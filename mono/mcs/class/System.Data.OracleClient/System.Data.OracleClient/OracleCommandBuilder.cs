@@ -235,9 +235,8 @@ namespace System.Data.OracleClient
 
                 if (!isKey)
                 {
-                    parameter = deleteCommand.Parameters.Add(
-                        CreateParameter(parmIndex++, schemaRow)
-                    );
+                    parameter = deleteCommand.Parameters
+                        .Add(CreateParameter(parmIndex++, schemaRow));
                     parameter.SourceVersion = DataRowVersion.Original;
 
                     dsColumnName = parameter.SourceColumn;
@@ -326,9 +325,8 @@ namespace System.Data.OracleClient
                     values.Append(" , ");
                 }
 
-                OracleParameter parameter = insertCommand.Parameters.Add(
-                    CreateParameter(parmIndex++, schemaRow)
-                );
+                OracleParameter parameter = insertCommand.Parameters
+                    .Add(CreateParameter(parmIndex++, schemaRow));
                 parameter.SourceVersion = DataRowVersion.Current;
 
                 dsColumnName = parameter.SourceColumn;
@@ -390,9 +388,8 @@ namespace System.Data.OracleClient
                 if (columns.Length > 0)
                     columns.Append(" , ");
 
-                OracleParameter parameter = updateCommand.Parameters.Add(
-                    CreateParameter(parmIndex++, schemaRow)
-                );
+                OracleParameter parameter = updateCommand.Parameters
+                    .Add(CreateParameter(parmIndex++, schemaRow));
                 parameter.SourceVersion = DataRowVersion.Current;
 
                 dsColumnName = parameter.SourceColumn;
@@ -431,9 +428,8 @@ namespace System.Data.OracleClient
 
                 if (!isKey)
                 {
-                    parameter = updateCommand.Parameters.Add(
-                        CreateParameter(parmIndex++, schemaRow)
-                    );
+                    parameter = updateCommand.Parameters
+                        .Add(CreateParameter(parmIndex++, schemaRow));
                     parameter.SourceVersion = DataRowVersion.Original;
 
                     dsColumnName = parameter.SourceColumn;

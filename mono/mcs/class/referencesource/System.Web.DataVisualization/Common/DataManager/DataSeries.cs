@@ -674,9 +674,8 @@ namespace System.Web.UI.DataVisualization.Charting
                             SR.ExceptionCustomAttributeMustBeInRange(
                                 "PixelPointDepth",
                                 (0).ToString(CultureInfo.CurrentCulture),
-                                CustomPropertyRegistry.MaxValueOfPixelAttribute.ToString(
-                                    CultureInfo.CurrentCulture
-                                )
+                                CustomPropertyRegistry.MaxValueOfPixelAttribute
+                                    .ToString(CultureInfo.CurrentCulture)
                             )
                         )
                     );
@@ -727,9 +726,8 @@ namespace System.Web.UI.DataVisualization.Charting
                             SR.ExceptionCustomAttributeMustBeInRange(
                                 "PixelPointGapDepth",
                                 (0).ToString(CultureInfo.CurrentCulture),
-                                CustomPropertyRegistry.MaxValueOfPixelAttribute.ToString(
-                                    CultureInfo.CurrentCulture
-                                )
+                                CustomPropertyRegistry.MaxValueOfPixelAttribute
+                                    .ToString(CultureInfo.CurrentCulture)
                             )
                         )
                     );
@@ -818,9 +816,8 @@ namespace System.Web.UI.DataVisualization.Charting
                             SR.ExceptionCustomAttributeMustBeInRange(
                                 "MinPixelPointWidth",
                                 (0).ToString(CultureInfo.CurrentCulture),
-                                CustomPropertyRegistry.MaxValueOfPixelAttribute.ToString(
-                                    CultureInfo.CurrentCulture
-                                )
+                                CustomPropertyRegistry.MaxValueOfPixelAttribute
+                                    .ToString(CultureInfo.CurrentCulture)
                             )
                         )
                     );
@@ -899,9 +896,8 @@ namespace System.Web.UI.DataVisualization.Charting
                             SR.ExceptionCustomAttributeMustBeInRange(
                                 "PixelPointWidth",
                                 (0).ToString(CultureInfo.CurrentCulture),
-                                CustomPropertyRegistry.MaxValueOfPixelAttribute.ToString(
-                                    CultureInfo.CurrentCulture
-                                )
+                                CustomPropertyRegistry.MaxValueOfPixelAttribute
+                                    .ToString(CultureInfo.CurrentCulture)
                             )
                         )
                     );
@@ -1895,8 +1891,8 @@ namespace System.Web.UI.DataVisualization.Charting
             if (this.Chart != null && this.Chart.chartPicture.SuppressExceptions)
             {
                 // Get series axis
-                Axis axisY = this
-                    .Chart.ChartAreas[this.ChartArea]
+                Axis axisY = this.Chart
+                    .ChartAreas[this.ChartArea]
                     .GetAxis(AxisName.Y, this.YAxisType, this.YSubAxisName);
 
                 foreach (DataPoint point in this.Points)

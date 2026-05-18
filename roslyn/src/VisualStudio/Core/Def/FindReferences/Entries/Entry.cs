@@ -38,8 +38,9 @@ namespace Microsoft.VisualStudio.LanguageServices.FindUsages
                         return DefinitionBucket;
 
                     case StandardTableKeyNames2.DefinitionIcon:
-                        return DefinitionBucket
-                            ?.DefinitionItem.Tags.GetFirstGlyph()
+                        return DefinitionBucket?.DefinitionItem
+                            .Tags
+                            .GetFirstGlyph()
                             .GetImageMoniker();
                 }
 

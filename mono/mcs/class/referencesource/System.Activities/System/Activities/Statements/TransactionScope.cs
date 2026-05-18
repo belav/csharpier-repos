@@ -347,22 +347,24 @@ namespace System.Activities.Statements
                     )
                 )
                 {
-                    throw FxTrace.Exception.AsError(
-                        new InvalidOperationException(
-                            SR.AbortInstanceOnTransactionFailureDoesNotMatch
-                        )
-                    );
+                    throw FxTrace.Exception
+                        .AsError(
+                            new InvalidOperationException(
+                                SR.AbortInstanceOnTransactionFailureDoesNotMatch
+                            )
+                        );
                 }
 
                 if (foundHandle.SuppressTransaction)
                 {
-                    throw FxTrace.Exception.AsError(
-                        new InvalidOperationException(
-                            SR.CannotNestTransactionScopeWhenAmbientHandleIsSuppressed(
-                                this.DisplayName
+                    throw FxTrace.Exception
+                        .AsError(
+                            new InvalidOperationException(
+                                SR.CannotNestTransactionScopeWhenAmbientHandleIsSuppressed(
+                                    this.DisplayName
+                                )
                             )
-                        )
-                    );
+                        );
                 }
                 transactionHandle = foundHandle;
             }
@@ -379,9 +381,8 @@ namespace System.Activities.Statements
                 //Most likely, you are inside a nested TSA
                 if (transaction.IsolationLevel != this.IsolationLevel)
                 {
-                    throw FxTrace.Exception.AsError(
-                        new InvalidOperationException(SR.IsolationLevelValidation)
-                    );
+                    throw FxTrace.Exception
+                        .AsError(new InvalidOperationException(SR.IsolationLevelValidation));
                 }
 
                 //Check if the nested TSA had a timeout specified explicitly
@@ -391,13 +392,14 @@ namespace System.Activities.Statements
                     this.delayWasScheduled.Set(context, true);
                     this.nestedScopeTimeout.Set(context, timeout);
 
-                    this.nestedScopeTimeoutActivityInstance.Set(
-                        context,
-                        context.ScheduleActivity(
-                            this.NestedScopeTimeoutWorkflow,
-                            new CompletionCallback(OnDelayCompletion)
-                        )
-                    );
+                    this.nestedScopeTimeoutActivityInstance
+                        .Set(
+                            context,
+                            context.ScheduleActivity(
+                                this.NestedScopeTimeoutWorkflow,
+                                new CompletionCallback(OnDelayCompletion)
+                            )
+                        );
                 }
 
                 //execute the Body under the current runtime transaction
@@ -468,9 +470,8 @@ namespace System.Activities.Statements
                 this.delayWasScheduled.Get(context),
                 "Internal error..Delay should have been scheduled if we are here"
             );
-            ActivityInstance delayActivityInstance = this.nestedScopeTimeoutActivityInstance.Get(
-                context
-            );
+            ActivityInstance delayActivityInstance = this.nestedScopeTimeoutActivityInstance
+                .Get(context);
             if (delayActivityInstance != null)
             {
                 context.CancelChild(delayActivityInstance);

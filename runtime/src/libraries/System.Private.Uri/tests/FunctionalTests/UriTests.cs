@@ -871,17 +871,18 @@ namespace System.PrivateUri.Tests
             var enteredLockMre = new ManualResetEvent(false);
             var finishedParsingMre = new ManualResetEvent(false);
 
-            Task.Factory.StartNew(
-                () =>
-                {
-                    lock (uriString)
+            Task.Factory
+                .StartNew(
+                    () =>
                     {
-                        enteredLockMre.Set();
-                        timedOut = !finishedParsingMre.WaitOne(TimeSpan.FromSeconds(10));
-                    }
-                },
-                TaskCreationOptions.LongRunning
-            );
+                        lock (uriString)
+                        {
+                            enteredLockMre.Set();
+                            timedOut = !finishedParsingMre.WaitOne(TimeSpan.FromSeconds(10));
+                        }
+                    },
+                    TaskCreationOptions.LongRunning
+                );
 
             enteredLockMre.WaitOne();
             int port = new Uri(uriString).Port;

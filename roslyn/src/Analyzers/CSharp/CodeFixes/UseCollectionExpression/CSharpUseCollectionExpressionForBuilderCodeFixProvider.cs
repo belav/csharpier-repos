@@ -91,9 +91,11 @@ internal partial class CSharpUseCollectionExpressionForBuilderCodeFixProvider
                 newDocument,
                 fallbackOptions,
                 dummyObjectCreation,
-                analysisResult.Matches.SelectAsArray(
-                    m => new CollectionExpressionMatch<StatementSyntax>(m.Statement, m.UseSpread)
-                ),
+                analysisResult.Matches
+                    .SelectAsArray(m => new CollectionExpressionMatch<StatementSyntax>(
+                        m.Statement,
+                        m.UseSpread
+                    )),
                 static o => o.Initializer,
                 static (o, i) => o.WithInitializer(i),
                 cancellationToken
@@ -122,10 +124,11 @@ internal partial class CSharpUseCollectionExpressionForBuilderCodeFixProvider
                 analysisResult.DiagnosticLocation,
                 root.GetCurrentNode(analysisResult.LocalDeclarationStatement)!,
                 root.GetCurrentNode(analysisResult.CreationExpression)!,
-                analysisResult.Matches.SelectAsArray(m => new Match<StatementSyntax>(
-                    root.GetCurrentNode(m.Statement)!,
-                    m.UseSpread
-                ))
+                analysisResult.Matches
+                    .SelectAsArray(m => new Match<StatementSyntax>(
+                        root.GetCurrentNode(m.Statement)!,
+                        m.UseSpread
+                    ))
             );
 
         // Creates a new document with all of the relevant nodes in analysisResult tracked so that we can find them

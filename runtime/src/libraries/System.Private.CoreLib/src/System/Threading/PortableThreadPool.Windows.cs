@@ -14,10 +14,11 @@ namespace System.Threading
             {
                 get
                 {
-                    bool success = Interop.Kernel32.GetThreadIOPendingFlag(
-                        Interop.Kernel32.GetCurrentThread(),
-                        out Interop.BOOL isIOPending
-                    );
+                    bool success = Interop.Kernel32
+                        .GetThreadIOPendingFlag(
+                            Interop.Kernel32.GetCurrentThread(),
+                            out Interop.BOOL isIOPending
+                        );
                     Debug.Assert(success);
                     return !success || isIOPending != Interop.BOOL.FALSE;
                 }
@@ -35,11 +36,12 @@ namespace System.Threading
                 get
                 {
                     if (
-                        !Interop.Kernel32.GetSystemTimes(
-                            out long idleTime,
-                            out long kernelTime,
-                            out long userTime
-                        )
+                        !Interop.Kernel32
+                            .GetSystemTimes(
+                                out long idleTime,
+                                out long kernelTime,
+                                out long userTime
+                            )
                     )
                     {
                         return 0;

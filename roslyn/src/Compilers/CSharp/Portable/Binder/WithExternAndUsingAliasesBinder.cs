@@ -242,8 +242,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                                     var declaration in (
                                         (SourceNamespaceSymbol)
                                             Compilation.SourceModule.GlobalNamespace
-                                    )
-                                        .MergedDeclaration
+                                    ).MergedDeclaration
                                         .Declarations
                                 )
                                 {

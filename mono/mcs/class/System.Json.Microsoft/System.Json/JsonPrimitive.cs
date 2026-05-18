@@ -979,11 +979,8 @@ namespace System.Json
         {
             try
             {
-                valueNumber = System.Convert.ChangeType(
-                    valueObject,
-                    type,
-                    CultureInfo.InvariantCulture
-                );
+                valueNumber = System.Convert
+                    .ChangeType(valueObject, type, CultureInfo.InvariantCulture);
                 return ReadAsFailureKind.NoFailure;
             }
             catch (OverflowException)

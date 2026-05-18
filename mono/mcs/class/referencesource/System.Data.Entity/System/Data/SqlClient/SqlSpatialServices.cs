@@ -113,17 +113,19 @@ namespace System.Data.SqlClient
             object result = null;
             if (wellKnownValue.WellKnownText != null)
             {
-                result = this.SqlTypes.SqlTypesGeographyFromText(
-                    wellKnownValue.WellKnownText,
-                    wellKnownValue.CoordinateSystemId
-                );
+                result = this.SqlTypes
+                    .SqlTypesGeographyFromText(
+                        wellKnownValue.WellKnownText,
+                        wellKnownValue.CoordinateSystemId
+                    );
             }
             else if (wellKnownValue.WellKnownBinary != null)
             {
-                result = this.SqlTypes.SqlTypesGeographyFromBinary(
-                    wellKnownValue.WellKnownBinary,
-                    wellKnownValue.CoordinateSystemId
-                );
+                result = this.SqlTypes
+                    .SqlTypesGeographyFromBinary(
+                        wellKnownValue.WellKnownBinary,
+                        wellKnownValue.CoordinateSystemId
+                    );
             }
             else
             {
@@ -231,17 +233,19 @@ namespace System.Data.SqlClient
             object result = null;
             if (wellKnownValue.WellKnownText != null)
             {
-                result = this.SqlTypes.SqlTypesGeometryFromText(
-                    wellKnownValue.WellKnownText,
-                    wellKnownValue.CoordinateSystemId
-                );
+                result = this.SqlTypes
+                    .SqlTypesGeometryFromText(
+                        wellKnownValue.WellKnownText,
+                        wellKnownValue.CoordinateSystemId
+                    );
             }
             else if (wellKnownValue.WellKnownBinary != null)
             {
-                result = this.SqlTypes.SqlTypesGeometryFromBinary(
-                    wellKnownValue.WellKnownBinary,
-                    wellKnownValue.CoordinateSystemId
-                );
+                result = this.SqlTypes
+                    .SqlTypesGeometryFromBinary(
+                        wellKnownValue.WellKnownBinary,
+                        wellKnownValue.CoordinateSystemId
+                    );
             }
             else
             {
@@ -340,62 +344,68 @@ namespace System.Data.SqlClient
 
         private MethodInfo FindSqlGeographyMethod(string methodName, params Type[] argTypes)
         {
-            return this.SqlTypes.SqlGeographyType.GetMethod(
-                methodName,
-                BindingFlags.Public | BindingFlags.Instance,
-                null,
-                argTypes,
-                null
-            );
+            return this.SqlTypes
+                .SqlGeographyType
+                .GetMethod(
+                    methodName,
+                    BindingFlags.Public | BindingFlags.Instance,
+                    null,
+                    argTypes,
+                    null
+                );
         }
 
         private MethodInfo FindSqlGeographyStaticMethod(string methodName, params Type[] argTypes)
         {
-            return this.SqlTypes.SqlGeographyType.GetMethod(
-                methodName,
-                BindingFlags.Public | BindingFlags.Static,
-                null,
-                argTypes,
-                null
-            );
+            return this.SqlTypes
+                .SqlGeographyType
+                .GetMethod(
+                    methodName,
+                    BindingFlags.Public | BindingFlags.Static,
+                    null,
+                    argTypes,
+                    null
+                );
         }
 
         private PropertyInfo FindSqlGeographyProperty(string propertyName)
         {
-            return this.SqlTypes.SqlGeographyType.GetProperty(
-                propertyName,
-                BindingFlags.Public | BindingFlags.Instance
-            );
+            return this.SqlTypes
+                .SqlGeographyType
+                .GetProperty(propertyName, BindingFlags.Public | BindingFlags.Instance);
         }
 
         private MethodInfo FindSqlGeometryStaticMethod(string methodName, params Type[] argTypes)
         {
-            return this.SqlTypes.SqlGeometryType.GetMethod(
-                methodName,
-                BindingFlags.Public | BindingFlags.Static,
-                null,
-                argTypes,
-                null
-            );
+            return this.SqlTypes
+                .SqlGeometryType
+                .GetMethod(
+                    methodName,
+                    BindingFlags.Public | BindingFlags.Static,
+                    null,
+                    argTypes,
+                    null
+                );
         }
 
         private MethodInfo FindSqlGeometryMethod(string methodName, params Type[] argTypes)
         {
-            return this.SqlTypes.SqlGeometryType.GetMethod(
-                methodName,
-                BindingFlags.Public | BindingFlags.Instance,
-                null,
-                argTypes,
-                null
-            );
+            return this.SqlTypes
+                .SqlGeometryType
+                .GetMethod(
+                    methodName,
+                    BindingFlags.Public | BindingFlags.Instance,
+                    null,
+                    argTypes,
+                    null
+                );
         }
 
         private PropertyInfo FindSqlGeometryProperty(string propertyName)
         {
-            return this.SqlTypes.SqlGeometryType.GetProperty(
-                propertyName,
-                BindingFlags.Public | BindingFlags.Instance
-            );
+            return this.SqlTypes
+                .SqlGeometryType
+                .GetProperty(propertyName, BindingFlags.Public | BindingFlags.Instance);
         }
 
         #endregion

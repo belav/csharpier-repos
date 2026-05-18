@@ -252,8 +252,8 @@ public class SqliteDatabaseCreatorTest
             new DbContextOptionsBuilder()
                 .UseSqlite(connectionString)
                 .UseInternalServiceProvider(
-                    SqliteTestStoreFactory
-                        .Instance.AddProviderServices(new ServiceCollection())
+                    SqliteTestStoreFactory.Instance
+                        .AddProviderServices(new ServiceCollection())
                         .BuildServiceProvider(validateScopes: true)
                 )
                 .Options

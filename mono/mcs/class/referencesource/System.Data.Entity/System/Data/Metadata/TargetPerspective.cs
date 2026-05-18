@@ -55,12 +55,8 @@ namespace System.Data.Metadata.Edm
 
             EdmType edmType = null;
             if (
-                this.MetadataWorkspace.TryGetItem<EdmType>(
-                    fullName,
-                    ignoreCase,
-                    this.TargetDataspace,
-                    out edmType
-                )
+                this.MetadataWorkspace
+                    .TryGetItem<EdmType>(fullName, ignoreCase, this.TargetDataspace, out edmType)
             )
             {
                 usage = TypeUsage.Create(edmType);

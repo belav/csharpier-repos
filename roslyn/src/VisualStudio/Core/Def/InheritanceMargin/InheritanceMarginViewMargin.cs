@@ -133,9 +133,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.InheritanceMarg
         {
             if (
                 e.Option.Equals(InheritanceMarginOptionsStorage.ShowInheritanceMargin)
-                || e.Option.Equals(
-                    InheritanceMarginOptionsStorage.InheritanceMarginCombinedWithIndicatorMargin
-                )
+                || e.Option
+                    .Equals(
+                        InheritanceMarginOptionsStorage.InheritanceMarginCombinedWithIndicatorMargin
+                    )
             )
             {
                 UpdateMarginVisibility();
@@ -165,9 +166,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.InheritanceMarg
                 return;
             }
 
-            using var _ = CodeAnalysis.PooledObjects.ArrayBuilder<SnapshotSpan>.GetInstance(
-                out var builder
-            );
+            using var _ = CodeAnalysis.PooledObjects
+                .ArrayBuilder<SnapshotSpan>
+                .GetInstance(out var builder);
             foreach (var mappingSpan in e.Spans)
             {
                 var normalizedSpan = mappingSpan.GetSpans(_textView.TextSnapshot);
@@ -212,10 +213,12 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.InheritanceMarg
                     // Only take tag spans with a visible start point and that map to something
                     // in the edit buffer and *start* on this line
                     if (
-                        mappingTagSpan.Span.Start.GetPoint(
-                            _textView.VisualSnapshot.TextBuffer,
-                            PositionAffinity.Predecessor
-                        ) != null
+                        mappingTagSpan.Span
+                            .Start
+                            .GetPoint(
+                                _textView.VisualSnapshot.TextBuffer,
+                                PositionAffinity.Predecessor
+                            ) != null
                     )
                     {
                         var tagSpans = mappingTagSpan.Span.GetSpans(_textView.TextSnapshot);

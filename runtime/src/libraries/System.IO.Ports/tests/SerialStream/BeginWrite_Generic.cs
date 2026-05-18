@@ -246,13 +246,8 @@ namespace System.IO.Ports.Tests
                 com1.Handshake = Handshake.RequestToSend;
                 com1.WriteTimeout = writeTimeout;
 
-                IAsyncResult writeAsyncResult = com1.BaseStream.BeginWrite(
-                    new byte[8],
-                    0,
-                    8,
-                    ar => asyncCallbackCalled = true,
-                    null
-                );
+                IAsyncResult writeAsyncResult = com1.BaseStream
+                    .BeginWrite(new byte[8], 0, 8, ar => asyncCallbackCalled = true, null);
                 asyncRead.WriteAsyncResult = writeAsyncResult;
 
                 Thread.Sleep(100 > com1.WriteTimeout ? 2 * com1.WriteTimeout : 200);
@@ -328,13 +323,8 @@ namespace System.IO.Ports.Tests
 
                 if (xonxoff)
                 {
-                    IAsyncResult ar = com2.BaseStream.BeginWrite(
-                        new byte[] { XOnOff.XOFF },
-                        0,
-                        1,
-                        null,
-                        null
-                    );
+                    IAsyncResult ar = com2.BaseStream
+                        .BeginWrite(new byte[] { XOnOff.XOFF }, 0, 1, null, null);
                     com2.BaseStream.EndWrite(ar);
                     Thread.Sleep(250);
                 }
@@ -355,13 +345,8 @@ namespace System.IO.Ports.Tests
 
                 if (xonxoff)
                 {
-                    IAsyncResult ar = com2.BaseStream.BeginWrite(
-                        new byte[] { XOnOff.XON },
-                        0,
-                        1,
-                        null,
-                        null
-                    );
+                    IAsyncResult ar = com2.BaseStream
+                        .BeginWrite(new byte[] { XOnOff.XON }, 0, 1, null, null);
                     com2.BaseStream.EndWrite(ar);
                 }
 

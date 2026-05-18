@@ -40,8 +40,8 @@ internal abstract class AbstractEmbeddedLanguageQuickInfoProvider : CommonQuickI
         if (!_embeddedLanguageProviderFeature.SyntaxTokenKinds.Contains(token.RawKind))
             return null;
 
-        var semanticModel = await context
-            .Document.GetRequiredSemanticModelAsync(context.CancellationToken)
+        var semanticModel = await context.Document
+            .GetRequiredSemanticModelAsync(context.CancellationToken)
             .ConfigureAwait(false);
 
         var quickInfoProviders = _embeddedLanguageProviderFeature.GetServices(

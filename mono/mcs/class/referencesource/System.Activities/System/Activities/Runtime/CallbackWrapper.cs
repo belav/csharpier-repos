@@ -162,16 +162,16 @@ namespace System.Activities.Runtime
             );
 
             if (
-                !this.callback.Equals(
-                    GenerateCallback(delegateType, parameterTypes, genericParameter)
-                )
+                !this.callback
+                    .Equals(GenerateCallback(delegateType, parameterTypes, genericParameter))
             )
             {
-                throw FxTrace.Exception.AsError(
-                    new InvalidOperationException(
-                        SR.InvalidExecutionCallback(this.callback.Method, null)
-                    )
-                );
+                throw FxTrace.Exception
+                    .AsError(
+                        new InvalidOperationException(
+                            SR.InvalidExecutionCallback(this.callback.Method, null)
+                        )
+                    );
             }
         }
 
@@ -395,11 +395,12 @@ namespace System.Activities.Runtime
         protected virtual void OnSerializingGenericCallback()
         {
             // Generics are invalid by default
-            throw FxTrace.Exception.AsError(
-                new InvalidOperationException(
-                    SR.InvalidExecutionCallback(this.callback.Method, null)
-                )
-            );
+            throw FxTrace.Exception
+                .AsError(
+                    new InvalidOperationException(
+                        SR.InvalidExecutionCallback(this.callback.Method, null)
+                    )
+                );
         }
     }
 }

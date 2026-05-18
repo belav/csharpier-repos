@@ -744,22 +744,24 @@ namespace System.Windows.Forms
                 //
                 // groupbox_printer
                 //
-                this.groupbox_printer.Controls.AddRange(
-                    new System.Windows.Forms.Control[]
-                    {
-                        this.button_properties,
-                        this.label_comment_text,
-                        this.label_where_text,
-                        this.label_comment,
-                        this.label_where,
-                        this.label_type_text,
-                        this.label_type,
-                        this.label_status_text,
-                        this.label_status,
-                        this.label_name,
-                        this.combobox_printers,
-                    }
-                );
+                this.groupbox_printer
+                    .Controls
+                    .AddRange(
+                        new System.Windows.Forms.Control[]
+                        {
+                            this.button_properties,
+                            this.label_comment_text,
+                            this.label_where_text,
+                            this.label_comment,
+                            this.label_where,
+                            this.label_type_text,
+                            this.label_type,
+                            this.label_status_text,
+                            this.label_status,
+                            this.label_name,
+                            this.combobox_printers,
+                        }
+                    );
                 this.groupbox_printer.Location = new System.Drawing.Point(12, 8);
                 this.groupbox_printer.Name = "groupbox_printer";
                 this.groupbox_printer.Size = new System.Drawing.Size(438, 136);
@@ -881,15 +883,16 @@ namespace System.Windows.Forms
                 this.AcceptButton = button_ok;
                 this.CancelButton = button_cancel;
                 this.ClientSize = new System.Drawing.Size(456, 194);
-                this.Controls.AddRange(
-                    new System.Windows.Forms.Control[]
-                    {
-                        this.button_ok,
-                        this.button_cancel,
-                        this.button_network,
-                        this.groupbox_printer,
-                    }
-                );
+                this.Controls
+                    .AddRange(
+                        new System.Windows.Forms.Control[]
+                        {
+                            this.button_ok,
+                            this.button_cancel,
+                            this.button_network,
+                            this.groupbox_printer,
+                        }
+                    );
                 this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
                 this.HelpButton = true;
                 this.MaximizeBox = false;

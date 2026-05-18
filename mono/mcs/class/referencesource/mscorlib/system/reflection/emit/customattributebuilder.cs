@@ -284,9 +284,10 @@ namespace System.Reflection.Emit
                         // type is one.
                         if (
                             !(namedProperties[i].DeclaringType is TypeBuilder)
-                            || !con.DeclaringType.IsSubclassOf(
-                                ((TypeBuilder)namedProperties[i].DeclaringType).BakedRuntimeType
-                            )
+                            || !con.DeclaringType
+                                .IsSubclassOf(
+                                    ((TypeBuilder)namedProperties[i].DeclaringType).BakedRuntimeType
+                                )
                         )
                             throw new ArgumentException(
                                 Environment.GetResourceString(
@@ -352,9 +353,10 @@ namespace System.Reflection.Emit
                         // type is one.
                         if (
                             !(namedFields[i].DeclaringType is TypeBuilder)
-                            || !con.DeclaringType.IsSubclassOf(
-                                ((TypeBuilder)namedFields[i].DeclaringType).BakedRuntimeType
-                            )
+                            || !con.DeclaringType
+                                .IsSubclassOf(
+                                    ((TypeBuilder)namedFields[i].DeclaringType).BakedRuntimeType
+                                )
                         )
                             throw new ArgumentException(
                                 Environment.GetResourceString(

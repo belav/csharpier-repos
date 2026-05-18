@@ -261,9 +261,8 @@ namespace System.Runtime.DurableInstancing
             Fx.Assert(owner != null, "Null owner passed to BindOwner.");
             if (IsBoundToInstanceOwner)
             {
-                throw Fx.Exception.AsError(
-                    new InvalidOperationException(SRCore.ContextAlreadyBoundToOwner)
-                );
+                throw Fx.Exception
+                    .AsError(new InvalidOperationException(SRCore.ContextAlreadyBoundToOwner));
             }
             InstanceOwner = owner;
         }
@@ -274,9 +273,8 @@ namespace System.Runtime.DurableInstancing
             Fx.Assert(instanceId != Guid.Empty, "Null instanceId passed to BindInstance.");
             if (IsBoundToInstance)
             {
-                throw Fx.Exception.AsError(
-                    new InvalidOperationException(SRCore.ContextAlreadyBoundToInstance)
-                );
+                throw Fx.Exception
+                    .AsError(new InvalidOperationException(SRCore.ContextAlreadyBoundToInstance));
             }
             InstanceId = instanceId;
             IsBoundToInstance = true;
@@ -288,21 +286,18 @@ namespace System.Runtime.DurableInstancing
             Fx.Assert(instanceVersion >= 0, "Negative instanceVersion passed to BindLock.");
             if (!IsBoundToInstanceOwner)
             {
-                throw Fx.Exception.AsError(
-                    new InvalidOperationException(SRCore.ContextMustBeBoundToOwner)
-                );
+                throw Fx.Exception
+                    .AsError(new InvalidOperationException(SRCore.ContextMustBeBoundToOwner));
             }
             if (!IsBoundToInstance)
             {
-                throw Fx.Exception.AsError(
-                    new InvalidOperationException(SRCore.ContextMustBeBoundToInstance)
-                );
+                throw Fx.Exception
+                    .AsError(new InvalidOperationException(SRCore.ContextMustBeBoundToInstance));
             }
             if (Interlocked.CompareExchange(ref this.instanceVersion, instanceVersion, -1) != -1)
             {
-                throw Fx.Exception.AsError(
-                    new InvalidOperationException(SRCore.ContextAlreadyBoundToLock)
-                );
+                throw Fx.Exception
+                    .AsError(new InvalidOperationException(SRCore.ContextAlreadyBoundToLock));
             }
         }
 
@@ -314,15 +309,13 @@ namespace System.Runtime.DurableInstancing
             Fx.Assert(instanceVersion >= 0, "Negative instanceVersion passed to StartBindLock.");
             if (!IsBoundToInstanceOwner)
             {
-                throw Fx.Exception.AsError(
-                    new InvalidOperationException(SRCore.ContextMustBeBoundToOwner)
-                );
+                throw Fx.Exception
+                    .AsError(new InvalidOperationException(SRCore.ContextMustBeBoundToOwner));
             }
             if (!IsBoundToInstance)
             {
-                throw Fx.Exception.AsError(
-                    new InvalidOperationException(SRCore.ContextMustBeBoundToInstance)
-                );
+                throw Fx.Exception
+                    .AsError(new InvalidOperationException(SRCore.ContextMustBeBoundToInstance));
             }
             if (
                 Interlocked.CompareExchange(
@@ -332,9 +325,8 @@ namespace System.Runtime.DurableInstancing
                 ) != -1
             )
             {
-                throw Fx.Exception.AsError(
-                    new InvalidOperationException(SRCore.ContextAlreadyBoundToLock)
-                );
+                throw Fx.Exception
+                    .AsError(new InvalidOperationException(SRCore.ContextAlreadyBoundToLock));
             }
         }
 

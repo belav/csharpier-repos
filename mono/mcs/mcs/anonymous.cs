@@ -602,11 +602,13 @@ namespace Mono.CSharp
                 // too late in the pipeline and standart assign cannot be used either due to
                 // recursive nature of GetStoreyInstanceExpression
                 //
-                var field = ec.CurrentAnonymousMethod.Storey.AddCompilerGeneratedField(
-                    LocalVariable.GetCompilerGeneratedName(block),
-                    storey_type_expr,
-                    true
-                );
+                var field = ec.CurrentAnonymousMethod
+                    .Storey
+                    .AddCompilerGeneratedField(
+                        LocalVariable.GetCompilerGeneratedName(block),
+                        storey_type_expr,
+                        true
+                    );
 
                 field.Define();
                 field.Emit();
@@ -678,9 +680,8 @@ namespace Mono.CSharp
             //
             if (initialize_hoisted_this)
             {
-                rc.CurrentBlock.AddScopeStatement(
-                    new ThisInitializer(hoisted_this, hoisted_this_parent)
-                );
+                rc.CurrentBlock
+                    .AddScopeStatement(new ThisInitializer(hoisted_this, hoisted_this_parent));
             }
 
             //
@@ -1114,9 +1115,8 @@ namespace Mono.CSharp
             {
                 using (ec.Set(ResolveContext.Options.ProbingMode))
                 {
-                    var prev = ec.Report.SetPrinter(
-                        TypeInferenceReportPrinter ?? new NullReportPrinter()
-                    );
+                    var prev = ec.Report
+                        .SetPrinter(TypeInferenceReportPrinter ?? new NullReportPrinter());
 
                     var res = Compatible(ec, delegate_type) != null;
 
@@ -1138,23 +1138,25 @@ namespace Mono.CSharp
                 if (delegate_type.IsDelegate)
                     return delegate_type;
 
-                ec.Report.Error(
-                    835,
-                    loc,
-                    "Cannot convert `{0}' to an expression tree of non-delegate type `{1}'",
-                    GetSignatureForError(),
-                    delegate_type.GetSignatureForError()
-                );
+                ec.Report
+                    .Error(
+                        835,
+                        loc,
+                        "Cannot convert `{0}' to an expression tree of non-delegate type `{1}'",
+                        GetSignatureForError(),
+                        delegate_type.GetSignatureForError()
+                    );
                 return null;
             }
 
-            ec.Report.Error(
-                1660,
-                loc,
-                "Cannot convert `{0}' to non-delegate type `{1}'",
-                GetSignatureForError(),
-                delegate_type.GetSignatureForError()
-            );
+            ec.Report
+                .Error(
+                    1660,
+                    loc,
+                    "Cannot convert `{0}' to non-delegate type `{1}'",
+                    GetSignatureForError(),
+                    delegate_type.GetSignatureForError()
+                );
             return null;
         }
 
@@ -1171,13 +1173,14 @@ namespace Mono.CSharp
                 return true;
 
             if (!ec.IsInProbingMode)
-                ec.Report.Error(
-                    1661,
-                    loc,
-                    "Cannot convert `{0}' to delegate type `{1}' since there is a parameter mismatch",
-                    GetSignatureForError(),
-                    delegate_type.GetSignatureForError()
-                );
+                ec.Report
+                    .Error(
+                        1661,
+                        loc,
+                        "Cannot convert `{0}' to delegate type `{1}' since there is a parameter mismatch",
+                        GetSignatureForError(),
+                        delegate_type.GetSignatureForError()
+                    );
 
             return false;
         }
@@ -1195,13 +1198,14 @@ namespace Mono.CSharp
                 if (ignore_errors)
                     return false;
 
-                ec.Report.Error(
-                    1593,
-                    loc,
-                    "Delegate `{0}' does not take `{1}' arguments",
-                    delegate_type.GetSignatureForError(),
-                    Parameters.Count.ToString()
-                );
+                ec.Report
+                    .Error(
+                        1593,
+                        loc,
+                        "Delegate `{0}' does not take `{1}' arguments",
+                        delegate_type.GetSignatureForError(),
+                        Parameters.Count.ToString()
+                    );
                 return false;
             }
 
@@ -1220,21 +1224,23 @@ namespace Mono.CSharp
                         return false;
 
                     if (p_mod == Parameter.Modifier.NONE)
-                        ec.Report.Error(
-                            1677,
-                            Parameters[i].Location,
-                            "Parameter `{0}' should not be declared with the `{1}' keyword",
-                            (i + 1).ToString(),
-                            Parameter.GetModifierSignature(Parameters[i].ModFlags)
-                        );
+                        ec.Report
+                            .Error(
+                                1677,
+                                Parameters[i].Location,
+                                "Parameter `{0}' should not be declared with the `{1}' keyword",
+                                (i + 1).ToString(),
+                                Parameter.GetModifierSignature(Parameters[i].ModFlags)
+                            );
                     else
-                        ec.Report.Error(
-                            1676,
-                            Parameters[i].Location,
-                            "Parameter `{0}' must be declared with the `{1}' keyword",
-                            (i + 1).ToString(),
-                            Parameter.GetModifierSignature(p_mod)
-                        );
+                        ec.Report
+                            .Error(
+                                1676,
+                                Parameters[i].Location,
+                                "Parameter `{0}' must be declared with the `{1}' keyword",
+                                (i + 1).ToString(),
+                                Parameter.GetModifierSignature(p_mod)
+                            );
                     error = true;
                 }
 
@@ -1251,14 +1257,15 @@ namespace Mono.CSharp
                     if (ignore_errors)
                         return false;
 
-                    ec.Report.Error(
-                        1678,
-                        Parameters[i].Location,
-                        "Parameter `{0}' is declared as type `{1}' but should be `{2}'",
-                        (i + 1).ToString(),
-                        Parameters.Types[i].GetSignatureForError(),
-                        invoke_pd.Types[i].GetSignatureForError()
-                    );
+                    ec.Report
+                        .Error(
+                            1678,
+                            Parameters[i].Location,
+                            "Parameter `{0}' is declared as type `{1}' but should be `{2}'",
+                            (i + 1).ToString(),
+                            Parameters.Types[i].GetSignatureForError(),
+                            invoke_pd.Types[i].GetSignatureForError()
+                        );
                     error = true;
                 }
             }
@@ -1449,11 +1456,12 @@ namespace Mono.CSharp
 
                         if (Block.IsAsync)
                         {
-                            ec.Report.Error(
-                                1989,
-                                loc,
-                                "Async lambda expressions cannot be converted to expression trees"
-                            );
+                            ec.Report
+                                .Error(
+                                    1989,
+                                    loc,
+                                    "Async lambda expressions cannot be converted to expression trees"
+                                );
                         }
 
                         using (ec.Set(ResolveContext.Options.ExpressionTreeConversion))
@@ -1530,11 +1538,8 @@ namespace Mono.CSharp
 
         public override Expression CreateExpressionTree(ResolveContext ec)
         {
-            ec.Report.Error(
-                1946,
-                loc,
-                "An anonymous method cannot be converted to an expression tree"
-            );
+            ec.Report
+                .Error(1946, loc, "An anonymous method cannot be converted to an expression tree");
             return null;
         }
 
@@ -1560,12 +1565,13 @@ namespace Mono.CSharp
                     {
                         if (!ec.IsInProbingMode)
                         {
-                            ec.Report.Error(
-                                1688,
-                                loc,
-                                "Cannot convert anonymous method block without a parameter list to delegate type `{0}' because it has one or more `out' parameters",
-                                delegate_type.GetSignatureForError()
-                            );
+                            ec.Report
+                                .Error(
+                                    1688,
+                                    loc,
+                                    "Cannot convert anonymous method block without a parameter list to delegate type `{0}' because it has one or more `out' parameters",
+                                    delegate_type.GetSignatureForError()
+                                );
                         }
 
                         return null;
@@ -1594,11 +1600,12 @@ namespace Mono.CSharp
         {
             if (rc.HasSet(ResolveContext.Options.ConstantScope))
             {
-                rc.Report.Error(
-                    1706,
-                    loc,
-                    "Anonymous methods and lambda expressions cannot be used in the current context"
-                );
+                rc.Report
+                    .Error(
+                        1706,
+                        loc,
+                        "Anonymous methods and lambda expressions cannot be used in the current context"
+                    );
                 return null;
             }
 
@@ -1661,12 +1668,13 @@ namespace Mono.CSharp
             if (rc.CurrentAnonymousMethod is AsyncInitializer)
                 return;
 
-            rc.Report.Error(
-                1686,
-                loc,
-                "Local variable or parameter `{0}' cannot have their address taken and be used inside an anonymous method, lambda expression or query expression",
-                var.Name
-            );
+            rc.Report
+                .Error(
+                    1686,
+                    loc,
+                    "Local variable or parameter `{0}' cannot have their address taken and be used inside an anonymous method, lambda expression or query expression",
+                    var.Name
+                );
         }
 
         public override string GetSignatureForError()
@@ -1700,13 +1708,14 @@ namespace Mono.CSharp
                     && !rt.IsGenericTask
                 )
                 {
-                    ec.Report.Error(
-                        4010,
-                        loc,
-                        "Cannot convert async {0} to delegate type `{1}'",
-                        GetSignatureForError(),
-                        delegate_type.GetSignatureForError()
-                    );
+                    ec.Report
+                        .Error(
+                            4010,
+                            loc,
+                            "Cannot convert async {0} to delegate type `{1}'",
+                            GetSignatureForError(),
+                            delegate_type.GetSignatureForError()
+                        );
 
                     return null;
                 }
@@ -1924,10 +1933,11 @@ namespace Mono.CSharp
                     ReturnType =
                         ReturnType.Kind == MemberKind.Void
                             ? ec.Module.PredefinedTypes.Task.TypeSpec
-                            : ec.Module.PredefinedTypes.TaskGeneric.TypeSpec.MakeGenericType(
-                                ec,
-                                new[] { ReturnType }
-                            );
+                            : ec.Module
+                                .PredefinedTypes
+                                .TaskGeneric
+                                .TypeSpec
+                                .MakeGenericType(ec, new[] { ReturnType });
                 }
             }
 
@@ -2084,11 +2094,12 @@ namespace Mono.CSharp
 
         public override Expression CreateExpressionTree(ResolveContext ec)
         {
-            ec.Report.Error(
-                1945,
-                loc,
-                "An expression tree cannot contain an anonymous method expression"
-            );
+            ec.Report
+                .Error(
+                    1945,
+                    loc,
+                    "An expression tree cannot contain an anonymous method expression"
+                );
             return null;
         }
 
@@ -2489,12 +2500,14 @@ namespace Mono.CSharp
                     {
                         if (parameters[ii].Name == p.Name)
                         {
-                            parent.Compiler.Report.Error(
-                                833,
-                                parameters[ii].Location,
-                                "`{0}': An anonymous type cannot have multiple properties with the same name",
-                                p.Name
-                            );
+                            parent.Compiler
+                                .Report
+                                .Error(
+                                    833,
+                                    parameters[ii].Location,
+                                    "`{0}': An anonymous type cannot have multiple properties with the same name",
+                                    p.Name
+                                );
 
                             p = new AnonymousTypeParameter(null, "$" + i.ToString(), p.Location);
                             parameters[i] = p;
@@ -2567,14 +2580,15 @@ namespace Mono.CSharp
                     continue;
                 }
 
-                c.Block.AddStatement(
-                    new StatementExpression(
-                        new SimpleAssign(
-                            new MemberAccess(new This(p.Location), f.Name),
-                            c.Block.GetParameterReference(i, p.Location)
+                c.Block
+                    .AddStatement(
+                        new StatementExpression(
+                            new SimpleAssign(
+                                new MemberAccess(new This(p.Location), f.Name),
+                                c.Block.GetParameterReference(i, p.Location)
+                            )
                         )
-                    )
-                );
+                    );
 
                 ToplevelBlock get_block = new ToplevelBlock(parent.Module.Compiler, p.Location);
                 get_block.AddStatement(

@@ -94,10 +94,8 @@ namespace System.Data.Entity.Design.AspNet
                 }
 
                 // construct output paths where the CSDL/MSL/SSDL resources will be placed
-                string virtualPathPrefix = base.VirtualPath.Replace(
-                    EntityDesignerUtils._edmxFileExtension,
-                    String.Empty
-                );
+                string virtualPathPrefix = base.VirtualPath
+                    .Replace(EntityDesignerUtils._edmxFileExtension, String.Empty);
                 string csdlResourceName = BuildProviderUtils.GetResourceNameForVirtualPath(
                     virtualPathPrefix + XmlConstants.CSpaceSchemaExtension
                 );

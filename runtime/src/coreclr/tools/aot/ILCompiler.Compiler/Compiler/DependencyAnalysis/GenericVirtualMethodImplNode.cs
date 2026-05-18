@@ -41,11 +41,12 @@ namespace ILCompiler.DependencyAnalysis
         {
             DependencyList dependencies = null;
 
-            factory.MetadataManager.GetDependenciesDueToVirtualMethodReflectability(
-                ref dependencies,
-                factory,
-                _method
-            );
+            factory.MetadataManager
+                .GetDependenciesDueToVirtualMethodReflectability(
+                    ref dependencies,
+                    factory,
+                    _method
+                );
 
             bool validInstantiation =
                 _method.IsSharedByGenericInstantiations

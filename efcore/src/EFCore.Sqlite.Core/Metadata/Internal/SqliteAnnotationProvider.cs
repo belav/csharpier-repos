@@ -37,8 +37,8 @@ public class SqliteAnnotationProvider : RelationalAnnotationProvider
         }
 
         if (
-            model
-                .Tables.SelectMany(t => t.Columns)
+            model.Tables
+                .SelectMany(t => t.Columns)
                 .Any(c => SqliteTypeMappingSource.IsSpatialiteType(c.StoreType))
         )
         {

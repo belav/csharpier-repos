@@ -83,21 +83,23 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
             {
                 // If we get 'Task' back, attempt to preselect that as the most likely result.
                 var taskType = context.SemanticModel.Compilation.TaskType();
-                return recommendedSymbols.NamedSymbols.SelectAsArray(
-                    s => IsValidForTaskLikeTypeOnlyContext(s, context),
-                    s => new SymbolAndSelectionInfo(
-                        Symbol: s,
-                        Preselect: s.OriginalDefinition.Equals(taskType)
-                    )
-                );
+                return recommendedSymbols.NamedSymbols
+                    .SelectAsArray(
+                        s => IsValidForTaskLikeTypeOnlyContext(s, context),
+                        s => new SymbolAndSelectionInfo(
+                            Symbol: s,
+                            Preselect: s.OriginalDefinition.Equals(taskType)
+                        )
+                    );
             }
             else if (context.IsGenericConstraintContext)
             {
                 // Just filter valid symbols. Nothing to preselect
-                return recommendedSymbols.NamedSymbols.SelectAsArray(
-                    IsValidForGenericConstraintContext,
-                    s => new SymbolAndSelectionInfo(Symbol: s, Preselect: false)
-                );
+                return recommendedSymbols.NamedSymbols
+                    .SelectAsArray(
+                        IsValidForGenericConstraintContext,
+                        s => new SymbolAndSelectionInfo(Symbol: s, Preselect: false)
+                    );
             }
             else
             {
@@ -109,12 +111,14 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
                     )
                     .ConfigureAwait(false);
                 if (!shouldPreselectInferredTypes)
-                    return recommendedSymbols.NamedSymbols.SelectAsArray(
-                        s => new SymbolAndSelectionInfo(Symbol: s, Preselect: false)
-                    );
+                    return recommendedSymbols.NamedSymbols
+                        .SelectAsArray(s => new SymbolAndSelectionInfo(
+                            Symbol: s,
+                            Preselect: false
+                        ));
 
-                var inferredTypes = context
-                    .InferredTypes.Where(t => t.SpecialType != SpecialType.System_Void)
+                var inferredTypes = context.InferredTypes
+                    .Where(t => t.SpecialType != SpecialType.System_Void)
                     .ToSet();
 
                 using var _ = ArrayBuilder<SymbolAndSelectionInfo>.GetInstance(out var result);

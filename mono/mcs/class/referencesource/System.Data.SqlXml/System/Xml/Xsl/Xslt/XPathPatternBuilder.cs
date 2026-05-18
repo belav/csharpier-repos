@@ -299,11 +299,8 @@ namespace System.Xml.Xsl.Xslt
                 {
                     nodeFilter.Body = f.And(nodeFilter.Body, predicate);
                 }
-                nodeFilter.Body = predicateEnvironment.fixupVisitor.Fixup(
-                    nodeFilter.Body,
-                    current,
-                    null
-                );
+                nodeFilter.Body = predicateEnvironment.fixupVisitor
+                    .Fixup(nodeFilter.Body, current, null);
             }
             //If any preidcate contains last() or position() node, then the current node is based on previous predicates,
             //for instance, a[...][2] is match second node after filter 'a[...]' instead of second 'a'.
@@ -372,10 +369,8 @@ namespace System.Xml.Xsl.Xslt
             }
 
             QilIterator j;
-            QilLoop result = f.BaseFactory.Filter(
-                i,
-                f.Not(f.IsEmpty(f.Filter(j = f.For(matches), f.Is(j, i))))
-            );
+            QilLoop result = f.BaseFactory
+                .Filter(i, f.Not(f.IsEmpty(f.Filter(j = f.For(matches), f.Is(j, i)))));
             SetPriority(result, 0.5);
             SetLastParent(result, result);
             return result;

@@ -121,8 +121,7 @@ internal sealed partial class GenericWebHostService : IHostedService
                 }
                 else
                 {
-                    serverAddressesFeature!.PreferHostingUrls = Options
-                        .WebHostOptions
+                    serverAddressesFeature!.PreferHostingUrls = Options.WebHostOptions
                         .PreferHostingUrls;
                 }
 

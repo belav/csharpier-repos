@@ -92,8 +92,8 @@ namespace Microsoft.Extensions.Hosting
             CancellationToken token = default
         )
         {
-            IHostApplicationLifetime applicationLifetime =
-                host.Services.GetRequiredService<IHostApplicationLifetime>();
+            IHostApplicationLifetime applicationLifetime = host.Services
+                .GetRequiredService<IHostApplicationLifetime>();
 
             token.Register(
                 state =>
@@ -110,14 +110,15 @@ namespace Microsoft.Extensions.Hosting
             var waitForStop = new TaskCompletionSource<object?>(
                 TaskCreationOptions.RunContinuationsAsynchronously
             );
-            applicationLifetime.ApplicationStopping.Register(
-                obj =>
-                {
-                    var tcs = (TaskCompletionSource<object?>)obj!;
-                    tcs.TrySetResult(null);
-                },
-                waitForStop
-            );
+            applicationLifetime.ApplicationStopping
+                .Register(
+                    obj =>
+                    {
+                        var tcs = (TaskCompletionSource<object?>)obj!;
+                        tcs.TrySetResult(null);
+                    },
+                    waitForStop
+                );
 
             await waitForStop.Task.ConfigureAwait(false);
 #endif

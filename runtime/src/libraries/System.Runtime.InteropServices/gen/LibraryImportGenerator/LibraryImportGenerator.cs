@@ -42,8 +42,8 @@ namespace Microsoft.Interop
         public void Initialize(IncrementalGeneratorInitializationContext context)
         {
             // Collect all methods adorned with LibraryImportAttribute
-            var attributedMethods = context
-                .SyntaxProvider.ForAttributeWithMetadataName(
+            var attributedMethods = context.SyntaxProvider
+                .ForAttributeWithMetadataName(
                     TypeNames.LibraryImportAttribute,
                     static (node, ct) => node is MethodDeclarationSyntax,
                     static (context, ct) =>
@@ -79,21 +79,22 @@ namespace Microsoft.Interop
 
             // Compute generator options
             IncrementalValueProvider<LibraryImportGeneratorOptions> stubOptions =
-                context.AnalyzerConfigOptionsProvider.Select(
-                    static (options, ct) => new LibraryImportGeneratorOptions(options.GlobalOptions)
-                );
+                context.AnalyzerConfigOptionsProvider
+                    .Select(
+                        static (options, ct) =>
+                            new LibraryImportGeneratorOptions(options.GlobalOptions)
+                    );
 
             IncrementalValueProvider<TargetFrameworkSettings> targetFramework =
-                context.AnalyzerConfigOptionsProvider.Select(
-                    (options, ct) => options.GlobalOptions.GetTargetFrameworkSettings()
-                );
+                context.AnalyzerConfigOptionsProvider
+                    .Select((options, ct) => options.GlobalOptions.GetTargetFrameworkSettings());
             IncrementalValueProvider<StubEnvironment> stubEnvironment =
                 context.CreateStubEnvironmentProvider();
 
             // Validate environment that is being used to generate stubs.
             context.RegisterDiagnostics(
-                context
-                    .CompilationProvider.Combine(attributedMethods.Collect())
+                context.CompilationProvider
+                    .Combine(attributedMethods.Collect())
                     .Combine(targetFramework)
                     .SelectMany(
                         (data, ct) =>
@@ -341,40 +342,32 @@ namespace Microsoft.Interop
                 }
                 else if (
                     lcidConversionAttrType is not null
-                    && SymbolEqualityComparer.Default.Equals(
-                        attr.AttributeClass,
-                        lcidConversionAttrType
-                    )
+                    && SymbolEqualityComparer.Default
+                        .Equals(attr.AttributeClass, lcidConversionAttrType)
                 )
                 {
                     lcidConversionAttr = attr;
                 }
                 else if (
                     suppressGCTransitionAttrType is not null
-                    && SymbolEqualityComparer.Default.Equals(
-                        attr.AttributeClass,
-                        suppressGCTransitionAttrType
-                    )
+                    && SymbolEqualityComparer.Default
+                        .Equals(attr.AttributeClass, suppressGCTransitionAttrType)
                 )
                 {
                     suppressGCTransitionAttribute = attr;
                 }
                 else if (
                     unmanagedCallConvAttrType is not null
-                    && SymbolEqualityComparer.Default.Equals(
-                        attr.AttributeClass,
-                        unmanagedCallConvAttrType
-                    )
+                    && SymbolEqualityComparer.Default
+                        .Equals(attr.AttributeClass, unmanagedCallConvAttrType)
                 )
                 {
                     unmanagedCallConvAttribute = attr;
                 }
                 else if (
                     defaultDllImportSearchPathsAttrType is not null
-                    && SymbolEqualityComparer.Default.Equals(
-                        attr.AttributeClass,
-                        defaultDllImportSearchPathsAttrType
-                    )
+                    && SymbolEqualityComparer.Default
+                        .Equals(attr.AttributeClass, defaultDllImportSearchPathsAttrType)
                 )
                 {
                     defaultDllImportSearchPathsAttribute = attr;
@@ -555,8 +548,7 @@ namespace Microsoft.Interop
                 );
             }
 
-            ImmutableArray<AttributeSyntax> forwardedAttributes = pinvokeStub
-                .ForwardedAttributes
+            ImmutableArray<AttributeSyntax> forwardedAttributes = pinvokeStub.ForwardedAttributes
                 .Array;
 
             const string innerPInvokeName = "__PInvoke";
@@ -582,13 +574,14 @@ namespace Microsoft.Interop
             code = code.AddStatements(dllImport);
 
             return (
-                pinvokeStub.ContainingSyntaxContext.WrapMemberInContainingSyntaxWithUnsafeModifier(
-                    PrintGeneratedSource(
-                        pinvokeStub.StubMethodSyntaxTemplate,
-                        pinvokeStub.SignatureContext,
-                        code
-                    )
-                ),
+                pinvokeStub.ContainingSyntaxContext
+                    .WrapMemberInContainingSyntaxWithUnsafeModifier(
+                        PrintGeneratedSource(
+                            pinvokeStub.StubMethodSyntaxTemplate,
+                            pinvokeStub.SignatureContext,
+                            code
+                        )
+                    ),
                 pinvokeStub.Diagnostics.Array.AddRange(diagnostics.Diagnostics)
             );
         }
@@ -629,9 +622,8 @@ namespace Microsoft.Interop
             }
 
             if (
-                pinvokeData.IsUserDefined.HasFlag(
-                    InteropAttributeMember.StringMarshallingCustomType
-                )
+                pinvokeData.IsUserDefined
+                    .HasFlag(InteropAttributeMember.StringMarshallingCustomType)
             )
             {
                 // Report a diagnostic when forwarding explicitly due to generator options or down-level support. Otherwise, StringMarshallingCustomType can just be omitted
@@ -668,10 +660,8 @@ namespace Microsoft.Interop
                     AttributeList(SingletonSeparatedList(CreateForwarderDllImport(pinvokeData)))
                 );
 
-            MemberDeclarationSyntax toPrint =
-                stub.ContainingSyntaxContext.WrapMemberInContainingSyntaxWithUnsafeModifier(
-                    stubMethod
-                );
+            MemberDeclarationSyntax toPrint = stub.ContainingSyntaxContext
+                .WrapMemberInContainingSyntaxWithUnsafeModifier(stubMethod);
 
             return toPrint;
         }

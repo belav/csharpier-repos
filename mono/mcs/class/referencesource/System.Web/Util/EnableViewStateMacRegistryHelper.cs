@@ -48,9 +48,8 @@ namespace System.Web.Util
 
                 // Exception: MAC errors from cross-page postbacks should be suppressed
                 // if either the <appSettings> switch is set or the reg key is set.
-                SuppressMacValidationErrorsFromCrossPagePostbacks |= !AppSettings
-                    .AllowInsecureDeserialization
-                    .Value;
+                SuppressMacValidationErrorsFromCrossPagePostbacks |=
+                    !AppSettings.AllowInsecureDeserialization.Value;
             }
 
             SuppressMacValidationErrorsAlways = AppSettings.AlwaysIgnoreViewStateValidationErrors;

@@ -171,14 +171,15 @@ namespace Mono.Cecil.Cil
             if (body.HasVariables)
             {
                 foreach (VariableDefinition var in body.Variables)
-                    nb.Variables.Add(
-                        new VariableDefinition(
-                            var.Name,
-                            var.Index,
-                            parent,
-                            context.Import(var.VariableType)
-                        )
-                    );
+                    nb.Variables
+                        .Add(
+                            new VariableDefinition(
+                                var.Name,
+                                var.Index,
+                                parent,
+                                context.Import(var.VariableType)
+                            )
+                        );
             }
 
             foreach (Instruction instr in body.Instructions)
@@ -193,9 +194,9 @@ namespace Mono.Cecil.Cil
                             ni.Operand = nb.Method.This;
                         else
                         {
-                            int param = body.Method.Parameters.IndexOf(
-                                (ParameterDefinition)instr.Operand
-                            );
+                            int param = body.Method
+                                .Parameters
+                                .IndexOf((ParameterDefinition)instr.Operand);
                             ni.Operand = parent.Parameters[param];
                         }
                         break;

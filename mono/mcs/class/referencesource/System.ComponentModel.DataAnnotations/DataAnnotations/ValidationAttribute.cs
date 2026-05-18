@@ -254,15 +254,17 @@ namespace System.ComponentModel.DataAnnotations
             )
             {
 #if SILVERLIGHT
-                var property = this._errorMessageResourceType.GetProperty(
-                    this._errorMessageResourceName,
-                    BindingFlags.Public | BindingFlags.Static
-                );
+                var property = this._errorMessageResourceType
+                    .GetProperty(
+                        this._errorMessageResourceName,
+                        BindingFlags.Public | BindingFlags.Static
+                    );
 #else
-                var property = this._errorMessageResourceType.GetProperty(
-                    this._errorMessageResourceName,
-                    BindingFlags.Public | BindingFlags.Static | BindingFlags.NonPublic
-                );
+                var property = this._errorMessageResourceType
+                    .GetProperty(
+                        this._errorMessageResourceName,
+                        BindingFlags.Public | BindingFlags.Static | BindingFlags.NonPublic
+                    );
                 if (property != null)
                 {
                     MethodInfo propertyGetter = property.GetGetMethod(

@@ -258,8 +258,7 @@ namespace System.Web.Razor.Parser
                                     AddMarkerSymbolIfNecessary();
                                 }
 
-                                editHandler.AutoCompleteString = SyntaxConstants
-                                    .VB
+                                editHandler.AutoCompleteString = SyntaxConstants.VB
                                     .EndHelperKeyword;
                                 return false;
                             }

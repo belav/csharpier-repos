@@ -785,8 +785,8 @@ namespace Microsoft.CodeAnalysis.InitializeParameter
                 {
                     // Found one.  Convert it to a coalesce expression with an appropriate
                     // throw expression.
-                    var compilation = await document
-                        .Project.GetRequiredCompilationAsync(cancellationToken)
+                    var compilation = await document.Project
+                        .GetRequiredCompilationAsync(cancellationToken)
                         .ConfigureAwait(false);
 
                     var root = await document

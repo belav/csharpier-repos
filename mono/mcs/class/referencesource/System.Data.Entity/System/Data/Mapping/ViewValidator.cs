@@ -70,8 +70,7 @@ namespace System.Data.Mapping
             {
                 get
                 {
-                    return _setMapping
-                        .EntityContainerMapping
+                    return _setMapping.EntityContainerMapping
                         .StorageMappingItemCollection
                         .EdmItemCollection;
                 }
@@ -80,8 +79,7 @@ namespace System.Data.Mapping
             {
                 get
                 {
-                    return _setMapping
-                        .EntityContainerMapping
+                    return _setMapping.EntityContainerMapping
                         .StorageMappingItemCollection
                         .StoreItemCollection;
                 }
@@ -157,11 +155,14 @@ namespace System.Data.Mapping
                                 : _elementType.ToString();
                         _errors.Add(
                             new EdmSchemaError(
-                                System.Data.Entity.Strings.Mapping_UnsupportedExpressionKind_QueryView(
-                                    _setMapping.Set.Name,
-                                    elementString,
-                                    expressionKind
-                                ),
+                                System.Data
+                                    .Entity
+                                    .Strings
+                                    .Mapping_UnsupportedExpressionKind_QueryView(
+                                        _setMapping.Set.Name,
+                                        elementString,
+                                        expressionKind
+                                    ),
                                 (int)
                                     StorageMappingErrorCode.MappingUnsupportedExpressionKindQueryView,
                                 EdmSchemaErrorSeverity.Error,
@@ -181,11 +182,14 @@ namespace System.Data.Mapping
                 {
                     _errors.Add(
                         new EdmSchemaError(
-                            System.Data.Entity.Strings.Mapping_UnsupportedPropertyKind_QueryView(
-                                _setMapping.Set.Name,
-                                expression.Property.Name,
-                                expression.Property.BuiltInTypeKind
-                            ),
+                            System.Data
+                                .Entity
+                                .Strings
+                                .Mapping_UnsupportedPropertyKind_QueryView(
+                                    _setMapping.Set.Name,
+                                    expression.Property.Name,
+                                    expression.Property.BuiltInTypeKind
+                                ),
                             (int)StorageMappingErrorCode.MappingUnsupportedPropertyKindQueryView,
                             EdmSchemaErrorSeverity.Error,
                             _setMapping.EntityContainerMapping.SourceLocation,
@@ -217,10 +221,13 @@ namespace System.Data.Mapping
                     {
                         _errors.Add(
                             new EdmSchemaError(
-                                System.Data.Entity.Strings.Mapping_UnsupportedInitialization_QueryView(
-                                    _setMapping.Set.Name,
-                                    type.FullName
-                                ),
+                                System.Data
+                                    .Entity
+                                    .Strings
+                                    .Mapping_UnsupportedInitialization_QueryView(
+                                        _setMapping.Set.Name,
+                                        type.FullName
+                                    ),
                                 (int)
                                     StorageMappingErrorCode.MappingUnsupportedInitializationQueryView,
                                 EdmSchemaErrorSeverity.Error,
@@ -300,10 +307,13 @@ namespace System.Data.Mapping
                 {
                     _errors.Add(
                         new EdmSchemaError(
-                            System.Data.Entity.Strings.Mapping_UnsupportedFunctionCall_QueryView(
-                                _setMapping.Set.Name,
-                                expression.Function.Identity
-                            ),
+                            System.Data
+                                .Entity
+                                .Strings
+                                .Mapping_UnsupportedFunctionCall_QueryView(
+                                    _setMapping.Set.Name,
+                                    expression.Function.Identity
+                                ),
                             (int)StorageMappingErrorCode.UnsupportedFunctionCallInQueryView,
                             EdmSchemaErrorSeverity.Error,
                             _setMapping.EntityContainerMapping.SourceLocation,
@@ -348,10 +358,13 @@ namespace System.Data.Mapping
                 {
                     _errors.Add(
                         new EdmSchemaError(
-                            System.Data.Entity.Strings.Mapping_UnsupportedScanTarget_QueryView(
-                                _setMapping.Set.Name,
-                                target.Name
-                            ),
+                            System.Data
+                                .Entity
+                                .Strings
+                                .Mapping_UnsupportedScanTarget_QueryView(
+                                    _setMapping.Set.Name,
+                                    target.Name
+                                ),
                             (int)StorageMappingErrorCode.MappingUnsupportedScanTargetQueryView,
                             EdmSchemaErrorSeverity.Error,
                             _setMapping.EntityContainerMapping.SourceLocation,
@@ -405,9 +418,13 @@ namespace System.Data.Mapping
             private void VisitExpressionBindingEnterScope(DbExpressionBinding binding)
             {
                 DbExpressionEntitySetInfo info = this.VisitExpressionBinding(binding);
-                this.variableScopes.Push(
-                    new KeyValuePair<string, DbExpressionEntitySetInfo>(binding.VariableName, info)
-                );
+                this.variableScopes
+                    .Push(
+                        new KeyValuePair<string, DbExpressionEntitySetInfo>(
+                            binding.VariableName,
+                            info
+                        )
+                    );
             }
 
             private void VisitExpressionBindingExitScope()
@@ -427,16 +444,19 @@ namespace System.Data.Mapping
                 //query view, it is better to be defensive since we might have missed some path up the tree
                 //while computing the sets
                 if (
-                    setInfos.SetInfos.All(it =>
-                        ((it.Value != null) && (it.Value is DbExpressionSimpleTypeEntitySetInfo))
-                    )
+                    setInfos.SetInfos
+                        .All(it =>
+                            (
+                                (it.Value != null)
+                                && (it.Value is DbExpressionSimpleTypeEntitySetInfo)
+                            )
+                        )
                     && setInfos.SetInfos.Count() == 2
                 )
                 {
                     foreach (
-                        DbExpressionSimpleTypeEntitySetInfo setInfo in setInfos.SetInfos.Select(
-                            it => it.Value
-                        )
+                        DbExpressionSimpleTypeEntitySetInfo setInfo in setInfos.SetInfos
+                            .Select(it => it.Value)
                     )
                     {
                         AssociationSetEnd setEnd = associationSet.AssociationSetEnds[i];
@@ -445,12 +465,15 @@ namespace System.Data.Mapping
                         {
                             _errors.Add(
                                 new EdmSchemaError(
-                                    System.Data.Entity.Strings.Mapping_EntitySetMismatchOnAssociationSetEnd_QueryView(
-                                        setInfo.EntitySet.Name,
-                                        declaredSet.Name,
-                                        setEnd.Name,
-                                        _setMapping.Set.Name
-                                    ),
+                                    System.Data
+                                        .Entity
+                                        .Strings
+                                        .Mapping_EntitySetMismatchOnAssociationSetEnd_QueryView(
+                                            setInfo.EntitySet.Name,
+                                            declaredSet.Name,
+                                            setEnd.Name,
+                                            _setMapping.Set.Name
+                                        ),
                                     (int)
                                         StorageMappingErrorCode.MappingUnsupportedInitializationQueryView,
                                     EdmSchemaErrorSeverity.Error,
@@ -475,8 +498,8 @@ namespace System.Data.Mapping
                 DbVariableReferenceExpression expression
             )
             {
-                return this
-                    .variableScopes.Where(it => (it.Key == expression.VariableName))
+                return this.variableScopes
+                    .Where(it => (it.Key == expression.VariableName))
                     .Select(it => it.Value)
                     .FirstOrDefault();
             }

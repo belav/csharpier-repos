@@ -187,20 +187,17 @@ namespace System.Web.UI.WebControls
         )
         {
             if (Page.ScriptManager != null)
-                Page.ScriptManager.RegisterExpandoAttributeExternal(
-                    this,
-                    controlId,
-                    attributeName,
-                    attributeValue,
-                    encode
-                );
+                Page.ScriptManager
+                    .RegisterExpandoAttributeExternal(
+                        this,
+                        controlId,
+                        attributeName,
+                        attributeValue,
+                        encode
+                    );
             else
-                Page.ClientScript.RegisterExpandoAttribute(
-                    controlId,
-                    attributeName,
-                    attributeValue,
-                    encode
-                );
+                Page.ClientScript
+                    .RegisterExpandoAttribute(controlId, attributeName, attributeValue, encode);
         }
 
         protected internal override void OnInit(EventArgs e)
@@ -250,32 +247,35 @@ namespace System.Web.UI.WebControls
             {
                 if (Page.ScriptManager != null)
                 {
-                    Page.ScriptManager.RegisterArrayDeclarationExternal(
-                        this,
-                        "Page_ValidationSummaries",
-                        String.Concat("document.getElementById ('", ClientID, "')")
-                    );
-                    Page.ScriptManager.RegisterStartupScriptExternal(
-                        this,
-                        typeof(BaseValidator),
-                        ClientID + "DisposeScript",
-                        @"
+                    Page.ScriptManager
+                        .RegisterArrayDeclarationExternal(
+                            this,
+                            "Page_ValidationSummaries",
+                            String.Concat("document.getElementById ('", ClientID, "')")
+                        );
+                    Page.ScriptManager
+                        .RegisterStartupScriptExternal(
+                            this,
+                            typeof(BaseValidator),
+                            ClientID + "DisposeScript",
+                            @"
 document.getElementById('"
-                            + ClientID
-                            + @"').dispose = function() {
+                                + ClientID
+                                + @"').dispose = function() {
 	Array.remove(Page_ValidationSummaries, document.getElementById('"
-                            + ClientID
-                            + @"'));
+                                + ClientID
+                                + @"'));
 }
 ",
-                        true
-                    );
+                            true
+                        );
                 }
                 else
-                    Page.ClientScript.RegisterArrayDeclaration(
-                        "Page_ValidationSummaries",
-                        String.Concat("document.getElementById ('", ClientID, "')")
-                    );
+                    Page.ClientScript
+                        .RegisterArrayDeclaration(
+                            "Page_ValidationSummaries",
+                            String.Concat("document.getElementById ('", ClientID, "')")
+                        );
             }
 
             if ((ShowSummary && has_errors) || (EnableClientScript && pre_render_called))

@@ -96,20 +96,22 @@ namespace System.ServiceModel.Channels
                     && (int)this.JavascriptResponseMessageProperty.StatusCode != 200
                 )
                 {
-                    byte[] buffer = this.encoding.GetBytes(
-                        String.Format(
-                            CultureInfo.InvariantCulture,
-                            ",{0}",
-                            (int)this.JavascriptResponseMessageProperty.StatusCode
-                        )
-                    );
+                    byte[] buffer = this.encoding
+                        .GetBytes(
+                            String.Format(
+                                CultureInfo.InvariantCulture,
+                                ",{0}",
+                                (int)this.JavascriptResponseMessageProperty.StatusCode
+                            )
+                        );
                     this.stream.Write(buffer, 0, buffer.Length);
                 }
-                this.stream.Write(
-                    this.encodedClosingFunctionCall,
-                    0,
-                    this.encodedClosingFunctionCall.Length
-                );
+                this.stream
+                    .Write(
+                        this.encodedClosingFunctionCall,
+                        0,
+                        this.encodedClosingFunctionCall.Length
+                    );
             }
         }
 
@@ -169,13 +171,14 @@ namespace System.ServiceModel.Channels
                 )
             )
             {
-                byte[] buffer = this.encoding.GetBytes(
-                    String.Format(
-                        CultureInfo.InvariantCulture,
-                        "{0}(",
-                        this.JavascriptResponseMessageProperty.CallbackFunctionName
-                    )
-                );
+                byte[] buffer = this.encoding
+                    .GetBytes(
+                        String.Format(
+                            CultureInfo.InvariantCulture,
+                            "{0}(",
+                            this.JavascriptResponseMessageProperty.CallbackFunctionName
+                        )
+                    );
                 this.stream.Write(buffer, 0, buffer.Length);
             }
         }

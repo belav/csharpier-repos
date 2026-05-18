@@ -511,14 +511,10 @@ public class CollectionCollectionBuilder
                     newJoinEntityType
                 );
 
-        ((SkipNavigation)RightNavigation).Builder.HasForeignKey(
-            (ForeignKey)rightForeignKey,
-            ConfigurationSource.Explicit
-        );
-        ((SkipNavigation)LeftNavigation).Builder.HasForeignKey(
-            (ForeignKey)leftForeignKey,
-            ConfigurationSource.Explicit
-        );
+        ((SkipNavigation)RightNavigation).Builder
+            .HasForeignKey((ForeignKey)rightForeignKey, ConfigurationSource.Explicit);
+        ((SkipNavigation)LeftNavigation).Builder
+            .HasForeignKey((ForeignKey)leftForeignKey, ConfigurationSource.Explicit);
 
         return newJoinEntityType;
 
@@ -549,8 +545,8 @@ public class CollectionCollectionBuilder
                 return compatibleFk;
             }
 
-            return joinEntityType
-                .Builder.HasRelationship(
+            return joinEntityType.Builder
+                .HasRelationship(
                     skipNavigation.DeclaringEntityType,
                     ConfigurationSource.Convention,
                     required: true,

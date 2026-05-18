@@ -314,7 +314,8 @@ namespace System.Data.Metadata.Edm
                 "collection",
                 TypeUsage.Create(
                     this.primitiveTypes[(int)collectionParameterTypeElementTypeKind]
-                        .EdmType.GetCollectionType()
+                        .EdmType
+                        .GetCollectionType()
                 ),
                 ParameterMode.In
             );

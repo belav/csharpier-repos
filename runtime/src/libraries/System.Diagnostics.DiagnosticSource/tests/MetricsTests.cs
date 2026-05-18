@@ -2558,69 +2558,78 @@ namespace System.Diagnostics.Metrics.Tests
 
                     int loopLength = 10_000;
 
-                    taskList[0] = Task.Factory.StartNew(() =>
-                    {
-                        for (int i = 0; i < loopLength; i++)
+                    taskList[0] = Task.Factory
+                        .StartNew(() =>
                         {
-                            counter.Add(1);
-                        }
-                    });
-                    taskList[1] = Task.Factory.StartNew(() =>
-                    {
-                        for (int i = 0; i < loopLength; i++)
+                            for (int i = 0; i < loopLength; i++)
+                            {
+                                counter.Add(1);
+                            }
+                        });
+                    taskList[1] = Task.Factory
+                        .StartNew(() =>
                         {
-                            counter.Add(1);
-                        }
-                    });
-                    taskList[2] = Task.Factory.StartNew(() =>
-                    {
-                        for (int i = 0; i < loopLength; i++)
+                            for (int i = 0; i < loopLength; i++)
+                            {
+                                counter.Add(1);
+                            }
+                        });
+                    taskList[2] = Task.Factory
+                        .StartNew(() =>
                         {
-                            histogram.Record(1);
-                        }
-                    });
-                    taskList[3] = Task.Factory.StartNew(() =>
-                    {
-                        for (int i = 0; i < loopLength; i++)
+                            for (int i = 0; i < loopLength; i++)
+                            {
+                                histogram.Record(1);
+                            }
+                        });
+                    taskList[3] = Task.Factory
+                        .StartNew(() =>
                         {
-                            histogram.Record(1);
-                        }
-                    });
-                    taskList[4] = Task.Factory.StartNew(() =>
-                    {
-                        for (int i = 0; i < loopLength; i++)
+                            for (int i = 0; i < loopLength; i++)
+                            {
+                                histogram.Record(1);
+                            }
+                        });
+                    taskList[4] = Task.Factory
+                        .StartNew(() =>
                         {
-                            listener.RecordObservableInstruments();
-                        }
-                    });
-                    taskList[5] = Task.Factory.StartNew(() =>
-                    {
-                        for (int i = 0; i < loopLength; i++)
+                            for (int i = 0; i < loopLength; i++)
+                            {
+                                listener.RecordObservableInstruments();
+                            }
+                        });
+                    taskList[5] = Task.Factory
+                        .StartNew(() =>
                         {
-                            listener.RecordObservableInstruments();
-                        }
-                    });
-                    taskList[6] = Task.Factory.StartNew(() =>
-                    {
-                        for (int i = 0; i < loopLength; i++)
+                            for (int i = 0; i < loopLength; i++)
+                            {
+                                listener.RecordObservableInstruments();
+                            }
+                        });
+                    taskList[6] = Task.Factory
+                        .StartNew(() =>
                         {
-                            upDownCounter.Add(1);
-                        }
-                    });
-                    taskList[7] = Task.Factory.StartNew(() =>
-                    {
-                        for (int i = 0; i < loopLength; i++)
+                            for (int i = 0; i < loopLength; i++)
+                            {
+                                upDownCounter.Add(1);
+                            }
+                        });
+                    taskList[7] = Task.Factory
+                        .StartNew(() =>
                         {
-                            upDownCounter.Add(1);
-                        }
-                    });
-                    taskList[8] = Task.Factory.StartNew(() =>
-                    {
-                        for (int i = 0; i < loopLength; i++)
+                            for (int i = 0; i < loopLength; i++)
+                            {
+                                upDownCounter.Add(1);
+                            }
+                        });
+                    taskList[8] = Task.Factory
+                        .StartNew(() =>
                         {
-                            listener.RecordObservableInstruments();
-                        }
-                    });
+                            for (int i = 0; i < loopLength; i++)
+                            {
+                                listener.RecordObservableInstruments();
+                            }
+                        });
 
                     Task.WaitAll(taskList);
 

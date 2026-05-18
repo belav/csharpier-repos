@@ -514,10 +514,11 @@ namespace System.Data.Linq.SqlClient
                         for (int j = i - 1; j >= 0; j--)
                         {
                             if (
-                                this.equalizer.AreEquivalent(
-                                    select.OrderBy[i].Expression,
-                                    select.OrderBy[j].Expression
-                                )
+                                this.equalizer
+                                    .AreEquivalent(
+                                        select.OrderBy[i].Expression,
+                                        select.OrderBy[j].Expression
+                                    )
                             )
                             {
                                 select.OrderBy.RemoveAt(i);

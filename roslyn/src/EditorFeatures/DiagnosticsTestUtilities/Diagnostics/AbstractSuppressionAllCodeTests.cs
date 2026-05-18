@@ -168,9 +168,11 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics
                         .GetResult();
 
                     var applyChangesOperation = operations.OfType<ApplyChangesOperation>().Single();
-                    var newDocument = applyChangesOperation
-                        .ChangedSolution.Projects.Single()
-                        .Documents.Single();
+                    var newDocument = applyChangesOperation.ChangedSolution
+                        .Projects
+                        .Single()
+                        .Documents
+                        .Single();
                     var newTree = newDocument.GetSyntaxTreeAsync().GetAwaiter().GetResult();
 
                     var newText = newTree.GetText().ToString();

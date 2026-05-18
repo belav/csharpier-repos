@@ -100,8 +100,7 @@ namespace System.Runtime.Remoting.Channels.Http
         {
             //build the headers
             ITransportHeaders requestHeaders = new TransportHeaders();
-            System.Collections.Specialized.NameValueCollection httpHeaders = context
-                .Request
+            System.Collections.Specialized.NameValueCollection httpHeaders = context.Request
                 .Headers;
             foreach (string key in httpHeaders.Keys)
             {
@@ -205,10 +204,8 @@ namespace System.Runtime.Remoting.Channels.Http
                     string key = entry.Key.ToString();
                     if (key != "__HttpStatusCode" && key != "__HttpReasonPhrase")
                     {
-                        context.Response.AddHeader(
-                            (string)entry.Key,
-                            responseHeaders[entry.Key].ToString()
-                        );
+                        context.Response
+                            .AddHeader((string)entry.Key, responseHeaders[entry.Key].ToString());
                     }
                 }
             }

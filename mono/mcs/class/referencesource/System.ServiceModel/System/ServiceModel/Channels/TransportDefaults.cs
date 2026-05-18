@@ -20,12 +20,10 @@ namespace System.ServiceModel.Channels
     {
         internal const TransactionFlowOption IssuedTokens = TransactionFlowOption.NotAllowed;
         internal const bool Transactions = false;
-        internal static TransactionProtocol TransactionProtocol = System
-            .ServiceModel
+        internal static TransactionProtocol TransactionProtocol = System.ServiceModel
             .TransactionProtocol
             .OleTransactions;
-        internal const string TransactionProtocolString = System
-            .ServiceModel
+        internal const string TransactionProtocolString = System.ServiceModel
             .Configuration
             .ConfigurationStrings
             .OleTransactions;
@@ -73,8 +71,7 @@ namespace System.ServiceModel.Channels
             Encoding.Unicode,
             Encoding.BigEndianUnicode,
         };
-        internal const string MessageVersionString = System
-            .ServiceModel
+        internal const string MessageVersionString = System.ServiceModel
             .Configuration
             .ConfigurationStrings
             .Soap12WSAddressing10;
@@ -96,12 +93,13 @@ namespace System.ServiceModel.Channels
                 if (charSet == supportedEncodings[i].WebName)
                     return;
             }
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                new ArgumentException(
-                    SR.GetString(SR.MessageTextEncodingNotSupported, charSet),
-                    "encoding"
-                )
-            );
+            throw DiagnosticUtility.ExceptionUtility
+                .ThrowHelperError(
+                    new ArgumentException(
+                        SR.GetString(SR.MessageTextEncodingNotSupported, charSet),
+                        "encoding"
+                    )
+                );
         }
 
         internal static string EncodingToCharSet(Encoding encoding)
@@ -194,16 +192,13 @@ namespace System.ServiceModel.Channels
         internal const bool ReceiveContextEnabled = true;
         internal const int MaxRetryCycles = 2;
         internal const int MaxPoolSize = 8;
-        internal const MsmqAuthenticationMode MsmqAuthenticationMode = System
-            .ServiceModel
+        internal const MsmqAuthenticationMode MsmqAuthenticationMode = System.ServiceModel
             .MsmqAuthenticationMode
             .WindowsDomain;
-        internal const MsmqEncryptionAlgorithm MsmqEncryptionAlgorithm = System
-            .ServiceModel
+        internal const MsmqEncryptionAlgorithm MsmqEncryptionAlgorithm = System.ServiceModel
             .MsmqEncryptionAlgorithm
             .RC4Stream;
-        internal const MsmqSecureHashAlgorithm DefaultMsmqSecureHashAlgorithm = System
-            .ServiceModel
+        internal const MsmqSecureHashAlgorithm DefaultMsmqSecureHashAlgorithm = System.ServiceModel
             .MsmqSecureHashAlgorithm
             .Sha256;
         internal static MsmqSecureHashAlgorithm MsmqSecureHashAlgorithm
@@ -216,13 +211,11 @@ namespace System.ServiceModel.Channels
             }
         }
         internal const ProtectionLevel MsmqProtectionLevel = ProtectionLevel.Sign;
-        internal const ReceiveErrorHandling ReceiveErrorHandling = System
-            .ServiceModel
+        internal const ReceiveErrorHandling ReceiveErrorHandling = System.ServiceModel
             .ReceiveErrorHandling
             .Fault;
         internal const int ReceiveRetryCount = 5;
-        internal const QueueTransferProtocol QueueTransferProtocol = System
-            .ServiceModel
+        internal const QueueTransferProtocol QueueTransferProtocol = System.ServiceModel
             .QueueTransferProtocol
             .Native;
         internal static TimeSpan RetryCycleDelay
@@ -259,8 +252,7 @@ namespace System.ServiceModel.Channels
     {
         internal const bool ExtractGroupsForWindowsAccounts =
             SspiSecurityTokenProvider.DefaultExtractWindowsGroupClaims;
-        internal const HostNameComparisonMode HostNameComparisonMode = System
-            .ServiceModel
+        internal const HostNameComparisonMode HostNameComparisonMode = System.ServiceModel
             .HostNameComparisonMode
             .Exact;
         internal const TokenImpersonationLevel ImpersonationLevel =
@@ -313,8 +305,7 @@ namespace System.ServiceModel.Channels
         internal const bool AllowNtlm = SspiSecurityTokenProvider.DefaultAllowNtlm;
         internal const int ConnectionBufferSize = 8192;
         internal const string ConnectionPoolGroupName = "default";
-        internal const HostNameComparisonMode HostNameComparisonMode = System
-            .ServiceModel
+        internal const HostNameComparisonMode HostNameComparisonMode = System.ServiceModel
             .HostNameComparisonMode
             .StrongWildcard;
         internal static TimeSpan IdleTimeout
@@ -337,8 +328,7 @@ namespace System.ServiceModel.Channels
         internal const string MaxOutputDelayString = "00:00:00.2";
         internal const int MaxPendingAcceptsConst = 0;
         internal const int MaxViaSize = 2048;
-        internal const ProtectionLevel ProtectionLevel = System
-            .Net
+        internal const ProtectionLevel ProtectionLevel = System.Net
             .Security
             .ProtectionLevel
             .EncryptAndSign;
@@ -429,8 +419,7 @@ namespace System.ServiceModel.Channels
         internal const AuthenticationSchemes AuthenticationScheme = AuthenticationSchemes.Anonymous;
         internal const bool BypassProxyOnLocal = false;
         internal const bool DecompressionEnabled = true;
-        internal const HostNameComparisonMode HostNameComparisonMode = System
-            .ServiceModel
+        internal const HostNameComparisonMode HostNameComparisonMode = System.ServiceModel
             .HostNameComparisonMode
             .StrongWildcard;
         internal const bool KeepAliveEnabled = true;
@@ -590,8 +579,7 @@ namespace System.ServiceModel.Channels
                 return System.ServiceModel.ReliableMessagingVersion.WSReliableMessagingFebruary2005;
             }
         }
-        internal const string ReliableMessagingVersionString = System
-            .ServiceModel
+        internal const string ReliableMessagingVersionString = System.ServiceModel
             .Configuration
             .ConfigurationStrings
             .WSReliableMessagingFebruary2005;

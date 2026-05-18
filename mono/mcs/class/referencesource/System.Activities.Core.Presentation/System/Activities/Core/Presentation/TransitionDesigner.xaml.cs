@@ -148,10 +148,8 @@ namespace System.Activities.Core.Presentation
             {
                 this.TransitionsSharingTrigger.Clear();
                 bool expandTargetTransition = true;
-                object expandCollapseTargetViewState = this.ViewStateService.RetrieveViewState(
-                    this.ModelItem,
-                    ExpandViewStateKey
-                );
+                object expandCollapseTargetViewState = this.ViewStateService
+                    .RetrieveViewState(this.ModelItem, ExpandViewStateKey);
 
                 if (expandCollapseTargetViewState != null)
                 {
@@ -180,23 +178,21 @@ namespace System.Activities.Core.Presentation
                             )
                             {
                                 bool expandTransition = false;
-                                object expandCollapseViewState =
-                                    this.ViewStateService.RetrieveViewState(
-                                        transitionModelItem,
-                                        ExpandViewStateKey
-                                    );
+                                object expandCollapseViewState = this.ViewStateService
+                                    .RetrieveViewState(transitionModelItem, ExpandViewStateKey);
                                 if (expandCollapseViewState != null)
                                 {
                                     expandTransition = (bool)expandCollapseViewState;
                                 }
 
-                                this.TransitionsSharingTrigger.Add(
-                                    new ExpandableItemWrapper()
-                                    {
-                                        Item = transitionModelItem,
-                                        IsExpanded = expandTransition,
-                                    }
-                                );
+                                this.TransitionsSharingTrigger
+                                    .Add(
+                                        new ExpandableItemWrapper()
+                                        {
+                                            Item = transitionModelItem,
+                                            IsExpanded = expandTransition,
+                                        }
+                                    );
                             }
                         }
                         else
@@ -209,10 +205,11 @@ namespace System.Activities.Core.Presentation
                 else
                 {
                     PointCollection thisPointCollection =
-                        this.ViewStateService.RetrieveViewState(
-                            this.ModelItem,
-                            StateContainerEditor.ConnectorLocationViewStateKey
-                        ) as PointCollection;
+                        this.ViewStateService
+                            .RetrieveViewState(
+                                this.ModelItem,
+                                StateContainerEditor.ConnectorLocationViewStateKey
+                            ) as PointCollection;
                     if (thisPointCollection != null && thisPointCollection.Count > 1)
                     {
                         foreach (
@@ -224,10 +221,11 @@ namespace System.Activities.Core.Presentation
                             if (transitionModelItem != this.ModelItem)
                             {
                                 PointCollection pointCollection =
-                                    this.ViewStateService.RetrieveViewState(
-                                        transitionModelItem,
-                                        StateContainerEditor.ConnectorLocationViewStateKey
-                                    ) as PointCollection;
+                                    this.ViewStateService
+                                        .RetrieveViewState(
+                                            transitionModelItem,
+                                            StateContainerEditor.ConnectorLocationViewStateKey
+                                        ) as PointCollection;
                                 if (pointCollection != null && pointCollection.Count > 0)
                                 {
                                     if (pointCollection[0].IsEqualTo(thisPointCollection[0]))
@@ -239,8 +237,8 @@ namespace System.Activities.Core.Presentation
                                             "Transition trigger should be null."
                                         );
                                         bool expandTransition = false;
-                                        object expandCollapseViewState =
-                                            this.ViewStateService.RetrieveViewState(
+                                        object expandCollapseViewState = this.ViewStateService
+                                            .RetrieveViewState(
                                                 transitionModelItem,
                                                 ExpandViewStateKey
                                             );
@@ -250,13 +248,14 @@ namespace System.Activities.Core.Presentation
                                             expandTransition = (bool)expandCollapseViewState;
                                         }
 
-                                        this.TransitionsSharingTrigger.Add(
-                                            new ExpandableItemWrapper()
-                                            {
-                                                Item = transitionModelItem,
-                                                IsExpanded = expandTransition,
-                                            }
-                                        );
+                                        this.TransitionsSharingTrigger
+                                            .Add(
+                                                new ExpandableItemWrapper()
+                                                {
+                                                    Item = transitionModelItem,
+                                                    IsExpanded = expandTransition,
+                                                }
+                                            );
                                     }
                                 }
                             }
@@ -335,8 +334,8 @@ namespace System.Activities.Core.Presentation
                 {
                     if (wrapper.Item != this.ModelItem)
                     {
-                        wrapper
-                            .Item.Properties[TriggerPropertyName]
+                        wrapper.Item
+                            .Properties[TriggerPropertyName]
                             .SetValue(this.ModelItem.Properties[TriggerPropertyName].Value);
                     }
                 }
@@ -361,8 +360,9 @@ namespace System.Activities.Core.Presentation
                     )
                     {
                         ModelItem movedModelItem = this.TransitionsSharingTrigger[
-                            e.NewStartingIndex
-                        ].Item;
+                                e.NewStartingIndex
+                            ]
+                            .Item;
                         ModelItemCollection transitionsCollection = this.parentStateModelItem
                             .Properties[StateDesigner.TransitionsPropertyName]
                             .Collection;
@@ -370,19 +370,23 @@ namespace System.Activities.Core.Presentation
                         if (e.OldStartingIndex < e.NewStartingIndex)
                         {
                             ModelItem nextModelItem = this.TransitionsSharingTrigger[
-                                e.OldStartingIndex
-                            ].Item;
+                                    e.OldStartingIndex
+                                ]
+                                .Item;
                             SwapItems(transitionsCollection, movedModelItem, nextModelItem);
                         }
                         // moving up
                         else if (e.OldStartingIndex > e.NewStartingIndex)
                         {
                             ModelItem previousModelItem = this.TransitionsSharingTrigger[
-                                e.OldStartingIndex
-                            ].Item;
+                                    e.OldStartingIndex
+                                ]
+                                .Item;
                             SwapItems(transitionsCollection, previousModelItem, movedModelItem);
                         }
-                        this.Context.Services.GetService<ModelTreeManager>()
+                        this.Context
+                            .Services
+                            .GetService<ModelTreeManager>()
                             .AddToCurrentEditingScope(new TransitionReorderChange());
                         scope.Complete();
                     }
@@ -421,11 +425,8 @@ namespace System.Activities.Core.Presentation
             ListBox listBox = VisualTreeUtils.FindVisualAncestor<ListBox>(button);
             ExpandableItemWrapper wrapper = (ExpandableItemWrapper)listBox.SelectedItem;
             wrapper.IsExpanded = button.IsChecked.Value;
-            this.ViewStateService.StoreViewState(
-                wrapper.Item,
-                ExpandViewStateKey,
-                button.IsChecked.Value
-            );
+            this.ViewStateService
+                .StoreViewState(wrapper.Item, ExpandViewStateKey, button.IsChecked.Value);
 
             if (
                 (wrapper.IsExpanded && this.Designer.ShouldCollapseAll)
@@ -471,7 +472,9 @@ namespace System.Activities.Core.Presentation
 
         void OnCopyCommandExecute(object sender, ExecutedRoutedEventArgs e)
         {
-            this.Context.Services.GetService<DesignerPerfEventProvider>()
+            this.Context
+                .Services
+                .GetService<DesignerPerfEventProvider>()
                 .WorkflowDesignerCopyStart();
             CutCopyPasteHelper.DoCopy(this.Context);
             e.Handled = true;
@@ -606,9 +609,10 @@ namespace System.Activities.Core.Presentation
                 ModelItem triggerModelItem = this.ModelItem.Properties[TriggerPropertyName].Value;
                 State toState = toStateModelItem.GetCurrentValue() as State;
 
-                ModelItem newTransitionItem = this
-                    .parentStateModelItem.Properties[StateDesigner.TransitionsPropertyName]
-                    .Collection.Add(
+                ModelItem newTransitionItem = this.parentStateModelItem
+                    .Properties[StateDesigner.TransitionsPropertyName]
+                    .Collection
+                    .Add(
                         new Transition()
                         {
                             Trigger =
@@ -627,10 +631,11 @@ namespace System.Activities.Core.Presentation
                 if (null == triggerModelItem)
                 {
                     PointCollection thisPointCollection =
-                        this.ViewStateService.RetrieveViewState(
-                            this.ModelItem,
-                            StateContainerEditor.ConnectorLocationViewStateKey
-                        ) as PointCollection;
+                        this.ViewStateService
+                            .RetrieveViewState(
+                                this.ModelItem,
+                                StateContainerEditor.ConnectorLocationViewStateKey
+                            ) as PointCollection;
                     if (null != thisPointCollection && thisPointCollection.Any())
                     {
                         PointCollection newTransitionViewState = new PointCollection
@@ -644,11 +649,12 @@ namespace System.Activities.Core.Presentation
                             newTransitionViewState.Add(new Point(0, 0));
                         }
 
-                        this.ViewStateService.StoreViewState(
-                            newTransitionItem,
-                            StateContainerEditor.ConnectorLocationViewStateKey,
-                            newTransitionViewState
-                        );
+                        this.ViewStateService
+                            .StoreViewState(
+                                newTransitionItem,
+                                StateContainerEditor.ConnectorLocationViewStateKey,
+                                newTransitionViewState
+                            );
                     }
                 }
 
@@ -717,7 +723,8 @@ namespace System.Activities.Core.Presentation
                     ? SR.EmptyName
                     : modelItem
                         .Properties[StateDesigner.DisplayNamePropertyName]
-                        .Value.GetCurrentValue()
+                        .Value
+                        .GetCurrentValue()
             );
         }
 

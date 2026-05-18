@@ -50,11 +50,8 @@ namespace System.Net.Security
                     {
                         foreach (TlsCipherSuite cs in allowedCipherSuites)
                         {
-                            string? name = Interop.Ssl.GetOpenSslCipherSuiteName(
-                                ssl,
-                                cs,
-                                out bool isTls12OrLower
-                            );
+                            string? name = Interop.Ssl
+                                .GetOpenSslCipherSuiteName(ssl, cs, out bool isTls12OrLower);
 
                             if (name == null)
                             {

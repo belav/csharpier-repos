@@ -183,9 +183,9 @@ namespace System.Data.Common.Internal.Materialization
                 );
 
                 // check for an existing entity with the same key
-                EntityEntry existingEntry = this.Context.ObjectStateManager.FindEntityEntry(
-                    entityKey
-                );
+                EntityEntry existingEntry = this.Context
+                    .ObjectStateManager
+                    .FindEntityEntry(entityKey);
                 if (null != existingEntry && !existingEntry.IsKeyEntry)
                 {
                     Debug.Assert(
@@ -200,25 +200,21 @@ namespace System.Data.Common.Internal.Materialization
                     RegisterMaterializedEntityForEvent(result);
                     if (null == existingEntry)
                     {
-                        Context.ObjectStateManager.AddEntry(
-                            wrappedEntity,
-                            entityKey,
-                            entitySet,
-                            "HandleEntity",
-                            false
-                        );
+                        Context.ObjectStateManager
+                            .AddEntry(wrappedEntity, entityKey, entitySet, "HandleEntity", false);
                     }
                     else
                     {
-                        Context.ObjectStateManager.PromoteKeyEntry(
-                            existingEntry,
-                            wrappedEntity,
-                            (IExtendedDataRecord)null,
-                            false, /*setIsLoaded*/
-                            true, /*keyEntryInitialized*/
-                            false,
-                            "HandleEntity"
-                        );
+                        Context.ObjectStateManager
+                            .PromoteKeyEntry(
+                                existingEntry,
+                                wrappedEntity,
+                                (IExtendedDataRecord)null,
+                                false, /*setIsLoaded*/
+                                true, /*keyEntryInitialized*/
+                                false,
+                                "HandleEntity"
+                            );
                     }
                 }
             }
@@ -263,9 +259,9 @@ namespace System.Data.Common.Internal.Materialization
                 );
 
                 // check for an existing entity with the same key
-                EntityEntry existingEntry = this.Context.ObjectStateManager.FindEntityEntry(
-                    entityKey
-                );
+                EntityEntry existingEntry = this.Context
+                    .ObjectStateManager
+                    .FindEntityEntry(entityKey);
                 if (null != existingEntry && !existingEntry.IsKeyEntry)
                 {
                     Debug.Assert(
@@ -294,25 +290,21 @@ namespace System.Data.Common.Internal.Materialization
                     RegisterMaterializedEntityForEvent(result);
                     if (null == existingEntry)
                     {
-                        Context.ObjectStateManager.AddEntry(
-                            result,
-                            entityKey,
-                            entitySet,
-                            "HandleEntity",
-                            false
-                        );
+                        Context.ObjectStateManager
+                            .AddEntry(result, entityKey, entitySet, "HandleEntity", false);
                     }
                     else
                     {
-                        Context.ObjectStateManager.PromoteKeyEntry(
-                            existingEntry,
-                            result,
-                            (IExtendedDataRecord)null,
-                            false, /*setIsLoaded*/
-                            true, /*keyEntryInitialized*/
-                            false,
-                            "HandleEntity"
-                        );
+                        Context.ObjectStateManager
+                            .PromoteKeyEntry(
+                                existingEntry,
+                                result,
+                                (IExtendedDataRecord)null,
+                                false, /*setIsLoaded*/
+                                true, /*keyEntryInitialized*/
+                                false,
+                                "HandleEntity"
+                            );
                     }
                 }
             }
@@ -402,10 +394,9 @@ namespace System.Data.Common.Internal.Materialization
             {
                 EntitySet targetEntitySet;
 
-                EntityContainer entityContainer = this.Context.MetadataWorkspace.GetEntityContainer(
-                    targetKey.EntityContainerName,
-                    DataSpace.CSpace
-                );
+                EntityContainer entityContainer = this.Context
+                    .MetadataWorkspace
+                    .GetEntityContainer(targetKey.EntityContainerName, DataSpace.CSpace);
 
                 // find the correct AssociationSet
                 AssociationSet associationSet =
@@ -578,8 +569,8 @@ namespace System.Data.Common.Internal.Materialization
                 )
             )
             {
-                oSpaceAssociation = this
-                    .Workspace.GetItemCollection(DataSpace.OSpace)
+                oSpaceAssociation = this.Workspace
+                    .GetItemCollection(DataSpace.OSpace)
                     .GetItem<AssociationType>(associationType.FullName);
                 AssociationSpaceMap[(AssociationType)associationType] = oSpaceAssociation;
             }
@@ -905,10 +896,9 @@ namespace System.Data.Common.Internal.Materialization
                 EdmType expectedSourceType = ((RefType)sourceEnd.TypeUsage.EdmType).ElementType;
                 TypeUsage entityTypeUsage;
                 if (
-                    !this.Context.Perspective.TryGetType(
-                        wrappedSource.IdentityType,
-                        out entityTypeUsage
-                    )
+                    !this.Context
+                        .Perspective
+                        .TryGetType(wrappedSource.IdentityType, out entityTypeUsage)
                     || entityTypeUsage.EdmType.EdmEquals(expectedSourceType)
                     || TypeSemantics.IsSubTypeOf(entityTypeUsage.EdmType, expectedSourceType)
                 )
@@ -937,10 +927,9 @@ namespace System.Data.Common.Internal.Materialization
 
             AssociationEndMember sourceMember = MetadataHelper.GetOtherAssociationEnd(targetMember);
 
-            EntityContainer entityContainer = this.Context.MetadataWorkspace.GetEntityContainer(
-                sourceKey.EntityContainerName,
-                DataSpace.CSpace
-            );
+            EntityContainer entityContainer = this.Context
+                .MetadataWorkspace
+                .GetEntityContainer(sourceKey.EntityContainerName, DataSpace.CSpace);
             EntitySet sourceEntitySet;
             AssociationSet associationSet =
                 MetadataHelper.GetAssociationsForEntitySetAndAssociationType(
@@ -1054,15 +1043,11 @@ namespace System.Data.Common.Internal.Materialization
                         existingEntry.RevertDelete();
                     }
                     existingEntry.UpdateCurrentValueRecord(wrappedEntity.Entity);
-                    Context.ObjectStateManager.ForgetEntryWithConceptualNull(
-                        existingEntry,
-                        resetAllKeys: true
-                    );
+                    Context.ObjectStateManager
+                        .ForgetEntryWithConceptualNull(existingEntry, resetAllKeys: true);
                     existingEntry.AcceptChanges();
-                    Context.ObjectStateManager.FixupReferencesByForeignKeys(
-                        existingEntry,
-                        replaceAddedRefs: true
-                    );
+                    Context.ObjectStateManager
+                        .FixupReferencesByForeignKeys(existingEntry, replaceAddedRefs: true);
                 }
                 else
                 {
@@ -1074,15 +1059,11 @@ namespace System.Data.Common.Internal.Materialization
                     {
                         // same behavior as MergeOption.OverwriteChanges
                         existingEntry.UpdateCurrentValueRecord(wrappedEntity.Entity);
-                        Context.ObjectStateManager.ForgetEntryWithConceptualNull(
-                            existingEntry,
-                            resetAllKeys: true
-                        );
+                        Context.ObjectStateManager
+                            .ForgetEntryWithConceptualNull(existingEntry, resetAllKeys: true);
                         existingEntry.AcceptChanges();
-                        Context.ObjectStateManager.FixupReferencesByForeignKeys(
-                            existingEntry,
-                            replaceAddedRefs: true
-                        );
+                        Context.ObjectStateManager
+                            .FixupReferencesByForeignKeys(existingEntry, replaceAddedRefs: true);
                     }
                     else
                     {
@@ -1270,24 +1251,34 @@ namespace System.Data.Common.Internal.Materialization
             protected override Exception CreateNullValueException()
             {
                 return EntityUtil.Constraint(
-                    System.Data.Entity.Strings.Materializer_SetInvalidValue(
-                        (Nullable.GetUnderlyingType(typeof(TProperty)) ?? typeof(TProperty)).Name,
-                        _typeName,
-                        _propertyName,
-                        "null"
-                    )
+                    System.Data
+                        .Entity
+                        .Strings
+                        .Materializer_SetInvalidValue(
+                            (
+                                Nullable.GetUnderlyingType(typeof(TProperty)) ?? typeof(TProperty)
+                            ).Name,
+                            _typeName,
+                            _propertyName,
+                            "null"
+                        )
                 );
             }
 
             protected override Exception CreateWrongTypeException(Type resultType)
             {
                 return EntityUtil.InvalidOperation(
-                    System.Data.Entity.Strings.Materializer_SetInvalidValue(
-                        (Nullable.GetUnderlyingType(typeof(TProperty)) ?? typeof(TProperty)).Name,
-                        _typeName,
-                        _propertyName,
-                        resultType.Name
-                    )
+                    System.Data
+                        .Entity
+                        .Strings
+                        .Materializer_SetInvalidValue(
+                            (
+                                Nullable.GetUnderlyingType(typeof(TProperty)) ?? typeof(TProperty)
+                            ).Name,
+                            _typeName,
+                            _propertyName,
+                            resultType.Name
+                        )
                 );
             }
         }

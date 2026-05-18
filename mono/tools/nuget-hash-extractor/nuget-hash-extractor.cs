@@ -67,21 +67,21 @@ class Driver
         IEnumerable<ZipArchiveEntry> entries = null;
         foreach (var prefix in prefixesToCheckInOrder)
         {
-            entries = zip.Entries.Where(e =>
-                e.FullName.StartsWith(prefix)
-                && !e.FullName.Contains("/ref/")
-                && e.Name.EndsWith(".dll")
-                && BadAssembliesToEnumTable.ContainsKey(e.Name)
-            );
+            entries = zip.Entries
+                .Where(e =>
+                    e.FullName.StartsWith(prefix)
+                    && !e.FullName.Contains("/ref/")
+                    && e.Name.EndsWith(".dll")
+                    && BadAssembliesToEnumTable.ContainsKey(e.Name)
+                );
             if (entries.Any())
                 break;
         }
 
         if (!entries.Any())
         {
-            Console.Error.WriteLine(
-                $"** Warning: No relevant assemblies found for nukpkg: {nupkg}"
-            );
+            Console.Error
+                .WriteLine($"** Warning: No relevant assemblies found for nukpkg: {nupkg}");
             return;
         }
 
@@ -133,8 +133,8 @@ class Driver
         {
             // This needs to be kept in sync with FilterDeniedAssemblies msbuild task in msbuild
             // Sory by assembly name and version
-            var query = ignoredAsmTable
-                .Values.GroupBy(data => data.AssemblyName)
+            var query = ignoredAsmTable.Values
+                .GroupBy(data => data.AssemblyName)
                 .OrderBy(group => group.Key)
                 .Select(group => new
                 {

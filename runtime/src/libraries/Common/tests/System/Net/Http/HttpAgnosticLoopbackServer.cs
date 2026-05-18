@@ -106,12 +106,8 @@ namespace System.Net.Test.Common
                     if (sslStream.NegotiatedApplicationProtocol == SslApplicationProtocol.Http2)
                     {
                         // Do not pass original options so the CreateConnectionAsync won't try to do ALPN again.
-                        return connection = await Http2LoopbackServerFactory
-                            .Singleton.CreateConnectionAsync(
-                                new SocketWrapper(socket),
-                                stream,
-                                options
-                            )
+                        return connection = await Http2LoopbackServerFactory.Singleton
+                            .CreateConnectionAsync(new SocketWrapper(socket), stream, options)
                             .ConfigureAwait(false);
                     }
                     if (
@@ -120,12 +116,8 @@ namespace System.Net.Test.Common
                     )
                     {
                         // Do not pass original options so the CreateConnectionAsync won't try to do ALPN again.
-                        return connection = await Http11LoopbackServerFactory
-                            .Singleton.CreateConnectionAsync(
-                                new SocketWrapper(socket),
-                                stream,
-                                options
-                            )
+                        return connection = await Http11LoopbackServerFactory.Singleton
+                            .CreateConnectionAsync(new SocketWrapper(socket), stream, options)
                             .ConfigureAwait(false);
                     }
                     else
@@ -138,14 +130,14 @@ namespace System.Net.Test.Common
 
                 if (_options.ClearTextVersion == HttpVersion.Version11)
                 {
-                    return connection = await Http11LoopbackServerFactory
-                        .Singleton.CreateConnectionAsync(new SocketWrapper(socket), stream, options)
+                    return connection = await Http11LoopbackServerFactory.Singleton
+                        .CreateConnectionAsync(new SocketWrapper(socket), stream, options)
                         .ConfigureAwait(false);
                 }
                 else if (_options.ClearTextVersion == HttpVersion.Version20)
                 {
-                    return connection = await Http2LoopbackServerFactory
-                        .Singleton.CreateConnectionAsync(new SocketWrapper(socket), stream, options)
+                    return connection = await Http2LoopbackServerFactory.Singleton
+                        .CreateConnectionAsync(new SocketWrapper(socket), stream, options)
                         .ConfigureAwait(false);
                 }
                 else

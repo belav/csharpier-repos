@@ -156,7 +156,8 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Extensions
         private static bool IsSourceBuffer(IProjectionBufferBase top, ITextBuffer bottom)
         {
             return top.SourceBuffers.Contains(bottom)
-                || top.SourceBuffers.OfType<IProjectionBufferBase>()
+                || top.SourceBuffers
+                    .OfType<IProjectionBufferBase>()
                     .Any(b => IsSourceBuffer(b, bottom));
         }
     }

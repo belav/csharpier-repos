@@ -64,12 +64,13 @@ namespace Mono.Linker.Steps
                     MarkAndPreserveAll(type, nav);
 
                 foreach (var exportedType in assembly.MainModule.ExportedTypes)
-                    _context.MarkingHelpers.MarkExportedType(
-                        exportedType,
-                        assembly.MainModule,
-                        new DependencyInfo(DependencyKind.XmlDescriptor, assembly.MainModule),
-                        GetMessageOriginForPosition(nav)
-                    );
+                    _context.MarkingHelpers
+                        .MarkExportedType(
+                            exportedType,
+                            assembly.MainModule,
+                            new DependencyInfo(DependencyKind.XmlDescriptor, assembly.MainModule),
+                            GetMessageOriginForPosition(nav)
+                        );
             }
             else
             {
@@ -114,11 +115,12 @@ namespace Mono.Linker.Steps
 
         void MarkAndPreserveAll(TypeDefinition type, XPathNavigator nav)
         {
-            _context.Annotations.Mark(
-                type,
-                new DependencyInfo(DependencyKind.XmlDescriptor, _xmlDocumentLocation),
-                GetMessageOriginForPosition(nav)
-            );
+            _context.Annotations
+                .Mark(
+                    type,
+                    new DependencyInfo(DependencyKind.XmlDescriptor, _xmlDocumentLocation),
+                    GetMessageOriginForPosition(nav)
+                );
             _context.Annotations.SetPreserve(type, TypePreserve.All);
 
             if (!type.HasNestedTypes)
@@ -134,12 +136,13 @@ namespace Mono.Linker.Steps
             XPathNavigator nav
         )
         {
-            _context.MarkingHelpers.MarkExportedType(
-                exported,
-                assembly.MainModule,
-                new DependencyInfo(DependencyKind.XmlDescriptor, _xmlDocumentLocation),
-                GetMessageOriginForPosition(nav)
-            );
+            _context.MarkingHelpers
+                .MarkExportedType(
+                    exported,
+                    assembly.MainModule,
+                    new DependencyInfo(DependencyKind.XmlDescriptor, _xmlDocumentLocation),
+                    GetMessageOriginForPosition(nav)
+                );
             return base.ProcessExportedType(exported, assembly, nav);
         }
 
@@ -171,11 +174,12 @@ namespace Mono.Linker.Steps
             if (!required)
                 return;
 
-            _context.Annotations.Mark(
-                type,
-                new DependencyInfo(DependencyKind.XmlDescriptor, _xmlDocumentLocation),
-                GetMessageOriginForPosition(nav)
-            );
+            _context.Annotations
+                .Mark(
+                    type,
+                    new DependencyInfo(DependencyKind.XmlDescriptor, _xmlDocumentLocation),
+                    GetMessageOriginForPosition(nav)
+                );
 
             if (type.IsNested)
             {
@@ -183,11 +187,12 @@ namespace Mono.Linker.Steps
                 while (currentType.IsNested)
                 {
                     var parent = currentType.DeclaringType;
-                    _context.Annotations.Mark(
-                        parent,
-                        new DependencyInfo(DependencyKind.DeclaringType, currentType),
-                        GetMessageOriginForPosition(nav)
-                    );
+                    _context.Annotations
+                        .Mark(
+                            parent,
+                            new DependencyInfo(DependencyKind.DeclaringType, currentType),
+                            GetMessageOriginForPosition(nav)
+                        );
                     currentType = parent;
                 }
             }
@@ -213,11 +218,12 @@ namespace Mono.Linker.Steps
             if (_context.Annotations.IsMarked(field))
                 LogWarning(nav, DiagnosticId.XmlDuplicatePreserveMember, field.FullName);
 
-            _context.Annotations.Mark(
-                field,
-                new DependencyInfo(DependencyKind.XmlDescriptor, _xmlDocumentLocation),
-                GetMessageOriginForPosition(nav)
-            );
+            _context.Annotations
+                .Mark(
+                    field,
+                    new DependencyInfo(DependencyKind.XmlDescriptor, _xmlDocumentLocation),
+                    GetMessageOriginForPosition(nav)
+                );
         }
 
         protected override void ProcessMethod(
@@ -239,11 +245,12 @@ namespace Mono.Linker.Steps
             }
             else
             {
-                _context.Annotations.Mark(
-                    method,
-                    new DependencyInfo(DependencyKind.XmlDescriptor, _xmlDocumentLocation),
-                    GetMessageOriginForPosition(nav)
-                );
+                _context.Annotations
+                    .Mark(
+                        method,
+                        new DependencyInfo(DependencyKind.XmlDescriptor, _xmlDocumentLocation),
+                        GetMessageOriginForPosition(nav)
+                    );
             }
         }
 

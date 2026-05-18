@@ -3220,15 +3220,16 @@ namespace System.Xml.Xsl.Xslt
                 }
 
                 // 3.1.2 switch on type of current node
-                QilTernary builtinTemplates = f.BaseFactory.Conditional(
-                    f.IsType(current, elementOrDocumentType),
-                    loopOnContent,
-                    f.Conditional(
-                        f.IsType(current, textOrAttributeType),
-                        f.TextCtor(f.XPathNodeValue(current)),
-                        f.Sequence()
-                    )
-                );
+                QilTernary builtinTemplates = f.BaseFactory
+                    .Conditional(
+                        f.IsType(current, elementOrDocumentType),
+                        loopOnContent,
+                        f.Conditional(
+                            f.IsType(current, textOrAttributeType),
+                            f.TextCtor(f.XPathNodeValue(current)),
+                            f.Sequence()
+                        )
+                    );
 
                 // 3.2 Stylesheet templates
                 matcherBuilder.CollectPatterns(sheet, mode);

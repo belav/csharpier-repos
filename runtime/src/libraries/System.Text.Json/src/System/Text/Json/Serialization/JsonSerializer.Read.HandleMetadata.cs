@@ -138,8 +138,7 @@ namespace System.Text.Json
 
                         case MetadataPropertyName.Type:
                             state.Current.JsonPropertyName =
-                                jsonTypeInfo
-                                    .PolymorphicTypeResolver
+                                jsonTypeInfo.PolymorphicTypeResolver
                                     ?.TypeDiscriminatorPropertyNameUtf8
                                 ?? s_typePropertyName;
 
@@ -270,8 +269,7 @@ namespace System.Text.Json
                         }
 
                         state.Current.PropertyState = StackFramePropertyState.None;
-                        state.Current.MetadataPropertyNames |= state
-                            .Current
+                        state.Current.MetadataPropertyNames |= state.Current
                             .LatestMetadataPropertyName;
                         return true; // "$values" property contains the nested payload, exit the metadata reader now.
 
@@ -293,8 +291,8 @@ namespace System.Text.Json
         {
             return (propertyName.Length > 0 && propertyName[0] == '$')
                 || (
-                    resolver
-                        ?.TypeDiscriminatorPropertyNameUtf8?.AsSpan()
+                    resolver?.TypeDiscriminatorPropertyNameUtf8
+                        ?.AsSpan()
                         .SequenceEqual(propertyName) == true
                 );
         }
@@ -405,10 +403,8 @@ namespace System.Text.Json
                         }
 
                         object boxedElement = element;
-                        state.ReferenceResolver.AddReference(
-                            property.Value.GetString()!,
-                            boxedElement
-                        );
+                        state.ReferenceResolver
+                            .AddReference(property.Value.GetString()!, boxedElement);
                         referenceValue = boxedElement;
                         return true;
                     }
@@ -436,9 +432,8 @@ namespace System.Text.Json
                             );
                         }
 
-                        referenceValue = state.ReferenceResolver.ResolveReference(
-                            property.Value.GetString()!
-                        );
+                        referenceValue = state.ReferenceResolver
+                            .ResolveReference(property.Value.GetString()!);
                         refMetadataFound = true;
                     }
                 }

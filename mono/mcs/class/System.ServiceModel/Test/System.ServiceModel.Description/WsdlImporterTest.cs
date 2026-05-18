@@ -616,9 +616,8 @@ namespace MonoTests.System.ServiceModel.Description
                         Path.Combine(Path.GetDirectoryName(path), import.SchemaLocation)
                     )
                 )
-                    ms.MetadataSections.Add(
-                        MetadataSection.CreateFromSchema(XmlSchema.Read(xr, null))
-                    );
+                    ms.MetadataSections
+                        .Add(MetadataSection.CreateFromSchema(XmlSchema.Read(xr, null)));
             return ms;
         }
 
@@ -656,13 +655,14 @@ namespace MonoTests.System.ServiceModel.Description
                     )
                 )
             );
-            mset.MetadataSections.Add(
-                new MetadataSection()
-                {
-                    Dialect = MetadataSection.ServiceDescriptionDialect,
-                    Metadata = sd,
-                }
-            );
+            mset.MetadataSections
+                .Add(
+                    new MetadataSection()
+                    {
+                        Dialect = MetadataSection.ServiceDescriptionDialect,
+                        Metadata = sd,
+                    }
+                );
 
             var imp = new WsdlImporter(mset);
             var sec = imp.ImportAllContracts();

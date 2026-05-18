@@ -22,14 +22,14 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
             CancellationToken cancellationToken
         )
         {
-            var backingFields = symbol
-                .ContainingType.GetMembers()
+            var backingFields = symbol.ContainingType
+                .GetMembers()
                 .OfType<IFieldSymbol>()
                 .Where(f => symbol.Equals(f.AssociatedSymbol))
                 .ToImmutableArray<ISymbol>();
 
-            var associatedNamedTypes = symbol
-                .ContainingType.GetTypeMembers()
+            var associatedNamedTypes = symbol.ContainingType
+                .GetTypeMembers()
                 .WhereAsArray(n => symbol.Equals(n.AssociatedSymbol))
                 .CastArray<ISymbol>();
 

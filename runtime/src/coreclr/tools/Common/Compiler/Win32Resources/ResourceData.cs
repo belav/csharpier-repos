@@ -49,16 +49,16 @@ namespace ILCompiler.Win32Resources
             Func<object, object, ushort, bool> resourceFilter = null
         )
         {
-            System.Collections.Immutable.ImmutableArray<byte> ecmaData = ecmaModule
-                .PEReader.GetEntireImage()
+            System.Collections.Immutable.ImmutableArray<byte> ecmaData = ecmaModule.PEReader
+                .GetEntireImage()
                 .GetContent();
             PEReader peFile = ecmaModule.PEReader;
 
             DirectoryEntry resourceDirectory = peFile.PEHeaders.PEHeader.ResourceTableDirectory;
             if (resourceDirectory.Size != 0)
             {
-                BlobReader resourceDataBlob = ecmaModule
-                    .PEReader.GetSectionData(resourceDirectory.RelativeVirtualAddress)
+                BlobReader resourceDataBlob = ecmaModule.PEReader
+                    .GetSectionData(resourceDirectory.RelativeVirtualAddress)
                     .GetReader(0, resourceDirectory.Size);
                 ReadResourceData(resourceDataBlob, peFile, resourceFilter);
             }
@@ -141,14 +141,13 @@ namespace ILCompiler.Win32Resources
                 ResType resType
             )
             {
-                return resType
-                    .NameHeadID.SelectMany(nameIdPair =>
-                        SelectResName(type, nameIdPair.Key, nameIdPair.Value)
-                    )
+                return resType.NameHeadID
+                    .SelectMany(nameIdPair => SelectResName(type, nameIdPair.Key, nameIdPair.Value))
                     .Concat(
-                        resType.NameHeadName.SelectMany(nameNamePair =>
-                            SelectResName(type, nameNamePair.Key, nameNamePair.Value)
-                        )
+                        resType.NameHeadName
+                            .SelectMany(nameNamePair =>
+                                SelectResName(type, nameNamePair.Key, nameNamePair.Value)
+                            )
                     );
             }
 
@@ -158,9 +157,8 @@ namespace ILCompiler.Win32Resources
                 ResName resType
             )
             {
-                return resType.Languages.Select(
-                    (lang) => (name, type, lang.Key, lang.Value.DataEntry)
-                );
+                return resType.Languages
+                    .Select((lang) => (name, type, lang.Key, lang.Value.DataEntry));
             }
         }
 

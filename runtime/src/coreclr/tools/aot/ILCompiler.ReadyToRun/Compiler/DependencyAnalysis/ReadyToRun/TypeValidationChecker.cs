@@ -209,9 +209,8 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                         // Validate that if the method has an RVA that the Class is not a ComImport class -- UNIMPLEMENTED
                         // Validate that if the method has an RVA that the method is not abstract
                         if (
-                            methodDef.Attributes.HasFlag(
-                                System.Reflection.MethodAttributes.Abstract
-                            )
+                            methodDef.Attributes
+                                .HasFlag(System.Reflection.MethodAttributes.Abstract)
                         )
                         {
                             AddTypeValidationError(
@@ -222,9 +221,8 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                         }
                         // Validate that if the method has an RVA is not marked with the miRuntime flag
                         if (
-                            methodDef.ImplAttributes.HasFlag(
-                                System.Reflection.MethodImplAttributes.Runtime
-                            )
+                            methodDef.ImplAttributes
+                                .HasFlag(System.Reflection.MethodImplAttributes.Runtime)
                         )
                         {
                             AddTypeValidationError(
@@ -235,9 +233,8 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                         }
                         // Validate that if the method has an RVA is not marked as InternalCall
                         if (
-                            methodDef.ImplAttributes.HasFlag(
-                                System.Reflection.MethodImplAttributes.InternalCall
-                            )
+                            methodDef.ImplAttributes
+                                .HasFlag(System.Reflection.MethodImplAttributes.InternalCall)
                         )
                         {
                             AddTypeValidationError(
@@ -409,8 +406,8 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
 
                     // Validate that all MethodImpls actually match signatures closely enough
                     if (
-                        !methodBody
-                            .Signature.ApplySubstitution(type.Instantiation)
+                        !methodBody.Signature
+                            .ApplySubstitution(type.Instantiation)
                             .EquivalentWithCovariantReturnType(
                                 methodDecl.Signature.ApplySubstitution(type.Instantiation)
                             )
@@ -486,9 +483,8 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                 VirtualMethodAlgorithm baseTypeVirtualMethodAlgorithm = null;
                 if (type.BaseType != null && !type.IsInterface && !type.IsValueType)
                 {
-                    baseTypeVirtualMethodAlgorithm = type.Context.GetVirtualMethodAlgorithmForType(
-                        type.BaseType
-                    );
+                    baseTypeVirtualMethodAlgorithm = type.Context
+                        .GetVirtualMethodAlgorithmForType(type.BaseType);
                 }
 
                 foreach (var interfaceImplemented in type.RuntimeInterfaces)
@@ -599,12 +595,11 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                                     type.BaseType
                                 );
                             if (
-                                !implementationMethod
-                                    .Signature.ApplySubstitution(type.Instantiation)
+                                !implementationMethod.Signature
+                                    .ApplySubstitution(type.Instantiation)
                                     .EquivalentWithCovariantReturnType(
-                                        implementationOnBaseType.Signature.ApplySubstitution(
-                                            type.Instantiation
-                                        )
+                                        implementationOnBaseType.Signature
+                                            .ApplySubstitution(type.Instantiation)
                                     )
                             )
                             {

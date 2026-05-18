@@ -115,10 +115,11 @@ namespace System.Runtime
                 (IntPtr)obj.GetMethodTable(),
                 RuntimeMethodHandle.ToIntPtr(slot),
                 (IntPtr context, IntPtr signature, object contextObject, ref IntPtr auxResult) =>
-                    RuntimeAugments.TypeLoaderCallbacks.ResolveGenericVirtualMethodTarget(
-                        new RuntimeTypeHandle(new EETypePtr(context)),
-                        *(RuntimeMethodHandle*)&signature
-                    )
+                    RuntimeAugments.TypeLoaderCallbacks
+                        .ResolveGenericVirtualMethodTarget(
+                            new RuntimeTypeHandle(new EETypePtr(context)),
+                            *(RuntimeMethodHandle*)&signature
+                        )
             );
 
             return v._result;
@@ -138,10 +139,10 @@ namespace System.Runtime
                         object contextObject,
                         ref IntPtr auxResult
                     ) =>
-                        Internal.Runtime.CompilerServices.OpenMethodResolver.ResolveMethodWorker(
-                            signature,
-                            contextObject
-                        ),
+                        Internal.Runtime
+                            .CompilerServices
+                            .OpenMethodResolver
+                            .ResolveMethodWorker(signature, contextObject),
                     obj
                 );
             }
@@ -162,11 +163,8 @@ namespace System.Runtime
                 ctx,
                 sig,
                 (IntPtr context, IntPtr signature, object contextObject, ref IntPtr auxResult) =>
-                    RuntimeAugments.TypeLoaderCallbacks.GenericLookupFromContextAndSignature(
-                        context,
-                        signature,
-                        out auxResult
-                    )
+                    RuntimeAugments.TypeLoaderCallbacks
+                        .GenericLookupFromContextAndSignature(context, signature, out auxResult)
             );
         }
 

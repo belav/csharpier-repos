@@ -75,13 +75,14 @@ public class OrderDetailsControllerActionConvention : IODataControllerActionConv
             if (parameters.Length == 0)
             {
                 var path = new ODataPathTemplate(route);
-                context.Action.AddSelector(
-                    "get",
-                    context.Prefix,
-                    context.Model,
-                    path,
-                    context.Options.RouteOptions
-                );
+                context.Action
+                    .AddSelector(
+                        "get",
+                        context.Prefix,
+                        context.Model,
+                        path,
+                        context.Options.RouteOptions
+                    );
 
                 return true;
             }
@@ -101,13 +102,14 @@ public class OrderDetailsControllerActionConvention : IODataControllerActionConv
                 var keyTemplate = new KeySegmentTemplate(keys, entitySet.EntityType(), entitySet);
 
                 var path = new ODataPathTemplate(route, keyTemplate);
-                context.Action.AddSelector(
-                    "get",
-                    context.Prefix,
-                    context.Model,
-                    path,
-                    context.Options.RouteOptions
-                );
+                context.Action
+                    .AddSelector(
+                        "get",
+                        context.Prefix,
+                        context.Model,
+                        path,
+                        context.Options.RouteOptions
+                    );
 
                 return true;
             }

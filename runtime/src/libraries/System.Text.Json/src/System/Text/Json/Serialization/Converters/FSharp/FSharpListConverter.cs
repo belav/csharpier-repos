@@ -18,10 +18,8 @@ namespace System.Text.Json.Serialization.Converters
         [RequiresDynamicCode(FSharpCoreReflectionProxy.FSharpCoreUnreferencedCodeMessage)]
         public FSharpListConverter()
         {
-            _listConstructor = FSharpCoreReflectionProxy.Instance.CreateFSharpListConstructor<
-                TList,
-                TElement
-            >();
+            _listConstructor = FSharpCoreReflectionProxy.Instance
+                .CreateFSharpListConstructor<TList, TElement>();
         }
 
         protected override void Add(in TElement value, ref ReadStack state)

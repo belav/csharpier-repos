@@ -248,8 +248,7 @@ namespace System.IO
                             {
                                 if (s_moveLeftString == null)
                                 {
-                                    string? moveLeft = ConsolePal
-                                        .TerminalFormatStringsInstance
+                                    string? moveLeft = ConsolePal.TerminalFormatStringsInstance
                                         .CursorLeft;
                                     s_moveLeftString = !string.IsNullOrEmpty(moveLeft)
                                         ? moveLeft + " " + moveLeft

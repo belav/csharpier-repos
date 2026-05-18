@@ -2004,8 +2004,8 @@ namespace System.Workflow.Activities.Rules
             // if this is an extension method, save the type information
             if (mi is ExtensionMethodInfo)
             {
-                invokeExpr.UserData[RuleUserDataKeys.QualifiedName] =
-                    mi.DeclaringType.AssemblyQualifiedName;
+                invokeExpr.UserData[RuleUserDataKeys.QualifiedName] = mi.DeclaringType
+                    .AssemblyQualifiedName;
             }
 
             return methodInvokeInfo;
@@ -2149,8 +2149,8 @@ namespace System.Workflow.Activities.Rules
                 // Evaluate the fixed portion of the parameter list.
                 for (i = 0; i < numFixedParameters; ++i)
                 {
-                    Type argType = execution
-                        .Validation.ExpressionInfo(invokeExpr.Parameters[i])
+                    Type argType = execution.Validation
+                        .ExpressionInfo(invokeExpr.Parameters[i])
                         .ExpressionType;
                     RuleExpressionResult argResult = RuleExpressionWalker.Evaluate(
                         execution,
@@ -2222,8 +2222,8 @@ namespace System.Workflow.Activities.Rules
                         );
                     for (; i < actualArgCount; ++i)
                     {
-                        Type argType = execution
-                            .Validation.ExpressionInfo(invokeExpr.Parameters[i])
+                        Type argType = execution.Validation
+                            .ExpressionInfo(invokeExpr.Parameters[i])
                             .ExpressionType;
                         RuleExpressionResult argResult = RuleExpressionWalker.Evaluate(
                             execution,
@@ -3006,8 +3006,8 @@ namespace System.Workflow.Activities.Rules
             }
             else
             {
-                Type operandType = execution
-                    .Validation.ExpressionInfo(castExpr.Expression)
+                Type operandType = execution.Validation
+                    .ExpressionInfo(castExpr.Expression)
                     .ExpressionType;
                 operandValue = Executor.AdjustTypeWithCast(operandType, operandValue, toType);
             }
@@ -3442,8 +3442,8 @@ namespace System.Workflow.Activities.Rules
             int i;
             for (i = 0; i < numFixedParameters; ++i)
             {
-                Type argType = execution
-                    .Validation.ExpressionInfo(indexerExpr.Indices[i])
+                Type argType = execution.Validation
+                    .ExpressionInfo(indexerExpr.Indices[i])
                     .ExpressionType;
                 RuleExpressionResult argResult = RuleExpressionWalker.Evaluate(
                     execution,
@@ -3483,8 +3483,8 @@ namespace System.Workflow.Activities.Rules
                     );
                 for (; i < actualArgCount; ++i)
                 {
-                    Type argType = execution
-                        .Validation.ExpressionInfo(indexerExpr.Indices[i])
+                    Type argType = execution.Validation
+                        .ExpressionInfo(indexerExpr.Indices[i])
                         .ExpressionType;
                     RuleExpressionResult argResult = RuleExpressionWalker.Evaluate(
                         execution,
@@ -3861,8 +3861,8 @@ namespace System.Workflow.Activities.Rules
 
             for (int i = 0; i < actualArgCount; ++i)
             {
-                Type argType = execution
-                    .Validation.ExpressionInfo(arrayIndexerExpr.Indices[i])
+                Type argType = execution.Validation
+                    .ExpressionInfo(arrayIndexerExpr.Indices[i])
                     .ExpressionType;
                 object argValue = RuleExpressionWalker
                     .Evaluate(execution, arrayIndexerExpr.Indices[i])
@@ -4131,9 +4131,8 @@ namespace System.Workflow.Activities.Rules
                 throw exception;
             }
 
-            RuleExpressionInfo expressionInfo = execution.Validation.ExpressionInfo(
-                createExpression
-            );
+            RuleExpressionInfo expressionInfo = execution.Validation
+                .ExpressionInfo(createExpression);
             if (expressionInfo == null) // Oops, someone forgot to validate.
             {
                 InvalidOperationException exception = new InvalidOperationException(
@@ -4173,8 +4172,8 @@ namespace System.Workflow.Activities.Rules
                 // Evaluate the fixed portion of the parameter list.
                 for (i = 0; i < numFixedParameters; ++i)
                 {
-                    Type argType = execution
-                        .Validation.ExpressionInfo(createExpression.Parameters[i])
+                    Type argType = execution.Validation
+                        .ExpressionInfo(createExpression.Parameters[i])
                         .ExpressionType;
                     RuleExpressionResult argResult = RuleExpressionWalker.Evaluate(
                         execution,
@@ -4225,8 +4224,8 @@ namespace System.Workflow.Activities.Rules
                     Array paramsArray = Array.CreateInstance(elementType, actualArgCount - i);
                     for (; i < actualArgCount; ++i)
                     {
-                        Type argType = execution
-                            .Validation.ExpressionInfo(createExpression.Parameters[i])
+                        Type argType = execution.Validation
+                            .ExpressionInfo(createExpression.Parameters[i])
                             .ExpressionType;
                         RuleExpressionResult argResult = RuleExpressionWalker.Evaluate(
                             execution,
@@ -4637,9 +4636,8 @@ namespace System.Workflow.Activities.Rules
                 throw exception;
             }
 
-            RuleExpressionInfo createExpressionInfo = execution.Validation.ExpressionInfo(
-                createExpression
-            );
+            RuleExpressionInfo createExpressionInfo = execution.Validation
+                .ExpressionInfo(createExpression);
             if (createExpression == null) // Oops, someone forgot to validate.
             {
                 InvalidOperationException exception = new InvalidOperationException(
@@ -4657,8 +4655,8 @@ namespace System.Workflow.Activities.Rules
             int size = 0;
             if (createExpression.SizeExpression != null)
             {
-                Type sizeType = execution
-                    .Validation.ExpressionInfo(createExpression.SizeExpression)
+                Type sizeType = execution.Validation
+                    .ExpressionInfo(createExpression.SizeExpression)
                     .ExpressionType;
                 RuleExpressionResult sizeResult = RuleExpressionWalker.Evaluate(
                     execution,
@@ -4683,8 +4681,8 @@ namespace System.Workflow.Activities.Rules
                 for (int i = 0; i < createExpression.Initializers.Count; ++i)
                 {
                     CodeExpression initializer = createExpression.Initializers[i];
-                    Type initializerType = execution
-                        .Validation.ExpressionInfo(initializer)
+                    Type initializerType = execution.Validation
+                        .ExpressionInfo(initializer)
                         .ExpressionType;
                     RuleExpressionResult initializerResult = RuleExpressionWalker.Evaluate(
                         execution,

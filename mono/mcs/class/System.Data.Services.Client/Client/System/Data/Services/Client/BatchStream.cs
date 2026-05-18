@@ -460,10 +460,11 @@ namespace System.Data.Services.Client
 
                     string transferEncoding;
                     if (
-                        !this.contentHeaders.TryGetValue(
-                            XmlConstants.HttpContentTransferEncoding,
-                            out transferEncoding
-                        )
+                        !this.contentHeaders
+                            .TryGetValue(
+                                XmlConstants.HttpContentTransferEncoding,
+                                out transferEncoding
+                            )
                         || XmlConstants.BatchRequestContentTransferEncoding != transferEncoding
                     )
                     {
@@ -780,11 +781,8 @@ namespace System.Data.Services.Client
             if (0 == this.byteLength)
             {
                 this.bytePosition = 0;
-                this.byteLength = this.reader.Read(
-                    this.byteBuffer,
-                    this.bytePosition,
-                    this.byteBuffer.Length
-                );
+                this.byteLength = this.reader
+                    .Read(this.byteBuffer, this.bytePosition, this.byteBuffer.Length);
                 if (null != this.writer)
                 {
                     this.writer.Write(this.byteBuffer, this.bytePosition, this.byteLength);
@@ -1102,11 +1100,12 @@ namespace System.Data.Services.Client
                             this.bytePosition = 0;
                         }
 
-                        int tmp = this.reader.Read(
-                            this.byteBuffer,
-                            this.byteLength,
-                            this.byteBuffer.Length - this.byteLength
-                        );
+                        int tmp = this.reader
+                            .Read(
+                                this.byteBuffer,
+                                this.byteLength,
+                                this.byteBuffer.Length - this.byteLength
+                            );
                         if (null != this.writer)
                         {
                             this.writer.Write(this.byteBuffer, this.byteLength, tmp);

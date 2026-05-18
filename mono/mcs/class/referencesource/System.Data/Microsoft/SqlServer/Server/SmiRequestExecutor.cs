@@ -30,9 +30,10 @@ namespace Microsoft.SqlServer.Server
             // Implement body with throw because there are only a couple of ways to get to this code:
             //  1) Client is calling this method even though the server negotiated for V2- and hasn't implemented V3 yet.
             //  2) Server didn't implement V3 on some interface, but negotiated V3+.
-            throw System.Data.Common.ADP.InternalError(
-                System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod
-            );
+            throw System.Data
+                .Common
+                .ADP
+                .InternalError(System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod);
         }
 
         internal virtual SmiEventStream Execute(
@@ -48,9 +49,10 @@ namespace Microsoft.SqlServer.Server
             // Implement body with throw because there are only a couple of ways to get to this code:
             //  1) Client is calling this method even though the server negotiated for V200- and hasn't implemented V210 yet.
             //  2) Server didn't implement V210 on some interface, but negotiated V210+.
-            throw System.Data.Common.ADP.InternalError(
-                System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod
-            );
+            throw System.Data
+                .Common
+                .ADP
+                .InternalError(System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod);
         }
 
         #endregion
@@ -98,9 +100,10 @@ namespace Microsoft.SqlServer.Server
             // Implement body with throw because there are only a couple of ways to get to this code:
             //  1) Client is calling this method even though the server negotiated for V210+ (and doesn't implement it).
             //  2) Server doesn't implement this method, but negotiated V200-.
-            throw System.Data.Common.ADP.InternalError(
-                System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod
-            );
+            throw System.Data
+                .Common
+                .ADP
+                .InternalError(System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod);
         }
         #endregion
 
@@ -117,9 +120,10 @@ namespace Microsoft.SqlServer.Server
             // Implement body with throw because there are only a couple of ways to get to this code:
             //  1) Client is calling this method even though the server negotiated for V3+ and dropped support for V2-.
             //  2) Server didn't implement V2- on some interface and negotiated V2-.
-            throw System.Data.Common.ADP.InternalError(
-                System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod
-            );
+            throw System.Data
+                .Common
+                .ADP
+                .InternalError(System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod);
         }
 
         // Check to see if parameter's DEFAULT bit is set
@@ -131,9 +135,10 @@ namespace Microsoft.SqlServer.Server
             // Implement body with throw because there are only a couple of ways to get to this code:
             //  1) Client is calling this method even though the server negotiated for V3+ and dropped support for V2-.
             //  2) Server didn't implement V2- on some interface and negotiated V2-.
-            throw System.Data.Common.ADP.InternalError(
-                System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod
-            );
+            throw System.Data
+                .Common
+                .ADP
+                .InternalError(System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod);
         }
 
         // Get the count of parameters
@@ -147,9 +152,10 @@ namespace Microsoft.SqlServer.Server
                 // Implement body with throw because there are only a couple of ways to get to this code:
                 //  1) Client is calling this method even though the server negotiated for V3+ and dropped support for V2-.
                 //  2) Server didn't implement V2- on some interface and negotiated V2-.
-                throw System.Data.Common.ADP.InternalError(
-                    System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod
-                );
+                throw System.Data
+                    .Common
+                    .ADP
+                    .InternalError(System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod);
             }
         }
 
@@ -162,9 +168,10 @@ namespace Microsoft.SqlServer.Server
             // Implement body with throw because there are only a couple of ways to get to this code:
             //  1) Client is calling this method even though the server negotiated for V3+ and dropped support for V2-.
             //  2) Server didn't implement V2- on some interface and negotiated V2-.
-            throw System.Data.Common.ADP.InternalError(
-                System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod
-            );
+            throw System.Data
+                .Common
+                .ADP
+                .InternalError(System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod);
         }
 
         //
@@ -178,9 +185,10 @@ namespace Microsoft.SqlServer.Server
             // Implement body with throw because there are only a couple of ways to get to this code:
             //  1) Client is calling this method even though the server negotiated for V3+ and dropped support for V2-.
             //  2) Server didn't implement V2- on some interface and negotiated V2-.
-            throw System.Data.Common.ADP.InternalError(
-                System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod
-            );
+            throw System.Data
+                .Common
+                .ADP
+                .InternalError(System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod);
         }
 
         public virtual SqlDbType GetVariantType(int ordinal)
@@ -191,9 +199,10 @@ namespace Microsoft.SqlServer.Server
             // Implement body with throw because there are only a couple of ways to get to this code:
             //  1) Client is calling this method even though the server negotiated for V3+ and dropped support for V2-.
             //  2) Server didn't implement V2- on some interface and negotiated V2-.
-            throw System.Data.Common.ADP.InternalError(
-                System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod
-            );
+            throw System.Data
+                .Common
+                .ADP
+                .InternalError(System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod);
         }
 
         public virtual Boolean GetBoolean(int ordinal)
@@ -204,9 +213,10 @@ namespace Microsoft.SqlServer.Server
             // Implement body with throw because there are only a couple of ways to get to this code:
             //  1) Client is calling this method even though the server negotiated for V3+ and dropped support for V2-.
             //  2) Server didn't implement V2- on some interface and negotiated V2-.
-            throw System.Data.Common.ADP.InternalError(
-                System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod
-            );
+            throw System.Data
+                .Common
+                .ADP
+                .InternalError(System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod);
         }
 
         public virtual Byte GetByte(int ordinal)
@@ -217,9 +227,10 @@ namespace Microsoft.SqlServer.Server
             // Implement body with throw because there are only a couple of ways to get to this code:
             //  1) Client is calling this method even though the server negotiated for V3+ and dropped support for V2-.
             //  2) Server didn't implement V2- on some interface and negotiated V2-.
-            throw System.Data.Common.ADP.InternalError(
-                System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod
-            );
+            throw System.Data
+                .Common
+                .ADP
+                .InternalError(System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod);
         }
 
         public virtual long GetBytes(
@@ -236,9 +247,10 @@ namespace Microsoft.SqlServer.Server
             // Implement body with throw because there are only a couple of ways to get to this code:
             //  1) Client is calling this method even though the server negotiated for V3+ and dropped support for V2-.
             //  2) Server didn't implement V2- on some interface and negotiated V2-.
-            throw System.Data.Common.ADP.InternalError(
-                System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod
-            );
+            throw System.Data
+                .Common
+                .ADP
+                .InternalError(System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod);
         }
 
         public virtual Char GetChar(int ordinal)
@@ -249,9 +261,10 @@ namespace Microsoft.SqlServer.Server
             // Implement body with throw because there are only a couple of ways to get to this code:
             //  1) Client is calling this method even though the server negotiated for V3+ and dropped support for V2-.
             //  2) Server didn't implement V2- on some interface and negotiated V2-.
-            throw System.Data.Common.ADP.InternalError(
-                System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod
-            );
+            throw System.Data
+                .Common
+                .ADP
+                .InternalError(System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod);
         }
 
         public virtual long GetChars(
@@ -268,9 +281,10 @@ namespace Microsoft.SqlServer.Server
             // Implement body with throw because there are only a couple of ways to get to this code:
             //  1) Client is calling this method even though the server negotiated for V3+ and dropped support for V2-.
             //  2) Server didn't implement V2- on some interface and negotiated V2-.
-            throw System.Data.Common.ADP.InternalError(
-                System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod
-            );
+            throw System.Data
+                .Common
+                .ADP
+                .InternalError(System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod);
         }
 
         public virtual Int16 GetInt16(int ordinal)
@@ -281,9 +295,10 @@ namespace Microsoft.SqlServer.Server
             // Implement body with throw because there are only a couple of ways to get to this code:
             //  1) Client is calling this method even though the server negotiated for V3+ and dropped support for V2-.
             //  2) Server didn't implement V2- on some interface and negotiated V2-.
-            throw System.Data.Common.ADP.InternalError(
-                System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod
-            );
+            throw System.Data
+                .Common
+                .ADP
+                .InternalError(System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod);
         }
 
         public virtual Int32 GetInt32(int ordinal)
@@ -294,9 +309,10 @@ namespace Microsoft.SqlServer.Server
             // Implement body with throw because there are only a couple of ways to get to this code:
             //  1) Client is calling this method even though the server negotiated for V3+ and dropped support for V2-.
             //  2) Server didn't implement V2- on some interface and negotiated V2-.
-            throw System.Data.Common.ADP.InternalError(
-                System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod
-            );
+            throw System.Data
+                .Common
+                .ADP
+                .InternalError(System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod);
         }
 
         public virtual Int64 GetInt64(int ordinal)
@@ -307,9 +323,10 @@ namespace Microsoft.SqlServer.Server
             // Implement body with throw because there are only a couple of ways to get to this code:
             //  1) Client is calling this method even though the server negotiated for V3+ and dropped support for V2-.
             //  2) Server didn't implement V2- on some interface and negotiated V2-.
-            throw System.Data.Common.ADP.InternalError(
-                System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod
-            );
+            throw System.Data
+                .Common
+                .ADP
+                .InternalError(System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod);
         }
 
         public virtual Single GetFloat(int ordinal)
@@ -320,9 +337,10 @@ namespace Microsoft.SqlServer.Server
             // Implement body with throw because there are only a couple of ways to get to this code:
             //  1) Client is calling this method even though the server negotiated for V3+ and dropped support for V2-.
             //  2) Server didn't implement V2- on some interface and negotiated V2-.
-            throw System.Data.Common.ADP.InternalError(
-                System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod
-            );
+            throw System.Data
+                .Common
+                .ADP
+                .InternalError(System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod);
         }
 
         public virtual Double GetDouble(int ordinal)
@@ -333,9 +351,10 @@ namespace Microsoft.SqlServer.Server
             // Implement body with throw because there are only a couple of ways to get to this code:
             //  1) Client is calling this method even though the server negotiated for V3+ and dropped support for V2-.
             //  2) Server didn't implement V2- on some interface and negotiated V2-.
-            throw System.Data.Common.ADP.InternalError(
-                System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod
-            );
+            throw System.Data
+                .Common
+                .ADP
+                .InternalError(System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod);
         }
 
         public virtual String GetString(int ordinal)
@@ -346,9 +365,10 @@ namespace Microsoft.SqlServer.Server
             // Implement body with throw because there are only a couple of ways to get to this code:
             //  1) Client is calling this method even though the server negotiated for V3+ and dropped support for V2-.
             //  2) Server didn't implement V2- on some interface and negotiated V2-.
-            throw System.Data.Common.ADP.InternalError(
-                System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod
-            );
+            throw System.Data
+                .Common
+                .ADP
+                .InternalError(System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod);
         }
 
         public virtual Decimal GetDecimal(int ordinal)
@@ -359,9 +379,10 @@ namespace Microsoft.SqlServer.Server
             // Implement body with throw because there are only a couple of ways to get to this code:
             //  1) Client is calling this method even though the server negotiated for V3+ and dropped support for V2-.
             //  2) Server didn't implement V2- on some interface and negotiated V2-.
-            throw System.Data.Common.ADP.InternalError(
-                System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod
-            );
+            throw System.Data
+                .Common
+                .ADP
+                .InternalError(System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod);
         }
 
         public virtual DateTime GetDateTime(int ordinal)
@@ -372,9 +393,10 @@ namespace Microsoft.SqlServer.Server
             // Implement body with throw because there are only a couple of ways to get to this code:
             //  1) Client is calling this method even though the server negotiated for V3+ and dropped support for V2-.
             //  2) Server didn't implement V2- on some interface and negotiated V2-.
-            throw System.Data.Common.ADP.InternalError(
-                System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod
-            );
+            throw System.Data
+                .Common
+                .ADP
+                .InternalError(System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod);
         }
 
         public virtual Guid GetGuid(int ordinal)
@@ -385,9 +407,10 @@ namespace Microsoft.SqlServer.Server
             // Implement body with throw because there are only a couple of ways to get to this code:
             //  1) Client is calling this method even though the server negotiated for V3+ and dropped support for V2-.
             //  2) Server didn't implement V2- on some interface and negotiated V2-.
-            throw System.Data.Common.ADP.InternalError(
-                System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod
-            );
+            throw System.Data
+                .Common
+                .ADP
+                .InternalError(System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod);
         }
 
         public virtual SqlBoolean GetSqlBoolean(int ordinal)
@@ -398,9 +421,10 @@ namespace Microsoft.SqlServer.Server
             // Implement body with throw because there are only a couple of ways to get to this code:
             //  1) Client is calling this method even though the server negotiated for V3+ and dropped support for V2-.
             //  2) Server didn't implement V2- on some interface and negotiated V2-.
-            throw System.Data.Common.ADP.InternalError(
-                System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod
-            );
+            throw System.Data
+                .Common
+                .ADP
+                .InternalError(System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod);
         }
 
         public virtual SqlByte GetSqlByte(int ordinal)
@@ -411,9 +435,10 @@ namespace Microsoft.SqlServer.Server
             // Implement body with throw because there are only a couple of ways to get to this code:
             //  1) Client is calling this method even though the server negotiated for V3+ and dropped support for V2-.
             //  2) Server didn't implement V2- on some interface and negotiated V2-.
-            throw System.Data.Common.ADP.InternalError(
-                System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod
-            );
+            throw System.Data
+                .Common
+                .ADP
+                .InternalError(System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod);
         }
 
         public virtual SqlInt16 GetSqlInt16(int ordinal)
@@ -424,9 +449,10 @@ namespace Microsoft.SqlServer.Server
             // Implement body with throw because there are only a couple of ways to get to this code:
             //  1) Client is calling this method even though the server negotiated for V3+ and dropped support for V2-.
             //  2) Server didn't implement V2- on some interface and negotiated V2-.
-            throw System.Data.Common.ADP.InternalError(
-                System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod
-            );
+            throw System.Data
+                .Common
+                .ADP
+                .InternalError(System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod);
         }
 
         public virtual SqlInt32 GetSqlInt32(int ordinal)
@@ -437,9 +463,10 @@ namespace Microsoft.SqlServer.Server
             // Implement body with throw because there are only a couple of ways to get to this code:
             //  1) Client is calling this method even though the server negotiated for V3+ and dropped support for V2-.
             //  2) Server didn't implement V2- on some interface and negotiated V2-.
-            throw System.Data.Common.ADP.InternalError(
-                System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod
-            );
+            throw System.Data
+                .Common
+                .ADP
+                .InternalError(System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod);
         }
 
         public virtual SqlInt64 GetSqlInt64(int ordinal)
@@ -450,9 +477,10 @@ namespace Microsoft.SqlServer.Server
             // Implement body with throw because there are only a couple of ways to get to this code:
             //  1) Client is calling this method even though the server negotiated for V3+ and dropped support for V2-.
             //  2) Server didn't implement V2- on some interface and negotiated V2-.
-            throw System.Data.Common.ADP.InternalError(
-                System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod
-            );
+            throw System.Data
+                .Common
+                .ADP
+                .InternalError(System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod);
         }
 
         public virtual SqlSingle GetSqlSingle(int ordinal)
@@ -463,9 +491,10 @@ namespace Microsoft.SqlServer.Server
             // Implement body with throw because there are only a couple of ways to get to this code:
             //  1) Client is calling this method even though the server negotiated for V3+ and dropped support for V2-.
             //  2) Server didn't implement V2- on some interface and negotiated V2-.
-            throw System.Data.Common.ADP.InternalError(
-                System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod
-            );
+            throw System.Data
+                .Common
+                .ADP
+                .InternalError(System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod);
         }
 
         public virtual SqlDouble GetSqlDouble(int ordinal)
@@ -476,9 +505,10 @@ namespace Microsoft.SqlServer.Server
             // Implement body with throw because there are only a couple of ways to get to this code:
             //  1) Client is calling this method even though the server negotiated for V3+ and dropped support for V2-.
             //  2) Server didn't implement V2- on some interface and negotiated V2-.
-            throw System.Data.Common.ADP.InternalError(
-                System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod
-            );
+            throw System.Data
+                .Common
+                .ADP
+                .InternalError(System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod);
         }
 
         public virtual SqlMoney GetSqlMoney(int ordinal)
@@ -489,9 +519,10 @@ namespace Microsoft.SqlServer.Server
             // Implement body with throw because there are only a couple of ways to get to this code:
             //  1) Client is calling this method even though the server negotiated for V3+ and dropped support for V2-.
             //  2) Server didn't implement V2- on some interface and negotiated V2-.
-            throw System.Data.Common.ADP.InternalError(
-                System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod
-            );
+            throw System.Data
+                .Common
+                .ADP
+                .InternalError(System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod);
         }
 
         public virtual SqlDateTime GetSqlDateTime(int ordinal)
@@ -502,9 +533,10 @@ namespace Microsoft.SqlServer.Server
             // Implement body with throw because there are only a couple of ways to get to this code:
             //  1) Client is calling this method even though the server negotiated for V3+ and dropped support for V2-.
             //  2) Server didn't implement V2- on some interface and negotiated V2-.
-            throw System.Data.Common.ADP.InternalError(
-                System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod
-            );
+            throw System.Data
+                .Common
+                .ADP
+                .InternalError(System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod);
         }
 
         public virtual SqlDecimal GetSqlDecimal(int ordinal)
@@ -515,9 +547,10 @@ namespace Microsoft.SqlServer.Server
             // Implement body with throw because there are only a couple of ways to get to this code:
             //  1) Client is calling this method even though the server negotiated for V3+ and dropped support for V2-.
             //  2) Server didn't implement V2- on some interface and negotiated V2-.
-            throw System.Data.Common.ADP.InternalError(
-                System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod
-            );
+            throw System.Data
+                .Common
+                .ADP
+                .InternalError(System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod);
         }
 
         public virtual SqlString GetSqlString(int ordinal)
@@ -528,9 +561,10 @@ namespace Microsoft.SqlServer.Server
             // Implement body with throw because there are only a couple of ways to get to this code:
             //  1) Client is calling this method even though the server negotiated for V3+ and dropped support for V2-.
             //  2) Server didn't implement V2- on some interface and negotiated V2-.
-            throw System.Data.Common.ADP.InternalError(
-                System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod
-            );
+            throw System.Data
+                .Common
+                .ADP
+                .InternalError(System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod);
         }
 
         public virtual SqlBinary GetSqlBinary(int ordinal)
@@ -541,9 +575,10 @@ namespace Microsoft.SqlServer.Server
             // Implement body with throw because there are only a couple of ways to get to this code:
             //  1) Client is calling this method even though the server negotiated for V3+ and dropped support for V2-.
             //  2) Server didn't implement V2- on some interface and negotiated V2-.
-            throw System.Data.Common.ADP.InternalError(
-                System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod
-            );
+            throw System.Data
+                .Common
+                .ADP
+                .InternalError(System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod);
         }
 
         public virtual SqlGuid GetSqlGuid(int ordinal)
@@ -554,9 +589,10 @@ namespace Microsoft.SqlServer.Server
             // Implement body with throw because there are only a couple of ways to get to this code:
             //  1) Client is calling this method even though the server negotiated for V3+ and dropped support for V2-.
             //  2) Server didn't implement V2- on some interface and negotiated V2-.
-            throw System.Data.Common.ADP.InternalError(
-                System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod
-            );
+            throw System.Data
+                .Common
+                .ADP
+                .InternalError(System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod);
         }
 
         public virtual SqlChars GetSqlChars(int ordinal)
@@ -567,9 +603,10 @@ namespace Microsoft.SqlServer.Server
             // Implement body with throw because there are only a couple of ways to get to this code:
             //  1) Client is calling this method even though the server negotiated for V3+ and dropped support for V2-.
             //  2) Server didn't implement V2- on some interface and negotiated V2-.
-            throw System.Data.Common.ADP.InternalError(
-                System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod
-            );
+            throw System.Data
+                .Common
+                .ADP
+                .InternalError(System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod);
         }
 
         public virtual SqlBytes GetSqlBytes(int ordinal)
@@ -580,9 +617,10 @@ namespace Microsoft.SqlServer.Server
             // Implement body with throw because there are only a couple of ways to get to this code:
             //  1) Client is calling this method even though the server negotiated for V3+ and dropped support for V2-.
             //  2) Server didn't implement V2- on some interface and negotiated V2-.
-            throw System.Data.Common.ADP.InternalError(
-                System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod
-            );
+            throw System.Data
+                .Common
+                .ADP
+                .InternalError(System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod);
         }
 
         public virtual SqlXml GetSqlXml(int ordinal)
@@ -593,9 +631,10 @@ namespace Microsoft.SqlServer.Server
             // Implement body with throw because there are only a couple of ways to get to this code:
             //  1) Client is calling this method even though the server negotiated for V3+ and dropped support for V2-.
             //  2) Server didn't implement V2- on some interface and negotiated V2-.
-            throw System.Data.Common.ADP.InternalError(
-                System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod
-            );
+            throw System.Data
+                .Common
+                .ADP
+                .InternalError(System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod);
         }
 
         public virtual SqlXml GetSqlXmlRef(int ordinal)
@@ -606,9 +645,10 @@ namespace Microsoft.SqlServer.Server
             // Implement body with throw because there are only a couple of ways to get to this code:
             //  1) Client is calling this method even though the server negotiated for V3+ and dropped support for V2-.
             //  2) Server didn't implement V2- on some interface and negotiated V2-.
-            throw System.Data.Common.ADP.InternalError(
-                System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod
-            );
+            throw System.Data
+                .Common
+                .ADP
+                .InternalError(System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod);
         }
 
         public virtual SqlBytes GetSqlBytesRef(int ordinal)
@@ -619,9 +659,10 @@ namespace Microsoft.SqlServer.Server
             // Implement body with throw because there are only a couple of ways to get to this code:
             //  1) Client is calling this method even though the server negotiated for V3+ and dropped support for V2-.
             //  2) Server didn't implement V2- on some interface and negotiated V2-.
-            throw System.Data.Common.ADP.InternalError(
-                System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod
-            );
+            throw System.Data
+                .Common
+                .ADP
+                .InternalError(System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod);
         }
 
         public virtual SqlChars GetSqlCharsRef(int ordinal)
@@ -632,9 +673,10 @@ namespace Microsoft.SqlServer.Server
             // Implement body with throw because there are only a couple of ways to get to this code:
             //  1) Client is calling this method even though the server negotiated for V3+ and dropped support for V2-.
             //  2) Server didn't implement V2- on some interface and negotiated V2-.
-            throw System.Data.Common.ADP.InternalError(
-                System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod
-            );
+            throw System.Data
+                .Common
+                .ADP
+                .InternalError(System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod);
         }
 
         //
@@ -648,9 +690,10 @@ namespace Microsoft.SqlServer.Server
             // Implement body with throw because there are only a couple of ways to get to this code:
             //  1) Client is calling this method even though the server negotiated for V3+ and dropped support for V2-.
             //  2) Server didn't implement V2- on some interface and negotiated V2-.
-            throw System.Data.Common.ADP.InternalError(
-                System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod
-            );
+            throw System.Data
+                .Common
+                .ADP
+                .InternalError(System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod);
         }
 
         public virtual void SetBoolean(int ordinal, Boolean value)
@@ -661,9 +704,10 @@ namespace Microsoft.SqlServer.Server
             // Implement body with throw because there are only a couple of ways to get to this code:
             //  1) Client is calling this method even though the server negotiated for V3+ and dropped support for V2-.
             //  2) Server didn't implement V2- on some interface and negotiated V2-.
-            throw System.Data.Common.ADP.InternalError(
-                System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod
-            );
+            throw System.Data
+                .Common
+                .ADP
+                .InternalError(System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod);
         }
 
         public virtual void SetByte(int ordinal, Byte value)
@@ -674,9 +718,10 @@ namespace Microsoft.SqlServer.Server
             // Implement body with throw because there are only a couple of ways to get to this code:
             //  1) Client is calling this method even though the server negotiated for V3+ and dropped support for V2-.
             //  2) Server didn't implement V2- on some interface and negotiated V2-.
-            throw System.Data.Common.ADP.InternalError(
-                System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod
-            );
+            throw System.Data
+                .Common
+                .ADP
+                .InternalError(System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod);
         }
 
         public virtual void SetBytes(
@@ -693,9 +738,10 @@ namespace Microsoft.SqlServer.Server
             // Implement body with throw because there are only a couple of ways to get to this code:
             //  1) Client is calling this method even though the server negotiated for V3+ and dropped support for V2-.
             //  2) Server didn't implement V2- on some interface and negotiated V2-.
-            throw System.Data.Common.ADP.InternalError(
-                System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod
-            );
+            throw System.Data
+                .Common
+                .ADP
+                .InternalError(System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod);
         }
 
         public virtual void SetChar(int ordinal, char value)
@@ -706,9 +752,10 @@ namespace Microsoft.SqlServer.Server
             // Implement body with throw because there are only a couple of ways to get to this code:
             //  1) Client is calling this method even though the server negotiated for V3+ and dropped support for V2-.
             //  2) Server didn't implement V2- on some interface and negotiated V2-.
-            throw System.Data.Common.ADP.InternalError(
-                System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod
-            );
+            throw System.Data
+                .Common
+                .ADP
+                .InternalError(System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod);
         }
 
         public virtual void SetChars(
@@ -725,9 +772,10 @@ namespace Microsoft.SqlServer.Server
             // Implement body with throw because there are only a couple of ways to get to this code:
             //  1) Client is calling this method even though the server negotiated for V3+ and dropped support for V2-.
             //  2) Server didn't implement V2- on some interface and negotiated V2-.
-            throw System.Data.Common.ADP.InternalError(
-                System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod
-            );
+            throw System.Data
+                .Common
+                .ADP
+                .InternalError(System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod);
         }
 
         public virtual void SetInt16(int ordinal, Int16 value)
@@ -738,9 +786,10 @@ namespace Microsoft.SqlServer.Server
             // Implement body with throw because there are only a couple of ways to get to this code:
             //  1) Client is calling this method even though the server negotiated for V3+ and dropped support for V2-.
             //  2) Server didn't implement V2- on some interface and negotiated V2-.
-            throw System.Data.Common.ADP.InternalError(
-                System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod
-            );
+            throw System.Data
+                .Common
+                .ADP
+                .InternalError(System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod);
         }
 
         public virtual void SetInt32(int ordinal, Int32 value)
@@ -751,9 +800,10 @@ namespace Microsoft.SqlServer.Server
             // Implement body with throw because there are only a couple of ways to get to this code:
             //  1) Client is calling this method even though the server negotiated for V3+ and dropped support for V2-.
             //  2) Server didn't implement V2- on some interface and negotiated V2-.
-            throw System.Data.Common.ADP.InternalError(
-                System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod
-            );
+            throw System.Data
+                .Common
+                .ADP
+                .InternalError(System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod);
         }
 
         public virtual void SetInt64(int ordinal, Int64 value)
@@ -764,9 +814,10 @@ namespace Microsoft.SqlServer.Server
             // Implement body with throw because there are only a couple of ways to get to this code:
             //  1) Client is calling this method even though the server negotiated for V3+ and dropped support for V2-.
             //  2) Server didn't implement V2- on some interface and negotiated V2-.
-            throw System.Data.Common.ADP.InternalError(
-                System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod
-            );
+            throw System.Data
+                .Common
+                .ADP
+                .InternalError(System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod);
         }
 
         public virtual void SetFloat(int ordinal, Single value)
@@ -777,9 +828,10 @@ namespace Microsoft.SqlServer.Server
             // Implement body with throw because there are only a couple of ways to get to this code:
             //  1) Client is calling this method even though the server negotiated for V3+ and dropped support for V2-.
             //  2) Server didn't implement V2- on some interface and negotiated V2-.
-            throw System.Data.Common.ADP.InternalError(
-                System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod
-            );
+            throw System.Data
+                .Common
+                .ADP
+                .InternalError(System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod);
         }
 
         public virtual void SetDouble(int ordinal, Double value)
@@ -790,9 +842,10 @@ namespace Microsoft.SqlServer.Server
             // Implement body with throw because there are only a couple of ways to get to this code:
             //  1) Client is calling this method even though the server negotiated for V3+ and dropped support for V2-.
             //  2) Server didn't implement V2- on some interface and negotiated V2-.
-            throw System.Data.Common.ADP.InternalError(
-                System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod
-            );
+            throw System.Data
+                .Common
+                .ADP
+                .InternalError(System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod);
         }
 
         public virtual void SetString(int ordinal, string value)
@@ -802,9 +855,10 @@ namespace Microsoft.SqlServer.Server
             // Implement body with throw because there are only a couple of ways to get to this code:
             //  1) Client is calling this method even though the server negotiated for V2 and dropped support for V1.
             //  2) Server didn't implement V1 on some interface and negotiated V1.
-            throw System.Data.Common.ADP.InternalError(
-                System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod
-            );
+            throw System.Data
+                .Common
+                .ADP
+                .InternalError(System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod);
         }
 
         public virtual void SetString(int ordinal, string value, int offset)
@@ -815,9 +869,10 @@ namespace Microsoft.SqlServer.Server
             // Implement body with throw because there are only a couple of ways to get to this code:
             //  1) Client is calling this method even though the server negotiated for V3+ and dropped support for V2-.
             //  2) Server didn't implement V2- on some interface and negotiated V2-.
-            throw System.Data.Common.ADP.InternalError(
-                System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod
-            );
+            throw System.Data
+                .Common
+                .ADP
+                .InternalError(System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod);
         }
 
         public virtual void SetDecimal(int ordinal, Decimal value)
@@ -828,9 +883,10 @@ namespace Microsoft.SqlServer.Server
             // Implement body with throw because there are only a couple of ways to get to this code:
             //  1) Client is calling this method even though the server negotiated for V3+ and dropped support for V2-.
             //  2) Server didn't implement V2- on some interface and negotiated V2-.
-            throw System.Data.Common.ADP.InternalError(
-                System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod
-            );
+            throw System.Data
+                .Common
+                .ADP
+                .InternalError(System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod);
         }
 
         public virtual void SetDateTime(int ordinal, DateTime value)
@@ -841,9 +897,10 @@ namespace Microsoft.SqlServer.Server
             // Implement body with throw because there are only a couple of ways to get to this code:
             //  1) Client is calling this method even though the server negotiated for V3+ and dropped support for V2-.
             //  2) Server didn't implement V2- on some interface and negotiated V2-.
-            throw System.Data.Common.ADP.InternalError(
-                System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod
-            );
+            throw System.Data
+                .Common
+                .ADP
+                .InternalError(System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod);
         }
 
         public virtual void SetGuid(int ordinal, Guid value)
@@ -854,9 +911,10 @@ namespace Microsoft.SqlServer.Server
             // Implement body with throw because there are only a couple of ways to get to this code:
             //  1) Client is calling this method even though the server negotiated for V3+ and dropped support for V2-.
             //  2) Server didn't implement V2- on some interface and negotiated V2-.
-            throw System.Data.Common.ADP.InternalError(
-                System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod
-            );
+            throw System.Data
+                .Common
+                .ADP
+                .InternalError(System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod);
         }
 
         public virtual void SetSqlBoolean(int ordinal, SqlBoolean value)
@@ -867,9 +925,10 @@ namespace Microsoft.SqlServer.Server
             // Implement body with throw because there are only a couple of ways to get to this code:
             //  1) Client is calling this method even though the server negotiated for V3+ and dropped support for V2-.
             //  2) Server didn't implement V2- on some interface and negotiated V2-.
-            throw System.Data.Common.ADP.InternalError(
-                System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod
-            );
+            throw System.Data
+                .Common
+                .ADP
+                .InternalError(System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod);
         }
 
         public virtual void SetSqlByte(int ordinal, SqlByte value)
@@ -880,9 +939,10 @@ namespace Microsoft.SqlServer.Server
             // Implement body with throw because there are only a couple of ways to get to this code:
             //  1) Client is calling this method even though the server negotiated for V3+ and dropped support for V2-.
             //  2) Server didn't implement V2- on some interface and negotiated V2-.
-            throw System.Data.Common.ADP.InternalError(
-                System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod
-            );
+            throw System.Data
+                .Common
+                .ADP
+                .InternalError(System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod);
         }
 
         public virtual void SetSqlInt16(int ordinal, SqlInt16 value)
@@ -893,9 +953,10 @@ namespace Microsoft.SqlServer.Server
             // Implement body with throw because there are only a couple of ways to get to this code:
             //  1) Client is calling this method even though the server negotiated for V3+ and dropped support for V2-.
             //  2) Server didn't implement V2- on some interface and negotiated V2-.
-            throw System.Data.Common.ADP.InternalError(
-                System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod
-            );
+            throw System.Data
+                .Common
+                .ADP
+                .InternalError(System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod);
         }
 
         public virtual void SetSqlInt32(int ordinal, SqlInt32 value)
@@ -906,9 +967,10 @@ namespace Microsoft.SqlServer.Server
             // Implement body with throw because there are only a couple of ways to get to this code:
             //  1) Client is calling this method even though the server negotiated for V3+ and dropped support for V2-.
             //  2) Server didn't implement V2- on some interface and negotiated V2-.
-            throw System.Data.Common.ADP.InternalError(
-                System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod
-            );
+            throw System.Data
+                .Common
+                .ADP
+                .InternalError(System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod);
         }
 
         public virtual void SetSqlInt64(int ordinal, SqlInt64 value)
@@ -919,9 +981,10 @@ namespace Microsoft.SqlServer.Server
             // Implement body with throw because there are only a couple of ways to get to this code:
             //  1) Client is calling this method even though the server negotiated for V3+ and dropped support for V2-.
             //  2) Server didn't implement V2- on some interface and negotiated V2-.
-            throw System.Data.Common.ADP.InternalError(
-                System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod
-            );
+            throw System.Data
+                .Common
+                .ADP
+                .InternalError(System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod);
         }
 
         public virtual void SetSqlSingle(int ordinal, SqlSingle value)
@@ -932,9 +995,10 @@ namespace Microsoft.SqlServer.Server
             // Implement body with throw because there are only a couple of ways to get to this code:
             //  1) Client is calling this method even though the server negotiated for V3+ and dropped support for V2-.
             //  2) Server didn't implement V2- on some interface and negotiated V2-.
-            throw System.Data.Common.ADP.InternalError(
-                System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod
-            );
+            throw System.Data
+                .Common
+                .ADP
+                .InternalError(System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod);
         }
 
         public virtual void SetSqlDouble(int ordinal, SqlDouble value)
@@ -945,9 +1009,10 @@ namespace Microsoft.SqlServer.Server
             // Implement body with throw because there are only a couple of ways to get to this code:
             //  1) Client is calling this method even though the server negotiated for V3+ and dropped support for V2-.
             //  2) Server didn't implement V2- on some interface and negotiated V2-.
-            throw System.Data.Common.ADP.InternalError(
-                System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod
-            );
+            throw System.Data
+                .Common
+                .ADP
+                .InternalError(System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod);
         }
 
         public virtual void SetSqlMoney(int ordinal, SqlMoney value)
@@ -958,9 +1023,10 @@ namespace Microsoft.SqlServer.Server
             // Implement body with throw because there are only a couple of ways to get to this code:
             //  1) Client is calling this method even though the server negotiated for V3+ and dropped support for V2-.
             //  2) Server didn't implement V2- on some interface and negotiated V2-.
-            throw System.Data.Common.ADP.InternalError(
-                System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod
-            );
+            throw System.Data
+                .Common
+                .ADP
+                .InternalError(System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod);
         }
 
         public virtual void SetSqlDateTime(int ordinal, SqlDateTime value)
@@ -971,9 +1037,10 @@ namespace Microsoft.SqlServer.Server
             // Implement body with throw because there are only a couple of ways to get to this code:
             //  1) Client is calling this method even though the server negotiated for V3+ and dropped support for V2-.
             //  2) Server didn't implement V2- on some interface and negotiated V2-.
-            throw System.Data.Common.ADP.InternalError(
-                System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod
-            );
+            throw System.Data
+                .Common
+                .ADP
+                .InternalError(System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod);
         }
 
         public virtual void SetSqlDecimal(int ordinal, SqlDecimal value)
@@ -984,9 +1051,10 @@ namespace Microsoft.SqlServer.Server
             // Implement body with throw because there are only a couple of ways to get to this code:
             //  1) Client is calling this method even though the server negotiated for V3+ and dropped support for V2-.
             //  2) Server didn't implement V2- on some interface and negotiated V2-.
-            throw System.Data.Common.ADP.InternalError(
-                System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod
-            );
+            throw System.Data
+                .Common
+                .ADP
+                .InternalError(System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod);
         }
 
         public virtual void SetSqlString(int ordinal, SqlString value)
@@ -996,9 +1064,10 @@ namespace Microsoft.SqlServer.Server
             // Implement body with throw because there are only a couple of ways to get to this code:
             //  1) Client is calling this method even though the server negotiated for V2 and dropped support for V1.
             //  2) Server didn't implement V1 on some interface and negotiated V1.
-            throw System.Data.Common.ADP.InternalError(
-                System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod
-            );
+            throw System.Data
+                .Common
+                .ADP
+                .InternalError(System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod);
         }
 
         public virtual void SetSqlString(int ordinal, SqlString value, int offset)
@@ -1009,9 +1078,10 @@ namespace Microsoft.SqlServer.Server
             // Implement body with throw because there are only a couple of ways to get to this code:
             //  1) Client is calling this method even though the server negotiated for V3+ and dropped support for V2-.
             //  2) Server didn't implement V2- on some interface and negotiated V2-.
-            throw System.Data.Common.ADP.InternalError(
-                System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod
-            );
+            throw System.Data
+                .Common
+                .ADP
+                .InternalError(System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod);
         }
 
         public virtual void SetSqlBinary(int ordinal, SqlBinary value)
@@ -1021,9 +1091,10 @@ namespace Microsoft.SqlServer.Server
             // Implement body with throw because there are only a couple of ways to get to this code:
             //  1) Client is calling this method even though the server negotiated for V2 and dropped support for V1.
             //  2) Server didn't implement V1 on some interface and negotiated V1.
-            throw System.Data.Common.ADP.InternalError(
-                System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod
-            );
+            throw System.Data
+                .Common
+                .ADP
+                .InternalError(System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod);
         }
 
         public virtual void SetSqlBinary(int ordinal, SqlBinary value, int offset)
@@ -1034,9 +1105,10 @@ namespace Microsoft.SqlServer.Server
             // Implement body with throw because there are only a couple of ways to get to this code:
             //  1) Client is calling this method even though the server negotiated for V3+ and dropped support for V2-.
             //  2) Server didn't implement V2- on some interface and negotiated V2-.
-            throw System.Data.Common.ADP.InternalError(
-                System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod
-            );
+            throw System.Data
+                .Common
+                .ADP
+                .InternalError(System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod);
         }
 
         public virtual void SetSqlGuid(int ordinal, SqlGuid value)
@@ -1047,9 +1119,10 @@ namespace Microsoft.SqlServer.Server
             // Implement body with throw because there are only a couple of ways to get to this code:
             //  1) Client is calling this method even though the server negotiated for V3+ and dropped support for V2-.
             //  2) Server didn't implement V2- on some interface and negotiated V2-.
-            throw System.Data.Common.ADP.InternalError(
-                System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod
-            );
+            throw System.Data
+                .Common
+                .ADP
+                .InternalError(System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod);
         }
 
         public virtual void SetSqlChars(int ordinal, SqlChars value)
@@ -1059,9 +1132,10 @@ namespace Microsoft.SqlServer.Server
             // Implement body with throw because there are only a couple of ways to get to this code:
             //  1) Client is calling this method even though the server negotiated for V2 and dropped support for V1.
             //  2) Server didn't implement V1 on some interface and negotiated V1.
-            throw System.Data.Common.ADP.InternalError(
-                System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod
-            );
+            throw System.Data
+                .Common
+                .ADP
+                .InternalError(System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod);
         }
 
         public virtual void SetSqlChars(int ordinal, SqlChars value, int offset)
@@ -1072,9 +1146,10 @@ namespace Microsoft.SqlServer.Server
             // Implement body with throw because there are only a couple of ways to get to this code:
             //  1) Client is calling this method even though the server negotiated for V3+ and dropped support for V2-.
             //  2) Server didn't implement V2- on some interface and negotiated V2-.
-            throw System.Data.Common.ADP.InternalError(
-                System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod
-            );
+            throw System.Data
+                .Common
+                .ADP
+                .InternalError(System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod);
         }
 
         public virtual void SetSqlBytes(int ordinal, SqlBytes value)
@@ -1084,9 +1159,10 @@ namespace Microsoft.SqlServer.Server
             // Implement body with throw because there are only a couple of ways to get to this code:
             //  1) Client is calling this method even though the server negotiated for V2 and dropped support for V1.
             //  2) Server didn't implement V1 on some interface and negotiated V1.
-            throw System.Data.Common.ADP.InternalError(
-                System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod
-            );
+            throw System.Data
+                .Common
+                .ADP
+                .InternalError(System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod);
         }
 
         public virtual void SetSqlBytes(int ordinal, SqlBytes value, int offset)
@@ -1097,9 +1173,10 @@ namespace Microsoft.SqlServer.Server
             // Implement body with throw because there are only a couple of ways to get to this code:
             //  1) Client is calling this method even though the server negotiated for V3+ and dropped support for V2-.
             //  2) Server didn't implement V2- on some interface and negotiated V2-.
-            throw System.Data.Common.ADP.InternalError(
-                System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod
-            );
+            throw System.Data
+                .Common
+                .ADP
+                .InternalError(System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod);
         }
 
         public virtual void SetSqlXml(int ordinal, SqlXml value)
@@ -1110,9 +1187,10 @@ namespace Microsoft.SqlServer.Server
             // Implement body with throw because there are only a couple of ways to get to this code:
             //  1) Client is calling this method even though the server negotiated for V3+ and dropped support for V2-.
             //  2) Server didn't implement V2- on some interface and negotiated V2-.
-            throw System.Data.Common.ADP.InternalError(
-                System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod
-            );
+            throw System.Data
+                .Common
+                .ADP
+                .InternalError(System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod);
         }
         #endregion
     }

@@ -223,9 +223,8 @@ namespace MonoTests.System.Security.Policy
             Assert.AreEqual(0, pre.OptionalPermissions.Count, "Optional.Count");
             Assert.AreEqual(0, pre.DeniedPermissions.Count, "Denied.Count");
             // and we can still add permissions
-            pre.RequestedPermissions.AddPermission(
-                new SecurityPermission(SecurityPermissionFlag.Execution)
-            );
+            pre.RequestedPermissions
+                .AddPermission(new SecurityPermission(SecurityPermissionFlag.Execution));
             Assert.AreEqual(1, pre.RequestedPermissions.Count, "Requested.Count-2");
             Assert.AreEqual(0, pre.OptionalPermissions.Count, "Optional.Count-2");
             Assert.AreEqual(0, pre.DeniedPermissions.Count, "Denied.Count-2");

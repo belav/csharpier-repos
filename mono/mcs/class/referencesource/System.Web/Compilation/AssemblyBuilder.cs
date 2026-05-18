@@ -631,12 +631,14 @@ namespace System.Web.Compilation
             CodeAttributeDeclaration declaration = new CodeAttributeDeclaration(
                 new CodeTypeReference(typeof(GeneratedCodeAttribute))
             );
-            declaration.Arguments.Add(
-                new CodeAttributeArgument(new CodePrimitiveExpression("ASP.NET"))
-            );
-            declaration.Arguments.Add(
-                new CodeAttributeArgument(new CodePrimitiveExpression(VersionInfo.SystemWebVersion))
-            );
+            declaration.Arguments
+                .Add(new CodeAttributeArgument(new CodePrimitiveExpression("ASP.NET")));
+            declaration.Arguments
+                .Add(
+                    new CodeAttributeArgument(
+                        new CodePrimitiveExpression(VersionInfo.SystemWebVersion)
+                    )
+                );
 
             AddAssemblyAttribute(declaration);
         }
@@ -1086,11 +1088,13 @@ namespace System.Web.Compilation
                 return;
 
             if (
-                CultureInfo.InvariantCulture.CompareInfo.IndexOf(
-                    compilParams.CompilerOptions,
-                    "/warnaserror",
-                    CompareOptions.IgnoreCase
-                ) >= 0
+                CultureInfo.InvariantCulture
+                    .CompareInfo
+                    .IndexOf(
+                        compilParams.CompilerOptions,
+                        "/warnaserror",
+                        CompareOptions.IgnoreCase
+                    ) >= 0
             )
                 compilParams.TreatWarningsAsErrors = false;
         }
@@ -1278,10 +1282,11 @@ namespace System.Web.Compilation
                         {
                             fileNames = String.Format(
                                 CultureInfo.InstalledUICulture,
-                                SR.Resources.GetString(
-                                    SR.Etw_Batch_Compilation,
-                                    CultureInfo.InstalledUICulture
-                                ),
+                                SR.Resources
+                                    .GetString(
+                                        SR.Etw_Batch_Compilation,
+                                        CultureInfo.InstalledUICulture
+                                    ),
                                 new object[1] { _buildProviders.Count }
                             );
                         }
@@ -1291,15 +1296,11 @@ namespace System.Web.Compilation
                             results != null
                             && (results.NativeCompilerReturnValue != 0 || results.Errors.HasErrors)
                         )
-                            status = SR.Resources.GetString(
-                                SR.Etw_Failure,
-                                CultureInfo.InstalledUICulture
-                            );
+                            status = SR.Resources
+                                .GetString(SR.Etw_Failure, CultureInfo.InstalledUICulture);
                         else
-                            status = SR.Resources.GetString(
-                                SR.Etw_Success,
-                                CultureInfo.InstalledUICulture
-                            );
+                            status = SR.Resources
+                                .GetString(SR.Etw_Success, CultureInfo.InstalledUICulture);
 
                         EtwTrace.Trace(
                             EtwTraceType.ETW_TYPE_COMPILE_LEAVE,
@@ -1437,10 +1438,9 @@ namespace System.Web.Compilation
                             error.Line
                                 == TemplateControlCodeDomTreeGenerator.badBaseClassLineMarker + 1
                             && error.ErrorText != null
-                            && error.ErrorText.IndexOf(
-                                "FrameworkInitialize",
-                                StringComparison.OrdinalIgnoreCase
-                            ) >= 0
+                            && error.ErrorText
+                                .IndexOf("FrameworkInitialize", StringComparison.OrdinalIgnoreCase)
+                                >= 0
                         )
                     )
                     {
@@ -1471,11 +1471,9 @@ namespace System.Web.Compilation
                 // Search for the partial class declaration within the file.  We do this by searching for
                 // the string "partial class" in case insensitive way.  This is far from fool proof, but
                 // it covers the common VB and C# cases, and the fallback when not found is reasonable.
-                int classOffset = CultureInfo.InvariantCulture.CompareInfo.IndexOf(
-                    codeFileContent,
-                    "partial class",
-                    CompareOptions.IgnoreCase
-                );
+                int classOffset = CultureInfo.InvariantCulture
+                    .CompareInfo
+                    .IndexOf(codeFileContent, "partial class", CompareOptions.IgnoreCase);
 
                 if (classOffset >= 0)
                 {

@@ -7,8 +7,7 @@ namespace System.Web.Http.SelfHost.ServiceModel.Channels
 {
     internal static class HttpTransportDefaults
     {
-        internal const HostNameComparisonMode HostNameComparisonMode = System
-            .ServiceModel
+        internal const HostNameComparisonMode HostNameComparisonMode = System.ServiceModel
             .HostNameComparisonMode
             .StrongWildcard;
         internal const TransferMode TransferMode = System.ServiceModel.TransferMode.Buffered;

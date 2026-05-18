@@ -838,10 +838,12 @@ class C
             {
                 {
                     CSharpFormattingOptions2.NewLineBeforeOpenBrace,
-                    CSharpFormattingOptions2.NewLineBeforeOpenBrace.DefaultValue.WithFlagValue(
-                        NewLineBeforeOpenBracePlacement.ObjectCollectionArrayInitializers,
-                        false
-                    )
+                    CSharpFormattingOptions2.NewLineBeforeOpenBrace
+                        .DefaultValue
+                        .WithFlagValue(
+                            NewLineBeforeOpenBracePlacement.ObjectCollectionArrayInitializers,
+                            false
+                        )
                 },
             };
 
@@ -924,10 +926,12 @@ class Goo
             {
                 {
                     CSharpFormattingOptions2.NewLineBeforeOpenBrace,
-                    CSharpFormattingOptions2.NewLineBeforeOpenBrace.DefaultValue.WithFlagValue(
-                        NewLineBeforeOpenBracePlacement.ObjectCollectionArrayInitializers,
-                        false
-                    )
+                    CSharpFormattingOptions2.NewLineBeforeOpenBrace
+                        .DefaultValue
+                        .WithFlagValue(
+                            NewLineBeforeOpenBracePlacement.ObjectCollectionArrayInitializers,
+                            false
+                        )
                 },
             };
 
@@ -1006,10 +1010,12 @@ class Goo
             {
                 {
                     CSharpFormattingOptions2.NewLineBeforeOpenBrace,
-                    CSharpFormattingOptions2.NewLineBeforeOpenBrace.DefaultValue.WithFlagValue(
-                        NewLineBeforeOpenBracePlacement.ObjectCollectionArrayInitializers,
-                        false
-                    )
+                    CSharpFormattingOptions2.NewLineBeforeOpenBrace
+                        .DefaultValue
+                        .WithFlagValue(
+                            NewLineBeforeOpenBracePlacement.ObjectCollectionArrayInitializers,
+                            false
+                        )
                 },
             };
 
@@ -1078,10 +1084,12 @@ class Goo
             {
                 {
                     CSharpFormattingOptions2.NewLineBeforeOpenBrace,
-                    CSharpFormattingOptions2.NewLineBeforeOpenBrace.DefaultValue.WithFlagValue(
-                        NewLineBeforeOpenBracePlacement.ObjectCollectionArrayInitializers,
-                        false
-                    )
+                    CSharpFormattingOptions2.NewLineBeforeOpenBrace
+                        .DefaultValue
+                        .WithFlagValue(
+                            NewLineBeforeOpenBracePlacement.ObjectCollectionArrayInitializers,
+                            false
+                        )
                 },
             };
 
@@ -1150,10 +1158,12 @@ class Goo
             {
                 {
                     CSharpFormattingOptions2.NewLineBeforeOpenBrace,
-                    CSharpFormattingOptions2.NewLineBeforeOpenBrace.DefaultValue.WithFlagValue(
-                        NewLineBeforeOpenBracePlacement.ObjectCollectionArrayInitializers,
-                        false
-                    )
+                    CSharpFormattingOptions2.NewLineBeforeOpenBrace
+                        .DefaultValue
+                        .WithFlagValue(
+                            NewLineBeforeOpenBracePlacement.ObjectCollectionArrayInitializers,
+                            false
+                        )
                 },
             };
             using var session = CreateSession(code, globalOptions);
@@ -1506,10 +1516,12 @@ record R
             {
                 {
                     CSharpFormattingOptions2.NewLineBeforeOpenBrace,
-                    CSharpFormattingOptions2.NewLineBeforeOpenBrace.DefaultValue.WithFlagValue(
-                        NewLineBeforeOpenBracePlacement.ObjectCollectionArrayInitializers,
-                        bracesOnNewLine
-                    )
+                    CSharpFormattingOptions2.NewLineBeforeOpenBrace
+                        .DefaultValue
+                        .WithFlagValue(
+                            NewLineBeforeOpenBracePlacement.ObjectCollectionArrayInitializers,
+                            bracesOnNewLine
+                        )
                 },
             };
             using var session = CreateSession(code, globalOptions);
@@ -1559,10 +1571,12 @@ class C
             {
                 {
                     CSharpFormattingOptions2.NewLineBeforeOpenBrace,
-                    CSharpFormattingOptions2.NewLineBeforeOpenBrace.DefaultValue.WithFlagValue(
-                        NewLineBeforeOpenBracePlacement.ObjectCollectionArrayInitializers,
-                        bracesOnNewLine
-                    )
+                    CSharpFormattingOptions2.NewLineBeforeOpenBrace
+                        .DefaultValue
+                        .WithFlagValue(
+                            NewLineBeforeOpenBracePlacement.ObjectCollectionArrayInitializers,
+                            bracesOnNewLine
+                        )
                 },
             };
             using var session = CreateSession(code, globalOptions);
@@ -1612,10 +1626,9 @@ class C
             {
                 {
                     CSharpFormattingOptions2.NewLineBeforeOpenBrace,
-                    CSharpFormattingOptions2.NewLineBeforeOpenBrace.DefaultValue.WithFlagValue(
-                        NewLineBeforeOpenBracePlacement.Accessors,
-                        bracesOnNewLine
-                    )
+                    CSharpFormattingOptions2.NewLineBeforeOpenBrace
+                        .DefaultValue
+                        .WithFlagValue(NewLineBeforeOpenBracePlacement.Accessors, bracesOnNewLine)
                 },
             };
             using var session = CreateSession(code, globalOptions);
@@ -1665,10 +1678,12 @@ class C
             {
                 {
                     CSharpFormattingOptions2.NewLineBeforeOpenBrace,
-                    CSharpFormattingOptions2.NewLineBeforeOpenBrace.DefaultValue.WithFlagValue(
-                        NewLineBeforeOpenBracePlacement.AnonymousMethods,
-                        bracesOnNewLine
-                    )
+                    CSharpFormattingOptions2.NewLineBeforeOpenBrace
+                        .DefaultValue
+                        .WithFlagValue(
+                            NewLineBeforeOpenBracePlacement.AnonymousMethods,
+                            bracesOnNewLine
+                        )
                 },
             };
             using var session = CreateSession(code, globalOptions);
@@ -1718,10 +1733,12 @@ class C
             {
                 {
                     CSharpFormattingOptions2.NewLineBeforeOpenBrace,
-                    CSharpFormattingOptions2.NewLineBeforeOpenBrace.DefaultValue.WithFlagValue(
-                        NewLineBeforeOpenBracePlacement.AnonymousTypes,
-                        bracesOnNewLine
-                    )
+                    CSharpFormattingOptions2.NewLineBeforeOpenBrace
+                        .DefaultValue
+                        .WithFlagValue(
+                            NewLineBeforeOpenBracePlacement.AnonymousTypes,
+                            bracesOnNewLine
+                        )
                 },
             };
             using var session = CreateSession(code, globalOptions);
@@ -1772,10 +1789,12 @@ class C
             {
                 {
                     CSharpFormattingOptions2.NewLineBeforeOpenBrace,
-                    CSharpFormattingOptions2.NewLineBeforeOpenBrace.DefaultValue.WithFlagValue(
-                        NewLineBeforeOpenBracePlacement.ControlBlocks,
-                        bracesOnNewLine
-                    )
+                    CSharpFormattingOptions2.NewLineBeforeOpenBrace
+                        .DefaultValue
+                        .WithFlagValue(
+                            NewLineBeforeOpenBracePlacement.ControlBlocks,
+                            bracesOnNewLine
+                        )
                 },
             };
             using var session = CreateSession(code, globalOptions);
@@ -1832,10 +1851,12 @@ class C
             {
                 {
                     CSharpFormattingOptions2.NewLineBeforeOpenBrace,
-                    CSharpFormattingOptions2.NewLineBeforeOpenBrace.DefaultValue.WithFlagValue(
-                        NewLineBeforeOpenBracePlacement.ControlBlocks,
-                        bracesOnNewLine
-                    )
+                    CSharpFormattingOptions2.NewLineBeforeOpenBrace
+                        .DefaultValue
+                        .WithFlagValue(
+                            NewLineBeforeOpenBracePlacement.ControlBlocks,
+                            bracesOnNewLine
+                        )
                 },
             };
             using var session = CreateSession(code, globalOptions);

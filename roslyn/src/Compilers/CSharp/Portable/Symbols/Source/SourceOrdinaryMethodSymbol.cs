@@ -179,8 +179,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         ) MakeParametersAndBindReturnType(BindingDiagnosticBag diagnostics)
         {
             var syntax = GetSyntax();
-            var withTypeParamsBinder = this
-                .DeclaringCompilation.GetBinderFactory(syntax.SyntaxTree)
+            var withTypeParamsBinder = this.DeclaringCompilation
+                .GetBinderFactory(syntax.SyntaxTree)
                 .GetBinder(syntax.ReturnType, syntax, this);
 
             // Constraint checking for parameter and return types must be delayed until
@@ -310,9 +310,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                             var asValueType =
                                 args.declaredConstraints.IsDefault
                                 || (
-                                    args.declaredConstraints[
-                                        typeParameterSymbol.Ordinal
-                                    ].Constraints
+                                    args.declaredConstraints[typeParameterSymbol.Ordinal]
+                                        .Constraints
                                     & (
                                         TypeParameterConstraintKind.ReferenceType
                                         | TypeParameterConstraintKind.Default
@@ -394,9 +393,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                         out var useSiteInfo
                     );
 
-                    var thisKeyword = syntax
-                        .ParameterList.Parameters[0]
-                        .Modifiers.FirstOrDefault(SyntaxKind.ThisKeyword);
+                    var thisKeyword = syntax.ParameterList
+                        .Parameters[0]
+                        .Modifiers
+                        .FirstOrDefault(SyntaxKind.ThisKeyword);
                     if ((object)attributeConstructor == null)
                     {
                         var memberDescriptor = WellKnownMembers.GetDescriptor(
@@ -624,11 +624,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             // list, we need to ensure we complete the implementation part when needed.
             Debug.Assert(this.DeclaringSyntaxReferences.Length == 1);
             return IsDefinedInSourceTree(this.SyntaxRef, tree, definedWithinSpan)
-                || this.SourcePartialImplementation?.IsDefinedInSourceTree(
-                    tree,
-                    definedWithinSpan,
-                    cancellationToken
-                ) == true;
+                || this.SourcePartialImplementation
+                    ?.IsDefinedInSourceTree(tree, definedWithinSpan, cancellationToken) == true;
         }
 
         protected abstract override void CheckConstraintsForExplicitInterfaceType(
@@ -663,10 +660,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     implementation.TypeParameters
                 )
             );
-            bool hasTypeDifferences = !constructedDefinition.ReturnTypeWithAnnotations.Equals(
-                implementation.ReturnTypeWithAnnotations,
-                TypeCompareKind.AllIgnoreOptions
-            );
+            bool hasTypeDifferences = !constructedDefinition.ReturnTypeWithAnnotations
+                .Equals(implementation.ReturnTypeWithAnnotations, TypeCompareKind.AllIgnoreOptions);
             if (hasTypeDifferences)
             {
                 diagnostics.Add(
@@ -841,10 +836,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             if (
                 (
                     !hasTypeDifferences
-                    && !MemberSignatureComparer.PartialMethodsStrictComparer.Equals(
-                        definition,
-                        implementation
-                    )
+                    && !MemberSignatureComparer.PartialMethodsStrictComparer
+                        .Equals(definition, implementation)
                 ) || hasDifferencesInParameterOrTypeParameterName(definition, implementation)
             )
             {
@@ -864,14 +857,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 SourceOrdinaryMethodSymbol implementation
             )
             {
-                return !definition.Parameters.SequenceEqual(
-                        implementation.Parameters,
-                        (a, b) => a.Name == b.Name
-                    )
-                    || !definition.TypeParameters.SequenceEqual(
-                        implementation.TypeParameters,
-                        (a, b) => a.Name == b.Name
-                    );
+                return !definition.Parameters
+                        .SequenceEqual(implementation.Parameters, (a, b) => a.Name == b.Name)
+                    || !definition.TypeParameters
+                        .SequenceEqual(implementation.TypeParameters, (a, b) => a.Name == b.Name);
             }
         }
 
@@ -1539,8 +1528,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
                     var diagnostics = BindingDiagnosticBag.GetInstance();
                     var syntax = GetSyntax();
-                    var withTypeParametersBinder = this
-                        .DeclaringCompilation.GetBinderFactory(syntax.SyntaxTree)
+                    var withTypeParametersBinder = this.DeclaringCompilation
+                        .GetBinderFactory(syntax.SyntaxTree)
                         .GetBinder(syntax.ReturnType, syntax, this);
                     var constraints = this.MakeTypeParameterConstraintTypes(
                         withTypeParametersBinder,
@@ -1569,8 +1558,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 if (_typeParameterInfo.LazyTypeParameterConstraintKinds.IsDefault)
                 {
                     var syntax = GetSyntax();
-                    var withTypeParametersBinder = this
-                        .DeclaringCompilation.GetBinderFactory(syntax.SyntaxTree)
+                    var withTypeParametersBinder = this.DeclaringCompilation
+                        .GetBinderFactory(syntax.SyntaxTree)
                         .GetBinder(syntax.ReturnType, syntax, this);
                     var constraints = this.MakeTypeParameterConstraintKinds(
                         withTypeParametersBinder,
@@ -1618,10 +1607,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
                 Debug.Assert(syntax.TypeParameterList != null);
 
-                MessageID.IDS_FeatureGenerics.CheckFeatureAvailability(
-                    diagnostics,
-                    syntax.TypeParameterList.LessThanToken
-                );
+                MessageID.IDS_FeatureGenerics
+                    .CheckFeatureAvailability(diagnostics, syntax.TypeParameterList.LessThanToken);
 
                 OverriddenMethodTypeParameterMapBase typeMap = null;
                 if (this.IsOverride)

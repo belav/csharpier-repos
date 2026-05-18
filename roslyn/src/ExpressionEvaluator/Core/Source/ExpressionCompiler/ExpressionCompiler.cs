@@ -158,11 +158,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
                     },
                     out error
                 );
-                result = r.CompileResult.ToQueryResult(
-                    CompilerId,
-                    r.ResultProperties,
-                    runtimeInstance
-                );
+                result = r.CompileResult
+                    .ToQueryResult(CompilerId, r.ResultProperties, runtimeInstance);
             }
             catch (Exception e) when (ExpressionEvaluatorFatalError.CrashIfFailFastEnabled(e))
             {
@@ -214,11 +211,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
                         ) == DkmClrCompilationResultFlags.PotentialSideEffect
                 );
 
-                result = r.CompileResult.ToQueryResult(
-                    CompilerId,
-                    r.ResultProperties,
-                    runtimeInstance
-                );
+                result = r.CompileResult
+                    .ToQueryResult(CompilerId, r.ResultProperties, runtimeInstance);
             }
             catch (Exception e) when (ExpressionEvaluatorFatalError.CrashIfFailFastEnabled(e))
             {

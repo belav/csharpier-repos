@@ -1087,14 +1087,15 @@ namespace System.Workflow.ComponentModel.Design
                         viewablePageLocation,
                         viewablePageSize
                     );
-                    this.pageLayoutInfo.Add(
-                        new PageLayoutData(
-                            logicalBounds,
-                            pageBounds,
-                            viewablePageBounds,
-                            new Point(column, row)
-                        )
-                    );
+                    this.pageLayoutInfo
+                        .Add(
+                            new PageLayoutData(
+                                logicalBounds,
+                                pageBounds,
+                                viewablePageBounds,
+                                new Point(column, row)
+                            )
+                        );
                 }
             }
         }
@@ -1137,8 +1138,9 @@ namespace System.Workflow.ComponentModel.Design
             //Read the unprintable margins
             Margins hardMargins = new Margins();
             using (
-                Graphics printerGraphics =
-                    this.printDocument.PrinterSettings.CreateMeasurementGraphics()
+                Graphics printerGraphics = this.printDocument
+                    .PrinterSettings
+                    .CreateMeasurementGraphics()
             )
                 hardMargins = this.printDocument.GetHardMargins(printerGraphics);
 

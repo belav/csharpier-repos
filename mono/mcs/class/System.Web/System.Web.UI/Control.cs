@@ -2433,11 +2433,8 @@ namespace System.Web.UI
             if (req == null)
                 return null;
 
-            VirtualPathData vpd = RouteTable.Routes.GetVirtualPath(
-                req.RequestContext,
-                routeName,
-                routeParameters
-            );
+            VirtualPathData vpd = RouteTable.Routes
+                .GetVirtualPath(req.RequestContext, routeName, routeParameters);
             if (vpd == null)
                 return null;
 

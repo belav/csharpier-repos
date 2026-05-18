@@ -108,8 +108,8 @@ namespace System.ServiceModel.Routing
                         binding = new CustomBinding(endpoint.Binding);
                     }
 
-                    SynchronousSendBindingElement syncSend =
-                        binding.Elements.Find<SynchronousSendBindingElement>();
+                    SynchronousSendBindingElement syncSend = binding.Elements
+                        .Find<SynchronousSendBindingElement>();
                     if (syncSend == null)
                     {
                         binding.Elements.Insert(0, new SynchronousSendBindingElement());
@@ -125,8 +125,8 @@ namespace System.ServiceModel.Routing
                 {
                     binding = new CustomBinding(endpoint.Binding);
                 }
-                TransactionFlowBindingElement transactionFlow =
-                    binding.Elements.Find<TransactionFlowBindingElement>();
+                TransactionFlowBindingElement transactionFlow = binding.Elements
+                    .Find<TransactionFlowBindingElement>();
                 if (transactionFlow != null)
                 {
                     transactionFlow.AllowWildcardAction = true;
@@ -338,11 +338,12 @@ namespace System.ServiceModel.Routing
                     IAsyncResult asyncResult;
                     using (this.PrepareTransactionalCall(this.transaction))
                     {
-                        asyncResult = this.parent.OnBeginOperation(
-                            this.requestMessage,
-                            this.PrepareAsyncCompletion(operationComplete),
-                            this
-                        );
+                        asyncResult = this.parent
+                            .OnBeginOperation(
+                                this.requestMessage,
+                                this.PrepareAsyncCompletion(operationComplete),
+                                this
+                            );
                     }
                     return this.SyncContinue(asyncResult);
                 }
@@ -549,11 +550,12 @@ namespace System.ServiceModel.Routing
                             )
                         )
                         {
-                            result = this.callbackInstance.BeginProcessMessage(
-                                message,
-                                this.PrepareAsyncCompletion(processCallback),
-                                this
-                            );
+                            result = this.callbackInstance
+                                .BeginProcessMessage(
+                                    message,
+                                    this.PrepareAsyncCompletion(processCallback),
+                                    this
+                                );
                         }
 
                         if (this.SyncContinue(result))

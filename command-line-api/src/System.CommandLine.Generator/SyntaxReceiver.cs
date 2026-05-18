@@ -44,9 +44,9 @@ namespace System.CommandLine.Generator
             }
 
             if (
-                invokeMethodSymbol.ReceiverType?.ToDisplayString(
-                    SymbolDisplayFormat.FullyQualifiedFormat
-                ) != _nameOfExtensionMethodAnchorType
+                invokeMethodSymbol.ReceiverType
+                    ?.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat)
+                != _nameOfExtensionMethodAnchorType
             )
             {
                 return;
@@ -75,8 +75,8 @@ namespace System.CommandLine.Generator
             {
                 if (namedDelegateType.DelegateInvokeMethod?.ReturnsVoid == false)
                 {
-                    delegateParameters = namedDelegateType
-                        .TypeArguments.Take(namedDelegateType.TypeArguments.Length - 1)
+                    delegateParameters = namedDelegateType.TypeArguments
+                        .Take(namedDelegateType.TypeArguments.Length - 1)
                         .Cast<ISymbol>()
                         .ToArray();
                 }
@@ -86,8 +86,9 @@ namespace System.CommandLine.Generator
                 }
             }
 
-            var symbols = invocationExpression
-                .ArgumentList.Arguments.Skip(1)
+            var symbols = invocationExpression.ArgumentList
+                .Arguments
+                .Skip(1)
                 .Select(x => context.SemanticModel.GetSymbolInfo(x.Expression).Symbol)
                 .ToArray();
 
@@ -125,8 +126,8 @@ namespace System.CommandLine.Generator
                     var ctor in modelType.Constructors.OrderByDescending(x => x.Parameters.Length)
                 )
                 {
-                    var targetTypes = ctor
-                        .Parameters.Select(x => x.Type)
+                    var targetTypes = ctor.Parameters
+                        .Select(x => x.Type)
                         .Concat(delegateParameters.Skip(1))
                         .ToArray();
                     if (IsMatch(targetTypes, givenParameters, wellKnownTypes))

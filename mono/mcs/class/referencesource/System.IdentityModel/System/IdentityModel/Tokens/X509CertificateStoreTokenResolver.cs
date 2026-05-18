@@ -89,9 +89,8 @@ namespace System.IdentityModel.Tokens
         {
             if (keyIdentifierClause == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                    "keyIdentifierClause"
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperArgumentNull("keyIdentifierClause");
             }
 
             key = null;
@@ -180,9 +179,8 @@ namespace System.IdentityModel.Tokens
         {
             if (keyIdentifierClause == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                    "keyIdentifierClause"
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperArgumentNull("keyIdentifierClause");
             }
 
             token = null;

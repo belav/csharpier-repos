@@ -58,8 +58,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Remote
         private void RegisterGlobalOperationNotifications()
         {
             // We are in the VS layer, so getting the IGlobalOperationNotificationService must succeed.
-            var globalOperationService = _services
-                .ExportProvider.GetExports<IGlobalOperationNotificationService>()
+            var globalOperationService = _services.ExportProvider
+                .GetExports<IGlobalOperationNotificationService>()
                 .Single()
                 .Value;
             globalOperationService.Started += OnGlobalOperationStarted;
@@ -68,8 +68,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Remote
 
         private void UnregisterGlobalOperationNotifications()
         {
-            var globalOperationService = _services
-                .ExportProvider.GetExports<IGlobalOperationNotificationService>()
+            var globalOperationService = _services.ExportProvider
+                .GetExports<IGlobalOperationNotificationService>()
                 .Single()
                 .Value;
             globalOperationService.Started -= OnGlobalOperationStarted;

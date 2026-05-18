@@ -53,9 +53,8 @@ namespace System.ComponentModel.Composition.Hosting
             {
                 if (this._parentEngineContext != null)
                 {
-                    return this._addedPartManagers.ConcatAllowingNull(
-                        this._parentEngineContext.GetAddedPartManagers()
-                    );
+                    return this._addedPartManagers
+                        .ConcatAllowingNull(this._parentEngineContext.GetAddedPartManagers());
                 }
                 return this._addedPartManagers;
             }
@@ -64,9 +63,8 @@ namespace System.ComponentModel.Composition.Hosting
             {
                 if (this._parentEngineContext != null)
                 {
-                    return this._removedPartManagers.ConcatAllowingNull(
-                        this._parentEngineContext.GetRemovedPartManagers()
-                    );
+                    return this._removedPartManagers
+                        .ConcatAllowingNull(this._parentEngineContext.GetRemovedPartManagers());
                 }
                 return this._removedPartManagers;
             }

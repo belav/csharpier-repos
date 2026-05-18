@@ -706,13 +706,15 @@ namespace IBM.Data.DB2
             for (int i = 0; i < _schemaTable.Rows.Count; i++)
             {
                 if (
-                    CultureInfo.CurrentCulture.CompareInfo.Compare(
-                        name,
-                        (string)_schemaTable.Rows[i]["BaseColumnName"],
-                        CompareOptions.IgnoreKanaType
-                            | CompareOptions.IgnoreWidth
-                            | CompareOptions.IgnoreCase
-                    ) == 0
+                    CultureInfo.CurrentCulture
+                        .CompareInfo
+                        .Compare(
+                            name,
+                            (string)_schemaTable.Rows[i]["BaseColumnName"],
+                            CompareOptions.IgnoreKanaType
+                                | CompareOptions.IgnoreWidth
+                                | CompareOptions.IgnoreCase
+                        ) == 0
                 )
                 {
                     return i;

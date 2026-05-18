@@ -101,12 +101,8 @@ namespace Microsoft.CodeAnalysis.GenerateEqualsAndGetHashCodeFromMembers
                     .GetSyntaxFormattingOptionsAsync(_fallbackOptions, cancellationToken)
                     .ConfigureAwait(false);
 
-                var newTypeDeclaration = info.Service.AddMembers(
-                    _typeDeclaration,
-                    methods,
-                    info,
-                    cancellationToken
-                );
+                var newTypeDeclaration = info.Service
+                    .AddMembers(_typeDeclaration, methods, info, cancellationToken);
 
                 if (constructedTypeToImplement is object)
                 {
@@ -144,9 +140,8 @@ namespace Microsoft.CodeAnalysis.GenerateEqualsAndGetHashCodeFromMembers
                 var semanticModel = await _document
                     .GetRequiredSemanticModelAsync(cancellationToken)
                     .ConfigureAwait(false);
-                var equatableType = semanticModel.Compilation.GetTypeByMetadataName(
-                    typeof(IEquatable<>).FullName!
-                );
+                var equatableType = semanticModel.Compilation
+                    .GetTypeByMetadataName(typeof(IEquatable<>).FullName!);
                 if (equatableType == null)
                     return null;
 
@@ -192,8 +187,8 @@ namespace Microsoft.CodeAnalysis.GenerateEqualsAndGetHashCodeFromMembers
                 CancellationToken cancellationToken
             )
             {
-                var compilation = await _document
-                    .Project.GetRequiredCompilationAsync(cancellationToken)
+                var compilation = await _document.Project
+                    .GetRequiredCompilationAsync(cancellationToken)
                     .ConfigureAwait(false);
 
                 var generator = _document.GetRequiredLanguageService<SyntaxGenerator>();

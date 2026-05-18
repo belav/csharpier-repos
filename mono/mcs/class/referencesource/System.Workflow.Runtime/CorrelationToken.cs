@@ -186,13 +186,14 @@ namespace System.Workflow.Runtime
                 }
             }
             SetValue(InitializedProperty, true);
-            WorkflowTrace.Runtime.TraceEvent(
-                TraceEventType.Information,
-                0,
-                "CorrelationToken initialized for {0} owner activity {1} ",
-                this.Name,
-                this.OwnerActivityName
-            );
+            WorkflowTrace.Runtime
+                .TraceEvent(
+                    TraceEventType.Information,
+                    0,
+                    "CorrelationToken initialized for {0} owner activity {1} ",
+                    this.Name,
+                    this.OwnerActivityName
+                );
         }
 
         internal void Uninitialize(Activity activity)
@@ -222,13 +223,14 @@ namespace System.Workflow.Runtime
                 }
             }
             //SetValue(InitializedProperty, false);
-            WorkflowTrace.Runtime.TraceEvent(
-                TraceEventType.Information,
-                0,
-                "CorrelationToken Uninitialized for {0} owner activity {1}",
-                this.Name,
-                this.OwnerActivityName
-            );
+            WorkflowTrace.Runtime
+                .TraceEvent(
+                    TraceEventType.Information,
+                    0,
+                    "CorrelationToken Uninitialized for {0} owner activity {1}",
+                    this.Name,
+                    this.OwnerActivityName
+                );
         }
 
         public void SubscribeForCorrelationTokenInitializedEvent(

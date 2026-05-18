@@ -41,9 +41,12 @@ namespace System.ServiceModel.Activation
             ServiceHostingEnvironment.EnsureInitialized();
             if (!ServiceHostingEnvironment.AspNetCompatibilityEnabled)
             {
-                throw FxTrace.Exception.AsError(
-                    new InvalidOperationException(SR.Hosting_RouteServiceRequiresCompatibilityMode)
-                );
+                throw FxTrace.Exception
+                    .AsError(
+                        new InvalidOperationException(
+                            SR.Hosting_RouteServiceRequiresCompatibilityMode
+                        )
+                    );
             }
             // we support emptystring as routeprfix as aspnet allows it
             if (routePrefix == null)
@@ -54,10 +57,8 @@ namespace System.ServiceModel.Activation
                 routePrefix.Contains(LeftCurlyBracket) || routePrefix.Contains(RightCurlyBracket)
             )
             {
-                throw FxTrace.Exception.Argument(
-                    "routePrefix",
-                    SR.Hosting_CurlyBracketFoundInRoutePrefix("{", "}")
-                );
+                throw FxTrace.Exception
+                    .Argument("routePrefix", SR.Hosting_CurlyBracketFoundInRoutePrefix("{", "}"));
             }
 
             if (

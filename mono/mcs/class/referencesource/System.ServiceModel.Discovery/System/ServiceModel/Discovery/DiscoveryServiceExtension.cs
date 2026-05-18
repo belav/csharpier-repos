@@ -42,9 +42,8 @@ namespace System.ServiceModel.Discovery
             }
             if (this.owner != null)
             {
-                throw FxTrace.Exception.AsError(
-                    new InvalidOperationException(SR2.DiscoveryExtensionAlreadyAttached)
-                );
+                throw FxTrace.Exception
+                    .AsError(new InvalidOperationException(SR2.DiscoveryExtensionAlreadyAttached));
             }
 
             this.owner = owner;
@@ -58,9 +57,8 @@ namespace System.ServiceModel.Discovery
             }
             if (this.owner != null)
             {
-                throw FxTrace.Exception.AsError(
-                    new InvalidOperationException(SR2.DiscoveryExtensionCannotBeDetached)
-                );
+                throw FxTrace.Exception
+                    .AsError(new InvalidOperationException(SR2.DiscoveryExtensionCannotBeDetached));
             }
         }
 
@@ -70,14 +68,15 @@ namespace System.ServiceModel.Discovery
 
             if (discoveryService == null)
             {
-                throw FxTrace.Exception.AsError(
-                    new InvalidOperationException(
-                        SR.DiscoveryMethodImplementationReturnsNull(
-                            "GetDiscoveryService",
-                            this.GetType()
+                throw FxTrace.Exception
+                    .AsError(
+                        new InvalidOperationException(
+                            SR.DiscoveryMethodImplementationReturnsNull(
+                                "GetDiscoveryService",
+                                this.GetType()
+                            )
                         )
-                    )
-                );
+                    );
             }
 
             return discoveryService;

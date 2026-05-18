@@ -55,12 +55,13 @@ namespace System.ServiceModel
                 }
                 if (value == string.Empty)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ArgumentOutOfRangeException(
-                            "value",
-                            SR.GetString(SR.SFxNameCannotBeEmpty)
-                        )
-                    );
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperError(
+                            new ArgumentOutOfRangeException(
+                                "value",
+                                SR.GetString(SR.SFxNameCannotBeEmpty)
+                            )
+                        );
                 }
                 name = value;
                 isNameSetExplicit = true;
@@ -79,9 +80,8 @@ namespace System.ServiceModel
             set
             {
                 if (!ProtectionLevelHelper.IsDefined(value))
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ArgumentOutOfRangeException("value")
-                    );
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperError(new ArgumentOutOfRangeException("value"));
                 this.protectionLevel = value;
                 this.hasProtectionLevel = true;
             }

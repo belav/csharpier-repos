@@ -42,9 +42,10 @@ namespace MonoTests.System.Data
             DataSet ds = new DataSet();
             ds.Tables.Add(DataProvider.CreateParentDataTable());
             ds.Tables.Add(DataProvider.CreateChildDataTable());
-            ds.Relations.Add(
-                new DataRelation("myRelation", ds.Tables[0].Columns[0], ds.Tables[1].Columns[0])
-            );
+            ds.Relations
+                .Add(
+                    new DataRelation("myRelation", ds.Tables[0].Columns[0], ds.Tables[1].Columns[0])
+                );
 
             DataRow drParent = ds.Tables[0].Rows[0];
             DataRow drChild = ds.Tables[1].Rows[0];

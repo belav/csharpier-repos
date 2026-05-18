@@ -219,9 +219,10 @@ namespace System.Workflow.Activities
             if (context.PropertyDescriptor.Name == "EventName")
             {
                 foreach (
-                    EventInfo eventInfo in this.InterfaceType.GetEvents(
-                        BindingFlags.DeclaredOnly | BindingFlags.Instance | BindingFlags.Public
-                    )
+                    EventInfo eventInfo in this.InterfaceType
+                        .GetEvents(
+                            BindingFlags.DeclaredOnly | BindingFlags.Instance | BindingFlags.Public
+                        )
                 )
                     names.Add(eventInfo.Name);
             }

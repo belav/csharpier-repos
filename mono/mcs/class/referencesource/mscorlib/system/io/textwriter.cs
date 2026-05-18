@@ -594,13 +594,14 @@ namespace System.IO
         public virtual Task WriteAsync(char value)
         {
             Tuple<TextWriter, char> tuple = new Tuple<TextWriter, char>(this, value);
-            return Task.Factory.StartNew(
-                _WriteCharDelegate,
-                tuple,
-                CancellationToken.None,
-                TaskCreationOptions.DenyChildAttach,
-                TaskScheduler.Default
-            );
+            return Task.Factory
+                .StartNew(
+                    _WriteCharDelegate,
+                    tuple,
+                    CancellationToken.None,
+                    TaskCreationOptions.DenyChildAttach,
+                    TaskScheduler.Default
+                );
         }
 
         [HostProtection(ExternalThreading = true)]
@@ -608,13 +609,14 @@ namespace System.IO
         public virtual Task WriteAsync(String value)
         {
             Tuple<TextWriter, string> tuple = new Tuple<TextWriter, string>(this, value);
-            return Task.Factory.StartNew(
-                _WriteStringDelegate,
-                tuple,
-                CancellationToken.None,
-                TaskCreationOptions.DenyChildAttach,
-                TaskScheduler.Default
-            );
+            return Task.Factory
+                .StartNew(
+                    _WriteStringDelegate,
+                    tuple,
+                    CancellationToken.None,
+                    TaskCreationOptions.DenyChildAttach,
+                    TaskScheduler.Default
+                );
         }
 
         [HostProtection(ExternalThreading = true)]
@@ -636,13 +638,14 @@ namespace System.IO
                 index,
                 count
             );
-            return Task.Factory.StartNew(
-                _WriteCharArrayRangeDelegate,
-                tuple,
-                CancellationToken.None,
-                TaskCreationOptions.DenyChildAttach,
-                TaskScheduler.Default
-            );
+            return Task.Factory
+                .StartNew(
+                    _WriteCharArrayRangeDelegate,
+                    tuple,
+                    CancellationToken.None,
+                    TaskCreationOptions.DenyChildAttach,
+                    TaskScheduler.Default
+                );
         }
 
         [HostProtection(ExternalThreading = true)]
@@ -650,13 +653,14 @@ namespace System.IO
         public virtual Task WriteLineAsync(char value)
         {
             Tuple<TextWriter, char> tuple = new Tuple<TextWriter, char>(this, value);
-            return Task.Factory.StartNew(
-                _WriteLineCharDelegate,
-                tuple,
-                CancellationToken.None,
-                TaskCreationOptions.DenyChildAttach,
-                TaskScheduler.Default
-            );
+            return Task.Factory
+                .StartNew(
+                    _WriteLineCharDelegate,
+                    tuple,
+                    CancellationToken.None,
+                    TaskCreationOptions.DenyChildAttach,
+                    TaskScheduler.Default
+                );
         }
 
         [HostProtection(ExternalThreading = true)]
@@ -664,13 +668,14 @@ namespace System.IO
         public virtual Task WriteLineAsync(String value)
         {
             Tuple<TextWriter, string> tuple = new Tuple<TextWriter, string>(this, value);
-            return Task.Factory.StartNew(
-                _WriteLineStringDelegate,
-                tuple,
-                CancellationToken.None,
-                TaskCreationOptions.DenyChildAttach,
-                TaskScheduler.Default
-            );
+            return Task.Factory
+                .StartNew(
+                    _WriteLineStringDelegate,
+                    tuple,
+                    CancellationToken.None,
+                    TaskCreationOptions.DenyChildAttach,
+                    TaskScheduler.Default
+                );
         }
 
         [HostProtection(ExternalThreading = true)]
@@ -692,13 +697,14 @@ namespace System.IO
                 index,
                 count
             );
-            return Task.Factory.StartNew(
-                _WriteLineCharArrayRangeDelegate,
-                tuple,
-                CancellationToken.None,
-                TaskCreationOptions.DenyChildAttach,
-                TaskScheduler.Default
-            );
+            return Task.Factory
+                .StartNew(
+                    _WriteLineCharArrayRangeDelegate,
+                    tuple,
+                    CancellationToken.None,
+                    TaskCreationOptions.DenyChildAttach,
+                    TaskScheduler.Default
+                );
         }
 
         [HostProtection(ExternalThreading = true)]
@@ -712,13 +718,14 @@ namespace System.IO
         [ComVisible(false)]
         public virtual Task FlushAsync()
         {
-            return Task.Factory.StartNew(
-                _FlushDelegate,
-                this,
-                CancellationToken.None,
-                TaskCreationOptions.DenyChildAttach,
-                TaskScheduler.Default
-            );
+            return Task.Factory
+                .StartNew(
+                    _FlushDelegate,
+                    this,
+                    CancellationToken.None,
+                    TaskCreationOptions.DenyChildAttach,
+                    TaskScheduler.Default
+                );
         }
         #endregion
 #endif //FEATURE_ASYNC_IO

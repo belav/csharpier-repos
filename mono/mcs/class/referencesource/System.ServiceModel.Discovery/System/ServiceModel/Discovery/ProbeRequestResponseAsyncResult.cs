@@ -99,20 +99,20 @@ namespace System.ServiceModel.Discovery
 
         bool ProcessFindRequest()
         {
-            IAsyncResult result = this.discoveryServiceImpl.BeginFind(
-                this.findRequest,
-                this.PrepareAsyncCompletion(onOnFindCompletedCallback),
-                this
-            );
+            IAsyncResult result = this.discoveryServiceImpl
+                .BeginFind(
+                    this.findRequest,
+                    this.PrepareAsyncCompletion(onOnFindCompletedCallback),
+                    this
+                );
 
             return (result.CompletedSynchronously && OnOnFindCompleted(result));
         }
 
         bool EnsureNotDuplicate()
         {
-            bool isDuplicate = this.discoveryServiceImpl.IsDuplicate(
-                OperationContext.Current.IncomingMessageHeaders.MessageId
-            );
+            bool isDuplicate = this.discoveryServiceImpl
+                .IsDuplicate(OperationContext.Current.IncomingMessageHeaders.MessageId);
 
             if (isDuplicate && TD.DuplicateDiscoveryMessageIsEnabled())
             {
@@ -160,9 +160,10 @@ namespace System.ServiceModel.Discovery
                 {
                     if (this.probeRequestResponseAsyncResult.isFindCompleted)
                     {
-                        throw FxTrace.Exception.AsError(
-                            new InvalidOperationException(SR.DiscoveryCannotAddMatchingEndpoint)
-                        );
+                        throw FxTrace.Exception
+                            .AsError(
+                                new InvalidOperationException(SR.DiscoveryCannotAddMatchingEndpoint)
+                            );
                     }
                     else
                     {

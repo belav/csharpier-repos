@@ -856,11 +856,12 @@ static class Helpers
     )]
     public static int CountConstructors(this Type t) =>
         t.GetConstructors(
-            BindingFlags.Instance
-                | BindingFlags.Static
-                | BindingFlags.Public
-                | BindingFlags.NonPublic
-        ).Length;
+                BindingFlags.Instance
+                    | BindingFlags.Static
+                    | BindingFlags.Public
+                    | BindingFlags.NonPublic
+            )
+            .Length;
 
     [UnconditionalSuppressMessage(
         "ReflectionAnalysis",
@@ -877,12 +878,13 @@ static class Helpers
     )]
     public static int CountMethods(this Type t) =>
         t.GetMethods(
-            BindingFlags.Instance
-                | BindingFlags.Static
-                | BindingFlags.Public
-                | BindingFlags.NonPublic
-                | BindingFlags.DeclaredOnly
-        ).Length;
+                BindingFlags.Instance
+                    | BindingFlags.Static
+                    | BindingFlags.Public
+                    | BindingFlags.NonPublic
+                    | BindingFlags.DeclaredOnly
+            )
+            .Length;
 
     [UnconditionalSuppressMessage(
         "ReflectionAnalysis",
@@ -891,11 +893,12 @@ static class Helpers
     )]
     public static int CountPublicMethods(this Type t) =>
         t.GetMethods(
-            BindingFlags.Instance
-                | BindingFlags.Static
-                | BindingFlags.Public
-                | BindingFlags.DeclaredOnly
-        ).Length;
+                BindingFlags.Instance
+                    | BindingFlags.Static
+                    | BindingFlags.Public
+                    | BindingFlags.DeclaredOnly
+            )
+            .Length;
 
     [UnconditionalSuppressMessage(
         "ReflectionAnalysis",
@@ -904,12 +907,13 @@ static class Helpers
     )]
     public static int CountFields(this Type t) =>
         t.GetFields(
-            BindingFlags.Instance
-                | BindingFlags.Static
-                | BindingFlags.Public
-                | BindingFlags.NonPublic
-                | BindingFlags.DeclaredOnly
-        ).Length;
+                BindingFlags.Instance
+                    | BindingFlags.Static
+                    | BindingFlags.Public
+                    | BindingFlags.NonPublic
+                    | BindingFlags.DeclaredOnly
+            )
+            .Length;
 
     [UnconditionalSuppressMessage(
         "ReflectionAnalysis",
@@ -918,12 +922,13 @@ static class Helpers
     )]
     public static int CountProperties(this Type t) =>
         t.GetProperties(
-            BindingFlags.Instance
-                | BindingFlags.Static
-                | BindingFlags.Public
-                | BindingFlags.NonPublic
-                | BindingFlags.DeclaredOnly
-        ).Length;
+                BindingFlags.Instance
+                    | BindingFlags.Static
+                    | BindingFlags.Public
+                    | BindingFlags.NonPublic
+                    | BindingFlags.DeclaredOnly
+            )
+            .Length;
 
     [UnconditionalSuppressMessage(
         "ReflectionAnalysis",

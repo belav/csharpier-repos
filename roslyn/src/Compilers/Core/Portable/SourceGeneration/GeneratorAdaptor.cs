@@ -38,8 +38,8 @@ namespace Microsoft.CodeAnalysis
                 );
             }
 
-            var contextBuilderSource = context
-                .CompilationProvider.Select((c, _) => new GeneratorContextBuilder(c))
+            var contextBuilderSource = context.CompilationProvider
+                .Select((c, _) => new GeneratorContextBuilder(c))
                 .Combine(context.ParseOptionsProvider)
                 .Select((p, _) => p.Item1 with { ParseOptions = p.Item2 })
                 .Combine(context.AnalyzerConfigOptionsProvider)
@@ -47,16 +47,14 @@ namespace Microsoft.CodeAnalysis
                 .Combine(context.AdditionalTextsProvider.Collect())
                 .Select((p, _) => p.Item1 with { AdditionalTexts = p.Item2 });
 
-            var syntaxContextReceiverCreator = generatorInitContext
-                .Callbacks
+            var syntaxContextReceiverCreator = generatorInitContext.Callbacks
                 .SyntaxContextReceiverCreator;
             if (syntaxContextReceiverCreator is object)
             {
                 contextBuilderSource = contextBuilderSource
                     .Combine(
-                        context.SyntaxProvider.CreateSyntaxReceiverProvider(
-                            syntaxContextReceiverCreator
-                        )
+                        context.SyntaxProvider
+                            .CreateSyntaxReceiverProvider(syntaxContextReceiverCreator)
                     )
                     .Select((p, _) => p.Item1 with { Receiver = p.Item2 });
             }

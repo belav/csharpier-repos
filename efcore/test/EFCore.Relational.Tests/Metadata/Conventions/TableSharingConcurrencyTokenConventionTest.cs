@@ -335,12 +335,12 @@ public class TableSharingConcurrencyTokenConventionTest
     }
 
     private ProviderConventionSetBuilderDependencies CreateDependencies() =>
-        FakeRelationalTestHelpers
-            .Instance.CreateContextServices()
+        FakeRelationalTestHelpers.Instance
+            .CreateContextServices()
             .GetRequiredService<ProviderConventionSetBuilderDependencies>();
 
     private RelationalConventionSetBuilderDependencies CreateRelationalDependencies() =>
-        FakeRelationalTestHelpers
-            .Instance.CreateContextServices()
+        FakeRelationalTestHelpers.Instance
+            .CreateContextServices()
             .GetRequiredService<RelationalConventionSetBuilderDependencies>();
 }

@@ -263,14 +263,16 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
             element.Add(
                 new XElement(
                     "Captures",
-                    tree.CaptureNumbersToSpan.OrderBy(kvp => kvp.Key)
+                    tree.CaptureNumbersToSpan
+                        .OrderBy(kvp => kvp.Key)
                         .Select(kvp => new XElement(
                             "Capture",
                             new XAttribute("Name", kvp.Key),
                             new XAttribute("Span", kvp.Value),
                             GetTextAttribute(text, kvp.Value)
                         )),
-                    tree.CaptureNamesToSpan.OrderBy(kvp => kvp.Key)
+                    tree.CaptureNamesToSpan
+                        .OrderBy(kvp => kvp.Key)
                         .Select(kvp => new XElement(
                             "Capture",
                             new XAttribute("Name", kvp.Key),
@@ -286,12 +288,13 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         private static XElement CreateDiagnosticsElement(SourceText text, RegexTree tree) =>
             new XElement(
                 "Diagnostics",
-                tree.Diagnostics.Select(d => new XElement(
-                    "Diagnostic",
-                    new XAttribute("Message", d.Message),
-                    new XAttribute("Span", d.Span),
-                    GetTextAttribute(text, d.Span)
-                ))
+                tree.Diagnostics
+                    .Select(d => new XElement(
+                        "Diagnostic",
+                        new XAttribute("Message", d.Message),
+                        new XAttribute("Span", d.Span),
+                        GetTextAttribute(text, d.Span)
+                    ))
             );
 
         private static XAttribute GetTextAttribute(SourceText text, TextSpan span) =>

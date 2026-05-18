@@ -3859,9 +3859,8 @@ class C
                     }
                 }
                 """,
-                parseOptions: TestOptions.Regular.WithLanguageVersion(
-                    CodeAnalysis.CSharp.LanguageVersion.CSharp6
-                )
+                parseOptions: TestOptions.Regular
+                    .WithLanguageVersion(CodeAnalysis.CSharp.LanguageVersion.CSharp6)
             );
         }
 
@@ -3892,9 +3891,8 @@ class C
                     }
                 }
                 """,
-                parseOptions: TestOptions.Regular.WithLanguageVersion(
-                    CodeAnalysis.CSharp.LanguageVersion.CSharp6
-                )
+                parseOptions: TestOptions.Regular
+                    .WithLanguageVersion(CodeAnalysis.CSharp.LanguageVersion.CSharp6)
             );
         }
 
@@ -3925,9 +3923,8 @@ class C
                     }
                 }
                 """,
-                parseOptions: TestOptions.Regular.WithLanguageVersion(
-                    CodeAnalysis.CSharp.LanguageVersion.CSharp6
-                )
+                parseOptions: TestOptions.Regular
+                    .WithLanguageVersion(CodeAnalysis.CSharp.LanguageVersion.CSharp6)
             );
         }
 
@@ -3958,9 +3955,8 @@ class C
                     }
                 }
                 """,
-                parseOptions: TestOptions.Regular.WithLanguageVersion(
-                    CodeAnalysis.CSharp.LanguageVersion.CSharp6
-                )
+                parseOptions: TestOptions.Regular
+                    .WithLanguageVersion(CodeAnalysis.CSharp.LanguageVersion.CSharp6)
             );
         }
 

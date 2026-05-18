@@ -287,12 +287,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 return;
             }
 
-            var args = ConstraintsHelper.CheckConstraintsArgsBoxed.Allocate(
-                DeclaringCompilation,
-                ContainingAssembly.CorLibrary.TypeConversions,
-                _locations[0],
-                diagnostics
-            );
+            var args = ConstraintsHelper.CheckConstraintsArgsBoxed
+                .Allocate(
+                    DeclaringCompilation,
+                    ContainingAssembly.CorLibrary.TypeConversions,
+                    _locations[0],
+                    diagnostics
+                );
             foreach (var constraintType in constraintTypes)
             {
                 if (!diagnostics.ReportUseSite(constraintType.Type, args.Args.Location))
@@ -418,14 +419,16 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                         //Debug.Assert(this.ContainingSymbol.IsContainingSymbolOfAllTypeParameters(this.ConstraintTypes));
                         //Debug.Assert(this.ContainingSymbol.IsContainingSymbolOfAllTypeParameters(ImmutableArray<TypeSymbol>.CreateFrom(this.Interfaces)));
                         Debug.Assert(
-                            this.ContainingSymbol.IsContainingSymbolOfAllTypeParameters(
-                                this.EffectiveBaseClassNoUseSiteDiagnostics
-                            )
+                            this.ContainingSymbol
+                                .IsContainingSymbolOfAllTypeParameters(
+                                    this.EffectiveBaseClassNoUseSiteDiagnostics
+                                )
                         );
                         Debug.Assert(
-                            this.ContainingSymbol.IsContainingSymbolOfAllTypeParameters(
-                                this.DeducedBaseTypeNoUseSiteDiagnostics
-                            )
+                            this.ContainingSymbol
+                                .IsContainingSymbolOfAllTypeParameters(
+                                    this.DeducedBaseTypeNoUseSiteDiagnostics
+                                )
                         );
                         break;
 

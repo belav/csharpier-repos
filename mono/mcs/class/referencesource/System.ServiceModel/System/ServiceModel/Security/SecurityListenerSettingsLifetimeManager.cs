@@ -66,8 +66,8 @@ namespace System.ServiceModel.Security
 
         void SetBufferManager()
         {
-            ITransportFactorySettings transportSettings =
-                this.innerListener.GetProperty<ITransportFactorySettings>();
+            ITransportFactorySettings transportSettings = this.innerListener
+                .GetProperty<ITransportFactorySettings>();
             if (transportSettings == null)
                 return;
 

@@ -123,16 +123,14 @@ namespace System.Reflection.Tests
             // The second to run it as a method which is invoked.
             Assert.Equal(
                 0,
-                ClassWithStaticConstructorThatIsCalledMultipleTimesViaReflection
-                    .VisibleStatics
+                ClassWithStaticConstructorThatIsCalledMultipleTimesViaReflection.VisibleStatics
                     .s_cctorCallCount
             );
             object obj = constructors[0].Invoke(null, new object[] { });
             Assert.Null(obj);
             Assert.Equal(
                 1,
-                ClassWithStaticConstructorThatIsCalledMultipleTimesViaReflection
-                    .VisibleStatics
+                ClassWithStaticConstructorThatIsCalledMultipleTimesViaReflection.VisibleStatics
                     .s_cctorCallCount
             );
 
@@ -142,8 +140,7 @@ namespace System.Reflection.Tests
             Assert.Null(obj);
             Assert.Equal(
                 1,
-                ClassWithStaticConstructorThatIsCalledMultipleTimesViaReflection
-                    .VisibleStatics
+                ClassWithStaticConstructorThatIsCalledMultipleTimesViaReflection.VisibleStatics
                     .s_cctorCallCount
             );
         }

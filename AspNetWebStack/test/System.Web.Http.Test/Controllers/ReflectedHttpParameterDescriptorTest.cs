@@ -61,13 +61,14 @@ namespace System.Web.Http
         public void ParameterInfo_Property()
         {
             ParameterInfo referenceParameter = new Mock<ParameterInfo>().Object;
-            Assert.Reflection.Property(
-                new ReflectedHttpParameterDescriptor(),
-                d => d.ParameterInfo,
-                expectedDefaultValue: null,
-                allowNull: false,
-                roundTripTestValue: referenceParameter
-            );
+            Assert.Reflection
+                .Property(
+                    new ReflectedHttpParameterDescriptor(),
+                    d => d.ParameterInfo,
+                    expectedDefaultValue: null,
+                    allowNull: false,
+                    roundTripTestValue: referenceParameter
+                );
         }
 
         [Fact]

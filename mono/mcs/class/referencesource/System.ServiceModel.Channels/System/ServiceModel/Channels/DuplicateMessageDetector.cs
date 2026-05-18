@@ -46,16 +46,12 @@ namespace System.ServiceModel.Channels
             {
                 if (disposed)
                 {
-                    throw FxTrace.Exception.AsError(
-                        new ObjectDisposedException(this.GetType().ToString())
-                    );
+                    throw FxTrace.Exception
+                        .AsError(new ObjectDisposedException(this.GetType().ToString()));
                 }
 
-                hash = this.hashAlgorithm.ComputeHash(
-                    msgBytes.Array,
-                    msgBytes.Offset,
-                    msgBytes.Count
-                );
+                hash = this.hashAlgorithm
+                    .ComputeHash(msgBytes.Array, msgBytes.Offset, msgBytes.Count);
             }
 
             hashString = Convert.ToBase64String(hash);
@@ -83,9 +79,8 @@ namespace System.ServiceModel.Channels
             {
                 if (this.disposed)
                 {
-                    throw FxTrace.Exception.AsError(
-                        new ObjectDisposedException(this.GetType().ToString())
-                    );
+                    throw FxTrace.Exception
+                        .AsError(new ObjectDisposedException(this.GetType().ToString()));
                 }
 
                 this.duplicateDetector.Remove(msgHash);

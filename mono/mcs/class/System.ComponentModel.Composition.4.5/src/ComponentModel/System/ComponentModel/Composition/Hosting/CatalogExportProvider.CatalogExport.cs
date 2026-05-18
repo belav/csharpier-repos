@@ -40,10 +40,8 @@ namespace System.ComponentModel.Composition.Hosting
 
             protected CatalogPart GetPartCore()
             {
-                return this._catalogExportProvider.GetComposablePart(
-                    this._partDefinition,
-                    this.IsSharedPart
-                );
+                return this._catalogExportProvider
+                    .GetComposablePart(this._partDefinition, this.IsSharedPart);
             }
 
             protected void ReleasePartCore(CatalogPart part, object value)
@@ -58,11 +56,8 @@ namespace System.ComponentModel.Composition.Hosting
 
             protected override object GetExportedValueCore()
             {
-                return this._catalogExportProvider.GetExportedValue(
-                    this.GetPart(),
-                    this._definition,
-                    this.IsSharedPart
-                );
+                return this._catalogExportProvider
+                    .GetExportedValue(this.GetPart(), this._definition, this.IsSharedPart);
             }
 
             [SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope")]
@@ -73,9 +68,8 @@ namespace System.ComponentModel.Composition.Hosting
                 CreationPolicy importCreationPolicy
             )
             {
-                CreationPolicy partPolicy = partDefinition.Metadata.GetValue<CreationPolicy>(
-                    CompositionConstants.PartCreationPolicyMetadataName
-                );
+                CreationPolicy partPolicy = partDefinition.Metadata
+                    .GetValue<CreationPolicy>(CompositionConstants.PartCreationPolicyMetadataName);
                 bool isSharedPart = ShouldUseSharedPart(partPolicy, importCreationPolicy);
 
                 if (isSharedPart)

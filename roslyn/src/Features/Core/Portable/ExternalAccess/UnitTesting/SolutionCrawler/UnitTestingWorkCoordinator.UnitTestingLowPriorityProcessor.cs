@@ -63,8 +63,7 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.UnitTesting.SolutionCrawler
                             await WaitForHigherPriorityOperationsAsync().ConfigureAwait(false);
 
                             // process any available project work, preferring the active project.
-                            var preferableProjectId = Processor
-                                ._documentTracker
+                            var preferableProjectId = Processor._documentTracker
                                 .SupportsDocumentTracking
                                 ? Processor._documentTracker.TryGetActiveDocument()?.ProjectId
                                 : null;

@@ -175,10 +175,8 @@ namespace System.Diagnostics
                 Trace.AutoFlush = traceSection.AutoFlush;
                 Trace.IndentSize = traceSection.IndentSize;
 
-                ListenerElementsCollection listeners = DiagnosticsConfiguration
-                    .SystemDiagnosticsSection
-                    ?.Trace
-                    .Listeners;
+                ListenerElementsCollection listeners =
+                    DiagnosticsConfiguration.SystemDiagnosticsSection?.Trace.Listeners;
                 if (listeners != null)
                 {
                     // If listeners were configured, replace the defaults with these.

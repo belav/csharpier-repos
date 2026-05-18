@@ -178,8 +178,8 @@ public class StoredProcedureResultColumn
 
     private IMutableProperty GetProperty() =>
         StoredProcedure.EntityType.FindProperty(PropertyName!)
-        ?? StoredProcedure
-            .EntityType.GetDerivedTypes()
+        ?? StoredProcedure.EntityType
+            .GetDerivedTypes()
             .Select(t => t.FindDeclaredProperty(PropertyName!)!)
             .First(n => n != null);
 

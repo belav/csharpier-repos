@@ -74,9 +74,10 @@ namespace System.ServiceModel.Discovery
             endpointDispatcher.DispatchRuntime.MessageInspectors.Add(this);
             if (endpointDispatcher.DispatchRuntime.CallbackClientRuntime != null)
             {
-                endpointDispatcher.DispatchRuntime.CallbackClientRuntime.MessageInspectors.Add(
-                    this
-                );
+                endpointDispatcher.DispatchRuntime
+                    .CallbackClientRuntime
+                    .MessageInspectors
+                    .Add(this);
             }
         }
 
@@ -94,10 +95,9 @@ namespace System.ServiceModel.Discovery
             UdpAddressingState addressingState = null;
 
             if (
-                OperationContext.Current.IncomingMessageProperties.TryGetValue(
-                    RemoteEndpointMessageProperty.Name,
-                    out messageProperty
-                )
+                OperationContext.Current
+                    .IncomingMessageProperties
+                    .TryGetValue(RemoteEndpointMessageProperty.Name, out messageProperty)
             )
             {
                 RemoteEndpointMessageProperty remoteEndpointProperty =
@@ -158,10 +158,9 @@ namespace System.ServiceModel.Discovery
         {
             object messageProperty;
             if (
-                OperationContext.Current.OutgoingMessageProperties.TryGetValue(
-                    DiscoveryMessageProperty.Name,
-                    out messageProperty
-                )
+                OperationContext.Current
+                    .OutgoingMessageProperties
+                    .TryGetValue(DiscoveryMessageProperty.Name, out messageProperty)
             )
             {
                 DiscoveryMessageProperty discoveryMessageProperty =

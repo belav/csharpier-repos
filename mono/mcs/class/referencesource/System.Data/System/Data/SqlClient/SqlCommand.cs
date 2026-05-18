@@ -46,9 +46,9 @@ namespace System.Data.SqlClient
     public sealed class SqlCommand : DbCommand, ICloneable
     {
         private static int _objectTypeCount; // Bid counter
-        internal readonly int ObjectID = System.Threading.Interlocked.Increment(
-            ref _objectTypeCount
-        );
+        internal readonly int ObjectID = System.Threading
+            .Interlocked
+            .Increment(ref _objectTypeCount);
 
         private string _commandText;
         private CommandType _commandType;
@@ -1991,14 +1991,15 @@ namespace System.Data.SqlClient
                                     _stateObj._syncOverAsync,
                                     "Should not attempt pends in a synchronous call"
                                 );
-                                bool result = _stateObj.Parser.TryRun(
-                                    RunBehavior.UntilDone,
-                                    this,
-                                    null,
-                                    null,
-                                    _stateObj,
-                                    out dataReady
-                                );
+                                bool result = _stateObj.Parser
+                                    .TryRun(
+                                        RunBehavior.UntilDone,
+                                        this,
+                                        null,
+                                        null,
+                                        _stateObj,
+                                        out dataReady
+                                    );
                                 if (!result)
                                 {
                                     throw SQL.SynchronousCallMayNotPend();
@@ -3031,131 +3032,138 @@ namespace System.Data.SqlClient
             {
                 long firstAttemptStart = ADP.TimerCurrent();
 
-                localCompletion.Task.ContinueWith(
-                    tsk =>
-                    {
-                        if (tsk.IsFaulted)
+                localCompletion.Task
+                    .ContinueWith(
+                        tsk =>
                         {
-                            globalCompletion.TrySetException(tsk.Exception.InnerException);
-                        }
-                        else if (tsk.IsCanceled)
-                        {
-                            globalCompletion.TrySetCanceled();
-                        }
-                        else
-                        {
-                            try
+                            if (tsk.IsFaulted)
                             {
-                                // Mark that we initiated the internal EndExecute. This should always be false until we set it here.
-                                Debug.Assert(!_internalEndExecuteInitiated);
-                                _internalEndExecuteInitiated = true;
-
-                                // lock on _stateObj prevents ----s with close/cancel.
-                                lock (_stateObj)
-                                {
-                                    endFunc(
-                                        tsk,
-                                        endMethod,
-                                        true /*inInternal*/
-                                    );
-                                }
-                                globalCompletion.TrySetResult(tsk.Result);
+                                globalCompletion.TrySetException(tsk.Exception.InnerException);
                             }
-                            catch (Exception e)
+                            else if (tsk.IsCanceled)
                             {
-                                // Put the state object back to the cache.
-                                // Do not reset the async state, since this is managed by the user Begin/End and not internally.
-                                if (ADP.IsCatchableExceptionType(e))
+                                globalCompletion.TrySetCanceled();
+                            }
+                            else
+                            {
+                                try
                                 {
-                                    ReliablePutStateObject();
-                                }
+                                    // Mark that we initiated the internal EndExecute. This should always be false until we set it here.
+                                    Debug.Assert(!_internalEndExecuteInitiated);
+                                    _internalEndExecuteInitiated = true;
 
-                                bool shouldRetry = false;
-
-                                // Check if we have an error indicating that we can retry.
-                                if (e is SqlException)
-                                {
-                                    SqlException sqlEx = e as SqlException;
-
-                                    for (int i = 0; i < sqlEx.Errors.Count; i++)
+                                    // lock on _stateObj prevents ----s with close/cancel.
+                                    lock (_stateObj)
                                     {
-                                        if (
-                                            sqlEx.Errors[i].Number
-                                            == TdsEnums.TCE_CONVERSION_ERROR_CLIENT_RETRY
-                                        )
+                                        endFunc(
+                                            tsk,
+                                            endMethod,
+                                            true /*inInternal*/
+                                        );
+                                    }
+                                    globalCompletion.TrySetResult(tsk.Result);
+                                }
+                                catch (Exception e)
+                                {
+                                    // Put the state object back to the cache.
+                                    // Do not reset the async state, since this is managed by the user Begin/End and not internally.
+                                    if (ADP.IsCatchableExceptionType(e))
+                                    {
+                                        ReliablePutStateObject();
+                                    }
+
+                                    bool shouldRetry = false;
+
+                                    // Check if we have an error indicating that we can retry.
+                                    if (e is SqlException)
+                                    {
+                                        SqlException sqlEx = e as SqlException;
+
+                                        for (int i = 0; i < sqlEx.Errors.Count; i++)
                                         {
-                                            shouldRetry = true;
-                                            break;
+                                            if (
+                                                sqlEx.Errors[i].Number
+                                                == TdsEnums.TCE_CONVERSION_ERROR_CLIENT_RETRY
+                                            )
+                                            {
+                                                shouldRetry = true;
+                                                break;
+                                            }
+                                        }
+                                    }
+
+                                    if (!shouldRetry)
+                                    {
+                                        // If we cannot retry, Reset the async state to make sure we leave a clean state.
+                                        if (null != _cachedAsyncState)
+                                        {
+                                            _cachedAsyncState.ResetAsyncState();
+                                        }
+                                        _activeConnection
+                                            .GetOpenTdsConnection()
+                                            .DecrementAsyncCount();
+
+                                        globalCompletion.TrySetException(e);
+                                    }
+                                    else
+                                    {
+                                        // Remove the enrty from the cache since it was inconsistent.
+                                        SqlQueryMetadataCache
+                                            .GetInstance()
+                                            .InvalidateCacheEntry(this);
+
+                                        try
+                                        {
+                                            // Kick off the retry.
+                                            _internalEndExecuteInitiated = false;
+                                            Task<object> retryTask =
+                                                (Task<object>)
+                                                    retryFunc(
+                                                        behavior,
+                                                        null,
+                                                        stateObject,
+                                                        TdsParserStaticMethods.GetRemainingTimeout(
+                                                            timeout,
+                                                            firstAttemptStart
+                                                        ),
+                                                        true /*inRetry*/
+                                                        ,
+                                                        asyncWrite
+                                                    );
+
+                                            retryTask.ContinueWith(
+                                                retryTsk =>
+                                                {
+                                                    if (retryTsk.IsFaulted)
+                                                    {
+                                                        globalCompletion.TrySetException(
+                                                            retryTsk.Exception.InnerException
+                                                        );
+                                                    }
+                                                    else if (retryTsk.IsCanceled)
+                                                    {
+                                                        globalCompletion.TrySetCanceled();
+                                                    }
+                                                    else
+                                                    {
+                                                        globalCompletion.TrySetResult(
+                                                            retryTsk.Result
+                                                        );
+                                                    }
+                                                },
+                                                TaskScheduler.Default
+                                            );
+                                        }
+                                        catch (Exception e2)
+                                        {
+                                            globalCompletion.TrySetException(e2);
                                         }
                                     }
                                 }
-
-                                if (!shouldRetry)
-                                {
-                                    // If we cannot retry, Reset the async state to make sure we leave a clean state.
-                                    if (null != _cachedAsyncState)
-                                    {
-                                        _cachedAsyncState.ResetAsyncState();
-                                    }
-                                    _activeConnection.GetOpenTdsConnection().DecrementAsyncCount();
-
-                                    globalCompletion.TrySetException(e);
-                                }
-                                else
-                                {
-                                    // Remove the enrty from the cache since it was inconsistent.
-                                    SqlQueryMetadataCache.GetInstance().InvalidateCacheEntry(this);
-
-                                    try
-                                    {
-                                        // Kick off the retry.
-                                        _internalEndExecuteInitiated = false;
-                                        Task<object> retryTask =
-                                            (Task<object>)
-                                                retryFunc(
-                                                    behavior,
-                                                    null,
-                                                    stateObject,
-                                                    TdsParserStaticMethods.GetRemainingTimeout(
-                                                        timeout,
-                                                        firstAttemptStart
-                                                    ),
-                                                    true /*inRetry*/
-                                                    ,
-                                                    asyncWrite
-                                                );
-
-                                        retryTask.ContinueWith(
-                                            retryTsk =>
-                                            {
-                                                if (retryTsk.IsFaulted)
-                                                {
-                                                    globalCompletion.TrySetException(
-                                                        retryTsk.Exception.InnerException
-                                                    );
-                                                }
-                                                else if (retryTsk.IsCanceled)
-                                                {
-                                                    globalCompletion.TrySetCanceled();
-                                                }
-                                                else
-                                                {
-                                                    globalCompletion.TrySetResult(retryTsk.Result);
-                                                }
-                                            },
-                                            TaskScheduler.Default
-                                        );
-                                    }
-                                    catch (Exception e2)
-                                    {
-                                        globalCompletion.TrySetException(e2);
-                                    }
-                                }
                             }
-                        }
-                    },
-                    TaskScheduler.Default
-                );
+                        },
+                        TaskScheduler.Default
+                    );
 
                 return true;
             }
@@ -3332,8 +3340,8 @@ namespace System.Data.SqlClient
             {
                 RegisterForConnectionCloseNotification(ref returnedTask);
 
-                Task<int>
-                    .Factory.FromAsync(BeginExecuteNonQueryAsync, EndExecuteNonQueryAsync, null)
+                Task<int>.Factory
+                    .FromAsync(BeginExecuteNonQueryAsync, EndExecuteNonQueryAsync, null)
                     .ContinueWith(
                         (t) =>
                         {
@@ -3433,13 +3441,8 @@ namespace System.Data.SqlClient
             {
                 RegisterForConnectionCloseNotification(ref returnedTask);
 
-                Task<SqlDataReader>
-                    .Factory.FromAsync(
-                        BeginExecuteReaderAsync,
-                        EndExecuteReaderAsync,
-                        behavior,
-                        null
-                    )
+                Task<SqlDataReader>.Factory
+                    .FromAsync(BeginExecuteReaderAsync, EndExecuteReaderAsync, behavior, null)
                     .ContinueWith(
                         (t) =>
                         {
@@ -3589,8 +3592,8 @@ namespace System.Data.SqlClient
             {
                 RegisterForConnectionCloseNotification(ref returnedTask);
 
-                Task<XmlReader>
-                    .Factory.FromAsync(BeginExecuteXmlReaderAsync, EndExecuteXmlReaderAsync, null)
+                Task<XmlReader>.Factory
+                    .FromAsync(BeginExecuteXmlReaderAsync, EndExecuteXmlReaderAsync, null)
                     .ContinueWith(
                         (t) =>
                         {
@@ -3830,22 +3833,21 @@ namespace System.Data.SqlClient
 
             //
 
-            paramsCmd.Parameters.Add(new SqlParameter("@procedure_name", SqlDbType.NVarChar, 255));
+            paramsCmd.Parameters
+                .Add(new SqlParameter("@procedure_name", SqlDbType.NVarChar, 255));
             paramsCmd.Parameters[0].Value = UnquoteProcedureName(parsedSProc[3], out groupNumber); // ProcedureName is 4rd element in parsed array
 
             if (null != groupNumber)
             {
-                SqlParameter param = paramsCmd.Parameters.Add(
-                    new SqlParameter("@group_number", SqlDbType.Int)
-                );
+                SqlParameter param = paramsCmd.Parameters
+                    .Add(new SqlParameter("@group_number", SqlDbType.Int));
                 param.Value = groupNumber;
             }
 
             if (!ADP.IsEmpty(parsedSProc[2]))
             { // SchemaName is 3rd element in parsed array
-                SqlParameter param = paramsCmd.Parameters.Add(
-                    new SqlParameter("@procedure_schema", SqlDbType.NVarChar, 255)
-                );
+                SqlParameter param = paramsCmd.Parameters
+                    .Add(new SqlParameter("@procedure_schema", SqlDbType.NVarChar, 255));
                 param.Value = UnquoteProcedurePart(parsedSProc[2]);
             }
 
@@ -4092,9 +4094,8 @@ namespace System.Data.SqlClient
                     {
                         // Map to dependency by ID set in context data.
                         SqlDependency dependency =
-                            SqlDependencyPerAppDomainDispatcher.SingletonInstance.LookupDependencyEntry(
-                                notifyContext
-                            );
+                            SqlDependencyPerAppDomainDispatcher.SingletonInstance
+                                .LookupDependencyEntry(notifyContext);
 
                         if (null != dependency)
                         {
@@ -4285,13 +4286,14 @@ namespace System.Data.SqlClient
                     "<sc.SqlCommand.ExecuteNonQuery|INFO> %d#, Command executed as SQLBATCH.\n",
                     ObjectID
                 );
-                Task executeTask = _stateObj.Parser.TdsExecuteSQLBatch(
-                    this.CommandText,
-                    timeout,
-                    this.Notification,
-                    _stateObj,
-                    sync: true
-                );
+                Task executeTask = _stateObj.Parser
+                    .TdsExecuteSQLBatch(
+                        this.CommandText,
+                        timeout,
+                        this.Notification,
+                        _stateObj,
+                        sync: true
+                    );
                 Debug.Assert(executeTask == null, "Shouldn't get a task when doing sync writes");
 
                 NotifyDependency();
@@ -4306,14 +4308,8 @@ namespace System.Data.SqlClient
                         _stateObj._syncOverAsync,
                         "Should not attempt pends in a synchronous call"
                     );
-                    bool result = _stateObj.Parser.TryRun(
-                        RunBehavior.UntilDone,
-                        this,
-                        null,
-                        null,
-                        _stateObj,
-                        out dataReady
-                    );
+                    bool result = _stateObj.Parser
+                        .TryRun(RunBehavior.UntilDone, this, null, null, _stateObj, out dataReady);
                     if (!result)
                     {
                         throw SQL.SynchronousCallMayNotPend();
@@ -5444,10 +5440,8 @@ namespace System.Data.SqlClient
                         Debug.Assert(sqlParameter != null, "sqlParameter should not be null.");
 
                         if (
-                            sqlParameter.ParameterNameFixed.Equals(
-                                parameterName,
-                                StringComparison.Ordinal
-                            )
+                            sqlParameter.ParameterNameFixed
+                                .Equals(parameterName, StringComparison.Ordinal)
                         )
                         {
                             Debug.Assert(
@@ -6072,16 +6066,17 @@ namespace System.Data.SqlClient
                         _sqlRPCParameterEncryptionReqArray != null,
                         "RunExecuteReader rpc array not provided for describe parameter encryption request."
                     );
-                    writeTask = _stateObj.Parser.TdsExecuteRPC(
-                        this,
-                        _sqlRPCParameterEncryptionReqArray,
-                        timeout,
-                        inSchema,
-                        this.Notification,
-                        _stateObj,
-                        CommandType.StoredProcedure == CommandType,
-                        sync: !asyncWrite
-                    );
+                    writeTask = _stateObj.Parser
+                        .TdsExecuteRPC(
+                            this,
+                            _sqlRPCParameterEncryptionReqArray,
+                            timeout,
+                            inSchema,
+                            this.Notification,
+                            _stateObj,
+                            CommandType.StoredProcedure == CommandType,
+                            sync: !asyncWrite
+                        );
                 }
                 else if (BatchRPCMode)
                 {
@@ -6099,16 +6094,17 @@ namespace System.Data.SqlClient
                         _SqlRPCBatchArray != null,
                         "RunExecuteReader rpc array not provided"
                     );
-                    writeTask = _stateObj.Parser.TdsExecuteRPC(
-                        this,
-                        _SqlRPCBatchArray,
-                        timeout,
-                        inSchema,
-                        this.Notification,
-                        _stateObj,
-                        CommandType.StoredProcedure == CommandType,
-                        sync: !asyncWrite
-                    );
+                    writeTask = _stateObj.Parser
+                        .TdsExecuteRPC(
+                            this,
+                            _SqlRPCBatchArray,
+                            timeout,
+                            inSchema,
+                            this.Notification,
+                            _stateObj,
+                            CommandType.StoredProcedure == CommandType,
+                            sync: !asyncWrite
+                        );
                 }
                 else if (
                     (System.Data.CommandType.Text == this.CommandType)
@@ -6129,13 +6125,14 @@ namespace System.Data.SqlClient
                         );
                     }
                     string text = GetCommandText(cmdBehavior) + GetResetOptionsString(cmdBehavior);
-                    writeTask = _stateObj.Parser.TdsExecuteSQLBatch(
-                        text,
-                        timeout,
-                        this.Notification,
-                        _stateObj,
-                        sync: !asyncWrite
-                    );
+                    writeTask = _stateObj.Parser
+                        .TdsExecuteSQLBatch(
+                            text,
+                            timeout,
+                            this.Notification,
+                            _stateObj,
+                            sync: !asyncWrite
+                        );
                 }
                 else if (System.Data.CommandType.Text == this.CommandType)
                 {
@@ -6198,16 +6195,17 @@ namespace System.Data.SqlClient
 
                     //
                     Debug.Assert(_rpcArrayOf1[0] == rpc);
-                    writeTask = _stateObj.Parser.TdsExecuteRPC(
-                        this,
-                        _rpcArrayOf1,
-                        timeout,
-                        inSchema,
-                        this.Notification,
-                        _stateObj,
-                        CommandType.StoredProcedure == CommandType,
-                        sync: !asyncWrite
-                    );
+                    writeTask = _stateObj.Parser
+                        .TdsExecuteRPC(
+                            this,
+                            _rpcArrayOf1,
+                            timeout,
+                            inSchema,
+                            this.Notification,
+                            _stateObj,
+                            CommandType.StoredProcedure == CommandType,
+                            sync: !asyncWrite
+                        );
                 }
                 else
                 {
@@ -6236,13 +6234,14 @@ namespace System.Data.SqlClient
                     // turn set options ON
                     if (null != optionSettings)
                     {
-                        Task executeTask = _stateObj.Parser.TdsExecuteSQLBatch(
-                            optionSettings,
-                            timeout,
-                            this.Notification,
-                            _stateObj,
-                            sync: true
-                        );
+                        Task executeTask = _stateObj.Parser
+                            .TdsExecuteSQLBatch(
+                                optionSettings,
+                                timeout,
+                                this.Notification,
+                                _stateObj,
+                                sync: true
+                            );
                         Debug.Assert(
                             executeTask == null,
                             "Shouldn't get a task when doing sync writes"
@@ -6252,14 +6251,15 @@ namespace System.Data.SqlClient
                             _stateObj._syncOverAsync,
                             "Should not attempt pends in a synchronous call"
                         );
-                        bool result = _stateObj.Parser.TryRun(
-                            RunBehavior.UntilDone,
-                            this,
-                            null,
-                            null,
-                            _stateObj,
-                            out dataReady
-                        );
+                        bool result = _stateObj.Parser
+                            .TryRun(
+                                RunBehavior.UntilDone,
+                                this,
+                                null,
+                                null,
+                                _stateObj,
+                                out dataReady
+                            );
                         if (!result)
                         {
                             throw SQL.SynchronousCallMayNotPend();
@@ -6273,16 +6273,17 @@ namespace System.Data.SqlClient
 
                     // execute sp
                     Debug.Assert(_rpcArrayOf1[0] == rpc);
-                    writeTask = _stateObj.Parser.TdsExecuteRPC(
-                        this,
-                        _rpcArrayOf1,
-                        timeout,
-                        inSchema,
-                        this.Notification,
-                        _stateObj,
-                        CommandType.StoredProcedure == CommandType,
-                        sync: !asyncWrite
-                    );
+                    writeTask = _stateObj.Parser
+                        .TdsExecuteRPC(
+                            this,
+                            _rpcArrayOf1,
+                            timeout,
+                            inSchema,
+                            this.Notification,
+                            _stateObj,
+                            CommandType.StoredProcedure == CommandType,
+                            sync: !asyncWrite
+                        );
                 }
 
                 Debug.Assert(writeTask == null || async, "Returned task in sync mode");
@@ -6485,9 +6486,8 @@ namespace System.Data.SqlClient
             }
             finally
             {
-                TdsParser.ReliabilitySection.Assert(
-                    "unreliable call to CompleteAsyncExecuteReader"
-                ); // you need to setup for a thread abort somewhere before you call this method
+                TdsParser.ReliabilitySection
+                    .Assert("unreliable call to CompleteAsyncExecuteReader"); // you need to setup for a thread abort somewhere before you call this method
                 if (processFinallyBlock)
                 {
                     // Don't reset the state for internal End. The user End will do that eventually.
@@ -6534,14 +6534,8 @@ namespace System.Data.SqlClient
                         _stateObj._syncOverAsync,
                         "Should not attempt pends in a synchronous call"
                     );
-                    bool result = _stateObj.Parser.TryRun(
-                        RunBehavior.UntilDone,
-                        this,
-                        ds,
-                        null,
-                        _stateObj,
-                        out dataReady
-                    );
+                    bool result = _stateObj.Parser
+                        .TryRun(RunBehavior.UntilDone, this, ds, null, _stateObj, out dataReady);
                     if (!result)
                     {
                         throw SQL.SynchronousCallMayNotPend();
@@ -8777,12 +8771,13 @@ namespace System.Data.SqlClient
             {
                 string commandText =
                     CommandType == CommandType.StoredProcedure ? CommandText : string.Empty;
-                SqlEventSource.Log.BeginExecute(
-                    GetHashCode(),
-                    Connection.DataSource,
-                    Connection.Database,
-                    commandText
-                );
+                SqlEventSource.Log
+                    .BeginExecute(
+                        GetHashCode(),
+                        Connection.DataSource,
+                        Connection.Database,
+                        commandText
+                    );
             }
         }
 
@@ -8810,11 +8805,12 @@ namespace System.Data.SqlClient
 
                 int compositeState = successFlag | isSqlExceptionFlag | synchronousFlag;
 
-                SqlEventSource.Log.EndExecute(
-                    GetHashCode(),
-                    compositeState,
-                    sqlExceptionNumber.GetValueOrDefault()
-                );
+                SqlEventSource.Log
+                    .EndExecute(
+                        GetHashCode(),
+                        compositeState,
+                        sqlExceptionNumber.GetValueOrDefault()
+                    );
             }
         }
 

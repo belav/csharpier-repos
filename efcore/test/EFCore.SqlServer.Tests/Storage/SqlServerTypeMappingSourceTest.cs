@@ -2082,9 +2082,8 @@ public class SqlServerTypeMappingSourceTest : RelationalTypeMappingSourceTestBas
     protected override ModelBuilder CreateModelBuilder(
         Action<ModelConfigurationBuilder> configureConventions = null
     ) =>
-        SqlServerTestHelpers.Instance.CreateConventionBuilder(
-            configureConventions: configureConventions
-        );
+        SqlServerTestHelpers.Instance
+            .CreateConventionBuilder(configureConventions: configureConventions);
 
     private class TestParameter : DbParameter
     {

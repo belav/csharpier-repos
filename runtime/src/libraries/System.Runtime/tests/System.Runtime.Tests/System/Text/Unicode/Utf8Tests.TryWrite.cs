@@ -771,8 +771,8 @@ namespace System.Text.Unicode.Tests
                 ToStringState.LastProvider = provider;
                 ToStringState.ToStringMode = ToStringMode.ISpanFormattableTryFormat;
 
-                ReadOnlySpan<byte> src = Encoding
-                    .UTF8.GetBytes(_value.ToString(format.ToString(), provider))
+                ReadOnlySpan<byte> src = Encoding.UTF8
+                    .GetBytes(_value.ToString(format.ToString(), provider))
                     .AsSpan();
                 if (src.TryCopyTo(utf8Destination))
                 {

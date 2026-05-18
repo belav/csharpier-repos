@@ -113,13 +113,12 @@ internal abstract class AbstractUseCollectionInitializerAnalyzer<
         var seenInvocation = false;
         var seenIndexAssignment = false;
 
-        var initializer = this.SyntaxFacts.GetInitializerOfBaseObjectCreationExpression(
-            _objectCreationExpression
-        );
+        var initializer = this.SyntaxFacts
+            .GetInitializerOfBaseObjectCreationExpression(_objectCreationExpression);
         if (initializer != null)
         {
-            var initializerExpressions =
-                this.SyntaxFacts.GetExpressionsOfObjectCollectionInitializer(initializer);
+            var initializerExpressions = this.SyntaxFacts
+                .GetExpressionsOfObjectCollectionInitializer(initializer);
             if (initializerExpressions is [var firstInit, ..])
             {
                 // if we have an object creation, and it *already* has an initializer in it (like `new T { { x, y } }`)
@@ -199,14 +198,16 @@ internal abstract class AbstractUseCollectionInitializerAnalyzer<
         {
             // Look for a call to Add or AddRange
             if (
-                this.State.TryAnalyzeAddInvocation(
-                    (TExpressionSyntax)
-                        this.SyntaxFacts.GetExpressionOfExpressionStatement(expressionStatement),
-                    requiredArgumentName: null,
-                    forCollectionExpression: false,
-                    cancellationToken,
-                    out var instance
-                ) && this.State.ValuePatternMatches(instance)
+                this.State
+                    .TryAnalyzeAddInvocation(
+                        (TExpressionSyntax)
+                            this.SyntaxFacts
+                                .GetExpressionOfExpressionStatement(expressionStatement),
+                        requiredArgumentName: null,
+                        forCollectionExpression: false,
+                        cancellationToken,
+                        out var instance
+                    ) && this.State.ValuePatternMatches(instance)
             )
             {
                 seenInvocation = true;
@@ -234,18 +235,19 @@ internal abstract class AbstractUseCollectionInitializerAnalyzer<
         if (this.HasExistingInvalidInitializerForCollection())
             return false;
 
-        var type = this
-            .SemanticModel.GetTypeInfo(_objectCreationExpression, cancellationToken)
+        var type = this.SemanticModel
+            .GetTypeInfo(_objectCreationExpression, cancellationToken)
             .Type;
         if (type == null)
             return false;
 
-        var addMethods = this.SemanticModel.LookupSymbols(
-            _objectCreationExpression.SpanStart,
-            container: type,
-            name: WellKnownMemberNames.CollectionInitializerAddMethodName,
-            includeReducedExtensionMethods: true
-        );
+        var addMethods = this.SemanticModel
+            .LookupSymbols(
+                _objectCreationExpression.SpanStart,
+                container: type,
+                name: WellKnownMemberNames.CollectionInitializerAddMethodName,
+                includeReducedExtensionMethods: true
+            );
 
         return addMethods.Any(static m =>
             m is IMethodSymbol methodSymbol && methodSymbol.Parameters.Any()
@@ -274,27 +276,23 @@ internal abstract class AbstractUseCollectionInitializerAnalyzer<
         // side of the initialization.  Rewriting this into a collection initializer would lead
         // to a definite-assignment error.
         if (
-            this.State.NodeContainsValuePatternOrReferencesInitializedSymbol(
-                right,
-                cancellationToken
-            )
+            this.State
+                .NodeContainsValuePatternOrReferencesInitializedSymbol(right, cancellationToken)
         )
             return false;
 
         // Can't reference the variable being initialized in the arguments of the indexing expression.
-        this.SyntaxFacts.GetPartsOfElementAccessExpression(
-            left,
-            out var elementInstance,
-            out var argumentList
-        );
+        this.SyntaxFacts
+            .GetPartsOfElementAccessExpression(left, out var elementInstance, out var argumentList);
         var elementAccessArguments = this.SyntaxFacts.GetArgumentsOfArgumentList(argumentList);
         foreach (var argument in elementAccessArguments)
         {
             if (
-                this.State.NodeContainsValuePatternOrReferencesInitializedSymbol(
-                    argument,
-                    cancellationToken
-                )
+                this.State
+                    .NodeContainsValuePatternOrReferencesInitializedSymbol(
+                        argument,
+                        cancellationToken
+                    )
             )
                 return false;
 

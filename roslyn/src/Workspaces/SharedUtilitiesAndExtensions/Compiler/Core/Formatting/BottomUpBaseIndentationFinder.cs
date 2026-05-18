@@ -204,11 +204,12 @@ namespace Microsoft.CodeAnalysis.Formatting
                     }
                     else
                     {
-                        var textLine = baseToken
-                            .SyntaxTree.GetText(cancellationToken)
-                            .Lines.GetLineFromPosition(baseToken.SpanStart);
-                        baseToken = baseToken
-                            .SyntaxTree.GetRoot(cancellationToken)
+                        var textLine = baseToken.SyntaxTree
+                            .GetText(cancellationToken)
+                            .Lines
+                            .GetLineFromPosition(baseToken.SpanStart);
+                        baseToken = baseToken.SyntaxTree
+                            .GetRoot(cancellationToken)
                             .FindToken(textLine.Start);
                     }
                 }

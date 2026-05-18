@@ -131,18 +131,19 @@ namespace System.Diagnostics
                         ) && Interop.procfs.TryReadStatFile(pid, tid, out stat)
                     )
                     {
-                        pi._threadInfoList.Add(
-                            new ThreadInfo()
-                            {
-                                _processId = pid,
-                                _threadId = (ulong)tid,
-                                _basePriority = pi.BasePriority,
-                                _currentPriority = (int)stat.nice,
-                                _startAddress = null,
-                                _threadState = ProcFsStateToThreadState(stat.state),
-                                _threadWaitReason = ThreadWaitReason.Unknown,
-                            }
-                        );
+                        pi._threadInfoList
+                            .Add(
+                                new ThreadInfo()
+                                {
+                                    _processId = pid,
+                                    _threadId = (ulong)tid,
+                                    _basePriority = pi.BasePriority,
+                                    _currentPriority = (int)stat.nice,
+                                    _startAddress = null,
+                                    _threadState = ProcFsStateToThreadState(stat.state),
+                                    _threadWaitReason = ThreadWaitReason.Unknown,
+                                }
+                            );
                     }
                 }
             }

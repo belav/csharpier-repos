@@ -70,14 +70,15 @@ namespace System.ServiceModel.Activation
             Type type = Type.GetType(MetabaseSettingsIis7FactoryTypeName, false);
             if (type == null)
             {
-                throw FxTrace.Exception.AsError(
-                    new InvalidOperationException(
-                        SR.Hosting_MetabaseSettingsIis7TypeNotFound(
-                            MetabaseSettingsIis7FactoryTypeName,
-                            WasHostingAssemblyName
+                throw FxTrace.Exception
+                    .AsError(
+                        new InvalidOperationException(
+                            SR.Hosting_MetabaseSettingsIis7TypeNotFound(
+                                MetabaseSettingsIis7FactoryTypeName,
+                                WasHostingAssemblyName
+                            )
                         )
-                    )
-                );
+                    );
             }
             return CreateMetabaseSettings(type);
         }
@@ -113,11 +114,12 @@ namespace System.ServiceModel.Activation
 
             if (!(instance is MetabaseSettingsIis))
             {
-                throw FxTrace.Exception.AsError(
-                    new InvalidOperationException(
-                        SR.Hosting_BadMetabaseSettingsIis7Type(type.AssemblyQualifiedName)
-                    )
-                );
+                throw FxTrace.Exception
+                    .AsError(
+                        new InvalidOperationException(
+                            SR.Hosting_BadMetabaseSettingsIis7Type(type.AssemblyQualifiedName)
+                        )
+                    );
             }
 
             return (MetabaseSettingsIis)instance;
@@ -222,14 +224,15 @@ namespace System.ServiceModel.Activation
                                 }
                                 if (AspNetPartialTrustHelpers.NeedPartialTrustInvoke)
                                 {
-                                    throw FxTrace.Exception.AsError(
-                                        new InvalidOperationException(
-                                            SR.PartialTrustNonHttpActivation(
-                                                protocol,
-                                                HostingEnvironmentWrapper.ApplicationVirtualPath
+                                    throw FxTrace.Exception
+                                        .AsError(
+                                            new InvalidOperationException(
+                                                SR.PartialTrustNonHttpActivation(
+                                                    protocol,
+                                                    HostingEnvironmentWrapper.ApplicationVirtualPath
+                                                )
                                             )
-                                        )
-                                    );
+                                        );
                                 }
                                 AddHostedTransportConfigurationIis7(protocol);
                             }
@@ -266,9 +269,12 @@ namespace System.ServiceModel.Activation
                 }
                 else
                 {
-                    throw FxTrace.Exception.AsError(
-                        new InvalidOperationException(SR.Hosting_ProtocolNoConfiguration(protocol))
-                    );
+                    throw FxTrace.Exception
+                        .AsError(
+                            new InvalidOperationException(
+                                SR.Hosting_ProtocolNoConfiguration(protocol)
+                            )
+                        );
                 }
             }
             catch (Exception exception)
@@ -322,9 +328,10 @@ namespace System.ServiceModel.Activation
             EnsureInitialized();
             if (!configurations.ContainsKey(scheme))
             {
-                throw FxTrace.Exception.AsError(
-                    new InvalidOperationException(SR.Hosting_NotSupportedProtocol(scheme))
-                );
+                throw FxTrace.Exception
+                    .AsError(
+                        new InvalidOperationException(SR.Hosting_NotSupportedProtocol(scheme))
+                    );
             }
 
             return configurations[scheme];

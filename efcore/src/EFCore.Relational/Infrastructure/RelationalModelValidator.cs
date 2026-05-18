@@ -657,11 +657,12 @@ public class RelationalModelValidator : ModelValidator
                     )
                     {
                         if (
-                            sproc.Parameters.Any(p =>
-                                p.PropertyName == property.Name
-                                && p.ForOriginalValue != parameter.ForOriginalValue
-                                && p.Direction != ParameterDirection.Input
-                            )
+                            sproc.Parameters
+                                .Any(p =>
+                                    p.PropertyName == property.Name
+                                    && p.ForOriginalValue != parameter.ForOriginalValue
+                                    && p.Direction != ParameterDirection.Input
+                                )
                         )
                         {
                             throw new InvalidOperationException(
@@ -933,9 +934,8 @@ public class RelationalModelValidator : ModelValidator
         {
             foreach (var key in entityType.GetDeclaredKeys())
             {
-                var mutableProperty = key.Properties.FirstOrDefault(p =>
-                    p.ValueGenerated.HasFlag(ValueGenerated.OnUpdate)
-                );
+                var mutableProperty = key.Properties
+                    .FirstOrDefault(p => p.ValueGenerated.HasFlag(ValueGenerated.OnUpdate));
                 if (mutableProperty != null && !mutableProperty.IsOrdinalKeyProperty())
                 {
                     throw new InvalidOperationException(
@@ -1050,9 +1050,9 @@ public class RelationalModelValidator : ModelValidator
                     {
                         var principalEntityType = foreignKey.PrincipalEntityType;
                         if (
-                            foreignKey.PrincipalEntityType.IsAssignableFrom(
-                                foreignKey.DeclaringEntityType
-                            ) || !mappedTypes.Contains(principalEntityType)
+                            foreignKey.PrincipalEntityType
+                                .IsAssignableFrom(foreignKey.DeclaringEntityType)
+                            || !mappedTypes.Contains(principalEntityType)
                         )
                         {
                             continue;
@@ -2348,9 +2348,8 @@ public class RelationalModelValidator : ModelValidator
         )
         {
             foreach (
-                var storeGeneratedProperty in key.Properties.Where(p =>
-                    (p.ValueGenerated & ValueGenerated.OnAdd) != 0
-                )
+                var storeGeneratedProperty in key.Properties
+                    .Where(p => (p.ValueGenerated & ValueGenerated.OnAdd) != 0)
             )
             {
                 logger.TpcStoreGeneratedIdentityWarning(storeGeneratedProperty);
@@ -2944,8 +2943,8 @@ public class RelationalModelValidator : ModelValidator
 
             if (declaringStoreObject != null)
             {
-                var fragments = property
-                    .DeclaringType.GetMappingFragments(storeObjectType)
+                var fragments = property.DeclaringType
+                    .GetMappingFragments(storeObjectType)
                     .ToList();
                 if (fragments.Count > 0)
                 {
@@ -3390,9 +3389,10 @@ public class RelationalModelValidator : ModelValidator
             }
         }
 
-        var ownerEntityTypeKeyPropertiesCount = ownership
-            .PrincipalEntityType.FindPrimaryKey()!
-            .Properties.Count;
+        var ownerEntityTypeKeyPropertiesCount = ownership.PrincipalEntityType
+            .FindPrimaryKey()!
+            .Properties
+            .Count;
         var expectedKeyCount = ownership.IsUnique
             ? ownerEntityTypeKeyPropertiesCount
             : ownerEntityTypeKeyPropertiesCount + 1;

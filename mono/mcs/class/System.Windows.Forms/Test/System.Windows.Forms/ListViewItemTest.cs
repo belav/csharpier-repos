@@ -4847,12 +4847,13 @@ namespace MonoTests.System.Windows.Forms
             Assert.IsNotNull(item.SubItems[1], "#A4");
             Assert.AreEqual(subItemAText, item.SubItems[1].Text, "#A5");
 
-            item.SubItems.AddRange(
-                new string[] { subItemBText, null, subItemCText },
-                Color.Blue,
-                Color.Red,
-                font
-            );
+            item.SubItems
+                .AddRange(
+                    new string[] { subItemBText, null, subItemCText },
+                    Color.Blue,
+                    Color.Red,
+                    font
+                );
             Assert.AreEqual(4, item.SubItems.Count, "#B1");
             Assert.IsNotNull(item.SubItems[0], "#B2");
             Assert.AreEqual(string.Empty, item.SubItems[0].Text, "#B3");
@@ -4876,12 +4877,8 @@ namespace MonoTests.System.Windows.Forms
             ListViewItem item = new ListViewItem();
             try
             {
-                item.SubItems.AddRange(
-                    (string[])null,
-                    Color.Blue,
-                    Color.Red,
-                    new Font("Arial", 14)
-                );
+                item.SubItems
+                    .AddRange((string[])null, Color.Blue, Color.Red, new Font("Arial", 14));
                 Assert.Fail("#1");
             }
             catch (ArgumentNullException ex)

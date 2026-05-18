@@ -110,12 +110,13 @@ namespace System.Windows.Forms
         public void DrawFocusRectangle()
         {
             if ((state & ListViewItemStates.Focused) != 0)
-                ThemeEngine.Current.CPDrawFocusRectangle(
-                    graphics,
-                    bounds,
-                    item.ListView.ForeColor,
-                    item.ListView.BackColor
-                );
+                ThemeEngine.Current
+                    .CPDrawFocusRectangle(
+                        graphics,
+                        bounds,
+                        item.ListView.ForeColor,
+                        item.ListView.BackColor
+                    );
         }
 
         public void DrawText()

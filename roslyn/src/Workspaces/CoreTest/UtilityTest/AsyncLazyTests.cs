@@ -71,23 +71,24 @@ namespace Microsoft.CodeAnalysis.UnitTests
 
             // Second, start a synchronous request. While we are in the GetValue, we will record which thread is being occupied by the request
             Thread? synchronousRequestThread = null;
-            Task.Factory.StartNew(
-                () =>
-                {
-                    try
+            Task.Factory
+                .StartNew(
+                    () =>
                     {
-                        synchronousRequestThread = Thread.CurrentThread;
-                        lazy.GetValue(requestCancellationTokenSource.Token);
-                    }
-                    finally // we do test GetValue in exceptional scenarios, so we should deal with this
-                    {
-                        synchronousRequestThread = null;
-                    }
-                },
-                CancellationToken.None,
-                TaskCreationOptions.None,
-                TaskScheduler.Current
-            );
+                        try
+                        {
+                            synchronousRequestThread = Thread.CurrentThread;
+                            lazy.GetValue(requestCancellationTokenSource.Token);
+                        }
+                        finally // we do test GetValue in exceptional scenarios, so we should deal with this
+                        {
+                            synchronousRequestThread = null;
+                        }
+                    },
+                    CancellationToken.None,
+                    TaskCreationOptions.None,
+                    TaskScheduler.Current
+                );
 
             // Wait until this request has actually started
             synchronousComputationStartedEvent.WaitOne();

@@ -18,9 +18,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
             CSharpSyntaxContext context,
             CancellationToken cancellationToken
         ) =>
-            context.TargetToken.IsAccessorDeclarationContext<EventDeclarationSyntax>(
-                position,
-                SyntaxKind.AddKeyword
-            );
+            context.TargetToken
+                .IsAccessorDeclarationContext<EventDeclarationSyntax>(
+                    position,
+                    SyntaxKind.AddKeyword
+                );
     }
 }

@@ -100,8 +100,8 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateVariable
                 var accessibility = Accessibility.Public;
 
                 // Ensure that we're not overly exposing a type.
-                var containingTypeAccessibility =
-                    this.TypeToGenerateIn.DetermineMinimalAccessibility();
+                var containingTypeAccessibility = this.TypeToGenerateIn
+                    .DetermineMinimalAccessibility();
                 var effectiveAccessibility = AccessibilityUtilities.Minimum(
                     containingTypeAccessibility,
                     accessibility
@@ -479,8 +479,8 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateVariable
                                     || FieldIsReadOnly(nextAssignedSymbol);
                             }
 
-                            AfterThisLocation ??=
-                                previousAssignedSymbol?.Locations.FirstOrDefault();
+                            AfterThisLocation ??= previousAssignedSymbol?.Locations
+                                .FirstOrDefault();
                             BeforeThisLocation ??= nextAssignedSymbol?.Locations.FirstOrDefault();
                         }
                     }
@@ -509,8 +509,8 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateVariable
                                 out _
                             );
 
-                            var symbol = _document
-                                .SemanticModel.GetSymbolInfo(left, cancellationToken)
+                            var symbol = _document.SemanticModel
+                                .GetSymbolInfo(left, cancellationToken)
                                 .Symbol;
                             if (
                                 symbol?.Kind == symbolKind
@@ -581,8 +581,8 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateVariable
                 // arbitrary variable (field, local, etc.).
                 if (inferredType.IsDelegateType())
                 {
-                    var syntaxKinds =
-                        _document.Document.GetRequiredLanguageService<ISyntaxKindsService>();
+                    var syntaxKinds = _document.Document
+                        .GetRequiredLanguageService<ISyntaxKindsService>();
                     if (
                         syntaxKinds.AddressOfExpression
                         == SimpleNameOrMemberAccessExpressionOpt.Parent?.RawKind
@@ -605,7 +605,8 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateVariable
                 {
                     var namedDelegateType = inferredType
                         .GetDelegateType(compilation)
-                        ?.DelegateInvokeMethod?.ConvertToType(compilation);
+                        ?.DelegateInvokeMethod
+                        ?.ConvertToType(compilation);
                     if (namedDelegateType != null)
                     {
                         inferredType = namedDelegateType;
@@ -628,8 +629,8 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateVariable
                     availableTypeParameters
                 );
 
-                var enclosingMethodSymbol =
-                    _document.SemanticModel.GetEnclosingSymbol<IMethodSymbol>(
+                var enclosingMethodSymbol = _document.SemanticModel
+                    .GetEnclosingSymbol<IMethodSymbol>(
                         SimpleNameOrMemberAccessExpressionOpt.SpanStart,
                         cancellationToken
                     );
@@ -664,8 +665,8 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateVariable
 
                 // If we're in an lambda/local function we're not actually 'in' the constructor.
                 // i.e. we can't actually write to read-only fields here.
-                var syntaxFacts =
-                    _document.Document.GetRequiredLanguageService<ISyntaxFactsService>();
+                var syntaxFacts = _document.Document
+                    .GetRequiredLanguageService<ISyntaxFactsService>();
                 if (simpleName.AncestorsAndSelf().Any(syntaxFacts.IsAnonymousOrLocalFunction))
                     return false;
 

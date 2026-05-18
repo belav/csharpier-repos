@@ -37,11 +37,12 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
             var declarations = _symbolDeclarationService.GetDeclarations(destination);
             return declarations.Any(
                 static (r, arg) =>
-                    arg.self.CanAddTo(
-                        r.GetSyntax(arg.cancellationToken),
-                        arg.solution,
-                        arg.cancellationToken
-                    ),
+                    arg.self
+                        .CanAddTo(
+                            r.GetSyntax(arg.cancellationToken),
+                            arg.solution,
+                            arg.cancellationToken
+                        ),
                 (self: this, solution, cancellationToken)
             );
         }

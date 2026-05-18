@@ -25,9 +25,8 @@ class Test
                         @"([\d]+)|([^\d]+)",
                         m =>
                             (m.Value.Length > 0 && char.IsDigit(m.Value[0]))
-                                ? m.Value.PadLeft(
-                                    Math.Max((left ?? "").Length, (right ?? "").Length)
-                                )
+                                ? m.Value
+                                    .PadLeft(Math.Max((left ?? "").Length, (right ?? "").Length))
                                 : m.Value
                     )
                 );

@@ -445,11 +445,12 @@ namespace System.Web.UI.HtmlControls
                                     .Contains("javascript")
                             )
                             {
-                                page.ClientScript.RegisterOnSubmitStatement(
-                                    typeof(HtmlForm),
-                                    "OnSubmitScript",
-                                    formOnSubmit
-                                );
+                                page.ClientScript
+                                    .RegisterOnSubmitStatement(
+                                        typeof(HtmlForm),
+                                        "OnSubmitScript",
+                                        formOnSubmit
+                                    );
                             }
                             Attributes.Remove("onsubmit");
                         }
@@ -483,11 +484,12 @@ namespace System.Web.UI.HtmlControls
 
                         if (c is IButtonControl)
                         {
-                            page.ClientScript.RegisterDefaultButtonScript(
-                                c,
-                                writer,
-                                false /* UseAddAttribute */
-                            );
+                            page.ClientScript
+                                .RegisterDefaultButtonScript(
+                                    c,
+                                    writer,
+                                    false /* UseAddAttribute */
+                                );
                         }
                         else
                         {

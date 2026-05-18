@@ -402,9 +402,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Snippets
         {
             var testString = "foo bar quux baz";
             using var workspace = CreateWorkspaceFromCode(testString);
-            var document = workspace.CurrentSolution.GetRequiredDocument(
-                workspace.Documents.First().Id
-            );
+            var document = workspace.CurrentSolution
+                .GetRequiredDocument(workspace.Documents.First().Id);
             var lspSnippetString = RoslynLSPSnippetConverter
                 .GenerateLSPSnippetAsync(
                     document,
@@ -423,9 +422,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Snippets
         {
             var testString = "foo bar quux baz";
             using var workspace = CreateWorkspaceFromCode(testString);
-            var document = workspace.CurrentSolution.GetRequiredDocument(
-                workspace.Documents.First().Id
-            );
+            var document = workspace.CurrentSolution
+                .GetRequiredDocument(workspace.Documents.First().Id);
             var lspSnippetString = RoslynLSPSnippetConverter
                 .GenerateLSPSnippetAsync(
                     document,
@@ -523,9 +521,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Snippets
             );
             var placeholders = GetSnippetPlaceholders(text, placeholderDictionary);
             using var workspace = CreateWorkspaceFromCode(markup);
-            var document = workspace.CurrentSolution.GetRequiredDocument(
-                workspace.Documents.First().Id
-            );
+            var document = workspace.CurrentSolution
+                .GetRequiredDocument(workspace.Documents.First().Id);
 
             var lspSnippetString = await RoslynLSPSnippetConverter
                 .GenerateLSPSnippetAsync(

@@ -168,11 +168,8 @@ namespace MonoTests.System.Windows.Forms.DataBinding
 
             c.BindingContext = new BindingContext();
             cm = (CurrencyManager)c.BindingContext[dataSet1, dataSet1.Tables[0].TableName];
-            binding = c.DataBindings.Add(
-                "Text",
-                dataSet1.Tables[0],
-                dataSet1.Tables[0].Columns[0].ColumnName
-            );
+            binding = c.DataBindings
+                .Add("Text", dataSet1.Tables[0], dataSet1.Tables[0].Columns[0].ColumnName);
 
             HookupCurrencyManager(cm);
             HookupBinding(binding);
@@ -220,11 +217,8 @@ namespace MonoTests.System.Windows.Forms.DataBinding
 
             c.BindingContext = new BindingContext();
             cm = (CurrencyManager)c.BindingContext[dataSet1, dataSet1.Tables[0].TableName];
-            binding = c.DataBindings.Add(
-                "Text",
-                dataSet1.Tables[0],
-                dataSet1.Tables[0].Columns[0].ColumnName
-            );
+            binding = c.DataBindings
+                .Add("Text", dataSet1.Tables[0], dataSet1.Tables[0].Columns[0].ColumnName);
 
             HookupCurrencyManager(cm);
 #if WITH_BINDINGS
@@ -278,11 +272,8 @@ namespace MonoTests.System.Windows.Forms.DataBinding
 
             c.BindingContext = new BindingContext();
             cm = (CurrencyManager)c.BindingContext[dataSet1, dataSet1.Tables[0].TableName];
-            binding = c.DataBindings.Add(
-                "Text",
-                dataSet1.Tables[0],
-                dataSet1.Tables[0].Columns[0].ColumnName
-            );
+            binding = c.DataBindings
+                .Add("Text", dataSet1.Tables[0], dataSet1.Tables[0].Columns[0].ColumnName);
 
             HookupCurrencyManager(cm);
 #if WITH_BINDINGS
@@ -333,11 +324,8 @@ namespace MonoTests.System.Windows.Forms.DataBinding
 
             c.BindingContext = new BindingContext();
             cm = (CurrencyManager)c.BindingContext[dataSet1, dataSet1.Tables[0].TableName];
-            binding = c.DataBindings.Add(
-                "Text",
-                dataSet1.Tables[0],
-                dataSet1.Tables[0].Columns[0].ColumnName
-            );
+            binding = c.DataBindings
+                .Add("Text", dataSet1.Tables[0], dataSet1.Tables[0].Columns[0].ColumnName);
 
             HookupCurrencyManager(cm);
 #if WITH_BINDINGS
@@ -390,11 +378,8 @@ namespace MonoTests.System.Windows.Forms.DataBinding
 
             c.BindingContext = new BindingContext();
             cm = (CurrencyManager)c.BindingContext[dataSet1, dataSet1.Tables[0].TableName];
-            binding = c.DataBindings.Add(
-                "Text",
-                dataSet1.Tables[0],
-                dataSet1.Tables[0].Columns[0].ColumnName
-            );
+            binding = c.DataBindings
+                .Add("Text", dataSet1.Tables[0], dataSet1.Tables[0].Columns[0].ColumnName);
 
             HookupCurrencyManager(cm);
 #if WITH_BINDINGS
@@ -441,11 +426,8 @@ namespace MonoTests.System.Windows.Forms.DataBinding
 
             c.BindingContext = new BindingContext();
             cm = (CurrencyManager)c.BindingContext[dataSet1, dataSet1.Tables[0].TableName];
-            binding = c.DataBindings.Add(
-                "Text",
-                dataSet1.Tables[0],
-                dataSet1.Tables[0].Columns[0].ColumnName
-            );
+            binding = c.DataBindings
+                .Add("Text", dataSet1.Tables[0], dataSet1.Tables[0].Columns[0].ColumnName);
 
             HookupCurrencyManager(cm);
 #if WITH_BINDINGS
@@ -496,11 +478,8 @@ namespace MonoTests.System.Windows.Forms.DataBinding
 
             c.BindingContext = new BindingContext();
             cm = (CurrencyManager)c.BindingContext[dataSet1, dataSet1.Tables[0].TableName];
-            binding = c.DataBindings.Add(
-                "Text",
-                dataSet1.Tables[0],
-                dataSet1.Tables[0].Columns[0].ColumnName
-            );
+            binding = c.DataBindings
+                .Add("Text", dataSet1.Tables[0], dataSet1.Tables[0].Columns[0].ColumnName);
 
             /* insert 2 rows */
             DataRow newrow = dataSet1.Tables[0].NewRow();
@@ -553,11 +532,8 @@ namespace MonoTests.System.Windows.Forms.DataBinding
 
             c.BindingContext = new BindingContext();
             cm = (CurrencyManager)c.BindingContext[dataSet1, dataSet1.Tables[0].TableName];
-            binding = c.DataBindings.Add(
-                "Text",
-                dataSet1.Tables[0],
-                dataSet1.Tables[0].Columns[0].ColumnName
-            );
+            binding = c.DataBindings
+                .Add("Text", dataSet1.Tables[0], dataSet1.Tables[0].Columns[0].ColumnName);
 
             HookupCurrencyManager(cm);
 #if WITH_BINDINGS
@@ -610,11 +586,8 @@ namespace MonoTests.System.Windows.Forms.DataBinding
 
             c.BindingContext = new BindingContext();
             cm = (CurrencyManager)c.BindingContext[dataSet1, dataSet1.Tables[0].TableName];
-            binding = c.DataBindings.Add(
-                "Text",
-                dataSet1.Tables[0],
-                dataSet1.Tables[0].Columns[0].ColumnName
-            );
+            binding = c.DataBindings
+                .Add("Text", dataSet1.Tables[0], dataSet1.Tables[0].Columns[0].ColumnName);
 
             HookupCurrencyManager(cm);
             HookupBinding(binding);
@@ -649,11 +622,8 @@ namespace MonoTests.System.Windows.Forms.DataBinding
 
             c.BindingContext = new BindingContext();
             cm = (CurrencyManager)c.BindingContext[dataSet1, dataSet1.Tables[0].TableName];
-            binding = c.DataBindings.Add(
-                "Text",
-                dataSet1.Tables[0],
-                dataSet1.Tables[0].Columns[0].ColumnName
-            );
+            binding = c.DataBindings
+                .Add("Text", dataSet1.Tables[0], dataSet1.Tables[0].Columns[0].ColumnName);
 
             HookupCurrencyManager(cm);
             HookupBinding(binding);
@@ -689,11 +659,8 @@ namespace MonoTests.System.Windows.Forms.DataBinding
 
             c.BindingContext = new BindingContext();
             cm = (CurrencyManager)c.BindingContext[dataSet1, dataSet1.Tables[0].TableName];
-            binding = c.DataBindings.Add(
-                "Text",
-                dataSet1.Tables[0],
-                dataSet1.Tables[0].Columns[0].ColumnName
-            );
+            binding = c.DataBindings
+                .Add("Text", dataSet1.Tables[0], dataSet1.Tables[0].Columns[0].ColumnName);
 
             HookupCurrencyManager(cm);
             HookupBinding(binding);
@@ -738,11 +705,8 @@ namespace MonoTests.System.Windows.Forms.DataBinding
 
             c.BindingContext = new BindingContext();
             cm = (CurrencyManager)c.BindingContext[dataSet1, dataSet1.Tables[0].TableName];
-            binding = c.DataBindings.Add(
-                "Text",
-                dataSet1.Tables[0],
-                dataSet1.Tables[0].Columns[0].ColumnName
-            );
+            binding = c.DataBindings
+                .Add("Text", dataSet1.Tables[0], dataSet1.Tables[0].Columns[0].ColumnName);
 
             HookupCurrencyManager(cm);
             HookupBinding(binding);
@@ -897,11 +861,8 @@ namespace MonoTests.System.Windows.Forms.DataBinding
             dataSet1.Tables[0].Rows.Add(newrow);
 
             cm = (CurrencyManager)bc[dataSet1, dataSet1.Tables[0].TableName];
-            binding = c.DataBindings.Add(
-                "Text",
-                dataSet1.Tables[0],
-                dataSet1.Tables[0].Columns[0].ColumnName
-            );
+            binding = c.DataBindings
+                .Add("Text", dataSet1.Tables[0], dataSet1.Tables[0].Columns[0].ColumnName);
 
             Assert.AreEqual(1, cm.Count, "1");
 
@@ -1010,11 +971,8 @@ namespace MonoTests.System.Windows.Forms.DataBinding
 
             c.BindingContext = new BindingContext();
             cm = (CurrencyManager)c.BindingContext[dataSet1, dataSet1.Tables[0].TableName];
-            binding = c.DataBindings.Add(
-                "Text",
-                dataSet1.Tables[0],
-                dataSet1.Tables[0].Columns[0].ColumnName
-            );
+            binding = c.DataBindings
+                .Add("Text", dataSet1.Tables[0], dataSet1.Tables[0].Columns[0].ColumnName);
 
             HookupCurrencyManager(cm);
 #if WITH_BINDINGS

@@ -162,14 +162,15 @@ namespace Mono.CodeContracts.Static.Analysis.HeapAnalysis
         {
             if (op != BinaryOperator.Cobjeq)
             {
-                return this.delegatee.Binary(
-                    pc,
-                    op,
-                    ConvertDest(pc, dest),
-                    ConvertSource(pc, operand1),
-                    ConvertSource(pc, operand2),
-                    data
-                );
+                return this.delegatee
+                    .Binary(
+                        pc,
+                        op,
+                        ConvertDest(pc, dest),
+                        ConvertSource(pc, operand1),
+                        ConvertSource(pc, operand2),
+                        data
+                    );
             }
 
             SymbolicValue op1 = TryConvertUnbox(pc, operand1);
@@ -180,13 +181,8 @@ namespace Mono.CodeContracts.Static.Analysis.HeapAnalysis
 
         public Result Isinst(APC pc, TypeNode type, int dest, int obj, Data data)
         {
-            return this.delegatee.Isinst(
-                pc,
-                type,
-                ConvertDest(pc, dest),
-                ConvertSource(pc, obj),
-                data
-            );
+            return this.delegatee
+                .Isinst(pc, type, ConvertDest(pc, dest), ConvertSource(pc, obj), data);
         }
 
         public Result LoadNull(APC pc, int dest, Data polarity)
@@ -213,14 +209,8 @@ namespace Mono.CodeContracts.Static.Analysis.HeapAnalysis
             Data data
         )
         {
-            return this.delegatee.Unary(
-                pc,
-                op,
-                unsigned,
-                ConvertDest(pc, dest),
-                ConvertSource(pc, source),
-                data
-            );
+            return this.delegatee
+                .Unary(pc, op, unsigned, ConvertDest(pc, dest), ConvertSource(pc, source), data);
         }
         #endregion
 
@@ -273,26 +263,22 @@ namespace Mono.CodeContracts.Static.Analysis.HeapAnalysis
             Data data
         )
         {
-            return this.delegatee.LoadStackAddress(
-                pc,
-                offset,
-                ConvertDest(pc, dest),
-                ConvertSource(pc, source),
-                type,
-                isOld,
-                data
-            );
+            return this.delegatee
+                .LoadStackAddress(
+                    pc,
+                    offset,
+                    ConvertDest(pc, dest),
+                    ConvertSource(pc, source),
+                    type,
+                    isOld,
+                    data
+                );
         }
 
         public Result LoadResult(APC pc, TypeNode type, int dest, int source, Data data)
         {
-            return this.delegatee.LoadResult(
-                pc,
-                type,
-                ConvertDest(pc, dest),
-                ConvertSource(pc, source),
-                data
-            );
+            return this.delegatee
+                .LoadResult(pc, type, ConvertDest(pc, dest), ConvertSource(pc, source), data);
         }
         #endregion
 
@@ -316,14 +302,15 @@ namespace Mono.CodeContracts.Static.Analysis.HeapAnalysis
             Data data
         )
         {
-            return this.delegatee.BranchCond(
-                pc,
-                target,
-                bop,
-                ConvertSource(pc, value1),
-                ConvertSource(pc, value2),
-                data
-            );
+            return this.delegatee
+                .BranchCond(
+                    pc,
+                    target,
+                    bop,
+                    ConvertSource(pc, value1),
+                    ConvertSource(pc, value2),
+                    data
+                );
         }
 
         public Result BranchTrue(APC pc, APC target, int cond, Data data)
@@ -354,14 +341,8 @@ namespace Mono.CodeContracts.Static.Analysis.HeapAnalysis
             where ArgList : IIndexable<int>
         {
             if (!this.parent.MetaDataProvider.IsVoidMethod(method) && InsideOld(pc))
-                return this.delegatee.LoadStack(
-                    pc,
-                    0,
-                    ConvertDest(pc, dest),
-                    ConvertOldDest(pc, dest),
-                    true,
-                    data
-                );
+                return this.delegatee
+                    .LoadStack(pc, 0, ConvertDest(pc, dest), ConvertOldDest(pc, dest), true, data);
 
             return DelegateCall(pc, method, virt, extraVarargs, dest, args, data);
         }
@@ -380,46 +361,38 @@ namespace Mono.CodeContracts.Static.Analysis.HeapAnalysis
             where ArgList : IIndexable<int>
         {
             if (!this.parent.MetaDataProvider.IsVoid(returnType) && InsideOld(pc))
-                return this.delegatee.LoadStack(
+                return this.delegatee
+                    .LoadStack(pc, 0, ConvertDest(pc, dest), ConvertOldDest(pc, dest), true, data);
+
+            return this.delegatee
+                .Calli(
                     pc,
-                    0,
+                    returnType,
+                    argTypes,
+                    instance,
                     ConvertDest(pc, dest),
-                    ConvertOldDest(pc, dest),
-                    true,
+                    ConvertSource(pc, functionPointer),
+                    ConvertSources(pc, args),
                     data
                 );
-
-            return this.delegatee.Calli(
-                pc,
-                returnType,
-                argTypes,
-                instance,
-                ConvertDest(pc, dest),
-                ConvertSource(pc, functionPointer),
-                ConvertSources(pc, args),
-                data
-            );
         }
 
         public Result CheckFinite(APC pc, int dest, int source, Data data)
         {
-            return this.delegatee.CheckFinite(
-                pc,
-                ConvertDest(pc, dest),
-                ConvertSource(pc, source),
-                data
-            );
+            return this.delegatee
+                .CheckFinite(pc, ConvertDest(pc, dest), ConvertSource(pc, source), data);
         }
 
         public Result CopyBlock(APC pc, int destAddress, int srcAddress, int len, Data data)
         {
-            return this.delegatee.CopyBlock(
-                pc,
-                ConvertSource(pc, destAddress),
-                ConvertSource(pc, srcAddress),
-                ConvertSource(pc, len),
-                data
-            );
+            return this.delegatee
+                .CopyBlock(
+                    pc,
+                    ConvertSource(pc, destAddress),
+                    ConvertSource(pc, srcAddress),
+                    ConvertSource(pc, len),
+                    data
+                );
         }
 
         public Result EndFilter(APC pc, int decision, Data data)
@@ -495,13 +468,8 @@ namespace Mono.CodeContracts.Static.Analysis.HeapAnalysis
 
         public Result Box(APC pc, TypeNode type, int dest, int source, Data data)
         {
-            return this.delegatee.Box(
-                pc,
-                type,
-                ConvertDest(pc, dest),
-                ConvertSource(pc, source),
-                data
-            );
+            return this.delegatee
+                .Box(pc, type, ConvertDest(pc, dest), ConvertSource(pc, source), data);
         }
 
         public Result ConstrainedCallvirt<TypeList, ArgList>(
@@ -516,37 +484,28 @@ namespace Mono.CodeContracts.Static.Analysis.HeapAnalysis
             where TypeList : IIndexable<TypeNode>
             where ArgList : IIndexable<int>
         {
-            return this.delegatee.ConstrainedCallvirt(
-                pc,
-                method,
-                constraint,
-                extraVarargs,
-                ConvertDest(pc, dest),
-                ConvertSources(pc, args),
-                data
-            );
+            return this.delegatee
+                .ConstrainedCallvirt(
+                    pc,
+                    method,
+                    constraint,
+                    extraVarargs,
+                    ConvertDest(pc, dest),
+                    ConvertSources(pc, args),
+                    data
+                );
         }
 
         public Result CastClass(APC pc, TypeNode type, int dest, int obj, Data data)
         {
-            return this.delegatee.CastClass(
-                pc,
-                type,
-                ConvertDest(pc, dest),
-                ConvertSource(pc, obj),
-                data
-            );
+            return this.delegatee
+                .CastClass(pc, type, ConvertDest(pc, dest), ConvertSource(pc, obj), data);
         }
 
         public Result CopyObj(APC pc, TypeNode type, int destPtr, int sourcePtr, Data data)
         {
-            return this.delegatee.CopyObj(
-                pc,
-                type,
-                ConvertSource(pc, destPtr),
-                ConvertSource(pc, sourcePtr),
-                data
-            );
+            return this.delegatee
+                .CopyObj(pc, type, ConvertSource(pc, destPtr), ConvertSource(pc, sourcePtr), data);
         }
 
         public Result Initobj(APC pc, TypeNode type, int ptr, Data data)
@@ -557,77 +516,46 @@ namespace Mono.CodeContracts.Static.Analysis.HeapAnalysis
         public Result LoadElement(APC pc, TypeNode type, int dest, int array, int index, Data data)
         {
             if (InsideOld(pc))
-                return this.delegatee.LoadStack(
+                return this.delegatee
+                    .LoadStack(pc, 0, ConvertDest(pc, dest), ConvertOldDest(pc, dest), true, data);
+            return this.delegatee
+                .LoadElement(
                     pc,
-                    0,
+                    type,
                     ConvertDest(pc, dest),
-                    ConvertOldDest(pc, dest),
-                    true,
+                    ConvertSource(pc, array),
+                    ConvertSource(pc, index),
                     data
                 );
-            return this.delegatee.LoadElement(
-                pc,
-                type,
-                ConvertDest(pc, dest),
-                ConvertSource(pc, array),
-                ConvertSource(pc, index),
-                data
-            );
         }
 
         public Result LoadField(APC pc, Field field, int dest, int obj, Data data)
         {
             if (InsideOld(pc))
-                return this.delegatee.LoadStack(
-                    pc,
-                    0,
-                    ConvertDest(pc, dest),
-                    ConvertOldDest(pc, dest),
-                    true,
-                    data
-                );
+                return this.delegatee
+                    .LoadStack(pc, 0, ConvertDest(pc, dest), ConvertOldDest(pc, dest), true, data);
 
-            return this.delegatee.LoadField(
-                pc,
-                field,
-                ConvertDest(pc, dest),
-                ConvertSource(pc, obj),
-                data
-            );
+            return this.delegatee
+                .LoadField(pc, field, ConvertDest(pc, dest), ConvertSource(pc, obj), data);
         }
 
         public Result LoadFieldAddress(APC pc, Field field, int dest, int obj, Data data)
         {
-            return this.delegatee.LoadFieldAddress(
-                pc,
-                field,
-                ConvertDest(pc, dest),
-                ConvertSource(pc, obj),
-                data
-            );
+            return this.delegatee
+                .LoadFieldAddress(pc, field, ConvertDest(pc, dest), ConvertSource(pc, obj), data);
         }
 
         public Result LoadLength(APC pc, int dest, int array, Data data)
         {
-            return this.delegatee.LoadLength(
-                pc,
-                ConvertDest(pc, dest),
-                ConvertSource(pc, array),
-                data
-            );
+            return this.delegatee
+                .LoadLength(pc, ConvertDest(pc, dest), ConvertSource(pc, array), data);
         }
 
         public Result LoadStaticField(APC pc, Field field, int dest, Data data)
         {
             if (InsideOld(pc))
-                return this.delegatee.LoadStack(
-                    pc,
-                    0,
-                    ConvertDest(pc, dest),
-                    ConvertOldDest(pc, dest),
-                    true,
-                    data
-                );
+                return this.delegatee
+                    .LoadStack(pc, 0, ConvertDest(pc, dest), ConvertOldDest(pc, dest), true, data);
 
             return this.delegatee.LoadStaticField(pc, field, ConvertDest(pc, dest), data);
         }
@@ -655,57 +583,33 @@ namespace Mono.CodeContracts.Static.Analysis.HeapAnalysis
         public Result NewArray<ArgList>(APC pc, TypeNode type, int dest, ArgList lengths, Data data)
             where ArgList : IIndexable<int>
         {
-            return this.delegatee.NewArray(
-                pc,
-                type,
-                ConvertDest(pc, dest),
-                ConvertSources(pc, lengths),
-                data
-            );
+            return this.delegatee
+                .NewArray(pc, type, ConvertDest(pc, dest), ConvertSources(pc, lengths), data);
         }
 
         public Result NewObj<ArgList>(APC pc, Method ctor, int dest, ArgList args, Data data)
             where ArgList : IIndexable<int>
         {
-            return this.delegatee.NewObj(
-                pc,
-                ctor,
-                ConvertDest(pc, dest),
-                ConvertSources(pc, args),
-                data
-            );
+            return this.delegatee
+                .NewObj(pc, ctor, ConvertDest(pc, dest), ConvertSources(pc, args), data);
         }
 
         public Result MkRefAny(APC pc, TypeNode type, int dest, int obj, Data data)
         {
-            return this.delegatee.MkRefAny(
-                pc,
-                type,
-                ConvertDest(pc, dest),
-                ConvertSource(pc, obj),
-                data
-            );
+            return this.delegatee
+                .MkRefAny(pc, type, ConvertDest(pc, dest), ConvertSource(pc, obj), data);
         }
 
         public Result RefAnyType(APC pc, int dest, int source, Data data)
         {
-            return this.delegatee.RefAnyType(
-                pc,
-                ConvertDest(pc, dest),
-                ConvertSource(pc, source),
-                data
-            );
+            return this.delegatee
+                .RefAnyType(pc, ConvertDest(pc, dest), ConvertSource(pc, source), data);
         }
 
         public Result RefAnyVal(APC pc, TypeNode type, int dest, int source, Data data)
         {
-            return this.delegatee.RefAnyVal(
-                pc,
-                type,
-                ConvertDest(pc, dest),
-                ConvertSource(pc, source),
-                data
-            );
+            return this.delegatee
+                .RefAnyVal(pc, type, ConvertDest(pc, dest), ConvertSource(pc, source), data);
         }
 
         public Result Rethrow(APC pc, Data data)
@@ -722,25 +626,21 @@ namespace Mono.CodeContracts.Static.Analysis.HeapAnalysis
             Data data
         )
         {
-            return this.delegatee.StoreElement(
-                pc,
-                type,
-                ConvertSource(pc, array),
-                ConvertSource(pc, index),
-                ConvertSource(pc, value),
-                data
-            );
+            return this.delegatee
+                .StoreElement(
+                    pc,
+                    type,
+                    ConvertSource(pc, array),
+                    ConvertSource(pc, index),
+                    ConvertSource(pc, value),
+                    data
+                );
         }
 
         public Result StoreField(APC pc, Field field, int obj, int value, Data data)
         {
-            return this.delegatee.StoreField(
-                pc,
-                field,
-                ConvertSource(pc, obj),
-                ConvertSource(pc, value),
-                data
-            );
+            return this.delegatee
+                .StoreField(pc, field, ConvertSource(pc, obj), ConvertSource(pc, value), data);
         }
 
         public Result StoreStaticField(APC pc, Field field, int value, Data data)
@@ -755,24 +655,14 @@ namespace Mono.CodeContracts.Static.Analysis.HeapAnalysis
 
         public Result Unbox(APC pc, TypeNode type, int dest, int obj, Data data)
         {
-            return this.delegatee.Unbox(
-                pc,
-                type,
-                ConvertDest(pc, dest),
-                ConvertSource(pc, obj),
-                data
-            );
+            return this.delegatee
+                .Unbox(pc, type, ConvertDest(pc, dest), ConvertSource(pc, obj), data);
         }
 
         public Result UnboxAny(APC pc, TypeNode type, int dest, int obj, Data data)
         {
-            return this.delegatee.UnboxAny(
-                pc,
-                type,
-                ConvertDest(pc, dest),
-                ConvertSource(pc, obj),
-                data
-            );
+            return this.delegatee
+                .UnboxAny(pc, type, ConvertDest(pc, dest), ConvertSource(pc, obj), data);
         }
 
         private Result DelegateCall<TypeList, ArgList>(
@@ -793,52 +683,56 @@ namespace Mono.CodeContracts.Static.Analysis.HeapAnalysis
                 string name = this.parent.MetaDataProvider.Name(method);
                 if (name == "Equals")
                 {
-                    return this.delegatee.Binary(
-                        pc,
-                        BinaryOperator.Cobjeq,
-                        ConvertDest(pc, dest),
-                        TryConvertUnbox(pc, args[0]),
-                        TryConvertUnbox(pc, args[1]),
-                        data
-                    );
+                    return this.delegatee
+                        .Binary(
+                            pc,
+                            BinaryOperator.Cobjeq,
+                            ConvertDest(pc, dest),
+                            TryConvertUnbox(pc, args[0]),
+                            TryConvertUnbox(pc, args[1]),
+                            data
+                        );
                 }
 
                 if (this.parent.MetaDataProvider.IsReferenceType(declaringType))
                 {
                     if (name == "op_Inequality")
                     {
-                        return this.delegatee.Binary(
-                            pc,
-                            BinaryOperator.Cne_Un,
-                            ConvertDest(pc, dest),
-                            ConvertSource(pc, args[0]),
-                            ConvertSource(pc, args[1]),
-                            data
-                        );
+                        return this.delegatee
+                            .Binary(
+                                pc,
+                                BinaryOperator.Cne_Un,
+                                ConvertDest(pc, dest),
+                                ConvertSource(pc, args[0]),
+                                ConvertSource(pc, args[1]),
+                                data
+                            );
                     }
                     if (name == "op_Equality")
                     {
-                        return this.delegatee.Binary(
-                            pc,
-                            BinaryOperator.Cobjeq,
-                            ConvertDest(pc, dest),
-                            ConvertSource(pc, args[0]),
-                            ConvertSource(pc, args[1]),
-                            data
-                        );
+                        return this.delegatee
+                            .Binary(
+                                pc,
+                                BinaryOperator.Cobjeq,
+                                ConvertDest(pc, dest),
+                                ConvertSource(pc, args[0]),
+                                ConvertSource(pc, args[1]),
+                                data
+                            );
                     }
                 }
             }
 
-            return this.delegatee.Call(
-                pc,
-                method,
-                virt,
-                extraVarargs,
-                ConvertDest(pc, dest),
-                ConvertSources(pc, args),
-                data
-            );
+            return this.delegatee
+                .Call(
+                    pc,
+                    method,
+                    virt,
+                    extraVarargs,
+                    ConvertDest(pc, dest),
+                    ConvertSources(pc, args),
+                    data
+                );
         }
         #endregion
 

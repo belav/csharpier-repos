@@ -59,9 +59,8 @@ namespace Moq
                     is StubbedPropertiesSetup sts
                 )
                 {
-                    newMock.MutableSetups.Add(
-                        new StubbedPropertiesSetup(newMock, sts.DefaultValueProvider)
-                    );
+                    newMock.MutableSetups
+                        .Add(new StubbedPropertiesSetup(newMock, sts.DefaultValueProvider));
                 }
                 if (!type.IsDelegateType())
                 {

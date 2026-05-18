@@ -113,9 +113,12 @@ public class ForeignKeyConstraint : Annotatable, IForeignKeyConstraint
             ref _foreignKeyRowValueFactory,
             this,
             static constraint =>
-                constraint
-                    .Table.Model.Model.GetRelationalDependencies()
-                    .RowForeignKeyValueFactoryFactory.Create(constraint)
+                constraint.Table
+                    .Model
+                    .Model
+                    .GetRelationalDependencies()
+                    .RowForeignKeyValueFactoryFactory
+                    .Create(constraint)
         );
 
     /// <summary>

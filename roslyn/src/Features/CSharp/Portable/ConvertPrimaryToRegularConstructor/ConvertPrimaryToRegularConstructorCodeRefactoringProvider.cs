@@ -90,8 +90,8 @@ internal sealed partial class ConvertPrimaryToRegularConstructorCodeRefactoringP
         CancellationToken cancellationToken
     )
     {
-        var compilation = await document
-            .Project.GetCompilationAsync(cancellationToken)
+        var compilation = await document.Project
+            .GetCompilationAsync(cancellationToken)
             .ConfigureAwait(false);
         var semanticModels = new ConcurrentSet<SemanticModel>();
 
@@ -118,9 +118,8 @@ internal sealed partial class ConvertPrimaryToRegularConstructorCodeRefactoringP
 
         // Get the named type and all its parameters for use during the rewrite.
         var namedType = semanticModel.GetRequiredDeclaredSymbol(typeDeclaration, cancellationToken);
-        var parameters = parameterList.Parameters.SelectAsArray(p =>
-            semanticModel.GetRequiredDeclaredSymbol(p, cancellationToken)
-        );
+        var parameters = parameterList.Parameters
+            .SelectAsArray(p => semanticModel.GetRequiredDeclaredSymbol(p, cancellationToken));
 
         // We may have to update multiple files (in the case of a partial type).  Use a solution-editor to make that
         // simple.  We will insert the regular constructor into the partial part containing the primary constructor.
@@ -134,9 +133,8 @@ internal sealed partial class ConvertPrimaryToRegularConstructorCodeRefactoringP
             is [PrimaryConstructorBaseTypeSyntax type, ..]
             ? type
             : null;
-        var methodTargetingAttributes = typeDeclaration.AttributeLists.Where(list =>
-            list.Target?.Identifier.ValueText == "method"
-        );
+        var methodTargetingAttributes = typeDeclaration.AttributeLists
+            .Where(list => list.Target?.Identifier.ValueText == "method");
 
         // Find the references to all the parameters.  This will help us determine how they're used and what change we
         // may need to make.
@@ -181,8 +179,8 @@ internal sealed partial class ConvertPrimaryToRegularConstructorCodeRefactoringP
         > GetParameterReferencesAsync()
         {
             var result = new MultiDictionary<IParameterSymbol, IdentifierNameSyntax>();
-            var documentsToSearch = namedType
-                .DeclaringSyntaxReferences.Select(r => r.SyntaxTree)
+            var documentsToSearch = namedType.DeclaringSyntaxReferences
+                .Select(r => r.SyntaxTree)
                 .Distinct()
                 .Select(solution.GetRequiredDocument)
                 .ToImmutableHashSet();
@@ -200,20 +198,20 @@ internal sealed partial class ConvertPrimaryToRegularConstructorCodeRefactoringP
                     //
                     // Note Use DistinctBy (.Net6) once available.
                     foreach (
-                        var referenceLocation in reference.Locations.Distinct(
-                            LinkedFileReferenceLocationEqualityComparer.Instance
-                        )
+                        var referenceLocation in reference.Locations
+                            .Distinct(LinkedFileReferenceLocationEqualityComparer.Instance)
                     )
                     {
                         if (referenceLocation.IsImplicit)
                             continue;
 
                         if (
-                            referenceLocation.Location.FindNode(
-                                findInsideTrivia: true,
-                                getInnermostNodeForTie: true,
-                                cancellationToken
-                            )
+                            referenceLocation.Location
+                                .FindNode(
+                                    findInsideTrivia: true,
+                                    getInnermostNodeForTie: true,
+                                    cancellationToken
+                                )
                             is not IdentifierNameSyntax identifierName
                         )
                             continue;
@@ -263,8 +261,8 @@ internal sealed partial class ConvertPrimaryToRegularConstructorCodeRefactoringP
                     && locationToField.TryGetValue(location, out var existingField)
                 )
                 {
-                    var baseFieldName = fieldNameRule
-                        .NamingStyle.MakeCompliant(parameter.Name)
+                    var baseFieldName = fieldNameRule.NamingStyle
+                        .MakeCompliant(parameter.Name)
                         .First();
                     var fieldName = NameGenerator.GenerateUniqueName(
                         baseFieldName,
@@ -432,28 +430,25 @@ internal sealed partial class ConvertPrimaryToRegularConstructorCodeRefactoringP
                         .WithAdditionalAnnotations(constructorAnnotation);
 
                     // If there is an existing non-static constructor, place it before that
-                    var firstConstructorIndex = currentTypeDeclaration.Members.IndexOf(m =>
-                        m is ConstructorDeclarationSyntax c
-                        && !c.Modifiers.Any(SyntaxKind.StaticKeyword)
-                    );
+                    var firstConstructorIndex = currentTypeDeclaration.Members
+                        .IndexOf(m =>
+                            m is ConstructorDeclarationSyntax c
+                            && !c.Modifiers.Any(SyntaxKind.StaticKeyword)
+                        );
                     if (firstConstructorIndex >= 0)
                     {
                         return currentTypeDeclaration.WithMembers(
-                            currentTypeDeclaration.Members.Insert(
-                                firstConstructorIndex,
-                                constructorDeclaration
-                            )
+                            currentTypeDeclaration.Members
+                                .Insert(firstConstructorIndex, constructorDeclaration)
                         );
                     }
 
                     // No constructors.  Place after any fields if present, or any properties if there are no fields.
-                    var lastFieldOrProperty = currentTypeDeclaration.Members.LastIndexOf(m =>
-                        m is FieldDeclarationSyntax
-                    );
+                    var lastFieldOrProperty = currentTypeDeclaration.Members
+                        .LastIndexOf(m => m is FieldDeclarationSyntax);
                     if (lastFieldOrProperty < 0)
-                        lastFieldOrProperty = currentTypeDeclaration.Members.LastIndexOf(m =>
-                            m is PropertyDeclarationSyntax
-                        );
+                        lastFieldOrProperty = currentTypeDeclaration.Members
+                            .LastIndexOf(m => m is PropertyDeclarationSyntax);
 
                     if (lastFieldOrProperty >= 0)
                     {
@@ -462,10 +457,8 @@ internal sealed partial class ConvertPrimaryToRegularConstructorCodeRefactoringP
                         );
 
                         return currentTypeDeclaration.WithMembers(
-                            currentTypeDeclaration.Members.Insert(
-                                lastFieldOrProperty + 1,
-                                constructorDeclaration
-                            )
+                            currentTypeDeclaration.Members
+                                .Insert(lastFieldOrProperty + 1, constructorDeclaration)
                         );
                     }
 
@@ -535,7 +528,8 @@ internal sealed partial class ConvertPrimaryToRegularConstructorCodeRefactoringP
             var currentRoot = mainDocumentEditor.GetChangedRoot();
             var formattingOptions = optionsProvider
                 .GetOptions(document.Project.Services)
-                .CleanupOptions.FormattingOptions;
+                .CleanupOptions
+                .FormattingOptions;
             var indentationOptions = new IndentationOptions(formattingOptions);
 
             var formattedRoot = Formatter.Format(

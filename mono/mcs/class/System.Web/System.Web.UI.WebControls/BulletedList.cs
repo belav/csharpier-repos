@@ -170,10 +170,11 @@ namespace System.Web.UI.WebControls
                     if (IsEnabled && item.Enabled)
                         writer.AddAttribute(
                             HtmlTextWriterAttribute.Href,
-                            Page.ClientScript.GetPostBackEventReference(
-                                GetPostBackOptions(index.ToString(Helpers.InvariantCulture)),
-                                true
-                            )
+                            Page.ClientScript
+                                .GetPostBackEventReference(
+                                    GetPostBackOptions(index.ToString(Helpers.InvariantCulture)),
+                                    true
+                                )
                         );
                     else
                         writer.AddAttribute(HtmlTextWriterAttribute.Disabled, "disabled", false);

@@ -138,11 +138,12 @@ namespace System.ServiceModel.Dispatcher
                 if (knownTypes == null)
                     knownTypes = new List<Type>();
                 if (type == null)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(
-                            SR.GetString(SR.SFxKnownTypeNull, description.Name)
-                        )
-                    );
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(
+                                SR.GetString(SR.SFxKnownTypeNull, description.Name)
+                            )
+                        );
                 ValidateDataContractType(type);
                 knownTypes.Add(type);
             }
@@ -199,11 +200,12 @@ namespace System.ServiceModel.Dispatcher
                 else
                 {
                     ValidateDataContractType(headerDescription.Type);
-                    messageInfo.HeaderDescriptionTable.Add(
-                        headerDescription.Name,
-                        headerDescription.Namespace,
-                        headerDescription
-                    );
+                    messageInfo.HeaderDescriptionTable
+                        .Add(
+                            headerDescription.Name,
+                            headerDescription.Namespace,
+                            headerDescription
+                        );
                 }
                 messageInfo.HeaderParts[i] = CreatePartInfo(
                     headerDescription,
@@ -360,13 +362,11 @@ namespace System.ServiceModel.Dispatcher
         )
         {
             if (writer == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentNullException("writer")
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(new ArgumentNullException("writer"));
             if (parameters == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentNullException("parameters")
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(new ArgumentNullException("parameters"));
 
             MessageInfo messageInfo;
             if (isRequest)
@@ -414,17 +414,18 @@ namespace System.ServiceModel.Dispatcher
             }
             catch (SerializationException sx)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new CommunicationException(
-                        SR.GetString(
-                            SR.SFxInvalidMessageBodyErrorSerializingParameter,
-                            part.Description.Namespace,
-                            part.Description.Name,
-                            sx.Message
-                        ),
-                        sx
-                    )
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        new CommunicationException(
+                            SR.GetString(
+                                SR.SFxInvalidMessageBodyErrorSerializingParameter,
+                                part.Description.Namespace,
+                                part.Description.Name,
+                                sx.Message
+                            ),
+                            sx
+                        )
+                    );
             }
         }
 
@@ -447,10 +448,8 @@ namespace System.ServiceModel.Dispatcher
             for (int i = 0; i < headers.Count; i++)
             {
                 MessageHeaderInfo header = headers[i];
-                MessageHeaderDescription headerDescription = messageInfo.HeaderDescriptionTable.Get(
-                    header.Name,
-                    header.Namespace
-                );
+                MessageHeaderDescription headerDescription = messageInfo.HeaderDescriptionTable
+                    .Get(header.Name, header.Namespace);
                 if (headerDescription != null)
                 {
                     if (header.MustUnderstand)
@@ -537,7 +536,8 @@ namespace System.ServiceModel.Dispatcher
                 {
                     if (multipleHeaderValues[i].Key != null)
                         parameters[i] = multipleHeaderValues[i]
-                            .Value.ToArray(multipleHeaderValues[i].Key);
+                            .Value
+                            .ToArray(multipleHeaderValues[i].Key);
                 }
             }
             if (messageInfo.UnknownHeaderDescription != null)
@@ -584,13 +584,11 @@ namespace System.ServiceModel.Dispatcher
         )
         {
             if (reader == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentNullException("reader")
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(new ArgumentNullException("reader"));
             if (parameters == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentNullException("parameters")
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(new ArgumentNullException("parameters"));
 
             MessageInfo messageInfo;
             if (isRequest)
@@ -601,18 +599,19 @@ namespace System.ServiceModel.Dispatcher
             if (messageInfo.WrapperName != null)
             {
                 if (!reader.IsStartElement(messageInfo.WrapperName, messageInfo.WrapperNamespace))
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new SerializationException(
-                            SR.GetString(
-                                SR.SFxInvalidMessageBody,
-                                messageInfo.WrapperName,
-                                messageInfo.WrapperNamespace,
-                                reader.NodeType,
-                                reader.Name,
-                                reader.NamespaceURI
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperError(
+                            new SerializationException(
+                                SR.GetString(
+                                    SR.SFxInvalidMessageBody,
+                                    messageInfo.WrapperName,
+                                    messageInfo.WrapperNamespace,
+                                    reader.NodeType,
+                                    reader.Name,
+                                    reader.NamespaceURI
+                                )
                             )
-                        )
-                    );
+                        );
                 bool isEmptyElement = reader.IsEmptyElement;
                 reader.Read();
                 if (isEmptyElement)
@@ -689,57 +688,61 @@ namespace System.ServiceModel.Dispatcher
             }
             catch (System.InvalidOperationException e)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(
-                        SR.GetString(
-                            SR.SFxInvalidMessageBodyErrorDeserializingParameter,
-                            part.Description.Namespace,
-                            part.Description.Name
-                        ),
-                        e
-                    )
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(
+                                SR.SFxInvalidMessageBodyErrorDeserializingParameter,
+                                part.Description.Namespace,
+                                part.Description.Name
+                            ),
+                            e
+                        )
+                    );
             }
             catch (System.Runtime.Serialization.InvalidDataContractException e)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidDataContractException(
-                        SR.GetString(
-                            SR.SFxInvalidMessageBodyErrorDeserializingParameter,
-                            part.Description.Namespace,
-                            part.Description.Name
-                        ),
-                        e
-                    )
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidDataContractException(
+                            SR.GetString(
+                                SR.SFxInvalidMessageBodyErrorDeserializingParameter,
+                                part.Description.Namespace,
+                                part.Description.Name
+                            ),
+                            e
+                        )
+                    );
             }
             catch (System.FormatException e)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    OperationFormatter.CreateDeserializationFailedFault(
-                        SR.GetString(
-                            SR.SFxInvalidMessageBodyErrorDeserializingParameterMore,
-                            part.Description.Namespace,
-                            part.Description.Name,
-                            e.Message
-                        ),
-                        e
-                    )
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        OperationFormatter.CreateDeserializationFailedFault(
+                            SR.GetString(
+                                SR.SFxInvalidMessageBodyErrorDeserializingParameterMore,
+                                part.Description.Namespace,
+                                part.Description.Name,
+                                e.Message
+                            ),
+                            e
+                        )
+                    );
             }
             catch (System.Runtime.Serialization.SerializationException e)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    OperationFormatter.CreateDeserializationFailedFault(
-                        SR.GetString(
-                            SR.SFxInvalidMessageBodyErrorDeserializingParameterMore,
-                            part.Description.Namespace,
-                            part.Description.Name,
-                            e.Message
-                        ),
-                        e
-                    )
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        OperationFormatter.CreateDeserializationFailedFault(
+                            SR.GetString(
+                                SR.SFxInvalidMessageBodyErrorDeserializingParameterMore,
+                                part.Description.Namespace,
+                                part.Description.Name,
+                                e.Message
+                            ),
+                            e
+                        )
+                    );
             }
 
             return val;
@@ -892,10 +895,11 @@ namespace System.ServiceModel.Dispatcher
 
             public object ReadObject(XmlDictionaryReader reader, XmlObjectSerializer serializer)
             {
-                object val = this.serializer.ReadObject(
-                    reader,
-                    false /* verifyObjectName */
-                );
+                object val = this.serializer
+                    .ReadObject(
+                        reader,
+                        false /* verifyObjectName */
+                    );
                 if (this.isQueryable && val != null)
                 {
                     return Queryable.AsQueryable((IEnumerable)val);

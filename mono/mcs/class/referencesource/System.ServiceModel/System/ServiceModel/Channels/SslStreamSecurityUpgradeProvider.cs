@@ -79,8 +79,8 @@ namespace System.ServiceModel.Channels
             BindingContext context
         )
         {
-            SecurityCredentialsManager credentialProvider =
-                context.BindingParameters.Find<SecurityCredentialsManager>();
+            SecurityCredentialsManager credentialProvider = context.BindingParameters
+                .Find<SecurityCredentialsManager>();
 
             if (credentialProvider == null)
             {
@@ -103,8 +103,8 @@ namespace System.ServiceModel.Channels
             BindingContext context
         )
         {
-            SecurityCredentialsManager credentialProvider =
-                context.BindingParameters.Find<SecurityCredentialsManager>();
+            SecurityCredentialsManager credentialProvider = context.BindingParameters
+                .Find<SecurityCredentialsManager>();
 
             if (credentialProvider == null)
             {
@@ -130,14 +130,15 @@ namespace System.ServiceModel.Channels
             );
             if (tokenProvider == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(
-                        SR.GetString(
-                            SR.ClientCredentialsUnableToCreateLocalTokenProvider,
-                            serverCertRequirement
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(
+                                SR.ClientCredentialsUnableToCreateLocalTokenProvider,
+                                serverCertRequirement
+                            )
                         )
-                    )
-                );
+                    );
             }
 
             SecurityTokenAuthenticator certificateAuthenticator =
@@ -236,9 +237,8 @@ namespace System.ServiceModel.Channels
         {
             if (upgradeInitiator == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                    "upgradeInitiator"
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperArgumentNull("upgradeInitiator");
             }
 
             SslStreamSecurityUpgradeInitiator sslUpgradeInitiator =
@@ -246,22 +246,24 @@ namespace System.ServiceModel.Channels
 
             if (sslUpgradeInitiator == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                    "upgradeInitiator",
-                    SR.GetString(SR.UnsupportedUpgradeInitiator, upgradeInitiator.GetType())
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperArgument(
+                        "upgradeInitiator",
+                        SR.GetString(SR.UnsupportedUpgradeInitiator, upgradeInitiator.GetType())
+                    );
             }
 
             if (kind != ChannelBindingKind.Endpoint)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                    "kind",
-                    SR.GetString(
-                        SR.StreamUpgradeUnsupportedChannelBindingKind,
-                        this.GetType(),
-                        kind
-                    )
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperArgument(
+                        "kind",
+                        SR.GetString(
+                            SR.StreamUpgradeUnsupportedChannelBindingKind,
+                            this.GetType(),
+                            kind
+                        )
+                    );
             }
 
             return sslUpgradeInitiator.ChannelBinding;
@@ -282,22 +284,24 @@ namespace System.ServiceModel.Channels
 
             if (sslupgradeAcceptor == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                    "upgradeAcceptor",
-                    SR.GetString(SR.UnsupportedUpgradeAcceptor, upgradeAcceptor.GetType())
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperArgument(
+                        "upgradeAcceptor",
+                        SR.GetString(SR.UnsupportedUpgradeAcceptor, upgradeAcceptor.GetType())
+                    );
             }
 
             if (kind != ChannelBindingKind.Endpoint)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                    "kind",
-                    SR.GetString(
-                        SR.StreamUpgradeUnsupportedChannelBindingKind,
-                        this.GetType(),
-                        kind
-                    )
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperArgument(
+                        "kind",
+                        SR.GetString(
+                            SR.StreamUpgradeUnsupportedChannelBindingKind,
+                            this.GetType(),
+                            kind
+                        )
+                    );
             }
 
             return sslupgradeAcceptor.ChannelBinding;
@@ -377,15 +381,16 @@ namespace System.ServiceModel.Channels
             if (x509Token == null)
             {
                 SecurityUtils.AbortTokenProviderIfRequired(this.serverTokenProvider);
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(
-                        SR.GetString(
-                            SR.InvalidTokenProvided,
-                            this.serverTokenProvider.GetType(),
-                            typeof(X509SecurityToken)
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(
+                                SR.InvalidTokenProvided,
+                                this.serverTokenProvider.GetType(),
+                                typeof(X509SecurityToken)
+                            )
                         )
-                    )
-                );
+                    );
             }
             this.serverCertificate = new X509Certificate2(x509Token.Certificate);
         }
@@ -515,11 +520,8 @@ namespace System.ServiceModel.Channels
                 SecurityUtils.EndOpenTokenProviderIfRequired(result);
                 this.onGetToken = Fx.ThunkCallback(new AsyncCallback(OnGetToken));
 
-                IAsyncResult getTokenResult = parent.serverTokenProvider.BeginGetToken(
-                    timeoutHelper.RemainingTime(),
-                    onGetToken,
-                    this
-                );
+                IAsyncResult getTokenResult = parent.serverTokenProvider
+                    .BeginGetToken(timeoutHelper.RemainingTime(), onGetToken, this);
 
                 if (!getTokenResult.CompletedSynchronously)
                 {
@@ -741,18 +743,20 @@ namespace System.ServiceModel.Channels
             }
             catch (AuthenticationException exception)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new SecurityNegotiationException(exception.Message, exception)
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        new SecurityNegotiationException(exception.Message, exception)
+                    );
             }
             catch (IOException ioException)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new SecurityNegotiationException(
-                        SR.GetString(SR.NegotiationFailedIO, ioException.Message),
-                        ioException
-                    )
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        new SecurityNegotiationException(
+                            SR.GetString(SR.NegotiationFailedIO, ioException.Message),
+                            ioException
+                        )
+                    );
             }
             if (SecurityUtils.ShouldValidateSslCipherStrength())
             {
@@ -821,8 +825,9 @@ namespace System.ServiceModel.Channels
                 try
                 {
                     SecurityToken token = new X509SecurityToken(certificate2, false);
-                    ReadOnlyCollection<IAuthorizationPolicy> authorizationPolicies =
-                        this.parent.ClientCertificateAuthenticator.ValidateToken(token);
+                    ReadOnlyCollection<IAuthorizationPolicy> authorizationPolicies = this.parent
+                        .ClientCertificateAuthenticator
+                        .ValidateToken(token);
                     this.clientSecurity = new SecurityMessageProperty();
                     this.clientSecurity.TransportToken = new SecurityTokenSpecification(
                         token,
@@ -893,14 +898,15 @@ namespace System.ServiceModel.Channels
                     false,
                     this.acceptor.ValidateRemoteCertificate
                 );
-                return this.sslStream.BeginAuthenticateAsServer(
-                    this.acceptor.parent.ServerCertificate,
-                    this.acceptor.parent.RequireClientCertificate,
-                    this.acceptor.parent.SslProtocols,
-                    false,
-                    callback,
-                    this
-                );
+                return this.sslStream
+                    .BeginAuthenticateAsServer(
+                        this.acceptor.parent.ServerCertificate,
+                        this.acceptor.parent.RequireClientCertificate,
+                        this.acceptor.parent.SslProtocols,
+                        false,
+                        callback,
+                        this
+                    );
             }
 
             protected override Stream OnCompleteAuthenticateAsServer(IAsyncResult result)
@@ -973,10 +979,8 @@ namespace System.ServiceModel.Channels
 
             SecurityTokenResolver dummy;
             this.serverCertificateAuthenticator = (
-                parent.ClientSecurityTokenManager.CreateSecurityTokenAuthenticator(
-                    serverCertRequirement,
-                    out dummy
-                )
+                parent.ClientSecurityTokenManager
+                    .CreateSecurityTokenAuthenticator(serverCertRequirement, out dummy)
             );
 
             if (parent.RequireClientCertificate)
@@ -989,20 +993,19 @@ namespace System.ServiceModel.Channels
                 clientCertRequirement.TargetAddress = remoteAddress;
                 clientCertRequirement.Via = via;
                 clientCertRequirement.TransportScheme = this.parent.Scheme;
-                this.clientCertificateProvider =
-                    parent.ClientSecurityTokenManager.CreateSecurityTokenProvider(
-                        clientCertRequirement
-                    );
+                this.clientCertificateProvider = parent.ClientSecurityTokenManager
+                    .CreateSecurityTokenProvider(clientCertRequirement);
                 if (clientCertificateProvider == null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(
-                            SR.GetString(
-                                SR.ClientCredentialsUnableToCreateLocalTokenProvider,
-                                clientCertRequirement
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(
+                                SR.GetString(
+                                    SR.ClientCredentialsUnableToCreateLocalTokenProvider,
+                                    clientCertRequirement
+                                )
                             )
-                        )
-                    );
+                        );
                 }
             }
         }
@@ -1182,27 +1185,30 @@ namespace System.ServiceModel.Channels
             }
             catch (SecurityTokenValidationException tokenValidationException)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new SecurityNegotiationException(
-                        tokenValidationException.Message,
-                        tokenValidationException
-                    )
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        new SecurityNegotiationException(
+                            tokenValidationException.Message,
+                            tokenValidationException
+                        )
+                    );
             }
             catch (AuthenticationException exception)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new SecurityNegotiationException(exception.Message, exception)
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        new SecurityNegotiationException(exception.Message, exception)
+                    );
             }
             catch (IOException ioException)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new SecurityNegotiationException(
-                        SR.GetString(SR.NegotiationFailedIO, ioException.Message),
-                        ioException
-                    )
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        new SecurityNegotiationException(
+                            SR.GetString(SR.NegotiationFailedIO, ioException.Message),
+                            ioException
+                        )
+                    );
             }
 
             if (SecurityUtils.ShouldValidateSslCipherStrength())
@@ -1255,11 +1261,9 @@ namespace System.ServiceModel.Channels
             AuthorizationContext authzContext = this.serverSecurity
                 .ServiceSecurityContext
                 .AuthorizationContext;
-            this.parent.IdentityVerifier.EnsureOutgoingIdentity(
-                this.RemoteAddress,
-                this.Via,
-                authzContext
-            );
+            this.parent
+                .IdentityVerifier
+                .EnsureOutgoingIdentity(this.RemoteAddress, this.Via, authzContext);
 
             return true;
         }
@@ -1302,23 +1306,25 @@ namespace System.ServiceModel.Channels
 
                 try
                 {
-                    return this.sslStream.BeginAuthenticateAsClient(
-                        string.Empty,
-                        this.clientCertificates,
-                        this.initiator.parent.SslProtocols,
-                        false,
-                        callback,
-                        this
-                    );
+                    return this.sslStream
+                        .BeginAuthenticateAsClient(
+                            string.Empty,
+                            this.clientCertificates,
+                            this.initiator.parent.SslProtocols,
+                            false,
+                            callback,
+                            this
+                        );
                 }
                 catch (SecurityTokenValidationException tokenValidationException)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new SecurityNegotiationException(
-                            tokenValidationException.Message,
-                            tokenValidationException
-                        )
-                    );
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperError(
+                            new SecurityNegotiationException(
+                                tokenValidationException.Message,
+                                tokenValidationException
+                            )
+                        );
                 }
             }
 
@@ -1330,12 +1336,13 @@ namespace System.ServiceModel.Channels
                 }
                 catch (SecurityTokenValidationException tokenValidationException)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new SecurityNegotiationException(
-                            tokenValidationException.Message,
-                            tokenValidationException
-                        )
-                    );
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperError(
+                            new SecurityNegotiationException(
+                                tokenValidationException.Message,
+                                tokenValidationException
+                            )
+                        );
                 }
 
                 if (SecurityUtils.ShouldValidateSslCipherStrength())
@@ -1448,11 +1455,8 @@ namespace System.ServiceModel.Channels
             bool HandleOpenTokenProviderComplete(IAsyncResult result)
             {
                 SecurityUtils.EndOpenTokenProviderIfRequired(result);
-                IAsyncResult getTokenResult = parent.clientCertificateProvider.BeginGetToken(
-                    timeoutHelper.RemainingTime(),
-                    onGetClientToken,
-                    this
-                );
+                IAsyncResult getTokenResult = parent.clientCertificateProvider
+                    .BeginGetToken(timeoutHelper.RemainingTime(), onGetClientToken, this);
 
                 if (!getTokenResult.CompletedSynchronously)
                 {

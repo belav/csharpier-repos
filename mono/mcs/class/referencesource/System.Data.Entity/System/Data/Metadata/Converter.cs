@@ -703,12 +703,13 @@ namespace System.Data.Metadata.Edm
             EdmMember member;
             // make sure that the end is not initialized as of yet
             if (
-                !associationType.Members.TryGetValue(
-                    end.Name,
-                    false /*ignoreCase*/
-                    ,
-                    out member
-                )
+                !associationType.Members
+                    .TryGetValue(
+                        end.Name,
+                        false /*ignoreCase*/
+                        ,
+                        out member
+                    )
             )
             {
                 // Create the end member and add the operations
@@ -932,9 +933,8 @@ namespace System.Data.Metadata.Edm
                             == BuiltInTypeKind.PrimitiveType
                     );
                     // try to get the instance of the primitive type from the item collection so that it back pointer is set.
-                    propertyType = convertedItemCache.ItemCollection.GetItem<PrimitiveType>(
-                        somProperty.TypeUsage.EdmType.FullName
-                    );
+                    propertyType = convertedItemCache.ItemCollection
+                        .GetItem<PrimitiveType>(somProperty.TypeUsage.EdmType.FullName);
                 }
                 else
                 {
@@ -1017,10 +1017,8 @@ namespace System.Data.Metadata.Edm
             );
 
             Som.IRelationshipEnd somRelationshipEnd = null;
-            somNavigationProperty.Relationship.TryGetEnd(
-                somNavigationProperty.ToEnd.Name,
-                out somRelationshipEnd
-            );
+            somNavigationProperty.Relationship
+                .TryGetEnd(somNavigationProperty.ToEnd.Name, out somRelationshipEnd);
             if (somRelationshipEnd.Multiplicity == RelationshipMultiplicity.Many)
             {
                 edmType = toEndEntityType.GetCollectionType();
@@ -1220,8 +1218,8 @@ namespace System.Data.Metadata.Edm
                         "functionImportEntityContainer must be specified during function import conversion"
                     );
                     EntityContainer entityContainer = functionImportEntityContainer;
-                    entitySets = somFunctionImport
-                        .ReturnTypeList.Select(returnType =>
+                    entitySets = somFunctionImport.ReturnTypeList
+                        .Select(returnType =>
                             null != returnType.EntitySet
                                 ? GetEntitySet(returnType.EntitySet, functionImportEntityContainer)
                                 : null
@@ -1301,11 +1299,8 @@ namespace System.Data.Metadata.Edm
             //ssdl we could see functions many times.
             GlobalItem returnFunction = null;
             Debug.Assert(
-                !convertedItemCache.ItemCollection.TryGetValue(
-                    function.Identity,
-                    false,
-                    out returnFunction
-                ),
+                !convertedItemCache.ItemCollection
+                    .TryGetValue(function.Identity, false, out returnFunction),
                 "Function duplicates must be checked by som"
             );
 
@@ -1473,8 +1468,7 @@ namespace System.Data.Metadata.Edm
                         somParameter != null
                         && somParameter.HasUserDefinedFacets
                         && somFunction.Schema.DataModel
-                            == System
-                                .Data
+                            == System.Data
                                 .EntityModel
                                 .SchemaObjectModel
                                 .SchemaDataModelOption

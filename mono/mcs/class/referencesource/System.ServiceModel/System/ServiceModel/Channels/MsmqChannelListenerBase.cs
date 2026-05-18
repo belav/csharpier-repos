@@ -42,9 +42,8 @@ namespace System.ServiceModel.Channels
         internal Exception NormalizePoisonException(long lookupId, Exception innerException)
         {
             if (this.ReceiveParameters.ExactlyOnce)
-                return DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new MsmqPoisonMessageException(lookupId, innerException)
-                );
+                return DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(new MsmqPoisonMessageException(lookupId, innerException));
             else if (null != innerException)
                 return DiagnosticUtility.ExceptionUtility.ThrowHelperError(innerException);
             else
@@ -156,11 +155,12 @@ namespace System.ServiceModel.Channels
                 // for WebHosted case.
                 ITransportManagerRegistration registration;
                 if (
-                    this.TransportManagerTable.TryLookupUri(
-                        this.Uri,
-                        TransportDefaults.HostNameComparisonMode,
-                        out registration
-                    )
+                    this.TransportManagerTable
+                        .TryLookupUri(
+                            this.Uri,
+                            TransportDefaults.HostNameComparisonMode,
+                            out registration
+                        )
                 )
                 {
                     // no need to use TransportManagerContainer because we never use the transport manager from channels
@@ -186,8 +186,8 @@ namespace System.ServiceModel.Channels
                 == MsmqAuthenticationMode.Certificate
             )
             {
-                SecurityCredentialsManager credentials =
-                    context.BindingParameters.Find<SecurityCredentialsManager>();
+                SecurityCredentialsManager credentials = context.BindingParameters
+                    .Find<SecurityCredentialsManager>();
                 if (credentials == null)
                 {
                     credentials = ServiceCredentials.CreateDefaultCredentials();
@@ -222,9 +222,8 @@ namespace System.ServiceModel.Channels
                     try
                     {
                         certificate = new X509Certificate2(
-                            msmqMessage.SenderCertificate.GetBufferCopy(
-                                msmqMessage.SenderCertificateLength.Value
-                            )
+                            msmqMessage.SenderCertificate
+                                .GetBufferCopy(msmqMessage.SenderCertificateLength.Value)
                         );
                         X509SecurityToken token = new X509SecurityToken(certificate, false);
                         ReadOnlyCollection<IAuthorizationPolicy> authorizationPolicies =
@@ -241,15 +240,17 @@ namespace System.ServiceModel.Channels
                     }
                     catch (SecurityTokenValidationException ex)
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new ProtocolException(SR.GetString(SR.MsmqBadCertificate), ex)
-                        );
+                        throw DiagnosticUtility.ExceptionUtility
+                            .ThrowHelperError(
+                                new ProtocolException(SR.GetString(SR.MsmqBadCertificate), ex)
+                            );
                     }
                     catch (System.Security.Cryptography.CryptographicException ex)
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new ProtocolException(SR.GetString(SR.MsmqBadCertificate), ex)
-                        );
+                        throw DiagnosticUtility.ExceptionUtility
+                            .ThrowHelperError(
+                                new ProtocolException(SR.GetString(SR.MsmqBadCertificate), ex)
+                            );
                     }
                 }
                 else if (
@@ -257,13 +258,11 @@ namespace System.ServiceModel.Channels
                     == this.ReceiveParameters.TransportSecurity.MsmqAuthenticationMode
                 )
                 {
-                    byte[] sid = msmqMessage.SenderId.GetBufferCopy(
-                        msmqMessage.SenderIdLength.Value
-                    );
+                    byte[] sid = msmqMessage.SenderId
+                        .GetBufferCopy(msmqMessage.SenderIdLength.Value);
                     if (0 == sid.Length)
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new ProtocolException(SR.GetString(SR.MsmqNoSid))
-                        );
+                        throw DiagnosticUtility.ExceptionUtility
+                            .ThrowHelperError(new ProtocolException(SR.GetString(SR.MsmqNoSid)));
 
                     SecurityIdentifier securityIdentifier = new SecurityIdentifier(sid, 0);
                     List<Claim> claims = new List<Claim>(2);

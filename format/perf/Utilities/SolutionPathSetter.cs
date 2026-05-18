@@ -13,7 +13,15 @@ namespace Microsoft.CodeAnalysis.Tools.Perf
         public static string RepositoryRootDirectory =>
             Directory
                 .GetParent(Environment.CurrentDirectory)
-                .Parent.Parent.Parent.Parent.Parent.Parent.Parent.Parent.FullName;
+                .Parent
+                .Parent
+                .Parent
+                .Parent
+                .Parent
+                .Parent
+                .Parent
+                .Parent
+                .FullName;
 
         public static void SetCurrentDirectory()
         {

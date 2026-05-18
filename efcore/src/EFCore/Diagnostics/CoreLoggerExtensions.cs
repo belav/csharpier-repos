@@ -2469,9 +2469,8 @@ public static class CoreLoggerExtensions
         return d.GenerateMessage(
             string.Join(
                 ", ",
-                p.FirstPropertyCollection.Select(n =>
-                    n.Item2.ShortDisplayName() + "." + n.Item1!.Name
-                )
+                p.FirstPropertyCollection
+                    .Select(n => n.Item2.ShortDisplayName() + "." + n.Item1!.Name)
             ),
             p.SecondPropertyCollection.First().Item1?.Name
         );
@@ -3004,7 +3003,8 @@ public static class CoreLoggerExtensions
             p.Property.Name,
             p.OldValue,
             p.NewValue,
-            p.EntityEntry.GetInfrastructure()
+            p.EntityEntry
+                .GetInfrastructure()
                 .BuildCurrentValuesString(
                     p.Property.DeclaringType.ContainingEntityType.FindPrimaryKey()!.Properties
                 )
@@ -3140,7 +3140,8 @@ public static class CoreLoggerExtensions
             p.Property.Name,
             p.OldValue,
             p.NewValue,
-            p.EntityEntry.GetInfrastructure()
+            p.EntityEntry
+                .GetInfrastructure()
                 .BuildCurrentValuesString(
                     p.Property.DeclaringType.ContainingEntityType.FindPrimaryKey()!.Properties
                 )
@@ -3287,7 +3288,8 @@ public static class CoreLoggerExtensions
             p.Removed.Count(),
             p.Navigation.DeclaringEntityType.ShortName(),
             p.Navigation.Name,
-            p.EntityEntry.GetInfrastructure()
+            p.EntityEntry
+                .GetInfrastructure()
                 .BuildCurrentValuesString(
                     p.Navigation.DeclaringEntityType.FindPrimaryKey()!.Properties
                 )
@@ -3434,7 +3436,8 @@ public static class CoreLoggerExtensions
             p.Removed.Count(),
             p.Navigation.DeclaringEntityType.ShortName(),
             p.Navigation.Name,
-            p.EntityEntry.GetInfrastructure()
+            p.EntityEntry
+                .GetInfrastructure()
                 .BuildCurrentValuesString(
                     p.Navigation.DeclaringEntityType.FindPrimaryKey()!.Properties
                 )
@@ -3567,7 +3570,8 @@ public static class CoreLoggerExtensions
         return d.GenerateMessage(
             p.Navigation.DeclaringEntityType.ShortName(),
             p.Navigation.Name,
-            p.EntityEntry.GetInfrastructure()
+            p.EntityEntry
+                .GetInfrastructure()
                 .BuildCurrentValuesString(
                     p.Navigation.DeclaringEntityType.FindPrimaryKey()!.Properties
                 )
@@ -3728,7 +3732,8 @@ public static class CoreLoggerExtensions
         return d.GenerateMessage(
             p.EntityEntry.Context.GetType().ShortDisplayName(),
             p.EntityEntry.Metadata.ShortName(),
-            p.EntityEntry.GetInfrastructure()
+            p.EntityEntry
+                .GetInfrastructure()
                 .BuildCurrentValuesString(p.EntityEntry.Metadata.FindPrimaryKey()!.Properties)
         );
     }
@@ -3858,7 +3863,8 @@ public static class CoreLoggerExtensions
         var p = (StateChangedEventData)payload;
         return d.GenerateMessage(
             p.EntityEntry.Metadata.ShortName(),
-            p.EntityEntry.GetInfrastructure()
+            p.EntityEntry
+                .GetInfrastructure()
                 .BuildCurrentValuesString(p.EntityEntry.Metadata.FindPrimaryKey()!.Properties),
             p.EntityEntry.Context.GetType().ShortDisplayName(),
             p.OldState,
@@ -4125,11 +4131,13 @@ public static class CoreLoggerExtensions
         var p = (CascadeDeleteEventData)payload;
         return d.GenerateMessage(
             p.EntityEntry.Metadata.ShortName(),
-            p.EntityEntry.GetInfrastructure()
+            p.EntityEntry
+                .GetInfrastructure()
                 .BuildCurrentValuesString(p.EntityEntry.Metadata.FindPrimaryKey()!.Properties),
             p.State,
             p.ParentEntityEntry.Metadata.ShortName(),
-            p.ParentEntityEntry.GetInfrastructure()
+            p.ParentEntityEntry
+                .GetInfrastructure()
                 .BuildCurrentValuesString(p.ParentEntityEntry.Metadata.FindPrimaryKey()!.Properties)
         );
     }
@@ -4459,7 +4467,8 @@ public static class CoreLoggerExtensions
         var p = (CascadeDeleteOrphanEventData)payload;
         return d.GenerateMessage(
             p.EntityEntry.Metadata.ShortName(),
-            p.EntityEntry.GetInfrastructure()
+            p.EntityEntry
+                .GetInfrastructure()
                 .BuildCurrentValuesString(p.EntityEntry.Metadata.FindPrimaryKey()!.Properties),
             p.State,
             p.ParentEntityType.ShortName()

@@ -250,10 +250,8 @@ namespace ILCompiler
                 {
                     ImmutableArray<Section> result = base.CreateSections();
                     return result.AddRange(
-                        _emitter._customSections.Select(s => new Section(
-                            s.Name,
-                            SectionCharacteristics.MemRead
-                        ))
+                        _emitter._customSections
+                            .Select(s => new Section(s.Name, SectionCharacteristics.MemRead))
                     );
                 }
 

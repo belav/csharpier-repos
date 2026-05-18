@@ -407,13 +407,14 @@ namespace System.Workflow.ComponentModel.Design
                 )
                 {
                     e.Graphics.FillRectangle(linearGradientBrush, rectangle);
-                    e.Graphics.DrawLine(
-                        e.DesignerTheme.BorderPen,
-                        rectangle.Left,
-                        rectangle.Bottom,
-                        rectangle.Right,
-                        rectangle.Bottom
-                    );
+                    e.Graphics
+                        .DrawLine(
+                            e.DesignerTheme.BorderPen,
+                            rectangle.Left,
+                            rectangle.Bottom,
+                            rectangle.Right,
+                            rectangle.Bottom
+                        );
                 }
 
                 base.OnPaint(e);
@@ -525,13 +526,14 @@ namespace System.Workflow.ComponentModel.Design
                     )
                     {
                         e.Graphics.FillRectangle(linearGradientBrush, rectangle);
-                        e.Graphics.DrawLine(
-                            e.DesignerTheme.BorderPen,
-                            rectangle.Left,
-                            rectangle.Top,
-                            rectangle.Right,
-                            rectangle.Top
-                        );
+                        e.Graphics
+                            .DrawLine(
+                                e.DesignerTheme.BorderPen,
+                                rectangle.Left,
+                                rectangle.Top,
+                                rectangle.Right,
+                                rectangle.Top
+                            );
                     }
                 }
 

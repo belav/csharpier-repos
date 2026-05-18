@@ -186,8 +186,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
                 if (
                     previousContext != null
                     && previousContext.MethodContextReuseConstraints.HasValue
-                    && previousContext
-                        .MethodContextReuseConstraints.GetValueOrDefault()
+                    && previousContext.MethodContextReuseConstraints
+                        .GetValueOrDefault()
                         .AreSatisfied(moduleVersionId, methodToken, methodVersion, offset)
                 )
                 {

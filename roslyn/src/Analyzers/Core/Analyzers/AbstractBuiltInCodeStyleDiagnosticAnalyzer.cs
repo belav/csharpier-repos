@@ -106,9 +106,8 @@ namespace Microsoft.CodeAnalysis.CodeStyle
             {
                 Debug.Assert(
                     option != null
-                        == descriptor.CustomTags.Contains(
-                            WellKnownDiagnosticTags.CustomSeverityConfigurable
-                        )
+                        == descriptor.CustomTags
+                            .Contains(WellKnownDiagnosticTags.CustomSeverityConfigurable)
                 );
                 AddDiagnosticIdToOptionMapping(descriptor.Id, option);
             }

@@ -75,14 +75,15 @@ namespace System.ServiceModel.Channels
             {
                 if (this.currentState != CommunicationState.Created)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(
-                            SR.GetString(
-                                SR.CommunicationObjectCannotBeModified,
-                                this.GetType().ToString()
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(
+                                SR.GetString(
+                                    SR.CommunicationObjectCannotBeModified,
+                                    this.GetType().ToString()
+                                )
                             )
-                        )
-                    );
+                        );
                 }
 
                 this.currentState = CommunicationState.Opened;
@@ -96,14 +97,15 @@ namespace System.ServiceModel.Channels
             {
                 if (this.currentState != CommunicationState.Opened)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(
-                            SR.GetString(
-                                SR.CommunicationObjectCannotBeModified,
-                                this.GetType().ToString()
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(
+                                SR.GetString(
+                                    SR.CommunicationObjectCannotBeModified,
+                                    this.GetType().ToString()
+                                )
                             )
-                        )
-                    );
+                        );
                 }
 
                 this.currentState = CommunicationState.Closed;
@@ -156,12 +158,13 @@ namespace System.ServiceModel.Channels
                 {
                     if (state.LastMatch != null)
                     {
-                        state.LastMatch.MatchLost(
-                            this.host,
-                            state.QueueName,
-                            state.IsPrivate,
-                            state.CallbackState
-                        );
+                        state.LastMatch
+                            .MatchLost(
+                                this.host,
+                                state.QueueName,
+                                state.IsPrivate,
+                                state.CallbackState
+                            );
                     }
 
                     state.LastMatchLength = matchLength;
@@ -183,11 +186,8 @@ namespace System.ServiceModel.Channels
             {
                 if (state.LastMatch != null)
                 {
-                    state.CallbackState = state.LastMatch.MatchFound(
-                        this.host,
-                        state.QueueName,
-                        state.IsPrivate
-                    );
+                    state.CallbackState = state.LastMatch
+                        .MatchFound(this.host, state.QueueName, state.IsPrivate);
                 }
             }
         }
@@ -212,12 +212,13 @@ namespace System.ServiceModel.Channels
             {
                 if (state.LastMatch != null)
                 {
-                    state.LastMatch.MatchLost(
-                        this.host,
-                        state.QueueName,
-                        state.IsPrivate,
-                        state.CallbackState
-                    );
+                    state.LastMatch
+                        .MatchLost(
+                            this.host,
+                            state.QueueName,
+                            state.IsPrivate,
+                            state.CallbackState
+                        );
                 }
 
                 state.LastMatchLength = bestMatchLength;
@@ -363,12 +364,13 @@ namespace System.ServiceModel.Channels
                 knownQueues.Remove(state.QueueName);
                 if (state.LastMatch != null)
                 {
-                    state.LastMatch.MatchLost(
-                        this.host,
-                        state.QueueName,
-                        state.IsPrivate,
-                        state.CallbackState
-                    );
+                    state.LastMatch
+                        .MatchLost(
+                            this.host,
+                            state.QueueName,
+                            state.IsPrivate,
+                            state.CallbackState
+                        );
                 }
             }
         }
@@ -380,12 +382,13 @@ namespace System.ServiceModel.Channels
             {
                 if (state.LastMatch == filter)
                 {
-                    state.LastMatch.MatchLost(
-                        this.host,
-                        state.QueueName,
-                        state.IsPrivate,
-                        state.CallbackState
-                    );
+                    state.LastMatch
+                        .MatchLost(
+                            this.host,
+                            state.QueueName,
+                            state.IsPrivate,
+                            state.CallbackState
+                        );
                     state.LastMatch = null;
                     state.LastMatchLength = -1;
                     MatchQueue(state);

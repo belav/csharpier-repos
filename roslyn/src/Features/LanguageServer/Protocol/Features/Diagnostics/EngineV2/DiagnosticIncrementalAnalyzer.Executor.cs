@@ -165,12 +165,13 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
                     return true;
 
                 return isOpenDocument
-                    && previousData.Items.Any(static d =>
-                        d.Severity
-                            is DiagnosticSeverity.Error
-                                or DiagnosticSeverity.Warning
-                                or DiagnosticSeverity.Info
-                    );
+                    && previousData.Items
+                        .Any(static d =>
+                            d.Severity
+                                is DiagnosticSeverity.Error
+                                    or DiagnosticSeverity.Warning
+                                    or DiagnosticSeverity.Info
+                        );
             }
         }
 
@@ -452,9 +453,10 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
                 return result;
             }
 
-            var compilerAnalyzer = project.Solution.State.Analyzers.GetCompilerDiagnosticAnalyzer(
-                project.Language
-            );
+            var compilerAnalyzer = project.Solution
+                .State
+                .Analyzers
+                .GetCompilerDiagnosticAnalyzer(project.Language);
             if (compilerAnalyzer == null)
             {
                 // this language doesn't support compiler analyzer
@@ -587,8 +589,7 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
                                     project,
                                     ideOptions,
                                     analyzersToRun,
-                                    compilationWithAnalyzers
-                                        .AnalysisOptions
+                                    compilationWithAnalyzers.AnalysisOptions
                                         .ReportSuppressedDiagnostics,
                                     cancellationToken
                                 )
@@ -837,8 +838,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
 
             foreach (var document in project.Documents)
             {
-                var loadDiagnostic = await document
-                    .State.GetLoadDiagnosticAsync(cancellationToken)
+                var loadDiagnostic = await document.State
+                    .GetLoadDiagnosticAsync(cancellationToken)
                     .ConfigureAwait(false);
                 if (loadDiagnostic != null)
                 {

@@ -55,7 +55,10 @@ public partial class MvcAnalyzer
                     context.ReportDiagnostic(
                         Diagnostic.Create(
                             DiagnosticDescriptors.AmbiguousActionRoute,
-                            ambiguousActionRoute.RouteUsageModel.UsageContext.RouteToken.GetLocation(),
+                            ambiguousActionRoute.RouteUsageModel
+                                .UsageContext
+                                .RouteToken
+                                .GetLocation(),
                             ambiguousActionRoute.RouteUsageModel.RoutePattern.Root.ToString()
                         )
                     );

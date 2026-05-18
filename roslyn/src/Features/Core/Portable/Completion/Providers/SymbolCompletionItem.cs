@@ -158,8 +158,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
                     .ToList();
                 using var _ = ArrayBuilder<ISymbol>.GetInstance(out var symbols);
 
-                var compilation = await document
-                    .Project.GetRequiredCompilationAsync(cancellationToken)
+                var compilation = await document.Project
+                    .GetRequiredCompilationAsync(cancellationToken)
                     .ConfigureAwait(false);
                 DecodeSymbols(idList, compilation, symbols);
 
@@ -172,8 +172,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
                         foreach (var id in linkedIds)
                         {
                             var linkedDoc = document.Project.Solution.GetRequiredDocument(id);
-                            var linkedCompilation = await linkedDoc
-                                .Project.GetRequiredCompilationAsync(cancellationToken)
+                            var linkedCompilation = await linkedDoc.Project
+                                .GetRequiredCompilationAsync(cancellationToken)
                                 .ConfigureAwait(false);
                             DecodeSymbols(idList, linkedCompilation, symbols);
                         }

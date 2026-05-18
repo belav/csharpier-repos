@@ -202,16 +202,16 @@ namespace Microsoft.CodeAnalysis.Workspaces.ProjectSystem
                 }
             }
 
-            var compilationOptions = _commandLineArgumentsForCommandLine
-                .CompilationOptions.WithConcurrentBuild(concurrent: false)
+            var compilationOptions = _commandLineArgumentsForCommandLine.CompilationOptions
+                .WithConcurrentBuild(concurrent: false)
                 .WithXmlReferenceResolver(
                     new XmlFileResolver(_commandLineArgumentsForCommandLine.BaseDirectory)
                 )
                 .WithAssemblyIdentityComparer(DesktopAssemblyIdentityComparer.Default)
                 .WithStrongNameProvider(
                     new DesktopStrongNameProvider(
-                        _commandLineArgumentsForCommandLine
-                            .KeyFileSearchPaths.WhereNotNull()
+                        _commandLineArgumentsForCommandLine.KeyFileSearchPaths
+                            .WhereNotNull()
                             .ToImmutableArray()
                     )
                 );
@@ -221,10 +221,8 @@ namespace Microsoft.CodeAnalysis.Workspaces.ProjectSystem
                 _commandLineArgumentsForCommandLine.DocumentationPath != null
                     ? DocumentationMode.Diagnose
                     : DocumentationMode.Parse;
-            var parseOptions =
-                _commandLineArgumentsForCommandLine.ParseOptions.WithDocumentationMode(
-                    documentationMode
-                );
+            var parseOptions = _commandLineArgumentsForCommandLine.ParseOptions
+                .WithDocumentationMode(documentationMode);
 
             // We've computed what the base values should be; we now give an opportunity for any host-specific settings to be computed
             // before we apply them

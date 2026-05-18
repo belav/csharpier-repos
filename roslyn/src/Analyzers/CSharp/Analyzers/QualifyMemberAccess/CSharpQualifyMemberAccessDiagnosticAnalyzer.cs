@@ -72,10 +72,8 @@ namespace Microsoft.CodeAnalysis.CSharp.QualifyMemberAccess
                     containingSymbol.Kind == SymbolKind.Field
                     || containingSymbol.Kind == SymbolKind.Property
                 )
-                && containingSymbol
-                    .DeclaringSyntaxReferences.Select(declaringSyntaxReferences =>
-                        declaringSyntaxReferences.GetSyntax()
-                    )
+                && containingSymbol.DeclaringSyntaxReferences
+                    .Select(declaringSyntaxReferences => declaringSyntaxReferences.GetSyntax())
                     .Any(declaringSyntax =>
                         IsInPropertyInitialization(declaringSyntax, node)
                         || IsInFieldInitialization(declaringSyntax, node)

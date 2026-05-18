@@ -41,10 +41,8 @@ public class EnumIConvertibleToType
             string s1 = i1.ToType(typeof(string), null) as string;
             if (s1 != "blue")
             {
-                TestLibrary.TestFramework.LogError(
-                    "001",
-                    "The result is not the value as expected"
-                );
+                TestLibrary.TestFramework
+                    .LogError("001", "The result is not the value as expected");
                 retVal = false;
             }
         }
@@ -70,10 +68,8 @@ public class EnumIConvertibleToType
             byte s1 = (byte)i1.ToType(typeof(byte), null);
             if (s1 != 101)
             {
-                TestLibrary.TestFramework.LogError(
-                    "003",
-                    "The result is not the value as expected"
-                );
+                TestLibrary.TestFramework
+                    .LogError("003", "The result is not the value as expected");
                 retVal = false;
             }
         }
@@ -90,9 +86,8 @@ public class EnumIConvertibleToType
     {
         bool retVal = true;
 
-        TestLibrary.TestFramework.BeginScenario(
-            "PosTest3: Convert an enum of negative value to single"
-        );
+        TestLibrary.TestFramework
+            .BeginScenario("PosTest3: Convert an enum of negative value to single");
 
         try
         {
@@ -101,10 +96,8 @@ public class EnumIConvertibleToType
             float s1 = (float)i1.ToType(typeof(float), null);
             if (s1 != -123456789.0f)
             {
-                TestLibrary.TestFramework.LogError(
-                    "005",
-                    "The result is not the value as expected"
-                );
+                TestLibrary.TestFramework
+                    .LogError("005", "The result is not the value as expected");
                 retVal = false;
             }
         }
@@ -121,9 +114,8 @@ public class EnumIConvertibleToType
     {
         bool retVal = true;
 
-        TestLibrary.TestFramework.BeginScenario(
-            "PosTest4: Convert an enum of int64.MaxValue to Int64 "
-        );
+        TestLibrary.TestFramework
+            .BeginScenario("PosTest4: Convert an enum of int64.MaxValue to Int64 ");
 
         try
         {
@@ -132,10 +124,8 @@ public class EnumIConvertibleToType
             long s1 = (long)i1.ToType(typeof(long), null);
             if (s1 != Int64.MaxValue)
             {
-                TestLibrary.TestFramework.LogError(
-                    "007",
-                    "The result is not the value as expected"
-                );
+                TestLibrary.TestFramework
+                    .LogError("007", "The result is not the value as expected");
                 retVal = false;
             }
         }
@@ -152,9 +142,8 @@ public class EnumIConvertibleToType
     {
         bool retVal = true;
 
-        TestLibrary.TestFramework.BeginScenario(
-            "PosTest5: Convert an enum of int32.MinValue to Int32"
-        );
+        TestLibrary.TestFramework
+            .BeginScenario("PosTest5: Convert an enum of int32.MinValue to Int32");
 
         try
         {
@@ -163,10 +152,8 @@ public class EnumIConvertibleToType
             int s1 = (int)i1.ToType(typeof(int), null);
             if (s1 != Int32.MinValue)
             {
-                TestLibrary.TestFramework.LogError(
-                    "009",
-                    "The result is not the value as expected"
-                );
+                TestLibrary.TestFramework
+                    .LogError("009", "The result is not the value as expected");
                 retVal = false;
             }
         }
@@ -183,9 +170,8 @@ public class EnumIConvertibleToType
     {
         bool retVal = true;
 
-        TestLibrary.TestFramework.BeginScenario(
-            "PosTest6:Set the first argument as type of double"
-        );
+        TestLibrary.TestFramework
+            .BeginScenario("PosTest6:Set the first argument as type of double");
 
         try
         {
@@ -194,10 +180,8 @@ public class EnumIConvertibleToType
             double s1 = (double)i1.ToType(typeof(double), null);
             if (s1 != (double)Int64.MaxValue)
             {
-                TestLibrary.TestFramework.LogError(
-                    "011",
-                    "The result is not the value as expected"
-                );
+                TestLibrary.TestFramework
+                    .LogError("011", "The result is not the value as expected");
                 retVal = false;
             }
         }
@@ -224,10 +208,8 @@ public class EnumIConvertibleToType
             e_test e1 = e_test.itemB;
             IConvertible i1 = e1 as IConvertible;
             Int16 s1 = (Int16)i1.ToType(typeof(Int16), null);
-            TestLibrary.TestFramework.LogError(
-                "101",
-                "The OverflowException was not thrown as expected"
-            );
+            TestLibrary.TestFramework
+                .LogError("101", "The OverflowException was not thrown as expected");
             retVal = false;
         }
         catch (OverflowException) { }

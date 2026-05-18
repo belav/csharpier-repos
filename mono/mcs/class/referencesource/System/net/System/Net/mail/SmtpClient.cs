@@ -186,8 +186,7 @@ namespace System.Net.Mail
 
                 deliveryMethod = MailConfiguration.Smtp.DeliveryMethod;
                 if (MailConfiguration.Smtp.SpecifiedPickupDirectory != null)
-                    pickupDirectoryLocation = MailConfiguration
-                        .Smtp
+                    pickupDirectoryLocation = MailConfiguration.Smtp
                         .SpecifiedPickupDirectory
                         .PickupDirectoryLocation;
             }

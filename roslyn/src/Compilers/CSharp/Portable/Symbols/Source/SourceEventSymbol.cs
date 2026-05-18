@@ -797,12 +797,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             // event (incorrectly) has a different type than the overridden event.  In such cases,
             // we want to retain the original (incorrect) type to avoid hiding the type given in source.
             if (
-                type.Type.Equals(
-                    overriddenEventType,
-                    TypeCompareKind.IgnoreCustomModifiersAndArraySizesAndLowerBounds
-                        | TypeCompareKind.IgnoreNullableModifiersForReferenceTypes
-                        | TypeCompareKind.IgnoreDynamic
-                )
+                type.Type
+                    .Equals(
+                        overriddenEventType,
+                        TypeCompareKind.IgnoreCustomModifiersAndArraySizesAndLowerBounds
+                            | TypeCompareKind.IgnoreNullableModifiersForReferenceTypes
+                            | TypeCompareKind.IgnoreDynamic
+                    )
             )
             {
                 type = type.WithTypeAndModifiers(
@@ -899,10 +900,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                         // We are passing ignoreImplementationInInterfacesIfResultIsNotReady: true to avoid a cycle. If false is passed, FindImplementationForInterfaceMemberInNonInterface
                         // will look how event accessors are implemented and we end up here again since we will need to know their signature for that.
                         this
-                            == this.containingType.FindImplementationForInterfaceMemberInNonInterface(
-                                interfaceMember,
-                                ignoreImplementationInInterfacesIfResultIsNotReady: true
-                            )
+                            == this.containingType
+                                .FindImplementationForInterfaceMemberInNonInterface(
+                                    interfaceMember,
+                                    ignoreImplementationInInterfacesIfResultIsNotReady: true
+                                )
                     ) //slow check (necessary and sufficient)
                     {
                         sawImplicitImplementation = true;

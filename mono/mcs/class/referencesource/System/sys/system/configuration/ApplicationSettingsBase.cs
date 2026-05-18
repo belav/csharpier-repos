@@ -527,8 +527,7 @@ namespace System.Configuration
                             if (spdr != null)
                             {
                                 spdr.Initialize(null, null);
-                                spdr.ApplicationName = ConfigurationManagerInternalFactory
-                                    .Instance
+                                spdr.ApplicationName = ConfigurationManagerInternalFactory.Instance
                                     .ExeProductName;
 
                                 // See if we already have a provider of the same name in our collection. If so,
@@ -734,8 +733,7 @@ namespace System.Configuration
 
                     //Initialize the SettingsProvider
                     provider.Initialize(null, null);
-                    provider.ApplicationName = ConfigurationManagerInternalFactory
-                        .Instance
+                    provider.ApplicationName = ConfigurationManagerInternalFactory.Instance
                         .ExeProductName;
                     _init.Provider = provider;
                 }
@@ -841,9 +839,10 @@ namespace System.Configuration
             if (IsClickOnceDeployed(AppDomain.CurrentDomain))
             {
                 // Now check if this is the first run since deployment or last upgrade
-                return System.Deployment.Internal.InternalActivationContextHelper.IsFirstRun(
-                    actCtx
-                );
+                return System.Deployment
+                    .Internal
+                    .InternalActivationContextHelper
+                    .IsFirstRun(actCtx);
             }
 
             return false;

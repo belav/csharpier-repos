@@ -977,11 +977,12 @@ namespace System.Net
                     {
                         using (currentUser.Impersonate())
                         {
-                            return Task<Stream>.Factory.FromAsync(
-                                this.BeginGetRequestStream,
-                                this.EndGetRequestStream,
-                                null
-                            );
+                            return Task<Stream>.Factory
+                                .FromAsync(
+                                    this.BeginGetRequestStream,
+                                    this.EndGetRequestStream,
+                                    null
+                                );
                         }
                     }
                 });
@@ -989,11 +990,8 @@ namespace System.Net
             else
             {
                 return Task.Run(() =>
-                    Task<Stream>.Factory.FromAsync(
-                        this.BeginGetRequestStream,
-                        this.EndGetRequestStream,
-                        null
-                    )
+                    Task<Stream>.Factory
+                        .FromAsync(this.BeginGetRequestStream, this.EndGetRequestStream, null)
                 );
             }
         }
@@ -1030,11 +1028,8 @@ namespace System.Net
                     {
                         using (currentUser.Impersonate())
                         {
-                            return Task<WebResponse>.Factory.FromAsync(
-                                this.BeginGetResponse,
-                                this.EndGetResponse,
-                                null
-                            );
+                            return Task<WebResponse>.Factory
+                                .FromAsync(this.BeginGetResponse, this.EndGetResponse, null);
                         }
                     }
                 });
@@ -1042,11 +1037,8 @@ namespace System.Net
             else
             {
                 return Task.Run(() =>
-                    Task<WebResponse>.Factory.FromAsync(
-                        this.BeginGetResponse,
-                        this.EndGetResponse,
-                        null
-                    )
+                    Task<WebResponse>.Factory
+                        .FromAsync(this.BeginGetResponse, this.EndGetResponse, null)
                 );
             }
         }

@@ -78,8 +78,7 @@ namespace tests.system_data_dll.System_Data
 
             dtParent = GHTUtils.DataProvider.CreateParentDataTable();
             ds.Tables.Add(dtParent);
-            System.Globalization.CultureInfo culInfo = System
-                .Globalization
+            System.Globalization.CultureInfo culInfo = System.Globalization
                 .CultureInfo
                 .CurrentCulture;
 

@@ -29,16 +29,10 @@ namespace System.Text.Json.Serialization.Converters
         public FSharpValueOptionConverter(JsonConverter<TElement> elementConverter)
         {
             _elementConverter = elementConverter;
-            _optionValueGetter =
-                FSharpCoreReflectionProxy.Instance.CreateFSharpValueOptionValueGetter<
-                    TValueOption,
-                    TElement
-                >();
-            _optionConstructor =
-                FSharpCoreReflectionProxy.Instance.CreateFSharpValueOptionSomeConstructor<
-                    TValueOption,
-                    TElement
-                >();
+            _optionValueGetter = FSharpCoreReflectionProxy.Instance
+                .CreateFSharpValueOptionValueGetter<TValueOption, TElement>();
+            _optionConstructor = FSharpCoreReflectionProxy.Instance
+                .CreateFSharpValueOptionSomeConstructor<TValueOption, TElement>();
             ConverterStrategy = elementConverter.ConverterStrategy;
         }
 
@@ -57,8 +51,7 @@ namespace System.Text.Json.Serialization.Converters
                 return true;
             }
 
-            state.Current.JsonPropertyInfo = state
-                .Current
+            state.Current.JsonPropertyInfo = state.Current
                 .JsonTypeInfo
                 .ElementTypeInfo!
                 .PropertyInfoForTypeInfo;
@@ -97,8 +90,7 @@ namespace System.Text.Json.Serialization.Converters
 
             TElement element = _optionValueGetter(ref value);
 
-            state.Current.JsonPropertyInfo = state
-                .Current
+            state.Current.JsonPropertyInfo = state.Current
                 .JsonTypeInfo
                 .ElementTypeInfo!
                 .PropertyInfoForTypeInfo;

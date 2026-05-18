@@ -88,7 +88,8 @@ namespace System.Data.Objects.Internal
             // Note: there is only ever one constraint per association type
             ReferentialConstraint constraint = (
                 (AssociationType)relatedEnd.RelationMetadata
-            ).ReferentialConstraints.First();
+            ).ReferentialConstraints
+                .First();
             Debug.Assert(
                 constraint.FromRole.Identity == relatedEnd.TargetRoleName,
                 "Unexpected constraint role"

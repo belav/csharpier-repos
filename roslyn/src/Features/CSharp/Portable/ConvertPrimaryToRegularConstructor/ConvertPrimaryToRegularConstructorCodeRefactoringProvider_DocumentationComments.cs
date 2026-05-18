@@ -68,10 +68,11 @@ internal sealed partial class ConvertPrimaryToRegularConstructorCodeRefactoringP
         if (
             content.All(c =>
                 c is XmlTextSyntax xmlText
-                && xmlText.TextTokens.All(t =>
-                    t.Kind() == SyntaxKind.XmlTextLiteralNewLineToken
-                    || string.IsNullOrWhiteSpace(t.Text)
-                )
+                && xmlText.TextTokens
+                    .All(t =>
+                        t.Kind() == SyntaxKind.XmlTextLiteralNewLineToken
+                        || string.IsNullOrWhiteSpace(t.Text)
+                    )
             )
         )
         {

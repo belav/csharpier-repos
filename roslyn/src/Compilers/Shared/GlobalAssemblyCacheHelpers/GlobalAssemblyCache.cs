@@ -25,9 +25,11 @@ namespace Microsoft.CodeAnalysis
             }
             else
             {
-                return System.Runtime.InteropServices.RuntimeInformation.FrameworkDescription.Contains(
-                    ".NET Framework"
-                )
+                return System.Runtime
+                    .InteropServices
+                    .RuntimeInformation
+                    .FrameworkDescription
+                    .Contains(".NET Framework")
                     ? new ClrGlobalAssemblyCache()
                     : new DotNetCoreGlobalAssemblyCache();
             }

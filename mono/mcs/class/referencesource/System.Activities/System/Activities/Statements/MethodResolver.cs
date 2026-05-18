@@ -717,12 +717,8 @@ namespace System.Activities.Statements
             {
                 // Try the default binder first. Never gives false positive, but will fail to detect methods w/ parameter array because
                 // it will not expand the formal parameter list when checking against actual parameters.
-                MethodBase result = Type.DefaultBinder.SelectMethod(
-                    bindingAttr,
-                    methodCandidates,
-                    types,
-                    modifiers
-                );
+                MethodBase result = Type.DefaultBinder
+                    .SelectMethod(bindingAttr, methodCandidates, types, modifiers);
 
                 // Could be false negative, check for parameter array and if so condense it back to an array before re-checking.
                 if (result == null)
@@ -734,7 +730,8 @@ namespace System.Activities.Statements
                         if (MethodResolver.HaveParameterArray(formalParams)) // Check if the last parameter of method is marked w/ "params" attribute
                         {
                             Type elementType = formalParams[formalParams.Length - 1]
-                                .ParameterType.GetElementType();
+                                .ParameterType
+                                .GetElementType();
 
                             bool allCompatible = true;
                             // There could be more actual parameters than formal parameters, because the formal parameter is a params T'[] for some T'.
@@ -762,12 +759,13 @@ namespace System.Activities.Statements
                             typeArray[typeArray.Length - 1] = elementType.MakeArrayType();
 
                             // Recheck the condensed array
-                            MethodBase newFound = Type.DefaultBinder.SelectMethod(
-                                bindingAttr,
-                                new MethodBase[] { methodInfo },
-                                typeArray,
-                                modifiers
-                            );
+                            MethodBase newFound = Type.DefaultBinder
+                                .SelectMethod(
+                                    bindingAttr,
+                                    new MethodBase[] { methodInfo },
+                                    typeArray,
+                                    modifiers
+                                );
                             if (result != null && newFound != null)
                             {
                                 string type = newFound.ReflectedType.Name;
@@ -776,16 +774,17 @@ namespace System.Activities.Statements
                                     bindingAttr == staticBindingFlags
                                         ? staticString
                                         : instanceString;
-                                throw FxTrace.Exception.AsError(
-                                    new AmbiguousMatchException(
-                                        SR.DuplicateMethodFound(
-                                            type,
-                                            bindingType,
-                                            name,
-                                            this.parentActivity.DisplayName
+                                throw FxTrace.Exception
+                                    .AsError(
+                                        new AmbiguousMatchException(
+                                            SR.DuplicateMethodFound(
+                                                type,
+                                                bindingType,
+                                                name,
+                                                this.parentActivity.DisplayName
+                                            )
                                         )
-                                    )
-                                );
+                                    );
                             }
                             else
                             {
@@ -1144,11 +1143,12 @@ namespace System.Activities.Statements
                 {
                     try
                     {
-                        this.instance.ReturnValue = this.executor.InvokeAndUnwrapExceptions(
-                            this.executor.asyncFunc,
-                            this.instance.TargetObject,
-                            this.instance.ActualParameters
-                        );
+                        this.instance.ReturnValue = this.executor
+                            .InvokeAndUnwrapExceptions(
+                                this.executor.asyncFunc,
+                                this.instance.TargetObject,
+                                this.instance.ActualParameters
+                            );
                     }
                     catch (Exception e)
                     {

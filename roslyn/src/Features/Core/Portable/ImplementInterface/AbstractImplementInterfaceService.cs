@@ -119,8 +119,7 @@ namespace Microsoft.CodeAnalysis.ImplementInterface
             }
 
             if (
-                state
-                    .MembersWithoutExplicitOrImplicitImplementationWhichCanBeImplicitlyImplemented
+                state.MembersWithoutExplicitOrImplicitImplementationWhichCanBeImplicitlyImplemented
                     .Length > 0
             )
             {

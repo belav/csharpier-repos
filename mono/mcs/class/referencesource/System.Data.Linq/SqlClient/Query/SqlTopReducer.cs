@@ -49,13 +49,14 @@ namespace System.Data.Linq.SqlClient
                     else
                     {
                         // cannot be converted to literal value. note that this select is not SQL2K compatible
-                        this.annotations.Add(
-                            select.Top,
-                            new SqlServerCompatibilityAnnotation(
-                                Strings.SourceExpressionAnnotation(select.Top.SourceExpression),
-                                SqlProvider.ProviderMode.Sql2000
-                            )
-                        );
+                        this.annotations
+                            .Add(
+                                select.Top,
+                                new SqlServerCompatibilityAnnotation(
+                                    Strings.SourceExpressionAnnotation(select.Top.SourceExpression),
+                                    SqlProvider.ProviderMode.Sql2000
+                                )
+                            );
                     }
                 }
                 return select;

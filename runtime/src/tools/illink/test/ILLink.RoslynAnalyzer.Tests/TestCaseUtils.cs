@@ -301,11 +301,12 @@ namespace ILLink.RoslynAnalyzer.Tests
                 string argName;
                 if (argument.NameEquals != null)
                 {
-                    argName = argument
-                        .NameEquals.ChildNodes()
+                    argName = argument.NameEquals
+                        .ChildNodes()
                         .OfType<IdentifierNameSyntax>()
                         .First()
-                        .Identifier.ValueText;
+                        .Identifier
+                        .ValueText;
                 }
                 else if (argument.NameColon is NameColonSyntax nameColon)
                 {

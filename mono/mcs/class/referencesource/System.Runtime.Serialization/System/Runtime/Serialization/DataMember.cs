@@ -357,10 +357,8 @@ namespace System.Runtime.Serialization
             Dictionary<DataContract, DataContract> boundContracts
         )
         {
-            DataContract memberTypeContract = this.MemberTypeContract.BindGenericParameters(
-                paramContracts,
-                boundContracts
-            );
+            DataContract memberTypeContract = this.MemberTypeContract
+                .BindGenericParameters(paramContracts, boundContracts);
             DataMember boundDataMember = new DataMember(
                 memberTypeContract,
                 this.Name,

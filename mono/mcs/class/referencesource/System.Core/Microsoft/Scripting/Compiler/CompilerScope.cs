@@ -221,22 +221,24 @@ namespace System.Linq.Expressions.Compiler
                 {
                     EmitGet(NearestHoistedLocals.SelfVariable);
                     lc.EmitConstantArray(indexes.ToArray());
-                    lc.IL.Emit(
-                        OpCodes.Call,
-                        typeof(RuntimeOps).GetMethod(
-                            "CreateRuntimeVariables",
-                            new[] { typeof(object[]), typeof(long[]) }
-                        )
-                    );
+                    lc.IL
+                        .Emit(
+                            OpCodes.Call,
+                            typeof(RuntimeOps).GetMethod(
+                                "CreateRuntimeVariables",
+                                new[] { typeof(object[]), typeof(long[]) }
+                            )
+                        );
                     return;
                 }
             }
 
             // No visible variables
-            lc.IL.Emit(
-                OpCodes.Call,
-                typeof(RuntimeOps).GetMethod("CreateRuntimeVariables", Type.EmptyTypes)
-            );
+            lc.IL
+                .Emit(
+                    OpCodes.Call,
+                    typeof(RuntimeOps).GetMethod("CreateRuntimeVariables", Type.EmptyTypes)
+                );
             return;
         }
 

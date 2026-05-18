@@ -77,7 +77,8 @@ public class SqlServerSequenceValueGeneratorTest
                     ),
                     new SqlServerTypeMappingSource(
                         TestServiceFactory.Instance.Create<TypeMappingSourceDependencies>(),
-                        TestServiceFactory.Instance.Create<RelationalTypeMappingSourceDependencies>()
+                        TestServiceFactory.Instance
+                            .Create<RelationalTypeMappingSourceDependencies>()
                     )
                 )
             ),
@@ -197,7 +198,8 @@ public class SqlServerSequenceValueGeneratorTest
                     ),
                     new SqlServerTypeMappingSource(
                         TestServiceFactory.Instance.Create<TypeMappingSourceDependencies>(),
-                        TestServiceFactory.Instance.Create<RelationalTypeMappingSourceDependencies>()
+                        TestServiceFactory.Instance
+                            .Create<RelationalTypeMappingSourceDependencies>()
                     )
                 )
             ),
@@ -213,8 +215,8 @@ public class SqlServerSequenceValueGeneratorTest
     {
         serviceProvider ??= SqlServerTestHelpers.Instance.CreateServiceProvider();
 
-        return SqlServerTestHelpers
-            .Instance.CreateContextServices(serviceProvider)
+        return SqlServerTestHelpers.Instance
+            .CreateContextServices(serviceProvider)
             .GetRequiredService<ISqlServerConnection>();
     }
 

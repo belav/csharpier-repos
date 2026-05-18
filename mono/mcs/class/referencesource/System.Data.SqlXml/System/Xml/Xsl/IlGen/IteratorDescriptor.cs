@@ -534,9 +534,8 @@ namespace System.Xml.Xsl.IlGen
 
                 case ItemLocation.Current:
                     this.helper.Emit(OpCodes.Ldloca, this.storage.CurrentLocation);
-                    this.helper.Call(
-                        this.storage.CurrentLocation.LocalType.GetMethod("get_Current")
-                    );
+                    this.helper
+                        .Call(this.storage.CurrentLocation.LocalType.GetMethod("get_Current"));
                     break;
 
                 default:
@@ -594,10 +593,11 @@ namespace System.Xml.Xsl.IlGen
             {
                 if (this.storage.IsCached)
                     EnsureLocal(
-                        this.helper.DeclareLocal(
-                            locName,
-                            typeof(IList<>).MakeGenericType(this.storage.ItemStorageType)
-                        )
+                        this.helper
+                            .DeclareLocal(
+                                locName,
+                                typeof(IList<>).MakeGenericType(this.storage.ItemStorageType)
+                            )
                     );
                 else
                     EnsureLocal(this.helper.DeclareLocal(locName, this.storage.ItemStorageType));
@@ -735,9 +735,8 @@ namespace System.Xml.Xsl.IlGen
             // Destination type must be item, so generate code to create an XmlAtomicValue
             this.helper.LoadInteger(this.helper.StaticData.DeclareXmlType(xmlType));
             this.helper.LoadQueryRuntime();
-            this.helper.Call(
-                XmlILMethods.StorageMethods[this.storage.ItemStorageType].ToAtomicValue
-            );
+            this.helper
+                .Call(XmlILMethods.StorageMethods[this.storage.ItemStorageType].ToAtomicValue);
 
             SetStorageType:
             this.storage = this.storage.ToStorageType(storageTypeDest);

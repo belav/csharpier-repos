@@ -294,7 +294,8 @@ public class ValueConverterTest
     {
         var converter = (
             (ValueConverter<Beatles, string>)_enumToNumber.ComposeWith(_intToString)
-        ).ConvertToProviderExpression.Compile();
+        ).ConvertToProviderExpression
+            .Compile();
 
         Assert.Equal("7", converter(Beatles.John));
         Assert.Equal("4", converter(Beatles.Paul));
@@ -323,7 +324,8 @@ public class ValueConverterTest
     {
         var converter = (
             (ValueConverter<Beatles, string>)_enumToNumber.ComposeWith(_intToString)
-        ).ConvertFromProviderExpression.Compile();
+        ).ConvertFromProviderExpression
+            .Compile();
 
         Assert.Equal(Beatles.John, converter("7"));
         Assert.Equal(Beatles.Paul, converter("4"));

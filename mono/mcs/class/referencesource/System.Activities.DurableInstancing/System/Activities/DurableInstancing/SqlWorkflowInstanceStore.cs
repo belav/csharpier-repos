@@ -99,14 +99,15 @@ namespace System.Activities.DurableInstancing
             {
                 if (value.CompareTo(SqlWorkflowInstanceStore.minimumTimeSpanAllowed) < 0)
                 {
-                    throw FxTrace.Exception.ArgumentOutOfRange(
-                        "lockRenewalPeriod",
-                        value,
-                        SR.InvalidLockRenewalPeriod(
+                    throw FxTrace.Exception
+                        .ArgumentOutOfRange(
+                            "lockRenewalPeriod",
                             value,
-                            SqlWorkflowInstanceStore.minimumTimeSpanAllowed
-                        )
-                    );
+                            SR.InvalidLockRenewalPeriod(
+                                value,
+                                SqlWorkflowInstanceStore.minimumTimeSpanAllowed
+                            )
+                        );
                 }
                 ThrowIfReadOnly();
                 this.hostLockRenewalPeriod = value;
@@ -150,14 +151,15 @@ namespace System.Activities.DurableInstancing
             {
                 if (value.CompareTo(SqlWorkflowInstanceStore.minimumTimeSpanAllowed) < 0)
                 {
-                    throw FxTrace.Exception.ArgumentOutOfRange(
-                        "instancePersistenceEventDetectionPeriod",
-                        value,
-                        SR.InvalidRunnableInstancesDetectionPeriod(
+                    throw FxTrace.Exception
+                        .ArgumentOutOfRange(
+                            "instancePersistenceEventDetectionPeriod",
                             value,
-                            SqlWorkflowInstanceStore.minimumTimeSpanAllowed
-                        )
-                    );
+                            SR.InvalidRunnableInstancesDetectionPeriod(
+                                value,
+                                SqlWorkflowInstanceStore.minimumTimeSpanAllowed
+                            )
+                        );
                 }
                 ThrowIfReadOnly();
                 this.instancePersistenceEventDetectionPeriod = value;
@@ -247,9 +249,8 @@ namespace System.Activities.DurableInstancing
 
             if (promoteAsVariant == null && promoteAsBinary == null)
             {
-                throw FxTrace.Exception.AsError(
-                    new InvalidOperationException(SR.NoPromotionsDefined(name))
-                );
+                throw FxTrace.Exception
+                    .AsError(new InvalidOperationException(SR.NoPromotionsDefined(name)));
             }
 
             if (
@@ -258,15 +259,16 @@ namespace System.Activities.DurableInstancing
                     > SqlWorkflowInstanceStoreConstants.MaximumPropertiesPerPromotion
             )
             {
-                throw FxTrace.Exception.Argument(
-                    "promoteAsVariant",
-                    SR.PromotionTooManyDefined(
-                        name,
-                        promoteAsVariant.Count(),
-                        "variant",
-                        SqlWorkflowInstanceStoreConstants.MaximumPropertiesPerPromotion
-                    )
-                );
+                throw FxTrace.Exception
+                    .Argument(
+                        "promoteAsVariant",
+                        SR.PromotionTooManyDefined(
+                            name,
+                            promoteAsVariant.Count(),
+                            "variant",
+                            SqlWorkflowInstanceStoreConstants.MaximumPropertiesPerPromotion
+                        )
+                    );
             }
 
             if (
@@ -275,15 +277,16 @@ namespace System.Activities.DurableInstancing
                     > SqlWorkflowInstanceStoreConstants.MaximumPropertiesPerPromotion
             )
             {
-                throw FxTrace.Exception.Argument(
-                    "promoteAsVariant",
-                    SR.PromotionTooManyDefined(
-                        name,
-                        promoteAsVariant.Count(),
-                        "binary",
-                        SqlWorkflowInstanceStoreConstants.MaximumPropertiesPerPromotion
-                    )
-                );
+                throw FxTrace.Exception
+                    .Argument(
+                        "promoteAsVariant",
+                        SR.PromotionTooManyDefined(
+                            name,
+                            promoteAsVariant.Count(),
+                            "binary",
+                            SqlWorkflowInstanceStoreConstants.MaximumPropertiesPerPromotion
+                        )
+                    );
             }
 
             HashSet<XName> promotedXNames = new HashSet<XName>();
@@ -295,20 +298,22 @@ namespace System.Activities.DurableInstancing
                 {
                     if (xname == null)
                     {
-                        throw FxTrace.Exception.AsError(
-                            new InvalidOperationException(
-                                SR.CanNotDefineNullForAPromotion("variant", name)
-                            )
-                        );
+                        throw FxTrace.Exception
+                            .AsError(
+                                new InvalidOperationException(
+                                    SR.CanNotDefineNullForAPromotion("variant", name)
+                                )
+                            );
                     }
 
                     if (promotedXNames.Contains(xname))
                     {
-                        throw FxTrace.Exception.AsError(
-                            new InvalidOperationException(
-                                SR.CannotPromoteXNameTwiceInPromotion(xname.ToString(), name)
-                            )
-                        );
+                        throw FxTrace.Exception
+                            .AsError(
+                                new InvalidOperationException(
+                                    SR.CannotPromoteXNameTwiceInPromotion(xname.ToString(), name)
+                                )
+                            );
                     }
 
                     variant.Add(xname);
@@ -324,20 +329,22 @@ namespace System.Activities.DurableInstancing
                 {
                     if (name == null)
                     {
-                        throw FxTrace.Exception.AsError(
-                            new InvalidOperationException(
-                                SR.CanNotDefineNullForAPromotion("binary", xname)
-                            )
-                        );
+                        throw FxTrace.Exception
+                            .AsError(
+                                new InvalidOperationException(
+                                    SR.CanNotDefineNullForAPromotion("binary", xname)
+                                )
+                            );
                     }
 
                     if (promotedXNames.Contains(xname))
                     {
-                        throw FxTrace.Exception.AsError(
-                            new InvalidOperationException(
-                                SR.CannotPromoteXNameTwiceInPromotion(xname.ToString(), name)
-                            )
-                        );
+                        throw FxTrace.Exception
+                            .AsError(
+                                new InvalidOperationException(
+                                    SR.CannotPromoteXNameTwiceInPromotion(xname.ToString(), name)
+                                )
+                            );
                     }
 
                     binary.Add(xname);
@@ -372,9 +379,8 @@ namespace System.Activities.DurableInstancing
                 && !(command is CreateWorkflowOwnerWithIdentityCommand)
             )
             {
-                throw FxTrace.Exception.AsError(
-                    new InstanceOwnerException(command.Name, this.storeLock.LockOwnerId)
-                );
+                throw FxTrace.Exception
+                    .AsError(new InstanceOwnerException(command.Name, this.storeLock.LockOwnerId));
             }
 
             if (this.IsRetryCommand(command))
@@ -885,10 +891,8 @@ namespace System.Activities.DurableInstancing
                     TD.UnlockInstanceException(e.Message);
                 }
                 // Keep on going - if problems are severe the host will be faulted and we'll give up then.
-                unlockInstanceState.BackoffTimeoutHelper.WaitAndBackoff(
-                    this.scheduledUnlockInstance,
-                    unlockInstanceState
-                );
+                unlockInstanceState.BackoffTimeoutHelper
+                    .WaitAndBackoff(this.scheduledUnlockInstance, unlockInstanceState);
             }
         }
 
@@ -903,9 +907,8 @@ namespace System.Activities.DurableInstancing
         {
             if (this.isReadOnly)
             {
-                throw FxTrace.Exception.AsError(
-                    new InvalidOperationException(SR.InstanceStoreReadOnly)
-                );
+                throw FxTrace.Exception
+                    .AsError(new InvalidOperationException(SR.InstanceStoreReadOnly));
             }
         }
 
@@ -933,10 +936,8 @@ namespace System.Activities.DurableInstancing
                     BackoffTimeoutHelper = new BackoffTimeoutHelper(TimeSpan.MaxValue),
                 };
 
-                unlockInstanceState.BackoffTimeoutHelper.WaitAndBackoff(
-                    this.scheduledUnlockInstance,
-                    unlockInstanceState
-                );
+                unlockInstanceState.BackoffTimeoutHelper
+                    .WaitAndBackoff(this.scheduledUnlockInstance, unlockInstanceState);
             }
         }
 

@@ -778,8 +778,7 @@ namespace System.Xml
                     }
                     else
                     {
-                        XmlAttributeCollection attrs = ((XmlAttribute)_node)
-                            .OwnerElement
+                        XmlAttributeCollection attrs = ((XmlAttribute)_node).OwnerElement
                             .Attributes;
                         bool bFound = false;
                         foreach (XmlAttribute attr in attrs)

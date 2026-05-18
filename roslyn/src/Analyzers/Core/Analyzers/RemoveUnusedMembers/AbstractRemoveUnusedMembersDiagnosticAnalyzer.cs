@@ -495,8 +495,7 @@ namespace Microsoft.CodeAnalysis.RemoveUnusedMembers
 
             private void AnalyzeInvocationOperation(OperationAnalysisContext operationContext)
             {
-                var targetMethod = ((IInvocationOperation)operationContext.Operation)
-                    .TargetMethod
+                var targetMethod = ((IInvocationOperation)operationContext.Operation).TargetMethod
                     .OriginalDefinition;
 
                 // A method invocation is considered as a read reference to the symbol
@@ -532,10 +531,8 @@ namespace Microsoft.CodeAnalysis.RemoveUnusedMembers
                 // Workaround for https://github.com/dotnet/roslyn/issues/19965
                 // IOperation API does not expose potential references to methods/properties within
                 // a bound method group/property group.
-                var symbolInfo = nameofArgument.SemanticModel!.GetSymbolInfo(
-                    nameofArgument.Syntax,
-                    operationContext.CancellationToken
-                );
+                var symbolInfo = nameofArgument.SemanticModel!
+                    .GetSymbolInfo(nameofArgument.Syntax, operationContext.CancellationToken);
                 foreach (var symbol in symbolInfo.GetAllSymbols())
                 {
                     switch (symbol.Kind)
@@ -552,8 +549,7 @@ namespace Microsoft.CodeAnalysis.RemoveUnusedMembers
 
             private void AnalyzeObjectCreationOperation(OperationAnalysisContext operationContext)
             {
-                var constructor = ((IObjectCreationOperation)operationContext.Operation)
-                    .Constructor
+                var constructor = ((IObjectCreationOperation)operationContext.Operation).Constructor
                     ?.OriginalDefinition;
 
                 // An object creation is considered as a read reference to the constructor
@@ -572,8 +568,8 @@ namespace Microsoft.CodeAnalysis.RemoveUnusedMembers
                 }
 
                 if (
-                    symbolEndContext
-                        .Symbol.GetAttributes()
+                    symbolEndContext.Symbol
+                        .GetAttributes()
                         .Any(
                             static (a, self) => a.AttributeClass == self._structLayoutAttributeType,
                             this
@@ -594,9 +590,8 @@ namespace Microsoft.CodeAnalysis.RemoveUnusedMembers
                     out var debuggerDisplayAttributeArguments
                 );
 
-                var entryPoint = symbolEndContext.Compilation.GetEntryPoint(
-                    symbolEndContext.CancellationToken
-                );
+                var entryPoint = symbolEndContext.Compilation
+                    .GetEntryPoint(symbolEndContext.CancellationToken);
 
                 var namedType = (INamedTypeSymbol)symbolEndContext.Symbol;
                 foreach (var member in namedType.GetMembers())
@@ -728,8 +723,8 @@ namespace Microsoft.CodeAnalysis.RemoveUnusedMembers
             )
             {
                 foreach (
-                    var tree in namedTypeSymbol
-                        .Locations.Select(l => l.SourceTree)
+                    var tree in namedTypeSymbol.Locations
+                        .Select(l => l.SourceTree)
                         .Distinct()
                         .WhereNotNull()
                 )
@@ -776,7 +771,8 @@ namespace Microsoft.CodeAnalysis.RemoveUnusedMembers
                             lazyModel ??= compilation.GetSemanticModel(syntaxTree);
                             var symbol = lazyModel
                                 .GetSymbolInfo(node, cancellationToken)
-                                .Symbol?.OriginalDefinition;
+                                .Symbol
+                                ?.OriginalDefinition;
 
                             if (IsCandidateSymbol(symbol))
                                 builder.Add(symbol);
@@ -1007,11 +1003,13 @@ namespace Microsoft.CodeAnalysis.RemoveUnusedMembers
                                     // Ignore methods which make a type awaitable.
                                     if (
                                         _iNotifyCompletionType != null
-                                        && Roslyn.Utilities.ImmutableArrayExtensions.Contains(
-                                            methodSymbol.ContainingType.AllInterfaces,
-                                            _iNotifyCompletionType,
-                                            SymbolEqualityComparer.Default
-                                        )
+                                        && Roslyn.Utilities
+                                            .ImmutableArrayExtensions
+                                            .Contains(
+                                                methodSymbol.ContainingType.AllInterfaces,
+                                                _iNotifyCompletionType,
+                                                SymbolEqualityComparer.Default
+                                            )
                                         && methodSymbol.Name is "GetAwaiter" or "GetResult"
                                     )
                                     {
@@ -1030,22 +1028,20 @@ namespace Microsoft.CodeAnalysis.RemoveUnusedMembers
                         case SymbolKind.Property:
                             if (
                                 _iNotifyCompletionType != null
-                                && memberSymbol.ContainingType.AllInterfaces.Contains(
-                                    _iNotifyCompletionType
-                                )
+                                && memberSymbol.ContainingType
+                                    .AllInterfaces
+                                    .Contains(_iNotifyCompletionType)
                                 && memberSymbol.Name == "IsCompleted"
                             )
                             {
                                 return false;
                             }
 
-                            return ((IPropertySymbol)memberSymbol)
-                                .ExplicitInterfaceImplementations
+                            return ((IPropertySymbol)memberSymbol).ExplicitInterfaceImplementations
                                 .IsEmpty;
 
                         case SymbolKind.Event:
-                            return ((IEventSymbol)memberSymbol)
-                                .ExplicitInterfaceImplementations
+                            return ((IEventSymbol)memberSymbol).ExplicitInterfaceImplementations
                                 .IsEmpty;
                     }
                 }
@@ -1083,8 +1079,8 @@ namespace Microsoft.CodeAnalysis.RemoveUnusedMembers
                     {
                         var suffix = methodSymbol.Name[prefix.Length..];
                         return suffix.Length > 0
-                            && methodSymbol
-                                .ContainingType.GetMembers(suffix)
+                            && methodSymbol.ContainingType
+                                .GetMembers(suffix)
                                 .Any(static m => m is IPropertySymbol);
                     }
 

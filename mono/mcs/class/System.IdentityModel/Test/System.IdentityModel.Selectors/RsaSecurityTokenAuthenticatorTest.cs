@@ -51,8 +51,7 @@ namespace MonoTests.System.IdentityModel.Selectors
             RSA rsa = (RSA)
                 new X509Certificate2(
                     TestResourceHelper.GetFullPathOfResource("Test/Resources/test.cer")
-                )
-                    .PublicKey
+                ).PublicKey
                     .Key;
             Authenticator a = new Authenticator();
             PolicyCollection pl = a.ValidateToken(new RsaSecurityToken(rsa));

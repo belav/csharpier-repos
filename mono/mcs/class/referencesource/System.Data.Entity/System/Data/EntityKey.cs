@@ -711,10 +711,8 @@ namespace System.Data
                 if (key1._keyNames[i].Equals(key2._keyNames[i]))
                 {
                     if (
-                        !ByValueEqualityComparer.Default.Equals(
-                            key1._compositeKeyValues[i],
-                            key2._compositeKeyValues[i]
-                        )
+                        !ByValueEqualityComparer.Default
+                            .Equals(key1._compositeKeyValues[i], key2._compositeKeyValues[i])
                     )
                     {
                         return false;
@@ -738,10 +736,8 @@ namespace System.Data
             {
                 if (String.Equals(keyName, key2._keyNames[i]))
                 {
-                    return ByValueEqualityComparer.Default.Equals(
-                        keyValue,
-                        key2._compositeKeyValues[i]
-                    );
+                    return ByValueEqualityComparer.Default
+                        .Equals(keyValue, key2._compositeKeyValues[i]);
                 }
             }
             return false;
@@ -1162,8 +1158,9 @@ namespace System.Data
         {
             if (entitySet != null)
             {
-                ReadOnlyMetadataCollection<EdmMember> keyMembers = ((EntitySetBase)entitySet)
-                    .ElementType
+                ReadOnlyMetadataCollection<EdmMember> keyMembers = (
+                    (EntitySetBase)entitySet
+                ).ElementType
                     .KeyMembers;
                 if (_singletonKeyValue != null)
                 {

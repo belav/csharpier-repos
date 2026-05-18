@@ -74,10 +74,8 @@ namespace System.ServiceModel.Channels
             }
             else if (message.Length == 0)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                    "message",
-                    SR.GetString(SR.ParameterCannotBeEmpty)
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperArgument("message", SR.GetString(SR.ParameterCannotBeEmpty));
             }
 
             if (
@@ -87,17 +85,19 @@ namespace System.ServiceModel.Channels
             {
                 if (locations == null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                        "locations",
-                        SR.GetString(SR.RedirectMustProvideLocation)
-                    );
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperArgumentNull(
+                            "locations",
+                            SR.GetString(SR.RedirectMustProvideLocation)
+                        );
                 }
                 else if (locations.Length == 0)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                        "locations",
-                        SR.GetString(SR.RedirectMustProvideLocation)
-                    );
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperArgument(
+                            "locations",
+                            SR.GetString(SR.RedirectMustProvideLocation)
+                        );
                 }
             }
 
@@ -107,9 +107,8 @@ namespace System.ServiceModel.Channels
                 && locations.Length > 0
             )
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                    SR.GetString(SR.RedirectCacheNoLocationAllowed)
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperArgument(SR.GetString(SR.RedirectCacheNoLocationAllowed));
             }
 
             if (locations == null)

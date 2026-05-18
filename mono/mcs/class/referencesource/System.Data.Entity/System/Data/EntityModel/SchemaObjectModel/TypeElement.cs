@@ -218,9 +218,8 @@ namespace System.Data.EntityModel.SchemaObjectModel
             {
                 _primitiveType.PrimitiveTypeKind = (PrimitiveTypeKind)
                     Enum.Parse(typeof(PrimitiveTypeKind), value);
-                _primitiveType.BaseType = MetadataItem.EdmProviderManifest.GetPrimitiveType(
-                    _primitiveType.PrimitiveTypeKind
-                );
+                _primitiveType.BaseType = MetadataItem.EdmProviderManifest
+                    .GetPrimitiveType(_primitiveType.PrimitiveTypeKind);
             }
             catch (ArgumentException)
             {
@@ -312,10 +311,13 @@ namespace System.Data.EntityModel.SchemaObjectModel
                     AddError(
                         ErrorCode.BadPrecisionAndScale,
                         EdmSchemaErrorSeverity.Error,
-                        System.Data.Entity.Strings.BadPrecisionAndScale(
-                            precisionFacetDescription.MaxValue.Value,
-                            scaleFacetDescription.MaxValue.Value
-                        )
+                        System.Data
+                            .Entity
+                            .Strings
+                            .BadPrecisionAndScale(
+                                precisionFacetDescription.MaxValue.Value,
+                                scaleFacetDescription.MaxValue.Value
+                            )
                     );
                     return false;
                 }
@@ -347,11 +349,14 @@ namespace System.Data.EntityModel.SchemaObjectModel
                     AddError(
                         ErrorCode.RequiredFacetMissing,
                         EdmSchemaErrorSeverity.Error,
-                        System.Data.Entity.Strings.MissingFacetDescription(
-                            PrimitiveType.Name,
-                            PrimitiveType.PrimitiveTypeKind,
-                            systemFacetDescription.FacetName
-                        )
+                        System.Data
+                            .Entity
+                            .Strings
+                            .MissingFacetDescription(
+                                PrimitiveType.Name,
+                                PrimitiveType.PrimitiveTypeKind,
+                                systemFacetDescription.FacetName
+                            )
                     );
                     addedErrors = true;
                 }

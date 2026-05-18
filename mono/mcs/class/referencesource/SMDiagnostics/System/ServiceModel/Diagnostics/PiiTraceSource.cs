@@ -96,8 +96,7 @@ namespace System.ServiceModel.Diagnostics
                                     (ushort)
                                         System.Runtime.Diagnostics.EventLogCategory.MessageLogging,
                                     (uint)
-                                        System
-                                            .Runtime
+                                        System.Runtime
                                             .Diagnostics
                                             .EventLogEventId
                                             .PiiLoggingNotAllowed,

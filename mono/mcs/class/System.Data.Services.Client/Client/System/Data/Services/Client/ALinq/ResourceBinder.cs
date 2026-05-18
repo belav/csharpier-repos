@@ -904,8 +904,8 @@ namespace System.Data.Services.Client
             if (((string)name.Value).Trim() == UriHelper.DOLLARSIGN + UriHelper.OPTIONEXPAND)
             {
                 ValidationRules.RequireCanExpand(re);
-                re.ExpandPaths = re
-                    .ExpandPaths.Union(new string[] { (string)value.Value }, StringComparer.Ordinal)
+                re.ExpandPaths = re.ExpandPaths
+                    .Union(new string[] { (string)value.Value }, StringComparer.Ordinal)
                     .ToList();
             }
             else
@@ -1771,9 +1771,8 @@ namespace System.Data.Services.Client
                 ParameterExpression collectorSourceParameter = resultSelector.Parameters[0];
                 ParameterExpression introducedRangeParameter = resultSelector.Parameters[1];
                 MemberInfo[] memberProperties = new MemberInfo[ne.Members.Count];
-                PropertyInfo[] properties = ne.Type.GetProperties(
-                    BindingFlags.Public | BindingFlags.Instance
-                );
+                PropertyInfo[] properties = ne.Type
+                    .GetProperties(BindingFlags.Public | BindingFlags.Instance);
                 Dictionary<string, Expression> sourceAccessors = new Dictionary<string, Expression>(
                     constructorParams.Length - 1,
                     StringComparer.Ordinal

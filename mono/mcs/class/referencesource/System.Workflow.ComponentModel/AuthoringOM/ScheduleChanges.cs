@@ -163,27 +163,30 @@ namespace System.Workflow.ComponentModel
                 ConditionTypeConverter.DeclarativeConditionDynamicProp
             );
             if (null != originalConditions)
-                this.modelChangeActions.AddRange(
-                    ((IWorkflowChangeDiff)originalConditions).Diff(
-                        originalConditions,
-                        changedConditions
-                    )
-                );
+                this.modelChangeActions
+                    .AddRange(
+                        ((IWorkflowChangeDiff)originalConditions).Diff(
+                            originalConditions,
+                            changedConditions
+                        )
+                    );
             else if (null != changedConditions)
-                this.modelChangeActions.AddRange(
-                    ((IWorkflowChangeDiff)changedConditions).Diff(
-                        originalConditions,
-                        changedConditions
-                    )
-                );
+                this.modelChangeActions
+                    .AddRange(
+                        ((IWorkflowChangeDiff)changedConditions).Diff(
+                            originalConditions,
+                            changedConditions
+                        )
+                    );
 
             // diff the process model
-            this.modelChangeActions.AddRange(
-                DiffTrees(
-                    this.originalRootActivity as CompositeActivity,
-                    this.clonedRootActivity as CompositeActivity
-                )
-            );
+            this.modelChangeActions
+                .AddRange(
+                    DiffTrees(
+                        this.originalRootActivity as CompositeActivity,
+                        this.clonedRootActivity as CompositeActivity
+                    )
+                );
 
             // always call it after diff tree, otherwise it turns on the Locked.
             ReleaseDynamicUpdateMode((Activity)this.clonedRootActivity);
@@ -292,8 +295,7 @@ namespace System.Workflow.ComponentModel
                             if (
                                 changeAction is RemovedActivityAction
                                 && contextActivity.DottedPath
-                                    == ((RemovedActivityAction)changeAction)
-                                        .OriginalRemovedActivity
+                                    == ((RemovedActivityAction)changeAction).OriginalRemovedActivity
                                         .DottedPath
                             )
                                 validationErrors.AddRange(
@@ -328,10 +330,8 @@ namespace System.Workflow.ComponentModel
                 workflowCoreRuntime.OnBeforeDynamicChange(this.modelChangeActions);
 
                 // set the new Workflow Definition
-                workflowCoreRuntime.RootActivity.SetValue(
-                    Activity.WorkflowDefinitionProperty,
-                    this.clonedRootActivity
-                );
+                workflowCoreRuntime.RootActivity
+                    .SetValue(Activity.WorkflowDefinitionProperty, this.clonedRootActivity);
 
                 // apply changes to all context Activities
                 foreach (Activity contextActivity in contextActivities)
@@ -609,17 +609,22 @@ namespace System.Workflow.ComponentModel
                                     != ActivityExecutionResult.Uninitialized
                                 )
                                 {
-                                    removedActivityAction.OriginalRemovedActivity.Uninitialize(
+                                    removedActivityAction.OriginalRemovedActivity
+                                        .Uninitialize(
+                                            executionContext.Activity
+                                                .RootActivity
+                                                .WorkflowCoreRuntime
+                                        );
+                                    removedActivityAction.OriginalRemovedActivity
+                                        .SetValue(
+                                            Activity.ExecutionResultProperty,
+                                            ActivityExecutionResult.Uninitialized
+                                        );
+                                }
+                                removedActivityAction.OriginalRemovedActivity
+                                    .OnActivityExecutionContextUnload(
                                         executionContext.Activity.RootActivity.WorkflowCoreRuntime
                                     );
-                                    removedActivityAction.OriginalRemovedActivity.SetValue(
-                                        Activity.ExecutionResultProperty,
-                                        ActivityExecutionResult.Uninitialized
-                                    );
-                                }
-                                removedActivityAction.OriginalRemovedActivity.OnActivityExecutionContextUnload(
-                                    executionContext.Activity.RootActivity.WorkflowCoreRuntime
-                                );
                                 removedActivityAction.OriginalRemovedActivity.Dispose();
                             }
                         }
@@ -655,10 +660,10 @@ namespace System.Workflow.ComponentModel
         )
         {
             List<WorkflowChangeAction> listChanges = new List<WorkflowChangeAction>();
-            IEnumerator<Activity> clonedActivitiesEnum =
-                clonedCompositeActivity.Activities.GetEnumerator();
-            IEnumerator<Activity> originalActivitiesEnum =
-                originalCompositeActivity.Activities.GetEnumerator();
+            IEnumerator<Activity> clonedActivitiesEnum = clonedCompositeActivity.Activities
+                .GetEnumerator();
+            IEnumerator<Activity> originalActivitiesEnum = originalCompositeActivity.Activities
+                .GetEnumerator();
             int currentRemoveIndex = 0;
             while (originalActivitiesEnum.MoveNext())
             {

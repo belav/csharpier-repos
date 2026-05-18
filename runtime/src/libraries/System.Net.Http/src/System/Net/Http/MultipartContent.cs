@@ -447,8 +447,7 @@ namespace System.Net.Http
             {
                 // Headers.
                 foreach (
-                    KeyValuePair<string, HeaderStringValues> headerPair in content
-                        .Headers
+                    KeyValuePair<string, HeaderStringValues> headerPair in content.Headers
                         .NonValidated
                 )
                 {

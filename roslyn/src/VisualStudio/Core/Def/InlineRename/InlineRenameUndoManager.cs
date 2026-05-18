@@ -122,8 +122,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.InlineRename
                 var startRenameUndoPrimitive = new RenameUndoPrimitive(
                     EditorFeaturesResources.Start_Rename
                 );
-                var textUndoHistoryService =
-                    workspace.Services.GetService<ITextUndoHistoryWorkspaceService>();
+                var textUndoHistoryService = workspace.Services
+                    .GetService<ITextUndoHistoryWorkspaceService>();
                 Contract.ThrowIfFalse(
                     textUndoHistoryService.TryGetTextUndoHistory(
                         workspace,
@@ -132,10 +132,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.InlineRename
                     )
                 );
                 Contract.ThrowIfFalse(
-                    undoHistory.Properties.TryGetProperty(
-                        typeof(ITextBuffer),
-                        out ITextBuffer primaryBuffer
-                    )
+                    undoHistory.Properties
+                        .TryGetProperty(typeof(ITextBuffer), out ITextBuffer primaryBuffer)
                 );
                 var undoManager = GetUndoManager(primaryBuffer);
 

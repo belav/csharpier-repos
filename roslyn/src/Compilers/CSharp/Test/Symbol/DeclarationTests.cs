@@ -460,18 +460,22 @@ namespace N1
 
             var type1 = (SourceNamedTypeSymbol)compilation.GetTypeByMetadataName("N1.N2.N3.C");
             Assert.True(
-                type1
-                    .MergedDeclaration.Declarations[0]
-                    .MemberNames.Value.SetEquals(new[] { "x", "y", "z" })
+                type1.MergedDeclaration
+                    .Declarations[0]
+                    .MemberNames
+                    .Value
+                    .SetEquals(new[] { "x", "y", "z" })
             );
 
             compilation = compilation.ReplaceSyntaxTree(firstTree, secondTree);
 
             var type2 = (SourceNamedTypeSymbol)compilation.GetTypeByMetadataName("N1.N2.N3.C");
             Assert.True(
-                type2
-                    .MergedDeclaration.Declarations[0]
-                    .MemberNames.Value.SetEquals(new[] { "x", "y", "z" })
+                type2.MergedDeclaration
+                    .Declarations[0]
+                    .MemberNames
+                    .Value
+                    .SetEquals(new[] { "x", "y", "z" })
             );
 
             // We should have the exact same set for the names.
@@ -484,9 +488,11 @@ namespace N1
 
             var type3 = (SourceNamedTypeSymbol)compilation.GetTypeByMetadataName("N1.N2.N3.C");
             Assert.True(
-                type3
-                    .MergedDeclaration.Declarations[0]
-                    .MemberNames.Value.SetEquals(new[] { "w", "x", "y", "z" })
+                type3.MergedDeclaration
+                    .Declarations[0]
+                    .MemberNames
+                    .Value
+                    .SetEquals(new[] { "w", "x", "y", "z" })
             );
 
             Assert.NotSame(
@@ -535,18 +541,22 @@ namespace N1
 
             var type1 = (SourceNamedTypeSymbol)compilation.GetTypeByMetadataName("N1.N2.N3.C");
             Assert.True(
-                type1
-                    .MergedDeclaration.Declarations[0]
-                    .MemberNames.Value.SetEquals(new[] { "x", "y", "z" })
+                type1.MergedDeclaration
+                    .Declarations[0]
+                    .MemberNames
+                    .Value
+                    .SetEquals(new[] { "x", "y", "z" })
             );
 
             compilation = compilation.ReplaceSyntaxTree(firstTree, secondTree);
 
             var type2 = (SourceNamedTypeSymbol)compilation.GetTypeByMetadataName("N1.N2.N3.D");
             Assert.True(
-                type2
-                    .MergedDeclaration.Declarations[0]
-                    .MemberNames.Value.SetEquals(new[] { "x", "y", "z" })
+                type2.MergedDeclaration
+                    .Declarations[0]
+                    .MemberNames
+                    .Value
+                    .SetEquals(new[] { "x", "y", "z" })
             );
 
             // We should have the exact same set for the names.
@@ -593,18 +603,22 @@ namespace N1
 
             var type1 = (SourceNamedTypeSymbol)compilation.GetTypeByMetadataName("N1.N2.N3.C");
             Assert.True(
-                type1
-                    .MergedDeclaration.Declarations[0]
-                    .MemberNames.Value.SetEquals(new[] { "x", "y", "z" })
+                type1.MergedDeclaration
+                    .Declarations[0]
+                    .MemberNames
+                    .Value
+                    .SetEquals(new[] { "x", "y", "z" })
             );
 
             compilation = compilation.ReplaceSyntaxTree(firstTree, secondTree);
 
             var type2 = (SourceNamedTypeSymbol)compilation.GetTypeByMetadataName("N1.C");
             Assert.True(
-                type2
-                    .MergedDeclaration.Declarations[0]
-                    .MemberNames.Value.SetEquals(new[] { "x", "y", "z" })
+                type2.MergedDeclaration
+                    .Declarations[0]
+                    .MemberNames
+                    .Value
+                    .SetEquals(new[] { "x", "y", "z" })
             );
 
             // We should have the exact same set for the names.
@@ -661,32 +675,40 @@ namespace N1
 
             var type1a = (SourceNamedTypeSymbol)compilation.GetTypeByMetadataName("N1.N2.N3.C");
             Assert.True(
-                type1a
-                    .MergedDeclaration.Declarations[0]
-                    .MemberNames.Value.SetEquals(new[] { "x", "y", "z" })
+                type1a.MergedDeclaration
+                    .Declarations[0]
+                    .MemberNames
+                    .Value
+                    .SetEquals(new[] { "x", "y", "z" })
             );
 
             var type1b = (SourceNamedTypeSymbol)compilation.GetTypeByMetadataName("N1.N2.N3.D");
             Assert.True(
-                type1b
-                    .MergedDeclaration.Declarations[0]
-                    .MemberNames.Value.SetEquals(new[] { "a", "b", "c" })
+                type1b.MergedDeclaration
+                    .Declarations[0]
+                    .MemberNames
+                    .Value
+                    .SetEquals(new[] { "a", "b", "c" })
             );
 
             compilation = compilation.ReplaceSyntaxTree(firstTree, secondTree);
 
             var type2a = (SourceNamedTypeSymbol)compilation.GetTypeByMetadataName("N1.C");
             Assert.True(
-                type2a
-                    .MergedDeclaration.Declarations[0]
-                    .MemberNames.Value.SetEquals(new[] { "x", "y", "z" })
+                type2a.MergedDeclaration
+                    .Declarations[0]
+                    .MemberNames
+                    .Value
+                    .SetEquals(new[] { "x", "y", "z" })
             );
 
             var type2b = (SourceNamedTypeSymbol)compilation.GetTypeByMetadataName("N1.D");
             Assert.True(
-                type2b
-                    .MergedDeclaration.Declarations[0]
-                    .MemberNames.Value.SetEquals(new[] { "a", "b", "c" })
+                type2b.MergedDeclaration
+                    .Declarations[0]
+                    .MemberNames
+                    .Value
+                    .SetEquals(new[] { "a", "b", "c" })
             );
 
             // We should have the exact same set for the names.
@@ -742,25 +764,31 @@ namespace N1
 
             var type1a = (SourceNamedTypeSymbol)compilation.GetTypeByMetadataName("N1.N2.N3.C");
             Assert.True(
-                type1a
-                    .MergedDeclaration.Declarations[0]
-                    .MemberNames.Value.SetEquals(new[] { "x", "y", "z" })
+                type1a.MergedDeclaration
+                    .Declarations[0]
+                    .MemberNames
+                    .Value
+                    .SetEquals(new[] { "x", "y", "z" })
             );
 
             var type1b = (SourceNamedTypeSymbol)compilation.GetTypeByMetadataName("N1.N2.N3.D");
             Assert.True(
-                type1b
-                    .MergedDeclaration.Declarations[0]
-                    .MemberNames.Value.SetEquals(new[] { "a", "b", "c" })
+                type1b.MergedDeclaration
+                    .Declarations[0]
+                    .MemberNames
+                    .Value
+                    .SetEquals(new[] { "a", "b", "c" })
             );
 
             compilation = compilation.ReplaceSyntaxTree(firstTree, secondTree);
 
             var type2a = (SourceNamedTypeSymbol)compilation.GetTypeByMetadataName("N1.C");
             Assert.True(
-                type2a
-                    .MergedDeclaration.Declarations[0]
-                    .MemberNames.Value.SetEquals(new[] { "x", "y", "z" })
+                type2a.MergedDeclaration
+                    .Declarations[0]
+                    .MemberNames
+                    .Value
+                    .SetEquals(new[] { "x", "y", "z" })
             );
 
             var type2b = (SourceNamedTypeSymbol)compilation.GetTypeByMetadataName("N1.D");
@@ -810,18 +838,22 @@ namespace N1
 
             var type1a = (SourceNamedTypeSymbol)compilation.GetTypeByMetadataName("N1.N2.N3.E");
             Assert.True(
-                type1a
-                    .MergedDeclaration.Declarations[0]
-                    .MemberNames.Value.SetEquals(new[] { "x", "y", "z" })
+                type1a.MergedDeclaration
+                    .Declarations[0]
+                    .MemberNames
+                    .Value
+                    .SetEquals(new[] { "x", "y", "z" })
             );
 
             compilation = compilation.ReplaceSyntaxTree(firstTree, secondTree);
 
             var type2a = (SourceNamedTypeSymbol)compilation.GetTypeByMetadataName("N1.E");
             Assert.True(
-                type2a
-                    .MergedDeclaration.Declarations[0]
-                    .MemberNames.Value.SetEquals(new[] { "x", "y", "z" })
+                type2a.MergedDeclaration
+                    .Declarations[0]
+                    .MemberNames
+                    .Value
+                    .SetEquals(new[] { "x", "y", "z" })
             );
 
             // We should have the exact same set for the names.
@@ -868,18 +900,22 @@ namespace N1
 
             var type1a = (SourceNamedTypeSymbol)compilation.GetTypeByMetadataName("N1.N2.N3.S");
             Assert.True(
-                type1a
-                    .MergedDeclaration.Declarations[0]
-                    .MemberNames.Value.SetEquals(new[] { "x", "y", "z" })
+                type1a.MergedDeclaration
+                    .Declarations[0]
+                    .MemberNames
+                    .Value
+                    .SetEquals(new[] { "x", "y", "z" })
             );
 
             compilation = compilation.ReplaceSyntaxTree(firstTree, secondTree);
 
             var type2a = (SourceNamedTypeSymbol)compilation.GetTypeByMetadataName("N1.S");
             Assert.True(
-                type2a
-                    .MergedDeclaration.Declarations[0]
-                    .MemberNames.Value.SetEquals(new[] { "x", "y", "z" })
+                type2a.MergedDeclaration
+                    .Declarations[0]
+                    .MemberNames
+                    .Value
+                    .SetEquals(new[] { "x", "y", "z" })
             );
 
             // We should have the exact same set for the names.
@@ -930,18 +966,22 @@ namespace N1
 
             var type1a = (SourceNamedTypeSymbol)compilation.GetTypeByMetadataName("N1.N2.N3.I");
             Assert.True(
-                type1a
-                    .MergedDeclaration.Declarations[0]
-                    .MemberNames.Value.SetEquals(new[] { "x", "y", "z" })
+                type1a.MergedDeclaration
+                    .Declarations[0]
+                    .MemberNames
+                    .Value
+                    .SetEquals(new[] { "x", "y", "z" })
             );
 
             compilation = compilation.ReplaceSyntaxTree(firstTree, secondTree);
 
             var type2a = (SourceNamedTypeSymbol)compilation.GetTypeByMetadataName("N1.I");
             Assert.True(
-                type2a
-                    .MergedDeclaration.Declarations[0]
-                    .MemberNames.Value.SetEquals(new[] { "x", "y", "z" })
+                type2a.MergedDeclaration
+                    .Declarations[0]
+                    .MemberNames
+                    .Value
+                    .SetEquals(new[] { "x", "y", "z" })
             );
 
             // We should have the exact same set for the names.
@@ -990,18 +1030,22 @@ namespace N1
 
             var type1a = (SourceNamedTypeSymbol)compilation.GetTypeByMetadataName("N1.N2.N3.E");
             Assert.True(
-                type1a
-                    .MergedDeclaration.Declarations[0]
-                    .MemberNames.Value.SetEquals(new[] { "x", "y", "z" })
+                type1a.MergedDeclaration
+                    .Declarations[0]
+                    .MemberNames
+                    .Value
+                    .SetEquals(new[] { "x", "y", "z" })
             );
 
             compilation = compilation.ReplaceSyntaxTree(firstTree, secondTree);
 
             var type2a = (SourceNamedTypeSymbol)compilation.GetTypeByMetadataName("N1.E");
             Assert.True(
-                type2a
-                    .MergedDeclaration.Declarations[0]
-                    .MemberNames.Value.SetEquals(new[] { "x", "y", "z" })
+                type2a.MergedDeclaration
+                    .Declarations[0]
+                    .MemberNames
+                    .Value
+                    .SetEquals(new[] { "x", "y", "z" })
             );
 
             // We should have the exact same set for the names.
@@ -1050,18 +1094,22 @@ namespace N1
 
             var type1a = (SourceNamedTypeSymbol)compilation.GetTypeByMetadataName("N1.N2.N3.E");
             Assert.True(
-                type1a
-                    .MergedDeclaration.Declarations[0]
-                    .MemberNames.Value.SetEquals(new[] { "x", "y", "z" })
+                type1a.MergedDeclaration
+                    .Declarations[0]
+                    .MemberNames
+                    .Value
+                    .SetEquals(new[] { "x", "y", "z" })
             );
 
             compilation = compilation.ReplaceSyntaxTree(firstTree, secondTree);
 
             var type2a = (SourceNamedTypeSymbol)compilation.GetTypeByMetadataName("N1.E");
             Assert.True(
-                type2a
-                    .MergedDeclaration.Declarations[0]
-                    .MemberNames.Value.SetEquals(new[] { "x", "y", "z" })
+                type2a.MergedDeclaration
+                    .Declarations[0]
+                    .MemberNames
+                    .Value
+                    .SetEquals(new[] { "x", "y", "z" })
             );
 
             // We should have the exact same set for the names.
@@ -1097,14 +1145,18 @@ namespace N1
             var type1 = (SourceNamedTypeSymbol)compilation1.GetTypeByMetadataName("N1.N2.N3.E");
             var type2 = (SourceNamedTypeSymbol)compilation2.GetTypeByMetadataName("N1.N2.N3.E");
             Assert.True(
-                type1
-                    .MergedDeclaration.Declarations[0]
-                    .MemberNames.Value.SetEquals(new[] { "x", "y", "z" })
+                type1.MergedDeclaration
+                    .Declarations[0]
+                    .MemberNames
+                    .Value
+                    .SetEquals(new[] { "x", "y", "z" })
             );
             Assert.True(
-                type2
-                    .MergedDeclaration.Declarations[0]
-                    .MemberNames.Value.SetEquals(new[] { "x", "y", "z" })
+                type2.MergedDeclaration
+                    .Declarations[0]
+                    .MemberNames
+                    .Value
+                    .SetEquals(new[] { "x", "y", "z" })
             );
 
             // We should have the exact same set for the names.

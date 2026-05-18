@@ -292,8 +292,7 @@ namespace Microsoft.CodeAnalysis.FindSymbols
                 && attrType.ContainingNamespace.ContainingNamespace?.Name == nameof(System.Runtime)
                 && attrType.ContainingNamespace.ContainingNamespace.ContainingNamespace?.Name
                     == nameof(System)
-                && attrType
-                    .ContainingNamespace
+                && attrType.ContainingNamespace
                     .ContainingNamespace
                     .ContainingNamespace
                     .ContainingNamespace
@@ -366,9 +365,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
 
             // If our symbol was from a project, then just check if this current project has a direct reference to it.
             if (symbolOrigination.sourceProject != null)
-                return project.ProjectReferences.Any(p =>
-                    p.ProjectId == symbolOrigination.sourceProject.Id
-                );
+                return project.ProjectReferences
+                    .Any(p => p.ProjectId == symbolOrigination.sourceProject.Id);
 
             // Otherwise, if the symbol is from metadata, see if the project's compilation references that metadata assembly.
             return HasReferenceToAssembly(

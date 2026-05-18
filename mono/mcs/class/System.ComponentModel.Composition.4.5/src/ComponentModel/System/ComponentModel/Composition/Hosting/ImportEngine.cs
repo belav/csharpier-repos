@@ -357,9 +357,8 @@ namespace System.ComponentModel.Composition.Hosting
                     {
                         partManager.State = ImportState.PreExportImportsSatisfying;
 
-                        var prereqImports = part.ImportDefinitions.Where(import =>
-                            import.IsPrerequisite
-                        );
+                        var prereqImports = part.ImportDefinitions
+                            .Where(import => import.IsPrerequisite);
                         result = result.MergeResult(
                             this.TrySatisfyImportSubset(partManager, prereqImports, null)
                         );
@@ -371,9 +370,8 @@ namespace System.ComponentModel.Composition.Hosting
                     {
                         partManager.State = ImportState.PostExportImportsSatisfying;
 
-                        var requiredImports = part.ImportDefinitions.Where(import =>
-                            !import.IsPrerequisite
-                        );
+                        var requiredImports = part.ImportDefinitions
+                            .Where(import => !import.IsPrerequisite);
 
                         result = result.MergeResult(
                             this.TrySatisfyImportSubset(partManager, requiredImports, null)
@@ -522,9 +520,8 @@ namespace System.ComponentModel.Composition.Hosting
             // Prepare for the recomposition effort by minimizing the amount of work we'll have to do later
             AtomicComposition atomicComposition = e.AtomicComposition;
 
-            IEnumerable<PartManager> affectedParts = this._recompositionManager.GetAffectedParts(
-                e.ChangedContractNames
-            );
+            IEnumerable<PartManager> affectedParts = this._recompositionManager
+                .GetAffectedParts(e.ChangedContractNames);
 
             // When in a atomicComposition account for everything that isn't yet reflected in the
             // index

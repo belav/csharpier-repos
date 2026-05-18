@@ -93,9 +93,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
                     BindingFlags.Static | BindingFlags.NonPublic
                 )
                 .MakeGenericMethod(type);
-            var segmentSize = SegmentedArrayHelper.TestAccessor.CalculateSegmentSize(
-                InvokeUnsafeSizeOf(type)
-            );
+            var segmentSize = SegmentedArrayHelper.TestAccessor
+                .CalculateSegmentSize(InvokeUnsafeSizeOf(type));
             Assert.Equal(
                 SegmentedArrayHelper.TestAccessor.CalculateSegmentShift(segmentSize),
                 (int)getSegmentShiftMethod.Invoke(null, null)
@@ -112,9 +111,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
                     BindingFlags.Static | BindingFlags.NonPublic
                 )
                 .MakeGenericMethod(type);
-            var segmentSize = SegmentedArrayHelper.TestAccessor.CalculateSegmentSize(
-                InvokeUnsafeSizeOf(type)
-            );
+            var segmentSize = SegmentedArrayHelper.TestAccessor
+                .CalculateSegmentSize(InvokeUnsafeSizeOf(type));
             Assert.Equal(
                 SegmentedArrayHelper.TestAccessor.CalculateOffsetMask(segmentSize),
                 (int)getOffsetMaskMethod.Invoke(null, null)

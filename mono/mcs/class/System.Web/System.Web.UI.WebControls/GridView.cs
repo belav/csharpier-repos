@@ -1553,8 +1553,8 @@ namespace System.Web.UI.WebControls
             if (props == null)
             {
                 object fitem = null;
-                PropertyInfo prop_item = source
-                    .DataSource.GetType()
+                PropertyInfo prop_item = source.DataSource
+                    .GetType()
                     .GetProperty(
                         "Item",
                         BindingFlags.Instance | BindingFlags.Static | BindingFlags.Public,
@@ -1958,12 +1958,13 @@ namespace System.Web.UI.WebControls
             if (pagerTemplate != null)
                 pagerTemplate.InstantiateIn(cell);
             else
-                cell.Controls.Add(
-                    PagerSettings.CreatePagerControl(
-                        pagedDataSource.CurrentPageIndex,
-                        pagedDataSource.PageCount
-                    )
-                );
+                cell.Controls
+                    .Add(
+                        PagerSettings.CreatePagerControl(
+                            pagedDataSource.CurrentPageIndex,
+                            pagedDataSource.PageCount
+                        )
+                    );
 
             row.Cells.Add(cell);
         }
@@ -2107,12 +2108,8 @@ namespace System.Web.UI.WebControls
                 if (field != null && !field.Visible)
                     continue;
 
-                c.ContainingField.ExtractValuesFromCell(
-                    fieldValues,
-                    c,
-                    row.RowState,
-                    includeReadOnlyFields
-                );
+                c.ContainingField
+                    .ExtractValuesFromCell(fieldValues, c, row.RowState, includeReadOnlyFields);
             }
             if (!includePrimaryKey && DataKeyNames != null)
                 foreach (string key in DataKeyNames)
@@ -2286,9 +2283,8 @@ namespace System.Web.UI.WebControls
             )
                 return;
 
-            cell.ControlStyle.MergeWith(
-                SortDirection == SortDirection.Ascending ? ascending : descending
-            );
+            cell.ControlStyle
+                .MergeWith(SortDirection == SortDirection.Ascending ? ascending : descending);
         }
 
         protected internal override void OnInit(EventArgs e)

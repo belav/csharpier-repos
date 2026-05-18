@@ -230,10 +230,11 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.LanguageService
             // Local: return the name if it's the declaration, otherwise the type
             if (
                 symbol is ILocalSymbol localSymbol
-                && !symbol.DeclaringSyntaxReferences.Any(
-                    static (d, token) => d.GetSyntax().DescendantTokens().Contains(token),
-                    token
-                )
+                && !symbol.DeclaringSyntaxReferences
+                    .Any(
+                        static (d, token) => d.GetSyntax().DescendantTokens().Contains(token),
+                        token
+                    )
             )
             {
                 symbol = localSymbol.Type;
@@ -540,8 +541,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.LanguageService
 
             static bool ModifiersContains(SyntaxToken token, SyntaxKind kind)
             {
-                return CSharpSyntaxFacts
-                    .Instance.GetModifiers(token.Parent)
+                return CSharpSyntaxFacts.Instance
+                    .GetModifiers(token.Parent)
                     .Any(t => t.IsKind(kind));
             }
         }

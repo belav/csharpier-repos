@@ -233,8 +233,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Emit
     public static void Main(string[] args) {}
     CHANGE
 }";
-            var emitRefAssembly = EmitOptions
-                .Default.WithEmitMetadataOnly(true)
+            var emitRefAssembly = EmitOptions.Default
+                .WithEmitMetadataOnly(true)
                 .WithIncludePrivateMembers(false);
 
             var mvid1 = CompiledGuid(
@@ -606,8 +606,8 @@ Partial.c = 3";
                     expectedOutput: expectedOutput1
                 );
                 var trees = cv.Compilation.SyntaxTrees.ToArray();
-                var comp2 = cv
-                    .Compilation.RemoveAllSyntaxTrees()
+                var comp2 = cv.Compilation
+                    .RemoveAllSyntaxTrees()
                     .AddSyntaxTrees(trees[1], trees[0], trees[2]);
                 CompileAndVerify(comp2, expectedOutput: expectedOutput2);
                 CompileAndVerify(

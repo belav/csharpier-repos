@@ -174,14 +174,8 @@ namespace System.IO.Tests
                 ReadWriteMode.SyncAPM => stream.EndRead(
                     stream.BeginRead(buffer, offset, count, null, null)
                 ),
-                ReadWriteMode.AsyncAPM => await Task.Factory.FromAsync(
-                    stream.BeginRead,
-                    stream.EndRead,
-                    buffer,
-                    offset,
-                    count,
-                    null
-                ),
+                ReadWriteMode.AsyncAPM => await Task.Factory
+                    .FromAsync(stream.BeginRead, stream.EndRead, buffer, offset, count, null),
                 _ => throw new Exception($"Unknown mode: {mode}"),
             };
         }
@@ -262,14 +256,8 @@ namespace System.IO.Tests
                     break;
 
                 case ReadWriteMode.AsyncAPM:
-                    await Task.Factory.FromAsync(
-                        stream.BeginWrite,
-                        stream.EndWrite,
-                        buffer,
-                        offset,
-                        count,
-                        null
-                    );
+                    await Task.Factory
+                        .FromAsync(stream.BeginWrite, stream.EndWrite, buffer, offset, count, null);
                     break;
 
                 default:
@@ -633,14 +621,8 @@ namespace System.IO.Tests
                 await Assert.ThrowsAsync(
                     UnsupportedReadWriteExceptionType,
                     () =>
-                        Task.Factory.FromAsync(
-                            stream.BeginRead,
-                            stream.EndRead,
-                            new byte[1],
-                            0,
-                            1,
-                            null
-                        )
+                        Task.Factory
+                            .FromAsync(stream.BeginRead, stream.EndRead, new byte[1], 0, 1, null)
                 );
                 Assert.True(
                     Record.Exception(() => stream.EndRead(new NotImplementedIAsyncResult()))
@@ -853,14 +835,8 @@ namespace System.IO.Tests
                 await Assert.ThrowsAsync(
                     UnsupportedReadWriteExceptionType,
                     () =>
-                        Task.Factory.FromAsync(
-                            stream.BeginWrite,
-                            stream.EndWrite,
-                            new byte[1],
-                            0,
-                            1,
-                            null
-                        )
+                        Task.Factory
+                            .FromAsync(stream.BeginWrite, stream.EndWrite, new byte[1], 0, 1, null)
                 );
                 Assert.True(
                     Record.Exception(() => stream.EndWrite(new NotImplementedIAsyncResult()))
@@ -2777,14 +2753,15 @@ namespace System.IO.Tests
                 writeable.EndWrite(writeable.BeginWrite(buffer, 0, buffer.Length, null, null))
             );
             await Assert.ThrowsAsync<IOException>(() =>
-                Task.Factory.FromAsync(
-                    writeable.BeginWrite,
-                    writeable.EndWrite,
-                    buffer,
-                    0,
-                    buffer.Length,
-                    null
-                )
+                Task.Factory
+                    .FromAsync(
+                        writeable.BeginWrite,
+                        writeable.EndWrite,
+                        buffer,
+                        0,
+                        buffer.Length,
+                        null
+                    )
             );
             Assert.Throws<IOException>(() => writeable.Flush());
         }
@@ -2985,46 +2962,47 @@ namespace System.IO.Tests
                 var readBuffer = new byte[1];
                 ValueTask<int> readValueTask = readable.ReadAsync(new byte[1]);
 
-                await Task.Factory.StartNew(
-                    () =>
-                    {
-                        Assert.IsType<CustomTaskScheduler>(TaskScheduler.Current);
-                        asyncLocal.Value = 42;
-                        switch (continueOnCapturedContext)
+                await Task.Factory
+                    .StartNew(
+                        () =>
                         {
-                            case null:
-                                if (flowExecutionContext)
-                                {
-                                    readValueTask.GetAwaiter().OnCompleted(continuation);
-                                }
-                                else
-                                {
-                                    readValueTask.GetAwaiter().UnsafeOnCompleted(continuation);
-                                }
-                                break;
-                            default:
-                                if (flowExecutionContext)
-                                {
-                                    readValueTask
-                                        .ConfigureAwait(continueOnCapturedContext.Value)
-                                        .GetAwaiter()
-                                        .OnCompleted(continuation);
-                                }
-                                else
-                                {
-                                    readValueTask
-                                        .ConfigureAwait(continueOnCapturedContext.Value)
-                                        .GetAwaiter()
-                                        .UnsafeOnCompleted(continuation);
-                                }
-                                break;
-                        }
-                        asyncLocal.Value = 0;
-                    },
-                    CancellationToken.None,
-                    TaskCreationOptions.None,
-                    new CustomTaskScheduler()
-                );
+                            Assert.IsType<CustomTaskScheduler>(TaskScheduler.Current);
+                            asyncLocal.Value = 42;
+                            switch (continueOnCapturedContext)
+                            {
+                                case null:
+                                    if (flowExecutionContext)
+                                    {
+                                        readValueTask.GetAwaiter().OnCompleted(continuation);
+                                    }
+                                    else
+                                    {
+                                        readValueTask.GetAwaiter().UnsafeOnCompleted(continuation);
+                                    }
+                                    break;
+                                default:
+                                    if (flowExecutionContext)
+                                    {
+                                        readValueTask
+                                            .ConfigureAwait(continueOnCapturedContext.Value)
+                                            .GetAwaiter()
+                                            .OnCompleted(continuation);
+                                    }
+                                    else
+                                    {
+                                        readValueTask
+                                            .ConfigureAwait(continueOnCapturedContext.Value)
+                                            .GetAwaiter()
+                                            .UnsafeOnCompleted(continuation);
+                                    }
+                                    break;
+                            }
+                            asyncLocal.Value = 0;
+                        },
+                        CancellationToken.None,
+                        TaskCreationOptions.None,
+                        new CustomTaskScheduler()
+                    );
 
                 Assert.False(readValueTask.IsCompleted);
                 Assert.False(readValueTask.IsCompletedSuccessfully);
@@ -3602,14 +3580,8 @@ namespace System.IO.Tests
             });
             await Assert.ThrowsAsync<IOException>(async () =>
             {
-                await Task.Factory.FromAsync(
-                    writeable.BeginWrite,
-                    writeable.EndWrite,
-                    new byte[1],
-                    0,
-                    1,
-                    null
-                );
+                await Task.Factory
+                    .FromAsync(writeable.BeginWrite, writeable.EndWrite, new byte[1], 0, 1, null);
             });
         }
 

@@ -42,9 +42,10 @@ namespace System.ServiceModel.Dispatcher
         {
             if (actions.Length == 0)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentException(SR.GetString(SR.ActionFilterEmptyList), "actions")
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        new ArgumentException(SR.GetString(SR.ActionFilterEmptyList), "actions")
+                    );
             }
 
             this.actions = new Dictionary<string, int>();

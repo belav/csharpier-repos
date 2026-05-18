@@ -28,8 +28,8 @@ namespace Internal.Runtime.InteropServices
 
 sealed class ClassFactoryWrapper
 {
-    private static readonly MethodInfo IClassFactory_Create = typeof(object)
-        .Assembly.GetType("Internal.Runtime.InteropServices.IClassFactory")
+    private static readonly MethodInfo IClassFactory_Create = typeof(object).Assembly
+        .GetType("Internal.Runtime.InteropServices.IClassFactory")
         .GetMethod("CreateInstance");
     private readonly object _obj;
 
@@ -59,30 +59,26 @@ namespace Activator
     {
         private static delegate* <ComActivationContext, object> GetClassFactoryForTypeMethod =
             (delegate* <ComActivationContext, object>)
-                typeof(object)
-                    .Assembly.GetType(
-                        "Internal.Runtime.InteropServices.ComActivator",
-                        throwOnError: true
-                    )
+                typeof(object).Assembly
+                    .GetType("Internal.Runtime.InteropServices.ComActivator", throwOnError: true)
                     .GetMethod(
                         "GetClassFactoryForType",
                         BindingFlags.NonPublic | BindingFlags.Static
                     )
-                    .MethodHandle.GetFunctionPointer();
+                    .MethodHandle
+                    .GetFunctionPointer();
         private static delegate* <
             ComActivationContext,
             bool,
             void> ClassRegistrationScenarioForType = (delegate* <ComActivationContext, bool, void>)
-            typeof(object)
-                .Assembly.GetType(
-                    "Internal.Runtime.InteropServices.ComActivator",
-                    throwOnError: true
-                )
+            typeof(object).Assembly
+                .GetType("Internal.Runtime.InteropServices.ComActivator", throwOnError: true)
                 .GetMethod(
                     "ClassRegistrationScenarioForType",
                     BindingFlags.NonPublic | BindingFlags.Static
                 )
-                .MethodHandle.GetFunctionPointer();
+                .MethodHandle
+                .GetFunctionPointer();
 
         private static ClassFactoryWrapper GetClassFactoryForType(ComActivationContext context)
         {

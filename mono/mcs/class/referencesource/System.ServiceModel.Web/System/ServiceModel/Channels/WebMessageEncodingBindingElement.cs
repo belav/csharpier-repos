@@ -65,13 +65,14 @@ namespace System.ServiceModel.Channels
             {
                 if (value <= 0)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ArgumentOutOfRangeException(
-                            "value",
-                            value,
-                            SR2.GetString(SR2.ValueMustBePositive)
-                        )
-                    );
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperError(
+                            new ArgumentOutOfRangeException(
+                                "value",
+                                value,
+                                SR2.GetString(SR2.ValueMustBePositive)
+                            )
+                        );
                 }
                 this.maxReadPoolSize = value;
             }
@@ -84,13 +85,14 @@ namespace System.ServiceModel.Channels
             {
                 if (value <= 0)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ArgumentOutOfRangeException(
-                            "value",
-                            value,
-                            SR2.GetString(SR2.ValueMustBePositive)
-                        )
-                    );
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperError(
+                            new ArgumentOutOfRangeException(
+                                "value",
+                                value,
+                                SR2.GetString(SR2.ValueMustBePositive)
+                            )
+                        );
                 }
                 this.maxWritePoolSize = value;
             }
@@ -108,10 +110,11 @@ namespace System.ServiceModel.Channels
 
                 if (value != MessageVersion.None)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                        "value",
-                        SR2.GetString(SR2.JsonOnlySupportsMessageVersionNone)
-                    );
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperArgument(
+                            "value",
+                            SR2.GetString(SR2.JsonOnlySupportsMessageVersionNone)
+                        );
                 }
             }
         }

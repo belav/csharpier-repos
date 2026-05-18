@@ -318,11 +318,12 @@ namespace System.Web.Http.ModelBinding
         )
         {
             HttpConfiguration config = new HttpConfiguration();
-            config.Routes.MapHttpRoute(
-                "DefaultApi",
-                "api/{controller}/{id}",
-                new { id = RouteParameter.Optional }
-            );
+            config.Routes
+                .MapHttpRoute(
+                    "DefaultApi",
+                    "api/{controller}/{id}",
+                    new { id = RouteParameter.Optional }
+                );
 
             // The null trace writer case is tested as well to verify the
             // ValuesController works as expected without tracing.
@@ -364,8 +365,8 @@ namespace System.Web.Http.ModelBinding
                     response = await client.SendAsync(request);
                     Assert.Equal(HttpStatusCode.OK, response.StatusCode);
                     string expectedGetQueryStringResponse = valuesController.Get(5);
-                    string actualGetQueryStringResponse =
-                        await response.Content.ReadAsAsync<string>();
+                    string actualGetQueryStringResponse = await response.Content
+                        .ReadAsAsync<string>();
                     Assert.Equal(expectedGetQueryStringResponse, actualGetQueryStringResponse);
                     if (traceWriter != null)
                     {
@@ -479,11 +480,12 @@ namespace System.Web.Http.ModelBinding
         public async Task ValuesController_Get_Id_Writes_Expected_Traces()
         {
             HttpConfiguration config = new HttpConfiguration();
-            config.Routes.MapHttpRoute(
-                "DefaultApi",
-                "api/{controller}/{id}",
-                new { id = RouteParameter.Optional }
-            );
+            config.Routes
+                .MapHttpRoute(
+                    "DefaultApi",
+                    "api/{controller}/{id}",
+                    new { id = RouteParameter.Optional }
+                );
             Mock<DelegatingHandler> customMessageHandler = new Mock<DelegatingHandler>()
             {
                 CallBase = true,
@@ -538,11 +540,12 @@ namespace System.Web.Http.ModelBinding
         public async Task ValuesController_Get_Id_Writes_Expected_Traces_InTheCorrectOrder()
         {
             HttpConfiguration config = new HttpConfiguration();
-            config.Routes.MapHttpRoute(
-                "DefaultApi",
-                "api/{controller}/{id}",
-                new { id = RouteParameter.Optional }
-            );
+            config.Routes
+                .MapHttpRoute(
+                    "DefaultApi",
+                    "api/{controller}/{id}",
+                    new { id = RouteParameter.Optional }
+                );
             Mock<DelegatingHandler> customMessageHandler = new Mock<DelegatingHandler>()
             {
                 CallBase = true,
@@ -674,22 +677,26 @@ namespace System.Web.Http.ModelBinding
                     && actualRecord.Exception is ReflectionTypeLoadException
                     && actualRecord.Message != null
                     && (
-                        actualRecord.Message.StartsWith(
-                            "Exception thrown while getting types from 'xunit.runner.visualstudio.testadapter, ",
-                            StringComparison.Ordinal
-                        )
-                        || actualRecord.Message.StartsWith(
-                            "Exception thrown while getting types from 'xunit.runner.msbuild.",
-                            StringComparison.Ordinal
-                        )
-                        || actualRecord.Message.StartsWith(
-                            "Exception thrown while getting types from 'System.Web, ",
-                            StringComparison.Ordinal
-                        )
-                        || actualRecord.Message.StartsWith(
-                            "Exception thrown while getting types from 'Microsoft.Build.Utilities.",
-                            StringComparison.Ordinal
-                        )
+                        actualRecord.Message
+                            .StartsWith(
+                                "Exception thrown while getting types from 'xunit.runner.visualstudio.testadapter, ",
+                                StringComparison.Ordinal
+                            )
+                        || actualRecord.Message
+                            .StartsWith(
+                                "Exception thrown while getting types from 'xunit.runner.msbuild.",
+                                StringComparison.Ordinal
+                            )
+                        || actualRecord.Message
+                            .StartsWith(
+                                "Exception thrown while getting types from 'System.Web, ",
+                                StringComparison.Ordinal
+                            )
+                        || actualRecord.Message
+                            .StartsWith(
+                                "Exception thrown while getting types from 'Microsoft.Build.Utilities.",
+                                StringComparison.Ordinal
+                            )
                     )
                 )
                 {
@@ -774,22 +781,26 @@ namespace System.Web.Http.ModelBinding
                     && actualRecord.Exception is ReflectionTypeLoadException
                     && actualRecord.Message != null
                     && (
-                        actualRecord.Message.StartsWith(
-                            "Exception thrown while getting types from 'xunit.runner.visualstudio.testadapter, ",
-                            StringComparison.Ordinal
-                        )
-                        || actualRecord.Message.StartsWith(
-                            "Exception thrown while getting types from 'xunit.runner.msbuild.",
-                            StringComparison.Ordinal
-                        )
-                        || actualRecord.Message.StartsWith(
-                            "Exception thrown while getting types from 'System.Web, ",
-                            StringComparison.Ordinal
-                        )
-                        || actualRecord.Message.StartsWith(
-                            "Exception thrown while getting types from 'Microsoft.Build.Utilities.",
-                            StringComparison.Ordinal
-                        )
+                        actualRecord.Message
+                            .StartsWith(
+                                "Exception thrown while getting types from 'xunit.runner.visualstudio.testadapter, ",
+                                StringComparison.Ordinal
+                            )
+                        || actualRecord.Message
+                            .StartsWith(
+                                "Exception thrown while getting types from 'xunit.runner.msbuild.",
+                                StringComparison.Ordinal
+                            )
+                        || actualRecord.Message
+                            .StartsWith(
+                                "Exception thrown while getting types from 'System.Web, ",
+                                StringComparison.Ordinal
+                            )
+                        || actualRecord.Message
+                            .StartsWith(
+                                "Exception thrown while getting types from 'Microsoft.Build.Utilities.",
+                                StringComparison.Ordinal
+                            )
                     )
                 )
                 {

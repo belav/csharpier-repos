@@ -185,9 +185,10 @@ namespace System.ServiceModel.Activation
                     if (listener == null)
                     {
                         // The listener has been stopped.
-                        throw FxTrace.Exception.AsError(
-                            new CommunicationObjectAbortedException(SR.PipeListenerProxyStopped)
-                        );
+                        throw FxTrace.Exception
+                            .AsError(
+                                new CommunicationObjectAbortedException(SR.PipeListenerProxyStopped)
+                            );
                     }
 
                     if (!demuxerCreated)

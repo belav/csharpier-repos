@@ -87,11 +87,12 @@ namespace System.Activities.XamlIntegration
                         {
                             if (!this.helpers.Value.TryGetValue(targetType, out currentHelper))
                             {
-                                throw FxTrace.Exception.AsError(
-                                    new InvalidOperationException(
-                                        SR.TypeConverterHelperCacheAddFailed(targetType)
-                                    )
-                                );
+                                throw FxTrace.Exception
+                                    .AsError(
+                                        new InvalidOperationException(
+                                            SR.TypeConverterHelperCacheAddFailed(targetType)
+                                        )
+                                    );
                             }
                         }
                     }
@@ -131,9 +132,8 @@ namespace System.Activities.XamlIntegration
                 {
                     if (targetType == TypeHelper.ObjectType)
                     {
-                        throw FxTrace.Exception.AsError(
-                            new InvalidOperationException(SR.InvalidTypeConverterUsage)
-                        );
+                        throw FxTrace.Exception
+                            .AsError(new InvalidOperationException(SR.InvalidTypeConverterUsage));
                     }
 
                     targetType = targetType.BaseType;
@@ -158,9 +158,8 @@ namespace System.Activities.XamlIntegration
                 T service = (T)context.GetService(typeof(T));
                 if (service == null)
                 {
-                    throw FxTrace.Exception.AsError(
-                        new InvalidOperationException(SR.InvalidTypeConverterUsage)
-                    );
+                    throw FxTrace.Exception
+                        .AsError(new InvalidOperationException(SR.InvalidTypeConverterUsage));
                 }
 
                 return service;

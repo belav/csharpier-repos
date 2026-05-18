@@ -39,8 +39,8 @@ public class SqlServerConvertTranslator : IMethodCallTranslator
         typeof(string),
     };
 
-    private static readonly MethodInfo[] SupportedMethods = TypeMapping
-        .Keys.SelectMany(t =>
+    private static readonly MethodInfo[] SupportedMethods = TypeMapping.Keys
+        .SelectMany(t =>
             typeof(Convert)
                 .GetTypeInfo()
                 .GetDeclaredMethods(t)

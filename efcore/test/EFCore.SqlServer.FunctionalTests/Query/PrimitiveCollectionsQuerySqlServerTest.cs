@@ -591,8 +591,8 @@ WHERE CAST(1 AS bit) IN (
 
         Assert.Equal(
             "[true,false]",
-            await context
-                .Database.SqlQuery<string>(
+            await context.Database
+                .SqlQuery<string>(
                     $"SELECT [Bools] AS [Value] FROM [PrimitiveCollectionsEntity] WHERE [Id] = 1"
                 )
                 .SingleAsync()

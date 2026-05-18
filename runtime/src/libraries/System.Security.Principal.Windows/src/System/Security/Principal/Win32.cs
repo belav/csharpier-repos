@@ -22,12 +22,13 @@ namespace System.Security.Principal
         )
         {
             Interop.OBJECT_ATTRIBUTES attributes = default;
-            uint error = Interop.Advapi32.LsaOpenPolicy(
-                systemName,
-                ref attributes,
-                (int)rights,
-                out SafeLsaPolicyHandle policyHandle
-            );
+            uint error = Interop.Advapi32
+                .LsaOpenPolicy(
+                    systemName,
+                    ref attributes,
+                    (int)rights,
+                    out SafeLsaPolicyHandle policyHandle
+                );
             if (error == 0)
             {
                 return policyHandle;
@@ -168,12 +169,8 @@ namespace System.Security.Principal
 
             if (
                 FALSE
-                != Interop.Advapi32.CreateWellKnownSid(
-                    (int)sidType,
-                    domainSid?.BinaryForm,
-                    resultSid,
-                    ref length
-                )
+                != Interop.Advapi32
+                    .CreateWellKnownSid((int)sidType, domainSid?.BinaryForm, resultSid, ref length)
             )
             {
                 return Interop.Errors.ERROR_SUCCESS;
@@ -233,11 +230,8 @@ namespace System.Security.Principal
 
             if (
                 FALSE
-                != Interop.Advapi32.GetWindowsAccountDomainSid(
-                    BinaryForm,
-                    resultSidBinary,
-                    ref sidLength
-                )
+                != Interop.Advapi32
+                    .GetWindowsAccountDomainSid(BinaryForm, resultSidBinary, ref sidLength)
             )
             {
                 resultSid = new SecurityIdentifier(resultSidBinary, 0);

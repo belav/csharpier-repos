@@ -31,20 +31,21 @@ namespace Microsoft.CodeAnalysis.CSharp.MakeLocalFunctionStatic
         {
             // If other local functions are called the it can't be made static unless the are static, or the local
             // function is recursive, or its calling a child local function
-            return !dataFlow.UsedLocalFunctions.Any(
-                static (usedLocalFunction, localFunctionStatement) =>
-                    !usedLocalFunction.IsStatic
-                    && !IsChildOrSelf(localFunctionStatement, usedLocalFunction),
-                localFunction
-            );
+            return !dataFlow.UsedLocalFunctions
+                .Any(
+                    static (usedLocalFunction, localFunctionStatement) =>
+                        !usedLocalFunction.IsStatic
+                        && !IsChildOrSelf(localFunctionStatement, usedLocalFunction),
+                    localFunction
+                );
 
             static bool IsChildOrSelf(
                 LocalFunctionStatementSyntax containingLocalFunction,
                 ISymbol calledLocationFunction
             )
             {
-                var node = calledLocationFunction
-                    .DeclaringSyntaxReferences.FirstOrDefault()
+                var node = calledLocationFunction.DeclaringSyntaxReferences
+                    .FirstOrDefault()
                     ?.GetSyntax();
                 // Contains also returns true if node is equal to the containing local function
                 return containingLocalFunction.Contains(node);

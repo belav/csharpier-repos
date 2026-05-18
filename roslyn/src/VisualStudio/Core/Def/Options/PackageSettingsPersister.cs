@@ -79,8 +79,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Options
                 }
                 else
                 {
-                    value = SolutionCrawlerOptionsStorage
-                        .SolutionBackgroundAnalysisScopeOption
+                    value = SolutionCrawlerOptionsStorage.SolutionBackgroundAnalysisScopeOption
                         .Definition
                         .DefaultValue;
                     return true;

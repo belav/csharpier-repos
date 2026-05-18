@@ -65,9 +65,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 {
                     case Accessibility.ProtectedOrInternal:
                         if (
-                            !this.ContainingAssembly.HasInternalAccessTo(
-                                _overriddenAccessor.ContainingAssembly
-                            )
+                            !this.ContainingAssembly
+                                .HasInternalAccessTo(_overriddenAccessor.ContainingAssembly)
                         )
                         {
                             // NOTE: Dev10 actually reports ERR_CantChangeAccessOnOverride (CS0507) in this case,
@@ -81,9 +80,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
                     case Accessibility.ProtectedAndInternal:
                         if (
-                            !this.ContainingAssembly.HasInternalAccessTo(
-                                _overriddenAccessor.ContainingAssembly
-                            )
+                            !this.ContainingAssembly
+                                .HasInternalAccessTo(_overriddenAccessor.ContainingAssembly)
                         )
                         {
                             // Of course this must trigger an error later, as you cannot override a private

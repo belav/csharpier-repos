@@ -29,15 +29,14 @@ namespace System.Text.Json.SourceGeneration
             System.Diagnostics.Debugger.Launch();
 #endif
             IncrementalValueProvider<KnownTypeSymbols> knownTypeSymbols =
-                context.CompilationProvider.Select(
-                    (compilation, _) => new KnownTypeSymbols(compilation)
-                );
+                context.CompilationProvider
+                    .Select((compilation, _) => new KnownTypeSymbols(compilation));
 
             IncrementalValuesProvider<(
                 ContextGenerationSpec?,
                 ImmutableEquatableArray<DiagnosticInfo>
-            )> contextGenerationSpecs = context
-                .SyntaxProvider.ForAttributeWithMetadataName(
+            )> contextGenerationSpecs = context.SyntaxProvider
+                .ForAttributeWithMetadataName(
 #if !ROSLYN4_4_OR_GREATER
                     context,
 #endif
@@ -60,8 +59,8 @@ namespace System.Text.Json.SourceGeneration
                                 tuple.Left.SemanticModel,
                                 cancellationToken
                             );
-                        ImmutableEquatableArray<DiagnosticInfo> diagnostics =
-                            parser.Diagnostics.ToImmutableEquatableArray();
+                        ImmutableEquatableArray<DiagnosticInfo> diagnostics = parser.Diagnostics
+                            .ToImmutableEquatableArray();
                         return (contextGenerationSpec, diagnostics);
                     }
                 )

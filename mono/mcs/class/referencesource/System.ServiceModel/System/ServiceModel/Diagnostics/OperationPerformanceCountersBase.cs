@@ -46,11 +46,9 @@ namespace System.ServiceModel.Diagnostics
             PerformanceCounterStrings.SERVICEMODELOPERATION.CallsFaultedPerSecond,
             PerformanceCounterStrings.SERVICEMODELOPERATION.CallDuration,
             PerformanceCounterStrings.SERVICEMODELOPERATION.CallDurationBase,
-            PerformanceCounterStrings
-                .SERVICEMODELOPERATION
+            PerformanceCounterStrings.SERVICEMODELOPERATION
                 .SecurityValidationAuthenticationFailures,
-            PerformanceCounterStrings
-                .SERVICEMODELOPERATION
+            PerformanceCounterStrings.SERVICEMODELOPERATION
                 .SecurityValidationAuthenticationFailuresPerSecond,
             PerformanceCounterStrings.SERVICEMODELOPERATION.SecurityCallsNotAuthorized,
             PerformanceCounterStrings.SERVICEMODELOPERATION.SecurityCallsNotAuthorizedPerSecond,

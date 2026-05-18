@@ -25,9 +25,10 @@ namespace System.Runtime.InteropServices.Marshalling
     )]
     public static unsafe class ComInterfaceMarshaller<T>
     {
-        private static readonly Guid? TargetInterfaceIID = StrategyBasedComWrappers
-            .DefaultIUnknownInterfaceDetailsStrategy.GetIUnknownDerivedDetails(typeof(T).TypeHandle)
-            ?.Iid;
+        private static readonly Guid? TargetInterfaceIID =
+            StrategyBasedComWrappers.DefaultIUnknownInterfaceDetailsStrategy
+                .GetIUnknownDerivedDetails(typeof(T).TypeHandle)
+                ?.Iid;
 
         /// <summary>
         /// Convert a managed object to a COM interface pointer for the COM interface represented by <typeparamref name="T"/>.
@@ -42,11 +43,8 @@ namespace System.Runtime.InteropServices.Marshalling
             }
             if (!ComWrappers.TryGetComInstance(managed, out nint unknown))
             {
-                unknown =
-                    StrategyBasedComWrappers.DefaultMarshallingInstance.GetOrCreateComInterfaceForObject(
-                        managed,
-                        CreateComInterfaceFlags.None
-                    );
+                unknown = StrategyBasedComWrappers.DefaultMarshallingInstance
+                    .GetOrCreateComInterfaceForObject(managed, CreateComInterfaceFlags.None);
             }
             return CastIUnknownToInterfaceType(unknown);
         }
@@ -65,10 +63,8 @@ namespace System.Runtime.InteropServices.Marshalling
                 return default;
             }
             return (T)
-                StrategyBasedComWrappers.DefaultMarshallingInstance.GetOrCreateObjectForComInstance(
-                    (nint)unmanaged,
-                    CreateObjectFlags.Unwrap
-                );
+                StrategyBasedComWrappers.DefaultMarshallingInstance
+                    .GetOrCreateObjectForComInstance((nint)unmanaged, CreateObjectFlags.Unwrap);
         }
 
         /// <summary>

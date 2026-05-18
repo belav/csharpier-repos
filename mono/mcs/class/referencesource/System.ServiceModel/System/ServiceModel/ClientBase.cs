@@ -83,9 +83,8 @@ namespace System.ServiceModel
         protected ClientBase(string endpointConfigurationName)
         {
             if (endpointConfigurationName == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                    "endpointConfigurationName"
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperArgumentNull("endpointConfigurationName");
 
             MakeCacheSettingReadOnly();
 
@@ -111,9 +110,8 @@ namespace System.ServiceModel
         protected ClientBase(string endpointConfigurationName, string remoteAddress)
         {
             if (endpointConfigurationName == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                    "endpointConfigurationName"
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperArgumentNull("endpointConfigurationName");
             if (remoteAddress == null)
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("remoteAddress");
 
@@ -142,9 +140,8 @@ namespace System.ServiceModel
         protected ClientBase(string endpointConfigurationName, EndpointAddress remoteAddress)
         {
             if (endpointConfigurationName == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                    "endpointConfigurationName"
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperArgumentNull("endpointConfigurationName");
             if (remoteAddress == null)
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("remoteAddress");
 
@@ -222,9 +219,8 @@ namespace System.ServiceModel
         protected ClientBase(InstanceContext callbackInstance)
         {
             if (callbackInstance == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                    "callbackInstance"
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperArgumentNull("callbackInstance");
 
             MakeCacheSettingReadOnly();
 
@@ -250,13 +246,11 @@ namespace System.ServiceModel
         protected ClientBase(InstanceContext callbackInstance, string endpointConfigurationName)
         {
             if (callbackInstance == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                    "callbackInstance"
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperArgumentNull("callbackInstance");
             if (endpointConfigurationName == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                    "endpointConfigurationName"
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperArgumentNull("endpointConfigurationName");
 
             MakeCacheSettingReadOnly();
 
@@ -286,13 +280,11 @@ namespace System.ServiceModel
         )
         {
             if (callbackInstance == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                    "callbackInstance"
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperArgumentNull("callbackInstance");
             if (endpointConfigurationName == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                    "endpointConfigurationName"
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperArgumentNull("endpointConfigurationName");
             if (remoteAddress == null)
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("remoteAddress");
 
@@ -329,13 +321,11 @@ namespace System.ServiceModel
         )
         {
             if (callbackInstance == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                    "callbackInstance"
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperArgumentNull("callbackInstance");
             if (endpointConfigurationName == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                    "endpointConfigurationName"
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperArgumentNull("endpointConfigurationName");
             if (remoteAddress == null)
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("remoteAddress");
 
@@ -371,9 +361,8 @@ namespace System.ServiceModel
         )
         {
             if (callbackInstance == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                    "callbackInstance"
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperArgumentNull("callbackInstance");
             if (binding == null)
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("binding");
             if (remoteAddress == null)
@@ -403,9 +392,8 @@ namespace System.ServiceModel
         protected ClientBase(InstanceContext callbackInstance, ServiceEndpoint endpoint)
         {
             if (callbackInstance == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                    "callbackInstance"
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperArgumentNull("callbackInstance");
             if (endpoint == null)
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("endpoint");
 
@@ -517,14 +505,15 @@ namespace System.ServiceModel
                 {
                     if (isCacheSettingReadOnly && cacheSetting != value)
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new InvalidOperationException(
-                                SR.GetString(
-                                    SR.SFxImmutableClientBaseCacheSetting,
-                                    typeof(TChannel).ToString()
+                        throw DiagnosticUtility.ExceptionUtility
+                            .ThrowHelperError(
+                                new InvalidOperationException(
+                                    SR.GetString(
+                                        SR.SFxImmutableClientBaseCacheSetting,
+                                        typeof(TChannel).ToString()
+                                    )
                                 )
-                            )
-                        );
+                            );
                     }
                     else
                     {
@@ -1161,15 +1150,13 @@ namespace System.ServiceModel
         {
             if (beginOperationDelegate == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                    "beginOperationDelegate"
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperArgumentNull("beginOperationDelegate");
             }
             if (endOperationDelegate == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                    "endOperationDelegate"
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperArgumentNull("endOperationDelegate");
             }
 
             AsyncOperation asyncOperation = AsyncOperationManager.CreateOperation(userState);
@@ -1301,19 +1288,18 @@ namespace System.ServiceModel
             {
                 if (client.Endpoint.Address == null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(
-                            SR.GetString(SR.SFxChannelFactoryEndpointAddressUri)
-                        )
-                    );
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(
+                                SR.GetString(SR.SFxChannelFactoryEndpointAddressUri)
+                            )
+                        );
                 }
 
                 ChannelFactory<T> cf = client.ChannelFactory;
                 cf.EnsureOpened(); // to prevent the NullReferenceException that is thrown if the ChannelFactory is not open when cf.ServiceChannelFactory is accessed.
-                this.channel = cf.ServiceChannelFactory.CreateServiceChannel(
-                    client.Endpoint.Address,
-                    client.Endpoint.Address.Uri
-                );
+                this.channel = cf.ServiceChannelFactory
+                    .CreateServiceChannel(client.Endpoint.Address, client.Endpoint.Address.Uri);
                 this.channel.InstanceContext = cf.CallbackInstance;
                 this.runtime = this.channel.ClientRuntime.GetRuntime();
             }
@@ -1376,11 +1362,12 @@ namespace System.ServiceModel
                 ProxyOperationRuntime op = this.runtime.GetOperationByName(methodName);
                 if (op == null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new NotSupportedException(
-                            SR.GetString(SR.SFxMethodNotSupported1, methodName)
-                        )
-                    );
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperError(
+                            new NotSupportedException(
+                                SR.GetString(SR.SFxMethodNotSupported1, methodName)
+                            )
+                        );
                 }
                 return op;
             }
@@ -1699,25 +1686,22 @@ namespace System.ServiceModel
 
                 public object GetInArg(int argNum)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new NotImplementedException()
-                    );
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperError(new NotImplementedException());
                 }
 
                 public string GetInArgName(int index)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new NotImplementedException()
-                    );
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperError(new NotImplementedException());
                 }
 
                 public int InArgCount
                 {
                     get
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new NotImplementedException()
-                        );
+                        throw DiagnosticUtility.ExceptionUtility
+                            .ThrowHelperError(new NotImplementedException());
                     }
                 }
 
@@ -1728,25 +1712,22 @@ namespace System.ServiceModel
 
                 public object GetArg(int argNum)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new NotImplementedException()
-                    );
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperError(new NotImplementedException());
                 }
 
                 public string GetArgName(int index)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new NotImplementedException()
-                    );
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperError(new NotImplementedException());
                 }
 
                 public bool HasVarArgs
                 {
                     get
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new NotImplementedException()
-                        );
+                        throw DiagnosticUtility.ExceptionUtility
+                            .ThrowHelperError(new NotImplementedException());
                     }
                 }
 
@@ -1754,9 +1735,8 @@ namespace System.ServiceModel
                 {
                     get
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new NotImplementedException()
-                        );
+                        throw DiagnosticUtility.ExceptionUtility
+                            .ThrowHelperError(new NotImplementedException());
                     }
                 }
 
@@ -1764,9 +1744,8 @@ namespace System.ServiceModel
                 {
                     get
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new NotImplementedException()
-                        );
+                        throw DiagnosticUtility.ExceptionUtility
+                            .ThrowHelperError(new NotImplementedException());
                     }
                 }
 
@@ -1774,9 +1753,8 @@ namespace System.ServiceModel
                 {
                     get
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new NotImplementedException()
-                        );
+                        throw DiagnosticUtility.ExceptionUtility
+                            .ThrowHelperError(new NotImplementedException());
                     }
                 }
 
@@ -1784,9 +1762,8 @@ namespace System.ServiceModel
                 {
                     get
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new NotImplementedException()
-                        );
+                        throw DiagnosticUtility.ExceptionUtility
+                            .ThrowHelperError(new NotImplementedException());
                     }
                 }
 
@@ -1794,9 +1771,8 @@ namespace System.ServiceModel
                 {
                     get
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new NotImplementedException()
-                        );
+                        throw DiagnosticUtility.ExceptionUtility
+                            .ThrowHelperError(new NotImplementedException());
                     }
                 }
 
@@ -1804,9 +1780,8 @@ namespace System.ServiceModel
                 {
                     get
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new NotImplementedException()
-                        );
+                        throw DiagnosticUtility.ExceptionUtility
+                            .ThrowHelperError(new NotImplementedException());
                     }
                 }
             }

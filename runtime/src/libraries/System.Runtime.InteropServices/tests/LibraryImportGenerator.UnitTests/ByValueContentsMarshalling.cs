@@ -440,9 +440,8 @@ namespace LibraryImportGenerator.UnitTests
                 TestCode = source,
                 TestBehaviors = TestBehaviors.SkipGeneratedSourcesCheck,
             };
-            test.DisabledDiagnostics.Remove(
-                GeneratorDiagnostics.Ids.NotRecommendedGeneratedComInterfaceUsage
-            );
+            test.DisabledDiagnostics
+                .Remove(GeneratorDiagnostics.Ids.NotRecommendedGeneratedComInterfaceUsage);
             test.ExpectedDiagnostics.AddRange(diagnostics);
             await test.RunAsync();
         }

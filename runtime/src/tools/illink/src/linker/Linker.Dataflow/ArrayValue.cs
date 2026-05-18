@@ -101,10 +101,14 @@ namespace ILLink.Shared.TrimAnalysis
                 }
 #endif
 
-                newValue.IndexValues.Add(
-                    kvp.Key,
-                    new ValueBasicBlockPair(kvp.Value.Value.DeepCopy(), kvp.Value.BasicBlockIndex)
-                );
+                newValue.IndexValues
+                    .Add(
+                        kvp.Key,
+                        new ValueBasicBlockPair(
+                            kvp.Value.Value.DeepCopy(),
+                            kvp.Value.BasicBlockIndex
+                        )
+                    );
             }
 
             return newValue;

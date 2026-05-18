@@ -103,12 +103,13 @@ namespace System.Activities.Runtime
 
         public override bool Execute(ActivityExecutor executor, BookmarkManager bookmarkManager)
         {
-            this.ActivityInstance.ResolveArguments(
-                executor,
-                argumentValueOverrides,
-                resultLocation,
-                nextArgumentIndex
-            );
+            this.ActivityInstance
+                .ResolveArguments(
+                    executor,
+                    argumentValueOverrides,
+                    resultLocation,
+                    nextArgumentIndex
+                );
 
             // Return true always to prevent scheduler from yielding silently.
             return true;

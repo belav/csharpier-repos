@@ -183,8 +183,7 @@ namespace Mono.Btls
                 /* Intermediate certificates are lost in the translation from X509Certificate(2) to X509CertificateImplBtls, so we need to restore them somehow. */
                 var chain = new System.Security.Cryptography.X509Certificates.X509Chain(false);
                 /* Let's try to recover as many as we can. */
-                chain.ChainPolicy.RevocationMode = System
-                    .Security
+                chain.ChainPolicy.RevocationMode = System.Security
                     .Cryptography
                     .X509Certificates
                     .X509RevocationMode

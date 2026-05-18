@@ -123,10 +123,11 @@ namespace System.ServiceModel.Activities.Dispatcher
         )
         {
             Activity workflowDefinition = null;
-            this.workflowDefinitionProvider.TryGetDefinition(
-                this.workflowDefinitionProvider.DefaultDefinitionIdentity,
-                out workflowDefinition
-            );
+            this.workflowDefinitionProvider
+                .TryGetDefinition(
+                    this.workflowDefinitionProvider.DefaultDefinitionIdentity,
+                    out workflowDefinition
+                );
             Fx.Assert(workflowDefinition != null, "Default definition shouldn't be null.");
 
             return WorkflowServiceInstance.InitializeInstance(
@@ -158,58 +159,58 @@ namespace System.ServiceModel.Activities.Dispatcher
             )
             {
                 if (
-                    !this.workflowDefinitionProvider.TryGetDefinitionAndMap(
-                        definitionIdentity,
-                        updatedIdentity.Identity,
-                        out workflowDefinition,
-                        out updateMap
-                    )
+                    !this.workflowDefinitionProvider
+                        .TryGetDefinitionAndMap(
+                            definitionIdentity,
+                            updatedIdentity.Identity,
+                            out workflowDefinition,
+                            out updateMap
+                        )
                 )
                 {
                     if (
-                        this.workflowDefinitionProvider.TryGetDefinition(
-                            updatedIdentity.Identity,
-                            out workflowDefinition
-                        )
+                        this.workflowDefinitionProvider
+                            .TryGetDefinition(updatedIdentity.Identity, out workflowDefinition)
                     )
                     {
-                        throw FxTrace.Exception.AsError(
-                            new FaultException(
-                                OperationExecutionFault.CreateUpdateFailedFault(
-                                    SR.UpdateMapNotFound(
-                                        definitionIdentity,
-                                        updatedIdentity.Identity
+                        throw FxTrace.Exception
+                            .AsError(
+                                new FaultException(
+                                    OperationExecutionFault.CreateUpdateFailedFault(
+                                        SR.UpdateMapNotFound(
+                                            definitionIdentity,
+                                            updatedIdentity.Identity
+                                        )
                                     )
                                 )
-                            )
-                        );
+                            );
                     }
                     else
                     {
-                        throw FxTrace.Exception.AsError(
-                            new FaultException(
-                                OperationExecutionFault.CreateUpdateFailedFault(
-                                    SR.UpdateDefinitionNotFound(updatedIdentity.Identity)
+                        throw FxTrace.Exception
+                            .AsError(
+                                new FaultException(
+                                    OperationExecutionFault.CreateUpdateFailedFault(
+                                        SR.UpdateDefinitionNotFound(updatedIdentity.Identity)
+                                    )
                                 )
-                            )
-                        );
+                            );
                     }
                 }
             }
             else if (
-                !this.workflowDefinitionProvider.TryGetDefinition(
-                    definitionIdentity,
-                    out workflowDefinition
-                )
+                !this.workflowDefinitionProvider
+                    .TryGetDefinition(definitionIdentity, out workflowDefinition)
             )
             {
-                throw FxTrace.Exception.AsError(
-                    new VersionMismatchException(
-                        SR.WorkflowServiceDefinitionIdentityNotMatched(definitionIdentity),
-                        null,
-                        definitionIdentity
-                    )
-                );
+                throw FxTrace.Exception
+                    .AsError(
+                        new VersionMismatchException(
+                            SR.WorkflowServiceDefinitionIdentityNotMatched(definitionIdentity),
+                            null,
+                            definitionIdentity
+                        )
+                    );
             }
 
             WorkflowIdentity definitionToLoad =
@@ -549,14 +550,15 @@ namespace System.ServiceModel.Activities.Dispatcher
                                 && this.keyMap.TryGetValue(key.Value, out conflictingContext)
                             )
                             {
-                                throw FxTrace.Exception.AsError(
-                                    new InstanceKeyCollisionException(
-                                        null,
-                                        context.InstanceId,
-                                        key,
-                                        conflictingContext.InstanceId
-                                    )
-                                );
+                                throw FxTrace.Exception
+                                    .AsError(
+                                        new InstanceKeyCollisionException(
+                                            null,
+                                            context.InstanceId,
+                                            key,
+                                            conflictingContext.InstanceId
+                                        )
+                                    );
                             }
                         }
                     }
@@ -810,15 +812,17 @@ namespace System.ServiceModel.Activities.Dispatcher
             {
                 if (associatedKeys != null)
                 {
-                    throw FxTrace.Exception.AsError(
-                        new InvalidOperationException(SR.NoAdditionalKeysOnInstanceIdLoad)
-                    );
+                    throw FxTrace.Exception
+                        .AsError(
+                            new InvalidOperationException(SR.NoAdditionalKeysOnInstanceIdLoad)
+                        );
                 }
 
-                handle = this.store.CreateInstanceHandle(
-                    this.owner,
-                    suggestedIdOrId == Guid.Empty ? Guid.NewGuid() : suggestedIdOrId
-                );
+                handle = this.store
+                    .CreateInstanceHandle(
+                        this.owner,
+                        suggestedIdOrId == Guid.Empty ? Guid.NewGuid() : suggestedIdOrId
+                    );
                 return new LoadWorkflowCommand()
                 {
                     AcceptUninitializedInstance = canCreateInstance,
@@ -836,9 +840,10 @@ namespace System.ServiceModel.Activities.Dispatcher
 
             if (instanceKeysToAssociate.ContainsKey(keyToAdd.Value))
             {
-                throw FxTrace.Exception.AsError(
-                    new InvalidOperationException(SR.DuplicateInstanceKeyExists(keyToAdd.Value))
-                );
+                throw FxTrace.Exception
+                    .AsError(
+                        new InvalidOperationException(SR.DuplicateInstanceKeyExists(keyToAdd.Value))
+                    );
             }
             instanceKeysToAssociate.Add(keyToAdd.Value, keyToAdd.Metadata);
         }
@@ -896,9 +901,8 @@ namespace System.ServiceModel.Activities.Dispatcher
             {
                 if (this.aborted)
                 {
-                    throw FxTrace.Exception.AsError(
-                        new OperationCanceledException(SR.DirectoryAborted)
-                    );
+                    throw FxTrace.Exception
+                        .AsError(new OperationCanceledException(SR.DirectoryAborted));
                 }
                 else
                 {
@@ -913,9 +917,8 @@ namespace System.ServiceModel.Activities.Dispatcher
             {
                 if (this.aborted)
                 {
-                    throw FxTrace.Exception.AsError(
-                        new OperationCanceledException(SR.DirectoryAborted)
-                    );
+                    throw FxTrace.Exception
+                        .AsError(new OperationCanceledException(SR.DirectoryAborted));
                 }
                 this.pipelinesInUse.Add(pipeline);
             }
@@ -1182,11 +1185,8 @@ namespace System.ServiceModel.Activities.Dispatcher
                     // loadAny requires load from store.
                     this.result = this.loadAny
                         ? null
-                        : this.ppd.LoadFromCache(
-                            this.key,
-                            this.suggestedIdOrId,
-                            this.canCreateInstance
-                        );
+                        : this.ppd
+                            .LoadFromCache(this.key, this.suggestedIdOrId, this.canCreateInstance);
 
                     if (this.result != null)
                     {
@@ -1199,15 +1199,13 @@ namespace System.ServiceModel.Activities.Dispatcher
                         // Fail early if the instance can't be created or loaded, no need to try to take the throttle.
                         if (this.key != null)
                         {
-                            throw FxTrace.Exception.AsError(
-                                new InstanceKeyNotReadyException(null, this.key)
-                            );
+                            throw FxTrace.Exception
+                                .AsError(new InstanceKeyNotReadyException(null, this.key));
                         }
                         else
                         {
-                            throw FxTrace.Exception.AsError(
-                                new InstanceNotReadyException(null, this.suggestedIdOrId)
-                            );
+                            throw FxTrace.Exception
+                                .AsError(new InstanceNotReadyException(null, this.suggestedIdOrId));
                         }
                     }
                     else
@@ -1233,11 +1231,12 @@ namespace System.ServiceModel.Activities.Dispatcher
                         }
                         else // there wasn't a load in progress, so we can move forward with the load.
                         {
-                            IAsyncResult reserveThrottleResult = this.ppd.BeginReserveThrottle(
-                                this.timeoutHelper.RemainingTime(),
-                                this.PrepareAsyncCompletion(handleReserveThrottle),
-                                this
-                            );
+                            IAsyncResult reserveThrottleResult = this.ppd
+                                .BeginReserveThrottle(
+                                    this.timeoutHelper.RemainingTime(),
+                                    this.PrepareAsyncCompletion(handleReserveThrottle),
+                                    this
+                                );
                             completeSelf = this.SyncContinue(reserveThrottleResult);
                         }
                     }
@@ -1298,36 +1297,38 @@ namespace System.ServiceModel.Activities.Dispatcher
                     {
                         this.suggestedIdOrId = Guid.NewGuid();
                     }
-                    this.handle = this.ppd.store.CreateInstanceHandle(
-                        this.ppd.owner,
-                        this.suggestedIdOrId
-                    );
+                    this.handle = this.ppd
+                        .store
+                        .CreateInstanceHandle(this.ppd.owner, this.suggestedIdOrId);
                     this.isInstanceInitialized = false;
                     return AfterLoad();
                 }
 
                 Fx.Assert(this.lockInstance, "To get here async, lockInstance must be true.");
 
-                InstancePersistenceCommand loadCommand = this.ppd.CreateLoadCommandHelper(
-                    this.key,
-                    out this.handle,
-                    this.canCreateInstance,
-                    this.suggestedIdOrId,
-                    this.associatedKeys,
-                    this.loadAny
-                );
+                InstancePersistenceCommand loadCommand = this.ppd
+                    .CreateLoadCommandHelper(
+                        this.key,
+                        out this.handle,
+                        this.canCreateInstance,
+                        this.suggestedIdOrId,
+                        this.associatedKeys,
+                        this.loadAny
+                    );
                 IAsyncResult executeResult;
                 try
                 {
                     using (PrepareTransactionalCall(this.transaction))
                     {
-                        executeResult = this.ppd.store.BeginExecute(
-                            this.handle,
-                            loadCommand,
-                            this.timeoutHelper.RemainingTime(),
-                            PrepareAsyncCompletion(LoadOrCreateAsyncResult.HandleExecute),
-                            this
-                        );
+                        executeResult = this.ppd
+                            .store
+                            .BeginExecute(
+                                this.handle,
+                                loadCommand,
+                                this.timeoutHelper.RemainingTime(),
+                                PrepareAsyncCompletion(LoadOrCreateAsyncResult.HandleExecute),
+                                this
+                            );
                     }
                 }
                 catch (InstanceHandleConflictException)
@@ -1396,15 +1397,15 @@ namespace System.ServiceModel.Activities.Dispatcher
                 {
                     if (thisPtr.loadAny)
                     {
-                        throw FxTrace.Exception.AsError(
-                            new InstanceNotReadyException(SR.NoRunnableInstances)
-                        );
+                        throw FxTrace.Exception
+                            .AsError(new InstanceNotReadyException(SR.NoRunnableInstances));
                     }
                     else
                     {
-                        throw FxTrace.Exception.AsError(
-                            new InvalidOperationException(SR.StoreViolationNoInstanceBound)
-                        );
+                        throw FxTrace.Exception
+                            .AsError(
+                                new InvalidOperationException(SR.StoreViolationNoInstanceBound)
+                            );
                     }
                 }
                 thisPtr.isInstanceInitialized =
@@ -1418,11 +1419,8 @@ namespace System.ServiceModel.Activities.Dispatcher
 
                 this.result = this.loadAny
                     ? null
-                    : this.ppd.LoadFromCache(
-                        this.key,
-                        this.suggestedIdOrId,
-                        this.canCreateInstance
-                    );
+                    : this.ppd
+                        .LoadFromCache(this.key, this.suggestedIdOrId, this.canCreateInstance);
                 if (this.result != null)
                 {
                     return true;
@@ -1473,9 +1471,10 @@ namespace System.ServiceModel.Activities.Dispatcher
                 {
                     if (!this.canCreateInstance)
                     {
-                        throw FxTrace.Exception.AsError(
-                            new InvalidOperationException(SR.PersistenceViolationNoCreate)
-                        );
+                        throw FxTrace.Exception
+                            .AsError(
+                                new InvalidOperationException(SR.PersistenceViolationNoCreate)
+                            );
                     }
 
                     if (this.view == null)
@@ -1499,13 +1498,16 @@ namespace System.ServiceModel.Activities.Dispatcher
                             this.ppd.store,
                             this.handle,
                             this.view.InstanceId,
-                            this.view.InstanceKeys.Values.Select(
-                                (keyView) =>
-                                    new InstanceKey(
-                                        keyView.InstanceKey,
-                                        keyView.InstanceKeyMetadata
-                                    )
-                            ),
+                            this.view
+                                .InstanceKeys
+                                .Values
+                                .Select(
+                                    (keyView) =>
+                                        new InstanceKey(
+                                            keyView.InstanceKey,
+                                            keyView.InstanceKeyMetadata
+                                        )
+                                ),
                             true,
                             true,
                             this.view,
@@ -1524,10 +1526,16 @@ namespace System.ServiceModel.Activities.Dispatcher
                         this.ppd.store,
                         this.handle,
                         this.view.InstanceId,
-                        this.view.InstanceKeys.Values.Select(
-                            (keyView) =>
-                                new InstanceKey(keyView.InstanceKey, keyView.InstanceKeyMetadata)
-                        ),
+                        this.view
+                            .InstanceKeys
+                            .Values
+                            .Select(
+                                (keyView) =>
+                                    new InstanceKey(
+                                        keyView.InstanceKey,
+                                        keyView.InstanceKeyMetadata
+                                    )
+                            ),
                         false,
                         true,
                         this.view,
@@ -1535,8 +1543,8 @@ namespace System.ServiceModel.Activities.Dispatcher
                     );
                     this.handle = null;
 
-                    IEnumerable<IPersistencePipelineModule> modules = this
-                        .context.GetInstance(null)
+                    IEnumerable<IPersistencePipelineModule> modules = this.context
+                        .GetInstance(null)
                         .PipelineModules;
                     if (modules != null)
                     {
@@ -1548,11 +1556,14 @@ namespace System.ServiceModel.Activities.Dispatcher
                         IAsyncResult loadResult;
                         using (PrepareTransactionalCall(this.transaction))
                         {
-                            loadResult = this.pipeline.BeginLoad(
-                                this.timeoutHelper.RemainingTime(),
-                                PrepareAsyncCompletion(LoadOrCreateAsyncResult.handleLoadPipeline),
-                                this
-                            );
+                            loadResult = this.pipeline
+                                .BeginLoad(
+                                    this.timeoutHelper.RemainingTime(),
+                                    PrepareAsyncCompletion(
+                                        LoadOrCreateAsyncResult.handleLoadPipeline
+                                    ),
+                                    this
+                                );
                         }
                         return SyncContinue(loadResult);
                     }
@@ -1566,35 +1577,38 @@ namespace System.ServiceModel.Activities.Dispatcher
                 Fx.Assert(this.view != null, "view must not be null!");
                 InstanceValue instanceValue;
                 if (
-                    !this.view.InstanceMetadata.TryGetValue(
-                        WorkflowNamespace.WorkflowHostType,
-                        out instanceValue
-                    )
+                    !this.view
+                        .InstanceMetadata
+                        .TryGetValue(WorkflowNamespace.WorkflowHostType, out instanceValue)
                 )
                 {
-                    throw FxTrace.Exception.AsError(
-                        new InstancePersistenceCommandException(
-                            SRCore.NullAssignedToValueType(
-                                this.ppd.serviceHost.DurableInstancingOptions.ScopeName
+                    throw FxTrace.Exception
+                        .AsError(
+                            new InstancePersistenceCommandException(
+                                SRCore.NullAssignedToValueType(
+                                    this.ppd.serviceHost.DurableInstancingOptions.ScopeName
+                                )
                             )
-                        )
-                    );
+                        );
                 }
 
                 if (
-                    !this.ppd.serviceHost.DurableInstancingOptions.ScopeName.Equals(
-                        instanceValue.Value
-                    )
+                    !this.ppd
+                        .serviceHost
+                        .DurableInstancingOptions
+                        .ScopeName
+                        .Equals(instanceValue.Value)
                 )
                 {
-                    throw FxTrace.Exception.AsError(
-                        new InstancePersistenceCommandException(
-                            SRCore.IncorrectValueType(
-                                this.ppd.serviceHost.DurableInstancingOptions.ScopeName,
-                                instanceValue.Value
+                    throw FxTrace.Exception
+                        .AsError(
+                            new InstancePersistenceCommandException(
+                                SRCore.IncorrectValueType(
+                                    this.ppd.serviceHost.DurableInstancingOptions.ScopeName,
+                                    instanceValue.Value
+                                )
                             )
-                        )
-                    );
+                        );
                 }
             }
 
@@ -1619,11 +1633,12 @@ namespace System.ServiceModel.Activities.Dispatcher
                 IAsyncResult result;
                 using (PrepareTransactionalCall(this.transaction))
                 {
-                    result = this.context.BeginEnlist(
-                        this.timeoutHelper.RemainingTime(),
-                        PrepareAsyncCompletion(LoadOrCreateAsyncResult.handleContextEnlist),
-                        this
-                    );
+                    result = this.context
+                        .BeginEnlist(
+                            this.timeoutHelper.RemainingTime(),
+                            PrepareAsyncCompletion(LoadOrCreateAsyncResult.handleContextEnlist),
+                            this
+                        );
                 }
                 return (SyncContinue(result));
             }
@@ -1657,10 +1672,9 @@ namespace System.ServiceModel.Activities.Dispatcher
                     {
                         if (this.key == null)
                         {
-                            this.ppd.instanceCache.TryGetValue(
-                                this.suggestedIdOrId,
-                                out this.result
-                            );
+                            this.ppd
+                                .instanceCache
+                                .TryGetValue(this.suggestedIdOrId, out this.result);
                         }
                         else
                         {
@@ -1678,20 +1692,20 @@ namespace System.ServiceModel.Activities.Dispatcher
                         {
                             PersistenceContext conflictingContext;
                             if (
-                                this.ppd.keyMap.TryGetValue(
-                                    instanceKey.Value,
-                                    out conflictingContext
-                                )
+                                this.ppd
+                                    .keyMap
+                                    .TryGetValue(instanceKey.Value, out conflictingContext)
                             )
                             {
-                                throw FxTrace.Exception.AsError(
-                                    new InstanceKeyCollisionException(
-                                        null,
-                                        this.context.InstanceId,
-                                        instanceKey,
-                                        conflictingContext.InstanceId
-                                    )
-                                );
+                                throw FxTrace.Exception
+                                    .AsError(
+                                        new InstanceKeyCollisionException(
+                                            null,
+                                            this.context.InstanceId,
+                                            instanceKey,
+                                            conflictingContext.InstanceId
+                                        )
+                                    );
                             }
                         }
                     }
@@ -1701,19 +1715,17 @@ namespace System.ServiceModel.Activities.Dispatcher
                         // If the handle is already invalid, don't boot other instances out of the cache.
                         // If the handle is valid here, that means any PersistenceContexts in the cache under this lock
                         // must be stale - the persistence framework doesn't allow multiple valid handles.
-                        throw FxTrace.Exception.AsError(
-                            new OperationCanceledException(SR.HandleFreedInDirectory)
-                        );
+                        throw FxTrace.Exception
+                            .AsError(new OperationCanceledException(SR.HandleFreedInDirectory));
                     }
 
                     this.context.IsVisible = true;
 
                     PersistenceContext contextToAbort;
                     if (
-                        this.ppd.instanceCache.TryGetValue(
-                            this.context.InstanceId,
-                            out contextToAbort
-                        )
+                        this.ppd
+                            .instanceCache
+                            .TryGetValue(this.context.InstanceId, out contextToAbort)
                     )
                     {
                         // This is a known race condition. An instace we have loaded can get unlocked, get keys
@@ -1791,23 +1803,31 @@ namespace System.ServiceModel.Activities.Dispatcher
                 {
                     if (!thisPtr.isInstanceInitialized && thisPtr.canCreateInstance)
                     {
-                        thisPtr.ppd.serviceHost.WorkflowServiceHostPerformanceCounters.WorkflowCreated();
+                        thisPtr.ppd
+                            .serviceHost
+                            .WorkflowServiceHostPerformanceCounters
+                            .WorkflowCreated();
                     }
                     else
                     {
-                        thisPtr.ppd.serviceHost.WorkflowServiceHostPerformanceCounters.WorkflowLoaded();
+                        thisPtr.ppd
+                            .serviceHost
+                            .WorkflowServiceHostPerformanceCounters
+                            .WorkflowLoaded();
                     }
 
-                    thisPtr.ppd.serviceHost.WorkflowServiceHostPerformanceCounters.WorkflowLoadDuration(
-                        thisPtr.GetDuration()
-                    );
+                    thisPtr.ppd
+                        .serviceHost
+                        .WorkflowServiceHostPerformanceCounters
+                        .WorkflowLoadDuration(thisPtr.GetDuration());
                 }
 
                 if (exception is OperationCanceledException)
                 {
-                    throw FxTrace.Exception.AsError(
-                        new CommunicationObjectAbortedException(SR.LoadingAborted, exception)
-                    );
+                    throw FxTrace.Exception
+                        .AsError(
+                            new CommunicationObjectAbortedException(SR.LoadingAborted, exception)
+                        );
                 }
             }
         }
@@ -1831,11 +1851,8 @@ namespace System.ServiceModel.Activities.Dispatcher
             {
                 this.ppd = directory;
                 if (
-                    directory.throttle.EnterAsync(
-                        timeout,
-                        ReserveThrottleAsyncResult.onThrottleAcquired,
-                        this
-                    )
+                    directory.throttle
+                        .EnterAsync(timeout, ReserveThrottleAsyncResult.onThrottleAcquired, this)
                 )
                 {
                     this.ownsThrottle = true;
@@ -1850,7 +1867,10 @@ namespace System.ServiceModel.Activities.Dispatcher
                 thisPtr.ownsThrottle = asyncException == null;
                 if (thisPtr.ownsThrottle)
                 {
-                    thisPtr.ppd.serviceHost.WorkflowServiceHostPerformanceCounters.WorkflowInMemory();
+                    thisPtr.ppd
+                        .serviceHost
+                        .WorkflowServiceHostPerformanceCounters
+                        .WorkflowInMemory();
                 }
                 thisPtr.Complete(false, asyncException);
             }

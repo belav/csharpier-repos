@@ -224,8 +224,8 @@ public abstract class DataAnnotationTestBase<TFixture> : IClassFixture<TFixture>
         Validate(modelBuilder);
 
         Assert.Null(
-            modelBuilder
-                .Model.FindEntityType(typeof(AbstractBaseEntity1))
+            modelBuilder.Model
+                .FindEntityType(typeof(AbstractBaseEntity1))
                 .FindProperty("BaseClassProperty")
         );
         Assert.NotNull(
@@ -235,18 +235,18 @@ public abstract class DataAnnotationTestBase<TFixture> : IClassFixture<TFixture>
             modelBuilder.Model.FindEntityType(typeof(Unit1)).FindProperty("BaseClassProperty")
         );
         Assert.Null(
-            modelBuilder
-                .Model.FindEntityType(typeof(AbstractBaseEntity1))
+            modelBuilder.Model
+                .FindEntityType(typeof(AbstractBaseEntity1))
                 .FindProperty("VirtualBaseClassProperty")
         );
         Assert.Null(
-            modelBuilder
-                .Model.FindEntityType(typeof(BaseEntity1))
+            modelBuilder.Model
+                .FindEntityType(typeof(BaseEntity1))
                 .FindProperty("VirtualBaseClassProperty")
         );
         Assert.Null(
-            modelBuilder
-                .Model.FindEntityType(typeof(Unit1))
+            modelBuilder.Model
+                .FindEntityType(typeof(Unit1))
                 .FindProperty("VirtualBaseClassProperty")
         );
     }
@@ -290,18 +290,18 @@ public abstract class DataAnnotationTestBase<TFixture> : IClassFixture<TFixture>
         Validate(modelBuilder);
 
         Assert.Null(
-            modelBuilder
-                .Model.FindEntityType(typeof(AbstractBaseEntity2))
+            modelBuilder.Model
+                .FindEntityType(typeof(AbstractBaseEntity2))
                 .FindProperty("VirtualBaseClassProperty")
         );
         Assert.Null(
-            modelBuilder
-                .Model.FindEntityType(typeof(BaseEntity2))
+            modelBuilder.Model
+                .FindEntityType(typeof(BaseEntity2))
                 .FindProperty("VirtualBaseClassProperty")
         );
         Assert.Null(
-            modelBuilder
-                .Model.FindEntityType(typeof(Unit2))
+            modelBuilder.Model
+                .FindEntityType(typeof(Unit2))
                 .FindProperty("VirtualBaseClassProperty")
         );
     }
@@ -345,14 +345,14 @@ public abstract class DataAnnotationTestBase<TFixture> : IClassFixture<TFixture>
         Validate(modelBuilder);
 
         Assert.Null(
-            modelBuilder
-                .Model.FindEntityType(typeof(AbstractBaseEntity3))
+            modelBuilder.Model
+                .FindEntityType(typeof(AbstractBaseEntity3))
                 .FindProperty("AbstractBaseClassProperty")
         );
         Assert.Null(modelBuilder.Model.FindEntityType(typeof(BaseEntity3)));
         Assert.Null(
-            modelBuilder
-                .Model.FindEntityType(typeof(Unit3))
+            modelBuilder.Model
+                .FindEntityType(typeof(Unit3))
                 .FindProperty("AbstractBaseClassProperty")
         );
     }
@@ -366,8 +366,8 @@ public abstract class DataAnnotationTestBase<TFixture> : IClassFixture<TFixture>
         modelBuilder.Entity<BaseEntity3>();
 
         Assert.NotNull(
-            modelBuilder
-                .Model.FindEntityType(typeof(Unit3))
+            modelBuilder.Model
+                .FindEntityType(typeof(Unit3))
                 .FindProperty("VirtualBaseClassProperty")
         );
 
@@ -388,8 +388,8 @@ public abstract class DataAnnotationTestBase<TFixture> : IClassFixture<TFixture>
         Assert.Null(modelBuilder.Model.FindEntityType(typeof(AbstractBaseEntity3)));
         Assert.Null(modelBuilder.Model.FindEntityType(typeof(BaseEntity3)));
         Assert.Null(
-            modelBuilder
-                .Model.FindEntityType(typeof(Unit3))
+            modelBuilder.Model
+                .FindEntityType(typeof(Unit3))
                 .FindProperty("VirtualBaseClassProperty")
         );
     }
@@ -434,18 +434,18 @@ public abstract class DataAnnotationTestBase<TFixture> : IClassFixture<TFixture>
         Validate(modelBuilder);
 
         Assert.Null(
-            modelBuilder
-                .Model.FindEntityType(typeof(AbstractBaseEntity3))
+            modelBuilder.Model
+                .FindEntityType(typeof(AbstractBaseEntity3))
                 .FindProperty("AbstractBaseClassProperty")
         );
         Assert.Null(
-            modelBuilder
-                .Model.FindEntityType(typeof(BaseEntity3))
+            modelBuilder.Model
+                .FindEntityType(typeof(BaseEntity3))
                 .FindProperty("AbstractBaseClassProperty")
         );
         Assert.Null(
-            modelBuilder
-                .Model.FindEntityType(typeof(Unit3))
+            modelBuilder.Model
+                .FindEntityType(typeof(Unit3))
                 .FindProperty("AbstractBaseClassProperty")
         );
     }
@@ -463,8 +463,8 @@ public abstract class DataAnnotationTestBase<TFixture> : IClassFixture<TFixture>
         Assert.Null(modelBuilder.Model.FindEntityType(typeof(AbstractBaseEntity2)));
         Assert.Null(modelBuilder.Model.FindEntityType(typeof(BaseEntity2)));
         Assert.Null(
-            modelBuilder
-                .Model.FindEntityType(typeof(Unit2))
+            modelBuilder.Model
+                .FindEntityType(typeof(Unit2))
                 .FindProperty("VirtualBaseClassProperty")
         );
     }
@@ -483,8 +483,8 @@ public abstract class DataAnnotationTestBase<TFixture> : IClassFixture<TFixture>
         Assert.Null(modelBuilder.Model.FindEntityType(typeof(AbstractBaseEntity1)));
         Assert.Null(modelBuilder.Model.FindEntityType(typeof(BaseEntity1)));
         Assert.Null(
-            modelBuilder
-                .Model.FindEntityType(typeof(Unit1))
+            modelBuilder.Model
+                .FindEntityType(typeof(Unit1))
                 .FindProperty("VirtualBaseClassProperty")
         );
     }
@@ -502,8 +502,8 @@ public abstract class DataAnnotationTestBase<TFixture> : IClassFixture<TFixture>
         Assert.Null(modelBuilder.Model.FindEntityType(typeof(BaseEntity5)));
         Assert.Null(modelBuilder.Model.FindEntityType(typeof(Unit5)));
         Assert.Null(
-            modelBuilder
-                .Model.FindEntityType(typeof(DifferentUnit5))
+            modelBuilder.Model
+                .FindEntityType(typeof(DifferentUnit5))
                 .FindProperty("VirtualBaseClassProperty")
         );
     }
@@ -2030,7 +2030,8 @@ public abstract class DataAnnotationTestBase<TFixture> : IClassFixture<TFixture>
                 .FindEntityType(typeof(Book))
                 .GetNavigations()
                 .Single(n => n.Name == "Details")
-                .ForeignKey.DeclaringEntityType
+                .ForeignKey
+                .DeclaringEntityType
         );
         Assert.Contains(
             "Details",
@@ -2068,7 +2069,8 @@ public abstract class DataAnnotationTestBase<TFixture> : IClassFixture<TFixture>
             model
                 .FindEntityType(typeof(BookLabel))
                 .FindNavigation(nameof(BookLabel.Book))
-                .Inverse?.Name
+                .Inverse
+                ?.Name
         );
 
         Assert.Null(
@@ -2093,7 +2095,8 @@ public abstract class DataAnnotationTestBase<TFixture> : IClassFixture<TFixture>
             model
                 .FindEntityType(typeof(SpecialBookLabel))
                 .FindNavigation(nameof(SpecialBookLabel.Book))
-                .Inverse?.Name
+                .Inverse
+                ?.Name
         );
         Assert.Null(
             model.FindEntityType(typeof(Book)).FindNavigation(nameof(Book.AlternateLabel)).Inverse
@@ -2133,7 +2136,8 @@ public abstract class DataAnnotationTestBase<TFixture> : IClassFixture<TFixture>
             model
                 .FindEntityType(typeof(SpecialBookLabel))
                 .FindNavigation(nameof(SpecialBookLabel.Book))
-                .Inverse?.Name
+                .Inverse
+                ?.Name
         );
         Assert.Null(model.FindEntityType(typeof(Book)).FindNavigation(nameof(Book.AlternateLabel)));
     }
@@ -2176,7 +2180,8 @@ public abstract class DataAnnotationTestBase<TFixture> : IClassFixture<TFixture>
             model
                 .FindEntityType(typeof(SpecialBookLabel))
                 .FindNavigation(nameof(SpecialBookLabel.Book))
-                .Inverse?.Name
+                .Inverse
+                ?.Name
         );
         Assert.Null(model.FindEntityType(typeof(Book)).FindNavigation(nameof(Book.AlternateLabel)));
     }
@@ -2198,7 +2203,8 @@ public abstract class DataAnnotationTestBase<TFixture> : IClassFixture<TFixture>
             model
                 .FindEntityType(typeof(ExtraSpecialBookLabel))
                 .FindNavigation(nameof(ExtraSpecialBookLabel.Book))
-                .Inverse?.Name
+                .Inverse
+                ?.Name
         );
         Assert.Null(
             model
@@ -2384,14 +2390,16 @@ public abstract class DataAnnotationTestBase<TFixture> : IClassFixture<TFixture>
             model
                 .FindEntityType(typeof(Blog7698))
                 .FindNavigation(nameof(Blog7698.PostNav))
-                .Inverse.Name
+                .Inverse
+                .Name
         );
         Assert.Equal(
             nameof(SpecialPost7698.BlogInverseNav),
             model
                 .FindEntityType(typeof(Blog7698))
                 .FindNavigation(nameof(Blog7698.ASpecialPostNav))
-                .Inverse.Name
+                .Inverse
+                .Name
         );
     }
 
@@ -2550,14 +2558,17 @@ public abstract class DataAnnotationTestBase<TFixture> : IClassFixture<TFixture>
             model
                 .FindEntityType(typeof(Post))
                 .FindNavigation("PostDetails")
-                .ForeignKey.PrincipalToDependent
+                .ForeignKey
+                .PrincipalToDependent
         );
         Assert.Equal(
             "PostDetailsId",
             model
                 .FindEntityType(typeof(Post))
                 .FindNavigation("PostDetails")
-                .ForeignKey.Properties.First()
+                .ForeignKey
+                .Properties
+                .First()
                 .Name
         );
 
@@ -2565,14 +2576,17 @@ public abstract class DataAnnotationTestBase<TFixture> : IClassFixture<TFixture>
             model
                 .FindEntityType(typeof(PostDetails))
                 .FindNavigation("Post")
-                .ForeignKey.PrincipalToDependent
+                .ForeignKey
+                .PrincipalToDependent
         );
         Assert.Equal(
             "PostId",
             model
                 .FindEntityType(typeof(PostDetails))
                 .FindNavigation("Post")
-                .ForeignKey.Properties.First()
+                .ForeignKey
+                .Properties
+                .First()
                 .Name
         );
 
@@ -2606,14 +2620,17 @@ public abstract class DataAnnotationTestBase<TFixture> : IClassFixture<TFixture>
             model
                 .FindEntityType(typeof(Post))
                 .FindNavigation("Author")
-                .ForeignKey.PrincipalToDependent
+                .ForeignKey
+                .PrincipalToDependent
         );
         Assert.Equal(
             "AuthorId",
             model
                 .FindEntityType(typeof(Post))
                 .FindNavigation("Author")
-                .ForeignKey.Properties.First()
+                .ForeignKey
+                .Properties
+                .First()
                 .Name
         );
 
@@ -2621,14 +2638,17 @@ public abstract class DataAnnotationTestBase<TFixture> : IClassFixture<TFixture>
             model
                 .FindEntityType(typeof(Author))
                 .FindNavigation("Post")
-                .ForeignKey.PrincipalToDependent
+                .ForeignKey
+                .PrincipalToDependent
         );
         Assert.Equal(
             "PostId",
             model
                 .FindEntityType(typeof(Author))
                 .FindNavigation("Post")
-                .ForeignKey.Properties.First()
+                .ForeignKey
+                .Properties
+                .First()
                 .Name
         );
 
@@ -3088,7 +3108,8 @@ public abstract class DataAnnotationTestBase<TFixture> : IClassFixture<TFixture>
             model
                 .FindEntityType(typeof(Order))
                 .FindNavigation(nameof(Order.ShippingAddress))
-                .ForeignKey.IsOwnership
+                .ForeignKey
+                .IsOwnership
         );
     }
 
@@ -3127,7 +3148,8 @@ public abstract class DataAnnotationTestBase<TFixture> : IClassFixture<TFixture>
             model
                 .FindEntityType(typeof(Book))
                 .FindNavigation(nameof(Book.AdditionalDetails))
-                .ForeignKey.IsOwnership
+                .ForeignKey
+                .IsOwnership
         );
         var one = model.FindEntityType(typeof(One));
         var ownership1 = one.FindNavigation(nameof(One.Details)).ForeignKey;

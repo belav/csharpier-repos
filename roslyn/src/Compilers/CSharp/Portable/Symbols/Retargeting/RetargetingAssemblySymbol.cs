@@ -312,10 +312,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Retargeting
                 return null;
             }
 
-            return this.RetargetingTranslator.Retarget(
-                underlying,
-                RetargetOptions.RetargetPrimitiveTypesByName
-            );
+            return this.RetargetingTranslator
+                .Retarget(underlying, RetargetOptions.RetargetPrimitiveTypesByName);
         }
 
 #nullable disable
@@ -326,10 +324,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Retargeting
                 NamedTypeSymbol underlying in _underlyingAssembly.GetAllTopLevelForwardedTypes()
             )
             {
-                yield return this.RetargetingTranslator.Retarget(
-                    underlying,
-                    RetargetOptions.RetargetPrimitiveTypesByName
-                );
+                yield return this.RetargetingTranslator
+                    .Retarget(underlying, RetargetOptions.RetargetPrimitiveTypesByName);
             }
         }
 

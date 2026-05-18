@@ -272,8 +272,7 @@ namespace System.ServiceModel.Configuration
             }
             if (
                 PropertyValueOrigin.Default
-                != source
-                    .ElementInformation
+                != source.ElementInformation
                     .Properties[ConfigurationStrings.DetectReplays]
                     .ValueOrigin
             )

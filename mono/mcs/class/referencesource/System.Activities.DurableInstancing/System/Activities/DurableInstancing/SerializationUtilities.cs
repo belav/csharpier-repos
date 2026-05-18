@@ -139,8 +139,7 @@ namespace System.Activities.DurableInstancing
             if (context.InstanceView.InstanceMetadataConsistency == InstanceValueConsistency.None)
             {
                 foreach (
-                    KeyValuePair<XName, InstanceValue> metadataProperty in context
-                        .InstanceView
+                    KeyValuePair<XName, InstanceValue> metadataProperty in context.InstanceView
                         .InstanceMetadata
                 )
                 {
@@ -389,10 +388,11 @@ namespace System.Activities.DurableInstancing
                     command as CreateWorkflowOwnerWithIdentityCommand;
 
                 if (
-                    ownerCommand.InstanceOwnerMetadata.TryGetValue(
-                        Workflow45Namespace.DefinitionIdentities,
-                        out instanceValueIdentityCollection
-                    )
+                    ownerCommand.InstanceOwnerMetadata
+                        .TryGetValue(
+                            Workflow45Namespace.DefinitionIdentities,
+                            out instanceValueIdentityCollection
+                        )
                 )
                 {
                     if (instanceValueIdentityCollection.Value != null)
@@ -401,28 +401,28 @@ namespace System.Activities.DurableInstancing
                             instanceValueIdentityCollection.Value as IList<WorkflowIdentity>;
                         if (identityCollection == null)
                         {
-                            string typeName = typeof(IList<>).Name.Replace(
-                                "`1",
-                                "<" + typeof(WorkflowIdentity).Name + ">"
-                            );
-                            throw FxTrace.Exception.AsError(
-                                new InstancePersistenceCommandException(
-                                    SR.InvalidMetadataValue(
-                                        Workflow45Namespace.DefinitionIdentities,
-                                        typeName
+                            string typeName = typeof(IList<>).Name
+                                .Replace("`1", "<" + typeof(WorkflowIdentity).Name + ">");
+                            throw FxTrace.Exception
+                                .AsError(
+                                    new InstancePersistenceCommandException(
+                                        SR.InvalidMetadataValue(
+                                            Workflow45Namespace.DefinitionIdentities,
+                                            typeName
+                                        )
                                     )
-                                )
-                            );
+                                );
                         }
                     }
                 }
 
                 InstanceValue instanceValue = null;
                 if (
-                    ownerCommand.InstanceOwnerMetadata.TryGetValue(
-                        Workflow45Namespace.DefinitionIdentityFilter,
-                        out instanceValue
-                    )
+                    ownerCommand.InstanceOwnerMetadata
+                        .TryGetValue(
+                            Workflow45Namespace.DefinitionIdentityFilter,
+                            out instanceValue
+                        )
                 )
                 {
                     if (instanceValue.Value != null)
@@ -442,14 +442,15 @@ namespace System.Activities.DurableInstancing
                             && workflowIdentityFilter != (int)WorkflowIdentityFilter.AnyRevision
                         )
                         {
-                            throw FxTrace.Exception.AsError(
-                                new InstancePersistenceCommandException(
-                                    SR.InvalidMetadataValue(
-                                        Workflow45Namespace.DefinitionIdentityFilter,
-                                        typeof(WorkflowIdentityFilter).Name
+                            throw FxTrace.Exception
+                                .AsError(
+                                    new InstancePersistenceCommandException(
+                                        SR.InvalidMetadataValue(
+                                            Workflow45Namespace.DefinitionIdentityFilter,
+                                            typeof(WorkflowIdentityFilter).Name
+                                        )
                                     )
-                                )
-                            );
+                                );
                         }
                     }
                 }
@@ -459,10 +460,8 @@ namespace System.Activities.DurableInstancing
                 InstanceValue instanceValue = null;
                 SaveWorkflowCommand saveCommand = command as SaveWorkflowCommand;
                 if (
-                    saveCommand.InstanceMetadataChanges.TryGetValue(
-                        Workflow45Namespace.DefinitionIdentity,
-                        out instanceValue
-                    )
+                    saveCommand.InstanceMetadataChanges
+                        .TryGetValue(Workflow45Namespace.DefinitionIdentity, out instanceValue)
                 )
                 {
                     if (!instanceValue.IsDeletedValue && instanceValue.Value != null)
@@ -470,14 +469,15 @@ namespace System.Activities.DurableInstancing
                         identityCollection = new Collection<WorkflowIdentity>();
                         if (!(instanceValue.Value is WorkflowIdentity))
                         {
-                            throw FxTrace.Exception.AsError(
-                                new InstancePersistenceCommandException(
-                                    SR.InvalidMetadataValue(
-                                        Workflow45Namespace.DefinitionIdentity,
-                                        typeof(WorkflowIdentity).Name
+                            throw FxTrace.Exception
+                                .AsError(
+                                    new InstancePersistenceCommandException(
+                                        SR.InvalidMetadataValue(
+                                            Workflow45Namespace.DefinitionIdentity,
+                                            typeof(WorkflowIdentity).Name
+                                        )
                                     )
-                                )
-                            );
+                                );
                         }
 
                         identityCollection.Add((WorkflowIdentity)instanceValue.Value);

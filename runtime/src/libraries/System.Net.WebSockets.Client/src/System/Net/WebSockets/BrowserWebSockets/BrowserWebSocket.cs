@@ -54,16 +54,17 @@ namespace System.Net.WebSockets
 #endif
 
 #if FEATURE_WASM_THREADS
-                return FastState = _innerWebSocket!.SynchronizationContext.Send(
-                    static (BrowserWebSocket self) =>
-                    {
-                        lock (self._thisLock)
+                return FastState = _innerWebSocket!.SynchronizationContext
+                    .Send(
+                        static (BrowserWebSocket self) =>
                         {
-                            return GetReadyState(self._innerWebSocket!);
-                        } //lock
-                    },
-                    this
-                );
+                            lock (self._thisLock)
+                            {
+                                return GetReadyState(self._innerWebSocket!);
+                            } //lock
+                        },
+                        this
+                    );
 #else
                 return FastState = GetReadyState(_innerWebSocket!);
 #endif
@@ -114,10 +115,8 @@ namespace System.Net.WebSockets
 #endif
 
 #if FEATURE_WASM_THREADS
-                return _innerWebSocket.SynchronizationContext.Send(
-                    BrowserInterop.GetProtocol,
-                    _innerWebSocket
-                );
+                return _innerWebSocket.SynchronizationContext
+                    .Send(BrowserInterop.GetProtocol, _innerWebSocket);
 #else
                 return BrowserInterop.GetProtocol(_innerWebSocket);
 #endif
@@ -138,23 +137,25 @@ namespace System.Net.WebSockets
                 throw new InvalidOperationException(SR.net_WebSockets_AlreadyStarted);
             }
 #if FEATURE_WASM_THREADS
-            JSHost.CurrentOrMainJSSynchronizationContext!.Send(
-                _ =>
-                {
-                    lock (_thisLock)
+            JSHost.CurrentOrMainJSSynchronizationContext!
+                .Send(
+                    _ =>
                     {
-                        ThrowIfDisposed();
-                        FastState = WebSocketState.Connecting;
-                        CreateCore(uri, requestedSubProtocols);
-                    }
-                },
-                null
-            );
+                        lock (_thisLock)
+                        {
+                            ThrowIfDisposed();
+                            FastState = WebSocketState.Connecting;
+                            CreateCore(uri, requestedSubProtocols);
+                        }
+                    },
+                    null
+                );
 
-            return JSHost.CurrentOrMainJSSynchronizationContext.Send(() =>
-            {
-                return ConnectAsyncCore(cancellationToken);
-            });
+            return JSHost.CurrentOrMainJSSynchronizationContext
+                .Send(() =>
+                {
+                    return ConnectAsyncCore(cancellationToken);
+                });
 #else
             FastState = WebSocketState.Connecting;
             CreateCore(uri, requestedSubProtocols);
@@ -200,17 +201,23 @@ namespace System.Net.WebSockets
             WebSocketValidate.ValidateArraySegment(buffer, nameof(buffer));
 
 #if FEATURE_WASM_THREADS
-            return _innerWebSocket!.SynchronizationContext.Send(() =>
-            {
-                Task promise;
-                lock (_thisLock)
+            return _innerWebSocket!.SynchronizationContext
+                .Send(() =>
                 {
-                    ThrowIfDisposed();
-                    promise = SendAsyncCore(buffer, messageType, endOfMessage, cancellationToken);
-                } //lock will unlock synchronously before promise is resolved!
+                    Task promise;
+                    lock (_thisLock)
+                    {
+                        ThrowIfDisposed();
+                        promise = SendAsyncCore(
+                            buffer,
+                            messageType,
+                            endOfMessage,
+                            cancellationToken
+                        );
+                    } //lock will unlock synchronously before promise is resolved!
 
-                return promise;
-            });
+                    return promise;
+                });
 #else
             return SendAsyncCore(buffer, messageType, endOfMessage, cancellationToken);
 #endif
@@ -241,16 +248,17 @@ namespace System.Net.WebSockets
             WebSocketValidate.ValidateArraySegment(buffer, nameof(buffer));
 
 #if FEATURE_WASM_THREADS
-            return _innerWebSocket!.SynchronizationContext.Send(() =>
-            {
-                Task<WebSocketReceiveResult> promise;
-                lock (_thisLock)
+            return _innerWebSocket!.SynchronizationContext
+                .Send(() =>
                 {
-                    ThrowIfDisposed();
-                    promise = ReceiveAsyncCore(buffer, cancellationToken);
-                } //lock will unlock synchronously before task is resolved!
-                return promise;
-            });
+                    Task<WebSocketReceiveResult> promise;
+                    lock (_thisLock)
+                    {
+                        ThrowIfDisposed();
+                        promise = ReceiveAsyncCore(buffer, cancellationToken);
+                    } //lock will unlock synchronously before task is resolved!
+                    return promise;
+                });
 #else
             return ReceiveAsyncCore(buffer, cancellationToken);
 #endif
@@ -280,43 +288,44 @@ namespace System.Net.WebSockets
             }
 
 #if FEATURE_WASM_THREADS
-            return _innerWebSocket!.SynchronizationContext.Send(() =>
-            {
-                Task promise;
-                lock (_thisLock)
+            return _innerWebSocket!.SynchronizationContext
+                .Send(() =>
                 {
-                    ThrowIfDisposed();
+                    Task promise;
+                    lock (_thisLock)
+                    {
+                        ThrowIfDisposed();
 #endif
-                    var state = State;
-                    if (state == WebSocketState.None || state == WebSocketState.Closed)
-                    {
-                        throw new WebSocketException(
-                            WebSocketError.InvalidState,
-                            SR.Format(
-                                SR.net_WebSockets_InvalidState,
-                                state,
-                                "Connecting, Open, CloseSent, Aborted"
-                            )
-                        );
-                    }
-                    if (
-                        state != WebSocketState.Open
-                        && state != WebSocketState.Connecting
-                        && state != WebSocketState.Aborted
-                    )
-                    {
-                        return Task.CompletedTask;
-                    }
+                        var state = State;
+                        if (state == WebSocketState.None || state == WebSocketState.Closed)
+                        {
+                            throw new WebSocketException(
+                                WebSocketError.InvalidState,
+                                SR.Format(
+                                    SR.net_WebSockets_InvalidState,
+                                    state,
+                                    "Connecting, Open, CloseSent, Aborted"
+                                )
+                            );
+                        }
+                        if (
+                            state != WebSocketState.Open
+                            && state != WebSocketState.Connecting
+                            && state != WebSocketState.Aborted
+                        )
+                        {
+                            return Task.CompletedTask;
+                        }
 #if FEATURE_WASM_THREADS
-                    promise = CloseAsyncCore(
-                        closeStatus,
-                        statusDescription,
-                        false,
-                        cancellationToken
-                    );
-                } //lock will unlock synchronously before task is resolved!
-                return promise;
-            });
+                        promise = CloseAsyncCore(
+                            closeStatus,
+                            statusDescription,
+                            false,
+                            cancellationToken
+                        );
+                    } //lock will unlock synchronously before task is resolved!
+                    return promise;
+                });
 #else
             return CloseAsyncCore(closeStatus, statusDescription, false, cancellationToken);
 #endif
@@ -347,45 +356,46 @@ namespace System.Net.WebSockets
             }
 
 #if FEATURE_WASM_THREADS
-            return _innerWebSocket!.SynchronizationContext.Send(() =>
-            {
-                Task promise;
-                lock (_thisLock)
+            return _innerWebSocket!.SynchronizationContext
+                .Send(() =>
                 {
-                    ThrowIfDisposed();
+                    Task promise;
+                    lock (_thisLock)
+                    {
+                        ThrowIfDisposed();
 #endif
-                    var state = State;
-                    if (state == WebSocketState.None || state == WebSocketState.Closed)
-                    {
-                        throw new WebSocketException(
-                            WebSocketError.InvalidState,
-                            SR.Format(
-                                SR.net_WebSockets_InvalidState,
-                                state,
-                                "Connecting, Open, CloseSent, Aborted"
-                            )
-                        );
-                    }
-                    if (
-                        state != WebSocketState.Open
-                        && state != WebSocketState.Connecting
-                        && state != WebSocketState.Aborted
-                        && state != WebSocketState.CloseSent
-                    )
-                    {
-                        return Task.CompletedTask;
-                    }
+                        var state = State;
+                        if (state == WebSocketState.None || state == WebSocketState.Closed)
+                        {
+                            throw new WebSocketException(
+                                WebSocketError.InvalidState,
+                                SR.Format(
+                                    SR.net_WebSockets_InvalidState,
+                                    state,
+                                    "Connecting, Open, CloseSent, Aborted"
+                                )
+                            );
+                        }
+                        if (
+                            state != WebSocketState.Open
+                            && state != WebSocketState.Connecting
+                            && state != WebSocketState.Aborted
+                            && state != WebSocketState.CloseSent
+                        )
+                        {
+                            return Task.CompletedTask;
+                        }
 
 #if FEATURE_WASM_THREADS
-                    promise = CloseAsyncCore(
-                        closeStatus,
-                        statusDescription,
-                        state != WebSocketState.Aborted,
-                        cancellationToken
-                    );
-                } //lock will unlock synchronously before task is resolved!
-                return promise;
-            });
+                        promise = CloseAsyncCore(
+                            closeStatus,
+                            statusDescription,
+                            state != WebSocketState.Aborted,
+                            cancellationToken
+                        );
+                    } //lock will unlock synchronously before task is resolved!
+                    return promise;
+                });
 #else
             return CloseAsyncCore(
                 closeStatus,
@@ -403,16 +413,17 @@ namespace System.Net.WebSockets
             {
                 return;
             }
-            _innerWebSocket?.SynchronizationContext.Send(
-                static (BrowserWebSocket self) =>
-                {
-                    lock (self._thisLock)
+            _innerWebSocket?.SynchronizationContext
+                .Send(
+                    static (BrowserWebSocket self) =>
                     {
-                        AbortCore(self, self.State);
-                    }
-                },
-                this
-            );
+                        lock (self._thisLock)
+                        {
+                            AbortCore(self, self.State);
+                        }
+                    },
+                    this
+                );
 #else
             AbortCore(this, this.State);
 #endif
@@ -425,16 +436,17 @@ namespace System.Net.WebSockets
             {
                 return;
             }
-            _innerWebSocket?.SynchronizationContext.Send(
-                static (BrowserWebSocket self) =>
-                {
-                    lock (self._thisLock)
+            _innerWebSocket?.SynchronizationContext
+                .Send(
+                    static (BrowserWebSocket self) =>
                     {
-                        DisposeCore(self);
-                    }
-                },
-                this
-            );
+                        lock (self._thisLock)
+                        {
+                            DisposeCore(self);
+                        }
+                    },
+                    this
+                );
 #else
             DisposeCore(this);
 #endif

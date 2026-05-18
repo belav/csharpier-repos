@@ -144,8 +144,7 @@ namespace System.Reflection
             );
             return (SignatureCallingConvention)(
                 reader.GetMethodSignature(methodSigHandle).CallingConvention
-                & Internal
-                    .Metadata
+                & Internal.Metadata
                     .NativeFormat
                     .SignatureCallingConvention
                     .UnmanagedCallingConventionMask

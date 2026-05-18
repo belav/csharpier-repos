@@ -35,13 +35,14 @@ namespace System.Composition.Hosting.Providers.Metadata
                 );
 
             var ti = typeof(TMetadata).GetTypeInfo();
-            var dictionaryConstructor = ti.DeclaredConstructors.SingleOrDefault(ci =>
-            {
-                var ps = ci.GetParameters();
-                return ci.IsPublic
-                    && ps.Length == 1
-                    && ps[0].ParameterType == typeof(IDictionary<string, object>);
-            });
+            var dictionaryConstructor = ti.DeclaredConstructors
+                .SingleOrDefault(ci =>
+                {
+                    var ps = ci.GetParameters();
+                    return ci.IsPublic
+                        && ps.Length == 1
+                        && ps[0].ParameterType == typeof(IDictionary<string, object>);
+                });
 
             if (dictionaryConstructor != null)
             {
@@ -57,9 +58,8 @@ namespace System.Composition.Hosting.Providers.Metadata
                     .Compile();
             }
 
-            var parameterlessConstructor = ti.DeclaredConstructors.SingleOrDefault(ci =>
-                ci.IsPublic && ci.GetParameters().Length == 0
-            );
+            var parameterlessConstructor = ti.DeclaredConstructors
+                .SingleOrDefault(ci => ci.IsPublic && ci.GetParameters().Length == 0);
             if (parameterlessConstructor != null)
             {
                 var providerArg = Expression.Parameter(
@@ -76,7 +76,8 @@ namespace System.Composition.Hosting.Providers.Metadata
                 foreach (
                     var prop in typeof(TMetadata)
                         .GetTypeInfo()
-                        .DeclaredProperties.Where(prop =>
+                        .DeclaredProperties
+                        .Where(prop =>
                             prop.GetMethod != null
                             && prop.GetMethod.IsPublic
                             && !prop.GetMethod.IsStatic

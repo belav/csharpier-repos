@@ -79,8 +79,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Peek
             var root = identifierLocation.SourceTree.GetRoot(cancellationToken);
             var node = root.FindToken(identifierLocation.SourceSpan.Start).Parent;
 
-            var syntaxFactsService = workspace
-                .Services.GetLanguageServices(root.Language)
+            var syntaxFactsService = workspace.Services
+                .GetLanguageServices(root.Language)
                 .GetService<ISyntaxFactsService>();
 
             switch (symbol.Kind)

@@ -196,20 +196,22 @@ namespace System.ServiceModel.Activities.Presentation
                             if (string.IsNullOrEmpty(operationName) || null == serviceContractName)
                             {
                                 ModelItem requestDisplayName;
-                                this.Activity.TryGetPropertyValue(
-                                    out requestDisplayName,
-                                    "Request",
-                                    "DisplayName"
-                                );
-                                throw FxTrace.Exception.AsError(
-                                    new InvalidOperationException(
-                                        string.Format(
-                                            CultureInfo.CurrentUICulture,
-                                            (string)this.FindResource("parametersRequiredText"),
-                                            requestDisplayName.GetCurrentValue()
+                                this.Activity
+                                    .TryGetPropertyValue(
+                                        out requestDisplayName,
+                                        "Request",
+                                        "DisplayName"
+                                    );
+                                throw FxTrace.Exception
+                                    .AsError(
+                                        new InvalidOperationException(
+                                            string.Format(
+                                                CultureInfo.CurrentUICulture,
+                                                (string)this.FindResource("parametersRequiredText"),
+                                                requestDisplayName.GetCurrentValue()
+                                            )
                                         )
-                                    )
-                                );
+                                    );
                             }
                         }
                         else
@@ -221,15 +223,18 @@ namespace System.ServiceModel.Activities.Presentation
 
                             if (string.IsNullOrEmpty(operationName) || null == serviceContractName)
                             {
-                                throw FxTrace.Exception.AsError(
-                                    new InvalidOperationException(
-                                        string.Format(
-                                            CultureInfo.CurrentUICulture,
-                                            (string)this.FindResource("parametersRequiredText"),
-                                            this.Activity.Properties["DisplayName"].ComputedValue
+                                throw FxTrace.Exception
+                                    .AsError(
+                                        new InvalidOperationException(
+                                            string.Format(
+                                                CultureInfo.CurrentUICulture,
+                                                (string)this.FindResource("parametersRequiredText"),
+                                                this.Activity
+                                                    .Properties["DisplayName"]
+                                                    .ComputedValue
+                                            )
                                         )
-                                    )
-                                );
+                                    );
                             }
                         }
                         xpathQuery = ParameterXPathQueryGenerator.CreateFromDataContractSerializer(

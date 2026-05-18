@@ -701,8 +701,8 @@ namespace Microsoft.Extensions.Options.Generators
                 return;
             }
 
-            var attributesData = _optionsSourceGenContext
-                .AttributesToGenerate.OrderBy(static kvp => kvp.Key, StringComparer.Ordinal)
+            var attributesData = _optionsSourceGenContext.AttributesToGenerate
+                .OrderBy(static kvp => kvp.Key, StringComparer.Ordinal)
                 .ToArray();
 
             OutLn($"namespace {StaticGeneratedValidationAttributesClassesNamespace}");
@@ -850,9 +850,8 @@ namespace Microsoft.Extensions.Options.Generators
             int capacity =
                 modelToValidate.MembersToValidate.Count == 0
                     ? 0
-                    : modelToValidate.MembersToValidate.Max(static vm =>
-                        vm.ValidationAttributes.Count
-                    );
+                    : modelToValidate.MembersToValidate
+                        .Max(static vm => vm.ValidationAttributes.Count);
             if (capacity > 0)
             {
                 OutLn(

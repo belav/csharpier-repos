@@ -87,15 +87,16 @@ namespace System.IdentityModel
             }
             else
             {
-                SignedInfoCanonicalFormWriter.Instance.WriteSignedInfoCanonicalForm(
-                    hashStream,
-                    this.SignatureMethod,
-                    this.DigestMethod,
-                    this.references,
-                    this.count,
-                    this.ResourcePool.TakeEncodingBuffer(),
-                    this.ResourcePool.TakeBase64Buffer()
-                );
+                SignedInfoCanonicalFormWriter.Instance
+                    .WriteSignedInfoCanonicalForm(
+                        hashStream,
+                        this.SignatureMethod,
+                        this.DigestMethod,
+                        this.references,
+                        this.count,
+                        this.ResourcePool.TakeEncodingBuffer(),
+                        this.ResourcePool.TakeBase64Buffer()
+                    );
             }
         }
 
@@ -274,9 +275,8 @@ namespace System.IdentityModel
             {
                 if (useStrTransform && string.IsNullOrEmpty(id))
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ArgumentNullException(id)
-                    );
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperError(new ArgumentNullException(id));
                 }
 
                 this.id = id;

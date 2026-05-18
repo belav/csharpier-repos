@@ -81,10 +81,8 @@ public class CosmosManyToManyJoinEntityTypeConvention
         if (ShouldSharePartitionKey(skipNavigation))
         {
             var model = skipNavigation.DeclaringEntityType.Model;
-            var joinEntityTypeBuilder = model.Builder.SharedTypeEntity(
-                joinEntityTypeName,
-                typeof(Dictionary<string, object>)
-            )!;
+            var joinEntityTypeBuilder = model.Builder
+                .SharedTypeEntity(joinEntityTypeName, typeof(Dictionary<string, object>))!;
             ConfigurePartitionKeyJoinEntityType(skipNavigation, joinEntityTypeBuilder);
         }
         else
@@ -179,8 +177,8 @@ public class CosmosManyToManyJoinEntityTypeConvention
             var joinEntityTypeBuilder = joinEntityType.Builder;
             if (ShouldSharePartitionKey(skipNavigation))
             {
-                var principalPartitionKey =
-                    skipNavigation.DeclaringEntityType.GetPartitionKeyProperty()!;
+                var principalPartitionKey = skipNavigation.DeclaringEntityType
+                    .GetPartitionKeyProperty()!;
                 var partitionKey = joinEntityType.GetPartitionKeyProperty();
                 if (
                     (
@@ -189,9 +187,9 @@ public class CosmosManyToManyJoinEntityTypeConvention
                             !joinEntityTypeBuilder.CanSetPartitionKey(principalPartitionKey.Name)
                             || (
                                 skipNavigation.ForeignKey!.Properties.Contains(partitionKey)
-                                && inverseSkipNavigation.ForeignKey!.Properties.Contains(
-                                    partitionKey
-                                )
+                                && inverseSkipNavigation.ForeignKey!
+                                    .Properties
+                                    .Contains(partitionKey)
                             )
                         )
                     )

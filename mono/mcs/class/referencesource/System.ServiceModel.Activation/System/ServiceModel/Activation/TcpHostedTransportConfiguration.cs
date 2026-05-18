@@ -16,9 +16,8 @@ namespace System.ServiceModel.Activation
         public TcpHostedTransportConfiguration()
             : base(Uri.UriSchemeNetTcp)
         {
-            string[] bindings = HostedTransportConfigurationManager.MetabaseSettings.GetBindings(
-                Uri.UriSchemeNetTcp
-            );
+            string[] bindings = HostedTransportConfigurationManager.MetabaseSettings
+                .GetBindings(Uri.UriSchemeNetTcp);
             for (int i = 0; i < bindings.Length; i++)
             {
                 BaseUriWithWildcard listenAddress = BaseUriWithWildcard.CreateHostedUri(
@@ -40,11 +39,12 @@ namespace System.ServiceModel.Activation
                     "Registering the unique TcpTransportManager with ListenUri:"
                         + listenAddress.BaseAddress
                 );
-                TcpChannelListener.StaticTransportManagerTable.RegisterUri(
-                    listenAddress.BaseAddress,
-                    listenAddress.HostNameComparisonMode,
-                    uniqueManager
-                );
+                TcpChannelListener.StaticTransportManagerTable
+                    .RegisterUri(
+                        listenAddress.BaseAddress,
+                        listenAddress.HostNameComparisonMode,
+                        uniqueManager
+                    );
             }
         }
 

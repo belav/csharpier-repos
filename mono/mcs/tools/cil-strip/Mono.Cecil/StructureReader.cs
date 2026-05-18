@@ -191,9 +191,8 @@ namespace Mono.Cecil
                         mrRow.Flags
                     );
 
-                    BinaryReader br = m_ir.MetadataReader.GetDataReader(
-                        m_img.CLIHeader.Resources.VirtualAddress
-                    );
+                    BinaryReader br = m_ir.MetadataReader
+                        .GetDataReader(m_img.CLIHeader.Resources.VirtualAddress);
                     br.BaseStream.Position += mrRow.Offset;
 
                     eres.Data = br.ReadBytes(br.ReadInt32());

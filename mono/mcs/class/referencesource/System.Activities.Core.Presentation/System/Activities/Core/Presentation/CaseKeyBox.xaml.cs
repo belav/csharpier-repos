@@ -174,33 +174,35 @@ namespace System.Activities.Core.Presentation
             DisableKeyboardLostFocus();
             ErrorReporting.ShowErrorMessage(errorMessage);
 
-            this.Dispatcher.BeginInvoke(
-                DispatcherPriority.ApplicationIdle,
-                (Action)(
-                    () =>
-                    {
-                        if (this.ErrorCallback != null)
+            this.Dispatcher
+                .BeginInvoke(
+                    DispatcherPriority.ApplicationIdle,
+                    (Action)(
+                        () =>
                         {
-                            this.ErrorCallback(this);
-                            this.Dispatcher.BeginInvoke(
-                                DispatcherPriority.ApplicationIdle,
-                                (Action)(
-                                    () =>
-                                    {
-                                        RegainFocus();
-                                        EnableKeyboardLostFocus();
-                                    }
-                                )
-                            );
+                            if (this.ErrorCallback != null)
+                            {
+                                this.ErrorCallback(this);
+                                this.Dispatcher
+                                    .BeginInvoke(
+                                        DispatcherPriority.ApplicationIdle,
+                                        (Action)(
+                                            () =>
+                                            {
+                                                RegainFocus();
+                                                EnableKeyboardLostFocus();
+                                            }
+                                        )
+                                    );
+                            }
+                            else
+                            {
+                                RegainFocus();
+                                EnableKeyboardLostFocus();
+                            }
                         }
-                        else
-                        {
-                            RegainFocus();
-                            EnableKeyboardLostFocus();
-                        }
-                    }
-                )
-            );
+                    )
+                );
         }
 
         void OnBoxMouseUp(object sender, MouseButtonEventArgs e)

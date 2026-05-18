@@ -318,8 +318,9 @@ namespace System.Runtime.DurableInstancing
         {
             lock (ThisLock)
             {
-                return this
-                    .owners.Values.Select(weakReference => (InstanceOwner)weakReference.Target)
+                return this.owners
+                    .Values
+                    .Select(weakReference => (InstanceOwner)weakReference.Target)
                     .Where(owner => owner != null)
                     .ToArray();
             }
@@ -363,9 +364,12 @@ namespace System.Runtime.DurableInstancing
                     }
                     else if (owner.OwnerToken != lockToken)
                     {
-                        throw Fx.Exception.AsError(
-                            new InvalidOperationException(SRCore.StoreReportedConflictingLockTokens)
-                        );
+                        throw Fx.Exception
+                            .AsError(
+                                new InvalidOperationException(
+                                    SRCore.StoreReportedConflictingLockTokens
+                                )
+                            );
                     }
                 }
                 else
@@ -568,9 +572,8 @@ namespace System.Runtime.DurableInstancing
                 {
                     throw;
                 }
-                throw Fx.Exception.AsError(
-                    new CallbackException(SRCore.OnFreeInstanceHandleThrew, exception)
-                );
+                throw Fx.Exception
+                    .AsError(new CallbackException(SRCore.OnFreeInstanceHandleThrew, exception));
             }
         }
 

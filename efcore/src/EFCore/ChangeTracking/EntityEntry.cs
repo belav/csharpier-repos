@@ -342,8 +342,8 @@ public class EntityEntry : IInfrastructure<InternalEntityEntry>
     ///     examples.
     /// </remarks>
     public virtual IEnumerable<PropertyEntry> Properties =>
-        InternalEntry
-            .EntityType.GetProperties()
+        InternalEntry.EntityType
+            .GetProperties()
             .Select(property => new PropertyEntry(InternalEntry, property));
 
     /// <summary>
@@ -440,8 +440,8 @@ public class EntityEntry : IInfrastructure<InternalEntityEntry>
     ///     for more information and examples.
     /// </remarks>
     public virtual IEnumerable<ReferenceEntry> References =>
-        InternalEntry
-            .EntityType.GetNavigations()
+        InternalEntry.EntityType
+            .GetNavigations()
             .Where(n => !n.IsCollection)
             .Select(navigation => new ReferenceEntry(InternalEntry, navigation));
 

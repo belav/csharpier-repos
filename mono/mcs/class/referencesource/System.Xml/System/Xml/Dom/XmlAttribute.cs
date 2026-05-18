@@ -95,12 +95,8 @@ namespace System.Xml
             get { return name.Prefix; }
             set
             {
-                name = name.OwnerDocument.AddAttrXmlName(
-                    value,
-                    LocalName,
-                    NamespaceURI,
-                    SchemaInfo
-                );
+                name = name.OwnerDocument
+                    .AddAttrXmlName(value, LocalName, NamespaceURI, SchemaInfo);
             }
         }
 
@@ -153,10 +149,8 @@ namespace System.Xml
                 XmlElement ownerElement = OwnerElement;
                 if (ownerElement != null)
                 {
-                    return ownerElement.Attributes.PrepareParentInElementIdAttrMap(
-                        Prefix,
-                        LocalName
-                    );
+                    return ownerElement.Attributes
+                        .PrepareParentInElementIdAttrMap(Prefix, LocalName);
                 }
             }
             return false;

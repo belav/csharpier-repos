@@ -80,11 +80,13 @@ namespace System.Data.Services.Client
             {
                 if (null == this.asyncWait)
                 {
-                    System.Threading.Interlocked.CompareExchange(
-                        ref this.asyncWait,
-                        new System.Threading.ManualResetEvent(this.IsCompleted),
-                        null
-                    );
+                    System.Threading
+                        .Interlocked
+                        .CompareExchange(
+                            ref this.asyncWait,
+                            new System.Threading.ManualResetEvent(this.IsCompleted),
+                            null
+                        );
 
                     if (this.IsCompleted)
                     {
@@ -168,11 +170,9 @@ namespace System.Data.Services.Client
 
             if (null != result.asyncWait)
             {
-                System.Threading.Interlocked.CompareExchange(
-                    ref result.asyncWaitDisposeLock,
-                    new object(),
-                    null
-                );
+                System.Threading
+                    .Interlocked
+                    .CompareExchange(ref result.asyncWaitDisposeLock, new object(), null);
                 lock (result.asyncWaitDisposeLock)
                 {
                     result.asyncWaitDisposed = true;
@@ -328,11 +328,9 @@ namespace System.Data.Services.Client
         {
             if (null != this.asyncWait)
             {
-                System.Threading.Interlocked.CompareExchange(
-                    ref this.asyncWaitDisposeLock,
-                    new object(),
-                    null
-                );
+                System.Threading
+                    .Interlocked
+                    .CompareExchange(ref this.asyncWaitDisposeLock, new object(), null);
                 lock (this.asyncWaitDisposeLock)
                 {
                     if (!this.asyncWaitDisposed)

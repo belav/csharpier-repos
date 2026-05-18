@@ -28,8 +28,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.NavigationBar
         )
         {
             // Jump back to the UI thread to determine what snapshot the user is processing.
-            await _threadingContext
-                .JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken)
+            await _threadingContext.JoinableTaskFactory
+                .SwitchToMainThreadAsync(cancellationToken)
                 .NoThrowAwaitable();
 
             // Cancellation exceptions are ignored in AsyncBatchingWorkQueue, so return without throwing if cancellation
@@ -125,8 +125,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.NavigationBar
         {
             // Switch to the UI so we can determine where the user is and determine the state the last time we updated
             // the UI.
-            await _threadingContext
-                .JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken)
+            await _threadingContext.JoinableTaskFactory
+                .SwitchToMainThreadAsync(cancellationToken)
                 .NoThrowAwaitable();
 
             // Cancellation exceptions are ignored in AsyncBatchingWorkQueue, so return without throwing if cancellation

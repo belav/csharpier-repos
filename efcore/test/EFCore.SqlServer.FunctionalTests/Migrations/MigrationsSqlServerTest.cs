@@ -9964,10 +9964,11 @@ CREATE TABLE [mySchema].[Customers] (
                 Assert.Equal(2, model.Tables.Count);
                 Assert.True(model.Tables.All(x => x.Schema == "mySchema"));
                 Assert.True(
-                    model.Tables.All(x =>
-                        x[SqlServerAnnotationNames.TemporalHistoryTableSchema] as string
-                        == "mySchema"
-                    )
+                    model.Tables
+                        .All(x =>
+                            x[SqlServerAnnotationNames.TemporalHistoryTableSchema] as string
+                            == "mySchema"
+                        )
                 );
             }
         );
@@ -10061,10 +10062,11 @@ CREATE TABLE [mySchema].[Orders] (
                 Assert.Equal(2, model.Tables.Count);
                 Assert.True(model.Tables.All(x => x.Schema == "mySchema"));
                 Assert.True(
-                    model.Tables.All(x =>
-                        x[SqlServerAnnotationNames.TemporalHistoryTableSchema] as string
-                        == "mySchema2"
-                    )
+                    model.Tables
+                        .All(x =>
+                            x[SqlServerAnnotationNames.TemporalHistoryTableSchema] as string
+                            == "mySchema2"
+                        )
                 );
             }
         );

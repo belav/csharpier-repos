@@ -96,11 +96,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
             CancellationToken cancellationToken
         )
         {
-            return context.SyntaxTree.IsGlobalMemberDeclarationContext(
-                    context.Position,
-                    SyntaxKindSet.AllGlobalMemberModifiers,
-                    cancellationToken
-                )
+            return context.SyntaxTree
+                    .IsGlobalMemberDeclarationContext(
+                        context.Position,
+                        SyntaxKindSet.AllGlobalMemberModifiers,
+                        cancellationToken
+                    )
                 || context.IsMemberDeclarationContext(
                     validModifiers: s_validMemberModifiers,
                     validTypeDeclarations: SyntaxKindSet.ClassInterfaceStructRecordTypeDeclarations,
@@ -118,10 +119,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
             // note: 'new()' can't come after a 'struct' constraint.
 
             if (
-                context.SyntaxTree.IsTypeParameterConstraintStartContext(
-                    context.Position,
-                    context.LeftToken
-                )
+                context.SyntaxTree
+                    .IsTypeParameterConstraintStartContext(context.Position, context.LeftToken)
             )
             {
                 return true;
@@ -135,8 +134,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
             )
             {
                 if (
-                    !constraintClause
-                        .Constraints.OfType<ClassOrStructConstraintSyntax>()
+                    !constraintClause.Constraints
+                        .OfType<ClassOrStructConstraintSyntax>()
                         .Any(c => c.ClassOrStructKeyword.Kind() == SyntaxKind.StructKeyword)
                 )
                 {

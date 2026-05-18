@@ -69,9 +69,11 @@ public class StoreStoredProcedureParameter
         PropertyMappings.Count != 0
             ? PropertyMappings[0].TypeMapping
             : (RelationalTypeMapping)
-                Table
-                    .Model.Model.GetModelDependencies()
-                    .TypeMappingSource.FindMapping(typeof(int))!;
+                Table.Model
+                    .Model
+                    .GetModelDependencies()
+                    .TypeMappingSource
+                    .FindMapping(typeof(int))!;
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to

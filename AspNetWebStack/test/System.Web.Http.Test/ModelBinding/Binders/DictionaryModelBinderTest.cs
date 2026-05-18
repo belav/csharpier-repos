@@ -31,23 +31,26 @@ namespace System.Web.Http.ModelBinding.Binders
                 },
             };
             HttpActionContext context = ContextUtil.CreateActionContext();
-            context.ControllerContext.Configuration.Services.Replace(
-                typeof(ModelBinderProvider),
-                (
-                    new SimpleModelBinderProvider(
-                        typeof(KeyValuePair<int, string>),
-                        mockKvpBinder.Object
+            context.ControllerContext
+                .Configuration
+                .Services
+                .Replace(
+                    typeof(ModelBinderProvider),
+                    (
+                        new SimpleModelBinderProvider(
+                            typeof(KeyValuePair<int, string>),
+                            mockKvpBinder.Object
+                        )
                     )
-                )
-            );
+                );
 
             mockKvpBinder
                 .Setup(o => o.BindModel(context, It.IsAny<ModelBindingContext>()))
                 .Returns(
                     (HttpActionContext cc, ModelBindingContext mbc) =>
                     {
-                        mbc.Model = mbc
-                            .ValueProvider.GetValue(mbc.ModelName)
+                        mbc.Model = mbc.ValueProvider
+                            .GetValue(mbc.ModelName)
                             .ConvertTo(mbc.ModelType);
                         return true;
                     }

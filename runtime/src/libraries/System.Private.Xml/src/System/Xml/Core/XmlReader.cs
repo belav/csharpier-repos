@@ -380,11 +380,12 @@ namespace System.Xml
 
             try
             {
-                return XmlUntypedConverter.Untyped.ChangeType(
-                    strContentValue,
-                    returnType,
-                    namespaceResolver ?? this as IXmlNamespaceResolver
-                );
+                return XmlUntypedConverter.Untyped
+                    .ChangeType(
+                        strContentValue,
+                        returnType,
+                        namespaceResolver ?? this as IXmlNamespaceResolver
+                    );
             }
             catch (FormatException e)
             {
@@ -605,11 +606,8 @@ namespace System.Xml
 
             return returnType == typeof(string)
                 ? string.Empty
-                : XmlUntypedConverter.Untyped.ChangeType(
-                    string.Empty,
-                    returnType,
-                    namespaceResolver
-                );
+                : XmlUntypedConverter.Untyped
+                    .ChangeType(string.Empty, returnType, namespaceResolver);
         }
 
         // Checks local name and namespace of the current element and returns its content as the requested type.

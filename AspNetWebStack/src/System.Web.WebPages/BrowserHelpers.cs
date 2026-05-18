@@ -37,8 +37,7 @@ namespace System.Web.WebPages
         {
             HttpBrowserCapabilities overriddenBrowser = new HttpContext(
                 new UserAgentWorkerRequest(userAgent)
-            )
-                .Request
+            ).Request
                 .Browser;
             return new HttpBrowserCapabilitiesWrapper(overriddenBrowser);
         }

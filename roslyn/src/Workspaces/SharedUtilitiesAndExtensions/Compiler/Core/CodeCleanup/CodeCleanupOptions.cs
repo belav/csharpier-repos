@@ -82,8 +82,7 @@ internal abstract class AbstractCodeCleanupOptionsProvider : CodeCleanupOptionsP
         (
             await GetCodeCleanupOptionsAsync(languageServices, cancellationToken)
                 .ConfigureAwait(false)
-        )
-            .FormattingOptions
+        ).FormattingOptions
             .LineFormatting;
 
     async ValueTask<DocumentFormattingOptions> OptionsProvider<DocumentFormattingOptions>.GetOptionsAsync(

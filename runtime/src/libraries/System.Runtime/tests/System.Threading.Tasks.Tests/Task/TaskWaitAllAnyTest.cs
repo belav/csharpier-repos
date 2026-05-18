@@ -320,16 +320,17 @@ namespace System.Threading.Tasks.Tests.WaitAllAny
             for (int i = 0; i < _taskInfos.Length; i++)
             {
                 int iCopy = i;
-                _taskInfos[i].Task = Task.Factory.StartNew(
-                    delegate(object o)
-                    {
-                        _taskInfos[iCopy].RunWorkload();
-                    },
-                    string.Concat("Task_", iCopy),
-                    _taskInfos[iCopy].CancellationTokenSource.Token,
-                    TaskCreationOptions.AttachedToParent,
-                    TaskScheduler.Current
-                );
+                _taskInfos[i].Task = Task.Factory
+                    .StartNew(
+                        delegate(object o)
+                        {
+                            _taskInfos[iCopy].RunWorkload();
+                        },
+                        string.Concat("Task_", iCopy),
+                        _taskInfos[iCopy].CancellationTokenSource.Token,
+                        TaskCreationOptions.AttachedToParent,
+                        TaskScheduler.Current
+                    );
 
                 _tasks[i] = _taskInfos[i].Task;
             }

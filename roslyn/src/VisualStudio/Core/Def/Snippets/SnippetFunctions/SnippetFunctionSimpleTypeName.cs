@@ -84,10 +84,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Snippets
             }
 
             if (
-                snippetExpansionClient.ExpansionSession.GetFieldSpan(
-                    _fieldName,
-                    surfaceBufferFieldSpan
-                ) != VSConstants.S_OK
+                snippetExpansionClient.ExpansionSession
+                    .GetFieldSpan(_fieldName, surfaceBufferFieldSpan) != VSConstants.S_OK
             )
             {
                 return false;

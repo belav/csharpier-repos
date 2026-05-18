@@ -116,8 +116,8 @@ internal class ProjectLoadTelemetryReporter(
     {
         // Similar to O#, we report the content files + any non-generated source files.
         var contentFiles = projectFileInfo.ContentFilePaths;
-        var sourceFiles = projectFileInfo
-            .Documents.Concat(projectFileInfo.AdditionalDocuments)
+        var sourceFiles = projectFileInfo.Documents
+            .Concat(projectFileInfo.AdditionalDocuments)
             .Concat(projectFileInfo.AnalyzerConfigDocuments)
             .Where(d => !d.IsGenerated)
             .SelectAsArray(d => d.FilePath);
@@ -158,8 +158,8 @@ internal class ProjectLoadTelemetryReporter(
         {
             // The projectId is formatted as {GUID}.
             // In order to match with O#, we need just the guid.
-            var projectGuid = projectToLoad
-                .ProjectGuid.Replace("{", string.Empty)
+            var projectGuid = projectToLoad.ProjectGuid
+                .Replace("{", string.Empty)
                 .Replace("}", string.Empty);
 
             // No need to actually hash the project guid.

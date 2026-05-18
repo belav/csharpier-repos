@@ -36,10 +36,11 @@ namespace Microsoft.Interop.Analyzers
             foreach (var diagnostic in context.Diagnostics)
             {
                 if (
-                    !diagnostic.Properties.TryGetValue(
-                        GeneratorDiagnosticProperties.AddMarshalAsAttribute,
-                        out string? addMarshalAsAttribute
-                    )
+                    !diagnostic.Properties
+                        .TryGetValue(
+                            GeneratorDiagnosticProperties.AddMarshalAsAttribute,
+                            out string? addMarshalAsAttribute
+                        )
                 )
                 {
                     continue;

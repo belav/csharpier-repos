@@ -10,8 +10,8 @@ internal static class MethodInfoExtensions
 {
     public static bool IsContainsMethod(this MethodInfo method) =>
         method is { Name: nameof(IList.Contains), DeclaringType: not null }
-        && method
-            .DeclaringType.GetInterfaces()
+        && method.DeclaringType
+            .GetInterfaces()
             .Append(method.DeclaringType)
             .Any(t =>
                 t == typeof(IList)

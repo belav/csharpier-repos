@@ -44,10 +44,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Snippets
 
             var surfaceBufferFieldSpan = new VsTextSpan[1];
             if (
-                snippetExpansionClient.ExpansionSession.GetFieldSpan(
-                    FieldName,
-                    surfaceBufferFieldSpan
-                ) != VSConstants.S_OK
+                snippetExpansionClient.ExpansionSession
+                    .GetFieldSpan(FieldName, surfaceBufferFieldSpan) != VSConstants.S_OK
             )
             {
                 return (VSConstants.E_FAIL, value, hasDefaultValue);
@@ -63,8 +61,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Snippets
                 return (VSConstants.E_FAIL, value, hasDefaultValue);
             }
 
-            var snippetFunctionService =
-                document.Project.GetRequiredLanguageService<SnippetFunctionService>();
+            var snippetFunctionService = document.Project
+                .GetRequiredLanguageService<SnippetFunctionService>();
             value = await snippetFunctionService
                 .GetContainingClassNameAsync(
                     document,

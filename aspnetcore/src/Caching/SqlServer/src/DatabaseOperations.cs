@@ -134,8 +134,8 @@ internal sealed class DatabaseOperations : IDatabaseOperations
         using (var connection = new SqlConnection(ConnectionString))
         using (var upsertCommand = new SqlCommand(SqlQueries.SetCacheItem, connection))
         {
-            upsertCommand
-                .Parameters.AddCacheItemId(key)
+            upsertCommand.Parameters
+                .AddCacheItemId(key)
                 .AddCacheItemValue(value)
                 .AddSlidingExpirationInSeconds(options.SlidingExpiration)
                 .AddAbsoluteExpiration(absoluteExpiration)
@@ -179,8 +179,8 @@ internal sealed class DatabaseOperations : IDatabaseOperations
         using (var connection = new SqlConnection(ConnectionString))
         using (var upsertCommand = new SqlCommand(SqlQueries.SetCacheItem, connection))
         {
-            upsertCommand
-                .Parameters.AddCacheItemId(key)
+            upsertCommand.Parameters
+                .AddCacheItemId(key)
                 .AddCacheItemValue(value)
                 .AddSlidingExpirationInSeconds(options.SlidingExpiration)
                 .AddAbsoluteExpiration(absoluteExpiration)
@@ -225,8 +225,8 @@ internal sealed class DatabaseOperations : IDatabaseOperations
         using (var connection = new SqlConnection(ConnectionString))
         using (var command = new SqlCommand(query, connection))
         {
-            command
-                .Parameters.AddCacheItemId(key)
+            command.Parameters
+                .AddCacheItemId(key)
                 .AddWithValue("UtcNow", SqlDbType.DateTimeOffset, utcNow);
 
             connection.Open();
@@ -280,8 +280,8 @@ internal sealed class DatabaseOperations : IDatabaseOperations
         using (var connection = new SqlConnection(ConnectionString))
         using (var command = new SqlCommand(query, connection))
         {
-            command
-                .Parameters.AddCacheItemId(key)
+            command.Parameters
+                .AddCacheItemId(key)
                 .AddWithValue("UtcNow", SqlDbType.DateTimeOffset, utcNow);
 
             await connection.OpenAsync(token).ConfigureAwait(false);

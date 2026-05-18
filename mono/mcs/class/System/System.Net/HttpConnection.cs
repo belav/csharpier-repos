@@ -77,21 +77,22 @@ namespace System.Net
             }
             else
             {
-                ssl_stream = epl.Listener.CreateSslStream(
-                    new NetworkStream(sock, false),
-                    false,
-                    (t, c, ch, e) =>
-                    {
-                        if (c == null)
+                ssl_stream = epl.Listener
+                    .CreateSslStream(
+                        new NetworkStream(sock, false),
+                        false,
+                        (t, c, ch, e) =>
+                        {
+                            if (c == null)
+                                return true;
+                            var c2 = c as X509Certificate2;
+                            if (c2 == null)
+                                c2 = new X509Certificate2(c.GetRawCertData());
+                            client_cert = c2;
+                            client_cert_errors = new int[] { (int)e };
                             return true;
-                        var c2 = c as X509Certificate2;
-                        if (c2 == null)
-                            c2 = new X509Certificate2(c.GetRawCertData());
-                        client_cert = c2;
-                        client_cert_errors = new int[] { (int)e };
-                        return true;
-                    }
-                );
+                        }
+                    );
                 stream = ssl_stream;
             }
             timer = new Timer(OnTimeout, null, Timeout.Infinite, Timeout.Infinite);

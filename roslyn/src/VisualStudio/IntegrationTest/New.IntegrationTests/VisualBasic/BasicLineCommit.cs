@@ -29,28 +29,25 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.VisualBasic
         [IdeFact]
         public async Task CaseCorrection()
         {
-            await TestServices.Editor.SetTextAsync(
-                @"Module Goo
+            await TestServices.Editor
+                .SetTextAsync(
+                    @"Module Goo
     Sub M()
 Dim x = Sub()
     End Sub
 End Module",
-                HangMitigatingCancellationToken
-            );
+                    HangMitigatingCancellationToken
+                );
 
-            await TestServices.Editor.PlaceCaretAsync(
-                "Sub()",
-                charsOffset: 1,
-                HangMitigatingCancellationToken
-            );
-            await TestServices.Input.SendAsync(
-                VirtualKeyCode.RETURN,
-                HangMitigatingCancellationToken
-            );
+            await TestServices.Editor
+                .PlaceCaretAsync("Sub()", charsOffset: 1, HangMitigatingCancellationToken);
+            await TestServices.Input
+                .SendAsync(VirtualKeyCode.RETURN, HangMitigatingCancellationToken);
             Assert.Equal(
                 48,
-                (await TestServices.Editor.GetCaretPositionAsync(HangMitigatingCancellationToken))
-                    .BufferPosition
+                (
+                    await TestServices.Editor.GetCaretPositionAsync(HangMitigatingCancellationToken)
+                ).BufferPosition
                     .Position
             );
         }
@@ -58,24 +55,23 @@ End Module",
         [IdeFact]
         public async Task UndoWithEndConstruct()
         {
-            await TestServices.Editor.SetTextAsync(
-                @"Module Module1
+            await TestServices.Editor
+                .SetTextAsync(
+                    @"Module Module1
     Sub Main()
     End Sub
     REM
 End Module",
-                HangMitigatingCancellationToken
-            );
+                    HangMitigatingCancellationToken
+                );
 
-            await TestServices.Editor.PlaceCaretAsync(
-                "    REM",
-                charsOffset: 0,
-                HangMitigatingCancellationToken
-            );
-            await TestServices.Input.SendAsync(
-                ["sub", VirtualKeyCode.ESCAPE, " goo()", VirtualKeyCode.RETURN],
-                HangMitigatingCancellationToken
-            );
+            await TestServices.Editor
+                .PlaceCaretAsync("    REM", charsOffset: 0, HangMitigatingCancellationToken);
+            await TestServices.Input
+                .SendAsync(
+                    ["sub", VirtualKeyCode.ESCAPE, " goo()", VirtualKeyCode.RETURN],
+                    HangMitigatingCancellationToken
+                );
             AssertEx.EqualOrDiff(
                 @"Module Module1
     Sub Main()
@@ -86,14 +82,13 @@ End Module",
 End Module",
                 await TestServices.Editor.GetTextAsync(HangMitigatingCancellationToken)
             );
-            await TestServices.Shell.ExecuteCommandAsync(
-                WellKnownCommands.Edit.Undo,
-                HangMitigatingCancellationToken
-            );
+            await TestServices.Shell
+                .ExecuteCommandAsync(WellKnownCommands.Edit.Undo, HangMitigatingCancellationToken);
             Assert.Equal(
                 54,
-                (await TestServices.Editor.GetCaretPositionAsync(HangMitigatingCancellationToken))
-                    .BufferPosition
+                (
+                    await TestServices.Editor.GetCaretPositionAsync(HangMitigatingCancellationToken)
+                ).BufferPosition
                     .Position
             );
         }
@@ -101,25 +96,24 @@ End Module",
         [IdeFact]
         public async Task UndoWithoutEndConstruct()
         {
-            await TestServices.Editor.SetTextAsync(
-                @"Module Module1
+            await TestServices.Editor
+                .SetTextAsync(
+                    @"Module Module1
 
     ''' <summary></summary>
     Sub Main()
     End Sub
 End Module",
-                HangMitigatingCancellationToken
-            );
+                    HangMitigatingCancellationToken
+                );
 
-            await TestServices.Editor.PlaceCaretAsync(
-                "Module1",
-                charsOffset: 0,
-                HangMitigatingCancellationToken
-            );
-            await TestServices.Input.SendAsync(
-                [VirtualKeyCode.DOWN, VirtualKeyCode.RETURN],
-                HangMitigatingCancellationToken
-            );
+            await TestServices.Editor
+                .PlaceCaretAsync("Module1", charsOffset: 0, HangMitigatingCancellationToken);
+            await TestServices.Input
+                .SendAsync(
+                    [VirtualKeyCode.DOWN, VirtualKeyCode.RETURN],
+                    HangMitigatingCancellationToken
+                );
             AssertEx.EqualOrDiff(
                 @"Module Module1
 
@@ -132,18 +126,18 @@ End Module",
             );
             Assert.Equal(
                 18,
-                (await TestServices.Editor.GetCaretPositionAsync(HangMitigatingCancellationToken))
-                    .BufferPosition
+                (
+                    await TestServices.Editor.GetCaretPositionAsync(HangMitigatingCancellationToken)
+                ).BufferPosition
                     .Position
             );
-            await TestServices.Shell.ExecuteCommandAsync(
-                WellKnownCommands.Edit.Undo,
-                HangMitigatingCancellationToken
-            );
+            await TestServices.Shell
+                .ExecuteCommandAsync(WellKnownCommands.Edit.Undo, HangMitigatingCancellationToken);
             Assert.Equal(
                 16,
-                (await TestServices.Editor.GetCaretPositionAsync(HangMitigatingCancellationToken))
-                    .BufferPosition
+                (
+                    await TestServices.Editor.GetCaretPositionAsync(HangMitigatingCancellationToken)
+                ).BufferPosition
                     .Position
             );
         }
@@ -151,40 +145,40 @@ End Module",
         [IdeFact]
         public async Task CommitOnSave()
         {
-            await TestServices.Editor.SetTextAsync(
-                @"Module Module1
+            await TestServices.Editor
+                .SetTextAsync(
+                    @"Module Module1
     Sub Main()
     End Sub
 End Module
 ",
-                HangMitigatingCancellationToken
-            );
+                    HangMitigatingCancellationToken
+                );
 
-            await TestServices.Editor.PlaceCaretAsync(
-                "(",
-                charsOffset: 1,
-                HangMitigatingCancellationToken
-            );
-            await TestServices.Input.SendAsync(
-                ["x   As   integer", VirtualKeyCode.TAB],
-                HangMitigatingCancellationToken
-            );
+            await TestServices.Editor
+                .PlaceCaretAsync("(", charsOffset: 1, HangMitigatingCancellationToken);
+            await TestServices.Input
+                .SendAsync(
+                    ["x   As   integer", VirtualKeyCode.TAB],
+                    HangMitigatingCancellationToken
+                );
 
             Assert.False(await TestServices.Editor.IsSavedAsync(HangMitigatingCancellationToken));
-            await TestServices.Input.SendAsync(
-                (VirtualKeyCode.VK_S, VirtualKeyCode.CONTROL),
-                HangMitigatingCancellationToken
-            );
+            await TestServices.Input
+                .SendAsync(
+                    (VirtualKeyCode.VK_S, VirtualKeyCode.CONTROL),
+                    HangMitigatingCancellationToken
+                );
 
             // Wait for async save operations to complete before proceeding
-            await TestServices.Workspace.WaitForAllAsyncOperationsAsync(
-                [FeatureAttribute.Workspace],
-                HangMitigatingCancellationToken
-            );
+            await TestServices.Workspace
+                .WaitForAllAsyncOperationsAsync(
+                    [FeatureAttribute.Workspace],
+                    HangMitigatingCancellationToken
+                );
 
-            await TestServices.SolutionExplorerVerifier.ActiveDocumentIsSavedAsync(
-                HangMitigatingCancellationToken
-            );
+            await TestServices.SolutionExplorerVerifier
+                .ActiveDocumentIsSavedAsync(HangMitigatingCancellationToken);
             Assert.True(await TestServices.Editor.IsSavedAsync(HangMitigatingCancellationToken));
             AssertEx.EqualOrDiff(
                 @"Module Module1
@@ -195,10 +189,8 @@ End Module
                 await TestServices.Editor.GetTextAsync(HangMitigatingCancellationToken)
             );
 
-            await TestServices.Shell.ExecuteCommandAsync(
-                WellKnownCommands.Edit.Undo,
-                HangMitigatingCancellationToken
-            );
+            await TestServices.Shell
+                .ExecuteCommandAsync(WellKnownCommands.Edit.Undo, HangMitigatingCancellationToken);
             AssertEx.EqualOrDiff(
                 @"Module Module1
     Sub Main(x   As   Integer)
@@ -209,8 +201,9 @@ End Module
             );
             Assert.Equal(
                 45,
-                (await TestServices.Editor.GetCaretPositionAsync(HangMitigatingCancellationToken))
-                    .BufferPosition
+                (
+                    await TestServices.Editor.GetCaretPositionAsync(HangMitigatingCancellationToken)
+                ).BufferPosition
                     .Position
             );
         }
@@ -218,36 +211,34 @@ End Module
         [IdeFact]
         public async Task CommitOnFocusLost()
         {
-            await TestServices.Editor.SetTextAsync(
-                @"Module M
+            await TestServices.Editor
+                .SetTextAsync(
+                    @"Module M
     Sub M()
     End Sub
 End Module",
-                HangMitigatingCancellationToken
-            );
+                    HangMitigatingCancellationToken
+                );
 
-            await TestServices.Editor.PlaceCaretAsync(
-                "End Sub",
-                charsOffset: -1,
-                HangMitigatingCancellationToken
-            );
+            await TestServices.Editor
+                .PlaceCaretAsync("End Sub", charsOffset: -1, HangMitigatingCancellationToken);
             await TestServices.Input.SendAsync(" ", HangMitigatingCancellationToken);
-            await TestServices.SolutionExplorer.AddFileAsync(
-                ProjectName,
-                "TestZ.vb",
-                open: true,
-                cancellationToken: HangMitigatingCancellationToken
-            ); // Cause focus lost
-            await TestServices.Input.SendAsync(
-                "                  ",
-                HangMitigatingCancellationToken
-            );
-            await TestServices.SolutionExplorer.CloseCodeFileAsync(
-                ProjectName,
-                "TestZ.vb",
-                saveFile: false,
-                cancellationToken: HangMitigatingCancellationToken
-            );
+            await TestServices.SolutionExplorer
+                .AddFileAsync(
+                    ProjectName,
+                    "TestZ.vb",
+                    open: true,
+                    cancellationToken: HangMitigatingCancellationToken
+                ); // Cause focus lost
+            await TestServices.Input
+                .SendAsync("                  ", HangMitigatingCancellationToken);
+            await TestServices.SolutionExplorer
+                .CloseCodeFileAsync(
+                    ProjectName,
+                    "TestZ.vb",
+                    saveFile: false,
+                    cancellationToken: HangMitigatingCancellationToken
+                );
             AssertEx.EqualOrDiff(
                 @"Module M
     Sub M()
@@ -260,8 +251,8 @@ End Module",
         [IdeFact]
         public async Task CommitOnFocusLostDoesNotFormatWithPrettyListingOff()
         {
-            var globalOptions =
-                await TestServices.Shell.GetComponentModelServiceAsync<IGlobalOptionService>(
+            var globalOptions = await TestServices.Shell
+                .GetComponentModelServiceAsync<IGlobalOptionService>(
                     HangMitigatingCancellationToken
                 );
             globalOptions.SetGlobalOption(
@@ -270,36 +261,34 @@ End Module",
                 false
             );
 
-            await TestServices.Editor.SetTextAsync(
-                @"Module M
+            await TestServices.Editor
+                .SetTextAsync(
+                    @"Module M
     Sub M()
     End Sub
 End Module",
-                HangMitigatingCancellationToken
-            );
+                    HangMitigatingCancellationToken
+                );
 
-            await TestServices.Editor.PlaceCaretAsync(
-                "End Sub",
-                charsOffset: -1,
-                HangMitigatingCancellationToken
-            );
+            await TestServices.Editor
+                .PlaceCaretAsync("End Sub", charsOffset: -1, HangMitigatingCancellationToken);
             await TestServices.Input.SendAsync(" ", HangMitigatingCancellationToken);
-            await TestServices.SolutionExplorer.AddFileAsync(
-                ProjectName,
-                "TestZ.vb",
-                open: true,
-                cancellationToken: HangMitigatingCancellationToken
-            ); // Cause focus lost
-            await TestServices.Input.SendAsync(
-                "                  ",
-                HangMitigatingCancellationToken
-            );
-            await TestServices.SolutionExplorer.CloseCodeFileAsync(
-                ProjectName,
-                "TestZ.vb",
-                saveFile: false,
-                HangMitigatingCancellationToken
-            );
+            await TestServices.SolutionExplorer
+                .AddFileAsync(
+                    ProjectName,
+                    "TestZ.vb",
+                    open: true,
+                    cancellationToken: HangMitigatingCancellationToken
+                ); // Cause focus lost
+            await TestServices.Input
+                .SendAsync("                  ", HangMitigatingCancellationToken);
+            await TestServices.SolutionExplorer
+                .CloseCodeFileAsync(
+                    ProjectName,
+                    "TestZ.vb",
+                    saveFile: false,
+                    HangMitigatingCancellationToken
+                );
             AssertEx.EqualOrDiff(
                 @"Module M
     Sub M()

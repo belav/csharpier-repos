@@ -346,10 +346,12 @@ namespace System.Workflow.ComponentModel.Design
                             PropertySegment propertySegment =
                                 serializer.DeserializeObject(xomlSerializationManager, reader)
                                 as PropertySegment;
-                            System.Diagnostics.Debug.Assert(
-                                obj == xomlSerializationManager.Context.Current,
-                                "Serialization Store did not remove object which it pushed onto the stack."
-                            );
+                            System.Diagnostics
+                                .Debug
+                                .Assert(
+                                    obj == xomlSerializationManager.Context.Current,
+                                    "Serialization Store did not remove object which it pushed onto the stack."
+                                );
                             xomlSerializationManager.Context.Pop();
 
                             if (needChangeEvent)
@@ -416,9 +418,8 @@ namespace System.Workflow.ComponentModel.Design
                             propertySegmentSerializationProvider
                         );
 
-                        xomlSerializationManager.Context.Push(
-                            new StringWriter(CultureInfo.InvariantCulture)
-                        );
+                        xomlSerializationManager.Context
+                            .Push(new StringWriter(CultureInfo.InvariantCulture));
 
                         IReferenceService referenceService =
                             this.serviceProvider.GetService(typeof(IReferenceService))
@@ -465,9 +466,9 @@ namespace System.Workflow.ComponentModel.Design
                                 {
                                     // Events.
                                     IEventBindingService eventBindingService =
-                                        this.serviceProvider.GetService(
-                                            typeof(IEventBindingService)
-                                        ) as IEventBindingService;
+                                        this.serviceProvider
+                                            .GetService(typeof(IEventBindingService))
+                                        as IEventBindingService;
                                     if (eventBindingService != null)
                                     {
                                         PropertySegment propertySegment = new PropertySegment(
@@ -703,11 +704,8 @@ namespace System.Workflow.ComponentModel.Design
                             if (propDesc.Converter.GetPropertiesSupported(dummyContext))
                             {
                                 foreach (
-                                    PropertyDescriptor childDesc in propDesc.Converter.GetProperties(
-                                        dummyContext,
-                                        this.obj,
-                                        new Attribute[] { }
-                                    )
+                                    PropertyDescriptor childDesc in propDesc.Converter
+                                        .GetProperties(dummyContext, this.obj, new Attribute[] { })
                                 )
                                 {
                                     properties.Add(
@@ -873,13 +871,8 @@ namespace System.Workflow.ComponentModel.Design
             if (value == null)
             {
                 if (this.realPropInfo != null)
-                    value = this.realPropInfo.GetValue(
-                        targetObj,
-                        invokeAttr,
-                        binder,
-                        index,
-                        culture
-                    );
+                    value = this.realPropInfo
+                        .GetValue(targetObj, invokeAttr, binder, index, culture);
                 else if (this.realPropDesc != null)
                     value = this.realPropDesc.GetValue(targetObj);
             }
@@ -953,11 +946,12 @@ namespace System.Workflow.ComponentModel.Design
                         )
                         {
                             foreach (
-                                PropertyDescriptor childDesc in propDesc.Converter.GetProperties(
-                                    dummyContext,
-                                    propDesc.GetValue(propertySegment.Object),
-                                    new Attribute[] { }
-                                )
+                                PropertyDescriptor childDesc in propDesc.Converter
+                                    .GetProperties(
+                                        dummyContext,
+                                        propDesc.GetValue(propertySegment.Object),
+                                        new Attribute[] { }
+                                    )
                             )
                             {
                                 if (childDesc.Name == propertyName)

@@ -881,9 +881,8 @@ namespace System.Xml.Schema
             { // inline xdr schema
                 if (builder._XdrName != null)
                 {
-                    builder._TargetNamespace = builder._NameTable.Add(
-                        "x-schema:#" + builder._XdrName
-                    );
+                    builder._TargetNamespace = builder._NameTable
+                        .Add("x-schema:#" + builder._XdrName);
                 }
                 else
                 {
@@ -1267,8 +1266,8 @@ namespace System.Xml.Schema
 
             if (builder._contentValidator != null)
             {
-                builder._ElementDef._ElementDecl.ContentValidator =
-                    builder._contentValidator.Finish(true);
+                builder._ElementDef._ElementDecl.ContentValidator = builder._contentValidator
+                    .Finish(true);
                 builder._contentValidator = null;
             }
 
@@ -1469,8 +1468,7 @@ namespace System.Xml.Schema
             //
             if (builder._AttributeDef._Default != null)
             {
-                builder._AttributeDef._AttDef.DefaultValueRaw = builder
-                    ._AttributeDef
+                builder._AttributeDef._AttDef.DefaultValueRaw = builder._AttributeDef
                     ._AttDef
                     .DefaultValueExpanded = (string)builder._AttributeDef._Default;
                 builder.CheckDefaultAttValue(builder._AttributeDef._AttDef);

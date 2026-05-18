@@ -204,19 +204,20 @@ public class RouteEndpointBuilderTest
             defaultOrder
         );
 
-        builder.FilterFactories.Add(
-            (endopintContext, next) =>
-            {
-                endpointFilterCallCount++;
-
-                return invocationContext =>
+        builder.FilterFactories
+            .Add(
+                (endopintContext, next) =>
                 {
-                    invocationFilterCallCount++;
+                    endpointFilterCallCount++;
 
-                    return next(invocationContext);
-                };
-            }
-        );
+                    return invocationContext =>
+                    {
+                        invocationFilterCallCount++;
+
+                        return next(invocationContext);
+                    };
+                }
+            );
 
         var endpoint = Assert.IsType<RouteEndpoint>(builder.Build());
 

@@ -58,11 +58,12 @@ namespace System.ServiceModel.Dispatcher
 
         public object DeserializeReply(Message message, object[] parameters)
         {
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                new NotSupportedException(
-                    SR2.GetString(SR2.QueryStringFormatterOperationNotSupportedClientSide)
-                )
-            );
+            throw DiagnosticUtility.ExceptionUtility
+                .ThrowHelperError(
+                    new NotSupportedException(
+                        SR2.GetString(SR2.QueryStringFormatterOperationNotSupportedClientSide)
+                    )
+                );
         }
 
         public Message SerializeRequest(MessageVersion messageVersion, object[] parameters)
@@ -80,10 +81,8 @@ namespace System.ServiceModel.Dispatcher
                 {
                     if (parameters[i] != null)
                     {
-                        nvc[this.queryMapping[i].Key] = this.qsc.ConvertValueToString(
-                            parameters[i],
-                            this.queryMapping[i].Value
-                        );
+                        nvc[this.queryMapping[i].Key] = this.qsc
+                            .ConvertValueToString(parameters[i], this.queryMapping[i].Value);
                     }
                 }
                 else
@@ -184,16 +183,17 @@ namespace System.ServiceModel.Dispatcher
                 string parameterName = mpd.XmlName.DecodedName;
                 if (alreadyGotVars.ContainsKey(parameterName))
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(
-                            SR2.GetString(
-                                SR2.UriTemplateVarCaseDistinction,
-                                operationDescription.XmlName.DecodedName,
-                                contractName,
-                                parameterName
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(
+                                SR2.GetString(
+                                    SR2.UriTemplateVarCaseDistinction,
+                                    operationDescription.XmlName.DecodedName,
+                                    contractName,
+                                    parameterName
+                                )
                             )
-                        )
-                    );
+                        );
                 }
                 List<string> neededPathCopy = new List<string>(neededPathVars);
                 foreach (string pathVar in neededPathCopy)
@@ -205,16 +205,17 @@ namespace System.ServiceModel.Dispatcher
                     {
                         if (mpd.Type != typeof(string))
                         {
-                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                                new InvalidOperationException(
-                                    SR2.GetString(
-                                        SR2.UriTemplatePathVarMustBeString,
-                                        operationDescription.XmlName.DecodedName,
-                                        contractName,
-                                        parameterName
+                            throw DiagnosticUtility.ExceptionUtility
+                                .ThrowHelperError(
+                                    new InvalidOperationException(
+                                        SR2.GetString(
+                                            SR2.UriTemplatePathVarMustBeString,
+                                            operationDescription.XmlName.DecodedName,
+                                            contractName,
+                                            parameterName
+                                        )
                                     )
-                                )
-                            );
+                                );
                         }
                         pathMapping.Add(i, parameterName);
                         alreadyGotVars.Add(parameterName, 0);
@@ -231,18 +232,19 @@ namespace System.ServiceModel.Dispatcher
                     {
                         if (!qsc.CanConvert(mpd.Type))
                         {
-                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                                new InvalidOperationException(
-                                    SR2.GetString(
-                                        SR2.UriTemplateQueryVarMustBeConvertible,
-                                        operationDescription.XmlName.DecodedName,
-                                        contractName,
-                                        parameterName,
-                                        mpd.Type,
-                                        qsc.GetType().Name
+                            throw DiagnosticUtility.ExceptionUtility
+                                .ThrowHelperError(
+                                    new InvalidOperationException(
+                                        SR2.GetString(
+                                            SR2.UriTemplateQueryVarMustBeConvertible,
+                                            operationDescription.XmlName.DecodedName,
+                                            contractName,
+                                            parameterName,
+                                            mpd.Type,
+                                            qsc.GetType().Name
+                                        )
                                     )
-                                )
-                            );
+                                );
                         }
                         queryMapping.Add(
                             i,
@@ -255,29 +257,31 @@ namespace System.ServiceModel.Dispatcher
             }
             if (neededPathVars.Count != 0)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(
-                        SR2.GetString(
-                            SR2.UriTemplateMissingVar,
-                            operationDescription.XmlName.DecodedName,
-                            contractName,
-                            neededPathVars[0]
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(
+                            SR2.GetString(
+                                SR2.UriTemplateMissingVar,
+                                operationDescription.XmlName.DecodedName,
+                                contractName,
+                                neededPathVars[0]
+                            )
                         )
-                    )
-                );
+                    );
             }
             if (neededQueryVars.Count != 0)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(
-                        SR2.GetString(
-                            SR2.UriTemplateMissingVar,
-                            operationDescription.XmlName.DecodedName,
-                            contractName,
-                            neededQueryVars[0]
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(
+                            SR2.GetString(
+                                SR2.UriTemplateMissingVar,
+                                operationDescription.XmlName.DecodedName,
+                                contractName,
+                                neededQueryVars[0]
+                            )
                         )
-                    )
-                );
+                    );
             }
         }
 

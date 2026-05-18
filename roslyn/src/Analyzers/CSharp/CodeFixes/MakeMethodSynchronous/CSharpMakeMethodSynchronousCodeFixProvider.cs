@@ -118,8 +118,8 @@ namespace Microsoft.CodeAnalysis.CSharp.MakeMethodSynchronous
             )
             {
                 // If the return type is IAsyncEnumerable<T>, then make the new return type IEnumerable<T>.
-                newReturnType = knownTypes
-                    .IEnumerableOfTType.Construct(methodSymbol.ReturnType.GetTypeArguments()[0])
+                newReturnType = knownTypes.IEnumerableOfTType
+                    .Construct(methodSymbol.ReturnType.GetTypeArguments()[0])
                     .GenerateTypeSyntax();
             }
             else if (
@@ -128,8 +128,8 @@ namespace Microsoft.CodeAnalysis.CSharp.MakeMethodSynchronous
             )
             {
                 // If the return type is IAsyncEnumerator<T>, then make the new return type IEnumerator<T>.
-                newReturnType = knownTypes
-                    .IEnumeratorOfTType.Construct(methodSymbol.ReturnType.GetTypeArguments()[0])
+                newReturnType = knownTypes.IEnumeratorOfTType
+                    .Construct(methodSymbol.ReturnType.GetTypeArguments()[0])
                     .GenerateTypeSyntax();
             }
 

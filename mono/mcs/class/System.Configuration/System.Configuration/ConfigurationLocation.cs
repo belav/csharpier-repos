@@ -103,11 +103,8 @@ namespace System.Configuration
                     Configuration parentFile = parent.GetParentWithFile();
                     if (parentFile != null)
                     {
-                        string parentRelativePath =
-                            parent.ConfigHost.GetConfigPathFromLocationSubPath(
-                                parent.LocationConfigPath,
-                                path
-                            );
+                        string parentRelativePath = parent.ConfigHost
+                            .GetConfigPathFromLocationSubPath(parent.LocationConfigPath, path);
                         parent = parentFile.FindLocationConfiguration(parentRelativePath, parent);
                     }
                 }

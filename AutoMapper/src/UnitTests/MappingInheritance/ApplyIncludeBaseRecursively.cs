@@ -152,5 +152,6 @@ public class CircularAs : NonValidatingSpecBase
     public void Should_report_the_error() =>
         new Action(AssertConfigurationIsValid)
             .ShouldThrow<InvalidOperationException>()
-            .Message.ShouldBe("As must specify a derived type, not " + typeof(DeviceDto));
+            .Message
+            .ShouldBe("As must specify a derived type, not " + typeof(DeviceDto));
 }

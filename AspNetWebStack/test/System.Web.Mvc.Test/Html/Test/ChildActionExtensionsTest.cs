@@ -46,11 +46,8 @@ namespace System.Web.Mvc.Html.Test
                 .Callback<string>(s => returnValue = s)
                 .Returns(() => returnValue);
             _httpContext.Setup(hc =>
-                hc.Server.Execute(
-                    It.IsAny<IHttpHandler>(),
-                    It.IsAny<TextWriter>(),
-                    It.IsAny<bool>()
-                )
+                hc.Server
+                    .Execute(It.IsAny<IHttpHandler>(), It.IsAny<TextWriter>(), It.IsAny<bool>())
             );
 
             _viewContext = new ViewContext
@@ -122,11 +119,8 @@ namespace System.Web.Mvc.Html.Test
             bool callbackPreserveForm = false;
             _httpContext
                 .Setup(hc =>
-                    hc.Server.Execute(
-                        It.IsAny<IHttpHandler>(),
-                        It.IsAny<TextWriter>(),
-                        It.IsAny<bool>()
-                    )
+                    hc.Server
+                        .Execute(It.IsAny<IHttpHandler>(), It.IsAny<TextWriter>(), It.IsAny<bool>())
                 )
                 .Callback<IHttpHandler, TextWriter, bool>(
                     (handler, textWriter, preserveForm) =>
@@ -169,11 +163,8 @@ namespace System.Web.Mvc.Html.Test
             MvcHandler mvcHandler = null;
             _httpContext
                 .Setup(hc =>
-                    hc.Server.Execute(
-                        It.IsAny<IHttpHandler>(),
-                        It.IsAny<TextWriter>(),
-                        It.IsAny<bool>()
-                    )
+                    hc.Server
+                        .Execute(It.IsAny<IHttpHandler>(), It.IsAny<TextWriter>(), It.IsAny<bool>())
                 )
                 .Callback<IHttpHandler, TextWriter, bool>(
                     (handler, _, __) =>
@@ -208,11 +199,8 @@ namespace System.Web.Mvc.Html.Test
             MvcHandler mvcHandler = null;
             _httpContext
                 .Setup(hc =>
-                    hc.Server.Execute(
-                        It.IsAny<IHttpHandler>(),
-                        It.IsAny<TextWriter>(),
-                        It.IsAny<bool>()
-                    )
+                    hc.Server
+                        .Execute(It.IsAny<IHttpHandler>(), It.IsAny<TextWriter>(), It.IsAny<bool>())
                 )
                 .Callback<IHttpHandler, TextWriter, bool>(
                     (handler, _, __) =>
@@ -244,11 +232,8 @@ namespace System.Web.Mvc.Html.Test
             MvcHandler mvcHandler = null;
             _httpContext
                 .Setup(hc =>
-                    hc.Server.Execute(
-                        It.IsAny<IHttpHandler>(),
-                        It.IsAny<TextWriter>(),
-                        It.IsAny<bool>()
-                    )
+                    hc.Server
+                        .Execute(It.IsAny<IHttpHandler>(), It.IsAny<TextWriter>(), It.IsAny<bool>())
                 )
                 .Callback<IHttpHandler, TextWriter, bool>(
                     (handler, _, __) =>
@@ -280,11 +265,8 @@ namespace System.Web.Mvc.Html.Test
             MvcHandler mvcHandler = null;
             _httpContext
                 .Setup(hc =>
-                    hc.Server.Execute(
-                        It.IsAny<IHttpHandler>(),
-                        It.IsAny<TextWriter>(),
-                        It.IsAny<bool>()
-                    )
+                    hc.Server
+                        .Execute(It.IsAny<IHttpHandler>(), It.IsAny<TextWriter>(), It.IsAny<bool>())
                 )
                 .Callback<IHttpHandler, TextWriter, bool>(
                     (handler, _, __) =>
@@ -316,11 +298,8 @@ namespace System.Web.Mvc.Html.Test
             MvcHandler mvcHandler = null;
             _httpContext
                 .Setup(hc =>
-                    hc.Server.Execute(
-                        It.IsAny<IHttpHandler>(),
-                        It.IsAny<TextWriter>(),
-                        It.IsAny<bool>()
-                    )
+                    hc.Server
+                        .Execute(It.IsAny<IHttpHandler>(), It.IsAny<TextWriter>(), It.IsAny<bool>())
                 )
                 .Callback<IHttpHandler, TextWriter, bool>(
                     (handler, _, __) =>
@@ -361,11 +340,8 @@ namespace System.Web.Mvc.Html.Test
             MvcHandler mvcHandler = null;
             _httpContext
                 .Setup(hc =>
-                    hc.Server.Execute(
-                        It.IsAny<IHttpHandler>(),
-                        It.IsAny<TextWriter>(),
-                        It.IsAny<bool>()
-                    )
+                    hc.Server
+                        .Execute(It.IsAny<IHttpHandler>(), It.IsAny<TextWriter>(), It.IsAny<bool>())
                 )
                 .Callback<IHttpHandler, TextWriter, bool>(
                     (handler, _, __) =>
@@ -397,11 +373,8 @@ namespace System.Web.Mvc.Html.Test
             MvcHandler mvcHandler = null;
             _httpContext
                 .Setup(hc =>
-                    hc.Server.Execute(
-                        It.IsAny<IHttpHandler>(),
-                        It.IsAny<TextWriter>(),
-                        It.IsAny<bool>()
-                    )
+                    hc.Server
+                        .Execute(It.IsAny<IHttpHandler>(), It.IsAny<TextWriter>(), It.IsAny<bool>())
                 )
                 .Callback<IHttpHandler, TextWriter, bool>(
                     (handler, _, __) =>
@@ -438,11 +411,8 @@ namespace System.Web.Mvc.Html.Test
             MvcHandler mvcHandler = null;
             _httpContext
                 .Setup(hc =>
-                    hc.Server.Execute(
-                        It.IsAny<IHttpHandler>(),
-                        It.IsAny<TextWriter>(),
-                        It.IsAny<bool>()
-                    )
+                    hc.Server
+                        .Execute(It.IsAny<IHttpHandler>(), It.IsAny<TextWriter>(), It.IsAny<bool>())
                 )
                 .Callback<IHttpHandler, TextWriter, bool>(
                     (handler, _, __) =>
@@ -508,11 +478,8 @@ namespace System.Web.Mvc.Html.Test
             MvcHandler mvcHandler = null;
             _httpContext
                 .Setup(hc =>
-                    hc.Server.Execute(
-                        It.IsAny<IHttpHandler>(),
-                        It.IsAny<TextWriter>(),
-                        It.IsAny<bool>()
-                    )
+                    hc.Server
+                        .Execute(It.IsAny<IHttpHandler>(), It.IsAny<TextWriter>(), It.IsAny<bool>())
                 )
                 .Callback<IHttpHandler, TextWriter, bool>(
                     (handler, _, __) =>
@@ -548,11 +515,8 @@ namespace System.Web.Mvc.Html.Test
             MvcHandler mvcHandler = null;
             _httpContext
                 .Setup(hc =>
-                    hc.Server.Execute(
-                        It.IsAny<IHttpHandler>(),
-                        It.IsAny<TextWriter>(),
-                        It.IsAny<bool>()
-                    )
+                    hc.Server
+                        .Execute(It.IsAny<IHttpHandler>(), It.IsAny<TextWriter>(), It.IsAny<bool>())
                 )
                 .Callback<IHttpHandler, TextWriter, bool>(
                     (handler, _, __) =>

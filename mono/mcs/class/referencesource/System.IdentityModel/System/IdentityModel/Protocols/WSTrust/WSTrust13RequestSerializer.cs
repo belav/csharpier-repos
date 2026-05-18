@@ -97,16 +97,17 @@ namespace System.IdentityModel.Protocols.WSTrust
                 rst.KeyWrapAlgorithm = reader.ReadElementContentAsString();
                 if (!UriUtil.CanCreateValidUri(rst.KeyWrapAlgorithm, UriKind.Absolute))
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new WSTrustSerializationException(
-                            SR.GetString(
-                                SR.ID3135,
-                                WSTrust13Constants.ElementNames.KeyWrapAlgorithm,
-                                WSTrust13Constants.NamespaceURI,
-                                rst.KeyWrapAlgorithm
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperError(
+                            new WSTrustSerializationException(
+                                SR.GetString(
+                                    SR.ID3135,
+                                    WSTrust13Constants.ElementNames.KeyWrapAlgorithm,
+                                    WSTrust13Constants.NamespaceURI,
+                                    rst.KeyWrapAlgorithm
+                                )
                             )
-                        )
-                    );
+                        );
                 }
 
                 return;
@@ -129,9 +130,10 @@ namespace System.IdentityModel.Protocols.WSTrust
 
                 if (rst.ValidateTarget == null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new WSTrustSerializationException(SR.GetString(SR.ID3221))
-                    );
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperError(
+                            new WSTrustSerializationException(SR.GetString(SR.ID3221))
+                        );
                 }
 
                 return;
@@ -188,16 +190,17 @@ namespace System.IdentityModel.Protocols.WSTrust
             {
                 if (!UriUtil.CanCreateValidUri(rst.KeyWrapAlgorithm, UriKind.Absolute))
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new WSTrustSerializationException(
-                            SR.GetString(
-                                SR.ID3135,
-                                WSTrust13Constants.ElementNames.KeyWrapAlgorithm,
-                                WSTrust13Constants.NamespaceURI,
-                                rst.KeyWrapAlgorithm
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperError(
+                            new WSTrustSerializationException(
+                                SR.GetString(
+                                    SR.ID3135,
+                                    WSTrust13Constants.ElementNames.KeyWrapAlgorithm,
+                                    WSTrust13Constants.NamespaceURI,
+                                    rst.KeyWrapAlgorithm
+                                )
                             )
-                        )
-                    );
+                        );
                 }
 
                 this.WriteXmlElement(
@@ -309,32 +312,30 @@ namespace System.IdentityModel.Protocols.WSTrust
 
             // Write out the WSTrust13 specific elements
             if (
-                StringComparer.Ordinal.Equals(
-                    elementName,
-                    WSTrust13Constants.ElementNames.SecondaryParameters
-                )
+                StringComparer.Ordinal
+                    .Equals(elementName, WSTrust13Constants.ElementNames.SecondaryParameters)
             )
             {
                 RequestSecurityToken secondaryParameters = elementValue as RequestSecurityToken;
 
                 if (secondaryParameters == null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(
-                            SR.GetString(
-                                SR.ID2064,
-                                WSTrust13Constants.ElementNames.SecondaryParameters
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(
+                                SR.GetString(
+                                    SR.ID2064,
+                                    WSTrust13Constants.ElementNames.SecondaryParameters
+                                )
                             )
-                        )
-                    );
+                        );
                 }
 
                 // WS-Trust 13 spec does not allow this
                 if (secondaryParameters.SecondaryParameters != null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(SR.GetString(SR.ID2055))
-                    );
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperError(new InvalidOperationException(SR.GetString(SR.ID2055)));
                 }
 
                 writer.WriteStartElement(
@@ -366,10 +367,8 @@ namespace System.IdentityModel.Protocols.WSTrust
             }
 
             if (
-                StringComparer.Ordinal.Equals(
-                    elementName,
-                    WSTrust13Constants.ElementNames.KeyWrapAlgorithm
-                )
+                StringComparer.Ordinal
+                    .Equals(elementName, WSTrust13Constants.ElementNames.KeyWrapAlgorithm)
             )
             {
                 writer.WriteElementString(
@@ -382,26 +381,25 @@ namespace System.IdentityModel.Protocols.WSTrust
             }
 
             if (
-                StringComparer.Ordinal.Equals(
-                    elementName,
-                    WSTrust13Constants.ElementNames.ValidateTarget
-                )
+                StringComparer.Ordinal
+                    .Equals(elementName, WSTrust13Constants.ElementNames.ValidateTarget)
             )
             {
                 SecurityTokenElement tokenElement = elementValue as SecurityTokenElement;
 
                 if (tokenElement == null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                        "elementValue",
-                        SR.GetString(
-                            SR.ID3222,
-                            WSTrust13Constants.ElementNames.ValidateTarget,
-                            WSTrust13Constants.NamespaceURI,
-                            typeof(SecurityTokenElement),
-                            elementValue
-                        )
-                    );
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperArgument(
+                            "elementValue",
+                            SR.GetString(
+                                SR.ID3222,
+                                WSTrust13Constants.ElementNames.ValidateTarget,
+                                WSTrust13Constants.NamespaceURI,
+                                typeof(SecurityTokenElement),
+                                elementValue
+                            )
+                        );
                 }
 
                 writer.WriteStartElement(
@@ -415,10 +413,8 @@ namespace System.IdentityModel.Protocols.WSTrust
                 }
                 else
                 {
-                    context.SecurityTokenHandlers.WriteToken(
-                        writer,
-                        tokenElement.GetSecurityToken()
-                    );
+                    context.SecurityTokenHandlers
+                        .WriteToken(writer, tokenElement.GetSecurityToken());
                 }
 
                 writer.WriteEndElement();
@@ -498,16 +494,17 @@ namespace System.IdentityModel.Protocols.WSTrust
                         )
                     )
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new WSTrustSerializationException(
-                                SR.GetString(
-                                    SR.ID3135,
-                                    WSTrust13Constants.ElementNames.KeyWrapAlgorithm,
-                                    WSTrust13Constants.NamespaceURI,
-                                    secondaryParameters.KeyWrapAlgorithm
+                        throw DiagnosticUtility.ExceptionUtility
+                            .ThrowHelperError(
+                                new WSTrustSerializationException(
+                                    SR.GetString(
+                                        SR.ID3135,
+                                        WSTrust13Constants.ElementNames.KeyWrapAlgorithm,
+                                        WSTrust13Constants.NamespaceURI,
+                                        secondaryParameters.KeyWrapAlgorithm
+                                    )
                                 )
-                            )
-                        );
+                            );
                     }
                 }
                 else if (
@@ -517,9 +514,10 @@ namespace System.IdentityModel.Protocols.WSTrust
                     )
                 )
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new WSTrustSerializationException(SR.GetString(SR.ID3130))
-                    );
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperError(
+                            new WSTrustSerializationException(SR.GetString(SR.ID3130))
+                        );
                 }
                 else
                 {

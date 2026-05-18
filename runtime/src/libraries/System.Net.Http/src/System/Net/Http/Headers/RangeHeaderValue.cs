@@ -128,12 +128,8 @@ namespace System.Net.Http.Headers
             parsedValue = null;
 
             if (
-                GenericHeaderParser.RangeParser.TryParseValue(
-                    input,
-                    null,
-                    ref index,
-                    out object? output
-                )
+                GenericHeaderParser.RangeParser
+                    .TryParseValue(input, null, ref index, out object? output)
             )
             {
                 parsedValue = (RangeHeaderValue)output!;

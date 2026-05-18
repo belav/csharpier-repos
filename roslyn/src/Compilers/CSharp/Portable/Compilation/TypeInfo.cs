@@ -66,9 +66,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         {
             return new TypeInfo(
                 info.Type?.GetITypeSymbol(info.Nullability.FlowState.ToAnnotation()),
-                info.ConvertedType?.GetITypeSymbol(
-                    info.ConvertedNullability.FlowState.ToAnnotation()
-                ),
+                info.ConvertedType
+                    ?.GetITypeSymbol(info.ConvertedNullability.FlowState.ToAnnotation()),
                 info.Nullability,
                 info.ConvertedNullability
             );

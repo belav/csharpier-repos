@@ -118,8 +118,9 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Suppression
                     {
                         var newPragmaAction =
                             newSuppressionFix.Action as IPragmaBasedCodeAction
-                            ?? newSuppressionFix
-                                .Action.NestedCodeActions.OfType<IPragmaBasedCodeAction>()
+                            ?? newSuppressionFix.Action
+                                .NestedCodeActions
+                                .OfType<IPragmaBasedCodeAction>()
                                 .SingleOrDefault();
                         if (newPragmaAction != null)
                         {

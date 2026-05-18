@@ -640,9 +640,8 @@ namespace System.Web.UI.DataVisualization.Charting
                         // only when series do not have this attribute set.
                         if (
                             !(customAttr.DataPointCustomProperties is DataPoint)
-                            || !(
-                                (DataPoint)customAttr.DataPointCustomProperties
-                            ).series.IsCustomPropertySet(this._name)
+                            || !((DataPoint)customAttr.DataPointCustomProperties).series
+                                .IsCustomPropertySet(this._name)
                         )
                         {
                             // Delete attribute
@@ -650,9 +649,8 @@ namespace System.Web.UI.DataVisualization.Charting
                                 customAttr.DataPointCustomProperties.IsCustomPropertySet(this._name)
                             )
                             {
-                                customAttr.DataPointCustomProperties.DeleteCustomProperty(
-                                    this._name
-                                );
+                                customAttr.DataPointCustomProperties
+                                    .DeleteCustomProperty(this._name);
                                 setAttributeValue = false;
                             }
                         }
@@ -664,9 +662,8 @@ namespace System.Web.UI.DataVisualization.Charting
                         customAttr.DataPointCustomProperties[this._name] = stringValue;
                     }
                 }
-                customAttr.DataPointCustomProperties.CustomProperties = customAttr
-                    .DataPointCustomProperties
-                    .CustomProperties;
+                customAttr.DataPointCustomProperties.CustomProperties =
+                    customAttr.DataPointCustomProperties.CustomProperties;
 
                 IChangeTracking changeTracking = component as IChangeTracking;
                 if (changeTracking != null)

@@ -195,13 +195,19 @@ namespace System.Web.Profile
 
                     cmd.CommandTimeout = CommandTimeout;
                     cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.Parameters.Add(
-                        CreateInputParam("@ApplicationName", SqlDbType.NVarChar, ApplicationName)
-                    );
+                    cmd.Parameters
+                        .Add(
+                            CreateInputParam(
+                                "@ApplicationName",
+                                SqlDbType.NVarChar,
+                                ApplicationName
+                            )
+                        );
                     cmd.Parameters.Add(CreateInputParam("@UserName", SqlDbType.NVarChar, userName));
-                    cmd.Parameters.Add(
-                        CreateInputParam("@CurrentTimeUtc", SqlDbType.DateTime, DateTime.UtcNow)
-                    );
+                    cmd.Parameters
+                        .Add(
+                            CreateInputParam("@CurrentTimeUtc", SqlDbType.DateTime, DateTime.UtcNow)
+                        );
                     reader = cmd.ExecuteReader(CommandBehavior.SingleRow);
                     if (reader.Read())
                     {
@@ -290,23 +296,32 @@ namespace System.Web.Profile
 
                     cmd.CommandTimeout = CommandTimeout;
                     cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.Parameters.Add(
-                        CreateInputParam("@ApplicationName", SqlDbType.NVarChar, ApplicationName)
-                    );
+                    cmd.Parameters
+                        .Add(
+                            CreateInputParam(
+                                "@ApplicationName",
+                                SqlDbType.NVarChar,
+                                ApplicationName
+                            )
+                        );
                     cmd.Parameters.Add(CreateInputParam("@UserName", SqlDbType.NVarChar, username));
                     cmd.Parameters.Add(CreateInputParam("@PropertyNames", SqlDbType.NText, names));
-                    cmd.Parameters.Add(
-                        CreateInputParam("@PropertyValuesString", SqlDbType.NText, values)
-                    );
-                    cmd.Parameters.Add(
-                        CreateInputParam("@PropertyValuesBinary", SqlDbType.Image, buf)
-                    );
-                    cmd.Parameters.Add(
-                        CreateInputParam("@IsUserAnonymous", SqlDbType.Bit, !userIsAuthenticated)
-                    );
-                    cmd.Parameters.Add(
-                        CreateInputParam("@CurrentTimeUtc", SqlDbType.DateTime, DateTime.UtcNow)
-                    );
+                    cmd.Parameters
+                        .Add(CreateInputParam("@PropertyValuesString", SqlDbType.NText, values));
+                    cmd.Parameters
+                        .Add(CreateInputParam("@PropertyValuesBinary", SqlDbType.Image, buf));
+                    cmd.Parameters
+                        .Add(
+                            CreateInputParam(
+                                "@IsUserAnonymous",
+                                SqlDbType.Bit,
+                                !userIsAuthenticated
+                            )
+                        );
+                    cmd.Parameters
+                        .Add(
+                            CreateInputParam("@CurrentTimeUtc", SqlDbType.DateTime, DateTime.UtcNow)
+                        );
                     cmd.ExecuteNonQuery();
                 }
                 finally
@@ -419,16 +434,16 @@ namespace System.Web.Profile
 
                         cmd.CommandTimeout = CommandTimeout;
                         cmd.CommandType = CommandType.StoredProcedure;
-                        cmd.Parameters.Add(
-                            CreateInputParam(
-                                "@ApplicationName",
-                                SqlDbType.NVarChar,
-                                ApplicationName
-                            )
-                        );
-                        cmd.Parameters.Add(
-                            CreateInputParam("@UserNames", SqlDbType.NVarChar, allUsers)
-                        );
+                        cmd.Parameters
+                            .Add(
+                                CreateInputParam(
+                                    "@ApplicationName",
+                                    SqlDbType.NVarChar,
+                                    ApplicationName
+                                )
+                            );
+                        cmd.Parameters
+                            .Add(CreateInputParam("@UserNames", SqlDbType.NVarChar, allUsers));
                         object o = cmd.ExecuteScalar();
                         if (o != null && o is int)
                             numProfilesDeleted += (int)o;
@@ -489,23 +504,30 @@ namespace System.Web.Profile
 
                     cmd.CommandTimeout = CommandTimeout;
                     cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.Parameters.Add(
-                        CreateInputParam("@ApplicationName", SqlDbType.NVarChar, ApplicationName)
-                    );
-                    cmd.Parameters.Add(
-                        CreateInputParam(
-                            "@ProfileAuthOptions",
-                            SqlDbType.Int,
-                            (int)authenticationOption
-                        )
-                    );
-                    cmd.Parameters.Add(
-                        CreateInputParam(
-                            "@InactiveSinceDate",
-                            SqlDbType.DateTime,
-                            userInactiveSinceDate.ToUniversalTime()
-                        )
-                    );
+                    cmd.Parameters
+                        .Add(
+                            CreateInputParam(
+                                "@ApplicationName",
+                                SqlDbType.NVarChar,
+                                ApplicationName
+                            )
+                        );
+                    cmd.Parameters
+                        .Add(
+                            CreateInputParam(
+                                "@ProfileAuthOptions",
+                                SqlDbType.Int,
+                                (int)authenticationOption
+                            )
+                        );
+                    cmd.Parameters
+                        .Add(
+                            CreateInputParam(
+                                "@InactiveSinceDate",
+                                SqlDbType.DateTime,
+                                userInactiveSinceDate.ToUniversalTime()
+                            )
+                        );
                     object o = cmd.ExecuteScalar();
                     if (o == null || !(o is int))
                         return 0;
@@ -548,23 +570,30 @@ namespace System.Web.Profile
 
                     cmd.CommandTimeout = CommandTimeout;
                     cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.Parameters.Add(
-                        CreateInputParam("@ApplicationName", SqlDbType.NVarChar, ApplicationName)
-                    );
-                    cmd.Parameters.Add(
-                        CreateInputParam(
-                            "@ProfileAuthOptions",
-                            SqlDbType.Int,
-                            (int)authenticationOption
-                        )
-                    );
-                    cmd.Parameters.Add(
-                        CreateInputParam(
-                            "@InactiveSinceDate",
-                            SqlDbType.DateTime,
-                            userInactiveSinceDate.ToUniversalTime()
-                        )
-                    );
+                    cmd.Parameters
+                        .Add(
+                            CreateInputParam(
+                                "@ApplicationName",
+                                SqlDbType.NVarChar,
+                                ApplicationName
+                            )
+                        );
+                    cmd.Parameters
+                        .Add(
+                            CreateInputParam(
+                                "@ProfileAuthOptions",
+                                SqlDbType.Int,
+                                (int)authenticationOption
+                            )
+                        );
+                    cmd.Parameters
+                        .Add(
+                            CreateInputParam(
+                                "@InactiveSinceDate",
+                                SqlDbType.DateTime,
+                                userInactiveSinceDate.ToUniversalTime()
+                            )
+                        );
                     object o = cmd.ExecuteScalar();
                     if (o == null || !(o is int))
                         return 0;
@@ -722,16 +751,22 @@ namespace System.Web.Profile
 
                     cmd.CommandTimeout = CommandTimeout;
                     cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.Parameters.Add(
-                        CreateInputParam("@ApplicationName", SqlDbType.NVarChar, ApplicationName)
-                    );
-                    cmd.Parameters.Add(
-                        CreateInputParam(
-                            "@ProfileAuthOptions",
-                            SqlDbType.Int,
-                            (int)authenticationOption
-                        )
-                    );
+                    cmd.Parameters
+                        .Add(
+                            CreateInputParam(
+                                "@ApplicationName",
+                                SqlDbType.NVarChar,
+                                ApplicationName
+                            )
+                        );
+                    cmd.Parameters
+                        .Add(
+                            CreateInputParam(
+                                "@ProfileAuthOptions",
+                                SqlDbType.Int,
+                                (int)authenticationOption
+                            )
+                        );
                     cmd.Parameters.Add(CreateInputParam("@PageIndex", SqlDbType.Int, pageIndex));
                     cmd.Parameters.Add(CreateInputParam("@PageSize", SqlDbType.Int, pageSize));
                     foreach (SqlParameter arg in args)

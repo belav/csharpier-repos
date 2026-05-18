@@ -982,9 +982,8 @@ namespace System.Buffers.Text.Tests
             {
                 Span<byte> testBytes = new byte[numberOfBytes];
                 Base64TestHelper.InitializeDecodableBytes(testBytes);
-                string sourceString = Encoding.ASCII.GetString(
-                    testBytes.Slice(0, numberOfBytesToTest).ToArray()
-                );
+                string sourceString = Encoding.ASCII
+                    .GetString(testBytes.Slice(0, numberOfBytesToTest).ToArray());
                 Span<byte> expectedBytes = Convert.FromBase64String(sourceString);
 
                 Assert.Equal(
@@ -1176,9 +1175,8 @@ namespace System.Buffers.Text.Tests
             byte[] expectedBytes
         )
         {
-            byte[] utf8BytesWithByteToBeIgnored = UTF8Encoding.UTF8.GetBytes(
-                utf8WithCharsToBeIgnored
-            );
+            byte[] utf8BytesWithByteToBeIgnored = UTF8Encoding.UTF8
+                .GetBytes(utf8WithCharsToBeIgnored);
             byte[] resultBytes = new byte[5];
             OperationStatus result = Base64.DecodeFromUtf8(
                 utf8BytesWithByteToBeIgnored,
@@ -1204,9 +1202,8 @@ namespace System.Buffers.Text.Tests
             byte[] expectedBytes
         )
         {
-            Span<byte> utf8BytesWithByteToBeIgnored = UTF8Encoding.UTF8.GetBytes(
-                utf8WithCharsToBeIgnored
-            );
+            Span<byte> utf8BytesWithByteToBeIgnored = UTF8Encoding.UTF8
+                .GetBytes(utf8WithCharsToBeIgnored);
             OperationStatus result = Base64.DecodeFromUtf8InPlace(
                 utf8BytesWithByteToBeIgnored,
                 out int bytesWritten
@@ -1227,9 +1224,8 @@ namespace System.Buffers.Text.Tests
         [MemberData(nameof(StringsOnlyWithCharsToBeIgnored))]
         public void BasicDecodingWithOnlyCharsToBeIgnored(string utf8WithCharsToBeIgnored)
         {
-            byte[] utf8BytesWithByteToBeIgnored = UTF8Encoding.UTF8.GetBytes(
-                utf8WithCharsToBeIgnored
-            );
+            byte[] utf8BytesWithByteToBeIgnored = UTF8Encoding.UTF8
+                .GetBytes(utf8WithCharsToBeIgnored);
             byte[] resultBytes = new byte[5];
             OperationStatus result = Base64.DecodeFromUtf8(
                 utf8BytesWithByteToBeIgnored,
@@ -1246,9 +1242,8 @@ namespace System.Buffers.Text.Tests
         [MemberData(nameof(StringsOnlyWithCharsToBeIgnored))]
         public void DecodingInPlaceWithOnlyCharsToBeIgnored(string utf8WithCharsToBeIgnored)
         {
-            Span<byte> utf8BytesWithByteToBeIgnored = UTF8Encoding.UTF8.GetBytes(
-                utf8WithCharsToBeIgnored
-            );
+            Span<byte> utf8BytesWithByteToBeIgnored = UTF8Encoding.UTF8
+                .GetBytes(utf8WithCharsToBeIgnored);
             OperationStatus result = Base64.DecodeFromUtf8InPlace(
                 utf8BytesWithByteToBeIgnored,
                 out int bytesWritten

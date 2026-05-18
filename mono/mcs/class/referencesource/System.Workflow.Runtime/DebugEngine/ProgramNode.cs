@@ -29,15 +29,16 @@ namespace System.Workflow.Runtime.DebugEngine
             out bool isSynchronousAttach
         )
         {
-            this.controller.Attach(
-                programId,
-                attachTimeout,
-                detachPingInterval,
-                out hostName,
-                out uri,
-                out controllerThreadId,
-                out isSynchronousAttach
-            );
+            this.controller
+                .Attach(
+                    programId,
+                    attachTimeout,
+                    detachPingInterval,
+                    out hostName,
+                    out uri,
+                    out controllerThreadId,
+                    out isSynchronousAttach
+                );
         }
     }
 

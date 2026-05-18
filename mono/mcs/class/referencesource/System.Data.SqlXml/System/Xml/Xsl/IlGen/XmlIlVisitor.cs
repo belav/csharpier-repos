@@ -136,7 +136,9 @@ namespace System.Xml.Xsl.IlGen
                 // Get MethodInfo for method that computes the value of this global
                 methGlobal = XmlILAnnotation
                     .Write(iter)
-                    .CachedIteratorDescriptor.Storage.GlobalLocation;
+                    .CachedIteratorDescriptor
+                    .Storage
+                    .GlobalLocation;
                 isCached = !iter.XmlType.IsSingleton;
 
                 // Notify the StaticDataManager of the new global value
@@ -178,9 +180,10 @@ namespace System.Xml.Xsl.IlGen
                     this.helper.LoadInteger(idxValue);
 
                     this.helper.LoadQueryRuntime();
-                    this.helper.LoadInteger(
-                        this.helper.StaticData.DeclareXmlType(XmlQueryTypeFactory.ItemS)
-                    );
+                    this.helper
+                        .LoadInteger(
+                            this.helper.StaticData.DeclareXmlType(XmlQueryTypeFactory.ItemS)
+                        );
                     this.helper.Emit(OpCodes.Ldloc, locParam);
                     this.helper.Call(XmlILMethods.ChangeTypeXsltResult);
 
@@ -213,13 +216,14 @@ namespace System.Xml.Xsl.IlGen
                         "Only parameters may not have a default value"
                     );
                     this.helper.LoadQueryRuntime();
-                    this.helper.Emit(
-                        OpCodes.Ldstr,
-                        Res.GetString(
-                            Res.XmlIl_UnknownParam,
-                            new string[] { param.Name.LocalName, param.Name.NamespaceUri }
-                        )
-                    );
+                    this.helper
+                        .Emit(
+                            OpCodes.Ldstr,
+                            Res.GetString(
+                                Res.XmlIl_UnknownParam,
+                                new string[] { param.Name.LocalName, param.Name.NamespaceUri }
+                            )
+                        );
                     this.helper.Call(XmlILMethods.ThrowException);
                 }
 
@@ -538,12 +542,13 @@ namespace System.Xml.Xsl.IlGen
             {
                 // Make sure there's an IL code path to both the true and false branches in order to avoid dead
                 // code which can cause IL verification errors.
-                this.helper.EmitUnconditionalBranch(
-                    this.iterCurr.CurrentBranchingContext == BranchingContext.OnTrue
-                        ? OpCodes.Brtrue
-                        : OpCodes.Brfalse,
-                    this.iterCurr.LabelBranch
-                );
+                this.helper
+                    .EmitUnconditionalBranch(
+                        this.iterCurr.CurrentBranchingContext == BranchingContext.OnTrue
+                            ? OpCodes.Brtrue
+                            : OpCodes.Brfalse,
+                        this.iterCurr.LabelBranch
+                    );
 
                 this.iterCurr.Storage = StorageDescriptor.None();
             }
@@ -571,12 +576,13 @@ namespace System.Xml.Xsl.IlGen
             {
                 // Make sure there's an IL code path to both the true and false branches in order to avoid dead
                 // code which can cause IL verification errors.
-                this.helper.EmitUnconditionalBranch(
-                    this.iterCurr.CurrentBranchingContext == BranchingContext.OnFalse
-                        ? OpCodes.Brtrue
-                        : OpCodes.Brfalse,
-                    this.iterCurr.LabelBranch
-                );
+                this.helper
+                    .EmitUnconditionalBranch(
+                        this.iterCurr.CurrentBranchingContext == BranchingContext.OnFalse
+                            ? OpCodes.Brtrue
+                            : OpCodes.Brfalse,
+                        this.iterCurr.LabelBranch
+                    );
 
                 this.iterCurr.Storage = StorageDescriptor.None();
             }
@@ -1056,10 +1062,11 @@ namespace System.Xml.Xsl.IlGen
                     this.helper.Emit(OpCodes.Brtrue, iterInfoTrue.GetLabelNext());
                     this.helper.EmitUnconditionalBranch(OpCodes.Br, this.iterNested.GetLabelNext());
 
-                    this.iterCurr.SetIterator(
-                        lblNext,
-                        StorageDescriptor.Local(locCond, itemStorageType, false)
-                    );
+                    this.iterCurr
+                        .SetIterator(
+                            lblNext,
+                            StorageDescriptor.Local(locCond, itemStorageType, false)
+                        );
                 }
 
                 // LabelDone:
@@ -1206,9 +1213,8 @@ namespace System.Xml.Xsl.IlGen
                 {
                     // Short-circuit rest of loop if max position has been exceeded
                     this.helper.Emit(OpCodes.Dup);
-                    this.helper.LoadInteger(
-                        (int)patt.GetArgument(OptimizerPatternArgument.MaxPosition)
-                    );
+                    this.helper
+                        .LoadInteger((int)patt.GetArgument(OptimizerPatternArgument.MaxPosition));
                     this.helper.Emit(OpCodes.Bgt, lblOnEnd);
                 }
 
@@ -1359,10 +1365,8 @@ namespace System.Xml.Xsl.IlGen
                 // LabelStart:
                 this.helper.MarkLabel(lblStart);
 
-                this.iterCurr.SetIterator(
-                    lblNext,
-                    StorageDescriptor.Local(locList, itemStorageType, false)
-                );
+                this.iterCurr
+                    .SetIterator(lblNext, StorageDescriptor.Local(locList, itemStorageType, false));
             }
         }
 
@@ -1479,28 +1483,28 @@ namespace System.Xml.Xsl.IlGen
             // Don't expose Next label if this iterator always returns a single node
             if (ndSet.XmlType.IsSingleton)
             {
-                this.helper.Emit(
-                    OpCodes.Switch,
-                    new Label[] { lblInitRight, lblNextLeft, lblNextRight }
-                );
+                this.helper
+                    .Emit(OpCodes.Switch, new Label[] { lblInitRight, lblNextLeft, lblNextRight });
                 this.iterCurr.Storage = StorageDescriptor.Current(locIter, typeof(XPathNavigator));
             }
             else
             {
-                this.helper.Emit(
-                    OpCodes.Switch,
-                    new Label[]
-                    {
-                        this.iterCurr.GetLabelNext(),
-                        lblInitRight,
-                        lblNextLeft,
-                        lblNextRight,
-                    }
-                );
-                this.iterCurr.SetIterator(
-                    lblNext,
-                    StorageDescriptor.Current(locIter, typeof(XPathNavigator))
-                );
+                this.helper
+                    .Emit(
+                        OpCodes.Switch,
+                        new Label[]
+                        {
+                            this.iterCurr.GetLabelNext(),
+                            lblInitRight,
+                            lblNextLeft,
+                            lblNextRight,
+                        }
+                    );
+                this.iterCurr
+                    .SetIterator(
+                        lblNext,
+                        StorageDescriptor.Current(locIter, typeof(XPathNavigator))
+                    );
             }
 
             return ndSet;
@@ -1815,15 +1819,17 @@ namespace System.Xml.Xsl.IlGen
             {
                 // Else push index of set of prefix mappings to use in resolving the prefix
                 if (ndParsedTagName.Right.NodeType == QilNodeType.Sequence)
-                    this.helper.LoadInteger(
-                        this.helper.StaticData.DeclarePrefixMappings(ndParsedTagName.Right)
-                    );
+                    this.helper
+                        .LoadInteger(
+                            this.helper.StaticData.DeclarePrefixMappings(ndParsedTagName.Right)
+                        );
                 else
-                    this.helper.LoadInteger(
-                        this.helper.StaticData.DeclarePrefixMappings(
-                            new QilNode[] { ndParsedTagName.Right }
-                        )
-                    );
+                    this.helper
+                        .LoadInteger(
+                            this.helper
+                                .StaticData
+                                .DeclarePrefixMappings(new QilNode[] { ndParsedTagName.Right })
+                        );
 
                 // If QName prefix should be preserved, then don't create an XmlQualifiedName, which discards the prefix
                 if (!preservePrefix)
@@ -2100,10 +2106,11 @@ namespace System.Xml.Xsl.IlGen
 
             // If filter is false, skip the current item
             StartNestedIterator(ndFilter.Body);
-            this.iterCurr.SetBranching(
-                BranchingContext.OnFalse,
-                this.iterCurr.ParentIterator.GetLabelNext()
-            );
+            this.iterCurr
+                .SetBranching(
+                    BranchingContext.OnFalse,
+                    this.iterCurr.ParentIterator.GetLabelNext()
+                );
             Visit(ndFilter.Body);
             EndNestedIterator(ndFilter.Body);
 
@@ -2154,20 +2161,20 @@ namespace System.Xml.Xsl.IlGen
                         if (isFilterElements)
                         {
                             // Iterator iter;
-                            locIter = this.helper.DeclareLocal(
-                                "$$$iterElemContent",
-                                typeof(ElementContentIterator)
-                            );
+                            locIter = this.helper
+                                .DeclareLocal("$$$iterElemContent", typeof(ElementContentIterator));
 
                             // iter.Create(navCtxt, locName, ns);
                             this.helper.Emit(OpCodes.Ldloca, locIter);
                             NestedVisitEnsureStack(input);
-                            this.helper.CallGetAtomizedName(
-                                this.helper.StaticData.DeclareName(name.LocalName)
-                            );
-                            this.helper.CallGetAtomizedName(
-                                this.helper.StaticData.DeclareName(name.NamespaceUri)
-                            );
+                            this.helper
+                                .CallGetAtomizedName(
+                                    this.helper.StaticData.DeclareName(name.LocalName)
+                                );
+                            this.helper
+                                .CallGetAtomizedName(
+                                    this.helper.StaticData.DeclareName(name.NamespaceUri)
+                                );
                             this.helper.Call(XmlILMethods.ElemContentCreate);
 
                             GenerateSimpleIterator(
@@ -2191,10 +2198,11 @@ namespace System.Xml.Xsl.IlGen
                             else
                             {
                                 // Iterator iter;
-                                locIter = this.helper.DeclareLocal(
-                                    "$$$iterContent",
-                                    typeof(NodeKindContentIterator)
-                                );
+                                locIter = this.helper
+                                    .DeclareLocal(
+                                        "$$$iterContent",
+                                        typeof(NodeKindContentIterator)
+                                    );
 
                                 // iter.Create(navCtxt, nodeType);
                                 this.helper.Emit(OpCodes.Ldloca, locIter);
@@ -2514,9 +2522,8 @@ namespace System.Xml.Xsl.IlGen
                 {
                     // Short-circuit rest of loop if max position has already been reached
                     this.helper.Emit(OpCodes.Ldloc, locPos);
-                    this.helper.LoadInteger(
-                        (int)patt.GetArgument(OptimizerPatternArgument.MaxPosition)
-                    );
+                    this.helper
+                        .LoadInteger((int)patt.GetArgument(OptimizerPatternArgument.MaxPosition));
                     this.helper.Emit(OpCodes.Bgt, this.iterCurr.ParentIterator.GetLabelNext());
                 }
 
@@ -2621,10 +2628,11 @@ namespace System.Xml.Xsl.IlGen
 
             // cache.Add(item);
             this.iterCurr.EnsureStackNoCache();
-            this.iterCurr.EnsureItemStorageType(
-                ndSort.Variable.XmlType,
-                GetItemStorageType(ndSort.Variable)
-            );
+            this.iterCurr
+                .EnsureItemStorageType(
+                    ndSort.Variable.XmlType,
+                    GetItemStorageType(ndSort.Variable)
+                );
             this.helper.Call(methods.SeqAdd);
 
             this.helper.Emit(OpCodes.Ldloca, locKeys);
@@ -2671,9 +2679,10 @@ namespace System.Xml.Xsl.IlGen
             if (ndKey.Collation.NodeType == QilNodeType.LiteralString)
             {
                 // collation = runtime.GetCollation(idx);
-                this.helper.CallGetCollation(
-                    this.helper.StaticData.DeclareCollation((string)(QilLiteral)ndKey.Collation)
-                );
+                this.helper
+                    .CallGetCollation(
+                        this.helper.StaticData.DeclareCollation((string)(QilLiteral)ndKey.Collation)
+                    );
             }
             else
             {
@@ -2696,10 +2705,8 @@ namespace System.Xml.Xsl.IlGen
                 StartNestedIterator(ndKey.Key, lblOnEndKey);
                 Visit(ndKey.Key);
                 this.iterCurr.EnsureStackNoCache();
-                this.iterCurr.EnsureItemStorageType(
-                    ndKey.Key.XmlType,
-                    GetItemStorageType(ndKey.Key)
-                );
+                this.iterCurr
+                    .EnsureItemStorageType(ndKey.Key.XmlType, GetItemStorageType(ndKey.Key));
 
                 // Non-empty sort key
                 // keys.AddSortKey(collation, value);
@@ -2935,10 +2942,8 @@ namespace System.Xml.Xsl.IlGen
             else if (pattDod.MatchesPattern(OptimizerPatternName.DodMerge))
             {
                 // DodSequenceMerge dodMerge;
-                LocalBuilder locMerge = this.helper.DeclareLocal(
-                    "$$$dodMerge",
-                    typeof(DodSequenceMerge)
-                );
+                LocalBuilder locMerge = this.helper
+                    .DeclareLocal("$$$dodMerge", typeof(DodSequenceMerge));
                 Label lblOnEnd = this.helper.DefineLabel();
 
                 // dodMerge.Create(runtime);
@@ -3062,9 +3067,8 @@ namespace System.Xml.Xsl.IlGen
             // if (!navAttr.MoveToAttribute(localName, namespaceUri)) goto LabelNextCtxt;
             this.helper.Emit(OpCodes.Ldloc, locNav);
             this.helper.CallGetAtomizedName(this.helper.StaticData.DeclareName(ndName.LocalName));
-            this.helper.CallGetAtomizedName(
-                this.helper.StaticData.DeclareName(ndName.NamespaceUri)
-            );
+            this.helper
+                .CallGetAtomizedName(this.helper.StaticData.DeclareName(ndName.NamespaceUri));
             this.helper.Call(XmlILMethods.NavMoveAttr);
             this.helper.Emit(OpCodes.Brfalse, this.iterCurr.GetLabelNext());
 
@@ -3726,10 +3730,11 @@ namespace System.Xml.Xsl.IlGen
                 Visit(ndTypeAssert.Source);
             }
 
-            this.iterCurr.EnsureItemStorageType(
-                ndTypeAssert.Source.XmlType,
-                GetItemStorageType(ndTypeAssert)
-            );
+            this.iterCurr
+                .EnsureItemStorageType(
+                    ndTypeAssert.Source.XmlType,
+                    GetItemStorageType(ndTypeAssert)
+                );
             return ndTypeAssert;
         }
 
@@ -3787,11 +3792,12 @@ namespace System.Xml.Xsl.IlGen
                 this.helper.LoadQueryRuntime();
                 NestedVisitEnsureStack(ndIsType.Source, typeof(XPathItem), !typDerived.IsSingleton);
                 this.helper.LoadInteger((int)codeBase);
-                this.helper.Call(
-                    typDerived.IsSingleton
-                        ? XmlILMethods.ItemMatchesCode
-                        : XmlILMethods.SeqMatchesCode
-                );
+                this.helper
+                    .Call(
+                        typDerived.IsSingleton
+                            ? XmlILMethods.ItemMatchesCode
+                            : XmlILMethods.SeqMatchesCode
+                    );
                 ZeroCompare(QilNodeType.Ne, true);
 
                 return ndIsType;
@@ -3801,9 +3807,12 @@ namespace System.Xml.Xsl.IlGen
             this.helper.LoadQueryRuntime();
             NestedVisitEnsureStack(ndIsType.Source, typeof(XPathItem), !typDerived.IsSingleton);
             this.helper.LoadInteger(this.helper.StaticData.DeclareXmlType(typBase));
-            this.helper.Call(
-                typDerived.IsSingleton ? XmlILMethods.ItemMatchesType : XmlILMethods.SeqMatchesType
-            );
+            this.helper
+                .Call(
+                    typDerived.IsSingleton
+                        ? XmlILMethods.ItemMatchesType
+                        : XmlILMethods.SeqMatchesType
+                );
             ZeroCompare(QilNodeType.Ne, true);
 
             return ndIsType;
@@ -4281,13 +4290,16 @@ namespace System.Xml.Xsl.IlGen
                 if (ndName.NamespaceUri.Length == 0)
                     this.helper.LoadXsltLibrary();
                 else
-                    this.helper.CallGetEarlyBoundObject(
-                        this.helper.StaticData.DeclareEarlyBound(
-                            ndName.NamespaceUri,
+                    this.helper
+                        .CallGetEarlyBoundObject(
+                            this.helper
+                                .StaticData
+                                .DeclareEarlyBound(
+                                    ndName.NamespaceUri,
+                                    extFunc.Method.DeclaringType
+                                ),
                             extFunc.Method.DeclaringType
-                        ),
-                        extFunc.Method.DeclaringType
-                    );
+                        );
             }
 
             // Generate code to push each Invoke argument onto the stack
@@ -4365,9 +4377,8 @@ namespace System.Xml.Xsl.IlGen
                     {
                         // (clrTypeFormalArg) runtime.ChangeTypeXsltArgument(xmlTypeFormalArg, (object) value, clrTypeFormalArg);
                         this.helper.LoadQueryRuntime();
-                        this.helper.LoadInteger(
-                            this.helper.StaticData.DeclareXmlType(xmlTypeFormalArg)
-                        );
+                        this.helper
+                            .LoadInteger(this.helper.StaticData.DeclareXmlType(xmlTypeFormalArg));
                         NestedVisitEnsureStack(
                             ndActualArg,
                             GetItemStorageType(xmlTypeFormalArg),
@@ -4395,10 +4406,8 @@ namespace System.Xml.Xsl.IlGen
             // Return value is on the stack; convert it to canonical ILGen storage type
             if (ndInvoke.XmlType.IsEmpty)
             {
-                this.helper.Emit(
-                    OpCodes.Ldsfld,
-                    XmlILMethods.StorageMethods[typeof(XPathItem)].SeqEmpty
-                );
+                this.helper
+                    .Emit(OpCodes.Ldsfld, XmlILMethods.StorageMethods[typeof(XPathItem)].SeqEmpty);
             }
             else if (clrTypeRetSrc != clrTypeRetDst)
             {
@@ -4829,7 +4838,8 @@ namespace System.Xml.Xsl.IlGen
 
             // iter.MoveNext(input);
             // goto LabelCall;
-            this.iterCurr.EnsureNoStackNoCache(nd.XmlType.IsNode ? "$$$navInput" : "$$$itemInput");
+            this.iterCurr
+                .EnsureNoStackNoCache(nd.XmlType.IsNode ? "$$$navInput" : "$$$itemInput");
             this.helper.Emit(OpCodes.Ldloca, locIter);
             this.iterCurr.PushValue();
             this.helper.EmitUnconditionalBranch(OpCodes.Br, lblCall);
@@ -4860,15 +4870,17 @@ namespace System.Xml.Xsl.IlGen
                 //      case IteratorResult.NoMoreNodes: goto LabelNextCtxt;
                 //      case IteratorResult.NeedInputNode: goto LabelNextInput;
                 // }
-                this.helper.Emit(
-                    OpCodes.Switch,
-                    new Label[] { this.iterCurr.GetLabelNext(), this.iterNested.GetLabelNext() }
-                );
+                this.helper
+                    .Emit(
+                        OpCodes.Switch,
+                        new Label[] { this.iterCurr.GetLabelNext(), this.iterNested.GetLabelNext() }
+                    );
 
-                this.iterCurr.SetIterator(
-                    lblOnEndNested,
-                    StorageDescriptor.Current(locIter, itemStorageType)
-                );
+                this.iterCurr
+                    .SetIterator(
+                        lblOnEndNested,
+                        StorageDescriptor.Current(locIter, itemStorageType)
+                    );
             }
         }
 
@@ -5062,12 +5074,12 @@ namespace System.Xml.Xsl.IlGen
                         if (ndSecond.NodeType == QilNodeType.LiteralQName)
                         {
                             QilName ndName = ndSecond as QilName;
-                            this.helper.LoadInteger(
-                                this.helper.StaticData.DeclareName(ndName.LocalName)
-                            );
-                            this.helper.LoadInteger(
-                                this.helper.StaticData.DeclareName(ndName.NamespaceUri)
-                            );
+                            this.helper
+                                .LoadInteger(this.helper.StaticData.DeclareName(ndName.LocalName));
+                            this.helper
+                                .LoadInteger(
+                                    this.helper.StaticData.DeclareName(ndName.NamespaceUri)
+                                );
 
                             // push runtime.IsQNameEqual(navigator, localName, namespaceUri)
                             this.helper.Call(XmlILMethods.QNameEqualLit);
@@ -5257,20 +5269,22 @@ namespace System.Xml.Xsl.IlGen
                 case BranchingContext.OnTrue:
                     // If relOp is Eq, jump to true label if top value is zero (Brfalse)
                     // If relOp is Ne, jump to true label if top value is non-zero (Brtrue)
-                    this.helper.Emit(
-                        (relOp == QilNodeType.Eq) ? OpCodes.Brfalse : OpCodes.Brtrue,
-                        this.iterCurr.LabelBranch
-                    );
+                    this.helper
+                        .Emit(
+                            (relOp == QilNodeType.Eq) ? OpCodes.Brfalse : OpCodes.Brtrue,
+                            this.iterCurr.LabelBranch
+                        );
                     this.iterCurr.Storage = StorageDescriptor.None();
                     break;
 
                 case BranchingContext.OnFalse:
                     // If relOp is Eq, jump to false label if top value is non-zero (Brtrue)
                     // If relOp is Ne, jump to false label if top value is zero (Brfalse)
-                    this.helper.Emit(
-                        (relOp == QilNodeType.Eq) ? OpCodes.Brtrue : OpCodes.Brfalse,
-                        this.iterCurr.LabelBranch
-                    );
+                    this.helper
+                        .Emit(
+                            (relOp == QilNodeType.Eq) ? OpCodes.Brtrue : OpCodes.Brfalse,
+                            this.iterCurr.LabelBranch
+                        );
                     this.iterCurr.Storage = StorageDescriptor.None();
                     break;
 
@@ -5283,10 +5297,11 @@ namespace System.Xml.Xsl.IlGen
                         // If relOp is Eq, push "true" if top value is zero, "false" otherwise
                         // If relOp is Ne, push "true" if top value is non-zero, "false" otherwise
                         lblTrue = this.helper.DefineLabel();
-                        this.helper.Emit(
-                            (relOp == QilNodeType.Eq) ? OpCodes.Brfalse : OpCodes.Brtrue,
-                            lblTrue
-                        );
+                        this.helper
+                            .Emit(
+                                (relOp == QilNodeType.Eq) ? OpCodes.Brfalse : OpCodes.Brtrue,
+                                lblTrue
+                            );
                         this.helper.ConvBranchToBool(lblTrue, true);
                     }
 
@@ -5509,9 +5524,12 @@ namespace System.Xml.Xsl.IlGen
             {
                 // Push NameFilter
                 Debug.Assert(xmlTypes == XmlNodeKindFlags.Element);
-                this.helper.CallGetNameFilter(
-                    this.helper.StaticData.DeclareNameFilter(ndName.LocalName, ndName.NamespaceUri)
-                );
+                this.helper
+                    .CallGetNameFilter(
+                        this.helper
+                            .StaticData
+                            .DeclareNameFilter(ndName.LocalName, ndName.NamespaceUri)
+                    );
             }
             else
             {

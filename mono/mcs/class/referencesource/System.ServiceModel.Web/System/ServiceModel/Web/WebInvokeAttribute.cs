@@ -36,9 +36,8 @@ namespace System.ServiceModel.Web
             {
                 if (!WebMessageBodyStyleHelper.IsDefined(value))
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ArgumentOutOfRangeException("value")
-                    );
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperError(new ArgumentOutOfRangeException("value"));
                 }
                 this.bodyStyle = value;
                 this.isBodyStyleDefined = true;
@@ -76,9 +75,8 @@ namespace System.ServiceModel.Web
             {
                 if (!WebMessageFormatHelper.IsDefined(value))
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ArgumentOutOfRangeException("value")
-                    );
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperError(new ArgumentOutOfRangeException("value"));
                 }
                 this.requestMessageFormat = value;
                 this.isRequestMessageFormatSet = true;
@@ -96,9 +94,8 @@ namespace System.ServiceModel.Web
             {
                 if (!WebMessageFormatHelper.IsDefined(value))
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ArgumentOutOfRangeException("value")
-                    );
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperError(new ArgumentOutOfRangeException("value"));
                 }
                 this.responseMessageFormat = value;
                 this.isResponseMessageFormatSet = true;

@@ -36,8 +36,8 @@ public class LazyLoadingProxyTests
     {
         using var context = new LazyContextIgnoreVirtuals<LazyNonVirtualNavEntity>();
         Assert.NotNull(
-            context
-                .Model.FindEntityType(typeof(LazyNonVirtualNavEntity))!
+            context.Model
+                .FindEntityType(typeof(LazyNonVirtualNavEntity))!
                 .FindNavigation(nameof(LazyNonVirtualNavEntity.SelfRef))
         );
     }
@@ -47,8 +47,8 @@ public class LazyLoadingProxyTests
     {
         using var context = new LazyContextAllowingFieldNavigation();
         Assert.NotNull(
-            context
-                .Model.FindEntityType(typeof(LazyFieldNavEntity))!
+            context.Model
+                .FindEntityType(typeof(LazyFieldNavEntity))!
                 .FindNavigation(nameof(LazyFieldNavEntity.SelfRef))
         );
     }
@@ -58,8 +58,8 @@ public class LazyLoadingProxyTests
     {
         using var context = new LazyContextDisabledNavigation();
         Assert.NotNull(
-            context
-                .Model.FindEntityType(typeof(LazyNonVirtualNavEntity))!
+            context.Model
+                .FindEntityType(typeof(LazyNonVirtualNavEntity))!
                 .FindNavigation(nameof(LazyNonVirtualNavEntity.SelfRef))
         );
     }
@@ -69,8 +69,8 @@ public class LazyLoadingProxyTests
     {
         using var context = new LazyContextDisabledFieldNavigation();
         Assert.NotNull(
-            context
-                .Model.FindEntityType(typeof(LazyFieldNavEntity))!
+            context.Model
+                .FindEntityType(typeof(LazyFieldNavEntity))!
                 .FindNavigation(nameof(LazyFieldNavEntity.SelfRef))
         );
     }
@@ -80,8 +80,8 @@ public class LazyLoadingProxyTests
     {
         using var context = new LazyContext<LazyNonVirtualOwnedNavEntity>();
         Assert.NotNull(
-            context
-                .Model.FindEntityType(typeof(LazyNonVirtualOwnedNavEntity))!
+            context.Model
+                .FindEntityType(typeof(LazyNonVirtualOwnedNavEntity))!
                 .FindNavigation(nameof(LazyNonVirtualOwnedNavEntity.NavigationToOwned))
         );
     }
@@ -91,8 +91,8 @@ public class LazyLoadingProxyTests
     {
         using var context = new LazyContextOwnedFieldNavigation();
         Assert.NotNull(
-            context
-                .Model.FindEntityType(typeof(LazyFieldOwnedNavEntity))!
+            context.Model
+                .FindEntityType(typeof(LazyFieldOwnedNavEntity))!
                 .FindNavigation(nameof(LazyFieldOwnedNavEntity.NavigationToOwned))
         );
     }

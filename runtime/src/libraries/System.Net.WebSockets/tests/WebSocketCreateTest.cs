@@ -584,8 +584,7 @@ namespace System.Net.WebSockets.Tests
             return stream;
         }
 
-        public static readonly object[][] EchoServers = System
-            .Net
+        public static readonly object[][] EchoServers = System.Net
             .Test
             .Common
             .Configuration

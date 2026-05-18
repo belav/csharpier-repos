@@ -130,13 +130,14 @@ namespace System.Activities.DurableInstancing
             {
                 try
                 {
-                    this.Store.BeginTryCommandSkipRetry(
-                        null,
-                        this.instancePersistenceCommand,
-                        this.taskTimeout,
-                        this.commandCompletedCallback,
-                        null
-                    );
+                    this.Store
+                        .BeginTryCommandSkipRetry(
+                            null,
+                            this.instancePersistenceCommand,
+                            this.taskTimeout,
+                            this.commandCompletedCallback,
+                            null
+                        );
                 }
                 catch (Exception exception)
                 {

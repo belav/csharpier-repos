@@ -518,13 +518,11 @@ namespace MonoTests.System.Web.UI.WebControls
             fr.Controls.Add(new BaseControl(GetDecoratedId(html, "UserName"), "heh"));
             string button = GetDecoratedId(html, "SubmitButton");
             if (button.Length > 0)
-                fr.Controls.Add(
-                    new BaseControl(GetDecoratedId(html, "SubmitButton"), "SubmitButton")
-                );
+                fr.Controls
+                    .Add(new BaseControl(GetDecoratedId(html, "SubmitButton"), "SubmitButton"));
             else
-                fr.Controls.Add(
-                    new BaseControl("__EVENTTARGET", GetEventTarget(html, "SubmitButton"))
-                );
+                fr.Controls
+                    .Add(new BaseControl("__EVENTTARGET", GetEventTarget(html, "SubmitButton")));
 
             test.Request = fr;
             html = test.Run();
@@ -534,13 +532,11 @@ namespace MonoTests.System.Web.UI.WebControls
             fr2.Controls.Add(new BaseControl(GetDecoratedId(html, "Answer"), "heh"));
             button = GetDecoratedId(html, "SubmitButton");
             if (button.Length > 0)
-                fr2.Controls.Add(
-                    new BaseControl(GetDecoratedId(html, "SubmitButton"), "SubmitButton")
-                );
+                fr2.Controls
+                    .Add(new BaseControl(GetDecoratedId(html, "SubmitButton"), "SubmitButton"));
             else
-                fr2.Controls.Add(
-                    new BaseControl("__EVENTTARGET", GetEventTarget(html, "SubmitButton"))
-                );
+                fr2.Controls
+                    .Add(new BaseControl("__EVENTTARGET", GetEventTarget(html, "SubmitButton")));
 
             test.Request = fr2;
             html = test.Run();

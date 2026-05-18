@@ -75,8 +75,7 @@ namespace System.Text.Json.Serialization.Converters
                 return true;
             }
 
-            state.Current.JsonPropertyInfo = state
-                .Current
+            state.Current.JsonPropertyInfo = state.Current
                 .JsonTypeInfo
                 .ElementTypeInfo!
                 .PropertyInfoForTypeInfo;

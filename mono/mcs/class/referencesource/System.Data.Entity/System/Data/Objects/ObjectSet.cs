@@ -132,10 +132,8 @@ namespace System.Data.Objects
         public TEntity ApplyCurrentValues(TEntity currentEntity)
         {
             // this method is expected to behave exactly like ObjectContext.ApplyCurrentValues -- see devnote at the top of this class
-            return this.Context.ApplyCurrentValues<TEntity>(
-                FullyQualifiedEntitySetName,
-                currentEntity
-            );
+            return this.Context
+                .ApplyCurrentValues<TEntity>(FullyQualifiedEntitySetName, currentEntity);
         }
 
         /// <summary>
@@ -146,10 +144,8 @@ namespace System.Data.Objects
         public TEntity ApplyOriginalValues(TEntity originalEntity)
         {
             // this method is expected to behave exactly like ObjectContext.ApplyOriginalValues -- see devnote at the top of this class
-            return this.Context.ApplyOriginalValues<TEntity>(
-                FullyQualifiedEntitySetName,
-                originalEntity
-            );
+            return this.Context
+                .ApplyOriginalValues<TEntity>(FullyQualifiedEntitySetName, originalEntity);
         }
 
         /// <summary>

@@ -215,15 +215,13 @@ class C
             var member1 = compilation1.GetMember<MethodSymbol>("B.F");
             Assert.Equal(
                 1,
-                ((PointerTypeSymbol)member1.Parameters[0].Type)
-                    .PointedAtTypeWithAnnotations
+                ((PointerTypeSymbol)member1.Parameters[0].Type).PointedAtTypeWithAnnotations
                     .CustomModifiers
                     .Length
             );
             Assert.Equal(
                 1,
-                ((ArrayTypeSymbol)member1.ReturnType)
-                    .ElementTypeWithAnnotations
+                ((ArrayTypeSymbol)member1.ReturnType).ElementTypeWithAnnotations
                     .CustomModifiers
                     .Length
             );
@@ -235,15 +233,13 @@ class C
             Assert.NotNull(other);
             Assert.Equal(
                 1,
-                ((PointerTypeSymbol)other.Parameters[0].Type)
-                    .PointedAtTypeWithAnnotations
+                ((PointerTypeSymbol)other.Parameters[0].Type).PointedAtTypeWithAnnotations
                     .CustomModifiers
                     .Length
             );
             Assert.Equal(
                 1,
-                ((ArrayTypeSymbol)other.ReturnType)
-                    .ElementTypeWithAnnotations
+                ((ArrayTypeSymbol)other.ReturnType).ElementTypeWithAnnotations
                     .CustomModifiers
                     .Length
             );
@@ -335,11 +331,11 @@ abstract class C
 
             var matcher = CreateMatcher(compilation1, peAssemblySymbol);
 
-            var f0 = peAssemblySymbol
-                .GlobalNamespace.GetMember<NamedTypeSymbol>("C")
+            var f0 = peAssemblySymbol.GlobalNamespace
+                .GetMember<NamedTypeSymbol>("C")
                 .GetMember("F");
-            var g0 = peAssemblySymbol
-                .GlobalNamespace.GetMember<NamedTypeSymbol>("C")
+            var g0 = peAssemblySymbol.GlobalNamespace
+                .GetMember<NamedTypeSymbol>("C")
                 .GetMember("G");
             var f1 = compilation1.GetMember<MethodSymbol>("C.F");
             var g1 = compilation1.GetMember<MethodSymbol>("C.G");

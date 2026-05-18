@@ -98,8 +98,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     originalOpt.Syntax.Kind() == SyntaxKind.VariableDeclarator
                     || (
                         originalOpt.Syntax.Kind() == SyntaxKind.LocalDeclarationStatement
-                        && ((LocalDeclarationStatementSyntax)originalOpt.Syntax)
-                            .Declaration
+                        && ((LocalDeclarationStatementSyntax)originalOpt.Syntax).Declaration
                             .Variables
                             .Count == 1
                     )

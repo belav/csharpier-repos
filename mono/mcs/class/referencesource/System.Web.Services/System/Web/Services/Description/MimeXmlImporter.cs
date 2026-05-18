@@ -105,9 +105,8 @@ namespace System.Web.Services.Description
                     {
                         importer.Extensions.Add(extensionType.FullName, extensionType);
                     }
-                    importer.Extensions.Add(
-                        new System.Data.Design.TypedDataSetSchemaImporterExtension()
-                    );
+                    importer.Extensions
+                        .Add(new System.Data.Design.TypedDataSetSchemaImporterExtension());
                     importer.Extensions.Add(new DataSetSchemaImporterExtension());
                 }
                 return importer;

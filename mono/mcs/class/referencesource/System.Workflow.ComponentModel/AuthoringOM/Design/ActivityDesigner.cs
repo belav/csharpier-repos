@@ -340,39 +340,42 @@ namespace System.Workflow.ComponentModel.Design
                 {
                     this.designerVerbs = new ActivityDesignerVerbCollection();
                     if (!IsLocked)
-                        this.designerVerbs.Add(
-                            new ActivityDesignerVerb(
-                                this,
-                                DesignerVerbGroup.General,
-                                DR.GetString(DR.GenerateEventHandlers),
-                                new EventHandler(OnGenerateEventHandler),
-                                new EventHandler(OnGenerateEventHandlerStatusUpdate)
-                            )
-                        );
+                        this.designerVerbs
+                            .Add(
+                                new ActivityDesignerVerb(
+                                    this,
+                                    DesignerVerbGroup.General,
+                                    DR.GetString(DR.GenerateEventHandlers),
+                                    new EventHandler(OnGenerateEventHandler),
+                                    new EventHandler(OnGenerateEventHandlerStatusUpdate)
+                                )
+                            );
 
                     // Add the item to choose an activity datasource
                     WorkflowDesignerLoader loader =
                         GetService(typeof(WorkflowDesignerLoader)) as WorkflowDesignerLoader;
                     if (this.Activity.Parent != null)
-                        this.designerVerbs.Add(
+                        this.designerVerbs
+                            .Add(
+                                new ActivityDesignerVerb(
+                                    this,
+                                    DesignerVerbGroup.General,
+                                    DR.GetString(DR.PromoteBindings),
+                                    new EventHandler(OnPromoteBindings),
+                                    new EventHandler(OnPromoteBindingsStatusUpdate)
+                                )
+                            );
+
+                    this.designerVerbs
+                        .Add(
                             new ActivityDesignerVerb(
                                 this,
                                 DesignerVerbGroup.General,
-                                DR.GetString(DR.PromoteBindings),
-                                new EventHandler(OnPromoteBindings),
-                                new EventHandler(OnPromoteBindingsStatusUpdate)
+                                DR.GetString(DR.BindSelectedProperty),
+                                new EventHandler(OnBindProperty),
+                                new EventHandler(OnBindPropertyStatusUpdate)
                             )
                         );
-
-                    this.designerVerbs.Add(
-                        new ActivityDesignerVerb(
-                            this,
-                            DesignerVerbGroup.General,
-                            DR.GetString(DR.BindSelectedProperty),
-                            new EventHandler(OnBindProperty),
-                            new EventHandler(OnBindPropertyStatusUpdate)
-                        )
-                    );
 
                     ActivityDesignerVerb designerVerb = new ActivityDesignerVerb(
                         this,
@@ -3478,11 +3481,10 @@ namespace System.Workflow.ComponentModel.Design
                 bool formShown = false; //if the drop down form is shown, draw the arrow up
                 if (
                     Form.ActiveForm != null
-                    && Form.ActiveForm.GetType()
-                        .FullName.Equals(
-                            typeof(ItemPalette).FullName + "+Palette",
-                            StringComparison.Ordinal
-                        )
+                    && Form.ActiveForm
+                        .GetType()
+                        .FullName
+                        .Equals(typeof(ItemPalette).FullName + "+Palette", StringComparison.Ordinal)
                 )
                     formShown = (
                         Form.ActiveForm.Location
@@ -3500,8 +3502,10 @@ namespace System.Workflow.ComponentModel.Design
                     }
                     else if (
                         Form.ActiveForm != null
-                        && Form.ActiveForm.GetType()
-                            .FullName.Equals(
+                        && Form.ActiveForm
+                            .GetType()
+                            .FullName
+                            .Equals(
                                 typeof(ItemPalette).FullName + "+Palette",
                                 StringComparison.Ordinal
                             )
@@ -3570,9 +3574,8 @@ namespace System.Workflow.ComponentModel.Design
                 {
                     this.activeDesigner = designer;
                     Rectangle bounds = GetBounds(designer, true);
-                    this.activeDesigner.OnShowSmartTagVerbs(
-                        new Point(bounds.Left, bounds.Bottom + 1)
-                    );
+                    this.activeDesigner
+                        .OnShowSmartTagVerbs(new Point(bounds.Left, bounds.Bottom + 1));
                     this.activeDesigner = null;
                 }
             }

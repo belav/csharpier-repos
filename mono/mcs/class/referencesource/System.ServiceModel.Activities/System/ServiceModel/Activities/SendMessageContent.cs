@@ -66,9 +66,8 @@ namespace System.ServiceModel.Activities
             {
                 if (this.InternalDeclaredMessageType != null)
                 {
-                    return ContractInferenceHelper.ExceptionType.IsAssignableFrom(
-                        this.InternalDeclaredMessageType
-                    );
+                    return ContractInferenceHelper.ExceptionType
+                        .IsAssignableFrom(this.InternalDeclaredMessageType);
                 }
                 else
                 {
@@ -152,9 +151,8 @@ namespace System.ServiceModel.Activities
                 requestFormatter = new ToRequest();
                 if (this.Message != null)
                 {
-                    requestFormatter.Parameters.Add(
-                        InArgument.CreateReference(this.Message, "Message")
-                    );
+                    requestFormatter.Parameters
+                        .Add(InArgument.CreateReference(this.Message, "Message"));
                 }
             }
         }
@@ -182,9 +180,8 @@ namespace System.ServiceModel.Activities
                 }
                 else if (this.Message != null)
                 {
-                    responseFormatter.Parameters.Add(
-                        InArgument.CreateReference(this.Message, "Message")
-                    );
+                    responseFormatter.Parameters
+                        .Add(InArgument.CreateReference(this.Message, "Message"));
                 }
             }
         }

@@ -38,20 +38,14 @@ builder.Services.AddCascadingAuthenticationState();
 builder.Services.AddScoped<IdentityUserAccessor>();
 builder.Services.AddScoped<IdentityRedirectManager>();
 #if (UseServer && UseWebAssembly)
-builder.Services.AddScoped<
-    AuthenticationStateProvider,
-    PersistingRevalidatingAuthenticationStateProvider
->();
+builder.Services
+    .AddScoped<AuthenticationStateProvider, PersistingRevalidatingAuthenticationStateProvider>();
 #elif (UseServer)
-builder.Services.AddScoped<
-    AuthenticationStateProvider,
-    IdentityRevalidatingAuthenticationStateProvider
->();
+builder.Services
+    .AddScoped<AuthenticationStateProvider, IdentityRevalidatingAuthenticationStateProvider>();
 #elif (UseWebAssembly)
-builder.Services.AddScoped<
-    AuthenticationStateProvider,
-    PersistingServerAuthenticationStateProvider
->();
+builder.Services
+    .AddScoped<AuthenticationStateProvider, PersistingServerAuthenticationStateProvider>();
 #else
 builder.Services.AddScoped<AuthenticationStateProvider, ServerAuthenticationStateProvider>();
 #endif
@@ -59,8 +53,8 @@ builder.Services.AddScoped<AuthenticationStateProvider, ServerAuthenticationStat
 #if (!UseServer)
 builder.Services.AddAuthorization();
 #endif
-builder
-    .Services.AddAuthentication(options =>
+builder.Services
+    .AddAuthentication(options =>
     {
         options.DefaultScheme = IdentityConstants.ApplicationScheme;
         options.DefaultSignInScheme = IdentityConstants.ExternalScheme;
@@ -72,17 +66,14 @@ var connectionString =
     ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
 #if (UseLocalDB)
-    options.UseSqlServer(connectionString)
-);
+        options.UseSqlServer(connectionString));
 #else
     options.UseSqlite(connectionString));
 #endif
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
-builder
-    .Services.AddIdentityCore<ApplicationUser>(options =>
-        options.SignIn.RequireConfirmedAccount = true
-    )
+builder.Services
+    .AddIdentityCore<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
     .AddEntityFrameworkStores<ApplicationDbContext>()
     .AddSignInManager()
     .AddDefaultTokenProviders();

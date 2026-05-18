@@ -22,11 +22,15 @@ namespace System.ServiceModel.ComIntegration
             string[] parameters = webhostParams.Split(',');
             if (parameters.Length != 2)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    System.ServiceModel.ComIntegration.Error.ListenerInitFailed(
-                        SR.GetString(SR.ServiceStringFormatError, webhostParams)
-                    )
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        System.ServiceModel
+                            .ComIntegration
+                            .Error
+                            .ListenerInitFailed(
+                                SR.GetString(SR.ServiceStringFormatError, webhostParams)
+                            )
+                    );
             }
 
             Guid clsid;
@@ -34,20 +38,28 @@ namespace System.ServiceModel.ComIntegration
 
             if (!DiagnosticUtility.Utility.TryCreateGuid(parameters[0], out clsid))
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    System.ServiceModel.ComIntegration.Error.ListenerInitFailed(
-                        SR.GetString(SR.ServiceStringFormatError, webhostParams)
-                    )
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        System.ServiceModel
+                            .ComIntegration
+                            .Error
+                            .ListenerInitFailed(
+                                SR.GetString(SR.ServiceStringFormatError, webhostParams)
+                            )
+                    );
             }
 
             if (!DiagnosticUtility.Utility.TryCreateGuid(parameters[1], out appId))
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    System.ServiceModel.ComIntegration.Error.ListenerInitFailed(
-                        SR.GetString(SR.ServiceStringFormatError, webhostParams)
-                    )
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        System.ServiceModel
+                            .ComIntegration
+                            .Error
+                            .ListenerInitFailed(
+                                SR.GetString(SR.ServiceStringFormatError, webhostParams)
+                            )
+                    );
             }
 
             // "B" == "With dashes and curly braces"
@@ -62,11 +74,18 @@ namespace System.ServiceModel.ComIntegration
             application = CatalogUtil.FindApplication(appId);
             if (application == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    System.ServiceModel.ComIntegration.Error.ListenerInitFailed(
-                        SR.GetString(SR.ApplicationNotFound, appId.ToString("B").ToUpperInvariant())
-                    )
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        System.ServiceModel
+                            .ComIntegration
+                            .Error
+                            .ListenerInitFailed(
+                                SR.GetString(
+                                    SR.ApplicationNotFound,
+                                    appId.ToString("B").ToUpperInvariant()
+                                )
+                            )
+                    );
             }
 
             ComCatalogCollection classes;
@@ -85,15 +104,19 @@ namespace System.ServiceModel.ComIntegration
 
             if (classObject == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    System.ServiceModel.ComIntegration.Error.ListenerInitFailed(
-                        SR.GetString(
-                            SR.ClsidNotInApplication,
-                            clsidString,
-                            appId.ToString("B").ToUpperInvariant()
-                        )
-                    )
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        System.ServiceModel
+                            .ComIntegration
+                            .Error
+                            .ListenerInitFailed(
+                                SR.GetString(
+                                    SR.ClsidNotInApplication,
+                                    clsidString,
+                                    appId.ToString("B").ToUpperInvariant()
+                                )
+                            )
+                    );
             }
 
             // Load up Indigo configuration, get the configuration for
@@ -134,11 +157,15 @@ namespace System.ServiceModel.ComIntegration
             }
             if (service == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    System.ServiceModel.ComIntegration.Error.ListenerInitFailed(
-                        SR.GetString(SR.ClsidNotInConfiguration, clsidString)
-                    )
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        System.ServiceModel
+                            .ComIntegration
+                            .Error
+                            .ListenerInitFailed(
+                                SR.GetString(SR.ClsidNotInConfiguration, clsidString)
+                            )
+                    );
             }
 
             // Hosting mode evaluation

@@ -47,15 +47,16 @@ namespace System.Web.Query.Dynamic
                 predicate,
                 values
             );
-            return source.Provider.CreateQuery(
-                Expression.Call(
-                    typeof(Queryable),
-                    "Where",
-                    new Type[] { source.ElementType },
-                    source.Expression,
-                    Expression.Quote(lambda)
-                )
-            );
+            return source.Provider
+                .CreateQuery(
+                    Expression.Call(
+                        typeof(Queryable),
+                        "Where",
+                        new Type[] { source.ElementType },
+                        source.Expression,
+                        Expression.Quote(lambda)
+                    )
+                );
         }
 
         public static IQueryable Select(
@@ -74,15 +75,16 @@ namespace System.Web.Query.Dynamic
                 selector,
                 values
             );
-            return source.Provider.CreateQuery(
-                Expression.Call(
-                    typeof(Queryable),
-                    "Select",
-                    new Type[] { source.ElementType, lambda.Body.Type },
-                    source.Expression,
-                    Expression.Quote(lambda)
-                )
-            );
+            return source.Provider
+                .CreateQuery(
+                    Expression.Call(
+                        typeof(Queryable),
+                        "Select",
+                        new Type[] { source.ElementType, lambda.Body.Type },
+                        source.Expression,
+                        Expression.Quote(lambda)
+                    )
+                );
         }
 
         public static IQueryable<T> OrderBy<T>(
@@ -132,30 +134,32 @@ namespace System.Web.Query.Dynamic
         {
             if (source == null)
                 throw new ArgumentNullException("source");
-            return source.Provider.CreateQuery(
-                Expression.Call(
-                    typeof(Queryable),
-                    "Take",
-                    new Type[] { source.ElementType },
-                    source.Expression,
-                    Expression.Constant(count)
-                )
-            );
+            return source.Provider
+                .CreateQuery(
+                    Expression.Call(
+                        typeof(Queryable),
+                        "Take",
+                        new Type[] { source.ElementType },
+                        source.Expression,
+                        Expression.Constant(count)
+                    )
+                );
         }
 
         public static IQueryable Skip(this IQueryable source, int count)
         {
             if (source == null)
                 throw new ArgumentNullException("source");
-            return source.Provider.CreateQuery(
-                Expression.Call(
-                    typeof(Queryable),
-                    "Skip",
-                    new Type[] { source.ElementType },
-                    source.Expression,
-                    Expression.Constant(count)
-                )
-            );
+            return source.Provider
+                .CreateQuery(
+                    Expression.Call(
+                        typeof(Queryable),
+                        "Skip",
+                        new Type[] { source.ElementType },
+                        source.Expression,
+                        Expression.Constant(count)
+                    )
+                );
         }
 
         public static IQueryable GroupBy(
@@ -183,16 +187,22 @@ namespace System.Web.Query.Dynamic
                 elementSelector,
                 values
             );
-            return source.Provider.CreateQuery(
-                Expression.Call(
-                    typeof(Queryable),
-                    "GroupBy",
-                    new Type[] { source.ElementType, keyLambda.Body.Type, elementLambda.Body.Type },
-                    source.Expression,
-                    Expression.Quote(keyLambda),
-                    Expression.Quote(elementLambda)
-                )
-            );
+            return source.Provider
+                .CreateQuery(
+                    Expression.Call(
+                        typeof(Queryable),
+                        "GroupBy",
+                        new Type[]
+                        {
+                            source.ElementType,
+                            keyLambda.Body.Type,
+                            elementLambda.Body.Type,
+                        },
+                        source.Expression,
+                        Expression.Quote(keyLambda),
+                        Expression.Quote(elementLambda)
+                    )
+                );
         }
 
         public static bool Any(this IQueryable source)
@@ -200,14 +210,15 @@ namespace System.Web.Query.Dynamic
             if (source == null)
                 throw new ArgumentNullException("source");
             return (bool)
-                source.Provider.Execute(
-                    Expression.Call(
-                        typeof(Queryable),
-                        "Any",
-                        new Type[] { source.ElementType },
-                        source.Expression
-                    )
-                );
+                source.Provider
+                    .Execute(
+                        Expression.Call(
+                            typeof(Queryable),
+                            "Any",
+                            new Type[] { source.ElementType },
+                            source.Expression
+                        )
+                    );
         }
 
         public static int Count(this IQueryable source)
@@ -215,14 +226,15 @@ namespace System.Web.Query.Dynamic
             if (source == null)
                 throw new ArgumentNullException("source");
             return (int)
-                source.Provider.Execute(
-                    Expression.Call(
-                        typeof(Queryable),
-                        "Count",
-                        new Type[] { source.ElementType },
-                        source.Expression
-                    )
-                );
+                source.Provider
+                    .Execute(
+                        Expression.Call(
+                            typeof(Queryable),
+                            "Count",
+                            new Type[] { source.ElementType },
+                            source.Expression
+                        )
+                    );
         }
     }
 
@@ -438,11 +450,8 @@ namespace System.Web.Query.Dynamic
             );
             assemblyAttributes.Add(securityRulesAttribute);
             AssemblyName name = new AssemblyName("DynamicClasses");
-            AssemblyBuilder assembly = AppDomain.CurrentDomain.DefineDynamicAssembly(
-                name,
-                AssemblyBuilderAccess.Run,
-                assemblyAttributes
-            );
+            AssemblyBuilder assembly = AppDomain.CurrentDomain
+                .DefineDynamicAssembly(name, AssemblyBuilderAccess.Run, assemblyAttributes);
 #if ENABLE_LINQ_PARTIAL_TRUST
             new ReflectionPermission(PermissionState.Unrestricted).Assert();
 #endif
@@ -501,11 +510,12 @@ namespace System.Web.Query.Dynamic
 #endif
             try
             {
-                TypeBuilder tb = this.module.DefineType(
-                    typeName,
-                    TypeAttributes.Class | TypeAttributes.Public,
-                    typeof(DynamicClass)
-                );
+                TypeBuilder tb = this.module
+                    .DefineType(
+                        typeName,
+                        TypeAttributes.Class | TypeAttributes.Public,
+                        typeof(DynamicClass)
+                    );
                 FieldInfo[] fields = GenerateProperties(tb, properties);
                 GenerateEquals(tb, fields);
                 GenerateGetHashCode(tb, fields);

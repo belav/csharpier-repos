@@ -105,18 +105,19 @@ namespace MonoTests.System.Xml
                     null
                 )
             );
-            vr.Schemas.Add(
-                XmlSchema.Read(
-                    new XmlTextReader(
-                        "<xs:schema xmlns:xs='"
-                            + XmlSchema.Namespace
-                            + "'><xs:element name='root' type='xs:anyURI' /></xs:schema>",
-                        XmlNodeType.Document,
+            vr.Schemas
+                .Add(
+                    XmlSchema.Read(
+                        new XmlTextReader(
+                            "<xs:schema xmlns:xs='"
+                                + XmlSchema.Namespace
+                                + "'><xs:element name='root' type='xs:anyURI' /></xs:schema>",
+                            XmlNodeType.Document,
+                            null
+                        ),
                         null
-                    ),
-                    null
-                )
-            );
+                    )
+                );
             vr.Read();
             vr.Read();
             vr.Read();
@@ -133,18 +134,19 @@ namespace MonoTests.System.Xml
                     null
                 )
             );
-            vr.Schemas.Add(
-                XmlSchema.Read(
-                    new XmlTextReader(
-                        "<xs:schema xmlns:xs='"
-                            + XmlSchema.Namespace
-                            + "'><xs:element name='root' type='xs:anyURI' /></xs:schema>",
-                        XmlNodeType.Document,
+            vr.Schemas
+                .Add(
+                    XmlSchema.Read(
+                        new XmlTextReader(
+                            "<xs:schema xmlns:xs='"
+                                + XmlSchema.Namespace
+                                + "'><xs:element name='root' type='xs:anyURI' /></xs:schema>",
+                            XmlNodeType.Document,
+                            null
+                        ),
                         null
-                    ),
-                    null
-                )
-            );
+                    )
+                );
             vr.Read();
             vr.Read();
             vr.Read();
@@ -240,9 +242,8 @@ namespace MonoTests.System.Xml
                 if (deriv.IsDerivedFrom(strType))
                     results.Add(name);
                 else
-                    Console.Error.WriteLine(
-                        deriv.GetType() + " is not derived from " + strType.GetType()
-                    );
+                    Console.Error
+                        .WriteLine(deriv.GetType() + " is not derived from " + strType.GetType());
             }
             return results.ToArray();
         }

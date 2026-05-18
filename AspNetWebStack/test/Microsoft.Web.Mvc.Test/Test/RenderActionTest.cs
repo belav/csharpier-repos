@@ -87,11 +87,8 @@ namespace Microsoft.Web.Mvc.Test
             html.RouteCollection.MapRoute(null, "{*dummy}");
             Mock.Get(html.ViewContext.HttpContext)
                 .Setup(o =>
-                    o.Server.Execute(
-                        It.IsAny<IHttpHandler>(),
-                        It.IsAny<TextWriter>(),
-                        It.IsAny<bool>()
-                    )
+                    o.Server
+                        .Execute(It.IsAny<IHttpHandler>(), It.IsAny<TextWriter>(), It.IsAny<bool>())
                 )
                 .Callback<IHttpHandler, TextWriter, bool>(
                     (_h, _w, _pf) =>

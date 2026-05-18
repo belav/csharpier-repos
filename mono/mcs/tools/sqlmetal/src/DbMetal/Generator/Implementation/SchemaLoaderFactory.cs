@@ -111,12 +111,13 @@ namespace DbMetal.Generator.Implementation
                 {
                     string connectionString = parameters.Conn;
                     if (string.IsNullOrEmpty(connectionString))
-                        connectionString = loader.Vendor.BuildConnectionString(
-                            parameters.Server,
-                            parameters.Database,
-                            parameters.User,
-                            parameters.Password
-                        );
+                        connectionString = loader.Vendor
+                            .BuildConnectionString(
+                                parameters.Server,
+                                parameters.Database,
+                                parameters.User,
+                                parameters.Password
+                            );
                     errorMsg = "Failed on setting ConnectionString=" + connectionString;
                     connection.ConnectionString = connectionString;
                 }

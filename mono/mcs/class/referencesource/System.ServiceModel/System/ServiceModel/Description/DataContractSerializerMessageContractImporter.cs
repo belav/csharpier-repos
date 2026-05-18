@@ -40,9 +40,8 @@ namespace System.ServiceModel.Description
         )
         {
             if (endpointContext == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentNullException("endpointContext")
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(new ArgumentNullException("endpointContext"));
 
             if (enabled)
                 MessageContractImporter.ImportMessageBinding(
@@ -58,9 +57,8 @@ namespace System.ServiceModel.Description
         )
         {
             if (contractContext == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentNullException("contractContext")
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(new ArgumentNullException("contractContext"));
 
             if (enabled)
                 MessageContractImporter.ImportMessageContract(
@@ -91,9 +89,8 @@ namespace System.ServiceModel.Description
         )
         {
             if (endpointContext == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentNullException("endpointContext")
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(new ArgumentNullException("endpointContext"));
 
             MessageContractImporter.ImportMessageBinding(
                 importer,
@@ -108,9 +105,8 @@ namespace System.ServiceModel.Description
         )
         {
             if (contractContext == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentNullException("contractContext")
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(new ArgumentNullException("contractContext"));
 
             MessageContractImporter.ImportMessageContract(
                 importer,

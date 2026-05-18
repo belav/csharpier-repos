@@ -36,24 +36,26 @@ namespace System.ServiceModel.Channels
             {
                 if (value < TimeSpan.Zero)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ArgumentOutOfRangeException(
-                            "value",
-                            value,
-                            SR.GetString(SR.SFxTimeoutOutOfRange0)
-                        )
-                    );
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperError(
+                            new ArgumentOutOfRangeException(
+                                "value",
+                                value,
+                                SR.GetString(SR.SFxTimeoutOutOfRange0)
+                            )
+                        );
                 }
 
                 if (TimeoutHelper.IsTooLarge(value))
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ArgumentOutOfRangeException(
-                            "value",
-                            value,
-                            SR.GetString(SR.SFxTimeoutOutOfRangeTooBig)
-                        )
-                    );
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperError(
+                            new ArgumentOutOfRangeException(
+                                "value",
+                                value,
+                                SR.GetString(SR.SFxTimeoutOutOfRangeTooBig)
+                            )
+                        );
                 }
 
                 this.idleTimeout = value;
@@ -68,24 +70,26 @@ namespace System.ServiceModel.Channels
             {
                 if (value < TimeSpan.Zero)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ArgumentOutOfRangeException(
-                            "value",
-                            value,
-                            SR.GetString(SR.SFxTimeoutOutOfRange0)
-                        )
-                    );
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperError(
+                            new ArgumentOutOfRangeException(
+                                "value",
+                                value,
+                                SR.GetString(SR.SFxTimeoutOutOfRange0)
+                            )
+                        );
                 }
 
                 if (TimeoutHelper.IsTooLarge(value))
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ArgumentOutOfRangeException(
-                            "value",
-                            value,
-                            SR.GetString(SR.SFxTimeoutOutOfRangeTooBig)
-                        )
-                    );
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperError(
+                            new ArgumentOutOfRangeException(
+                                "value",
+                                value,
+                                SR.GetString(SR.SFxTimeoutOutOfRangeTooBig)
+                            )
+                        );
                 }
 
                 this.leaseTimeout = value;
@@ -100,13 +104,14 @@ namespace System.ServiceModel.Channels
             {
                 if (value <= 0)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ArgumentOutOfRangeException(
-                            "value",
-                            value,
-                            SR.GetString(SR.ValueMustBePositive)
-                        )
-                    );
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperError(
+                            new ArgumentOutOfRangeException(
+                                "value",
+                                value,
+                                SR.GetString(SR.ValueMustBePositive)
+                            )
+                        );
                 }
 
                 this.maxOutboundChannelsPerEndpoint = value;

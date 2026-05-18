@@ -339,8 +339,8 @@ namespace ILCompiler
                     break;
 
                 case ReadyToRunHelper.GVMLookupForSlot:
-                    methodDesc = context
-                        .SystemModule.GetKnownType("System.Runtime", "TypeLoaderExports")
+                    methodDesc = context.SystemModule
+                        .GetKnownType("System.Runtime", "TypeLoaderExports")
                         .GetKnownMethod("GVMLookupForSlot", null);
                     break;
 
@@ -361,8 +361,8 @@ namespace ILCompiler
                     break;
 
                 case ReadyToRunHelper.GetCurrentManagedThreadId:
-                    methodDesc = context
-                        .SystemModule.GetKnownType("System", "Environment")
+                    methodDesc = context.SystemModule
+                        .GetKnownType("System", "Environment")
                         .GetKnownMethod("get_CurrentManagedThreadId", null);
                     break;
 

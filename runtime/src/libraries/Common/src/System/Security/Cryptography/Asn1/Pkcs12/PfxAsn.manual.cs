@@ -272,8 +272,7 @@ namespace System.Security.Cryptography.Asn1.Pkcs12
                 throw new X509IterationCountExceededException();
             }
 
-            int encryptedValueLength = encryptedData
-                .EncryptedContentInfo
+            int encryptedValueLength = encryptedData.EncryptedContentInfo
                 .EncryptedContent
                 .Value
                 .Length;

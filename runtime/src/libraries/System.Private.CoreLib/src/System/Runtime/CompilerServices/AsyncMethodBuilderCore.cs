@@ -85,10 +85,8 @@ namespace System.Runtime.CompilerServices
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get =>
-                TplEventSource.Log.IsEnabled(
-                    EventLevel.Warning,
-                    TplEventSource.Keywords.AsyncMethod
-                );
+                TplEventSource.Log
+                    .IsEnabled(EventLevel.Warning, TplEventSource.Keywords.AsyncMethod);
         }
 #endif
 

@@ -238,9 +238,8 @@ namespace System.ServiceModel.Channels
             if (this.preReadCount > 0)
             {
                 byte[] tempBuffer = this.preReadData;
-                this.preReadData = DiagnosticUtility.Utility.AllocateByteArray(
-                    initialSize + this.preReadCount
-                );
+                this.preReadData = DiagnosticUtility.Utility
+                    .AllocateByteArray(initialSize + this.preReadCount);
                 Buffer.BlockCopy(
                     tempBuffer,
                     this.preReadOffset,
@@ -382,13 +381,14 @@ namespace System.ServiceModel.Channels
             {
                 if (value < -1)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ArgumentOutOfRangeException(
-                            "value",
-                            value,
-                            SR.GetString(SR.ValueMustBeInRange, -1, int.MaxValue)
-                        )
-                    );
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperError(
+                            new ArgumentOutOfRangeException(
+                                "value",
+                                value,
+                                SR.GetString(SR.ValueMustBeInRange, -1, int.MaxValue)
+                            )
+                        );
                 }
 
                 this.readTimeout = value;
@@ -402,13 +402,14 @@ namespace System.ServiceModel.Channels
             {
                 if (value < -1)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ArgumentOutOfRangeException(
-                            "value",
-                            value,
-                            SR.GetString(SR.ValueMustBeInRange, -1, int.MaxValue)
-                        )
-                    );
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperError(
+                            new ArgumentOutOfRangeException(
+                                "value",
+                                value,
+                                SR.GetString(SR.ValueMustBeInRange, -1, int.MaxValue)
+                            )
+                        );
                 }
 
                 this.writeTimeout = value;
@@ -426,9 +427,8 @@ namespace System.ServiceModel.Channels
             get
             {
 #pragma warning suppress 56503 // Microsoft, required by the Stream.Length contract
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new NotSupportedException(SR.GetString(SR.SeekNotSupported))
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(new NotSupportedException(SR.GetString(SR.SeekNotSupported)));
             }
         }
 
@@ -437,15 +437,13 @@ namespace System.ServiceModel.Channels
             get
             {
 #pragma warning suppress 56503 // Microsoft, required by the Stream.Position contract
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new NotSupportedException(SR.GetString(SR.SeekNotSupported))
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(new NotSupportedException(SR.GetString(SR.SeekNotSupported)));
             }
             set
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new NotSupportedException(SR.GetString(SR.SeekNotSupported))
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(new NotSupportedException(SR.GetString(SR.SeekNotSupported)));
             }
         }
 
@@ -547,16 +545,14 @@ namespace System.ServiceModel.Channels
 
         public override long Seek(long offset, SeekOrigin origin)
         {
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                new NotSupportedException(SR.GetString(SR.SeekNotSupported))
-            );
+            throw DiagnosticUtility.ExceptionUtility
+                .ThrowHelperError(new NotSupportedException(SR.GetString(SR.SeekNotSupported)));
         }
 
         public override void SetLength(long value)
         {
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                new NotSupportedException(SR.GetString(SR.SeekNotSupported))
-            );
+            throw DiagnosticUtility.ExceptionUtility
+                .ThrowHelperError(new NotSupportedException(SR.GetString(SR.SeekNotSupported)));
         }
 
         public void Shutdown(TimeSpan timeout)
@@ -744,9 +740,8 @@ namespace System.ServiceModel.Channels
                     {
                         if (this.asyncReadBuffer == null)
                         {
-                            this.asyncReadBuffer = DiagnosticUtility.Utility.AllocateByteArray(
-                                innerStream.Connection.AsyncReadBufferSize
-                            );
+                            this.asyncReadBuffer = DiagnosticUtility.Utility
+                                .AllocateByteArray(innerStream.Connection.AsyncReadBufferSize);
                         }
                     }
                 }
@@ -781,9 +776,8 @@ namespace System.ServiceModel.Channels
             get
             {
 #pragma warning suppress 56503 // Not publicly accessible and this should never be called.
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new NotImplementedException()
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(new NotImplementedException());
             }
         }
 
@@ -824,9 +818,8 @@ namespace System.ServiceModel.Channels
             }
             catch (IOException ioException)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    ConvertIOException(ioException)
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(ConvertIOException(ioException));
             }
         }
 
@@ -837,16 +830,14 @@ namespace System.ServiceModel.Channels
 
         public object DuplicateAndClose(int targetProcessId)
         {
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                new NotImplementedException()
-            );
+            throw DiagnosticUtility.ExceptionUtility
+                .ThrowHelperError(new NotImplementedException());
         }
 
         public virtual object GetCoreTransport()
         {
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                new NotImplementedException()
-            );
+            throw DiagnosticUtility.ExceptionUtility
+                .ThrowHelperError(new NotImplementedException());
         }
 
         public IAsyncResult BeginValidate(Uri uri, AsyncCallback callback, object state)
@@ -905,9 +896,8 @@ namespace System.ServiceModel.Channels
             }
             catch (IOException ioException)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    ConvertIOException(ioException)
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(ConvertIOException(ioException));
             }
             finally
             {
@@ -934,9 +924,8 @@ namespace System.ServiceModel.Channels
                 }
                 catch (IOException ioException)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        ConvertIOException(ioException)
-                    );
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperError(ConvertIOException(ioException));
                 }
             }
         }
@@ -967,9 +956,8 @@ namespace System.ServiceModel.Channels
             }
             catch (IOException ioException)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    ConvertIOException(ioException)
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(ConvertIOException(ioException));
             }
         }
 
@@ -1015,9 +1003,8 @@ namespace System.ServiceModel.Channels
             }
             catch (IOException ioException)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    ConvertIOException(ioException)
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(ConvertIOException(ioException));
             }
         }
 
@@ -1052,9 +1039,8 @@ namespace System.ServiceModel.Channels
             }
             catch (IOException ioException)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    ConvertIOException(ioException)
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(ConvertIOException(ioException));
             }
 
             return AsyncCompletionResult.Completed;
@@ -1073,9 +1059,8 @@ namespace System.ServiceModel.Channels
                 }
                 catch (IOException ioException)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        ConvertIOException(ioException)
-                    );
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperError(ConvertIOException(ioException));
                 }
             }
 
@@ -1169,47 +1154,51 @@ namespace System.ServiceModel.Channels
         {
             if (offset < 0)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentOutOfRangeException(
-                        "offset",
-                        offset,
-                        SR.GetString(SR.ValueMustBeNonNegative)
-                    )
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        new ArgumentOutOfRangeException(
+                            "offset",
+                            offset,
+                            SR.GetString(SR.ValueMustBeNonNegative)
+                        )
+                    );
             }
 
             if (offset > bufferSize)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentOutOfRangeException(
-                        "offset",
-                        offset,
-                        SR.GetString(SR.OffsetExceedsBufferSize, bufferSize)
-                    )
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        new ArgumentOutOfRangeException(
+                            "offset",
+                            offset,
+                            SR.GetString(SR.OffsetExceedsBufferSize, bufferSize)
+                        )
+                    );
             }
 
             if (size <= 0)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentOutOfRangeException(
-                        "size",
-                        size,
-                        SR.GetString(SR.ValueMustBePositive)
-                    )
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        new ArgumentOutOfRangeException(
+                            "size",
+                            size,
+                            SR.GetString(SR.ValueMustBePositive)
+                        )
+                    );
             }
 
             int remainingBufferSpace = bufferSize - offset;
             if (size > remainingBufferSpace)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentOutOfRangeException(
-                        "size",
-                        size,
-                        SR.GetString(SR.SizeExceedsRemainingBufferSpace, remainingBufferSpace)
-                    )
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        new ArgumentOutOfRangeException(
+                            "size",
+                            size,
+                            SR.GetString(SR.SizeExceedsRemainingBufferSpace, remainingBufferSpace)
+                        )
+                    );
             }
         }
     }

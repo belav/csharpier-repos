@@ -172,16 +172,17 @@ namespace MonoCasTests.System.Web.Hosting
             AspNetHostingPermissionLevel level
         )
         {
-            ConstructorInfo ci = this.Type.GetConstructor(
-                new Type[5]
-                {
-                    typeof(string),
-                    typeof(string),
-                    typeof(string),
-                    typeof(string),
-                    typeof(TextWriter),
-                }
-            );
+            ConstructorInfo ci = this.Type
+                .GetConstructor(
+                    new Type[5]
+                    {
+                        typeof(string),
+                        typeof(string),
+                        typeof(string),
+                        typeof(string),
+                        typeof(TextWriter),
+                    }
+                );
             Assert.IsNotNull(ci, ".ctor(string,string,TextWriter)");
             return ci.Invoke(new object[5] { null, cwd, "/", String.Empty, sw });
         }

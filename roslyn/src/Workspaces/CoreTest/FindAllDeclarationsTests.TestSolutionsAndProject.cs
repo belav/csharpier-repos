@@ -120,8 +120,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
             var pid = ProjectId.CreateNewId();
             var workspace = CreateWorkspace(testHost);
 
-            solution = workspace
-                .CurrentSolution.AddProject(pid, "TestCases", "TestCases", LanguageNames.CSharp)
+            solution = workspace.CurrentSolution
+                .AddProject(pid, "TestCases", "TestCases", LanguageNames.CSharp)
                 .AddMetadataReference(pid, MscorlibRef);
             for (var i = 0; i < sourceTexts.Length; i++)
             {

@@ -123,10 +123,11 @@ public class QueryRootProcessor : ExpressionVisitor
                 );
 
             case ParameterExpression parameterExpression
-                when parameterExpression.Name?.StartsWith(
-                    QueryCompilationContext.QueryParameterPrefix,
-                    StringComparison.Ordinal
-                ) == true
+                when parameterExpression.Name
+                    ?.StartsWith(
+                        QueryCompilationContext.QueryParameterPrefix,
+                        StringComparison.Ordinal
+                    ) == true
                     && ShouldConvertToParameterQueryRoot(parameterExpression):
                 return new ParameterQueryRootExpression(
                     parameterExpression.Type.GetSequenceType(),

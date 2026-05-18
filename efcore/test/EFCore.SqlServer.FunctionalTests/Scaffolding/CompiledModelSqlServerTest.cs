@@ -480,8 +480,8 @@ public class CompiledModelSqlServerTest : CompiledModelRelationalTestBase
                     eb.Property<Point>("Point")
                         .HasColumnType("geometry")
                         .HasDefaultValue(
-                            NtsGeometryServices
-                                .Instance.CreateGeometryFactory(srid: 0)
+                            NtsGeometryServices.Instance
+                                .CreateGeometryFactory(srid: 0)
                                 .CreatePoint(new CoordinateZM(0, 0, 0, 0))
                         )
                         .HasConversion<
@@ -534,9 +534,8 @@ public class CompiledModelSqlServerTest : CompiledModelRelationalTestBase
     {
         base.AddReferences(build);
         build.References.Add(BuildReference.ByName("Microsoft.EntityFrameworkCore.SqlServer"));
-        build.References.Add(
-            BuildReference.ByName("Microsoft.EntityFrameworkCore.SqlServer.NetTopologySuite")
-        );
+        build.References
+            .Add(BuildReference.ByName("Microsoft.EntityFrameworkCore.SqlServer.NetTopologySuite"));
         build.References.Add(BuildReference.ByName("NetTopologySuite"));
         return build;
     }

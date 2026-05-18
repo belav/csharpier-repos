@@ -27,9 +27,10 @@ namespace System.IdentityModel
             if (!certificate.HasPrivateKey)
             {
 #pragma warning suppress 56526 // no validation necessary for value.Thumbprint
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentException(SR.GetString(SR.ID1001, certificate.Thumbprint))
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        new ArgumentException(SR.GetString(SR.ID1001, certificate.Thumbprint))
+                    );
             }
 
             // Check for accessibility of private key
@@ -47,17 +48,19 @@ namespace System.IdentityModel
             }
             catch (CryptographicException e)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentException(SR.GetString(SR.ID1039, certificate.Thumbprint), e)
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        new ArgumentException(SR.GetString(SR.ID1039, certificate.Thumbprint), e)
+                    );
             }
 
             if (rsa == null)
             {
 #pragma warning suppress 56526 // no validation necessary for value.Thumbprint
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentException(SR.GetString(SR.ID1002, certificate.Thumbprint))
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        new ArgumentException(SR.GetString(SR.ID1002, certificate.Thumbprint))
+                    );
             }
 
             return rsa;
@@ -84,11 +87,12 @@ namespace System.IdentityModel
                 )
             )
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(
-                        SR.GetString(SR.ID1025, storeName, storeLocation, findType, findValue)
-                    )
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(SR.ID1025, storeName, storeLocation, findType, findValue)
+                        )
+                    );
             }
 
             return certificate;
@@ -159,9 +163,8 @@ namespace System.IdentityModel
 
             if (issuerNameRegistry == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                    "issuerNameRegistry"
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperArgumentNull("issuerNameRegistry");
             }
 
             X509Chain chain = new X509Chain();

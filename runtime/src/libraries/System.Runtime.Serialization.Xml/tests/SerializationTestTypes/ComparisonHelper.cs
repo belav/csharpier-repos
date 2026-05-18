@@ -127,7 +127,8 @@ namespace SerializationTestTypes
             if (
                 originalData
                     .GetType()
-                    .Name.Equals(typeof(System.Runtime.Serialization.ExtensionDataObject).Name)
+                    .Name
+                    .Equals(typeof(System.Runtime.Serialization.ExtensionDataObject).Name)
             )
             {
                 return;

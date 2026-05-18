@@ -200,12 +200,13 @@ namespace System.Runtime.Remoting.Channels
 
             try
             {
-                AppDomain.CurrentDomain.ProcessMessageInDomain(
-                    arrRequest,
-                    cadMsg,
-                    out res.arrResponse,
-                    out res.cadMrm
-                );
+                AppDomain.CurrentDomain
+                    .ProcessMessageInDomain(
+                        arrRequest,
+                        cadMsg,
+                        out res.arrResponse,
+                        out res.cadMrm
+                    );
             }
             catch (Exception e)
             {

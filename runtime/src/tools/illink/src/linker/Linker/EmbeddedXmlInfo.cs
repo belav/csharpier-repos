@@ -17,8 +17,8 @@ namespace Mono.Linker
             Func<Resource, bool> predicate
         )
         {
-            return assembly
-                    .Modules.SelectMany(mod => mod.Resources)
+            return assembly.Modules
+                    .SelectMany(mod => mod.Resources)
                     .Where(res => res.ResourceType == ResourceType.Embedded)
                     .Where(res => res.Name.EndsWith(".xml", StringComparison.OrdinalIgnoreCase))
                     .Where(res => predicate(res))

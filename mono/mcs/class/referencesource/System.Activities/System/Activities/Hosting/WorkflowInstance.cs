@@ -135,9 +135,10 @@ namespace System.Activities.Hosting
             {
                 if (!this.isInitialized)
                 {
-                    throw FxTrace.Exception.AsError(
-                        new InvalidOperationException(SR.ControllerInvalidBeforeInitialize)
-                    );
+                    throw FxTrace.Exception
+                        .AsError(
+                            new InvalidOperationException(SR.ControllerInvalidBeforeInitialize)
+                        );
                 }
 
                 return this.controller;
@@ -203,10 +204,8 @@ namespace System.Activities.Hosting
             ActivityExecutor executor = deserializedRuntimeState as ActivityExecutor;
             if (executor == null)
             {
-                throw FxTrace.Exception.Argument(
-                    "deserializedRuntimeState",
-                    SR.InvalidRuntimeState
-                );
+                throw FxTrace.Exception
+                    .Argument("deserializedRuntimeState", SR.InvalidRuntimeState);
             }
             if (updateMap == null)
             {
@@ -260,10 +259,8 @@ namespace System.Activities.Hosting
 
             if (this.executor == null)
             {
-                throw FxTrace.Exception.Argument(
-                    "deserializedRuntimeState",
-                    SR.InvalidRuntimeState
-                );
+                throw FxTrace.Exception
+                    .Argument("deserializedRuntimeState", SR.InvalidRuntimeState);
             }
             this.executor.ThrowIfNonSerializable();
 
@@ -287,9 +284,12 @@ namespace System.Activities.Hosting
                         }
                         else
                         {
-                            throw FxTrace.Exception.AsError(
-                                new InstanceUpdateException(SR.InvalidImplementationAsWorkflowRoot)
-                            );
+                            throw FxTrace.Exception
+                                .AsError(
+                                    new InstanceUpdateException(
+                                        SR.InvalidImplementationAsWorkflowRoot
+                                    )
+                                );
                         }
                     }
 
@@ -297,11 +297,8 @@ namespace System.Activities.Hosting
 
                     this.executor.WorkflowIdentity = this.DefinitionIdentity;
 
-                    this.executor.UpdateInstancePhase1(
-                        updateMap,
-                        this.WorkflowDefinition,
-                        ref updateErrors
-                    );
+                    this.executor
+                        .UpdateInstancePhase1(updateMap, this.WorkflowDefinition, ref updateErrors);
                     ThrowIfDynamicUpdateErrorExists(updateErrors);
                 }
 
@@ -314,14 +311,15 @@ namespace System.Activities.Hosting
                     // Track that dynamic update is successful
                     if (this.Controller.TrackingEnabled)
                     {
-                        this.Controller.Track(
-                            new WorkflowInstanceUpdatedRecord(
-                                this.Id,
-                                this.WorkflowDefinition.DisplayName,
-                                originalDefinitionIdentity,
-                                this.executor.WorkflowIdentity
-                            )
-                        );
+                        this.Controller
+                            .Track(
+                                new WorkflowInstanceUpdatedRecord(
+                                    this.Id,
+                                    this.WorkflowDefinition.DisplayName,
+                                    originalDefinitionIdentity,
+                                    this.executor.WorkflowIdentity
+                                )
+                            );
                     }
                 }
 
@@ -348,15 +346,16 @@ namespace System.Activities.Hosting
                             ),
                         }.AsReadOnly();
                     }
-                    this.TrackingProvider.AddRecord(
-                        new WorkflowInstanceUpdatedRecord(
-                            this.Id,
-                            this.WorkflowDefinition.DisplayName,
-                            originalDefinitionIdentity,
-                            this.DefinitionIdentity,
-                            blockingActivities
-                        )
-                    );
+                    this.TrackingProvider
+                        .AddRecord(
+                            new WorkflowInstanceUpdatedRecord(
+                                this.Id,
+                                this.WorkflowDefinition.DisplayName,
+                                originalDefinitionIdentity,
+                                this.DefinitionIdentity,
+                                blockingActivities
+                            )
+                        );
                 }
                 throw;
             }
@@ -390,8 +389,8 @@ namespace System.Activities.Hosting
                     LocationReferenceEnvironment parentEnvironment = null;
                     if (extensionManager != null && extensionManager.SymbolResolver != null)
                     {
-                        parentEnvironment =
-                            extensionManager.SymbolResolver.AsLocationReferenceEnvironment();
+                        parentEnvironment = extensionManager.SymbolResolver
+                            .AsLocationReferenceEnvironment();
                     }
                     localEnvironment = new ActivityLocationReferenceEnvironment(parentEnvironment);
                 }
@@ -475,11 +474,12 @@ namespace System.Activities.Hosting
                     );
                 }
 
-                this.executor.ScheduleRootActivity(
-                    this.WorkflowDefinition,
-                    actualInputs,
-                    workflowExecutionProperties
-                );
+                this.executor
+                    .ScheduleRootActivity(
+                        this.WorkflowDefinition,
+                        actualInputs,
+                        workflowExecutionProperties
+                    );
             }
             else
             {
@@ -496,8 +496,8 @@ namespace System.Activities.Hosting
 
                 for (int i = 0; i < this.extensions.WorkflowInstanceExtensions.Count; i++)
                 {
-                    IWorkflowInstanceExtension extension =
-                        this.extensions.WorkflowInstanceExtensions[i];
+                    IWorkflowInstanceExtension extension = this.extensions
+                        .WorkflowInstanceExtensions[i];
                     extension.SetInstance(proxy);
                 }
             }
@@ -507,9 +507,8 @@ namespace System.Activities.Hosting
         {
             if (this.isInitialized)
             {
-                throw FxTrace.Exception.AsError(
-                    new InvalidOperationException(SR.WorkflowInstanceIsReadOnly(this.Id))
-                );
+                throw FxTrace.Exception
+                    .AsError(new InvalidOperationException(SR.WorkflowInstanceIsReadOnly(this.Id)));
             }
         }
 
@@ -593,11 +592,8 @@ namespace System.Activities.Hosting
             object state
         )
         {
-            return this.Controller.BeginFlushTrackingRecords(
-                ActivityDefaults.TrackingTimeout,
-                callback,
-                state
-            );
+            return this.Controller
+                .BeginFlushTrackingRecords(ActivityDefaults.TrackingTimeout, callback, state);
         }
 
         protected virtual void OnEndFlushTrackingRecords(IAsyncResult result)
@@ -631,15 +627,16 @@ namespace System.Activities.Hosting
                     sourceInstanceId,
                     source.GetType().FullName
                 );
-                this.controller.Track(
-                    new WorkflowInstanceUnhandledExceptionRecord(
-                        this.Id,
-                        this.WorkflowDefinition.DisplayName,
-                        faultSourceInfo,
-                        exception,
-                        this.DefinitionIdentity
-                    )
-                );
+                this.controller
+                    .Track(
+                        new WorkflowInstanceUnhandledExceptionRecord(
+                            this.Id,
+                            this.WorkflowDefinition.DisplayName,
+                            faultSourceInfo,
+                            exception,
+                            this.DefinitionIdentity
+                        )
+                    );
             }
 
             OnNotifyUnhandledException(exception, source, sourceInstanceId);
@@ -688,9 +685,8 @@ namespace System.Activities.Hosting
 
             if (wasPerformingOperation)
             {
-                throw FxTrace.Exception.AsError(
-                    new InvalidOperationException(SR.RuntimeOperationInProgress)
-                );
+                throw FxTrace.Exception
+                    .AsError(new InvalidOperationException(SR.RuntimeOperationInProgress));
             }
         }
 
@@ -730,14 +726,15 @@ namespace System.Activities.Hosting
                                 reason.InnerException.Message
                             );
                         }
-                        this.controller.Track(
-                            new WorkflowInstanceAbortedRecord(
-                                this.Id,
-                                this.WorkflowDefinition.DisplayName,
-                                message,
-                                this.DefinitionIdentity
-                            )
-                        );
+                        this.controller
+                            .Track(
+                                new WorkflowInstanceAbortedRecord(
+                                    this.Id,
+                                    this.WorkflowDefinition.DisplayName,
+                                    message,
+                                    this.DefinitionIdentity
+                                )
+                            );
                     }
                 }
 #if DEBUG
@@ -758,9 +755,12 @@ namespace System.Activities.Hosting
             ThrowIfAborted();
             if (!this.Controller.IsPersistable)
             {
-                throw FxTrace.Exception.AsError(
-                    new InvalidOperationException(SR.PrepareForSerializationRequiresPersistability)
-                );
+                throw FxTrace.Exception
+                    .AsError(
+                        new InvalidOperationException(
+                            SR.PrepareForSerializationRequiresPersistability
+                        )
+                    );
             }
         }
 
@@ -785,9 +785,10 @@ namespace System.Activities.Hosting
             ThrowIfAborted();
             if (this.Controller.IsPersistable)
             {
-                throw FxTrace.Exception.AsError(
-                    new InvalidOperationException(SR.PauseWhenPersistableInvalidIfPersistable)
-                );
+                throw FxTrace.Exception
+                    .AsError(
+                        new InvalidOperationException(SR.PauseWhenPersistableInvalidIfPersistable)
+                    );
             }
         }
 
@@ -815,25 +816,27 @@ namespace System.Activities.Hosting
                         this.executor.TerminationException != null,
                         "must have a termination exception if we're faulted"
                     );
-                    this.controller.Track(
-                        new WorkflowInstanceTerminatedRecord(
-                            this.Id,
-                            this.WorkflowDefinition.DisplayName,
-                            this.executor.TerminationException.Message,
-                            this.DefinitionIdentity
-                        )
-                    );
+                    this.controller
+                        .Track(
+                            new WorkflowInstanceTerminatedRecord(
+                                this.Id,
+                                this.WorkflowDefinition.DisplayName,
+                                this.executor.TerminationException.Message,
+                                this.DefinitionIdentity
+                            )
+                        );
                 }
                 else if (completionState == ActivityInstanceState.Closed)
                 {
-                    this.controller.Track(
-                        new WorkflowInstanceRecord(
-                            this.Id,
-                            this.WorkflowDefinition.DisplayName,
-                            WorkflowInstanceStates.Completed,
-                            this.DefinitionIdentity
-                        )
-                    );
+                    this.controller
+                        .Track(
+                            new WorkflowInstanceRecord(
+                                this.Id,
+                                this.WorkflowDefinition.DisplayName,
+                                WorkflowInstanceStates.Completed,
+                                this.DefinitionIdentity
+                            )
+                        );
                 }
                 else
                 {
@@ -841,14 +844,15 @@ namespace System.Activities.Hosting
                         completionState == ActivityInstanceState.Canceled,
                         "Cannot be executing a workflow instance when WorkflowState was completed."
                     );
-                    this.controller.Track(
-                        new WorkflowInstanceRecord(
-                            this.Id,
-                            this.WorkflowDefinition.DisplayName,
-                            WorkflowInstanceStates.Canceled,
-                            this.DefinitionIdentity
-                        )
-                    );
+                    this.controller
+                        .Track(
+                            new WorkflowInstanceRecord(
+                                this.Id,
+                                this.WorkflowDefinition.DisplayName,
+                                WorkflowInstanceStates.Canceled,
+                                this.DefinitionIdentity
+                            )
+                        );
                 }
                 this.hasTrackedCompletion = true;
             }
@@ -863,26 +867,28 @@ namespace System.Activities.Hosting
                 {
                     if (!this.HasTrackedStarted)
                     {
-                        this.TrackingProvider.AddRecord(
-                            new WorkflowInstanceRecord(
-                                this.Id,
-                                this.WorkflowDefinition.DisplayName,
-                                WorkflowInstanceStates.Started,
-                                this.DefinitionIdentity
-                            )
-                        );
+                        this.TrackingProvider
+                            .AddRecord(
+                                new WorkflowInstanceRecord(
+                                    this.Id,
+                                    this.WorkflowDefinition.DisplayName,
+                                    WorkflowInstanceStates.Started,
+                                    this.DefinitionIdentity
+                                )
+                            );
                         this.HasTrackedStarted = true;
                     }
                     else
                     {
-                        this.TrackingProvider.AddRecord(
-                            new WorkflowInstanceRecord(
-                                this.Id,
-                                this.WorkflowDefinition.DisplayName,
-                                WorkflowInstanceStates.Resumed,
-                                this.DefinitionIdentity
-                            )
-                        );
+                        this.TrackingProvider
+                            .AddRecord(
+                                new WorkflowInstanceRecord(
+                                    this.Id,
+                                    this.WorkflowDefinition.DisplayName,
+                                    WorkflowInstanceStates.Resumed,
+                                    this.DefinitionIdentity
+                                )
+                            );
                     }
                 }
                 this.hasTrackedResumed = true;
@@ -938,9 +944,8 @@ namespace System.Activities.Hosting
         {
             if (this.isAborted || (this.executor != null && this.executor.IsAbortPending))
             {
-                throw FxTrace.Exception.AsError(
-                    new InvalidOperationException(SR.WorkflowInstanceAborted(this.Id))
-                );
+                throw FxTrace.Exception
+                    .AsError(new InvalidOperationException(SR.WorkflowInstanceAborted(this.Id)));
             }
         }
 
@@ -948,9 +953,8 @@ namespace System.Activities.Hosting
         {
             if (!this.executor.IsIdle)
             {
-                throw FxTrace.Exception.AsError(
-                    new InvalidOperationException(SR.BookmarksOnlyResumableWhileIdle)
-                );
+                throw FxTrace.Exception
+                    .AsError(new InvalidOperationException(SR.BookmarksOnlyResumableWhileIdle));
             }
         }
 
@@ -1101,8 +1105,9 @@ namespace System.Activities.Hosting
 
                     this.instance.ValidateGetMappedVariables();
 
-                    IDictionary<string, LocationInfo> mappedLocations =
-                        this.instance.executor.GatherMappableVariables();
+                    IDictionary<string, LocationInfo> mappedLocations = this.instance
+                        .executor
+                        .GatherMappableVariables();
                     if (mappedLocations != null)
                     {
                         mappedLocations = new ReadOnlyDictionaryInternal<string, LocationInfo>(

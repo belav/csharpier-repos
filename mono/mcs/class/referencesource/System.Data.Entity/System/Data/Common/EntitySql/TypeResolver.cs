@@ -274,9 +274,8 @@ namespace System.Data.Common.EntitySql
         {
             get
             {
-                return _perspective.MetadataWorkspace.GetCanonicalModelTypeUsage(
-                    PrimitiveTypeKind.String
-                );
+                return _perspective.MetadataWorkspace
+                    .GetCanonicalModelTypeUsage(PrimitiveTypeKind.String);
             }
         }
 
@@ -287,9 +286,8 @@ namespace System.Data.Common.EntitySql
         {
             get
             {
-                return _perspective.MetadataWorkspace.GetCanonicalModelTypeUsage(
-                    PrimitiveTypeKind.Boolean
-                );
+                return _perspective.MetadataWorkspace
+                    .GetCanonicalModelTypeUsage(PrimitiveTypeKind.Boolean);
             }
         }
 
@@ -300,9 +298,8 @@ namespace System.Data.Common.EntitySql
         {
             get
             {
-                return _perspective.MetadataWorkspace.GetCanonicalModelTypeUsage(
-                    PrimitiveTypeKind.Int64
-                );
+                return _perspective.MetadataWorkspace
+                    .GetCanonicalModelTypeUsage(PrimitiveTypeKind.Int64);
             }
         }
 
@@ -360,8 +357,8 @@ namespace System.Data.Common.EntitySql
             //
             if (
                 overloads.Exists(overload =>
-                    overload
-                        .Parameters.Select(p => p.ResultType)
+                    overload.Parameters
+                        .Select(p => p.ResultType)
                         .SequenceEqual(
                             functionInfo.Parameters.Select(p => p.ResultType),
                             TypeUsageStructuralComparer.Instance

@@ -98,9 +98,8 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                         // this is to prevent things like opening a file, changing in other files keep enqueuing
                         // expensive high priority work.
                         if (
-                            !item.InvocationReasons.Contains(
-                                PredefinedInvocationReasons.SyntaxChanged
-                            )
+                            !item.InvocationReasons
+                                .Contains(PredefinedInvocationReasons.SyntaxChanged)
                         )
                         {
                             return;

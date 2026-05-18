@@ -201,10 +201,8 @@ namespace Microsoft.Interop
             foreach (BoundGenerator marshaller in marshallers.NativeParameterMarshallers)
             {
                 // Get arguments for invocation
-                ArgumentSyntax argSyntax = marshaller.Generator.AsArgument(
-                    marshaller.TypeInfo,
-                    context
-                );
+                ArgumentSyntax argSyntax = marshaller.Generator
+                    .AsArgument(marshaller.TypeInfo, context);
                 invoke = invoke.AddArgumentListArguments(argSyntax);
             }
             // Assign to return value if necessary
@@ -217,13 +215,11 @@ namespace Microsoft.Interop
                 marshallers.NativeReturnMarshaller.TypeInfo
             );
 
-            string targetIdentifier =
-                marshallers.NativeReturnMarshaller.Generator.UsesNativeIdentifier(
-                    marshallers.NativeReturnMarshaller.TypeInfo,
-                    context
-                )
-                    ? native
-                    : managed;
+            string targetIdentifier = marshallers.NativeReturnMarshaller
+                .Generator
+                .UsesNativeIdentifier(marshallers.NativeReturnMarshaller.TypeInfo, context)
+                ? native
+                : managed;
 
             return ExpressionStatement(
                 AssignmentExpression(
@@ -249,10 +245,8 @@ namespace Microsoft.Interop
             foreach (BoundGenerator marshaller in marshallers.ManagedParameterMarshallers)
             {
                 // Get arguments for invocation
-                ArgumentSyntax argSyntax = marshaller.Generator.AsManagedArgument(
-                    marshaller.TypeInfo,
-                    context
-                );
+                ArgumentSyntax argSyntax = marshaller.Generator
+                    .AsManagedArgument(marshaller.TypeInfo, context);
                 invoke = invoke.AddArgumentListArguments(argSyntax);
             }
             // Assign to return value if necessary
@@ -289,22 +283,24 @@ namespace Microsoft.Interop
             var (managed, _) = context.GetIdentifiers(managedExceptionMarshaller.TypeInfo);
 
             catchClauseBuilder.AddRange(
-                managedExceptionMarshaller.Generator.Generate(
-                    managedExceptionMarshaller.TypeInfo,
-                    context with
-                    {
-                        CurrentStage = StubCodeContext.Stage.Marshal,
-                    }
-                )
+                managedExceptionMarshaller.Generator
+                    .Generate(
+                        managedExceptionMarshaller.TypeInfo,
+                        context with
+                        {
+                            CurrentStage = StubCodeContext.Stage.Marshal,
+                        }
+                    )
             );
             catchClauseBuilder.AddRange(
-                managedExceptionMarshaller.Generator.Generate(
-                    managedExceptionMarshaller.TypeInfo,
-                    context with
-                    {
-                        CurrentStage = StubCodeContext.Stage.PinnedMarshal,
-                    }
-                )
+                managedExceptionMarshaller.Generator
+                    .Generate(
+                        managedExceptionMarshaller.TypeInfo,
+                        context with
+                        {
+                            CurrentStage = StubCodeContext.Stage.PinnedMarshal,
+                        }
+                    )
             );
             return ImmutableArray.Create(
                 CatchClause(

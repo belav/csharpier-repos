@@ -1286,9 +1286,10 @@ namespace System.Data.Query.PlanCompiler
                     useCompatMode
                         ? (
                             augmentedJoinNode.Children.All(c => c is AugmentedTableNode)
-                            && augmentedJoinNode.JoinEdges.All(joinEdge =>
-                                IsConstraintPresentForTurningIntoInnerJoin(joinEdge)
-                            )
+                            && augmentedJoinNode.JoinEdges
+                                .All(joinEdge =>
+                                    IsConstraintPresentForTurningIntoInnerJoin(joinEdge)
+                                )
                         )
                         : (
                             CanAllJoinEdgesBeTurnedIntoInnerJoins(
@@ -1935,7 +1936,9 @@ namespace System.Data.Query.PlanCompiler
                     !edge2.LeftVars[j].Equals(edge1.LeftVars[j])
                     || !edge2
                         .RightVars[j]
-                        .ColumnMetadata.Name.Equals(edge1.RightVars[j].ColumnMetadata.Name)
+                        .ColumnMetadata
+                        .Name
+                        .Equals(edge1.RightVars[j].ColumnMetadata.Name)
                 )
                 {
                     return false;
@@ -2034,9 +2037,11 @@ namespace System.Data.Query.PlanCompiler
 
             // Am I a self-join?
             if (
-                !joinEdge.Left.Table.TableMetadata.Extent.Equals(
-                    joinEdge.Right.Table.TableMetadata.Extent
-                )
+                !joinEdge.Left
+                    .Table
+                    .TableMetadata
+                    .Extent
+                    .Equals(joinEdge.Right.Table.TableMetadata.Extent)
             )
             {
                 return false;
@@ -2048,7 +2053,9 @@ namespace System.Data.Query.PlanCompiler
                 if (
                     !joinEdge
                         .LeftVars[i]
-                        .ColumnMetadata.Name.Equals(joinEdge.RightVars[i].ColumnMetadata.Name)
+                        .ColumnMetadata
+                        .Name
+                        .Equals(joinEdge.RightVars[i].ColumnMetadata.Name)
                 )
                 {
                     return false;
@@ -2748,8 +2755,8 @@ namespace System.Data.Query.PlanCompiler
             if (joinNode.OtherPredicate != null)
             {
                 foreach (
-                    Var var in joinNode
-                        .OtherPredicate.GetNodeInfo(this.m_command)
+                    Var var in joinNode.OtherPredicate
+                        .GetNodeInfo(this.m_command)
                         .ExternalReferences
                 )
                 {

@@ -112,11 +112,8 @@ namespace Microsoft.Web.Mvc.ModelBinding
                 ModelName = bindingContext.ModelName,
             };
 
-            IExtensibleModelBinder dtoBinder =
-                bindingContext.ModelBinderProviders.GetRequiredBinder(
-                    controllerContext,
-                    dtoBindingContext
-                );
+            IExtensibleModelBinder dtoBinder = bindingContext.ModelBinderProviders
+                .GetRequiredBinder(controllerContext, dtoBindingContext);
             dtoBinder.BindModel(controllerContext, dtoBindingContext);
             return (ComplexModelDto)dtoBindingContext.Model;
         }
@@ -214,8 +211,8 @@ namespace Microsoft.Web.Mvc.ModelBinding
 
         private static object GetPropertyDefaultValue(PropertyDescriptor propertyDescriptor)
         {
-            DefaultValueAttribute attr = propertyDescriptor
-                .Attributes.OfType<DefaultValueAttribute>()
+            DefaultValueAttribute attr = propertyDescriptor.Attributes
+                .OfType<DefaultValueAttribute>()
                 .FirstOrDefault();
             return (attr != null) ? attr.Value : null;
         }
@@ -239,8 +236,8 @@ namespace Microsoft.Web.Mvc.ModelBinding
 
             foreach (PropertyDescriptor propertyDescriptor in propertyDescriptors)
             {
-                BindingBehaviorAttribute propAttr = propertyDescriptor
-                    .Attributes.OfType<BindingBehaviorAttribute>()
+                BindingBehaviorAttribute propAttr = propertyDescriptor.Attributes
+                    .OfType<BindingBehaviorAttribute>()
                     .SingleOrDefault();
                 BindingBehaviorAttribute workingAttr = propAttr ?? typeAttr;
                 if (workingAttr != null)
@@ -335,8 +332,8 @@ namespace Microsoft.Web.Mvc.ModelBinding
                 string modelStateKey = dtoResult.ValidationNode.ModelStateKey;
                 if (bindingContext.ModelState.IsValidField(modelStateKey))
                 {
-                    ModelValidator requiredValidator = ModelValidatorProviders
-                        .Providers.GetValidators(propertyMetadata, controllerContext)
+                    ModelValidator requiredValidator = ModelValidatorProviders.Providers
+                        .GetValidators(propertyMetadata, controllerContext)
                         .Where(v => v.IsRequired)
                         .FirstOrDefault();
                     if (requiredValidator != null)
@@ -347,10 +344,8 @@ namespace Microsoft.Web.Mvc.ModelBinding
                             )
                         )
                         {
-                            bindingContext.ModelState.AddModelError(
-                                modelStateKey,
-                                validationResult.Message
-                            );
+                            bindingContext.ModelState
+                                .AddModelError(modelStateKey, validationResult.Message);
                         }
                     }
                 }

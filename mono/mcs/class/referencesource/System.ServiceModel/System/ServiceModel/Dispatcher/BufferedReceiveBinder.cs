@@ -100,11 +100,8 @@ namespace System.ServiceModel.Dispatcher
         {
             if (Interlocked.CompareExchange(ref this.pendingOperationSemaphore, 1, 0) == 0)
             {
-                IAsyncResult result = this.channelBinder.BeginTryReceive(
-                    timeout,
-                    tryReceiveCallback,
-                    this
-                );
+                IAsyncResult result = this.channelBinder
+                    .BeginTryReceive(timeout, tryReceiveCallback, this);
                 if (result.CompletedSynchronously)
                 {
                     HandleEndTryReceive(result);
@@ -214,10 +211,8 @@ namespace System.ServiceModel.Dispatcher
             {
                 if (binder.channelBinder.TryReceive(TimeSpan.MaxValue, out requestContext))
                 {
-                    requiresDispatch = binder.inputQueue.EnqueueWithoutDispatch(
-                        new RequestContextWrapper(requestContext),
-                        null
-                    );
+                    requiresDispatch = binder.inputQueue
+                        .EnqueueWithoutDispatch(new RequestContextWrapper(requestContext), null);
                 }
             }
             catch (Exception exception)
@@ -259,10 +254,8 @@ namespace System.ServiceModel.Dispatcher
             {
                 if (binder.channelBinder.EndTryReceive(result, out requestContext))
                 {
-                    requiresDispatch = binder.inputQueue.EnqueueWithoutDispatch(
-                        new RequestContextWrapper(requestContext),
-                        null
-                    );
+                    requiresDispatch = binder.inputQueue
+                        .EnqueueWithoutDispatch(new RequestContextWrapper(requestContext), null);
                 }
             }
             catch (Exception exception)

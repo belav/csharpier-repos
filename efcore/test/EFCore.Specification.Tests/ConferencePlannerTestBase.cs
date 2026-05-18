@@ -104,13 +104,13 @@ public abstract partial class ConferencePlannerTestBase<TFixture> : IClassFixtur
 
             var pinky = context.Attendees.Single(a => a.UserName == "Pinks");
 
-            var pinkySessions = context
-                .Sessions.AsNoTracking()
+            var pinkySessions = context.Sessions
+                .AsNoTracking()
                 .Where(s => s.SessionAttendees.Any(e => e.Attendee.UserName == "Pinks"))
                 .ToList();
 
-            var session = context
-                .Sessions.AsNoTracking()
+            var session = context.Sessions
+                .AsNoTracking()
                 .Single(e => e.Title == "Hidden gems in .NET Core 3");
 
             Assert.Equal(21, pinkySessions.Count);
@@ -132,8 +132,8 @@ public abstract partial class ConferencePlannerTestBase<TFixture> : IClassFixtur
 
             Assert.Equal(
                 result.Sessions.Select(r => r.Id).OrderBy(i => i).ToList(),
-                context
-                    .Sessions.AsNoTracking()
+                context.Sessions
+                    .AsNoTracking()
                     .Where(s => s.SessionAttendees.Any(e => e.Attendee.UserName == "Pinks"))
                     .Select(s => s.Id)
                     .OrderBy(i => i)
@@ -158,8 +158,8 @@ public abstract partial class ConferencePlannerTestBase<TFixture> : IClassFixtur
         {
             var controller = new AttendeesController(context);
 
-            var session = context
-                .Sessions.AsNoTracking()
+            var session = context.Sessions
+                .AsNoTracking()
                 .Single(e => e.Title == "Hidden gems in .NET Core 3");
 
             var result = (string)await controller.AddSession("The Stig", session.Id);
@@ -173,8 +173,8 @@ public abstract partial class ConferencePlannerTestBase<TFixture> : IClassFixtur
         {
             var controller = new AttendeesController(context);
 
-            var beforeRemove = context
-                .Sessions.AsNoTracking()
+            var beforeRemove = context.Sessions
+                .AsNoTracking()
                 .Where(s => s.SessionAttendees.Any(e => e.Attendee.UserName == "Pinks"))
                 .OrderBy(e => e.Id)
                 .Select(e => e.Id)
@@ -187,8 +187,8 @@ public abstract partial class ConferencePlannerTestBase<TFixture> : IClassFixtur
 
             Assert.Equal("Success", result);
 
-            var afterRemove = context
-                .Sessions.AsNoTracking()
+            var afterRemove = context.Sessions
+                .AsNoTracking()
                 .Where(s => s.SessionAttendees.Any(e => e.Attendee.UserName == "Pinks"))
                 .OrderBy(e => e.Id)
                 .Select(e => e.Id)
@@ -216,8 +216,8 @@ public abstract partial class ConferencePlannerTestBase<TFixture> : IClassFixtur
         {
             var controller = new AttendeesController(context);
 
-            var session = context
-                .Sessions.AsNoTracking()
+            var session = context.Sessions
+                .AsNoTracking()
                 .Single(e => e.Title == "Hidden gems in .NET Core 3");
 
             var result = await controller.RemoveSession("The Stig", session.Id);
@@ -236,8 +236,8 @@ public abstract partial class ConferencePlannerTestBase<TFixture> : IClassFixtur
 
         public async Task<AttendeeResponse> Get(string username)
         {
-            var attendee = await _db
-                .Attendees.Include(a => a.SessionsAttendees)
+            var attendee = await _db.Attendees
+                .Include(a => a.SessionsAttendees)
                     .ThenInclude(sa => sa.Session)
                 .SingleOrDefaultAsync(a => a.UserName == username);
 
@@ -245,8 +245,8 @@ public abstract partial class ConferencePlannerTestBase<TFixture> : IClassFixtur
         }
 
         public async Task<List<SessionResponse>> GetSessions(string username) =>
-            await _db
-                .Sessions.AsNoTracking()
+            await _db.Sessions
+                .AsNoTracking()
                 .Include(s => s.Track)
                 .Include(s => s.SessionSpeakers)
                     .ThenInclude(ss => ss.Speaker)
@@ -256,8 +256,8 @@ public abstract partial class ConferencePlannerTestBase<TFixture> : IClassFixtur
 
         public async Task<AttendeeResponse> Post(Attendee input)
         {
-            var existingAttendee = await _db
-                .Attendees.Where(a => a.UserName == input.UserName)
+            var existingAttendee = await _db.Attendees
+                .Where(a => a.UserName == input.UserName)
                 .FirstOrDefaultAsync();
 
             if (existingAttendee != null)
@@ -281,8 +281,8 @@ public abstract partial class ConferencePlannerTestBase<TFixture> : IClassFixtur
 
         public async Task<object> AddSession(string username, int sessionId)
         {
-            var attendee = await _db
-                .Attendees.Include(a => a.SessionsAttendees)
+            var attendee = await _db.Attendees
+                .Include(a => a.SessionsAttendees)
                     .ThenInclude(sa => sa.Session)
                 .SingleOrDefaultAsync(a => a.UserName == username);
 
@@ -298,9 +298,8 @@ public abstract partial class ConferencePlannerTestBase<TFixture> : IClassFixtur
                 return "No session";
             }
 
-            attendee.SessionsAttendees.Add(
-                new SessionAttendee { AttendeeId = attendee.Id, SessionId = sessionId }
-            );
+            attendee.SessionsAttendees
+                .Add(new SessionAttendee { AttendeeId = attendee.Id, SessionId = sessionId });
 
             await _db.SaveChangesAsync();
 
@@ -309,8 +308,8 @@ public abstract partial class ConferencePlannerTestBase<TFixture> : IClassFixtur
 
         public async Task<string> RemoveSession(string username, int sessionId)
         {
-            var attendee = await _db
-                .Attendees.Include(a => a.SessionsAttendees)
+            var attendee = await _db.Attendees
+                .Include(a => a.SessionsAttendees)
                 .SingleOrDefaultAsync(a => a.UserName == username);
 
             if (attendee == null)
@@ -325,9 +324,8 @@ public abstract partial class ConferencePlannerTestBase<TFixture> : IClassFixtur
                 return "No session";
             }
 
-            var sessionAttendee = attendee.SessionsAttendees.FirstOrDefault(sa =>
-                sa.SessionId == sessionId
-            );
+            var sessionAttendee = attendee.SessionsAttendees
+                .FirstOrDefault(sa => sa.SessionId == sessionId);
             attendee.SessionsAttendees.Remove(sessionAttendee);
 
             await _db.SaveChangesAsync();
@@ -385,15 +383,15 @@ public abstract partial class ConferencePlannerTestBase<TFixture> : IClassFixtur
         public async Task<List<SearchResult>> Search(SearchTerm term)
         {
             var query = term.Query;
-            var sessionResults = await _db
-                .Sessions.Include(s => s.Track)
+            var sessionResults = await _db.Sessions
+                .Include(s => s.Track)
                 .Include(s => s.SessionSpeakers)
                     .ThenInclude(ss => ss.Speaker)
                 .Where(s => s.Title.Contains(query) || s.Track.Name.Contains(query))
                 .ToListAsync();
 
-            var speakerResults = await _db
-                .Speakers.Include(s => s.SessionSpeakers)
+            var speakerResults = await _db.Speakers
+                .Include(s => s.SessionSpeakers)
                     .ThenInclude(ss => ss.Session)
                 .Where(s =>
                     s.Name.Contains(query) || s.Bio.Contains(query) || s.WebSite.Contains(query)
@@ -437,8 +435,8 @@ public abstract partial class ConferencePlannerTestBase<TFixture> : IClassFixtur
     public virtual async Task SessionsController_Get_with_ID() =>
         await ExecuteWithStrategyInTransactionAsync(async context =>
         {
-            var session = context
-                .Sessions.AsNoTracking()
+            var session = context.Sessions
+                .AsNoTracking()
                 .Single(e => e.Title.StartsWith("C# and Rust: combining "));
 
             var controller = new SessionsController(context);
@@ -492,8 +490,8 @@ public abstract partial class ConferencePlannerTestBase<TFixture> : IClassFixtur
     public virtual async Task SessionsController_Put() =>
         await ExecuteWithStrategyInTransactionAsync(async context =>
         {
-            var session = context
-                .Sessions.AsNoTracking()
+            var session = context.Sessions
+                .AsNoTracking()
                 .Single(e => e.Title.StartsWith("C# and Rust: combining "));
 
             var controller = new SessionsController(context);
@@ -534,8 +532,8 @@ public abstract partial class ConferencePlannerTestBase<TFixture> : IClassFixtur
     public virtual async Task SessionsController_Delete() =>
         await ExecuteWithStrategyInTransactionAsync(async context =>
         {
-            var session = context
-                .Sessions.AsNoTracking()
+            var session = context.Sessions
+                .AsNoTracking()
                 .Single(e => e.Title.StartsWith("C# and Rust: combining "));
 
             var controller = new SessionsController(context);
@@ -570,8 +568,8 @@ public abstract partial class ConferencePlannerTestBase<TFixture> : IClassFixtur
         }
 
         public async Task<List<SessionResponse>> Get() =>
-            await _db
-                .Sessions.AsNoTracking()
+            await _db.Sessions
+                .AsNoTracking()
                 .Include(s => s.Track)
                 .Include(s => s.SessionSpeakers)
                     .ThenInclude(ss => ss.Speaker)
@@ -580,8 +578,8 @@ public abstract partial class ConferencePlannerTestBase<TFixture> : IClassFixtur
 
         public async Task<SessionResponse> Get(int id)
         {
-            var session = await _db
-                .Sessions.AsNoTracking()
+            var session = await _db.Sessions
+                .AsNoTracking()
                 .Include(s => s.Track)
                 .Include(s => s.SessionSpeakers)
                     .ThenInclude(ss => ss.Speaker)
@@ -693,8 +691,8 @@ public abstract partial class ConferencePlannerTestBase<TFixture> : IClassFixtur
         }
 
         public async Task<List<SpeakerResponse>> GetSpeakers() =>
-            await _db
-                .Speakers.AsNoTracking()
+            await _db.Speakers
+                .AsNoTracking()
                 .Include(s => s.SessionSpeakers)
                     .ThenInclude(ss => ss.Session)
                 .Select(s => s.MapSpeakerResponse())
@@ -702,8 +700,8 @@ public abstract partial class ConferencePlannerTestBase<TFixture> : IClassFixtur
 
         public async Task<SpeakerResponse> GetSpeaker(int id)
         {
-            var speaker = await _db
-                .Speakers.AsNoTracking()
+            var speaker = await _db.Speakers
+                .AsNoTracking()
                 .Include(s => s.SessionSpeakers)
                     .ThenInclude(ss => ss.Session)
                 .SingleOrDefaultAsync(s => s.Id == id);

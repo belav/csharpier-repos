@@ -38,17 +38,18 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
                 .Returns(
                     delegate(ControllerContext cc, ExtensibleModelBindingContext mbc)
                     {
-                        mbc.Model = mbc
-                            .ValueProvider.GetValue(mbc.ModelName)
+                        mbc.Model = mbc.ValueProvider
+                            .GetValue(mbc.ModelName)
                             .ConvertTo(mbc.ModelType);
                         return true;
                     }
                 );
-            bindingContext.ModelBinderProviders.RegisterBinderForType(
-                typeof(int),
-                mockIntBinder.Object,
-                false /* suppressPrefixCheck */
-            );
+            bindingContext.ModelBinderProviders
+                .RegisterBinderForType(
+                    typeof(int),
+                    mockIntBinder.Object,
+                    false /* suppressPrefixCheck */
+                );
 
             // Act
             bool retVal = new ArrayModelBinder<int>().BindModel(controllerContext, bindingContext);

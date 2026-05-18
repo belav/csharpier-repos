@@ -24,9 +24,14 @@ namespace System.IdentityModel.Tokens
         {
             if (!IsDefined(value))
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidEnumArgumentException("value", (int)value, typeof(SecurityKeyUsage))
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidEnumArgumentException(
+                            "value",
+                            (int)value,
+                            typeof(SecurityKeyUsage)
+                        )
+                    );
             }
         }
     }

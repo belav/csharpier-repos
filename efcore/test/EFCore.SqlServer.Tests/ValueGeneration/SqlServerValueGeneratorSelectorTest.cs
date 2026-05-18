@@ -58,8 +58,8 @@ public class SqlServerValueGeneratorSelectorTest
         var model = builder.FinalizeModel();
         var entityType = model.FindEntityType(typeof(AnEntity));
 
-        var selector = SqlServerTestHelpers
-            .Instance.CreateContextServices(model)
+        var selector = SqlServerTestHelpers.Instance
+            .CreateContextServices(model)
             .GetRequiredService<IValueGeneratorSelector>();
 
         Assert.IsType<TExpected>(
@@ -79,8 +79,8 @@ public class SqlServerValueGeneratorSelectorTest
         var model = builder.FinalizeModel();
         var entityType = model.FindEntityType(typeof(AnEntity));
 
-        var selector = SqlServerTestHelpers
-            .Instance.CreateContextServices(model)
+        var selector = SqlServerTestHelpers.Instance
+            .CreateContextServices(model)
             .GetRequiredService<IValueGeneratorSelector>();
 
         Assert.IsType<TemporaryGuidValueGenerator>(
@@ -100,8 +100,8 @@ public class SqlServerValueGeneratorSelectorTest
         var model = builder.FinalizeModel();
         var entityType = model.FindEntityType(typeof(AnEntity));
 
-        var selector = SqlServerTestHelpers
-            .Instance.CreateContextServices(model)
+        var selector = SqlServerTestHelpers.Instance
+            .CreateContextServices(model)
             .GetRequiredService<IValueGeneratorSelector>();
 
         var generator = selector.Select(entityType.FindProperty("String"), entityType);
@@ -121,8 +121,8 @@ public class SqlServerValueGeneratorSelectorTest
         var model = builder.FinalizeModel();
         var entityType = model.FindEntityType(typeof(AnEntity));
 
-        var selector = SqlServerTestHelpers
-            .Instance.CreateContextServices(model)
+        var selector = SqlServerTestHelpers.Instance
+            .CreateContextServices(model)
             .GetRequiredService<IValueGeneratorSelector>();
 
         var generator = selector.Select(entityType.FindProperty("Binary"), entityType);
@@ -178,8 +178,8 @@ public class SqlServerValueGeneratorSelectorTest
         var model = builder.FinalizeModel();
         var entityType = model.FindEntityType(typeof(AnEntity));
 
-        var selector = InMemoryTestHelpers
-            .Instance.CreateContextServices(model)
+        var selector = InMemoryTestHelpers.Instance
+            .CreateContextServices(model)
             .GetRequiredService<IValueGeneratorSelector>();
 
         Assert.Equal(
@@ -204,8 +204,8 @@ public class SqlServerValueGeneratorSelectorTest
         var model = builder.UseHiLo().FinalizeModel();
         var entityType = model.FindEntityType(typeof(AnEntity));
 
-        var selector = SqlServerTestHelpers
-            .Instance.CreateContextServices(model)
+        var selector = SqlServerTestHelpers.Instance
+            .CreateContextServices(model)
             .GetRequiredService<IValueGeneratorSelector>();
 
         Assert.IsType<SqlServerSequenceHiLoValueGenerator<int>>(

@@ -79,11 +79,9 @@ namespace System.ServiceModel.Dispatcher
             )
                 return true;
 
-            bool path = CultureInfo.InvariantCulture.CompareInfo.IsPrefix(
-                to.AbsolutePath,
-                address.Uri.AbsolutePath,
-                CompareOptions.Ordinal
-            );
+            bool path = CultureInfo.InvariantCulture
+                .CompareInfo
+                .IsPrefix(to.AbsolutePath, address.Uri.AbsolutePath, CompareOptions.Ordinal);
             bool host = IncludeHostNameInComparison
                 ? (String.CompareOrdinal(to.Host, address.Uri.Host) == 0)
                 : true;

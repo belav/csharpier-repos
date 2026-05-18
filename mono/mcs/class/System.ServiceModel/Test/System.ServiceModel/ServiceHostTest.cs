@@ -154,20 +154,24 @@ namespace MonoTests.System.ServiceModel
         {
             ServiceHost host = new ServiceHost(typeof(Foo), new Uri("http://localhost/echo"));
             // same as above, but through Endpoints.Add()
-            host.Description.Endpoints.Add(
-                new ServiceEndpoint(
-                    ContractDescription.GetContract(typeof(Foo)),
-                    new BasicHttpBinding(),
-                    new EndpointAddress("http://localhost/echo/rel")
-                )
-            );
-            host.Description.Endpoints.Add(
-                new ServiceEndpoint(
-                    ContractDescription.GetContract(typeof(Foo)),
-                    new BasicHttpBinding(),
-                    new EndpointAddress("http://localhost/echo/rel")
-                )
-            );
+            host.Description
+                .Endpoints
+                .Add(
+                    new ServiceEndpoint(
+                        ContractDescription.GetContract(typeof(Foo)),
+                        new BasicHttpBinding(),
+                        new EndpointAddress("http://localhost/echo/rel")
+                    )
+                );
+            host.Description
+                .Endpoints
+                .Add(
+                    new ServiceEndpoint(
+                        ContractDescription.GetContract(typeof(Foo)),
+                        new BasicHttpBinding(),
+                        new EndpointAddress("http://localhost/echo/rel")
+                    )
+                );
 
             host.Open();
             host.Close(); // should not reach here. It is to make sure to close unexpectedly opened host.
@@ -178,20 +182,24 @@ namespace MonoTests.System.ServiceModel
         public void AddServiceEndpoint2_3()
         {
             ServiceHost host = new ServiceHost(typeof(HogeFuga), new Uri("http://localhost/echo"));
-            host.Description.Endpoints.Add(
-                new ServiceEndpoint(
-                    ContractDescription.GetContract(typeof(IHoge)),
-                    new BasicHttpBinding(),
-                    new EndpointAddress("http://localhost/echo")
-                )
-            );
-            host.Description.Endpoints.Add(
-                new ServiceEndpoint(
-                    ContractDescription.GetContract(typeof(IFuga)),
-                    new BasicHttpBinding(),
-                    new EndpointAddress("http://localhost/echo")
-                )
-            );
+            host.Description
+                .Endpoints
+                .Add(
+                    new ServiceEndpoint(
+                        ContractDescription.GetContract(typeof(IHoge)),
+                        new BasicHttpBinding(),
+                        new EndpointAddress("http://localhost/echo")
+                    )
+                );
+            host.Description
+                .Endpoints
+                .Add(
+                    new ServiceEndpoint(
+                        ContractDescription.GetContract(typeof(IFuga)),
+                        new BasicHttpBinding(),
+                        new EndpointAddress("http://localhost/echo")
+                    )
+                );
 
             // Different contracts unlike previous two cases.
             // If two or more endpoints are bound to the same listen
@@ -416,10 +424,8 @@ namespace MonoTests.System.ServiceModel
                 ChannelDispatcher cd = (ChannelDispatcher)host.ChannelDispatchers[0];
                 DispatchRuntime dr = cd.Endpoints[0].DispatchRuntime;
                 Assert.IsNotNull(dr.InstanceContextProvider, "#2");
-                InstanceContext ctx = dr.InstanceContextProvider.GetExistingInstanceContext(
-                    null,
-                    null
-                );
+                InstanceContext ctx = dr.InstanceContextProvider
+                    .GetExistingInstanceContext(null, null);
                 Assert.IsNotNull(ctx, "#3");
                 Assert.AreEqual(instance, ctx.GetServiceInstance(), "#4");
             }

@@ -156,8 +156,7 @@ namespace System.Data.Metadata.Edm
                         associationSet.ElementType.ReferentialConstraints.Count == 1,
                         "Expected exactly one constraint for FK"
                     );
-                    ReferentialConstraint constraint = associationSet
-                        .ElementType
+                    ReferentialConstraint constraint = associationSet.ElementType
                         .ReferentialConstraints[0];
                     if (
                         constraint.ToRole.GetEntityType().IsAssignableFrom(this.ElementType)

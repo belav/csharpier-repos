@@ -90,8 +90,9 @@ namespace System.ServiceModel.Activation
                 }
             }
 
-            ServiceDebugBehavior debugBehavior =
-                service.Description.Behaviors.Find<ServiceDebugBehavior>();
+            ServiceDebugBehavior debugBehavior = service.Description
+                .Behaviors
+                .Find<ServiceDebugBehavior>();
             if (debugBehavior != null)
             {
                 if (debugBehavior.HttpHelpPageEnabled)
@@ -104,8 +105,9 @@ namespace System.ServiceModel.Activation
                 }
             }
 
-            ServiceMetadataBehavior metadataBehavior =
-                service.Description.Behaviors.Find<ServiceMetadataBehavior>();
+            ServiceMetadataBehavior metadataBehavior = service.Description
+                .Behaviors
+                .Find<ServiceMetadataBehavior>();
             if (metadataBehavior != null)
             {
                 if (metadataBehavior.HttpGetEnabled)
@@ -123,11 +125,12 @@ namespace System.ServiceModel.Activation
         {
             if (uri != null && uri.IsAbsoluteUri)
             {
-                throw FxTrace.Exception.AsError(
-                    new InvalidOperationException(
-                        SR.Hosting_SharedEndpointRequiresRelativeEndpoint(uri.ToString())
-                    )
-                );
+                throw FxTrace.Exception
+                    .AsError(
+                        new InvalidOperationException(
+                            SR.Hosting_SharedEndpointRequiresRelativeEndpoint(uri.ToString())
+                        )
+                    );
             }
         }
 

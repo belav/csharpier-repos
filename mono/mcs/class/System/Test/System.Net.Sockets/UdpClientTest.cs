@@ -1086,23 +1086,24 @@ namespace MonoTests.System.Net.Sockets
             ManualResetEvent ready = new ManualResetEvent(false);
             bool got_exc = false;
 
-            Task receive_task = Task.Factory.StartNew(() =>
-            {
-                IPEndPoint ep = new IPEndPoint(IPAddress.Any, 0);
-                try
+            Task receive_task = Task.Factory
+                .StartNew(() =>
                 {
-                    ready.Set();
-                    client.Receive(ref ep);
-                }
-                catch (SocketException)
-                {
-                    got_exc = true;
-                }
-                finally
-                {
-                    client.Close();
-                }
-            });
+                    IPEndPoint ep = new IPEndPoint(IPAddress.Any, 0);
+                    try
+                    {
+                        ready.Set();
+                        client.Receive(ref ep);
+                    }
+                    catch (SocketException)
+                    {
+                        got_exc = true;
+                    }
+                    finally
+                    {
+                        client.Close();
+                    }
+                });
 
             ready.WaitOne(2000);
             Thread.Sleep(20);

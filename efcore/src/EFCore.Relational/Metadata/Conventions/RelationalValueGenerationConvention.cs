@@ -181,12 +181,10 @@ public class RelationalValueGenerationConvention
             return;
         }
 
-        var oldLink = entityTypeBuilder.Metadata.FindRowInternalForeignKeys(
-            StoreObjectIdentifier.Table(oldTable, oldSchema)
-        );
-        var newLink = entityTypeBuilder.Metadata.FindRowInternalForeignKeys(
-            StoreObjectIdentifier.Table(newTable, newSchema)
-        );
+        var oldLink = entityTypeBuilder.Metadata
+            .FindRowInternalForeignKeys(StoreObjectIdentifier.Table(oldTable, oldSchema));
+        var newLink = entityTypeBuilder.Metadata
+            .FindRowInternalForeignKeys(StoreObjectIdentifier.Table(newTable, newSchema));
 
         if (!oldLink.Any() && !newLink.Any())
         {

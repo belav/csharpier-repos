@@ -212,8 +212,10 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             if (node == null)
                 return document.GetRequiredSemanticModelAsync(cancellationToken);
 
-            var semanticModelService =
-                document.Project.Solution.Services.GetRequiredService<ISemanticModelReuseWorkspaceService>();
+            var semanticModelService = document.Project
+                .Solution
+                .Services
+                .GetRequiredService<ISemanticModelReuseWorkspaceService>();
 
             return semanticModelService.ReuseExistingSpeculativeModelAsync(
                 document,
@@ -322,9 +324,10 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             var syntaxTree = await document
                 .GetRequiredSyntaxTreeAsync(cancellationToken)
                 .ConfigureAwait(false);
-            return document.Project.AnalyzerOptions.AnalyzerConfigOptionsProvider.GetOptions(
-                syntaxTree
-            );
+            return document.Project
+                .AnalyzerOptions
+                .AnalyzerConfigOptionsProvider
+                .GetOptions(syntaxTree);
         }
 #endif
     }

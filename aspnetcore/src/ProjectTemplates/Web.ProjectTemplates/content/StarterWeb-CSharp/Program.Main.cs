@@ -46,18 +46,17 @@ public class Program
             ?? throw new InvalidOperationException(
                 "Connection string 'DefaultConnection' not found."
             );
-        builder.Services.AddDbContext<ApplicationDbContext>(options =>
+        builder.Services
+            .AddDbContext<ApplicationDbContext>(options =>
 #if (UseLocalDB)
-            options.UseSqlServer(connectionString)
-        );
+                options.UseSqlServer(connectionString));
 #else
-            options.UseSqlite(connectionString)
-        );
+                options.UseSqlite(connectionString));
 #endif
         builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
-        builder
-            .Services.AddDefaultIdentity<IdentityUser>(options =>
+        builder.Services
+            .AddDefaultIdentity<IdentityUser>(options =>
                 options.SignIn.RequireConfirmedAccount = true
             )
             .AddEntityFrameworkStores<ApplicationDbContext>();
@@ -66,8 +65,8 @@ public class Program
         var initialScopes = builder.Configuration["DownstreamApi:Scopes"]?.Split(' ');
 
 #endif
-        builder
-            .Services.AddAuthentication(OpenIdConnectDefaults.AuthenticationScheme)
+        builder.Services
+            .AddAuthentication(OpenIdConnectDefaults.AuthenticationScheme)
 #if (GenerateApiOrGraph)
             .AddMicrosoftIdentityWebApp(builder.Configuration.GetSection("AzureAd"))
             .EnableTokenAcquisitionToCallDownstreamApi(initialScopes)
@@ -86,8 +85,8 @@ public class Program
         var initialScopes = builder.Configuration["DownstreamApi:Scopes"]?.Split(' ');
 
 #endif
-        builder
-            .Services.AddAuthentication(OpenIdConnectDefaults.AuthenticationScheme)
+        builder.Services
+            .AddAuthentication(OpenIdConnectDefaults.AuthenticationScheme)
 #if (GenerateApi)
             .AddMicrosoftIdentityWebApp(builder.Configuration.GetSection("AzureAdB2C"))
             .EnableTokenAcquisitionToCallDownstreamApi(initialScopes)
@@ -99,11 +98,12 @@ public class Program
 #endif
 #if (OrganizationalAuth)
 
-        builder.Services.AddControllersWithViews(options =>
-        {
-            var policy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
-            options.Filters.Add(new AuthorizeFilter(policy));
-        });
+        builder.Services
+            .AddControllersWithViews(options =>
+            {
+                var policy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
+                options.Filters.Add(new AuthorizeFilter(policy));
+            });
 #else
         builder.Services.AddControllersWithViews();
 #endif
@@ -114,11 +114,12 @@ public class Program
 
         builder.Services.AddAuthentication(NegotiateDefaults.AuthenticationScheme).AddNegotiate();
 
-        builder.Services.AddAuthorization(options =>
-        {
-            // By default, all incoming requests will be authorized according to the default policy.
-            options.FallbackPolicy = options.DefaultPolicy;
-        });
+        builder.Services
+            .AddAuthorization(options =>
+            {
+                // By default, all incoming requests will be authorized according to the default policy.
+                options.FallbackPolicy = options.DefaultPolicy;
+            });
         builder.Services.AddRazorPages();
 #endif
 

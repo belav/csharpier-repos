@@ -499,10 +499,8 @@ namespace System.Web.UI.DataVisualization.Charting
                     for (int seriesIndex = 1; seriesIndex < series.Length; seriesIndex++)
                     {
                         series[seriesIndex]
-                            .Points.Insert(
-                                toIndex,
-                                series[seriesIndex].Points[toIndex + fromIndex]
-                            );
+                            .Points
+                            .Insert(toIndex, series[seriesIndex].Points[toIndex + fromIndex]);
                     }
 
                     // Increase move point to index
@@ -1080,13 +1078,14 @@ namespace System.Web.UI.DataVisualization.Charting
                         }
                         else
                         {
-                            seriesTable.Columns.Add(
-                                "Y"
-                                    + (yIndex + 1).ToString(
-                                        System.Globalization.CultureInfo.InvariantCulture
-                                    ),
-                                columnType
-                            );
+                            seriesTable.Columns
+                                .Add(
+                                    "Y"
+                                        + (yIndex + 1).ToString(
+                                            System.Globalization.CultureInfo.InvariantCulture
+                                        ),
+                                    columnType
+                                );
                         }
                     }
 
@@ -1476,7 +1475,8 @@ namespace System.Web.UI.DataVisualization.Charting
                         {
                             // Copy point into the output series for all series
                             output[seriesIndex]
-                                .Points.Add(inputSeries[seriesIndex].Points[pointIndex].Clone());
+                                .Points
+                                .Add(inputSeries[seriesIndex].Points[pointIndex].Clone());
                         }
                     }
 

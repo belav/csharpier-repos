@@ -87,10 +87,8 @@ namespace System.ServiceModel.Discovery
             }
             if (startAnnouncements)
             {
-                this.announceOnlineAsyncResult.Start(
-                    this.asyncOpenTimeoutHelper.RemainingTime(),
-                    false
-                );
+                this.announceOnlineAsyncResult
+                    .Start(this.asyncOpenTimeoutHelper.RemainingTime(), false);
             }
         }
 
@@ -144,10 +142,8 @@ namespace System.ServiceModel.Discovery
             }
             else if (startAnnouncements)
             {
-                this.announceOnlineAsyncResult.Start(
-                    this.asyncOpenTimeoutHelper.RemainingTime(),
-                    true
-                );
+                this.announceOnlineAsyncResult
+                    .Start(this.asyncOpenTimeoutHelper.RemainingTime(), true);
             }
             return this.announceOnlineAsyncResult;
         }

@@ -20,8 +20,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                 ushort SyntaxKind,
                 Guid projectId
             )> RudeEdits = telemetry._rudeEdits.AsImmutable();
-            public readonly ImmutableArray<string> EmitErrorIds =
-                telemetry._emitErrorIds.AsImmutable();
+            public readonly ImmutableArray<string> EmitErrorIds = telemetry._emitErrorIds
+                .AsImmutable();
             public readonly ImmutableArray<Guid> ProjectsWithValidDelta =
                 telemetry._projectsWithValidDelta.AsImmutable();
             public readonly EditAndContinueCapabilities Capabilities = telemetry._capabilities;

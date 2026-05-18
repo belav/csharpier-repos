@@ -93,10 +93,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.MoveStaticMembe
                     typeName,
                     language == LanguageNames.CSharp ? ".cs" : ".vb"
                 );
-                var selectedMembers =
-                    viewModel.MemberSelectionViewModel.CheckedMembers.SelectAsArray(vm =>
-                        vm.Symbol
-                    );
+                var selectedMembers = viewModel.MemberSelectionViewModel
+                    .CheckedMembers
+                    .SelectAsArray(vm => vm.Symbol);
 
                 if (viewModel.DestinationName.IsNew)
                 {
@@ -152,8 +151,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.MoveStaticMembe
                 cancellationTokenSource.Token
             );
 
-            var existingTypes = selectedType
-                .ContainingNamespace.GetAllTypes(cancellationTokenSource.Token)
+            var existingTypes = selectedType.ContainingNamespace
+                .GetAllTypes(cancellationTokenSource.Token)
                 .ToImmutableArray();
             var existingTypeNames = existingTypes.SelectAsArray(t => t.ToDisplayString());
             var candidateName = selectedType.Name + "Helpers";
@@ -230,8 +229,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.MoveStaticMembe
                 {
                     // for partially declared classes, we may want multiple entries for a single type.
                     // filter to those actually in a real file, and that is not our current location.
-                    return t
-                        .Locations.Where(l =>
+                    return t.Locations
+                        .Where(l =>
                             l.IsInSource
                             && (
                                 currentType.Name != t.Name || GetFile(l) != currentDocument.FilePath

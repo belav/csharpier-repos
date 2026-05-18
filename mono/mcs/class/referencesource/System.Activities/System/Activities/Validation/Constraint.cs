@@ -50,11 +50,12 @@ namespace System.Activities.Validation
 
             if (validationErrorList == null)
             {
-                throw FxTrace.Exception.AsError(
-                    new InvalidOperationException(
-                        SR.AddValidationErrorMustBeCalledFromConstraint(typeof(Constraint).Name)
-                    )
-                );
+                throw FxTrace.Exception
+                    .AsError(
+                        new InvalidOperationException(
+                            SR.AddValidationErrorMustBeCalledFromConstraint(typeof(Constraint).Name)
+                        )
+                    );
             }
 
             validationErrorList.Add(error);
@@ -75,25 +76,30 @@ namespace System.Activities.Validation
         protected override void Execute(NativeActivityContext context)
         {
             object objectToValidate = this.toValidate.Get<object>(context);
-            ValidationContext objectToValidateContext =
-                this.toValidateContext.Get<ValidationContext>(context);
+            ValidationContext objectToValidateContext = this.toValidateContext
+                .Get<ValidationContext>(context);
 
             if (objectToValidate == null)
             {
-                throw FxTrace.Exception.AsError(
-                    new InvalidOperationException(
-                        SR.CannotValidateNullObject(typeof(Constraint).Name, this.DisplayName)
-                    )
-                );
+                throw FxTrace.Exception
+                    .AsError(
+                        new InvalidOperationException(
+                            SR.CannotValidateNullObject(typeof(Constraint).Name, this.DisplayName)
+                        )
+                    );
             }
 
             if (objectToValidateContext == null)
             {
-                throw FxTrace.Exception.AsError(
-                    new InvalidOperationException(
-                        SR.ValidationContextCannotBeNull(typeof(Constraint).Name, this.DisplayName)
-                    )
-                );
+                throw FxTrace.Exception
+                    .AsError(
+                        new InvalidOperationException(
+                            SR.ValidationContextCannotBeNull(
+                                typeof(Constraint).Name,
+                                this.DisplayName
+                            )
+                        )
+                    );
             }
 
             List<ValidationError> validationErrorList = new List<ValidationError>(1);

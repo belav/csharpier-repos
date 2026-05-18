@@ -31,11 +31,10 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.FindUsages
         )
         {
             return new FSharpDefinitionItem(
-                Microsoft.CodeAnalysis.FindUsages.DefinitionItem.Create(
-                    tags,
-                    displayParts,
-                    sourceSpan.ToRoslynDocumentSpan()
-                )
+                Microsoft.CodeAnalysis
+                    .FindUsages
+                    .DefinitionItem
+                    .Create(tags, displayParts, sourceSpan.ToRoslynDocumentSpan())
             );
         }
 
@@ -46,11 +45,10 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.FindUsages
         )
         {
             return new FSharpDefinitionItem(
-                Microsoft.CodeAnalysis.FindUsages.DefinitionItem.CreateNonNavigableItem(
-                    tags,
-                    displayParts,
-                    originationParts
-                )
+                Microsoft.CodeAnalysis
+                    .FindUsages
+                    .DefinitionItem
+                    .CreateNonNavigableItem(tags, displayParts, originationParts)
             );
         }
     }

@@ -37,9 +37,8 @@ namespace System.ServiceModel.Security
         {
             if (requestSecurityToken == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                    "requestSecurityToken"
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperArgumentNull("requestSecurityToken");
             }
 
             if (serializer == null)
@@ -49,9 +48,8 @@ namespace System.ServiceModel.Security
 
             if (serializationContext == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                    "serializationContext"
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperArgumentNull("serializationContext");
             }
 
             _requestSecurityToken = requestSecurityToken;

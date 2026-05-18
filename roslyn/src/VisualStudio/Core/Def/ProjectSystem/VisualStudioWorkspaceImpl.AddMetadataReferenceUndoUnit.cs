@@ -33,16 +33,16 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
                 var fromProject = currentSolution.GetProject(FromProjectId);
                 if (fromProject != null)
                 {
-                    var reference = fromProject
-                        .MetadataReferences.OfType<PortableExecutableReference>()
+                    var reference = fromProject.MetadataReferences
+                        .OfType<PortableExecutableReference>()
                         .FirstOrDefault(p =>
                             StringComparer.OrdinalIgnoreCase.Equals(p.FilePath, _filePath)
                         );
 
                     if (reference == null)
                     {
-                        var documentationProvider =
-                            Workspace.Services.GetRequiredService<IDocumentationProviderService>();
+                        var documentationProvider = Workspace.Services
+                            .GetRequiredService<IDocumentationProviderService>();
                         try
                         {
                             reference = MetadataReference.CreateFromFile(

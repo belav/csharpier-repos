@@ -1506,8 +1506,8 @@ class C
         )
         {
             return (AbstractCommentSelectionBase<ValueTuple>)
-                workspace
-                    .ExportProvider.GetExportedValues<ICommandHandler>()
+                workspace.ExportProvider
+                    .GetExportedValues<ICommandHandler>()
                     .First(export =>
                         typeof(ToggleBlockCommentCommandHandler).Equals(export.GetType())
                     );

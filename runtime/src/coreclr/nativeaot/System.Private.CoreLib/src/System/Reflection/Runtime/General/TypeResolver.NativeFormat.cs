@@ -96,11 +96,8 @@ namespace System.Reflection.Runtime.General
                     int rank = sig.Rank;
                     if (rank <= 0)
                         throw new BadImageFormatException(); // Bad rank.
-                    RuntimeTypeInfo? elementType = sig.ElementType.TryResolve(
-                        reader,
-                        typeContext,
-                        ref exception
-                    );
+                    RuntimeTypeInfo? elementType = sig.ElementType
+                        .TryResolve(reader, typeContext, ref exception);
                     if (elementType == null)
                         return null;
                     return elementType.GetMultiDimArrayType(rank);
@@ -111,11 +108,8 @@ namespace System.Reflection.Runtime.General
                     ByReferenceSignature sig = typeHandle
                         .ToByReferenceSignatureHandle(reader)
                         .GetByReferenceSignature(reader);
-                    RuntimeTypeInfo? targetType = sig.Type.TryResolve(
-                        reader,
-                        typeContext,
-                        ref exception
-                    );
+                    RuntimeTypeInfo? targetType = sig.Type
+                        .TryResolve(reader, typeContext, ref exception);
                     if (targetType == null)
                         return null;
                     return targetType.GetByRefType();
@@ -134,11 +128,8 @@ namespace System.Reflection.Runtime.General
                     PointerSignature sig = typeHandle
                         .ToPointerSignatureHandle(reader)
                         .GetPointerSignature(reader);
-                    RuntimeTypeInfo? targetType = sig.Type.TryResolve(
-                        reader,
-                        typeContext,
-                        ref exception
-                    );
+                    RuntimeTypeInfo? targetType = sig.Type
+                        .TryResolve(reader, typeContext, ref exception);
                     if (targetType == null)
                         return null;
                     return targetType.GetPointerType();
@@ -150,11 +141,8 @@ namespace System.Reflection.Runtime.General
                         .ToFunctionPointerSignatureHandle(reader)
                         .GetFunctionPointerSignature(reader);
                     MethodSignature methodSig = sig.Signature.GetMethodSignature(reader);
-                    RuntimeTypeInfo? returnType = methodSig.ReturnType.TryResolve(
-                        reader,
-                        typeContext,
-                        ref exception
-                    );
+                    RuntimeTypeInfo? returnType = methodSig.ReturnType
+                        .TryResolve(reader, typeContext, ref exception);
                     if (returnType == null)
                         return null;
                     var parameterTypes = new RuntimeTypeInfo[methodSig.Parameters.Count];
@@ -173,8 +161,7 @@ namespace System.Reflection.Runtime.General
                     bool isUnmanaged =
                         (
                             methodSig.CallingConvention
-                            & Internal
-                                .Metadata
+                            & Internal.Metadata
                                 .NativeFormat
                                 .SignatureCallingConvention
                                 .UnmanagedCallingConventionMask
@@ -191,11 +178,8 @@ namespace System.Reflection.Runtime.General
                     SZArraySignature sig = typeHandle
                         .ToSZArraySignatureHandle(reader)
                         .GetSZArraySignature(reader);
-                    RuntimeTypeInfo? elementType = sig.ElementType.TryResolve(
-                        reader,
-                        typeContext,
-                        ref exception
-                    );
+                    RuntimeTypeInfo? elementType = sig.ElementType
+                        .TryResolve(reader, typeContext, ref exception);
                     if (elementType == null)
                         return null;
                     return elementType.GetArrayType();
@@ -211,11 +195,8 @@ namespace System.Reflection.Runtime.General
                     TypeInstantiationSignature sig = typeHandle
                         .ToTypeInstantiationSignatureHandle(reader)
                         .GetTypeInstantiationSignature(reader);
-                    RuntimeTypeInfo? genericTypeDefinition = sig.GenericType.TryResolve(
-                        reader,
-                        typeContext,
-                        ref exception
-                    );
+                    RuntimeTypeInfo? genericTypeDefinition = sig.GenericType
+                        .TryResolve(reader, typeContext, ref exception);
                     if (genericTypeDefinition == null)
                         return null;
                     LowLevelList<RuntimeTypeInfo> genericTypeArguments =

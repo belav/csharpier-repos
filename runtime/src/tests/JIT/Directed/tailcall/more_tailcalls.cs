@@ -513,15 +513,16 @@ public class Program
         IL.Push(acc);
         IL.Push(s_calcStaticCalliOther);
         IL.Emit.Tail();
-        IL.Emit.Calli(
-            new StandAloneMethodSig(
-                CallingConventions.Standard,
-                typeof(int),
-                typeof(int),
-                typeof(S32),
-                typeof(int)
-            )
-        );
+        IL.Emit
+            .Calli(
+                new StandAloneMethodSig(
+                    CallingConventions.Standard,
+                    typeof(int),
+                    typeof(int),
+                    typeof(S32),
+                    typeof(int)
+                )
+            );
         return IL.Return<int>();
     }
 
@@ -534,14 +535,15 @@ public class Program
         IL.Push(acc);
         IL.Push(s_calcStaticCalli);
         IL.Emit.Tail();
-        IL.Emit.Calli(
-            new StandAloneMethodSig(
-                CallingConventions.Standard,
-                typeof(int),
-                typeof(int),
-                typeof(int)
-            )
-        );
+        IL.Emit
+            .Calli(
+                new StandAloneMethodSig(
+                    CallingConventions.Standard,
+                    typeof(int),
+                    typeof(int),
+                    typeof(int)
+                )
+            );
         return IL.Return<int>();
     }
 
@@ -568,12 +570,13 @@ public class Program
         IL.Push(ref s16);
         IL.Push(s_instanceMethodOnValueType);
         IL.Emit.Tail();
-        IL.Emit.Calli(
-            new StandAloneMethodSig(
-                CallingConventions.Standard | CallingConventions.HasThis,
-                typeof(string)
-            )
-        );
+        IL.Emit
+            .Calli(
+                new StandAloneMethodSig(
+                    CallingConventions.Standard | CallingConventions.HasThis,
+                    typeof(string)
+                )
+            );
         return IL.Return<string>();
     }
 
@@ -588,15 +591,16 @@ public class Program
         IL.Push(ref s16);
         IL.Push(s_instanceMethodOnValueType);
         IL.Emit.Tail();
-        IL.Emit.Calli(
-            new StandAloneMethodSig(
-                CallingConventions.Standard
-                    | CallingConventions.HasThis
-                    | CallingConventions.ExplicitThis,
-                typeof(string),
-                typeof(S16).MakeByRefType()
-            )
-        );
+        IL.Emit
+            .Calli(
+                new StandAloneMethodSig(
+                    CallingConventions.Standard
+                        | CallingConventions.HasThis
+                        | CallingConventions.ExplicitThis,
+                    typeof(string),
+                    typeof(S16).MakeByRefType()
+                )
+            );
         return IL.Return<string>();
     }
 
@@ -626,15 +630,16 @@ public class Program
         IL.Push(acc);
         IL.Push(s_calcStaticCalliRetbufOther);
         IL.Emit.Tail();
-        IL.Emit.Calli(
-            new StandAloneMethodSig(
-                CallingConventions.Standard,
-                typeof(S32),
-                typeof(int),
-                typeof(S32),
-                typeof(int)
-            )
-        );
+        IL.Emit
+            .Calli(
+                new StandAloneMethodSig(
+                    CallingConventions.Standard,
+                    typeof(S32),
+                    typeof(int),
+                    typeof(S32),
+                    typeof(int)
+                )
+            );
         return IL.Return<S32>();
     }
 
@@ -647,14 +652,15 @@ public class Program
         IL.Push(acc);
         IL.Push(s_calcStaticCalliRetbuf);
         IL.Emit.Tail();
-        IL.Emit.Calli(
-            new StandAloneMethodSig(
-                CallingConventions.Standard,
-                typeof(S32),
-                typeof(int),
-                typeof(int)
-            )
-        );
+        IL.Emit
+            .Calli(
+                new StandAloneMethodSig(
+                    CallingConventions.Standard,
+                    typeof(S32),
+                    typeof(int),
+                    typeof(int)
+                )
+            );
         return IL.Return<S32>();
     }
 
@@ -764,12 +770,13 @@ public class Program
         IL.Push(x);
         IL.Push(y);
         IL.Emit.Tail();
-        IL.Emit.Call(
-            new MethodRef(typeof(Program), nameof(GenName2)).MakeGenericMethod(
-                typeof(T1),
-                typeof(T2)
-            )
-        );
+        IL.Emit
+            .Call(
+                new MethodRef(typeof(Program), nameof(GenName2)).MakeGenericMethod(
+                    typeof(T1),
+                    typeof(T2)
+                )
+            );
         return IL.Return<string>();
     }
 
@@ -781,12 +788,13 @@ public class Program
         IL.Push(x);
         IL.Push(y);
         IL.Emit.Tail();
-        IL.Emit.Call(
-            new MethodRef(typeof(Program), nameof(GenName2)).MakeGenericMethod(
-                typeof(T),
-                typeof(string)
-            )
-        );
+        IL.Emit
+            .Call(
+                new MethodRef(typeof(Program), nameof(GenName2)).MakeGenericMethod(
+                    typeof(T),
+                    typeof(string)
+                )
+            );
         return IL.Return<string>();
     }
 
@@ -798,12 +806,13 @@ public class Program
         IL.Push(x);
         IL.Push(y);
         IL.Emit.Tail();
-        IL.Emit.Call(
-            new MethodRef(typeof(Program), nameof(GenName2)).MakeGenericMethod(
-                typeof(object),
-                typeof(string)
-            )
-        );
+        IL.Emit
+            .Call(
+                new MethodRef(typeof(Program), nameof(GenName2)).MakeGenericMethod(
+                    typeof(object),
+                    typeof(string)
+                )
+            );
         return IL.Return<string>();
     }
 
@@ -827,12 +836,13 @@ public class Program
         IL.Push(c);
         IL.Push(d);
         IL.Emit.Tail();
-        IL.Emit.Callvirt(
-            new MethodRef(
-                typeof(IGenInterface<T1, T2>),
-                nameof(IGenInterface<T1, T2>.F)
-            ).MakeGenericMethod(typeof(T3), typeof(T4))
-        );
+        IL.Emit
+            .Callvirt(
+                new MethodRef(
+                    typeof(IGenInterface<T1, T2>),
+                    nameof(IGenInterface<T1, T2>.F)
+                ).MakeGenericMethod(typeof(T3), typeof(T4))
+            );
         return IL.Return<string>();
     }
 
@@ -844,9 +854,10 @@ public class Program
         IL.Push(a);
         IL.Push(b);
         IL.Emit.Tail();
-        IL.Emit.Callvirt(
-            new MethodRef(typeof(IGenInterface<T1, T2>), nameof(IGenInterface<T1, T2>.G))
-        );
+        IL.Emit
+            .Callvirt(
+                new MethodRef(typeof(IGenInterface<T1, T2>), nameof(IGenInterface<T1, T2>.G))
+            );
         return IL.Return<string>();
     }
 
@@ -866,12 +877,13 @@ public class Program
         IL.Push(c);
         IL.Push(d);
         IL.Emit.Tail();
-        IL.Emit.Callvirt(
-            new MethodRef(
-                typeof(IGenInterface<string, object>),
-                nameof(IGenInterface<string, object>.F)
-            ).MakeGenericMethod(typeof(int), typeof(object))
-        );
+        IL.Emit
+            .Callvirt(
+                new MethodRef(
+                    typeof(IGenInterface<string, object>),
+                    nameof(IGenInterface<string, object>.F)
+                ).MakeGenericMethod(typeof(int), typeof(object))
+            );
         return IL.Return<string>();
     }
 
@@ -887,12 +899,13 @@ public class Program
         IL.Push(a);
         IL.Push(b);
         IL.Emit.Tail();
-        IL.Emit.Callvirt(
-            new MethodRef(
-                typeof(IGenInterface<string, object>),
-                nameof(IGenInterface<string, object>.G)
-            )
-        );
+        IL.Emit
+            .Callvirt(
+                new MethodRef(
+                    typeof(IGenInterface<string, object>),
+                    nameof(IGenInterface<string, object>.G)
+                )
+            );
         return IL.Return<string>();
     }
 
@@ -901,12 +914,13 @@ public class Program
     {
         IL.Push(ga);
         IL.Emit.Tail();
-        IL.Emit.Callvirt(
-            new MethodRef(
-                typeof(GenAbstract<string>),
-                nameof(GenAbstract<string>.F)
-            ).MakeGenericMethod(typeof(object))
-        );
+        IL.Emit
+            .Callvirt(
+                new MethodRef(
+                    typeof(GenAbstract<string>),
+                    nameof(GenAbstract<string>.F)
+                ).MakeGenericMethod(typeof(object))
+            );
         return IL.Return<string>();
     }
 
@@ -924,11 +938,13 @@ public class Program
     {
         IL.Push(ga);
         IL.Emit.Tail();
-        IL.Emit.Callvirt(
-            new MethodRef(typeof(GenAbstract<int>), nameof(GenAbstract<int>.F)).MakeGenericMethod(
-                typeof(object)
-            )
-        );
+        IL.Emit
+            .Callvirt(
+                new MethodRef(
+                    typeof(GenAbstract<int>),
+                    nameof(GenAbstract<int>.F)
+                ).MakeGenericMethod(typeof(object))
+            );
         return IL.Return<string>();
     }
 
@@ -957,11 +973,12 @@ public class Program
         IL.Emit.Ldarg(nameof(d));
         IL.Push(r + d[99]);
         IL.Emit.Tail();
-        IL.Emit.Call(
-            new MethodRef(typeof(Program), nameof(InstantiatingStub1Other)).MakeGenericMethod(
-                typeof(T)
-            )
-        );
+        IL.Emit
+            .Call(
+                new MethodRef(typeof(Program), nameof(InstantiatingStub1Other)).MakeGenericMethod(
+                    typeof(T)
+                )
+            );
         return IL.Return<int>();
     }
 
@@ -990,11 +1007,12 @@ public class Program
             IL.Push(c0);
             IL.Emit.Ldarg(nameof(d));
             IL.Emit.Tail();
-            IL.Emit.Call(
-                new MethodRef(typeof(Program), nameof(InstantiatingStub1)).MakeGenericMethod(
-                    typeof(T)
-                )
-            );
+            IL.Emit
+                .Call(
+                    new MethodRef(typeof(Program), nameof(InstantiatingStub1)).MakeGenericMethod(
+                        typeof(T)
+                    )
+                );
             return IL.Return<int>();
         }
     }
@@ -1035,19 +1053,21 @@ public class Program
         IL.Emit.Pop();
         GenericInstanceFactory fact = new GenericInstanceFactory();
         IL.Push(fact);
-        IL.Emit.Call(
-            new MethodRef(
-                typeof(GenericInstanceFactory),
-                nameof(GenericInstanceFactory.CreateInstance)
-            )
-        );
+        IL.Emit
+            .Call(
+                new MethodRef(
+                    typeof(GenericInstanceFactory),
+                    nameof(GenericInstanceFactory.CreateInstance)
+                )
+            );
         IL.Emit.Tail();
-        IL.Emit.Callvirt(
-            new MethodRef(
-                typeof(GenericInstance<string>),
-                nameof(GenericInstance<string>.NumberOfInstances)
-            )
-        );
+        IL.Emit
+            .Callvirt(
+                new MethodRef(
+                    typeof(GenericInstance<string>),
+                    nameof(GenericInstance<string>.NumberOfInstances)
+                )
+            );
         return IL.Return<int>();
     }
 }
@@ -1170,15 +1190,16 @@ class Instance
         IL.Push(acc);
         IL.Push(s_calcInstanceCalliOther);
         IL.Emit.Tail();
-        IL.Emit.Calli(
-            new StandAloneMethodSig(
-                CallingConventions.Standard | CallingConventions.HasThis,
-                typeof(int),
-                typeof(int),
-                typeof(S32),
-                typeof(int)
-            )
-        );
+        IL.Emit
+            .Calli(
+                new StandAloneMethodSig(
+                    CallingConventions.Standard | CallingConventions.HasThis,
+                    typeof(int),
+                    typeof(int),
+                    typeof(S32),
+                    typeof(int)
+                )
+            );
         return IL.Return<int>();
     }
 
@@ -1192,14 +1213,15 @@ class Instance
         IL.Push(acc);
         IL.Push(s_calcInstanceCalli);
         IL.Emit.Tail();
-        IL.Emit.Calli(
-            new StandAloneMethodSig(
-                CallingConventions.Standard | CallingConventions.HasThis,
-                typeof(int),
-                typeof(int),
-                typeof(int)
-            )
-        );
+        IL.Emit
+            .Calli(
+                new StandAloneMethodSig(
+                    CallingConventions.Standard | CallingConventions.HasThis,
+                    typeof(int),
+                    typeof(int),
+                    typeof(int)
+                )
+            );
         return IL.Return<int>();
     }
 
@@ -1227,15 +1249,16 @@ class Instance
         IL.Push(acc);
         IL.Push(s_calcInstanceCalliRetbufOther);
         IL.Emit.Tail();
-        IL.Emit.Calli(
-            new StandAloneMethodSig(
-                CallingConventions.Standard | CallingConventions.HasThis,
-                typeof(S32),
-                typeof(int),
-                typeof(S32),
-                typeof(int)
-            )
-        );
+        IL.Emit
+            .Calli(
+                new StandAloneMethodSig(
+                    CallingConventions.Standard | CallingConventions.HasThis,
+                    typeof(S32),
+                    typeof(int),
+                    typeof(S32),
+                    typeof(int)
+                )
+            );
         return IL.Return<S32>();
     }
 
@@ -1249,14 +1272,15 @@ class Instance
         IL.Push(acc);
         IL.Push(s_calcInstanceCalliRetbuf);
         IL.Emit.Tail();
-        IL.Emit.Calli(
-            new StandAloneMethodSig(
-                CallingConventions.Standard | CallingConventions.HasThis,
-                typeof(S32),
-                typeof(int),
-                typeof(int)
-            )
-        );
+        IL.Emit
+            .Calli(
+                new StandAloneMethodSig(
+                    CallingConventions.Standard | CallingConventions.HasThis,
+                    typeof(S32),
+                    typeof(int),
+                    typeof(int)
+                )
+            );
         return IL.Return<S32>();
     }
 
@@ -1527,12 +1551,13 @@ class GenInstance<T1, T2>
         IL.Push(c);
         IL.Push(d);
         IL.Emit.Tail();
-        IL.Emit.Callvirt(
-            new MethodRef(typeof(GenInstance<T1, T2>), nameof(NonVirt)).MakeGenericMethod(
-                typeof(T3),
-                typeof(T4)
-            )
-        );
+        IL.Emit
+            .Callvirt(
+                new MethodRef(typeof(GenInstance<T1, T2>), nameof(NonVirt)).MakeGenericMethod(
+                    typeof(T3),
+                    typeof(T4)
+                )
+            );
         return IL.Return<string>();
     }
 
@@ -1546,12 +1571,13 @@ class GenInstance<T1, T2>
         IL.Push(c);
         IL.Push(d);
         IL.Emit.Tail();
-        IL.Emit.Callvirt(
-            new MethodRef(typeof(GenInstance<T1, T2>), nameof(Virt)).MakeGenericMethod(
-                typeof(T3),
-                typeof(T4)
-            )
-        );
+        IL.Emit
+            .Callvirt(
+                new MethodRef(typeof(GenInstance<T1, T2>), nameof(Virt)).MakeGenericMethod(
+                    typeof(T3),
+                    typeof(T4)
+                )
+            );
         return IL.Return<string>();
     }
 

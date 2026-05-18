@@ -173,10 +173,8 @@ namespace LibraryImportGenerator.IntegrationTests
         {
             var stringContainer = new StringContainer { str1 = "Foo", str2 = "Bar" };
 
-            NativeExportsNE.Stateless.DeepDuplicateStrings(
-                stringContainer,
-                out var stringContainer2
-            );
+            NativeExportsNE.Stateless
+                .DeepDuplicateStrings(stringContainer, out var stringContainer2);
 
             Assert.Equal(stringContainer, stringContainer2);
         }

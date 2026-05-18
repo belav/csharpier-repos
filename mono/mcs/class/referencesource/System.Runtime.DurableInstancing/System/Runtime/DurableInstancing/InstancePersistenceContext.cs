@@ -128,9 +128,8 @@ namespace System.Runtime.DurableInstancing
                     {
                         throw;
                     }
-                    throw Fx.Exception.AsError(
-                        new CallbackException(SRCore.OnCancelRequestedThrew, exception)
-                    );
+                    throw Fx.Exception
+                        .AsError(new CallbackException(SRCore.OnCancelRequestedThrew, exception));
                 }
             }
         }
@@ -179,9 +178,8 @@ namespace System.Runtime.DurableInstancing
 
             if (!InstanceView.IsBoundToInstanceOwner)
             {
-                throw Fx.Exception.AsError(
-                    new InvalidOperationException(SRCore.ContextMustBeBoundToOwner)
-                );
+                throw Fx.Exception
+                    .AsError(new InvalidOperationException(SRCore.ContextMustBeBoundToOwner));
             }
             IsHandleDoomedByRollback = true;
 
@@ -192,11 +190,12 @@ namespace System.Runtime.DurableInstancing
         {
             if (instanceVersion < 0)
             {
-                throw Fx.Exception.ArgumentOutOfRange(
-                    "instanceVersion",
-                    instanceVersion,
-                    SRCore.InvalidLockToken
-                );
+                throw Fx.Exception
+                    .ArgumentOutOfRange(
+                        "instanceVersion",
+                        instanceVersion,
+                        SRCore.InvalidLockToken
+                    );
             }
             ThrowIfNotActive("BindAcquiredLock");
 
@@ -261,11 +260,12 @@ namespace System.Runtime.DurableInstancing
         {
             if (instanceVersion < 0)
             {
-                throw Fx.Exception.ArgumentOutOfRange(
-                    "instanceVersion",
-                    instanceVersion,
-                    SRCore.InvalidLockToken
-                );
+                throw Fx.Exception
+                    .ArgumentOutOfRange(
+                        "instanceVersion",
+                        instanceVersion,
+                        SRCore.InvalidLockToken
+                    );
             }
             TimeoutHelper.ThrowIfNegativeArgument(timeout);
             ThrowIfNotActive(methodName);
@@ -278,12 +278,13 @@ namespace System.Runtime.DurableInstancing
             if (wait == null)
             {
                 InstanceHandle.Free();
-                throw Fx.Exception.AsError(
-                    new InstanceHandleConflictException(
-                        LastAsyncResult.CurrentCommand.Name,
-                        InstanceView.InstanceId
-                    )
-                );
+                throw Fx.Exception
+                    .AsError(
+                        new InstanceHandleConflictException(
+                            LastAsyncResult.CurrentCommand.Name,
+                            InstanceView.InstanceId
+                        )
+                    );
             }
             return wait;
         }
@@ -298,12 +299,13 @@ namespace System.Runtime.DurableInstancing
                 if (!InstanceHandle.FinishReclaim(ref instanceVersion))
                 {
                     InstanceHandle.Free();
-                    throw Fx.Exception.AsError(
-                        new InstanceHandleConflictException(
-                            LastAsyncResult.CurrentCommand.Name,
-                            InstanceView.InstanceId
-                        )
-                    );
+                    throw Fx.Exception
+                        .AsError(
+                            new InstanceHandleConflictException(
+                                LastAsyncResult.CurrentCommand.Name,
+                                InstanceView.InstanceId
+                            )
+                        );
                 }
                 Fx.Assert(instanceVersion >= 0, "Where did the instance version go?");
             }
@@ -339,9 +341,8 @@ namespace System.Runtime.DurableInstancing
             {
                 if (instanceData != null && instanceData.Count > 0)
                 {
-                    throw Fx.Exception.AsError(
-                        new InvalidOperationException(SRCore.UninitializedCannotHaveData)
-                    );
+                    throw Fx.Exception
+                        .AsError(new InvalidOperationException(SRCore.UninitializedCannotHaveData));
                 }
             }
             else if (state == InstanceState.Completed)
@@ -351,9 +352,10 @@ namespace System.Runtime.DurableInstancing
                     && associatedInstanceKeyMetadata.Count > 0
                 )
                 {
-                    throw Fx.Exception.AsError(
-                        new InvalidOperationException(SRCore.CompletedMustNotHaveAssociatedKeys)
-                    );
+                    throw Fx.Exception
+                        .AsError(
+                            new InvalidOperationException(SRCore.CompletedMustNotHaveAssociatedKeys)
+                        );
                 }
             }
             else if (state != InstanceState.Initialized)
@@ -443,9 +445,8 @@ namespace System.Runtime.DurableInstancing
                 {
                     if (key.Value.InstanceKeyState == InstanceKeyState.Associated)
                     {
-                        throw Fx.Exception.AsError(
-                            new InvalidOperationException(SRCore.CannotCompleteWithKeys)
-                        );
+                        throw Fx.Exception
+                            .AsError(new InvalidOperationException(SRCore.CannotCompleteWithKeys));
                     }
                 }
             }
@@ -534,9 +535,8 @@ namespace System.Runtime.DurableInstancing
                 && copy.ContainsKey(key)
             )
             {
-                throw Fx.Exception.AsError(
-                    new InvalidOperationException(SRCore.KeyAlreadyAssociated)
-                );
+                throw Fx.Exception
+                    .AsError(new InvalidOperationException(SRCore.KeyAlreadyAssociated));
             }
             InstanceKeyView keyView = new InstanceKeyView(key);
             keyView.InstanceKeyState = InstanceKeyState.Associated;
@@ -563,18 +563,16 @@ namespace System.Runtime.DurableInstancing
                 {
                     if (existingKeyView.InstanceKeyState == InstanceKeyState.Completed)
                     {
-                        throw Fx.Exception.AsError(
-                            new InvalidOperationException(SRCore.KeyAlreadyCompleted)
-                        );
+                        throw Fx.Exception
+                            .AsError(new InvalidOperationException(SRCore.KeyAlreadyCompleted));
                     }
                 }
                 else if (
                     (InstanceView.InstanceKeysConsistency & InstanceValueConsistency.Partial) == 0
                 )
                 {
-                    throw Fx.Exception.AsError(
-                        new InvalidOperationException(SRCore.KeyNotAssociated)
-                    );
+                    throw Fx.Exception
+                        .AsError(new InvalidOperationException(SRCore.KeyNotAssociated));
                 }
             }
 
@@ -615,18 +613,16 @@ namespace System.Runtime.DurableInstancing
                 {
                     if (existingKeyView.InstanceKeyState == InstanceKeyState.Associated)
                     {
-                        throw Fx.Exception.AsError(
-                            new InvalidOperationException(SRCore.KeyNotCompleted)
-                        );
+                        throw Fx.Exception
+                            .AsError(new InvalidOperationException(SRCore.KeyNotCompleted));
                     }
                 }
                 else if (
                     (InstanceView.InstanceKeysConsistency & InstanceValueConsistency.Partial) == 0
                 )
                 {
-                    throw Fx.Exception.AsError(
-                        new InvalidOperationException(SRCore.KeyAlreadyUnassociated)
-                    );
+                    throw Fx.Exception
+                        .AsError(new InvalidOperationException(SRCore.KeyAlreadyUnassociated));
                 }
             }
 
@@ -660,9 +656,8 @@ namespace System.Runtime.DurableInstancing
             {
                 if (InstanceView.InstanceKeysConsistency == InstanceValueConsistency.None)
                 {
-                    throw Fx.Exception.AsError(
-                        new InvalidOperationException(SRCore.KeyNotAssociated)
-                    );
+                    throw Fx.Exception
+                        .AsError(new InvalidOperationException(SRCore.KeyNotAssociated));
                 }
 
                 Dictionary<Guid, InstanceKeyView> copy = new Dictionary<Guid, InstanceKeyView>(
@@ -759,9 +754,8 @@ namespace System.Runtime.DurableInstancing
             {
                 if (InstanceView.InstanceKeysConsistency == InstanceValueConsistency.None)
                 {
-                    throw Fx.Exception.AsError(
-                        new InvalidOperationException(SRCore.KeyNotAssociated)
-                    );
+                    throw Fx.Exception
+                        .AsError(new InvalidOperationException(SRCore.KeyNotAssociated));
                 }
 
                 if (!value.IsWriteOnly() && !value.IsDeletedValue)
@@ -972,9 +966,8 @@ namespace System.Runtime.DurableInstancing
                     {
                         throw;
                     }
-                    throw Fx.Exception.AsError(
-                        new CallbackException(SRCore.OnCancelRequestedThrew, exception)
-                    );
+                    throw Fx.Exception
+                        .AsError(new CallbackException(SRCore.OnCancelRequestedThrew, exception));
                 }
             }
         }
@@ -1052,9 +1045,8 @@ namespace System.Runtime.DurableInstancing
         {
             if (!InstanceView.IsBoundToLock)
             {
-                throw Fx.Exception.AsError(
-                    new InvalidOperationException(SRCore.InstanceOperationRequiresLock)
-                );
+                throw Fx.Exception
+                    .AsError(new InvalidOperationException(SRCore.InstanceOperationRequiresLock));
             }
         }
 
@@ -1062,9 +1054,10 @@ namespace System.Runtime.DurableInstancing
         {
             if (!InstanceView.IsBoundToInstance)
             {
-                throw Fx.Exception.AsError(
-                    new InvalidOperationException(SRCore.InstanceOperationRequiresInstance)
-                );
+                throw Fx.Exception
+                    .AsError(
+                        new InvalidOperationException(SRCore.InstanceOperationRequiresInstance)
+                    );
             }
         }
 
@@ -1072,9 +1065,8 @@ namespace System.Runtime.DurableInstancing
         {
             if (!InstanceView.IsBoundToInstanceOwner)
             {
-                throw Fx.Exception.AsError(
-                    new InvalidOperationException(SRCore.InstanceOperationRequiresOwner)
-                );
+                throw Fx.Exception
+                    .AsError(new InvalidOperationException(SRCore.InstanceOperationRequiresOwner));
             }
         }
 
@@ -1082,9 +1074,10 @@ namespace System.Runtime.DurableInstancing
         {
             if (InstanceView.IsBoundToLock && InstanceView.InstanceState == InstanceState.Completed)
             {
-                throw Fx.Exception.AsError(
-                    new InvalidOperationException(SRCore.InstanceOperationRequiresNotCompleted)
-                );
+                throw Fx.Exception
+                    .AsError(
+                        new InvalidOperationException(SRCore.InstanceOperationRequiresNotCompleted)
+                    );
             }
         }
 
@@ -1095,9 +1088,12 @@ namespace System.Runtime.DurableInstancing
                 && InstanceView.InstanceState == InstanceState.Uninitialized
             )
             {
-                throw Fx.Exception.AsError(
-                    new InvalidOperationException(SRCore.InstanceOperationRequiresNotUninitialized)
-                );
+                throw Fx.Exception
+                    .AsError(
+                        new InvalidOperationException(
+                            SRCore.InstanceOperationRequiresNotUninitialized
+                        )
+                    );
             }
         }
 
@@ -1105,9 +1101,12 @@ namespace System.Runtime.DurableInstancing
         {
             if (!Active)
             {
-                throw Fx.Exception.AsError(
-                    new InvalidOperationException(SRCore.OutsideInstanceExecutionScope(methodName))
-                );
+                throw Fx.Exception
+                    .AsError(
+                        new InvalidOperationException(
+                            SRCore.OutsideInstanceExecutionScope(methodName)
+                        )
+                    );
             }
         }
 
@@ -1116,9 +1115,12 @@ namespace System.Runtime.DurableInstancing
             ThrowIfNotActive(methodName);
             if (RootAsyncResult.CurrentCommand.IsTransactionEnlistmentOptional)
             {
-                throw Fx.Exception.AsError(
-                    new InvalidOperationException(SRCore.OutsideTransactionalCommand(methodName))
-                );
+                throw Fx.Exception
+                    .AsError(
+                        new InvalidOperationException(
+                            SRCore.OutsideTransactionalCommand(methodName)
+                        )
+                    );
             }
         }
 
@@ -1133,18 +1135,18 @@ namespace System.Runtime.DurableInstancing
                 {
                     if (this.freezeTransaction)
                     {
-                        throw Fx.Exception.AsError(
-                            new InvalidOperationException(SRCore.MustSetTransactionOnFirstCall)
-                        );
+                        throw Fx.Exception
+                            .AsError(
+                                new InvalidOperationException(SRCore.MustSetTransactionOnFirstCall)
+                            );
                     }
                     RootAsyncResult.SetInteriorTransaction(transaction, false);
                     this.transaction = transaction;
                 }
                 else if (!transaction.Equals(this.transaction))
                 {
-                    throw Fx.Exception.AsError(
-                        new InvalidOperationException(SRCore.CannotReplaceTransaction)
-                    );
+                    throw Fx.Exception
+                        .AsError(new InvalidOperationException(SRCore.CannotReplaceTransaction));
                 }
             }
             this.freezeTransaction = true;
@@ -1194,12 +1196,13 @@ namespace System.Runtime.DurableInstancing
 
                 OnCompleting = new Action<AsyncResult, Exception>(SimpleCleanup);
 
-                IAsyncResult result = this.initialInstanceHandle.BeginAcquireExecutionContext(
-                    transaction,
-                    this.timeoutHelper.RemainingTime(),
-                    PrepareAsyncCompletion(ExecuteAsyncResult.onAcquireContext),
-                    this
-                );
+                IAsyncResult result = this.initialInstanceHandle
+                    .BeginAcquireExecutionContext(
+                        transaction,
+                        this.timeoutHelper.RemainingTime(),
+                        PrepareAsyncCompletion(ExecuteAsyncResult.onAcquireContext),
+                        this
+                    );
                 if (result.CompletedSynchronously)
                 {
                     // After this stage, must complete explicitly in order to get Cleanup to run correctly.
@@ -1282,10 +1285,8 @@ namespace System.Runtime.DurableInstancing
                 : this(command, timeout, null, null)
             {
                 this.initialInstanceHandle = initialInstanceHandle;
-                this.context = this.initialInstanceHandle.AcquireExecutionContext(
-                    transaction,
-                    this.timeoutHelper.RemainingTime()
-                );
+                this.context = this.initialInstanceHandle
+                    .AcquireExecutionContext(transaction, this.timeoutHelper.RemainingTime());
 
                 Exception completionException = null;
                 try
@@ -1408,9 +1409,8 @@ namespace System.Runtime.DurableInstancing
 
                 if (this.waitForTransaction != null)
                 {
-                    throw Fx.Exception.AsError(
-                        new InvalidOperationException(SRCore.ExecuteMustBeNested)
-                    );
+                    throw Fx.Exception
+                        .AsError(new InvalidOperationException(SRCore.ExecuteMustBeNested));
                 }
 
                 bool success = false;
@@ -1492,11 +1492,12 @@ namespace System.Runtime.DurableInstancing
                                     && !CurrentCommand.IsTransactionEnlistmentOptional
                                 )
                                 {
-                                    throw Fx.Exception.AsError(
-                                        new InvalidOperationException(
-                                            SRCore.CannotInvokeTransactionalFromNonTransactional
-                                        )
-                                    );
+                                    throw Fx.Exception
+                                        .AsError(
+                                            new InvalidOperationException(
+                                                SRCore.CannotInvokeTransactionalFromNonTransactional
+                                            )
+                                        );
                                 }
                             }
                         }
@@ -1504,11 +1505,12 @@ namespace System.Runtime.DurableInstancing
                         {
                             if (!CurrentCommand.IsTransactionEnlistmentOptional)
                             {
-                                throw Fx.Exception.AsError(
-                                    new InvalidOperationException(
-                                        SRCore.CannotInvokeTransactionalFromNonTransactional
-                                    )
-                                );
+                                throw Fx.Exception
+                                    .AsError(
+                                        new InvalidOperationException(
+                                            SRCore.CannotInvokeTransactionalFromNonTransactional
+                                        )
+                                    );
                             }
                         }
                         else if (this.priorAsyncResult == null)
@@ -1535,20 +1537,22 @@ namespace System.Runtime.DurableInstancing
                                             .AutomaticallyAcquiringLock
                                     )
                                     {
-                                        throw Fx.Exception.AsError(
-                                            new InvalidOperationException(
-                                                SRCore.CannotInvokeBindingFromNonBinding
-                                            )
-                                        );
+                                        throw Fx.Exception
+                                            .AsError(
+                                                new InvalidOperationException(
+                                                    SRCore.CannotInvokeBindingFromNonBinding
+                                                )
+                                            );
                                     }
                                 }
                                 else if (!this.context.InstanceView.IsBoundToInstanceOwner)
                                 {
-                                    throw Fx.Exception.AsError(
-                                        new InvalidOperationException(
-                                            SRCore.MayBindLockCommandShouldValidateOwner
-                                        )
-                                    );
+                                    throw Fx.Exception
+                                        .AsError(
+                                            new InvalidOperationException(
+                                                SRCore.MayBindLockCommandShouldValidateOwner
+                                            )
+                                        );
                                 }
                                 else if (!this.context.InstanceView.IsBoundToLock)
                                 {
@@ -1558,19 +1562,19 @@ namespace System.Runtime.DurableInstancing
                             }
                             else if (!this.executionStack.Peek().Current.AutomaticallyAcquiringLock)
                             {
-                                throw Fx.Exception.AsError(
-                                    new InvalidOperationException(
-                                        SRCore.CannotInvokeBindingFromNonBinding
-                                    )
-                                );
+                                throw Fx.Exception
+                                    .AsError(
+                                        new InvalidOperationException(
+                                            SRCore.CannotInvokeBindingFromNonBinding
+                                        )
+                                    );
                             }
                         }
 
                         if (this.context.CancelRequested)
                         {
-                            throw Fx.Exception.AsError(
-                                new OperationCanceledException(SRCore.HandleFreed)
-                            );
+                            throw Fx.Exception
+                                .AsError(new OperationCanceledException(SRCore.HandleFreed));
                         }
 
                         BindReclaimedLockException bindReclaimedLockException = null;
@@ -1583,11 +1587,14 @@ namespace System.Runtime.DurableInstancing
                                 txScope = TransactionHelper.CreateTransactionScope(
                                     this.context.Transaction
                                 );
-                                commandProcessed = this.context.InstanceHandle.Store.TryCommand(
-                                    this.context,
-                                    CurrentCommand,
-                                    this.timeoutHelper.RemainingTime()
-                                );
+                                commandProcessed = this.context
+                                    .InstanceHandle
+                                    .Store
+                                    .TryCommand(
+                                        this.context,
+                                        CurrentCommand,
+                                        this.timeoutHelper.RemainingTime()
+                                    );
                             }
                             catch (BindReclaimedLockException exception)
                             {
@@ -1602,9 +1609,8 @@ namespace System.Runtime.DurableInstancing
                             if (bindReclaimedLockException != null)
                             {
                                 BindReclaimed(
-                                    !bindReclaimedLockException.MarkerWaitHandle.Wait(
-                                        this.timeoutHelper.RemainingTime()
-                                    )
+                                    !bindReclaimedLockException.MarkerWaitHandle
+                                        .Wait(this.timeoutHelper.RemainingTime())
                                 );
                             }
                         }
@@ -1615,13 +1621,16 @@ namespace System.Runtime.DurableInstancing
                             {
                                 try
                                 {
-                                    result = this.context.InstanceHandle.Store.BeginTryCommand(
-                                        this.context,
-                                        CurrentCommand,
-                                        this.timeoutHelper.RemainingTime(),
-                                        PrepareAsyncCompletion(ExecuteAsyncResult.onTryCommand),
-                                        this
-                                    );
+                                    result = this.context
+                                        .InstanceHandle
+                                        .Store
+                                        .BeginTryCommand(
+                                            this.context,
+                                            CurrentCommand,
+                                            this.timeoutHelper.RemainingTime(),
+                                            PrepareAsyncCompletion(ExecuteAsyncResult.onTryCommand),
+                                            this
+                                        );
                                 }
                                 catch (BindReclaimedLockException exception)
                                 {
@@ -1633,11 +1642,12 @@ namespace System.Runtime.DurableInstancing
                             {
                                 AfterCommand(true);
                                 if (
-                                    !bindReclaimedLockException.MarkerWaitHandle.WaitAsync(
-                                        ExecuteAsyncResult.onBindReclaimed,
-                                        this,
-                                        this.timeoutHelper.RemainingTime()
-                                    )
+                                    !bindReclaimedLockException.MarkerWaitHandle
+                                        .WaitAsync(
+                                            ExecuteAsyncResult.onBindReclaimed,
+                                            this,
+                                            this.timeoutHelper.RemainingTime()
+                                        )
                                 )
                                 {
                                     return false;
@@ -1686,10 +1696,8 @@ namespace System.Runtime.DurableInstancing
                     IAsyncResult result = null;
                     try
                     {
-                        result = this.transactionToCommit.BeginCommit(
-                            PrepareAsyncCompletion(ExecuteAsyncResult.onCommit),
-                            this
-                        );
+                        result = this.transactionToCommit
+                            .BeginCommit(PrepareAsyncCompletion(ExecuteAsyncResult.onCommit), this);
                     }
                     catch (TransactionException)
                     {
@@ -1729,11 +1737,12 @@ namespace System.Runtime.DurableInstancing
                 if (bindReclaimedLockException != null)
                 {
                     if (
-                        !bindReclaimedLockException.MarkerWaitHandle.WaitAsync(
-                            ExecuteAsyncResult.onBindReclaimed,
-                            this,
-                            this.timeoutHelper.RemainingTime()
-                        )
+                        !bindReclaimedLockException.MarkerWaitHandle
+                            .WaitAsync(
+                                ExecuteAsyncResult.onBindReclaimed,
+                                this,
+                                this.timeoutHelper.RemainingTime()
+                            )
                     )
                     {
                         return false;
@@ -1747,30 +1756,31 @@ namespace System.Runtime.DurableInstancing
             {
                 if (!object.ReferenceEquals(this.context.LastAsyncResult, this))
                 {
-                    throw Fx.Exception.AsError(
-                        new InvalidOperationException(SRCore.ExecuteMustBeNested)
-                    );
+                    throw Fx.Exception
+                        .AsError(new InvalidOperationException(SRCore.ExecuteMustBeNested));
                 }
                 if (!commandProcessed)
                 {
                     if (this.executeCalledByCurrentCommand)
                     {
-                        throw Fx.Exception.AsError(
-                            new InvalidOperationException(
-                                SRCore.TryCommandCannotExecuteSubCommandsAndReduce
-                            )
-                        );
+                        throw Fx.Exception
+                            .AsError(
+                                new InvalidOperationException(
+                                    SRCore.TryCommandCannotExecuteSubCommandsAndReduce
+                                )
+                            );
                     }
                     IEnumerable<InstancePersistenceCommand> reduction = CurrentCommand.Reduce(
                         this.context.InstanceView
                     );
                     if (reduction == null)
                     {
-                        throw Fx.Exception.AsError(
-                            new NotSupportedException(
-                                SRCore.ProviderDoesNotSupportCommand(CurrentCommand.Name)
-                            )
-                        );
+                        throw Fx.Exception
+                            .AsError(
+                                new NotSupportedException(
+                                    SRCore.ProviderDoesNotSupportCommand(CurrentCommand.Name)
+                                )
+                            );
                     }
                     this.executionStack.Push(this.currentExecution);
                     this.currentExecution = reduction.GetEnumerator();
@@ -1807,18 +1817,19 @@ namespace System.Runtime.DurableInstancing
             {
                 if (timedOut)
                 {
-                    this.context.InstanceHandle.CancelReclaim(
-                        new TimeoutException(SRCore.TimedOutWaitingForLockResolution)
-                    );
+                    this.context
+                        .InstanceHandle
+                        .CancelReclaim(
+                            new TimeoutException(SRCore.TimedOutWaitingForLockResolution)
+                        );
                 }
                 this.context.ConcludeBindReclaimedLockHelper();
 
                 // If we get here, the reclaim attempt succeeded and we own the lock - but we are in the
                 // CreateBindReclaimedLockException path, which auto-cancels on success.
                 this.context.InstanceHandle.Free();
-                throw Fx.Exception.AsError(
-                    new OperationCanceledException(SRCore.BindReclaimSucceeded)
-                );
+                throw Fx.Exception
+                    .AsError(new OperationCanceledException(SRCore.BindReclaimSucceeded));
             }
 
             [Fx.Tag.GuaranteeNonBlocking]
@@ -1851,19 +1862,21 @@ namespace System.Runtime.DurableInstancing
                         TimeSpan waitTimeout = this.timeoutHelper.RemainingTime();
                         if (!this.waitForTransaction.Wait(waitTimeout))
                         {
-                            throw Fx.Exception.AsError(
-                                new TimeoutException(InternalSR.TimeoutOnOperation(waitTimeout))
-                            );
+                            throw Fx.Exception
+                                .AsError(
+                                    new TimeoutException(InternalSR.TimeoutOnOperation(waitTimeout))
+                                );
                         }
                     }
                     else
                     {
                         if (
-                            !this.waitForTransaction.WaitAsync(
-                                ExecuteAsyncResult.onCommitWait,
-                                this,
-                                this.timeoutHelper.RemainingTime()
-                            )
+                            !this.waitForTransaction
+                                .WaitAsync(
+                                    ExecuteAsyncResult.onCommitWait,
+                                    this,
+                                    this.timeoutHelper.RemainingTime()
+                                )
                         )
                         {
                             return false;
@@ -1891,12 +1904,13 @@ namespace System.Runtime.DurableInstancing
                     if (this.finalState == null)
                     {
                         this.context.InstanceHandle.Free();
-                        throw Fx.Exception.AsError(
-                            new InstanceHandleConflictException(
-                                null,
-                                this.context.InstanceView.InstanceId
-                            )
-                        );
+                        throw Fx.Exception
+                            .AsError(
+                                new InstanceHandleConflictException(
+                                    null,
+                                    this.context.InstanceView.InstanceId
+                                )
+                            );
                     }
                 }
                 return true;
@@ -2071,9 +2085,11 @@ namespace System.Runtime.DurableInstancing
                 {
                     if (timeoutException != null)
                     {
-                        thisPtr.context.InstanceHandle.CancelReclaim(
-                            new TimeoutException(SRCore.TimedOutWaitingForLockResolution)
-                        );
+                        thisPtr.context
+                            .InstanceHandle
+                            .CancelReclaim(
+                                new TimeoutException(SRCore.TimedOutWaitingForLockResolution)
+                            );
                     }
                     thisPtr.context.ConcludeBindReclaimedLockHelper();
                 }

@@ -145,9 +145,8 @@ namespace System.Workflow.ComponentModel.Compiler
             {
                 if (this.runtimeType.DeclaringType == null)
                     return null;
-                return this.typeProvider.GetType(
-                    this.runtimeType.DeclaringType.AssemblyQualifiedName
-                );
+                return this.typeProvider
+                    .GetType(this.runtimeType.DeclaringType.AssemblyQualifiedName);
             }
         }
 
@@ -417,24 +416,26 @@ namespace System.Workflow.ComponentModel.Compiler
             string[] namedParams
         )
         {
-            return this.runtimeType.InvokeMember(
-                name,
-                bindingFlags,
-                binder,
-                target,
-                providedArgs,
-                modifiers,
-                culture,
-                namedParams
-            );
+            return this.runtimeType
+                .InvokeMember(
+                    name,
+                    bindingFlags,
+                    binder,
+                    target,
+                    providedArgs,
+                    modifiers,
+                    culture,
+                    namedParams
+                );
         }
 
         public override bool IsSubclassOf(Type potentialBaseType)
         {
-            return System.Workflow.ComponentModel.Compiler.TypeProvider.IsSubclassOf(
-                this.runtimeType,
-                potentialBaseType
-            );
+            return System.Workflow
+                .ComponentModel
+                .Compiler
+                .TypeProvider
+                .IsSubclassOf(this.runtimeType, potentialBaseType);
         }
 
         public override bool IsAssignableFrom(Type c)
@@ -956,9 +957,8 @@ namespace System.Workflow.ComponentModel.Compiler
             {
                 get
                 {
-                    return this.rtTypeWrapper.ResolveTypeFromTypeSystem(
-                        this.ctorInfo.DeclaringType
-                    );
+                    return this.rtTypeWrapper
+                        .ResolveTypeFromTypeSystem(this.ctorInfo.DeclaringType);
                 }
             }
 
@@ -989,9 +989,8 @@ namespace System.Workflow.ComponentModel.Compiler
             {
                 get
                 {
-                    return this.rtTypeWrapper.ResolveTypeFromTypeSystem(
-                        this.ctorInfo.ReflectedType
-                    );
+                    return this.rtTypeWrapper
+                        .ResolveTypeFromTypeSystem(this.ctorInfo.ReflectedType);
                 }
             }
         }
@@ -1055,9 +1054,8 @@ namespace System.Workflow.ComponentModel.Compiler
             {
                 get
                 {
-                    return this.rtTypeWrapper.ResolveTypeFromTypeSystem(
-                        this.fieldInfo.DeclaringType
-                    );
+                    return this.rtTypeWrapper
+                        .ResolveTypeFromTypeSystem(this.fieldInfo.DeclaringType);
                 }
             }
 
@@ -1088,9 +1086,8 @@ namespace System.Workflow.ComponentModel.Compiler
             {
                 get
                 {
-                    return this.rtTypeWrapper.ResolveTypeFromTypeSystem(
-                        this.fieldInfo.ReflectedType
-                    );
+                    return this.rtTypeWrapper
+                        .ResolveTypeFromTypeSystem(this.fieldInfo.ReflectedType);
                 }
             }
         }
@@ -1183,9 +1180,8 @@ namespace System.Workflow.ComponentModel.Compiler
             {
                 get
                 {
-                    return this.rtTypeWrapper.ResolveTypeFromTypeSystem(
-                        this.propertyInfo.PropertyType
-                    );
+                    return this.rtTypeWrapper
+                        .ResolveTypeFromTypeSystem(this.propertyInfo.PropertyType);
                 }
             }
 
@@ -1205,9 +1201,8 @@ namespace System.Workflow.ComponentModel.Compiler
             {
                 get
                 {
-                    return this.rtTypeWrapper.ResolveTypeFromTypeSystem(
-                        this.propertyInfo.DeclaringType
-                    );
+                    return this.rtTypeWrapper
+                        .ResolveTypeFromTypeSystem(this.propertyInfo.DeclaringType);
                 }
             }
 
@@ -1238,9 +1233,8 @@ namespace System.Workflow.ComponentModel.Compiler
             {
                 get
                 {
-                    return this.rtTypeWrapper.ResolveTypeFromTypeSystem(
-                        this.propertyInfo.ReflectedType
-                    );
+                    return this.rtTypeWrapper
+                        .ResolveTypeFromTypeSystem(this.propertyInfo.ReflectedType);
                 }
             }
             public override int MetadataToken
@@ -1364,9 +1358,8 @@ namespace System.Workflow.ComponentModel.Compiler
             {
                 get
                 {
-                    return this.rtTypeWrapper.ResolveTypeFromTypeSystem(
-                        this.methodInfo.DeclaringType
-                    );
+                    return this.rtTypeWrapper
+                        .ResolveTypeFromTypeSystem(this.methodInfo.DeclaringType);
                 }
             }
 
@@ -1397,9 +1390,8 @@ namespace System.Workflow.ComponentModel.Compiler
             {
                 get
                 {
-                    return this.rtTypeWrapper.ResolveTypeFromTypeSystem(
-                        this.methodInfo.ReflectedType
-                    );
+                    return this.rtTypeWrapper
+                        .ResolveTypeFromTypeSystem(this.methodInfo.ReflectedType);
                 }
             }
         }
@@ -1452,9 +1444,8 @@ namespace System.Workflow.ComponentModel.Compiler
             {
                 get
                 {
-                    return this.rtTypeWrapper.ResolveTypeFromTypeSystem(
-                        this.eventInfo.DeclaringType
-                    );
+                    return this.rtTypeWrapper
+                        .ResolveTypeFromTypeSystem(this.eventInfo.DeclaringType);
                 }
             }
 
@@ -1485,9 +1476,8 @@ namespace System.Workflow.ComponentModel.Compiler
             {
                 get
                 {
-                    return this.rtTypeWrapper.ResolveTypeFromTypeSystem(
-                        this.eventInfo.ReflectedType
-                    );
+                    return this.rtTypeWrapper
+                        .ResolveTypeFromTypeSystem(this.eventInfo.ReflectedType);
                 }
             }
 
@@ -1555,9 +1545,8 @@ namespace System.Workflow.ComponentModel.Compiler
             {
                 get
                 {
-                    return this.rtTypeWrapper.ResolveTypeFromTypeSystem(
-                        this.paramInfo.ParameterType
-                    );
+                    return this.rtTypeWrapper
+                        .ResolveTypeFromTypeSystem(this.paramInfo.ParameterType);
                 }
             }
             public override int Position

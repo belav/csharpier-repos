@@ -23,9 +23,10 @@ namespace System.Text.RegularExpressions.Tests
 {
     public static class RegexGeneratorHelper
     {
-        private static readonly CSharpParseOptions s_previewParseOptions = CSharpParseOptions
-            .Default.WithLanguageVersion(LanguageVersion.Preview)
-            .WithDocumentationMode(DocumentationMode.Diagnose);
+        private static readonly CSharpParseOptions s_previewParseOptions =
+            CSharpParseOptions.Default
+                .WithLanguageVersion(LanguageVersion.Preview)
+                .WithDocumentationMode(DocumentationMode.Diagnose);
         private static readonly EmitOptions s_emitOptions = new EmitOptions(
             debugInformationFormat: DebugInformationFormat.Embedded
         );
@@ -151,13 +152,10 @@ namespace System.Text.RegularExpressions.Tests
 
             comp = comp.AddSyntaxTrees(generatorResults.GeneratedTrees.ToArray());
             EmitResult results = comp.Emit(Stream.Null, cancellationToken: cancellationToken);
-            ImmutableArray<Diagnostic> generatorDiagnostics =
-                generatorResults.Diagnostics.RemoveAll(d =>
-                    d.Severity <= DiagnosticSeverity.Hidden
-                );
-            ImmutableArray<Diagnostic> resultsDiagnostics = results.Diagnostics.RemoveAll(d =>
-                d.Severity <= DiagnosticSeverity.Hidden
-            );
+            ImmutableArray<Diagnostic> generatorDiagnostics = generatorResults.Diagnostics
+                .RemoveAll(d => d.Severity <= DiagnosticSeverity.Hidden);
+            ImmutableArray<Diagnostic> resultsDiagnostics = results.Diagnostics
+                .RemoveAll(d => d.Severity <= DiagnosticSeverity.Hidden);
             if (!results.Success || resultsDiagnostics.Length != 0)
             {
                 throw new ArgumentException(
@@ -173,8 +171,8 @@ namespace System.Text.RegularExpressions.Tests
                 );
             }
 
-            return generatorResults
-                .Diagnostics.Concat(results.Diagnostics)
+            return generatorResults.Diagnostics
+                .Concat(results.Diagnostics)
                 .Where(d => d.Severity != DiagnosticSeverity.Hidden)
                 .ToArray();
         }
@@ -316,7 +314,8 @@ namespace System.Text.RegularExpressions.Tests
                             specificDiagnosticOptions: ImmutableDictionary<
                                 string,
                                 ReportDiagnostic
-                            >.Empty.Add("SYSLIB1044", ReportDiagnostic.Hidden)
+                            >.Empty
+                                .Add("SYSLIB1044", ReportDiagnostic.Hidden)
                         ) // regex with limited support
                         .WithNullableContextOptions(NullableContextOptions.Enable)
                     )
@@ -343,10 +342,8 @@ namespace System.Text.RegularExpressions.Tests
             GeneratorDriverRunResult generatorResults = s_generatorDriver
                 .RunGenerators(comp!, cancellationToken)
                 .GetRunResult();
-            ImmutableArray<Diagnostic> generatorDiagnostics =
-                generatorResults.Diagnostics.RemoveAll(d =>
-                    d.Severity <= DiagnosticSeverity.Hidden
-                );
+            ImmutableArray<Diagnostic> generatorDiagnostics = generatorResults.Diagnostics
+                .RemoveAll(d => d.Severity <= DiagnosticSeverity.Hidden);
             if (generatorDiagnostics.Length != 0)
             {
                 throw new ArgumentException(
@@ -367,9 +364,8 @@ namespace System.Text.RegularExpressions.Tests
                 options: s_emitOptions,
                 cancellationToken: cancellationToken
             );
-            ImmutableArray<Diagnostic> resultsDiagnostics = results.Diagnostics.RemoveAll(d =>
-                d.Severity <= DiagnosticSeverity.Hidden
-            );
+            ImmutableArray<Diagnostic> resultsDiagnostics = results.Diagnostics
+                .RemoveAll(d => d.Severity <= DiagnosticSeverity.Hidden);
             if (!results.Success || resultsDiagnostics.Length != 0)
             {
                 throw new ArgumentException(

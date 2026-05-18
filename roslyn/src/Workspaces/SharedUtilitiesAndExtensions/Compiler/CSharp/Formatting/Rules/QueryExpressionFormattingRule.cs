@@ -193,9 +193,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
                     if (currentToken.GetAncestor<QueryExpressionSyntax>() != null)
                     {
                         if (
-                            _options.NewLines.HasFlag(
-                                NewLinePlacement.BetweenQueryExpressionClauses
-                            )
+                            _options.NewLines
+                                .HasFlag(NewLinePlacement.BetweenQueryExpressionClauses)
                         )
                         {
                             return CreateAdjustNewLinesOperation(

@@ -70,8 +70,8 @@ namespace ILCompiler.DependencyAnalysis
                 MetadataVirtualMethodAlgorithm.FindSlotDefiningMethodForVirtualMethod(
                     method.GetTypicalMethodDefinition()
                 );
-            TypeDesc typeOfDeclaringMethodForSlot =
-                declaringMethodForSlot.OwningType.GetTypeDefinition();
+            TypeDesc typeOfDeclaringMethodForSlot = declaringMethodForSlot.OwningType
+                .GetTypeDefinition();
             TypeDesc currentType = method.OwningType.GetTypeDefinition();
             TypeDesc containingTypeOfDeclaringMethodForSlot = method.OwningType;
 
@@ -85,10 +85,11 @@ namespace ILCompiler.DependencyAnalysis
 
             if (containingTypeOfDeclaringMethodForSlot.HasInstantiation)
             {
-                declaringMethodForSlot = method.Context.GetMethodForInstantiatedType(
-                    declaringMethodForSlot.GetTypicalMethodDefinition(),
-                    (InstantiatedType)containingTypeOfDeclaringMethodForSlot
-                );
+                declaringMethodForSlot = method.Context
+                    .GetMethodForInstantiatedType(
+                        declaringMethodForSlot.GetTypicalMethodDefinition(),
+                        (InstantiatedType)containingTypeOfDeclaringMethodForSlot
+                    );
             }
 
             Debug.Assert(declaringMethodForSlot != null);
@@ -113,12 +114,10 @@ namespace ILCompiler.DependencyAnalysis
                     "Reflection virtual invoke owning type"
                 );
 
-                NativeLayoutMethodNameAndSignatureVertexNode nameAndSig =
-                    factory.NativeLayout.MethodNameAndSignatureVertex(
-                        method.GetTypicalMethodDefinition()
-                    );
-                NativeLayoutPlacedSignatureVertexNode placedNameAndSig =
-                    factory.NativeLayout.PlacedSignatureVertex(nameAndSig);
+                NativeLayoutMethodNameAndSignatureVertexNode nameAndSig = factory.NativeLayout
+                    .MethodNameAndSignatureVertex(method.GetTypicalMethodDefinition());
+                NativeLayoutPlacedSignatureVertexNode placedNameAndSig = factory.NativeLayout
+                    .PlacedSignatureVertex(nameAndSig);
                 dependencies.Add(placedNameAndSig, "Reflection virtual invoke method signature");
 
                 if (!method.HasInstantiation)
@@ -191,9 +190,8 @@ namespace ILCompiler.DependencyAnalysis
                 // of the method's containing type instead of the open type definition.
                 //
 
-                TypeDesc containingTypeKey = method.OwningType.ConvertToCanonForm(
-                    CanonicalFormKind.Specific
-                );
+                TypeDesc containingTypeKey = method.OwningType
+                    .ConvertToCanonForm(CanonicalFormKind.Specific);
 
                 HashSet<TypeDesc> cache;
                 if (!methodsEmitted.TryGetValue(mappingEntry.MetadataHandle, out cache))
@@ -216,12 +214,10 @@ namespace ILCompiler.DependencyAnalysis
                     out parentHierarchyDistance
                 );
                 ISymbolNode containingTypeKeyNode = factory.NecessaryTypeSymbol(containingTypeKey);
-                NativeLayoutMethodNameAndSignatureVertexNode nameAndSig =
-                    factory.NativeLayout.MethodNameAndSignatureVertex(
-                        method.GetTypicalMethodDefinition()
-                    );
-                NativeLayoutPlacedSignatureVertexNode placedNameAndSig =
-                    factory.NativeLayout.PlacedSignatureVertex(nameAndSig);
+                NativeLayoutMethodNameAndSignatureVertexNode nameAndSig = factory.NativeLayout
+                    .MethodNameAndSignatureVertex(method.GetTypicalMethodDefinition());
+                NativeLayoutPlacedSignatureVertexNode placedNameAndSig = factory.NativeLayout
+                    .PlacedSignatureVertex(nameAndSig);
 
                 Vertex vertex;
                 if (method.HasInstantiation)

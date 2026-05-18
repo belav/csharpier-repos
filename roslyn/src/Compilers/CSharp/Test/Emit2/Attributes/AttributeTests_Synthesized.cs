@@ -70,9 +70,11 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             );
             Assert.Equal(
                 "System.Int32",
-                attribute
-                    .AttributeConstructor.Parameters.Single()
-                    .TypeWithAnnotations.ToTestDisplayString()
+                attribute.AttributeConstructor
+                    .Parameters
+                    .Single()
+                    .TypeWithAnnotations
+                    .ToTestDisplayString()
             );
             Assert.Empty(attribute.CommonNamedArguments);
 
@@ -123,16 +125,17 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             );
             Assert.Equal(
                 "System.Diagnostics.DebuggableAttribute.DebuggingModes",
-                attribute
-                    .AttributeConstructor.Parameters.Single()
-                    .TypeWithAnnotations.ToTestDisplayString()
+                attribute.AttributeConstructor
+                    .Parameters
+                    .Single()
+                    .TypeWithAnnotations
+                    .ToTestDisplayString()
             );
             Assert.Empty(attribute.CommonNamedArguments);
 
             Assert.Equal(1, attribute.CommonConstructorArguments.Length);
 
-            var expectedDebuggingMode = DebuggableAttribute
-                .DebuggingModes
+            var expectedDebuggingMode = DebuggableAttribute.DebuggingModes
                 .IgnoreSymbolStoreSequencePoints;
 
             if (isSynthesized && optimizations == OptimizationLevel.Debug)
@@ -164,19 +167,16 @@ class C
             var comp = CreateEmptyCompilation(
                 "",
                 new[] { reference },
-                options: TestOptions.ReleaseDll.WithMetadataImportOptions(
-                    MetadataImportOptions.Internal
-                )
+                options: TestOptions.ReleaseDll
+                    .WithMetadataImportOptions(MetadataImportOptions.Internal)
             );
 
             var pid = (NamedTypeSymbol)
-                comp
-                    .GlobalNamespace.GetMembers()
+                comp.GlobalNamespace
+                    .GetMembers()
                     .Where(s =>
-                        s.Name.StartsWith(
-                            "<PrivateImplementationDetails>",
-                            StringComparison.Ordinal
-                        )
+                        s.Name
+                            .StartsWith("<PrivateImplementationDetails>", StringComparison.Ordinal)
                     )
                     .Single();
 
@@ -202,9 +202,8 @@ unsafe struct S
             var comp = CreateEmptyCompilation(
                 "",
                 new[] { reference },
-                options: TestOptions.UnsafeReleaseDll.WithMetadataImportOptions(
-                    MetadataImportOptions.Internal
-                )
+                options: TestOptions.UnsafeReleaseDll
+                    .WithMetadataImportOptions(MetadataImportOptions.Internal)
             );
 
             var s = (NamedTypeSymbol)comp.GlobalNamespace.GetMembers("S").Single();
@@ -321,14 +320,16 @@ abstract class C
                         peModule
                             .GetCustomAttributesForToken(((PEMethodSymbol)p.GetMethod).Handle)
                             .Single()
-                            .AttributeClass.Name
+                            .AttributeClass
+                            .Name
                     );
                     Assert.Equal(
                         "CompilerGeneratedAttribute",
                         peModule
                             .GetCustomAttributesForToken(((PEMethodSymbol)p.SetMethod).Handle)
                             .Single()
-                            .AttributeClass.Name
+                            .AttributeClass
+                            .Name
                     );
 
                     // no attributes on abstract property accessors
@@ -346,14 +347,16 @@ abstract class C
                         peModule
                             .GetCustomAttributesForToken(((PEMethodSymbol)e.AddMethod).Handle)
                             .Single()
-                            .AttributeClass.Name
+                            .AttributeClass
+                            .Name
                     );
                     Assert.Equal(
                         "CompilerGeneratedAttribute",
                         peModule
                             .GetCustomAttributesForToken(((PEMethodSymbol)e.RemoveMethod).Handle)
                             .Single()
-                            .AttributeClass.Name
+                            .AttributeClass
+                            .Name
                     );
                 }
             );
@@ -384,9 +387,8 @@ class C
                 CreateCompilation(source, options: options),
                 symbolValidator: m =>
                 {
-                    var displayClass = m.GlobalNamespace.GetMember<NamedTypeSymbol>(
-                        "C.<>c__DisplayClass0_0"
-                    );
+                    var displayClass = m.GlobalNamespace
+                        .GetMember<NamedTypeSymbol>("C.<>c__DisplayClass0_0");
                     AssertEx.SetEqual(
                         new[] { "CompilerGeneratedAttribute" },
                         GetAttributeNames(displayClass.GetAttributes())
@@ -757,8 +759,8 @@ class B : A
                 CreateCompilationWithMscorlib45(source, options: options),
                 symbolValidator: module =>
                 {
-                    var attributes = module
-                        .GlobalNamespace.GetTypeMember("B")
+                    var attributes = module.GlobalNamespace
+                        .GetTypeMember("B")
                         .GetMember<MethodSymbol>("<>n__0")
                         .GetAttributes();
 
@@ -806,8 +808,8 @@ class B : A
                 CreateCompilationWithMscorlib45(source, options: options),
                 symbolValidator: module =>
                 {
-                    var baseMethodWrapper = module
-                        .GlobalNamespace.GetTypeMember("B")
+                    var baseMethodWrapper = module.GlobalNamespace
+                        .GetTypeMember("B")
                         .GetMember<MethodSymbol>("<>n__0");
                     AssertEx.SetEqual(
                         new[] { "CompilerGeneratedAttribute", "DebuggerHiddenAttribute" },
@@ -861,8 +863,8 @@ class B : A
                 CreateCompilationWithMscorlib45(source, options: options),
                 symbolValidator: module =>
                 {
-                    var baseMethodWrapper = module
-                        .GlobalNamespace.GetTypeMember("B")
+                    var baseMethodWrapper = module.GlobalNamespace
+                        .GetTypeMember("B")
                         .GetMember<MethodSymbol>("<>n__0");
                     AssertEx.SetEqual(
                         new[] { "CompilerGeneratedAttribute", "DebuggerHiddenAttribute" },
@@ -1054,9 +1056,8 @@ namespace System.Runtime.CompilerServices
             CompileAndVerify(
                 source,
                 symbolValidator: validate,
-                options: TestOptions.ReleaseDll.WithMetadataImportOptions(
-                    MetadataImportOptions.All
-                ),
+                options: TestOptions.ReleaseDll
+                    .WithMetadataImportOptions(MetadataImportOptions.All),
                 verify: ExecutionConditionUtil.IsCoreClr ? Verification.Passes : Verification.Fails
             );
 
@@ -2271,8 +2272,8 @@ class Test
                 CreateCompilationWithMscorlib45(source, options: options),
                 symbolValidator: module =>
                 {
-                    var type = module
-                        .GlobalNamespace.GetMember<NamedTypeSymbol>("Test")
+                    var type = module.GlobalNamespace
+                        .GetMember<NamedTypeSymbol>("Test")
                         .GetTypeMember("<>c");
                     var stateMachine = type.GetTypeMember("<<F>b__0_0>d");
                     var asyncMethod = type.GetMember<MethodSymbol>("<F>b__0_0");
@@ -2385,9 +2386,8 @@ class Test
             var reference = CreateCompilationWithMscorlib45(source, options: referenceOptions)
                 .EmitToImageReference(options: new EmitOptions(metadataOnly: true));
 
-            var options = TestOptions.ReleaseDll.WithMetadataImportOptions(
-                MetadataImportOptions.All
-            );
+            var options = TestOptions.ReleaseDll
+                .WithMetadataImportOptions(MetadataImportOptions.All);
             var compilation = CreateCompilationWithMscorlib45(
                 "",
                 new[] { reference },
@@ -2520,9 +2520,8 @@ public class Test<T>
             var reference = CreateCompilationWithMscorlib45(source, options: referenceOptions)
                 .EmitToImageReference(options: new EmitOptions(metadataOnly: true));
 
-            var options = TestOptions.ReleaseDll.WithMetadataImportOptions(
-                MetadataImportOptions.All
-            );
+            var options = TestOptions.ReleaseDll
+                .WithMetadataImportOptions(MetadataImportOptions.All);
             var compilation = CreateCompilationWithMscorlib45(
                 "",
                 new[] { reference },

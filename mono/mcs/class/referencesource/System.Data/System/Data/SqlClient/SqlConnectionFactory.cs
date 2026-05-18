@@ -293,8 +293,9 @@ namespace System.Data.SqlClient
             // if the xml was not obtained from machine.config use the embedded XML resource
             if (XMLStream == null)
             {
-                XMLStream = System
-                    .Reflection.Assembly.GetExecutingAssembly()
+                XMLStream = System.Reflection
+                    .Assembly
+                    .GetExecutingAssembly()
                     .GetManifestResourceStream("System.Data.SqlClient.SqlMetaData.xml");
                 cacheMetaDataFactory = true;
             }

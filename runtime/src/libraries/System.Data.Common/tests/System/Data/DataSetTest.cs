@@ -446,7 +446,8 @@ namespace System.Data.Tests
             dt.Columns["ID"].AllowDBNull = false;
 
             // Add a nullable DataColumn w/ ColumnMapping = MappingType.Attribute
-            dt.Columns.Add(new DataColumn("ShipDate", typeof(DateTime), "", MappingType.Attribute));
+            dt.Columns
+                .Add(new DataColumn("ShipDate", typeof(DateTime), "", MappingType.Attribute));
             dt.Columns["ShipDate"].AllowDBNull = true;
 
             // Add a nullable DataColumn w/ ColumnMapping = MappingType.Attribute
@@ -957,13 +958,13 @@ namespace System.Data.Tests
 
             ds.Tables.Add(new DataTable("ExampleDataTable"));
             ds.Tables["ExampleDataTable"]
-                .Columns.Add(
-                    new DataColumn("PrimaryKeyColumn", typeof(int), "", MappingType.Attribute)
-                );
+                .Columns
+                .Add(new DataColumn("PrimaryKeyColumn", typeof(int), "", MappingType.Attribute));
             ds.Tables["ExampleDataTable"].Columns["PrimaryKeyColumn"].AllowDBNull = false;
 
             ds.Tables["ExampleDataTable"]
-                .Constraints.Add(
+                .Constraints
+                .Add(
                     "PK_ExampleDataTable",
                     ds.Tables["ExampleDataTable"].Columns["PrimaryKeyColumn"],
                     true
@@ -1110,17 +1111,15 @@ namespace System.Data.Tests
             dt3.Columns.Add(new DataColumn("Title", typeof(string), "", MappingType.Attribute));
             dt3.Columns["Title"].AllowDBNull = false;
 
-            dt3.Constraints.Add(
-                "PK_Element",
-                new DataColumn[] { dt3.Columns["Dimension"], dt3.Columns["Number"] },
-                true
-            );
+            dt3.Constraints
+                .Add(
+                    "PK_Element",
+                    new DataColumn[] { dt3.Columns["Dimension"], dt3.Columns["Number"] },
+                    true
+                );
 
-            ds.Relations.Add(
-                "FK_Element_To_Dimension",
-                dt2.Columns["Number"],
-                dt3.Columns["Dimension"]
-            );
+            ds.Relations
+                .Add("FK_Element_To_Dimension", dt2.Columns["Number"], dt3.Columns["Dimension"]);
 
             ds.AcceptChanges();
 
@@ -1164,7 +1163,8 @@ namespace System.Data.Tests
             ds.Tables.Add("MyType");
 
             ds.Tables["MyType"]
-                .Columns.Add(new DataColumn("Desc", typeof(string), "", MappingType.Attribute));
+                .Columns
+                .Add(new DataColumn("Desc", typeof(string), "", MappingType.Attribute));
             ds.Tables["MyType"].Columns["Desc"].MaxLength = 32;
 
             ds.AcceptChanges();
@@ -1325,19 +1325,21 @@ namespace System.Data.Tests
             dt2.Columns.Add(new DataColumn("Number", typeof(int)));
             dt2.Columns["Number"].AllowDBNull = false;
 
-            dt2.Constraints.Add(
-                "PK_Element",
-                new DataColumn[] { dt2.Columns["Dimension"], dt2.Columns["Number"] },
-                true
-            );
+            dt2.Constraints
+                .Add(
+                    "PK_Element",
+                    new DataColumn[] { dt2.Columns["Dimension"], dt2.Columns["Number"] },
+                    true
+                );
 
             // Add DataRelations
-            ds.Relations.Add(
-                "FK_Element_To_Dimension",
-                dt1.Columns["Number"],
-                dt2.Columns["Dimension"],
-                true
-            );
+            ds.Relations
+                .Add(
+                    "FK_Element_To_Dimension",
+                    dt1.Columns["Number"],
+                    dt2.Columns["Dimension"],
+                    true
+                );
 
             // Add 2 Dimensions
             for (int i = 0; i < 2; i++)
@@ -1506,9 +1508,10 @@ namespace System.Data.Tests
             parent.Columns.Add("id", typeof(int));
             child.Columns.Add("ref_id", typeof(int));
 
-            child.Constraints.Add(
-                new ForeignKeyConstraint("fk_constraint", parent.Columns[0], child.Columns[0])
-            );
+            child.Constraints
+                .Add(
+                    new ForeignKeyConstraint("fk_constraint", parent.Columns[0], child.Columns[0])
+                );
 
             DataRow dr = parent.NewRow();
             dr[0] = 1;
@@ -1560,11 +1563,8 @@ namespace System.Data.Tests
             child.Rows.Add(new object[] { 3, 3, "mono child 3" });
             child.AcceptChanges();
 
-            DataRelation relation = ds.Relations.Add(
-                "parent_child",
-                parent.Columns["id"],
-                child.Columns["parent"]
-            );
+            DataRelation relation = ds.Relations
+                .Add("parent_child", parent.Columns["id"], child.Columns["parent"]);
 
             // modify the parent and get changes
             child.Rows[1]["parent"] = 4;
@@ -1600,11 +1600,8 @@ namespace System.Data.Tests
             child.Columns.Add("name", typeof(string));
             child.PrimaryKey = new DataColumn[] { child.Columns["id"] };
 
-            DataRelation relation = ds.Relations.Add(
-                "parent_child",
-                parent.Columns["id"],
-                child.Columns["parent"]
-            );
+            DataRelation relation = ds.Relations
+                .Add("parent_child", parent.Columns["id"], child.Columns["parent"]);
 
             parent.Rows.Add(new object[] { 1, "mono test 1" });
             parent.Rows.Add(new object[] { 2, "mono test 2" });

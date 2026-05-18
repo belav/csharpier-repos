@@ -474,13 +474,14 @@ internal sealed class OletxTransactionManager
             outcomeEnlistment = new OutcomeEnlistment();
             try
             {
-                _dtcTransactionManager.ProxyShimFactory.BeginTransaction(
-                    oletxTimeout,
-                    oletxIsoLevel,
-                    outcomeEnlistment,
-                    out txIdentifier,
-                    out transactionShim
-                );
+                _dtcTransactionManager.ProxyShimFactory
+                    .BeginTransaction(
+                        oletxTimeout,
+                        oletxIsoLevel,
+                        outcomeEnlistment,
+                        out txIdentifier,
+                        out transactionShim
+                    );
             }
             catch (COMException ex)
             {
@@ -814,9 +815,8 @@ internal sealed class OletxInternalResourceManager
         Hashtable? rmHashTable = null;
         if (OletxTransactionManager._resourceManagerHashTable != null)
         {
-            OletxTransactionManager.ResourceManagerHashTableLock.AcquireReaderLock(
-                Timeout.Infinite
-            );
+            OletxTransactionManager.ResourceManagerHashTableLock
+                .AcquireReaderLock(Timeout.Infinite);
             try
             {
                 rmHashTable = (Hashtable)OletxTransactionManager._resourceManagerHashTable.Clone();

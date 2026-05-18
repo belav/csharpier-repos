@@ -54,13 +54,11 @@ public class SqlServerHierarchyIdOptionsExtension : IDbContextOptionsExtension
             using (var scope = internalServiceProvider.CreateScope())
             {
                 if (
-                    scope
-                        .ServiceProvider.GetService<IEnumerable<IMethodCallTranslatorPlugin>>()
+                    scope.ServiceProvider
+                        .GetService<IEnumerable<IMethodCallTranslatorPlugin>>()
                         ?.Any(s => s is SqlServerHierarchyIdMethodCallTranslatorPlugin) != true
-                    || scope
-                        .ServiceProvider.GetService<
-                            IEnumerable<IRelationalTypeMappingSourcePlugin>
-                        >()
+                    || scope.ServiceProvider
+                        .GetService<IEnumerable<IRelationalTypeMappingSourcePlugin>>()
                         ?.Any(s => s is SqlServerHierarchyIdTypeMappingSourcePlugin) != true
                 )
                 {

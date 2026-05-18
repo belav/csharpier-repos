@@ -132,26 +132,26 @@ namespace System.Globalization.Tests
             AssertExtensions.Throws<ArgumentException>(
                 "options",
                 () =>
-                    CultureInfo.InvariantCulture.CompareInfo.GetHashCode(
-                        "Test",
-                        CompareOptions.OrdinalIgnoreCase | CompareOptions.IgnoreCase
-                    )
+                    CultureInfo.InvariantCulture
+                        .CompareInfo
+                        .GetHashCode(
+                            "Test",
+                            CompareOptions.OrdinalIgnoreCase | CompareOptions.IgnoreCase
+                        )
             );
             AssertExtensions.Throws<ArgumentException>(
                 "options",
                 () =>
-                    CultureInfo.InvariantCulture.CompareInfo.GetHashCode(
-                        "Test",
-                        CompareOptions.Ordinal | CompareOptions.IgnoreSymbols
-                    )
+                    CultureInfo.InvariantCulture
+                        .CompareInfo
+                        .GetHashCode("Test", CompareOptions.Ordinal | CompareOptions.IgnoreSymbols)
             );
             AssertExtensions.Throws<ArgumentException>(
                 "options",
                 () =>
-                    CultureInfo.InvariantCulture.CompareInfo.GetHashCode(
-                        "Test",
-                        (CompareOptions)(-1)
-                    )
+                    CultureInfo.InvariantCulture
+                        .CompareInfo
+                        .GetHashCode("Test", (CompareOptions)(-1))
             );
         }
 
@@ -1732,14 +1732,12 @@ namespace System.Globalization.Tests
         {
             // Ensure that null spans and non-null empty spans produce the same hash code.
 
-            int hashCodeOfNullSpan = CultureInfo.InvariantCulture.CompareInfo.GetHashCode(
-                ReadOnlySpan<char>.Empty,
-                CompareOptions.None
-            );
-            int hashCodeOfNotNullEmptySpan = CultureInfo.InvariantCulture.CompareInfo.GetHashCode(
-                "".AsSpan(),
-                CompareOptions.None
-            );
+            int hashCodeOfNullSpan = CultureInfo.InvariantCulture
+                .CompareInfo
+                .GetHashCode(ReadOnlySpan<char>.Empty, CompareOptions.None);
+            int hashCodeOfNotNullEmptySpan = CultureInfo.InvariantCulture
+                .CompareInfo
+                .GetHashCode("".AsSpan(), CompareOptions.None);
             Assert.Equal(hashCodeOfNullSpan, hashCodeOfNotNullEmptySpan);
         }
 
@@ -1749,26 +1747,29 @@ namespace System.Globalization.Tests
             AssertExtensions.Throws<ArgumentException>(
                 "options",
                 () =>
-                    CultureInfo.InvariantCulture.CompareInfo.GetHashCode(
-                        "Test".AsSpan(),
-                        CompareOptions.OrdinalIgnoreCase | CompareOptions.IgnoreCase
-                    )
+                    CultureInfo.InvariantCulture
+                        .CompareInfo
+                        .GetHashCode(
+                            "Test".AsSpan(),
+                            CompareOptions.OrdinalIgnoreCase | CompareOptions.IgnoreCase
+                        )
             );
             AssertExtensions.Throws<ArgumentException>(
                 "options",
                 () =>
-                    CultureInfo.InvariantCulture.CompareInfo.GetHashCode(
-                        "Test".AsSpan(),
-                        CompareOptions.Ordinal | CompareOptions.IgnoreSymbols
-                    )
+                    CultureInfo.InvariantCulture
+                        .CompareInfo
+                        .GetHashCode(
+                            "Test".AsSpan(),
+                            CompareOptions.Ordinal | CompareOptions.IgnoreSymbols
+                        )
             );
             AssertExtensions.Throws<ArgumentException>(
                 "options",
                 () =>
-                    CultureInfo.InvariantCulture.CompareInfo.GetHashCode(
-                        "Test".AsSpan(),
-                        (CompareOptions)(-1)
-                    )
+                    CultureInfo.InvariantCulture
+                        .CompareInfo
+                        .GetHashCode("Test".AsSpan(), (CompareOptions)(-1))
             );
         }
     }

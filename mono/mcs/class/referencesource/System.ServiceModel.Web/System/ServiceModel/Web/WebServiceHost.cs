@@ -58,9 +58,8 @@ namespace System.ServiceModel.Web
             AuthenticationSchemes supportedSchemes = AuthenticationSchemes.None;
             if (host.BaseAddresses.Count > 0)
             {
-                supportedSchemes = AspNetEnvironment.Current.GetAuthenticationSchemes(
-                    host.BaseAddresses[0]
-                );
+                supportedSchemes = AspNetEnvironment.Current
+                    .GetAuthenticationSchemes(host.BaseAddresses[0]);
 
                 if (AspNetEnvironment.Current.IsSimpleApplicationHost)
                 {
@@ -121,15 +120,17 @@ namespace System.ServiceModel.Web
                     {
                         if (implementedContracts.Count > 1)
                         {
-                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                                new InvalidOperationException(multipleContractsErrorMessage)
-                            );
+                            throw DiagnosticUtility.ExceptionUtility
+                                .ThrowHelperError(
+                                    new InvalidOperationException(multipleContractsErrorMessage)
+                                );
                         }
                         else if (implementedContracts.Count == 0)
                         {
-                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                                new InvalidOperationException(noContractErrorMessage)
-                            );
+                            throw DiagnosticUtility.ExceptionUtility
+                                .ThrowHelperError(
+                                    new InvalidOperationException(noContractErrorMessage)
+                                );
                         }
                         foreach (ContractDescription contract in implementedContracts.Values)
                         {
@@ -152,8 +153,7 @@ namespace System.ServiceModel.Web
                         protocolMappingItem != null
                         && string.Equals(
                             protocolMappingItem.Binding,
-                            WebHttpBinding
-                                .WebHttpBindingConfigurationStrings
+                            WebHttpBinding.WebHttpBindingConfigurationStrings
                                 .WebHttpBindingCollectionElementName,
                             StringComparison.Ordinal
                         )
@@ -281,8 +281,9 @@ namespace System.ServiceModel.Web
                 sdb.HttpHelpPageEnabled = false;
                 sdb.HttpsHelpPageEnabled = false;
             }
-            ServiceMetadataBehavior smb =
-                this.Description.Behaviors.Find<ServiceMetadataBehavior>();
+            ServiceMetadataBehavior smb = this.Description
+                .Behaviors
+                .Find<ServiceMetadataBehavior>();
             if (smb != null)
             {
                 smb.HttpGetEnabled = false;
@@ -302,8 +303,8 @@ namespace System.ServiceModel.Web
             {
                 if (
                     serviceEndpoint.Binding != null
-                    && serviceEndpoint
-                        .Binding.CreateBindingElements()
+                    && serviceEndpoint.Binding
+                        .CreateBindingElements()
                         .Find<WebMessageEncodingBindingElement>() != null
                 )
                 {

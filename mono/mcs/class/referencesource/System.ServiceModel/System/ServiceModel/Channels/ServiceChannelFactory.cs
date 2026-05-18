@@ -197,11 +197,12 @@ namespace System.ServiceModel.Channels
                             .ManualAddressing
                     )
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new InvalidOperationException(
-                                SR.GetString(SR.CantCreateChannelWithManualAddressing)
-                            )
-                        );
+                        throw DiagnosticUtility.ExceptionUtility
+                            .ThrowHelperError(
+                                new InvalidOperationException(
+                                    SR.GetString(SR.CantCreateChannelWithManualAddressing)
+                                )
+                            );
                     }
 
                     return new ServiceChannelFactoryOverDuplex(
@@ -250,11 +251,12 @@ namespace System.ServiceModel.Channels
                             .ManualAddressing
                     )
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new InvalidOperationException(
-                                SR.GetString(SR.CantCreateChannelWithManualAddressing)
-                            )
-                        );
+                        throw DiagnosticUtility.ExceptionUtility
+                            .ThrowHelperError(
+                                new InvalidOperationException(
+                                    SR.GetString(SR.CantCreateChannelWithManualAddressing)
+                                )
+                            );
                     }
 
                     return new ServiceChannelFactoryOverDuplexSession(
@@ -338,13 +340,14 @@ namespace System.ServiceModel.Channels
                 supportedChannels.Add(typeof(IDuplexSessionChannel), 0);
             }
 
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                ChannelRequirements.CantCreateChannelException(
-                    supportedChannels.Keys,
-                    requiredChannels,
-                    binding.Name
-                )
-            );
+            throw DiagnosticUtility.ExceptionUtility
+                .ThrowHelperError(
+                    ChannelRequirements.CantCreateChannelException(
+                        supportedChannels.Keys,
+                        requiredChannels,
+                        binding.Name
+                    )
+                );
         }
 
         protected override void OnAbort()
@@ -485,15 +488,16 @@ namespace System.ServiceModel.Channels
         {
             if (!this.CanCreateChannel<TChannel>())
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(
-                        SR.GetString(
-                            SR.CouldnTCreateChannelForChannelType2,
-                            this.bindingName,
-                            typeof(TChannel).Name
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(
+                                SR.CouldnTCreateChannelForChannelType2,
+                                this.bindingName,
+                                typeof(TChannel).Name
+                            )
                         )
-                    )
-                );
+                    );
             }
 
             return (TChannel)this.CreateChannel(typeof(TChannel), address, via);
@@ -527,8 +531,8 @@ namespace System.ServiceModel.Channels
                 serviceChannel
             );
 
-            serviceChannel
-                .ClientRuntime.GetRuntime()
+            serviceChannel.ClientRuntime
+                .GetRuntime()
                 .InitializeChannel((IClientChannel)serviceChannel.Proxy);
             OperationContext current = OperationContext.Current;
             if ((current != null) && (current.InstanceContext != null))
@@ -554,11 +558,12 @@ namespace System.ServiceModel.Channels
         {
             if (!proxiedType.IsInterface)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(
-                        SR.GetString("SFxChannelFactoryTypeMustBeInterface")
-                    )
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString("SFxChannelFactoryTypeMustBeInterface")
+                        )
+                    );
             }
             ServiceChannelProxy proxy = new ServiceChannelProxy(
                 interfaceType,

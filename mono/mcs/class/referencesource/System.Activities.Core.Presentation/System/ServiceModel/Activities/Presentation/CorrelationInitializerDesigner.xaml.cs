@@ -51,9 +51,10 @@ namespace System.ServiceModel.Activities.Presentation
         {
             base.OnInitialized(args);
 
-            this.CommandBindings.Add(
-                new CommandBinding(AddNewInitializerCommand, this.OnAddNewInitializerExecuted)
-            );
+            this.CommandBindings
+                .Add(
+                    new CommandBinding(AddNewInitializerCommand, this.OnAddNewInitializerExecuted)
+                );
 
             //create data grid helper
             this.correlationInitializerDGHelper = new DataGridHelper(
@@ -144,9 +145,8 @@ namespace System.ServiceModel.Activities.Presentation
             var activity = e.NewValue as ModelItem;
             if (null != activity && !activity.IsMessagingActivity())
             {
-                throw FxTrace.Exception.AsError(
-                    new NotSupportedException(activity.ItemType.FullName)
-                );
+                throw FxTrace.Exception
+                    .AsError(new NotSupportedException(activity.ItemType.FullName));
             }
             ((CorrelationInitializerDesigner)sender).OnActivityChanged();
         }

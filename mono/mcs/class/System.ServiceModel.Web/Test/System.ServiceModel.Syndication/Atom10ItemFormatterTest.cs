@@ -159,12 +159,10 @@ namespace MonoTests.System.ServiceModel.Syndication
             // It however automatically fills ...
             SyndicationItem item = new SyndicationItem();
             item.Categories.Add(new SyndicationCategory("myname", "myscheme", "mylabel"));
-            item.Authors.Add(
-                new SyndicationPerson("john@doe.com", "John Doe", "http://john.doe.name")
-            );
-            item.Contributors.Add(
-                new SyndicationPerson("jane@doe.com", "Jane Doe", "http://jane.doe.name")
-            );
+            item.Authors
+                .Add(new SyndicationPerson("john@doe.com", "John Doe", "http://john.doe.name"));
+            item.Contributors
+                .Add(new SyndicationPerson("jane@doe.com", "Jane Doe", "http://jane.doe.name"));
             StringWriter sw = new StringWriter();
             using (XmlWriter w = CreateWriter(sw))
                 new Atom10ItemFormatter(item).WriteTo(w);
@@ -225,24 +223,26 @@ namespace MonoTests.System.ServiceModel.Syndication
         {
             // ... and it passes.
             SyndicationItem item = new SyndicationItem();
-            item.Links.Add(
-                new SyndicationLink(
-                    new Uri("http://example.com/Page1"),
-                    "alternate",
-                    "Page 1",
-                    "text/html",
-                    0
-                )
-            );
-            item.Links.Add(
-                new SyndicationLink(
-                    new Uri("http://example.com/Page2"),
-                    "alternate",
-                    "Page 2",
-                    "text/html",
-                    0
-                )
-            );
+            item.Links
+                .Add(
+                    new SyndicationLink(
+                        new Uri("http://example.com/Page1"),
+                        "alternate",
+                        "Page 1",
+                        "text/html",
+                        0
+                    )
+                );
+            item.Links
+                .Add(
+                    new SyndicationLink(
+                        new Uri("http://example.com/Page2"),
+                        "alternate",
+                        "Page 2",
+                        "text/html",
+                        0
+                    )
+                );
             StringWriter sw = new StringWriter();
             using (XmlWriter w = CreateWriter(sw))
                 new Atom10ItemFormatter(item).WriteTo(w);

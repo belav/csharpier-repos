@@ -58,8 +58,13 @@ namespace System.Net.Http.WinHttpHandlerFunctional.Tests
             string cookieValue
         )
         {
-            Uri uri =
-                System.Net.Test.Common.Configuration.Http.RemoteHttp11Server.RedirectUriForDestinationUri(
+            Uri uri = System.Net
+                .Test
+                .Common
+                .Configuration
+                .Http
+                .RemoteHttp11Server
+                .RedirectUriForDestinationUri(
                     302,
                     System.Net.Test.Common.Configuration.Http.RemoteEchoServer,
                     1
@@ -74,10 +79,8 @@ namespace System.Net.Http.WinHttpHandlerFunctional.Tests
 
             using (HttpClient client = new HttpClient(handler))
             {
-                client.DefaultRequestHeaders.Add(
-                    "X-SetCookie",
-                    string.Format("{0}={1};Path=/", cookieName, cookieValue)
-                );
+                client.DefaultRequestHeaders
+                    .Add("X-SetCookie", string.Format("{0}={1};Path=/", cookieName, cookieValue));
                 using (HttpResponseMessage httpResponse = await client.GetAsync(uri))
                 {
                     string responseText = await httpResponse.Content.ReadAsStringAsync();
@@ -210,15 +213,17 @@ namespace System.Net.Http.WinHttpHandlerFunctional.Tests
                 Assert.Equal(HttpStatusCode.OK, response.StatusCode);
                 Assert.Equal(HttpVersion20.Value, response.Version);
                 string responsePayload = await response.Content.ReadAsStringAsync();
-                var responseContent = Newtonsoft.Json.JsonConvert.DeserializeAnonymousType(
-                    responsePayload,
-                    new
-                    {
-                        Method = "_",
-                        BodyContent = "_",
-                        Cookies = new Dictionary<string, string>(),
-                    }
-                );
+                var responseContent = Newtonsoft.Json
+                    .JsonConvert
+                    .DeserializeAnonymousType(
+                        responsePayload,
+                        new
+                        {
+                            Method = "_",
+                            BodyContent = "_",
+                            Cookies = new Dictionary<string, string>(),
+                        }
+                    );
                 Assert.Equal("POST", responseContent.Method);
                 Assert.Equal(payload, responseContent.BodyContent);
                 Assert.Equal(
@@ -298,8 +303,8 @@ namespace System.Net.Http.WinHttpHandlerFunctional.Tests
                 HttpResponseMessage response = task.Result;
                 Assert.True(response.IsSuccessStatusCode);
                 Assert.Equal(HttpVersion20.Value, response.Version);
-                string responsePayload = await response
-                    .Content.ReadAsStringAsync()
+                string responsePayload = await response.Content
+                    .ReadAsStringAsync()
                     .WaitAsync(TestHelper.PassingTestTimeout);
                 Assert.Contains(payloadText, responsePayload);
             }
@@ -338,8 +343,8 @@ namespace System.Net.Http.WinHttpHandlerFunctional.Tests
             HttpResponseMessage response = task.Result;
             Assert.True(response.IsSuccessStatusCode);
             Assert.Equal(HttpVersion20.Value, response.Version);
-            string responsePayload = await response
-                .Content.ReadAsStringAsync()
+            string responsePayload = await response.Content
+                .ReadAsStringAsync()
                 .WaitAsync(TestHelper.PassingTestTimeout);
             Assert.Contains(payloadText, responsePayload);
         }

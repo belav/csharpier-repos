@@ -293,8 +293,7 @@ namespace System.Data.SqlClient
                 case "MAX":
                 case "MIN":
                 {
-                    string name = ((CollectionType)funParams[0].TypeUsage.EdmType)
-                        .TypeUsage
+                    string name = ((CollectionType)funParams[0].TypeUsage.EdmType).TypeUsage
                         .EdmType
                         .Name;
                     return (
@@ -359,8 +358,7 @@ namespace System.Data.SqlClient
                 case "COUNT":
                 case "COUNT_BIG":
                 {
-                    string name = ((CollectionType)funParams[0].TypeUsage.EdmType)
-                        .TypeUsage
+                    string name = ((CollectionType)funParams[0].TypeUsage.EdmType).TypeUsage
                         .EdmType
                         .Name;
                     return name.Equals("Guid", StringComparison.OrdinalIgnoreCase);
@@ -371,10 +369,10 @@ namespace System.Data.SqlClient
                         foreach (FunctionParameter funParam in funParams)
                         {
                             if (
-                                funParam.TypeUsage.EdmType.Name.Equals(
-                                    "Int64",
-                                    StringComparison.OrdinalIgnoreCase
-                                )
+                                funParam.TypeUsage
+                                    .EdmType
+                                    .Name
+                                    .Equals("Int64", StringComparison.OrdinalIgnoreCase)
                             )
                             {
                                 return true;
@@ -600,9 +598,9 @@ namespace System.Data.SqlClient
         public override TypeUsage GetStoreType(TypeUsage edmType)
         {
             EntityUtil.CheckArgumentNull<TypeUsage>(edmType, "edmType");
-            System.Diagnostics.Debug.Assert(
-                edmType.EdmType.BuiltInTypeKind == BuiltInTypeKind.PrimitiveType
-            );
+            System.Diagnostics
+                .Debug
+                .Assert(edmType.EdmType.BuiltInTypeKind == BuiltInTypeKind.PrimitiveType);
 
             PrimitiveType primitiveType = edmType.EdmType as PrimitiveType;
             if (primitiveType == null)

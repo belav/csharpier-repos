@@ -123,15 +123,16 @@ internal static partial class Interop
             ref int pcbStructInfo
         )
         {
-            return Interop.Crypt32.CryptDecodeObject(
-                dwCertEncodingType,
-                (IntPtr)lpszStructType,
-                pbEncoded,
-                cbEncoded,
-                dwFlags,
-                pvStructInfo,
-                ref pcbStructInfo
-            );
+            return Interop.Crypt32
+                .CryptDecodeObject(
+                    dwCertEncodingType,
+                    (IntPtr)lpszStructType,
+                    pbEncoded,
+                    cbEncoded,
+                    dwFlags,
+                    pvStructInfo,
+                    ref pcbStructInfo
+                );
         }
 
         public static unsafe bool CryptDecodeObjectPointer(
@@ -144,15 +145,16 @@ internal static partial class Interop
             ref int pcbStructInfo
         )
         {
-            return Interop.Crypt32.CryptDecodeObjectPointer(
-                dwCertEncodingType,
-                (IntPtr)lpszStructType,
-                pbEncoded,
-                cbEncoded,
-                dwFlags,
-                pvStructInfo,
-                ref pcbStructInfo
-            );
+            return Interop.Crypt32
+                .CryptDecodeObjectPointer(
+                    dwCertEncodingType,
+                    (IntPtr)lpszStructType,
+                    pbEncoded,
+                    cbEncoded,
+                    dwFlags,
+                    pvStructInfo,
+                    ref pcbStructInfo
+                );
         }
 
         public static unsafe bool CryptDecodeObjectPointer(
@@ -166,15 +168,16 @@ internal static partial class Interop
         {
             fixed (byte* pEncoded = encoded)
             {
-                return Interop.Crypt32.CryptDecodeObjectPointer(
-                    dwCertEncodingType,
-                    (IntPtr)lpszStructType,
-                    pEncoded,
-                    encoded.Length,
-                    dwFlags,
-                    pvStructInfo,
-                    ref pcbStructInfo
-                );
+                return Interop.Crypt32
+                    .CryptDecodeObjectPointer(
+                        dwCertEncodingType,
+                        (IntPtr)lpszStructType,
+                        pEncoded,
+                        encoded.Length,
+                        dwFlags,
+                        pvStructInfo,
+                        ref pcbStructInfo
+                    );
             }
         }
 
@@ -186,13 +189,14 @@ internal static partial class Interop
             ref int pcbEncoded
         )
         {
-            return Interop.Crypt32.CryptEncodeObject(
-                dwCertEncodingType,
-                (IntPtr)lpszStructType,
-                pvStructInfo,
-                pbEncoded,
-                ref pcbEncoded
-            );
+            return Interop.Crypt32
+                .CryptEncodeObject(
+                    dwCertEncodingType,
+                    (IntPtr)lpszStructType,
+                    pvStructInfo,
+                    pbEncoded,
+                    ref pcbEncoded
+                );
         }
 
         public static unsafe byte[] EncodeObject(
@@ -202,25 +206,27 @@ internal static partial class Interop
         {
             int cb = 0;
             if (
-                !Interop.crypt32.CryptEncodeObject(
-                    Interop.Crypt32.CertEncodingType.All,
-                    lpszStructType,
-                    decoded,
-                    null,
-                    ref cb
-                )
+                !Interop.crypt32
+                    .CryptEncodeObject(
+                        Interop.Crypt32.CertEncodingType.All,
+                        lpszStructType,
+                        decoded,
+                        null,
+                        ref cb
+                    )
             )
                 throw Marshal.GetLastPInvokeError().ToCryptographicException();
 
             byte[] encoded = new byte[cb];
             if (
-                !Interop.crypt32.CryptEncodeObject(
-                    Interop.Crypt32.CertEncodingType.All,
-                    lpszStructType,
-                    decoded,
-                    encoded,
-                    ref cb
-                )
+                !Interop.crypt32
+                    .CryptEncodeObject(
+                        Interop.Crypt32.CertEncodingType.All,
+                        lpszStructType,
+                        decoded,
+                        encoded,
+                        ref cb
+                    )
             )
                 throw Marshal.GetLastPInvokeError().ToCryptographicException();
 
@@ -231,25 +237,27 @@ internal static partial class Interop
         {
             int cb = 0;
             if (
-                !Interop.Crypt32.CryptEncodeObject(
-                    Interop.Crypt32.CertEncodingType.All,
-                    lpszStructType,
-                    decoded,
-                    null,
-                    ref cb
-                )
+                !Interop.Crypt32
+                    .CryptEncodeObject(
+                        Interop.Crypt32.CertEncodingType.All,
+                        lpszStructType,
+                        decoded,
+                        null,
+                        ref cb
+                    )
             )
                 throw Marshal.GetLastPInvokeError().ToCryptographicException();
 
             byte[] encoded = new byte[cb];
             if (
-                !Interop.Crypt32.CryptEncodeObject(
-                    Interop.Crypt32.CertEncodingType.All,
-                    lpszStructType,
-                    decoded,
-                    encoded,
-                    ref cb
-                )
+                !Interop.Crypt32
+                    .CryptEncodeObject(
+                        Interop.Crypt32.CertEncodingType.All,
+                        lpszStructType,
+                        decoded,
+                        encoded,
+                        ref cb
+                    )
             )
                 throw Marshal.GetLastPInvokeError().ToCryptographicException();
 
@@ -261,10 +269,11 @@ internal static partial class Interop
         )
         {
             if (
-                !Interop.Crypt32.CertCreateCertificateChainEngine(
-                    ref config,
-                    out SafeChainEngineHandle chainEngineHandle
-                )
+                !Interop.Crypt32
+                    .CertCreateCertificateChainEngine(
+                        ref config,
+                        out SafeChainEngineHandle chainEngineHandle
+                    )
             )
             {
                 Exception e = Marshal.GetLastPInvokeError().ToCryptographicException();
@@ -296,14 +305,15 @@ internal static partial class Interop
                 pCertContext.Dispose();
             }
 
-            pCertContext = Interop.Crypt32.CertFindCertificateInStore(
-                hCertStore,
-                Interop.Crypt32.CertEncodingType.All,
-                Interop.Crypt32.CertFindFlags.None,
-                dwFindType,
-                pvFindPara,
-                pPrevCertContext
-            );
+            pCertContext = Interop.Crypt32
+                .CertFindCertificateInStore(
+                    hCertStore,
+                    Interop.Crypt32.CertEncodingType.All,
+                    Interop.Crypt32.CertFindFlags.None,
+                    dwFindType,
+                    pvFindPara,
+                    pPrevCertContext
+                );
             return !pCertContext.IsInvalid;
         }
 
@@ -314,12 +324,13 @@ internal static partial class Interop
             int cbKeyUsage
         )
         {
-            bool result = Interop.Crypt32.CertGetIntendedKeyUsage(
-                dwCertEncodingType,
-                pCertInfo,
-                out Interop.Crypt32.X509KeyUsageFlags x509KeyUsageFlags,
-                cbKeyUsage
-            );
+            bool result = Interop.Crypt32
+                .CertGetIntendedKeyUsage(
+                    dwCertEncodingType,
+                    pCertInfo,
+                    out Interop.Crypt32.X509KeyUsageFlags x509KeyUsageFlags,
+                    cbKeyUsage
+                );
             pbKeyUsage = (X509KeyUsageFlags)(int)x509KeyUsageFlags;
             return result;
         }
@@ -331,12 +342,13 @@ internal static partial class Interop
             ref Interop.Crypt32.CERT_CHAIN_POLICY_STATUS pPolicyStatus
         )
         {
-            return Interop.Crypt32.CertVerifyCertificateChainPolicy(
-                (IntPtr)pszPolicyOID,
-                pChainContext,
-                ref pPolicyPara,
-                ref pPolicyStatus
-            );
+            return Interop.Crypt32
+                .CertVerifyCertificateChainPolicy(
+                    (IntPtr)pszPolicyOID,
+                    pChainContext,
+                    ref pPolicyPara,
+                    ref pPolicyStatus
+                );
         }
 
         public static bool CryptAcquireCertificatePrivateKey(
@@ -348,14 +360,15 @@ internal static partial class Interop
             out bool pfCallerFreeProvOrNCryptKey
         )
         {
-            bool result = Interop.Crypt32.CryptAcquireCertificatePrivateKey(
-                pCert,
-                dwFlags,
-                pvParameters,
-                out phCryptProvOrNCryptKey,
-                out Interop.Crypt32.CryptKeySpec pdwKeySpecEnum,
-                out pfCallerFreeProvOrNCryptKey
-            );
+            bool result = Interop.Crypt32
+                .CryptAcquireCertificatePrivateKey(
+                    pCert,
+                    dwFlags,
+                    pvParameters,
+                    out phCryptProvOrNCryptKey,
+                    out Interop.Crypt32.CryptKeySpec pdwKeySpecEnum,
+                    out pfCallerFreeProvOrNCryptKey
+                );
             pdwKeySpec = (int)pdwKeySpecEnum;
             return result;
         }

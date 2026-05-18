@@ -79,10 +79,8 @@ namespace System.Reflection
                     )
                     {
                         if (
-                            type.FullName!.StartsWith(
-                                CallingConventionTypePrefix,
-                                StringComparison.Ordinal
-                            )
+                            type.FullName!
+                                .StartsWith(CallingConventionTypePrefix, StringComparison.Ordinal)
                         )
                         {
                             builder.Add(type);

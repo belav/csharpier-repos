@@ -282,8 +282,11 @@ namespace System.Workflow.Activities.Rules
             RuleCondition conditionDefinitionToEvaluate = defs.Conditions[this._condition];
             if (conditionDefinitionToEvaluate != null)
             {
-                Activity contextActivity =
-                    System.Workflow.Activities.Common.Helpers.GetEnclosingActivity(activity);
+                Activity contextActivity = System.Workflow
+                    .Activities
+                    .Common
+                    .Helpers
+                    .GetEnclosingActivity(activity);
                 RuleValidation validation = new RuleValidation(contextActivity);
                 if (!conditionDefinitionToEvaluate.Validate(validation))
                 {

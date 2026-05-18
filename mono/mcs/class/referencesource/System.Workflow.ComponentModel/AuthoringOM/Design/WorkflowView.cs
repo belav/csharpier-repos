@@ -669,9 +669,10 @@ namespace System.Workflow.ComponentModel.Design
                         {
                             Bitmap tabImage = DR.GetImage(tabButtonInfo[i, 1]) as Bitmap;
                             string buttonCaption = DR.GetString(tabButtonInfo[i, 0]);
-                            this.toolContainer.TabStrip.Tabs.Add(
-                                new ItemInfo(i + 1, tabImage, buttonCaption)
-                            );
+                            this.toolContainer
+                                .TabStrip
+                                .Tabs
+                                .Add(new ItemInfo(i + 1, tabImage, buttonCaption));
                         }
 
                         this.toolContainer.TabStrip.TabChange +=
@@ -1130,15 +1131,16 @@ namespace System.Workflow.ComponentModel.Design
 
             e.Graphics.EndContainer(graphicsState);
 
-            e.Graphics.FillRectangle(
-                SystemBrushes.Control,
-                new Rectangle(
-                    Width - SystemInformation.VerticalScrollBarWidth,
-                    Height - SystemInformation.HorizontalScrollBarHeight,
-                    SystemInformation.VerticalScrollBarWidth,
-                    SystemInformation.HorizontalScrollBarHeight
-                )
-            );
+            e.Graphics
+                .FillRectangle(
+                    SystemBrushes.Control,
+                    new Rectangle(
+                        Width - SystemInformation.VerticalScrollBarWidth,
+                        Height - SystemInformation.HorizontalScrollBarHeight,
+                        SystemInformation.VerticalScrollBarWidth,
+                        SystemInformation.HorizontalScrollBarHeight
+                    )
+                );
         }
 
         protected virtual void OnZoomChanged()
@@ -2528,16 +2530,17 @@ namespace System.Workflow.ComponentModel.Design
                         }
                         else if (e is DragEventArgs)
                         {
-                            clientPoint = this.workflowView.PointToClient(
-                                new Point(((DragEventArgs)e).X, ((DragEventArgs)e).Y)
-                            );
+                            clientPoint = this.workflowView
+                                .PointToClient(
+                                    new Point(((DragEventArgs)e).X, ((DragEventArgs)e).Y)
+                                );
                             this.workflowView.UpdateLayout();
                         }
 
                         Point logicalPoint = this.workflowView.ClientPointToLogical(clientPoint);
-                        HitTestInfo hitTestInfo = this.workflowView.RootDesigner.HitTest(
-                            logicalPoint
-                        );
+                        HitTestInfo hitTestInfo = this.workflowView
+                            .RootDesigner
+                            .HitTest(logicalPoint);
                         this.messageContext =
                             (hitTestInfo != null) ? hitTestInfo : HitTestInfo.Nowhere;
                         this.workflowView.messageHitTestContexts.Push(this.messageContext);
@@ -2732,12 +2735,13 @@ namespace System.Workflow.ComponentModel.Design
 
         internal void Subscribe(int elapsedInterval, EventHandler elapsedEventHandler)
         {
-            this.elapsedEvents.Add(
-                new ElapsedEventUnit(
-                    elapsedInterval / WorkflowTimer.TimerInterval,
-                    elapsedEventHandler
-                )
-            );
+            this.elapsedEvents
+                .Add(
+                    new ElapsedEventUnit(
+                        elapsedInterval / WorkflowTimer.TimerInterval,
+                        elapsedEventHandler
+                    )
+                );
             if (!this.timer.Enabled)
                 this.timer.Start();
         }

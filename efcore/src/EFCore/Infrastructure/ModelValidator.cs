@@ -251,8 +251,8 @@ public class ModelValidator : IModelValidator
             var runtimeProperties = typeBase.GetRuntimeProperties();
             var clrProperties = new HashSet<string>(StringComparer.Ordinal);
             clrProperties.UnionWith(
-                runtimeProperties
-                    .Values.Where(pi => pi.IsCandidateProperty(needsWrite: false))
+                runtimeProperties.Values
+                    .Where(pi => pi.IsCandidateProperty(needsWrite: false))
                     .Select(pi => pi.GetSimpleMemberName())
             );
 
@@ -295,12 +295,13 @@ public class ModelValidator : IModelValidator
                     continue;
                 }
 
-                var targetType = Dependencies.MemberClassifier.FindCandidateNavigationPropertyType(
-                    clrProperty,
-                    conventionModel,
-                    useAttributes: true,
-                    out var targetOwned
-                );
+                var targetType = Dependencies.MemberClassifier
+                    .FindCandidateNavigationPropertyType(
+                        clrProperty,
+                        conventionModel,
+                        useAttributes: true,
+                        out var targetOwned
+                    );
                 if (targetType == null && clrProperty.FindSetterProperty() == null)
                 {
                     continue;
@@ -611,9 +612,8 @@ public class ModelValidator : IModelValidator
         {
             foreach (var key in entityType.GetDeclaredKeys())
             {
-                var mutableProperty = key.Properties.FirstOrDefault(p =>
-                    p.ValueGenerated.HasFlag(ValueGenerated.OnUpdate)
-                );
+                var mutableProperty = key.Properties
+                    .FirstOrDefault(p => p.ValueGenerated.HasFlag(ValueGenerated.OnUpdate));
                 if (mutableProperty != null)
                 {
                     throw new InvalidOperationException(
@@ -648,10 +648,8 @@ public class ModelValidator : IModelValidator
                 var principalType = foreignKey.PrincipalEntityType;
                 if (
                     !foreignKey.PrincipalKey.IsPrimaryKey()
-                    || !PropertyListComparer.Instance.Equals(
-                        foreignKey.Properties,
-                        primaryKey.Properties
-                    )
+                    || !PropertyListComparer.Instance
+                        .Equals(foreignKey.Properties, primaryKey.Properties)
                     || foreignKey.PrincipalEntityType.IsAssignableFrom(entityType)
                 )
                 {
@@ -936,9 +934,8 @@ public class ModelValidator : IModelValidator
                             !fk.IsOwnership
                             && (
                                 fk.PrincipalEntityType != fk.DeclaringEntityType
-                                || !fk.Properties.SequenceEqual(
-                                    entityType.FindPrimaryKey()!.Properties
-                                )
+                                || !fk.Properties
+                                    .SequenceEqual(entityType.FindPrimaryKey()!.Properties)
                             )
                             && !Contains(fk.DeclaringEntityType.FindOwnership(), fk)
                         )
@@ -1031,9 +1028,8 @@ public class ModelValidator : IModelValidator
                     {
                         if (
                             inheritedKey.DeclaringEntityType != entityType
-                            && inheritedKey.Properties.All(p =>
-                                declaredForeignKey.Properties.Contains(p)
-                            )
+                            && inheritedKey.Properties
+                                .All(p => declaredForeignKey.Properties.Contains(p))
                             && !ContainedInForeignKeyForAllConcreteTypes(
                                 inheritedKey.DeclaringEntityType,
                                 generatedProperty
@@ -1126,9 +1122,8 @@ public class ModelValidator : IModelValidator
             if (constructorBinding != null)
             {
                 foreach (
-                    var consumedProperty in constructorBinding.ParameterBindings.SelectMany(p =>
-                        p.ConsumedProperties
-                    )
+                    var consumedProperty in constructorBinding.ParameterBindings
+                        .SelectMany(p => p.ConsumedProperties)
                 )
                 {
                     properties.Remove(consumedProperty);

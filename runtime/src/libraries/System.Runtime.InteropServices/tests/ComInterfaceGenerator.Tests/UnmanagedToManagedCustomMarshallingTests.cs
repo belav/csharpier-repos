@@ -240,18 +240,14 @@ namespace ComInterfaceGenerator.Tests
 
                 Assert.Equal(freeCalls, IntWrapperMarshallerToIntWithFreeCounts.NumCallsToFree);
 
-                NativeExportsNE.UnmanagedToManagedCustomMarshalling.SetNativeObjectData(
-                    wrapper,
-                    newValue
-                );
+                NativeExportsNE.UnmanagedToManagedCustomMarshalling
+                    .SetNativeObjectData(wrapper, newValue);
                 Assert.Equal(freeCalls, IntWrapperMarshallerToIntWithFreeCounts.NumCallsToFree);
 
                 int finalValue = 10;
 
-                NativeExportsNE.UnmanagedToManagedCustomMarshalling.ExchangeNativeObjectData(
-                    wrapper,
-                    ref finalValue
-                );
+                NativeExportsNE.UnmanagedToManagedCustomMarshalling
+                    .ExchangeNativeObjectData(wrapper, ref finalValue);
                 Assert.Equal(freeCalls + 1, IntWrapperMarshallerToIntWithFreeCounts.NumCallsToFree);
             }
             finally
@@ -280,12 +276,8 @@ namespace ComInterfaceGenerator.Tests
 
                 int freeCalls = IntWrapperMarshallerToIntWithFreeCounts.NumCallsToFree;
 
-                NativeExportsNE.UnmanagedToManagedCustomMarshalling.SumAndSetNativeObjectData(
-                    wrapper,
-                    values,
-                    values.Length,
-                    out int _
-                );
+                NativeExportsNE.UnmanagedToManagedCustomMarshalling
+                    .SumAndSetNativeObjectData(wrapper, values, values.Length, out int _);
 
                 Assert.Equal(freeCalls, IntWrapperMarshallerToIntWithFreeCounts.NumCallsToFree);
             }
@@ -315,12 +307,8 @@ namespace ComInterfaceGenerator.Tests
 
                 int freeCalls = IntWrapperMarshallerToIntWithFreeCounts.NumCallsToFree;
 
-                NativeExportsNE.UnmanagedToManagedCustomMarshalling.SumAndSetNativeObjectData(
-                    wrapper,
-                    ref values,
-                    values.Length,
-                    out int _
-                );
+                NativeExportsNE.UnmanagedToManagedCustomMarshalling
+                    .SumAndSetNativeObjectData(wrapper, ref values, values.Length, out int _);
 
                 Assert.Equal(
                     freeCalls + values.Length,
@@ -354,11 +342,8 @@ namespace ComInterfaceGenerator.Tests
 
                 int elementFreeCalls = IntWrapperMarshallerToIntWithFreeCounts.NumCallsToFree;
 
-                NativeExportsNE.UnmanagedToManagedCustomMarshalling.MultiplyWithNativeObjectData(
-                    wrapper,
-                    values,
-                    values.Length
-                );
+                NativeExportsNE.UnmanagedToManagedCustomMarshalling
+                    .MultiplyWithNativeObjectData(wrapper, values, values.Length);
 
                 Assert.Equal(expected, values);
 
@@ -395,16 +380,11 @@ namespace ComInterfaceGenerator.Tests
                 int marshallerFreeCalls = StatefulUnmanagedToManagedCollectionMarshaller<
                     IntWrapper,
                     int
-                >
-                    .In
+                >.In
                     .NumCallsToFree;
 
-                NativeExportsNE.UnmanagedToManagedCustomMarshalling.SumAndSetNativeObjectData(
-                    wrapper,
-                    values,
-                    values.Length,
-                    out int _
-                );
+                NativeExportsNE.UnmanagedToManagedCustomMarshalling
+                    .SumAndSetNativeObjectData(wrapper, values, values.Length, out int _);
 
                 // We shouldn't free the elements, but we always free the stateful marshaller.
                 Assert.Equal(
@@ -413,8 +393,7 @@ namespace ComInterfaceGenerator.Tests
                 );
                 Assert.Equal(
                     marshallerFreeCalls + 1,
-                    StatefulUnmanagedToManagedCollectionMarshaller<IntWrapper, int>
-                        .In
+                    StatefulUnmanagedToManagedCollectionMarshaller<IntWrapper, int>.In
                         .NumCallsToFree
                 );
             }
@@ -446,16 +425,11 @@ namespace ComInterfaceGenerator.Tests
                 int marshallerFreeCalls = StatefulUnmanagedToManagedCollectionMarshaller<
                     IntWrapper,
                     int
-                >
-                    .Ref
+                >.Ref
                     .NumCallsToFree;
 
-                NativeExportsNE.UnmanagedToManagedCustomMarshalling.SumAndSetNativeObjectData(
-                    wrapper,
-                    ref values,
-                    values.Length,
-                    out int _
-                );
+                NativeExportsNE.UnmanagedToManagedCustomMarshalling
+                    .SumAndSetNativeObjectData(wrapper, ref values, values.Length, out int _);
 
                 Assert.Equal(
                     elementFreeCalls + values.Length,
@@ -463,8 +437,7 @@ namespace ComInterfaceGenerator.Tests
                 );
                 Assert.Equal(
                     marshallerFreeCalls + 1,
-                    StatefulUnmanagedToManagedCollectionMarshaller<IntWrapper, int>
-                        .Ref
+                    StatefulUnmanagedToManagedCollectionMarshaller<IntWrapper, int>.Ref
                         .NumCallsToFree
                 );
             }
@@ -497,15 +470,11 @@ namespace ComInterfaceGenerator.Tests
                 int marshallerFreeCalls = StatefulUnmanagedToManagedCollectionMarshaller<
                     IntWrapper,
                     int
-                >
-                    .In
+                >.In
                     .NumCallsToFree;
 
-                NativeExportsNE.UnmanagedToManagedCustomMarshalling.MultiplyWithNativeObjectData(
-                    wrapper,
-                    values,
-                    values.Length
-                );
+                NativeExportsNE.UnmanagedToManagedCustomMarshalling
+                    .MultiplyWithNativeObjectData(wrapper, values, values.Length);
 
                 Assert.Equal(expected, values);
 
@@ -515,8 +484,7 @@ namespace ComInterfaceGenerator.Tests
                 );
                 Assert.Equal(
                     marshallerFreeCalls + 1,
-                    StatefulUnmanagedToManagedCollectionMarshaller<IntWrapper, int>
-                        .In
+                    StatefulUnmanagedToManagedCollectionMarshaller<IntWrapper, int>.In
                         .NumCallsToFree
                 );
             }

@@ -44,9 +44,9 @@ namespace Microsoft.CodeAnalysis.Test.Utilities.MoveStaticMembers
                 var actualPrecheckedMembers = selectedNodeSymbols.SelectAsArray(n => n.Name).Sort();
                 if (!ExpectedPrecheckedMembers.Sort().SequenceEqual(actualPrecheckedMembers))
                 {
-                    System.Diagnostics.Debug.Fail(
-                        "Expected Prechecked members did not match recieved members"
-                    );
+                    System.Diagnostics
+                        .Debug
+                        .Fail("Expected Prechecked members did not match recieved members");
                     var errMsg = string.Format(
                         "Expected: {0} \n Actual: {1}",
                         ExpectedPrecheckedMembers,
@@ -73,8 +73,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities.MoveStaticMembers
                 );
             }
 
-            var destination = selectedType
-                .ContainingNamespace.GetAllTypes(CancellationToken.None)
+            var destination = selectedType.ContainingNamespace
+                .GetAllTypes(CancellationToken.None)
                 .First(t => t.ToDisplayString() == DestinationName);
             return new MoveStaticMembersOptions(destination, selectedMembers);
         }

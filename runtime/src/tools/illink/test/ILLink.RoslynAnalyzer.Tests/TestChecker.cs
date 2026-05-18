@@ -271,8 +271,7 @@ namespace ILLink.RoslynAnalyzer.Tests
                     case BinaryExpressionSyntax binaryExpressionSyntax:
                         if (
                             !Enum.TryParse<Tool>(
-                                (binaryExpressionSyntax.Left as MemberAccessExpressionSyntax)!
-                                    .Name
+                                (binaryExpressionSyntax.Left as MemberAccessExpressionSyntax)!.Name
                                     .Identifier
                                     .ValueText,
                                 out var besProducedBy

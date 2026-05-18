@@ -51,9 +51,8 @@ namespace System.ServiceModel
             set
             {
                 if (!MsmqAuthenticationModeHelper.IsDefined(value))
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ArgumentOutOfRangeException("value")
-                    );
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperError(new ArgumentOutOfRangeException("value"));
                 this.msmqAuthenticationMode = value;
             }
         }
@@ -65,9 +64,8 @@ namespace System.ServiceModel
             set
             {
                 if (!MsmqEncryptionAlgorithmHelper.IsDefined(value))
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ArgumentOutOfRangeException("value")
-                    );
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperError(new ArgumentOutOfRangeException("value"));
                 this.msmqEncryptionAlgorithm = value;
             }
         }
@@ -79,9 +77,8 @@ namespace System.ServiceModel
             set
             {
                 if (!MsmqSecureHashAlgorithmHelper.IsDefined(value))
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ArgumentOutOfRangeException("value")
-                    );
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperError(new ArgumentOutOfRangeException("value"));
                 this.msmqHashAlgorithm = value;
             }
         }
@@ -93,9 +90,8 @@ namespace System.ServiceModel
             set
             {
                 if (!ProtectionLevelHelper.IsDefined(value))
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ArgumentOutOfRangeException("value")
-                    );
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperError(new ArgumentOutOfRangeException("value"));
                 this.msmqProtectionLevel = value;
             }
         }

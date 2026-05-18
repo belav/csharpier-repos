@@ -158,12 +158,13 @@ namespace System.ServiceModel.Security.Tokens
             set
             {
                 if (value < 0)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ArgumentOutOfRangeException(
-                            "value",
-                            SR.GetString(SR.ValueMustBeNonNegative)
-                        )
-                    );
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperError(
+                            new ArgumentOutOfRangeException(
+                                "value",
+                                SR.GetString(SR.ValueMustBeNonNegative)
+                            )
+                        );
                 this.keySize = value;
             }
         }
@@ -223,9 +224,8 @@ namespace System.ServiceModel.Security.Tokens
         )
         {
             if (requestParameters == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                    "requestParameters"
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperArgumentNull("requestParameters");
 
             if (trustDriver == null)
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("trustDriver");
@@ -837,18 +837,20 @@ namespace System.ServiceModel.Security.Tokens
             SecurityKeyType issuedKeyType
         )
         {
-            this.additionalRequestParameters.Insert(
-                0,
-                standardsManager.TrustDriver.CreateEncryptionAlgorithmElement(
-                    algorithmSuite.DefaultEncryptionAlgorithm
-                )
-            );
-            this.additionalRequestParameters.Insert(
-                0,
-                standardsManager.TrustDriver.CreateCanonicalizationAlgorithmElement(
-                    algorithmSuite.DefaultCanonicalizationAlgorithm
-                )
-            );
+            this.additionalRequestParameters
+                .Insert(
+                    0,
+                    standardsManager.TrustDriver
+                        .CreateEncryptionAlgorithmElement(algorithmSuite.DefaultEncryptionAlgorithm)
+                );
+            this.additionalRequestParameters
+                .Insert(
+                    0,
+                    standardsManager.TrustDriver
+                        .CreateCanonicalizationAlgorithmElement(
+                            algorithmSuite.DefaultCanonicalizationAlgorithm
+                        )
+                );
 
             if (this.keyType == SecurityKeyType.BearerKey)
             {
@@ -861,10 +863,8 @@ namespace System.ServiceModel.Security.Tokens
                 (this.keyType == SecurityKeyType.SymmetricKey)
                     ? algorithmSuite.DefaultSymmetricSignatureAlgorithm
                     : algorithmSuite.DefaultAsymmetricSignatureAlgorithm;
-            this.additionalRequestParameters.Insert(
-                0,
-                standardsManager.TrustDriver.CreateSignWithElement(signWithAlgorithm)
-            );
+            this.additionalRequestParameters
+                .Insert(0, standardsManager.TrustDriver.CreateSignWithElement(signWithAlgorithm));
             string encryptWithAlgorithm;
             if (issuedKeyType == SecurityKeyType.SymmetricKey)
             {
@@ -874,21 +874,23 @@ namespace System.ServiceModel.Security.Tokens
             {
                 encryptWithAlgorithm = algorithmSuite.DefaultAsymmetricKeyWrapAlgorithm;
             }
-            this.additionalRequestParameters.Insert(
-                0,
-                standardsManager.TrustDriver.CreateEncryptWithElement(encryptWithAlgorithm)
-            );
+            this.additionalRequestParameters
+                .Insert(
+                    0,
+                    standardsManager.TrustDriver.CreateEncryptWithElement(encryptWithAlgorithm)
+                );
 
             if (standardsManager.TrustVersion != TrustVersion.WSTrustFeb2005)
             {
-                this.additionalRequestParameters.Insert(
-                    0,
-                    (
-                        (WSTrustDec2005.DriverDec2005)standardsManager.TrustDriver
-                    ).CreateKeyWrapAlgorithmElement(
-                        algorithmSuite.DefaultAsymmetricKeyWrapAlgorithm
-                    )
-                );
+                this.additionalRequestParameters
+                    .Insert(
+                        0,
+                        (
+                            (WSTrustDec2005.DriverDec2005)standardsManager.TrustDriver
+                        ).CreateKeyWrapAlgorithmElement(
+                            algorithmSuite.DefaultAsymmetricKeyWrapAlgorithm
+                        )
+                    );
             }
 
             return;
@@ -940,10 +942,8 @@ namespace System.ServiceModel.Security.Tokens
                 string algorithm;
                 XmlElement element = trustVersionNormalizedParameterCollection[i];
                 if (
-                    standardsManager.TrustDriver.IsCanonicalizationAlgorithmElement(
-                        element,
-                        out algorithm
-                    )
+                    standardsManager.TrustDriver
+                        .IsCanonicalizationAlgorithmElement(element, out algorithm)
                 )
                 {
                     if (algorithmSuite.DefaultCanonicalizationAlgorithm != algorithm)
@@ -987,10 +987,8 @@ namespace System.ServiceModel.Security.Tokens
                     doesEncryptWithAlgorithmMatch = true;
                 }
                 else if (
-                    standardsManager.TrustDriver.IsEncryptionAlgorithmElement(
-                        element,
-                        out algorithm
-                    )
+                    standardsManager.TrustDriver
+                        .IsEncryptionAlgorithmElement(element, out algorithm)
                 )
                 {
                     if (algorithm != algorithmSuite.DefaultEncryptionAlgorithm)
@@ -1145,8 +1143,7 @@ namespace System.ServiceModel.Security.Tokens
                         == (
                             (System.ServiceModel.Security.WSTrust.Driver)
                                 standardsManager.TrustDriver
-                        )
-                            .DriverDictionary
+                        ).DriverDictionary
                             .Claims
                             .Value
                     )
@@ -1155,8 +1152,7 @@ namespace System.ServiceModel.Security.Tokens
                         == (
                             (System.ServiceModel.Security.WSTrust.Driver)
                                 standardsManager.TrustDriver
-                        )
-                            .DriverDictionary
+                        ).DriverDictionary
                             .Namespace
                             .Value
                     )
@@ -1258,8 +1254,8 @@ namespace System.ServiceModel.Security.Tokens
             else
             {
                 sb.AppendLine(String.Format(CultureInfo.InvariantCulture, "IssuerBinding:"));
-                BindingElementCollection bindingElements =
-                    this.issuerBinding.CreateBindingElements();
+                BindingElementCollection bindingElements = this.issuerBinding
+                    .CreateBindingElements();
                 for (int i = 0; i < bindingElements.Count; i++)
                 {
                     sb.AppendLine(

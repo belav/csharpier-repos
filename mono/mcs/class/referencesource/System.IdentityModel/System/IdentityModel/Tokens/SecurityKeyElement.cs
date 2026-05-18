@@ -32,9 +32,8 @@ namespace System.IdentityModel.Tokens
         {
             if (securityKeyIdentifierClause == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                    "securityKeyIdentifierClause"
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperArgumentNull("securityKeyIdentifierClause");
             }
 
             Initialize(
@@ -56,9 +55,8 @@ namespace System.IdentityModel.Tokens
         {
             if (securityKeyIdentifier == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                    "securityKeyIdentifier"
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperArgumentNull("securityKeyIdentifier");
             }
 
             Initialize(securityKeyIdentifier, securityTokenResolver);
@@ -239,20 +237,21 @@ namespace System.IdentityModel.Tokens
                             return;
                         }
 
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelper(
-                            new SecurityTokenException(
-                                SR.GetString(
-                                    SR.ID2080,
-                                    _securityTokenResolver == null
-                                        ? "null"
-                                        : _securityTokenResolver.ToString(),
-                                    _securityKeyIdentifier == null
-                                        ? "null"
-                                        : _securityKeyIdentifier.ToString()
-                                )
-                            ),
-                            System.Diagnostics.TraceEventType.Error
-                        );
+                        throw DiagnosticUtility.ExceptionUtility
+                            .ThrowHelper(
+                                new SecurityTokenException(
+                                    SR.GetString(
+                                        SR.ID2080,
+                                        _securityTokenResolver == null
+                                            ? "null"
+                                            : _securityTokenResolver.ToString(),
+                                        _securityKeyIdentifier == null
+                                            ? "null"
+                                            : _securityKeyIdentifier.ToString()
+                                    )
+                                ),
+                                System.Diagnostics.TraceEventType.Error
+                            );
                     }
                 }
             }

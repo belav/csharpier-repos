@@ -64,7 +64,8 @@ public abstract class CompiledModelTestBase : NonSharedModelTestBase
             eb.HasAlternateKey(e => e.Id);
 
             eb.Property(e => e.AlternateId)
-                .Metadata.SetJsonValueReaderWriterType(
+                .Metadata
+                .SetJsonValueReaderWriterType(
                     jsonColumns ? typeof(MyJsonGuidReaderWriter) : typeof(JsonGuidReaderWriter)
                 );
 
@@ -1359,12 +1360,10 @@ public abstract class CompiledModelTestBase : NonSharedModelTestBase
         build.References.Add(BuildReference.ByName("Microsoft.EntityFrameworkCore"));
         build.References.Add(BuildReference.ByName("Microsoft.EntityFrameworkCore.Abstractions"));
         build.References.Add(BuildReference.ByName("Microsoft.EntityFrameworkCore.Proxies"));
-        build.References.Add(
-            BuildReference.ByName("Microsoft.EntityFrameworkCore.Specification.Tests")
-        );
-        build.References.Add(
-            BuildReference.ByName(typeof(CompiledModelTestBase).Assembly.GetName().Name)
-        );
+        build.References
+            .Add(BuildReference.ByName("Microsoft.EntityFrameworkCore.Specification.Tests"));
+        build.References
+            .Add(BuildReference.ByName(typeof(CompiledModelTestBase).Assembly.GetName().Name));
         build.References.Add(BuildReference.ByName(GetType().Assembly.GetName().Name));
         return build;
     }

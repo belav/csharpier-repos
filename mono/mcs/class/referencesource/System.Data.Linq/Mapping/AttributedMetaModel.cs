@@ -761,8 +761,8 @@ namespace System.Data.Linq.Mapping
             // (because no lock will be required for the common read scenario).
             this.InitDataMembers();
             this.identities = this.dataMembers.Where(m => m.IsPrimaryKey).ToList().AsReadOnly();
-            this.persistentMembers = this
-                .dataMembers.Where(m => m.IsPersistent)
+            this.persistentMembers = this.dataMembers
+                .Where(m => m.IsPersistent)
                 .ToList()
                 .AsReadOnly();
         }
@@ -1100,8 +1100,8 @@ namespace System.Data.Linq.Mapping
                     {
                         if (this.associations == null)
                         {
-                            this.associations = this
-                                .dataMembers.Where(m => m.IsAssociation)
+                            this.associations = this.dataMembers
+                                .Where(m => m.IsAssociation)
                                 .Select(m => m.Association)
                                 .ToList()
                                 .AsReadOnly();
@@ -1421,10 +1421,8 @@ namespace System.Data.Linq.Mapping
                     : (DataAttribute)this.attrAssoc;
             if (this.attr != null && this.attr.Storage != null)
             {
-                MemberInfo[] mis = mi.DeclaringType.GetMember(
-                    this.attr.Storage,
-                    BindingFlags.Instance | BindingFlags.NonPublic
-                );
+                MemberInfo[] mis = mi.DeclaringType
+                    .GetMember(this.attr.Storage, BindingFlags.Instance | BindingFlags.NonPublic);
                 if (mis == null || mis.Length != 1)
                 {
                     throw Error.BadStorageProperty(this.attr.Storage, mi.DeclaringType, mi.Name);

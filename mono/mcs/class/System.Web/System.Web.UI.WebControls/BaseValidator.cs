@@ -258,20 +258,17 @@ namespace System.Web.UI.WebControls
         {
             Page page = Page;
             if (page.ScriptManager != null)
-                page.ScriptManager.RegisterExpandoAttributeExternal(
-                    this,
-                    controlId,
-                    attributeName,
-                    attributeValue,
-                    encode
-                );
+                page.ScriptManager
+                    .RegisterExpandoAttributeExternal(
+                        this,
+                        controlId,
+                        attributeName,
+                        attributeValue,
+                        encode
+                    );
             else
-                page.ClientScript.RegisterExpandoAttribute(
-                    controlId,
-                    attributeName,
-                    attributeValue,
-                    encode
-                );
+                page.ClientScript
+                    .RegisterExpandoAttribute(controlId, attributeName, attributeValue, encode);
         }
 
         protected void CheckControlValidationProperty(string name, string propertyName)
@@ -312,9 +309,10 @@ namespace System.Web.UI.WebControls
             if (!EnableClientScript)
                 return false;
             return UplevelHelper.IsUplevel(
-                System.Web.Configuration.HttpCapabilitiesBase.GetUserAgentForDetection(
-                    HttpContext.Current.Request
-                )
+                System.Web
+                    .Configuration
+                    .HttpCapabilitiesBase
+                    .GetUserAgentForDetection(HttpContext.Current.Request)
             );
         }
 
@@ -415,64 +413,71 @@ namespace System.Web.UI.WebControls
             {
                 if (page.ScriptManager != null)
                 {
-                    page.ScriptManager.RegisterClientScriptResourceExternal(
-                        this,
-                        typeof(BaseValidator),
-                        "WebUIValidation_2.0.js"
-                    );
-                    page.ScriptManager.RegisterClientScriptBlockExternal(
-                        this,
-                        typeof(BaseValidator),
-                        "ValidationInitializeScript",
-                        page.ValidationInitializeScript,
-                        true
-                    );
-                    page.ScriptManager.RegisterOnSubmitStatementExternal(
-                        this,
-                        typeof(BaseValidator),
-                        "ValidationOnSubmitStatement",
-                        page.ValidationOnSubmitStatement
-                    );
-                    page.ScriptManager.RegisterStartupScriptExternal(
-                        this,
-                        typeof(BaseValidator),
-                        "ValidationStartupScript",
-                        page.ValidationStartupScript,
-                        true
-                    );
-                }
-                else if (
-                    !page.ClientScript.IsClientScriptIncludeRegistered(
-                        typeof(BaseValidator),
-                        "Mono-System.Web-ValidationClientScriptBlock"
-                    )
-                )
-                {
-                    page.ClientScript.RegisterClientScriptInclude(
-                        typeof(BaseValidator),
-                        "Mono-System.Web-ValidationClientScriptBlock",
-                        page.ClientScript.GetWebResourceUrl(
+                    page.ScriptManager
+                        .RegisterClientScriptResourceExternal(
+                            this,
                             typeof(BaseValidator),
                             "WebUIValidation_2.0.js"
+                        );
+                    page.ScriptManager
+                        .RegisterClientScriptBlockExternal(
+                            this,
+                            typeof(BaseValidator),
+                            "ValidationInitializeScript",
+                            page.ValidationInitializeScript,
+                            true
+                        );
+                    page.ScriptManager
+                        .RegisterOnSubmitStatementExternal(
+                            this,
+                            typeof(BaseValidator),
+                            "ValidationOnSubmitStatement",
+                            page.ValidationOnSubmitStatement
+                        );
+                    page.ScriptManager
+                        .RegisterStartupScriptExternal(
+                            this,
+                            typeof(BaseValidator),
+                            "ValidationStartupScript",
+                            page.ValidationStartupScript,
+                            true
+                        );
+                }
+                else if (
+                    !page.ClientScript
+                        .IsClientScriptIncludeRegistered(
+                            typeof(BaseValidator),
+                            "Mono-System.Web-ValidationClientScriptBlock"
                         )
-                    );
-                    page.ClientScript.RegisterClientScriptBlock(
-                        typeof(BaseValidator),
-                        "Mono-System.Web-ValidationClientScriptBlock.Initialize",
-                        page.ValidationInitializeScript,
-                        true
-                    );
-                    page.ClientScript.RegisterOnSubmitStatement(
-                        typeof(BaseValidator),
-                        "Mono-System.Web-ValidationOnSubmitStatement",
-                        page.ValidationOnSubmitStatement
-                    );
-                    page.ClientScript.RegisterStartupScript(
-                        typeof(BaseValidator),
-                        "Mono-System.Web-ValidationStartupScript",
-                        page.ValidationStartupScript,
-                        true
-                    );
+                )
+                {
+                    page.ClientScript
+                        .RegisterClientScriptInclude(
+                            typeof(BaseValidator),
+                            "Mono-System.Web-ValidationClientScriptBlock",
+                            page.ClientScript
+                                .GetWebResourceUrl(typeof(BaseValidator), "WebUIValidation_2.0.js")
+                        );
+                    page.ClientScript
+                        .RegisterClientScriptBlock(
+                            typeof(BaseValidator),
+                            "Mono-System.Web-ValidationClientScriptBlock.Initialize",
+                            page.ValidationInitializeScript,
+                            true
+                        );
+                    page.ClientScript
+                        .RegisterOnSubmitStatement(
+                            typeof(BaseValidator),
+                            "Mono-System.Web-ValidationOnSubmitStatement",
+                            page.ValidationOnSubmitStatement
+                        );
+                    page.ClientScript
+                        .RegisterStartupScript(
+                            typeof(BaseValidator),
+                            "Mono-System.Web-ValidationStartupScript",
+                            page.ValidationStartupScript,
+                            true
+                        );
                 }
             }
         }
@@ -484,32 +489,35 @@ namespace System.Web.UI.WebControls
             {
                 if (page.ScriptManager != null)
                 {
-                    page.ScriptManager.RegisterArrayDeclarationExternal(
-                        this,
-                        "Page_Validators",
-                        String.Concat("document.getElementById ('", ClientID, "')")
-                    );
-                    page.ScriptManager.RegisterStartupScriptExternal(
-                        this,
-                        typeof(BaseValidator),
-                        ClientID + "DisposeScript",
-                        @"
+                    page.ScriptManager
+                        .RegisterArrayDeclarationExternal(
+                            this,
+                            "Page_Validators",
+                            String.Concat("document.getElementById ('", ClientID, "')")
+                        );
+                    page.ScriptManager
+                        .RegisterStartupScriptExternal(
+                            this,
+                            typeof(BaseValidator),
+                            ClientID + "DisposeScript",
+                            @"
 document.getElementById('"
-                            + ClientID
-                            + @"').dispose = function() {
+                                + ClientID
+                                + @"').dispose = function() {
     Array.remove(Page_Validators, document.getElementById('"
-                            + ClientID
-                            + @"'));
+                                + ClientID
+                                + @"'));
 }
 ",
-                        true
-                    );
+                            true
+                        );
                 }
                 else
-                    page.ClientScript.RegisterArrayDeclaration(
-                        "Page_Validators",
-                        String.Concat("document.getElementById ('", ClientID, "')")
-                    );
+                    page.ClientScript
+                        .RegisterArrayDeclaration(
+                            "Page_Validators",
+                            String.Concat("document.getElementById ('", ClientID, "')")
+                        );
             }
         }
 

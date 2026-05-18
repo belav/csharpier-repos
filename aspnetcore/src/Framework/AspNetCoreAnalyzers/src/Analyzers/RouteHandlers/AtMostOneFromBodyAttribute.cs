@@ -27,14 +27,13 @@ public partial class RouteHandlerAnalyzer : DiagnosticAnalyzer
             WellKnownType.Microsoft_AspNetCore_Http_AsParametersAttribute
         );
 
-        var asParametersDecoratedParameters = methodSymbol.Parameters.Where(p =>
-            p.HasAttribute(asParametersAttributeType)
-        );
+        var asParametersDecoratedParameters = methodSymbol.Parameters
+            .Where(p => p.HasAttribute(asParametersAttributeType));
 
         foreach (var asParameterDecoratedParameter in asParametersDecoratedParameters)
         {
-            var fromBodyMetadataInterfaceMembers = asParameterDecoratedParameter
-                .Type.GetMembers()
+            var fromBodyMetadataInterfaceMembers = asParameterDecoratedParameter.Type
+                .GetMembers()
                 .Where(m => m.HasAttributeImplementingInterface(fromBodyMetadataInterfaceType));
 
             if (fromBodyMetadataInterfaceMembers.Count() >= 2)
@@ -43,9 +42,8 @@ public partial class RouteHandlerAnalyzer : DiagnosticAnalyzer
             }
         }
 
-        var fromBodyMetadataInterfaceParameters = methodSymbol.Parameters.Where(p =>
-            p.HasAttributeImplementingInterface(fromBodyMetadataInterfaceType)
-        );
+        var fromBodyMetadataInterfaceParameters = methodSymbol.Parameters
+            .Where(p => p.HasAttributeImplementingInterface(fromBodyMetadataInterfaceType));
 
         if (fromBodyMetadataInterfaceParameters.Count() >= 2)
         {

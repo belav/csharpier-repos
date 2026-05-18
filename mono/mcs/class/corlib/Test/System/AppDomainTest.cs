@@ -285,10 +285,11 @@ namespace MonoTests.System
 
             try
             {
-                AppDomain.CurrentDomain.DefineDynamicAssembly(
-                    name,
-                    AssemblyBuilderAccess.Run | (AssemblyBuilderAccess)666
-                );
+                AppDomain.CurrentDomain
+                    .DefineDynamicAssembly(
+                        name,
+                        AssemblyBuilderAccess.Run | (AssemblyBuilderAccess)666
+                    );
                 Assert.Fail("#1");
             }
             catch (ArgumentException ex)
@@ -348,10 +349,8 @@ namespace MonoTests.System
         {
             try
             {
-                AppDomain.CurrentDomain.DefineDynamicAssembly(
-                    (AssemblyName)null,
-                    AssemblyBuilderAccess.Run
-                );
+                AppDomain.CurrentDomain
+                    .DefineDynamicAssembly((AssemblyName)null, AssemblyBuilderAccess.Run);
                 Assert.Fail("#A1");
             }
             catch (ArgumentNullException ex)
@@ -404,11 +403,12 @@ namespace MonoTests.System
 
             try
             {
-                AppDomain.CurrentDomain.DefineDynamicAssembly(
-                    name,
-                    AssemblyBuilderAccess.Run | (AssemblyBuilderAccess)666,
-                    AppDomain.CurrentDomain.Evidence
-                );
+                AppDomain.CurrentDomain
+                    .DefineDynamicAssembly(
+                        name,
+                        AssemblyBuilderAccess.Run | (AssemblyBuilderAccess)666,
+                        AppDomain.CurrentDomain.Evidence
+                    );
                 Assert.Fail("#1");
             }
             catch (ArgumentException ex)
@@ -445,11 +445,12 @@ namespace MonoTests.System
                 name.Name = invalid_name;
                 try
                 {
-                    AppDomain.CurrentDomain.DefineDynamicAssembly(
-                        name,
-                        AssemblyBuilderAccess.Run,
-                        AppDomain.CurrentDomain.Evidence
-                    );
+                    AppDomain.CurrentDomain
+                        .DefineDynamicAssembly(
+                            name,
+                            AssemblyBuilderAccess.Run,
+                            AppDomain.CurrentDomain.Evidence
+                        );
                     Assert.Fail("#1:" + invalid_name);
                 }
                 catch (ArgumentException ex)
@@ -472,11 +473,12 @@ namespace MonoTests.System
         {
             try
             {
-                AppDomain.CurrentDomain.DefineDynamicAssembly(
-                    (AssemblyName)null,
-                    AssemblyBuilderAccess.Run,
-                    AppDomain.CurrentDomain.Evidence
-                );
+                AppDomain.CurrentDomain
+                    .DefineDynamicAssembly(
+                        (AssemblyName)null,
+                        AssemblyBuilderAccess.Run,
+                        AppDomain.CurrentDomain.Evidence
+                    );
                 Assert.Fail("#A1");
             }
             catch (ArgumentNullException ex)
@@ -492,11 +494,12 @@ namespace MonoTests.System
 
             try
             {
-                AppDomain.CurrentDomain.DefineDynamicAssembly(
-                    name,
-                    AssemblyBuilderAccess.Run,
-                    AppDomain.CurrentDomain.Evidence
-                );
+                AppDomain.CurrentDomain
+                    .DefineDynamicAssembly(
+                        name,
+                        AssemblyBuilderAccess.Run,
+                        AppDomain.CurrentDomain.Evidence
+                    );
                 Assert.Fail("#B1");
             }
             catch (ArgumentException ex)
@@ -512,11 +515,12 @@ namespace MonoTests.System
 
             try
             {
-                AppDomain.CurrentDomain.DefineDynamicAssembly(
-                    name,
-                    AssemblyBuilderAccess.Run,
-                    AppDomain.CurrentDomain.Evidence
-                );
+                AppDomain.CurrentDomain
+                    .DefineDynamicAssembly(
+                        name,
+                        AssemblyBuilderAccess.Run,
+                        AppDomain.CurrentDomain.Evidence
+                    );
                 Assert.Fail("#C1");
             }
             catch (ArgumentException ex)
@@ -537,11 +541,12 @@ namespace MonoTests.System
 
             try
             {
-                AppDomain.CurrentDomain.DefineDynamicAssembly(
-                    name,
-                    AssemblyBuilderAccess.Run | (AssemblyBuilderAccess)666,
-                    Path.GetTempPath()
-                );
+                AppDomain.CurrentDomain
+                    .DefineDynamicAssembly(
+                        name,
+                        AssemblyBuilderAccess.Run | (AssemblyBuilderAccess)666,
+                        Path.GetTempPath()
+                    );
                 Assert.Fail("#1");
             }
             catch (ArgumentException ex)
@@ -578,11 +583,8 @@ namespace MonoTests.System
                 name.Name = invalid_name;
                 try
                 {
-                    AppDomain.CurrentDomain.DefineDynamicAssembly(
-                        name,
-                        AssemblyBuilderAccess.Run,
-                        Path.GetTempPath()
-                    );
+                    AppDomain.CurrentDomain
+                        .DefineDynamicAssembly(name, AssemblyBuilderAccess.Run, Path.GetTempPath());
                     Assert.Fail("#1:" + invalid_name);
                 }
                 catch (ArgumentException ex)
@@ -605,11 +607,12 @@ namespace MonoTests.System
         {
             try
             {
-                AppDomain.CurrentDomain.DefineDynamicAssembly(
-                    (AssemblyName)null,
-                    AssemblyBuilderAccess.Run,
-                    Path.GetTempPath()
-                );
+                AppDomain.CurrentDomain
+                    .DefineDynamicAssembly(
+                        (AssemblyName)null,
+                        AssemblyBuilderAccess.Run,
+                        Path.GetTempPath()
+                    );
                 Assert.Fail("#A1");
             }
             catch (ArgumentNullException ex)
@@ -625,11 +628,8 @@ namespace MonoTests.System
 
             try
             {
-                AppDomain.CurrentDomain.DefineDynamicAssembly(
-                    name,
-                    AssemblyBuilderAccess.Run,
-                    Path.GetTempPath()
-                );
+                AppDomain.CurrentDomain
+                    .DefineDynamicAssembly(name, AssemblyBuilderAccess.Run, Path.GetTempPath());
                 Assert.Fail("#B1");
             }
             catch (ArgumentException ex)
@@ -645,11 +645,8 @@ namespace MonoTests.System
 
             try
             {
-                AppDomain.CurrentDomain.DefineDynamicAssembly(
-                    name,
-                    AssemblyBuilderAccess.Run,
-                    Path.GetTempPath()
-                );
+                AppDomain.CurrentDomain
+                    .DefineDynamicAssembly(name, AssemblyBuilderAccess.Run, Path.GetTempPath());
                 Assert.Fail("#C1");
             }
             catch (ArgumentException ex)
@@ -670,12 +667,13 @@ namespace MonoTests.System
 
             try
             {
-                AppDomain.CurrentDomain.DefineDynamicAssembly(
-                    name,
-                    AssemblyBuilderAccess.Run | (AssemblyBuilderAccess)666,
-                    Path.GetTempPath(),
-                    AppDomain.CurrentDomain.Evidence
-                );
+                AppDomain.CurrentDomain
+                    .DefineDynamicAssembly(
+                        name,
+                        AssemblyBuilderAccess.Run | (AssemblyBuilderAccess)666,
+                        Path.GetTempPath(),
+                        AppDomain.CurrentDomain.Evidence
+                    );
                 Assert.Fail("#1");
             }
             catch (ArgumentException ex)
@@ -712,12 +710,13 @@ namespace MonoTests.System
                 name.Name = invalid_name;
                 try
                 {
-                    AppDomain.CurrentDomain.DefineDynamicAssembly(
-                        name,
-                        AssemblyBuilderAccess.Run,
-                        Path.GetTempPath(),
-                        AppDomain.CurrentDomain.Evidence
-                    );
+                    AppDomain.CurrentDomain
+                        .DefineDynamicAssembly(
+                            name,
+                            AssemblyBuilderAccess.Run,
+                            Path.GetTempPath(),
+                            AppDomain.CurrentDomain.Evidence
+                        );
                     Assert.Fail("#1:" + invalid_name);
                 }
                 catch (ArgumentException ex)
@@ -740,12 +739,13 @@ namespace MonoTests.System
         {
             try
             {
-                AppDomain.CurrentDomain.DefineDynamicAssembly(
-                    (AssemblyName)null,
-                    AssemblyBuilderAccess.Run,
-                    Path.GetTempPath(),
-                    AppDomain.CurrentDomain.Evidence
-                );
+                AppDomain.CurrentDomain
+                    .DefineDynamicAssembly(
+                        (AssemblyName)null,
+                        AssemblyBuilderAccess.Run,
+                        Path.GetTempPath(),
+                        AppDomain.CurrentDomain.Evidence
+                    );
                 Assert.Fail("#A1");
             }
             catch (ArgumentNullException ex)
@@ -761,12 +761,13 @@ namespace MonoTests.System
 
             try
             {
-                AppDomain.CurrentDomain.DefineDynamicAssembly(
-                    name,
-                    AssemblyBuilderAccess.Run,
-                    Path.GetTempPath(),
-                    AppDomain.CurrentDomain.Evidence
-                );
+                AppDomain.CurrentDomain
+                    .DefineDynamicAssembly(
+                        name,
+                        AssemblyBuilderAccess.Run,
+                        Path.GetTempPath(),
+                        AppDomain.CurrentDomain.Evidence
+                    );
                 Assert.Fail("#B1");
             }
             catch (ArgumentException ex)
@@ -782,12 +783,13 @@ namespace MonoTests.System
 
             try
             {
-                AppDomain.CurrentDomain.DefineDynamicAssembly(
-                    name,
-                    AssemblyBuilderAccess.Run,
-                    Path.GetTempPath(),
-                    AppDomain.CurrentDomain.Evidence
-                );
+                AppDomain.CurrentDomain
+                    .DefineDynamicAssembly(
+                        name,
+                        AssemblyBuilderAccess.Run,
+                        Path.GetTempPath(),
+                        AppDomain.CurrentDomain.Evidence
+                    );
                 Assert.Fail("#C1");
             }
             catch (ArgumentException ex)
@@ -808,13 +810,14 @@ namespace MonoTests.System
 
             try
             {
-                AppDomain.CurrentDomain.DefineDynamicAssembly(
-                    name,
-                    AssemblyBuilderAccess.Run | (AssemblyBuilderAccess)666,
-                    (PermissionSet)null,
-                    (PermissionSet)null,
-                    (PermissionSet)null
-                );
+                AppDomain.CurrentDomain
+                    .DefineDynamicAssembly(
+                        name,
+                        AssemblyBuilderAccess.Run | (AssemblyBuilderAccess)666,
+                        (PermissionSet)null,
+                        (PermissionSet)null,
+                        (PermissionSet)null
+                    );
                 Assert.Fail("#1");
             }
             catch (ArgumentException ex)
@@ -851,13 +854,14 @@ namespace MonoTests.System
                 name.Name = invalid_name;
                 try
                 {
-                    AppDomain.CurrentDomain.DefineDynamicAssembly(
-                        name,
-                        AssemblyBuilderAccess.Run,
-                        (PermissionSet)null,
-                        (PermissionSet)null,
-                        (PermissionSet)null
-                    );
+                    AppDomain.CurrentDomain
+                        .DefineDynamicAssembly(
+                            name,
+                            AssemblyBuilderAccess.Run,
+                            (PermissionSet)null,
+                            (PermissionSet)null,
+                            (PermissionSet)null
+                        );
                     Assert.Fail("#1:" + invalid_name);
                 }
                 catch (ArgumentException ex)
@@ -880,13 +884,14 @@ namespace MonoTests.System
         {
             try
             {
-                AppDomain.CurrentDomain.DefineDynamicAssembly(
-                    (AssemblyName)null,
-                    AssemblyBuilderAccess.Run,
-                    (PermissionSet)null,
-                    (PermissionSet)null,
-                    (PermissionSet)null
-                );
+                AppDomain.CurrentDomain
+                    .DefineDynamicAssembly(
+                        (AssemblyName)null,
+                        AssemblyBuilderAccess.Run,
+                        (PermissionSet)null,
+                        (PermissionSet)null,
+                        (PermissionSet)null
+                    );
                 Assert.Fail("#A1");
             }
             catch (ArgumentNullException ex)
@@ -902,13 +907,14 @@ namespace MonoTests.System
 
             try
             {
-                AppDomain.CurrentDomain.DefineDynamicAssembly(
-                    name,
-                    AssemblyBuilderAccess.Run,
-                    (PermissionSet)null,
-                    (PermissionSet)null,
-                    (PermissionSet)null
-                );
+                AppDomain.CurrentDomain
+                    .DefineDynamicAssembly(
+                        name,
+                        AssemblyBuilderAccess.Run,
+                        (PermissionSet)null,
+                        (PermissionSet)null,
+                        (PermissionSet)null
+                    );
                 Assert.Fail("#B1");
             }
             catch (ArgumentException ex)
@@ -924,13 +930,14 @@ namespace MonoTests.System
 
             try
             {
-                AppDomain.CurrentDomain.DefineDynamicAssembly(
-                    name,
-                    AssemblyBuilderAccess.Run,
-                    (PermissionSet)null,
-                    (PermissionSet)null,
-                    (PermissionSet)null
-                );
+                AppDomain.CurrentDomain
+                    .DefineDynamicAssembly(
+                        name,
+                        AssemblyBuilderAccess.Run,
+                        (PermissionSet)null,
+                        (PermissionSet)null,
+                        (PermissionSet)null
+                    );
                 Assert.Fail("#C1");
             }
             catch (ArgumentException ex)
@@ -951,14 +958,15 @@ namespace MonoTests.System
 
             try
             {
-                AppDomain.CurrentDomain.DefineDynamicAssembly(
-                    name,
-                    AssemblyBuilderAccess.Run | (AssemblyBuilderAccess)666,
-                    AppDomain.CurrentDomain.Evidence,
-                    (PermissionSet)null,
-                    (PermissionSet)null,
-                    (PermissionSet)null
-                );
+                AppDomain.CurrentDomain
+                    .DefineDynamicAssembly(
+                        name,
+                        AssemblyBuilderAccess.Run | (AssemblyBuilderAccess)666,
+                        AppDomain.CurrentDomain.Evidence,
+                        (PermissionSet)null,
+                        (PermissionSet)null,
+                        (PermissionSet)null
+                    );
                 Assert.Fail("#1");
             }
             catch (ArgumentException ex)
@@ -995,14 +1003,15 @@ namespace MonoTests.System
                 name.Name = invalid_name;
                 try
                 {
-                    AppDomain.CurrentDomain.DefineDynamicAssembly(
-                        name,
-                        AssemblyBuilderAccess.Run,
-                        AppDomain.CurrentDomain.Evidence,
-                        (PermissionSet)null,
-                        (PermissionSet)null,
-                        (PermissionSet)null
-                    );
+                    AppDomain.CurrentDomain
+                        .DefineDynamicAssembly(
+                            name,
+                            AssemblyBuilderAccess.Run,
+                            AppDomain.CurrentDomain.Evidence,
+                            (PermissionSet)null,
+                            (PermissionSet)null,
+                            (PermissionSet)null
+                        );
                     Assert.Fail("#1:" + invalid_name);
                 }
                 catch (ArgumentException ex)
@@ -1025,14 +1034,15 @@ namespace MonoTests.System
         {
             try
             {
-                AppDomain.CurrentDomain.DefineDynamicAssembly(
-                    (AssemblyName)null,
-                    AssemblyBuilderAccess.Run,
-                    AppDomain.CurrentDomain.Evidence,
-                    (PermissionSet)null,
-                    (PermissionSet)null,
-                    (PermissionSet)null
-                );
+                AppDomain.CurrentDomain
+                    .DefineDynamicAssembly(
+                        (AssemblyName)null,
+                        AssemblyBuilderAccess.Run,
+                        AppDomain.CurrentDomain.Evidence,
+                        (PermissionSet)null,
+                        (PermissionSet)null,
+                        (PermissionSet)null
+                    );
                 Assert.Fail("#A1");
             }
             catch (ArgumentNullException ex)
@@ -1048,14 +1058,15 @@ namespace MonoTests.System
 
             try
             {
-                AppDomain.CurrentDomain.DefineDynamicAssembly(
-                    name,
-                    AssemblyBuilderAccess.Run,
-                    AppDomain.CurrentDomain.Evidence,
-                    (PermissionSet)null,
-                    (PermissionSet)null,
-                    (PermissionSet)null
-                );
+                AppDomain.CurrentDomain
+                    .DefineDynamicAssembly(
+                        name,
+                        AssemblyBuilderAccess.Run,
+                        AppDomain.CurrentDomain.Evidence,
+                        (PermissionSet)null,
+                        (PermissionSet)null,
+                        (PermissionSet)null
+                    );
                 Assert.Fail("#B1");
             }
             catch (ArgumentException ex)
@@ -1071,14 +1082,15 @@ namespace MonoTests.System
 
             try
             {
-                AppDomain.CurrentDomain.DefineDynamicAssembly(
-                    name,
-                    AssemblyBuilderAccess.Run,
-                    AppDomain.CurrentDomain.Evidence,
-                    (PermissionSet)null,
-                    (PermissionSet)null,
-                    (PermissionSet)null
-                );
+                AppDomain.CurrentDomain
+                    .DefineDynamicAssembly(
+                        name,
+                        AssemblyBuilderAccess.Run,
+                        AppDomain.CurrentDomain.Evidence,
+                        (PermissionSet)null,
+                        (PermissionSet)null,
+                        (PermissionSet)null
+                    );
                 Assert.Fail("#C1");
             }
             catch (ArgumentException ex)
@@ -1099,14 +1111,15 @@ namespace MonoTests.System
 
             try
             {
-                AppDomain.CurrentDomain.DefineDynamicAssembly(
-                    name,
-                    AssemblyBuilderAccess.Run | (AssemblyBuilderAccess)666,
-                    Path.GetTempPath(),
-                    (PermissionSet)null,
-                    (PermissionSet)null,
-                    (PermissionSet)null
-                );
+                AppDomain.CurrentDomain
+                    .DefineDynamicAssembly(
+                        name,
+                        AssemblyBuilderAccess.Run | (AssemblyBuilderAccess)666,
+                        Path.GetTempPath(),
+                        (PermissionSet)null,
+                        (PermissionSet)null,
+                        (PermissionSet)null
+                    );
                 Assert.Fail("#1");
             }
             catch (ArgumentException ex)
@@ -1143,14 +1156,15 @@ namespace MonoTests.System
                 name.Name = invalid_name;
                 try
                 {
-                    AppDomain.CurrentDomain.DefineDynamicAssembly(
-                        name,
-                        AssemblyBuilderAccess.Run,
-                        Path.GetTempPath(),
-                        (PermissionSet)null,
-                        (PermissionSet)null,
-                        (PermissionSet)null
-                    );
+                    AppDomain.CurrentDomain
+                        .DefineDynamicAssembly(
+                            name,
+                            AssemblyBuilderAccess.Run,
+                            Path.GetTempPath(),
+                            (PermissionSet)null,
+                            (PermissionSet)null,
+                            (PermissionSet)null
+                        );
                     Assert.Fail("#1:" + invalid_name);
                 }
                 catch (ArgumentException ex)
@@ -1173,14 +1187,15 @@ namespace MonoTests.System
         {
             try
             {
-                AppDomain.CurrentDomain.DefineDynamicAssembly(
-                    (AssemblyName)null,
-                    AssemblyBuilderAccess.Run,
-                    Path.GetTempPath(),
-                    (PermissionSet)null,
-                    (PermissionSet)null,
-                    (PermissionSet)null
-                );
+                AppDomain.CurrentDomain
+                    .DefineDynamicAssembly(
+                        (AssemblyName)null,
+                        AssemblyBuilderAccess.Run,
+                        Path.GetTempPath(),
+                        (PermissionSet)null,
+                        (PermissionSet)null,
+                        (PermissionSet)null
+                    );
                 Assert.Fail("#A1");
             }
             catch (ArgumentNullException ex)
@@ -1196,14 +1211,15 @@ namespace MonoTests.System
 
             try
             {
-                AppDomain.CurrentDomain.DefineDynamicAssembly(
-                    name,
-                    AssemblyBuilderAccess.Run,
-                    Path.GetTempPath(),
-                    (PermissionSet)null,
-                    (PermissionSet)null,
-                    (PermissionSet)null
-                );
+                AppDomain.CurrentDomain
+                    .DefineDynamicAssembly(
+                        name,
+                        AssemblyBuilderAccess.Run,
+                        Path.GetTempPath(),
+                        (PermissionSet)null,
+                        (PermissionSet)null,
+                        (PermissionSet)null
+                    );
                 Assert.Fail("#B1");
             }
             catch (ArgumentException ex)
@@ -1219,14 +1235,15 @@ namespace MonoTests.System
 
             try
             {
-                AppDomain.CurrentDomain.DefineDynamicAssembly(
-                    name,
-                    AssemblyBuilderAccess.Run,
-                    Path.GetTempPath(),
-                    (PermissionSet)null,
-                    (PermissionSet)null,
-                    (PermissionSet)null
-                );
+                AppDomain.CurrentDomain
+                    .DefineDynamicAssembly(
+                        name,
+                        AssemblyBuilderAccess.Run,
+                        Path.GetTempPath(),
+                        (PermissionSet)null,
+                        (PermissionSet)null,
+                        (PermissionSet)null
+                    );
                 Assert.Fail("#C1");
             }
             catch (ArgumentException ex)
@@ -1247,15 +1264,16 @@ namespace MonoTests.System
 
             try
             {
-                AppDomain.CurrentDomain.DefineDynamicAssembly(
-                    name,
-                    AssemblyBuilderAccess.Run | (AssemblyBuilderAccess)666,
-                    Path.GetTempPath(),
-                    AppDomain.CurrentDomain.Evidence,
-                    (PermissionSet)null,
-                    (PermissionSet)null,
-                    (PermissionSet)null
-                );
+                AppDomain.CurrentDomain
+                    .DefineDynamicAssembly(
+                        name,
+                        AssemblyBuilderAccess.Run | (AssemblyBuilderAccess)666,
+                        Path.GetTempPath(),
+                        AppDomain.CurrentDomain.Evidence,
+                        (PermissionSet)null,
+                        (PermissionSet)null,
+                        (PermissionSet)null
+                    );
                 Assert.Fail("#1");
             }
             catch (ArgumentException ex)
@@ -1292,15 +1310,16 @@ namespace MonoTests.System
                 name.Name = invalid_name;
                 try
                 {
-                    AppDomain.CurrentDomain.DefineDynamicAssembly(
-                        name,
-                        AssemblyBuilderAccess.Run,
-                        Path.GetTempPath(),
-                        AppDomain.CurrentDomain.Evidence,
-                        (PermissionSet)null,
-                        (PermissionSet)null,
-                        (PermissionSet)null
-                    );
+                    AppDomain.CurrentDomain
+                        .DefineDynamicAssembly(
+                            name,
+                            AssemblyBuilderAccess.Run,
+                            Path.GetTempPath(),
+                            AppDomain.CurrentDomain.Evidence,
+                            (PermissionSet)null,
+                            (PermissionSet)null,
+                            (PermissionSet)null
+                        );
                     Assert.Fail("#1:" + invalid_name);
                 }
                 catch (ArgumentException ex)
@@ -1323,15 +1342,16 @@ namespace MonoTests.System
         {
             try
             {
-                AppDomain.CurrentDomain.DefineDynamicAssembly(
-                    (AssemblyName)null,
-                    AssemblyBuilderAccess.Run,
-                    Path.GetTempPath(),
-                    AppDomain.CurrentDomain.Evidence,
-                    (PermissionSet)null,
-                    (PermissionSet)null,
-                    (PermissionSet)null
-                );
+                AppDomain.CurrentDomain
+                    .DefineDynamicAssembly(
+                        (AssemblyName)null,
+                        AssemblyBuilderAccess.Run,
+                        Path.GetTempPath(),
+                        AppDomain.CurrentDomain.Evidence,
+                        (PermissionSet)null,
+                        (PermissionSet)null,
+                        (PermissionSet)null
+                    );
                 Assert.Fail("#A1");
             }
             catch (ArgumentNullException ex)
@@ -1347,15 +1367,16 @@ namespace MonoTests.System
 
             try
             {
-                AppDomain.CurrentDomain.DefineDynamicAssembly(
-                    name,
-                    AssemblyBuilderAccess.Run,
-                    Path.GetTempPath(),
-                    AppDomain.CurrentDomain.Evidence,
-                    (PermissionSet)null,
-                    (PermissionSet)null,
-                    (PermissionSet)null
-                );
+                AppDomain.CurrentDomain
+                    .DefineDynamicAssembly(
+                        name,
+                        AssemblyBuilderAccess.Run,
+                        Path.GetTempPath(),
+                        AppDomain.CurrentDomain.Evidence,
+                        (PermissionSet)null,
+                        (PermissionSet)null,
+                        (PermissionSet)null
+                    );
                 Assert.Fail("#B1");
             }
             catch (ArgumentException ex)
@@ -1371,15 +1392,16 @@ namespace MonoTests.System
 
             try
             {
-                AppDomain.CurrentDomain.DefineDynamicAssembly(
-                    name,
-                    AssemblyBuilderAccess.Run,
-                    Path.GetTempPath(),
-                    AppDomain.CurrentDomain.Evidence,
-                    (PermissionSet)null,
-                    (PermissionSet)null,
-                    (PermissionSet)null
-                );
+                AppDomain.CurrentDomain
+                    .DefineDynamicAssembly(
+                        name,
+                        AssemblyBuilderAccess.Run,
+                        Path.GetTempPath(),
+                        AppDomain.CurrentDomain.Evidence,
+                        (PermissionSet)null,
+                        (PermissionSet)null,
+                        (PermissionSet)null
+                    );
                 Assert.Fail("#C1");
             }
             catch (ArgumentException ex)
@@ -1400,16 +1422,17 @@ namespace MonoTests.System
 
             try
             {
-                AppDomain.CurrentDomain.DefineDynamicAssembly(
-                    name,
-                    AssemblyBuilderAccess.Run | (AssemblyBuilderAccess)666,
-                    Path.GetTempPath(),
-                    AppDomain.CurrentDomain.Evidence,
-                    (PermissionSet)null,
-                    (PermissionSet)null,
-                    (PermissionSet)null,
-                    true
-                );
+                AppDomain.CurrentDomain
+                    .DefineDynamicAssembly(
+                        name,
+                        AssemblyBuilderAccess.Run | (AssemblyBuilderAccess)666,
+                        Path.GetTempPath(),
+                        AppDomain.CurrentDomain.Evidence,
+                        (PermissionSet)null,
+                        (PermissionSet)null,
+                        (PermissionSet)null,
+                        true
+                    );
                 Assert.Fail("#1");
             }
             catch (ArgumentException ex)
@@ -1446,16 +1469,17 @@ namespace MonoTests.System
                 name.Name = invalid_name;
                 try
                 {
-                    AppDomain.CurrentDomain.DefineDynamicAssembly(
-                        name,
-                        AssemblyBuilderAccess.Run,
-                        Path.GetTempPath(),
-                        AppDomain.CurrentDomain.Evidence,
-                        (PermissionSet)null,
-                        (PermissionSet)null,
-                        (PermissionSet)null,
-                        true
-                    );
+                    AppDomain.CurrentDomain
+                        .DefineDynamicAssembly(
+                            name,
+                            AssemblyBuilderAccess.Run,
+                            Path.GetTempPath(),
+                            AppDomain.CurrentDomain.Evidence,
+                            (PermissionSet)null,
+                            (PermissionSet)null,
+                            (PermissionSet)null,
+                            true
+                        );
                     Assert.Fail("#1:" + invalid_name);
                 }
                 catch (ArgumentException ex)
@@ -1478,16 +1502,17 @@ namespace MonoTests.System
         {
             try
             {
-                AppDomain.CurrentDomain.DefineDynamicAssembly(
-                    (AssemblyName)null,
-                    AssemblyBuilderAccess.Run,
-                    Path.GetTempPath(),
-                    AppDomain.CurrentDomain.Evidence,
-                    (PermissionSet)null,
-                    (PermissionSet)null,
-                    (PermissionSet)null,
-                    true
-                );
+                AppDomain.CurrentDomain
+                    .DefineDynamicAssembly(
+                        (AssemblyName)null,
+                        AssemblyBuilderAccess.Run,
+                        Path.GetTempPath(),
+                        AppDomain.CurrentDomain.Evidence,
+                        (PermissionSet)null,
+                        (PermissionSet)null,
+                        (PermissionSet)null,
+                        true
+                    );
                 Assert.Fail("#A1");
             }
             catch (ArgumentNullException ex)
@@ -1503,16 +1528,17 @@ namespace MonoTests.System
 
             try
             {
-                AppDomain.CurrentDomain.DefineDynamicAssembly(
-                    name,
-                    AssemblyBuilderAccess.Run,
-                    Path.GetTempPath(),
-                    AppDomain.CurrentDomain.Evidence,
-                    (PermissionSet)null,
-                    (PermissionSet)null,
-                    (PermissionSet)null,
-                    true
-                );
+                AppDomain.CurrentDomain
+                    .DefineDynamicAssembly(
+                        name,
+                        AssemblyBuilderAccess.Run,
+                        Path.GetTempPath(),
+                        AppDomain.CurrentDomain.Evidence,
+                        (PermissionSet)null,
+                        (PermissionSet)null,
+                        (PermissionSet)null,
+                        true
+                    );
                 Assert.Fail("#B1");
             }
             catch (ArgumentException ex)
@@ -1528,16 +1554,17 @@ namespace MonoTests.System
 
             try
             {
-                AppDomain.CurrentDomain.DefineDynamicAssembly(
-                    name,
-                    AssemblyBuilderAccess.Run,
-                    Path.GetTempPath(),
-                    AppDomain.CurrentDomain.Evidence,
-                    (PermissionSet)null,
-                    (PermissionSet)null,
-                    (PermissionSet)null,
-                    true
-                );
+                AppDomain.CurrentDomain
+                    .DefineDynamicAssembly(
+                        name,
+                        AssemblyBuilderAccess.Run,
+                        Path.GetTempPath(),
+                        AppDomain.CurrentDomain.Evidence,
+                        (PermissionSet)null,
+                        (PermissionSet)null,
+                        (PermissionSet)null,
+                        true
+                    );
                 Assert.Fail("#C1");
             }
             catch (ArgumentException ex)
@@ -1558,17 +1585,18 @@ namespace MonoTests.System
 
             try
             {
-                AppDomain.CurrentDomain.DefineDynamicAssembly(
-                    name,
-                    AssemblyBuilderAccess.Run | (AssemblyBuilderAccess)666,
-                    Path.GetTempPath(),
-                    AppDomain.CurrentDomain.Evidence,
-                    (PermissionSet)null,
-                    (PermissionSet)null,
-                    (PermissionSet)null,
-                    true,
-                    new List<CustomAttributeBuilder>()
-                );
+                AppDomain.CurrentDomain
+                    .DefineDynamicAssembly(
+                        name,
+                        AssemblyBuilderAccess.Run | (AssemblyBuilderAccess)666,
+                        Path.GetTempPath(),
+                        AppDomain.CurrentDomain.Evidence,
+                        (PermissionSet)null,
+                        (PermissionSet)null,
+                        (PermissionSet)null,
+                        true,
+                        new List<CustomAttributeBuilder>()
+                    );
                 Assert.Fail("#1");
             }
             catch (ArgumentException ex)
@@ -1605,17 +1633,18 @@ namespace MonoTests.System
                 name.Name = invalid_name;
                 try
                 {
-                    AppDomain.CurrentDomain.DefineDynamicAssembly(
-                        name,
-                        AssemblyBuilderAccess.Run,
-                        Path.GetTempPath(),
-                        AppDomain.CurrentDomain.Evidence,
-                        (PermissionSet)null,
-                        (PermissionSet)null,
-                        (PermissionSet)null,
-                        true,
-                        new List<CustomAttributeBuilder>()
-                    );
+                    AppDomain.CurrentDomain
+                        .DefineDynamicAssembly(
+                            name,
+                            AssemblyBuilderAccess.Run,
+                            Path.GetTempPath(),
+                            AppDomain.CurrentDomain.Evidence,
+                            (PermissionSet)null,
+                            (PermissionSet)null,
+                            (PermissionSet)null,
+                            true,
+                            new List<CustomAttributeBuilder>()
+                        );
                     Assert.Fail("#1:" + invalid_name);
                 }
                 catch (ArgumentException ex)
@@ -1638,17 +1667,18 @@ namespace MonoTests.System
         {
             try
             {
-                AppDomain.CurrentDomain.DefineDynamicAssembly(
-                    (AssemblyName)null,
-                    AssemblyBuilderAccess.Run,
-                    Path.GetTempPath(),
-                    AppDomain.CurrentDomain.Evidence,
-                    (PermissionSet)null,
-                    (PermissionSet)null,
-                    (PermissionSet)null,
-                    true,
-                    new List<CustomAttributeBuilder>()
-                );
+                AppDomain.CurrentDomain
+                    .DefineDynamicAssembly(
+                        (AssemblyName)null,
+                        AssemblyBuilderAccess.Run,
+                        Path.GetTempPath(),
+                        AppDomain.CurrentDomain.Evidence,
+                        (PermissionSet)null,
+                        (PermissionSet)null,
+                        (PermissionSet)null,
+                        true,
+                        new List<CustomAttributeBuilder>()
+                    );
                 Assert.Fail("#A1");
             }
             catch (ArgumentNullException ex)
@@ -1664,17 +1694,18 @@ namespace MonoTests.System
 
             try
             {
-                AppDomain.CurrentDomain.DefineDynamicAssembly(
-                    name,
-                    AssemblyBuilderAccess.Run,
-                    Path.GetTempPath(),
-                    AppDomain.CurrentDomain.Evidence,
-                    (PermissionSet)null,
-                    (PermissionSet)null,
-                    (PermissionSet)null,
-                    true,
-                    new List<CustomAttributeBuilder>()
-                );
+                AppDomain.CurrentDomain
+                    .DefineDynamicAssembly(
+                        name,
+                        AssemblyBuilderAccess.Run,
+                        Path.GetTempPath(),
+                        AppDomain.CurrentDomain.Evidence,
+                        (PermissionSet)null,
+                        (PermissionSet)null,
+                        (PermissionSet)null,
+                        true,
+                        new List<CustomAttributeBuilder>()
+                    );
                 Assert.Fail("#B1");
             }
             catch (ArgumentException ex)
@@ -1690,17 +1721,18 @@ namespace MonoTests.System
 
             try
             {
-                AppDomain.CurrentDomain.DefineDynamicAssembly(
-                    name,
-                    AssemblyBuilderAccess.Run,
-                    Path.GetTempPath(),
-                    AppDomain.CurrentDomain.Evidence,
-                    (PermissionSet)null,
-                    (PermissionSet)null,
-                    (PermissionSet)null,
-                    true,
-                    new List<CustomAttributeBuilder>()
-                );
+                AppDomain.CurrentDomain
+                    .DefineDynamicAssembly(
+                        name,
+                        AssemblyBuilderAccess.Run,
+                        Path.GetTempPath(),
+                        AppDomain.CurrentDomain.Evidence,
+                        (PermissionSet)null,
+                        (PermissionSet)null,
+                        (PermissionSet)null,
+                        true,
+                        new List<CustomAttributeBuilder>()
+                    );
                 Assert.Fail("#C1");
             }
             catch (ArgumentException ex)
@@ -1760,11 +1792,8 @@ namespace MonoTests.System
                 )
             );
 
-            ab = AppDomain.CurrentDomain.DefineDynamicAssembly(
-                name,
-                AssemblyBuilderAccess.Save,
-                cattrs
-            );
+            ab = AppDomain.CurrentDomain
+                .DefineDynamicAssembly(name, AssemblyBuilderAccess.Save, cattrs);
 
             ab.SetCustomAttribute(
                 new CustomAttributeBuilder(
@@ -1878,11 +1907,8 @@ namespace MonoTests.System
                 )
             );
 
-            ab = AppDomain.CurrentDomain.DefineDynamicAssembly(
-                name,
-                AssemblyBuilderAccess.Save,
-                cattrs
-            );
+            ab = AppDomain.CurrentDomain
+                .DefineDynamicAssembly(name, AssemblyBuilderAccess.Save, cattrs);
 
             ab.SetCustomAttribute(
                 new CustomAttributeBuilder(
@@ -1965,11 +1991,12 @@ namespace MonoTests.System
 
             try
             {
-                AppDomain.CurrentDomain.DefineDynamicAssembly(
-                    name,
-                    AssemblyBuilderAccess.Run | (AssemblyBuilderAccess)666,
-                    new List<CustomAttributeBuilder>()
-                );
+                AppDomain.CurrentDomain
+                    .DefineDynamicAssembly(
+                        name,
+                        AssemblyBuilderAccess.Run | (AssemblyBuilderAccess)666,
+                        new List<CustomAttributeBuilder>()
+                    );
                 Assert.Fail("#1");
             }
             catch (ArgumentException ex)
@@ -2006,11 +2033,12 @@ namespace MonoTests.System
                 name.Name = invalid_name;
                 try
                 {
-                    AppDomain.CurrentDomain.DefineDynamicAssembly(
-                        name,
-                        AssemblyBuilderAccess.Run,
-                        new List<CustomAttributeBuilder>()
-                    );
+                    AppDomain.CurrentDomain
+                        .DefineDynamicAssembly(
+                            name,
+                            AssemblyBuilderAccess.Run,
+                            new List<CustomAttributeBuilder>()
+                        );
                     Assert.Fail("#1:" + invalid_name);
                 }
                 catch (ArgumentException ex)
@@ -2033,11 +2061,12 @@ namespace MonoTests.System
         {
             try
             {
-                AppDomain.CurrentDomain.DefineDynamicAssembly(
-                    (AssemblyName)null,
-                    AssemblyBuilderAccess.Run,
-                    new List<CustomAttributeBuilder>()
-                );
+                AppDomain.CurrentDomain
+                    .DefineDynamicAssembly(
+                        (AssemblyName)null,
+                        AssemblyBuilderAccess.Run,
+                        new List<CustomAttributeBuilder>()
+                    );
                 Assert.Fail("#A1");
             }
             catch (ArgumentNullException ex)
@@ -2053,11 +2082,12 @@ namespace MonoTests.System
 
             try
             {
-                AppDomain.CurrentDomain.DefineDynamicAssembly(
-                    name,
-                    AssemblyBuilderAccess.Run,
-                    new List<CustomAttributeBuilder>()
-                );
+                AppDomain.CurrentDomain
+                    .DefineDynamicAssembly(
+                        name,
+                        AssemblyBuilderAccess.Run,
+                        new List<CustomAttributeBuilder>()
+                    );
                 Assert.Fail("#B1");
             }
             catch (ArgumentException ex)
@@ -2073,11 +2103,12 @@ namespace MonoTests.System
 
             try
             {
-                AppDomain.CurrentDomain.DefineDynamicAssembly(
-                    name,
-                    AssemblyBuilderAccess.Run,
-                    new List<CustomAttributeBuilder>()
-                );
+                AppDomain.CurrentDomain
+                    .DefineDynamicAssembly(
+                        name,
+                        AssemblyBuilderAccess.Run,
+                        new List<CustomAttributeBuilder>()
+                    );
                 Assert.Fail("#C1");
             }
             catch (ArgumentException ex)
@@ -2131,11 +2162,8 @@ namespace MonoTests.System
         {
             try
             {
-                AppDomain.CurrentDomain.ExecuteAssemblyByName(
-                    "mscorlib",
-                    (Evidence)null,
-                    new string[0]
-                );
+                AppDomain.CurrentDomain
+                    .ExecuteAssemblyByName("mscorlib", (Evidence)null, new string[0]);
                 Assert.Fail("#1");
             }
             catch (MissingMethodException ex)
@@ -2409,11 +2437,8 @@ namespace MonoTests.System
 
             try
             {
-                AppDomain.CurrentDomain.ExecuteAssembly(
-                    assembly.Location,
-                    (Evidence)null,
-                    new string[0]
-                );
+                AppDomain.CurrentDomain
+                    .ExecuteAssembly(assembly.Location, (Evidence)null, new string[0]);
                 Assert.Fail("#1");
             }
             catch (MissingMethodException ex)
@@ -2434,13 +2459,14 @@ namespace MonoTests.System
 
             try
             {
-                AppDomain.CurrentDomain.ExecuteAssembly(
-                    assembly.Location,
-                    (Evidence)null,
-                    new string[0],
-                    (byte[])null,
-                    AssemblyHashAlgorithm.SHA1
-                );
+                AppDomain.CurrentDomain
+                    .ExecuteAssembly(
+                        assembly.Location,
+                        (Evidence)null,
+                        new string[0],
+                        (byte[])null,
+                        AssemblyHashAlgorithm.SHA1
+                    );
                 Assert.Fail("#1");
             }
             catch (MissingMethodException ex)
@@ -3816,11 +3842,12 @@ namespace MonoTests.System
         {
             public void GenerateAssembly(AssemblyName aname, string path)
             {
-                AssemblyBuilder ab = AppDomain.CurrentDomain.DefineDynamicAssembly(
-                    aname,
-                    AssemblyBuilderAccess.Save,
-                    Path.GetDirectoryName(path)
-                );
+                AssemblyBuilder ab = AppDomain.CurrentDomain
+                    .DefineDynamicAssembly(
+                        aname,
+                        AssemblyBuilderAccess.Save,
+                        Path.GetDirectoryName(path)
+                    );
                 ab.Save(Path.GetFileName(path));
             }
 

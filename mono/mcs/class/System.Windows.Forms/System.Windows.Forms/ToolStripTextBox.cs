@@ -584,15 +584,15 @@ namespace System.Windows.Forms
                     if (tsr is ToolStripProfessionalRenderer)
                         using (
                             Pen p = new Pen(
-                                (tsr as ToolStripProfessionalRenderer)
-                                    .ColorTable
+                                (tsr as ToolStripProfessionalRenderer).ColorTable
                                     .ButtonSelectedBorder
                             )
                         )
-                            e.Graphics.DrawRectangle(
-                                p,
-                                new Rectangle(0, 0, this.Width - 1, this.Height - 1)
-                            );
+                            e.Graphics
+                                .DrawRectangle(
+                                    p,
+                                    new Rectangle(0, 0, this.Width - 1, this.Height - 1)
+                                );
                 }
             }
 

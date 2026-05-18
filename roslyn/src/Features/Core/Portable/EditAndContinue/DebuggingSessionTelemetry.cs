@@ -82,17 +82,15 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                 FunctionId.Debugging_EncSession,
                 KeyValueLogMessage.Create(map =>
                 {
-                    map["SolutionSessionId"] = data
-                        .SolutionSessionId.ToString("B")
+                    map["SolutionSessionId"] = data.SolutionSessionId
+                        .ToString("B")
                         .ToUpperInvariant();
                     map[SessionId] = debugSessionId;
-                    map["SessionCount"] = data.EditSessionData.Count(session =>
-                        session.InBreakState
-                    );
+                    map["SessionCount"] = data.EditSessionData
+                        .Count(session => session.InBreakState);
                     map["EmptySessionCount"] = data.EmptyEditSessionCount;
-                    map["HotReloadSessionCount"] = data.EditSessionData.Count(session =>
-                        !session.InBreakState
-                    );
+                    map["HotReloadSessionCount"] = data.EditSessionData
+                        .Count(session => !session.InBreakState);
                     map["EmptyHotReloadSessionCount"] = data.EmptyHotReloadEditSessionCount;
                 })
             );

@@ -359,8 +359,8 @@ public class CSharpRuntimeAnnotationCodeGenerator : ICSharpRuntimeAnnotationCode
             parameters.MainBuilder.Append(parameters.TargetName).Append('.');
         }
 
-        parameters
-            .MainBuilder.Append(parameters.IsRuntime ? "AddRuntimeAnnotation(" : "AddAnnotation(")
+        parameters.MainBuilder
+            .Append(parameters.IsRuntime ? "AddRuntimeAnnotation(" : "AddAnnotation(")
             .Append(Dependencies.CSharpHelper.Literal(annotationName))
             .Append(", ")
             .Append(valueString)

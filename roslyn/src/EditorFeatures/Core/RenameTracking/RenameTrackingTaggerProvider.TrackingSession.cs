@@ -63,10 +63,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.RenameTracking
             {
                 _threadingContext = stateMachine.ThreadingContext;
                 _asyncListener = asyncListener;
-                _trackingSpan = snapshotSpan.Snapshot.CreateTrackingSpan(
-                    snapshotSpan.Span,
-                    SpanTrackingMode.EdgeInclusive
-                );
+                _trackingSpan = snapshotSpan.Snapshot
+                    .CreateTrackingSpan(snapshotSpan.Span, SpanTrackingMode.EdgeInclusive);
                 _cancellationToken = _cancellationTokenSource.Token;
 
                 if (snapshotSpan.Length > 0)
@@ -77,11 +75,16 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.RenameTracking
                     // tagging.
 
                     _originalName = snapshotSpan.GetText();
-                    _isRenamableIdentifierTask = Task.Factory.SafeStartNewFromAsync(
-                        () => DetermineIfRenamableIdentifierAsync(snapshotSpan, initialCheck: true),
-                        _cancellationToken,
-                        TaskScheduler.Default
-                    );
+                    _isRenamableIdentifierTask = Task.Factory
+                        .SafeStartNewFromAsync(
+                            () =>
+                                DetermineIfRenamableIdentifierAsync(
+                                    snapshotSpan,
+                                    initialCheck: true
+                                ),
+                            _cancellationToken,
+                            TaskScheduler.Default
+                        );
 
                     var asyncToken = _asyncListener.BeginAsyncOperation(
                         GetType().Name + ".UpdateTrackingSessionAfterIsRenamableIdentifierTask"
@@ -91,11 +94,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.RenameTracking
                         .SafeContinueWithFromAsync(
                             async t =>
                             {
-                                await _threadingContext
-                                    .JoinableTaskFactory.SwitchToMainThreadAsync(
-                                        alwaysYield: true,
-                                        _cancellationToken
-                                    )
+                                await _threadingContext.JoinableTaskFactory
+                                    .SwitchToMainThreadAsync(alwaysYield: true, _cancellationToken)
                                     .NoThrowAwaitable();
 
                                 // Avoid throwing an exception in this common case
@@ -133,11 +133,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.RenameTracking
                 task.SafeContinueWithFromAsync(
                         async t =>
                         {
-                            await _threadingContext
-                                .JoinableTaskFactory.SwitchToMainThreadAsync(
-                                    alwaysYield: true,
-                                    _cancellationToken
-                                )
+                            await _threadingContext.JoinableTaskFactory
+                                .SwitchToMainThreadAsync(alwaysYield: true, _cancellationToken)
                                 .NoThrowAwaitable();
 
                             // Avoid throwing an exception in this common case
@@ -348,10 +345,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.RenameTracking
                     return TriggerIdentifierKind.NotRenamable;
                 }
 
-                return sourceSymbol.Locations.Any(
-                    static (loc, token) => loc == token.GetLocation(),
-                    token
-                )
+                return sourceSymbol.Locations
+                    .Any(static (loc, token) => loc == token.GetLocation(), token)
                     ? TriggerIdentifierKind.RenamableDeclaration
                     : TriggerIdentifierKind.RenamableReference;
             }

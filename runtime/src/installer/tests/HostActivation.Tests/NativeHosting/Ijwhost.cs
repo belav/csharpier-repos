@@ -44,7 +44,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.NativeHosting
                     result
                         .Should()
                         .Fail()
-                        .And.HaveStdErrContaining(
+                        .And
+                        .HaveStdErrContaining(
                             $"Expected active runtime context because runtimeconfig.json [{app.RuntimeConfigJson}] does not exist."
                         );
                 }
@@ -53,10 +54,10 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.NativeHosting
                     result
                         .Should()
                         .Pass()
-                        .And.HaveStdOutContaining(
-                            "[C++/CLI] NativeEntryPoint: calling managed class"
-                        )
-                        .And.HaveStdOutContaining(
+                        .And
+                        .HaveStdOutContaining("[C++/CLI] NativeEntryPoint: calling managed class")
+                        .And
+                        .HaveStdOutContaining(
                             "[C++/CLI] ManagedClass: AssemblyLoadContext = \"Default\" System.Runtime.Loader.DefaultAssemblyLoadContext"
                         );
                 }
@@ -92,8 +93,10 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.NativeHosting
                 result
                     .Should()
                     .Pass()
-                    .And.HaveStdOutContaining("[C++/CLI] NativeEntryPoint: calling managed class")
-                    .And.HaveStdOutContaining(
+                    .And
+                    .HaveStdOutContaining("[C++/CLI] NativeEntryPoint: calling managed class")
+                    .And
+                    .HaveStdOutContaining(
                         "[C++/CLI] ManagedClass: AssemblyLoadContext = \"Default\" System.Runtime.Loader.DefaultAssemblyLoadContext"
                     );
             }
@@ -118,11 +121,14 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.NativeHosting
             result
                 .Should()
                 .Pass()
-                .And.HaveStdOutContaining("[C++/CLI] NativeEntryPoint: calling managed class")
-                .And.HaveStdOutContaining(
+                .And
+                .HaveStdOutContaining("[C++/CLI] NativeEntryPoint: calling managed class")
+                .And
+                .HaveStdOutContaining(
                     "[C++/CLI] ManagedClass: AssemblyLoadContext = \"Default\" System.Runtime.Loader.DefaultAssemblyLoadContext"
                 )
-                .And.ExecuteSelfContained(selfContained);
+                .And
+                .ExecuteSelfContained(selfContained);
         }
 
         public class SharedTestState : SharedTestStateBase

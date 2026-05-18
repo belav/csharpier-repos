@@ -33,8 +33,7 @@ namespace AnalyzerRunner
         }
 
         private static ImmutableArray<Assembly> DefaultAssemblies =>
-            MSBuildMefHostServices.DefaultAssemblies.Add(
-                typeof(AnalyzerRunnerMefHostServices).Assembly
-            );
+            MSBuildMefHostServices.DefaultAssemblies
+                .Add(typeof(AnalyzerRunnerMefHostServices).Assembly);
     }
 }

@@ -2918,9 +2918,8 @@ End Class
                 position,
                 triggerInfo
             );
-            var completionItem = completionList.ItemsList.First(i =>
-                CompareItems(i.DisplayText, "Bar[int bay]")
-            );
+            var completionItem = completionList.ItemsList
+                .First(i => CompareItems(i.DisplayText, "Bar[int bay]"));
 
             if (
                 service.GetProvider(completionItem, document.Project)
@@ -3242,9 +3241,8 @@ int bar;
                 position,
                 triggerInfo
             );
-            var completionItem = completionList.ItemsList.First(i =>
-                CompareItems(i.DisplayText, "Equals(object obj)")
-            );
+            var completionItem = completionList.ItemsList
+                .First(i => CompareItems(i.DisplayText, "Equals(object obj)"));
 
             if (
                 service.GetProvider(completionItem, document.Project)
@@ -3329,9 +3327,8 @@ int bar;
                 cursorPosition,
                 triggerInfo
             );
-            var completionItem = completionList.ItemsList.First(i =>
-                CompareItems(i.DisplayText, "Equals(object obj)")
-            );
+            var completionItem = completionList.ItemsList
+                .First(i => CompareItems(i.DisplayText, "Equals(object obj)"));
 
             if (
                 service.GetProvider(completionItem, document.Project)
@@ -3809,8 +3806,9 @@ namespace ClassLibrary7
             // reference to P2. If we try to override Goo, the missing "Missing" type will
             // prevent round tripping the symbolkey.
             using var workspace = TestWorkspace.Create(text, composition: GetComposition());
-            var compilation = await workspace
-                .CurrentSolution.Projects.First(p => p.Name == "P3")
+            var compilation = await workspace.CurrentSolution
+                .Projects
+                .First(p => p.Name == "P3")
                 .GetCompilationAsync();
 
             // CompilationExtensions is in the Microsoft.CodeAnalysis.Test.Utilities namespace
@@ -3874,8 +3872,9 @@ public class SomeClass : Base
 }
 ";
 
-            var origComp = await workspace
-                .CurrentSolution.Projects.Single()
+            var origComp = await workspace.CurrentSolution
+                .Projects
+                .Single()
                 .GetRequiredCompilationAsync(CancellationToken.None);
             var options = CSharpParseOptions.Default.WithLanguageVersion(LanguageVersion.Latest);
             var libComp = origComp
@@ -3900,8 +3899,8 @@ public class SomeClass : Base
                 testDocument.CursorPosition.Value,
                 CompletionTrigger.Invoke
             );
-            var completionItem = completionList
-                .ItemsList.Where(c => c.DisplayText == "M(in int x)")
+            var completionItem = completionList.ItemsList
+                .Where(c => c.DisplayText == "M(in int x)")
                 .Single();
 
             var commit = await service.GetChangeAsync(

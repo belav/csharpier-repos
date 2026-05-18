@@ -201,8 +201,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
                 var nextToken = originalToken.GetNextToken(includeSkipped: true);
                 if (
                     nextToken.Kind() == SyntaxKind.ExternKeyword
-                    || ((CompilationUnitSyntax)context.SyntaxTree.GetRoot(cancellationToken))
-                        .Externs
+                    || (
+                        (CompilationUnitSyntax)context.SyntaxTree.GetRoot(cancellationToken)
+                    ).Externs
                         .Count > 0
                 )
                 {

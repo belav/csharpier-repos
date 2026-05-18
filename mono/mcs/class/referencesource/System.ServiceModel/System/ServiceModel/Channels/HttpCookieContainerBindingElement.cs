@@ -42,9 +42,8 @@ namespace System.ServiceModel.Channels
         {
             if (context == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentNullException("context")
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(new ArgumentNullException("context"));
             }
 
             if (
@@ -52,14 +51,15 @@ namespace System.ServiceModel.Channels
                 && !context.Binding.Scheme.Equals("https", StringComparison.OrdinalIgnoreCase)
             )
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(
-                        SR.GetString(
-                            SR.CookieContainerBindingElementNeedsHttp,
-                            typeof(HttpCookieContainerBindingElement)
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(
+                                SR.CookieContainerBindingElementNeedsHttp,
+                                typeof(HttpCookieContainerBindingElement)
+                            )
                         )
-                    )
-                );
+                    );
             }
 
 #pragma warning suppress 56506 // BindingContext.BindingParameters should never be null

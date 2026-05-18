@@ -68,9 +68,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                 var baseNode =
                     outermostCapturedVariable != null
                         ? outermostCapturedVariable.GetIdentifierTokenAtDeclaration(document).Parent
-                        : this.OriginalSelectionResult.GetOutermostCallSiteContainerToProcess(
-                            cancellationToken
-                        );
+                        : this.OriginalSelectionResult
+                            .GetOutermostCallSiteContainerToProcess(cancellationToken);
 
                 if (baseNode is CompilationUnitSyntax)
                 {
@@ -256,7 +255,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                 if (
                     !originalMethodDefinition
                         .FindTokenOnLeftOfPosition(originalMethodDefinition.SpanStart)
-                        .TrailingTrivia.Any(SyntaxKind.EndOfLineTrivia)
+                        .TrailingTrivia
+                        .Any(SyntaxKind.EndOfLineTrivia)
                 )
                 {
                     // Add a second new line since there were no line endings in the original form

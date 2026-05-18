@@ -112,8 +112,8 @@ namespace System.Data.Mapping.ViewGeneration.QueryRewriting
             BoolExpression conditionUnderKB = condition.Create(
                 new AndExpr<BoolDomainConstraint>(_kb.KbExpression, condition.Tree)
             );
-            var context =
-                IdentifierService<BoolDomainConstraint>.Instance.CreateConversionContext();
+            var context = IdentifierService<BoolDomainConstraint>.Instance
+                .CreateConversionContext();
             var converter = new Converter<BoolDomainConstraint>(conditionUnderKB.Tree, context);
             bool isSatisfiable = converter.Vertex.IsZero() == false;
             return isSatisfiable;
@@ -157,16 +157,17 @@ namespace System.Data.Mapping.ViewGeneration.QueryRewriting
                                     )
                                 );
                             // is this constraint implied by the where clause?
-                            BoolExpression exclusion = view.Condition.Create(
-                                new AndExpr<DomainConstraint<BoolLiteral, Constant>>(
-                                    view.Condition.Tree,
-                                    new NotExpr<DomainConstraint<BoolLiteral, Constant>>(
-                                        new TermExpr<DomainConstraint<BoolLiteral, Constant>>(
-                                            constraint
+                            BoolExpression exclusion = view.Condition
+                                .Create(
+                                    new AndExpr<DomainConstraint<BoolLiteral, Constant>>(
+                                        view.Condition.Tree,
+                                        new NotExpr<DomainConstraint<BoolLiteral, Constant>>(
+                                            new TermExpr<DomainConstraint<BoolLiteral, Constant>>(
+                                                constraint
+                                            )
                                         )
                                     )
-                                )
-                            );
+                                );
                             bool isImplied = false == IsSatisfiable(exclusion);
                             if (isImplied)
                             {

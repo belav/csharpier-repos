@@ -193,17 +193,17 @@ namespace Microsoft.Build.Tasks.Xaml
                                 );
                                 if (arrayType.UnderlyingType != null)
                                 {
-                                    paramInfo.Type = xamlArrayReader.SchemaContext.GetXamlType(
-                                        arrayType.UnderlyingType.MakeArrayType()
-                                    );
+                                    paramInfo.Type = xamlArrayReader.SchemaContext
+                                        .GetXamlType(arrayType.UnderlyingType.MakeArrayType());
                                 }
                                 else
                                 {
-                                    throw FxTrace.Exception.AsError(
-                                        new InvalidOperationException(
-                                            SR.AttributeParameterTypeUnknown(arrayType)
-                                        )
-                                    );
+                                    throw FxTrace.Exception
+                                        .AsError(
+                                            new InvalidOperationException(
+                                                SR.AttributeParameterTypeUnknown(arrayType)
+                                            )
+                                        );
                                 }
                             }
                         }
@@ -273,13 +273,14 @@ namespace Microsoft.Build.Tasks.Xaml
                             || paramType.UnderlyingType.IsArray
                         )
                         {
-                            throw FxTrace.Exception.AsError(
-                                new InvalidOperationException(
-                                    SR.AttributeParamTypeNotSupported(
-                                        paramType.UnderlyingType.FullName
+                            throw FxTrace.Exception
+                                .AsError(
+                                    new InvalidOperationException(
+                                        SR.AttributeParamTypeNotSupported(
+                                            paramType.UnderlyingType.FullName
+                                        )
                                     )
-                                )
-                            );
+                                );
                         }
 
                         paramValue = reader.Value as string;
@@ -301,11 +302,12 @@ namespace Microsoft.Build.Tasks.Xaml
                     }
                     else
                     {
-                        throw FxTrace.Exception.AsError(
-                            new InvalidOperationException(
-                                SR.AttributeParameterTypeUnknown(reader.Value as string)
-                            )
-                        );
+                        throw FxTrace.Exception
+                            .AsError(
+                                new InvalidOperationException(
+                                    SR.AttributeParameterTypeUnknown(reader.Value as string)
+                                )
+                            );
                     }
                 }
                 else if (reader.NodeType == XamlNodeType.StartObject)
@@ -399,11 +401,12 @@ namespace Microsoft.Build.Tasks.Xaml
             string clrTypeName;
             if (!XamlBuildTaskServices.TryGetClrTypeName(xamlType, rootNamespace, out clrTypeName))
             {
-                throw FxTrace.Exception.AsError(
-                    new InvalidOperationException(
-                        SR.TypeNameUnknown(XamlBuildTaskServices.GetFullTypeName(xamlType))
-                    )
-                );
+                throw FxTrace.Exception
+                    .AsError(
+                        new InvalidOperationException(
+                            SR.TypeNameUnknown(XamlBuildTaskServices.GetFullTypeName(xamlType))
+                        )
+                    );
             }
             return Tuple.Create(clrTypeName, xamlType.UnderlyingType);
         }
@@ -476,9 +479,8 @@ namespace Microsoft.Build.Tasks.Xaml
                     }
                     else
                     {
-                        throw FxTrace.Exception.AsError(
-                            new InvalidOperationException(SR.UnknownBooleanValue(value))
-                        );
+                        throw FxTrace.Exception
+                            .AsError(new InvalidOperationException(SR.UnknownBooleanValue(value)));
                     }
                 }
                 else

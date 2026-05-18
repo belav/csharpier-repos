@@ -156,7 +156,8 @@ public abstract class TableSplittingTestBase : NonSharedModelTestBase
 
             scooterEntry
                 .Reference(v => v.Engine)
-                .TargetEntry.Property<int>("SeatingCapacity")
+                .TargetEntry
+                .Property<int>("SeatingCapacity")
                 .CurrentValue = 1;
 
             context.SaveChanges();
@@ -600,8 +601,8 @@ public abstract class TableSplittingTestBase : NonSharedModelTestBase
 
         using (var context = CreateContext())
         {
-            var transport = context
-                .Vehicles.Include(v => v.Operator)
+            var transport = context.Vehicles
+                .Include(v => v.Operator)
                 .Single(v => v.Name == "Fuel transport");
             var tank = context
                 .Set<FuelTank>()
@@ -634,8 +635,8 @@ public abstract class TableSplittingTestBase : NonSharedModelTestBase
 
         using (var context = CreateContext())
         {
-            var bike = context
-                .Vehicles.Include(v => v.Operator)
+            var bike = context.Vehicles
+                .Include(v => v.Operator)
                 .Single(v => v.Name == "Trek Pro Fit Madone 6 Series");
 
             bike.Operator = new Operator { Name = "Chris Horner" };
@@ -654,8 +655,8 @@ public abstract class TableSplittingTestBase : NonSharedModelTestBase
 
         using (var context = CreateContext())
         {
-            var bike = context
-                .Vehicles.Include(v => v.Operator)
+            var bike = context.Vehicles
+                .Include(v => v.Operator)
                 .Single(v => v.Name == "Trek Pro Fit Madone 6 Series");
             Assert.Equal("repairman", bike.Operator.Name);
             Assert.Equal("Repair", ((LicensedOperator)bike.Operator).LicenseType);
@@ -705,8 +706,8 @@ public abstract class TableSplittingTestBase : NonSharedModelTestBase
 
         using (var context = CreateContext())
         {
-            var bike = context
-                .Vehicles.Include(v => v.Operator)
+            var bike = context.Vehicles
+                .Include(v => v.Operator)
                 .Single(v => v.Name == "Trek Pro Fit Madone 6 Series");
 
             Assert.Equal(2, bike.SeatingCapacity);
@@ -735,8 +736,8 @@ public abstract class TableSplittingTestBase : NonSharedModelTestBase
 
         using (var context = CreateContext())
         {
-            var bike = context
-                .Vehicles.Include(v => v.Operator)
+            var bike = context.Vehicles
+                .Include(v => v.Operator)
                 .Single(v => v.Name == "Trek Pro Fit Madone 6 Series");
 
             var newBike = new Vehicle
@@ -759,8 +760,8 @@ public abstract class TableSplittingTestBase : NonSharedModelTestBase
 
         using (var context = CreateContext())
         {
-            var bike = context
-                .Vehicles.Include(v => v.Operator)
+            var bike = context.Vehicles
+                .Include(v => v.Operator)
                 .Single(v => v.Name == "Trek Pro Fit Madone 6 Series");
             Assert.Equal(2, bike.SeatingCapacity);
             Assert.Equal("repairman", bike.Operator.Name);

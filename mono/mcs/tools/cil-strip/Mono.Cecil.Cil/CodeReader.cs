@@ -52,9 +52,10 @@ namespace Mono.Cecil.Cil
         {
             MethodDefinition meth = body.Method;
             MethodBody methBody = body;
-            BinaryReader br = m_reflectReader.Module.ImageReader.MetadataReader.GetDataReader(
-                meth.RVA
-            );
+            BinaryReader br = m_reflectReader.Module
+                .ImageReader
+                .MetadataReader
+                .GetDataReader(meth.RVA);
 
             // lets read the method
             int flags = br.ReadByte();
@@ -342,9 +343,8 @@ namespace Mono.Cecil.Cil
         CallSite GetCallSiteAt(int token, GenericContext context)
         {
             StandAloneSigTable sasTable = m_reflectReader.TableReader.GetStandAloneSigTable();
-            MethodSig ms = m_reflectReader.SigReader.GetStandAloneMethodSig(
-                sasTable[(int)GetRid(token) - 1].Signature
-            );
+            MethodSig ms = m_reflectReader.SigReader
+                .GetStandAloneMethodSig(sasTable[(int)GetRid(token) - 1].Signature);
             CallSite cs = new CallSite(
                 ms.HasThis,
                 ms.ExplicitThis,
@@ -390,9 +390,8 @@ namespace Mono.Cecil.Cil
 
                 varType = m_reflectReader.GetModifierType(lv.CustomMods, varType);
 
-                body.Variables.Add(
-                    new VariableDefinition(string.Concat("V_", i), i, body.Method, varType)
-                );
+                body.Variables
+                    .Add(new VariableDefinition(string.Concat("V_", i), i, body.Method, varType));
             }
         }
     }

@@ -41,11 +41,13 @@ namespace Mono.Mozilla
         {
             IntPtr docEncoderServicePtr = IntPtr.Zero;
 
-            this.control.ServiceManager.getServiceByContractID(
-                "@mozilla.org/layout/documentEncoder;1?type=text/html",
-                typeof(nsIDocumentEncoder).GUID,
-                out docEncoderServicePtr
-            );
+            this.control
+                .ServiceManager
+                .getServiceByContractID(
+                    "@mozilla.org/layout/documentEncoder;1?type=text/html",
+                    typeof(nsIDocumentEncoder).GUID,
+                    out docEncoderServicePtr
+                );
             if (docEncoderServicePtr == IntPtr.Zero)
                 throw new Mono.WebBrowser.Exception(
                     Mono.WebBrowser.Exception.ErrorCodes.DocumentEncoderService

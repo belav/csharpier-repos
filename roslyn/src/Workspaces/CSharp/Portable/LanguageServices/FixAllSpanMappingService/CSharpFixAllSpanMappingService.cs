@@ -58,10 +58,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeFixesAndRefactorings
                 );
             }
 
-            return ImmutableDictionary<Document, ImmutableArray<TextSpan>>.Empty.Add(
-                document,
-                ImmutableArray.Create(fixAllSpan)
-            );
+            return ImmutableDictionary<Document, ImmutableArray<TextSpan>>.Empty
+                .Add(document, ImmutableArray.Create(fixAllSpan));
         }
     }
 }

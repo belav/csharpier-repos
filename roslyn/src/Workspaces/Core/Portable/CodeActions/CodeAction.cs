@@ -139,8 +139,7 @@ namespace Microsoft.CodeAnalysis.CodeActions
                 static codeAction =>
                     new Func<CancellationToken, Task<IEnumerable<CodeActionOperation>>>(
                         codeAction.ComputeOperationsAsync
-                    )
-                        .Method
+                    ).Method
                         .DeclaringType != typeof(CodeAction)
             );
 #pragma warning restore RS0030 // Do not use banned APIs
@@ -151,8 +150,9 @@ namespace Microsoft.CodeAnalysis.CodeActions
             return IsNonProgressApiOverridden(
                 s_isNonProgressGetChangedSolutionAsyncOverridden,
                 static codeAction =>
-                    new Func<CancellationToken, Task<Solution?>>(codeAction.GetChangedSolutionAsync)
-                        .Method
+                    new Func<CancellationToken, Task<Solution?>>(
+                        codeAction.GetChangedSolutionAsync
+                    ).Method
                         .DeclaringType != typeof(CodeAction)
             );
         }
@@ -605,8 +605,10 @@ namespace Microsoft.CodeAnalysis.CodeActions
             if (document.SupportsSyntaxTree)
             {
                 // TODO: avoid ILegacyGlobalCodeActionOptionsWorkspaceService https://github.com/dotnet/roslyn/issues/60777
-                var globalOptions =
-                    document.Project.Solution.Services.GetService<ILegacyGlobalCleanCodeGenerationOptionsWorkspaceService>();
+                var globalOptions = document.Project
+                    .Solution
+                    .Services
+                    .GetService<ILegacyGlobalCleanCodeGenerationOptionsWorkspaceService>();
                 var fallbackOptions = globalOptions?.Provider ?? CodeActionOptions.DefaultProvider;
 
                 var options = await document

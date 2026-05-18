@@ -298,8 +298,8 @@ namespace Microsoft.Extensions.DependencyModel.Tests
 
             var result = context.Merge(contextRedist);
 
-            result
-                .CompileLibraries.Should()
+            result.CompileLibraries
+                .Should()
                 .BeEquivalentTo(
                     new[]
                     {
@@ -309,8 +309,8 @@ namespace Microsoft.Extensions.DependencyModel.Tests
                     }
                 );
 
-            result
-                .RuntimeLibraries.Should()
+            result.RuntimeLibraries
+                .Should()
                 .BeEquivalentTo(
                     new[] { runtimeLibraries[0], runtimeLibraries[1], runtimeLibrariesRedist[1] }
                 );
@@ -373,15 +373,19 @@ namespace Microsoft.Extensions.DependencyModel.Tests
             );
 
             var result = context.Merge(contextRedist);
-            result
-                .RuntimeGraph.Should()
+            result.RuntimeGraph
+                .Should()
                 .Contain(g => g.Runtime == "win8-x64")
-                .Subject.Fallbacks.Should()
+                .Subject
+                .Fallbacks
+                .Should()
                 .BeEquivalentTo("win8");
-            result
-                .RuntimeGraph.Should()
+            result.RuntimeGraph
+                .Should()
                 .Contain(g => g.Runtime == "win8")
-                .Subject.Fallbacks.Should()
+                .Subject
+                .Fallbacks
+                .Should()
                 .BeEquivalentTo("win7-x64", "win7-x86");
         }
 

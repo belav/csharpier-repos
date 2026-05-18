@@ -72,12 +72,13 @@ namespace Microsoft.CodeAnalysis.UseAutoProperty
                         : CodeActionPriority.Default;
 
                 context.RegisterCodeFix(
-                    CodeAction.SolutionChangeAction.Create(
-                        AnalyzersResources.Use_auto_property,
-                        c => ProcessResultAsync(context, diagnostic, c),
-                        equivalenceKey: nameof(AnalyzersResources.Use_auto_property),
-                        priority
-                    ),
+                    CodeAction.SolutionChangeAction
+                        .Create(
+                            AnalyzersResources.Use_auto_property,
+                            c => ProcessResultAsync(context, diagnostic, c),
+                            equivalenceKey: nameof(AnalyzersResources.Use_auto_property),
+                            priority
+                        ),
                     diagnostic
                 );
             }
@@ -210,8 +211,8 @@ namespace Microsoft.CodeAnalysis.UseAutoProperty
             propertyDocument = solution.GetRequiredDocument(propertyDocument.Id);
             Debug.Assert(fieldDocument.Project == propertyDocument.Project);
 
-            compilation = await fieldDocument
-                .Project.GetRequiredCompilationAsync(cancellationToken)
+            compilation = await fieldDocument.Project
+                .GetRequiredCompilationAsync(cancellationToken)
                 .ConfigureAwait(false);
 
             fieldSymbol = (IFieldSymbol?)
@@ -438,8 +439,8 @@ namespace Microsoft.CodeAnalysis.UseAutoProperty
             CancellationToken cancellationToken
         )
         {
-            var constructorSpans = field
-                .ContainingType.GetMembers()
+            var constructorSpans = field.ContainingType
+                .GetMembers()
                 .Where(m => m.IsConstructor())
                 .SelectMany(c => c.DeclaringSyntaxReferences)
                 .Select(s => s.GetSyntax(cancellationToken))
@@ -447,15 +448,16 @@ namespace Microsoft.CodeAnalysis.UseAutoProperty
                 .WhereNotNull()
                 .Select(d => (d.SyntaxTree.FilePath, d.Span))
                 .ToSet();
-            return renameLocations.Locations.Any(loc =>
-                IsWrittenToOutsideOfConstructorOrProperty(
-                    renameLocations.Solution,
-                    loc,
-                    propertyDeclaration,
-                    constructorSpans,
-                    cancellationToken
-                )
-            );
+            return renameLocations.Locations
+                .Any(loc =>
+                    IsWrittenToOutsideOfConstructorOrProperty(
+                        renameLocations.Solution,
+                        loc,
+                        propertyDeclaration,
+                        constructorSpans,
+                        cancellationToken
+                    )
+                );
         }
 
         private static bool IsWrittenToOutsideOfConstructorOrProperty(

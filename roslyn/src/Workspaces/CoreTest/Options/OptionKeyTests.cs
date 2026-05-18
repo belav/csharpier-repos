@@ -231,8 +231,7 @@ namespace Microsoft.CodeAnalysis.UnitTests.Options
 
             Assert.True(NamingStyleOptions.NamingPreferences.Definition.IsEditorConfigOption);
             Assert.True(
-                CodeStyleOptions2
-                    .PreferIntrinsicPredefinedTypeKeywordInMemberAccess
+                CodeStyleOptions2.PreferIntrinsicPredefinedTypeKeywordInMemberAccess
                     .Definition
                     .IsEditorConfigOption
             );

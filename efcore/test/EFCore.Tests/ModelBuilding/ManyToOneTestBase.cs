@@ -2196,10 +2196,12 @@ public abstract partial class ModelBuilderTest
 
             Assert.Equal(
                 "ShadowId",
-                modelBuilder
-                    .Model.FindEntityType(typeof(Beta))
+                modelBuilder.Model
+                    .FindEntityType(typeof(Beta))
                     .FindNavigation("FirstNav")
-                    .ForeignKey.Properties.Single()
+                    .ForeignKey
+                    .Properties
+                    .Single()
                     .Name
             );
         }
@@ -2232,10 +2234,12 @@ public abstract partial class ModelBuilderTest
 
             Assert.Equal(
                 "KappaId",
-                modelBuilder
-                    .Model.FindEntityType(typeof(Omega))
+                modelBuilder.Model
+                    .FindEntityType(typeof(Omega))
                     .FindNavigation(nameof(Omega.Kappa))
-                    .ForeignKey.Properties.Single()
+                    .ForeignKey
+                    .Properties
+                    .Single()
                     .Name
             );
         }

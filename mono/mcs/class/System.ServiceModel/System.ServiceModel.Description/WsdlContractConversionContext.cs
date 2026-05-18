@@ -71,10 +71,12 @@ namespace System.ServiceModel.Description
                         operationMessage.Operation.Name
                     )
                 );
-            return od.Messages.FirstOrDefault(md =>
-                md.Direction == MessageDirection.Input && operationMessage is OperationInput
-                || md.Direction == MessageDirection.Output && operationMessage is OperationOutput
-            );
+            return od.Messages
+                .FirstOrDefault(md =>
+                    md.Direction == MessageDirection.Input && operationMessage is OperationInput
+                    || md.Direction == MessageDirection.Output
+                        && operationMessage is OperationOutput
+                );
         }
 
         public Operation GetOperation(OperationDescription operation)

@@ -28,9 +28,10 @@ namespace System.ServiceModel.Configuration
                 TEnum dummy;
                 if (!Enum.TryParse<TEnum>(value.ToString(), true, out dummy))
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidEnumArgumentException("value", (int)value, typeof(TEnum))
-                    );
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidEnumArgumentException("value", (int)value, typeof(TEnum))
+                        );
                 }
 
                 int combinedValue = (int)((object)dummy);
@@ -43,9 +44,10 @@ namespace System.ServiceModel.Configuration
                     )
                 )
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidEnumArgumentException("value", (int)value, typeof(TEnum))
-                    );
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidEnumArgumentException("value", (int)value, typeof(TEnum))
+                        );
                 }
             }
         }

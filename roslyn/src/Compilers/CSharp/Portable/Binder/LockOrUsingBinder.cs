@@ -32,8 +32,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             {
                 if (_lazyLockedOrDisposedVariables == null)
                 {
-                    ImmutableHashSet<Symbol> lockedOrDisposedVariables =
-                        this.Next.LockedOrDisposedVariables;
+                    ImmutableHashSet<Symbol> lockedOrDisposedVariables = this.Next
+                        .LockedOrDisposedVariables;
 
                     ExpressionSyntax targetExpressionSyntax = TargetExpressionSyntax;
 

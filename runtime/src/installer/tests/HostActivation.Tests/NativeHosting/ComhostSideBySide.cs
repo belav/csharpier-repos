@@ -71,9 +71,12 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.NativeHosting
             result
                 .Should()
                 .Pass()
-                .And.HaveStdOutContaining("New instance of Server created")
-                .And.HaveStdOutContaining($"Activation of {sharedState.ClsidString} succeeded.")
-                .And.ExecuteSelfContained(selfContained);
+                .And
+                .HaveStdOutContaining("New instance of Server created")
+                .And
+                .HaveStdOutContaining($"Activation of {sharedState.ClsidString} succeeded.")
+                .And
+                .ExecuteSelfContained(selfContained);
         }
 
         public class SharedTestState : Comhost.SharedTestState

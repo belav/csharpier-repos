@@ -1512,94 +1512,95 @@ namespace System.Threading.Channels.Tests
                 return;
             }
 
-            await Task.Factory.StartNew(
-                async () =>
-                {
-                    Assert.Null(SynchronizationContext.Current);
-
-                    Channel<bool> c = CreateChannel<bool>();
-                    ValueTask<bool> vt = readOrWait
-                        ? c.Reader.ReadAsync()
-                        : c.Reader.WaitToReadAsync();
-
-                    var continuationRan = new TaskCompletionSource<bool>();
-                    var asyncLocal = new AsyncLocal<int>();
-                    bool schedulerWasFlowed = false;
-                    bool executionContextWasFlowed = false;
-                    Action continuation = () =>
+            await Task.Factory
+                .StartNew(
+                    async () =>
                     {
-                        schedulerWasFlowed =
-                            SynchronizationContext.Current is CustomSynchronizationContext;
-                        executionContextWasFlowed = 42 == asyncLocal.Value;
-                        continuationRan.SetResult(true);
-                    };
+                        Assert.Null(SynchronizationContext.Current);
 
-                    if (completeBeforeOnCompleted)
-                    {
-                        Assert.False(vt.IsCompleted);
-                        Assert.False(vt.IsCompletedSuccessfully);
-                        c.Writer.TryWrite(true);
-                    }
+                        Channel<bool> c = CreateChannel<bool>();
+                        ValueTask<bool> vt = readOrWait
+                            ? c.Reader.ReadAsync()
+                            : c.Reader.WaitToReadAsync();
 
-                    SynchronizationContext.SetSynchronizationContext(
-                        new CustomSynchronizationContext()
-                    );
-                    asyncLocal.Value = 42;
-                    switch (continueOnCapturedContext)
-                    {
-                        case null:
-                            if (flowExecutionContext)
-                            {
-                                vt.GetAwaiter().OnCompleted(continuation);
-                            }
-                            else
-                            {
-                                vt.GetAwaiter().UnsafeOnCompleted(continuation);
-                            }
-                            break;
-                        default:
-                            if (flowExecutionContext)
-                            {
-                                vt.ConfigureAwait(continueOnCapturedContext.Value)
-                                    .GetAwaiter()
-                                    .OnCompleted(continuation);
-                            }
-                            else
-                            {
-                                vt.ConfigureAwait(continueOnCapturedContext.Value)
-                                    .GetAwaiter()
-                                    .UnsafeOnCompleted(continuation);
-                            }
-                            break;
-                    }
-                    asyncLocal.Value = 0;
-                    SynchronizationContext.SetSynchronizationContext(null);
+                        var continuationRan = new TaskCompletionSource<bool>();
+                        var asyncLocal = new AsyncLocal<int>();
+                        bool schedulerWasFlowed = false;
+                        bool executionContextWasFlowed = false;
+                        Action continuation = () =>
+                        {
+                            schedulerWasFlowed =
+                                SynchronizationContext.Current is CustomSynchronizationContext;
+                            executionContextWasFlowed = 42 == asyncLocal.Value;
+                            continuationRan.SetResult(true);
+                        };
 
-                    if (!completeBeforeOnCompleted)
-                    {
-                        Assert.False(vt.IsCompleted);
-                        Assert.False(vt.IsCompletedSuccessfully);
-                        c.Writer.TryWrite(true);
-                    }
+                        if (completeBeforeOnCompleted)
+                        {
+                            Assert.False(vt.IsCompleted);
+                            Assert.False(vt.IsCompletedSuccessfully);
+                            c.Writer.TryWrite(true);
+                        }
 
-                    await continuationRan.Task;
-                    Assert.True(vt.IsCompleted);
-                    Assert.True(vt.IsCompletedSuccessfully);
+                        SynchronizationContext.SetSynchronizationContext(
+                            new CustomSynchronizationContext()
+                        );
+                        asyncLocal.Value = 42;
+                        switch (continueOnCapturedContext)
+                        {
+                            case null:
+                                if (flowExecutionContext)
+                                {
+                                    vt.GetAwaiter().OnCompleted(continuation);
+                                }
+                                else
+                                {
+                                    vt.GetAwaiter().UnsafeOnCompleted(continuation);
+                                }
+                                break;
+                            default:
+                                if (flowExecutionContext)
+                                {
+                                    vt.ConfigureAwait(continueOnCapturedContext.Value)
+                                        .GetAwaiter()
+                                        .OnCompleted(continuation);
+                                }
+                                else
+                                {
+                                    vt.ConfigureAwait(continueOnCapturedContext.Value)
+                                        .GetAwaiter()
+                                        .UnsafeOnCompleted(continuation);
+                                }
+                                break;
+                        }
+                        asyncLocal.Value = 0;
+                        SynchronizationContext.SetSynchronizationContext(null);
 
-                    Assert.Equal(continueOnCapturedContext != false, schedulerWasFlowed);
-                    if (completeBeforeOnCompleted) // OnCompleted will simply queue using a mechanism that happens to flow
-                    {
-                        Assert.True(executionContextWasFlowed);
-                    }
-                    else
-                    {
-                        Assert.Equal(flowExecutionContext, executionContextWasFlowed);
-                    }
-                },
-                CancellationToken.None,
-                TaskCreationOptions.None,
-                setNonDefaultTaskScheduler ? new CustomTaskScheduler() : TaskScheduler.Default
-            );
+                        if (!completeBeforeOnCompleted)
+                        {
+                            Assert.False(vt.IsCompleted);
+                            Assert.False(vt.IsCompletedSuccessfully);
+                            c.Writer.TryWrite(true);
+                        }
+
+                        await continuationRan.Task;
+                        Assert.True(vt.IsCompleted);
+                        Assert.True(vt.IsCompletedSuccessfully);
+
+                        Assert.Equal(continueOnCapturedContext != false, schedulerWasFlowed);
+                        if (completeBeforeOnCompleted) // OnCompleted will simply queue using a mechanism that happens to flow
+                        {
+                            Assert.True(executionContextWasFlowed);
+                        }
+                        else
+                        {
+                            Assert.Equal(flowExecutionContext, executionContextWasFlowed);
+                        }
+                    },
+                    CancellationToken.None,
+                    TaskCreationOptions.None,
+                    setNonDefaultTaskScheduler ? new CustomTaskScheduler() : TaskScheduler.Default
+                );
         }
 
         public static IEnumerable<object[]> Reader_ContinuesOnCurrentSchedulerIfDesired_MemberData() =>
@@ -1657,51 +1658,52 @@ namespace System.Threading.Channels.Tests
                     c.Writer.TryWrite(true);
                 }
 
-                await Task.Factory.StartNew(
-                    () =>
-                    {
-                        if (setDefaultSyncContext)
+                await Task.Factory
+                    .StartNew(
+                        () =>
                         {
-                            SynchronizationContext.SetSynchronizationContext(
-                                new SynchronizationContext()
-                            );
-                        }
+                            if (setDefaultSyncContext)
+                            {
+                                SynchronizationContext.SetSynchronizationContext(
+                                    new SynchronizationContext()
+                                );
+                            }
 
-                        Assert.IsType<CustomTaskScheduler>(TaskScheduler.Current);
-                        asyncLocal.Value = 42;
-                        switch (continueOnCapturedContext)
-                        {
-                            case null:
-                                if (flowExecutionContext)
-                                {
-                                    vt.GetAwaiter().OnCompleted(continuation);
-                                }
-                                else
-                                {
-                                    vt.GetAwaiter().UnsafeOnCompleted(continuation);
-                                }
-                                break;
-                            default:
-                                if (flowExecutionContext)
-                                {
-                                    vt.ConfigureAwait(continueOnCapturedContext.Value)
-                                        .GetAwaiter()
-                                        .OnCompleted(continuation);
-                                }
-                                else
-                                {
-                                    vt.ConfigureAwait(continueOnCapturedContext.Value)
-                                        .GetAwaiter()
-                                        .UnsafeOnCompleted(continuation);
-                                }
-                                break;
-                        }
-                        asyncLocal.Value = 0;
-                    },
-                    CancellationToken.None,
-                    TaskCreationOptions.None,
-                    new CustomTaskScheduler()
-                );
+                            Assert.IsType<CustomTaskScheduler>(TaskScheduler.Current);
+                            asyncLocal.Value = 42;
+                            switch (continueOnCapturedContext)
+                            {
+                                case null:
+                                    if (flowExecutionContext)
+                                    {
+                                        vt.GetAwaiter().OnCompleted(continuation);
+                                    }
+                                    else
+                                    {
+                                        vt.GetAwaiter().UnsafeOnCompleted(continuation);
+                                    }
+                                    break;
+                                default:
+                                    if (flowExecutionContext)
+                                    {
+                                        vt.ConfigureAwait(continueOnCapturedContext.Value)
+                                            .GetAwaiter()
+                                            .OnCompleted(continuation);
+                                    }
+                                    else
+                                    {
+                                        vt.ConfigureAwait(continueOnCapturedContext.Value)
+                                            .GetAwaiter()
+                                            .UnsafeOnCompleted(continuation);
+                                    }
+                                    break;
+                            }
+                            asyncLocal.Value = 0;
+                        },
+                        CancellationToken.None,
+                        TaskCreationOptions.None,
+                        new CustomTaskScheduler()
+                    );
 
                 if (!completeBeforeOnCompleted)
                 {
@@ -1734,7 +1736,8 @@ namespace System.Threading.Channels.Tests
             Assert.Throws<InvalidOperationException>(() => readVt.GetResult());
 
             ValueTaskAwaiter<bool> waitReadVt = CreateChannel()
-                .Reader.WaitToReadAsync()
+                .Reader
+                .WaitToReadAsync()
                 .GetAwaiter();
             Assert.Throws<InvalidOperationException>(() => waitReadVt.GetResult());
 
@@ -1744,7 +1747,8 @@ namespace System.Threading.Channels.Tests
                 Assert.Throws<InvalidOperationException>(() => writeVt.GetResult());
 
                 ValueTaskAwaiter<bool> waitWriteVt = CreateFullChannel()
-                    .Writer.WaitToWriteAsync()
+                    .Writer
+                    .WaitToWriteAsync()
                     .GetAwaiter();
                 Assert.Throws<InvalidOperationException>(() => waitWriteVt.GetResult());
             }
@@ -1758,7 +1762,8 @@ namespace System.Threading.Channels.Tests
             Assert.Throws<InvalidOperationException>(() => readVt.OnCompleted(() => { }));
 
             ValueTaskAwaiter<bool> waitReadVt = CreateChannel()
-                .Reader.WaitToReadAsync()
+                .Reader
+                .WaitToReadAsync()
                 .GetAwaiter();
             waitReadVt.OnCompleted(() => { });
             Assert.Throws<InvalidOperationException>(() => waitReadVt.OnCompleted(() => { }));
@@ -1770,7 +1775,8 @@ namespace System.Threading.Channels.Tests
                 Assert.Throws<InvalidOperationException>(() => writeVt.OnCompleted(() => { }));
 
                 ValueTaskAwaiter<bool> waitWriteVt = CreateFullChannel()
-                    .Writer.WaitToWriteAsync()
+                    .Writer
+                    .WaitToWriteAsync()
                     .GetAwaiter();
                 waitWriteVt.OnCompleted(() => { });
                 Assert.Throws<InvalidOperationException>(() => waitWriteVt.OnCompleted(() => { }));

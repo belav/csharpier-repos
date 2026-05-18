@@ -203,10 +203,11 @@ namespace System.Globalization
             else
             {
                 return (
-                    this.String.Substring(
-                        start,
-                        (this.Indexes[lengthInTextElements + startingTextElement] - start)
-                    )
+                    this.String
+                        .Substring(
+                            start,
+                            (this.Indexes[lengthInTextElements + startingTextElement] - start)
+                        )
                 );
             }
         }

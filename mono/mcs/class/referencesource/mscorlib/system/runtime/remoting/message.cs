@@ -920,8 +920,8 @@ namespace System.Runtime.Remoting.Messaging
         [System.Security.SecurityCritical] // auto-generated
         internal static void PropagateCallContextFromThreadToMessage(IMessage msg)
         {
-            LogicalCallContext callCtx = Thread
-                .CurrentThread.GetMutableExecutionContext()
+            LogicalCallContext callCtx = Thread.CurrentThread
+                .GetMutableExecutionContext()
                 .LogicalCallContext;
 
             msg.Properties[Message.CallContextKey] = callCtx;
@@ -3305,12 +3305,8 @@ namespace System.Runtime.Remoting.Messaging
 
                         // Use the default binder to select the right overload
                         // based on signature.
-                        MI = Type.DefaultBinder.SelectMethod(
-                            MethodCall.LookupAll,
-                            matches,
-                            methodSignature,
-                            null
-                        );
+                        MI = Type.DefaultBinder
+                            .SelectMethod(MethodCall.LookupAll, matches, methodSignature, null);
                     }
 
                     BCLDebug.Trace(
@@ -5197,11 +5193,12 @@ namespace System.Runtime.Remoting.Messaging
                 Identity.ProcessGuid
             );
             String unUsed;
-            IMessageSink channelSink = CrossAppDomainChannel.AppDomainChannel.CreateMessageSink(
-                null, //uri
-                data, //channelData
-                out unUsed
-            ); //out objURI
+            IMessageSink channelSink = CrossAppDomainChannel.AppDomainChannel
+                .CreateMessageSink(
+                    null, //uri
+                    data, //channelData
+                    out unUsed
+                ); //out objURI
 
             Contract.Assert(channelSink != null, "X-domain transition failure");
             _ID.RaceSetChannelSink(channelSink);

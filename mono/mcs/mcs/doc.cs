@@ -176,10 +176,8 @@ namespace Mono.CSharp
                     mc.Location,
                     "Invalid XML `include' element. Missing `file' attribute"
                 );
-                el.ParentNode.InsertBefore(
-                    el.OwnerDocument.CreateComment(" Include tag is invalid "),
-                    el
-                );
+                el.ParentNode
+                    .InsertBefore(el.OwnerDocument.CreateComment(" Include tag is invalid "), el);
                 keep_include_node = true;
             }
             else if (path.Length == 0)
@@ -190,10 +188,8 @@ namespace Mono.CSharp
                     mc.Location,
                     "Invalid XML `include' element. Missing `path' attribute"
                 );
-                el.ParentNode.InsertBefore(
-                    el.OwnerDocument.CreateComment(" Include tag is invalid "),
-                    el
-                );
+                el.ParentNode
+                    .InsertBefore(el.OwnerDocument.CreateComment(" Include tag is invalid "), el);
                 keep_include_node = true;
             }
             else
@@ -213,15 +209,17 @@ namespace Mono.CSharp
                     catch (Exception e)
                     {
                         exception = e;
-                        el.ParentNode.InsertBefore(
-                            el.OwnerDocument.CreateComment(
-                                String.Format(
-                                    " Badly formed XML in at comment file `{0}': cannot be included ",
-                                    file
-                                )
-                            ),
-                            el
-                        );
+                        el.ParentNode
+                            .InsertBefore(
+                                el.OwnerDocument
+                                    .CreateComment(
+                                        String.Format(
+                                            " Badly formed XML in at comment file `{0}': cannot be included ",
+                                            file
+                                        )
+                                    ),
+                                el
+                            );
                     }
                 }
 
@@ -232,12 +230,14 @@ namespace Mono.CSharp
                         XmlNodeList nl = doc.SelectNodes(path);
                         if (nl.Count == 0)
                         {
-                            el.ParentNode.InsertBefore(
-                                el.OwnerDocument.CreateComment(
-                                    " No matching elements were found for the include tag embedded here. "
-                                ),
-                                el
-                            );
+                            el.ParentNode
+                                .InsertBefore(
+                                    el.OwnerDocument
+                                        .CreateComment(
+                                            " No matching elements were found for the include tag embedded here. "
+                                        ),
+                                    el
+                                );
 
                             keep_include_node = true;
                         }
@@ -247,12 +247,14 @@ namespace Mono.CSharp
                     catch (Exception ex)
                     {
                         exception = ex;
-                        el.ParentNode.InsertBefore(
-                            el.OwnerDocument.CreateComment(
-                                " Failed to insert some or all of included XML "
-                            ),
-                            el
-                        );
+                        el.ParentNode
+                            .InsertBefore(
+                                el.OwnerDocument
+                                    .CreateComment(
+                                        " Failed to insert some or all of included XML "
+                                    ),
+                                el
+                            );
                     }
                 }
 
@@ -314,14 +316,16 @@ namespace Mono.CSharp
 
             // TODO: CS1710, CS1712
 
-            mc.Compiler.Report.Warning(
-                1711,
-                2,
-                mc.Location,
-                "XML comment on `{0}' has a typeparam name `{1}' but there is no type parameter by that name",
-                mc.GetSignatureForError(),
-                tp_name
-            );
+            mc.Compiler
+                .Report
+                .Warning(
+                    1711,
+                    2,
+                    mc.Location,
+                    "XML comment on `{0}' has a typeparam name `{1}' but there is no type parameter by that name",
+                    mc.GetSignatureForError(),
+                    tp_name
+                );
         }
 
         //
@@ -345,14 +349,16 @@ namespace Mono.CSharp
                 member = member.Parent;
             } while (member != null);
 
-            mc.Compiler.Report.Warning(
-                1735,
-                2,
-                mc.Location,
-                "XML comment on `{0}' has a typeparamref name `{1}' that could not be resolved",
-                mc.GetSignatureForError(),
-                tp_name
-            );
+            mc.Compiler
+                .Report
+                .Warning(
+                    1735,
+                    2,
+                    mc.Location,
+                    "XML comment on `{0}' has a typeparamref name `{1}' that could not be resolved",
+                    mc.GetSignatureForError(),
+                    tp_name
+                );
         }
 
         FullNamedExpression ResolveMemberName(IMemberContext context, MemberName mn)
@@ -598,10 +604,8 @@ namespace Mono.CSharp
                                             i >= pm_params.Count
                                             || pparam == null
                                             || pparam.TypeSpec == null
-                                            || !TypeSpecComparer.Override.IsEqual(
-                                                pparam.TypeSpec,
-                                                pm_params.Types[i]
-                                            )
+                                            || !TypeSpecComparer.Override
+                                                .IsEqual(pparam.TypeSpec, pm_params.Types[i])
                                             || (pparam.Modifier & Parameter.Modifier.RefOutMask)
                                                 != (
                                                     pm_params.FixedParameters[i].ModFlags

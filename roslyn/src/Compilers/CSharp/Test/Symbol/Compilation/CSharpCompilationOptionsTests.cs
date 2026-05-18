@@ -371,7 +371,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 0,
                 new CSharpCompilationOptions(OutputKind.ConsoleApplication)
                     .WithMainTypeName(null)
-                    .Errors.Length
+                    .Errors
+                    .Length
             );
             new CSharpCompilationOptions(OutputKind.ConsoleApplication)
                 .WithMainTypeName("blah\0goo")
@@ -473,14 +474,16 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 new CSharpCompilationOptions(OutputKind.ConsoleApplication)
                     .WithUsings("A", "B")
                     .WithUsings(null)
-                    .Usings.Count()
+                    .Usings
+                    .Count()
             );
             Assert.Equal(
                 0,
                 new CSharpCompilationOptions(OutputKind.ConsoleApplication)
                     .WithUsings("A", "B")
                     .WithUsings((string[])null)
-                    .Usings.Count()
+                    .Usings
+                    .Count()
             );
 
             new CSharpCompilationOptions(OutputKind.ConsoleApplication)
@@ -521,14 +524,16 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 3,
                 new CSharpCompilationOptions(OutputKind.ConsoleApplication)
                     .WithSpecificDiagnosticOptions(warnings)
-                    .SpecificDiagnosticOptions.Count
+                    .SpecificDiagnosticOptions
+                    .Count
             );
 
             Assert.Equal(
                 0,
                 new CSharpCompilationOptions(OutputKind.ConsoleApplication)
                     .WithSpecificDiagnosticOptions(null)
-                    .SpecificDiagnosticOptions.Count
+                    .SpecificDiagnosticOptions
+                    .Count
             );
 
             Assert.Equal(
@@ -558,8 +563,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         {
             // ModuleName
             Assert.Null(TestOptions.ReleaseDll.WithModuleName(null).ModuleName);
-            TestOptions
-                .ReleaseDll.WithModuleName("")
+            TestOptions.ReleaseDll
+                .WithModuleName("")
                 .VerifyErrors(
                     // error CS7087: Invalid module name: Name cannot be empty.
                     Diagnostic(ErrorCode.ERR_BadModuleName)
@@ -567,8 +572,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                         .WithLocation(1, 1)
                 );
 
-            TestOptions
-                .ReleaseDll.WithModuleName("a\0a")
+            TestOptions.ReleaseDll
+                .WithModuleName("a\0a")
                 .VerifyErrors(
                     // error CS7087: Invalid module name: Name contains invalid characters.
                     Diagnostic(ErrorCode.ERR_BadModuleName)
@@ -576,8 +581,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                         .WithLocation(1, 1)
                 );
 
-            TestOptions
-                .ReleaseDll.WithModuleName("a\uD800b")
+            TestOptions.ReleaseDll
+                .WithModuleName("a\uD800b")
                 .VerifyErrors(
                     // error CS7087: Invalid module name: Name contains invalid characters.
                     Diagnostic(ErrorCode.ERR_BadModuleName)
@@ -585,8 +590,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                         .WithLocation(1, 1)
                 );
 
-            TestOptions
-                .ReleaseDll.WithModuleName("a\\b")
+            TestOptions.ReleaseDll
+                .WithModuleName("a\\b")
                 .VerifyErrors(
                     // error CS7087: Invalid module name: Name contains invalid characters.
                     Diagnostic(ErrorCode.ERR_BadModuleName)
@@ -594,8 +599,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                         .WithLocation(1, 1)
                 );
 
-            TestOptions
-                .ReleaseDll.WithModuleName("a/b")
+            TestOptions.ReleaseDll
+                .WithModuleName("a/b")
                 .VerifyErrors(
                     // error CS7087: Invalid module name: Name contains invalid characters.
                     Diagnostic(ErrorCode.ERR_BadModuleName)
@@ -603,8 +608,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                         .WithLocation(1, 1)
                 );
 
-            TestOptions
-                .ReleaseDll.WithModuleName("a:b")
+            TestOptions.ReleaseDll
+                .WithModuleName("a:b")
                 .VerifyErrors(
                     // error CS7087: Invalid module name: Name contains invalid characters.
                     Diagnostic(ErrorCode.ERR_BadModuleName)
@@ -669,8 +674,10 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
 
             Assert.Equal(
                 0,
-                new CSharpCompilationOptions(OutputKind.ConsoleApplication, mainTypeName: null)
-                    .Errors
+                new CSharpCompilationOptions(
+                    OutputKind.ConsoleApplication,
+                    mainTypeName: null
+                ).Errors
                     .Length
             );
             new CSharpCompilationOptions(

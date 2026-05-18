@@ -717,10 +717,8 @@ namespace System.Threading
 #if !FEATURE_PAL && !SILVERLIGHT    // PAL doesn't support  eventing
                         if (CdsSyncEtwBCLProvider.Log.IsEnabled())
                         {
-                            CdsSyncEtwBCLProvider.Log.Barrier_PhaseFinished(
-                                sense,
-                                CurrentPhaseNumber
-                            );
+                            CdsSyncEtwBCLProvider.Log
+                                .Barrier_PhaseFinished(sense, CurrentPhaseNumber);
                         }
 #endif
                         FinishPhase(sense);

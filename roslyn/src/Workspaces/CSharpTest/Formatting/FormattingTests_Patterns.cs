@@ -177,10 +177,12 @@ class A
                 { CSharpFormattingOptions2.SpacingAroundBinaryOperator, spacing },
                 {
                     CSharpFormattingOptions2.SpaceBetweenParentheses,
-                    CSharpFormattingOptions2.SpaceBetweenParentheses.DefaultValue.WithFlagValue(
-                        SpacePlacementWithinParentheses.Expressions,
-                        spaceWithinExpressionParentheses
-                    )
+                    CSharpFormattingOptions2.SpaceBetweenParentheses
+                        .DefaultValue
+                        .WithFlagValue(
+                            SpacePlacementWithinParentheses.Expressions,
+                            spaceWithinExpressionParentheses
+                        )
                 },
             };
             await AssertFormatAsync(expected, content, changedOptionSet: changingOptions);
@@ -342,10 +344,12 @@ class A
                 { CSharpFormattingOptions2.SpacingAroundBinaryOperator, spacing },
                 {
                     CSharpFormattingOptions2.SpaceBetweenParentheses,
-                    CSharpFormattingOptions2.SpaceBetweenParentheses.DefaultValue.WithFlagValue(
-                        SpacePlacementWithinParentheses.Expressions,
-                        spaceWithinExpressionParentheses
-                    )
+                    CSharpFormattingOptions2.SpaceBetweenParentheses
+                        .DefaultValue
+                        .WithFlagValue(
+                            SpacePlacementWithinParentheses.Expressions,
+                            spaceWithinExpressionParentheses
+                        )
                 },
             };
             await AssertFormatAsync(expected, content, changedOptionSet: changingOptions);

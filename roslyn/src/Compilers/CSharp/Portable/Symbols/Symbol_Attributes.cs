@@ -215,13 +215,14 @@ namespace Microsoft.CodeAnalysis.CSharp
             }
 
             bool hasAnyDiagnostics;
-            (attributeData, boundAttribute) = arguments.Binder.GetAttribute(
-                syntax,
-                type,
-                beforeAttributePartBound: null,
-                afterAttributePartBound: null,
-                out hasAnyDiagnostics
-            );
+            (attributeData, boundAttribute) = arguments.Binder
+                .GetAttribute(
+                    syntax,
+                    type,
+                    beforeAttributePartBound: null,
+                    afterAttributePartBound: null,
+                    out hasAnyDiagnostics
+                );
             if (!attributeData.HasErrors)
             {
                 obsoleteData = attributeData.DecodeObsoleteAttribute(kind);
@@ -269,17 +270,18 @@ namespace Microsoft.CodeAnalysis.CSharp
             Debug.Assert(arguments.Diagnostics.DiagnosticBag is not null);
             Debug.Assert(arguments.AttributeSyntaxOpt is not null);
             if (
-                arguments.Attribute.IsTargetAttribute(
-                    AttributeDescription.CompilerFeatureRequiredAttribute
-                )
+                arguments.Attribute
+                    .IsTargetAttribute(AttributeDescription.CompilerFeatureRequiredAttribute)
             )
             {
                 // Do not use '{FullName}'. This is reserved for compiler usage.
-                arguments.Diagnostics.DiagnosticBag.Add(
-                    ErrorCode.ERR_ExplicitReservedAttr,
-                    arguments.AttributeSyntaxOpt.Location,
-                    AttributeDescription.CompilerFeatureRequiredAttribute.FullName
-                );
+                arguments.Diagnostics
+                    .DiagnosticBag
+                    .Add(
+                        ErrorCode.ERR_ExplicitReservedAttr,
+                        arguments.AttributeSyntaxOpt.Location,
+                        AttributeDescription.CompilerFeatureRequiredAttribute.FullName
+                    );
             }
             else if (
                 arguments.Attribute.IsTargetAttribute(AttributeDescription.ExperimentalAttribute)
@@ -291,13 +293,11 @@ namespace Microsoft.CodeAnalysis.CSharp
                     )
                 )
                 {
-                    var attrArgumentLocation = arguments.Attribute.GetAttributeArgumentLocation(
-                        parameterIndex: 0
-                    );
-                    arguments.Diagnostics.DiagnosticBag.Add(
-                        ErrorCode.ERR_InvalidExperimentalDiagID,
-                        attrArgumentLocation
-                    );
+                    var attrArgumentLocation = arguments.Attribute
+                        .GetAttributeArgumentLocation(parameterIndex: 0);
+                    arguments.Diagnostics
+                        .DiagnosticBag
+                        .Add(ErrorCode.ERR_InvalidExperimentalDiagID, attrArgumentLocation);
                 }
             }
 
@@ -441,10 +441,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     {
                         if (attributeTypesBuilder[i].IsGenericType)
                         {
-                            MessageID.IDS_FeatureGenericAttributes.CheckFeatureAvailability(
-                                diagnostics,
-                                attributesToBind[i]
-                            );
+                            MessageID.IDS_FeatureGenericAttributes
+                                .CheckFeatureAvailability(diagnostics, attributesToBind[i]);
                         }
                     }
                 }
@@ -595,8 +593,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     !boundAttributes.IsDefaultOrEmpty
                     && this is SourceAssemblySymbol
                     && !diagnostics.DiagnosticBag.IsEmptyWithoutResolution
-                    && diagnostics
-                        .DiagnosticBag.AsEnumerableWithoutResolution()
+                    && diagnostics.DiagnosticBag
+                        .AsEnumerableWithoutResolution()
                         .OfType<DiagnosticWithInfo>()
                         .Where(isObsoleteDiagnostic)
                         .Any()
@@ -648,7 +646,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
                         //    2. Collect obsolete diagnostics reported within the span of those locations.
                         foreach (
-                            Diagnostic d in diagnostics.DiagnosticBag.AsEnumerableWithoutResolution()
+                            Diagnostic d in diagnostics.DiagnosticBag
+                                .AsEnumerableWithoutResolution()
                         )
                         {
                             if (d is DiagnosticWithInfo withInfo && isObsoleteDiagnostic(withInfo))
@@ -677,7 +676,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                             filtered.AddDependencies(diagnostics);
 
                             foreach (
-                                Diagnostic d in diagnostics.DiagnosticBag.AsEnumerableWithoutResolution()
+                                Diagnostic d in diagnostics.DiagnosticBag
+                                    .AsEnumerableWithoutResolution()
                             )
                             {
                                 if (!toRemove.Contains(d))

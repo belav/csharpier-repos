@@ -110,8 +110,7 @@ namespace System.Data.Mapping.Update.Internal
             // for associations with referential constraints, the principal end is always interesting
             // since its key values may take precedence over the key values of the dependent end
             foreach (
-                ReferentialConstraint constraint in associationSet
-                    .ElementType
+                ReferentialConstraint constraint in associationSet.ElementType
                     .ReferentialConstraints
             )
             {

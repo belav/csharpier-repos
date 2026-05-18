@@ -33,16 +33,14 @@ namespace System.ServiceModel.Routing
             this.endpointTraits = new List<RoutingEndpointTrait>();
             foreach (ServiceEndpoint endpoint in endpoints)
             {
-                this.endpointTraits.Add(
-                    new RoutingEndpointTrait(routerContract, endpoint, operationContext)
-                );
+                this.endpointTraits
+                    .Add(new RoutingEndpointTrait(routerContract, endpoint, operationContext));
             }
 
             if (this.endpointTraits.Count == 0)
             {
-                throw FxTrace.Exception.AsError(
-                    new ConfigurationErrorsException(SR.BackupListEmpty)
-                );
+                throw FxTrace.Exception
+                    .AsError(new ConfigurationErrorsException(SR.BackupListEmpty));
             }
         }
 

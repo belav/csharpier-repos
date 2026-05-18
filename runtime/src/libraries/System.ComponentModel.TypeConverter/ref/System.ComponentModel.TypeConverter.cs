@@ -187,8 +187,7 @@ namespace System.ComponentModel
         public virtual System.Attribute? this[
             [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(
                 System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.PublicFields
-                    | System
-                        .Diagnostics
+                    | System.Diagnostics
                         .CodeAnalysis
                         .DynamicallyAccessedMemberTypes
                         .PublicParameterlessConstructor
@@ -240,8 +239,7 @@ namespace System.ComponentModel
         protected System.Attribute? GetDefaultAttribute(
             [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(
                 System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.PublicFields
-                    | System
-                        .Diagnostics
+                    | System.Diagnostics
                         .CodeAnalysis
                         .DynamicallyAccessedMemberTypes
                         .PublicParameterlessConstructor
@@ -282,13 +280,11 @@ namespace System.ComponentModel
                     | System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.PublicEvents
                     | System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.PublicFields
                     | System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.PublicMethods
-                    | System
-                        .Diagnostics
+                    | System.Diagnostics
                         .CodeAnalysis
                         .DynamicallyAccessedMemberTypes
                         .PublicNestedTypes
-                    | System
-                        .Diagnostics
+                    | System.Diagnostics
                         .CodeAnalysis
                         .DynamicallyAccessedMemberTypes
                         .PublicProperties
@@ -302,13 +298,11 @@ namespace System.ComponentModel
                     | System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.PublicEvents
                     | System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.PublicFields
                     | System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.PublicMethods
-                    | System
-                        .Diagnostics
+                    | System.Diagnostics
                         .CodeAnalysis
                         .DynamicallyAccessedMemberTypes
                         .PublicNestedTypes
-                    | System
-                        .Diagnostics
+                    | System.Diagnostics
                         .CodeAnalysis
                         .DynamicallyAccessedMemberTypes
                         .PublicProperties
@@ -323,13 +317,11 @@ namespace System.ComponentModel
                     | System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.PublicEvents
                     | System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.PublicFields
                     | System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.PublicMethods
-                    | System
-                        .Diagnostics
+                    | System.Diagnostics
                         .CodeAnalysis
                         .DynamicallyAccessedMemberTypes
                         .PublicNestedTypes
-                    | System
-                        .Diagnostics
+                    | System.Diagnostics
                         .CodeAnalysis
                         .DynamicallyAccessedMemberTypes
                         .PublicProperties
@@ -1492,8 +1484,7 @@ namespace System.ComponentModel
         public EnumConverter(
             [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(
                 System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.PublicFields
-                    | System
-                        .Diagnostics
+                    | System.Diagnostics
                         .CodeAnalysis
                         .DynamicallyAccessedMemberTypes
                         .PublicParameterlessConstructor
@@ -1508,8 +1499,7 @@ namespace System.ComponentModel
 
         [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(
             System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.PublicFields
-                | System
-                    .Diagnostics
+                | System.Diagnostics
                     .CodeAnalysis
                     .DynamicallyAccessedMemberTypes
                     .PublicParameterlessConstructor
@@ -2370,8 +2360,7 @@ namespace System.ComponentModel
 
         public LicenseProviderAttribute(
             [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(
-                System
-                    .Diagnostics
+                System.Diagnostics
                     .CodeAnalysis
                     .DynamicallyAccessedMemberTypes
                     .PublicParameterlessConstructor
@@ -2381,8 +2370,7 @@ namespace System.ComponentModel
 
         public LicenseProviderAttribute(
             [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(
-                System
-                    .Diagnostics
+                System.Diagnostics
                     .CodeAnalysis
                     .DynamicallyAccessedMemberTypes
                     .PublicParameterlessConstructor
@@ -2391,8 +2379,7 @@ namespace System.ComponentModel
         ) { }
 
         [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(
-            System
-                .Diagnostics
+            System.Diagnostics
                 .CodeAnalysis
                 .DynamicallyAccessedMemberTypes
                 .PublicParameterlessConstructor
@@ -3913,8 +3900,7 @@ namespace System.ComponentModel
 
         public PropertyTabAttribute(
             [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(
-                System
-                    .Diagnostics
+                System.Diagnostics
                     .CodeAnalysis
                     .DynamicallyAccessedMemberTypes
                     .PublicParameterlessConstructor
@@ -3924,8 +3910,7 @@ namespace System.ComponentModel
 
         public PropertyTabAttribute(
             [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(
-                System
-                    .Diagnostics
+                System.Diagnostics
                     .CodeAnalysis
                     .DynamicallyAccessedMemberTypes
                     .PublicParameterlessConstructor
@@ -4002,8 +3987,7 @@ namespace System.ComponentModel
         public ProvidePropertyAttribute(
             string propertyName,
             [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(
-                System
-                    .Diagnostics
+                System.Diagnostics
                     .CodeAnalysis
                     .DynamicallyAccessedMemberTypes
                     .PublicParameterlessConstructor
@@ -4014,8 +3998,7 @@ namespace System.ComponentModel
         public ProvidePropertyAttribute(
             string propertyName,
             [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(
-                System
-                    .Diagnostics
+                System.Diagnostics
                     .CodeAnalysis
                     .DynamicallyAccessedMemberTypes
                     .PublicParameterlessConstructor
@@ -4029,8 +4012,7 @@ namespace System.ComponentModel
         }
 
         [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(
-            System
-                .Diagnostics
+            System.Diagnostics
                 .CodeAnalysis
                 .DynamicallyAccessedMemberTypes
                 .PublicParameterlessConstructor
@@ -4876,8 +4858,7 @@ namespace System.ComponentModel
 
         [return: System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(
             System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.PublicFields
-                | System
-                    .Diagnostics
+                | System.Diagnostics
                     .CodeAnalysis
                     .DynamicallyAccessedMemberTypes
                     .PublicParameterlessConstructor
@@ -4885,8 +4866,7 @@ namespace System.ComponentModel
         public System.Type GetReflectionType(
             [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(
                 System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.PublicFields
-                    | System
-                        .Diagnostics
+                    | System.Diagnostics
                         .CodeAnalysis
                         .DynamicallyAccessedMemberTypes
                         .PublicParameterlessConstructor
@@ -4899,8 +4879,7 @@ namespace System.ComponentModel
 
         [return: System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(
             System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.PublicFields
-                | System
-                    .Diagnostics
+                | System.Diagnostics
                     .CodeAnalysis
                     .DynamicallyAccessedMemberTypes
                     .PublicParameterlessConstructor
@@ -4908,8 +4887,7 @@ namespace System.ComponentModel
         public virtual System.Type GetReflectionType(
             [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(
                 System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.PublicFields
-                    | System
-                        .Diagnostics
+                    | System.Diagnostics
                         .CodeAnalysis
                         .DynamicallyAccessedMemberTypes
                         .PublicParameterlessConstructor
@@ -4981,8 +4959,7 @@ namespace System.ComponentModel
         public static System.Type ComObjectType
         {
             [return: System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(
-                System
-                    .Diagnostics
+                System.Diagnostics
                     .CodeAnalysis
                     .DynamicallyAccessedMemberTypes
                     .PublicParameterlessConstructor
@@ -4996,8 +4973,7 @@ namespace System.ComponentModel
         public static System.Type InterfaceType
         {
             [return: System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(
-                System
-                    .Diagnostics
+                System.Diagnostics
                     .CodeAnalysis
                     .DynamicallyAccessedMemberTypes
                     .PublicParameterlessConstructor
@@ -5576,8 +5552,7 @@ namespace System.ComponentModel
         )]
         [return: System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(
             System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.PublicFields
-                | System
-                    .Diagnostics
+                | System.Diagnostics
                     .CodeAnalysis
                     .DynamicallyAccessedMemberTypes
                     .PublicParameterlessConstructor
@@ -5585,8 +5560,7 @@ namespace System.ComponentModel
         public static System.Type GetReflectionType(
             [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(
                 System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.PublicFields
-                    | System
-                        .Diagnostics
+                    | System.Diagnostics
                         .CodeAnalysis
                         .DynamicallyAccessedMemberTypes
                         .PublicParameterlessConstructor
@@ -6715,16 +6689,14 @@ namespace System.ComponentModel.Design
         string? GetPathOfAssembly(System.Reflection.AssemblyName name);
 
         [return: System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(
-            System
-                .Diagnostics
+            System.Diagnostics
                 .CodeAnalysis
                 .DynamicallyAccessedMemberTypes
                 .PublicParameterlessConstructor
         )]
         System.Type? GetType(
             [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(
-                System
-                    .Diagnostics
+                System.Diagnostics
                     .CodeAnalysis
                     .DynamicallyAccessedMemberTypes
                     .PublicParameterlessConstructor
@@ -6733,16 +6705,14 @@ namespace System.ComponentModel.Design
         );
 
         [return: System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(
-            System
-                .Diagnostics
+            System.Diagnostics
                 .CodeAnalysis
                 .DynamicallyAccessedMemberTypes
                 .PublicParameterlessConstructor
         )]
         System.Type? GetType(
             [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(
-                System
-                    .Diagnostics
+                System.Diagnostics
                     .CodeAnalysis
                     .DynamicallyAccessedMemberTypes
                     .PublicParameterlessConstructor
@@ -6752,16 +6722,14 @@ namespace System.ComponentModel.Design
         );
 
         [return: System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(
-            System
-                .Diagnostics
+            System.Diagnostics
                 .CodeAnalysis
                 .DynamicallyAccessedMemberTypes
                 .PublicParameterlessConstructor
         )]
         System.Type? GetType(
             [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(
-                System
-                    .Diagnostics
+                System.Diagnostics
                     .CodeAnalysis
                     .DynamicallyAccessedMemberTypes
                     .PublicParameterlessConstructor

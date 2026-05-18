@@ -287,9 +287,11 @@ namespace R2RDump
                             method.ComponentReader.MetadataReader,
                             method.MethodHandle
                         ),
-                    AssemblyName = method.ComponentReader.MetadataReader.GetString(
-                        method.ComponentReader.MetadataReader.GetAssemblyDefinition().Name
-                    ),
+                    AssemblyName = method.ComponentReader
+                        .MetadataReader
+                        .GetString(
+                            method.ComponentReader.MetadataReader.GetAssemblyDefinition().Name
+                        ),
                     ColdRVA = 0,
                     ColdLength = 0,
                 };
@@ -301,13 +303,8 @@ namespace R2RDump
             if (r2r.Composite)
             {
                 foreach (
-                    KeyValuePair<
-                        string,
-                        int
-                    > kvpRefAssembly in r2r.ManifestReferenceAssemblies.OrderBy(
-                        kvp => kvp.Key,
-                        StringComparer.OrdinalIgnoreCase
-                    )
+                    KeyValuePair<string, int> kvpRefAssembly in r2r.ManifestReferenceAssemblies
+                        .OrderBy(kvp => kvp.Key, StringComparer.OrdinalIgnoreCase)
                 )
                 {
                     yield return new AssemblyInfo(

@@ -62,10 +62,11 @@ namespace System.ServiceModel.Channels
 
             if (!this.CanBuildChannelFactory<TChannel>(context.Clone()))
             {
-                throw FxTrace.Exception.Argument(
-                    "TChannel",
-                    SR2.GetString(SR2.ChannelTypeNotSupported, typeof(TChannel))
-                );
+                throw FxTrace.Exception
+                    .Argument(
+                        "TChannel",
+                        SR2.GetString(SR2.ChannelTypeNotSupported, typeof(TChannel))
+                    );
             }
 
             IChannelFactory<TChannel> innerFactory = context.BuildInnerChannelFactory<TChannel>();
@@ -151,9 +152,8 @@ namespace System.ServiceModel.Channels
                     }
                     else
                     {
-                        throw FxTrace.Exception.AsError(
-                            base.CreateChannelTypeNotSupportedException(typeof(TChannel))
-                        );
+                        throw FxTrace.Exception
+                            .AsError(base.CreateChannelTypeNotSupportedException(typeof(TChannel)));
                     }
                 }
                 return channel;

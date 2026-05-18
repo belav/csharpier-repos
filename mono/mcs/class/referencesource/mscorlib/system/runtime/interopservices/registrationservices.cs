@@ -908,10 +908,8 @@ namespace System.Runtime.InteropServices
                     if (strProgId != String.Empty)
                     {
                         using (
-                            RegistryKey TypeNameKey = Registry.ClassesRoot.OpenSubKey(
-                                strProgId,
-                                true
-                            )
+                            RegistryKey TypeNameKey = Registry.ClassesRoot
+                                .OpenSubKey(strProgId, true)
                         )
                         {
                             if (TypeNameKey != null)
@@ -1177,9 +1175,8 @@ namespace System.Runtime.InteropServices
             {
                 // Create the HKEY_CLASS_ROOT\Component Category key.
                 using (
-                    RegistryKey ComponentCategoryKey = Registry.ClassesRoot.CreateSubKey(
-                        strComponentCategorySubKey
-                    )
+                    RegistryKey ComponentCategoryKey = Registry.ClassesRoot
+                        .CreateSubKey(strComponentCategorySubKey)
                 )
                 {
                     // Create the HKEY_CLASS_ROOT\Component Category\<Managed Category Guid> key.
@@ -1200,15 +1197,13 @@ namespace System.Runtime.InteropServices
         private static bool ManagedCategoryExists()
         {
             using (
-                RegistryKey componentCategoryKey = Registry.ClassesRoot.OpenSubKey(
-                    strComponentCategorySubKey,
+                RegistryKey componentCategoryKey = Registry.ClassesRoot
+                    .OpenSubKey(strComponentCategorySubKey,
 #if FEATURE_MACL
-                    RegistryKeyPermissionCheck.ReadSubTree
-                )
+                        RegistryKeyPermissionCheck.ReadSubTree)
             )
 #else
-                    false
-                )
+                        false)
             )
 #endif
             {

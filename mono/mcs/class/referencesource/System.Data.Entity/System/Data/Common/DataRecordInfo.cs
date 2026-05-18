@@ -55,8 +55,7 @@ namespace System.Data.Common
                         )
                         {
                             throw EntityUtil.Argument(
-                                System
-                                    .Data
+                                System.Data
                                     .Entity
                                     .Strings
                                     .EdmMembersDefiningTypeDoNotAgreeWithMetadataType

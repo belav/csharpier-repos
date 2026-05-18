@@ -30,8 +30,8 @@ public class InMemoryMapObjectPropertyFromSubQuery : AutoMapperSpecBase
                     d => d.Price,
                     o =>
                         o.MapFrom(source =>
-                            source
-                                .Articles.Where(x =>
+                            source.Articles
+                                .Where(x =>
                                     x.IsDefault && x.NationId == 1 && source.ECommercePublished
                                 )
                                 .FirstOrDefault()

@@ -37,9 +37,8 @@ namespace System.ServiceModel.Description
         )
         {
             if (endpointDispatcher == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentNullException("endpointDispatcher")
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(new ArgumentNullException("endpointDispatcher"));
 
             endpointDispatcher.DispatchRuntime.ValidateMustUnderstand = this.ValidateMustUnderstand;
         }
@@ -50,9 +49,8 @@ namespace System.ServiceModel.Description
         )
         {
             if (behavior == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentNullException("behavior")
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(new ArgumentNullException("behavior"));
 
             behavior.ValidateMustUnderstand = this.ValidateMustUnderstand;
         }

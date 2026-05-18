@@ -222,11 +222,12 @@ namespace System.Net.Sockets.Tests
         }
 
         public override Task<Socket> AcceptAsync(Socket s, Socket acceptSocket) =>
-            Task.Factory.FromAsync(
-                (callback, state) => s.BeginAccept(acceptSocket, 0, callback, state),
-                result => s.EndAccept(out _, out _, result),
-                null
-            );
+            Task.Factory
+                .FromAsync(
+                    (callback, state) => s.BeginAccept(acceptSocket, 0, callback, state),
+                    result => s.EndAccept(out _, out _, result),
+                    null
+                );
 
         public override Task ConnectAsync(Socket s, EndPoint endPoint) =>
             Task.Factory.FromAsync(s.BeginConnect, s.EndConnect, endPoint, null);
@@ -235,28 +236,24 @@ namespace System.Net.Sockets.Tests
             Task.Factory.FromAsync(s.BeginConnect, s.EndConnect, addresses, port, null);
 
         public override Task<int> ReceiveAsync(Socket s, ArraySegment<byte> buffer) =>
-            Task.Factory.FromAsync(
-                (callback, state) =>
-                    s.BeginReceive(
-                        buffer.Array,
-                        buffer.Offset,
-                        buffer.Count,
-                        SocketFlags.None,
-                        callback,
-                        state
-                    ),
-                s.EndReceive,
-                null
-            );
+            Task.Factory
+                .FromAsync(
+                    (callback, state) =>
+                        s.BeginReceive(
+                            buffer.Array,
+                            buffer.Offset,
+                            buffer.Count,
+                            SocketFlags.None,
+                            callback,
+                            state
+                        ),
+                    s.EndReceive,
+                    null
+                );
 
         public override Task<int> ReceiveAsync(Socket s, IList<ArraySegment<byte>> bufferList) =>
-            Task.Factory.FromAsync(
-                s.BeginReceive,
-                s.EndReceive,
-                bufferList,
-                SocketFlags.None,
-                null
-            );
+            Task.Factory
+                .FromAsync(s.BeginReceive, s.EndReceive, bufferList, SocketFlags.None, null);
 
         public override Task<SocketReceiveFromResult> ReceiveFromAsync(
             Socket s,
@@ -338,19 +335,20 @@ namespace System.Net.Sockets.Tests
         }
 
         public override Task<int> SendAsync(Socket s, ArraySegment<byte> buffer) =>
-            Task.Factory.FromAsync(
-                (callback, state) =>
-                    s.BeginSend(
-                        buffer.Array,
-                        buffer.Offset,
-                        buffer.Count,
-                        SocketFlags.None,
-                        callback,
-                        state
-                    ),
-                s.EndSend,
-                null
-            );
+            Task.Factory
+                .FromAsync(
+                    (callback, state) =>
+                        s.BeginSend(
+                            buffer.Array,
+                            buffer.Offset,
+                            buffer.Count,
+                            SocketFlags.None,
+                            callback,
+                            state
+                        ),
+                    s.EndSend,
+                    null
+                );
 
         public override Task<int> SendAsync(Socket s, IList<ArraySegment<byte>> bufferList) =>
             Task.Factory.FromAsync(s.BeginSend, s.EndSend, bufferList, SocketFlags.None, null);
@@ -360,27 +358,29 @@ namespace System.Net.Sockets.Tests
             ArraySegment<byte> buffer,
             EndPoint endPoint
         ) =>
-            Task.Factory.FromAsync(
-                (callback, state) =>
-                    s.BeginSendTo(
-                        buffer.Array,
-                        buffer.Offset,
-                        buffer.Count,
-                        SocketFlags.None,
-                        endPoint,
-                        callback,
-                        state
-                    ),
-                s.EndSendTo,
-                null
-            );
+            Task.Factory
+                .FromAsync(
+                    (callback, state) =>
+                        s.BeginSendTo(
+                            buffer.Array,
+                            buffer.Offset,
+                            buffer.Count,
+                            SocketFlags.None,
+                            endPoint,
+                            callback,
+                            state
+                        ),
+                    s.EndSendTo,
+                    null
+                );
 
         public override Task SendFileAsync(Socket s, string fileName) =>
-            Task.Factory.FromAsync(
-                (callback, state) => s.BeginSendFile(fileName, callback, state),
-                s.EndSendFile,
-                null
-            );
+            Task.Factory
+                .FromAsync(
+                    (callback, state) => s.BeginSendFile(fileName, callback, state),
+                    s.EndSendFile,
+                    null
+                );
 
         public override Task SendFileAsync(
             Socket s,
@@ -389,26 +389,28 @@ namespace System.Net.Sockets.Tests
             ArraySegment<byte> postBuffer,
             TransmitFileOptions flags
         ) =>
-            Task.Factory.FromAsync(
-                (callback, state) =>
-                    s.BeginSendFile(
-                        fileName,
-                        preBuffer.Array,
-                        postBuffer.Array,
-                        flags,
-                        callback,
-                        state
-                    ),
-                s.EndSendFile,
-                null
-            );
+            Task.Factory
+                .FromAsync(
+                    (callback, state) =>
+                        s.BeginSendFile(
+                            fileName,
+                            preBuffer.Array,
+                            postBuffer.Array,
+                            flags,
+                            callback,
+                            state
+                        ),
+                    s.EndSendFile,
+                    null
+                );
 
         public override Task DisconnectAsync(Socket s, bool reuseSocket) =>
-            Task.Factory.FromAsync(
-                (callback, state) => s.BeginDisconnect(reuseSocket, callback, state),
-                s.EndDisconnect,
-                null
-            );
+            Task.Factory
+                .FromAsync(
+                    (callback, state) => s.BeginDisconnect(reuseSocket, callback, state),
+                    s.EndDisconnect,
+                    null
+                );
 
         public override bool UsesApm => true;
     }

@@ -136,7 +136,8 @@ namespace System.Data.Services.Client
         )
         {
             this.Visit(npse.Source);
-            this.uriBuilder.Append(UriHelper.FORWARDSLASH)
+            this.uriBuilder
+                .Append(UriHelper.FORWARDSLASH)
                 .Append(this.ExpressionToString(npse.MemberExpression));
             this.VisitQueryOptions(npse);
             return npse;
@@ -150,12 +151,14 @@ namespace System.Data.Services.Client
             )
             {
                 this.Visit(rse.Source);
-                this.uriBuilder.Append(UriHelper.FORWARDSLASH)
+                this.uriBuilder
+                    .Append(UriHelper.FORWARDSLASH)
                     .Append(this.ExpressionToString(rse.MemberExpression));
             }
             else
             {
-                this.uriBuilder.Append(UriHelper.FORWARDSLASH)
+                this.uriBuilder
+                    .Append(UriHelper.FORWARDSLASH)
                     .Append((string)((ConstantExpression)rse.MemberExpression).Value);
             }
 
@@ -164,9 +167,8 @@ namespace System.Data.Services.Client
                 this.uriBuilder.Append(UriHelper.LEFTPAREN);
                 if (rse.KeyPredicate.Count == 1)
                 {
-                    this.uriBuilder.Append(
-                        this.ExpressionToString(rse.KeyPredicate.Values.First())
-                    );
+                    this.uriBuilder
+                        .Append(this.ExpressionToString(rse.KeyPredicate.Values.First()));
                 }
                 else
                 {
@@ -195,7 +197,8 @@ namespace System.Data.Services.Client
 
             if (rse.CountOption == CountOption.ValueOnly)
             {
-                this.uriBuilder.Append(UriHelper.FORWARDSLASH)
+                this.uriBuilder
+                    .Append(UriHelper.FORWARDSLASH)
                     .Append(UriHelper.DOLLARSIGN)
                     .Append(UriHelper.COUNT);
                 this.EnsureMinimumVersion(2, 0);
@@ -415,7 +418,8 @@ namespace System.Data.Services.Client
 
                 if (
                     keys[ii]
-                        .Value.ToString()
+                        .Value
+                        .ToString()
                         .Equals(
                             UriHelper.DOLLARSIGN + UriHelper.OPTIONCOUNT,
                             StringComparison.OrdinalIgnoreCase

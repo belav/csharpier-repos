@@ -924,8 +924,8 @@ namespace nwind
                 {
                     if ((this._customerDemographic.Entity != null))
                     {
-                        CustomerDemographic previousCustomerDemographic =
-                            this._customerDemographic.Entity;
+                        CustomerDemographic previousCustomerDemographic = this._customerDemographic
+                            .Entity;
                         this._customerDemographic.Entity = null;
                         previousCustomerDemographic.CustomerCustomerDemo.Remove(this);
                     }

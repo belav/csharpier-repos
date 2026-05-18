@@ -87,8 +87,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.DependencyResolution
                         .Save();
                 }
 
-                CommandResult result = SharedState
-                    .DotNetWithNetCoreApp.Exec(
+                CommandResult result = SharedState.DotNetWithNetCoreApp
+                    .Exec(
                         Constants.AdditionalDeps.CommandLineArgument,
                         additionalDepsDirectory,
                         app.AppDll
@@ -138,12 +138,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.DependencyResolution
                 File.Delete(Path.Combine(app.Location, $"{additionalLibName}.dll"));
             }
 
-            CommandResult result = SharedState
-                .DotNetWithNetCoreApp.Exec(
-                    Constants.AdditionalDeps.CommandLineArgument,
-                    additionalDepsFile,
-                    app.AppDll
-                )
+            CommandResult result = SharedState.DotNetWithNetCoreApp
+                .Exec(Constants.AdditionalDeps.CommandLineArgument, additionalDepsFile, app.AppDll)
                 .EnableTracingAndCaptureOutputs()
                 .Execute(expectedToFail: !dependencyExists);
 
@@ -153,9 +149,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.DependencyResolution
                 result
                     .Should()
                     .Pass()
-                    .And.HaveResolvedAssembly(
-                        Path.Combine(app.Location, $"{additionalLibName}.dll")
-                    );
+                    .And
+                    .HaveResolvedAssembly(Path.Combine(app.Location, $"{additionalLibName}.dll"));
             }
             else
             {
@@ -164,7 +159,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.DependencyResolution
                 result
                     .Should()
                     .Fail()
-                    .And.ErrorWithMissingAssembly(
+                    .And
+                    .ErrorWithMissingAssembly(
                         $"{additionalLibName}.deps.json",
                         additionalLibName,
                         "1.0.0"
@@ -180,8 +176,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.DependencyResolution
             {
                 File.WriteAllText(invalidDepsFile, "{");
 
-                SharedState
-                    .DotNetWithNetCoreApp.Exec(
+                SharedState.DotNetWithNetCoreApp
+                    .Exec(
                         Constants.AdditionalDeps.CommandLineArgument,
                         invalidDepsFile,
                         SharedState.FrameworkReferenceApp.AppDll
@@ -190,8 +186,10 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.DependencyResolution
                     .Execute(expectedToFail: true)
                     .Should()
                     .Fail()
-                    .And.HaveUsedAdditionalDeps(invalidDepsFile)
-                    .And.HaveStdErrContaining(
+                    .And
+                    .HaveUsedAdditionalDeps(invalidDepsFile)
+                    .And
+                    .HaveStdErrContaining(
                         $"Error initializing the dependency resolver: An error occurred while parsing: {invalidDepsFile}"
                     );
             }

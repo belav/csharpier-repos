@@ -56,9 +56,8 @@ namespace System.ServiceModel.Channels
             : this(settings)
         {
             if (context == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentNullException("context")
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(new ArgumentNullException("context"));
 
 #pragma warning suppress 56506 // Microsoft, context.BindingParameters is never null
             credentials = context.BindingParameters.Find<ClientCredentials>();
@@ -89,13 +88,14 @@ namespace System.ServiceModel.Channels
             {
                 if (!PeerReferralPolicyHelper.IsDefined(value))
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidEnumArgumentException(
-                            "value",
-                            (int)value,
-                            typeof(PeerReferralPolicy)
-                        )
-                    );
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidEnumArgumentException(
+                                "value",
+                                (int)value,
+                                typeof(PeerReferralPolicy)
+                            )
+                        );
                 }
                 referralPolicy = value;
             }
@@ -111,9 +111,8 @@ namespace System.ServiceModel.Channels
         )
         {
             if (context == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentNullException("context")
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(new ArgumentNullException("context"));
 
 #pragma warning suppress 56506 // Microsoft, context.BindingParameters is never null
             context.BindingParameters.Add(this);
@@ -124,9 +123,8 @@ namespace System.ServiceModel.Channels
         public override bool CanBuildChannelFactory<TChannel>(BindingContext context)
         {
             if (context == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentNullException("context")
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(new ArgumentNullException("context"));
 #pragma warning suppress 56506 // Microsoft, context.BindingParameters is never null
             this.credentials = context.BindingParameters.Find<ClientCredentials>();
             context.BindingParameters.Add(this);
@@ -138,9 +136,8 @@ namespace System.ServiceModel.Channels
         )
         {
             if (context == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentNullException("context")
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(new ArgumentNullException("context"));
 
 #pragma warning suppress 56506 // Microsoft, context.BindingParameters is never null
             context.BindingParameters.Add(this);
@@ -151,9 +148,8 @@ namespace System.ServiceModel.Channels
         public override bool CanBuildChannelListener<TChannel>(BindingContext context)
         {
             if (context == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentNullException("context")
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(new ArgumentNullException("context"));
 #pragma warning suppress 56506 // Microsoft, context.BindingParameters is never null
             this.credentials = context.BindingParameters.Find<ClientCredentials>();
             context.BindingParameters.Add(this);

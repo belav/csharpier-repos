@@ -639,8 +639,9 @@ namespace System.Configuration
 
                 if (versionInfoFileName != null)
                 {
-                    System.Diagnostics.FileVersionInfo version =
-                        System.Diagnostics.FileVersionInfo.GetVersionInfo(versionInfoFileName);
+                    System.Diagnostics.FileVersionInfo version = System.Diagnostics
+                        .FileVersionInfo
+                        .GetVersionInfo(versionInfoFileName);
                     if (version != null)
                     {
                         if (String.IsNullOrEmpty(_companyName))

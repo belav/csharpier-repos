@@ -559,9 +559,8 @@ namespace System.Linq.Parallel
 
                 if (_outputEnumerator.MoveNext())
                 {
-                    Pair<TInputOutput, ConcatKey<TLeftKey, TRightKey>> current = _outputEnumerator
-                        .Current
-                        .Value;
+                    Pair<TInputOutput, ConcatKey<TLeftKey, TRightKey>> current =
+                        _outputEnumerator.Current.Value;
                     currentElement = current.First;
                     currentKey = current.Second;
                     return true;

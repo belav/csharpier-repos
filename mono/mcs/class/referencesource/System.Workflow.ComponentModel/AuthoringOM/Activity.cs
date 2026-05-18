@@ -1772,9 +1772,8 @@ namespace System.Workflow.ComponentModel
                     contextActivity.GetValue(Activity.ActivityExecutionContextInfoProperty);
                 if (executionContextInfo.ParentContextId == -1)
                     return null;
-                return this.WorkflowCoreRuntime.GetContextActivityForId(
-                    executionContextInfo.ParentContextId
-                );
+                return this.WorkflowCoreRuntime
+                    .GetContextActivityForId(executionContextInfo.ParentContextId);
             }
         }
         internal Activity RootContextActivity
@@ -1889,14 +1888,18 @@ namespace System.Workflow.ComponentModel
 
         internal void SetStatus(ActivityExecutionStatus newStatus, bool transacted)
         {
-            System.Workflow.Runtime.WorkflowTrace.Runtime.TraceEvent(
-                TraceEventType.Information,
-                0,
-                "Activity Status Change - Activity: {0} Old:{1}; New:{2}",
-                this.QualifiedName,
-                ActivityExecutionStatusEnumToString(this.ExecutionStatus),
-                ActivityExecutionStatusEnumToString(newStatus)
-            );
+            System.Workflow
+                .Runtime
+                .WorkflowTrace
+                .Runtime
+                .TraceEvent(
+                    TraceEventType.Information,
+                    0,
+                    "Activity Status Change - Activity: {0} Old:{1}; New:{2}",
+                    this.QualifiedName,
+                    ActivityExecutionStatusEnumToString(this.ExecutionStatus),
+                    ActivityExecutionStatusEnumToString(newStatus)
+                );
 
             // Set Was Executing
             if (
@@ -2036,8 +2039,7 @@ namespace System.Workflow.ComponentModel
                 ActivityExecutionContext currentContext = new ActivityExecutionContext(this);
 
                 foreach (
-                    ActivityExecutionContext childContext in currentContext
-                        .ExecutionContextManager
+                    ActivityExecutionContext childContext in currentContext.ExecutionContextManager
                         .ExecutionContexts
                 )
                 {
@@ -2120,20 +2122,17 @@ namespace System.Workflow.ComponentModel
                                 "Inner exception: {0}",
                                 new object[] { exception }
                             );
-                        System.Workflow.Runtime.WorkflowTrace.Runtime.TraceEvent(
-                            TraceEventType.Critical,
-                            0,
-                            errorString
-                        );
+                        System.Workflow
+                            .Runtime
+                            .WorkflowTrace
+                            .Runtime
+                            .TraceEvent(TraceEventType.Critical, 0, errorString);
                         this.WorkflowCoreRuntime.TerminateInstance(exception);
                     }
                     else if (exception != null && this.parent != null)
                     {
-                        this.WorkflowCoreRuntime.RaiseException(
-                            exception,
-                            this.Parent,
-                            string.Empty
-                        );
+                        this.WorkflowCoreRuntime
+                            .RaiseException(exception, this.Parent, string.Empty);
                         this.RemoveProperty(ActivityExecutionContext.CurrentExceptionProperty);
                     }
                     else if (this.parent == null || this.PersistOnClose)
@@ -2144,11 +2143,8 @@ namespace System.Workflow.ComponentModel
                         // throw exception to outer
                         if (exception != null)
                         {
-                            this.WorkflowCoreRuntime.RaiseException(
-                                exception,
-                                this.Parent,
-                                string.Empty
-                            );
+                            this.WorkflowCoreRuntime
+                                .RaiseException(exception, this.Parent, string.Empty);
                             this.RemoveProperty(ActivityExecutionContext.CurrentExceptionProperty);
                         }
                     }
@@ -2301,16 +2297,14 @@ namespace System.Workflow.ComponentModel
                     )
                     {
                         ActivityExecutionContext resurrectedContext =
-                            executionContext.ExecutionContextManager.DiscardPersistedExecutionContext(
-                                contextInfo
-                            );
+                            executionContext.ExecutionContextManager
+                                .DiscardPersistedExecutionContext(contextInfo);
                         UninitializeCompletedContext(
                             resurrectedContext.Activity,
                             resurrectedContext
                         );
-                        executionContext.ExecutionContextManager.CompleteExecutionContext(
-                            resurrectedContext
-                        );
+                        executionContext.ExecutionContextManager
+                            .CompleteExecutionContext(resurrectedContext);
                     }
                 }
             }
@@ -2836,8 +2830,8 @@ namespace System.Workflow.ComponentModel
                         string lookupPath = thisLookupPath;
                         if (!string.IsNullOrEmpty(thisLookupPath))
                             lookupPath += ".";
-                        lookupPath += this
-                            .activities.IndexOf(childActivity)
+                        lookupPath += this.activities
+                            .IndexOf(childActivity)
                             .ToString(CultureInfo.InvariantCulture);
                         lookupPaths.Add(childActivity.QualifiedName, lookupPath);
 

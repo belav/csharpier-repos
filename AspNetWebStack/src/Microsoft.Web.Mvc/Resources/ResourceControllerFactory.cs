@@ -102,11 +102,13 @@ namespace Microsoft.Web.Mvc.Resources
                                 if (ava != null)
                                 {
                                     if (
-                                        ava.Verbs.Contains(
-                                            controllerContext
-                                                .HttpContext.Request.GetHttpMethodOverride()
-                                                .ToUpperInvariant()
-                                        )
+                                        ava.Verbs
+                                            .Contains(
+                                                controllerContext.HttpContext
+                                                    .Request
+                                                    .GetHttpMethodOverride()
+                                                    .ToUpperInvariant()
+                                            )
                                     )
                                     {
                                         matches.Add(ad);

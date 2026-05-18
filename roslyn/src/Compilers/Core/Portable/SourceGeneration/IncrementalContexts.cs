@@ -48,8 +48,8 @@ namespace Microsoft.CodeAnalysis
 
         public IncrementalValueProvider<Compilation> CompilationProvider =>
             new IncrementalValueProvider<Compilation>(
-                SharedInputNodes
-                    .Compilation.WithRegisterOutput(RegisterOutput)
+                SharedInputNodes.Compilation
+                    .WithRegisterOutput(RegisterOutput)
                     .WithTrackingName(WellKnownGeneratorInputs.Compilation),
                 CatchAnalyzerExceptions
             );
@@ -59,8 +59,8 @@ namespace Microsoft.CodeAnalysis
         // changes).
         internal IncrementalValueProvider<CompilationOptions> CompilationOptionsProvider =>
             new(
-                SharedInputNodes
-                    .CompilationOptions.WithRegisterOutput(RegisterOutput)
+                SharedInputNodes.CompilationOptions
+                    .WithRegisterOutput(RegisterOutput)
                     .WithComparer(ReferenceEqualityComparer.Instance)
                     .WithTrackingName(WellKnownGeneratorInputs.CompilationOptions),
                 CatchAnalyzerExceptions
@@ -68,32 +68,32 @@ namespace Microsoft.CodeAnalysis
 
         public IncrementalValueProvider<ParseOptions> ParseOptionsProvider =>
             new IncrementalValueProvider<ParseOptions>(
-                SharedInputNodes
-                    .ParseOptions.WithRegisterOutput(RegisterOutput)
+                SharedInputNodes.ParseOptions
+                    .WithRegisterOutput(RegisterOutput)
                     .WithTrackingName(WellKnownGeneratorInputs.ParseOptions),
                 CatchAnalyzerExceptions
             );
 
         public IncrementalValuesProvider<AdditionalText> AdditionalTextsProvider =>
             new IncrementalValuesProvider<AdditionalText>(
-                SharedInputNodes
-                    .AdditionalTexts.WithRegisterOutput(RegisterOutput)
+                SharedInputNodes.AdditionalTexts
+                    .WithRegisterOutput(RegisterOutput)
                     .WithTrackingName(WellKnownGeneratorInputs.AdditionalTexts),
                 CatchAnalyzerExceptions
             );
 
         public IncrementalValueProvider<AnalyzerConfigOptionsProvider> AnalyzerConfigOptionsProvider =>
             new IncrementalValueProvider<AnalyzerConfigOptionsProvider>(
-                SharedInputNodes
-                    .AnalyzerConfigOptions.WithRegisterOutput(RegisterOutput)
+                SharedInputNodes.AnalyzerConfigOptions
+                    .WithRegisterOutput(RegisterOutput)
                     .WithTrackingName(WellKnownGeneratorInputs.AnalyzerConfigOptions),
                 CatchAnalyzerExceptions
             );
 
         public IncrementalValuesProvider<MetadataReference> MetadataReferencesProvider =>
             new IncrementalValuesProvider<MetadataReference>(
-                SharedInputNodes
-                    .MetadataReferences.WithRegisterOutput(RegisterOutput)
+                SharedInputNodes.MetadataReferences
+                    .WithRegisterOutput(RegisterOutput)
                     .WithTrackingName(WellKnownGeneratorInputs.MetadataReferences),
                 CatchAnalyzerExceptions
             );

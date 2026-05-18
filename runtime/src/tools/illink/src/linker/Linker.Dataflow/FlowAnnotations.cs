@@ -1188,7 +1188,8 @@ namespace ILLink.Shared.TrimAnalysis
                 {
                     var innerGenericArgument = (
                         genericArgument as IGenericInstance
-                    )?.GenericArguments.FirstOrDefault();
+                    )?.GenericArguments
+                        .FirstOrDefault();
                     switch (innerGenericArgument)
                     {
                         case GenericParameter gp:
@@ -1196,9 +1197,9 @@ namespace ILLink.Shared.TrimAnalysis
                                 genericArgumentType,
                                 new GenericParameterValue(
                                     gp,
-                                    _context.Annotations.FlowAnnotations.GetGenericParameterAnnotation(
-                                        gp
-                                    )
+                                    _context.Annotations
+                                        .FlowAnnotations
+                                        .GetGenericParameterAnnotation(gp)
                                 )
                             );
 

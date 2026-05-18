@@ -101,9 +101,9 @@ namespace System.Data
         private object _defaultViewManagerLock = new Object();
 
         private static int _objectTypeCount; // Bid counter
-        private readonly int _objectID = System.Threading.Interlocked.Increment(
-            ref _objectTypeCount
-        );
+        private readonly int _objectID = System.Threading
+            .Interlocked
+            .Increment(ref _objectTypeCount);
         private static XmlSchemaComplexType schemaTypeForWSDL = null;
 
         internal bool UseDataSetSchemaOnly; // UseDataSetSchemaOnly  , for YUKON
@@ -1908,10 +1908,8 @@ namespace System.Data
 
                     if (
                         reader.LocalName == Keywords.XSD_SCHEMA
-                        && reader.NamespaceURI.StartsWith(
-                            Keywords.XSD_NS_START,
-                            StringComparison.Ordinal
-                        )
+                        && reader.NamespaceURI
+                            .StartsWith(Keywords.XSD_NS_START, StringComparison.Ordinal)
                     )
                         throw ExceptionBuilder.DataSetUnsupportedSchema(Keywords.XSDNS);
 
@@ -1967,10 +1965,8 @@ namespace System.Data
 
                         if (
                             reader.LocalName == Keywords.XSD_SCHEMA
-                            && reader.NamespaceURI.StartsWith(
-                                Keywords.XSD_NS_START,
-                                StringComparison.Ordinal
-                            )
+                            && reader.NamespaceURI
+                                .StartsWith(Keywords.XSD_NS_START, StringComparison.Ordinal)
                         )
                             throw ExceptionBuilder.DataSetUnsupportedSchema(Keywords.XSDNS);
 
@@ -2388,10 +2384,8 @@ namespace System.Data
 
                         if (
                             reader.LocalName == Keywords.XSD_SCHEMA
-                            && reader.NamespaceURI.StartsWith(
-                                Keywords.XSD_NS_START,
-                                StringComparison.Ordinal
-                            )
+                            && reader.NamespaceURI
+                                .StartsWith(Keywords.XSD_NS_START, StringComparison.Ordinal)
                         )
                             throw ExceptionBuilder.DataSetUnsupportedSchema(Keywords.XSDNS);
 
@@ -2468,10 +2462,8 @@ namespace System.Data
 
                             if (
                                 reader.LocalName == Keywords.XSD_SCHEMA
-                                && reader.NamespaceURI.StartsWith(
-                                    Keywords.XSD_NS_START,
-                                    StringComparison.Ordinal
-                                )
+                                && reader.NamespaceURI
+                                    .StartsWith(Keywords.XSD_NS_START, StringComparison.Ordinal)
                             )
                                 throw ExceptionBuilder.DataSetUnsupportedSchema(Keywords.XSDNS);
 
@@ -3003,10 +2995,8 @@ namespace System.Data
 
                             if (
                                 reader.LocalName == Keywords.XSD_SCHEMA
-                                && reader.NamespaceURI.StartsWith(
-                                    Keywords.XSD_NS_START,
-                                    StringComparison.Ordinal
-                                )
+                                && reader.NamespaceURI
+                                    .StartsWith(Keywords.XSD_NS_START, StringComparison.Ordinal)
                             )
                                 throw ExceptionBuilder.DataSetUnsupportedSchema(Keywords.XSDNS);
 
@@ -3110,10 +3100,8 @@ namespace System.Data
 
                             if (
                                 reader.LocalName == Keywords.XSD_SCHEMA
-                                && reader.NamespaceURI.StartsWith(
-                                    Keywords.XSD_NS_START,
-                                    StringComparison.Ordinal
-                                )
+                                && reader.NamespaceURI
+                                    .StartsWith(Keywords.XSD_NS_START, StringComparison.Ordinal)
                             )
                                 throw ExceptionBuilder.DataSetUnsupportedSchema(Keywords.XSDNS);
 
@@ -4479,9 +4467,8 @@ namespace System.Data
                                     ? typeof(DataSet).FullName
                                     : typeof(DataTable).FullName;
                                 importedTypes.Add(type, typeName);
-                                mainNamespace.Imports.Add(
-                                    new CodeNamespaceImport(typeof(DataSet).Namespace)
-                                );
+                                mainNamespace.Imports
+                                    .Add(new CodeNamespaceImport(typeof(DataSet).Namespace));
                                 compileUnit.ReferencedAssemblies.Add("System.Data.dll");
                                 return typeName;
                             }
@@ -4530,9 +4517,8 @@ namespace System.Data
                             return null;
                         string typeName = typeof(DataSet).FullName;
                         importedTypes.Add(type, typeName);
-                        mainNamespace.Imports.Add(
-                            new CodeNamespaceImport(typeof(DataSet).Namespace)
-                        );
+                        mainNamespace.Imports
+                            .Add(new CodeNamespaceImport(typeof(DataSet).Namespace));
                         compileUnit.ReferencedAssemblies.Add("System.Data.dll");
                         return typeName;
                     }

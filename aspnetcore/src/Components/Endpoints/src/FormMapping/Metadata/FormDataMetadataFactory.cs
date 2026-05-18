@@ -217,9 +217,8 @@ internal partial class FormDataMetadataFactory(
                             return null;
                         }
 
-                        result.ConstructorParameters.Add(
-                            new FormDataParameterMetadata(parameter, parameterTypeInfo)
-                        );
+                        result.ConstructorParameters
+                            .Add(new FormDataParameterMetadata(parameter, parameterTypeInfo));
                     }
                 }
 
@@ -228,10 +227,10 @@ internal partial class FormDataMetadataFactory(
                 {
                     var property = propertyHelper.Property;
                     Log.CandidateProperty(_logger, propertyHelper.Name, property.PropertyType);
-                    var matchingConstructorParameter = result.ConstructorParameters.FirstOrDefault(
-                        p =>
+                    var matchingConstructorParameter = result.ConstructorParameters
+                        .FirstOrDefault(p =>
                             string.Equals(p.Name, property.Name, StringComparison.OrdinalIgnoreCase)
-                    );
+                        );
 
                     if (matchingConstructorParameter != null)
                     {

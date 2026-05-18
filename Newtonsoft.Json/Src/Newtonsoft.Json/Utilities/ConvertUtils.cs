@@ -296,10 +296,8 @@ namespace Newtonsoft.Json.Utilities
                 return null;
             }
 
-            MethodCall<object?, object?> call =
-                JsonTypeReflector.ReflectionDelegateFactory.CreateMethodCall<object?>(
-                    castMethodInfo
-                );
+            MethodCall<object?, object?> call = JsonTypeReflector.ReflectionDelegateFactory
+                .CreateMethodCall<object?>(castMethodInfo);
 
             return o => call(null, o);
         }

@@ -95,8 +95,10 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.Completion
                 string[]
             >(CommitCharacterArrayComparer.Instance);
 
-            var creationService =
-                document.Project.Solution.Services.GetRequiredService<ILspCompletionResultCreationService>();
+            var creationService = document.Project
+                .Solution
+                .Services
+                .GetRequiredService<ILspCompletionResultCreationService>();
             var completionService = document.GetRequiredLanguageService<CompletionService>();
 
             var defaultSpan = list.Span;
@@ -219,10 +221,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.Completion
                 foreach (var tag in tags)
                 {
                     if (
-                        ProtocolConversions.RoslynTagToCompletionItemKinds.TryGetValue(
-                            tag,
-                            out var completionItemKinds
-                        )
+                        ProtocolConversions.RoslynTagToCompletionItemKinds
+                            .TryGetValue(tag, out var completionItemKinds)
                     )
                     {
                         // Always at least pick the core kind provided.
@@ -567,10 +567,11 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.Completion
             {
                 if (
                     SnippetCompletionItem.IsSnippet(selectedItem)
-                    && completionChange.Properties.TryGetValue(
-                        SnippetCompletionItem.LSPSnippetKey,
-                        out var lspSnippetChangeText
-                    )
+                    && completionChange.Properties
+                        .TryGetValue(
+                            SnippetCompletionItem.LSPSnippetKey,
+                            out var lspSnippetChangeText
+                        )
                 )
                 {
                     textEdit.NewText = lspSnippetChangeText;

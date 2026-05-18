@@ -35,9 +35,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         )
         {
             using var workspace = CreateWorkspace(code, options, testHost);
-            var document = workspace.CurrentSolution.GetRequiredDocument(
-                workspace.Documents.First().Id
-            );
+            var document = workspace.CurrentSolution
+                .GetRequiredDocument(workspace.Documents.First().Id);
 
             return await GetAllClassificationsAsync(document, spans);
         }
@@ -3235,8 +3234,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
             );
             var document = workspace.Documents.First();
 
-            var listenerProvider =
-                workspace.ExportProvider.GetExportedValue<IAsynchronousOperationListenerProvider>();
+            var listenerProvider = workspace.ExportProvider
+                .GetExportedValue<IAsynchronousOperationListenerProvider>();
             var globalOptions = workspace.ExportProvider.GetExportedValue<IGlobalOptionService>();
 
             var provider = new TotalClassificationTaggerProvider(

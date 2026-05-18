@@ -804,72 +804,38 @@ namespace System.Diagnostics.Tests
                     string traceState = "x-" + a.TraceStateString;
                     string baggageString = "x=y, " + GetFormattedBaggage(a.Baggage);
 
-                    DistributedContextPropagator.Current.Inject(
-                        a,
-                        null,
-                        (object carrier, string fieldName, string value) =>
-                        {
-                            if (fieldName == CustomPropagator.XTraceParent)
+                    DistributedContextPropagator.Current
+                        .Inject(
+                            a,
+                            null,
+                            (object carrier, string fieldName, string value) =>
                             {
-                                Assert.Equal(traceParent, value);
-                                return;
+                                if (fieldName == CustomPropagator.XTraceParent)
+                                {
+                                    Assert.Equal(traceParent, value);
+                                    return;
+                                }
+
+                                if (fieldName == CustomPropagator.XTraceState)
+                                {
+                                    Assert.Equal(traceState, value);
+                                    return;
+                                }
+
+                                if (fieldName == CustomPropagator.XBaggage)
+                                {
+                                    Assert.Equal(baggageString, value);
+                                    return;
+                                }
+
+                                Assert.Fail(
+                                    $"Encountered wrong header name '{fieldName}' in the Custom Propagator"
+                                );
                             }
+                        );
 
-                            if (fieldName == CustomPropagator.XTraceState)
-                            {
-                                Assert.Equal(traceState, value);
-                                return;
-                            }
-
-                            if (fieldName == CustomPropagator.XBaggage)
-                            {
-                                Assert.Equal(baggageString, value);
-                                return;
-                            }
-
-                            Assert.Fail(
-                                $"Encountered wrong header name '{fieldName}' in the Custom Propagator"
-                            );
-                        }
-                    );
-
-                    DistributedContextPropagator.Current.ExtractTraceIdAndState(
-                        null,
-                        (
-                            object carrier,
-                            string fieldName,
-                            out string? fieldValue,
-                            out IEnumerable<string>? fieldValues
-                        ) =>
-                        {
-                            fieldValues = null;
-                            fieldValue = null;
-
-                            if (fieldName == CustomPropagator.XTraceParent)
-                            {
-                                fieldValue = traceParent;
-                                return;
-                            }
-
-                            if (fieldName == CustomPropagator.XTraceState)
-                            {
-                                fieldValue = traceState;
-                                return;
-                            }
-
-                            Assert.Fail(
-                                $"Encountered wrong header name '{fieldName}' in the Custom propagator"
-                            );
-                        },
-                        out string? traceId,
-                        out string? state
-                    );
-
-                    Assert.Equal(traceParent, traceId);
-                    Assert.Equal(traceState, state);
-
-                    IEnumerable<KeyValuePair<string, string?>>? b =
-                        DistributedContextPropagator.Current.ExtractBaggage(
+                    DistributedContextPropagator.Current
+                        .ExtractTraceIdAndState(
                             null,
                             (
                                 object carrier,
@@ -878,21 +844,58 @@ namespace System.Diagnostics.Tests
                                 out IEnumerable<string>? fieldValues
                             ) =>
                             {
-                                Assert.Null(carrier);
-                                fieldValue = null;
                                 fieldValues = null;
+                                fieldValue = null;
 
-                                if (fieldName == CustomPropagator.XBaggage)
+                                if (fieldName == CustomPropagator.XTraceParent)
                                 {
-                                    fieldValue = baggageString;
+                                    fieldValue = traceParent;
+                                    return;
+                                }
+
+                                if (fieldName == CustomPropagator.XTraceState)
+                                {
+                                    fieldValue = traceState;
                                     return;
                                 }
 
                                 Assert.Fail(
-                                    $"Encountered wrong header name '{fieldName}' in custom propagator"
+                                    $"Encountered wrong header name '{fieldName}' in the Custom propagator"
                                 );
-                            }
+                            },
+                            out string? traceId,
+                            out string? state
                         );
+
+                    Assert.Equal(traceParent, traceId);
+                    Assert.Equal(traceState, state);
+
+                    IEnumerable<KeyValuePair<string, string?>>? b =
+                        DistributedContextPropagator.Current
+                            .ExtractBaggage(
+                                null,
+                                (
+                                    object carrier,
+                                    string fieldName,
+                                    out string? fieldValue,
+                                    out IEnumerable<string>? fieldValues
+                                ) =>
+                                {
+                                    Assert.Null(carrier);
+                                    fieldValue = null;
+                                    fieldValues = null;
+
+                                    if (fieldName == CustomPropagator.XBaggage)
+                                    {
+                                        fieldValue = baggageString;
+                                        return;
+                                    }
+
+                                    Assert.Fail(
+                                        $"Encountered wrong header name '{fieldName}' in custom propagator"
+                                    );
+                                }
+                            );
 
                     Assert.Equal(2, b.Count());
                     Assert.Equal(new KeyValuePair<string, string>("x", "y"), b.ElementAt(0));

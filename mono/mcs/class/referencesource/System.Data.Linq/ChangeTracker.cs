@@ -190,9 +190,11 @@ namespace System.Data.Linq
             private StandardTrackedObject PromoteFastTrackedObject(object obj)
             {
                 Type type = obj.GetType();
-                MetaType metaType = this
-                    .services.Model.GetTable(type)
-                    .RowType.GetInheritanceType(type);
+                MetaType metaType = this.services
+                    .Model
+                    .GetTable(type)
+                    .RowType
+                    .GetInheritanceType(type);
                 return this.PromoteFastTrackedObject(metaType, obj);
             }
 
@@ -452,9 +454,9 @@ namespace System.Data.Linq
                 internal override void ConvertToNew()
                 {
                     // must be new or unmodified or removed to convert to new
-                    System.Diagnostics.Debug.Assert(
-                        this.IsNew || this.IsRemoved || this.IsUnmodified
-                    );
+                    System.Diagnostics
+                        .Debug
+                        .Assert(this.IsNew || this.IsRemoved || this.IsUnmodified);
                     this.original = null;
                     this.state = State.New;
                 }
@@ -469,9 +471,9 @@ namespace System.Data.Linq
                 internal override void ConvertToModified()
                 {
                     System.Diagnostics.Debug.Assert(this.IsPossiblyModified);
-                    System.Diagnostics.Debug.Assert(
-                        this.type.VersionMember != null || !this.type.HasUpdateCheck
-                    );
+                    System.Diagnostics
+                        .Debug
+                        .Assert(this.type.VersionMember != null || !this.type.HasUpdateCheck);
                     this.state = State.Modified;
                     this.isWeaklyTracked = false;
                 }
@@ -668,8 +670,9 @@ namespace System.Data.Linq
                         {
                             if (!am.Association.IsMany)
                             {
-                                IEnumerable ds = this
-                                    .tracker.services.GetDeferredSourceFactory(am)
+                                IEnumerable ds = this.tracker
+                                    .services
+                                    .GetDeferredSourceFactory(am)
                                     .CreateDeferredSource(this.current);
                                 if (am.StorageAccessor.HasValue(this.current))
                                 {
@@ -703,9 +706,12 @@ namespace System.Data.Linq
 
                     object copy = Activator.CreateInstance(this.Type.Type);
 
-                    MetaType rootMetaType = this
-                        .tracker.services.Model.GetTable(instanceType)
-                        .RowType.InheritanceRoot;
+                    MetaType rootMetaType = this.tracker
+                        .services
+                        .Model
+                        .GetTable(instanceType)
+                        .RowType
+                        .InheritanceRoot;
                     foreach (
                         MetaDataMember mm in rootMetaType
                             .GetInheritanceType(instanceType)
@@ -731,8 +737,9 @@ namespace System.Data.Linq
                                 }
                                 else
                                 {
-                                    IEnumerable ds = this
-                                        .tracker.services.GetDeferredSourceFactory(mm)
+                                    IEnumerable ds = this.tracker
+                                        .services
+                                        .GetDeferredSourceFactory(mm)
                                         .CreateDeferredSource(copy);
                                     mm.DeferredSourceAccessor.SetBoxedValue(ref copy, ds);
                                 }
@@ -781,12 +788,10 @@ namespace System.Data.Linq
                                     {
                                         MetaDataMember accThis = assoc.ThisKey[i];
                                         MetaDataMember accParent = assoc.OtherKey[i];
-                                        object parentValue =
-                                            accParent.StorageAccessor.GetBoxedValue(parent);
-                                        accThis.StorageAccessor.SetBoxedValue(
-                                            ref this.current,
-                                            parentValue
-                                        );
+                                        object parentValue = accParent.StorageAccessor
+                                            .GetBoxedValue(parent);
+                                        accThis.StorageAccessor
+                                            .SetBoxedValue(ref this.current, parentValue);
                                         valueWasSet = true;
                                     }
                                 }
@@ -813,9 +818,8 @@ namespace System.Data.Linq
                                                 )
                                                 {
                                                     if (
-                                                        accThis.StorageAccessor.GetBoxedValue(
-                                                            this.current
-                                                        ) != null
+                                                        accThis.StorageAccessor
+                                                            .GetBoxedValue(this.current) != null
                                                     )
                                                     {
                                                         throw Error.InconsistentAssociationAndKeyChange(
@@ -826,10 +830,8 @@ namespace System.Data.Linq
                                                 }
                                                 else
                                                 {
-                                                    accThis.StorageAccessor.SetBoxedValue(
-                                                        ref this.current,
-                                                        null
-                                                    );
+                                                    accThis.StorageAccessor
+                                                        .SetBoxedValue(ref this.current, null);
                                                     valueWasSet = true;
                                                 }
                                             }
@@ -868,14 +870,16 @@ namespace System.Data.Linq
                     {
                         if (this.original != null)
                         {
-                            object currentDiscriminator =
-                                type.Discriminator.MemberAccessor.GetBoxedValue(this.current);
+                            object currentDiscriminator = type.Discriminator
+                                .MemberAccessor
+                                .GetBoxedValue(this.current);
                             MetaType currentTypeFromDiscriminator = TypeFromDiscriminator(
                                 this.type,
                                 currentDiscriminator
                             );
-                            object dbDiscriminator =
-                                type.Discriminator.MemberAccessor.GetBoxedValue(this.original);
+                            object dbDiscriminator = type.Discriminator
+                                .MemberAccessor
+                                .GetBoxedValue(this.original);
                             MetaType dbTypeFromDiscriminator = TypeFromDiscriminator(
                                 this.type,
                                 dbDiscriminator
@@ -899,10 +903,10 @@ namespace System.Data.Linq
                             if (currentType.HasInheritanceCode)
                             {
                                 object code = currentType.InheritanceCode;
-                                this.type.Discriminator.MemberAccessor.SetBoxedValue(
-                                    ref current,
-                                    code
-                                );
+                                this.type
+                                    .Discriminator
+                                    .MemberAccessor
+                                    .SetBoxedValue(ref current, code);
                                 valueWasSet = true;
                             }
                         }
@@ -975,9 +979,8 @@ namespace System.Data.Linq
                             object currentValue = mm.MemberAccessor.GetBoxedValue(this.current);
                             if (this.original != null && mm.StorageAccessor.HasValue(this.original))
                             {
-                                object originalValue = mm.MemberAccessor.GetBoxedValue(
-                                    this.original
-                                );
+                                object originalValue = mm.MemberAccessor
+                                    .GetBoxedValue(this.original);
                                 yield return new ModifiedMemberInfo(
                                     mm.Member,
                                     currentValue,
@@ -1024,10 +1027,9 @@ namespace System.Data.Linq
                                 return true;
                             }
                         }
-                        IEnumerable<MetaDataMember> deferredMembers =
-                            this.Type.PersistentDataMembers.Where(p =>
-                                p.IsDeferred && !p.IsAssociation
-                            );
+                        IEnumerable<MetaDataMember> deferredMembers = this.Type
+                            .PersistentDataMembers
+                            .Where(p => p.IsDeferred && !p.IsAssociation);
                         foreach (MetaDataMember deferredMember in deferredMembers)
                         {
                             if (HasDeferredLoader(deferredMember))
@@ -1072,10 +1074,9 @@ namespace System.Data.Linq
                                 InitializeDeferredLoader(assoc.ThisMember);
                             }
                         }
-                        IEnumerable<MetaDataMember> deferredMembers =
-                            this.Type.PersistentDataMembers.Where(p =>
-                                p.IsDeferred && !p.IsAssociation
-                            );
+                        IEnumerable<MetaDataMember> deferredMembers = this.Type
+                            .PersistentDataMembers
+                            .Where(p => p.IsDeferred && !p.IsAssociation);
                         foreach (MetaDataMember deferredMember in deferredMembers)
                         {
                             // don't set loader on member that is dependent on unrealized generated values
@@ -1098,8 +1099,9 @@ namespace System.Data.Linq
                         // don't reset loader on any deferred member that already has one
                         if (loader == null)
                         {
-                            IDeferredSourceFactory factory =
-                                this.tracker.services.GetDeferredSourceFactory(deferredMember);
+                            IDeferredSourceFactory factory = this.tracker
+                                .services
+                                .GetDeferredSourceFactory(deferredMember);
                             loader = factory.CreateDeferredSource(this.current);
                             dsacc.SetBoxedValue(ref this.current, loader);
                         }
@@ -1147,16 +1149,15 @@ namespace System.Data.Linq
                                 object otherItem = null;
                                 if (assoc.ThisMember.IsDeferred)
                                 {
-                                    otherItem =
-                                        assoc.ThisMember.DeferredValueAccessor.GetBoxedValue(
-                                            this.current
-                                        );
+                                    otherItem = assoc.ThisMember
+                                        .DeferredValueAccessor
+                                        .GetBoxedValue(this.current);
                                 }
                                 else
                                 {
-                                    otherItem = assoc.ThisMember.StorageAccessor.GetBoxedValue(
-                                        this.current
-                                    );
+                                    otherItem = assoc.ThisMember
+                                        .StorageAccessor
+                                        .GetBoxedValue(this.current);
                                 }
                                 if (otherItem != null)
                                 {

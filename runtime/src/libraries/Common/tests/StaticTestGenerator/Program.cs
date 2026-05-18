@@ -185,9 +185,12 @@ namespace StaticTestGenerator
                     if (test.Values != null)
                     {
                         if (
-                            !test.Values.All(v =>
-                                v == null || (v is Type t && IsPublic(t)) || IsPublic(v.GetType())
-                            )
+                            !test.Values
+                                .All(v =>
+                                    v == null
+                                    || (v is Type t && IsPublic(t))
+                                    || IsPublic(v.GetType())
+                                )
                         )
                         {
                             Log(
@@ -390,8 +393,8 @@ namespace StaticTestGenerator
         )
         {
             // Create the dictionary containing all tests and associated test cases.
-            Dictionary<IXunitTestCase, List<TestCase>> testCases = sink
-                .TestCases.Cast<IXunitTestCase>()
+            Dictionary<IXunitTestCase, List<TestCase>> testCases = sink.TestCases
+                .Cast<IXunitTestCase>()
                 .Select(tc =>
                 {
                     MethodInfo testMethod = ((ReflectionMethodInfo)tc.Method).MethodInfo;
@@ -1067,9 +1070,8 @@ namespace StaticTestGenerator
                 )
                 {
                     name = GetTypeName(
-                        type.DeclaringType.MakeGenericType(
-                            genericArgs.Take(parentGenericArgs.Length).ToArray()
-                        )
+                        type.DeclaringType
+                            .MakeGenericType(genericArgs.Take(parentGenericArgs.Length).ToArray())
                     );
                 }
                 else

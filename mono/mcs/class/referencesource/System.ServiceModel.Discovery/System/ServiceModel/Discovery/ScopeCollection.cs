@@ -16,10 +16,8 @@ namespace System.ServiceModel.Discovery
         {
             if (item != null && !item.IsAbsoluteUri)
             {
-                throw FxTrace.Exception.Argument(
-                    "item",
-                    SR2.DiscoveryArgumentInvalidScopeUri(item)
-                );
+                throw FxTrace.Exception
+                    .Argument("item", SR2.DiscoveryArgumentInvalidScopeUri(item));
             }
             base.InsertItem(index, item);
         }
@@ -28,10 +26,8 @@ namespace System.ServiceModel.Discovery
         {
             if (item != null && !item.IsAbsoluteUri)
             {
-                throw FxTrace.Exception.Argument(
-                    "item",
-                    SR2.DiscoveryArgumentInvalidScopeUri(item)
-                );
+                throw FxTrace.Exception
+                    .Argument("item", SR2.DiscoveryArgumentInvalidScopeUri(item));
             }
             base.SetItem(index, item);
         }

@@ -310,8 +310,8 @@ public abstract class OwnedEntityQueryRelationalTestBase : OwnedEntityQueryTestB
         var contextFactory = await InitializeAsync<MyContext28247>(seed: c => c.Seed());
 
         using var context = contextFactory.CreateContext();
-        var query = context
-            .RotRutCases.AsNoTracking()
+        var query = context.RotRutCases
+            .AsNoTracking()
             .OrderBy(e => e.Id)
             .Select(e =>
                 e.Rot == null
@@ -348,8 +348,8 @@ public abstract class OwnedEntityQueryRelationalTestBase : OwnedEntityQueryTestB
         var contextFactory = await InitializeAsync<MyContext28247>(seed: c => c.Seed());
 
         using var context = contextFactory.CreateContext();
-        var query = context
-            .RotRutCases.AsNoTracking()
+        var query = context.RotRutCases
+            .AsNoTracking()
             .OrderBy(e => e.Id)
             .Select(e =>
                 e.Rot != null

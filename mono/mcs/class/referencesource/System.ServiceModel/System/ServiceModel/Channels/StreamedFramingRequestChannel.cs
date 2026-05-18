@@ -387,12 +387,10 @@ namespace System.ServiceModel.Channels
                     }
                     else
                     {
-                        this.channelBindingProvider =
-                            channel.upgrade.GetProperty<IStreamUpgradeChannelBindingProvider>();
-                        this.upgradeInitiator = channel.upgrade.CreateUpgradeInitiator(
-                            channel.RemoteAddress,
-                            channel.Via
-                        );
+                        this.channelBindingProvider = channel.upgrade
+                            .GetProperty<IStreamUpgradeChannelBindingProvider>();
+                        this.upgradeInitiator = channel.upgrade
+                            .CreateUpgradeInitiator(channel.RemoteAddress, channel.Via);
                         if (onUpgrade == null)
                         {
                             onUpgrade = Fx.ThunkCallback(new AsyncCallback(OnUpgrade));
@@ -429,11 +427,8 @@ namespace System.ServiceModel.Channels
                         && this.channelBindingProvider.IsChannelBindingSupportEnabled
                     )
                     {
-                        this.channel.channelBindingToken =
-                            this.channelBindingProvider.GetChannelBinding(
-                                this.upgradeInitiator,
-                                ChannelBindingKind.Endpoint
-                            );
+                        this.channel.channelBindingToken = this.channelBindingProvider
+                            .GetChannelBinding(this.upgradeInitiator, ChannelBindingKind.Endpoint);
                     }
 
                     this.remoteSecurity = StreamSecurityUpgradeInitiator.GetRemoteSecurity(
@@ -775,9 +770,13 @@ namespace System.ServiceModel.Channels
                 }
                 catch (TimeoutException exception)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new TimeoutException(SR.GetString(SR.TimeoutOnRequest, timeout), exception)
-                    );
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperError(
+                            new TimeoutException(
+                                SR.GetString(SR.TimeoutOnRequest, timeout),
+                                exception
+                            )
+                        );
                 }
             }
 
@@ -876,12 +875,13 @@ namespace System.ServiceModel.Channels
                     }
                     catch (TimeoutException exception)
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new TimeoutException(
-                                SR.GetString(SR.TimeoutOnRequest, timeout),
-                                exception
-                            )
-                        );
+                        throw DiagnosticUtility.ExceptionUtility
+                            .ThrowHelperError(
+                                new TimeoutException(
+                                    SR.GetString(SR.TimeoutOnRequest, timeout),
+                                    exception
+                                )
+                            );
                     }
 
                     success = true;
@@ -935,12 +935,16 @@ namespace System.ServiceModel.Channels
                 }
                 catch (TimeoutException exception)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new TimeoutException(
-                            SR.GetString(SR.TimeoutOnRequest, this.timeoutHelper.OriginalTimeout),
-                            exception
-                        )
-                    );
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperError(
+                            new TimeoutException(
+                                SR.GetString(
+                                    SR.TimeoutOnRequest,
+                                    this.timeoutHelper.OriginalTimeout
+                                ),
+                                exception
+                            )
+                        );
                 }
                 return replyMessage;
             }

@@ -286,8 +286,7 @@ namespace R2RDump
                         (
                             amd64UnwindInfo.Flags
                             & (int)
-                                ILCompiler
-                                    .Reflection
+                                ILCompiler.Reflection
                                     .ReadyToRun
                                     .Amd64
                                     .UnwindFlags

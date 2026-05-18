@@ -270,9 +270,10 @@ namespace Microsoft.Interop
                     }
                 }
                 foreach (
-                    KeyValuePair<MarshalMode, CustomTypeMarshallerData> mode in nestedCollection
-                        .Marshallers
-                        .Modes
+                    KeyValuePair<
+                        MarshalMode,
+                        CustomTypeMarshallerData
+                    > mode in nestedCollection.Marshallers.Modes
                 )
                 {
                     foreach (

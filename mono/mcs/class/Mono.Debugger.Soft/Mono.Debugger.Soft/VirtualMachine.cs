@@ -224,14 +224,15 @@ namespace Mono.Debugger.Soft
             {
                 long[] ids = null;
                 var fetchingEvent = new ManualResetEvent(false);
-                vm.conn.VM_GetThreads(
-                    (threadsIds) =>
-                    {
-                        ids = threadsIds;
-                        threads = new ThreadMirror[threadsIds.Length];
-                        fetchingEvent.Set();
-                    }
-                );
+                vm.conn
+                    .VM_GetThreads(
+                        (threadsIds) =>
+                        {
+                            ids = threadsIds;
+                            threads = new ThreadMirror[threadsIds.Length];
+                            fetchingEvent.Set();
+                        }
+                    );
                 if (WaitHandle.WaitAny(new[] { vm.conn.DisconnectedEvent, fetchingEvent }) == 0)
                 {
                     throw new VMDisconnectedException();

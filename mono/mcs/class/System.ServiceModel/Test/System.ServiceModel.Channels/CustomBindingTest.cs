@@ -307,10 +307,11 @@ namespace MonoTests.System.ServiceModel.Channels
             );
 
             ChannelProtectionRequirements reqs = new ChannelProtectionRequirements();
-            reqs.OutgoingSignatureParts.AddParts(
-                new MessagePartSpecification(new XmlQualifiedName("SampleValue", "urn:foo")),
-                "urn:myaction"
-            );
+            reqs.OutgoingSignatureParts
+                .AddParts(
+                    new MessagePartSpecification(new XmlQualifiedName("SampleValue", "urn:foo")),
+                    "urn:myaction"
+                );
             BindingParameterCollection parameters = new BindingParameterCollection();
             parameters.Add(reqs);
             /*

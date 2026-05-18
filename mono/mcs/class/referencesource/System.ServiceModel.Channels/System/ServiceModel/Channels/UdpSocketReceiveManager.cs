@@ -233,12 +233,13 @@ namespace System.ServiceModel.Channels
                 messageBytes = this.CopyMessageIntoBufferManager(messageBytes);
 
                 //when receiveHandler.HandleDataReceived is called, it will return the buffer to the buffer manager.
-                continueReceiving = this.receiveHandler.HandleDataReceived(
-                    messageBytes,
-                    state.RemoteEndPoint,
-                    state.Socket.InterfaceIndex,
-                    this.onMessageDequeued
-                );
+                continueReceiving = this.receiveHandler
+                    .HandleDataReceived(
+                        messageBytes,
+                        state.RemoteEndPoint,
+                        state.Socket.InterfaceIndex,
+                        this.onMessageDequeued
+                    );
             }
             catch (Exception ex)
             {
@@ -313,12 +314,13 @@ namespace System.ServiceModel.Channels
                 messageBytes = this.CopyMessageIntoBufferManager(messageBytes);
                 //if HandleDataReceived returns false, it means that the max pending message count was hit.
                 //when receiveHandler.HandleDataReceived is called (whether now or later), it will return the buffer to the buffer manager.
-                return this.receiveHandler.HandleDataReceived(
-                    messageBytes,
-                    state.RemoteEndPoint,
-                    state.Socket.InterfaceIndex,
-                    this.onMessageDequeued
-                );
+                return this.receiveHandler
+                    .HandleDataReceived(
+                        messageBytes,
+                        state.RemoteEndPoint,
+                        state.Socket.InterfaceIndex,
+                        this.onMessageDequeued
+                    );
             }
 
             return false;
@@ -373,9 +375,8 @@ namespace System.ServiceModel.Channels
         {
             if (this.IsDisposed)
             {
-                throw FxTrace.Exception.AsError(
-                    new ObjectDisposedException("SocketReceiveManager")
-                );
+                throw FxTrace.Exception
+                    .AsError(new ObjectDisposedException("SocketReceiveManager"));
             }
         }
 
@@ -396,10 +397,8 @@ namespace System.ServiceModel.Channels
             try
             {
                 EndPoint remoteEndpoint = null;
-                ArraySegment<byte> messageBytes = state.Socket.EndReceiveFrom(
-                    result,
-                    ref remoteEndpoint
-                );
+                ArraySegment<byte> messageBytes = state.Socket
+                    .EndReceiveFrom(result, ref remoteEndpoint);
                 state.RemoteEndPoint = remoteEndpoint;
                 Fx.Assert(
                     messageBytes.Array == state.ReceiveBuffer,

@@ -1032,9 +1032,9 @@ public class HtmlHelper : IHtmlHelper, IViewContextAware
         var shouldGenerateAntiforgery = antiforgery ?? method != FormMethod.Get;
         if (shouldGenerateAntiforgery)
         {
-            ViewContext.FormContext.EndOfFormContent.Add(
-                _htmlGenerator.GenerateAntiforgery(ViewContext)
-            );
+            ViewContext.FormContext
+                .EndOfFormContent
+                .Add(_htmlGenerator.GenerateAntiforgery(ViewContext));
         }
 
         return CreateForm();
@@ -1092,9 +1092,9 @@ public class HtmlHelper : IHtmlHelper, IViewContextAware
         var shouldGenerateAntiforgery = antiforgery ?? method != FormMethod.Get;
         if (shouldGenerateAntiforgery)
         {
-            ViewContext.FormContext.EndOfFormContent.Add(
-                _htmlGenerator.GenerateAntiforgery(ViewContext)
-            );
+            ViewContext.FormContext
+                .EndOfFormContent
+                .Add(_htmlGenerator.GenerateAntiforgery(ViewContext));
         }
 
         return CreateForm();

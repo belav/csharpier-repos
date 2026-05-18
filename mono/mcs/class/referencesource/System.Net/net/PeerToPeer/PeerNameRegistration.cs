@@ -107,14 +107,15 @@ namespace System.Net.PeerToPeer
             m_PeerNameRecord.PeerName = name;
             m_Port = port;
             m_Cloud = cloud;
-            Logging.P2PTraceSource.TraceEvent(
-                TraceEventType.Information,
-                0,
-                "Created a PeerNameRegistration with PeerName {0}, Port {1}, Cloud {2} - Proceeding to register",
-                name,
-                port,
-                cloud
-            );
+            Logging.P2PTraceSource
+                .TraceEvent(
+                    TraceEventType.Information,
+                    0,
+                    "Created a PeerNameRegistration with PeerName {0}, Port {1}, Cloud {2} - Proceeding to register",
+                    name,
+                    port,
+                    cloud
+                );
         }
 
         /// <summary>
@@ -223,11 +224,12 @@ namespace System.Net.PeerToPeer
             if (m_Disposed)
                 throw new ObjectDisposedException(this.GetType().FullName);
 
-            Logging.P2PTraceSource.TraceEvent(
-                TraceEventType.Information,
-                0,
-                "Proceeding to register through the Register method()"
-            );
+            Logging.P2PTraceSource
+                .TraceEvent(
+                    TraceEventType.Information,
+                    0,
+                    "Proceeding to register through the Register method()"
+                );
             InternalRegister();
         }
 
@@ -297,11 +299,12 @@ namespace System.Net.PeerToPeer
             //---------------------------------------------------------------
             if (Logging.P2PTraceSource.Switch.ShouldTrace(TraceEventType.Information))
             {
-                Logging.P2PTraceSource.TraceEvent(
-                    TraceEventType.Information,
-                    0,
-                    "InternalRegister() is called with the following Info"
-                );
+                Logging.P2PTraceSource
+                    .TraceEvent(
+                        TraceEventType.Information,
+                        0,
+                        "InternalRegister() is called with the following Info"
+                    );
                 m_PeerNameRecord.TracePeerNameRecord();
             }
 
@@ -424,12 +427,13 @@ namespace System.Net.PeerToPeer
             }
             m_RegisteredPeerName = m_PeerNameRecord.PeerName;
             m_IsRegistered = true;
-            Logging.P2PTraceSource.TraceEvent(
-                TraceEventType.Information,
-                0,
-                "Registration is successful. The handle is {0}",
-                m_RegistrationHandle.DangerousGetHandle()
-            );
+            Logging.P2PTraceSource
+                .TraceEvent(
+                    TraceEventType.Information,
+                    0,
+                    "Registration is successful. The handle is {0}",
+                    m_RegistrationHandle.DangerousGetHandle()
+                );
         }
 
         /// <summary>
@@ -510,11 +514,12 @@ namespace System.Net.PeerToPeer
             //---------------------------------------------------------------
             if (Logging.P2PTraceSource.Switch.ShouldTrace(TraceEventType.Information))
             {
-                Logging.P2PTraceSource.TraceEvent(
-                    TraceEventType.Information,
-                    0,
-                    "Update() is called with the following Info"
-                );
+                Logging.P2PTraceSource
+                    .TraceEvent(
+                        TraceEventType.Information,
+                        0,
+                        "Update() is called with the following Info"
+                    );
                 m_PeerNameRecord.TracePeerNameRecord();
             }
 
@@ -620,12 +625,13 @@ namespace System.Net.PeerToPeer
                     }
                 }
 
-                Logging.P2PTraceSource.TraceEvent(
-                    TraceEventType.Information,
-                    0,
-                    "Update of existing registration is successful. The handle is {0}",
-                    m_RegistrationHandle.DangerousGetHandle()
-                );
+                Logging.P2PTraceSource
+                    .TraceEvent(
+                        TraceEventType.Information,
+                        0,
+                        "Update of existing registration is successful. The handle is {0}",
+                        m_RegistrationHandle.DangerousGetHandle()
+                    );
             }
         }
 

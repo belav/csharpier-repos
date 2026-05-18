@@ -141,9 +141,9 @@ namespace System.Data
                 ForeignKeyConstraint fk = (ForeignKeyConstraint)constraint;
                 if (addUniqueWhenAddingForeign)
                 {
-                    UniqueConstraint key = fk.RelatedTable.Constraints.FindKeyConstraint(
-                        fk.RelatedColumnsReference
-                    );
+                    UniqueConstraint key = fk.RelatedTable
+                        .Constraints
+                        .FindKeyConstraint(fk.RelatedColumnsReference);
                     if (key == null)
                     {
                         if (constraint.ConstraintName.Length == 0)
@@ -884,8 +884,7 @@ namespace System.Data
                                 constr.parentColumnNames[j]
                             ];
                         else
-                            parents[j] = table
-                                .DataSet
+                            parents[j] = table.DataSet
                                 .Tables[constr.parentTableName, constr.parentTableNamespace]
                                 .Columns[constr.parentColumnNames[j]];
                         childs[j] = table.Columns[constr.childColumnNames[j]];

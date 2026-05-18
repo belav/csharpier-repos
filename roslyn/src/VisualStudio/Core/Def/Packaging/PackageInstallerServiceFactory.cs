@@ -193,8 +193,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Packaging
             try
             {
                 if (_packageSourceProvider != null)
-                    return _packageSourceProvider
-                        .Value.GetSources(includeUnOfficial: true, includeDisabled: false)
+                    return _packageSourceProvider.Value
+                        .GetSources(includeUnOfficial: true, includeDisabled: false)
                         .SelectAsArray(r => new PackageSource(r.Key, r.Value));
             }
             catch (Exception ex) when (ex is InvalidDataException or InvalidOperationException)
@@ -302,9 +302,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Packaging
             // other than the VisualStudioWorkspace.
             if (workspace == Workspace && Workspace != null && IsEnabled)
             {
-                await this.ThreadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(
-                    cancellationToken
-                );
+                await this.ThreadingContext
+                    .JoinableTaskFactory
+                    .SwitchToMainThreadAsync(cancellationToken);
 
                 var projectId = documentId.ProjectId;
                 var dte = (EnvDTE.DTE)_serviceProvider.GetService(typeof(SDTE));
@@ -376,23 +376,25 @@ namespace Microsoft.VisualStudio.LanguageServices.Packaging
                             cancellationToken = default;
                             if (version == null)
                             {
-                                _packageInstaller.Value.InstallLatestPackage(
-                                    source,
-                                    dteProject,
-                                    packageName,
-                                    includePrerelease,
-                                    ignoreDependencies: false
-                                );
+                                _packageInstaller.Value
+                                    .InstallLatestPackage(
+                                        source,
+                                        dteProject,
+                                        packageName,
+                                        includePrerelease,
+                                        ignoreDependencies: false
+                                    );
                             }
                             else
                             {
-                                _packageInstaller.Value.InstallPackage(
-                                    source,
-                                    dteProject,
-                                    packageName,
-                                    version,
-                                    ignoreDependencies: false
-                                );
+                                _packageInstaller.Value
+                                    .InstallPackage(
+                                        source,
+                                        dteProject,
+                                        packageName,
+                                        version,
+                                        ignoreDependencies: false
+                                    );
                             }
 
                             installedPackagesMap = await GetInstalledPackagesMapAsync(
@@ -436,9 +438,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Packaging
             }
             catch (Exception e) when (FatalError.ReportAndCatch(e))
             {
-                await this.ThreadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(
-                    cancellationToken
-                );
+                await this.ThreadingContext
+                    .JoinableTaskFactory
+                    .SwitchToMainThreadAsync(cancellationToken);
                 dte.StatusBar.Text = string.Format(
                     ServicesVSResources.Package_install_failed_colon_0,
                     e.Message
@@ -464,9 +466,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Packaging
             CancellationToken cancellationToken
         )
         {
-            await this.ThreadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(
-                cancellationToken
-            );
+            await this.ThreadingContext
+                .JoinableTaskFactory
+                .SwitchToMainThreadAsync(cancellationToken);
             dte.StatusBar.Text = text;
         }
 
@@ -514,11 +516,12 @@ namespace Microsoft.VisualStudio.LanguageServices.Packaging
 
                             // Once we start the installation, we can't cancel anymore.
                             cancellationToken = default;
-                            _packageUninstaller.Value.UninstallPackage(
-                                dteProject,
-                                packageName,
-                                removeDependencies: true
-                            );
+                            _packageUninstaller.Value
+                                .UninstallPackage(
+                                    dteProject,
+                                    packageName,
+                                    removeDependencies: true
+                                );
 
                             await UpdateStatusBarAsync(
                                     dte,
@@ -548,9 +551,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Packaging
             }
             catch (Exception e) when (FatalError.ReportAndCatch(e))
             {
-                await this.ThreadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(
-                    cancellationToken
-                );
+                await this.ThreadingContext
+                    .JoinableTaskFactory
+                    .SwitchToMainThreadAsync(cancellationToken);
                 dte.StatusBar.Text = string.Format(
                     ServicesVSResources.Package_uninstall_failed_colon_0,
                     e.Message

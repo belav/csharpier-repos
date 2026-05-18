@@ -1506,9 +1506,8 @@ namespace System.Web.UI.DataVisualization.Charting
             }
 
             if (Common.ProcessModePaint)
-                Common.Chart.CallOnPrePaint(
-                    new ChartPaintEventArgs(this, chartGraph, Common, Position)
-                );
+                Common.Chart
+                    .CallOnPrePaint(new ChartPaintEventArgs(this, chartGraph, Common, Position));
 
             //***************************************************************
             //** Add spacing between text and border
@@ -1657,9 +1656,10 @@ namespace System.Web.UI.DataVisualization.Charting
                 }
                 // Call Paint event
                 if (Common.ProcessModePaint)
-                    Common.Chart.CallOnPostPaint(
-                        new ChartPaintEventArgs(this, chartGraph, Common, Position)
-                    );
+                    Common.Chart
+                        .CallOnPostPaint(
+                            new ChartPaintEventArgs(this, chartGraph, Common, Position)
+                        );
 
                 //***************************************************************
                 //** Restore old transformation
@@ -1672,27 +1672,29 @@ namespace System.Web.UI.DataVisualization.Charting
                 if (Common.ProcessModeRegions)
                 {
 #if !Microsoft_CONTROL
-                    Common.HotRegionsList.AddHotRegion(
-                        titlePosition,
-                        this.ToolTip,
-                        this.Url,
-                        this.MapAreaAttributes,
-                        this.PostBackValue,
-                        this,
-                        ChartElementType.Title,
-                        string.Empty
-                    );
+                    Common.HotRegionsList
+                        .AddHotRegion(
+                            titlePosition,
+                            this.ToolTip,
+                            this.Url,
+                            this.MapAreaAttributes,
+                            this.PostBackValue,
+                            this,
+                            ChartElementType.Title,
+                            string.Empty
+                        );
 #else
-                    Common.HotRegionsList.AddHotRegion(
-                        titlePosition,
-                        this.ToolTip,
-                        null,
-                        null,
-                        null,
-                        this,
-                        ChartElementType.Title,
-                        null
-                    );
+                    Common.HotRegionsList
+                        .AddHotRegion(
+                            titlePosition,
+                            this.ToolTip,
+                            null,
+                            null,
+                            null,
+                            this,
+                            ChartElementType.Title,
+                            null
+                        );
 #endif // !Microsoft_CONTROL
                 }
             }
@@ -1929,12 +1931,13 @@ namespace System.Web.UI.DataVisualization.Charting
                 && this.DockedToChartArea == Constants.NotSetValue
             )
             {
-                this.Position.SetPositionNoAuto(
-                    frameTitlePosition.X + elementSpacing,
-                    frameTitlePosition.Y,
-                    frameTitlePosition.Width - 2f * elementSpacing,
-                    frameTitlePosition.Height
-                );
+                this.Position
+                    .SetPositionNoAuto(
+                        frameTitlePosition.X + elementSpacing,
+                        frameTitlePosition.Y,
+                        frameTitlePosition.Width - 2f * elementSpacing,
+                        frameTitlePosition.Height
+                    );
                 frameTitlePosition = RectangleF.Empty;
                 return;
             }
@@ -2058,12 +2061,13 @@ namespace System.Web.UI.DataVisualization.Charting
                 }
             }
 
-            this.Position.SetPositionNoAuto(
-                titlePosition.X,
-                titlePosition.Y,
-                titlePosition.Width,
-                titlePosition.Height
-            );
+            this.Position
+                .SetPositionNoAuto(
+                    titlePosition.X,
+                    titlePosition.Y,
+                    titlePosition.Width,
+                    titlePosition.Height
+                );
         }
 
         #endregion
@@ -2246,12 +2250,13 @@ namespace System.Web.UI.DataVisualization.Charting
                         }
 
                         // Set title position without changing the 'Auto' flag
-                        title.Position.SetPositionNoAuto(
-                            titlePosition.X,
-                            titlePosition.Y,
-                            titlePosition.Width,
-                            titlePosition.Height
-                        );
+                        title.Position
+                            .SetPositionNoAuto(
+                                titlePosition.X,
+                                titlePosition.Y,
+                                titlePosition.Width,
+                                titlePosition.Height
+                            );
 
                         // If custom position is used in the chart area reset the curent adjusted position
                         if (!area.Position.Auto)

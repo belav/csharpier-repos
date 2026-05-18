@@ -378,7 +378,8 @@ namespace System.Net.Http.Functional.Tests
                 Enumerable
                     .Range(0, dop)
                     .Select(_ =>
-                        Task.Factory.StartNew(
+                        Task.Factory
+                            .StartNew(
                                 async delegate
                                 {
                                     int index;
@@ -410,12 +411,13 @@ namespace System.Net.Http.Functional.Tests
         private sealed class ThreadPerTaskScheduler : TaskScheduler
         {
             protected override void QueueTask(Task task) =>
-                Task.Factory.StartNew(
-                    () => TryExecuteTask(task),
-                    CancellationToken.None,
-                    TaskCreationOptions.LongRunning,
-                    TaskScheduler.Default
-                );
+                Task.Factory
+                    .StartNew(
+                        () => TryExecuteTask(task),
+                        CancellationToken.None,
+                        TaskCreationOptions.LongRunning,
+                        TaskScheduler.Default
+                    );
 
             protected override bool TryExecuteTaskInline(Task task, bool taskWasPreviouslyQueued) =>
                 TryExecuteTask(task);

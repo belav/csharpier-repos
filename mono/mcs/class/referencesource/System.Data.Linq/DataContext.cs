@@ -631,9 +631,9 @@ namespace System.Data.Linq
                             this.provider.Connection.Open();
                             openedConnection = true;
                         }
-                        transaction = this.provider.Connection.BeginTransaction(
-                            IsolationLevel.ReadCommitted
-                        );
+                        transaction = this.provider
+                            .Connection
+                            .BeginTransaction(IsolationLevel.ReadCommitted);
                         this.provider.Transaction = transaction;
                         new ChangeProcessor(this.services, this).SubmitChanges(failureMode);
                         this.AcceptChanges();
@@ -762,10 +762,8 @@ namespace System.Data.Linq
                     trackedObject.Type,
                     trackedObject.Original
                 );
-                object freshInstance = refreshContext.Services.GetObjectByKey(
-                    trackedObject.Type,
-                    keyValues
-                );
+                object freshInstance = refreshContext.Services
+                    .GetObjectByKey(trackedObject.Type, keyValues);
                 if (freshInstance == null)
                 {
                     throw Error.RefreshOfDeletedObject();
@@ -876,11 +874,12 @@ namespace System.Data.Linq
             }
             return (int)
                 this.ExecuteMethodCall(
-                    this,
-                    (MethodInfo)MethodInfo.GetCurrentMethod(),
-                    command,
-                    parameters
-                ).ReturnValue;
+                        this,
+                        (MethodInfo)MethodInfo.GetCurrentMethod(),
+                        command,
+                        parameters
+                    )
+                    .ReturnValue;
         }
 
         /// <summary>
@@ -909,11 +908,14 @@ namespace System.Data.Linq
             }
             return (IEnumerable<TResult>)
                 this.ExecuteMethodCall(
-                    this,
-                    ((MethodInfo)MethodInfo.GetCurrentMethod()).MakeGenericMethod(typeof(TResult)),
-                    query,
-                    parameters
-                ).ReturnValue;
+                        this,
+                        ((MethodInfo)MethodInfo.GetCurrentMethod()).MakeGenericMethod(
+                            typeof(TResult)
+                        ),
+                        query,
+                        parameters
+                    )
+                    .ReturnValue;
         }
 
         /// <summary>
@@ -947,11 +949,12 @@ namespace System.Data.Linq
             }
             return (IEnumerable)
                 this.ExecuteMethodCall(
-                    this,
-                    _miExecuteQuery.MakeGenericMethod(elementType),
-                    query,
-                    parameters
-                ).ReturnValue;
+                        this,
+                        _miExecuteQuery.MakeGenericMethod(elementType),
+                        query,
+                        parameters
+                    )
+                    .ReturnValue;
         }
 
         private static MethodInfo _miExecuteQuery;

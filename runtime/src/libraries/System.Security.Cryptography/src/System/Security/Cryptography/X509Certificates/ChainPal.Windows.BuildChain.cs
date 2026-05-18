@@ -53,8 +53,7 @@ namespace System.Security.Cryptography.X509Certificates
                     {
                         if (!applicationPolicyOids.IsInvalid)
                         {
-                            chainPara.RequestedUsage.dwType = Interop
-                                .Crypt32
+                            chainPara.RequestedUsage.dwType = Interop.Crypt32
                                 .CertUsageMatchType
                                 .USAGE_MATCH_TYPE_AND;
                             chainPara.RequestedUsage.Usage.cUsageIdentifier =
@@ -72,8 +71,7 @@ namespace System.Security.Cryptography.X509Certificates
                         {
                             if (!certificatePolicyOids.IsInvalid)
                             {
-                                chainPara.RequestedIssuancePolicy.dwType = Interop
-                                    .Crypt32
+                                chainPara.RequestedIssuancePolicy.dwType = Interop.Crypt32
                                     .CertUsageMatchType
                                     .USAGE_MATCH_TYPE_AND;
                                 chainPara.RequestedIssuancePolicy.Usage.cUsageIdentifier =
@@ -85,9 +83,9 @@ namespace System.Security.Cryptography.X509Certificates
                             chainPara.dwUrlRetrievalTimeout = (int)
                                 Math.Floor(timeout.TotalMilliseconds);
 
-                            Interop.Crypt32.FILETIME ft = Interop.Crypt32.FILETIME.FromDateTime(
-                                verificationTime
-                            );
+                            Interop.Crypt32.FILETIME ft = Interop.Crypt32
+                                .FILETIME
+                                .FromDateTime(verificationTime);
                             Interop.Crypt32.CertChainFlags flags = MapRevocationFlags(
                                 revocationMode,
                                 revocationFlag,
@@ -99,16 +97,17 @@ namespace System.Security.Cryptography.X509Certificates
                             )
                             {
                                 if (
-                                    !Interop.Crypt32.CertGetCertificateChain(
-                                        storeHandle.DangerousGetHandle(),
-                                        certContext,
-                                        &ft,
-                                        extraStoreHandle,
-                                        ref chainPara,
-                                        flags,
-                                        IntPtr.Zero,
-                                        out chain
-                                    )
+                                    !Interop.Crypt32
+                                        .CertGetCertificateChain(
+                                            storeHandle.DangerousGetHandle(),
+                                            certContext,
+                                            &ft,
+                                            extraStoreHandle,
+                                            ref chainPara,
+                                            flags,
+                                            IntPtr.Zero,
+                                            out chain
+                                        )
                                 )
                                 {
                                     chain.Dispose();
@@ -144,9 +143,8 @@ namespace System.Security.Cryptography.X509Certificates
                     customChainEngine.cbSize =
                         Marshal.SizeOf<Interop.Crypt32.CERT_CHAIN_ENGINE_CONFIG>();
                     customChainEngine.hExclusiveRoot = customTrustStoreHandle.DangerousGetHandle();
-                    chainEngineHandle = Interop.crypt32.CertCreateCertificateChainEngine(
-                        ref customChainEngine
-                    );
+                    chainEngineHandle = Interop.crypt32
+                        .CertCreateCertificateChainEngine(ref customChainEngine);
                 }
             }
             else
@@ -197,8 +195,7 @@ namespace System.Security.Cryptography.X509Certificates
             else if (revocationFlag == X509RevocationFlag.EntireChain)
                 dwFlags |= Interop.Crypt32.CertChainFlags.CERT_CHAIN_REVOCATION_CHECK_CHAIN;
             else
-                dwFlags |= Interop
-                    .Crypt32
+                dwFlags |= Interop.Crypt32
                     .CertChainFlags
                     .CERT_CHAIN_REVOCATION_CHECK_CHAIN_EXCLUDE_ROOT;
 

@@ -33,10 +33,8 @@ internal static class TextBufferOptionProviders
             optionsProvider.IndentationManager,
             explicitFormat: false
         );
-        return optionsProvider.GlobalOptions.GetDocumentationCommentOptions(
-            lineFormattingOptions,
-            languageServices.Language
-        );
+        return optionsProvider.GlobalOptions
+            .GetDocumentationCommentOptions(lineFormattingOptions, languageServices.Language);
     }
 
     public static LineFormattingOptions GetLineFormattingOptions(
@@ -134,14 +132,11 @@ internal static class TextBufferOptionProviders
 
         return new IndentationOptions(formattingOptions)
         {
-            AutoFormattingOptions = optionsProvider.GlobalOptions.GetAutoFormattingOptions(
-                languageServices.Language
-            ),
+            AutoFormattingOptions = optionsProvider.GlobalOptions
+                .GetAutoFormattingOptions(languageServices.Language),
             // TODO: Call editorOptions.GetIndentStyle() instead (see https://github.com/dotnet/roslyn/issues/62204):
-            IndentStyle = optionsProvider.GlobalOptions.GetOption(
-                IndentationOptionsStorage.SmartIndent,
-                languageServices.Language
-            ),
+            IndentStyle = optionsProvider.GlobalOptions
+                .GetOption(IndentationOptionsStorage.SmartIndent, languageServices.Language),
         };
     }
 
@@ -154,9 +149,8 @@ internal static class TextBufferOptionProviders
     {
         var editorOptions = optionsProvider.Factory.GetOptions(textBuffer);
         var configOptions = editorOptions.ToAnalyzerConfigOptions();
-        var fallbackOptions = optionsProvider.GlobalOptions.GetAddImportPlacementOptions(
-            languageServices
-        );
+        var fallbackOptions = optionsProvider.GlobalOptions
+            .GetAddImportPlacementOptions(languageServices);
         return configOptions.GetAddImportPlacementOptions(
             languageServices,
             allowInHiddenRegions,

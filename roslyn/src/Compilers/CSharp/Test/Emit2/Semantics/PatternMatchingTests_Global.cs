@@ -1102,7 +1102,8 @@ class H
                     "System.Int32",
                     (
                         (IFieldSymbol)compilation.GetSemanticModel(tree).GetDeclaredSymbol(x1Decl)
-                    ).Type.ToTestDisplayString()
+                    ).Type
+                        .ToTestDisplayString()
                 );
 
                 var x2Decl = GetPatternDeclarations(tree, "x2").Single();
@@ -1800,7 +1801,8 @@ class H
                     "System.Int32",
                     (
                         (IFieldSymbol)compilation.GetSemanticModel(tree).GetDeclaredSymbol(x1Decl)
-                    ).Type.ToTestDisplayString()
+                    ).Type
+                        .ToTestDisplayString()
                 );
 
                 var x2Decl = GetPatternDeclarations(tree, "x2").Single();

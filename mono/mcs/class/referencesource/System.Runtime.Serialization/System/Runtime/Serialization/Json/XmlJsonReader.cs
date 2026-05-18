@@ -749,21 +749,24 @@ namespace System.Runtime.Serialization.Json
             }
             catch (ArgumentException exception)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    XmlExceptionHelper.CreateConversionException(value, "decimal", exception)
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        XmlExceptionHelper.CreateConversionException(value, "decimal", exception)
+                    );
             }
             catch (FormatException exception)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    XmlExceptionHelper.CreateConversionException(value, "decimal", exception)
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        XmlExceptionHelper.CreateConversionException(value, "decimal", exception)
+                    );
             }
             catch (OverflowException exception)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    XmlExceptionHelper.CreateConversionException(value, "decimal", exception)
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        XmlExceptionHelper.CreateConversionException(value, "decimal", exception)
+                    );
             }
         }
 
@@ -781,21 +784,24 @@ namespace System.Runtime.Serialization.Json
             }
             catch (ArgumentException exception)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    XmlExceptionHelper.CreateConversionException(value, "Int64", exception)
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        XmlExceptionHelper.CreateConversionException(value, "Int64", exception)
+                    );
             }
             catch (FormatException exception)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    XmlExceptionHelper.CreateConversionException(value, "Int64", exception)
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        XmlExceptionHelper.CreateConversionException(value, "Int64", exception)
+                    );
             }
             catch (OverflowException exception)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    XmlExceptionHelper.CreateConversionException(value, "Int64", exception)
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        XmlExceptionHelper.CreateConversionException(value, "Int64", exception)
+                    );
             }
         }
 
@@ -805,55 +811,73 @@ namespace System.Runtime.Serialization.Json
             {
                 if (buffer == null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ArgumentNullException("buffer")
-                    );
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperError(new ArgumentNullException("buffer"));
                 }
                 if (offset < 0)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ArgumentOutOfRangeException(
-                            "offset",
-                            System.Runtime.Serialization.SR.GetString(
-                                System.Runtime.Serialization.SR.ValueMustBeNonNegative
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperError(
+                            new ArgumentOutOfRangeException(
+                                "offset",
+                                System.Runtime
+                                    .Serialization
+                                    .SR
+                                    .GetString(
+                                        System.Runtime.Serialization.SR.ValueMustBeNonNegative
+                                    )
                             )
-                        )
-                    );
+                        );
                 }
                 if (offset > buffer.Length)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ArgumentOutOfRangeException(
-                            "offset",
-                            System.Runtime.Serialization.SR.GetString(
-                                System.Runtime.Serialization.SR.OffsetExceedsBufferSize,
-                                buffer.Length
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperError(
+                            new ArgumentOutOfRangeException(
+                                "offset",
+                                System.Runtime
+                                    .Serialization
+                                    .SR
+                                    .GetString(
+                                        System.Runtime.Serialization.SR.OffsetExceedsBufferSize,
+                                        buffer.Length
+                                    )
                             )
-                        )
-                    );
+                        );
                 }
                 if (count < 0)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ArgumentOutOfRangeException(
-                            "count",
-                            System.Runtime.Serialization.SR.GetString(
-                                System.Runtime.Serialization.SR.ValueMustBeNonNegative
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperError(
+                            new ArgumentOutOfRangeException(
+                                "count",
+                                System.Runtime
+                                    .Serialization
+                                    .SR
+                                    .GetString(
+                                        System.Runtime.Serialization.SR.ValueMustBeNonNegative
+                                    )
                             )
-                        )
-                    );
+                        );
                 }
                 if (count > buffer.Length - offset)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ArgumentOutOfRangeException(
-                            "count",
-                            System.Runtime.Serialization.SR.GetString(
-                                System.Runtime.Serialization.SR.SizeExceedsRemainingBufferSpace,
-                                buffer.Length - offset
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperError(
+                            new ArgumentOutOfRangeException(
+                                "count",
+                                System.Runtime
+                                    .Serialization
+                                    .SR
+                                    .GetString(
+                                        System.Runtime
+                                            .Serialization
+                                            .SR
+                                            .SizeExceedsRemainingBufferSpace,
+                                        buffer.Length - offset
+                                    )
                             )
-                        )
-                    );
+                        );
                 }
 
                 return 0;
@@ -868,55 +892,73 @@ namespace System.Runtime.Serialization.Json
             {
                 if (chars == null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ArgumentNullException("chars")
-                    );
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperError(new ArgumentNullException("chars"));
                 }
                 if (offset < 0)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ArgumentOutOfRangeException(
-                            "offset",
-                            System.Runtime.Serialization.SR.GetString(
-                                System.Runtime.Serialization.SR.ValueMustBeNonNegative
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperError(
+                            new ArgumentOutOfRangeException(
+                                "offset",
+                                System.Runtime
+                                    .Serialization
+                                    .SR
+                                    .GetString(
+                                        System.Runtime.Serialization.SR.ValueMustBeNonNegative
+                                    )
                             )
-                        )
-                    );
+                        );
                 }
                 if (offset > chars.Length)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ArgumentOutOfRangeException(
-                            "offset",
-                            System.Runtime.Serialization.SR.GetString(
-                                System.Runtime.Serialization.SR.OffsetExceedsBufferSize,
-                                chars.Length
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperError(
+                            new ArgumentOutOfRangeException(
+                                "offset",
+                                System.Runtime
+                                    .Serialization
+                                    .SR
+                                    .GetString(
+                                        System.Runtime.Serialization.SR.OffsetExceedsBufferSize,
+                                        chars.Length
+                                    )
                             )
-                        )
-                    );
+                        );
                 }
                 if (count < 0)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ArgumentOutOfRangeException(
-                            "count",
-                            System.Runtime.Serialization.SR.GetString(
-                                System.Runtime.Serialization.SR.ValueMustBeNonNegative
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperError(
+                            new ArgumentOutOfRangeException(
+                                "count",
+                                System.Runtime
+                                    .Serialization
+                                    .SR
+                                    .GetString(
+                                        System.Runtime.Serialization.SR.ValueMustBeNonNegative
+                                    )
                             )
-                        )
-                    );
+                        );
                 }
                 if (count > chars.Length - offset)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ArgumentOutOfRangeException(
-                            "count",
-                            System.Runtime.Serialization.SR.GetString(
-                                System.Runtime.Serialization.SR.SizeExceedsRemainingBufferSpace,
-                                chars.Length - offset
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperError(
+                            new ArgumentOutOfRangeException(
+                                "count",
+                                System.Runtime
+                                    .Serialization
+                                    .SR
+                                    .GetString(
+                                        System.Runtime
+                                            .Serialization
+                                            .SR
+                                            .SizeExceedsRemainingBufferSpace,
+                                        chars.Length - offset
+                                    )
                             )
-                        )
-                    );
+                        );
                 }
                 int actual;
 
@@ -955,39 +997,46 @@ namespace System.Runtime.Serialization.Json
             }
             if (offset < 0)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentOutOfRangeException(
-                        "offset",
-                        SR.GetString(SR.ValueMustBeNonNegative)
-                    )
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        new ArgumentOutOfRangeException(
+                            "offset",
+                            SR.GetString(SR.ValueMustBeNonNegative)
+                        )
+                    );
             }
             if (offset > buffer.Length)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentOutOfRangeException(
-                        "offset",
-                        SR.GetString(SR.JsonOffsetExceedsBufferSize, buffer.Length)
-                    )
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        new ArgumentOutOfRangeException(
+                            "offset",
+                            SR.GetString(SR.JsonOffsetExceedsBufferSize, buffer.Length)
+                        )
+                    );
             }
             if (count < 0)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentOutOfRangeException(
-                        "count",
-                        SR.GetString(SR.ValueMustBeNonNegative)
-                    )
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        new ArgumentOutOfRangeException(
+                            "count",
+                            SR.GetString(SR.ValueMustBeNonNegative)
+                        )
+                    );
             }
             if (count > buffer.Length - offset)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentOutOfRangeException(
-                        "count",
-                        SR.GetString(SR.JsonSizeExceedsRemainingBufferSpace, buffer.Length - offset)
-                    )
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        new ArgumentOutOfRangeException(
+                            "count",
+                            SR.GetString(
+                                SR.JsonSizeExceedsRemainingBufferSpace,
+                                buffer.Length - offset
+                            )
+                        )
+                    );
             }
             MoveToInitial(quotas, onClose);
 
@@ -1035,55 +1084,59 @@ namespace System.Runtime.Serialization.Json
         {
             if (array == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentNullException("array")
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(new ArgumentNullException("array"));
             }
             if (offset < 0)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentOutOfRangeException(
-                        "offset",
-                        SR.GetString(SR.ValueMustBeNonNegative)
-                    )
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        new ArgumentOutOfRangeException(
+                            "offset",
+                            SR.GetString(SR.ValueMustBeNonNegative)
+                        )
+                    );
             }
             if (offset > array.Length)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentOutOfRangeException(
-                        "offset",
-                        SR.GetString(SR.OffsetExceedsBufferSize, array.Length)
-                    )
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        new ArgumentOutOfRangeException(
+                            "offset",
+                            SR.GetString(SR.OffsetExceedsBufferSize, array.Length)
+                        )
+                    );
             }
             if (count < 0)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentOutOfRangeException(
-                        "count",
-                        SR.GetString(SR.ValueMustBeNonNegative)
-                    )
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        new ArgumentOutOfRangeException(
+                            "count",
+                            SR.GetString(SR.ValueMustBeNonNegative)
+                        )
+                    );
             }
             if (count > array.Length - offset)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentOutOfRangeException(
-                        "count",
-                        SR.GetString(SR.SizeExceedsRemainingBufferSpace, array.Length - offset)
-                    )
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        new ArgumentOutOfRangeException(
+                            "count",
+                            SR.GetString(SR.SizeExceedsRemainingBufferSpace, array.Length - offset)
+                        )
+                    );
             }
         }
 
         protected override XmlSigningNodeWriter CreateSigningNodeWriter()
         {
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                new NotSupportedException(
-                    SR.GetString(SR.JsonMethodNotSupported, "CreateSigningNodeWriter")
-                )
-            );
+            throw DiagnosticUtility.ExceptionUtility
+                .ThrowHelperError(
+                    new NotSupportedException(
+                        SR.GetString(SR.JsonMethodNotSupported, "CreateSigningNodeWriter")
+                    )
+                );
         }
 
         static int BreakText(byte[] buffer, int offset, int length)
@@ -1165,9 +1218,12 @@ namespace System.Runtime.Serialization.Json
                 byte ch = buffer[offset];
                 if (ch < 0x20)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new FormatException(SR.GetString(SR.InvalidCharacterEncountered, (char)ch))
-                    );
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperError(
+                            new FormatException(
+                                SR.GetString(SR.InvalidCharacterEncountered, (char)ch)
+                            )
+                        );
                 }
                 else if (ch == (byte)'\\' || ch == 0xEF)
                 {
@@ -1206,9 +1262,10 @@ namespace System.Runtime.Serialization.Json
             }
             catch (OverflowException exception)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    XmlExceptionHelper.CreateConversionException(value, "char", exception)
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        XmlExceptionHelper.CreateConversionException(value, "char", exception)
+                    );
             }
         }
 
@@ -1220,21 +1277,24 @@ namespace System.Runtime.Serialization.Json
             }
             catch (ArgumentException exception)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    XmlExceptionHelper.CreateConversionException(value, "Int32", exception)
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        XmlExceptionHelper.CreateConversionException(value, "Int32", exception)
+                    );
             }
             catch (FormatException exception)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    XmlExceptionHelper.CreateConversionException(value, "Int32", exception)
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        XmlExceptionHelper.CreateConversionException(value, "Int32", exception)
+                    );
             }
             catch (OverflowException exception)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    XmlExceptionHelper.CreateConversionException(value, "Int32", exception)
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        XmlExceptionHelper.CreateConversionException(value, "Int32", exception)
+                    );
             }
         }
 
@@ -1343,10 +1403,8 @@ namespace System.Runtime.Serialization.Json
             } while (complexTextMode == JsonComplexTextMode.QuotedText);
 
             int actualOffset = BufferReader.Offset - 1; //  -1 to ignore " at end of local name
-            elementNode.LocalName.SetValue(
-                elementNode.NameOffset,
-                actualOffset - elementNode.NameOffset
-            );
+            elementNode.LocalName
+                .SetValue(elementNode.NameOffset, actualOffset - elementNode.NameOffset);
             elementNode.NameLength = actualOffset - elementNode.NameOffset;
             elementNode.Namespace.Uri.SetValue(elementNode.NameOffset, 0);
             elementNode.Prefix.SetValue(PrefixHandleType.Empty);
@@ -1518,10 +1576,13 @@ namespace System.Runtime.Serialization.Json
                             XmlExceptionHelper.ThrowXmlException(
                                 this,
                                 new XmlException(
-                                    System.Runtime.Serialization.SR.GetString(
-                                        System.Runtime.Serialization.SR.XmlInvalidLowSurrogate,
-                                        bufferAsString
-                                    )
+                                    System.Runtime
+                                        .Serialization
+                                        .SR
+                                        .GetString(
+                                            System.Runtime.Serialization.SR.XmlInvalidLowSurrogate,
+                                            bufferAsString
+                                        )
                                 )
                             );
                         }
@@ -1793,11 +1854,8 @@ namespace System.Runtime.Serialization.Json
                         }
                     } while (complexTextMode == JsonComplexTextMode.QuotedText);
 
-                    attribute.Value.SetValue(
-                        ValueHandleType.UTF8,
-                        offset,
-                        BufferReader.Offset - 1 - offset
-                    );
+                    attribute.Value
+                        .SetValue(ValueHandleType.UTF8, offset, BufferReader.Offset - 1 - offset);
 
                     SkipWhitespaceInBufferReader();
 
@@ -1843,11 +1901,8 @@ namespace System.Runtime.Serialization.Json
             attribute.LocalName.SetConstantValue(StringHandleConstStringType.Item);
             attribute.Namespace.Uri.SetValue(0, 0);
             attribute.Prefix.SetValue(PrefixHandleType.Empty);
-            attribute.Value.SetValue(
-                ValueHandleType.UTF8,
-                elementNode.NameOffset,
-                elementNode.NameLength
-            );
+            attribute.Value
+                .SetValue(ValueHandleType.UTF8, elementNode.NameOffset, elementNode.NameLength);
 
             elementNode.NameLength = 0;
             elementNode.Prefix.SetValue(PrefixHandleType.A);

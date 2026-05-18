@@ -58,17 +58,18 @@ namespace MonoCasTests.System.Web.UI.WebControls
             AspNetHostingPermissionLevel level
         )
         {
-            ConstructorInfo ci = this.Type.GetConstructor(
-                new Type[6]
-                {
-                    typeof(DateTime),
-                    typeof(bool),
-                    typeof(bool),
-                    typeof(bool),
-                    typeof(bool),
-                    typeof(string),
-                }
-            );
+            ConstructorInfo ci = this.Type
+                .GetConstructor(
+                    new Type[6]
+                    {
+                        typeof(DateTime),
+                        typeof(bool),
+                        typeof(bool),
+                        typeof(bool),
+                        typeof(bool),
+                        typeof(string),
+                    }
+                );
             Assert.IsNotNull(ci, ".ctor(DateTime,bool,bool,bool,bool,string)");
             return ci.Invoke(
                 new object[6] { DateTime.MinValue, false, false, false, false, String.Empty }

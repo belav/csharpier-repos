@@ -128,8 +128,8 @@ namespace Microsoft.CodeAnalysis.ImplementAbstractClass
             CancellationToken cancellationToken
         )
         {
-            var compilation = await _document
-                .Project.GetRequiredCompilationAsync(cancellationToken)
+            var compilation = await _document.Project
+                .GetRequiredCompilationAsync(cancellationToken)
                 .ConfigureAwait(false);
             var memberDefinitions = GenerateMembers(
                 compilation,
@@ -167,12 +167,8 @@ namespace Microsoft.CodeAnalysis.ImplementAbstractClass
                 .GetCodeGenerationInfoAsync(context, _options.FallbackOptions, cancellationToken)
                 .ConfigureAwait(false);
 
-            var updatedClassNode = info.Service.AddMembers(
-                classNodeToAddMembersTo,
-                memberDefinitions,
-                info,
-                cancellationToken
-            );
+            var updatedClassNode = info.Service
+                .AddMembers(classNodeToAddMembersTo, memberDefinitions, info, cancellationToken);
 
             var root = await _document
                 .GetRequiredSyntaxRootAsync(cancellationToken)

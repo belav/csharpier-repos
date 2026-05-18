@@ -146,11 +146,12 @@ public class ReliabilityFramework
         rf._logger.WriteToInstrumentationLog(null, LoggingLevels.StartupShutdown, "Started");
         foreach (string arg in args)
         {
-            rf._logger.WriteToInstrumentationLog(
-                null,
-                LoggingLevels.StartupShutdown,
-                String.Format("Argument: {0}", arg)
-            );
+            rf._logger
+                .WriteToInstrumentationLog(
+                    null,
+                    LoggingLevels.StartupShutdown,
+                    String.Format("Argument: {0}", arg)
+                );
             if (arg[0] == '-')
             {
                 if (String.Compare(arg.Substring(1), "replay", true) == 0)
@@ -205,11 +206,12 @@ public class ReliabilityFramework
         {
             okToContinue = false;
             Console.WriteLine("You must specify a config file!");
-            rf._logger.WriteToInstrumentationLog(
-                null,
-                LoggingLevels.StartupShutdown,
-                "No configuration file specified."
-            );
+            rf._logger
+                .WriteToInstrumentationLog(
+                    null,
+                    LoggingLevels.StartupShutdown,
+                    "No configuration file specified."
+                );
         }
 
         System.Console.WriteLine("Using config file: " + configFile);
@@ -228,11 +230,12 @@ public class ReliabilityFramework
             );
             Console.WriteLine(" -{0}:<seed>	-	Random Number seed for replays", sSeed);
             Console.WriteLine(" -unittest   -   Set when run via unit test harness");
-            rf._logger.WriteToInstrumentationLog(
-                null,
-                LoggingLevels.StartupShutdown,
-                "Not ok to continue."
-            );
+            rf._logger
+                .WriteToInstrumentationLog(
+                    null,
+                    LoggingLevels.StartupShutdown,
+                    "Not ok to continue."
+                );
 
             return 0;
         }
@@ -244,11 +247,12 @@ public class ReliabilityFramework
             {
                 rf._logger.WriteToInstrumentationLog(null, LoggingLevels.Tests, "Running tests...");
                 retVal = rf.RunReliabilityTests(configFile, doReplay);
-                rf._logger.WriteToInstrumentationLog(
-                    null,
-                    LoggingLevels.Tests,
-                    String.Format("Successfully executed tests, return val: {0}", retVal)
-                );
+                rf._logger
+                    .WriteToInstrumentationLog(
+                        null,
+                        LoggingLevels.Tests,
+                        String.Format("Successfully executed tests, return val: {0}", retVal)
+                    );
             }
             catch (OutOfMemoryException e)
             {
@@ -286,20 +290,22 @@ public class ReliabilityFramework
         }
         finally
         {
-            rf._logger.WriteToInstrumentationLog(
-                null,
-                LoggingLevels.StartupShutdown,
-                "Reliability framework is shutting down..."
-            );
+            rf._logger
+                .WriteToInstrumentationLog(
+                    null,
+                    LoggingLevels.StartupShutdown,
+                    "Reliability framework is shutting down..."
+                );
         }
 
         NoExitPoll();
 
-        rf._logger.WriteToInstrumentationLog(
-            null,
-            LoggingLevels.StartupShutdown,
-            String.Format("Shutdown w/ ret val of  {0}", retVal)
-        );
+        rf._logger
+            .WriteToInstrumentationLog(
+                null,
+                LoggingLevels.StartupShutdown,
+                String.Format("Shutdown w/ ret val of  {0}", retVal)
+            );
 
         GC.Collect(2);
         GC.WaitForPendingFinalizers();
@@ -517,10 +523,11 @@ public class ReliabilityFramework
 
                                 test.AssemblyLoadContextIndex =
                                     i % _curTestSet.NumAssemblyLoadContexts; // only used for roudn robin scheduling.
-                                Task.Factory.StartNew(() =>
-                                {
-                                    TestPreLoader(test, testSet.DiscoveryPaths);
-                                });
+                                Task.Factory
+                                    .StartNew(() =>
+                                    {
+                                        TestPreLoader(test, testSet.DiscoveryPaths);
+                                    });
                                 //                                TestPreLoaderDelegate loadTestDelegate = new TestPreLoaderDelegate(this.TestPreLoader);
                                 //                                loadTestDelegate.BeginInvoke(test, testSet.DiscoveryPaths, null, null);
                             }
@@ -1270,58 +1277,59 @@ public class ReliabilityFramework
             switch (daTest.TestStartMode)
             {
                 case TestStartModeEnum.ProcessLoader:
-                    Task.Factory.StartNew(() =>
-                    {
-                        string msg = String.Format(
-                            "==============================[tid: {0, 4}, running test: {1} STATUS: START, {2} tests running {3} threads ==============================",
-                            Thread.CurrentThread.ManagedThreadId,
-                            daTest.Assembly,
-                            _testsRunningCount,
-                            Process.GetCurrentProcess().Threads.Count
-                        );
-                        _logger.WriteToInstrumentationLog(
-                            _curTestSet,
-                            LoggingLevels.StartupShutdown,
-                            msg
-                        );
-
-                        try
+                    Task.Factory
+                        .StartNew(() =>
                         {
-                            object[] parameters = null;
-                            if (daTest.EntryPointMethod.GetParameters().Length == 1)
+                            string msg = String.Format(
+                                "==============================[tid: {0, 4}, running test: {1} STATUS: START, {2} tests running {3} threads ==============================",
+                                Thread.CurrentThread.ManagedThreadId,
+                                daTest.Assembly,
+                                _testsRunningCount,
+                                Process.GetCurrentProcess().Threads.Count
+                            );
+                            _logger.WriteToInstrumentationLog(
+                                _curTestSet,
+                                LoggingLevels.StartupShutdown,
+                                msg
+                            );
+
+                            try
                             {
-                                parameters = new object[]
+                                object[] parameters = null;
+                                if (daTest.EntryPointMethod.GetParameters().Length == 1)
                                 {
-                                    (daTest.Arguments == null)
-                                        ? new string[0]
-                                        : daTest.GetSplitArguments(),
-                                };
+                                    parameters = new object[]
+                                    {
+                                        (daTest.Arguments == null)
+                                            ? new string[0]
+                                            : daTest.GetSplitArguments(),
+                                    };
+                                }
+                                daTest.EntryPointMethod.Invoke(null, parameters);
                             }
-                            daTest.EntryPointMethod.Invoke(null, parameters);
-                        }
-                        catch (Exception e)
-                        {
-                            // crash on exceptions when running as a unit test.
-                            if (IsRunningAsUnitTest)
-                                Environment.FailFast("Test failed", e);
+                            catch (Exception e)
+                            {
+                                // crash on exceptions when running as a unit test.
+                                if (IsRunningAsUnitTest)
+                                    Environment.FailFast("Test failed", e);
 
-                            Console.WriteLine(e);
-                        }
-                        msg = String.Format(
-                            "==============================[tid: {0, 4}, running test: {1} STATUS: DONE, {2} tests running {3} threads ==============================",
-                            Thread.CurrentThread.ManagedThreadId,
-                            daTest.Assembly,
-                            _testsRunningCount,
-                            Process.GetCurrentProcess().Threads.Count
-                        );
-                        _logger.WriteToInstrumentationLog(
-                            _curTestSet,
-                            LoggingLevels.StartupShutdown,
-                            msg
-                        );
-                        Interlocked.Increment(ref _testsRanCount);
-                        SignalTestFinished(daTest);
-                    });
+                                Console.WriteLine(e);
+                            }
+                            msg = String.Format(
+                                "==============================[tid: {0, 4}, running test: {1} STATUS: DONE, {2} tests running {3} threads ==============================",
+                                Thread.CurrentThread.ManagedThreadId,
+                                daTest.Assembly,
+                                _testsRunningCount,
+                                Process.GetCurrentProcess().Threads.Count
+                            );
+                            _logger.WriteToInstrumentationLog(
+                                _curTestSet,
+                                LoggingLevels.StartupShutdown,
+                                msg
+                            );
+                            Interlocked.Increment(ref _testsRanCount);
+                            SignalTestFinished(daTest);
+                        });
                     break;
                 case TestStartModeEnum.AppDomainLoader:
                     Console.WriteLine("Appdomain mode is NOT supported for ProjectK");

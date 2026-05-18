@@ -153,12 +153,13 @@ namespace System.Data.Metadata.Edm
             KnownAssemblyEntry entry;
             bool shouldLoadReferences = false;
             if (
-                loadingData.KnownAssemblies.TryGetKnownAssembly(
-                    assembly,
-                    loadingData.ObjectItemAssemblyLoaderFactory,
-                    loadingData.EdmItemCollection,
-                    out entry
-                )
+                loadingData.KnownAssemblies
+                    .TryGetKnownAssembly(
+                        assembly,
+                        loadingData.ObjectItemAssemblyLoaderFactory,
+                        loadingData.EdmItemCollection,
+                        out entry
+                    )
             )
             {
                 shouldLoadReferences =
@@ -178,12 +179,13 @@ namespace System.Data.Metadata.Edm
             {
                 if (
                     entry == null
-                        && loadingData.KnownAssemblies.TryGetKnownAssembly(
-                            assembly,
-                            loadingData.ObjectItemAssemblyLoaderFactory,
-                            loadingData.EdmItemCollection,
-                            out entry
-                        )
+                        && loadingData.KnownAssemblies
+                            .TryGetKnownAssembly(
+                                assembly,
+                                loadingData.ObjectItemAssemblyLoaderFactory,
+                                loadingData.EdmItemCollection,
+                                out entry
+                            )
                     || entry != null
                 )
                 {
@@ -219,10 +221,11 @@ namespace System.Data.Metadata.Edm
         {
             foreach (var entry in assemblies)
             {
-                edmItemCollection.ConventionalOcCache.AddAssemblyToOcCacheFromAssemblyCache(
-                    entry.Key,
-                    new ImmutableAssemblyCacheEntry(entry.Value)
-                );
+                edmItemCollection.ConventionalOcCache
+                    .AddAssemblyToOcCacheFromAssemblyCache(
+                        entry.Key,
+                        new ImmutableAssemblyCacheEntry(entry.Value)
+                    );
             }
         }
 

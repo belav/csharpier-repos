@@ -471,10 +471,9 @@ namespace System.Workflow.Runtime
                         break;
 
                     default:
-                        System.Diagnostics.Debug.Assert(
-                            false,
-                            "Unknown performance counter operation."
-                        );
+                        System.Diagnostics
+                            .Debug
+                            .Assert(false, "Unknown performance counter operation.");
                         break;
                 }
             }

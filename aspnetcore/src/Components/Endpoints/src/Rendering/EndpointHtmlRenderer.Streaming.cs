@@ -221,9 +221,8 @@ internal partial class EndpointHtmlRenderer
         // We already started the response so we have no choice but to return a 200 with HTML and will
         // have to communicate the error information within that
         var env = httpContext.RequestServices.GetRequiredService<IWebHostEnvironment>();
-        var options = httpContext.RequestServices.GetRequiredService<
-            IOptions<RazorComponentsServiceOptions>
-        >();
+        var options = httpContext.RequestServices
+            .GetRequiredService<IOptions<RazorComponentsServiceOptions>>();
         var showDetailedErrors = env.IsDevelopment() || options.Value.DetailedErrors;
         var message = showDetailedErrors
             ? exception.ToString()
@@ -254,9 +253,10 @@ internal partial class EndpointHtmlRenderer
 
         writer.Write(">");
         writer.Write(
-            HtmlEncoder.Default.Encode(
-                OpaqueRedirection.CreateProtectedRedirectionUrl(httpContext, destinationUrl)
-            )
+            HtmlEncoder.Default
+                .Encode(
+                    OpaqueRedirection.CreateProtectedRedirectionUrl(httpContext, destinationUrl)
+                )
         );
         writer.Write("</template><blazor-ssr-end></blazor-ssr-end></blazor-ssr>");
     }

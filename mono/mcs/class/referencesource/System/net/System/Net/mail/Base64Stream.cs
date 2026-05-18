@@ -847,13 +847,9 @@ namespace System.Net
             {
                 for (; ; )
                 {
-                    IAsyncResult result = this.parent.BaseStream.BeginRead(
-                        this.buffer,
-                        this.offset,
-                        this.count,
-                        onRead,
-                        this
-                    );
+                    IAsyncResult result = this.parent
+                        .BaseStream
+                        .BeginRead(this.buffer, this.offset, this.count, onRead, this);
                     if (!result.CompletedSynchronously || CompleteRead(result))
                         break;
                 }
@@ -917,22 +913,25 @@ namespace System.Net
                 {
                     // do not append a space when writing from a stream since this means
                     // it's writing the email body
-                    this.written += this.parent.EncodeBytes(
-                        this.buffer,
-                        this.offset + this.written,
-                        this.count - this.written,
-                        false,
-                        false
-                    );
+                    this.written += this.parent
+                        .EncodeBytes(
+                            this.buffer,
+                            this.offset + this.written,
+                            this.count - this.written,
+                            false,
+                            false
+                        );
                     if (this.written < this.count)
                     {
-                        IAsyncResult result = this.parent.BaseStream.BeginWrite(
-                            this.parent.WriteState.Buffer,
-                            0,
-                            this.parent.WriteState.Length,
-                            onWrite,
-                            this
-                        );
+                        IAsyncResult result = this.parent
+                            .BaseStream
+                            .BeginWrite(
+                                this.parent.WriteState.Buffer,
+                                0,
+                                this.parent.WriteState.Length,
+                                onWrite,
+                                this
+                            );
                         if (!result.CompletedSynchronously)
                             break;
                         CompleteWrite(result);

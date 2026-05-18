@@ -464,9 +464,11 @@ namespace System.Web.UI.DataVisualization.Charting
                 }
 
                 // Get chart type interface
-                IChartType chartType = this.axis.ChartArea.Common.ChartTypeRegistry.GetChartType(
-                    series.ChartTypeName
-                );
+                IChartType chartType = this.axis
+                    .ChartArea
+                    .Common
+                    .ChartTypeRegistry
+                    .GetChartType(series.ChartTypeName);
                 if (chartType == null)
                 {
                     return false;
@@ -565,14 +567,15 @@ namespace System.Web.UI.DataVisualization.Charting
                         // Calculate interval and round scale
                         double minimum = axisScaleSegment.ScaleMinimum;
                         double maximum = axisScaleSegment.ScaleMaximum;
-                        axisScaleSegment.Interval = this.axis.EstimateNumberAxis(
-                            ref minimum,
-                            ref maximum,
-                            startFromZero,
-                            this.axis.prefferedNumberofIntervals,
-                            true,
-                            true
-                        );
+                        axisScaleSegment.Interval = this.axis
+                            .EstimateNumberAxis(
+                                ref minimum,
+                                ref maximum,
+                                startFromZero,
+                                this.axis.prefferedNumberofIntervals,
+                                true,
+                                true
+                            );
                         axisScaleSegment.ScaleMinimum = minimum;
                         axisScaleSegment.ScaleMaximum = maximum;
 
@@ -789,14 +792,15 @@ namespace System.Web.UI.DataVisualization.Charting
             // Calculate scale maximum and minimum
             double minimum = minYValue;
             double maximum = maxYValue;
-            this.axis.EstimateNumberAxis(
-                ref minimum,
-                ref maximum,
-                this.axis.IsStartedFromZero,
-                this.axis.prefferedNumberofIntervals,
-                true,
-                true
-            );
+            this.axis
+                .EstimateNumberAxis(
+                    ref minimum,
+                    ref maximum,
+                    this.axis.IsStartedFromZero,
+                    this.axis.prefferedNumberofIntervals,
+                    true,
+                    true
+                );
 
             // Make sure max/min Y values are not the same
             if (maxYValue == minYValue)
@@ -1029,9 +1033,11 @@ namespace System.Web.UI.DataVisualization.Charting
             {
                 // Get number of Y values to process
                 int maxYValueCount = 1;
-                IChartType chartType = this.axis.ChartArea.Common.ChartTypeRegistry.GetChartType(
-                    series.ChartTypeName
-                );
+                IChartType chartType = this.axis
+                    .ChartArea
+                    .Common
+                    .ChartTypeRegistry
+                    .GetChartType(series.ChartTypeName);
                 if (chartType != null)
                 {
                     if (chartType.ExtraYValuesConnectedToYAxis && chartType.YValuesPerPoint > 1)

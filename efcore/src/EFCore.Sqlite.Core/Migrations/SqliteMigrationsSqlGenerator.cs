@@ -134,10 +134,8 @@ public class SqliteMigrationsSqlGenerator : MigrationsSqlGenerator
                         (alterColumnOperation.Table, alterColumnOperation.Schema)
                     );
                     rebuild.OperationsToReplace.Add(alterColumnOperation);
-                    rebuild.AlterColumnsDeferred.Add(
-                        alterColumnOperation.Name,
-                        alterColumnOperation
-                    );
+                    rebuild.AlterColumnsDeferred
+                        .Add(alterColumnOperation.Name, alterColumnOperation);
 
                     operations.Add(alterColumnOperation);
 
@@ -152,11 +150,13 @@ public class SqliteMigrationsSqlGenerator : MigrationsSqlGenerator
                             out var rebuild
                         )
                         && (
-                            rebuild
-                                .AddColumnsDeferred.Keys.Intersect(createIndexOperation.Columns)
+                            rebuild.AddColumnsDeferred
+                                .Keys
+                                .Intersect(createIndexOperation.Columns)
                                 .Any()
-                            || rebuild
-                                .RenameColumnsDeferred.Keys.Intersect(createIndexOperation.Columns)
+                            || rebuild.RenameColumnsDeferred
+                                .Keys
+                                .Intersect(createIndexOperation.Columns)
                                 .Any()
                         )
                     )
@@ -177,9 +177,8 @@ public class SqliteMigrationsSqlGenerator : MigrationsSqlGenerator
                             ? model
                                 ?.GetRelationalModel()
                                 .FindTable(renameIndexOperation.Table, renameIndexOperation.Schema)
-                                ?.Indexes.FirstOrDefault(i =>
-                                    i.Name == renameIndexOperation.NewName
-                                )
+                                ?.Indexes
+                                .FirstOrDefault(i => i.Name == renameIndexOperation.NewName)
                             : null;
                     if (index != null)
                     {
@@ -237,10 +236,8 @@ public class SqliteMigrationsSqlGenerator : MigrationsSqlGenerator
                         {
                             rebuild.OperationsToReplace.Add(renameColumnOperation);
                             rebuild.DropColumnsDeferred.Add(renameColumnOperation.Name);
-                            rebuild.RenameColumnsDeferred.Add(
-                                renameColumnOperation.NewName,
-                                renameColumnOperation
-                            );
+                            rebuild.RenameColumnsDeferred
+                                .Add(renameColumnOperation.NewName, renameColumnOperation);
                         }
                     }
 
@@ -338,10 +335,8 @@ public class SqliteMigrationsSqlGenerator : MigrationsSqlGenerator
             {
                 // TODO: Consider warning once per table--list all operation types we're warning for
                 // TODO: Consider listing which operations required a rebuild
-                Dependencies.MigrationsLogger.TableRebuildPendingWarning(
-                    operationToWarnFor.GetType(),
-                    table.Name
-                );
+                Dependencies.MigrationsLogger
+                    .TableRebuildPendingWarning(operationToWarnFor.GetType(), table.Name);
             }
 
             foreach (var operationToReplace in rebuildContext.OperationsToReplace)
@@ -363,8 +358,8 @@ public class SqliteMigrationsSqlGenerator : MigrationsSqlGenerator
             }
 
             foreach (
-                var column in table
-                    .Columns.Where(c => c.Order.HasValue)
+                var column in table.Columns
+                    .Where(c => c.Order.HasValue)
                     .OrderBy(c => c.Order!.Value)
                     .Concat(table.Columns.Where(c => !c.Order.HasValue))
             )
@@ -380,10 +375,9 @@ public class SqliteMigrationsSqlGenerator : MigrationsSqlGenerator
                     ColumnType = column.StoreType,
                     IsNullable = column.IsNullable,
                     DefaultValue =
-                        rebuildContext.AddColumnsDeferred.TryGetValue(
-                            column.Name,
-                            out var originalOperation
-                        ) && !originalOperation.IsNullable
+                        rebuildContext.AddColumnsDeferred
+                            .TryGetValue(column.Name, out var originalOperation)
+                        && !originalOperation.IsNullable
                             ? originalOperation.DefaultValue
                             : defaultValue,
                     DefaultValueSql = column.DefaultValueSql,
@@ -406,16 +400,14 @@ public class SqliteMigrationsSqlGenerator : MigrationsSqlGenerator
                 var uniqueConstraint in table.UniqueConstraints.Where(c => !c.GetIsPrimaryKey())
             )
             {
-                createTableOperation.UniqueConstraints.Add(
-                    AddUniqueConstraintOperation.CreateFrom(uniqueConstraint)
-                );
+                createTableOperation.UniqueConstraints
+                    .Add(AddUniqueConstraintOperation.CreateFrom(uniqueConstraint));
             }
 
             foreach (var checkConstraint in table.CheckConstraints)
             {
-                createTableOperation.CheckConstraints.Add(
-                    AddCheckConstraintOperation.CreateFrom(checkConstraint)
-                );
+                createTableOperation.CheckConstraints
+                    .Add(AddCheckConstraintOperation.CreateFrom(checkConstraint));
             }
 
             createTableOperation.AddAnnotations(table.GetAnnotations());
@@ -461,10 +453,9 @@ public class SqliteMigrationsSqlGenerator : MigrationsSqlGenerator
                 intoBuilder.Append(Dependencies.SqlGenerationHelper.DelimitIdentifier(column.Name));
 
                 var defaultValue =
-                    rebuildContext.AlterColumnsDeferred.TryGetValue(
-                        column.Name,
-                        out var alterColumnOperation
-                    ) && alterColumnOperation is { IsNullable: false, OldColumn.IsNullable: true }
+                    rebuildContext.AlterColumnsDeferred
+                        .TryGetValue(column.Name, out var alterColumnOperation)
+                    && alterColumnOperation is { IsNullable: false, OldColumn.IsNullable: true }
                         ? alterColumnOperation.DefaultValue
                         : null;
                 if (defaultValue != null)
@@ -473,14 +464,13 @@ public class SqliteMigrationsSqlGenerator : MigrationsSqlGenerator
                 }
 
                 selectBuilder.Append(
-                    Dependencies.SqlGenerationHelper.DelimitIdentifier(
-                        rebuildContext.RenameColumnsDeferred.TryGetValue(
-                            column.Name,
-                            out var renameColumnOperation
+                    Dependencies.SqlGenerationHelper
+                        .DelimitIdentifier(
+                            rebuildContext.RenameColumnsDeferred
+                                .TryGetValue(column.Name, out var renameColumnOperation)
+                                ? renameColumnOperation.Name
+                                : column.Name
                         )
-                            ? renameColumnOperation.Name
-                            : column.Name
-                    )
                 );
 
                 if (defaultValue != null)
@@ -489,10 +479,8 @@ public class SqliteMigrationsSqlGenerator : MigrationsSqlGenerator
                         (
                             column.StoreType == null
                                 ? null
-                                : Dependencies.TypeMappingSource.FindMapping(
-                                    defaultValue.GetType(),
-                                    column.StoreType
-                                )
+                                : Dependencies.TypeMappingSource
+                                    .FindMapping(defaultValue.GetType(), column.StoreType)
                         ) ?? Dependencies.TypeMappingSource.GetMappingForValue(defaultValue);
 
                     selectBuilder
@@ -508,9 +496,8 @@ public class SqliteMigrationsSqlGenerator : MigrationsSqlGenerator
                     Sql = new StringBuilder()
                         .Append("INSERT INTO ")
                         .Append(
-                            Dependencies.SqlGenerationHelper.DelimitIdentifier(
-                                createTableOperation.Name
-                            )
+                            Dependencies.SqlGenerationHelper
+                                .DelimitIdentifier(createTableOperation.Name)
                         )
                         .Append(" (")
                         .Append(intoBuilder)
@@ -768,9 +755,8 @@ public class SqliteMigrationsSqlGenerator : MigrationsSqlGenerator
         // This handles the quirks of creating integer primary keys using autoincrement, not default rowid behavior.
         if (operation.PrimaryKey?.Columns.Length == 1)
         {
-            var columnOp = operation.Columns.FirstOrDefault(o =>
-                o.Name == operation.PrimaryKey.Columns[0]
-            );
+            var columnOp = operation.Columns
+                .FirstOrDefault(o => o.Name == operation.PrimaryKey.Columns[0]);
             if (columnOp != null)
             {
                 columnOp.AddAnnotation(SqliteAnnotationNames.InlinePrimaryKey, true);

@@ -265,8 +265,8 @@ namespace System.Xml.Xsl.Xslt
 #endif // !FEATURE_PAL
 
             CodeCompileUnit[] codeUnits = new CodeCompileUnit[scriptsForLang.Count];
-            CompilerParameters compilParams =
-                lastScript.compilerInfo.CreateDefaultCompilerParameters();
+            CompilerParameters compilParams = lastScript.compilerInfo
+                .CreateDefaultCompilerParameters();
 
             //
 
@@ -315,28 +315,30 @@ namespace System.Xml.Xsl.Xslt
                     // Put SecurityTransparentAttribute and SecurityRulesAttribute on the first CodeCompileUnit only
                     if (idx == 0)
                     {
-                        unit.AssemblyCustomAttributes.Add(
-                            new CodeAttributeDeclaration(
-                                "System.Security.SecurityTransparentAttribute"
-                            )
-                        );
+                        unit.AssemblyCustomAttributes
+                            .Add(
+                                new CodeAttributeDeclaration(
+                                    "System.Security.SecurityTransparentAttribute"
+                                )
+                            );
 
                         // We want the assemblies generated for scripts to stick to the old security model
-                        unit.AssemblyCustomAttributes.Add(
-                            new CodeAttributeDeclaration(
-                                new CodeTypeReference(
-                                    typeof(System.Security.SecurityRulesAttribute)
-                                ),
-                                new CodeAttributeArgument(
-                                    new CodeFieldReferenceExpression(
-                                        new CodeTypeReferenceExpression(
-                                            typeof(System.Security.SecurityRuleSet)
-                                        ),
-                                        "Level1"
+                        unit.AssemblyCustomAttributes
+                            .Add(
+                                new CodeAttributeDeclaration(
+                                    new CodeTypeReference(
+                                        typeof(System.Security.SecurityRulesAttribute)
+                                    ),
+                                    new CodeAttributeArgument(
+                                        new CodeFieldReferenceExpression(
+                                            new CodeTypeReferenceExpression(
+                                                typeof(System.Security.SecurityRuleSet)
+                                            ),
+                                            "Level1"
+                                        )
                                     )
                                 )
-                            )
-                        );
+                            );
                     }
                 }
 
@@ -397,13 +399,14 @@ namespace System.Xml.Xsl.Xslt
             {
                 // Compiler might have created temporary files
                 results = new CompilerResults(compilParams.TempFiles);
-                results.Errors.Add(
-                    compiler.CreateError(
-                        lastScript.EndLineInfo, /*[XT_041]*/
-                        Res.Xslt_ScriptCompileException,
-                        e.Message
-                    )
-                );
+                results.Errors
+                    .Add(
+                        compiler.CreateError(
+                            lastScript.EndLineInfo, /*[XT_041]*/
+                            Res.Xslt_ScriptCompileException,
+                            e.Message
+                        )
+                    );
             }
 
             if (!settings.CheckOnly)

@@ -755,9 +755,8 @@ namespace System.Activities
 
             if (options.CancellationToken.IsCancellationRequested)
             {
-                throw FxTrace.Exception.AsError(
-                    new OperationCanceledException(options.CancellationToken)
-                );
+                throw FxTrace.Exception
+                    .AsError(new OperationCanceledException(options.CancellationToken));
             }
 
             Activity activity = childActivity.Activity;
@@ -878,8 +877,7 @@ namespace System.Activities
 
                     for (int i = 0; i < activity.HandlerOf.RuntimeDelegateArguments.Count; i++)
                     {
-                        RuntimeDelegateArgument delegateArgument = activity
-                            .HandlerOf
+                        RuntimeDelegateArgument delegateArgument = activity.HandlerOf
                             .RuntimeDelegateArguments[i];
                         DelegateArgument boundArgument = delegateArgument.BoundArgument;
                         if (boundArgument != null)
@@ -1116,13 +1114,14 @@ namespace System.Activities
                     {
                         if (activity.HasBeenAssociatedWithAnInstance)
                         {
-                            throw FxTrace.Exception.AsError(
-                                new InvalidOperationException(
-                                    SR.RootActivityAlreadyAssociatedWithInstance(
-                                        activity.DisplayName
+                            throw FxTrace.Exception
+                                .AsError(
+                                    new InvalidOperationException(
+                                        SR.RootActivityAlreadyAssociatedWithInstance(
+                                            activity.DisplayName
+                                        )
                                     )
-                                )
-                            );
+                                );
                         }
 
                         activity.InitializeAsRoot(hostEnvironment);
@@ -1251,9 +1250,8 @@ namespace System.Activities
                     if (object.ReferenceEquals(currentActivity.Activity, popActivity))
                     {
                         ChildActivity completedParent = parentChain.Pop();
-                        completedParent.Activity.SetCached(
-                            isSkippingPrivateChildren: options.SkipPrivateChildren
-                        );
+                        completedParent.Activity
+                            .SetCached(isSkippingPrivateChildren: options.SkipPrivateChildren);
                     }
                     else
                     {

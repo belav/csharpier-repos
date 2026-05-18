@@ -76,11 +76,8 @@ namespace System.Web.DynamicData.ModelProviders
         {
             MetadataProperty generated;
             if (
-                property.MetadataProperties.TryGetValue(
-                    StoreGeneratedMetadata,
-                    false,
-                    out generated
-                )
+                property.MetadataProperties
+                    .TryGetValue(StoreGeneratedMetadata, false, out generated)
             )
             {
                 return "Identity" == (string)generated.Value

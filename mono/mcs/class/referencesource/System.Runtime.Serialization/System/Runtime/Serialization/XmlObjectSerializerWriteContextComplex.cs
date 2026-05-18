@@ -89,14 +89,18 @@ namespace System.Runtime.Serialization
             {
                 if (this.IsGetOnlyCollection && dataContract is SurrogateDataContract)
                 {
-                    throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidDataContractException(
-                            SR.GetString(
-                                SR.SurrogatesWithGetOnlyCollectionsNotSupportedSerDeser,
-                                DataContract.GetClrTypeFullName(dataContract.UnderlyingType)
+                    throw System.Runtime
+                        .Serialization
+                        .DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidDataContractException(
+                                SR.GetString(
+                                    SR.SurrogatesWithGetOnlyCollectionsNotSupportedSerDeser,
+                                    DataContract.GetClrTypeFullName(dataContract.UnderlyingType)
+                                )
                             )
-                        )
-                    );
+                        );
                 }
                 return dataContract;
             }
@@ -123,14 +127,18 @@ namespace System.Runtime.Serialization
             {
                 if (this.IsGetOnlyCollection && dataContract is SurrogateDataContract)
                 {
-                    throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidDataContractException(
-                            SR.GetString(
-                                SR.SurrogatesWithGetOnlyCollectionsNotSupportedSerDeser,
-                                DataContract.GetClrTypeFullName(dataContract.UnderlyingType)
+                    throw System.Runtime
+                        .Serialization
+                        .DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidDataContractException(
+                                SR.GetString(
+                                    SR.SurrogatesWithGetOnlyCollectionsNotSupportedSerDeser,
+                                    DataContract.GetClrTypeFullName(dataContract.UnderlyingType)
+                                )
                             )
-                        )
-                    );
+                        );
                 }
                 return dataContract;
             }
@@ -161,14 +169,18 @@ namespace System.Runtime.Serialization
             {
                 if (this.IsGetOnlyCollection && dataContract is SurrogateDataContract)
                 {
-                    throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidDataContractException(
-                            SR.GetString(
-                                SR.SurrogatesWithGetOnlyCollectionsNotSupportedSerDeser,
-                                DataContract.GetClrTypeFullName(dataContract.UnderlyingType)
+                    throw System.Runtime
+                        .Serialization
+                        .DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidDataContractException(
+                                SR.GetString(
+                                    SR.SurrogatesWithGetOnlyCollectionsNotSupportedSerDeser,
+                                    DataContract.GetClrTypeFullName(dataContract.UnderlyingType)
+                                )
                             )
-                        )
-                    );
+                        );
                 }
                 return dataContract;
             }
@@ -544,11 +556,15 @@ namespace System.Runtime.Serialization
                         memberType
                     );
                     if (!DataContract.IsTypeSerializable(memberType))
-                        throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new InvalidDataContractException(
-                                SR.GetString(SR.TypeNotSerializable, memberType)
-                            )
-                        );
+                        throw System.Runtime
+                            .Serialization
+                            .DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(
+                                new InvalidDataContractException(
+                                    SR.GetString(SR.TypeNotSerializable, memberType)
+                                )
+                            );
                     return;
                 }
             }
@@ -571,14 +587,18 @@ namespace System.Runtime.Serialization
                 );
                 if (this.IsGetOnlyCollection && surrogateType != type)
                 {
-                    throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidDataContractException(
-                            SR.GetString(
-                                SR.SurrogatesWithGetOnlyCollectionsNotSupportedSerDeser,
-                                DataContract.GetClrTypeFullName(type)
+                    throw System.Runtime
+                        .Serialization
+                        .DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidDataContractException(
+                                SR.GetString(
+                                    SR.SurrogatesWithGetOnlyCollectionsNotSupportedSerDeser,
+                                    DataContract.GetClrTypeFullName(type)
+                                )
                             )
-                        )
-                    );
+                        );
                 }
                 else
                 {

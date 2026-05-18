@@ -155,11 +155,12 @@ namespace System.Runtime
         {
             if (timeout < TimeSpan.Zero)
             {
-                throw Fx.Exception.ArgumentOutOfRange(
-                    argumentName,
-                    timeout,
-                    InternalSR.TimeoutMustBeNonNegative(argumentName, timeout)
-                );
+                throw Fx.Exception
+                    .ArgumentOutOfRange(
+                        argumentName,
+                        timeout,
+                        InternalSR.TimeoutMustBeNonNegative(argumentName, timeout)
+                    );
             }
         }
 
@@ -172,11 +173,12 @@ namespace System.Runtime
         {
             if (timeout <= TimeSpan.Zero)
             {
-                throw Fx.Exception.ArgumentOutOfRange(
-                    argumentName,
-                    timeout,
-                    InternalSR.TimeoutMustBePositive(argumentName, timeout)
-                );
+                throw Fx.Exception
+                    .ArgumentOutOfRange(
+                        argumentName,
+                        timeout,
+                        InternalSR.TimeoutMustBePositive(argumentName, timeout)
+                    );
             }
         }
 

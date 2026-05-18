@@ -227,10 +227,11 @@ namespace System.ServiceModel.Discovery.Udp
             }
             msg.Properties.Add("Via", LocalAddress.Uri);
             msg.Properties.Add("Encoder", message_encoder);
-            msg.Properties.Add(
-                RemoteEndpointMessageProperty.Name,
-                new RemoteEndpointMessageProperty(ip.Address.ToString(), ip.Port)
-            );
+            msg.Properties
+                .Add(
+                    RemoteEndpointMessageProperty.Name,
+                    new RemoteEndpointMessageProperty(ip.Address.ToString(), ip.Port)
+                );
 
             Logger.LogMessage(
                 MessageLogSourceKind.TransportReceive,
@@ -313,7 +314,8 @@ namespace System.ServiceModel.Discovery.Udp
                     .Any(nic =>
                         nic.SupportsMulticast
                         && nic.GetIPProperties()
-                            .MulticastAddresses.Any(mca => mca.Address.Equals(ip))
+                            .MulticastAddresses
+                            .Any(mca => mca.Address.Equals(ip))
                     );
                 int port = LocalAddress.Uri.Port;
                 if (isMulticast)
@@ -331,11 +333,12 @@ namespace System.ServiceModel.Discovery.Udp
             // FIXME: apply UdpTransportSetting here.
             var settings = binding_element.TransportSettings;
             if (settings.MulticastInterfaceId != null)
-                client.Client.SetSocketOption(
-                    SocketOptionLevel.Udp,
-                    SocketOptionName.MulticastInterface,
-                    settings.MulticastInterfaceId
-                );
+                client.Client
+                    .SetSocketOption(
+                        SocketOptionLevel.Udp,
+                        SocketOptionName.MulticastInterface,
+                        settings.MulticastInterfaceId
+                    );
         }
 
         Func<TimeSpan, Message> receive_delegate;

@@ -362,10 +362,11 @@ namespace nwind
             {
                 return false;
             }
-            return System.Collections.Generic.EqualityComparer<int>.Default.Equals(
-                this._categoryID,
-                value._categoryID
-            );
+            return System.Collections
+                .Generic
+                .EqualityComparer<int>
+                .Default
+                .Equals(this._categoryID, value._categoryID);
         }
 
         #region Attachment handlers
@@ -816,10 +817,11 @@ namespace nwind
             {
                 return false;
             }
-            return System.Collections.Generic.EqualityComparer<string>.Default.Equals(
-                this._customerID,
-                value._customerID
-            );
+            return System.Collections
+                .Generic
+                .EqualityComparer<string>
+                .Default
+                .Equals(this._customerID, value._customerID);
         }
 
         #region Attachment handlers
@@ -996,8 +998,8 @@ namespace nwind
                 {
                     if ((this._customerDemographic.Entity != null))
                     {
-                        CustomerDemographic previousCustomerDemographic =
-                            this._customerDemographic.Entity;
+                        CustomerDemographic previousCustomerDemographic = this._customerDemographic
+                            .Entity;
                         this._customerDemographic.Entity = null;
                         previousCustomerDemographic.CustomerCustomerDemo.Remove(this);
                     }
@@ -1073,14 +1075,16 @@ namespace nwind
                 return false;
             }
             return (
-                System.Collections.Generic.EqualityComparer<string>.Default.Equals(
-                    this._customerID,
-                    value._customerID
-                )
-                && System.Collections.Generic.EqualityComparer<string>.Default.Equals(
-                    this._customerTypeID,
-                    value._customerTypeID
-                )
+                System.Collections
+                    .Generic
+                    .EqualityComparer<string>
+                    .Default
+                    .Equals(this._customerID, value._customerID)
+                && System.Collections
+                    .Generic
+                    .EqualityComparer<string>
+                    .Default
+                    .Equals(this._customerTypeID, value._customerTypeID)
             );
         }
     }
@@ -1237,10 +1241,11 @@ namespace nwind
             {
                 return false;
             }
-            return System.Collections.Generic.EqualityComparer<string>.Default.Equals(
-                this._customerTypeID,
-                value._customerTypeID
-            );
+            return System.Collections
+                .Generic
+                .EqualityComparer<string>
+                .Default
+                .Equals(this._customerTypeID, value._customerTypeID);
         }
 
         #region Attachment handlers
@@ -1945,10 +1950,11 @@ namespace nwind
             {
                 return false;
             }
-            return System.Collections.Generic.EqualityComparer<int>.Default.Equals(
-                this._employeeID,
-                value._employeeID
-            );
+            return System.Collections
+                .Generic
+                .EqualityComparer<int>
+                .Default
+                .Equals(this._employeeID, value._employeeID);
         }
 
         #region Attachment handlers
@@ -2210,14 +2216,16 @@ namespace nwind
                 return false;
             }
             return (
-                System.Collections.Generic.EqualityComparer<int>.Default.Equals(
-                    this._employeeID,
-                    value._employeeID
-                )
-                && System.Collections.Generic.EqualityComparer<string>.Default.Equals(
-                    this._territoryID,
-                    value._territoryID
-                )
+                System.Collections
+                    .Generic
+                    .EqualityComparer<int>
+                    .Default
+                    .Equals(this._employeeID, value._employeeID)
+                && System.Collections
+                    .Generic
+                    .EqualityComparer<string>
+                    .Default
+                    .Equals(this._territoryID, value._territoryID)
             );
         }
     }
@@ -2845,10 +2853,11 @@ namespace nwind
             {
                 return false;
             }
-            return System.Collections.Generic.EqualityComparer<int>.Default.Equals(
-                this._orderID,
-                value._orderID
-            );
+            return System.Collections
+                .Generic
+                .EqualityComparer<int>
+                .Default
+                .Equals(this._orderID, value._orderID);
         }
 
         #region Attachment handlers
@@ -3174,14 +3183,16 @@ namespace nwind
                 return false;
             }
             return (
-                System.Collections.Generic.EqualityComparer<int>.Default.Equals(
-                    this._orderID,
-                    value._orderID
-                )
-                && System.Collections.Generic.EqualityComparer<int>.Default.Equals(
-                    this._productID,
-                    value._productID
-                )
+                System.Collections
+                    .Generic
+                    .EqualityComparer<int>
+                    .Default
+                    .Equals(this._orderID, value._orderID)
+                && System.Collections
+                    .Generic
+                    .EqualityComparer<int>
+                    .Default
+                    .Equals(this._productID, value._productID)
             );
         }
     }
@@ -3654,10 +3665,11 @@ namespace nwind
             {
                 return false;
             }
-            return System.Collections.Generic.EqualityComparer<int>.Default.Equals(
-                this._productID,
-                value._productID
-            );
+            return System.Collections
+                .Generic
+                .EqualityComparer<int>
+                .Default
+                .Equals(this._productID, value._productID);
         }
 
         #region Attachment handlers
@@ -3826,10 +3838,11 @@ namespace nwind
             {
                 return false;
             }
-            return System.Collections.Generic.EqualityComparer<int>.Default.Equals(
-                this._regionID,
-                value._regionID
-            );
+            return System.Collections
+                .Generic
+                .EqualityComparer<int>
+                .Default
+                .Equals(this._regionID, value._regionID);
         }
 
         #region Attachment handlers
@@ -4027,10 +4040,11 @@ namespace nwind
             {
                 return false;
             }
-            return System.Collections.Generic.EqualityComparer<int>.Default.Equals(
-                this._shipperID,
-                value._shipperID
-            );
+            return System.Collections
+                .Generic
+                .EqualityComparer<int>
+                .Default
+                .Equals(this._shipperID, value._shipperID);
         }
 
         #region Attachment handlers
@@ -4489,10 +4503,11 @@ namespace nwind
             {
                 return false;
             }
-            return System.Collections.Generic.EqualityComparer<int>.Default.Equals(
-                this._supplierID,
-                value._supplierID
-            );
+            return System.Collections
+                .Generic
+                .EqualityComparer<int>
+                .Default
+                .Equals(this._supplierID, value._supplierID);
         }
 
         #region Attachment handlers
@@ -4736,10 +4751,11 @@ namespace nwind
             {
                 return false;
             }
-            return System.Collections.Generic.EqualityComparer<string>.Default.Equals(
-                this._territoryID,
-                value._territoryID
-            );
+            return System.Collections
+                .Generic
+                .EqualityComparer<string>
+                .Default
+                .Equals(this._territoryID, value._territoryID);
         }
 
         #region Attachment handlers

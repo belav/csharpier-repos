@@ -44,9 +44,9 @@ namespace Microsoft.CodeAnalysis.GenerateConstructorFromMembers
                 // Otherwise, just generate a normal constructor that assigns any provided
                 // parameters into fields.
                 var project = _document.Project;
-                var languageServices = project.Solution.Services.GetLanguageServices(
-                    _state.ContainingType.Language
-                );
+                var languageServices = project.Solution
+                    .Services
+                    .GetLanguageServices(_state.ContainingType.Language);
 
                 var semanticModel = await _document
                     .GetRequiredSemanticModelAsync(cancellationToken)
@@ -57,8 +57,8 @@ namespace Microsoft.CodeAnalysis.GenerateConstructorFromMembers
 
                 Contract.ThrowIfNull(_state.DelegatedConstructor);
                 var thisConstructorArguments = factory.CreateArguments(
-                    _state
-                        .Parameters.Take(_state.DelegatedConstructor.Parameters.Length)
+                    _state.Parameters
+                        .Take(_state.DelegatedConstructor.Parameters.Length)
                         .ToImmutableArray()
                 );
 
@@ -143,9 +143,8 @@ namespace Microsoft.CodeAnalysis.GenerateConstructorFromMembers
             {
                 get
                 {
-                    var parameters = _state.Parameters.Select(p =>
-                        _service.ToDisplayString(p, SimpleFormat)
-                    );
+                    var parameters = _state.Parameters
+                        .Select(p => _service.ToDisplayString(p, SimpleFormat));
                     var parameterString = string.Join(", ", parameters);
 
                     return string.Format(

@@ -23,11 +23,12 @@ namespace System.Activities.DurableInstancing
                     result = new GZipObjectSerializer();
                     break;
                 default:
-                    throw FxTrace.Exception.AsError(
-                        new InvalidOperationException(
-                            SR.UnknownCompressionOption(instanceEncodingOption)
-                        )
-                    );
+                    throw FxTrace.Exception
+                        .AsError(
+                            new InvalidOperationException(
+                                SR.UnknownCompressionOption(instanceEncodingOption)
+                            )
+                        );
             }
 
             return result;

@@ -139,8 +139,9 @@ namespace Microsoft.CodeAnalysis.SimplifyInterpolation
                         formatString = value;
 
                         unnecessarySpans.AddRange(
-                            invocation
-                                .Syntax.Span.Subtract(
+                            invocation.Syntax
+                                .Span
+                                .Subtract(
                                     GetPreservedInterpolationExpressionSyntax(instance).FullSpan
                                 )
                                 .Subtract(
@@ -171,9 +172,9 @@ namespace Microsoft.CodeAnalysis.SimplifyInterpolation
                     formatString = "";
 
                     unnecessarySpans.AddRange(
-                        invocation.Syntax.Span.Subtract(
-                            GetPreservedInterpolationExpressionSyntax(instance).FullSpan
-                        )
+                        invocation.Syntax
+                            .Span
+                            .Subtract(GetPreservedInterpolationExpressionSyntax(instance).FullSpan)
                     );
                     return;
                 }
@@ -307,8 +308,9 @@ namespace Microsoft.CodeAnalysis.SimplifyInterpolation
                                 negate = targetName == nameof(string.PadRight);
 
                                 unnecessarySpans.AddRange(
-                                    invocation
-                                        .Syntax.Span.Subtract(
+                                    invocation.Syntax
+                                        .Span
+                                        .Subtract(
                                             GetPreservedInterpolationExpressionSyntax(
                                                 instance
                                             ).FullSpan

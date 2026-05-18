@@ -12,8 +12,8 @@ public class UnrollEqualsStartsWith
     [Fact]
     public static int TestEntryPoint()
     {
-        var testTypes = typeof(UnrollEqualsStartsWith)
-            .Assembly.GetTypes()
+        var testTypes = typeof(UnrollEqualsStartsWith).Assembly
+            .GetTypes()
             .Where(t => t.Name.StartsWith("Tests_len"))
             .ToArray();
 

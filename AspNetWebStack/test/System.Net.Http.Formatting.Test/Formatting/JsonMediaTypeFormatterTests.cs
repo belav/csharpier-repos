@@ -68,13 +68,14 @@ namespace System.Net.Http.Formatting
             get
             {
                 // Include neither ISerializable data set nor unsigned longs
-                return CommonUnitTestDataSets.ValueAndRefTypeTestDataCollection.Except(
-                    new TestData[]
-                    {
-                        CommonUnitTestDataSets.Ulongs,
-                        CommonUnitTestDataSets.ISerializableTypes,
-                    }
-                );
+                return CommonUnitTestDataSets.ValueAndRefTypeTestDataCollection
+                    .Except(
+                        new TestData[]
+                        {
+                            CommonUnitTestDataSets.Ulongs,
+                            CommonUnitTestDataSets.ISerializableTypes,
+                        }
+                    );
             }
         }
 
@@ -129,26 +130,28 @@ namespace System.Net.Http.Formatting
         [Fact]
         public void Indent_RoundTrips()
         {
-            Assert.Reflection.BooleanProperty(
-                new XmlMediaTypeFormatter(),
-                c => c.Indent,
-                expectedDefaultValue: false
-            );
+            Assert.Reflection
+                .BooleanProperty(
+                    new XmlMediaTypeFormatter(),
+                    c => c.Indent,
+                    expectedDefaultValue: false
+                );
         }
 
         [Fact]
         public void MaxDepth_RoundTrips()
         {
-            Assert.Reflection.IntegerProperty(
-                new JsonMediaTypeFormatter(),
-                c => c.MaxDepth,
-                expectedDefaultValue: 256,
-                minLegalValue: 1,
-                illegalLowerValue: 0,
-                maxLegalValue: null,
-                illegalUpperValue: null,
-                roundTripTestValue: 256
-            );
+            Assert.Reflection
+                .IntegerProperty(
+                    new JsonMediaTypeFormatter(),
+                    c => c.MaxDepth,
+                    expectedDefaultValue: 256,
+                    minLegalValue: 1,
+                    illegalLowerValue: 0,
+                    maxLegalValue: null,
+                    illegalUpperValue: null,
+                    roundTripTestValue: 256
+                );
         }
 
         [Theory]
@@ -440,9 +443,10 @@ namespace System.Net.Http.Formatting
 
             JToken after =
                 (
-                    await Assert.Task.SucceedsWithResultAsync<object>(
-                        formatter.ReadFromStreamAsync(typeof(JToken), memStream, null, null)
-                    )
+                    await Assert.Task
+                        .SucceedsWithResultAsync<object>(
+                            formatter.ReadFromStreamAsync(typeof(JToken), memStream, null, null)
+                        )
                 ) as JToken;
             Assert.NotNull(after);
             string afterMessage = after.ToObject<string>();
@@ -667,15 +671,16 @@ namespace System.Net.Http.Formatting
             };
             MemoryStream memoryStream = new MemoryStream();
             HttpContent content = new StringContent(String.Empty);
-            await Assert.Task.SucceedsAsync(
-                formatter.WriteToStreamAsync(
-                    typeof(SampleType),
-                    new SampleType(),
-                    memoryStream,
-                    content,
-                    transportContext: null
-                )
-            );
+            await Assert.Task
+                .SucceedsAsync(
+                    formatter.WriteToStreamAsync(
+                        typeof(SampleType),
+                        new SampleType(),
+                        memoryStream,
+                        content,
+                        transportContext: null
+                    )
+                );
             memoryStream.Position = 0;
             string serializedString = new StreamReader(memoryStream).ReadToEnd();
             //Assert.True(serializedString.Contains("DataContractSampleType"),
@@ -696,15 +701,16 @@ namespace System.Net.Http.Formatting
             };
             MemoryStream memoryStream = new MemoryStream();
             HttpContent content = new StringContent(String.Empty);
-            await Assert.Task.SucceedsAsync(
-                formatter.WriteToStreamAsync(
-                    typeof(SampleType),
-                    new SampleType(),
-                    memoryStream,
-                    content,
-                    transportContext: null
-                )
-            );
+            await Assert.Task
+                .SucceedsAsync(
+                    formatter.WriteToStreamAsync(
+                        typeof(SampleType),
+                        new SampleType(),
+                        memoryStream,
+                        content,
+                        transportContext: null
+                    )
+                );
             memoryStream.Position = 0;
             string serializedString = new StreamReader(memoryStream).ReadToEnd();
             Assert.True(
@@ -724,15 +730,16 @@ namespace System.Net.Http.Formatting
             };
             MemoryStream memoryStream = new MemoryStream();
             HttpContent content = new StringContent(String.Empty);
-            await Assert.Task.SucceedsAsync(
-                formatter.WriteToStreamAsync(
-                    type,
-                    null,
-                    memoryStream,
-                    content,
-                    transportContext: null
-                )
-            );
+            await Assert.Task
+                .SucceedsAsync(
+                    formatter.WriteToStreamAsync(
+                        type,
+                        null,
+                        memoryStream,
+                        content,
+                        transportContext: null
+                    )
+                );
             memoryStream.Position = 0;
             string serializedString = new StreamReader(memoryStream).ReadToEnd();
             Assert.True(
@@ -749,9 +756,10 @@ namespace System.Net.Http.Formatting
             JToken before = new JValue(beforeMessage);
             MemoryStream memStream = new MemoryStream();
 
-            await Assert.Task.SucceedsAsync(
-                formatter.WriteToStreamAsync(typeof(JToken), before, memStream, null, null)
-            );
+            await Assert.Task
+                .SucceedsAsync(
+                    formatter.WriteToStreamAsync(typeof(JToken), before, memStream, null, null)
+                );
             memStream.Position = 0;
             JToken after = JToken.Load(new JsonTextReader(new StreamReader(memStream)));
             string afterMessage = after.ToObject<string>();
@@ -902,11 +910,12 @@ namespace System.Net.Http.Formatting
                 return false;
             }
 
-            return !Assert.Http.IsKnownUnserializable(
-                type,
-                obj,
-                (t) => typeof(INotJsonSerializable).IsAssignableFrom(t)
-            );
+            return !Assert.Http
+                .IsKnownUnserializable(
+                    type,
+                    obj,
+                    (t) => typeof(INotJsonSerializable).IsAssignableFrom(t)
+                );
         }
     }
 }

@@ -133,11 +133,8 @@ namespace Mono.CodeContracts.Static.DataFlowAnalysis
             AState existingState;
             if (this.JoinState.TryGetValue(edge.Value, out existingState))
             {
-                bool widen = this.widen_strategy.WantToWiden(
-                    edge.Key,
-                    edge.Value,
-                    IsBackEdge(edge.Key, edge.Value)
-                );
+                bool widen = this.widen_strategy
+                    .WantToWiden(edge.Key, edge.Value, IsBackEdge(edge.Key, edge.Value));
                 AState joinedState;
                 bool result = Join(edge, state, existingState, out joinedState, widen);
                 if (result)

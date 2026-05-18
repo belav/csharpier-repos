@@ -118,12 +118,15 @@ namespace System.ServiceModel.Discovery.VersionApril2005
             Fx.Assert(response != null, "The response message cannot be null.");
             if (response.ProbeMatches != null)
             {
-                this.responseReceiver.ProbeMatchOperation(
-                    OperationContext.Current.IncomingMessageHeaders.RelatesTo,
-                    DiscoveryUtility.ToDiscoveryMessageSequenceOrNull(response.MessageSequence),
-                    DiscoveryUtility.ToEndpointDiscoveryMetadataCollection(response.ProbeMatches),
-                    false
-                );
+                this.responseReceiver
+                    .ProbeMatchOperation(
+                        OperationContext.Current.IncomingMessageHeaders.RelatesTo,
+                        DiscoveryUtility.ToDiscoveryMessageSequenceOrNull(response.MessageSequence),
+                        DiscoveryUtility.ToEndpointDiscoveryMetadataCollection(
+                            response.ProbeMatches
+                        ),
+                        false
+                    );
             }
             return new CompletedAsyncResult(callback, state);
         }
@@ -142,11 +145,12 @@ namespace System.ServiceModel.Discovery.VersionApril2005
             Fx.Assert(response != null, "The response message cannot be null.");
             if ((response.ResolveMatches != null) && (response.ResolveMatches.ResolveMatch != null))
             {
-                this.responseReceiver.ResolveMatchOperation(
-                    OperationContext.Current.IncomingMessageHeaders.RelatesTo,
-                    DiscoveryUtility.ToDiscoveryMessageSequenceOrNull(response.MessageSequence),
-                    response.ResolveMatches.ResolveMatch.ToEndpointDiscoveryMetadata()
-                );
+                this.responseReceiver
+                    .ResolveMatchOperation(
+                        OperationContext.Current.IncomingMessageHeaders.RelatesTo,
+                        DiscoveryUtility.ToDiscoveryMessageSequenceOrNull(response.MessageSequence),
+                        response.ResolveMatches.ResolveMatch.ToEndpointDiscoveryMetadata()
+                    );
             }
             return new CompletedAsyncResult(callback, state);
         }
@@ -165,11 +169,12 @@ namespace System.ServiceModel.Discovery.VersionApril2005
             Fx.Assert(message != null, "The message cannot be null.");
             if ((message.MessageSequence != null) && (message.Hello != null))
             {
-                this.responseReceiver.HelloOperation(
-                    OperationContext.Current.IncomingMessageHeaders.RelatesTo,
-                    message.MessageSequence.ToDiscoveryMessageSequence(),
-                    message.Hello.ToEndpointDiscoveryMetadata()
-                );
+                this.responseReceiver
+                    .HelloOperation(
+                        OperationContext.Current.IncomingMessageHeaders.RelatesTo,
+                        message.MessageSequence.ToDiscoveryMessageSequence(),
+                        message.Hello.ToEndpointDiscoveryMetadata()
+                    );
             }
             else
             {

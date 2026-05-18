@@ -62,9 +62,8 @@ namespace System.ServiceModel.Channels
         )
         {
             if (serializer == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentNullException("serializer")
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(new ArgumentNullException("serializer"));
             return CreateFault(code, reason, detail, serializer, actor, actor);
         }
 
@@ -78,30 +77,25 @@ namespace System.ServiceModel.Channels
         )
         {
             if (code == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentNullException("code")
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(new ArgumentNullException("code"));
             if (reason == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentNullException("reason")
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(new ArgumentNullException("reason"));
             if (actor == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentNullException("actor")
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(new ArgumentNullException("actor"));
             if (node == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentNullException("node")
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(new ArgumentNullException("node"));
             return new XmlObjectSerializerFault(code, reason, detail, serializer, actor, node);
         }
 
         public static MessageFault CreateFault(Message message, int maxBufferSize)
         {
             if (message == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentNullException("message")
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(new ArgumentNullException("message"));
             XmlDictionaryReader reader = message.GetReaderAtBodyContents();
             using (reader)
             {
@@ -136,21 +130,33 @@ namespace System.ServiceModel.Channels
                 }
                 catch (InvalidOperationException e)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new CommunicationException(SR.GetString(SR.SFxErrorDeserializingFault), e)
-                    );
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperError(
+                            new CommunicationException(
+                                SR.GetString(SR.SFxErrorDeserializingFault),
+                                e
+                            )
+                        );
                 }
                 catch (FormatException e)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new CommunicationException(SR.GetString(SR.SFxErrorDeserializingFault), e)
-                    );
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperError(
+                            new CommunicationException(
+                                SR.GetString(SR.SFxErrorDeserializingFault),
+                                e
+                            )
+                        );
                 }
                 catch (XmlException e)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new CommunicationException(SR.GetString(SR.SFxErrorDeserializingFault), e)
-                    );
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperError(
+                            new CommunicationException(
+                                SR.GetString(SR.SFxErrorDeserializingFault),
+                                e
+                            )
+                        );
                 }
             }
         }
@@ -239,18 +245,18 @@ namespace System.ServiceModel.Channels
         public T GetDetail<T>(XmlObjectSerializer serializer)
         {
             if (serializer == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentNullException("serializer")
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(new ArgumentNullException("serializer"));
             XmlDictionaryReader reader = GetReaderAtDetailContents();
             T value = (T)serializer.ReadObject(reader);
             if (!reader.EOF)
             {
                 reader.MoveToContent();
                 if (reader.NodeType != XmlNodeType.EndElement && !reader.EOF)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new FormatException(SR.GetString(SR.ExtraContentIsPresentInFaultDetail))
-                    );
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperError(
+                            new FormatException(SR.GetString(SR.ExtraContentIsPresentInFaultDetail))
+                        );
             }
             return value;
         }
@@ -258,9 +264,10 @@ namespace System.ServiceModel.Channels
         public XmlDictionaryReader GetReaderAtDetailContents()
         {
             if (!HasDetail)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(SR.GetString(SR.FaultDoesNotHaveAnyDetail))
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(SR.GetString(SR.FaultDoesNotHaveAnyDetail))
+                    );
             return OnGetReaderAtDetailContents();
         }
 
@@ -389,11 +396,12 @@ namespace System.ServiceModel.Channels
             }
             else
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(
-                        SR.GetString(SR.EnvelopeVersionUnknown, version.ToString())
-                    )
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(SR.EnvelopeVersionUnknown, version.ToString())
+                        )
+                    );
             }
         }
 
@@ -779,9 +787,10 @@ namespace System.ServiceModel.Channels
             List<FaultReasonText> translations = new List<FaultReasonText>();
             if (reader.IsEmptyElement)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new FormatException(SR.GetString(SR.AtLeastOneFaultReasonMustBeSpecified))
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        new FormatException(SR.GetString(SR.AtLeastOneFaultReasonMustBeSpecified))
+                    );
             }
             else
             {

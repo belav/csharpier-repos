@@ -114,8 +114,8 @@ namespace Microsoft.CodeAnalysis.CommentSelection
                     return true;
                 }
 
-                var document =
-                    subjectBuffer.CurrentSnapshot.GetOpenDocumentInCurrentContextWithChanges();
+                var document = subjectBuffer.CurrentSnapshot
+                    .GetOpenDocumentInCurrentContextWithChanges();
                 if (document == null)
                 {
                     return true;
@@ -173,16 +173,17 @@ namespace Microsoft.CodeAnalysis.CommentSelection
             if (edits.TrackingSpans.Any())
             {
                 // Create tracking spans to track the text changes.
-                var trackingSpans = edits.TrackingSpans.SelectAsArray(textSpan =>
-                    (
-                        originalSpan: textSpan,
-                        trackingSpan: CreateTrackingSpan(
-                            edits.ResultOperation,
-                            originalSnapshot,
-                            textSpan.TrackingTextSpan
+                var trackingSpans = edits.TrackingSpans
+                    .SelectAsArray(textSpan =>
+                        (
+                            originalSpan: textSpan,
+                            trackingSpan: CreateTrackingSpan(
+                                edits.ResultOperation,
+                                originalSnapshot,
+                                textSpan.TrackingTextSpan
+                            )
                         )
-                    )
-                );
+                    );
 
                 // Convert the tracking spans into snapshot spans for formatting and selection.
                 var trackingSnapshotSpans = trackingSpans.Select(s =>

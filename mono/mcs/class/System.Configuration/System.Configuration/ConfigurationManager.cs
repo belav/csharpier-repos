@@ -101,8 +101,7 @@ namespace System.Configuration
                 case ConfigurationUserLevel.None:
                     if (exePath == null || exePath.Length == 0)
                     {
-                        map.ExeConfigFilename = AppDomain
-                            .CurrentDomain
+                        map.ExeConfigFilename = AppDomain.CurrentDomain
                             .SetupInformation
                             .ConfigurationFile;
                     }

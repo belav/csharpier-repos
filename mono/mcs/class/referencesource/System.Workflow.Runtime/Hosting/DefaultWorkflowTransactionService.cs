@@ -60,19 +60,20 @@ namespace System.Workflow.Runtime.Hosting
 
         protected internal override void Start()
         {
-            WorkflowTrace.Host.TraceEvent(
-                TraceEventType.Information,
-                0,
-                "DefaultWorkflowCommitWorkBatchService: Starting"
-            );
+            WorkflowTrace.Host
+                .TraceEvent(
+                    TraceEventType.Information,
+                    0,
+                    "DefaultWorkflowCommitWorkBatchService: Starting"
+                );
 
             //
             // If we didn't find a local value for enable retries
             // check in the common section
             if ((!_ignoreCommonEnableRetries) && (null != base.Runtime))
             {
-                NameValueConfigurationCollection commonConfigurationParameters =
-                    base.Runtime.CommonParameters;
+                NameValueConfigurationCollection commonConfigurationParameters = base.Runtime
+                    .CommonParameters;
                 if (commonConfigurationParameters != null)
                 {
                     // Then scan for connection string in the common configuration parameters section
@@ -94,11 +95,12 @@ namespace System.Workflow.Runtime.Hosting
 
         protected override void OnStopped()
         {
-            WorkflowTrace.Host.TraceEvent(
-                TraceEventType.Information,
-                0,
-                "DefaultWorkflowCommitWorkBatchService: Stopping"
-            );
+            WorkflowTrace.Host
+                .TraceEvent(
+                    TraceEventType.Information,
+                    0,
+                    "DefaultWorkflowCommitWorkBatchService: Stopping"
+                );
 
             base.OnStopped();
         }
@@ -127,24 +129,26 @@ namespace System.Workflow.Runtime.Hosting
                 }
                 catch (Exception e)
                 {
-                    WorkflowTrace.Host.TraceEvent(
-                        TraceEventType.Error,
-                        0,
-                        "DefaultWorkflowCommitWorkBatchService caught exception from commitWorkBatchCallback: "
-                            + e.ToString()
-                    );
+                    WorkflowTrace.Host
+                        .TraceEvent(
+                            TraceEventType.Error,
+                            0,
+                            "DefaultWorkflowCommitWorkBatchService caught exception from commitWorkBatchCallback: "
+                                + e.ToString()
+                        );
 
                     if (dbRetry.TryDoRetry(ref retryCounter))
                     {
-                        WorkflowTrace.Host.TraceEvent(
-                            TraceEventType.Information,
-                            0,
-                            "DefaultWorkflowCommitWorkBatchService retrying commitWorkBatchCallback (retry attempt "
-                                + retryCounter.ToString(
-                                    System.Globalization.CultureInfo.InvariantCulture
-                                )
-                                + ")"
-                        );
+                        WorkflowTrace.Host
+                            .TraceEvent(
+                                TraceEventType.Information,
+                                0,
+                                "DefaultWorkflowCommitWorkBatchService retrying commitWorkBatchCallback (retry attempt "
+                                    + retryCounter.ToString(
+                                        System.Globalization.CultureInfo.InvariantCulture
+                                    )
+                                    + ")"
+                            );
                         continue;
                     }
                     else

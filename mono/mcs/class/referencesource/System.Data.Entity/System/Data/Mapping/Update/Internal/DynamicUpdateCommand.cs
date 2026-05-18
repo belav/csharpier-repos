@@ -180,9 +180,8 @@ namespace System.Data.Mapping.Update.Internal
 
                                 // retrieve result which includes the context for back-propagation
                                 int columnOrdinal = members.IndexOf(member);
-                                PropagatorResult result = this.CurrentValues.GetMemberValue(
-                                    columnOrdinal
-                                );
+                                PropagatorResult result = this.CurrentValues
+                                    .GetMemberValue(columnOrdinal);
 
                                 // register for back-propagation
                                 generatedValues.Add(
@@ -416,18 +415,17 @@ namespace System.Data.Mapping.Update.Internal
             }
 
             // order by Container.Table
-            result = StringComparer.Ordinal.Compare(
-                this.m_processor.Table.Name,
-                other.m_processor.Table.Name
-            );
+            result = StringComparer.Ordinal
+                .Compare(this.m_processor.Table.Name, other.m_processor.Table.Name);
             if (0 != result)
             {
                 return result;
             }
-            result = StringComparer.Ordinal.Compare(
-                this.m_processor.Table.EntityContainer.Name,
-                other.m_processor.Table.EntityContainer.Name
-            );
+            result = StringComparer.Ordinal
+                .Compare(
+                    this.m_processor.Table.EntityContainer.Name,
+                    other.m_processor.Table.EntityContainer.Name
+                );
             if (0 != result)
             {
                 return result;

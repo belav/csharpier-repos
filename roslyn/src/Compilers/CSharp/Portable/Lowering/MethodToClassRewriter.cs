@@ -439,10 +439,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             //  add the method to module
             if (this.CompilationState.Emitting)
             {
-                this.CompilationState.ModuleBuilderOpt.AddSynthesizedDefinition(
-                    containingType,
-                    wrapper.GetCciAdapter()
-                );
+                this.CompilationState
+                    .ModuleBuilderOpt
+                    .AddSynthesizedDefinition(containingType, wrapper.GetCciAdapter());
             }
 
             Debug.Assert(wrapper.SynthesizesLoweredBoundBody);
@@ -961,9 +960,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
                 AddSynthesizedAttribute(
                     ref attributes,
-                    this.DeclaringCompilation.TrySynthesizeAttribute(
-                        WellKnownMember.System_Diagnostics_DebuggerHiddenAttribute__ctor
-                    )
+                    this.DeclaringCompilation
+                        .TrySynthesizeAttribute(
+                            WellKnownMember.System_Diagnostics_DebuggerHiddenAttribute__ctor
+                        )
                 );
             }
         }

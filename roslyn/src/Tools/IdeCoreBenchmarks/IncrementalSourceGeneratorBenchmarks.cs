@@ -73,8 +73,8 @@ namespace IdeCoreBenchmarks
                 throw new ArgumentException("Couldn't find Roslyn.sln");
 
             Console.WriteLine("Found Roslyn.sln: " + Process.GetCurrentProcess().Id);
-            var assemblies = MSBuildMefHostServices
-                .DefaultAssemblies.Add(typeof(AnalyzerRunnerHelper).Assembly)
+            var assemblies = MSBuildMefHostServices.DefaultAssemblies
+                .Add(typeof(AnalyzerRunnerHelper).Assembly)
                 .Add(typeof(FindReferencesBenchmarks).Assembly);
             var services = MefHostServices.Create(assemblies);
 
@@ -138,11 +138,12 @@ namespace IdeCoreBenchmarks
                         return node;
                     });
 #else
-                    var input = ctx.SyntaxProvider.ForAttributeWithMetadataName(
-                        "System.Text.Json.Serialization.JsonSerializableAttribute",
-                        (n, _) => n is ClassDeclarationSyntax,
-                        (ctx, _) => 0
-                    );
+                    var input = ctx.SyntaxProvider
+                        .ForAttributeWithMetadataName(
+                            "System.Text.Json.Serialization.JsonSerializableAttribute",
+                            (n, _) => n is ClassDeclarationSyntax,
+                            (ctx, _) => 0
+                        );
                     // var input = ctx.ForAttributeWithSimpleName<ClassDeclarationSyntax>("JsonSerializableAttribute");
 #endif
                     ctx.RegisterSourceOutput(input, (spc, node) => { });
@@ -159,9 +160,9 @@ namespace IdeCoreBenchmarks
             //    Console.WriteLine(proj.Name);
             //}
 
-            var project = _workspace.CurrentSolution.Projects.Single(p =>
-                p.Name == "Microsoft.CodeAnalysis.Workspaces(netstandard2.0)"
-            );
+            var project = _workspace.CurrentSolution
+                .Projects
+                .Single(p => p.Name == "Microsoft.CodeAnalysis.Workspaces(netstandard2.0)");
 
             var start = DateTime.Now;
             Console.WriteLine("Getting compilation: " + project.Name);
@@ -174,9 +175,8 @@ namespace IdeCoreBenchmarks
 
             Console.WriteLine("First generator run: " + (DateTime.Now - start));
 
-            var syntaxTree = compilation.SyntaxTrees.Single(t =>
-                t.FilePath.Contains("AbstractCaseCorrectionService")
-            );
+            var syntaxTree = compilation.SyntaxTrees
+                .Single(t => t.FilePath.Contains("AbstractCaseCorrectionService"));
             var sourceText = syntaxTree.GetText();
 
             Console.WriteLine("Start profiling now");

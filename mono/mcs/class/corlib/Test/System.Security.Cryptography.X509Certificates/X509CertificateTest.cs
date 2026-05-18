@@ -1824,8 +1824,8 @@ namespace MonoTests.System.Security.Cryptography.X509Certificates
                 0x0D,
                 0x0A,
             };
-            string tsa = Encoding
-                .Default.GetString(ToStringArray)
+            string tsa = Encoding.Default
+                .GetString(ToStringArray)
                 .Replace("\r\n", Environment.NewLine);
             //Assert.AreEqual (tsa, x509.ToString (true), "ToString(true)");
             Assert.AreEqual(
@@ -3074,8 +3074,8 @@ namespace MonoTests.System.Security.Cryptography.X509Certificates
                 0x0D,
                 0x0A,
             };
-            string tsa = Encoding
-                .Default.GetString(ToStringArray)
+            string tsa = Encoding.Default
+                .GetString(ToStringArray)
                 .Replace("\r\n", Environment.NewLine);
             //Assert.AreEqual (tsa, x509.ToString (true), "ToString(true)");
             Assert.AreEqual("OU=Directory Services, O=AT&T, C=US", x509.Issuer, "Issuer");
@@ -4659,8 +4659,8 @@ namespace MonoTests.System.Security.Cryptography.X509Certificates
                 0x0D,
                 0x0A,
             };
-            string tsa = Encoding
-                .Default.GetString(ToStringArray)
+            string tsa = Encoding.Default
+                .GetString(ToStringArray)
                 .Replace("\r\n", Environment.NewLine);
             //Assert.AreEqual (tsa, x509.ToString (true), "ToString(true)");
             Assert.AreEqual(
@@ -6069,8 +6069,8 @@ namespace MonoTests.System.Security.Cryptography.X509Certificates
                 0x0D,
                 0x0A,
             };
-            string tsa = Encoding
-                .Default.GetString(ToStringArray)
+            string tsa = Encoding.Default
+                .GetString(ToStringArray)
                 .Replace("\r\n", Environment.NewLine);
             //Assert.AreEqual (tsa, x509.ToString (true), "ToString(true)");
             Assert.AreEqual(
@@ -8776,8 +8776,8 @@ namespace MonoTests.System.Security.Cryptography.X509Certificates
                 0x0D,
                 0x0A,
             };
-            string tsa = Encoding
-                .Default.GetString(ToStringArray)
+            string tsa = Encoding.Default
+                .GetString(ToStringArray)
                 .Replace("\r\n", Environment.NewLine);
             //Assert.AreEqual (tsa, x509.ToString (true), "ToString(true)");
             Assert.AreEqual("O=SET Root, C=US", x509.Issuer, "Issuer");
@@ -10017,8 +10017,8 @@ namespace MonoTests.System.Security.Cryptography.X509Certificates
                 0x0D,
                 0x0A,
             };
-            string tsa = Encoding
-                .Default.GetString(ToStringArray)
+            string tsa = Encoding.Default
+                .GetString(ToStringArray)
                 .Replace("\r\n", Environment.NewLine);
             //Assert.AreEqual (tsa, x509.ToString (true), "ToString(true)");
             Assert.AreEqual("OU=Directory Services, O=AT&T, C=US", x509.Issuer, "Issuer");
@@ -13841,8 +13841,8 @@ namespace MonoTests.System.Security.Cryptography.X509Certificates
                 0x0D,
                 0x0A,
             };
-            string tsa = Encoding
-                .Default.GetString(ToStringArray)
+            string tsa = Encoding.Default
+                .GetString(ToStringArray)
                 .Replace("\r\n", Environment.NewLine);
             //Assert.AreEqual (tsa, x509.ToString (true), "ToString(true)");
             Assert.AreEqual(
@@ -17190,8 +17190,8 @@ namespace MonoTests.System.Security.Cryptography.X509Certificates
                 0x0D,
                 0x0A,
             };
-            string tsa = Encoding
-                .Default.GetString(ToStringArray)
+            string tsa = Encoding.Default
+                .GetString(ToStringArray)
                 .Replace("\r\n", Environment.NewLine);
             //Assert.AreEqual (tsa, x509.ToString (true), "ToString(true)");
             Assert.AreEqual(
@@ -18606,8 +18606,8 @@ namespace MonoTests.System.Security.Cryptography.X509Certificates
                 0x0D,
                 0x0A,
             };
-            string tsa = Encoding
-                .Default.GetString(ToStringArray)
+            string tsa = Encoding.Default
+                .GetString(ToStringArray)
                 .Replace("\r\n", Environment.NewLine);
             //Assert.AreEqual (tsa, x509.ToString (true), "ToString(true)");
             Assert.AreEqual(
@@ -21265,8 +21265,8 @@ namespace MonoTests.System.Security.Cryptography.X509Certificates
                 0x0D,
                 0x0A,
             };
-            string tsa = Encoding
-                .Default.GetString(ToStringArray)
+            string tsa = Encoding.Default
+                .GetString(ToStringArray)
                 .Replace("\r\n", Environment.NewLine);
             //Assert.AreEqual (tsa, x509.ToString (true), "ToString(true)");
             Assert.AreEqual(

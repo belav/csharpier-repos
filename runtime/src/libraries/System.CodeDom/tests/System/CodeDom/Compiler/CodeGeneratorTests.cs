@@ -255,14 +255,12 @@ namespace System.CodeDom.Compiler.Tests
             member.Comments.Add(new CodeCommentStatement("Comment"));
             member.StartDirectives.Add(new CodeDirective());
             member.StartDirectives.Add(new CodeChecksumPragma());
-            member.StartDirectives.Add(
-                new CodeChecksumPragma("fileName", Guid.NewGuid(), new byte[0])
-            );
+            member.StartDirectives
+                .Add(new CodeChecksumPragma("fileName", Guid.NewGuid(), new byte[0]));
             member.EndDirectives.Add(new CodeDirective());
             member.EndDirectives.Add(new CodeChecksumPragma());
-            member.EndDirectives.Add(
-                new CodeChecksumPragma("fileName", Guid.NewGuid(), new byte[0])
-            );
+            member.EndDirectives
+                .Add(new CodeChecksumPragma("fileName", Guid.NewGuid(), new byte[0]));
 
             var writer = new StringWriter();
             int generateCommentStatementsCallCount = 0;
@@ -658,14 +656,12 @@ namespace System.CodeDom.Compiler.Tests
                 var e = new CodeSnippetCompileUnit("value") { LinePragma = new CodeLinePragma() };
                 e.StartDirectives.Add(new CodeDirective());
                 e.StartDirectives.Add(new CodeChecksumPragma());
-                e.StartDirectives.Add(
-                    new CodeChecksumPragma("fileName", Guid.NewGuid(), new byte[0])
-                );
+                e.StartDirectives
+                    .Add(new CodeChecksumPragma("fileName", Guid.NewGuid(), new byte[0]));
                 e.EndDirectives.Add(new CodeDirective());
                 e.EndDirectives.Add(new CodeChecksumPragma());
-                e.EndDirectives.Add(
-                    new CodeChecksumPragma("fileName", Guid.NewGuid(), new byte[0])
-                );
+                e.EndDirectives
+                    .Add(new CodeChecksumPragma("fileName", Guid.NewGuid(), new byte[0]));
                 int generateCompileUnitStartCallCount = 0;
                 int generateCompileUnitEndCallCount = 0;
                 int generateDirectivesCallCount = 0;
@@ -1576,12 +1572,14 @@ namespace System.CodeDom.Compiler.Tests
             PerformActionWithOutput(writer =>
             {
                 var e = new CodeNamespace();
-                e.Imports.Add(
-                    new CodeNamespaceImport("Namespace1") { LinePragma = new CodeLinePragma() }
-                );
-                e.Imports.Add(
-                    new CodeNamespaceImport("Namespace2") { LinePragma = new CodeLinePragma() }
-                );
+                e.Imports
+                    .Add(
+                        new CodeNamespaceImport("Namespace1") { LinePragma = new CodeLinePragma() }
+                    );
+                e.Imports
+                    .Add(
+                        new CodeNamespaceImport("Namespace2") { LinePragma = new CodeLinePragma() }
+                    );
                 int generateLinePragmaStartCallCount = 0;
                 int generateNamespaceCallCount = 0;
                 int generateLinePragmaEndCallCount = 0;
@@ -2072,14 +2070,12 @@ namespace System.CodeDom.Compiler.Tests
                 var e = new CodeSnippetCompileUnit("value") { LinePragma = new CodeLinePragma() };
                 e.StartDirectives.Add(new CodeDirective());
                 e.StartDirectives.Add(new CodeChecksumPragma());
-                e.StartDirectives.Add(
-                    new CodeChecksumPragma("fileName", Guid.NewGuid(), new byte[0])
-                );
+                e.StartDirectives
+                    .Add(new CodeChecksumPragma("fileName", Guid.NewGuid(), new byte[0]));
                 e.EndDirectives.Add(new CodeDirective());
                 e.EndDirectives.Add(new CodeChecksumPragma());
-                e.EndDirectives.Add(
-                    new CodeChecksumPragma("fileName", Guid.NewGuid(), new byte[0])
-                );
+                e.EndDirectives
+                    .Add(new CodeChecksumPragma("fileName", Guid.NewGuid(), new byte[0]));
 
                 int generateLinePragmaStartCallCount = 0;
                 int generateDirectivesCallCount = 0;
@@ -2179,14 +2175,12 @@ namespace System.CodeDom.Compiler.Tests
                 var e = new CodeGotoStatement { LinePragma = new CodeLinePragma() };
                 e.StartDirectives.Add(new CodeDirective());
                 e.StartDirectives.Add(new CodeChecksumPragma());
-                e.StartDirectives.Add(
-                    new CodeChecksumPragma("fileName", Guid.NewGuid(), new byte[0])
-                );
+                e.StartDirectives
+                    .Add(new CodeChecksumPragma("fileName", Guid.NewGuid(), new byte[0]));
                 e.EndDirectives.Add(new CodeDirective());
                 e.EndDirectives.Add(new CodeChecksumPragma());
-                e.EndDirectives.Add(
-                    new CodeChecksumPragma("fileName", Guid.NewGuid(), new byte[0])
-                );
+                e.EndDirectives
+                    .Add(new CodeChecksumPragma("fileName", Guid.NewGuid(), new byte[0]));
 
                 int generateLinePragmaStartCallCount = 0;
                 int generateDirectivesCallCount = 0;
@@ -2771,14 +2765,12 @@ namespace System.CodeDom.Compiler.Tests
                 type.Comments.Add(new CodeCommentStatement("Comment"));
                 type.StartDirectives.Add(new CodeDirective());
                 type.StartDirectives.Add(new CodeChecksumPragma());
-                type.StartDirectives.Add(
-                    new CodeChecksumPragma("fileName", Guid.NewGuid(), new byte[0])
-                );
+                type.StartDirectives
+                    .Add(new CodeChecksumPragma("fileName", Guid.NewGuid(), new byte[0]));
                 type.EndDirectives.Add(new CodeDirective());
                 type.EndDirectives.Add(new CodeChecksumPragma());
-                type.EndDirectives.Add(
-                    new CodeChecksumPragma("fileName", Guid.NewGuid(), new byte[0])
-                );
+                type.EndDirectives
+                    .Add(new CodeChecksumPragma("fileName", Guid.NewGuid(), new byte[0]));
                 var e = new CodeNamespace();
                 e.Types.Add(type);
 

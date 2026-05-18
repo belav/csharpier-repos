@@ -76,14 +76,10 @@ namespace Microsoft.CodeAnalysis.Diagnostics
 
         public bool Equals(Suppression other)
         {
-            return EqualityComparer<SuppressionDescriptor>.Default.Equals(
-                    Descriptor,
-                    other.Descriptor
-                )
-                && EqualityComparer<Diagnostic>.Default.Equals(
-                    SuppressedDiagnostic,
-                    other.SuppressedDiagnostic
-                );
+            return EqualityComparer<SuppressionDescriptor>.Default
+                    .Equals(Descriptor, other.Descriptor)
+                && EqualityComparer<Diagnostic>.Default
+                    .Equals(SuppressedDiagnostic, other.SuppressedDiagnostic);
         }
 
         public override int GetHashCode()

@@ -26,8 +26,7 @@ namespace System.Text.Json.SourceGeneration.Tests
         public UnmappedMemberHandlingTests_Metadata_Async()
             : base(
                 new AsyncStreamSerializerWrapper(
-                    UnmappedMemberHandlingTests_Metadata_String
-                        .UnmappedMemberHandlingTestsContext
+                    UnmappedMemberHandlingTests_Metadata_String.UnmappedMemberHandlingTestsContext
                         .Default
                 )
             ) { }

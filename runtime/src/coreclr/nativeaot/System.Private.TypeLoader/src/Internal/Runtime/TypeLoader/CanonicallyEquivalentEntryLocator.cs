@@ -57,10 +57,8 @@ namespace Internal.Runtime.TypeLoader
                     return _defType.ConvertToCanonForm(_canonKind).GetHashCode();
 
                 if (!_genericDefinition.IsNull())
-                    return TypeLoaderEnvironment.Instance.GetCanonicalHashCode(
-                        _typeToFind,
-                        _canonKind
-                    );
+                    return TypeLoaderEnvironment.Instance
+                        .GetCanonicalHashCode(_typeToFind, _canonKind);
                 else
                     return _typeToFind.GetHashCode();
             }
@@ -88,11 +86,8 @@ namespace Internal.Runtime.TypeLoader
                     );
 
                     return _genericDefinition.Equals(otherGenericDefinition)
-                        && TypeLoaderEnvironment.Instance.CanInstantiationsShareCode(
-                            _genericArgs,
-                            otherGenericArgs,
-                            _canonKind
-                        );
+                        && TypeLoaderEnvironment.Instance
+                            .CanInstantiationsShareCode(_genericArgs, otherGenericArgs, _canonKind);
                 }
                 else
                     return false;
@@ -109,10 +104,8 @@ namespace Internal.Runtime.TypeLoader
             }
 
             if (_genericArgs != null)
-                return TypeLoaderEnvironment.Instance.ConversionToCanonFormIsAChange(
-                    _genericArgs,
-                    _canonKind
-                );
+                return TypeLoaderEnvironment.Instance
+                    .ConversionToCanonFormIsAChange(_genericArgs, _canonKind);
 
             return false;
         }

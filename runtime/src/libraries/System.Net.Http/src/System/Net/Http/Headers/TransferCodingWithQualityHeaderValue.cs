@@ -50,11 +50,8 @@ namespace System.Net.Http.Headers
         {
             int index = 0;
             return (TransferCodingWithQualityHeaderValue)
-                TransferCodingHeaderParser.SingleValueWithQualityParser.ParseValue(
-                    input,
-                    null,
-                    ref index
-                );
+                TransferCodingHeaderParser.SingleValueWithQualityParser
+                    .ParseValue(input, null, ref index);
         }
 
         public static bool TryParse(
@@ -66,12 +63,8 @@ namespace System.Net.Http.Headers
             parsedValue = null;
 
             if (
-                TransferCodingHeaderParser.SingleValueWithQualityParser.TryParseValue(
-                    input,
-                    null,
-                    ref index,
-                    out object? output
-                )
+                TransferCodingHeaderParser.SingleValueWithQualityParser
+                    .TryParseValue(input, null, ref index, out object? output)
             )
             {
                 parsedValue = (TransferCodingWithQualityHeaderValue)output!;

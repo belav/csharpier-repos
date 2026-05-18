@@ -85,12 +85,13 @@ namespace System.ServiceModel.Description
                 string bindingSectionName;
 
                 if (!BindingsSection.TryAdd(bindingName, binding, config, out bindingSectionName))
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ArgumentException(
-                            SR.GetString(SR.ConfigBindingCannotBeConfigured),
-                            "endpoint.Binding"
-                        )
-                    );
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperError(
+                            new ArgumentException(
+                                SR.GetString(SR.ConfigBindingCannotBeConfigured),
+                                "endpoint.Binding"
+                            )
+                        );
 
                 bindingDV = new BindingDictionaryValue(bindingName, bindingSectionName);
                 bindingTable.Add(binding, bindingDV);
@@ -101,7 +102,8 @@ namespace System.ServiceModel.Description
         bool CheckIfBindingNameInUse(string name, object nameCollection)
         {
             foreach (
-                BindingCollectionElement bindingCollectionElement in this.bindingsSection.BindingCollections
+                BindingCollectionElement bindingCollectionElement in this.bindingsSection
+                    .BindingCollections
             )
                 if (bindingCollectionElement.ContainsKey(name))
                     return true;

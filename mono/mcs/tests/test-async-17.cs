@@ -8,8 +8,8 @@ class Tester
 {
     async Task<int> TestException_1()
     {
-        await Task
-            .Factory.StartNew(() =>
+        await Task.Factory
+            .StartNew(() =>
             {
                 throw new ApplicationException();
             })
@@ -19,8 +19,8 @@ class Tester
 
     async Task TestException_2()
     {
-        await Task
-            .Factory.StartNew(() =>
+        await Task.Factory
+            .StartNew(() =>
             {
                 throw new ApplicationException();
             })
@@ -30,8 +30,8 @@ class Tester
     async Task TestException_3()
     {
         Func<Task> a = async () =>
-            await Task
-                .Factory.StartNew(() =>
+            await Task.Factory
+                .StartNew(() =>
                 {
                     throw new ApplicationException();
                 })
@@ -56,8 +56,8 @@ class Tester
         int state = 0;
         try
         {
-            await Task
-                .Factory.StartNew(() =>
+            await Task.Factory
+                .StartNew(() =>
                 {
                     throw new ArgumentException();
                 })
@@ -81,8 +81,8 @@ class Tester
     {
         try
         {
-            await Task
-                .Factory.StartNew(() =>
+            await Task.Factory
+                .StartNew(() =>
                 {
                     throw new ArgumentException();
                 })
@@ -100,8 +100,8 @@ class Tester
     {
         try
         {
-            await Task
-                .Factory.StartNew(() =>
+            await Task.Factory
+                .StartNew(() =>
                 {
                     throw new ArgumentException();
                 })

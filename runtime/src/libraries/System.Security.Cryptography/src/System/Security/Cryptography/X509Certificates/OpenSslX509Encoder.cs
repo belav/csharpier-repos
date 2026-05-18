@@ -188,10 +188,8 @@ namespace System.Security.Cryptography.X509Certificates
         )
         {
             using (
-                SafeAsn1BitStringHandle bitString = Interop.Crypto.DecodeAsn1BitString(
-                    encoded,
-                    encoded.Length
-                )
+                SafeAsn1BitStringHandle bitString = Interop.Crypto
+                    .DecodeAsn1BitString(encoded, encoded.Length)
             )
             {
                 Interop.Crypto.CheckValidOpenSslHandle(bitString);
@@ -251,13 +249,14 @@ namespace System.Security.Cryptography.X509Certificates
         )
         {
             if (
-                !Interop.Crypto.DecodeX509BasicConstraints2Extension(
-                    encoded,
-                    encoded.Length,
-                    out certificateAuthority,
-                    out hasPathLengthConstraint,
-                    out pathLengthConstraint
-                )
+                !Interop.Crypto
+                    .DecodeX509BasicConstraints2Extension(
+                        encoded,
+                        encoded.Length,
+                        out certificateAuthority,
+                        out hasPathLengthConstraint,
+                        out pathLengthConstraint
+                    )
             )
             {
                 throw Interop.Crypto.CreateOpenSslCryptographicException();
@@ -272,10 +271,8 @@ namespace System.Security.Cryptography.X509Certificates
             OidCollection oids = new OidCollection();
 
             using (
-                SafeEkuExtensionHandle eku = Interop.Crypto.DecodeExtendedKeyUsage(
-                    encoded,
-                    encoded.Length
-                )
+                SafeEkuExtensionHandle eku = Interop.Crypto
+                    .DecodeExtendedKeyUsage(encoded, encoded.Length)
             )
             {
                 Interop.Crypto.CheckValidOpenSslHandle(eku);

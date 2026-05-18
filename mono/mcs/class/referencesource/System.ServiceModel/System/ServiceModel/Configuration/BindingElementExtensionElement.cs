@@ -33,14 +33,15 @@ namespace System.ServiceModel.Configuration
             }
             if (bindingElement.GetType() != this.BindingElementType)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                    "bindingElement",
-                    SR.GetString(
-                        SR.ConfigInvalidTypeForBindingElement,
-                        this.BindingElementType.ToString(),
-                        bindingElement.GetType().ToString()
-                    )
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperArgument(
+                        "bindingElement",
+                        SR.GetString(
+                            SR.ConfigInvalidTypeForBindingElement,
+                            this.BindingElementType.ToString(),
+                            bindingElement.GetType().ToString()
+                        )
+                    );
             }
         }
     }

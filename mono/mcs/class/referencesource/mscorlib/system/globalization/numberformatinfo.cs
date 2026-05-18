@@ -550,8 +550,7 @@ namespace System.Globalization
         {
             get
             {
-                System.Globalization.CultureInfo culture = System
-                    .Threading
+                System.Globalization.CultureInfo culture = System.Threading
                     .Thread
                     .CurrentThread
                     .CurrentCulture;

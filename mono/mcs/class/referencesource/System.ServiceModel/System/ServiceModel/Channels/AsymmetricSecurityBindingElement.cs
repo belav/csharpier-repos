@@ -103,9 +103,8 @@ namespace System.ServiceModel.Channels
             set
             {
                 if (!MessageProtectionOrderHelper.IsDefined(value))
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ArgumentOutOfRangeException("value")
-                    );
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperError(new ArgumentOutOfRangeException("value"));
                 this.messageProtectionOrder = value;
             }
         }
@@ -232,28 +231,29 @@ namespace System.ServiceModel.Channels
             if (context == null)
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("context");
             if (credentialsManager == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                    "credentialsManager"
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperArgumentNull("credentialsManager");
 
             if (this.InitiatorTokenParameters == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(
-                        SR.GetString(
-                            SR.AsymmetricSecurityBindingElementNeedsInitiatorTokenParameters,
-                            this.ToString()
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(
+                                SR.AsymmetricSecurityBindingElementNeedsInitiatorTokenParameters,
+                                this.ToString()
+                            )
                         )
-                    )
-                );
+                    );
             if (this.RecipientTokenParameters == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(
-                        SR.GetString(
-                            SR.AsymmetricSecurityBindingElementNeedsRecipientTokenParameters,
-                            this.ToString()
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(
+                                SR.AsymmetricSecurityBindingElementNeedsRecipientTokenParameters,
+                                this.ToString()
+                            )
                         )
-                    )
-                );
+                    );
 
             bool isDuplexSecurity =
                 !this.isCertificateSignatureBinding
@@ -265,14 +265,15 @@ namespace System.ServiceModel.Channels
             SecurityProtocolFactory protocolFactory;
 
             AsymmetricSecurityProtocolFactory forward = new AsymmetricSecurityProtocolFactory();
-            forward.ProtectionRequirements.Add(
-                SecurityBindingElement.ComputeProtectionRequirements(
-                    this,
-                    context.BindingParameters,
-                    context.Binding.Elements,
-                    isForService
-                )
-            );
+            forward.ProtectionRequirements
+                .Add(
+                    SecurityBindingElement.ComputeProtectionRequirements(
+                        this,
+                        context.BindingParameters,
+                        context.Binding.Elements,
+                        isForService
+                    )
+                );
             forward.RequireConfidentiality = this.HasProtectionRequirements(
                 forward.ProtectionRequirements.IncomingEncryptionParts
             );
@@ -408,14 +409,15 @@ namespace System.ServiceModel.Channels
                 }
                 reverse.DoRequestSignatureConfirmation = this.RequireSignatureConfirmation;
                 reverse.MessageProtectionOrder = this.MessageProtectionOrder;
-                reverse.ProtectionRequirements.Add(
-                    SecurityBindingElement.ComputeProtectionRequirements(
-                        this,
-                        context.BindingParameters,
-                        context.Binding.Elements,
-                        isForService
-                    )
-                );
+                reverse.ProtectionRequirements
+                    .Add(
+                        SecurityBindingElement.ComputeProtectionRequirements(
+                            this,
+                            context.BindingParameters,
+                            context.Binding.Elements,
+                            isForService
+                        )
+                    );
                 if (isForService)
                 {
                     reverse.ApplyConfidentiality = this.HasProtectionRequirements(
@@ -481,8 +483,8 @@ namespace System.ServiceModel.Channels
             }
 
             BindingContext issuerBindingContext = context.Clone();
-            SecurityCredentialsManager credentialsManager =
-                context.BindingParameters.Find<SecurityCredentialsManager>();
+            SecurityCredentialsManager credentialsManager = context.BindingParameters
+                .Find<SecurityCredentialsManager>();
             if (credentialsManager == null)
             {
                 credentialsManager = ClientCredentials.CreateDefaultCredentials();
@@ -517,8 +519,8 @@ namespace System.ServiceModel.Channels
 
             SecurityChannelListener<TChannel> channelListener =
                 new SecurityChannelListener<TChannel>(this, context);
-            SecurityCredentialsManager credentialsManager =
-                context.BindingParameters.Find<SecurityCredentialsManager>();
+            SecurityCredentialsManager credentialsManager = context.BindingParameters
+                .Find<SecurityCredentialsManager>();
             if (credentialsManager == null)
                 credentialsManager = ServiceCredentials.CreateDefaultCredentials();
 
@@ -543,8 +545,9 @@ namespace System.ServiceModel.Channels
             {
                 AddressingVersion addressing = MessageVersion.Default.Addressing;
 #pragma warning suppress 56506
-                MessageEncodingBindingElement encoding =
-                    context.Binding.Elements.Find<MessageEncodingBindingElement>();
+                MessageEncodingBindingElement encoding = context.Binding
+                    .Elements
+                    .Find<MessageEncodingBindingElement>();
                 if (encoding != null)
                 {
                     addressing = encoding.MessageVersion.Addressing;
@@ -552,7 +555,8 @@ namespace System.ServiceModel.Channels
 
                 ChannelProtectionRequirements myRequirements = base.GetProtectionRequirements(
                     addressing,
-                    this.GetIndividualProperty<ISecurityCapabilities>().SupportedRequestProtectionLevel
+                    this.GetIndividualProperty<ISecurityCapabilities>()
+                        .SupportedRequestProtectionLevel
                 );
                 myRequirements.Add(
                     context.GetInnerProperty<ChannelProtectionRequirements>()

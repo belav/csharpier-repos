@@ -190,7 +190,8 @@ namespace ILCompiler
             {
                 TypeDesc owningTypeOfThunks = (
                     (CompilerTypeSystemContext)key.TargetMethod.Context
-                ).GeneratedAssembly.GetGlobalModuleType();
+                ).GeneratedAssembly
+                    .GetGlobalModuleType();
                 return new DefaultInterfaceMethodImplementationInstantiationThunk(
                     owningTypeOfThunks,
                     key.TargetMethod,

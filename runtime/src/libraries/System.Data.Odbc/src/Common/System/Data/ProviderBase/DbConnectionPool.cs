@@ -669,9 +669,10 @@ namespace System.Data.ProviderBase
                         }
                         else if (timeout)
                         {
-                            next.Completion.TrySetException(
-                                ADP.ExceptionWithStackTrace(ADP.PooledOpenTimeout())
-                            );
+                            next.Completion
+                                .TrySetException(
+                                    ADP.ExceptionWithStackTrace(ADP.PooledOpenTimeout())
+                                );
                         }
                         else
                         {
@@ -871,9 +872,10 @@ namespace System.Data.ProviderBase
                                     if (onlyOneCheckConnection)
                                     {
                                         if (
-                                            _waitHandles.CreationSemaphore.WaitOne(
-                                                unchecked((int)waitForMultipleObjectsTimeout)
-                                            )
+                                            _waitHandles.CreationSemaphore
+                                                .WaitOne(
+                                                    unchecked((int)waitForMultipleObjectsTimeout)
+                                                )
                                         )
                                         {
                                             try

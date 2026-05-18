@@ -39,8 +39,8 @@ namespace Microsoft.Build.Execution
         internal ProjectTargetInstance(ProjectTargetElement xml)
         {
             FullPath = xml.ContainingProject.FullPath;
-            Children = xml
-                .Children.Select<ProjectElement, ProjectTargetInstanceChild>(c =>
+            Children = xml.Children
+                .Select<ProjectElement, ProjectTargetInstanceChild>(c =>
                 {
                     if (c is ProjectOnErrorElement)
                         return new ProjectOnErrorInstance((ProjectOnErrorElement)c);

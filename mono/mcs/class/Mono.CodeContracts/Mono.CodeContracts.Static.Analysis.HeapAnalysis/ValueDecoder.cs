@@ -69,11 +69,12 @@ namespace Mono.CodeContracts.Static.Analysis.HeapAnalysis
         public Result ForwardDecode<Data, Result, Visitor>(APC pc, Visitor visitor, Data state)
             where Visitor : IILVisitor<APC, SymbolicValue, SymbolicValue, Data, Result>
         {
-            return this.stack_decoder.ForwardDecode<
-                Data,
-                Result,
-                StackToSymbolicAdapter<Data, Result, Visitor>
-            >(pc, new StackToSymbolicAdapter<Data, Result, Visitor>(this.parent, visitor), state);
+            return this.stack_decoder
+                .ForwardDecode<Data, Result, StackToSymbolicAdapter<Data, Result, Visitor>>(
+                    pc,
+                    new StackToSymbolicAdapter<Data, Result, Visitor>(this.parent, visitor),
+                    state
+                );
         }
 
         public bool IsUnreachable(APC pc)
@@ -91,10 +92,11 @@ namespace Mono.CodeContracts.Static.Analysis.HeapAnalysis
             )
                 return null;
 
-            return this.parent.EdgeRenaming(
-                new Pair<APC, APC>(from, to),
-                this.ContextProvider.MethodContext.CFG.IsJoinPoint(to)
-            );
+            return this.parent
+                .EdgeRenaming(
+                    new Pair<APC, APC>(from, to),
+                    this.ContextProvider.MethodContext.CFG.IsJoinPoint(to)
+                );
         }
 
         public void Dump(

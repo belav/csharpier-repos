@@ -111,13 +111,14 @@ namespace Microsoft.Extensions.Caching.Memory
             {
                 if (_postEvictionCallbacks != null)
                 {
-                    Task.Factory.StartNew(
-                        state => InvokeCallbacks((CacheEntry)state!),
-                        cacheEntry,
-                        CancellationToken.None,
-                        TaskCreationOptions.DenyChildAttach,
-                        TaskScheduler.Default
-                    );
+                    Task.Factory
+                        .StartNew(
+                            state => InvokeCallbacks((CacheEntry)state!),
+                            cacheEntry,
+                            CancellationToken.None,
+                            TaskCreationOptions.DenyChildAttach,
+                            TaskScheduler.Default
+                        );
                 }
             }
 
@@ -138,12 +139,13 @@ namespace Microsoft.Extensions.Caching.Memory
 
                     try
                     {
-                        registration.EvictionCallback?.Invoke(
-                            entry.Key,
-                            entry.Value,
-                            entry.EvictionReason,
-                            registration.State
-                        );
+                        registration.EvictionCallback
+                            ?.Invoke(
+                                entry.Key,
+                                entry.Value,
+                                entry.EvictionReason,
+                                registration.State
+                            );
                     }
                     catch (Exception e)
                     {

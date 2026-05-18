@@ -133,8 +133,8 @@ public class ServicePropertyDiscoveryConventionTest
             owned: false,
             ConfigurationSource.Explicit
         );
-        entityType!
-            .Builder.Property(
+        entityType!.Builder
+            .Property(
                 typeof(ILazyLoader),
                 nameof(BlogOneService.Loader),
                 ConfigurationSource.Explicit
@@ -156,11 +156,16 @@ public class ServicePropertyDiscoveryConventionTest
             owned: false,
             ConfigurationSource.Explicit
         );
-        entityType!.Builder.HasRelationship(
-            model.AddEntityType(typeof(LazyLoader), owned: false, ConfigurationSource.Explicit)!,
-            nameof(BlogOneService.Loader),
-            ConfigurationSource.Explicit
-        );
+        entityType!.Builder
+            .HasRelationship(
+                model.AddEntityType(
+                    typeof(LazyLoader),
+                    owned: false,
+                    ConfigurationSource.Explicit
+                )!,
+                nameof(BlogOneService.Loader),
+                ConfigurationSource.Explicit
+            );
 
         RunConvention(entityType);
 
@@ -173,10 +178,8 @@ public class ServicePropertyDiscoveryConventionTest
     {
         var entityType = RunConvention<BlogDuplicateService>();
 
-        entityType.Builder.Ignore(
-            nameof(BlogDuplicateService.ContextTwo),
-            ConfigurationSource.Convention
-        );
+        entityType.Builder
+            .Ignore(nameof(BlogDuplicateService.ContextTwo), ConfigurationSource.Convention);
 
         Assert.NotNull(entityType.FindServiceProperty(nameof(BlogDuplicateService.ContextOne)));
         Assert.Null(entityType.FindServiceProperty(nameof(BlogDuplicateService.ContextTwo)));
@@ -209,8 +212,8 @@ public class ServicePropertyDiscoveryConventionTest
         new(CreateDependencies());
 
     private ProviderConventionSetBuilderDependencies CreateDependencies() =>
-        InMemoryTestHelpers
-            .Instance.CreateContextServices()
+        InMemoryTestHelpers.Instance
+            .CreateContextServices()
             .GetRequiredService<ProviderConventionSetBuilderDependencies>();
 
     private class BlogOneService : Blog
@@ -271,18 +274,14 @@ public class ServicePropertyDiscoveryConventionTest
             modelBuilder.Entity<PrivateUnmappedBaseSuper>(b =>
             {
                 // Because private properties on un-mapped base types are not found by convention
-                b.Metadata.AddServiceProperty(
-                    typeof(PrivateUnmappedBase).GetAnyProperty("Context")!
-                );
-                b.Metadata.AddServiceProperty(
-                    typeof(PrivateUnmappedBase).GetAnyProperty("EntityType")!
-                );
-                b.Metadata.AddServiceProperty(
-                    typeof(PrivateUnmappedBase).GetAnyProperty("ALazyLoader")!
-                );
-                b.Metadata.AddServiceProperty(
-                    typeof(PrivateUnmappedBase).GetAnyProperty("LazyLoader")!
-                );
+                b.Metadata
+                    .AddServiceProperty(typeof(PrivateUnmappedBase).GetAnyProperty("Context")!);
+                b.Metadata
+                    .AddServiceProperty(typeof(PrivateUnmappedBase).GetAnyProperty("EntityType")!);
+                b.Metadata
+                    .AddServiceProperty(typeof(PrivateUnmappedBase).GetAnyProperty("ALazyLoader")!);
+                b.Metadata
+                    .AddServiceProperty(typeof(PrivateUnmappedBase).GetAnyProperty("LazyLoader")!);
             });
     }
 

@@ -177,9 +177,8 @@ namespace System.ServiceModel.Security
                     return this.mergedSupportingTokenProvidersMap[action];
                 }
                 else if (
-                    this.mergedSupportingTokenProvidersMap.ContainsKey(
-                        MessageHeaders.WildcardAction
-                    )
+                    this.mergedSupportingTokenProvidersMap
+                        .ContainsKey(MessageHeaders.WildcardAction)
                 )
                 {
                     return this.mergedSupportingTokenProvidersMap[MessageHeaders.WildcardAction];
@@ -259,8 +258,9 @@ namespace System.ServiceModel.Security
                     {
                         requirement.IsOptionalToken = true;
                     }
-                    System.IdentityModel.Selectors.SecurityTokenProvider provider =
-                        this.factory.SecurityTokenManager.CreateSecurityTokenProvider(requirement);
+                    System.IdentityModel.Selectors.SecurityTokenProvider provider = this.factory
+                        .SecurityTokenManager
+                        .CreateSecurityTokenProvider(requirement);
                     if (provider == null)
                     {
                         continue;
@@ -293,8 +293,9 @@ namespace System.ServiceModel.Security
                     {
                         requirement.IsOptionalToken = true;
                     }
-                    System.IdentityModel.Selectors.SecurityTokenProvider provider =
-                        this.factory.SecurityTokenManager.CreateSecurityTokenProvider(requirement);
+                    System.IdentityModel.Selectors.SecurityTokenProvider provider = this.factory
+                        .SecurityTokenManager
+                        .CreateSecurityTokenProvider(requirement);
                     if (provider == null)
                     {
                         continue;
@@ -327,8 +328,9 @@ namespace System.ServiceModel.Security
                     {
                         requirement.IsOptionalToken = true;
                     }
-                    System.IdentityModel.Selectors.SecurityTokenProvider provider =
-                        this.factory.SecurityTokenManager.CreateSecurityTokenProvider(requirement);
+                    System.IdentityModel.Selectors.SecurityTokenProvider provider = this.factory
+                        .SecurityTokenManager
+                        .CreateSecurityTokenProvider(requirement);
                     if (provider == null)
                     {
                         continue;
@@ -361,8 +363,9 @@ namespace System.ServiceModel.Security
                     {
                         requirement.IsOptionalToken = true;
                     }
-                    System.IdentityModel.Selectors.SecurityTokenProvider provider =
-                        this.factory.SecurityTokenManager.CreateSecurityTokenProvider(requirement);
+                    System.IdentityModel.Selectors.SecurityTokenProvider provider = this.factory
+                        .SecurityTokenManager
+                        .CreateSecurityTokenProvider(requirement);
                     if (provider == null)
                     {
                         continue;
@@ -506,10 +509,8 @@ namespace System.ServiceModel.Security
                     Collection<SupportingTokenProviderSpecification> providerSpecList;
                     ICollection<SupportingTokenProviderSpecification> existingList;
                     if (
-                        this.scopedSupportingTokenProviderSpecification.TryGetValue(
-                            action,
-                            out existingList
-                        )
+                        this.scopedSupportingTokenProviderSpecification
+                            .TryGetValue(action, out existingList)
                     )
                     {
                         providerSpecList = (
@@ -519,10 +520,8 @@ namespace System.ServiceModel.Security
                     else
                     {
                         providerSpecList = new Collection<SupportingTokenProviderSpecification>();
-                        this.scopedSupportingTokenProviderSpecification.Add(
-                            action,
-                            providerSpecList
-                        );
+                        this.scopedSupportingTokenProviderSpecification
+                            .Add(action, providerSpecList);
                     }
                     this.AddSupportingTokenProviders(
                         this.factory
@@ -676,13 +675,14 @@ namespace System.ServiceModel.Security
             }
             for (int i = 0; i < tokens.Count; ++i)
             {
-                security.IncomingSupportingTokens.Add(
-                    new SupportingTokenSpecification(
-                        tokens[i],
-                        tokenPoliciesMapping[tokens[i]],
-                        attachmentMode
-                    )
-                );
+                security.IncomingSupportingTokens
+                    .Add(
+                        new SupportingTokenSpecification(
+                            tokens[i],
+                            tokenPoliciesMapping[tokens[i]],
+                            attachmentMode
+                        )
+                    );
             }
         }
 
@@ -752,8 +752,8 @@ namespace System.ServiceModel.Security
             MessageDirection transferDirection = factory.ActAsInitiator
                 ? MessageDirection.Input
                 : MessageDirection.Output;
-            SendSecurityHeader sendSecurityHeader =
-                factory.StandardsManager.CreateSendSecurityHeader(
+            SendSecurityHeader sendSecurityHeader = factory.StandardsManager
+                .CreateSendSecurityHeader(
                     message,
                     actor,
                     true,
@@ -794,13 +794,14 @@ namespace System.ServiceModel.Security
                         supportingTokensProperty.OutgoingSupportingTokens[i];
                     if (spec.SecurityTokenParameters == null)
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new MessageSecurityException(
-                                SR.GetString(
-                                    SR.SenderSideSupportingTokensMustSpecifySecurityTokenParameters
+                        throw DiagnosticUtility.ExceptionUtility
+                            .ThrowHelperError(
+                                new MessageSecurityException(
+                                    SR.GetString(
+                                        SR.SenderSideSupportingTokensMustSpecifySecurityTokenParameters
+                                    )
                                 )
-                            )
-                        );
+                            );
                     }
                     supportingTokens.Add(spec);
                 }
@@ -857,9 +858,8 @@ namespace System.ServiceModel.Security
                     }
                     else
                     {
-                        supportingToken = spec.TokenProvider.GetToken(
-                            timeoutHelper.RemainingTime()
-                        );
+                        supportingToken = spec.TokenProvider
+                            .GetToken(timeoutHelper.RemainingTime());
                     }
 
                     supportingTokens.Add(
@@ -978,14 +978,17 @@ namespace System.ServiceModel.Security
                                 "Unknown token attachment mode "
                                     + supportingTokens[i].SecurityTokenAttachmentMode.ToString()
                             );
-                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                                new NotSupportedException(
-                                    SR.GetString(
-                                        SR.UnknownTokenAttachmentMode,
-                                        supportingTokens[i].SecurityTokenAttachmentMode.ToString()
+                            throw DiagnosticUtility.ExceptionUtility
+                                .ThrowHelperError(
+                                    new NotSupportedException(
+                                        SR.GetString(
+                                            SR.UnknownTokenAttachmentMode,
+                                            supportingTokens[i]
+                                                .SecurityTokenAttachmentMode
+                                                .ToString()
+                                        )
                                     )
-                                )
-                            );
+                                );
                     }
                 }
             }
@@ -1099,11 +1102,12 @@ namespace System.ServiceModel.Security
             {
                 // should this be an ArgumentNullException ?
                 // throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentNullException("provider"));
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new MessageSecurityException(
-                        SR.GetString(SR.TokenProviderCannotGetTokensForTarget, target)
-                    )
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        new MessageSecurityException(
+                            SR.GetString(SR.TokenProviderCannotGetTokensForTarget, target)
+                        )
+                    );
             }
 
             SecurityToken token = null;
@@ -1114,21 +1118,23 @@ namespace System.ServiceModel.Security
             }
             catch (SecurityTokenException exception)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new MessageSecurityException(
-                        SR.GetString(SR.TokenProviderCannotGetTokensForTarget, target),
-                        exception
-                    )
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        new MessageSecurityException(
+                            SR.GetString(SR.TokenProviderCannotGetTokensForTarget, target),
+                            exception
+                        )
+                    );
             }
             catch (SecurityNegotiationException sne)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new SecurityNegotiationException(
-                        SR.GetString(SR.TokenProviderCannotGetTokensForTarget, target),
-                        sne
-                    )
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        new SecurityNegotiationException(
+                            SR.GetString(SR.TokenProviderCannotGetTokensForTarget, target),
+                            sne
+                        )
+                    );
             }
 
             return token;
@@ -1187,8 +1193,7 @@ namespace System.ServiceModel.Security
                     verifiedMessage.Headers.To,
                     verifiedMessage.Headers.Action,
                     SecurityUtils.GetIdentityNamesFromContext(
-                        verifiedMessage
-                            .Properties
+                        verifiedMessage.Properties
                             .Security
                             .ServiceSecurityContext
                             .AuthorizationContext
@@ -1328,25 +1333,27 @@ namespace System.ServiceModel.Security
                     result as SecurityTokenProvider.SecurityTokenAsyncResult;
                 if (securityTokenAsyncResult != null)
                 {
-                    this.supportingTokens.Add(
-                        new SupportingTokenSpecification(
-                            SecurityTokenProvider.SecurityTokenAsyncResult.End(result),
-                            EmptyReadOnlyCollection<IAuthorizationPolicy>.Instance,
-                            spec.SecurityTokenAttachmentMode,
-                            spec.TokenParameters
-                        )
-                    );
+                    this.supportingTokens
+                        .Add(
+                            new SupportingTokenSpecification(
+                                SecurityTokenProvider.SecurityTokenAsyncResult.End(result),
+                                EmptyReadOnlyCollection<IAuthorizationPolicy>.Instance,
+                                spec.SecurityTokenAttachmentMode,
+                                spec.TokenParameters
+                            )
+                        );
                 }
                 else
                 {
-                    this.supportingTokens.Add(
-                        new SupportingTokenSpecification(
-                            spec.TokenProvider.EndGetToken(result),
-                            EmptyReadOnlyCollection<IAuthorizationPolicy>.Instance,
-                            spec.SecurityTokenAttachmentMode,
-                            spec.TokenParameters
-                        )
-                    );
+                    this.supportingTokens
+                        .Add(
+                            new SupportingTokenSpecification(
+                                spec.TokenProvider.EndGetToken(result),
+                                EmptyReadOnlyCollection<IAuthorizationPolicy>.Instance,
+                                spec.SecurityTokenAttachmentMode,
+                                spec.TokenParameters
+                            )
+                        );
                 }
 
                 ++this.currentTokenProviderIndex;
@@ -1376,11 +1383,12 @@ namespace System.ServiceModel.Security
                     }
                     else
                     {
-                        result = spec.TokenProvider.BeginGetToken(
-                            timeoutHelper.RemainingTime(),
-                            getSupportingTokensCallback,
-                            this
-                        );
+                        result = spec.TokenProvider
+                            .BeginGetToken(
+                                timeoutHelper.RemainingTime(),
+                                getSupportingTokensCallback,
+                                this
+                            );
                     }
 
                     if (!result.CompletedSynchronously)
@@ -1397,15 +1405,16 @@ namespace System.ServiceModel.Security
             {
                 bool completeSelf;
                 if (
-                    this.binding.TryGetSupportingTokens(
-                        this.binding.SecurityProtocolFactory,
-                        this.binding.Target,
-                        this.binding.Via,
-                        this.message,
-                        timeoutHelper.RemainingTime(),
-                        false,
-                        out supportingTokens
-                    )
+                    this.binding
+                        .TryGetSupportingTokens(
+                            this.binding.SecurityProtocolFactory,
+                            this.binding.Target,
+                            this.binding.Via,
+                            this.message,
+                            timeoutHelper.RemainingTime(),
+                            false,
+                            out supportingTokens
+                        )
                 )
                 {
                     completeSelf = this.OnGetSupportingTokensDone(timeoutHelper.RemainingTime());
@@ -1413,9 +1422,8 @@ namespace System.ServiceModel.Security
                 else
                 {
                     this.supportingTokens = new Collection<SupportingTokenSpecification>();
-                    this.supportingTokenProviders = this.binding.GetSupportingTokenProviders(
-                        message.Headers.Action
-                    );
+                    this.supportingTokenProviders = this.binding
+                        .GetSupportingTokenProviders(message.Headers.Action);
                     if (
                         !(
                             this.supportingTokenProviders != null
@@ -1424,11 +1432,12 @@ namespace System.ServiceModel.Security
                     )
                     {
                         Fx.Assert("There must be at least 1 supporting token provider");
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new NotSupportedException(
-                                "There must be at least 1 supporting token provider"
-                            )
-                        );
+                        throw DiagnosticUtility.ExceptionUtility
+                            .ThrowHelperError(
+                                new NotSupportedException(
+                                    "There must be at least 1 supporting token provider"
+                                )
+                            );
                     }
                     completeSelf = this.AddSupportingTokens();
                 }

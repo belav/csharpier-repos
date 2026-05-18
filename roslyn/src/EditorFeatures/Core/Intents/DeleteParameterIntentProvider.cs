@@ -85,8 +85,8 @@ internal sealed class DeleteParameterIntentProvider(IGlobalOptionService globalO
             return ImmutableArray<IntentProcessorResult>.Empty;
         }
 
-        var changedDocuments = changeSignatureResult
-            .UpdatedSolution.GetChangedDocuments(priorDocument.Project.Solution)
+        var changedDocuments = changeSignatureResult.UpdatedSolution
+            .GetChangedDocuments(priorDocument.Project.Solution)
             .ToImmutableArray();
         return ImmutableArray.Create(
             new IntentProcessorResult(

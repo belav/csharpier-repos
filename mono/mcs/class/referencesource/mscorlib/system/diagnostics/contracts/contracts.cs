@@ -1064,12 +1064,10 @@ namespace System.Diagnostics.Contracts.Internal
             Exception innerException
         )
         {
-            return System.Runtime.CompilerServices.ContractHelper.RaiseContractFailedEvent(
-                failureKind,
-                userMessage,
-                conditionText,
-                innerException
-            );
+            return System.Runtime
+                .CompilerServices
+                .ContractHelper
+                .RaiseContractFailedEvent(failureKind, userMessage, conditionText, innerException);
         }
 
         /// <summary>
@@ -1087,13 +1085,10 @@ namespace System.Diagnostics.Contracts.Internal
             Exception innerException
         )
         {
-            System.Runtime.CompilerServices.ContractHelper.TriggerFailure(
-                kind,
-                displayMessage,
-                userMessage,
-                conditionText,
-                innerException
-            );
+            System.Runtime
+                .CompilerServices
+                .ContractHelper
+                .TriggerFailure(kind, displayMessage, userMessage, conditionText, innerException);
         }
 
         #endregion Rewriter Failure Hooks

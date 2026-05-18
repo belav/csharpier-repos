@@ -70,10 +70,11 @@ namespace ILCompiler.Dataflow
 
             var diagnosticContext = new DiagnosticContext(
                 origin,
-                !mdManager.Logger.ShouldSuppressAnalysisWarningsForRequires(
-                    origin.MemberDefinition,
-                    DiagnosticUtilities.RequiresUnreferencedCodeAttribute
-                ),
+                !mdManager.Logger
+                    .ShouldSuppressAnalysisWarningsForRequires(
+                        origin.MemberDefinition,
+                        DiagnosticUtilities.RequiresUnreferencedCodeAttribute
+                    ),
                 mdManager.Logger
             );
             var reflectionMarker = new ReflectionMarker(
@@ -159,16 +160,14 @@ namespace ILCompiler.Dataflow
                     != default
                 )
                 {
-                    var genericParameterValue =
-                        reflectionMarker.Annotations.GetGenericParameterValue(genericParameter);
+                    var genericParameterValue = reflectionMarker.Annotations
+                        .GetGenericParameterValue(genericParameter);
                     Debug.Assert(
                         genericParameterValue.DynamicallyAccessedMemberTypes
                             != DynamicallyAccessedMemberTypes.None
                     );
-                    MultiValue genericArgumentValue =
-                        reflectionMarker.Annotations.GetTypeValueFromGenericArgument(
-                            genericArgument
-                        );
+                    MultiValue genericArgumentValue = reflectionMarker.Annotations
+                        .GetTypeValueFromGenericArgument(genericArgument);
                     var requireDynamicallyAccessedMembersAction =
                         new RequireDynamicallyAccessedMembersAction(
                             reflectionMarker,

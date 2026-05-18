@@ -65,8 +65,8 @@ namespace Microsoft.CodeAnalysis.Interactive
 
             try
             {
-                await InteractiveHost
-                    .Service.RunServerAsync(pipeName, clientProcessId, invokeOnMainThread)
+                await InteractiveHost.Service
+                    .RunServerAsync(pipeName, clientProcessId, invokeOnMainThread)
                     .ConfigureAwait(false);
                 return 0;
             }

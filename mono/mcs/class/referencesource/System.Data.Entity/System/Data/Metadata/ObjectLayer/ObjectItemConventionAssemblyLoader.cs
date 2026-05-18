@@ -52,13 +52,14 @@ namespace System.Data.Metadata.Edm
                 {
                     if (type.IsValueType && !type.IsEnum)
                     {
-                        SessionData.LoadMessageLogger.LogLoadMessage(
-                            Strings.Validator_OSpace_Convention_Struct(
-                                cspaceType.FullName,
-                                type.FullName
-                            ),
-                            cspaceType
-                        );
+                        SessionData.LoadMessageLogger
+                            .LogLoadMessage(
+                                Strings.Validator_OSpace_Convention_Struct(
+                                    cspaceType.FullName,
+                                    type.FullName
+                                ),
+                                cspaceType
+                            );
                         continue;
                     }
 
@@ -81,16 +82,17 @@ namespace System.Data.Metadata.Edm
                         {
                             // at this point there is already a Clr Type that is structurally matched to this CSpace type, we throw exception
                             EdmType previousOSpaceType = SessionData.CspaceToOspace[cspaceType];
-                            SessionData.EdmItemErrors.Add(
-                                new EdmItemError(
-                                    Strings.Validator_OSpace_Convention_AmbiguousClrType(
-                                        cspaceType.Name,
-                                        previousOSpaceType.ClrType.FullName,
-                                        type.FullName
-                                    ),
-                                    previousOSpaceType
-                                )
-                            );
+                            SessionData.EdmItemErrors
+                                .Add(
+                                    new EdmItemError(
+                                        Strings.Validator_OSpace_Convention_AmbiguousClrType(
+                                            cspaceType.Name,
+                                            previousOSpaceType.ClrType.FullName,
+                                            type.FullName
+                                        ),
+                                        previousOSpaceType
+                                    )
+                                );
                         }
                     }
                 }
@@ -131,14 +133,15 @@ namespace System.Data.Metadata.Edm
                         pair.Value > 1,
                         "how did we get a negative count of types in the dictionary?"
                     );
-                    SessionData.EdmItemErrors.Add(
-                        new EdmItemError(
-                            Strings.Validator_OSpace_Convention_MultipleTypesWithSameName(
-                                type.Name
-                            ),
-                            pair.Key
-                        )
-                    );
+                    SessionData.EdmItemErrors
+                        .Add(
+                            new EdmItemError(
+                                Strings.Validator_OSpace_Convention_MultipleTypesWithSameName(
+                                    type.Name
+                                ),
+                                pair.Key
+                            )
+                        );
                 }
             }
 
@@ -167,13 +170,14 @@ namespace System.Data.Metadata.Edm
             // if one of the types is an enum while the other is not there is no match
             if (Helper.IsEnumType(cspaceType) ^ type.IsEnum)
             {
-                SessionData.LoadMessageLogger.LogLoadMessage(
-                    Strings.Validator_OSpace_Convention_SSpaceOSpaceTypeMismatch(
-                        cspaceType.FullName,
-                        cspaceType.FullName
-                    ),
-                    cspaceType
-                );
+                SessionData.LoadMessageLogger
+                    .LogLoadMessage(
+                        Strings.Validator_OSpace_Convention_SSpaceOSpaceTypeMismatch(
+                            cspaceType.FullName,
+                            cspaceType.FullName
+                        ),
+                        cspaceType
+                    );
                 return false;
             }
 
@@ -339,18 +343,17 @@ namespace System.Data.Metadata.Edm
             // a valid Edm primitive types (e.g. ulong)
             PrimitiveType underlyingEnumType;
             if (
-                !ClrProviderManifest.Instance.TryGetPrimitiveType(
-                    enumType.GetEnumUnderlyingType(),
-                    out underlyingEnumType
-                )
+                !ClrProviderManifest.Instance
+                    .TryGetPrimitiveType(enumType.GetEnumUnderlyingType(), out underlyingEnumType)
             )
             {
-                SessionData.LoadMessageLogger.LogLoadMessage(
-                    Strings.Validator_UnsupportedEnumUnderlyingType(
-                        enumType.GetEnumUnderlyingType().FullName
-                    ),
-                    cspaceEnumType
-                );
+                SessionData.LoadMessageLogger
+                    .LogLoadMessage(
+                        Strings.Validator_UnsupportedEnumUnderlyingType(
+                            enumType.GetEnumUnderlyingType().FullName
+                        ),
+                        cspaceEnumType
+                    );
 
                 return false;
             }
@@ -359,10 +362,11 @@ namespace System.Data.Metadata.Edm
                 != cspaceEnumType.UnderlyingType.PrimitiveTypeKind
             )
             {
-                SessionData.LoadMessageLogger.LogLoadMessage(
-                    Strings.Validator_OSpace_Convention_NonMatchingUnderlyingTypes,
-                    cspaceEnumType
-                );
+                SessionData.LoadMessageLogger
+                    .LogLoadMessage(
+                        Strings.Validator_OSpace_Convention_NonMatchingUnderlyingTypes,
+                        cspaceEnumType
+                    );
 
                 return false;
             }
@@ -389,8 +393,8 @@ namespace System.Data.Metadata.Edm
 
             var enumUnderlyingType = enumType.GetEnumUnderlyingType();
 
-            var cspaceSortedEnumMemberEnumerator = cspaceEnumType
-                .Members.OrderBy(m => m.Name)
+            var cspaceSortedEnumMemberEnumerator = cspaceEnumType.Members
+                .OrderBy(m => m.Name)
                 .GetEnumerator();
             var ospaceSortedEnumMemberNamesEnumerator = enumType
                 .GetEnumNames()
@@ -408,13 +412,15 @@ namespace System.Data.Metadata.Edm
                 if (
                     cspaceSortedEnumMemberEnumerator.Current.Name
                         == ospaceSortedEnumMemberNamesEnumerator.Current
-                    && cspaceSortedEnumMemberEnumerator.Current.Value.Equals(
-                        Convert.ChangeType(
-                            Enum.Parse(enumType, ospaceSortedEnumMemberNamesEnumerator.Current),
-                            enumUnderlyingType,
-                            CultureInfo.InvariantCulture
+                    && cspaceSortedEnumMemberEnumerator.Current
+                        .Value
+                        .Equals(
+                            Convert.ChangeType(
+                                Enum.Parse(enumType, ospaceSortedEnumMemberNamesEnumerator.Current),
+                                enumUnderlyingType,
+                                CultureInfo.InvariantCulture
+                            )
                         )
-                    )
                 )
                 {
                     if (!cspaceSortedEnumMemberEnumerator.MoveNext())
@@ -424,15 +430,19 @@ namespace System.Data.Metadata.Edm
                 }
             }
 
-            SessionData.LoadMessageLogger.LogLoadMessage(
-                System.Data.Entity.Strings.Mapping_Enum_OCMapping_MemberMismatch(
-                    enumType.FullName,
-                    cspaceSortedEnumMemberEnumerator.Current.Name,
-                    cspaceSortedEnumMemberEnumerator.Current.Value,
-                    cspaceEnumType.FullName
-                ),
-                cspaceEnumType
-            );
+            SessionData.LoadMessageLogger
+                .LogLoadMessage(
+                    System.Data
+                        .Entity
+                        .Strings
+                        .Mapping_Enum_OCMapping_MemberMismatch(
+                            enumType.FullName,
+                            cspaceSortedEnumMemberEnumerator.Current.Name,
+                            cspaceSortedEnumMemberEnumerator.Current.Value,
+                            cspaceEnumType.FullName
+                        ),
+                    cspaceEnumType
+                );
 
             return false;
         }
@@ -452,14 +462,12 @@ namespace System.Data.Metadata.Edm
         private EdmType ResolveBaseType(StructuralType baseCSpaceType, Type type)
         {
             EdmType ospaceType;
-            bool foundValue = SessionData.CspaceToOspace.TryGetValue(
-                baseCSpaceType,
-                out ospaceType
-            );
+            bool foundValue = SessionData.CspaceToOspace
+                .TryGetValue(baseCSpaceType, out ospaceType);
             if (!foundValue)
             {
-                string message =
-                    SessionData.LoadMessageLogger.CreateErrorMessageWithTypeSpecificLoadLogs(
+                string message = SessionData.LoadMessageLogger
+                    .CreateErrorMessageWithTypeSpecificLoadLogs(
                         Strings.Validator_OSpace_Convention_BaseTypeNotLoaded(type, baseCSpaceType),
                         baseCSpaceType
                     );
@@ -686,10 +694,8 @@ namespace System.Data.Metadata.Edm
         {
             EdmType propertyType;
             if (
-                SessionData.CspaceToOspace.TryGetValue(
-                    (StructuralType)cspaceProperty.TypeUsage.EdmType,
-                    out propertyType
-                )
+                SessionData.CspaceToOspace
+                    .TryGetValue((StructuralType)cspaceProperty.TypeUsage.EdmType, out propertyType)
             )
             {
                 Debug.Assert(propertyType is StructuralType, "Structural type expected.");
@@ -704,8 +710,8 @@ namespace System.Data.Metadata.Edm
             }
             else
             {
-                string message =
-                    SessionData.LoadMessageLogger.CreateErrorMessageWithTypeSpecificLoadLogs(
+                string message = SessionData.LoadMessageLogger
+                    .CreateErrorMessageWithTypeSpecificLoadLogs(
                         Strings.Validator_OSpace_Convention_MissingOSpaceType(
                             cspaceProperty.TypeUsage.EdmType.FullName
                         ),
@@ -724,10 +730,8 @@ namespace System.Data.Metadata.Edm
         {
             EdmType ospaceRelationship;
             if (
-                SessionData.CspaceToOspace.TryGetValue(
-                    cspaceProperty.RelationshipType,
-                    out ospaceRelationship
-                )
+                SessionData.CspaceToOspace
+                    .TryGetValue(cspaceProperty.RelationshipType, out ospaceRelationship)
             )
             {
                 Debug.Assert(ospaceRelationship is StructuralType, "Structural type expected.");
@@ -737,11 +741,13 @@ namespace System.Data.Metadata.Edm
                 if (Helper.IsCollectionType(cspaceProperty.TypeUsage.EdmType))
                 {
                     EdmType findType;
-                    foundTarget = SessionData.CspaceToOspace.TryGetValue(
-                        (StructuralType)
-                            ((CollectionType)cspaceProperty.TypeUsage.EdmType).TypeUsage.EdmType,
-                        out findType
-                    );
+                    foundTarget = SessionData.CspaceToOspace
+                        .TryGetValue(
+                            (StructuralType)
+                                ((CollectionType)cspaceProperty.TypeUsage.EdmType).TypeUsage
+                                    .EdmType,
+                            out findType
+                        );
                     if (foundTarget)
                     {
                         Debug.Assert(findType is StructuralType, "Structural type expected.");
@@ -752,10 +758,11 @@ namespace System.Data.Metadata.Edm
                 else
                 {
                     EdmType findType;
-                    foundTarget = SessionData.CspaceToOspace.TryGetValue(
-                        (StructuralType)cspaceProperty.TypeUsage.EdmType,
-                        out findType
-                    );
+                    foundTarget = SessionData.CspaceToOspace
+                        .TryGetValue(
+                            (StructuralType)cspaceProperty.TypeUsage.EdmType,
+                            out findType
+                        );
                     if (foundTarget)
                     {
                         Debug.Assert(findType is StructuralType, "Structural type expected.");
@@ -779,24 +786,21 @@ namespace System.Data.Metadata.Edm
                 // we can use First because o-space relationships are created directly from
                 // c-space relationship
                 navigationProperty.ToEndMember = (RelationshipEndMember)
-                    ((RelationshipType)ospaceRelationship).Members.First(e =>
-                        e.Name == cspaceProperty.ToEndMember.Name
-                    );
+                    ((RelationshipType)ospaceRelationship).Members
+                        .First(e => e.Name == cspaceProperty.ToEndMember.Name);
                 navigationProperty.FromEndMember = (RelationshipEndMember)
-                    ((RelationshipType)ospaceRelationship).Members.First(e =>
-                        e.Name == cspaceProperty.FromEndMember.Name
-                    );
+                    ((RelationshipType)ospaceRelationship).Members
+                        .First(e => e.Name == cspaceProperty.FromEndMember.Name);
                 ospaceType.AddMember(navigationProperty);
             }
             else
             {
-                EntityTypeBase missingType = cspaceProperty
-                    .RelationshipType.RelationshipEndMembers.Select(e =>
-                        ((RefType)e.TypeUsage.EdmType).ElementType
-                    )
+                EntityTypeBase missingType = cspaceProperty.RelationshipType
+                    .RelationshipEndMembers
+                    .Select(e => ((RefType)e.TypeUsage.EdmType).ElementType)
                     .First(e => e != cspaceType);
-                string message =
-                    SessionData.LoadMessageLogger.CreateErrorMessageWithTypeSpecificLoadLogs(
+                string message = SessionData.LoadMessageLogger
+                    .CreateErrorMessageWithTypeSpecificLoadLogs(
                         Strings.Validator_OSpace_Convention_RelationshipNotLoaded(
                             cspaceProperty.RelationshipType.FullName,
                             missingType.FullName
@@ -942,10 +946,8 @@ namespace System.Data.Metadata.Edm
         {
             EdmType propertyType;
             if (
-                SessionData.CspaceToOspace.TryGetValue(
-                    cspaceProperty.TypeUsage.EdmType,
-                    out propertyType
-                )
+                SessionData.CspaceToOspace
+                    .TryGetValue(cspaceProperty.TypeUsage.EdmType, out propertyType)
             )
             {
                 if (clrProperty.CanRead && clrProperty.CanWrite)
@@ -954,8 +956,8 @@ namespace System.Data.Metadata.Edm
                 }
                 else
                 {
-                    string message =
-                        SessionData.LoadMessageLogger.CreateErrorMessageWithTypeSpecificLoadLogs(
+                    string message = SessionData.LoadMessageLogger
+                        .CreateErrorMessageWithTypeSpecificLoadLogs(
                             Strings.Validator_OSpace_Convention_ScalarPropertyMissginGetterOrSetter(
                                 clrProperty.Name,
                                 type.FullName,
@@ -969,8 +971,8 @@ namespace System.Data.Metadata.Edm
             }
             else
             {
-                string message =
-                    SessionData.LoadMessageLogger.CreateErrorMessageWithTypeSpecificLoadLogs(
+                string message = SessionData.LoadMessageLogger
+                    .CreateErrorMessageWithTypeSpecificLoadLogs(
                         Strings.Validator_OSpace_Convention_MissingOSpaceType(
                             cspaceProperty.TypeUsage.EdmType.FullName
                         ),
@@ -992,7 +994,8 @@ namespace System.Data.Metadata.Edm
 
             // find all the relationships
             foreach (
-                AssociationType cspaceAssociation in SessionData.EdmItemCollection.GetItems<AssociationType>()
+                AssociationType cspaceAssociation in SessionData.EdmItemCollection
+                    .GetItems<AssociationType>()
             )
             {
                 Debug.Assert(
@@ -1008,14 +1011,16 @@ namespace System.Data.Metadata.Edm
 
                 EdmType[] ospaceEndTypes = new EdmType[2];
                 if (
-                    SessionData.CspaceToOspace.TryGetValue(
-                        GetRelationshipEndType(cspaceAssociation.RelationshipEndMembers[0]),
-                        out ospaceEndTypes[0]
-                    )
-                    && SessionData.CspaceToOspace.TryGetValue(
-                        GetRelationshipEndType(cspaceAssociation.RelationshipEndMembers[1]),
-                        out ospaceEndTypes[1]
-                    )
+                    SessionData.CspaceToOspace
+                        .TryGetValue(
+                            GetRelationshipEndType(cspaceAssociation.RelationshipEndMembers[0]),
+                            out ospaceEndTypes[0]
+                        )
+                    && SessionData.CspaceToOspace
+                        .TryGetValue(
+                            GetRelationshipEndType(cspaceAssociation.RelationshipEndMembers[1]),
+                            out ospaceEndTypes[1]
+                        )
                 )
                 {
                     Debug.Assert(ospaceEndTypes[0] is StructuralType);
@@ -1153,14 +1158,15 @@ namespace System.Data.Metadata.Edm
             else
             {
                 // we were loading in convention mode, and ran into an assembly that can't be loaded by convention
-                sessionData.EdmItemErrors.Add(
-                    new EdmItemError(
-                        Strings.Validator_OSpace_Convention_AttributeAssemblyReferenced(
-                            assembly.FullName
-                        ),
-                        null
-                    )
-                );
+                sessionData.EdmItemErrors
+                    .Add(
+                        new EdmItemError(
+                            Strings.Validator_OSpace_Convention_AttributeAssemblyReferenced(
+                                assembly.FullName
+                            ),
+                            null
+                        )
+                    );
                 return new ObjectItemNoOpAssemblyLoader(assembly, sessionData);
             }
         }

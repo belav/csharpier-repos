@@ -136,10 +136,8 @@ internal sealed class InstallPackageAndAddImportCodeAction : AddImportCodeAction
             CancellationToken cancellationToken
         )
         {
-            var newSolution = workspace.CurrentSolution.WithDocumentText(
-                _changedDocumentId,
-                _newText
-            );
+            var newSolution = workspace.CurrentSolution
+                .WithDocumentText(_changedDocumentId, _newText);
 
             // First make the changes to add the import to the document.
             if (workspace.TryApplyChanges(newSolution, progressTracker))
@@ -159,10 +157,8 @@ internal sealed class InstallPackageAndAddImportCodeAction : AddImportCodeAction
                 }
 
                 // Installing the nuget package failed.  Roll back the workspace.
-                var rolledBackSolution = workspace.CurrentSolution.WithDocumentText(
-                    _changedDocumentId,
-                    _oldText
-                );
+                var rolledBackSolution = workspace.CurrentSolution
+                    .WithDocumentText(_changedDocumentId, _oldText);
                 workspace.TryApplyChanges(rolledBackSolution, progressTracker);
             }
 

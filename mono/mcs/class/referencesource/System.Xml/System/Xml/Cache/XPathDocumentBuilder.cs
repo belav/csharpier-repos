@@ -146,10 +146,8 @@ namespace MS.Internal.Xml.Cache
             else
             {
                 // This tree is an XQuery fragment (no document root node), so root will be next node in the current page
-                this.doc.SetRootNode(
-                    this.nodePageFact.NextNodePage,
-                    this.nodePageFact.NextNodeIndex
-                );
+                this.doc
+                    .SetRootNode(this.nodePageFact.NextNodePage, this.nodePageFact.NextNodeIndex);
             }
         }
 
@@ -324,7 +322,8 @@ namespace MS.Internal.Xml.Cache
             if (this.pageParent[this.idxParent].HasNamespaceDecls)
             {
                 // Add it to the document's element --> namespace mapping
-                this.doc.AddNamespace(this.pageParent, this.idxParent, this.pageNmsp, this.idxNmsp);
+                this.doc
+                    .AddNamespace(this.pageParent, this.idxParent, this.pageNmsp, this.idxNmsp);
 
                 // Restore the previous namespace chain
                 nodeRef = this.stkNmsp.Pop();
@@ -386,11 +385,12 @@ namespace MS.Internal.Xml.Cache
                 {
                     // Then add its value to the idValueMap map
                     Debug.Assert(this.idxParent != 0, "ID attribute must have an element parent");
-                    this.doc.AddIdElement(
-                        this.pageSibling[this.idxSibling].Value,
-                        this.pageParent,
-                        this.idxParent
-                    );
+                    this.doc
+                        .AddIdElement(
+                            this.pageSibling[this.idxSibling].Value,
+                            this.pageParent,
+                            this.idxParent
+                        );
                 }
             }
         }
@@ -714,10 +714,11 @@ namespace MS.Internal.Xml.Cache
 
                     // Id was defined in DTD and DTD doesn't have notion of namespace so we should
                     // use prefix instead of namespace here.  Schema already does this for us.
-                    this.elemIdMap.Add(
-                        new XmlQualifiedName(attrList.LocalName, attrList.Prefix),
-                        new XmlQualifiedName(idAttribute.LocalName, idAttribute.Prefix)
-                    );
+                    this.elemIdMap
+                        .Add(
+                            new XmlQualifiedName(attrList.LocalName, attrList.Prefix),
+                            new XmlQualifiedName(idAttribute.LocalName, idAttribute.Prefix)
+                        );
                 }
             }
         }
@@ -765,18 +766,19 @@ namespace MS.Internal.Xml.Cache
             ComputeLineInfo(false, out lineNumOffset, out linePosOffset);
 
             // Obtain a XPathNodeInfoAtom object for this node
-            info = this.infoTable.Create(
-                prefix,
-                string.Empty,
-                string.Empty,
-                string.Empty,
-                pageElem,
-                pageNode,
-                null,
-                this.doc,
-                this.lineNumBase,
-                this.linePosBase
-            );
+            info = this.infoTable
+                .Create(
+                    prefix,
+                    string.Empty,
+                    string.Empty,
+                    string.Empty,
+                    pageElem,
+                    pageNode,
+                    null,
+                    this.doc,
+                    this.lineNumBase,
+                    this.linePosBase
+                );
 
             // Initialize the new node
             pageNode[idxNode].Create(info, XPathNodeType.Namespace, idxElem);
@@ -813,18 +815,19 @@ namespace MS.Internal.Xml.Cache
             ComputeLineInfo(XPathNavigator.IsText(xptyp), out lineNumOffset, out linePosOffset);
 
             // Obtain a XPathNodeInfoAtom object for this node
-            info = this.infoTable.Create(
-                localName,
-                namespaceUri,
-                prefix,
-                baseUri,
-                this.pageParent,
-                pageNode,
-                pageNode,
-                this.doc,
-                this.lineNumBase,
-                this.linePosBase
-            );
+            info = this.infoTable
+                .Create(
+                    localName,
+                    namespaceUri,
+                    prefix,
+                    baseUri,
+                    this.pageParent,
+                    pageNode,
+                    pageNode,
+                    this.doc,
+                    this.lineNumBase,
+                    this.linePosBase
+                );
 
             // Initialize the new node
             pageNode[idxNode].Create(info, xptyp, this.idxParent);

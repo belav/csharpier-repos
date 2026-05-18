@@ -26,13 +26,14 @@ namespace System.ServiceModel.Activation
         {
             if (!IsDefined(value))
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidEnumArgumentException(
-                        "value",
-                        (int)value,
-                        typeof(AspNetCompatibilityRequirementsMode)
-                    )
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidEnumArgumentException(
+                            "value",
+                            (int)value,
+                            typeof(AspNetCompatibilityRequirementsMode)
+                        )
+                    );
             }
         }
     }

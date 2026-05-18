@@ -419,11 +419,8 @@ namespace System.Net.Sockets
         [HostProtection(ExternalThreading = true)]
         public Task<TcpClient> AcceptTcpClientAsync()
         {
-            return Task<TcpClient>.Factory.FromAsync(
-                BeginAcceptTcpClient,
-                EndAcceptTcpClient,
-                null
-            );
+            return Task<TcpClient>.Factory
+                .FromAsync(BeginAcceptTcpClient, EndAcceptTcpClient, null);
         }
     }; // class TcpListener
 } // namespace System.Net.Sockets

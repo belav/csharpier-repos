@@ -24,8 +24,7 @@ namespace ComInterfaceGenerator.Unit.Tests
                 GeneratorKind.VTableIndexStubGenerator => new VirtualMethodIndexAttributeProvider(),
                 GeneratorKind.ComInterfaceGeneratorManagedObjectWrapper =>
                     new GeneratedComInterfaceAttributeProvider(
-                        System
-                            .Runtime
+                        System.Runtime
                             .InteropServices
                             .Marshalling
                             .ComInterfaceOptions
@@ -33,8 +32,7 @@ namespace ComInterfaceGenerator.Unit.Tests
                     ),
                 GeneratorKind.ComInterfaceGeneratorComObjectWrapper =>
                     new GeneratedComInterfaceAttributeProvider(
-                        System
-                            .Runtime
+                        System.Runtime
                             .InteropServices
                             .Marshalling
                             .ComInterfaceOptions
@@ -1274,9 +1272,8 @@ namespace ComInterfaceGenerator.Unit.Tests
                 TestCode = source,
                 TestBehaviors = TestBehaviors.SkipGeneratedSourcesCheck,
             };
-            test.DisabledDiagnostics.Remove(
-                GeneratorDiagnostics.Ids.NotRecommendedGeneratedComInterfaceUsage
-            );
+            test.DisabledDiagnostics
+                .Remove(GeneratorDiagnostics.Ids.NotRecommendedGeneratedComInterfaceUsage);
             test.ExpectedDiagnostics.AddRange(diagnostics);
             await test.RunAsync();
         }

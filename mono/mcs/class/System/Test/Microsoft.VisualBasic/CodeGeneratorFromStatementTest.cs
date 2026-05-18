@@ -518,18 +518,19 @@ namespace MonoTests.Microsoft.VisualBasic
                 "#4"
             );
 
-            cis.Statements.AddRange(
-                new CodeStatement[]
-                {
-                    new CodeExpressionStatement(new CodeSnippetExpression("DoA()")),
-                    new CodeExpressionStatement(new CodeSnippetExpression(";")),
-                    new CodeExpressionStatement(new CodeSnippetExpression("DoB()")),
-                    new CodeLabeledStatement("test", new CodeSnippetStatement("C")),
-                    new CodeExpressionStatement(new CodeSnippetExpression("")),
-                    new CodeSnippetStatement("A"),
-                    new CodeExpressionStatement(new CodeSnippetExpression("DoC()")),
-                }
-            );
+            cis.Statements
+                .AddRange(
+                    new CodeStatement[]
+                    {
+                        new CodeExpressionStatement(new CodeSnippetExpression("DoA()")),
+                        new CodeExpressionStatement(new CodeSnippetExpression(";")),
+                        new CodeExpressionStatement(new CodeSnippetExpression("DoB()")),
+                        new CodeLabeledStatement("test", new CodeSnippetStatement("C")),
+                        new CodeExpressionStatement(new CodeSnippetExpression("")),
+                        new CodeSnippetStatement("A"),
+                        new CodeExpressionStatement(new CodeSnippetExpression("DoC()")),
+                    }
+                );
             Assert.AreEqual(
                 string.Format(
                     CultureInfo.InvariantCulture,

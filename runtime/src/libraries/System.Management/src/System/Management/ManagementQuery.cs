@@ -3518,9 +3518,10 @@ namespace System.Management
                 s =
                     s
                     + " within "
-                    + withinInterval.TotalSeconds.ToString(
-                        (IFormatProvider)CultureInfo.InvariantCulture.GetFormat(typeof(double))
-                    );
+                    + withinInterval.TotalSeconds
+                        .ToString(
+                            (IFormatProvider)CultureInfo.InvariantCulture.GetFormat(typeof(double))
+                        );
 
             //Where clause
             if (!(Condition.Length == 0))
@@ -3532,9 +3533,10 @@ namespace System.Management
                 s =
                     s
                     + " group within "
-                    + groupWithinInterval.TotalSeconds.ToString(
-                        (IFormatProvider)CultureInfo.InvariantCulture.GetFormat(typeof(double))
-                    );
+                    + groupWithinInterval.TotalSeconds
+                        .ToString(
+                            (IFormatProvider)CultureInfo.InvariantCulture.GetFormat(typeof(double))
+                        );
 
                 //Group By clause
                 if ((null != groupByPropertyList) && (0 < groupByPropertyList.Count))

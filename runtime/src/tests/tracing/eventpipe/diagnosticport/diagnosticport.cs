@@ -60,9 +60,10 @@ namespace Tracing.Tests.DiagnosticPortValidation
                                 IpcAdvertise advertise = IpcAdvertise.Parse(stream);
                                 lock (sync)
                                     advertisements.Add(advertise);
-                                Logger.logger.Log(
-                                    $"Server {serverIndex} got advertise {advertise.ToString()}"
-                                );
+                                Logger.logger
+                                    .Log(
+                                        $"Server {serverIndex} got advertise {advertise.ToString()}"
+                                    );
                             })
                         );
                     }
@@ -124,26 +125,25 @@ namespace Tracing.Tests.DiagnosticPortValidation
                             for (int i = 0; i < s_NumberOfPorts; i++)
                             {
                                 fSuccess &= !mre.WaitOne(0);
-                                Logger.logger.Log(
-                                    $"Runtime HAS NOT resumed (expects: true): {fSuccess}"
-                                );
+                                Logger.logger
+                                    .Log($"Runtime HAS NOT resumed (expects: true): {fSuccess}");
                                 var (server, _) = serverAndNames[i];
                                 int serverIndex = i;
                                 Stream stream = await server.AcceptAsync();
                                 IpcAdvertise advertise = IpcAdvertise.Parse(stream);
                                 lock (sync)
                                     advertisements.Add(advertise);
-                                Logger.logger.Log(
-                                    $"Server {serverIndex} got advertise {advertise.ToString()}"
-                                );
+                                Logger.logger
+                                    .Log(
+                                        $"Server {serverIndex} got advertise {advertise.ToString()}"
+                                    );
 
                                 // send resume command on this connection
                                 var message = new IpcMessage(0x04, 0x01);
                                 Logger.logger.Log($"Port {serverIndex} sent: {message.ToString()}");
                                 IpcMessage response = IpcClient.SendMessage(stream, message);
-                                Logger.logger.Log(
-                                    $"Port {serverIndex} received: {response.ToString()}"
-                                );
+                                Logger.logger
+                                    .Log($"Port {serverIndex} received: {response.ToString()}");
                             }
                         }
                     );
@@ -194,9 +194,8 @@ namespace Tracing.Tests.DiagnosticPortValidation
                         () =>
                         {
                             fSuccess &= !mre.WaitOne(0);
-                            Logger.logger.Log(
-                                $"Runtime HAS NOT resumed (expects: true): {fSuccess}"
-                            );
+                            Logger.logger
+                                .Log($"Runtime HAS NOT resumed (expects: true): {fSuccess}");
 
                             // send resume command on this connection
                             var message = new IpcMessage(0x04, 0x01);
@@ -266,9 +265,10 @@ namespace Tracing.Tests.DiagnosticPortValidation
                 config,
                 out var sessionId
             );
-            Logger.logger.Log(
-                $"Started EventPipeSession over standard connection with session id: 0x{sessionId:x}"
-            );
+            Logger.logger
+                .Log(
+                    $"Started EventPipeSession over standard connection with session id: 0x{sessionId:x}"
+                );
 
             Task readerTask = Task.Run(async () =>
             {
@@ -335,9 +335,10 @@ namespace Tracing.Tests.DiagnosticPortValidation
                     IpcMessage response = IpcClient.SendMessage(stream, message);
                     Logger.logger.Log($"received: {response.ToString()}");
                     ProcessInfo info = ProcessInfo.TryParse(response.Payload);
-                    Logger.logger.Log(
-                        $"ProcessInfo: {{ id={info.ProcessId}, cookie={info.RuntimeCookie}, cmdline={info.Commandline}, OS={info.OS}, arch={info.Arch} }}"
-                    );
+                    Logger.logger
+                        .Log(
+                            $"ProcessInfo: {{ id={info.ProcessId}, cookie={info.RuntimeCookie}, cmdline={info.Commandline}, OS={info.OS}, arch={info.Arch} }}"
+                        );
 
                     Utils.Assert(
                         info.RuntimeCookie.Equals(advertise.RuntimeInstanceCookie),
@@ -404,9 +405,10 @@ namespace Tracing.Tests.DiagnosticPortValidation
                                 IpcAdvertise advertise = IpcAdvertise.Parse(stream);
                                 lock (sync)
                                     advertisements.Add(advertise);
-                                Logger.logger.Log(
-                                    $"Server {serverIndex} got advertise {advertise.ToString()}"
-                                );
+                                Logger.logger
+                                    .Log(
+                                        $"Server {serverIndex} got advertise {advertise.ToString()}"
+                                    );
                             })
                         );
                     }
@@ -447,9 +449,10 @@ namespace Tracing.Tests.DiagnosticPortValidation
                     var processInfoMessage = new IpcMessage(0x04, 0x04);
                     Logger.logger.Log($"Wrote: {processInfoMessage}");
                     IpcMessage response = IpcClient.SendMessage(stream, processInfoMessage);
-                    Logger.logger.Log(
-                        $"Received: [{response.Payload.Select(b => b.ToString("X2") + " ").Aggregate(string.Concat)}]"
-                    );
+                    Logger.logger
+                        .Log(
+                            $"Received: [{response.Payload.Select(b => b.ToString("X2") + " ").Aggregate(string.Concat)}]"
+                        );
                     ProcessInfo2 processInfo2 = ProcessInfo2.TryParse(response.Payload);
 
                     if (TestLibrary.Utilities.IsMonoRuntime)
@@ -461,8 +464,9 @@ namespace Tracing.Tests.DiagnosticPortValidation
                     }
                     else if (TestLibrary.Utilities.IsNativeAot)
                     {
-                        string expectedName = System
-                            .Reflection.Assembly.GetExecutingAssembly()
+                        string expectedName = System.Reflection
+                            .Assembly
+                            .GetExecutingAssembly()
                             .GetName()
                             .Name;
                         Utils.Assert(

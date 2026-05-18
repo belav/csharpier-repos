@@ -37,8 +37,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
 
         // Explicitly remove ":" from the set of filter characters because (by default)
         // any character that appears in DisplayText gets treated as a filter char.
-        private static readonly CompletionItemRules s_rules =
-            CompletionItemRules.Default.WithFilterCharacterRule(
+        private static readonly CompletionItemRules s_rules = CompletionItemRules.Default
+            .WithFilterCharacterRule(
                 CharacterSetModificationRule.Create(CharacterSetModificationKind.Remove, ':')
             );
 
@@ -193,8 +193,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
             int position
         )
         {
-            var existingArguments = argumentList
-                .Arguments.Where(a => a.Span.End <= position && a.NameColon != null)
+            var existingArguments = argumentList.Arguments
+                .Where(a => a.Span.End <= position && a.NameColon != null)
                 .Select(a => a.NameColon!.Name.Identifier.ValueText);
 
             return existingArguments.ToSet();
@@ -263,8 +263,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
                 && type.TypeKind != TypeKind.Delegate
             )
             {
-                return type
-                    .InstanceConstructors.Where(c => c.IsAccessibleWithin(within))
+                return type.InstanceConstructors
+                    .Where(c => c.IsAccessibleWithin(within))
                     .Select(c => c.Parameters);
             }
 
@@ -329,8 +329,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
 
                 if (type != null)
                 {
-                    return type
-                        .InstanceConstructors.Where(c => c.IsAccessibleWithin(within))
+                    return type.InstanceConstructors
+                        .Where(c => c.IsAccessibleWithin(within))
                         .Select(c => c.Parameters);
                 }
             }
@@ -360,8 +360,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
             var type =
                 semanticModel.GetTypeInfo(baseType.Type, cancellationToken).Type
                 as INamedTypeSymbol;
-            return type
-                ?.InstanceConstructors.Where(m => m.IsAccessibleWithin(within))
+            return type?.InstanceConstructors
+                .Where(m => m.IsAccessibleWithin(within))
                 .Select(m => m.Parameters);
         }
 

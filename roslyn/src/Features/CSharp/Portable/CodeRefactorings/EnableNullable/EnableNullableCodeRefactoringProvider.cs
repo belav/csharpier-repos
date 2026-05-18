@@ -325,16 +325,16 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.EnableNullable
             {
                 // If the file starts with a #region/#endregion that contains no semantic content (e.g. just a file
                 // header), skip it.
-                var nextToken = firstToken
-                    .Parent.GetLastToken(includeDirectives: true)
+                var nextToken = firstToken.Parent
+                    .GetLastToken(includeDirectives: true)
                     .GetNextToken(includeDirectives: true);
                 if (
                     nextToken.IsKind(SyntaxKind.HashToken)
                     && nextToken.Parent.IsKind(SyntaxKind.EndRegionDirectiveTrivia)
                 )
                 {
-                    firstToken = nextToken
-                        .Parent.GetLastToken(includeDirectives: true)
+                    firstToken = nextToken.Parent
+                        .GetLastToken(includeDirectives: true)
                         .GetNextToken(includeDirectives: true);
                 }
             }

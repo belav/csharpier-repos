@@ -80,8 +80,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.AddInheritdoc
                     continue;
                 }
 
-                semanticModel ??= await context
-                    .Document.GetRequiredSemanticModelAsync(cancellationToken)
+                semanticModel ??= await context.Document
+                    .GetRequiredSemanticModelAsync(cancellationToken)
                     .ConfigureAwait(false);
 
                 var symbol = semanticModel.GetDeclaredSymbol(node, cancellationToken);

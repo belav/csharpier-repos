@@ -602,9 +602,8 @@ namespace System.Xml
                     return true;
                 case XmlBinaryNodeType.BoolTextWithEndElement:
                     MoveToAtomicTextWithEndElement()
-                        .Value.SetValue(
-                            ReadUInt8() != 0 ? ValueHandleType.True : ValueHandleType.False
-                        );
+                        .Value
+                        .SetValue(ReadUInt8() != 0 ? ValueHandleType.True : ValueHandleType.False);
                     if (this.OutsideRootElement)
                         VerifyWhitespace();
                     return true;

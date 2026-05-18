@@ -197,10 +197,8 @@ namespace Microsoft.Interop.JavaScript
                     return new JSFunctionTypeInfo(true, Array.Empty<JSSimpleTypeInfo>());
                 case INamedTypeSymbol actionType
                     when fullTypeName.StartsWith(Constants.ActionGlobal, StringComparison.Ordinal):
-                    var argumentTypes = actionType
-                        .TypeArguments.Select(arg =>
-                            CreateJSTypeInfoForTypeSymbol(arg) as JSSimpleTypeInfo
-                        )
+                    var argumentTypes = actionType.TypeArguments
+                        .Select(arg => CreateJSTypeInfoForTypeSymbol(arg) as JSSimpleTypeInfo)
                         .ToArray();
                     if (argumentTypes.Any(x => x is null))
                     {
@@ -211,8 +209,8 @@ namespace Microsoft.Interop.JavaScript
                 // function
                 case INamedTypeSymbol funcType
                     when fullTypeName.StartsWith(Constants.FuncGlobal, StringComparison.Ordinal):
-                    var signatureTypes = funcType
-                        .TypeArguments.Select(argName =>
+                    var signatureTypes = funcType.TypeArguments
+                        .Select(argName =>
                             CreateJSTypeInfoForTypeSymbol(argName) as JSSimpleTypeInfo
                         )
                         .ToArray();

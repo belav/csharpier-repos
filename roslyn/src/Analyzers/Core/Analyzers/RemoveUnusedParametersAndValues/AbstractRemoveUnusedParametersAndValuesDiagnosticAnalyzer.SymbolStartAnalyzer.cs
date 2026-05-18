@@ -66,9 +66,8 @@ namespace Microsoft.CodeAnalysis.RemoveUnusedParametersAndValues
                 var deserializationConstructorCheck = new DeserializationConstructorCheck(
                     context.Compilation
                 );
-                var iCustomMarshaler = context.Compilation.GetTypeByMetadataName(
-                    typeof(ICustomMarshaler).FullName!
-                );
+                var iCustomMarshaler = context.Compilation
+                    .GetTypeByMetadataName(typeof(ICustomMarshaler).FullName!);
 
                 context.RegisterSymbolStartAction(
                     symbolStartContext =>
@@ -337,8 +336,8 @@ namespace Microsoft.CodeAnalysis.RemoveUnusedParametersAndValues
                     return false;
                 }
 
-                var methodSyntax = method
-                    .DeclaringSyntaxReferences.FirstOrDefault()
+                var methodSyntax = method.DeclaringSyntaxReferences
+                    .FirstOrDefault()
                     ?.GetSyntax(cancellationToken);
                 if (_compilationAnalyzer.ReturnsThrow(methodSyntax))
                 {
@@ -356,10 +355,11 @@ namespace Microsoft.CodeAnalysis.RemoveUnusedParametersAndValues
                             ContainingType: { } containingType
                         } methodSymbol
                     && methodSymbol.Parameters[0].Type.SpecialType == SpecialType.System_String
-                    && containingType.AllInterfaces.Any(
-                        (@interface, marshaler) => @interface.Equals(marshaler),
-                        _iCustomMarshaler
-                    )
+                    && containingType.AllInterfaces
+                        .Any(
+                            (@interface, marshaler) => @interface.Equals(marshaler),
+                            _iCustomMarshaler
+                        )
                 )
                 {
                     return false;

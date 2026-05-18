@@ -33,8 +33,9 @@ namespace Commons.Xml.Relaxng
 
         static void Usage()
         {
-            Console.Error.WriteLine(
-                @"
+            Console.Error
+                .WriteLine(
+                    @"
 Usage: mono-xmltool [options]
 
 options:
@@ -53,7 +54,7 @@ environment variable that affects behavior:
 
 	MONO_XMLTOOL_ERROR_DETAILS = yes : to get exception details.
 "
-            );
+                );
         }
 
         static void Run(string[] args)

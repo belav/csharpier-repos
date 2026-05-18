@@ -78,9 +78,8 @@ namespace System.ServiceModel.Routing
                         Win32Exception errorDetail = new Win32Exception(
                             ERROR_BAD_IMPERSONATION_LEVEL
                         );
-                        throw FxTrace.Exception.AsError(
-                            new SecurityNegotiationException(errorDetail.Message)
-                        );
+                        throw FxTrace.Exception
+                            .AsError(new SecurityNegotiationException(errorDetail.Message));
                     }
                     finally
                     {
@@ -231,9 +230,8 @@ namespace System.ServiceModel.Routing
             }
 
             this.operations = new List<SendOperation>(1);
-            this.operations.Add(
-                new SendOperation(result, typeof(TContract), this.OperationContext)
-            );
+            this.operations
+                .Add(new SendOperation(result, typeof(TContract), this.OperationContext));
         }
 
         public void RouteToEndpoints<TContract>(RoutingConfiguration routingConfig)
@@ -282,9 +280,8 @@ namespace System.ServiceModel.Routing
             this.operations = new List<SendOperation>(endpointLists.Count);
             foreach (IEnumerable<ServiceEndpoint> endpointList in endpointLists)
             {
-                this.operations.Add(
-                    new SendOperation(endpointList, typeof(TContract), this.OperationContext)
-                );
+                this.operations
+                    .Add(new SendOperation(endpointList, typeof(TContract), this.OperationContext));
             }
         }
 

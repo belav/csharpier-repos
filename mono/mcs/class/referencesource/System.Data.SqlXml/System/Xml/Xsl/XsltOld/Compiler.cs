@@ -295,10 +295,8 @@ namespace System.Xml.Xsl.XsltOld
         internal void InsertExtensionNamespace()
         {
             InsertExtensionNamespace(
-                Input.Navigator.GetAttribute(
-                    Input.Atoms.ExtensionElementPrefixes,
-                    Input.Atoms.UriXsl
-                )
+                Input.Navigator
+                    .GetAttribute(Input.Atoms.ExtensionElementPrefixes, Input.Atoms.UriXsl)
             );
         }
 
@@ -351,9 +349,8 @@ namespace System.Xml.Xsl.XsltOld
 
         internal virtual void PopScope()
         {
-            this.currentTemplate.ReleaseVariableSlots(
-                this.scopeManager.CurrentScope.GetVeriablesCount()
-            );
+            this.currentTemplate
+                .ReleaseVariableSlots(this.scopeManager.CurrentScope.GetVeriablesCount());
             this.scopeManager.PopScope();
         }
 
@@ -640,10 +637,11 @@ namespace System.Xml.Xsl.XsltOld
         {
             Debug.Assert(this.xmlResolver != null);
             string baseUri = this.Input.BaseURI;
-            Uri uri = this.xmlResolver.ResolveUri(
-                (baseUri.Length != 0) ? this.xmlResolver.ResolveUri(null, baseUri) : null,
-                relativeUri
-            );
+            Uri uri = this.xmlResolver
+                .ResolveUri(
+                    (baseUri.Length != 0) ? this.xmlResolver.ResolveUri(null, baseUri) : null,
+                    relativeUri
+                );
             if (uri == null)
             {
                 throw XsltException.Create(Res.Xslt_CantResolve, relativeUri);
@@ -1030,19 +1028,20 @@ namespace System.Xml.Xsl.XsltOld
             }
 
             // We want the assemblies generated for scripts to stick to the old security model
-            unit.AssemblyCustomAttributes.Add(
-                new CodeAttributeDeclaration(
-                    new CodeTypeReference(typeof(System.Security.SecurityRulesAttribute)),
-                    new CodeAttributeArgument(
-                        new CodeFieldReferenceExpression(
-                            new CodeTypeReferenceExpression(
-                                typeof(System.Security.SecurityRuleSet)
-                            ),
-                            "Level1"
+            unit.AssemblyCustomAttributes
+                .Add(
+                    new CodeAttributeDeclaration(
+                        new CodeTypeReference(typeof(System.Security.SecurityRulesAttribute)),
+                        new CodeAttributeArgument(
+                            new CodeFieldReferenceExpression(
+                                new CodeTypeReferenceExpression(
+                                    typeof(System.Security.SecurityRuleSet)
+                                ),
+                                "Level1"
+                            )
                         )
                     )
-                )
-            );
+                );
 
             CompilerParameters compilParams = new CompilerParameters();
             {
@@ -1055,9 +1054,8 @@ namespace System.Xml.Xsl.XsltOld
 #pragma warning disable 618
                         compilParams.Evidence = evidence;
 #pragma warning restore 618
-                        compilParams.ReferencedAssemblies.Add(
-                            typeof(XPathNavigator).Module.FullyQualifiedName
-                        );
+                        compilParams.ReferencedAssemblies
+                            .Add(typeof(XPathNavigator).Module.FullyQualifiedName);
                         compilParams.ReferencedAssemblies.Add("System.dll");
 #if !FEATURE_PAL // visualbasic
                         if (lang == ScriptingLanguage.VisualBasic)
@@ -1094,10 +1092,9 @@ namespace System.Xml.Xsl.XsltOld
             {
                 string ns = (string)entry.Key;
                 CodeTypeDeclaration scriptClass = (CodeTypeDeclaration)entry.Value;
-                this.stylesheet.ScriptObjectTypes.Add(
-                    ns,
-                    assembly.GetType(nsName + "." + scriptClass.Name)
-                );
+                this.stylesheet
+                    .ScriptObjectTypes
+                    .Add(ns, assembly.GetType(nsName + "." + scriptClass.Name));
             }
         }
 #endif

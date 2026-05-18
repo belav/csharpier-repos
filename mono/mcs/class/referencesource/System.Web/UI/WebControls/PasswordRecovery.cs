@@ -1629,10 +1629,8 @@ namespace System.Web.UI.WebControls
             {
                 CommandEventArgs ce = (CommandEventArgs)e;
                 if (
-                    ce.CommandName.Equals(
-                        SubmitButtonCommandName,
-                        StringComparison.CurrentCultureIgnoreCase
-                    )
+                    ce.CommandName
+                        .Equals(SubmitButtonCommandName, StringComparison.CurrentCultureIgnoreCase)
                 )
                 {
                     AttemptSendPassword();

@@ -57,11 +57,12 @@ namespace Mono.Unix
         private int GetProcessStatus()
         {
             int status;
-            int r = Native.Syscall.waitpid(
-                pid,
-                out status,
-                Native.WaitOptions.WNOHANG | Native.WaitOptions.WUNTRACED
-            );
+            int r = Native.Syscall
+                .waitpid(
+                    pid,
+                    out status,
+                    Native.WaitOptions.WNOHANG | Native.WaitOptions.WUNTRACED
+                );
             UnixMarshal.ThrowExceptionForLastErrorIf(r);
             return r;
         }

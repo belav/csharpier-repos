@@ -50,26 +50,28 @@ namespace MonoTests.System.Windows.Forms
             // 2 Normal Buttons
             FlowLayoutPanel p = new FlowLayoutPanel();
 
-            p.Controls.Add(
-                CreateButton(
-                    100,
-                    100,
-                    false,
-                    DockStyle.None,
-                    new Padding(),
-                    AnchorStyles.Left | AnchorStyles.Top
-                )
-            );
-            p.Controls.Add(
-                CreateButton(
-                    100,
-                    100,
-                    false,
-                    DockStyle.None,
-                    new Padding(),
-                    AnchorStyles.Left | AnchorStyles.Top
-                )
-            );
+            p.Controls
+                .Add(
+                    CreateButton(
+                        100,
+                        100,
+                        false,
+                        DockStyle.None,
+                        new Padding(),
+                        AnchorStyles.Left | AnchorStyles.Top
+                    )
+                );
+            p.Controls
+                .Add(
+                    CreateButton(
+                        100,
+                        100,
+                        false,
+                        DockStyle.None,
+                        new Padding(),
+                        AnchorStyles.Left | AnchorStyles.Top
+                    )
+                );
 
             Assert.AreEqual(new Rectangle(0, 0, 100, 100), p.Controls[0].Bounds, "C1");
             Assert.AreEqual(new Rectangle(100, 0, 100, 100), p.Controls[1].Bounds, "C2");
@@ -81,26 +83,28 @@ namespace MonoTests.System.Windows.Forms
             // Dock Fill and Normal
             FlowLayoutPanel p = new FlowLayoutPanel();
 
-            p.Controls.Add(
-                CreateButton(
-                    100,
-                    50,
-                    false,
-                    DockStyle.Fill,
-                    new Padding(),
-                    AnchorStyles.Left | AnchorStyles.Top
-                )
-            );
-            p.Controls.Add(
-                CreateButton(
-                    100,
-                    100,
-                    false,
-                    DockStyle.None,
-                    new Padding(),
-                    AnchorStyles.Left | AnchorStyles.Top
-                )
-            );
+            p.Controls
+                .Add(
+                    CreateButton(
+                        100,
+                        50,
+                        false,
+                        DockStyle.Fill,
+                        new Padding(),
+                        AnchorStyles.Left | AnchorStyles.Top
+                    )
+                );
+            p.Controls
+                .Add(
+                    CreateButton(
+                        100,
+                        100,
+                        false,
+                        DockStyle.None,
+                        new Padding(),
+                        AnchorStyles.Left | AnchorStyles.Top
+                    )
+                );
 
             Assert.AreEqual(new Rectangle(0, 0, 100, 100), p.Controls[0].Bounds, "D1");
             Assert.AreEqual(new Rectangle(100, 0, 100, 100), p.Controls[1].Bounds, "D2");
@@ -112,26 +116,28 @@ namespace MonoTests.System.Windows.Forms
             // Anchored: Top/Bottom and Normal
             FlowLayoutPanel p = new FlowLayoutPanel();
 
-            p.Controls.Add(
-                CreateButton(
-                    100,
-                    50,
-                    false,
-                    DockStyle.None,
-                    new Padding(),
-                    AnchorStyles.Top | AnchorStyles.Bottom
-                )
-            );
-            p.Controls.Add(
-                CreateButton(
-                    100,
-                    100,
-                    false,
-                    DockStyle.None,
-                    new Padding(),
-                    AnchorStyles.Left | AnchorStyles.Top
-                )
-            );
+            p.Controls
+                .Add(
+                    CreateButton(
+                        100,
+                        50,
+                        false,
+                        DockStyle.None,
+                        new Padding(),
+                        AnchorStyles.Top | AnchorStyles.Bottom
+                    )
+                );
+            p.Controls
+                .Add(
+                    CreateButton(
+                        100,
+                        100,
+                        false,
+                        DockStyle.None,
+                        new Padding(),
+                        AnchorStyles.Left | AnchorStyles.Top
+                    )
+                );
 
             Assert.AreEqual(new Rectangle(0, 0, 100, 100), p.Controls[0].Bounds, "E1");
             Assert.AreEqual(new Rectangle(100, 0, 100, 100), p.Controls[1].Bounds, "E2");
@@ -143,26 +149,28 @@ namespace MonoTests.System.Windows.Forms
             // Anchored: Top/Bottom and Dock Fill
             FlowLayoutPanel p = new FlowLayoutPanel();
 
-            p.Controls.Add(
-                CreateButton(
-                    100,
-                    50,
-                    false,
-                    DockStyle.None,
-                    new Padding(),
-                    AnchorStyles.Top | AnchorStyles.Bottom
-                )
-            );
-            p.Controls.Add(
-                CreateButton(
-                    100,
-                    100,
-                    false,
-                    DockStyle.Fill,
-                    new Padding(),
-                    AnchorStyles.Left | AnchorStyles.Top
-                )
-            );
+            p.Controls
+                .Add(
+                    CreateButton(
+                        100,
+                        50,
+                        false,
+                        DockStyle.None,
+                        new Padding(),
+                        AnchorStyles.Top | AnchorStyles.Bottom
+                    )
+                );
+            p.Controls
+                .Add(
+                    CreateButton(
+                        100,
+                        100,
+                        false,
+                        DockStyle.Fill,
+                        new Padding(),
+                        AnchorStyles.Left | AnchorStyles.Top
+                    )
+                );
 
             Assert.AreEqual(new Rectangle(0, 0, 100, 0), p.Controls[0].Bounds, "F1");
             Assert.AreEqual(new Rectangle(100, 0, 100, 0), p.Controls[1].Bounds, "F2");
@@ -174,26 +182,28 @@ namespace MonoTests.System.Windows.Forms
             // 2 Anchored: Top/Bottom
             FlowLayoutPanel p = new FlowLayoutPanel();
 
-            p.Controls.Add(
-                CreateButton(
-                    100,
-                    50,
-                    false,
-                    DockStyle.None,
-                    new Padding(),
-                    AnchorStyles.Top | AnchorStyles.Bottom
-                )
-            );
-            p.Controls.Add(
-                CreateButton(
-                    100,
-                    100,
-                    false,
-                    DockStyle.None,
-                    new Padding(),
-                    AnchorStyles.Top | AnchorStyles.Bottom
-                )
-            );
+            p.Controls
+                .Add(
+                    CreateButton(
+                        100,
+                        50,
+                        false,
+                        DockStyle.None,
+                        new Padding(),
+                        AnchorStyles.Top | AnchorStyles.Bottom
+                    )
+                );
+            p.Controls
+                .Add(
+                    CreateButton(
+                        100,
+                        100,
+                        false,
+                        DockStyle.None,
+                        new Padding(),
+                        AnchorStyles.Top | AnchorStyles.Bottom
+                    )
+                );
 
             Assert.AreEqual(new Rectangle(0, 0, 100, 0), p.Controls[0].Bounds, "G1");
             Assert.AreEqual(new Rectangle(100, 0, 100, 0), p.Controls[1].Bounds, "G2");
@@ -205,26 +215,28 @@ namespace MonoTests.System.Windows.Forms
             // 2 Dock Fill
             FlowLayoutPanel p = new FlowLayoutPanel();
 
-            p.Controls.Add(
-                CreateButton(
-                    100,
-                    50,
-                    false,
-                    DockStyle.Fill,
-                    new Padding(),
-                    AnchorStyles.Left | AnchorStyles.Top
-                )
-            );
-            p.Controls.Add(
-                CreateButton(
-                    100,
-                    100,
-                    false,
-                    DockStyle.Fill,
-                    new Padding(),
-                    AnchorStyles.Left | AnchorStyles.Top
-                )
-            );
+            p.Controls
+                .Add(
+                    CreateButton(
+                        100,
+                        50,
+                        false,
+                        DockStyle.Fill,
+                        new Padding(),
+                        AnchorStyles.Left | AnchorStyles.Top
+                    )
+                );
+            p.Controls
+                .Add(
+                    CreateButton(
+                        100,
+                        100,
+                        false,
+                        DockStyle.Fill,
+                        new Padding(),
+                        AnchorStyles.Left | AnchorStyles.Top
+                    )
+                );
 
             Assert.AreEqual(new Rectangle(0, 0, 100, 0), p.Controls[0].Bounds, "H1");
             Assert.AreEqual(new Rectangle(100, 0, 100, 0), p.Controls[1].Bounds, "H2");
@@ -236,26 +248,28 @@ namespace MonoTests.System.Windows.Forms
             // Dock Top
             FlowLayoutPanel p = new FlowLayoutPanel();
 
-            p.Controls.Add(
-                CreateButton(
-                    100,
-                    50,
-                    false,
-                    DockStyle.Top,
-                    new Padding(),
-                    AnchorStyles.Left | AnchorStyles.Top
-                )
-            );
-            p.Controls.Add(
-                CreateButton(
-                    100,
-                    100,
-                    false,
-                    DockStyle.None,
-                    new Padding(),
-                    AnchorStyles.Left | AnchorStyles.Top
-                )
-            );
+            p.Controls
+                .Add(
+                    CreateButton(
+                        100,
+                        50,
+                        false,
+                        DockStyle.Top,
+                        new Padding(),
+                        AnchorStyles.Left | AnchorStyles.Top
+                    )
+                );
+            p.Controls
+                .Add(
+                    CreateButton(
+                        100,
+                        100,
+                        false,
+                        DockStyle.None,
+                        new Padding(),
+                        AnchorStyles.Left | AnchorStyles.Top
+                    )
+                );
 
             Assert.AreEqual(new Rectangle(0, 0, 100, 50), p.Controls[0].Bounds, "I1");
             Assert.AreEqual(new Rectangle(100, 0, 100, 100), p.Controls[1].Bounds, "I2");
@@ -267,26 +281,28 @@ namespace MonoTests.System.Windows.Forms
             // Dock Bottom
             FlowLayoutPanel p = new FlowLayoutPanel();
 
-            p.Controls.Add(
-                CreateButton(
-                    100,
-                    50,
-                    false,
-                    DockStyle.Bottom,
-                    new Padding(),
-                    AnchorStyles.Left | AnchorStyles.Top
-                )
-            );
-            p.Controls.Add(
-                CreateButton(
-                    100,
-                    100,
-                    false,
-                    DockStyle.None,
-                    new Padding(),
-                    AnchorStyles.Left | AnchorStyles.Top
-                )
-            );
+            p.Controls
+                .Add(
+                    CreateButton(
+                        100,
+                        50,
+                        false,
+                        DockStyle.Bottom,
+                        new Padding(),
+                        AnchorStyles.Left | AnchorStyles.Top
+                    )
+                );
+            p.Controls
+                .Add(
+                    CreateButton(
+                        100,
+                        100,
+                        false,
+                        DockStyle.None,
+                        new Padding(),
+                        AnchorStyles.Left | AnchorStyles.Top
+                    )
+                );
 
             Assert.AreEqual(new Rectangle(0, 50, 100, 50), p.Controls[0].Bounds, "J1");
             Assert.AreEqual(new Rectangle(100, 0, 100, 100), p.Controls[1].Bounds, "J2");
@@ -298,26 +314,28 @@ namespace MonoTests.System.Windows.Forms
             // Anchor Bottom
             FlowLayoutPanel p = new FlowLayoutPanel();
 
-            p.Controls.Add(
-                CreateButton(
-                    100,
-                    50,
-                    false,
-                    DockStyle.None,
-                    new Padding(),
-                    AnchorStyles.Left | AnchorStyles.Bottom
-                )
-            );
-            p.Controls.Add(
-                CreateButton(
-                    100,
-                    100,
-                    false,
-                    DockStyle.None,
-                    new Padding(),
-                    AnchorStyles.Left | AnchorStyles.Top
-                )
-            );
+            p.Controls
+                .Add(
+                    CreateButton(
+                        100,
+                        50,
+                        false,
+                        DockStyle.None,
+                        new Padding(),
+                        AnchorStyles.Left | AnchorStyles.Bottom
+                    )
+                );
+            p.Controls
+                .Add(
+                    CreateButton(
+                        100,
+                        100,
+                        false,
+                        DockStyle.None,
+                        new Padding(),
+                        AnchorStyles.Left | AnchorStyles.Top
+                    )
+                );
 
             Assert.AreEqual(new Rectangle(0, 50, 100, 50), p.Controls[0].Bounds, "K1");
             Assert.AreEqual(new Rectangle(100, 0, 100, 100), p.Controls[1].Bounds, "K2");
@@ -329,19 +347,21 @@ namespace MonoTests.System.Windows.Forms
             // No Dock or Anchor
             FlowLayoutPanel p = new FlowLayoutPanel();
 
-            p.Controls.Add(
-                CreateButton(100, 50, false, DockStyle.None, new Padding(), AnchorStyles.None)
-            );
-            p.Controls.Add(
-                CreateButton(
-                    100,
-                    100,
-                    false,
-                    DockStyle.None,
-                    new Padding(),
-                    AnchorStyles.Left | AnchorStyles.Top
-                )
-            );
+            p.Controls
+                .Add(
+                    CreateButton(100, 50, false, DockStyle.None, new Padding(), AnchorStyles.None)
+                );
+            p.Controls
+                .Add(
+                    CreateButton(
+                        100,
+                        100,
+                        false,
+                        DockStyle.None,
+                        new Padding(),
+                        AnchorStyles.Left | AnchorStyles.Top
+                    )
+                );
 
             Assert.AreEqual(new Rectangle(0, 25, 100, 50), p.Controls[0].Bounds, "L1");
             Assert.AreEqual(new Rectangle(100, 0, 100, 100), p.Controls[1].Bounds, "L2");
@@ -353,46 +373,50 @@ namespace MonoTests.System.Windows.Forms
             // WrapContents = true
             FlowLayoutPanel p = new FlowLayoutPanel();
 
-            p.Controls.Add(
-                CreateButton(
-                    100,
-                    50,
-                    false,
-                    DockStyle.None,
-                    new Padding(),
-                    AnchorStyles.Left | AnchorStyles.Top
-                )
-            );
-            p.Controls.Add(
-                CreateButton(
-                    100,
-                    100,
-                    false,
-                    DockStyle.None,
-                    new Padding(),
-                    AnchorStyles.Left | AnchorStyles.Top
-                )
-            );
-            p.Controls.Add(
-                CreateButton(
-                    100,
-                    100,
-                    false,
-                    DockStyle.None,
-                    new Padding(),
-                    AnchorStyles.Left | AnchorStyles.Top
-                )
-            );
-            p.Controls.Add(
-                CreateButton(
-                    100,
-                    100,
-                    false,
-                    DockStyle.None,
-                    new Padding(),
-                    AnchorStyles.Left | AnchorStyles.Top
-                )
-            );
+            p.Controls
+                .Add(
+                    CreateButton(
+                        100,
+                        50,
+                        false,
+                        DockStyle.None,
+                        new Padding(),
+                        AnchorStyles.Left | AnchorStyles.Top
+                    )
+                );
+            p.Controls
+                .Add(
+                    CreateButton(
+                        100,
+                        100,
+                        false,
+                        DockStyle.None,
+                        new Padding(),
+                        AnchorStyles.Left | AnchorStyles.Top
+                    )
+                );
+            p.Controls
+                .Add(
+                    CreateButton(
+                        100,
+                        100,
+                        false,
+                        DockStyle.None,
+                        new Padding(),
+                        AnchorStyles.Left | AnchorStyles.Top
+                    )
+                );
+            p.Controls
+                .Add(
+                    CreateButton(
+                        100,
+                        100,
+                        false,
+                        DockStyle.None,
+                        new Padding(),
+                        AnchorStyles.Left | AnchorStyles.Top
+                    )
+                );
 
             Assert.AreEqual(new Rectangle(0, 0, 100, 50), p.Controls[0].Bounds, "M1");
             Assert.AreEqual(new Rectangle(100, 0, 100, 100), p.Controls[1].Bounds, "M2");
@@ -407,46 +431,50 @@ namespace MonoTests.System.Windows.Forms
             FlowLayoutPanel p = new FlowLayoutPanel();
             p.WrapContents = false;
 
-            p.Controls.Add(
-                CreateButton(
-                    100,
-                    50,
-                    false,
-                    DockStyle.None,
-                    new Padding(),
-                    AnchorStyles.Left | AnchorStyles.Top
-                )
-            );
-            p.Controls.Add(
-                CreateButton(
-                    100,
-                    100,
-                    false,
-                    DockStyle.None,
-                    new Padding(),
-                    AnchorStyles.Left | AnchorStyles.Top
-                )
-            );
-            p.Controls.Add(
-                CreateButton(
-                    100,
-                    100,
-                    false,
-                    DockStyle.None,
-                    new Padding(),
-                    AnchorStyles.Left | AnchorStyles.Top
-                )
-            );
-            p.Controls.Add(
-                CreateButton(
-                    100,
-                    100,
-                    false,
-                    DockStyle.None,
-                    new Padding(),
-                    AnchorStyles.Left | AnchorStyles.Top
-                )
-            );
+            p.Controls
+                .Add(
+                    CreateButton(
+                        100,
+                        50,
+                        false,
+                        DockStyle.None,
+                        new Padding(),
+                        AnchorStyles.Left | AnchorStyles.Top
+                    )
+                );
+            p.Controls
+                .Add(
+                    CreateButton(
+                        100,
+                        100,
+                        false,
+                        DockStyle.None,
+                        new Padding(),
+                        AnchorStyles.Left | AnchorStyles.Top
+                    )
+                );
+            p.Controls
+                .Add(
+                    CreateButton(
+                        100,
+                        100,
+                        false,
+                        DockStyle.None,
+                        new Padding(),
+                        AnchorStyles.Left | AnchorStyles.Top
+                    )
+                );
+            p.Controls
+                .Add(
+                    CreateButton(
+                        100,
+                        100,
+                        false,
+                        DockStyle.None,
+                        new Padding(),
+                        AnchorStyles.Left | AnchorStyles.Top
+                    )
+                );
 
             Assert.AreEqual(new Rectangle(0, 0, 100, 50), p.Controls[0].Bounds, "N1");
             Assert.AreEqual(new Rectangle(100, 0, 100, 100), p.Controls[1].Bounds, "N2");
@@ -460,46 +488,50 @@ namespace MonoTests.System.Windows.Forms
             // SetFlowBreak 1, 3
             FlowLayoutPanel p = new FlowLayoutPanel();
 
-            p.Controls.Add(
-                CreateButton(
-                    100,
-                    100,
-                    false,
-                    DockStyle.None,
-                    new Padding(),
-                    AnchorStyles.Left | AnchorStyles.Top
-                )
-            );
-            p.Controls.Add(
-                CreateButton(
-                    100,
-                    100,
-                    false,
-                    DockStyle.None,
-                    new Padding(),
-                    AnchorStyles.Left | AnchorStyles.Top
-                )
-            );
-            p.Controls.Add(
-                CreateButton(
-                    100,
-                    100,
-                    false,
-                    DockStyle.None,
-                    new Padding(),
-                    AnchorStyles.Left | AnchorStyles.Top
-                )
-            );
-            p.Controls.Add(
-                CreateButton(
-                    100,
-                    100,
-                    false,
-                    DockStyle.None,
-                    new Padding(),
-                    AnchorStyles.Left | AnchorStyles.Top
-                )
-            );
+            p.Controls
+                .Add(
+                    CreateButton(
+                        100,
+                        100,
+                        false,
+                        DockStyle.None,
+                        new Padding(),
+                        AnchorStyles.Left | AnchorStyles.Top
+                    )
+                );
+            p.Controls
+                .Add(
+                    CreateButton(
+                        100,
+                        100,
+                        false,
+                        DockStyle.None,
+                        new Padding(),
+                        AnchorStyles.Left | AnchorStyles.Top
+                    )
+                );
+            p.Controls
+                .Add(
+                    CreateButton(
+                        100,
+                        100,
+                        false,
+                        DockStyle.None,
+                        new Padding(),
+                        AnchorStyles.Left | AnchorStyles.Top
+                    )
+                );
+            p.Controls
+                .Add(
+                    CreateButton(
+                        100,
+                        100,
+                        false,
+                        DockStyle.None,
+                        new Padding(),
+                        AnchorStyles.Left | AnchorStyles.Top
+                    )
+                );
 
             Assert.AreEqual(new Size(400, 100), p.PreferredSize, "O1");
 
@@ -519,46 +551,50 @@ namespace MonoTests.System.Windows.Forms
             // Margins
             FlowLayoutPanel p = new FlowLayoutPanel();
 
-            p.Controls.Add(
-                CreateButton(
-                    50,
-                    50,
-                    false,
-                    DockStyle.None,
-                    new Padding(1, 3, 5, 2),
-                    AnchorStyles.Left | AnchorStyles.Top
-                )
-            );
-            p.Controls.Add(
-                CreateButton(
-                    50,
-                    50,
-                    false,
-                    DockStyle.None,
-                    new Padding(7, 3, 12, 5),
-                    AnchorStyles.Left | AnchorStyles.Top
-                )
-            );
-            p.Controls.Add(
-                CreateButton(
-                    50,
-                    50,
-                    false,
-                    DockStyle.None,
-                    new Padding(14, 7, 1, 3),
-                    AnchorStyles.Left | AnchorStyles.Top
-                )
-            );
-            p.Controls.Add(
-                CreateButton(
-                    50,
-                    50,
-                    false,
-                    DockStyle.None,
-                    new Padding(4),
-                    AnchorStyles.Left | AnchorStyles.Top
-                )
-            );
+            p.Controls
+                .Add(
+                    CreateButton(
+                        50,
+                        50,
+                        false,
+                        DockStyle.None,
+                        new Padding(1, 3, 5, 2),
+                        AnchorStyles.Left | AnchorStyles.Top
+                    )
+                );
+            p.Controls
+                .Add(
+                    CreateButton(
+                        50,
+                        50,
+                        false,
+                        DockStyle.None,
+                        new Padding(7, 3, 12, 5),
+                        AnchorStyles.Left | AnchorStyles.Top
+                    )
+                );
+            p.Controls
+                .Add(
+                    CreateButton(
+                        50,
+                        50,
+                        false,
+                        DockStyle.None,
+                        new Padding(14, 7, 1, 3),
+                        AnchorStyles.Left | AnchorStyles.Top
+                    )
+                );
+            p.Controls
+                .Add(
+                    CreateButton(
+                        50,
+                        50,
+                        false,
+                        DockStyle.None,
+                        new Padding(4),
+                        AnchorStyles.Left | AnchorStyles.Top
+                    )
+                );
 
             Assert.AreEqual(new Size(248, 60), p.PreferredSize, "P1");
             Assert.AreEqual(new Rectangle(1, 3, 50, 50), p.Controls[0].Bounds, "P2");
@@ -573,46 +609,50 @@ namespace MonoTests.System.Windows.Forms
             // Margins and Different Sizes
             FlowLayoutPanel p = new FlowLayoutPanel();
 
-            p.Controls.Add(
-                CreateButton(
-                    25,
-                    45,
-                    false,
-                    DockStyle.None,
-                    new Padding(6),
-                    AnchorStyles.Left | AnchorStyles.Top
-                )
-            );
-            p.Controls.Add(
-                CreateButton(
-                    60,
-                    20,
-                    false,
-                    DockStyle.None,
-                    new Padding(9),
-                    AnchorStyles.Left | AnchorStyles.Top
-                )
-            );
-            p.Controls.Add(
-                CreateButton(
-                    15,
-                    85,
-                    false,
-                    DockStyle.None,
-                    new Padding(2),
-                    AnchorStyles.Left | AnchorStyles.Top
-                )
-            );
-            p.Controls.Add(
-                CreateButton(
-                    50,
-                    20,
-                    false,
-                    DockStyle.None,
-                    new Padding(4),
-                    AnchorStyles.Left | AnchorStyles.Top
-                )
-            );
+            p.Controls
+                .Add(
+                    CreateButton(
+                        25,
+                        45,
+                        false,
+                        DockStyle.None,
+                        new Padding(6),
+                        AnchorStyles.Left | AnchorStyles.Top
+                    )
+                );
+            p.Controls
+                .Add(
+                    CreateButton(
+                        60,
+                        20,
+                        false,
+                        DockStyle.None,
+                        new Padding(9),
+                        AnchorStyles.Left | AnchorStyles.Top
+                    )
+                );
+            p.Controls
+                .Add(
+                    CreateButton(
+                        15,
+                        85,
+                        false,
+                        DockStyle.None,
+                        new Padding(2),
+                        AnchorStyles.Left | AnchorStyles.Top
+                    )
+                );
+            p.Controls
+                .Add(
+                    CreateButton(
+                        50,
+                        20,
+                        false,
+                        DockStyle.None,
+                        new Padding(4),
+                        AnchorStyles.Left | AnchorStyles.Top
+                    )
+                );
 
             Assert.AreEqual(new Size(192, 89), p.PreferredSize, "Q1");
             Assert.AreEqual(new Rectangle(6, 6, 25, 45), p.Controls[0].Bounds, "Q2");
@@ -627,59 +667,63 @@ namespace MonoTests.System.Windows.Forms
             // Random Complex Layout 1
             FlowLayoutPanel p = new FlowLayoutPanel();
 
-            p.Controls.Add(
-                CreateButton(
-                    25,
-                    45,
-                    false,
-                    DockStyle.None,
-                    new Padding(6),
-                    AnchorStyles.Right | AnchorStyles.Top
-                )
-            );
-            p.Controls.Add(
-                CreateButton(
-                    60,
-                    20,
-                    false,
-                    DockStyle.Fill,
-                    new Padding(9),
-                    AnchorStyles.Bottom | AnchorStyles.Top
-                )
-            );
-            p.Controls.Add(
-                CreateButton(
-                    15,
-                    85,
-                    false,
-                    DockStyle.None,
-                    new Padding(2),
-                    AnchorStyles.Left | AnchorStyles.Top | AnchorStyles.Bottom
-                )
-            );
-            p.Controls.Add(
-                CreateButton(
-                    50,
-                    20,
-                    false,
-                    DockStyle.None,
-                    new Padding(4),
-                    AnchorStyles.Left | AnchorStyles.Bottom
-                )
-            );
-            p.Controls.Add(
-                CreateButton(
-                    13,
-                    22,
-                    false,
-                    DockStyle.None,
-                    new Padding(12),
-                    AnchorStyles.Left | AnchorStyles.Right
-                )
-            );
-            p.Controls.Add(
-                CreateButton(73, 28, false, DockStyle.Top, new Padding(6), AnchorStyles.None)
-            );
+            p.Controls
+                .Add(
+                    CreateButton(
+                        25,
+                        45,
+                        false,
+                        DockStyle.None,
+                        new Padding(6),
+                        AnchorStyles.Right | AnchorStyles.Top
+                    )
+                );
+            p.Controls
+                .Add(
+                    CreateButton(
+                        60,
+                        20,
+                        false,
+                        DockStyle.Fill,
+                        new Padding(9),
+                        AnchorStyles.Bottom | AnchorStyles.Top
+                    )
+                );
+            p.Controls
+                .Add(
+                    CreateButton(
+                        15,
+                        85,
+                        false,
+                        DockStyle.None,
+                        new Padding(2),
+                        AnchorStyles.Left | AnchorStyles.Top | AnchorStyles.Bottom
+                    )
+                );
+            p.Controls
+                .Add(
+                    CreateButton(
+                        50,
+                        20,
+                        false,
+                        DockStyle.None,
+                        new Padding(4),
+                        AnchorStyles.Left | AnchorStyles.Bottom
+                    )
+                );
+            p.Controls
+                .Add(
+                    CreateButton(
+                        13,
+                        22,
+                        false,
+                        DockStyle.None,
+                        new Padding(12),
+                        AnchorStyles.Left | AnchorStyles.Right
+                    )
+                );
+            p.Controls
+                .Add(CreateButton(73, 28, false, DockStyle.Top, new Padding(6), AnchorStyles.None));
 
             Assert.AreEqual(new Size(314, 57), p.PreferredSize, "R1");
             Assert.AreEqual(new Rectangle(6, 6, 25, 45), p.Controls[0].Bounds, "R2");
@@ -696,66 +740,75 @@ namespace MonoTests.System.Windows.Forms
             // Random Complex Layout 2
             FlowLayoutPanel p = new FlowLayoutPanel();
 
-            p.Controls.Add(
-                CreateButton(
-                    12,
-                    345,
-                    false,
-                    DockStyle.Bottom,
-                    new Padding(1, 2, 3, 4),
-                    AnchorStyles.Left | AnchorStyles.Top
-                )
-            );
-            p.Controls.Add(
-                CreateButton(
-                    9,
-                    44,
-                    false,
-                    DockStyle.Top,
-                    new Padding(6, 3, 2, 7),
-                    AnchorStyles.Right | AnchorStyles.Top
-                )
-            );
-            p.Controls.Add(
-                CreateButton(
-                    78,
-                    14,
-                    false,
-                    DockStyle.None,
-                    new Padding(5, 1, 2, 4),
-                    AnchorStyles.Left | AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Right
-                )
-            );
-            p.Controls.Add(
-                CreateButton(
-                    21,
-                    64,
-                    false,
-                    DockStyle.Top,
-                    new Padding(3, 3, 3, 1),
-                    AnchorStyles.None
-                )
-            );
-            p.Controls.Add(
-                CreateButton(
-                    14,
-                    14,
-                    false,
-                    DockStyle.Fill,
-                    new Padding(11, 4, 6, 3),
-                    AnchorStyles.Top | AnchorStyles.Bottom
-                )
-            );
-            p.Controls.Add(
-                CreateButton(
-                    132,
-                    6,
-                    false,
-                    DockStyle.Fill,
-                    new Padding(5, 5, 4, 5),
-                    AnchorStyles.Top | AnchorStyles.Bottom
-                )
-            );
+            p.Controls
+                .Add(
+                    CreateButton(
+                        12,
+                        345,
+                        false,
+                        DockStyle.Bottom,
+                        new Padding(1, 2, 3, 4),
+                        AnchorStyles.Left | AnchorStyles.Top
+                    )
+                );
+            p.Controls
+                .Add(
+                    CreateButton(
+                        9,
+                        44,
+                        false,
+                        DockStyle.Top,
+                        new Padding(6, 3, 2, 7),
+                        AnchorStyles.Right | AnchorStyles.Top
+                    )
+                );
+            p.Controls
+                .Add(
+                    CreateButton(
+                        78,
+                        14,
+                        false,
+                        DockStyle.None,
+                        new Padding(5, 1, 2, 4),
+                        AnchorStyles.Left
+                            | AnchorStyles.Top
+                            | AnchorStyles.Bottom
+                            | AnchorStyles.Right
+                    )
+                );
+            p.Controls
+                .Add(
+                    CreateButton(
+                        21,
+                        64,
+                        false,
+                        DockStyle.Top,
+                        new Padding(3, 3, 3, 1),
+                        AnchorStyles.None
+                    )
+                );
+            p.Controls
+                .Add(
+                    CreateButton(
+                        14,
+                        14,
+                        false,
+                        DockStyle.Fill,
+                        new Padding(11, 4, 6, 3),
+                        AnchorStyles.Top | AnchorStyles.Bottom
+                    )
+                );
+            p.Controls
+                .Add(
+                    CreateButton(
+                        132,
+                        6,
+                        false,
+                        DockStyle.Fill,
+                        new Padding(5, 5, 4, 5),
+                        AnchorStyles.Top | AnchorStyles.Bottom
+                    )
+                );
 
             p.SetFlowBreak(p.Controls[0], true);
             p.SetFlowBreak(p.Controls[2], true);
@@ -775,26 +828,28 @@ namespace MonoTests.System.Windows.Forms
             FlowLayoutPanel p = new FlowLayoutPanel();
             p.WrapContents = false;
 
-            p.Controls.Add(
-                CreateButton(
-                    100,
-                    100,
-                    false,
-                    DockStyle.None,
-                    new Padding(),
-                    AnchorStyles.Left | AnchorStyles.Top
-                )
-            );
-            p.Controls.Add(
-                CreateButton(
-                    100,
-                    100,
-                    false,
-                    DockStyle.None,
-                    new Padding(),
-                    AnchorStyles.Left | AnchorStyles.Top
-                )
-            );
+            p.Controls
+                .Add(
+                    CreateButton(
+                        100,
+                        100,
+                        false,
+                        DockStyle.None,
+                        new Padding(),
+                        AnchorStyles.Left | AnchorStyles.Top
+                    )
+                );
+            p.Controls
+                .Add(
+                    CreateButton(
+                        100,
+                        100,
+                        false,
+                        DockStyle.None,
+                        new Padding(),
+                        AnchorStyles.Left | AnchorStyles.Top
+                    )
+                );
 
             p.SetFlowBreak(p.Controls[0], true);
 
@@ -811,26 +866,28 @@ namespace MonoTests.System.Windows.Forms
             FlowLayoutPanel p = new FlowLayoutPanel();
             p.FlowDirection = FlowDirection.RightToLeft;
 
-            p.Controls.Add(
-                CreateButton(
-                    100,
-                    100,
-                    false,
-                    DockStyle.None,
-                    new Padding(),
-                    AnchorStyles.Left | AnchorStyles.Top
-                )
-            );
-            p.Controls.Add(
-                CreateButton(
-                    100,
-                    100,
-                    false,
-                    DockStyle.None,
-                    new Padding(),
-                    AnchorStyles.Left | AnchorStyles.Top
-                )
-            );
+            p.Controls
+                .Add(
+                    CreateButton(
+                        100,
+                        100,
+                        false,
+                        DockStyle.None,
+                        new Padding(),
+                        AnchorStyles.Left | AnchorStyles.Top
+                    )
+                );
+            p.Controls
+                .Add(
+                    CreateButton(
+                        100,
+                        100,
+                        false,
+                        DockStyle.None,
+                        new Padding(),
+                        AnchorStyles.Left | AnchorStyles.Top
+                    )
+                );
 
             Assert.AreEqual(new Rectangle(100, 0, 100, 100), p.Controls[0].Bounds, "AC1");
             Assert.AreEqual(new Rectangle(0, 0, 100, 100), p.Controls[1].Bounds, "AC2");
@@ -843,26 +900,28 @@ namespace MonoTests.System.Windows.Forms
             FlowLayoutPanel p = new FlowLayoutPanel();
             p.FlowDirection = FlowDirection.RightToLeft;
 
-            p.Controls.Add(
-                CreateButton(
-                    100,
-                    50,
-                    false,
-                    DockStyle.Fill,
-                    new Padding(),
-                    AnchorStyles.Left | AnchorStyles.Top
-                )
-            );
-            p.Controls.Add(
-                CreateButton(
-                    100,
-                    100,
-                    false,
-                    DockStyle.None,
-                    new Padding(),
-                    AnchorStyles.Left | AnchorStyles.Top
-                )
-            );
+            p.Controls
+                .Add(
+                    CreateButton(
+                        100,
+                        50,
+                        false,
+                        DockStyle.Fill,
+                        new Padding(),
+                        AnchorStyles.Left | AnchorStyles.Top
+                    )
+                );
+            p.Controls
+                .Add(
+                    CreateButton(
+                        100,
+                        100,
+                        false,
+                        DockStyle.None,
+                        new Padding(),
+                        AnchorStyles.Left | AnchorStyles.Top
+                    )
+                );
 
             Assert.AreEqual(new Rectangle(100, 0, 100, 100), p.Controls[0].Bounds, "AD1");
             Assert.AreEqual(new Rectangle(0, 0, 100, 100), p.Controls[1].Bounds, "AD2");
@@ -875,26 +934,28 @@ namespace MonoTests.System.Windows.Forms
             FlowLayoutPanel p = new FlowLayoutPanel();
             p.FlowDirection = FlowDirection.RightToLeft;
 
-            p.Controls.Add(
-                CreateButton(
-                    100,
-                    50,
-                    false,
-                    DockStyle.None,
-                    new Padding(),
-                    AnchorStyles.Top | AnchorStyles.Bottom
-                )
-            );
-            p.Controls.Add(
-                CreateButton(
-                    100,
-                    100,
-                    false,
-                    DockStyle.None,
-                    new Padding(),
-                    AnchorStyles.Left | AnchorStyles.Top
-                )
-            );
+            p.Controls
+                .Add(
+                    CreateButton(
+                        100,
+                        50,
+                        false,
+                        DockStyle.None,
+                        new Padding(),
+                        AnchorStyles.Top | AnchorStyles.Bottom
+                    )
+                );
+            p.Controls
+                .Add(
+                    CreateButton(
+                        100,
+                        100,
+                        false,
+                        DockStyle.None,
+                        new Padding(),
+                        AnchorStyles.Left | AnchorStyles.Top
+                    )
+                );
 
             Assert.AreEqual(new Rectangle(100, 0, 100, 100), p.Controls[0].Bounds, "AE1");
             Assert.AreEqual(new Rectangle(0, 0, 100, 100), p.Controls[1].Bounds, "AE2");
@@ -907,26 +968,28 @@ namespace MonoTests.System.Windows.Forms
             FlowLayoutPanel p = new FlowLayoutPanel();
             p.FlowDirection = FlowDirection.RightToLeft;
 
-            p.Controls.Add(
-                CreateButton(
-                    100,
-                    50,
-                    false,
-                    DockStyle.None,
-                    new Padding(),
-                    AnchorStyles.Top | AnchorStyles.Bottom
-                )
-            );
-            p.Controls.Add(
-                CreateButton(
-                    100,
-                    100,
-                    false,
-                    DockStyle.Fill,
-                    new Padding(),
-                    AnchorStyles.Left | AnchorStyles.Top
-                )
-            );
+            p.Controls
+                .Add(
+                    CreateButton(
+                        100,
+                        50,
+                        false,
+                        DockStyle.None,
+                        new Padding(),
+                        AnchorStyles.Top | AnchorStyles.Bottom
+                    )
+                );
+            p.Controls
+                .Add(
+                    CreateButton(
+                        100,
+                        100,
+                        false,
+                        DockStyle.Fill,
+                        new Padding(),
+                        AnchorStyles.Left | AnchorStyles.Top
+                    )
+                );
 
             Assert.AreEqual(new Rectangle(100, 0, 100, 0), p.Controls[0].Bounds, "AF1");
             Assert.AreEqual(new Rectangle(0, 0, 100, 0), p.Controls[1].Bounds, "AF2");
@@ -939,26 +1002,28 @@ namespace MonoTests.System.Windows.Forms
             FlowLayoutPanel p = new FlowLayoutPanel();
             p.FlowDirection = FlowDirection.RightToLeft;
 
-            p.Controls.Add(
-                CreateButton(
-                    100,
-                    50,
-                    false,
-                    DockStyle.None,
-                    new Padding(),
-                    AnchorStyles.Top | AnchorStyles.Bottom
-                )
-            );
-            p.Controls.Add(
-                CreateButton(
-                    100,
-                    100,
-                    false,
-                    DockStyle.None,
-                    new Padding(),
-                    AnchorStyles.Top | AnchorStyles.Bottom
-                )
-            );
+            p.Controls
+                .Add(
+                    CreateButton(
+                        100,
+                        50,
+                        false,
+                        DockStyle.None,
+                        new Padding(),
+                        AnchorStyles.Top | AnchorStyles.Bottom
+                    )
+                );
+            p.Controls
+                .Add(
+                    CreateButton(
+                        100,
+                        100,
+                        false,
+                        DockStyle.None,
+                        new Padding(),
+                        AnchorStyles.Top | AnchorStyles.Bottom
+                    )
+                );
 
             Assert.AreEqual(new Rectangle(100, 0, 100, 0), p.Controls[0].Bounds, "AG1");
             Assert.AreEqual(new Rectangle(0, 0, 100, 0), p.Controls[1].Bounds, "AG2");
@@ -971,26 +1036,28 @@ namespace MonoTests.System.Windows.Forms
             FlowLayoutPanel p = new FlowLayoutPanel();
             p.FlowDirection = FlowDirection.RightToLeft;
 
-            p.Controls.Add(
-                CreateButton(
-                    100,
-                    50,
-                    false,
-                    DockStyle.Fill,
-                    new Padding(),
-                    AnchorStyles.Left | AnchorStyles.Top
-                )
-            );
-            p.Controls.Add(
-                CreateButton(
-                    100,
-                    100,
-                    false,
-                    DockStyle.Fill,
-                    new Padding(),
-                    AnchorStyles.Left | AnchorStyles.Top
-                )
-            );
+            p.Controls
+                .Add(
+                    CreateButton(
+                        100,
+                        50,
+                        false,
+                        DockStyle.Fill,
+                        new Padding(),
+                        AnchorStyles.Left | AnchorStyles.Top
+                    )
+                );
+            p.Controls
+                .Add(
+                    CreateButton(
+                        100,
+                        100,
+                        false,
+                        DockStyle.Fill,
+                        new Padding(),
+                        AnchorStyles.Left | AnchorStyles.Top
+                    )
+                );
 
             Assert.AreEqual(new Rectangle(100, 0, 100, 0), p.Controls[0].Bounds, "AH1");
             Assert.AreEqual(new Rectangle(0, 0, 100, 0), p.Controls[1].Bounds, "AH2");
@@ -1003,26 +1070,28 @@ namespace MonoTests.System.Windows.Forms
             FlowLayoutPanel p = new FlowLayoutPanel();
             p.FlowDirection = FlowDirection.RightToLeft;
 
-            p.Controls.Add(
-                CreateButton(
-                    100,
-                    50,
-                    false,
-                    DockStyle.Top,
-                    new Padding(),
-                    AnchorStyles.Left | AnchorStyles.Top
-                )
-            );
-            p.Controls.Add(
-                CreateButton(
-                    100,
-                    100,
-                    false,
-                    DockStyle.None,
-                    new Padding(),
-                    AnchorStyles.Left | AnchorStyles.Top
-                )
-            );
+            p.Controls
+                .Add(
+                    CreateButton(
+                        100,
+                        50,
+                        false,
+                        DockStyle.Top,
+                        new Padding(),
+                        AnchorStyles.Left | AnchorStyles.Top
+                    )
+                );
+            p.Controls
+                .Add(
+                    CreateButton(
+                        100,
+                        100,
+                        false,
+                        DockStyle.None,
+                        new Padding(),
+                        AnchorStyles.Left | AnchorStyles.Top
+                    )
+                );
 
             Assert.AreEqual(new Rectangle(100, 0, 100, 50), p.Controls[0].Bounds, "AI1");
             Assert.AreEqual(new Rectangle(0, 0, 100, 100), p.Controls[1].Bounds, "AI2");
@@ -1035,26 +1104,28 @@ namespace MonoTests.System.Windows.Forms
             FlowLayoutPanel p = new FlowLayoutPanel();
             p.FlowDirection = FlowDirection.RightToLeft;
 
-            p.Controls.Add(
-                CreateButton(
-                    100,
-                    50,
-                    false,
-                    DockStyle.Bottom,
-                    new Padding(),
-                    AnchorStyles.Left | AnchorStyles.Top
-                )
-            );
-            p.Controls.Add(
-                CreateButton(
-                    100,
-                    100,
-                    false,
-                    DockStyle.None,
-                    new Padding(),
-                    AnchorStyles.Left | AnchorStyles.Top
-                )
-            );
+            p.Controls
+                .Add(
+                    CreateButton(
+                        100,
+                        50,
+                        false,
+                        DockStyle.Bottom,
+                        new Padding(),
+                        AnchorStyles.Left | AnchorStyles.Top
+                    )
+                );
+            p.Controls
+                .Add(
+                    CreateButton(
+                        100,
+                        100,
+                        false,
+                        DockStyle.None,
+                        new Padding(),
+                        AnchorStyles.Left | AnchorStyles.Top
+                    )
+                );
 
             Assert.AreEqual(new Rectangle(100, 50, 100, 50), p.Controls[0].Bounds, "AJ1");
             Assert.AreEqual(new Rectangle(0, 0, 100, 100), p.Controls[1].Bounds, "AJ2");
@@ -1067,26 +1138,28 @@ namespace MonoTests.System.Windows.Forms
             FlowLayoutPanel p = new FlowLayoutPanel();
             p.FlowDirection = FlowDirection.RightToLeft;
 
-            p.Controls.Add(
-                CreateButton(
-                    100,
-                    50,
-                    false,
-                    DockStyle.None,
-                    new Padding(),
-                    AnchorStyles.Left | AnchorStyles.Bottom
-                )
-            );
-            p.Controls.Add(
-                CreateButton(
-                    100,
-                    100,
-                    false,
-                    DockStyle.None,
-                    new Padding(),
-                    AnchorStyles.Left | AnchorStyles.Top
-                )
-            );
+            p.Controls
+                .Add(
+                    CreateButton(
+                        100,
+                        50,
+                        false,
+                        DockStyle.None,
+                        new Padding(),
+                        AnchorStyles.Left | AnchorStyles.Bottom
+                    )
+                );
+            p.Controls
+                .Add(
+                    CreateButton(
+                        100,
+                        100,
+                        false,
+                        DockStyle.None,
+                        new Padding(),
+                        AnchorStyles.Left | AnchorStyles.Top
+                    )
+                );
 
             Assert.AreEqual(new Rectangle(100, 50, 100, 50), p.Controls[0].Bounds, "AK1");
             Assert.AreEqual(new Rectangle(0, 0, 100, 100), p.Controls[1].Bounds, "AK2");
@@ -1099,19 +1172,21 @@ namespace MonoTests.System.Windows.Forms
             FlowLayoutPanel p = new FlowLayoutPanel();
             p.FlowDirection = FlowDirection.RightToLeft;
 
-            p.Controls.Add(
-                CreateButton(100, 50, false, DockStyle.None, new Padding(), AnchorStyles.None)
-            );
-            p.Controls.Add(
-                CreateButton(
-                    100,
-                    100,
-                    false,
-                    DockStyle.None,
-                    new Padding(),
-                    AnchorStyles.Left | AnchorStyles.Top
-                )
-            );
+            p.Controls
+                .Add(
+                    CreateButton(100, 50, false, DockStyle.None, new Padding(), AnchorStyles.None)
+                );
+            p.Controls
+                .Add(
+                    CreateButton(
+                        100,
+                        100,
+                        false,
+                        DockStyle.None,
+                        new Padding(),
+                        AnchorStyles.Left | AnchorStyles.Top
+                    )
+                );
 
             Assert.AreEqual(new Rectangle(100, 25, 100, 50), p.Controls[0].Bounds, "AL1");
             Assert.AreEqual(new Rectangle(0, 0, 100, 100), p.Controls[1].Bounds, "AL2");
@@ -1124,46 +1199,50 @@ namespace MonoTests.System.Windows.Forms
             FlowLayoutPanel p = new FlowLayoutPanel();
             p.FlowDirection = FlowDirection.RightToLeft;
 
-            p.Controls.Add(
-                CreateButton(
-                    100,
-                    50,
-                    false,
-                    DockStyle.None,
-                    new Padding(),
-                    AnchorStyles.Left | AnchorStyles.Top
-                )
-            );
-            p.Controls.Add(
-                CreateButton(
-                    100,
-                    100,
-                    false,
-                    DockStyle.None,
-                    new Padding(),
-                    AnchorStyles.Left | AnchorStyles.Top
-                )
-            );
-            p.Controls.Add(
-                CreateButton(
-                    100,
-                    100,
-                    false,
-                    DockStyle.None,
-                    new Padding(),
-                    AnchorStyles.Left | AnchorStyles.Top
-                )
-            );
-            p.Controls.Add(
-                CreateButton(
-                    100,
-                    100,
-                    false,
-                    DockStyle.None,
-                    new Padding(),
-                    AnchorStyles.Left | AnchorStyles.Top
-                )
-            );
+            p.Controls
+                .Add(
+                    CreateButton(
+                        100,
+                        50,
+                        false,
+                        DockStyle.None,
+                        new Padding(),
+                        AnchorStyles.Left | AnchorStyles.Top
+                    )
+                );
+            p.Controls
+                .Add(
+                    CreateButton(
+                        100,
+                        100,
+                        false,
+                        DockStyle.None,
+                        new Padding(),
+                        AnchorStyles.Left | AnchorStyles.Top
+                    )
+                );
+            p.Controls
+                .Add(
+                    CreateButton(
+                        100,
+                        100,
+                        false,
+                        DockStyle.None,
+                        new Padding(),
+                        AnchorStyles.Left | AnchorStyles.Top
+                    )
+                );
+            p.Controls
+                .Add(
+                    CreateButton(
+                        100,
+                        100,
+                        false,
+                        DockStyle.None,
+                        new Padding(),
+                        AnchorStyles.Left | AnchorStyles.Top
+                    )
+                );
 
             Assert.AreEqual(new Rectangle(100, 0, 100, 50), p.Controls[0].Bounds, "AM1");
             Assert.AreEqual(new Rectangle(0, 0, 100, 100), p.Controls[1].Bounds, "AM2");
@@ -1179,46 +1258,50 @@ namespace MonoTests.System.Windows.Forms
             p.WrapContents = false;
             p.FlowDirection = FlowDirection.RightToLeft;
 
-            p.Controls.Add(
-                CreateButton(
-                    100,
-                    50,
-                    false,
-                    DockStyle.None,
-                    new Padding(),
-                    AnchorStyles.Left | AnchorStyles.Top
-                )
-            );
-            p.Controls.Add(
-                CreateButton(
-                    100,
-                    100,
-                    false,
-                    DockStyle.None,
-                    new Padding(),
-                    AnchorStyles.Left | AnchorStyles.Top
-                )
-            );
-            p.Controls.Add(
-                CreateButton(
-                    100,
-                    100,
-                    false,
-                    DockStyle.None,
-                    new Padding(),
-                    AnchorStyles.Left | AnchorStyles.Top
-                )
-            );
-            p.Controls.Add(
-                CreateButton(
-                    100,
-                    100,
-                    false,
-                    DockStyle.None,
-                    new Padding(),
-                    AnchorStyles.Left | AnchorStyles.Top
-                )
-            );
+            p.Controls
+                .Add(
+                    CreateButton(
+                        100,
+                        50,
+                        false,
+                        DockStyle.None,
+                        new Padding(),
+                        AnchorStyles.Left | AnchorStyles.Top
+                    )
+                );
+            p.Controls
+                .Add(
+                    CreateButton(
+                        100,
+                        100,
+                        false,
+                        DockStyle.None,
+                        new Padding(),
+                        AnchorStyles.Left | AnchorStyles.Top
+                    )
+                );
+            p.Controls
+                .Add(
+                    CreateButton(
+                        100,
+                        100,
+                        false,
+                        DockStyle.None,
+                        new Padding(),
+                        AnchorStyles.Left | AnchorStyles.Top
+                    )
+                );
+            p.Controls
+                .Add(
+                    CreateButton(
+                        100,
+                        100,
+                        false,
+                        DockStyle.None,
+                        new Padding(),
+                        AnchorStyles.Left | AnchorStyles.Top
+                    )
+                );
 
             Assert.AreEqual(new Rectangle(100, 0, 100, 50), p.Controls[0].Bounds, "AN1");
             Assert.AreEqual(new Rectangle(0, 0, 100, 100), p.Controls[1].Bounds, "AN2");
@@ -1233,46 +1316,50 @@ namespace MonoTests.System.Windows.Forms
             FlowLayoutPanel p = new FlowLayoutPanel();
             p.FlowDirection = FlowDirection.RightToLeft;
 
-            p.Controls.Add(
-                CreateButton(
-                    100,
-                    100,
-                    false,
-                    DockStyle.None,
-                    new Padding(),
-                    AnchorStyles.Left | AnchorStyles.Top
-                )
-            );
-            p.Controls.Add(
-                CreateButton(
-                    100,
-                    100,
-                    false,
-                    DockStyle.None,
-                    new Padding(),
-                    AnchorStyles.Left | AnchorStyles.Top
-                )
-            );
-            p.Controls.Add(
-                CreateButton(
-                    100,
-                    100,
-                    false,
-                    DockStyle.None,
-                    new Padding(),
-                    AnchorStyles.Left | AnchorStyles.Top
-                )
-            );
-            p.Controls.Add(
-                CreateButton(
-                    100,
-                    100,
-                    false,
-                    DockStyle.None,
-                    new Padding(),
-                    AnchorStyles.Left | AnchorStyles.Top
-                )
-            );
+            p.Controls
+                .Add(
+                    CreateButton(
+                        100,
+                        100,
+                        false,
+                        DockStyle.None,
+                        new Padding(),
+                        AnchorStyles.Left | AnchorStyles.Top
+                    )
+                );
+            p.Controls
+                .Add(
+                    CreateButton(
+                        100,
+                        100,
+                        false,
+                        DockStyle.None,
+                        new Padding(),
+                        AnchorStyles.Left | AnchorStyles.Top
+                    )
+                );
+            p.Controls
+                .Add(
+                    CreateButton(
+                        100,
+                        100,
+                        false,
+                        DockStyle.None,
+                        new Padding(),
+                        AnchorStyles.Left | AnchorStyles.Top
+                    )
+                );
+            p.Controls
+                .Add(
+                    CreateButton(
+                        100,
+                        100,
+                        false,
+                        DockStyle.None,
+                        new Padding(),
+                        AnchorStyles.Left | AnchorStyles.Top
+                    )
+                );
 
             p.SetFlowBreak(p.Controls[0], true);
             p.SetFlowBreak(p.Controls[2], true);
@@ -1290,46 +1377,50 @@ namespace MonoTests.System.Windows.Forms
             FlowLayoutPanel p = new FlowLayoutPanel();
             p.FlowDirection = FlowDirection.RightToLeft;
 
-            p.Controls.Add(
-                CreateButton(
-                    50,
-                    50,
-                    false,
-                    DockStyle.None,
-                    new Padding(1, 3, 5, 2),
-                    AnchorStyles.Left | AnchorStyles.Top
-                )
-            );
-            p.Controls.Add(
-                CreateButton(
-                    50,
-                    50,
-                    false,
-                    DockStyle.None,
-                    new Padding(7, 3, 12, 5),
-                    AnchorStyles.Left | AnchorStyles.Top
-                )
-            );
-            p.Controls.Add(
-                CreateButton(
-                    50,
-                    50,
-                    false,
-                    DockStyle.None,
-                    new Padding(14, 7, 1, 3),
-                    AnchorStyles.Left | AnchorStyles.Top
-                )
-            );
-            p.Controls.Add(
-                CreateButton(
-                    50,
-                    50,
-                    false,
-                    DockStyle.None,
-                    new Padding(4),
-                    AnchorStyles.Left | AnchorStyles.Top
-                )
-            );
+            p.Controls
+                .Add(
+                    CreateButton(
+                        50,
+                        50,
+                        false,
+                        DockStyle.None,
+                        new Padding(1, 3, 5, 2),
+                        AnchorStyles.Left | AnchorStyles.Top
+                    )
+                );
+            p.Controls
+                .Add(
+                    CreateButton(
+                        50,
+                        50,
+                        false,
+                        DockStyle.None,
+                        new Padding(7, 3, 12, 5),
+                        AnchorStyles.Left | AnchorStyles.Top
+                    )
+                );
+            p.Controls
+                .Add(
+                    CreateButton(
+                        50,
+                        50,
+                        false,
+                        DockStyle.None,
+                        new Padding(14, 7, 1, 3),
+                        AnchorStyles.Left | AnchorStyles.Top
+                    )
+                );
+            p.Controls
+                .Add(
+                    CreateButton(
+                        50,
+                        50,
+                        false,
+                        DockStyle.None,
+                        new Padding(4),
+                        AnchorStyles.Left | AnchorStyles.Top
+                    )
+                );
 
             Assert.AreEqual(new Rectangle(145, 3, 50, 50), p.Controls[0].Bounds, "AP1");
             Assert.AreEqual(new Rectangle(82, 3, 50, 50), p.Controls[1].Bounds, "AP2");
@@ -1344,46 +1435,50 @@ namespace MonoTests.System.Windows.Forms
             FlowLayoutPanel p = new FlowLayoutPanel();
             p.FlowDirection = FlowDirection.RightToLeft;
 
-            p.Controls.Add(
-                CreateButton(
-                    25,
-                    45,
-                    false,
-                    DockStyle.None,
-                    new Padding(6),
-                    AnchorStyles.Left | AnchorStyles.Top
-                )
-            );
-            p.Controls.Add(
-                CreateButton(
-                    60,
-                    20,
-                    false,
-                    DockStyle.None,
-                    new Padding(9),
-                    AnchorStyles.Left | AnchorStyles.Top
-                )
-            );
-            p.Controls.Add(
-                CreateButton(
-                    15,
-                    85,
-                    false,
-                    DockStyle.None,
-                    new Padding(2),
-                    AnchorStyles.Left | AnchorStyles.Top
-                )
-            );
-            p.Controls.Add(
-                CreateButton(
-                    50,
-                    20,
-                    false,
-                    DockStyle.None,
-                    new Padding(4),
-                    AnchorStyles.Left | AnchorStyles.Top
-                )
-            );
+            p.Controls
+                .Add(
+                    CreateButton(
+                        25,
+                        45,
+                        false,
+                        DockStyle.None,
+                        new Padding(6),
+                        AnchorStyles.Left | AnchorStyles.Top
+                    )
+                );
+            p.Controls
+                .Add(
+                    CreateButton(
+                        60,
+                        20,
+                        false,
+                        DockStyle.None,
+                        new Padding(9),
+                        AnchorStyles.Left | AnchorStyles.Top
+                    )
+                );
+            p.Controls
+                .Add(
+                    CreateButton(
+                        15,
+                        85,
+                        false,
+                        DockStyle.None,
+                        new Padding(2),
+                        AnchorStyles.Left | AnchorStyles.Top
+                    )
+                );
+            p.Controls
+                .Add(
+                    CreateButton(
+                        50,
+                        20,
+                        false,
+                        DockStyle.None,
+                        new Padding(4),
+                        AnchorStyles.Left | AnchorStyles.Top
+                    )
+                );
 
             Assert.AreEqual(new Rectangle(169, 6, 25, 45), p.Controls[0].Bounds, "AQ1");
             Assert.AreEqual(new Rectangle(94, 9, 60, 20), p.Controls[1].Bounds, "AQ2");
@@ -1398,59 +1493,63 @@ namespace MonoTests.System.Windows.Forms
             FlowLayoutPanel p = new FlowLayoutPanel();
             p.FlowDirection = FlowDirection.RightToLeft;
 
-            p.Controls.Add(
-                CreateButton(
-                    25,
-                    45,
-                    false,
-                    DockStyle.None,
-                    new Padding(6),
-                    AnchorStyles.Right | AnchorStyles.Top
-                )
-            );
-            p.Controls.Add(
-                CreateButton(
-                    60,
-                    20,
-                    false,
-                    DockStyle.Fill,
-                    new Padding(9),
-                    AnchorStyles.Bottom | AnchorStyles.Top
-                )
-            );
-            p.Controls.Add(
-                CreateButton(
-                    15,
-                    85,
-                    false,
-                    DockStyle.None,
-                    new Padding(2),
-                    AnchorStyles.Left | AnchorStyles.Top | AnchorStyles.Bottom
-                )
-            );
-            p.Controls.Add(
-                CreateButton(
-                    50,
-                    20,
-                    false,
-                    DockStyle.None,
-                    new Padding(4),
-                    AnchorStyles.Left | AnchorStyles.Bottom
-                )
-            );
-            p.Controls.Add(
-                CreateButton(
-                    13,
-                    22,
-                    false,
-                    DockStyle.None,
-                    new Padding(12),
-                    AnchorStyles.Left | AnchorStyles.Right
-                )
-            );
-            p.Controls.Add(
-                CreateButton(73, 28, false, DockStyle.Top, new Padding(6), AnchorStyles.None)
-            );
+            p.Controls
+                .Add(
+                    CreateButton(
+                        25,
+                        45,
+                        false,
+                        DockStyle.None,
+                        new Padding(6),
+                        AnchorStyles.Right | AnchorStyles.Top
+                    )
+                );
+            p.Controls
+                .Add(
+                    CreateButton(
+                        60,
+                        20,
+                        false,
+                        DockStyle.Fill,
+                        new Padding(9),
+                        AnchorStyles.Bottom | AnchorStyles.Top
+                    )
+                );
+            p.Controls
+                .Add(
+                    CreateButton(
+                        15,
+                        85,
+                        false,
+                        DockStyle.None,
+                        new Padding(2),
+                        AnchorStyles.Left | AnchorStyles.Top | AnchorStyles.Bottom
+                    )
+                );
+            p.Controls
+                .Add(
+                    CreateButton(
+                        50,
+                        20,
+                        false,
+                        DockStyle.None,
+                        new Padding(4),
+                        AnchorStyles.Left | AnchorStyles.Bottom
+                    )
+                );
+            p.Controls
+                .Add(
+                    CreateButton(
+                        13,
+                        22,
+                        false,
+                        DockStyle.None,
+                        new Padding(12),
+                        AnchorStyles.Left | AnchorStyles.Right
+                    )
+                );
+            p.Controls
+                .Add(CreateButton(73, 28, false, DockStyle.Top, new Padding(6), AnchorStyles.None));
 
             Assert.AreEqual(new Rectangle(169, 6, 25, 45), p.Controls[0].Bounds, "AR1");
             Assert.AreEqual(new Rectangle(94, 9, 60, 39), p.Controls[1].Bounds, "AR2");
@@ -1467,66 +1566,75 @@ namespace MonoTests.System.Windows.Forms
             FlowLayoutPanel p = new FlowLayoutPanel();
             p.FlowDirection = FlowDirection.RightToLeft;
 
-            p.Controls.Add(
-                CreateButton(
-                    12,
-                    345,
-                    false,
-                    DockStyle.Bottom,
-                    new Padding(1, 2, 3, 4),
-                    AnchorStyles.Left | AnchorStyles.Top
-                )
-            );
-            p.Controls.Add(
-                CreateButton(
-                    9,
-                    44,
-                    false,
-                    DockStyle.Top,
-                    new Padding(6, 3, 2, 7),
-                    AnchorStyles.Right | AnchorStyles.Top
-                )
-            );
-            p.Controls.Add(
-                CreateButton(
-                    78,
-                    14,
-                    false,
-                    DockStyle.None,
-                    new Padding(5, 1, 2, 4),
-                    AnchorStyles.Left | AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Right
-                )
-            );
-            p.Controls.Add(
-                CreateButton(
-                    21,
-                    64,
-                    false,
-                    DockStyle.Top,
-                    new Padding(3, 3, 3, 1),
-                    AnchorStyles.None
-                )
-            );
-            p.Controls.Add(
-                CreateButton(
-                    14,
-                    14,
-                    false,
-                    DockStyle.Fill,
-                    new Padding(11, 4, 6, 3),
-                    AnchorStyles.Top | AnchorStyles.Bottom
-                )
-            );
-            p.Controls.Add(
-                CreateButton(
-                    132,
-                    6,
-                    false,
-                    DockStyle.Fill,
-                    new Padding(5, 5, 4, 5),
-                    AnchorStyles.Top | AnchorStyles.Bottom
-                )
-            );
+            p.Controls
+                .Add(
+                    CreateButton(
+                        12,
+                        345,
+                        false,
+                        DockStyle.Bottom,
+                        new Padding(1, 2, 3, 4),
+                        AnchorStyles.Left | AnchorStyles.Top
+                    )
+                );
+            p.Controls
+                .Add(
+                    CreateButton(
+                        9,
+                        44,
+                        false,
+                        DockStyle.Top,
+                        new Padding(6, 3, 2, 7),
+                        AnchorStyles.Right | AnchorStyles.Top
+                    )
+                );
+            p.Controls
+                .Add(
+                    CreateButton(
+                        78,
+                        14,
+                        false,
+                        DockStyle.None,
+                        new Padding(5, 1, 2, 4),
+                        AnchorStyles.Left
+                            | AnchorStyles.Top
+                            | AnchorStyles.Bottom
+                            | AnchorStyles.Right
+                    )
+                );
+            p.Controls
+                .Add(
+                    CreateButton(
+                        21,
+                        64,
+                        false,
+                        DockStyle.Top,
+                        new Padding(3, 3, 3, 1),
+                        AnchorStyles.None
+                    )
+                );
+            p.Controls
+                .Add(
+                    CreateButton(
+                        14,
+                        14,
+                        false,
+                        DockStyle.Fill,
+                        new Padding(11, 4, 6, 3),
+                        AnchorStyles.Top | AnchorStyles.Bottom
+                    )
+                );
+            p.Controls
+                .Add(
+                    CreateButton(
+                        132,
+                        6,
+                        false,
+                        DockStyle.Fill,
+                        new Padding(5, 5, 4, 5),
+                        AnchorStyles.Top | AnchorStyles.Bottom
+                    )
+                );
 
             p.SetFlowBreak(p.Controls[0], true);
             p.SetFlowBreak(p.Controls[2], true);
@@ -1547,26 +1655,28 @@ namespace MonoTests.System.Windows.Forms
             p.WrapContents = false;
             p.FlowDirection = FlowDirection.RightToLeft;
 
-            p.Controls.Add(
-                CreateButton(
-                    100,
-                    100,
-                    false,
-                    DockStyle.None,
-                    new Padding(),
-                    AnchorStyles.Left | AnchorStyles.Top
-                )
-            );
-            p.Controls.Add(
-                CreateButton(
-                    100,
-                    100,
-                    false,
-                    DockStyle.None,
-                    new Padding(),
-                    AnchorStyles.Left | AnchorStyles.Top
-                )
-            );
+            p.Controls
+                .Add(
+                    CreateButton(
+                        100,
+                        100,
+                        false,
+                        DockStyle.None,
+                        new Padding(),
+                        AnchorStyles.Left | AnchorStyles.Top
+                    )
+                );
+            p.Controls
+                .Add(
+                    CreateButton(
+                        100,
+                        100,
+                        false,
+                        DockStyle.None,
+                        new Padding(),
+                        AnchorStyles.Left | AnchorStyles.Top
+                    )
+                );
 
             p.SetFlowBreak(p.Controls[0], true);
 
@@ -1584,26 +1694,28 @@ namespace MonoTests.System.Windows.Forms
             p.Size = new Size(100, 200);
             p.FlowDirection = FlowDirection.TopDown;
 
-            p.Controls.Add(
-                CreateButton(
-                    100,
-                    100,
-                    false,
-                    DockStyle.None,
-                    new Padding(),
-                    AnchorStyles.Left | AnchorStyles.Top
-                )
-            );
-            p.Controls.Add(
-                CreateButton(
-                    100,
-                    100,
-                    false,
-                    DockStyle.None,
-                    new Padding(),
-                    AnchorStyles.Left | AnchorStyles.Top
-                )
-            );
+            p.Controls
+                .Add(
+                    CreateButton(
+                        100,
+                        100,
+                        false,
+                        DockStyle.None,
+                        new Padding(),
+                        AnchorStyles.Left | AnchorStyles.Top
+                    )
+                );
+            p.Controls
+                .Add(
+                    CreateButton(
+                        100,
+                        100,
+                        false,
+                        DockStyle.None,
+                        new Padding(),
+                        AnchorStyles.Left | AnchorStyles.Top
+                    )
+                );
 
             Assert.AreEqual(new Rectangle(0, 0, 100, 100), p.Controls[0].Bounds, "BC1");
             Assert.AreEqual(new Rectangle(0, 100, 100, 100), p.Controls[1].Bounds, "BC2");
@@ -1617,26 +1729,28 @@ namespace MonoTests.System.Windows.Forms
             p.Size = new Size(100, 200);
             p.FlowDirection = FlowDirection.TopDown;
 
-            p.Controls.Add(
-                CreateButton(
-                    50,
-                    100,
-                    false,
-                    DockStyle.Fill,
-                    new Padding(),
-                    AnchorStyles.Left | AnchorStyles.Top
-                )
-            );
-            p.Controls.Add(
-                CreateButton(
-                    100,
-                    100,
-                    false,
-                    DockStyle.None,
-                    new Padding(),
-                    AnchorStyles.Left | AnchorStyles.Top
-                )
-            );
+            p.Controls
+                .Add(
+                    CreateButton(
+                        50,
+                        100,
+                        false,
+                        DockStyle.Fill,
+                        new Padding(),
+                        AnchorStyles.Left | AnchorStyles.Top
+                    )
+                );
+            p.Controls
+                .Add(
+                    CreateButton(
+                        100,
+                        100,
+                        false,
+                        DockStyle.None,
+                        new Padding(),
+                        AnchorStyles.Left | AnchorStyles.Top
+                    )
+                );
 
             Assert.AreEqual(new Rectangle(0, 0, 100, 100), p.Controls[0].Bounds, "BD1");
             Assert.AreEqual(new Rectangle(0, 100, 100, 100), p.Controls[1].Bounds, "BD2");
@@ -1650,26 +1764,28 @@ namespace MonoTests.System.Windows.Forms
             p.Size = new Size(100, 200);
             p.FlowDirection = FlowDirection.TopDown;
 
-            p.Controls.Add(
-                CreateButton(
-                    50,
-                    100,
-                    false,
-                    DockStyle.None,
-                    new Padding(),
-                    AnchorStyles.Left | AnchorStyles.Right
-                )
-            );
-            p.Controls.Add(
-                CreateButton(
-                    100,
-                    100,
-                    false,
-                    DockStyle.None,
-                    new Padding(),
-                    AnchorStyles.Left | AnchorStyles.Top
-                )
-            );
+            p.Controls
+                .Add(
+                    CreateButton(
+                        50,
+                        100,
+                        false,
+                        DockStyle.None,
+                        new Padding(),
+                        AnchorStyles.Left | AnchorStyles.Right
+                    )
+                );
+            p.Controls
+                .Add(
+                    CreateButton(
+                        100,
+                        100,
+                        false,
+                        DockStyle.None,
+                        new Padding(),
+                        AnchorStyles.Left | AnchorStyles.Top
+                    )
+                );
 
             Assert.AreEqual(new Rectangle(0, 0, 100, 100), p.Controls[0].Bounds, "BE1");
             Assert.AreEqual(new Rectangle(0, 100, 100, 100), p.Controls[1].Bounds, "BE2");
@@ -1683,26 +1799,28 @@ namespace MonoTests.System.Windows.Forms
             p.Size = new Size(100, 200);
             p.FlowDirection = FlowDirection.TopDown;
 
-            p.Controls.Add(
-                CreateButton(
-                    50,
-                    100,
-                    false,
-                    DockStyle.None,
-                    new Padding(),
-                    AnchorStyles.Left | AnchorStyles.Right
-                )
-            );
-            p.Controls.Add(
-                CreateButton(
-                    100,
-                    100,
-                    false,
-                    DockStyle.Fill,
-                    new Padding(),
-                    AnchorStyles.Left | AnchorStyles.Top
-                )
-            );
+            p.Controls
+                .Add(
+                    CreateButton(
+                        50,
+                        100,
+                        false,
+                        DockStyle.None,
+                        new Padding(),
+                        AnchorStyles.Left | AnchorStyles.Right
+                    )
+                );
+            p.Controls
+                .Add(
+                    CreateButton(
+                        100,
+                        100,
+                        false,
+                        DockStyle.Fill,
+                        new Padding(),
+                        AnchorStyles.Left | AnchorStyles.Top
+                    )
+                );
 
             Assert.AreEqual(new Rectangle(0, 0, 0, 100), p.Controls[0].Bounds, "BF1");
             Assert.AreEqual(new Rectangle(0, 100, 0, 100), p.Controls[1].Bounds, "BF2");
@@ -1716,26 +1834,28 @@ namespace MonoTests.System.Windows.Forms
             p.Size = new Size(100, 200);
             p.FlowDirection = FlowDirection.TopDown;
 
-            p.Controls.Add(
-                CreateButton(
-                    50,
-                    100,
-                    false,
-                    DockStyle.None,
-                    new Padding(),
-                    AnchorStyles.Left | AnchorStyles.Right
-                )
-            );
-            p.Controls.Add(
-                CreateButton(
-                    100,
-                    100,
-                    false,
-                    DockStyle.None,
-                    new Padding(),
-                    AnchorStyles.Left | AnchorStyles.Right
-                )
-            );
+            p.Controls
+                .Add(
+                    CreateButton(
+                        50,
+                        100,
+                        false,
+                        DockStyle.None,
+                        new Padding(),
+                        AnchorStyles.Left | AnchorStyles.Right
+                    )
+                );
+            p.Controls
+                .Add(
+                    CreateButton(
+                        100,
+                        100,
+                        false,
+                        DockStyle.None,
+                        new Padding(),
+                        AnchorStyles.Left | AnchorStyles.Right
+                    )
+                );
 
             Assert.AreEqual(new Rectangle(0, 0, 0, 100), p.Controls[0].Bounds, "BG1");
             Assert.AreEqual(new Rectangle(0, 100, 0, 100), p.Controls[1].Bounds, "BG2");
@@ -1749,26 +1869,28 @@ namespace MonoTests.System.Windows.Forms
             p.Size = new Size(100, 200);
             p.FlowDirection = FlowDirection.TopDown;
 
-            p.Controls.Add(
-                CreateButton(
-                    50,
-                    100,
-                    false,
-                    DockStyle.Fill,
-                    new Padding(),
-                    AnchorStyles.Left | AnchorStyles.Top
-                )
-            );
-            p.Controls.Add(
-                CreateButton(
-                    100,
-                    100,
-                    false,
-                    DockStyle.Fill,
-                    new Padding(),
-                    AnchorStyles.Left | AnchorStyles.Top
-                )
-            );
+            p.Controls
+                .Add(
+                    CreateButton(
+                        50,
+                        100,
+                        false,
+                        DockStyle.Fill,
+                        new Padding(),
+                        AnchorStyles.Left | AnchorStyles.Top
+                    )
+                );
+            p.Controls
+                .Add(
+                    CreateButton(
+                        100,
+                        100,
+                        false,
+                        DockStyle.Fill,
+                        new Padding(),
+                        AnchorStyles.Left | AnchorStyles.Top
+                    )
+                );
 
             Assert.AreEqual(new Rectangle(0, 0, 0, 100), p.Controls[0].Bounds, "BH1");
             Assert.AreEqual(new Rectangle(0, 100, 0, 100), p.Controls[1].Bounds, "BH2");
@@ -1782,26 +1904,28 @@ namespace MonoTests.System.Windows.Forms
             p.Size = new Size(100, 200);
             p.FlowDirection = FlowDirection.TopDown;
 
-            p.Controls.Add(
-                CreateButton(
-                    50,
-                    100,
-                    false,
-                    DockStyle.Left,
-                    new Padding(),
-                    AnchorStyles.Left | AnchorStyles.Top
-                )
-            );
-            p.Controls.Add(
-                CreateButton(
-                    100,
-                    100,
-                    false,
-                    DockStyle.None,
-                    new Padding(),
-                    AnchorStyles.Left | AnchorStyles.Top
-                )
-            );
+            p.Controls
+                .Add(
+                    CreateButton(
+                        50,
+                        100,
+                        false,
+                        DockStyle.Left,
+                        new Padding(),
+                        AnchorStyles.Left | AnchorStyles.Top
+                    )
+                );
+            p.Controls
+                .Add(
+                    CreateButton(
+                        100,
+                        100,
+                        false,
+                        DockStyle.None,
+                        new Padding(),
+                        AnchorStyles.Left | AnchorStyles.Top
+                    )
+                );
 
             Assert.AreEqual(new Rectangle(0, 0, 50, 100), p.Controls[0].Bounds, "BI1");
             Assert.AreEqual(new Rectangle(0, 100, 100, 100), p.Controls[1].Bounds, "BI2");
@@ -1815,26 +1939,28 @@ namespace MonoTests.System.Windows.Forms
             p.Size = new Size(100, 200);
             p.FlowDirection = FlowDirection.TopDown;
 
-            p.Controls.Add(
-                CreateButton(
-                    50,
-                    100,
-                    false,
-                    DockStyle.Right,
-                    new Padding(),
-                    AnchorStyles.Left | AnchorStyles.Top
-                )
-            );
-            p.Controls.Add(
-                CreateButton(
-                    100,
-                    100,
-                    false,
-                    DockStyle.None,
-                    new Padding(),
-                    AnchorStyles.Left | AnchorStyles.Top
-                )
-            );
+            p.Controls
+                .Add(
+                    CreateButton(
+                        50,
+                        100,
+                        false,
+                        DockStyle.Right,
+                        new Padding(),
+                        AnchorStyles.Left | AnchorStyles.Top
+                    )
+                );
+            p.Controls
+                .Add(
+                    CreateButton(
+                        100,
+                        100,
+                        false,
+                        DockStyle.None,
+                        new Padding(),
+                        AnchorStyles.Left | AnchorStyles.Top
+                    )
+                );
 
             Assert.AreEqual(new Rectangle(50, 0, 50, 100), p.Controls[0].Bounds, "BJ1");
             Assert.AreEqual(new Rectangle(0, 100, 100, 100), p.Controls[1].Bounds, "BJ2");
@@ -1848,26 +1974,28 @@ namespace MonoTests.System.Windows.Forms
             p.Size = new Size(100, 200);
             p.FlowDirection = FlowDirection.TopDown;
 
-            p.Controls.Add(
-                CreateButton(
-                    50,
-                    100,
-                    false,
-                    DockStyle.None,
-                    new Padding(),
-                    AnchorStyles.Top | AnchorStyles.Right
-                )
-            );
-            p.Controls.Add(
-                CreateButton(
-                    100,
-                    100,
-                    false,
-                    DockStyle.None,
-                    new Padding(),
-                    AnchorStyles.Top | AnchorStyles.Left
-                )
-            );
+            p.Controls
+                .Add(
+                    CreateButton(
+                        50,
+                        100,
+                        false,
+                        DockStyle.None,
+                        new Padding(),
+                        AnchorStyles.Top | AnchorStyles.Right
+                    )
+                );
+            p.Controls
+                .Add(
+                    CreateButton(
+                        100,
+                        100,
+                        false,
+                        DockStyle.None,
+                        new Padding(),
+                        AnchorStyles.Top | AnchorStyles.Left
+                    )
+                );
 
             Assert.AreEqual(new Rectangle(50, 0, 50, 100), p.Controls[0].Bounds, "BK1");
             Assert.AreEqual(new Rectangle(0, 100, 100, 100), p.Controls[1].Bounds, "BK2");
@@ -1881,19 +2009,21 @@ namespace MonoTests.System.Windows.Forms
             p.Size = new Size(100, 200);
             p.FlowDirection = FlowDirection.TopDown;
 
-            p.Controls.Add(
-                CreateButton(50, 100, false, DockStyle.None, new Padding(), AnchorStyles.None)
-            );
-            p.Controls.Add(
-                CreateButton(
-                    100,
-                    100,
-                    false,
-                    DockStyle.None,
-                    new Padding(),
-                    AnchorStyles.Left | AnchorStyles.Top
-                )
-            );
+            p.Controls
+                .Add(
+                    CreateButton(50, 100, false, DockStyle.None, new Padding(), AnchorStyles.None)
+                );
+            p.Controls
+                .Add(
+                    CreateButton(
+                        100,
+                        100,
+                        false,
+                        DockStyle.None,
+                        new Padding(),
+                        AnchorStyles.Left | AnchorStyles.Top
+                    )
+                );
 
             Assert.AreEqual(new Rectangle(25, 0, 50, 100), p.Controls[0].Bounds, "BL1");
             Assert.AreEqual(new Rectangle(0, 100, 100, 100), p.Controls[1].Bounds, "BL2");
@@ -1907,46 +2037,50 @@ namespace MonoTests.System.Windows.Forms
             p.Size = new Size(100, 200);
             p.FlowDirection = FlowDirection.TopDown;
 
-            p.Controls.Add(
-                CreateButton(
-                    50,
-                    100,
-                    false,
-                    DockStyle.None,
-                    new Padding(),
-                    AnchorStyles.Left | AnchorStyles.Top
-                )
-            );
-            p.Controls.Add(
-                CreateButton(
-                    100,
-                    100,
-                    false,
-                    DockStyle.None,
-                    new Padding(),
-                    AnchorStyles.Left | AnchorStyles.Top
-                )
-            );
-            p.Controls.Add(
-                CreateButton(
-                    100,
-                    100,
-                    false,
-                    DockStyle.None,
-                    new Padding(),
-                    AnchorStyles.Left | AnchorStyles.Top
-                )
-            );
-            p.Controls.Add(
-                CreateButton(
-                    100,
-                    100,
-                    false,
-                    DockStyle.None,
-                    new Padding(),
-                    AnchorStyles.Left | AnchorStyles.Top
-                )
-            );
+            p.Controls
+                .Add(
+                    CreateButton(
+                        50,
+                        100,
+                        false,
+                        DockStyle.None,
+                        new Padding(),
+                        AnchorStyles.Left | AnchorStyles.Top
+                    )
+                );
+            p.Controls
+                .Add(
+                    CreateButton(
+                        100,
+                        100,
+                        false,
+                        DockStyle.None,
+                        new Padding(),
+                        AnchorStyles.Left | AnchorStyles.Top
+                    )
+                );
+            p.Controls
+                .Add(
+                    CreateButton(
+                        100,
+                        100,
+                        false,
+                        DockStyle.None,
+                        new Padding(),
+                        AnchorStyles.Left | AnchorStyles.Top
+                    )
+                );
+            p.Controls
+                .Add(
+                    CreateButton(
+                        100,
+                        100,
+                        false,
+                        DockStyle.None,
+                        new Padding(),
+                        AnchorStyles.Left | AnchorStyles.Top
+                    )
+                );
 
             Assert.AreEqual(new Rectangle(0, 0, 50, 100), p.Controls[0].Bounds, "BM1");
             Assert.AreEqual(new Rectangle(0, 100, 100, 100), p.Controls[1].Bounds, "BM2");
@@ -1963,46 +2097,50 @@ namespace MonoTests.System.Windows.Forms
             p.WrapContents = false;
             p.FlowDirection = FlowDirection.TopDown;
 
-            p.Controls.Add(
-                CreateButton(
-                    50,
-                    100,
-                    false,
-                    DockStyle.None,
-                    new Padding(),
-                    AnchorStyles.Left | AnchorStyles.Top
-                )
-            );
-            p.Controls.Add(
-                CreateButton(
-                    100,
-                    100,
-                    false,
-                    DockStyle.None,
-                    new Padding(),
-                    AnchorStyles.Left | AnchorStyles.Top
-                )
-            );
-            p.Controls.Add(
-                CreateButton(
-                    100,
-                    100,
-                    false,
-                    DockStyle.None,
-                    new Padding(),
-                    AnchorStyles.Left | AnchorStyles.Top
-                )
-            );
-            p.Controls.Add(
-                CreateButton(
-                    100,
-                    100,
-                    false,
-                    DockStyle.None,
-                    new Padding(),
-                    AnchorStyles.Left | AnchorStyles.Top
-                )
-            );
+            p.Controls
+                .Add(
+                    CreateButton(
+                        50,
+                        100,
+                        false,
+                        DockStyle.None,
+                        new Padding(),
+                        AnchorStyles.Left | AnchorStyles.Top
+                    )
+                );
+            p.Controls
+                .Add(
+                    CreateButton(
+                        100,
+                        100,
+                        false,
+                        DockStyle.None,
+                        new Padding(),
+                        AnchorStyles.Left | AnchorStyles.Top
+                    )
+                );
+            p.Controls
+                .Add(
+                    CreateButton(
+                        100,
+                        100,
+                        false,
+                        DockStyle.None,
+                        new Padding(),
+                        AnchorStyles.Left | AnchorStyles.Top
+                    )
+                );
+            p.Controls
+                .Add(
+                    CreateButton(
+                        100,
+                        100,
+                        false,
+                        DockStyle.None,
+                        new Padding(),
+                        AnchorStyles.Left | AnchorStyles.Top
+                    )
+                );
 
             Assert.AreEqual(new Rectangle(0, 0, 50, 100), p.Controls[0].Bounds, "BN1");
             Assert.AreEqual(new Rectangle(0, 100, 100, 100), p.Controls[1].Bounds, "BN2");
@@ -2018,46 +2156,50 @@ namespace MonoTests.System.Windows.Forms
             p.Size = new Size(100, 200);
             p.FlowDirection = FlowDirection.TopDown;
 
-            p.Controls.Add(
-                CreateButton(
-                    100,
-                    100,
-                    false,
-                    DockStyle.None,
-                    new Padding(),
-                    AnchorStyles.Left | AnchorStyles.Top
-                )
-            );
-            p.Controls.Add(
-                CreateButton(
-                    100,
-                    100,
-                    false,
-                    DockStyle.None,
-                    new Padding(),
-                    AnchorStyles.Left | AnchorStyles.Top
-                )
-            );
-            p.Controls.Add(
-                CreateButton(
-                    100,
-                    100,
-                    false,
-                    DockStyle.None,
-                    new Padding(),
-                    AnchorStyles.Left | AnchorStyles.Top
-                )
-            );
-            p.Controls.Add(
-                CreateButton(
-                    100,
-                    100,
-                    false,
-                    DockStyle.None,
-                    new Padding(),
-                    AnchorStyles.Left | AnchorStyles.Top
-                )
-            );
+            p.Controls
+                .Add(
+                    CreateButton(
+                        100,
+                        100,
+                        false,
+                        DockStyle.None,
+                        new Padding(),
+                        AnchorStyles.Left | AnchorStyles.Top
+                    )
+                );
+            p.Controls
+                .Add(
+                    CreateButton(
+                        100,
+                        100,
+                        false,
+                        DockStyle.None,
+                        new Padding(),
+                        AnchorStyles.Left | AnchorStyles.Top
+                    )
+                );
+            p.Controls
+                .Add(
+                    CreateButton(
+                        100,
+                        100,
+                        false,
+                        DockStyle.None,
+                        new Padding(),
+                        AnchorStyles.Left | AnchorStyles.Top
+                    )
+                );
+            p.Controls
+                .Add(
+                    CreateButton(
+                        100,
+                        100,
+                        false,
+                        DockStyle.None,
+                        new Padding(),
+                        AnchorStyles.Left | AnchorStyles.Top
+                    )
+                );
 
             p.SetFlowBreak(p.Controls[0], true);
             p.SetFlowBreak(p.Controls[2], true);
@@ -2076,46 +2218,50 @@ namespace MonoTests.System.Windows.Forms
             p.Size = new Size(100, 200);
             p.FlowDirection = FlowDirection.TopDown;
 
-            p.Controls.Add(
-                CreateButton(
-                    50,
-                    50,
-                    false,
-                    DockStyle.None,
-                    new Padding(1, 3, 5, 2),
-                    AnchorStyles.Left | AnchorStyles.Top
-                )
-            );
-            p.Controls.Add(
-                CreateButton(
-                    50,
-                    50,
-                    false,
-                    DockStyle.None,
-                    new Padding(7, 3, 12, 5),
-                    AnchorStyles.Left | AnchorStyles.Top
-                )
-            );
-            p.Controls.Add(
-                CreateButton(
-                    50,
-                    50,
-                    false,
-                    DockStyle.None,
-                    new Padding(14, 7, 1, 3),
-                    AnchorStyles.Left | AnchorStyles.Top
-                )
-            );
-            p.Controls.Add(
-                CreateButton(
-                    50,
-                    50,
-                    false,
-                    DockStyle.None,
-                    new Padding(4),
-                    AnchorStyles.Left | AnchorStyles.Top
-                )
-            );
+            p.Controls
+                .Add(
+                    CreateButton(
+                        50,
+                        50,
+                        false,
+                        DockStyle.None,
+                        new Padding(1, 3, 5, 2),
+                        AnchorStyles.Left | AnchorStyles.Top
+                    )
+                );
+            p.Controls
+                .Add(
+                    CreateButton(
+                        50,
+                        50,
+                        false,
+                        DockStyle.None,
+                        new Padding(7, 3, 12, 5),
+                        AnchorStyles.Left | AnchorStyles.Top
+                    )
+                );
+            p.Controls
+                .Add(
+                    CreateButton(
+                        50,
+                        50,
+                        false,
+                        DockStyle.None,
+                        new Padding(14, 7, 1, 3),
+                        AnchorStyles.Left | AnchorStyles.Top
+                    )
+                );
+            p.Controls
+                .Add(
+                    CreateButton(
+                        50,
+                        50,
+                        false,
+                        DockStyle.None,
+                        new Padding(4),
+                        AnchorStyles.Left | AnchorStyles.Top
+                    )
+                );
 
             Assert.AreEqual(new Rectangle(1, 3, 50, 50), p.Controls[0].Bounds, "BP1");
             Assert.AreEqual(new Rectangle(7, 58, 50, 50), p.Controls[1].Bounds, "BP2");
@@ -2131,46 +2277,50 @@ namespace MonoTests.System.Windows.Forms
             p.Size = new Size(100, 200);
             p.FlowDirection = FlowDirection.TopDown;
 
-            p.Controls.Add(
-                CreateButton(
-                    25,
-                    45,
-                    false,
-                    DockStyle.None,
-                    new Padding(6),
-                    AnchorStyles.Left | AnchorStyles.Top
-                )
-            );
-            p.Controls.Add(
-                CreateButton(
-                    60,
-                    20,
-                    false,
-                    DockStyle.None,
-                    new Padding(9),
-                    AnchorStyles.Left | AnchorStyles.Top
-                )
-            );
-            p.Controls.Add(
-                CreateButton(
-                    15,
-                    85,
-                    false,
-                    DockStyle.None,
-                    new Padding(2),
-                    AnchorStyles.Left | AnchorStyles.Top
-                )
-            );
-            p.Controls.Add(
-                CreateButton(
-                    50,
-                    20,
-                    false,
-                    DockStyle.None,
-                    new Padding(4),
-                    AnchorStyles.Left | AnchorStyles.Top
-                )
-            );
+            p.Controls
+                .Add(
+                    CreateButton(
+                        25,
+                        45,
+                        false,
+                        DockStyle.None,
+                        new Padding(6),
+                        AnchorStyles.Left | AnchorStyles.Top
+                    )
+                );
+            p.Controls
+                .Add(
+                    CreateButton(
+                        60,
+                        20,
+                        false,
+                        DockStyle.None,
+                        new Padding(9),
+                        AnchorStyles.Left | AnchorStyles.Top
+                    )
+                );
+            p.Controls
+                .Add(
+                    CreateButton(
+                        15,
+                        85,
+                        false,
+                        DockStyle.None,
+                        new Padding(2),
+                        AnchorStyles.Left | AnchorStyles.Top
+                    )
+                );
+            p.Controls
+                .Add(
+                    CreateButton(
+                        50,
+                        20,
+                        false,
+                        DockStyle.None,
+                        new Padding(4),
+                        AnchorStyles.Left | AnchorStyles.Top
+                    )
+                );
 
             Assert.AreEqual(new Rectangle(6, 6, 25, 45), p.Controls[0].Bounds, "BQ1");
             Assert.AreEqual(new Rectangle(9, 66, 60, 20), p.Controls[1].Bounds, "BQ2");
@@ -2186,59 +2336,65 @@ namespace MonoTests.System.Windows.Forms
             p.Size = new Size(100, 200);
             p.FlowDirection = FlowDirection.TopDown;
 
-            p.Controls.Add(
-                CreateButton(
-                    25,
-                    45,
-                    false,
-                    DockStyle.None,
-                    new Padding(6),
-                    AnchorStyles.Right | AnchorStyles.Top
-                )
-            );
-            p.Controls.Add(
-                CreateButton(
-                    60,
-                    20,
-                    false,
-                    DockStyle.Fill,
-                    new Padding(9),
-                    AnchorStyles.Bottom | AnchorStyles.Top
-                )
-            );
-            p.Controls.Add(
-                CreateButton(
-                    15,
-                    85,
-                    false,
-                    DockStyle.None,
-                    new Padding(2),
-                    AnchorStyles.Left | AnchorStyles.Top | AnchorStyles.Bottom
-                )
-            );
-            p.Controls.Add(
-                CreateButton(
-                    50,
-                    20,
-                    false,
-                    DockStyle.None,
-                    new Padding(4),
-                    AnchorStyles.Left | AnchorStyles.Bottom
-                )
-            );
-            p.Controls.Add(
-                CreateButton(
-                    13,
-                    22,
-                    false,
-                    DockStyle.None,
-                    new Padding(12),
-                    AnchorStyles.Left | AnchorStyles.Right
-                )
-            );
-            p.Controls.Add(
-                CreateButton(73, 28, false, DockStyle.Left, new Padding(6), AnchorStyles.None)
-            );
+            p.Controls
+                .Add(
+                    CreateButton(
+                        25,
+                        45,
+                        false,
+                        DockStyle.None,
+                        new Padding(6),
+                        AnchorStyles.Right | AnchorStyles.Top
+                    )
+                );
+            p.Controls
+                .Add(
+                    CreateButton(
+                        60,
+                        20,
+                        false,
+                        DockStyle.Fill,
+                        new Padding(9),
+                        AnchorStyles.Bottom | AnchorStyles.Top
+                    )
+                );
+            p.Controls
+                .Add(
+                    CreateButton(
+                        15,
+                        85,
+                        false,
+                        DockStyle.None,
+                        new Padding(2),
+                        AnchorStyles.Left | AnchorStyles.Top | AnchorStyles.Bottom
+                    )
+                );
+            p.Controls
+                .Add(
+                    CreateButton(
+                        50,
+                        20,
+                        false,
+                        DockStyle.None,
+                        new Padding(4),
+                        AnchorStyles.Left | AnchorStyles.Bottom
+                    )
+                );
+            p.Controls
+                .Add(
+                    CreateButton(
+                        13,
+                        22,
+                        false,
+                        DockStyle.None,
+                        new Padding(12),
+                        AnchorStyles.Left | AnchorStyles.Right
+                    )
+                );
+            p.Controls
+                .Add(
+                    CreateButton(73, 28, false, DockStyle.Left, new Padding(6), AnchorStyles.None)
+                );
 
             Assert.AreEqual(new Rectangle(6, 6, 25, 45), p.Controls[0].Bounds, "BR1");
             Assert.AreEqual(new Rectangle(9, 66, 19, 20), p.Controls[1].Bounds, "BR2");
@@ -2256,66 +2412,75 @@ namespace MonoTests.System.Windows.Forms
             p.Size = new Size(100, 200);
             p.FlowDirection = FlowDirection.TopDown;
 
-            p.Controls.Add(
-                CreateButton(
-                    12,
-                    345,
-                    false,
-                    DockStyle.Right,
-                    new Padding(1, 2, 3, 4),
-                    AnchorStyles.Left | AnchorStyles.Top
-                )
-            );
-            p.Controls.Add(
-                CreateButton(
-                    9,
-                    44,
-                    false,
-                    DockStyle.Left,
-                    new Padding(6, 3, 2, 7),
-                    AnchorStyles.Right | AnchorStyles.Top
-                )
-            );
-            p.Controls.Add(
-                CreateButton(
-                    78,
-                    14,
-                    false,
-                    DockStyle.None,
-                    new Padding(5, 1, 2, 4),
-                    AnchorStyles.Left | AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Right
-                )
-            );
-            p.Controls.Add(
-                CreateButton(
-                    21,
-                    64,
-                    false,
-                    DockStyle.Left,
-                    new Padding(3, 3, 3, 1),
-                    AnchorStyles.None
-                )
-            );
-            p.Controls.Add(
-                CreateButton(
-                    14,
-                    14,
-                    false,
-                    DockStyle.Fill,
-                    new Padding(11, 4, 6, 3),
-                    AnchorStyles.Left | AnchorStyles.Right
-                )
-            );
-            p.Controls.Add(
-                CreateButton(
-                    132,
-                    6,
-                    false,
-                    DockStyle.Fill,
-                    new Padding(5, 5, 4, 5),
-                    AnchorStyles.Left | AnchorStyles.Right
-                )
-            );
+            p.Controls
+                .Add(
+                    CreateButton(
+                        12,
+                        345,
+                        false,
+                        DockStyle.Right,
+                        new Padding(1, 2, 3, 4),
+                        AnchorStyles.Left | AnchorStyles.Top
+                    )
+                );
+            p.Controls
+                .Add(
+                    CreateButton(
+                        9,
+                        44,
+                        false,
+                        DockStyle.Left,
+                        new Padding(6, 3, 2, 7),
+                        AnchorStyles.Right | AnchorStyles.Top
+                    )
+                );
+            p.Controls
+                .Add(
+                    CreateButton(
+                        78,
+                        14,
+                        false,
+                        DockStyle.None,
+                        new Padding(5, 1, 2, 4),
+                        AnchorStyles.Left
+                            | AnchorStyles.Top
+                            | AnchorStyles.Bottom
+                            | AnchorStyles.Right
+                    )
+                );
+            p.Controls
+                .Add(
+                    CreateButton(
+                        21,
+                        64,
+                        false,
+                        DockStyle.Left,
+                        new Padding(3, 3, 3, 1),
+                        AnchorStyles.None
+                    )
+                );
+            p.Controls
+                .Add(
+                    CreateButton(
+                        14,
+                        14,
+                        false,
+                        DockStyle.Fill,
+                        new Padding(11, 4, 6, 3),
+                        AnchorStyles.Left | AnchorStyles.Right
+                    )
+                );
+            p.Controls
+                .Add(
+                    CreateButton(
+                        132,
+                        6,
+                        false,
+                        DockStyle.Fill,
+                        new Padding(5, 5, 4, 5),
+                        AnchorStyles.Left | AnchorStyles.Right
+                    )
+                );
 
             p.SetFlowBreak(p.Controls[0], true);
             p.SetFlowBreak(p.Controls[2], true);
@@ -2337,26 +2502,28 @@ namespace MonoTests.System.Windows.Forms
             p.WrapContents = false;
             p.FlowDirection = FlowDirection.TopDown;
 
-            p.Controls.Add(
-                CreateButton(
-                    100,
-                    100,
-                    false,
-                    DockStyle.None,
-                    new Padding(),
-                    AnchorStyles.Left | AnchorStyles.Top
-                )
-            );
-            p.Controls.Add(
-                CreateButton(
-                    100,
-                    100,
-                    false,
-                    DockStyle.None,
-                    new Padding(),
-                    AnchorStyles.Left | AnchorStyles.Top
-                )
-            );
+            p.Controls
+                .Add(
+                    CreateButton(
+                        100,
+                        100,
+                        false,
+                        DockStyle.None,
+                        new Padding(),
+                        AnchorStyles.Left | AnchorStyles.Top
+                    )
+                );
+            p.Controls
+                .Add(
+                    CreateButton(
+                        100,
+                        100,
+                        false,
+                        DockStyle.None,
+                        new Padding(),
+                        AnchorStyles.Left | AnchorStyles.Top
+                    )
+                );
 
             p.SetFlowBreak(p.Controls[0], true);
 
@@ -2374,26 +2541,28 @@ namespace MonoTests.System.Windows.Forms
             p.Size = new Size(100, 200);
             p.FlowDirection = FlowDirection.BottomUp;
 
-            p.Controls.Add(
-                CreateButton(
-                    100,
-                    100,
-                    false,
-                    DockStyle.None,
-                    new Padding(),
-                    AnchorStyles.Left | AnchorStyles.Top
-                )
-            );
-            p.Controls.Add(
-                CreateButton(
-                    100,
-                    100,
-                    false,
-                    DockStyle.None,
-                    new Padding(),
-                    AnchorStyles.Left | AnchorStyles.Top
-                )
-            );
+            p.Controls
+                .Add(
+                    CreateButton(
+                        100,
+                        100,
+                        false,
+                        DockStyle.None,
+                        new Padding(),
+                        AnchorStyles.Left | AnchorStyles.Top
+                    )
+                );
+            p.Controls
+                .Add(
+                    CreateButton(
+                        100,
+                        100,
+                        false,
+                        DockStyle.None,
+                        new Padding(),
+                        AnchorStyles.Left | AnchorStyles.Top
+                    )
+                );
 
             Assert.AreEqual(new Rectangle(0, 100, 100, 100), p.Controls[0].Bounds, "CC1");
             Assert.AreEqual(new Rectangle(0, 0, 100, 100), p.Controls[1].Bounds, "CC2");
@@ -2407,26 +2576,28 @@ namespace MonoTests.System.Windows.Forms
             p.Size = new Size(100, 200);
             p.FlowDirection = FlowDirection.BottomUp;
 
-            p.Controls.Add(
-                CreateButton(
-                    50,
-                    100,
-                    false,
-                    DockStyle.Fill,
-                    new Padding(),
-                    AnchorStyles.Left | AnchorStyles.Top
-                )
-            );
-            p.Controls.Add(
-                CreateButton(
-                    100,
-                    100,
-                    false,
-                    DockStyle.None,
-                    new Padding(),
-                    AnchorStyles.Left | AnchorStyles.Top
-                )
-            );
+            p.Controls
+                .Add(
+                    CreateButton(
+                        50,
+                        100,
+                        false,
+                        DockStyle.Fill,
+                        new Padding(),
+                        AnchorStyles.Left | AnchorStyles.Top
+                    )
+                );
+            p.Controls
+                .Add(
+                    CreateButton(
+                        100,
+                        100,
+                        false,
+                        DockStyle.None,
+                        new Padding(),
+                        AnchorStyles.Left | AnchorStyles.Top
+                    )
+                );
 
             Assert.AreEqual(new Rectangle(0, 100, 100, 100), p.Controls[0].Bounds, "CD1");
             Assert.AreEqual(new Rectangle(0, 0, 100, 100), p.Controls[1].Bounds, "CD2");
@@ -2440,26 +2611,28 @@ namespace MonoTests.System.Windows.Forms
             p.Size = new Size(100, 200);
             p.FlowDirection = FlowDirection.BottomUp;
 
-            p.Controls.Add(
-                CreateButton(
-                    50,
-                    100,
-                    false,
-                    DockStyle.None,
-                    new Padding(),
-                    AnchorStyles.Left | AnchorStyles.Right
-                )
-            );
-            p.Controls.Add(
-                CreateButton(
-                    100,
-                    100,
-                    false,
-                    DockStyle.None,
-                    new Padding(),
-                    AnchorStyles.Left | AnchorStyles.Top
-                )
-            );
+            p.Controls
+                .Add(
+                    CreateButton(
+                        50,
+                        100,
+                        false,
+                        DockStyle.None,
+                        new Padding(),
+                        AnchorStyles.Left | AnchorStyles.Right
+                    )
+                );
+            p.Controls
+                .Add(
+                    CreateButton(
+                        100,
+                        100,
+                        false,
+                        DockStyle.None,
+                        new Padding(),
+                        AnchorStyles.Left | AnchorStyles.Top
+                    )
+                );
 
             Assert.AreEqual(new Rectangle(0, 100, 100, 100), p.Controls[0].Bounds, "CE1");
             Assert.AreEqual(new Rectangle(0, 0, 100, 100), p.Controls[1].Bounds, "CE2");
@@ -2473,26 +2646,28 @@ namespace MonoTests.System.Windows.Forms
             p.Size = new Size(100, 200);
             p.FlowDirection = FlowDirection.BottomUp;
 
-            p.Controls.Add(
-                CreateButton(
-                    50,
-                    100,
-                    false,
-                    DockStyle.None,
-                    new Padding(),
-                    AnchorStyles.Left | AnchorStyles.Right
-                )
-            );
-            p.Controls.Add(
-                CreateButton(
-                    100,
-                    100,
-                    false,
-                    DockStyle.Fill,
-                    new Padding(),
-                    AnchorStyles.Left | AnchorStyles.Top
-                )
-            );
+            p.Controls
+                .Add(
+                    CreateButton(
+                        50,
+                        100,
+                        false,
+                        DockStyle.None,
+                        new Padding(),
+                        AnchorStyles.Left | AnchorStyles.Right
+                    )
+                );
+            p.Controls
+                .Add(
+                    CreateButton(
+                        100,
+                        100,
+                        false,
+                        DockStyle.Fill,
+                        new Padding(),
+                        AnchorStyles.Left | AnchorStyles.Top
+                    )
+                );
 
             Assert.AreEqual(new Rectangle(0, 100, 0, 100), p.Controls[0].Bounds, "CF1");
             Assert.AreEqual(new Rectangle(0, 0, 0, 100), p.Controls[1].Bounds, "CF2");
@@ -2506,26 +2681,28 @@ namespace MonoTests.System.Windows.Forms
             p.Size = new Size(100, 200);
             p.FlowDirection = FlowDirection.BottomUp;
 
-            p.Controls.Add(
-                CreateButton(
-                    50,
-                    100,
-                    false,
-                    DockStyle.None,
-                    new Padding(),
-                    AnchorStyles.Left | AnchorStyles.Right
-                )
-            );
-            p.Controls.Add(
-                CreateButton(
-                    100,
-                    100,
-                    false,
-                    DockStyle.None,
-                    new Padding(),
-                    AnchorStyles.Left | AnchorStyles.Right
-                )
-            );
+            p.Controls
+                .Add(
+                    CreateButton(
+                        50,
+                        100,
+                        false,
+                        DockStyle.None,
+                        new Padding(),
+                        AnchorStyles.Left | AnchorStyles.Right
+                    )
+                );
+            p.Controls
+                .Add(
+                    CreateButton(
+                        100,
+                        100,
+                        false,
+                        DockStyle.None,
+                        new Padding(),
+                        AnchorStyles.Left | AnchorStyles.Right
+                    )
+                );
 
             Assert.AreEqual(new Rectangle(0, 100, 0, 100), p.Controls[0].Bounds, "CG1");
             Assert.AreEqual(new Rectangle(0, 0, 0, 100), p.Controls[1].Bounds, "CG2");
@@ -2539,26 +2716,28 @@ namespace MonoTests.System.Windows.Forms
             p.Size = new Size(100, 200);
             p.FlowDirection = FlowDirection.BottomUp;
 
-            p.Controls.Add(
-                CreateButton(
-                    50,
-                    100,
-                    false,
-                    DockStyle.Fill,
-                    new Padding(),
-                    AnchorStyles.Left | AnchorStyles.Top
-                )
-            );
-            p.Controls.Add(
-                CreateButton(
-                    100,
-                    100,
-                    false,
-                    DockStyle.Fill,
-                    new Padding(),
-                    AnchorStyles.Left | AnchorStyles.Top
-                )
-            );
+            p.Controls
+                .Add(
+                    CreateButton(
+                        50,
+                        100,
+                        false,
+                        DockStyle.Fill,
+                        new Padding(),
+                        AnchorStyles.Left | AnchorStyles.Top
+                    )
+                );
+            p.Controls
+                .Add(
+                    CreateButton(
+                        100,
+                        100,
+                        false,
+                        DockStyle.Fill,
+                        new Padding(),
+                        AnchorStyles.Left | AnchorStyles.Top
+                    )
+                );
 
             Assert.AreEqual(new Rectangle(0, 100, 0, 100), p.Controls[0].Bounds, "CH1");
             Assert.AreEqual(new Rectangle(0, 0, 0, 100), p.Controls[1].Bounds, "CH2");
@@ -2572,26 +2751,28 @@ namespace MonoTests.System.Windows.Forms
             p.Size = new Size(100, 200);
             p.FlowDirection = FlowDirection.BottomUp;
 
-            p.Controls.Add(
-                CreateButton(
-                    50,
-                    100,
-                    false,
-                    DockStyle.Left,
-                    new Padding(),
-                    AnchorStyles.Left | AnchorStyles.Top
-                )
-            );
-            p.Controls.Add(
-                CreateButton(
-                    100,
-                    100,
-                    false,
-                    DockStyle.None,
-                    new Padding(),
-                    AnchorStyles.Left | AnchorStyles.Top
-                )
-            );
+            p.Controls
+                .Add(
+                    CreateButton(
+                        50,
+                        100,
+                        false,
+                        DockStyle.Left,
+                        new Padding(),
+                        AnchorStyles.Left | AnchorStyles.Top
+                    )
+                );
+            p.Controls
+                .Add(
+                    CreateButton(
+                        100,
+                        100,
+                        false,
+                        DockStyle.None,
+                        new Padding(),
+                        AnchorStyles.Left | AnchorStyles.Top
+                    )
+                );
 
             Assert.AreEqual(new Rectangle(0, 100, 50, 100), p.Controls[0].Bounds, "CI1");
             Assert.AreEqual(new Rectangle(0, 0, 100, 100), p.Controls[1].Bounds, "CI2");
@@ -2605,26 +2786,28 @@ namespace MonoTests.System.Windows.Forms
             p.Size = new Size(100, 200);
             p.FlowDirection = FlowDirection.BottomUp;
 
-            p.Controls.Add(
-                CreateButton(
-                    50,
-                    100,
-                    false,
-                    DockStyle.Right,
-                    new Padding(),
-                    AnchorStyles.Left | AnchorStyles.Top
-                )
-            );
-            p.Controls.Add(
-                CreateButton(
-                    100,
-                    100,
-                    false,
-                    DockStyle.None,
-                    new Padding(),
-                    AnchorStyles.Left | AnchorStyles.Top
-                )
-            );
+            p.Controls
+                .Add(
+                    CreateButton(
+                        50,
+                        100,
+                        false,
+                        DockStyle.Right,
+                        new Padding(),
+                        AnchorStyles.Left | AnchorStyles.Top
+                    )
+                );
+            p.Controls
+                .Add(
+                    CreateButton(
+                        100,
+                        100,
+                        false,
+                        DockStyle.None,
+                        new Padding(),
+                        AnchorStyles.Left | AnchorStyles.Top
+                    )
+                );
 
             Assert.AreEqual(new Rectangle(50, 100, 50, 100), p.Controls[0].Bounds, "CJ1");
             Assert.AreEqual(new Rectangle(0, 0, 100, 100), p.Controls[1].Bounds, "CJ2");
@@ -2638,26 +2821,28 @@ namespace MonoTests.System.Windows.Forms
             p.Size = new Size(100, 200);
             p.FlowDirection = FlowDirection.BottomUp;
 
-            p.Controls.Add(
-                CreateButton(
-                    50,
-                    100,
-                    false,
-                    DockStyle.None,
-                    new Padding(),
-                    AnchorStyles.Top | AnchorStyles.Right
-                )
-            );
-            p.Controls.Add(
-                CreateButton(
-                    100,
-                    100,
-                    false,
-                    DockStyle.None,
-                    new Padding(),
-                    AnchorStyles.Top | AnchorStyles.Left
-                )
-            );
+            p.Controls
+                .Add(
+                    CreateButton(
+                        50,
+                        100,
+                        false,
+                        DockStyle.None,
+                        new Padding(),
+                        AnchorStyles.Top | AnchorStyles.Right
+                    )
+                );
+            p.Controls
+                .Add(
+                    CreateButton(
+                        100,
+                        100,
+                        false,
+                        DockStyle.None,
+                        new Padding(),
+                        AnchorStyles.Top | AnchorStyles.Left
+                    )
+                );
 
             Assert.AreEqual(new Rectangle(50, 100, 50, 100), p.Controls[0].Bounds, "CK1");
             Assert.AreEqual(new Rectangle(0, 0, 100, 100), p.Controls[1].Bounds, "CK2");
@@ -2671,19 +2856,21 @@ namespace MonoTests.System.Windows.Forms
             p.Size = new Size(100, 200);
             p.FlowDirection = FlowDirection.BottomUp;
 
-            p.Controls.Add(
-                CreateButton(50, 100, false, DockStyle.None, new Padding(), AnchorStyles.None)
-            );
-            p.Controls.Add(
-                CreateButton(
-                    100,
-                    100,
-                    false,
-                    DockStyle.None,
-                    new Padding(),
-                    AnchorStyles.Left | AnchorStyles.Top
-                )
-            );
+            p.Controls
+                .Add(
+                    CreateButton(50, 100, false, DockStyle.None, new Padding(), AnchorStyles.None)
+                );
+            p.Controls
+                .Add(
+                    CreateButton(
+                        100,
+                        100,
+                        false,
+                        DockStyle.None,
+                        new Padding(),
+                        AnchorStyles.Left | AnchorStyles.Top
+                    )
+                );
 
             Assert.AreEqual(new Rectangle(25, 100, 50, 100), p.Controls[0].Bounds, "CL1");
             Assert.AreEqual(new Rectangle(0, 0, 100, 100), p.Controls[1].Bounds, "CL2");
@@ -2697,46 +2884,50 @@ namespace MonoTests.System.Windows.Forms
             p.Size = new Size(100, 200);
             p.FlowDirection = FlowDirection.BottomUp;
 
-            p.Controls.Add(
-                CreateButton(
-                    50,
-                    100,
-                    false,
-                    DockStyle.None,
-                    new Padding(),
-                    AnchorStyles.Left | AnchorStyles.Top
-                )
-            );
-            p.Controls.Add(
-                CreateButton(
-                    100,
-                    100,
-                    false,
-                    DockStyle.None,
-                    new Padding(),
-                    AnchorStyles.Left | AnchorStyles.Top
-                )
-            );
-            p.Controls.Add(
-                CreateButton(
-                    100,
-                    100,
-                    false,
-                    DockStyle.None,
-                    new Padding(),
-                    AnchorStyles.Left | AnchorStyles.Top
-                )
-            );
-            p.Controls.Add(
-                CreateButton(
-                    100,
-                    100,
-                    false,
-                    DockStyle.None,
-                    new Padding(),
-                    AnchorStyles.Left | AnchorStyles.Top
-                )
-            );
+            p.Controls
+                .Add(
+                    CreateButton(
+                        50,
+                        100,
+                        false,
+                        DockStyle.None,
+                        new Padding(),
+                        AnchorStyles.Left | AnchorStyles.Top
+                    )
+                );
+            p.Controls
+                .Add(
+                    CreateButton(
+                        100,
+                        100,
+                        false,
+                        DockStyle.None,
+                        new Padding(),
+                        AnchorStyles.Left | AnchorStyles.Top
+                    )
+                );
+            p.Controls
+                .Add(
+                    CreateButton(
+                        100,
+                        100,
+                        false,
+                        DockStyle.None,
+                        new Padding(),
+                        AnchorStyles.Left | AnchorStyles.Top
+                    )
+                );
+            p.Controls
+                .Add(
+                    CreateButton(
+                        100,
+                        100,
+                        false,
+                        DockStyle.None,
+                        new Padding(),
+                        AnchorStyles.Left | AnchorStyles.Top
+                    )
+                );
 
             Assert.AreEqual(new Rectangle(0, 100, 50, 100), p.Controls[0].Bounds, "CM1");
             Assert.AreEqual(new Rectangle(0, 0, 100, 100), p.Controls[1].Bounds, "CM2");
@@ -2753,46 +2944,50 @@ namespace MonoTests.System.Windows.Forms
             p.WrapContents = false;
             p.FlowDirection = FlowDirection.BottomUp;
 
-            p.Controls.Add(
-                CreateButton(
-                    50,
-                    100,
-                    false,
-                    DockStyle.None,
-                    new Padding(),
-                    AnchorStyles.Left | AnchorStyles.Top
-                )
-            );
-            p.Controls.Add(
-                CreateButton(
-                    100,
-                    100,
-                    false,
-                    DockStyle.None,
-                    new Padding(),
-                    AnchorStyles.Left | AnchorStyles.Top
-                )
-            );
-            p.Controls.Add(
-                CreateButton(
-                    100,
-                    100,
-                    false,
-                    DockStyle.None,
-                    new Padding(),
-                    AnchorStyles.Left | AnchorStyles.Top
-                )
-            );
-            p.Controls.Add(
-                CreateButton(
-                    100,
-                    100,
-                    false,
-                    DockStyle.None,
-                    new Padding(),
-                    AnchorStyles.Left | AnchorStyles.Top
-                )
-            );
+            p.Controls
+                .Add(
+                    CreateButton(
+                        50,
+                        100,
+                        false,
+                        DockStyle.None,
+                        new Padding(),
+                        AnchorStyles.Left | AnchorStyles.Top
+                    )
+                );
+            p.Controls
+                .Add(
+                    CreateButton(
+                        100,
+                        100,
+                        false,
+                        DockStyle.None,
+                        new Padding(),
+                        AnchorStyles.Left | AnchorStyles.Top
+                    )
+                );
+            p.Controls
+                .Add(
+                    CreateButton(
+                        100,
+                        100,
+                        false,
+                        DockStyle.None,
+                        new Padding(),
+                        AnchorStyles.Left | AnchorStyles.Top
+                    )
+                );
+            p.Controls
+                .Add(
+                    CreateButton(
+                        100,
+                        100,
+                        false,
+                        DockStyle.None,
+                        new Padding(),
+                        AnchorStyles.Left | AnchorStyles.Top
+                    )
+                );
 
             Assert.AreEqual(new Rectangle(0, 100, 50, 100), p.Controls[0].Bounds, "CN1");
             Assert.AreEqual(new Rectangle(0, 0, 100, 100), p.Controls[1].Bounds, "CN2");
@@ -2808,46 +3003,50 @@ namespace MonoTests.System.Windows.Forms
             p.Size = new Size(100, 200);
             p.FlowDirection = FlowDirection.BottomUp;
 
-            p.Controls.Add(
-                CreateButton(
-                    100,
-                    100,
-                    false,
-                    DockStyle.None,
-                    new Padding(),
-                    AnchorStyles.Left | AnchorStyles.Top
-                )
-            );
-            p.Controls.Add(
-                CreateButton(
-                    100,
-                    100,
-                    false,
-                    DockStyle.None,
-                    new Padding(),
-                    AnchorStyles.Left | AnchorStyles.Top
-                )
-            );
-            p.Controls.Add(
-                CreateButton(
-                    100,
-                    100,
-                    false,
-                    DockStyle.None,
-                    new Padding(),
-                    AnchorStyles.Left | AnchorStyles.Top
-                )
-            );
-            p.Controls.Add(
-                CreateButton(
-                    100,
-                    100,
-                    false,
-                    DockStyle.None,
-                    new Padding(),
-                    AnchorStyles.Left | AnchorStyles.Top
-                )
-            );
+            p.Controls
+                .Add(
+                    CreateButton(
+                        100,
+                        100,
+                        false,
+                        DockStyle.None,
+                        new Padding(),
+                        AnchorStyles.Left | AnchorStyles.Top
+                    )
+                );
+            p.Controls
+                .Add(
+                    CreateButton(
+                        100,
+                        100,
+                        false,
+                        DockStyle.None,
+                        new Padding(),
+                        AnchorStyles.Left | AnchorStyles.Top
+                    )
+                );
+            p.Controls
+                .Add(
+                    CreateButton(
+                        100,
+                        100,
+                        false,
+                        DockStyle.None,
+                        new Padding(),
+                        AnchorStyles.Left | AnchorStyles.Top
+                    )
+                );
+            p.Controls
+                .Add(
+                    CreateButton(
+                        100,
+                        100,
+                        false,
+                        DockStyle.None,
+                        new Padding(),
+                        AnchorStyles.Left | AnchorStyles.Top
+                    )
+                );
 
             p.SetFlowBreak(p.Controls[0], true);
             p.SetFlowBreak(p.Controls[2], true);
@@ -2866,46 +3065,50 @@ namespace MonoTests.System.Windows.Forms
             p.Size = new Size(100, 200);
             p.FlowDirection = FlowDirection.BottomUp;
 
-            p.Controls.Add(
-                CreateButton(
-                    50,
-                    50,
-                    false,
-                    DockStyle.None,
-                    new Padding(1, 3, 5, 2),
-                    AnchorStyles.Left | AnchorStyles.Top
-                )
-            );
-            p.Controls.Add(
-                CreateButton(
-                    50,
-                    50,
-                    false,
-                    DockStyle.None,
-                    new Padding(7, 3, 12, 5),
-                    AnchorStyles.Left | AnchorStyles.Top
-                )
-            );
-            p.Controls.Add(
-                CreateButton(
-                    50,
-                    50,
-                    false,
-                    DockStyle.None,
-                    new Padding(14, 7, 1, 3),
-                    AnchorStyles.Left | AnchorStyles.Top
-                )
-            );
-            p.Controls.Add(
-                CreateButton(
-                    50,
-                    50,
-                    false,
-                    DockStyle.None,
-                    new Padding(4),
-                    AnchorStyles.Left | AnchorStyles.Top
-                )
-            );
+            p.Controls
+                .Add(
+                    CreateButton(
+                        50,
+                        50,
+                        false,
+                        DockStyle.None,
+                        new Padding(1, 3, 5, 2),
+                        AnchorStyles.Left | AnchorStyles.Top
+                    )
+                );
+            p.Controls
+                .Add(
+                    CreateButton(
+                        50,
+                        50,
+                        false,
+                        DockStyle.None,
+                        new Padding(7, 3, 12, 5),
+                        AnchorStyles.Left | AnchorStyles.Top
+                    )
+                );
+            p.Controls
+                .Add(
+                    CreateButton(
+                        50,
+                        50,
+                        false,
+                        DockStyle.None,
+                        new Padding(14, 7, 1, 3),
+                        AnchorStyles.Left | AnchorStyles.Top
+                    )
+                );
+            p.Controls
+                .Add(
+                    CreateButton(
+                        50,
+                        50,
+                        false,
+                        DockStyle.None,
+                        new Padding(4),
+                        AnchorStyles.Left | AnchorStyles.Top
+                    )
+                );
 
             Assert.AreEqual(new Rectangle(1, 148, 50, 50), p.Controls[0].Bounds, "CP1");
             Assert.AreEqual(new Rectangle(7, 90, 50, 50), p.Controls[1].Bounds, "CP2");
@@ -2921,46 +3124,50 @@ namespace MonoTests.System.Windows.Forms
             p.Size = new Size(100, 200);
             p.FlowDirection = FlowDirection.BottomUp;
 
-            p.Controls.Add(
-                CreateButton(
-                    25,
-                    45,
-                    false,
-                    DockStyle.None,
-                    new Padding(6),
-                    AnchorStyles.Left | AnchorStyles.Top
-                )
-            );
-            p.Controls.Add(
-                CreateButton(
-                    60,
-                    20,
-                    false,
-                    DockStyle.None,
-                    new Padding(9),
-                    AnchorStyles.Left | AnchorStyles.Top
-                )
-            );
-            p.Controls.Add(
-                CreateButton(
-                    15,
-                    85,
-                    false,
-                    DockStyle.None,
-                    new Padding(2),
-                    AnchorStyles.Left | AnchorStyles.Top
-                )
-            );
-            p.Controls.Add(
-                CreateButton(
-                    50,
-                    20,
-                    false,
-                    DockStyle.None,
-                    new Padding(4),
-                    AnchorStyles.Left | AnchorStyles.Top
-                )
-            );
+            p.Controls
+                .Add(
+                    CreateButton(
+                        25,
+                        45,
+                        false,
+                        DockStyle.None,
+                        new Padding(6),
+                        AnchorStyles.Left | AnchorStyles.Top
+                    )
+                );
+            p.Controls
+                .Add(
+                    CreateButton(
+                        60,
+                        20,
+                        false,
+                        DockStyle.None,
+                        new Padding(9),
+                        AnchorStyles.Left | AnchorStyles.Top
+                    )
+                );
+            p.Controls
+                .Add(
+                    CreateButton(
+                        15,
+                        85,
+                        false,
+                        DockStyle.None,
+                        new Padding(2),
+                        AnchorStyles.Left | AnchorStyles.Top
+                    )
+                );
+            p.Controls
+                .Add(
+                    CreateButton(
+                        50,
+                        20,
+                        false,
+                        DockStyle.None,
+                        new Padding(4),
+                        AnchorStyles.Left | AnchorStyles.Top
+                    )
+                );
 
             Assert.AreEqual(new Rectangle(6, 149, 25, 45), p.Controls[0].Bounds, "CQ1");
             Assert.AreEqual(new Rectangle(9, 114, 60, 20), p.Controls[1].Bounds, "CQ2");
@@ -2976,59 +3183,65 @@ namespace MonoTests.System.Windows.Forms
             p.Size = new Size(100, 200);
             p.FlowDirection = FlowDirection.BottomUp;
 
-            p.Controls.Add(
-                CreateButton(
-                    25,
-                    45,
-                    false,
-                    DockStyle.None,
-                    new Padding(6),
-                    AnchorStyles.Right | AnchorStyles.Top
-                )
-            );
-            p.Controls.Add(
-                CreateButton(
-                    60,
-                    20,
-                    false,
-                    DockStyle.Fill,
-                    new Padding(9),
-                    AnchorStyles.Bottom | AnchorStyles.Top
-                )
-            );
-            p.Controls.Add(
-                CreateButton(
-                    15,
-                    85,
-                    false,
-                    DockStyle.None,
-                    new Padding(2),
-                    AnchorStyles.Left | AnchorStyles.Top | AnchorStyles.Bottom
-                )
-            );
-            p.Controls.Add(
-                CreateButton(
-                    50,
-                    20,
-                    false,
-                    DockStyle.None,
-                    new Padding(4),
-                    AnchorStyles.Left | AnchorStyles.Bottom
-                )
-            );
-            p.Controls.Add(
-                CreateButton(
-                    13,
-                    22,
-                    false,
-                    DockStyle.None,
-                    new Padding(12),
-                    AnchorStyles.Left | AnchorStyles.Right
-                )
-            );
-            p.Controls.Add(
-                CreateButton(73, 28, false, DockStyle.Left, new Padding(6), AnchorStyles.None)
-            );
+            p.Controls
+                .Add(
+                    CreateButton(
+                        25,
+                        45,
+                        false,
+                        DockStyle.None,
+                        new Padding(6),
+                        AnchorStyles.Right | AnchorStyles.Top
+                    )
+                );
+            p.Controls
+                .Add(
+                    CreateButton(
+                        60,
+                        20,
+                        false,
+                        DockStyle.Fill,
+                        new Padding(9),
+                        AnchorStyles.Bottom | AnchorStyles.Top
+                    )
+                );
+            p.Controls
+                .Add(
+                    CreateButton(
+                        15,
+                        85,
+                        false,
+                        DockStyle.None,
+                        new Padding(2),
+                        AnchorStyles.Left | AnchorStyles.Top | AnchorStyles.Bottom
+                    )
+                );
+            p.Controls
+                .Add(
+                    CreateButton(
+                        50,
+                        20,
+                        false,
+                        DockStyle.None,
+                        new Padding(4),
+                        AnchorStyles.Left | AnchorStyles.Bottom
+                    )
+                );
+            p.Controls
+                .Add(
+                    CreateButton(
+                        13,
+                        22,
+                        false,
+                        DockStyle.None,
+                        new Padding(12),
+                        AnchorStyles.Left | AnchorStyles.Right
+                    )
+                );
+            p.Controls
+                .Add(
+                    CreateButton(73, 28, false, DockStyle.Left, new Padding(6), AnchorStyles.None)
+                );
 
             Assert.AreEqual(new Rectangle(6, 149, 25, 45), p.Controls[0].Bounds, "CR1");
             Assert.AreEqual(new Rectangle(9, 114, 19, 20), p.Controls[1].Bounds, "CR2");
@@ -3046,66 +3259,75 @@ namespace MonoTests.System.Windows.Forms
             p.Size = new Size(100, 200);
             p.FlowDirection = FlowDirection.BottomUp;
 
-            p.Controls.Add(
-                CreateButton(
-                    12,
-                    345,
-                    false,
-                    DockStyle.Right,
-                    new Padding(1, 2, 3, 4),
-                    AnchorStyles.Left | AnchorStyles.Top
-                )
-            );
-            p.Controls.Add(
-                CreateButton(
-                    9,
-                    44,
-                    false,
-                    DockStyle.Left,
-                    new Padding(6, 3, 2, 7),
-                    AnchorStyles.Right | AnchorStyles.Top
-                )
-            );
-            p.Controls.Add(
-                CreateButton(
-                    78,
-                    14,
-                    false,
-                    DockStyle.None,
-                    new Padding(5, 1, 2, 4),
-                    AnchorStyles.Left | AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Right
-                )
-            );
-            p.Controls.Add(
-                CreateButton(
-                    21,
-                    64,
-                    false,
-                    DockStyle.Left,
-                    new Padding(3, 3, 3, 1),
-                    AnchorStyles.None
-                )
-            );
-            p.Controls.Add(
-                CreateButton(
-                    14,
-                    14,
-                    false,
-                    DockStyle.Fill,
-                    new Padding(11, 4, 6, 3),
-                    AnchorStyles.Left | AnchorStyles.Right
-                )
-            );
-            p.Controls.Add(
-                CreateButton(
-                    132,
-                    6,
-                    false,
-                    DockStyle.Fill,
-                    new Padding(5, 5, 4, 5),
-                    AnchorStyles.Left | AnchorStyles.Right
-                )
-            );
+            p.Controls
+                .Add(
+                    CreateButton(
+                        12,
+                        345,
+                        false,
+                        DockStyle.Right,
+                        new Padding(1, 2, 3, 4),
+                        AnchorStyles.Left | AnchorStyles.Top
+                    )
+                );
+            p.Controls
+                .Add(
+                    CreateButton(
+                        9,
+                        44,
+                        false,
+                        DockStyle.Left,
+                        new Padding(6, 3, 2, 7),
+                        AnchorStyles.Right | AnchorStyles.Top
+                    )
+                );
+            p.Controls
+                .Add(
+                    CreateButton(
+                        78,
+                        14,
+                        false,
+                        DockStyle.None,
+                        new Padding(5, 1, 2, 4),
+                        AnchorStyles.Left
+                            | AnchorStyles.Top
+                            | AnchorStyles.Bottom
+                            | AnchorStyles.Right
+                    )
+                );
+            p.Controls
+                .Add(
+                    CreateButton(
+                        21,
+                        64,
+                        false,
+                        DockStyle.Left,
+                        new Padding(3, 3, 3, 1),
+                        AnchorStyles.None
+                    )
+                );
+            p.Controls
+                .Add(
+                    CreateButton(
+                        14,
+                        14,
+                        false,
+                        DockStyle.Fill,
+                        new Padding(11, 4, 6, 3),
+                        AnchorStyles.Left | AnchorStyles.Right
+                    )
+                );
+            p.Controls
+                .Add(
+                    CreateButton(
+                        132,
+                        6,
+                        false,
+                        DockStyle.Fill,
+                        new Padding(5, 5, 4, 5),
+                        AnchorStyles.Left | AnchorStyles.Right
+                    )
+                );
 
             p.SetFlowBreak(p.Controls[0], true);
             p.SetFlowBreak(p.Controls[2], true);
@@ -3127,26 +3349,28 @@ namespace MonoTests.System.Windows.Forms
             p.WrapContents = false;
             p.FlowDirection = FlowDirection.BottomUp;
 
-            p.Controls.Add(
-                CreateButton(
-                    100,
-                    100,
-                    false,
-                    DockStyle.None,
-                    new Padding(),
-                    AnchorStyles.Left | AnchorStyles.Top
-                )
-            );
-            p.Controls.Add(
-                CreateButton(
-                    100,
-                    100,
-                    false,
-                    DockStyle.None,
-                    new Padding(),
-                    AnchorStyles.Left | AnchorStyles.Top
-                )
-            );
+            p.Controls
+                .Add(
+                    CreateButton(
+                        100,
+                        100,
+                        false,
+                        DockStyle.None,
+                        new Padding(),
+                        AnchorStyles.Left | AnchorStyles.Top
+                    )
+                );
+            p.Controls
+                .Add(
+                    CreateButton(
+                        100,
+                        100,
+                        false,
+                        DockStyle.None,
+                        new Padding(),
+                        AnchorStyles.Left | AnchorStyles.Top
+                    )
+                );
 
             p.SetFlowBreak(p.Controls[0], true);
 
@@ -3179,9 +3403,8 @@ namespace MonoTests.System.Windows.Forms
         public void PreferredSize()
         {
             FlowLayoutPanel panel = new FlowLayoutPanel();
-            panel.Controls.AddRange(
-                new Control[] { new PreferredSizeControl(), new PreferredSizeControl() }
-            );
+            panel.Controls
+                .AddRange(new Control[] { new PreferredSizeControl(), new PreferredSizeControl() });
             Assert.AreEqual(new Size(212, 106), panel.PreferredSize, "1");
             Assert.AreEqual(new Size(106, 212), panel.GetPreferredSize(new Size(150, 150)), "2");
             Assert.AreEqual(new Size(212, 106), panel.GetPreferredSize(new Size(1000, 1000)), "3");

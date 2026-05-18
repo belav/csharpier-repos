@@ -20,9 +20,8 @@ namespace System.ServiceModel.Dispatcher
         {
             if (OperationContext.Current == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(SR2.NoOperationContext)
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(new InvalidOperationException(SR2.NoOperationContext));
             }
 
             DurableMessageDispatchInspector.SuppressContextOnReply(OperationContext.Current);

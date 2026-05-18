@@ -883,8 +883,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Formatting
             };
 
             project = project.AddAnalyzerReference(new TestAnalyzerReferenceByLanguage(map));
-            project = project
-                .Solution.WithProjectFilePath(project.Id, @$"z:\\{project.FilePath}")
+            project = project.Solution
+                .WithProjectFilePath(project.Id, @$"z:\\{project.FilePath}")
                 .GetProject(project.Id);
             project = project
                 .AddAnalyzerConfigDocument(
@@ -929,8 +929,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Formatting
             var codeCleanupService = document.GetLanguageService<ICodeCleanupService>();
 
             var enabledDiagnostics = codeCleanupService.GetAllDiagnostics();
-            var supportedDiagnostics = enabledDiagnostics
-                .Diagnostics.SelectMany(x => x.DiagnosticIds)
+            var supportedDiagnostics = enabledDiagnostics.Diagnostics
+                .SelectMany(x => x.DiagnosticIds)
                 .ToArray();
             return supportedDiagnostics;
 
@@ -1027,19 +1027,20 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Formatting
                 preferredImportPlacement
             );
 
-            var solution = workspace.CurrentSolution.WithAnalyzerReferences(
-                new[]
-                {
-                    new AnalyzerFileReference(
-                        typeof(CSharpCompilerDiagnosticAnalyzer).Assembly.Location,
-                        TestAnalyzerAssemblyLoader.LoadFromFile
-                    ),
-                    new AnalyzerFileReference(
-                        typeof(UseExpressionBodyDiagnosticAnalyzer).Assembly.Location,
-                        TestAnalyzerAssemblyLoader.LoadFromFile
-                    ),
-                }
-            );
+            var solution = workspace.CurrentSolution
+                .WithAnalyzerReferences(
+                    new[]
+                    {
+                        new AnalyzerFileReference(
+                            typeof(CSharpCompilerDiagnosticAnalyzer).Assembly.Location,
+                            TestAnalyzerAssemblyLoader.LoadFromFile
+                        ),
+                        new AnalyzerFileReference(
+                            typeof(UseExpressionBodyDiagnosticAnalyzer).Assembly.Location,
+                            TestAnalyzerAssemblyLoader.LoadFromFile
+                        ),
+                    }
+                );
 
             if (diagnosticIdsWithSeverity != null)
             {
@@ -1077,11 +1078,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Formatting
             var enabledDiagnostics = codeCleanupService.GetAllDiagnostics();
 
             if (enabledFixIdsFilter != null)
-                enabledDiagnostics =
-                    VisualStudio.LanguageServices.Implementation.CodeCleanup.AbstractCodeCleanUpFixer.AdjustDiagnosticOptions(
-                        enabledDiagnostics,
-                        enabledFixIdsFilter
-                    );
+                enabledDiagnostics = VisualStudio.LanguageServices
+                    .Implementation
+                    .CodeCleanup
+                    .AbstractCodeCleanUpFixer
+                    .AdjustDiagnosticOptions(enabledDiagnostics, enabledFixIdsFilter);
 
             var newDoc = await codeCleanupService.CleanupAsync(
                 document,

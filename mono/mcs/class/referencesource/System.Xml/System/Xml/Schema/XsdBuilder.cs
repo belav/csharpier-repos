@@ -1468,10 +1468,8 @@ namespace System.Xml.Schema
                     {
                         this.namespaces = new Hashtable();
                     }
-                    this.namespaces.Add(
-                        (name == this.schemaNames.QnXmlNs.Name) ? string.Empty : name,
-                        value
-                    );
+                    this.namespaces
+                        .Add((name == this.schemaNames.QnXmlNs.Name) ? string.Empty : name, value);
                 }
                 else
                 {
@@ -1517,10 +1515,11 @@ namespace System.Xml.Schema
                 }
                 if (this.unhandledAttributes.Count != 0)
                 {
-                    this.xso.SetUnhandledAttributes(
-                        (XmlAttribute[])
-                            this.unhandledAttributes.ToArray(typeof(System.Xml.XmlAttribute))
-                    );
+                    this.xso
+                        .SetUnhandledAttributes(
+                            (XmlAttribute[])
+                                this.unhandledAttributes.ToArray(typeof(System.Xml.XmlAttribute))
+                        );
                     this.unhandledAttributes.Clear();
                 }
             }

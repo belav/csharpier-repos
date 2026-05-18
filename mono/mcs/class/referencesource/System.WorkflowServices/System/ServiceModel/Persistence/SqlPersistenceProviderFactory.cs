@@ -86,9 +86,13 @@ namespace System.ServiceModel.Persistence
 
                         if (settings == null)
                         {
-                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                                SR2.GetString(SR2.ConnectionStringNameIncorrect, parameters[key])
-                            );
+                            throw DiagnosticUtility.ExceptionUtility
+                                .ThrowHelperArgument(
+                                    SR2.GetString(
+                                        SR2.ConnectionStringNameIncorrect,
+                                        parameters[key]
+                                    )
+                                );
                         }
 
                         this.connectionString = settings.ConnectionString;
@@ -103,27 +107,29 @@ namespace System.ServiceModel.Persistence
                         );
                         break;
                     default:
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                            key,
-                            SR2.GetString(
-                                SR2.UnknownSqlPersistenceConfigurationParameter,
+                        throw DiagnosticUtility.ExceptionUtility
+                            .ThrowHelperArgument(
                                 key,
-                                connectionStringNameParameter,
-                                serializeAsTextParameter,
-                                lockTimeoutParameter
-                            )
-                        );
+                                SR2.GetString(
+                                    SR2.UnknownSqlPersistenceConfigurationParameter,
+                                    key,
+                                    connectionStringNameParameter,
+                                    serializeAsTextParameter,
+                                    lockTimeoutParameter
+                                )
+                            );
                 }
             }
 
             if (this.connectionString == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                    SR2.GetString(
-                        SR2.ConnectionStringNameParameterRequired,
-                        connectionStringNameParameter
-                    )
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperArgument(
+                        SR2.GetString(
+                            SR2.ConnectionStringNameParameterRequired,
+                            connectionStringNameParameter
+                        )
+                    );
             }
 
             this.loadHandler = new LoadHandler(this);
@@ -158,12 +164,13 @@ namespace System.ServiceModel.Persistence
                     || (value > TimeSpan.FromSeconds(int.MaxValue) && value != TimeSpan.MaxValue)
                 )
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ArgumentOutOfRangeException(
-                            "value",
-                            SR2.GetString(SR2.LockTimeoutOutOfRange)
-                        )
-                    );
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperError(
+                            new ArgumentOutOfRangeException(
+                                "value",
+                                SR2.GetString(SR2.LockTimeoutOutOfRange)
+                            )
+                        );
                 }
                 this.lockTimeout = value;
             }
@@ -221,10 +228,11 @@ namespace System.ServiceModel.Persistence
 
             if (Guid.Empty == id)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                    "id",
-                    SR2.GetString(SR2.SqlPersistenceProviderRequiresNonEmptyGuid)
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperArgument(
+                        "id",
+                        SR2.GetString(SR2.SqlPersistenceProviderRequiresNonEmptyGuid)
+                    );
             }
 
             return new SqlPersistenceProvider(id, this);
@@ -303,12 +311,13 @@ namespace System.ServiceModel.Persistence
                     throw;
                 }
 
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new PersistenceException(
-                        SR2.GetString(SR2.ErrorOpeningSqlPersistenceProvider),
-                        e
-                    )
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        new PersistenceException(
+                            SR2.GetString(SR2.ErrorOpeningSqlPersistenceProvider),
+                            e
+                        )
+                    );
             }
         }
 
@@ -628,9 +637,8 @@ namespace System.ServiceModel.Persistence
 
         void PerformOpen(TimeSpan timeout)
         {
-            string lowerCaseConnectionString = this.connectionString.ToUpper(
-                CultureInfo.InvariantCulture
-            );
+            string lowerCaseConnectionString = this.connectionString
+                .ToUpper(CultureInfo.InvariantCulture);
 
             if (
                 !lowerCaseConnectionString.Contains("CONNECTION TIMEOUT")
@@ -745,12 +753,13 @@ namespace System.ServiceModel.Persistence
                     throw;
                 }
 
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new PersistenceException(
-                        SR2.GetString(SR2.PersistenceOperationError, handler.OperationName),
-                        e
-                    )
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        new PersistenceException(
+                            SR2.GetString(SR2.PersistenceOperationError, handler.OperationName),
+                            e
+                        )
+                    );
             }
 
             Exception toThrow = handler.ProcessResult(resultCode, id, returnValue);
@@ -820,10 +829,8 @@ namespace System.ServiceModel.Persistence
                 )
             )
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                    "timeout",
-                    SR2.GetString(SR2.CommandTimeoutOutOfRange)
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperArgument("timeout", SR2.GetString(SR2.CommandTimeoutOutOfRange));
             }
         }
 
@@ -1214,18 +1221,15 @@ namespace System.ServiceModel.Persistence
                 }
 
                 TimeoutHelper timeoutHelper = new TimeoutHelper(timeout);
-                SqlConnection connection = this.provider.OpenConnection(
-                    timeoutHelper.RemainingTime()
-                );
+                SqlConnection connection = this.provider
+                    .OpenConnection(timeoutHelper.RemainingTime());
 
                 bool completeSelf = false;
                 Exception delayedException = null;
                 try
                 {
-                    this.command = this.provider.CreateCommand(
-                        connection,
-                        timeoutHelper.RemainingTime()
-                    );
+                    this.command = this.provider
+                        .CreateCommand(connection, timeoutHelper.RemainingTime());
 
                     this.handler.SetupCommand(this.command, this.id, additionalParameters);
 
@@ -1269,15 +1273,16 @@ namespace System.ServiceModel.Persistence
                     }
                     finally
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new PersistenceException(
-                                SR2.GetString(
-                                    SR2.PersistenceOperationError,
-                                    this.handler.OperationName
-                                ),
-                                e
-                            )
-                        );
+                        throw DiagnosticUtility.ExceptionUtility
+                            .ThrowHelperError(
+                                new PersistenceException(
+                                    SR2.GetString(
+                                        SR2.PersistenceOperationError,
+                                        this.handler.OperationName
+                                    ),
+                                    e
+                                )
+                            );
                     }
                 }
 
@@ -1446,14 +1451,8 @@ namespace System.ServiceModel.Persistence
             )
             {
                 base.ThrowIfDisposedOrNotOpen();
-                return this.factory.BeginCreate(
-                    this.Id,
-                    instance,
-                    timeout,
-                    unlockInstance,
-                    callback,
-                    state
-                );
+                return this.factory
+                    .BeginCreate(this.Id, instance, timeout, unlockInstance, callback, state);
             }
 
             public override IAsyncResult BeginDelete(
@@ -1497,14 +1496,8 @@ namespace System.ServiceModel.Persistence
             )
             {
                 base.ThrowIfDisposedOrNotOpen();
-                return this.factory.BeginUpdate(
-                    this.Id,
-                    instance,
-                    timeout,
-                    unlockInstance,
-                    callback,
-                    state
-                );
+                return this.factory
+                    .BeginUpdate(this.Id, instance, timeout, unlockInstance, callback, state);
             }
 
             public override object Create(object instance, TimeSpan timeout, bool unlockInstance)

@@ -23,10 +23,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
 {
     public class ReferenceManagerTests : CSharpTestBase
     {
-        private static readonly CSharpCompilationOptions s_signedDll =
-            TestOptions.ReleaseDll.WithCryptoPublicKey(
-                TestResources.TestKeys.PublicKey_ce65828c82a341f2
-            );
+        private static readonly CSharpCompilationOptions s_signedDll = TestOptions.ReleaseDll
+            .WithCryptoPublicKey(TestResources.TestKeys.PublicKey_ce65828c82a341f2);
 
         [Fact]
         public void WinRtCompilationReferences()
@@ -1132,19 +1130,20 @@ public class E : bar::C { }
                     t3 = Parse("#r \"Lib\"", options: TestOptions.Script),
                 },
                 references: new MetadataReference[] { MscorlibRef_v4_0_30316_17626, r1, r2 },
-                options: TestOptions.ReleaseDll.WithMetadataReferenceResolver(
-                    new TestMetadataReferenceResolver(
-                        assemblyNames: new Dictionary<string, PortableExecutableReference>
-                        {
-                            { "Lib", r3 },
-                        },
-                        files: new Dictionary<string, PortableExecutableReference>
-                        {
-                            { p2, r2 },
-                            { p3, r3 },
-                        }
+                options: TestOptions.ReleaseDll
+                    .WithMetadataReferenceResolver(
+                        new TestMetadataReferenceResolver(
+                            assemblyNames: new Dictionary<string, PortableExecutableReference>
+                            {
+                                { "Lib", r3 },
+                            },
+                            files: new Dictionary<string, PortableExecutableReference>
+                            {
+                                { p2, r2 },
+                                { p3, r3 },
+                            }
+                        )
                     )
-                )
             );
 
             // no diagnostics expected, all duplicate references should be ignored as they all refer to the same file:
@@ -1302,8 +1301,9 @@ public interface I {}";
 
             var compilation = CSharpCompilation.Create("goo", references: new[] { r1, r2 });
 
-            var refs = compilation
-                .Assembly.Modules.Select(module => module.GetReferencedAssemblies())
+            var refs = compilation.Assembly
+                .Modules
+                .Select(module => module.GetReferencedAssemblies())
                 .ToArray();
             Assert.Equal(1, refs.Length);
             Assert.Equal(1, refs[0].Length);
@@ -1331,9 +1331,8 @@ public interface I {}";
                     MetadataReference.CreateFromFile(p1),
                     MetadataReference.CreateFromFile(p2),
                 },
-                TestOptions.ReleaseDll.WithAssemblyIdentityComparer(
-                    DesktopAssemblyIdentityComparer.Default
-                )
+                TestOptions.ReleaseDll
+                    .WithAssemblyIdentityComparer(DesktopAssemblyIdentityComparer.Default)
             );
 
             comp.VerifyDiagnostics(
@@ -1697,9 +1696,8 @@ public class A
         [Fact]
         public void ReferenceResolution_ExceptionsFromResolver()
         {
-            var options = TestOptions.ReleaseDll.WithMetadataReferenceResolver(
-                new ErroneousReferenceResolver()
-            );
+            var options = TestOptions.ReleaseDll
+                .WithMetadataReferenceResolver(new ErroneousReferenceResolver());
 
             foreach (var tree in new[] { Parse("#r \"throw\"", options: TestOptions.Script) })
             {
@@ -1757,18 +1755,19 @@ public class A
 
             var c = CreateCompilationWithMscorlib45(
                 new[] { t1, t2 },
-                options: TestOptions.ReleaseDll.WithMetadataReferenceResolver(
-                    new TestMetadataReferenceResolver(
-                        pathResolver: new VirtualizedRelativePathResolver(
-                            new[] { @"C:\A\lib.dll", @"C:\B\lib.dll" }
-                        ),
-                        files: new Dictionary<string, PortableExecutableReference>()
-                        {
-                            { @"C:\A\lib.dll", Net451.MicrosoftCSharp },
-                            { @"C:\B\lib.dll", Net451.MicrosoftVisualBasic },
-                        }
+                options: TestOptions.ReleaseDll
+                    .WithMetadataReferenceResolver(
+                        new TestMetadataReferenceResolver(
+                            pathResolver: new VirtualizedRelativePathResolver(
+                                new[] { @"C:\A\lib.dll", @"C:\B\lib.dll" }
+                            ),
+                            files: new Dictionary<string, PortableExecutableReference>()
+                            {
+                                { @"C:\A\lib.dll", Net451.MicrosoftCSharp },
+                                { @"C:\B\lib.dll", Net451.MicrosoftVisualBasic },
+                            }
+                        )
                     )
-                )
             );
 
             c.VerifyDiagnostics();
@@ -2101,8 +2100,8 @@ namespace System.Printing
             );
             comp.VerifyDiagnostics();
 
-            var method = comp
-                .GlobalNamespace.GetMember<NamespaceSymbol>("System")
+            var method = comp.GlobalNamespace
+                .GetMember<NamespaceSymbol>("System")
                 .GetMember<NamespaceSymbol>("Windows")
                 .GetMember<NamespaceSymbol>("Controls")
                 .GetMember<NamedTypeSymbol>("PrintDialog")
@@ -2253,9 +2252,8 @@ class D
             var moduleReferences1 = moduleSymbol1.GetReferencedAssemblies();
             Assert.Contains(assemblyMetadata.GetAssembly().Identity, moduleReferences1);
 
-            var moduleTypeSymbol1 = comp1.GlobalNamespace.GetMember<NamedTypeSymbol>(
-                "TypeFromModule"
-            );
+            var moduleTypeSymbol1 = comp1.GlobalNamespace
+                .GetMember<NamedTypeSymbol>("TypeFromModule");
             Assert.Equal(moduleSymbol1, moduleTypeSymbol1.ContainingModule);
             Assert.Equal(comp1.Assembly, moduleTypeSymbol1.ContainingAssembly);
 
@@ -2267,9 +2265,8 @@ class D
 
             var moduleReferences2 = moduleSymbol2.GetReferencedAssemblies();
 
-            var moduleTypeSymbol2 = comp2.GlobalNamespace.GetMember<NamedTypeSymbol>(
-                "TypeFromModule"
-            );
+            var moduleTypeSymbol2 = comp2.GlobalNamespace
+                .GetMember<NamedTypeSymbol>("TypeFromModule");
             Assert.Equal(moduleSymbol2, moduleTypeSymbol2.ContainingModule);
             Assert.Equal(comp2.Assembly, moduleTypeSymbol2.ContainingAssembly);
 
@@ -2305,8 +2302,8 @@ namespace A
             var comp1 = CreateCompilation(text1, new MetadataReference[] { moduleRef });
             var tree1 = comp1.SyntaxTrees.Single();
 
-            var implicitTypeCount1 = comp1
-                .GlobalNamespace.GetMember<NamespaceSymbol>("A")
+            var implicitTypeCount1 = comp1.GlobalNamespace
+                .GetMember<NamespaceSymbol>("A")
                 .GetMembers(TypeSymbol.ImplicitTypeName)
                 .Length;
             Assert.Equal(1, implicitTypeCount1);
@@ -2314,8 +2311,8 @@ namespace A
             var tree2 = tree1.WithInsertAt(text1.Length, text2);
             var comp2 = comp1.ReplaceSyntaxTree(tree1, tree2);
 
-            var implicitTypeCount2 = comp2
-                .GlobalNamespace.GetMember<NamespaceSymbol>("A")
+            var implicitTypeCount2 = comp2.GlobalNamespace
+                .GetMember<NamespaceSymbol>("A")
                 .GetMembers(TypeSymbol.ImplicitTypeName)
                 .Length;
             Assert.Equal(1, implicitTypeCount2);
@@ -2326,15 +2323,13 @@ namespace A
         {
             var cPublic = CreateCompilation(
                 "class C { }",
-                options: TestOptions.ReleaseDll.WithMetadataImportOptions(
-                    MetadataImportOptions.Public
-                )
+                options: TestOptions.ReleaseDll
+                    .WithMetadataImportOptions(MetadataImportOptions.Public)
             );
             var cInternal = CreateCompilation(
                 "class D { }",
-                options: TestOptions.ReleaseDll.WithMetadataImportOptions(
-                    MetadataImportOptions.Internal
-                )
+                options: TestOptions.ReleaseDll
+                    .WithMetadataImportOptions(MetadataImportOptions.Internal)
             );
             var cAll = CreateCompilation(
                 "class E { }",
@@ -2343,15 +2338,13 @@ namespace A
 
             var cPublic2 = CreateCompilation(
                 "class C { }",
-                options: TestOptions.ReleaseDll.WithMetadataImportOptions(
-                    MetadataImportOptions.Public
-                )
+                options: TestOptions.ReleaseDll
+                    .WithMetadataImportOptions(MetadataImportOptions.Public)
             );
             var cInternal2 = CreateCompilation(
                 "class D { }",
-                options: TestOptions.ReleaseDll.WithMetadataImportOptions(
-                    MetadataImportOptions.Internal
-                )
+                options: TestOptions.ReleaseDll
+                    .WithMetadataImportOptions(MetadataImportOptions.Internal)
             );
             var cAll2 = CreateCompilation(
                 "class E { }",
@@ -2396,12 +2389,11 @@ internal class C
             var mainInternal = CreateCompilation(
                 mainSource,
                 new[] { moduleRef },
-                options: TestOptions.ReleaseDll.WithMetadataImportOptions(
-                    MetadataImportOptions.Internal
-                )
+                options: TestOptions.ReleaseDll
+                    .WithMetadataImportOptions(MetadataImportOptions.Internal)
             );
-            var mInternal = mainInternal
-                .GlobalNamespace.GetMember<NamedTypeSymbol>("C")
+            var mInternal = mainInternal.GlobalNamespace
+                .GetMember<NamedTypeSymbol>("C")
                 .GetMembers("m");
             Assert.Equal(0, mInternal.Length);
 
@@ -2409,12 +2401,11 @@ internal class C
             var mainPublic = CreateCompilation(
                 mainSource,
                 new[] { moduleRef },
-                options: TestOptions.ReleaseDll.WithMetadataImportOptions(
-                    MetadataImportOptions.Public
-                )
+                options: TestOptions.ReleaseDll
+                    .WithMetadataImportOptions(MetadataImportOptions.Public)
             );
-            var mPublic = mainPublic
-                .GlobalNamespace.GetMember<NamedTypeSymbol>("C")
+            var mPublic = mainPublic.GlobalNamespace
+                .GetMember<NamedTypeSymbol>("C")
                 .GetMembers("m");
             Assert.Equal(0, mPublic.Length);
         }
@@ -2884,9 +2875,8 @@ public class Source
         {
             var vectors40 = CreateCompilation(
                 @"[assembly: System.Reflection.AssemblyVersion(""4.0.0.0"")]",
-                options: TestOptions.ReleaseDll.WithCryptoPublicKey(
-                    TestResources.TestKeys.PublicKey_b03f5f7f11d50a3a
-                ),
+                options: TestOptions.ReleaseDll
+                    .WithCryptoPublicKey(TestResources.TestKeys.PublicKey_b03f5f7f11d50a3a),
                 assemblyName: "System.Numerics.Vectors"
             );
 
@@ -2897,9 +2887,8 @@ public class Source
 
             var vectors41 = CreateCompilation(
                 @"[assembly: System.Reflection.AssemblyVersion(""4.1.0.0"")]",
-                options: TestOptions.ReleaseDll.WithCryptoPublicKey(
-                    TestResources.TestKeys.PublicKey_b03f5f7f11d50a3a
-                ),
+                options: TestOptions.ReleaseDll
+                    .WithCryptoPublicKey(TestResources.TestKeys.PublicKey_b03f5f7f11d50a3a),
                 assemblyName: "System.Numerics.Vectors"
             );
 
@@ -2913,12 +2902,10 @@ public class Source
 
             var c1 = CreateEmptyCompilation(
                 "",
-                TargetFrameworkUtil.StandardReferences.AddRange(
-                    new[] { refVectors40, refVectors41 }
-                ),
-                options: TestOptions.ReleaseDll.WithAssemblyIdentityComparer(
-                    DesktopAssemblyIdentityComparer.Default
-                )
+                TargetFrameworkUtil.StandardReferences
+                    .AddRange(new[] { refVectors40, refVectors41 }),
+                options: TestOptions.ReleaseDll
+                    .WithAssemblyIdentityComparer(DesktopAssemblyIdentityComparer.Default)
             );
             c1.VerifyDiagnostics();
 
@@ -2935,12 +2922,10 @@ public class Source
 
             var c2 = CreateEmptyCompilation(
                 "",
-                TargetFrameworkUtil.StandardReferences.AddRange(
-                    new[] { refVectors41, refVectors40 }
-                ),
-                options: TestOptions.ReleaseDll.WithAssemblyIdentityComparer(
-                    DesktopAssemblyIdentityComparer.Default
-                )
+                TargetFrameworkUtil.StandardReferences
+                    .AddRange(new[] { refVectors41, refVectors40 }),
+                options: TestOptions.ReleaseDll
+                    .WithAssemblyIdentityComparer(DesktopAssemblyIdentityComparer.Default)
             );
             c2.VerifyDiagnostics();
 
@@ -3067,8 +3052,8 @@ public class Source
                         )
                         .ToMetadataReference()
                         .WithProperties(
-                            MetadataReferenceProperties
-                                .Assembly.WithAliases(ImmutableArray.Create("Z"))
+                            MetadataReferenceProperties.Assembly
+                                .WithAliases(ImmutableArray.Create("Z"))
                                 .WithRecursiveAliases(true)
                         ),
                 }
@@ -3120,8 +3105,8 @@ public class Source
                         )
                         .ToMetadataReference()
                         .WithProperties(
-                            MetadataReferenceProperties
-                                .Assembly.WithAliases(ImmutableArray.Create("Z"))
+                            MetadataReferenceProperties.Assembly
+                                .WithAliases(ImmutableArray.Create("Z"))
                                 .WithRecursiveAliases(true)
                         ),
                 }
@@ -3170,22 +3155,22 @@ new B()
                     bRef.WithAliases(ImmutableArray.Create("X")),
                     aRef,
                 },
-                TestOptions.ReleaseDll.WithMetadataReferenceResolver(
-                    new TestMetadataReferenceResolver(
-                        assemblyNames: new Dictionary<string, PortableExecutableReference>()
-                        {
+                TestOptions.ReleaseDll
+                    .WithMetadataReferenceResolver(
+                        new TestMetadataReferenceResolver(
+                            assemblyNames: new Dictionary<string, PortableExecutableReference>()
                             {
-                                "a",
-                                (PortableExecutableReference)
-                                    aRef.WithProperties(
-                                        MetadataReferenceProperties.Assembly.WithRecursiveAliases(
-                                            true
+                                {
+                                    "a",
+                                    (PortableExecutableReference)
+                                        aRef.WithProperties(
+                                            MetadataReferenceProperties.Assembly
+                                                .WithRecursiveAliases(true)
                                         )
-                                    )
-                            },
-                        }
+                                },
+                            }
+                        )
                     )
-                )
             );
 
             c.VerifyDiagnostics();
@@ -3221,18 +3206,19 @@ new B()
                     bRef.WithAliases(ImmutableArray.Create("X")),
                     aRef,
                 },
-                TestOptions.ReleaseDll.WithMetadataReferenceResolver(
-                    new TestMetadataReferenceResolver(
-                        assemblyNames: new Dictionary<string, PortableExecutableReference>()
-                        {
+                TestOptions.ReleaseDll
+                    .WithMetadataReferenceResolver(
+                        new TestMetadataReferenceResolver(
+                            assemblyNames: new Dictionary<string, PortableExecutableReference>()
                             {
-                                "a",
-                                (PortableExecutableReference)
-                                    aRef.WithProperties(MetadataReferenceProperties.Assembly)
-                            },
-                        }
+                                {
+                                    "a",
+                                    (PortableExecutableReference)
+                                        aRef.WithProperties(MetadataReferenceProperties.Assembly)
+                                },
+                            }
+                        )
                     )
-                )
             );
 
             c.VerifyDiagnostics(
@@ -3278,8 +3264,8 @@ public class P
                     bRef.WithAliases(ImmutableArray.Create("X")),
                     aRef,
                     aRef.WithProperties(
-                        MetadataReferenceProperties
-                            .Assembly.WithAliases(ImmutableArray.Create("Y"))
+                        MetadataReferenceProperties.Assembly
+                            .WithAliases(ImmutableArray.Create("Y"))
                             .WithRecursiveAliases(true)
                     ),
                     MscorlibRef,
@@ -3325,8 +3311,8 @@ public class P
                 {
                     bRef.WithAliases(ImmutableArray.Create("X")),
                     aRef.WithProperties(
-                        MetadataReferenceProperties
-                            .Assembly.WithAliases(ImmutableArray.Create("Y"))
+                        MetadataReferenceProperties.Assembly
+                            .WithAliases(ImmutableArray.Create("Y"))
                             .WithRecursiveAliases(true)
                     ),
                     aRef,
@@ -3374,13 +3360,13 @@ public class P
                     bRef.WithAliases(ImmutableArray.Create("X")),
                     aRef,
                     aRef.WithProperties(
-                        MetadataReferenceProperties
-                            .Assembly.WithAliases(ImmutableArray.Create("Y"))
+                        MetadataReferenceProperties.Assembly
+                            .WithAliases(ImmutableArray.Create("Y"))
                             .WithRecursiveAliases(true)
                     ),
                     aRef.WithProperties(
-                        MetadataReferenceProperties
-                            .Assembly.WithAliases(ImmutableArray.Create("Y"))
+                        MetadataReferenceProperties.Assembly
+                            .WithAliases(ImmutableArray.Create("Y"))
                             .WithRecursiveAliases(true)
                     ),
                     aRef,
@@ -3435,13 +3421,13 @@ public class P
                 {
                     bRef.WithAliases(ImmutableArray.Create("X")),
                     aRef.WithProperties(
-                        MetadataReferenceProperties
-                            .Assembly.WithAliases(ImmutableArray.Create("Y", "Y"))
+                        MetadataReferenceProperties.Assembly
+                            .WithAliases(ImmutableArray.Create("Y", "Y"))
                             .WithRecursiveAliases(true)
                     ),
                     dRef.WithProperties(
-                        MetadataReferenceProperties
-                            .Assembly.WithAliases(ImmutableArray.Create("Z"))
+                        MetadataReferenceProperties.Assembly
+                            .WithAliases(ImmutableArray.Create("Z"))
                             .WithRecursiveAliases(true)
                     ),
                     MscorlibRef,
@@ -4643,9 +4629,8 @@ public class C : A
         )]
         public void MissingAssemblyResolution_Supersession_FxUnification()
         {
-            var options = TestOptions.ReleaseDll.WithAssemblyIdentityComparer(
-                DesktopAssemblyIdentityComparer.Default
-            );
+            var options = TestOptions.ReleaseDll
+                .WithAssemblyIdentityComparer(DesktopAssemblyIdentityComparer.Default);
 
             // c - "mscorlib, v4"
             //     a -> "mscorlib, v2"
@@ -4709,9 +4694,8 @@ public class C : A
         )]
         public void MissingAssemblyResolution_Supersession_StrongNames()
         {
-            var options = TestOptions.ReleaseDll.WithAssemblyIdentityComparer(
-                DesktopAssemblyIdentityComparer.Default
-            );
+            var options = TestOptions.ReleaseDll
+                .WithAssemblyIdentityComparer(DesktopAssemblyIdentityComparer.Default);
 
             // c - a -> "C, v2"
             //     b -> "C, v1"

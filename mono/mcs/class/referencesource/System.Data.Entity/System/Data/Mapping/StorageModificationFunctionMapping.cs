@@ -239,9 +239,8 @@ namespace System.Data.Mapping
                     )
                 )
                 {
-                    ReadOnlyMetadataCollection<ReferentialConstraint> constraints = assocationSet
-                        .ElementType
-                        .ReferentialConstraints;
+                    ReadOnlyMetadataCollection<ReferentialConstraint> constraints =
+                        assocationSet.ElementType.ReferentialConstraints;
                     if (null != constraints)
                     {
                         foreach (ReferentialConstraint constraint in constraints)

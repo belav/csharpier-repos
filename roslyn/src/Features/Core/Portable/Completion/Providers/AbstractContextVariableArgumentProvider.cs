@@ -108,10 +108,8 @@ namespace Microsoft.CodeAnalysis.Completion
                 )
             )
             {
-                var enclosingSymbol = context.SemanticModel.GetEnclosingSymbol(
-                    targetToken.SpanStart,
-                    context.CancellationToken
-                );
+                var enclosingSymbol = context.SemanticModel
+                    .GetEnclosingSymbol(targetToken.SpanStart, context.CancellationToken);
                 while (
                     enclosingSymbol
                         is IMethodSymbol
@@ -153,10 +151,9 @@ namespace Microsoft.CodeAnalysis.Completion
                     return;
                 }
 
-                var conversion = context.SemanticModel.Compilation.ClassifyCommonConversion(
-                    symbolType,
-                    context.Parameter.Type
-                );
+                var conversion = context.SemanticModel
+                    .Compilation
+                    .ClassifyCommonConversion(symbolType, context.Parameter.Type);
                 if (!conversion.IsImplicit)
                 {
                     return;

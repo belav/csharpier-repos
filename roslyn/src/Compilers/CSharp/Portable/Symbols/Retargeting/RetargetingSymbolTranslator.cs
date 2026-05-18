@@ -84,10 +84,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Retargeting
                     tupleErrorField.Name,
                     tupleErrorField.TupleElementIndex,
                     tupleErrorField.TryGetFirstLocation(),
-                    this.RetargetingTranslator.Retarget(
-                        tupleErrorField.TypeWithAnnotations,
-                        RetargetOptions.RetargetPrimitiveTypesByTypeCode
-                    ),
+                    this.RetargetingTranslator
+                        .Retarget(
+                            tupleErrorField.TypeWithAnnotations,
+                            RetargetOptions.RetargetPrimitiveTypesByTypeCode
+                        ),
                     tupleErrorField.GetUseSiteInfo().DiagnosticInfo,
                     tupleErrorField.IsImplicitlyDeclared,
                     retargetedCorrespondingDefaultFieldOpt
@@ -335,10 +336,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Retargeting
                     }
 
                     return (NamedTypeSymbol)
-                        this.SymbolMap.GetOrAdd(
-                            type,
-                            _retargetingModule._createRetargetingNamedType
-                        );
+                        this.SymbolMap
+                            .GetOrAdd(type, _retargetingModule._createRetargetingNamedType);
                 }
                 else
                 {
@@ -504,9 +503,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Retargeting
                 }
                 else
                 {
-                    string namespaceName = type.ContainingNamespace.ToDisplayString(
-                        SymbolDisplayFormat.QualifiedNameOnlyFormat
-                    );
+                    string namespaceName = type.ContainingNamespace
+                        .ToDisplayString(SymbolDisplayFormat.QualifiedNameOnlyFormat);
                     mdName = MetadataTypeName.FromNamespaceAndTypeName(
                         namespaceName,
                         type.MetadataName,
@@ -556,18 +554,18 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Retargeting
                     }
                     else
                     {
-                        string namespaceName = type.ContainingNamespace.ToDisplayString(
-                            SymbolDisplayFormat.QualifiedNameOnlyFormat
-                        );
+                        string namespaceName = type.ContainingNamespace
+                            .ToDisplayString(SymbolDisplayFormat.QualifiedNameOnlyFormat);
                         mdName = MetadataTypeName.FromNamespaceAndTypeName(
                             namespaceName,
                             type.MetadataName,
                             forcedArity: type.Arity
                         );
-                        result1 = destination.To.LookupDeclaredOrForwardedTopLevelMetadataType(
-                            ref mdName,
-                            visitedAssemblies: null
-                        );
+                        result1 = destination.To
+                            .LookupDeclaredOrForwardedTopLevelMetadataType(
+                                ref mdName,
+                                visitedAssemblies: null
+                            );
                     }
 
                     Debug.Assert(result1.Arity == type.Arity);
@@ -738,8 +736,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Retargeting
                     }
                 }
 
-                ImmutableArray<AssemblySymbol> assembliesToEmbedTypesFrom =
-                    this.UnderlyingModule.GetAssembliesToEmbedTypesFrom();
+                ImmutableArray<AssemblySymbol> assembliesToEmbedTypesFrom = this.UnderlyingModule
+                    .GetAssembliesToEmbedTypesFrom();
 
                 if (assembliesToEmbedTypesFrom.Length > 0)
                 {
@@ -841,10 +839,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Retargeting
             public virtual TypeParameterSymbol Retarget(TypeParameterSymbol typeParameter)
             {
                 return (TypeParameterSymbol)
-                    this.SymbolMap.GetOrAdd(
-                        typeParameter,
-                        _retargetingModule._createRetargetingTypeParameter
-                    );
+                    this.SymbolMap
+                        .GetOrAdd(
+                            typeParameter,
+                            _retargetingModule._createRetargetingTypeParameter
+                        );
             }
 
             public ArrayTypeSymbol Retarget(ArrayTypeSymbol type)
@@ -1165,10 +1164,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Retargeting
                 Debug.Assert(ReferenceEquals(property, property.OriginalDefinition));
 
                 return (PropertySymbol)
-                    this.SymbolMap.GetOrAdd(
-                        property,
-                        _retargetingModule._createRetargetingProperty
-                    );
+                    this.SymbolMap
+                        .GetOrAdd(property, _retargetingModule._createRetargetingProperty);
             }
 
             public PropertySymbol Retarget(
@@ -1287,22 +1284,23 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Retargeting
                     IEqualityComparer<MethodSymbol> retargetedMethodComparer
                 )
                 {
-                    var targetParams = method.Parameters.SelectAsArray(
-                        static ParameterSymbol (param, translator) =>
-                            new SignatureOnlyParameterSymbol(
-                                translator.Retarget(
-                                    param.TypeWithAnnotations,
-                                    RetargetOptions.RetargetPrimitiveTypesByTypeCode
+                    var targetParams = method.Parameters
+                        .SelectAsArray(
+                            static ParameterSymbol (param, translator) =>
+                                new SignatureOnlyParameterSymbol(
+                                    translator.Retarget(
+                                        param.TypeWithAnnotations,
+                                        RetargetOptions.RetargetPrimitiveTypesByTypeCode
+                                    ),
+                                    translator.RetargetModifiers(
+                                        param.RefCustomModifiers,
+                                        modifiersHaveChanged: out _
+                                    ),
+                                    param.IsParams,
+                                    param.RefKind
                                 ),
-                                translator.RetargetModifiers(
-                                    param.RefCustomModifiers,
-                                    modifiersHaveChanged: out _
-                                ),
-                                param.IsParams,
-                                param.RefKind
-                            ),
-                        translator
-                    );
+                            translator
+                        );
 
                     // We will be using this symbol only for the purpose of method signature comparison,
                     // IndexedTypeParameterSymbols should work just fine as the type parameters for the method.
@@ -1379,22 +1377,23 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Retargeting
                 IEqualityComparer<PropertySymbol> retargetedPropertyComparer
             )
             {
-                var targetParams = property.Parameters.SelectAsArray(
-                    static ParameterSymbol (param, self) =>
-                        new SignatureOnlyParameterSymbol(
-                            self.Retarget(
-                                param.TypeWithAnnotations,
-                                RetargetOptions.RetargetPrimitiveTypesByTypeCode
+                var targetParams = property.Parameters
+                    .SelectAsArray(
+                        static ParameterSymbol (param, self) =>
+                            new SignatureOnlyParameterSymbol(
+                                self.Retarget(
+                                    param.TypeWithAnnotations,
+                                    RetargetOptions.RetargetPrimitiveTypesByTypeCode
+                                ),
+                                self.RetargetModifiers(
+                                    param.RefCustomModifiers,
+                                    modifiersHaveChanged: out _
+                                ),
+                                param.IsParams,
+                                param.RefKind
                             ),
-                            self.RetargetModifiers(
-                                param.RefCustomModifiers,
-                                modifiersHaveChanged: out _
-                            ),
-                            param.IsParams,
-                            param.RefKind
-                        ),
-                    this
-                );
+                        this
+                    );
 
                 var targetProperty = new SignatureOnlyPropertySymbol(
                     property.Name,

@@ -68,16 +68,17 @@ namespace System.ServiceModel.Configuration
                         retval = MessageVersion.Default;
                         break;
                     default:
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new ArgumentOutOfRangeException(
-                                "value",
-                                SR.GetString(
-                                    SR.ConfigInvalidClassFactoryValue,
-                                    messageVersion,
-                                    typeof(MessageVersion).FullName
+                        throw DiagnosticUtility.ExceptionUtility
+                            .ThrowHelperError(
+                                new ArgumentOutOfRangeException(
+                                    "value",
+                                    SR.GetString(
+                                        SR.ConfigInvalidClassFactoryValue,
+                                        messageVersion,
+                                        typeof(MessageVersion).FullName
+                                    )
                                 )
-                            )
-                        );
+                            );
                 }
                 return retval;
             }
@@ -129,15 +130,16 @@ namespace System.ServiceModel.Configuration
                 }
                 else
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ArgumentOutOfRangeException(
-                            "value",
-                            SR.GetString(
-                                SR.ConfigInvalidClassInstanceValue,
-                                typeof(MessageVersion).FullName
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperError(
+                            new ArgumentOutOfRangeException(
+                                "value",
+                                SR.GetString(
+                                    SR.ConfigInvalidClassInstanceValue,
+                                    typeof(MessageVersion).FullName
+                                )
                             )
-                        )
-                    );
+                        );
                 }
                 return retval;
             }

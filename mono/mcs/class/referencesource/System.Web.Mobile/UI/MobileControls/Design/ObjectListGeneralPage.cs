@@ -136,23 +136,24 @@ namespace System.Web.UI.Design.MobileControls
                 "General.ico"
             );
 
-            this.Controls.AddRange(
-                new Control[]
-                {
-                    grplblAppearance,
-                    lblBackCommandText,
-                    _txtBackCommandText,
-                    lblDetailsCommandText,
-                    _txtDetailsCommandText,
-                    lblMoreText,
-                    _txtMoreText,
-                    pagingGroup,
-                    itemCountLabel,
-                    _txtItemCount,
-                    itemsPerPageLabel,
-                    _txtItemsPerPage,
-                }
-            );
+            this.Controls
+                .AddRange(
+                    new Control[]
+                    {
+                        grplblAppearance,
+                        lblBackCommandText,
+                        _txtBackCommandText,
+                        lblDetailsCommandText,
+                        _txtDetailsCommandText,
+                        lblMoreText,
+                        _txtMoreText,
+                        pagingGroup,
+                        itemCountLabel,
+                        _txtItemCount,
+                        itemsPerPageLabel,
+                        _txtItemsPerPage,
+                    }
+                );
         }
 
         /// <summary>
@@ -222,9 +223,8 @@ namespace System.Web.UI.Design.MobileControls
             }
             catch (Exception)
             {
-                _txtItemsPerPage.Text = objectList.ItemsPerPage.ToString(
-                    CultureInfo.InvariantCulture
-                );
+                _txtItemsPerPage.Text = objectList.ItemsPerPage
+                    .ToString(CultureInfo.InvariantCulture);
             }
 
             objectList.BackCommandText = _txtBackCommandText.Text;

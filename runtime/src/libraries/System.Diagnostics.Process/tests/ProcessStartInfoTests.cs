@@ -423,11 +423,12 @@ namespace System.Diagnostics.Tests
                     Console.Write(
                         string.Join(
                             ItemSeparator,
-                            new ProcessStartInfo().Environment.Select(e =>
-                                Convert.ToBase64String(
-                                    Encoding.UTF8.GetBytes(e.Key + "=" + e.Value)
+                            new ProcessStartInfo().Environment
+                                .Select(e =>
+                                    Convert.ToBase64String(
+                                        Encoding.UTF8.GetBytes(e.Key + "=" + e.Value)
+                                    )
                                 )
-                            )
                         )
                     );
                     return RemoteExecutor.SuccessExitCode;
@@ -467,8 +468,8 @@ namespace System.Diagnostics.Tests
                     Console.Write(
                         string.Join(
                             ItemSeparator,
-                            new ProcessStartInfo()
-                                .EnvironmentVariables.Cast<DictionaryEntry>()
+                            new ProcessStartInfo().EnvironmentVariables
+                                .Cast<DictionaryEntry>()
                                 .Select(e =>
                                     Convert.ToBase64String(
                                         Encoding.UTF8.GetBytes(e.Key + "=" + e.Value)
@@ -512,7 +513,9 @@ namespace System.Diagnostics.Tests
             // To mimic this behaviour, we can't use Environment.SetEnvironmentVariable here as it's case-insensitive on Windows.
             // We also can't use p.StartInfo.Environment as it's comparer is set to OrdinalIgnoreCAse.
             // But we can overwrite it using reflection to mimic the CreateProcess behaviour and avoid having this test call CreateProcess directly.
-            p.StartInfo.Environment.GetType()
+            p.StartInfo
+                .Environment
+                .GetType()
                 .GetField(
                     "_contents",
                     Reflection.BindingFlags.NonPublic | Reflection.BindingFlags.Instance
@@ -781,11 +784,10 @@ namespace System.Diagnostics.Tests
             psi.EnvironmentVariables.Add("NewKey2", "NewValue2");
 
             // Environment and EnvironmentVariables should be equal, but have different enumeration types.
-            IEnumerable<KeyValuePair<string, string>> allEnvironment = psi.Environment.OrderBy(k =>
-                k.Key
-            );
-            IEnumerable<DictionaryEntry> allDictionary = psi
-                .EnvironmentVariables.Cast<DictionaryEntry>()
+            IEnumerable<KeyValuePair<string, string>> allEnvironment = psi.Environment
+                .OrderBy(k => k.Key);
+            IEnumerable<DictionaryEntry> allDictionary = psi.EnvironmentVariables
+                .Cast<DictionaryEntry>()
                 .OrderBy(k => k.Key);
             Assert.Equal(
                 allEnvironment.Select(k => new DictionaryEntry(k.Key, k.Value)),

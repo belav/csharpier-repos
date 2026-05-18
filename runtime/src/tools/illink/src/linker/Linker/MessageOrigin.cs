@@ -87,16 +87,18 @@ namespace Mono.Linker
             if (Provider is MethodDefinition method && method.DebugInformation.HasSequencePoints)
             {
                 var offset = ILOffset ?? method.DebugInformation.SequencePoints[0].Offset;
-                SequencePoint? correspondingSequencePoint = method
-                    .DebugInformation.SequencePoints.Where(s => s.Offset <= offset)
+                SequencePoint? correspondingSequencePoint = method.DebugInformation
+                    .SequencePoints
+                    .Where(s => s.Offset <= offset)
                     ?.Last();
 
                 // If the warning comes from hidden line (compiler generated code typically)
                 // search for any sequence point with non-hidden line number and report that as a best effort.
                 if (correspondingSequencePoint?.StartLine == HiddenLineNumber)
                 {
-                    correspondingSequencePoint = method
-                        .DebugInformation.SequencePoints.Where(s => s.StartLine != HiddenLineNumber)
+                    correspondingSequencePoint = method.DebugInformation
+                        .SequencePoints
+                        .Where(s => s.StartLine != HiddenLineNumber)
                         .FirstOrDefault();
                 }
 

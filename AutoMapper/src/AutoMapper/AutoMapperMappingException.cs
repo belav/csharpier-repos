@@ -75,7 +75,8 @@ public class AutoMapperMappingException : Exception
         {
             return string.Join(
                 Environment.NewLine,
-                base.StackTrace.Split(new[] { Environment.NewLine }, StringSplitOptions.None)
+                base.StackTrace
+                    .Split(new[] { Environment.NewLine }, StringSplitOptions.None)
                     .Where(str => !str.TrimStart().StartsWith("at AutoMapper."))
             );
         }
@@ -245,7 +246,8 @@ public class AutoMapperConfigurationException : Exception
             if (Errors != null)
                 return string.Join(
                     Environment.NewLine,
-                    base.StackTrace.Split(new[] { Environment.NewLine }, StringSplitOptions.None)
+                    base.StackTrace
+                        .Split(new[] { Environment.NewLine }, StringSplitOptions.None)
                         .Where(str => !str.TrimStart().StartsWith("at AutoMapper."))
                         .ToArray()
                 );

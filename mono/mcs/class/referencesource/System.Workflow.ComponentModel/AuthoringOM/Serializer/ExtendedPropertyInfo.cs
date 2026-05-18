@@ -216,14 +216,10 @@ namespace System.Workflow.ComponentModel.Serialization
                         out prefix
                     );
                     if (
-                        qualifiedPropertyName.Name.Equals(
-                            xmlQualifiedName.Name,
-                            StringComparison.Ordinal
-                        )
-                        && qualifiedPropertyName.Namespace.Equals(
-                            xmlQualifiedName.Namespace,
-                            StringComparison.Ordinal
-                        )
+                        qualifiedPropertyName.Name
+                            .Equals(xmlQualifiedName.Name, StringComparison.Ordinal)
+                        && qualifiedPropertyName.Namespace
+                            .Equals(xmlQualifiedName.Namespace, StringComparison.Ordinal)
                     )
                     {
                         isExtendedProperty = true;
@@ -253,14 +249,10 @@ namespace System.Workflow.ComponentModel.Serialization
                     out prefix
                 );
                 if (
-                    qualifiedPropertyName.Name.Equals(
-                        xmlQualifiedName.Name,
-                        StringComparison.Ordinal
-                    )
-                    && qualifiedPropertyName.Namespace.Equals(
-                        xmlQualifiedName.Namespace,
-                        StringComparison.Ordinal
-                    )
+                    qualifiedPropertyName.Name
+                        .Equals(xmlQualifiedName.Name, StringComparison.Ordinal)
+                    && qualifiedPropertyName.Namespace
+                        .Equals(xmlQualifiedName.Namespace, StringComparison.Ordinal)
                 )
                 {
                     return true;

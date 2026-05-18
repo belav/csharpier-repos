@@ -522,20 +522,15 @@ namespace System.Speech.Recognition
 
                 // Set the grammar's root rule
                 elementFactory.Grammar.Root = rootId;
-                elementFactory.Grammar.TagFormat = System
-                    .Speech
+                elementFactory.Grammar.TagFormat = System.Speech
                     .Recognition
                     .SrgsGrammar
                     .SrgsTagFormat
                     .KeyValuePairs;
 
                 // Create the root rule
-                IRule root = elementFactory.Grammar.CreateRule(
-                    rootId,
-                    RulePublic.False,
-                    RuleDynamic.NotSet,
-                    false
-                );
+                IRule root = elementFactory.Grammar
+                    .CreateRule(rootId, RulePublic.False, RuleDynamic.NotSet, false);
 
                 // Create all the rules
                 foreach (GrammarBuilderBase item in Items)

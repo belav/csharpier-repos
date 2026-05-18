@@ -52,11 +52,15 @@ namespace System.ServiceModel.Security
             X509SecurityToken result = token as X509SecurityToken;
             if (result == null && token != null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(
-                        SR.GetString(SR.TokenProviderReturnedBadToken, token.GetType().ToString())
-                    )
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(
+                                SR.TokenProviderReturnedBadToken,
+                                token.GetType().ToString()
+                            )
+                        )
+                    );
             }
             return result;
         }
@@ -111,9 +115,8 @@ namespace System.ServiceModel.Security
                     return DXD.TrustDec2005Dictionary.TlsnegoValueTypeUri;
                 }
                 // Not supported
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException()
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(new InvalidOperationException());
             }
         }
 
@@ -196,16 +199,20 @@ namespace System.ServiceModel.Security
             TlsSspiNegotiation tlsNegotiation = (TlsSspiNegotiation)sspiNegotiation;
             if (tlsNegotiation.IsValidContext == false)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new SecurityNegotiationException(SR.GetString(SR.InvalidSspiNegotiation))
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        new SecurityNegotiationException(SR.GetString(SR.InvalidSspiNegotiation))
+                    );
             }
             X509Certificate2 serverCert = tlsNegotiation.RemoteCertificate;
             if (serverCert == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new SecurityNegotiationException(SR.GetString(SR.ServerCertificateNotProvided))
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        new SecurityNegotiationException(
+                            SR.GetString(SR.ServerCertificateNotProvided)
+                        )
+                    );
             }
             ReadOnlyCollection<IAuthorizationPolicy> authzPolicies;
             if (this.ServerTokenAuthenticator != null)
@@ -296,11 +303,9 @@ namespace System.ServiceModel.Security
                 : base(callback, state)
             {
                 this.tlsTokenProvider = tlsTokenProvider;
-                IAsyncResult result = this.tlsTokenProvider.ClientTokenProvider.BeginGetToken(
-                    timeout,
-                    getTokensCallback,
-                    this
-                );
+                IAsyncResult result = this.tlsTokenProvider
+                    .ClientTokenProvider
+                    .BeginGetToken(timeout, getTokensCallback, this);
                 if (!result.CompletedSynchronously)
                 {
                     return;
@@ -321,12 +326,12 @@ namespace System.ServiceModel.Security
                     result.AsyncState;
                 try
                 {
-                    SecurityToken token =
-                        typedResult.tlsTokenProvider.ClientTokenProvider.EndGetToken(result);
+                    SecurityToken token = typedResult.tlsTokenProvider
+                        .ClientTokenProvider
+                        .EndGetToken(result);
                     X509SecurityToken clientToken = TlsnegoTokenProvider.ValidateToken(token);
-                    typedResult.sspiState = typedResult.tlsTokenProvider.CreateTlsSspiState(
-                        clientToken
-                    );
+                    typedResult.sspiState = typedResult.tlsTokenProvider
+                        .CreateTlsSspiState(clientToken);
                     typedResult.Complete(false);
                 }
                 catch (Exception e)

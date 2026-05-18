@@ -373,9 +373,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests.CertificateCreatio
                     HashAlgorithmName.SHA384
                 );
 
-                req.OtherRequestAttributes.Add(
-                    new AsnEncodedData(new Oid(null, null), Array.Empty<byte>())
-                );
+                req.OtherRequestAttributes
+                    .Add(new AsnEncodedData(new Oid(null, null), Array.Empty<byte>()));
 
                 X509SignatureGenerator gen = X509SignatureGenerator.CreateForECDsa(key);
                 InvalidOperationException ex;
@@ -399,9 +398,13 @@ namespace System.Security.Cryptography.X509Certificates.Tests.CertificateCreatio
                     HashAlgorithmName.SHA384
                 );
 
-                req.OtherRequestAttributes.Add(
-                    new AsnEncodedData(new Oid("1.2.840.113549.1.9.14", null), Array.Empty<byte>())
-                );
+                req.OtherRequestAttributes
+                    .Add(
+                        new AsnEncodedData(
+                            new Oid("1.2.840.113549.1.9.14", null),
+                            Array.Empty<byte>()
+                        )
+                    );
 
                 X509SignatureGenerator gen = X509SignatureGenerator.CreateForECDsa(key);
                 InvalidOperationException ex;
@@ -473,9 +476,10 @@ namespace System.Security.Cryptography.X509Certificates.Tests.CertificateCreatio
                     0x00,
                 };
 
-                req.OtherRequestAttributes.Add(
-                    new AsnEncodedData(new Oid("1.2.840.113549.1.9.7", null), invalidEncoding)
-                );
+                req.OtherRequestAttributes
+                    .Add(
+                        new AsnEncodedData(new Oid("1.2.840.113549.1.9.7", null), invalidEncoding)
+                    );
 
                 X509SignatureGenerator gen = X509SignatureGenerator.CreateForECDsa(key);
 

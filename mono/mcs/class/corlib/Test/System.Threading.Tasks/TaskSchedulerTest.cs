@@ -252,11 +252,12 @@ namespace MonoTests.System.Threading.Tasks
         // We use this intermediary method to improve chances of GC kicking
         static void CreateAndForgetFaultedTask(ManualResetEventSlim evt)
         {
-            Task.Factory.StartNew(() =>
-            {
-                evt.Set();
-                throw new Exception("foo");
-            });
+            Task.Factory
+                .StartNew(() =>
+                {
+                    evt.Set();
+                    throw new Exception("foo");
+                });
         }
     }
 }

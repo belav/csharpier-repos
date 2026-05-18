@@ -27,8 +27,8 @@ public class IHostApplicationBuilderTests
         using IHost host = builder.Build();
 
         // VerifyBuilderWorks should have configured a FakeServiceProviderFactory with the following State.
-        FakeServiceCollection fakeServices =
-            host.Services.GetRequiredService<FakeServiceCollection>();
+        FakeServiceCollection fakeServices = host.Services
+            .GetRequiredService<FakeServiceCollection>();
         Assert.Equal("Hi!", fakeServices.State);
     }
 }
@@ -45,9 +45,8 @@ internal static class HostBuilderExtensions
         Assert.Equal(2, builder.Configuration.Sources.Count); // there's an empty source by default
         Assert.Equal("Development", builder.Configuration[HostDefaults.EnvironmentKey]);
 
-        builder.Configuration.AddInMemoryCollection(
-            new Dictionary<string, string> { ["Key1"] = "value1" }
-        );
+        builder.Configuration
+            .AddInMemoryCollection(new Dictionary<string, string> { ["Key1"] = "value1" });
 
         Assert.Equal(2, builder.Configuration.GetChildren().Count());
         Assert.Equal(3, builder.Configuration.Sources.Count);

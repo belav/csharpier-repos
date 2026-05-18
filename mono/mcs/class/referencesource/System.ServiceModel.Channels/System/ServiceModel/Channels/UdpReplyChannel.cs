@@ -74,9 +74,10 @@ namespace System.ServiceModel.Channels
         {
             if (timeout < TimeSpan.Zero)
             {
-                throw FxTrace.Exception.AsError(
-                    new ArgumentOutOfRangeException("timeout", timeout, SR.TimeoutOutOfRange0)
-                );
+                throw FxTrace.Exception
+                    .AsError(
+                        new ArgumentOutOfRangeException("timeout", timeout, SR.TimeoutOutOfRange0)
+                    );
             }
 
             this.ThrowPending();
@@ -96,9 +97,10 @@ namespace System.ServiceModel.Channels
         {
             if (timeout < TimeSpan.Zero)
             {
-                throw FxTrace.Exception.AsError(
-                    new ArgumentOutOfRangeException("timeout", timeout, SR.TimeoutOutOfRange0)
-                );
+                throw FxTrace.Exception
+                    .AsError(
+                        new ArgumentOutOfRangeException("timeout", timeout, SR.TimeoutOutOfRange0)
+                    );
             }
 
             this.ThrowPending();
@@ -114,9 +116,10 @@ namespace System.ServiceModel.Channels
         {
             if (timeout < TimeSpan.Zero)
             {
-                throw FxTrace.Exception.AsError(
-                    new ArgumentOutOfRangeException("timeout", timeout, SR.TimeoutOutOfRange0)
-                );
+                throw FxTrace.Exception
+                    .AsError(
+                        new ArgumentOutOfRangeException("timeout", timeout, SR.TimeoutOutOfRange0)
+                    );
             }
 
             this.ThrowPending();
@@ -131,9 +134,10 @@ namespace System.ServiceModel.Channels
         {
             if (timeout < TimeSpan.Zero)
             {
-                throw FxTrace.Exception.AsError(
-                    new ArgumentOutOfRangeException("timeout", timeout, SR.TimeoutOutOfRange0)
-                );
+                throw FxTrace.Exception
+                    .AsError(
+                        new ArgumentOutOfRangeException("timeout", timeout, SR.TimeoutOutOfRange0)
+                    );
             }
 
             this.ThrowPending();
@@ -149,9 +153,10 @@ namespace System.ServiceModel.Channels
         {
             if (timeout < TimeSpan.Zero)
             {
-                throw FxTrace.Exception.AsError(
-                    new ArgumentOutOfRangeException("timeout", timeout, SR.TimeoutOutOfRange0)
-                );
+                throw FxTrace.Exception
+                    .AsError(
+                        new ArgumentOutOfRangeException("timeout", timeout, SR.TimeoutOutOfRange0)
+                    );
             }
 
             this.ThrowPending();
@@ -166,9 +171,10 @@ namespace System.ServiceModel.Channels
         {
             if (timeout < TimeSpan.Zero)
             {
-                throw FxTrace.Exception.AsError(
-                    new ArgumentOutOfRangeException("timeout", timeout, SR.TimeoutOutOfRange0)
-                );
+                throw FxTrace.Exception
+                    .AsError(
+                        new ArgumentOutOfRangeException("timeout", timeout, SR.TimeoutOutOfRange0)
+                    );
             }
 
             this.ThrowPending();
@@ -202,9 +208,10 @@ namespace System.ServiceModel.Channels
             }
             else
             {
-                throw FxTrace.Exception.AsError(
-                    UdpReplyChannel.CreateReceiveRequestTimedOutException(channel, timeout)
-                );
+                throw FxTrace.Exception
+                    .AsError(
+                        UdpReplyChannel.CreateReceiveRequestTimedOutException(channel, timeout)
+                    );
             }
         }
 
@@ -312,12 +319,13 @@ namespace System.ServiceModel.Channels
             {
                 if (!this.channel.EndTryReceiveRequest(result, out this.requestContext))
                 {
-                    throw FxTrace.Exception.AsError(
-                        UdpReplyChannel.CreateReceiveRequestTimedOutException(
-                            this.channel,
-                            this.timeout
-                        )
-                    );
+                    throw FxTrace.Exception
+                        .AsError(
+                            UdpReplyChannel.CreateReceiveRequestTimedOutException(
+                                this.channel,
+                                this.timeout
+                            )
+                        );
                 }
             }
         }

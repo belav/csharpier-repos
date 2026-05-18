@@ -159,9 +159,8 @@ namespace Microsoft.CodeAnalysis.GenerateConstructorFromMembers
                 INamedTypeSymbol containingType,
                 ImmutableArray<IParameterSymbol> parameters
             ) =>
-                containingType.InstanceConstructors.FirstOrDefault(c =>
-                    MatchesConstructorBasedOnParameterTypes(c, parameters)
-                );
+                containingType.InstanceConstructors
+                    .FirstOrDefault(c => MatchesConstructorBasedOnParameterTypes(c, parameters));
 
             private static bool MatchesConstructorBasedOnParameterTypes(
                 IMethodSymbol constructor,

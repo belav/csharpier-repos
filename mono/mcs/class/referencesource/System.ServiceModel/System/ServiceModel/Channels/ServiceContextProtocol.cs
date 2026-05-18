@@ -35,10 +35,11 @@ namespace System.ServiceModel.Channels
             }
 
             // deserialize the callback context header, if present
-            int headerIndex = message.Headers.FindHeader(
-                CallbackContextMessageHeader.CallbackContextHeaderName,
-                CallbackContextMessageHeader.CallbackContextHeaderNamespace
-            );
+            int headerIndex = message.Headers
+                .FindHeader(
+                    CallbackContextMessageHeader.CallbackContextHeaderName,
+                    CallbackContextMessageHeader.CallbackContextHeaderNamespace
+                );
             if (headerIndex > 0)
             {
                 CallbackContextMessageProperty property =
@@ -89,14 +90,15 @@ namespace System.ServiceModel.Channels
             CallbackContextMessageProperty dummy;
             if (CallbackContextMessageProperty.TryGet(message, out dummy))
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperWarning(
-                    new InvalidOperationException(
-                        SR.GetString(
-                            SR.CallbackContextNotExpectedOnOutgoingMessageAtServer,
-                            message.Headers.Action
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperWarning(
+                        new InvalidOperationException(
+                            SR.GetString(
+                                SR.CallbackContextNotExpectedOnOutgoingMessageAtServer,
+                                message.Headers.Action
+                            )
                         )
-                    )
-                );
+                    );
             }
         }
 

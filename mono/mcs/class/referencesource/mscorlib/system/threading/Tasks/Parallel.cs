@@ -261,13 +261,18 @@ namespace System.Threading.Tasks
             {
                 forkJoinContextID = Interlocked.Increment(ref s_forkJoinContextID);
                 callerTask = Task.InternalCurrent;
-                TplEtwProvider.Log.ParallelInvokeBegin(
-                    (callerTask != null ? callerTask.m_taskScheduler.Id : TaskScheduler.Current.Id),
-                    (callerTask != null ? callerTask.Id : 0),
-                    forkJoinContextID,
-                    TplEtwProvider.ForkJoinOperationType.ParallelInvoke,
-                    actionsCopy.Length
-                );
+                TplEtwProvider.Log
+                    .ParallelInvokeBegin(
+                        (
+                            callerTask != null
+                                ? callerTask.m_taskScheduler.Id
+                                : TaskScheduler.Current.Id
+                        ),
+                        (callerTask != null ? callerTask.Id : 0),
+                        forkJoinContextID,
+                        TplEtwProvider.ForkJoinOperationType.ParallelInvoke,
+                        actionsCopy.Length
+                    );
             }
 #endif
 
@@ -403,13 +408,14 @@ namespace System.Threading.Tasks
                     // Launch all actions as tasks
                     for (int i = 1; i < tasks.Length; i++)
                     {
-                        tasks[i] = Task.Factory.StartNew(
-                            actionsCopy[i],
-                            parallelOptions.CancellationToken,
-                            TaskCreationOptions.None,
-                            InternalTaskOptions.None,
-                            parallelOptions.EffectiveTaskScheduler
-                        );
+                        tasks[i] = Task.Factory
+                            .StartNew(
+                                actionsCopy[i],
+                                parallelOptions.CancellationToken,
+                                TaskCreationOptions.None,
+                                InternalTaskOptions.None,
+                                parallelOptions.EffectiveTaskScheduler
+                            );
                     }
 
                     // Optimization: Use current thread to run something before we block waiting for all tasks.
@@ -457,15 +463,16 @@ namespace System.Threading.Tasks
                 // ETW event for Parallel Invoke End
                 if (TplEtwProvider.Log.IsEnabled())
                 {
-                    TplEtwProvider.Log.ParallelInvokeEnd(
-                        (
-                            callerTask != null
-                                ? callerTask.m_taskScheduler.Id
-                                : TaskScheduler.Current.Id
-                        ),
-                        (callerTask != null ? callerTask.Id : 0),
-                        forkJoinContextID
-                    );
+                    TplEtwProvider.Log
+                        .ParallelInvokeEnd(
+                            (
+                                callerTask != null
+                                    ? callerTask.m_taskScheduler.Id
+                                    : TaskScheduler.Current.Id
+                            ),
+                            (callerTask != null ? callerTask.Id : 0),
+                            forkJoinContextID
+                        );
                 }
 #endif
             }
@@ -1276,16 +1283,17 @@ namespace System.Threading.Tasks
             // if cancellation is enabled, we need to register a callback to stop the loop when it gets signaled
             if (parallelOptions.CancellationToken.CanBeCanceled)
             {
-                ctr = parallelOptions.CancellationToken.InternalRegisterWithoutEC(
-                    (o) =>
-                    {
-                        // Cause processing to stop
-                        sharedPStateFlags.Cancel();
-                        // Record our cancellation
-                        oce = new OperationCanceledException(parallelOptions.CancellationToken);
-                    },
-                    null
-                );
+                ctr = parallelOptions.CancellationToken
+                    .InternalRegisterWithoutEC(
+                        (o) =>
+                        {
+                            // Cause processing to stop
+                            sharedPStateFlags.Cancel();
+                            // Record our cancellation
+                            oce = new OperationCanceledException(parallelOptions.CancellationToken);
+                        },
+                        null
+                    );
             }
 
 #if !MONO
@@ -1297,18 +1305,19 @@ namespace System.Threading.Tasks
             {
                 forkJoinContextID = Interlocked.Increment(ref s_forkJoinContextID);
                 callingTask = Task.InternalCurrent;
-                TplEtwProvider.Log.ParallelLoopBegin(
-                    (
-                        callingTask != null
-                            ? callingTask.m_taskScheduler.Id
-                            : TaskScheduler.Current.Id
-                    ),
-                    (callingTask != null ? callingTask.Id : 0),
-                    forkJoinContextID,
-                    TplEtwProvider.ForkJoinOperationType.ParallelFor,
-                    fromInclusive,
-                    toExclusive
-                );
+                TplEtwProvider.Log
+                    .ParallelLoopBegin(
+                        (
+                            callingTask != null
+                                ? callingTask.m_taskScheduler.Id
+                                : TaskScheduler.Current.Id
+                        ),
+                        (callingTask != null ? callingTask.Id : 0),
+                        forkJoinContextID,
+                        TplEtwProvider.ForkJoinOperationType.ParallelFor,
+                        fromInclusive,
+                        toExclusive
+                    );
             }
 #endif
 
@@ -1363,15 +1372,16 @@ namespace System.Threading.Tasks
                         // ETW event for ParallelFor Worker Fork
                         if (TplEtwProvider.Log.IsEnabled())
                         {
-                            TplEtwProvider.Log.ParallelFork(
-                                (
-                                    currentWorkerTask != null
-                                        ? currentWorkerTask.m_taskScheduler.Id
-                                        : TaskScheduler.Current.Id
-                                ),
-                                (currentWorkerTask != null ? currentWorkerTask.Id : 0),
-                                forkJoinContextID
-                            );
+                            TplEtwProvider.Log
+                                .ParallelFork(
+                                    (
+                                        currentWorkerTask != null
+                                            ? currentWorkerTask.m_taskScheduler.Id
+                                            : TaskScheduler.Current.Id
+                                    ),
+                                    (currentWorkerTask != null ? currentWorkerTask.Id : 0),
+                                    forkJoinContextID
+                                );
                         }
 #endif
 
@@ -1500,15 +1510,16 @@ namespace System.Threading.Tasks
                             // ETW event for ParallelFor Worker Join
                             if (TplEtwProvider.Log.IsEnabled())
                             {
-                                TplEtwProvider.Log.ParallelJoin(
-                                    (
-                                        currentWorkerTask != null
-                                            ? currentWorkerTask.m_taskScheduler.Id
-                                            : TaskScheduler.Current.Id
-                                    ),
-                                    (currentWorkerTask != null ? currentWorkerTask.Id : 0),
-                                    forkJoinContextID
-                                );
+                                TplEtwProvider.Log
+                                    .ParallelJoin(
+                                        (
+                                            currentWorkerTask != null
+                                                ? currentWorkerTask.m_taskScheduler.Id
+                                                : TaskScheduler.Current.Id
+                                        ),
+                                        (currentWorkerTask != null ? currentWorkerTask.Id : 0),
+                                        forkJoinContextID
+                                    );
                             }
 #endif
                         }
@@ -1582,16 +1593,17 @@ namespace System.Threading.Tasks
                     else
                         nTotalIterations = -1; //PLS_STOPPED! We can't determine this if we were stopped..
 
-                    TplEtwProvider.Log.ParallelLoopEnd(
-                        (
-                            callingTask != null
-                                ? callingTask.m_taskScheduler.Id
-                                : TaskScheduler.Current.Id
-                        ),
-                        (callingTask != null ? callingTask.Id : 0),
-                        forkJoinContextID,
-                        nTotalIterations
-                    );
+                    TplEtwProvider.Log
+                        .ParallelLoopEnd(
+                            (
+                                callingTask != null
+                                    ? callingTask.m_taskScheduler.Id
+                                    : TaskScheduler.Current.Id
+                            ),
+                            (callingTask != null ? callingTask.Id : 0),
+                            forkJoinContextID,
+                            nTotalIterations
+                        );
                 }
 #endif
             }
@@ -1686,16 +1698,17 @@ namespace System.Threading.Tasks
             // if cancellation is enabled, we need to register a callback to stop the loop when it gets signaled
             if (parallelOptions.CancellationToken.CanBeCanceled)
             {
-                ctr = parallelOptions.CancellationToken.InternalRegisterWithoutEC(
-                    (o) =>
-                    {
-                        // Cause processing to stop
-                        sharedPStateFlags.Cancel();
-                        // Record our cancellation
-                        oce = new OperationCanceledException(parallelOptions.CancellationToken);
-                    },
-                    null
-                );
+                ctr = parallelOptions.CancellationToken
+                    .InternalRegisterWithoutEC(
+                        (o) =>
+                        {
+                            // Cause processing to stop
+                            sharedPStateFlags.Cancel();
+                            // Record our cancellation
+                            oce = new OperationCanceledException(parallelOptions.CancellationToken);
+                        },
+                        null
+                    );
             }
 
 #if !MONO
@@ -1707,14 +1720,19 @@ namespace System.Threading.Tasks
             {
                 forkJoinContextID = Interlocked.Increment(ref s_forkJoinContextID);
                 callerTask = Task.InternalCurrent;
-                TplEtwProvider.Log.ParallelLoopBegin(
-                    (callerTask != null ? callerTask.m_taskScheduler.Id : TaskScheduler.Current.Id),
-                    (callerTask != null ? callerTask.Id : 0),
-                    forkJoinContextID,
-                    TplEtwProvider.ForkJoinOperationType.ParallelFor,
-                    fromInclusive,
-                    toExclusive
-                );
+                TplEtwProvider.Log
+                    .ParallelLoopBegin(
+                        (
+                            callerTask != null
+                                ? callerTask.m_taskScheduler.Id
+                                : TaskScheduler.Current.Id
+                        ),
+                        (callerTask != null ? callerTask.Id : 0),
+                        forkJoinContextID,
+                        TplEtwProvider.ForkJoinOperationType.ParallelFor,
+                        fromInclusive,
+                        toExclusive
+                    );
             }
 #endif
 
@@ -1769,15 +1787,16 @@ namespace System.Threading.Tasks
                         // ETW event for ParallelFor Worker Fork
                         if (TplEtwProvider.Log.IsEnabled())
                         {
-                            TplEtwProvider.Log.ParallelFork(
-                                (
-                                    currentWorkerTask != null
-                                        ? currentWorkerTask.m_taskScheduler.Id
-                                        : TaskScheduler.Current.Id
-                                ),
-                                (currentWorkerTask != null ? currentWorkerTask.Id : 0),
-                                forkJoinContextID
-                            );
+                            TplEtwProvider.Log
+                                .ParallelFork(
+                                    (
+                                        currentWorkerTask != null
+                                            ? currentWorkerTask.m_taskScheduler.Id
+                                            : TaskScheduler.Current.Id
+                                    ),
+                                    (currentWorkerTask != null ? currentWorkerTask.Id : 0),
+                                    forkJoinContextID
+                                );
                         }
 #endif
 
@@ -1908,15 +1927,16 @@ namespace System.Threading.Tasks
                             // ETW event for ParallelFor Worker Join
                             if (TplEtwProvider.Log.IsEnabled())
                             {
-                                TplEtwProvider.Log.ParallelJoin(
-                                    (
-                                        currentWorkerTask != null
-                                            ? currentWorkerTask.m_taskScheduler.Id
-                                            : TaskScheduler.Current.Id
-                                    ),
-                                    (currentWorkerTask != null ? currentWorkerTask.Id : 0),
-                                    forkJoinContextID
-                                );
+                                TplEtwProvider.Log
+                                    .ParallelJoin(
+                                        (
+                                            currentWorkerTask != null
+                                                ? currentWorkerTask.m_taskScheduler.Id
+                                                : TaskScheduler.Current.Id
+                                        ),
+                                        (currentWorkerTask != null ? currentWorkerTask.Id : 0),
+                                        forkJoinContextID
+                                    );
                             }
 #endif
                         }
@@ -1990,16 +2010,17 @@ namespace System.Threading.Tasks
                     else
                         nTotalIterations = -1; //PLS_STOPPED! We can't determine this if we were stopped..
 
-                    TplEtwProvider.Log.ParallelLoopEnd(
-                        (
-                            callerTask != null
-                                ? callerTask.m_taskScheduler.Id
-                                : TaskScheduler.Current.Id
-                        ),
-                        (callerTask != null ? callerTask.Id : 0),
-                        forkJoinContextID,
-                        nTotalIterations
-                    );
+                    TplEtwProvider.Log
+                        .ParallelLoopEnd(
+                            (
+                                callerTask != null
+                                    ? callerTask.m_taskScheduler.Id
+                                    : TaskScheduler.Current.Id
+                            ),
+                            (callerTask != null ? callerTask.Id : 0),
+                            forkJoinContextID,
+                            nTotalIterations
+                        );
                 }
 #endif
             }
@@ -3989,14 +4010,19 @@ namespace System.Threading.Tasks
             {
                 forkJoinContextID = Interlocked.Increment(ref s_forkJoinContextID);
                 callerTask = Task.InternalCurrent;
-                TplEtwProvider.Log.ParallelLoopBegin(
-                    (callerTask != null ? callerTask.m_taskScheduler.Id : TaskScheduler.Current.Id),
-                    (callerTask != null ? callerTask.Id : 0),
-                    forkJoinContextID,
-                    TplEtwProvider.ForkJoinOperationType.ParallelForEach,
-                    0,
-                    0
-                );
+                TplEtwProvider.Log
+                    .ParallelLoopBegin(
+                        (
+                            callerTask != null
+                                ? callerTask.m_taskScheduler.Id
+                                : TaskScheduler.Current.Id
+                        ),
+                        (callerTask != null ? callerTask.Id : 0),
+                        forkJoinContextID,
+                        TplEtwProvider.ForkJoinOperationType.ParallelForEach,
+                        0,
+                        0
+                    );
             }
 #endif
 
@@ -4016,16 +4042,17 @@ namespace System.Threading.Tasks
             // if cancellation is enabled, we need to register a callback to stop the loop when it gets signaled
             if (parallelOptions.CancellationToken.CanBeCanceled)
             {
-                ctr = parallelOptions.CancellationToken.InternalRegisterWithoutEC(
-                    (o) =>
-                    {
-                        // Cause processing to stop
-                        sharedPStateFlags.Cancel();
-                        // Record our cancellation
-                        oce = new OperationCanceledException(parallelOptions.CancellationToken);
-                    },
-                    null
-                );
+                ctr = parallelOptions.CancellationToken
+                    .InternalRegisterWithoutEC(
+                        (o) =>
+                        {
+                            // Cause processing to stop
+                            sharedPStateFlags.Cancel();
+                            // Record our cancellation
+                            oce = new OperationCanceledException(parallelOptions.CancellationToken);
+                        },
+                        null
+                    );
             }
 
             // Get our dynamic partitioner -- depends on whether source is castable to OrderablePartitioner
@@ -4064,15 +4091,16 @@ namespace System.Threading.Tasks
                 // ETW event for ParallelForEach Worker Fork
                 if (TplEtwProvider.Log.IsEnabled())
                 {
-                    TplEtwProvider.Log.ParallelFork(
-                        (
-                            currentWorkerTask != null
-                                ? currentWorkerTask.m_taskScheduler.Id
-                                : TaskScheduler.Current.Id
-                        ),
-                        (currentWorkerTask != null ? currentWorkerTask.Id : 0),
-                        forkJoinContextID
-                    );
+                    TplEtwProvider.Log
+                        .ParallelFork(
+                            (
+                                currentWorkerTask != null
+                                    ? currentWorkerTask.m_taskScheduler.Id
+                                    : TaskScheduler.Current.Id
+                            ),
+                            (currentWorkerTask != null ? currentWorkerTask.Id : 0),
+                            forkJoinContextID
+                        );
                 }
 #endif
 
@@ -4244,15 +4272,16 @@ namespace System.Threading.Tasks
                     // ETW event for ParallelFor Worker Join
                     if (TplEtwProvider.Log.IsEnabled())
                     {
-                        TplEtwProvider.Log.ParallelJoin(
-                            (
-                                currentWorkerTask != null
-                                    ? currentWorkerTask.m_taskScheduler.Id
-                                    : TaskScheduler.Current.Id
-                            ),
-                            (currentWorkerTask != null ? currentWorkerTask.Id : 0),
-                            forkJoinContextID
-                        );
+                        TplEtwProvider.Log
+                            .ParallelJoin(
+                                (
+                                    currentWorkerTask != null
+                                        ? currentWorkerTask.m_taskScheduler.Id
+                                        : TaskScheduler.Current.Id
+                                ),
+                                (currentWorkerTask != null ? currentWorkerTask.Id : 0),
+                                forkJoinContextID
+                            );
                     }
 #endif
                 }
@@ -4344,16 +4373,17 @@ namespace System.Threading.Tasks
                 // ETW event for Parallel For End
                 if (TplEtwProvider.Log.IsEnabled())
                 {
-                    TplEtwProvider.Log.ParallelLoopEnd(
-                        (
-                            callerTask != null
-                                ? callerTask.m_taskScheduler.Id
-                                : TaskScheduler.Current.Id
-                        ),
-                        (callerTask != null ? callerTask.Id : 0),
-                        forkJoinContextID,
-                        0
-                    );
+                    TplEtwProvider.Log
+                        .ParallelLoopEnd(
+                            (
+                                callerTask != null
+                                    ? callerTask.m_taskScheduler.Id
+                                    : TaskScheduler.Current.Id
+                            ),
+                            (callerTask != null ? callerTask.Id : 0),
+                            forkJoinContextID,
+                            0
+                        );
                 }
 #endif
             }

@@ -18,8 +18,8 @@ namespace Microsoft.Interop
             this IncrementalGeneratorInitializationContext context
         )
         {
-            var isModuleSkipLocalsInit = context
-                .SyntaxProvider.ForAttributeWithMetadataName(
+            var isModuleSkipLocalsInit = context.SyntaxProvider
+                .ForAttributeWithMetadataName(
                     TypeNames.System_Runtime_CompilerServices_SkipLocalsInitAttribute,
                     (node, ct) => node is ICompilationUnitSyntax,
                     // If SkipLocalsInit is applied at the top level, it is either applied to the module
@@ -35,20 +35,22 @@ namespace Microsoft.Interop
                             : EnvironmentFlags.None
                 );
 
-            var disabledRuntimeMarshalling = context
-                .SyntaxProvider.ForAttributeWithMetadataName(
+            var disabledRuntimeMarshalling = context.SyntaxProvider
+                .ForAttributeWithMetadataName(
                     TypeNames.System_Runtime_CompilerServices_DisableRuntimeMarshallingAttribute,
                     // DisableRuntimeMarshalling is only available at the top level.
                     (node, ct) => true,
                     // Only allow DisableRuntimeMarshalling attributes from the attribute type in the core assembly.
                     // Otherwise the runtime isn't going to respect it and invalid behavior can happen.
                     (context, ct) =>
-                        SymbolEqualityComparer.Default.Equals(
-                            context.Attributes[0].AttributeClass.ContainingAssembly,
-                            context
-                                .SemanticModel.Compilation.GetSpecialType(SpecialType.System_Object)
-                                .ContainingAssembly
-                        )
+                        SymbolEqualityComparer.Default
+                            .Equals(
+                                context.Attributes[0].AttributeClass.ContainingAssembly,
+                                context.SemanticModel
+                                    .Compilation
+                                    .GetSpecialType(SpecialType.System_Object)
+                                    .ContainingAssembly
+                            )
                 )
                 .Where(valid => valid)
                 .Collect()
@@ -68,8 +70,8 @@ namespace Microsoft.Interop
             this IncrementalGeneratorInitializationContext context
         )
         {
-            return context
-                .CompilationProvider.Combine(context.CreateEnvironmentFlagsProvider())
+            return context.CompilationProvider
+                .Combine(context.CreateEnvironmentFlagsProvider())
                 .Select((data, ct) => new StubEnvironment(data.Left, data.Right));
         }
 

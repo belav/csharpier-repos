@@ -190,11 +190,12 @@ namespace System.Activities.Statements
                 context.GetExtension<CompensationExtension>();
             if (compensationExtension == null)
             {
-                throw FxTrace.Exception.AsError(
-                    new InvalidOperationException(
-                        SR.CompensateWithoutCompensableActivity(this.DisplayName)
-                    )
-                );
+                throw FxTrace.Exception
+                    .AsError(
+                        new InvalidOperationException(
+                            SR.CompensateWithoutCompensableActivity(this.DisplayName)
+                        )
+                    );
             }
 
             if (Target.IsEmpty)
@@ -216,11 +217,12 @@ namespace System.Activities.Statements
                 }
                 else
                 {
-                    throw FxTrace.Exception.AsError(
-                        new InvalidOperationException(
-                            SR.InvalidCompensateActivityUsage(this.DisplayName)
-                        )
-                    );
+                    throw FxTrace.Exception
+                        .AsError(
+                            new InvalidOperationException(
+                                SR.InvalidCompensateActivityUsage(this.DisplayName)
+                            )
+                        );
                 }
             }
             else
@@ -233,10 +235,8 @@ namespace System.Activities.Statements
 
                 if (compensationToken == null)
                 {
-                    throw FxTrace.Exception.Argument(
-                        "Target",
-                        SR.InvalidCompensationToken(this.DisplayName)
-                    );
+                    throw FxTrace.Exception
+                        .Argument("Target", SR.InvalidCompensationToken(this.DisplayName));
                 }
 
                 if (compensationToken.CompensateCalled)
@@ -247,11 +247,12 @@ namespace System.Activities.Statements
 
                 if (tokenData == null || tokenData.CompensationState != CompensationState.Completed)
                 {
-                    throw FxTrace.Exception.AsError(
-                        new InvalidOperationException(
-                            SR.CompensableActivityAlreadyConfirmedOrCompensated
-                        )
-                    );
+                    throw FxTrace.Exception
+                        .AsError(
+                            new InvalidOperationException(
+                                SR.CompensableActivityAlreadyConfirmedOrCompensated
+                            )
+                        );
                 }
 
                 // A valid in-arg was passed...

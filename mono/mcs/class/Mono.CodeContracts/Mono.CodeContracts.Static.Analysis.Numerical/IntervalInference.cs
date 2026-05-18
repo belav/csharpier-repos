@@ -292,10 +292,11 @@ namespace Mono.CodeContracts.Static.Analysis.Numerical
                 if (!k.IsNormal())
                     return false.Without(out refined);
 
-                var interval = env.Context.For(
-                    Rational.MinusInfinity,
-                    k.UpperBound.IsInteger ? k.UpperBound - 1L : k.UpperBound
-                );
+                var interval = env.Context
+                    .For(
+                        Rational.MinusInfinity,
+                        k.UpperBound.IsInteger ? k.UpperBound - 1L : k.UpperBound
+                    );
 
                 TInterval leftIntv;
                 if (env.TryGetValue(left, out leftIntv))
@@ -345,10 +346,11 @@ namespace Mono.CodeContracts.Static.Analysis.Numerical
                     return false.Without(out refined);
 
                 // [k, +oo] or (k, +oo]
-                var interval = env.Context.For(
-                    k.LowerBound.IsInteger ? k.LowerBound + successor : k.LowerBound,
-                    Rational.PlusInfinity
-                );
+                var interval = env.Context
+                    .For(
+                        k.LowerBound.IsInteger ? k.LowerBound + successor : k.LowerBound,
+                        Rational.PlusInfinity
+                    );
 
                 TInterval rightIntv;
                 if (env.TryGetValue(right, out rightIntv))

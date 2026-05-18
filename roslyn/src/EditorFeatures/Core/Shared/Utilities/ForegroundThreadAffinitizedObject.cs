@@ -95,18 +95,18 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Utilities
             }
             else
             {
-                return Task.Factory.SafeStartNewFromAsync(
-                    async () =>
-                    {
-                        await ThreadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(
-                            cancellationToken
-                        );
+                return Task.Factory
+                    .SafeStartNewFromAsync(
+                        async () =>
+                        {
+                            await ThreadingContext.JoinableTaskFactory
+                                .SwitchToMainThreadAsync(cancellationToken);
 
-                        action();
-                    },
-                    cancellationToken,
-                    TaskScheduler.Default
-                );
+                            action();
+                        },
+                        cancellationToken,
+                        TaskScheduler.Default
+                    );
             }
         }
 

@@ -62,17 +62,18 @@ namespace MonoTests.System.Data
             Assert.AreEqual(6, dt.Rows.Count, "DRWC3");
             dt.Rows.Remove(dt.Rows[0]);
             Assert.AreEqual(5, dt.Rows.Count, "DRWC4");
-            dt.Rows.Add(
-                new object[]
-                {
-                    1,
-                    "1-String1",
-                    "1-String2",
-                    new DateTime(2005, 1, 1, 0, 0, 0, 0),
-                    1.534,
-                    true,
-                }
-            );
+            dt.Rows
+                .Add(
+                    new object[]
+                    {
+                        1,
+                        "1-String1",
+                        "1-String2",
+                        new DateTime(2005, 1, 1, 0, 0, 0, 0),
+                        1.534,
+                        true,
+                    }
+                );
             Assert.AreEqual(6, dt.Rows.Count, "DRWC5");
         }
 
@@ -163,17 +164,18 @@ namespace MonoTests.System.Data
         {
             DataTable dt = DataProvider.CreateParentDataTable();
             dt.Rows.Clear();
-            dt.Rows.Add(
-                new object[]
-                {
-                    1,
-                    "1-String1",
-                    "1-String2",
-                    new DateTime(2005, 1, 1, 0, 0, 0, 0),
-                    1.534,
-                    true,
-                }
-            );
+            dt.Rows
+                .Add(
+                    new object[]
+                    {
+                        1,
+                        "1-String1",
+                        "1-String2",
+                        new DateTime(2005, 1, 1, 0, 0, 0, 0),
+                        1.534,
+                        true,
+                    }
+                );
             Assert.AreEqual(1, dt.Rows.Count, "DRWC15");
             Assert.AreEqual(1, dt.Rows[0]["ParentId"], "DRWC16");
             Assert.AreEqual("1-String1", dt.Rows[0]["String1"], "DRWC17");
@@ -192,16 +194,17 @@ namespace MonoTests.System.Data
         {
             DataTable dt = DataProvider.CreateParentDataTable();
             int count = dt.Rows.Count;
-            dt.Rows.Add(
-                new object[]
-                {
-                    8,
-                    "1-String1",
-                    "1-String2",
-                    new DateTime(2005, 1, 1, 0, 0, 0, 0),
-                    1.534,
-                }
-            );
+            dt.Rows
+                .Add(
+                    new object[]
+                    {
+                        8,
+                        "1-String1",
+                        "1-String2",
+                        new DateTime(2005, 1, 1, 0, 0, 0, 0),
+                        1.534,
+                    }
+                );
             Assert.AreEqual(count + 1, dt.Rows.Count, "DRWC14");
         }
 

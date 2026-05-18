@@ -157,15 +157,16 @@ namespace System.ServiceModel
             this.resolverSettings = new PeerResolverSettings();
             if (element == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ConfigurationErrorsException(
-                        SR.GetString(
-                            SR.ConfigInvalidBindingConfigurationName,
-                            configurationName,
-                            ConfigurationStrings.NetPeerTcpBindingCollectionElementName
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        new ConfigurationErrorsException(
+                            SR.GetString(
+                                SR.ConfigInvalidBindingConfigurationName,
+                                configurationName,
+                                ConfigurationStrings.NetPeerTcpBindingCollectionElementName
+                            )
                         )
-                    )
-                );
+                    );
             }
             else
             {
@@ -190,9 +191,12 @@ namespace System.ServiceModel
                                 new PnrpPeerResolverBindingElement(this.Resolver.ReferralPolicy)
                             );
                         else
-                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                                new InvalidOperationException(SR.GetString(SR.PeerResolverRequired))
-                            );
+                            throw DiagnosticUtility.ExceptionUtility
+                                .ThrowHelperError(
+                                    new InvalidOperationException(
+                                        SR.GetString(SR.PeerResolverRequired)
+                                    )
+                                );
                     }
                     break;
                 case PeerResolverMode.Custom:
@@ -202,11 +206,12 @@ namespace System.ServiceModel
                                 new PeerCustomResolverBindingElement(this.Resolver.Custom)
                             );
                         else
-                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                                new InvalidOperationException(
-                                    SR.GetString(SR.PeerResolverSettingsInvalid)
-                                )
-                            );
+                            throw DiagnosticUtility.ExceptionUtility
+                                .ThrowHelperError(
+                                    new InvalidOperationException(
+                                        SR.GetString(SR.PeerResolverSettingsInvalid)
+                                    )
+                                );
                     }
                     break;
                 case PeerResolverMode.Pnrp:
@@ -216,15 +221,19 @@ namespace System.ServiceModel
                                 new PnrpPeerResolverBindingElement(this.Resolver.ReferralPolicy)
                             );
                         else
-                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                                new InvalidOperationException(SR.GetString(SR.PeerResolverRequired))
-                            );
+                            throw DiagnosticUtility.ExceptionUtility
+                                .ThrowHelperError(
+                                    new InvalidOperationException(
+                                        SR.GetString(SR.PeerResolverRequired)
+                                    )
+                                );
                     }
                     break;
                 default:
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(SR.GetString(SR.PeerResolverRequired))
-                    );
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(SR.GetString(SR.PeerResolverRequired))
+                        );
             }
 
             bindingElements.Add(encoding);

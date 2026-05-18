@@ -154,10 +154,8 @@ namespace Microsoft.Interop.Analyzers
                 {
                     if (enableUnsafe)
                     {
-                        var selectedOptions = fix.SelectedOptions.Add(
-                            Option.AllowUnsafe,
-                            new Option.Bool(true)
-                        );
+                        var selectedOptions = fix.SelectedOptions
+                            .Add(Option.AllowUnsafe, new Option.Bool(true));
 
                         context.RegisterCodeFix(
                             CodeAction.Create(
@@ -244,10 +242,11 @@ namespace Microsoft.Interop.Analyzers
                         foreach (var diagnostic in diagnosticsInScope)
                         {
                             bool mayRequireAdditionalWork =
-                                diagnostic.Properties.TryGetValue(
-                                    Option.MayRequireAdditionalWork,
-                                    out string mayRequireAdditionalWorkString
-                                )
+                                diagnostic.Properties
+                                    .TryGetValue(
+                                        Option.MayRequireAdditionalWork,
+                                        out string mayRequireAdditionalWorkString
+                                    )
                                 && bool.TryParse(
                                     mayRequireAdditionalWorkString,
                                     out bool mayRequireAdditionalWorkValue
@@ -260,14 +259,14 @@ namespace Microsoft.Interop.Analyzers
                                 // that was able to warn the user that additional work may be required.
                                 continue;
                             }
-                            DocumentId documentId = solutionEditor.OriginalSolution.GetDocumentId(
-                                diagnostic.Location.SourceTree
-                            )!;
+                            DocumentId documentId = solutionEditor.OriginalSolution
+                                .GetDocumentId(diagnostic.Location.SourceTree)!;
                             DocumentEditor editor = await solutionEditor
                                 .GetDocumentEditorAsync(documentId, ct)
                                 .ConfigureAwait(false);
-                            SyntaxNode root = await diagnostic
-                                .Location.SourceTree.GetRootAsync(ct)
+                            SyntaxNode root = await diagnostic.Location
+                                .SourceTree
+                                .GetRootAsync(ct)
                                 .ConfigureAwait(false);
 
                             SyntaxNode node = root.FindNode(diagnostic.Location.SourceSpan);

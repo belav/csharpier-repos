@@ -39,10 +39,8 @@ namespace Microsoft.Build.Tasks.Xaml
                     KeyValuePair<string, ITaskItem> markupItemByTypeName in markupItemsByTypeName
                 )
                 {
-                    this.markupItemsByTypeName.Add(
-                        markupItemByTypeName.Key,
-                        markupItemByTypeName.Value
-                    );
+                    this.markupItemsByTypeName
+                        .Add(markupItemByTypeName.Key, markupItemByTypeName.Value);
                 }
             }
         }

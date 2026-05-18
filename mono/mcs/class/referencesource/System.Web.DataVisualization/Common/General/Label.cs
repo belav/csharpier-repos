@@ -1152,8 +1152,9 @@ namespace System.Web.UI.DataVisualization.Charting
                 */
 
                 // Gets axis labels style
-                CircularAxisLabelsStyle labelsStyle =
-                    this._axis.ChartArea.GetCircularAxisLabelsStyle();
+                CircularAxisLabelsStyle labelsStyle = this._axis
+                    .ChartArea
+                    .GetCircularAxisLabelsStyle();
 
                 // Get list of circular axes with labels
                 ArrayList circularAxes = this._axis.ChartArea.GetCircularAxisList();
@@ -1305,12 +1306,15 @@ namespace System.Web.UI.DataVisualization.Charting
                                 path.AddPolygon(points);
                                 path.CloseAllFigures();
                                 path.Transform(graph.Transform);
-                                this._axis.Common.HotRegionsList.AddHotRegion(
-                                    path,
-                                    false,
-                                    ChartElementType.AxisLabels,
-                                    circAxis.Title
-                                );
+                                this._axis
+                                    .Common
+                                    .HotRegionsList
+                                    .AddHotRegion(
+                                        path,
+                                        false,
+                                        ChartElementType.AxisLabels,
+                                        circAxis.Title
+                                    );
                             }
                         }
 
@@ -1555,12 +1559,13 @@ namespace System.Web.UI.DataVisualization.Charting
                                 Series axisSeries = null;
                                 if (_axis.axisType == AxisName.X || _axis.axisType == AxisName.X2)
                                 {
-                                    List<string> seriesArray = _axis.ChartArea.GetXAxesSeries(
-                                        (_axis.axisType == AxisName.X)
-                                            ? AxisType.Primary
-                                            : AxisType.Secondary,
-                                        _axis.SubAxisName
-                                    );
+                                    List<string> seriesArray = _axis.ChartArea
+                                        .GetXAxesSeries(
+                                            (_axis.axisType == AxisName.X)
+                                                ? AxisType.Primary
+                                                : AxisType.Secondary,
+                                            _axis.SubAxisName
+                                        );
                                     if (seriesArray.Count > 0)
                                     {
                                         axisSeries = _axis.Common.DataManager.Series[
@@ -1609,8 +1614,8 @@ namespace System.Web.UI.DataVisualization.Charting
                         // on the label middle point position.
                         if (_axis.ScaleSegments.Count > 0)
                         {
-                            AxisScaleSegment scaleSegment =
-                                _axis.ScaleSegments.FindScaleSegmentForAxisValue(middlePoint);
+                            AxisScaleSegment scaleSegment = _axis.ScaleSegments
+                                .FindScaleSegmentForAxisValue(middlePoint);
                             _axis.ScaleSegments.AllowOutOfScaleValues = true;
                             _axis.ScaleSegments.EnforceSegment(scaleSegment);
                         }
@@ -2093,33 +2098,27 @@ namespace System.Web.UI.DataVisualization.Charting
                 bool adjustForWallWidth = false;
                 if (
                     this._axis.AxisPosition == AxisPosition.Top
-                    && !this._axis.ChartArea.ShouldDrawOnSurface(
-                        SurfaceNames.Top,
-                        backElements,
-                        false
-                    )
+                    && !this._axis
+                        .ChartArea
+                        .ShouldDrawOnSurface(SurfaceNames.Top, backElements, false)
                 )
                 {
                     adjustForWallWidth = true;
                 }
                 if (
                     this._axis.AxisPosition == AxisPosition.Left
-                    && !this._axis.ChartArea.ShouldDrawOnSurface(
-                        SurfaceNames.Left,
-                        backElements,
-                        false
-                    )
+                    && !this._axis
+                        .ChartArea
+                        .ShouldDrawOnSurface(SurfaceNames.Left, backElements, false)
                 )
                 {
                     adjustForWallWidth = true;
                 }
                 if (
                     this._axis.AxisPosition == AxisPosition.Right
-                    && !this._axis.ChartArea.ShouldDrawOnSurface(
-                        SurfaceNames.Right,
-                        backElements,
-                        false
-                    )
+                    && !this._axis
+                        .ChartArea
+                        .ShouldDrawOnSurface(SurfaceNames.Right, backElements, false)
                 )
                 {
                     adjustForWallWidth = true;

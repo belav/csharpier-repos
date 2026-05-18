@@ -37,9 +37,10 @@ namespace System.Xml.Serialization
         )]
         internal static bool IsValidLanguageIndependentIdentifier(string ident)
         {
-            return System.CodeDom.Compiler.CodeGenerator.IsValidLanguageIndependentIdentifier(
-                ident
-            );
+            return System.CodeDom
+                .Compiler
+                .CodeGenerator
+                .IsValidLanguageIndependentIdentifier(ident);
         }
 
         [SuppressMessage(

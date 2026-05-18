@@ -48,9 +48,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
             );
 
         private static readonly SymbolDisplayFormat MinimalParameterTypeFormat =
-            SymbolDisplayFormat.MinimallyQualifiedFormat.AddMiscellaneousOptions(
-                SymbolDisplayMiscellaneousOptions.ExpandValueTuple
-            );
+            SymbolDisplayFormat.MinimallyQualifiedFormat
+                .AddMiscellaneousOptions(SymbolDisplayMiscellaneousOptions.ExpandValueTuple);
 
         private Action<SyntaxNode?>? _testSpeculativeNodeCallback;
 
@@ -140,9 +139,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
 
             // To get a Speculative SemanticModel (which is much faster), we need to
             // walk up to the node the DocumentationTrivia is attached to.
-            var parentNode = token
-                .Parent?.FirstAncestorOrSelf<DocumentationCommentTriviaSyntax>()
-                ?.ParentTrivia.Token.Parent;
+            var parentNode = token.Parent
+                ?.FirstAncestorOrSelf<DocumentationCommentTriviaSyntax>()
+                ?.ParentTrivia
+                .Token
+                .Parent;
             _testSpeculativeNodeCallback?.Invoke(parentNode);
             if (parentNode == null)
                 return default;
@@ -444,11 +445,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
                                 }
                             );
                             builder.Append(
-                                p.Type.ToMinimalDisplayString(
-                                    semanticModel,
-                                    position,
-                                    MinimalParameterTypeFormat
-                                )
+                                p.Type
+                                    .ToMinimalDisplayString(
+                                        semanticModel,
+                                        position,
+                                        MinimalParameterTypeFormat
+                                    )
                             );
                         }
                     );

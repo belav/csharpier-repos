@@ -82,15 +82,14 @@ namespace System.Threading
         internal static object GetOrCreateThreadLocalCompletionCountObject() =>
             ThreadPool.UseWindowsThreadPool
                 ? WindowsThreadPool.GetOrCreateThreadLocalCompletionCountObject()
-                : PortableThreadPool.ThreadPoolInstance.GetOrCreateThreadLocalCompletionCountObject();
+                : PortableThreadPool.ThreadPoolInstance
+                    .GetOrCreateThreadLocalCompletionCountObject();
 
         public static bool SetMaxThreads(int workerThreads, int completionPortThreads) =>
             ThreadPool.UseWindowsThreadPool
                 ? WindowsThreadPool.SetMaxThreads(workerThreads, completionPortThreads)
-                : PortableThreadPool.ThreadPoolInstance.SetMaxThreads(
-                    workerThreads,
-                    completionPortThreads
-                );
+                : PortableThreadPool.ThreadPoolInstance
+                    .SetMaxThreads(workerThreads, completionPortThreads);
 
         public static void GetMaxThreads(out int workerThreads, out int completionPortThreads)
         {
@@ -100,20 +99,16 @@ namespace System.Threading
             }
             else
             {
-                PortableThreadPool.ThreadPoolInstance.GetMaxThreads(
-                    out workerThreads,
-                    out completionPortThreads
-                );
+                PortableThreadPool.ThreadPoolInstance
+                    .GetMaxThreads(out workerThreads, out completionPortThreads);
             }
         }
 
         public static bool SetMinThreads(int workerThreads, int completionPortThreads) =>
             ThreadPool.UseWindowsThreadPool
                 ? WindowsThreadPool.SetMinThreads(workerThreads, completionPortThreads)
-                : PortableThreadPool.ThreadPoolInstance.SetMinThreads(
-                    workerThreads,
-                    completionPortThreads
-                );
+                : PortableThreadPool.ThreadPoolInstance
+                    .SetMinThreads(workerThreads, completionPortThreads);
 
         public static void GetMinThreads(out int workerThreads, out int completionPortThreads)
         {
@@ -123,10 +118,8 @@ namespace System.Threading
             }
             else
             {
-                PortableThreadPool.ThreadPoolInstance.GetMinThreads(
-                    out workerThreads,
-                    out completionPortThreads
-                );
+                PortableThreadPool.ThreadPoolInstance
+                    .GetMinThreads(out workerThreads, out completionPortThreads);
             }
         }
 
@@ -138,10 +131,8 @@ namespace System.Threading
             }
             else
             {
-                PortableThreadPool.ThreadPoolInstance.GetAvailableThreads(
-                    out workerThreads,
-                    out completionPortThreads
-                );
+                PortableThreadPool.ThreadPoolInstance
+                    .GetAvailableThreads(out workerThreads, out completionPortThreads);
             }
         }
 
@@ -168,10 +159,8 @@ namespace System.Threading
                     threadLocalCompletionCountObject,
                     currentTimeMs
                 )
-                : PortableThreadPool.ThreadPoolInstance.NotifyWorkItemComplete(
-                    threadLocalCompletionCountObject,
-                    currentTimeMs
-                );
+                : PortableThreadPool.ThreadPoolInstance
+                    .NotifyWorkItemComplete(threadLocalCompletionCountObject, currentTimeMs);
 
         internal static bool NotifyThreadBlocked() =>
             ThreadPool.UseWindowsThreadPool

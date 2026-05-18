@@ -30,8 +30,8 @@ namespace Microsoft.Extensions.DependencyModel.Tests
         public AndWhichConstraint<JsonAssertions, JToken> HaveProperty(string expected)
         {
             var token = Subject[expected];
-            Execute
-                .Assertion.ForCondition(token != null)
+            Execute.Assertion
+                .ForCondition(token != null)
                 .FailWith("Expected {0} to have property '{1}'", Subject, expected);
 
             return new AndWhichConstraint<JsonAssertions, JToken>(this, token);
@@ -40,8 +40,8 @@ namespace Microsoft.Extensions.DependencyModel.Tests
         public AndConstraint<JsonAssertions> NotHaveProperty(string expected)
         {
             var token = Subject[expected];
-            Execute
-                .Assertion.ForCondition(token == null)
+            Execute.Assertion
+                .ForCondition(token == null)
                 .FailWith("Expected {0} to have property '{1}'", Subject, expected);
 
             return new AndConstraint<JsonAssertions>(this);

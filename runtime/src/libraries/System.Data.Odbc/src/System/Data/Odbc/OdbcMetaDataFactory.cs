@@ -163,16 +163,14 @@ namespace System.Data.Odbc
 
             // replace the original table with the updated one
             metaDataCollectionsTable.AcceptChanges();
-            CollectionDataSet.Tables.Remove(
-                CollectionDataSet.Tables[DbMetaDataCollectionNames.MetaDataCollections]!
-            );
+            CollectionDataSet.Tables
+                .Remove(CollectionDataSet.Tables[DbMetaDataCollectionNames.MetaDataCollections]!);
             CollectionDataSet.Tables.Add(metaDataCollectionsTable);
 
             if (restrictionsTable != null)
             {
-                CollectionDataSet.Tables.Remove(
-                    CollectionDataSet.Tables[DbMetaDataCollectionNames.Restrictions]!
-                );
+                CollectionDataSet.Tables
+                    .Remove(CollectionDataSet.Tables[DbMetaDataCollectionNames.Restrictions]!);
                 CollectionDataSet.Tables.Add(restrictionsTable);
             }
         }
@@ -764,8 +762,7 @@ namespace System.Data.Odbc
                 || (retcode == ODBC32.SQLRETURN.SUCCESS_WITH_INFO)
             )
             {
-                Common.SupportedJoinOperators supportedJoinOperators = Common
-                    .SupportedJoinOperators
+                Common.SupportedJoinOperators supportedJoinOperators = Common.SupportedJoinOperators
                     .None;
                 if ((int32Value & (int)ODBC32.SQL_OJ_CAPABILITIES.LEFT) != 0)
                 {

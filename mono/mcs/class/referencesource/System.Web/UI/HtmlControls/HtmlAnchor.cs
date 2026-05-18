@@ -226,10 +226,8 @@ namespace System.Web.UI.HtmlControls
 
                 PostBackOptions options = GetPostBackOptions();
                 Debug.Assert(options != null);
-                string postBackEventReference = Page.ClientScript.GetPostBackEventReference(
-                    options,
-                    true
-                );
+                string postBackEventReference = Page.ClientScript
+                    .GetPostBackEventReference(options, true);
 
                 Debug.Assert(!string.IsNullOrEmpty(postBackEventReference));
                 writer.WriteAttribute("href", postBackEventReference, true);

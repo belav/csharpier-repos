@@ -183,10 +183,8 @@ namespace System.Security.Cryptography.X509Certificates
                     {
                         if (OpenSslX509ChainEventSource.Log.IsEnabled())
                         {
-                            OpenSslX509ChainEventSource.Log.CrlCacheExpired(
-                                nextUpdate,
-                                verificationTime
-                            );
+                            OpenSslX509ChainEventSource.Log
+                                .CrlCacheExpired(nextUpdate, verificationTime);
                         }
 
                         return false;
@@ -368,8 +366,7 @@ namespace System.Security.Cryptography.X509Certificates
                     )
                     {
                         foreach (
-                            GeneralNameAsn name in distributionPoint
-                                .DistributionPoint
+                            GeneralNameAsn name in distributionPoint.DistributionPoint
                                 .Value
                                 .FullName
                         )

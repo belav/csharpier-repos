@@ -15,9 +15,8 @@ namespace System.Runtime.Serialization.Json
             Miscellaneous = "RequiresReview - Static fields are marked SecurityCritical or readonly to prevent"
                 + " data from being modified or leaked to other components in appdomain."
         )]
-        public static readonly int DataContractXsdBaseNamespaceLength = Globals
-            .DataContractXsdBaseNamespace
-            .Length;
+        public static readonly int DataContractXsdBaseNamespaceLength =
+            Globals.DataContractXsdBaseNamespace.Length;
 
         [Fx.Tag.SecurityNote(
             Miscellaneous = "RequiresReview - Static fields are marked SecurityCritical or readonly to prevent"

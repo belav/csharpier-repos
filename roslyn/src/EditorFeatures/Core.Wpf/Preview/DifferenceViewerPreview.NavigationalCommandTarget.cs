@@ -54,9 +54,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Preview
                         case VSConstants.VSStd2KCmdID.UP_EXT:
                             if (this._textView.Selection.IsEmpty)
                             {
-                                this._textView.Caret.MoveTo(
-                                    this._textView.Caret.Position.VirtualBufferPosition
-                                );
+                                this._textView
+                                    .Caret
+                                    .MoveTo(this._textView.Caret.Position.VirtualBufferPosition);
                             }
                             this._editorOperations.MoveLineUp(true);
                             return VSConstants.S_OK;
@@ -66,9 +66,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Preview
                         case VSConstants.VSStd2KCmdID.DOWN_EXT:
                             if (this._textView.Selection.IsEmpty)
                             {
-                                this._textView.Caret.MoveTo(
-                                    this._textView.Caret.Position.VirtualBufferPosition
-                                );
+                                this._textView
+                                    .Caret
+                                    .MoveTo(this._textView.Caret.Position.VirtualBufferPosition);
                             }
                             this._editorOperations.MoveLineDown(true);
                             return VSConstants.S_OK;

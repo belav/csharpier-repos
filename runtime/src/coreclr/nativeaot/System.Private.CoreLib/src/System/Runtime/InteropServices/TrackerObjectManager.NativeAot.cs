@@ -260,8 +260,10 @@ namespace System.Runtime.InteropServices
         // Used during GC callback
         public static int FindTrackerTargets(IntPtr pThis, IntPtr findReferenceTargetsCallback)
         {
-            return (*(delegate* unmanaged<IntPtr, IntPtr, int>**)pThis)[5]
-                (pThis, findReferenceTargetsCallback);
+            return (*(delegate* unmanaged<IntPtr, IntPtr, int>**)pThis)[5](
+                pThis,
+                findReferenceTargetsCallback
+            );
         }
 
         public static void GetReferenceTrackerManager(

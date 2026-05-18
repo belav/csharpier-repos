@@ -332,9 +332,8 @@ namespace System.ServiceModel.Channels
                             {
                                 Exception exceptionToThrow = this.pendingException;
                                 this.pendingException = null;
-                                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                                    exceptionToThrow
-                                );
+                                throw DiagnosticUtility.ExceptionUtility
+                                    .ThrowHelperError(exceptionToThrow);
                             }
                         }
                     }

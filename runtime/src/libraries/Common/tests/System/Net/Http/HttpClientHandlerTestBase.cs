@@ -61,8 +61,7 @@ namespace System.Net.Http.Functional.Tests
         public static readonly bool[] BoolValues = new[] { true, false };
 
         // For use by remote server tests
-        public static readonly IEnumerable<object[]> RemoteServersMemberData = Configuration
-            .Http
+        public static readonly IEnumerable<object[]> RemoteServersMemberData = Configuration.Http
             .RemoteServersMemberData;
 
         protected HttpClient CreateHttpClientForRemoteServer(

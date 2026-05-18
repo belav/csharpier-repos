@@ -94,8 +94,8 @@ namespace R2RDump
                     WriteDivider("Component Assembly Sections");
                     int assemblyIndex = 0;
                     foreach (
-                        string assemblyName in _r2r
-                            .ManifestReferenceAssemblies.OrderBy(kvp => kvp.Value)
+                        string assemblyName in _r2r.ManifestReferenceAssemblies
+                            .OrderBy(kvp => kvp.Value)
                             .Select(kvp => kvp.Key)
                     )
                     {
@@ -294,7 +294,8 @@ namespace R2RDump
                     _r2r.Machine == Machine.Amd64
                     && (
                         (ILCompiler.Reflection.ReadyToRun.Amd64.UnwindInfo)rtf.UnwindInfo
-                    ).CodeOffsetToUnwindCodeIndex.TryGetValue(codeOffset, out int unwindCodeIndex)
+                    ).CodeOffsetToUnwindCodeIndex
+                        .TryGetValue(codeOffset, out int unwindCodeIndex)
                 )
                 {
                     ILCompiler.Reflection.ReadyToRun.Amd64.UnwindCode code = (
@@ -311,10 +312,8 @@ namespace R2RDump
                 if (
                     gcInfo != null
                     && gcInfo.Transitions != null
-                    && gcInfo.Transitions.TryGetValue(
-                        codeOffset,
-                        out List<BaseGcTransition> transitionsForOffset
-                    )
+                    && gcInfo.Transitions
+                        .TryGetValue(codeOffset, out List<BaseGcTransition> transitionsForOffset)
                 )
                 {
                     string[] formattedTransitions = new string[transitionsForOffset.Count];
@@ -438,9 +437,8 @@ namespace R2RDump
                     {
                         _writer.WriteLine();
                         foreach (
-                            ReadyToRunMethod method in _r2r.ReadyToRunAssemblies[
-                                assemblyIndex2
-                            ].Methods
+                            ReadyToRunMethod method in _r2r.ReadyToRunAssemblies[assemblyIndex2]
+                                .Methods
                         )
                         {
                             _writer.WriteLine(
@@ -508,8 +506,8 @@ namespace R2RDump
                         }
                         entries.Sort(
                             (e1, e2) =>
-                                e1
-                                    .Signature.ToString(_model.SignatureFormattingOptions)
+                                e1.Signature
+                                    .ToString(_model.SignatureFormattingOptions)
                                     .CompareTo(
                                         e2.Signature.ToString(_model.SignatureFormattingOptions)
                                     )
@@ -593,8 +591,8 @@ namespace R2RDump
                     );
                     int manifestAsmIndex = 0;
                     foreach (
-                        string manifestReferenceAssembly in _r2r
-                            .ManifestReferenceAssemblies.OrderBy(kvp => kvp.Value)
+                        string manifestReferenceAssembly in _r2r.ManifestReferenceAssemblies
+                            .OrderBy(kvp => kvp.Value)
                             .Select(kvp => kvp.Key)
                     )
                     {
@@ -761,8 +759,8 @@ namespace R2RDump
             WriteDivider("Eager fixup counts across all methods");
 
             // Group all fixups across methods by fixup kind, and sum each category
-            var sortedFixupCounts = _r2r
-                .Methods.Where(m => m.Fixups != null)
+            var sortedFixupCounts = _r2r.Methods
+                .Where(m => m.Fixups != null)
                 .SelectMany(m => m.Fixups)
                 .GroupBy(f => f.Signature.FixupKind)
                 .Select(group => new { FixupKind = group.Key, Count = group.Count() })

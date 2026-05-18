@@ -163,10 +163,14 @@ namespace System.Net
 
             bool trustNewHost = true; // Assume trusted unless proven otherwise
 
-            string spnKey = httpWebRequest.ChallengedUri.GetParts(
-                UriComponents.Scheme | UriComponents.Host | UriComponents.Port | UriComponents.Path,
-                UriFormat.SafeUnescaped
-            );
+            string spnKey = httpWebRequest.ChallengedUri
+                .GetParts(
+                    UriComponents.Scheme
+                        | UriComponents.Host
+                        | UriComponents.Port
+                        | UriComponents.Path,
+                    UriFormat.SafeUnescaped
+                );
             SpnToken spnToken = AuthenticationManager.SpnDictionary.InternalGet(spnKey);
             if (spnToken == null || spnToken.Spn == null)
             {
@@ -227,10 +231,8 @@ namespace System.Net
                 }
                 string spn = "HTTP/" + host;
                 spnKey =
-                    httpWebRequest.ChallengedUri.GetParts(
-                        UriComponents.SchemeAndServer,
-                        UriFormat.SafeUnescaped
-                    ) + "/";
+                    httpWebRequest.ChallengedUri
+                        .GetParts(UriComponents.SchemeAndServer, UriFormat.SafeUnescaped) + "/";
                 spnToken = new SpnToken(spn, trustNewHost);
                 AuthenticationManager.SpnDictionary.InternalSet(spnKey, spnToken);
             }
@@ -602,8 +604,7 @@ namespace System.Net
                                     httpWebRequest.CurrentAuthenticationState == null
                                     || httpWebRequest.CurrentAuthenticationState.Authorization
                                         == null
-                                    || !httpWebRequest
-                                        .CurrentAuthenticationState
+                                    || !httpWebRequest.CurrentAuthenticationState
                                         .Authorization
                                         .MutuallyAuthenticated
                                 )

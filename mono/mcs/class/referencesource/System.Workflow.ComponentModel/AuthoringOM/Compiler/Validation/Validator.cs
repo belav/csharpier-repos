@@ -65,11 +65,8 @@ namespace System.Workflow.ComponentModel.Compiler
                     );
                     if (dependencyProperty == null)
                     {
-                        object[] validationVisibilityAtrributes =
-                            args.CurrentProperty.GetCustomAttributes(
-                                typeof(ValidationOptionAttribute),
-                                true
-                            );
+                        object[] validationVisibilityAtrributes = args.CurrentProperty
+                            .GetCustomAttributes(typeof(ValidationOptionAttribute), true);
                         ValidationOption validationVisibility =
                             (validationVisibilityAtrributes.Length > 0)
                                 ? (
@@ -173,10 +170,12 @@ namespace System.Workflow.ComponentModel.Compiler
                         }
                         finally
                         {
-                            System.Diagnostics.Debug.Assert(
-                                manager.Context.Current == childContext,
-                                "Unwinding contextStack: the item that is about to be popped is not the one we pushed."
-                            );
+                            System.Diagnostics
+                                .Debug
+                                .Assert(
+                                    manager.Context.Current == childContext,
+                                    "Unwinding contextStack: the item that is about to be popped is not the one we pushed."
+                                );
                             manager.Context.Pop();
                         }
                     }
@@ -184,10 +183,12 @@ namespace System.Workflow.ComponentModel.Compiler
             }
             finally
             {
-                System.Diagnostics.Debug.Assert(
-                    manager.Context.Current == propertyValidationContext,
-                    "Unwinding contextStack: the item that is about to be popped is not the one we pushed."
-                );
+                System.Diagnostics
+                    .Debug
+                    .Assert(
+                        manager.Context.Current == propertyValidationContext,
+                        "Unwinding contextStack: the item that is about to be popped is not the one we pushed."
+                    );
                 manager.Context.Pop();
             }
 

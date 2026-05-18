@@ -34,14 +34,10 @@ namespace Microsoft.Interop.Analyzers
 
             context.RegisterCompilationStartAction(context =>
             {
-                INamedTypeSymbol? interfaceTypeAttribute =
-                    context.Compilation.GetBestTypeByMetadataName(
-                        TypeNames.InterfaceTypeAttribute
-                    )!;
-                INamedTypeSymbol? generatedComInterfaceAttribute =
-                    context.Compilation.GetBestTypeByMetadataName(
-                        TypeNames.GeneratedComInterfaceAttribute
-                    );
+                INamedTypeSymbol? interfaceTypeAttribute = context.Compilation
+                    .GetBestTypeByMetadataName(TypeNames.InterfaceTypeAttribute)!;
+                INamedTypeSymbol? generatedComInterfaceAttribute = context.Compilation
+                    .GetBestTypeByMetadataName(TypeNames.GeneratedComInterfaceAttribute);
 
                 if (generatedComInterfaceAttribute is null)
                 {
@@ -59,10 +55,8 @@ namespace Microsoft.Interop.Analyzers
                         INamedTypeSymbol type = (INamedTypeSymbol)context.Symbol;
                         AttributeData? interfaceTypeAttributeData = type.GetAttributes()
                             .FirstOrDefault(a =>
-                                a.AttributeClass.Equals(
-                                    interfaceTypeAttribute,
-                                    SymbolEqualityComparer.Default
-                                )
+                                a.AttributeClass
+                                    .Equals(interfaceTypeAttribute, SymbolEqualityComparer.Default)
                             );
                         if (
                             type is not { TypeKind: TypeKind.Interface, IsComImport: true }
@@ -205,10 +199,8 @@ namespace Microsoft.Interop.Analyzers
                                             );
                                         return managedToUnmanagedGenerator with
                                         {
-                                            Diagnostics =
-                                                managedToUnmanagedGenerator.Diagnostics.AddRange(
-                                                    unmanagedToManagedGenerator.Diagnostics
-                                                ),
+                                            Diagnostics = managedToUnmanagedGenerator.Diagnostics
+                                                .AddRange(unmanagedToManagedGenerator.Diagnostics),
                                         };
                                     }
                                 ),

@@ -149,8 +149,8 @@ internal sealed class RestoreHandler(DotnetCliHelper dotnetCliHelper)
         // We don't have an addressable solution, so lets find all addressable projects.
         // We can only restore projects with file paths as we are using the dotnet CLI to address them.
         // We also need to remove duplicates as in multi targeting scenarios there will be multiple projects with the same file path.
-        var projects = solution
-            .Projects.Select(p => p.FilePath)
+        var projects = solution.Projects
+            .Select(p => p.FilePath)
             .WhereNotNull()
             .Distinct()
             .ToImmutableArray();

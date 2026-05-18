@@ -71,11 +71,12 @@ namespace Mono.CSharp
 
         public virtual Expression CreateExpressionTree(ResolveContext ec)
         {
-            ec.Report.Error(
-                834,
-                loc,
-                "A lambda expression with statement body cannot be converted to an expresion tree"
-            );
+            ec.Report
+                .Error(
+                    834,
+                    loc,
+                    "A lambda expression with statement body cannot be converted to an expresion tree"
+                );
             return null;
         }
 
@@ -1154,9 +1155,10 @@ namespace Mono.CSharp
 
             if (fc.TryFinally != null)
             {
-                fc.TryFinally.RegisterForControlExitCheck(
-                    new DefiniteAssignmentBitSet(fc.DefiniteAssignment)
-                );
+                fc.TryFinally
+                    .RegisterForControlExitCheck(
+                        new DefiniteAssignmentBitSet(fc.DefiniteAssignment)
+                    );
             }
             else
             {
@@ -1238,12 +1240,13 @@ namespace Mono.CSharp
                 }
                 else if (block_return_type != InternalType.ErrorType)
                 {
-                    ec.Report.Error(
-                        126,
-                        loc,
-                        "An object of a type convertible to `{0}' is required for the return statement",
-                        block_return_type.GetSignatureForError()
-                    );
+                    ec.Report
+                        .Error(
+                            126,
+                            loc,
+                            "An object of a type convertible to `{0}' is required for the return statement",
+                            block_return_type.GetSignatureForError()
+                        );
                 }
 
                 return false;
@@ -1256,12 +1259,13 @@ namespace Mono.CSharp
             {
                 if (block_return_type.Kind == MemberKind.Void)
                 {
-                    ec.Report.Error(
-                        127,
-                        loc,
-                        "`{0}': A return keyword must not be followed by any expression when method returns void",
-                        ec.GetSignatureForError()
-                    );
+                    ec.Report
+                        .Error(
+                            127,
+                            loc,
+                            "`{0}': A return keyword must not be followed by any expression when method returns void",
+                            ec.GetSignatureForError()
+                        );
 
                     return false;
                 }
@@ -1285,11 +1289,8 @@ namespace Mono.CSharp
                         if (async_type == null && async_block.ReturnTypeInference != null)
                         {
                             if (expr.Type.Kind == MemberKind.Void && !(this is ContextualReturn))
-                                ec.Report.Error(
-                                    4029,
-                                    loc,
-                                    "Cannot return an expression of type `void'"
-                                );
+                                ec.Report
+                                    .Error(4029, loc, "Cannot return an expression of type `void'");
                             else
                                 async_block.ReturnTypeInference.AddCommonTypeBoundAsync(expr.Type);
                             return true;
@@ -1297,11 +1298,12 @@ namespace Mono.CSharp
 
                         if (async_type.Kind == MemberKind.Void)
                         {
-                            ec.Report.Error(
-                                8030,
-                                loc,
-                                "Anonymous function or lambda expression converted to a void returning delegate cannot return a value"
-                            );
+                            ec.Report
+                                .Error(
+                                    8030,
+                                    loc,
+                                    "Anonymous function or lambda expression converted to a void returning delegate cannot return a value"
+                                );
                             return false;
                         }
 
@@ -1312,20 +1314,22 @@ namespace Mono.CSharp
 
                             if (async_block.DelegateType != null)
                             {
-                                ec.Report.Error(
-                                    8031,
-                                    loc,
-                                    "Async lambda expression or anonymous method converted to a `Task' cannot return a value. Consider returning `Task<T>'"
-                                );
+                                ec.Report
+                                    .Error(
+                                        8031,
+                                        loc,
+                                        "Async lambda expression or anonymous method converted to a `Task' cannot return a value. Consider returning `Task<T>'"
+                                    );
                             }
                             else
                             {
-                                ec.Report.Error(
-                                    1997,
-                                    loc,
-                                    "`{0}': A return keyword must not be followed by an expression when async method returns `Task'. Consider using `Task<T>' return type",
-                                    ec.GetSignatureForError()
-                                );
+                                ec.Report
+                                    .Error(
+                                        1997,
+                                        loc,
+                                        "`{0}': A return keyword must not be followed by an expression when async method returns `Task'. Consider using `Task<T>' return type",
+                                        ec.GetSignatureForError()
+                                    );
                             }
                             return false;
                         }
@@ -1339,13 +1343,14 @@ namespace Mono.CSharp
                                 != ec.Module.PredefinedTypes.Task.TypeSpec
                         )
                         {
-                            ec.Report.Error(
-                                4016,
-                                loc,
-                                "`{0}': The return expression type of async method must be `{1}' rather than `Task<{1}>'",
-                                ec.GetSignatureForError(),
-                                async_type.TypeArguments[0].GetSignatureForError()
-                            );
+                            ec.Report
+                                .Error(
+                                    4016,
+                                    loc,
+                                    "`{0}': The return expression type of async method must be `{1}' rather than `Task<{1}>'",
+                                    ec.GetSignatureForError(),
+                                    async_type.TypeArguments[0].GetSignatureForError()
+                                );
                         }
                         else
                         {
@@ -1357,11 +1362,12 @@ namespace Mono.CSharp
                 {
                     if (block_return_type.Kind == MemberKind.Void)
                     {
-                        ec.Report.Error(
-                            8030,
-                            loc,
-                            "Anonymous function or lambda expression converted to a void returning delegate cannot return a value"
-                        );
+                        ec.Report
+                            .Error(
+                                8030,
+                                loc,
+                                "Anonymous function or lambda expression converted to a void returning delegate cannot return a value"
+                            );
                         return false;
                     }
 
@@ -1395,11 +1401,12 @@ namespace Mono.CSharp
 
             if (expr is ReferenceExpression && block_return_type.Kind != MemberKind.ByRef)
             {
-                ec.Report.Error(
-                    8149,
-                    loc,
-                    "By-reference returns can only be used in methods that return by reference"
-                );
+                ec.Report
+                    .Error(
+                        8149,
+                        loc,
+                        "By-reference returns can only be used in methods that return by reference"
+                    );
                 return false;
             }
 
@@ -1410,11 +1417,12 @@ namespace Mono.CSharp
                     var ref_expr = Expr as ReferenceExpression;
                     if (ref_expr == null)
                     {
-                        ec.Report.Error(
-                            8150,
-                            loc,
-                            "By-reference return is required when method returns by reference"
-                        );
+                        ec.Report
+                            .Error(
+                                8150,
+                                loc,
+                                "By-reference return is required when method returns by reference"
+                            );
                         return false;
                     }
 
@@ -1422,12 +1430,13 @@ namespace Mono.CSharp
 
                     if (expr.Type != byref_return.Element)
                     {
-                        ec.Report.Error(
-                            8151,
-                            loc,
-                            "The return by reference expression must be of type `{0}' because this method returns by reference",
-                            byref_return.GetSignatureForError()
-                        );
+                        ec.Report
+                            .Error(
+                                8151,
+                                loc,
+                                "The return by reference expression must be of type `{0}' because this method returns by reference",
+                                byref_return.GetSignatureForError()
+                            );
                         return false;
                     }
                 }
@@ -1439,13 +1448,14 @@ namespace Mono.CSharp
                     {
                         if (am != null && block_return_type == ec.ReturnType)
                         {
-                            ec.Report.Error(
-                                1662,
-                                loc,
-                                "Cannot convert `{0}' to delegate type `{1}' because some of the return types in the block are not implicitly convertible to the delegate return type",
-                                am.ContainerType,
-                                am.GetSignatureForError()
-                            );
+                            ec.Report
+                                .Error(
+                                    1662,
+                                    loc,
+                                    "Cannot convert `{0}' to delegate type `{1}' because some of the return types in the block are not implicitly convertible to the delegate return type",
+                                    am.ContainerType,
+                                    am.GetSignatureForError()
+                                );
                         }
                         return false;
                     }
@@ -1536,11 +1546,12 @@ namespace Mono.CSharp
 
         void Error_ReturnFromIterator(ResolveContext rc)
         {
-            rc.Report.Error(
-                1622,
-                loc,
-                "Cannot return a value from iterators. Use the yield return statement to return a value, or yield break to end the iteration"
-            );
+            rc.Report
+                .Error(
+                    1622,
+                    loc,
+                    "Cannot return a value from iterators. Use the yield return statement to return a value, or yield break to end the iteration"
+                );
         }
 
         public override Reachability MarkReachable(Reachability rc)
@@ -1610,12 +1621,13 @@ namespace Mono.CSharp
 
         public static void Error_UnknownLabel(BlockContext bc, string label, Location loc)
         {
-            bc.Report.Error(
-                159,
-                loc,
-                "The label `{0}:' could not be found within the scope of the goto statement",
-                label
-            );
+            bc.Report
+                .Error(
+                    159,
+                    loc,
+                    "The label `{0}:' could not be found within the scope of the goto statement",
+                    label
+                );
         }
 
         protected override bool DoFlowAnalysis(FlowAnalysisContext fc)
@@ -1890,13 +1902,14 @@ namespace Mono.CSharp
                 }
 
                 if (!Convert.ImplicitStandardConversionExists(c, type))
-                    ec.Report.Warning(
-                        469,
-                        2,
-                        loc,
-                        "The `goto case' value is not implicitly convertible to type `{0}'",
-                        type.GetSignatureForError()
-                    );
+                    ec.Report
+                        .Warning(
+                            469,
+                            2,
+                            loc,
+                            "The `goto case' value is not implicitly convertible to type `{0}'",
+                            type.GetSignatureForError()
+                        );
             }
 
             ec.Switch.RegisterGotoCase(this, res);
@@ -2005,11 +2018,12 @@ namespace Mono.CSharp
                 expr = Convert.ImplicitConversion(rc, expr, et, expr.Location);
             else
             {
-                rc.Report.Error(
-                    155,
-                    expr.Location,
-                    "The type caught or thrown must be derived from System.Exception"
-                );
+                rc.Report
+                    .Error(
+                        155,
+                        expr.Location,
+                        "The type caught or thrown must be derived from System.Exception"
+                    );
                 expr = EmptyCast.Create(expr, et);
             }
 
@@ -2022,11 +2036,12 @@ namespace Mono.CSharp
             {
                 if (!ec.HasSet(ResolveContext.Options.CatchScope))
                 {
-                    ec.Report.Error(
-                        156,
-                        loc,
-                        "A throw statement with no arguments is not allowed outside of a catch clause"
-                    );
+                    ec.Report
+                        .Error(
+                            156,
+                            loc,
+                            "A throw statement with no arguments is not allowed outside of a catch clause"
+                        );
                 }
                 else if (ec.HasSet(ResolveContext.Options.FinallyScope))
                 {
@@ -2034,11 +2049,12 @@ namespace Mono.CSharp
                     {
                         if (b.IsFinallyBlock)
                         {
-                            ec.Report.Error(
-                                724,
-                                loc,
-                                "A throw statement with no arguments is not allowed inside of a finally clause nested inside of the innermost catch clause"
-                            );
+                            ec.Report
+                                .Error(
+                                    724,
+                                    loc,
+                                    "A throw statement with no arguments is not allowed inside of a finally clause nested inside of the innermost catch clause"
+                                );
                             break;
                         }
                     }
@@ -2401,49 +2417,54 @@ namespace Mono.CSharp
                 if (vexpr != null && !vexpr.IsPossibleType(bc))
                 {
                     if (bc.Module.Compiler.Settings.Version < LanguageVersion.V_3)
-                        bc.Report.FeatureIsNotAvailable(
-                            bc.Module.Compiler,
-                            loc,
-                            "implicitly typed local variable"
-                        );
+                        bc.Report
+                            .FeatureIsNotAvailable(
+                                bc.Module.Compiler,
+                                loc,
+                                "implicitly typed local variable"
+                            );
 
                     if (li.IsFixed)
                     {
-                        bc.Report.Error(
-                            821,
-                            loc,
-                            "A fixed statement cannot use an implicitly typed local variable"
-                        );
+                        bc.Report
+                            .Error(
+                                821,
+                                loc,
+                                "A fixed statement cannot use an implicitly typed local variable"
+                            );
                         return false;
                     }
 
                     if (li.IsConstant)
                     {
-                        bc.Report.Error(
-                            822,
-                            loc,
-                            "An implicitly typed local variable cannot be a constant"
-                        );
+                        bc.Report
+                            .Error(
+                                822,
+                                loc,
+                                "An implicitly typed local variable cannot be a constant"
+                            );
                         return false;
                     }
 
                     if (Initializer == null)
                     {
-                        bc.Report.Error(
-                            818,
-                            loc,
-                            "An implicitly typed local variable declarator must include an initializer"
-                        );
+                        bc.Report
+                            .Error(
+                                818,
+                                loc,
+                                "An implicitly typed local variable declarator must include an initializer"
+                            );
                         return false;
                     }
 
                     if (declarators != null)
                     {
-                        bc.Report.Error(
-                            819,
-                            loc,
-                            "An implicitly typed local variable declaration cannot include multiple declarators"
-                        );
+                        bc.Report
+                            .Error(
+                                819,
+                                loc,
+                                "An implicitly typed local variable declaration cannot include multiple declarators"
+                            );
                         declarators = null;
                     }
 
@@ -2499,22 +2520,20 @@ namespace Mono.CSharp
                 {
                     if (!(initializer is ReferenceExpression))
                     {
-                        bc.Report.Error(
-                            8172,
-                            loc,
-                            "Cannot initialize a by-reference variable `{0}' with a value",
-                            li.Name
-                        );
+                        bc.Report
+                            .Error(
+                                8172,
+                                loc,
+                                "Cannot initialize a by-reference variable `{0}' with a value",
+                                li.Name
+                            );
                         return false;
                     }
 
                     if (bc.CurrentAnonymousMethod is AsyncInitializer)
                     {
-                        bc.Report.Error(
-                            8177,
-                            loc,
-                            "Async methods cannot use by-reference variables"
-                        );
+                        bc.Report
+                            .Error(8177, loc, "Async methods cannot use by-reference variables");
                     }
                     else if (bc.CurrentIterator != null)
                     {
@@ -2525,12 +2544,13 @@ namespace Mono.CSharp
                 {
                     if (initializer is ReferenceExpression)
                     {
-                        bc.Report.Error(
-                            8171,
-                            loc,
-                            "Cannot initialize a by-value variable `{0}' with a reference expression",
-                            li.Name
-                        );
+                        bc.Report
+                            .Error(
+                                8171,
+                                loc,
+                                "Cannot initialize a by-value variable `{0}' with a reference expression",
+                                li.Name
+                            );
                         return false;
                     }
                 }
@@ -2880,21 +2900,23 @@ namespace Mono.CSharp
                 }
 
                 if (VariableInfo.IsEverAssigned)
-                    ec.Report.Warning(
-                        219,
-                        3,
-                        Location,
-                        "The variable `{0}' is assigned but its value is never used",
-                        Name
-                    );
+                    ec.Report
+                        .Warning(
+                            219,
+                            3,
+                            Location,
+                            "The variable `{0}' is assigned but its value is never used",
+                            Name
+                        );
                 else
-                    ec.Report.Warning(
-                        168,
-                        3,
-                        Location,
-                        "The variable `{0}' is declared but never used",
-                        Name
-                    );
+                    ec.Report
+                        .Warning(
+                            168,
+                            3,
+                            Location,
+                            "The variable `{0}' is declared but never used",
+                            Name
+                        );
             }
 
             if (HoistedVariant != null)
@@ -3238,14 +3260,16 @@ namespace Mono.CSharp
                 return;
             }
 
-            ParametersBlock.TopBlock.Report.Error(
-                136,
-                variable.Location,
-                "A local variable named `{0}' cannot be declared in this scope because it would give a different meaning "
-                    + "to `{0}', which is already used in a `{1}' scope to denote something else",
-                name,
-                reason
-            );
+            ParametersBlock.TopBlock
+                .Report
+                .Error(
+                    136,
+                    variable.Location,
+                    "A local variable named `{0}' cannot be declared in this scope because it would give a different meaning "
+                        + "to `{0}', which is already used in a `{1}' scope to denote something else",
+                    name,
+                    reason
+                );
         }
 
         public virtual void Error_AlreadyDeclared(string name, INamedBlockVariable variable)
@@ -3257,23 +3281,27 @@ namespace Mono.CSharp
             }
             else
             {
-                ParametersBlock.TopBlock.Report.Error(
-                    128,
-                    variable.Location,
-                    "A local variable named `{0}' is already defined in this scope",
-                    name
-                );
+                ParametersBlock.TopBlock
+                    .Report
+                    .Error(
+                        128,
+                        variable.Location,
+                        "A local variable named `{0}' is already defined in this scope",
+                        name
+                    );
             }
         }
 
         public virtual void Error_AlreadyDeclaredTypeParameter(string name, Location loc)
         {
-            ParametersBlock.TopBlock.Report.Error(
-                412,
-                loc,
-                "The type parameter name `{0}' is the same as local variable or parameter name",
-                name
-            );
+            ParametersBlock.TopBlock
+                .Report
+                .Error(
+                    412,
+                    loc,
+                    "The type parameter name `{0}' is the same as local variable or parameter name",
+                    name
+                );
         }
 
         //
@@ -3818,8 +3846,7 @@ namespace Mono.CSharp
                 if (storey.HoistedThis == null || !(storey.Parent is HoistedStoreyClass))
                 {
                     foreach (
-                        ExplicitBlock ref_block in Original
-                            .ParametersBlock
+                        ExplicitBlock ref_block in Original.ParametersBlock
                             .TopBlock
                             .ThisReferencesFromChildrenBlock
                     )
@@ -3952,10 +3979,11 @@ namespace Mono.CSharp
                                 //
                                 // Add reference to closest storey which holds captured this
                                 //
-                                pb.StateMachine.AddParentStoreyReference(
-                                    ec,
-                                    parent_this_block.StateMachine ?? storey
-                                );
+                                pb.StateMachine
+                                    .AddParentStoreyReference(
+                                        ec,
+                                        parent_this_block.StateMachine ?? storey
+                                    );
                             }
 
                             //
@@ -4332,12 +4360,13 @@ namespace Mono.CSharp
                 if (p.VariableInfo.IsAssigned(dat))
                     continue;
 
-                fc.Report.Error(
-                    177,
-                    p.Location,
-                    "The out parameter `{0}' must be assigned to before control leaves the current method",
-                    p.Parameter.Name
-                );
+                fc.Report
+                    .Error(
+                        177,
+                        p.Location,
+                        "The out parameter `{0}' must be assigned to before control leaves the current method",
+                        p.Parameter.Name
+                    );
             }
         }
 
@@ -4379,13 +4408,14 @@ namespace Mono.CSharp
                         else
                         {
                             var labeled = (LabeledStatement)entry.Value;
-                            target.labels.Add(
-                                entry.Key,
-                                RemapLabeledStatement(
-                                    labeled,
-                                    clonectx.RemapBlockCopy(labeled.Block)
-                                )
-                            );
+                            target.labels
+                                .Add(
+                                    entry.Key,
+                                    RemapLabeledStatement(
+                                        labeled,
+                                        clonectx.RemapBlockCopy(labeled.Block)
+                                    )
+                                );
                         }
                     }
 
@@ -4600,12 +4630,13 @@ namespace Mono.CSharp
 
                 if (bc.CurrentBlock != null)
                 {
-                    bc.Report.Error(
-                        584,
-                        bc.CurrentBlock.StartLocation,
-                        "Internal compiler error: {0}",
-                        e.Message
-                    );
+                    bc.Report
+                        .Error(
+                            584,
+                            bc.CurrentBlock.StartLocation,
+                            "Internal compiler error: {0}",
+                            e.Message
+                        );
                 }
                 else
                 {
@@ -4688,43 +4719,43 @@ namespace Mono.CSharp
                 Parameter.Modifier mod = p.ModFlags;
                 if ((mod & Parameter.Modifier.RefOutMask) != 0)
                 {
-                    host.Compiler.Report.Error(
-                        1988,
-                        p.Location,
-                        "Async methods cannot have ref or out parameters"
-                    );
+                    host.Compiler
+                        .Report
+                        .Error(1988, p.Location, "Async methods cannot have ref or out parameters");
                     return this;
                 }
 
                 if (p is ArglistParameter)
                 {
-                    host.Compiler.Report.Error(
-                        4006,
-                        p.Location,
-                        "__arglist is not allowed in parameter list of async methods"
-                    );
+                    host.Compiler
+                        .Report
+                        .Error(
+                            4006,
+                            p.Location,
+                            "__arglist is not allowed in parameter list of async methods"
+                        );
                     return this;
                 }
 
                 if (parameters.Types[i].IsPointer)
                 {
-                    host.Compiler.Report.Error(
-                        4005,
-                        p.Location,
-                        "Async methods cannot have unsafe parameters"
-                    );
+                    host.Compiler
+                        .Report
+                        .Error(4005, p.Location, "Async methods cannot have unsafe parameters");
                     return this;
                 }
             }
 
             if (!HasAwait)
             {
-                host.Compiler.Report.Warning(
-                    1998,
-                    1,
-                    loc,
-                    "Async block lacks `await' operator and will run synchronously"
-                );
+                host.Compiler
+                    .Report
+                    .Warning(
+                        1998,
+                        1,
+                        loc,
+                        "Async block lacks `await' operator and will run synchronously"
+                    );
             }
 
             var block_type = host.Module.Compiler.BuiltinTypes.Void;
@@ -5286,12 +5317,13 @@ namespace Mono.CSharp
             if (HasReachableClosingBrace && bc.ReturnType.Kind != MemberKind.Void)
             {
                 // TODO: var md = bc.CurrentMemberDefinition;
-                bc.Report.Error(
-                    161,
-                    md.Location,
-                    "`{0}': not all code paths return a value",
-                    md.GetSignatureForError()
-                );
+                bc.Report
+                    .Error(
+                        161,
+                        md.Location,
+                        "`{0}': not all code paths return a value",
+                        md.GetSignatureForError()
+                    );
             }
 
             if ((flags & Flags.NoFlowAnalysis) != 0)
@@ -5424,12 +5456,13 @@ namespace Mono.CSharp
         public void Error_AlreadyOccurs(ResolveContext ec, SwitchLabel collision_with)
         {
             ec.Report.SymbolRelatedToPreviousError(collision_with.loc, null);
-            ec.Report.Error(
-                152,
-                loc,
-                "The label `{0}' already occurs in this switch statement",
-                GetSignatureForError()
-            );
+            ec.Report
+                .Error(
+                    152,
+                    loc,
+                    "The label `{0}' already occurs in this switch statement",
+                    GetSignatureForError()
+                );
         }
 
         protected override void CloneTo(CloneContext clonectx, Statement target)
@@ -5552,21 +5585,23 @@ namespace Mono.CSharp
             {
                 if (FallOut)
                 {
-                    fc.Report.Error(
-                        8070,
-                        loc,
-                        "Control cannot fall out of switch statement through final case label `{0}'",
-                        label.GetSignatureForError()
-                    );
+                    fc.Report
+                        .Error(
+                            8070,
+                            loc,
+                            "Control cannot fall out of switch statement through final case label `{0}'",
+                            label.GetSignatureForError()
+                        );
                 }
                 else
                 {
-                    fc.Report.Error(
-                        163,
-                        loc,
-                        "Control cannot fall through from one case label `{0}' to another",
-                        label.GetSignatureForError()
-                    );
+                    fc.Report
+                        .Error(
+                            163,
+                            loc,
+                            "Control cannot fall through from one case label `{0}' to another",
+                            label.GetSignatureForError()
+                        );
                 }
                 return true;
             }
@@ -6059,12 +6094,13 @@ namespace Mono.CSharp
                 {
                     if (Expr.Type != InternalType.ErrorType)
                     {
-                        ec.Report.Error(
-                            151,
-                            loc,
-                            "A switch expression of type `{0}' cannot be converted to an integral type, bool, char, string, enum or nullable type",
-                            Expr.Type.GetSignatureForError()
-                        );
+                        ec.Report
+                            .Error(
+                                151,
+                                loc,
+                                "A switch expression of type `{0}' cannot be converted to an integral type, bool, char, string, enum or nullable type",
+                                Expr.Type.GetSignatureForError()
+                            );
                     }
 
                     return false;
@@ -6088,11 +6124,12 @@ namespace Mono.CSharp
                     && ec.Module.Compiler.Settings.Version == LanguageVersion.ISO_1
                 )
                 {
-                    ec.Report.FeatureIsNotAvailable(
-                        ec.Module.Compiler,
-                        loc,
-                        "switch expression of boolean type"
-                    );
+                    ec.Report
+                        .FeatureIsNotAvailable(
+                            ec.Module.Compiler,
+                            loc,
+                            "switch expression of boolean type"
+                        );
                     return false;
                 }
 
@@ -6334,10 +6371,11 @@ namespace Mono.CSharp
             if (ec.Module.PredefinedTypes.Dictionary.Define())
             {
                 string_dictionary_type = new TypeExpression(
-                    ec.Module.PredefinedTypes.Dictionary.TypeSpec.MakeGenericType(
-                        ec,
-                        new[] { ec.BuiltinTypes.String, ec.BuiltinTypes.Int }
-                    ),
+                    ec.Module
+                        .PredefinedTypes
+                        .Dictionary
+                        .TypeSpec
+                        .MakeGenericType(ec, new[] { ec.BuiltinTypes.String, ec.BuiltinTypes.Int }),
                     loc
                 );
             }
@@ -7067,12 +7105,13 @@ namespace Mono.CSharp
 
             if (!TypeSpec.IsReferenceType(expr.Type) && expr.Type != InternalType.ErrorType)
             {
-                ec.Report.Error(
-                    185,
-                    loc,
-                    "`{0}' is not a reference type as required by the lock statement",
-                    expr.Type.GetSignatureForError()
-                );
+                ec.Report
+                    .Error(
+                        185,
+                        loc,
+                        "`{0}' is not a reference type as required by the lock statement",
+                        expr.Type.GetSignatureForError()
+                    );
             }
 
             if (expr.Type.IsGenericParameter)
@@ -7492,11 +7531,12 @@ namespace Mono.CSharp
             {
                 if (!Variable.Type.IsPointer && li == Variable)
                 {
-                    bc.Report.Error(
-                        209,
-                        TypeExpression.Location,
-                        "The type of locals declared in a fixed statement must be a pointer type"
-                    );
+                    bc.Report
+                        .Error(
+                            209,
+                            TypeExpression.Location,
+                            "The type of locals declared in a fixed statement must be a pointer type"
+                        );
                     return null;
                 }
 
@@ -7615,11 +7655,12 @@ namespace Mono.CSharp
 
                     if (already_fixed)
                     {
-                        bc.Report.Error(
-                            213,
-                            loc,
-                            "You cannot use the fixed statement to take the address of an already fixed expression"
-                        );
+                        bc.Report
+                            .Error(
+                                213,
+                                loc,
+                                "You cannot use the fixed statement to take the address of an already fixed expression"
+                            );
                         return null;
                     }
 
@@ -7629,11 +7670,12 @@ namespace Mono.CSharp
 
                 if (initializer is Cast)
                 {
-                    bc.Report.Error(
-                        254,
-                        initializer.Location,
-                        "The right hand side of a fixed statement assignment may not be a cast expression"
-                    );
+                    bc.Report
+                        .Error(
+                            254,
+                            initializer.Location,
+                            "The right hand side of a fixed statement assignment may not be a cast expression"
+                        );
                     return null;
                 }
 
@@ -7643,22 +7685,24 @@ namespace Mono.CSharp
                 var method = GetPinnableReference(bc, res);
                 if (method == null)
                 {
-                    bc.Report.Error(
-                        8385,
-                        initializer.Location,
-                        "The given expression cannot be used in a fixed statement"
-                    );
+                    bc.Report
+                        .Error(
+                            8385,
+                            initializer.Location,
+                            "The given expression cannot be used in a fixed statement"
+                        );
                     return null;
                 }
 
                 var compiler = bc.Module.Compiler;
                 if (compiler.Settings.Version < LanguageVersion.V_7_3)
                 {
-                    bc.Report.FeatureIsNotAvailable(
-                        compiler,
-                        initializer.Location,
-                        "extensible fixed statement"
-                    );
+                    bc.Report
+                        .FeatureIsNotAvailable(
+                            compiler,
+                            initializer.Location,
+                            "extensible fixed statement"
+                        );
                 }
 
                 method.InstanceExpression = res;
@@ -7718,13 +7762,14 @@ namespace Mono.CSharp
                 {
                     if (bc.Module.Compiler.Settings.Version > LanguageVersion.V_7_2)
                     {
-                        bc.Report.Warning(
-                            280,
-                            2,
-                            expr.Location,
-                            "`{0}' has the wrong signature to be used in extensible fixed statement",
-                            mg.GetSignatureForError()
-                        );
+                        bc.Report
+                            .Warning(
+                                280,
+                                2,
+                                expr.Location,
+                                "`{0}' has the wrong signature to be used in extensible fixed statement",
+                                mg.GetSignatureForError()
+                            );
                     }
 
                     return null;
@@ -7913,22 +7958,24 @@ namespace Mono.CSharp
                 {
                     if (ctch.Filter.ContainsEmitWithAwait())
                     {
-                        bc.Report.Error(
-                            7094,
-                            ctch.Filter.Location,
-                            "The `await' operator cannot be used in the filter expression of a catch clause"
-                        );
+                        bc.Report
+                            .Error(
+                                7094,
+                                ctch.Filter.Location,
+                                "The `await' operator cannot be used in the filter expression of a catch clause"
+                            );
                     }
 
                     var c = ctch.Filter as Constant;
                     if (c != null && !c.IsDefaultValue)
                     {
-                        bc.Report.Warning(
-                            7095,
-                            1,
-                            ctch.Filter.Location,
-                            "Exception filter expression is a constant"
-                        );
+                        bc.Report
+                            .Warning(
+                                7095,
+                                1,
+                                ctch.Filter.Location,
+                                "Exception filter expression is a constant"
+                            );
                     }
                 }
 
@@ -8073,11 +8120,12 @@ namespace Mono.CSharp
                         && !TypeSpec.IsBaseClass(type, bc.BuiltinTypes.Exception, false)
                     )
                     {
-                        bc.Report.Error(
-                            155,
-                            loc,
-                            "The type caught or thrown must be derived from System.Exception"
-                        );
+                        bc.Report
+                            .Error(
+                                155,
+                                loc,
+                                "The type caught or thrown must be derived from System.Exception"
+                            );
                     }
                     else if (li != null)
                     {
@@ -8592,12 +8640,13 @@ namespace Mono.CSharp
                         if (!bc.Module.PredefinedAttributes.RuntimeCompatibility.IsDefined)
                             continue;
 
-                        bc.Report.Warning(
-                            1058,
-                            1,
-                            c.loc,
-                            "A previous catch clause already catches all exceptions. All non-exceptions thrown will be wrapped in a `System.Runtime.CompilerServices.RuntimeWrappedException'"
-                        );
+                        bc.Report
+                            .Warning(
+                                1058,
+                                1,
+                                c.loc,
+                                "A previous catch clause already catches all exceptions. All non-exceptions thrown will be wrapped in a `System.Runtime.CompilerServices.RuntimeWrappedException'"
+                            );
 
                         continue;
                     }
@@ -8611,12 +8660,13 @@ namespace Mono.CSharp
 
                     if (resolved_type == ct || TypeSpec.IsBaseClass(resolved_type, ct, true))
                     {
-                        bc.Report.Error(
-                            160,
-                            c.loc,
-                            "A previous catch clause already catches all exceptions of this or a super type `{0}'",
-                            ct.GetSignatureForError()
-                        );
+                        bc.Report
+                            .Error(
+                                160,
+                                c.loc,
+                                "A previous catch clause already catches all exceptions of this or a super type `{0}'",
+                                ct.GetSignatureForError()
+                            );
                         ok = false;
                     }
                 }
@@ -8893,12 +8943,13 @@ namespace Mono.CSharp
                     {
                         bc.Report.SymbolRelatedToPreviousError(type);
                         var loc = type_expr == null ? initializer.Location : type_expr.Location;
-                        bc.Report.Error(
-                            1674,
-                            loc,
-                            "`{0}': type used in a using statement must be implicitly convertible to `System.IDisposable'",
-                            type.GetSignatureForError()
-                        );
+                        bc.Report
+                            .Error(
+                                1674,
+                                loc,
+                                "`{0}': type used in a using statement must be implicitly convertible to `System.IDisposable'",
+                                type.GetSignatureForError()
+                            );
                     }
 
                     return;
@@ -9237,12 +9288,13 @@ namespace Mono.CSharp
                 if (variable_ref == null)
                     return false;
 
-                for_each.body.AddScopeStatement(
-                    new StatementExpression(
-                        new CompilerAssign(variable_ref, access, Location.Null),
-                        for_each.type.Location
-                    )
-                );
+                for_each.body
+                    .AddScopeStatement(
+                        new StatementExpression(
+                            new CompilerAssign(variable_ref, access, Location.Null),
+                            for_each.type.Location
+                        )
+                    );
 
                 return for_each.body.Resolve(ec);
             }
@@ -9376,13 +9428,14 @@ namespace Mono.CSharp
             void Error_WrongEnumerator(ResolveContext rc, MethodSpec enumerator)
             {
                 rc.Report.SymbolRelatedToPreviousError(enumerator);
-                rc.Report.Error(
-                    202,
-                    loc,
-                    "foreach statement requires that the return type `{0}' of `{1}' must have a suitable public MoveNext method and public Current property",
-                    enumerator.ReturnType.GetSignatureForError(),
-                    enumerator.GetSignatureForError()
-                );
+                rc.Report
+                    .Error(
+                        202,
+                        loc,
+                        "foreach statement requires that the return type `{0}' of `{1}' must have a suitable public MoveNext method and public Current property",
+                        enumerator.ReturnType.GetSignatureForError(),
+                        enumerator.GetSignatureForError()
+                    );
             }
 
             MethodGroupExpr ResolveGetEnumerator(ResolveContext rc)
@@ -9450,13 +9503,14 @@ namespace Mono.CSharp
                             )
                             {
                                 rc.Report.SymbolRelatedToPreviousError(expr.Type);
-                                rc.Report.Error(
-                                    1640,
-                                    loc,
-                                    "foreach statement cannot operate on variables of type `{0}' because it contains multiple implementation of `{1}'. Try casting to a specific implementation",
-                                    expr.Type.GetSignatureForError(),
-                                    gen_ienumerable.TypeSpec.GetSignatureForError()
-                                );
+                                rc.Report
+                                    .Error(
+                                        1640,
+                                        loc,
+                                        "foreach statement cannot operate on variables of type `{0}' because it contains multiple implementation of `{1}'. Try casting to a specific implementation",
+                                        expr.Type.GetSignatureForError(),
+                                        gen_ienumerable.TypeSpec.GetSignatureForError()
+                                    );
 
                                 return null;
                             }
@@ -9490,21 +9544,23 @@ namespace Mono.CSharp
                 {
                     if (expr.Type == InternalType.DefaultType)
                     {
-                        rc.Report.Error(
-                            8312,
-                            loc,
-                            "Use of default literal is not valid in this context"
-                        );
+                        rc.Report
+                            .Error(
+                                8312,
+                                loc,
+                                "Use of default literal is not valid in this context"
+                            );
                     }
                     else if (expr.Type != InternalType.ErrorType)
                     {
-                        rc.Report.Error(
-                            1579,
-                            loc,
-                            "foreach statement cannot operate on variables of type `{0}' because it does not contain a definition for `{1}' or is inaccessible",
-                            expr.Type.GetSignatureForError(),
-                            "GetEnumerator"
-                        );
+                        rc.Report
+                            .Error(
+                                1579,
+                                loc,
+                                "foreach statement cannot operate on variables of type `{0}' because it does not contain a definition for `{1}' or is inaccessible",
+                                expr.Type.GetSignatureForError(),
+                                "GetEnumerator"
+                            );
                     }
 
                     return null;
@@ -9655,12 +9711,13 @@ namespace Mono.CSharp
                 if (variable_ref == null)
                     return false;
 
-                for_each.body.AddScopeStatement(
-                    new StatementExpression(
-                        new CompilerAssign(variable_ref, current_pe, Location.Null),
-                        for_each.type.Location
-                    )
-                );
+                for_each.body
+                    .AddScopeStatement(
+                        new StatementExpression(
+                            new CompilerAssign(variable_ref, current_pe, Location.Null),
+                            for_each.type.Location
+                        )
+                    );
 
                 var init = new Invocation.Predefined(get_enumerator_mg, null);
 
@@ -9730,16 +9787,17 @@ namespace Mono.CSharp
             )
             {
                 ec.Report.SymbolRelatedToPreviousError(best);
-                ec.Report.Warning(
-                    278,
-                    2,
-                    expr.Location,
-                    "`{0}' contains ambiguous implementation of `{1}' pattern. Method `{2}' is ambiguous with method `{3}'",
-                    expr.Type.GetSignatureForError(),
-                    "enumerable",
-                    best.GetSignatureForError(),
-                    ambiguous.GetSignatureForError()
-                );
+                ec.Report
+                    .Warning(
+                        278,
+                        2,
+                        expr.Location,
+                        "`{0}' contains ambiguous implementation of `{1}' pattern. Method `{2}' is ambiguous with method `{3}'",
+                        expr.Type.GetSignatureForError(),
+                        "enumerable",
+                        best.GetSignatureForError(),
+                        ambiguous.GetSignatureForError()
+                    );
 
                 ambiguous_getenumerator_name = true;
                 return true;
@@ -9843,12 +9901,13 @@ namespace Mono.CSharp
             {
                 if (expr.eclass == ExprClass.MethodGroup || expr is AnonymousMethodExpression)
                 {
-                    ec.Report.Error(
-                        446,
-                        expr.Location,
-                        "Foreach statement cannot operate on a `{0}'",
-                        expr.ExprClassName
-                    );
+                    ec.Report
+                        .Error(
+                            446,
+                            expr.Location,
+                            "Foreach statement cannot operate on a `{0}'",
+                            expr.ExprClassName
+                        );
                     return false;
                 }
 

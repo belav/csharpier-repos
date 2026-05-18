@@ -178,13 +178,14 @@ namespace System.Threading.Tasks.Tests
         {
             var tcs = new TaskCompletionSource();
             var invoked = new TaskCompletionSource();
-            _ = Task.Factory.FromAsync(
-                TaskToAsyncResult.Begin(tcs.Task, null, null),
-                iar =>
-                {
-                    invoked.SetResult();
-                }
-            );
+            _ = Task.Factory
+                .FromAsync(
+                    TaskToAsyncResult.Begin(tcs.Task, null, null),
+                    iar =>
+                    {
+                        invoked.SetResult();
+                    }
+                );
             tcs.SetResult();
             await invoked.Task;
         }
@@ -194,11 +195,12 @@ namespace System.Threading.Tasks.Tests
         {
             var tcs = new TaskCompletionSource();
             var invoked = new TaskCompletionSource();
-            _ = Task.Factory.FromAsync(
-                (callback, state) => TaskToAsyncResult.Begin(tcs.Task, callback, state),
-                iar => invoked.SetResult(),
-                new object()
-            );
+            _ = Task.Factory
+                .FromAsync(
+                    (callback, state) => TaskToAsyncResult.Begin(tcs.Task, callback, state),
+                    iar => invoked.SetResult(),
+                    new object()
+                );
             tcs.SetResult();
             await invoked.Task;
         }

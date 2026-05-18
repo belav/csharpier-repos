@@ -1136,9 +1136,10 @@ namespace System.Data
 
         public static Exception ColumnTypeNotSupported()
         {
-            return System.Data.Common.ADP.NotSupported(
-                Res.GetString(Res.DataColumn_NullableTypesNotSupported)
-            );
+            return System.Data
+                .Common
+                .ADP
+                .NotSupported(Res.GetString(Res.DataColumn_NullableTypesNotSupported));
         }
 
         //

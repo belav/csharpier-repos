@@ -55,7 +55,8 @@ namespace System.ServiceModel.Security
             {
                 get
                 {
-                    return DXD.TrustDec2005Dictionary.RequestSecurityTokenCollectionIssuanceFinalResponse;
+                    return DXD.TrustDec2005Dictionary
+                        .RequestSecurityTokenCollectionIssuanceFinalResponse;
                 }
             }
 
@@ -104,9 +105,8 @@ namespace System.ServiceModel.Security
             )
             {
                 XmlElement result = base.CreateRequiredClaimsElement(claimsList);
-                XmlAttribute dialectAttribute = result.OwnerDocument.CreateAttribute(
-                    DXD.TrustDec2005Dictionary.Dialect.Value
-                );
+                XmlAttribute dialectAttribute = result.OwnerDocument
+                    .CreateAttribute(DXD.TrustDec2005Dictionary.Dialect.Value);
                 dialectAttribute.Value = DXD.TrustDec2005Dictionary.DialectType.Value;
                 result.Attributes.Append(dialectAttribute);
 
@@ -120,9 +120,8 @@ namespace System.ServiceModel.Security
             )
             {
                 if (channelBehaviors == null)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                        "channelBehaviors"
-                    );
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperArgumentNull("channelBehaviors");
 
                 ChannelFactory<IWsTrustDec2005SecurityTokenService> result =
                     new ChannelFactory<IWsTrustDec2005SecurityTokenService>(binding, address);
@@ -135,9 +134,11 @@ namespace System.ServiceModel.Security
                 }
                 // add a behavior that removes the UI channel initializer added by the client credentials since there should be no UI
                 // initializer popped up as part of obtaining the federation token (the UI should already have been popped up for the main channel)
-                result.Endpoint.Behaviors.Add(
-                    new WSTrustFeb2005.DriverFeb2005.InteractiveInitializersRemovingBehavior()
-                );
+                result.Endpoint
+                    .Behaviors
+                    .Add(
+                        new WSTrustFeb2005.DriverFeb2005.InteractiveInitializersRemovingBehavior()
+                    );
 
                 return new WSTrustFeb2005.DriverFeb2005.RequestChannelFactory<IWsTrustDec2005SecurityTokenService>(
                     result
@@ -152,9 +153,8 @@ namespace System.ServiceModel.Security
                 // For WS-Trust 1.3 we want everything in the requestSecurityTokenTemplate parameters to endup as Addtional parameters.
                 // The parameters will appear as a child element under a XmlElement named secondaryParameters.
                 if (originalRequestParameters == null)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                        "originalRequestParameters"
-                    );
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperArgumentNull("originalRequestParameters");
 
                 if (
                     originalRequestParameters.Count > 0
@@ -163,7 +163,8 @@ namespace System.ServiceModel.Security
                 )
                 {
                     XmlElement secondaryParamElement = originalRequestParameters[0]
-                        .OwnerDocument.CreateElement(
+                        .OwnerDocument
+                        .CreateElement(
                             DXD.TrustDec2005Dictionary.Prefix.Value,
                             DXD.TrustDec2005Dictionary.SecondaryParameters.Value,
                             DXD.TrustDec2005Dictionary.Namespace.Value
@@ -193,9 +194,8 @@ namespace System.ServiceModel.Security
             {
                 if (keyWrapAlgorithm == null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                        "keyWrapAlgorithm"
-                    );
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperArgumentNull("keyWrapAlgorithm");
                 }
                 XmlDocument doc = new XmlDocument();
                 XmlElement result = doc.CreateElement(

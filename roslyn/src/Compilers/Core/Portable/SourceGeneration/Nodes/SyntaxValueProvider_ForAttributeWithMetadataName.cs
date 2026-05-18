@@ -59,9 +59,8 @@ public partial struct SyntaxValueProvider
 {
     private static readonly char[] s_nestedTypeNameSeparators = new char[] { '+' };
     private static readonly SymbolDisplayFormat s_metadataDisplayFormat =
-        SymbolDisplayFormat.QualifiedNameArityFormat.AddCompilerInternalOptions(
-            SymbolDisplayCompilerInternalOptions.UsePlusForNestedTypes
-        );
+        SymbolDisplayFormat.QualifiedNameArityFormat
+            .AddCompilerInternalOptions(SymbolDisplayCompilerInternalOptions.UsePlusForNestedTypes);
 
     /// <summary>
     /// Creates an <see cref="IncrementalValuesProvider{T}"/> that can provide a transform over all <see

@@ -276,10 +276,8 @@ namespace System.ServiceModel.Activities
                 }
 
                 this.internalSend = CreateInternalSend();
-                this.InternalContent.ConfigureInternalSend(
-                    this.internalSend,
-                    out this.requestFormatter
-                );
+                this.InternalContent
+                    .ConfigureInternalSend(this.internalSend, out this.requestFormatter);
 
                 if (this.requestFormatter != null && this.lazyFormatter != null)
                 {

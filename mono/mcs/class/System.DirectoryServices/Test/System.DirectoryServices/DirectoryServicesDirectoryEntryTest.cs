@@ -79,10 +79,8 @@ namespace MonoTests.System.DirectoryServices
             cnJohnSmith.Properties["telephoneNumber"].Value = "1 801 555 1212";
             cnJohnSmith.CommitChanges();
 
-            DirectoryEntry cnBarakTsabari = ouHumanResources.Children.Add(
-                "cn=Barak Tsabari",
-                "Class"
-            );
+            DirectoryEntry cnBarakTsabari = ouHumanResources.Children
+                .Add("cn=Barak Tsabari", "Class");
             ((PropertyValueCollection)cnBarakTsabari.Properties["objectClass"]).Add("person");
             ((PropertyValueCollection)cnBarakTsabari.Properties["objectClass"]).Add(
                 "organizationalPerson"
@@ -807,10 +805,8 @@ namespace MonoTests.System.DirectoryServices
             )
             {
                 using (
-                    DirectoryEntry cnBarakTsabari = ouHumanResources.Children.Add(
-                        "cn=Barak Tsabari",
-                        "Class"
-                    )
+                    DirectoryEntry cnBarakTsabari = ouHumanResources.Children
+                        .Add("cn=Barak Tsabari", "Class")
                 )
                 {
                     ((PropertyValueCollection)cnBarakTsabari.Properties["objectClass"]).Add(
@@ -1101,10 +1097,8 @@ namespace MonoTests.System.DirectoryServices
             )
             {
                 using (
-                    DirectoryEntry cnBarakTsabari = ouHumanResources.Children.Add(
-                        "cn=Barak Tsabari",
-                        "Class"
-                    )
+                    DirectoryEntry cnBarakTsabari = ouHumanResources.Children
+                        .Add("cn=Barak Tsabari", "Class")
                 )
                 {
                     ((PropertyValueCollection)cnBarakTsabari.Properties["objectClass"]).Add(
@@ -1651,10 +1645,8 @@ namespace MonoTests.System.DirectoryServices
             )
             {
                 using (
-                    DirectoryEntry cnBarakTsabari = ouHumanResources.Children.Add(
-                        "cn=Barak Tsabari",
-                        "Class"
-                    )
+                    DirectoryEntry cnBarakTsabari = ouHumanResources.Children
+                        .Add("cn=Barak Tsabari", "Class")
                 )
                 {
                     ((PropertyValueCollection)cnBarakTsabari.Properties["objectClass"]).Add(
@@ -2392,10 +2384,8 @@ namespace MonoTests.System.DirectoryServices
             )
             {
                 using (
-                    DirectoryEntry newEmployeeDE = humanResourcesDE.Children.Add(
-                        "cn=New Employee",
-                        "Class"
-                    )
+                    DirectoryEntry newEmployeeDE = humanResourcesDE.Children
+                        .Add("cn=New Employee", "Class")
                 )
                 {
                     Assert.AreEqual(newEmployeeDE.Properties["cn"].Value, null);

@@ -57,9 +57,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols
             CompileAndVerify(
                 source,
                 validator: validator,
-                options: TestOptions.ReleaseDll.WithMetadataImportOptions(
-                    MetadataImportOptions.Internal
-                )
+                options: TestOptions.ReleaseDll
+                    .WithMetadataImportOptions(MetadataImportOptions.Internal)
             );
         }
 
@@ -2736,9 +2735,8 @@ B",
                 source: source,
                 sourceSymbolValidator: validator(true),
                 symbolValidator: validator(false),
-                options: TestOptions.ReleaseDll.WithMetadataImportOptions(
-                    MetadataImportOptions.Internal
-                )
+                options: TestOptions.ReleaseDll
+                    .WithMetadataImportOptions(MetadataImportOptions.Internal)
             );
         }
 
@@ -2792,9 +2790,8 @@ static class S
 }";
             var compilation = CreateCompilation(
                 source,
-                options: TestOptions.ReleaseDll.WithMetadataImportOptions(
-                    MetadataImportOptions.Internal
-                )
+                options: TestOptions.ReleaseDll
+                    .WithMetadataImportOptions(MetadataImportOptions.Internal)
             );
             Action<ModuleSymbol> validator = module =>
             {
@@ -2907,8 +2904,8 @@ internal static class C
                 comp,
                 symbolValidator: module =>
                 {
-                    var method = module
-                        .GlobalNamespace.GetMember<NamedTypeSymbol>("C")
+                    var method = module.GlobalNamespace
+                        .GetMember<NamedTypeSymbol>("C")
                         .GetMember<PEMethodSymbol>("M1");
                     Assert.True(method.IsExtensionMethod);
                     Assert.Equal(
@@ -3155,8 +3152,8 @@ class Program
             var compilation = CreateCompilationWithMscorlib40AndSystemCore(source);
             compilation.VerifyDiagnostics();
 
-            var extensionMethod = compilation
-                .GlobalNamespace.GetMember<NamedTypeSymbol>("C")
+            var extensionMethod = compilation.GlobalNamespace
+                .GetMember<NamedTypeSymbol>("C")
                 .GetMember<MethodSymbol>("M");
             Assert.True(extensionMethod.IsExtensionMethod);
 
@@ -3209,8 +3206,8 @@ public struct MyStruct<T>
             );
             compilation2.VerifyDiagnostics();
 
-            var extensionMethod = compilation2
-                .GlobalNamespace.GetMember<NamedTypeSymbol>("C")
+            var extensionMethod = compilation2.GlobalNamespace
+                .GetMember<NamedTypeSymbol>("C")
                 .GetMember<MethodSymbol>("M");
             Assert.True(extensionMethod.IsExtensionMethod);
 
@@ -3243,8 +3240,8 @@ public struct MyStruct<T>
                     .WithLocation(5, 9)
             );
 
-            extensionMethod = compilation2
-                .GlobalNamespace.GetMember<NamedTypeSymbol>("C")
+            extensionMethod = compilation2.GlobalNamespace
+                .GetMember<NamedTypeSymbol>("C")
                 .GetMember<MethodSymbol>("M");
             Assert.True(extensionMethod.IsExtensionMethod);
 
@@ -4678,8 +4675,8 @@ public static class C
             var compilation = CreateCompilationWithMscorlib40AndSystemCore(source);
             compilation.VerifyDiagnostics();
 
-            var extensionMethod = compilation
-                .GlobalNamespace.GetMember<NamedTypeSymbol>("C")
+            var extensionMethod = compilation.GlobalNamespace
+                .GetMember<NamedTypeSymbol>("C")
                 .GetMember<MethodSymbol>("M");
             Assert.True(extensionMethod.IsExtensionMethod);
 
@@ -4717,9 +4714,10 @@ public static class C
                 targetFramework: TargetFramework.NetCoreApp
             );
 
-            var a = compilation
-                .GlobalNamespace.GetTypeMember("A")
-                .InstanceConstructors.Where(c => !c.IsDefaultValueTypeConstructor())
+            var a = compilation.GlobalNamespace
+                .GetTypeMember("A")
+                .InstanceConstructors
+                .Where(c => !c.IsDefaultValueTypeConstructor())
                 .Single();
 
             Assert.Null(a.Parameters[1].ExplicitDefaultValue);

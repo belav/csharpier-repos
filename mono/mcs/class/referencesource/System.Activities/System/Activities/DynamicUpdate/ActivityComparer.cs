@@ -592,18 +592,14 @@ namespace System.Activities.DynamicUpdate
             {
                 // now, let's try creating argument entries
                 IList<ArgumentInfo> oldArguments = ArgumentInfo.List(originalActivity);
-                this.nestedFinalizer.CreateArgumentEntries(
-                    entry,
-                    currentActivity.RuntimeArguments,
-                    oldArguments
-                );
+                this.nestedFinalizer
+                    .CreateArgumentEntries(entry, currentActivity.RuntimeArguments, oldArguments);
                 if (entry.HasEnvironmentUpdates)
                 {
                     if (entry.EnvironmentUpdateMap.HasArgumentEntries)
                     {
                         foreach (
-                            EnvironmentUpdateMapEntry argumentEntry in entry
-                                .EnvironmentUpdateMap
+                            EnvironmentUpdateMapEntry argumentEntry in entry.EnvironmentUpdateMap
                                 .ArgumentEntries
                         )
                         {
@@ -645,22 +641,24 @@ namespace System.Activities.DynamicUpdate
                             )
                             {
                                 // create an entry for removal of this expression
-                                this.privateMap.AddEntry(
-                                    new DynamicUpdateMapEntry(
-                                        oldRuntimeArgument.BoundArgument.Expression.InternalId,
-                                        0
-                                    )
-                                );
+                                this.privateMap
+                                    .AddEntry(
+                                        new DynamicUpdateMapEntry(
+                                            oldRuntimeArgument.BoundArgument.Expression.InternalId,
+                                            0
+                                        )
+                                    );
                             }
                         }
                     }
 
-                    DynamicUpdateMapBuilder.Finalizer.FillEnvironmentMapMemberCounts(
-                        entry.EnvironmentUpdateMap,
-                        currentActivity,
-                        originalActivity,
-                        oldArguments
-                    );
+                    DynamicUpdateMapBuilder.Finalizer
+                        .FillEnvironmentMapMemberCounts(
+                            entry.EnvironmentUpdateMap,
+                            currentActivity,
+                            originalActivity,
+                            oldArguments
+                        );
                     this.argumentChangeDetected = true;
                 }
                 else if (
@@ -747,9 +745,8 @@ namespace System.Activities.DynamicUpdate
                 );
 
                 // add originalActivity and currentActivity to the pair queue so that their subtrees are further processed for matching
-                this.matchedActivities.Enqueue(
-                    new Tuple<Activity, Activity>(originalActivity, currentActivity)
-                );
+                this.matchedActivities
+                    .Enqueue(new Tuple<Activity, Activity>(originalActivity, currentActivity));
             }
 
             bool AddEqualChildren(Activity currentActivity, Activity originalActivity)

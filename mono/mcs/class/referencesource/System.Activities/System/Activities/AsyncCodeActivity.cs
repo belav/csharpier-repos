@@ -99,18 +99,22 @@ namespace System.Activities
 
                 if (result == null)
                 {
-                    throw FxTrace.Exception.AsError(
-                        new InvalidOperationException(SR.BeginExecuteMustNotReturnANullAsyncResult)
-                    );
+                    throw FxTrace.Exception
+                        .AsError(
+                            new InvalidOperationException(
+                                SR.BeginExecuteMustNotReturnANullAsyncResult
+                            )
+                        );
                 }
 
                 if (!object.ReferenceEquals(result.AsyncState, asyncContext))
                 {
-                    throw FxTrace.Exception.AsError(
-                        new InvalidOperationException(
-                            SR.BeginExecuteMustUseProvidedStateAsAsyncResultState
-                        )
-                    );
+                    throw FxTrace.Exception
+                        .AsError(
+                            new InvalidOperationException(
+                                SR.BeginExecuteMustUseProvidedStateAsAsyncResultState
+                            )
+                        );
                 }
 
                 if (result.CompletedSynchronously)
@@ -239,9 +243,8 @@ namespace System.Activities
 
         protected sealed override void CacheMetadata(ActivityMetadata metadata)
         {
-            throw FxTrace.Exception.AsError(
-                new InvalidOperationException(SR.WrongCacheMetadataForCodeActivity)
-            );
+            throw FxTrace.Exception
+                .AsError(new InvalidOperationException(SR.WrongCacheMetadataForCodeActivity));
         }
 
         protected virtual void CacheMetadata(CodeActivityMetadata metadata)
@@ -265,13 +268,14 @@ namespace System.Activities
 
             protected override void OnCallExecutor()
             {
-                this.Executor.CompleteOperation(
-                    new CompleteAsyncCodeActivityWorkItem(
-                        this.AsyncContext,
-                        this.Instance,
-                        this.result
-                    )
-                );
+                this.Executor
+                    .CompleteOperation(
+                        new CompleteAsyncCodeActivityWorkItem(
+                            this.AsyncContext,
+                            this.Instance,
+                            this.result
+                        )
+                    );
             }
 
             // not [DataContract] since this workitem will never happen when persistable
@@ -461,18 +465,22 @@ namespace System.Activities
 
                 if (result == null)
                 {
-                    throw FxTrace.Exception.AsError(
-                        new InvalidOperationException(SR.BeginExecuteMustNotReturnANullAsyncResult)
-                    );
+                    throw FxTrace.Exception
+                        .AsError(
+                            new InvalidOperationException(
+                                SR.BeginExecuteMustNotReturnANullAsyncResult
+                            )
+                        );
                 }
 
                 if (!object.ReferenceEquals(result.AsyncState, asyncContext))
                 {
-                    throw FxTrace.Exception.AsError(
-                        new InvalidOperationException(
-                            SR.BeginExecuteMustUseProvidedStateAsAsyncResultState
-                        )
-                    );
+                    throw FxTrace.Exception
+                        .AsError(
+                            new InvalidOperationException(
+                                SR.BeginExecuteMustUseProvidedStateAsAsyncResultState
+                            )
+                        );
                 }
 
                 if (result.CompletedSynchronously)
@@ -582,9 +590,8 @@ namespace System.Activities
 
         protected sealed override void CacheMetadata(ActivityMetadata metadata)
         {
-            throw FxTrace.Exception.AsError(
-                new InvalidOperationException(SR.WrongCacheMetadataForCodeActivity)
-            );
+            throw FxTrace.Exception
+                .AsError(new InvalidOperationException(SR.WrongCacheMetadataForCodeActivity));
         }
 
         protected virtual void CacheMetadata(CodeActivityMetadata metadata)

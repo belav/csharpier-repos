@@ -118,27 +118,12 @@ namespace System.IO.Ports.Tests
 
                 TCSupport.WaitForReadBufferToLoad(com1, totalBytesToRead);
 
-                IAsyncResult readAsyncResult1 = com1.BaseStream.BeginRead(
-                    new byte[numBytesToRead1],
-                    0,
-                    numBytesToRead1,
-                    null,
-                    null
-                );
-                IAsyncResult readAsyncResult2 = com1.BaseStream.BeginRead(
-                    new byte[numBytesToRead2],
-                    0,
-                    numBytesToRead2,
-                    null,
-                    null
-                );
-                IAsyncResult readAsyncResult3 = com1.BaseStream.BeginRead(
-                    new byte[numBytesToRead3],
-                    0,
-                    numBytesToRead3,
-                    null,
-                    null
-                );
+                IAsyncResult readAsyncResult1 = com1.BaseStream
+                    .BeginRead(new byte[numBytesToRead1], 0, numBytesToRead1, null, null);
+                IAsyncResult readAsyncResult2 = com1.BaseStream
+                    .BeginRead(new byte[numBytesToRead2], 0, numBytesToRead2, null, null);
+                IAsyncResult readAsyncResult3 = com1.BaseStream
+                    .BeginRead(new byte[numBytesToRead3], 0, numBytesToRead3, null, null);
 
                 if (
                     numBytesToRead1
@@ -207,27 +192,12 @@ namespace System.IO.Ports.Tests
 
                 TCSupport.WaitForReadBufferToLoad(com1, totalBytesToRead);
 
-                IAsyncResult readAsyncResult1 = com1.BaseStream.BeginRead(
-                    new byte[numBytesToRead1],
-                    0,
-                    numBytesToRead1,
-                    null,
-                    null
-                );
-                IAsyncResult readAsyncResult2 = com1.BaseStream.BeginRead(
-                    new byte[numBytesToRead2],
-                    0,
-                    numBytesToRead2,
-                    null,
-                    null
-                );
-                IAsyncResult readAsyncResult3 = com1.BaseStream.BeginRead(
-                    new byte[numBytesToRead3],
-                    0,
-                    numBytesToRead3,
-                    null,
-                    null
-                );
+                IAsyncResult readAsyncResult1 = com1.BaseStream
+                    .BeginRead(new byte[numBytesToRead1], 0, numBytesToRead1, null, null);
+                IAsyncResult readAsyncResult2 = com1.BaseStream
+                    .BeginRead(new byte[numBytesToRead2], 0, numBytesToRead2, null, null);
+                IAsyncResult readAsyncResult3 = com1.BaseStream
+                    .BeginRead(new byte[numBytesToRead3], 0, numBytesToRead3, null, null);
 
                 if (
                     numBytesToRead2

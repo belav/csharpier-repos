@@ -539,8 +539,8 @@ namespace System.Management
                         collectionObject.options.BlockSize
                     ];
 
-                    int status = collectionObject
-                        .scope.GetSecuredIEnumWbemClassObjectHandler(enumWbem)
+                    int status = collectionObject.scope
+                        .GetSecuredIEnumWbemClassObjectHandler(enumWbem)
                         .Next_(
                             timeout,
                             (uint)collectionObject.options.BlockSize,
@@ -619,8 +619,8 @@ namespace System.Management
 
                     try
                     {
-                        status = collectionObject
-                            .scope.GetSecuredIEnumWbemClassObjectHandler(enumWbem)
+                        status = collectionObject.scope
+                            .GetSecuredIEnumWbemClassObjectHandler(enumWbem)
                             .Reset_();
                     }
                     catch (COMException e)

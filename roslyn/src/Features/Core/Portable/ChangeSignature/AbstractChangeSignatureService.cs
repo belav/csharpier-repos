@@ -334,8 +334,9 @@ namespace Microsoft.CodeAnalysis.ChangeSignature
                 return null;
             }
 
-            var changeSignatureOptionsService =
-                succeededContext.Solution.Services.GetRequiredService<IChangeSignatureOptionsService>();
+            var changeSignatureOptionsService = succeededContext.Solution
+                .Services
+                .GetRequiredService<IChangeSignatureOptionsService>();
 
             return changeSignatureOptionsService.GetChangeSignatureOptions(
                 succeededContext.Document,
@@ -360,9 +361,8 @@ namespace Microsoft.CodeAnalysis.ChangeSignature
                 var engine = new FindReferencesSearchEngine(
                     solution,
                     documents: null,
-                    ReferenceFinders.DefaultReferenceFinders.Add(
-                        DelegateInvokeMethodReferenceFinder.DelegateInvokeMethod
-                    ),
+                    ReferenceFinders.DefaultReferenceFinders
+                        .Add(DelegateInvokeMethodReferenceFinder.DelegateInvokeMethod),
                     streamingProgress,
                     FindReferencesSearchOptions.Default
                 );
@@ -557,8 +557,9 @@ namespace Microsoft.CodeAnalysis.ChangeSignature
             foreach (var docId in nodesToUpdate.Keys)
             {
                 var doc = currentSolution.GetRequiredDocument(docId);
-                var updater =
-                    doc.Project.Services.GetRequiredService<AbstractChangeSignatureService>();
+                var updater = doc.Project
+                    .Services
+                    .GetRequiredService<AbstractChangeSignatureService>();
                 var root = await doc.GetSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
                 if (root is null)
                 {
@@ -839,8 +840,8 @@ namespace Microsoft.CodeAnalysis.ChangeSignature
 
                 if (
                     !arguments[i].IsNamed
-                    || updatedSignature
-                        .UpdatedConfiguration.ToListOfParameters()
+                    || updatedSignature.UpdatedConfiguration
+                        .ToListOfParameters()
                         .Any(
                             static (p, arg) => p.Name == arg.arguments[arg.i].GetName(),
                             (arguments, i)
@@ -870,10 +871,10 @@ namespace Microsoft.CodeAnalysis.ChangeSignature
                 > updatedSignature.OriginalConfiguration.ToListOfParameters().Length
             )
             {
-                var originalConfigurationParameters =
-                    updatedSignature.OriginalConfiguration.ToListOfParameters();
-                var updatedConfigurationParameters =
-                    updatedSignature.UpdatedConfiguration.ToListOfParameters();
+                var originalConfigurationParameters = updatedSignature.OriginalConfiguration
+                    .ToListOfParameters();
+                var updatedConfigurationParameters = updatedSignature.UpdatedConfiguration
+                    .ToListOfParameters();
 
                 var bonusParameters = realParameters.Skip(originalConfigurationParameters.Length);
 
@@ -1343,8 +1344,8 @@ namespace Microsoft.CodeAnalysis.ChangeSignature
                 }
 
                 if (
-                    semanticModel
-                        .Compilation.ClassifyCommonConversion(symbolType, addedParameter.Type)
+                    semanticModel.Compilation
+                        .ClassifyCommonConversion(symbolType, addedParameter.Type)
                         .IsImplicit
                 )
                 {
@@ -1479,10 +1480,8 @@ namespace Microsoft.CodeAnalysis.ChangeSignature
                             cancellationToken
                         );
                         var toType = methodSymbol.Parameters.Last().Type;
-                        return !semanticModel.Compilation.HasImplicitConversion(
-                            fromType.Type,
-                            toType
-                        );
+                        return !semanticModel.Compilation
+                            .HasImplicitConversion(fromType.Type, toType);
                     }
                 }
             }

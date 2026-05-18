@@ -546,11 +546,11 @@ namespace BuildValidator
 
             bool hasPdbCompressionDifferences()
             {
-                var originalEntry = originalInfo
-                    .AssemblyReader.ReadDebugDirectory()
+                var originalEntry = originalInfo.AssemblyReader
+                    .ReadDebugDirectory()
                     .SingleOrDefault(x => x.Type == DebugDirectoryEntryType.EmbeddedPortablePdb);
-                var rebuildEntry = rebuildInfo
-                    .AssemblyReader.ReadDebugDirectory()
+                var rebuildEntry = rebuildInfo.AssemblyReader
+                    .ReadDebugDirectory()
                     .SingleOrDefault(x => x.Type == DebugDirectoryEntryType.EmbeddedPortablePdb);
                 if (
                     originalEntry.Type == DebugDirectoryEntryType.Unknown

@@ -266,27 +266,29 @@ namespace System.IO.Pipes
 
             int startTime = Environment.TickCount; // We need to measure time here, not in the lambda
 
-            return Task.Factory.StartNew(
-                static state =>
-                {
-                    var tuple = ((
-                        NamedPipeClientStream stream,
-                        int timeout,
-                        CancellationToken cancellationToken,
-                        int startTime
-                    ))
-                        state!;
-                    tuple.stream.ConnectInternal(
-                        tuple.timeout,
-                        tuple.cancellationToken,
-                        tuple.startTime
-                    );
-                },
-                (this, timeout, cancellationToken, startTime),
-                cancellationToken,
-                TaskCreationOptions.DenyChildAttach,
-                TaskScheduler.Default
-            );
+            return Task.Factory
+                .StartNew(
+                    static state =>
+                    {
+                        var tuple = ((
+                            NamedPipeClientStream stream,
+                            int timeout,
+                            CancellationToken cancellationToken,
+                            int startTime
+                        ))
+                            state!;
+                        tuple.stream
+                            .ConnectInternal(
+                                tuple.timeout,
+                                tuple.cancellationToken,
+                                tuple.startTime
+                            );
+                    },
+                    (this, timeout, cancellationToken, startTime),
+                    cancellationToken,
+                    TaskCreationOptions.DenyChildAttach,
+                    TaskScheduler.Default
+                );
         }
 
         public Task ConnectAsync(TimeSpan timeout, CancellationToken cancellationToken = default) =>

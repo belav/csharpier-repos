@@ -99,9 +99,8 @@ namespace Microsoft.CodeAnalysis.CSharp.OrganizeImports
                 where TSyntax : SyntaxNode
             {
                 if (list.Count > 0)
-                    this.TextChanges.Add(
-                        new TextChange(GetTextSpan(list), GetNewText(organizedList))
-                    );
+                    this.TextChanges
+                        .Add(new TextChange(GetTextSpan(list), GetNewText(organizedList)));
             }
 
             private static string GetNewText<TSyntax>(SyntaxList<TSyntax> organizedList)

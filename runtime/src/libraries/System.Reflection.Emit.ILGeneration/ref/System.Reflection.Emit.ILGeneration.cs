@@ -136,8 +136,7 @@ namespace System.Reflection.Emit
 
         public virtual void ThrowException(
             [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(
-                System
-                    .Diagnostics
+                System.Diagnostics
                     .CodeAnalysis
                     .DynamicallyAccessedMemberTypes
                     .PublicParameterlessConstructor

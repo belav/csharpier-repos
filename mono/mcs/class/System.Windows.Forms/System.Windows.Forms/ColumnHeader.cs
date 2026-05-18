@@ -151,10 +151,8 @@ namespace System.Windows.Forms
             if (owner != null)
                 column_rect.Height = ThemeEngine.Current.ListViewGetHeaderHeight(owner, owner.Font);
             else
-                column_rect.Height = ThemeEngine.Current.ListViewGetHeaderHeight(
-                    null,
-                    ThemeEngine.Current.DefaultFont
-                );
+                column_rect.Height = ThemeEngine.Current
+                    .ListViewGetHeaderHeight(null, ThemeEngine.Current.DefaultFont);
 
             column_rect.Width = 0;
 

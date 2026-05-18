@@ -1308,10 +1308,8 @@ namespace System.Configuration
                                     );
                                 }
 
-                                dataToWrite |= entry.Value.SerializeToXmlElement(
-                                    writer,
-                                    ElementName
-                                );
+                                dataToWrite |= entry.Value
+                                    .SerializeToXmlElement(writer, ElementName);
                             }
                             else
                                 dataToWrite |= entry.Value.SerializeElement(writer, false);

@@ -459,8 +459,8 @@ class Program
             comp.TestOnlyCompilationData = nullableAnalysisData;
             comp.VerifyDiagnostics();
 
-            int analyzed = nullableAnalysisData
-                .Data.Where(pair => pair.Value.RequiredAnalysis)
+            int analyzed = nullableAnalysisData.Data
+                .Where(pair => pair.Value.RequiredAnalysis)
                 .Count();
             Assert.Equal(nMethods / 2, analyzed);
         }

@@ -231,10 +231,11 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 throw new InvalidOperationException("Only records have copy-constructor");
             }
 
-            return type.InstanceConstructors.Single(c =>
-                c.Parameters is [{ Type: var parameterType }]
-                && parameterType.Equals(type, SymbolEqualityComparer.Default)
-            );
+            return type.InstanceConstructors
+                .Single(c =>
+                    c.Parameters is [{ Type: var parameterType }]
+                    && parameterType.Equals(type, SymbolEqualityComparer.Default)
+                );
         }
 
         public static IMethodSymbol GetPrimaryConstructor(
@@ -243,9 +244,10 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         )
         {
             var type = compilation.GetMember<INamedTypeSymbol>(qualifiedTypeName);
-            return type.InstanceConstructors.Single(c =>
-                c.DeclaringSyntaxReferences.Any(r => r.GetSyntax() is TypeDeclarationSyntax)
-            );
+            return type.InstanceConstructors
+                .Single(c =>
+                    c.DeclaringSyntaxReferences.Any(r => r.GetSyntax() is TypeDeclarationSyntax)
+                );
         }
 
         public static IMethodSymbol GetParameterlessConstructor(
@@ -282,18 +284,20 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 throw new InvalidOperationException("Only records have primary deconstructor");
             }
 
-            return primaryConstructor
-                .ContainingType.GetMembers("Deconstruct")
+            return primaryConstructor.ContainingType
+                .GetMembers("Deconstruct")
                 .OfType<IMethodSymbol>()
                 .Single(m =>
                     m.Parameters.Length == primaryConstructor.Parameters.Length
-                    && m.Parameters.All(p =>
-                        p.RefKind == RefKind.Out
-                        && p.Type.Equals(
-                            primaryConstructor.Parameters[p.Ordinal].Type,
-                            SymbolEqualityComparer.Default
+                    && m.Parameters
+                        .All(p =>
+                            p.RefKind == RefKind.Out
+                            && p.Type
+                                .Equals(
+                                    primaryConstructor.Parameters[p.Ordinal].Type,
+                                    SymbolEqualityComparer.Default
+                                )
                         )
-                    )
                 );
         }
 
@@ -876,7 +880,9 @@ internal static class Extensions
     {
         return (
             (Microsoft.CodeAnalysis.CSharp.Symbols.PublicModel.TypeParameterSymbol)symbol
-        ).UnderlyingTypeParameterSymbol.AllEffectiveInterfacesNoUseSiteDiagnostics.GetPublicSymbols();
+        ).UnderlyingTypeParameterSymbol
+            .AllEffectiveInterfacesNoUseSiteDiagnostics
+            .GetPublicSymbols();
     }
 
     public static ITypeSymbol GetParameterType(this IMethodSymbol method, int index) =>
@@ -1197,10 +1203,10 @@ internal static class Extensions
         DiagnosticBag diagnostics
     )
     {
-        var bindingDiagnostics = Microsoft.CodeAnalysis.CSharp.BindingDiagnosticBag.GetInstance(
-            withDiagnostics: true,
-            withDependencies: false
-        );
+        var bindingDiagnostics = Microsoft.CodeAnalysis
+            .CSharp
+            .BindingDiagnosticBag
+            .GetInstance(withDiagnostics: true, withDependencies: false);
         var result = binder.BindCref(syntax, out ambiguityWinner, bindingDiagnostics);
         diagnostics.AddRange(bindingDiagnostics.DiagnosticBag);
         bindingDiagnostics.Free();
@@ -1213,10 +1219,10 @@ internal static class Extensions
         DiagnosticBag diagnostics
     )
     {
-        var bindingDiagnostics = Microsoft.CodeAnalysis.CSharp.BindingDiagnosticBag.GetInstance(
-            withDiagnostics: true,
-            withDependencies: false
-        );
+        var bindingDiagnostics = Microsoft.CodeAnalysis
+            .CSharp
+            .BindingDiagnosticBag
+            .GetInstance(withDiagnostics: true, withDependencies: false);
         var result = binder.BindEmbeddedBlock(node, bindingDiagnostics);
         diagnostics.AddRange(bindingDiagnostics.DiagnosticBag);
         bindingDiagnostics.Free();
@@ -1229,10 +1235,10 @@ internal static class Extensions
         DiagnosticBag diagnostics
     )
     {
-        var bindingDiagnostics = Microsoft.CodeAnalysis.CSharp.BindingDiagnosticBag.GetInstance(
-            withDiagnostics: true,
-            withDependencies: false
-        );
+        var bindingDiagnostics = Microsoft.CodeAnalysis
+            .CSharp
+            .BindingDiagnosticBag
+            .GetInstance(withDiagnostics: true, withDependencies: false);
         var result = binder.BindExpression(node, bindingDiagnostics);
         diagnostics.AddRange(bindingDiagnostics.DiagnosticBag);
         bindingDiagnostics.Free();

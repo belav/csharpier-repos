@@ -1510,11 +1510,12 @@ namespace System.Text.Json.Tests
                 )
                 {
                     builder.Append(
-                        Encoding.UTF8.GetString(
-                            json.HasValueSequence
-                                ? json.ValueSequence.ToArray()
-                                : json.ValueSpan.ToArray()
-                        )
+                        Encoding.UTF8
+                            .GetString(
+                                json.HasValueSequence
+                                    ? json.ValueSequence.ToArray()
+                                    : json.ValueSpan.ToArray()
+                            )
                     );
                     if (json.HasValueSequence)
                     {
@@ -1545,11 +1546,12 @@ namespace System.Text.Json.Tests
                 )
                 {
                     builder.Append(
-                        Encoding.UTF8.GetString(
-                            json.HasValueSequence
-                                ? json.ValueSequence.ToArray()
-                                : json.ValueSpan.ToArray()
-                        )
+                        Encoding.UTF8
+                            .GetString(
+                                json.HasValueSequence
+                                    ? json.ValueSequence.ToArray()
+                                    : json.ValueSpan.ToArray()
+                            )
                     );
                     if (json.HasValueSequence)
                     {
@@ -1608,11 +1610,12 @@ namespace System.Text.Json.Tests
                     );
                     Assert.Equal(
                         expectedString,
-                        Encoding.UTF8.GetString(
-                            json.HasValueSequence
-                                ? json.ValueSequence.ToArray()
-                                : json.ValueSpan.ToArray()
-                        )
+                        Encoding.UTF8
+                            .GetString(
+                                json.HasValueSequence
+                                    ? json.ValueSequence.ToArray()
+                                    : json.ValueSpan.ToArray()
+                            )
                     );
 
                     if (json.HasValueSequence)
@@ -2213,9 +2216,8 @@ namespace System.Text.Json.Tests
                         continue;
                     }
 
-                    byte[] dataUtf8 = Encoding.UTF8.GetBytes(
-                        jsonStringWithoutLineEnding + lineEnding
-                    );
+                    byte[] dataUtf8 = Encoding.UTF8
+                        .GetBytes(jsonStringWithoutLineEnding + lineEnding);
                     var state = new JsonReaderState(
                         options: new JsonReaderOptions
                         {

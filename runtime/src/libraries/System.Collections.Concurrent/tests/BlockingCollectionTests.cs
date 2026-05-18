@@ -183,10 +183,11 @@ namespace System.Collections.Concurrent.Tests
             DebuggerAttributeInfo info = DebuggerAttributes.ValidateDebuggerTypeProxyProperties(
                 col
             );
-            PropertyInfo itemProperty = info.Properties.Single(pr =>
-                pr.GetCustomAttribute<DebuggerBrowsableAttribute>().State
-                == DebuggerBrowsableState.RootHidden
-            );
+            PropertyInfo itemProperty = info.Properties
+                .Single(pr =>
+                    pr.GetCustomAttribute<DebuggerBrowsableAttribute>().State
+                    == DebuggerBrowsableState.RootHidden
+                );
             int[] items = itemProperty.GetValue(info.Instance) as int[];
             Assert.Equal(col, items);
         }
@@ -287,24 +288,25 @@ namespace System.Collections.Concurrent.Tests
 
             for (int i = 0; i < threads.Length; ++i)
             {
-                threads[i] = Task.Factory.StartNew(
-                    delegate(object index)
-                    {
-                        int startOfSequence = ((int)index) * numOfElementsPerThread;
-                        int endOfSequence = startOfSequence + numOfElementsPerThread;
-
-                        mre.WaitOne();
-
-                        for (int j = startOfSequence; j < endOfSequence; ++j)
+                threads[i] = Task.Factory
+                    .StartNew(
+                        delegate(object index)
                         {
-                            Assert.True(blockingCollection.TryAdd(j));
-                        }
-                    },
-                    i,
-                    CancellationToken.None,
-                    TaskCreationOptions.DenyChildAttach,
-                    TaskScheduler.Default
-                );
+                            int startOfSequence = ((int)index) * numOfElementsPerThread;
+                            int endOfSequence = startOfSequence + numOfElementsPerThread;
+
+                            mre.WaitOne();
+
+                            for (int j = startOfSequence; j < endOfSequence; ++j)
+                            {
+                                Assert.True(blockingCollection.TryAdd(j));
+                            }
+                        },
+                        i,
+                        CancellationToken.None,
+                        TaskCreationOptions.DenyChildAttach,
+                        TaskScheduler.Default
+                    );
             }
 
             mre.Set();
@@ -341,23 +343,24 @@ namespace System.Collections.Concurrent.Tests
             {
                 if (i < (threads.Length / 2))
                 {
-                    threads[i] = Task.Factory.StartNew(
-                        delegate(object index)
-                        {
-                            int startOfSequence = ((int)index) * numOfElementsPerThread;
-                            int endOfSequence = startOfSequence + numOfElementsPerThread;
-
-                            mre.WaitOne();
-                            for (int j = startOfSequence; j < endOfSequence; ++j)
+                    threads[i] = Task.Factory
+                        .StartNew(
+                            delegate(object index)
                             {
-                                Assert.True(blockingCollection.TryAdd(j));
-                            }
-                        },
-                        i,
-                        CancellationToken.None,
-                        TaskCreationOptions.DenyChildAttach,
-                        TaskScheduler.Default
-                    );
+                                int startOfSequence = ((int)index) * numOfElementsPerThread;
+                                int endOfSequence = startOfSequence + numOfElementsPerThread;
+
+                                mre.WaitOne();
+                                for (int j = startOfSequence; j < endOfSequence; ++j)
+                                {
+                                    Assert.True(blockingCollection.TryAdd(j));
+                                }
+                            },
+                            i,
+                            CancellationToken.None,
+                            TaskCreationOptions.DenyChildAttach,
+                            TaskScheduler.Default
+                        );
                 }
                 else
                 {
@@ -929,27 +932,28 @@ namespace System.Collections.Concurrent.Tests
             {
                 if (i < (threads.Length / 2))
                 {
-                    threads[i] = Task.Factory.StartNew(
-                        delegate(object index)
-                        {
-                            int startOfSequence = ((int)index) * numOfElementsPerThread;
-                            int endOfSequence = startOfSequence + numOfElementsPerThread;
-
-                            mre.WaitOne();
-                            for (int j = startOfSequence; j < endOfSequence; ++j)
+                    threads[i] = Task.Factory
+                        .StartNew(
+                            delegate(object index)
                             {
-                                Assert.InRange(
-                                    BlockingCollection<int>.AddToAny(blockingCollections, j),
-                                    0,
-                                    int.MaxValue
-                                );
-                            }
-                        },
-                        i,
-                        CancellationToken.None,
-                        TaskCreationOptions.DenyChildAttach,
-                        TaskScheduler.Default
-                    );
+                                int startOfSequence = ((int)index) * numOfElementsPerThread;
+                                int endOfSequence = startOfSequence + numOfElementsPerThread;
+
+                                mre.WaitOne();
+                                for (int j = startOfSequence; j < endOfSequence; ++j)
+                                {
+                                    Assert.InRange(
+                                        BlockingCollection<int>.AddToAny(blockingCollections, j),
+                                        0,
+                                        int.MaxValue
+                                    );
+                                }
+                            },
+                            i,
+                            CancellationToken.None,
+                            TaskCreationOptions.DenyChildAttach,
+                            TaskScheduler.Default
+                        );
                 }
                 else
                 {

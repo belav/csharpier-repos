@@ -124,8 +124,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.WorkspaceServices.Mocks
             public IDisposable Subscribe(IObserver<T> observer)
             {
                 var actionBlock = new ActionBlock<T>(observer.OnNext);
-                actionBlock
-                    .Completion.ContinueWith(
+                actionBlock.Completion
+                    .ContinueWith(
                         static (t, s) =>
                         {
                             var observer = (IObserver<T>)s!;
@@ -142,10 +142,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.WorkspaceServices.Mocks
                         TaskScheduler.Default
                     )
                     .Forget();
-                return this.sourceBlock.LinkTo(
-                    actionBlock,
-                    new DataflowLinkOptions { PropagateCompletion = true }
-                );
+                return this.sourceBlock
+                    .LinkTo(actionBlock, new DataflowLinkOptions { PropagateCompletion = true });
             }
         }
     }

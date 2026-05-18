@@ -914,13 +914,13 @@ public class EndToEndCosmosTest : IClassFixture<EndToEndCosmosTest.CosmosFixture
         await Can_add_update_delete_with_collection<
             IReadOnlyDictionary<string, Dictionary<string, short?>>
         >(
-            ImmutableDictionary<string, Dictionary<string, short?>>
-                .Empty.Add("2", new Dictionary<string, short?> { { "value", 2 } })
+            ImmutableDictionary<string, Dictionary<string, short?>>.Empty
+                .Add("2", new Dictionary<string, short?> { { "value", 2 } })
                 .Add("1", new Dictionary<string, short?> { { "value", 1 } }),
             c =>
             {
-                c.Collection = ImmutableDictionary<string, Dictionary<string, short?>>
-                    .Empty.Add("1", new Dictionary<string, short?> { { "value", 1 } })
+                c.Collection = ImmutableDictionary<string, Dictionary<string, short?>>.Empty
+                    .Add("1", new Dictionary<string, short?> { { "value", 1 } })
                     .Add("2", null);
             },
             new Dictionary<string, Dictionary<string, short?>>
@@ -1039,8 +1039,8 @@ public class EndToEndCosmosTest : IClassFixture<EndToEndCosmosTest.CosmosFixture
             await context.Database.EnsureCreatedAsync();
 
             Assert.Null(
-                context
-                    .Model.FindEntityType(typeof(CustomerWithResourceId))
+                context.Model
+                    .FindEntityType(typeof(CustomerWithResourceId))
                     .FindProperty(StoreKeyConvention.DefaultIdPropertyName)
             );
 
@@ -1736,8 +1736,9 @@ OFFSET 0 LIMIT 1
 
             Assert.StartsWith(
                 "Response status code does not indicate success: NotFound (404); Substatus: 0",
-                (await Assert.ThrowsAsync<DbUpdateException>(() => context.SaveChangesAsync()))
-                    .InnerException!
+                (
+                    await Assert.ThrowsAsync<DbUpdateException>(() => context.SaveChangesAsync())
+                ).InnerException!
                     .Message
             );
         }
@@ -1748,8 +1749,9 @@ OFFSET 0 LIMIT 1
 
             Assert.StartsWith(
                 "Response status code does not indicate success: NotFound (404); Substatus: 0",
-                (await Assert.ThrowsAsync<DbUpdateException>(() => context.SaveChangesAsync()))
-                    .InnerException!
+                (
+                    await Assert.ThrowsAsync<DbUpdateException>(() => context.SaveChangesAsync())
+                ).InnerException!
                     .Message
             );
         }
@@ -1760,8 +1762,9 @@ OFFSET 0 LIMIT 1
 
             Assert.StartsWith(
                 "Response status code does not indicate success: NotFound (404); Substatus: 0",
-                (await Assert.ThrowsAsync<DbUpdateException>(() => context.SaveChangesAsync()))
-                    .InnerException!
+                (
+                    await Assert.ThrowsAsync<DbUpdateException>(() => context.SaveChangesAsync())
+                ).InnerException!
                     .Message
             );
         }

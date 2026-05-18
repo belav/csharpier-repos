@@ -48,8 +48,8 @@ public static class RateLimiterApplicationBuilderExtensions
 
     private static void VerifyServicesAreRegistered(IApplicationBuilder app)
     {
-        var serviceProviderIsService =
-            app.ApplicationServices.GetService<IServiceProviderIsService>();
+        var serviceProviderIsService = app.ApplicationServices
+            .GetService<IServiceProviderIsService>();
         if (
             serviceProviderIsService != null
             && !serviceProviderIsService.IsService(typeof(RateLimitingMetrics))

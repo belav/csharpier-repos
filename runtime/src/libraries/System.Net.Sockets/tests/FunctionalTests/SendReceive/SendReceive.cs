@@ -1320,29 +1320,31 @@ namespace System.Net.Sockets.Tests
                 using (server)
                 using (var b = new Barrier(2))
                 {
-                    Task dispose = Task.Factory.StartNew(
-                        () =>
-                        {
-                            b.SignalAndWait();
-                            client.Dispose();
-                        },
-                        CancellationToken.None,
-                        TaskCreationOptions.LongRunning,
-                        TaskScheduler.Default
-                    );
+                    Task dispose = Task.Factory
+                        .StartNew(
+                            () =>
+                            {
+                                b.SignalAndWait();
+                                client.Dispose();
+                            },
+                            CancellationToken.None,
+                            TaskCreationOptions.LongRunning,
+                            TaskScheduler.Default
+                        );
 
-                    Task send = Task.Factory.StartNew(
-                        () =>
-                        {
-                            b.SignalAndWait();
-                            SendAsync(client, new ArraySegment<byte>(new byte[1]))
-                                .GetAwaiter()
-                                .GetResult();
-                        },
-                        CancellationToken.None,
-                        TaskCreationOptions.LongRunning,
-                        TaskScheduler.Default
-                    );
+                    Task send = Task.Factory
+                        .StartNew(
+                            () =>
+                            {
+                                b.SignalAndWait();
+                                SendAsync(client, new ArraySegment<byte>(new byte[1]))
+                                    .GetAwaiter()
+                                    .GetResult();
+                            },
+                            CancellationToken.None,
+                            TaskCreationOptions.LongRunning,
+                            TaskScheduler.Default
+                        );
 
                     await dispose;
                     Exception error = await Record.ExceptionAsync(() => send);
@@ -1372,8 +1374,8 @@ namespace System.Net.Sockets.Tests
                 using (server)
                 using (var b = new Barrier(2))
                 {
-                    Task dispose = Task
-                        .Factory.StartNew(
+                    Task dispose = Task.Factory
+                        .StartNew(
                             () =>
                             {
                                 b.SignalAndWait();
@@ -1385,8 +1387,8 @@ namespace System.Net.Sockets.Tests
                         )
                         .WaitAsync(TestSettings.PassingTestTimeout);
 
-                    Task send = Task
-                        .Factory.StartNew(
+                    Task send = Task.Factory
+                        .StartNew(
                             () =>
                             {
                                 SendAsync(server, new ArraySegment<byte>(new byte[1]))
@@ -1747,12 +1749,13 @@ namespace System.Net.Sockets.Tests
                         // Queue a work item for each first socket to do a blocking receive.
                         Task[] receives = (
                             from pair in socketPairs
-                            select Task.Factory.StartNew(
-                                () => pair.Item1.Receive(new byte[1]),
-                                CancellationToken.None,
-                                TaskCreationOptions.PreferFairness,
-                                TaskScheduler.Default
-                            )
+                            select Task.Factory
+                                .StartNew(
+                                    () => pair.Item1.Receive(new byte[1]),
+                                    CancellationToken.None,
+                                    TaskCreationOptions.PreferFairness,
+                                    TaskScheduler.Default
+                                )
                         ).ToArray();
 
                         // Give a bit of time for the pool to start executing the receives.  It's possible this won't be enough,

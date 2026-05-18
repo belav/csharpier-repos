@@ -388,11 +388,12 @@ namespace MonoTests.System.Threading.Tasks.Dataflow
 
             var tokenSource = new CancellationTokenSource();
 
-            Task.Factory.StartNew(() =>
-            {
-                Thread.Sleep(100);
-                tokenSource.Cancel();
-            });
+            Task.Factory
+                .StartNew(() =>
+                {
+                    Thread.Sleep(100);
+                    tokenSource.Cancel();
+                });
 
             AssertEx.Throws<OperationCanceledException>(() => block.Receive(tokenSource.Token));
 

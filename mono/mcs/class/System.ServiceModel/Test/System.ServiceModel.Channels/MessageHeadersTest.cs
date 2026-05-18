@@ -70,13 +70,14 @@ namespace MonoTests.System.ServiceModel.Channels
         public void TestFindHeaderWithMultipleIdenticalHeaders()
         {
             Message m = Message.CreateMessage(MessageVersion.Default, "test", 1);
-            m.Headers.Add(
-                MessageHeader.CreateHeader(
-                    "Action",
-                    "http://schemas.xmlsoap.org/ws/2004/08/addressing",
-                    1
-                )
-            );
+            m.Headers
+                .Add(
+                    MessageHeader.CreateHeader(
+                        "Action",
+                        "http://schemas.xmlsoap.org/ws/2004/08/addressing",
+                        1
+                    )
+                );
 
             MessageHeaders headers = m.Headers;
 

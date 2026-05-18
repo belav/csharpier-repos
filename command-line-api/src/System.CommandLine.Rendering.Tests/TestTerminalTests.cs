@@ -22,8 +22,8 @@ namespace System.CommandLine.Rendering.Tests
 
             terminal.CursorLeft = 19;
 
-            terminal
-                .Events.OfType<TestTerminal.CursorPositionChanged>()
+            terminal.Events
+                .OfType<TestTerminal.CursorPositionChanged>()
                 .Select(e => e.Position)
                 .Should()
                 .BeEquivalentSequenceTo(new Point(19, 0));
@@ -36,8 +36,8 @@ namespace System.CommandLine.Rendering.Tests
 
             terminal.CursorTop = 12;
 
-            terminal
-                .Events.OfType<TestTerminal.CursorPositionChanged>()
+            terminal.Events
+                .OfType<TestTerminal.CursorPositionChanged>()
                 .Select(e => e.Position)
                 .Should()
                 .BeEquivalentSequenceTo(new Point(0, 12));
@@ -50,12 +50,11 @@ namespace System.CommandLine.Rendering.Tests
 
             terminal.IsAnsiTerminal = true;
 
-            terminal.Out.Write(
-                $"before move{Ansi.Cursor.Move.ToLocation(3, 5).EscapeSequence}after move"
-            );
+            terminal.Out
+                .Write($"before move{Ansi.Cursor.Move.ToLocation(3, 5).EscapeSequence}after move");
 
-            terminal
-                .Events.Should()
+            terminal.Events
+                .Should()
                 .BeEquivalentSequenceTo(
                     new TestTerminal.ContentWritten("before move"),
                     new TestTerminal.CursorPositionChanged(new Point(2, 4)),
@@ -75,8 +74,8 @@ namespace System.CommandLine.Rendering.Tests
 
             terminal.Out.Write(stringWithEscapeSequence);
 
-            terminal
-                .Events.Should()
+            terminal.Events
+                .Should()
                 .BeEquivalentSequenceTo(new TestTerminal.ContentWritten(stringWithEscapeSequence));
         }
 
@@ -100,8 +99,8 @@ namespace System.CommandLine.Rendering.Tests
 
             renderer.RenderToRegion(threeLinesOfText, new Region(2, 5, 13, 3));
 
-            terminal
-                .Events.OfType<TestTerminal.CursorPositionChanged>()
+            terminal.Events
+                .OfType<TestTerminal.CursorPositionChanged>()
                 .Select(e => e.Position)
                 .Should()
                 .BeEquivalentSequenceTo(new Point(2, 5), new Point(2, 6), new Point(2, 7));
@@ -122,8 +121,8 @@ namespace System.CommandLine.Rendering.Tests
 
             renderer.RenderToRegion("first line\nsecond line", region);
 
-            terminal
-                .Events.Where(e => !(e is TestTerminal.AnsiControlCodeWritten))
+            terminal.Events
+                .Where(e => !(e is TestTerminal.AnsiControlCodeWritten))
                 .Should()
                 .BeEquivalentSequenceTo(
                     new TestTerminal.CursorPositionChanged(new Point(1, 3)),
@@ -147,8 +146,8 @@ namespace System.CommandLine.Rendering.Tests
                 region
             );
 
-            terminal
-                .Events.Should()
+            terminal.Events
+                .Should()
                 .Contain(e =>
                     e is TestTerminal.ContentWritten
                     && ((TestTerminal.ContentWritten)e).Content == "text"

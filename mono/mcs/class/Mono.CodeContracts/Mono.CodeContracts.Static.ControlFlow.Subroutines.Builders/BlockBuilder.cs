@@ -232,16 +232,16 @@ namespace Mono.CodeContracts.Static.ControlFlow.Subroutines.Builders
             do
             {
                 if (this.builder.IsBlockStart(currentLabel))
-                    this.current_block = this.builder.RecordInformationForNewBlock(
-                        currentLabel,
-                        this.current_block
-                    );
+                    this.current_block = this.builder
+                        .RecordInformationForNewBlock(currentLabel, this.current_block);
                 if (
-                    this.builder.CodeProvider.Decode<
-                        BlockBuilder<TLabel>,
-                        BlockWithLabels<TLabel>,
-                        bool
-                    >(currentLabel, this, this.current_block)
+                    this.builder
+                        .CodeProvider
+                        .Decode<BlockBuilder<TLabel>, BlockWithLabels<TLabel>, bool>(
+                            currentLabel,
+                            this,
+                            this.current_block
+                        )
                 )
                     this.current_block = null;
             } while (this.builder.CodeProvider.Next(currentLabel, out currentLabel));

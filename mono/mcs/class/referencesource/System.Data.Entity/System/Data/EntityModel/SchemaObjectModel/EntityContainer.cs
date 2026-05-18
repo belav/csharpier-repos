@@ -243,19 +243,23 @@ namespace System.Data.EntityModel.SchemaObjectModel
                         );
                     }
                     else if (
-                        !Schema.SchemaManager.TryResolveType(
-                            null,
-                            _unresolvedExtendedEntityContainerName,
-                            out extendingEntityContainer
-                        )
+                        !Schema.SchemaManager
+                            .TryResolveType(
+                                null,
+                                _unresolvedExtendedEntityContainerName,
+                                out extendingEntityContainer
+                            )
                     )
                     {
                         AddError(
                             ErrorCode.InvalidEntityContainerNameInExtends,
                             EdmSchemaErrorSeverity.Error,
-                            System.Data.Entity.Strings.InvalidEntityContainerNameInExtends(
-                                _unresolvedExtendedEntityContainerName
-                            )
+                            System.Data
+                                .Entity
+                                .Strings
+                                .InvalidEntityContainerNameInExtends(
+                                    _unresolvedExtendedEntityContainerName
+                                )
                         );
                     }
                     else
@@ -392,11 +396,14 @@ namespace System.Data.EntityModel.SchemaObjectModel
                 schemaElement.AddError(
                     ErrorCode.AlreadyDefined,
                     EdmSchemaErrorSeverity.Error,
-                    System.Data.Entity.Strings.DuplicateMemberNameInExtendedEntityContainer(
-                        schemaElement.Name,
-                        ExtendingEntityContainer.Name,
-                        this.Name
-                    )
+                    System.Data
+                        .Entity
+                        .Strings
+                        .DuplicateMemberNameInExtendedEntityContainer(
+                            schemaElement.Name,
+                            ExtendingEntityContainer.Name,
+                            this.Name
+                        )
                 );
             }
         }
@@ -431,11 +438,14 @@ namespace System.Data.EntityModel.SchemaObjectModel
                         AddError(
                             ErrorCode.ConcurrencyRedefinedOnSubTypeOfEntitySetType,
                             EdmSchemaErrorSeverity.Error,
-                            System.Data.Entity.Strings.ConcurrencyRedefinedOnSubTypeOfEntitySetType(
-                                itemType.FQName,
-                                set.EntityType.FQName,
-                                set.FQName
-                            )
+                            System.Data
+                                .Entity
+                                .Strings
+                                .ConcurrencyRedefinedOnSubTypeOfEntitySetType(
+                                    itemType.FQName,
+                                    set.EntityType.FQName,
+                                    set.FQName
+                                )
                         );
                     }
                 }
@@ -467,13 +477,16 @@ namespace System.Data.EntityModel.SchemaObjectModel
                             AddError(
                                 ErrorCode.SimilarRelationshipEnd,
                                 EdmSchemaErrorSeverity.Error,
-                                System.Data.Entity.Strings.SimilarRelationshipEnd(
-                                    alreadyValidatedEnd.Name,
-                                    alreadyValidatedEnd.ParentElement.Name,
-                                    currentSetEnd.ParentElement.Name,
-                                    alreadyValidatedEnd.EntitySet.Name,
-                                    this.FQName
-                                )
+                                System.Data
+                                    .Entity
+                                    .Strings
+                                    .SimilarRelationshipEnd(
+                                        alreadyValidatedEnd.Name,
+                                        alreadyValidatedEnd.ParentElement.Name,
+                                        currentSetEnd.ParentElement.Name,
+                                        alreadyValidatedEnd.EntitySet.Name,
+                                        this.FQName
+                                    )
                             );
                             error = true;
                             break;
@@ -613,11 +626,10 @@ namespace System.Data.EntityModel.SchemaObjectModel
                 entitySet.AddError(
                     ErrorCode.AlreadyDefined,
                     EdmSchemaErrorSeverity.Error,
-                    System.Data.Entity.Strings.DuplicateEntitySetTable(
-                        entitySet.Name,
-                        schema,
-                        table
-                    )
+                    System.Data
+                        .Entity
+                        .Strings
+                        .DuplicateEntitySetTable(entitySet.Name, schema, table)
                 );
             }
         }

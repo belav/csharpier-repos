@@ -87,11 +87,12 @@ namespace System.IdentityModel
             }
             else
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new NotSupportedException(
-                        SR.GetString(SR.UnsupportedInputTypeForTransform, input.GetType())
-                    )
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        new NotSupportedException(
+                            SR.GetString(SR.UnsupportedInputTypeForTransform, input.GetType())
+                        )
+                    );
             }
         }
 
@@ -134,11 +135,12 @@ namespace System.IdentityModel
             }
             else
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new NotSupportedException(
-                        SR.GetString(SR.UnsupportedInputTypeForTransform, input.GetType())
-                    )
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        new NotSupportedException(
+                            SR.GetString(SR.UnsupportedInputTypeForTransform, input.GetType())
+                        )
+                    );
             }
 
             hashStream.FlushHash();
@@ -188,9 +190,10 @@ namespace System.IdentityModel
             );
             if (algorithm != this.Algorithm)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new CryptographicException(SR.GetString(SR.AlgorithmMismatchForTransform))
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        new CryptographicException(SR.GetString(SR.AlgorithmMismatchForTransform))
+                    );
             }
 
             reader.MoveToContent();
@@ -308,22 +311,26 @@ namespace System.IdentityModel
 
                 if (algorithm == null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new CryptographicException(
-                            SR.GetString(
-                                SR.RequiredAttributeMissing,
-                                dictionaryManager.XmlSignatureDictionary.Algorithm,
-                                dictionaryManager.XmlSignatureDictionary.CanonicalizationMethod
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperError(
+                            new CryptographicException(
+                                SR.GetString(
+                                    SR.RequiredAttributeMissing,
+                                    dictionaryManager.XmlSignatureDictionary.Algorithm,
+                                    dictionaryManager.XmlSignatureDictionary.CanonicalizationMethod
+                                )
                             )
-                        )
-                    );
+                        );
                 }
 
                 if (algorithm != this.CanonicalizationAlgorithm)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new CryptographicException(SR.GetString(SR.AlgorithmMismatchForTransform))
-                    );
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperError(
+                            new CryptographicException(
+                                SR.GetString(SR.AlgorithmMismatchForTransform)
+                            )
+                        );
                 }
 
                 // ReadEndElement() called only if element was not empty

@@ -60,7 +60,8 @@ namespace Microsoft.VisualStudio.LanguageServices.DocumentOutline
                     textBuffer: textBuffer,
                     method: Methods.TextDocumentDocumentSymbolName,
                     capabilitiesFilter: _ => true,
-                    languageServerName: WellKnownLspServerKinds.AlwaysActiveVSLspServer.ToUserVisibleString(),
+                    languageServerName: WellKnownLspServerKinds.AlwaysActiveVSLspServer
+                        .ToUserVisibleString(),
                     parameterFactory: ParameterFunction,
                     cancellationToken: cancellationToken
                 )

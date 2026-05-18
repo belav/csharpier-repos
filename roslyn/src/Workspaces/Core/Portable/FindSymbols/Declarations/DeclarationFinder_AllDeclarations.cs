@@ -162,7 +162,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             {
                 // get declarations from directly referenced metadata
                 foreach (
-                    var peReference in project.MetadataReferences.OfType<PortableExecutableReference>()
+                    var peReference in project.MetadataReferences
+                        .OfType<PortableExecutableReference>()
                 )
                 {
                     using var _ = ArrayBuilder<ISymbol>.GetInstance(out var buffer);

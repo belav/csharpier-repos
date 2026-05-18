@@ -1228,12 +1228,8 @@ namespace System.Xml
         // Boolean
         public virtual bool[] ReadBooleanArray(string localName, string namespaceUri)
         {
-            return BooleanArrayHelperWithString.Instance.ReadArray(
-                this,
-                localName,
-                namespaceUri,
-                Quotas.MaxArrayLength
-            );
+            return BooleanArrayHelperWithString.Instance
+                .ReadArray(this, localName, namespaceUri, Quotas.MaxArrayLength);
         }
 
         public virtual bool[] ReadBooleanArray(
@@ -1241,12 +1237,8 @@ namespace System.Xml
             XmlDictionaryString namespaceUri
         )
         {
-            return BooleanArrayHelperWithDictionaryString.Instance.ReadArray(
-                this,
-                localName,
-                namespaceUri,
-                Quotas.MaxArrayLength
-            );
+            return BooleanArrayHelperWithDictionaryString.Instance
+                .ReadArray(this, localName, namespaceUri, Quotas.MaxArrayLength);
         }
 
         public virtual int ReadArray(
@@ -1287,12 +1279,8 @@ namespace System.Xml
         // Int16
         public virtual short[] ReadInt16Array(string localName, string namespaceUri)
         {
-            return Int16ArrayHelperWithString.Instance.ReadArray(
-                this,
-                localName,
-                namespaceUri,
-                Quotas.MaxArrayLength
-            );
+            return Int16ArrayHelperWithString.Instance
+                .ReadArray(this, localName, namespaceUri, Quotas.MaxArrayLength);
         }
 
         public virtual short[] ReadInt16Array(
@@ -1300,12 +1288,8 @@ namespace System.Xml
             XmlDictionaryString namespaceUri
         )
         {
-            return Int16ArrayHelperWithDictionaryString.Instance.ReadArray(
-                this,
-                localName,
-                namespaceUri,
-                Quotas.MaxArrayLength
-            );
+            return Int16ArrayHelperWithDictionaryString.Instance
+                .ReadArray(this, localName, namespaceUri, Quotas.MaxArrayLength);
         }
 
         public virtual int ReadArray(
@@ -1353,12 +1337,8 @@ namespace System.Xml
         // Int32
         public virtual int[] ReadInt32Array(string localName, string namespaceUri)
         {
-            return Int32ArrayHelperWithString.Instance.ReadArray(
-                this,
-                localName,
-                namespaceUri,
-                Quotas.MaxArrayLength
-            );
+            return Int32ArrayHelperWithString.Instance
+                .ReadArray(this, localName, namespaceUri, Quotas.MaxArrayLength);
         }
 
         public virtual int[] ReadInt32Array(
@@ -1366,12 +1346,8 @@ namespace System.Xml
             XmlDictionaryString namespaceUri
         )
         {
-            return Int32ArrayHelperWithDictionaryString.Instance.ReadArray(
-                this,
-                localName,
-                namespaceUri,
-                Quotas.MaxArrayLength
-            );
+            return Int32ArrayHelperWithDictionaryString.Instance
+                .ReadArray(this, localName, namespaceUri, Quotas.MaxArrayLength);
         }
 
         public virtual int ReadArray(
@@ -1412,12 +1388,8 @@ namespace System.Xml
         // Int64
         public virtual long[] ReadInt64Array(string localName, string namespaceUri)
         {
-            return Int64ArrayHelperWithString.Instance.ReadArray(
-                this,
-                localName,
-                namespaceUri,
-                Quotas.MaxArrayLength
-            );
+            return Int64ArrayHelperWithString.Instance
+                .ReadArray(this, localName, namespaceUri, Quotas.MaxArrayLength);
         }
 
         public virtual long[] ReadInt64Array(
@@ -1425,12 +1397,8 @@ namespace System.Xml
             XmlDictionaryString namespaceUri
         )
         {
-            return Int64ArrayHelperWithDictionaryString.Instance.ReadArray(
-                this,
-                localName,
-                namespaceUri,
-                Quotas.MaxArrayLength
-            );
+            return Int64ArrayHelperWithDictionaryString.Instance
+                .ReadArray(this, localName, namespaceUri, Quotas.MaxArrayLength);
         }
 
         public virtual int ReadArray(
@@ -1471,12 +1439,8 @@ namespace System.Xml
         // Single
         public virtual float[] ReadSingleArray(string localName, string namespaceUri)
         {
-            return SingleArrayHelperWithString.Instance.ReadArray(
-                this,
-                localName,
-                namespaceUri,
-                Quotas.MaxArrayLength
-            );
+            return SingleArrayHelperWithString.Instance
+                .ReadArray(this, localName, namespaceUri, Quotas.MaxArrayLength);
         }
 
         public virtual float[] ReadSingleArray(
@@ -1484,12 +1448,8 @@ namespace System.Xml
             XmlDictionaryString namespaceUri
         )
         {
-            return SingleArrayHelperWithDictionaryString.Instance.ReadArray(
-                this,
-                localName,
-                namespaceUri,
-                Quotas.MaxArrayLength
-            );
+            return SingleArrayHelperWithDictionaryString.Instance
+                .ReadArray(this, localName, namespaceUri, Quotas.MaxArrayLength);
         }
 
         public virtual int ReadArray(
@@ -1530,12 +1490,8 @@ namespace System.Xml
         // Double
         public virtual double[] ReadDoubleArray(string localName, string namespaceUri)
         {
-            return DoubleArrayHelperWithString.Instance.ReadArray(
-                this,
-                localName,
-                namespaceUri,
-                Quotas.MaxArrayLength
-            );
+            return DoubleArrayHelperWithString.Instance
+                .ReadArray(this, localName, namespaceUri, Quotas.MaxArrayLength);
         }
 
         public virtual double[] ReadDoubleArray(
@@ -1543,12 +1499,8 @@ namespace System.Xml
             XmlDictionaryString namespaceUri
         )
         {
-            return DoubleArrayHelperWithDictionaryString.Instance.ReadArray(
-                this,
-                localName,
-                namespaceUri,
-                Quotas.MaxArrayLength
-            );
+            return DoubleArrayHelperWithDictionaryString.Instance
+                .ReadArray(this, localName, namespaceUri, Quotas.MaxArrayLength);
         }
 
         public virtual int ReadArray(
@@ -1589,12 +1541,8 @@ namespace System.Xml
         // Decimal
         public virtual decimal[] ReadDecimalArray(string localName, string namespaceUri)
         {
-            return DecimalArrayHelperWithString.Instance.ReadArray(
-                this,
-                localName,
-                namespaceUri,
-                Quotas.MaxArrayLength
-            );
+            return DecimalArrayHelperWithString.Instance
+                .ReadArray(this, localName, namespaceUri, Quotas.MaxArrayLength);
         }
 
         public virtual decimal[] ReadDecimalArray(
@@ -1602,12 +1550,8 @@ namespace System.Xml
             XmlDictionaryString namespaceUri
         )
         {
-            return DecimalArrayHelperWithDictionaryString.Instance.ReadArray(
-                this,
-                localName,
-                namespaceUri,
-                Quotas.MaxArrayLength
-            );
+            return DecimalArrayHelperWithDictionaryString.Instance
+                .ReadArray(this, localName, namespaceUri, Quotas.MaxArrayLength);
         }
 
         public virtual int ReadArray(
@@ -1648,12 +1592,8 @@ namespace System.Xml
         // DateTime
         public virtual DateTime[] ReadDateTimeArray(string localName, string namespaceUri)
         {
-            return DateTimeArrayHelperWithString.Instance.ReadArray(
-                this,
-                localName,
-                namespaceUri,
-                Quotas.MaxArrayLength
-            );
+            return DateTimeArrayHelperWithString.Instance
+                .ReadArray(this, localName, namespaceUri, Quotas.MaxArrayLength);
         }
 
         public virtual DateTime[] ReadDateTimeArray(
@@ -1661,12 +1601,8 @@ namespace System.Xml
             XmlDictionaryString namespaceUri
         )
         {
-            return DateTimeArrayHelperWithDictionaryString.Instance.ReadArray(
-                this,
-                localName,
-                namespaceUri,
-                Quotas.MaxArrayLength
-            );
+            return DateTimeArrayHelperWithDictionaryString.Instance
+                .ReadArray(this, localName, namespaceUri, Quotas.MaxArrayLength);
         }
 
         public virtual int ReadArray(
@@ -1707,12 +1643,8 @@ namespace System.Xml
         // Guid
         public virtual Guid[] ReadGuidArray(string localName, string namespaceUri)
         {
-            return GuidArrayHelperWithString.Instance.ReadArray(
-                this,
-                localName,
-                namespaceUri,
-                Quotas.MaxArrayLength
-            );
+            return GuidArrayHelperWithString.Instance
+                .ReadArray(this, localName, namespaceUri, Quotas.MaxArrayLength);
         }
 
         public virtual Guid[] ReadGuidArray(
@@ -1720,12 +1652,8 @@ namespace System.Xml
             XmlDictionaryString namespaceUri
         )
         {
-            return GuidArrayHelperWithDictionaryString.Instance.ReadArray(
-                this,
-                localName,
-                namespaceUri,
-                Quotas.MaxArrayLength
-            );
+            return GuidArrayHelperWithDictionaryString.Instance
+                .ReadArray(this, localName, namespaceUri, Quotas.MaxArrayLength);
         }
 
         public virtual int ReadArray(
@@ -1766,12 +1694,8 @@ namespace System.Xml
         // TimeSpan
         public virtual TimeSpan[] ReadTimeSpanArray(string localName, string namespaceUri)
         {
-            return TimeSpanArrayHelperWithString.Instance.ReadArray(
-                this,
-                localName,
-                namespaceUri,
-                Quotas.MaxArrayLength
-            );
+            return TimeSpanArrayHelperWithString.Instance
+                .ReadArray(this, localName, namespaceUri, Quotas.MaxArrayLength);
         }
 
         public virtual TimeSpan[] ReadTimeSpanArray(
@@ -1779,12 +1703,8 @@ namespace System.Xml
             XmlDictionaryString namespaceUri
         )
         {
-            return TimeSpanArrayHelperWithDictionaryString.Instance.ReadArray(
-                this,
-                localName,
-                namespaceUri,
-                Quotas.MaxArrayLength
-            );
+            return TimeSpanArrayHelperWithDictionaryString.Instance
+                .ReadArray(this, localName, namespaceUri, Quotas.MaxArrayLength);
         }
 
         public virtual int ReadArray(

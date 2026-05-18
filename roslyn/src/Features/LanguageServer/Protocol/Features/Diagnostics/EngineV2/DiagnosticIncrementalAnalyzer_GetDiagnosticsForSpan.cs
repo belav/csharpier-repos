@@ -145,8 +145,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
                 var text = await document
                     .GetValueTextAsync(cancellationToken)
                     .ConfigureAwait(false);
-                var stateSets = owner
-                    ._stateManager.GetOrCreateStateSets(document.Project)
+                var stateSets = owner._stateManager
+                    .GetOrCreateStateSets(document.Project)
                     .Where(s =>
                         DocumentAnalysisExecutor.IsAnalyzerEnabledForProject(
                             s.Analyzer,
@@ -156,9 +156,9 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
                     )
                     .ToImmutableArray();
 
-                var ideOptions = owner.AnalyzerService.GlobalOptions.GetIdeAnalyzerOptions(
-                    document.Project
-                );
+                var ideOptions = owner.AnalyzerService
+                    .GlobalOptions
+                    .GetIdeAnalyzerOptions(document.Project);
 
                 // Note that some callers, such as diagnostic tagger, might pass in a range equal to the entire document span.
                 // We clear out range for such cases as we are computing full document diagnostics.
@@ -228,8 +228,7 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
                     if (
                         (
                             (WorkspaceAnalyzerOptions)
-                                projectAndCompilationWithAnalyzers
-                                    .CompilationWithAnalyzers
+                                projectAndCompilationWithAnalyzers.CompilationWithAnalyzers
                                     .AnalysisOptions
                                     .Options!
                         ).IdeOptions == ideOptions
@@ -508,8 +507,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
                     // Skip analyzer if none of its reported diagnostics should be included.
                     if (
                         shouldIncludeDiagnostic != null
-                        && !owner
-                            .DiagnosticAnalyzerInfoCache.GetDiagnosticDescriptors(analyzer)
+                        && !owner.DiagnosticAnalyzerInfoCache
+                            .GetDiagnosticDescriptors(analyzer)
                             .Any(
                                 static (a, shouldIncludeDiagnostic) =>
                                     shouldIncludeDiagnostic(a.Id),
@@ -660,8 +659,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
                         $"Pri{_priorityProvider.Priority.GetPriorityInt()}.Incremental"
                     );
 
-                    diagnosticsMap = await _owner
-                        ._incrementalMemberEditAnalyzer.ComputeDiagnosticsAsync(
+                    diagnosticsMap = await _owner._incrementalMemberEditAnalyzer
+                        .ComputeDiagnosticsAsync(
                             executor,
                             analyzersWithState,
                             version,
@@ -692,9 +691,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
                 }
 
                 if (incrementalAnalysis)
-                    _owner._incrementalMemberEditAnalyzer.UpdateDocumentWithCachedDiagnostics(
-                        (Document)_document
-                    );
+                    _owner._incrementalMemberEditAnalyzer
+                        .UpdateDocumentWithCachedDiagnostics((Document)_document);
 
                 async Task<bool> TryDeprioritizeAnalyzerAsync(
                     DiagnosticAnalyzer analyzer,
@@ -772,9 +770,10 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
                     // track this analyzer. This ensures that when the owner of this provider calls us back to execute
                     // the low priority bucket, we can still get back to this analyzer and execute it that time.
                     if (
-                        !_owner.GlobalOptions.GetOption(
-                            DiagnosticOptionsStorage.LightbulbSkipExecutingDeprioritizedAnalyzers
-                        )
+                        !_owner.GlobalOptions
+                            .GetOption(
+                                DiagnosticOptionsStorage.LightbulbSkipExecutingDeprioritizedAnalyzers
+                            )
                     )
                         _priorityProvider.AddDeprioritizedAnalyzerWithLowPriority(analyzer);
 
@@ -876,16 +875,16 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
                 return diagnostic.DocumentId == _document.Id
                     && (
                         _range == null
-                        || _range.Value.IntersectsWith(
-                            diagnostic.DataLocation.UnmappedFileSpan.GetClampedTextSpan(_text)
-                        )
+                        || _range.Value
+                            .IntersectsWith(
+                                diagnostic.DataLocation.UnmappedFileSpan.GetClampedTextSpan(_text)
+                            )
                     )
                     && (_includeSuppressedDiagnostics || !diagnostic.IsSuppressed)
                     && (
                         _includeCompilerDiagnostics
-                        || !diagnostic.CustomTags.Any(static t =>
-                            t is WellKnownDiagnosticTags.Compiler
-                        )
+                        || !diagnostic.CustomTags
+                            .Any(static t => t is WellKnownDiagnosticTags.Compiler)
                     )
                     && (
                         _shouldIncludeDiagnostic == null || _shouldIncludeDiagnostic(diagnostic.Id)

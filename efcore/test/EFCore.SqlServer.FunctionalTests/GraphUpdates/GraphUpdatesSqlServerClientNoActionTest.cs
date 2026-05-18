@@ -25,8 +25,8 @@ public class GraphUpdatesSqlServerClientNoActionTest
             base.OnModelCreating(modelBuilder, context);
 
             foreach (
-                var foreignKey in modelBuilder
-                    .Model.GetEntityTypes()
+                var foreignKey in modelBuilder.Model
+                    .GetEntityTypes()
                     .SelectMany(e => e.GetDeclaredForeignKeys())
             )
             {

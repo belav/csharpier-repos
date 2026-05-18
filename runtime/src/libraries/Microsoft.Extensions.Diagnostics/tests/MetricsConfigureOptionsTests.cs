@@ -95,9 +95,10 @@ namespace Microsoft.Extensions.Diagnostics.Metrics.Configuration
 
             Assert.Equal(7, options.Rules.Count);
 
-            var rule1 = options.Rules.Single(rule =>
-                rule.MeterName == "MeterName1" && rule.InstrumentName == "InstrumentName1"
-            );
+            var rule1 = options.Rules
+                .Single(rule =>
+                    rule.MeterName == "MeterName1" && rule.InstrumentName == "InstrumentName1"
+                );
             AssertRule(
                 rule1,
                 "MeterName1",
@@ -106,9 +107,10 @@ namespace Microsoft.Extensions.Diagnostics.Metrics.Configuration
                 MeterScope.Local,
                 true
             );
-            var rule2 = options.Rules.Single(rule =>
-                rule.MeterName == "MeterName1" && rule.InstrumentName == "InstrumentName2"
-            );
+            var rule2 = options.Rules
+                .Single(rule =>
+                    rule.MeterName == "MeterName1" && rule.InstrumentName == "InstrumentName2"
+                );
             AssertRule(
                 rule2,
                 "MeterName1",
@@ -117,14 +119,14 @@ namespace Microsoft.Extensions.Diagnostics.Metrics.Configuration
                 MeterScope.Local,
                 false
             );
-            var rule3 = options.Rules.Single(rule =>
-                rule.MeterName == "MeterName1" && rule.InstrumentName == null
-            );
+            var rule3 = options.Rules
+                .Single(rule => rule.MeterName == "MeterName1" && rule.InstrumentName == null);
             AssertRule(rule3, "MeterName1", null, "ListenerName", MeterScope.Local, true);
 
-            var rule4 = options.Rules.Single(rule =>
-                rule.MeterName == "MeterName2" && rule.InstrumentName == "InstrumentName1"
-            );
+            var rule4 = options.Rules
+                .Single(rule =>
+                    rule.MeterName == "MeterName2" && rule.InstrumentName == "InstrumentName1"
+                );
             AssertRule(
                 rule4,
                 "MeterName2",
@@ -133,9 +135,10 @@ namespace Microsoft.Extensions.Diagnostics.Metrics.Configuration
                 MeterScope.Local,
                 true
             );
-            var rule5 = options.Rules.Single(rule =>
-                rule.MeterName == "MeterName2" && rule.InstrumentName == "InstrumentName2"
-            );
+            var rule5 = options.Rules
+                .Single(rule =>
+                    rule.MeterName == "MeterName2" && rule.InstrumentName == "InstrumentName2"
+                );
             AssertRule(
                 rule5,
                 "MeterName2",
@@ -144,9 +147,8 @@ namespace Microsoft.Extensions.Diagnostics.Metrics.Configuration
                 MeterScope.Local,
                 false
             );
-            var rule6 = options.Rules.Single(rule =>
-                rule.MeterName == "MeterName2" && rule.InstrumentName == null
-            );
+            var rule6 = options.Rules
+                .Single(rule => rule.MeterName == "MeterName2" && rule.InstrumentName == null);
             AssertRule(rule6, "MeterName2", null, "ListenerName", MeterScope.Local, true);
 
             var rule7 = options.Rules.Single(rule => rule.MeterName == null);

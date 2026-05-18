@@ -313,11 +313,10 @@ namespace Moq
                     && invocation.Method.IsEventAddAccessor()
                 )
                 {
-                    var implementingMethod = invocation.Method.GetImplementingMethod(
-                        invocation.ProxyType
-                    );
-                    var @event = implementingMethod
-                        .DeclaringType.GetEvents(bindingFlags)
+                    var implementingMethod = invocation.Method
+                        .GetImplementingMethod(invocation.ProxyType);
+                    var @event = implementingMethod.DeclaringType
+                        .GetEvents(bindingFlags)
                         .SingleOrDefault(e => e.GetAddMethod(true) == implementingMethod);
                     if (@event != null)
                     {
@@ -343,11 +342,10 @@ namespace Moq
                     && invocation.Method.IsEventRemoveAccessor()
                 )
                 {
-                    var implementingMethod = invocation.Method.GetImplementingMethod(
-                        invocation.ProxyType
-                    );
-                    var @event = implementingMethod
-                        .DeclaringType.GetEvents(bindingFlags)
+                    var implementingMethod = invocation.Method
+                        .GetImplementingMethod(invocation.ProxyType);
+                    var @event = implementingMethod.DeclaringType
+                        .GetEvents(bindingFlags)
                         .SingleOrDefault(e => e.GetRemoveMethod(true) == implementingMethod);
                     if (@event != null)
                     {

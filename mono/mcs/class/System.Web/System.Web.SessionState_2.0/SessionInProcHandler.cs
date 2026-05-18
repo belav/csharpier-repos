@@ -112,15 +112,16 @@ namespace System.Web.SessionState
             if (item == null || String.IsNullOrEmpty(id))
                 return;
 
-            HttpRuntime.InternalCache.Insert(
-                id,
-                item,
-                null,
-                Cache.NoAbsoluteExpiration,
-                TimeSpan.FromMinutes(timeout),
-                CacheItemPriority.AboveNormal,
-                removedCB
-            );
+            HttpRuntime.InternalCache
+                .Insert(
+                    id,
+                    item,
+                    null,
+                    Cache.NoAbsoluteExpiration,
+                    TimeSpan.FromMinutes(timeout),
+                    CacheItemPriority.AboveNormal,
+                    removedCB
+                );
         }
 
         void UpdateSessionItemTimeout(int timeout, string id)
@@ -128,12 +129,13 @@ namespace System.Web.SessionState
             if (String.IsNullOrEmpty(id))
                 return;
 
-            HttpRuntime.InternalCache.SetItemTimeout(
-                id,
-                Cache.NoAbsoluteExpiration,
-                TimeSpan.FromMinutes(timeout),
-                true
-            );
+            HttpRuntime.InternalCache
+                .SetItemTimeout(
+                    id,
+                    Cache.NoAbsoluteExpiration,
+                    TimeSpan.FromMinutes(timeout),
+                    true
+                );
         }
 
         public override void CreateUninitializedItem(HttpContext context, string id, int timeout)

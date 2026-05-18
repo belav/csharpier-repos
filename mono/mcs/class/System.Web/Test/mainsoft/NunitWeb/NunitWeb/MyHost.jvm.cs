@@ -96,10 +96,8 @@ namespace MonoTests.SystemWeb.Framework
             NameValueCollection headers = new NameValueCollection();
             headers.Add(INVOKER_HEADER, Serialize(t.Invoker));
             headers.Add(USER_HEADER, Serialize(t.UserData));
-            WebRequest wr = t.Request.CreateWebRequest(
-                new Uri("http://localhost:59598/NunitWebTest/"),
-                headers
-            );
+            WebRequest wr = t.Request
+                .CreateWebRequest(new Uri("http://localhost:59598/NunitWebTest/"), headers);
 
             WebResponse response = null;
             try

@@ -472,8 +472,8 @@ WHERE 0 = 1
 
         Assert.Equal(
             "[true,false]",
-            await context
-                .Database.SqlQuery<string>(
+            await context.Database
+                .SqlQuery<string>(
                     $"SELECT [Bools] AS [Value] FROM [PrimitiveCollectionsEntity] WHERE [Id] = 1"
                 )
                 .SingleAsync()

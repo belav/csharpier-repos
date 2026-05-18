@@ -55,8 +55,7 @@ namespace System.IdentityModel.Tokens
                                 {
                                     CspParameters csp = new CspParameters();
                                     csp.ProviderType = 24;
-                                    csp.KeyContainerName = rsaCsp
-                                        .CspKeyContainerInfo
+                                    csp.KeyContainerName = rsaCsp.CspKeyContainerInfo
                                         .KeyContainerName;
                                     csp.KeyNumber = (int)rsaCsp.CspKeyContainerInfo.KeyNumber;
                                     if (rsaCsp.CspKeyContainerInfo.MachineKeyStore)
@@ -71,11 +70,12 @@ namespace System.IdentityModel.Tokens
                                 this.privateKey = CngLightup.GetDSAPrivateKey(this.certificate);
                             }
                             if (certificate.HasPrivateKey && this.privateKey == null)
-                                DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                                    new NotSupportedException(
-                                        SR.GetString(SR.PrivateKeyNotSupported)
-                                    )
-                                );
+                                DiagnosticUtility.ExceptionUtility
+                                    .ThrowHelperError(
+                                        new NotSupportedException(
+                                            SR.GetString(SR.PrivateKeyNotSupported)
+                                        )
+                                    );
                         }
                         this.privateKeyAvailabilityDetermined = true;
                     }
@@ -104,11 +104,12 @@ namespace System.IdentityModel.Tokens
                                 if (this.publicKey == null)
                                     this.publicKey = CngLightup.GetDSAPublicKey(this.certificate);
                                 if (this.publicKey == null)
-                                    DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                                        new NotSupportedException(
-                                            SR.GetString(SR.PublicKeyNotSupported)
-                                        )
-                                    );
+                                    DiagnosticUtility.ExceptionUtility
+                                        .ThrowHelperError(
+                                            new NotSupportedException(
+                                                SR.GetString(SR.PublicKeyNotSupported)
+                                            )
+                                        );
                             }
                             this.publicKeyAvailabilityDetermined = true;
                         }
@@ -128,25 +129,26 @@ namespace System.IdentityModel.Tokens
             // We can decrypt key only if we have the private key in the certificate.
             if (this.PrivateKey == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new NotSupportedException(SR.GetString(SR.MissingPrivateKey))
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        new NotSupportedException(SR.GetString(SR.MissingPrivateKey))
+                    );
             }
 
             RSA rsa = this.PrivateKey as RSA;
             if (rsa == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new NotSupportedException(SR.GetString(SR.PrivateKeyNotRSA))
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(new NotSupportedException(SR.GetString(SR.PrivateKeyNotRSA)));
             }
 
             // Support exchange keySpec, AT_EXCHANGE ?
             if (rsa.KeyExchangeAlgorithm == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new NotSupportedException(SR.GetString(SR.PrivateKeyExchangeNotSupported))
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        new NotSupportedException(SR.GetString(SR.PrivateKeyExchangeNotSupported))
+                    );
             }
 
             switch (algorithm)
@@ -161,11 +163,12 @@ namespace System.IdentityModel.Tokens
                     if (IsSupportedAlgorithm(algorithm))
                         return EncryptedXml.DecryptKey(keyData, rsa, true);
 
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new NotSupportedException(
-                            SR.GetString(SR.UnsupportedCryptoAlgorithm, algorithm)
-                        )
-                    );
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperError(
+                            new NotSupportedException(
+                                SR.GetString(SR.UnsupportedCryptoAlgorithm, algorithm)
+                            )
+                        );
             }
         }
 
@@ -175,9 +178,8 @@ namespace System.IdentityModel.Tokens
             RSA rsa = this.PublicKey as RSA;
             if (rsa == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new NotSupportedException(SR.GetString(SR.PublicKeyNotRSA))
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(new NotSupportedException(SR.GetString(SR.PublicKeyNotRSA)));
             }
 
             switch (algorithm)
@@ -192,11 +194,12 @@ namespace System.IdentityModel.Tokens
                     if (IsSupportedAlgorithm(algorithm))
                         return EncryptedXml.EncryptKey(keyData, rsa, true);
 
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new NotSupportedException(
-                            SR.GetString(SR.UnsupportedCryptoAlgorithm, algorithm)
-                        )
-                    );
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperError(
+                            new NotSupportedException(
+                                SR.GetString(SR.UnsupportedCryptoAlgorithm, algorithm)
+                            )
+                        );
             }
         }
 
@@ -209,17 +212,19 @@ namespace System.IdentityModel.Tokens
             {
                 if (this.PrivateKey == null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new NotSupportedException(SR.GetString(SR.MissingPrivateKey))
-                    );
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperError(
+                            new NotSupportedException(SR.GetString(SR.MissingPrivateKey))
+                        );
                 }
 
                 if (string.IsNullOrEmpty(algorithm))
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                        algorithm,
-                        SR.GetString(SR.EmptyOrNullArgumentString, "algorithm")
-                    );
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperArgument(
+                            algorithm,
+                            SR.GetString(SR.EmptyOrNullArgumentString, "algorithm")
+                        );
                 }
 
                 switch (algorithm)
@@ -229,11 +234,12 @@ namespace System.IdentityModel.Tokens
                         {
                             return (this.PrivateKey as DSA);
                         }
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new NotSupportedException(
-                                SR.GetString(SR.AlgorithmAndPrivateKeyMisMatch)
-                            )
-                        );
+                        throw DiagnosticUtility.ExceptionUtility
+                            .ThrowHelperError(
+                                new NotSupportedException(
+                                    SR.GetString(SR.AlgorithmAndPrivateKeyMisMatch)
+                                )
+                            );
 
                     case SignedXml.XmlDsigRSASHA1Url:
                     case SecurityAlgorithms.RsaSha256Signature:
@@ -243,20 +249,22 @@ namespace System.IdentityModel.Tokens
                         {
                             return (this.PrivateKey as RSA);
                         }
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new NotSupportedException(
-                                SR.GetString(SR.AlgorithmAndPrivateKeyMisMatch)
-                            )
-                        );
+                        throw DiagnosticUtility.ExceptionUtility
+                            .ThrowHelperError(
+                                new NotSupportedException(
+                                    SR.GetString(SR.AlgorithmAndPrivateKeyMisMatch)
+                                )
+                            );
                     default:
                         if (IsSupportedAlgorithm(algorithm))
                             return this.PrivateKey;
                         else
-                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                                new NotSupportedException(
-                                    SR.GetString(SR.UnsupportedCryptoAlgorithm, algorithm)
-                                )
-                            );
+                            throw DiagnosticUtility.ExceptionUtility
+                                .ThrowHelperError(
+                                    new NotSupportedException(
+                                        SR.GetString(SR.UnsupportedCryptoAlgorithm, algorithm)
+                                    )
+                                );
                 }
             }
             else
@@ -268,11 +276,12 @@ namespace System.IdentityModel.Tokens
                         {
                             return (this.PublicKey as DSA);
                         }
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new NotSupportedException(
-                                SR.GetString(SR.AlgorithmAndPublicKeyMisMatch)
-                            )
-                        );
+                        throw DiagnosticUtility.ExceptionUtility
+                            .ThrowHelperError(
+                                new NotSupportedException(
+                                    SR.GetString(SR.AlgorithmAndPublicKeyMisMatch)
+                                )
+                            );
                     case SignedXml.XmlDsigRSASHA1Url:
                     case SecurityAlgorithms.RsaSha256Signature:
                     case EncryptedXml.XmlEncRSA15Url:
@@ -281,18 +290,20 @@ namespace System.IdentityModel.Tokens
                         {
                             return (this.PublicKey as RSA);
                         }
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new NotSupportedException(
-                                SR.GetString(SR.AlgorithmAndPublicKeyMisMatch)
-                            )
-                        );
+                        throw DiagnosticUtility.ExceptionUtility
+                            .ThrowHelperError(
+                                new NotSupportedException(
+                                    SR.GetString(SR.AlgorithmAndPublicKeyMisMatch)
+                                )
+                            );
                     default:
 
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new NotSupportedException(
-                                SR.GetString(SR.UnsupportedCryptoAlgorithm, algorithm)
-                            )
-                        );
+                        throw DiagnosticUtility.ExceptionUtility
+                            .ThrowHelperError(
+                                new NotSupportedException(
+                                    SR.GetString(SR.UnsupportedCryptoAlgorithm, algorithm)
+                                )
+                            );
                 }
             }
         }
@@ -301,10 +312,11 @@ namespace System.IdentityModel.Tokens
         {
             if (string.IsNullOrEmpty(algorithm))
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                    algorithm,
-                    SR.GetString(SR.EmptyOrNullArgumentString, "algorithm")
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperArgument(
+                        algorithm,
+                        SR.GetString(SR.EmptyOrNullArgumentString, "algorithm")
+                    );
             }
 
             object algorithmObject = CryptoHelper.GetAlgorithmFromConfig(algorithm);
@@ -319,15 +331,16 @@ namespace System.IdentityModel.Tokens
                 if (hashAlgorithm != null)
                     return hashAlgorithm;
 
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new CryptographicException(
-                        SR.GetString(
-                            SR.UnsupportedAlgorithmForCryptoOperation,
-                            algorithm,
-                            "CreateDigest"
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        new CryptographicException(
+                            SR.GetString(
+                                SR.UnsupportedAlgorithmForCryptoOperation,
+                                algorithm,
+                                "CreateDigest"
+                            )
                         )
-                    )
-                );
+                    );
             }
 
             switch (algorithm)
@@ -338,11 +351,12 @@ namespace System.IdentityModel.Tokens
                 case SecurityAlgorithms.RsaSha256Signature:
                     return CryptoHelper.NewSha256HashAlgorithm();
                 default:
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new NotSupportedException(
-                            SR.GetString(SR.UnsupportedCryptoAlgorithm, algorithm)
-                        )
-                    );
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperError(
+                            new NotSupportedException(
+                                SR.GetString(SR.UnsupportedCryptoAlgorithm, algorithm)
+                            )
+                        );
             }
         }
 
@@ -354,10 +368,11 @@ namespace System.IdentityModel.Tokens
 
             if (string.IsNullOrEmpty(algorithm))
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                    algorithm,
-                    SR.GetString(SR.EmptyOrNullArgumentString, "algorithm")
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperArgument(
+                        algorithm,
+                        SR.GetString(SR.EmptyOrNullArgumentString, "algorithm")
+                    );
             }
 
             object algorithmObject = CryptoHelper.GetAlgorithmFromConfig(algorithm);
@@ -379,20 +394,25 @@ namespace System.IdentityModel.Tokens
                 }
                 catch (InvalidCastException e)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new NotSupportedException(SR.GetString(SR.AlgorithmAndPublicKeyMisMatch), e)
-                    );
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperError(
+                            new NotSupportedException(
+                                SR.GetString(SR.AlgorithmAndPublicKeyMisMatch),
+                                e
+                            )
+                        );
                 }
 
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new CryptographicException(
-                        SR.GetString(
-                            SR.UnsupportedAlgorithmForCryptoOperation,
-                            algorithm,
-                            "GetSignatureDeformatter"
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        new CryptographicException(
+                            SR.GetString(
+                                SR.UnsupportedAlgorithmForCryptoOperation,
+                                algorithm,
+                                "GetSignatureDeformatter"
+                            )
                         )
-                    )
-                );
+                    );
             }
 
             switch (algorithm)
@@ -402,9 +422,10 @@ namespace System.IdentityModel.Tokens
                     // Ensure that we have a DSA algorithm object.
                     DSA dsa = (this.PublicKey as DSA);
                     if (dsa == null)
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new NotSupportedException(SR.GetString(SR.PublicKeyNotDSA))
-                        );
+                        throw DiagnosticUtility.ExceptionUtility
+                            .ThrowHelperError(
+                                new NotSupportedException(SR.GetString(SR.PublicKeyNotDSA))
+                            );
                     return new DSASignatureDeformatter(dsa);
 
                 case SignedXml.XmlDsigRSASHA1Url:
@@ -412,17 +433,19 @@ namespace System.IdentityModel.Tokens
                     // Ensure that we have an RSA algorithm object.
                     RSA rsa = (this.PublicKey as RSA);
                     if (rsa == null)
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new NotSupportedException(SR.GetString(SR.PublicKeyNotRSA))
-                        );
+                        throw DiagnosticUtility.ExceptionUtility
+                            .ThrowHelperError(
+                                new NotSupportedException(SR.GetString(SR.PublicKeyNotRSA))
+                            );
                     return new RSAPKCS1SignatureDeformatter(rsa);
 
                 default:
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new NotSupportedException(
-                            SR.GetString(SR.UnsupportedCryptoAlgorithm, algorithm)
-                        )
-                    );
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperError(
+                            new NotSupportedException(
+                                SR.GetString(SR.UnsupportedCryptoAlgorithm, algorithm)
+                            )
+                        );
             }
         }
 
@@ -431,17 +454,19 @@ namespace System.IdentityModel.Tokens
             // One can sign only if the private key is present.
             if (this.PrivateKey == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new NotSupportedException(SR.GetString(SR.MissingPrivateKey))
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        new NotSupportedException(SR.GetString(SR.MissingPrivateKey))
+                    );
             }
 
             if (string.IsNullOrEmpty(algorithm))
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                    algorithm,
-                    SR.GetString(SR.EmptyOrNullArgumentString, "algorithm")
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperArgument(
+                        algorithm,
+                        SR.GetString(SR.EmptyOrNullArgumentString, "algorithm")
+                    );
             }
 
             // We support:
@@ -469,23 +494,25 @@ namespace System.IdentityModel.Tokens
                 }
                 catch (InvalidCastException e)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new NotSupportedException(
-                            SR.GetString(SR.AlgorithmAndPrivateKeyMisMatch),
-                            e
-                        )
-                    );
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperError(
+                            new NotSupportedException(
+                                SR.GetString(SR.AlgorithmAndPrivateKeyMisMatch),
+                                e
+                            )
+                        );
                 }
 
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new CryptographicException(
-                        SR.GetString(
-                            SR.UnsupportedAlgorithmForCryptoOperation,
-                            algorithm,
-                            "GetSignatureFormatter"
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        new CryptographicException(
+                            SR.GetString(
+                                SR.UnsupportedAlgorithmForCryptoOperation,
+                                algorithm,
+                                "GetSignatureFormatter"
+                            )
                         )
-                    )
-                );
+                    );
             }
 
             switch (algorithm)
@@ -495,35 +522,39 @@ namespace System.IdentityModel.Tokens
                     // Ensure that we have a DSA algorithm object.
                     DSA dsa = (this.PrivateKey as DSA);
                     if (dsa == null)
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new NotSupportedException(SR.GetString(SR.PrivateKeyNotDSA))
-                        );
+                        throw DiagnosticUtility.ExceptionUtility
+                            .ThrowHelperError(
+                                new NotSupportedException(SR.GetString(SR.PrivateKeyNotDSA))
+                            );
                     return new DSASignatureFormatter(dsa);
 
                 case SignedXml.XmlDsigRSASHA1Url:
                     // Ensure that we have an RSA algorithm object.
                     RSA rsa = (this.PrivateKey as RSA);
                     if (rsa == null)
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new NotSupportedException(SR.GetString(SR.PrivateKeyNotRSA))
-                        );
+                        throw DiagnosticUtility.ExceptionUtility
+                            .ThrowHelperError(
+                                new NotSupportedException(SR.GetString(SR.PrivateKeyNotRSA))
+                            );
                     return new RSAPKCS1SignatureFormatter(rsa);
 
                 case SecurityAlgorithms.RsaSha256Signature:
                     // Ensure that we have an RSA algorithm object.
                     RSA rsaSha256 = (privateKey as RSA);
                     if (rsaSha256 == null)
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new NotSupportedException(SR.GetString(SR.PrivateKeyNotRSA))
-                        );
+                        throw DiagnosticUtility.ExceptionUtility
+                            .ThrowHelperError(
+                                new NotSupportedException(SR.GetString(SR.PrivateKeyNotRSA))
+                            );
                     return new RSAPKCS1SignatureFormatter(rsaSha256);
 
                 default:
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new NotSupportedException(
-                            SR.GetString(SR.UnsupportedCryptoAlgorithm, algorithm)
-                        )
-                    );
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperError(
+                            new NotSupportedException(
+                                SR.GetString(SR.UnsupportedCryptoAlgorithm, algorithm)
+                            )
+                        );
             }
         }
 
@@ -537,15 +568,15 @@ namespace System.IdentityModel.Tokens
                 return asymmetricAlgorithm;
 
             if (asymmetricAlgorithm == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentNullException("asymmetricAlgorithm")
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(new ArgumentNullException("asymmetricAlgorithm"));
 
             if (string.IsNullOrEmpty(algorithm))
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                    algorithm,
-                    SR.GetString(SR.EmptyOrNullArgumentString, "algorithm")
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperArgument(
+                        algorithm,
+                        SR.GetString(SR.EmptyOrNullArgumentString, "algorithm")
+                    );
 
             // only level up if alg is sha256
             if (!string.Equals(algorithm, SecurityAlgorithms.RsaSha256Signature))
@@ -588,10 +619,11 @@ namespace System.IdentityModel.Tokens
         {
             if (string.IsNullOrEmpty(algorithm))
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                    algorithm,
-                    SR.GetString(SR.EmptyOrNullArgumentString, "algorithm")
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperArgument(
+                        algorithm,
+                        SR.GetString(SR.EmptyOrNullArgumentString, "algorithm")
+                    );
             }
 
             return (CryptoHelper.IsAsymmetricAlgorithm(algorithm));
@@ -601,10 +633,11 @@ namespace System.IdentityModel.Tokens
         {
             if (string.IsNullOrEmpty(algorithm))
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                    algorithm,
-                    SR.GetString(SR.EmptyOrNullArgumentString, "algorithm")
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperArgument(
+                        algorithm,
+                        SR.GetString(SR.EmptyOrNullArgumentString, "algorithm")
+                    );
             }
 
             object algorithmObject = null;

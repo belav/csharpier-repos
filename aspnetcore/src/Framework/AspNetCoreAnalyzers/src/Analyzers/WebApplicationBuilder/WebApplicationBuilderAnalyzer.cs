@@ -392,8 +392,8 @@ public sealed class WebApplicationBuilderAnalyzer : DiagnosticAnalyzer
                         //
                         // IdentifierNameSyntax finds non-generic methods (e.g. `Foo()`), whereas
                         // GenericNameSyntax finds generic methods (e.g. `Foo<T>()`).
-                        var methodName = operation
-                            .Syntax.DescendantNodes()
+                        var methodName = operation.Syntax
+                            .DescendantNodes()
                             .OfType<SimpleNameSyntax>()
                             .Where(node =>
                                 node is IdentifierNameSyntax || node is GenericNameSyntax

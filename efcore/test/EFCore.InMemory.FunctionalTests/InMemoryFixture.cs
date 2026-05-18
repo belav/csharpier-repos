@@ -29,7 +29,7 @@ public class InMemoryFixture
     public static ServiceProvider BuildServiceProvider(
         IServiceCollection providerServices = null
     ) =>
-        InMemoryTestStoreFactory
-            .Instance.AddProviderServices(providerServices ?? new ServiceCollection())
+        InMemoryTestStoreFactory.Instance
+            .AddProviderServices(providerServices ?? new ServiceCollection())
             .BuildServiceProvider(validateScopes: true);
 }

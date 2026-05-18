@@ -434,8 +434,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
                 if (documentId != null)
                 {
                     // file doesn't exist in current solution
-                    var document = await project
-                        .Solution.GetTextDocumentAsync(documentId, cancellationToken)
+                    var document = await project.Solution
+                        .GetTextDocumentAsync(documentId, cancellationToken)
                         .ConfigureAwait(false);
 
                     if (document == null)
@@ -614,8 +614,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
 
                 if (
                     _diagnosticIds != null
-                    && Owner
-                        .DiagnosticAnalyzerInfoCache.GetDiagnosticDescriptors(stateSet.Analyzer)
+                    && Owner.DiagnosticAnalyzerInfoCache
+                        .GetDiagnosticDescriptors(stateSet.Analyzer)
                         .All(d => !_diagnosticIds.Contains(d.Id))
                 )
                 {

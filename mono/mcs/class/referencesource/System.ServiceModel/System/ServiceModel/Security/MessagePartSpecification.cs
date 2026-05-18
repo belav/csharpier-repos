@@ -49,9 +49,10 @@ namespace System.ServiceModel.Security
             set
             {
                 if (isReadOnly)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(SR.GetString(SR.ObjectIsReadOnly))
-                    );
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(SR.GetString(SR.ObjectIsReadOnly))
+                        );
 
                 this.isBodyIncluded = value;
             }
@@ -79,9 +80,10 @@ namespace System.ServiceModel.Security
         public void Clear()
         {
             if (isReadOnly)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(SR.GetString(SR.ObjectIsReadOnly))
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(SR.GetString(SR.ObjectIsReadOnly))
+                    );
 
             if (this.headerTypes != null)
                 this.headerTypes.Clear();
@@ -91,9 +93,10 @@ namespace System.ServiceModel.Security
         public void Union(MessagePartSpecification specification)
         {
             if (isReadOnly)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(SR.GetString(SR.ObjectIsReadOnly))
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(SR.GetString(SR.ObjectIsReadOnly))
+                    );
             if (specification == null)
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("specification");
 

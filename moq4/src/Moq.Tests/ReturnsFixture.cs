@@ -224,14 +224,8 @@ namespace Moq.Tests
                         s1 + s2 + s3 + s4 + s5 + s6
                 );
 
-            string result = mock.Object.Execute(
-                "blah1",
-                "blah2",
-                "blah3",
-                "blah4",
-                "blah5",
-                "blah6"
-            );
+            string result = mock.Object
+                .Execute("blah1", "blah2", "blah3", "blah4", "blah5", "blah6");
             Assert.Equal("blah1blah2blah3blah4blah5blah6", result);
         }
 
@@ -255,15 +249,8 @@ namespace Moq.Tests
                         s1 + s2 + s3 + s4 + s5 + s6 + s7
                 );
 
-            string result = mock.Object.Execute(
-                "blah1",
-                "blah2",
-                "blah3",
-                "blah4",
-                "blah5",
-                "blah6",
-                "blah7"
-            );
+            string result = mock.Object
+                .Execute("blah1", "blah2", "blah3", "blah4", "blah5", "blah6", "blah7");
             Assert.Equal("blah1blah2blah3blah4blah5blah6blah7", result);
         }
 
@@ -296,16 +283,8 @@ namespace Moq.Tests
                     ) => s1 + s2 + s3 + s4 + s5 + s6 + s7 + s8
                 );
 
-            string result = mock.Object.Execute(
-                "blah1",
-                "blah2",
-                "blah3",
-                "blah4",
-                "blah5",
-                "blah6",
-                "blah7",
-                "blah8"
-            );
+            string result = mock.Object
+                .Execute("blah1", "blah2", "blah3", "blah4", "blah5", "blah6", "blah7", "blah8");
             Assert.Equal("blah1blah2blah3blah4blah5blah6blah7blah8", result);
         }
 

@@ -360,8 +360,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             TypeWithAnnotations returnType;
             ImmutableArray<ParameterSymbol> parameters;
 
-            var binder = this
-                .DeclaringCompilation.GetBinderFactory(declarationSyntax.SyntaxTree)
+            var binder = this.DeclaringCompilation
+                .GetBinderFactory(declarationSyntax.SyntaxTree)
                 .GetBinder(returnTypeSyntax, declarationSyntax, this);
 
             SyntaxToken arglistToken;
@@ -906,11 +906,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                                 && IsContainingType(parameterType)
                                 && IsSelfConstrainedTypeParameter(this.ReturnType)
                             )
-                            || this.ReturnType.EffectiveTypeNoUseSiteDiagnostics.IsEqualToOrDerivedFrom(
-                                parameterType,
-                                ComparisonForUserDefinedOperators,
-                                useSiteInfo: ref useSiteInfo
-                            )
+                            || this.ReturnType
+                                .EffectiveTypeNoUseSiteDiagnostics
+                                .IsEqualToOrDerivedFrom(
+                                    parameterType,
+                                    ComparisonForUserDefinedOperators,
+                                    useSiteInfo: ref useSiteInfo
+                                )
                         )
                 )
             )
@@ -947,11 +949,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             Debug.Assert(containingType.IsDefinition);
             return type is TypeParameterSymbol p
                 && (object)p.ContainingSymbol == containingType
-                && p.ConstraintTypesNoUseSiteDiagnostics.Any(
-                    (typeArgument, containingType) =>
-                        typeArgument.Type.Equals(containingType, ComparisonForUserDefinedOperators),
-                    containingType
-                );
+                && p.ConstraintTypesNoUseSiteDiagnostics
+                    .Any(
+                        (typeArgument, containingType) =>
+                            typeArgument.Type
+                                .Equals(containingType, ComparisonForUserDefinedOperators),
+                        containingType
+                    );
         }
 
         private bool IsSelfConstrainedTypeParameter(TypeSymbol type)

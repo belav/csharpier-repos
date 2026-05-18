@@ -118,9 +118,10 @@ namespace System.ServiceModel.Discovery
 
             if (context.Binding.Elements.IndexOf(this) != 0)
             {
-                throw FxTrace.Exception.AsError(
-                    new InvalidOperationException(SR.DiscoveryClientBindingElementNotFirst)
-                );
+                throw FxTrace.Exception
+                    .AsError(
+                        new InvalidOperationException(SR.DiscoveryClientBindingElementNotFirst)
+                    );
             }
 
             if (this.CanBuildChannelFactory<TChannel>(context))
@@ -133,13 +134,12 @@ namespace System.ServiceModel.Discovery
             }
             else
             {
-                throw FxTrace.Exception.Argument(
-                    "TChannel",
-                    ServiceModel.SR.GetString(
-                        ServiceModel.SR.ChannelTypeNotSupported,
-                        typeof(TChannel)
-                    )
-                );
+                throw FxTrace.Exception
+                    .Argument(
+                        "TChannel",
+                        ServiceModel.SR
+                            .GetString(ServiceModel.SR.ChannelTypeNotSupported, typeof(TChannel))
+                    );
             }
         }
 
@@ -162,10 +162,12 @@ namespace System.ServiceModel.Discovery
                 throw FxTrace.Exception.ArgumentNull("context");
             }
 
-            throw FxTrace.Exception.Argument(
-                "TChannel",
-                ServiceModel.SR.GetString(ServiceModel.SR.ChannelTypeNotSupported, typeof(TChannel))
-            );
+            throw FxTrace.Exception
+                .Argument(
+                    "TChannel",
+                    ServiceModel.SR
+                        .GetString(ServiceModel.SR.ChannelTypeNotSupported, typeof(TChannel))
+                );
         }
 
         public override BindingElement Clone()

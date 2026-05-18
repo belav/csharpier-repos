@@ -76,8 +76,8 @@ public partial class ModelBindingCommandHandlerTests
 
             await command.Parse(commandLine, configuration).InvokeAsync(CancellationToken.None);
 
-            configuration
-                .Output.ToString()
+            configuration.Output
+                .ToString()
                 .Should()
                 .Be($"ClassWithSetter<{type.Name}>: {expectedValue}");
         }
@@ -112,8 +112,8 @@ public partial class ModelBindingCommandHandlerTests
 
             await command.Parse(commandLine, configuration).InvokeAsync(CancellationToken.None);
 
-            configuration
-                .Output.ToString()
+            configuration.Output
+                .ToString()
                 .Should()
                 .Be($"ClassWithCtorParameter<{type.Name}>: {expectedValue}");
         }

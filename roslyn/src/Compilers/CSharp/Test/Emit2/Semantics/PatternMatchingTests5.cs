@@ -3534,9 +3534,12 @@ class N
 
             var comp = CreateCompilation(
                 source,
-                options: TestOptions.DebugDll.WithNullableContextOptions(
-                    nullableEnable ? NullableContextOptions.Enable : NullableContextOptions.Disable
-                )
+                options: TestOptions.DebugDll
+                    .WithNullableContextOptions(
+                        nullableEnable
+                            ? NullableContextOptions.Enable
+                            : NullableContextOptions.Disable
+                    )
             );
             if (nullableEnable)
             {
@@ -3674,9 +3677,12 @@ class N
 """;
             var comp = CreateCompilation(
                 source,
-                options: TestOptions.DebugDll.WithNullableContextOptions(
-                    nullableEnable ? NullableContextOptions.Enable : NullableContextOptions.Disable
-                )
+                options: TestOptions.DebugDll
+                    .WithNullableContextOptions(
+                        nullableEnable
+                            ? NullableContextOptions.Enable
+                            : NullableContextOptions.Disable
+                    )
             );
             if (nullableEnable)
             {

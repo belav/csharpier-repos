@@ -37,10 +37,11 @@ namespace System.IdentityModel.Tokens
             : base(samlSubject)
         {
             if (string.IsNullOrEmpty(authenticationMethod))
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                    "authenticationMethod",
-                    SR.GetString(SR.SAMLAuthenticationStatementMissingAuthenticationMethod)
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperArgument(
+                        "authenticationMethod",
+                        SR.GetString(SR.SAMLAuthenticationStatementMissingAuthenticationMethod)
+                    );
 
             this.authenticationMethod = authenticationMethod;
             this.authenticationInstant = authenticationInstant.ToUniversalTime();
@@ -52,12 +53,13 @@ namespace System.IdentityModel.Tokens
                 foreach (SamlAuthorityBinding binding in authorityBindings)
                 {
                     if (binding == null)
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                            SR.GetString(
-                                SR.SAMLEntityCannotBeNullOrEmpty,
-                                XD.SamlDictionary.Assertion.Value
-                            )
-                        );
+                        throw DiagnosticUtility.ExceptionUtility
+                            .ThrowHelperArgument(
+                                SR.GetString(
+                                    SR.SAMLEntityCannotBeNullOrEmpty,
+                                    XD.SamlDictionary.Assertion.Value
+                                )
+                            );
 
                     this.authorityBindings.Add(binding);
                 }
@@ -72,9 +74,10 @@ namespace System.IdentityModel.Tokens
             set
             {
                 if (isReadOnly)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(SR.GetString(SR.ObjectIsReadOnly))
-                    );
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(SR.GetString(SR.ObjectIsReadOnly))
+                        );
 
                 this.authenticationInstant = value;
             }
@@ -86,9 +89,10 @@ namespace System.IdentityModel.Tokens
             set
             {
                 if (isReadOnly)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(SR.GetString(SR.ObjectIsReadOnly))
-                    );
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(SR.GetString(SR.ObjectIsReadOnly))
+                        );
 
                 if (string.IsNullOrEmpty(value))
                     this.authenticationMethod = XD.SamlDictionary
@@ -115,9 +119,10 @@ namespace System.IdentityModel.Tokens
             set
             {
                 if (isReadOnly)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(SR.GetString(SR.ObjectIsReadOnly))
-                    );
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(SR.GetString(SR.ObjectIsReadOnly))
+                        );
 
                 this.dnsAddress = value;
             }
@@ -129,9 +134,10 @@ namespace System.IdentityModel.Tokens
             set
             {
                 if (isReadOnly)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(SR.GetString(SR.ObjectIsReadOnly))
-                    );
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(SR.GetString(SR.ObjectIsReadOnly))
+                        );
 
                 this.ipAddress = value;
             }
@@ -180,20 +186,24 @@ namespace System.IdentityModel.Tokens
         void CheckObjectValidity()
         {
             if (this.SamlSubject == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new SecurityTokenException(SR.GetString(SR.SAMLSubjectStatementRequiresSubject))
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        new SecurityTokenException(
+                            SR.GetString(SR.SAMLSubjectStatementRequiresSubject)
+                        )
+                    );
 
             // Authenticaton instant is required. We will throw an exception if it is not present while
             // deserializing a SAML Authentication statement. When creating a new Authentication statement
             // we set this value to UtcNow.
 
             if (string.IsNullOrEmpty(this.authenticationMethod))
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new SecurityTokenException(
-                        SR.GetString(SR.SAMLAuthenticationStatementMissingAuthenticationMethod)
-                    )
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        new SecurityTokenException(
+                            SR.GetString(SR.SAMLAuthenticationStatementMissingAuthenticationMethod)
+                        )
+                    );
         }
 
         public override void ReadXml(
@@ -204,27 +214,26 @@ namespace System.IdentityModel.Tokens
         )
         {
             if (reader == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentNullException("reader")
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(new ArgumentNullException("reader"));
 
             if (samlSerializer == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentNullException("samlSerializer")
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(new ArgumentNullException("samlSerializer"));
 
 #pragma warning suppress 56506 // samlSerializer.DictionaryManager is never null.
             SamlDictionary dictionary = samlSerializer.DictionaryManager.SamlDictionary;
 
             string authInstance = reader.GetAttribute(dictionary.AuthenticationInstant, null);
             if (string.IsNullOrEmpty(authInstance))
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new SecurityTokenException(
-                        SR.GetString(
-                            SR.SAMLAuthenticationStatementMissingAuthenticationInstanceOnRead
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        new SecurityTokenException(
+                            SR.GetString(
+                                SR.SAMLAuthenticationStatementMissingAuthenticationInstanceOnRead
+                            )
                         )
-                    )
-                );
+                    );
             this.authenticationInstant = DateTime
                 .ParseExact(
                     authInstance,
@@ -236,13 +245,14 @@ namespace System.IdentityModel.Tokens
 
             this.authenticationMethod = reader.GetAttribute(dictionary.AuthenticationMethod, null);
             if (string.IsNullOrEmpty(this.authenticationMethod))
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new SecurityTokenException(
-                        SR.GetString(
-                            SR.SAMLAuthenticationStatementMissingAuthenticationMethodOnRead
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        new SecurityTokenException(
+                            SR.GetString(
+                                SR.SAMLAuthenticationStatementMissingAuthenticationMethodOnRead
+                            )
                         )
-                    )
-                );
+                    );
 
             reader.MoveToContent();
             reader.Read();
@@ -256,11 +266,12 @@ namespace System.IdentityModel.Tokens
             else
             {
                 // Subject is a required element for a Authentication Statement clause.
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new SecurityTokenException(
-                        SR.GetString(SR.SAMLAuthenticationStatementMissingSubject)
-                    )
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        new SecurityTokenException(
+                            SR.GetString(SR.SAMLAuthenticationStatementMissingSubject)
+                        )
+                    );
             }
 
             if (reader.IsStartElement(dictionary.SubjectLocality, dictionary.Namespace))
@@ -297,11 +308,12 @@ namespace System.IdentityModel.Tokens
                 else
                 {
                     // We do not understand this element.
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new SecurityTokenException(
-                            SR.GetString(SR.SAMLBadSchema, dictionary.AuthenticationStatement)
-                        )
-                    );
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperError(
+                            new SecurityTokenException(
+                                SR.GetString(SR.SAMLBadSchema, dictionary.AuthenticationStatement)
+                            )
+                        );
                 }
             }
 
@@ -318,14 +330,12 @@ namespace System.IdentityModel.Tokens
             CheckObjectValidity();
 
             if (writer == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentNullException("writer")
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(new ArgumentNullException("writer"));
 
             if (samlSerializer == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentNullException("samlSerializer")
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(new ArgumentNullException("samlSerializer"));
 
 #pragma warning suppress 56506 // samlSerializer.DictionaryManager is never null.
             SamlDictionary dictionary = samlSerializer.DictionaryManager.SamlDictionary;
@@ -341,10 +351,8 @@ namespace System.IdentityModel.Tokens
             writer.WriteEndAttribute();
             writer.WriteStartAttribute(dictionary.AuthenticationInstant, null);
             writer.WriteString(
-                this.authenticationInstant.ToString(
-                    SamlConstants.GeneratedDateTimeFormat,
-                    CultureInfo.InvariantCulture
-                )
+                this.authenticationInstant
+                    .ToString(SamlConstants.GeneratedDateTimeFormat, CultureInfo.InvariantCulture)
             );
             writer.WriteEndAttribute();
 

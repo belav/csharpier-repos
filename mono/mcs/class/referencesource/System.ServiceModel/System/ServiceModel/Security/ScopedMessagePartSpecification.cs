@@ -43,9 +43,8 @@ namespace System.ServiceModel.Security
             : this()
         {
             if (other == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentNullException("other")
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(new ArgumentNullException("other"));
 
             this.channelParts.Union(other.channelParts);
             if (other.actionParts != null)
@@ -73,9 +72,8 @@ namespace System.ServiceModel.Security
         public void AddParts(MessagePartSpecification parts)
         {
             if (parts == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentNullException("parts")
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(new ArgumentNullException("parts"));
 
             ThrowIfReadOnly();
 
@@ -85,13 +83,11 @@ namespace System.ServiceModel.Security
         public void AddParts(MessagePartSpecification parts, string action)
         {
             if (action == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentNullException("action")
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(new ArgumentNullException("action"));
             if (parts == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentNullException("parts")
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(new ArgumentNullException("parts"));
 
             ThrowIfReadOnly();
 
@@ -103,9 +99,8 @@ namespace System.ServiceModel.Security
         internal void AddParts(MessagePartSpecification parts, XmlDictionaryString action)
         {
             if (action == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentNullException("action")
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(new ArgumentNullException("action"));
             AddParts(parts, action.Value);
         }
 
@@ -212,9 +207,10 @@ namespace System.ServiceModel.Security
         void ThrowIfReadOnly()
         {
             if (this.isReadOnly)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(SR.GetString(SR.ObjectIsReadOnly))
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(SR.GetString(SR.ObjectIsReadOnly))
+                    );
         }
     }
 }

@@ -736,8 +736,8 @@ namespace Microsoft.CodeAnalysis.InitializeParameter
                     var otherDocument = currentSolution.GetDocument(propertySyntax.SyntaxTree);
                     if (otherDocument != null)
                     {
-                        var otherRoot = await propertySyntax
-                            .SyntaxTree.GetRootAsync(cancellationToken)
+                        var otherRoot = await propertySyntax.SyntaxTree
+                            .GetRootAsync(cancellationToken)
                             .ConfigureAwait(false);
                         currentSolution = currentSolution.WithDocumentSyntaxRoot(
                             otherDocument.Id,
@@ -994,8 +994,8 @@ namespace Microsoft.CodeAnalysis.InitializeParameter
             // Use a variety of heuristics around the name/type to see if this is a match.
 
             var containingType = parameter.ContainingType;
-            var compilation = await document
-                .Project.GetRequiredCompilationAsync(cancellationToken)
+            var compilation = await document.Project
+                .GetRequiredCompilationAsync(cancellationToken)
                 .ConfigureAwait(false);
 
             // Walk through the naming rules against this parameter's name to see what

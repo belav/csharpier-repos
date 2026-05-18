@@ -283,9 +283,8 @@ namespace System.ServiceModel.Description
                 if (t == typeof(global::System.ServiceModel.Description.MetadataSet)) { }
                 else
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        CreateUnknownTypeException(o)
-                    );
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperError(CreateUnknownTypeException(o));
                 }
             }
             if (processOuterElement)
@@ -359,9 +358,8 @@ namespace System.ServiceModel.Description
                 if (t == typeof(global::System.ServiceModel.Description.MetadataSection)) { }
                 else
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        CreateUnknownTypeException(o)
-                    );
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperError(CreateUnknownTypeException(o));
                 }
             }
 
@@ -438,18 +436,16 @@ namespace System.ServiceModel.Description
                     }
                     else
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            CreateInvalidAnyTypeException(elem)
-                        );
+                        throw DiagnosticUtility.ExceptionUtility
+                            .ThrowHelperError(CreateInvalidAnyTypeException(elem));
                     }
                 }
                 else
                 {
                     if (o.@Metadata != null)
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            CreateUnknownTypeException(o.@Metadata)
-                        );
+                        throw DiagnosticUtility.ExceptionUtility
+                            .ThrowHelperError(CreateUnknownTypeException(o.@Metadata));
                     }
                 }
             }
@@ -476,9 +472,8 @@ namespace System.ServiceModel.Description
                 if (t == typeof(global::System.ServiceModel.Description.MetadataLocation)) { }
                 else
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        CreateUnknownTypeException(o)
-                    );
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperError(CreateUnknownTypeException(o));
                 }
             }
             WriteStartElement(n, ns, o, false, null);
@@ -523,9 +518,8 @@ namespace System.ServiceModel.Description
                 }
                 else
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        CreateUnknownNodeException()
-                    );
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperError(CreateUnknownNodeException());
                 }
             }
             else
@@ -559,9 +553,10 @@ namespace System.ServiceModel.Description
                     )
                 ) { }
                 else
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        CreateUnknownTypeException((System.Xml.XmlQualifiedName)xsiType)
-                    );
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperError(
+                            CreateUnknownTypeException((System.Xml.XmlQualifiedName)xsiType)
+                        );
             }
             if (isNull)
                 return null;
@@ -656,9 +651,10 @@ namespace System.ServiceModel.Description
                     )
                 ) { }
                 else
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        CreateUnknownTypeException((System.Xml.XmlQualifiedName)xsiType)
-                    );
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperError(
+                            CreateUnknownTypeException((System.Xml.XmlQualifiedName)xsiType)
+                        );
             }
             if (isNull)
                 return null;
@@ -750,9 +746,11 @@ namespace System.ServiceModel.Description
                     )
                     {
                         {
-                            o.@Metadata = System.Web.Services.Description.ServiceDescription.Read(
-                                this.Reader
-                            );
+                            o.@Metadata = System.Web
+                                .Services
+                                .Description
+                                .ServiceDescription
+                                .Read(this.Reader);
                         }
                         paramsRead[3] = true;
                     }
@@ -767,16 +765,17 @@ namespace System.ServiceModel.Description
                         o.@Metadata =
                             (global::System.ServiceModel.Description.MetadataReference)ReadSerializable(
                                 (System.Xml.Serialization.IXmlSerializable)
-                                    System.Activator.CreateInstance(
-                                        typeof(global::System.ServiceModel.Description.MetadataReference),
-                                        System.Reflection.BindingFlags.Instance
-                                            | System.Reflection.BindingFlags.Public
-                                            | System.Reflection.BindingFlags.CreateInstance
-                                            | System.Reflection.BindingFlags.NonPublic,
-                                        null,
-                                        new object[0],
-                                        null
-                                    )
+                                    System.Activator
+                                        .CreateInstance(
+                                            typeof(global::System.ServiceModel.Description.MetadataReference),
+                                            System.Reflection.BindingFlags.Instance
+                                                | System.Reflection.BindingFlags.Public
+                                                | System.Reflection.BindingFlags.CreateInstance
+                                                | System.Reflection.BindingFlags.NonPublic,
+                                            null,
+                                            new object[0],
+                                            null
+                                        )
                             );
                         paramsRead[3] = true;
                     }
@@ -831,9 +830,10 @@ namespace System.ServiceModel.Description
                     )
                 ) { }
                 else
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        CreateUnknownTypeException((System.Xml.XmlQualifiedName)xsiType)
-                    );
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperError(
+                            CreateUnknownTypeException((System.Xml.XmlQualifiedName)xsiType)
+                        );
             }
             if (isNull)
                 return null;
@@ -1050,16 +1050,14 @@ namespace System.ServiceModel.Description
             id139_XmlSchemaInclude = Reader.NameTable.Add(@"XmlSchemaInclude");
             id78_namespace = Reader.NameTable.Add(@"namespace");
             id18_attributeFormDefault = Reader.NameTable.Add(@"attributeFormDefault");
-            id100_XmlSchemaFractionDigitsFacet = Reader.NameTable.Add(
-                @"XmlSchemaFractionDigitsFacet"
-            );
+            id100_XmlSchemaFractionDigitsFacet = Reader.NameTable
+                .Add(@"XmlSchemaFractionDigitsFacet");
             id32_attributeGroup = Reader.NameTable.Add(@"attributeGroup");
             id64_XmlSchemaDocumentation = Reader.NameTable.Add(@"XmlSchemaDocumentation");
             id93_maxLength = Reader.NameTable.Add(@"maxLength");
             id49_type = Reader.NameTable.Add(@"type");
-            id86_XmlSchemaSimpleTypeRestriction = Reader.NameTable.Add(
-                @"XmlSchemaSimpleTypeRestriction"
-            );
+            id86_XmlSchemaSimpleTypeRestriction = Reader.NameTable
+                .Add(@"XmlSchemaSimpleTypeRestriction");
             id96_length = Reader.NameTable.Add(@"length");
             id104_XmlSchemaLengthFacet = Reader.NameTable.Add(@"XmlSchemaLengthFacet");
             id17_XmlSchema = Reader.NameTable.Add(@"XmlSchema");

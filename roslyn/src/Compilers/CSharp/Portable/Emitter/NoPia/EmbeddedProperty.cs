@@ -27,9 +27,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit.NoPia
             PEModuleBuilder moduleBuilder
         )
         {
-            return UnderlyingProperty.AdaptedPropertySymbol.GetCustomAttributesToEmit(
-                moduleBuilder
-            );
+            return UnderlyingProperty.AdaptedPropertySymbol
+                .GetCustomAttributesToEmit(moduleBuilder);
         }
 
         protected override ImmutableArray<EmbeddedParameter> GetParameters()

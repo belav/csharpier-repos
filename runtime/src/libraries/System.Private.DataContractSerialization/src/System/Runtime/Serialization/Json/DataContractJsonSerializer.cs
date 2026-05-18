@@ -679,9 +679,8 @@ namespace System.Runtime.Serialization.Json
                     && (itemType.GetGenericTypeDefinition() == Globals.TypeOfKeyValue)
                 )
                 {
-                    itemType = Globals.TypeOfKeyValuePair.MakeGenericType(
-                        itemType.GenericTypeArguments
-                    );
+                    itemType = Globals.TypeOfKeyValuePair
+                        .MakeGenericType(itemType.GenericTypeArguments);
                 }
                 this.knownTypeList!.Add(itemType);
                 typeToCheck = itemType;

@@ -1271,12 +1271,13 @@ namespace System.Web.UI.WebControls
             if (pagerTemplate != null)
                 pagerTemplate.InstantiateIn(cell);
             else
-                cell.Controls.Add(
-                    PagerSettings.CreatePagerControl(
-                        pagedDataSource.CurrentPageIndex,
-                        pagedDataSource.PageCount
-                    )
-                );
+                cell.Controls
+                    .Add(
+                        PagerSettings.CreatePagerControl(
+                            pagedDataSource.CurrentPageIndex,
+                            pagedDataSource.PageCount
+                        )
+                    );
 
             row.Cells.Add(cell);
         }

@@ -2812,7 +2812,8 @@ public abstract class EntitySplittingQueryTestBase : NonSharedModelTestBase
             expectedType.IsGenericType
             && expectedType
                 .GetTypeInfo()
-                .ImplementedInterfaces.Any(i =>
+                .ImplementedInterfaces
+                .Any(i =>
                     i.IsConstructedGenericType
                     && i.GetGenericTypeDefinition() == typeof(IEnumerable<>)
                 )

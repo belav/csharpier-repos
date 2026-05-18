@@ -224,9 +224,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             if (kind == UnaryOperatorKind.DecimalUnaryMinus)
             {
                 method = (MethodSymbol)
-                    _compilation.Assembly.GetSpecialTypeMember(
-                        SpecialMember.System_Decimal__op_UnaryNegation
-                    );
+                    _compilation.Assembly
+                        .GetSpecialTypeMember(SpecialMember.System_Decimal__op_UnaryNegation);
                 if (!_inExpressionLambda)
                 {
                     return BoundCall.Synthesized(

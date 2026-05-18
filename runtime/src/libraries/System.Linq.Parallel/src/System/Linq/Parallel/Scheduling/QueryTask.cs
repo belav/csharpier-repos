@@ -100,13 +100,14 @@ namespace System.Linq.Parallel
                 DateTime.Now.Ticks,
                 _taskIndex
             );
-            return Task.Factory.StartNew(
-                s_baseWorkDelegate,
-                this,
-                CancellationToken.None,
-                TaskCreationOptions.AttachedToParent | TaskCreationOptions.PreferFairness,
-                taskScheduler
-            );
+            return Task.Factory
+                .StartNew(
+                    s_baseWorkDelegate,
+                    this,
+                    CancellationToken.None,
+                    TaskCreationOptions.AttachedToParent | TaskCreationOptions.PreferFairness,
+                    taskScheduler
+                );
         }
 
         //-----------------------------------------------------------------------------------

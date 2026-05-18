@@ -3934,8 +3934,8 @@ class Program
                 var lambda in tree.GetRoot().DescendantNodes().OfType<LambdaExpressionSyntax>()
             )
             {
-                var reference = lambda
-                    .Body.DescendantNodesAndSelf()
+                var reference = lambda.Body
+                    .DescendantNodesAndSelf()
                     .OfType<IdentifierNameSyntax>()
                     .First();
                 Assert.Equal("x", reference.ToString());
@@ -6118,9 +6118,8 @@ class B
             var comp = CreateCompilation(
                 source,
                 parseOptions: TestOptions.Regular.WithFeature("run-nullable-analysis", "always"),
-                options: TestOptions.DebugDll.WithNullableContextOptions(
-                    NullableContextOptions.Disable
-                )
+                options: TestOptions.DebugDll
+                    .WithNullableContextOptions(NullableContextOptions.Disable)
             );
             comp.VerifyDiagnostics(
                 // (5,28): warning CS8632: The annotation for nullable reference types should only be used in code within a '#nullable' context.
@@ -6173,9 +6172,8 @@ class B
             var comp = CreateCompilation(
                 source,
                 parseOptions: TestOptions.Regular.WithFeature("run-nullable-analysis", "always"),
-                options: TestOptions.DebugDll.WithNullableContextOptions(
-                    NullableContextOptions.Enable
-                )
+                options: TestOptions.DebugDll
+                    .WithNullableContextOptions(NullableContextOptions.Enable)
             );
             comp.VerifyDiagnostics(
                 // (14,28): warning CS8632: The annotation for nullable reference types should only be used in code within a '#nullable' context.
@@ -6265,9 +6263,8 @@ partial class C9 { }
             // -nullable-:
             comp = CreateCompilation(
                 new[] { source0, source1, source2 },
-                options: TestOptions.DebugDll.WithNullableContextOptions(
-                    NullableContextOptions.Disable
-                )
+                options: TestOptions.DebugDll
+                    .WithNullableContextOptions(NullableContextOptions.Disable)
             );
             comp.VerifyDiagnostics(
                 // (15,11): warning CS8620: Nullability of reference types in argument of type 'C6' doesn't match target type 'Base<object?>' for parameter 'b' in 'void Program.F(Base<object?> b)'.
@@ -6290,9 +6287,8 @@ partial class C9 { }
             // -nullable+:
             comp = CreateCompilation(
                 new[] { source0, source1, source2 },
-                options: TestOptions.DebugDll.WithNullableContextOptions(
-                    NullableContextOptions.Enable
-                )
+                options: TestOptions.DebugDll
+                    .WithNullableContextOptions(NullableContextOptions.Enable)
             );
             comp.VerifyDiagnostics(
                 // (10,11): warning CS8620: Nullability of reference types in argument of type 'C1' doesn't match target type 'Base<object?>' for parameter 'b' in 'void Program.F(Base<object?> b)'.
@@ -6457,9 +6453,8 @@ class Program
 }";
             var comp = CreateCompilation(
                 source,
-                options: TestOptions.DebugDll.WithNullableContextOptions(
-                    NullableContextOptions.Enable
-                )
+                options: TestOptions.DebugDll
+                    .WithNullableContextOptions(NullableContextOptions.Enable)
             );
             comp.VerifyDiagnostics();
         }
@@ -6484,9 +6479,8 @@ class Program
 }}";
             var comp = CreateCompilation(
                 source,
-                options: TestOptions.DebugDll.WithNullableContextOptions(
-                    NullableContextOptions.Enable
-                )
+                options: TestOptions.DebugDll
+                    .WithNullableContextOptions(NullableContextOptions.Enable)
             );
             comp.VerifyDiagnostics(
                 // (6,25): error CS8669: The annotation for nullable reference types should only be used in code within a '#nullable' annotations context. Auto-generated code requires an explicit '#nullable enable' directive in source.
@@ -6518,9 +6512,8 @@ class Program
 }}";
             var comp = CreateCompilation(
                 source,
-                options: TestOptions.DebugDll.WithNullableContextOptions(
-                    NullableContextOptions.Enable
-                )
+                options: TestOptions.DebugDll
+                    .WithNullableContextOptions(NullableContextOptions.Enable)
             );
             comp.VerifyDiagnostics();
         }
@@ -6541,9 +6534,8 @@ class Program
 }";
             var comp = CreateCompilation(
                 source,
-                options: TestOptions.DebugDll.WithNullableContextOptions(
-                    NullableContextOptions.Enable
-                )
+                options: TestOptions.DebugDll
+                    .WithNullableContextOptions(NullableContextOptions.Enable)
             );
             comp.VerifyDiagnostics(
                 // (8,13): warning CS8600: Converting null literal or possible null value to non-nullable type.
@@ -6569,9 +6561,8 @@ partial class Program
 }";
             var comp = CreateCompilation(
                 source,
-                options: TestOptions.DebugDll.WithNullableContextOptions(
-                    NullableContextOptions.Enable
-                )
+                options: TestOptions.DebugDll
+                    .WithNullableContextOptions(NullableContextOptions.Enable)
             );
             comp.VerifyDiagnostics(
                 // (8,13): warning CS8600: Converting null literal or possible null value to non-nullable type.
@@ -6604,9 +6595,8 @@ partial class Program
 }";
             var comp = CreateCompilation(
                 source,
-                options: TestOptions.DebugDll.WithNullableContextOptions(
-                    NullableContextOptions.Enable
-                )
+                options: TestOptions.DebugDll
+                    .WithNullableContextOptions(NullableContextOptions.Enable)
             );
             comp.VerifyDiagnostics(
                 // (12,13): warning CS8625: Cannot convert null literal to non-nullable reference type.
@@ -6643,9 +6633,8 @@ partial class Program
 }";
             var comp = CreateCompilation(
                 new[] { source1, source2 },
-                options: TestOptions.DebugDll.WithNullableContextOptions(
-                    NullableContextOptions.Enable
-                )
+                options: TestOptions.DebugDll
+                    .WithNullableContextOptions(NullableContextOptions.Enable)
             );
             comp.VerifyDiagnostics(
                 // (8,13): warning CS8625: Cannot convert null literal to non-nullable reference type.
@@ -6683,9 +6672,8 @@ partial class Program
 }";
             var comp = CreateCompilation(
                 new[] { source1, source2 },
-                options: TestOptions.DebugDll.WithNullableContextOptions(
-                    NullableContextOptions.Enable
-                )
+                options: TestOptions.DebugDll
+                    .WithNullableContextOptions(NullableContextOptions.Enable)
             );
             comp.VerifyDiagnostics(
                 // (8,13): warning CS8625: Cannot convert null literal to non-nullable reference type.
@@ -6805,8 +6793,8 @@ partial class Program
 
             var comp = CreateCompilation(
                 new[] { source1, source2, source3, source4 },
-                options: TestOptions
-                    .DebugDll.WithNullableContextOptions(NullableContextOptions.Enable)
+                options: TestOptions.DebugDll
+                    .WithNullableContextOptions(NullableContextOptions.Enable)
                     .WithSyntaxTreeOptionsProvider(syntaxOptions)
             );
             comp.VerifyDiagnostics(
@@ -7421,15 +7409,12 @@ class Program
                 Diagnostic(ErrorCode.WRN_NullReferenceReceiver, "s").WithLocation(7, 13)
             );
 
-            var id = MessageProvider.Instance.GetIdForErrorCode(
-                (int)ErrorCode.WRN_NullReferenceReceiver
-            );
+            var id = MessageProvider.Instance
+                .GetIdForErrorCode((int)ErrorCode.WRN_NullReferenceReceiver);
             var comp2 = CreateCompilation(
                 source,
-                options: TestOptions.DebugDll.WithSpecificDiagnosticOptions(
-                    id,
-                    ReportDiagnostic.Suppress
-                )
+                options: TestOptions.DebugDll
+                    .WithSpecificDiagnosticOptions(id, ReportDiagnostic.Suppress)
             );
             comp2.VerifyDiagnostics();
         }
@@ -10634,19 +10619,22 @@ class D : C<B>, I<B>
             comp.VerifyDiagnostics();
             var derivedType = comp.GetMember<NamedTypeSymbol>("D");
             var baseType = derivedType.BaseTypeNoUseSiteDiagnostics;
-            var constraintType = baseType
-                .TypeParameters.Single()
-                .ConstraintTypesNoUseSiteDiagnostics.Single();
+            var constraintType = baseType.TypeParameters
+                .Single()
+                .ConstraintTypesNoUseSiteDiagnostics
+                .Single();
             Assert.Equal(NullableAnnotation.Oblivious, constraintType.NullableAnnotation);
             var interfaceType = derivedType.Interfaces().Single();
-            constraintType = interfaceType
-                .TypeParameters.Single()
-                .ConstraintTypesNoUseSiteDiagnostics.Single();
+            constraintType = interfaceType.TypeParameters
+                .Single()
+                .ConstraintTypesNoUseSiteDiagnostics
+                .Single();
             Assert.Equal(NullableAnnotation.Oblivious, constraintType.NullableAnnotation);
             var method = baseType.GetMember<MethodSymbol>("M");
-            constraintType = method
-                .TypeParameters.Single()
-                .ConstraintTypesNoUseSiteDiagnostics.Single();
+            constraintType = method.TypeParameters
+                .Single()
+                .ConstraintTypesNoUseSiteDiagnostics
+                .Single();
             Assert.Equal(NullableAnnotation.Oblivious, constraintType.NullableAnnotation);
         }
 
@@ -10675,7 +10663,8 @@ class C : I<string>
             );
             typeArg = (
                 (NamedTypeSymbol)method.ReturnType
-            ).TypeArgumentsWithAnnotationsNoUseSiteDiagnostics.Single();
+            ).TypeArgumentsWithAnnotationsNoUseSiteDiagnostics
+                .Single();
             Assert.Equal(NullableAnnotation.Oblivious, typeArg.NullableAnnotation);
             var parameter = method.Parameters.Single();
             Assert.Equal(
@@ -10684,7 +10673,8 @@ class C : I<string>
             );
             typeArg = (
                 (NamedTypeSymbol)parameter.Type
-            ).TypeArgumentsWithAnnotationsNoUseSiteDiagnostics.Single();
+            ).TypeArgumentsWithAnnotationsNoUseSiteDiagnostics
+                .Single();
             Assert.Equal(NullableAnnotation.Oblivious, typeArg.NullableAnnotation);
         }
 
@@ -14449,20 +14439,23 @@ class B2 : A
                 {
                     var member = type.GetMember<EventSymbol>(memberName);
                     Assert.False(
-                        member.TypeWithAnnotations.Equals(
-                            member.OverriddenEvent.TypeWithAnnotations,
-                            TypeCompareKind.AllIgnoreOptions
-                                & ~TypeCompareKind.AllNullableIgnoreOptions
-                        )
+                        member.TypeWithAnnotations
+                            .Equals(
+                                member.OverriddenEvent.TypeWithAnnotations,
+                                TypeCompareKind.AllIgnoreOptions
+                                    & ~TypeCompareKind.AllNullableIgnoreOptions
+                            )
                     );
                 }
 
                 var e3 = type.GetMember<EventSymbol>("E3");
                 Assert.True(
-                    e3.TypeWithAnnotations.Equals(
-                        e3.OverriddenEvent.TypeWithAnnotations,
-                        TypeCompareKind.AllIgnoreOptions & ~TypeCompareKind.AllNullableIgnoreOptions
-                    )
+                    e3.TypeWithAnnotations
+                        .Equals(
+                            e3.OverriddenEvent.TypeWithAnnotations,
+                            TypeCompareKind.AllIgnoreOptions
+                                & ~TypeCompareKind.AllNullableIgnoreOptions
+                        )
                 );
             }
 
@@ -14473,16 +14466,18 @@ class B2 : A
                 foreach (var ev in type.GetMembers().OfType<EventSymbol>())
                 {
                     Assert.True(
-                        ev.TypeWithAnnotations.Equals(
-                            ev.AddMethod.Parameters.Last().TypeWithAnnotations,
-                            TypeCompareKind.ConsiderEverything
-                        )
+                        ev.TypeWithAnnotations
+                            .Equals(
+                                ev.AddMethod.Parameters.Last().TypeWithAnnotations,
+                                TypeCompareKind.ConsiderEverything
+                            )
                     );
                     Assert.True(
-                        ev.TypeWithAnnotations.Equals(
-                            ev.RemoveMethod.Parameters.Last().TypeWithAnnotations,
-                            TypeCompareKind.ConsiderEverything
-                        )
+                        ev.TypeWithAnnotations
+                            .Equals(
+                                ev.RemoveMethod.Parameters.Last().TypeWithAnnotations,
+                                TypeCompareKind.ConsiderEverything
+                            )
                     );
                 }
             }
@@ -14578,16 +14573,18 @@ public class B2 : A
                 var member = type.GetMember<MethodSymbol>(methodName);
                 Assert.Equal(
                     expectMatch,
-                    member.ReturnTypeWithAnnotations.Equals(
-                        member.OverriddenMethod.ReturnTypeWithAnnotations,
-                        TypeCompareKind.ConsiderEverything
-                    )
+                    member.ReturnTypeWithAnnotations
+                        .Equals(
+                            member.OverriddenMethod.ReturnTypeWithAnnotations,
+                            TypeCompareKind.ConsiderEverything
+                        )
                 );
                 Assert.Equal(
                     expectMatch,
-                    member
-                        .Parameters.Single()
-                        .TypeWithAnnotations.Equals(
+                    member.Parameters
+                        .Single()
+                        .TypeWithAnnotations
+                        .Equals(
                             member.OverriddenMethod.Parameters.Single().TypeWithAnnotations,
                             TypeCompareKind.ConsiderEverything
                         )
@@ -14888,11 +14885,12 @@ class B2 : IA
 
                     var impl = (EventSymbol)type.FindImplementationForInterfaceMember(member);
                     Assert.False(
-                        impl.TypeWithAnnotations.Equals(
-                            member.TypeWithAnnotations,
-                            TypeCompareKind.AllIgnoreOptions
-                                & ~TypeCompareKind.AllNullableIgnoreOptions
-                        )
+                        impl.TypeWithAnnotations
+                            .Equals(
+                                member.TypeWithAnnotations,
+                                TypeCompareKind.AllIgnoreOptions
+                                    & ~TypeCompareKind.AllNullableIgnoreOptions
+                            )
                     );
                 }
             }
@@ -14905,10 +14903,12 @@ class B2 : IA
 
                 var impl = (EventSymbol)type.FindImplementationForInterfaceMember(e3);
                 Assert.True(
-                    impl.TypeWithAnnotations.Equals(
-                        e3.TypeWithAnnotations,
-                        TypeCompareKind.AllIgnoreOptions & ~TypeCompareKind.AllNullableIgnoreOptions
-                    )
+                    impl.TypeWithAnnotations
+                        .Equals(
+                            e3.TypeWithAnnotations,
+                            TypeCompareKind.AllIgnoreOptions
+                                & ~TypeCompareKind.AllNullableIgnoreOptions
+                        )
                 );
             }
 
@@ -14919,16 +14919,18 @@ class B2 : IA
                 foreach (var ev in type.GetMembers().OfType<EventSymbol>())
                 {
                     Assert.True(
-                        ev.TypeWithAnnotations.Equals(
-                            ev.AddMethod.Parameters.Last().TypeWithAnnotations,
-                            TypeCompareKind.ConsiderEverything
-                        )
+                        ev.TypeWithAnnotations
+                            .Equals(
+                                ev.AddMethod.Parameters.Last().TypeWithAnnotations,
+                                TypeCompareKind.ConsiderEverything
+                            )
                     );
                     Assert.True(
-                        ev.TypeWithAnnotations.Equals(
-                            ev.RemoveMethod.Parameters.Last().TypeWithAnnotations,
-                            TypeCompareKind.ConsiderEverything
-                        )
+                        ev.TypeWithAnnotations
+                            .Equals(
+                                ev.RemoveMethod.Parameters.Last().TypeWithAnnotations,
+                                TypeCompareKind.ConsiderEverything
+                            )
                     );
                 }
             }
@@ -15011,10 +15013,12 @@ class B2 : IB
 
                 var impl = (EventSymbol)b1.FindImplementationForInterfaceMember(member);
                 Assert.False(
-                    impl.TypeWithAnnotations.Equals(
-                        member.TypeWithAnnotations,
-                        TypeCompareKind.AllIgnoreOptions & ~TypeCompareKind.AllNullableIgnoreOptions
-                    )
+                    impl.TypeWithAnnotations
+                        .Equals(
+                            member.TypeWithAnnotations,
+                            TypeCompareKind.AllIgnoreOptions
+                                & ~TypeCompareKind.AllNullableIgnoreOptions
+                        )
                 );
             }
 
@@ -15022,10 +15026,12 @@ class B2 : IB
             {
                 var impl = (EventSymbol)b1.FindImplementationForInterfaceMember(e3);
                 Assert.True(
-                    impl.TypeWithAnnotations.Equals(
-                        e3.TypeWithAnnotations,
-                        TypeCompareKind.AllIgnoreOptions & ~TypeCompareKind.AllNullableIgnoreOptions
-                    )
+                    impl.TypeWithAnnotations
+                        .Equals(
+                            e3.TypeWithAnnotations,
+                            TypeCompareKind.AllIgnoreOptions
+                                & ~TypeCompareKind.AllNullableIgnoreOptions
+                        )
                 );
             }
 
@@ -15036,16 +15042,18 @@ class B2 : IB
                 foreach (var ev in type.GetMembers().OfType<EventSymbol>())
                 {
                     Assert.True(
-                        ev.TypeWithAnnotations.Equals(
-                            ev.AddMethod.Parameters.Last().TypeWithAnnotations,
-                            TypeCompareKind.ConsiderEverything
-                        )
+                        ev.TypeWithAnnotations
+                            .Equals(
+                                ev.AddMethod.Parameters.Last().TypeWithAnnotations,
+                                TypeCompareKind.ConsiderEverything
+                            )
                     );
                     Assert.True(
-                        ev.TypeWithAnnotations.Equals(
-                            ev.RemoveMethod.Parameters.Last().TypeWithAnnotations,
-                            TypeCompareKind.ConsiderEverything
-                        )
+                        ev.TypeWithAnnotations
+                            .Equals(
+                                ev.RemoveMethod.Parameters.Last().TypeWithAnnotations,
+                                TypeCompareKind.ConsiderEverything
+                            )
                     );
                 }
             }
@@ -15139,10 +15147,12 @@ class B2 : A2
             )
             {
                 Assert.False(
-                    member.TypeWithAnnotations.Equals(
-                        member.OverriddenProperty.TypeWithAnnotations,
-                        TypeCompareKind.AllIgnoreOptions & ~TypeCompareKind.AllNullableIgnoreOptions
-                    )
+                    member.TypeWithAnnotations
+                        .Equals(
+                            member.OverriddenProperty.TypeWithAnnotations,
+                            TypeCompareKind.AllIgnoreOptions
+                                & ~TypeCompareKind.AllNullableIgnoreOptions
+                        )
                 );
             }
 
@@ -15154,10 +15164,12 @@ class B2 : A2
             )
             {
                 Assert.True(
-                    member.TypeWithAnnotations.Equals(
-                        member.OverriddenProperty.TypeWithAnnotations,
-                        TypeCompareKind.AllIgnoreOptions & ~TypeCompareKind.AllNullableIgnoreOptions
-                    )
+                    member.TypeWithAnnotations
+                        .Equals(
+                            member.OverriddenProperty.TypeWithAnnotations,
+                            TypeCompareKind.AllIgnoreOptions
+                                & ~TypeCompareKind.AllNullableIgnoreOptions
+                        )
                 );
             }
 
@@ -15168,16 +15180,18 @@ class B2 : A2
                 foreach (var property in type.GetMembers().OfType<PropertySymbol>())
                 {
                     Assert.True(
-                        property.TypeWithAnnotations.Equals(
-                            property.GetMethod.ReturnTypeWithAnnotations,
-                            TypeCompareKind.ConsiderEverything
-                        )
+                        property.TypeWithAnnotations
+                            .Equals(
+                                property.GetMethod.ReturnTypeWithAnnotations,
+                                TypeCompareKind.ConsiderEverything
+                            )
                     );
                     Assert.True(
-                        property.TypeWithAnnotations.Equals(
-                            property.SetMethod.Parameters.Last().TypeWithAnnotations,
-                            TypeCompareKind.ConsiderEverything
-                        )
+                        property.TypeWithAnnotations
+                            .Equals(
+                                property.SetMethod.Parameters.Last().TypeWithAnnotations,
+                                TypeCompareKind.ConsiderEverything
+                            )
                     );
                 }
             }
@@ -15344,10 +15358,12 @@ class B : IA, IA2
             {
                 var impl = (PropertySymbol)b.FindImplementationForInterfaceMember(member);
                 Assert.False(
-                    impl.TypeWithAnnotations.Equals(
-                        member.TypeWithAnnotations,
-                        TypeCompareKind.AllIgnoreOptions & ~TypeCompareKind.AllNullableIgnoreOptions
-                    )
+                    impl.TypeWithAnnotations
+                        .Equals(
+                            member.TypeWithAnnotations,
+                            TypeCompareKind.AllIgnoreOptions
+                                & ~TypeCompareKind.AllNullableIgnoreOptions
+                        )
                 );
             }
 
@@ -15360,10 +15376,12 @@ class B : IA, IA2
             {
                 var impl = (PropertySymbol)b.FindImplementationForInterfaceMember(member);
                 Assert.True(
-                    impl.TypeWithAnnotations.Equals(
-                        member.TypeWithAnnotations,
-                        TypeCompareKind.AllIgnoreOptions & ~TypeCompareKind.AllNullableIgnoreOptions
-                    )
+                    impl.TypeWithAnnotations
+                        .Equals(
+                            member.TypeWithAnnotations,
+                            TypeCompareKind.AllIgnoreOptions
+                                & ~TypeCompareKind.AllNullableIgnoreOptions
+                        )
                 );
             }
 
@@ -15374,16 +15392,18 @@ class B : IA, IA2
                 foreach (var property in type.GetMembers().OfType<PropertySymbol>())
                 {
                     Assert.True(
-                        property.TypeWithAnnotations.Equals(
-                            property.GetMethod.ReturnTypeWithAnnotations,
-                            TypeCompareKind.ConsiderEverything
-                        )
+                        property.TypeWithAnnotations
+                            .Equals(
+                                property.GetMethod.ReturnTypeWithAnnotations,
+                                TypeCompareKind.ConsiderEverything
+                            )
                     );
                     Assert.True(
-                        property.TypeWithAnnotations.Equals(
-                            property.SetMethod.Parameters.Last().TypeWithAnnotations,
-                            TypeCompareKind.ConsiderEverything
-                        )
+                        property.TypeWithAnnotations
+                            .Equals(
+                                property.SetMethod.Parameters.Last().TypeWithAnnotations,
+                                TypeCompareKind.ConsiderEverything
+                            )
                     );
                 }
             }
@@ -15485,10 +15505,12 @@ class B : IA, IA2
             {
                 var impl = (PropertySymbol)b.FindImplementationForInterfaceMember(member);
                 Assert.False(
-                    impl.TypeWithAnnotations.Equals(
-                        member.TypeWithAnnotations,
-                        TypeCompareKind.AllIgnoreOptions & ~TypeCompareKind.AllNullableIgnoreOptions
-                    )
+                    impl.TypeWithAnnotations
+                        .Equals(
+                            member.TypeWithAnnotations,
+                            TypeCompareKind.AllIgnoreOptions
+                                & ~TypeCompareKind.AllNullableIgnoreOptions
+                        )
                 );
             }
 
@@ -15501,10 +15523,12 @@ class B : IA, IA2
             {
                 var impl = (PropertySymbol)b.FindImplementationForInterfaceMember(member);
                 Assert.True(
-                    impl.TypeWithAnnotations.Equals(
-                        member.TypeWithAnnotations,
-                        TypeCompareKind.AllIgnoreOptions & ~TypeCompareKind.AllNullableIgnoreOptions
-                    )
+                    impl.TypeWithAnnotations
+                        .Equals(
+                            member.TypeWithAnnotations,
+                            TypeCompareKind.AllIgnoreOptions
+                                & ~TypeCompareKind.AllNullableIgnoreOptions
+                        )
                 );
             }
 
@@ -15515,16 +15539,18 @@ class B : IA, IA2
                 foreach (var property in type.GetMembers().OfType<PropertySymbol>())
                 {
                     Assert.True(
-                        property.TypeWithAnnotations.Equals(
-                            property.GetMethod.ReturnTypeWithAnnotations,
-                            TypeCompareKind.ConsiderEverything
-                        )
+                        property.TypeWithAnnotations
+                            .Equals(
+                                property.GetMethod.ReturnTypeWithAnnotations,
+                                TypeCompareKind.ConsiderEverything
+                            )
                     );
                     Assert.True(
-                        property.TypeWithAnnotations.Equals(
-                            property.SetMethod.Parameters.Last().TypeWithAnnotations,
-                            TypeCompareKind.ConsiderEverything
-                        )
+                        property.TypeWithAnnotations
+                            .Equals(
+                                property.SetMethod.Parameters.Last().TypeWithAnnotations,
+                                TypeCompareKind.ConsiderEverything
+                            )
                     );
                 }
             }
@@ -15602,16 +15628,17 @@ class B : A
             {
                 var member = b.GetMember<MethodSymbol>(memberName);
                 Assert.False(
-                    member.ReturnTypeWithAnnotations.Equals(
-                        member
-                            .OverriddenMethod.ConstructIfGeneric(
-                                member.TypeParameters.SelectAsArray(t =>
-                                    TypeWithAnnotations.Create(t)
+                    member.ReturnTypeWithAnnotations
+                        .Equals(
+                            member.OverriddenMethod
+                                .ConstructIfGeneric(
+                                    member.TypeParameters
+                                        .SelectAsArray(t => TypeWithAnnotations.Create(t))
                                 )
-                            )
-                            .ReturnTypeWithAnnotations,
-                        TypeCompareKind.AllIgnoreOptions & ~TypeCompareKind.AllNullableIgnoreOptions
-                    )
+                                .ReturnTypeWithAnnotations,
+                            TypeCompareKind.AllIgnoreOptions
+                                & ~TypeCompareKind.AllNullableIgnoreOptions
+                        )
                 );
             }
         }
@@ -15754,10 +15781,12 @@ class B : IA
                     implementing.TypeParameters.SelectAsArray(t => TypeWithAnnotations.Create(t))
                 );
                 Assert.False(
-                    implementing.ReturnTypeWithAnnotations.Equals(
-                        implemented.ReturnTypeWithAnnotations,
-                        TypeCompareKind.AllIgnoreOptions & ~TypeCompareKind.AllNullableIgnoreOptions
-                    )
+                    implementing.ReturnTypeWithAnnotations
+                        .Equals(
+                            implemented.ReturnTypeWithAnnotations,
+                            TypeCompareKind.AllIgnoreOptions
+                                & ~TypeCompareKind.AllNullableIgnoreOptions
+                        )
                 );
             }
 
@@ -15768,10 +15797,12 @@ class B : IA
                     implementing.TypeParameters.SelectAsArray(t => TypeWithAnnotations.Create(t))
                 );
                 Assert.True(
-                    implementing.ReturnTypeWithAnnotations.Equals(
-                        implemented.ReturnTypeWithAnnotations,
-                        TypeCompareKind.AllIgnoreOptions & ~TypeCompareKind.AllNullableIgnoreOptions
-                    )
+                    implementing.ReturnTypeWithAnnotations
+                        .Equals(
+                            implemented.ReturnTypeWithAnnotations,
+                            TypeCompareKind.AllIgnoreOptions
+                                & ~TypeCompareKind.AllNullableIgnoreOptions
+                        )
                 );
             }
         }
@@ -15879,10 +15910,11 @@ class B : IA
                 implementing.TypeParameters.SelectAsArray(t => TypeWithAnnotations.Create(t))
             );
             Assert.False(
-                implementing.ReturnTypeWithAnnotations.Equals(
-                    implemented.ReturnTypeWithAnnotations,
-                    TypeCompareKind.AllIgnoreOptions & ~TypeCompareKind.AllNullableIgnoreOptions
-                )
+                implementing.ReturnTypeWithAnnotations
+                    .Equals(
+                        implemented.ReturnTypeWithAnnotations,
+                        TypeCompareKind.AllIgnoreOptions & ~TypeCompareKind.AllNullableIgnoreOptions
+                    )
             );
 
             member = ia.GetMember<MethodSymbol>("M2");
@@ -16244,8 +16276,10 @@ class B : A
             var m1 = b.GetMember<MethodSymbol>("M1");
             Assert.False(
                 m1.Parameters[0]
-                    .TypeWithAnnotations.Equals(
-                        m1.OverriddenMethod.ConstructIfGeneric(
+                    .TypeWithAnnotations
+                    .Equals(
+                        m1.OverriddenMethod
+                            .ConstructIfGeneric(
                                 m1.TypeParameters.SelectAsArray(t => TypeWithAnnotations.Create(t))
                             )
                             .Parameters[0]
@@ -16648,27 +16682,31 @@ class B : A
             {
                 var member = b.GetMember<MethodSymbol>(memberName);
                 Assert.False(
-                    member.ReturnTypeWithAnnotations.Equals(
-                        member
-                            .OverriddenMethod.ConstructIfGeneric(
-                                member.TypeParameters.SelectAsArray(t =>
-                                    TypeWithAnnotations.Create(t)
+                    member.ReturnTypeWithAnnotations
+                        .Equals(
+                            member.OverriddenMethod
+                                .ConstructIfGeneric(
+                                    member.TypeParameters
+                                        .SelectAsArray(t => TypeWithAnnotations.Create(t))
                                 )
-                            )
-                            .ReturnTypeWithAnnotations,
-                        TypeCompareKind.AllIgnoreOptions & ~TypeCompareKind.AllNullableIgnoreOptions
-                    )
+                                .ReturnTypeWithAnnotations,
+                            TypeCompareKind.AllIgnoreOptions
+                                & ~TypeCompareKind.AllNullableIgnoreOptions
+                        )
                 );
             }
 
             var m3 = b.GetMember<MethodSymbol>("M3");
             Assert.True(
-                m3.ReturnTypeWithAnnotations.Equals(
-                    m3.OverriddenMethod.ConstructIfGeneric(
-                        m3.TypeParameters.SelectAsArray(t => TypeWithAnnotations.Create(t))
-                    ).ReturnTypeWithAnnotations,
-                    TypeCompareKind.AllIgnoreOptions & ~TypeCompareKind.AllNullableIgnoreOptions
-                )
+                m3.ReturnTypeWithAnnotations
+                    .Equals(
+                        m3.OverriddenMethod
+                            .ConstructIfGeneric(
+                                m3.TypeParameters.SelectAsArray(t => TypeWithAnnotations.Create(t))
+                            )
+                            .ReturnTypeWithAnnotations,
+                        TypeCompareKind.AllIgnoreOptions & ~TypeCompareKind.AllNullableIgnoreOptions
+                    )
             );
         }
 
@@ -16780,12 +16818,12 @@ class B : A
                 Assert.False(
                     member
                         .Parameters[0]
-                        .TypeWithAnnotations.Equals(
-                            member
-                                .OverriddenMethod.ConstructIfGeneric(
-                                    member.TypeParameters.SelectAsArray(t =>
-                                        TypeWithAnnotations.Create(t)
-                                    )
+                        .TypeWithAnnotations
+                        .Equals(
+                            member.OverriddenMethod
+                                .ConstructIfGeneric(
+                                    member.TypeParameters
+                                        .SelectAsArray(t => TypeWithAnnotations.Create(t))
                                 )
                                 .Parameters[0]
                                 .TypeWithAnnotations,
@@ -16798,8 +16836,10 @@ class B : A
             var m3 = b.GetMember<MethodSymbol>("M3");
             Assert.True(
                 m3.Parameters[0]
-                    .TypeWithAnnotations.Equals(
-                        m3.OverriddenMethod.ConstructIfGeneric(
+                    .TypeWithAnnotations
+                    .Equals(
+                        m3.OverriddenMethod
+                            .ConstructIfGeneric(
                                 m3.TypeParameters.SelectAsArray(t => TypeWithAnnotations.Create(t))
                             )
                             .Parameters[0]
@@ -19873,7 +19913,8 @@ class B : IA
                 Assert.False(
                     implementing
                         .Parameters[0]
-                        .TypeWithAnnotations.Equals(
+                        .TypeWithAnnotations
+                        .Equals(
                             implemented.Parameters[0].TypeWithAnnotations,
                             TypeCompareKind.AllIgnoreOptions
                                 & ~TypeCompareKind.AllNullableIgnoreOptions
@@ -19890,7 +19931,8 @@ class B : IA
                 Assert.True(
                     implementing
                         .Parameters[0]
-                        .TypeWithAnnotations.Equals(
+                        .TypeWithAnnotations
+                        .Equals(
                             implemented.Parameters[0].TypeWithAnnotations,
                             TypeCompareKind.AllIgnoreOptions
                                 & ~TypeCompareKind.AllNullableIgnoreOptions
@@ -20039,7 +20081,8 @@ class B3 : A3
                     Assert.False(
                         member
                             .Parameters[0]
-                            .TypeWithAnnotations.Equals(
+                            .TypeWithAnnotations
+                            .Equals(
                                 member.OverriddenProperty.Parameters[0].TypeWithAnnotations,
                                 TypeCompareKind.AllIgnoreOptions
                                     & ~TypeCompareKind.AllNullableIgnoreOptions
@@ -20058,7 +20101,8 @@ class B3 : A3
                 Assert.True(
                     member
                         .Parameters[0]
-                        .TypeWithAnnotations.Equals(
+                        .TypeWithAnnotations
+                        .Equals(
                             member.OverriddenProperty.Parameters[0].TypeWithAnnotations,
                             TypeCompareKind.AllIgnoreOptions
                                 & ~TypeCompareKind.AllNullableIgnoreOptions
@@ -20073,16 +20117,18 @@ class B3 : A3
                 foreach (var property in type.GetMembers().OfType<PropertySymbol>())
                 {
                     Assert.True(
-                        property.TypeWithAnnotations.Equals(
-                            property.GetMethod.ReturnTypeWithAnnotations,
-                            TypeCompareKind.ConsiderEverything
-                        )
+                        property.TypeWithAnnotations
+                            .Equals(
+                                property.GetMethod.ReturnTypeWithAnnotations,
+                                TypeCompareKind.ConsiderEverything
+                            )
                     );
                     Assert.True(
-                        property.TypeWithAnnotations.Equals(
-                            property.SetMethod.Parameters.Last().TypeWithAnnotations,
-                            TypeCompareKind.ConsiderEverything
-                        )
+                        property.TypeWithAnnotations
+                            .Equals(
+                                property.SetMethod.Parameters.Last().TypeWithAnnotations,
+                                TypeCompareKind.ConsiderEverything
+                            )
                     );
                 }
             }
@@ -20169,7 +20215,8 @@ class B3 : IA3
                 Assert.False(
                     implementing
                         .Parameters[0]
-                        .TypeWithAnnotations.Equals(
+                        .TypeWithAnnotations
+                        .Equals(
                             implemented.Parameters[0].TypeWithAnnotations,
                             TypeCompareKind.AllIgnoreOptions
                                 & ~TypeCompareKind.AllNullableIgnoreOptions
@@ -20190,7 +20237,8 @@ class B3 : IA3
                 Assert.True(
                     implementing
                         .Parameters[0]
-                        .TypeWithAnnotations.Equals(
+                        .TypeWithAnnotations
+                        .Equals(
                             implemented.Parameters[0].TypeWithAnnotations,
                             TypeCompareKind.AllIgnoreOptions
                                 & ~TypeCompareKind.AllNullableIgnoreOptions
@@ -20205,16 +20253,18 @@ class B3 : IA3
                 foreach (var property in type.GetMembers().OfType<PropertySymbol>())
                 {
                     Assert.True(
-                        property.TypeWithAnnotations.Equals(
-                            property.GetMethod.ReturnTypeWithAnnotations,
-                            TypeCompareKind.ConsiderEverything
-                        )
+                        property.TypeWithAnnotations
+                            .Equals(
+                                property.GetMethod.ReturnTypeWithAnnotations,
+                                TypeCompareKind.ConsiderEverything
+                            )
                     );
                     Assert.True(
-                        property.TypeWithAnnotations.Equals(
-                            property.SetMethod.Parameters.Last().TypeWithAnnotations,
-                            TypeCompareKind.ConsiderEverything
-                        )
+                        property.TypeWithAnnotations
+                            .Equals(
+                                property.SetMethod.Parameters.Last().TypeWithAnnotations,
+                                TypeCompareKind.ConsiderEverything
+                            )
                     );
                 }
             }
@@ -20297,7 +20347,8 @@ class B3 : IA3
                 Assert.False(
                     implementing
                         .Parameters[0]
-                        .TypeWithAnnotations.Equals(
+                        .TypeWithAnnotations
+                        .Equals(
                             implemented.Parameters[0].TypeWithAnnotations,
                             TypeCompareKind.AllIgnoreOptions
                                 & ~TypeCompareKind.AllNullableIgnoreOptions
@@ -20318,7 +20369,8 @@ class B3 : IA3
                 Assert.True(
                     implementing
                         .Parameters[0]
-                        .TypeWithAnnotations.Equals(
+                        .TypeWithAnnotations
+                        .Equals(
                             implemented.Parameters[0].TypeWithAnnotations,
                             TypeCompareKind.AllIgnoreOptions
                                 & ~TypeCompareKind.AllNullableIgnoreOptions
@@ -20333,16 +20385,18 @@ class B3 : IA3
                 foreach (var property in type.GetMembers().OfType<PropertySymbol>())
                 {
                     Assert.True(
-                        property.TypeWithAnnotations.Equals(
-                            property.GetMethod.ReturnTypeWithAnnotations,
-                            TypeCompareKind.ConsiderEverything
-                        )
+                        property.TypeWithAnnotations
+                            .Equals(
+                                property.GetMethod.ReturnTypeWithAnnotations,
+                                TypeCompareKind.ConsiderEverything
+                            )
                     );
                     Assert.True(
-                        property.TypeWithAnnotations.Equals(
-                            property.SetMethod.Parameters.Last().TypeWithAnnotations,
-                            TypeCompareKind.ConsiderEverything
-                        )
+                        property.TypeWithAnnotations
+                            .Equals(
+                                property.SetMethod.Parameters.Last().TypeWithAnnotations,
+                                TypeCompareKind.ConsiderEverything
+                            )
                     );
                 }
             }
@@ -21225,7 +21279,8 @@ public class C4 : I1<A?>
                 Assert.Same(
                     method,
                     c3.FindImplementationForInterfaceMember(
-                        m.GlobalNamespace.GetTypeMember("C4")
+                        m.GlobalNamespace
+                            .GetTypeMember("C4")
                             .InterfacesNoUseSiteDiagnostics()[0]
                             .GetMember("M")
                     )
@@ -21628,7 +21683,8 @@ class B : IA
                 Assert.False(
                     implementing
                         .Parameters[0]
-                        .TypeWithAnnotations.Equals(
+                        .TypeWithAnnotations
+                        .Equals(
                             implemented.Parameters[0].TypeWithAnnotations,
                             TypeCompareKind.AllIgnoreOptions
                                 & ~TypeCompareKind.AllNullableIgnoreOptions
@@ -21645,7 +21701,8 @@ class B : IA
                 Assert.True(
                     implementing
                         .Parameters[0]
-                        .TypeWithAnnotations.Equals(
+                        .TypeWithAnnotations
+                        .Equals(
                             implemented.Parameters[0].TypeWithAnnotations,
                             TypeCompareKind.AllIgnoreOptions
                                 & ~TypeCompareKind.AllNullableIgnoreOptions
@@ -21723,10 +21780,12 @@ class B : IA
                     implementing.TypeParameters.SelectAsArray(t => TypeWithAnnotations.Create(t))
                 );
                 Assert.False(
-                    implementing.ReturnTypeWithAnnotations.Equals(
-                        implemented.ReturnTypeWithAnnotations,
-                        TypeCompareKind.AllIgnoreOptions & ~TypeCompareKind.AllNullableIgnoreOptions
-                    )
+                    implementing.ReturnTypeWithAnnotations
+                        .Equals(
+                            implemented.ReturnTypeWithAnnotations,
+                            TypeCompareKind.AllIgnoreOptions
+                                & ~TypeCompareKind.AllNullableIgnoreOptions
+                        )
                 );
             }
 
@@ -21737,10 +21796,12 @@ class B : IA
                     implementing.TypeParameters.SelectAsArray(t => TypeWithAnnotations.Create(t))
                 );
                 Assert.True(
-                    implementing.ReturnTypeWithAnnotations.Equals(
-                        implemented.ReturnTypeWithAnnotations,
-                        TypeCompareKind.AllIgnoreOptions & ~TypeCompareKind.AllNullableIgnoreOptions
-                    )
+                    implementing.ReturnTypeWithAnnotations
+                        .Equals(
+                            implemented.ReturnTypeWithAnnotations,
+                            TypeCompareKind.AllIgnoreOptions
+                                & ~TypeCompareKind.AllNullableIgnoreOptions
+                        )
                 );
             }
         }
@@ -21822,7 +21883,8 @@ partial class C1
                 Assert.False(
                     m1Impl
                         .Parameters[i]
-                        .TypeWithAnnotations.Equals(
+                        .TypeWithAnnotations
+                        .Equals(
                             m1Def.Parameters[i].TypeWithAnnotations,
                             TypeCompareKind.AllIgnoreOptions
                                 & ~TypeCompareKind.AllNullableIgnoreOptions
@@ -21833,7 +21895,8 @@ partial class C1
             Assert.True(
                 m1Impl
                     .Parameters[3]
-                    .TypeWithAnnotations.Equals(
+                    .TypeWithAnnotations
+                    .Equals(
                         m1Def.Parameters[3].TypeWithAnnotations,
                         TypeCompareKind.AllIgnoreOptions & ~TypeCompareKind.AllNullableIgnoreOptions
                     )
@@ -36718,9 +36781,8 @@ public class C
 
             var comp = CreateCompilation(
                 new[] { source, NotNullIfNotNullAttributeDefinition },
-                options: TestOptions.DebugExe.WithNullableContextOptions(
-                    NullableContextOptions.Enable
-                )
+                options: TestOptions.DebugExe
+                    .WithNullableContextOptions(NullableContextOptions.Enable)
             );
             comp.VerifyDiagnostics(
                 // (7,1): warning CS8602: Dereference of a possibly null reference.
@@ -47413,8 +47475,8 @@ class Program
                 var setterAttributes = setter.GetAttributes();
                 AssertEx.Empty(setterAttributes);
 
-                var setterValueAttributes = setter
-                    .Parameters.Last()
+                var setterValueAttributes = setter.Parameters
+                    .Last()
                     .GetAttributes()
                     .Select(a => a.ToString());
                 Assert.Equal(
@@ -47507,8 +47569,8 @@ public class COpen<TOpen>
                 var setterAttributes = setter.GetAttributes();
                 AssertEx.Empty(setterAttributes);
 
-                var setterValueAttributes = setter
-                    .Parameters.Last()
+                var setterValueAttributes = setter.Parameters
+                    .Last()
                     .GetAttributes()
                     .Select(a => a.ToString());
                 Assert.Equal(
@@ -51887,8 +51949,8 @@ class C
                     );
                 }
 
-                var setterValueAttributes = setter
-                    .Parameters.Last()
+                var setterValueAttributes = setter.Parameters
+                    .Last()
                     .GetAttributes()
                     .Select(a => a.ToString());
                 Assert.Equal(
@@ -82809,7 +82871,8 @@ class C
                 "object _",
                 model
                     .GetSymbolInfo(discard2)
-                    .Symbol.ToDisplayString(SymbolDisplayFormat.MinimallyQualifiedFormat)
+                    .Symbol
+                    .ToDisplayString(SymbolDisplayFormat.MinimallyQualifiedFormat)
             );
             Assert.Null(model.GetDeclaredSymbol(discard2));
         }
@@ -112900,17 +112963,18 @@ class B
                 Assert.Equal(
                     "void B.F2<T2>(T2 t2) where T2 : class?",
                     f2.ToDisplayString(
-                        SymbolDisplayFormat.TestFormat.WithGenericsOptions(
-                            SymbolDisplayFormat.TestFormat.GenericsOptions
-                                | SymbolDisplayGenericsOptions.IncludeTypeConstraints
-                        )
+                        SymbolDisplayFormat.TestFormat
+                            .WithGenericsOptions(
+                                SymbolDisplayFormat.TestFormat.GenericsOptions
+                                    | SymbolDisplayGenericsOptions.IncludeTypeConstraints
+                            )
                     )
                 );
                 Assert.Equal(
                     "void B.F2<T2>(T2 t2) where T2 : class",
                     f2.ToDisplayString(
-                        SymbolDisplayFormat
-                            .TestFormat.WithGenericsOptions(
+                        SymbolDisplayFormat.TestFormat
+                            .WithGenericsOptions(
                                 SymbolDisplayFormat.TestFormat.GenericsOptions
                                     | SymbolDisplayGenericsOptions.IncludeTypeConstraints
                             )
@@ -116911,7 +116975,8 @@ class B : I<object?>
                     Assert.Empty(at1.GetAttributes());
                     Assert.Equal(
                         "void I<System.Object!>.F1<TF1>(TF1 x) where TF1 : System.Object!",
-                        af1.ExplicitInterfaceImplementations.Single()
+                        af1.ExplicitInterfaceImplementations
+                            .Single()
                             .ToDisplayString(SymbolDisplayFormat.TestFormatWithConstraints)
                     );
                 }
@@ -116959,7 +117024,8 @@ class B : I<object?>
                     Assert.Empty(tf1.GetAttributes());
                     Assert.Equal(
                         "void I<System.Object?>.F1<TF1>(TF1 x)",
-                        bf1.ExplicitInterfaceImplementations.Single()
+                        bf1.ExplicitInterfaceImplementations
+                            .Single()
                             .ToDisplayString(SymbolDisplayFormat.TestFormatWithConstraints)
                     );
                 }
@@ -117047,7 +117113,8 @@ class B : I<A?>
                     Assert.Empty(at1.GetAttributes());
                     Assert.Equal(
                         "void I<A!>.F1<TF1>(TF1 x) where TF1 : A!",
-                        af1.ExplicitInterfaceImplementations.Single()
+                        af1.ExplicitInterfaceImplementations
+                            .Single()
                             .ToDisplayString(SymbolDisplayFormat.TestFormatWithConstraints)
                     );
                 }
@@ -117059,7 +117126,8 @@ class B : I<A?>
                     );
                     Assert.Equal(
                         "void I<A>.F1<TF1>(TF1 x) where TF1 : A",
-                        af1.ExplicitInterfaceImplementations.Single()
+                        af1.ExplicitInterfaceImplementations
+                            .Single()
                             .ToDisplayString(SymbolDisplayFormat.TestFormatWithConstraints)
                     );
                 }
@@ -117091,7 +117159,8 @@ class B : I<A?>
                     Assert.Empty(tf1.GetAttributes());
                     Assert.Equal(
                         "void I<A?>.F1<TF1>(TF1 x) where TF1 : A?",
-                        bf1.ExplicitInterfaceImplementations.Single()
+                        bf1.ExplicitInterfaceImplementations
+                            .Single()
                             .ToDisplayString(SymbolDisplayFormat.TestFormatWithConstraints)
                     );
                 }
@@ -117100,7 +117169,8 @@ class B : I<A?>
                     Assert.Empty(tf1.GetAttributes());
                     Assert.Equal(
                         "void I<A>.F1<TF1>(TF1 x) where TF1 : A",
-                        bf1.ExplicitInterfaceImplementations.Single()
+                        bf1.ExplicitInterfaceImplementations
+                            .Single()
                             .ToDisplayString(SymbolDisplayFormat.TestFormatWithConstraints)
                     );
                 }
@@ -117168,7 +117238,8 @@ class B : I<object?>
                 {
                     Assert.Equal(
                         "void I<System.Object!>.F1<TF1>(TF1 x) where TF1 : class?, System.Object!",
-                        af1.ExplicitInterfaceImplementations.Single()
+                        af1.ExplicitInterfaceImplementations
+                            .Single()
                             .ToDisplayString(SymbolDisplayFormat.TestFormatWithConstraints)
                     );
                 }
@@ -117176,7 +117247,8 @@ class B : I<object?>
                 {
                     Assert.Equal(
                         "void I<System.Object>.F1<TF1>(TF1 x) where TF1 : class?, System.Object",
-                        af1.ExplicitInterfaceImplementations.Single()
+                        af1.ExplicitInterfaceImplementations
+                            .Single()
                             .ToDisplayString(SymbolDisplayFormat.TestFormatWithConstraints)
                     );
                 }
@@ -117206,7 +117278,8 @@ class B : I<object?>
                 {
                     Assert.Equal(
                         "void I<System.Object?>.F1<TF1>(TF1 x) where TF1 : class?",
-                        bf1.ExplicitInterfaceImplementations.Single()
+                        bf1.ExplicitInterfaceImplementations
+                            .Single()
                             .ToDisplayString(SymbolDisplayFormat.TestFormatWithConstraints)
                     );
                 }
@@ -117214,7 +117287,8 @@ class B : I<object?>
                 {
                     Assert.Equal(
                         "void I<System.Object>.F1<TF1>(TF1 x) where TF1 : class?, System.Object",
-                        bf1.ExplicitInterfaceImplementations.Single()
+                        bf1.ExplicitInterfaceImplementations
+                            .Single()
                             .ToDisplayString(SymbolDisplayFormat.TestFormatWithConstraints)
                     );
                 }
@@ -117404,7 +117478,8 @@ class B : I<object?>
                 {
                     Assert.Equal(
                         "void I<System.Object!>.F1<TF1>(TF1 x) where TF1 : System.Object!, B?",
-                        af1.ExplicitInterfaceImplementations.Single()
+                        af1.ExplicitInterfaceImplementations
+                            .Single()
                             .ToDisplayString(SymbolDisplayFormat.TestFormatWithConstraints)
                     );
                 }
@@ -117412,7 +117487,8 @@ class B : I<object?>
                 {
                     Assert.Equal(
                         "void I<System.Object>.F1<TF1>(TF1 x) where TF1 : System.Object, B?",
-                        af1.ExplicitInterfaceImplementations.Single()
+                        af1.ExplicitInterfaceImplementations
+                            .Single()
                             .ToDisplayString(SymbolDisplayFormat.TestFormatWithConstraints)
                     );
                 }
@@ -117442,7 +117518,8 @@ class B : I<object?>
                 {
                     Assert.Equal(
                         "void I<System.Object?>.F1<TF1>(TF1 x) where TF1 : B?",
-                        bf1.ExplicitInterfaceImplementations.Single()
+                        bf1.ExplicitInterfaceImplementations
+                            .Single()
                             .ToDisplayString(SymbolDisplayFormat.TestFormatWithConstraints)
                     );
                 }
@@ -117450,7 +117527,8 @@ class B : I<object?>
                 {
                     Assert.Equal(
                         "void I<System.Object>.F1<TF1>(TF1 x) where TF1 : System.Object, B?",
-                        bf1.ExplicitInterfaceImplementations.Single()
+                        bf1.ExplicitInterfaceImplementations
+                            .Single()
                             .ToDisplayString(SymbolDisplayFormat.TestFormatWithConstraints)
                     );
                 }
@@ -117517,7 +117595,8 @@ class B : I<object?, B?>
                 {
                     Assert.Equal(
                         "void I<System.Object!, B?>.F1<TF1>(TF1 x) where TF1 : System.Object!, B?",
-                        af1.ExplicitInterfaceImplementations.Single()
+                        af1.ExplicitInterfaceImplementations
+                            .Single()
                             .ToDisplayString(SymbolDisplayFormat.TestFormatWithConstraints)
                     );
                 }
@@ -117525,7 +117604,8 @@ class B : I<object?, B?>
                 {
                     Assert.Equal(
                         "void I<System.Object, B>.F1<TF1>(TF1 x) where TF1 : B",
-                        af1.ExplicitInterfaceImplementations.Single()
+                        af1.ExplicitInterfaceImplementations
+                            .Single()
                             .ToDisplayString(SymbolDisplayFormat.TestFormatWithConstraints)
                     );
                 }
@@ -117555,7 +117635,8 @@ class B : I<object?, B?>
                 {
                     Assert.Equal(
                         "void I<System.Object?, B?>.F1<TF1>(TF1 x) where TF1 : B?",
-                        bf1.ExplicitInterfaceImplementations.Single()
+                        bf1.ExplicitInterfaceImplementations
+                            .Single()
                             .ToDisplayString(SymbolDisplayFormat.TestFormatWithConstraints)
                     );
                 }
@@ -117563,7 +117644,8 @@ class B : I<object?, B?>
                 {
                     Assert.Equal(
                         "void I<System.Object, B>.F1<TF1>(TF1 x) where TF1 : B",
-                        bf1.ExplicitInterfaceImplementations.Single()
+                        bf1.ExplicitInterfaceImplementations
+                            .Single()
                             .ToDisplayString(SymbolDisplayFormat.TestFormatWithConstraints)
                     );
                 }
@@ -132694,7 +132776,8 @@ class var {}
                     model
                         .GetDeclaredSymbol(decl.Designation)
                         .GetSymbol<LocalSymbol>()
-                        .TypeWithAnnotations.ToTestDisplayString(includeNonNullable: true)
+                        .TypeWithAnnotations
+                        .ToTestDisplayString(includeNonNullable: true)
                 );
             }
         }
@@ -132734,7 +132817,8 @@ class var {}
                 model
                     .GetDeclaredSymbol(decl.Designation)
                     .GetSymbol<LocalSymbol>()
-                    .TypeWithAnnotations.ToTestDisplayString(includeNonNullable: true)
+                    .TypeWithAnnotations
+                    .ToTestDisplayString(includeNonNullable: true)
             );
         }
 
@@ -132762,9 +132846,10 @@ class A<T> where T :
                 Assert.Equal(
                     "A<T> where T : class!",
                     a.ToDisplayString(
-                        SymbolDisplayFormat.TestFormatWithConstraints.WithMiscellaneousOptions(
-                            SymbolDisplayMiscellaneousOptions.IncludeNotNullableReferenceTypeModifier
-                        )
+                        SymbolDisplayFormat.TestFormatWithConstraints
+                            .WithMiscellaneousOptions(
+                                SymbolDisplayMiscellaneousOptions.IncludeNotNullableReferenceTypeModifier
+                            )
                     )
                 );
             }
@@ -132788,9 +132873,10 @@ class A<T> where T :
             Assert.Equal(
                 "A<T> where T : class",
                 a.ToDisplayString(
-                    SymbolDisplayFormat.TestFormatWithConstraints.WithMiscellaneousOptions(
-                        SymbolDisplayMiscellaneousOptions.IncludeNotNullableReferenceTypeModifier
-                    )
+                    SymbolDisplayFormat.TestFormatWithConstraints
+                        .WithMiscellaneousOptions(
+                            SymbolDisplayMiscellaneousOptions.IncludeNotNullableReferenceTypeModifier
+                        )
                 )
             );
         }
@@ -132819,17 +132905,19 @@ class A<T> where T : class
                 Assert.Equal(
                     "A<T> where T : class?",
                     a.ToDisplayString(
-                        SymbolDisplayFormat.TestFormatWithConstraints.WithMiscellaneousOptions(
-                            SymbolDisplayMiscellaneousOptions.IncludeNullableReferenceTypeModifier
-                        )
+                        SymbolDisplayFormat.TestFormatWithConstraints
+                            .WithMiscellaneousOptions(
+                                SymbolDisplayMiscellaneousOptions.IncludeNullableReferenceTypeModifier
+                            )
                     )
                 );
                 Assert.Equal(
                     "A<T> where T : class",
                     a.ToDisplayString(
-                        SymbolDisplayFormat.TestFormatWithConstraints.WithMiscellaneousOptions(
-                            SymbolDisplayMiscellaneousOptions.IncludeNotNullableReferenceTypeModifier
-                        )
+                        SymbolDisplayFormat.TestFormatWithConstraints
+                            .WithMiscellaneousOptions(
+                                SymbolDisplayMiscellaneousOptions.IncludeNotNullableReferenceTypeModifier
+                            )
                     )
                 );
 
@@ -132855,17 +132943,19 @@ class A<T> where T : class
             Assert.Equal(
                 "A<T> where T : class?",
                 a.ToDisplayString(
-                    SymbolDisplayFormat.TestFormatWithConstraints.WithMiscellaneousOptions(
-                        SymbolDisplayMiscellaneousOptions.IncludeNullableReferenceTypeModifier
-                    )
+                    SymbolDisplayFormat.TestFormatWithConstraints
+                        .WithMiscellaneousOptions(
+                            SymbolDisplayMiscellaneousOptions.IncludeNullableReferenceTypeModifier
+                        )
                 )
             );
             Assert.Equal(
                 "A<T> where T : class",
                 a.ToDisplayString(
-                    SymbolDisplayFormat.TestFormatWithConstraints.WithMiscellaneousOptions(
-                        SymbolDisplayMiscellaneousOptions.IncludeNotNullableReferenceTypeModifier
-                    )
+                    SymbolDisplayFormat.TestFormatWithConstraints
+                        .WithMiscellaneousOptions(
+                            SymbolDisplayMiscellaneousOptions.IncludeNotNullableReferenceTypeModifier
+                        )
                 )
             );
 
@@ -132903,9 +132993,10 @@ class unmanaged {}
                 Assert.Equal(
                     "A<T> where T : unmanaged!",
                     a.ToDisplayString(
-                        SymbolDisplayFormat.TestFormatWithConstraints.WithMiscellaneousOptions(
-                            SymbolDisplayMiscellaneousOptions.IncludeNotNullableReferenceTypeModifier
-                        )
+                        SymbolDisplayFormat.TestFormatWithConstraints
+                            .WithMiscellaneousOptions(
+                                SymbolDisplayMiscellaneousOptions.IncludeNotNullableReferenceTypeModifier
+                            )
                     )
                 );
             }
@@ -132931,9 +133022,10 @@ class unmanaged {}
             Assert.Equal(
                 "A<T> where T : unmanaged",
                 a.ToDisplayString(
-                    SymbolDisplayFormat.TestFormatWithConstraints.WithMiscellaneousOptions(
-                        SymbolDisplayMiscellaneousOptions.IncludeNotNullableReferenceTypeModifier
-                    )
+                    SymbolDisplayFormat.TestFormatWithConstraints
+                        .WithMiscellaneousOptions(
+                            SymbolDisplayMiscellaneousOptions.IncludeNotNullableReferenceTypeModifier
+                        )
                 )
             );
         }
@@ -132992,7 +133084,8 @@ A<string>
                         type,
                         SpeculativeBindingOption.BindAsTypeOrNamespace
                     )
-                    .Type.ToTestDisplayString(includeNonNullable: true)
+                    .Type
+                    .ToTestDisplayString(includeNonNullable: true)
             );
         }
 
@@ -145973,9 +146066,8 @@ partial class Program
             string source
         )
         {
-            string id = MessageProvider.Instance.GetIdForErrorCode(
-                (int)ErrorCode.WRN_NullAsNonNullable
-            );
+            string id = MessageProvider.Instance
+                .GetIdForErrorCode((int)ErrorCode.WRN_NullAsNonNullable);
 
             var source2 =
                 @"
@@ -146210,12 +146302,10 @@ partial class Program
 
         private static void AssertDiagnosticOptions_NullableWarningsNeverGiven(string source)
         {
-            string id1 = MessageProvider.Instance.GetIdForErrorCode(
-                (int)ErrorCode.WRN_NullAsNonNullable
-            );
-            string id2 = MessageProvider.Instance.GetIdForErrorCode(
-                (int)ErrorCode.WRN_ConvertingNullableToNonNullable
-            );
+            string id1 = MessageProvider.Instance
+                .GetIdForErrorCode((int)ErrorCode.WRN_NullAsNonNullable);
+            string id2 = MessageProvider.Instance
+                .GetIdForErrorCode((int)ErrorCode.WRN_ConvertingNullableToNonNullable);
 
             var source2 =
                 @"
@@ -146380,9 +146470,8 @@ partial class Program
                 + MessageProvider.Instance.GetIdForErrorCode((int)ErrorCode.WRN_NullAsNonNullable)
                 + @"
 #pragma warning disable "
-                + MessageProvider.Instance.GetIdForErrorCode(
-                    (int)ErrorCode.WRN_ConvertingNullableToNonNullable
-                )
+                + MessageProvider.Instance
+                    .GetIdForErrorCode((int)ErrorCode.WRN_ConvertingNullableToNonNullable)
                 + @"
 partial class Program
 {
@@ -146471,9 +146560,8 @@ partial class Program
             {
                 CSharpCompilationOptions options = WithNullable(nullableContextOptions);
 
-                string id = MessageProvider.Instance.GetIdForErrorCode(
-                    (int)ErrorCode.WRN_NullAsNonNullable
-                );
+                string id = MessageProvider.Instance
+                    .GetIdForErrorCode((int)ErrorCode.WRN_NullAsNonNullable);
                 var comp = CreateCompilation(new[] { source, source2 }, options: options);
                 var diagnostics = comp.GetDiagnostics();
                 diagnostics.Verify(
@@ -146681,9 +146769,8 @@ partial class Program
                 + MessageProvider.Instance.GetIdForErrorCode((int)ErrorCode.WRN_NullAsNonNullable)
                 + @"
 #pragma warning disable "
-                + MessageProvider.Instance.GetIdForErrorCode(
-                    (int)ErrorCode.WRN_ConvertingNullableToNonNullable
-                )
+                + MessageProvider.Instance
+                    .GetIdForErrorCode((int)ErrorCode.WRN_ConvertingNullableToNonNullable)
                 + @"
 #nullable disable
 partial class Program
@@ -146727,9 +146814,8 @@ partial class Program
                 + MessageProvider.Instance.GetIdForErrorCode((int)ErrorCode.WRN_NullAsNonNullable)
                 + @"
 #pragma warning disable "
-                + MessageProvider.Instance.GetIdForErrorCode(
-                    (int)ErrorCode.WRN_ConvertingNullableToNonNullable
-                )
+                + MessageProvider.Instance
+                    .GetIdForErrorCode((int)ErrorCode.WRN_ConvertingNullableToNonNullable)
                 + @"
 partial class Program
 {
@@ -146771,9 +146857,8 @@ partial class Program
                 + MessageProvider.Instance.GetIdForErrorCode((int)ErrorCode.WRN_NullAsNonNullable)
                 + @"
 #pragma warning restore "
-                + MessageProvider.Instance.GetIdForErrorCode(
-                    (int)ErrorCode.WRN_ConvertingNullableToNonNullable
-                )
+                + MessageProvider.Instance
+                    .GetIdForErrorCode((int)ErrorCode.WRN_ConvertingNullableToNonNullable)
                 + @"
 #nullable disable
 partial class Program
@@ -147065,9 +147150,8 @@ partial class Program
     }
 }";
 
-            string id = MessageProvider.Instance.GetIdForErrorCode(
-                (int)ErrorCode.WRN_ConvertingNullableToNonNullable
-            );
+            string id = MessageProvider.Instance
+                .GetIdForErrorCode((int)ErrorCode.WRN_ConvertingNullableToNonNullable);
 
             assertDiagnosticOptions1(NullableContextOptions.Enable);
             assertDiagnosticOptions1(NullableContextOptions.Warnings);
@@ -147237,9 +147321,8 @@ partial class Program
             var source =
                 @"
 #pragma warning restore "
-                + MessageProvider.Instance.GetIdForErrorCode(
-                    (int)ErrorCode.WRN_ConvertingNullableToNonNullable
-                )
+                + MessageProvider.Instance
+                    .GetIdForErrorCode((int)ErrorCode.WRN_ConvertingNullableToNonNullable)
                 + @"
 partial class Program
 {
@@ -147294,9 +147377,8 @@ partial class Program
             {
                 CSharpCompilationOptions options = WithNullable(nullableContextOptions);
 
-                string id = MessageProvider.Instance.GetIdForErrorCode(
-                    (int)ErrorCode.WRN_ConvertingNullableToNonNullable
-                );
+                string id = MessageProvider.Instance
+                    .GetIdForErrorCode((int)ErrorCode.WRN_ConvertingNullableToNonNullable);
                 var comp = CreateCompilation(new[] { source, source2 }, options: options);
                 var diagnostics = comp.GetDiagnostics();
                 diagnostics.Verify();
@@ -147428,9 +147510,8 @@ partial class Program
             var source =
                 @"
 #pragma warning disable "
-                + MessageProvider.Instance.GetIdForErrorCode(
-                    (int)ErrorCode.WRN_ConvertingNullableToNonNullable
-                )
+                + MessageProvider.Instance
+                    .GetIdForErrorCode((int)ErrorCode.WRN_ConvertingNullableToNonNullable)
                 + @"
 #nullable enable
 partial class Program
@@ -147450,9 +147531,8 @@ partial class Program
             var source =
                 @"
 #pragma warning restore "
-                + MessageProvider.Instance.GetIdForErrorCode(
-                    (int)ErrorCode.WRN_ConvertingNullableToNonNullable
-                )
+                + MessageProvider.Instance
+                    .GetIdForErrorCode((int)ErrorCode.WRN_ConvertingNullableToNonNullable)
                 + @"
 #nullable enable
 partial class Program
@@ -147475,9 +147555,8 @@ partial class Program
                 @"
 #nullable disable
 #pragma warning restore "
-                + MessageProvider.Instance.GetIdForErrorCode(
-                    (int)ErrorCode.WRN_ConvertingNullableToNonNullable
-                )
+                + MessageProvider.Instance
+                    .GetIdForErrorCode((int)ErrorCode.WRN_ConvertingNullableToNonNullable)
                 + @"
 partial class Program
 {
@@ -147572,9 +147651,8 @@ partial class Program
                 @"
 #nullable enable
 #pragma warning restore "
-                + MessageProvider.Instance.GetIdForErrorCode(
-                    (int)ErrorCode.WRN_ConvertingNullableToNonNullable
-                )
+                + MessageProvider.Instance
+                    .GetIdForErrorCode((int)ErrorCode.WRN_ConvertingNullableToNonNullable)
                 + @"
 partial class Program
 {
@@ -147723,9 +147801,8 @@ partial class Program
             var source =
                 @"
 #pragma warning disable "
-                + MessageProvider.Instance.GetIdForErrorCode(
-                    (int)ErrorCode.WRN_ConvertingNullableToNonNullable
-                )
+                + MessageProvider.Instance
+                    .GetIdForErrorCode((int)ErrorCode.WRN_ConvertingNullableToNonNullable)
                 + @"
 #nullable enable warnings
 partial class Program
@@ -160365,13 +160442,16 @@ partial class C
             Assert.Equal(
                 "System.IEquatable<T>!",
                 f.TypeParameters[0]
-                    .ConstraintTypesNoUseSiteDiagnostics.Single()
+                    .ConstraintTypesNoUseSiteDiagnostics
+                    .Single()
                     .ToTestDisplayString(true)
             );
             Assert.Equal(
                 "System.IEquatable<T>",
-                f.PartialImplementationPart.TypeParameters[0]
-                    .ConstraintTypesNoUseSiteDiagnostics.Single()
+                f.PartialImplementationPart
+                    .TypeParameters[0]
+                    .ConstraintTypesNoUseSiteDiagnostics
+                    .Single()
                     .ToTestDisplayString(true)
             );
         }
@@ -160400,7 +160480,8 @@ partial class C
             Assert.Equal(
                 "System.IEquatable<T?>!",
                 f.TypeParameters[0]
-                    .ConstraintTypesNoUseSiteDiagnostics.Single()
+                    .ConstraintTypesNoUseSiteDiagnostics
+                    .Single()
                     .ToTestDisplayString(true)
             );
             Assert.Null(
@@ -160408,8 +160489,10 @@ partial class C
             );
             Assert.Equal(
                 "System.IEquatable<T>",
-                f.PartialImplementationPart.TypeParameters[0]
-                    .ConstraintTypesNoUseSiteDiagnostics.Single()
+                f.PartialImplementationPart
+                    .TypeParameters[0]
+                    .ConstraintTypesNoUseSiteDiagnostics
+                    .Single()
                     .ToTestDisplayString(true)
             );
         }
@@ -161274,8 +161357,7 @@ class C2 : I
             Assert.True(((ArrayTypeSymbol)c2Goo.Parameters[0].Type).ElementType.IsReferenceType);
             Assert.Equal(
                 NullableAnnotation.Annotated,
-                ((ArrayTypeSymbol)c2Goo.Parameters[0].Type)
-                    .ElementTypeWithAnnotations
+                ((ArrayTypeSymbol)c2Goo.Parameters[0].Type).ElementTypeWithAnnotations
                     .NullableAnnotation
             );
         }
@@ -161472,8 +161554,7 @@ class Derived : Base
             Assert.True(((ArrayTypeSymbol)dGoo.Parameters[0].Type).ElementType.IsReferenceType);
             Assert.Equal(
                 NullableAnnotation.Annotated,
-                ((ArrayTypeSymbol)dGoo.Parameters[0].Type)
-                    .ElementTypeWithAnnotations
+                ((ArrayTypeSymbol)dGoo.Parameters[0].Type).ElementTypeWithAnnotations
                     .NullableAnnotation
             );
         }
@@ -167923,7 +168004,8 @@ interface I2 : I<object> {}
                 "Extension<object!>",
                 model
                     .GetSymbolInfo(invocation)
-                    .Symbol.ToDisplayString(TypeWithAnnotations.TestDisplayFormat)
+                    .Symbol
+                    .ToDisplayString(TypeWithAnnotations.TestDisplayFormat)
             );
         }
 
@@ -167975,7 +168057,8 @@ interface I2 : I<object> {}
                 "Extension<object?>",
                 model
                     .GetSymbolInfo(invocation)
-                    .Symbol.ToDisplayString(TypeWithAnnotations.TestDisplayFormat)
+                    .Symbol
+                    .ToDisplayString(TypeWithAnnotations.TestDisplayFormat)
             );
         }
 
@@ -168027,7 +168110,8 @@ interface I2 : I<object> {}
                 "Extension<object?>",
                 model
                     .GetSymbolInfo(invocation)
-                    .Symbol.ToDisplayString(TypeWithAnnotations.TestDisplayFormat)
+                    .Symbol
+                    .ToDisplayString(TypeWithAnnotations.TestDisplayFormat)
             );
         }
 
@@ -168080,7 +168164,8 @@ interface I2 : I<object> {}
                 "Extension<object!>",
                 model
                     .GetSymbolInfo(invocation)
-                    .Symbol.ToDisplayString(TypeWithAnnotations.TestDisplayFormat)
+                    .Symbol
+                    .ToDisplayString(TypeWithAnnotations.TestDisplayFormat)
             );
         }
 
@@ -168132,7 +168217,8 @@ interface I2 : I<object?> {}
                 "Extension<object!>",
                 model
                     .GetSymbolInfo(invocation)
-                    .Symbol.ToDisplayString(TypeWithAnnotations.TestDisplayFormat)
+                    .Symbol
+                    .ToDisplayString(TypeWithAnnotations.TestDisplayFormat)
             );
         }
 
@@ -168174,7 +168260,8 @@ interface I2 : I3<I<object>> {}
                 "Extension<object!>",
                 model
                     .GetSymbolInfo(invocation)
-                    .Symbol.ToDisplayString(TypeWithAnnotations.TestDisplayFormat)
+                    .Symbol
+                    .ToDisplayString(TypeWithAnnotations.TestDisplayFormat)
             );
         }
 
@@ -168216,7 +168303,8 @@ interface I2 : I3<I<object>> {}
                 "Extension<object!>",
                 model
                     .GetSymbolInfo(invocation)
-                    .Symbol.ToDisplayString(TypeWithAnnotations.TestDisplayFormat)
+                    .Symbol
+                    .ToDisplayString(TypeWithAnnotations.TestDisplayFormat)
             );
         }
 
@@ -168265,7 +168353,8 @@ interface I2<T> : I<T> where T : class {}
                 "Extension<object>",
                 model
                     .GetSymbolInfo(invocation)
-                    .Symbol.ToDisplayString(TypeWithAnnotations.TestDisplayFormat)
+                    .Symbol
+                    .ToDisplayString(TypeWithAnnotations.TestDisplayFormat)
             );
         }
 
@@ -168318,7 +168407,8 @@ interface I2<T> : I<T> where T : class {}
                 "Extension<object!>",
                 model
                     .GetSymbolInfo(invocation)
-                    .Symbol.ToDisplayString(TypeWithAnnotations.TestDisplayFormat)
+                    .Symbol
+                    .ToDisplayString(TypeWithAnnotations.TestDisplayFormat)
             );
         }
 
@@ -168632,7 +168722,8 @@ partial class C : I<object> { }
                 "Extension<object?>",
                 model
                     .GetSymbolInfo(invocation)
-                    .Symbol.ToDisplayString(TypeWithAnnotations.TestDisplayFormat)
+                    .Symbol
+                    .ToDisplayString(TypeWithAnnotations.TestDisplayFormat)
             );
         }
 
@@ -168672,7 +168763,8 @@ partial class C : I<object> { }
                 "Extension<object!>",
                 model
                     .GetSymbolInfo(invocation)
-                    .Symbol.ToDisplayString(TypeWithAnnotations.TestDisplayFormat)
+                    .Symbol
+                    .ToDisplayString(TypeWithAnnotations.TestDisplayFormat)
             );
         }
 
@@ -168716,7 +168808,8 @@ partial class C : I<object> { }
                 "Extension<object!>",
                 model
                     .GetSymbolInfo(invocation)
-                    .Symbol.ToDisplayString(TypeWithAnnotations.TestDisplayFormat)
+                    .Symbol
+                    .ToDisplayString(TypeWithAnnotations.TestDisplayFormat)
             );
         }
 
@@ -182719,9 +182812,8 @@ namespace System.Runtime.CompilerServices
 ";
             var comp = CreateCompilation(
                 src,
-                options: TestOptions.DebugExe.WithNullableContextOptions(
-                    NullableContextOptions.Enable
-                )
+                options: TestOptions.DebugExe
+                    .WithNullableContextOptions(NullableContextOptions.Enable)
             );
             var diagnostics = comp.GetEmitDiagnostics();
 
@@ -182985,9 +183077,8 @@ public class C
             Assert.Equal("i.Item", item.ToString());
             Assert.Equal(
                 "object",
-                ((IPropertySymbol)model.GetSymbolInfo(item).Symbol).Type.ToDisplayString(
-                    TypeWithAnnotations.TestDisplayFormat
-                )
+                ((IPropertySymbol)model.GetSymbolInfo(item).Symbol).Type
+                    .ToDisplayString(TypeWithAnnotations.TestDisplayFormat)
             );
 
             var found = model
@@ -183035,9 +183126,8 @@ public class C
             Assert.Equal("i[0]", item.ToString());
             Assert.Equal(
                 "object",
-                ((IPropertySymbol)model.GetSymbolInfo(item).Symbol).Type.ToDisplayString(
-                    TypeWithAnnotations.TestDisplayFormat
-                )
+                ((IPropertySymbol)model.GetSymbolInfo(item).Symbol).Type
+                    .ToDisplayString(TypeWithAnnotations.TestDisplayFormat)
             );
         }
 
@@ -183141,9 +183231,8 @@ public class C
             Assert.Equal("i.Get()", item.ToString());
             Assert.Equal(
                 "object",
-                ((IMethodSymbol)model.GetSymbolInfo(item).Symbol).ReturnType.ToDisplayString(
-                    TypeWithAnnotations.TestDisplayFormat
-                )
+                ((IMethodSymbol)model.GetSymbolInfo(item).Symbol).ReturnType
+                    .ToDisplayString(TypeWithAnnotations.TestDisplayFormat)
             );
         }
 
@@ -183192,9 +183281,8 @@ public class C
             Assert.Equal("i.Item", item.ToString());
             Assert.Equal(
                 "object",
-                ((IPropertySymbol)model.GetSymbolInfo(item).Symbol).Type.ToDisplayString(
-                    TypeWithAnnotations.TestDisplayFormat
-                )
+                ((IPropertySymbol)model.GetSymbolInfo(item).Symbol).Type
+                    .ToDisplayString(TypeWithAnnotations.TestDisplayFormat)
             );
 
             var found = model
@@ -183393,9 +183481,8 @@ public class C
             Assert.Equal("i[0]", item.ToString());
             Assert.Equal(
                 "object",
-                ((IPropertySymbol)model.GetSymbolInfo(item).Symbol).Type.ToDisplayString(
-                    TypeWithAnnotations.TestDisplayFormat
-                )
+                ((IPropertySymbol)model.GetSymbolInfo(item).Symbol).Type
+                    .ToDisplayString(TypeWithAnnotations.TestDisplayFormat)
             );
         }
 
@@ -183499,9 +183586,8 @@ public class C
             Assert.Equal("i.Get()", item.ToString());
             Assert.Equal(
                 "object",
-                ((IMethodSymbol)model.GetSymbolInfo(item).Symbol).ReturnType.ToDisplayString(
-                    TypeWithAnnotations.TestDisplayFormat
-                )
+                ((IMethodSymbol)model.GetSymbolInfo(item).Symbol).ReturnType
+                    .ToDisplayString(TypeWithAnnotations.TestDisplayFormat)
             );
 
             var i3 = comp.GetTypeByMetadataName("I3");
@@ -183512,9 +183598,8 @@ public class C
                 .Single(s => s.Name == "Get");
             Assert.Equal(
                 "object",
-                ((IMethodSymbol)found).ReturnType.ToDisplayString(
-                    TypeWithAnnotations.TestDisplayFormat
-                )
+                ((IMethodSymbol)found).ReturnType
+                    .ToDisplayString(TypeWithAnnotations.TestDisplayFormat)
             );
         }
 

@@ -82,10 +82,12 @@ public class ODataQueryTestFixtureInitializer
 
         selfHostServer.Start();
 
-        var baseAddress = selfHostServer
-            .Services.GetService<IServer>()
-            .Features.Get<IServerAddressesFeature>()
-            .Addresses.First();
+        var baseAddress = selfHostServer.Services
+            .GetService<IServer>()
+            .Features
+            .Get<IServerAddressesFeature>()
+            .Addresses
+            .First();
         var clientFactory = selfHostServer.Services.GetRequiredService<IHttpClientFactory>();
 
         return (baseAddress, clientFactory, selfHostServer);

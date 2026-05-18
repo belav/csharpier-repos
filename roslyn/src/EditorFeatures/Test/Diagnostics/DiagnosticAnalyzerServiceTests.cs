@@ -38,18 +38,14 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics
     public class DiagnosticAnalyzerServiceTests
     {
         private static readonly TestComposition s_featuresCompositionWithMockDiagnosticUpdateSourceRegistrationService =
-            EditorTestCompositions
-                .EditorFeatures.AddExcludedPartTypes(
-                    typeof(IDiagnosticUpdateSourceRegistrationService)
-                )
+            EditorTestCompositions.EditorFeatures
+                .AddExcludedPartTypes(typeof(IDiagnosticUpdateSourceRegistrationService))
                 .AddParts(typeof(MockDiagnosticUpdateSourceRegistrationService))
                 .AddParts(typeof(TestDocumentTrackingService));
 
         private static readonly TestComposition s_editorFeaturesCompositionWithMockDiagnosticUpdateSourceRegistrationService =
-            EditorTestCompositions
-                .EditorFeatures.AddExcludedPartTypes(
-                    typeof(IDiagnosticUpdateSourceRegistrationService)
-                )
+            EditorTestCompositions.EditorFeatures
+                .AddExcludedPartTypes(typeof(IDiagnosticUpdateSourceRegistrationService))
                 .AddParts(typeof(MockDiagnosticUpdateSourceRegistrationService));
 
         private static AdhocWorkspace CreateWorkspace(Type[] additionalParts = null) =>
@@ -60,7 +56,10 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics
             );
 
         private static IGlobalOptionService GetGlobalOptions(Workspace workspace) =>
-            workspace.Services.SolutionServices.ExportProvider.GetExportedValue<IGlobalOptionService>();
+            workspace.Services
+                .SolutionServices
+                .ExportProvider
+                .GetExportedValue<IGlobalOptionService>();
 
         private static void OpenDocumentAndMakeActive(Document document, Workspace workspace)
         {
@@ -538,23 +537,26 @@ dotnet_diagnostic.{DisabledByDefaultAnalyzer.s_compilationRule.Id}.severity = wa
 
             // cause analysis
             var location = Location.Create(document.FilePath, textSpan: default, lineSpan: default);
-            var properties = ImmutableDictionary<string, string>.Empty.Add(
-                WellKnownDiagnosticPropertyNames.Origin,
-                WellKnownDiagnosticTags.Build
-            );
+            var properties = ImmutableDictionary<string, string>.Empty
+                .Add(WellKnownDiagnosticPropertyNames.Origin, WellKnownDiagnosticTags.Build);
 
             await service.SynchronizeWithBuildAsync(
                 workspace,
-                ImmutableDictionary<ProjectId, ImmutableArray<DiagnosticData>>.Empty.Add(
-                    document.Project.Id,
-                    ImmutableArray.Create(
-                        DiagnosticData.Create(
-                            document.Project.Solution,
-                            Diagnostic.Create(NoNameAnalyzer.s_syntaxRule, location, properties),
-                            document.Project
+                ImmutableDictionary<ProjectId, ImmutableArray<DiagnosticData>>.Empty
+                    .Add(
+                        document.Project.Id,
+                        ImmutableArray.Create(
+                            DiagnosticData.Create(
+                                document.Project.Solution,
+                                Diagnostic.Create(
+                                    NoNameAnalyzer.s_syntaxRule,
+                                    location,
+                                    properties
+                                ),
+                                document.Project
+                            )
                         )
-                    )
-                ),
+                    ),
                 new TaskQueue(service.Listener, TaskScheduler.Default),
                 onBuildCompleted: true,
                 CancellationToken.None
@@ -746,10 +748,9 @@ dotnet_diagnostic.{DisabledByDefaultAnalyzer.s_compilationRule.Id}.severity = wa
             );
             var project = workspace.CurrentSolution.Projects.Single();
 
-            var newSpecificOptions = project.CompilationOptions.SpecificDiagnosticOptions.Add(
-                NamedTypeAnalyzer.DiagnosticId,
-                ReportDiagnostic.Warn
-            );
+            var newSpecificOptions = project.CompilationOptions
+                .SpecificDiagnosticOptions
+                .Add(NamedTypeAnalyzer.DiagnosticId, ReportDiagnostic.Warn);
             project = project.WithCompilationOptions(
                 project.CompilationOptions.WithSpecificDiagnosticOptions(newSpecificOptions)
             );
@@ -1096,11 +1097,12 @@ dotnet_diagnostic.{NamedTypeAnalyzer.DiagnosticId}.severity = warning
                 )
             );
 
-            workspace.GlobalOptions.SetGlobalOption(
-                SolutionCrawlerOptionsStorage.BackgroundAnalysisScopeOption,
-                LanguageNames.CSharp,
-                analysisScope
-            );
+            workspace.GlobalOptions
+                .SetGlobalOption(
+                    SolutionCrawlerOptionsStorage.BackgroundAnalysisScopeOption,
+                    LanguageNames.CSharp,
+                    analysisScope
+                );
 
             workspace.TryApplyChanges(
                 workspace.CurrentSolution.WithAnalyzerReferences(new[] { analyzerReference })
@@ -1260,22 +1262,25 @@ class A
 
             using var workspace = new TestWorkspace(composition);
 
-            workspace.GlobalOptions.SetGlobalOption(
-                SolutionCrawlerOptionsStorage.BackgroundAnalysisScopeOption,
-                LanguageNames.CSharp,
-                analysisScope
-            );
-            workspace.GlobalOptions.SetGlobalOption(
-                SolutionCrawlerOptionsStorage.EnableDiagnosticsInSourceGeneratedFiles,
-                isSourceGenerated
-            );
+            workspace.GlobalOptions
+                .SetGlobalOption(
+                    SolutionCrawlerOptionsStorage.BackgroundAnalysisScopeOption,
+                    LanguageNames.CSharp,
+                    analysisScope
+                );
+            workspace.GlobalOptions
+                .SetGlobalOption(
+                    SolutionCrawlerOptionsStorage.EnableDiagnosticsInSourceGeneratedFiles,
+                    isSourceGenerated
+                );
 
             var compilerDiagnosticsScope = analysisScope.ToEquivalentCompilerDiagnosticsScope();
-            workspace.GlobalOptions.SetGlobalOption(
-                SolutionCrawlerOptionsStorage.CompilerDiagnosticsScopeOption,
-                LanguageNames.CSharp,
-                compilerDiagnosticsScope
-            );
+            workspace.GlobalOptions
+                .SetGlobalOption(
+                    SolutionCrawlerOptionsStorage.CompilerDiagnosticsScopeOption,
+                    LanguageNames.CSharp,
+                    compilerDiagnosticsScope
+                );
 
             workspace.InitializeDocuments(
                 TestWorkspace.CreateWorkspaceElement(
@@ -1312,7 +1317,8 @@ class A
                 foreach (var e in eCollection)
                 {
                     diagnostics.AddRange(
-                        e.Diagnostics.Where(d =>
+                        e.Diagnostics
+                            .Where(d =>
                                 d.Id == IDEDiagnosticIds.RemoveUnnecessarySuppressionDiagnosticId
                             )
                             .OrderBy(d => d.DataLocation.UnmappedFileSpan.GetClampedTextSpan(text))
@@ -1383,7 +1389,9 @@ class A
                 {
                     var pragma1 = root.FindTrivia(
                             diagnostics[0]
-                                .DataLocation.UnmappedFileSpan.GetClampedTextSpan(text)
+                                .DataLocation
+                                .UnmappedFileSpan
+                                .GetClampedTextSpan(text)
                                 .Start
                         )
                         .ToString();
@@ -1393,7 +1401,9 @@ class A
                     );
                     var pragma2 = root.FindTrivia(
                             diagnostics[1]
-                                .DataLocation.UnmappedFileSpan.GetClampedTextSpan(text)
+                                .DataLocation
+                                .UnmappedFileSpan
+                                .GetClampedTextSpan(text)
                                 .Start
                         )
                         .ToString();
@@ -1811,8 +1821,9 @@ class A
             );
             Assert.True(
                 workspace.TryApplyChanges(
-                    workspace
-                        .CurrentSolution.Projects.Single()
+                    workspace.CurrentSolution
+                        .Projects
+                        .Single()
                         .AddAnalyzerReference(new TestGeneratorReference(generator))
                         .Solution
                 )

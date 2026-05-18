@@ -587,7 +587,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                                         location,
                                         hasAssociatedProperty ? associatedPropertyOrEvent : field,
                                         new CSharpRequiredLanguageVersion(
-                                            MessageID.IDS_FeatureAutoDefaultStructs.RequiredVersion()
+                                            MessageID.IDS_FeatureAutoDefaultStructs
+                                                .RequiredVersion()
                                         )
                                     );
                                 }
@@ -3251,10 +3252,12 @@ namespace Microsoft.CodeAnalysis.CSharp
         {
             if (
                 node.Conversion.IsInlineArray
-                && node.Type.OriginalDefinition.Equals(
-                    compilation.GetWellKnownType(WellKnownType.System_Span_T),
-                    TypeCompareKind.AllIgnoreOptions
-                )
+                && node.Type
+                    .OriginalDefinition
+                    .Equals(
+                        compilation.GetWellKnownType(WellKnownType.System_Span_T),
+                        TypeCompareKind.AllIgnoreOptions
+                    )
             )
             {
                 // exposing ref is a potential write

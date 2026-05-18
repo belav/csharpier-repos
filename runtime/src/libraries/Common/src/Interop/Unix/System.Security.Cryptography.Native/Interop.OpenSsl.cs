@@ -306,11 +306,8 @@ internal static partial class Interop
                     && sslAuthenticationOptions.ApplicationProtocols.Count != 0
                 )
                 {
-                    Interop.Ssl.SslCtxSetAlpnSelectCb(
-                        sslCtx,
-                        &AlpnServerSelectCallback,
-                        IntPtr.Zero
-                    );
+                    Interop.Ssl
+                        .SslCtxSetAlpnSelectCb(sslCtx, &AlpnServerSelectCallback, IntPtr.Zero);
                 }
 
                 if (sslAuthenticationOptions.CertificateContext != null)
@@ -461,10 +458,12 @@ internal static partial class Interop
             {
                 if (sslAuthenticationOptions.IsServer)
                 {
-                    sslAuthenticationOptions.CertificateContext!.SslContexts!.TryGetValue(
-                        protocols | (hasAlpn ? FakeAlpnSslProtocol : SslProtocols.None),
-                        out sslCtxHandle
-                    );
+                    sslAuthenticationOptions.CertificateContext!
+                        .SslContexts!
+                        .TryGetValue(
+                            protocols | (hasAlpn ? FakeAlpnSslProtocol : SslProtocols.None),
+                            out sslCtxHandle
+                        );
                 }
                 else
                 {
@@ -484,10 +483,9 @@ internal static partial class Interop
                 if (cacheSslContext)
                 {
                     bool added = sslAuthenticationOptions.IsServer
-                        ? sslAuthenticationOptions.CertificateContext!.SslContexts!.TryAdd(
-                            protocols | (SslProtocols)(hasAlpn ? 1 : 0),
-                            newCtxHandle
-                        )
+                        ? sslAuthenticationOptions.CertificateContext!
+                            .SslContexts!
+                            .TryAdd(protocols | (SslProtocols)(hasAlpn ? 1 : 0), newCtxHandle)
                         : s_clientSslContexts.TryAdd(protocols, newCtxHandle);
                     if (added)
                     {
@@ -525,10 +523,11 @@ internal static partial class Interop
                     else
                     {
                         if (
-                            Interop.Ssl.SslSetAlpnProtos(
-                                sslHandle,
-                                sslAuthenticationOptions.ApplicationProtocols
-                            ) != 0
+                            Interop.Ssl
+                                .SslSetAlpnProtos(
+                                    sslHandle,
+                                    sslAuthenticationOptions.ApplicationProtocols
+                                ) != 0
                         )
                         {
                             throw CreateSslException(SR.net_alpn_config_failed);
@@ -594,8 +593,7 @@ internal static partial class Interop
                             == true
                         )
                         {
-                            SslCertificateTrust trust = sslAuthenticationOptions
-                                .CertificateContext!
+                            SslCertificateTrust trust = sslAuthenticationOptions.CertificateContext!
                                 .Trust!;
                             X509Certificate2Collection certList = (
                                 trust._trustList ?? trust._store!.Certificates
@@ -621,8 +619,8 @@ internal static partial class Interop
                             }
                         }
 
-                        byte[]? ocspResponse =
-                            sslAuthenticationOptions.CertificateContext.GetOcspResponseNoWaiting();
+                        byte[]? ocspResponse = sslAuthenticationOptions.CertificateContext
+                            .GetOcspResponseNoWaiting();
 
                         if (ocspResponse != null)
                         {

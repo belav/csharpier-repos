@@ -61,8 +61,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.LanguageClient
                 // on the threadpool thread but is indirectly blocked on by the UI thread.
                 await TaskScheduler.Default.SwitchTo(alwaysYield: true);
 
-                await _languageClientBroker
-                    .Value.LoadAsync(
+                await _languageClientBroker.Value
+                    .LoadAsync(
                         new LanguageClientMetadata([
                             ContentTypeNames.CSharpContentType,
                             ContentTypeNames.VisualBasicContentType,

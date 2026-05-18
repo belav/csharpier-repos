@@ -382,10 +382,11 @@ internal class TestApp
     private static byte test_3_13(byte num)
     {
         return AA.aa_init[
-            num - 100,
-            (AA.aa_init[0, num - 1, num / 100].q | 1) - 2,
-            1 + AA.aa_zero[0, num - 1, num / 100].q
-        ].q;
+                num - 100,
+                (AA.aa_init[0, num - 1, num / 100].q | 1) - 2,
+                1 + AA.aa_zero[0, num - 1, num / 100].q
+            ]
+            .q;
     }
 
     private static byte test_3_14(byte num)

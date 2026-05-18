@@ -108,8 +108,9 @@ namespace Microsoft.CodeAnalysis.AutomaticCompletion
                 return;
             }
 
-            var document =
-                args.SubjectBuffer.CurrentSnapshot.GetOpenDocumentInCurrentContextWithChanges();
+            var document = args.SubjectBuffer
+                .CurrentSnapshot
+                .GetOpenDocumentInCurrentContextWithChanges();
             if (document == null)
             {
                 NextAction(operations, nextHandler);
@@ -118,9 +119,8 @@ namespace Microsoft.CodeAnalysis.AutomaticCompletion
 
             // feature off
             if (
-                !EditorOptionsService.GlobalOptions.GetOption(
-                    AutomaticLineEnderOptionsStorage.AutomaticLineEnder
-                )
+                !EditorOptionsService.GlobalOptions
+                    .GetOption(AutomaticLineEnderOptionsStorage.AutomaticLineEnder)
             )
             {
                 NextAction(operations, nextHandler);
@@ -128,10 +128,11 @@ namespace Microsoft.CodeAnalysis.AutomaticCompletion
             }
 
             using (
-                context.OperationContext.AddScope(
-                    allowCancellation: true,
-                    EditorFeaturesResources.Automatically_completing
-                )
+                context.OperationContext
+                    .AddScope(
+                        allowCancellation: true,
+                        EditorFeaturesResources.Automatically_completing
+                    )
             )
             {
                 var cancellationToken = context.OperationContext.UserCancellationToken;
@@ -174,11 +175,12 @@ namespace Microsoft.CodeAnalysis.AutomaticCompletion
                 if (selectNodeAndOperationKind != null)
                 {
                     var (selectedNode, addBrace) = selectNodeAndOperationKind.Value;
-                    using var transaction = args.TextView.CreateEditTransaction(
-                        EditorFeaturesResources.Automatic_Line_Ender,
-                        _undoRegistry,
-                        _editorOperationsFactoryService
-                    );
+                    using var transaction = args.TextView
+                        .CreateEditTransaction(
+                            EditorFeaturesResources.Automatic_Line_Ender,
+                            _undoRegistry,
+                            _editorOperationsFactoryService
+                        );
                     ModifySelectedNode(
                         args,
                         parsedDocument,
@@ -199,16 +201,18 @@ namespace Microsoft.CodeAnalysis.AutomaticCompletion
                 );
                 if (endingInsertionPosition != null)
                 {
-                    using var transaction = args.TextView.CreateEditTransaction(
-                        EditorFeaturesResources.Automatic_Line_Ender,
-                        _undoRegistry,
-                        _editorOperationsFactoryService
-                    );
-                    var formattingOptions = args.SubjectBuffer.GetSyntaxFormattingOptions(
-                        EditorOptionsService,
-                        parsedDocument.LanguageServices,
-                        explicitFormat: false
-                    );
+                    using var transaction = args.TextView
+                        .CreateEditTransaction(
+                            EditorFeaturesResources.Automatic_Line_Ender,
+                            _undoRegistry,
+                            _editorOperationsFactoryService
+                        );
+                    var formattingOptions = args.SubjectBuffer
+                        .GetSyntaxFormattingOptions(
+                            EditorOptionsService,
+                            parsedDocument.LanguageServices,
+                            explicitFormat: false
+                        );
                     InsertEnding(
                         args.TextView,
                         args.SubjectBuffer,
@@ -224,11 +228,12 @@ namespace Microsoft.CodeAnalysis.AutomaticCompletion
                 }
 
                 // Neither of the two operations could be performed
-                using var editTransaction = args.TextView.CreateEditTransaction(
-                    EditorFeaturesResources.Automatic_Line_Ender,
-                    _undoRegistry,
-                    _editorOperationsFactoryService
-                );
+                using var editTransaction = args.TextView
+                    .CreateEditTransaction(
+                        EditorFeaturesResources.Automatic_Line_Ender,
+                        _undoRegistry,
+                        _editorOperationsFactoryService
+                    );
                 NextAction(operations, nextHandler);
                 editTransaction.Complete();
             }

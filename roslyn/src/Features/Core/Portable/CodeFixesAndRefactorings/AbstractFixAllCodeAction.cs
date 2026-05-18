@@ -66,8 +66,10 @@ namespace Microsoft.CodeAnalysis.CodeFixesAndRefactorings
             cancellationToken.ThrowIfCancellationRequested();
             FixAllLogger.LogState(FixAllState, IsInternalProvider(FixAllState));
 
-            var service =
-                FixAllState.Project.Solution.Services.GetRequiredService<IFixAllGetFixesService>();
+            var service = FixAllState.Project
+                .Solution
+                .Services
+                .GetRequiredService<IFixAllGetFixesService>();
 
             var fixAllContext = CreateFixAllContext(
                 FixAllState,
@@ -89,8 +91,10 @@ namespace Microsoft.CodeAnalysis.CodeFixesAndRefactorings
             cancellationToken.ThrowIfCancellationRequested();
             FixAllLogger.LogState(FixAllState, IsInternalProvider(FixAllState));
 
-            var service =
-                FixAllState.Project.Solution.Services.GetRequiredService<IFixAllGetFixesService>();
+            var service = FixAllState.Project
+                .Solution
+                .Services
+                .GetRequiredService<IFixAllGetFixesService>();
 
             var fixAllContext = CreateFixAllContext(
                 FixAllState,

@@ -146,12 +146,13 @@ public class RelationalDatabaseFacadeExtensionsTest
         bool async
     )
     {
-        var context = InMemoryTestHelpers.Instance.CreateContext(
-            new ServiceCollection().AddScoped<
-                IDbContextTransactionManager,
-                FakeDbContextTransactionManager
-            >()
-        );
+        var context = InMemoryTestHelpers.Instance
+            .CreateContext(
+                new ServiceCollection().AddScoped<
+                    IDbContextTransactionManager,
+                    FakeDbContextTransactionManager
+                >()
+            );
 
         var transactionManager = (FakeDbContextTransactionManager)
             context.GetService<IDbContextTransactionManager>();
@@ -240,9 +241,10 @@ public class RelationalDatabaseFacadeExtensionsTest
             Migrations = migrations.ToDictionary(x => x, x => default(TypeInfo)),
         };
 
-        var db = FakeRelationalTestHelpers.Instance.CreateContext(
-            new ServiceCollection().AddSingleton<IMigrationsAssembly>(migrationsAssembly)
-        );
+        var db = FakeRelationalTestHelpers.Instance
+            .CreateContext(
+                new ServiceCollection().AddSingleton<IMigrationsAssembly>(migrationsAssembly)
+            );
 
         Assert.Equal(migrations, db.Database.GetMigrations());
     }
@@ -271,9 +273,8 @@ public class RelationalDatabaseFacadeExtensionsTest
             AppliedMigrations = migrations.Select(id => new HistoryRow(id, "1.1.0")).ToList(),
         };
 
-        var context = FakeRelationalTestHelpers.Instance.CreateContext(
-            new ServiceCollection().AddSingleton<IHistoryRepository>(repository)
-        );
+        var context = FakeRelationalTestHelpers.Instance
+            .CreateContext(new ServiceCollection().AddSingleton<IHistoryRepository>(repository));
 
         Assert.Equal(
             migrations,
@@ -427,11 +428,12 @@ public class RelationalDatabaseFacadeExtensionsTest
                 .ToList(),
         };
 
-        var context = FakeRelationalTestHelpers.Instance.CreateContext(
-            new ServiceCollection()
-                .AddSingleton<IHistoryRepository>(repository)
-                .AddSingleton<IMigrationsAssembly>(migrationsAssembly)
-        );
+        var context = FakeRelationalTestHelpers.Instance
+            .CreateContext(
+                new ServiceCollection()
+                    .AddSingleton<IHistoryRepository>(repository)
+                    .AddSingleton<IMigrationsAssembly>(migrationsAssembly)
+            );
 
         Assert.Equal(
             new[] { "00000000000003_Three" },
@@ -485,11 +487,8 @@ public class RelationalDatabaseFacadeExtensionsTest
             if (cancellation)
             {
                 var cancellationToken = new CancellationToken();
-                await context.Database.ExecuteSqlRawAsync(
-                    "<Some query>",
-                    new object[] { 1, 2 },
-                    cancellationToken
-                );
+                await context.Database
+                    .ExecuteSqlRawAsync("<Some query>", new object[] { 1, 2 }, cancellationToken);
             }
             else
             {
@@ -540,11 +539,12 @@ public class RelationalDatabaseFacadeExtensionsTest
             if (cancellation)
             {
                 var cancellationToken = new CancellationToken();
-                await context.Database.ExecuteSqlRawAsync(
-                    "<Some query>",
-                    new object[] { 1, "Cheese" },
-                    cancellationToken
-                );
+                await context.Database
+                    .ExecuteSqlRawAsync(
+                        "<Some query>",
+                        new object[] { 1, "Cheese" },
+                        cancellationToken
+                    );
             }
             else
             {
@@ -574,18 +574,17 @@ public class RelationalDatabaseFacadeExtensionsTest
             if (cancellation)
             {
                 var cancellationToken = new CancellationToken();
-                await context.Database.ExecuteSqlRawAsync(
-                    "<Some query>",
-                    new List<object> { 1, 2 },
-                    cancellationToken
-                );
+                await context.Database
+                    .ExecuteSqlRawAsync(
+                        "<Some query>",
+                        new List<object> { 1, 2 },
+                        cancellationToken
+                    );
             }
             else
             {
-                await context.Database.ExecuteSqlRawAsync(
-                    "<Some query>",
-                    new List<object> { 1, 2 }
-                );
+                await context.Database
+                    .ExecuteSqlRawAsync("<Some query>", new List<object> { 1, 2 });
             }
         }
         else
@@ -611,18 +610,17 @@ public class RelationalDatabaseFacadeExtensionsTest
             if (cancellation)
             {
                 var cancellationToken = new CancellationToken();
-                await context.Database.ExecuteSqlRawAsync(
-                    "<Some query>",
-                    new List<object> { 1, "Pickle" },
-                    cancellationToken
-                );
+                await context.Database
+                    .ExecuteSqlRawAsync(
+                        "<Some query>",
+                        new List<object> { 1, "Pickle" },
+                        cancellationToken
+                    );
             }
             else
             {
-                await context.Database.ExecuteSqlRawAsync(
-                    "<Some query>",
-                    new List<object> { 1, "Pickle" }
-                );
+                await context.Database
+                    .ExecuteSqlRawAsync("<Some query>", new List<object> { 1, "Pickle" });
             }
         }
         else
@@ -648,11 +646,8 @@ public class RelationalDatabaseFacadeExtensionsTest
             if (cancellation)
             {
                 var cancellationToken = new CancellationToken();
-                await context.Database.ExecuteSqlRawAsync(
-                    "<Some query>",
-                    new object[] { 1 },
-                    cancellationToken
-                );
+                await context.Database
+                    .ExecuteSqlRawAsync("<Some query>", new object[] { 1 }, cancellationToken);
             }
             else
             {
@@ -682,11 +677,8 @@ public class RelationalDatabaseFacadeExtensionsTest
             if (cancellation)
             {
                 var cancellationToken = new CancellationToken();
-                await context.Database.ExecuteSqlRawAsync(
-                    "<Some query>",
-                    new[] { "Branston" },
-                    cancellationToken
-                );
+                await context.Database
+                    .ExecuteSqlRawAsync("<Some query>", new[] { "Branston" }, cancellationToken);
             }
             else
             {
@@ -706,14 +698,16 @@ public class RelationalDatabaseFacadeExtensionsTest
     {
         public ThudContext()
             : base(
-                FakeRelationalTestHelpers.Instance.CreateOptions(
-                    FakeRelationalTestHelpers.Instance.CreateServiceProvider(
-                        new ServiceCollection().AddScoped<
-                            IRawSqlCommandBuilder,
-                            TestRawSqlCommandBuilder
-                        >()
+                FakeRelationalTestHelpers.Instance
+                    .CreateOptions(
+                        FakeRelationalTestHelpers.Instance
+                            .CreateServiceProvider(
+                                new ServiceCollection().AddScoped<
+                                    IRawSqlCommandBuilder,
+                                    TestRawSqlCommandBuilder
+                                >()
+                            )
                     )
-                )
             ) { }
     }
 

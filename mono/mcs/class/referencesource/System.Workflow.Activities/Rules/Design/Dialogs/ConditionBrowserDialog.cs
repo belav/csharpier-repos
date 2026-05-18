@@ -96,9 +96,8 @@ namespace System.Workflow.Activities.Rules.Design
                     );
 
                     this.declarativeConditionCollection.Remove(declarativeRuleDefinition.Name);
-                    this.declarativeConditionCollection.Add(
-                        updatedRuleObject as RuleExpressionCondition
-                    );
+                    this.declarativeConditionCollection
+                        .Add(updatedRuleObject as RuleExpressionCondition);
 
                     return true;
                 }

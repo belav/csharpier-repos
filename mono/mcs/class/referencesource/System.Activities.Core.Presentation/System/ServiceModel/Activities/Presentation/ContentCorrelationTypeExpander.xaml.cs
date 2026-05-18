@@ -272,13 +272,14 @@ namespace System.ServiceModel.Activities.Presentation
         )
         {
             var control = (ContentCorrelationTypeExpander)sender;
-            control.Dispatcher.BeginInvoke(
-                new Action(() =>
-                {
-                    control.OnTypesToExpandChanged();
-                }),
-                DispatcherPriority.Render
-            );
+            control.Dispatcher
+                .BeginInvoke(
+                    new Action(() =>
+                    {
+                        control.OnTypesToExpandChanged();
+                    }),
+                    DispatcherPriority.Render
+                );
         }
     }
 

@@ -120,9 +120,8 @@ namespace Microsoft.CodeAnalysis.UseCompoundAssignment
                 return;
             }
 
-            var binaryKind = _syntaxFacts.SyntaxKinds.Convert<TSyntaxKind>(
-                binaryExpression.RawKind
-            );
+            var binaryKind = _syntaxFacts.SyntaxKinds
+                .Convert<TSyntaxKind>(binaryExpression.RawKind);
             if (!_binaryToAssignmentMap.ContainsKey(binaryKind))
             {
                 return;
@@ -190,10 +189,9 @@ namespace Microsoft.CodeAnalysis.UseCompoundAssignment
                     // or if increment operator is defined in the containing type
                     if (
                         operation.OperatorMethod is null
-                        || operation
-                            .OperatorMethod.ContainingType.GetMembers(
-                                WellKnownMemberNames.IncrementOperatorName
-                            )
+                        || operation.OperatorMethod
+                            .ContainingType
+                            .GetMembers(WellKnownMemberNames.IncrementOperatorName)
                             .Length > 0
                     )
                     {
@@ -225,10 +223,9 @@ namespace Microsoft.CodeAnalysis.UseCompoundAssignment
                     // or if decrement operator is defined in the containing type
                     if (
                         operation.OperatorMethod is null
-                        || operation
-                            .OperatorMethod.ContainingType.GetMembers(
-                                WellKnownMemberNames.DecrementOperatorName
-                            )
+                        || operation.OperatorMethod
+                            .ContainingType
+                            .GetMembers(WellKnownMemberNames.DecrementOperatorName)
                             .Length > 0
                     )
                     {

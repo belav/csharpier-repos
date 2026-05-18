@@ -273,10 +273,11 @@ namespace System.Data.Objects
                 }
 
                 // Map the C-space result type to O-space.
-                tResultType =
-                    this._state.ObjectContext.Perspective.MetadataWorkspace.GetOSpaceTypeUsage(
-                        tResultType
-                    );
+                tResultType = this._state
+                    .ObjectContext
+                    .Perspective
+                    .MetadataWorkspace
+                    .GetOSpaceTypeUsage(tResultType);
                 if (null == tResultType)
                 {
                     throw EntityUtil.InvalidOperation(

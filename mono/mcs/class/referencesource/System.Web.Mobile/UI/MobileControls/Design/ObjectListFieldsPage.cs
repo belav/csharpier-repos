@@ -143,20 +143,21 @@ namespace System.Web.UI.Design.MobileControls
             _ckbVisible.CheckedChanged += new EventHandler(this.OnPropertyChanged);
             _ckbVisible.TabIndex = Index + 6;
 
-            this.Controls.AddRange(
-                new Control[]
-                {
-                    _ckbAutoGenerateFields,
-                    grplblFieldList,
-                    lblDataField,
-                    _cmbDataField,
-                    lblDataFormatString,
-                    _txtDataFormatString,
-                    lblTitle,
-                    _txtTitle,
-                    _ckbVisible,
-                }
-            );
+            this.Controls
+                .AddRange(
+                    new Control[]
+                    {
+                        _ckbAutoGenerateFields,
+                        grplblFieldList,
+                        lblDataField,
+                        _cmbDataField,
+                        lblDataFormatString,
+                        _txtDataFormatString,
+                        lblTitle,
+                        _txtTitle,
+                        _ckbVisible,
+                    }
+                );
         }
 
         protected override void InitPage()

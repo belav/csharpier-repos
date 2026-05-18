@@ -87,9 +87,10 @@ public class Program
 
             if (errorCount > 0)
             {
-                Console.Error.WriteLine(
-                    $"llvm-dwarfdump failed. First five errors:{Environment.NewLine}{string.Join(Environment.NewLine, firstFiveErrors)}"
-                );
+                Console.Error
+                    .WriteLine(
+                        $"llvm-dwarfdump failed. First five errors:{Environment.NewLine}{string.Join(Environment.NewLine, firstFiveErrors)}"
+                    );
                 return 10;
             }
         }

@@ -110,8 +110,8 @@ public static class ExpressionExtensions
         {
             var memberInfos =
                 (List<TMemberInfo>)
-                    newExpression
-                        .Arguments.Select(a => memberMatcher(a, parameterExpression))
+                    newExpression.Arguments
+                        .Select(a => memberMatcher(a, parameterExpression))
                         .Where(p => p != null)
                         .ToList()!;
 
@@ -270,18 +270,19 @@ public static class ExpressionExtensions
                 || nonNullableType.IsNumeric()
                 || nonNullableType.IsEnum
             )
-                ? Infrastructure.ExpressionExtensions.CreateEqualsExpression(
-                    Expression.Call(
-                        EF.MakePropertyMethod(typeof(object)),
-                        entityParameterExpression,
-                        Expression.Constant(property.Name, typeof(string))
-                    ),
-                    Expression.Call(
-                        keyValuesConstantExpression,
-                        ValueBuffer.GetValueMethod,
-                        Expression.Constant(i)
+                ? Infrastructure.ExpressionExtensions
+                    .CreateEqualsExpression(
+                        Expression.Call(
+                            EF.MakePropertyMethod(typeof(object)),
+                            entityParameterExpression,
+                            Expression.Constant(property.Name, typeof(string))
+                        ),
+                        Expression.Call(
+                            keyValuesConstantExpression,
+                            ValueBuffer.GetValueMethod,
+                            Expression.Constant(i)
+                        )
                     )
-                )
                 : Expression.Equal(
                     Expression.Call(
                         EF.MakePropertyMethod(property.ClrType),

@@ -41,8 +41,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExternalAccess.Pythia
                 return ImmutableArray<(string, Glyph)>.Empty;
 
             var context = new PythiaDeclarationNameContext(syntaxContext);
-            var result = await _lazyImplementation
-                .Value.ProvideRecommendationsAsync(context, cancellationToken)
+            var result = await _lazyImplementation.Value
+                .ProvideRecommendationsAsync(context, cancellationToken)
                 .ConfigureAwait(false);
 
             // We just pick the first possible symbol kind for glyph.

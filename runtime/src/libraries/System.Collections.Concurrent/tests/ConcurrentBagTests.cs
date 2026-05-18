@@ -48,22 +48,23 @@ namespace System.Collections.Concurrent.Tests
                         Enumerable
                             .Range(0, threadsCount)
                             .Select(_ =>
-                                Task.Factory.StartNew(
-                                    () =>
-                                    {
-                                        b.SignalAndWait();
-                                        for (int i = 1; i < itemsPerThread + 1; i++)
+                                Task.Factory
+                                    .StartNew(
+                                        () =>
                                         {
-                                            bag.Add(i);
-                                            int item;
-                                            Assert.True(bag.TryPeek(out item)); // ordering implementation detail that's not guaranteed
-                                            Assert.Equal(i, item);
-                                        }
-                                    },
-                                    CancellationToken.None,
-                                    TaskCreationOptions.LongRunning,
-                                    TaskScheduler.Default
-                                )
+                                            b.SignalAndWait();
+                                            for (int i = 1; i < itemsPerThread + 1; i++)
+                                            {
+                                                bag.Add(i);
+                                                int item;
+                                                Assert.True(bag.TryPeek(out item)); // ordering implementation detail that's not guaranteed
+                                                Assert.Equal(i, item);
+                                            }
+                                        },
+                                        CancellationToken.None,
+                                        TaskCreationOptions.LongRunning,
+                                        TaskScheduler.Default
+                                    )
                             )
                     ).ToArray()
                 );
@@ -77,7 +78,8 @@ namespace System.Collections.Concurrent.Tests
         {
             var bag = new ConcurrentBag<int>(Enumerable.Range(1, 5));
 
-            Task.Factory.StartNew(
+            Task.Factory
+                .StartNew(
                     () =>
                     {
                         int item;
@@ -114,7 +116,8 @@ namespace System.Collections.Concurrent.Tests
         public static void AddManyItems_ThenTakeOnDifferentThread_ItemsOutputInExpectedOrder()
         {
             var bag = new ConcurrentBag<int>(Enumerable.Range(0, 100000));
-            Task.Factory.StartNew(
+            Task.Factory
+                .StartNew(
                     () =>
                     {
                         for (int i = 0; i < 100000; i++)
@@ -383,17 +386,21 @@ namespace System.Collections.Concurrent.Tests
                 Task.WaitAll(
                     (
                         from _ in Enumerable.Range(0, otherThreads)
-                        select Task.Factory.StartNew(
-                            () =>
-                            {
-                                Assert.NotEqual(origThreadId, Environment.CurrentManagedThreadId);
-                                for (int i = 0; i < ItemsPerThread; i++)
-                                    bag.Add(i);
-                            },
-                            CancellationToken.None,
-                            TaskCreationOptions.LongRunning,
-                            TaskScheduler.Default
-                        )
+                        select Task.Factory
+                            .StartNew(
+                                () =>
+                                {
+                                    Assert.NotEqual(
+                                        origThreadId,
+                                        Environment.CurrentManagedThreadId
+                                    );
+                                    for (int i = 0; i < ItemsPerThread; i++)
+                                        bag.Add(i);
+                                },
+                                CancellationToken.None,
+                                TaskCreationOptions.LongRunning,
+                                TaskScheduler.Default
+                            )
                     ).ToArray()
                 );
 
@@ -435,37 +442,38 @@ namespace System.Collections.Concurrent.Tests
             Task.WaitAll(
                 (
                     from i in Enumerable.Range(0, threadsCount)
-                    select Task.Factory.StartNew(
-                        () =>
-                        {
-                            var random = new Random();
-                            for (int j = 0; j < itemsPerThread; j++)
+                    select Task.Factory
+                        .StartNew(
+                            () =>
                             {
-                                int item;
-                                switch (random.Next(5))
+                                var random = new Random();
+                                for (int j = 0; j < itemsPerThread; j++)
                                 {
-                                    case 0:
-                                        bag.Add(j);
-                                        break;
-                                    case 1:
-                                        bag.TryPeek(out item);
-                                        break;
-                                    case 2:
-                                        bag.TryTake(out item);
-                                        break;
-                                    case 3:
-                                        bag.Clear();
-                                        break;
-                                    case 4:
-                                        bag.ToArray();
-                                        break;
+                                    int item;
+                                    switch (random.Next(5))
+                                    {
+                                        case 0:
+                                            bag.Add(j);
+                                            break;
+                                        case 1:
+                                            bag.TryPeek(out item);
+                                            break;
+                                        case 2:
+                                            bag.TryTake(out item);
+                                            break;
+                                        case 3:
+                                            bag.Clear();
+                                            break;
+                                        case 4:
+                                            bag.ToArray();
+                                            break;
+                                    }
                                 }
-                            }
-                        },
-                        CancellationToken.None,
-                        TaskCreationOptions.LongRunning,
-                        TaskScheduler.Default
-                    )
+                            },
+                            CancellationToken.None,
+                            TaskCreationOptions.LongRunning,
+                            TaskScheduler.Default
+                        )
                 ).ToArray()
             );
         }

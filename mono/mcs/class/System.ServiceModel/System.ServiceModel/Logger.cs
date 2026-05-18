@@ -102,10 +102,11 @@ namespace System.ServiceModel
                     }
                     catch (Exception ex)
                     {
-                        Console.Error.WriteLine(
-                            "WARNING: WCF trace environment variable points to non-creatable file name: "
-                                + env
-                        );
+                        Console.Error
+                            .WriteLine(
+                                "WARNING: WCF trace environment variable points to non-creatable file name: "
+                                    + env
+                            );
                     }
                     break;
 #endif

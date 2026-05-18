@@ -71,9 +71,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification.Simplifiers
             if (
                 specialType is SpecialType.System_IntPtr or SpecialType.System_UIntPtr
                 && semanticModel.SyntaxTree.Options.LanguageVersion() >= LanguageVersion.CSharp9
-                && semanticModel.Compilation.SupportsRuntimeCapability(
-                    RuntimeCapability.NumericIntPtr
-                )
+                && semanticModel.Compilation
+                    .SupportsRuntimeCapability(RuntimeCapability.NumericIntPtr)
             )
             {
                 return SyntaxFactory.Identifier(
@@ -128,8 +127,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification.Simplifiers
                 {
                     if (qualifiedNameNode.Right.Identifier.HasAnnotations(AliasAnnotation.Kind))
                     {
-                        aliasAnnotationInfo = qualifiedNameNode
-                            .Right.Identifier.GetAnnotations(AliasAnnotation.Kind)
+                        aliasAnnotationInfo = qualifiedNameNode.Right
+                            .Identifier
+                            .GetAnnotations(AliasAnnotation.Kind)
                             .Single();
                     }
                 }
@@ -138,8 +138,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification.Simplifiers
                 {
                     if (aliasQualifiedNameNode.Name.Identifier.HasAnnotations(AliasAnnotation.Kind))
                     {
-                        aliasAnnotationInfo = aliasQualifiedNameNode
-                            .Name.Identifier.GetAnnotations(AliasAnnotation.Kind)
+                        aliasAnnotationInfo = aliasQualifiedNameNode.Name
+                            .Identifier
+                            .GetAnnotations(AliasAnnotation.Kind)
                             .Single();
                     }
                 }
@@ -480,8 +481,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification.Simplifiers
                 return token.Parent;
 
             var originalSemanticMode = semanticModel.GetOriginalSemanticModel();
-            token = originalSemanticMode
-                .SyntaxTree.GetRoot(cancellationToken)
+            token = originalSemanticMode.SyntaxTree
+                .GetRoot(cancellationToken)
                 .FindToken(semanticModel.OriginalPositionForSpeculation);
 
             return token.Parent;

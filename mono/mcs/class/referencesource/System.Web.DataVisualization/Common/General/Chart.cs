@@ -440,10 +440,8 @@ namespace System.Web.UI.DataVisualization.Charting
                                 // SQL derived datasource
                                 Type selectArgsType = dataSource
                                     .GetType()
-                                    .Assembly.GetType(
-                                        "System.Web.UI.DataSourceSelectArguments",
-                                        true
-                                    );
+                                    .Assembly
+                                    .GetType("System.Web.UI.DataSourceSelectArguments", true);
                                 ConstructorInfo ci = selectArgsType.GetConstructor(new Type[] { });
                                 dataSource = m.Invoke(
                                     dataSource,
@@ -681,9 +679,8 @@ namespace System.Web.UI.DataVisualization.Charting
                 // Convert data source to recognizable source for the series
                 if (dataSource is DataSet && ((DataSet)dataSource).Tables.Count > 0)
                 {
-                    dataSource = ((DataSet)dataSource).DefaultViewManager.CreateDataView(
-                        ((DataSet)dataSource).Tables[0]
-                    );
+                    dataSource = ((DataSet)dataSource).DefaultViewManager
+                        .CreateDataView(((DataSet)dataSource).Tables[0]);
                 }
                 else if (dataSource is DataTable)
                 {
@@ -856,9 +853,12 @@ namespace System.Web.UI.DataVisualization.Charting
                                     new ArgumentOutOfRangeException(
                                         "dataSource",
                                         SR.ExceptionDataPointYValuesCountMismatch(
-                                            series.YValuesPerPoint.ToString(
-                                                System.Globalization.CultureInfo.InvariantCulture
-                                            )
+                                            series.YValuesPerPoint
+                                                .ToString(
+                                                    System.Globalization
+                                                        .CultureInfo
+                                                        .InvariantCulture
+                                                )
                                         )
                                     )
                                 );
@@ -2058,14 +2058,15 @@ namespace System.Web.UI.DataVisualization.Charting
                     }
 
                     // Call BackPaint event
-                    this.Chart.CallOnPrePaint(
-                        new ChartPaintEventArgs(
-                            this.Chart,
-                            this.ChartGraph,
-                            this.Common,
-                            new ElementPosition(0, 0, 100, 100)
-                        )
-                    );
+                    this.Chart
+                        .CallOnPrePaint(
+                            new ChartPaintEventArgs(
+                                this.Chart,
+                                this.ChartGraph,
+                                this.Common,
+                                new ElementPosition(0, 0, 100, 100)
+                            )
+                        );
 
                     // Call paint function for each chart area.
                     foreach (ChartArea area in _chartAreas)
@@ -2099,14 +2100,15 @@ namespace System.Web.UI.DataVisualization.Charting
                     }
 
                     // Call Paint event
-                    this.Chart.CallOnPostPaint(
-                        new ChartPaintEventArgs(
-                            this.Chart,
-                            this.ChartGraph,
-                            this.Common,
-                            new ElementPosition(0, 0, 100, 100)
-                        )
-                    );
+                    this.Chart
+                        .CallOnPostPaint(
+                            new ChartPaintEventArgs(
+                                this.Chart,
+                                this.ChartGraph,
+                                this.Common,
+                                new ElementPosition(0, 0, 100, 100)
+                            )
+                        );
                 }
 
                 // Draw annotation objects
@@ -2252,9 +2254,8 @@ namespace System.Web.UI.DataVisualization.Charting
                 this._chartBorderPosition = chartGraph.GetAbsoluteRectangle(chartAreasRectangle);
 
                 // Get border interface
-                border3D = Common.BorderTypeRegistry.GetBorderType(
-                    _borderSkin.SkinStyle.ToString()
-                );
+                border3D = Common.BorderTypeRegistry
+                    .GetBorderType(_borderSkin.SkinStyle.ToString());
                 if (border3D != null)
                 {
                     border3D.Resolution = chartGraph.Graphics.DpiX;
@@ -2363,20 +2364,22 @@ namespace System.Web.UI.DataVisualization.Charting
                         );
 
                         // Calculate position of the legend if it's docked outside of the chart area
-                        this.Legends.CalcOutsideLegendPosition(
-                            chartGraph,
-                            area,
-                            ref areaPosition,
-                            elementSpacing
-                        );
+                        this.Legends
+                            .CalcOutsideLegendPosition(
+                                chartGraph,
+                                area,
+                                ref areaPosition,
+                                elementSpacing
+                            );
 
                         // Set area position without changing the Auto flag
-                        area.Position.SetPositionNoAuto(
-                            areaPosition.X,
-                            areaPosition.Y,
-                            areaPosition.Width,
-                            areaPosition.Height
-                        );
+                        area.Position
+                            .SetPositionNoAuto(
+                                areaPosition.X,
+                                areaPosition.Y,
+                                areaPosition.Width,
+                                areaPosition.Height
+                            );
 
                         // Go to next area
                         ++row;
@@ -2400,12 +2403,8 @@ namespace System.Web.UI.DataVisualization.Charting
                         );
 
                         // Calculate position of the legend if it's docked outside of the chart area
-                        this.Legends.CalcOutsideLegendPosition(
-                            chartGraph,
-                            area,
-                            ref rect,
-                            elementSpacing
-                        );
+                        this.Legends
+                            .CalcOutsideLegendPosition(chartGraph, area, ref rect, elementSpacing);
                     }
                 }
             }
@@ -3168,9 +3167,8 @@ namespace System.Web.UI.DataVisualization.Charting
             //****************************************************************
             //** Find the smalles size of the inner plot
             //****************************************************************
-            RectangleF areaPlotPosition = (
-                (ChartArea)areasGroup[0]
-            ).PlotAreaPosition.ToRectangleF();
+            RectangleF areaPlotPosition = ((ChartArea)areasGroup[0]).PlotAreaPosition
+                .ToRectangleF();
             foreach (ChartArea area in areasGroup)
             {
                 if (area.PlotAreaPosition.X > areaPlotPosition.X)
@@ -3243,10 +3241,8 @@ namespace System.Web.UI.DataVisualization.Charting
                     == AreaAlignmentOrientations.Vertical
                 )
                 {
-                    area.AxisX2.AdjustLabelFontAtSecondPass(
-                        ChartGraph,
-                        area.InnerPlotPosition.Auto
-                    );
+                    area.AxisX2
+                        .AdjustLabelFontAtSecondPass(ChartGraph, area.InnerPlotPosition.Auto);
                     area.AxisX.AdjustLabelFontAtSecondPass(ChartGraph, area.InnerPlotPosition.Auto);
                 }
                 if (
@@ -3254,10 +3250,8 @@ namespace System.Web.UI.DataVisualization.Charting
                     == AreaAlignmentOrientations.Horizontal
                 )
                 {
-                    area.AxisY2.AdjustLabelFontAtSecondPass(
-                        ChartGraph,
-                        area.InnerPlotPosition.Auto
-                    );
+                    area.AxisY2
+                        .AdjustLabelFontAtSecondPass(ChartGraph, area.InnerPlotPosition.Auto);
                     area.AxisY.AdjustLabelFontAtSecondPass(ChartGraph, area.InnerPlotPosition.Auto);
                 }
             }
@@ -3313,12 +3307,13 @@ namespace System.Web.UI.DataVisualization.Charting
                             }
 
                             // Set new position
-                            area.Position.SetPositionNoAuto(
-                                areaPosition.X,
-                                areaPosition.Y,
-                                areaPosition.Width,
-                                areaPosition.Height
-                            );
+                            area.Position
+                                .SetPositionNoAuto(
+                                    areaPosition.X,
+                                    areaPosition.Y,
+                                    areaPosition.Width,
+                                    areaPosition.Height
+                                );
                         }
                     }
                 }
@@ -3367,11 +3362,9 @@ namespace System.Web.UI.DataVisualization.Charting
                                 {
                                     if (selectionChanged)
                                     {
-                                        groupArea.CursorX.SelectionStart = changedArea
-                                            .CursorX
+                                        groupArea.CursorX.SelectionStart = changedArea.CursorX
                                             .SelectionStart;
-                                        groupArea.CursorX.SelectionEnd = changedArea
-                                            .CursorX
+                                        groupArea.CursorX.SelectionEnd = changedArea.CursorX
                                             .SelectionEnd;
                                     }
                                     else
@@ -3383,11 +3376,9 @@ namespace System.Web.UI.DataVisualization.Charting
                                 {
                                     if (selectionChanged)
                                     {
-                                        groupArea.CursorY.SelectionStart = changedArea
-                                            .CursorY
+                                        groupArea.CursorY.SelectionStart = changedArea.CursorY
                                             .SelectionStart;
-                                        groupArea.CursorY.SelectionEnd = changedArea
-                                            .CursorY
+                                        groupArea.CursorY.SelectionEnd = changedArea.CursorY
                                             .SelectionEnd;
                                     }
                                     else
@@ -3499,57 +3490,45 @@ namespace System.Web.UI.DataVisualization.Charting
 
                                 if (orientation == AreaAlignmentOrientations.Vertical)
                                 {
-                                    groupArea.AxisX.ScaleView.Position = changedArea
-                                        .AxisX
+                                    groupArea.AxisX.ScaleView.Position = changedArea.AxisX
                                         .ScaleView
                                         .Position;
-                                    groupArea.AxisX.ScaleView.Size = changedArea
-                                        .AxisX
+                                    groupArea.AxisX.ScaleView.Size = changedArea.AxisX
                                         .ScaleView
                                         .Size;
-                                    groupArea.AxisX.ScaleView.SizeType = changedArea
-                                        .AxisX
+                                    groupArea.AxisX.ScaleView.SizeType = changedArea.AxisX
                                         .ScaleView
                                         .SizeType;
 
-                                    groupArea.AxisX2.ScaleView.Position = changedArea
-                                        .AxisX2
+                                    groupArea.AxisX2.ScaleView.Position = changedArea.AxisX2
                                         .ScaleView
                                         .Position;
-                                    groupArea.AxisX2.ScaleView.Size = changedArea
-                                        .AxisX2
+                                    groupArea.AxisX2.ScaleView.Size = changedArea.AxisX2
                                         .ScaleView
                                         .Size;
-                                    groupArea.AxisX2.ScaleView.SizeType = changedArea
-                                        .AxisX2
+                                    groupArea.AxisX2.ScaleView.SizeType = changedArea.AxisX2
                                         .ScaleView
                                         .SizeType;
                                 }
                                 if (orientation == AreaAlignmentOrientations.Horizontal)
                                 {
-                                    groupArea.AxisY.ScaleView.Position = changedArea
-                                        .AxisY
+                                    groupArea.AxisY.ScaleView.Position = changedArea.AxisY
                                         .ScaleView
                                         .Position;
-                                    groupArea.AxisY.ScaleView.Size = changedArea
-                                        .AxisY
+                                    groupArea.AxisY.ScaleView.Size = changedArea.AxisY
                                         .ScaleView
                                         .Size;
-                                    groupArea.AxisY.ScaleView.SizeType = changedArea
-                                        .AxisY
+                                    groupArea.AxisY.ScaleView.SizeType = changedArea.AxisY
                                         .ScaleView
                                         .SizeType;
 
-                                    groupArea.AxisY2.ScaleView.Position = changedArea
-                                        .AxisY2
+                                    groupArea.AxisY2.ScaleView.Position = changedArea.AxisY2
                                         .ScaleView
                                         .Position;
-                                    groupArea.AxisY2.ScaleView.Size = changedArea
-                                        .AxisY2
+                                    groupArea.AxisY2.ScaleView.Size = changedArea.AxisY2
                                         .ScaleView
                                         .Size;
-                                    groupArea.AxisY2.ScaleView.SizeType = changedArea
-                                        .AxisY2
+                                    groupArea.AxisY2.ScaleView.SizeType = changedArea.AxisY2
                                         .ScaleView
                                         .SizeType;
                                 }

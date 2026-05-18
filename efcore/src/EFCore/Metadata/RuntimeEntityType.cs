@@ -336,10 +336,8 @@ public class RuntimeEntityType : RuntimeTypeBase, IRuntimeEntityType
         foreach (var fk in FindDeclaredForeignKeys(properties))
         {
             if (
-                PropertyListComparer.Instance.Equals(
-                    fk.PrincipalKey.Properties,
-                    principalKey.Properties
-                )
+                PropertyListComparer.Instance
+                    .Equals(fk.PrincipalKey.Properties, principalKey.Properties)
                 && fk.PrincipalEntityType == principalEntityType
             )
             {
@@ -845,7 +843,8 @@ public class RuntimeEntityType : RuntimeTypeBase, IRuntimeEntityType
                     {
                         ((IModel)entityType.Model)
                             .GetModelDependencies()
-                            .ConstructorBindingFactory.GetBindings(
+                            .ConstructorBindingFactory
+                            .GetBindings(
                                 entityType,
                                 out entityType._constructorBinding,
                                 out entityType._serviceOnlyConstructorBinding

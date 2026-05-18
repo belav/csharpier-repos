@@ -19,12 +19,10 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.VSTypeScript.Api
             IEnumerable<TextChange> textChanges,
             CancellationToken cancellationToken
         ) =>
-            Editor.Shared.Extensions.IWorkspaceExtensions.ApplyTextChanges(
-                workspace,
-                id,
-                textChanges,
-                cancellationToken
-            );
+            Editor.Shared
+                .Extensions
+                .IWorkspaceExtensions
+                .ApplyTextChanges(workspace, id, textChanges, cancellationToken);
 
         public static SnapshotPoint? GetCaretPoint(
             this ITextView textView,
@@ -35,10 +33,10 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.VSTypeScript.Api
             this ITextView textView,
             SnapshotPoint point
         ) =>
-            Editor.Shared.Extensions.ITextViewExtensions.TryMoveCaretToAndEnsureVisible(
-                textView,
-                point
-            );
+            Editor.Shared
+                .Extensions
+                .ITextViewExtensions
+                .TryMoveCaretToAndEnsureVisible(textView, point);
 
         public static SnapshotPoint? GetCaretPoint(
             this ITextView textView,
@@ -49,10 +47,10 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.VSTypeScript.Api
             this ITextView textView,
             VirtualSnapshotPoint point
         ) =>
-            Editor.Shared.Extensions.ITextViewExtensions.TryMoveCaretToAndEnsureVisible(
-                textView,
-                point
-            );
+            Editor.Shared
+                .Extensions
+                .ITextViewExtensions
+                .TryMoveCaretToAndEnsureVisible(textView, point);
 
         public static SnapshotSpan? TryGetSpan(
             this ITextSnapshot snapshot,
@@ -61,13 +59,10 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.VSTypeScript.Api
             int endLine,
             int endIndex
         ) =>
-            Text.Shared.Extensions.ITextSnapshotExtensions.TryGetSpan(
-                snapshot,
-                startLine,
-                startIndex,
-                endLine,
-                endIndex
-            );
+            Text.Shared
+                .Extensions
+                .ITextSnapshotExtensions
+                .TryGetSpan(snapshot, startLine, startIndex, endLine, endIndex);
 
         public static void GetLineAndCharacter(
             this ITextSnapshot snapshot,
@@ -75,12 +70,10 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.VSTypeScript.Api
             out int lineNumber,
             out int characterIndex
         ) =>
-            Text.Shared.Extensions.ITextSnapshotExtensions.GetLineAndCharacter(
-                snapshot,
-                position,
-                out lineNumber,
-                out characterIndex
-            );
+            Text.Shared
+                .Extensions
+                .ITextSnapshotExtensions
+                .GetLineAndCharacter(snapshot, position, out lineNumber, out characterIndex);
 
         public static int GetColumnFromLineOffset(this string line, int endPosition, int tabSize) =>
             Shared.Extensions.StringExtensions.GetColumnFromLineOffset(line, endPosition, tabSize);

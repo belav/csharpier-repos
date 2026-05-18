@@ -726,10 +726,8 @@ namespace System.ServiceModel.Channels
                                     : (range.Upper - this.windowStart)
                             );
 
-                            transferredInWindow -= this.window.GetTransferredInRangeCount(
-                                beginIndex,
-                                endIndex
-                            );
+                            transferredInWindow -= this.window
+                                .GetTransferredInRangeCount(beginIndex, endIndex);
                         }
                     }
                 }
@@ -951,9 +949,8 @@ namespace System.ServiceModel.Channels
         void ThrowIfRollover()
         {
             if (this.windowStart + this.window.Count + this.waitQueue.Count == Int64.MaxValue)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new MessageNumberRolloverFault(this.id).CreateException()
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(new MessageNumberRolloverFault(this.id).CreateException());
         }
 
         void UpdateStats(Int64 now, Int64 lastAttemptTime)
@@ -1271,11 +1268,8 @@ namespace System.ServiceModel.Channels
 
             public void Complete0()
             {
-                attemptInfo = this.strategy.AddToWindow(
-                    this.attemptInfo.Message,
-                    this.isLast,
-                    this.attemptInfo.State
-                );
+                attemptInfo = this.strategy
+                    .AddToWindow(this.attemptInfo.Message, this.isLast, this.attemptInfo.State);
                 this.completeEvent.Set();
             }
 

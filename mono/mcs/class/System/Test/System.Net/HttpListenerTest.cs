@@ -743,22 +743,23 @@ namespace MonoTests.System.Net
                 null
             );
 
-            Task.Factory.StartNew(() =>
-            {
-                var webRequest = (HttpWebRequest)WebRequest.Create(uri);
-                webRequest.Method = "POST";
-                webRequest.KeepAlive = false;
-                Stream requestStream = webRequest.GetRequestStream();
-                requestStream.WriteByte(1);
-                requestStream.Close();
-                using (WebResponse response = webRequest.GetResponse())
-                using (Stream stream = response.GetResponseStream())
+            Task.Factory
+                .StartNew(() =>
                 {
-                    byte[] clientBytes = new byte[1024];
-                    Assert.IsNotNull(stream, "#01");
-                    stream.Read(clientBytes, 0, clientBytes.Length);
-                }
-            });
+                    var webRequest = (HttpWebRequest)WebRequest.Create(uri);
+                    webRequest.Method = "POST";
+                    webRequest.KeepAlive = false;
+                    Stream requestStream = webRequest.GetRequestStream();
+                    requestStream.WriteByte(1);
+                    requestStream.Close();
+                    using (WebResponse response = webRequest.GetResponse())
+                    using (Stream stream = response.GetResponseStream())
+                    {
+                        byte[] clientBytes = new byte[1024];
+                        Assert.IsNotNull(stream, "#01");
+                        stream.Read(clientBytes, 0, clientBytes.Length);
+                    }
+                });
 
             Assert.IsTrue(exceptionOccuredEvent.WaitOne(15 * 1000), "#02");
         }

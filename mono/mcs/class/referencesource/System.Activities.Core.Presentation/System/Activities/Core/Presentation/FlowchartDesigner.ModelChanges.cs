@@ -38,7 +38,8 @@ namespace System.Activities.Core.Presentation
             using (
                 EditingScope deleteLinkEditingScope = (
                     (IModelTreeItem)this.ModelItem
-                ).ModelTreeManager.CreateEditingScope(SR.FCDeleteLink)
+                ).ModelTreeManager
+                    .CreateEditingScope(SR.FCDeleteLink)
             )
             {
                 caseKey = DeleteLinkImpl(link, isMoveOrAutoSplit, referenceUpdatedModelItems);
@@ -93,9 +94,8 @@ namespace System.Activities.Core.Presentation
                 caseKey = flowSwitchLink;
                 //Transitioning from the fakeModelItem world to the real ModelItem world.
                 FlowNode fs = flowSwitchLink.ParentFlowSwitch;
-                ModelItem realFlowSwitchMI = (
-                    this.ModelItem as IModelTreeItem
-                ).ModelTreeManager.WrapAsModelItem(fs);
+                ModelItem realFlowSwitchMI = (this.ModelItem as IModelTreeItem).ModelTreeManager
+                    .WrapAsModelItem(fs);
                 if (
                     referenceUpdatedModelItems != null
                     && referenceUpdatedModelItems.Contains(realFlowSwitchMI)

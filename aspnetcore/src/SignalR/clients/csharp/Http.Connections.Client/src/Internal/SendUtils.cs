@@ -29,8 +29,8 @@ internal static partial class SendUtils
         {
             while (true)
             {
-                var result = await application
-                    .Input.ReadAsync(cancellationToken)
+                var result = await application.Input
+                    .ReadAsync(cancellationToken)
                     .ConfigureAwait(false);
                 var buffer = result.Buffer;
 

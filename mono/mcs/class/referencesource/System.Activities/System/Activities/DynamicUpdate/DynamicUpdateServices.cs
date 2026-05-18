@@ -139,10 +139,8 @@ namespace System.Activities.DynamicUpdate
             );
             if (originalDefinition == null)
             {
-                throw FxTrace.Exception.Argument(
-                    "updatedWorkflowDefinition",
-                    SR.MustCallPrepareBeforeFinalize
-                );
+                throw FxTrace.Exception
+                    .Argument("updatedWorkflowDefinition", SR.MustCallPrepareBeforeFinalize);
             }
 
             DynamicUpdateMap result = InternalTryCreateUpdateMap(
@@ -205,10 +203,8 @@ namespace System.Activities.DynamicUpdate
                 DynamicUpdateInfo.GetOriginalActivityBuilder(updatedActivityDefinition);
             if (originalActivityDefinition == null)
             {
-                throw FxTrace.Exception.Argument(
-                    "updatedActivityDefinition",
-                    SR.MustCallPrepareBeforeFinalize
-                );
+                throw FxTrace.Exception
+                    .Argument("updatedActivityDefinition", SR.MustCallPrepareBeforeFinalize);
             }
 
             Activity originalBuiltRoot = GetDynamicActivity(originalActivityDefinition);

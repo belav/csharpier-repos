@@ -143,15 +143,13 @@ namespace System.ServiceModel.Security
                 )
             )
             {
-                SecurityToken transportToken = OperationContext
-                    .Current
+                SecurityToken transportToken = OperationContext.Current
                     .IncomingMessageProperties
                     .Security
                     .TransportToken
                     .SecurityToken;
 
-                ReadOnlyCollection<IAuthorizationPolicy> policyCollection = OperationContext
-                    .Current
+                ReadOnlyCollection<IAuthorizationPolicy> policyCollection = OperationContext.Current
                     .IncomingMessageProperties
                     .Security
                     .TransportToken
@@ -286,9 +284,9 @@ namespace System.ServiceModel.Security
                 // WCF does not call our SecurityTokenHandlers for the Transport token. So run the token through
                 // the SecurityTokenHandler and generate claims for this token.
                 transportTokenIdentityCollection.AddRange(
-                    serviceCreds.IdentityConfiguration.SecurityTokenHandlers.ValidateToken(
-                        transportToken
-                    )
+                    serviceCreds.IdentityConfiguration
+                        .SecurityTokenHandlers
+                        .ValidateToken(transportToken)
                 );
             }
 
@@ -316,16 +314,14 @@ namespace System.ServiceModel.Security
 
             if (tranportTokenIdentities == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                    "tranportTokenIdentities"
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperArgumentNull("tranportTokenIdentities");
             }
 
             if (baseAuthorizationPolicies == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                    "baseAuthorizationPolicy"
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperArgumentNull("baseAuthorizationPolicy");
             }
 
             if (baseAuthorizationPolicies.Count == 0)
@@ -333,10 +329,8 @@ namespace System.ServiceModel.Security
                 // This should never happen in our current configuration. IDFx token handlers do not validate
                 // client tokens present at the transport level. So we should atleast have one IAuthorizationPolicy
                 // that WCF generated for the transport token.
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                    "baseAuthorizationPolicy",
-                    SR.GetString(SR.ID0020)
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperArgument("baseAuthorizationPolicy", SR.GetString(SR.ID0020));
             }
 
             //
@@ -366,9 +360,8 @@ namespace System.ServiceModel.Security
 
             if (policyToEliminate == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperInvalidOperation(
-                    SR.GetString(SR.ID4271, transportToken)
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperInvalidOperation(SR.GetString(SR.ID4271, transportToken));
             }
 
             baseAuthorizationPolicies.Remove(policyToEliminate);
@@ -395,9 +388,8 @@ namespace System.ServiceModel.Security
 
             if (tranportTokenIdentities == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                    "tranportTokenIdentities"
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperArgumentNull("tranportTokenIdentities");
             }
 
             if (authPolicy == null)
@@ -486,16 +478,14 @@ namespace System.ServiceModel.Security
         {
             if (authorizationPolicies == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                    "authorizationPolicies"
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperArgumentNull("authorizationPolicies");
             }
 
             if (securityTokenHandlerCollection == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                    "securityTokenHandlerCollection"
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperArgumentNull("securityTokenHandlerCollection");
             }
 
             List<ClaimsIdentity> identities = new List<ClaimsIdentity>();
@@ -508,8 +498,7 @@ namespace System.ServiceModel.Security
                 && (OperationContext.Current.IncomingMessageProperties.Security != null)
             )
             {
-                SecurityMessageProperty securityMessageProperty = OperationContext
-                    .Current
+                SecurityMessageProperty securityMessageProperty = OperationContext.Current
                     .IncomingMessageProperties
                     .Security;
                 foreach (
@@ -679,8 +668,11 @@ namespace System.ServiceModel.Security
                 && OperationContext.Current.Host.Description.Behaviors != null
             )
             {
-                serviceCredentials =
-                    OperationContext.Current.Host.Description.Behaviors.Find<ServiceCredentials>();
+                serviceCredentials = OperationContext.Current
+                    .Host
+                    .Description
+                    .Behaviors
+                    .Find<ServiceCredentials>();
             }
 
             return serviceCredentials;
@@ -692,8 +684,8 @@ namespace System.ServiceModel.Security
             string authenticationMethod
         )
         {
-            System.Security.Claims.Claim authenticationMethodClaim =
-                claimsIdentity.Claims.FirstOrDefault(claim =>
+            System.Security.Claims.Claim authenticationMethodClaim = claimsIdentity.Claims
+                .FirstOrDefault(claim =>
                     claim.Type == System.Security.Claims.ClaimTypes.AuthenticationMethod
                 );
 
@@ -717,8 +709,8 @@ namespace System.ServiceModel.Security
         {
             // the issuer for this claim should always be the default issuer.
             string issuerName = ClaimsIdentity.DefaultIssuer;
-            System.Security.Claims.Claim authenticationInstantClaim =
-                claimsIdentity.Claims.FirstOrDefault(claim =>
+            System.Security.Claims.Claim authenticationInstantClaim = claimsIdentity.Claims
+                .FirstOrDefault(claim =>
                     claim.Type == System.Security.Claims.ClaimTypes.AuthenticationInstant
                 );
 
@@ -751,9 +743,8 @@ namespace System.ServiceModel.Security
         {
             if ((identity1 == null) && (identity2 == null))
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperInvalidOperation(
-                    SR.GetString(SR.ID4268)
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperInvalidOperation(SR.GetString(SR.ID4268));
             }
 
             if (identity1 == null)
@@ -833,11 +824,9 @@ namespace System.ServiceModel.Security
                     AuthorizationPolicy.ClaimsPrincipalKey
                 ] as ClaimsPrincipal;
 
-            claimsPrincipal =
-                credentials.IdentityConfiguration.ClaimsAuthenticationManager.Authenticate(
-                    resource.AbsoluteUri,
-                    claimsPrincipal
-                );
+            claimsPrincipal = credentials.IdentityConfiguration
+                .ClaimsAuthenticationManager
+                .Authenticate(resource.AbsoluteUri, claimsPrincipal);
             operationContext.ServiceSecurityContext.AuthorizationContext.Properties[
                 AuthorizationPolicy.ClaimsPrincipalKey
             ] = claimsPrincipal;
@@ -861,8 +850,9 @@ namespace System.ServiceModel.Security
                 );
             }
 
-            bool authorized =
-                credentials.IdentityConfiguration.ClaimsAuthorizationManager.CheckAccess(
+            bool authorized = credentials.IdentityConfiguration
+                .ClaimsAuthorizationManager
+                .CheckAccess(
                     new System.Security.Claims.AuthorizationContext(
                         claimsPrincipal,
                         resource.AbsoluteUri,
@@ -874,17 +864,23 @@ namespace System.ServiceModel.Security
             {
                 if (authorized)
                 {
-                    System.IdentityModel.Diagnostics.TraceUtility.TraceString(
-                        TraceEventType.Information,
-                        SR.GetString(SR.TraceOnAuthorizeRequestSucceed)
-                    );
+                    System.IdentityModel
+                        .Diagnostics
+                        .TraceUtility
+                        .TraceString(
+                            TraceEventType.Information,
+                            SR.GetString(SR.TraceOnAuthorizeRequestSucceed)
+                        );
                 }
                 else
                 {
-                    System.IdentityModel.Diagnostics.TraceUtility.TraceString(
-                        TraceEventType.Information,
-                        SR.GetString(SR.TraceOnAuthorizeRequestFailed)
-                    );
+                    System.IdentityModel
+                        .Diagnostics
+                        .TraceUtility
+                        .TraceString(
+                            TraceEventType.Information,
+                            SR.GetString(SR.TraceOnAuthorizeRequestFailed)
+                        );
                 }
             }
 
@@ -942,9 +938,8 @@ namespace System.ServiceModel.Security
         {
             if (securityMessageProperty == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                    "securityMessageProperty"
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperArgumentNull("securityMessageProperty");
             }
 
             _securityMessageProperty = securityMessageProperty;
@@ -978,9 +973,8 @@ namespace System.ServiceModel.Security
 
         IEnumerator IEnumerable.GetEnumerator()
         {
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                new NotImplementedException()
-            );
+            throw DiagnosticUtility.ExceptionUtility
+                .ThrowHelperError(new NotImplementedException());
         }
     }
 }

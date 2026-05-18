@@ -211,11 +211,8 @@ namespace System.Web.UI.WebControls
                         case HotSpotMode.PostBack:
                             writer.AddAttribute(
                                 HtmlTextWriterAttribute.Href,
-                                Page.ClientScript.GetPostBackClientHyperlink(
-                                    this,
-                                    n.ToString(),
-                                    true
-                                )
+                                Page.ClientScript
+                                    .GetPostBackClientHyperlink(this, n.ToString(), true)
                             );
                             break;
                     }

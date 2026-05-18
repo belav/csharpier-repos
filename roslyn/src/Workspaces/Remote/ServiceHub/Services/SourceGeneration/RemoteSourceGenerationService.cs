@@ -39,8 +39,8 @@ internal sealed partial class RemoteSourceGenerationService(
             async solution =>
             {
                 var project = solution.GetRequiredProject(projectId);
-                var documentStates = await solution
-                    .State.GetSourceGeneratedDocumentStatesAsync(project.State, cancellationToken)
+                var documentStates = await solution.State
+                    .GetSourceGeneratedDocumentStatesAsync(project.State, cancellationToken)
                     .ConfigureAwait(false);
 
                 using var _ = ArrayBuilder<(
@@ -72,8 +72,8 @@ internal sealed partial class RemoteSourceGenerationService(
             async solution =>
             {
                 var project = solution.GetRequiredProject(projectId);
-                var documentStates = await solution
-                    .State.GetSourceGeneratedDocumentStatesAsync(project.State, cancellationToken)
+                var documentStates = await solution.State
+                    .GetSourceGeneratedDocumentStatesAsync(project.State, cancellationToken)
                     .ConfigureAwait(false);
 
                 using var _ = ArrayBuilder<string>.GetInstance(documentIds.Length, out var result);

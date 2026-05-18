@@ -47,11 +47,12 @@ namespace Microsoft.CodeAnalysis.CSharp
                     is var (attributeLocation, _)
             )
             {
-                this._diagnostics.Add(
-                    ErrorCode.ERR_InterceptableMethodMustBeOrdinary,
-                    attributeLocation,
-                    nameSyntax.Identifier.ValueText
-                );
+                this._diagnostics
+                    .Add(
+                        ErrorCode.ERR_InterceptableMethodMustBeOrdinary,
+                        attributeLocation,
+                        nameSyntax.Identifier.ValueText
+                    );
             }
 
             rewrittenArgs = MakeArguments(

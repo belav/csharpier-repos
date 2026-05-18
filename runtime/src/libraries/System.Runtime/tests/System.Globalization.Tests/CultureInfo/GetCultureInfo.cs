@@ -168,10 +168,11 @@ namespace System.Globalization.Tests
             var psi = new ProcessStartInfo();
             psi.Environment.Clear();
 
-            psi.Environment.Add(
-                "DOTNET_SYSTEM_GLOBALIZATION_PREDEFINED_CULTURES_ONLY",
-                predefinedCulturesOnlyEnvVar
-            );
+            psi.Environment
+                .Add(
+                    "DOTNET_SYSTEM_GLOBALIZATION_PREDEFINED_CULTURES_ONLY",
+                    predefinedCulturesOnlyEnvVar
+                );
 
             RemoteExecutor
                 .Invoke(
@@ -220,10 +221,11 @@ namespace System.Globalization.Tests
 
             if (declarePredefinedCulturesOnly)
             {
-                psi.Environment.Add(
-                    "DOTNET_SYSTEM_GLOBALIZATION_PREDEFINED_CULTURES_ONLY",
-                    predefinedCulturesOnly ? "true" : "false"
-                );
+                psi.Environment
+                    .Add(
+                        "DOTNET_SYSTEM_GLOBALIZATION_PREDEFINED_CULTURES_ONLY",
+                        predefinedCulturesOnly ? "true" : "false"
+                    );
             }
 
             bool restricted =

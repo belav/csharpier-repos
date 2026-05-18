@@ -23,9 +23,8 @@ namespace System.Web.Hosting
             new Version(4, 5, 1)
         ).ToString();
 
-        private static readonly string _customLoaderAssemblyName = typeof(CustomLoaderHelper)
-            .Assembly
-            .FullName;
+        private static readonly string _customLoaderAssemblyName =
+            typeof(CustomLoaderHelper).Assembly.FullName;
         private static readonly string _customLoaderTypeName = typeof(CustomLoaderHelper).FullName;
         private static readonly Guid IID_ICustomLoader = new Guid(
             "50A3CE65-2F9F-44E9-9094-32C6C928F966"

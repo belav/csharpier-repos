@@ -287,10 +287,8 @@ namespace HttpStress
                         foreach (KeyValuePair<string, IEnumerable<string>> reqHeader in req.Headers)
                         {
                             if (
-                                !m.Headers.TryGetValues(
-                                    reqHeader.Key,
-                                    out IEnumerable<string>? values
-                                )
+                                !m.Headers
+                                    .TryGetValues(reqHeader.Key, out IEnumerable<string>? values)
                             )
                             {
                                 throw new Exception(
@@ -313,10 +311,11 @@ namespace HttpStress
                             )
                             {
                                 if (
-                                    !m.TrailingHeaders.TryGetValues(
-                                        reqHeader.Key + "-trailer",
-                                        out IEnumerable<string>? values
-                                    )
+                                    !m.TrailingHeaders
+                                        .TryGetValues(
+                                            reqHeader.Key + "-trailer",
+                                            out IEnumerable<string>? values
+                                        )
                                 )
                                 {
                                     throw new Exception(

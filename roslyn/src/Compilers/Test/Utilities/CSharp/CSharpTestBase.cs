@@ -878,11 +878,12 @@ namespace System.Diagnostics.CodeAnalysis
         {
             options =
                 options
-                ?? TestOptions.ReleaseDll.WithOutputKind(
-                    (expectedOutput != null)
-                        ? OutputKind.ConsoleApplication
-                        : OutputKind.DynamicallyLinkedLibrary
-                );
+                ?? TestOptions.ReleaseDll
+                    .WithOutputKind(
+                        (expectedOutput != null)
+                            ? OutputKind.ConsoleApplication
+                            : OutputKind.DynamicallyLinkedLibrary
+                    );
             var compilation = CreateExperimentalCompilationWithMscorlib45(
                 source,
                 feature,
@@ -1597,9 +1598,8 @@ namespace System.Diagnostics.CodeAnalysis
             var compileDiagnostics = comp.GetDiagnostics();
             var emitDiagnostics = comp.GetEmitDiagnostics();
 
-            var resolvedReferences = comp.References.Where(r =>
-                r.Properties.Kind == MetadataImageKind.Assembly
-            );
+            var resolvedReferences = comp.References
+                .Where(r => r.Properties.Kind == MetadataImageKind.Assembly);
 
             if (
                 !compileDiagnostics.Any(d => d.DefaultSeverity == DiagnosticSeverity.Error)
@@ -1620,9 +1620,8 @@ namespace System.Diagnostics.CodeAnalysis
                         var comp2 = comp.RemoveAllReferences()
                             .AddReferences(
                                 used.Concat(
-                                    comp.References.Where(r =>
-                                        r.Properties.Kind == MetadataImageKind.Module
-                                    )
+                                    comp.References
+                                        .Where(r => r.Properties.Kind == MetadataImageKind.Module)
                                 )
                             );
                         comp2
@@ -1692,8 +1691,8 @@ namespace System.Diagnostics.CodeAnalysis
             var builder = ArrayBuilder<Symbol>.GetInstance();
             UsesIsNullableVisitor.GetUses(builder, symbol);
 
-            var format = SymbolDisplayFormat
-                .TestFormat.AddMiscellaneousOptions(
+            var format = SymbolDisplayFormat.TestFormat
+                .AddMiscellaneousOptions(
                     SymbolDisplayMiscellaneousOptions.IncludeNullableReferenceTypeModifier
                         | SymbolDisplayMiscellaneousOptions.IncludeNotNullableReferenceTypeModifier
                 )
@@ -2341,8 +2340,9 @@ namespace System.Diagnostics.CodeAnalysis
             ImmutableArray<ILVisualizer.LocalInfo> localDefinitions;
             if (!bodyBlock.LocalSignature.IsNil)
             {
-                var signature = peModule
-                    .Module.MetadataReader.GetStandaloneSignature(bodyBlock.LocalSignature)
+                var signature = peModule.Module
+                    .MetadataReader
+                    .GetStandaloneSignature(bodyBlock.LocalSignature)
                     .Signature;
                 var signatureReader = peModule.Module.GetMemoryReaderOrThrow(signature);
                 var localInfos = methodDecoder.DecodeLocalSignatureOrThrow(ref signatureReader);

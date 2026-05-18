@@ -25,8 +25,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities.LanguageServer
         [Fact]
         public void TestExportedDiagnosticIds()
         {
-            var attribute =
-                this.LspBuildOnlyDiagnosticsType.GetCustomAttribute<LspBuildOnlyDiagnosticsAttribute>();
+            var attribute = this.LspBuildOnlyDiagnosticsType
+                .GetCustomAttribute<LspBuildOnlyDiagnosticsAttribute>();
 
             var actualDiagnosticCodes = attribute.BuildOnlyDiagnostics;
             var missing = ExpectedDiagnosticCodes

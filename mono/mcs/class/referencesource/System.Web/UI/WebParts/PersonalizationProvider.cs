@@ -198,9 +198,8 @@ namespace System.Web.UI.WebControls.WebParts
                     WebPartsSection configSection = RuntimeConfig.GetConfig().WebParts;
                     if (configSection != null)
                     {
-                        WebPartsPersonalizationAuthorization authConfig = configSection
-                            .Personalization
-                            .Authorization;
+                        WebPartsPersonalizationAuthorization authConfig =
+                            configSection.Personalization.Authorization;
                         if (authConfig != null)
                         {
                             IDictionary capabilities = new HybridDictionary();

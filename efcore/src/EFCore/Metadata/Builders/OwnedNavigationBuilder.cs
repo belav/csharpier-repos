@@ -61,7 +61,8 @@ public class OwnedNavigationBuilder : IInfrastructure<IConventionEntityTypeBuild
             {
                 _builder = PrincipalEntityType
                     .FindNavigation(_builder.Metadata.PrincipalToDependent!.Name)
-                    ?.ForeignKey.Builder!;
+                    ?.ForeignKey
+                    .Builder!;
             }
 
             return _builder;
@@ -127,8 +128,8 @@ public class OwnedNavigationBuilder : IInfrastructure<IConventionEntityTypeBuild
     /// <returns>An object that can be used to configure the primary key.</returns>
     public virtual KeyBuilder HasKey(params string[] propertyNames) =>
         new(
-            DependentEntityType
-                .Builder.PrimaryKey(
+            DependentEntityType.Builder
+                .PrimaryKey(
                     Check.NotEmpty(propertyNames, nameof(propertyNames)),
                     ConfigurationSource.Explicit
                 )!
@@ -149,8 +150,8 @@ public class OwnedNavigationBuilder : IInfrastructure<IConventionEntityTypeBuild
     public virtual PropertyBuilder Property(string propertyName) =>
         UpdateBuilder(() =>
             new PropertyBuilder(
-                DependentEntityType
-                    .Builder.Property(
+                DependentEntityType.Builder
+                    .Property(
                         Check.NotEmpty(propertyName, nameof(propertyName)),
                         ConfigurationSource.Explicit
                     )!
@@ -175,8 +176,8 @@ public class OwnedNavigationBuilder : IInfrastructure<IConventionEntityTypeBuild
     public virtual PropertyBuilder<TProperty> Property<TProperty>(string propertyName) =>
         UpdateBuilder(() =>
             new PropertyBuilder<TProperty>(
-                DependentEntityType
-                    .Builder.Property(
+                DependentEntityType.Builder
+                    .Property(
                         typeof(TProperty),
                         Check.NotEmpty(propertyName, nameof(propertyName)),
                         ConfigurationSource.Explicit
@@ -201,8 +202,8 @@ public class OwnedNavigationBuilder : IInfrastructure<IConventionEntityTypeBuild
     /// <returns>An object that can be used to configure the property.</returns>
     public virtual PropertyBuilder Property(Type propertyType, string propertyName) =>
         new(
-            DependentEntityType
-                .Builder.Property(
+            DependentEntityType.Builder
+                .Property(
                     Check.NotNull(propertyType, nameof(propertyType)),
                     Check.NotEmpty(propertyName, nameof(propertyName)),
                     ConfigurationSource.Explicit
@@ -225,8 +226,8 @@ public class OwnedNavigationBuilder : IInfrastructure<IConventionEntityTypeBuild
     public virtual PrimitiveCollectionBuilder PrimitiveCollection(string propertyName) =>
         UpdateBuilder(() =>
             new PrimitiveCollectionBuilder(
-                DependentEntityType
-                    .Builder.PrimitiveCollection(
+                DependentEntityType.Builder
+                    .PrimitiveCollection(
                         Check.NotEmpty(propertyName, nameof(propertyName)),
                         ConfigurationSource.Explicit
                     )!
@@ -254,8 +255,8 @@ public class OwnedNavigationBuilder : IInfrastructure<IConventionEntityTypeBuild
     ) =>
         UpdateBuilder(() =>
             new PrimitiveCollectionBuilder<TProperty>(
-                DependentEntityType
-                    .Builder.PrimitiveCollection(
+                DependentEntityType.Builder
+                    .PrimitiveCollection(
                         typeof(TProperty),
                         Check.NotEmpty(propertyName, nameof(propertyName)),
                         ConfigurationSource.Explicit
@@ -284,8 +285,8 @@ public class OwnedNavigationBuilder : IInfrastructure<IConventionEntityTypeBuild
         string propertyName
     ) =>
         new(
-            DependentEntityType
-                .Builder.PrimitiveCollection(
+            DependentEntityType.Builder
+                .PrimitiveCollection(
                     Check.NotNull(propertyType, nameof(propertyType)),
                     Check.NotEmpty(propertyName, nameof(propertyName)),
                     ConfigurationSource.Explicit
@@ -309,8 +310,8 @@ public class OwnedNavigationBuilder : IInfrastructure<IConventionEntityTypeBuild
         [DynamicallyAccessedMembers(IProperty.DynamicallyAccessedMemberTypes)] TProperty
     >(string propertyName) =>
         new(
-            DependentEntityType
-                .Builder.IndexerProperty(
+            DependentEntityType.Builder
+                .IndexerProperty(
                     typeof(TProperty),
                     Check.NotEmpty(propertyName, nameof(propertyName)),
                     ConfigurationSource.Explicit
@@ -338,8 +339,8 @@ public class OwnedNavigationBuilder : IInfrastructure<IConventionEntityTypeBuild
         Check.NotNull(propertyType, nameof(propertyType));
 
         return new PropertyBuilder(
-            DependentEntityType
-                .Builder.IndexerProperty(
+            DependentEntityType.Builder
+                .IndexerProperty(
                     propertyType,
                     Check.NotEmpty(propertyName, nameof(propertyName)),
                     ConfigurationSource.Explicit
@@ -357,9 +358,8 @@ public class OwnedNavigationBuilder : IInfrastructure<IConventionEntityTypeBuild
     /// <returns>An object that can be used to configure the navigation property.</returns>
     public virtual NavigationBuilder Navigation(string navigationName) =>
         new(
-            DependentEntityType.Builder.Navigation(
-                Check.NotEmpty(navigationName, nameof(navigationName))
-            )
+            DependentEntityType.Builder
+                .Navigation(Check.NotEmpty(navigationName, nameof(navigationName)))
         );
 
     /// <summary>
@@ -384,8 +384,8 @@ public class OwnedNavigationBuilder : IInfrastructure<IConventionEntityTypeBuild
     /// <returns>An object that can be used to configure the index.</returns>
     public virtual IndexBuilder HasIndex(params string[] propertyNames) =>
         new(
-            DependentEntityType
-                .Builder.HasIndex(
+            DependentEntityType.Builder
+                .HasIndex(
                     Check.NotEmpty(propertyNames, nameof(propertyNames)),
                     ConfigurationSource.Explicit
                 )!
@@ -662,11 +662,8 @@ public class OwnedNavigationBuilder : IInfrastructure<IConventionEntityTypeBuild
         using (var batch = DependentEntityType.Model.DelayConventions())
         {
             var navigationMember = MemberIdentity.Create(navigationName);
-            var relationship = DependentEntityType.Builder.HasOwnership(
-                ownedType,
-                navigationMember,
-                ConfigurationSource.Explicit
-            )!;
+            var relationship = DependentEntityType.Builder
+                .HasOwnership(ownedType, navigationMember, ConfigurationSource.Explicit)!;
             relationship.IsUnique(true, ConfigurationSource.Explicit);
             foreignKey = (IMutableForeignKey)batch.Run(relationship.Metadata)!;
         }
@@ -910,11 +907,8 @@ public class OwnedNavigationBuilder : IInfrastructure<IConventionEntityTypeBuild
         using (var batch = DependentEntityType.Model.DelayConventions())
         {
             var navigationMember = MemberIdentity.Create(navigationName);
-            var relationship = DependentEntityType.Builder.HasOwnership(
-                ownedType,
-                navigationMember,
-                ConfigurationSource.Explicit
-            )!;
+            var relationship = DependentEntityType.Builder
+                .HasOwnership(ownedType, navigationMember, ConfigurationSource.Explicit)!;
             relationship.IsUnique(false, ConfigurationSource.Explicit);
             foreignKey = (IMutableForeignKey)batch.Run(relationship.Metadata)!;
         }
@@ -958,8 +952,8 @@ public class OwnedNavigationBuilder : IInfrastructure<IConventionEntityTypeBuild
             DependentEntityType,
             relatedEntityType,
             navigationName,
-            DependentEntityType
-                .Builder.HasRelationship(
+            DependentEntityType.Builder
+                .HasRelationship(
                     relatedEntityType,
                     navigationName,
                     ConfigurationSource.Explicit,
@@ -1043,8 +1037,8 @@ public class OwnedNavigationBuilder : IInfrastructure<IConventionEntityTypeBuild
             DependentEntityType,
             relatedEntityType,
             navigationName,
-            DependentEntityType
-                .Builder.HasRelationship(
+            DependentEntityType.Builder
+                .HasRelationship(
                     relatedEntityType,
                     navigationName,
                     ConfigurationSource.Explicit,
@@ -1126,21 +1120,16 @@ public class OwnedNavigationBuilder : IInfrastructure<IConventionEntityTypeBuild
 
             if (navigationName != null)
             {
-                relatedEntityType = Builder.ModelBuilder.Metadata.FindEntityType(
-                    relatedType,
-                    navigationName,
-                    DependentEntityType
-                );
+                relatedEntityType = Builder.ModelBuilder
+                    .Metadata
+                    .FindEntityType(relatedType, navigationName, DependentEntityType);
             }
         }
 
         return relatedEntityType
-            ?? DependentEntityType
-                .Builder.ModelBuilder.Entity(
-                    relatedType,
-                    ConfigurationSource.Explicit,
-                    shouldBeOwned: false
-                )!
+            ?? DependentEntityType.Builder
+                .ModelBuilder
+                .Entity(relatedType, ConfigurationSource.Explicit, shouldBeOwned: false)!
                 .Metadata;
     }
 
@@ -1154,10 +1143,8 @@ public class OwnedNavigationBuilder : IInfrastructure<IConventionEntityTypeBuild
         ChangeTrackingStrategy changeTrackingStrategy
     )
     {
-        DependentEntityType.Builder.HasChangeTrackingStrategy(
-            changeTrackingStrategy,
-            ConfigurationSource.Explicit
-        );
+        DependentEntityType.Builder
+            .HasChangeTrackingStrategy(changeTrackingStrategy, ConfigurationSource.Explicit);
 
         return this;
     }
@@ -1183,10 +1170,8 @@ public class OwnedNavigationBuilder : IInfrastructure<IConventionEntityTypeBuild
         PropertyAccessMode propertyAccessMode
     )
     {
-        DependentEntityType.Builder.UsePropertyAccessMode(
-            propertyAccessMode,
-            ConfigurationSource.Explicit
-        );
+        DependentEntityType.Builder
+            .UsePropertyAccessMode(propertyAccessMode, ConfigurationSource.Explicit);
 
         return this;
     }

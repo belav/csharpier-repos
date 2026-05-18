@@ -992,8 +992,7 @@ namespace System.Diagnostics.Eventing.Reader
                                 varVal.StringVal = taskMem.GetMemory();
                             }
                             break;
-                        case UnsafeNativeMethods
-                            .EvtChannelConfigPropertyId
+                        case UnsafeNativeMethods.EvtChannelConfigPropertyId
                             .EvtChannelLoggingConfigLogFilePath:
                             {
                                 varVal.Type = (uint)
@@ -1002,8 +1001,7 @@ namespace System.Diagnostics.Eventing.Reader
                                 varVal.StringVal = taskMem.GetMemory();
                             }
                             break;
-                        case UnsafeNativeMethods
-                            .EvtChannelConfigPropertyId
+                        case UnsafeNativeMethods.EvtChannelConfigPropertyId
                             .EvtChannelLoggingConfigMaxSize:
                             {
                                 varVal.Type = (uint)
@@ -1011,8 +1009,7 @@ namespace System.Diagnostics.Eventing.Reader
                                 varVal.ULong = (ulong)((long)val);
                             }
                             break;
-                        case UnsafeNativeMethods
-                            .EvtChannelConfigPropertyId
+                        case UnsafeNativeMethods.EvtChannelConfigPropertyId
                             .EvtChannelPublishingConfigLevel:
                             {
                                 varVal.Type = (uint)
@@ -1020,8 +1017,7 @@ namespace System.Diagnostics.Eventing.Reader
                                 varVal.UInteger = (uint)((int)val);
                             }
                             break;
-                        case UnsafeNativeMethods
-                            .EvtChannelConfigPropertyId
+                        case UnsafeNativeMethods.EvtChannelConfigPropertyId
                             .EvtChannelPublishingConfigKeywords:
                             {
                                 varVal.Type = (uint)
@@ -1029,8 +1025,7 @@ namespace System.Diagnostics.Eventing.Reader
                                 varVal.ULong = (ulong)((long)val);
                             }
                             break;
-                        case UnsafeNativeMethods
-                            .EvtChannelConfigPropertyId
+                        case UnsafeNativeMethods.EvtChannelConfigPropertyId
                             .EvtChannelLoggingConfigRetention:
                             {
                                 varVal.Type = (uint)
@@ -1041,8 +1036,7 @@ namespace System.Diagnostics.Eventing.Reader
                                     varVal.Bool = 0;
                             }
                             break;
-                        case UnsafeNativeMethods
-                            .EvtChannelConfigPropertyId
+                        case UnsafeNativeMethods.EvtChannelConfigPropertyId
                             .EvtChannelLoggingConfigAutoBackup:
                             {
                                 varVal.Type = (uint)
@@ -1393,8 +1387,7 @@ namespace System.Diagnostics.Eventing.Reader
             IntPtr pointer = IntPtr.Zero;
             int bufferNeeded;
             int propCount;
-            UnsafeNativeMethods.EvtRenderFlags flag = UnsafeNativeMethods
-                .EvtRenderFlags
+            UnsafeNativeMethods.EvtRenderFlags flag = UnsafeNativeMethods.EvtRenderFlags
                 .EvtRenderEventValues;
 
             EventLogPermissionHolder.GetEventLogPermission().Demand();
@@ -1626,8 +1619,7 @@ namespace System.Diagnostics.Eventing.Reader
             IntPtr buffer = IntPtr.Zero;
             int bufferNeeded;
             int propCount;
-            UnsafeNativeMethods.EvtRenderFlags flag = UnsafeNativeMethods
-                .EvtRenderFlags
+            UnsafeNativeMethods.EvtRenderFlags flag = UnsafeNativeMethods.EvtRenderFlags
                 .EvtRenderBookmark;
 
             try

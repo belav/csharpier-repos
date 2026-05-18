@@ -167,8 +167,7 @@
             {
                 Rectangle clientRectangle = new Rectangle(Point.Empty, ParentView.ViewPortSize);
                 Size indicatorMargins = WorkflowTheme.CurrentTheme.AmbientTheme.Margin;
-                Size scrollIndicatorSize = WorkflowTheme
-                    .CurrentTheme
+                Size scrollIndicatorSize = WorkflowTheme.CurrentTheme
                     .AmbientTheme
                     .ScrollIndicatorSize;
 

@@ -175,8 +175,7 @@ namespace System.Diagnostics.PerformanceData
                 Int32 CounterOffset = 0;
 
                 foreach (
-                    KeyValuePair<Int32, CounterType> CounterDef in m_instance
-                        .m_counterSet
+                    KeyValuePair<Int32, CounterType> CounterDef in m_instance.m_counterSet
                         .m_idToCounter
                 )
                 {

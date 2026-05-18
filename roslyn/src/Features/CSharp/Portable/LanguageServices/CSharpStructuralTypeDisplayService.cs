@@ -51,8 +51,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.LanguageServices
 
                 first = false;
                 members.AddRange(
-                    property
-                        .Type.ToMinimalDisplayParts(
+                    property.Type
+                        .ToMinimalDisplayParts(
                             semanticModel,
                             position,
                             s_minimalWithoutExpandedTuples

@@ -117,11 +117,8 @@ namespace MonoTests.System.Windows.Forms
                 comboBox1.DisplayMember = "displaymember";
                 comboBox1.ValueMember = "valuemember";
                 comboBox1.DataSource = t;
-                comboBox1.DataBindings.Add(
-                    "SelectedValue",
-                    new InitialBoundValue_dummy(),
-                    "controlsrc"
-                );
+                comboBox1.DataBindings
+                    .Add("SelectedValue", new InitialBoundValue_dummy(), "controlsrc");
                 f.Controls.Add(comboBox1);
                 Assert.AreEqual(string.Empty, comboBox1.Text, "#??");
 
@@ -133,11 +130,8 @@ namespace MonoTests.System.Windows.Forms
                 Assert.AreEqual(string.Empty, comboBox1.Text, "#A02-1");
                 comboBox1.DataSource = t;
                 Assert.AreEqual("lower", comboBox1.Text, "#A02");
-                comboBox1.DataBindings.Add(
-                    "SelectedValue",
-                    new InitialBoundValue_dummy(),
-                    "controlsrc"
-                );
+                comboBox1.DataBindings
+                    .Add("SelectedValue", new InitialBoundValue_dummy(), "controlsrc");
                 Assert.AreEqual("lower", comboBox1.Text, "#A03");
 
                 comboBox1 = new ComboBox();
@@ -145,11 +139,8 @@ namespace MonoTests.System.Windows.Forms
                 comboBox1.ValueMember = "valuemember";
                 comboBox1.DataSource = t;
                 Assert.AreEqual(string.Empty, comboBox1.Text, "#A01");
-                comboBox1.DataBindings.Add(
-                    "SelectedValue",
-                    new InitialBoundValue_dummy(),
-                    "controlsrc"
-                );
+                comboBox1.DataBindings
+                    .Add("SelectedValue", new InitialBoundValue_dummy(), "controlsrc");
                 Assert.AreEqual(string.Empty, comboBox1.Text, "#A04");
                 f.Controls.AddRange(new Control[] { comboBox1 });
                 Assert.AreEqual(string.Empty, comboBox1.Text, "#A04");
@@ -159,11 +150,8 @@ namespace MonoTests.System.Windows.Forms
                 comboBox1.DisplayMember = "displaymember";
                 comboBox1.ValueMember = "valuemember";
                 Assert.AreEqual(string.Empty, comboBox1.Text, "#A02");
-                comboBox1.DataBindings.Add(
-                    "SelectedValue",
-                    new InitialBoundValue_dummy(),
-                    "controlsrc"
-                );
+                comboBox1.DataBindings
+                    .Add("SelectedValue", new InitialBoundValue_dummy(), "controlsrc");
                 Assert.AreEqual(string.Empty, comboBox1.Text, "#A02-1");
                 comboBox1.DataSource = t;
                 Assert.AreEqual("lower", comboBox1.Text, "#A03");
@@ -176,22 +164,16 @@ namespace MonoTests.System.Windows.Forms
                 Assert.AreEqual("lower", comboBox1.Text, "#A03");
                 comboBox1.ValueMember = "valuemember";
                 Assert.AreEqual("lower", comboBox1.Text, "#A02");
-                comboBox1.DataBindings.Add(
-                    "SelectedValue",
-                    new InitialBoundValue_dummy(),
-                    "controlsrc"
-                );
+                comboBox1.DataBindings
+                    .Add("SelectedValue", new InitialBoundValue_dummy(), "controlsrc");
                 Assert.AreEqual("lower", comboBox1.Text, "#A02-1");
 
                 comboBox1 = new ComboBox();
                 comboBox1.DisplayMember = "displaymember";
                 comboBox1.ValueMember = "valuemember";
                 Assert.AreEqual("", comboBox1.Text, "#A02");
-                comboBox1.DataBindings.Add(
-                    "SelectedValue",
-                    new InitialBoundValue_dummy(),
-                    "controlsrc"
-                );
+                comboBox1.DataBindings
+                    .Add("SelectedValue", new InitialBoundValue_dummy(), "controlsrc");
                 Assert.AreEqual(string.Empty, comboBox1.Text, "#A02-1");
                 comboBox1.DataSource = t;
                 Assert.AreEqual(string.Empty, comboBox1.Text, "#A03");
@@ -205,11 +187,8 @@ namespace MonoTests.System.Windows.Forms
                 Assert.AreEqual("", comboBox1.Text, "#A03");
                 comboBox1.ValueMember = "valuemember";
                 Assert.AreEqual("", comboBox1.Text, "#A02");
-                comboBox1.DataBindings.Add(
-                    "SelectedValue",
-                    new InitialBoundValue_dummy(),
-                    "controlsrc"
-                );
+                comboBox1.DataBindings
+                    .Add("SelectedValue", new InitialBoundValue_dummy(), "controlsrc");
                 Assert.AreEqual("", comboBox1.Text, "#A02-1");
                 f.Controls.AddRange(new Control[] { comboBox1 });
                 Assert.AreEqual("", comboBox1.Text, "#A02-1");
@@ -222,11 +201,8 @@ namespace MonoTests.System.Windows.Forms
                 Assert.AreEqual("", comboBox1.Text, "#A03");
                 comboBox1.DataSource = t;
                 Assert.AreEqual("lower", comboBox1.Text, "#A03");
-                comboBox1.DataBindings.Add(
-                    "SelectedValue",
-                    new InitialBoundValue_dummy(),
-                    "controlsrc"
-                );
+                comboBox1.DataBindings
+                    .Add("SelectedValue", new InitialBoundValue_dummy(), "controlsrc");
                 Assert.AreEqual("lower", comboBox1.Text, "#A03");
 
                 comboBox1 = new ComboBox();
@@ -235,11 +211,8 @@ namespace MonoTests.System.Windows.Forms
                 Assert.AreEqual("", comboBox1.Text, "#A03");
                 comboBox1.ValueMember = "valuemember";
                 Assert.AreEqual("", comboBox1.Text, "#A03");
-                comboBox1.DataBindings.Add(
-                    "SelectedValue",
-                    new InitialBoundValue_dummy(),
-                    "controlsrc"
-                );
+                comboBox1.DataBindings
+                    .Add("SelectedValue", new InitialBoundValue_dummy(), "controlsrc");
                 Assert.AreEqual("", comboBox1.Text, "#A03");
                 comboBox1.DataSource = t;
                 Assert.AreEqual("lower", comboBox1.Text, "#A03");
@@ -250,11 +223,8 @@ namespace MonoTests.System.Windows.Forms
                 Assert.AreEqual("", comboBox1.Text, "#A03");
                 comboBox1.DataSource = t;
                 Assert.AreEqual("a", comboBox1.Text, "#A03");
-                comboBox1.DataBindings.Add(
-                    "SelectedValue",
-                    new InitialBoundValue_dummy(),
-                    "controlsrc"
-                );
+                comboBox1.DataBindings
+                    .Add("SelectedValue", new InitialBoundValue_dummy(), "controlsrc");
                 Assert.AreEqual("a", comboBox1.Text, "#A03");
                 comboBox1.DisplayMember = "displaymember";
                 Assert.AreEqual("lower", comboBox1.Text, "#A03");
@@ -283,11 +253,8 @@ namespace MonoTests.System.Windows.Forms
                 Assert.AreEqual("", comboBox1.Text, "#A03");
                 comboBox1.DataSource = t;
                 Assert.AreEqual("", comboBox1.Text, "#A03");
-                comboBox1.DataBindings.Add(
-                    "SelectedValue",
-                    new InitialBoundValue_dummy(),
-                    "controlsrc"
-                );
+                comboBox1.DataBindings
+                    .Add("SelectedValue", new InitialBoundValue_dummy(), "controlsrc");
                 Assert.AreEqual("", comboBox1.Text, "#A03");
                 f.Controls.AddRange(new Control[] { comboBox1 });
                 Assert.AreEqual("", comboBox1.Text, "#A03");

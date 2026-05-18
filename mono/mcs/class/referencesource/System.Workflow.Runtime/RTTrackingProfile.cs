@@ -428,8 +428,7 @@ namespace System.Workflow.Runtime
                     {
                         //
                         // Remove all references to this activity that might exist in our caches
-                        string qId = ((RemovedActivityAction)action)
-                            .OriginalRemovedActivity
+                        string qId = ((RemovedActivityAction)action).OriginalRemovedActivity
                             .QualifiedName;
                         _activities.Remove(qId);
                         _activitiesIgnore.Remove(qId);
@@ -775,8 +774,7 @@ namespace System.Workflow.Runtime
                     else if (action is RemovedActivityAction)
                     {
                         if (!addedOnly)
-                            qualifiedId = ((RemovedActivityAction)action)
-                                .OriginalRemovedActivity
+                            qualifiedId = ((RemovedActivityAction)action).OriginalRemovedActivity
                                 .QualifiedName;
                     }
                     else

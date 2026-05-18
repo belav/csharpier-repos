@@ -916,9 +916,8 @@ public class Driver
             if (include != "")
             {
                 XmlElement varset = (XmlElement)
-                    root.OwnerDocument.SelectSingleNode(
-                        "fileGeneration/vars[@name='" + include + "']"
-                    );
+                    root.OwnerDocument
+                        .SelectSingleNode("fileGeneration/vars[@name='" + include + "']");
                 if (varset == null)
                     throw new Exception("varset '" + include + "' not found");
                 content = ReplaceVars(content, varset);

@@ -37,10 +37,8 @@ namespace System.DirectoryServices.ActiveDirectory
             );
 
             string sidLocal;
-            global::Interop.BOOL result = global::Interop.Advapi32.ConvertSidToStringSid(
-                domainInfo.sid,
-                out sidLocal
-            );
+            global::Interop.BOOL result = global::Interop.Advapi32
+                .ConvertSidToStringSid(domainInfo.sid, out sidLocal);
             if (result == global::Interop.BOOL.FALSE)
             {
                 throw ExceptionHelper.GetExceptionFromErrorCode(Marshal.GetLastPInvokeError());

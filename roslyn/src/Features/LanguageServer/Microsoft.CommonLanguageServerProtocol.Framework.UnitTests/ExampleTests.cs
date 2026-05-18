@@ -40,7 +40,8 @@ public partial class ExampleTests
         var handlerProvider = server
             .GetTestAccessor()
             .GetQueueAccessor()!
-            .Value.GetHandlerProvider();
+            .Value
+            .GetHandlerProvider();
         var methods = handlerProvider.GetRegisteredMethods();
 
         Assert.Equal(5, methods.Length);

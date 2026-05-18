@@ -210,18 +210,15 @@ namespace System.Reflection.Runtime.FieldInfos
                         }
 
                         _lazyFieldAccessor = fieldAccessor =
-                            ReflectionCoreExecution.ExecutionEnvironment.CreateLiteralFieldAccessor(
-                                defaultValue,
-                                FieldType.TypeHandle
-                            );
+                            ReflectionCoreExecution.ExecutionEnvironment
+                                .CreateLiteralFieldAccessor(defaultValue, FieldType.TypeHandle);
                     }
                     else
                     {
                         _lazyFieldAccessor = fieldAccessor = TryGetFieldAccessor();
                         if (fieldAccessor == null)
-                            throw ReflectionCoreExecution.ExecutionEnvironment.CreateNonInvokabilityException(
-                                this
-                            );
+                            throw ReflectionCoreExecution.ExecutionEnvironment
+                                .CreateNonInvokabilityException(this);
                     }
                 }
                 return fieldAccessor;

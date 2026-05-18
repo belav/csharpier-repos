@@ -864,12 +864,10 @@ namespace System.Xml.Serialization
                 SerializerData sd = batch.Datas[n];
                 lock (sd)
                 {
-                    sd.WriterType = res.CompiledAssembly.GetType(
-                        gres.Namespace + "." + gres.WriterClassName
-                    );
-                    sd.ReaderType = res.CompiledAssembly.GetType(
-                        gres.Namespace + "." + gres.ReaderClassName
-                    );
+                    sd.WriterType = res.CompiledAssembly
+                        .GetType(gres.Namespace + "." + gres.WriterClassName);
+                    sd.ReaderType = res.CompiledAssembly
+                        .GetType(gres.Namespace + "." + gres.ReaderClassName);
                     sd.WriterMethod = sd.WriterType.GetMethod(gres.WriteMethodName);
                     sd.ReaderMethod = sd.ReaderType.GetMethod(gres.ReadMethodName);
                     sd.Batch = null;

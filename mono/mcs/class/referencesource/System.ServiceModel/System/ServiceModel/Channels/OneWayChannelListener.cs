@@ -119,10 +119,11 @@ namespace System.ServiceModel.Channels
                 {
                     // validate that the request message contains our expected header
                     result = context.RequestMessage;
-                    result.Properties.Add(
-                        RequestContextMessageProperty.Name,
-                        new RequestContextMessageProperty(context)
-                    );
+                    result.Properties
+                        .Add(
+                            RequestContextMessageProperty.Name,
+                            new RequestContextMessageProperty(context)
+                        );
 
                     if (this.validateHeader)
                     {
@@ -422,10 +423,12 @@ namespace System.ServiceModel.Channels
                     try
                     {
                         this.message = context.RequestMessage;
-                        this.message.Properties.Add(
-                            RequestContextMessageProperty.Name,
-                            new RequestContextMessageProperty(context)
-                        );
+                        this.message
+                            .Properties
+                            .Add(
+                                RequestContextMessageProperty.Name,
+                                new RequestContextMessageProperty(context)
+                            );
 
                         if (validateHeader)
                         {
@@ -828,11 +831,8 @@ namespace System.ServiceModel.Channels
 
                         try
                         {
-                            result = this.innerChannelListener.BeginAcceptChannel(
-                                TimeSpan.MaxValue,
-                                onAcceptInnerChannel,
-                                this
-                            );
+                            result = this.innerChannelListener
+                                .BeginAcceptChannel(TimeSpan.MaxValue, onAcceptInnerChannel, this);
                         }
                         catch (CommunicationException e)
                         {
@@ -974,11 +974,8 @@ namespace System.ServiceModel.Channels
                 {
                     this.onExceptionDequeued = new Action(OnExceptionDequeued);
                 }
-                this.inputChannelAcceptor.Enqueue(
-                    exceptionToEnqueue,
-                    this.onExceptionDequeued,
-                    canDispatchOnThisThread
-                );
+                this.inputChannelAcceptor
+                    .Enqueue(exceptionToEnqueue, this.onExceptionDequeued, canDispatchOnThisThread);
             }
             else
             {
@@ -1571,10 +1568,8 @@ namespace System.ServiceModel.Channels
                 }
                 else if (exceptionToEnqueue != null)
                 {
-                    dispatchLater = this.acceptor.EnqueueWithoutDispatch(
-                        exceptionToEnqueue,
-                        this.onMessageDequeued
-                    );
+                    dispatchLater = this.acceptor
+                        .EnqueueWithoutDispatch(exceptionToEnqueue, this.onMessageDequeued);
                 }
 
                 return startLoop;

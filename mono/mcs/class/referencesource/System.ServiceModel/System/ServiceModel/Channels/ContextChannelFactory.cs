@@ -30,9 +30,8 @@ namespace System.ServiceModel.Channels
         {
             if (!ContextExchangeMechanismHelper.IsDefined(contextExchangeMechanism))
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentOutOfRangeException("contextExchangeMechanism")
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(new ArgumentOutOfRangeException("contextExchangeMechanism"));
             }
 
             this.contextExchangeMechanism = contextExchangeMechanism;

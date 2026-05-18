@@ -131,8 +131,8 @@ namespace System.ServiceModel.Channels
         {
             ReliableRequestor temp = this.CreateRequestor();
             this.ConfigureRequestor(temp);
-            ReliableMessagingVersion reliableMessagingVersion =
-                this.settings.ReliableMessagingVersion;
+            ReliableMessagingVersion reliableMessagingVersion = this.settings
+                .ReliableMessagingVersion;
             temp.MessageAction = WsrmIndex.GetTerminateSequenceActionHeader(
                 this.settings.MessageVersion.Addressing,
                 reliableMessagingVersion
@@ -276,11 +276,12 @@ namespace System.ServiceModel.Channels
                     || this.State == CommunicationState.Closing
                 )
                 {
-                    this.session.OnLocalFault(
-                        exception,
-                        SequenceTerminatedFault.CreateQuotaExceededFault(this.session.OutputID),
-                        null
-                    );
+                    this.session
+                        .OnLocalFault(
+                            exception,
+                            SequenceTerminatedFault.CreateQuotaExceededFault(this.session.OutputID),
+                            null
+                        );
                 }
             }
             else
@@ -396,16 +397,17 @@ namespace System.ServiceModel.Channels
                     {
                         TD.MaxRetryCyclesExceeded(SR.GetString(SR.MaximumRetryCountExceeded));
                     }
-                    this.session.OnLocalFault(
-                        new CommunicationException(
-                            SR.GetString(SR.MaximumRetryCountExceeded),
-                            this.maxRetryCountException
-                        ),
-                        SequenceTerminatedFault.CreateMaxRetryCountExceededFault(
-                            this.session.OutputID
-                        ),
-                        null
-                    );
+                    this.session
+                        .OnLocalFault(
+                            new CommunicationException(
+                                SR.GetString(SR.MaximumRetryCountExceeded),
+                                this.maxRetryCountException
+                            ),
+                            SequenceTerminatedFault.CreateMaxRetryCountExceededFault(
+                                this.session.OutputID
+                            ),
+                            null
+                        );
                 }
                 else
                 {
@@ -434,14 +436,17 @@ namespace System.ServiceModel.Channels
                 {
                     TD.MaxRetryCyclesExceeded(SR.GetString(SR.MaximumRetryCountExceeded));
                 }
-                this.session.OnLocalFault(
-                    new CommunicationException(
-                        SR.GetString(SR.MaximumRetryCountExceeded),
-                        this.maxRetryCountException
-                    ),
-                    SequenceTerminatedFault.CreateMaxRetryCountExceededFault(this.session.OutputID),
-                    null
-                );
+                this.session
+                    .OnLocalFault(
+                        new CommunicationException(
+                            SR.GetString(SR.MaximumRetryCountExceeded),
+                            this.maxRetryCountException
+                        ),
+                        SequenceTerminatedFault.CreateMaxRetryCountExceededFault(
+                            this.session.OutputID
+                        ),
+                        null
+                    );
                 return new CompletedAsyncResult(callback, state);
             }
             else
@@ -620,9 +625,8 @@ namespace System.ServiceModel.Channels
                 if (fault != null)
                 {
                     this.ReliableSession.OnLocalFault(null, fault, null);
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        fault.CreateException()
-                    );
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperError(fault.CreateException());
                 }
             }
             finally
@@ -669,10 +673,11 @@ namespace System.ServiceModel.Channels
                     if (this.settings.FlowControlEnabled)
                         bufferRemaining = messageInfo.AcknowledgementInfo.BufferRemaining;
 
-                    this.connection.ProcessTransferred(
-                        messageInfo.AcknowledgementInfo.Ranges,
-                        bufferRemaining
-                    );
+                    this.connection
+                        .ProcessTransferred(
+                            messageInfo.AcknowledgementInfo.Ranges,
+                            bufferRemaining
+                        );
                 }
 
                 if (wsrm11)
@@ -764,11 +769,12 @@ namespace System.ServiceModel.Channels
                                 response.Close();
                             }
 
-                            this.session.OnRemoteFault(
-                                new ProtocolException(
-                                    SR.GetString(SR.UnsupportedTerminateSequenceExceptionString)
-                                )
-                            );
+                            this.session
+                                .OnRemoteFault(
+                                    new ProtocolException(
+                                        SR.GetString(SR.UnsupportedTerminateSequenceExceptionString)
+                                    )
+                                );
                             return;
                         }
                     }
@@ -844,8 +850,8 @@ namespace System.ServiceModel.Channels
 
         void TerminateSequence(TimeSpan timeout)
         {
-            ReliableMessagingVersion reliableMessagingVersion =
-                this.settings.ReliableMessagingVersion;
+            ReliableMessagingVersion reliableMessagingVersion = this.settings
+                .ReliableMessagingVersion;
 
             if (
                 reliableMessagingVersion == ReliableMessagingVersion.WSReliableMessagingFebruary2005
@@ -877,8 +883,8 @@ namespace System.ServiceModel.Channels
 
         IAsyncResult BeginTerminateSequence(TimeSpan timeout, AsyncCallback callback, object state)
         {
-            ReliableMessagingVersion reliableMessagingVersion =
-                this.settings.ReliableMessagingVersion;
+            ReliableMessagingVersion reliableMessagingVersion = this.settings
+                .ReliableMessagingVersion;
             if (
                 reliableMessagingVersion == ReliableMessagingVersion.WSReliableMessagingFebruary2005
             )
@@ -925,13 +931,11 @@ namespace System.ServiceModel.Channels
         void ThrowInvalidAddException()
         {
             if (this.State == CommunicationState.Faulted)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    this.GetTerminalException()
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(this.GetTerminalException());
             else
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    this.CreateClosedException()
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(this.CreateClosedException());
         }
 
         void UnblockClose()

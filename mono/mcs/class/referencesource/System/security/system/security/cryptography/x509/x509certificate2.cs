@@ -1806,8 +1806,7 @@ namespace System.Security.Cryptography.X509Certificates
             if (asymmetricAlgorithm != null)
             {
                 CAPI.CRYPT_KEY_PROV_INFO keyProvInfo = new CAPI.CRYPT_KEY_PROV_INFO();
-                keyProvInfo.pwszContainerName = asymmetricAlgorithm
-                    .CspKeyContainerInfo
+                keyProvInfo.pwszContainerName = asymmetricAlgorithm.CspKeyContainerInfo
                     .KeyContainerName;
                 keyProvInfo.pwszProvName = asymmetricAlgorithm.CspKeyContainerInfo.ProviderName;
                 keyProvInfo.dwProvType = (uint)asymmetricAlgorithm.CspKeyContainerInfo.ProviderType;

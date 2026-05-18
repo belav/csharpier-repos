@@ -162,12 +162,13 @@ namespace MonoTests.System.ServiceModel.Discovery
             {
                 Assert.IsTrue(ib.DispatchBehaviorApplied, "#1");
                 var b = new ServiceDiscoveryBehavior();
-                b.AnnouncementEndpoints.Add(
-                    new AnnouncementEndpoint(
-                        new CustomBinding(new HttpTransportBindingElement()),
-                        new EndpointAddress("http://localhost:4989")
-                    )
-                );
+                b.AnnouncementEndpoints
+                    .Add(
+                        new AnnouncementEndpoint(
+                            new CustomBinding(new HttpTransportBindingElement()),
+                            new EndpointAddress("http://localhost:4989")
+                        )
+                    );
                 IServiceBehavior sb = b;
                 var host = new ServiceHost(typeof(TestService));
                 var se = host.AddServiceEndpoint(

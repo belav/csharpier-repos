@@ -917,7 +917,9 @@ namespace System.Web.UI.WebControls
         )
         {
             foreach (
-                AssociationSet associationSet in entitySet.EntityContainer.BaseEntitySets.OfType<AssociationSet>()
+                AssociationSet associationSet in entitySet.EntityContainer
+                    .BaseEntitySets
+                    .OfType<AssociationSet>()
             )
             {
                 Debug.Assert(
@@ -978,8 +980,8 @@ namespace System.Web.UI.WebControls
             EntityType entityType = GetEntityType(GetOppositeEnd(end));
 
             // if there is a corresponding navigation property, use its name as the prefix
-            navigationProperty = entityType
-                .NavigationProperties.Where(np => np.ToEndMember == end)
+            navigationProperty = entityType.NavigationProperties
+                .Where(np => np.ToEndMember == end)
                 .SingleOrDefault(); // metadata is supposed to ensure this is non-ambiguous
             return null != navigationProperty;
         }
@@ -1011,11 +1013,9 @@ namespace System.Web.UI.WebControls
                 && (IsStrictSubtypeOf(entityType, fromType) || entityType == fromType)
             )
             {
-                RelationshipMultiplicity fromMult = fromEnd
-                    .CorrespondingAssociationEndMember
+                RelationshipMultiplicity fromMult = fromEnd.CorrespondingAssociationEndMember
                     .RelationshipMultiplicity;
-                RelationshipMultiplicity toMult = toEnd
-                    .CorrespondingAssociationEndMember
+                RelationshipMultiplicity toMult = toEnd.CorrespondingAssociationEndMember
                     .RelationshipMultiplicity;
 
                 // If forKey is false (we are testing to see if this is a far end for a reference, not a key)
@@ -1348,8 +1348,9 @@ namespace System.Web.UI.WebControls
         )
         {
             foreach (
-                var keyProperty in entityWrapper
-                    .Collection.AllPropertyDescriptors.Select(d => d.Column)
+                var keyProperty in entityWrapper.Collection
+                    .AllPropertyDescriptors
+                    .Select(d => d.Column)
                     .OfType<EntityDataSourcePropertyColumn>()
                     .Where(c => c.IsKey)
             )

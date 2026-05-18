@@ -299,9 +299,10 @@ namespace System.ServiceModel.Dispatcher
                     this.compiler.nestingLevel++;
                     if (this.compiler.nestingLevel > 3) // throw if we find something deepter than [ [ ] ]
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new QueryCompileException(QueryCompileError.PredicateNestingTooDeep)
-                        );
+                        throw DiagnosticUtility.ExceptionUtility
+                            .ThrowHelperError(
+                                new QueryCompileException(QueryCompileError.PredicateNestingTooDeep)
+                            );
                     }
                     for (int i = 1; i < expr.SubExprCount; ++i)
                     {
@@ -368,9 +369,12 @@ namespace System.ServiceModel.Dispatcher
                     {
                         if (function.ParamTypes[index] == ValueDataType.Sequence)
                         {
-                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                                new QueryCompileException(QueryCompileError.InvalidTypeConversion)
-                            );
+                            throw DiagnosticUtility.ExceptionUtility
+                                .ThrowHelperError(
+                                    new QueryCompileException(
+                                        QueryCompileError.InvalidTypeConversion
+                                    )
+                                );
                         }
 
                         this.CompileTypecast(function.ParamTypes[index]);
@@ -392,9 +396,12 @@ namespace System.ServiceModel.Dispatcher
                         if (XPathExprType.String == expr.SubExpr[1].Type)
                         {
                             this.CompileFunctionParam(function, expr.SubExpr, 0);
-                            this.codeBlock.Append(
-                                new StringPrefixOpcode(((XPathStringExpr)expr.SubExpr[1]).String)
-                            );
+                            this.codeBlock
+                                .Append(
+                                    new StringPrefixOpcode(
+                                        ((XPathStringExpr)expr.SubExpr[1]).String
+                                    )
+                                );
                             return true;
                         }
                     }
@@ -459,9 +466,8 @@ namespace System.ServiceModel.Dispatcher
 
                 if (1 == this.compiler.nestingLevel)
                 {
-                    this.compiler.SetPushInitialContext(
-                        firstStep.SelectDesc.Type != QueryNodeType.Root
-                    );
+                    this.compiler
+                        .SetPushInitialContext(firstStep.SelectDesc.Type != QueryNodeType.Root);
                 }
             }
 
@@ -641,9 +647,10 @@ namespace System.ServiceModel.Dispatcher
 
                     if (!step.SelectDesc.Axis.IsSupported())
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new QueryCompileException(QueryCompileError.UnsupportedAxis)
-                        );
+                        throw DiagnosticUtility.ExceptionUtility
+                            .ThrowHelperError(
+                                new QueryCompileException(QueryCompileError.UnsupportedAxis)
+                            );
                     }
 
                     this.codeBlock.Append(new SelectOpcode(step.SelectDesc));
@@ -654,9 +661,12 @@ namespace System.ServiceModel.Dispatcher
                         this.compiler.nestingLevel++;
                         if (this.compiler.nestingLevel > 3) // throw if we find something deepter than [ [ ] ]
                         {
-                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                                new QueryCompileException(QueryCompileError.PredicateNestingTooDeep)
-                            );
+                            throw DiagnosticUtility.ExceptionUtility
+                                .ThrowHelperError(
+                                    new QueryCompileException(
+                                        QueryCompileError.PredicateNestingTooDeep
+                                    )
+                                );
                         }
                         this.CompilePredicates(step.SubExpr);
                         this.compiler.nestingLevel--;
@@ -781,9 +791,10 @@ namespace System.ServiceModel.Dispatcher
                     XPathStepExpr step = (XPathStepExpr)steps[i];
                     if (!step.SelectDesc.Axis.IsSupported())
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new QueryCompileException(QueryCompileError.UnsupportedAxis)
-                        );
+                        throw DiagnosticUtility.ExceptionUtility
+                            .ThrowHelperError(
+                                new QueryCompileException(QueryCompileError.UnsupportedAxis)
+                            );
                     }
                     Opcode stepOpcode = null;
                     if (start && 0 == i)
@@ -811,9 +822,12 @@ namespace System.ServiceModel.Dispatcher
                         this.compiler.nestingLevel++;
                         if (this.compiler.nestingLevel > 3) // throw if we find something deepter than [ [ ] ]
                         {
-                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                                new QueryCompileException(QueryCompileError.PredicateNestingTooDeep)
-                            );
+                            throw DiagnosticUtility.ExceptionUtility
+                                .ThrowHelperError(
+                                    new QueryCompileException(
+                                        QueryCompileError.PredicateNestingTooDeep
+                                    )
+                                );
                         }
                         this.CompilePredicates(step.SubExpr);
                         this.compiler.nestingLevel--;
@@ -853,12 +867,13 @@ namespace System.ServiceModel.Dispatcher
 
                 if (expr.Function is XPathMessageFunction)
                 {
-                    this.codeBlock.Append(
-                        new XPathMessageFunctionCallOpcode(
-                            (XPathMessageFunction)expr.Function,
-                            expr.SubExprCount
-                        )
-                    );
+                    this.codeBlock
+                        .Append(
+                            new XPathMessageFunctionCallOpcode(
+                                (XPathMessageFunction)expr.Function,
+                                expr.SubExprCount
+                            )
+                        );
                     if (IsSpecialInternalFunction(expr))
                     {
                         this.codeBlock.Append(new PopSequenceToValueStackOpcode());
@@ -866,9 +881,14 @@ namespace System.ServiceModel.Dispatcher
                 }
                 else
                 {
-                    this.codeBlock.Append(
-                        new XsltFunctionCallOpcode(expr.Context, expr.Function, expr.SubExprCount)
-                    );
+                    this.codeBlock
+                        .Append(
+                            new XsltFunctionCallOpcode(
+                                expr.Context,
+                                expr.Function,
+                                expr.SubExprCount
+                            )
+                        );
                 }
             }
 
@@ -879,9 +899,10 @@ namespace System.ServiceModel.Dispatcher
                 // It is here in case we decide to
                 if (expr.Variable is XPathMessageVariable)
                 {
-                    this.codeBlock.Append(
-                        new PushXPathMessageVariableOpcode((XPathMessageVariable)expr.Variable)
-                    );
+                    this.codeBlock
+                        .Append(
+                            new PushXPathMessageVariableOpcode((XPathMessageVariable)expr.Variable)
+                        );
                 }
                 else
                 {
@@ -945,9 +966,8 @@ namespace System.ServiceModel.Dispatcher
 
             void ThrowError(QueryCompileError error)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new QueryCompileException(error)
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(new QueryCompileException(error));
             }
         }
     }

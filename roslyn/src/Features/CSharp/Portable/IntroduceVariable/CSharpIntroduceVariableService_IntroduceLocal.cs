@@ -66,8 +66,8 @@ namespace Microsoft.CodeAnalysis.CSharp.IntroduceVariable
             // If we're inserting into a multi-line parent, then add a newline after the local-var
             // we're adding.  That way we don't end up having it and the starting statement be on
             // the same line (which will cause indentation to be computed incorrectly).
-            var text = await document
-                .Document.GetValueTextAsync(cancellationToken)
+            var text = await document.Document
+                .GetValueTextAsync(cancellationToken)
                 .ConfigureAwait(false);
             if (
                 !text.AreOnSameLine(
@@ -99,10 +99,9 @@ namespace Microsoft.CodeAnalysis.CSharp.IntroduceVariable
                     // this will be null for expression-bodied properties & indexer (not for individual getters & setters, those do have a symbol),
                     // both of which are a shorthand for the getter and always return a value
                     var method =
-                        document.SemanticModel.GetDeclaredSymbol(
-                            arrowExpression.Parent,
-                            cancellationToken
-                        ) as IMethodSymbol;
+                        document.SemanticModel
+                            .GetDeclaredSymbol(arrowExpression.Parent, cancellationToken)
+                        as IMethodSymbol;
                     var createReturnStatement = true;
 
                     if (method is not null)
@@ -174,9 +173,8 @@ namespace Microsoft.CodeAnalysis.CSharp.IntroduceVariable
             // Add an elastic newline so that the formatter will place this new lambda body across multiple lines.
             newBody = newBody
                 .WithOpenBraceToken(
-                    newBody.OpenBraceToken.WithAppendedTrailingTrivia(
-                        SyntaxFactory.ElasticCarriageReturnLineFeed
-                    )
+                    newBody.OpenBraceToken
+                        .WithAppendedTrailingTrivia(SyntaxFactory.ElasticCarriageReturnLineFeed)
                 )
                 .WithAdditionalAnnotations(Formatter.Annotation);
 
@@ -346,16 +344,13 @@ namespace Microsoft.CodeAnalysis.CSharp.IntroduceVariable
             // Add an elastic newline so that the formatter will place this new block across multiple lines.
             newBody = newBody
                 .WithOpenBraceToken(
-                    newBody.OpenBraceToken.WithAppendedTrailingTrivia(
-                        SyntaxFactory.ElasticCarriageReturnLineFeed
-                    )
+                    newBody.OpenBraceToken
+                        .WithAppendedTrailingTrivia(SyntaxFactory.ElasticCarriageReturnLineFeed)
                 )
                 .WithAdditionalAnnotations(Formatter.Annotation);
 
-            var newRoot = document.Root.ReplaceNode(
-                oldParentingNode,
-                WithBlockBody(oldParentingNode, newBody)
-            );
+            var newRoot = document.Root
+                .ReplaceNode(oldParentingNode, WithBlockBody(oldParentingNode, newBody));
             return document.Document.WithSyntaxRoot(newRoot);
         }
 
@@ -572,9 +567,8 @@ namespace Microsoft.CodeAnalysis.CSharp.IntroduceVariable
                 .Where(node =>
                     node is InvocationExpressionSyntax invocationExpression
                     && invocationExpression.Expression.GetRightmostName() != null
-                    && !invocationExpression.Expression.IsKind(
-                        SyntaxKind.SimpleMemberAccessExpression
-                    )
+                    && !invocationExpression.Expression
+                        .IsKind(SyntaxKind.SimpleMemberAccessExpression)
                     && localFunctionIdentifiers.Contains(
                         invocationExpression.Expression.GetRightmostName().Identifier.ValueText
                     )

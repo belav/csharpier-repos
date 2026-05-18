@@ -107,9 +107,8 @@ public class QueryableMethodNormalizingExpressionVisitor : ExpressionVisitor
         {
             return VisitMethodCall(
                 Expression.Call(
-                    EnumerableMethods.ElementAt.MakeGenericMethod(
-                        indexerSource.Type.GetSequenceType()
-                    ),
+                    EnumerableMethods.ElementAt
+                        .MakeGenericMethod(indexerSource.Type.GetSequenceType()),
                     indexerSource,
                     index
                 )
@@ -173,8 +172,8 @@ public class QueryableMethodNormalizingExpressionVisitor : ExpressionVisitor
                 )
                 {
                     genericArguments[^1] = body.Type;
-                    var newIncludeMethod = methodCallExpression
-                        .Method.GetGenericMethodDefinition()
+                    var newIncludeMethod = methodCallExpression.Method
+                        .GetGenericMethodDefinition()
                         .MakeGenericMethod(genericArguments);
 
                     return Expression.Call(newIncludeMethod, source, lambda);
@@ -448,9 +447,8 @@ public class QueryableMethodNormalizingExpressionVisitor : ExpressionVisitor
                         innerArgument = toListMethodCallExpression.Arguments[0];
                     }
 
-                    var innerQueryableElementType = innerArgument.Type.TryGetElementType(
-                        typeof(IQueryable<>)
-                    );
+                    var innerQueryableElementType = innerArgument.Type
+                        .TryGetElementType(typeof(IQueryable<>));
                     if (
                         innerQueryableElementType == null
                         || innerQueryableElementType != genericType
@@ -809,9 +807,8 @@ public class QueryableMethodNormalizingExpressionVisitor : ExpressionVisitor
                 {
                     // In case of collection navigation it can be of enumerable or other type.
                     innerSource = Expression.Call(
-                        QueryableMethods.AsQueryable.MakeGenericMethod(
-                            innerSource.Type.GetSequenceType()
-                        ),
+                        QueryableMethods.AsQueryable
+                            .MakeGenericMethod(innerSource.Type.GetSequenceType()),
                         innerSource
                     );
                 }
@@ -852,18 +849,15 @@ public class QueryableMethodNormalizingExpressionVisitor : ExpressionVisitor
                 )
                 {
                     selector = Expression.Call(
-                        EnumerableMethods.AsEnumerable.MakeGenericMethod(
-                            genericArguments[3].GetSequenceType()
-                        ),
+                        EnumerableMethods.AsEnumerable
+                            .MakeGenericMethod(genericArguments[3].GetSequenceType()),
                         selector
                     );
                 }
 
                 return Expression.Call(
-                    QueryableMethods.Select.MakeGenericMethod(
-                        genericArguments[0],
-                        genericArguments[3]
-                    ),
+                    QueryableMethods.Select
+                        .MakeGenericMethod(genericArguments[0], genericArguments[3]),
                     outerSource,
                     Expression.Quote(Expression.Lambda(selector, resultSelector.Parameters[0]))
                 );
@@ -987,10 +981,11 @@ public class QueryableMethodNormalizingExpressionVisitor : ExpressionVisitor
         {
             if (
                 _allowedParameters.Contains(parameterExpression)
-                || parameterExpression.Name?.StartsWith(
-                    QueryCompilationContext.QueryParameterPrefix,
-                    StringComparison.Ordinal
-                ) == true
+                || parameterExpression.Name
+                    ?.StartsWith(
+                        QueryCompilationContext.QueryParameterPrefix,
+                        StringComparison.Ordinal
+                    ) == true
             )
             {
                 return parameterExpression;

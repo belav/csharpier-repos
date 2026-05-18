@@ -197,14 +197,15 @@ namespace System.Data.Services.Client
             Debug.Assert(names != null, "names != null");
             Debug.Assert(rewriteExpression != null, "rewriteExpression != null");
 
-            this.rewrites.Add(
-                new MemberInitRewrite()
-                {
-                    Root = root,
-                    MemberNames = names,
-                    RewriteExpression = rewriteExpression,
-                }
-            );
+            this.rewrites
+                .Add(
+                    new MemberInitRewrite()
+                    {
+                        Root = root,
+                        MemberNames = names,
+                        RewriteExpression = rewriteExpression,
+                    }
+                );
             this.parameterEntries.Push(rewriteExpression);
         }
 

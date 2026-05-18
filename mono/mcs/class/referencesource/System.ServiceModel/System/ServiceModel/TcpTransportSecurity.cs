@@ -39,9 +39,8 @@ namespace System.ServiceModel
             {
                 if (!TcpClientCredentialTypeHelper.IsDefined(value))
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ArgumentOutOfRangeException("value")
-                    );
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperError(new ArgumentOutOfRangeException("value"));
                 }
                 this.clientCredentialType = value;
             }
@@ -55,9 +54,8 @@ namespace System.ServiceModel
             {
                 if (!ProtectionLevelHelper.IsDefined(value))
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ArgumentOutOfRangeException("value")
-                    );
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperError(new ArgumentOutOfRangeException("value"));
                 }
                 this.protectionLevel = value;
             }
@@ -75,19 +73,19 @@ namespace System.ServiceModel
 
                 if (
                     value.PolicyEnforcement == PolicyEnforcement.Always
-                    && !System
-                        .Security
+                    && !System.Security
                         .Authentication
                         .ExtendedProtection
                         .ExtendedProtectionPolicy
                         .OSSupportsExtendedProtection
                 )
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new PlatformNotSupportedException(
-                            SR.GetString(SR.ExtendedProtectionNotSupported)
-                        )
-                    );
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperError(
+                            new PlatformNotSupportedException(
+                                SR.GetString(SR.ExtendedProtectionNotSupported)
+                            )
+                        );
                 }
                 this.extendedProtectionPolicy = value;
             }
@@ -108,11 +106,12 @@ namespace System.ServiceModel
         {
             if (this.protectionLevel != ProtectionLevel.EncryptAndSign)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(
-                        SR.GetString(SR.UnsupportedSslProtectionLevel, this.protectionLevel)
-                    )
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(SR.UnsupportedSslProtectionLevel, this.protectionLevel)
+                        )
+                    );
             }
 
             SslStreamSecurityBindingElement result = new SslStreamSecurityBindingElement();

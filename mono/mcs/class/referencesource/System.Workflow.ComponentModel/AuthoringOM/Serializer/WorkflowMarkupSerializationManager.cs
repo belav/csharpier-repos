@@ -92,9 +92,8 @@ namespace System.Workflow.ComponentModel.Serialization
             set
             {
                 this.serializationManager = value;
-                this.serializationManager.AddSerializationProvider(
-                    new WellKnownTypeSerializationProvider()
-                );
+                this.serializationManager
+                    .AddSerializationProvider(new WellKnownTypeSerializationProvider());
             }
         }
 
@@ -156,10 +155,8 @@ namespace System.Workflow.ComponentModel.Serialization
             //Make sure that while writting the workflow namespaces will always be the default
             prefix =
                 (
-                    mappingForType.Prefix.Equals(
-                        StandardXomlKeys.WorkflowPrefix,
-                        StringComparison.Ordinal
-                    )
+                    mappingForType.Prefix
+                        .Equals(StandardXomlKeys.WorkflowPrefix, StringComparison.Ordinal)
                 )
                     ? String.Empty
                     : mappingForType.Prefix;
@@ -257,10 +254,8 @@ namespace System.Workflow.ComponentModel.Serialization
                             resolvedType = GetType(fullTypeName);
                             if (
                                 resolvedType != null
-                                && !resolvedType.AssemblyQualifiedName.Equals(
-                                    assemblyQualifiedName,
-                                    StringComparison.Ordinal
-                                )
+                                && !resolvedType.AssemblyQualifiedName
+                                    .Equals(assemblyQualifiedName, StringComparison.Ordinal)
                             )
                                 resolvedType = null;
                         }
@@ -404,10 +399,8 @@ namespace System.Workflow.ComponentModel.Serialization
 
                 List<WorkflowMarkupSerializerMapping> xmlnsMappings = null;
                 if (
-                    !this.xmlNamespaceBasedMappings.TryGetValue(
-                        mapping.XmlNamespace,
-                        out xmlnsMappings
-                    )
+                    !this.xmlNamespaceBasedMappings
+                        .TryGetValue(mapping.XmlNamespace, out xmlnsMappings)
                 )
                 {
                     xmlnsMappings = new List<WorkflowMarkupSerializerMapping>();

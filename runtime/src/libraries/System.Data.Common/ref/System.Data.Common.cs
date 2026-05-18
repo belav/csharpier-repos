@@ -213,8 +213,7 @@ namespace System.Data
     )]
     [System.ComponentModel.ToolboxItemAttribute(false)]
     [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(
-        System
-            .Diagnostics
+        System.Diagnostics
             .CodeAnalysis
             .DynamicallyAccessedMemberTypes
             .PublicParameterlessConstructor
@@ -1643,8 +1642,7 @@ namespace System.Data
     [System.Xml.Serialization.XmlRootAttribute("DataSet")]
     [System.Xml.Serialization.XmlSchemaProviderAttribute("GetDataSetSchema")]
     [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(
-        System
-            .Diagnostics
+        System.Diagnostics
             .CodeAnalysis
             .DynamicallyAccessedMemberTypes
             .PublicParameterlessConstructor
@@ -2289,8 +2287,7 @@ namespace System.Data
     [System.ComponentModel.ToolboxItemAttribute(false)]
     [System.Xml.Serialization.XmlSchemaProviderAttribute("GetDataTableSchema")]
     [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(
-        System
-            .Diagnostics
+        System.Diagnostics
             .CodeAnalysis
             .DynamicallyAccessedMemberTypes
             .PublicParameterlessConstructor
@@ -5300,8 +5297,7 @@ namespace System.Data.Common
     }
 
     [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(
-        System
-            .Diagnostics
+        System.Diagnostics
             .CodeAnalysis
             .DynamicallyAccessedMemberTypes
             .PublicParameterlessConstructor

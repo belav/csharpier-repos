@@ -425,11 +425,8 @@ namespace Commons.Xml.Relaxng.Inference
             {
                 try
                 {
-                    st.Datatype.ParseValue(
-                        value,
-                        source.NameTable,
-                        source as IXmlNamespaceResolver
-                    );
+                    st.Datatype
+                        .ParseValue(value, source.NameTable, source as IXmlNamespaceResolver);
                     return typeName;
                 }
                 catch

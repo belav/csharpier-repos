@@ -287,10 +287,11 @@ namespace Microsoft.CodeAnalysis.CSharp
                     ((InvocationExpressionSyntax)nameofOperator.Syntax).Expression;
                 if (this._compilation.TryGetInterceptor(nameofIdentiferSyntax.Location) is not null)
                 {
-                    this._diagnostics.Add(
-                        ErrorCode.ERR_InterceptorCannotInterceptNameof,
-                        nameofIdentiferSyntax.Location
-                    );
+                    this._diagnostics
+                        .Add(
+                            ErrorCode.ERR_InterceptorCannotInterceptNameof,
+                            nameofIdentiferSyntax.Location
+                        );
                 }
             }
 
@@ -323,11 +324,12 @@ namespace Microsoft.CodeAnalysis.CSharp
                     || visited.HasErrors
                     || ReferenceEquals(visited.Type, node.Type)
                     || visited.Type is { }
-                        && visited.Type.Equals(
-                            node.Type,
-                            TypeCompareKind.IgnoreDynamicAndTupleNames
-                                | TypeCompareKind.IgnoreNullableModifiersForReferenceTypes
-                        )
+                        && visited.Type
+                            .Equals(
+                                node.Type,
+                                TypeCompareKind.IgnoreDynamicAndTupleNames
+                                    | TypeCompareKind.IgnoreNullableModifiersForReferenceTypes
+                            )
                     || IsUnusedDeconstruction(node)
             );
 
@@ -449,9 +451,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                             static t => t.ContainsNativeIntegerWrapperType()
                         )
                         || typeParameters.Any(static t =>
-                            t.ConstraintTypesNoUseSiteDiagnostics.Any(static t =>
-                                t.ContainsNativeIntegerWrapperType()
-                            )
+                            t.ConstraintTypesNoUseSiteDiagnostics
+                                .Any(static t => t.ContainsNativeIntegerWrapperType())
                         )
                     )
                     {
@@ -460,9 +461,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                 }
 
                 if (
-                    _factory.CompilationState.Compilation.ShouldEmitNullableAttributes(
-                        localFunction
-                    )
+                    _factory.CompilationState
+                        .Compilation
+                        .ShouldEmitNullableAttributes(localFunction)
                 )
                 {
                     bool constraintsNeedNullableAttribute = typeParameters.Any(

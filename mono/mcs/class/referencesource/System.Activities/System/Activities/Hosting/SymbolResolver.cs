@@ -81,10 +81,15 @@ namespace System.Activities.Hosting
             }
 
             // We don't need to check key for null since we want the exception to bubble up from the inner dictionary
-            this.symbols.Add(
-                key,
-                new ExternalLocationReference(key, type, TypeHelper.GetDefaultValueForType(type))
-            );
+            this.symbols
+                .Add(
+                    key,
+                    new ExternalLocationReference(
+                        key,
+                        type,
+                        TypeHelper.GetDefaultValueForType(type)
+                    )
+                );
         }
 
         public void Add(string key, object value, Type type)
@@ -152,11 +157,8 @@ namespace System.Activities.Hosting
 
             if (arrayIndex < 0)
             {
-                throw FxTrace.Exception.ArgumentOutOfRange(
-                    "arrayIndex",
-                    arrayIndex,
-                    SR.CopyToIndexOutOfRange
-                );
+                throw FxTrace.Exception
+                    .ArgumentOutOfRange("arrayIndex", arrayIndex, SR.CopyToIndexOutOfRange);
             }
 
             if (array.Rank > 1)
@@ -286,9 +288,10 @@ namespace System.Activities.Hosting
                 }
             }
 
-            throw FxTrace.Exception.AsError(
-                new InvalidOperationException(SR.SymbolResolverDoesNotHaveSymbol(name, type))
-            );
+            throw FxTrace.Exception
+                .AsError(
+                    new InvalidOperationException(SR.SymbolResolverDoesNotHaveSymbol(name, type))
+                );
         }
 
         public LocationReferenceEnvironment AsLocationReferenceEnvironment()
@@ -380,11 +383,12 @@ namespace System.Activities.Hosting
 
                 if (resolver == null)
                 {
-                    throw FxTrace.Exception.AsError(
-                        new InvalidOperationException(
-                            SR.CanNotFindSymbolResolverInWorkflowInstanceExtensions
-                        )
-                    );
+                    throw FxTrace.Exception
+                        .AsError(
+                            new InvalidOperationException(
+                                SR.CanNotFindSymbolResolverInWorkflowInstanceExtensions
+                            )
+                        );
                 }
 
                 return resolver.GetLocation(this.Name, this.Type);
@@ -411,9 +415,8 @@ namespace System.Activities.Hosting
                     get { return this.value; }
                     set
                     {
-                        throw FxTrace.Exception.AsError(
-                            new InvalidOperationException(SR.ExternalLocationsGetOnly)
-                        );
+                        throw FxTrace.Exception
+                            .AsError(new InvalidOperationException(SR.ExternalLocationsGetOnly));
                     }
                 }
             }

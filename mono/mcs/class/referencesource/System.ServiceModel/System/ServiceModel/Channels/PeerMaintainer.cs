@@ -116,10 +116,8 @@ namespace System.ServiceModel.Channels
             {
                 if (Fx.IsFatal(e))
                     throw;
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperCallback(
-                    SR.GetString(SR.ResolverException),
-                    e
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperCallback(SR.GetString(SR.ResolverException), e);
             }
             if (referrals != null && canShareReferrals)
             {
@@ -554,10 +552,8 @@ namespace System.ServiceModel.Channels
             {
                 if (Fx.IsFatal(e))
                     throw;
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperCallback(
-                    SR.GetString(SR.ResolverException),
-                    e
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperCallback(SR.GetString(SR.ResolverException), e);
             }
 
             if (canShareReferrals)
@@ -677,11 +673,12 @@ namespace System.ServiceModel.Channels
                 ReadOnlyCollection<PeerNodeAddress> addresses;
                 try
                 {
-                    addresses = config.Resolver.Resolve(
-                        config.MeshId,
-                        config.MaxResolveAddresses,
-                        timeoutHelper.RemainingTime()
-                    );
+                    addresses = config.Resolver
+                        .Resolve(
+                            config.MeshId,
+                            config.MaxResolveAddresses,
+                            timeoutHelper.RemainingTime()
+                        );
                 }
                 catch (Exception e)
                 {
@@ -702,9 +699,10 @@ namespace System.ServiceModel.Channels
                         );
                     }
 
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new CommunicationException(SR.GetString(SR.ResolverException), e)
-                    );
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperError(
+                            new CommunicationException(SR.GetString(SR.ResolverException), e)
+                        );
                 }
 
                 if (addresses != null)

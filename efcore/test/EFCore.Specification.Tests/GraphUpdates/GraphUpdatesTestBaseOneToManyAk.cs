@@ -1271,7 +1271,8 @@ public abstract partial class GraphUpdatesTestBase<TFixture>
             context =>
             {
                 var removed = LoadOptionalAkGraph(context)
-                    .OptionalChildrenAk.OrderBy(c => c.Id)
+                    .OptionalChildrenAk
+                    .OrderBy(c => c.Id)
                     .First();
 
                 removedId = removed.Id;

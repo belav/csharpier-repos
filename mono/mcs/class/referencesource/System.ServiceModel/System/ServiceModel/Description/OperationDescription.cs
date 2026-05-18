@@ -14,8 +14,7 @@ namespace System.ServiceModel.Description
     [DebuggerDisplay("Name={name}, IsInitiating={isInitiating}, IsTerminating={isTerminating}")]
     public class OperationDescription
     {
-        internal const string SessionOpenedAction = Channels
-            .WebSocketTransportSettings
+        internal const string SessionOpenedAction = Channels.WebSocketTransportSettings
             .ConnectionOpenedAction;
         XmlName name;
         bool isInitiating;
@@ -43,12 +42,13 @@ namespace System.ServiceModel.Description
             }
             if (name.Length == 0)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentOutOfRangeException(
-                        "name",
-                        SR.GetString(SR.SFxOperationDescriptionNameCannotBeEmpty)
-                    )
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        new ArgumentOutOfRangeException(
+                            "name",
+                            SR.GetString(SR.SFxOperationDescriptionNameCannotBeEmpty)
+                        )
+                    );
             }
             this.name = new XmlName(
                 name,
@@ -56,9 +56,8 @@ namespace System.ServiceModel.Description
             );
             if (declaringContract == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                    "declaringContract"
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperArgumentNull("declaringContract");
             }
             this.declaringContract = declaringContract;
             this.isInitiating = true;
@@ -135,9 +134,8 @@ namespace System.ServiceModel.Description
             set
             {
                 if (!ProtectionLevelHelper.IsDefined(value))
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ArgumentOutOfRangeException("value")
-                    );
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperError(new ArgumentOutOfRangeException("value"));
                 this.protectionLevel = value;
                 this.hasProtectionLevel = true;
             }
@@ -174,9 +172,8 @@ namespace System.ServiceModel.Description
             {
                 if (value == null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                        "DeclaringContract"
-                    );
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperArgumentNull("DeclaringContract");
                 }
                 else
                 {
@@ -275,11 +272,12 @@ namespace System.ServiceModel.Description
         {
             if (this.Messages.Count != 1 && this.Messages.Count != 2)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new System.InvalidOperationException(
-                        SR.GetString(SR.SFxOperationMustHaveOneOrTwoMessages, this.Name)
-                    )
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        new System.InvalidOperationException(
+                            SR.GetString(SR.SFxOperationMustHaveOneOrTwoMessages, this.Name)
+                        )
+                    );
             }
         }
 

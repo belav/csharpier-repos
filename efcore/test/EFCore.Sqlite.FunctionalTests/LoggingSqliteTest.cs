@@ -59,7 +59,7 @@ public class LoggingSqliteTest
     protected override string ProviderName => "Microsoft.EntityFrameworkCore.Sqlite";
 
     protected override string ProviderVersion =>
-        typeof(SqliteOptionsExtension)
-            .Assembly.GetCustomAttribute<AssemblyInformationalVersionAttribute>()
+        typeof(SqliteOptionsExtension).Assembly
+            .GetCustomAttribute<AssemblyInformationalVersionAttribute>()
             ?.InformationalVersion;
 }

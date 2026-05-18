@@ -67,19 +67,15 @@ class Program
         Assert.NotEmpty(result.Completions.ItemsList);
         Assert.Equal("alpha", result.Completions.ItemsList[0].DisplayText);
 
-        var description = await result.Service.GetDescriptionAsync(
-            result.Document,
-            result.Completions.ItemsList[0]
-        );
+        var description = await result.Service
+            .GetDescriptionAsync(result.Document, result.Completions.ItemsList[0]);
         Assert.Equal(
             "Matches a string that contains only lowercase or uppercase letters A through Z in the English alphabet.",
             description.Text
         );
 
-        var change = await result.Service.GetChangeAsync(
-            result.Document,
-            result.Completions.ItemsList[0]
-        );
+        var change = await result.Service
+            .GetChangeAsync(result.Document, result.Completions.ItemsList[0]);
         Assert.Equal("alpha", change.TextChange.NewText);
     }
 
@@ -138,10 +134,8 @@ class Program
         Assert.NotEmpty(result.Completions.ItemsList);
         Assert.Equal("alpha", result.Completions.ItemsList[0].DisplayText);
 
-        var change = await result.Service.GetChangeAsync(
-            result.Document,
-            result.Completions.ItemsList[0]
-        );
+        var change = await result.Service
+            .GetChangeAsync(result.Document, result.Completions.ItemsList[0]);
         Assert.Equal("alpha", change.TextChange.NewText);
         Assert.Equal(result.CompletionListSpan, change.TextChange.Span);
     }
@@ -173,10 +167,8 @@ class Program
         Assert.NotEmpty(result.Completions.ItemsList);
         Assert.Equal("alpha", result.Completions.ItemsList[0].DisplayText);
 
-        var change = await result.Service.GetChangeAsync(
-            result.Document,
-            result.Completions.ItemsList[0]
-        );
+        var change = await result.Service
+            .GetChangeAsync(result.Document, result.Completions.ItemsList[0]);
         Assert.Equal("alpha", change.TextChange.NewText);
         Assert.Equal(result.CompletionListSpan, change.TextChange.Span);
     }
@@ -208,10 +200,8 @@ class Program
         Assert.NotEmpty(result.Completions.ItemsList);
         Assert.Equal("alpha", result.Completions.ItemsList[0].DisplayText);
 
-        var change = await result.Service.GetChangeAsync(
-            result.Document,
-            result.Completions.ItemsList[0]
-        );
+        var change = await result.Service
+            .GetChangeAsync(result.Document, result.Completions.ItemsList[0]);
         Assert.Equal("alpha", change.TextChange.NewText);
         Assert.Equal(result.CompletionListSpan, change.TextChange.Span);
     }

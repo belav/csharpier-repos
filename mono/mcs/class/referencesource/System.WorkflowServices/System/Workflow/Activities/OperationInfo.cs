@@ -220,9 +220,8 @@ namespace System.Workflow.Activities
                 Activity owner = this.ParentDependencyObject as Activity;
                 if (owner != null)
                 {
-                    owner.RootActivity.RemoveProperty(
-                        DynamicContractTypeBuilder.DynamicContractTypesProperty
-                    );
+                    owner.RootActivity
+                        .RemoveProperty(DynamicContractTypeBuilder.DynamicContractTypesProperty);
                 }
 
                 contractType = DynamicContractTypeBuilder.GetContractType(
@@ -265,9 +264,8 @@ namespace System.Workflow.Activities
                 Activity owner = this.ParentDependencyObject as Activity;
                 if (owner != null)
                 {
-                    owner.RootActivity.RemoveProperty(
-                        DynamicContractTypeBuilder.DynamicContractTypesProperty
-                    );
+                    owner.RootActivity
+                        .RemoveProperty(DynamicContractTypeBuilder.DynamicContractTypesProperty);
                 }
                 methodInfo = InternalGetMethodInfo(provider);
             }

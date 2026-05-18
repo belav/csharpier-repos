@@ -64,8 +64,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertCast
             // #1 and #2 change their position in the expression (#2 goes in front to stay near the type and #1 to the end to stay near the expression)
             var openParen = Token(SyntaxKind.OpenParenToken);
             var closeParen = Token(SyntaxKind.CloseParenToken);
-            var newTrailingTrivia = asExpression
-                .Left.GetTrailingTrivia()
+            var newTrailingTrivia = asExpression.Left
+                .GetTrailingTrivia()
                 .SkipInitialWhitespace()
                 .ToSyntaxTriviaList()
                 .AddRange(asExpression.GetTrailingTrivia());

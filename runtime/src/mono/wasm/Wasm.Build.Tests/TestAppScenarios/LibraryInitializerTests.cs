@@ -51,11 +51,12 @@ public class LibraryInitializerTests : AppTestBase
             )
         );
         Assert.True(
-            result.ConsoleOutput.Any(m =>
-                m.Contains(
-                    "MONO_WASM: Failed to invoke 'onRuntimeConfigLoaded' on library initializer '../WasmBasicTestApp.lib.module.js': Error: Error thrown from library initializer"
-                )
-            ),
+            result.ConsoleOutput
+                .Any(m =>
+                    m.Contains(
+                        "MONO_WASM: Failed to invoke 'onRuntimeConfigLoaded' on library initializer '../WasmBasicTestApp.lib.module.js': Error: Error thrown from library initializer"
+                    )
+                ),
             "The library initializer test didn't emit expected error message"
         );
     }

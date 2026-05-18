@@ -192,8 +192,8 @@ namespace System.Runtime.Remoting
                         returnArgs[n++] = null;
                 }
 
-                var latestCallContext = Thread
-                    .CurrentThread.GetMutableExecutionContext()
+                var latestCallContext = Thread.CurrentThread
+                    .GetMutableExecutionContext()
                     .LogicalCallContext;
                 result = new ReturnMessage(rval, returnArgs, n, latestCallContext, reqMsg);
             }
@@ -396,7 +396,8 @@ namespace System.Runtime.Remoting
             if (IsTransparentProxy(Obj))
                 oref = RemotingServices
                     .GetRealProxy(Obj)
-                    .ObjectIdentity.CreateObjRef(RequestedType);
+                    .ObjectIdentity
+                    .CreateObjRef(RequestedType);
             else
                 oref = Obj.CreateObjRef(RequestedType);
 
@@ -557,11 +558,12 @@ namespace System.Runtime.Remoting
                 BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance;
             RuntimeType type = (RuntimeType)msg.MethodBase.DeclaringType;
             return type.GetMethodsByName(
-                    msg.MethodName,
-                    bfinst,
-                    RuntimeType.MemberListType.CaseSensitive,
-                    type
-                ).Length > 1;
+                        msg.MethodName,
+                        bfinst,
+                        RuntimeType.MemberListType.CaseSensitive,
+                        type
+                    )
+                    .Length > 1;
         }
 
         public static bool IsObjectOutOfAppDomain(object tp)

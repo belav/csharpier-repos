@@ -1239,18 +1239,16 @@ public abstract partial class ModelBuilderTest
                 var targetEntityType = clonedEntityType.Value;
                 foreach (var foreignKey in clonedEntityType.Key.GetDeclaredForeignKeys())
                 {
-                    var targetPrincipalEntityType = targetEntityType.Model.FindEntityType(
-                        foreignKey.PrincipalEntityType.Name
-                    )!;
+                    var targetPrincipalEntityType = targetEntityType.Model
+                        .FindEntityType(foreignKey.PrincipalEntityType.Name)!;
                     var clonedForeignKey = targetEntityType.AddForeignKey(
-                        foreignKey
-                            .Properties.Select(p => targetEntityType.FindProperty(p.Name)!)
+                        foreignKey.Properties
+                            .Select(p => targetEntityType.FindProperty(p.Name)!)
                             .ToList(),
                         targetPrincipalEntityType.FindKey(
-                            foreignKey
-                                .PrincipalKey.Properties.Select(p =>
-                                    targetPrincipalEntityType.FindProperty(p.Name)!
-                                )
+                            foreignKey.PrincipalKey
+                                .Properties
+                                .Select(p => targetPrincipalEntityType.FindProperty(p.Name)!)
                                 .ToList()
                         )!,
                         targetPrincipalEntityType
@@ -1264,18 +1262,18 @@ public abstract partial class ModelBuilderTest
                 foreach (var skipNavigation in clonedEntityType.Key.GetDeclaredSkipNavigations())
                 {
                     var targetEntityType = clonedEntityType.Value;
-                    var otherEntityType = targetEntityType.Model.FindEntityType(
-                        skipNavigation.TargetEntityType.Name
-                    )!;
+                    var otherEntityType = targetEntityType.Model
+                        .FindEntityType(skipNavigation.TargetEntityType.Name)!;
                     Copy(
                         skipNavigation,
-                        clonedEntityType.Value.AddSkipNavigation(
-                            skipNavigation.Name,
-                            skipNavigation.GetIdentifyingMemberInfo(),
-                            otherEntityType,
-                            skipNavigation.IsCollection,
-                            skipNavigation.IsOnDependent
-                        )
+                        clonedEntityType.Value
+                            .AddSkipNavigation(
+                                skipNavigation.Name,
+                                skipNavigation.GetIdentifyingMemberInfo(),
+                                otherEntityType,
+                                skipNavigation.IsCollection,
+                                skipNavigation.IsOnDependent
+                            )
                     );
                 }
             }
@@ -1290,9 +1288,8 @@ public abstract partial class ModelBuilderTest
         {
             if (sourceEntityType.BaseType != null)
             {
-                targetEntityType.BaseType = targetEntityType.Model.FindEntityType(
-                    sourceEntityType.BaseType.Name
-                );
+                targetEntityType.BaseType = targetEntityType.Model
+                    .FindEntityType(sourceEntityType.BaseType.Name);
             }
 
             targetEntityType.SetQueryFilter(sourceEntityType.GetQueryFilter());
@@ -1366,8 +1363,8 @@ public abstract partial class ModelBuilderTest
 
             foreach (var index in sourceEntityType.GetDeclaredIndexes())
             {
-                var targetProperties = index
-                    .Properties.Select(p => targetEntityType.FindProperty(p.Name)!)
+                var targetProperties = index.Properties
+                    .Select(p => targetEntityType.FindProperty(p.Name)!)
                     .ToList();
                 var clonedIndex =
                     index.Name == null
@@ -1592,24 +1589,23 @@ public abstract partial class ModelBuilderTest
             );
             if (sourceNavigation.ForeignKey != null)
             {
-                var targetDependentType = targetNavigation.DeclaringEntityType.Model.FindEntityType(
-                    sourceNavigation.ForeignKey.DeclaringEntityType.Name
-                )!;
-                var targetPrincipalType = targetNavigation.DeclaringEntityType.Model.FindEntityType(
-                    sourceNavigation.ForeignKey.PrincipalEntityType.Name
-                )!;
+                var targetDependentType = targetNavigation.DeclaringEntityType
+                    .Model
+                    .FindEntityType(sourceNavigation.ForeignKey.DeclaringEntityType.Name)!;
+                var targetPrincipalType = targetNavigation.DeclaringEntityType
+                    .Model
+                    .FindEntityType(sourceNavigation.ForeignKey.PrincipalEntityType.Name)!;
                 var targetKey = targetPrincipalType.FindKey(
-                    sourceNavigation
-                        .ForeignKey.PrincipalKey.Properties.Select(p =>
-                            targetPrincipalType.FindProperty(p.Name)!
-                        )
+                    sourceNavigation.ForeignKey
+                        .PrincipalKey
+                        .Properties
+                        .Select(p => targetPrincipalType.FindProperty(p.Name)!)
                         .ToList()
                 )!;
                 var targetForeignKey = targetDependentType.FindForeignKey(
-                    sourceNavigation
-                        .ForeignKey.Properties.Select(p =>
-                            targetDependentType.FindProperty(p.Name)!
-                        )
+                    sourceNavigation.ForeignKey
+                        .Properties
+                        .Select(p => targetDependentType.FindProperty(p.Name)!)
                         .ToList(),
                     targetKey,
                     targetPrincipalType
@@ -1619,9 +1615,9 @@ public abstract partial class ModelBuilderTest
 
             if (sourceNavigation.Inverse != null)
             {
-                var targetEntityType = targetNavigation.DeclaringEntityType.Model.FindEntityType(
-                    sourceNavigation.Inverse.DeclaringEntityType.Name
-                )!;
+                var targetEntityType = targetNavigation.DeclaringEntityType
+                    .Model
+                    .FindEntityType(sourceNavigation.Inverse.DeclaringEntityType.Name)!;
                 targetNavigation.SetInverse(
                     targetEntityType.FindSkipNavigation(sourceNavigation.Inverse.Name)
                 );

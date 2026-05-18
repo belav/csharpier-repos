@@ -1832,8 +1832,8 @@ namespace System.Text.Json.Serialization.Tests
             );
 
         public static IEnumerable<object[]> Get_PolymorphicInterface_TestData_Serialization() =>
-            PolymorphicInterface
-                .Helpers.GetSerializeTestData()
+            PolymorphicInterface.Helpers
+                .GetSerializeTestData()
                 .Select(entry => new object[] { entry });
 
         [Theory]
@@ -1849,8 +1849,8 @@ namespace System.Text.Json.Serialization.Tests
             );
 
         public static IEnumerable<object[]> Get_PolymorphicInterface_TestData_Deserialization() =>
-            PolymorphicInterface
-                .Helpers.GetSerializeTestData()
+            PolymorphicInterface.Helpers
+                .GetSerializeTestData()
                 .Where(entry => entry.ExpectedJson != null)
                 .Select(entry => new object[] { entry });
 
@@ -1858,8 +1858,8 @@ namespace System.Text.Json.Serialization.Tests
         public async Task PolymorphicInterface_TestDataArray_Serialization()
         {
             IEnumerable<(PolymorphicInterface Value, string ExpectedJson)> inputs =
-                PolymorphicInterface
-                    .Helpers.GetSerializeTestData()
+                PolymorphicInterface.Helpers
+                    .GetSerializeTestData()
                     .Where(entry => entry.ExpectedSerializationException is null)
                     .Select(entry => (entry.Value, entry.ExpectedJson));
 
@@ -1870,8 +1870,8 @@ namespace System.Text.Json.Serialization.Tests
         public async Task PolymorphicInterface_TestDataArray_Deserialization()
         {
             IEnumerable<(string ExpectedJson, PolymorphicInterface ExpectedRoundtripValue)> inputs =
-                PolymorphicInterface
-                    .Helpers.GetSerializeTestData()
+                PolymorphicInterface.Helpers
+                    .GetSerializeTestData()
                     .Where(entry => entry.ExpectedRoundtripValue is not null)
                     .Select(entry => (entry.ExpectedJson, entry.ExpectedRoundtripValue));
 
@@ -1938,8 +1938,8 @@ namespace System.Text.Json.Serialization.Tests
             );
 
         public static IEnumerable<object[]> Get_PolymorphicInterface_CustomConfigWithNearestAncestorFallback_TestData_Serialization() =>
-            PolymorphicInterface
-                .Helpers.GetSerializeTestData_CustomConfigWithNearestAncestorFallback()
+            PolymorphicInterface.Helpers
+                .GetSerializeTestData_CustomConfigWithNearestAncestorFallback()
                 .Select(entry => new object[] { entry });
 
         [Theory]
@@ -1960,8 +1960,8 @@ namespace System.Text.Json.Serialization.Tests
             );
 
         public static IEnumerable<object[]> Get_PolymorphicInterface_CustomConfigWithNearestAncestorFallback_TestData_Deserialization() =>
-            PolymorphicInterface
-                .Helpers.GetSerializeTestData_CustomConfigWithNearestAncestorFallback()
+            PolymorphicInterface.Helpers
+                .GetSerializeTestData_CustomConfigWithNearestAncestorFallback()
                 .Where(entry => entry.ExpectedJson != null)
                 .Select(entry => new object[] { entry });
 
@@ -1969,8 +1969,8 @@ namespace System.Text.Json.Serialization.Tests
         public async Task PolymorphicInterface_CustomConfigWithNearestAncestorFallback_TestDataArray_Serialization()
         {
             IEnumerable<(PolymorphicInterface Value, string ExpectedJson)> inputs =
-                PolymorphicInterface
-                    .Helpers.GetSerializeTestData_CustomConfigWithNearestAncestorFallback()
+                PolymorphicInterface.Helpers
+                    .GetSerializeTestData_CustomConfigWithNearestAncestorFallback()
                     .Where(entry => entry.ExpectedSerializationException is null)
                     .Select(entry => (entry.Value, entry.ExpectedJson));
 
@@ -1984,8 +1984,8 @@ namespace System.Text.Json.Serialization.Tests
         public async Task PolymorphicInterface_CustomConfigWithNearestAncestorFallback_TestDataArray_Deserialization()
         {
             IEnumerable<(string ExpectedJson, PolymorphicInterface ExpectedRoundtripValue)> inputs =
-                PolymorphicInterface
-                    .Helpers.GetSerializeTestData_CustomConfigWithNearestAncestorFallback()
+                PolymorphicInterface.Helpers
+                    .GetSerializeTestData_CustomConfigWithNearestAncestorFallback()
                     .Where(entry => entry.ExpectedRoundtripValue is not null)
                     .Select(entry => (entry.ExpectedJson, entry.ExpectedRoundtripValue));
 
@@ -2016,8 +2016,8 @@ namespace System.Text.Json.Serialization.Tests
         }
 
         public static IEnumerable<object[]> Get_PolymorphicInterface_DiamondInducingConfigurations_ShouldThrowNotSupportedException() =>
-            PolymorphicInterface
-                .Helpers.GetDiamondInducingConfigurations()
+            PolymorphicInterface.Helpers
+                .GetDiamondInducingConfigurations()
                 .Select(entry => new object[] { entry.diamondValue, entry.configuration });
 
         [JsonDerivedType(typeof(DerivedClass_NoTypeDiscriminator))]

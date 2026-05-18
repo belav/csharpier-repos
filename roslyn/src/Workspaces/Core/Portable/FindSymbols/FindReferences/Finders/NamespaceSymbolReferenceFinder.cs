@@ -179,8 +179,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
             CancellationToken cancellationToken
         )
         {
-            var tokens = state
-                .Root.DescendantTokens()
+            var tokens = state.Root
+                .DescendantTokens()
                 .WhereAsArray(
                     static (token, state) => state.SyntaxFacts.IsGlobalNamespaceKeyword(token),
                     state

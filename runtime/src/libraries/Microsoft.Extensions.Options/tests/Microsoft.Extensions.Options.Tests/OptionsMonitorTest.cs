@@ -532,16 +532,17 @@ namespace Microsoft.Extensions.Options.Tests
             Task<FakeOptions>[] instanceTasks = Enumerable
                 .Range(0, 2)
                 .Select(_ =>
-                    Task.Factory.StartNew(
-                        () =>
-                        {
-                            barrier.SignalAndWait();
-                            return monitor.Get("someName");
-                        },
-                        CancellationToken.None,
-                        TaskCreationOptions.LongRunning,
-                        TaskScheduler.Default
-                    )
+                    Task.Factory
+                        .StartNew(
+                            () =>
+                            {
+                                barrier.SignalAndWait();
+                                return monitor.Get("someName");
+                            },
+                            CancellationToken.None,
+                            TaskCreationOptions.LongRunning,
+                            TaskScheduler.Default
+                        )
                 )
                 .ToArray();
 

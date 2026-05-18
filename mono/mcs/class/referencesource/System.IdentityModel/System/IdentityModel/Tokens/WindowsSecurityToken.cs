@@ -131,9 +131,8 @@ namespace System.IdentityModel.Tokens
         {
             if (this.disposed)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ObjectDisposedException(this.GetType().FullName)
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(new ObjectDisposedException(this.GetType().FullName));
             }
         }
     }

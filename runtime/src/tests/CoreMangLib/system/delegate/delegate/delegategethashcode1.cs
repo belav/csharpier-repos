@@ -58,9 +58,10 @@ namespace DelegateTest
         public bool PosTest1()
         {
             bool retVal = true;
-            TestLibrary.TestFramework.BeginScenario(
-                "PosTest1: hash code of two different delegate object is not equal,the two delegate callback different function. "
-            );
+            TestLibrary.TestFramework
+                .BeginScenario(
+                    "PosTest1: hash code of two different delegate object is not equal,the two delegate callback different function. "
+                );
 
             try
             {
@@ -93,9 +94,10 @@ namespace DelegateTest
         {
             bool retVal = true;
             //Type,target, method, and invocation list
-            TestLibrary.TestFramework.BeginScenario(
-                "PosTest2: hash code of two different delegate object even though  they invoke the same function  is not equal "
-            );
+            TestLibrary.TestFramework
+                .BeginScenario(
+                    "PosTest2: hash code of two different delegate object even though  they invoke the same function  is not equal "
+                );
 
             try
             {
@@ -127,9 +129,10 @@ namespace DelegateTest
         {
             bool retVal = true;
 
-            TestLibrary.TestFramework.BeginScenario(
-                "PosTest3: Use the same type's same  method to create two delegate which delegate object is the same,their hashcode is equal"
-            );
+            TestLibrary.TestFramework
+                .BeginScenario(
+                    "PosTest3: Use the same type's same  method to create two delegate which delegate object is the same,their hashcode is equal"
+                );
 
             try
             {
@@ -161,9 +164,10 @@ namespace DelegateTest
         {
             bool retVal = true;
 
-            TestLibrary.TestFramework.BeginScenario(
-                "PosTest4: Use the same type's different static method to create two delegate which delegate object is the same,their hashcode is equal "
-            );
+            TestLibrary.TestFramework
+                .BeginScenario(
+                    "PosTest4: Use the same type's different static method to create two delegate which delegate object is the same,their hashcode is equal "
+                );
 
             try
             {
@@ -195,9 +199,10 @@ namespace DelegateTest
         {
             bool retVal = true;
 
-            TestLibrary.TestFramework.BeginScenario(
-                "PosTest6:  Use the different type's same static method to create two delegate ,which delegate object is the same,their hashcode is equal"
-            );
+            TestLibrary.TestFramework
+                .BeginScenario(
+                    "PosTest6:  Use the different type's same static method to create two delegate ,which delegate object is the same,their hashcode is equal"
+                );
 
             try
             {
@@ -230,9 +235,10 @@ namespace DelegateTest
         {
             bool retVal = true;
 
-            TestLibrary.TestFramework.BeginScenario(
-                "PosTest7:  Use the different instance's same instance method to create two delegate which delegate object is the same, their hashcode is different"
-            );
+            TestLibrary.TestFramework
+                .BeginScenario(
+                    "PosTest7:  Use the different instance's same instance method to create two delegate which delegate object is the same, their hashcode is different"
+                );
 
             try
             {
@@ -266,9 +272,10 @@ namespace DelegateTest
         {
             bool retVal = true;
             //Type,target, method, and invocation list
-            TestLibrary.TestFramework.BeginScenario(
-                "PosTest8: hash code of two delegate object is not equal,the two delegate callback different function. "
-            );
+            TestLibrary.TestFramework
+                .BeginScenario(
+                    "PosTest8: hash code of two delegate object is not equal,the two delegate callback different function. "
+                );
 
             try
             {
@@ -306,45 +313,42 @@ namespace DelegateTest
 
         public bool StartWork_Bool()
         {
-            TestLibrary.TestFramework.LogInformation(
-                "TestClass's StartWork_Bool method  is running. id=" + this.id
-            );
+            TestLibrary.TestFramework
+                .LogInformation("TestClass's StartWork_Bool method  is running. id=" + this.id);
             return true;
         }
 
         public bool StartWork_Bool(string str)
         {
-            TestLibrary.TestFramework.LogInformation(
-                "TestClass's StartWork_Bool method  is running. id="
-                    + this.id
-                    + " "
-                    + "message="
-                    + str
-            );
+            TestLibrary.TestFramework
+                .LogInformation(
+                    "TestClass's StartWork_Bool method  is running. id="
+                        + this.id
+                        + " "
+                        + "message="
+                        + str
+                );
             return true;
         }
 
         public static bool Working_Bool()
         {
-            TestLibrary.TestFramework.LogInformation(
-                "TestClass's Working_Bool method  is running ."
-            );
+            TestLibrary.TestFramework
+                .LogInformation("TestClass's Working_Bool method  is running .");
             return true;
         }
 
         public static bool Completed_Bool()
         {
-            TestLibrary.TestFramework.LogInformation(
-                "TestClass's Completed_Bool method  is running ."
-            );
+            TestLibrary.TestFramework
+                .LogInformation("TestClass's Completed_Bool method  is running .");
             return true;
         }
 
         public void StartWork_Void()
         {
-            TestLibrary.TestFramework.LogInformation(
-                "TestClass1's StartWork_Bool method  is running. id=" + this.id
-            );
+            TestLibrary.TestFramework
+                .LogInformation("TestClass1's StartWork_Bool method  is running. id=" + this.id);
         }
     }
 
@@ -359,25 +363,22 @@ namespace DelegateTest
 
         public bool StartWork_Bool()
         {
-            TestLibrary.TestFramework.LogInformation(
-                "TestClass1's StartWork_Bool method  is running. id=" + this.id
-            );
+            TestLibrary.TestFramework
+                .LogInformation("TestClass1's StartWork_Bool method  is running. id=" + this.id);
             return true;
         }
 
         public static bool Working_Bool()
         {
-            TestLibrary.TestFramework.LogInformation(
-                "TestClass1's Working_Bool method  is running ."
-            );
+            TestLibrary.TestFramework
+                .LogInformation("TestClass1's Working_Bool method  is running .");
             return true;
         }
 
         public static bool Completed_Bool()
         {
-            TestLibrary.TestFramework.LogInformation(
-                "TestClass1's Completed_Bool method  is running ."
-            );
+            TestLibrary.TestFramework
+                .LogInformation("TestClass1's Completed_Bool method  is running .");
             return true;
         }
     }

@@ -97,7 +97,8 @@ public class MigrationsScaffolderTest
                 new MigrationsModelDiffer(
                     new TestRelationalTypeMappingSource(
                         TestServiceFactory.Instance.Create<TypeMappingSourceDependencies>(),
-                        TestServiceFactory.Instance.Create<RelationalTypeMappingSourceDependencies>()
+                        TestServiceFactory.Instance
+                            .Create<RelationalTypeMappingSourceDependencies>()
                     ),
                     new MigrationsAnnotationProvider(
                         new MigrationsAnnotationProviderDependencies()

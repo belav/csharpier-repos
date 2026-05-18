@@ -180,8 +180,8 @@ namespace System.CommandLine
             static void ThrowIfInvalid(CliCommand command)
             {
                 if (
-                    command
-                        .Parents.FlattenBreadthFirst(c => c.Parents)
+                    command.Parents
+                        .FlattenBreadthFirst(c => c.Parents)
                         .Any(ancestor => ancestor == command)
                 )
                 {

@@ -306,9 +306,8 @@ namespace Castle.DynamicProxy.Tests
                 intMethod.Name
             );
 
-            var nestedGenericBoolMethod = type.GetInterfaceMap(
-                nestedGenericBoolInterfaceType
-            ).TargetMethods[0];
+            var nestedGenericBoolMethod = type.GetInterfaceMap(nestedGenericBoolInterfaceType)
+                .TargetMethods[0];
             Assert.AreEqual(
                 "Castle.DynamicProxy.Tests.Interfaces.IGenericWithNonGenericMethod`1[IGenericWithNonGenericMethod`1[Boolean]].SomeMethod",
                 nestedGenericBoolMethod.Name
@@ -347,12 +346,10 @@ namespace Castle.DynamicProxy.Tests
                 intSetter.Name
             );
 
-            var nestedGenericBoolGetter = type.GetInterfaceMap(
-                nestedGenericBoolInterfaceType
-            ).TargetMethods[0];
-            var nestedGenericBoolSetter = type.GetInterfaceMap(
-                nestedGenericBoolInterfaceType
-            ).TargetMethods[1];
+            var nestedGenericBoolGetter = type.GetInterfaceMap(nestedGenericBoolInterfaceType)
+                .TargetMethods[0];
+            var nestedGenericBoolSetter = type.GetInterfaceMap(nestedGenericBoolInterfaceType)
+                .TargetMethods[1];
             Assert.AreEqual(
                 "Castle.DynamicProxy.Tests.Interfaces.IGenericWithProperty`1[IGenericWithProperty`1[Boolean]].get_SomeProperty",
                 nestedGenericBoolGetter.Name
@@ -393,12 +390,10 @@ namespace Castle.DynamicProxy.Tests
                 intRemover.Name
             );
 
-            var nestedGenericBoolAdder = type.GetInterfaceMap(
-                nestedGenericBoolInterfaceType
-            ).TargetMethods[0];
-            var nestedGenericBoolRemover = type.GetInterfaceMap(
-                nestedGenericBoolInterfaceType
-            ).TargetMethods[1];
+            var nestedGenericBoolAdder = type.GetInterfaceMap(nestedGenericBoolInterfaceType)
+                .TargetMethods[0];
+            var nestedGenericBoolRemover = type.GetInterfaceMap(nestedGenericBoolInterfaceType)
+                .TargetMethods[1];
             Assert.AreEqual(
                 "Castle.DynamicProxy.Tests.Interfaces.IGenericWithEvent`1[IGenericWithEvent`1[Boolean]].add_SomeEvent",
                 nestedGenericBoolAdder.Name
@@ -435,9 +430,8 @@ namespace Castle.DynamicProxy.Tests
                 intBoolMethod.Name
             );
 
-            var intNestedGenericBoolMethod = type.GetInterfaceMap(
-                intNestedGenericBoolInterfaceType
-            ).TargetMethods[0];
+            var intNestedGenericBoolMethod = type.GetInterfaceMap(intNestedGenericBoolInterfaceType)
+                .TargetMethods[0];
             Assert.AreEqual(
                 "Castle.DynamicProxy.Tests.Interfaces.IGenericWithNonGenericMethod`2[Int32,IGenericWithNonGenericMethod`1[Boolean]].SomeMethod",
                 intNestedGenericBoolMethod.Name

@@ -57,16 +57,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Classification
         private static TextSpan GetOperatorTokenSpan(SyntaxNode syntax) =>
             syntax switch
             {
-                AssignmentExpressionSyntax assignmentExpression => assignmentExpression
-                    .OperatorToken
-                    .Span,
+                AssignmentExpressionSyntax assignmentExpression =>
+                    assignmentExpression.OperatorToken.Span,
                 BinaryExpressionSyntax binaryExpression => binaryExpression.OperatorToken.Span,
-                PrefixUnaryExpressionSyntax prefixUnaryExpression => prefixUnaryExpression
-                    .OperatorToken
-                    .Span,
-                PostfixUnaryExpressionSyntax postfixUnaryExpression => postfixUnaryExpression
-                    .OperatorToken
-                    .Span,
+                PrefixUnaryExpressionSyntax prefixUnaryExpression =>
+                    prefixUnaryExpression.OperatorToken.Span,
+                PostfixUnaryExpressionSyntax postfixUnaryExpression =>
+                    postfixUnaryExpression.OperatorToken.Span,
                 _ => default,
             };
     }

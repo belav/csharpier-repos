@@ -340,8 +340,9 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
                     nextTriviaPair.LeadingTrivia
                     ?? SpecializedCollections.EmptyEnumerable<SyntaxTrivia>();
 
-                return tokenPair
-                    .PreviousToken.TrailingTrivia.Concat(trailingTrivia)
+                return tokenPair.PreviousToken
+                    .TrailingTrivia
+                    .Concat(trailingTrivia)
                     .Concat(leadingTrivia)
                     .Concat(tokenPair.NextToken.LeadingTrivia);
             }

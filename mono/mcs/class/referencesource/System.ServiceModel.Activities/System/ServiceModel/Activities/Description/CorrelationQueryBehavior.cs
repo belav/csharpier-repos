@@ -101,9 +101,8 @@ namespace System.ServiceModel.Activities.Description
 
         public void ApplyClientBehavior(ServiceEndpoint endpoint, ClientRuntime clientRuntime)
         {
-            ICorrelationDataSource source = endpoint.Binding.GetProperty<ICorrelationDataSource>(
-                new BindingParameterCollection()
-            );
+            ICorrelationDataSource source = endpoint.Binding
+                .GetProperty<ICorrelationDataSource>(new BindingParameterCollection());
 
             if (source != null)
             {
@@ -117,9 +116,8 @@ namespace System.ServiceModel.Activities.Description
             EndpointDispatcher endpointDispatcher
         )
         {
-            ICorrelationDataSource source = endpoint.Binding.GetProperty<ICorrelationDataSource>(
-                new BindingParameterCollection()
-            );
+            ICorrelationDataSource source = endpoint.Binding
+                .GetProperty<ICorrelationDataSource>(new BindingParameterCollection());
 
             if (source != null)
             {

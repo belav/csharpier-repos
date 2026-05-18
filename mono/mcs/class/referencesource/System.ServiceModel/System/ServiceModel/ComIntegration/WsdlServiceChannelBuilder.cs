@@ -41,9 +41,10 @@ namespace System.ServiceModel.ComIntegration
             get
             {
                 if (serviceChannel != null)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new COMException(SR.GetString(SR.TooLate), HR.RPC_E_TOO_LATE)
-                    );
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperError(
+                            new COMException(SR.GetString(SR.TooLate), HR.RPC_E_TOO_LATE)
+                        );
                 return serviceChannelFactory;
             }
         }
@@ -65,9 +66,10 @@ namespace System.ServiceModel.ComIntegration
             get
             {
                 if (serviceChannel != null)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new COMException(SR.GetString(SR.TooLate), HR.RPC_E_TOO_LATE)
-                    );
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperError(
+                            new COMException(SR.GetString(SR.TooLate), HR.RPC_E_TOO_LATE)
+                        );
                 return behaviors;
             }
         }
@@ -236,32 +238,44 @@ namespace System.ServiceModel.ComIntegration
                 || string.IsNullOrEmpty(bindingName)
                 || string.IsNullOrEmpty(address)
             )
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new MonikerSyntaxException(SR.GetString(SR.ContractBindingAddressCannotBeNull))
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        new MonikerSyntaxException(
+                            SR.GetString(SR.ContractBindingAddressCannotBeNull)
+                        )
+                    );
 
             if (!string.IsNullOrEmpty(spnIdentity))
             {
                 if ((!string.IsNullOrEmpty(upnIdentity)) || (!string.IsNullOrEmpty(dnsIdentity)))
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new MonikerSyntaxException(SR.GetString(SR.MonikerIncorrectServerIdentity))
-                    );
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperError(
+                            new MonikerSyntaxException(
+                                SR.GetString(SR.MonikerIncorrectServerIdentity)
+                            )
+                        );
                 identity = EndpointIdentity.CreateSpnIdentity(spnIdentity);
             }
             else if (!string.IsNullOrEmpty(upnIdentity))
             {
                 if ((!string.IsNullOrEmpty(spnIdentity)) || (!string.IsNullOrEmpty(dnsIdentity)))
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new MonikerSyntaxException(SR.GetString(SR.MonikerIncorrectServerIdentity))
-                    );
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperError(
+                            new MonikerSyntaxException(
+                                SR.GetString(SR.MonikerIncorrectServerIdentity)
+                            )
+                        );
                 identity = EndpointIdentity.CreateUpnIdentity(upnIdentity);
             }
             else if (!string.IsNullOrEmpty(dnsIdentity))
             {
                 if ((!string.IsNullOrEmpty(spnIdentity)) || (!string.IsNullOrEmpty(upnIdentity)))
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new MonikerSyntaxException(SR.GetString(SR.MonikerIncorrectServerIdentity))
-                    );
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperError(
+                            new MonikerSyntaxException(
+                                SR.GetString(SR.MonikerIncorrectServerIdentity)
+                            )
+                        );
                 identity = EndpointIdentity.CreateDnsIdentity(dnsIdentity);
             }
             else
@@ -272,9 +286,10 @@ namespace System.ServiceModel.ComIntegration
             if (!String.IsNullOrEmpty(serializer))
             {
                 if ("xml" != serializer && "datacontract" != serializer)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new MonikerSyntaxException(SR.GetString(SR.MonikerIncorectSerializer))
-                    );
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperError(
+                            new MonikerSyntaxException(SR.GetString(SR.MonikerIncorectSerializer))
+                        );
 
                 if ("xml" == serializer)
                     useXmlSerializer = true;
@@ -362,9 +377,12 @@ namespace System.ServiceModel.ComIntegration
                     if (Fx.IsFatal(e))
                         throw;
 
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new MonikerSyntaxException(SR.GetString(SR.FailedImportOfWsdl, e.Message))
-                    );
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperError(
+                            new MonikerSyntaxException(
+                                SR.GetString(SR.FailedImportOfWsdl, e.Message)
+                            )
+                        );
                 }
             }
             finally
@@ -376,9 +394,10 @@ namespace System.ServiceModel.ComIntegration
 
         public WsdlImporter CreateDataContractSerializerImporter(MetadataSet metaData)
         {
-            Collection<IWsdlImportExtension> wsdlImportExtensions = ConfigNS
-                .ClientSection.GetSection()
-                .Metadata.LoadWsdlImportExtensions();
+            Collection<IWsdlImportExtension> wsdlImportExtensions = ConfigNS.ClientSection
+                .GetSection()
+                .Metadata
+                .LoadWsdlImportExtensions();
 
             for (int i = 0; i < wsdlImportExtensions.Count; i++)
             {
@@ -396,9 +415,10 @@ namespace System.ServiceModel.ComIntegration
 
         public WsdlImporter CreateXmlSerializerImporter(MetadataSet metaData)
         {
-            Collection<IWsdlImportExtension> wsdlImportExtensions = ConfigNS
-                .ClientSection.GetSection()
-                .Metadata.LoadWsdlImportExtensions();
+            Collection<IWsdlImportExtension> wsdlImportExtensions = ConfigNS.ClientSection
+                .GetSection()
+                .Metadata
+                .LoadWsdlImportExtensions();
 
             for (int i = 0; i < wsdlImportExtensions.Count; i++)
             {
@@ -418,9 +438,8 @@ namespace System.ServiceModel.ComIntegration
         {
             IntPtr inner = IntPtr.Zero;
             if (riid != InterfaceID.idIDispatch)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidCastException(SR.GetString(SR.NoInterface, riid))
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(new InvalidCastException(SR.GetString(SR.NoInterface, riid)));
             if (contractDescription == null)
             {
                 throw Fx.AssertAndThrow("ContractDescription should not be null at this point");

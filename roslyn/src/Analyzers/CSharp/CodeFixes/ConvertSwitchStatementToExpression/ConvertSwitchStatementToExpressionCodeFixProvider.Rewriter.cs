@@ -255,10 +255,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertSwitchStatementToExpression
                     && !Equals(typeInfo.ConvertedType, typeInfo.Type)
                 )
                 {
-                    var conversion = _semanticModel.Compilation.ClassifyConversion(
-                        typeInfo.Type,
-                        typeInfo.ConvertedType
-                    );
+                    var conversion = _semanticModel.Compilation
+                        .ClassifyConversion(typeInfo.Type, typeInfo.ConvertedType);
                     if (!conversion.IsIdentityOrImplicitReference())
                         return node.Cast(typeInfo.ConvertedType);
                 }
@@ -284,8 +282,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertSwitchStatementToExpression
                 bool allowMoveNextStatementToSwitchExpression = true
             )
             {
-                var switchArms = node
-                    .Sections
+                var switchArms = node.Sections
                     // The default label must come last in the switch expression.
                     .OrderBy(section => section.Labels.Any(label => IsDefaultSwitchLabel(label)))
                     .Select(s =>
@@ -342,15 +339,18 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertSwitchStatementToExpression
                     ),
                     SeparatedList(
                         switchArms.Select(t =>
-                            t.armExpression.WithLeadingTrivia(
-                                t.tokensForLeadingTrivia.GetTrivia()
-                                    .FilterComments(addElasticMarker: false)
-                            )
+                            t.armExpression
+                                .WithLeadingTrivia(
+                                    t.tokensForLeadingTrivia
+                                        .GetTrivia()
+                                        .FilterComments(addElasticMarker: false)
+                                )
                         ),
                         switchArms.Select(t =>
                             Token(SyntaxKind.CommaToken)
                                 .WithTrailingTrivia(
-                                    t.tokensForTrailingTrivia.GetTrivia()
+                                    t.tokensForTrailingTrivia
+                                        .GetTrivia()
                                         .FilterComments(addElasticMarker: true)
                                 )
                         )
@@ -365,23 +365,23 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertSwitchStatementToExpression
                 // expression before rewriting as a switch expression
                 var expressionType = _semanticModel
                     .GetSymbolInfo(node.Expression)
-                    .Symbol.GetSymbolType();
+                    .Symbol
+                    .GetSymbolType();
                 var expressionConvertedType = _semanticModel
                     .GetTypeInfo(node.Expression)
                     .ConvertedType;
 
                 if (
                     expressionConvertedType != null
-                    && !SymbolEqualityComparer.Default.Equals(
-                        expressionConvertedType,
-                        expressionType
-                    )
+                    && !SymbolEqualityComparer.Default
+                        .Equals(expressionConvertedType, expressionType)
                 )
                 {
                     return node.Update(
                         node.SwitchKeyword,
                         node.OpenParenToken,
-                        node.Expression.Cast(expressionConvertedType)
+                        node.Expression
+                            .Cast(expressionConvertedType)
                             .WithAdditionalAnnotations(Formatter.Annotation),
                         node.CloseParenToken,
                         node.OpenBraceToken,

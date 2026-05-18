@@ -27,8 +27,7 @@ namespace System.Web.Mvc
 
     internal sealed class TypeCacheSerializer
     {
-        private static readonly Guid _mvcVersionId = typeof(TypeCacheSerializer)
-            .Module
+        private static readonly Guid _mvcVersionId = typeof(TypeCacheSerializer).Module
             .ModuleVersionId;
 
         // used for unit testing

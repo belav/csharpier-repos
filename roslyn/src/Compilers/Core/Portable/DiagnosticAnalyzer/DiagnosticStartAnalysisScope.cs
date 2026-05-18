@@ -509,7 +509,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                 analyzer
             );
             this.GetOrCreateAnalyzerActions(analyzer)
-                .Value.AddCompilationStartAction(analyzerAction);
+                .Value
+                .AddCompilationStartAction(analyzerAction);
         }
 
         public void EnableConcurrentExecution(DiagnosticAnalyzer analyzer)
@@ -866,7 +867,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             OperationBlockStartAnalyzerAction analyzerAction =
                 new OperationBlockStartAnalyzerAction(action, analyzer);
             this.GetOrCreateAnalyzerActions(analyzer)
-                .Value.AddOperationBlockStartAction(analyzerAction);
+                .Value
+                .AddOperationBlockStartAction(analyzerAction);
         }
 
         public void RegisterOperationBlockEndAction(
@@ -879,7 +881,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                 analyzer
             );
             this.GetOrCreateAnalyzerActions(analyzer)
-                .Value.AddOperationBlockEndAction(analyzerAction);
+                .Value
+                .AddOperationBlockEndAction(analyzerAction);
         }
 
         public void RegisterOperationBlockAction(

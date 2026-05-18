@@ -440,10 +440,8 @@ namespace System.Windows.Forms.Design
             // do not change selection if nothing has changed
             //
             if (selectedControls.Count != 0)
-                this.SelectionService.SetSelectedComponents(
-                    selectedControls,
-                    SelectionTypes.Replace
-                );
+                this.SelectionService
+                    .SetSelectedComponents(selectedControls, SelectionTypes.Replace);
 
             _selectionContainer.Refresh();
         }

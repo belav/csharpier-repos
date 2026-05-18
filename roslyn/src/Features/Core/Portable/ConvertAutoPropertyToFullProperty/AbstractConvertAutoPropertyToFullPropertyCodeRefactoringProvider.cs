@@ -175,12 +175,8 @@ namespace Microsoft.CodeAnalysis.ConvertAutoPropertyToFullProperty
                     editor.ReplaceNode(
                         typeBlock,
                         (currentTypeDeclaration, _) =>
-                            info.Service.AddField(
-                                currentTypeDeclaration,
-                                newField,
-                                info,
-                                cancellationToken
-                            )
+                            info.Service
+                                .AddField(currentTypeDeclaration, newField, info, cancellationToken)
                     );
                 }
             }

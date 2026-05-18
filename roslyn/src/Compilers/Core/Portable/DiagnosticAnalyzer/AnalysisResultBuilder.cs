@@ -27,7 +27,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         > s_emptyPathToAdditionalTextMap = ImmutableDictionary<
             string,
             OneOrMany<AdditionalText>
-        >.Empty.WithComparers(PathUtilities.Comparer);
+        >.Empty
+            .WithComparers(PathUtilities.Comparer);
 
         private readonly object _gate = new object();
         private readonly Dictionary<DiagnosticAnalyzer, TimeSpan>? _analyzerExecutionTimeOpt;
@@ -812,8 +813,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                 {
                     if (analyzers.Contains(diagnosticsByAnalyzer.Key))
                     {
-                        var diagnostics = diagnosticsByAnalyzer
-                            .Value.Where(shouldInclude)
+                        var diagnostics = diagnosticsByAnalyzer.Value
+                            .Where(shouldInclude)
                             .ToImmutableArray();
                         if (!diagnostics.IsEmpty)
                         {
@@ -854,8 +855,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             {
                 if (analyzers.Contains(diagnosticsByAnalyzer.Key))
                 {
-                    var diagnostics = diagnosticsByAnalyzer
-                        .Value.Where(shouldInclude)
+                    var diagnostics = diagnosticsByAnalyzer.Value
+                        .Where(shouldInclude)
                         .ToImmutableArray();
                     if (!diagnostics.IsEmpty)
                     {

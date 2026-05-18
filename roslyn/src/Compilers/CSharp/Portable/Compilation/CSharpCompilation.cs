@@ -1954,12 +1954,13 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// </summary>
         internal new NamedTypeSymbol? GetTypeByMetadataName(string fullyQualifiedMetadataName)
         {
-            var result = this.Assembly.GetTypeByMetadataName(
-                fullyQualifiedMetadataName,
-                includeReferences: true,
-                isWellKnownType: false,
-                conflicts: out var _
-            );
+            var result = this.Assembly
+                .GetTypeByMetadataName(
+                    fullyQualifiedMetadataName,
+                    includeReferences: true,
+                    isWellKnownType: false,
+                    conflicts: out var _
+                );
             Debug.Assert(result?.IsErrorType() != true);
             return result;
         }
@@ -2053,9 +2054,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                         entryPoint = new EntryPoint(
                             entryPoint.MethodSymbol,
                             new ImmutableBindingDiagnostic<AssemblySymbol>(
-                                entryPoint.Diagnostics.Diagnostics.Concat(
-                                    diagnostics.ToReadOnlyAndFree()
-                                ),
+                                entryPoint.Diagnostics
+                                    .Diagnostics
+                                    .Concat(diagnostics.ToReadOnlyAndFree()),
                                 entryPoint.Diagnostics.Dependencies
                             )
                         );
@@ -2905,12 +2906,15 @@ namespace Microsoft.CodeAnalysis.CSharp
         )
         {
             Debug.Assert(
-                System.Runtime.CompilerServices.Unsafe.AreSame(
-                    ref cachedBinderFactories,
-                    ref ignoreAccessibility
-                        ? ref _ignoreAccessibilityBinderFactories
-                        : ref _binderFactories
-                )
+                System.Runtime
+                    .CompilerServices
+                    .Unsafe
+                    .AreSame(
+                        ref cachedBinderFactories,
+                        ref ignoreAccessibility
+                            ? ref _ignoreAccessibilityBinderFactories
+                            : ref _binderFactories
+                    )
             );
 
             var treeNum = GetSyntaxTreeOrdinal(syntaxTree);
@@ -3068,10 +3072,11 @@ namespace Microsoft.CodeAnalysis.CSharp
                             else if (info.Kind == SyntaxKind.ExternAliasDirective)
                             {
                                 // Record targets of used extern aliases
-                                var node = info
-                                    .Tree.GetRoot(cancellationToken)
+                                var node = info.Tree
+                                    .GetRoot(cancellationToken)
                                     .FindToken(info.Span.Start, findInsideTrivia: false)
-                                    .Parent!.FirstAncestorOrSelf<ExternAliasDirectiveSyntax>();
+                                    .Parent!
+                                    .FirstAncestorOrSelf<ExternAliasDirectiveSyntax>();
 
                                 if (
                                     node is object
@@ -3505,7 +3510,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             if (
                 syntaxAndDeclarations
                     .GetLazyState()
-                    .LoadDirectiveMap.TryGetValue(syntaxTree, out loadDirectives)
+                    .LoadDirectiveMap
+                    .TryGetValue(syntaxTree, out loadDirectives)
             )
             {
                 Debug.Assert(!loadDirectives.IsEmpty);
@@ -3608,8 +3614,9 @@ namespace Microsoft.CodeAnalysis.CSharp
             if (reportUnusedUsings && UsageOfUsingsRecordedInTrees is not null)
             {
                 foreach (
-                    var singleDeclaration in ((SourceNamespaceSymbol)SourceModule.GlobalNamespace)
-                        .MergedDeclaration
+                    var singleDeclaration in (
+                        (SourceNamespaceSymbol)SourceModule.GlobalNamespace
+                    ).MergedDeclaration
                         .Declarations
                 )
                 {
@@ -4168,9 +4175,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                 if (
                     (
                         emittingPdb
-                        || moduleBeingBuilt.EmitOptions.InstrumentationKinds.Contains(
-                            InstrumentationKind.TestCoverage
-                        )
+                        || moduleBeingBuilt.EmitOptions
+                            .InstrumentationKinds
+                            .Contains(InstrumentationKind.TestCoverage)
                     )
                     && !CreateDebugDocuments(
                         moduleBeingBuilt.DebugDocumentsBuilder,
@@ -5040,10 +5047,11 @@ namespace Microsoft.CodeAnalysis.CSharp
             if (!elementNullableAnnotations.IsDefault)
             {
                 tupleType = tupleType.WithElementTypes(
-                    tupleType.TupleElementTypesWithAnnotations.ZipAsArray(
-                        elementNullableAnnotations,
-                        (t, a) => TypeWithAnnotations.Create(t.Type, a.ToInternalAnnotation())
-                    )
+                    tupleType.TupleElementTypesWithAnnotations
+                        .ZipAsArray(
+                            elementNullableAnnotations,
+                            (t, a) => TypeWithAnnotations.Create(t.Type, a.ToInternalAnnotation())
+                        )
                 );
             }
             return tupleType.GetPublicSymbol();
@@ -5095,8 +5103,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 Location.None
             );
 
-            return this
-                .AnonymousTypeManager.ConstructAnonymousTypeSymbol(descriptor)
+            return this.AnonymousTypeManager
+                .ConstructAnonymousTypeSymbol(descriptor)
                 .GetPublicSymbol();
         }
 
@@ -5166,11 +5174,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     && csharpRightType.SpecialType != SpecialType.None
                 )
                 {
-                    var easyOutBinaryKind = OverloadResolution.BinopEasyOut.OpKind(
-                        binaryKind,
-                        csharpLeftType,
-                        csharpRightType
-                    );
+                    var easyOutBinaryKind = OverloadResolution.BinopEasyOut
+                        .OpKind(binaryKind, csharpLeftType, csharpRightType);
 
                     if (easyOutBinaryKind != BinaryOperatorKind.Error)
                     {
@@ -5523,10 +5528,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     && csharpOperandType.SpecialType != SpecialType.None
                 )
                 {
-                    var easyOutUnaryKind = OverloadResolution.UnopEasyOut.OpKind(
-                        unaryKind,
-                        csharpOperandType
-                    );
+                    var easyOutUnaryKind = OverloadResolution.UnopEasyOut
+                        .OpKind(unaryKind, csharpOperandType);
 
                     if (easyOutUnaryKind != UnaryOperatorKind.Error)
                     {
@@ -5812,7 +5815,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                     bool value =
                         SyntaxTrees
                             .FirstOrDefault()
-                            ?.Options?.Features?.ContainsKey("nullablePublicOnly") == true;
+                            ?.Options
+                            ?.Features
+                            ?.ContainsKey("nullablePublicOnly") == true;
                     _lazyEmitNullablePublicOnly = value.ToThreeState();
                 }
                 return _lazyEmitNullablePublicOnly.Value();
@@ -6163,8 +6168,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     if (mergedNamespace != null)
                     {
                         _cache[
-                            mergedNamespace
-                                .ConstituentNamespaces.OfType<SourceNamespaceSymbol>()
+                            mergedNamespace.ConstituentNamespaces
+                                .OfType<SourceNamespaceSymbol>()
                                 .First()
                                 .MergedDeclaration
                         ] = symbol;

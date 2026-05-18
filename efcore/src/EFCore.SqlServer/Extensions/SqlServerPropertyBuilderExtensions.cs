@@ -109,11 +109,11 @@ public static class SqlServerPropertyBuilderExtensions
 
         return name == null
             ? null
-            : propertyBuilder.Metadata.DeclaringType.Model.Builder.HasSequence(
-                name,
-                schema,
-                fromDataAnnotation
-            );
+            : propertyBuilder.Metadata
+                .DeclaringType
+                .Model
+                .Builder
+                .HasSequence(name, schema, fromDataAnnotation);
     }
 
     /// <summary>
@@ -237,11 +237,11 @@ public static class SqlServerPropertyBuilderExtensions
 
         return name == null
             ? null
-            : propertyBuilder.Metadata.DeclaringType.Model.Builder.HasSequence(
-                name,
-                schema,
-                fromDataAnnotation
-            );
+            : propertyBuilder.Metadata
+                .DeclaringType
+                .Model
+                .Builder
+                .HasSequence(name, schema, fromDataAnnotation);
     }
 
     /// <summary>
@@ -525,13 +525,10 @@ public static class SqlServerPropertyBuilderExtensions
         in StoreObjectIdentifier storeObject,
         bool fromDataAnnotation = false
     ) =>
-        propertyBuilder
-            .Metadata.FindOverrides(storeObject)
-            ?.Builder.CanSetAnnotation(
-                SqlServerAnnotationNames.IdentitySeed,
-                seed,
-                fromDataAnnotation
-            )
+        propertyBuilder.Metadata
+            .FindOverrides(storeObject)
+            ?.Builder
+            .CanSetAnnotation(SqlServerAnnotationNames.IdentitySeed, seed, fromDataAnnotation)
         ?? true;
 
     /// <summary>
@@ -595,11 +592,8 @@ public static class SqlServerPropertyBuilderExtensions
             )
         )
         {
-            propertyBuilder.Metadata.SetIdentityIncrement(
-                increment,
-                storeObject,
-                fromDataAnnotation
-            );
+            propertyBuilder.Metadata
+                .SetIdentityIncrement(increment, storeObject, fromDataAnnotation);
             return propertyBuilder;
         }
 
@@ -649,9 +643,10 @@ public static class SqlServerPropertyBuilderExtensions
         in StoreObjectIdentifier storeObject,
         bool fromDataAnnotation = false
     ) =>
-        propertyBuilder
-            .Metadata.FindOverrides(storeObject)
-            ?.Builder.CanSetAnnotation(
+        propertyBuilder.Metadata
+            .FindOverrides(storeObject)
+            ?.Builder
+            .CanSetAnnotation(
                 SqlServerAnnotationNames.IdentityIncrement,
                 increment,
                 fromDataAnnotation
@@ -687,10 +682,8 @@ public static class SqlServerPropertyBuilderExtensions
             )
         )
         {
-            propertyBuilder.Metadata.SetValueGenerationStrategy(
-                valueGenerationStrategy,
-                fromDataAnnotation
-            );
+            propertyBuilder.Metadata
+                .SetValueGenerationStrategy(valueGenerationStrategy, fromDataAnnotation);
             if (valueGenerationStrategy != SqlServerValueGenerationStrategy.IdentityColumn)
             {
                 propertyBuilder.HasIdentityColumnSeed(null, fromDataAnnotation);
@@ -748,11 +741,12 @@ public static class SqlServerPropertyBuilderExtensions
             )
         )
         {
-            propertyBuilder.Metadata.SetValueGenerationStrategy(
-                valueGenerationStrategy,
-                storeObject,
-                fromDataAnnotation
-            );
+            propertyBuilder.Metadata
+                .SetValueGenerationStrategy(
+                    valueGenerationStrategy,
+                    storeObject,
+                    fromDataAnnotation
+                );
             if (valueGenerationStrategy != SqlServerValueGenerationStrategy.IdentityColumn)
             {
                 propertyBuilder.HasIdentityColumnSeed(null, storeObject, fromDataAnnotation);
@@ -816,9 +810,10 @@ public static class SqlServerPropertyBuilderExtensions
             || SqlServerPropertyExtensions.IsCompatibleWithValueGeneration(propertyBuilder.Metadata)
         )
         && (
-            propertyBuilder
-                .Metadata.FindOverrides(storeObject)
-                ?.Builder.CanSetAnnotation(
+            propertyBuilder.Metadata
+                .FindOverrides(storeObject)
+                ?.Builder
+                .CanSetAnnotation(
                     SqlServerAnnotationNames.ValueGenerationStrategy,
                     valueGenerationStrategy,
                     fromDataAnnotation

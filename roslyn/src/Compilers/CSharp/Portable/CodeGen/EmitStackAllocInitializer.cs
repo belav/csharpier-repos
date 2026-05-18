@@ -59,12 +59,13 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
                 else if (elementType.EnumUnderlyingTypeOrSelf().SpecialType.SizeInBytes() == 1)
                 {
                     // Initialize the stackalloc by copying the data from a metadata blob
-                    var field = _builder.module.GetFieldForData(
-                        data,
-                        alignment: 1,
-                        inits.Syntax,
-                        _diagnostics.DiagnosticBag
-                    );
+                    var field = _builder.module
+                        .GetFieldForData(
+                            data,
+                            alignment: 1,
+                            inits.Syntax,
+                            _diagnostics.DiagnosticBag
+                        );
                     _builder.EmitOpCode(ILOpCode.Dup);
                     _builder.EmitOpCode(ILOpCode.Ldsflda);
                     _builder.EmitToken(field, inits.Syntax, _diagnostics.DiagnosticBag);
@@ -163,7 +164,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
             int index = 0;
             int elementTypeSizeInBytes = elementType
                 .EnumUnderlyingTypeOrSelf()
-                .SpecialType.SizeInBytes();
+                .SpecialType
+                .SizeInBytes();
             foreach (BoundExpression init in inits)
             {
                 if (includeConstants || init.ConstantValueOpt == null)

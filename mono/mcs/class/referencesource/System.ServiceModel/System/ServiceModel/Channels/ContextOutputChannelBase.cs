@@ -158,12 +158,13 @@ namespace System.ServiceModel.Channels
 
                         if (this.correlationCallback.IsFullyDefined)
                         {
-                            IAsyncResult result = this.correlationCallback.BeginFinalizeCorrelation(
-                                this.message,
-                                this.timeoutHelper.RemainingTime(),
-                                onFinalizeCorrelation,
-                                this
-                            );
+                            IAsyncResult result = this.correlationCallback
+                                .BeginFinalizeCorrelation(
+                                    this.message,
+                                    this.timeoutHelper.RemainingTime(),
+                                    onFinalizeCorrelation,
+                                    this
+                                );
                             if (result.CompletedSynchronously)
                             {
                                 if (OnFinalizeCorrelationCompleted(result))
@@ -179,12 +180,9 @@ namespace System.ServiceModel.Channels
 
                 if (shouldSend)
                 {
-                    IAsyncResult result = this.channel.InnerChannel.BeginSend(
-                        this.message,
-                        this.timeoutHelper.RemainingTime(),
-                        onSend,
-                        this
-                    );
+                    IAsyncResult result = this.channel
+                        .InnerChannel
+                        .BeginSend(this.message, this.timeoutHelper.RemainingTime(), onSend, this);
                     if (result.CompletedSynchronously)
                     {
                         OnSendCompleted(result);
@@ -265,12 +263,14 @@ namespace System.ServiceModel.Channels
                 IAsyncResult sendResult;
                 try
                 {
-                    sendResult = this.channel.InnerChannel.BeginSend(
-                        this.sendMessage,
-                        this.timeoutHelper.RemainingTime(),
-                        onSend,
-                        this
-                    );
+                    sendResult = this.channel
+                        .InnerChannel
+                        .BeginSend(
+                            this.sendMessage,
+                            this.timeoutHelper.RemainingTime(),
+                            onSend,
+                            this
+                        );
                     throwing = false;
                 }
                 finally

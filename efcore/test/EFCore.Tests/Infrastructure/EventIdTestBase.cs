@@ -57,7 +57,8 @@ public abstract class EventIdTestBase
 
         var eventIdFields = eventIdType
             .GetTypeInfo()
-            .DeclaredFields.Where(p =>
+            .DeclaredFields
+            .Where(p =>
                 p.FieldType == typeof(EventId) && p.GetCustomAttribute<ObsoleteAttribute>() == null
             )
             .ToList();
@@ -84,8 +85,8 @@ public abstract class EventIdTestBase
 
                 var category = isExtensionMethod
                     ? loggerParameters[0].ParameterType.GenericTypeArguments[0]
-                    : loggerMethod
-                        .DeclaringType!.GetInterfaces()
+                    : loggerMethod.DeclaringType!
+                        .GetInterfaces()
                         .Single(i =>
                             i.IsGenericType
                             && i.GetGenericTypeDefinition() == typeof(IDiagnosticsLogger<>)

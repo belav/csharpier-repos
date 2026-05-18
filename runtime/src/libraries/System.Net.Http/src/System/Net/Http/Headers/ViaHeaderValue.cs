@@ -160,12 +160,8 @@ namespace System.Net.Http.Headers
             parsedValue = null;
 
             if (
-                GenericHeaderParser.SingleValueViaParser.TryParseValue(
-                    input,
-                    null,
-                    ref index,
-                    out object? output
-                )
+                GenericHeaderParser.SingleValueViaParser
+                    .TryParseValue(input, null, ref index, out object? output)
             )
             {
                 parsedValue = (ViaHeaderValue)output!;

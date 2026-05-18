@@ -58,8 +58,7 @@ namespace ILLink.RoslynAnalyzer.Tests
         )
         {
             var mdRef = MetadataReference.CreateFromFile(
-                typeof(Mono.Linker.Tests.Cases.Expectations.Metadata.BaseMetadataAttribute)
-                    .Assembly
+                typeof(Mono.Linker.Tests.Cases.Expectations.Metadata.BaseMetadataAttribute).Assembly
                     .Location
             );
             additionalReferences ??= Array.Empty<MetadataReference>();

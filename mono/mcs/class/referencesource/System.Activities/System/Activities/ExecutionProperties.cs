@@ -250,9 +250,8 @@ namespace System.Activities
         {
             if (this.scope.HasChildren)
             {
-                throw FxTrace.Exception.AsError(
-                    new InvalidOperationException(SR.CannotAddOrRemoveWithChildren)
-                );
+                throw FxTrace.Exception
+                    .AsError(new InvalidOperationException(SR.CannotAddOrRemoveWithChildren));
             }
         }
 
@@ -260,9 +259,8 @@ namespace System.Activities
         {
             if (this.context.IsDisposed)
             {
-                throw FxTrace.Exception.AsError(
-                    new InvalidOperationException(SR.AECForPropertiesHasBeenDisposed)
-                );
+                throw FxTrace.Exception
+                    .AsError(new InvalidOperationException(SR.AECForPropertiesHasBeenDisposed));
             }
         }
     }

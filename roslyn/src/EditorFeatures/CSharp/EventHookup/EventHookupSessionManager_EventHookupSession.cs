@@ -122,64 +122,58 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.EventHookup
                 )
                 {
                     var position = textView.GetCaretPoint(subjectBuffer).Value.Position;
-                    _trackingPoint = textView.TextSnapshot.CreateTrackingPoint(
-                        position,
-                        PointTrackingMode.Negative
-                    );
+                    _trackingPoint = textView.TextSnapshot
+                        .CreateTrackingPoint(position, PointTrackingMode.Negative);
 
                     // If the caret is at the end of the document we just create an empty span
                     var length = textView.TextSnapshot.Length > position + 1 ? 1 : 0;
-                    _trackingSpan = textView.TextSnapshot.CreateTrackingSpan(
-                        new Span(position, length),
-                        SpanTrackingMode.EdgeInclusive
-                    );
+                    _trackingSpan = textView.TextSnapshot
+                        .CreateTrackingSpan(
+                            new Span(position, length),
+                            SpanTrackingMode.EdgeInclusive
+                        );
 
                     var asyncToken = asyncListener.BeginAsyncOperation(GetType().Name + ".Start");
 
-                    this.GetEventNameTask = Task.Factory.SafeStartNewFromAsync(
-                        () =>
-                            DetermineIfEventHookupAndGetHandlerNameAsync(
-                                document,
-                                position,
-                                cancellationToken
-                            ),
-                        cancellationToken,
-                        TaskScheduler.Default
-                    );
+                    this.GetEventNameTask = Task.Factory
+                        .SafeStartNewFromAsync(
+                            () =>
+                                DetermineIfEventHookupAndGetHandlerNameAsync(
+                                    document,
+                                    position,
+                                    cancellationToken
+                                ),
+                            cancellationToken,
+                            TaskScheduler.Default
+                        );
 
-                    var continuedTask = this.GetEventNameTask.SafeContinueWithFromAsync(
-                        async t =>
-                        {
-                            await _threadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(
-                                alwaysYield: true,
-                                cancellationToken
-                            );
-
-                            if (t.Result != null)
+                    var continuedTask = this.GetEventNameTask
+                        .SafeContinueWithFromAsync(
+                            async t =>
                             {
-                                commandHandler.EventHookupSessionManager.EventHookupFoundInSession(
-                                    this
-                                );
-                            }
-                        },
-                        cancellationToken,
-                        TaskContinuationOptions.OnlyOnRanToCompletion
-                            | TaskContinuationOptions.ExecuteSynchronously,
-                        TaskScheduler.Default
-                    );
+                                await _threadingContext.JoinableTaskFactory
+                                    .SwitchToMainThreadAsync(alwaysYield: true, cancellationToken);
+
+                                if (t.Result != null)
+                                {
+                                    commandHandler.EventHookupSessionManager
+                                        .EventHookupFoundInSession(this);
+                                }
+                            },
+                            cancellationToken,
+                            TaskContinuationOptions.OnlyOnRanToCompletion
+                                | TaskContinuationOptions.ExecuteSynchronously,
+                            TaskScheduler.Default
+                        );
 
                     continuedTask.CompletesAsyncOperation(asyncToken);
                 }
                 else
                 {
-                    _trackingPoint = textView.TextSnapshot.CreateTrackingPoint(
-                        0,
-                        PointTrackingMode.Negative
-                    );
-                    _trackingSpan = textView.TextSnapshot.CreateTrackingSpan(
-                        new Span(),
-                        SpanTrackingMode.EdgeInclusive
-                    );
+                    _trackingPoint = textView.TextSnapshot
+                        .CreateTrackingPoint(0, PointTrackingMode.Negative);
+                    _trackingSpan = textView.TextSnapshot
+                        .CreateTrackingSpan(new Span(), SpanTrackingMode.EdgeInclusive);
                     this.GetEventNameTask = SpecializedTasks.Null<string>();
                     eventHookupSessionManager.CancelAndDismissExistingSessions();
                 }
@@ -317,9 +311,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.EventHookup
                     semanticModel,
                     syntaxFactsService
                 );
-                var basename = namingRule.NamingStyle.CreateName(
-                    ImmutableArray.Create(string.Format("{0}_{1}", objectPart, eventSymbol.Name))
-                );
+                var basename = namingRule.NamingStyle
+                    .CreateName(
+                        ImmutableArray.Create(
+                            string.Format("{0}_{1}", objectPart, eventSymbol.Name)
+                        )
+                    );
 
                 var reservedNames = semanticModel
                     .LookupSymbols(plusEqualsToken.SpanStart)

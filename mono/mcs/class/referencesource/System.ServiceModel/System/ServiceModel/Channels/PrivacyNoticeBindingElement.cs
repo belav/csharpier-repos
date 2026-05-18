@@ -45,13 +45,14 @@ namespace System.ServiceModel.Channels
             {
                 if (value < 0)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ArgumentOutOfRangeException(
-                            "value",
-                            value,
-                            SR.GetString(SR.ValueMustBePositive)
-                        )
-                    );
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperError(
+                            new ArgumentOutOfRangeException(
+                                "value",
+                                value,
+                                SR.GetString(SR.ValueMustBePositive)
+                            )
+                        );
                 }
                 this.version = value;
             }
@@ -81,8 +82,8 @@ namespace System.ServiceModel.Channels
 
             if (context.BindingElements != null)
             {
-                PrivacyNoticeBindingElement settings =
-                    context.BindingElements.Find<PrivacyNoticeBindingElement>();
+                PrivacyNoticeBindingElement settings = context.BindingElements
+                    .Find<PrivacyNoticeBindingElement>();
 
                 if (settings != null)
                 {

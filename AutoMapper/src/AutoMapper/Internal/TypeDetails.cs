@@ -69,9 +69,8 @@ public class TypeDetails
         {
             var publicNoArgMethods = GetPublicNoArgMethods();
             var noArgExtensionMethods = GetNoArgExtensionMethods(
-                Config.SourceExtensionMethods.Where(m =>
-                    !_nameToMember.ContainsKey(m.Name) && Config.ShouldMapMethod(m)
-                )
+                Config.SourceExtensionMethods
+                    .Where(m => !_nameToMember.ContainsKey(m.Name) && Config.ShouldMapMethod(m))
             );
             return accessors.Concat(publicNoArgMethods).Concat(noArgExtensionMethods);
         }

@@ -352,10 +352,11 @@ namespace System.Threading.Tasks.Tests
                 Task alreadyCompletedTask = Task.Factory.StartNew(() => { });
                 alreadyCompletedTask.Wait();
 
-                Task alreadyFaultedTask = Task.Factory.StartNew(() =>
-                {
-                    throw new Exception("FAULTED!");
-                });
+                Task alreadyFaultedTask = Task.Factory
+                    .StartNew(() =>
+                    {
+                        throw new Exception("FAULTED!");
+                    });
                 try
                 {
                     alreadyFaultedTask.Wait();
@@ -415,12 +416,13 @@ namespace System.Threading.Tasks.Tests
                 alreadyCompletedTask.Wait();
                 bool doIt = true;
 
-                Task<int> alreadyFaultedTask = Task<int>.Factory.StartNew(() =>
-                {
-                    if (doIt)
-                        throw new Exception("FAULTED!");
-                    return 42;
-                });
+                Task<int> alreadyFaultedTask = Task<int>.Factory
+                    .StartNew(() =>
+                    {
+                        if (doIt)
+                            throw new Exception("FAULTED!");
+                        return 42;
+                    });
                 try
                 {
                     alreadyFaultedTask.Wait();
@@ -1084,10 +1086,11 @@ namespace System.Threading.Tasks.Tests
 
             Task task8 = Task.Delay(-1, cts2.Token);
             Task task9 = Task.Delay(new TimeSpan(1, 0, 0, 0), cts2.Token);
-            Task.Factory.StartNew(() =>
-            {
-                cts2.Cancel();
-            });
+            Task.Factory
+                .StartNew(() =>
+                {
+                    cts2.Cancel();
+                });
 
             Debug.WriteLine(
                 "RunDelayTests:    > Waiting for infinite-delayed, eventually-canceled tasks to complete.  If we hang, something went wrong."
@@ -1196,12 +1199,13 @@ namespace System.Threading.Tasks.Tests
             Task<int> mcw1 = t.ContinueWith(
                     delegate(Task antecedent)
                     {
-                        Task<int> inner = Task<int>.Factory.StartNew(
-                            delegate
-                            {
-                                throw new InvalidOperationException();
-                            }
-                        );
+                        Task<int> inner = Task<int>.Factory
+                            .StartNew(
+                                delegate
+                                {
+                                    throw new InvalidOperationException();
+                                }
+                            );
 
                         return inner;
                     }
@@ -1215,12 +1219,13 @@ namespace System.Threading.Tasks.Tests
                     delegate(Task antecedent)
                     {
                         throwException();
-                        Task<int> inner = Task<int>.Factory.StartNew(
-                            delegate
-                            {
-                                return 0;
-                            }
-                        );
+                        Task<int> inner = Task<int>.Factory
+                            .StartNew(
+                                delegate
+                                {
+                                    return 0;
+                                }
+                            );
 
                         return inner;
                     }
@@ -1230,23 +1235,25 @@ namespace System.Threading.Tasks.Tests
             mcwExceptionChecker(mcw2, "Task antecedent, throw in returned Future");
 
             // Test mcw off of future
-            Task<int> f = Task<int>.Factory.StartNew(
-                delegate
-                {
-                    return 0;
-                }
-            );
+            Task<int> f = Task<int>.Factory
+                .StartNew(
+                    delegate
+                    {
+                        return 0;
+                    }
+                );
 
             // Throw in the returned future
             mcw1 = f.ContinueWith(
                     delegate(Task<int> antecedent)
                     {
-                        Task<int> inner = Task<int>.Factory.StartNew(
-                            delegate
-                            {
-                                throw new InvalidOperationException();
-                            }
-                        );
+                        Task<int> inner = Task<int>.Factory
+                            .StartNew(
+                                delegate
+                                {
+                                    throw new InvalidOperationException();
+                                }
+                            );
 
                         return inner;
                     }
@@ -1260,12 +1267,13 @@ namespace System.Threading.Tasks.Tests
                     delegate(Task<int> antecedent)
                     {
                         throwException();
-                        Task<int> inner = Task<int>.Factory.StartNew(
-                            delegate
-                            {
-                                return 0;
-                            }
-                        );
+                        Task<int> inner = Task<int>.Factory
+                            .StartNew(
+                                delegate
+                                {
+                                    return 0;
+                                }
+                            );
 
                         return inner;
                     }
@@ -1313,51 +1321,55 @@ namespace System.Threading.Tasks.Tests
             };
 
             // Try Task.FromAsync(iar,...)
-            Task asyncTask = Task.Factory.FromAsync(
-                fac.StartWrite("1234567890", null, null),
-                delegate(IAsyncResult iar)
-                {
-                    throw new InvalidOperationException();
-                }
-            );
+            Task asyncTask = Task.Factory
+                .FromAsync(
+                    fac.StartWrite("1234567890", null, null),
+                    delegate(IAsyncResult iar)
+                    {
+                        throw new InvalidOperationException();
+                    }
+                );
 
             AsyncExceptionChecker(asyncTask, "Task-based FromAsync(iar, ...)");
 
             // Try Task.FromAsync(beginMethod, endMethod, ...)
-            asyncTask = Task.Factory.FromAsync(
-                fac.StartWrite,
-                delegate(IAsyncResult iar)
-                {
-                    throw new InvalidOperationException();
-                },
-                "1234567890",
-                null
-            );
+            asyncTask = Task.Factory
+                .FromAsync(
+                    fac.StartWrite,
+                    delegate(IAsyncResult iar)
+                    {
+                        throw new InvalidOperationException();
+                    },
+                    "1234567890",
+                    null
+                );
 
             AsyncExceptionChecker(asyncTask, "Task-based FromAsync(beginMethod, ...)");
 
             // Try Task<string>.Factory.FromAsync(iar,...)
-            Task<string> asyncFuture = Task<string>.Factory.FromAsync(
-                fac.StartRead(10, null, null),
-                delegate(IAsyncResult iar)
-                {
-                    throwException();
-                    return fac.EndRead(iar);
-                }
-            );
+            Task<string> asyncFuture = Task<string>.Factory
+                .FromAsync(
+                    fac.StartRead(10, null, null),
+                    delegate(IAsyncResult iar)
+                    {
+                        throwException();
+                        return fac.EndRead(iar);
+                    }
+                );
 
             AsyncExceptionChecker(asyncFuture, "Future-based FromAsync(iar, ...)");
 
-            asyncFuture = Task<string>.Factory.FromAsync(
-                fac.StartRead,
-                delegate(IAsyncResult iar)
-                {
-                    throwException();
-                    return fac.EndRead(iar);
-                },
-                10,
-                null
-            );
+            asyncFuture = Task<string>.Factory
+                .FromAsync(
+                    fac.StartRead,
+                    delegate(IAsyncResult iar)
+                    {
+                        throwException();
+                        return fac.EndRead(iar);
+                    },
+                    10,
+                    null
+                );
 
             AsyncExceptionChecker(asyncFuture, "Future-based FromAsync(beginMethod, ...)");
         }
@@ -1395,10 +1407,11 @@ namespace System.Threading.Tasks.Tests
                         TaskScheduler tsInner1 = null,
                             tsInner2 = null;
 
-                        Task tInner = Task.Factory.StartNew(() =>
-                        {
-                            tsInner1 = TaskScheduler.Current;
-                        });
+                        Task tInner = Task.Factory
+                            .StartNew(() =>
+                            {
+                                tsInner1 = TaskScheduler.Current;
+                            });
                         Task continuation = tInner.ContinueWith(_ =>
                         {
                             tsInner2 = TaskScheduler.Current;
@@ -1410,15 +1423,16 @@ namespace System.Threading.Tasks.Tests
                         Assert.Equal(tsInner2, expectedInnerTs);
                     };
 
-                    Task outerTask = Task.Factory.StartNew(
-                        () =>
-                        {
-                            commonAction("task");
-                        },
-                        CancellationToken.None,
-                        creationOptions,
-                        outerTs
-                    );
+                    Task outerTask = Task.Factory
+                        .StartNew(
+                            () =>
+                            {
+                                commonAction("task");
+                            },
+                            CancellationToken.None,
+                            creationOptions,
+                            outerTs
+                        );
                     Task outerContinuation = outerTask.ContinueWith(
                         _ =>
                         {
@@ -1468,23 +1482,25 @@ namespace System.Threading.Tasks.Tests
         {
             // StartNew, Task and Future
             Task i1 = null;
-            Task t1 = Task.Factory.StartNew(
-                () =>
-                {
-                    i1 = new Task(() => { }, TaskCreationOptions.AttachedToParent);
-                },
-                TaskCreationOptions.DenyChildAttach
-            );
+            Task t1 = Task.Factory
+                .StartNew(
+                    () =>
+                    {
+                        i1 = new Task(() => { }, TaskCreationOptions.AttachedToParent);
+                    },
+                    TaskCreationOptions.DenyChildAttach
+                );
 
             Task i2 = null;
-            Task t2 = Task<int>.Factory.StartNew(
-                () =>
-                {
-                    i2 = new Task(() => { }, TaskCreationOptions.AttachedToParent);
-                    return 42;
-                },
-                TaskCreationOptions.DenyChildAttach
-            );
+            Task t2 = Task<int>.Factory
+                .StartNew(
+                    () =>
+                    {
+                        i2 = new Task(() => { }, TaskCreationOptions.AttachedToParent);
+                        return 42;
+                    },
+                    TaskCreationOptions.DenyChildAttach
+                );
 
             // ctor/Start, Task and Future
             Task i3 = null;
@@ -1701,25 +1717,26 @@ namespace System.Threading.Tasks.Tests
                 if (s == null)
                     throw new ArgumentNullException(nameof(s));
 
-                Task t = Task.Factory.StartNew(
-                    delegate
-                    {
-                        //Thread.Sleep(100);
-                        try
+                Task t = Task.Factory
+                    .StartNew(
+                        delegate
                         {
-                            lock (_list)
+                            //Thread.Sleep(100);
+                            try
                             {
-                                for (int i = 0; i < length; i++)
-                                    _list.Add(s[i + offset]);
+                                lock (_list)
+                                {
+                                    for (int i = 0; i < length; i++)
+                                        _list.Add(s[i + offset]);
+                                }
+                                mar.Signal();
                             }
-                            mar.Signal();
+                            catch (Exception e)
+                            {
+                                mar.Signal(e);
+                            }
                         }
-                        catch (Exception e)
-                        {
-                            mar.Signal(e);
-                        }
-                    }
-                );
+                    );
 
                 return mar;
             }
@@ -1768,37 +1785,38 @@ namespace System.Threading.Tasks.Tests
                 if (maxBytes == -1)
                     throw new ArgumentException("Value was not valid", nameof(maxBytes));
 
-                Task t = Task.Factory.StartNew(
-                    delegate
-                    {
-                        //Thread.Sleep(100);
-                        StringBuilder sb = new StringBuilder();
-                        int bytesRead = 0;
-                        try
+                Task t = Task.Factory
+                    .StartNew(
+                        delegate
                         {
-                            lock (_list)
+                            //Thread.Sleep(100);
+                            StringBuilder sb = new StringBuilder();
+                            int bytesRead = 0;
+                            try
                             {
-                                while ((_list.Count > 0) && (bytesRead < maxBytes))
+                                lock (_list)
                                 {
-                                    sb.Append(_list[0]);
-                                    if (buf != null)
+                                    while ((_list.Count > 0) && (bytesRead < maxBytes))
                                     {
-                                        buf[offset] = _list[0];
-                                        offset++;
+                                        sb.Append(_list[0]);
+                                        if (buf != null)
+                                        {
+                                            buf[offset] = _list[0];
+                                            offset++;
+                                        }
+                                        _list.RemoveAt(0);
+                                        bytesRead++;
                                     }
-                                    _list.RemoveAt(0);
-                                    bytesRead++;
                                 }
-                            }
 
-                            mar.SignalState(sb.ToString());
+                                mar.SignalState(sb.ToString());
+                            }
+                            catch (Exception e)
+                            {
+                                mar.Signal(e);
+                            }
                         }
-                        catch (Exception e)
-                        {
-                            mar.Signal(e);
-                        }
-                    }
-                );
+                    );
 
                 return mar;
             }

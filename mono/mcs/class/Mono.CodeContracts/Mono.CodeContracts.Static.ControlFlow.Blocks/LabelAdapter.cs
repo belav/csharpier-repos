@@ -98,12 +98,8 @@ namespace Mono.CodeContracts.Static.ControlFlow.Blocks
 
         public Result Branch(Label pc, Label target, bool leavesExceptionBlock, Data data)
         {
-            return this.visitor.Branch(
-                ConvertLabel(pc),
-                ConvertLabel(target),
-                leavesExceptionBlock,
-                data
-            );
+            return this.visitor
+                .Branch(ConvertLabel(pc), ConvertLabel(target), leavesExceptionBlock, data);
         }
 
         public Result BranchCond(
@@ -115,14 +111,8 @@ namespace Mono.CodeContracts.Static.ControlFlow.Blocks
             Data data
         )
         {
-            return this.visitor.BranchCond(
-                ConvertLabel(pc),
-                ConvertLabel(target),
-                bop,
-                value1,
-                value2,
-                data
-            );
+            return this.visitor
+                .BranchCond(ConvertLabel(pc), ConvertLabel(target), bop, value1, value2, data);
         }
 
         public Result BranchTrue(Label pc, Label target, Dummy cond, Data data)
@@ -152,15 +142,8 @@ namespace Mono.CodeContracts.Static.ControlFlow.Blocks
             where TypeList : IIndexable<TypeNode>
             where ArgList : IIndexable<Dummy>
         {
-            return this.visitor.Call(
-                ConvertLabel(pc),
-                method,
-                virt,
-                extraVarargs,
-                dest,
-                args,
-                data
-            );
+            return this.visitor
+                .Call(ConvertLabel(pc), method, virt, extraVarargs, dest, args, data);
         }
 
         public Result Calli<TypeList, ArgList>(
@@ -176,16 +159,17 @@ namespace Mono.CodeContracts.Static.ControlFlow.Blocks
             where TypeList : IIndexable<TypeNode>
             where ArgList : IIndexable<Dummy>
         {
-            return this.visitor.Calli(
-                ConvertLabel(pc),
-                returnType,
-                argTypes,
-                instance,
-                dest,
-                functionPointer,
-                args,
-                data
-            );
+            return this.visitor
+                .Calli(
+                    ConvertLabel(pc),
+                    returnType,
+                    argTypes,
+                    instance,
+                    dest,
+                    functionPointer,
+                    args,
+                    data
+                );
         }
 
         public Result CheckFinite(Label pc, Dummy dest, Dummy source, Data data)
@@ -292,15 +276,16 @@ namespace Mono.CodeContracts.Static.ControlFlow.Blocks
             where TypeList : IIndexable<TypeNode>
             where ArgList : IIndexable<Dummy>
         {
-            return this.visitor.ConstrainedCallvirt(
-                ConvertLabel(pc),
-                method,
-                constraint,
-                extraVarargs,
-                dest,
-                args,
-                data
-            );
+            return this.visitor
+                .ConstrainedCallvirt(
+                    ConvertLabel(pc),
+                    method,
+                    constraint,
+                    extraVarargs,
+                    dest,
+                    args,
+                    data
+                );
         }
 
         public Result CastClass(Label pc, TypeNode type, Dummy dest, Dummy obj, Data data)
@@ -470,11 +455,8 @@ namespace Mono.CodeContracts.Static.ControlFlow.Blocks
             if (this.original_pc.InsideOldManifestation)
                 return this.visitor.Nop(ConvertLabel(pc), data);
 
-            return this.visitor.BeginOld(
-                ConvertLabel(pc),
-                ConvertMatchingEndLabel(matchingEnd),
-                data
-            );
+            return this.visitor
+                .BeginOld(ConvertLabel(pc), ConvertMatchingEndLabel(matchingEnd), data);
         }
 
         public Result EndOld(
@@ -486,14 +468,15 @@ namespace Mono.CodeContracts.Static.ControlFlow.Blocks
             Data data
         )
         {
-            return this.visitor.EndOld(
-                ConvertLabel(pc),
-                ConvertMatchingBeginLabel(matchingBegin),
-                type,
-                dest,
-                source,
-                data
-            );
+            return this.visitor
+                .EndOld(
+                    ConvertLabel(pc),
+                    ConvertMatchingBeginLabel(matchingBegin),
+                    type,
+                    dest,
+                    source,
+                    data
+                );
         }
 
         public Result LoadStack(
@@ -518,15 +501,8 @@ namespace Mono.CodeContracts.Static.ControlFlow.Blocks
             Data data
         )
         {
-            return this.visitor.LoadStackAddress(
-                ConvertLabel(pc),
-                offset,
-                dest,
-                source,
-                type,
-                isOld,
-                data
-            );
+            return this.visitor
+                .LoadStackAddress(ConvertLabel(pc), offset, dest, source, type, isOld, data);
         }
 
         public Result LoadResult(Label pc, TypeNode type, Dummy dest, Dummy source, Data data)

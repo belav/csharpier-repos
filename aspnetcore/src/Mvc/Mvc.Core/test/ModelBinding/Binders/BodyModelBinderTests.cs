@@ -132,9 +132,8 @@ public class BodyModelBinderTests
             .BindingDetails(d =>
             {
                 d.BindingSource = BindingSource.Body;
-                d.ModelBindingMessageProvider.SetMissingRequestBodyRequiredValueAccessor(() =>
-                    "Customized error message"
-                );
+                d.ModelBindingMessageProvider
+                    .SetMissingRequestBodyRequiredValueAccessor(() => "Customized error message");
             });
 
         var bindingContext = GetBindingContext(typeof(Person), metadataProvider: provider);

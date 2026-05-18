@@ -44,8 +44,8 @@ namespace Microsoft.CodeAnalysis.BraceMatching
             foreach (var matcher in matchers)
             {
                 cancellationToken.ThrowIfCancellationRequested();
-                var braces = await matcher
-                    .Value.FindBracesAsync(document, position, options, cancellationToken)
+                var braces = await matcher.Value
+                    .FindBracesAsync(document, position, options, cancellationToken)
                     .ConfigureAwait(false);
                 if (braces.HasValue)
                 {

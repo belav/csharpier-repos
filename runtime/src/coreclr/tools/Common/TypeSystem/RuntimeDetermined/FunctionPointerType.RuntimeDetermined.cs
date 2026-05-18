@@ -28,8 +28,8 @@ namespace Internal.TypeSystem
         )
         {
             var sigBuilder = new MethodSignatureBuilder(_signature);
-            sigBuilder.ReturnType =
-                _signature.ReturnType.GetNonRuntimeDeterminedTypeFromRuntimeDeterminedSubtypeViaSubstitution(
+            sigBuilder.ReturnType = _signature.ReturnType
+                .GetNonRuntimeDeterminedTypeFromRuntimeDeterminedSubtypeViaSubstitution(
                     typeInstantiation,
                     methodInstantiation
                 );

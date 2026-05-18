@@ -78,10 +78,8 @@ namespace Microsoft.CodeAnalysis.DocumentationComments
                 return;
 
             using (
-                context.OperationContext.AddScope(
-                    allowCancellation: true,
-                    EditorFeaturesResources.Completing_Tag
-                )
+                context.OperationContext
+                    .AddScope(allowCancellation: true, EditorFeaturesResources.Completing_Tag)
             )
             {
                 var buffer = args.SubjectBuffer;

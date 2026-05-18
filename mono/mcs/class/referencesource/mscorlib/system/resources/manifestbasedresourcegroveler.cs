@@ -133,11 +133,12 @@ namespace System.Resources
 #if !FEATURE_CORECLR && !MONO
                         if (FrameworkEventSource.IsInitialized)
                         {
-                            FrameworkEventSource.Log.ResourceManagerFoundResourceSetInCacheUnexpected(
-                                _mediator.BaseName,
-                                _mediator.MainAssembly,
-                                culture.Name
-                            );
+                            FrameworkEventSource.Log
+                                .ResourceManagerFoundResourceSetInCacheUnexpected(
+                                    _mediator.BaseName,
+                                    _mediator.MainAssembly,
+                                    culture.Name
+                                );
                         }
 #endif
                     }
@@ -151,23 +152,25 @@ namespace System.Resources
             {
                 if (stream != null)
                 {
-                    FrameworkEventSource.Log.ResourceManagerStreamFound(
-                        _mediator.BaseName,
-                        _mediator.MainAssembly,
-                        culture.Name,
-                        satellite,
-                        fileName
-                    );
+                    FrameworkEventSource.Log
+                        .ResourceManagerStreamFound(
+                            _mediator.BaseName,
+                            _mediator.MainAssembly,
+                            culture.Name,
+                            satellite,
+                            fileName
+                        );
                 }
                 else
                 {
-                    FrameworkEventSource.Log.ResourceManagerStreamNotFound(
-                        _mediator.BaseName,
-                        _mediator.MainAssembly,
-                        culture.Name,
-                        satellite,
-                        fileName
-                    );
+                    FrameworkEventSource.Log
+                        .ResourceManagerStreamNotFound(
+                            _mediator.BaseName,
+                            _mediator.MainAssembly,
+                            culture.Name,
+                            satellite,
+                            fileName
+                        );
                 }
             }
 #endif
@@ -178,12 +181,13 @@ namespace System.Resources
 #if !FEATURE_CORECLR && !MONO
                 if (FrameworkEventSource.IsInitialized)
                 {
-                    FrameworkEventSource.Log.ResourceManagerCreatingResourceSet(
-                        _mediator.BaseName,
-                        _mediator.MainAssembly,
-                        culture.Name,
-                        fileName
-                    );
+                    FrameworkEventSource.Log
+                        .ResourceManagerCreatingResourceSet(
+                            _mediator.BaseName,
+                            _mediator.MainAssembly,
+                            culture.Name,
+                            fileName
+                        );
                 }
 #endif
                 rs = CreateResourceSet(stream, satellite);
@@ -203,11 +207,12 @@ namespace System.Resources
             {
                 if (FrameworkEventSource.IsInitialized)
                 {
-                    FrameworkEventSource.Log.ResourceManagerNotCreatingResourceSet(
-                        _mediator.BaseName,
-                        _mediator.MainAssembly,
-                        culture.Name
-                    );
+                    FrameworkEventSource.Log
+                        .ResourceManagerNotCreatingResourceSet(
+                            _mediator.BaseName,
+                            _mediator.MainAssembly,
+                            culture.Name
+                        );
                 }
             }
 #endif
@@ -246,11 +251,12 @@ namespace System.Resources
 #if !FEATURE_CORECLR && !MONO
                 if (FrameworkEventSource.IsInitialized)
                 {
-                    FrameworkEventSource.Log.ResourceManagerNeutralResourcesSufficient(
-                        _mediator.BaseName,
-                        _mediator.MainAssembly,
-                        lookForCulture.Name
-                    );
+                    FrameworkEventSource.Log
+                        .ResourceManagerNeutralResourcesSufficient(
+                            _mediator.BaseName,
+                            _mediator.MainAssembly,
+                            lookForCulture.Name
+                        );
                 }
 #endif
 
@@ -620,21 +626,23 @@ namespace System.Resources
             {
                 if (canonicalName != null)
                 {
-                    FrameworkEventSource.Log.ResourceManagerCaseInsensitiveResourceStreamLookupSucceeded(
-                        _mediator.BaseName,
-                        _mediator.MainAssembly,
-                        satellite.GetSimpleName(),
-                        givenName
-                    );
+                    FrameworkEventSource.Log
+                        .ResourceManagerCaseInsensitiveResourceStreamLookupSucceeded(
+                            _mediator.BaseName,
+                            _mediator.MainAssembly,
+                            satellite.GetSimpleName(),
+                            givenName
+                        );
                 }
                 else
                 {
-                    FrameworkEventSource.Log.ResourceManagerCaseInsensitiveResourceStreamLookupFailed(
-                        _mediator.BaseName,
-                        _mediator.MainAssembly,
-                        satellite.GetSimpleName(),
-                        givenName
-                    );
+                    FrameworkEventSource.Log
+                        .ResourceManagerCaseInsensitiveResourceStreamLookupFailed(
+                            _mediator.BaseName,
+                            _mediator.MainAssembly,
+                            satellite.GetSimpleName(),
+                            givenName
+                        );
                 }
             }
 #endif
@@ -667,12 +675,13 @@ namespace System.Resources
             {
                 if (FrameworkEventSource.IsInitialized)
                 {
-                    FrameworkEventSource.Log.ResourceManagerManifestResourceAccessDenied(
-                        _mediator.BaseName,
-                        _mediator.MainAssembly,
-                        satellite.GetSimpleName(),
-                        canonicalName
-                    );
+                    FrameworkEventSource.Log
+                        .ResourceManagerManifestResourceAccessDenied(
+                            _mediator.BaseName,
+                            _mediator.MainAssembly,
+                            satellite.GetSimpleName(),
+                            canonicalName
+                        );
                 }
             }
 #endif
@@ -703,13 +712,14 @@ namespace System.Resources
             // Yet also somehow log this error for a developer.
             try
             {
-                satellite = _mediator.MainAssembly.InternalGetSatelliteAssembly(
-                    satAssemblyName,
-                    lookForCulture,
-                    _mediator.SatelliteContractVersion,
-                    false,
-                    ref stackMark
-                );
+                satellite = _mediator.MainAssembly
+                    .InternalGetSatelliteAssembly(
+                        satAssemblyName,
+                        lookForCulture,
+                        _mediator.SatelliteContractVersion,
+                        false,
+                        ref stackMark
+                    );
             }
             // Jun 08: for cases other than ACCESS_DENIED, we'll assert instead of throw to give release builds more opportunity to fallback.
             //
@@ -776,21 +786,23 @@ namespace System.Resources
             {
                 if (satellite != null)
                 {
-                    FrameworkEventSource.Log.ResourceManagerGetSatelliteAssemblySucceeded(
-                        _mediator.BaseName,
-                        _mediator.MainAssembly,
-                        lookForCulture.Name,
-                        satAssemblyName
-                    );
+                    FrameworkEventSource.Log
+                        .ResourceManagerGetSatelliteAssemblySucceeded(
+                            _mediator.BaseName,
+                            _mediator.MainAssembly,
+                            lookForCulture.Name,
+                            satAssemblyName
+                        );
                 }
                 else
                 {
-                    FrameworkEventSource.Log.ResourceManagerGetSatelliteAssemblyFailed(
-                        _mediator.BaseName,
-                        _mediator.MainAssembly,
-                        lookForCulture.Name,
-                        satAssemblyName
-                    );
+                    FrameworkEventSource.Log
+                        .ResourceManagerGetSatelliteAssemblyFailed(
+                            _mediator.BaseName,
+                            _mediator.MainAssembly,
+                            lookForCulture.Name,
+                            satAssemblyName
+                        );
                 }
             }
 #endif

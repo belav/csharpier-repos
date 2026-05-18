@@ -73,10 +73,8 @@ namespace System.Web.UI
                     );
             }
 
-            virtualPath = HostingEnvironment.VirtualPathProvider.CombineVirtualPaths(
-                VirtualPath.Absolute,
-                virtualPath
-            );
+            virtualPath = HostingEnvironment.VirtualPathProvider
+                .CombineVirtualPaths(VirtualPath.Absolute, virtualPath);
             return BuildManager.GetCompiledType(virtualPath);
         }
 

@@ -17,9 +17,10 @@ namespace System.Activities.Core.Presentation
         public override void Initialize(EditingContext context, Type modelType)
         {
             if (
-                context
-                    .Services.GetService<DesignerConfigurationService>()
-                    .TargetFrameworkName.IsLessThan45()
+                context.Services
+                    .GetService<DesignerConfigurationService>()
+                    .TargetFrameworkName
+                    .IsLessThan45()
             )
             {
                 AttributeTableBuilder builder = new AttributeTableBuilder();

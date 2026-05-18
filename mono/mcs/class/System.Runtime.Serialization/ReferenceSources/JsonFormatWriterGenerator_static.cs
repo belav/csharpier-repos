@@ -162,10 +162,8 @@ namespace System.Runtime.Serialization.Json
                 InvokeOnSerializing(classContract.BaseContract, objSerialized, context);
             if (classContract.OnSerializing != null)
             {
-                classContract.OnSerializing.Invoke(
-                    objSerialized,
-                    new object[] { context.GetStreamingContext() }
-                );
+                classContract.OnSerializing
+                    .Invoke(objSerialized, new object[] { context.GetStreamingContext() });
             }
         }
 
@@ -179,10 +177,8 @@ namespace System.Runtime.Serialization.Json
                 InvokeOnSerialized(classContract.BaseContract, objSerialized, context);
             if (classContract.OnSerialized != null)
             {
-                classContract.OnSerialized.Invoke(
-                    objSerialized,
-                    new object[] { context.GetStreamingContext() }
-                );
+                classContract.OnSerialized
+                    .Invoke(objSerialized, new object[] { context.GetStreamingContext() });
             }
         }
 
@@ -283,17 +279,18 @@ namespace System.Runtime.Serialization.Json
                     case CollectionKind.GenericCollection:
                     case CollectionKind.GenericList:
                         incrementCollectionCountMethod =
-                            XmlFormatGeneratorStatics.IncrementCollectionCountGenericMethod.MakeGenericMethod(
-                                collectionContract.ItemType
-                            );
+                            XmlFormatGeneratorStatics.IncrementCollectionCountGenericMethod
+                                .MakeGenericMethod(collectionContract.ItemType);
                         break;
                     case CollectionKind.GenericDictionary:
                         incrementCollectionCountMethod =
-                            XmlFormatGeneratorStatics.IncrementCollectionCountGenericMethod.MakeGenericMethod(
-                                Globals.TypeOfKeyValuePair.MakeGenericType(
-                                    collectionContract.ItemType.GetGenericArguments()
-                                )
-                            );
+                            XmlFormatGeneratorStatics.IncrementCollectionCountGenericMethod
+                                .MakeGenericMethod(
+                                    Globals.TypeOfKeyValuePair
+                                        .MakeGenericType(
+                                            collectionContract.ItemType.GetGenericArguments()
+                                        )
+                                );
                         break;
                 }
                 if (incrementCollectionCountMethod != null)
@@ -310,9 +307,8 @@ namespace System.Runtime.Serialization.Json
                 {
                     isGenericDictionary = true;
                     keyValueTypes = collectionContract.ItemType.GetGenericArguments();
-                    enumeratorType = Globals.TypeOfGenericDictionaryEnumerator.MakeGenericType(
-                        keyValueTypes
-                    );
+                    enumeratorType = Globals.TypeOfGenericDictionaryEnumerator
+                        .MakeGenericType(keyValueTypes);
                 }
                 else if (collectionContract.Kind == CollectionKind.Dictionary)
                 {
@@ -404,9 +400,8 @@ namespace System.Runtime.Serialization.Json
                 }
                 else if (isGenericDictionary)
                 {
-                    Type ctorParam = Globals.TypeOfIEnumeratorGeneric.MakeGenericType(
-                        Globals.TypeOfKeyValuePair.MakeGenericType(keyValueTypes)
-                    );
+                    Type ctorParam = Globals.TypeOfIEnumeratorGeneric
+                        .MakeGenericType(Globals.TypeOfKeyValuePair.MakeGenericType(keyValueTypes));
                     ConstructorInfo dictEnumCtor = enumeratorType.GetConstructor(
                         Globals.ScanAllMembers,
                         null,
@@ -426,9 +421,8 @@ namespace System.Runtime.Serialization.Json
 
                 if (canWriteSimpleDictionary)
                 {
-                    Type genericDictionaryKeyValueType = Globals.TypeOfKeyValue.MakeGenericType(
-                        keyValueTypes
-                    );
+                    Type genericDictionaryKeyValueType = Globals.TypeOfKeyValue
+                        .MakeGenericType(keyValueTypes);
                     genericDictionaryKeyProperty = genericDictionaryKeyValueType.GetProperty(
                         JsonGlobals.KeyString
                     );
@@ -470,10 +464,8 @@ namespace System.Runtime.Serialization.Json
                         currentValue = getCurrentMethod.Invoke(enumerator, emptyArray);
 
                         if (incrementCollectionCountMethod == null)
-                            XmlFormatGeneratorStatics.IncrementItemCountMethod.Invoke(
-                                context,
-                                new object[] { 1 }
-                            );
+                            XmlFormatGeneratorStatics.IncrementItemCountMethod
+                                .Invoke(context, new object[] { 1 });
 
                         if (
                             !TryWritePrimitive(
@@ -691,10 +683,8 @@ namespace System.Runtime.Serialization.Json
             Pointer memberValueRefPointer = null;
             if (memberType.IsPointer)
                 memberValueRefPointer = (Pointer)
-                    JsonFormatGeneratorStatics.BoxPointer.Invoke(
-                        null,
-                        new object[] { memberValue, memberType }
-                    );
+                    JsonFormatGeneratorStatics.BoxPointer
+                        .Invoke(null, new object[] { memberValue, memberType });
             bool isNullableOfT = (
                 memberType.IsGenericType
                 && memberType.GetGenericTypeDefinition() == Globals.TypeOfNullable
@@ -704,10 +694,8 @@ namespace System.Runtime.Serialization.Json
                 PrimitiveDataContract primitiveContract =
                     PrimitiveDataContract.GetPrimitiveDataContract(memberType);
                 if (primitiveContract != null)
-                    primitiveContract.XmlFormatContentWriterMethod.Invoke(
-                        writer,
-                        new object[] { memberValue }
-                    );
+                    primitiveContract.XmlFormatContentWriterMethod
+                        .Invoke(writer, new object[] { memberValue });
                 else
                     InternalSerialize(
                         XmlFormatGeneratorStatics.InternalSerializeMethod,
@@ -728,15 +716,16 @@ namespace System.Runtime.Serialization.Json
                 else
                     isNull = memberValue == null;
                 if (isNull)
-                    XmlFormatGeneratorStatics.WriteNullMethod.Invoke(
-                        context,
-                        new object[]
-                        {
-                            writer,
-                            memberType,
-                            DataContract.IsTypeSerializable(memberType),
-                        }
-                    );
+                    XmlFormatGeneratorStatics.WriteNullMethod
+                        .Invoke(
+                            context,
+                            new object[]
+                            {
+                                writer,
+                                memberType,
+                                DataContract.IsTypeSerializable(memberType),
+                            }
+                        );
                 else
                 {
                     PrimitiveDataContract primitiveContract =
@@ -747,15 +736,11 @@ namespace System.Runtime.Serialization.Json
                     )
                     {
                         if (isNullableOfT)
-                            primitiveContract.XmlFormatContentWriterMethod.Invoke(
-                                writer,
-                                new object[] { memberValue }
-                            );
+                            primitiveContract.XmlFormatContentWriterMethod
+                                .Invoke(writer, new object[] { memberValue });
                         else
-                            primitiveContract.XmlFormatContentWriterMethod.Invoke(
-                                context,
-                                new object[] { writer, memberValue }
-                            );
+                            primitiveContract.XmlFormatContentWriterMethod
+                                .Invoke(context, new object[] { writer, memberValue });
                     }
                     else
                     {
@@ -777,15 +762,16 @@ namespace System.Runtime.Serialization.Json
                         }
                         if (isNull2)
                         {
-                            XmlFormatGeneratorStatics.WriteNullMethod.Invoke(
-                                context,
-                                new object[]
-                                {
-                                    writer,
-                                    memberType,
-                                    DataContract.IsTypeSerializable(memberType),
-                                }
-                            );
+                            XmlFormatGeneratorStatics.WriteNullMethod
+                                .Invoke(
+                                    context,
+                                    new object[]
+                                    {
+                                        writer,
+                                        memberType,
+                                        DataContract.IsTypeSerializable(memberType),
+                                    }
+                                );
                         }
                         else
                         {
@@ -853,18 +839,18 @@ namespace System.Runtime.Serialization.Json
                 Type innerType = memberType.GetGenericArguments()[0];
                 if (
                     (bool)
-                        XmlFormatGeneratorStatics
-                            .GetHasValueMethod.MakeGenericMethod(innerType)
+                        XmlFormatGeneratorStatics.GetHasValueMethod
+                            .MakeGenericMethod(innerType)
                             .Invoke(null, new object[] { v })
                 )
-                    v = XmlFormatGeneratorStatics
-                        .GetNullableValueMethod.MakeGenericMethod(innerType)
+                    v = XmlFormatGeneratorStatics.GetNullableValueMethod
+                        .MakeGenericMethod(innerType)
                         .Invoke(null, new object[] { v });
                 else
                 {
                     isNull = true;
-                    v = XmlFormatGeneratorStatics
-                        .GetDefaultValueMethod.MakeGenericMethod(memberType)
+                    v = XmlFormatGeneratorStatics.GetDefaultValueMethod
+                        .MakeGenericMethod(memberType)
                         .Invoke(null, new object[0]);
                 }
                 memberType = innerType;

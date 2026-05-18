@@ -23,10 +23,8 @@ namespace Microsoft.CodeAnalysis.Editor.EditorConfigSettings.Updater
         {
             namingStyleOption = null;
             foreach (
-                var (
-                    option,
-                    optionAsNamingStyle
-                ) in editorConfigNamingStyles.Rules.AsNamingStyleSettings()
+                var (option, optionAsNamingStyle) in editorConfigNamingStyles.Rules
+                    .AsNamingStyleSettings()
             )
             {
                 if (AreSameRule(optionAsNamingStyle, namingStyleSetting))
@@ -56,9 +54,8 @@ namespace Microsoft.CodeAnalysis.Editor.EditorConfigSettings.Updater
                 }
 
                 return left.ApplicableSymbolKindList.SequenceEqual(right!.ApplicableSymbolKindList)
-                    && left.ApplicableAccessibilityList.SequenceEqual(
-                        right.ApplicableAccessibilityList
-                    )
+                    && left.ApplicableAccessibilityList
+                        .SequenceEqual(right.ApplicableAccessibilityList)
                     && left.RequiredModifierList.SequenceEqual(right.RequiredModifierList);
             }
 

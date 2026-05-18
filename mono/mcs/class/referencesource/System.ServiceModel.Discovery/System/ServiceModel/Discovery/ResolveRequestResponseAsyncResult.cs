@@ -95,20 +95,20 @@ namespace System.ServiceModel.Discovery
 
         bool ProcessResolveRequest()
         {
-            IAsyncResult result = this.discoveryServiceImpl.BeginResolve(
-                this.resolveCriteria,
-                this.PrepareAsyncCompletion(onOnResolveCompletedCallback),
-                this
-            );
+            IAsyncResult result = this.discoveryServiceImpl
+                .BeginResolve(
+                    this.resolveCriteria,
+                    this.PrepareAsyncCompletion(onOnResolveCompletedCallback),
+                    this
+                );
 
             return (result.CompletedSynchronously && OnOnResolveCompleted(result));
         }
 
         bool EnsureNotDuplicate()
         {
-            bool isDuplicate = this.discoveryServiceImpl.IsDuplicate(
-                OperationContext.Current.IncomingMessageHeaders.MessageId
-            );
+            bool isDuplicate = this.discoveryServiceImpl
+                .IsDuplicate(OperationContext.Current.IncomingMessageHeaders.MessageId);
 
             if (isDuplicate && TD.DuplicateDiscoveryMessageIsEnabled())
             {

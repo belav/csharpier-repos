@@ -3836,42 +3836,56 @@ namespace System.Data.Linq.SqlClient
                         case "Ticks":
                             if (SqlFactory.IsSqlTimeType(exp))
                             {
-                                return this.sql.Divide(
-                                    sql.ConvertToBigint(
-                                        sql.Add(
-                                            this.sql.Multiply(
-                                                sql.ConvertToBigint(sql.DATEPART("HOUR", exp)),
-                                                3600000000000
-                                            ),
-                                            this.sql.Multiply(
-                                                sql.ConvertToBigint(sql.DATEPART("MINUTE", exp)),
-                                                60000000000
-                                            ),
-                                            this.sql.Multiply(
-                                                sql.ConvertToBigint(sql.DATEPART("SECOND", exp)),
-                                                1000000000
-                                            ),
-                                            sql.DATEPART("NANOSECOND", exp)
-                                        )
-                                    ),
-                                    100
-                                );
+                                return this.sql
+                                    .Divide(
+                                        sql.ConvertToBigint(
+                                            sql.Add(
+                                                this.sql
+                                                    .Multiply(
+                                                        sql.ConvertToBigint(
+                                                            sql.DATEPART("HOUR", exp)
+                                                        ),
+                                                        3600000000000
+                                                    ),
+                                                this.sql
+                                                    .Multiply(
+                                                        sql.ConvertToBigint(
+                                                            sql.DATEPART("MINUTE", exp)
+                                                        ),
+                                                        60000000000
+                                                    ),
+                                                this.sql
+                                                    .Multiply(
+                                                        sql.ConvertToBigint(
+                                                            sql.DATEPART("SECOND", exp)
+                                                        ),
+                                                        1000000000
+                                                    ),
+                                                sql.DATEPART("NANOSECOND", exp)
+                                            )
+                                        ),
+                                        100
+                                    );
                             }
                             return sql.ConvertToBigint(exp);
                         case "TotalMilliseconds":
                             if (SqlFactory.IsSqlTimeType(exp))
                             {
-                                return this.sql.Add(
-                                    this.sql.Multiply(sql.DATEPART("HOUR", exp), 3600000),
-                                    this.sql.Multiply(sql.DATEPART("MINUTE", exp), 60000),
-                                    this.sql.Multiply(sql.DATEPART("SECOND", exp), 1000),
-                                    this.sql.Divide(
-                                        sql.ConvertToDouble(
-                                            sql.ConvertToBigint(sql.DATEPART("NANOSECOND", exp))
-                                        ),
-                                        1000000
-                                    )
-                                );
+                                return this.sql
+                                    .Add(
+                                        this.sql.Multiply(sql.DATEPART("HOUR", exp), 3600000),
+                                        this.sql.Multiply(sql.DATEPART("MINUTE", exp), 60000),
+                                        this.sql.Multiply(sql.DATEPART("SECOND", exp), 1000),
+                                        this.sql
+                                            .Divide(
+                                                sql.ConvertToDouble(
+                                                    sql.ConvertToBigint(
+                                                        sql.DATEPART("NANOSECOND", exp)
+                                                    )
+                                                ),
+                                                1000000
+                                            )
+                                    );
                             }
                             return sql.Divide(
                                 sql.ConvertToDouble(exp),
@@ -3880,83 +3894,109 @@ namespace System.Data.Linq.SqlClient
                         case "TotalSeconds":
                             if (SqlFactory.IsSqlTimeType(exp))
                             {
-                                return this.sql.Add(
-                                    this.sql.Multiply(sql.DATEPART("HOUR", exp), 3600),
-                                    this.sql.Multiply(sql.DATEPART("MINUTE", exp), 60),
-                                    this.sql.DATEPART("SECOND", exp),
-                                    this.sql.Divide(
-                                        sql.ConvertToDouble(
-                                            sql.ConvertToBigint(sql.DATEPART("NANOSECOND", exp))
-                                        ),
-                                        1000000000
-                                    )
-                                );
+                                return this.sql
+                                    .Add(
+                                        this.sql.Multiply(sql.DATEPART("HOUR", exp), 3600),
+                                        this.sql.Multiply(sql.DATEPART("MINUTE", exp), 60),
+                                        this.sql.DATEPART("SECOND", exp),
+                                        this.sql
+                                            .Divide(
+                                                sql.ConvertToDouble(
+                                                    sql.ConvertToBigint(
+                                                        sql.DATEPART("NANOSECOND", exp)
+                                                    )
+                                                ),
+                                                1000000000
+                                            )
+                                    );
                             }
                             return sql.Divide(sql.ConvertToDouble(exp), TimeSpan.TicksPerSecond);
                         case "TotalMinutes":
                             if (SqlFactory.IsSqlTimeType(exp))
                             {
-                                return this.sql.Add(
-                                    this.sql.Multiply(sql.DATEPART("HOUR", exp), 60),
-                                    this.sql.DATEPART("MINUTE", exp),
-                                    this.sql.Divide(
-                                        sql.ConvertToDouble(sql.DATEPART("SECOND", exp)),
-                                        60
-                                    ),
-                                    this.sql.Divide(
-                                        sql.ConvertToDouble(
-                                            sql.ConvertToBigint(sql.DATEPART("NANOSECOND", exp))
-                                        ),
-                                        60000000000
-                                    )
-                                );
+                                return this.sql
+                                    .Add(
+                                        this.sql.Multiply(sql.DATEPART("HOUR", exp), 60),
+                                        this.sql.DATEPART("MINUTE", exp),
+                                        this.sql
+                                            .Divide(
+                                                sql.ConvertToDouble(sql.DATEPART("SECOND", exp)),
+                                                60
+                                            ),
+                                        this.sql
+                                            .Divide(
+                                                sql.ConvertToDouble(
+                                                    sql.ConvertToBigint(
+                                                        sql.DATEPART("NANOSECOND", exp)
+                                                    )
+                                                ),
+                                                60000000000
+                                            )
+                                    );
                             }
                             return sql.Divide(sql.ConvertToDouble(exp), TimeSpan.TicksPerMinute);
                         case "TotalHours":
                             if (SqlFactory.IsSqlTimeType(exp))
                             {
-                                return this.sql.Add(
-                                    this.sql.DATEPART("HOUR", exp),
-                                    this.sql.Divide(
-                                        sql.ConvertToDouble(sql.DATEPART("MINUTE", exp)),
-                                        60
-                                    ),
-                                    this.sql.Divide(
-                                        sql.ConvertToDouble(sql.DATEPART("SECOND", exp)),
-                                        3600
-                                    ),
-                                    this.sql.Divide(
-                                        sql.ConvertToDouble(
-                                            sql.ConvertToBigint(sql.DATEPART("NANOSECOND", exp))
-                                        ),
-                                        3600000000000
-                                    )
-                                );
+                                return this.sql
+                                    .Add(
+                                        this.sql.DATEPART("HOUR", exp),
+                                        this.sql
+                                            .Divide(
+                                                sql.ConvertToDouble(sql.DATEPART("MINUTE", exp)),
+                                                60
+                                            ),
+                                        this.sql
+                                            .Divide(
+                                                sql.ConvertToDouble(sql.DATEPART("SECOND", exp)),
+                                                3600
+                                            ),
+                                        this.sql
+                                            .Divide(
+                                                sql.ConvertToDouble(
+                                                    sql.ConvertToBigint(
+                                                        sql.DATEPART("NANOSECOND", exp)
+                                                    )
+                                                ),
+                                                3600000000000
+                                            )
+                                    );
                             }
                             return sql.Divide(sql.ConvertToDouble(exp), TimeSpan.TicksPerHour);
                         case "TotalDays":
                             if (SqlFactory.IsSqlTimeType(exp))
                             {
-                                return this.sql.Divide(
-                                    this.sql.Add(
-                                        this.sql.DATEPART("HOUR", exp),
-                                        this.sql.Divide(
-                                            sql.ConvertToDouble(sql.DATEPART("MINUTE", exp)),
-                                            60
-                                        ),
-                                        this.sql.Divide(
-                                            sql.ConvertToDouble(sql.DATEPART("SECOND", exp)),
-                                            3600
-                                        ),
-                                        this.sql.Divide(
-                                            sql.ConvertToDouble(
-                                                sql.ConvertToBigint(sql.DATEPART("NANOSECOND", exp))
+                                return this.sql
+                                    .Divide(
+                                        this.sql
+                                            .Add(
+                                                this.sql.DATEPART("HOUR", exp),
+                                                this.sql
+                                                    .Divide(
+                                                        sql.ConvertToDouble(
+                                                            sql.DATEPART("MINUTE", exp)
+                                                        ),
+                                                        60
+                                                    ),
+                                                this.sql
+                                                    .Divide(
+                                                        sql.ConvertToDouble(
+                                                            sql.DATEPART("SECOND", exp)
+                                                        ),
+                                                        3600
+                                                    ),
+                                                this.sql
+                                                    .Divide(
+                                                        sql.ConvertToDouble(
+                                                            sql.ConvertToBigint(
+                                                                sql.DATEPART("NANOSECOND", exp)
+                                                            )
+                                                        ),
+                                                        3600000000000
+                                                    )
                                             ),
-                                            3600000000000
-                                        )
-                                    ),
-                                    24
-                                );
+                                        24
+                                    );
                             }
                             return sql.Divide(sql.ConvertToDouble(exp), TimeSpan.TicksPerDay);
                         case "Milliseconds":

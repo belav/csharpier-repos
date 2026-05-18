@@ -284,9 +284,8 @@ namespace ILLink.RoslynAnalyzer
                     context =>
                     {
                         if (
-                            context.ContainingSymbol.IsInRequiresUnreferencedCodeAttributeScope(
-                                out _
-                            )
+                            context.ContainingSymbol
+                                .IsInRequiresUnreferencedCodeAttributeScope(out _)
                         )
                             return;
 
@@ -307,9 +306,8 @@ namespace ILLink.RoslynAnalyzer
                     context =>
                     {
                         if (
-                            context.ContainingSymbol.IsInRequiresUnreferencedCodeAttributeScope(
-                                out _
-                            )
+                            context.ContainingSymbol
+                                .IsInRequiresUnreferencedCodeAttributeScope(out _)
                         )
                             return;
 
@@ -336,9 +334,8 @@ namespace ILLink.RoslynAnalyzer
                     context =>
                     {
                         if (
-                            context.ContainingSymbol.IsInRequiresUnreferencedCodeAttributeScope(
-                                out _
-                            )
+                            context.ContainingSymbol
+                                .IsInRequiresUnreferencedCodeAttributeScope(out _)
                         )
                             return;
 
@@ -679,14 +676,16 @@ namespace ILLink.RoslynAnalyzer
                         (
                             !attributableSymbolLocation.IsInSource
                             || (
-                                overrideParam.ParameterSymbol!.TryGetAttribute(
-                                    DynamicallyAccessedMembersAnalyzer.DynamicallyAccessedMembersAttribute,
-                                    out var _
-                                )
-                                && baseParam.ParameterSymbol!.TryGetAttribute(
-                                    DynamicallyAccessedMembersAnalyzer.DynamicallyAccessedMembersAttribute,
-                                    out var _
-                                )
+                                overrideParam.ParameterSymbol!
+                                    .TryGetAttribute(
+                                        DynamicallyAccessedMembersAnalyzer.DynamicallyAccessedMembersAttribute,
+                                        out var _
+                                    )
+                                && baseParam.ParameterSymbol!
+                                    .TryGetAttribute(
+                                        DynamicallyAccessedMembersAnalyzer.DynamicallyAccessedMembersAttribute,
+                                        out var _
+                                    )
                             )
                         )
                             ? (null, null)

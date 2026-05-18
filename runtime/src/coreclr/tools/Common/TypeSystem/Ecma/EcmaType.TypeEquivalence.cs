@@ -25,16 +25,17 @@ namespace Internal.TypeSystem.Ecma
             else
             {
                 // other equivalent types get it from the declaring assembly
-                var attributeHandle = this.MetadataReader.GetCustomAttributeHandle(
-                    MetadataReader.GetAssemblyDefinition().GetCustomAttributes(),
-                    "System.Runtime.InteropServices",
-                    "GuidAttribute"
-                );
+                var attributeHandle = this.MetadataReader
+                    .GetCustomAttributeHandle(
+                        MetadataReader.GetAssemblyDefinition().GetCustomAttributes(),
+                        "System.Runtime.InteropServices",
+                        "GuidAttribute"
+                    );
                 if (attributeHandle.IsNil)
                     return null;
 
-                guidAttribute = this
-                    .MetadataReader.GetCustomAttribute(attributeHandle)
+                guidAttribute = this.MetadataReader
+                    .GetCustomAttribute(attributeHandle)
                     .DecodeValue(new CustomAttributeTypeProvider(this.EcmaModule));
             }
 

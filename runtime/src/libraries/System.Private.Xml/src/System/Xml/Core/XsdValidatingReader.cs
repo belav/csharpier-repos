@@ -901,11 +901,8 @@ namespace System.Xml
                 }
                 else
                 {
-                    return XmlUntypedConverter.Untyped.ChangeType(
-                        typedValue,
-                        returnType,
-                        namespaceResolver
-                    );
+                    return XmlUntypedConverter.Untyped
+                        .ChangeType(typedValue, returnType, namespaceResolver);
                 }
             }
             catch (FormatException e)
@@ -1380,19 +1377,13 @@ namespace System.Xml
                         typedValue = originalStringValue;
                     }
 
-                    return xmlType.ValueConverter.ChangeType(
-                        typedValue!,
-                        returnType,
-                        namespaceResolver
-                    );
+                    return xmlType.ValueConverter
+                        .ChangeType(typedValue!, returnType, namespaceResolver);
                 }
                 else
                 {
-                    return XmlUntypedConverter.Untyped.ChangeType(
-                        typedValue!,
-                        returnType,
-                        namespaceResolver
-                    );
+                    return XmlUntypedConverter.Untyped
+                        .ChangeType(typedValue!, returnType, namespaceResolver);
                 }
             }
             catch (FormatException e)
@@ -2751,8 +2742,7 @@ namespace System.Xml
                 {
                     if (_validationState == ValidatingReaderState.OnDefaultAttribute)
                     {
-                        XmlSchemaAttribute schemaAttr = _attributePSVI
-                            .attributeSchemaInfo
+                        XmlSchemaAttribute schemaAttr = _attributePSVI.attributeSchemaInfo
                             .SchemaAttribute!;
                         originalStringValue = schemaAttr.DefaultValue ?? schemaAttr.FixedValue!;
                     }
@@ -3100,9 +3090,9 @@ namespace System.Xml
                                 {
                                     // The atomicValue returned is a default value
                                     _cachingReader.SwitchTextNodeAndEndElement(
-                                        _xmlSchemaInfo.XmlType!.ValueConverter.ToString(
-                                            _atomicValue!
-                                        ),
+                                        _xmlSchemaInfo.XmlType!
+                                            .ValueConverter
+                                            .ToString(_atomicValue!),
                                         _originalAtomicValueString
                                     );
                                 }
@@ -3152,11 +3142,12 @@ namespace System.Xml
                         Debug.Assert(listType != null);
                         if (listType.ItemType.Variety == XmlSchemaDatatypeVariety.Union)
                         {
-                            typedValue = xmlType.ValueConverter.ChangeType(
-                                typedValue,
-                                xmlType.Datatype.ValueType,
-                                _thisNSResolver
-                            );
+                            typedValue = xmlType.ValueConverter
+                                .ChangeType(
+                                    typedValue,
+                                    xmlType.Datatype.ValueType,
+                                    _thisNSResolver
+                                );
                         }
                     }
                 }

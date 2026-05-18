@@ -79,9 +79,8 @@ namespace System.ServiceModel.Activation
             if (!success)
             {
                 System.ServiceModel.Diagnostics.Utility.CloseInvalidOutSafeHandle(processToken);
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new Win32Exception(error)
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(new Win32Exception(error));
             }
 
             return processToken;
@@ -105,9 +104,8 @@ namespace System.ServiceModel.Activation
                 int error = Marshal.GetLastWin32Error();
                 if (error != ListenerUnsafeNativeMethods.ERROR_INSUFFICIENT_BUFFER)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new Win32Exception(error)
-                    );
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperError(new Win32Exception(error));
                 }
             }
 
@@ -132,9 +130,8 @@ namespace System.ServiceModel.Activation
             )
             {
                 int error = Marshal.GetLastWin32Error();
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new Win32Exception(error)
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(new Win32Exception(error));
             }
         }
 
@@ -262,9 +259,8 @@ namespace System.ServiceModel.Activation
                     if (!success)
                     {
                         int error = Marshal.GetLastWin32Error();
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new Win32Exception(error)
-                        );
+                        throw DiagnosticUtility.ExceptionUtility
+                            .ThrowHelperError(new Win32Exception(error));
                     }
 
                     int length = GetTokenInformationLength(
@@ -311,9 +307,8 @@ namespace System.ServiceModel.Activation
                         int error = Marshal.GetLastWin32Error();
                         if (!success || error != UnsafeNativeMethods.ERROR_SUCCESS)
                         {
-                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                                new Win32Exception(error)
-                            );
+                            throw DiagnosticUtility.ExceptionUtility
+                                .ThrowHelperError(new Win32Exception(error));
                         }
                     }
                 }
@@ -351,9 +346,8 @@ namespace System.ServiceModel.Activation
                 int errorCode = Marshal.GetLastWin32Error();
                 if (errorCode != ListenerUnsafeNativeMethods.ERROR_INSUFFICIENT_BUFFER)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new Win32Exception(errorCode)
-                    );
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperError(new Win32Exception(errorCode));
                 }
             }
             byte[] pSecurityDescriptor = new byte[lpnLengthNeeded];
@@ -460,9 +454,8 @@ namespace System.ServiceModel.Activation
                 error = Marshal.GetLastWin32Error();
                 if (error != ListenerUnsafeNativeMethods.ERROR_INSUFFICIENT_BUFFER)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new Win32Exception(error)
-                    );
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperError(new Win32Exception(error));
                 }
             }
 
@@ -481,9 +474,8 @@ namespace System.ServiceModel.Activation
             )
             {
                 error = Marshal.GetLastWin32Error();
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new Win32Exception(error)
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(new Win32Exception(error));
             }
 
             return new SecurityIdentifier(sid, 0);
@@ -620,9 +612,8 @@ namespace System.ServiceModel.Activation
                         int errorCode = Marshal.GetLastWin32Error();
                         if (errorCode != ListenerUnsafeNativeMethods.ERROR_INSUFFICIENT_BUFFER)
                         {
-                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                                new Win32Exception(errorCode)
-                            );
+                            throw DiagnosticUtility.ExceptionUtility
+                                .ThrowHelperError(new Win32Exception(errorCode));
                         }
                     }
                     byte[] serviceStatusProcess = new byte[lpnLengthNeeded];
@@ -636,9 +627,8 @@ namespace System.ServiceModel.Activation
                     );
                     if (!success)
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new Win32Exception()
-                        );
+                        throw DiagnosticUtility.ExceptionUtility
+                            .ThrowHelperError(new Win32Exception());
                     }
                     fixed (byte* pServiceStatusProcess = serviceStatusProcess)
                     {

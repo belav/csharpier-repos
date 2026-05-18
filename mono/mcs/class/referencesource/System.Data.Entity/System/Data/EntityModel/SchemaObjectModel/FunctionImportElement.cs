@@ -129,10 +129,10 @@ namespace System.Data.EntityModel.SchemaObjectModel
                     owner.AddError(
                         ErrorCode.FunctionImportUnknownEntitySet,
                         EdmSchemaErrorSeverity.Error,
-                        System.Data.Entity.Strings.FunctionImportUnknownEntitySet(
-                            unresolvedEntitySet,
-                            this.FQName
-                        )
+                        System.Data
+                            .Entity
+                            .Strings
+                            .FunctionImportUnknownEntitySet(unresolvedEntitySet, this.FQName)
                     );
                 }
             }
@@ -300,9 +300,10 @@ namespace System.Data.EntityModel.SchemaObjectModel
                     owner.AddError(
                         ErrorCode.FunctionImportReturnsEntitiesButDoesNotSpecifyEntitySet,
                         EdmSchemaErrorSeverity.Error,
-                        System.Data.Entity.Strings.FunctionImportReturnEntitiesButDoesNotSpecifyEntitySet(
-                            this.FQName
-                        )
+                        System.Data
+                            .Entity
+                            .Strings
+                            .FunctionImportReturnEntitiesButDoesNotSpecifyEntitySet(this.FQName)
                     );
                 }
                 else if (null != entitySet.EntityType && !entityType.IsOfType(entitySet.EntityType))
@@ -311,11 +312,14 @@ namespace System.Data.EntityModel.SchemaObjectModel
                     owner.AddError(
                         ErrorCode.FunctionImportEntityTypeDoesNotMatchEntitySet,
                         EdmSchemaErrorSeverity.Error,
-                        System.Data.Entity.Strings.FunctionImportEntityTypeDoesNotMatchEntitySet(
-                            this.FQName,
-                            entitySet.EntityType.FQName,
-                            entitySet.Name
-                        )
+                        System.Data
+                            .Entity
+                            .Strings
+                            .FunctionImportEntityTypeDoesNotMatchEntitySet(
+                                this.FQName,
+                                entitySet.EntityType.FQName,
+                                entitySet.Name
+                            )
                     );
                 }
             }
@@ -333,10 +337,13 @@ namespace System.Data.EntityModel.SchemaObjectModel
                             EdmSchemaErrorSeverity.Error,
                             owner.LineNumber,
                             owner.LinePosition,
-                            System.Data.Entity.Strings.ComplexTypeAsReturnTypeAndDefinedEntitySet(
-                                this.FQName,
-                                complexType.Name
-                            )
+                            System.Data
+                                .Entity
+                                .Strings
+                                .ComplexTypeAsReturnTypeAndDefinedEntitySet(
+                                    this.FQName,
+                                    complexType.Name
+                                )
                         );
                     }
                 }
@@ -357,9 +364,10 @@ namespace System.Data.EntityModel.SchemaObjectModel
                         owner.AddError(
                             ErrorCode.FunctionImportSpecifiesEntitySetButDoesNotReturnEntityType,
                             EdmSchemaErrorSeverity.Error,
-                            System.Data.Entity.Strings.FunctionImportSpecifiesEntitySetButNotEntityType(
-                                this.FQName
-                            )
+                            System.Data
+                                .Entity
+                                .Strings
+                                .FunctionImportSpecifiesEntitySetButNotEntityType(this.FQName)
                         );
                     }
                 }

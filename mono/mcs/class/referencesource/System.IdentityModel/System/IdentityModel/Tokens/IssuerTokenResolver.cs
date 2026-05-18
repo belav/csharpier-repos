@@ -48,9 +48,8 @@ namespace System.IdentityModel.Tokens
         {
             if (wrappedTokenResolver == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                    "wrappedTokenResolver"
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperArgumentNull("wrappedTokenResolver");
             }
 
             _wrappedTokenResolver = wrappedTokenResolver;
@@ -74,9 +73,8 @@ namespace System.IdentityModel.Tokens
         {
             if (keyIdentifierClause == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                    "keyIdentifierClause"
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperArgumentNull("keyIdentifierClause");
             }
 
             key = null;
@@ -139,9 +137,8 @@ namespace System.IdentityModel.Tokens
         {
             if (keyIdentifierClause == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                    "keyIdentifierClause"
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperArgumentNull("keyIdentifierClause");
             }
 
             token = null;

@@ -627,10 +627,11 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
         internal bool ContainsLambda(MemberBody body)
         {
             var isLambda = IsLambda;
-            return body.RootNodes.Any(
-                static (root, isLambda) => root.DescendantNodesAndSelf().Any(isLambda),
-                isLambda
-            );
+            return body.RootNodes
+                .Any(
+                    static (root, isLambda) => root.DescendantNodesAndSelf().Any(isLambda),
+                    isLambda
+                );
         }
 
         /// <summary>
@@ -1620,10 +1621,9 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                             // If the body has an empty mapping then all active statements in the body must be mapped by TryMatchActiveStatement.
                             Debug.Assert(!match.Value.Forward.IsEmpty());
 
-                            hasMatching = match.Value.Forward.TryGetValue(
-                                oldStatementSyntax,
-                                out newStatementSyntax
-                            );
+                            hasMatching = match.Value
+                                .Forward
+                                .TryGetValue(oldStatementSyntax, out newStatementSyntax);
                         }
                     }
                     else
@@ -3207,7 +3207,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
         ) =>
             (
                 exact ? s_exactSymbolEqualityComparer : s_runtimeSymbolEqualityComparer
-            ).ParameterEquivalenceComparer.Equals(oldParameter, newParameter);
+            ).ParameterEquivalenceComparer
+                .Equals(oldParameter, newParameter);
 
         protected static bool TypeParameterConstraintsEquivalent(
             ITypeParameterSymbol oldParameter,
@@ -4483,10 +4484,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                                     // The old symbol's declaration syntax may be located in a different document than the old version of the current document.
                                     var oldSyntaxModel =
                                         (oldDeclaration != null)
-                                            ? await oldProject
-                                                .Solution.GetRequiredDocument(
-                                                    oldDeclaration.SyntaxTree
-                                                )
+                                            ? await oldProject.Solution
+                                                .GetRequiredDocument(oldDeclaration.SyntaxTree)
                                                 .GetRequiredSemanticModelAsync(cancellationToken)
                                                 .ConfigureAwait(false)
                                             : oldModel;
@@ -5998,10 +5997,11 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                 // VB implements clause (the method name is the same, but interface implementations differ)
                 if (
                     oldMethod.Name == newMethod.Name
-                    && !oldMethod.ExplicitInterfaceImplementations.SequenceEqual(
-                        newMethod.ExplicitInterfaceImplementations,
-                        SymbolsEquivalent
-                    )
+                    && !oldMethod.ExplicitInterfaceImplementations
+                        .SequenceEqual(
+                            newMethod.ExplicitInterfaceImplementations,
+                            SymbolsEquivalent
+                        )
                 )
                 {
                     rudeEdit = RudeEditKind.ImplementsClauseUpdate;
@@ -6636,8 +6636,7 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                         ContainingNamespace.Name: "CompilerServices",
                         ContainingNamespace.ContainingNamespace.Name: "Runtime",
                         ContainingNamespace.ContainingNamespace.ContainingNamespace.Name: "System",
-                        ContainingNamespace
-                            .ContainingNamespace
+                        ContainingNamespace.ContainingNamespace
                             .ContainingNamespace
                             .ContainingNamespace
                             .IsGlobalNamespace: true
@@ -6687,25 +6686,23 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                 foreach (var match in oldAttributes.Value)
                 {
                     if (
-                        SymbolEquivalenceComparer.Instance.Equals(
-                            match.AttributeClass,
-                            attribute.AttributeClass
-                        )
+                        SymbolEquivalenceComparer.Instance
+                            .Equals(match.AttributeClass, attribute.AttributeClass)
                     )
                     {
                         if (
-                            SymbolEquivalenceComparer.Instance.Equals(
-                                match.AttributeConstructor,
-                                attribute.AttributeConstructor
-                            )
-                            && match.ConstructorArguments.SequenceEqual(
-                                attribute.ConstructorArguments,
-                                TypedConstantComparer.Instance
-                            )
-                            && match.NamedArguments.SequenceEqual(
-                                attribute.NamedArguments,
-                                NamedArgumentComparer.Instance
-                            )
+                            SymbolEquivalenceComparer.Instance
+                                .Equals(match.AttributeConstructor, attribute.AttributeConstructor)
+                            && match.ConstructorArguments
+                                .SequenceEqual(
+                                    attribute.ConstructorArguments,
+                                    TypedConstantComparer.Instance
+                                )
+                            && match.NamedArguments
+                                .SequenceEqual(
+                                    attribute.NamedArguments,
+                                    NamedArgumentComparer.Instance
+                                )
                         )
                         {
                             return match;
@@ -6946,9 +6943,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
             // copy constructor
             if (record.TypeKind == TypeKind.Class)
             {
-                result = record.InstanceConstructors.SingleOrDefault(m =>
-                    m.IsImplicitlyDeclared && m.IsCopyConstructor()
-                );
+                result = record.InstanceConstructors
+                    .SingleOrDefault(m => m.IsImplicitlyDeclared && m.IsCopyConstructor());
                 if (result is not null)
                 {
                     yield return result;
@@ -7329,8 +7325,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
             CancellationToken cancellationToken
         ) =>
             IsPrimaryConstructor(parameter.ContainingSymbol, cancellationToken)
-            && parameter
-                .ContainingType.GetMembers($"<{parameter.Name}>P")
+            && parameter.ContainingType
+                .GetMembers($"<{parameter.Name}>P")
                 .Any(m => m.Kind == SymbolKind.Field);
 
         private static bool HasBackingField(IEventSymbol @event)
@@ -7363,9 +7359,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                 return false;
             }
 
-            var layoutAttribute = model.Compilation.GetTypeByMetadataName(
-                typeof(StructLayoutAttribute).FullName!
-            );
+            var layoutAttribute = model.Compilation
+                .GetTypeByMetadataName(typeof(StructLayoutAttribute).FullName!);
             if (layoutAttribute == null)
             {
                 return false;
@@ -7480,9 +7475,10 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                 var oldType = updatesInCurrentDocument.OldType;
 
                 var anyInitializerUpdatesInCurrentDocument =
-                    updatesInCurrentDocument.ChangedDeclarations.Keys.Any(
-                        IsDeclarationWithInitializer
-                    ) || updatesInCurrentDocument.HasDeletedMemberInitializer;
+                    updatesInCurrentDocument.ChangedDeclarations
+                        .Keys
+                        .Any(IsDeclarationWithInitializer)
+                    || updatesInCurrentDocument.HasDeletedMemberInitializer;
                 var isPartialEdit = IsPartialTypeEdit(
                     oldType,
                     newType,
@@ -7556,9 +7552,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                         // be reported in the document they were made in.
                         if (
                             !anyInitializerUpdatesInCurrentDocument
-                            && !updatesInCurrentDocument.ChangedDeclarations.ContainsKey(
-                                newDeclaration
-                            )
+                            && !updatesInCurrentDocument.ChangedDeclarations
+                                .ContainsKey(newDeclaration)
                         )
                         {
                             continue;
@@ -9404,21 +9399,19 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                                 ParameterKind.Explicit =>
                                 // Try to map the parameter from old to new syntax using either the member parameter map or the body map (for lambda parameters).
                                 // If the parameter doesn't exist in the new source show the error at the containing lambda or member location.
-                                parameterMap?.Forward.TryGetValue(
-                                    oldParameterSyntax!,
-                                    out var newParameterSyntax
-                                ) == true
+                                parameterMap?.Forward
+                                    .TryGetValue(oldParameterSyntax!, out var newParameterSyntax)
+                                == true
                                     ? GetDiagnosticSpan(newParameterSyntax, EditKind.Update)
-                                : bodyMap.Forward.TryGetValue(
-                                    oldParameterSyntax!,
-                                    out newParameterSyntax
-                                )
+                                : bodyMap.Forward
+                                    .TryGetValue(oldParameterSyntax!, out newParameterSyntax)
                                     ? GetDiagnosticSpan(newParameterSyntax, EditKind.Update)
                                 : oldContainingLambdaSyntax != null
-                                && bodyMap.Forward.TryGetValue(
-                                    oldContainingLambdaSyntax,
-                                    out var newContainingLambdaSyntax
-                                )
+                                && bodyMap.Forward
+                                    .TryGetValue(
+                                        oldContainingLambdaSyntax,
+                                        out var newContainingLambdaSyntax
+                                    )
                                     ? GetDiagnosticSpan(newContainingLambdaSyntax, EditKind.Update)
                                 : GetSymbolLocationSpan(newMember, cancellationToken),
                                 _ => GetSymbolLocationSpan(newMember, cancellationToken),
@@ -9518,10 +9511,11 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                     newLambdaSymbol.TypeParameters,
                     exact: false
                 )
-                || !oldLambdaSymbol.TypeParameters.SequenceEqual(
-                    newLambdaSymbol.TypeParameters,
-                    static (p, q) => p.Name == q.Name
-                )
+                || !oldLambdaSymbol.TypeParameters
+                    .SequenceEqual(
+                        newLambdaSymbol.TypeParameters,
+                        static (p, q) => p.Name == q.Name
+                    )
             )
             {
                 diagnosticContext.Report(RudeEditKind.ChangingTypeParameters, cancellationToken);
@@ -9951,10 +9945,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
         ) =>
             symbol is { IsStatic: false } and (IPropertySymbol or IFieldSymbol)
             && GetPrimaryConstructor(symbol.ContainingType, cancellationToken) is { } primaryCtor
-            && primaryCtor.Parameters.Any(
-                static (parameter, name) => parameter.Name == name,
-                symbol.Name
-            );
+            && primaryCtor.Parameters
+                .Any(static (parameter, name) => parameter.Name == name, symbol.Name);
 
         /// <summary>
         /// Primary constructor that the <paramref name="symbol"/> participates in (if any),
@@ -9968,18 +9960,17 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
         ) =>
             IsPrimaryConstructorDeclaration(declaration) ? (IMethodSymbol)symbol
             : IsDeclarationWithInitializer(declaration)
-                ? symbol.ContainingType.InstanceConstructors.FirstOrDefault(
-                    IsPrimaryConstructor,
-                    cancellationToken
-                )
+                ? symbol.ContainingType
+                    .InstanceConstructors
+                    .FirstOrDefault(IsPrimaryConstructor, cancellationToken)
             : null;
 
         private static IPropertySymbol? GetPropertySynthesizedForRecordPrimaryConstructorParameter(
             IParameterSymbol parameter
         ) =>
             (IPropertySymbol?)
-                parameter
-                    .ContainingType.GetMembers(parameter.Name)
+                parameter.ContainingType
+                    .GetMembers(parameter.Name)
                     .FirstOrDefault(static m =>
                         m
                             is IPropertySymbol
@@ -10061,7 +10052,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
             if (
                 newSymbol is IPropertySymbol { IsStatic: false, ContainingType.IsRecord: true }
                 && GetPrimaryConstructor(newSymbol.ContainingType, cancellationToken)
-                    ?.Parameters.FirstOrDefault(
+                    ?.Parameters
+                    .FirstOrDefault(
                         static (parameter, name) => parameter.Name == name,
                         newSymbol.Name
                     )
@@ -10122,10 +10114,11 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
             Compilation compilation
         ) =>
             method.Parameters is [var parameter]
-            && SymbolEqualityComparer.Default.Equals(
-                parameter.Type,
-                compilation.GetTypeByMetadataName(typeof(StringBuilder).FullName!)
-            );
+            && SymbolEqualityComparer.Default
+                .Equals(
+                    parameter.Type,
+                    compilation.GetTypeByMetadataName(typeof(StringBuilder).FullName!)
+                );
 
         private static bool HasIEquatableEqualsSignature(IMethodSymbol method) =>
             method.Parameters is [var parameter]

@@ -39,8 +39,9 @@ namespace System.ServiceModel.Channels
                 && credentials.ServiceCertificate.SslCertificateAuthentication != null
             )
             {
-                this.sslCertificateValidator =
-                    credentials.ServiceCertificate.SslCertificateAuthentication.GetCertificateValidator();
+                this.sslCertificateValidator = credentials.ServiceCertificate
+                    .SslCertificateAuthentication
+                    .GetCertificateValidator();
                 this.remoteCertificateValidationCallback = new RemoteCertificateValidationCallback(
                     RemoteCertificateValidationCallback
                 );
@@ -112,10 +113,11 @@ namespace System.ServiceModel.Channels
                 {
                     if (certificateIdentity.Certificates.Count > 1)
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                            "remoteAddress",
-                            SR.GetString(SR.HttpsIdentityMultipleCerts, remoteAddress.Uri)
-                        );
+                        throw DiagnosticUtility.ExceptionUtility
+                            .ThrowHelperArgument(
+                                "remoteAddress",
+                                SR.GetString(SR.HttpsIdentityMultipleCerts, remoteAddress.Uri)
+                            );
                     }
                 }
 
@@ -131,10 +133,11 @@ namespace System.ServiceModel.Channels
                     && !validIdentity
                 )
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                        "remoteAddress",
-                        SR.GetString(SR.HttpsExplicitIdentity)
-                    );
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperArgument(
+                            "remoteAddress",
+                            SR.GetString(SR.HttpsExplicitIdentity)
+                        );
                 }
             }
             base.ValidateCreateChannelParameters(remoteAddress, via);
@@ -495,10 +498,8 @@ namespace System.ServiceModel.Channels
                     clientCertificateToken,
                     ref timeoutHelper
                 );
-                this.factory.AddServerCertMappingOrSetRemoteCertificateValidationCallback(
-                    request,
-                    to
-                );
+                this.factory
+                    .AddServerCertMappingOrSetRemoteCertificateValidationCallback(request, to);
                 return request;
             }
 
@@ -573,8 +574,8 @@ namespace System.ServiceModel.Channels
                     this.certificateProvider = httpsChannel.certificateProvider;
                     if (this.factory.ManualAddressing && this.factory.RequireClientCertificate)
                     {
-                        this.certificateProvider =
-                            this.factory.CreateAndOpenCertificateTokenProvider(
+                        this.certificateProvider = this.factory
+                            .CreateAndOpenCertificateTokenProvider(
                                 to,
                                 via,
                                 httpsChannel.ChannelParameters,
@@ -597,14 +598,15 @@ namespace System.ServiceModel.Channels
 
                 bool GetWebRequest()
                 {
-                    IAsyncResult result = this.httpsChannel.BeginBaseGetWebRequest(
-                        to,
-                        via,
-                        tokenContainer,
-                        ref timeoutHelper,
-                        onGetBaseWebRequestCallback,
-                        this
-                    );
+                    IAsyncResult result = this.httpsChannel
+                        .BeginBaseGetWebRequest(
+                            to,
+                            via,
+                            tokenContainer,
+                            ref timeoutHelper,
+                            onGetBaseWebRequestCallback,
+                            this
+                        );
 
                     if (!result.CompletedSynchronously)
                     {
@@ -612,10 +614,11 @@ namespace System.ServiceModel.Channels
                     }
 
                     this.request = this.httpsChannel.EndBaseGetWebRequest(result);
-                    this.factory.AddServerCertMappingOrSetRemoteCertificateValidationCallback(
-                        this.request,
-                        this.to
-                    );
+                    this.factory
+                        .AddServerCertMappingOrSetRemoteCertificateValidationCallback(
+                            this.request,
+                            this.to
+                        );
                     return true;
                 }
 
@@ -630,11 +633,8 @@ namespace System.ServiceModel.Channels
                             );
                         }
 
-                        IAsyncResult result = this.certificateProvider.BeginGetToken(
-                            timeoutHelper.RemainingTime(),
-                            onGetTokenCallback,
-                            this
-                        );
+                        IAsyncResult result = this.certificateProvider
+                            .BeginGetToken(timeoutHelper.RemainingTime(), onGetTokenCallback, this);
 
                         if (!result.CompletedSynchronously)
                         {
@@ -657,10 +657,11 @@ namespace System.ServiceModel.Channels
                     try
                     {
                         thisPtr.request = thisPtr.httpsChannel.EndBaseGetWebRequest(result);
-                        thisPtr.factory.AddServerCertMappingOrSetRemoteCertificateValidationCallback(
-                            thisPtr.request,
-                            thisPtr.to
-                        );
+                        thisPtr.factory
+                            .AddServerCertMappingOrSetRemoteCertificateValidationCallback(
+                                thisPtr.request,
+                                thisPtr.to
+                            );
                     }
 #pragma warning suppress 56500 // Microsoft, transferring exception to another thread
                     catch (Exception e)

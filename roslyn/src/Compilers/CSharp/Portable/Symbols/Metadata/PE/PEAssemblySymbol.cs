@@ -135,17 +135,16 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
             {
                 if (this.MightContainExtensionMethods)
                 {
-                    this.PrimaryModule.LoadCustomAttributesFilterExtensions(
-                        _assembly.Handle,
-                        ref _lazyCustomAttributes
-                    );
+                    this.PrimaryModule
+                        .LoadCustomAttributesFilterExtensions(
+                            _assembly.Handle,
+                            ref _lazyCustomAttributes
+                        );
                 }
                 else
                 {
-                    this.PrimaryModule.LoadCustomAttributes(
-                        _assembly.Handle,
-                        ref _lazyCustomAttributes
-                    );
+                    this.PrimaryModule
+                        .LoadCustomAttributes(_assembly.Handle, ref _lazyCustomAttributes);
                 }
             }
             return _lazyCustomAttributes;
@@ -345,10 +344,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
             {
                 if (_lazyObsoleteAttributeData == ObsoleteAttributeData.Uninitialized)
                 {
-                    var experimentalData = PrimaryModule.Module.TryDecodeExperimentalAttributeData(
-                        Assembly.Handle,
-                        new MetadataDecoder(PrimaryModule)
-                    );
+                    var experimentalData = PrimaryModule.Module
+                        .TryDecodeExperimentalAttributeData(
+                            Assembly.Handle,
+                            new MetadataDecoder(PrimaryModule)
+                        );
                     Interlocked.CompareExchange(
                         ref _lazyObsoleteAttributeData,
                         experimentalData,

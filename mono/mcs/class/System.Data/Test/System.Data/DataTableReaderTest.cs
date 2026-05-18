@@ -650,12 +650,13 @@ namespace MonoTests.System.Data
             testTable.Columns.Add("col_expression_local", typeof(int));
             testTable.Columns["col_expression_local"].Expression = "col_int*5";
 
-            ds.Relations.Add(
-                "rel",
-                new DataColumn[] { testTable1.Columns["col1"] },
-                new DataColumn[] { testTable.Columns["col_int"] },
-                false
-            );
+            ds.Relations
+                .Add(
+                    "rel",
+                    new DataColumn[] { testTable1.Columns["col1"] },
+                    new DataColumn[] { testTable.Columns["col_int"] },
+                    false
+                );
             testTable.Columns.Add("col_expression_ext");
             testTable.Columns["col_expression_ext"].Expression = "parent.col2";
 

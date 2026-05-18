@@ -3626,8 +3626,8 @@ public abstract partial class LoadTestBase<TFixture>
 
                 if (state != EntityState.Detached)
                 {
-                    var single = context
-                        .ChangeTracker.Entries<SingleCompositeKey>()
+                    var single = context.ChangeTracker
+                        .Entries<SingleCompositeKey>()
                         .Single()
                         .Entity;
 
@@ -3970,8 +3970,8 @@ public abstract partial class LoadTestBase<TFixture>
 
                 if (state != EntityState.Detached)
                 {
-                    var parent = context
-                        .ChangeTracker.Entries<ParentFullLoaderByConstructor>()
+                    var parent = context.ChangeTracker
+                        .Entries<ParentFullLoaderByConstructor>()
                         .Single()
                         .Entity;
 
@@ -4103,8 +4103,8 @@ public abstract partial class LoadTestBase<TFixture>
 
                 if (state != EntityState.Detached)
                 {
-                    var parent = context
-                        .ChangeTracker.Entries<ParentFullLoaderByConstructor>()
+                    var parent = context.ChangeTracker
+                        .Entries<ParentFullLoaderByConstructor>()
                         .Single()
                         .Entity;
 
@@ -4229,8 +4229,8 @@ public abstract partial class LoadTestBase<TFixture>
 
                 if (state != EntityState.Detached)
                 {
-                    var single = context
-                        .ChangeTracker.Entries<SingleFullLoaderByConstructor>()
+                    var single = context.ChangeTracker
+                        .Entries<SingleFullLoaderByConstructor>()
                         .Single()
                         .Entity;
 
@@ -5305,8 +5305,8 @@ public abstract partial class LoadTestBase<TFixture>
 
             if (state != EntityState.Detached)
             {
-                var parent = context
-                    .ChangeTracker.Entries<ParentFullLoaderByConstructor>()
+                var parent = context.ChangeTracker
+                    .Entries<ParentFullLoaderByConstructor>()
                     .Single()
                     .Entity;
 
@@ -5411,8 +5411,8 @@ public abstract partial class LoadTestBase<TFixture>
 
             if (state != EntityState.Detached)
             {
-                var parent = context
-                    .ChangeTracker.Entries<ParentFullLoaderByConstructor>()
+                var parent = context.ChangeTracker
+                    .Entries<ParentFullLoaderByConstructor>()
                     .Single()
                     .Entity;
 
@@ -5810,8 +5810,8 @@ public abstract partial class LoadTestBase<TFixture>
 
         if (state != EntityState.Detached)
         {
-            var single = context
-                .ChangeTracker.Entries<SingleFullLoaderByConstructor>()
+            var single = context.ChangeTracker
+                .Entries<SingleFullLoaderByConstructor>()
                 .Single()
                 .Entity;
 
@@ -6041,8 +6041,8 @@ public abstract partial class LoadTestBase<TFixture>
 
             if (state != EntityState.Detached)
             {
-                var parent = context
-                    .ChangeTracker.Entries<ParentDelegateLoaderByConstructor>()
+                var parent = context.ChangeTracker
+                    .Entries<ParentDelegateLoaderByConstructor>()
                     .Single()
                     .Entity;
 
@@ -6132,8 +6132,8 @@ public abstract partial class LoadTestBase<TFixture>
 
             if (state != EntityState.Detached)
             {
-                var parent = context
-                    .ChangeTracker.Entries<ParentDelegateLoaderByConstructor>()
+                var parent = context.ChangeTracker
+                    .Entries<ParentDelegateLoaderByConstructor>()
                     .Single()
                     .Entity;
 
@@ -6216,8 +6216,8 @@ public abstract partial class LoadTestBase<TFixture>
 
             if (state != EntityState.Detached)
             {
-                var single = context
-                    .ChangeTracker.Entries<SingleDelegateLoaderByConstructor>()
+                var single = context.ChangeTracker
+                    .Entries<SingleDelegateLoaderByConstructor>()
                     .Single()
                     .Entity;
 
@@ -6788,8 +6788,8 @@ public abstract partial class LoadTestBase<TFixture>
 
             if (state != EntityState.Detached)
             {
-                var parent = context
-                    .ChangeTracker.Entries<ParentDelegateLoaderByConstructor>()
+                var parent = context.ChangeTracker
+                    .Entries<ParentDelegateLoaderByConstructor>()
                     .Single()
                     .Entity;
 
@@ -6873,8 +6873,8 @@ public abstract partial class LoadTestBase<TFixture>
 
             if (state != EntityState.Detached)
             {
-                var parent = context
-                    .ChangeTracker.Entries<ParentDelegateLoaderByConstructor>()
+                var parent = context.ChangeTracker
+                    .Entries<ParentDelegateLoaderByConstructor>()
                     .Single()
                     .Entity;
 
@@ -7024,8 +7024,8 @@ public abstract partial class LoadTestBase<TFixture>
 
         if (state != EntityState.Detached)
         {
-            var single = context
-                .ChangeTracker.Entries<SingleDelegateLoaderByConstructor>()
+            var single = context.ChangeTracker
+                .Entries<SingleDelegateLoaderByConstructor>()
                 .Single()
                 .Entity;
 
@@ -7260,8 +7260,8 @@ public abstract partial class LoadTestBase<TFixture>
 
                 if (state != EntityState.Detached)
                 {
-                    var parent = context
-                        .ChangeTracker.Entries<ParentDelegateLoaderByProperty>()
+                    var parent = context.ChangeTracker
+                        .Entries<ParentDelegateLoaderByProperty>()
                         .Single()
                         .Entity;
 
@@ -7361,8 +7361,8 @@ public abstract partial class LoadTestBase<TFixture>
 
                 if (state != EntityState.Detached)
                 {
-                    var parent = context
-                        .ChangeTracker.Entries<ParentDelegateLoaderByProperty>()
+                    var parent = context.ChangeTracker
+                        .Entries<ParentDelegateLoaderByProperty>()
                         .Single()
                         .Entity;
 
@@ -7455,8 +7455,8 @@ public abstract partial class LoadTestBase<TFixture>
 
                 if (state != EntityState.Detached)
                 {
-                    var single = context
-                        .ChangeTracker.Entries<SingleDelegateLoaderByProperty>()
+                    var single = context.ChangeTracker
+                        .Entries<SingleDelegateLoaderByProperty>()
                         .Single()
                         .Entity;
 
@@ -8090,8 +8090,8 @@ public abstract partial class LoadTestBase<TFixture>
 
             if (state != EntityState.Detached)
             {
-                var parent = context
-                    .ChangeTracker.Entries<ParentDelegateLoaderByProperty>()
+                var parent = context.ChangeTracker
+                    .Entries<ParentDelegateLoaderByProperty>()
                     .Single()
                     .Entity;
 
@@ -8172,8 +8172,8 @@ public abstract partial class LoadTestBase<TFixture>
 
             if (state != EntityState.Detached)
             {
-                var parent = context
-                    .ChangeTracker.Entries<ParentDelegateLoaderByProperty>()
+                var parent = context.ChangeTracker
+                    .Entries<ParentDelegateLoaderByProperty>()
                     .Single()
                     .Entity;
 
@@ -8320,8 +8320,8 @@ public abstract partial class LoadTestBase<TFixture>
 
         if (state != EntityState.Detached)
         {
-            var single = context
-                .ChangeTracker.Entries<SingleDelegateLoaderByProperty>()
+            var single = context.ChangeTracker
+                .Entries<SingleDelegateLoaderByProperty>()
                 .Single()
                 .Entity;
 
@@ -8564,8 +8564,8 @@ public abstract partial class LoadTestBase<TFixture>
 
                 if (state != EntityState.Detached)
                 {
-                    var parent = context
-                        .ChangeTracker.Entries<ParentDelegateLoaderWithStateByProperty>()
+                    var parent = context.ChangeTracker
+                        .Entries<ParentDelegateLoaderWithStateByProperty>()
                         .Single()
                         .Entity;
 
@@ -8665,8 +8665,8 @@ public abstract partial class LoadTestBase<TFixture>
 
                 if (state != EntityState.Detached)
                 {
-                    var parent = context
-                        .ChangeTracker.Entries<ParentDelegateLoaderWithStateByProperty>()
+                    var parent = context.ChangeTracker
+                        .Entries<ParentDelegateLoaderWithStateByProperty>()
                         .Single()
                         .Entity;
 
@@ -8759,8 +8759,8 @@ public abstract partial class LoadTestBase<TFixture>
 
                 if (state != EntityState.Detached)
                 {
-                    var single = context
-                        .ChangeTracker.Entries<SingleDelegateLoaderWithStateByProperty>()
+                    var single = context.ChangeTracker
+                        .Entries<SingleDelegateLoaderWithStateByProperty>()
                         .Single()
                         .Entity;
 
@@ -9359,8 +9359,8 @@ public abstract partial class LoadTestBase<TFixture>
 
             if (state != EntityState.Detached)
             {
-                var parent = context
-                    .ChangeTracker.Entries<ParentDelegateLoaderWithStateByProperty>()
+                var parent = context.ChangeTracker
+                    .Entries<ParentDelegateLoaderWithStateByProperty>()
                     .Single()
                     .Entity;
 
@@ -9436,8 +9436,8 @@ public abstract partial class LoadTestBase<TFixture>
 
             if (state != EntityState.Detached)
             {
-                var parent = context
-                    .ChangeTracker.Entries<ParentDelegateLoaderWithStateByProperty>()
+                var parent = context.ChangeTracker
+                    .Entries<ParentDelegateLoaderWithStateByProperty>()
                     .Single()
                     .Entity;
 
@@ -9579,8 +9579,8 @@ public abstract partial class LoadTestBase<TFixture>
 
         if (state != EntityState.Detached)
         {
-            var single = context
-                .ChangeTracker.Entries<SingleDelegateLoaderWithStateByProperty>()
+            var single = context.ChangeTracker
+                .Entries<SingleDelegateLoaderWithStateByProperty>()
                 .Single()
                 .Entity;
 

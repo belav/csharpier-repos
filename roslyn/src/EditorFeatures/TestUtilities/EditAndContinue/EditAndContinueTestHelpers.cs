@@ -181,8 +181,7 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
 
                 var includeFirstLineInDiagnostics =
                     expectedResult.Diagnostics.Any(d => d.FirstLine != null) == true;
-                var newActiveStatementSpans = expectedResult
-                    .ActiveStatements
+                var newActiveStatementSpans = expectedResult.ActiveStatements
                     .OldUnmappedTrackingSpans;
 
                 // we need to rebuild the edit script, so that it operates on nodes associated with the same syntax trees backing the documents:
@@ -287,8 +286,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
                     );
 
                     // check lines of line edits:
-                    _ = expectedResult
-                        .LineEdits.Zip(
+                    _ = expectedResult.LineEdits
+                        .Zip(
                             result.LineEdits,
                             (expected, actual) =>
                             {
@@ -474,17 +473,13 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
                             }
                         }
 
-                        var deletedSymbolContainer = actualSemanticEdit
-                            .DeletedSymbolContainer?.Resolve(
-                                newCompilation,
-                                ignoreAssemblyKey: true
-                            )
+                        var deletedSymbolContainer = actualSemanticEdit.DeletedSymbolContainer
+                            ?.Resolve(newCompilation, ignoreAssemblyKey: true)
                             .Symbol;
                         AssertEx.AreEqual(
                             deletedSymbolContainer,
-                            expectedSemanticEdit.DeletedSymbolContainerProvider?.Invoke(
-                                newCompilation
-                            ),
+                            expectedSemanticEdit.DeletedSymbolContainerProvider
+                                ?.Invoke(newCompilation),
                             message: $"{message}, {editKind}({expectedNewSymbol ?? expectedOldSymbol}): Incorrect deleted container"
                         );
 
@@ -506,8 +501,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
                 // Partial types must match:
                 AssertEx.AreEqual(
                     expectedSemanticEdit.PartialType?.Invoke(newCompilation),
-                    actualSemanticEdit
-                        .PartialType?.Resolve(newCompilation, ignoreAssemblyKey: true)
+                    actualSemanticEdit.PartialType
+                        ?.Resolve(newCompilation, ignoreAssemblyKey: true)
                         .Symbol,
                     message: $"{message}, {editKind}({expectedNewSymbol ?? expectedOldSymbol}): Partial types do not match"
                 );

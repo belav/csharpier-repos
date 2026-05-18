@@ -28,8 +28,7 @@ namespace Tracing.Tests.GCEvents
             };
 
             bool enableRundown = TestLibrary.Utilities.IsNativeAot ? false : true;
-            Dictionary<string, ExpectedEventCount> _expectedEventCounts = TestLibrary
-                .Utilities
+            Dictionary<string, ExpectedEventCount> _expectedEventCounts = TestLibrary.Utilities
                 .IsNativeAot
                 ? _expectedEventCountsNativeAOT
                 : _expectedEventCountsCoreCLR;
@@ -103,17 +102,15 @@ namespace Tracing.Tests.GCEvents
                 Logger.logger.Log("GCRestartEEStopEvents: " + GCRestartEEStopEvents);
                 bool GCRestartEEStartStopResult =
                     GCRestartEEStartEvents >= 50 && GCRestartEEStopEvents >= 50;
-                Logger.logger.Log(
-                    "GCRestartEEStartStopResult check: " + GCRestartEEStartStopResult
-                );
+                Logger.logger
+                    .Log("GCRestartEEStartStopResult check: " + GCRestartEEStartStopResult);
 
                 Logger.logger.Log("GCSuspendEEEvents: " + GCSuspendEEEvents);
                 Logger.logger.Log("GCSuspendEEEndEvents: " + GCSuspendEEEndEvents);
                 bool GCSuspendEEStartStopResult =
                     GCSuspendEEEvents >= 50 && GCSuspendEEEndEvents >= 50;
-                Logger.logger.Log(
-                    "GCSuspendEEStartStopResult check: " + GCSuspendEEStartStopResult
-                );
+                Logger.logger
+                    .Log("GCSuspendEEStartStopResult check: " + GCSuspendEEStartStopResult);
 
                 return GCStartStopResult && GCRestartEEStartStopResult && GCSuspendEEStartStopResult
                     ? 100

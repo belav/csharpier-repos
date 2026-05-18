@@ -1939,8 +1939,8 @@ namespace MonoTests.System
                             stage = "8";
                             // 02/25/2002 04:25:13 as is
                             long tick1 = 631502079130000000;
-                            long tick2 = TimeZone
-                                .CurrentTimeZone.ToLocalTime(new DateTime(tick1))
+                            long tick2 = TimeZone.CurrentTimeZone
+                                .ToLocalTime(new DateTime(tick1))
                                 .Ticks; // adjusted to local time
                             dt = DateTime.Parse("Mon, 25 Feb 2002 04:25:13 GMT", ci);
                             Assert.AreEqual(

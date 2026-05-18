@@ -83,8 +83,7 @@ public class SingletonCosmosClientWrapper : ISingletonCosmosClientWrapper
 
         if (options.GatewayModeMaxConnectionLimit != null)
         {
-            configuration.GatewayModeMaxConnectionLimit = options
-                .GatewayModeMaxConnectionLimit
+            configuration.GatewayModeMaxConnectionLimit = options.GatewayModeMaxConnectionLimit
                 .Value;
         }
 

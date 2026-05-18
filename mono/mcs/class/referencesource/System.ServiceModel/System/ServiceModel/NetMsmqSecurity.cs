@@ -48,9 +48,8 @@ namespace System.ServiceModel
             {
                 if (!NetMsmqSecurityModeHelper.IsDefined(value))
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ArgumentOutOfRangeException("value")
-                    );
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperError(new ArgumentOutOfRangeException("value"));
                 }
                 this.mode = value;
             }
@@ -125,11 +124,8 @@ namespace System.ServiceModel
                 messageSecurity = null;
             security = new NetMsmqSecurity(mode, null, messageSecurity);
             return sbe == null
-                || Config.SecurityElement.AreBindingsMatching(
-                    security.CreateMessageSecurity(),
-                    sbe,
-                    false
-                );
+                || Config.SecurityElement
+                    .AreBindingsMatching(security.CreateMessageSecurity(), sbe, false);
         }
     }
 }

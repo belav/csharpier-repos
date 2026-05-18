@@ -42,9 +42,8 @@ namespace System.ServiceModel.Security
             {
                 if (value == null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ArgumentNullException("value")
-                    );
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperError(new ArgumentNullException("value"));
                 }
                 this.securityProtocol = value;
             }

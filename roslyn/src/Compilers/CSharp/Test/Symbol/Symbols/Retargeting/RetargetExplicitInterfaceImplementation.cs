@@ -94,16 +94,16 @@ public class C : Interface1
                     case SymbolKind.Property:
                         Assert.Equal(
                             interfaceV1,
-                            ((PropertySymbol)member)
-                                .ExplicitInterfaceImplementations.Single()
+                            ((PropertySymbol)member).ExplicitInterfaceImplementations
+                                .Single()
                                 .ContainingType
                         );
                         break;
                     case SymbolKind.Event:
                         Assert.Equal(
                             interfaceV1,
-                            ((EventSymbol)member)
-                                .ExplicitInterfaceImplementations.Single()
+                            ((EventSymbol)member).ExplicitInterfaceImplementations
+                                .Single()
                                 .ContainingType
                         );
                         break;

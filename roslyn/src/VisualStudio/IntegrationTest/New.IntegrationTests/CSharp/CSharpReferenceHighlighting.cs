@@ -92,24 +92,24 @@ class C
     }
 }";
             await TestServices.Editor.SetTextAsync(text, HangMitigatingCancellationToken);
-            await TestServices.Editor.PlaceCaretAsync(
-                "x",
-                charsOffset: 0,
-                HangMitigatingCancellationToken
-            );
-            await TestServices.Workspace.WaitForAsyncOperationsAsync(
-                FeatureAttribute.ReferenceHighlighting,
-                HangMitigatingCancellationToken
-            );
-            await TestServices.Shell.ExecuteCommandAsync(
-                WellKnownCommands.Edit.NextHighlightedReference,
-                HangMitigatingCancellationToken
-            );
-            await TestServices.EditorVerifier.CurrentLineTextAsync(
-                "        x$$ = 3;",
-                assertCaretPosition: true,
-                HangMitigatingCancellationToken
-            );
+            await TestServices.Editor
+                .PlaceCaretAsync("x", charsOffset: 0, HangMitigatingCancellationToken);
+            await TestServices.Workspace
+                .WaitForAsyncOperationsAsync(
+                    FeatureAttribute.ReferenceHighlighting,
+                    HangMitigatingCancellationToken
+                );
+            await TestServices.Shell
+                .ExecuteCommandAsync(
+                    WellKnownCommands.Edit.NextHighlightedReference,
+                    HangMitigatingCancellationToken
+                );
+            await TestServices.EditorVerifier
+                .CurrentLineTextAsync(
+                    "        x$$ = 3;",
+                    assertCaretPosition: true,
+                    HangMitigatingCancellationToken
+                );
         }
 
         [WorkItem("https://github.com/dotnet/roslyn/pull/52041")]
@@ -128,39 +128,42 @@ class C
     }
 }";
             await TestServices.Editor.SetTextAsync(text, HangMitigatingCancellationToken);
-            await TestServices.Editor.PlaceCaretAsync(
-                "x",
-                charsOffset: 0,
-                HangMitigatingCancellationToken
-            );
+            await TestServices.Editor
+                .PlaceCaretAsync("x", charsOffset: 0, HangMitigatingCancellationToken);
 
-            await TestServices.Workspace.WaitForAsyncOperationsAsync(
-                FeatureAttribute.ReferenceHighlighting,
-                HangMitigatingCancellationToken
-            );
-            await TestServices.Shell.ExecuteCommandAsync(
-                WellKnownCommands.Edit.NextHighlightedReference,
-                HangMitigatingCancellationToken
-            );
-            await TestServices.EditorVerifier.CurrentLineTextAsync(
-                "        x$$++;",
-                assertCaretPosition: true,
-                HangMitigatingCancellationToken
-            );
+            await TestServices.Workspace
+                .WaitForAsyncOperationsAsync(
+                    FeatureAttribute.ReferenceHighlighting,
+                    HangMitigatingCancellationToken
+                );
+            await TestServices.Shell
+                .ExecuteCommandAsync(
+                    WellKnownCommands.Edit.NextHighlightedReference,
+                    HangMitigatingCancellationToken
+                );
+            await TestServices.EditorVerifier
+                .CurrentLineTextAsync(
+                    "        x$$++;",
+                    assertCaretPosition: true,
+                    HangMitigatingCancellationToken
+                );
 
-            await TestServices.Workspace.WaitForAsyncOperationsAsync(
-                FeatureAttribute.ReferenceHighlighting,
-                HangMitigatingCancellationToken
-            );
-            await TestServices.Shell.ExecuteCommandAsync(
-                WellKnownCommands.Edit.NextHighlightedReference,
-                HangMitigatingCancellationToken
-            );
-            await TestServices.EditorVerifier.CurrentLineTextAsync(
-                "        x$$ = 3;",
-                assertCaretPosition: true,
-                HangMitigatingCancellationToken
-            );
+            await TestServices.Workspace
+                .WaitForAsyncOperationsAsync(
+                    FeatureAttribute.ReferenceHighlighting,
+                    HangMitigatingCancellationToken
+                );
+            await TestServices.Shell
+                .ExecuteCommandAsync(
+                    WellKnownCommands.Edit.NextHighlightedReference,
+                    HangMitigatingCancellationToken
+                );
+            await TestServices.EditorVerifier
+                .CurrentLineTextAsync(
+                    "        x$$ = 3;",
+                    assertCaretPosition: true,
+                    HangMitigatingCancellationToken
+                );
         }
 
         private async Task VerifyAsync(
@@ -170,16 +173,17 @@ class C
         )
         {
             await TestServices.Editor.PlaceCaretAsync(marker, charsOffset: -1, cancellationToken);
-            await TestServices.Workspace.WaitForAllAsyncOperationsAsync(
-                [
-                    FeatureAttribute.Workspace,
-                    FeatureAttribute.SolutionCrawlerLegacy,
-                    FeatureAttribute.DiagnosticService,
-                    FeatureAttribute.Classification,
-                    FeatureAttribute.ReferenceHighlighting,
-                ],
-                cancellationToken
-            );
+            await TestServices.Workspace
+                .WaitForAllAsyncOperationsAsync(
+                    [
+                        FeatureAttribute.Workspace,
+                        FeatureAttribute.SolutionCrawlerLegacy,
+                        FeatureAttribute.DiagnosticService,
+                        FeatureAttribute.Classification,
+                        FeatureAttribute.ReferenceHighlighting,
+                    ],
+                    cancellationToken
+                );
 
             var tags = await TestServices.Editor.GetTagsAsync<ITextMarkerTag>(cancellationToken);
             var definitionTagSpans = tags.SelectAsArray(
@@ -222,16 +226,17 @@ class C
         private async Task VerifyNoneAsync(string marker, CancellationToken cancellationToken)
         {
             await TestServices.Editor.PlaceCaretAsync(marker, charsOffset: -1, cancellationToken);
-            await TestServices.Workspace.WaitForAllAsyncOperationsAsync(
-                [
-                    FeatureAttribute.Workspace,
-                    FeatureAttribute.SolutionCrawlerLegacy,
-                    FeatureAttribute.DiagnosticService,
-                    FeatureAttribute.Classification,
-                    FeatureAttribute.ReferenceHighlighting,
-                ],
-                cancellationToken
-            );
+            await TestServices.Workspace
+                .WaitForAllAsyncOperationsAsync(
+                    [
+                        FeatureAttribute.Workspace,
+                        FeatureAttribute.SolutionCrawlerLegacy,
+                        FeatureAttribute.DiagnosticService,
+                        FeatureAttribute.Classification,
+                        FeatureAttribute.ReferenceHighlighting,
+                    ],
+                    cancellationToken
+                );
 
             var tags = await TestServices.Editor.GetTagsAsync<ITextMarkerTag>(cancellationToken);
             Assert.Empty(tags.Where(tag => tag.Tag.Type == ReferenceHighlightTag.TagId));

@@ -162,41 +162,46 @@ namespace System.Web.UI
                             case ClientAPIRegisterType.ClientScriptBlocksWithoutTags:
                             case ClientAPIRegisterType.ClientStartupScripts:
                             case ClientAPIRegisterType.ClientStartupScriptsWithoutTags:
-                                Page.ClientScript.RegisterScriptBlock(
-                                    registerCallData.Key,
-                                    registerCallData.StringParam2,
-                                    registerCallData.Type
-                                );
+                                Page.ClientScript
+                                    .RegisterScriptBlock(
+                                        registerCallData.Key,
+                                        registerCallData.StringParam2,
+                                        registerCallData.Type
+                                    );
                                 break;
 
                             case ClientAPIRegisterType.OnSubmitStatement:
-                                Page.ClientScript.RegisterOnSubmitStatementInternal(
-                                    registerCallData.Key,
-                                    registerCallData.StringParam2
-                                );
+                                Page.ClientScript
+                                    .RegisterOnSubmitStatementInternal(
+                                        registerCallData.Key,
+                                        registerCallData.StringParam2
+                                    );
                                 break;
 
                             case ClientAPIRegisterType.ArrayDeclaration:
-                                Page.ClientScript.RegisterArrayDeclaration(
-                                    registerCallData.StringParam1,
-                                    registerCallData.StringParam2
-                                );
+                                Page.ClientScript
+                                    .RegisterArrayDeclaration(
+                                        registerCallData.StringParam1,
+                                        registerCallData.StringParam2
+                                    );
                                 break;
 
                             case ClientAPIRegisterType.HiddenField:
-                                Page.ClientScript.RegisterHiddenField(
-                                    registerCallData.StringParam1,
-                                    registerCallData.StringParam2
-                                );
+                                Page.ClientScript
+                                    .RegisterHiddenField(
+                                        registerCallData.StringParam1,
+                                        registerCallData.StringParam2
+                                    );
                                 break;
 
                             case ClientAPIRegisterType.ExpandoAttribute:
-                                Page.ClientScript.RegisterExpandoAttribute(
-                                    registerCallData.StringParam1,
-                                    registerCallData.StringParam2,
-                                    registerCallData.StringParam3,
-                                    false
-                                );
+                                Page.ClientScript
+                                    .RegisterExpandoAttribute(
+                                        registerCallData.StringParam1,
+                                        registerCallData.StringParam2,
+                                        registerCallData.StringParam3,
+                                        false
+                                    );
                                 break;
 
                             case ClientAPIRegisterType.EventValidation:
@@ -358,10 +363,11 @@ namespace System.Web.UI
             {
                 foreach (RegisterCallData registerCallData in _registeredCallDataForEventValidation)
                 {
-                    Page.ClientScript.RegisterForEventValidation(
-                        registerCallData.StringParam1,
-                        registerCallData.StringParam2
-                    );
+                    Page.ClientScript
+                        .RegisterForEventValidation(
+                            registerCallData.StringParam1,
+                            registerCallData.StringParam2
+                        );
                 }
             }
         }
@@ -622,10 +628,8 @@ namespace System.Web.UI
 
             if (cachedVary._varyByCustom != null)
             {
-                string customString = Context.ApplicationInstance.GetVaryByCustomString(
-                    Context,
-                    cachedVary._varyByCustom
-                );
+                string customString = Context.ApplicationInstance
+                    .GetVaryByCustomString(Context, cachedVary._varyByCustom);
                 if (customString != null)
                     combinedHashCode.AddObject(customString);
             }

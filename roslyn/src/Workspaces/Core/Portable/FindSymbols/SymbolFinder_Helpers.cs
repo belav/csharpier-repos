@@ -76,8 +76,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
                     if (
                         (
                             namespace1Count > 1
-                            && await namespace1
-                                .ConstituentNamespaces.AnyAsync(
+                            && await namespace1.ConstituentNamespaces
+                                .AnyAsync(
                                     static (n, arg) =>
                                         NamespaceSymbolsMatchAsync(
                                             arg.solution,
@@ -91,8 +91,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
                         )
                         || (
                             namespace2Count > 1
-                            && await namespace2
-                                .ConstituentNamespaces.AnyAsync(
+                            && await namespace2.ConstituentNamespaces
+                                .AnyAsync(
                                     static (n2, arg) =>
                                         NamespaceSymbolsMatchAsync(
                                             arg.solution,
@@ -158,11 +158,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
 
             // 1) Compare searchSymbol and symbolToMatch using SymbolEquivalenceComparer.IgnoreAssembliesInstance
             if (
-                !SymbolEquivalenceComparer.IgnoreAssembliesInstance.Equals(
-                    searchSymbol,
-                    symbolToMatch,
-                    equivalentTypesWithDifferingAssemblies
-                )
+                !SymbolEquivalenceComparer.IgnoreAssembliesInstance
+                    .Equals(searchSymbol, symbolToMatch, equivalentTypesWithDifferingAssemblies)
             )
             {
                 // 2) If the symbols are NOT equivalent ignoring assemblies, then they cannot be equivalent.
@@ -210,10 +207,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             // Must contain equivalents named types residing in different assemblies.
             Contract.ThrowIfFalse(
                 equivalentTypesWithDifferingAssemblies.All(kvp =>
-                    !SymbolEquivalenceComparer.Instance.Equals(
-                        kvp.Key.ContainingAssembly,
-                        kvp.Value.ContainingAssembly
-                    )
+                    !SymbolEquivalenceComparer.Instance
+                        .Equals(kvp.Key.ContainingAssembly, kvp.Value.ContainingAssembly)
                 )
             );
 

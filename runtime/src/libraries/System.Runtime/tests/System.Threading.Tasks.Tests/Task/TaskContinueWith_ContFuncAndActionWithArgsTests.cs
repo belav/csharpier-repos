@@ -462,12 +462,13 @@ namespace System.Threading.Tasks.Tests
             Task<int> t4 = t3.ContinueWith(
                     delegate(Task<int> t, Object obj)
                     {
-                        return Task<int>.Factory.StartNew(
-                            delegate
-                            {
-                                return 10;
-                            }
-                        );
+                        return Task<int>.Factory
+                            .StartNew(
+                                delegate
+                                {
+                                    return 10;
+                                }
+                            );
                     },
                     stateParam
                 )
@@ -475,14 +476,15 @@ namespace System.Threading.Tasks.Tests
             Task<string> t5 = t4.ContinueWith(
                     delegate(Task<int> t, Object obj)
                     {
-                        return Task<string>.Factory.StartNew(
-                            delegate
-                            {
-                                for (int i = 0; i < 400; i++)
-                                    ;
-                                return "worked";
-                            }
-                        );
+                        return Task<string>.Factory
+                            .StartNew(
+                                delegate
+                                {
+                                    for (int i = 0; i < 400; i++)
+                                        ;
+                                    return "worked";
+                                }
+                            );
                     },
                     stateParam
                 )
@@ -1041,18 +1043,20 @@ namespace System.Threading.Tasks.Tests
                 ManualResetEvent mre = new ManualResetEvent(false);
                 Task task;
                 if (taskIsFuture)
-                    task = Task<string>.Factory.StartNew(() =>
-                    {
-                        mre.WaitOne();
-                        return "";
-                    });
-                else
-                    task = Task.Factory.StartNew(
-                        delegate
+                    task = Task<string>.Factory
+                        .StartNew(() =>
                         {
                             mre.WaitOne();
-                        }
-                    );
+                            return "";
+                        });
+                else
+                    task = Task.Factory
+                        .StartNew(
+                            delegate
+                            {
+                                mre.WaitOne();
+                            }
+                        );
 
                 initRan();
                 bool cancel = false;
@@ -1098,19 +1102,21 @@ namespace System.Threading.Tasks.Tests
                 bool expect = (options & TaskContinuationOptions.NotOnFaulted) == 0;
                 Task task;
                 if (taskIsFuture)
-                    task = Task<string>.Factory.StartNew(
-                        delegate
-                        {
-                            throw new Exception("Boom");
-                        }
-                    );
+                    task = Task<string>.Factory
+                        .StartNew(
+                            delegate
+                            {
+                                throw new Exception("Boom");
+                            }
+                        );
                 else
-                    task = Task.Factory.StartNew(
-                        delegate
-                        {
-                            throw new Exception("Boom");
-                        }
-                    );
+                    task = Task.Factory
+                        .StartNew(
+                            delegate
+                            {
+                                throw new Exception("Boom");
+                            }
+                        );
                 try
                 {
                     task.Wait();
@@ -1149,21 +1155,23 @@ namespace System.Threading.Tasks.Tests
                 ManualResetEvent mre = new ManualResetEvent(false);
                 Task task;
                 if (taskIsFuture)
-                    task = Task<string>.Factory.StartNew(
-                        delegate
-                        {
-                            mre.WaitOne();
-                            throw new Exception("Boom");
-                        }
-                    );
+                    task = Task<string>.Factory
+                        .StartNew(
+                            delegate
+                            {
+                                mre.WaitOne();
+                                throw new Exception("Boom");
+                            }
+                        );
                 else
-                    task = Task.Factory.StartNew(
-                        delegate
-                        {
-                            mre.WaitOne();
-                            throw new Exception("Boom");
-                        }
-                    );
+                    task = Task.Factory
+                        .StartNew(
+                            delegate
+                            {
+                                mre.WaitOne();
+                                throw new Exception("Boom");
+                            }
+                        );
 
                 initRan();
                 bool cancel = false;
@@ -1207,23 +1215,25 @@ namespace System.Threading.Tasks.Tests
                 Task task;
                 ManualResetEvent cancellationMRE = new ManualResetEvent(false);
                 if (taskIsFuture)
-                    task = Task<string>.Factory.StartNew(
-                        () =>
-                        {
-                            cancellationMRE.WaitOne();
-                            throw new OperationCanceledException(cts.Token);
-                        },
-                        cts.Token
-                    );
+                    task = Task<string>.Factory
+                        .StartNew(
+                            () =>
+                            {
+                                cancellationMRE.WaitOne();
+                                throw new OperationCanceledException(cts.Token);
+                            },
+                            cts.Token
+                        );
                 else
-                    task = Task.Factory.StartNew(
-                        delegate
-                        {
-                            cancellationMRE.WaitOne();
-                            throw new OperationCanceledException(cts.Token);
-                        },
-                        cts.Token
-                    );
+                    task = Task.Factory
+                        .StartNew(
+                            delegate
+                            {
+                                cancellationMRE.WaitOne();
+                                throw new OperationCanceledException(cts.Token);
+                            },
+                            cts.Token
+                        );
                 cts.Cancel();
                 cancellationMRE.Set();
 
@@ -1262,23 +1272,25 @@ namespace System.Threading.Tasks.Tests
                 ManualResetEvent cancellationMRE = new ManualResetEvent(false);
 
                 if (taskIsFuture)
-                    task = Task<string>.Factory.StartNew(
-                        () =>
-                        {
-                            cancellationMRE.WaitOne();
-                            throw new OperationCanceledException(ct);
-                        },
-                        ct
-                    );
+                    task = Task<string>.Factory
+                        .StartNew(
+                            () =>
+                            {
+                                cancellationMRE.WaitOne();
+                                throw new OperationCanceledException(ct);
+                            },
+                            ct
+                        );
                 else
-                    task = Task.Factory.StartNew(
-                        delegate
-                        {
-                            cancellationMRE.WaitOne();
-                            throw new OperationCanceledException(ct);
-                        },
-                        ct
-                    );
+                    task = Task.Factory
+                        .StartNew(
+                            delegate
+                            {
+                                cancellationMRE.WaitOne();
+                                throw new OperationCanceledException(ct);
+                            },
+                            ct
+                        );
 
                 initRan();
                 bool cancel = false;

@@ -24,9 +24,8 @@ public class ConnectionSpecificationTest
             using var scope = serviceProvider.CreateScope();
             var context = scope.ServiceProvider.GetRequiredService<NoneInOnConfiguringContext>();
 
-            context.Database.SetConnectionString(
-                SqlServerNorthwindTestStoreFactory.NorthwindConnectionString
-            );
+            context.Database
+                .SetConnectionString(SqlServerNorthwindTestStoreFactory.NorthwindConnectionString);
 
             Assert.True(context.Customers.Any());
         }
@@ -39,9 +38,8 @@ public class ConnectionSpecificationTest
         {
             using var context = new NoneInOnConfiguringContext();
 
-            context.Database.SetConnectionString(
-                SqlServerNorthwindTestStoreFactory.NorthwindConnectionString
-            );
+            context.Database
+                .SetConnectionString(SqlServerNorthwindTestStoreFactory.NorthwindConnectionString);
 
             Assert.True(context.Customers.Any());
         }
@@ -187,8 +185,8 @@ public class ConnectionSpecificationTest
         using (SqlServerTestStore.GetNorthwindStore())
         {
             using var scope = serviceProvider.CreateScope();
-            var context =
-                scope.ServiceProvider.GetRequiredService<ConnectionInOnConfiguringContext>();
+            var context = scope.ServiceProvider
+                .GetRequiredService<ConnectionInOnConfiguringContext>();
             Assert.True(context.Customers.Any());
         }
     }
@@ -224,8 +222,8 @@ public class ConnectionSpecificationTest
             connection = serviceProvider.GetRequiredService<SqlConnection>();
 
             using var scope = serviceProvider.CreateScope();
-            var context =
-                scope.ServiceProvider.GetRequiredService<OwnedConnectionInOnConfiguringContext>();
+            var context = scope.ServiceProvider
+                .GetRequiredService<OwnedConnectionInOnConfiguringContext>();
             Assert.True(context.Customers.Any());
         }
 
@@ -265,8 +263,8 @@ public class ConnectionSpecificationTest
         using (SqlServerTestStore.GetNorthwindStore())
         {
             using var scope = serviceProvider.CreateScope();
-            var context =
-                scope.ServiceProvider.GetRequiredService<ConnectionInOnConfiguringContext>();
+            var context = scope.ServiceProvider
+                .GetRequiredService<ConnectionInOnConfiguringContext>();
 
             Assert.Same(connection, context.Database.GetDbConnection());
             Assert.True(context.Customers.Any());
@@ -296,8 +294,8 @@ public class ConnectionSpecificationTest
         using (SqlServerTestStore.GetNorthwindStore())
         {
             using var scope = serviceProvider.CreateScope();
-            var context =
-                scope.ServiceProvider.GetRequiredService<OwnedConnectionInOnConfiguringContext>();
+            var context = scope.ServiceProvider
+                .GetRequiredService<OwnedConnectionInOnConfiguringContext>();
 
             context.Database.OpenConnection();
             Assert.Same(connection, context.Database.GetDbConnection());
@@ -333,8 +331,8 @@ public class ConnectionSpecificationTest
         using (SqlServerTestStore.GetNorthwindStore())
         {
             using var scope = serviceProvider.CreateScope();
-            var context =
-                scope.ServiceProvider.GetRequiredService<ConnectionInOnConfiguringContext>();
+            var context = scope.ServiceProvider
+                .GetRequiredService<ConnectionInOnConfiguringContext>();
 
             context.Database.OpenConnection();
             Assert.Same(connection, context.Database.GetDbConnection());
@@ -573,8 +571,8 @@ public class ConnectionSpecificationTest
             using var serviceScope = serviceProvider
                 .GetRequiredService<IServiceScopeFactory>()
                 .CreateScope();
-            using var context =
-                serviceScope.ServiceProvider.GetRequiredService<UseConfigurationContext>();
+            using var context = serviceScope.ServiceProvider
+                .GetRequiredService<UseConfigurationContext>();
             Assert.True(context.Customers.Any());
         }
     }

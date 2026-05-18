@@ -765,9 +765,10 @@ namespace System.Security.Policy
                         )
                     );
 
-                CodeGroup rootCodeGroup = System.Security.Util.XMLUtil.CreateCodeGroup(
-                    UnnormalizeClassDeep(elCodeGroup, classes)
-                );
+                CodeGroup rootCodeGroup = System.Security
+                    .Util
+                    .XMLUtil
+                    .CreateCodeGroup(UnnormalizeClassDeep(elCodeGroup, classes));
                 if (rootCodeGroup == null)
                     throw new ArgumentException(
                         Environment.GetResourceString(
@@ -1532,9 +1533,8 @@ namespace System.Security.Policy
                     {
                         SecurityElement elPermSet = (SecurityElement)
                             m_permSetElement.Children[m_permSetElement.InternalChildren.Count - 1];
-                        m_permSetElement.InternalChildren.RemoveAt(
-                            m_permSetElement.InternalChildren.Count - 1
-                        );
+                        m_permSetElement.InternalChildren
+                            .RemoveAt(m_permSetElement.InternalChildren.Count - 1);
 
                         if (
                             elPermSet.Tag.Equals("PermissionSet")

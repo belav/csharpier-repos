@@ -158,7 +158,8 @@ namespace System.ServiceModel.Security
             {
                 get
                 {
-                    return XD.SecureConversationFeb2005Dictionary.RequestSecurityContextCloseResponse;
+                    return XD.SecureConversationFeb2005Dictionary
+                        .RequestSecurityContextCloseResponse;
                 }
             }
 
@@ -176,7 +177,8 @@ namespace System.ServiceModel.Security
             {
                 get
                 {
-                    return XD.SecureConversationFeb2005Dictionary.RequestSecurityContextRenewResponse;
+                    return XD.SecureConversationFeb2005Dictionary
+                        .RequestSecurityContextRenewResponse;
                 }
             }
 

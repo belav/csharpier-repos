@@ -143,8 +143,8 @@ internal sealed partial class Http2Connection
 
         _context = context;
         _streamLifetimeHandler = this;
-        _metricsContext = context
-            .ConnectionFeatures.GetRequiredFeature<IConnectionMetricsContextFeature>()
+        _metricsContext = context.ConnectionFeatures
+            .GetRequiredFeature<IConnectionMetricsContextFeature>()
             .MetricsContext;
 
         // Capture the ExecutionContext before dispatching HTTP/2 middleware. Will be restored by streams when processing request
@@ -304,8 +304,7 @@ internal sealed partial class Http2Connection
                 await _frameWriter.WriteSettingsAsync(_serverSettings.GetNonProtocolDefaults());
                 // Inform the client that the connection window is larger than the default. It can't be lowered here,
                 // It can only be lowered by not issuing window updates after data is received.
-                var connectionWindow = _context
-                    .ServiceContext
+                var connectionWindow = _context.ServiceContext
                     .ServerOptions
                     .Limits
                     .Http2
@@ -601,14 +600,15 @@ internal sealed partial class Http2Connection
                                 );
 
                                 var responseBytes = InvalidHttp1xErrorResponseBytes ??=
-                                    Encoding.ASCII.GetBytes(
-                                        "HTTP/1.1 400 Bad Request\r\n"
-                                            + "Connection: close\r\n"
-                                            + "Content-Type: text/plain\r\n"
-                                            + "Content-Length: 56\r\n"
-                                            + "\r\n"
-                                            + "An HTTP/1.x request was sent to an HTTP/2 only endpoint."
-                                    );
+                                    Encoding.ASCII
+                                        .GetBytes(
+                                            "HTTP/1.1 400 Bad Request\r\n"
+                                                + "Connection: close\r\n"
+                                                + "Content-Type: text/plain\r\n"
+                                                + "Content-Length: 56\r\n"
+                                                + "\r\n"
+                                                + "An HTTP/1.x request was sent to an HTTP/2 only endpoint."
+                                        );
 
                                 await _context.Transport.Output.WriteAsync(responseBytes);
 
@@ -1489,8 +1489,7 @@ internal sealed partial class Http2Connection
             _currentHeadersStream.TotalParsedHeaderSize = _totalParsedHeaderSize;
 
             // This must be initialized before we offload the request or else we may start processing request body frames without it.
-            _currentHeadersStream.InputRemaining = _currentHeadersStream
-                .RequestHeaders
+            _currentHeadersStream.InputRemaining = _currentHeadersStream.RequestHeaders
                 .ContentLength;
 
             // This must wait until we've received all of the headers so we can verify the content-length.
@@ -1588,10 +1587,8 @@ internal sealed partial class Http2Connection
             throw;
         }
 
-        KestrelEventSource.Log.RequestQueuedStart(
-            _currentHeadersStream,
-            AspNetCore.Http.HttpProtocol.Http2
-        );
+        KestrelEventSource.Log
+            .RequestQueuedStart(_currentHeadersStream, AspNetCore.Http.HttpProtocol.Http2);
         _context.ServiceContext.Metrics.RequestQueuedStart(_metricsContext, KestrelMetrics.Http2);
 
         // _scheduleInline is only true in tests

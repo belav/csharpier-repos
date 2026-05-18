@@ -67,9 +67,8 @@
             {
                 return node;
             }
-            _currentChain.Elements.Add(
-                new BinaryExpressionFingerprint(node.NodeType, node.Type, node.Method)
-            );
+            _currentChain.Elements
+                .Add(new BinaryExpressionFingerprint(node.NodeType, node.Type, node.Method));
             return base.VisitBinary(node);
         }
 
@@ -89,9 +88,8 @@
             {
                 return node;
             }
-            _currentChain.Elements.Add(
-                new ConditionalExpressionFingerprint(node.NodeType, node.Type)
-            );
+            _currentChain.Elements
+                .Add(new ConditionalExpressionFingerprint(node.NodeType, node.Type));
             return base.VisitConditional(node);
         }
 
@@ -148,9 +146,8 @@
             {
                 return node;
             }
-            _currentChain.Elements.Add(
-                new IndexExpressionFingerprint(node.NodeType, node.Type, node.Indexer)
-            );
+            _currentChain.Elements
+                .Add(new IndexExpressionFingerprint(node.NodeType, node.Type, node.Indexer));
             return base.VisitIndex(node);
         }
 
@@ -195,9 +192,8 @@
             {
                 return node;
             }
-            _currentChain.Elements.Add(
-                new MemberExpressionFingerprint(node.NodeType, node.Type, node.Member)
-            );
+            _currentChain.Elements
+                .Add(new MemberExpressionFingerprint(node.NodeType, node.Type, node.Member));
             return base.VisitMember(node);
         }
 
@@ -232,9 +228,8 @@
             {
                 return node;
             }
-            _currentChain.Elements.Add(
-                new MethodCallExpressionFingerprint(node.NodeType, node.Type, node.Method)
-            );
+            _currentChain.Elements
+                .Add(new MethodCallExpressionFingerprint(node.NodeType, node.Type, node.Method));
             return base.VisitMethodCall(node);
         }
 
@@ -263,9 +258,8 @@
                 _seenParameters.Add(node);
             }
 
-            _currentChain.Elements.Add(
-                new ParameterExpressionFingerprint(node.NodeType, node.Type, parameterIndex)
-            );
+            _currentChain.Elements
+                .Add(new ParameterExpressionFingerprint(node.NodeType, node.Type, parameterIndex));
             return base.VisitParameter(node);
         }
 
@@ -295,9 +289,10 @@
             {
                 return node;
             }
-            _currentChain.Elements.Add(
-                new TypeBinaryExpressionFingerprint(node.NodeType, node.Type, node.TypeOperand)
-            );
+            _currentChain.Elements
+                .Add(
+                    new TypeBinaryExpressionFingerprint(node.NodeType, node.Type, node.TypeOperand)
+                );
             return base.VisitTypeBinary(node);
         }
 
@@ -307,9 +302,8 @@
             {
                 return node;
             }
-            _currentChain.Elements.Add(
-                new UnaryExpressionFingerprint(node.NodeType, node.Type, node.Method)
-            );
+            _currentChain.Elements
+                .Add(new UnaryExpressionFingerprint(node.NodeType, node.Type, node.Method));
             return base.VisitUnary(node);
         }
     }

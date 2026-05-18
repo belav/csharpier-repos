@@ -88,8 +88,8 @@ namespace System.IdentityModel.Tokens
 
         internal abstract class BinaryTokenEntry : TokenEntry
         {
-            internal static readonly XmlDictionaryString ElementName =
-                XD.SecurityJan2004Dictionary.BinarySecurityToken;
+            internal static readonly XmlDictionaryString ElementName = XD.SecurityJan2004Dictionary
+                .BinarySecurityToken;
             internal static readonly XmlDictionaryString EncodingTypeAttribute =
                 XD.SecurityJan2004Dictionary.EncodingType;
             internal const string EncodingTypeAttributeString = SecurityJan2004Strings.EncodingType;
@@ -111,9 +111,8 @@ namespace System.IdentityModel.Tokens
             protected BinaryTokenEntry(string[] valueTypeUris)
             {
                 if (valueTypeUris == null)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                        "valueTypeUris"
-                    );
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperArgumentNull("valueTypeUris");
 
                 this.valueTypeUris = new string[valueTypeUris.GetLength(0)];
                 for (int i = 0; i < this.valueTypeUris.GetLength(0); ++i)
@@ -383,15 +382,16 @@ namespace System.IdentityModel.Tokens
 
                 if (clause == null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new XmlException(
-                            SR.GetString(
-                                SR.CannotReadKeyIdentifierClause,
-                                reader.LocalName,
-                                reader.NamespaceURI
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperError(
+                            new XmlException(
+                                SR.GetString(
+                                    SR.CannotReadKeyIdentifierClause,
+                                    reader.LocalName,
+                                    reader.NamespaceURI
+                                )
                             )
-                        )
-                    );
+                        );
                 }
 
                 if (!string.IsNullOrEmpty(strId))
@@ -434,14 +434,15 @@ namespace System.IdentityModel.Tokens
                         return;
                     }
                 }
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(
-                        SR.GetString(
-                            SR.StandardsManagerCannotWriteObject,
-                            keyIdentifierClause.GetType()
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(
+                                SR.StandardsManagerCannotWriteObject,
+                                keyIdentifierClause.GetType()
+                            )
                         )
-                    )
-                );
+                    );
             }
         }
 
@@ -535,11 +536,12 @@ namespace System.IdentityModel.Tokens
                 }
                 else
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new SecurityMessageSerializationException(
-                            SR.GetString(SR.UnknownEncodingInKeyIdentifier)
-                        )
-                    );
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperError(
+                            new SecurityMessageSerializationException(
+                                SR.GetString(SR.UnknownEncodingInKeyIdentifier)
+                            )
+                        );
                 }
 
                 reader.ReadEndElement();
@@ -904,51 +906,55 @@ namespace System.IdentityModel.Tokens
                     {
                         if (readAuthorityBinding)
                         {
-                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                                new XmlException(
-                                    SR.GetString(SR.MultipleSamlAuthorityBindingsInReference)
-                                )
-                            );
+                            throw DiagnosticUtility.ExceptionUtility
+                                .ThrowHelperError(
+                                    new XmlException(
+                                        SR.GetString(SR.MultipleSamlAuthorityBindingsInReference)
+                                    )
+                                );
                         }
                         readAuthorityBinding = true;
                         binding = reader.GetAttribute(XD.SamlDictionary.Binding, null);
                         if (string.IsNullOrEmpty(binding))
                         {
-                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                                new XmlException(
-                                    SR.GetString(
-                                        SR.RequiredAttributeMissing,
-                                        XD.SamlDictionary.Binding.Value,
-                                        XD.SamlDictionary.AuthorityBinding.Value
+                            throw DiagnosticUtility.ExceptionUtility
+                                .ThrowHelperError(
+                                    new XmlException(
+                                        SR.GetString(
+                                            SR.RequiredAttributeMissing,
+                                            XD.SamlDictionary.Binding.Value,
+                                            XD.SamlDictionary.AuthorityBinding.Value
+                                        )
                                     )
-                                )
-                            );
+                                );
                         }
                         location = reader.GetAttribute(XD.SamlDictionary.Location, null);
                         if (string.IsNullOrEmpty(location))
                         {
-                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                                new XmlException(
-                                    SR.GetString(
-                                        SR.RequiredAttributeMissing,
-                                        XD.SamlDictionary.Location.Value,
-                                        XD.SamlDictionary.AuthorityBinding.Value
+                            throw DiagnosticUtility.ExceptionUtility
+                                .ThrowHelperError(
+                                    new XmlException(
+                                        SR.GetString(
+                                            SR.RequiredAttributeMissing,
+                                            XD.SamlDictionary.Location.Value,
+                                            XD.SamlDictionary.AuthorityBinding.Value
+                                        )
                                     )
-                                )
-                            );
+                                );
                         }
                         authorityKind = reader.GetAttribute(XD.SamlDictionary.AuthorityKind, null);
                         if (string.IsNullOrEmpty(authorityKind))
                         {
-                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                                new XmlException(
-                                    SR.GetString(
-                                        SR.RequiredAttributeMissing,
-                                        XD.SamlDictionary.AuthorityKind.Value,
-                                        XD.SamlDictionary.AuthorityBinding.Value
+                            throw DiagnosticUtility.ExceptionUtility
+                                .ThrowHelperError(
+                                    new XmlException(
+                                        SR.GetString(
+                                            SR.RequiredAttributeMissing,
+                                            XD.SamlDictionary.AuthorityKind.Value,
+                                            XD.SamlDictionary.AuthorityBinding.Value
+                                        )
                                     )
-                                )
-                            );
+                                );
                         }
                         if (reader.IsEmptyElement)
                         {
@@ -969,9 +975,12 @@ namespace System.IdentityModel.Tokens
                     {
                         if (readKeyIdentifier)
                         {
-                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                                new XmlException(SR.GetString(SR.MultipleKeyIdentifiersInReference))
-                            );
+                            throw DiagnosticUtility.ExceptionUtility
+                                .ThrowHelperError(
+                                    new XmlException(
+                                        SR.GetString(SR.MultipleKeyIdentifiersInReference)
+                                    )
+                                );
                         }
                         readKeyIdentifier = true;
                         valueType = reader.GetAttribute(
@@ -987,9 +996,10 @@ namespace System.IdentityModel.Tokens
                 }
                 if (!readKeyIdentifier)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new XmlException(SR.GetString(SR.DidNotFindKeyIdentifierInReference))
-                    );
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperError(
+                            new XmlException(SR.GetString(SR.DidNotFindKeyIdentifierInReference))
+                        );
                 }
                 return new SamlAssertionKeyIdentifierClause(
                     id,
@@ -1277,8 +1287,8 @@ namespace System.IdentityModel.Tokens
 
         public class IdManager : SignatureTargetIdManager
         {
-            internal static readonly XmlDictionaryString ElementName =
-                XD.XmlEncryptionDictionary.EncryptedData;
+            internal static readonly XmlDictionaryString ElementName = XD.XmlEncryptionDictionary
+                .EncryptedData;
 
             static readonly IdManager instance = new IdManager();
 

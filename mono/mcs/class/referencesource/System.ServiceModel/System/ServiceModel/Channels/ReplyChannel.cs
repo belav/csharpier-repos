@@ -65,9 +65,10 @@ namespace System.ServiceModel.Channels
             }
             else
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    ReplyChannel.CreateReceiveRequestTimedOutException(channel, timeout)
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        ReplyChannel.CreateReceiveRequestTimedOutException(channel, timeout)
+                    );
             }
         }
 
@@ -131,12 +132,13 @@ namespace System.ServiceModel.Channels
             {
                 if (!this.channel.EndTryReceiveRequest(result, out this.requestContext))
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        ReplyChannel.CreateReceiveRequestTimedOutException(
-                            this.channel,
-                            this.timeout
-                        )
-                    );
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperError(
+                            ReplyChannel.CreateReceiveRequestTimedOutException(
+                                this.channel,
+                                this.timeout
+                            )
+                        );
                 }
             }
 
@@ -202,13 +204,14 @@ namespace System.ServiceModel.Channels
         public RequestContext ReceiveRequest(TimeSpan timeout)
         {
             if (timeout < TimeSpan.Zero)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentOutOfRangeException(
-                        "timeout",
-                        timeout,
-                        SR.GetString(SR.SFxTimeoutOutOfRange0)
-                    )
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        new ArgumentOutOfRangeException(
+                            "timeout",
+                            timeout,
+                            SR.GetString(SR.SFxTimeoutOutOfRange0)
+                        )
+                    );
 
             this.ThrowPending();
             return ReplyChannel.HelpReceiveRequest(this, timeout);
@@ -227,13 +230,14 @@ namespace System.ServiceModel.Channels
         {
             if (timeout < TimeSpan.Zero)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentOutOfRangeException(
-                        "timeout",
-                        timeout,
-                        SR.GetString(SR.SFxTimeoutOutOfRange0)
-                    )
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        new ArgumentOutOfRangeException(
+                            "timeout",
+                            timeout,
+                            SR.GetString(SR.SFxTimeoutOutOfRange0)
+                        )
+                    );
             }
 
             this.ThrowPending();
@@ -248,13 +252,14 @@ namespace System.ServiceModel.Channels
         public bool TryReceiveRequest(TimeSpan timeout, out RequestContext context)
         {
             if (timeout < TimeSpan.Zero)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentOutOfRangeException(
-                        "timeout",
-                        timeout,
-                        SR.GetString(SR.SFxTimeoutOutOfRange0)
-                    )
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        new ArgumentOutOfRangeException(
+                            "timeout",
+                            timeout,
+                            SR.GetString(SR.SFxTimeoutOutOfRange0)
+                        )
+                    );
 
             this.ThrowPending();
             return base.Dequeue(timeout, out context);
@@ -267,13 +272,14 @@ namespace System.ServiceModel.Channels
         )
         {
             if (timeout < TimeSpan.Zero)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentOutOfRangeException(
-                        "timeout",
-                        timeout,
-                        SR.GetString(SR.SFxTimeoutOutOfRange0)
-                    )
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        new ArgumentOutOfRangeException(
+                            "timeout",
+                            timeout,
+                            SR.GetString(SR.SFxTimeoutOutOfRange0)
+                        )
+                    );
 
             this.ThrowPending();
             return base.BeginDequeue(timeout, callback, state);
@@ -287,13 +293,14 @@ namespace System.ServiceModel.Channels
         public bool WaitForRequest(TimeSpan timeout)
         {
             if (timeout < TimeSpan.Zero)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentOutOfRangeException(
-                        "timeout",
-                        timeout,
-                        SR.GetString(SR.SFxTimeoutOutOfRange0)
-                    )
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        new ArgumentOutOfRangeException(
+                            "timeout",
+                            timeout,
+                            SR.GetString(SR.SFxTimeoutOutOfRange0)
+                        )
+                    );
 
             this.ThrowPending();
             return base.WaitForItem(timeout);
@@ -306,13 +313,14 @@ namespace System.ServiceModel.Channels
         )
         {
             if (timeout < TimeSpan.Zero)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentOutOfRangeException(
-                        "timeout",
-                        timeout,
-                        SR.GetString(SR.SFxTimeoutOutOfRange0)
-                    )
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        new ArgumentOutOfRangeException(
+                            "timeout",
+                            timeout,
+                            SR.GetString(SR.SFxTimeoutOutOfRange0)
+                        )
+                    );
 
             this.ThrowPending();
             return base.BeginWaitForItem(timeout, callback, state);

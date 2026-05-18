@@ -294,8 +294,9 @@ namespace System.Activities.Core.Presentation
         {
             get
             {
-                ViewStateService viewStateService =
-                    this.Context.Services.GetService<ViewStateService>();
+                ViewStateService viewStateService = this.Context
+                    .Services
+                    .GetService<ViewStateService>();
                 return viewStateService;
             }
         }
@@ -407,8 +408,9 @@ namespace System.Activities.Core.Presentation
                 this.ModelItem.PropertyChanged += new PropertyChangedEventHandler(
                     this.OnModelPropertyChanged
                 );
-                ModelTreeManager modelTreeManager =
-                    this.Context.Services.GetService<ModelTreeManager>();
+                ModelTreeManager modelTreeManager = this.Context
+                    .Services
+                    .GetService<ModelTreeManager>();
                 modelTreeManager.EditingScopeCompleted += new EventHandler<EditingScopeEventArgs>(
                     this.OnEditingScopeCompleted
                 );
@@ -436,19 +438,15 @@ namespace System.Activities.Core.Presentation
                 }
             }
 
-            object widthViewState = this.ViewStateService.RetrieveViewState(
-                this.ModelItem,
-                StateContainerWidthViewStateKey
-            );
+            object widthViewState = this.ViewStateService
+                .RetrieveViewState(this.ModelItem, StateContainerWidthViewStateKey);
             if (widthViewState != null)
             {
                 this.StateContainerWidth = (double)widthViewState;
             }
 
-            object heightViewState = this.ViewStateService.RetrieveViewState(
-                this.ModelItem,
-                StateContainerHeightViewStateKey
-            );
+            object heightViewState = this.ViewStateService
+                .RetrieveViewState(this.ModelItem, StateContainerHeightViewStateKey);
             if (heightViewState != null)
             {
                 this.StateContainerHeight = (double)heightViewState;
@@ -506,8 +504,9 @@ namespace System.Activities.Core.Presentation
                 this.ModelItem.PropertyChanged -= new PropertyChangedEventHandler(
                     this.OnModelPropertyChanged
                 );
-                ModelTreeManager modelTreeManager =
-                    this.Context.Services.GetService<ModelTreeManager>();
+                ModelTreeManager modelTreeManager = this.Context
+                    .Services
+                    .GetService<ModelTreeManager>();
                 modelTreeManager.EditingScopeCompleted -= new EventHandler<EditingScopeEventArgs>(
                     this.OnEditingScopeCompleted
                 );
@@ -565,10 +564,8 @@ namespace System.Activities.Core.Presentation
             this.initialNode.Measure(new Size(Double.PositiveInfinity, Double.PositiveInfinity));
             double startHeight = this.initialNode.DesiredSize.Height;
             double startWidth = this.initialNode.DesiredSize.Width;
-            object locationOfShape = this.ViewStateService.RetrieveViewState(
-                this.ModelItem,
-                StateContainerEditor.ShapeLocationViewStateKey
-            );
+            object locationOfShape = this.ViewStateService
+                .RetrieveViewState(this.ModelItem, StateContainerEditor.ShapeLocationViewStateKey);
             if (locationOfShape != null)
             {
                 Point locationPt = (Point)locationOfShape;
@@ -659,8 +656,9 @@ namespace System.Activities.Core.Presentation
             UIElement element;
             if (!this.modelItemToUIElement.TryGetValue(model, out element))
             {
-                element = this
-                    .Context.Services.GetService<VirtualizedContainerService>()
+                element = this.Context
+                    .Services
+                    .GetService<VirtualizedContainerService>()
                     .GetContainer(model, this);
                 if (element is VirtualizedContainerService.VirtualizingContainer)
                 {
@@ -690,14 +688,10 @@ namespace System.Activities.Core.Presentation
                 this.modelItemToUIElement.Add(model, element);
                 this.PopulateConnectionPoints(element);
 
-                object locationOfShape = this.ViewStateService.RetrieveViewState(
-                    model,
-                    ShapeLocationViewStateKey
-                );
-                object sizeOfShape = this.ViewStateService.RetrieveViewState(
-                    model,
-                    ShapeSizeViewStateKey
-                );
+                object locationOfShape = this.ViewStateService
+                    .RetrieveViewState(model, ShapeLocationViewStateKey);
+                object sizeOfShape = this.ViewStateService
+                    .RetrieveViewState(model, ShapeSizeViewStateKey);
                 if (locationOfShape != null)
                 {
                     Point locationPt = (Point)locationOfShape;
@@ -740,36 +734,38 @@ namespace System.Activities.Core.Presentation
             }
 
             // We need to wait until after the state visuals are added and displayed.
-            this.Dispatcher.BeginInvoke(
-                DispatcherPriority.Loaded,
-                new Action(() =>
-                {
-                    if (!suppressAddingConnectorsWhenAddingStateVisuals && this.populated)
+            this.Dispatcher
+                .BeginInvoke(
+                    DispatcherPriority.Loaded,
+                    new Action(() =>
                     {
-                        ModelItem stateMachineModelItem = null;
-                        foreach (UIElement view in viewsAdded)
+                        if (!suppressAddingConnectorsWhenAddingStateVisuals && this.populated)
                         {
-                            ModelItem stateModelItem = StateContainerEditor.GetModelItemFromView(
-                                view
-                            );
-                            this.AddChildTransitionVisualsToStateMachineEditor(stateModelItem);
-                            if (stateMachineModelItem == null)
+                            ModelItem stateMachineModelItem = null;
+                            foreach (UIElement view in viewsAdded)
                             {
-                                stateMachineModelItem =
-                                    StateContainerEditor.GetStateMachineModelItem(stateModelItem);
-                            }
-                            if (
-                                stateMachineModelItem
-                                    .Properties[StateMachineDesigner.InitialStatePropertyName]
-                                    .Value == stateModelItem
-                            )
-                            {
-                                this.AddInitialNodeConnector(view);
+                                ModelItem stateModelItem =
+                                    StateContainerEditor.GetModelItemFromView(view);
+                                this.AddChildTransitionVisualsToStateMachineEditor(stateModelItem);
+                                if (stateMachineModelItem == null)
+                                {
+                                    stateMachineModelItem =
+                                        StateContainerEditor.GetStateMachineModelItem(
+                                            stateModelItem
+                                        );
+                                }
+                                if (
+                                    stateMachineModelItem
+                                        .Properties[StateMachineDesigner.InitialStatePropertyName]
+                                        .Value == stateModelItem
+                                )
+                                {
+                                    this.AddInitialNodeConnector(view);
+                                }
                             }
                         }
-                    }
-                })
-            );
+                    })
+                );
         }
 
         void RemoveStateVisual(UIElement removedStateDesigner)
@@ -830,10 +826,8 @@ namespace System.Activities.Core.Presentation
                 }
             }
 
-            object locationOfShape = this.ViewStateService.RetrieveViewState(
-                modelItem,
-                StateContainerEditor.ShapeLocationViewStateKey
-            );
+            object locationOfShape = this.ViewStateService
+                .RetrieveViewState(modelItem, StateContainerEditor.ShapeLocationViewStateKey);
             if (locationOfShape != null)
             {
                 this.shapeLocations.Remove((Point)locationOfShape);
@@ -941,16 +935,18 @@ namespace System.Activities.Core.Presentation
                 int destConnectionPointIndex = StateContainerEditor
                     .GetConnectionPoints(destConnPoint.ParentDesigner)
                     .IndexOf(destConnPoint);
-                this.ViewStateService.StoreViewState(
-                    connectorModelItem,
-                    SrcConnectionPointIndexStateKey,
-                    srcConnectionPointIndex
-                );
-                this.ViewStateService.StoreViewState(
-                    connectorModelItem,
-                    DestConnectionPointIndexStateKey,
-                    destConnectionPointIndex
-                );
+                this.ViewStateService
+                    .StoreViewState(
+                        connectorModelItem,
+                        SrcConnectionPointIndexStateKey,
+                        srcConnectionPointIndex
+                    );
+                this.ViewStateService
+                    .StoreViewState(
+                        connectorModelItem,
+                        DestConnectionPointIndexStateKey,
+                        destConnectionPointIndex
+                    );
             }
 
             return connector;
@@ -1015,10 +1011,8 @@ namespace System.Activities.Core.Presentation
         )
         {
             Connector connector = null;
-            object connectorLocation = this.ViewStateService.RetrieveViewState(
-                connectorModelItem,
-                ConnectorLocationViewStateKey
-            );
+            object connectorLocation = this.ViewStateService
+                .RetrieveViewState(connectorModelItem, ConnectorLocationViewStateKey);
             PointCollection locationPts = connectorLocation as PointCollection;
             if (locationPts != null)
             {
@@ -1026,14 +1020,10 @@ namespace System.Activities.Core.Presentation
                     destConnPoint = null;
                 if (connectorModelItem.ItemType == typeof(Transition))
                 {
-                    object srcConnPointIndex = this.ViewStateService.RetrieveViewState(
-                        connectorModelItem,
-                        SrcConnectionPointIndexStateKey
-                    );
-                    object destConnPointIndex = this.ViewStateService.RetrieveViewState(
-                        connectorModelItem,
-                        DestConnectionPointIndexStateKey
-                    );
+                    object srcConnPointIndex = this.ViewStateService
+                        .RetrieveViewState(connectorModelItem, SrcConnectionPointIndexStateKey);
+                    object destConnPointIndex = this.ViewStateService
+                        .RetrieveViewState(connectorModelItem, DestConnectionPointIndexStateKey);
 
                     if (srcConnPointIndex != null)
                     {
@@ -1128,11 +1118,12 @@ namespace System.Activities.Core.Presentation
                         PointCollection connectorPoints = new PointCollection(
                             ConnectorRouter.Route(this.panel, srcConnPoint, destConnPoint)
                         );
-                        this.ViewStateService.StoreViewState(
-                            connectorModelItem,
-                            ConnectorLocationViewStateKey,
-                            connectorPoints
-                        );
+                        this.ViewStateService
+                            .StoreViewState(
+                                connectorModelItem,
+                                ConnectorLocationViewStateKey,
+                                connectorPoints
+                            );
                         connector = CreateConnector(
                             srcConnPoint,
                             destConnPoint,
@@ -1293,11 +1284,12 @@ namespace System.Activities.Core.Presentation
                         connectorPoints,
                         connectorModelItem
                     );
-                    this.ViewStateService.StoreViewState(
-                        connectorModelItem,
-                        ConnectorLocationViewStateKey,
-                        connectorPoints
-                    );
+                    this.ViewStateService
+                        .StoreViewState(
+                            connectorModelItem,
+                            ConnectorLocationViewStateKey,
+                            connectorPoints
+                        );
                 }
             }
             if (connector != null)
@@ -1623,7 +1615,8 @@ namespace System.Activities.Core.Presentation
             }
 
             foreach (
-                ConnectionPoint connectionPoint in this.activeConnectionPointsAdorner.ConnectionPoints
+                ConnectionPoint connectionPoint in this.activeConnectionPointsAdorner
+                    .ConnectionPoints
             )
             {
                 if (object.Equals(connectionPoint, closestConnectionPoint))
@@ -1765,11 +1758,12 @@ namespace System.Activities.Core.Presentation
                 // Using internalViewStateChange flag for that purpose.
                 this.internalViewStateChange = true;
                 ModelItem storageModelItem = view.ModelItem;
-                this.ViewStateService.StoreViewState(
-                    storageModelItem,
-                    ShapeSizeViewStateKey,
-                    ((UIElement)sender).DesiredSize
-                );
+                this.ViewStateService
+                    .StoreViewState(
+                        storageModelItem,
+                        ShapeSizeViewStateKey,
+                        ((UIElement)sender).DesiredSize
+                    );
                 this.internalViewStateChange = false;
             }
         }
@@ -1903,9 +1897,10 @@ namespace System.Activities.Core.Presentation
         {
             if (e.Key == Key.Enter || e.Key == Key.Return)
             {
-                this.DesignerView.MakeRootDesigner(
-                    StateContainerEditor.GetConnectorModelItem(sender as DependencyObject)
-                );
+                this.DesignerView
+                    .MakeRootDesigner(
+                        StateContainerEditor.GetConnectorModelItem(sender as DependencyObject)
+                    );
                 e.Handled = true;
             }
         }
@@ -2024,10 +2019,9 @@ namespace System.Activities.Core.Presentation
                     movedConnector
                 );
                 PointCollection existingViewState =
-                    this.ViewStateService.RetrieveViewState(
-                        connectorModelItem,
-                        ConnectorLocationViewStateKey
-                    ) as PointCollection;
+                    this.ViewStateService
+                        .RetrieveViewState(connectorModelItem, ConnectorLocationViewStateKey)
+                    as PointCollection;
                 if (
                     existingViewState != null
                     && existingViewState.Count > 0
@@ -2234,19 +2228,21 @@ namespace System.Activities.Core.Presentation
                 {
                     if (this.requiredSize.Width > this.StateContainerWidth)
                     {
-                        this.ViewStateService.StoreViewState(
-                            this.ModelItem,
-                            StateContainerEditor.StateContainerWidthViewStateKey,
-                            this.requiredSize.Width
-                        );
+                        this.ViewStateService
+                            .StoreViewState(
+                                this.ModelItem,
+                                StateContainerEditor.StateContainerWidthViewStateKey,
+                                this.requiredSize.Width
+                            );
                     }
                     if (this.requiredSize.Height > this.StateContainerHeight)
                     {
-                        this.ViewStateService.StoreViewState(
-                            this.ModelItem,
-                            StateContainerEditor.StateContainerHeightViewStateKey,
-                            this.requiredSize.Height
-                        );
+                        this.ViewStateService
+                            .StoreViewState(
+                                this.ModelItem,
+                                StateContainerEditor.StateContainerHeightViewStateKey,
+                                this.requiredSize.Height
+                            );
                     }
                 })
             );
@@ -2615,7 +2611,9 @@ namespace System.Activities.Core.Presentation
                                 if (view == null)
                                 {
                                     view =
-                                        this.Context.Services.GetService<ViewService>()
+                                        this.Context
+                                            .Services
+                                            .GetService<ViewService>()
                                             .GetView(droppedModelItem) as WorkflowViewElement;
                                     ViewUtilities.MeasureView(view as WorkflowViewElement, true);
                                 }
@@ -2654,10 +2652,8 @@ namespace System.Activities.Core.Presentation
                                     new Size(DefaultStateDesignerWidth, DefaultStateDesignerHeight)
                                 );
                             }
-                            object viewState = this.ViewStateService.RetrieveViewState(
-                                droppedModelItem,
-                                ShapeLocationViewStateKey
-                            );
+                            object viewState = this.ViewStateService
+                                .RetrieveViewState(droppedModelItem, ShapeLocationViewStateKey);
                             if (externalDrop)
                             {
                                 Fx.Assert(
@@ -2674,12 +2670,10 @@ namespace System.Activities.Core.Presentation
                                     );
                                 Fx.Assert(container != null, "container should not be null");
                                 Point oldLocation = (Point)viewState;
-                                oldLocation = srcContainer.panel.GetLocationRelativeToOutmostPanel(
-                                    oldLocation
-                                );
-                                Point newLocation = this.panel.GetLocationRelativeToOutmostPanel(
-                                    shapeLocation
-                                );
+                                oldLocation = srcContainer.panel
+                                    .GetLocationRelativeToOutmostPanel(oldLocation);
+                                Point newLocation = this.panel
+                                    .GetLocationRelativeToOutmostPanel(shapeLocation);
                                 // To make sure the connectors are still connected to the connection points
                                 OffsetConnectorViewState(container, oldLocation, newLocation, true);
                             }
@@ -2690,26 +2684,27 @@ namespace System.Activities.Core.Presentation
             }
 
             DragDropHelper.SetDragDropMovedViewElements(e, new WorkflowViewElement[] { });
-            this.Dispatcher.BeginInvoke(
-                () =>
-                {
-                    bool first = true;
-                    foreach (ModelItem modelItem in modelItemsToSelect)
+            this.Dispatcher
+                .BeginInvoke(
+                    () =>
                     {
-                        if (first)
+                        bool first = true;
+                        foreach (ModelItem modelItem in modelItemsToSelect)
                         {
-                            Keyboard.Focus((IInputElement)modelItem.View);
-                            Selection.SelectOnly(this.Context, modelItem);
-                            first = false;
+                            if (first)
+                            {
+                                Keyboard.Focus((IInputElement)modelItem.View);
+                                Selection.SelectOnly(this.Context, modelItem);
+                                first = false;
+                            }
+                            else
+                            {
+                                Selection.Union(this.Context, modelItem);
+                            }
                         }
-                        else
-                        {
-                            Selection.Union(this.Context, modelItem);
-                        }
-                    }
-                },
-                DispatcherPriority.ApplicationIdle
-            );
+                    },
+                    DispatcherPriority.ApplicationIdle
+                );
 
             return droppedModelItem;
         }
@@ -2827,8 +2822,9 @@ namespace System.Activities.Core.Presentation
             using (EditingScope es = (EditingScope)this.ModelItem.BeginEdit(SR.ItemMove))
             {
                 foreach (
-                    ModelItem selectedModelItem in this
-                        .Context.Items.GetValue<Selection>()
+                    ModelItem selectedModelItem in this.Context
+                        .Items
+                        .GetValue<Selection>()
                         .SelectedObjects
                 )
                 {
@@ -2891,12 +2887,13 @@ namespace System.Activities.Core.Presentation
             }
             else if (
                 (new List<Key> { Key.Left, Key.Right, Key.Up, Key.Down }).Contains(e.Key)
-                && currentSelection.SelectedObjects.All<ModelItem>(
-                    (p) =>
-                    {
-                        return this.modelItemToUIElement.ContainsKey(p);
-                    }
-                )
+                && currentSelection.SelectedObjects
+                    .All<ModelItem>(
+                        (p) =>
+                        {
+                            return this.modelItemToUIElement.ContainsKey(p);
+                        }
+                    )
             )
             {
                 this.KeyboardMove(e.Key);
@@ -3082,10 +3079,8 @@ namespace System.Activities.Core.Presentation
                     );
                 }
                 ModelItem modelItem = GetModelItemFromView(movedElement);
-                object viewState = this.ViewStateService.RetrieveViewState(
-                    modelItem,
-                    ShapeLocationViewStateKey
-                );
+                object viewState = this.ViewStateService
+                    .RetrieveViewState(modelItem, ShapeLocationViewStateKey);
                 if (viewState != null)
                 {
                     Point oldLocation = (Point)viewState;
@@ -3183,15 +3178,16 @@ namespace System.Activities.Core.Presentation
                             this.ModelItem.BeginEdit(SR.AutoConnect, false)
                     )
                     {
-                        es.Changes.Add(
-                            new StoreAutoConnectorViewStateChange(
-                                this.ModelItem,
-                                sourceModelItem,
-                                droppedModelItem,
-                                connectorModelItem,
-                                edgeLocation
-                            )
-                        );
+                        es.Changes
+                            .Add(
+                                new StoreAutoConnectorViewStateChange(
+                                    this.ModelItem,
+                                    sourceModelItem,
+                                    droppedModelItem,
+                                    connectorModelItem,
+                                    edgeLocation
+                                )
+                            );
                         es.Complete();
                     }
                     scope.Complete();
@@ -3235,13 +3231,15 @@ namespace System.Activities.Core.Presentation
                     {
                         trasitionModelItem = sourceModelItem
                             .Properties[StateDesigner.TransitionsPropertyName]
-                            .Collection.Insert(insertIndex, transition);
+                            .Collection
+                            .Insert(insertIndex, transition);
                     }
                     else
                     {
                         trasitionModelItem = sourceModelItem
                             .Properties[StateDesigner.TransitionsPropertyName]
-                            .Collection.Add(transition);
+                            .Collection
+                            .Add(transition);
                     }
                     Fx.Assert(trasitionModelItem != null, "trasitionModelItem");
                     return trasitionModelItem;
@@ -3249,7 +3247,8 @@ namespace System.Activities.Core.Presentation
                 // auto-connect from the initial node
                 else if (sourceModelItem.ItemType == typeof(StartNode))
                 {
-                    this.ModelItem.Properties[StateMachineDesigner.InitialStatePropertyName]
+                    this.ModelItem
+                        .Properties[StateMachineDesigner.InitialStatePropertyName]
                         .SetValue(droppedModelItem);
                     return this.ModelItem;
                 }
@@ -3436,10 +3435,11 @@ namespace System.Activities.Core.Presentation
                         ref srcConnectionPoint,
                         ref desConnectionPoint
                     );
-                    this.OldViewState = editor.ViewStateService.RetrieveViewState(
-                        this.ViewStateOwnerModelItem,
-                        ConnectorLocationViewStateKey
-                    );
+                    this.OldViewState = editor.ViewStateService
+                        .RetrieveViewState(
+                            this.ViewStateOwnerModelItem,
+                            ConnectorLocationViewStateKey
+                        );
                     this.NewViewState = points;
 
                     // compare old and new values, if they're the same, return false
@@ -3460,11 +3460,12 @@ namespace System.Activities.Core.Presentation
                     this.ShouldCreateConnector = false;
                 }
 
-                editor.ViewStateService.StoreViewState(
-                    this.ViewStateOwnerModelItem,
-                    ConnectorLocationViewStateKey,
-                    this.NewViewState
-                );
+                editor.ViewStateService
+                    .StoreViewState(
+                        this.ViewStateOwnerModelItem,
+                        ConnectorLocationViewStateKey,
+                        this.NewViewState
+                    );
                 return true;
             }
 
@@ -3566,7 +3567,8 @@ namespace System.Activities.Core.Presentation
                         );
                         droppedModelItem
                             .Properties[StateDesigner.TransitionsPropertyName]
-                            .Collection.Add(
+                            .Collection
+                            .Add(
                                 new Transition()
                                 {
                                     DisplayName = StateContainerEditor.GenerateTransitionName(
@@ -3586,7 +3588,9 @@ namespace System.Activities.Core.Presentation
                     // of the new transition from the dropped state. So the visual of the transition will be created twice. To solve that problem,
                     // we need to suppress adding connector when adding state visual (in the UI reaction for step 1).
                     // And to support redo, we must place the suppression in the undo stack.
-                    this.Context.Services.GetService<ModelTreeManager>()
+                    this.Context
+                        .Services
+                        .GetService<ModelTreeManager>()
                         .AddToCurrentEditingScope(
                             new SuppressAddingConnectorWhenAddingStateVisual()
                         );

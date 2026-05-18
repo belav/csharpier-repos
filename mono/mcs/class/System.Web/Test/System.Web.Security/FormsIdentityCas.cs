@@ -75,9 +75,8 @@ namespace MonoCasTests.System.Web.Security
             AspNetHostingPermissionLevel level
         )
         {
-            ConstructorInfo ci = this.Type.GetConstructor(
-                new Type[1] { typeof(FormsAuthenticationTicket) }
-            );
+            ConstructorInfo ci = this.Type
+                .GetConstructor(new Type[1] { typeof(FormsAuthenticationTicket) });
             Assert.IsNotNull(ci, ".ctor(FormsAuthenticationTicket)");
             return ci.Invoke(new object[1] { ticket });
         }

@@ -91,16 +91,10 @@ namespace tests.system_data_dll.System_Data
         {
             DataSet ds = getDataSet();
             int counter = 0;
-            ds.Relations.Add(
-                "rel1",
-                ds.Tables[0].Columns["ParentId"],
-                ds.Tables[1].Columns["ParentId"]
-            );
-            ds.Relations.Add(
-                "rel2",
-                ds.Tables[0].Columns["String1"],
-                ds.Tables[1].Columns["String1"]
-            );
+            ds.Relations
+                .Add("rel1", ds.Tables[0].Columns["ParentId"], ds.Tables[1].Columns["ParentId"]);
+            ds.Relations
+                .Add("rel2", ds.Tables[0].Columns["String1"], ds.Tables[1].Columns["String1"]);
 
             System.Collections.IEnumerator myEnumerator = ds.Relations.GetEnumerator();
 

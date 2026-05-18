@@ -354,10 +354,13 @@ namespace System.Data.EntityModel.SchemaObjectModel
                             ErrorCode.FunctionWithNonEdmTypeNotSupported,
                             EdmSchemaErrorSeverity.Error,
                             this,
-                            System.Data.Entity.Strings.FunctionWithNonEdmPrimitiveTypeNotSupported(
-                                typeName,
-                                this.ParentElement.FQName
-                            )
+                            System.Data
+                                .Entity
+                                .Strings
+                                .FunctionWithNonEdmPrimitiveTypeNotSupported(
+                                    typeName,
+                                    this.ParentElement.FQName
+                                )
                         );
                     }
                 }
@@ -378,10 +381,13 @@ namespace System.Data.EntityModel.SchemaObjectModel
                                 ErrorCode.FunctionWithNonPrimitiveTypeNotSupported,
                                 EdmSchemaErrorSeverity.Error,
                                 this,
-                                System.Data.Entity.Strings.FunctionWithNonPrimitiveTypeNotSupported(
-                                    _isRefType ? _unresolvedType : _type.FQName,
-                                    this.ParentElement.FQName
-                                )
+                                System.Data
+                                    .Entity
+                                    .Strings
+                                    .FunctionWithNonPrimitiveTypeNotSupported(
+                                        _isRefType ? _unresolvedType : _type.FQName,
+                                        this.ParentElement.FQName
+                                    )
                             );
                         }
                     }
@@ -396,10 +402,13 @@ namespace System.Data.EntityModel.SchemaObjectModel
                                     ErrorCode.FunctionWithNonPrimitiveTypeNotSupported,
                                     EdmSchemaErrorSeverity.Error,
                                     this,
-                                    System.Data.Entity.Strings.FunctionWithNonPrimitiveTypeNotSupported(
-                                        _typeSubElement.FQName,
-                                        this.ParentElement.FQName
-                                    )
+                                    System.Data
+                                        .Entity
+                                        .Strings
+                                        .FunctionWithNonPrimitiveTypeNotSupported(
+                                            _typeSubElement.FQName,
+                                            this.ParentElement.FQName
+                                        )
                                 );
                             }
                             else
@@ -427,8 +436,7 @@ namespace System.Data.EntityModel.SchemaObjectModel
                                                 ErrorCode.TVFReturnTypeRowHasNonScalarProperty,
                                                 EdmSchemaErrorSeverity.Error,
                                                 this,
-                                                System
-                                                    .Data
+                                                System.Data
                                                     .Entity
                                                     .Strings
                                                     .TVFReturnTypeRowHasNonScalarProperty

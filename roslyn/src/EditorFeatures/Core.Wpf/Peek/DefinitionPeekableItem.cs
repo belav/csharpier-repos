@@ -67,10 +67,12 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Peek
                     return;
 
                 // Note: this is called on a background thread, but we must block the thread since the API doesn't support proper asynchrony.
-                var success = _peekableItem._threadingContext.JoinableTaskFactory.Run(async () =>
-                    await FindResultsAsync(resultCollection, callback, cancellationToken)
-                        .ConfigureAwait(false)
-                );
+                var success = _peekableItem._threadingContext
+                    .JoinableTaskFactory
+                    .Run(async () =>
+                        await FindResultsAsync(resultCollection, callback, cancellationToken)
+                            .ConfigureAwait(false)
+                    );
                 if (!success)
                     callback.ReportFailure(
                         new Exception(EditorFeaturesResources.No_information_found)
@@ -95,8 +97,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Peek
                 if (compilation is null)
                     return false;
 
-                var symbol = _peekableItem
-                    ._symbolKey.Resolve(
+                var symbol = _peekableItem._symbolKey
+                    .Resolve(
                         compilation,
                         ignoreAssemblyKey: true,
                         cancellationToken: cancellationToken
@@ -110,11 +112,10 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Peek
                 if (sourceLocations.Count == 0)
                 {
                     // It's a symbol from metadata, so we want to go produce it from metadata
-                    var options = _peekableItem._globalOptions.GetMetadataAsSourceOptions(
-                        project.Services
-                    );
-                    var declarationFile = await _peekableItem
-                        ._metadataAsSourceFileService.GetGeneratedFileAsync(
+                    var options = _peekableItem._globalOptions
+                        .GetMetadataAsSourceOptions(project.Services);
+                    var declarationFile = await _peekableItem._metadataAsSourceFileService
+                        .GetGeneratedFileAsync(
                             workspace,
                             project,
                             symbol,

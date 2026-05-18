@@ -377,10 +377,8 @@ namespace System.ServiceModel.Activities
             if (!metadata.HasViolations)
             {
                 this.internalReceive = CreateInternalReceive();
-                this.InternalContent.ConfigureInternalReceive(
-                    this.internalReceive,
-                    out this.requestFormatter
-                );
+                this.InternalContent
+                    .ConfigureInternalReceive(this.internalReceive, out this.requestFormatter);
             }
             else
             {
@@ -511,10 +509,8 @@ namespace System.ServiceModel.Activities
         {
             if (operation == null)
             {
-                throw FxTrace.Exception.ArgumentNull(
-                    "operation",
-                    "OperationDescription should not be null"
-                );
+                throw FxTrace.Exception
+                    .ArgumentNull("operation", "OperationDescription should not be null");
             }
 
             MessageDescription message;
@@ -572,9 +568,8 @@ namespace System.ServiceModel.Activities
                             }
                             // Indicating it is a untyped message contract
                             if (
-                                !messagePart.Type.IsAssignableFrom(
-                                    typeof(System.ServiceModel.Channels.Message)
-                                )
+                                !messagePart.Type
+                                    .IsAssignableFrom(typeof(System.ServiceModel.Channels.Message))
                             )
                             {
                                 contentIsParameter = true;
@@ -640,16 +635,17 @@ namespace System.ServiceModel.Activities
                 if (
                     (
                         message.Body.ReturnValue != null
-                        && message.Body.ReturnValue.Type.IsDefined(
-                            typeof(MessageContractAttribute),
-                            false
-                        )
+                        && message.Body
+                            .ReturnValue
+                            .Type
+                            .IsDefined(typeof(MessageContractAttribute), false)
                     )
                     || (
                         message.Body.ReturnValue != null
-                        && message.Body.ReturnValue.Type.IsAssignableFrom(
-                            typeof(System.ServiceModel.Channels.Message)
-                        )
+                        && message.Body
+                            .ReturnValue
+                            .Type
+                            .IsAssignableFrom(typeof(System.ServiceModel.Channels.Message))
                     )
                 )
                 {
@@ -661,9 +657,10 @@ namespace System.ServiceModel.Activities
                         operation.Messages[1].MessageType != null
                         || operation
                             .Messages[1]
-                            .Body.ReturnValue.Type.IsAssignableFrom(
-                                typeof(System.ServiceModel.Channels.Message)
-                            )
+                            .Body
+                            .ReturnValue
+                            .Type
+                            .IsAssignableFrom(typeof(System.ServiceModel.Channels.Message))
                     )
                     {
                         receiveActivity.Content = new ReceiveMessageContent();

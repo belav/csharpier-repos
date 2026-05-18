@@ -92,8 +92,10 @@ namespace Microsoft.CodeAnalysis.CodeFixes
             var triggerDocument = diagnosticsToFix.First().Key;
             var diagnosticSpan = diagnosticsToFix
                 .First()
-                .Value.FirstOrDefault()
-                ?.Location.SourceSpan;
+                .Value
+                .FirstOrDefault()
+                ?.Location
+                .SourceSpan;
             var diagnosticIds = GetDiagnosticsIds(diagnosticsToFix.Values);
             var diagnosticProvider = new FixMultipleDiagnosticProvider(diagnosticsToFix);
             return new FixAllState(

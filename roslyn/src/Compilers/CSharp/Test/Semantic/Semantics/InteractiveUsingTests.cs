@@ -570,8 +570,8 @@ t = typeof(File); // global using exposed
 
             var compilation = CreateSubmission(
                 submissionSource,
-                options: TestOptions
-                    .DebugDll.WithSourceReferenceResolver(resolver)
+                options: TestOptions.DebugDll
+                    .WithSourceReferenceResolver(resolver)
                     .WithUsings("System.IO", "System.IO.Path")
             );
 

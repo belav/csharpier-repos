@@ -662,9 +662,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                     HashAlgorithmName.SHA256
                 );
 
-                req.CertificateExtensions.Add(
-                    new X509Extension("2.5.29.17", "30028200".HexToByteArray(), false)
-                );
+                req.CertificateExtensions
+                    .Add(new X509Extension("2.5.29.17", "30028200".HexToByteArray(), false));
 
                 DateTimeOffset now = DateTimeOffset.UtcNow;
                 DateTimeOffset notBefore = now.AddMinutes(-1);
@@ -697,13 +696,14 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                     HashAlgorithmName.SHA256
                 );
 
-                req.CertificateExtensions.Add(
-                    new X509Extension(
-                        "2.5.29.17",
-                        "301682142E70656163682E66727569742E6578616D706C65".HexToByteArray(),
-                        false
-                    )
-                );
+                req.CertificateExtensions
+                    .Add(
+                        new X509Extension(
+                            "2.5.29.17",
+                            "301682142E70656163682E66727569742E6578616D706C65".HexToByteArray(),
+                            false
+                        )
+                    );
 
                 DateTimeOffset now = DateTimeOffset.UtcNow;
                 DateTimeOffset notBefore = now.AddMinutes(-1);
@@ -996,13 +996,14 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                     HashAlgorithmName.SHA256
                 );
 
-                req.CertificateExtensions.Add(
-                    new X509Extension(
-                        "2.5.29.17",
-                        includeDnsName ? uriSrvAndDns : uriAndSrv,
-                        critical: false
-                    )
-                );
+                req.CertificateExtensions
+                    .Add(
+                        new X509Extension(
+                            "2.5.29.17",
+                            includeDnsName ? uriSrvAndDns : uriAndSrv,
+                            critical: false
+                        )
+                    );
 
                 DateTimeOffset now = DateTimeOffset.UtcNow;
                 DateTimeOffset notBefore = now.AddMinutes(-1);

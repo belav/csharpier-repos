@@ -203,9 +203,12 @@ namespace DbLinq.Data.Linq.Sugar.Implementation
             BuilderContext builderContext
         )
         {
-            var dataMember = builderContext
-                .QueryContext.DataContext.Mapping.GetTable(tableExpression.Type)
-                .RowType.GetDataMember(memberInfo);
+            var dataMember = builderContext.QueryContext
+                .DataContext
+                .Mapping
+                .GetTable(tableExpression.Type)
+                .RowType
+                .GetDataMember(memberInfo);
             if (dataMember == null)
                 return null;
             return RegisterColumn(
@@ -222,9 +225,12 @@ namespace DbLinq.Data.Linq.Sugar.Implementation
             BuilderContext builderContext
         )
         {
-            var dataMember = builderContext
-                .QueryContext.DataContext.Mapping.GetTable(table.Type)
-                .RowType.GetDataMember(memberInfo);
+            var dataMember = builderContext.QueryContext
+                .DataContext
+                .Mapping
+                .GetTable(table.Type)
+                .RowType
+                .GetDataMember(memberInfo);
             if (dataMember == null)
                 return null;
             return new ColumnExpression(table, dataMember);
@@ -415,9 +421,12 @@ namespace DbLinq.Data.Linq.Sugar.Implementation
         )
         {
             foreach (
-                var metaMember in builderContext
-                    .QueryContext.DataContext.Mapping.GetTable(tableExpression.Type)
-                    .RowType.PersistentDataMembers
+                var metaMember in builderContext.QueryContext
+                    .DataContext
+                    .Mapping
+                    .GetTable(tableExpression.Type)
+                    .RowType
+                    .PersistentDataMembers
             )
             {
                 yield return RegisterColumn(tableExpression, metaMember.Member, builderContext);
@@ -589,13 +598,14 @@ namespace DbLinq.Data.Linq.Sugar.Implementation
         {
             var entityType = expression.EntitySetType.GetGenericArguments()[0];
             List<ElementInit> members = new List<ElementInit>();
-            var add = expression.EntitySetType.GetMethod(
-                "Add",
-                BindingFlags.NonPublic | BindingFlags.Instance,
-                null,
-                new Type[] { typeof(KeyValuePair<object, MemberInfo>) },
-                null
-            );
+            var add = expression.EntitySetType
+                .GetMethod(
+                    "Add",
+                    BindingFlags.NonPublic | BindingFlags.Instance,
+                    null,
+                    new Type[] { typeof(KeyValuePair<object, MemberInfo>) },
+                    null
+                );
 
             foreach (var info in expression.Columns)
             {
@@ -631,12 +641,13 @@ namespace DbLinq.Data.Linq.Sugar.Implementation
 
             return Expression.ListInit(
                 Expression.New(
-                    expression.EntitySetType.GetConstructor(
-                        BindingFlags.NonPublic | BindingFlags.Instance,
-                        null,
-                        new[] { typeof(DataContext) },
-                        null
-                    ),
+                    expression.EntitySetType
+                        .GetConstructor(
+                            BindingFlags.NonPublic | BindingFlags.Instance,
+                            null,
+                            new[] { typeof(DataContext) },
+                            null
+                        ),
                     Expression.Constant(builderContext.QueryContext.DataContext)
                 ),
                 members

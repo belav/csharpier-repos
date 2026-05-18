@@ -397,9 +397,9 @@ namespace System.Formats.Cbor.Tests
 
             ECParameters ecParams = ecDsa.ExportParameters(includePrivateParameters: false);
 
-            string? expectedCurveFriendlyName = NormalizeCurveForPlatform(
-                curveFriendlyName
-            ).Oid.FriendlyName;
+            string? expectedCurveFriendlyName = NormalizeCurveForPlatform(curveFriendlyName)
+                .Oid
+                .FriendlyName;
 
             Assert.True(ecParams.Curve.IsNamed);
             Assert.Equal(expectedCurveFriendlyName, ecParams.Curve.Oid.FriendlyName);

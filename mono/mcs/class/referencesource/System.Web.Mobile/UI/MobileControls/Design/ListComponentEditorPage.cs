@@ -67,12 +67,13 @@ namespace System.Web.UI.Design.MobileControls
             TreeList.BtnUp.Click += new EventHandler(OnClickUpButton);
             TreeList.BtnDown.Click += new EventHandler(OnClickDownButton);
 
-            this.Controls.AddRange(
-                new Control[]
-                {
-                    TreeList, /*, grplblProperties*/
-                }
-            );
+            this.Controls
+                .AddRange(
+                    new Control[]
+                    {
+                        TreeList, /*, grplblProperties*/
+                    }
+                );
         }
 
         protected virtual void InitPage()

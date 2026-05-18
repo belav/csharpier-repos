@@ -106,12 +106,14 @@ public class ForeignKeyPropertyDiscoveryConvention
 
         // If new properties were used for this relationship we have to examine the other foreign keys
         // in case they can use the properties used previously.
-        var fksToProcess = newRelationshipBuilder
-            .Metadata.DeclaringEntityType.GetForeignKeys()
+        var fksToProcess = newRelationshipBuilder.Metadata
+            .DeclaringEntityType
+            .GetForeignKeys()
             .Where(fk => fk != newRelationshipBuilder.Metadata)
             .Concat(
-                newRelationshipBuilder
-                    .Metadata.DeclaringEntityType.GetDerivedTypes()
+                newRelationshipBuilder.Metadata
+                    .DeclaringEntityType
+                    .GetDerivedTypes()
                     .SelectMany(et => et.GetDeclaredForeignKeys())
             )
             .ToList();
@@ -157,9 +159,8 @@ public class ForeignKeyPropertyDiscoveryConvention
             foreach (var fkProperty in foreignKey.Properties)
             {
                 if (
-                    ConfigurationSource.Convention.Overrides(
-                        fkProperty.GetTypeConfigurationSource()
-                    )
+                    ConfigurationSource.Convention
+                        .Overrides(fkProperty.GetTypeConfigurationSource())
                     && (fkProperty.IsShadowProperty() || fkProperty.IsIndexerProperty())
                     && fkProperty.ClrType.IsNullableType() == foreignKey.IsRequired
                     && fkProperty
@@ -170,12 +171,14 @@ public class ForeignKeyPropertyDiscoveryConvention
                     var newType = fkProperty.ClrType.MakeNullable(!foreignKey.IsRequired);
                     if (fkProperty.ClrType != newType)
                     {
-                        fkProperty.DeclaringType.Builder.Property(
-                            newType,
-                            fkProperty.Name,
-                            fkProperty.GetConfigurationSource()
-                                == ConfigurationSource.DataAnnotation
-                        );
+                        fkProperty.DeclaringType
+                            .Builder
+                            .Property(
+                                newType,
+                                fkProperty.Name,
+                                fkProperty.GetConfigurationSource()
+                                    == ConfigurationSource.DataAnnotation
+                            );
                     }
                 }
             }
@@ -192,9 +195,8 @@ public class ForeignKeyPropertyDiscoveryConvention
             || foreignKey.DeclaringEntityType.IsKeyless
             || (
                 !foreignKey.IsUnique
-                && !ConfigurationSource.Convention.Overrides(
-                    foreignKey.GetIsUniqueConfigurationSource()
-                )
+                && !ConfigurationSource.Convention
+                    .Overrides(foreignKey.GetIsUniqueConfigurationSource())
             )
             || foreignKey.PrincipalToDependent?.IsCollection == true
             || foreignKey.DeclaringEntityType.FindOwnership() != null
@@ -211,9 +213,8 @@ public class ForeignKeyPropertyDiscoveryConvention
             invertible = false;
         }
         else if (
-            ConfigurationSource.Convention.Overrides(
-                foreignKey.GetPrincipalEndConfigurationSource()
-            )
+            ConfigurationSource.Convention
+                .Overrides(foreignKey.GetPrincipalEndConfigurationSource())
             && foreignKey.PrincipalEntityType.FindOwnership() != null
             && foreignKey is { PrincipalToDependent: not null, DependentToPrincipal: null }
         )
@@ -232,9 +233,8 @@ public class ForeignKeyPropertyDiscoveryConvention
         {
             if (
                 invertible
-                && ConfigurationSource.Convention.Overrides(
-                    foreignKey.GetPrincipalEndConfigurationSource()
-                )
+                && ConfigurationSource.Convention
+                    .Overrides(foreignKey.GetPrincipalEndConfigurationSource())
             )
             {
                 var candidatePropertiesOnPrincipal = FindCandidateForeignKeyProperties(
@@ -272,12 +272,10 @@ public class ForeignKeyPropertyDiscoveryConvention
                     if (
                         !foreignKey.IsOwnership
                         && (
-                            !ConfigurationSource.Convention.Overrides(
-                                foreignKey.GetPrincipalEndConfigurationSource()
-                            )
-                            || foreignKey.DeclaringEntityType.IsInOwnershipPath(
-                                foreignKey.PrincipalEntityType
-                            )
+                            !ConfigurationSource.Convention
+                                .Overrides(foreignKey.GetPrincipalEndConfigurationSource())
+                            || foreignKey.DeclaringEntityType
+                                .IsInOwnershipPath(foreignKey.PrincipalEntityType)
                         )
                     )
                     {
@@ -291,13 +289,16 @@ public class ForeignKeyPropertyDiscoveryConvention
                     else if (
                         foreignKey.IsOwnership
                         && (
-                            !ConfigurationSource.Convention.Overrides(
-                                foreignKey.DeclaringEntityType.GetPrimaryKeyConfigurationSource()
-                            )
+                            !ConfigurationSource.Convention
+                                .Overrides(
+                                    foreignKey.DeclaringEntityType
+                                        .GetPrimaryKeyConfigurationSource()
+                                )
                             || (
-                                foreignKey
-                                    .DeclaringEntityType.FindPrimaryKey()
-                                    ?.Properties.All(p => !p.IsShadowProperty())
+                                foreignKey.DeclaringEntityType
+                                    .FindPrimaryKey()
+                                    ?.Properties
+                                    .All(p => !p.IsShadowProperty())
                                 ?? false
                             )
                         )
@@ -376,9 +377,8 @@ public class ForeignKeyPropertyDiscoveryConvention
             if (
                 foreignKeyProperties == null
                 && invertible
-                && ConfigurationSource.Convention.Overrides(
-                    foreignKey.GetPrincipalEndConfigurationSource()
-                )
+                && ConfigurationSource.Convention
+                    .Overrides(foreignKey.GetPrincipalEndConfigurationSource())
             )
             {
                 ((ForeignKey)relationshipBuilder.Metadata).SetPrincipalEndConfigurationSource(null);
@@ -386,9 +386,8 @@ public class ForeignKeyPropertyDiscoveryConvention
         }
         else if (
             invertible
-            && ConfigurationSource.Convention.Overrides(
-                foreignKey.GetPrincipalEndConfigurationSource()
-            )
+            && ConfigurationSource.Convention
+                .Overrides(foreignKey.GetPrincipalEndConfigurationSource())
         )
         {
             var candidatePropertiesOnPrincipal = FindCandidateForeignKeyProperties(
@@ -409,11 +408,11 @@ public class ForeignKeyPropertyDiscoveryConvention
         }
 
         var conflictingFKCount =
-            foreignKey
-                .DeclaringEntityType.FindForeignKeys(foreignKeyProperties)
+            foreignKey.DeclaringEntityType
+                .FindForeignKeys(foreignKeyProperties)
                 .Concat(
-                    foreignKey
-                        .DeclaringEntityType.GetDerivedTypes()
+                    foreignKey.DeclaringEntityType
+                        .GetDerivedTypes()
                         .SelectMany(et => et.FindDeclaredForeignKeys(foreignKeyProperties))
                 )
                 .Count() - 1;
@@ -639,12 +638,13 @@ public class ForeignKeyPropertyDiscoveryConvention
                             : "." + principalNavigationSpec
                     );
 
-                Dependencies.Logger.IncompatibleMatchingForeignKeyProperties(
-                    dependentNavigationSpec,
-                    principalNavigationSpec,
-                    foreignKeyProperties,
-                    propertiesToReference
-                );
+                Dependencies.Logger
+                    .IncompatibleMatchingForeignKeyProperties(
+                        dependentNavigationSpec,
+                        principalNavigationSpec,
+                        foreignKeyProperties,
+                        propertiesToReference
+                    );
             }
 
             // Stop searching if match found, but is incompatible
@@ -786,9 +786,8 @@ public class ForeignKeyPropertyDiscoveryConvention
         {
             if (
                 foreignKey.IsInModel
-                && ConfigurationSource.Convention.Overrides(
-                    foreignKey.GetPrincipalEndConfigurationSource()
-                )
+                && ConfigurationSource.Convention
+                    .Overrides(foreignKey.GetPrincipalEndConfigurationSource())
             )
             {
                 DiscoverProperties(foreignKey.Builder, context);
@@ -862,9 +861,9 @@ public class ForeignKeyPropertyDiscoveryConvention
         var isRequired = relationshipBuilder.Metadata.IsRequired;
         using var batch = context.DelayConventions();
         foreach (
-            var property in relationshipBuilder.Metadata.Properties.Where(p =>
-                p.ClrType.IsNullableType()
-            )
+            var property in relationshipBuilder.Metadata
+                .Properties
+                .Where(p => p.ClrType.IsNullableType())
         )
         {
             var requiredSet = property.Builder.IsRequired(isRequired) != null;
@@ -930,8 +929,8 @@ public class ForeignKeyPropertyDiscoveryConvention
     {
         var key = keyBuilder.Metadata;
         foreach (
-            var foreignKey in key
-                .DeclaringEntityType.GetDerivedTypesInclusive()
+            var foreignKey in key.DeclaringEntityType
+                .GetDerivedTypesInclusive()
                 .SelectMany(t => t.GetDeclaredForeignKeys())
                 .ToList()
         )
@@ -958,8 +957,8 @@ public class ForeignKeyPropertyDiscoveryConvention
             return;
         }
 
-        var foreignKeys = key
-            .DeclaringEntityType.GetDerivedTypesInclusive()
+        var foreignKeys = key.DeclaringEntityType
+            .GetDerivedTypesInclusive()
             .SelectMany(t => t.GetDeclaredForeignKeys())
             .ToList();
         foreach (var foreignKey in foreignKeys)
@@ -997,8 +996,8 @@ public class ForeignKeyPropertyDiscoveryConvention
 
         var initialPrimaryKey = entityTypeBuilder.Metadata.FindPrimaryKey();
 
-        var foreignKeys = entityTypeBuilder
-            .Metadata.GetDerivedTypesInclusive()
+        var foreignKeys = entityTypeBuilder.Metadata
+            .GetDerivedTypesInclusive()
             .SelectMany(t => t.GetDeclaredForeignKeys())
             .ToList();
         foreach (var foreignKey in foreignKeys)
@@ -1011,8 +1010,8 @@ public class ForeignKeyPropertyDiscoveryConvention
             DiscoverProperties(foreignKey.Builder, context);
         }
 
-        var referencingForeignKeys = entityTypeBuilder
-            .Metadata.GetDerivedTypesInclusive()
+        var referencingForeignKeys = entityTypeBuilder.Metadata
+            .GetDerivedTypesInclusive()
             .SelectMany(t => t.GetDeclaredReferencingForeignKeys())
             .ToList();
         foreach (var referencingForeignKey in referencingForeignKeys)
@@ -1089,18 +1088,17 @@ public class ForeignKeyPropertyDiscoveryConvention
                 );
                 if (foreignKeyProperties != null)
                 {
-                    var conflictingForeignKey = foreignKey
-                        .DeclaringEntityType.FindForeignKeys(foreignKeyProperties)
+                    var conflictingForeignKey = foreignKey.DeclaringEntityType
+                        .FindForeignKeys(foreignKeyProperties)
                         .Concat(
-                            foreignKey
-                                .DeclaringEntityType.GetDerivedTypes()
+                            foreignKey.DeclaringEntityType
+                                .GetDerivedTypes()
                                 .SelectMany(et => et.FindDeclaredForeignKeys(foreignKeyProperties))
                         )
                         .FirstOrDefault(fk =>
                             fk != foreignKey
-                            && ConfigurationSource.Convention.Overrides(
-                                fk.GetPropertiesConfigurationSource()
-                            )
+                            && ConfigurationSource.Convention
+                                .Overrides(fk.GetPropertiesConfigurationSource())
                         );
                     if (conflictingForeignKey != null)
                     {

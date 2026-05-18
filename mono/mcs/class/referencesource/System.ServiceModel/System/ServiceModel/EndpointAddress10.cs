@@ -55,10 +55,11 @@ namespace System.ServiceModel
 
         void IXmlSerializable.WriteXml(XmlWriter writer)
         {
-            this.address.WriteContentsTo(
-                AddressingVersion.WSAddressing10,
-                XmlDictionaryWriter.CreateDictionaryWriter(writer)
-            );
+            this.address
+                .WriteContentsTo(
+                    AddressingVersion.WSAddressing10,
+                    XmlDictionaryWriter.CreateDictionaryWriter(writer)
+                );
         }
 
         static XmlQualifiedName EprType

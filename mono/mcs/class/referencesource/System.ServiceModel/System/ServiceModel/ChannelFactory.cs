@@ -134,11 +134,14 @@ namespace System.ServiceModel
         {
             if (this.Endpoint == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(
-                        SR.GetString(SR.SFxChannelFactoryCannotApplyConfigurationWithoutEndpoint)
-                    )
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(
+                                SR.SFxChannelFactoryCannotApplyConfigurationWithoutEndpoint
+                            )
+                        )
+                    );
             }
 
             if (!this.Endpoint.IsFullyConfigured)
@@ -170,11 +173,12 @@ namespace System.ServiceModel
         {
             if (endpoint.Address == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(
-                        SR.GetString(SR.SFxChannelFactoryEndpointAddressUri)
-                    )
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(SR.SFxChannelFactoryEndpointAddressUri)
+                        )
+                    );
             }
 
             return endpoint.Address;
@@ -184,33 +188,36 @@ namespace System.ServiceModel
         {
             if (this.Endpoint == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(
-                        SR.GetString(SR.SFxChannelFactoryCannotCreateFactoryWithoutDescription)
-                    )
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(SR.SFxChannelFactoryCannotCreateFactoryWithoutDescription)
+                        )
+                    );
             }
 
             if (this.Endpoint.Binding == null)
             {
                 if (this.configurationName != null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(
-                            SR.GetString(
-                                SR.SFxChannelFactoryNoBindingFoundInConfig1,
-                                configurationName
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(
+                                SR.GetString(
+                                    SR.SFxChannelFactoryNoBindingFoundInConfig1,
+                                    configurationName
+                                )
                             )
-                        )
-                    );
+                        );
                 }
                 else
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(
-                            SR.GetString(SR.SFxChannelFactoryNoBindingFoundInConfigOrCode)
-                        )
-                    );
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(
+                                SR.GetString(SR.SFxChannelFactoryNoBindingFoundInConfigOrCode)
+                            )
+                        );
                 }
             }
 
@@ -455,9 +462,10 @@ namespace System.ServiceModel
             }
 
             if (this.innerFactory == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(SR.GetString(SR.InnerChannelFactoryWasNotSet))
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(SR.GetString(SR.InnerChannelFactoryWasNotSet))
+                    );
         }
 
         class OpenAsyncResult : AsyncResult
@@ -483,11 +491,8 @@ namespace System.ServiceModel
                     return;
                 }
 
-                IAsyncResult result = this.communicationObject.BeginOpen(
-                    timeout,
-                    onOpenComplete,
-                    this
-                );
+                IAsyncResult result = this.communicationObject
+                    .BeginOpen(timeout, onOpenComplete, this);
                 if (result.CompletedSynchronously)
                 {
                     this.communicationObject.EndOpen(result);
@@ -549,11 +554,8 @@ namespace System.ServiceModel
                     return;
                 }
 
-                IAsyncResult result = this.communicationObject.BeginClose(
-                    timeout,
-                    onCloseComplete,
-                    this
-                );
+                IAsyncResult result = this.communicationObject
+                    .BeginClose(timeout, onCloseComplete, this);
 
                 if (result.CompletedSynchronously)
                 {
@@ -612,11 +614,12 @@ namespace System.ServiceModel
 
             if (!channelType.IsInterface)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(
-                        SR.GetString(SR.SFxChannelFactoryTypeMustBeInterface)
-                    )
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(SR.SFxChannelFactoryTypeMustBeInterface)
+                        )
+                    );
             }
 
             this.channelType = channelType;
@@ -668,9 +671,8 @@ namespace System.ServiceModel
                 }
                 if (endpointConfigurationName == null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                        "endpointConfigurationName"
-                    );
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperArgumentNull("endpointConfigurationName");
                 }
 
                 this.InitializeEndpoint(endpointConfigurationName, remoteAddress);
@@ -822,14 +824,15 @@ namespace System.ServiceModel
 
                     if (this.HasDuplexOperations())
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new InvalidOperationException(
-                                SR.GetString(
-                                    SR.SFxCreateNonDuplexChannel1,
-                                    this.Endpoint.Contract.Name
+                        throw DiagnosticUtility.ExceptionUtility
+                            .ThrowHelperError(
+                                new InvalidOperationException(
+                                    SR.GetString(
+                                        SR.SFxCreateNonDuplexChannel1,
+                                        this.Endpoint.Contract.Name
+                                    )
                                 )
-                            )
-                        );
+                            );
                     }
 
                     EnsureOpened();
@@ -979,9 +982,8 @@ namespace System.ServiceModel
 
         protected override ServiceEndpoint CreateDescription()
         {
-            ContractDescription contractDescription = this.TypeLoader.LoadContractDescription(
-                this.channelType
-            );
+            ContractDescription contractDescription = this.TypeLoader
+                .LoadContractDescription(this.channelType);
 
             ServiceEndpoint endpoint = new ServiceEndpoint(contractDescription);
             ReflectOnCallbackInstance(endpoint);
@@ -996,14 +998,15 @@ namespace System.ServiceModel
             {
                 if (endpoint.Contract.CallbackContractType == null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(
-                            SR.GetString(
-                                SR.SfxCallbackTypeCannotBeNull,
-                                endpoint.Contract.ContractType.FullName
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(
+                                SR.GetString(
+                                    SR.SfxCallbackTypeCannotBeNull,
+                                    endpoint.Contract.ContractType.FullName
+                                )
                             )
-                        )
-                    );
+                        );
                 }
 
                 this.TypeLoader.AddBehaviorsFromImplementationType(endpoint, callbackType);
@@ -1012,14 +1015,15 @@ namespace System.ServiceModel
             {
                 if (endpoint.Contract.CallbackContractType == null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(
-                            SR.GetString(
-                                SR.SfxCallbackTypeCannotBeNull,
-                                endpoint.Contract.ContractType.FullName
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(
+                                SR.GetString(
+                                    SR.SfxCallbackTypeCannotBeNull,
+                                    endpoint.Contract.ContractType.FullName
+                                )
                             )
-                        )
-                    );
+                        );
                 }
 
                 object implementation = this.CallbackInstance.UserObject;
@@ -1049,14 +1053,15 @@ namespace System.ServiceModel
 
             if (channelFactory.HasDuplexOperations())
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(
-                        SR.GetString(
-                            SR.SFxInvalidStaticOverloadCalledForDuplexChannelFactory1,
-                            channelFactory.channelType.Name
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(
+                                SR.SFxInvalidStaticOverloadCalledForDuplexChannelFactory1,
+                                channelFactory.channelType.Name
+                            )
                         )
-                    )
-                );
+                    );
             }
 
             TChannel channel = channelFactory.CreateChannel();
@@ -1073,14 +1078,15 @@ namespace System.ServiceModel
 
             if (channelFactory.HasDuplexOperations())
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(
-                        SR.GetString(
-                            SR.SFxInvalidStaticOverloadCalledForDuplexChannelFactory1,
-                            channelFactory.channelType.Name
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(
+                                SR.SFxInvalidStaticOverloadCalledForDuplexChannelFactory1,
+                                channelFactory.channelType.Name
+                            )
                         )
-                    )
-                );
+                    );
             }
 
             TChannel channel = channelFactory.CreateChannel();
@@ -1098,14 +1104,15 @@ namespace System.ServiceModel
 
             if (channelFactory.HasDuplexOperations())
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(
-                        SR.GetString(
-                            SR.SFxInvalidStaticOverloadCalledForDuplexChannelFactory1,
-                            channelFactory.channelType.Name
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(
+                                SR.SFxInvalidStaticOverloadCalledForDuplexChannelFactory1,
+                                channelFactory.channelType.Name
+                            )
                         )
-                    )
-                );
+                    );
             }
 
             TChannel channel = channelFactory.CreateChannel(endpointAddress, via);

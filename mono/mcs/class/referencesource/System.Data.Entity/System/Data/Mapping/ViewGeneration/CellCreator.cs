@@ -100,11 +100,12 @@ namespace System.Data.Mapping.ViewGeneration
             {
                 //Find Projected members that are Boolean AND are mentioned in the Where clause with not_null condition
                 foreach (
-                    var memberToExpand in cell
-                        .SQuery.GetProjectedMembers()
+                    var memberToExpand in cell.SQuery
+                        .GetProjectedMembers()
                         .Where(member => IsBooleanMember(member))
                         .Where(boolMember =>
-                            cell.SQuery.GetConjunctsFromWhereClause()
+                            cell.SQuery
+                                .GetConjunctsFromWhereClause()
                                 .Where(restriction =>
                                     restriction.Domain.Values.Contains(Constant.NotNull)
                                 )
@@ -130,8 +131,8 @@ namespace System.Data.Mapping.ViewGeneration
             {
                 foreach (var sSideMemberToExpand in sSideMembersToBeExpanded)
                 {
-                    var cSideMembers = cell
-                        .SQuery.GetProjectedPositions(sSideMemberToExpand)
+                    var cSideMembers = cell.SQuery
+                        .GetProjectedPositions(sSideMemberToExpand)
                         .Select(pos =>
                             ((MemberProjectedSlot)cell.CQuery.ProjectedSlotAt(pos)).MemberPath
                         );
@@ -202,8 +203,8 @@ namespace System.Data.Mapping.ViewGeneration
                     else
                     { //If the s-side member is not projected, see if the mapped C-side member(s) is projected
                         foreach (
-                            var cMemberToExpand in cell
-                                .CQuery.GetProjectedMembers()
+                            var cMemberToExpand in cell.CQuery
+                                .GetProjectedMembers()
                                 .Intersect(mappedCSideMembers)
                         )
                         {
@@ -291,14 +292,16 @@ namespace System.Data.Mapping.ViewGeneration
             if (
                 originalCell
                     .GetLeftQuery(viewTarget)
-                    .Conditions.Where(restriction =>
+                    .Conditions
+                    .Where(restriction =>
                         restriction.RestrictedMemberSlot.MemberPath.Equals(memberToExpand)
                     )
                     .Where(restriction => restriction.Domain.Values.Contains(negatedCondition))
                     .Any()
                 || originalCell
                     .GetRightQuery(viewTarget)
-                    .Conditions.Where(restriction =>
+                    .Conditions
+                    .Where(restriction =>
                         restriction.RestrictedMemberSlot.MemberPath.Equals(rightSidePath)
                     )
                     .Where(restriction => restriction.Domain.Values.Contains(negatedCondition))
@@ -413,8 +416,7 @@ namespace System.Data.Mapping.ViewGeneration
                             IEnumerable<EdmType> typeAndSubTypes =
                                 MetadataHelper.GetTypeAndSubtypesOf(
                                     type,
-                                    m_containerMapping
-                                        .StorageMappingItemCollection
+                                    m_containerMapping.StorageMappingItemCollection
                                         .EdmItemCollection,
                                     false /*includeAbstractTypes*/
                                 );
@@ -594,8 +596,7 @@ namespace System.Data.Mapping.ViewGeneration
                             allTypes.AddRange(
                                 MetadataHelper.GetTypeAndSubtypesOf(
                                     type,
-                                    m_containerMapping
-                                        .StorageMappingItemCollection
+                                    m_containerMapping.StorageMappingItemCollection
                                         .EdmItemCollection,
                                     false /*includeAbstractTypes*/
                                 )

@@ -241,8 +241,7 @@ namespace System.DirectoryServices.AccountManagement
                         new object[]
                         {
                             UnsafeNativeMethods.ADS_OPTION_ENUM.ADS_OPTION_PASSWORD_METHOD,
-                            UnsafeNativeMethods
-                                .ADS_PASSWORD_ENCODING_ENUM
+                            UnsafeNativeMethods.ADS_PASSWORD_ENCODING_ENUM
                                 .ADS_PASSWORD_ENCODE_CLEAR,
                         }
                     );

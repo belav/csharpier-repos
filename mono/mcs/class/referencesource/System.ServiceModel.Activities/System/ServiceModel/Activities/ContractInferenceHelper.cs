@@ -203,9 +203,10 @@ namespace System.ServiceModel.Activities
                     "Client side contract should have exactly one operation!"
                 );
 
-                serviceEndpoint
-                    .Contract.Operations[0]
-                    .Behaviors.Add(new TransactionFlowAttribute(TransactionFlowOption.Allowed));
+                serviceEndpoint.Contract
+                    .Operations[0]
+                    .Behaviors
+                    .Add(new TransactionFlowAttribute(TransactionFlowOption.Allowed));
             }
             else
             {
@@ -240,9 +241,8 @@ namespace System.ServiceModel.Activities
                     SessionMode = SessionMode.Allowed,
                 };
                 operation = new OperationDescription(operationName, contract);
-                operation.Behaviors.Add(
-                    new TransactionFlowAttribute(TransactionFlowOption.Allowed)
-                );
+                operation.Behaviors
+                    .Add(new TransactionFlowAttribute(TransactionFlowOption.Allowed));
 
                 string requestAction = null;
                 string replyAction = null;
@@ -333,11 +333,8 @@ namespace System.ServiceModel.Activities
             // Infer Out-Message
             if (receiveReply != null)
             {
-                receiveReply.InternalContent.InferMessageDescription(
-                    operation,
-                    receiveReply,
-                    MessageDirection.Output
-                );
+                receiveReply.InternalContent
+                    .InferMessageDescription(operation, receiveReply, MessageDirection.Output);
             }
 
             PostProcessOperation(operation);
@@ -373,22 +370,16 @@ namespace System.ServiceModel.Activities
             }
 
             // Infer In-Message
-            receive.InternalContent.InferMessageDescription(
-                operation,
-                receive,
-                MessageDirection.Input
-            );
+            receive.InternalContent
+                .InferMessageDescription(operation, receive, MessageDirection.Input);
 
             // Infer Out-Message
             if (receive.HasReply)
             {
                 // At this point, we already know all the following SendReplies are equivalent
                 SendReply sendReply = receive.FollowingReplies[0];
-                sendReply.InternalContent.InferMessageDescription(
-                    operation,
-                    sendReply,
-                    MessageDirection.Output
-                );
+                sendReply.InternalContent
+                    .InferMessageDescription(operation, sendReply, MessageDirection.Output);
             }
             else if (receive.HasFault)
             {
@@ -417,8 +408,7 @@ namespace System.ServiceModel.Activities
                 operation.IsInsideTransactedReceiveScope = true;
                 EnableTransactionBehavior(operation);
                 if (
-                    receive
-                        .InternalReceive
+                    receive.InternalReceive
                         .AdditionalData
                         .IsFirstReceiveOfTransactedReceiveScopeTree
                 )
@@ -568,8 +558,8 @@ namespace System.ServiceModel.Activities
         {
             Fx.Assert(operationDescription != null, "OperationDescription is null");
 
-            OperationBehaviorAttribute attribute =
-                operationDescription.Behaviors.Find<OperationBehaviorAttribute>();
+            OperationBehaviorAttribute attribute = operationDescription.Behaviors
+                .Find<OperationBehaviorAttribute>();
             if (attribute != null)
             {
                 attribute.TransactionScopeRequired = true;
@@ -584,26 +574,26 @@ namespace System.ServiceModel.Activities
                 };
                 operationDescription.Behaviors.Add(attr);
             }
-            TransactionFlowAttribute transactionFlowAttribute =
-                operationDescription.Behaviors.Find<TransactionFlowAttribute>();
+            TransactionFlowAttribute transactionFlowAttribute = operationDescription.Behaviors
+                .Find<TransactionFlowAttribute>();
             if (transactionFlowAttribute != null)
             {
                 if (transactionFlowAttribute.Transactions != TransactionFlowOption.Allowed)
                 {
-                    throw FxTrace.Exception.AsError(
-                        new InvalidOperationException(
-                            SR.ContractInferenceValidationForTransactionFlowBehavior
-                        )
-                    );
+                    throw FxTrace.Exception
+                        .AsError(
+                            new InvalidOperationException(
+                                SR.ContractInferenceValidationForTransactionFlowBehavior
+                            )
+                        );
                 }
             }
             else
             {
                 if (!operationDescription.IsOneWay)
                 {
-                    operationDescription.Behaviors.Add(
-                        new TransactionFlowAttribute(TransactionFlowOption.Allowed)
-                    );
+                    operationDescription.Behaviors
+                        .Add(new TransactionFlowAttribute(TransactionFlowOption.Allowed));
                 }
             }
         }
@@ -633,19 +623,24 @@ namespace System.ServiceModel.Activities
         {
             if (operation.Behaviors.Find<DataContractSerializerOperationBehavior>() != null)
             {
-                throw FxTrace.Exception.AsError(
-                    new InvalidOperationException(
-                        SR.OperationHasSerializerBehavior(
-                            operation.Name,
-                            operation.DeclaringContract.Name,
-                            typeof(DataContractSerializerOperationBehavior)
+                throw FxTrace.Exception
+                    .AsError(
+                        new InvalidOperationException(
+                            SR.OperationHasSerializerBehavior(
+                                operation.Name,
+                                operation.DeclaringContract.Name,
+                                typeof(DataContractSerializerOperationBehavior)
+                            )
                         )
+                    );
+            }
+            operation.Behaviors
+                .Add(
+                    new DataContractSerializerOperationBehavior(
+                        operation,
+                        DataContractFormatAttribute
                     )
                 );
-            }
-            operation.Behaviors.Add(
-                new DataContractSerializerOperationBehavior(operation, DataContractFormatAttribute)
-            );
             if (!operation.Behaviors.Contains(typeof(DataContractSerializerOperationGenerator)))
             {
                 operation.Behaviors.Add(new DataContractSerializerOperationGenerator());
@@ -656,24 +651,23 @@ namespace System.ServiceModel.Activities
         {
             if (operation.Behaviors.Find<XmlSerializerOperationBehavior>() != null)
             {
-                throw FxTrace.Exception.AsError(
-                    new InvalidOperationException(
-                        SR.OperationHasSerializerBehavior(
-                            operation.Name,
-                            operation.DeclaringContract.Name,
-                            typeof(XmlSerializerOperationBehavior)
+                throw FxTrace.Exception
+                    .AsError(
+                        new InvalidOperationException(
+                            SR.OperationHasSerializerBehavior(
+                                operation.Name,
+                                operation.DeclaringContract.Name,
+                                typeof(XmlSerializerOperationBehavior)
+                            )
                         )
-                    )
-                );
+                    );
             }
-            operation.Behaviors.Add(
-                new XmlSerializerOperationBehavior(operation, XmlSerializerFormatAttribute)
-            );
+            operation.Behaviors
+                .Add(new XmlSerializerOperationBehavior(operation, XmlSerializerFormatAttribute));
             if (!operation.Behaviors.Contains(typeof(XmlSerializerOperationGenerator)))
             {
-                operation.Behaviors.Add(
-                    new XmlSerializerOperationGenerator(new XmlSerializerImportOptions())
-                );
+                operation.Behaviors
+                    .Add(new XmlSerializerOperationGenerator(new XmlSerializerImportOptions()));
             }
         }
 
@@ -712,11 +706,8 @@ namespace System.ServiceModel.Activities
             operation.Messages.RemoveAt(1);
 
             SendReply sendReply = receive.FollowingReplies[0];
-            sendReply.InternalContent.InferMessageDescription(
-                operation,
-                sendReply,
-                MessageDirection.Output
-            );
+            sendReply.InternalContent
+                .InferMessageDescription(operation, sendReply, MessageDirection.Output);
 
             ContractInferenceHelper.PostProcessOperation(operation);
         }
@@ -769,11 +760,12 @@ namespace System.ServiceModel.Activities
                             {
                                 if (faultDescription.Action != action)
                                 {
-                                    throw FxTrace.Exception.AsError(
-                                        new ValidationException(
-                                            SR.SendRepliesHaveSameFaultTypeDifferentAction
-                                        )
-                                    );
+                                    throw FxTrace.Exception
+                                        .AsError(
+                                            new ValidationException(
+                                                SR.SendRepliesHaveSameFaultTypeDifferentAction
+                                            )
+                                        );
                                 }
                                 else
                                 {

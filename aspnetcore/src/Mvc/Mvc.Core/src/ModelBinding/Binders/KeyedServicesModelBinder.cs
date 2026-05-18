@@ -34,10 +34,8 @@ internal class KeyedServicesModelBinder : IModelBinder
 
         if (model != null)
         {
-            bindingContext.ValidationState.Add(
-                model,
-                new ValidationStateEntry() { SuppressValidation = true }
-            );
+            bindingContext.ValidationState
+                .Add(model, new ValidationStateEntry() { SuppressValidation = true });
         }
 
         bindingContext.Result = ModelBindingResult.Success(model);

@@ -2075,23 +2075,25 @@ namespace System.Xml.Serialization
         {
             // check that the choice field exists
 
-            MemberInfo[] infos = structModel.Type.GetMember(
-                choice.MemberName,
-                BindingFlags.DeclaredOnly
-                    | BindingFlags.Public
-                    | BindingFlags.Instance
-                    | BindingFlags.Static
-            );
-            if (infos == null || infos.Length == 0)
-            {
-                // if we can not find the choice identifier between fields, check proerties
-                PropertyInfo info = structModel.Type.GetProperty(
+            MemberInfo[] infos = structModel.Type
+                .GetMember(
                     choice.MemberName,
                     BindingFlags.DeclaredOnly
                         | BindingFlags.Public
                         | BindingFlags.Instance
                         | BindingFlags.Static
                 );
+            if (infos == null || infos.Length == 0)
+            {
+                // if we can not find the choice identifier between fields, check proerties
+                PropertyInfo info = structModel.Type
+                    .GetProperty(
+                        choice.MemberName,
+                        BindingFlags.DeclaredOnly
+                            | BindingFlags.Public
+                            | BindingFlags.Instance
+                            | BindingFlags.Static
+                    );
 
                 if (info == null)
                 {
@@ -2551,9 +2553,8 @@ namespace System.Xml.Serialization
                     if (a.XmlArray == null)
                         a.XmlArray = CreateArrayAttribute(accessor.TypeDesc);
                     if (CountAtLevel(a.XmlArrayItems, arrayNestingLevel) == 0)
-                        a.XmlArrayItems.Add(
-                            CreateArrayItemAttribute(arrayElementTypeDesc, arrayNestingLevel)
-                        );
+                        a.XmlArrayItems
+                            .Add(CreateArrayItemAttribute(arrayElementTypeDesc, arrayNestingLevel));
                     ElementAccessor arrayElement = new ElementAccessor();
                     arrayElement.Name = XmlConvert.EncodeLocalName(
                         a.XmlArray.ElementName.Length == 0 ? accessorName : a.XmlArray.ElementName

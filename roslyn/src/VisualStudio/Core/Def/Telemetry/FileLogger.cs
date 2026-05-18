@@ -54,8 +54,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Telemetry
             ) { }
 
         private static string GetLogFileName() =>
-            DateTime
-                .Now.ToString(CultureInfo.InvariantCulture)
+            DateTime.Now
+                .ToString(CultureInfo.InvariantCulture)
                 .Replace(' ', '_')
                 .Replace('/', '_')
                 .Replace(':', '_') + ".log";

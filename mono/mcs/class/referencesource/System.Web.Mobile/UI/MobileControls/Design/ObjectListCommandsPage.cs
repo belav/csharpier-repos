@@ -111,17 +111,18 @@ namespace System.Web.UI.Design.MobileControls
             _cmbDefaultCommand.SelectedIndexChanged += new EventHandler(this.OnSetPageDirty);
             _cmbDefaultCommand.TextChanged += new EventHandler(this.OnSetPageDirty);
 
-            this.Controls.AddRange(
-                new Control[]
-                {
-                    grplblCommandList,
-                    lblText,
-                    _txtText,
-                    grplblData,
-                    lblDefaultCommand,
-                    _cmbDefaultCommand,
-                }
-            );
+            this.Controls
+                .AddRange(
+                    new Control[]
+                    {
+                        grplblCommandList,
+                        lblText,
+                        _txtText,
+                        grplblData,
+                        lblDefaultCommand,
+                        _cmbDefaultCommand,
+                    }
+                );
         }
 
         protected override void InitPage()

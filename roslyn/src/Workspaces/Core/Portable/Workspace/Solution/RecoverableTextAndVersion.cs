@@ -117,8 +117,8 @@ namespace Microsoft.CodeAnalysis
             if (recoverableText.LoadTextOptions != options && recoverableText.InitialSource != null)
             {
                 var textAndVersion = useAsync
-                    ? await recoverableText
-                        .InitialSource.GetValueAsync(options, cancellationToken)
+                    ? await recoverableText.InitialSource
+                        .GetValueAsync(options, cancellationToken)
                         .ConfigureAwait(false)
                     : recoverableText.InitialSource.GetValue(options, cancellationToken);
                 Interlocked.Exchange(

@@ -480,8 +480,8 @@ namespace MakeGenMethod
 
         static void TestGenericMethod_NoDictionaries_Inner()
         {
-            MethodInfo testMethod = TypeOf
-                .GM_NonGenericType.GetTypeInfo()
+            MethodInfo testMethod = TypeOf.GM_NonGenericType
+                .GetTypeInfo()
                 .GetDeclaredMethod("VerySimpleGenericMethod")
                 .MakeGenericMethod(new Type[] { TypeOf.CommonType1 });
             var result = testMethod.Invoke(new NonGenericType(), null);
@@ -654,8 +654,8 @@ namespace MakeGenMethod
 
         static void RunTest_Delegate(Type t_in, Type t_out)
         {
-            MethodInfo method = TypeOf
-                .GM_MakeGenericMethodTest.GetTypeInfo()
+            MethodInfo method = TypeOf.GM_MakeGenericMethodTest
+                .GetTypeInfo()
                 .GetDeclaredMethod("MethodForDelegate")
                 .MakeGenericMethod(new Type[] { t_in, t_out });
 
@@ -728,8 +728,8 @@ namespace MakeGenMethod
 
             var dynamicallyCreatedArray = TypeOf.CommonType10.MakeArrayType();
 
-            MethodInfo method = TypeOf
-                .GM_MakeGenericMethodTest.GetTypeInfo()
+            MethodInfo method = TypeOf.GM_MakeGenericMethodTest
+                .GetTypeInfo()
                 .GetDeclaredMethod("MethodForDelegate")
                 .MakeGenericMethod(new Type[] { dynamicallyCreatedArray, dynamicallyCreatedArray });
 

@@ -23,8 +23,8 @@ namespace Microsoft.DotNet.CoreSetup.Test
 
         public AndConstraint<DirectoryInfoAssertions> Exist()
         {
-            Execute
-                .Assertion.ForCondition(_dirInfo.Exists)
+            Execute.Assertion
+                .ForCondition(_dirInfo.Exists)
                 .FailWith($"Expected directory '{_dirInfo.FullName}' does not exist.");
             return new AndConstraint<DirectoryInfoAssertions>(this);
         }
@@ -34,8 +34,8 @@ namespace Microsoft.DotNet.CoreSetup.Test
             var file = _dirInfo
                 .EnumerateFiles(expectedFile, SearchOption.TopDirectoryOnly)
                 .SingleOrDefault();
-            Execute
-                .Assertion.ForCondition(file != null)
+            Execute.Assertion
+                .ForCondition(file != null)
                 .FailWith(
                     $"Expected File '{expectedFile}' cannot be found in directory '{_dirInfo.FullName}."
                 );
@@ -47,8 +47,8 @@ namespace Microsoft.DotNet.CoreSetup.Test
             var file = _dirInfo
                 .EnumerateFiles(expectedFile, SearchOption.TopDirectoryOnly)
                 .SingleOrDefault();
-            Execute
-                .Assertion.ForCondition(file == null)
+            Execute.Assertion
+                .ForCondition(file == null)
                 .FailWith(
                     $"File '{expectedFile}' should not be found in directory '{_dirInfo.FullName}'."
                 );
@@ -82,8 +82,8 @@ namespace Microsoft.DotNet.CoreSetup.Test
             var dir = _dirInfo
                 .EnumerateDirectories(expectedDir, SearchOption.TopDirectoryOnly)
                 .SingleOrDefault();
-            Execute
-                .Assertion.ForCondition(dir != null)
+            Execute.Assertion
+                .ForCondition(dir != null)
                 .FailWith(
                     $"Expected directory '{expectedDir}' cannot be found inside directory '{_dirInfo.FullName}'."
                 );
@@ -96,8 +96,8 @@ namespace Microsoft.DotNet.CoreSetup.Test
             var dir = _dirInfo
                 .EnumerateDirectories(expectedDir, SearchOption.TopDirectoryOnly)
                 .SingleOrDefault();
-            Execute
-                .Assertion.ForCondition(dir == null)
+            Execute.Assertion
+                .ForCondition(dir == null)
                 .FailWith(
                     $"Directory '{expectedDir}' should not be found in found inside directory '{_dirInfo.FullName}'."
                 );
@@ -116,14 +116,14 @@ namespace Microsoft.DotNet.CoreSetup.Test
             var extraFiles = Enumerable.Except(actualFiles, expectedFiles);
             var nl = Environment.NewLine;
 
-            Execute
-                .Assertion.ForCondition(!missingFiles.Any())
+            Execute.Assertion
+                .ForCondition(!missingFiles.Any())
                 .FailWith(
                     $"Following files cannot be found inside directory {_dirInfo.FullName} {nl} {string.Join(nl, missingFiles)}"
                 );
 
-            Execute
-                .Assertion.ForCondition(!extraFiles.Any())
+            Execute.Assertion
+                .ForCondition(!extraFiles.Any())
                 .FailWith(
                     $"Following extra files are found inside directory {_dirInfo.FullName} {nl} {string.Join(nl, extraFiles)}"
                 );
@@ -136,8 +136,8 @@ namespace Microsoft.DotNet.CoreSetup.Test
             _dirInfo.Refresh();
             DateTime writeTime = _dirInfo.LastWriteTimeUtc;
 
-            Execute
-                .Assertion.ForCondition(writeTime <= timeUtc)
+            Execute.Assertion
+                .ForCondition(writeTime <= timeUtc)
                 .FailWith(
                     $"Directory '{_dirInfo.FullName}' should not be modified after {timeUtc}, but is modified at {writeTime}."
                 );

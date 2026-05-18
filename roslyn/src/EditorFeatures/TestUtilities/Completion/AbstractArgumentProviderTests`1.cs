@@ -127,8 +127,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities.Completion
             var symbol = symbols.Single();
             var parameters = symbol.GetParameters();
 
-            var syntaxFacts = workspace
-                .Services.GetLanguageServices(root.Language)
+            var syntaxFacts = workspace.Services
+                .GetLanguageServices(root.Language)
                 .GetRequiredService<ISyntaxFactsService>();
             Contract.ThrowIfTrue(
                 arguments.Any(argument => syntaxFacts.IsNamedArgument(argument)),

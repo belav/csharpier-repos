@@ -171,15 +171,17 @@ namespace System.Workflow.Activities.Rules.Design
             );
             projectedValue.Append(currentValue.Substring(selectionStart + selectionLength));
 
-            System.Diagnostics.Trace.WriteLine(
-                string.Format(
-                    CultureInfo.CurrentCulture,
-                    "KeyCode:{0}, KeyData:{1}, KeyValue:{2}",
-                    e.KeyCode,
-                    e.KeyData,
-                    e.KeyValue
-                )
-            );
+            System.Diagnostics
+                .Trace
+                .WriteLine(
+                    string.Format(
+                        CultureInfo.CurrentCulture,
+                        "KeyCode:{0}, KeyData:{1}, KeyValue:{2}",
+                        e.KeyCode,
+                        e.KeyData,
+                        e.KeyValue
+                    )
+                );
             this.toolTip.Hide(this);
             if (e.KeyData == (Keys.Control | Keys.Space))
             {
@@ -556,9 +558,10 @@ namespace System.Workflow.Activities.Rules.Design
                 for (int i = 0; i < this.listBoxAutoComplete.Items.Count; i++)
                 {
                     if (
-                        this
-                            .listBoxAutoComplete.Items[i]
-                            .Text.StartsWith(currentValue, StringComparison.OrdinalIgnoreCase)
+                        this.listBoxAutoComplete
+                            .Items[i]
+                            .Text
+                            .StartsWith(currentValue, StringComparison.OrdinalIgnoreCase)
                     )
                     {
                         wordMatched = true;

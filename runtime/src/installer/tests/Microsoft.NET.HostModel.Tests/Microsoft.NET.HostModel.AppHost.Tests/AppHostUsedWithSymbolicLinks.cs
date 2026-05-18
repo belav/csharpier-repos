@@ -49,7 +49,8 @@ namespace Microsoft.NET.HostModel.Tests
                     .Execute()
                     .Should()
                     .Pass()
-                    .And.HaveStdOutContaining("Hello World");
+                    .And
+                    .HaveStdOutContaining("Hello World");
             }
         }
 
@@ -89,7 +90,8 @@ namespace Microsoft.NET.HostModel.Tests
                     .Execute()
                     .Should()
                     .Pass()
-                    .And.HaveStdOutContaining("Hello World");
+                    .And
+                    .HaveStdOutContaining("Hello World");
             }
         }
 
@@ -127,7 +129,8 @@ namespace Microsoft.NET.HostModel.Tests
                     .Execute()
                     .Should()
                     .Pass()
-                    .And.HaveStdOutContaining("Hello World");
+                    .And
+                    .HaveStdOutContaining("Hello World");
             }
         }
 
@@ -154,7 +157,8 @@ namespace Microsoft.NET.HostModel.Tests
                     .Execute()
                     .Should()
                     .Pass()
-                    .And.HaveStdOutContaining("Hello World");
+                    .And
+                    .HaveStdOutContaining("Hello World");
             }
         }
 
@@ -180,7 +184,8 @@ namespace Microsoft.NET.HostModel.Tests
                     .Execute()
                     .Should()
                     .Pass()
-                    .And.HaveStdOutContaining("Hello World");
+                    .And
+                    .HaveStdOutContaining("Hello World");
             }
         }
 
@@ -206,7 +211,8 @@ namespace Microsoft.NET.HostModel.Tests
                     .Execute()
                     .Should()
                     .Pass()
-                    .And.HaveStdOutContaining("Hello World");
+                    .And
+                    .HaveStdOutContaining("Hello World");
             }
         }
 
@@ -225,14 +231,15 @@ namespace Microsoft.NET.HostModel.Tests
                 Directory.Move(app.Location, newAppDir.Location);
 
                 using var symlink = new SymLink(app.Location, newAppDir.Location);
-                TestContext
-                    .BuiltDotNet.Exec(app.AppDll)
+                TestContext.BuiltDotNet
+                    .Exec(app.AppDll)
                     .CaptureStdErr()
                     .CaptureStdOut()
                     .Execute()
                     .Should()
                     .Pass()
-                    .And.HaveStdOutContaining("Hello World");
+                    .And
+                    .HaveStdOutContaining("Hello World");
             }
         }
 
@@ -274,7 +281,8 @@ namespace Microsoft.NET.HostModel.Tests
                 .Execute()
                 .Should()
                 .Pass()
-                .And.HaveStdOutContaining("[kn-IN]! [ta-IN]! [default]!");
+                .And
+                .HaveStdOutContaining("[kn-IN]! [ta-IN]! [default]!");
         }
 
         public class SharedTestState : IDisposable

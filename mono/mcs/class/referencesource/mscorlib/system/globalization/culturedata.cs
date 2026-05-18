@@ -825,8 +825,10 @@ namespace System.Globalization
             {
                 // Open in read-only mode.
                 // Use InternalOpenSubKey so that we avoid the security check.
-                Microsoft.Win32.RegistryKey key =
-                    Microsoft.Win32.Registry.LocalMachine.InternalOpenSubKey(s_RegionKey, false);
+                Microsoft.Win32.RegistryKey key = Microsoft.Win32
+                    .Registry
+                    .LocalMachine
+                    .InternalOpenSubKey(s_RegionKey, false);
 
                 if (key != null)
                 {
@@ -1286,9 +1288,9 @@ namespace System.Globalization
                         {
                             // We have to make the neutral distinction in case the OS returns a specific name
                             if (
-                                CultureInfo.UserDefaultUICulture.Name.Equals(
-                                    Thread.CurrentThread.CurrentUICulture.Name
-                                )
+                                CultureInfo.UserDefaultUICulture
+                                    .Name
+                                    .Equals(Thread.CurrentThread.CurrentUICulture.Name)
                             )
                             {
                                 this.sLocalizedDisplayName = DoGetLocaleInfo(
@@ -1343,10 +1345,8 @@ namespace System.Globalization
                             {
                                 // "Azeri (Latin)" + "Azerbaijan" -> "Azeri (Latin, Azerbaijan)"
                                 this.sEnglishDisplayName =
-                                    this.SENGLISHLANGUAGE.Substring(
-                                        0,
-                                        this.sEnglishLanguage.Length - 1
-                                    )
+                                    this.SENGLISHLANGUAGE
+                                        .Substring(0, this.sEnglishLanguage.Length - 1)
                                     + ", "
                                     + this.SENGCOUNTRY
                                     + ")";
@@ -1489,9 +1489,9 @@ namespace System.Globalization
                 if (this.sLocalizedLanguage == null)
                 {
                     if (
-                        CultureInfo.UserDefaultUICulture.Name.Equals(
-                            Thread.CurrentThread.CurrentUICulture.Name
-                        )
+                        CultureInfo.UserDefaultUICulture
+                            .Name
+                            .Equals(Thread.CurrentThread.CurrentUICulture.Name)
                     )
                     {
                         this.sLocalizedLanguage = DoGetLocaleInfo(LOCALE_SLOCALIZEDLANGUAGENAME);
@@ -1613,9 +1613,9 @@ namespace System.Globalization
                     {
                         // We have to make the neutral distinction in case the OS returns a specific name
                         if (
-                            CultureInfo.UserDefaultUICulture.Name.Equals(
-                                Thread.CurrentThread.CurrentUICulture.Name
-                            )
+                            CultureInfo.UserDefaultUICulture
+                                .Name
+                                .Equals(Thread.CurrentThread.CurrentUICulture.Name)
                         )
                         {
                             this.sLocalizedCountry = DoGetLocaleInfo(LOCALE_SLOCALIZEDCOUNTRYNAME);

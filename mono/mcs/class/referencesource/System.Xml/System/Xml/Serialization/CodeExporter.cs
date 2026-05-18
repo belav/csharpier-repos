@@ -131,17 +131,21 @@ namespace System.Xml.Serialization
                         }
                     }
                     AssemblyName assemblyName = a.GetName();
-                    decl.Arguments.Add(
-                        new CodeAttributeArgument(new CodePrimitiveExpression(assemblyName.Name))
-                    );
-                    string version = GetProductVersion(a);
-                    decl.Arguments.Add(
-                        new CodeAttributeArgument(
-                            new CodePrimitiveExpression(
-                                version == null ? assemblyName.Version.ToString() : version
+                    decl.Arguments
+                        .Add(
+                            new CodeAttributeArgument(
+                                new CodePrimitiveExpression(assemblyName.Name)
                             )
-                        )
-                    );
+                        );
+                    string version = GetProductVersion(a);
+                    decl.Arguments
+                        .Add(
+                            new CodeAttributeArgument(
+                                new CodePrimitiveExpression(
+                                    version == null ? assemblyName.Version.ToString() : version
+                                )
+                            )
+                        );
                     generatedCodeAttribute = decl;
                 }
                 return generatedCodeAttribute;
@@ -237,11 +241,12 @@ namespace System.Xml.Serialization
                         CodeAttributeDeclaration include = new CodeAttributeDeclaration(
                             includeType.FullName
                         );
-                        include.Arguments.Add(
-                            new CodeAttributeArgument(
-                                new CodeTypeOfExpression(derived.TypeDesc.FullName)
-                            )
-                        );
+                        include.Arguments
+                            .Add(
+                                new CodeAttributeArgument(
+                                    new CodeTypeOfExpression(derived.TypeDesc.FullName)
+                                )
+                            );
                         includeMetadata.Add(include);
                     }
                 }
@@ -259,11 +264,12 @@ namespace System.Xml.Serialization
                             CodeAttributeDeclaration include = new CodeAttributeDeclaration(
                                 includeType.FullName
                             );
-                            include.Arguments.Add(
-                                new CodeAttributeArgument(
-                                    new CodeTypeOfExpression(arrayMapping.TypeDesc.FullName)
-                                )
-                            );
+                            include.Arguments
+                                .Add(
+                                    new CodeAttributeArgument(
+                                        new CodeTypeOfExpression(arrayMapping.TypeDesc.FullName)
+                                    )
+                                );
                             includeMetadata.Add(include);
                             typesIncluded.Add(arrayMapping.TypeDesc.FullName, string.Empty);
                             EnsureTypesExported(arrayMapping.Elements, arrayMapping.Namespace);
@@ -340,30 +346,38 @@ namespace System.Xml.Serialization
             CodeAttributeDeclaration attribute = new CodeAttributeDeclaration(type.FullName);
             if (name == null || name.Length == 0)
             {
-                attribute.Arguments.Add(
-                    new CodeAttributeArgument("AnonymousType", new CodePrimitiveExpression(true))
-                );
+                attribute.Arguments
+                    .Add(
+                        new CodeAttributeArgument(
+                            "AnonymousType",
+                            new CodePrimitiveExpression(true)
+                        )
+                    );
             }
             else
             {
                 if (defaultName != name)
                 {
-                    attribute.Arguments.Add(
-                        new CodeAttributeArgument("TypeName", new CodePrimitiveExpression(name))
-                    );
+                    attribute.Arguments
+                        .Add(
+                            new CodeAttributeArgument("TypeName", new CodePrimitiveExpression(name))
+                        );
                 }
             }
             if (ns != null && ns.Length != 0)
             {
-                attribute.Arguments.Add(
-                    new CodeAttributeArgument("Namespace", new CodePrimitiveExpression(ns))
-                );
+                attribute.Arguments
+                    .Add(new CodeAttributeArgument("Namespace", new CodePrimitiveExpression(ns)));
             }
             if (!includeInSchema)
             {
-                attribute.Arguments.Add(
-                    new CodeAttributeArgument("IncludeInSchema", new CodePrimitiveExpression(false))
-                );
+                attribute.Arguments
+                    .Add(
+                        new CodeAttributeArgument(
+                            "IncludeInSchema",
+                            new CodePrimitiveExpression(false)
+                        )
+                    );
             }
             if (attribute.Arguments.Count > 0)
             {
@@ -386,9 +400,12 @@ namespace System.Xml.Serialization
             )
             {
                 CodeAttributeDeclaration attribute = new CodeAttributeDeclaration(type.FullName);
-                attribute.Arguments.Add(
-                    new CodeAttributeArgument(new CodeTypeOfExpression(derived.TypeDesc.FullName))
-                );
+                attribute.Arguments
+                    .Add(
+                        new CodeAttributeArgument(
+                            new CodeTypeOfExpression(derived.TypeDesc.FullName)
+                        )
+                    );
                 metadata.Add(attribute);
                 AddIncludeMetadata(metadata, derived, type);
             }
@@ -410,9 +427,8 @@ namespace System.Xml.Serialization
             if (constant.XmlName != constant.Name)
             {
                 CodeAttributeDeclaration attribute = new CodeAttributeDeclaration(type.FullName);
-                attribute.Arguments.Add(
-                    new CodeAttributeArgument(new CodePrimitiveExpression(constant.XmlName))
-                );
+                attribute.Arguments
+                    .Add(new CodeAttributeArgument(new CodePrimitiveExpression(constant.XmlName)));
                 field.CustomAttributes.Add(attribute);
             }
         }
@@ -473,13 +489,14 @@ namespace System.Xml.Serialization
             if (EnableDataBinding)
             {
                 prop.SetStatements.Add(propertySet);
-                prop.SetStatements.Add(
-                    new CodeMethodInvokeExpression(
-                        new CodeThisReferenceExpression(),
-                        RaisePropertyChangedEventMethod.Name,
-                        new CodePrimitiveExpression(name)
-                    )
-                );
+                prop.SetStatements
+                    .Add(
+                        new CodeMethodInvokeExpression(
+                            new CodeThisReferenceExpression(),
+                            RaisePropertyChangedEventMethod.Name,
+                            new CodePrimitiveExpression(name)
+                        )
+                    );
             }
             else
                 prop.SetStatements.Add(propertySet);
@@ -500,9 +517,10 @@ namespace System.Xml.Serialization
                 {
                     codeClass.BaseTypes.Add(typeof(object));
                 }
-                codeClass.BaseTypes.Add(
-                    new CodeTypeReference(typeof(System.ComponentModel.INotifyPropertyChanged))
-                );
+                codeClass.BaseTypes
+                    .Add(
+                        new CodeTypeReference(typeof(System.ComponentModel.INotifyPropertyChanged))
+                    );
                 codeClass.Members.Add(PropertyChangedEvent);
                 codeClass.Members.Add(RaisePropertyChangedEventMethod);
             }
@@ -524,24 +542,26 @@ namespace System.Xml.Serialization
                 CodeArgumentReferenceExpression propertyName = new CodeArgumentReferenceExpression(
                     "propertyName"
                 );
-                raisePropertyChangedEventMethod.Parameters.Add(
-                    new CodeParameterDeclarationExpression(
-                        typeof(string),
-                        propertyName.ParameterName
-                    )
-                );
+                raisePropertyChangedEventMethod.Parameters
+                    .Add(
+                        new CodeParameterDeclarationExpression(
+                            typeof(string),
+                            propertyName.ParameterName
+                        )
+                    );
                 CodeVariableReferenceExpression propertyChanged =
                     new CodeVariableReferenceExpression("propertyChanged");
-                raisePropertyChangedEventMethod.Statements.Add(
-                    new CodeVariableDeclarationStatement(
-                        typeof(PropertyChangedEventHandler),
-                        propertyChanged.VariableName,
-                        new CodeEventReferenceExpression(
-                            new CodeThisReferenceExpression(),
-                            PropertyChangedEvent.Name
+                raisePropertyChangedEventMethod.Statements
+                    .Add(
+                        new CodeVariableDeclarationStatement(
+                            typeof(PropertyChangedEventHandler),
+                            propertyChanged.VariableName,
+                            new CodeEventReferenceExpression(
+                                new CodeThisReferenceExpression(),
+                                PropertyChangedEvent.Name
+                            )
                         )
-                    )
-                );
+                    );
                 CodeConditionStatement ifStatement = new CodeConditionStatement(
                     new CodeBinaryOperatorExpression(
                         propertyChanged,
@@ -550,16 +570,17 @@ namespace System.Xml.Serialization
                     )
                 );
                 raisePropertyChangedEventMethod.Statements.Add(ifStatement);
-                ifStatement.TrueStatements.Add(
-                    new CodeDelegateInvokeExpression(
-                        propertyChanged,
-                        new CodeThisReferenceExpression(),
-                        new CodeObjectCreateExpression(
-                            typeof(PropertyChangedEventArgs),
-                            propertyName
+                ifStatement.TrueStatements
+                    .Add(
+                        new CodeDelegateInvokeExpression(
+                            propertyChanged,
+                            new CodeThisReferenceExpression(),
+                            new CodeObjectCreateExpression(
+                                typeof(PropertyChangedEventArgs),
+                                propertyName
+                            )
                         )
-                    )
-                );
+                    );
                 return raisePropertyChangedEventMethod;
             }
         }
@@ -574,9 +595,8 @@ namespace System.Xml.Serialization
                 propertyChangedEvent.Type = new CodeTypeReference(
                     typeof(PropertyChangedEventHandler)
                 );
-                propertyChangedEvent.ImplementationTypes.Add(
-                    typeof(System.ComponentModel.INotifyPropertyChanged)
-                );
+                propertyChangedEvent.ImplementationTypes
+                    .Add(typeof(System.ComponentModel.INotifyPropertyChanged));
                 return propertyChangedEvent;
             }
         }

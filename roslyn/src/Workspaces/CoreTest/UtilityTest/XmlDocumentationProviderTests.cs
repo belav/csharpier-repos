@@ -24,8 +24,9 @@ namespace Microsoft.CodeAnalysis.UnitTests
             var roslynCompilersLocation = typeof(Compilation).Assembly.Location;
             var roslynCompilersXmlFilePath = Path.ChangeExtension(roslynCompilersLocation, ".xml");
             var documentationProvider = XmlDocumentationProvider.CreateFromBytes(
-                Encoding.UTF8.GetBytes(
-                    """
+                Encoding.UTF8
+                    .GetBytes(
+                        """
 <?xml version="1.0"?>
 <doc>
     <assembly>
@@ -40,7 +41,7 @@ namespace Microsoft.CodeAnalysis.UnitTests
     </members>
 </doc>
 """
-                )
+                    )
             );
             var portableExecutableReference = MetadataReference.CreateFromFile(
                 roslynCompilersLocation,

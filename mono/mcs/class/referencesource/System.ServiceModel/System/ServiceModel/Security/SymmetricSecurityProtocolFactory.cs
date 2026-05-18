@@ -178,29 +178,27 @@ namespace System.ServiceModel.Security
                 SecurityTokenResolver resolver = null;
                 if (this.SecurityTokenParameters.HasAsymmetricKey)
                 {
-                    this.recipientAsymmetricTokenProvider =
-                        this.SecurityTokenManager.CreateSecurityTokenProvider(
-                            recipientTokenRequirement
-                        );
+                    this.recipientAsymmetricTokenProvider = this.SecurityTokenManager
+                        .CreateSecurityTokenProvider(recipientTokenRequirement);
                 }
                 else
                 {
-                    this.recipientSymmetricTokenAuthenticator =
-                        this.SecurityTokenManager.CreateSecurityTokenAuthenticator(
-                            recipientTokenRequirement,
-                            out resolver
-                        );
+                    this.recipientSymmetricTokenAuthenticator = this.SecurityTokenManager
+                        .CreateSecurityTokenAuthenticator(recipientTokenRequirement, out resolver);
                 }
                 if (
                     this.RecipientSymmetricTokenAuthenticator != null
                     && this.RecipientAsymmetricTokenProvider != null
                 )
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ArgumentException(
-                            SR.GetString(SR.OnlyOneOfEncryptedKeyOrSymmetricBindingCanBeSelected)
-                        )
-                    );
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperError(
+                            new ArgumentException(
+                                SR.GetString(
+                                    SR.OnlyOneOfEncryptedKeyOrSymmetricBindingCanBeSelected
+                                )
+                            )
+                        );
                 }
                 if (resolver != null)
                 {
@@ -241,8 +239,8 @@ namespace System.ServiceModel.Security
             if (this.tokenParameters.HasAsymmetricKey)
             {
                 this.protectionTokenParameters = new WrappedKeySecurityTokenParameters();
-                this.protectionTokenParameters.RequireDerivedKeys =
-                    this.SecurityTokenParameters.RequireDerivedKeys;
+                this.protectionTokenParameters.RequireDerivedKeys = this.SecurityTokenParameters
+                    .RequireDerivedKeys;
             }
             else
             {

@@ -785,8 +785,8 @@ partial struct C
                 assemblyValidator: (assembly) =>
                 {
                     var reader = assembly.GetMetadataReader();
-                    var type = reader
-                        .TypeDefinitions.Select(handle => reader.GetTypeDefinition(handle))
+                    var type = reader.TypeDefinitions
+                        .Select(handle => reader.GetTypeDefinition(handle))
                         .Where(typeDef => reader.GetString(typeDef.Name) == "S")
                         .Single();
 

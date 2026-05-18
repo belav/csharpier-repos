@@ -3127,21 +3127,23 @@ namespace MonoTests.System.Data.Connected.SqlClient
                 Assert.IsNull(ex.InnerException, "#3");
                 Assert.IsNotNull(ex.Message, "#4");
                 Assert.IsTrue(
-                    ex.Message.IndexOf(
-                        string.Format(CultureInfo.InvariantCulture, "'{0}'", overflow)
-                    ) != -1,
+                    ex.Message
+                        .IndexOf(string.Format(CultureInfo.InvariantCulture, "'{0}'", overflow))
+                        != -1,
                     "#5:" + ex.Message
                 );
                 Assert.IsTrue(
-                    ex.Message.IndexOf(
-                        string.Format(CultureInfo.InvariantCulture, "{0:N4}", SMALLMONEY_MIN)
-                    ) != -1,
+                    ex.Message
+                        .IndexOf(
+                            string.Format(CultureInfo.InvariantCulture, "{0:N4}", SMALLMONEY_MIN)
+                        ) != -1,
                     "#6:" + ex.Message
                 );
                 Assert.IsTrue(
-                    ex.Message.IndexOf(
-                        string.Format(CultureInfo.InvariantCulture, "{0:N4}", SMALLMONEY_MAX)
-                    ) != -1,
+                    ex.Message
+                        .IndexOf(
+                            string.Format(CultureInfo.InvariantCulture, "{0:N4}", SMALLMONEY_MAX)
+                        ) != -1,
                     "#7:" + ex.Message
                 );
             }
@@ -3191,21 +3193,23 @@ namespace MonoTests.System.Data.Connected.SqlClient
                 Assert.IsNull(ex.InnerException, "#3");
                 Assert.IsNotNull(ex.Message, "#4");
                 Assert.IsTrue(
-                    ex.Message.IndexOf(
-                        string.Format(CultureInfo.InvariantCulture, "'{0}'", overflow)
-                    ) != -1,
+                    ex.Message
+                        .IndexOf(string.Format(CultureInfo.InvariantCulture, "'{0}'", overflow))
+                        != -1,
                     "#5:" + ex.Message
                 );
                 Assert.IsTrue(
-                    ex.Message.IndexOf(
-                        string.Format(CultureInfo.InvariantCulture, "{0:N4}", SMALLMONEY_MIN)
-                    ) != -1,
+                    ex.Message
+                        .IndexOf(
+                            string.Format(CultureInfo.InvariantCulture, "{0:N4}", SMALLMONEY_MIN)
+                        ) != -1,
                     "#6:" + ex.Message
                 );
                 Assert.IsTrue(
-                    ex.Message.IndexOf(
-                        string.Format(CultureInfo.InvariantCulture, "{0:N4}", SMALLMONEY_MAX)
-                    ) != -1,
+                    ex.Message
+                        .IndexOf(
+                            string.Format(CultureInfo.InvariantCulture, "{0:N4}", SMALLMONEY_MAX)
+                        ) != -1,
                     "#7:" + ex.Message
                 );
             }

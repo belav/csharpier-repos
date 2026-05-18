@@ -112,8 +112,8 @@ namespace System.CommandLine
                 Method = method;"
             );
             foreach (
-                var propertyAssignment in invocation
-                    .Parameters.Select(x => x.GetPropertyAssignment())
+                var propertyAssignment in invocation.Parameters
+                    .Select(x => x.GetPropertyAssignment())
                     .Where(x => !string.IsNullOrWhiteSpace(x))
             )
             {
@@ -131,8 +131,8 @@ namespace System.CommandLine
             );
 
             foreach (
-                var propertyDeclaration in invocation
-                    .Parameters.Select(x => x.GetPropertyDeclaration())
+                var propertyDeclaration in invocation.Parameters
+                    .Select(x => x.GetPropertyDeclaration())
                     .Where(x => !string.IsNullOrWhiteSpace(x))
             )
             {
@@ -167,8 +167,8 @@ namespace System.CommandLine
             DelegateInvocation invocation
         )
         {
-            return invocation
-                .Parameters.Select(x => x.GetMethodParameter())
+            return invocation.Parameters
+                .Select(x => x.GetMethodParameter())
                 .Where(x => !string.IsNullOrWhiteSpace(x.Name))
                 .ToArray();
         }

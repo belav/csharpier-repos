@@ -611,10 +611,10 @@ namespace System.Data.Common.EntitySql
                     {
                         throw EntityUtil.EntitySqlError(
                             _query,
-                            System.Data.Entity.Strings.InvalidLiteralFormat(
-                                "datetime",
-                                literalValue
-                            ),
+                            System.Data
+                                .Entity
+                                .Strings
+                                .InvalidLiteralFormat("datetime", literalValue),
                             _iPos
                         );
                     }
@@ -637,10 +637,10 @@ namespace System.Data.Common.EntitySql
                     {
                         throw EntityUtil.EntitySqlError(
                             _query,
-                            System.Data.Entity.Strings.InvalidLiteralFormat(
-                                "datetimeoffset",
-                                literalValue
-                            ),
+                            System.Data
+                                .Entity
+                                .Strings
+                                .InvalidLiteralFormat("datetimeoffset", literalValue),
                             _iPos
                         );
                     }

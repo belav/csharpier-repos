@@ -403,10 +403,11 @@ public class FacebookTests : RemoteAuthenticationTests<FacebookOptions>
                             Sender = req =>
                             {
                                 if (
-                                    req.RequestUri.GetComponents(
-                                        UriComponents.SchemeAndServer | UriComponents.Path,
-                                        UriFormat.UriEscaped
-                                    ) == FacebookDefaults.TokenEndpoint
+                                    req.RequestUri
+                                        .GetComponents(
+                                            UriComponents.SchemeAndServer | UriComponents.Path,
+                                            UriFormat.UriEscaped
+                                        ) == FacebookDefaults.TokenEndpoint
                                 )
                                 {
                                     var res = new HttpResponseMessage(HttpStatusCode.OK);
@@ -415,10 +416,11 @@ public class FacebookTests : RemoteAuthenticationTests<FacebookOptions>
                                     return res;
                                 }
                                 if (
-                                    req.RequestUri.GetComponents(
-                                        UriComponents.SchemeAndServer | UriComponents.Path,
-                                        UriFormat.UriEscaped
-                                    )
+                                    req.RequestUri
+                                        .GetComponents(
+                                            UriComponents.SchemeAndServer | UriComponents.Path,
+                                            UriFormat.UriEscaped
+                                        )
                                     == new Uri(customUserInfoEndpoint).GetComponents(
                                         UriComponents.SchemeAndServer | UriComponents.Path,
                                         UriFormat.UriEscaped
@@ -509,10 +511,11 @@ public class FacebookTests : RemoteAuthenticationTests<FacebookOptions>
                                     );
                                 }
                                 else if (
-                                    req.RequestUri.GetComponents(
-                                        UriComponents.SchemeAndServer | UriComponents.Path,
-                                        UriFormat.UriEscaped
-                                    ) == "https://graph.facebook.com/v14.0/me"
+                                    req.RequestUri
+                                        .GetComponents(
+                                            UriComponents.SchemeAndServer | UriComponents.Path,
+                                            UriFormat.UriEscaped
+                                        ) == "https://graph.facebook.com/v14.0/me"
                                 )
                                 {
                                     return ReturnJsonResponse(

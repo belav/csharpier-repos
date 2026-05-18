@@ -107,10 +107,8 @@ namespace ILCompiler
             switch (_targetKind)
             {
                 case TargetKind.ExactCallableAddress:
-                    return factory.GenericLookup.MethodEntry(
-                        TargetMethod,
-                        TargetMethodIsUnboxingThunk
-                    );
+                    return factory.GenericLookup
+                        .MethodEntry(TargetMethod, TargetMethodIsUnboxingThunk);
 
                 case TargetKind.InterfaceDispatch:
                     return factory.GenericLookup.VirtualDispatchCell(TargetMethod);
@@ -119,11 +117,12 @@ namespace ILCompiler
                     return factory.GenericLookup.MethodHandle(TargetMethod);
 
                 case TargetKind.ConstrainedMethod:
-                    return factory.GenericLookup.ConstrainedMethodUse(
-                        _targetMethod,
-                        _constrainedType,
-                        directCall: !_targetMethod.HasInstantiation
-                    );
+                    return factory.GenericLookup
+                        .ConstrainedMethodUse(
+                            _targetMethod,
+                            _constrainedType,
+                            directCall: !_targetMethod.HasInstantiation
+                        );
 
                 default:
                     Debug.Assert(false);

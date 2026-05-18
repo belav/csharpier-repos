@@ -121,13 +121,14 @@ namespace Microsoft.Extensions.Caching.Memory
             object? state
         )
         {
-            entry.PostEvictionCallbacks.Add(
-                new PostEvictionCallbackRegistration()
-                {
-                    EvictionCallback = callback,
-                    State = state,
-                }
-            );
+            entry.PostEvictionCallbacks
+                .Add(
+                    new PostEvictionCallbackRegistration()
+                    {
+                        EvictionCallback = callback,
+                        State = state,
+                    }
+                );
             return entry;
         }
 

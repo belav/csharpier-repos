@@ -134,9 +134,8 @@ namespace System.ServiceModel.Activities
                 requestFormatter = new FromRequest();
                 if (this.Message != null)
                 {
-                    requestFormatter.Parameters.Add(
-                        OutArgument.CreateReference(this.Message, "Message")
-                    );
+                    requestFormatter.Parameters
+                        .Add(OutArgument.CreateReference(this.Message, "Message"));
                 }
             }
         }
@@ -165,9 +164,8 @@ namespace System.ServiceModel.Activities
                 }
                 else if (this.Message != null)
                 {
-                    responseFormatter.Parameters.Add(
-                        OutArgument.CreateReference(this.Message, "Message")
-                    );
+                    responseFormatter.Parameters
+                        .Add(OutArgument.CreateReference(this.Message, "Message"));
                 }
             }
         }

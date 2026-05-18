@@ -102,9 +102,8 @@ namespace Microsoft.CodeAnalysis.CSharp
     {
         protected override ImmutableArray<BoundNode?> Children =>
             StaticCast<BoundNode?>.From(
-                this.ConstructorArguments.AddRange(
-                    StaticCast<BoundExpression>.From(this.NamedArguments)
-                )
+                this.ConstructorArguments
+                    .AddRange(StaticCast<BoundExpression>.From(this.NamedArguments))
             );
     }
 
@@ -198,11 +197,12 @@ namespace Microsoft.CodeAnalysis.CSharp
     {
         protected override ImmutableArray<BoundNode?> Children =>
             StaticCast<BoundNode?>.From(
-                this.Arguments.AddRange(
-                    BoundObjectCreationExpression.GetChildInitializers(
-                        this.InitializerExpressionOpt
+                this.Arguments
+                    .AddRange(
+                        BoundObjectCreationExpression.GetChildInitializers(
+                            this.InitializerExpressionOpt
+                        )
                     )
-                )
             );
     }
 

@@ -9,8 +9,8 @@ namespace System.Formats.Cbor.Tests
     {
         public static Arbitrary<CborPropertyTestContext> PropertyTestInput()
         {
-            Arbitrary<NonEmptyArray<CborDocument>> documentArb =
-                Arb.Default.NonEmptyArray<CborDocument>();
+            Arbitrary<NonEmptyArray<CborDocument>> documentArb = Arb.Default
+                .NonEmptyArray<CborDocument>();
             Arbitrary<bool> convertArb = Arb.Default.Bool();
             Gen<CborConformanceMode> conformanceModes = Gen.Elements(
                 CborConformanceMode.Lax,

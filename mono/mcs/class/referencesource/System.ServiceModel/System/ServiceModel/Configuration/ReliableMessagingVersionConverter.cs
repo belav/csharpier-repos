@@ -48,9 +48,10 @@ namespace System.ServiceModel.Configuration
                     case ConfigurationStrings.WSReliableMessagingFebruary2005:
                         return ReliableMessagingVersion.WSReliableMessagingFebruary2005;
                     default:
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                            SR.GetString(SR.ConfigInvalidReliableMessagingVersionValue, version)
-                        );
+                        throw DiagnosticUtility.ExceptionUtility
+                            .ThrowHelperArgument(
+                                SR.GetString(SR.ConfigInvalidReliableMessagingVersionValue, version)
+                            );
                 }
             }
             return base.ConvertFrom(context, culture, value);
@@ -81,15 +82,16 @@ namespace System.ServiceModel.Configuration
                 }
                 else
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ArgumentOutOfRangeException(
-                            "value",
-                            SR.GetString(
-                                SR.ConfigInvalidClassInstanceValue,
-                                typeof(ReliableMessagingVersion).FullName
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperError(
+                            new ArgumentOutOfRangeException(
+                                "value",
+                                SR.GetString(
+                                    SR.ConfigInvalidClassInstanceValue,
+                                    typeof(ReliableMessagingVersion).FullName
+                                )
                             )
-                        )
-                    );
+                        );
                 }
             }
             return base.ConvertTo(context, culture, value, destinationType);

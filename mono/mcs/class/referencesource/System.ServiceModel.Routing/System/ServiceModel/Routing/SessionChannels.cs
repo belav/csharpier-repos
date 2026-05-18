@@ -57,9 +57,8 @@ namespace System.ServiceModel.Routing
             {
                 if (this.sessions.Count > 0)
                 {
-                    localClients = this.sessionList.ConvertAll<ICommunicationObject>(
-                        (client) => (ICommunicationObject)client
-                    );
+                    localClients = this.sessionList
+                        .ConvertAll<ICommunicationObject>((client) => (ICommunicationObject)client);
                     this.sessionList.Clear();
                     this.sessions.Clear();
                 }

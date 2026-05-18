@@ -219,11 +219,12 @@ namespace Mono.CSharp
         {
             if (Expr is ReferenceExpression)
             {
-                ec.Report.Error(
-                    8155,
-                    Expr.Location,
-                    "Lambda expressions that return by reference cannot be converted to expression trees"
-                );
+                ec.Report
+                    .Error(
+                        8155,
+                        Expr.Location,
+                        "Lambda expressions that return by reference cannot be converted to expression trees"
+                    );
                 return null;
             }
 
@@ -261,11 +262,12 @@ namespace Mono.CSharp
                 if (Expr is ReferenceExpression)
                 {
                     // CSC: should be different error code
-                    ec.Report.Error(
-                        8149,
-                        loc,
-                        "By-reference returns can only be used in lambda expressions that return by reference"
-                    );
+                    ec.Report
+                        .Error(
+                            8149,
+                            loc,
+                            "By-reference returns can only be used in lambda expressions that return by reference"
+                        );
                     return false;
                 }
 

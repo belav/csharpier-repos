@@ -87,8 +87,8 @@ namespace System.IdentityModel.Configuration
                     throw DiagnosticUtility.ThrowHelperInvalidOperation(SR.GetString(SR.ID7027));
                 }
 
-                IdentityConfigurationElement element =
-                    section.IdentityConfigurationElements.GetElement(DefaultServiceName);
+                IdentityConfigurationElement element = section.IdentityConfigurationElements
+                    .GetElement(DefaultServiceName);
                 LoadConfiguration(element);
             }
             else
@@ -120,9 +120,8 @@ namespace System.IdentityModel.Configuration
         {
             if (identityConfigurationName == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                    "identityConfigurationName"
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperArgumentNull("identityConfigurationName");
             }
 
             SystemIdentityModelSection section = SystemIdentityModelSection.Current;
@@ -133,9 +132,8 @@ namespace System.IdentityModel.Configuration
             }
 
             _identityConfigurationName = identityConfigurationName;
-            IdentityConfigurationElement element = section.IdentityConfigurationElements.GetElement(
-                identityConfigurationName
-            );
+            IdentityConfigurationElement element = section.IdentityConfigurationElements
+                .GetElement(identityConfigurationName);
             LoadConfiguration(element);
         }
 
@@ -451,9 +449,8 @@ namespace System.IdentityModel.Configuration
                 //
                 // If the mode is custom but the validator or still default, something has gone wrong.
                 //
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(SR.GetString(SR.ID4280))
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(new InvalidOperationException(SR.GetString(SR.ID4280)));
             }
 
             this.IsInitialized = true;
@@ -535,18 +532,18 @@ namespace System.IdentityModel.Configuration
 
                             if (
                                 string.IsNullOrEmpty(handlerElementCollection.Name)
-                                || StringComparer.Ordinal.Equals(
-                                    handlerElementCollection.Name,
-                                    ConfigurationStrings.DefaultConfigurationElementName
-                                )
+                                || StringComparer.Ordinal
+                                    .Equals(
+                                        handlerElementCollection.Name,
+                                        ConfigurationStrings.DefaultConfigurationElementName
+                                    )
                             )
                             {
                                 //
                                 // For the default collection, merge the IdentityConfiguration with the underlying config, if it exists.
                                 //
                                 if (
-                                    handlerElementCollection
-                                        .SecurityTokenHandlerConfiguration
+                                    handlerElementCollection.SecurityTokenHandlerConfiguration
                                         .IsConfigured
                                 )
                                 {
@@ -579,8 +576,7 @@ namespace System.IdentityModel.Configuration
                                 // This is a non-default collection. There should be no settings inherited from IdentityConfiguration.
                                 //
                                 if (
-                                    handlerElementCollection
-                                        .SecurityTokenHandlerConfiguration
+                                    handlerElementCollection.SecurityTokenHandlerConfiguration
                                         .IsConfigured
                                 )
                                 {
@@ -665,8 +661,7 @@ namespace System.IdentityModel.Configuration
             try
             {
                 if (
-                    element
-                        .ElementInformation
+                    element.ElementInformation
                         .Properties[ConfigurationStrings.MaximumClockSkew]
                         .ValueOrigin != PropertyValueOrigin.Default
                 )
@@ -693,9 +688,9 @@ namespace System.IdentityModel.Configuration
 
                 foreach (AudienceUriElement audienceUriElement in element.AudienceUris)
                 {
-                    handlerConfiguration.AudienceRestriction.AllowedAudienceUris.Add(
-                        new Uri(audienceUriElement.Value, UriKind.RelativeOrAbsolute)
-                    );
+                    handlerConfiguration.AudienceRestriction
+                        .AllowedAudienceUris
+                        .Add(new Uri(audienceUriElement.Value, UriKind.RelativeOrAbsolute));
                 }
             }
             if (element.Caches.IsConfigured)
@@ -720,11 +715,9 @@ namespace System.IdentityModel.Configuration
             if (element.CertificateValidation.IsConfigured)
             {
                 handlerConfiguration.RevocationMode = element.CertificateValidation.RevocationMode;
-                handlerConfiguration.CertificateValidationMode = element
-                    .CertificateValidation
+                handlerConfiguration.CertificateValidationMode = element.CertificateValidation
                     .CertificateValidationMode;
-                handlerConfiguration.TrustedStoreLocation = element
-                    .CertificateValidation
+                handlerConfiguration.TrustedStoreLocation = element.CertificateValidation
                     .TrustedStoreLocation;
 
                 if (element.CertificateValidation.CertificateValidator.IsConfigured)
@@ -782,8 +775,7 @@ namespace System.IdentityModel.Configuration
 
                 // ExpirationPeriod { TimeSpan }
                 //
-                handlerConfiguration.TokenReplayCacheExpirationPeriod = element
-                    .TokenReplayDetection
+                handlerConfiguration.TokenReplayCacheExpirationPeriod = element.TokenReplayDetection
                     .ExpirationPeriod;
             }
 
@@ -819,9 +811,9 @@ namespace System.IdentityModel.Configuration
 
                 foreach (AudienceUriElement audienceUriElement in element.AudienceUris)
                 {
-                    handlerConfiguration.AudienceRestriction.AllowedAudienceUris.Add(
-                        new Uri(audienceUriElement.Value, UriKind.RelativeOrAbsolute)
-                    );
+                    handlerConfiguration.AudienceRestriction
+                        .AllowedAudienceUris
+                        .Add(new Uri(audienceUriElement.Value, UriKind.RelativeOrAbsolute));
                 }
             }
 
@@ -847,11 +839,9 @@ namespace System.IdentityModel.Configuration
             if (element.CertificateValidation.IsConfigured)
             {
                 handlerConfiguration.RevocationMode = element.CertificateValidation.RevocationMode;
-                handlerConfiguration.CertificateValidationMode = element
-                    .CertificateValidation
+                handlerConfiguration.CertificateValidationMode = element.CertificateValidation
                     .CertificateValidationMode;
-                handlerConfiguration.TrustedStoreLocation = element
-                    .CertificateValidation
+                handlerConfiguration.TrustedStoreLocation = element.CertificateValidation
                     .TrustedStoreLocation;
 
                 if (element.CertificateValidation.CertificateValidator.IsConfigured)
@@ -888,8 +878,7 @@ namespace System.IdentityModel.Configuration
             try
             {
                 if (
-                    element
-                        .ElementInformation
+                    element.ElementInformation
                         .Properties[ConfigurationStrings.MaximumClockSkew]
                         .ValueOrigin != PropertyValueOrigin.Default
                 )
@@ -910,8 +899,7 @@ namespace System.IdentityModel.Configuration
             // SaveBootstrapTokens
             //
             if (
-                element
-                    .ElementInformation
+                element.ElementInformation
                     .Properties[ConfigurationStrings.SaveBootstrapContext]
                     .ValueOrigin != PropertyValueOrigin.Default
             )
@@ -945,8 +933,7 @@ namespace System.IdentityModel.Configuration
                 //
                 // ExpirationPeriod { TimeSpan }
                 //
-                handlerConfiguration.TokenReplayCacheExpirationPeriod = element
-                    .TokenReplayDetection
+                handlerConfiguration.TokenReplayCacheExpirationPeriod = element.TokenReplayDetection
                     .ExpirationPeriod;
             }
 

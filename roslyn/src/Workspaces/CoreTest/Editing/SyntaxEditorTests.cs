@@ -61,11 +61,12 @@ public class C
             var fieldX = editor.Generator.GetMembers(cls)[0];
             editor.ReplaceNode(
                 fieldX,
-                editor.Generator.FieldDeclaration(
-                    "Y",
-                    editor.Generator.TypeExpression(SpecialType.System_String),
-                    Accessibility.Public
-                )
+                editor.Generator
+                    .FieldDeclaration(
+                        "Y",
+                        editor.Generator.TypeExpression(SpecialType.System_String),
+                        Accessibility.Public
+                    )
             );
             var newRoot = editor.GetChangedRoot();
 
@@ -123,11 +124,12 @@ public class C
             var fieldX = editor.Generator.GetMembers(cls)[0];
             editor.InsertAfter(
                 fieldX,
-                editor.Generator.FieldDeclaration(
-                    "Y",
-                    editor.Generator.TypeExpression(SpecialType.System_String),
-                    Accessibility.Public
-                )
+                editor.Generator
+                    .FieldDeclaration(
+                        "Y",
+                        editor.Generator.TypeExpression(SpecialType.System_String),
+                        Accessibility.Public
+                    )
             );
             var newRoot = editor.GetChangedRoot();
 
@@ -159,11 +161,12 @@ public class C
             var fieldX = editor.Generator.GetMembers(cls)[0];
             editor.InsertBefore(
                 fieldX,
-                editor.Generator.FieldDeclaration(
-                    "Y",
-                    editor.Generator.TypeExpression(SpecialType.System_String),
-                    Accessibility.Public
-                )
+                editor.Generator
+                    .FieldDeclaration(
+                        "Y",
+                        editor.Generator.TypeExpression(SpecialType.System_String),
+                        Accessibility.Public
+                    )
             );
             var newRoot = editor.GetChangedRoot();
 
@@ -217,19 +220,21 @@ public class C
             var fieldX = editor.Generator.GetMembers(cls)[0];
             editor.InsertAfter(
                 fieldX,
-                editor.Generator.FieldDeclaration(
-                    "Y",
-                    editor.Generator.TypeExpression(SpecialType.System_String),
-                    Accessibility.Public
-                )
+                editor.Generator
+                    .FieldDeclaration(
+                        "Y",
+                        editor.Generator.TypeExpression(SpecialType.System_String),
+                        Accessibility.Public
+                    )
             );
             editor.InsertBefore(
                 fieldX,
-                editor.Generator.FieldDeclaration(
-                    "Z",
-                    editor.Generator.TypeExpression(SpecialType.System_Object),
-                    Accessibility.Public
-                )
+                editor.Generator
+                    .FieldDeclaration(
+                        "Z",
+                        editor.Generator.TypeExpression(SpecialType.System_Object),
+                        Accessibility.Public
+                    )
             );
             editor.RemoveNode(fieldX);
             var newRoot = editor.GetChangedRoot();

@@ -314,10 +314,8 @@ namespace System.Web.UI.WebControls
 
                 if (effectiveEnabled)
                 {
-                    string postBackEventReference = page.ClientScript.GetPostBackEventReference(
-                        options,
-                        false
-                    );
+                    string postBackEventReference = page.ClientScript
+                        .GetPostBackEventReference(options, false);
                     if (!String.IsNullOrEmpty(postBackEventReference))
                     {
                         onClick = Util.MergeScript(onClick, postBackEventReference);

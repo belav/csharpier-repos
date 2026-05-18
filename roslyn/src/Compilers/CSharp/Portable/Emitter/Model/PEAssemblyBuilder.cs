@@ -174,12 +174,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
                                 )
                             )
                             {
-                                context.Diagnostics.Add(
-                                    new CSDiagnostic(
-                                        new CSDiagnosticInfo(ErrorCode.ERR_CryptoHashFailed),
-                                        NoLocation.Singleton
-                                    )
-                                );
+                                context.Diagnostics
+                                    .Add(
+                                        new CSDiagnostic(
+                                            new CSDiagnosticInfo(ErrorCode.ERR_CryptoHashFailed),
+                                            NoLocation.Singleton
+                                        )
+                                    );
                             }
                         }
                     }
@@ -210,7 +211,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
                     foreach (
                         EmbeddedResource resource in (
                             (Symbols.Metadata.PE.PEModuleSymbol)modules[i]
-                        ).Module.GetEmbeddedResourcesOrThrow()
+                        ).Module
+                            .GetEmbeddedResourcesOrThrow()
                     )
                     {
                         builder.Add(
@@ -699,9 +701,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
         )
         {
             var attributeMetadataName = MetadataTypeName.FromFullName(description.FullName);
-            var userDefinedAttribute = _sourceAssembly.SourceModule.LookupTopLevelMetadataType(
-                ref attributeMetadataName
-            );
+            var userDefinedAttribute = _sourceAssembly.SourceModule
+                .LookupTopLevelMetadataType(ref attributeMetadataName);
             Debug.Assert(
                 userDefinedAttribute is null
                     || (object)userDefinedAttribute.ContainingModule == _sourceAssembly.SourceModule

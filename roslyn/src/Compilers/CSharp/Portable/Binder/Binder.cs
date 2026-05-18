@@ -1145,8 +1145,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 string? snippet = null;
                 if (scope.ScopeDesignator != null)
                 {
-                    var lines = scope
-                        .ScopeDesignator.ToString()
+                    var lines = scope.ScopeDesignator
+                        .ToString()
                         .Split(
                             new[] { Environment.NewLine },
                             StringSplitOptions.RemoveEmptyEntries

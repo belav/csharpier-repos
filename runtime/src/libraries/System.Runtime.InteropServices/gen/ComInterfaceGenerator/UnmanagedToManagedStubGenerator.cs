@@ -37,10 +37,9 @@ namespace Microsoft.Interop
             diagnosticsBag.ReportGeneratorDiagnostics(bindingDiagnostics);
 
             if (
-                _marshallers.NativeReturnMarshaller.Generator.UsesNativeIdentifier(
-                    _marshallers.NativeReturnMarshaller.TypeInfo,
-                    _context
-                )
+                _marshallers.NativeReturnMarshaller
+                    .Generator
+                    .UsesNativeIdentifier(_marshallers.NativeReturnMarshaller.TypeInfo, _context)
             )
             {
                 // If we need a different native return identifier, then recreate the context with the correct identifier before we generate any code.

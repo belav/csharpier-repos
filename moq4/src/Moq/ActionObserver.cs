@@ -325,12 +325,8 @@ namespace Moq
         {
             recorder = new Recorder(matcherObserver);
             return (IProxy)
-                ProxyFactory.Instance.CreateProxy(
-                    type,
-                    recorder,
-                    Type.EmptyTypes,
-                    ctorArgs ?? new object[0]
-                );
+                ProxyFactory.Instance
+                    .CreateProxy(type, recorder, Type.EmptyTypes, ctorArgs ?? new object[0]);
 
             /* Unmerged change from project 'Moq(netstandard2.0)'
             Before:
@@ -423,10 +419,8 @@ namespace Moq
                 get
                 {
                     Debug.Assert(this.invocationTimestamp != default);
-                    return this.matcherObserver.GetMatchesBetween(
-                        this.creationTimestamp,
-                        this.invocationTimestamp
-                    );
+                    return this.matcherObserver
+                        .GetMatchesBetween(this.creationTimestamp, this.invocationTimestamp);
                 }
             }
 

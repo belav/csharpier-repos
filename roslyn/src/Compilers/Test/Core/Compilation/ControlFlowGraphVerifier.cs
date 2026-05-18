@@ -814,8 +814,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
                             parent
                                 is VisualBasic.Syntax.ConditionalAccessExpressionSyntax conditional
                             && conditional.Expression == syntax
-                            && conditional
-                                .WhenNotNull.DescendantNodesAndSelf()
+                            && conditional.WhenNotNull
+                                .DescendantNodesAndSelf()
                                 .Any(n =>
                                     n.IsKind(VisualBasic.SyntaxKind.XmlElementAccessExpression)
                                     || n.IsKind(
@@ -1169,9 +1169,11 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
                         );
                     }
                     else if (
-                        block.EnclosingRegion.EnclosingRegion?.EnclosingRegion.CaptureIds.Contains(
-                            id
-                        ) ?? false
+                        block.EnclosingRegion
+                            .EnclosingRegion
+                            ?.EnclosingRegion
+                            .CaptureIds
+                            .Contains(id) ?? false
                     )
                     {
                         AssertTrueWithGraph(
@@ -1420,11 +1422,12 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
                                     caseStmt == referenceSyntax
                                     || caseStmt.Cases.Contains(referenceSyntax as CaseClauseSyntax)
                                 )
-                                && caseStmt.Cases.Contains(
-                                    applyParenthesizedIfAnyVB(
-                                        (VisualBasicSyntaxNode)binOp.RightOperand.Syntax
-                                    ) as CaseClauseSyntax
-                                )
+                                && caseStmt.Cases
+                                    .Contains(
+                                        applyParenthesizedIfAnyVB(
+                                            (VisualBasicSyntaxNode)binOp.RightOperand.Syntax
+                                        ) as CaseClauseSyntax
+                                    )
                             )
                             {
                                 return true;
@@ -1580,7 +1583,9 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
                                     if (
                                         (
                                             (CSharp.Syntax.BaseObjectCreationExpressionSyntax)syntax
-                                        ).Initializer?.Expressions.Any() == true
+                                        ).Initializer
+                                            ?.Expressions
+                                            .Any() == true
                                     )
                                     {
                                         return true;
@@ -1588,9 +1593,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
                                     break;
                                 case CSharp.SyntaxKind.CollectionExpression:
                                     if (
-                                        (
-                                            (CSharp.Syntax.CollectionExpressionSyntax)syntax
-                                        ).Elements.Any()
+                                        ((CSharp.Syntax.CollectionExpressionSyntax)syntax).Elements
+                                            .Any()
                                     )
                                     {
                                         return true;
@@ -1893,8 +1897,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
                     if (block.BranchValue != null)
                     {
                         foreach (
-                            IFlowCaptureReferenceOperation reference in block
-                                .BranchValue.DescendantsAndSelf()
+                            IFlowCaptureReferenceOperation reference in block.BranchValue
+                                .DescendantsAndSelf()
                                 .OfType<IFlowCaptureReferenceOperation>()
                         )
                         {

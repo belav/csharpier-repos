@@ -335,9 +335,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
             return new NavigableLocation(
                 async (options, cancellationToken) =>
                 {
-                    await _threadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(
-                        cancellationToken
-                    );
+                    await _threadingContext.JoinableTaskFactory
+                        .SwitchToMainThreadAsync(cancellationToken);
                     using (OpenNewDocumentStateScope(options))
                     {
                         // Ensure we come back to the UI Thread after navigating so we close the state scope.
@@ -376,10 +375,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
                 if (generatedDocument == null)
                     return null;
 
-                return _sourceGeneratedFileManager.Value.GetNavigationCallback(
-                    generatedDocument,
-                    await getTextSpanForMappingAsync(generatedDocument).ConfigureAwait(false)
-                );
+                return _sourceGeneratedFileManager.Value
+                    .GetNavigationCallback(
+                        generatedDocument,
+                        await getTextSpanForMappingAsync(generatedDocument).ConfigureAwait(false)
+                    );
             }
 
             // Before attempting to open the document, check if the location maps to a different file that should be opened instead.
@@ -496,9 +496,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
             )
             {
                 // OpenDocument must be called on the UI thread.
-                await threadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(
-                    cancellationToken
-                );
+                await threadingContext.JoinableTaskFactory
+                    .SwitchToMainThreadAsync(cancellationToken);
                 workspace.OpenDocument(documentId);
             }
         }

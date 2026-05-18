@@ -1366,9 +1366,8 @@ namespace System.Xml.Schema
                         InferElement(actualElement!, false, parentSchema!);
                         for (int i = 0; i < xss.Items.Count; ++i)
                         {
-                            xsc.Items.Add(
-                                CreateNewElementforChoice((XmlSchemaElement)xss.Items[i])
-                            );
+                            xsc.Items
+                                .Add(CreateNewElementforChoice((XmlSchemaElement)xss.Items[i]));
                         }
                         xss.Items.Clear();
                         xss.Items.Add(xsc);

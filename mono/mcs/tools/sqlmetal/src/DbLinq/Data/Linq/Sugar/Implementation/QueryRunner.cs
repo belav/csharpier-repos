@@ -367,11 +367,8 @@ namespace DbLinq.Data.Linq.Sugar.Implementation
             var fields = new List<string>();
             for (int fieldIndex = 0; fieldIndex < dataReader.FieldCount; fieldIndex++)
                 fields.Add(dataReader.GetName(fieldIndex));
-            return dataContext.QueryBuilder.GetTableReader(
-                elementType,
-                fields,
-                new QueryContext(dataContext)
-            );
+            return dataContext.QueryBuilder
+                .GetTableReader(elementType, fields, new QueryContext(dataContext));
         }
 
         /// <summary>

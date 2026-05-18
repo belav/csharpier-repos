@@ -95,9 +95,8 @@ namespace Microsoft.Build.Evaluation
         {
             property_type = propertyType;
             this.name = name;
-            predecessor = project.Properties.FirstOrDefault(p =>
-                p.Name.Equals(name, StringComparison.OrdinalIgnoreCase)
-            );
+            predecessor = project.Properties
+                .FirstOrDefault(p => p.Name.Equals(name, StringComparison.OrdinalIgnoreCase));
             if (predecessor != null)
                 project.RemoveProperty(predecessor);
         }

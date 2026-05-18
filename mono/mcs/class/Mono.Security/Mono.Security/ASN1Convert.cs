@@ -62,10 +62,11 @@ namespace Mono.Security
                 // UTCTIME
                 return new ASN1(
                     0x17,
-                    Encoding.ASCII.GetBytes(
-                        dt.ToUniversalTime().ToString("yyMMddHHmmss", CultureInfo.InvariantCulture)
-                            + "Z"
-                    )
+                    Encoding.ASCII
+                        .GetBytes(
+                            dt.ToUniversalTime()
+                                .ToString("yyMMddHHmmss", CultureInfo.InvariantCulture) + "Z"
+                        )
                 );
             }
             else
@@ -73,10 +74,11 @@ namespace Mono.Security
                 // GENERALIZEDTIME
                 return new ASN1(
                     0x18,
-                    Encoding.ASCII.GetBytes(
-                        dt.ToUniversalTime()
-                            .ToString("yyyyMMddHHmmss", CultureInfo.InvariantCulture) + "Z"
-                    )
+                    Encoding.ASCII
+                        .GetBytes(
+                            dt.ToUniversalTime()
+                                .ToString("yyyyMMddHHmmss", CultureInfo.InvariantCulture) + "Z"
+                        )
                 );
             }
         }

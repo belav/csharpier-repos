@@ -656,8 +656,8 @@ namespace System.Data.Entity.Design.PluralizationServices
             );
 
             this._knownSingluarWords = new List<string>(
-                _irregularPluralsDictionary
-                    .Keys.Concat(_assimilatedClassicalInflectionDictionary.Keys)
+                _irregularPluralsDictionary.Keys
+                    .Concat(_assimilatedClassicalInflectionDictionary.Keys)
                     .Concat(_oSuffixDictionary.Keys)
                     .Concat(_classicalInflectionDictionary.Keys)
                     .Concat(_irregularVerbList.Keys)
@@ -671,8 +671,8 @@ namespace System.Data.Entity.Design.PluralizationServices
             ); // see the _knowConflictingPluralList comment above
 
             this._knownPluralWords = new List<string>(
-                _irregularPluralsDictionary
-                    .Values.Concat(_assimilatedClassicalInflectionDictionary.Values)
+                _irregularPluralsDictionary.Values
+                    .Concat(_assimilatedClassicalInflectionDictionary.Values)
                     .Concat(_oSuffixDictionary.Values)
                     .Concat(_classicalInflectionDictionary.Values)
                     .Concat(_irregularVerbList.Values)
@@ -894,9 +894,8 @@ namespace System.Data.Entity.Design.PluralizationServices
             if (this._assimilatedClassicalInflectionPluralizationService.ExistsInFirst(suffixWord))
             {
                 return prefixWord
-                    + this._assimilatedClassicalInflectionPluralizationService.GetSecondValue(
-                        suffixWord
-                    );
+                    + this._assimilatedClassicalInflectionPluralizationService
+                        .GetSecondValue(suffixWord);
             }
 
             // Handle the classical variants of modern inflections
@@ -1216,9 +1215,8 @@ namespace System.Data.Entity.Design.PluralizationServices
             if (this._assimilatedClassicalInflectionPluralizationService.ExistsInSecond(suffixWord))
             {
                 return prefixWord
-                    + this._assimilatedClassicalInflectionPluralizationService.GetFirstValue(
-                        suffixWord
-                    );
+                    + this._assimilatedClassicalInflectionPluralizationService
+                        .GetFirstValue(suffixWord);
             }
 
             // Handle the classical variants of modern inflections

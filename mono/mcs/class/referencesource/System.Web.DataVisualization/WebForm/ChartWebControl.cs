@@ -701,10 +701,8 @@ namespace System.Web.UI.DataVisualization.Charting
             // Check if GUID parameter should be added to the SRC tag
             // Solves issue with image caching in IE
             _addGuidParam = true;
-            int indexNoGuidParam = this.ImageLocation.IndexOf(
-                "#NOGUIDPARAM",
-                StringComparison.Ordinal
-            );
+            int indexNoGuidParam = this.ImageLocation
+                .IndexOf("#NOGUIDPARAM", StringComparison.Ordinal);
             if (indexNoGuidParam > 0)
             {
                 _addGuidParam = false;
@@ -2763,9 +2761,8 @@ namespace System.Web.UI.DataVisualization.Charting
                 }
                 else
                 {
-                    IChartType chartType = this._chartTypeRegistry.GetChartType(
-                        series.ChartTypeName
-                    );
+                    IChartType chartType = this._chartTypeRegistry
+                        .GetChartType(series.ChartTypeName);
                     applyToPoints = chartType.ApplyPaletteColorsToPoints;
                 }
 
@@ -2853,11 +2850,8 @@ namespace System.Web.UI.DataVisualization.Charting
             }
 
             // Align series
-            this.chartPicture.AlignDataPointsByAxisLabel(
-                seriesList,
-                false,
-                PointSortOrder.Ascending
-            );
+            this.chartPicture
+                .AlignDataPointsByAxisLabel(seriesList, false, PointSortOrder.Ascending);
         }
 
         /// <summary>
@@ -2938,15 +2932,16 @@ namespace System.Web.UI.DataVisualization.Charting
             string otherFields
         )
         {
-            this.chartPicture.DataBindCrossTab(
-                dataSource,
-                seriesGroupByField,
-                xField,
-                yFields,
-                otherFields,
-                false,
-                PointSortOrder.Ascending
-            );
+            this.chartPicture
+                .DataBindCrossTab(
+                    dataSource,
+                    seriesGroupByField,
+                    xField,
+                    yFields,
+                    otherFields,
+                    false,
+                    PointSortOrder.Ascending
+                );
         }
 
         /// <summary>
@@ -2974,15 +2969,16 @@ namespace System.Web.UI.DataVisualization.Charting
             PointSortOrder sortingOrder
         )
         {
-            this.chartPicture.DataBindCrossTab(
-                dataSource,
-                seriesGroupByField,
-                xField,
-                yFields,
-                otherFields,
-                true,
-                sortingOrder
-            );
+            this.chartPicture
+                .DataBindCrossTab(
+                    dataSource,
+                    seriesGroupByField,
+                    xField,
+                    yFields,
+                    otherFields,
+                    true,
+                    sortingOrder
+                );
         }
 
         #endregion

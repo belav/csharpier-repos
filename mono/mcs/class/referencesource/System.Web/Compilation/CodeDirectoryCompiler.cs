@@ -360,9 +360,8 @@ namespace System.Web.Compilation
                 _buildProviders.Add(ProfileBuildProvider.Create());
             }
 
-            VirtualDirectory vdir = HostingEnvironment.VirtualPathProvider.GetDirectory(
-                _virtualDir
-            );
+            VirtualDirectory vdir = HostingEnvironment.VirtualPathProvider
+                .GetDirectory(_virtualDir);
             ProcessDirectoryRecursive(
                 vdir,
                 true /*topLevel*/

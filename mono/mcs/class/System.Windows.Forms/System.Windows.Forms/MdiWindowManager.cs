@@ -259,12 +259,10 @@ namespace System.Windows.Forms
             MenuItem close = new MenuItem("&Close", new EventHandler(CloseItemHandler));
             MenuItem next = new MenuItem("Nex&t", new EventHandler(NextItemHandler));
 
-            icon_menu.MenuItems.AddRange(
-                new MenuItem[] { restore, move, size, minimize, maximize, close, next }
-            );
-            icon_popup_menu.MenuItems.AddRange(
-                new MenuItem[] { restore, move, size, minimize, maximize, close, next }
-            );
+            icon_menu.MenuItems
+                .AddRange(new MenuItem[] { restore, move, size, minimize, maximize, close, next });
+            icon_popup_menu.MenuItems
+                .AddRange(new MenuItem[] { restore, move, size, minimize, maximize, close, next });
         }
 
         private void ClickIconMenuItem(object sender, EventArgs e)
@@ -365,15 +363,16 @@ namespace System.Windows.Forms
 
         private void DrawIconMenuItem(object sender, DrawItemEventArgs de)
         {
-            de.Graphics.DrawIcon(
-                form.Icon,
-                new Rectangle(
-                    de.Bounds.X + 2,
-                    de.Bounds.Y + 2,
-                    de.Bounds.Height - 4,
-                    de.Bounds.Height - 4
-                )
-            );
+            de.Graphics
+                .DrawIcon(
+                    form.Icon,
+                    new Rectangle(
+                        de.Bounds.X + 2,
+                        de.Bounds.Y + 2,
+                        de.Bounds.Height - 4,
+                        de.Bounds.Height - 4
+                    )
+                );
         }
 
         private void MeasureIconMenuItem(object sender, MeasureItemEventArgs me)

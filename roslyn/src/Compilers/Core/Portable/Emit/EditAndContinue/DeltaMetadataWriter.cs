@@ -560,8 +560,7 @@ namespace Microsoft.CodeAnalysis.Emit
             if (versionPattern is not null)
             {
                 RoslynDebug.AssertNotNull(_previousGeneration.InitialBaseline.LazyMetadataSymbols);
-                identity = _previousGeneration
-                    .InitialBaseline
+                identity = _previousGeneration.InitialBaseline
                     .LazyMetadataSymbols
                     .AssemblyReferenceIdentityMap[identity.WithVersion(versionPattern)];
             }
@@ -927,9 +926,10 @@ namespace Microsoft.CodeAnalysis.Emit
                 // in a way that we can use
                 var handle = GetMethodDefinitionHandle(methodDef);
                 if (
-                    _previousGeneration.OriginalMetadata.MetadataReader.GetTableRowCount(
-                        TableIndex.MethodDef
-                    ) >= MetadataTokens.GetRowNumber(handle)
+                    _previousGeneration.OriginalMetadata
+                        .MetadataReader
+                        .GetTableRowCount(TableIndex.MethodDef)
+                    >= MetadataTokens.GetRowNumber(handle)
                 )
                 {
                     EmitParametersFromOriginalMetadata(methodDef, handle);
@@ -957,9 +957,9 @@ namespace Microsoft.CodeAnalysis.Emit
             MethodDefinitionHandle handle
         )
         {
-            var def = _previousGeneration.OriginalMetadata.MetadataReader.GetMethodDefinition(
-                handle
-            );
+            var def = _previousGeneration.OriginalMetadata
+                .MetadataReader
+                .GetMethodDefinition(handle);
 
             var parameters = def.GetParameters();
             var paramDefinitions = this.GetParametersToEmit(methodDef);
@@ -1034,14 +1034,15 @@ namespace Microsoft.CodeAnalysis.Emit
         {
             if (symbol != null && _changes.IsAdded(symbol.GetISymbol()))
             {
-                Context.Diagnostics.Add(
-                    messageProvider.CreateDiagnostic(
-                        messageProvider.ERR_EncReferenceToAddedMember,
-                        GetSymbolLocation(symbol),
-                        symbol.Name,
-                        symbol.ContainingAssembly.Name
-                    )
-                );
+                Context.Diagnostics
+                    .Add(
+                        messageProvider.CreateDiagnostic(
+                            messageProvider.ERR_EncReferenceToAddedMember,
+                            GetSymbolLocation(symbol),
+                            symbol.Name,
+                            symbol.ContainingAssembly.Name
+                        )
+                    );
             }
         }
 
@@ -1151,9 +1152,9 @@ namespace Microsoft.CodeAnalysis.Emit
             int lastCustomAttributeRowId =
                 _previousGeneration.CustomAttributesAdded.Count > 0
                     ? _previousGeneration.CustomAttributesAdded.Max(static entry => entry.Value[^1])
-                    : _previousGeneration.OriginalMetadata.MetadataReader.GetTableRowCount(
-                        TableIndex.CustomAttribute
-                    );
+                    : _previousGeneration.OriginalMetadata
+                        .MetadataReader
+                        .GetTableRowCount(TableIndex.CustomAttribute);
 
             // We emit all attributes that each parent entity has defined in the current generation.
             // These will replace any attributes emitted in the original metadata as well as any previous generation.
@@ -1172,13 +1173,15 @@ namespace Microsoft.CodeAnalysis.Emit
                     }
 
                     int xOrdinal = MetadataTokens.GetRowNumber(
-                        _previousGeneration
-                            .OriginalMetadata.MetadataReader.GetCustomAttributes(x.parentHandle)
+                        _previousGeneration.OriginalMetadata
+                            .MetadataReader
+                            .GetCustomAttributes(x.parentHandle)
                             .FirstOrDefault()
                     );
                     int yOrdinal = MetadataTokens.GetRowNumber(
-                        _previousGeneration
-                            .OriginalMetadata.MetadataReader.GetCustomAttributes(y.parentHandle)
+                        _previousGeneration.OriginalMetadata
+                            .MetadataReader
+                            .GetCustomAttributes(y.parentHandle)
                             .FirstOrDefault()
                     );
 
@@ -1198,16 +1201,12 @@ namespace Microsoft.CodeAnalysis.Emit
                     Debug.Assert(xOrdinal == int.MaxValue && yOrdinal == int.MaxValue);
 
                     // order entities with no attributes added in previous generations after those who have some:
-                    xOrdinal = _previousGeneration.CustomAttributesAdded.TryGetValue(
-                        x.parentHandle,
-                        out var rowIds
-                    )
+                    xOrdinal = _previousGeneration.CustomAttributesAdded
+                        .TryGetValue(x.parentHandle, out var rowIds)
                         ? rowIds[0]
                         : int.MaxValue;
-                    yOrdinal = _previousGeneration.CustomAttributesAdded.TryGetValue(
-                        y.parentHandle,
-                        out rowIds
-                    )
+                    yOrdinal = _previousGeneration.CustomAttributesAdded
+                        .TryGetValue(y.parentHandle, out rowIds)
                         ? rowIds[0]
                         : int.MaxValue;
 
@@ -1228,10 +1227,9 @@ namespace Microsoft.CodeAnalysis.Emit
 
             foreach (var (parentHandle, attributeEnumerator) in _deferredCustomAttributes)
             {
-                var originalCustomAttributes =
-                    _previousGeneration.OriginalMetadata.MetadataReader.GetCustomAttributes(
-                        parentHandle
-                    );
+                var originalCustomAttributes = _previousGeneration.OriginalMetadata
+                    .MetadataReader
+                    .GetCustomAttributes(parentHandle);
                 foreach (var handle in originalCustomAttributes)
                 {
                     _customAttributeRowIds.Add(MetadataTokens.GetRowNumber(handle));
@@ -1246,10 +1244,8 @@ namespace Microsoft.CodeAnalysis.Emit
 
             foreach (var (parentHandle, attributeEnumerator) in _deferredCustomAttributes)
             {
-                var previouslyAddedRowIds = _previousGeneration.CustomAttributesAdded.TryGetValue(
-                    parentHandle,
-                    out var rowIds
-                )
+                var previouslyAddedRowIds = _previousGeneration.CustomAttributesAdded
+                    .TryGetValue(parentHandle, out var rowIds)
                     ? rowIds
                     : ImmutableArray<int>.Empty;
                 _customAttributeRowIds.AddRange(previouslyAddedRowIds);
@@ -1275,13 +1271,10 @@ namespace Microsoft.CodeAnalysis.Emit
 
                 if (_customAttributeRowIds.Count > previousCustomAttributeRowIdsCount)
                 {
-                    var previouslyAddedRowIds =
-                        _previousGeneration.CustomAttributesAdded.TryGetValue(
-                            parentHandle,
-                            out var rowIds
-                        )
-                            ? rowIds
-                            : ImmutableArray<int>.Empty;
+                    var previouslyAddedRowIds = _previousGeneration.CustomAttributesAdded
+                        .TryGetValue(parentHandle, out var rowIds)
+                        ? rowIds
+                        : ImmutableArray<int>.Empty;
                     _customAttributesAdded.Add(
                         parentHandle,
                         previouslyAddedRowIds.AddRange(

@@ -581,11 +581,12 @@ namespace System.Threading
         [MethodImpl(MethodImplOptions.NoInlining)]
         public void RefreshLoggingEnabledFull()
         {
-            _loggingEnabled = FrameworkEventSource.Log.IsEnabled(
-                EventLevel.Verbose,
-                FrameworkEventSource.Keywords.ThreadPool
-                    | FrameworkEventSource.Keywords.ThreadTransfer
-            );
+            _loggingEnabled = FrameworkEventSource.Log
+                .IsEnabled(
+                    EventLevel.Verbose,
+                    FrameworkEventSource.Keywords.ThreadPool
+                        | FrameworkEventSource.Keywords.ThreadTransfer
+                );
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -1789,8 +1790,7 @@ namespace System.Threading
 
             // Enumerate each local queue
             foreach (
-                ThreadPoolWorkQueue.WorkStealingQueue wsq in ThreadPoolWorkQueue
-                    .WorkStealingQueueList
+                ThreadPoolWorkQueue.WorkStealingQueue wsq in ThreadPoolWorkQueue.WorkStealingQueueList
                     .Queues
             )
             {

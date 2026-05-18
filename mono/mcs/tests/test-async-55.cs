@@ -31,12 +31,13 @@ class X
         mre2 = new ManualResetEvent(false);
         tcs = new TaskCompletionSource<bool>();
 
-        Task.Factory.StartNew(
-            new Func<Task>(ExecuteAsync),
-            new CancellationToken(),
-            TaskCreationOptions.LongRunning,
-            TaskScheduler.Default
-        );
+        Task.Factory
+            .StartNew(
+                new Func<Task>(ExecuteAsync),
+                new CancellationToken(),
+                TaskCreationOptions.LongRunning,
+                TaskScheduler.Default
+            );
 
         if (!mre.WaitOne(1000))
             return 1;

@@ -179,7 +179,9 @@ namespace System.Text.RegularExpressions.Generator
                 writer.Write("        base.Caps = new Hashtable {");
                 AppendHashtableContents(
                     writer,
-                    rm.Tree.CaptureNumberSparseMapping.Cast<DictionaryEntry>()
+                    rm.Tree
+                        .CaptureNumberSparseMapping
+                        .Cast<DictionaryEntry>()
                         .OrderBy(de => de.Key as int?)
                 );
                 writer.WriteLine($" }};");
@@ -189,7 +191,9 @@ namespace System.Text.RegularExpressions.Generator
                 writer.Write("        base.CapNames = new Hashtable {");
                 AppendHashtableContents(
                     writer,
-                    rm.Tree.CaptureNameToNumberMapping.Cast<DictionaryEntry>()
+                    rm.Tree
+                        .CaptureNameToNumberMapping
+                        .Cast<DictionaryEntry>()
                         .OrderBy(de => de.Key as string, StringComparer.Ordinal)
                 );
                 writer.WriteLine($" }};");
@@ -1266,8 +1270,7 @@ namespace System.Text.RegularExpressions.Generator
             {
                 Debug.Assert(regexTree.FindOptimizations.FixedDistanceSets is { Count: > 0 });
 
-                List<RegexFindOptimizations.FixedDistanceSet>? sets = regexTree
-                    .FindOptimizations
+                List<RegexFindOptimizations.FixedDistanceSet>? sets = regexTree.FindOptimizations
                     .FixedDistanceSets;
                 RegexFindOptimizations.FixedDistanceSet primarySet = sets![0];
                 const int MaxSets = 4;
@@ -1491,8 +1494,7 @@ namespace System.Text.RegularExpressions.Generator
             {
                 Debug.Assert(regexTree.FindOptimizations.FixedDistanceSets is { Count: > 0 });
 
-                RegexFindOptimizations.FixedDistanceSet set = regexTree
-                    .FindOptimizations
+                RegexFindOptimizations.FixedDistanceSet set = regexTree.FindOptimizations
                     .FixedDistanceSets![0];
                 Debug.Assert(set.Distance == 0);
 

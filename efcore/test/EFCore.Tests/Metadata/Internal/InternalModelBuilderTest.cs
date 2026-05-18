@@ -632,12 +632,10 @@ public class InternalModelBuilderTest
 
         Assert.Empty(model.GetEntityTypes().Where(e => e.IsImplicitlyCreatedJoinEntityType));
 
-        var leftSkipNav = manyToManyLeft.Metadata.FindDeclaredSkipNavigation(
-            nameof(ManyToManyLeft.Rights)
-        );
-        var rightSkipNav = manyToManyRight.Metadata.FindDeclaredSkipNavigation(
-            nameof(ManyToManyRight.Lefts)
-        );
+        var leftSkipNav = manyToManyLeft.Metadata
+            .FindDeclaredSkipNavigation(nameof(ManyToManyLeft.Rights));
+        var rightSkipNav = manyToManyRight.Metadata
+            .FindDeclaredSkipNavigation(nameof(ManyToManyRight.Lefts));
 
         Assert.NotNull(leftSkipNav);
         Assert.NotNull(rightSkipNav);
@@ -708,12 +706,10 @@ public class InternalModelBuilderTest
 
         Assert.Null(modelBuilder.RemoveImplicitJoinEntity(joinEntityType));
 
-        var leftSkipNav = manyToManyLeft.Metadata.FindDeclaredSkipNavigation(
-            nameof(ManyToManyLeft.Rights)
-        );
-        var rightSkipNav = manyToManyRight.Metadata.FindDeclaredSkipNavigation(
-            nameof(ManyToManyRight.Lefts)
-        );
+        var leftSkipNav = manyToManyLeft.Metadata
+            .FindDeclaredSkipNavigation(nameof(ManyToManyLeft.Rights));
+        var rightSkipNav = manyToManyRight.Metadata
+            .FindDeclaredSkipNavigation(nameof(ManyToManyRight.Lefts));
         Assert.NotNull(leftSkipNav);
         Assert.NotNull(rightSkipNav);
 
@@ -811,8 +807,8 @@ public class InternalModelBuilderTest
         );
 
     private static ProviderConventionSetBuilderDependencies CreateDependencies() =>
-        InMemoryTestHelpers
-            .Instance.CreateContextServices()
+        InMemoryTestHelpers.Instance
+            .CreateContextServices()
             .GetRequiredService<ProviderConventionSetBuilderDependencies>();
 
     protected virtual InternalModelBuilder CreateModelBuilder(Model model = null) =>

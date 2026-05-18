@@ -241,7 +241,8 @@ namespace System.Reflection.Runtime.General
             RuntimeTypeInfo contextTypeInfo =
                 declaringTypeHandle.GetRuntimeTypeInfoForRuntimeTypeHandle();
             NativeFormatRuntimeNamedTypeInfo definingTypeInfo =
-                contextTypeInfo.AnchoringTypeDefinitionForDeclaredMembers.CastToNativeFormatRuntimeNamedTypeInfo();
+                contextTypeInfo.AnchoringTypeDefinitionForDeclaredMembers
+                    .CastToNativeFormatRuntimeNamedTypeInfo();
 
             // RuntimeFieldHandles always yield FieldInfo's whose ReflectedType equals the DeclaringType.
             RuntimeTypeInfo reflectedType = contextTypeInfo;
@@ -581,12 +582,13 @@ namespace System.Reflection.Runtime.General
             if (info != null)
                 return info;
 
-            ReflectionCoreExecution.ExecutionEnvironment.GetEnumInfo(
-                runtimeType.TypeHandle,
-                out string[] unsortedNames,
-                out object[] unsortedValues,
-                out bool isFlags
-            );
+            ReflectionCoreExecution.ExecutionEnvironment
+                .GetEnumInfo(
+                    runtimeType.TypeHandle,
+                    out string[] unsortedNames,
+                    out object[] unsortedValues,
+                    out bool isFlags
+                );
 
             // Call into IntrospectiveSort directly to avoid the Comparer<T>.Default codepath.
             // That codepath would bring functionality to compare everything that was ever allocated in the program.
@@ -636,9 +638,8 @@ namespace System.Reflection.Runtime.General
             RuntimeMethodInfo invokeMethod = runtimeType.GetInvokeMethod();
 
             MethodBaseInvoker methodInvoker = invokeMethod.MethodInvoker;
-            IntPtr invokeThunk = ReflectionCoreExecution.ExecutionEnvironment.GetDynamicInvokeThunk(
-                methodInvoker
-            );
+            IntPtr invokeThunk = ReflectionCoreExecution.ExecutionEnvironment
+                .GetDynamicInvokeThunk(methodInvoker);
 
             info = new DynamicInvokeInfo(invokeMethod, invokeThunk);
             runtimeType.GenericCache = info;
@@ -654,9 +655,8 @@ namespace System.Reflection.Runtime.General
             IntPtr methodStartAddress
         )
         {
-            return ReflectionCoreExecution.ExecutionEnvironment.GetMethodBaseFromStartAddressIfAvailable(
-                methodStartAddress
-            );
+            return ReflectionCoreExecution.ExecutionEnvironment
+                .GetMethodBaseFromStartAddressIfAvailable(methodStartAddress);
         }
 
         public sealed override Assembly GetAssemblyForHandle(RuntimeTypeHandle typeHandle)
@@ -666,10 +666,8 @@ namespace System.Reflection.Runtime.General
 
         public sealed override void RunClassConstructor(RuntimeTypeHandle typeHandle)
         {
-            IntPtr pStaticClassConstructionContext =
-                ReflectionCoreExecution.ExecutionEnvironment.GetStaticClassConstructionContext(
-                    typeHandle
-                );
+            IntPtr pStaticClassConstructionContext = ReflectionCoreExecution.ExecutionEnvironment
+                .GetStaticClassConstructionContext(typeHandle);
             if (pStaticClassConstructionContext != IntPtr.Zero)
             {
                 RuntimeAugments.EnsureClassConstructorRun(pStaticClassConstructionContext);

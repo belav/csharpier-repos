@@ -192,9 +192,10 @@ namespace System.Data.Common
                     // occur, so we just rethrow a ProviderIncompatibleException and make whatever we caught
                     // the inner exception of it.
                     throw EntityUtil.ProviderIncompatible(
-                        System.Data.Entity.Strings.EntityClient_FailedToGetInformation(
-                            informationType
-                        ),
+                        System.Data
+                            .Entity
+                            .Strings
+                            .EntityClient_FailedToGetInformation(informationType),
                         e
                     );
                 }
@@ -212,9 +213,10 @@ namespace System.Data.Common
                 }
 
                 throw EntityUtil.ProviderIncompatible(
-                    System.Data.Entity.Strings.ProviderReturnedNullForGetDbInformation(
-                        informationType
-                    )
+                    System.Data
+                        .Entity
+                        .Strings
+                        .ProviderReturnedNullForGetDbInformation(informationType)
                 );
             }
             return reader;

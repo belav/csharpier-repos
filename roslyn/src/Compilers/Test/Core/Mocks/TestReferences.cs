@@ -177,8 +177,7 @@ public static class TestReferences
                     () =>
                         AssemblyMetadata
                             .CreateFromImage(
-                                ProprietaryTestResources
-                                    .silverlight_v5_0_5_0
+                                ProprietaryTestResources.silverlight_v5_0_5_0
                                     .System_v5_0_5_0_silverlight
                             )
                             .GetReference(display: "System.v5.0.5.0_silverlight.dll"),
@@ -830,8 +829,7 @@ public static class TestReferences
                         () =>
                             AssemblyMetadata
                                 .CreateFromImage(
-                                    TestResources
-                                        .SymbolsTests
+                                    TestResources.SymbolsTests
                                         .CustomModifiers
                                         .GenericMethodWithModifiers
                                 )
@@ -1558,8 +1556,7 @@ public static class TestReferences
                         () =>
                             AssemblyMetadata
                                 .CreateFromImage(
-                                    TestResources
-                                        .General
+                                    TestResources.General
                                         .CSharpExplicitInterfaceImplementationProperties
                                 )
                                 .GetReference(
@@ -1574,8 +1571,7 @@ public static class TestReferences
                         () =>
                             AssemblyMetadata
                                 .CreateFromImage(
-                                    TestResources
-                                        .General
+                                    TestResources.General
                                         .ILExplicitInterfaceImplementationProperties
                                 )
                                 .GetReference(
@@ -1593,8 +1589,7 @@ public static class TestReferences
                         () =>
                             AssemblyMetadata
                                 .CreateFromImage(
-                                    TestResources
-                                        .General
+                                    TestResources.General
                                         .CSharpExplicitInterfaceImplementationEvents
                                 )
                                 .GetReference(

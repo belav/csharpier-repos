@@ -2080,11 +2080,12 @@ return true;
 
         public override int GetHashCode()
         {
-            return WebUtil.HashCodeCombiner.CombineHashCodes(
-                _type.GetHashCode(),
-                _key.GetHashCode(),
-                _isInclude.GetHashCode()
-            );
+            return WebUtil.HashCodeCombiner
+                .CombineHashCodes(
+                    _type.GetHashCode(),
+                    _key.GetHashCode(),
+                    _isInclude.GetHashCode()
+                );
         }
 
         public override bool Equals(object o)

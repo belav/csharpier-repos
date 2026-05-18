@@ -32,9 +32,10 @@ namespace Microsoft.CodeAnalysis.UnusedReferences
             CancellationToken cancellationToken
         )
         {
-            var projects = solution.Projects.Where(project =>
-                projectFilePath.Equals(project.FilePath, StringComparison.OrdinalIgnoreCase)
-            );
+            var projects = solution.Projects
+                .Where(project =>
+                    projectFilePath.Equals(project.FilePath, StringComparison.OrdinalIgnoreCase)
+                );
 
             HashSet<string> usedAssemblyFilePaths = new();
             HashSet<string> usedProjectFileNames = new();
@@ -167,9 +168,8 @@ namespace Microsoft.CodeAnalysis.UnusedReferences
                     // Since we only know project references by their CompilationReference which
                     // does not include the full output path. We look only at the file name of the
                     // compilation assembly and compare it with our list of used project assembly names.
-                    var projectAssemblyFileNames = reference.CompilationAssemblies.SelectAsArray(
-                        assemblyPath => Path.GetFileName(assemblyPath)
-                    );
+                    var projectAssemblyFileNames = reference.CompilationAssemblies
+                        .SelectAsArray(assemblyPath => Path.GetFileName(assemblyPath));
 
                     // We will look at the project assemblies brought in directly by the
                     // references to see if they are used.
@@ -195,11 +195,12 @@ namespace Microsoft.CodeAnalysis.UnusedReferences
                     // We will look at the compilation assemblies brought in directly by the
                     // references to see if they are used.
                     if (
-                        !reference.CompilationAssemblies.Any(
-                            static (name, usedAssemblyFilePaths) =>
-                                usedAssemblyFilePaths.Contains(name),
-                            usedAssemblyFilePaths
-                        )
+                        !reference.CompilationAssemblies
+                            .Any(
+                                static (name, usedAssemblyFilePaths) =>
+                                    usedAssemblyFilePaths.Contains(name),
+                                usedAssemblyFilePaths
+                            )
                     )
                     {
                         // None of the assemblies brought into this compilation are in the
@@ -275,20 +276,23 @@ namespace Microsoft.CodeAnalysis.UnusedReferences
         )
         {
             if (
-                reference.CompilationAssemblies.Any(
-                    static (name, usedAssemblyFilePaths) => usedAssemblyFilePaths.Contains(name),
-                    usedAssemblyFilePaths
-                )
+                reference.CompilationAssemblies
+                    .Any(
+                        static (name, usedAssemblyFilePaths) =>
+                            usedAssemblyFilePaths.Contains(name),
+                        usedAssemblyFilePaths
+                    )
             )
             {
                 return true;
             }
 
-            return reference.Dependencies.Any(
-                static (dependency, usedAssemblyFilePaths) =>
-                    ContainsAnyCompilationAssembly(dependency, usedAssemblyFilePaths),
-                usedAssemblyFilePaths
-            );
+            return reference.Dependencies
+                .Any(
+                    static (dependency, usedAssemblyFilePaths) =>
+                        ContainsAnyCompilationAssembly(dependency, usedAssemblyFilePaths),
+                    usedAssemblyFilePaths
+                );
         }
 
         internal static void RemoveAllCompilationAssemblies(
@@ -306,11 +310,10 @@ namespace Microsoft.CodeAnalysis.UnusedReferences
 
         internal static ImmutableArray<string> GetAllCompilationAssemblies(ReferenceInfo reference)
         {
-            var transitiveCompilationAssemblies = reference.Dependencies.SelectMany(dependency =>
-                GetAllCompilationAssemblies(dependency)
-            );
-            return reference
-                .CompilationAssemblies.Concat(transitiveCompilationAssemblies)
+            var transitiveCompilationAssemblies = reference.Dependencies
+                .SelectMany(dependency => GetAllCompilationAssemblies(dependency));
+            return reference.CompilationAssemblies
+                .Concat(transitiveCompilationAssemblies)
                 .ToImmutableArray();
         }
 
@@ -321,8 +324,8 @@ namespace Microsoft.CodeAnalysis.UnusedReferences
             CancellationToken cancellationToken
         )
         {
-            var referenceCleanupService =
-                solution.Services.GetRequiredService<IReferenceCleanupService>();
+            var referenceCleanupService = solution.Services
+                .GetRequiredService<IReferenceCleanupService>();
 
             await ApplyReferenceUpdatesAsync(
                     referenceCleanupService,

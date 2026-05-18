@@ -346,9 +346,10 @@ namespace Roslyn.Test.Utilities
             );
 
             if (
-                !diff.Lines.Any(line =>
-                    line.Type == ChangeType.Inserted || line.Type == ChangeType.Deleted
-                )
+                !diff.Lines
+                    .Any(line =>
+                        line.Type == ChangeType.Inserted || line.Type == ChangeType.Deleted
+                    )
             )
             {
                 // We have a failure only caused by line ending differences; recalculate with line endings visible
@@ -1228,10 +1229,8 @@ namespace Roslyn.Test.Utilities
                 .AppendLine();
             foreach (var (index, ex) in exceptions)
             {
-                var stack = ex.StackTrace.Split(
-                    new[] { Environment.NewLine },
-                    StringSplitOptions.None
-                );
+                var stack = ex.StackTrace
+                    .Split(new[] { Environment.NewLine }, StringSplitOptions.None);
                 stringBuilder
                     .AppendLine($"Assertion failed at index {index}:")
                     .AppendLine(stack[^2]) // Prints the failing line in the original test case.

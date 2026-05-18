@@ -662,18 +662,19 @@ namespace System.Xml.Serialization
                 }
                 //
 
-                mapping.TypeDesc = mapping.TypeDesc.CreateMappedTypeDesc(
-                    new MappedTypeDesc(
-                        typeName,
-                        qname.Name,
-                        qname.Namespace,
-                        type,
-                        context,
-                        typeOwner,
-                        mainNamespace,
-                        compileUnit.ReferencedAssemblies
-                    )
-                );
+                mapping.TypeDesc = mapping.TypeDesc
+                    .CreateMappedTypeDesc(
+                        new MappedTypeDesc(
+                            typeName,
+                            qname.Name,
+                            qname.Namespace,
+                            type,
+                            context,
+                            typeOwner,
+                            mainNamespace,
+                            compileUnit.ReferencedAssemblies
+                        )
+                    );
 
                 if (mapping is ArrayMapping)
                 {
@@ -1383,8 +1384,10 @@ namespace System.Xml.Serialization
                 choiceIdentifier.Name = member.ChoiceIdentifier.MemberName;
                 if (groupRepeats)
                 {
-                    choiceIdentifier.TypeDesc =
-                        member.ChoiceIdentifier.Mapping.TypeDesc.CreateArrayTypeDesc();
+                    choiceIdentifier.TypeDesc = member.ChoiceIdentifier
+                        .Mapping
+                        .TypeDesc
+                        .CreateArrayTypeDesc();
                 }
                 else
                 {
@@ -2112,9 +2115,8 @@ namespace System.Xml.Serialization
                 if (itemAccessor.Any)
                     return null;
                 arrayMapping.Elements = new ElementAccessor[] { itemAccessor };
-                arrayMapping.TypeDesc = (
-                    (TypeMapping)itemAccessor.Mapping
-                ).TypeDesc.CreateArrayTypeDesc();
+                arrayMapping.TypeDesc = ((TypeMapping)itemAccessor.Mapping).TypeDesc
+                    .CreateArrayTypeDesc();
                 arrayMapping.TypeName =
                     (type.Name == null || type.Name.Length == 0)
                         ? "ArrayOf" + CodeIdentifier.MakePascal(itemAccessor.Mapping.TypeDesc.Name)

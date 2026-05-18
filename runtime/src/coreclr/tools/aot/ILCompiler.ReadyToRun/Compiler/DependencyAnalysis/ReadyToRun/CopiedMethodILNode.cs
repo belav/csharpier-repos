@@ -50,8 +50,8 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                 );
             }
 
-            var rva = _method
-                .MetadataReader.GetMethodDefinition(_method.Handle)
+            var rva = _method.MetadataReader
+                .GetMethodDefinition(_method.Handle)
                 .RelativeVirtualAddress;
             var reader = _method.Module.PEReader.GetSectionData(rva).GetReader();
             int size = MethodBodyBlock.Create(reader).Size;

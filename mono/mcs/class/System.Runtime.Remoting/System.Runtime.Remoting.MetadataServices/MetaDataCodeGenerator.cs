@@ -71,10 +71,11 @@ namespace System.Runtime.Remoting.MetadataServices
             // Suds types
 
             sudsTypes = new Hashtable();
-            XmlNodeList nodes = doc.DocumentElement.SelectNodes(
-                "wsdl:binding/suds:class|wsdl:binding/suds:interface|wsdl:binding/suds:struct",
-                nsManager
-            );
+            XmlNodeList nodes = doc.DocumentElement
+                .SelectNodes(
+                    "wsdl:binding/suds:class|wsdl:binding/suds:interface|wsdl:binding/suds:struct",
+                    nsManager
+                );
             foreach (XmlElement node in nodes)
                 sudsTypes[GetTypeQualifiedName(node, node.GetAttribute("type"))] = node;
 

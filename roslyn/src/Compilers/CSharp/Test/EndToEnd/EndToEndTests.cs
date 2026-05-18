@@ -662,10 +662,8 @@ public class Test
 
             var verifier = CompileAndVerify(
                 files.ToArrayAndFree(),
-                parseOptions: TestOptions.Regular.WithFeature(
-                    "InterceptorsPreviewNamespaces",
-                    "global"
-                ),
+                parseOptions: TestOptions.Regular
+                    .WithFeature("InterceptorsPreviewNamespaces", "global"),
                 expectedOutput: makeExpectedOutput()
             );
             verifier.VerifyDiagnostics();
@@ -806,11 +804,12 @@ public class Test
             var generator = new IncrementalGeneratorWrapper(
                 new PipelineCallbackGenerator(ctx =>
                 {
-                    var input = ctx.SyntaxProvider.ForAttributeWithMetadataName(
-                        "N1.XAttribute",
-                        (node, _) => node is ClassDeclarationSyntax,
-                        (context, _) => (ClassDeclarationSyntax)context.TargetNode
-                    );
+                    var input = ctx.SyntaxProvider
+                        .ForAttributeWithMetadataName(
+                            "N1.XAttribute",
+                            (node, _) => node is ClassDeclarationSyntax,
+                            (context, _) => (ClassDeclarationSyntax)context.TargetNode
+                        );
                     ctx.RegisterSourceOutput(input, (spc, node) => { });
                 })
             );

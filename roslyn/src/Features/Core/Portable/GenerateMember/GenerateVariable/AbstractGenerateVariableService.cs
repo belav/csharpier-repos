@@ -410,8 +410,8 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateVariable
 
                 if (containingMethod.Parameters.Length > 0)
                 {
-                    var compilation = await document
-                        .Project.GetRequiredCompilationAsync(cancellationToken)
+                    var compilation = await document.Project
+                        .GetRequiredCompilationAsync(cancellationToken)
                         .ConfigureAwait(false);
                     var cancellationTokenType = compilation.CancellationTokenType();
 

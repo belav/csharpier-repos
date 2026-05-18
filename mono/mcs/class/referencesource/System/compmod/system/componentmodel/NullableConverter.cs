@@ -80,11 +80,8 @@ namespace System.ComponentModel
             }
             else if (this.simpleTypeConverter != null)
             {
-                object convertedValue = this.simpleTypeConverter.ConvertFrom(
-                    context,
-                    culture,
-                    value
-                );
+                object convertedValue = this.simpleTypeConverter
+                    .ConvertFrom(context, culture, value);
                 return convertedValue;
             }
             else

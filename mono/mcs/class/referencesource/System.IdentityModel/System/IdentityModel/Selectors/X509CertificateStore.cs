@@ -57,13 +57,14 @@ namespace System.IdentityModel.Selectors
                     this.storeName = "TrustedPublisher";
                     break;
                 default:
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidEnumArgumentException(
-                            "storeName",
-                            (int)storeName,
-                            typeof(StoreName)
-                        )
-                    );
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidEnumArgumentException(
+                                "storeName",
+                                (int)storeName,
+                                typeof(StoreName)
+                            )
+                        );
             }
 
             if (
@@ -71,12 +72,13 @@ namespace System.IdentityModel.Selectors
                 && storeLocation != StoreLocation.LocalMachine
             )
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentOutOfRangeException(
-                        "storeLocation",
-                        SR.GetString(SR.X509CertStoreLocationNotValid)
-                    )
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        new ArgumentOutOfRangeException(
+                            "storeLocation",
+                            SR.GetString(SR.X509CertStoreLocationNotValid)
+                        )
+                    );
             }
             this.storeLocation = storeLocation;
         }
@@ -115,9 +117,8 @@ namespace System.IdentityModel.Selectors
             if (certStoreHandle == null || certStoreHandle.IsInvalid)
             {
                 int error = Marshal.GetLastWin32Error();
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new CryptographicException(error)
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(new CryptographicException(error));
             }
             this.certStoreHandle = certStoreHandle;
         }
@@ -151,16 +152,17 @@ namespace System.IdentityModel.Selectors
                     case X509FindType.FindBySubjectName:
                         strFindValue = findValue as string;
                         if (strFindValue == null)
-                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                                new ArgumentException(
-                                    SR.GetString(
-                                        SR.X509FindValueMismatch,
-                                        findType,
-                                        typeof(string),
-                                        findValue.GetType()
+                            throw DiagnosticUtility.ExceptionUtility
+                                .ThrowHelperError(
+                                    new ArgumentException(
+                                        SR.GetString(
+                                            SR.X509FindValueMismatch,
+                                            findType,
+                                            typeof(string),
+                                            findValue.GetType()
+                                        )
                                     )
-                                )
-                            );
+                                );
 
                         dwFindType = CAPI.CERT_FIND_SUBJECT_STR;
                         pvFindPara = SafeHGlobalHandle.AllocHGlobal(strFindValue);
@@ -172,17 +174,18 @@ namespace System.IdentityModel.Selectors
                         {
                             strFindValue = findValue as string;
                             if (strFindValue == null)
-                                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                                    new ArgumentException(
-                                        SR.GetString(
-                                            SR.X509FindValueMismatchMulti,
-                                            findType,
-                                            typeof(string),
-                                            typeof(byte[]),
-                                            findValue.GetType()
+                                throw DiagnosticUtility.ExceptionUtility
+                                    .ThrowHelperError(
+                                        new ArgumentException(
+                                            SR.GetString(
+                                                SR.X509FindValueMismatchMulti,
+                                                findType,
+                                                typeof(string),
+                                                typeof(byte[]),
+                                                findValue.GetType()
+                                            )
                                         )
-                                    )
-                                );
+                                    );
 
                             bytes = SecurityUtils.DecodeHexString(strFindValue);
                         }
@@ -198,16 +201,17 @@ namespace System.IdentityModel.Selectors
 
                     case X509FindType.FindBySubjectDistinguishedName:
                         if (!(findValue is string))
-                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                                new ArgumentException(
-                                    SR.GetString(
-                                        SR.X509FindValueMismatch,
-                                        findType,
-                                        typeof(string),
-                                        findValue.GetType()
+                            throw DiagnosticUtility.ExceptionUtility
+                                .ThrowHelperError(
+                                    new ArgumentException(
+                                        SR.GetString(
+                                            SR.X509FindValueMismatch,
+                                            findType,
+                                            typeof(string),
+                                            findValue.GetType()
+                                        )
                                     )
-                                )
-                            );
+                                );
 
                         dwFindType = CAPI.CERT_FIND_ANY;
                         break;
@@ -215,16 +219,17 @@ namespace System.IdentityModel.Selectors
                     case X509FindType.FindByIssuerName:
                         strFindValue = findValue as string;
                         if (strFindValue == null)
-                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                                new ArgumentException(
-                                    SR.GetString(
-                                        SR.X509FindValueMismatch,
-                                        findType,
-                                        typeof(string),
-                                        findValue.GetType()
+                            throw DiagnosticUtility.ExceptionUtility
+                                .ThrowHelperError(
+                                    new ArgumentException(
+                                        SR.GetString(
+                                            SR.X509FindValueMismatch,
+                                            findType,
+                                            typeof(string),
+                                            findValue.GetType()
+                                        )
                                     )
-                                )
-                            );
+                                );
 
                         dwFindType = CAPI.CERT_FIND_ISSUER_STR;
                         pvFindPara = SafeHGlobalHandle.AllocHGlobal(strFindValue);
@@ -232,16 +237,17 @@ namespace System.IdentityModel.Selectors
 
                     case X509FindType.FindByIssuerDistinguishedName:
                         if (!(findValue is string))
-                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                                new ArgumentException(
-                                    SR.GetString(
-                                        SR.X509FindValueMismatch,
-                                        findType,
-                                        typeof(string),
-                                        findValue.GetType()
+                            throw DiagnosticUtility.ExceptionUtility
+                                .ThrowHelperError(
+                                    new ArgumentException(
+                                        SR.GetString(
+                                            SR.X509FindValueMismatch,
+                                            findType,
+                                            typeof(string),
+                                            findValue.GetType()
+                                        )
                                     )
-                                )
-                            );
+                                );
 
                         dwFindType = CAPI.CERT_FIND_ANY;
                         break;
@@ -252,17 +258,18 @@ namespace System.IdentityModel.Selectors
                         {
                             strFindValue = findValue as string;
                             if (strFindValue == null)
-                                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                                    new ArgumentException(
-                                        SR.GetString(
-                                            SR.X509FindValueMismatchMulti,
-                                            findType,
-                                            typeof(string),
-                                            typeof(byte[]),
-                                            findValue.GetType()
+                                throw DiagnosticUtility.ExceptionUtility
+                                    .ThrowHelperError(
+                                        new ArgumentException(
+                                            SR.GetString(
+                                                SR.X509FindValueMismatchMulti,
+                                                findType,
+                                                typeof(string),
+                                                typeof(byte[]),
+                                                findValue.GetType()
+                                            )
                                         )
-                                    )
-                                );
+                                    );
 
                             bytes = SecurityUtils.DecodeHexString(strFindValue);
 
@@ -285,17 +292,18 @@ namespace System.IdentityModel.Selectors
                         {
                             strFindValue = findValue as string;
                             if (strFindValue == null)
-                                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                                    new ArgumentException(
-                                        SR.GetString(
-                                            SR.X509FindValueMismatchMulti,
-                                            findType,
-                                            typeof(string),
-                                            typeof(byte[]),
-                                            findValue.GetType()
+                                throw DiagnosticUtility.ExceptionUtility
+                                    .ThrowHelperError(
+                                        new ArgumentException(
+                                            SR.GetString(
+                                                SR.X509FindValueMismatchMulti,
+                                                findType,
+                                                typeof(string),
+                                                typeof(byte[]),
+                                                findValue.GetType()
+                                            )
                                         )
-                                    )
-                                );
+                                    );
 
                             bytes = SecurityUtils.DecodeHexString(strFindValue);
                         }

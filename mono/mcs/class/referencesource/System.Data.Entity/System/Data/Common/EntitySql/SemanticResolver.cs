@@ -457,8 +457,7 @@ namespace System.Data.Common.EntitySql
                         for (
                             expressionInterpretationContext = _currentGroupAggregateInfo;
                             expressionInterpretationContext != null
-                                && expressionInterpretationContext
-                                    .DefiningScopeRegion
+                                && expressionInterpretationContext.DefiningScopeRegion
                                     .ScopeRegionIndex
                                     >= definingScopeRegionOfScopeEntry.ScopeRegionIndex;
                             expressionInterpretationContext =
@@ -576,8 +575,9 @@ namespace System.Data.Common.EntitySql
             //
             // Try resolving as a member of the default entity container.
             //
-            EntityContainer defaultEntityContainer =
-                this.TypeResolver.Perspective.GetDefaultContainer();
+            EntityContainer defaultEntityContainer = this.TypeResolver
+                .Perspective
+                .GetDefaultContainer();
             ExpressionResolution defaultEntityContainerResolution;
             if (
                 defaultEntityContainer != null
@@ -599,12 +599,14 @@ namespace System.Data.Common.EntitySql
                 //
                 EntityContainer entityContainer;
                 if (
-                    this.TypeResolver.Perspective.TryGetEntityContainer(
-                        name,
-                        _parserOptions.NameComparisonCaseInsensitive /*ignoreCase*/
-                        ,
-                        out entityContainer
-                    )
+                    this.TypeResolver
+                        .Perspective
+                        .TryGetEntityContainer(
+                            name,
+                            _parserOptions.NameComparisonCaseInsensitive /*ignoreCase*/
+                            ,
+                            out entityContainer
+                        )
                 )
                 {
                     return new EntityContainerExpression(entityContainer);
@@ -614,12 +616,13 @@ namespace System.Data.Common.EntitySql
             //
             // Otherwise, resolve as an unqualified name.
             //
-            return this.TypeResolver.ResolveUnqualifiedName(
-                name,
-                leftHandSideOfMemberAccess /* partOfQualifiedName */
-                ,
-                errCtx
-            );
+            return this.TypeResolver
+                .ResolveUnqualifiedName(
+                    name,
+                    leftHandSideOfMemberAccess /* partOfQualifiedName */
+                    ,
+                    errCtx
+                );
         }
 
         internal MetadataMember ResolveSimpleFunctionName(string name, ErrorContext errCtx)
@@ -629,19 +632,21 @@ namespace System.Data.Common.EntitySql
             // Note that calling type resolver directly will avoid resolution of the identifier as a local variable or entity container
             // (these resolutions are performed only by ResolveSimpleName(...)).
             //
-            var resolution = this.TypeResolver.ResolveUnqualifiedName(
-                name,
-                false /* partOfQualifiedName */
-                ,
-                errCtx
-            );
+            var resolution = this.TypeResolver
+                .ResolveUnqualifiedName(
+                    name,
+                    false /* partOfQualifiedName */
+                    ,
+                    errCtx
+                );
             if (resolution.MetadataMemberClass == MetadataMemberClass.Namespace)
             {
                 //
                 // Try resolving as a function import inside the default entity container.
                 //
-                EntityContainer defaultEntityContainer =
-                    this.TypeResolver.Perspective.GetDefaultContainer();
+                EntityContainer defaultEntityContainer = this.TypeResolver
+                    .Perspective
+                    .GetDefaultContainer();
                 ExpressionResolution defaultEntityContainerResolution;
                 if (
                     defaultEntityContainer != null
@@ -744,13 +749,14 @@ namespace System.Data.Common.EntitySql
             {
                 EdmMember member;
                 if (
-                    TypeResolver.Perspective.TryGetMember(
-                        (StructuralType)valueExpr.ResultType.EdmType,
-                        name,
-                        _parserOptions.NameComparisonCaseInsensitive /*ignoreCase*/
-                        ,
-                        out member
-                    )
+                    TypeResolver.Perspective
+                        .TryGetMember(
+                            (StructuralType)valueExpr.ResultType.EdmType,
+                            name,
+                            _parserOptions.NameComparisonCaseInsensitive /*ignoreCase*/
+                            ,
+                            out member
+                        )
                 )
                 {
                     Debug.Assert(member != null, "member != null");
@@ -845,26 +851,30 @@ namespace System.Data.Common.EntitySql
             EntitySetBase entitySetBase;
             EdmFunction functionImport;
             if (
-                this.TypeResolver.Perspective.TryGetExtent(
-                    entityContainer,
-                    name,
-                    _parserOptions.NameComparisonCaseInsensitive /*ignoreCase*/
-                    ,
-                    out entitySetBase
-                )
+                this.TypeResolver
+                    .Perspective
+                    .TryGetExtent(
+                        entityContainer,
+                        name,
+                        _parserOptions.NameComparisonCaseInsensitive /*ignoreCase*/
+                        ,
+                        out entitySetBase
+                    )
             )
             {
                 resolution = new ValueExpression(entitySetBase.Scan());
                 return true;
             }
             else if (
-                this.TypeResolver.Perspective.TryGetFunctionImport(
-                    entityContainer,
-                    name,
-                    _parserOptions.NameComparisonCaseInsensitive /*ignoreCase*/
-                    ,
-                    out functionImport
-                )
+                this.TypeResolver
+                    .Perspective
+                    .TryGetFunctionImport(
+                        entityContainer,
+                        name,
+                        _parserOptions.NameComparisonCaseInsensitive /*ignoreCase*/
+                        ,
+                        out functionImport
+                    )
             )
             {
                 resolution = new MetadataFunctionGroup(
@@ -1085,9 +1095,9 @@ namespace System.Data.Common.EntitySql
                     //
                     // Reset aggregate info of AST nodes of aggregates resolved to the CurrentScopeRegion.
                     //
-                    this.CurrentScopeRegion.GroupAggregateInfos.ForEach(groupAggregateInfo =>
-                        groupAggregateInfo.DetachFromAstNode()
-                    );
+                    this.CurrentScopeRegion
+                        .GroupAggregateInfos
+                        .ForEach(groupAggregateInfo => groupAggregateInfo.DetachFromAstNode());
 
                     //
                     // Rollback scopes of the region.

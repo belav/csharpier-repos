@@ -47,8 +47,8 @@ namespace Microsoft.CodeAnalysis.RemoveUnnecessaryImports
                 isEnabledByDefault: true,
                 helpLinkUri: "https://github.com/dotnet/roslyn/issues/41640",
                 description: AnalyzersResources.Add_the_following_PropertyGroup_to_your_MSBuild_project_file_to_enable_IDE0005_Remove_unnecessary_usings_imports_on_build,
-                customTags: DiagnosticCustomTags
-                    .Microsoft.Concat(EnforceOnBuild.Never.ToCustomTag())
+                customTags: DiagnosticCustomTags.Microsoft
+                    .Concat(EnforceOnBuild.Never.ToCustomTag())
                     .ToArray()
             );
 #pragma warning restore RS0030 // Do not used banned APIs
@@ -176,13 +176,14 @@ namespace Microsoft.CodeAnalysis.RemoveUnnecessaryImports
             if (!IsAnalysisLevelGreaterThanOrEquals(8, context.Options))
                 return;
 
-            var tree = compilation.SyntaxTrees.FirstOrDefault(tree =>
-                !GeneratedCodeUtilities.IsGeneratedCode(
-                    tree,
-                    IsRegularCommentOrDocComment,
-                    context.CancellationToken
-                )
-            );
+            var tree = compilation.SyntaxTrees
+                .FirstOrDefault(tree =>
+                    !GeneratedCodeUtilities.IsGeneratedCode(
+                        tree,
+                        IsRegularCommentOrDocComment,
+                        context.CancellationToken
+                    )
+                );
             if (tree is null || tree.Options.DocumentationMode != DocumentationMode.None)
                 return;
 

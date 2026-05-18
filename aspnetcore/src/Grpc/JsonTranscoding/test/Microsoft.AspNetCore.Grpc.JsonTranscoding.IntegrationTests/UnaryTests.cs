@@ -28,10 +28,11 @@ public class UnaryTests : IntegrationTestBase
         {
             return Task.FromResult(new HelloReply { Message = $"Hello {request.Name}!" });
         }
-        var method = Fixture.DynamicGrpc.AddUnaryMethod<HelloRequest, HelloReply>(
-            UnaryMethod,
-            Greeter.Descriptor.FindMethodByName("SayHello")
-        );
+        var method = Fixture.DynamicGrpc
+            .AddUnaryMethod<HelloRequest, HelloReply>(
+                UnaryMethod,
+                Greeter.Descriptor.FindMethodByName("SayHello")
+            );
 
         var client = new HttpClient(Fixture.Handler) { BaseAddress = new Uri("http://localhost") };
 
@@ -60,10 +61,11 @@ public class UnaryTests : IntegrationTestBase
 
             return new HelloReply { Message = $"Hello {request.Name}!" };
         }
-        var method = Fixture.DynamicGrpc.AddUnaryMethod<HelloRequest, HelloReply>(
-            UnaryMethod,
-            Greeter.Descriptor.FindMethodByName("SayHello")
-        );
+        var method = Fixture.DynamicGrpc
+            .AddUnaryMethod<HelloRequest, HelloReply>(
+                UnaryMethod,
+                Greeter.Descriptor.FindMethodByName("SayHello")
+            );
 
         var client = new HttpClient(Fixture.Handler) { BaseAddress = new Uri("http://localhost") };
 
@@ -104,10 +106,11 @@ public class UnaryTests : IntegrationTestBase
 
             return new HelloReply { Message = $"Hello {request.Name}!" };
         }
-        var method = Fixture.DynamicGrpc.AddUnaryMethod<HelloRequest, HelloReply>(
-            UnaryMethod,
-            Greeter.Descriptor.FindMethodByName("SayHello")
-        );
+        var method = Fixture.DynamicGrpc
+            .AddUnaryMethod<HelloRequest, HelloReply>(
+                UnaryMethod,
+                Greeter.Descriptor.FindMethodByName("SayHello")
+            );
 
         var client = new HttpClient(Fixture.Handler) { BaseAddress = new Uri("http://localhost") };
 
@@ -141,10 +144,11 @@ public class UnaryTests : IntegrationTestBase
             authContext = context.AuthContext;
             return Task.FromResult(new HelloReply { Message = $"Hello {request.Name}!" });
         }
-        var method = Fixture.DynamicGrpc.AddUnaryMethod<HelloRequest, HelloReply>(
-            UnaryMethod,
-            Greeter.Descriptor.FindMethodByName("SayHello")
-        );
+        var method = Fixture.DynamicGrpc
+            .AddUnaryMethod<HelloRequest, HelloReply>(
+                UnaryMethod,
+                Greeter.Descriptor.FindMethodByName("SayHello")
+            );
 
         var client = new HttpClient(Fixture.Handler) { BaseAddress = new Uri("http://localhost") };
 
@@ -170,10 +174,11 @@ public class UnaryTests : IntegrationTestBase
         {
             return Task.FromResult(new HelloReply { Message = $"Hello {request.Name}!" });
         }
-        var method = Fixture.DynamicGrpc.AddUnaryMethod<HelloRequest, HelloReply>(
-            UnaryMethod,
-            Greeter.Descriptor.FindMethodByName("SayHelloPost")
-        );
+        var method = Fixture.DynamicGrpc
+            .AddUnaryMethod<HelloRequest, HelloReply>(
+                UnaryMethod,
+                Greeter.Descriptor.FindMethodByName("SayHelloPost")
+            );
 
         var encoding = JsonRequestHelpers.GetEncodingFromCharset(charset);
         var contentType =
@@ -214,10 +219,11 @@ public class UnaryTests : IntegrationTestBase
         {
             return Task.FromResult(new HelloReply { Message = $"Hello {request.Name}!" });
         }
-        var method = Fixture.DynamicGrpc.AddUnaryMethod<HelloRequest, HelloReply>(
-            UnaryMethod,
-            Greeter.Descriptor.FindMethodByName("SayHelloPost")
-        );
+        var method = Fixture.DynamicGrpc
+            .AddUnaryMethod<HelloRequest, HelloReply>(
+                UnaryMethod,
+                Greeter.Descriptor.FindMethodByName("SayHelloPost")
+            );
 
         var contentType = "application/json; charset=" + charset;
 
@@ -246,10 +252,11 @@ public class UnaryTests : IntegrationTestBase
         {
             return Task.FromResult(new HelloReply { Message = $"Hello {request.Name}!" });
         }
-        var method = Fixture.DynamicGrpc.AddUnaryMethod<EnumHelloRequest, HelloReply>(
-            UnaryMethod,
-            Greeter.Descriptor.FindMethodByName("SayHelloPostEnum")
-        );
+        var method = Fixture.DynamicGrpc
+            .AddUnaryMethod<EnumHelloRequest, HelloReply>(
+                UnaryMethod,
+                Greeter.Descriptor.FindMethodByName("SayHelloPostEnum")
+            );
 
         var client = new HttpClient(Fixture.Handler) { BaseAddress = new Uri("http://localhost") };
 

@@ -63,23 +63,22 @@ namespace System.IdentityModel
 
             if (signingCredentials == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                    "signingCredentials"
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperArgumentNull("signingCredentials");
             }
 
             if (string.IsNullOrEmpty(referenceId))
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentException(SR.GetString(SR.ID0006), "referenceId")
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        new ArgumentException(SR.GetString(SR.ID0006), "referenceId")
+                    );
             }
 
             if (securityTokenSerializer == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                    "securityTokenSerializer"
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperArgumentNull("securityTokenSerializer");
             }
 
             // Remember the user's writer here. We need to finally write out the signed XML
@@ -217,16 +216,14 @@ namespace System.IdentityModel
             base.Flush();
             if (_writerStream == null || _writerStream.Length == 0)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(SR.GetString(SR.ID6029))
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(new InvalidOperationException(SR.GetString(SR.ID6029)));
             }
 
             if (_signatureFragment.Length != 0)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(SR.GetString(SR.ID6030))
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(new InvalidOperationException(SR.GetString(SR.ID6030)));
             }
 
             Fx.Assert(_endFragment != null && _endFragment.Length == 0, SR.GetString(SR.ID8026));

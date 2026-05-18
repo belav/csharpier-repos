@@ -110,11 +110,8 @@ namespace System.Web.Razor.Editor
                 {
                     return true;
                 }
-                EditResult result = changeOwner.EditHandler.ApplyChange(
-                    changeOwner,
-                    change,
-                    force: true
-                );
+                EditResult result = changeOwner.EditHandler
+                    .ApplyChange(changeOwner, change, force: true);
                 changeOwner.ReplaceWith(result.EditedSpan);
             }
 
@@ -425,9 +422,8 @@ namespace System.Web.Razor.Editor
                                             RazorResources.Trace_ParseComplete,
                                             fileNameOnly,
                                             elapsedMs.HasValue
-                                                ? elapsedMs.Value.ToString(
-                                                    CultureInfo.InvariantCulture
-                                                )
+                                                ? elapsedMs.Value
+                                                    .ToString(CultureInfo.InvariantCulture)
                                                 : "?"
                                         );
 
@@ -461,9 +457,8 @@ namespace System.Web.Razor.Editor
                                                 RazorResources.Trace_TreesCompared,
                                                 fileNameOnly,
                                                 elapsedMs.HasValue
-                                                    ? elapsedMs.Value.ToString(
-                                                        CultureInfo.InvariantCulture
-                                                    )
+                                                    ? elapsedMs.Value
+                                                        .ToString(CultureInfo.InvariantCulture)
                                                     : "?",
                                                 treeStructureChanged
                                             );
@@ -492,8 +487,8 @@ namespace System.Web.Razor.Editor
                                         {
                                             // Rewind the buffer and sanity check the line mappings
                                             finalChange.NewBuffer.Position = 0;
-                                            int lineCount = finalChange
-                                                .NewBuffer.ReadToEnd()
+                                            int lineCount = finalChange.NewBuffer
+                                                .ReadToEnd()
                                                 .Split(
                                                     new string[]
                                                     {
@@ -505,20 +500,22 @@ namespace System.Web.Razor.Editor
                                                 )
                                                 .Count();
                                             Debug.Assert(
-                                                !args.GeneratorResults.DesignTimeLineMappings.Any(
-                                                    pair => pair.Value.StartLine > lineCount
-                                                ),
+                                                !args.GeneratorResults
+                                                    .DesignTimeLineMappings
+                                                    .Any(pair => pair.Value.StartLine > lineCount),
                                                 "Found a design-time line mapping referring to a line outside the source file!"
                                             );
                                             Debug.Assert(
-                                                !args
-                                                    .GeneratorResults.Document.Flatten()
+                                                !args.GeneratorResults
+                                                    .Document
+                                                    .Flatten()
                                                     .Any(span => span.Start.LineIndex > lineCount),
                                                 "Found a span with a line number outside the source file"
                                             );
                                             Debug.Assert(
-                                                !args
-                                                    .GeneratorResults.Document.Flatten()
+                                                !args.GeneratorResults
+                                                    .Document
+                                                    .Flatten()
                                                     .Any(span =>
                                                         span.Start.AbsoluteIndex
                                                         > parcel.NewBuffer.Length

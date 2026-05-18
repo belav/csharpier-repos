@@ -182,9 +182,8 @@ namespace System.Data.Mapping.Update.Internal
                 )
                 {
                     foreach (
-                        int principal in translator.KeyManager.GetDirectReferences(
-                            property.Identifier
-                        )
+                        int principal in translator.KeyManager
+                            .GetDirectReferences(property.Identifier)
                     )
                     {
                         PropagatorResult owner;

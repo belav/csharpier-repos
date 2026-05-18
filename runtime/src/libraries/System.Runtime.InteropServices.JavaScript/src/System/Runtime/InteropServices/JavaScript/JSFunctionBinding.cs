@@ -245,11 +245,8 @@ namespace System.Runtime.InteropServices.JavaScript
                 moduleName
             );
 
-            Interop.Runtime.BindJSImport(
-                signature.Header,
-                out int isException,
-                out object exceptionMessage
-            );
+            Interop.Runtime
+                .BindJSImport(signature.Header, out int isException, out object exceptionMessage);
             if (isException != 0)
                 throw new JSException((string)exceptionMessage);
 
@@ -266,13 +263,14 @@ namespace System.Runtime.InteropServices.JavaScript
         {
             var signature = JSHostImplementation.GetMethodSignature(signatures, null, null);
 
-            Interop.Runtime.BindCSFunction(
-                fullyQualifiedName,
-                signatureHash,
-                signature.Header,
-                out int isException,
-                out object exceptionMessage
-            );
+            Interop.Runtime
+                .BindCSFunction(
+                    fullyQualifiedName,
+                    signatureHash,
+                    signature.Header,
+                    out int isException,
+                    out object exceptionMessage
+                );
             if (isException != 0)
             {
                 throw new JSException((string)exceptionMessage);

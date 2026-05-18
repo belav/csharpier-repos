@@ -81,9 +81,8 @@ namespace System.ServiceModel.Activation
 
             if (hResult != 0)
             {
-                throw FxTrace.Exception.AsError(
-                    new COMException(SR.Hosting_MetabaseAccessError, (int)hResult)
-                );
+                throw FxTrace.Exception
+                    .AsError(new COMException(SR.Hosting_MetabaseAccessError, (int)hResult));
             }
 
             bufferHandle = SafeHGlobalHandleCritical.AllocHGlobal(currentBufferSize);
@@ -153,9 +152,8 @@ namespace System.ServiceModel.Activation
             }
             else if (hResult != 0)
             {
-                throw FxTrace.Exception.AsError(
-                    new COMException(SR.Hosting_MetabaseAccessError, (int)hResult)
-                );
+                throw FxTrace.Exception
+                    .AsError(new COMException(SR.Hosting_MetabaseAccessError, (int)hResult));
             }
 
             return ConvertData();
@@ -175,14 +173,15 @@ namespace System.ServiceModel.Activation
                 case MSAdminBase.MULTISZ_METADATA:
                     return RecordToStringArray();
                 default:
-                    throw FxTrace.Exception.AsError(
-                        new NotSupportedException(
-                            SR.Hosting_MetabaseDataTypeUnsupported(
-                                record.dwMDDataType.ToString(NumberFormatInfo.CurrentInfo),
-                                record.dwMDIdentifier.ToString(NumberFormatInfo.CurrentInfo)
+                    throw FxTrace.Exception
+                        .AsError(
+                            new NotSupportedException(
+                                SR.Hosting_MetabaseDataTypeUnsupported(
+                                    record.dwMDDataType.ToString(NumberFormatInfo.CurrentInfo),
+                                    record.dwMDIdentifier.ToString(NumberFormatInfo.CurrentInfo)
+                                )
                             )
-                        )
-                    );
+                        );
             }
         }
 
@@ -196,13 +195,14 @@ namespace System.ServiceModel.Activation
                 // Ensure that the data is an array of double-byte unicode chars.
                 if ((record.dwMDDataLen & 1) != 0)
                 {
-                    throw FxTrace.Exception.AsError(
-                        new DataMisalignedException(
-                            SR.Hosting_MetabaseDataStringsTerminate(
-                                record.dwMDIdentifier.ToString(NumberFormatInfo.CurrentInfo)
+                    throw FxTrace.Exception
+                        .AsError(
+                            new DataMisalignedException(
+                                SR.Hosting_MetabaseDataStringsTerminate(
+                                    record.dwMDIdentifier.ToString(NumberFormatInfo.CurrentInfo)
+                                )
                             )
-                        )
-                    );
+                        );
                 }
 
                 int startPos = 0;
@@ -223,13 +223,14 @@ namespace System.ServiceModel.Activation
                         && Marshal.ReadInt16(record.pbMDData, endPos - 2) != 0
                     )
                     {
-                        throw FxTrace.Exception.AsError(
-                            new DataMisalignedException(
-                                SR.Hosting_MetabaseDataStringsTerminate(
-                                    record.dwMDIdentifier.ToString(NumberFormatInfo.CurrentInfo)
+                        throw FxTrace.Exception
+                            .AsError(
+                                new DataMisalignedException(
+                                    SR.Hosting_MetabaseDataStringsTerminate(
+                                        record.dwMDIdentifier.ToString(NumberFormatInfo.CurrentInfo)
+                                    )
                                 )
-                            )
-                        );
+                            );
                     }
 
                     // End of the string.

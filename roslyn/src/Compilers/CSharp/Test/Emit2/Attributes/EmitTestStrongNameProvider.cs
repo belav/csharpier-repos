@@ -30,8 +30,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
 
             var src = @"class C {}";
             var keyFile = Temp.CreateFile().WriteAllBytes(TestResources.General.snKey).Path;
-            var options = TestOptions
-                .DebugDll.WithStrongNameProvider(provider)
+            var options = TestOptions.DebugDll
+                .WithStrongNameProvider(provider)
                 .WithCryptoKeyFile(keyFile);
 
             var comp = CreateCompilation(src, options: options);
@@ -54,8 +54,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             };
 
             var src = @"class C {}";
-            var options = TestOptions
-                .DebugDll.WithStrongNameProvider(provider)
+            var options = TestOptions.DebugDll
+                .WithStrongNameProvider(provider)
                 .WithCryptoKeyContainer("RoslynTestContainer");
 
             var comp = CreateCompilation(src, options: options);

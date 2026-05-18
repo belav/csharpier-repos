@@ -67,11 +67,12 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.RemoveUnnecessaryNullableDirec
         {
             foreach (var diagnostic in diagnostics)
             {
-                var nullableDirective = diagnostic.Location.FindNode(
-                    findInsideTrivia: true,
-                    getInnermostNodeForTie: true,
-                    cancellationToken
-                );
+                var nullableDirective = diagnostic.Location
+                    .FindNode(
+                        findInsideTrivia: true,
+                        getInnermostNodeForTie: true,
+                        cancellationToken
+                    );
                 editor.RemoveNode(nullableDirective, SyntaxRemoveOptions.KeepNoTrivia);
             }
 

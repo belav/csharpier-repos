@@ -831,16 +831,17 @@ namespace System.Xml.Xsl.XsltOld
             }
 
             switch (
-                this.builder.BeginEvent(
-                    stateOutlook,
-                    nodeType,
-                    prefix,
-                    name,
-                    nspace,
-                    empty,
-                    htmlProps,
-                    search
-                )
+                this.builder
+                    .BeginEvent(
+                        stateOutlook,
+                        nodeType,
+                        prefix,
+                        name,
+                        nspace,
+                        empty,
+                        htmlProps,
+                        search
+                    )
             )
             {
                 case OutputResult.Continue:

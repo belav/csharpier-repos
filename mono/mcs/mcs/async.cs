@@ -73,20 +73,18 @@ namespace Mono.CSharp
         {
             if (rc.HasSet(ResolveContext.Options.LockScope))
             {
-                rc.Report.Error(
-                    1996,
-                    loc,
-                    "The `await' operator cannot be used in the body of a lock statement"
-                );
+                rc.Report
+                    .Error(
+                        1996,
+                        loc,
+                        "The `await' operator cannot be used in the body of a lock statement"
+                    );
             }
 
             if (rc.IsUnsafe)
             {
-                rc.Report.Error(
-                    4004,
-                    loc,
-                    "The `await' operator cannot be used in an unsafe context"
-                );
+                rc.Report
+                    .Error(4004, loc, "The `await' operator cannot be used in an unsafe context");
             }
 
             var bc = (BlockContext)rc;
@@ -175,21 +173,23 @@ namespace Mono.CSharp
                     && (invocation.MethodGroup.BestCandidate.Modifiers & Modifiers.ASYNC) != 0
                 )
                 {
-                    rc.Report.Error(
-                        4008,
-                        loc,
-                        "Cannot await void method `{0}'. Consider changing method return type to `Task'",
-                        invocation.GetSignatureForError()
-                    );
+                    rc.Report
+                        .Error(
+                            4008,
+                            loc,
+                            "Cannot await void method `{0}'. Consider changing method return type to `Task'",
+                            invocation.GetSignatureForError()
+                        );
                 }
                 else if (type != InternalType.ErrorType)
                 {
-                    rc.Report.Error(
-                        4001,
-                        loc,
-                        "Cannot await `{0}' expression",
-                        type.GetSignatureForError()
-                    );
+                    rc.Report
+                        .Error(
+                            4001,
+                            loc,
+                            "Cannot await `{0}' expression",
+                            type.GetSignatureForError()
+                        );
                 }
             }
         }
@@ -356,23 +356,25 @@ namespace Mono.CSharp
 
         void Error_WrongAwaiterPattern(ResolveContext rc, TypeSpec awaiter)
         {
-            rc.Report.Error(
-                4011,
-                loc,
-                "The awaiter type `{0}' must have suitable IsCompleted and GetResult members",
-                awaiter.GetSignatureForError()
-            );
+            rc.Report
+                .Error(
+                    4011,
+                    loc,
+                    "The awaiter type `{0}' must have suitable IsCompleted and GetResult members",
+                    awaiter.GetSignatureForError()
+                );
         }
 
         public override bool Resolve(BlockContext bc)
         {
             if (bc.CurrentBlock is Linq.QueryBlock)
             {
-                bc.Report.Error(
-                    1995,
-                    loc,
-                    "The `await' operator may only be used in a query expression within the first collection expression of the initial `from' clause or within the collection expression of a `join' clause"
-                );
+                bc.Report
+                    .Error(
+                        1995,
+                        loc,
+                        "The `await' operator may only be used in a query expression within the first collection expression of the initial `from' clause or within the collection expression of a `join' clause"
+                    );
                 return false;
             }
 
@@ -410,12 +412,13 @@ namespace Mono.CSharp
 
             if (errors_printer.ErrorsCount > 0 || !MemberAccess.IsValidDotExpression(ama.Type))
             {
-                bc.Report.Error(
-                    1986,
-                    expr.Location,
-                    "The `await' operand type `{0}' must have suitable GetAwaiter method",
-                    expr.Type.GetSignatureForError()
-                );
+                bc.Report
+                    .Error(
+                        1986,
+                        expr.Location,
+                        "The `await' operand type `{0}' must have suitable GetAwaiter method",
+                        expr.Type.GetSignatureForError()
+                    );
 
                 return false;
             }
@@ -432,13 +435,14 @@ namespace Mono.CSharp
 
             if (!awaiter_definition.INotifyCompletion)
             {
-                bc.Report.Error(
-                    4027,
-                    loc,
-                    "The awaiter type `{0}' must implement interface `{1}'",
-                    awaiter_type.GetSignatureForError(),
-                    bc.Module.PredefinedTypes.INotifyCompletion.GetSignatureForError()
-                );
+                bc.Report
+                    .Error(
+                        4027,
+                        loc,
+                        "The awaiter type `{0}' must implement interface `{1}'",
+                        awaiter_type.GetSignatureForError(),
+                        bc.Module.PredefinedTypes.INotifyCompletion.GetSignatureForError()
+                    );
                 return false;
             }
 
@@ -1065,10 +1069,11 @@ namespace Mono.CSharp
             bool unsafe_version = false;
             if (Module.PredefinedTypes.ICriticalNotifyCompletion.Define())
             {
-                unsafe_version = awaiter.Type.ImplementsInterface(
-                    Module.PredefinedTypes.ICriticalNotifyCompletion.TypeSpec,
-                    false
-                );
+                unsafe_version = awaiter.Type
+                    .ImplementsInterface(
+                        Module.PredefinedTypes.ICriticalNotifyCompletion.TypeSpec,
+                        false
+                    );
             }
 
             EmitOnCompleted(ec, awaiter, unsafe_version);

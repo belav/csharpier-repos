@@ -120,9 +120,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.PreviewPane
                     ? string.Format(EditorFeaturesResources.Get_help_for_0, data.Id)
                     : null,
                 previewContent: previewContent,
-                logIdVerbatimInTelemetry: data.CustomTags.Contains(
-                    WellKnownDiagnosticTags.Telemetry
-                ),
+                logIdVerbatimInTelemetry: data.CustomTags
+                    .Contains(WellKnownDiagnosticTags.Telemetry),
                 uiShell: _uiShell,
                 optionPageGuid: optionPageGuid
             );

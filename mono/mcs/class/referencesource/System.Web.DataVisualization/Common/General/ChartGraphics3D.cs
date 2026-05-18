@@ -599,15 +599,16 @@ namespace System.Web.UI.DataVisualization.Charting
                         backLightColor,
                         rightLightColor,
                         bottomLightColor;
-                    area.matrix3D.GetLight(
-                        brush.Color,
-                        out frontLightColor,
-                        out backLightColor,
-                        out leftLightColor,
-                        out rightLightColor,
-                        out topLightColor,
-                        out bottomLightColor
-                    );
+                    area.matrix3D
+                        .GetLight(
+                            brush.Color,
+                            out frontLightColor,
+                            out backLightColor,
+                            out leftLightColor,
+                            out rightLightColor,
+                            out topLightColor,
+                            out bottomLightColor
+                        );
 
                     Color lightColor;
                     if (area.Area3DStyle.Inclination < 0)
@@ -672,15 +673,16 @@ namespace System.Web.UI.DataVisualization.Charting
                         backLightColor,
                         rightLightColor,
                         bottomLightColor;
-                    area.matrix3D.GetLight(
-                        brush.Color,
-                        out frontLightColor,
-                        out backLightColor,
-                        out leftLightColor,
-                        out rightLightColor,
-                        out topLightColor,
-                        out bottomLightColor
-                    );
+                    area.matrix3D
+                        .GetLight(
+                            brush.Color,
+                            out frontLightColor,
+                            out backLightColor,
+                            out leftLightColor,
+                            out rightLightColor,
+                            out topLightColor,
+                            out bottomLightColor
+                        );
 
                     Color lightColor;
                     if (area.Area3DStyle.Inclination < 0)
@@ -841,35 +843,37 @@ namespace System.Web.UI.DataVisualization.Charting
                     if (point.IsCustomPropertySet("_COLLECTED_DATA_POINT"))
                     {
                         // Add point to the map area
-                        common.HotRegionsList.AddHotRegion(
-                            (ChartGraphics)this,
-                            path,
-                            false,
-                            point.ReplaceKeywords(point.ToolTip),
+                        common.HotRegionsList
+                            .AddHotRegion(
+                                (ChartGraphics)this,
+                                path,
+                                false,
+                                point.ReplaceKeywords(point.ToolTip),
 #if Microsoft_CONTROL
-                            string.Empty,
-                            string.Empty,
-                            string.Empty,
+                                string.Empty,
+                                string.Empty,
+                                string.Empty,
 #else // Microsoft_CONTROL
-                            point.ReplaceKeywords(point.Url),
-                            point.ReplaceKeywords(point.MapAreaAttributes),
-                            point.ReplaceKeywords(point.PostBackValue),
+                                point.ReplaceKeywords(point.Url),
+                                point.ReplaceKeywords(point.MapAreaAttributes),
+                                point.ReplaceKeywords(point.PostBackValue),
 #endif // Microsoft_CONTROL
-                            point,
-                            ChartElementType.DataPoint
-                        );
+                                point,
+                                ChartElementType.DataPoint
+                            );
 
                         return;
                     }
 
-                    common.HotRegionsList.AddHotRegion(
-                        path,
-                        false,
-                        (ChartGraphics)this,
-                        point,
-                        point.series.Name,
-                        pointIndex
-                    );
+                    common.HotRegionsList
+                        .AddHotRegion(
+                            path,
+                            false,
+                            (ChartGraphics)this,
+                            point,
+                            point.series.Name,
+                            pointIndex
+                        );
                 }
             }
         }
@@ -960,15 +964,16 @@ namespace System.Web.UI.DataVisualization.Charting
                         backLightColor,
                         rightLightColor,
                         bottomLightColor;
-                    area.matrix3D.GetLight(
-                        brush.Color,
-                        out frontLightColor,
-                        out backLightColor,
-                        out leftLightColor,
-                        out rightLightColor,
-                        out topLightColor,
-                        out bottomLightColor
-                    );
+                    area.matrix3D
+                        .GetLight(
+                            brush.Color,
+                            out frontLightColor,
+                            out backLightColor,
+                            out leftLightColor,
+                            out rightLightColor,
+                            out topLightColor,
+                            out bottomLightColor
+                        );
 
                     Pen newPen = (Pen)pen.Clone();
 
@@ -1005,35 +1010,37 @@ namespace System.Web.UI.DataVisualization.Charting
                     if (point.IsCustomPropertySet("_COLLECTED_DATA_POINT"))
                     {
                         // Add point to the map area
-                        common.HotRegionsList.AddHotRegion(
-                            (ChartGraphics)this,
-                            path,
-                            false,
-                            point.ReplaceKeywords(point.ToolTip),
+                        common.HotRegionsList
+                            .AddHotRegion(
+                                (ChartGraphics)this,
+                                path,
+                                false,
+                                point.ReplaceKeywords(point.ToolTip),
 #if Microsoft_CONTROL
-                            string.Empty,
-                            string.Empty,
-                            string.Empty,
+                                string.Empty,
+                                string.Empty,
+                                string.Empty,
 #else // Microsoft_CONTROL
-                            point.ReplaceKeywords(point.Url),
-                            point.ReplaceKeywords(point.MapAreaAttributes),
-                            point.ReplaceKeywords(point.PostBackValue),
+                                point.ReplaceKeywords(point.Url),
+                                point.ReplaceKeywords(point.MapAreaAttributes),
+                                point.ReplaceKeywords(point.PostBackValue),
 #endif // Microsoft_CONTROL
-                            point,
-                            ChartElementType.DataPoint
-                        );
+                                point,
+                                ChartElementType.DataPoint
+                            );
 
                         return;
                     }
 
-                    common.HotRegionsList.AddHotRegion(
-                        path,
-                        false,
-                        (ChartGraphics)this,
-                        point,
-                        point.series.Name,
-                        pointIndex
-                    );
+                    common.HotRegionsList
+                        .AddHotRegion(
+                            path,
+                            false,
+                            (ChartGraphics)this,
+                            point,
+                            point.series.Name,
+                            pointIndex
+                        );
                 }
             }
         }
@@ -1151,15 +1158,16 @@ namespace System.Web.UI.DataVisualization.Charting
                         backLightColor,
                         rightLightColor,
                         bottomLightColor;
-                    area.matrix3D.GetLight(
-                        brush.Color,
-                        out frontLightColor,
-                        out backLightColor,
-                        out leftLightColor,
-                        out rightLightColor,
-                        out topLightColor,
-                        out bottomLightColor
-                    );
+                    area.matrix3D
+                        .GetLight(
+                            brush.Color,
+                            out frontLightColor,
+                            out backLightColor,
+                            out leftLightColor,
+                            out rightLightColor,
+                            out topLightColor,
+                            out bottomLightColor
+                        );
 
                     Pen newPen = (Pen)pen.Clone();
 
@@ -1196,36 +1204,38 @@ namespace System.Web.UI.DataVisualization.Charting
                     if (point.IsCustomPropertySet("_COLLECTED_DATA_POINT"))
                     {
                         // Add point to the map area
-                        common.HotRegionsList.AddHotRegion(
-                            (ChartGraphics)this,
-                            path,
-                            false,
-                            point.ReplaceKeywords(point.ToolTip),
+                        common.HotRegionsList
+                            .AddHotRegion(
+                                (ChartGraphics)this,
+                                path,
+                                false,
+                                point.ReplaceKeywords(point.ToolTip),
 #if Microsoft_CONTROL
-                            string.Empty,
-                            string.Empty,
-                            string.Empty,
+                                string.Empty,
+                                string.Empty,
+                                string.Empty,
 #else // Microsoft_CONTROL
-                            point.ReplaceKeywords(point.Url),
-                            point.ReplaceKeywords(point.MapAreaAttributes),
-                            point.ReplaceKeywords(point.PostBackValue),
+                                point.ReplaceKeywords(point.Url),
+                                point.ReplaceKeywords(point.MapAreaAttributes),
+                                point.ReplaceKeywords(point.PostBackValue),
 #endif // Microsoft_CONTROL
-                            point,
-                            ChartElementType.DataPoint
-                        );
+                                point,
+                                ChartElementType.DataPoint
+                            );
 
                         return;
                     }
 
                     // Add points to the map area
-                    common.HotRegionsList.AddHotRegion(
-                        path,
-                        false,
-                        (ChartGraphics)this,
-                        point,
-                        point.series.Name,
-                        pointIndex
-                    );
+                    common.HotRegionsList
+                        .AddHotRegion(
+                            path,
+                            false,
+                            (ChartGraphics)this,
+                            point,
+                            point.series.Name,
+                            pointIndex
+                        );
                 }
             }
         }

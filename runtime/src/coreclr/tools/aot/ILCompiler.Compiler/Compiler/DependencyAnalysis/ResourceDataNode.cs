@@ -77,14 +77,19 @@ namespace ILCompiler.DependencyAnalysis
             _indexData = new List<ResourceIndexData>();
             // Build up index information
             foreach (
-                EcmaAssembly module in factory
-                    .MetadataManager.GetCompilationModulesWithMetadata()
+                EcmaAssembly module in factory.MetadataManager
+                    .GetCompilationModulesWithMetadata()
                     .OfType<EcmaAssembly>()
             )
             {
-                PEMemoryBlock resourceDirectory = module.PEReader.GetSectionData(
-                    module.PEReader.PEHeaders.CorHeader.ResourcesDirectory.RelativeVirtualAddress
-                );
+                PEMemoryBlock resourceDirectory = module.PEReader
+                    .GetSectionData(
+                        module.PEReader
+                            .PEHeaders
+                            .CorHeader
+                            .ResourcesDirectory
+                            .RelativeVirtualAddress
+                    );
 
                 try
                 {
@@ -92,9 +97,8 @@ namespace ILCompiler.DependencyAnalysis
                     {
                         foreach (var resourceHandle in module.MetadataReader.ManifestResources)
                         {
-                            ManifestResource resource = module.MetadataReader.GetManifestResource(
-                                resourceHandle
-                            );
+                            ManifestResource resource = module.MetadataReader
+                                .GetManifestResource(resourceHandle);
 
                             // Don't try to embed linked resources or resources in other assemblies
                             if (!resource.Implementation.IsNil)
@@ -106,11 +110,8 @@ namespace ILCompiler.DependencyAnalysis
 
                             // Check if emitting the manifest resource is blocked by policy.
                             if (
-                                factory.MetadataManager.IsManifestResourceBlocked(
-                                    factory,
-                                    module,
-                                    resourceName
-                                )
+                                factory.MetadataManager
+                                    .IsManifestResourceBlocked(factory, module, resourceName)
                             )
                                 continue;
 
@@ -155,9 +156,14 @@ namespace ILCompiler.DependencyAnalysis
             foreach (ResourceIndexData indexData in _indexData)
             {
                 EcmaModule module = indexData.EcmaModule;
-                PEMemoryBlock resourceDirectory = module.PEReader.GetSectionData(
-                    module.PEReader.PEHeaders.CorHeader.ResourcesDirectory.RelativeVirtualAddress
-                );
+                PEMemoryBlock resourceDirectory = module.PEReader
+                    .GetSectionData(
+                        module.PEReader
+                            .PEHeaders
+                            .CorHeader
+                            .ResourcesDirectory
+                            .RelativeVirtualAddress
+                    );
                 Debug.Assert(currentPos == indexData.NativeOffset);
                 BlobReader reader = resourceDirectory.GetReader(
                     indexData.EcmaOffset,

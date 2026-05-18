@@ -44,12 +44,8 @@ internal class TestSnippetInfoService : ISnippetInfoService
         var snippets = XmlSnippetParser.CodeSnippet.ReadSnippets(testSnippetsXml);
         Contract.ThrowIfNull(snippets);
 
-        var snippetInfos = snippets.Value.Select(s => new SnippetInfo(
-            s.Shortcut,
-            s.Title,
-            s.Title,
-            snippetsFile
-        ));
+        var snippetInfos = snippets.Value
+            .Select(s => new SnippetInfo(s.Shortcut, s.Title, s.Title, snippetsFile));
         return snippetInfos;
     }
 

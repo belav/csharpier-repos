@@ -794,8 +794,9 @@ namespace MonoTests
 
             Start(dtest_app_path, "local-reflect");
 
-            MethodMirror m = entry_point
-                .DeclaringType.Assembly.GetType("LocalReflectClass")
+            MethodMirror m = entry_point.DeclaringType
+                .Assembly
+                .GetType("LocalReflectClass")
                 .GetMethod("RunMe");
 
             Assert.IsNotNull(m);
@@ -2481,9 +2482,9 @@ namespace MonoTests
             // This is no longer true on 4.0
             //Assert.AreEqual ("Assembly", frame.Method.DeclaringType.Assembly.GetAssemblyObject ().Type.Name);
 
-            TypeMirror t = vm.RootDomain.Corlib.GetType(
-                "System.Diagnostics.DebuggerDisplayAttribute"
-            );
+            TypeMirror t = vm.RootDomain
+                .Corlib
+                .GetType("System.Diagnostics.DebuggerDisplayAttribute");
             Assert.AreEqual("DebuggerDisplayAttribute", t.Name);
 
             TypeMirror ba = m.Assembly.GetType("BAttribute");
@@ -4218,8 +4219,9 @@ namespace MonoTests
             Assert.AreEqual("NullReferenceException", (e as ExceptionEvent).Exception.Type.Name);
 
             var ex = (e as ExceptionEvent).Exception;
-            var tostring_method = vm
-                .RootDomain.Corlib.GetType("System.Object")
+            var tostring_method = vm.RootDomain
+                .Corlib
+                .GetType("System.Object")
                 .GetMethod("ToString");
             ex.InvokeMethod(e.Thread, tostring_method, null, InvokeOptions.SingleThreaded);
         }
@@ -4343,9 +4345,8 @@ namespace MonoTests
                     AssertThrows<Exception>(
                         delegate()
                         {
-                            var assembly_obj = (
-                                e as AssemblyUnloadEvent
-                            ).Assembly.GetAssemblyObject();
+                            var assembly_obj = (e as AssemblyUnloadEvent).Assembly
+                                .GetAssemblyObject();
                         }
                     );
                     continue;
@@ -4996,9 +4997,9 @@ namespace MonoTests
             MethodMirror m = entry_point.DeclaringType.GetMethod("gc_suspend_invoke");
 
             var o =
-                entry_point.DeclaringType.GetValue(
-                    entry_point.DeclaringType.GetField("gc_suspend_field")
-                ) as ObjectMirror;
+                entry_point.DeclaringType
+                    .GetValue(entry_point.DeclaringType.GetField("gc_suspend_field"))
+                as ObjectMirror;
             //Console.WriteLine (o);
 
             StackFrame frame = e.Thread.GetFrames()[0];
@@ -5010,9 +5011,9 @@ namespace MonoTests
             long addr = o.Address;
 
             var o2 =
-                entry_point.DeclaringType.GetValue(
-                    entry_point.DeclaringType.GetField("gc_suspend_field")
-                ) as ObjectMirror;
+                entry_point.DeclaringType
+                    .GetValue(entry_point.DeclaringType.GetField("gc_suspend_field"))
+                as ObjectMirror;
             Assert.IsNull(o2);
         }
 
@@ -5058,8 +5059,8 @@ namespace MonoTests
             AssertThrows<InvalidOperationException>(
                 delegate
                 {
-                    entry_point
-                        .DeclaringType.GetMethod("Main")
+                    entry_point.DeclaringType
+                        .GetMethod("Main")
                         .MakeGenericMethod(new TypeMirror[] { intm });
                 }
             );
@@ -5777,9 +5778,9 @@ namespace MonoTests
                         var amirror = assemblyload.Assembly;
                         if (amirror.GetName().Name.Contains("dtest-app"))
                         {
-                            var methodMirror = amirror.EntryPoint.DeclaringType.GetMethod(
-                                "attach_break"
-                            );
+                            var methodMirror = amirror.EntryPoint
+                                .DeclaringType
+                                .GetMethod("attach_break");
                             vm.SetBreakpoint(methodMirror, 0);
                         }
                     }
@@ -6030,9 +6031,8 @@ namespace MonoTests
         {
             vm.Detach();
             Start(dtest_app_opt_path);
-            MethodMirror async_method = entry_point.DeclaringType.GetMethod(
-                "test_async_debug_generics"
-            );
+            MethodMirror async_method = entry_point.DeclaringType
+                .GetMethod("test_async_debug_generics");
             Assert.IsNotNull(async_method);
             vm.SetBreakpoint(async_method, 0);
             vm.Resume();

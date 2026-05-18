@@ -119,17 +119,15 @@ namespace System.Activities.Presentation
             this.Loaded += (sender, e) =>
             {
                 OnReadOnlyStateChanged(new ReadOnlyState());
-                this.ContextItemManager.Subscribe<ReadOnlyState>(
-                    this.OnReadOnlyStateChangedCallback
-                );
+                this.ContextItemManager
+                    .Subscribe<ReadOnlyState>(this.OnReadOnlyStateChangedCallback);
                 this.OnDynamicArgumentsLoaded();
                 this.OnUnderlyingArgumentTypeChanged();
             };
             this.Unloaded += (sender, e) =>
             {
-                this.ContextItemManager.Unsubscribe<ReadOnlyState>(
-                    this.OnReadOnlyStateChangedCallback
-                );
+                this.ContextItemManager
+                    .Unsubscribe<ReadOnlyState>(this.OnReadOnlyStateChangedCallback);
             };
 
             DynamicArgumentWrapperObject.Editor = this;
@@ -499,7 +497,8 @@ namespace System.Activities.Presentation
                         {
                             argumentKVPair
                                 .Properties["Value"]
-                                .Value.Properties["Expression"]
+                                .Value
+                                .Properties["Expression"]
                                 .SetValue(wrapper.Expression.GetCurrentValue());
                         }
                     }
@@ -589,9 +588,10 @@ namespace System.Activities.Presentation
                     DataGridRow row = entry.Row;
                     string newName = e.NewValue as string;
 
-                    bool duplicates = this.DynamicArguments.Any<DynamicArgumentWrapperObject>(p =>
-                        string.Equals(p.Name, newName) && p != entry
-                    );
+                    bool duplicates = this.DynamicArguments
+                        .Any<DynamicArgumentWrapperObject>(p =>
+                            string.Equals(p.Name, newName) && p != entry
+                        );
                     if (duplicates || string.IsNullOrEmpty(newName))
                     {
                         entry.Name = e.OldValue as string;
@@ -643,7 +643,8 @@ namespace System.Activities.Presentation
                         {
                             entry.Expression = (
                                 this.OwnerActivity as IModelTreeItem
-                            ).ModelTreeManager.WrapAsModelItem(newExpression);
+                            ).ModelTreeManager
+                                .WrapAsModelItem(newExpression);
                         }
                         else
                         {
@@ -665,10 +666,8 @@ namespace System.Activities.Presentation
             }
             else
             {
-                var defaultNames = this
-                    .DynamicArguments.Select<DynamicArgumentWrapperObject, string>(p =>
-                        (string)p.Name
-                    )
+                var defaultNames = this.DynamicArguments
+                    .Select<DynamicArgumentWrapperObject, string>(p => (string)p.Name)
                     .Where<string>(p =>
                         0
                         == string.Compare(

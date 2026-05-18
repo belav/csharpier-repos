@@ -95,17 +95,13 @@ namespace System.IdentityModel.Protocols.WSTrust
                 this.IssueResponse = WSTrustFeb2005Constants.Actions.IssueResponse;
                 this.Renew = WSTrustFeb2005Constants.Actions.Renew;
                 this.RenewResponse = WSTrustFeb2005Constants.Actions.RenewResponse;
-                this.RequestSecurityContextToken = WSTrustFeb2005Constants
-                    .Actions
+                this.RequestSecurityContextToken = WSTrustFeb2005Constants.Actions
                     .RequestSecurityContextToken;
-                this.RequestSecurityContextTokenCancel = WSTrustFeb2005Constants
-                    .Actions
+                this.RequestSecurityContextTokenCancel = WSTrustFeb2005Constants.Actions
                     .RequestSecurityContextTokenCancel;
-                this.RequestSecurityContextTokenResponse = WSTrustFeb2005Constants
-                    .Actions
+                this.RequestSecurityContextTokenResponse = WSTrustFeb2005Constants.Actions
                     .RequestSecurityContextTokenResponse;
-                this.RequestSecurityContextTokenResponseCancel = WSTrustFeb2005Constants
-                    .Actions
+                this.RequestSecurityContextTokenResponseCancel = WSTrustFeb2005Constants.Actions
                     .RequestSecurityContextTokenResponseCancel;
                 this.Validate = WSTrustFeb2005Constants.Actions.Validate;
                 this.ValidateResponse = WSTrustFeb2005Constants.Actions.ValidateResponse;

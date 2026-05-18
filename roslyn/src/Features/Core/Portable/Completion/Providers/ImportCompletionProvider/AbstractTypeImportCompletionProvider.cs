@@ -53,15 +53,14 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
             )
             {
                 var telemetryCounter = new TelemetryCounter();
-                var typeImportCompletionService =
-                    completionContext.Document.GetRequiredLanguageService<ITypeImportCompletionService>();
+                var typeImportCompletionService = completionContext.Document
+                    .GetRequiredLanguageService<ITypeImportCompletionService>();
 
                 var (itemsFromAllAssemblies, isPartialResult) = await typeImportCompletionService
                     .GetAllTopLevelTypesAsync(
                         completionContext.Document.Project,
                         syntaxContext,
-                        forceCacheCreation: completionContext
-                            .CompletionOptions
+                        forceCacheCreation: completionContext.CompletionOptions
                             .ForceExpandedCompletionIndexCreation,
                         completionContext.CompletionOptions,
                         cancellationToken
@@ -113,10 +112,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
             var aliasDeclarations = GetAliasDeclarationNodes(nodeToCheck);
             foreach (var aliasNode in aliasDeclarations)
             {
-                var symbol = syntaxContext.SemanticModel.GetDeclaredSymbol(
-                    aliasNode,
-                    cancellationToken
-                );
+                var symbol = syntaxContext.SemanticModel
+                    .GetDeclaredSymbol(aliasNode, cancellationToken);
                 if (
                     symbol is IAliasSymbol
                     {
@@ -145,9 +142,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
                     var typeParameter = target.GetTypeParameters();
                     if (typeParameter.IsEmpty)
                     {
-                        var namespaceOfTarget = target.ContainingNamespace.ToDisplayString(
-                            SymbolDisplayFormats.NameFormat
-                        );
+                        var namespaceOfTarget = target.ContainingNamespace
+                            .ToDisplayString(SymbolDisplayFormats.NameFormat);
                         var typeNameOfTarget = target.Name;
                         dictionary.Add(namespaceOfTarget, typeNameOfTarget);
                     }

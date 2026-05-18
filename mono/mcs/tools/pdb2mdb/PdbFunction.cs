@@ -425,9 +425,8 @@ namespace Microsoft.Cci.Pdb
                 uint ilEndOffset;
                 bits.ReadUInt32(out ilStartOffset);
                 bits.ReadUInt32(out ilEndOffset);
-                this.iteratorScopes.Add(
-                    new PdbIteratorScope(ilStartOffset, ilEndOffset - ilStartOffset)
-                );
+                this.iteratorScopes
+                    .Add(new PdbIteratorScope(ilStartOffset, ilEndOffset - ilStartOffset));
             }
         }
 

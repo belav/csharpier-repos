@@ -13,8 +13,7 @@ namespace Roslyn.VisualStudio.IntegrationTests
     {
         public static class Debug
         {
-            public const VSConstants.VSStd97CmdID Immediate = VSConstants
-                .VSStd97CmdID
+            public const VSConstants.VSStd97CmdID Immediate = VSConstants.VSStd97CmdID
                 .ImmediateWindow;
         }
 
@@ -28,22 +27,18 @@ namespace Roslyn.VisualStudio.IntegrationTests
             public const VSConstants.VSStd2KCmdID LineEnd = VSConstants.VSStd2KCmdID.EOL;
             public const VSConstants.VSStd2KCmdID LineEndExtend = VSConstants.VSStd2KCmdID.EOL_EXT;
             public const VSConstants.VSStd2KCmdID LineStart = VSConstants.VSStd2KCmdID.BOL;
-            public const VSConstants.VSStd2KCmdID LineStartExtend = VSConstants
-                .VSStd2KCmdID
+            public const VSConstants.VSStd2KCmdID LineStartExtend = VSConstants.VSStd2KCmdID
                 .BOL_EXT;
             public const VSConstants.VSStd2KCmdID LineUp = VSConstants.VSStd2KCmdID.UP;
-            public const VSConstants.VSStd2KCmdID ListMembers = VSConstants
-                .VSStd2KCmdID
+            public const VSConstants.VSStd2KCmdID ListMembers = VSConstants.VSStd2KCmdID
                 .SHOWMEMBERLIST;
-            public const VSConstants.VSStd2KCmdID ParameterInfo = VSConstants
-                .VSStd2KCmdID
+            public const VSConstants.VSStd2KCmdID ParameterInfo = VSConstants.VSStd2KCmdID
                 .PARAMINFO;
             public const VSConstants.VSStd97CmdID Paste = VSConstants.VSStd97CmdID.Paste;
             public const VSConstants.VSStd97CmdID Redo = VSConstants.VSStd97CmdID.Redo;
             public const VSConstants.VSStd97CmdID SelectAll = VSConstants.VSStd97CmdID.SelectAll;
             public const VSConstants.VSStd2KCmdID SelectionCancel = VSConstants.VSStd2KCmdID.CANCEL;
-            public const VSConstants.VSStd2KCmdID ToggleCompletionMode = VSConstants
-                .VSStd2KCmdID
+            public const VSConstants.VSStd2KCmdID ToggleCompletionMode = VSConstants.VSStd2KCmdID
                 .ToggleConsumeFirstCompletionMode;
             public const VSConstants.VSStd97CmdID Undo = VSConstants.VSStd97CmdID.Undo;
 
@@ -91,21 +86,16 @@ namespace Roslyn.VisualStudio.IntegrationTests
 
         public static class Refactor
         {
-            public const VSConstants.VSStd2KCmdID EncapsulateField = VSConstants
-                .VSStd2KCmdID
+            public const VSConstants.VSStd2KCmdID EncapsulateField = VSConstants.VSStd2KCmdID
                 .ENCAPSULATEFIELD;
-            public const VSConstants.VSStd2KCmdID ExtractInterface = VSConstants
-                .VSStd2KCmdID
+            public const VSConstants.VSStd2KCmdID ExtractInterface = VSConstants.VSStd2KCmdID
                 .EXTRACTINTERFACE;
-            public const VSConstants.VSStd2KCmdID ExtractMethod = VSConstants
-                .VSStd2KCmdID
+            public const VSConstants.VSStd2KCmdID ExtractMethod = VSConstants.VSStd2KCmdID
                 .EXTRACTMETHOD;
-            public const VSConstants.VSStd2KCmdID RemoveParameters = VSConstants
-                .VSStd2KCmdID
+            public const VSConstants.VSStd2KCmdID RemoveParameters = VSConstants.VSStd2KCmdID
                 .REMOVEPARAMETERS;
             public const VSConstants.VSStd2KCmdID Rename = VSConstants.VSStd2KCmdID.RENAME;
-            public const VSConstants.VSStd2KCmdID ReorderParameters = VSConstants
-                .VSStd2KCmdID
+            public const VSConstants.VSStd2KCmdID ReorderParameters = VSConstants.VSStd2KCmdID
                 .REORDERPARAMETERS;
         }
     }

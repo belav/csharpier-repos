@@ -86,9 +86,8 @@ namespace System.Runtime
         // This is factored out to allow Signal and Unlock to be inlined.
         void ThrowInvalidSignalGateState()
         {
-            throw Fx.Exception.AsError(
-                new InvalidOperationException(InternalSR.InvalidSemaphoreExit)
-            );
+            throw Fx.Exception
+                .AsError(new InvalidOperationException(InternalSR.InvalidSemaphoreExit));
         }
 
         static class GateState

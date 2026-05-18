@@ -14,8 +14,8 @@ namespace Microsoft.CodeAnalysis.Shared.Helpers.RemoveUnnecessaryImports
     {
         public static SyntaxToken StripNewLines(ISyntaxFacts syntaxFacts, SyntaxToken token)
         {
-            var trimmedLeadingTrivia = token
-                .LeadingTrivia.SkipWhile(syntaxFacts.IsEndOfLineTrivia)
+            var trimmedLeadingTrivia = token.LeadingTrivia
+                .SkipWhile(syntaxFacts.IsEndOfLineTrivia)
                 .ToList();
 
             // If the list ends with 3 newlines remove the last one until there's only 2 newlines to end the leading trivia.

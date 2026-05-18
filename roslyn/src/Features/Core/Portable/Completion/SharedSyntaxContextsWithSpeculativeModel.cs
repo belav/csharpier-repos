@@ -54,17 +54,18 @@ namespace Microsoft.CodeAnalysis.Completion
                 SharedSyntaxContextsWithSpeculativeModel self
             )
             {
-                return self._cache.GetOrAdd(
-                    document,
-                    d =>
-                        AsyncLazy.Create(cancellationToken =>
-                            Utilities.CreateSyntaxContextWithExistingSpeculativeModelAsync(
-                                d,
-                                self._position,
-                                cancellationToken
+                return self._cache
+                    .GetOrAdd(
+                        document,
+                        d =>
+                            AsyncLazy.Create(cancellationToken =>
+                                Utilities.CreateSyntaxContextWithExistingSpeculativeModelAsync(
+                                    d,
+                                    self._position,
+                                    cancellationToken
+                                )
                             )
-                        )
-                );
+                    );
             }
         }
     }

@@ -129,8 +129,8 @@ public class DbContext
         // DbSet instances, and this code becomes a no-op. However, if this set initializer is then saved and used later
         // for the Set method, then it makes the problem bigger because now an app is using the non-replaced services
         // even when it doesn't need to.
-        ServiceProviderCache
-            .Instance.GetOrAdd(options, providerRequired: false)
+        ServiceProviderCache.Instance
+            .GetOrAdd(options, providerRequired: false)
             .GetRequiredService<IDbSetInitializer>()
             .InitializeSets(this);
 
@@ -454,8 +454,8 @@ public class DbContext
 
                 var options = optionsBuilder.Options;
 
-                _serviceScope = ServiceProviderCache
-                    .Instance.GetOrAdd(options, providerRequired: true)
+                _serviceScope = ServiceProviderCache.Instance
+                    .GetOrAdd(options, providerRequired: true)
                     .GetRequiredService<IServiceScopeFactory>()
                     .CreateScope();
 
@@ -653,10 +653,8 @@ public class DbContext
                 ? interceptionResult.Result
                 : DbContextDependencies.StateManager.SaveChanges(acceptAllChangesOnSuccess);
 
-            var result = DbContextDependencies.UpdateLogger.SaveChangesCompleted(
-                this,
-                entitiesSaved
-            );
+            var result = DbContextDependencies.UpdateLogger
+                .SaveChangesCompleted(this, entitiesSaved);
 
             SavedChanges?.Invoke(
                 this,
@@ -796,8 +794,8 @@ public class DbContext
 
         SavingChanges?.Invoke(this, new SavingChangesEventArgs(acceptAllChangesOnSuccess));
 
-        var interceptionResult = await DbContextDependencies
-            .UpdateLogger.SaveChangesStartingAsync(this, cancellationToken)
+        var interceptionResult = await DbContextDependencies.UpdateLogger
+            .SaveChangesStartingAsync(this, cancellationToken)
             .ConfigureAwait(acceptAllChangesOnSuccess);
 
         TryDetectChanges();
@@ -806,12 +804,12 @@ public class DbContext
         {
             var entitiesSaved = interceptionResult.HasResult
                 ? interceptionResult.Result
-                : await DbContextDependencies
-                    .StateManager.SaveChangesAsync(acceptAllChangesOnSuccess, cancellationToken)
+                : await DbContextDependencies.StateManager
+                    .SaveChangesAsync(acceptAllChangesOnSuccess, cancellationToken)
                     .ConfigureAwait(false);
 
-            var result = await DbContextDependencies
-                .UpdateLogger.SaveChangesCompletedAsync(this, entitiesSaved, cancellationToken)
+            var result = await DbContextDependencies.UpdateLogger
+                .SaveChangesCompletedAsync(this, entitiesSaved, cancellationToken)
                 .ConfigureAwait(false);
 
             SavedChanges?.Invoke(
@@ -838,14 +836,14 @@ public class DbContext
                 DbContextDependencies.ExceptionDetector.IsCancellation(exception, cancellationToken)
             )
             {
-                await DbContextDependencies
-                    .UpdateLogger.SaveChangesCanceledAsync(this, cancellationToken)
+                await DbContextDependencies.UpdateLogger
+                    .SaveChangesCanceledAsync(this, cancellationToken)
                     .ConfigureAwait(false);
             }
             else
             {
-                await DbContextDependencies
-                    .UpdateLogger.SaveChangesFailedAsync(this, exception, cancellationToken)
+                await DbContextDependencies.UpdateLogger
+                    .SaveChangesFailedAsync(this, exception, cancellationToken)
                     .ConfigureAwait(false);
 
                 SaveChangesFailed?.Invoke(
@@ -933,8 +931,7 @@ public class DbContext
                 _configurationSnapshot.AutoDetectChangesEnabled;
             if (_configurationSnapshot.QueryTrackingBehavior.HasValue)
             {
-                changeTracker.QueryTrackingBehavior = _configurationSnapshot
-                    .QueryTrackingBehavior
+                changeTracker.QueryTrackingBehavior = _configurationSnapshot.QueryTrackingBehavior
                     .Value;
             }
 
@@ -952,22 +949,24 @@ public class DbContext
 
         if (_dbContextDependencies != null || _configurationSnapshot.HasStateManagerConfiguration)
         {
-            DbContextDependencies.StateManager.SetEvents(
-                _configurationSnapshot.Tracking,
-                _configurationSnapshot.Tracked,
-                _configurationSnapshot.StateChanging,
-                _configurationSnapshot.StateChanged
-            );
+            DbContextDependencies.StateManager
+                .SetEvents(
+                    _configurationSnapshot.Tracking,
+                    _configurationSnapshot.Tracked,
+                    _configurationSnapshot.StateChanging,
+                    _configurationSnapshot.StateChanged
+                );
         }
 
         if (_dbContextDependencies != null || _configurationSnapshot.HasChangeDetectorConfiguration)
         {
-            DbContextDependencies.ChangeDetector.SetEvents(
-                _configurationSnapshot.DetectingAllChanges,
-                _configurationSnapshot.DetectedAllChanges,
-                _configurationSnapshot.DetectingEntityChanges,
-                _configurationSnapshot.DetectedEntityChanges
-            );
+            DbContextDependencies.ChangeDetector
+                .SetEvents(
+                    _configurationSnapshot.DetectingAllChanges,
+                    _configurationSnapshot.DetectedAllChanges,
+                    _configurationSnapshot.DetectingEntityChanges,
+                    _configurationSnapshot.DetectedEntityChanges
+                );
         }
 
         SavingChanges = _configurationSnapshot.SavingChanges;
@@ -1057,9 +1056,8 @@ public class DbContext
 
         var resettableServices = new List<IResettableService>();
 
-        var services = _contextServices?.InternalServiceProvider.GetService<
-            IEnumerable<IResettableService>
-        >();
+        var services = _contextServices?.InternalServiceProvider
+            .GetService<IEnumerable<IResettableService>>();
         if (services is not null)
         {
             resettableServices.AddRange(services);
@@ -1224,12 +1222,8 @@ public class DbContext
     {
         if (entry.EntityState == EntityState.Detached)
         {
-            DbContextDependencies.EntityGraphAttacher.AttachGraph(
-                entry,
-                entityState,
-                entityState,
-                forceStateWhenUnknownKey: true
-            );
+            DbContextDependencies.EntityGraphAttacher
+                .AttachGraph(entry, entityState, entityState, forceStateWhenUnknownKey: true);
         }
         else
         {
@@ -1247,13 +1241,14 @@ public class DbContext
         CancellationToken cancellationToken
     ) =>
         entry.EntityState == EntityState.Detached
-            ? DbContextDependencies.EntityGraphAttacher.AttachGraphAsync(
-                entry,
-                entityState,
-                entityState,
-                forceStateWhenUnknownKey: true,
-                cancellationToken
-            )
+            ? DbContextDependencies.EntityGraphAttacher
+                .AttachGraphAsync(
+                    entry,
+                    entityState,
+                    entityState,
+                    forceStateWhenUnknownKey: true,
+                    cancellationToken
+                )
             : entry.SetEntityStateAsync(
                 entityState,
                 acceptChanges: true,

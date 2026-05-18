@@ -1334,8 +1334,8 @@ namespace System.Web.UI.DataVisualization.Charting
             // Adjust cell position by space required for the separatorType
             if (LegendItem != null && LegendItem.SeparatorType != LegendSeparatorStyle.None)
             {
-                this.cellPosition.Height -= this
-                    .Legend.GetSeparatorSize(LegendItem.SeparatorType)
+                this.cellPosition.Height -= this.Legend
+                    .GetSeparatorSize(LegendItem.SeparatorType)
                     .Height;
             }
         }
@@ -1396,11 +1396,9 @@ namespace System.Web.UI.DataVisualization.Charting
 
                     // Use original image size
                     if (
-                        this.Common.ImageLoader.GetAdjustedImageSize(
-                            this.Image,
-                            graph.Graphics,
-                            ref imageSize
-                        )
+                        this.Common
+                            .ImageLoader
+                            .GetAdjustedImageSize(this.Image, graph.Graphics, ref imageSize)
                     )
                     {
                         cellSize.Width = (int)imageSize.Width;
@@ -1870,19 +1868,20 @@ namespace System.Web.UI.DataVisualization.Charting
                 }
 
                 // Fire an event for custom cell back drawing
-                this.Chart.CallOnPrePaint(
-                    new ChartPaintEventArgs(
-                        this,
-                        chartGraph,
-                        this.Common,
-                        new ElementPosition(
-                            rectRelative.X,
-                            rectRelative.Y,
-                            rectRelative.Width,
-                            rectRelative.Height
+                this.Chart
+                    .CallOnPrePaint(
+                        new ChartPaintEventArgs(
+                            this,
+                            chartGraph,
+                            this.Common,
+                            new ElementPosition(
+                                rectRelative.X,
+                                rectRelative.Y,
+                                rectRelative.Width,
+                                rectRelative.Height
+                            )
                         )
-                    )
-                );
+                    );
 
                 // Check legend cell type
                 switch (this.CellType)
@@ -1905,19 +1904,20 @@ namespace System.Web.UI.DataVisualization.Charting
                 }
 
                 // Fire an event for custom cell drawing
-                this.Chart.CallOnPostPaint(
-                    new ChartPaintEventArgs(
-                        this,
-                        chartGraph,
-                        this.Common,
-                        new ElementPosition(
-                            rectRelative.X,
-                            rectRelative.Y,
-                            rectRelative.Width,
-                            rectRelative.Height
+                this.Chart
+                    .CallOnPostPaint(
+                        new ChartPaintEventArgs(
+                            this,
+                            chartGraph,
+                            this.Common,
+                            new ElementPosition(
+                                rectRelative.X,
+                                rectRelative.Y,
+                                rectRelative.Width,
+                                rectRelative.Height
+                            )
                         )
-                    )
-                );
+                    );
             }
 #if DEBUG
             // Draw bounding rectangle for debug purpose
@@ -1930,17 +1930,19 @@ namespace System.Web.UI.DataVisualization.Charting
             {
                 // Add hot region.
                 // Note that legend cell is passed as sub-object of legend item
-                this.Common.HotRegionsList.AddHotRegion(
-                    chartGraph.GetRelativeRectangle(this.cellPositionWithMargins),
-                    this.GetCellToolTip(),
-                    this.GetCellUrl(),
-                    this.GetCellMapAreaAttributes(),
-                    this.GetCellPostBackValue(),
-                    this.LegendItem,
-                    this,
-                    ChartElementType.LegendItem,
-                    this.LegendItem.SeriesName
-                );
+                this.Common
+                    .HotRegionsList
+                    .AddHotRegion(
+                        chartGraph.GetRelativeRectangle(this.cellPositionWithMargins),
+                        this.GetCellToolTip(),
+                        this.GetCellUrl(),
+                        this.GetCellMapAreaAttributes(),
+                        this.GetCellPostBackValue(),
+                        this.LegendItem,
+                        this,
+                        ChartElementType.LegendItem,
+                        this.LegendItem.SeriesName
+                    );
             }
         }
 
@@ -2480,9 +2482,9 @@ namespace System.Web.UI.DataVisualization.Charting
                         if (legendItem.markerImage.Length > 0)
                         {
                             // Get image size
-                            System.Drawing.Image image = this.Common.ImageLoader.LoadImage(
-                                legendItem.markerImage
-                            );
+                            System.Drawing.Image image = this.Common
+                                .ImageLoader
+                                .LoadImage(legendItem.markerImage);
 
                             SizeF imageSize = new SizeF();
 

@@ -31,10 +31,8 @@ namespace System.Net
                     || OperatingSystem.IsMacCatalyst()
                     || (
                         OperatingSystem.IsLinux()
-                        && RuntimeInformation.RuntimeIdentifier.StartsWith(
-                            "linux-bionic-",
-                            StringComparison.OrdinalIgnoreCase
-                        )
+                        && RuntimeInformation.RuntimeIdentifier
+                            .StartsWith("linux-bionic-", StringComparison.OrdinalIgnoreCase)
                     );
 
         public static NegotiateAuthenticationPal Create(
@@ -203,8 +201,7 @@ namespace System.Net
                     clientOptions.RequiredProtectionLevel switch
                     {
                         ProtectionLevel.Sign => Interop.NetSecurityNative.GssFlags.GSS_C_INTEG_FLAG,
-                        ProtectionLevel.EncryptAndSign => Interop
-                            .NetSecurityNative
+                        ProtectionLevel.EncryptAndSign => Interop.NetSecurityNative
                             .GssFlags
                             .GSS_C_INTEG_FLAG | Interop.NetSecurityNative.GssFlags.GSS_C_CONF_FLAG,
                         _ => 0,
@@ -216,12 +213,10 @@ namespace System.Net
 
                 contextFlags |= clientOptions.AllowedImpersonationLevel switch
                 {
-                    TokenImpersonationLevel.Identification => Interop
-                        .NetSecurityNative
+                    TokenImpersonationLevel.Identification => Interop.NetSecurityNative
                         .GssFlags
                         .GSS_C_IDENTIFY_FLAG,
-                    TokenImpersonationLevel.Delegation => Interop
-                        .NetSecurityNative
+                    TokenImpersonationLevel.Delegation => Interop.NetSecurityNative
                         .GssFlags
                         .GSS_C_DELEG_FLAG,
                     _ => 0,
@@ -292,8 +287,7 @@ namespace System.Net
                     serverOptions.RequiredProtectionLevel switch
                     {
                         ProtectionLevel.Sign => Interop.NetSecurityNative.GssFlags.GSS_C_INTEG_FLAG,
-                        ProtectionLevel.EncryptAndSign => Interop
-                            .NetSecurityNative
+                        ProtectionLevel.EncryptAndSign => Interop.NetSecurityNative
                             .GssFlags
                             .GSS_C_INTEG_FLAG | Interop.NetSecurityNative.GssFlags.GSS_C_CONF_FLAG,
                         _ => 0,
@@ -435,13 +429,14 @@ namespace System.Net
                 {
                     Interop.NetSecurityNative.Status minorStatus;
                     bool encrypt = requestEncryption;
-                    Interop.NetSecurityNative.Status status = Interop.NetSecurityNative.WrapBuffer(
-                        out minorStatus,
-                        _securityContext,
-                        ref encrypt,
-                        input,
-                        ref encryptedBuffer
-                    );
+                    Interop.NetSecurityNative.Status status = Interop.NetSecurityNative
+                        .WrapBuffer(
+                            out minorStatus,
+                            _securityContext,
+                            ref encrypt,
+                            input,
+                            ref encryptedBuffer
+                        );
                     isEncrypted = encrypt;
                     if (status != Interop.NetSecurityNative.Status.GSS_S_COMPLETE)
                     {
@@ -471,8 +466,8 @@ namespace System.Net
                 try
                 {
                     Interop.NetSecurityNative.Status minorStatus;
-                    Interop.NetSecurityNative.Status status =
-                        Interop.NetSecurityNative.UnwrapBuffer(
+                    Interop.NetSecurityNative.Status status = Interop.NetSecurityNative
+                        .UnwrapBuffer(
                             out minorStatus,
                             _securityContext,
                             out wasEncrypted,
@@ -513,8 +508,8 @@ namespace System.Net
                 try
                 {
                     Interop.NetSecurityNative.Status minorStatus;
-                    Interop.NetSecurityNative.Status status =
-                        Interop.NetSecurityNative.UnwrapBuffer(
+                    Interop.NetSecurityNative.Status status = Interop.NetSecurityNative
+                        .UnwrapBuffer(
                             out minorStatus,
                             _securityContext,
                             out wasEncrypted,
@@ -555,12 +550,8 @@ namespace System.Net
                 try
                 {
                     Interop.NetSecurityNative.Status minorStatus;
-                    Interop.NetSecurityNative.Status status = Interop.NetSecurityNative.GetMic(
-                        out minorStatus,
-                        _securityContext,
-                        message,
-                        ref micBuffer
-                    );
+                    Interop.NetSecurityNative.Status status = Interop.NetSecurityNative
+                        .GetMic(out minorStatus, _securityContext, message, ref micBuffer);
                     if (status != Interop.NetSecurityNative.Status.GSS_S_COMPLETE)
                     {
                         throw new Interop.NetSecurityNative.GssApiException(status, minorStatus);
@@ -581,12 +572,8 @@ namespace System.Net
             {
                 Debug.Assert(_securityContext is not null);
 
-                Interop.NetSecurityNative.Status status = Interop.NetSecurityNative.VerifyMic(
-                    out _,
-                    _securityContext,
-                    message,
-                    signature
-                );
+                Interop.NetSecurityNative.Status status = Interop.NetSecurityNative
+                    .VerifyMic(out _, _securityContext, message, signature);
                 return status == Interop.NetSecurityNative.Status.GSS_S_COMPLETE;
             }
 
@@ -681,11 +668,8 @@ namespace System.Net
 
                 try
                 {
-                    Interop.NetSecurityNative.Status status = Interop.NetSecurityNative.GetUser(
-                        out var minorStatus,
-                        context,
-                        ref token
-                    );
+                    Interop.NetSecurityNative.Status status = Interop.NetSecurityNative
+                        .GetUser(out var minorStatus, context, ref token);
 
                     if (status != Interop.NetSecurityNative.Status.GSS_S_COMPLETE)
                     {
@@ -761,35 +745,37 @@ namespace System.Net
                         Debug.Assert(appDataOffset < channelBinding.Size);
                         IntPtr cbtAppData = channelBinding.DangerousGetHandle() + appDataOffset;
                         int cbtAppDataSize = channelBinding.Size - appDataOffset;
-                        status = Interop.NetSecurityNative.InitSecContext(
-                            out minorStatus,
-                            credentialsHandle,
-                            ref contextHandle,
-                            _packageType,
-                            cbtAppData,
-                            cbtAppDataSize,
-                            targetNameHandle,
-                            (uint)requestedContextFlags,
-                            incomingBlob,
-                            ref token,
-                            out outputFlags,
-                            out isNtlmUsed
-                        );
+                        status = Interop.NetSecurityNative
+                            .InitSecContext(
+                                out minorStatus,
+                                credentialsHandle,
+                                ref contextHandle,
+                                _packageType,
+                                cbtAppData,
+                                cbtAppDataSize,
+                                targetNameHandle,
+                                (uint)requestedContextFlags,
+                                incomingBlob,
+                                ref token,
+                                out outputFlags,
+                                out isNtlmUsed
+                            );
                     }
                     else
                     {
-                        status = Interop.NetSecurityNative.InitSecContext(
-                            out minorStatus,
-                            credentialsHandle,
-                            ref contextHandle,
-                            _packageType,
-                            targetNameHandle,
-                            (uint)requestedContextFlags,
-                            incomingBlob,
-                            ref token,
-                            out outputFlags,
-                            out isNtlmUsed
-                        );
+                        status = Interop.NetSecurityNative
+                            .InitSecContext(
+                                out minorStatus,
+                                credentialsHandle,
+                                ref contextHandle,
+                                _packageType,
+                                targetNameHandle,
+                                (uint)requestedContextFlags,
+                                incomingBlob,
+                                ref token,
+                                out outputFlags,
+                                out isNtlmUsed
+                            );
                     }
 
                     if (
@@ -870,15 +856,16 @@ namespace System.Net
                 {
                     Interop.NetSecurityNative.Status status;
                     Interop.NetSecurityNative.Status minorStatus;
-                    status = Interop.NetSecurityNative.AcceptSecContext(
-                        out minorStatus,
-                        credentialsHandle,
-                        ref contextHandle,
-                        incomingBlob,
-                        ref token,
-                        out uint outputFlags,
-                        out bool isNtlmUsed
-                    );
+                    status = Interop.NetSecurityNative
+                        .AcceptSecContext(
+                            out minorStatus,
+                            credentialsHandle,
+                            ref contextHandle,
+                            incomingBlob,
+                            ref token,
+                            out uint outputFlags,
+                            out bool isNtlmUsed
+                        );
 
                     if (
                         (status != Interop.NetSecurityNative.Status.GSS_S_COMPLETE)

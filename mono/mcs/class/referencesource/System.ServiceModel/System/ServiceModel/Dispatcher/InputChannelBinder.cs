@@ -51,9 +51,8 @@ namespace System.ServiceModel.Dispatcher
             get
             {
 #pragma warning suppress 56503 // Microsoft, the property is really not implemented, cannot lie, API not public
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new NotImplementedException()
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(new NotImplementedException());
             }
         }
 
@@ -104,9 +103,8 @@ namespace System.ServiceModel.Dispatcher
 
         public void EndSend(IAsyncResult result)
         {
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                new NotImplementedException()
-            );
+            throw DiagnosticUtility.ExceptionUtility
+                .ThrowHelperError(new NotImplementedException());
         }
 
         public void Send(Message message, TimeSpan timeout)
@@ -141,9 +139,8 @@ namespace System.ServiceModel.Dispatcher
 
         public Message EndRequest(IAsyncResult result)
         {
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                new NotImplementedException()
-            );
+            throw DiagnosticUtility.ExceptionUtility
+                .ThrowHelperError(new NotImplementedException());
         }
 
         public Message Request(Message message, TimeSpan timeout)

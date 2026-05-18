@@ -206,9 +206,10 @@ namespace System.ServiceModel.Description
             {
                 if (this.isReadOnly)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(SR.GetString(SR.ObjectIsReadOnly))
-                    );
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(SR.GetString(SR.ObjectIsReadOnly))
+                        );
                 }
 
                 this.securityTokenHandlerCollectionManager = value;
@@ -222,9 +223,10 @@ namespace System.ServiceModel.Description
             {
                 if (this.isReadOnly)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(SR.GetString(SR.ObjectIsReadOnly))
-                    );
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(SR.GetString(SR.ObjectIsReadOnly))
+                        );
                 }
                 this.useIdentityConfiguration = value;
             }
@@ -237,9 +239,10 @@ namespace System.ServiceModel.Description
             {
                 if (this.isReadOnly)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(SR.GetString(SR.ObjectIsReadOnly))
-                    );
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(SR.GetString(SR.ObjectIsReadOnly))
+                        );
                 }
                 this.supportInteractive = value;
             }
@@ -265,15 +268,16 @@ namespace System.ServiceModel.Description
             ClientCredentials result = CloneCore();
             if (result == null || result.GetType() != this.GetType())
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new NotImplementedException(
-                        SR.GetString(
-                            SR.CloneNotImplementedCorrectly,
-                            this.GetType(),
-                            (result != null) ? result.ToString() : "null"
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        new NotImplementedException(
+                            SR.GetString(
+                                SR.CloneNotImplementedCorrectly,
+                                this.GetType(),
+                                (result != null) ? result.ToString() : "null"
+                            )
                         )
-                    )
-                );
+                    );
             }
             return result;
         }
@@ -287,23 +291,23 @@ namespace System.ServiceModel.Description
         {
             if (bindingParameters == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                    "bindingParameters"
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperArgumentNull("bindingParameters");
             }
             // throw if bindingParameters already has a SecurityCredentialsManager
             SecurityCredentialsManager otherCredentialsManager =
                 bindingParameters.Find<SecurityCredentialsManager>();
             if (otherCredentialsManager != null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(
-                        SR.GetString(
-                            SR.MultipleSecurityCredentialsManagersInChannelBindingParameters,
-                            otherCredentialsManager
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(
+                                SR.MultipleSecurityCredentialsManagersInChannelBindingParameters,
+                                otherCredentialsManager
+                            )
                         )
-                    )
-                );
+                    );
             }
             bindingParameters.Add(this);
         }
@@ -313,14 +317,15 @@ namespace System.ServiceModel.Description
             EndpointDispatcher endpointDispatcher
         )
         {
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                new InvalidOperationException(
-                    SR.GetString(
-                        SR.SFXEndpointBehaviorUsedOnWrongSide,
-                        typeof(ClientCredentials).Name
+            throw DiagnosticUtility.ExceptionUtility
+                .ThrowHelperError(
+                    new InvalidOperationException(
+                        SR.GetString(
+                            SR.SFXEndpointBehaviorUsedOnWrongSide,
+                            typeof(ClientCredentials).Name
+                        )
                     )
-                )
-            );
+                );
         }
 
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -341,9 +346,8 @@ namespace System.ServiceModel.Description
                 )
             )
             {
-                behavior.InteractiveChannelInitializers.Add(
-                    new InfocardInteractiveChannelInitializer(this, serviceEndpoint.Binding)
-                );
+                behavior.InteractiveChannelInitializers
+                    .Add(new InfocardInteractiveChannelInitializer(this, serviceEndpoint.Binding));
             }
         }
 
@@ -359,9 +363,8 @@ namespace System.ServiceModel.Description
 
             if (serviceEndpoint.Binding == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                    "serviceEndpoint.Binding"
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperArgumentNull("serviceEndpoint.Binding");
             }
 
             if (

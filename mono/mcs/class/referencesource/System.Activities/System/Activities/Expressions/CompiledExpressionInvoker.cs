@@ -62,10 +62,8 @@ namespace System.Activities.Expressions
 
             if (this.expressionActivity == null)
             {
-                throw FxTrace.Exception.Argument(
-                    "expression",
-                    SR.ITextExpressionParameterMustBeActivity
-                );
+                throw FxTrace.Exception
+                    .Argument("expression", SR.ITextExpressionParameterMustBeActivity);
             }
 
             ActivityWithResult resultActivity = this.expressionActivity as ActivityWithResult;
@@ -100,22 +98,20 @@ namespace System.Activities.Expressions
                         )
                     )
                     {
-                        throw FxTrace.Exception.AsError(
-                            new NotSupportedException(
-                                SR.TextExpressionMetadataRequiresCompilation(
-                                    this.expressionActivity.GetType().Name
+                        throw FxTrace.Exception
+                            .AsError(
+                                new NotSupportedException(
+                                    SR.TextExpressionMetadataRequiresCompilation(
+                                        this.expressionActivity.GetType().Name
+                                    )
                                 )
-                            )
-                        );
+                            );
                     }
                 }
             }
 
-            return this.compiledRoot.InvokeExpression(
-                this.expressionId,
-                this.locationReferences,
-                activityContext
-            );
+            return this.compiledRoot
+                .InvokeExpression(this.expressionId, this.locationReferences, activityContext);
         }
 
         //
@@ -264,10 +260,8 @@ namespace System.Activities.Expressions
                 }
             }
 
-            return this.compiledRoot.GetExpressionTreeForExpression(
-                this.expressionId,
-                this.locationReferences
-            );
+            return this.compiledRoot
+                .GetExpressionTreeForExpression(this.expressionId, this.locationReferences);
         }
 
         bool TryGetCurrentCompiledExpressionRoot(
@@ -348,9 +342,10 @@ namespace System.Activities.Expressions
                         this.accessor.CreateLocationArgument(reference, false);
                     }
 
-                    this.locationReferences.Add(
-                        new InlinedLocationReference(reference, this.metadata.CurrentActivity)
-                    );
+                    this.locationReferences
+                        .Add(
+                            new InlinedLocationReference(reference, this.metadata.CurrentActivity)
+                        );
                 }
             }
 
@@ -379,9 +374,8 @@ namespace System.Activities.Expressions
                 // generates auto arguments only for locations that are referenced.
                 if (!this.textExpression.RequiresCompilation)
                 {
-                    IList<string> requiredLocationNames = this.compiledRoot.GetRequiredLocations(
-                        this.expressionId
-                    );
+                    IList<string> requiredLocationNames = this.compiledRoot
+                        .GetRequiredLocations(this.expressionId);
                     this.CreateRequiredArguments(requiredLocationNames);
                 }
             }

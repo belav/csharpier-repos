@@ -90,16 +90,17 @@ namespace System.Data.Linq.SqlClient
                     ConvertColumnsToMax(select, out changed, out containsLongExpressions);
                     if (containsLongExpressions)
                     {
-                        this.annotations.Add(
-                            select,
-                            new SqlServerCompatibilityAnnotation(
-                                Strings.TextNTextAndImageCannotOccurInDistinct(
-                                    select.SourceExpression
-                                ),
-                                SqlProvider.ProviderMode.Sql2000,
-                                SqlProvider.ProviderMode.SqlCE
-                            )
-                        );
+                        this.annotations
+                            .Add(
+                                select,
+                                new SqlServerCompatibilityAnnotation(
+                                    Strings.TextNTextAndImageCannotOccurInDistinct(
+                                        select.SourceExpression
+                                    ),
+                                    SqlProvider.ProviderMode.Sql2000,
+                                    SqlProvider.ProviderMode.SqlCE
+                                )
+                            );
                     }
                 }
                 return base.VisitSelect(select);
@@ -125,14 +126,15 @@ namespace System.Data.Linq.SqlClient
                 {
                     // unless the UNION is 'ALL', the server will perform a DISTINCT operation,
                     // which isn't valid for large types (text, ntext, image)
-                    this.annotations.Add(
-                        su,
-                        new SqlServerCompatibilityAnnotation(
-                            Strings.TextNTextAndImageCannotOccurInUnion(su.SourceExpression),
-                            SqlProvider.ProviderMode.Sql2000,
-                            SqlProvider.ProviderMode.SqlCE
-                        )
-                    );
+                    this.annotations
+                        .Add(
+                            su,
+                            new SqlServerCompatibilityAnnotation(
+                                Strings.TextNTextAndImageCannotOccurInUnion(su.SourceExpression),
+                                SqlProvider.ProviderMode.Sql2000,
+                                SqlProvider.ProviderMode.SqlCE
+                            )
+                        );
                 }
                 return base.VisitUnion(su);
             }
@@ -145,13 +147,14 @@ namespace System.Data.Linq.SqlClient
                     fc.Arguments[0] = ConvertToMax(fc.Arguments[0], out changed);
                     if (fc.Arguments[0].SqlType.IsLargeType)
                     {
-                        this.annotations.Add(
-                            fc,
-                            new SqlServerCompatibilityAnnotation(
-                                Strings.LenOfTextOrNTextNotSupported(fc.SourceExpression),
-                                SqlProvider.ProviderMode.Sql2000
-                            )
-                        );
+                        this.annotations
+                            .Add(
+                                fc,
+                                new SqlServerCompatibilityAnnotation(
+                                    Strings.LenOfTextOrNTextNotSupported(fc.SourceExpression),
+                                    SqlProvider.ProviderMode.Sql2000
+                                )
+                            );
                     }
                 }
                 return base.VisitFunctionCall(fc);

@@ -148,8 +148,8 @@ public static class RelationalKeyExtensions
             // Using a hashset is detrimental to the perf when there are no cycles
             for (var i = 0; i < RelationalEntityTypeExtensions.MaxEntityTypesSharingTable; i++)
             {
-                var linkingFk = rootKey!
-                    .DeclaringEntityType.FindRowInternalForeignKeys(storeObject)
+                var linkingFk = rootKey!.DeclaringEntityType
+                    .FindRowInternalForeignKeys(storeObject)
                     .FirstOrDefault();
                 if (linkingFk == null)
                 {
@@ -175,8 +175,8 @@ public static class RelationalKeyExtensions
                 {
                     var table = storeObject;
                     if (
-                        key
-                            .DeclaringEntityType.GetMappingFragments(StoreObjectType.Table)
+                        key.DeclaringEntityType
+                            .GetMappingFragments(StoreObjectType.Table)
                             .Any(t =>
                                 t.StoreObject != table
                                 && key.Properties.GetColumnNames(t.StoreObject) != null
@@ -189,7 +189,8 @@ public static class RelationalKeyExtensions
                     if (
                         key.DeclaringEntityType.GetMappingStrategy()
                             != RelationalAnnotationNames.TphMappingStrategy
-                        && key.DeclaringEntityType.GetDerivedTypes()
+                        && key.DeclaringEntityType
+                            .GetDerivedTypes()
                             .Select(e => StoreObjectIdentifier.Create(e, StoreObjectType.Table))
                             .Any(t => t != null && key.Properties.GetColumnNames(t.Value) != null)
                     )
@@ -211,8 +212,8 @@ public static class RelationalKeyExtensions
             {
                 IReadOnlyKey? linkedKey = null;
                 foreach (
-                    var otherKey in rootKey
-                        .DeclaringEntityType.FindRowInternalForeignKeys(storeObject)
+                    var otherKey in rootKey.DeclaringEntityType
+                        .FindRowInternalForeignKeys(storeObject)
                         .SelectMany(fk => fk.PrincipalEntityType.GetKeys())
                 )
                 {

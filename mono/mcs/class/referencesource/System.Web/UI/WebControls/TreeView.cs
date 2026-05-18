@@ -388,42 +388,44 @@ namespace System.Web.UI.WebControls
                     {
                         case TreeViewImageSet.Arrows:
                         {
-                            _cachedCollapseImageUrl = Page.ClientScript.GetWebResourceUrl(
-                                typeof(TreeView),
-                                "TreeView_Arrows_Collapse.gif"
-                            );
+                            _cachedCollapseImageUrl = Page.ClientScript
+                                .GetWebResourceUrl(
+                                    typeof(TreeView),
+                                    "TreeView_Arrows_Collapse.gif"
+                                );
                             break;
                         }
                         case TreeViewImageSet.Contacts:
                         {
-                            _cachedCollapseImageUrl = Page.ClientScript.GetWebResourceUrl(
-                                typeof(TreeView),
-                                "TreeView_Contacts_Collapse.gif"
-                            );
+                            _cachedCollapseImageUrl = Page.ClientScript
+                                .GetWebResourceUrl(
+                                    typeof(TreeView),
+                                    "TreeView_Contacts_Collapse.gif"
+                                );
                             break;
                         }
                         case TreeViewImageSet.XPFileExplorer:
                         {
-                            _cachedCollapseImageUrl = Page.ClientScript.GetWebResourceUrl(
-                                typeof(TreeView),
-                                "TreeView_XP_Explorer_Collapse.gif"
-                            );
+                            _cachedCollapseImageUrl = Page.ClientScript
+                                .GetWebResourceUrl(
+                                    typeof(TreeView),
+                                    "TreeView_XP_Explorer_Collapse.gif"
+                                );
                             break;
                         }
                         case TreeViewImageSet.Msdn:
                         {
-                            _cachedCollapseImageUrl = Page.ClientScript.GetWebResourceUrl(
-                                typeof(TreeView),
-                                "TreeView_MSDN_Collapse.gif"
-                            );
+                            _cachedCollapseImageUrl = Page.ClientScript
+                                .GetWebResourceUrl(typeof(TreeView), "TreeView_MSDN_Collapse.gif");
                             break;
                         }
                         case TreeViewImageSet.WindowsHelp:
                         {
-                            _cachedCollapseImageUrl = Page.ClientScript.GetWebResourceUrl(
-                                typeof(TreeView),
-                                "TreeView_Windows_Help_Collapse.gif"
-                            );
+                            _cachedCollapseImageUrl = Page.ClientScript
+                                .GetWebResourceUrl(
+                                    typeof(TreeView),
+                                    "TreeView_Windows_Help_Collapse.gif"
+                                );
                             break;
                         }
                         case TreeViewImageSet.Custom:
@@ -572,42 +574,41 @@ namespace System.Web.UI.WebControls
                     {
                         case TreeViewImageSet.Arrows:
                         {
-                            _cachedExpandImageUrl = Page.ClientScript.GetWebResourceUrl(
-                                typeof(TreeView),
-                                "TreeView_Arrows_Expand.gif"
-                            );
+                            _cachedExpandImageUrl = Page.ClientScript
+                                .GetWebResourceUrl(typeof(TreeView), "TreeView_Arrows_Expand.gif");
                             break;
                         }
                         case TreeViewImageSet.Contacts:
                         {
-                            _cachedExpandImageUrl = Page.ClientScript.GetWebResourceUrl(
-                                typeof(TreeView),
-                                "TreeView_Contacts_Expand.gif"
-                            );
+                            _cachedExpandImageUrl = Page.ClientScript
+                                .GetWebResourceUrl(
+                                    typeof(TreeView),
+                                    "TreeView_Contacts_Expand.gif"
+                                );
                             break;
                         }
                         case TreeViewImageSet.XPFileExplorer:
                         {
-                            _cachedExpandImageUrl = Page.ClientScript.GetWebResourceUrl(
-                                typeof(TreeView),
-                                "TreeView_XP_Explorer_Expand.gif"
-                            );
+                            _cachedExpandImageUrl = Page.ClientScript
+                                .GetWebResourceUrl(
+                                    typeof(TreeView),
+                                    "TreeView_XP_Explorer_Expand.gif"
+                                );
                             break;
                         }
                         case TreeViewImageSet.Msdn:
                         {
-                            _cachedExpandImageUrl = Page.ClientScript.GetWebResourceUrl(
-                                typeof(TreeView),
-                                "TreeView_MSDN_Expand.gif"
-                            );
+                            _cachedExpandImageUrl = Page.ClientScript
+                                .GetWebResourceUrl(typeof(TreeView), "TreeView_MSDN_Expand.gif");
                             break;
                         }
                         case TreeViewImageSet.WindowsHelp:
                         {
-                            _cachedExpandImageUrl = Page.ClientScript.GetWebResourceUrl(
-                                typeof(TreeView),
-                                "TreeView_Windows_Help_Expand.gif"
-                            );
+                            _cachedExpandImageUrl = Page.ClientScript
+                                .GetWebResourceUrl(
+                                    typeof(TreeView),
+                                    "TreeView_Windows_Help_Expand.gif"
+                                );
                             break;
                         }
                         case TreeViewImageSet.Custom:
@@ -891,58 +892,62 @@ namespace System.Web.UI.WebControls
                     {
                         case TreeViewImageSet.Simple:
                         {
-                            _cachedNoExpandImageUrl = Page.ClientScript.GetWebResourceUrl(
-                                typeof(TreeView),
-                                "TreeView_Simple_NoExpand.gif"
-                            );
+                            _cachedNoExpandImageUrl = Page.ClientScript
+                                .GetWebResourceUrl(
+                                    typeof(TreeView),
+                                    "TreeView_Simple_NoExpand.gif"
+                                );
                             break;
                         }
                         case TreeViewImageSet.Simple2:
                         {
-                            _cachedNoExpandImageUrl = Page.ClientScript.GetWebResourceUrl(
-                                typeof(TreeView),
-                                "TreeView_Simple2_NoExpand.gif"
-                            );
+                            _cachedNoExpandImageUrl = Page.ClientScript
+                                .GetWebResourceUrl(
+                                    typeof(TreeView),
+                                    "TreeView_Simple2_NoExpand.gif"
+                                );
                             break;
                         }
                         case TreeViewImageSet.Arrows:
                         {
-                            _cachedNoExpandImageUrl = Page.ClientScript.GetWebResourceUrl(
-                                typeof(TreeView),
-                                "TreeView_Arrows_NoExpand.gif"
-                            );
+                            _cachedNoExpandImageUrl = Page.ClientScript
+                                .GetWebResourceUrl(
+                                    typeof(TreeView),
+                                    "TreeView_Arrows_NoExpand.gif"
+                                );
                             break;
                         }
                         case TreeViewImageSet.Contacts:
                         {
-                            _cachedNoExpandImageUrl = Page.ClientScript.GetWebResourceUrl(
-                                typeof(TreeView),
-                                "TreeView_Contacts_NoExpand.gif"
-                            );
+                            _cachedNoExpandImageUrl = Page.ClientScript
+                                .GetWebResourceUrl(
+                                    typeof(TreeView),
+                                    "TreeView_Contacts_NoExpand.gif"
+                                );
                             break;
                         }
                         case TreeViewImageSet.XPFileExplorer:
                         {
-                            _cachedNoExpandImageUrl = Page.ClientScript.GetWebResourceUrl(
-                                typeof(TreeView),
-                                "TreeView_XP_Explorer_NoExpand.gif"
-                            );
+                            _cachedNoExpandImageUrl = Page.ClientScript
+                                .GetWebResourceUrl(
+                                    typeof(TreeView),
+                                    "TreeView_XP_Explorer_NoExpand.gif"
+                                );
                             break;
                         }
                         case TreeViewImageSet.Msdn:
                         {
-                            _cachedNoExpandImageUrl = Page.ClientScript.GetWebResourceUrl(
-                                typeof(TreeView),
-                                "TreeView_MSDN_NoExpand.gif"
-                            );
+                            _cachedNoExpandImageUrl = Page.ClientScript
+                                .GetWebResourceUrl(typeof(TreeView), "TreeView_MSDN_NoExpand.gif");
                             break;
                         }
                         case TreeViewImageSet.WindowsHelp:
                         {
-                            _cachedNoExpandImageUrl = Page.ClientScript.GetWebResourceUrl(
-                                typeof(TreeView),
-                                "TreeView_Windows_Help_NoExpand.gif"
-                            );
+                            _cachedNoExpandImageUrl = Page.ClientScript
+                                .GetWebResourceUrl(
+                                    typeof(TreeView),
+                                    "TreeView_Windows_Help_NoExpand.gif"
+                                );
                             break;
                         }
                         case TreeViewImageSet.Custom:
@@ -2295,74 +2300,83 @@ namespace System.Web.UI.WebControls
                             {
                                 case TreeViewImageSet.BulletedList:
                                 {
-                                    rootNodeImageUrl = Page.ClientScript.GetWebResourceUrl(
-                                        typeof(TreeView),
-                                        "TreeView_BulletedList_RootNode.gif"
-                                    );
+                                    rootNodeImageUrl = Page.ClientScript
+                                        .GetWebResourceUrl(
+                                            typeof(TreeView),
+                                            "TreeView_BulletedList_RootNode.gif"
+                                        );
                                     break;
                                 }
                                 case TreeViewImageSet.BulletedList2:
                                 {
-                                    rootNodeImageUrl = Page.ClientScript.GetWebResourceUrl(
-                                        typeof(TreeView),
-                                        "TreeView_BulletedList2_RootNode.gif"
-                                    );
+                                    rootNodeImageUrl = Page.ClientScript
+                                        .GetWebResourceUrl(
+                                            typeof(TreeView),
+                                            "TreeView_BulletedList2_RootNode.gif"
+                                        );
                                     break;
                                 }
                                 case TreeViewImageSet.BulletedList3:
                                 {
-                                    rootNodeImageUrl = Page.ClientScript.GetWebResourceUrl(
-                                        typeof(TreeView),
-                                        "TreeView_BulletedList3_RootNode.gif"
-                                    );
+                                    rootNodeImageUrl = Page.ClientScript
+                                        .GetWebResourceUrl(
+                                            typeof(TreeView),
+                                            "TreeView_BulletedList3_RootNode.gif"
+                                        );
                                     break;
                                 }
                                 case TreeViewImageSet.BulletedList4:
                                 {
-                                    rootNodeImageUrl = Page.ClientScript.GetWebResourceUrl(
-                                        typeof(TreeView),
-                                        "TreeView_BulletedList4_RootNode.gif"
-                                    );
+                                    rootNodeImageUrl = Page.ClientScript
+                                        .GetWebResourceUrl(
+                                            typeof(TreeView),
+                                            "TreeView_BulletedList4_RootNode.gif"
+                                        );
                                     break;
                                 }
                                 case TreeViewImageSet.News:
                                 {
-                                    rootNodeImageUrl = Page.ClientScript.GetWebResourceUrl(
-                                        typeof(TreeView),
-                                        "TreeView_News_RootNode.gif"
-                                    );
+                                    rootNodeImageUrl = Page.ClientScript
+                                        .GetWebResourceUrl(
+                                            typeof(TreeView),
+                                            "TreeView_News_RootNode.gif"
+                                        );
                                     break;
                                 }
                                 case TreeViewImageSet.Inbox:
                                 {
-                                    rootNodeImageUrl = Page.ClientScript.GetWebResourceUrl(
-                                        typeof(TreeView),
-                                        "TreeView_Inbox_RootNode.gif"
-                                    );
+                                    rootNodeImageUrl = Page.ClientScript
+                                        .GetWebResourceUrl(
+                                            typeof(TreeView),
+                                            "TreeView_Inbox_RootNode.gif"
+                                        );
                                     break;
                                 }
                                 case TreeViewImageSet.Events:
                                 {
-                                    rootNodeImageUrl = Page.ClientScript.GetWebResourceUrl(
-                                        typeof(TreeView),
-                                        "TreeView_Events_RootNode.gif"
-                                    );
+                                    rootNodeImageUrl = Page.ClientScript
+                                        .GetWebResourceUrl(
+                                            typeof(TreeView),
+                                            "TreeView_Events_RootNode.gif"
+                                        );
                                     break;
                                 }
                                 case TreeViewImageSet.Faq:
                                 {
-                                    rootNodeImageUrl = Page.ClientScript.GetWebResourceUrl(
-                                        typeof(TreeView),
-                                        "TreeView_FAQ_RootNode.gif"
-                                    );
+                                    rootNodeImageUrl = Page.ClientScript
+                                        .GetWebResourceUrl(
+                                            typeof(TreeView),
+                                            "TreeView_FAQ_RootNode.gif"
+                                        );
                                     break;
                                 }
                                 case TreeViewImageSet.XPFileExplorer:
                                 {
-                                    rootNodeImageUrl = Page.ClientScript.GetWebResourceUrl(
-                                        typeof(TreeView),
-                                        "TreeView_XP_Explorer_RootNode.gif"
-                                    );
+                                    rootNodeImageUrl = Page.ClientScript
+                                        .GetWebResourceUrl(
+                                            typeof(TreeView),
+                                            "TreeView_XP_Explorer_RootNode.gif"
+                                        );
                                     break;
                                 }
                             }
@@ -2386,74 +2400,83 @@ namespace System.Web.UI.WebControls
                             {
                                 case TreeViewImageSet.BulletedList:
                                 {
-                                    parentNodeImageUrl = Page.ClientScript.GetWebResourceUrl(
-                                        typeof(TreeView),
-                                        "TreeView_BulletedList_ParentNode.gif"
-                                    );
+                                    parentNodeImageUrl = Page.ClientScript
+                                        .GetWebResourceUrl(
+                                            typeof(TreeView),
+                                            "TreeView_BulletedList_ParentNode.gif"
+                                        );
                                     break;
                                 }
                                 case TreeViewImageSet.BulletedList2:
                                 {
-                                    parentNodeImageUrl = Page.ClientScript.GetWebResourceUrl(
-                                        typeof(TreeView),
-                                        "TreeView_BulletedList2_ParentNode.gif"
-                                    );
+                                    parentNodeImageUrl = Page.ClientScript
+                                        .GetWebResourceUrl(
+                                            typeof(TreeView),
+                                            "TreeView_BulletedList2_ParentNode.gif"
+                                        );
                                     break;
                                 }
                                 case TreeViewImageSet.BulletedList3:
                                 {
-                                    parentNodeImageUrl = Page.ClientScript.GetWebResourceUrl(
-                                        typeof(TreeView),
-                                        "TreeView_BulletedList3_ParentNode.gif"
-                                    );
+                                    parentNodeImageUrl = Page.ClientScript
+                                        .GetWebResourceUrl(
+                                            typeof(TreeView),
+                                            "TreeView_BulletedList3_ParentNode.gif"
+                                        );
                                     break;
                                 }
                                 case TreeViewImageSet.BulletedList4:
                                 {
-                                    parentNodeImageUrl = Page.ClientScript.GetWebResourceUrl(
-                                        typeof(TreeView),
-                                        "TreeView_BulletedList4_ParentNode.gif"
-                                    );
+                                    parentNodeImageUrl = Page.ClientScript
+                                        .GetWebResourceUrl(
+                                            typeof(TreeView),
+                                            "TreeView_BulletedList4_ParentNode.gif"
+                                        );
                                     break;
                                 }
                                 case TreeViewImageSet.News:
                                 {
-                                    parentNodeImageUrl = Page.ClientScript.GetWebResourceUrl(
-                                        typeof(TreeView),
-                                        "TreeView_News_ParentNode.gif"
-                                    );
+                                    parentNodeImageUrl = Page.ClientScript
+                                        .GetWebResourceUrl(
+                                            typeof(TreeView),
+                                            "TreeView_News_ParentNode.gif"
+                                        );
                                     break;
                                 }
                                 case TreeViewImageSet.Inbox:
                                 {
-                                    parentNodeImageUrl = Page.ClientScript.GetWebResourceUrl(
-                                        typeof(TreeView),
-                                        "TreeView_Inbox_ParentNode.gif"
-                                    );
+                                    parentNodeImageUrl = Page.ClientScript
+                                        .GetWebResourceUrl(
+                                            typeof(TreeView),
+                                            "TreeView_Inbox_ParentNode.gif"
+                                        );
                                     break;
                                 }
                                 case TreeViewImageSet.Events:
                                 {
-                                    parentNodeImageUrl = Page.ClientScript.GetWebResourceUrl(
-                                        typeof(TreeView),
-                                        "TreeView_Events_ParentNode.gif"
-                                    );
+                                    parentNodeImageUrl = Page.ClientScript
+                                        .GetWebResourceUrl(
+                                            typeof(TreeView),
+                                            "TreeView_Events_ParentNode.gif"
+                                        );
                                     break;
                                 }
                                 case TreeViewImageSet.Faq:
                                 {
-                                    parentNodeImageUrl = Page.ClientScript.GetWebResourceUrl(
-                                        typeof(TreeView),
-                                        "TreeView_FAQ_ParentNode.gif"
-                                    );
+                                    parentNodeImageUrl = Page.ClientScript
+                                        .GetWebResourceUrl(
+                                            typeof(TreeView),
+                                            "TreeView_FAQ_ParentNode.gif"
+                                        );
                                     break;
                                 }
                                 case TreeViewImageSet.XPFileExplorer:
                                 {
-                                    parentNodeImageUrl = Page.ClientScript.GetWebResourceUrl(
-                                        typeof(TreeView),
-                                        "TreeView_XP_Explorer_ParentNode.gif"
-                                    );
+                                    parentNodeImageUrl = Page.ClientScript
+                                        .GetWebResourceUrl(
+                                            typeof(TreeView),
+                                            "TreeView_XP_Explorer_ParentNode.gif"
+                                        );
                                     break;
                                 }
                             }
@@ -2477,74 +2500,83 @@ namespace System.Web.UI.WebControls
                             {
                                 case TreeViewImageSet.BulletedList:
                                 {
-                                    leafNodeImageUrl = Page.ClientScript.GetWebResourceUrl(
-                                        typeof(TreeView),
-                                        "TreeView_BulletedList_LeafNode.gif"
-                                    );
+                                    leafNodeImageUrl = Page.ClientScript
+                                        .GetWebResourceUrl(
+                                            typeof(TreeView),
+                                            "TreeView_BulletedList_LeafNode.gif"
+                                        );
                                     break;
                                 }
                                 case TreeViewImageSet.BulletedList2:
                                 {
-                                    leafNodeImageUrl = Page.ClientScript.GetWebResourceUrl(
-                                        typeof(TreeView),
-                                        "TreeView_BulletedList2_LeafNode.gif"
-                                    );
+                                    leafNodeImageUrl = Page.ClientScript
+                                        .GetWebResourceUrl(
+                                            typeof(TreeView),
+                                            "TreeView_BulletedList2_LeafNode.gif"
+                                        );
                                     break;
                                 }
                                 case TreeViewImageSet.BulletedList3:
                                 {
-                                    leafNodeImageUrl = Page.ClientScript.GetWebResourceUrl(
-                                        typeof(TreeView),
-                                        "TreeView_BulletedList3_LeafNode.gif"
-                                    );
+                                    leafNodeImageUrl = Page.ClientScript
+                                        .GetWebResourceUrl(
+                                            typeof(TreeView),
+                                            "TreeView_BulletedList3_LeafNode.gif"
+                                        );
                                     break;
                                 }
                                 case TreeViewImageSet.BulletedList4:
                                 {
-                                    leafNodeImageUrl = Page.ClientScript.GetWebResourceUrl(
-                                        typeof(TreeView),
-                                        "TreeView_BulletedList4_LeafNode.gif"
-                                    );
+                                    leafNodeImageUrl = Page.ClientScript
+                                        .GetWebResourceUrl(
+                                            typeof(TreeView),
+                                            "TreeView_BulletedList4_LeafNode.gif"
+                                        );
                                     break;
                                 }
                                 case TreeViewImageSet.News:
                                 {
-                                    leafNodeImageUrl = Page.ClientScript.GetWebResourceUrl(
-                                        typeof(TreeView),
-                                        "TreeView_News_LeafNode.gif"
-                                    );
+                                    leafNodeImageUrl = Page.ClientScript
+                                        .GetWebResourceUrl(
+                                            typeof(TreeView),
+                                            "TreeView_News_LeafNode.gif"
+                                        );
                                     break;
                                 }
                                 case TreeViewImageSet.Inbox:
                                 {
-                                    leafNodeImageUrl = Page.ClientScript.GetWebResourceUrl(
-                                        typeof(TreeView),
-                                        "TreeView_Inbox_LeafNode.gif"
-                                    );
+                                    leafNodeImageUrl = Page.ClientScript
+                                        .GetWebResourceUrl(
+                                            typeof(TreeView),
+                                            "TreeView_Inbox_LeafNode.gif"
+                                        );
                                     break;
                                 }
                                 case TreeViewImageSet.Events:
                                 {
-                                    leafNodeImageUrl = Page.ClientScript.GetWebResourceUrl(
-                                        typeof(TreeView),
-                                        "TreeView_Events_LeafNode.gif"
-                                    );
+                                    leafNodeImageUrl = Page.ClientScript
+                                        .GetWebResourceUrl(
+                                            typeof(TreeView),
+                                            "TreeView_Events_LeafNode.gif"
+                                        );
                                     break;
                                 }
                                 case TreeViewImageSet.Faq:
                                 {
-                                    leafNodeImageUrl = Page.ClientScript.GetWebResourceUrl(
-                                        typeof(TreeView),
-                                        "TreeView_FAQ_LeafNode.gif"
-                                    );
+                                    leafNodeImageUrl = Page.ClientScript
+                                        .GetWebResourceUrl(
+                                            typeof(TreeView),
+                                            "TreeView_FAQ_LeafNode.gif"
+                                        );
                                     break;
                                 }
                                 case TreeViewImageSet.XPFileExplorer:
                                 {
-                                    leafNodeImageUrl = Page.ClientScript.GetWebResourceUrl(
-                                        typeof(TreeView),
-                                        "TreeView_XP_Explorer_LeafNode.gif"
-                                    );
+                                    leafNodeImageUrl = Page.ClientScript
+                                        .GetWebResourceUrl(
+                                            typeof(TreeView),
+                                            "TreeView_XP_Explorer_LeafNode.gif"
+                                        );
                                     break;
                                 }
                             }
@@ -2561,10 +2593,11 @@ namespace System.Web.UI.WebControls
                         {
                             if (LineImagesFolder.Length == 0)
                             {
-                                ImageUrls[index] = Page.ClientScript.GetWebResourceUrl(
-                                    typeof(TreeView),
-                                    "TreeView_Default_NoExpand.gif"
-                                );
+                                ImageUrls[index] = Page.ClientScript
+                                    .GetWebResourceUrl(
+                                        typeof(TreeView),
+                                        "TreeView_Default_NoExpand.gif"
+                                    );
                             }
                             else
                             {
@@ -2587,10 +2620,11 @@ namespace System.Web.UI.WebControls
                             }
                             else
                             {
-                                ImageUrls[index] = Page.ClientScript.GetWebResourceUrl(
-                                    typeof(TreeView),
-                                    "TreeView_Default_NoExpand.gif"
-                                );
+                                ImageUrls[index] = Page.ClientScript
+                                    .GetWebResourceUrl(
+                                        typeof(TreeView),
+                                        "TreeView_Default_NoExpand.gif"
+                                    );
                             }
                         }
                         break;
@@ -2600,10 +2634,11 @@ namespace System.Web.UI.WebControls
                         {
                             if (LineImagesFolder.Length == 0)
                             {
-                                ImageUrls[index] = Page.ClientScript.GetWebResourceUrl(
-                                    typeof(TreeView),
-                                    "TreeView_Default_Expand.gif"
-                                );
+                                ImageUrls[index] = Page.ClientScript
+                                    .GetWebResourceUrl(
+                                        typeof(TreeView),
+                                        "TreeView_Default_Expand.gif"
+                                    );
                             }
                             else
                             {
@@ -2626,10 +2661,11 @@ namespace System.Web.UI.WebControls
                             }
                             else
                             {
-                                ImageUrls[index] = Page.ClientScript.GetWebResourceUrl(
-                                    typeof(TreeView),
-                                    "TreeView_Default_Expand.gif"
-                                );
+                                ImageUrls[index] = Page.ClientScript
+                                    .GetWebResourceUrl(
+                                        typeof(TreeView),
+                                        "TreeView_Default_Expand.gif"
+                                    );
                             }
                         }
                         break;
@@ -2638,10 +2674,11 @@ namespace System.Web.UI.WebControls
                         {
                             if (LineImagesFolder.Length == 0)
                             {
-                                ImageUrls[index] = Page.ClientScript.GetWebResourceUrl(
-                                    typeof(TreeView),
-                                    "TreeView_Default_Collapse.gif"
-                                );
+                                ImageUrls[index] = Page.ClientScript
+                                    .GetWebResourceUrl(
+                                        typeof(TreeView),
+                                        "TreeView_Default_Collapse.gif"
+                                    );
                             }
                             else
                             {
@@ -2664,20 +2701,19 @@ namespace System.Web.UI.WebControls
                             }
                             else
                             {
-                                ImageUrls[index] = Page.ClientScript.GetWebResourceUrl(
-                                    typeof(TreeView),
-                                    "TreeView_Default_Collapse.gif"
-                                );
+                                ImageUrls[index] = Page.ClientScript
+                                    .GetWebResourceUrl(
+                                        typeof(TreeView),
+                                        "TreeView_Default_Collapse.gif"
+                                    );
                             }
                         }
                         break;
                     case IImageIndex:
                         if (LineImagesFolder.Length == 0)
                         {
-                            ImageUrls[index] = Page.ClientScript.GetWebResourceUrl(
-                                typeof(TreeView),
-                                "TreeView_Default_I.gif"
-                            );
+                            ImageUrls[index] = Page.ClientScript
+                                .GetWebResourceUrl(typeof(TreeView), "TreeView_Default_I.gif");
                         }
                         else
                         {
@@ -2689,10 +2725,8 @@ namespace System.Web.UI.WebControls
                     case RImageIndex:
                         if (LineImagesFolder.Length == 0)
                         {
-                            ImageUrls[index] = Page.ClientScript.GetWebResourceUrl(
-                                typeof(TreeView),
-                                "TreeView_Default_R.gif"
-                            );
+                            ImageUrls[index] = Page.ClientScript
+                                .GetWebResourceUrl(typeof(TreeView), "TreeView_Default_R.gif");
                         }
                         else
                         {
@@ -2704,10 +2738,11 @@ namespace System.Web.UI.WebControls
                     case RPlusImageIndex:
                         if (LineImagesFolder.Length == 0)
                         {
-                            ImageUrls[index] = Page.ClientScript.GetWebResourceUrl(
-                                typeof(TreeView),
-                                "TreeView_Default_RExpand.gif"
-                            );
+                            ImageUrls[index] = Page.ClientScript
+                                .GetWebResourceUrl(
+                                    typeof(TreeView),
+                                    "TreeView_Default_RExpand.gif"
+                                );
                         }
                         else
                         {
@@ -2719,10 +2754,11 @@ namespace System.Web.UI.WebControls
                     case RMinusImageIndex:
                         if (LineImagesFolder.Length == 0)
                         {
-                            ImageUrls[index] = Page.ClientScript.GetWebResourceUrl(
-                                typeof(TreeView),
-                                "TreeView_Default_RCollapse.gif"
-                            );
+                            ImageUrls[index] = Page.ClientScript
+                                .GetWebResourceUrl(
+                                    typeof(TreeView),
+                                    "TreeView_Default_RCollapse.gif"
+                                );
                         }
                         else
                         {
@@ -2734,10 +2770,8 @@ namespace System.Web.UI.WebControls
                     case TImageIndex:
                         if (LineImagesFolder.Length == 0)
                         {
-                            ImageUrls[index] = Page.ClientScript.GetWebResourceUrl(
-                                typeof(TreeView),
-                                "TreeView_Default_T.gif"
-                            );
+                            ImageUrls[index] = Page.ClientScript
+                                .GetWebResourceUrl(typeof(TreeView), "TreeView_Default_T.gif");
                         }
                         else
                         {
@@ -2749,10 +2783,11 @@ namespace System.Web.UI.WebControls
                     case TPlusImageIndex:
                         if (LineImagesFolder.Length == 0)
                         {
-                            ImageUrls[index] = Page.ClientScript.GetWebResourceUrl(
-                                typeof(TreeView),
-                                "TreeView_Default_TExpand.gif"
-                            );
+                            ImageUrls[index] = Page.ClientScript
+                                .GetWebResourceUrl(
+                                    typeof(TreeView),
+                                    "TreeView_Default_TExpand.gif"
+                                );
                         }
                         else
                         {
@@ -2764,10 +2799,11 @@ namespace System.Web.UI.WebControls
                     case TMinusImageIndex:
                         if (LineImagesFolder.Length == 0)
                         {
-                            ImageUrls[index] = Page.ClientScript.GetWebResourceUrl(
-                                typeof(TreeView),
-                                "TreeView_Default_TCollapse.gif"
-                            );
+                            ImageUrls[index] = Page.ClientScript
+                                .GetWebResourceUrl(
+                                    typeof(TreeView),
+                                    "TreeView_Default_TCollapse.gif"
+                                );
                         }
                         else
                         {
@@ -2779,10 +2815,8 @@ namespace System.Web.UI.WebControls
                     case LImageIndex:
                         if (LineImagesFolder.Length == 0)
                         {
-                            ImageUrls[index] = Page.ClientScript.GetWebResourceUrl(
-                                typeof(TreeView),
-                                "TreeView_Default_L.gif"
-                            );
+                            ImageUrls[index] = Page.ClientScript
+                                .GetWebResourceUrl(typeof(TreeView), "TreeView_Default_L.gif");
                         }
                         else
                         {
@@ -2794,10 +2828,11 @@ namespace System.Web.UI.WebControls
                     case LPlusImageIndex:
                         if (LineImagesFolder.Length == 0)
                         {
-                            ImageUrls[index] = Page.ClientScript.GetWebResourceUrl(
-                                typeof(TreeView),
-                                "TreeView_Default_LExpand.gif"
-                            );
+                            ImageUrls[index] = Page.ClientScript
+                                .GetWebResourceUrl(
+                                    typeof(TreeView),
+                                    "TreeView_Default_LExpand.gif"
+                                );
                         }
                         else
                         {
@@ -2809,10 +2844,11 @@ namespace System.Web.UI.WebControls
                     case LMinusImageIndex:
                         if (LineImagesFolder.Length == 0)
                         {
-                            ImageUrls[index] = Page.ClientScript.GetWebResourceUrl(
-                                typeof(TreeView),
-                                "TreeView_Default_LCollapse.gif"
-                            );
+                            ImageUrls[index] = Page.ClientScript
+                                .GetWebResourceUrl(
+                                    typeof(TreeView),
+                                    "TreeView_Default_LCollapse.gif"
+                                );
                         }
                         else
                         {
@@ -2824,10 +2860,8 @@ namespace System.Web.UI.WebControls
                     case DashImageIndex:
                         if (LineImagesFolder.Length == 0)
                         {
-                            ImageUrls[index] = Page.ClientScript.GetWebResourceUrl(
-                                typeof(TreeView),
-                                "TreeView_Default_Dash.gif"
-                            );
+                            ImageUrls[index] = Page.ClientScript
+                                .GetWebResourceUrl(typeof(TreeView), "TreeView_Default_Dash.gif");
                         }
                         else
                         {
@@ -2839,10 +2873,11 @@ namespace System.Web.UI.WebControls
                     case DashPlusImageIndex:
                         if (LineImagesFolder.Length == 0)
                         {
-                            ImageUrls[index] = Page.ClientScript.GetWebResourceUrl(
-                                typeof(TreeView),
-                                "TreeView_Default_DashExpand.gif"
-                            );
+                            ImageUrls[index] = Page.ClientScript
+                                .GetWebResourceUrl(
+                                    typeof(TreeView),
+                                    "TreeView_Default_DashExpand.gif"
+                                );
                         }
                         else
                         {
@@ -2854,10 +2889,11 @@ namespace System.Web.UI.WebControls
                     case DashMinusImageIndex:
                         if (LineImagesFolder.Length == 0)
                         {
-                            ImageUrls[index] = Page.ClientScript.GetWebResourceUrl(
-                                typeof(TreeView),
-                                "TreeView_Default_DashCollapse.gif"
-                            );
+                            ImageUrls[index] = Page.ClientScript
+                                .GetWebResourceUrl(
+                                    typeof(TreeView),
+                                    "TreeView_Default_DashCollapse.gif"
+                                );
                         }
                         else
                         {
@@ -3431,8 +3467,7 @@ namespace System.Web.UI.WebControls
                         {
                             className += " ";
                         }
-                        string hyperLinkClassName = _selectedNodeStyle
-                            .HyperLinkStyle
+                        string hyperLinkClassName = _selectedNodeStyle.HyperLinkStyle
                             .RegisteredCssClass;
                         if (hyperLinkClassName.Length > 0)
                         {

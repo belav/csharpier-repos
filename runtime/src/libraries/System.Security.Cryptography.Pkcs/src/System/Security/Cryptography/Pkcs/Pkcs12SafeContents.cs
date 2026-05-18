@@ -267,8 +267,7 @@ namespace System.Security.Cryptography.Pkcs
             }
 
             List<Pkcs12SafeBag> bags;
-            int encryptedValueLength = encryptedData
-                .EncryptedContentInfo
+            int encryptedValueLength = encryptedData.EncryptedContentInfo
                 .EncryptedContent
                 .Value
                 .Length;

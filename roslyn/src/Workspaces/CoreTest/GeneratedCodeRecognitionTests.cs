@@ -136,13 +136,8 @@ generated_code = false
         {
             var projectName = "TestProject";
             var projectId = ProjectId.CreateNewId(projectName);
-            return new AdhocWorkspace()
-                .CurrentSolution.AddProject(
-                    projectId,
-                    projectName,
-                    projectName,
-                    LanguageNames.CSharp
-                )
+            return new AdhocWorkspace().CurrentSolution
+                .AddProject(projectId, projectName, projectName, LanguageNames.CSharp)
                 .GetProject(projectId);
         }
     }

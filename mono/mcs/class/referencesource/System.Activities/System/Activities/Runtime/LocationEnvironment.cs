@@ -564,12 +564,8 @@ namespace System.Activities.Runtime
             if (location.CanBeMapped)
             {
                 this.hasMappableLocations = true;
-                this.MappableObjectManager.Register(
-                    location,
-                    this.Definition,
-                    locationReference,
-                    activityInstance
-                );
+                this.MappableObjectManager
+                    .Register(location, this.Definition, locationReference, activityInstance);
             }
         }
 
@@ -582,9 +578,10 @@ namespace System.Activities.Runtime
         {
             if (isDisposed)
             {
-                throw FxTrace.Exception.AsError(
-                    new ObjectDisposedException(this.GetType().FullName, SR.EnvironmentDisposed)
-                );
+                throw FxTrace.Exception
+                    .AsError(
+                        new ObjectDisposedException(this.GetType().FullName, SR.EnvironmentDisposed)
+                    );
             }
         }
 
@@ -603,23 +600,24 @@ namespace System.Activities.Runtime
                 || map.RuntimeDelegateArgumentCount != actualRuntimeDelegateArgumentCount
             )
             {
-                throw FxTrace.Exception.AsError(
-                    new InstanceUpdateException(
-                        SR.InvalidUpdateMap(
-                            SR.WrongEnvironmentCount(
-                                activity,
-                                map.NewArgumentCount,
-                                map.NewVariableCount,
-                                map.NewPrivateVariableCount,
-                                map.RuntimeDelegateArgumentCount,
-                                activity.RuntimeArguments.Count,
-                                activity.RuntimeVariables.Count,
-                                activity.ImplementationVariables.Count,
-                                actualRuntimeDelegateArgumentCount
+                throw FxTrace.Exception
+                    .AsError(
+                        new InstanceUpdateException(
+                            SR.InvalidUpdateMap(
+                                SR.WrongEnvironmentCount(
+                                    activity,
+                                    map.NewArgumentCount,
+                                    map.NewVariableCount,
+                                    map.NewPrivateVariableCount,
+                                    map.RuntimeDelegateArgumentCount,
+                                    activity.RuntimeArguments.Count,
+                                    activity.RuntimeVariables.Count,
+                                    activity.ImplementationVariables.Count,
+                                    actualRuntimeDelegateArgumentCount
+                                )
                             )
                         )
-                    )
-                );
+                    );
             }
 
             int expectedLocationCount =
@@ -656,21 +654,22 @@ namespace System.Activities.Runtime
 
             if (expectedLocationCount != actualLocationCount)
             {
-                throw FxTrace.Exception.AsError(
-                    new InstanceUpdateException(
-                        SR.InvalidUpdateMap(
-                            SR.WrongOriginalEnvironmentCount(
-                                activity,
-                                map.OldArgumentCount,
-                                map.OldVariableCount,
-                                map.OldPrivateVariableCount,
-                                map.RuntimeDelegateArgumentCount,
-                                expectedLocationCount,
-                                actualLocationCount
+                throw FxTrace.Exception
+                    .AsError(
+                        new InstanceUpdateException(
+                            SR.InvalidUpdateMap(
+                                SR.WrongOriginalEnvironmentCount(
+                                    activity,
+                                    map.OldArgumentCount,
+                                    map.OldVariableCount,
+                                    map.OldPrivateVariableCount,
+                                    map.RuntimeDelegateArgumentCount,
+                                    expectedLocationCount,
+                                    actualLocationCount
+                                )
                             )
                         )
-                    )
-                );
+                    );
             }
 
             Location[] newLocations = null;

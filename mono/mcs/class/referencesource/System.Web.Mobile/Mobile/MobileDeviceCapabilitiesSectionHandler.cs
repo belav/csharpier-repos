@@ -143,11 +143,12 @@ namespace System.Web.Mobile
                         try
                         {
                             evaluator = (MobileCapabilities.EvaluateCapabilitiesDelegate)
-                                MobileCapabilities.EvaluateCapabilitiesDelegate.CreateDelegate(
-                                    typeof(MobileCapabilities.EvaluateCapabilitiesDelegate),
-                                    evaluatorClass,
-                                    methodName
-                                );
+                                MobileCapabilities.EvaluateCapabilitiesDelegate
+                                    .CreateDelegate(
+                                        typeof(MobileCapabilities.EvaluateCapabilitiesDelegate),
+                                        evaluatorClass,
+                                        methodName
+                                    );
                         }
                         catch (Exception e)
                         {

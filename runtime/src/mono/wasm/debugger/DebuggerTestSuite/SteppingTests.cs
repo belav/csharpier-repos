@@ -2078,7 +2078,10 @@ namespace DebuggerTests
                     pause_location["callFrames"]
                         .Value<JArray>()
                         .Any(f =>
-                            f?["scopeChain"]?[0]?["type"]?.Value<string>()
+                            f?["scopeChain"]
+                                ?[0]
+                                ?["type"]
+                                ?.Value<string>()
                                 ?.Equals("wasm-expression-stack") == true
                         )
                 );
@@ -2087,7 +2090,10 @@ namespace DebuggerTests
                     pause_location["callFrames"]
                         .Value<JArray>()
                         .Any(f =>
-                            f?["scopeChain"]?[0]?["type"]?.Value<string>()
+                            f?["scopeChain"]
+                                ?[0]
+                                ?["type"]
+                                ?.Value<string>()
                                 ?.Equals("wasm-expression-stack") == true
                         )
                 );

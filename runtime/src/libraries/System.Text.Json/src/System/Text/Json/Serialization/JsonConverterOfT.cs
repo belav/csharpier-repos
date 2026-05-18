@@ -623,8 +623,7 @@ namespace System.Text.Json.Serialization
 
             // Extension data properties change how dictionary key naming policies are applied.
             state.Current.IsWritingExtensionDataProperty = true;
-            state.Current.JsonPropertyInfo = state
-                .Current
+            state.Current.JsonPropertyInfo = state.Current
                 .JsonTypeInfo
                 .ElementTypeInfo!
                 .PropertyInfoForTypeInfo;

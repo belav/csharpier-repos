@@ -157,8 +157,8 @@ namespace Microsoft.CodeAnalysis.PdbSourceDocument
                     // Now that we have the right DLL, we need to look up the symbol in this DLL, because the one
                     // we have is from the reference assembly. To do this we create an empty compilation,
                     // add our DLL as a reference, and use SymbolKey to map the type across.
-                    var documentationProvider =
-                        sourceWorkspace.Services.GetRequiredService<IDocumentationProviderService>();
+                    var documentationProvider = sourceWorkspace.Services
+                        .GetRequiredService<IDocumentationProviderService>();
                     var dllReference = IOUtilities.PerformIO(() =>
                         MetadataReference.CreateFromFile(
                             dllPath,
@@ -174,8 +174,8 @@ namespace Microsoft.CodeAnalysis.PdbSourceDocument
                         return null;
                     }
 
-                    var compilationFactory =
-                        sourceProject.Services.GetRequiredService<ICompilationFactoryService>();
+                    var compilationFactory = sourceProject.Services
+                        .GetRequiredService<ICompilationFactoryService>();
                     var tmpCompilation = compilationFactory
                         .CreateCompilation("tmp", compilationFactory.GetDefaultCompilationOptions())
                         .AddReferences(dllReference);
@@ -336,10 +336,11 @@ namespace Microsoft.CodeAnalysis.PdbSourceDocument
             // to the document passed in, which we just use the first document for.
             // TODO: Support results from multiple source files: https://github.com/dotnet/roslyn/issues/55834
             var firstDocumentFilePath = sourceFileInfos[0]!.FilePath;
-            var firstDocument = navigateProject.Documents.First(d =>
-                d.FilePath?.Equals(firstDocumentFilePath, StringComparison.OrdinalIgnoreCase)
-                ?? false
-            );
+            var firstDocument = navigateProject.Documents
+                .First(d =>
+                    d.FilePath?.Equals(firstDocumentFilePath, StringComparison.OrdinalIgnoreCase)
+                    ?? false
+                );
             var navigateLocation = await MetadataAsSourceHelpers
                 .GetLocationInGeneratedSourceAsync(symbolId, firstDocument, cancellationToken)
                 .ConfigureAwait(false);
@@ -351,10 +352,9 @@ namespace Microsoft.CodeAnalysis.PdbSourceDocument
             var sourceDescription =
                 sourceFileInfos
                     .FirstOrDefault(sfi =>
-                        sfi!.FilePath?.Equals(
-                            navigateDocument.FilePath,
-                            StringComparison.OrdinalIgnoreCase
-                        ) ?? false
+                        sfi!.FilePath
+                            ?.Equals(navigateDocument.FilePath, StringComparison.OrdinalIgnoreCase)
+                        ?? false
                     )
                     ?.SourceDescription
                 ?? FeaturesResources.from_metadata;
@@ -481,8 +481,8 @@ namespace Microsoft.CodeAnalysis.PdbSourceDocument
         private static void AssertIsMainThread(MetadataAsSourceWorkspace workspace)
         {
             Contract.ThrowIfNull(workspace);
-            var threadingService = workspace
-                .Services.GetRequiredService<IWorkspaceThreadingServiceProvider>()
+            var threadingService = workspace.Services
+                .GetRequiredService<IWorkspaceThreadingServiceProvider>()
                 .Service;
             Contract.ThrowIfFalse(threadingService.IsOnMainThread);
         }

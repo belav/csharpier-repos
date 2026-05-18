@@ -105,18 +105,16 @@ namespace Microsoft.Interop
                     {
                         MarshallingAttributeInfo =
                             ComExceptionMarshalling.CreateSpecificMarshallingInfo(
-                                nativeReturnMarshaller.Generator.AsNativeType(
-                                    nativeReturnMarshaller.TypeInfo
-                                )
+                                nativeReturnMarshaller.Generator
+                                    .AsNativeType(nativeReturnMarshaller.TypeInfo)
                             ),
                     };
                 }
 
                 IMarshallingGeneratorFactory exceptionHandlerFactory =
                     new ExtendedInvariantsValidator(
-                        nativeReturnMarshaller.Generator.AsNativeType(
-                            nativeReturnMarshaller.TypeInfo
-                        ),
+                        nativeReturnMarshaller.Generator
+                            .AsNativeType(nativeReturnMarshaller.TypeInfo),
                         generatorFactory
                     );
 
@@ -234,9 +232,8 @@ namespace Microsoft.Interop
                     )
                 ),
                 NativeReturnMarshaller.Generator.AsReturnType(NativeReturnMarshaller.TypeInfo),
-                NativeReturnMarshaller.Generator.GenerateAttributesForReturnType(
-                    NativeReturnMarshaller.TypeInfo
-                )
+                NativeReturnMarshaller.Generator
+                    .GenerateAttributesForReturnType(NativeReturnMarshaller.TypeInfo)
             );
         }
 

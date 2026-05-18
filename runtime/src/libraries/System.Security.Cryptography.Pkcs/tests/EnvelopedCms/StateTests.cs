@@ -302,8 +302,8 @@ namespace System.Security.Cryptography.Pkcs.EnvelopedCmsTests.Tests
             ecms.Decode(encodedMessage);
 
             using (
-                X509Certificate2 cer =
-                    Certificates.RSAKeyTransfer1.TryGetCertificateWithPrivateKey()
+                X509Certificate2 cer = Certificates.RSAKeyTransfer1
+                    .TryGetCertificateWithPrivateKey()
             )
             {
                 if (cer == null)
@@ -354,8 +354,8 @@ namespace System.Security.Cryptography.Pkcs.EnvelopedCmsTests.Tests
             ecms.Decode(encodedMessage);
 
             using (
-                X509Certificate2 cer =
-                    Certificates.RSAKeyTransfer1.TryGetCertificateWithPrivateKey()
+                X509Certificate2 cer = Certificates.RSAKeyTransfer1
+                    .TryGetCertificateWithPrivateKey()
             )
             {
                 if (cer == null)
@@ -411,16 +411,16 @@ namespace System.Security.Cryptography.Pkcs.EnvelopedCmsTests.Tests
             ecms.Decode(encodedMessage);
 
             using (
-                X509Certificate2 cert1 =
-                    Certificates.RSAKeyTransfer1.TryGetCertificateWithPrivateKey()
+                X509Certificate2 cert1 = Certificates.RSAKeyTransfer1
+                    .TryGetCertificateWithPrivateKey()
             )
             using (
-                X509Certificate2 cert2 =
-                    Certificates.RSAKeyTransfer2.TryGetCertificateWithPrivateKey()
+                X509Certificate2 cert2 = Certificates.RSAKeyTransfer2
+                    .TryGetCertificateWithPrivateKey()
             )
             using (
-                X509Certificate2 cert3 =
-                    Certificates.RSAKeyTransfer3.TryGetCertificateWithPrivateKey()
+                X509Certificate2 cert3 = Certificates.RSAKeyTransfer3
+                    .TryGetCertificateWithPrivateKey()
             )
             {
                 if (cert1 == null || cert2 == null || cert3 == null)

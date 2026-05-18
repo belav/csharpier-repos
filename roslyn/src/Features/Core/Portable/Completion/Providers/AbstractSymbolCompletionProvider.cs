@@ -77,8 +77,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
             if (symbol.Kind == SymbolKind.Local)
             {
                 var local = (ILocalSymbol)symbol;
-                var declarationSyntax = symbol
-                    .DeclaringSyntaxReferences.Select(r => r.GetSyntax())
+                var declarationSyntax = symbol.DeclaringSyntaxReferences
+                    .Select(r => r.GetSyntax())
                     .SingleOrDefault();
                 if (declarationSyntax != null && position < declarationSyntax.FullSpan.End)
                 {
@@ -258,10 +258,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
                 contextPosition: context.Position,
                 symbols: symbols.SelectAsArray(t => t.Symbol),
                 supportedPlatforms: supportedPlatformData,
-                rules: CompletionItemRules
-                    .Default.WithMatchPriority(
-                        preselect ? MatchPriority.Preselect : MatchPriority.Default
-                    )
+                rules: CompletionItemRules.Default
+                    .WithMatchPriority(preselect ? MatchPriority.Preselect : MatchPriority.Default)
                     .WithSelectionBehavior(
                         context.IsRightSideOfNumericType
                             ? CompletionItemSelectionBehavior.SoftSelection

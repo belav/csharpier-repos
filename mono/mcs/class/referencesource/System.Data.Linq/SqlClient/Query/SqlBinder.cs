@@ -763,10 +763,12 @@ namespace System.Data.Linq.SqlClient
                         }
                         else
                         {
-                            System.Diagnostics.Debug.Assert(
-                                false,
-                                "Don't know how to apply 'as' to " + target.NodeType
-                            );
+                            System.Diagnostics
+                                .Debug
+                                .Assert(
+                                    false,
+                                    "Don't know how to apply 'as' to " + target.NodeType
+                                );
                         }
                         return target;
                 }
@@ -1314,9 +1316,9 @@ namespace System.Data.Linq.SqlClient
                         {
                             return e;
                         }
-                        MetaDataMember mm = sn.MetaType.PersistentDataMembers.FirstOrDefault(p =>
-                            p.Member == m.Member
-                        );
+                        MetaDataMember mm = sn.MetaType
+                            .PersistentDataMembers
+                            .FirstOrDefault(p => p.Member == m.Member);
                         if (!sn.SqlType.CanBeColumn && mm != null)
                         {
                             throw Error.MemberNotPartOfProjection(
@@ -1381,9 +1383,8 @@ namespace System.Data.Linq.SqlClient
                                 // entire SubSelect will be columnized as a whole. Subsequent columnization does not know how to handle
                                 // any function calls that may be produced by the PostBindDotNetConverter, but we know how to handle it here.
                                 newSelect.Selection = rexp;
-                                newSelect.Selection = this.columnizer.ColumnizeSelection(
-                                    newSelect.Selection
-                                );
+                                newSelect.Selection = this.columnizer
+                                    .ColumnizeSelection(newSelect.Selection);
                                 newSelect.Selection = this.ConvertLinks(newSelect.Selection);
                                 SqlNodeType subType =
                                     (rexp is SqlTypeCase || !rexp.SqlType.CanBeColumn)

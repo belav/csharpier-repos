@@ -293,12 +293,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     var genericTypeDescr = typeDescr.WithNewFieldsTypes(genericFieldTypes);
 
                     var key = new SynthesizedDelegateKey(genericTypeDescr);
-                    var namedTemplate = this.AnonymousDelegates.GetOrAdd(
-                        key,
-                        static (key, @this) =>
-                            new AnonymousDelegateTemplateSymbol(@this, key.TypeDescriptor),
-                        this
-                    );
+                    var namedTemplate = this.AnonymousDelegates
+                        .GetOrAdd(
+                            key,
+                            static (key, @this) =>
+                                new AnonymousDelegateTemplateSymbol(@this, key.TypeDescriptor),
+                            this
+                        );
 
                     return namedTemplate.Construct(typeArguments);
                 }
@@ -332,10 +333,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 AnonymousDelegateTemplateSymbol? template;
                 if (!this.AnonymousDelegates.TryGetValue(key, out template))
                 {
-                    template = this.AnonymousDelegates.GetOrAdd(
-                        key,
-                        new AnonymousDelegateTemplateSymbol(this, typeDescr, typeParameters)
-                    );
+                    template = this.AnonymousDelegates
+                        .GetOrAdd(
+                            key,
+                            new AnonymousDelegateTemplateSymbol(this, typeDescr, typeParameters)
+                        );
                 }
 
                 // Adjust template location if the template is owned by this manager
@@ -432,20 +434,21 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             var referenced = PooledHashSet<TypeParameterSymbol>.GetInstance();
             foreach (var field in typeDescr.Fields)
             {
-                field.TypeWithAnnotations.VisitType(
-                    type: null,
-                    typeWithAnnotationsPredicate: null,
-                    typePredicate: static (type, referenced, _) =>
-                    {
-                        if (type is TypeParameterSymbol typeParameter)
+                field.TypeWithAnnotations
+                    .VisitType(
+                        type: null,
+                        typeWithAnnotationsPredicate: null,
+                        typePredicate: static (type, referenced, _) =>
                         {
-                            referenced.Add(typeParameter);
-                        }
-                        return false;
-                    },
-                    arg: referenced,
-                    visitCustomModifiers: true
-                );
+                            if (type is TypeParameterSymbol typeParameter)
+                            {
+                                referenced.Add(typeParameter);
+                            }
+                            return false;
+                        },
+                        arg: referenced,
+                        visitCustomModifiers: true
+                    );
             }
 
             ImmutableArray<TypeParameterSymbol> typeParameters;
@@ -519,10 +522,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             if (!this.AnonymousTypeTemplates.TryGetValue(typeDescr.Key, out template))
             {
                 // NOTE: the newly created template may be thrown away if another thread wins
-                template = this.AnonymousTypeTemplates.GetOrAdd(
-                    typeDescr.Key,
-                    new AnonymousTypeTemplateSymbol(this, typeDescr)
-                );
+                template = this.AnonymousTypeTemplates
+                    .GetOrAdd(typeDescr.Key, new AnonymousTypeTemplateSymbol(this, typeDescr));
             }
 
             // Adjust template location if the template is owned by this manager
@@ -548,13 +549,14 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             Microsoft.CodeAnalysis.Emit.AnonymousTypeKey key
         )
         {
-            var fields = key.Fields.SelectAsArray(f => new AnonymousTypeField(
-                f.Name,
-                Location.None,
-                typeWithAnnotations: default,
-                refKind: RefKind.None,
-                ScopedKind.None
-            ));
+            var fields = key.Fields
+                .SelectAsArray(f => new AnonymousTypeField(
+                    f.Name,
+                    Location.None,
+                    typeWithAnnotations: default,
+                    refKind: RefKind.None,
+                    ScopedKind.None
+                ));
             var typeDescr = new AnonymousTypeDescriptor(fields, Location.None);
             return new AnonymousTypeTemplateSymbol(this, typeDescr);
         }
@@ -593,10 +595,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             {
                 Debug.Assert(!key.IsDelegate);
                 var templateKey = AnonymousTypeDescriptor.ComputeKey(key.Fields, f => f.Name);
-                this.AnonymousTypeTemplates.GetOrAdd(
-                    templateKey,
-                    k => this.CreatePlaceholderTemplate(key)
-                );
+                this.AnonymousTypeTemplates
+                    .GetOrAdd(templateKey, k => this.CreatePlaceholderTemplate(key));
             }
 
             // Get all anonymous types owned by this manager
@@ -718,17 +718,18 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                         returnsVoid,
                         generation
                     );
-                    this.AnonymousDelegates.GetOrAdd(
-                        delegateKey,
-                        (k, args) =>
-                            CreatePlaceholderSynthesizedDelegateValue(
-                                key.Name,
-                                args.refKinds,
-                                args.returnsVoid,
-                                args.parameterCount
-                            ),
-                        (refKinds, returnsVoid, parameterCount)
-                    );
+                    this.AnonymousDelegates
+                        .GetOrAdd(
+                            delegateKey,
+                            (k, args) =>
+                                CreatePlaceholderSynthesizedDelegateValue(
+                                    key.Name,
+                                    args.refKinds,
+                                    args.returnsVoid,
+                                    args.parameterCount
+                                ),
+                            (refKinds, returnsVoid, parameterCount)
+                        );
                 }
             }
 

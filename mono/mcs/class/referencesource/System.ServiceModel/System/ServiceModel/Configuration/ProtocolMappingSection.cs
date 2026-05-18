@@ -27,34 +27,38 @@ namespace System.ServiceModel.Configuration
 
         protected override void InitializeDefault()
         {
-            this.ProtocolMappingCollection.Add(
-                new ProtocolMappingElement(
-                    "http",
-                    "basicHttpBinding",
-                    ConfigurationStrings.DefaultName
-                )
-            );
-            this.ProtocolMappingCollection.Add(
-                new ProtocolMappingElement(
-                    "net.tcp",
-                    "netTcpBinding",
-                    ConfigurationStrings.DefaultName
-                )
-            );
-            this.ProtocolMappingCollection.Add(
-                new ProtocolMappingElement(
-                    "net.pipe",
-                    "netNamedPipeBinding",
-                    ConfigurationStrings.DefaultName
-                )
-            );
-            this.ProtocolMappingCollection.Add(
-                new ProtocolMappingElement(
-                    "net.msmq",
-                    "netMsmqBinding",
-                    ConfigurationStrings.DefaultName
-                )
-            );
+            this.ProtocolMappingCollection
+                .Add(
+                    new ProtocolMappingElement(
+                        "http",
+                        "basicHttpBinding",
+                        ConfigurationStrings.DefaultName
+                    )
+                );
+            this.ProtocolMappingCollection
+                .Add(
+                    new ProtocolMappingElement(
+                        "net.tcp",
+                        "netTcpBinding",
+                        ConfigurationStrings.DefaultName
+                    )
+                );
+            this.ProtocolMappingCollection
+                .Add(
+                    new ProtocolMappingElement(
+                        "net.pipe",
+                        "netNamedPipeBinding",
+                        ConfigurationStrings.DefaultName
+                    )
+                );
+            this.ProtocolMappingCollection
+                .Add(
+                    new ProtocolMappingElement(
+                        "net.msmq",
+                        "netMsmqBinding",
+                        ConfigurationStrings.DefaultName
+                    )
+                );
         }
 
         internal static ProtocolMappingSection GetSection()

@@ -175,9 +175,10 @@ namespace System.Web.Configuration
                 else
                 {
                     if (
-                        !System.CodeDom.Compiler.CodeGenerator.IsValidLanguageIndependentIdentifier(
-                            refID
-                        )
+                        !System.CodeDom
+                            .Compiler
+                            .CodeGenerator
+                            .IsValidLanguageIndependentIdentifier(refID)
                     )
                     {
                         throw new ConfigurationErrorsException(

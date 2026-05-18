@@ -754,21 +754,24 @@ namespace System.Reflection.Emit.Tests
                     anotherTypeFromDisk
                         .GetMethod("StringMethod", BindingFlags.NonPublic | BindingFlags.Instance)
                         .GetMethodBody()
-                        .LocalVariables.Count
+                        .LocalVariables
+                        .Count
                 );
                 Assert.Equal(
                     2,
                     anotherTypeFromDisk
                         .GetMethod("TypeMethod", BindingFlags.NonPublic | BindingFlags.Instance)
                         .GetMethodBody()
-                        .LocalVariables.Count
+                        .LocalVariables
+                        .Count
                 );
                 Assert.Equal(
                     2,
                     anotherTypeFromDisk
                         .GetMethod("LongMethod", BindingFlags.NonPublic | BindingFlags.Static)
                         .GetMethodBody()
-                        .LocalVariables.Count
+                        .LocalVariables
+                        .Count
                 );
             }
         }

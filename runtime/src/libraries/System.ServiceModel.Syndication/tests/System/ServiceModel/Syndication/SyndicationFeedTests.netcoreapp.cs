@@ -132,17 +132,18 @@ namespace System.ServiceModel.Syndication.Tests
             var feed = new SyndicationFeed();
             feed.ElementExtensions.Add(new SyndicationElementExtension("other", "", 10));
             feed.ElementExtensions.Add(new SyndicationElementExtension("skipHours", "other", 10));
-            feed.ElementExtensions.Add(
-                new SyndicationElementExtension(
-                    new XElement(
-                        "skipHours",
-                        new XElement("hour", 0),
-                        new XElement("hour", 10),
-                        new XElement("other", 10),
-                        new XElement("hour", 23)
-                    ).CreateReader()
-                )
-            );
+            feed.ElementExtensions
+                .Add(
+                    new SyndicationElementExtension(
+                        new XElement(
+                            "skipHours",
+                            new XElement("hour", 0),
+                            new XElement("hour", 10),
+                            new XElement("other", 10),
+                            new XElement("hour", 23)
+                        ).CreateReader()
+                    )
+                );
 
             Assert.Equal(new int[] { 0, 10, 23 }, feed.SkipHours);
             Assert.Same(feed.SkipHours, feed.SkipHours);
@@ -158,17 +159,18 @@ namespace System.ServiceModel.Syndication.Tests
             var feed = new SyndicationFeed();
             feed.ElementExtensions.Add(new SyndicationElementExtension("other", "", 10));
             feed.ElementExtensions.Add(new SyndicationElementExtension("skipHours", "other", 10));
-            feed.ElementExtensions.Add(
-                new SyndicationElementExtension(
-                    new XElement(
-                        "skipHours",
-                        new XElement("hour", 0),
-                        new XElement("hour", 10),
-                        new XElement("other", 10),
-                        new XElement("hour", value)
-                    ).CreateReader()
-                )
-            );
+            feed.ElementExtensions
+                .Add(
+                    new SyndicationElementExtension(
+                        new XElement(
+                            "skipHours",
+                            new XElement("hour", 0),
+                            new XElement("hour", 10),
+                            new XElement("other", 10),
+                            new XElement("hour", value)
+                        ).CreateReader()
+                    )
+                );
 
             Assert.Throws<FormatException>(() => feed.SkipHours);
         }
@@ -179,23 +181,24 @@ namespace System.ServiceModel.Syndication.Tests
             var feed = new SyndicationFeed();
             feed.ElementExtensions.Add(new SyndicationElementExtension("other", "", 10));
             feed.ElementExtensions.Add(new SyndicationElementExtension("skipDays", "other", 10));
-            feed.ElementExtensions.Add(
-                new SyndicationElementExtension(
-                    new XElement(
-                        "skipDays",
-                        new XElement("day", "monday"),
-                        new XElement("day", "tuesday"),
-                        new XElement("other", 10),
-                        new XElement("day", "wednesday"),
-                        new XElement("day", "thursday"),
-                        new XElement("day", "friday"),
-                        new XElement("day", "SATURDAY"),
-                        new XElement("day", ""),
-                        new XElement("day", "invalid"),
-                        new XElement("day", "sunday")
-                    ).CreateReader()
-                )
-            );
+            feed.ElementExtensions
+                .Add(
+                    new SyndicationElementExtension(
+                        new XElement(
+                            "skipDays",
+                            new XElement("day", "monday"),
+                            new XElement("day", "tuesday"),
+                            new XElement("other", 10),
+                            new XElement("day", "wednesday"),
+                            new XElement("day", "thursday"),
+                            new XElement("day", "friday"),
+                            new XElement("day", "SATURDAY"),
+                            new XElement("day", ""),
+                            new XElement("day", "invalid"),
+                            new XElement("day", "sunday")
+                        ).CreateReader()
+                    )
+                );
 
             Assert.Equal(
                 new string[]
@@ -219,18 +222,19 @@ namespace System.ServiceModel.Syndication.Tests
             var feed = new SyndicationFeed();
             feed.ElementExtensions.Add(new SyndicationElementExtension("other", "", 10));
             feed.ElementExtensions.Add(new SyndicationElementExtension("textInput", "other", 10));
-            feed.ElementExtensions.Add(
-                new SyndicationElementExtension(
-                    new XElement(
-                        "textInput",
-                        new XElement("name", "Name"),
-                        new XElement("description", "Description"),
-                        new XElement("other", 10),
-                        new XElement("title", "Title"),
-                        new XElement("link", "http://google.com")
-                    ).CreateReader()
-                )
-            );
+            feed.ElementExtensions
+                .Add(
+                    new SyndicationElementExtension(
+                        new XElement(
+                            "textInput",
+                            new XElement("name", "Name"),
+                            new XElement("description", "Description"),
+                            new XElement("other", 10),
+                            new XElement("title", "Title"),
+                            new XElement("link", "http://google.com")
+                        ).CreateReader()
+                    )
+                );
 
             Assert.Equal("Name", feed.TextInput.Name);
             Assert.Equal("Description", feed.TextInput.Description);

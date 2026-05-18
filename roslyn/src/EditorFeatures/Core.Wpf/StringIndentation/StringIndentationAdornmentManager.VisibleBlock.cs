@@ -76,11 +76,10 @@ namespace Microsoft.CodeAnalysis.Editor.StringIndentation
                     return null;
                 }
 
-                var guideLineTopLine = view.TextViewLines.GetTextViewLineContainingBufferPosition(
-                    guideLineSpanStart
-                );
-                var guideLineBottomLine =
-                    view.TextViewLines.GetTextViewLineContainingBufferPosition(guideLineSpanEnd);
+                var guideLineTopLine = view.TextViewLines
+                    .GetTextViewLineContainingBufferPosition(guideLineSpanStart);
+                var guideLineBottomLine = view.TextViewLines
+                    .GetTextViewLineContainingBufferPosition(guideLineSpanEnd);
 
                 // This is slightly subtle.  First, the line might start on a line that is above/below what the actual
                 // view is displaying.  In that case we want to draw up to the boundary of the view to make it look like

@@ -236,10 +236,11 @@ namespace System.Data.SqlClient
                                     throw SQL.GlobalTransactionsNotEnabled();
                                 }
 
-                                SysTxForGlobalTransactions.SetDistributedTransactionIdentifier.Invoke(
-                                    _atomicTransaction,
-                                    new object[] { this, GetGlobalTxnIdentifierFromToken() }
-                                );
+                                SysTxForGlobalTransactions.SetDistributedTransactionIdentifier
+                                    .Invoke(
+                                        _atomicTransaction,
+                                        new object[] { this, GetGlobalTxnIdentifierFromToken() }
+                                    );
                             }
 
                             promoteException = null;

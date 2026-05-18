@@ -1408,10 +1408,8 @@ namespace MonoTests.System.Web.UI
             );
 
             RouteTable.Routes.Add(new Route("{foo}-{bar}", new PageRouteHandler("~/default.aspx")));
-            RouteTable.Routes.Add(
-                "myroute1",
-                new Route("{bar}-{foo}", new PageRouteHandler("~/default.aspx"))
-            );
+            RouteTable.Routes
+                .Add("myroute1", new Route("{bar}-{foo}", new PageRouteHandler("~/default.aspx")));
             path = ctl.GetRouteUrl("myroute1", obj);
             Assert.IsNotNull(path, "#A2-1");
             Assert.AreEqual("/NunitWeb/two-one", path, "#A2-2");
@@ -1445,10 +1443,8 @@ namespace MonoTests.System.Web.UI
             );
 
             RouteTable.Routes.Add(new Route("{foo}-{bar}", new PageRouteHandler("~/default.aspx")));
-            RouteTable.Routes.Add(
-                "myroute",
-                new Route("{bar}-{foo}", new PageRouteHandler("~/default.aspx"))
-            );
+            RouteTable.Routes
+                .Add("myroute", new Route("{bar}-{foo}", new PageRouteHandler("~/default.aspx")));
             path = ctl.GetRouteUrl("myroute", rvd);
             Assert.IsNotNull(path, "#A2-1");
             Assert.AreEqual("/NunitWeb/two-one", path, "#A2-2");

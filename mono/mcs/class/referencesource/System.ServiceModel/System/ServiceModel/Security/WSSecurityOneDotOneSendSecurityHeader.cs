@@ -74,8 +74,8 @@ namespace System.ServiceModel.Security
         {
             // We are not reading EncryptedData from the wire here, hence pass false.
             EncryptedHeaderXml encryptedHeaderXml = new EncryptedHeaderXml(version, false);
-            encryptedHeaderXml.SecurityTokenSerializer =
-                this.StandardsManager.SecurityTokenSerializer;
+            encryptedHeaderXml.SecurityTokenSerializer = this.StandardsManager
+                .SecurityTokenSerializer;
             encryptedHeaderXml.EncryptionMethod = this.EncryptionAlgorithm;
             encryptedHeaderXml.EncryptionMethodDictionaryString =
                 this.EncryptionAlgorithmDictionaryString;

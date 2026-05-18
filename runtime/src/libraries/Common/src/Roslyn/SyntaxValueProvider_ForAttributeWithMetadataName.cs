@@ -218,8 +218,9 @@ internal static partial class SyntaxValueProviderExtensions
                 {
                     if (
                         attribute.ApplicationSyntaxReference?.SyntaxTree == targetSyntaxTree
-                        && attribute.AttributeClass?.ToDisplayString( /*s_metadataDisplayFormat*/
-                        ) == fullyQualifiedMetadataName
+                        && attribute.AttributeClass
+                            ?.ToDisplayString( /*s_metadataDisplayFormat*/
+                            ) == fullyQualifiedMetadataName
                     )
                     {
                         result.Append(attribute);

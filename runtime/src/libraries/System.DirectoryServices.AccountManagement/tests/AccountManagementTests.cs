@@ -17,10 +17,8 @@ namespace System.DirectoryServices.AccountManagement.Tests
         internal static bool IsActiveDirectoryServer =>
             IsLdapConfigurationExist && LdapConfiguration.Configuration.IsActiveDirectoryServer;
         internal static bool IsDomainJoinedClient =>
-            !Environment.MachineName.Equals(
-                Environment.UserDomainName,
-                StringComparison.OrdinalIgnoreCase
-            );
+            !Environment.MachineName
+                .Equals(Environment.UserDomainName, StringComparison.OrdinalIgnoreCase);
 
         [Fact]
         public void TestConstructors()

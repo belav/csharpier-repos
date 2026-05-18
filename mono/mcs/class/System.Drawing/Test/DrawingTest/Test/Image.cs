@@ -47,10 +47,11 @@ namespace Test.Sys.Drawing
         public void Clone2()
         {
             Image im1 = (Image)
-                t.Bitmap.Clone(
-                    new Rectangle(0, 0, t.Bitmap.Width, t.Bitmap.Height),
-                    t.Bitmap.PixelFormat
-                );
+                t.Bitmap
+                    .Clone(
+                        new Rectangle(0, 0, t.Bitmap.Width, t.Bitmap.Height),
+                        t.Bitmap.PixelFormat
+                    );
             t.Graphics.FillRectangle(Brushes.Beige, 0, 0, 100, 100);
             Assert.IsFalse(
                 DrawingTest.CalculateNorm((Bitmap)im1) == DrawingTest.CalculateNorm(t.Bitmap)

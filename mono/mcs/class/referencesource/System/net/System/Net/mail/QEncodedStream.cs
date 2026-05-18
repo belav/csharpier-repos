@@ -704,20 +704,23 @@ namespace System.Net.Mime
             {
                 for (; ; )
                 {
-                    this.written += this.parent.EncodeBytes(
-                        this.buffer,
-                        this.offset + this.written,
-                        this.count - this.written
-                    );
+                    this.written += this.parent
+                        .EncodeBytes(
+                            this.buffer,
+                            this.offset + this.written,
+                            this.count - this.written
+                        );
                     if (this.written < this.count)
                     {
-                        IAsyncResult result = this.parent.BaseStream.BeginWrite(
-                            this.parent.WriteState.Buffer,
-                            0,
-                            this.parent.WriteState.Length,
-                            onWrite,
-                            this
-                        );
+                        IAsyncResult result = this.parent
+                            .BaseStream
+                            .BeginWrite(
+                                this.parent.WriteState.Buffer,
+                                0,
+                                this.parent.WriteState.Length,
+                                onWrite,
+                                this
+                            );
                         if (!result.CompletedSynchronously)
                             break;
                         CompleteWrite(result);

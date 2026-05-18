@@ -228,11 +228,8 @@ namespace System.ServiceModel.Channels
             // Create the neighbor binding
             CreateBinding();
             this.serviceHost.Description.Endpoints.Clear();
-            ServiceEndpoint endPoint = this.serviceHost.AddServiceEndpoint(
-                typeof(IPeerService),
-                this.binding,
-                config.GetMeshUri()
-            );
+            ServiceEndpoint endPoint = this.serviceHost
+                .AddServiceEndpoint(typeof(IPeerService), this.binding, config.GetMeshUri());
             endPoint.ListenUri = config.GetSelfUri();
             endPoint.ListenUriMode =
                 (this.config.Port > 0) ? ListenUriMode.Explicit : ListenUriMode.Unique;
@@ -382,9 +379,10 @@ namespace System.ServiceModel.Channels
         {
             IPeerNeighbor neighbor = GetNeighbor();
             if (neighbor == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ObjectDisposedException(typeof(IPeerNeighbor).ToString())
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        new ObjectDisposedException(typeof(IPeerNeighbor).ToString())
+                    );
             Message reply = this.config.SecurityManager.ProcessRequest(neighbor, message);
             if (reply == null)
             {
@@ -399,9 +397,10 @@ namespace System.ServiceModel.Channels
         {
             IPeerNeighbor neighbor = GetNeighbor();
             if (neighbor == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ObjectDisposedException(typeof(IPeerNeighbor).ToString())
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        new ObjectDisposedException(typeof(IPeerNeighbor).ToString())
+                    );
             neighbor.Abort(PeerCloseReason.Faulted, PeerCloseInitiator.RemoteNode);
         }
 

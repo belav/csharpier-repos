@@ -38,12 +38,13 @@ public class QueryBugsTest : NonSharedModelTestBase
         var contextFactory = await InitializeDateTimeContextAsync();
 
         using var context = contextFactory.CreateContext();
-        var query = context.Dates.Where(d =>
-            d.DateTime2_2 == DateTime.Now
-            || d.DateTime2_7 == DateTime.Now
-            || d.DateTime == DateTime.Now
-            || d.SmallDateTime == DateTime.Now
-        );
+        var query = context.Dates
+            .Where(d =>
+                d.DateTime2_2 == DateTime.Now
+                || d.DateTime2_7 == DateTime.Now
+                || d.DateTime == DateTime.Now
+                || d.SmallDateTime == DateTime.Now
+            );
 
         var results = async ? await query.ToListAsync() : query.ToList();
 
@@ -66,12 +67,13 @@ WHERE [d].[DateTime2_2] = GETDATE() OR [d].[DateTime2_7] = GETDATE() OR [d].[Dat
         var contextFactory = await InitializeDateTimeContextAsync();
 
         using var context = contextFactory.CreateContext();
-        var query = context.Dates.Where(d =>
-            d.DateTime2_2 != DateTime.Now
-            && d.DateTime2_7 != DateTime.Now
-            && d.DateTime != DateTime.Now
-            && d.SmallDateTime != DateTime.Now
-        );
+        var query = context.Dates
+            .Where(d =>
+                d.DateTime2_2 != DateTime.Now
+                && d.DateTime2_7 != DateTime.Now
+                && d.DateTime != DateTime.Now
+                && d.SmallDateTime != DateTime.Now
+            );
 
         var results = async ? await query.ToListAsync() : query.ToList();
 
@@ -94,19 +96,20 @@ WHERE [d].[DateTime2_2] <> GETDATE() AND [d].[DateTime2_7] <> GETDATE() AND [d].
         var contextFactory = await InitializeDateTimeContextAsync();
 
         using var context = contextFactory.CreateContext();
-        var query = context.Dates.Where(d =>
-            d.SmallDateTime == new DateTime(1970, 9, 3, 12, 0, 0)
-            && d.DateTime == new DateTime(1971, 9, 3, 12, 0, 10, 220)
-            && d.DateTime2 == new DateTime(1972, 9, 3, 12, 0, 10, 333)
-            && d.DateTime2_0 == new DateTime(1973, 9, 3, 12, 0, 10)
-            && d.DateTime2_1 == new DateTime(1974, 9, 3, 12, 0, 10, 500)
-            && d.DateTime2_2 == new DateTime(1975, 9, 3, 12, 0, 10, 660)
-            && d.DateTime2_3 == new DateTime(1976, 9, 3, 12, 0, 10, 777)
-            && d.DateTime2_4 == new DateTime(1977, 9, 3, 12, 0, 10, 888)
-            && d.DateTime2_5 == new DateTime(1978, 9, 3, 12, 0, 10, 999)
-            && d.DateTime2_6 == new DateTime(1979, 9, 3, 12, 0, 10, 111)
-            && d.DateTime2_7 == new DateTime(1980, 9, 3, 12, 0, 10, 222)
-        );
+        var query = context.Dates
+            .Where(d =>
+                d.SmallDateTime == new DateTime(1970, 9, 3, 12, 0, 0)
+                && d.DateTime == new DateTime(1971, 9, 3, 12, 0, 10, 220)
+                && d.DateTime2 == new DateTime(1972, 9, 3, 12, 0, 10, 333)
+                && d.DateTime2_0 == new DateTime(1973, 9, 3, 12, 0, 10)
+                && d.DateTime2_1 == new DateTime(1974, 9, 3, 12, 0, 10, 500)
+                && d.DateTime2_2 == new DateTime(1975, 9, 3, 12, 0, 10, 660)
+                && d.DateTime2_3 == new DateTime(1976, 9, 3, 12, 0, 10, 777)
+                && d.DateTime2_4 == new DateTime(1977, 9, 3, 12, 0, 10, 888)
+                && d.DateTime2_5 == new DateTime(1978, 9, 3, 12, 0, 10, 999)
+                && d.DateTime2_6 == new DateTime(1979, 9, 3, 12, 0, 10, 111)
+                && d.DateTime2_7 == new DateTime(1980, 9, 3, 12, 0, 10, 222)
+            );
 
         var results = async ? await query.ToListAsync() : query.ToList();
 
@@ -144,19 +147,20 @@ WHERE [d].[SmallDateTime] = '1970-09-03T12:00:00' AND [d].[DateTime] = '1971-09-
         var contextFactory = await InitializeDateTimeContextAsync();
 
         using var context = contextFactory.CreateContext();
-        var query = context.Dates.Where(d =>
-            dateTimes.Contains(d.SmallDateTime)
-            && dateTimes.Contains(d.DateTime)
-            && dateTimes.Contains(d.DateTime2)
-            && dateTimes.Contains(d.DateTime2_0)
-            && dateTimes.Contains(d.DateTime2_1)
-            && dateTimes.Contains(d.DateTime2_2)
-            && dateTimes.Contains(d.DateTime2_3)
-            && dateTimes.Contains(d.DateTime2_4)
-            && dateTimes.Contains(d.DateTime2_5)
-            && dateTimes.Contains(d.DateTime2_6)
-            && dateTimes.Contains(d.DateTime2_7)
-        );
+        var query = context.Dates
+            .Where(d =>
+                dateTimes.Contains(d.SmallDateTime)
+                && dateTimes.Contains(d.DateTime)
+                && dateTimes.Contains(d.DateTime2)
+                && dateTimes.Contains(d.DateTime2_0)
+                && dateTimes.Contains(d.DateTime2_1)
+                && dateTimes.Contains(d.DateTime2_2)
+                && dateTimes.Contains(d.DateTime2_3)
+                && dateTimes.Contains(d.DateTime2_4)
+                && dateTimes.Contains(d.DateTime2_5)
+                && dateTimes.Contains(d.DateTime2_6)
+                && dateTimes.Contains(d.DateTime2_7)
+            );
 
         var results = async ? await query.ToListAsync() : query.ToList();
 
@@ -422,8 +426,8 @@ WHERE [d].[SmallDateTime] IN (
 
         using var context = contextFactory.CreateContext();
 
-        var count = await context
-            .Persons.Where(p =>
+        var count = await context.Persons
+            .Where(p =>
                 p.AddressOne != null && p.AddressOne.Street.Contains("Low Street")
                 || p.AddressTwo != null && p.AddressTwo.Street.Contains("Low Street")
             )
@@ -519,11 +523,12 @@ WHERE [d].[SmallDateTime] IN (
         );
 
         using var context = contextFactory.CreateContext();
-        await context.Database.ExecuteSqlRawAsync(
-            @"
+        await context.Database
+            .ExecuteSqlRawAsync(
+                @"
 CREATE TABLE ZeroKey (Id int);
 INSERT ZeroKey VALUES (NULL)"
-        );
+            );
 
         Assert.Equal(
             RelationalStrings.ErrorMaterializingPropertyNullReference("ZeroKey", "Id", typeof(int)),
@@ -616,8 +621,8 @@ INSERT ZeroKey VALUES (NULL)"
         var contextFactory = await InitializeAsync<MyContext925>();
 
         using var ctx = contextFactory.CreateContext();
-        var query = ctx
-            .Customers.Include(c => c.Orders)
+        var query = ctx.Customers
+            .Include(c => c.Orders)
             .OrderBy(c => c.FirstName)
             .ThenBy(c => c.LastName);
         var result = query.ToList();
@@ -908,7 +913,8 @@ Queen of the Andals and the Rhoynar and the First Men, Khaleesi of the Great Gra
 
         using var ctx = contextFactory.CreateContext();
         var firstName = details.FirstName;
-        ctx.Customers.Where(c => c.FirstName == firstName && c.LastName == details.LastName)
+        ctx.Customers
+            .Where(c => c.FirstName == firstName && c.LastName == details.LastName)
             .ToList();
 
         // No AssertSQL since compiler generated variable names are different between local and CI
@@ -1096,8 +1102,8 @@ Queen of the Andals and the Rhoynar and the First Men, Khaleesi of the Great Gra
 
         using (var context = contextFactory.CreateContext())
         {
-            var results = context
-                .Parents.Include(p => p.ChildCollection)
+            var results = context.Parents
+                .Include(p => p.ChildCollection)
                     .ThenInclude(c => c.SelfReferenceCollection)
                 .ToList();
 
@@ -1108,8 +1114,8 @@ Queen of the Andals and the Rhoynar and the First Men, Khaleesi of the Great Gra
 
         using (var context = contextFactory.CreateContext())
         {
-            var results = context
-                .Children.Select(c => new
+            var results = context.Children
+                .Select(c => new
                 {
                     c.SelfReferenceBackNavigation,
                     c.SelfReferenceBackNavigation.ParentBackNavigation,
@@ -1123,8 +1129,8 @@ Queen of the Andals and the Rhoynar and the First Men, Khaleesi of the Great Gra
 
         using (var context = contextFactory.CreateContext())
         {
-            var results = context
-                .Children.Select(c => new
+            var results = context.Children
+                .Select(c => new
                 {
                     SelfReferenceBackNavigation = EF.Property<MyContext3409.IChild3409>(
                         c,
@@ -1144,8 +1150,8 @@ Queen of the Andals and the Rhoynar and the First Men, Khaleesi of the Great Gra
 
         using (var context = contextFactory.CreateContext())
         {
-            var results = context
-                .Children.Include(c => c.SelfReferenceBackNavigation)
+            var results = context.Children
+                .Include(c => c.SelfReferenceBackNavigation)
                     .ThenInclude(c => c.ParentBackNavigation)
                 .ToList();
 
@@ -1491,8 +1497,8 @@ Queen of the Andals and the Rhoynar and the First Men, Khaleesi of the Great Gra
         using (var context = contextFactory.CreateContext())
         {
             // can_include_dependent_to_principal_navigation_of_derived_type_with_shadow_fk
-            var query = context
-                .Contacts.OfType<ReproContext6986.ServiceOperatorContact6986>()
+            var query = context.Contacts
+                .OfType<ReproContext6986.ServiceOperatorContact6986>()
                 .Include(e => e.ServiceOperator6986)
                 .ToList();
 
@@ -1503,8 +1509,8 @@ Queen of the Andals and the Rhoynar and the First Men, Khaleesi of the Great Gra
         using (var context = contextFactory.CreateContext())
         {
             // can_project_shadow_property_using_ef_property
-            var query = context
-                .Contacts.OfType<ReproContext6986.ServiceOperatorContact6986>()
+            var query = context.Contacts
+                .OfType<ReproContext6986.ServiceOperatorContact6986>()
                 .Select(c => new { c, Prop = EF.Property<int>(c, "ServiceOperator6986Id") })
                 .ToList();
 
@@ -1617,8 +1623,8 @@ Queen of the Andals and the Rhoynar and the First Men, Khaleesi of the Great Gra
             i =>
             {
                 using var ctx = contextFactory.CreateContext();
-                var result = ctx
-                    .Posts.Where(x => x.Blog.Id > 1)
+                var result = ctx.Posts
+                    .Where(x => x.Blog.Id > 1)
                     .Include(x => x.Blog)
                     .Include(x => x.Comments)
                     .ToList();
@@ -1633,8 +1639,8 @@ Queen of the Andals and the Rhoynar and the First Men, Khaleesi of the Great Gra
             i =>
             {
                 using var ctx = contextFactory.CreateContext();
-                var result = ctx
-                    .Posts.Where(x => x.Blog.Id > 1)
+                var result = ctx.Posts
+                    .Where(x => x.Blog.Id > 1)
                     .Include(x => x.Blog)
                         .ThenInclude(b => b.Author)
                     .ToList();
@@ -1655,8 +1661,8 @@ Queen of the Andals and the Rhoynar and the First Men, Khaleesi of the Great Gra
                 .Select(async i =>
                 {
                     using var ctx = contextFactory.CreateContext();
-                    var result = await ctx
-                        .Posts.Where(x => x.Blog.Id > 1)
+                    var result = await ctx.Posts
+                        .Where(x => x.Blog.Id > 1)
                         .Include(x => x.Blog)
                         .ToListAsync();
 
@@ -1670,8 +1676,8 @@ Queen of the Andals and the Rhoynar and the First Men, Khaleesi of the Great Gra
                 .Select(async i =>
                 {
                     using var ctx = contextFactory.CreateContext();
-                    var result = await ctx
-                        .Posts.Where(x => x.Blog.Id > 1)
+                    var result = await ctx.Posts
+                        .Where(x => x.Blog.Id > 1)
                         .Include(x => x.Blog)
                         .Include(x => x.Comments)
                         .ToListAsync();
@@ -1686,8 +1692,8 @@ Queen of the Andals and the Rhoynar and the First Men, Khaleesi of the Great Gra
                 .Select(async i =>
                 {
                     using var ctx = contextFactory.CreateContext();
-                    var result = await ctx
-                        .Posts.Where(x => x.Blog.Id > 1)
+                    var result = await ctx.Posts
+                        .Where(x => x.Blog.Id > 1)
                         .Include(x => x.Blog)
                             .ThenInclude(b => b.Author)
                         .ToListAsync();
@@ -1826,8 +1832,8 @@ Queen of the Andals and the Rhoynar and the First Men, Khaleesi of the Great Gra
 
         using (var context = contextFactory.CreateContext())
         {
-            var query = context
-                .Proposal.OfType<MyContext7312.ProposalLeave7312>()
+            var query = context.Proposal
+                .OfType<MyContext7312.ProposalLeave7312>()
                 .Include(l => l.LeaveType)
                 .ToList();
 
@@ -1938,8 +1944,8 @@ Queen of the Andals and the Rhoynar and the First Men, Khaleesi of the Great Gra
 
         using (var context = contextFactory.CreateContext())
         {
-            var query = context
-                .Entity.Where(e => e.Permission.HasFlag(MyContext8538.Permission.READ_WRITE))
+            var query = context.Entity
+                .Where(e => e.Permission.HasFlag(MyContext8538.Permission.READ_WRITE))
                 .ToList();
 
             Assert.Single(query);
@@ -1956,10 +1962,8 @@ WHERE [e].[Permission] & CAST(17179869184 AS bigint) = CAST(17179869184 AS bigin
         using (var context = contextFactory.CreateContext())
         {
             ClearLog();
-            var query = context
-                .Entity.Where(e =>
-                    e.PermissionShort.HasFlag(MyContext8538.PermissionShort.READ_WRITE)
-                )
+            var query = context.Entity
+                .Where(e => e.PermissionShort.HasFlag(MyContext8538.PermissionShort.READ_WRITE))
                 .ToList();
 
             Assert.Single(query);
@@ -1997,8 +2001,8 @@ WHERE [e].[Permission] & [e].[Permission] = [e].[Permission]
         using (var context = contextFactory.CreateContext())
         {
             ClearLog();
-            var query = context
-                .Entity.Where(e => e.PermissionByte.HasFlag(e.PermissionByte))
+            var query = context.Entity
+                .Where(e => e.PermissionByte.HasFlag(e.PermissionByte))
                 .ToList();
 
             Assert.Equal(3, query.Count);
@@ -2249,8 +2253,8 @@ WHERE [e].[Name] IS NULL
             Assert.Equal(0, context.Cache.Count);
 
             var entityParam = Expression.Parameter(typeof(MyContext8909.Entity8909), "e");
-            var idPropertyInfo = context
-                .Model.FindEntityType((typeof(MyContext8909.Entity8909)))
+            var idPropertyInfo = context.Model
+                .FindEntityType((typeof(MyContext8909.Entity8909)))
                 .FindProperty(nameof(MyContext8909.Entity8909.Id))
                 .PropertyInfo;
             for (var i = 0; i < 1100; i++)
@@ -2464,8 +2468,8 @@ ORDER BY [m].[Id]
 
         using (var context = contextFactory.CreateContext())
         {
-            var result = context
-                .Widgets.Where(w => w.Val == 1)
+            var result = context.Widgets
+                .Where(w => w.Val == 1)
                 .Select(w => MyContext9214.AddOne(w.Val))
                 .Single();
 
@@ -2483,8 +2487,8 @@ WHERE [w].[Val] = 1
         using (var context = contextFactory.CreateContext())
         {
             ClearLog();
-            var result = context
-                .Widgets.Where(w => w.Val == 1)
+            var result = context.Widgets
+                .Where(w => w.Val == 1)
                 .Select(w => MyContext9214.AddTwo(w.Val))
                 .Single();
 
@@ -2582,8 +2586,8 @@ WHERE [w].[Val] = 1
 
             Assert.Equal(0, valueParam.Value);
 
-            var blogs = context
-                .Blogs.FromSqlRaw(
+            var blogs = context.Blogs
+                .FromSqlRaw(
                     "[dbo].[GetPersonAndVoteCount]  @id, @Value out",
                     new SqlParameter { ParameterName = "id", Value = 1 },
                     valueParam
@@ -2648,8 +2652,8 @@ BEGIN
 
         using (var context = contextFactory.CreateContext())
         {
-            var result = await context
-                .People.OfType<MyContext9038.PersonTeacher9038>()
+            var result = await context.People
+                .OfType<MyContext9038.PersonTeacher9038>()
                 .Include(m => m.Students)
                     .ThenInclude(m => m.Family)
                         .ThenInclude(m => m.Members)
@@ -2781,8 +2785,8 @@ BEGIN
 
         using (var context = contextFactory.CreateContext())
         {
-            var query = context
-                .Carts.Select(t => new
+            var query = context.Carts
+                .Select(t => new
                 {
                     Processing = t.Configuration != null ? !t.Configuration.Processed : (bool?)null,
                 })
@@ -2866,8 +2870,8 @@ ORDER BY [p].[Id]
         using (var context = contextFactory.CreateContext())
         {
             ClearLog();
-            var query = context
-                .Parents.OrderBy(p => p.Id)
+            var query = context.Parents
+                .OrderBy(p => p.Id)
                 .Select(p => p.Children.ToList())
                 .ToList();
 
@@ -3386,8 +3390,8 @@ WHERE ([t].[Name] <> N'Bar') OR [t].[Name] IS NULL
 
         using (var context = contextFactory.CreateContext())
         {
-            var query1 = context
-                .Blogs.Select(b => new
+            var query1 = context.Blogs
+                .Select(b => new
                 {
                     Collection1 = b.Posts1,
                     Collection2 = b.Posts2,
@@ -3395,8 +3399,8 @@ WHERE ([t].[Name] <> N'Bar') OR [t].[Name] IS NULL
                 })
                 .ToList();
 
-            var query2 = context
-                .Blogs.Select(b => new
+            var query2 = context.Blogs
+                .Select(b => new
                 {
                     Collection1 = b.Posts1.OrderBy(p => p.Id).First().Comments.Count,
                     Collection2 = b.Posts2.OrderBy(p => p.Id).First().Comments.Count,
@@ -3405,8 +3409,8 @@ WHERE ([t].[Name] <> N'Bar') OR [t].[Name] IS NULL
                 .ToList();
 
             Assert.Throws<InvalidOperationException>(() =>
-                context
-                    .Blogs.Select(b => new
+                context.Blogs
+                    .Select(b => new
                     {
                         Collection1 = b.Posts1.OrderBy(p => p.Id),
                         Collection2 = b.Posts2.OrderBy(p => p.Id),
@@ -3718,8 +3722,8 @@ FROM [Prices] AS [p]
 
         using (var context = contextFactory.CreateContext())
         {
-            var query = context
-                .Employees.Include(i => i.Devices)
+            var query = context.Employees
+                .Include(i => i.Devices)
                 .OfType<MyContext12582.IEmployee12582>()
                 .ToList();
 
@@ -3731,9 +3735,10 @@ FROM [Prices] AS [p]
 
         using (var context = contextFactory.CreateContext())
         {
-            var query = context
-                .Employees.Select(e =>
-                    e.Devices.Where(d => d.Device != "foo")
+            var query = context.Employees
+                .Select(e =>
+                    e.Devices
+                        .Where(d => d.Device != "foo")
                         .Cast<MyContext12582.IEmployeeDevice12582>()
                 )
                 .ToList();
@@ -4001,9 +4006,8 @@ FROM [Prices] AS [p]
 
         using (var context = contextFactory.CreateContext())
         {
-            var query = context.Schools.Include(s =>
-                ((MyContext11944.ElementarySchool11944)s).Students
-            );
+            var query = context.Schools
+                .Include(s => ((MyContext11944.ElementarySchool11944)s).Students);
             var result = query.ToList();
 
             Assert.Equal(2, result.Count);
@@ -4015,9 +4019,10 @@ FROM [Prices] AS [p]
 
         using (var context = contextFactory.CreateContext())
         {
-            var query = context.Schools.Select(s =>
-                ((MyContext11944.ElementarySchool11944)s).Students.Where(ss => true).ToList()
-            );
+            var query = context.Schools
+                .Select(s =>
+                    ((MyContext11944.ElementarySchool11944)s).Students.Where(ss => true).ToList()
+                );
             var result = query.ToList();
 
             Assert.Equal(2, result.Count);
@@ -4088,8 +4093,8 @@ FROM [Prices] AS [p]
         using (var context = contextFactory.CreateContext())
         {
             var testDateList = new List<DateTime> { new(2018, 10, 07) };
-            var findRecordsWithDateInList = context
-                .ReproEntity.Where(a => testDateList.Contains(a.MyTime))
+            var findRecordsWithDateInList = context.ReproEntity
+                .Where(a => testDateList.Contains(a.MyTime))
                 .ToList();
 
             Assert.Single(findRecordsWithDateInList);
@@ -4155,8 +4160,8 @@ WHERE [r].[MyTime] IN (
 
             // Note that in this query, the outer Contains really has no type mapping, neither for its source (collection parameter), nor
             // for its item (the conditional expression returns key, which is also a parameter). The default type mapping must be applied.
-            var query = context
-                .Todos.Where(x => keys.Contains(todoTypes.Contains(x.Type) ? key : key))
+            var query = context.Todos
+                .Where(x => keys.Contains(todoTypes.Contains(x.Type) ? key : key))
                 .ToList();
 
             Assert.Single(query);
@@ -4220,11 +4225,11 @@ END IN (
 
         using (var context = contextFactory.CreateContext())
         {
-            var partners = context
-                .Partners.Select(x => new
+            var partners = context.Partners
+                .Select(x => new
                 {
-                    Addresses = x
-                        .Addresses.Select(y => new
+                    Addresses = x.Addresses
+                        .Select(y => new
                         {
                             Turnovers = y.Turnovers == null ? null : new { y.Turnovers.AmountIn },
                         })
@@ -4441,8 +4446,8 @@ ORDER BY [p].[Id]
 
         using (var context = contextFactory.CreateContext())
         {
-            var result = context
-                .Parents.OrderBy(e => e.Id)
+            var result = context.Parents
+                .OrderBy(e => e.Id)
                 .Select(p => (ulong?)p.Child.ULongRowVersion)
                 .FirstOrDefault();
 
@@ -4570,8 +4575,8 @@ ORDER BY [p].[Id]
 
         using (var context = contextFactory.CreateContext())
         {
-            var result = context
-                .Bases.Include(p => ((MyContext16233.DerivedType16233)p).Reference)
+            var result = context.Bases
+                .Include(p => ((MyContext16233.DerivedType16233)p).Reference)
                 .OrderBy(b => b.Id)
                 .ToList();
 
@@ -4598,8 +4603,8 @@ ORDER BY [b].[Id]
         using (var context = contextFactory.CreateContext())
         {
             ClearLog();
-            var result = context
-                .Bases.AsNoTracking()
+            var result = context.Bases
+                .AsNoTracking()
                 .Include(p => ((MyContext16233.DerivedType16233)p).Reference)
                 .OrderBy(b => b.Id)
                 .ToList();
@@ -4823,8 +4828,8 @@ LEFT JOIN [Categories] AS [c] ON [p].[CategoryId] = [c].[Id]
                 userParam
             );
 
-            var query = context
-                .BuildingSet.Where(selection)
+            var query = context.BuildingSet
+                .Where(selection)
                 .Include(a => a.Builder)
                     .ThenInclude(a => a.City)
                 .Include(a => a.Mandator)
@@ -5020,12 +5025,8 @@ WHERE [c].[Name] = N'Leeds'
 
         using (var context = contextFactory.CreateContext())
         {
-            var customers = context
-                .Customers.Select(c => new
-                {
-                    Customer = c,
-                    CustomerAgain = MyContext8864.Get(context, c.Id),
-                })
+            var customers = context.Customers
+                .Select(c => new { Customer = c, CustomerAgain = MyContext8864.Get(context, c.Id) })
                 .ToList();
 
             Assert.Equal(2, customers.Count);
@@ -5168,9 +5169,8 @@ WHERE EXISTS (
         using (var context = contextFactory.CreateContext())
         {
             ClearLog();
-            var query = context.EntitiesReferencingEntityWithQueryFilterSelfReference.Where(e =>
-                e.Name != "Foo"
-            );
+            var query = context.EntitiesReferencingEntityWithQueryFilterSelfReference
+                .Where(e => e.Name != "Foo");
             var result = query.ToList();
 
             AssertSql(
@@ -5305,8 +5305,8 @@ WHERE [r].[IsRemoved] = CAST(0 AS bit)
         using (var context = contextFactory.CreateContext())
         {
             ClearLog();
-            var query = context
-                .Parents.Where(p =>
+            var query = context.Parents
+                .Where(p =>
                     EF.Property<bool>(
                         EF.Property<MyContext17276.IRemovable17276>(p, "RemovableEntity"),
                         "IsRemoved"
@@ -5327,8 +5327,8 @@ WHERE [r].[IsRemoved] = CAST(1 AS bit)
         using (var context = contextFactory.CreateContext())
         {
             ClearLog();
-            var query = context
-                .RemovableEntities.Where(p =>
+            var query = context.RemovableEntities
+                .Where(p =>
                     EF.Property<string>(
                         EF.Property<MyContext17276.IOwned>(p, "OwnedEntity"),
                         "OwnedValue"
@@ -5446,8 +5446,8 @@ WHERE [p].[Id] = @__id_0
         using (var context = contextFactory.CreateContext())
         {
             // Verify no client eval
-            var result = context
-                .Foos.Where(f => f.String == new MyContext6864.Bar6864(1337))
+            var result = context.Foos
+                .Where(f => f.String == new MyContext6864.Bar6864(1337))
                 .ToList();
 
             Assert.Empty(result);
@@ -5529,8 +5529,8 @@ WHERE [f].[String] = @__p_0
         {
             ClearLog();
             // Verify no client eval
-            var result = context
-                .Foos.Where(f => f.String == new MyContext6864.Bar6864(1337).Clone())
+            var result = context.Foos
+                .Where(f => f.String == new MyContext6864.Bar6864(1337).Clone())
                 .ToList();
 
             Assert.Empty(result);
@@ -5620,8 +5620,8 @@ WHERE [t].[Nombre] LIKE '%lla%'
             });
 
             foreach (
-                var property in modelBuilder
-                    .Model.GetEntityTypes()
+                var property in modelBuilder.Model
+                    .GetEntityTypes()
                     .SelectMany(e => e.GetProperties().Where(p => p.ClrType == typeof(string)))
             )
             {
@@ -5691,8 +5691,8 @@ FROM [Blogs] AS [b]
 
         using (var context = contextFactory.CreateContext())
         {
-            var personsToFind = await context
-                .Persons.Where(p => p.Age >= 21)
+            var personsToFind = await context.Persons
+                .Where(p => p.Age >= 21)
                 .Select(p => new MyContext17644.PersonDetailView17644
                 {
                     Name = p.Name,
@@ -5712,8 +5712,8 @@ WHERE [p].[Age] >= 21
         using (var context = contextFactory.CreateContext())
         {
             ClearLog();
-            var personsToFind = await context
-                .Persons.Where(p => p.Age >= 21)
+            var personsToFind = await context.Persons
+                .Where(p => p.Age >= 21)
                 .Select(p => new MyContext17644.PersonDetailView17644
                 {
                     Name = p.Name,
@@ -5733,8 +5733,8 @@ WHERE [p].[Age] >= 21
         using (var context = contextFactory.CreateContext())
         {
             ClearLog();
-            var personsToFind = await context
-                .Persons.Where(p => p.Age >= 21)
+            var personsToFind = await context.Persons
+                .Where(p => p.Age >= 21)
                 .Select(p => new MyContext17644.PersonDetailView17644
                 {
                     Name = p.Name,
@@ -5754,8 +5754,8 @@ WHERE [p].[Age] >= 21
         using (var context = contextFactory.CreateContext())
         {
             ClearLog();
-            var personsToFind = await context
-                .Persons.Where(p => p.Age >= 21)
+            var personsToFind = await context.Persons
+                .Where(p => p.Age >= 21)
                 .Select(p => new MyContext17644.PersonDetailView17644
                 {
                     Name = p.Name,
@@ -5775,8 +5775,8 @@ WHERE [p].[Age] >= 21
         using (var context = contextFactory.CreateContext())
         {
             ClearLog();
-            var personsToFind = await context
-                .Persons.Where(p => p.Age >= 21)
+            var personsToFind = await context.Persons
+                .Where(p => p.Age >= 21)
                 .OrderBy(p => p.Id)
                 .Select(p => new MyContext17644.PersonDetailView17644
                 {
@@ -5798,8 +5798,8 @@ ORDER BY [p].[Id] DESC
         using (var context = contextFactory.CreateContext())
         {
             ClearLog();
-            var personsToFind = await context
-                .Persons.Where(p => p.Age >= 21)
+            var personsToFind = await context.Persons
+                .Where(p => p.Age >= 21)
                 .OrderBy(p => p.Id)
                 .Select(p => new MyContext17644.PersonDetailView17644
                 {
@@ -5862,8 +5862,8 @@ ORDER BY [p].[Id] DESC
 
         using (var context = contextFactory.CreateContext())
         {
-            var query = await context
-                .Entities.Select(e => new
+            var query = await context.Entities
+                .Select(e => new
                 {
                     ThingIds = e.Values.First().Things.Select(t => t.Subthing.ThingId).ToList(),
                 })
@@ -5968,8 +5968,8 @@ ORDER BY [e].[Id], [t0].[Id]
         {
             var users = (
                 from user in context.Users
-                from organisation in context
-                    .Organisations.Where(o => o.OrganisationUsers.Any())
+                from organisation in context.Organisations
+                    .Where(o => o.OrganisationUsers.Any())
                     .DefaultIfEmpty()
                 select new { UserId = user.Id, OrgId = organisation.Id }
             ).ToList();
@@ -6141,9 +6141,8 @@ CROSS JOIN (
         {
             var users = (
                 from a in context.Activities
-                let cs = context.CompetitionSeasons.First(s =>
-                    s.StartDate <= a.DateTime && a.DateTime < s.EndDate
-                )
+                let cs = context.CompetitionSeasons
+                    .First(s => s.StartDate <= a.DateTime && a.DateTime < s.EndDate)
                 select new
                 {
                     cs.Id,
@@ -6176,22 +6175,22 @@ ORDER BY [a].[Id], [a0].[Id], [t].[Id]
         using (var context = contextFactory.CreateContext())
         {
             ClearLog();
-            var users = context
-                .Activities.Select(a => new
+            var users = context.Activities
+                .Select(a => new
                 {
                     Activity = a,
-                    CompetitionSeason = context.CompetitionSeasons.First(s =>
-                        s.StartDate <= a.DateTime && a.DateTime < s.EndDate
-                    ),
+                    CompetitionSeason = context.CompetitionSeasons
+                        .First(s => s.StartDate <= a.DateTime && a.DateTime < s.EndDate),
                 })
                 .Select(a => new
                 {
                     a.Activity,
                     CompetitionSeasonId = a.CompetitionSeason.Id,
                     Points = a.Activity.Points
-                        ?? a.Activity.ActivityType.Points.Where(p =>
-                                p.CompetitionSeason == a.CompetitionSeason
-                            )
+                        ?? a.Activity
+                            .ActivityType
+                            .Points
+                            .Where(p => p.CompetitionSeason == a.CompetitionSeason)
                             .Select(p => p.Points)
                             .SingleOrDefault(),
                 })
@@ -6278,12 +6277,12 @@ INNER JOIN [ActivityType12456] AS [a0] ON [a].[ActivityTypeId] = [a0].[Id]
 
         using (var context = contextFactory.CreateContext())
         {
-            var container = await context
-                .Trades.Select(x => new
+            var container = await context.Trades
+                .Select(x => new
                 {
                     x.Id,
-                    Assets = x
-                        .Assets.AsQueryable()
+                    Assets = x.Assets
+                        .AsQueryable()
                         .Select(y => new
                         {
                             y.Id,
@@ -6406,8 +6405,8 @@ ORDER BY [t0].[Id], [t1].[Id], [t1].[Id0]
 
         using (var context = contextFactory.CreateContext())
         {
-            context
-                .Entities.Select(s => new IssueContext13517.IssueEntityDto13517
+            context.Entities
+                .Select(s => new IssueContext13517.IssueEntityDto13517
                 {
                     Id = s.Id,
                     RefEntity =
@@ -6748,12 +6747,10 @@ WHERE [u].[Id] IS NOT NULL
 
         using (var context = contextFactory.CreateContext())
         {
-            var result = context
-                .BaseEntities.Select(b =>
-                    context
-                        .OtherEntities.Where(o =>
-                            o.OtherEntityData == ((IssueContext19138.SubEntity19138)b).Data
-                        )
+            var result = context.BaseEntities
+                .Select(b =>
+                    context.OtherEntities
+                        .Where(o => o.OtherEntityData == ((IssueContext19138.SubEntity19138)b).Data)
                         .FirstOrDefault()
                 )
                 .ToList();
@@ -7014,10 +7011,8 @@ LEFT JOIN [CustomerMemberships] AS [c0] ON [c].[Id] = [c0].[CustomerId]
 
         using (var context = contextFactory.CreateContext())
         {
-            var originalQuery = context.Entities.Select(a => new IssueContext20097.MyModel20097
-            {
-                Id = a.Id,
-            });
+            var originalQuery = context.Entities
+                .Select(a => new IssueContext20097.MyModel20097 { Id = a.Id });
             var query = IssueContext20097.AddFilter(originalQuery, 1).ToList();
 
             Assert.Single(query);
@@ -7036,10 +7031,8 @@ WHERE [e].[Id] = @__id_0
         using (var context = contextFactory.CreateContext())
         {
             ClearLog();
-            var originalQuery = context.Entities.Select(a => new IssueContext20097.MyModel20097
-            {
-                Id = a.Id,
-            });
+            var originalQuery = context.Entities
+                .Select(a => new IssueContext20097.MyModel20097 { Id = a.Id });
             var query = originalQuery
                 .Where<IssueContext20097.IHaveId20097>(a => a.Id == 1)
                 .ToList();
@@ -7058,10 +7051,8 @@ WHERE [e].[Id] = CAST(1 AS bigint)
         using (var context = contextFactory.CreateContext())
         {
             ClearLog();
-            var originalQuery = context.Entities.Select(a => new IssueContext20097.MyModel20097
-            {
-                Id = a.Id,
-            });
+            var originalQuery = context.Entities
+                .Select(a => new IssueContext20097.MyModel20097 { Id = a.Id });
             var query = originalQuery
                 .Where(a => ((IssueContext20097.IHaveId20097)a).Id == 1)
                 .ToList();
@@ -7080,10 +7071,8 @@ WHERE [e].[Id] = CAST(1 AS bigint)
         using (var context = contextFactory.CreateContext())
         {
             ClearLog();
-            var originalQuery = context.Entities.Select(a => new IssueContext20097.MyModel20097
-            {
-                Id = a.Id,
-            });
+            var originalQuery = context.Entities
+                .Select(a => new IssueContext20097.MyModel20097 { Id = a.Id });
             var query = originalQuery
                 .Where(a => (a as IssueContext20097.IHaveId20097).Id == 1)
                 .ToList();
@@ -7102,10 +7091,8 @@ WHERE [e].[Id] = CAST(1 AS bigint)
         using (var context = contextFactory.CreateContext())
         {
             ClearLog();
-            var originalQuery = context.Entities.Select(a => new IssueContext20097.MyModel20097
-            {
-                Id = a.Id,
-            });
+            var originalQuery = context.Entities
+                .Select(a => new IssueContext20097.MyModel20097 { Id = a.Id });
             var query = originalQuery
                 .Where(a => ((IssueContext20097.IHaveId20097)a).Id == 1)
                 .ToList();
@@ -7361,8 +7348,8 @@ ORDER BY [p].[Id]
 
         using (var context = contextFactory.CreateContext())
         {
-            context
-                .Parents.Include(p => p.Children1)
+            context.Parents
+                .Include(p => p.Children1)
                 .Include(p => p.Children2)
                 .AsSplitQuery()
                 .ToList();
@@ -7414,8 +7401,8 @@ ORDER BY [p].[Id]
 
         using var context = contextFactory.CreateContext();
 
-        context
-            .Parents.Include(p => p.Children1)
+        context.Parents
+            .Include(p => p.Children1)
             .Include(p => p.Children2)
             .AsSingleQuery()
             .ToList();
@@ -7440,8 +7427,8 @@ ORDER BY [p].[Id], [c].[Id]
 
         using (var context = contextFactory.CreateContext())
         {
-            context
-                .Parents.Include(p => p.Children1)
+            context.Parents
+                .Include(p => p.Children1)
                 .Include(p => p.Children2)
                 .AsSplitQuery()
                 .ToList();
@@ -7451,8 +7438,8 @@ ORDER BY [p].[Id], [c].[Id]
 
         using (var context = contextFactory.CreateContext())
         {
-            await context
-                .Parents.Include(p => p.Children1)
+            await context.Parents
+                .Include(p => p.Children1)
                 .Include(p => p.Children2)
                 .AsSplitQuery()
                 .ToListAsync();
@@ -7462,8 +7449,8 @@ ORDER BY [p].[Id], [c].[Id]
 
         using (var context = contextFactory.CreateContext())
         {
-            context
-                .Parents.Include(p => p.Children1)
+            context.Parents
+                .Include(p => p.Children1)
                 .Include(p => p.Children2)
                 .OrderBy(e => e.Id)
                 .AsSplitQuery()
@@ -7474,8 +7461,8 @@ ORDER BY [p].[Id], [c].[Id]
 
         using (var context = contextFactory.CreateContext())
         {
-            await context
-                .Parents.Include(p => p.Children1)
+            await context.Parents
+                .Include(p => p.Children1)
                 .Include(p => p.Children2)
                 .OrderBy(e => e.Id)
                 .AsSplitQuery()
@@ -7759,8 +7746,8 @@ FROM [Businesses] AS [b]
     {
         var contextFactory = await InitializeAsync<MyContext21666>(onConfiguring: options =>
             ((IDbContextOptionsBuilderInfrastructure)options).AddOrUpdateExtension(
-                options
-                    .Options.FindExtension<SqlServerOptionsExtension>()
+                options.Options
+                    .FindExtension<SqlServerOptionsExtension>()
                     .WithConnection(null)
                     .WithConnectionString(SqlServerTestStore.CreateConnectionString(StoreName))
             )
@@ -7811,13 +7798,16 @@ FROM [Businesses] AS [b]
             > projection = b => new MyContext21768.BookViewModel21768
             {
                 FirstPage =
-                    b.FrontCover.Illustrations.FirstOrDefault(i =>
-                        i.State >= MyContext21768.IllustrationState21768.Approved
-                    ) != null
+                    b.FrontCover
+                        .Illustrations
+                        .FirstOrDefault(i =>
+                            i.State >= MyContext21768.IllustrationState21768.Approved
+                        ) != null
                         ? new MyContext21768.PageViewModel21768
                         {
-                            Uri = b
-                                .FrontCover.Illustrations.FirstOrDefault(i =>
+                            Uri = b.FrontCover
+                                .Illustrations
+                                .FirstOrDefault(i =>
                                     i.State >= MyContext21768.IllustrationState21768.Approved
                                 )
                                 .Uri,
@@ -7957,12 +7947,14 @@ WHERE [b].[Id] = 1
         using (var context = contextFactory.CreateContext())
         {
             var query =
-                from t1 in context.Tests.FromSqlInterpolated(
-                    $"Select * from Tests Where Type = {MyContext19206.TestType19206.Unit}"
-                )
-                from t2 in context.Tests.FromSqlInterpolated(
-                    $"Select * from Tests Where Type = {MyContext19206.TestType19206.Integration}"
-                )
+                from t1 in context.Tests
+                    .FromSqlInterpolated(
+                        $"Select * from Tests Where Type = {MyContext19206.TestType19206.Unit}"
+                    )
+                from t2 in context.Tests
+                    .FromSqlInterpolated(
+                        $"Select * from Tests Where Type = {MyContext19206.TestType19206.Integration}"
+                    )
                 select new { t1, t2 };
 
             var result = query.ToList();
@@ -8070,8 +8062,8 @@ WHERE ([e].[Name] <> N'Foo' OR [e].[Name] IS NULL) AND [e].[TenantId] = @__ef_fi
         {
             modelBuilder.Entity<MyEntity18510>().HasQueryFilter(x => x.Name != "Foo");
 
-            var entityType = modelBuilder
-                .Model.GetEntityTypes()
+            var entityType = modelBuilder.Model
+                .GetEntityTypes()
                 .Single(et => et.ClrType == typeof(MyEntity18510));
             var queryFilter = entityType.GetQueryFilter();
             Expression<Func<int>> tenantFunc = () => TenantId;
@@ -8470,8 +8462,7 @@ ORDER BY [u].[Id] DESC
 
             Assert.Equal(
                 10,
-                aggregate
-                    .FirstValueObject
+                aggregate.FirstValueObject
                     .SecondValueObjects[0]
                     .FourthValueObject
                     .FifthValueObjects[0]
@@ -8479,8 +8470,7 @@ ORDER BY [u].[Id] DESC
             );
             Assert.Equal(
                 20,
-                aggregate
-                    .FirstValueObject
+                aggregate.FirstValueObject
                     .SecondValueObjects[0]
                     .ThirdValueObjects[0]
                     .FourthValueObject
@@ -8772,8 +8762,8 @@ WHERE ([a].[Id] = @__entity_equality_a_0_Id AND [a0].[Id] = @__entity_equality_b
 
         using (var context = contextFactory.CreateContext())
         {
-            var masterTrunk = context
-                .MasterTrunk.OrderBy(e => EF.Property<string>(e, "Id"))
+            var masterTrunk = context.MasterTrunk
+                .OrderBy(e => EF.Property<string>(e, "Id"))
                 .FirstOrDefault(); //exception Sequence contains no elements.
 
             Assert.NotNull(masterTrunk);
@@ -9159,8 +9149,8 @@ FROM [CycleC] AS [c]
 
         using (var context = contextFactory.CreateContext())
         {
-            var results = context
-                .Entities.Select(x => new MyContext12274.OuterDTO12274
+            var results = context.Entities
+                .Select(x => new MyContext12274.OuterDTO12274
                 {
                     Id = x.Id,
                     Name = x.Name,
@@ -9219,8 +9209,8 @@ FROM [CycleC] AS [c]
 
         using (var context = contextFactory.CreateContext())
         {
-            var result = context
-                .Blogs.Select(e => new
+            var result = context.Blogs
+                .Select(e => new
                 {
                     e.Id,
                     e.Title,
@@ -9245,8 +9235,8 @@ ORDER BY [b].[Id]
         using (var context = contextFactory.CreateContext())
         {
             ClearLog();
-            var result = context
-                .Blogs.Select(e => new
+            var result = context.Blogs
+                .Select(e => new
                 {
                     e.Id,
                     e.Title,
@@ -9611,8 +9601,8 @@ WHERE [l].[Name] = N'My Location'
             Expression<Func<MyContext19253.A19253, string>> leftKeySelector = x => x.forkey;
             Expression<Func<MyContext19253.B19253, string>> rightKeySelector = y => y.forkey;
 
-            var query = context
-                .A.GroupJoin(
+            var query = context.A
+                .GroupJoin(
                     context.B,
                     leftKeySelector,
                     rightKeySelector,
@@ -9631,8 +9621,8 @@ WHERE [l].[Name] = N'My Location'
                         }
                 )
                 .Concat(
-                    context
-                        .B.GroupJoin(
+                    context.B
+                        .GroupJoin(
                             context.A,
                             rightKeySelector,
                             leftKeySelector,
@@ -9676,8 +9666,8 @@ WHERE [a0].[Id] IS NULL
             Expression<Func<MyContext19253.A19253, string>> leftKeySelector = x => x.forkey;
             Expression<Func<MyContext19253.B19253, string>> rightKeySelector = y => y.forkey;
 
-            var query = context
-                .A.GroupJoin(
+            var query = context.A
+                .GroupJoin(
                     context.B,
                     leftKeySelector,
                     rightKeySelector,
@@ -9696,8 +9686,8 @@ WHERE [a0].[Id] IS NULL
                         }
                 )
                 .Union(
-                    context
-                        .B.GroupJoin(
+                    context.B
+                        .GroupJoin(
                             context.A,
                             rightKeySelector,
                             leftKeySelector,
@@ -9741,8 +9731,8 @@ WHERE [a0].[Id] IS NULL
             Expression<Func<MyContext19253.A19253, string>> leftKeySelector = x => x.forkey;
             Expression<Func<MyContext19253.B19253, string>> rightKeySelector = y => y.forkey;
 
-            var query = context
-                .A.GroupJoin(
+            var query = context.A
+                .GroupJoin(
                     context.B,
                     leftKeySelector,
                     rightKeySelector,
@@ -9761,8 +9751,8 @@ WHERE [a0].[Id] IS NULL
                         }
                 )
                 .Except(
-                    context
-                        .B.GroupJoin(
+                    context.B
+                        .GroupJoin(
                             context.A,
                             rightKeySelector,
                             leftKeySelector,
@@ -9804,8 +9794,8 @@ LEFT JOIN [A] AS [a0] ON [b0].[forkey] = [a0].[forkey]
             Expression<Func<MyContext19253.A19253, string>> leftKeySelector = x => x.forkey;
             Expression<Func<MyContext19253.B19253, string>> rightKeySelector = y => y.forkey;
 
-            var query = context
-                .A.GroupJoin(
+            var query = context.A
+                .GroupJoin(
                     context.B,
                     leftKeySelector,
                     rightKeySelector,
@@ -9824,8 +9814,8 @@ LEFT JOIN [A] AS [a0] ON [b0].[forkey] = [a0].[forkey]
                         }
                 )
                 .Intersect(
-                    context
-                        .B.GroupJoin(
+                    context.B
+                        .GroupJoin(
                             context.A,
                             rightKeySelector,
                             leftKeySelector,
@@ -9954,9 +9944,8 @@ LEFT JOIN [A] AS [a0] ON [b0].[forkey] = [a0].[forkey]
 
         using (var context = contextFactory.CreateContext())
         {
-            var testUser = context.Blogs.FirstOrDefault(x =>
-                x.JObject["Author"].Value<string>() == "Maumar"
-            );
+            var testUser = context.Blogs
+                .FirstOrDefault(x => x.JObject["Author"].Value<string>() == "Maumar");
 
             Assert.NotNull(testUser);
 
@@ -10367,8 +10356,8 @@ OUTPUT INSERTED.[Id], i._Position;
 
         using var context = contextFactory.CreateContext();
         var id = 1;
-        var person = await context
-            .Persons.Include(p => p.Images)
+        var person = await context.Persons
+            .Include(p => p.Images)
             .Include(p => p.Actor)
                 .ThenInclude(a => a.Movies)
                     .ThenInclude(p => p.Movie)
@@ -10384,8 +10373,8 @@ OUTPUT INSERTED.[Id], i._Position;
                 x.Hometown,
                 x.Bio,
                 x.AvatarUrl,
-                Images = x
-                    .Images.Select(i => new
+                Images = x.Images
+                    .Select(i => new
                     {
                         i.Id,
                         i.ImageUrl,
@@ -10393,8 +10382,9 @@ OUTPUT INSERTED.[Id], i._Position;
                         i.Width,
                     })
                     .ToList(),
-                KnownByFilms = x
-                    .Actor.Movies.Select(m => m.Movie)
+                KnownByFilms = x.Actor
+                    .Movies
+                    .Select(m => m.Movie)
                     .Union(x.Director.Movies.Select(m => m.Movie))
                     .Select(m => new
                     {
@@ -10539,11 +10529,11 @@ ORDER BY [t].[Id], [t].[Id0], [t].[Id1], [p0].[Id]
         var contextFactory = await InitializeAsync<MyContext19947>();
 
         using var context = contextFactory.CreateContext();
-        var query = context
-            .Users.Select(captain => new
+        var query = context.Users
+            .Select(captain => new
             {
-                CaptainRateDtos = captain
-                    .Cars.SelectMany(car0 => car0.Taxis)
+                CaptainRateDtos = captain.Cars
+                    .SelectMany(car0 => car0.Taxis)
                     .OrderByDescending(taxi => taxi.DateArrived)
                     .Take(12)
                     .Select(taxi => new
@@ -10553,8 +10543,8 @@ ORDER BY [t].[Id], [t].[Id0], [t].[Id1], [p0].[Id]
                         UserId = taxi.UserEUser.Id,
                     })
                     .ToList(),
-                ReportCount = captain
-                    .Cars.SelectMany(car1 => car1.Taxis)
+                ReportCount = captain.Cars
+                    .SelectMany(car1 => car1.Taxis)
                     .Count(taxi0 => taxi0.ReportText != ""),
             })
             .SingleOrDefault();
@@ -10593,11 +10583,11 @@ ORDER BY [t].[Id], [t1].[DateArrived] DESC, [t1].[Id], [t1].[Id0]
         var contextFactory = await InitializeAsync<MyContext19947>();
 
         using var context = contextFactory.CreateContext();
-        var query = context
-            .Users.Select(captain => new
+        var query = context.Users
+            .Select(captain => new
             {
-                CaptainRateDtos = captain
-                    .Cars.SelectMany(car0 => car0.Taxis)
+                CaptainRateDtos = captain.Cars
+                    .SelectMany(car0 => car0.Taxis)
                     .OrderByDescending(taxi => taxi.DateArrived)
                     .Take(12)
                     .Select(taxi => new
@@ -10681,16 +10671,17 @@ ORDER BY [t].[Id], [t1].[DateArrived] DESC, [t1].[Id], [t1].[Id0]
         using var context = contextFactory.CreateContext();
         var referenceId = "a";
         var customerId = new Guid("1115c816-6c4c-4016-94df-d8b60a22ffa1");
-        var query = context
-            .Orders.Where(o => o.ExternalReferenceId == referenceId && o.CustomerId == customerId)
+        var query = context.Orders
+            .Where(o => o.ExternalReferenceId == referenceId && o.CustomerId == customerId)
             .Select(o => new
             {
-                IdentityDocuments = o.IdentityDocuments.Select(id => new
-                {
-                    Images = o
-                        .IdentityDocuments.SelectMany(id => id.Images)
-                        .Select(i => new { i.Image }),
-                }),
+                IdentityDocuments = o.IdentityDocuments
+                    .Select(id => new
+                    {
+                        Images = o.IdentityDocuments
+                            .SelectMany(id => id.Images)
+                            .Select(i => new { i.Image }),
+                    }),
             })
             .SingleOrDefault();
 
@@ -10787,8 +10778,8 @@ ORDER BY [t].[Id], [t0].[Id], [t0].[Id0]
         var contextFactory = await InitializeAsync<MyContext18738>();
 
         using var context = contextFactory.CreateContext();
-        var resultCollection = context
-            .StudentGameMapper.OrderBy(s => s.Id)
+        var resultCollection = context.StudentGameMapper
+            .OrderBy(s => s.Id)
             .Select(s => new StudentGameResult
             {
                 SportsList = (
@@ -10878,8 +10869,9 @@ ORDER BY [t].[Id]
 
         using var context = contextFactory.CreateContext();
 
-        context.Database.ExecuteSqlRaw(
-            @"create function [dbo].[GetPersonStatusAsOf] (@personId bigint, @timestamp datetime2)
+        context.Database
+            .ExecuteSqlRaw(
+                @"create function [dbo].[GetPersonStatusAsOf] (@personId bigint, @timestamp datetime2)
                     returns @personStatus table
                                     (
                                         Id bigint not null,
@@ -10895,7 +10887,7 @@ ORDER BY [t].[Id]
                                         where [m].[PersonId] = @personId and [m].[TimeStamp] = @timestamp
                                         return
                                     end"
-        );
+            );
 
         ClearLog();
 
@@ -11248,17 +11240,13 @@ ORDER BY [t].[Id]
         MyContext25225 context,
         Guid parentId
     ) =>
-        context
-            .Parents.Where(x => x.Id == parentId)
+        context.Parents
+            .Where(x => x.Id == parentId)
             .Select(p => new ParentViewModel25225
             {
                 Id = p.Id,
-                Collection = p
-                    .Collection.Select(c => new CollectionViewModel25225
-                    {
-                        Id = c.Id,
-                        ParentId = c.ParentId,
-                    })
+                Collection = p.Collection
+                    .Select(c => new CollectionViewModel25225 { Id = c.Id, ParentId = c.ParentId })
                     .ToArray(),
             });
 
@@ -11362,8 +11350,8 @@ ORDER BY [t].[Id]
 
         using (var context = contextFactory.CreateContext())
         {
-            _ = context
-                .Entities.Where(x => x.DateTime == parameter)
+            _ = context.Entities
+                .Where(x => x.DateTime == parameter)
                 .Select(e => e.DateTime)
                 .FirstOrDefault();
 
@@ -11412,8 +11400,8 @@ WHERE [e].[DateTime] = @__parameter_0
 
         using (var context = contextFactory.CreateContext())
         {
-            _ = context
-                .Entities.Where(x => x.DateTimeOffset == parameter)
+            _ = context.Entities
+                .Where(x => x.DateTimeOffset == parameter)
                 .Select(e => e.DateTimeOffset)
                 .FirstOrDefault();
 
@@ -11459,8 +11447,8 @@ WHERE [e].[DateTimeOffset] = @__parameter_0
 
         using (var context = contextFactory.CreateContext())
         {
-            _ = context
-                .Entities.Where(x => x.TimeSpan == parameter)
+            _ = context.Entities
+                .Where(x => x.TimeSpan == parameter)
                 .Select(e => e.TimeSpan)
                 .FirstOrDefault();
 

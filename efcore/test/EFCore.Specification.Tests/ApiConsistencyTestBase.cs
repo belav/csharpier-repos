@@ -132,10 +132,8 @@ public abstract class ApiConsistencyTestBase<TFixture> : IClassFixture<TFixture>
                     if (
                         method.ReturnType
                             != (method.GetParameters().FirstOrDefault()?.ParameterType)
-                        || !Fixture.GenericFluentApiTypes.TryGetValue(
-                            method.ReturnType,
-                            out var genericType
-                        )
+                        || !Fixture.GenericFluentApiTypes
+                            .TryGetValue(method.ReturnType, out var genericType)
                         || Fixture.UnmatchedMetadataMethods.Contains(method)
                     )
                     {
@@ -250,18 +248,16 @@ public abstract class ApiConsistencyTestBase<TFixture> : IClassFixture<TFixture>
                 if (
                     !Fixture.UnmatchedMetadataMethods.Contains(method)
                     && !(
-                        Fixture.UnmatchedMirrorMethods.TryGetValue(
-                            tuple.Value,
-                            out var unmatchedMirrorMethods
-                        ) && unmatchedMirrorMethods.Contains(method)
+                        Fixture.UnmatchedMirrorMethods
+                            .TryGetValue(tuple.Value, out var unmatchedMirrorMethods)
+                        && unmatchedMirrorMethods.Contains(method)
                     )
                 )
                 {
                     MethodInfo matchingMethod = null;
                     foreach (
-                        var targetMethod in tuple.Value.GetMethods(
-                            PublicInstance | BindingFlags.DeclaredOnly
-                        )
+                        var targetMethod in tuple.Value
+                            .GetMethods(PublicInstance | BindingFlags.DeclaredOnly)
                     )
                     {
                         if (
@@ -431,8 +427,8 @@ public abstract class ApiConsistencyTestBase<TFixture> : IClassFixture<TFixture>
     [ConditionalFact]
     public void Mutable_metadata_types_have_matching_methods()
     {
-        var errors = Fixture
-            .MetadataMethods.Select(typeTuple =>
+        var errors = Fixture.MetadataMethods
+            .Select(typeTuple =>
                 from readonlyMethod in typeTuple.ReadOnly
                 where !Fixture.UnmatchedMetadataMethods.Contains(readonlyMethod)
                 where typeTuple.Mutable != null
@@ -457,10 +453,8 @@ public abstract class ApiConsistencyTestBase<TFixture> : IClassFixture<TFixture>
         var (readonlyMethod, mutableMethod) = methodTuple;
 
         if (
-            Fixture.MetadataTypes.TryGetValue(
-                readonlyMethod.ReturnType,
-                out var expectedReturnTypes
-            )
+            Fixture.MetadataTypes
+                .TryGetValue(readonlyMethod.ReturnType, out var expectedReturnTypes)
         )
         {
             if (mutableMethod == null)
@@ -503,8 +497,8 @@ public abstract class ApiConsistencyTestBase<TFixture> : IClassFixture<TFixture>
     [ConditionalFact]
     public void Convention_metadata_types_have_matching_methods()
     {
-        var errors = Fixture
-            .MetadataMethods.Select(typeTuple =>
+        var errors = Fixture.MetadataMethods
+            .Select(typeTuple =>
                 from mutableMethod in typeTuple.Mutable
                 where !Fixture.UnmatchedMetadataMethods.Contains(mutableMethod)
                 join conventionMethod in typeTuple.Convention
@@ -548,10 +542,8 @@ public abstract class ApiConsistencyTestBase<TFixture> : IClassFixture<TFixture>
             }
         }
         else if (
-            Fixture.MutableMetadataTypes.TryGetValue(
-                mutableMethod.ReturnType,
-                out expectedReturnType
-            )
+            Fixture.MutableMetadataTypes
+                .TryGetValue(mutableMethod.ReturnType, out expectedReturnType)
         )
         {
             if (conventionMethod == null)
@@ -594,8 +586,8 @@ public abstract class ApiConsistencyTestBase<TFixture> : IClassFixture<TFixture>
     [ConditionalFact]
     public void Convention_metadata_types_have_expected_methods()
     {
-        var errors = Fixture
-            .MetadataMethods.Select(t => ValidateConventionMethods(t.Convention))
+        var errors = Fixture.MetadataMethods
+            .Select(t => ValidateConventionMethods(t.Convention))
             .Where(e => e != null)
             .ToList();
 
@@ -646,8 +638,8 @@ public abstract class ApiConsistencyTestBase<TFixture> : IClassFixture<TFixture>
     [ConditionalFact]
     public void Convention_builder_types_have_expected_methods()
     {
-        var errors = Fixture
-            .MetadataMethods.Select(t => ValidateConventionBuilderMethods(t.ConventionBuilder))
+        var errors = Fixture.MetadataMethods
+            .Select(t => ValidateConventionBuilderMethods(t.ConventionBuilder))
             .Where(e => e != null)
             .ToList();
 
@@ -753,8 +745,8 @@ public abstract class ApiConsistencyTestBase<TFixture> : IClassFixture<TFixture>
     [ConditionalFact]
     public void Convention_builder_methods_have_matching_returns()
     {
-        var errors = Fixture
-            .MetadataTypes.Select(t =>
+        var errors = Fixture.MetadataTypes
+            .Select(t =>
                 ValidateConventionBuilderMethodReturns(
                     t.Value.ConventionBuilder,
                     t.Value.Convention
@@ -776,8 +768,8 @@ public abstract class ApiConsistencyTestBase<TFixture> : IClassFixture<TFixture>
             return null;
         }
 
-        var extensionType = Fixture
-            .MetadataExtensionTypes.GetValueOrDefault(builderType)
+        var extensionType = Fixture.MetadataExtensionTypes
+            .GetValueOrDefault(builderType)
             .ConventionBuilderExtensions;
         var unmatchedMethods = new List<(Type Type, Type ReturnType, MethodInfo Method)>();
         foreach (var interfaceType in builderType.GetDeclaredInterfaces())
@@ -804,10 +796,8 @@ public abstract class ApiConsistencyTestBase<TFixture> : IClassFixture<TFixture>
             var normalizedInterfaceType = interfaceType.IsGenericType
                 ? interfaceType.GetGenericTypeDefinition()
                 : interfaceType;
-            var readOnlyInterfaceType = Fixture
-                .MetadataTypes.FirstOrDefault(p =>
-                    p.Value.ConventionBuilder == normalizedInterfaceType
-                )
+            var readOnlyInterfaceType = Fixture.MetadataTypes
+                .FirstOrDefault(p => p.Value.ConventionBuilder == normalizedInterfaceType)
                 .Key;
 
             var methods = interfaceType.GetMethods(PublicInstance);
@@ -858,8 +848,8 @@ public abstract class ApiConsistencyTestBase<TFixture> : IClassFixture<TFixture>
                 continue;
             }
 
-            var interfaceExtensionType = Fixture
-                .MetadataExtensionTypes.GetValueOrDefault(readOnlyInterfaceType)
+            var interfaceExtensionType = Fixture.MetadataExtensionTypes
+                .GetValueOrDefault(readOnlyInterfaceType)
                 .ConventionBuilderExtensions;
             if (interfaceExtensionType == null)
             {
@@ -933,8 +923,8 @@ public abstract class ApiConsistencyTestBase<TFixture> : IClassFixture<TFixture>
     [ConditionalFact]
     public void Runtime_metadata_types_have_matching_methods()
     {
-        var errors = Fixture
-            .MetadataMethods.Select(typeTuple =>
+        var errors = Fixture.MetadataMethods
+            .Select(typeTuple =>
                 from readOnlyMethod in typeTuple.ReadOnly
                 where !Fixture.UnmatchedMetadataMethods.Contains(readOnlyMethod)
                 join runtimeMethod in typeTuple.Runtime
@@ -967,10 +957,8 @@ public abstract class ApiConsistencyTestBase<TFixture> : IClassFixture<TFixture>
             }
         }
         else if (
-            Fixture.MutableMetadataTypes.TryGetValue(
-                readOnlyMethod.ReturnType,
-                out expectedReturnType
-            )
+            Fixture.MutableMetadataTypes
+                .TryGetValue(readOnlyMethod.ReturnType, out expectedReturnType)
         )
         {
             if (runtimeMethod == null)
@@ -1013,8 +1001,8 @@ public abstract class ApiConsistencyTestBase<TFixture> : IClassFixture<TFixture>
     [ConditionalFact]
     public void Readonly_metadata_methods_have_expected_name()
     {
-        var errors = Fixture
-            .MetadataMethods.SelectMany(m => m.ReadOnly.Select(ValidateMethodName))
+        var errors = Fixture.MetadataMethods
+            .SelectMany(m => m.ReadOnly.Select(ValidateMethodName))
             .Where(e => e != null)
             .ToList();
 
@@ -1046,8 +1034,8 @@ public abstract class ApiConsistencyTestBase<TFixture> : IClassFixture<TFixture>
     [ConditionalFact]
     public void Mutable_metadata_methods_have_expected_shape()
     {
-        var errors = Fixture
-            .MetadataMethods.SelectMany(m => m.Mutable.Select(ValidateMutableMethod))
+        var errors = Fixture.MetadataMethods
+            .SelectMany(m => m.Mutable.Select(ValidateMutableMethod))
             .Where(e => e != null)
             .ToList();
 
@@ -1109,8 +1097,8 @@ public abstract class ApiConsistencyTestBase<TFixture> : IClassFixture<TFixture>
     [ConditionalFact]
     public void Convention_metadata_methods_have_expected_shape()
     {
-        var errors = Fixture
-            .MetadataMethods.SelectMany(m => m.Convention.Select(ValidateConventionMethod))
+        var errors = Fixture.MetadataMethods
+            .SelectMany(m => m.Convention.Select(ValidateConventionMethod))
             .Where(e => e != null)
             .ToList();
 
@@ -1217,9 +1205,8 @@ public abstract class ApiConsistencyTestBase<TFixture> : IClassFixture<TFixture>
                     // Check that the parameter has a non-public copy constructor, identifying C# 9 records
                     || !it.GetConstructors()[0]
                         .GetParameters()[0]
-                        .ParameterType.GetConstructors(
-                            BindingFlags.Instance | BindingFlags.NonPublic
-                        )
+                        .ParameterType
+                        .GetConstructors(BindingFlags.Instance | BindingFlags.NonPublic)
                         .Any(c =>
                             c.GetParameters() is var parameters
                             && parameters.Length == 1
@@ -1252,8 +1239,8 @@ public abstract class ApiConsistencyTestBase<TFixture> : IClassFixture<TFixture>
                 type.IsNestedPrivate
                 && !type.IsSealed
                 && !type.IsAbstract
-                && !type
-                    .DeclaringType.GetNestedTypes(BindingFlags.NonPublic)
+                && !type.DeclaringType
+                    .GetNestedTypes(BindingFlags.NonPublic)
                     .Any(t => t.BaseType == type)
             select type.FullName
         ).ToList();
@@ -1781,24 +1768,24 @@ public abstract class ApiConsistencyTestBase<TFixture> : IClassFixture<TFixture>
                 var (mutableType, conventionType, conventionBuilderType, runtimeType) =
                     MetadataTypes[type];
                 var readOnlyMethods =
-                    extensionTypeTuple
-                        .ReadonlyExtensions?.GetMethods(BindingFlags.Public | BindingFlags.Static)
+                    extensionTypeTuple.ReadonlyExtensions
+                        ?.GetMethods(BindingFlags.Public | BindingFlags.Static)
                         .Where(m =>
                             !IsObsolete(m) && m.GetParameters().First().ParameterType == type
                         )
                         .ToArray()
                     ?? new MethodInfo[0];
                 var mutableMethods =
-                    extensionTypeTuple
-                        .MutableExtensions?.GetMethods(BindingFlags.Public | BindingFlags.Static)
+                    extensionTypeTuple.MutableExtensions
+                        ?.GetMethods(BindingFlags.Public | BindingFlags.Static)
                         .Where(m =>
                             !IsObsolete(m) && m.GetParameters().First().ParameterType == mutableType
                         )
                         .ToArray()
                     ?? new MethodInfo[0];
                 var conventionMethods =
-                    extensionTypeTuple
-                        .ConventionExtensions?.GetMethods(BindingFlags.Public | BindingFlags.Static)
+                    extensionTypeTuple.ConventionExtensions
+                        ?.GetMethods(BindingFlags.Public | BindingFlags.Static)
                         .Where(m =>
                             !IsObsolete(m)
                             && m.GetParameters().First().ParameterType == conventionType
@@ -1806,10 +1793,8 @@ public abstract class ApiConsistencyTestBase<TFixture> : IClassFixture<TFixture>
                         .ToArray()
                     ?? new MethodInfo[0];
                 var conventionBuilderMethods =
-                    extensionTypeTuple
-                        .ConventionBuilderExtensions?.GetMethods(
-                            BindingFlags.Public | BindingFlags.Static
-                        )
+                    extensionTypeTuple.ConventionBuilderExtensions
+                        ?.GetMethods(BindingFlags.Public | BindingFlags.Static)
                         .Where(m =>
                             !IsObsolete(m)
                             && m.GetParameters().First().ParameterType == conventionBuilderType
@@ -1817,8 +1802,8 @@ public abstract class ApiConsistencyTestBase<TFixture> : IClassFixture<TFixture>
                         .ToArray()
                     ?? new MethodInfo[0];
                 var runtimeMethods =
-                    extensionTypeTuple
-                        .RuntimeExtensions?.GetMethods(BindingFlags.Public | BindingFlags.Static)
+                    extensionTypeTuple.RuntimeExtensions
+                        ?.GetMethods(BindingFlags.Public | BindingFlags.Static)
                         .Where(m =>
                             !IsObsolete(m) && m.GetParameters().First().ParameterType == runtimeType
                         )
@@ -1849,26 +1834,30 @@ public abstract class ApiConsistencyTestBase<TFixture> : IClassFixture<TFixture>
                     typeTuple.Key.GetMethods(PublicInstance).Where(m => !IsObsolete(m)).ToArray()
                     ?? new MethodInfo[0];
                 var mutableMethods =
-                    typeTuple
-                        .Value.Mutable.GetMethods(PublicInstance)
+                    typeTuple.Value
+                        .Mutable
+                        .GetMethods(PublicInstance)
                         .Where(m => !IsObsolete(m))
                         .ToArray()
                     ?? new MethodInfo[0];
                 var conventionMethods =
-                    typeTuple
-                        .Value.Convention.GetMethods(PublicInstance)
+                    typeTuple.Value
+                        .Convention
+                        .GetMethods(PublicInstance)
                         .Where(m => !IsObsolete(m))
                         .ToArray()
                     ?? new MethodInfo[0];
                 var conventionBuilderMethods =
-                    typeTuple
-                        .Value.ConventionBuilder?.GetMethods(PublicInstance)
+                    typeTuple.Value
+                        .ConventionBuilder
+                        ?.GetMethods(PublicInstance)
                         .Where(m => !IsObsolete(m))
                         .ToArray()
                     ?? new MethodInfo[0];
                 var runtimeMethods =
-                    typeTuple
-                        .Value.Runtime?.GetMethods(PublicInstance)
+                    typeTuple.Value
+                        .Runtime
+                        ?.GetMethods(PublicInstance)
                         .Where(m => !IsObsolete(m))
                         .ToArray()
                     ?? new MethodInfo[0];

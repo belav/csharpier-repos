@@ -10,9 +10,8 @@ namespace System.Activities.DurableInstancing
     {
         public UnlockInstanceCommand()
             : base(
-                SqlWorkflowInstanceStoreConstants.DurableInstancingNamespace.GetName(
-                    "UnlockInstance"
-                )
+                SqlWorkflowInstanceStoreConstants.DurableInstancingNamespace
+                    .GetName("UnlockInstance")
             ) { }
 
         public Guid InstanceId { get; set; }

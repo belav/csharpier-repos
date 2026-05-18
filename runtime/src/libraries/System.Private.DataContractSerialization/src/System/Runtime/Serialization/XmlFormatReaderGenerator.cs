@@ -156,9 +156,8 @@ namespace System.Runtime.Serialization
 
                     bool isFactoryType = InvokeFactoryMethod(classContract, objectId);
                     if (
-                        Globals.TypeOfIDeserializationCallback.IsAssignableFrom(
-                            classContract.UnderlyingType
-                        )
+                        Globals.TypeOfIDeserializationCallback
+                            .IsAssignableFrom(classContract.UnderlyingType)
                     )
                     {
                         _ilg.Call(
@@ -401,9 +400,8 @@ namespace System.Runtime.Serialization
 
             private static bool HasFactoryMethod(ClassDataContract classContract)
             {
-                return Globals.TypeOfIObjectReference.IsAssignableFrom(
-                    classContract.UnderlyingType
-                );
+                return Globals.TypeOfIObjectReference
+                    .IsAssignableFrom(classContract.UnderlyingType);
             }
 
             private bool InvokeFactoryMethod(
@@ -867,9 +865,8 @@ namespace System.Runtime.Serialization
                     switch (collectionContract.Kind)
                     {
                         case CollectionKind.GenericDictionary:
-                            type = Globals.TypeOfDictionaryGeneric.MakeGenericType(
-                                itemType.GetGenericArguments()
-                            );
+                            type = Globals.TypeOfDictionaryGeneric
+                                .MakeGenericType(itemType.GetGenericArguments());
                             constructor = type.GetConstructor(
                                 BindingFlags.Instance | BindingFlags.Public,
                                 Type.EmptyTypes
@@ -971,8 +968,8 @@ namespace System.Runtime.Serialization
                 _ilg.EndFor();
                 if (isArray)
                 {
-                    MethodInfo trimArraySizeMethod =
-                        XmlFormatGeneratorStatics.TrimArraySizeMethod.MakeGenericMethod(itemType);
+                    MethodInfo trimArraySizeMethod = XmlFormatGeneratorStatics.TrimArraySizeMethod
+                        .MakeGenericMethod(itemType);
                     _ilg.Call(null, trimArraySizeMethod, growingCollection, i);
                     _ilg.Stloc(_objectLocal);
                     _ilg.Call(

@@ -521,9 +521,8 @@ Y2FsaG9zdDANBgkqhkiG9w0BAQsFAAMCB4A=
                     RSASignaturePadding.Pkcs1
                 );
 
-                rootReq.CertificateExtensions.Add(
-                    X509BasicConstraintsExtension.CreateForCertificateAuthority()
-                );
+                rootReq.CertificateExtensions
+                    .Add(X509BasicConstraintsExtension.CreateForCertificateAuthority());
 
                 using (X509Certificate2 rootCert = rootReq.CreateSelfSigned(notBefore, notAfter))
                 {
@@ -579,9 +578,8 @@ Y2FsaG9zdDANBgkqhkiG9w0BAQsFAAMCB4A=
                     RSASignaturePadding.Pkcs1
                 );
 
-                rootReq.CertificateExtensions.Add(
-                    X509BasicConstraintsExtension.CreateForCertificateAuthority()
-                );
+                rootReq.CertificateExtensions
+                    .Add(X509BasicConstraintsExtension.CreateForCertificateAuthority());
 
                 using (X509Certificate2 rootCert = rootReq.CreateSelfSigned(notBefore, notAfter))
                 {
@@ -634,9 +632,8 @@ Y2FsaG9zdDANBgkqhkiG9w0BAQsFAAMCB4A=
                     HashAlgorithmName.SHA384
                 );
 
-                rootReq.CertificateExtensions.Add(
-                    X509BasicConstraintsExtension.CreateForCertificateAuthority()
-                );
+                rootReq.CertificateExtensions
+                    .Add(X509BasicConstraintsExtension.CreateForCertificateAuthority());
 
                 using (X509Certificate2 rootCert = rootReq.CreateSelfSigned(notBefore, notAfter))
                 {

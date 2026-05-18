@@ -821,11 +821,12 @@ namespace Microsoft.Extensions.Hosting.Internal
             lifetime.ApplicationStarted.Register(() => wasStartedCalled = true);
 
             var wasStoppingCalled = false;
-            lifetime.ApplicationStopping.Register(() =>
-            {
-                wasStoppingCalled = true;
-                otherTcs.SetResult(true);
-            });
+            lifetime.ApplicationStopping
+                .Register(() =>
+                {
+                    wasStoppingCalled = true;
+                    otherTcs.SetResult(true);
+                });
 
             // Ensure all completions have been signaled before continuing
             await Task.WhenAll(host.StartAsync(), throwingTcs.Task, otherTcs.Task);
@@ -878,30 +879,33 @@ namespace Microsoft.Extensions.Hosting.Internal
                 var applicationStoppingCompletedBeforeApplicationStopped = false;
                 var applicationStoppedCompletedBeforeRunCompleted = false;
 
-                lifetime.ApplicationStarted.Register(() =>
-                {
-                    applicationStartedEvent.Set();
-                });
+                lifetime.ApplicationStarted
+                    .Register(() =>
+                    {
+                        applicationStartedEvent.Set();
+                    });
 
-                lifetime.ApplicationStopping.Register(() =>
-                {
-                    // Check whether the applicationStartedEvent has been set
-                    applicationStartedCompletedBeforeApplicationStopping =
-                        applicationStartedEvent.IsSet;
+                lifetime.ApplicationStopping
+                    .Register(() =>
+                    {
+                        // Check whether the applicationStartedEvent has been set
+                        applicationStartedCompletedBeforeApplicationStopping =
+                            applicationStartedEvent.IsSet;
 
-                    // Simulate work.
-                    Thread.Sleep(1000);
+                        // Simulate work.
+                        Thread.Sleep(1000);
 
-                    applicationStoppingEvent.Set();
-                });
+                        applicationStoppingEvent.Set();
+                    });
 
-                lifetime.ApplicationStopped.Register(() =>
-                {
-                    // Check whether the applicationStoppingEvent has been set
-                    applicationStoppingCompletedBeforeApplicationStopped =
-                        applicationStoppingEvent.IsSet;
-                    applicationStoppedEvent.Set();
-                });
+                lifetime.ApplicationStopped
+                    .Register(() =>
+                    {
+                        // Check whether the applicationStoppingEvent has been set
+                        applicationStoppingCompletedBeforeApplicationStopped =
+                            applicationStoppingEvent.IsSet;
+                        applicationStoppedEvent.Set();
+                    });
 
                 var runHostAndVerifyApplicationStopped = Task.Run(async () =>
                 {
@@ -1109,8 +1113,7 @@ namespace Microsoft.Extensions.Hosting.Internal
                                     Assert.Equal(1, startedCalls);
                                     Assert.Equal(1, stoppingCalls);
                                     Assert.True(
-                                        applicationLifetime
-                                            .ApplicationStopped
+                                        applicationLifetime.ApplicationStopped
                                             .IsCancellationRequested
                                     );
                                 };

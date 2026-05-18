@@ -135,17 +135,18 @@ namespace System.Xml.Xsl.Qil
         /// </summary>
         protected virtual void WriteLineInfo(QilNode node)
         {
-            this.writer.WriteAttributeString(
-                "lineInfo",
-                string.Format(
-                    CultureInfo.InvariantCulture,
-                    "[{0},{1} -- {2},{3}]",
-                    node.SourceLine.Start.Line,
-                    node.SourceLine.Start.Pos,
-                    node.SourceLine.End.Line,
-                    node.SourceLine.End.Pos
-                )
-            );
+            this.writer
+                .WriteAttributeString(
+                    "lineInfo",
+                    string.Format(
+                        CultureInfo.InvariantCulture,
+                        "[{0},{1} -- {2},{3}]",
+                        node.SourceLine.Start.Line,
+                        node.SourceLine.Start.Pos,
+                        node.SourceLine.End.Line,
+                        node.SourceLine.End.Pos
+                    )
+                );
         }
 
         /// <summary>
@@ -153,10 +154,12 @@ namespace System.Xml.Xsl.Qil
         /// </summary>
         protected virtual void WriteXmlType(QilNode node)
         {
-            this.writer.WriteAttributeString(
-                "xmlType",
-                node.XmlType.ToString((this.options & Options.RoundTripTypeInfo) != 0 ? "S" : "G")
-            );
+            this.writer
+                .WriteAttributeString(
+                    "xmlType",
+                    node.XmlType
+                        .ToString((this.options & Options.RoundTripTypeInfo) != 0 ? "S" : "G")
+                );
         }
 
         //-----------------------------------------------
@@ -171,9 +174,10 @@ namespace System.Xml.Xsl.Qil
             if (node is QilLiteral)
             {
                 // If literal is not handled elsewhere, print its string value
-                this.writer.WriteValue(
-                    Convert.ToString(((QilLiteral)node).Value, CultureInfo.InvariantCulture)
-                );
+                this.writer
+                    .WriteValue(
+                        Convert.ToString(((QilLiteral)node).Value, CultureInfo.InvariantCulture)
+                    );
                 return node;
             }
             else if (node is QilReference)
@@ -257,9 +261,12 @@ namespace System.Xml.Xsl.Qil
         /// </summary>
         protected override QilNode VisitLiteralType(QilLiteral value)
         {
-            this.writer.WriteString(
-                ((XmlQueryType)value).ToString((this.options & Options.TypeInfo) != 0 ? "G" : "S")
-            );
+            this.writer
+                .WriteString(
+                    ((XmlQueryType)value).ToString(
+                        (this.options & Options.TypeInfo) != 0 ? "G" : "S"
+                    )
+                );
             return value;
         }
 
@@ -305,15 +312,17 @@ namespace System.Xml.Xsl.Qil
                 WriteAnnotations(node.Annotation);
 
             // Call WriteStartElement
-            this.writer.WriteStartElement("", Enum.GetName(typeof(QilNodeType), node.NodeType), "");
+            this.writer
+                .WriteStartElement("", Enum.GetName(typeof(QilNodeType), node.NodeType), "");
 
             // Write common attributes
 #if QIL_TRACE_NODE_CREATION
             if ((this.options & Options.NodeIdentity) != 0)
-                this.writer.WriteAttributeString(
-                    "nodeId",
-                    node.NodeId.ToString(CultureInfo.InvariantCulture)
-                );
+                this.writer
+                    .WriteAttributeString(
+                        "nodeId",
+                        node.NodeId.ToString(CultureInfo.InvariantCulture)
+                    );
 
             if ((this.options & Options.NodeLocation) != 0)
                 this.writer.WriteAttributeString("nodeLoc", node.NodeLocation);

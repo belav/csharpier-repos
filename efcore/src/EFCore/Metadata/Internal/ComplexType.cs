@@ -52,10 +52,8 @@ public class ComplexType
         }
 
         if (
-            EntityType.DynamicProxyGenAssemblyName.Equals(
-                type.Assembly.GetName().Name,
-                StringComparison.Ordinal
-            )
+            EntityType.DynamicProxyGenAssemblyName
+                .Equals(type.Assembly.GetName().Name, StringComparison.Ordinal)
         )
         {
             throw new ArgumentException(CoreStrings.AddingProxyTypeAsEntityType(type.FullName));
@@ -332,12 +330,8 @@ public class ComplexType
         IConventionAnnotation? annotation,
         IConventionAnnotation? oldAnnotation
     ) =>
-        Model.ConventionDispatcher.OnComplexTypeAnnotationChanged(
-            Builder,
-            name,
-            annotation,
-            oldAnnotation
-        );
+        Model.ConventionDispatcher
+            .OnComplexTypeAnnotationChanged(Builder, name, annotation, oldAnnotation);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -438,7 +432,8 @@ public class ComplexType
                     {
                         ((IModel)complexType.Model)
                             .GetModelDependencies()
-                            .ConstructorBindingFactory.GetBindings(
+                            .ConstructorBindingFactory
+                            .GetBindings(
                                 (IReadOnlyEntityType)complexType,
                                 out complexType._constructorBinding,
                                 out complexType._serviceOnlyConstructorBinding

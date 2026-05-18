@@ -1106,9 +1106,8 @@ namespace MonoTests.System.ComponentModel
 
             MS_System_ComponentModel.MaskedTextProvider mtp = null;
             int testPosition = 0;
-            MS_System_ComponentModel.MaskedTextResultHint resultHint = MS_System_ComponentModel
-                .MaskedTextResultHint
-                .Unknown;
+            MS_System_ComponentModel.MaskedTextResultHint resultHint =
+                MS_System_ComponentModel.MaskedTextResultHint.Unknown;
             bool result;
 
             foreach (string mask in test_masks)
@@ -1261,9 +1260,8 @@ namespace MonoTests.System.ComponentModel
 
             MS_System_ComponentModel.MaskedTextProvider mtp = null;
             int testPosition = 0;
-            MS_System_ComponentModel.MaskedTextResultHint resultHint = MS_System_ComponentModel
-                .MaskedTextResultHint
-                .Unknown;
+            MS_System_ComponentModel.MaskedTextResultHint resultHint =
+                MS_System_ComponentModel.MaskedTextResultHint.Unknown;
 
             bool result;
 
@@ -1359,9 +1357,8 @@ namespace MonoTests.System.ComponentModel
             );
 
             MS_System_ComponentModel.MaskedTextProvider mtp = null;
-            MS_System_ComponentModel.MaskedTextResultHint resultHint = MS_System_ComponentModel
-                .MaskedTextResultHint
-                .Unknown;
+            MS_System_ComponentModel.MaskedTextResultHint resultHint =
+                MS_System_ComponentModel.MaskedTextResultHint.Unknown;
 
             foreach (string mask in test_masks)
             {
@@ -2143,9 +2140,8 @@ namespace MonoTests.System.ComponentModel
             BitArray bits = new BitArray(max);
             for (int i = 0; i < max; i++)
             {
-                bool result_MS = MS_System_ComponentModel.MaskedTextProvider.IsValidInputChar(
-                    (char)i
-                );
+                bool result_MS = MS_System_ComponentModel.MaskedTextProvider
+                    .IsValidInputChar((char)i);
                 bool result_Mono = MaskedTextProvider.IsValidInputChar((char)i);
                 if (dont_write && result_MS != result_Mono)
                 {
@@ -2200,9 +2196,8 @@ namespace MonoTests.System.ComponentModel
             BitArray bits = new BitArray(max);
             for (int i = 0; i < max; i++)
             {
-                bool result_MS = MS_System_ComponentModel.MaskedTextProvider.IsValidMaskChar(
-                    (char)i
-                );
+                bool result_MS = MS_System_ComponentModel.MaskedTextProvider
+                    .IsValidMaskChar((char)i);
                 bool result_Mono = MaskedTextProvider.IsValidMaskChar((char)i);
                 if (dont_write && result_MS != result_Mono)
                 {
@@ -2257,9 +2252,8 @@ namespace MonoTests.System.ComponentModel
             BitArray bits = new BitArray(max);
             for (int i = 0; i < max; i++)
             {
-                bool result_MS = MS_System_ComponentModel.MaskedTextProvider.IsValidPasswordChar(
-                    (char)i
-                );
+                bool result_MS = MS_System_ComponentModel.MaskedTextProvider
+                    .IsValidPasswordChar((char)i);
                 bool result_Mono = MaskedTextProvider.IsValidPasswordChar((char)i);
                 if (dont_write && (result_MS != result_Mono))
                 {
@@ -4219,7 +4213,8 @@ namespace MonoTests.System.ComponentModel
                         args[arg_types.Length - 1] = Enum.ToObject(
                             method
                                 .GetParameters()[arg_types.Length - 1]
-                                .ParameterType.GetElementType(),
+                                .ParameterType
+                                .GetElementType(),
                             (int)args[arg_types.Length - 1]
                         );
                     }

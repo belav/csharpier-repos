@@ -69,8 +69,8 @@ public static class CoreClrConfigurationDetection
 
     private static bool AssemblyConfigurationEquals(string configuration)
     {
-        AssemblyConfigurationAttribute assemblyConfigurationAttribute =
-            typeof(string).Assembly.GetCustomAttribute<AssemblyConfigurationAttribute>();
+        AssemblyConfigurationAttribute assemblyConfigurationAttribute = typeof(string).Assembly
+            .GetCustomAttribute<AssemblyConfigurationAttribute>();
 
         return assemblyConfigurationAttribute != null
             && string.Equals(

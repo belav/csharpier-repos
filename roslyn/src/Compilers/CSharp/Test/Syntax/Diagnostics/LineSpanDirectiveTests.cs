@@ -243,8 +243,8 @@ void Render()
             AssertEx.Equal(expectedLineMappings, actualLineMappings);
 
             var textB = SourceText.From(sourceB);
-            var actualVisibility = textB
-                .Lines.Select(line => treeB.GetLineVisibility(line.Start))
+            var actualVisibility = textB.Lines
+                .Select(line => treeB.GetLineVisibility(line.Start))
                 .ToImmutableArray();
             var expectedVisibility = new[]
             {

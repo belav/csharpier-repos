@@ -44,20 +44,19 @@ namespace System.ServiceModel.Channels
                 HttpRequestMessageProperty.GetHttpRequestMessageFromMessage(message);
             if (httpRequestMessage == null)
             {
-                HttpRequestMessageProperty requestMessageProperty =
-                    message.Properties.GetValue<HttpRequestMessageProperty>(
-                        HttpRequestMessageProperty.Name
-                    );
+                HttpRequestMessageProperty requestMessageProperty = message.Properties
+                    .GetValue<HttpRequestMessageProperty>(HttpRequestMessageProperty.Name);
                 if (requestMessageProperty == null)
                 {
-                    throw FxTrace.Exception.AsError(
-                        new InvalidOperationException(
-                            SR.MissingHttpMessageProperty(
-                                ToHttpRequestMessageMethodName,
-                                HttpRequestMessagePropertyTypeName
+                    throw FxTrace.Exception
+                        .AsError(
+                            new InvalidOperationException(
+                                SR.MissingHttpMessageProperty(
+                                    ToHttpRequestMessageMethodName,
+                                    HttpRequestMessagePropertyTypeName
+                                )
                             )
-                        )
-                    );
+                        );
                 }
 
                 httpRequestMessage = CreateRequestMessage(message, requestMessageProperty);
@@ -84,20 +83,19 @@ namespace System.ServiceModel.Channels
                 HttpResponseMessageProperty.GetHttpResponseMessageFromMessage(message);
             if (httpResponseMessage == null)
             {
-                HttpResponseMessageProperty responseMessageProperty =
-                    message.Properties.GetValue<HttpResponseMessageProperty>(
-                        HttpResponseMessageProperty.Name
-                    );
+                HttpResponseMessageProperty responseMessageProperty = message.Properties
+                    .GetValue<HttpResponseMessageProperty>(HttpResponseMessageProperty.Name);
                 if (responseMessageProperty == null)
                 {
-                    throw FxTrace.Exception.AsError(
-                        new InvalidOperationException(
-                            SR.MissingHttpMessageProperty(
-                                ToHttpResponseMessageMethodName,
-                                HttpResponseMessagePropertyTypeName
+                    throw FxTrace.Exception
+                        .AsError(
+                            new InvalidOperationException(
+                                SR.MissingHttpMessageProperty(
+                                    ToHttpResponseMessageMethodName,
+                                    HttpResponseMessagePropertyTypeName
+                                )
                             )
-                        )
-                    );
+                        );
                 }
 
                 httpResponseMessage = CreateResponseMessage(message, responseMessageProperty);
@@ -117,10 +115,11 @@ namespace System.ServiceModel.Channels
                 "The 'httpRequestMessage' parameter should never be null."
             );
 
-            message.Properties.Add(
-                HttpRequestMessageProperty.Name,
-                new HttpRequestMessageProperty(httpRequestMessage)
-            );
+            message.Properties
+                .Add(
+                    HttpRequestMessageProperty.Name,
+                    new HttpRequestMessageProperty(httpRequestMessage)
+                );
             CopyPropertiesToMessage(message, httpRequestMessage.Properties);
         }
 
@@ -135,10 +134,11 @@ namespace System.ServiceModel.Channels
                 "The 'httpResponseMessage' parameter should never be null."
             );
 
-            message.Properties.Add(
-                HttpResponseMessageProperty.Name,
-                new HttpResponseMessageProperty(httpResponseMessage)
-            );
+            message.Properties
+                .Add(
+                    HttpResponseMessageProperty.Name,
+                    new HttpResponseMessageProperty(httpResponseMessage)
+                );
             HttpRequestMessage httpRequestMessage = httpResponseMessage.RequestMessage;
             if (httpRequestMessage != null)
             {

@@ -250,11 +250,8 @@ namespace System.ServiceModel.Security
                     requirement.Properties[
                         ServiceModelSecurityTokenRequirement.MessageDirectionProperty
                     ] = MessageDirection.Input;
-                    this.recipientCryptoTokenAuthenticator =
-                        this.SecurityTokenManager.CreateSecurityTokenAuthenticator(
-                            requirement,
-                            out resolver
-                        );
+                    this.recipientCryptoTokenAuthenticator = this.SecurityTokenManager
+                        .CreateSecurityTokenAuthenticator(requirement, out resolver);
                     Open(
                         "RecipientCryptoTokenAuthenticator",
                         true,
@@ -307,8 +304,8 @@ namespace System.ServiceModel.Security
                         (this.RequiresAsymmetricTokenProviderForForwardDirection)
                             ? MessageDirection.Input
                             : MessageDirection.Output;
-                    this.recipientAsymmetricTokenProvider =
-                        this.SecurityTokenManager.CreateSecurityTokenProvider(requirement);
+                    this.recipientAsymmetricTokenProvider = this.SecurityTokenManager
+                        .CreateSecurityTokenProvider(requirement);
                     Open(
                         "RecipientAsymmetricTokenProvider",
                         this.RequiresAsymmetricTokenProviderForForwardDirection,

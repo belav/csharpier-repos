@@ -36,9 +36,8 @@ namespace Microsoft.Interop
                 };
             }
             else if (
-                interopAttributeData.IsUserDefined.HasFlag(
-                    InteropAttributeMember.StringMarshallingCustomType
-                )
+                interopAttributeData.IsUserDefined
+                    .HasFlag(InteropAttributeMember.StringMarshallingCustomType)
             )
             {
                 defaultEncoding = CharEncoding.Custom;

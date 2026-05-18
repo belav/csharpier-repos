@@ -451,8 +451,8 @@ namespace Microsoft.CodeAnalysis.ValueTracking
             var semanticModel = await document
                 .GetRequiredSemanticModelAsync(cancellationToken)
                 .ConfigureAwait(false);
-            return item
-                .SymbolKey.Resolve(semanticModel.Compilation, cancellationToken: cancellationToken)
+            return item.SymbolKey
+                .Resolve(semanticModel.Compilation, cancellationToken: cancellationToken)
                 .Symbol;
         }
     }

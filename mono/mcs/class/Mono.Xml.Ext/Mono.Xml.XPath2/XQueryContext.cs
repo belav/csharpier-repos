@@ -74,9 +74,8 @@ namespace Mono.Xml.XPath2
 
             namespaceManager = new XmlNamespaceManager(ctx.NameTable);
             foreach (
-                DictionaryEntry de in ctx.NSResolver.GetNamespacesInScope(
-                    XmlNamespaceScope.ExcludeXml
-                )
+                DictionaryEntry de in ctx.NSResolver
+                    .GetNamespacesInScope(XmlNamespaceScope.ExcludeXml)
             )
                 namespaceManager.AddNamespace(de.Key.ToString(), de.Value.ToString());
             namespaceManager.PushScope();

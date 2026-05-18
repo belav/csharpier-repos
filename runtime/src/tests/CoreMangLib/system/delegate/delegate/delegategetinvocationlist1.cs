@@ -53,9 +53,10 @@ namespace DelegateTest
         {
             bool retVal = true;
 
-            TestLibrary.TestFramework.BeginScenario(
-                "PosTest1: Call GetInvocationList against a delegate with one function"
-            );
+            TestLibrary.TestFramework
+                .BeginScenario(
+                    "PosTest1: Call GetInvocationList against a delegate with one function"
+                );
             try
             {
                 DelegateGetInvocationList delctor = new DelegateGetInvocationList();
@@ -64,19 +65,18 @@ namespace DelegateTest
                 Delegate[] invocationList = delctor.starkWork.GetInvocationList();
                 if (invocationList.Length != 1)
                 {
-                    TestLibrary.TestFramework.LogError(
-                        "001",
-                        "Call GetInvocationList against a delegate with one function returns wrong result: "
-                            + invocationList.Length
-                    );
+                    TestLibrary.TestFramework
+                        .LogError(
+                            "001",
+                            "Call GetInvocationList against a delegate with one function returns wrong result: "
+                                + invocationList.Length
+                        );
                     retVal = false;
                 }
                 if (!delctor.starkWork.GetInvocationList()[0].Equals(dStartWork_Bool))
                 {
-                    TestLibrary.TestFramework.LogError(
-                        "002",
-                        " GetInvocationList return error method  "
-                    );
+                    TestLibrary.TestFramework
+                        .LogError("002", " GetInvocationList return error method  ");
                     retVal = false;
                 }
                 delctor.starkWork();
@@ -96,9 +96,10 @@ namespace DelegateTest
         {
             bool retVal = true;
 
-            TestLibrary.TestFramework.BeginScenario(
-                "PosTest2: Call GetInvocationList against a delegate with muti different functions "
-            );
+            TestLibrary.TestFramework
+                .BeginScenario(
+                    "PosTest2: Call GetInvocationList against a delegate with muti different functions "
+                );
             try
             {
                 DelegateGetInvocationList delctor = new DelegateGetInvocationList();
@@ -112,11 +113,12 @@ namespace DelegateTest
                 Delegate[] invocationList = delctor.starkWork.GetInvocationList();
                 if (invocationList.Length != 3)
                 {
-                    TestLibrary.TestFramework.LogError(
-                        "004",
-                        "Call GetInvocationList against a delegate with one function returns wrong result: "
-                            + invocationList.Length
-                    );
+                    TestLibrary.TestFramework
+                        .LogError(
+                            "004",
+                            "Call GetInvocationList against a delegate with one function returns wrong result: "
+                                + invocationList.Length
+                        );
                     retVal = false;
                 }
                 if (
@@ -125,10 +127,8 @@ namespace DelegateTest
                     || !delctor.starkWork.GetInvocationList()[2].Equals(bCompleted_Bool)
                 )
                 {
-                    TestLibrary.TestFramework.LogError(
-                        "005",
-                        " GetInvocationList return error method  "
-                    );
+                    TestLibrary.TestFramework
+                        .LogError("005", " GetInvocationList return error method  ");
                     retVal = false;
                 }
                 delctor.starkWork();
@@ -148,9 +148,10 @@ namespace DelegateTest
         {
             bool retVal = true;
 
-            TestLibrary.TestFramework.BeginScenario(
-                "PosTest3: Call GetInvocationList against a delegate with muti functions ,some is null"
-            );
+            TestLibrary.TestFramework
+                .BeginScenario(
+                    "PosTest3: Call GetInvocationList against a delegate with muti functions ,some is null"
+                );
             try
             {
                 DelegateGetInvocationList delctor = new DelegateGetInvocationList();
@@ -165,11 +166,12 @@ namespace DelegateTest
                 Delegate[] invocationList = delctor.starkWork.GetInvocationList();
                 if (invocationList.Length != 3)
                 {
-                    TestLibrary.TestFramework.LogError(
-                        "007",
-                        "Call GetInvocationList against a delegate with one function returns wrong result: "
-                            + invocationList.Length
-                    );
+                    TestLibrary.TestFramework
+                        .LogError(
+                            "007",
+                            "Call GetInvocationList against a delegate with one function returns wrong result: "
+                                + invocationList.Length
+                        );
                     retVal = false;
                 }
                 if (
@@ -178,10 +180,8 @@ namespace DelegateTest
                     || !delctor.starkWork.GetInvocationList()[2].Equals(bCompleted_Bool)
                 )
                 {
-                    TestLibrary.TestFramework.LogError(
-                        "008",
-                        " GetInvocationList return error method  "
-                    );
+                    TestLibrary.TestFramework
+                        .LogError("008", " GetInvocationList return error method  ");
                     retVal = false;
                 }
                 delctor.starkWork();
@@ -201,9 +201,10 @@ namespace DelegateTest
         {
             bool retVal = true;
 
-            TestLibrary.TestFramework.BeginScenario(
-                "PosTest4: Call GetInvocationList against a delegate with muti functions ,some of these are the same"
-            );
+            TestLibrary.TestFramework
+                .BeginScenario(
+                    "PosTest4: Call GetInvocationList against a delegate with muti functions ,some of these are the same"
+                );
             try
             {
                 DelegateGetInvocationList delctor = new DelegateGetInvocationList();
@@ -218,11 +219,12 @@ namespace DelegateTest
                 Delegate[] invocationList = delctor.starkWork.GetInvocationList();
                 if (invocationList.Length != 4)
                 {
-                    TestLibrary.TestFramework.LogError(
-                        "010",
-                        "Call GetInvocationList against a delegate with one function returns wrong result: "
-                            + invocationList.Length
-                    );
+                    TestLibrary.TestFramework
+                        .LogError(
+                            "010",
+                            "Call GetInvocationList against a delegate with one function returns wrong result: "
+                                + invocationList.Length
+                        );
                     retVal = false;
                 }
                 if (
@@ -232,10 +234,8 @@ namespace DelegateTest
                     || !delctor.starkWork.GetInvocationList()[3].Equals(bCompleted_Bool)
                 )
                 {
-                    TestLibrary.TestFramework.LogError(
-                        "011",
-                        " GetInvocationList return error method  "
-                    );
+                    TestLibrary.TestFramework
+                        .LogError("011", " GetInvocationList return error method  ");
                     retVal = false;
                 }
                 delctor.starkWork();

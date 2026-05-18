@@ -33,13 +33,12 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.CSharp
             await base.InitializeAsync();
 
             // Try disable the responsive completion option again: https://github.com/dotnet/roslyn/issues/70787
-            await TestServices.StateReset.DisableResponsiveCompletion(
-                HangMitigatingCancellationToken
-            );
+            await TestServices.StateReset
+                .DisableResponsiveCompletion(HangMitigatingCancellationToken);
 
             // Disable import completion.
-            var globalOptions =
-                await TestServices.Shell.GetComponentModelServiceAsync<IGlobalOptionService>(
+            var globalOptions = await TestServices.Shell
+                .GetComponentModelServiceAsync<IGlobalOptionService>(
                     HangMitigatingCancellationToken
                 );
             globalOptions.SetGlobalOption(
@@ -59,8 +58,8 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.CSharp
         {
             await SetUpEditorAsync(@"$$", HangMitigatingCancellationToken);
 
-            var globalOptions =
-                await TestServices.Shell.GetComponentModelServiceAsync<IGlobalOptionService>(
+            var globalOptions = await TestServices.Shell
+                .GetComponentModelServiceAsync<IGlobalOptionService>(
                     HangMitigatingCancellationToken
                 );
             globalOptions.SetGlobalOption(
@@ -78,18 +77,18 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.CSharp
             Assert.Contains(
                 "using",
                 (
-                    await TestServices.Editor.GetCompletionItemsAsync(
-                        HangMitigatingCancellationToken
-                    )
+                    await TestServices.Editor
+                        .GetCompletionItemsAsync(HangMitigatingCancellationToken)
                 ).Select(completion => completion.DisplayText)
             );
 
             await TestServices.Input.SendAsync(VirtualKeyCode.TAB, HangMitigatingCancellationToken);
-            await TestServices.EditorVerifier.CurrentLineTextAsync(
-                "using$$",
-                assertCaretPosition: true,
-                HangMitigatingCancellationToken
-            );
+            await TestServices.EditorVerifier
+                .CurrentLineTextAsync(
+                    "using$$",
+                    assertCaretPosition: true,
+                    HangMitigatingCancellationToken
+                );
         }
 
         [IdeTheory, CombinatorialData]
@@ -104,8 +103,8 @@ class C
                 HangMitigatingCancellationToken
             );
 
-            var globalOptions =
-                await TestServices.Shell.GetComponentModelServiceAsync<IGlobalOptionService>(
+            var globalOptions = await TestServices.Shell
+                .GetComponentModelServiceAsync<IGlobalOptionService>(
                     HangMitigatingCancellationToken
                 );
             globalOptions.SetGlobalOption(
@@ -123,40 +122,40 @@ class C
             Assert.Contains(
                 "public",
                 (
-                    await TestServices.Editor.GetCompletionItemsAsync(
-                        HangMitigatingCancellationToken
-                    )
+                    await TestServices.Editor
+                        .GetCompletionItemsAsync(HangMitigatingCancellationToken)
                 ).Select(completion => completion.DisplayText)
             );
 
             await TestServices.Input.SendAsync(' ', HangMitigatingCancellationToken);
-            await TestServices.EditorVerifier.CurrentLineTextAsync(
-                "    public $$",
-                assertCaretPosition: true,
-                HangMitigatingCancellationToken
-            );
+            await TestServices.EditorVerifier
+                .CurrentLineTextAsync(
+                    "    public $$",
+                    assertCaretPosition: true,
+                    HangMitigatingCancellationToken
+                );
 
             await TestServices.Input.SendAsync('t', HangMitigatingCancellationToken);
             Assert.Contains(
                 "T",
                 (
-                    await TestServices.Editor.GetCompletionItemsAsync(
-                        HangMitigatingCancellationToken
-                    )
+                    await TestServices.Editor
+                        .GetCompletionItemsAsync(HangMitigatingCancellationToken)
                 ).Select(completion => completion.DisplayText)
             );
 
             await TestServices.Input.SendAsync(' ', HangMitigatingCancellationToken);
             await TestServices.Input.SendAsync("Goo<T>() { }", HangMitigatingCancellationToken);
-            await TestServices.EditorVerifier.TextContainsAsync(
-                @"
+            await TestServices.EditorVerifier
+                .TextContainsAsync(
+                    @"
 class C
 {
     public T Goo<T>() { }$$
 }",
-                assertCaretPosition: true,
-                HangMitigatingCancellationToken
-            );
+                    assertCaretPosition: true,
+                    HangMitigatingCancellationToken
+                );
         }
 
         [IdeTheory, CombinatorialData]
@@ -182,8 +181,8 @@ public static class NavigateTo
                 HangMitigatingCancellationToken
             );
 
-            var globalOptions =
-                await TestServices.Shell.GetComponentModelServiceAsync<IGlobalOptionService>(
+            var globalOptions = await TestServices.Shell
+                .GetComponentModelServiceAsync<IGlobalOptionService>(
                     HangMitigatingCancellationToken
                 );
             globalOptions.SetGlobalOption(
@@ -201,36 +200,33 @@ public static class NavigateTo
             Assert.Contains(
                 "Search",
                 (
-                    await TestServices.Editor.GetCompletionItemsAsync(
-                        HangMitigatingCancellationToken
-                    )
+                    await TestServices.Editor
+                        .GetCompletionItemsAsync(HangMitigatingCancellationToken)
                 ).Select(completion => completion.DisplayText)
             );
             Assert.Contains(
                 "Navigate",
                 (
-                    await TestServices.Editor.GetCompletionItemsAsync(
-                        HangMitigatingCancellationToken
-                    )
+                    await TestServices.Editor
+                        .GetCompletionItemsAsync(HangMitigatingCancellationToken)
                 ).Select(completion => completion.DisplayText)
             );
 
-            await TestServices.Input.SendAsync(
-                ['S', VirtualKeyCode.TAB],
-                HangMitigatingCancellationToken
-            );
-            await TestServices.EditorVerifier.CurrentLineTextAsync(
-                "        NavigateTo.Search$$",
-                assertCaretPosition: true,
-                HangMitigatingCancellationToken
-            );
+            await TestServices.Input
+                .SendAsync(['S', VirtualKeyCode.TAB], HangMitigatingCancellationToken);
+            await TestServices.EditorVerifier
+                .CurrentLineTextAsync(
+                    "        NavigateTo.Search$$",
+                    assertCaretPosition: true,
+                    HangMitigatingCancellationToken
+                );
         }
 
         [IdeTheory, CombinatorialData]
         public async Task CtrlAltSpace(bool showCompletionInArgumentLists)
         {
-            var globalOptions =
-                await TestServices.Shell.GetComponentModelServiceAsync<IGlobalOptionService>(
+            var globalOptions = await TestServices.Shell
+                .GetComponentModelServiceAsync<IGlobalOptionService>(
                     HangMitigatingCancellationToken
                 );
             globalOptions.SetGlobalOption(
@@ -244,10 +240,8 @@ public static class NavigateTo
                 showCompletionInArgumentLists
             );
 
-            await TestServices.Editor.SetUseSuggestionModeAsync(
-                false,
-                HangMitigatingCancellationToken
-            );
+            await TestServices.Editor
+                .SetUseSuggestionModeAsync(false, HangMitigatingCancellationToken);
 
             // Note: the completion needs to be unambiguous for the test to be deterministic.
             // Otherwise the result might depend on the state of MRU list.
@@ -257,14 +251,13 @@ public static class NavigateTo
                 await TestServices.Editor.IsCompletionActiveAsync(HangMitigatingCancellationToken)
             );
 
-            await TestServices.Input.SendAsync(
-                [" Goo", VirtualKeyCode.RETURN],
-                HangMitigatingCancellationToken
-            );
-            await TestServices.Input.SendAsync(
-                ['{', VirtualKeyCode.RETURN, '}', VirtualKeyCode.UP, VirtualKeyCode.RETURN],
-                HangMitigatingCancellationToken
-            );
+            await TestServices.Input
+                .SendAsync([" Goo", VirtualKeyCode.RETURN], HangMitigatingCancellationToken);
+            await TestServices.Input
+                .SendAsync(
+                    ['{', VirtualKeyCode.RETURN, '}', VirtualKeyCode.UP, VirtualKeyCode.RETURN],
+                    HangMitigatingCancellationToken
+                );
 
             await TestServices.Input.SendAsync("pu", HangMitigatingCancellationToken);
             Assert.True(
@@ -276,14 +269,13 @@ public static class NavigateTo
                 await TestServices.Editor.IsCompletionActiveAsync(HangMitigatingCancellationToken)
             );
 
-            await TestServices.Input.SendAsync(
-                [" Program", VirtualKeyCode.RETURN],
-                HangMitigatingCancellationToken
-            );
-            await TestServices.Input.SendAsync(
-                ['{', VirtualKeyCode.RETURN, '}', VirtualKeyCode.UP, VirtualKeyCode.RETURN],
-                HangMitigatingCancellationToken
-            );
+            await TestServices.Input
+                .SendAsync([" Program", VirtualKeyCode.RETURN], HangMitigatingCancellationToken);
+            await TestServices.Input
+                .SendAsync(
+                    ['{', VirtualKeyCode.RETURN, '}', VirtualKeyCode.UP, VirtualKeyCode.RETURN],
+                    HangMitigatingCancellationToken
+                );
 
             await TestServices.Input.SendAsync("pub", HangMitigatingCancellationToken);
             Assert.True(
@@ -300,14 +292,16 @@ public static class NavigateTo
                 await TestServices.Editor.IsCompletionActiveAsync(HangMitigatingCancellationToken)
             );
 
-            await TestServices.Input.SendAsync(
-                [" Main(string[] args)", VirtualKeyCode.RETURN],
-                HangMitigatingCancellationToken
-            );
-            await TestServices.Input.SendAsync(
-                ['{', VirtualKeyCode.RETURN, '}', VirtualKeyCode.UP, VirtualKeyCode.RETURN],
-                HangMitigatingCancellationToken
-            );
+            await TestServices.Input
+                .SendAsync(
+                    [" Main(string[] args)", VirtualKeyCode.RETURN],
+                    HangMitigatingCancellationToken
+                );
+            await TestServices.Input
+                .SendAsync(
+                    ['{', VirtualKeyCode.RETURN, '}', VirtualKeyCode.UP, VirtualKeyCode.RETURN],
+                    HangMitigatingCancellationToken
+                );
 
             await TestServices.Input.SendAsync("System.Console.", HangMitigatingCancellationToken);
             Assert.True(
@@ -315,27 +309,30 @@ public static class NavigateTo
             );
 
             await TestServices.Input.SendAsync("writeline();", HangMitigatingCancellationToken);
-            await TestServices.EditorVerifier.CurrentLineTextAsync(
-                "            System.Console.WriteLine();$$",
-                assertCaretPosition: true,
-                HangMitigatingCancellationToken
-            );
+            await TestServices.EditorVerifier
+                .CurrentLineTextAsync(
+                    "            System.Console.WriteLine();$$",
+                    assertCaretPosition: true,
+                    HangMitigatingCancellationToken
+                );
 
-            await TestServices.Input.SendAsync(
-                [
-                    VirtualKeyCode.HOME,
-                    (VirtualKeyCode.END, VirtualKeyCode.SHIFT),
-                    VirtualKeyCode.DELETE,
-                ],
-                HangMitigatingCancellationToken
-            );
-            await TestServices.Input.SendAsync(
-                new InputKey(
-                    VirtualKeyCode.SPACE,
-                    ImmutableArray.Create(VirtualKeyCode.CONTROL, VirtualKeyCode.MENU)
-                ),
-                HangMitigatingCancellationToken
-            );
+            await TestServices.Input
+                .SendAsync(
+                    [
+                        VirtualKeyCode.HOME,
+                        (VirtualKeyCode.END, VirtualKeyCode.SHIFT),
+                        VirtualKeyCode.DELETE,
+                    ],
+                    HangMitigatingCancellationToken
+                );
+            await TestServices.Input
+                .SendAsync(
+                    new InputKey(
+                        VirtualKeyCode.SPACE,
+                        ImmutableArray.Create(VirtualKeyCode.CONTROL, VirtualKeyCode.MENU)
+                    ),
+                    HangMitigatingCancellationToken
+                );
 
             await TestServices.Input.SendAsync("System.Console.", HangMitigatingCancellationToken);
             Assert.True(
@@ -343,18 +340,19 @@ public static class NavigateTo
             );
 
             await TestServices.Input.SendAsync("writeline();", HangMitigatingCancellationToken);
-            await TestServices.EditorVerifier.CurrentLineTextAsync(
-                "            System.Console.writeline();$$",
-                assertCaretPosition: true,
-                HangMitigatingCancellationToken
-            );
+            await TestServices.EditorVerifier
+                .CurrentLineTextAsync(
+                    "            System.Console.writeline();$$",
+                    assertCaretPosition: true,
+                    HangMitigatingCancellationToken
+                );
         }
 
         [IdeTheory, CombinatorialData]
         public async Task CtrlAltSpaceOption(bool showCompletionInArgumentLists)
         {
-            var globalOptions =
-                await TestServices.Shell.GetComponentModelServiceAsync<IGlobalOptionService>(
+            var globalOptions = await TestServices.Shell
+                .GetComponentModelServiceAsync<IGlobalOptionService>(
                     HangMitigatingCancellationToken
                 );
             globalOptions.SetGlobalOption(
@@ -368,10 +366,8 @@ public static class NavigateTo
                 showCompletionInArgumentLists
             );
 
-            await TestServices.Editor.SetUseSuggestionModeAsync(
-                false,
-                HangMitigatingCancellationToken
-            );
+            await TestServices.Editor
+                .SetUseSuggestionModeAsync(false, HangMitigatingCancellationToken);
 
             await TestServices.Input.SendAsync("names", HangMitigatingCancellationToken);
             Assert.True(
@@ -379,17 +375,16 @@ public static class NavigateTo
             );
 
             await TestServices.Input.SendAsync(" Goo", HangMitigatingCancellationToken);
-            await TestServices.EditorVerifier.CurrentLineTextAsync(
-                "namespace Goo$$",
-                assertCaretPosition: true,
-                HangMitigatingCancellationToken
-            );
+            await TestServices.EditorVerifier
+                .CurrentLineTextAsync(
+                    "namespace Goo$$",
+                    assertCaretPosition: true,
+                    HangMitigatingCancellationToken
+                );
 
             await ClearEditorAsync(HangMitigatingCancellationToken);
-            await TestServices.Editor.SetUseSuggestionModeAsync(
-                true,
-                HangMitigatingCancellationToken
-            );
+            await TestServices.Editor
+                .SetUseSuggestionModeAsync(true, HangMitigatingCancellationToken);
 
             await TestServices.Input.SendAsync("nam", HangMitigatingCancellationToken);
             Assert.True(
@@ -397,11 +392,12 @@ public static class NavigateTo
             );
 
             await TestServices.Input.SendAsync(" Goo", HangMitigatingCancellationToken);
-            await TestServices.EditorVerifier.CurrentLineTextAsync(
-                "nam Goo$$",
-                assertCaretPosition: true,
-                HangMitigatingCancellationToken
-            );
+            await TestServices.EditorVerifier
+                .CurrentLineTextAsync(
+                    "nam Goo$$",
+                    assertCaretPosition: true,
+                    HangMitigatingCancellationToken
+                );
         }
 
         [IdeTheory, CombinatorialData]
@@ -409,8 +405,8 @@ public static class NavigateTo
         {
             await SetUpEditorAsync("class c { void M() {$$ } }", HangMitigatingCancellationToken);
 
-            var globalOptions =
-                await TestServices.Shell.GetComponentModelServiceAsync<IGlobalOptionService>(
+            var globalOptions = await TestServices.Shell
+                .GetComponentModelServiceAsync<IGlobalOptionService>(
                     HangMitigatingCancellationToken
                 );
             globalOptions.SetGlobalOption(
@@ -424,16 +420,16 @@ public static class NavigateTo
                 showCompletionInArgumentLists
             );
 
-            await TestServices.Input.SendAsync(
-                (VirtualKeyCode.SPACE, VirtualKeyCode.CONTROL),
-                HangMitigatingCancellationToken
-            );
+            await TestServices.Input
+                .SendAsync(
+                    (VirtualKeyCode.SPACE, VirtualKeyCode.CONTROL),
+                    HangMitigatingCancellationToken
+                );
             Assert.Contains(
                 "System",
                 (
-                    await TestServices.Editor.GetCompletionItemsAsync(
-                        HangMitigatingCancellationToken
-                    )
+                    await TestServices.Editor
+                        .GetCompletionItemsAsync(HangMitigatingCancellationToken)
                 ).Select(completion => completion.DisplayText)
             );
         }
@@ -443,8 +439,8 @@ public static class NavigateTo
         {
             await SetUpEditorAsync("class c { void M() {$$ } }", HangMitigatingCancellationToken);
 
-            var globalOptions =
-                await TestServices.Shell.GetComponentModelServiceAsync<IGlobalOptionService>(
+            var globalOptions = await TestServices.Shell
+                .GetComponentModelServiceAsync<IGlobalOptionService>(
                     HangMitigatingCancellationToken
                 );
             globalOptions.SetGlobalOption(
@@ -462,38 +458,32 @@ public static class NavigateTo
             Assert.Equal(
                 "c",
                 (
-                    await TestServices.Editor.GetCurrentCompletionItemAsync(
-                        HangMitigatingCancellationToken
-                    )
+                    await TestServices.Editor
+                        .GetCurrentCompletionItemAsync(HangMitigatingCancellationToken)
                 ).DisplayText
             );
             Assert.Contains(
                 "c",
                 (
-                    await TestServices.Editor.GetCompletionItemsAsync(
-                        HangMitigatingCancellationToken
-                    )
+                    await TestServices.Editor
+                        .GetCompletionItemsAsync(HangMitigatingCancellationToken)
                 ).Select(completion => completion.DisplayText)
             );
 
-            await TestServices.Input.SendAsync(
-                VirtualKeyCode.DOWN,
-                HangMitigatingCancellationToken
-            );
+            await TestServices.Input
+                .SendAsync(VirtualKeyCode.DOWN, HangMitigatingCancellationToken);
             Assert.Equal(
                 "char",
                 (
-                    await TestServices.Editor.GetCurrentCompletionItemAsync(
-                        HangMitigatingCancellationToken
-                    )
+                    await TestServices.Editor
+                        .GetCurrentCompletionItemAsync(HangMitigatingCancellationToken)
                 ).DisplayText
             );
             Assert.Contains(
                 "char",
                 (
-                    await TestServices.Editor.GetCompletionItemsAsync(
-                        HangMitigatingCancellationToken
-                    )
+                    await TestServices.Editor
+                        .GetCompletionItemsAsync(HangMitigatingCancellationToken)
                 ).Select(completion => completion.DisplayText)
             );
         }
@@ -514,8 +504,8 @@ class Class1
                 HangMitigatingCancellationToken
             );
 
-            var globalOptions =
-                await TestServices.Shell.GetComponentModelServiceAsync<IGlobalOptionService>(
+            var globalOptions = await TestServices.Shell
+                .GetComponentModelServiceAsync<IGlobalOptionService>(
                     HangMitigatingCancellationToken
                 );
             globalOptions.SetGlobalOption(
@@ -533,25 +523,22 @@ class Class1
             Assert.Contains(
                 "see",
                 (
-                    await TestServices.Editor.GetCompletionItemsAsync(
-                        HangMitigatingCancellationToken
-                    )
+                    await TestServices.Editor
+                        .GetCompletionItemsAsync(HangMitigatingCancellationToken)
                 ).Select(completion => completion.DisplayText)
             );
             Assert.Contains(
                 "seealso",
                 (
-                    await TestServices.Editor.GetCompletionItemsAsync(
-                        HangMitigatingCancellationToken
-                    )
+                    await TestServices.Editor
+                        .GetCompletionItemsAsync(HangMitigatingCancellationToken)
                 ).Select(completion => completion.DisplayText)
             );
             Assert.Contains(
                 "summary",
                 (
-                    await TestServices.Editor.GetCompletionItemsAsync(
-                        HangMitigatingCancellationToken
-                    )
+                    await TestServices.Editor
+                        .GetCompletionItemsAsync(HangMitigatingCancellationToken)
                 ).Select(completion => completion.DisplayText)
             );
 
@@ -562,9 +549,8 @@ class Class1
             var targetIndex = completionItems.IndexOf("see");
             var currentIndex = completionItems.IndexOf(
                 (
-                    await TestServices.Editor.GetCurrentCompletionItemAsync(
-                        HangMitigatingCancellationToken
-                    )
+                    await TestServices.Editor
+                        .GetCurrentCompletionItemAsync(HangMitigatingCancellationToken)
                 ).DisplayText
             );
             if (currentIndex != targetIndex)
@@ -574,15 +560,14 @@ class Class1
                 await TestServices.Input.SendAsync(keys, HangMitigatingCancellationToken);
             }
 
-            await TestServices.Input.SendAsync(
-                VirtualKeyCode.RETURN,
-                HangMitigatingCancellationToken
-            );
-            await TestServices.EditorVerifier.CurrentLineTextAsync(
-                "    ///<see cref=\"$$\"/>",
-                assertCaretPosition: true,
-                HangMitigatingCancellationToken
-            );
+            await TestServices.Input
+                .SendAsync(VirtualKeyCode.RETURN, HangMitigatingCancellationToken);
+            await TestServices.EditorVerifier
+                .CurrentLineTextAsync(
+                    "    ///<see cref=\"$$\"/>",
+                    assertCaretPosition: true,
+                    HangMitigatingCancellationToken
+                );
         }
 
         [IdeTheory, CombinatorialData]
@@ -596,8 +581,8 @@ class C { }
                 HangMitigatingCancellationToken
             );
 
-            var globalOptions =
-                await TestServices.Shell.GetComponentModelServiceAsync<IGlobalOptionService>(
+            var globalOptions = await TestServices.Shell
+                .GetComponentModelServiceAsync<IGlobalOptionService>(
                     HangMitigatingCancellationToken
                 );
             globalOptions.SetGlobalOption(
@@ -612,11 +597,12 @@ class C { }
             );
 
             await TestServices.Input.SendAsync("<summary>", HangMitigatingCancellationToken);
-            await TestServices.EditorVerifier.CurrentLineTextAsync(
-                "/// <summary>$$</summary>",
-                assertCaretPosition: true,
-                HangMitigatingCancellationToken
-            );
+            await TestServices.EditorVerifier
+                .CurrentLineTextAsync(
+                    "/// <summary>$$</summary>",
+                    assertCaretPosition: true,
+                    HangMitigatingCancellationToken
+                );
 
             await SetUpEditorAsync(
                 @"
@@ -627,11 +613,12 @@ class C { }
             );
 
             await TestServices.Input.SendAsync("</", HangMitigatingCancellationToken);
-            await TestServices.EditorVerifier.CurrentLineTextAsync(
-                "/// <summary></summary>$$",
-                assertCaretPosition: true,
-                HangMitigatingCancellationToken
-            );
+            await TestServices.EditorVerifier
+                .CurrentLineTextAsync(
+                    "/// <summary></summary>$$",
+                    assertCaretPosition: true,
+                    HangMitigatingCancellationToken
+                );
         }
 
         [IdeTheory, CombinatorialData]
@@ -649,8 +636,8 @@ class Class1
                 HangMitigatingCancellationToken
             );
 
-            var globalOptions =
-                await TestServices.Shell.GetComponentModelServiceAsync<IGlobalOptionService>(
+            var globalOptions = await TestServices.Shell
+                .GetComponentModelServiceAsync<IGlobalOptionService>(
                     HangMitigatingCancellationToken
                 );
             globalOptions.SetGlobalOption(
@@ -664,10 +651,8 @@ class Class1
                 showCompletionInArgumentLists
             );
 
-            await TestServices.Editor.SetUseSuggestionModeAsync(
-                false,
-                HangMitigatingCancellationToken
-            );
+            await TestServices.Editor
+                .SetUseSuggestionModeAsync(false, HangMitigatingCancellationToken);
 
             await TestServices.Input.SendAsync("Mai", HangMitigatingCancellationToken);
             Assert.True(
@@ -676,9 +661,8 @@ class Class1
 
             await TestServices.Input.SendAsync("(", HangMitigatingCancellationToken);
 
-            var currentSignature = await TestServices.Editor.GetCurrentSignatureAsync(
-                HangMitigatingCancellationToken
-            );
+            var currentSignature = await TestServices.Editor
+                .GetCurrentSignatureAsync(HangMitigatingCancellationToken);
             Assert.Equal("void Class1.Main(string[] args)", currentSignature.Content);
             Assert.NotNull(currentSignature.CurrentParameter);
             Assert.Equal("args", currentSignature.CurrentParameter.Name);
@@ -701,8 +685,8 @@ class Class1
                 HangMitigatingCancellationToken
             );
 
-            var globalOptions =
-                await TestServices.Shell.GetComponentModelServiceAsync<IGlobalOptionService>(
+            var globalOptions = await TestServices.Shell
+                .GetComponentModelServiceAsync<IGlobalOptionService>(
                     HangMitigatingCancellationToken
                 );
             globalOptions.SetGlobalOption(
@@ -716,38 +700,40 @@ class Class1
                 showCompletionInArgumentLists
             );
 
-            await TestServices.Editor.SetUseSuggestionModeAsync(
-                false,
-                HangMitigatingCancellationToken
-            );
+            await TestServices.Editor
+                .SetUseSuggestionModeAsync(false, HangMitigatingCancellationToken);
 
-            await TestServices.Input.SendAsync(
-                ['{', VirtualKeyCode.RETURN, "                 "],
-                HangMitigatingCancellationToken
-            );
+            await TestServices.Input
+                .SendAsync(
+                    ['{', VirtualKeyCode.RETURN, "                 "],
+                    HangMitigatingCancellationToken
+                );
 
-            await TestServices.Shell.ExecuteCommandAsync(
-                WellKnownCommands.Edit.ListMembers,
-                HangMitigatingCancellationToken
-            );
-            await TestServices.Workspace.WaitForAsyncOperationsAsync(
-                FeatureAttribute.CompletionSet,
-                HangMitigatingCancellationToken
-            );
+            await TestServices.Shell
+                .ExecuteCommandAsync(
+                    WellKnownCommands.Edit.ListMembers,
+                    HangMitigatingCancellationToken
+                );
+            await TestServices.Workspace
+                .WaitForAsyncOperationsAsync(
+                    FeatureAttribute.CompletionSet,
+                    HangMitigatingCancellationToken
+                );
 
             await TestServices.Input.SendAsync('}', HangMitigatingCancellationToken);
 
-            await TestServices.EditorVerifier.TextContainsAsync(
-                @"
+            await TestServices.EditorVerifier
+                .TextContainsAsync(
+                    @"
 class Class1
 {
     void Main(string[] args)
     {
     }$$
 }",
-                assertCaretPosition: true,
-                HangMitigatingCancellationToken
-            );
+                    assertCaretPosition: true,
+                    HangMitigatingCancellationToken
+                );
         }
 
         [IdeTheory, CombinatorialData]
@@ -766,8 +752,8 @@ class Class1
                 HangMitigatingCancellationToken
             );
 
-            var globalOptions =
-                await TestServices.Shell.GetComponentModelServiceAsync<IGlobalOptionService>(
+            var globalOptions = await TestServices.Shell
+                .GetComponentModelServiceAsync<IGlobalOptionService>(
                     HangMitigatingCancellationToken
                 );
             globalOptions.SetGlobalOption(
@@ -781,18 +767,18 @@ class Class1
                 showCompletionInArgumentLists
             );
 
-            await TestServices.Editor.SetUseSuggestionModeAsync(
-                false,
-                HangMitigatingCancellationToken
-            );
+            await TestServices.Editor
+                .SetUseSuggestionModeAsync(false, HangMitigatingCancellationToken);
 
-            await TestServices.Input.SendAsync(
-                ['M', (VirtualKeyCode.RETURN, VirtualKeyCode.SHIFT)],
-                HangMitigatingCancellationToken
-            );
+            await TestServices.Input
+                .SendAsync(
+                    ['M', (VirtualKeyCode.RETURN, VirtualKeyCode.SHIFT)],
+                    HangMitigatingCancellationToken
+                );
 
-            await TestServices.EditorVerifier.TextContainsAsync(
-                @"
+            await TestServices.EditorVerifier
+                .TextContainsAsync(
+                    @"
 class Class1
 {
     void Main(string[] args)
@@ -801,9 +787,9 @@ class Class1
 $$
     }
 }",
-                assertCaretPosition: true,
-                HangMitigatingCancellationToken
-            );
+                    assertCaretPosition: true,
+                    HangMitigatingCancellationToken
+                );
         }
 
         [IdeTheory, CombinatorialData]
@@ -821,8 +807,8 @@ class Class1
                 HangMitigatingCancellationToken
             );
 
-            var globalOptions =
-                await TestServices.Shell.GetComponentModelServiceAsync<IGlobalOptionService>(
+            var globalOptions = await TestServices.Shell
+                .GetComponentModelServiceAsync<IGlobalOptionService>(
                     HangMitigatingCancellationToken
                 );
             globalOptions.SetGlobalOption(
@@ -836,18 +822,18 @@ class Class1
                 showCompletionInArgumentLists
             );
 
-            await TestServices.Editor.SetUseSuggestionModeAsync(
-                true,
-                HangMitigatingCancellationToken
-            );
+            await TestServices.Editor
+                .SetUseSuggestionModeAsync(true, HangMitigatingCancellationToken);
 
-            await TestServices.Input.SendAsync(
-                ['M', (VirtualKeyCode.RETURN, VirtualKeyCode.SHIFT)],
-                HangMitigatingCancellationToken
-            );
+            await TestServices.Input
+                .SendAsync(
+                    ['M', (VirtualKeyCode.RETURN, VirtualKeyCode.SHIFT)],
+                    HangMitigatingCancellationToken
+                );
 
-            await TestServices.EditorVerifier.TextContainsAsync(
-                @"
+            await TestServices.EditorVerifier
+                .TextContainsAsync(
+                    @"
 class Class1
 {
     void Main(string[] args)
@@ -856,9 +842,9 @@ class Class1
 $$
     }
 }",
-                assertCaretPosition: true,
-                HangMitigatingCancellationToken
-            );
+                    assertCaretPosition: true,
+                    HangMitigatingCancellationToken
+                );
         }
 
         [IdeTheory, CombinatorialData]
@@ -873,8 +859,8 @@ class Class1
                 HangMitigatingCancellationToken
             );
 
-            var globalOptions =
-                await TestServices.Shell.GetComponentModelServiceAsync<IGlobalOptionService>(
+            var globalOptions = await TestServices.Shell
+                .GetComponentModelServiceAsync<IGlobalOptionService>(
                     HangMitigatingCancellationToken
                 );
             globalOptions.SetGlobalOption(
@@ -888,10 +874,8 @@ class Class1
                 showCompletionInArgumentLists
             );
 
-            await TestServices.Editor.SetUseSuggestionModeAsync(
-                false,
-                HangMitigatingCancellationToken
-            );
+            await TestServices.Editor
+                .SetUseSuggestionModeAsync(false, HangMitigatingCancellationToken);
 
             await TestServices.Input.SendAsync("int P { g", HangMitigatingCancellationToken);
             Assert.True(
@@ -900,24 +884,24 @@ class Class1
 
             await TestServices.Input.SendAsync("{", HangMitigatingCancellationToken);
 
-            await TestServices.EditorVerifier.TextContainsAsync(
-                @"
+            await TestServices.EditorVerifier
+                .TextContainsAsync(
+                    @"
 class Class1
 {
     int P { get { $$} }
 }",
-                assertCaretPosition: true,
-                HangMitigatingCancellationToken
-            );
+                    assertCaretPosition: true,
+                    HangMitigatingCancellationToken
+                );
         }
 
         [IdeTheory, CombinatorialData]
         [WorkItem("https://github.com/dotnet/roslyn/issues/33822")]
         public async Task EnsureTheCaretIsVisibleAfterALongEdit(bool showCompletionInArgumentLists)
         {
-            var visibleColumns = await TestServices.Editor.GetVisibleColumnCountAsync(
-                HangMitigatingCancellationToken
-            );
+            var visibleColumns = await TestServices.Editor
+                .GetVisibleColumnCountAsync(HangMitigatingCancellationToken);
             var variableName = new string('a', (int)(0.75 * visibleColumns));
             await SetUpEditorAsync(
                 $@"
@@ -932,8 +916,8 @@ public class Program
                 HangMitigatingCancellationToken
             );
 
-            var globalOptions =
-                await TestServices.Shell.GetComponentModelServiceAsync<IGlobalOptionService>(
+            var globalOptions = await TestServices.Shell
+                .GetComponentModelServiceAsync<IGlobalOptionService>(
                     HangMitigatingCancellationToken
                 );
             globalOptions.SetGlobalOption(
@@ -948,13 +932,13 @@ public class Program
             );
 
             Assert.True(variableName.Length > 0);
-            await TestServices.Input.SendAsync(
-                [VirtualKeyCode.DELETE, "aaa", VirtualKeyCode.TAB],
-                HangMitigatingCancellationToken
-            );
-            var actualText = await TestServices.Editor.GetTextAsync(
-                HangMitigatingCancellationToken
-            );
+            await TestServices.Input
+                .SendAsync(
+                    [VirtualKeyCode.DELETE, "aaa", VirtualKeyCode.TAB],
+                    HangMitigatingCancellationToken
+                );
+            var actualText = await TestServices.Editor
+                .GetTextAsync(HangMitigatingCancellationToken);
             Assert.Contains($"{variableName} = {variableName}", actualText);
             Assert.True(
                 await TestServices.Editor.IsCaretOnScreenAsync(HangMitigatingCancellationToken)
@@ -971,8 +955,8 @@ public class Program
         {
             await SetUpEditorAsync(@"$$", HangMitigatingCancellationToken);
 
-            var globalOptions =
-                await TestServices.Shell.GetComponentModelServiceAsync<IGlobalOptionService>(
+            var globalOptions = await TestServices.Shell
+                .GetComponentModelServiceAsync<IGlobalOptionService>(
                     HangMitigatingCancellationToken
                 );
             globalOptions.SetGlobalOption(
@@ -986,18 +970,20 @@ public class Program
                 showCompletionInArgumentLists
             );
 
-            await TestServices.Input.SendAsync(
-                (VirtualKeyCode.SPACE, VirtualKeyCode.CONTROL),
-                HangMitigatingCancellationToken
-            );
+            await TestServices.Input
+                .SendAsync(
+                    (VirtualKeyCode.SPACE, VirtualKeyCode.CONTROL),
+                    HangMitigatingCancellationToken
+                );
             Assert.True(
                 await TestServices.Editor.IsCompletionActiveAsync(HangMitigatingCancellationToken)
             );
 
-            await TestServices.Input.SendAsync(
-                (VirtualKeyCode.VK_A, VirtualKeyCode.CONTROL),
-                HangMitigatingCancellationToken
-            );
+            await TestServices.Input
+                .SendAsync(
+                    (VirtualKeyCode.VK_A, VirtualKeyCode.CONTROL),
+                    HangMitigatingCancellationToken
+                );
             Assert.False(
                 await TestServices.Editor.IsCompletionActiveAsync(HangMitigatingCancellationToken)
             );

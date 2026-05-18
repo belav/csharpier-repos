@@ -710,13 +710,14 @@ namespace System.Net
             public void Set()
             {
                 var tcs = m_tcs;
-                Task.Factory.StartNew(
-                    s => ((TaskCompletionSource<bool>)s).TrySetResult(true),
-                    tcs,
-                    CancellationToken.None,
-                    TaskCreationOptions.PreferFairness,
-                    TaskScheduler.Default
-                );
+                Task.Factory
+                    .StartNew(
+                        s => ((TaskCompletionSource<bool>)s).TrySetResult(true),
+                        tcs,
+                        CancellationToken.None,
+                        TaskCreationOptions.PreferFairness,
+                        TaskScheduler.Default
+                    );
                 tcs.Task.Wait();
             }
 

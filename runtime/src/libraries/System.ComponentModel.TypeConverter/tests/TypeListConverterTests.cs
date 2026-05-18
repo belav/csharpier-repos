@@ -60,12 +60,8 @@ namespace System.ComponentModel.Tests
         public static void ConvertTo_WithContext_Negative()
         {
             Assert.Throws<InvalidCastException>(() =>
-                TypeListConverterTests.s_converter.ConvertTo(
-                    TypeConverterTests.s_context,
-                    null,
-                    3,
-                    typeof(string)
-                )
+                TypeListConverterTests.s_converter
+                    .ConvertTo(TypeConverterTests.s_context, null, 3, typeof(string))
             );
         }
     }

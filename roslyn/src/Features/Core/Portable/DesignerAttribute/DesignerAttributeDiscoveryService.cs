@@ -448,8 +448,7 @@ namespace Microsoft.CodeAnalysis.DesignerAttribute
                         Name: nameof(DesignerCategoryAttribute),
                         ContainingNamespace.Name: nameof(System.ComponentModel),
                         ContainingNamespace.ContainingNamespace.Name: nameof(System),
-                        ContainingNamespace
-                            .ContainingNamespace
+                        ContainingNamespace.ContainingNamespace
                             .ContainingNamespace
                             .IsGlobalNamespace: true,
                     };

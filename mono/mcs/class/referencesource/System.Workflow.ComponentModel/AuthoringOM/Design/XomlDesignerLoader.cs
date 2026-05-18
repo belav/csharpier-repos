@@ -308,10 +308,9 @@ namespace System.Workflow.ComponentModel.Design
 
             errors = new ArrayList();
 
-            Stream stream = type.Module.Assembly.GetManifestResourceStream(
-                type,
-                manifestResourceName
-            );
+            Stream stream = type.Module
+                .Assembly
+                .GetManifestResourceStream(type, manifestResourceName);
             if (stream == null)
                 stream = type.Module.Assembly.GetManifestResourceStream(manifestResourceName);
 
@@ -874,11 +873,8 @@ namespace System.Workflow.ComponentModel.Design
                         Type updatedType = typeProvider.GetType(((Type)args.CurrentValue).FullName);
                         if (updatedType != null)
                         {
-                            args.CurrentProperty.SetValue(
-                                args.CurrentPropertyOwner,
-                                updatedType,
-                                null
-                            );
+                            args.CurrentProperty
+                                .SetValue(args.CurrentPropertyOwner, updatedType, null);
 
                             if (args.CurrentActivity != null)
                                 TypeDescriptor.Refresh(args.CurrentActivity);

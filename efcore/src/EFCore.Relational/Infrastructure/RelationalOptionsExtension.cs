@@ -359,8 +359,8 @@ public abstract class RelationalOptionsExtension : IDbContextOptionsExtension
     /// <returns>The extension.</returns>
     public static RelationalOptionsExtension Extract(IDbContextOptions options)
     {
-        var relationalOptionsExtensions = options
-            .Extensions.OfType<RelationalOptionsExtension>()
+        var relationalOptionsExtensions = options.Extensions
+            .OfType<RelationalOptionsExtension>()
             .ToList();
 
         if (relationalOptionsExtensions.Count == 0)
@@ -402,11 +402,8 @@ public abstract class RelationalOptionsExtension : IDbContextOptionsExtension
         CoreOptionsExtension coreOptionsExtension
     ) =>
         coreOptionsExtension.WithWarningsConfiguration(
-            coreOptionsExtension
-                .WarningsConfiguration.TryWithExplicit(
-                    RelationalEventId.AmbientTransactionWarning,
-                    WarningBehavior.Throw
-                )
+            coreOptionsExtension.WarningsConfiguration
+                .TryWithExplicit(RelationalEventId.AmbientTransactionWarning, WarningBehavior.Throw)
                 .TryWithExplicit(
                     RelationalEventId.IndexPropertiesBothMappedAndNotMappedToTable,
                     WarningBehavior.Throw

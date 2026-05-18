@@ -81,10 +81,8 @@ namespace System.Net.Security
         {
             if (PinnableBufferCacheEventSource.Log.IsEnabled())
             {
-                PinnableBufferCacheEventSource.Log.DebugMessage1(
-                    "CTOR: In System.Net._SslStream.SslStream",
-                    this.GetHashCode()
-                );
+                PinnableBufferCacheEventSource.Log
+                    .DebugMessage1("CTOR: In System.Net._SslStream.SslStream", this.GetHashCode());
             }
             _SslState = sslState;
             _Reader = new FixedSizeReader(_SslState.InnerStream);
@@ -107,11 +105,12 @@ namespace System.Net.Security
             {
                 if (PinnableBufferCacheEventSource.Log.IsEnabled())
                 {
-                    PinnableBufferCacheEventSource.Log.DebugMessage2(
-                        "DTOR: In System.Net._SslStream.~SslStream Freeing Read Buffer",
-                        this.GetHashCode(),
-                        PinnableBufferCacheEventSource.AddressOfByteArray(_InternalBuffer)
-                    );
+                    PinnableBufferCacheEventSource.Log
+                        .DebugMessage2(
+                            "DTOR: In System.Net._SslStream.~SslStream Freeing Read Buffer",
+                            this.GetHashCode(),
+                            PinnableBufferCacheEventSource.AddressOfByteArray(_InternalBuffer)
+                        );
                 }
                 FreeReadBuffer();
             }
@@ -119,11 +118,12 @@ namespace System.Net.Security
             {
                 if (PinnableBufferCacheEventSource.Log.IsEnabled())
                 {
-                    PinnableBufferCacheEventSource.Log.DebugMessage2(
-                        "DTOR: In System.Net._SslStream.~SslStream Freeing Write Buffer",
-                        this.GetHashCode(),
-                        PinnableBufferCacheEventSource.AddressOfByteArray(_PinnableOutputBuffer)
-                    );
+                    PinnableBufferCacheEventSource.Log
+                        .DebugMessage2(
+                            "DTOR: In System.Net._SslStream.~SslStream Freeing Write Buffer",
+                            this.GetHashCode(),
+                            PinnableBufferCacheEventSource.AddressOfByteArray(_PinnableOutputBuffer)
+                        );
                 }
                 s_PinnableWriteBufferCache.FreeBuffer(_PinnableOutputBuffer);
             }
@@ -342,11 +342,12 @@ namespace System.Net.Security
                 {
                     if (PinnableBufferCacheEventSource.Log.IsEnabled())
                     {
-                        PinnableBufferCacheEventSource.Log.DebugMessage2(
-                            "In System.Net._SslStream.EnsureInternalBufferSize IS pinnable",
-                            this.GetHashCode(),
-                            newSize
-                        );
+                        PinnableBufferCacheEventSource.Log
+                            .DebugMessage2(
+                                "In System.Net._SslStream.EnsureInternalBufferSize IS pinnable",
+                                this.GetHashCode(),
+                                newSize
+                            );
                     }
                     _InternalBufferFromPinnableCache = true;
                     _InternalBuffer = s_PinnableReadBufferCache.AllocateBuffer();
@@ -355,11 +356,12 @@ namespace System.Net.Security
                 {
                     if (PinnableBufferCacheEventSource.Log.IsEnabled())
                     {
-                        PinnableBufferCacheEventSource.Log.DebugMessage2(
-                            "In System.Net._SslStream.EnsureInternalBufferSize NOT pinnable",
-                            this.GetHashCode(),
-                            newSize
-                        );
+                        PinnableBufferCacheEventSource.Log
+                            .DebugMessage2(
+                                "In System.Net._SslStream.EnsureInternalBufferSize NOT pinnable",
+                                this.GetHashCode(),
+                                newSize
+                            );
                     }
                     _InternalBufferFromPinnableCache = false;
                     _InternalBuffer = new byte[newSize];
@@ -701,23 +703,25 @@ namespace System.Net.Security
                     outBuffer = _PinnableOutputBuffer;
                     if (PinnableBufferCacheEventSource.Log.IsEnabled())
                     {
-                        PinnableBufferCacheEventSource.Log.DebugMessage3(
-                            "In System.Net._SslStream.StartWriting Trying Pinnable",
-                            this.GetHashCode(),
-                            count,
-                            PinnableBufferCacheEventSource.AddressOfByteArray(outBuffer)
-                        );
+                        PinnableBufferCacheEventSource.Log
+                            .DebugMessage3(
+                                "In System.Net._SslStream.StartWriting Trying Pinnable",
+                                this.GetHashCode(),
+                                count,
+                                PinnableBufferCacheEventSource.AddressOfByteArray(outBuffer)
+                            );
                     }
                 }
                 else
                 {
                     if (PinnableBufferCacheEventSource.Log.IsEnabled())
                     {
-                        PinnableBufferCacheEventSource.Log.DebugMessage2(
-                            "In System.Net._SslStream.StartWriting BufferInUse",
-                            this.GetHashCode(),
-                            count
-                        );
+                        PinnableBufferCacheEventSource.Log
+                            .DebugMessage2(
+                                "In System.Net._SslStream.StartWriting BufferInUse",
+                                this.GetHashCode(),
+                                count
+                            );
                     }
                 }
 
@@ -751,12 +755,13 @@ namespace System.Net.Security
 
                     if (PinnableBufferCacheEventSource.Log.IsEnabled())
                     {
-                        PinnableBufferCacheEventSource.Log.DebugMessage3(
-                            "In System.Net._SslStream.StartWriting Got Encrypted Buffer",
-                            this.GetHashCode(),
-                            encryptedBytes,
-                            PinnableBufferCacheEventSource.AddressOfByteArray(outBuffer)
-                        );
+                        PinnableBufferCacheEventSource.Log
+                            .DebugMessage3(
+                                "In System.Net._SslStream.StartWriting Got Encrypted Buffer",
+                                this.GetHashCode(),
+                                encryptedBytes,
+                                PinnableBufferCacheEventSource.AddressOfByteArray(outBuffer)
+                            );
                     }
                     if (asyncRequest != null)
                     {
@@ -767,13 +772,8 @@ namespace System.Net.Security
                             count - chunkBytes,
                             _ResumeAsyncWriteCallback
                         );
-                        IAsyncResult ar = _SslState.InnerStream.BeginWrite(
-                            outBuffer,
-                            0,
-                            encryptedBytes,
-                            _WriteCallback,
-                            asyncRequest
-                        );
+                        IAsyncResult ar = _SslState.InnerStream
+                            .BeginWrite(outBuffer, 0, encryptedBytes, _WriteCallback, asyncRequest);
                         if (!ar.CompletedSynchronously)
                         {
                             return;
@@ -803,10 +803,11 @@ namespace System.Net.Security
                 _PinnableOutputBufferInUse = null;
                 if (PinnableBufferCacheEventSource.Log.IsEnabled())
                 {
-                    PinnableBufferCacheEventSource.Log.DebugMessage1(
-                        "In System.Net._SslStream.StartWriting Freeing buffer.",
-                        this.GetHashCode()
-                    );
+                    PinnableBufferCacheEventSource.Log
+                        .DebugMessage1(
+                            "In System.Net._SslStream.StartWriting Freeing buffer.",
+                            this.GetHashCode()
+                        );
                 }
             }
         }

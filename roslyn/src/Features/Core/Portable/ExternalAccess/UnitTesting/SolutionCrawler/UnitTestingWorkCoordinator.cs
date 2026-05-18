@@ -61,8 +61,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.UnitTesting.SolutionCrawler
 #if false // Not used in unit testing crawling
                 _documentTrackingService = _registration.Services.GetRequiredService<IUnitTestingDocumentTrackingService>();
 #endif
-                _solutionCrawlerOptionsService =
-                    _registration.Services.GetService<Microsoft.CodeAnalysis.SolutionCrawler.ISolutionCrawlerOptionsService>();
+                _solutionCrawlerOptionsService = _registration.Services
+                    .GetService<Microsoft.CodeAnalysis.SolutionCrawler.ISolutionCrawlerOptionsService>();
 
                 // event and worker queues
                 _shutdownToken = _shutdownNotificationSource.Token;
@@ -245,7 +245,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.UnitTesting.SolutionCrawler
                     // If we had a mix of exceptions, don't eat it
                     if (
                         ae.InnerExceptions.Any(e => e is not OperationCanceledException)
-                        || ae.InnerExceptions.Cast<OperationCanceledException>()
+                        || ae.InnerExceptions
+                            .Cast<OperationCanceledException>()
                             .Any(NotOurShutdownToken)
                     )
                     {
@@ -969,14 +970,14 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.UnitTesting.SolutionCrawler
                         }
                     }
 
-                    _workCoordinator
-                        ._documentAndProjectWorkerProcessor.GetTestAccessor()
+                    _workCoordinator._documentAndProjectWorkerProcessor
+                        .GetTestAccessor()
                         .WaitUntilCompletion(workers, list);
                 }
 
                 internal void WaitUntilCompletion() =>
-                    _workCoordinator
-                        ._documentAndProjectWorkerProcessor.GetTestAccessor()
+                    _workCoordinator._documentAndProjectWorkerProcessor
+                        .GetTestAccessor()
                         .WaitUntilCompletion();
             }
         }
@@ -1029,9 +1030,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.UnitTesting.SolutionCrawler
                 using var pool = SharedPools.Default<HashSet<string>>().GetPooledObject();
                 if (_solutionId != null)
                 {
-                    pool.Object.UnionWith(
-                        solution.State.ProjectStates.Select(kv => kv.Value.Language)
-                    );
+                    pool.Object
+                        .UnionWith(solution.State.ProjectStates.Select(kv => kv.Value.Language));
                     return string.Join(",", pool.Object);
                 }
 

@@ -60,10 +60,10 @@ namespace System.Data.EntityModel.SchemaObjectModel
                     AddError(
                         ErrorCode.InvalidBaseType,
                         EdmSchemaErrorSeverity.Error,
-                        System.Data.Entity.Strings.InvalidBaseTypeForItemType(
-                            BaseType.FQName,
-                            FQName
-                        )
+                        System.Data
+                            .Entity
+                            .Strings
+                            .InvalidBaseTypeForItemType(BaseType.FQName, FQName)
                     );
                 }
                 // Since the base type is not null, key must be defined on the base type
@@ -72,10 +72,10 @@ namespace System.Data.EntityModel.SchemaObjectModel
                     AddError(
                         ErrorCode.InvalidKey,
                         EdmSchemaErrorSeverity.Error,
-                        System.Data.Entity.Strings.InvalidKeyKeyDefinedInBaseClass(
-                            FQName,
-                            BaseType.FQName
-                        )
+                        System.Data
+                            .Entity
+                            .Strings
+                            .InvalidKeyKeyDefinedInBaseClass(FQName, BaseType.FQName)
                     );
                 }
             }
@@ -159,10 +159,12 @@ namespace System.Data.EntityModel.SchemaObjectModel
                 {
                     if (BaseType != null)
                     {
-                        System.Diagnostics.Debug.Assert(
-                            BaseType is SchemaEntityType,
-                            "ItemType.BaseType is not ItemType"
-                        );
+                        System.Diagnostics
+                            .Debug
+                            .Assert(
+                                BaseType is SchemaEntityType,
+                                "ItemType.BaseType is not ItemType"
+                            );
                         return (BaseType as SchemaEntityType).KeyProperties;
                     }
 

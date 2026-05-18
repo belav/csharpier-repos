@@ -25,9 +25,8 @@ namespace Microsoft.CodeAnalysis.CSharp.NavigationBar
     internal class CSharpNavigationBarItemService : AbstractNavigationBarItemService
     {
         private static readonly SymbolDisplayFormat s_typeFormat =
-            SymbolDisplayFormat.CSharpErrorMessageFormat.AddGenericsOptions(
-                SymbolDisplayGenericsOptions.IncludeVariance
-            );
+            SymbolDisplayFormat.CSharpErrorMessageFormat
+                .AddGenericsOptions(SymbolDisplayGenericsOptions.IncludeVariance);
 
         private static readonly SymbolDisplayFormat s_memberFormat = new(
             genericsOptions: SymbolDisplayGenericsOptions.IncludeTypeParameters,

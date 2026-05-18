@@ -432,12 +432,13 @@ namespace System.Data.Linq.SqlClient
                             {
                                 throw e.InnerException;
                             }
-                            return this.sql.ValueFromObject(
-                                invokeResult,
-                                invoke.Type,
-                                true,
-                                this.dominatingExpression
-                            );
+                            return this.sql
+                                .ValueFromObject(
+                                    invokeResult,
+                                    invoke.Type,
+                                    true,
+                                    this.dominatingExpression
+                                );
                         }
                     }
                 }
@@ -1068,12 +1069,13 @@ namespace System.Data.Linq.SqlClient
                 throw Error.WrongDataContext();
             }
             MetaTable metaTable = this.services.Model.GetTable(table.ElementType);
-            return this.translator.BuildDefaultQuery(
-                metaTable.RowType,
-                this.allowDeferred,
-                link,
-                this.dominatingExpression
-            );
+            return this.translator
+                .BuildDefaultQuery(
+                    metaTable.RowType,
+                    this.allowDeferred,
+                    link,
+                    this.dominatingExpression
+                );
         }
 
         private SqlNode VisitLinkedTable(LinkedTableExpression linkedTable)
@@ -1230,9 +1232,12 @@ namespace System.Data.Linq.SqlClient
                     case MemberTypes.Method:
                     {
                         foreach (
-                            PropertyInfo pi in mi.DeclaringType.GetProperties(
-                                BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic
-                            )
+                            PropertyInfo pi in mi.DeclaringType
+                                .GetProperties(
+                                    BindingFlags.Instance
+                                        | BindingFlags.Public
+                                        | BindingFlags.NonPublic
+                                )
                         )
                         {
                             MethodInfo method = mi as MethodInfo;
@@ -1578,13 +1583,14 @@ namespace System.Data.Linq.SqlClient
             SqlAliasRef aref = new SqlAliasRef(alias);
 
             // Build default projection
-            SqlExpression projection = this.translator.BuildProjection(
-                aref,
-                function.ResultRowTypes[0].InheritanceRoot,
-                this.allowDeferred,
-                null,
-                mce
-            );
+            SqlExpression projection = this.translator
+                .BuildProjection(
+                    aref,
+                    function.ResultRowTypes[0].InheritanceRoot,
+                    this.allowDeferred,
+                    null,
+                    mce
+                );
 
             SqlSelect select = new SqlSelect(projection, alias, mce);
             return select;
@@ -1627,13 +1633,8 @@ namespace System.Data.Linq.SqlClient
                     spc,
                     mce
                 );
-                spc.Projection = this.translator.BuildProjection(
-                    rowExp,
-                    rowType,
-                    this.allowDeferred,
-                    null,
-                    mce
-                );
+                spc.Projection = this.translator
+                    .BuildProjection(rowExp, rowType, this.allowDeferred, null, mce);
             }
             else if (
                 !(
@@ -1723,13 +1724,14 @@ namespace System.Data.Linq.SqlClient
                         suq,
                         this.dominatingExpression
                     );
-                    suq.Projection = this.translator.BuildProjection(
-                        rowExp,
-                        mType,
-                        this.allowDeferred,
-                        null,
-                        this.dominatingExpression
-                    );
+                    suq.Projection = this.translator
+                        .BuildProjection(
+                            rowExp,
+                            mType,
+                            this.allowDeferred,
+                            null,
+                            this.dominatingExpression
+                        );
                 }
             }
             return suq;
@@ -3847,8 +3849,9 @@ namespace System.Data.Linq.SqlClient
             try
             {
                 MetaTable metaTable = this.services.Model.GetTable(item.Type);
-                Expression source = this
-                    .services.Context.GetTable(metaTable.RowType.Type)
+                Expression source = this.services
+                    .Context
+                    .GetTable(metaTable.RowType.Type)
                     .Expression;
                 Type rowType = metaTable.RowType.Type;
 
@@ -3955,10 +3958,12 @@ namespace System.Data.Linq.SqlClient
 
         void AddIdentityMembers(IEnumerable<MemberInfo> members)
         {
-            System.Diagnostics.Debug.Assert(
-                this.IdentityMembers == null,
-                "We already have a set of keys -- why are we adding more?"
-            );
+            System.Diagnostics
+                .Debug
+                .Assert(
+                    this.IdentityMembers == null,
+                    "We already have a set of keys -- why are we adding more?"
+                );
             this.IdentityMembers = new List<MemberInfo>(members);
         }
 

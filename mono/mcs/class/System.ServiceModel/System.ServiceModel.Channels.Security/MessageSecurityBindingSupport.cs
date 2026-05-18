@@ -178,8 +178,7 @@ namespace System.ServiceModel.Channels.Security
             // r.Properties [ReqType.IsOutOfBandTokenProperty] =
             // r.Properties [ReqType.IssuerAddressProperty] =
             // r.Properties [ReqType.MessageDirectionProperty] =
-            r.Properties[ReqType.MessageSecurityVersionProperty] = Element
-                .MessageSecurityVersion
+            r.Properties[ReqType.MessageSecurityVersionProperty] = Element.MessageSecurityVersion
                 .SecurityTokenVersion;
             r.Properties[ReqType.SecurityAlgorithmSuiteProperty] = Element.DefaultAlgorithmSuite;
             r.Properties[ReqType.SecurityBindingElementProperty] = Element;
@@ -274,9 +273,8 @@ namespace System.ServiceModel.Channels.Security
         {
             requirement.KeyUsage = usage;
             requirement.Properties[ReqType.SecurityBindingElementProperty] = Element;
-            requirement.Properties[ReqType.MessageSecurityVersionProperty] = Element
-                .MessageSecurityVersion
-                .SecurityTokenVersion;
+            requirement.Properties[ReqType.MessageSecurityVersionProperty] =
+                Element.MessageSecurityVersion.SecurityTokenVersion;
 
             InitializeRequirement(targetParams, requirement);
 

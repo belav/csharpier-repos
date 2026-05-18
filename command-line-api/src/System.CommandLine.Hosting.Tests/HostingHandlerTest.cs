@@ -54,9 +54,8 @@ namespace System.CommandLine.Hosting.Tests
             var root = new CliRootCommand();
 
             root.Subcommands.Add(new MyCommand().UseCommandHandler<MyHandler>());
-            root.Subcommands.Add(
-                new MyOtherCommand().UseCommandHandler<MyOtherCommand.MyHandler>()
-            );
+            root.Subcommands
+                .Add(new MyOtherCommand().UseCommandHandler<MyOtherCommand.MyHandler>());
             var config = new CliConfiguration(root).UseHost(host =>
             {
                 host.ConfigureServices(services =>
@@ -104,9 +103,8 @@ namespace System.CommandLine.Hosting.Tests
 
             var cmd = new CliRootCommand();
             cmd.Subcommands.Add(new MyCommand().UseCommandHandler<MyDerivedCliAction>());
-            cmd.Subcommands.Add(
-                new MyOtherCommand().UseCommandHandler<MyOtherCommand.MyDerivedCliAction>()
-            );
+            cmd.Subcommands
+                .Add(new MyOtherCommand().UseCommandHandler<MyOtherCommand.MyDerivedCliAction>());
             var config = new CliConfiguration(cmd).UseHost(
                 (builder) =>
                 {

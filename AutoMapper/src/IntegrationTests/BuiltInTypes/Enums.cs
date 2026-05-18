@@ -26,14 +26,15 @@ public class EnumToUnderlyingType : IntegrationTest<EnumToUnderlyingType.Databas
     {
         protected override void Seed(Context context)
         {
-            context.Customers.Add(
-                new Customer
-                {
-                    FirstName = "Bob",
-                    LastName = "Smith",
-                    ConsoleColor = ConsoleColor.Yellow,
-                }
-            );
+            context.Customers
+                .Add(
+                    new Customer
+                    {
+                        FirstName = "Bob",
+                        LastName = "Smith",
+                        ConsoleColor = ConsoleColor.Yellow,
+                    }
+                );
             base.Seed(context);
         }
     }
@@ -48,7 +49,8 @@ public class EnumToUnderlyingType : IntegrationTest<EnumToUnderlyingType.Databas
         {
             ProjectTo<CustomerViewModel>(context.Customers)
                 .First()
-                .ConsoleColor.ShouldBe((int)ConsoleColor.Yellow);
+                .ConsoleColor
+                .ShouldBe((int)ConsoleColor.Yellow);
         }
     }
 }
@@ -79,14 +81,15 @@ public class UnderlyingTypeToEnum : IntegrationTest<UnderlyingTypeToEnum.Databas
     {
         protected override void Seed(Context context)
         {
-            context.Customers.Add(
-                new Customer
-                {
-                    FirstName = "Bob",
-                    LastName = "Smith",
-                    ConsoleColor = (int)ConsoleColor.Yellow,
-                }
-            );
+            context.Customers
+                .Add(
+                    new Customer
+                    {
+                        FirstName = "Bob",
+                        LastName = "Smith",
+                        ConsoleColor = (int)ConsoleColor.Yellow,
+                    }
+                );
             base.Seed(context);
         }
     }
@@ -101,7 +104,8 @@ public class UnderlyingTypeToEnum : IntegrationTest<UnderlyingTypeToEnum.Databas
         {
             ProjectTo<CustomerViewModel>(context.Customers)
                 .First()
-                .ConsoleColor.ShouldBe(ConsoleColor.Yellow);
+                .ConsoleColor
+                .ShouldBe(ConsoleColor.Yellow);
         }
     }
 }
@@ -132,14 +136,15 @@ public class EnumToEnum : IntegrationTest<EnumToEnum.DatabaseInitializer>
     {
         protected override void Seed(Context context)
         {
-            context.Customers.Add(
-                new Customer
-                {
-                    FirstName = "Bob",
-                    LastName = "Smith",
-                    ConsoleColor = DayOfWeek.Saturday,
-                }
-            );
+            context.Customers
+                .Add(
+                    new Customer
+                    {
+                        FirstName = "Bob",
+                        LastName = "Smith",
+                        ConsoleColor = DayOfWeek.Saturday,
+                    }
+                );
             base.Seed(context);
         }
     }
@@ -154,7 +159,8 @@ public class EnumToEnum : IntegrationTest<EnumToEnum.DatabaseInitializer>
         {
             ProjectTo<CustomerViewModel>(context.Customers)
                 .First()
-                .ConsoleColor.ShouldBe(ConsoleColor.DarkYellow);
+                .ConsoleColor
+                .ShouldBe(ConsoleColor.DarkYellow);
         }
     }
 }

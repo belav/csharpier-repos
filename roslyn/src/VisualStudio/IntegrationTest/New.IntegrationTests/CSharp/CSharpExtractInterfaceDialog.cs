@@ -32,31 +32,30 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.CSharp
                 HangMitigatingCancellationToken
             );
             await TestServices.Editor.InvokeCodeActionListAsync(HangMitigatingCancellationToken);
-            await TestServices.EditorVerifier.CodeActionAsync(
-                "Extract interface...",
-                applyFix: true,
-                blockUntilComplete: false,
-                cancellationToken: HangMitigatingCancellationToken
-            );
+            await TestServices.EditorVerifier
+                .CodeActionAsync(
+                    "Extract interface...",
+                    applyFix: true,
+                    blockUntilComplete: false,
+                    cancellationToken: HangMitigatingCancellationToken
+                );
 
-            await TestServices.ExtractInterfaceDialog.VerifyOpenAsync(
-                HangMitigatingCancellationToken
-            );
-            await TestServices.ExtractInterfaceDialog.ClickCancelAsync(
-                HangMitigatingCancellationToken
-            );
-            await TestServices.ExtractInterfaceDialog.VerifyClosedAsync(
-                HangMitigatingCancellationToken
-            );
+            await TestServices.ExtractInterfaceDialog
+                .VerifyOpenAsync(HangMitigatingCancellationToken);
+            await TestServices.ExtractInterfaceDialog
+                .ClickCancelAsync(HangMitigatingCancellationToken);
+            await TestServices.ExtractInterfaceDialog
+                .VerifyClosedAsync(HangMitigatingCancellationToken);
 
-            await TestServices.EditorVerifier.TextContainsAsync(
-                @"class C
+            await TestServices.EditorVerifier
+                .TextContainsAsync(
+                    @"class C
 {
     public void M() { }
 }
 ",
-                cancellationToken: HangMitigatingCancellationToken
-            );
+                    cancellationToken: HangMitigatingCancellationToken
+                );
         }
 
         [IdeFact]
@@ -71,28 +70,25 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.CSharp
                 HangMitigatingCancellationToken
             );
             await TestServices.Editor.InvokeCodeActionListAsync(HangMitigatingCancellationToken);
-            await TestServices.EditorVerifier.CodeActionAsync(
-                "Extract interface...",
-                applyFix: true,
-                blockUntilComplete: false,
-                cancellationToken: HangMitigatingCancellationToken
-            );
+            await TestServices.EditorVerifier
+                .CodeActionAsync(
+                    "Extract interface...",
+                    applyFix: true,
+                    blockUntilComplete: false,
+                    cancellationToken: HangMitigatingCancellationToken
+                );
 
-            await TestServices.ExtractInterfaceDialog.VerifyOpenAsync(
-                HangMitigatingCancellationToken
-            );
+            await TestServices.ExtractInterfaceDialog
+                .VerifyOpenAsync(HangMitigatingCancellationToken);
 
-            var targetFileName = await TestServices.ExtractInterfaceDialog.GetTargetFileNameAsync(
-                HangMitigatingCancellationToken
-            );
+            var targetFileName = await TestServices.ExtractInterfaceDialog
+                .GetTargetFileNameAsync(HangMitigatingCancellationToken);
             Assert.Equal(expected: "IC.cs", actual: targetFileName);
 
-            await TestServices.ExtractInterfaceDialog.ClickCancelAsync(
-                HangMitigatingCancellationToken
-            );
-            await TestServices.ExtractInterfaceDialog.VerifyClosedAsync(
-                HangMitigatingCancellationToken
-            );
+            await TestServices.ExtractInterfaceDialog
+                .ClickCancelAsync(HangMitigatingCancellationToken);
+            await TestServices.ExtractInterfaceDialog
+                .VerifyClosedAsync(HangMitigatingCancellationToken);
         }
 
         [IdeFact]
@@ -109,52 +105,45 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.CSharp
             );
 
             await TestServices.Editor.InvokeCodeActionListAsync(HangMitigatingCancellationToken);
-            await TestServices.EditorVerifier.CodeActionAsync(
-                "Extract interface...",
-                applyFix: true,
-                blockUntilComplete: false,
-                cancellationToken: HangMitigatingCancellationToken
-            );
+            await TestServices.EditorVerifier
+                .CodeActionAsync(
+                    "Extract interface...",
+                    applyFix: true,
+                    blockUntilComplete: false,
+                    cancellationToken: HangMitigatingCancellationToken
+                );
 
-            await TestServices.ExtractInterfaceDialog.VerifyOpenAsync(
-                HangMitigatingCancellationToken
-            );
+            await TestServices.ExtractInterfaceDialog
+                .VerifyOpenAsync(HangMitigatingCancellationToken);
 
-            var selectedItems = await TestServices.ExtractInterfaceDialog.GetSelectedItemsAsync(
-                HangMitigatingCancellationToken
-            );
+            var selectedItems = await TestServices.ExtractInterfaceDialog
+                .GetSelectedItemsAsync(HangMitigatingCancellationToken);
             Assert.Equal(
                 expected: new[] { "M1()", "M2()" },
                 actual: selectedItems.Select(item => item.SymbolName)
             );
 
-            await TestServices.ExtractInterfaceDialog.ClickDeselectAllAsync(
-                HangMitigatingCancellationToken
-            );
+            await TestServices.ExtractInterfaceDialog
+                .ClickDeselectAllAsync(HangMitigatingCancellationToken);
 
-            selectedItems = await TestServices.ExtractInterfaceDialog.GetSelectedItemsAsync(
-                HangMitigatingCancellationToken
-            );
+            selectedItems = await TestServices.ExtractInterfaceDialog
+                .GetSelectedItemsAsync(HangMitigatingCancellationToken);
             Assert.Empty(selectedItems);
 
-            await TestServices.ExtractInterfaceDialog.ClickSelectAllAsync(
-                HangMitigatingCancellationToken
-            );
+            await TestServices.ExtractInterfaceDialog
+                .ClickSelectAllAsync(HangMitigatingCancellationToken);
 
-            selectedItems = await TestServices.ExtractInterfaceDialog.GetSelectedItemsAsync(
-                HangMitigatingCancellationToken
-            );
+            selectedItems = await TestServices.ExtractInterfaceDialog
+                .GetSelectedItemsAsync(HangMitigatingCancellationToken);
             Assert.Equal(
                 expected: new[] { "M1()", "M2()" },
                 actual: selectedItems.Select(item => item.SymbolName)
             );
 
-            await TestServices.ExtractInterfaceDialog.ClickCancelAsync(
-                HangMitigatingCancellationToken
-            );
-            await TestServices.ExtractInterfaceDialog.VerifyClosedAsync(
-                HangMitigatingCancellationToken
-            );
+            await TestServices.ExtractInterfaceDialog
+                .ClickCancelAsync(HangMitigatingCancellationToken);
+            await TestServices.ExtractInterfaceDialog
+                .VerifyClosedAsync(HangMitigatingCancellationToken);
         }
 
         [IdeFact]
@@ -171,55 +160,47 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.CSharp
             );
 
             await TestServices.Editor.InvokeCodeActionListAsync(HangMitigatingCancellationToken);
-            await TestServices.EditorVerifier.CodeActionAsync(
-                "Extract interface...",
-                applyFix: true,
-                blockUntilComplete: false,
-                cancellationToken: HangMitigatingCancellationToken
-            );
+            await TestServices.EditorVerifier
+                .CodeActionAsync(
+                    "Extract interface...",
+                    applyFix: true,
+                    blockUntilComplete: false,
+                    cancellationToken: HangMitigatingCancellationToken
+                );
 
-            await TestServices.ExtractInterfaceDialog.VerifyOpenAsync(
-                HangMitigatingCancellationToken
-            );
-            await TestServices.ExtractInterfaceDialog.ClickDeselectAllAsync(
-                HangMitigatingCancellationToken
-            );
-            await TestServices.ExtractInterfaceDialog.ToggleItemAsync(
-                "M2()",
-                HangMitigatingCancellationToken
-            );
+            await TestServices.ExtractInterfaceDialog
+                .VerifyOpenAsync(HangMitigatingCancellationToken);
+            await TestServices.ExtractInterfaceDialog
+                .ClickDeselectAllAsync(HangMitigatingCancellationToken);
+            await TestServices.ExtractInterfaceDialog
+                .ToggleItemAsync("M2()", HangMitigatingCancellationToken);
             await TestServices.ExtractInterfaceDialog.ClickOKAsync(HangMitigatingCancellationToken);
-            await TestServices.ExtractInterfaceDialog.VerifyClosedAsync(
-                HangMitigatingCancellationToken
-            );
+            await TestServices.ExtractInterfaceDialog
+                .VerifyClosedAsync(HangMitigatingCancellationToken);
 
-            await TestServices.SolutionExplorer.OpenFileAsync(
-                ProjectName,
-                "Class1.cs",
-                HangMitigatingCancellationToken
-            );
-            await TestServices.EditorVerifier.TextContainsAsync(
-                @"class C : IC
+            await TestServices.SolutionExplorer
+                .OpenFileAsync(ProjectName, "Class1.cs", HangMitigatingCancellationToken);
+            await TestServices.EditorVerifier
+                .TextContainsAsync(
+                    @"class C : IC
 {
     public void M1() { }
     public void M2() { }
 }
 ",
-                cancellationToken: HangMitigatingCancellationToken
-            );
+                    cancellationToken: HangMitigatingCancellationToken
+                );
 
-            await TestServices.SolutionExplorer.OpenFileAsync(
-                ProjectName,
-                "IC.cs",
-                HangMitigatingCancellationToken
-            );
-            await TestServices.EditorVerifier.TextContainsAsync(
-                @"interface IC
+            await TestServices.SolutionExplorer
+                .OpenFileAsync(ProjectName, "IC.cs", HangMitigatingCancellationToken);
+            await TestServices.EditorVerifier
+                .TextContainsAsync(
+                    @"interface IC
 {
     void M2();
 }",
-                cancellationToken: HangMitigatingCancellationToken
-            );
+                    cancellationToken: HangMitigatingCancellationToken
+                );
         }
 
         [IdeFact]
@@ -234,28 +215,27 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.CSharp
                 HangMitigatingCancellationToken
             );
             await TestServices.Editor.InvokeCodeActionListAsync(HangMitigatingCancellationToken);
-            await TestServices.EditorVerifier.CodeActionAsync(
-                "Extract interface...",
-                applyFix: true,
-                blockUntilComplete: false,
-                cancellationToken: HangMitigatingCancellationToken
-            );
+            await TestServices.EditorVerifier
+                .CodeActionAsync(
+                    "Extract interface...",
+                    applyFix: true,
+                    blockUntilComplete: false,
+                    cancellationToken: HangMitigatingCancellationToken
+                );
 
-            await TestServices.ExtractInterfaceDialog.VerifyOpenAsync(
-                HangMitigatingCancellationToken
-            );
+            await TestServices.ExtractInterfaceDialog
+                .VerifyOpenAsync(HangMitigatingCancellationToken);
 
-            await TestServices.ExtractInterfaceDialog.SelectSameFileAsync(
-                HangMitigatingCancellationToken
-            );
+            await TestServices.ExtractInterfaceDialog
+                .SelectSameFileAsync(HangMitigatingCancellationToken);
 
             await TestServices.ExtractInterfaceDialog.ClickOKAsync(HangMitigatingCancellationToken);
-            await TestServices.ExtractInterfaceDialog.VerifyClosedAsync(
-                HangMitigatingCancellationToken
-            );
+            await TestServices.ExtractInterfaceDialog
+                .VerifyClosedAsync(HangMitigatingCancellationToken);
 
-            await TestServices.EditorVerifier.TextContainsAsync(
-                @"interface IC
+            await TestServices.EditorVerifier
+                .TextContainsAsync(
+                    @"interface IC
 {
     void M();
 }
@@ -265,8 +245,8 @@ class C : IC
     public void M() { }
 }
 ",
-                cancellationToken: HangMitigatingCancellationToken
-            );
+                    cancellationToken: HangMitigatingCancellationToken
+                );
         }
 
         [IdeFact]
@@ -283,33 +263,29 @@ class C : IC
             );
 
             await TestServices.Editor.InvokeCodeActionListAsync(HangMitigatingCancellationToken);
-            await TestServices.EditorVerifier.CodeActionAsync(
-                "Extract interface...",
-                applyFix: true,
-                blockUntilComplete: false,
-                cancellationToken: HangMitigatingCancellationToken
-            );
+            await TestServices.EditorVerifier
+                .CodeActionAsync(
+                    "Extract interface...",
+                    applyFix: true,
+                    blockUntilComplete: false,
+                    cancellationToken: HangMitigatingCancellationToken
+                );
 
-            await TestServices.ExtractInterfaceDialog.VerifyOpenAsync(
-                HangMitigatingCancellationToken
-            );
-            await TestServices.ExtractInterfaceDialog.ClickDeselectAllAsync(
-                HangMitigatingCancellationToken
-            );
-            await TestServices.ExtractInterfaceDialog.ToggleItemAsync(
-                "M2()",
-                HangMitigatingCancellationToken
-            );
-            await TestServices.ExtractInterfaceDialog.SelectSameFileAsync(
-                HangMitigatingCancellationToken
-            );
+            await TestServices.ExtractInterfaceDialog
+                .VerifyOpenAsync(HangMitigatingCancellationToken);
+            await TestServices.ExtractInterfaceDialog
+                .ClickDeselectAllAsync(HangMitigatingCancellationToken);
+            await TestServices.ExtractInterfaceDialog
+                .ToggleItemAsync("M2()", HangMitigatingCancellationToken);
+            await TestServices.ExtractInterfaceDialog
+                .SelectSameFileAsync(HangMitigatingCancellationToken);
             await TestServices.ExtractInterfaceDialog.ClickOKAsync(HangMitigatingCancellationToken);
-            await TestServices.ExtractInterfaceDialog.VerifyClosedAsync(
-                HangMitigatingCancellationToken
-            );
+            await TestServices.ExtractInterfaceDialog
+                .VerifyClosedAsync(HangMitigatingCancellationToken);
 
-            await TestServices.EditorVerifier.TextContainsAsync(
-                @"interface IC
+            await TestServices.EditorVerifier
+                .TextContainsAsync(
+                    @"interface IC
 {
     void M2();
 }
@@ -320,8 +296,8 @@ class C : IC
     public void M2() { }
 }
 ",
-                cancellationToken: HangMitigatingCancellationToken
-            );
+                    cancellationToken: HangMitigatingCancellationToken
+                );
         }
 
         [IdeFact]
@@ -339,28 +315,27 @@ class C : IC
                 HangMitigatingCancellationToken
             );
             await TestServices.Editor.InvokeCodeActionListAsync(HangMitigatingCancellationToken);
-            await TestServices.EditorVerifier.CodeActionAsync(
-                "Extract interface...",
-                applyFix: true,
-                blockUntilComplete: false,
-                cancellationToken: HangMitigatingCancellationToken
-            );
+            await TestServices.EditorVerifier
+                .CodeActionAsync(
+                    "Extract interface...",
+                    applyFix: true,
+                    blockUntilComplete: false,
+                    cancellationToken: HangMitigatingCancellationToken
+                );
 
-            await TestServices.ExtractInterfaceDialog.VerifyOpenAsync(
-                HangMitigatingCancellationToken
-            );
+            await TestServices.ExtractInterfaceDialog
+                .VerifyOpenAsync(HangMitigatingCancellationToken);
 
-            await TestServices.ExtractInterfaceDialog.SelectSameFileAsync(
-                HangMitigatingCancellationToken
-            );
+            await TestServices.ExtractInterfaceDialog
+                .SelectSameFileAsync(HangMitigatingCancellationToken);
 
             await TestServices.ExtractInterfaceDialog.ClickOKAsync(HangMitigatingCancellationToken);
-            await TestServices.ExtractInterfaceDialog.VerifyClosedAsync(
-                HangMitigatingCancellationToken
-            );
+            await TestServices.ExtractInterfaceDialog
+                .VerifyClosedAsync(HangMitigatingCancellationToken);
 
-            await TestServices.EditorVerifier.TextContainsAsync(
-                @"namespace A
+            await TestServices.EditorVerifier
+                .TextContainsAsync(
+                    @"namespace A
 {
     interface IC
     {
@@ -373,8 +348,8 @@ class C : IC
     }
 }
 ",
-                cancellationToken: HangMitigatingCancellationToken
-            );
+                    cancellationToken: HangMitigatingCancellationToken
+                );
         }
 
         [IdeFact]
@@ -389,28 +364,27 @@ class C : IC
                 HangMitigatingCancellationToken
             );
             await TestServices.Editor.InvokeCodeActionListAsync(HangMitigatingCancellationToken);
-            await TestServices.EditorVerifier.CodeActionAsync(
-                "Extract interface...",
-                applyFix: true,
-                blockUntilComplete: false,
-                cancellationToken: HangMitigatingCancellationToken
-            );
+            await TestServices.EditorVerifier
+                .CodeActionAsync(
+                    "Extract interface...",
+                    applyFix: true,
+                    blockUntilComplete: false,
+                    cancellationToken: HangMitigatingCancellationToken
+                );
 
-            await TestServices.ExtractInterfaceDialog.VerifyOpenAsync(
-                HangMitigatingCancellationToken
-            );
+            await TestServices.ExtractInterfaceDialog
+                .VerifyOpenAsync(HangMitigatingCancellationToken);
 
-            await TestServices.ExtractInterfaceDialog.SelectSameFileAsync(
-                HangMitigatingCancellationToken
-            );
+            await TestServices.ExtractInterfaceDialog
+                .SelectSameFileAsync(HangMitigatingCancellationToken);
 
             await TestServices.ExtractInterfaceDialog.ClickOKAsync(HangMitigatingCancellationToken);
-            await TestServices.ExtractInterfaceDialog.VerifyClosedAsync(
-                HangMitigatingCancellationToken
-            );
+            await TestServices.ExtractInterfaceDialog
+                .VerifyClosedAsync(HangMitigatingCancellationToken);
 
-            await TestServices.EditorVerifier.TextContainsAsync(
-                @"interface IC
+            await TestServices.EditorVerifier
+                .TextContainsAsync(
+                    @"interface IC
 {
     bool M();
 }
@@ -420,8 +394,8 @@ class C : IC
     public bool M() => false;
 }
 ",
-                cancellationToken: HangMitigatingCancellationToken
-            );
+                    cancellationToken: HangMitigatingCancellationToken
+                );
         }
     }
 }

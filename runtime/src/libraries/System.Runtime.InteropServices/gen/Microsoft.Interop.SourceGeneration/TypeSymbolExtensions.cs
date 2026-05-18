@@ -106,12 +106,13 @@ namespace Microsoft.Interop
                         }
 
                         if (
-                            t.ContainingAssembly.Equals(
-                                compilation
-                                    .GetSpecialType(SpecialType.System_Object)
-                                    .ContainingAssembly,
-                                SymbolEqualityComparer.Default
-                            )
+                            t.ContainingAssembly
+                                .Equals(
+                                    compilation
+                                        .GetSpecialType(SpecialType.System_Object)
+                                        .ContainingAssembly,
+                                    SymbolEqualityComparer.Default
+                                )
                         )
                         {
                             if (t.ToDisplayString() == TypeNames.System_Guid) // .NET has established that Guid is blittable and matches the shape of the Win32 GUID type exactly and always will.
@@ -272,10 +273,8 @@ namespace Microsoft.Interop
             return (type, other) switch
             {
                 (INamedTypeSymbol namedType, INamedTypeSymbol namedOther) =>
-                    SymbolEqualityComparer.Default.Equals(
-                        namedType.ConstructedFrom,
-                        namedOther.ConstructedFrom
-                    ),
+                    SymbolEqualityComparer.Default
+                        .Equals(namedType.ConstructedFrom, namedOther.ConstructedFrom),
                 _ => SymbolEqualityComparer.Default.Equals(type, other),
             };
         }
@@ -381,8 +380,8 @@ namespace Microsoft.Interop
                         // This value represents how many generic arguments the instantiatedTemplateType type would need to have the same total number of generic parameters as unboundConstructedType,
                         // including accounting for nesting.
                         numOriginalTypeArgumentsSubstituted += numArgumentsToPropogate;
-                        currentType
-                            .TypeParameters.CastArray<ITypeSymbol>()
+                        currentType.TypeParameters
+                            .CastArray<ITypeSymbol>()
                             .CopyTo(
                                 currentType.TypeParameters.Length - numArgumentsToPropogate,
                                 arguments,

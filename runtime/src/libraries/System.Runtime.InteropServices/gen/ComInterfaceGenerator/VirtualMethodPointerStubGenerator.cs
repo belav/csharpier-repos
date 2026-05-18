@@ -140,11 +140,15 @@ namespace Microsoft.Interop
                                     InitializerExpression(
                                         SyntaxKind.CollectionInitializerExpression,
                                         SeparatedList<ExpressionSyntax>(
-                                            methodStub.CallingConvention.Array.Select(callConv =>
-                                                TypeOfExpression(
-                                                    TypeSyntaxes.CallConv(callConv.Name.ValueText)
+                                            methodStub.CallingConvention
+                                                .Array
+                                                .Select(callConv =>
+                                                    TypeOfExpression(
+                                                        TypeSyntaxes.CallConv(
+                                                            callConv.Name.ValueText
+                                                        )
+                                                    )
                                                 )
-                                            )
                                         )
                                     )
                                 )
@@ -176,8 +180,7 @@ namespace Microsoft.Interop
             IncrementalMethodStubGenerationContext methodStub
         )
         {
-            ImmutableArray<TypePositionInfo> originalElements = methodStub
-                .SignatureContext
+            ImmutableArray<TypePositionInfo> originalElements = methodStub.SignatureContext
                 .ElementTypeInformation;
 
             var elements = ImmutableArray.CreateBuilder<TypePositionInfo>(
@@ -306,9 +309,8 @@ namespace Microsoft.Interop
             functionPointerParameters.Add(FunctionPointerParameter(retType));
 
             // delegate* unmanaged<...>
-            ImmutableArray<FunctionPointerUnmanagedCallingConventionSyntax> callConv = method
-                .CallingConvention
-                .Array;
+            ImmutableArray<FunctionPointerUnmanagedCallingConventionSyntax> callConv =
+                method.CallingConvention.Array;
             FunctionPointerTypeSyntax functionPointerType = FunctionPointerType(
                 FunctionPointerCallingConvention(
                     Token(SyntaxKind.UnmanagedKeyword),

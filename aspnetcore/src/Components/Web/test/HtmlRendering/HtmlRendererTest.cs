@@ -40,9 +40,8 @@ public class HtmlRendererTest
             collection.AddSingleton(new RenderFragment(_ => { }))
         );
         var htmlRenderer = GetHtmlRenderer(serviceProvider);
-        var htmlContent = await htmlRenderer.Dispatcher.InvokeAsync(
-            htmlRenderer.BeginRenderingComponent<TestComponent>
-        );
+        var htmlContent = await htmlRenderer.Dispatcher
+            .InvokeAsync(htmlRenderer.BeginRenderingComponent<TestComponent>);
 
         // Act
         var ex = Assert.Throws<InvalidOperationException>(() =>
@@ -66,14 +65,15 @@ public class HtmlRendererTest
         );
 
         var htmlRenderer = GetHtmlRenderer(serviceProvider);
-        await htmlRenderer.Dispatcher.InvokeAsync(async () =>
-        {
-            // Act
-            var result = await htmlRenderer.RenderComponentAsync<TestComponent>();
+        await htmlRenderer.Dispatcher
+            .InvokeAsync(async () =>
+            {
+                // Act
+                var result = await htmlRenderer.RenderComponentAsync<TestComponent>();
 
-            // Assert
-            Assert.Equal("<p></p>", result.ToHtmlString());
-        });
+                // Assert
+                Assert.Equal("<p></p>", result.ToHtmlString());
+            });
     }
 
     [Fact]
@@ -93,14 +93,15 @@ public class HtmlRendererTest
         );
 
         var htmlRenderer = GetHtmlRenderer(serviceProvider);
-        await htmlRenderer.Dispatcher.InvokeAsync(async () =>
-        {
-            // Act
-            var result = await htmlRenderer.RenderComponentAsync<TestComponent>();
+        await htmlRenderer.Dispatcher
+            .InvokeAsync(async () =>
+            {
+                // Act
+                var result = await htmlRenderer.RenderComponentAsync<TestComponent>();
 
-            // Assert
-            AssertHtmlContentEquals(expectedHtml, result);
-        });
+                // Assert
+                AssertHtmlContentEquals(expectedHtml, result);
+            });
     }
 
     [Fact]
@@ -120,14 +121,15 @@ public class HtmlRendererTest
         );
 
         var htmlRenderer = GetHtmlRenderer(serviceProvider);
-        await htmlRenderer.Dispatcher.InvokeAsync(async () =>
-        {
-            // Act
-            var result = await htmlRenderer.RenderComponentAsync<TestComponent>();
+        await htmlRenderer.Dispatcher
+            .InvokeAsync(async () =>
+            {
+                // Act
+                var result = await htmlRenderer.RenderComponentAsync<TestComponent>();
 
-            // Assert
-            AssertHtmlContentEquals(expectedHtml, result);
-        });
+                // Assert
+                AssertHtmlContentEquals(expectedHtml, result);
+            });
     }
 
     [Fact]
@@ -147,14 +149,15 @@ public class HtmlRendererTest
         );
 
         var htmlRenderer = GetHtmlRenderer(serviceProvider);
-        await htmlRenderer.Dispatcher.InvokeAsync(async () =>
-        {
-            // Act
-            var result = await htmlRenderer.RenderComponentAsync<TestComponent>();
+        await htmlRenderer.Dispatcher
+            .InvokeAsync(async () =>
+            {
+                // Act
+                var result = await htmlRenderer.RenderComponentAsync<TestComponent>();
 
-            // Assert
-            AssertHtmlContentEquals(expectedHtml, result);
-        });
+                // Assert
+                AssertHtmlContentEquals(expectedHtml, result);
+            });
     }
 
     [Fact]
@@ -190,14 +193,15 @@ public class HtmlRendererTest
         );
 
         var htmlRenderer = GetHtmlRenderer(serviceProvider);
-        await htmlRenderer.Dispatcher.InvokeAsync(async () =>
-        {
-            // Act
-            var result = await htmlRenderer.RenderComponentAsync<TestComponent>();
+        await htmlRenderer.Dispatcher
+            .InvokeAsync(async () =>
+            {
+                // Act
+                var result = await htmlRenderer.RenderComponentAsync<TestComponent>();
 
-            // Assert
-            AssertHtmlContentEquals(expectedHtml, result);
-        });
+                // Assert
+                AssertHtmlContentEquals(expectedHtml, result);
+            });
     }
 
     [Fact]
@@ -244,14 +248,15 @@ public class HtmlRendererTest
         );
 
         var htmlRenderer = GetHtmlRenderer(serviceProvider);
-        await htmlRenderer.Dispatcher.InvokeAsync(async () =>
-        {
-            // Act
-            var result = await htmlRenderer.RenderComponentAsync<TestComponent>();
+        await htmlRenderer.Dispatcher
+            .InvokeAsync(async () =>
+            {
+                // Act
+                var result = await htmlRenderer.RenderComponentAsync<TestComponent>();
 
-            // Assert
-            AssertHtmlContentEquals(expectedHtml, result);
-        });
+                // Assert
+                AssertHtmlContentEquals(expectedHtml, result);
+            });
     }
 
     [Fact]
@@ -287,14 +292,15 @@ public class HtmlRendererTest
         );
 
         var htmlRenderer = GetHtmlRenderer(serviceProvider);
-        await htmlRenderer.Dispatcher.InvokeAsync(async () =>
-        {
-            // Act
-            var result = await htmlRenderer.RenderComponentAsync<TestComponent>();
+        await htmlRenderer.Dispatcher
+            .InvokeAsync(async () =>
+            {
+                // Act
+                var result = await htmlRenderer.RenderComponentAsync<TestComponent>();
 
-            // Assert
-            AssertHtmlContentEquals(expectedHtml, result);
-        });
+                // Assert
+                AssertHtmlContentEquals(expectedHtml, result);
+            });
     }
 
     [Fact]
@@ -314,14 +320,15 @@ public class HtmlRendererTest
         );
 
         var htmlRenderer = GetHtmlRenderer(serviceProvider);
-        await htmlRenderer.Dispatcher.InvokeAsync(async () =>
-        {
-            // Act
-            var result = await htmlRenderer.RenderComponentAsync<TestComponent>();
+        await htmlRenderer.Dispatcher
+            .InvokeAsync(async () =>
+            {
+                // Act
+                var result = await htmlRenderer.RenderComponentAsync<TestComponent>();
 
-            // Assert
-            AssertHtmlContentEquals(expectedHtml, result);
-        });
+                // Assert
+                AssertHtmlContentEquals(expectedHtml, result);
+            });
     }
 
     [Fact]
@@ -341,14 +348,15 @@ public class HtmlRendererTest
         );
 
         var htmlRenderer = GetHtmlRenderer(serviceProvider);
-        await htmlRenderer.Dispatcher.InvokeAsync(async () =>
-        {
-            // Act
-            var result = await htmlRenderer.RenderComponentAsync<TestComponent>();
+        await htmlRenderer.Dispatcher
+            .InvokeAsync(async () =>
+            {
+                // Act
+                var result = await htmlRenderer.RenderComponentAsync<TestComponent>();
 
-            // Assert
-            AssertHtmlContentEquals(expectedHtml, result);
-        });
+                // Assert
+                AssertHtmlContentEquals(expectedHtml, result);
+            });
     }
 
     [Fact]
@@ -385,14 +393,15 @@ public class HtmlRendererTest
         );
 
         var htmlRenderer = GetHtmlRenderer(serviceProvider);
-        await htmlRenderer.Dispatcher.InvokeAsync(async () =>
-        {
-            // Act
-            var result = await htmlRenderer.RenderComponentAsync<TestComponent>();
+        await htmlRenderer.Dispatcher
+            .InvokeAsync(async () =>
+            {
+                // Act
+                var result = await htmlRenderer.RenderComponentAsync<TestComponent>();
 
-            // Assert
-            AssertHtmlContentEquals(expectedHtml, result);
-        });
+                // Assert
+                AssertHtmlContentEquals(expectedHtml, result);
+            });
     }
 
     [Fact]
@@ -439,14 +448,15 @@ public class HtmlRendererTest
         );
 
         var htmlRenderer = GetHtmlRenderer(serviceProvider);
-        await htmlRenderer.Dispatcher.InvokeAsync(async () =>
-        {
-            // Act
-            var result = await htmlRenderer.RenderComponentAsync<TestComponent>();
+        await htmlRenderer.Dispatcher
+            .InvokeAsync(async () =>
+            {
+                // Act
+                var result = await htmlRenderer.RenderComponentAsync<TestComponent>();
 
-            // Assert
-            AssertHtmlContentEquals(expectedHtml, result);
-        });
+                // Assert
+                AssertHtmlContentEquals(expectedHtml, result);
+            });
     }
 
     [Fact]
@@ -492,14 +502,15 @@ public class HtmlRendererTest
         );
 
         var htmlRenderer = GetHtmlRenderer(serviceProvider);
-        await htmlRenderer.Dispatcher.InvokeAsync(async () =>
-        {
-            // Act
-            var result = await htmlRenderer.RenderComponentAsync<TestComponent>();
+        await htmlRenderer.Dispatcher
+            .InvokeAsync(async () =>
+            {
+                // Act
+                var result = await htmlRenderer.RenderComponentAsync<TestComponent>();
 
-            // Assert
-            AssertHtmlContentEquals(expectedHtml, result);
-        });
+                // Assert
+                AssertHtmlContentEquals(expectedHtml, result);
+            });
     }
 
     [Fact]
@@ -522,14 +533,15 @@ public class HtmlRendererTest
         );
 
         var htmlRenderer = GetHtmlRenderer(serviceProvider);
-        await htmlRenderer.Dispatcher.InvokeAsync(async () =>
-        {
-            // Act
-            var result = await htmlRenderer.RenderComponentAsync<TestComponent>();
+        await htmlRenderer.Dispatcher
+            .InvokeAsync(async () =>
+            {
+                // Act
+                var result = await htmlRenderer.RenderComponentAsync<TestComponent>();
 
-            // Assert
-            AssertHtmlContentEquals(expectedHtml, result);
-        });
+                // Assert
+                AssertHtmlContentEquals(expectedHtml, result);
+            });
     }
 
     [Fact]
@@ -552,14 +564,15 @@ public class HtmlRendererTest
         );
 
         var htmlRenderer = GetHtmlRenderer(serviceProvider);
-        await htmlRenderer.Dispatcher.InvokeAsync(async () =>
-        {
-            // Act
-            var result = await htmlRenderer.RenderComponentAsync<TestComponent>();
+        await htmlRenderer.Dispatcher
+            .InvokeAsync(async () =>
+            {
+                // Act
+                var result = await htmlRenderer.RenderComponentAsync<TestComponent>();
 
-            // Assert
-            AssertHtmlContentEquals(expectedHtml, result);
-        });
+                // Assert
+                AssertHtmlContentEquals(expectedHtml, result);
+            });
     }
 
     [Fact]
@@ -580,14 +593,15 @@ public class HtmlRendererTest
         );
 
         var htmlRenderer = GetHtmlRenderer(serviceProvider);
-        await htmlRenderer.Dispatcher.InvokeAsync(async () =>
-        {
-            // Act
-            var result = await htmlRenderer.RenderComponentAsync<TestComponent>();
+        await htmlRenderer.Dispatcher
+            .InvokeAsync(async () =>
+            {
+                // Act
+                var result = await htmlRenderer.RenderComponentAsync<TestComponent>();
 
-            // Assert
-            AssertHtmlContentEquals(expectedHtml, result);
-        });
+                // Assert
+                AssertHtmlContentEquals(expectedHtml, result);
+            });
     }
 
     [Fact]
@@ -608,14 +622,15 @@ public class HtmlRendererTest
         );
 
         var htmlRenderer = GetHtmlRenderer(serviceProvider);
-        await htmlRenderer.Dispatcher.InvokeAsync(async () =>
-        {
-            // Act
-            var result = await htmlRenderer.RenderComponentAsync<TestComponent>();
+        await htmlRenderer.Dispatcher
+            .InvokeAsync(async () =>
+            {
+                // Act
+                var result = await htmlRenderer.RenderComponentAsync<TestComponent>();
 
-            // Assert
-            AssertHtmlContentEquals(expectedHtml, result);
-        });
+                // Assert
+                AssertHtmlContentEquals(expectedHtml, result);
+            });
     }
 
     [Fact]
@@ -636,14 +651,15 @@ public class HtmlRendererTest
         );
 
         var htmlRenderer = GetHtmlRenderer(serviceProvider);
-        await htmlRenderer.Dispatcher.InvokeAsync(async () =>
-        {
-            // Act
-            var result = await htmlRenderer.RenderComponentAsync<TestComponent>();
+        await htmlRenderer.Dispatcher
+            .InvokeAsync(async () =>
+            {
+                // Act
+                var result = await htmlRenderer.RenderComponentAsync<TestComponent>();
 
-            // Assert
-            AssertHtmlContentEquals(expectedHtml, result);
-        });
+                // Assert
+                AssertHtmlContentEquals(expectedHtml, result);
+            });
     }
 
     [Fact]
@@ -663,14 +679,15 @@ public class HtmlRendererTest
         );
 
         var htmlRenderer = GetHtmlRenderer(serviceProvider);
-        await htmlRenderer.Dispatcher.InvokeAsync(async () =>
-        {
-            // Act
-            var result = await htmlRenderer.RenderComponentAsync<TestComponent>();
+        await htmlRenderer.Dispatcher
+            .InvokeAsync(async () =>
+            {
+                // Act
+                var result = await htmlRenderer.RenderComponentAsync<TestComponent>();
 
-            // Assert
-            AssertHtmlContentEquals(expectedHtml, result);
-        });
+                // Assert
+                AssertHtmlContentEquals(expectedHtml, result);
+            });
     }
 
     [Fact]
@@ -692,14 +709,15 @@ public class HtmlRendererTest
         );
 
         var htmlRenderer = GetHtmlRenderer(serviceProvider);
-        await htmlRenderer.Dispatcher.InvokeAsync(async () =>
-        {
-            // Act
-            var result = await htmlRenderer.RenderComponentAsync<TestComponent>();
+        await htmlRenderer.Dispatcher
+            .InvokeAsync(async () =>
+            {
+                // Act
+                var result = await htmlRenderer.RenderComponentAsync<TestComponent>();
 
-            // Assert
-            AssertHtmlContentEquals(expectedHtml, result);
-        });
+                // Assert
+                AssertHtmlContentEquals(expectedHtml, result);
+            });
     }
 
     [Fact]
@@ -735,14 +753,15 @@ public class HtmlRendererTest
         );
 
         var htmlRenderer = GetHtmlRenderer(serviceProvider);
-        await htmlRenderer.Dispatcher.InvokeAsync(async () =>
-        {
-            // Act
-            var result = await htmlRenderer.RenderComponentAsync<TestComponent>();
+        await htmlRenderer.Dispatcher
+            .InvokeAsync(async () =>
+            {
+                // Act
+                var result = await htmlRenderer.RenderComponentAsync<TestComponent>();
 
-            // Assert
-            AssertHtmlContentEquals(expectedHtml, result);
-        });
+                // Assert
+                AssertHtmlContentEquals(expectedHtml, result);
+            });
     }
 
     [Fact]
@@ -789,14 +808,15 @@ public class HtmlRendererTest
         );
 
         var htmlRenderer = GetHtmlRenderer(serviceProvider);
-        await htmlRenderer.Dispatcher.InvokeAsync(async () =>
-        {
-            // Act
-            var result = await htmlRenderer.RenderComponentAsync<TestComponent>();
+        await htmlRenderer.Dispatcher
+            .InvokeAsync(async () =>
+            {
+                // Act
+                var result = await htmlRenderer.RenderComponentAsync<TestComponent>();
 
-            // Assert
-            AssertHtmlContentEquals(expectedHtml, result);
-        });
+                // Assert
+                AssertHtmlContentEquals(expectedHtml, result);
+            });
     }
 
     [Fact]
@@ -844,14 +864,15 @@ public class HtmlRendererTest
         );
 
         var htmlRenderer = GetHtmlRenderer(serviceProvider);
-        await htmlRenderer.Dispatcher.InvokeAsync(async () =>
-        {
-            // Act
-            var result = await htmlRenderer.RenderComponentAsync<TestComponent>();
+        await htmlRenderer.Dispatcher
+            .InvokeAsync(async () =>
+            {
+                // Act
+                var result = await htmlRenderer.RenderComponentAsync<TestComponent>();
 
-            // Assert
-            AssertHtmlContentEquals(expectedHtml, result);
-        });
+                // Assert
+                AssertHtmlContentEquals(expectedHtml, result);
+            });
     }
 
     [Fact]
@@ -901,18 +922,19 @@ public class HtmlRendererTest
             throw new InvalidOperationException();
 
         var htmlRenderer = GetHtmlRenderer(serviceProvider);
-        await htmlRenderer.Dispatcher.InvokeAsync(async () =>
-        {
-            // Act
-            var result = await htmlRenderer.RenderComponentAsync<ComponentWithParameters>(
-                ParameterView.FromDictionary(
-                    new Dictionary<string, object> { { "update", change }, { "value", 5 } }
-                )
-            );
+        await htmlRenderer.Dispatcher
+            .InvokeAsync(async () =>
+            {
+                // Act
+                var result = await htmlRenderer.RenderComponentAsync<ComponentWithParameters>(
+                    ParameterView.FromDictionary(
+                        new Dictionary<string, object> { { "update", change }, { "value", 5 } }
+                    )
+                );
 
-            // Assert
-            AssertHtmlContentEquals(expectedHtml, result);
-        });
+                // Assert
+                AssertHtmlContentEquals(expectedHtml, result);
+            });
     }
 
     [Fact]
@@ -949,14 +971,15 @@ public class HtmlRendererTest
         );
 
         var htmlRenderer = GetHtmlRenderer(serviceProvider);
-        await htmlRenderer.Dispatcher.InvokeAsync(async () =>
-        {
-            // Act
-            var result = await htmlRenderer.RenderComponentAsync<TestComponent>();
+        await htmlRenderer.Dispatcher
+            .InvokeAsync(async () =>
+            {
+                // Act
+                var result = await htmlRenderer.RenderComponentAsync<TestComponent>();
 
-            // Assert
-            AssertHtmlContentEquals(expectedHtml, result);
-        });
+                // Assert
+                AssertHtmlContentEquals(expectedHtml, result);
+            });
     }
 
     [Fact]
@@ -994,14 +1017,15 @@ public class HtmlRendererTest
         );
 
         var htmlRenderer = GetHtmlRenderer(serviceProvider);
-        await htmlRenderer.Dispatcher.InvokeAsync(async () =>
-        {
-            // Act
-            var result = await htmlRenderer.RenderComponentAsync<TestComponent>();
+        await htmlRenderer.Dispatcher
+            .InvokeAsync(async () =>
+            {
+                // Act
+                var result = await htmlRenderer.RenderComponentAsync<TestComponent>();
 
-            // Assert
-            AssertHtmlContentEquals(expectedHtml, result);
-        });
+                // Assert
+                AssertHtmlContentEquals(expectedHtml, result);
+            });
     }
 
     private class ComponentWithParameters : IComponent
@@ -1033,16 +1057,17 @@ public class HtmlRendererTest
         );
 
         var htmlRenderer = GetHtmlRenderer(serviceProvider);
-        await htmlRenderer.Dispatcher.InvokeAsync(async () =>
-        {
-            // Act
-            var result = await htmlRenderer.RenderComponentAsync<AsyncComponent>(
-                ParameterView.FromDictionary(new Dictionary<string, object> { ["Value"] = 10 })
-            );
+        await htmlRenderer.Dispatcher
+            .InvokeAsync(async () =>
+            {
+                // Act
+                var result = await htmlRenderer.RenderComponentAsync<AsyncComponent>(
+                    ParameterView.FromDictionary(new Dictionary<string, object> { ["Value"] = 10 })
+                );
 
-            // Assert
-            AssertHtmlContentEquals(expectedHtml, result);
-        });
+                // Assert
+                AssertHtmlContentEquals(expectedHtml, result);
+            });
     }
 
     [Fact]
@@ -1072,18 +1097,19 @@ public class HtmlRendererTest
         );
 
         var htmlRenderer = GetHtmlRenderer(serviceProvider);
-        await htmlRenderer.Dispatcher.InvokeAsync(async () =>
-        {
-            // Act
-            var result = await htmlRenderer.RenderComponentAsync<NestedAsyncComponent>(
-                ParameterView.FromDictionary(
-                    new Dictionary<string, object> { ["Nested"] = false, ["Value"] = 10 }
-                )
-            );
+        await htmlRenderer.Dispatcher
+            .InvokeAsync(async () =>
+            {
+                // Act
+                var result = await htmlRenderer.RenderComponentAsync<NestedAsyncComponent>(
+                    ParameterView.FromDictionary(
+                        new Dictionary<string, object> { ["Nested"] = false, ["Value"] = 10 }
+                    )
+                );
 
-            // Assert
-            AssertHtmlContentEquals(expectedHtml, result);
-        });
+                // Assert
+                AssertHtmlContentEquals(expectedHtml, result);
+            });
     }
 
     [Fact]
@@ -1094,45 +1120,46 @@ public class HtmlRendererTest
         // even though they are not within the same root component.
 
         var htmlRenderer = GetHtmlRenderer();
-        await htmlRenderer.Dispatcher.InvokeAsync(async () =>
-        {
-            // Arrange/Act/Assert 1: initially get some empty output
-            var first = await htmlRenderer.RenderComponentAsync<SectionOutlet>(
-                ParameterView.FromDictionary(
-                    new Dictionary<string, object>
-                    {
-                        { nameof(SectionOutlet.SectionId), "testsection" },
-                    }
-                )
-            );
-
-            Assert.Empty(first.ToHtmlString());
-
-            // Act/Assert 2: cause it to be updated
-            var second = await htmlRenderer.RenderComponentAsync<SectionContent>(
-                ParameterView.FromDictionary(
-                    new Dictionary<string, object>
-                    {
-                        { nameof(SectionContent.SectionId), "testsection" },
+        await htmlRenderer.Dispatcher
+            .InvokeAsync(async () =>
+            {
+                // Arrange/Act/Assert 1: initially get some empty output
+                var first = await htmlRenderer.RenderComponentAsync<SectionOutlet>(
+                    ParameterView.FromDictionary(
+                        new Dictionary<string, object>
                         {
-                            nameof(SectionContent.ChildContent),
-                            (RenderFragment)(
-                                builder =>
-                                {
-                                    builder.AddContent(
-                                        0,
-                                        "Hello from the section content provider"
-                                    );
-                                }
-                            )
-                        },
-                    }
-                )
-            );
+                            { nameof(SectionOutlet.SectionId), "testsection" },
+                        }
+                    )
+                );
 
-            Assert.Empty(second.ToHtmlString());
-            Assert.Equal("Hello from the section content provider", first.ToHtmlString());
-        });
+                Assert.Empty(first.ToHtmlString());
+
+                // Act/Assert 2: cause it to be updated
+                var second = await htmlRenderer.RenderComponentAsync<SectionContent>(
+                    ParameterView.FromDictionary(
+                        new Dictionary<string, object>
+                        {
+                            { nameof(SectionContent.SectionId), "testsection" },
+                            {
+                                nameof(SectionContent.ChildContent),
+                                (RenderFragment)(
+                                    builder =>
+                                    {
+                                        builder.AddContent(
+                                            0,
+                                            "Hello from the section content provider"
+                                        );
+                                    }
+                                )
+                            },
+                        }
+                    )
+                );
+
+                Assert.Empty(second.ToHtmlString());
+                Assert.Equal("Hello from the section content provider", first.ToHtmlString());
+            });
     }
 
     [Fact]
@@ -1153,17 +1180,18 @@ public class HtmlRendererTest
         using var ms = new MemoryStream();
         using var writer = new StreamWriter(ms, new UTF8Encoding(false));
 
-        await htmlRenderer.Dispatcher.InvokeAsync(async () =>
-        {
-            // Act
-            var result = await htmlRenderer.RenderComponentAsync<TestComponent>();
-            result.WriteHtmlTo(writer);
-            writer.Flush();
+        await htmlRenderer.Dispatcher
+            .InvokeAsync(async () =>
+            {
+                // Act
+                var result = await htmlRenderer.RenderComponentAsync<TestComponent>();
+                result.WriteHtmlTo(writer);
+                writer.Flush();
 
-            // Assert
-            var actual = Encoding.UTF8.GetString(ms.ToArray());
-            Assert.Equal("<p>Hey!</p>", actual);
-        });
+                // Assert
+                var actual = Encoding.UTF8.GetString(ms.ToArray());
+                Assert.Equal("<p>Hey!</p>", actual);
+            });
     }
 
     [Fact]
@@ -1178,19 +1206,20 @@ public class HtmlRendererTest
         );
 
         var htmlRenderer = GetHtmlRenderer(services);
-        await htmlRenderer.Dispatcher.InvokeAsync(async () =>
-        {
-            // Act/Assert: state before quiescence
-            var result = htmlRenderer.BeginRenderingComponent<AsyncLoadingComponent>();
-            var quiescenceTask = result.QuiescenceTask;
-            Assert.False(quiescenceTask.IsCompleted);
-            Assert.Equal("Loading...", result.ToHtmlString());
+        await htmlRenderer.Dispatcher
+            .InvokeAsync(async () =>
+            {
+                // Act/Assert: state before quiescence
+                var result = htmlRenderer.BeginRenderingComponent<AsyncLoadingComponent>();
+                var quiescenceTask = result.QuiescenceTask;
+                Assert.False(quiescenceTask.IsCompleted);
+                Assert.Equal("Loading...", result.ToHtmlString());
 
-            // Act/Assert: state after quiescence
-            completionTcs.SetResult();
-            await quiescenceTask;
-            Assert.Equal("Finished loading", result.ToHtmlString());
-        });
+                // Act/Assert: state after quiescence
+                completionTcs.SetResult();
+                await quiescenceTask;
+                Assert.Equal("Finished loading", result.ToHtmlString());
+            });
     }
 
     [Fact]
@@ -1204,22 +1233,23 @@ public class HtmlRendererTest
         );
 
         var htmlRenderer = GetHtmlRenderer(services);
-        await htmlRenderer.Dispatcher.InvokeAsync(async () =>
-        {
-            // Act/Assert
-            var ex = await Assert.ThrowsAsync<InvalidTimeZoneException>(async () =>
+        await htmlRenderer.Dispatcher
+            .InvokeAsync(async () =>
             {
-                await htmlRenderer.RenderComponentAsync<ErrorThrowingComponent>(
-                    ParameterView.FromDictionary(
-                        new Dictionary<string, object>
-                        {
-                            { nameof(ErrorThrowingComponent.ThrowSync), true },
-                        }
-                    )
-                );
+                // Act/Assert
+                var ex = await Assert.ThrowsAsync<InvalidTimeZoneException>(async () =>
+                {
+                    await htmlRenderer.RenderComponentAsync<ErrorThrowingComponent>(
+                        ParameterView.FromDictionary(
+                            new Dictionary<string, object>
+                            {
+                                { nameof(ErrorThrowingComponent.ThrowSync), true },
+                            }
+                        )
+                    );
+                });
+                Assert.Equal("sync", ex.Message);
             });
-            Assert.Equal("sync", ex.Message);
-        });
     }
 
     [Fact]
@@ -1232,21 +1262,22 @@ public class HtmlRendererTest
         );
 
         var htmlRenderer = GetHtmlRenderer(services);
-        await htmlRenderer.Dispatcher.InvokeAsync(async () =>
-        {
-            // Act/Assert
-            var ex = await Assert.ThrowsAsync<InvalidTimeZoneException>(() =>
-                htmlRenderer.RenderComponentAsync<ErrorThrowingComponent>(
-                    ParameterView.FromDictionary(
-                        new Dictionary<string, object>
-                        {
-                            { nameof(ErrorThrowingComponent.ThrowAsync), true },
-                        }
+        await htmlRenderer.Dispatcher
+            .InvokeAsync(async () =>
+            {
+                // Act/Assert
+                var ex = await Assert.ThrowsAsync<InvalidTimeZoneException>(() =>
+                    htmlRenderer.RenderComponentAsync<ErrorThrowingComponent>(
+                        ParameterView.FromDictionary(
+                            new Dictionary<string, object>
+                            {
+                                { nameof(ErrorThrowingComponent.ThrowAsync), true },
+                            }
+                        )
                     )
-                )
-            );
-            Assert.Equal("async", ex.Message);
-        });
+                );
+                Assert.Equal("async", ex.Message);
+            });
     }
 
     [Fact]
@@ -1260,22 +1291,23 @@ public class HtmlRendererTest
         );
 
         var htmlRenderer = GetHtmlRenderer(services);
-        await htmlRenderer.Dispatcher.InvokeAsync(() =>
-        {
-            // Act/Assert
-            var ex = Assert.Throws<InvalidTimeZoneException>(() =>
+        await htmlRenderer.Dispatcher
+            .InvokeAsync(() =>
             {
-                htmlRenderer.BeginRenderingComponent<ErrorThrowingComponent>(
-                    ParameterView.FromDictionary(
-                        new Dictionary<string, object>
-                        {
-                            { nameof(ErrorThrowingComponent.ThrowSync), true },
-                        }
-                    )
-                );
+                // Act/Assert
+                var ex = Assert.Throws<InvalidTimeZoneException>(() =>
+                {
+                    htmlRenderer.BeginRenderingComponent<ErrorThrowingComponent>(
+                        ParameterView.FromDictionary(
+                            new Dictionary<string, object>
+                            {
+                                { nameof(ErrorThrowingComponent.ThrowSync), true },
+                            }
+                        )
+                    );
+                });
+                Assert.Equal("sync", ex.Message);
             });
-            Assert.Equal("sync", ex.Message);
-        });
     }
 
     [Fact]
@@ -1290,25 +1322,26 @@ public class HtmlRendererTest
         );
 
         var htmlRenderer = GetHtmlRenderer(services);
-        await htmlRenderer.Dispatcher.InvokeAsync(async () =>
-        {
-            // Act/Assert
-            var content = htmlRenderer.BeginRenderingComponent<ErrorThrowingComponent>(
-                ParameterView.FromDictionary(
-                    new Dictionary<string, object>
-                    {
-                        { nameof(ErrorThrowingComponent.ThrowAsync), true },
-                    }
-                )
-            );
-
-            var ex = await Assert.ThrowsAsync<InvalidTimeZoneException>(() =>
+        await htmlRenderer.Dispatcher
+            .InvokeAsync(async () =>
             {
-                completionTcs.SetResult();
-                return content.QuiescenceTask;
+                // Act/Assert
+                var content = htmlRenderer.BeginRenderingComponent<ErrorThrowingComponent>(
+                    ParameterView.FromDictionary(
+                        new Dictionary<string, object>
+                        {
+                            { nameof(ErrorThrowingComponent.ThrowAsync), true },
+                        }
+                    )
+                );
+
+                var ex = await Assert.ThrowsAsync<InvalidTimeZoneException>(() =>
+                {
+                    completionTcs.SetResult();
+                    return content.QuiescenceTask;
+                });
+                Assert.Equal("async", ex.Message);
             });
-            Assert.Equal("async", ex.Message);
-        });
     }
 
     [Fact]
@@ -1343,23 +1376,24 @@ public class HtmlRendererTest
         );
 
         var htmlRenderer = GetHtmlRenderer(serviceProvider);
-        await htmlRenderer.Dispatcher.InvokeAsync(async () =>
-        {
-            // Act
-            var result = await htmlRenderer.RenderComponentAsync<TestComponent>();
+        await htmlRenderer.Dispatcher
+            .InvokeAsync(async () =>
+            {
+                // Act
+                var result = await htmlRenderer.RenderComponentAsync<TestComponent>();
 
-            // Assert
-            Assert.Equal(
-                @"<script>
+                // Assert
+                Assert.Equal(
+                    @"<script>
     alert('Hello, Person with special chars like \u0027 \u0022 \u003C/script\u003E!');
 </script>
 And now with HTML encoding: Person with special chars like &#x27; &quot; &lt;/script&gt;".Replace(
-                    "\r",
-                    ""
-                ),
-                result.ToHtmlString()
-            );
-        });
+                        "\r",
+                        ""
+                    ),
+                    result.ToHtmlString()
+                );
+            });
     }
 
     [Fact]
@@ -1378,14 +1412,15 @@ And now with HTML encoding: Person with special chars like &#x27; &quot; &lt;/sc
         );
 
         var htmlRenderer = GetHtmlRenderer(serviceProvider);
-        await htmlRenderer.Dispatcher.InvokeAsync(async () =>
-        {
-            // Act
-            var result = await htmlRenderer.RenderComponentAsync<TestComponent>();
+        await htmlRenderer.Dispatcher
+            .InvokeAsync(async () =>
+            {
+                // Act
+                var result = await htmlRenderer.RenderComponentAsync<TestComponent>();
 
-            // Assert
-            Assert.Equal("<div></div>", result.ToHtmlString());
-        });
+                // Assert
+                Assert.Equal("<div></div>", result.ToHtmlString());
+            });
     }
 
     [Fact]
@@ -1405,14 +1440,15 @@ And now with HTML encoding: Person with special chars like &#x27; &quot; &lt;/sc
         );
 
         var htmlRenderer = GetHtmlRenderer(serviceProvider);
-        await htmlRenderer.Dispatcher.InvokeAsync(async () =>
-        {
-            // Act
-            var result = await htmlRenderer.RenderComponentAsync<TestComponent>();
+        await htmlRenderer.Dispatcher
+            .InvokeAsync(async () =>
+            {
+                // Act
+                var result = await htmlRenderer.RenderComponentAsync<TestComponent>();
 
-            // Assert
-            Assert.Equal("<form></form>", result.ToHtmlString());
-        });
+                // Assert
+                Assert.Equal("<form></form>", result.ToHtmlString());
+            });
     }
 
     [Fact]
@@ -1437,17 +1473,18 @@ And now with HTML encoding: Person with special chars like &#x27; &quot; &lt;/sc
         );
 
         var htmlRenderer = GetHtmlRenderer(serviceProvider);
-        await htmlRenderer.Dispatcher.InvokeAsync(async () =>
-        {
-            // Act
-            var result = await htmlRenderer.RenderComponentAsync<TestComponent>();
+        await htmlRenderer.Dispatcher
+            .InvokeAsync(async () =>
+            {
+                // Act
+                var result = await htmlRenderer.RenderComponentAsync<TestComponent>();
 
-            // Assert
-            Assert.Equal(
-                "<form><input type=\"hidden\" name=\"_handler\" value=\"some &lt;name&gt;\" /></form>",
-                result.ToHtmlString()
-            );
-        });
+                // Assert
+                Assert.Equal(
+                    "<form><input type=\"hidden\" name=\"_handler\" value=\"some &lt;name&gt;\" /></form>",
+                    result.ToHtmlString()
+                );
+            });
     }
 
     [Fact]
@@ -1481,17 +1518,18 @@ And now with HTML encoding: Person with special chars like &#x27; &quot; &lt;/sc
         );
 
         var htmlRenderer = GetHtmlRenderer(serviceProvider);
-        await htmlRenderer.Dispatcher.InvokeAsync(async () =>
-        {
-            // Act
-            var result = await htmlRenderer.RenderComponentAsync<TestComponent>();
+        await htmlRenderer.Dispatcher
+            .InvokeAsync(async () =>
+            {
+                // Act
+                var result = await htmlRenderer.RenderComponentAsync<TestComponent>();
 
-            // Assert
-            Assert.Equal(
-                "<form><input type=\"hidden\" name=\"_handler\" value=\"[myscope]somename\" /></form>",
-                result.ToHtmlString()
-            );
-        });
+                // Assert
+                Assert.Equal(
+                    "<form><input type=\"hidden\" name=\"_handler\" value=\"[myscope]somename\" /></form>",
+                    result.ToHtmlString()
+                );
+            });
     }
 
     [Theory]
@@ -1532,17 +1570,18 @@ And now with HTML encoding: Person with special chars like &#x27; &quot; &lt;/sc
         );
 
         var htmlRenderer = GetHtmlRenderer(serviceProvider);
-        await htmlRenderer.Dispatcher.InvokeAsync(async () =>
-        {
-            // Act
-            var result = await htmlRenderer.RenderComponentAsync<TestComponent>();
+        await htmlRenderer.Dispatcher
+            .InvokeAsync(async () =>
+            {
+                // Act
+                var result = await htmlRenderer.RenderComponentAsync<TestComponent>();
 
-            // Assert
-            Assert.Equal(
-                $"<form action=\"{HttpUtility.HtmlAttributeEncode(expectedAction)}\"></form>",
-                result.ToHtmlString()
-            );
-        });
+                // Assert
+                Assert.Equal(
+                    $"<form action=\"{HttpUtility.HtmlAttributeEncode(expectedAction)}\"></form>",
+                    result.ToHtmlString()
+                );
+            });
     }
 
     [Fact]
@@ -1563,14 +1602,18 @@ And now with HTML encoding: Person with special chars like &#x27; &quot; &lt;/sc
         );
 
         var htmlRenderer = GetHtmlRenderer(serviceProvider);
-        await htmlRenderer.Dispatcher.InvokeAsync(async () =>
-        {
-            // Act
-            var result = await htmlRenderer.RenderComponentAsync<TestComponent>();
+        await htmlRenderer.Dispatcher
+            .InvokeAsync(async () =>
+            {
+                // Act
+                var result = await htmlRenderer.RenderComponentAsync<TestComponent>();
 
-            // Assert
-            Assert.Equal("<form method=\"post\" action=\"/page\"></form>", result.ToHtmlString());
-        });
+                // Assert
+                Assert.Equal(
+                    "<form method=\"post\" action=\"/page\"></form>",
+                    result.ToHtmlString()
+                );
+            });
     }
 
     [Fact]
@@ -1591,17 +1634,18 @@ And now with HTML encoding: Person with special chars like &#x27; &quot; &lt;/sc
         );
 
         var htmlRenderer = GetHtmlRenderer(serviceProvider);
-        await htmlRenderer.Dispatcher.InvokeAsync(async () =>
-        {
-            // Act
-            var result = await htmlRenderer.RenderComponentAsync<TestComponent>();
+        await htmlRenderer.Dispatcher
+            .InvokeAsync(async () =>
+            {
+                // Act
+                var result = await htmlRenderer.RenderComponentAsync<TestComponent>();
 
-            // Assert
-            Assert.Equal(
-                "<form action=\"https://example.com/explicit\"></form>",
-                result.ToHtmlString()
-            );
-        });
+                // Assert
+                Assert.Equal(
+                    "<form action=\"https://example.com/explicit\"></form>",
+                    result.ToHtmlString()
+                );
+            });
     }
 
     [Fact]
@@ -1619,14 +1663,15 @@ And now with HTML encoding: Person with special chars like &#x27; &quot; &lt;/sc
         );
 
         var htmlRenderer = GetHtmlRenderer(serviceProvider);
-        await htmlRenderer.Dispatcher.InvokeAsync(async () =>
-        {
-            // Act
-            var result = await htmlRenderer.RenderComponentAsync<TestComponent>();
+        await htmlRenderer.Dispatcher
+            .InvokeAsync(async () =>
+            {
+                // Act
+                var result = await htmlRenderer.RenderComponentAsync<TestComponent>();
 
-            // Assert
-            Assert.Equal("<form></form>", result.ToHtmlString());
-        });
+                // Assert
+                Assert.Equal("<form></form>", result.ToHtmlString());
+            });
     }
 
     // TODO: As above, but inside a FormMappingScope, showing its name also shows up

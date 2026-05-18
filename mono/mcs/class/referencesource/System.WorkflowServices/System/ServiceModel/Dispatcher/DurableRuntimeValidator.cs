@@ -49,19 +49,19 @@ namespace System.ServiceModel.Dispatcher
                         + "OperationContext.Current.EndpointDispatcher.DispatchRuntime."
                 );
 
-                this.concurrencyMode = OperationContext
-                    .Current
+                this.concurrencyMode = OperationContext.Current
                     .EndpointDispatcher
                     .DispatchRuntime
                     .ConcurrencyMode;
 
                 if (this.concurrencyMode == ConcurrencyMode.Multiple)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(
-                            SR2.GetString(SR2.ConcurrencyMultipleNotSupported)
-                        )
-                    );
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(
+                                SR2.GetString(SR2.ConcurrencyMultipleNotSupported)
+                            )
+                        );
                 }
 
                 if (
@@ -69,11 +69,12 @@ namespace System.ServiceModel.Dispatcher
                     && this.concurrencyMode != ConcurrencyMode.Single
                 )
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(
-                            SR2.GetString(SR2.SaveStateInTransactionRequiresSingle)
-                        )
-                    );
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(
+                                SR2.GetString(SR2.SaveStateInTransactionRequiresSingle)
+                            )
+                        );
                 }
 
                 if (
@@ -81,11 +82,12 @@ namespace System.ServiceModel.Dispatcher
                     && this.exceptionAction == UnknownExceptionAction.AbortInstance
                 )
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(
-                            SR2.GetString(SR2.ConcurrencyReentrantAndAbortNotSupported)
-                        )
-                    );
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(
+                                SR2.GetString(SR2.ConcurrencyReentrantAndAbortNotSupported)
+                            )
+                        );
                 }
 
                 this.validated = true;

@@ -132,12 +132,13 @@ namespace System.ServiceModel.Diagnostics
             {
                 throw new InvalidOperationException();
             }
-            this.navigator.AddAttribute(
-                this.currentAttributeName,
-                this.currentAttributeText,
-                this.currentAttributeNs,
-                this.currentAttributePrefix
-            );
+            this.navigator
+                .AddAttribute(
+                    this.currentAttributeName,
+                    this.currentAttributeText,
+                    this.currentAttributeNs,
+                    this.currentAttributePrefix
+                );
             this.writingAttribute = false;
         }
 

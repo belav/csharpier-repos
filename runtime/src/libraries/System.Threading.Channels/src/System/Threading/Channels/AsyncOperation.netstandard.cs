@@ -17,13 +17,14 @@ namespace System.Threading.Channels
             QueueUserWorkItem(action, state);
 
         private static void QueueUserWorkItem(Action<object?> action, object? state) =>
-            Task.Factory.StartNew(
-                action,
-                state,
-                CancellationToken.None,
-                TaskCreationOptions.DenyChildAttach,
-                TaskScheduler.Default
-            );
+            Task.Factory
+                .StartNew(
+                    action,
+                    state,
+                    CancellationToken.None,
+                    TaskCreationOptions.DenyChildAttach,
+                    TaskScheduler.Default
+                );
 
         private static CancellationTokenRegistration UnsafeRegister(
             CancellationToken cancellationToken,

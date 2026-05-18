@@ -43,9 +43,8 @@ namespace System.ServiceModel
         public OperationContext(IContextChannel channel)
         {
             if (channel == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentNullException("channel")
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(new ArgumentNullException("channel"));
 
             ServiceChannel serviceChannel = channel as ServiceChannel;
 
@@ -62,11 +61,12 @@ namespace System.ServiceModel
             }
             else
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(
-                        SR.GetString(SR.SFxInvalidChannelToOperationContext)
-                    )
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(SR.SFxInvalidChannelToOperationContext)
+                        )
+                    );
             }
         }
 
@@ -76,9 +76,8 @@ namespace System.ServiceModel
         internal OperationContext(ServiceHostBase host, MessageVersion outgoingMessageVersion)
         {
             if (outgoingMessageVersion == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentNullException("outgoingMessageVersion")
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(new ArgumentNullException("outgoingMessageVersion"));
 
             this.host = host;
             this.outgoingMessageVersion = outgoingMessageVersion;
@@ -462,9 +461,10 @@ namespace System.ServiceModel
         {
             if (this.txFacet == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(SR.GetString(SR.NoTransactionInContext))
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(SR.GetString(SR.NoTransactionInContext))
+                    );
             }
 
             this.txFacet.Completed();

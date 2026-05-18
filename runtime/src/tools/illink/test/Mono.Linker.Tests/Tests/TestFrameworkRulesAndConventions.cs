@@ -22,8 +22,8 @@ namespace Mono.Linker.Tests.Tests
             {
                 using (var assembly = AssemblyDefinition.ReadAssembly(expectationsAssemblyPath))
                 {
-                    var nonAttributeTypes = assembly
-                        .MainModule.AllDefinedTypes()
+                    var nonAttributeTypes = assembly.MainModule
+                        .AllDefinedTypes()
                         .Where(t => !IsAcceptableExpectationsAssemblyType(t))
                         .ToArray();
 

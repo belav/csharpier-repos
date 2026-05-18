@@ -58,15 +58,16 @@ namespace System.ServiceModel.ComIntegration
                         if (operationRoleMembers == null)
                         {
                             // Did not find the operation
-                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                                Error.ListenerInitFailed(
-                                    SR.GetString(
-                                        SR.ComOperationNotFound,
-                                        contract.Name,
-                                        operation.Name
+                            throw DiagnosticUtility.ExceptionUtility
+                                .ThrowHelperError(
+                                    Error.ListenerInitFailed(
+                                        SR.GetString(
+                                            SR.ComOperationNotFound,
+                                            contract.Name,
+                                            operation.Name
+                                        )
                                     )
-                                )
-                            );
+                                );
                         }
                         break;
                     }
@@ -132,9 +133,8 @@ namespace System.ServiceModel.ComIntegration
                     {
                         if (!this.comAuth.IsAuthorizedForOperation(identity))
                         {
-                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                                Error.CallAccessDenied()
-                            );
+                            throw DiagnosticUtility.ExceptionUtility
+                                .ThrowHelperError(Error.CallAccessDenied());
                         }
                     }
 
@@ -166,9 +166,8 @@ namespace System.ServiceModel.ComIntegration
                             }
                             else
                             {
-                                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                                    Error.TransactionMismatch()
-                                );
+                                throw DiagnosticUtility.ExceptionUtility
+                                    .ThrowHelperError(Error.TransactionMismatch());
                             }
                             ComPlusMethodCallTrace.Trace(
                                 TraceEventType.Verbose,
@@ -188,8 +187,7 @@ namespace System.ServiceModel.ComIntegration
                             Transaction txProxy = proxy.CurrentTransaction;
                             Guid currentTransactionID = Guid.Empty;
                             if (txProxy != null)
-                                currentTransactionID = txProxy
-                                    .TransactionInformation
+                                currentTransactionID = txProxy.TransactionInformation
                                     .DistributedIdentifier;
 
                             string identityName = String.Empty;
@@ -197,32 +195,34 @@ namespace System.ServiceModel.ComIntegration
                             if (null != identity)
                                 identityName = identity.Name;
 
-                            DiagnosticUtility.EventLog.LogEvent(
-                                TraceEventType.Error,
-                                (ushort)System.Runtime.Diagnostics.EventLogCategory.ComPlus,
-                                (uint)
-                                    System
-                                        .Runtime
-                                        .Diagnostics
-                                        .EventLogEventId
-                                        .ComPlusInvokingMethodFailedMismatchedTransactions,
-                                incomingTransactionID.ToString("B").ToUpperInvariant(),
-                                currentTransactionID.ToString("B").ToUpperInvariant(),
-                                from.ToString(),
-                                this.info.AppID.ToString("B").ToUpperInvariant(),
-                                this.info.Clsid.ToString("B").ToUpperInvariant(),
-                                iid.ToString(),
-                                action,
-                                instanceID.ToString(CultureInfo.InvariantCulture),
-                                System.Threading.Thread.CurrentThread.ManagedThreadId.ToString(
-                                    CultureInfo.InvariantCulture
-                                ),
-                                SafeNativeMethods
-                                    .GetCurrentThreadId()
-                                    .ToString(CultureInfo.InvariantCulture),
-                                identityName,
-                                e.ToString()
-                            );
+                            DiagnosticUtility.EventLog
+                                .LogEvent(
+                                    TraceEventType.Error,
+                                    (ushort)System.Runtime.Diagnostics.EventLogCategory.ComPlus,
+                                    (uint)
+                                        System.Runtime
+                                            .Diagnostics
+                                            .EventLogEventId
+                                            .ComPlusInvokingMethodFailedMismatchedTransactions,
+                                    incomingTransactionID.ToString("B").ToUpperInvariant(),
+                                    currentTransactionID.ToString("B").ToUpperInvariant(),
+                                    from.ToString(),
+                                    this.info.AppID.ToString("B").ToUpperInvariant(),
+                                    this.info.Clsid.ToString("B").ToUpperInvariant(),
+                                    iid.ToString(),
+                                    action,
+                                    instanceID.ToString(CultureInfo.InvariantCulture),
+                                    System.Threading
+                                        .Thread
+                                        .CurrentThread
+                                        .ManagedThreadId
+                                        .ToString(CultureInfo.InvariantCulture),
+                                    SafeNativeMethods
+                                        .GetCurrentThreadId()
+                                        .ToString(CultureInfo.InvariantCulture),
+                                    identityName,
+                                    e.ToString()
+                                );
                             errorTraced = true;
                             throw;
                         }
@@ -280,30 +280,32 @@ namespace System.ServiceModel.ComIntegration
                 {
                     if (DiagnosticUtility.ShouldTraceError)
                     {
-                        DiagnosticUtility.EventLog.LogEvent(
-                            TraceEventType.Error,
-                            (ushort)System.Runtime.Diagnostics.EventLogCategory.ComPlus,
-                            (uint)
-                                System
-                                    .Runtime
-                                    .Diagnostics
-                                    .EventLogEventId
-                                    .ComPlusInvokingMethodFailed,
-                            from == null ? string.Empty : from.ToString(),
-                            this.info.AppID.ToString("B").ToUpperInvariant(),
-                            this.info.Clsid.ToString("B").ToUpperInvariant(),
-                            iid.ToString("B").ToUpperInvariant(),
-                            action,
-                            instanceID.ToString(CultureInfo.InvariantCulture),
-                            System.Threading.Thread.CurrentThread.ManagedThreadId.ToString(
-                                CultureInfo.InvariantCulture
-                            ),
-                            SafeNativeMethods
-                                .GetCurrentThreadId()
-                                .ToString(CultureInfo.InvariantCulture),
-                            identity.Name,
-                            e.ToString()
-                        );
+                        DiagnosticUtility.EventLog
+                            .LogEvent(
+                                TraceEventType.Error,
+                                (ushort)System.Runtime.Diagnostics.EventLogCategory.ComPlus,
+                                (uint)
+                                    System.Runtime
+                                        .Diagnostics
+                                        .EventLogEventId
+                                        .ComPlusInvokingMethodFailed,
+                                from == null ? string.Empty : from.ToString(),
+                                this.info.AppID.ToString("B").ToUpperInvariant(),
+                                this.info.Clsid.ToString("B").ToUpperInvariant(),
+                                iid.ToString("B").ToUpperInvariant(),
+                                action,
+                                instanceID.ToString(CultureInfo.InvariantCulture),
+                                System.Threading
+                                    .Thread
+                                    .CurrentThread
+                                    .ManagedThreadId
+                                    .ToString(CultureInfo.InvariantCulture),
+                                SafeNativeMethods
+                                    .GetCurrentThreadId()
+                                    .ToString(CultureInfo.InvariantCulture),
+                                identity.Name,
+                                e.ToString()
+                            );
                     }
                 }
                 throw;

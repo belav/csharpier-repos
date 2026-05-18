@@ -749,8 +749,8 @@ namespace Microsoft.Diagnostics.Tools.Pgo
                     MethodProfileData prof1 = profile1.GetMethodProfileData(method);
                     MethodProfileData prof2 = profile2.GetMethodProfileData(method);
 
-                    List<int> typeHandleHistogramCallSites = prof1
-                        .SchemaData.Concat(prof2.SchemaData)
+                    List<int> typeHandleHistogramCallSites = prof1.SchemaData
+                        .Concat(prof2.SchemaData)
                         .Where(e =>
                             e.InstrumentationKind == PgoInstrumentationKind.GetLikelyClass
                             || e.InstrumentationKind == PgoInstrumentationKind.HandleHistogramTypes
@@ -875,10 +875,11 @@ namespace Microsoft.Diagnostics.Tools.Pgo
                         string dot = fg.Dump(title);
 
                         string fileName =
-                            DebugNameFormatter.Instance.FormatName(
-                                method.OwningType,
-                                DebugNameFormatter.FormatOptions.NamespaceQualify
-                            )
+                            DebugNameFormatter.Instance
+                                .FormatName(
+                                    method.OwningType,
+                                    DebugNameFormatter.FormatOptions.NamespaceQualify
+                                )
                             + "."
                             + method.DiagnosticName;
                         foreach (char c in Path.GetInvalidFileNameChars())
@@ -1014,27 +1015,29 @@ namespace Microsoft.Diagnostics.Tools.Pgo
                 $"# Methods with 64-bit edge counts: {profiledMethods.Count(spd => spd.SchemaData.Any(elem => elem.InstrumentationKind == PgoInstrumentationKind.EdgeLongCount))}"
             );
             int numTypeHandleHistograms = profiledMethods.Sum(spd =>
-                spd.SchemaData.Count(elem =>
-                    elem.InstrumentationKind == PgoInstrumentationKind.HandleHistogramTypes
-                )
+                spd.SchemaData
+                    .Count(elem =>
+                        elem.InstrumentationKind == PgoInstrumentationKind.HandleHistogramTypes
+                    )
             );
             int methodsWithTypeHandleHistograms = profiledMethods.Count(spd =>
-                spd.SchemaData.Any(elem =>
-                    elem.InstrumentationKind == PgoInstrumentationKind.HandleHistogramTypes
-                )
+                spd.SchemaData
+                    .Any(elem =>
+                        elem.InstrumentationKind == PgoInstrumentationKind.HandleHistogramTypes
+                    )
             );
             PrintOutput(
                 $"# Type handle histograms: {numTypeHandleHistograms} in {methodsWithTypeHandleHistograms} methods"
             );
             int numGetLikelyClass = profiledMethods.Sum(spd =>
-                spd.SchemaData.Count(elem =>
-                    elem.InstrumentationKind == PgoInstrumentationKind.GetLikelyClass
-                )
+                spd.SchemaData
+                    .Count(elem =>
+                        elem.InstrumentationKind == PgoInstrumentationKind.GetLikelyClass
+                    )
             );
             int methodsWithGetLikelyClass = profiledMethods.Count(spd =>
-                spd.SchemaData.Any(elem =>
-                    elem.InstrumentationKind == PgoInstrumentationKind.GetLikelyClass
-                )
+                spd.SchemaData
+                    .Any(elem => elem.InstrumentationKind == PgoInstrumentationKind.GetLikelyClass)
             );
             PrintOutput(
                 $"# GetLikelyClass data: {numGetLikelyClass} in {methodsWithGetLikelyClass} methods"
@@ -1043,8 +1046,8 @@ namespace Microsoft.Diagnostics.Tools.Pgo
             var histogramCallSites = new List<(MethodProfileData mpd, int ilOffset)>();
             foreach (var mpd in profiledMethods)
             {
-                var sites = mpd
-                    .SchemaData.Where(e =>
+                var sites = mpd.SchemaData
+                    .Where(e =>
                         e.InstrumentationKind == PgoInstrumentationKind.HandleHistogramTypes
                         || e.InstrumentationKind == PgoInstrumentationKind.GetLikelyClass
                     )
@@ -1295,9 +1298,8 @@ namespace Microsoft.Diagnostics.Tools.Pgo
                         "Either a pid or process name from the following list must be specified"
                     );
                     foreach (
-                        TraceProcess proc in traceLog.Processes.OrderByDescending(proc =>
-                            proc.CPUMSec
-                        )
+                        TraceProcess proc in traceLog.Processes
+                            .OrderByDescending(proc => proc.CPUMSec)
                     )
                     {
                         PrintOutput(
@@ -1405,7 +1407,8 @@ namespace Microsoft.Diagnostics.Tools.Pgo
                     HashSet<int> clrInstanceIds = new HashSet<int>();
                     HashSet<int> examinedClrInstanceIds = new HashSet<int>();
                     foreach (
-                        var assemblyLoadTrace in p.EventsInProcess.ByEventType<AssemblyLoadUnloadTraceData>()
+                        var assemblyLoadTrace in p.EventsInProcess
+                            .ByEventType<AssemblyLoadUnloadTraceData>()
                     )
                     {
                         if (examinedClrInstanceIds.Add(assemblyLoadTrace.ClrInstanceID))
@@ -1518,10 +1521,8 @@ namespace Microsoft.Diagnostics.Tools.Pgo
                         // This path may be normalized
                         if (
                             File.Exists(filePathTemp)
-                            || !tsc._normalizedFilePathToFilePath.TryGetValue(
-                                filePathTemp,
-                                out candidateFilePath
-                            )
+                            || !tsc._normalizedFilePathToFilePath
+                                .TryGetValue(filePathTemp, out candidateFilePath)
                         )
                             candidateFilePath = filePathTemp;
 
@@ -1606,14 +1607,14 @@ namespace Microsoft.Diagnostics.Tools.Pgo
                     bool mismatch = false;
                     bool mismatchHandled = false;
                     foreach (
-                        DebugDirectoryEntry debugEntry in ecmaModule.PEReader.SafeReadDebugDirectory()
+                        DebugDirectoryEntry debugEntry in ecmaModule.PEReader
+                            .SafeReadDebugDirectory()
                     )
                     {
                         if (debugEntry.Type == DebugDirectoryEntryType.CodeView)
                         {
-                            var codeViewData = ecmaModule.PEReader.ReadCodeViewDebugDirectoryData(
-                                debugEntry
-                            );
+                            var codeViewData = ecmaModule.PEReader
+                                .ReadCodeViewDebugDirectoryData(debugEntry);
                             if (codeViewData.Path.EndsWith("ni.pdb"))
                                 continue;
                             if (codeViewData.Guid != e.ManagedPdbSignature)
@@ -2113,7 +2114,8 @@ namespace Microsoft.Diagnostics.Tools.Pgo
                     if (!hasLbr)
                     {
                         foreach (
-                            SampledProfileTraceData e in p.EventsInProcess.ByEventType<SampledProfileTraceData>()
+                            SampledProfileTraceData e in p.EventsInProcess
+                                .ByEventType<SampledProfileTraceData>()
                         )
                         {
                             correlator.AttributeSamplesToIP(e.InstructionPointer, 1);
@@ -2272,8 +2274,8 @@ namespace Microsoft.Diagnostics.Tools.Pgo
                             SampleProfile sp = correlator?.GetProfile(methodData.Method);
                             if (sp != null && sp.AttributedSamples >= Get(_command.SpgoMinSamples))
                             {
-                                IEnumerable<PgoSchemaElem> schema = sp.SmoothedSamples.Select(
-                                    kvp => new PgoSchemaElem
+                                IEnumerable<PgoSchemaElem> schema = sp.SmoothedSamples
+                                    .Select(kvp => new PgoSchemaElem
                                     {
                                         InstrumentationKind =
                                             kvp.Value > uint.MaxValue
@@ -2282,24 +2284,24 @@ namespace Microsoft.Diagnostics.Tools.Pgo
                                         ILOffset = kvp.Key.Start,
                                         Count = 1,
                                         DataLong = kvp.Value,
-                                    }
-                                );
+                                    });
 
                                 bool includeFullGraphs = Get(_command.IncludeFullGraphs);
                                 if (includeFullGraphs)
                                 {
                                     schema = schema.Concat(
-                                        sp.SmoothedEdgeSamples.Select(kvp => new PgoSchemaElem
-                                        {
-                                            InstrumentationKind =
-                                                kvp.Value > uint.MaxValue
-                                                    ? PgoInstrumentationKind.EdgeLongCount
-                                                    : PgoInstrumentationKind.EdgeIntCount,
-                                            ILOffset = kvp.Key.Item1.Start,
-                                            Other = kvp.Key.Item2.Start,
-                                            Count = 1,
-                                            DataLong = kvp.Value,
-                                        })
+                                        sp.SmoothedEdgeSamples
+                                            .Select(kvp => new PgoSchemaElem
+                                            {
+                                                InstrumentationKind =
+                                                    kvp.Value > uint.MaxValue
+                                                        ? PgoInstrumentationKind.EdgeLongCount
+                                                        : PgoInstrumentationKind.EdgeIntCount,
+                                                ILOffset = kvp.Key.Item1.Start,
+                                                Other = kvp.Key.Item2.Start,
+                                                Count = 1,
+                                                DataLong = kvp.Value,
+                                            })
                                     );
                                 }
 
@@ -2309,8 +2311,8 @@ namespace Microsoft.Diagnostics.Tools.Pgo
                                 if (includeFullGraphs)
                                 {
                                     var writtenBlocks = new HashSet<int>(
-                                        methodData
-                                            .InstrumentationData.Where(elem =>
+                                        methodData.InstrumentationData
+                                            .Where(elem =>
                                                 elem.InstrumentationKind
                                                     == PgoInstrumentationKind.BasicBlockIntCount
                                                 || elem.InstrumentationKind
@@ -2320,8 +2322,8 @@ namespace Microsoft.Diagnostics.Tools.Pgo
                                     );
 
                                     var writtenEdges = new HashSet<(int, int)>(
-                                        methodData
-                                            .InstrumentationData.Where(elem =>
+                                        methodData.InstrumentationData
+                                            .Where(elem =>
                                                 elem.InstrumentationKind
                                                     == PgoInstrumentationKind.EdgeIntCount
                                                 || elem.InstrumentationKind
@@ -2337,9 +2339,12 @@ namespace Microsoft.Diagnostics.Tools.Pgo
                                     );
                                     Debug.Assert(
                                         writtenEdges.SetEquals(
-                                            sp.FlowGraph.BasicBlocks.SelectMany(bb =>
-                                                bb.Targets.Select(bbTar => (bb.Start, bbTar.Start))
-                                            )
+                                            sp.FlowGraph
+                                                .BasicBlocks
+                                                .SelectMany(bb =>
+                                                    bb.Targets
+                                                        .Select(bbTar => (bb.Start, bbTar.Start))
+                                                )
                                         )
                                     );
                                 }
@@ -2363,15 +2368,15 @@ namespace Microsoft.Diagnostics.Tools.Pgo
                     var config = new MibcConfig();
 
                     // Look for OS and Arch, e.g. "Windows" and "x64"
-                    TraceEvent processInfo = p
-                        .EventsInProcess.Filter(t => t.EventName == "ProcessInfo")
+                    TraceEvent processInfo = p.EventsInProcess
+                        .Filter(t => t.EventName == "ProcessInfo")
                         .FirstOrDefault();
                     config.Os = processInfo?.PayloadByName("OSInformation")?.ToString();
                     config.Arch = processInfo?.PayloadByName("ArchInformation")?.ToString();
 
                     // Look for Sku, e.g. "CoreClr"
-                    TraceEvent runtimeStart = p
-                        .EventsInProcess.Filter(t => t.EventName == "Runtime/Start")
+                    TraceEvent runtimeStart = p.EventsInProcess
+                        .Filter(t => t.EventName == "Runtime/Start")
                         .FirstOrDefault();
                     config.Runtime = runtimeStart?.PayloadByName("Sku")?.ToString();
 

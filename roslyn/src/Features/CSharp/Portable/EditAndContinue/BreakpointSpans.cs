@@ -224,9 +224,11 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
                         //   C<T>(...) :$$ [|B(...)|], I
                         //   C<T>(...) : [|B(...)|], I where ... $$
                         var baseInitializer = (PrimaryConstructorBaseTypeSyntax?)
-                            typeDeclaration.BaseList?.Types.FirstOrDefault(t =>
-                                t.IsKind(SyntaxKind.PrimaryConstructorBaseType)
-                            );
+                            typeDeclaration.BaseList
+                                ?.Types
+                                .FirstOrDefault(t =>
+                                    t.IsKind(SyntaxKind.PrimaryConstructorBaseType)
+                                );
                         if (
                             baseInitializer != null
                             && position > typeDeclaration.BaseList!.ColonToken.SpanStart
@@ -546,10 +548,8 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
         internal static IEnumerable<SyntaxToken> GetActiveTokensForImplicitConstructorInitializer(
             ConstructorDeclarationSyntax constructor
         ) =>
-            constructor
-                .Modifiers.Concat(
-                    SpecializedCollections.SingletonEnumerable(constructor.Identifier)
-                )
+            constructor.Modifiers
+                .Concat(SpecializedCollections.SingletonEnumerable(constructor.Identifier))
                 .Concat(constructor.ParameterList.DescendantTokens());
 
         internal static TextSpan CreateSpanForExplicitConstructorInitializer(

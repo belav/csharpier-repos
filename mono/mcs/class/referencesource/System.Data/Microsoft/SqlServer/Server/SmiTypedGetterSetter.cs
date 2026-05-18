@@ -32,15 +32,17 @@ namespace Microsoft.SqlServer.Server
         {
             if (!CanGet)
             {
-                throw System.Data.Common.ADP.InternalError(
-                    System.Data.Common.ADP.InternalErrorCode.InvalidSmiCall
-                );
+                throw System.Data
+                    .Common
+                    .ADP
+                    .InternalError(System.Data.Common.ADP.InternalErrorCode.InvalidSmiCall);
             }
             else
             {
-                throw System.Data.Common.ADP.InternalError(
-                    System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod
-                );
+                throw System.Data
+                    .Common
+                    .ADP
+                    .InternalError(System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod);
             }
         }
 
@@ -50,15 +52,17 @@ namespace Microsoft.SqlServer.Server
         {
             if (!CanGet)
             {
-                throw System.Data.Common.ADP.InternalError(
-                    System.Data.Common.ADP.InternalErrorCode.InvalidSmiCall
-                );
+                throw System.Data
+                    .Common
+                    .ADP
+                    .InternalError(System.Data.Common.ADP.InternalErrorCode.InvalidSmiCall);
             }
             else
             {
-                throw System.Data.Common.ADP.InternalError(
-                    System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod
-                );
+                throw System.Data
+                    .Common
+                    .ADP
+                    .InternalError(System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod);
             }
         }
 
@@ -67,15 +71,17 @@ namespace Microsoft.SqlServer.Server
         {
             if (!CanGet)
             {
-                throw System.Data.Common.ADP.InternalError(
-                    System.Data.Common.ADP.InternalErrorCode.InvalidSmiCall
-                );
+                throw System.Data
+                    .Common
+                    .ADP
+                    .InternalError(System.Data.Common.ADP.InternalErrorCode.InvalidSmiCall);
             }
             else
             {
-                throw System.Data.Common.ADP.InternalError(
-                    System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod
-                );
+                throw System.Data
+                    .Common
+                    .ADP
+                    .InternalError(System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod);
             }
         }
 
@@ -84,15 +90,17 @@ namespace Microsoft.SqlServer.Server
         {
             if (!CanGet)
             {
-                throw System.Data.Common.ADP.InternalError(
-                    System.Data.Common.ADP.InternalErrorCode.InvalidSmiCall
-                );
+                throw System.Data
+                    .Common
+                    .ADP
+                    .InternalError(System.Data.Common.ADP.InternalErrorCode.InvalidSmiCall);
             }
             else
             {
-                throw System.Data.Common.ADP.InternalError(
-                    System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod
-                );
+                throw System.Data
+                    .Common
+                    .ADP
+                    .InternalError(System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod);
             }
         }
 
@@ -102,15 +110,17 @@ namespace Microsoft.SqlServer.Server
         {
             if (!CanGet)
             {
-                throw System.Data.Common.ADP.InternalError(
-                    System.Data.Common.ADP.InternalErrorCode.InvalidSmiCall
-                );
+                throw System.Data
+                    .Common
+                    .ADP
+                    .InternalError(System.Data.Common.ADP.InternalErrorCode.InvalidSmiCall);
             }
             else
             {
-                throw System.Data.Common.ADP.InternalError(
-                    System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod
-                );
+                throw System.Data
+                    .Common
+                    .ADP
+                    .InternalError(System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod);
             }
         }
 
@@ -125,15 +135,17 @@ namespace Microsoft.SqlServer.Server
         {
             if (!CanGet)
             {
-                throw System.Data.Common.ADP.InternalError(
-                    System.Data.Common.ADP.InternalErrorCode.InvalidSmiCall
-                );
+                throw System.Data
+                    .Common
+                    .ADP
+                    .InternalError(System.Data.Common.ADP.InternalErrorCode.InvalidSmiCall);
             }
             else
             {
-                throw System.Data.Common.ADP.InternalError(
-                    System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod
-                );
+                throw System.Data
+                    .Common
+                    .ADP
+                    .InternalError(System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod);
             }
         }
 
@@ -142,15 +154,17 @@ namespace Microsoft.SqlServer.Server
         {
             if (!CanGet)
             {
-                throw System.Data.Common.ADP.InternalError(
-                    System.Data.Common.ADP.InternalErrorCode.InvalidSmiCall
-                );
+                throw System.Data
+                    .Common
+                    .ADP
+                    .InternalError(System.Data.Common.ADP.InternalErrorCode.InvalidSmiCall);
             }
             else
             {
-                throw System.Data.Common.ADP.InternalError(
-                    System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod
-                );
+                throw System.Data
+                    .Common
+                    .ADP
+                    .InternalError(System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod);
             }
         }
 
@@ -165,15 +179,17 @@ namespace Microsoft.SqlServer.Server
         {
             if (!CanGet)
             {
-                throw System.Data.Common.ADP.InternalError(
-                    System.Data.Common.ADP.InternalErrorCode.InvalidSmiCall
-                );
+                throw System.Data
+                    .Common
+                    .ADP
+                    .InternalError(System.Data.Common.ADP.InternalErrorCode.InvalidSmiCall);
             }
             else
             {
-                throw System.Data.Common.ADP.InternalError(
-                    System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod
-                );
+                throw System.Data
+                    .Common
+                    .ADP
+                    .InternalError(System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod);
             }
         }
 
@@ -181,15 +197,17 @@ namespace Microsoft.SqlServer.Server
         {
             if (!CanGet)
             {
-                throw System.Data.Common.ADP.InternalError(
-                    System.Data.Common.ADP.InternalErrorCode.InvalidSmiCall
-                );
+                throw System.Data
+                    .Common
+                    .ADP
+                    .InternalError(System.Data.Common.ADP.InternalErrorCode.InvalidSmiCall);
             }
             else
             {
-                throw System.Data.Common.ADP.InternalError(
-                    System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod
-                );
+                throw System.Data
+                    .Common
+                    .ADP
+                    .InternalError(System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod);
             }
         }
 
@@ -198,15 +216,17 @@ namespace Microsoft.SqlServer.Server
         {
             if (!CanGet)
             {
-                throw System.Data.Common.ADP.InternalError(
-                    System.Data.Common.ADP.InternalErrorCode.InvalidSmiCall
-                );
+                throw System.Data
+                    .Common
+                    .ADP
+                    .InternalError(System.Data.Common.ADP.InternalErrorCode.InvalidSmiCall);
             }
             else
             {
-                throw System.Data.Common.ADP.InternalError(
-                    System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod
-                );
+                throw System.Data
+                    .Common
+                    .ADP
+                    .InternalError(System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod);
             }
         }
 
@@ -215,15 +235,17 @@ namespace Microsoft.SqlServer.Server
         {
             if (!CanGet)
             {
-                throw System.Data.Common.ADP.InternalError(
-                    System.Data.Common.ADP.InternalErrorCode.InvalidSmiCall
-                );
+                throw System.Data
+                    .Common
+                    .ADP
+                    .InternalError(System.Data.Common.ADP.InternalErrorCode.InvalidSmiCall);
             }
             else
             {
-                throw System.Data.Common.ADP.InternalError(
-                    System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod
-                );
+                throw System.Data
+                    .Common
+                    .ADP
+                    .InternalError(System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod);
             }
         }
 
@@ -232,15 +254,17 @@ namespace Microsoft.SqlServer.Server
         {
             if (!CanGet)
             {
-                throw System.Data.Common.ADP.InternalError(
-                    System.Data.Common.ADP.InternalErrorCode.InvalidSmiCall
-                );
+                throw System.Data
+                    .Common
+                    .ADP
+                    .InternalError(System.Data.Common.ADP.InternalErrorCode.InvalidSmiCall);
             }
             else
             {
-                throw System.Data.Common.ADP.InternalError(
-                    System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod
-                );
+                throw System.Data
+                    .Common
+                    .ADP
+                    .InternalError(System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod);
             }
         }
 
@@ -249,15 +273,17 @@ namespace Microsoft.SqlServer.Server
         {
             if (!CanGet)
             {
-                throw System.Data.Common.ADP.InternalError(
-                    System.Data.Common.ADP.InternalErrorCode.InvalidSmiCall
-                );
+                throw System.Data
+                    .Common
+                    .ADP
+                    .InternalError(System.Data.Common.ADP.InternalErrorCode.InvalidSmiCall);
             }
             else
             {
-                throw System.Data.Common.ADP.InternalError(
-                    System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod
-                );
+                throw System.Data
+                    .Common
+                    .ADP
+                    .InternalError(System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod);
             }
         }
 
@@ -266,15 +292,17 @@ namespace Microsoft.SqlServer.Server
         {
             if (!CanGet)
             {
-                throw System.Data.Common.ADP.InternalError(
-                    System.Data.Common.ADP.InternalErrorCode.InvalidSmiCall
-                );
+                throw System.Data
+                    .Common
+                    .ADP
+                    .InternalError(System.Data.Common.ADP.InternalErrorCode.InvalidSmiCall);
             }
             else
             {
-                throw System.Data.Common.ADP.InternalError(
-                    System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod
-                );
+                throw System.Data
+                    .Common
+                    .ADP
+                    .InternalError(System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod);
             }
         }
 
@@ -283,15 +311,17 @@ namespace Microsoft.SqlServer.Server
         {
             if (!CanGet)
             {
-                throw System.Data.Common.ADP.InternalError(
-                    System.Data.Common.ADP.InternalErrorCode.InvalidSmiCall
-                );
+                throw System.Data
+                    .Common
+                    .ADP
+                    .InternalError(System.Data.Common.ADP.InternalErrorCode.InvalidSmiCall);
             }
             else
             {
-                throw System.Data.Common.ADP.InternalError(
-                    System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod
-                );
+                throw System.Data
+                    .Common
+                    .ADP
+                    .InternalError(System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod);
             }
         }
 
@@ -300,15 +330,17 @@ namespace Microsoft.SqlServer.Server
         {
             if (!CanGet)
             {
-                throw System.Data.Common.ADP.InternalError(
-                    System.Data.Common.ADP.InternalErrorCode.InvalidSmiCall
-                );
+                throw System.Data
+                    .Common
+                    .ADP
+                    .InternalError(System.Data.Common.ADP.InternalErrorCode.InvalidSmiCall);
             }
             else
             {
-                throw System.Data.Common.ADP.InternalError(
-                    System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod
-                );
+                throw System.Data
+                    .Common
+                    .ADP
+                    .InternalError(System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod);
             }
         }
 
@@ -317,15 +349,17 @@ namespace Microsoft.SqlServer.Server
         {
             if (!CanGet)
             {
-                throw System.Data.Common.ADP.InternalError(
-                    System.Data.Common.ADP.InternalErrorCode.InvalidSmiCall
-                );
+                throw System.Data
+                    .Common
+                    .ADP
+                    .InternalError(System.Data.Common.ADP.InternalErrorCode.InvalidSmiCall);
             }
             else
             {
-                throw System.Data.Common.ADP.InternalError(
-                    System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod
-                );
+                throw System.Data
+                    .Common
+                    .ADP
+                    .InternalError(System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod);
             }
         }
 
@@ -334,15 +368,17 @@ namespace Microsoft.SqlServer.Server
         {
             if (!CanGet)
             {
-                throw System.Data.Common.ADP.InternalError(
-                    System.Data.Common.ADP.InternalErrorCode.InvalidSmiCall
-                );
+                throw System.Data
+                    .Common
+                    .ADP
+                    .InternalError(System.Data.Common.ADP.InternalErrorCode.InvalidSmiCall);
             }
             else
             {
-                throw System.Data.Common.ADP.InternalError(
-                    System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod
-                );
+                throw System.Data
+                    .Common
+                    .ADP
+                    .InternalError(System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod);
             }
         }
 
@@ -351,15 +387,17 @@ namespace Microsoft.SqlServer.Server
         {
             if (!CanGet)
             {
-                throw System.Data.Common.ADP.InternalError(
-                    System.Data.Common.ADP.InternalErrorCode.InvalidSmiCall
-                );
+                throw System.Data
+                    .Common
+                    .ADP
+                    .InternalError(System.Data.Common.ADP.InternalErrorCode.InvalidSmiCall);
             }
             else
             {
-                throw System.Data.Common.ADP.InternalError(
-                    System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod
-                );
+                throw System.Data
+                    .Common
+                    .ADP
+                    .InternalError(System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod);
             }
         }
 
@@ -367,9 +405,10 @@ namespace Microsoft.SqlServer.Server
         //  This method called for both get and set.
         internal virtual SmiTypedGetterSetter GetTypedGetterSetter(SmiEventSink sink, int ordinal)
         {
-            throw System.Data.Common.ADP.InternalError(
-                System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod
-            );
+            throw System.Data
+                .Common
+                .ADP
+                .InternalError(System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod);
         }
 
         // valid for multi-valued types only
@@ -377,15 +416,17 @@ namespace Microsoft.SqlServer.Server
         {
             if (!CanGet)
             {
-                throw System.Data.Common.ADP.InternalError(
-                    System.Data.Common.ADP.InternalErrorCode.InvalidSmiCall
-                );
+                throw System.Data
+                    .Common
+                    .ADP
+                    .InternalError(System.Data.Common.ADP.InternalErrorCode.InvalidSmiCall);
             }
             else
             {
-                throw System.Data.Common.ADP.InternalError(
-                    System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod
-                );
+                throw System.Data
+                    .Common
+                    .ADP
+                    .InternalError(System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod);
             }
         }
         #endregion
@@ -398,15 +439,17 @@ namespace Microsoft.SqlServer.Server
         {
             if (!CanSet)
             {
-                throw System.Data.Common.ADP.InternalError(
-                    System.Data.Common.ADP.InternalErrorCode.InvalidSmiCall
-                );
+                throw System.Data
+                    .Common
+                    .ADP
+                    .InternalError(System.Data.Common.ADP.InternalErrorCode.InvalidSmiCall);
             }
             else
             {
-                throw System.Data.Common.ADP.InternalError(
-                    System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod
-                );
+                throw System.Data
+                    .Common
+                    .ADP
+                    .InternalError(System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod);
             }
         }
 
@@ -415,15 +458,17 @@ namespace Microsoft.SqlServer.Server
         {
             if (!CanSet)
             {
-                throw System.Data.Common.ADP.InternalError(
-                    System.Data.Common.ADP.InternalErrorCode.InvalidSmiCall
-                );
+                throw System.Data
+                    .Common
+                    .ADP
+                    .InternalError(System.Data.Common.ADP.InternalErrorCode.InvalidSmiCall);
             }
             else
             {
-                throw System.Data.Common.ADP.InternalError(
-                    System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod
-                );
+                throw System.Data
+                    .Common
+                    .ADP
+                    .InternalError(System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod);
             }
         }
 
@@ -432,15 +477,17 @@ namespace Microsoft.SqlServer.Server
         {
             if (!CanSet)
             {
-                throw System.Data.Common.ADP.InternalError(
-                    System.Data.Common.ADP.InternalErrorCode.InvalidSmiCall
-                );
+                throw System.Data
+                    .Common
+                    .ADP
+                    .InternalError(System.Data.Common.ADP.InternalErrorCode.InvalidSmiCall);
             }
             else
             {
-                throw System.Data.Common.ADP.InternalError(
-                    System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod
-                );
+                throw System.Data
+                    .Common
+                    .ADP
+                    .InternalError(System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod);
             }
         }
 
@@ -459,15 +506,17 @@ namespace Microsoft.SqlServer.Server
         {
             if (!CanSet)
             {
-                throw System.Data.Common.ADP.InternalError(
-                    System.Data.Common.ADP.InternalErrorCode.InvalidSmiCall
-                );
+                throw System.Data
+                    .Common
+                    .ADP
+                    .InternalError(System.Data.Common.ADP.InternalErrorCode.InvalidSmiCall);
             }
             else
             {
-                throw System.Data.Common.ADP.InternalError(
-                    System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod
-                );
+                throw System.Data
+                    .Common
+                    .ADP
+                    .InternalError(System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod);
             }
         }
 
@@ -475,15 +524,17 @@ namespace Microsoft.SqlServer.Server
         {
             if (!CanSet)
             {
-                throw System.Data.Common.ADP.InternalError(
-                    System.Data.Common.ADP.InternalErrorCode.InvalidSmiCall
-                );
+                throw System.Data
+                    .Common
+                    .ADP
+                    .InternalError(System.Data.Common.ADP.InternalErrorCode.InvalidSmiCall);
             }
             else
             {
-                throw System.Data.Common.ADP.InternalError(
-                    System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod
-                );
+                throw System.Data
+                    .Common
+                    .ADP
+                    .InternalError(System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod);
             }
         }
 
@@ -502,15 +553,17 @@ namespace Microsoft.SqlServer.Server
         {
             if (!CanSet)
             {
-                throw System.Data.Common.ADP.InternalError(
-                    System.Data.Common.ADP.InternalErrorCode.InvalidSmiCall
-                );
+                throw System.Data
+                    .Common
+                    .ADP
+                    .InternalError(System.Data.Common.ADP.InternalErrorCode.InvalidSmiCall);
             }
             else
             {
-                throw System.Data.Common.ADP.InternalError(
-                    System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod
-                );
+                throw System.Data
+                    .Common
+                    .ADP
+                    .InternalError(System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod);
             }
         }
 
@@ -518,15 +571,17 @@ namespace Microsoft.SqlServer.Server
         {
             if (!CanSet)
             {
-                throw System.Data.Common.ADP.InternalError(
-                    System.Data.Common.ADP.InternalErrorCode.InvalidSmiCall
-                );
+                throw System.Data
+                    .Common
+                    .ADP
+                    .InternalError(System.Data.Common.ADP.InternalErrorCode.InvalidSmiCall);
             }
             else
             {
-                throw System.Data.Common.ADP.InternalError(
-                    System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod
-                );
+                throw System.Data
+                    .Common
+                    .ADP
+                    .InternalError(System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod);
             }
         }
 
@@ -541,15 +596,17 @@ namespace Microsoft.SqlServer.Server
         {
             if (!CanSet)
             {
-                throw System.Data.Common.ADP.InternalError(
-                    System.Data.Common.ADP.InternalErrorCode.InvalidSmiCall
-                );
+                throw System.Data
+                    .Common
+                    .ADP
+                    .InternalError(System.Data.Common.ADP.InternalErrorCode.InvalidSmiCall);
             }
             else
             {
-                throw System.Data.Common.ADP.InternalError(
-                    System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod
-                );
+                throw System.Data
+                    .Common
+                    .ADP
+                    .InternalError(System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod);
             }
         }
 
@@ -558,15 +615,17 @@ namespace Microsoft.SqlServer.Server
         {
             if (!CanSet)
             {
-                throw System.Data.Common.ADP.InternalError(
-                    System.Data.Common.ADP.InternalErrorCode.InvalidSmiCall
-                );
+                throw System.Data
+                    .Common
+                    .ADP
+                    .InternalError(System.Data.Common.ADP.InternalErrorCode.InvalidSmiCall);
             }
             else
             {
-                throw System.Data.Common.ADP.InternalError(
-                    System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod
-                );
+                throw System.Data
+                    .Common
+                    .ADP
+                    .InternalError(System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod);
             }
         }
 
@@ -575,15 +634,17 @@ namespace Microsoft.SqlServer.Server
         {
             if (!CanSet)
             {
-                throw System.Data.Common.ADP.InternalError(
-                    System.Data.Common.ADP.InternalErrorCode.InvalidSmiCall
-                );
+                throw System.Data
+                    .Common
+                    .ADP
+                    .InternalError(System.Data.Common.ADP.InternalErrorCode.InvalidSmiCall);
             }
             else
             {
-                throw System.Data.Common.ADP.InternalError(
-                    System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod
-                );
+                throw System.Data
+                    .Common
+                    .ADP
+                    .InternalError(System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod);
             }
         }
 
@@ -592,15 +653,17 @@ namespace Microsoft.SqlServer.Server
         {
             if (!CanSet)
             {
-                throw System.Data.Common.ADP.InternalError(
-                    System.Data.Common.ADP.InternalErrorCode.InvalidSmiCall
-                );
+                throw System.Data
+                    .Common
+                    .ADP
+                    .InternalError(System.Data.Common.ADP.InternalErrorCode.InvalidSmiCall);
             }
             else
             {
-                throw System.Data.Common.ADP.InternalError(
-                    System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod
-                );
+                throw System.Data
+                    .Common
+                    .ADP
+                    .InternalError(System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod);
             }
         }
 
@@ -609,15 +672,17 @@ namespace Microsoft.SqlServer.Server
         {
             if (!CanSet)
             {
-                throw System.Data.Common.ADP.InternalError(
-                    System.Data.Common.ADP.InternalErrorCode.InvalidSmiCall
-                );
+                throw System.Data
+                    .Common
+                    .ADP
+                    .InternalError(System.Data.Common.ADP.InternalErrorCode.InvalidSmiCall);
             }
             else
             {
-                throw System.Data.Common.ADP.InternalError(
-                    System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod
-                );
+                throw System.Data
+                    .Common
+                    .ADP
+                    .InternalError(System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod);
             }
         }
 
@@ -626,15 +691,17 @@ namespace Microsoft.SqlServer.Server
         {
             if (!CanSet)
             {
-                throw System.Data.Common.ADP.InternalError(
-                    System.Data.Common.ADP.InternalErrorCode.InvalidSmiCall
-                );
+                throw System.Data
+                    .Common
+                    .ADP
+                    .InternalError(System.Data.Common.ADP.InternalErrorCode.InvalidSmiCall);
             }
             else
             {
-                throw System.Data.Common.ADP.InternalError(
-                    System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod
-                );
+                throw System.Data
+                    .Common
+                    .ADP
+                    .InternalError(System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod);
             }
         }
 
@@ -643,15 +710,17 @@ namespace Microsoft.SqlServer.Server
         {
             if (!CanSet)
             {
-                throw System.Data.Common.ADP.InternalError(
-                    System.Data.Common.ADP.InternalErrorCode.InvalidSmiCall
-                );
+                throw System.Data
+                    .Common
+                    .ADP
+                    .InternalError(System.Data.Common.ADP.InternalErrorCode.InvalidSmiCall);
             }
             else
             {
-                throw System.Data.Common.ADP.InternalError(
-                    System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod
-                );
+                throw System.Data
+                    .Common
+                    .ADP
+                    .InternalError(System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod);
             }
         }
 
@@ -660,15 +729,17 @@ namespace Microsoft.SqlServer.Server
         {
             if (!CanSet)
             {
-                throw System.Data.Common.ADP.InternalError(
-                    System.Data.Common.ADP.InternalErrorCode.InvalidSmiCall
-                );
+                throw System.Data
+                    .Common
+                    .ADP
+                    .InternalError(System.Data.Common.ADP.InternalErrorCode.InvalidSmiCall);
             }
             else
             {
-                throw System.Data.Common.ADP.InternalError(
-                    System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod
-                );
+                throw System.Data
+                    .Common
+                    .ADP
+                    .InternalError(System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod);
             }
         }
 
@@ -677,15 +748,17 @@ namespace Microsoft.SqlServer.Server
         {
             if (!CanSet)
             {
-                throw System.Data.Common.ADP.InternalError(
-                    System.Data.Common.ADP.InternalErrorCode.InvalidSmiCall
-                );
+                throw System.Data
+                    .Common
+                    .ADP
+                    .InternalError(System.Data.Common.ADP.InternalErrorCode.InvalidSmiCall);
             }
             else
             {
-                throw System.Data.Common.ADP.InternalError(
-                    System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod
-                );
+                throw System.Data
+                    .Common
+                    .ADP
+                    .InternalError(System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod);
             }
         }
 
@@ -694,15 +767,17 @@ namespace Microsoft.SqlServer.Server
         {
             if (!CanSet)
             {
-                throw System.Data.Common.ADP.InternalError(
-                    System.Data.Common.ADP.InternalErrorCode.InvalidSmiCall
-                );
+                throw System.Data
+                    .Common
+                    .ADP
+                    .InternalError(System.Data.Common.ADP.InternalErrorCode.InvalidSmiCall);
             }
             else
             {
-                throw System.Data.Common.ADP.InternalError(
-                    System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod
-                );
+                throw System.Data
+                    .Common
+                    .ADP
+                    .InternalError(System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod);
             }
         }
 
@@ -711,15 +786,17 @@ namespace Microsoft.SqlServer.Server
         {
             if (!CanSet)
             {
-                throw System.Data.Common.ADP.InternalError(
-                    System.Data.Common.ADP.InternalErrorCode.InvalidSmiCall
-                );
+                throw System.Data
+                    .Common
+                    .ADP
+                    .InternalError(System.Data.Common.ADP.InternalErrorCode.InvalidSmiCall);
             }
             else
             {
-                throw System.Data.Common.ADP.InternalError(
-                    System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod
-                );
+                throw System.Data
+                    .Common
+                    .ADP
+                    .InternalError(System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod);
             }
         }
 
@@ -731,9 +808,10 @@ namespace Microsoft.SqlServer.Server
             // Implement body with throw because there are only a couple of ways to get to this code:
             //  1) Client is calling this method even though the server negotiated for V3+ and dropped support for V2-.
             //  2) Server didn't implement V2- on some interface and negotiated V2-.
-            throw System.Data.Common.ADP.InternalError(
-                System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod
-            );
+            throw System.Data
+                .Common
+                .ADP
+                .InternalError(System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod);
         }
 
         // valid for multi-valued types only
@@ -741,15 +819,17 @@ namespace Microsoft.SqlServer.Server
         {
             if (!CanSet)
             {
-                throw System.Data.Common.ADP.InternalError(
-                    System.Data.Common.ADP.InternalErrorCode.InvalidSmiCall
-                );
+                throw System.Data
+                    .Common
+                    .ADP
+                    .InternalError(System.Data.Common.ADP.InternalErrorCode.InvalidSmiCall);
             }
             else
             {
-                throw System.Data.Common.ADP.InternalError(
-                    System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod
-                );
+                throw System.Data
+                    .Common
+                    .ADP
+                    .InternalError(System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod);
             }
         }
 
@@ -757,15 +837,17 @@ namespace Microsoft.SqlServer.Server
         {
             if (!CanSet)
             {
-                throw System.Data.Common.ADP.InternalError(
-                    System.Data.Common.ADP.InternalErrorCode.InvalidSmiCall
-                );
+                throw System.Data
+                    .Common
+                    .ADP
+                    .InternalError(System.Data.Common.ADP.InternalErrorCode.InvalidSmiCall);
             }
             else
             {
-                throw System.Data.Common.ADP.InternalError(
-                    System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod
-                );
+                throw System.Data
+                    .Common
+                    .ADP
+                    .InternalError(System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod);
             }
         }
         #endregion

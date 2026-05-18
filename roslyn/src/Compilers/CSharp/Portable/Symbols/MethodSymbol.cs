@@ -453,10 +453,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     )
                     || (
                         requireSameReturnType
-                        && !this.ReturnType.Equals(
-                            overridden.ReturnType,
-                            TypeCompareKind.AllIgnoreOptions
-                        )
+                        && !this.ReturnType
+                            .Equals(overridden.ReturnType, TypeCompareKind.AllIgnoreOptions)
                     )
                 )
                 {
@@ -481,10 +479,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             bool requireSameReturnType
         )
         {
-            var m = this.ConstructedFrom.GetLeastOverriddenMethodCore(
-                accessingTypeOpt,
-                requireSameReturnType
-            );
+            var m = this.ConstructedFrom
+                .GetLeastOverriddenMethodCore(accessingTypeOpt, requireSameReturnType);
             return m.IsGenericMethod ? m.Construct(this.TypeArgumentsWithAnnotations) : m;
         }
 
@@ -1031,11 +1027,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 DiagnosticInfo diagnosticInfo = result.DiagnosticInfo;
 
                 if (
-                    this.ReturnTypeWithAnnotations.GetUnificationUseSiteDiagnosticRecursive(
-                        ref diagnosticInfo,
-                        this,
-                        ref unificationCheckedTypes
-                    )
+                    this.ReturnTypeWithAnnotations
+                        .GetUnificationUseSiteDiagnosticRecursive(
+                            ref diagnosticInfo,
+                            this,
+                            ref unificationCheckedTypes
+                        )
                     || GetUnificationUseSiteDiagnosticRecursive(
                         ref diagnosticInfo,
                         this.RefCustomModifiers,

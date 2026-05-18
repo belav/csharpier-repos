@@ -41,11 +41,12 @@ namespace System.ServiceModel.Channels
 
             if (version != AddressingVersion.WSAddressing10)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(
-                        SR.GetString(SR.CallbackContextOnlySupportedInWSAddressing10, version)
-                    )
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(SR.CallbackContextOnlySupportedInWSAddressing10, version)
+                        )
+                    );
             }
 
             this.callbackAddress = callbackAddress;
@@ -73,12 +74,13 @@ namespace System.ServiceModel.Channels
                 if (encryptAndSignChannelProtectionRequirements == null)
                 {
                     MessagePartSpecification header = new MessagePartSpecification();
-                    header.HeaderTypes.Add(
-                        new XmlQualifiedName(
-                            CallbackContextHeaderName,
-                            CallbackContextHeaderNamespace
-                        )
-                    );
+                    header.HeaderTypes
+                        .Add(
+                            new XmlQualifiedName(
+                                CallbackContextHeaderName,
+                                CallbackContextHeaderNamespace
+                            )
+                        );
                     ChannelProtectionRequirements requirements =
                         new ChannelProtectionRequirements();
                     requirements.IncomingSignatureParts.AddParts(header);
@@ -95,12 +97,13 @@ namespace System.ServiceModel.Channels
                 if (signChannelProtectionRequirements == null)
                 {
                     MessagePartSpecification header = new MessagePartSpecification();
-                    header.HeaderTypes.Add(
-                        new XmlQualifiedName(
-                            CallbackContextHeaderName,
-                            CallbackContextHeaderNamespace
-                        )
-                    );
+                    header.HeaderTypes
+                        .Add(
+                            new XmlQualifiedName(
+                                CallbackContextHeaderName,
+                                CallbackContextHeaderNamespace
+                            )
+                        );
                     ChannelProtectionRequirements requirements =
                         new ChannelProtectionRequirements();
                     requirements.IncomingSignatureParts.AddParts(header);
@@ -112,9 +115,8 @@ namespace System.ServiceModel.Channels
             }
             else
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentOutOfRangeException("protectionLevel")
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(new ArgumentOutOfRangeException("protectionLevel"));
             }
 
             return result;
@@ -132,11 +134,12 @@ namespace System.ServiceModel.Channels
 
             if (version != AddressingVersion.WSAddressing10)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ProtocolException(
-                        SR.GetString(SR.CallbackContextOnlySupportedInWSAddressing10, version)
-                    )
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        new ProtocolException(
+                            SR.GetString(SR.CallbackContextOnlySupportedInWSAddressing10, version)
+                        )
+                    );
             }
 
             try
@@ -153,12 +156,13 @@ namespace System.ServiceModel.Channels
             }
             catch (XmlException e)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ProtocolException(
-                        SR.GetString(SR.XmlFormatViolationInCallbackContextHeader),
-                        e
-                    )
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        new ProtocolException(
+                            SR.GetString(SR.XmlFormatViolationInCallbackContextHeader),
+                            e
+                        )
+                    );
             }
         }
 
@@ -171,12 +175,13 @@ namespace System.ServiceModel.Channels
             {
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("writer");
             }
-            this.callbackAddress.WriteTo(
-                this.version,
-                writer,
-                CallbackEndpointReference,
-                CallbackContextHeaderNamespace
-            );
+            this.callbackAddress
+                .WriteTo(
+                    this.version,
+                    writer,
+                    CallbackEndpointReference,
+                    CallbackContextHeaderNamespace
+                );
         }
     }
 }

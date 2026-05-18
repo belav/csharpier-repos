@@ -143,8 +143,8 @@ namespace Roslyn.VisualStudio.CSharp.UnitTests.ProjectSystemShim
                 projectRefPath: null,
                 "CSharp"
             );
-            var cpsProjectFactory =
-                environment.ExportProvider.GetExportedValue<IWorkspaceProjectContextFactory>();
+            var cpsProjectFactory = environment.ExportProvider
+                .GetExportedValue<IWorkspaceProjectContextFactory>();
 
             var data = new TestEvaluationData(
                 projectFilePath,
@@ -182,8 +182,8 @@ namespace Roslyn.VisualStudio.CSharp.UnitTests.ProjectSystemShim
                 projectRefPath: null,
                 projectCapabilities: ""
             );
-            var cpsProjectFactory =
-                environment.ExportProvider.GetExportedValue<IWorkspaceProjectContextFactory>();
+            var cpsProjectFactory = environment.ExportProvider
+                .GetExportedValue<IWorkspaceProjectContextFactory>();
 
             var data = new TestEvaluationData(
                 projectFilePath,
@@ -234,11 +234,8 @@ namespace Roslyn.VisualStudio.CSharp.UnitTests.ProjectSystemShim
                     baseDirectory = Path.GetTempPath();
                 }
 
-                return CSharpCommandLineParser.Default.Parse(
-                    arguments,
-                    baseDirectory,
-                    sdkDirectory
-                );
+                return CSharpCommandLineParser.Default
+                    .Parse(arguments, baseDirectory, sdkDirectory);
             }
         }
 

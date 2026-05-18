@@ -122,16 +122,20 @@ class A
                 mutatingLspWorkspace,
                 CapabilitiesWithVSExtensions
             );
-            testLspServer.TestWorkspace.GlobalOptions.SetGlobalOption(
-                InlineHintsOptionsStorage.EnabledForParameters,
-                LanguageNames.CSharp,
-                true
-            );
-            testLspServer.TestWorkspace.GlobalOptions.SetGlobalOption(
-                InlineHintsOptionsStorage.EnabledForTypes,
-                LanguageNames.CSharp,
-                true
-            );
+            testLspServer.TestWorkspace
+                .GlobalOptions
+                .SetGlobalOption(
+                    InlineHintsOptionsStorage.EnabledForParameters,
+                    LanguageNames.CSharp,
+                    true
+                );
+            testLspServer.TestWorkspace
+                .GlobalOptions
+                .SetGlobalOption(
+                    InlineHintsOptionsStorage.EnabledForTypes,
+                    LanguageNames.CSharp,
+                    true
+                );
             var document = testLspServer.GetCurrentSolution().Projects.Single().Documents.Single();
             var textDocument = CreateTextDocumentIdentifier(document.GetURI());
             var sourceText = await document.GetTextAsync();
@@ -213,16 +217,20 @@ class A
                     },
                 }
             );
-            testLspServer.TestWorkspace.GlobalOptions.SetGlobalOption(
-                InlineHintsOptionsStorage.EnabledForParameters,
-                LanguageNames.CSharp,
-                true
-            );
-            testLspServer.TestWorkspace.GlobalOptions.SetGlobalOption(
-                InlineHintsOptionsStorage.EnabledForTypes,
-                LanguageNames.CSharp,
-                true
-            );
+            testLspServer.TestWorkspace
+                .GlobalOptions
+                .SetGlobalOption(
+                    InlineHintsOptionsStorage.EnabledForParameters,
+                    LanguageNames.CSharp,
+                    true
+                );
+            testLspServer.TestWorkspace
+                .GlobalOptions
+                .SetGlobalOption(
+                    InlineHintsOptionsStorage.EnabledForTypes,
+                    LanguageNames.CSharp,
+                    true
+                );
             await VerifyInlayHintAsync(testLspServer, hasTextEdits);
         }
     }

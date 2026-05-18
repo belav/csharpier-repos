@@ -38,18 +38,20 @@ namespace System.ServiceModel.Channels
             }
             catch (AuthenticationException exception)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new SecurityNegotiationException(exception.Message, exception)
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        new SecurityNegotiationException(exception.Message, exception)
+                    );
             }
             catch (IOException ioException)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new SecurityNegotiationException(
-                        SR.GetString(SR.NegotiationFailedIO, ioException.Message),
-                        ioException
-                    )
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        new SecurityNegotiationException(
+                            SR.GetString(SR.NegotiationFailedIO, ioException.Message),
+                            ioException
+                        )
+                    );
             }
 
             if (!result.CompletedSynchronously)
@@ -69,18 +71,20 @@ namespace System.ServiceModel.Channels
             }
             catch (AuthenticationException exception)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new SecurityNegotiationException(exception.Message, exception)
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        new SecurityNegotiationException(exception.Message, exception)
+                    );
             }
             catch (IOException ioException)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new SecurityNegotiationException(
-                        SR.GetString(SR.NegotiationFailedIO, ioException.Message),
-                        ioException
-                    )
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        new SecurityNegotiationException(
+                            SR.GetString(SR.NegotiationFailedIO, ioException.Message),
+                            ioException
+                        )
+                    );
             }
 
             this.remoteSecurity = this.ValidateCreateSecurity();

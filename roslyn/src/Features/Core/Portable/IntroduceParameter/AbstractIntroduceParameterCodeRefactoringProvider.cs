@@ -443,8 +443,8 @@ namespace Microsoft.CodeAnalysis.IntroduceParameter
                 // Does not support cross-language references currently
                 if (refLocation.Document.Project.Language == document.Project.Language)
                 {
-                    var reference = refLocation
-                        .Location.FindNode(cancellationToken)
+                    var reference = refLocation.Location
+                        .FindNode(cancellationToken)
                         .GetRequiredParent();
                     if (
                         reference

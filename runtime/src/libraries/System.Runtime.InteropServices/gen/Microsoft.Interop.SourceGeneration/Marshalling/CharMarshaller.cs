@@ -185,12 +185,8 @@ namespace Microsoft.Interop
             out GeneratorDiagnostic? diagnostic
         )
         {
-            return ByValueMarshalKindSupportDescriptor.Default.GetSupport(
-                marshalKind,
-                info,
-                context,
-                out diagnostic
-            );
+            return ByValueMarshalKindSupportDescriptor.Default
+                .GetSupport(marshalKind, info, context, out diagnostic);
         }
     }
 }

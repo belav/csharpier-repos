@@ -31,9 +31,9 @@ namespace Microsoft.CodeAnalysis
         {
             // TODO (tomat): the method may throw all sorts of exceptions.
             workspace ??= new AdhocWorkspace();
-            var languageServices = workspace.Services.SolutionServices.GetLanguageServices(
-                language
-            );
+            var languageServices = workspace.Services
+                .SolutionServices
+                .GetLanguageServices(language);
             if (languageServices == null)
             {
                 throw new ArgumentException(WorkspacesResources.Unrecognized_language_name);
@@ -48,8 +48,8 @@ namespace Microsoft.CodeAnalysis
                 sdkDirectory: RuntimeEnvironment.GetRuntimeDirectory()
             );
 
-            var metadataService =
-                languageServices.SolutionServices.GetRequiredService<IMetadataService>();
+            var metadataService = languageServices.SolutionServices
+                .GetRequiredService<IMetadataService>();
 
             // we only support file paths in /r command line arguments
             var relativePathResolver = new RelativePathResolver(
@@ -61,8 +61,8 @@ namespace Microsoft.CodeAnalysis
                 relativePathResolver
             );
 
-            var analyzerLoader = languageServices
-                .SolutionServices.GetRequiredService<IAnalyzerService>()
+            var analyzerLoader = languageServices.SolutionServices
+                .GetRequiredService<IAnalyzerService>()
                 .GetLoader();
             var xmlFileResolver = new XmlFileResolver(commandLineArguments.BaseDirectory);
             var strongNameProvider = new DesktopStrongNameProvider(
@@ -186,8 +186,8 @@ namespace Microsoft.CodeAnalysis
                     ),
                     checksumAlgorithm: commandLineArguments.ChecksumAlgorithm
                 ),
-                compilationOptions: commandLineArguments
-                    .CompilationOptions.WithXmlReferenceResolver(xmlFileResolver)
+                compilationOptions: commandLineArguments.CompilationOptions
+                    .WithXmlReferenceResolver(xmlFileResolver)
                     .WithAssemblyIdentityComparer(assemblyIdentityComparer)
                     .WithStrongNameProvider(strongNameProvider)
                     // TODO (https://github.com/dotnet/roslyn/issues/4967):
@@ -204,9 +204,8 @@ namespace Microsoft.CodeAnalysis
                 analyzerReferences: boundAnalyzerReferences,
                 additionalDocuments: CreateDocuments(commandLineArguments.AdditionalFiles),
                 analyzerConfigDocuments: CreateDocuments(
-                    commandLineArguments.AnalyzerConfigPaths.SelectAsArray(
-                        p => new CommandLineSourceFile(p, isScript: false)
-                    )
+                    commandLineArguments.AnalyzerConfigPaths
+                        .SelectAsArray(p => new CommandLineSourceFile(p, isScript: false))
                 ),
                 hostObjectType: null
             );

@@ -660,8 +660,7 @@ namespace System.Web.Compilation
         {
             Debug.Trace("CBM", "PrecompileApplication");
 
-            PrecompilationFlags savedFlags = _hostingParameters
-                .ClientBuildManagerParameter
+            PrecompilationFlags savedFlags = _hostingParameters.ClientBuildManagerParameter
                 .PrecompilationFlags;
 
             if (forceCleanBuild)

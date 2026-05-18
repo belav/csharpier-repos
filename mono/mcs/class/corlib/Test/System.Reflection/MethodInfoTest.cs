@@ -177,10 +177,9 @@ namespace MonoTests.System.Reflection
             MethodInfo mi = typeof(MethodInfoTest).GetMethod("ReturnTypeMarshalAs");
 
             Assert.IsTrue(
-                mi.ReturnTypeCustomAttributes.GetCustomAttributes(
-                    typeof(MarshalAsAttribute),
-                    true
-                ).Length == 1
+                mi.ReturnTypeCustomAttributes
+                    .GetCustomAttributes(typeof(MarshalAsAttribute), true)
+                    .Length == 1
             );
         }
 

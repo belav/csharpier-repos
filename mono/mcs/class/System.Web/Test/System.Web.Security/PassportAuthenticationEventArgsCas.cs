@@ -89,9 +89,8 @@ namespace MonoCasTests.System.Web.Security
             AspNetHostingPermissionLevel level
         )
         {
-            ConstructorInfo ci = this.Type.GetConstructor(
-                new Type[2] { typeof(PassportIdentity), typeof(HttpContext) }
-            );
+            ConstructorInfo ci = this.Type
+                .GetConstructor(new Type[2] { typeof(PassportIdentity), typeof(HttpContext) });
             Assert.IsNotNull(ci, ".ctor(PassportIdentity,HttpContext)");
             return ci.Invoke(new object[2] { null, context });
         }

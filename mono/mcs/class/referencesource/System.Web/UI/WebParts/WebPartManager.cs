@@ -1858,25 +1858,27 @@ if (zoneElement != null) {{
 
                     if (connection.ConflictsWithConsumer(otherConnection))
                     {
-                        connection.Consumer.SetConnectErrorMessage(
-                            SR.GetString(
-                                SR.WebPartConnection_Duplicate,
-                                connection.ConsumerConnectionPoint.DisplayName,
-                                connection.Consumer.DisplayTitle
-                            )
-                        );
+                        connection.Consumer
+                            .SetConnectErrorMessage(
+                                SR.GetString(
+                                    SR.WebPartConnection_Duplicate,
+                                    connection.ConsumerConnectionPoint.DisplayName,
+                                    connection.Consumer.DisplayTitle
+                                )
+                            );
                         hasConflict = true;
                     }
 
                     if (connection.ConflictsWithProvider(otherConnection))
                     {
-                        connection.Consumer.SetConnectErrorMessage(
-                            SR.GetString(
-                                SR.WebPartConnection_Duplicate,
-                                connection.ProviderConnectionPoint.DisplayName,
-                                connection.Provider.DisplayTitle
-                            )
-                        );
+                        connection.Consumer
+                            .SetConnectErrorMessage(
+                                SR.GetString(
+                                    SR.WebPartConnection_Duplicate,
+                                    connection.ProviderConnectionPoint.DisplayName,
+                                    connection.Provider.DisplayTitle
+                                )
+                            );
                         hasConflict = true;
                     }
                 }
@@ -4853,33 +4855,36 @@ if (zoneElement != null) {{
 
             if (Page != null)
             {
-                Page.ClientScript.RegisterStartupScript(
-                    this,
-                    typeof(WebPartManager),
-                    ExportSensitiveDataWarningDeclaration,
-                    "var __wpmExportWarning='"
-                        + Util.QuoteJScriptString(ExportSensitiveDataWarning)
-                        + "';",
-                    true
-                );
+                Page.ClientScript
+                    .RegisterStartupScript(
+                        this,
+                        typeof(WebPartManager),
+                        ExportSensitiveDataWarningDeclaration,
+                        "var __wpmExportWarning='"
+                            + Util.QuoteJScriptString(ExportSensitiveDataWarning)
+                            + "';",
+                        true
+                    );
 
-                Page.ClientScript.RegisterStartupScript(
-                    this,
-                    typeof(WebPartManager),
-                    CloseProviderWarningDeclaration,
-                    "var __wpmCloseProviderWarning='"
-                        + Util.QuoteJScriptString(CloseProviderWarning)
-                        + "';",
-                    true
-                );
+                Page.ClientScript
+                    .RegisterStartupScript(
+                        this,
+                        typeof(WebPartManager),
+                        CloseProviderWarningDeclaration,
+                        "var __wpmCloseProviderWarning='"
+                            + Util.QuoteJScriptString(CloseProviderWarning)
+                            + "';",
+                        true
+                    );
 
-                Page.ClientScript.RegisterStartupScript(
-                    this,
-                    typeof(WebPartManager),
-                    DeleteWarningDeclaration,
-                    "var __wpmDeleteWarning='" + Util.QuoteJScriptString(DeleteWarning) + "';",
-                    true
-                );
+                Page.ClientScript
+                    .RegisterStartupScript(
+                        this,
+                        typeof(WebPartManager),
+                        DeleteWarningDeclaration,
+                        "var __wpmDeleteWarning='" + Util.QuoteJScriptString(DeleteWarning) + "';",
+                        true
+                    );
 
                 _renderClientScript = CheckRenderClientScript();
                 if (_renderClientScript)
@@ -5030,11 +5035,8 @@ if (zoneElement != null) {{
 
         protected virtual void RegisterClientScript()
         {
-            Page.ClientScript.RegisterClientScriptResource(
-                this,
-                typeof(WebPartManager),
-                "WebParts.js"
-            );
+            Page.ClientScript
+                .RegisterClientScriptResource(this, typeof(WebPartManager), "WebParts.js");
 
             bool allowPageDesign = DisplayMode.AllowPageDesign;
 
@@ -5100,13 +5102,14 @@ if (zoneElement != null) {{
                 (Personalization.Scope == PersonalizationScope.Shared ? "true" : "false"),
                 zoneCode.ToString()
             );
-            Page.ClientScript.RegisterStartupScript(
-                this,
-                typeof(WebPartManager),
-                String.Empty,
-                startupScript,
-                false
-            );
+            Page.ClientScript
+                .RegisterStartupScript(
+                    this,
+                    typeof(WebPartManager),
+                    String.Empty,
+                    startupScript,
+                    false
+                );
 
             IScriptManager scriptManager = Page.ScriptManager;
             if ((scriptManager != null) && scriptManager.SupportsPartialRendering)

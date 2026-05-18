@@ -247,9 +247,8 @@ namespace System.ServiceModel.Configuration
                     if (Resolver.Custom.Binding != null)
                     {
                         var bcol = ConfigUtil.BindingsSection[Resolver.Custom.Binding];
-                        var bc = bcol.ConfiguredBindings.First(b =>
-                            b.Name == Resolver.Custom.BindingConfiguration
-                        );
+                        var bc = bcol.ConfiguredBindings
+                            .First(b => b.Name == Resolver.Custom.BindingConfiguration);
                         n.Resolver.Custom.Binding = (Binding)
                             Activator.CreateInstance(bcol.BindingType, new object[0]);
                         bc.ApplyConfiguration(n.Resolver.Custom.Binding);

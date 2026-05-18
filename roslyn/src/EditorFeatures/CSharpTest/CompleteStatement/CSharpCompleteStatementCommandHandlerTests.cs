@@ -4182,8 +4182,8 @@ class C
         }
 
         internal override ICommandHandler GetCommandHandler(TestWorkspace workspace) =>
-            workspace
-                .ExportProvider.GetExportedValues<ICommandHandler>()
+            workspace.ExportProvider
+                .GetExportedValues<ICommandHandler>()
                 .OfType<CompleteStatementCommandHandler>()
                 .Single();
 

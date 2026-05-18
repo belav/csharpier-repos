@@ -478,9 +478,10 @@ namespace Mono.Options
             {
                 throw new OptionException(
                     string.Format(
-                        c.OptionSet.MessageLocalizer(
-                            "Could not convert string `{0}' to type {1} for option `{2}'."
-                        ),
+                        c.OptionSet
+                            .MessageLocalizer(
+                                "Could not convert string `{0}' to type {1} for option `{2}'."
+                            ),
                         value,
                         targetType.Name,
                         c.OptionName

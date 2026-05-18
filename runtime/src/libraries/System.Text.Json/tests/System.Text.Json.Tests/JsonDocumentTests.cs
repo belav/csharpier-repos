@@ -3964,34 +3964,36 @@ namespace System.Text.Json.Tests
                 using (var gate = new Barrier(2))
                 {
                     await Task.WhenAll(
-                        Task.Factory.StartNew(
-                            () =>
-                            {
-                                gate.SignalAndWait();
-                                for (int i = 0; i < Iters; i++)
+                        Task.Factory
+                            .StartNew(
+                                () =>
                                 {
-                                    Assert.Equal("John", first.GetString());
-                                    Assert.True(first.ValueEquals("John"));
-                                }
-                            },
-                            CancellationToken.None,
-                            TaskCreationOptions.LongRunning,
-                            TaskScheduler.Default
-                        ),
-                        Task.Factory.StartNew(
-                            () =>
-                            {
-                                gate.SignalAndWait();
-                                for (int i = 0; i < Iters; i++)
+                                    gate.SignalAndWait();
+                                    for (int i = 0; i < Iters; i++)
+                                    {
+                                        Assert.Equal("John", first.GetString());
+                                        Assert.True(first.ValueEquals("John"));
+                                    }
+                                },
+                                CancellationToken.None,
+                                TaskCreationOptions.LongRunning,
+                                TaskScheduler.Default
+                            ),
+                        Task.Factory
+                            .StartNew(
+                                () =>
                                 {
-                                    Assert.Equal("Smith", last.GetString());
-                                    Assert.True(last.ValueEquals("Smith"));
-                                }
-                            },
-                            CancellationToken.None,
-                            TaskCreationOptions.LongRunning,
-                            TaskScheduler.Default
-                        )
+                                    gate.SignalAndWait();
+                                    for (int i = 0; i < Iters; i++)
+                                    {
+                                        Assert.Equal("Smith", last.GetString());
+                                        Assert.True(last.ValueEquals("Smith"));
+                                    }
+                                },
+                                CancellationToken.None,
+                                TaskCreationOptions.LongRunning,
+                                TaskScheduler.Default
+                            )
                     );
                 }
             }

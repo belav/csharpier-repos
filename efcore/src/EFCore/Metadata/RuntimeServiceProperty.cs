@@ -66,9 +66,10 @@ public class RuntimeServiceProperty : RuntimePropertyBase, IServiceProperty
                 static property =>
                 {
                     var entityType = property.DeclaringEntityType;
-                    var factory = entityType
-                        .Model.GetModelDependencies()
-                        .ParameterBindingFactories.FindFactory(property.ClrType, property.Name)!;
+                    var factory = entityType.Model
+                        .GetModelDependencies()
+                        .ParameterBindingFactories
+                        .FindFactory(property.ClrType, property.Name)!;
                     return (ServiceParameterBinding)
                         factory.Bind(entityType, property.ClrType, property.Name);
                 }

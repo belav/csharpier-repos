@@ -30,13 +30,11 @@ namespace System.Security.Cryptography.Cng.Tests
                 "MyCreationTitle"
             );
             byte[] myPropValue1 = "23afbc".HexToByteArray();
-            p.Parameters.Add(
-                new CngProperty("MyProp1", myPropValue1, CngPropertyOptions.CustomProperty)
-            );
+            p.Parameters
+                .Add(new CngProperty("MyProp1", myPropValue1, CngPropertyOptions.CustomProperty));
             byte[] myPropValue2 = "8765".HexToByteArray();
-            p.Parameters.Add(
-                new CngProperty("MyProp2", myPropValue2, CngPropertyOptions.CustomProperty)
-            );
+            p.Parameters
+                .Add(new CngProperty("MyProp2", myPropValue2, CngPropertyOptions.CustomProperty));
 
             using (CngKey key = CngKey.Create(alg, null, p))
             {

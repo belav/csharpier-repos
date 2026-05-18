@@ -119,8 +119,8 @@ public class TestServiceFactory
 
         var elementType = TryGetEnumerableType(serviceType);
 
-        var implementationTypes = (elementType ?? serviceType)
-            .Assembly.GetTypes()
+        var implementationTypes = (elementType ?? serviceType).Assembly
+            .GetTypes()
             .Where(t => (elementType ?? serviceType).IsAssignableFrom(t) && !t.IsAbstract)
             .ToList();
 

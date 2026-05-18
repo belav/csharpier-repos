@@ -95,11 +95,9 @@ namespace Mono.CodeContracts.Static.Analysis.ExpressionAnalysis
                 if (expr.Symbol.Equals(default(SymbolicValue)))
                     sb.Append("<!null!>");
                 else
-                    this.context_provider.ExpressionContext.Decode<
-                        StringBuilder,
-                        Dummy,
-                        PrinterImpl<SymbolicValue>
-                    >(expr, this, sb);
+                    this.context_provider
+                        .ExpressionContext
+                        .Decode<StringBuilder, Dummy, PrinterImpl<SymbolicValue>>(expr, this, sb);
             }
 
             #region Implementation of IExpressionILVisitor<ExternalExpression<APC,SymbolicValue>,ExternalExpression<APC,SymbolicValue>,SymbolicValue,StringBuilder,Dummy>

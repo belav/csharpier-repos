@@ -369,9 +369,8 @@ public class LibraryBuilderTask : AppBuilderTask
         buildOptions.CompilerArguments.Add("-D ANDROID=1");
         buildOptions.CompilerArguments.Add("-D HOST_ANDROID=1");
         buildOptions.CompilerArguments.Add("-fPIC");
-        buildOptions.CompilerArguments.Add(
-            IsSharedLibrary ? $"-shared -o {libraryName}" : $"-o {libraryName}"
-        );
+        buildOptions.CompilerArguments
+            .Add(IsSharedLibrary ? $"-shared -o {libraryName}" : $"-o {libraryName}");
         buildOptions.IncludePaths.Add(MonoRuntimeHeaders);
         buildOptions.LinkerArguments.Add($"--soname={libraryName}");
         buildOptions.LinkerArguments.AddRange(linkerArgs);
@@ -409,9 +408,8 @@ public class LibraryBuilderTask : AppBuilderTask
         string libraryName = GetLibraryName();
 
         ClangBuildOptions buildOptions = new ClangBuildOptions();
-        buildOptions.CompilerArguments.Add(
-            IsSharedLibrary ? $"-dynamiclib -o {libraryName}" : $"-o {libraryName}"
-        );
+        buildOptions.CompilerArguments
+            .Add(IsSharedLibrary ? $"-dynamiclib -o {libraryName}" : $"-o {libraryName}");
         buildOptions.CompilerArguments.Add("-D HOST_APPLE_MOBILE=1");
         buildOptions.CompilerArguments.Add("-D FORCE_AOT=1");
         buildOptions.IncludePaths.Add(MonoRuntimeHeaders);

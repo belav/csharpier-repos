@@ -237,10 +237,11 @@ namespace System.Globalization.Tests
             Assert.True(
                 ci.Name.Equals(ri.Name, StringComparison.OrdinalIgnoreCase)
                     || // Desktop usese culture name as region name
-                    ri.Name.Equals(
-                        GetLocaleInfo(ci, LOCALE_SISO3166CTRYNAME),
-                        StringComparison.OrdinalIgnoreCase
-                    )
+                    ri.Name
+                        .Equals(
+                            GetLocaleInfo(ci, LOCALE_SISO3166CTRYNAME),
+                            StringComparison.OrdinalIgnoreCase
+                        )
             ); // netcore uses 2 letter ISO for region name
             Assert.Equal(
                 GetLocaleInfo(ci, LOCALE_SISO3166CTRYNAME),

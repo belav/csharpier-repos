@@ -1134,7 +1134,8 @@ internal static class ReflectionTest
             // Also tests GetEntryAssembly
             var modAttr = Assembly
                 .GetEntryAssembly()
-                .ManifestModule.GetCustomAttribute<TestModuleAttribute>();
+                .ManifestModule
+                .GetCustomAttribute<TestModuleAttribute>();
             if (modAttr == null)
                 throw new Exception();
         }
@@ -2946,12 +2947,13 @@ internal static class ReflectionTest
     )]
     public static int CountMethods(this Type t) =>
         t.GetMethods(
-            BindingFlags.Instance
-                | BindingFlags.Static
-                | BindingFlags.Public
-                | BindingFlags.NonPublic
-                | BindingFlags.DeclaredOnly
-        ).Length;
+                BindingFlags.Instance
+                    | BindingFlags.Static
+                    | BindingFlags.Public
+                    | BindingFlags.NonPublic
+                    | BindingFlags.DeclaredOnly
+            )
+            .Length;
 
     class Assert
     {

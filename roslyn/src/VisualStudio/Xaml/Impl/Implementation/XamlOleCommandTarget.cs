@@ -21,9 +21,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml
 
         protected override ITextBuffer? GetSubjectBufferContainingCaret()
         {
-            return this.WpfTextView.GetBufferContainingCaret(
-                contentType: ContentTypeNames.XamlContentType
-            );
+            return this.WpfTextView
+                .GetBufferContainingCaret(contentType: ContentTypeNames.XamlContentType);
         }
     }
 }

@@ -324,14 +324,15 @@ public abstract class OutputCacheMiddlewareTests
 
         // This would pass the IfModifiedSince checks
         context.HttpContext.Request.Headers.IfModifiedSince = HeaderUtilities.FormatDate(utcNow);
-        context.CachedResponse.CopyHeadersFrom(
-            new HeaderDictionary
-            {
-                [HeaderNames.LastModified] = HeaderUtilities.FormatDate(
-                    utcNow - TimeSpan.FromSeconds(10)
-                ),
-            }
-        );
+        context.CachedResponse
+            .CopyHeadersFrom(
+                new HeaderDictionary
+                {
+                    [HeaderNames.LastModified] = HeaderUtilities.FormatDate(
+                        utcNow - TimeSpan.FromSeconds(10)
+                    ),
+                }
+            );
 
         context.HttpContext.Request.Headers.IfNoneMatch = "\"E1\"";
         Assert.False(middleware.ContentIsNotModified(context));
@@ -398,9 +399,8 @@ public abstract class OutputCacheMiddlewareTests
         var context = TestUtils.CreateTestContext(testSink: sink);
         using var entry = new OutputCacheEntry(DateTimeOffset.UtcNow, StatusCodes.Status200OK);
         context.CachedResponse = entry;
-        context.CachedResponse.CopyHeadersFrom(
-            new HeaderDictionary { [HeaderNames.ETag] = "\"E2\"" }
-        );
+        context.CachedResponse
+            .CopyHeadersFrom(new HeaderDictionary { [HeaderNames.ETag] = "\"E2\"" });
         context.HttpContext.Request.Headers.IfNoneMatch = "\"E1\"";
 
         Assert.False(middleware.ContentIsNotModified(context));
@@ -415,9 +415,8 @@ public abstract class OutputCacheMiddlewareTests
         var context = TestUtils.CreateTestContext(testSink: sink);
         using var entry = new OutputCacheEntry(DateTimeOffset.UtcNow, StatusCodes.Status200OK);
         context.CachedResponse = entry;
-        context.CachedResponse.CopyHeadersFrom(
-            new HeaderDictionary { [HeaderNames.ETag] = "\"E2\"" }
-        );
+        context.CachedResponse
+            .CopyHeadersFrom(new HeaderDictionary { [HeaderNames.ETag] = "\"E2\"" });
         context.HttpContext.Request.Headers.IfNoneMatch = new string[]
         {
             "\"E0\", \"E1\"",
@@ -1069,9 +1068,10 @@ public abstract class OutputCacheMiddlewareTests
             CancellationToken cancellation
         )
         {
-            context.AllowCacheLookup = !context.HttpContext.Request.Headers.ContainsKey(
-                "X-Refresh"
-            );
+            context.AllowCacheLookup = !context.HttpContext
+                .Request
+                .Headers
+                .ContainsKey("X-Refresh");
             context.AllowCacheStorage = true;
             return ValueTask.CompletedTask;
         }

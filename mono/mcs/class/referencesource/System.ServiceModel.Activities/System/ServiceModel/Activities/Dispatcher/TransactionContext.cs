@@ -36,10 +36,8 @@ namespace System.ServiceModel.Activities.Dispatcher
 
             this.currentTransaction = currentTransaction.Clone();
             this.durableInstance = durableInstance;
-            this.currentTransaction.EnlistVolatile(
-                this,
-                EnlistmentOptions.EnlistDuringPrepareRequired
-            );
+            this.currentTransaction
+                .EnlistVolatile(this, EnlistmentOptions.EnlistDuringPrepareRequired);
         }
 
         public Transaction CurrentTransaction
@@ -162,11 +160,13 @@ namespace System.ServiceModel.Activities.Dispatcher
                 IAsyncResult result = null;
                 using (PrepareTransactionalCall(this.context.currentTransaction))
                 {
-                    result = this.context.durableInstance.BeginPersist(
-                        TimeSpan.MaxValue,
-                        PrepareAsyncCompletion(PrepareAsyncResult.onEndPersist),
-                        this
-                    );
+                    result = this.context
+                        .durableInstance
+                        .BeginPersist(
+                            TimeSpan.MaxValue,
+                            PrepareAsyncCompletion(PrepareAsyncResult.onEndPersist),
+                            this
+                        );
                 }
                 if (SyncContinue(result))
                 {

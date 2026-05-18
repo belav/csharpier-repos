@@ -261,8 +261,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Utilities
             );
 
             var newTree = tree.WithRootAndOptions(newRoot, tree.Options);
-            var newSemanticModel = semanticModel
-                .Compilation.ReplaceSyntaxTree(tree, newTree)
+            var newSemanticModel = semanticModel.Compilation
+                .ReplaceSyntaxTree(tree, newTree)
                 .GetSemanticModel(newTree);
 
             var newDeclarationTypeNode = newTree
@@ -273,10 +273,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Utilities
                 .GetTypeInfo(newDeclarationTypeNode, cancellationToken)
                 .Type;
 
-            return SymbolEquivalenceComparer.TupleNamesMustMatchInstance.Equals(
-                declarationType,
-                newDeclarationType
-            );
+            return SymbolEquivalenceComparer.TupleNamesMustMatchInstance
+                .Equals(declarationType, newDeclarationType);
         }
 
         private static bool IsSafeToSwitchToVarWithoutNeedingSpeculation(
@@ -395,7 +393,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Utilities
                         if (
                             semanticModel
                                 .GetSymbolInfo(n, cancellationToken)
-                                .Symbol.IsKind(SymbolKind.Local) == true
+                                .Symbol
+                                .IsKind(SymbolKind.Local) == true
                         )
                         {
                             return true;

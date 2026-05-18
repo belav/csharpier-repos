@@ -30,13 +30,14 @@ namespace System.ServiceModel.Security.Tokens
         {
             if (!IsDefined(value))
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidEnumArgumentException(
-                        "value",
-                        (int)value,
-                        typeof(SecurityTokenInclusionMode)
-                    )
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidEnumArgumentException(
+                            "value",
+                            (int)value,
+                            typeof(SecurityTokenInclusionMode)
+                        )
+                    );
             }
         }
     }

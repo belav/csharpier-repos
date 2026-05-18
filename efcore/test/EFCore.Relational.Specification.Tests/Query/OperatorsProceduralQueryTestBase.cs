@@ -1692,9 +1692,10 @@ public abstract class OperatorsProceduralQueryTestBase : NonSharedModelTestBase
     }
 
     protected virtual bool DivideByZeroException(Exception ex) =>
-        ex.Message.StartsWith(
-            CoreStrings.ExpressionParameterizationExceptionSensitive("").Substring(0, 90)
-        )
+        ex.Message
+            .StartsWith(
+                CoreStrings.ExpressionParameterizationExceptionSensitive("").Substring(0, 90)
+            )
         && ex.InnerException is DivideByZeroException;
 
     #endregion

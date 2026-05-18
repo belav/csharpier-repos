@@ -382,15 +382,16 @@ namespace System.Data.ProviderBase
                                 case SqlXml: // turn string into a SqlXml value for DataColumn
                                     System.Xml.XmlReaderSettings settings =
                                         new System.Xml.XmlReaderSettings();
-                                    settings.ConformanceLevel = System
-                                        .Xml
+                                    settings.ConformanceLevel = System.Xml
                                         .ConformanceLevel
                                         .Fragment;
-                                    System.Xml.XmlReader reader = System.Xml.XmlReader.Create(
-                                        new System.IO.StringReader(xml),
-                                        settings,
-                                        (string?)null
-                                    );
+                                    System.Xml.XmlReader reader = System.Xml
+                                        .XmlReader
+                                        .Create(
+                                            new System.IO.StringReader(xml),
+                                            settings,
+                                            (string?)null
+                                        );
                                     _readerDataValues[i] = new System.Data.SqlTypes.SqlXml(reader);
                                     break;
                                 case XmlDocument: // turn string into XmlDocument value for DataColumn

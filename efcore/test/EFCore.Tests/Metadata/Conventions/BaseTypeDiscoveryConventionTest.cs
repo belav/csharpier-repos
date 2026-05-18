@@ -12,14 +12,10 @@ public class BaseTypeDiscoveryConventionTest
     public void Discovers_parent_type()
     {
         var entityBuilderA = CreateInternalEntityTypeBuilder<A>();
-        var entityBuilderB = entityBuilderA.ModelBuilder.Entity(
-            typeof(B),
-            ConfigurationSource.Explicit
-        );
-        var entityBuilderC = entityBuilderA.ModelBuilder.Entity(
-            typeof(C),
-            ConfigurationSource.Explicit
-        );
+        var entityBuilderB = entityBuilderA.ModelBuilder
+            .Entity(typeof(B), ConfigurationSource.Explicit);
+        var entityBuilderC = entityBuilderA.ModelBuilder
+            .Entity(typeof(C), ConfigurationSource.Explicit);
         Assert.Null(entityBuilderC.Metadata.BaseType);
 
         RunConvention(entityBuilderC);
@@ -31,10 +27,8 @@ public class BaseTypeDiscoveryConventionTest
     public void Discovers_grandparent_type()
     {
         var entityBuilderA = CreateInternalEntityTypeBuilder<A>();
-        var entityBuilderC = entityBuilderA.ModelBuilder.Entity(
-            typeof(C),
-            ConfigurationSource.Explicit
-        );
+        var entityBuilderC = entityBuilderA.ModelBuilder
+            .Entity(typeof(C), ConfigurationSource.Explicit);
         Assert.Null(entityBuilderC.Metadata.BaseType);
 
         RunConvention(entityBuilderC);
@@ -46,14 +40,10 @@ public class BaseTypeDiscoveryConventionTest
     public void Discovers_parent_type_if_base_type_set()
     {
         var entityBuilderA = CreateInternalEntityTypeBuilder<A>();
-        var entityBuilderB = entityBuilderA.ModelBuilder.Entity(
-            typeof(B),
-            ConfigurationSource.Explicit
-        );
-        var entityBuilderC = entityBuilderA.ModelBuilder.Entity(
-            typeof(C),
-            ConfigurationSource.Explicit
-        );
+        var entityBuilderB = entityBuilderA.ModelBuilder
+            .Entity(typeof(B), ConfigurationSource.Explicit);
+        var entityBuilderC = entityBuilderA.ModelBuilder
+            .Entity(typeof(C), ConfigurationSource.Explicit);
         entityBuilderC.HasBaseType(entityBuilderA.Metadata, ConfigurationSource.Convention);
 
         RunConvention(entityBuilderC);
@@ -74,8 +64,8 @@ public class BaseTypeDiscoveryConventionTest
     }
 
     private ProviderConventionSetBuilderDependencies CreateDependencies() =>
-        InMemoryTestHelpers
-            .Instance.CreateContextServices()
+        InMemoryTestHelpers.Instance
+            .CreateContextServices()
             .GetRequiredService<ProviderConventionSetBuilderDependencies>();
 
     private class A { }

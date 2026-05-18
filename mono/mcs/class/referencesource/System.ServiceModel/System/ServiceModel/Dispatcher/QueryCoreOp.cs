@@ -256,15 +256,16 @@ namespace System.ServiceModel.Dispatcher
                     break;
 
                 default:
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new QueryCompileException(
-                            QueryCompileError.InvalidType,
-                            SR.GetString(
-                                SR.QueryVariableTypeNotSupported,
-                                this.variable.VariableType.ToString()
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperError(
+                            new QueryCompileException(
+                                QueryCompileError.InvalidType,
+                                SR.GetString(
+                                    SR.QueryVariableTypeNotSupported,
+                                    this.variable.VariableType.ToString()
+                                )
                             )
-                        )
-                    );
+                        );
             }
         }
 
@@ -290,12 +291,13 @@ namespace System.ServiceModel.Dispatcher
                 object o = this.variable.Evaluate(this.xsltContext);
                 if (o == null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new QueryProcessingException(
-                            QueryProcessingError.Unexpected,
-                            SR.GetString(SR.QueryVariableNull)
-                        )
-                    );
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperError(
+                            new QueryProcessingException(
+                                QueryProcessingError.Unexpected,
+                                SR.GetString(SR.QueryVariableNull)
+                            )
+                        );
                 }
 
                 switch (this.type)
@@ -324,27 +326,29 @@ namespace System.ServiceModel.Dispatcher
                             }
                             else
                             {
-                                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                                    new QueryProcessingException(
-                                        QueryProcessingError.Unexpected,
-                                        SR.GetString(SR.QueryMustBeSeekable)
-                                    )
-                                );
+                                throw DiagnosticUtility.ExceptionUtility
+                                    .ThrowHelperError(
+                                        new QueryProcessingException(
+                                            QueryProcessingError.Unexpected,
+                                            SR.GetString(SR.QueryMustBeSeekable)
+                                        )
+                                    );
                             }
                         }
                         context.Push(seq, count);
                         break;
 
                     default:
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperCritical(
-                            new QueryProcessingException(
-                                QueryProcessingError.Unexpected,
-                                SR.GetString(
-                                    SR.QueryVariableTypeNotSupported,
-                                    this.variable.VariableType.ToString()
+                        throw DiagnosticUtility.ExceptionUtility
+                            .ThrowHelperCritical(
+                                new QueryProcessingException(
+                                    QueryProcessingError.Unexpected,
+                                    SR.GetString(
+                                        SR.QueryVariableTypeNotSupported,
+                                        this.variable.VariableType.ToString()
+                                    )
                                 )
-                            )
-                        );
+                            );
                 }
             }
             return this.next;

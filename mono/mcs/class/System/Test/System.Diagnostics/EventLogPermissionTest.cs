@@ -187,9 +187,8 @@ namespace MonoTests.System.Diagnostics
             EventLogPermission result = (EventLogPermission)elp1.Intersect(elp2);
             Assert.IsNull(result, "Empty N Empty");
             // 2. None N Entry
-            elp2.PermissionEntries.Add(
-                new EventLogPermissionEntry(EventLogPermissionAccess.None, "localhost")
-            );
+            elp2.PermissionEntries
+                .Add(new EventLogPermissionEntry(EventLogPermissionAccess.None, "localhost"));
             result = (EventLogPermission)elp1.Intersect(elp2);
             Assert.IsNull(result, "Empty N Entry");
             // 3. Entry N None
@@ -225,9 +224,8 @@ namespace MonoTests.System.Diagnostics
             );
 
             // 4. Unrestricted N Entry
-            elp2.PermissionEntries.Add(
-                new EventLogPermissionEntry(EventLogPermissionAccess.None, "localhost")
-            );
+            elp2.PermissionEntries
+                .Add(new EventLogPermissionEntry(EventLogPermissionAccess.None, "localhost"));
             result = (EventLogPermission)elp1.Intersect(elp2);
             Assert.IsFalse(result.IsUnrestricted(), "(Unrestricted N Entry).IsUnrestricted");
             Assert.AreEqual(1, result.PermissionEntries.Count, "(Unrestricted N Entry).Count");
@@ -238,9 +236,8 @@ namespace MonoTests.System.Diagnostics
             Assert.AreEqual(1, result.PermissionEntries.Count, "(Entry N Unrestricted).Count");
 
             // 6. Unrestricted N Unrestricted
-            elp1.PermissionEntries.Add(
-                new EventLogPermissionEntry(EventLogPermissionAccess.None, "localhost")
-            );
+            elp1.PermissionEntries
+                .Add(new EventLogPermissionEntry(EventLogPermissionAccess.None, "localhost"));
             result = (EventLogPermission)elp1.Intersect(elp1);
             Assert.IsTrue(result.IsUnrestricted(), "(Unrestricted N Unrestricted).IsUnrestricted");
             Assert.AreEqual(
@@ -324,9 +321,8 @@ namespace MonoTests.System.Diagnostics
         public void Union_Null()
         {
             EventLogPermission elp = new EventLogPermission(PermissionState.None);
-            elp.PermissionEntries.Add(
-                new EventLogPermissionEntry(EventLogPermissionAccess.None, "localhost")
-            );
+            elp.PermissionEntries
+                .Add(new EventLogPermissionEntry(EventLogPermissionAccess.None, "localhost"));
             // Union with null is a simple copy
             EventLogPermission union = (EventLogPermission)elp.Union(null);
             Assert.IsNotNull(elp.PermissionEntries.Count, "Count");

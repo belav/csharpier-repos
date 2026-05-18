@@ -16,10 +16,8 @@ namespace System.Web.Mvc.Test
         public void GetValidatorsGuardClauses()
         {
             // Arrange
-            ModelMetadata metadata = ModelMetadataProviders.Current.GetMetadataForType(
-                null,
-                typeof(object)
-            );
+            ModelMetadata metadata = ModelMetadataProviders.Current
+                .GetMetadataForType(null, typeof(object));
             Mock<AssociatedValidatorProvider> provider = new Mock<AssociatedValidatorProvider>
             {
                 CallBase = true,
@@ -42,11 +40,8 @@ namespace System.Web.Mvc.Test
             // Arrange
             IEnumerable<Attribute> callbackAttributes = null;
             ControllerContext context = new ControllerContext();
-            ModelMetadata metadata = ModelMetadataProviders.Current.GetMetadataForProperty(
-                null,
-                typeof(PropertyModel),
-                "LocalAttributes"
-            );
+            ModelMetadata metadata = ModelMetadataProviders.Current
+                .GetMetadataForProperty(null, typeof(PropertyModel), "LocalAttributes");
             Mock<TestableAssociatedValidatorProvider> provider =
                 new Mock<TestableAssociatedValidatorProvider> { CallBase = true };
             provider
@@ -73,11 +68,8 @@ namespace System.Web.Mvc.Test
             // Arrange
             IEnumerable<Attribute> callbackAttributes = null;
             ControllerContext context = new ControllerContext();
-            ModelMetadata metadata = ModelMetadataProviders.Current.GetMetadataForProperty(
-                null,
-                typeof(PropertyModel),
-                "MetadataAttributes"
-            );
+            ModelMetadata metadata = ModelMetadataProviders.Current
+                .GetMetadataForProperty(null, typeof(PropertyModel), "MetadataAttributes");
             Mock<TestableAssociatedValidatorProvider> provider =
                 new Mock<TestableAssociatedValidatorProvider> { CallBase = true };
             provider
@@ -104,11 +96,8 @@ namespace System.Web.Mvc.Test
             // Arrange
             IEnumerable<Attribute> callbackAttributes = null;
             ControllerContext context = new ControllerContext();
-            ModelMetadata metadata = ModelMetadataProviders.Current.GetMetadataForProperty(
-                null,
-                typeof(PropertyModel),
-                "MixedAttributes"
-            );
+            ModelMetadata metadata = ModelMetadataProviders.Current
+                .GetMetadataForProperty(null, typeof(PropertyModel), "MixedAttributes");
             Mock<TestableAssociatedValidatorProvider> provider =
                 new Mock<TestableAssociatedValidatorProvider> { CallBase = true };
             provider

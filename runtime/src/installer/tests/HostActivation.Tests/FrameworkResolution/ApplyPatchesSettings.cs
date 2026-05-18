@@ -97,7 +97,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
                         )
                     )
                     .ShouldHaveResolvedFramework(MicrosoftNETCoreApp, "5.1.2")
-                    .And.HaveResolvedFramework(MiddleWare, "2.1.2");
+                    .And
+                    .HaveResolvedFramework(MiddleWare, "2.1.2");
             }
         }
 
@@ -119,7 +120,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
                         )
                     )
                     .ShouldHaveResolvedFramework(MicrosoftNETCoreApp, "5.1.2")
-                    .And.HaveResolvedFramework(MiddleWare, "2.1.2");
+                    .And
+                    .HaveResolvedFramework(MiddleWare, "2.1.2");
             }
         }
 

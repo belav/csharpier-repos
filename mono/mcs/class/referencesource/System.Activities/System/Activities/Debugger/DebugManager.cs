@@ -140,9 +140,8 @@ namespace System.Activities.Debugger
                 }
             }
 
-            List<Activity> sameSourceActivities = this.instrumentationTracker.GetSameSourceSubRoots(
-                activity
-            );
+            List<Activity> sameSourceActivities = this.instrumentationTracker
+                .GetSameSourceSubRoots(activity);
             this.instrumentationTracker.MarkInstrumented(activity);
 
             foreach (Activity sameSourceActivity in sameSourceActivities)
@@ -390,10 +389,8 @@ namespace System.Activities.Debugger
             }
             else
             {
-                State activityState = this.stateManager.DefineStateWithDebugInfo(
-                    sourceLocation,
-                    name
-                );
+                State activityState = this.stateManager
+                    .DefineStateWithDebugInfo(sourceLocation, name);
                 this.states.Add(activity, activityState);
             }
         }

@@ -703,9 +703,8 @@ namespace System.Data.Objects
                         // If the context is not null, it be because the failure happened after it was attached, or it
                         // could mean that this entity was already attached, in which case we don't want to clean it up
                         // If we find the entity in the context and its key is temporary, we must have just added it, so remove it now.
-                        EntityEntry entry = this.ObjectStateManager.FindEntityEntry(
-                            wrappedEntity.Entity
-                        );
+                        EntityEntry entry = this.ObjectStateManager
+                            .FindEntityEntry(wrappedEntity.Entity);
                         if (entry != null && entry.EntityKey.IsTemporary)
                         {
                             // devnote: relationshipManager is valid, so entity must be IEntityWithRelationships and casting is safe
@@ -761,13 +760,8 @@ namespace System.Data.Objects
 
             VerifyContextForAddOrAttach(wrappedEntity);
             wrappedEntity.Context = this;
-            EntityEntry entry = this.ObjectStateManager.AddEntry(
-                wrappedEntity,
-                (EntityKey)null,
-                entitySet,
-                argumentName,
-                true
-            );
+            EntityEntry entry = this.ObjectStateManager
+                .AddEntry(wrappedEntity, (EntityKey)null, entitySet, argumentName, true);
 
             // If the entity supports relationships, AttachContext on the
             // RelationshipManager object - with load option of
@@ -855,8 +849,8 @@ namespace System.Data.Objects
             bool removedConvert;
             var navProp = ParsePropertySelectorExpression<TEntity>(selector, out removedConvert);
             IEntityWrapper wrappedEntity = WrapEntityAndCheckContext(entity, "property");
-            wrappedEntity
-                .RelationshipManager.GetRelatedEnd(navProp, throwArgumentException: removedConvert)
+            wrappedEntity.RelationshipManager
+                .GetRelatedEnd(navProp, throwArgumentException: removedConvert)
                 .Load();
         }
 
@@ -886,8 +880,8 @@ namespace System.Data.Objects
             bool removedConvert;
             var navProp = ParsePropertySelectorExpression<TEntity>(selector, out removedConvert);
             IEntityWrapper wrappedEntity = WrapEntityAndCheckContext(entity, "property");
-            wrappedEntity
-                .RelationshipManager.GetRelatedEnd(navProp, throwArgumentException: removedConvert)
+            wrappedEntity.RelationshipManager
+                .GetRelatedEnd(navProp, throwArgumentException: removedConvert)
                 .Load(mergeOption);
         }
 
@@ -901,17 +895,19 @@ namespace System.Data.Objects
             if (wrappedEntity.Context == null)
             {
                 throw new InvalidOperationException(
-                    System.Data.Entity.Strings.ObjectContext_CannotExplicitlyLoadDetachedRelationships(
-                        refType
-                    )
+                    System.Data
+                        .Entity
+                        .Strings
+                        .ObjectContext_CannotExplicitlyLoadDetachedRelationships(refType)
                 );
             }
             if (wrappedEntity.Context != this)
             {
                 throw new InvalidOperationException(
-                    System.Data.Entity.Strings.ObjectContext_CannotLoadReferencesUsingDifferentContext(
-                        refType
-                    )
+                    System.Data
+                        .Entity
+                        .Strings
+                        .ObjectContext_CannotLoadReferencesUsingDifferentContext(refType)
                 );
             }
             return wrappedEntity;
@@ -1283,13 +1279,14 @@ namespace System.Data.Objects
                     // SetChangeTrackerOntoEntity is now called from PromoteKeyEntryInitialization().
                     // Calling PromoteKeyEntryInitialization() before calling relationshipManager.AttachContext prevents
                     // overriding Context property on relationshipManager (and attaching relatedEnds to current context).
-                    this.ObjectStateManager.PromoteKeyEntryInitialization(
-                        this,
-                        entry,
-                        wrappedEntity, /*shadowValues*/
-                        null, /*replacingEntry*/
-                        false
-                    );
+                    this.ObjectStateManager
+                        .PromoteKeyEntryInitialization(
+                            this,
+                            entry,
+                            wrappedEntity, /*shadowValues*/
+                            null, /*replacingEntry*/
+                            false
+                        );
 
                     Debug.Assert(
                         this.ObjectStateManager.TransactionManager.TrackProcessedEntities,
@@ -1304,15 +1301,16 @@ namespace System.Data.Objects
 
                     wrappedEntity.TakeSnapshotOfRelationships(entry);
 
-                    this.ObjectStateManager.PromoteKeyEntry(
-                        entry,
-                        wrappedEntity,
-                        /*shadowValues*/null,
-                        /*replacingEntry*/false,
-                        /*setIsLoaded*/false,
-                        /*keyEntryInitialized*/true,
-                        "Attach"
-                    );
+                    this.ObjectStateManager
+                        .PromoteKeyEntry(
+                            entry,
+                            wrappedEntity,
+                            /*shadowValues*/null,
+                            /*replacingEntry*/false,
+                            /*setIsLoaded*/false,
+                            /*keyEntryInitialized*/true,
+                            "Attach"
+                        );
 
                     ObjectStateManager.FixupReferencesByForeignKeys(entry);
 
@@ -1328,12 +1326,8 @@ namespace System.Data.Objects
             {
                 VerifyContextForAddOrAttach(wrappedEntity);
                 wrappedEntity.Context = this;
-                entry = this.ObjectStateManager.AttachEntry(
-                    key,
-                    wrappedEntity,
-                    entitySet,
-                    argumentName
-                );
+                entry = this.ObjectStateManager
+                    .AttachEntry(key, wrappedEntity, entitySet, argumentName);
 
                 Debug.Assert(
                     this.ObjectStateManager.TransactionManager.TrackProcessedEntities,
@@ -1652,8 +1646,10 @@ namespace System.Data.Objects
                 || (_connection.State == ConnectionState.Broken)
             )
             {
-                string message =
-                    System.Data.Entity.Strings.EntityClient_ExecutingOnClosedConnection(
+                string message = System.Data
+                    .Entity
+                    .Strings
+                    .EntityClient_ExecutingOnClosedConnection(
                         _connection.State == ConnectionState.Closed
                             ? System.Data.Entity.Strings.EntityClient_ConnectionStateClosed
                             : System.Data.Entity.Strings.EntityClient_ConnectionStateBroken
@@ -2143,11 +2139,8 @@ namespace System.Data.Objects
             else
             {
                 if (
-                    !this.MetadataWorkspace.TryGetEntityContainer(
-                        entityContainerName,
-                        DataSpace.CSpace,
-                        out container
-                    )
+                    !this.MetadataWorkspace
+                        .TryGetEntityContainer(entityContainerName, DataSpace.CSpace, out container)
                 )
                 {
                     throw EntityUtil.EntityContainterNotFoundForName(entityContainerName);
@@ -2228,10 +2221,11 @@ namespace System.Data.Objects
         internal TypeUsage GetTypeUsage(Type entityCLRType)
         {
             // Register the assembly so the type information will be sure to be loaded in metadata
-            this.MetadataWorkspace.ImplicitLoadAssemblyForType(
-                entityCLRType,
-                System.Reflection.Assembly.GetCallingAssembly()
-            );
+            this.MetadataWorkspace
+                .ImplicitLoadAssemblyForType(
+                    entityCLRType,
+                    System.Reflection.Assembly.GetCallingAssembly()
+                );
 
             TypeUsage entityTypeUsage = null;
             if (
@@ -3093,9 +3087,10 @@ namespace System.Data.Objects
                 if (null == parameter)
                 {
                     throw EntityUtil.InvalidOperation(
-                        System.Data.Entity.Strings.ObjectContext_ExecuteFunctionCalledWithNullParameter(
-                            i
-                        )
+                        System.Data
+                            .Entity
+                            .Strings
+                            .ObjectContext_ExecuteFunctionCalledWithNullParameter(i)
                     );
                 }
             }
@@ -3200,8 +3195,9 @@ namespace System.Data.Objects
                     entitySets.Count > resultSetIndex ? entitySets[resultSetIndex] : null;
 
                 // create the shaper
-                System.Data.Common.QueryCache.QueryCacheManager cacheManager =
-                    this.Perspective.MetadataWorkspace.GetQueryCacheManager();
+                System.Data.Common.QueryCache.QueryCacheManager cacheManager = this.Perspective
+                    .MetadataWorkspace
+                    .GetQueryCacheManager();
                 ShaperFactory<TElement> shaperFactory = Translator.TranslateColumnMap<TElement>(
                     cacheManager,
                     commandDefinition.CreateColumnMap(storeReader, resultSetIndex),
@@ -3339,22 +3335,22 @@ namespace System.Data.Objects
                         // loading the type. We don't care if the type still cannot be loaded - in this case the result TypeUsage will be null
                         // which we handle later.
                         if (
-                            !this.Perspective.TryGetTypeByName(
-                                objectParameter.MappableType.FullName, /*ignoreCase */
-                                false,
-                                out typeUsage
-                            )
+                            !this.Perspective
+                                .TryGetTypeByName(
+                                    objectParameter.MappableType.FullName, /*ignoreCase */
+                                    false,
+                                    out typeUsage
+                                )
                         )
                         {
-                            this.MetadataWorkspace.ImplicitLoadAssemblyForType(
-                                objectParameter.MappableType,
-                                null
-                            );
-                            this.Perspective.TryGetTypeByName(
-                                objectParameter.MappableType.FullName, /*ignoreCase */
-                                false,
-                                out typeUsage
-                            );
+                            this.MetadataWorkspace
+                                .ImplicitLoadAssemblyForType(objectParameter.MappableType, null);
+                            this.Perspective
+                                .TryGetTypeByName(
+                                    objectParameter.MappableType.FullName, /*ignoreCase */
+                                    false,
+                                    out typeUsage
+                                );
                         }
                     }
                     else
@@ -3406,11 +3402,8 @@ namespace System.Data.Objects
                 }
                 if (matchCount == 1)
                 {
-                    functionImport.Parameters.TryGetValue(
-                        parameterName,
-                        true,
-                        out functionParameter
-                    );
+                    functionImport.Parameters
+                        .TryGetValue(parameterName, true, out functionParameter);
                 }
             }
             return functionParameter;
@@ -3547,10 +3540,8 @@ namespace System.Data.Objects
                     proxyTypeInfo.SetEntityWrapper(wrappedEntity);
                     if (proxyTypeInfo.InitializeEntityCollections != null)
                     {
-                        proxyTypeInfo.InitializeEntityCollections.Invoke(
-                            null,
-                            new object[] { wrappedEntity }
-                        );
+                        proxyTypeInfo.InitializeEntityCollections
+                            .Invoke(null, new object[] { wrappedEntity });
                     }
                 }
                 finally
@@ -3668,10 +3659,11 @@ namespace System.Data.Objects
             // If the entities in the user's result spans multiple assemblies, the
             // user must manually call LoadFromAssembly. *GetCallingAssembly returns
             // the assembly of the method that invoked the currently executing method.
-            this.MetadataWorkspace.ImplicitLoadAssemblyForType(
-                typeof(TElement),
-                System.Reflection.Assembly.GetCallingAssembly()
-            );
+            this.MetadataWorkspace
+                .ImplicitLoadAssemblyForType(
+                    typeof(TElement),
+                    System.Reflection.Assembly.GetCallingAssembly()
+                );
 
             this.EnsureConnection();
             DbDataReader reader = null;
@@ -3723,10 +3715,11 @@ namespace System.Data.Objects
             // If the entities in the user's result spans multiple assemblies, the
             // user must manually call LoadFromAssembly. *GetCallingAssembly returns
             // the assembly of the method that invoked the currently executing method.
-            this.MetadataWorkspace.ImplicitLoadAssemblyForType(
-                typeof(TElement),
-                System.Reflection.Assembly.GetCallingAssembly()
-            );
+            this.MetadataWorkspace
+                .ImplicitLoadAssemblyForType(
+                    typeof(TElement),
+                    System.Reflection.Assembly.GetCallingAssembly()
+                );
 
             return InternalTranslate<TElement>(
                 reader,
@@ -3766,10 +3759,11 @@ namespace System.Data.Objects
             // If the entities in the user's result spans multiple assemblies, the
             // user must manually call LoadFromAssembly. *GetCallingAssembly returns
             // the assembly of the method that invoked the currently executing method.
-            this.MetadataWorkspace.ImplicitLoadAssemblyForType(
-                typeof(TEntity),
-                System.Reflection.Assembly.GetCallingAssembly()
-            );
+            this.MetadataWorkspace
+                .ImplicitLoadAssemblyForType(
+                    typeof(TEntity),
+                    System.Reflection.Assembly.GetCallingAssembly()
+                );
 
             return InternalTranslate<TEntity>(reader, entitySetName, mergeOption, false);
         }
@@ -3842,8 +3836,8 @@ namespace System.Data.Objects
             }
 
             // build a shaper for the column map to produce typed results
-            System.Data.Common.QueryCache.QueryCacheManager cacheManager =
-                this.MetadataWorkspace.GetQueryCacheManager();
+            System.Data.Common.QueryCache.QueryCacheManager cacheManager = this.MetadataWorkspace
+                .GetQueryCacheManager();
             ShaperFactory<TElement> shaperFactory = Translator.TranslateColumnMap<TElement>(
                 cacheManager,
                 columnMap,
@@ -3926,8 +3920,7 @@ namespace System.Data.Objects
                 else
                 {
                     throw EntityUtil.InvalidOperation(
-                        System
-                            .Data
+                        System.Data
                             .Entity
                             .Strings
                             .ObjectContext_ExecuteCommandWithMixOfDbParameterAndValues
@@ -4000,8 +3993,8 @@ namespace System.Data.Objects
             DbProviderServices services = DbProviderServices.GetProviderServices(
                 this.GetStoreItemCollection().StoreProviderFactory
             );
-            string targetProviderManifestToken =
-                this.GetStoreItemCollection().StoreProviderManifestToken;
+            string targetProviderManifestToken = this.GetStoreItemCollection()
+                .StoreProviderManifestToken;
             return services.CreateDatabaseScript(
                 targetProviderManifestToken,
                 this.GetStoreItemCollection()

@@ -341,8 +341,10 @@ namespace Microsoft.CodeAnalysis.GenerateConstructorFromMembers
             if (canAddNullCheck)
             {
                 // ILegacyGlobalOptionsWorkspaceService is not provided in LSP, so don't give the code action with Dialog if it is null
-                var globalOptions =
-                    document.Project.Solution.Services.GetService<ILegacyGlobalOptionsWorkspaceService>();
+                var globalOptions = document.Project
+                    .Solution
+                    .Services
+                    .GetService<ILegacyGlobalOptionsWorkspaceService>();
                 if (globalOptions == null)
                 {
                     return null;

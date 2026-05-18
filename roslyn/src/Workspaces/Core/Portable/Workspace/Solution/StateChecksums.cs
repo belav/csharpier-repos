@@ -99,8 +99,7 @@ internal sealed class SolutionStateChecksums(
                 state.FrozenSourceGeneratedDocumentState,
                 "We should not have had a FrozenSourceGeneratedDocumentIdentity checksum if we didn't have a text in the first place."
             );
-            result[FrozenSourceGeneratedDocumentIdentity] = state
-                .FrozenSourceGeneratedDocumentState
+            result[FrozenSourceGeneratedDocumentIdentity] = state.FrozenSourceGeneratedDocumentState
                 .Identity;
         }
 

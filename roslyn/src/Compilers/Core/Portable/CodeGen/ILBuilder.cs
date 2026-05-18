@@ -1095,13 +1095,14 @@ namespace Microsoft.CodeAnalysis.CodeGen
             if (_initialHiddenSequencePointMarker >= 0)
             {
                 Debug.Assert(this.SeqPointsOpt.Count == 0);
-                this.SeqPointsOpt.Add(
-                    new RawSequencePoint(
-                        syntaxTree,
-                        _initialHiddenSequencePointMarker,
-                        RawSequencePoint.HiddenSequencePointSpan
-                    )
-                );
+                this.SeqPointsOpt
+                    .Add(
+                        new RawSequencePoint(
+                            syntaxTree,
+                            _initialHiddenSequencePointMarker,
+                            RawSequencePoint.HiddenSequencePointSpan
+                        )
+                    );
                 _initialHiddenSequencePointMarker = -1;
             }
 

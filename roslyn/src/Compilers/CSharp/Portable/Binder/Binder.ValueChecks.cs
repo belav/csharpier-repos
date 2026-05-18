@@ -1018,13 +1018,15 @@ namespace Microsoft.CodeAnalysis.CSharp
                     }
 
                     getItemOrSliceHelper = getItemOrSliceHelper.AsMember(
-                        getItemOrSliceHelper.ContainingType.Construct(
-                            ImmutableArray.Create(
-                                elementAccess
-                                    .Expression.Type.TryGetInlineArrayElementField()
-                                    .TypeWithAnnotations
+                        getItemOrSliceHelper.ContainingType
+                            .Construct(
+                                ImmutableArray.Create(
+                                    elementAccess.Expression
+                                        .Type
+                                        .TryGetInlineArrayElementField()
+                                        .TypeWithAnnotations
+                                )
                             )
-                        )
                     );
 
                     return CheckMethodReturnValueKind(
@@ -4129,10 +4131,11 @@ namespace Microsoft.CodeAnalysis.CSharp
                 case BoundKind.ThisReference:
                     var thisParam = ((MethodSymbol)_symbol).ThisParameter;
                     Debug.Assert(
-                        thisParam.Type.Equals(
-                            ((BoundThisReference)expr).Type,
-                            TypeCompareKind.ConsiderEverything
-                        )
+                        thisParam.Type
+                            .Equals(
+                                ((BoundThisReference)expr).Type,
+                                TypeCompareKind.ConsiderEverything
+                            )
                     );
                     return GetParameterRefEscape(thisParam);
 
@@ -4478,10 +4481,11 @@ namespace Microsoft.CodeAnalysis.CSharp
                 case BoundKind.ThisReference:
                     var thisParam = ((MethodSymbol)_symbol).ThisParameter;
                     Debug.Assert(
-                        thisParam.Type.Equals(
-                            ((BoundThisReference)expr).Type,
-                            TypeCompareKind.ConsiderEverything
-                        )
+                        thisParam.Type
+                            .Equals(
+                                ((BoundThisReference)expr).Type,
+                                TypeCompareKind.ConsiderEverything
+                            )
                     );
                     return CheckParameterRefEscape(
                         node,
@@ -4717,9 +4721,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 case BoundKind.FunctionPointerInvocation:
                     var functionPointerInvocation = (BoundFunctionPointerInvocation)expr;
 
-                    FunctionPointerMethodSymbol signature = functionPointerInvocation
-                        .FunctionPointer
-                        .Signature;
+                    FunctionPointerMethodSymbol signature =
+                        functionPointerInvocation.FunctionPointer.Signature;
                     if (signature.RefKind == RefKind.None)
                     {
                         break;
@@ -4869,10 +4872,11 @@ namespace Microsoft.CodeAnalysis.CSharp
                 case BoundKind.ThisReference:
                     var thisParam = ((MethodSymbol)_symbol).ThisParameter;
                     Debug.Assert(
-                        thisParam.Type.Equals(
-                            ((BoundThisReference)expr).Type,
-                            TypeCompareKind.ConsiderEverything
-                        )
+                        thisParam.Type
+                            .Equals(
+                                ((BoundThisReference)expr).Type,
+                                TypeCompareKind.ConsiderEverything
+                            )
                     );
                     return GetParameterValEscape(thisParam);
                 case BoundKind.DefaultLiteral:
@@ -5366,16 +5370,16 @@ namespace Microsoft.CodeAnalysis.CSharp
                         return true;
                     }
                     Debug.Assert(
-                        constructMethod.ReturnType.Equals(
-                            expr.Type,
-                            TypeCompareKind.AllIgnoreOptions
-                        )
+                        constructMethod.ReturnType
+                            .Equals(expr.Type, TypeCompareKind.AllIgnoreOptions)
                     );
                     Debug.Assert(
-                        parameter.Type.OriginalDefinition.Equals(
-                            _compilation.GetWellKnownType(WellKnownType.System_ReadOnlySpan_T),
-                            TypeCompareKind.AllIgnoreOptions
-                        )
+                        parameter.Type
+                            .OriginalDefinition
+                            .Equals(
+                                _compilation.GetWellKnownType(WellKnownType.System_ReadOnlySpan_T),
+                                TypeCompareKind.AllIgnoreOptions
+                            )
                     );
                     if (parameter.EffectiveScope == ScopedKind.ScopedValue)
                     {
@@ -5521,10 +5525,11 @@ namespace Microsoft.CodeAnalysis.CSharp
                 case BoundKind.ThisReference:
                     var thisParam = ((MethodSymbol)_symbol).ThisParameter;
                     Debug.Assert(
-                        thisParam.Type.Equals(
-                            ((BoundThisReference)expr).Type,
-                            TypeCompareKind.ConsiderEverything
-                        )
+                        thisParam.Type
+                            .Equals(
+                                ((BoundThisReference)expr).Type,
+                                TypeCompareKind.ConsiderEverything
+                            )
                     );
                     return CheckParameterValEscape(node, thisParam, escapeTo, diagnostics);
 
@@ -6491,10 +6496,11 @@ namespace Microsoft.CodeAnalysis.CSharp
             // - Span<T> Convert(ref inlineArray), or
             // - ReadOnlySpan<T> Convert(in inlineArray)
 
-            RefKind parameterRefKind = resultType.OriginalDefinition.Equals(
-                _compilation.GetWellKnownType(WellKnownType.System_ReadOnlySpan_T),
-                TypeCompareKind.AllIgnoreOptions
-            )
+            RefKind parameterRefKind = resultType.OriginalDefinition
+                .Equals(
+                    _compilation.GetWellKnownType(WellKnownType.System_ReadOnlySpan_T),
+                    TypeCompareKind.AllIgnoreOptions
+                )
                 ? RefKind.In
                 : RefKind.Ref;
 

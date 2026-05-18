@@ -219,9 +219,11 @@ namespace System.CommandLine.DragonFruit
                     {
                         var kebabCasedParameterName = parameterDescription.Key.ToKebabCase();
 
-                        var option = builder.RootCommand.Options.FirstOrDefault(o =>
-                            HasAliasIgnoringPrefix(o, kebabCasedParameterName)
-                        );
+                        var option = builder.RootCommand
+                            .Options
+                            .FirstOrDefault(o =>
+                                HasAliasIgnoringPrefix(o, kebabCasedParameterName)
+                            );
 
                         if (option != null)
                         {
@@ -291,8 +293,8 @@ namespace System.CommandLine.DragonFruit
             };
 
             foreach (
-                var option in descriptor
-                    .ParameterDescriptors.Where(d => !omittedTypes.Contains(d.ValueType))
+                var option in descriptor.ParameterDescriptors
+                    .Where(d => !omittedTypes.Contains(d.ValueType))
                     .Where(d => !_argumentParameterNames.Contains(d.ValueName))
                     .Select(p => p.BuildOption())
             )

@@ -317,8 +317,7 @@ namespace Internal.IL
 
                     case ILOpcode.ret:
                         {
-                            bool hasReturnValue = !methodIL
-                                .OwningMethod
+                            bool hasReturnValue = !methodIL.OwningMethod
                                 .Signature
                                 .ReturnType
                                 .IsVoid;

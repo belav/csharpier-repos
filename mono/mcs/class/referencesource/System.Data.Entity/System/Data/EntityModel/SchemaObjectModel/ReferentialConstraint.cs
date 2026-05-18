@@ -62,9 +62,10 @@ namespace System.Data.EntityModel.SchemaObjectModel
                     AddError(
                         ErrorCode.SameRoleReferredInReferentialConstraint,
                         EdmSchemaErrorSeverity.Error,
-                        System.Data.Entity.Strings.SameRoleReferredInReferentialConstraint(
-                            this.ParentElement.Name
-                        )
+                        System.Data
+                            .Entity
+                            .Strings
+                            .SameRoleReferredInReferentialConstraint(this.ParentElement.Name)
                     );
                 }
 
@@ -105,11 +106,14 @@ namespace System.Data.EntityModel.SchemaObjectModel
                     AddError(
                         ErrorCode.InvalidPropertyInRelationshipConstraint,
                         EdmSchemaErrorSeverity.Error,
-                        System.Data.Entity.Strings.InvalidFromPropertyInRelationshipConstraint(
-                            PrincipalRole.Name,
-                            principalRoleEnd.Type.FQName,
-                            this.ParentElement.FQName
-                        )
+                        System.Data
+                            .Entity
+                            .Strings
+                            .InvalidFromPropertyInRelationshipConstraint(
+                                PrincipalRole.Name,
+                                principalRoleEnd.Type.FQName,
+                                this.ParentElement.FQName
+                            )
                     );
                 }
                 else
@@ -147,10 +151,13 @@ namespace System.Data.EntityModel.SchemaObjectModel
                         AddError(
                             ErrorCode.InvalidMultiplicityInRoleInRelationshipConstraint,
                             EdmSchemaErrorSeverity.Error,
-                            System.Data.Entity.Strings.InvalidMultiplicityFromRoleUpperBoundMustBeOne(
-                                _principalRole.Name,
-                                this.ParentElement.Name
-                            )
+                            System.Data
+                                .Entity
+                                .Strings
+                                .InvalidMultiplicityFromRoleUpperBoundMustBeOne(
+                                    _principalRole.Name,
+                                    this.ParentElement.Name
+                                )
                         );
                     }
                     else if (
@@ -158,8 +165,10 @@ namespace System.Data.EntityModel.SchemaObjectModel
                         && principalRoleEnd.Multiplicity == RelationshipMultiplicity.One
                     )
                     {
-                        string message =
-                            System.Data.Entity.Strings.InvalidMultiplicityFromRoleToPropertyNullableV1(
+                        string message = System.Data
+                            .Entity
+                            .Strings
+                            .InvalidMultiplicityFromRoleToPropertyNullableV1(
                                 _principalRole.Name,
                                 this.ParentElement.Name
                             );
@@ -180,16 +189,20 @@ namespace System.Data.EntityModel.SchemaObjectModel
                         string message;
                         if (v1Behavior)
                         {
-                            message =
-                                System.Data.Entity.Strings.InvalidMultiplicityFromRoleToPropertyNonNullableV1(
+                            message = System.Data
+                                .Entity
+                                .Strings
+                                .InvalidMultiplicityFromRoleToPropertyNonNullableV1(
                                     _principalRole.Name,
                                     this.ParentElement.Name
                                 );
                         }
                         else
                         {
-                            message =
-                                System.Data.Entity.Strings.InvalidMultiplicityFromRoleToPropertyNonNullableV2(
+                            message = System.Data
+                                .Entity
+                                .Strings
+                                .InvalidMultiplicityFromRoleToPropertyNonNullableV2(
                                     _principalRole.Name,
                                     this.ParentElement.Name
                                 );
@@ -212,10 +225,13 @@ namespace System.Data.EntityModel.SchemaObjectModel
                         AddError(
                             ErrorCode.InvalidMultiplicityInRoleInRelationshipConstraint,
                             EdmSchemaErrorSeverity.Error,
-                            System.Data.Entity.Strings.InvalidMultiplicityToRoleLowerBoundMustBeZero(
-                                _dependentRole.Name,
-                                this.ParentElement.Name
-                            )
+                            System.Data
+                                .Entity
+                                .Strings
+                                .InvalidMultiplicityToRoleLowerBoundMustBeZero(
+                                    _dependentRole.Name,
+                                    this.ParentElement.Name
+                                )
                         );
                     }
 
@@ -230,11 +246,14 @@ namespace System.Data.EntityModel.SchemaObjectModel
                         AddError(
                             ErrorCode.InvalidPropertyInRelationshipConstraint,
                             EdmSchemaErrorSeverity.Error,
-                            System.Data.Entity.Strings.InvalidToPropertyInRelationshipConstraint(
-                                DependentRole.Name,
-                                dependentRoleEnd.Type.FQName,
-                                this.ParentElement.FQName
-                            )
+                            System.Data
+                                .Entity
+                                .Strings
+                                .InvalidToPropertyInRelationshipConstraint(
+                                    DependentRole.Name,
+                                    dependentRoleEnd.Type.FQName,
+                                    this.ParentElement.FQName
+                                )
                         );
                     }
 
@@ -247,10 +266,13 @@ namespace System.Data.EntityModel.SchemaObjectModel
                             AddError(
                                 ErrorCode.InvalidMultiplicityInRoleInRelationshipConstraint,
                                 EdmSchemaErrorSeverity.Error,
-                                System.Data.Entity.Strings.InvalidMultiplicityToRoleUpperBoundMustBeOne(
-                                    dependentRoleEnd.Name,
-                                    this.ParentElement.Name
-                                )
+                                System.Data
+                                    .Entity
+                                    .Strings
+                                    .InvalidMultiplicityToRoleUpperBoundMustBeOne(
+                                        dependentRoleEnd.Name,
+                                        this.ParentElement.Name
+                                    )
                             );
                         }
                     }
@@ -261,10 +283,13 @@ namespace System.Data.EntityModel.SchemaObjectModel
                         AddError(
                             ErrorCode.InvalidMultiplicityInRoleInRelationshipConstraint,
                             EdmSchemaErrorSeverity.Error,
-                            System.Data.Entity.Strings.InvalidMultiplicityToRoleUpperBoundMustBeMany(
-                                dependentRoleEnd.Name,
-                                this.ParentElement.Name
-                            )
+                            System.Data
+                                .Entity
+                                .Strings
+                                .InvalidMultiplicityToRoleUpperBoundMustBeMany(
+                                    dependentRoleEnd.Name,
+                                    this.ParentElement.Name
+                                )
                         );
                     }
 
@@ -273,8 +298,7 @@ namespace System.Data.EntityModel.SchemaObjectModel
                         AddError(
                             ErrorCode.MismatchNumberOfPropertiesInRelationshipConstraint,
                             EdmSchemaErrorSeverity.Error,
-                            System
-                                .Data
+                            System.Data
                                 .Entity
                                 .Strings
                                 .MismatchNumberOfPropertiesinRelationshipConstraint
@@ -292,13 +316,16 @@ namespace System.Data.EntityModel.SchemaObjectModel
                                 AddError(
                                     ErrorCode.TypeMismatchRelationshipConstaint,
                                     EdmSchemaErrorSeverity.Error,
-                                    System.Data.Entity.Strings.TypeMismatchRelationshipConstaint(
-                                        _dependentRole.RoleProperties[i].Name,
-                                        _dependentRole.End.Type.Identity,
-                                        _principalRole.RoleProperties[i].Name,
-                                        _principalRole.End.Type.Identity,
-                                        this.ParentElement.Name
-                                    )
+                                    System.Data
+                                        .Entity
+                                        .Strings
+                                        .TypeMismatchRelationshipConstaint(
+                                            _dependentRole.RoleProperties[i].Name,
+                                            _dependentRole.End.Type.Identity,
+                                            _principalRole.RoleProperties[i].Name,
+                                            _principalRole.End.Type.Identity,
+                                            this.ParentElement.Name
+                                        )
                                 );
                             }
                         }

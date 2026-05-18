@@ -41,10 +41,8 @@ namespace System.Web.UI
                     string baseValue = (string)base.Value;
                     if (!String.IsNullOrEmpty(baseValue))
                     {
-                        object value = AtlasWeb.ResourceManager.GetString(
-                            baseValue,
-                            AtlasWeb.Culture
-                        );
+                        object value = AtlasWeb.ResourceManager
+                            .GetString(baseValue, AtlasWeb.Culture);
                         if (_type != null)
                         {
                             try

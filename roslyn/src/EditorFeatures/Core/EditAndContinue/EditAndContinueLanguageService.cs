@@ -89,8 +89,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
         private Solution GetCurrentCompileTimeSolution(Solution? currentDesignTimeSolution = null)
         {
             var workspace = WorkspaceProvider.Value.Workspace;
-            return workspace
-                .Services.GetRequiredService<ICompileTimeSolutionProvider>()
+            return workspace.Services
+                .GetRequiredService<ICompileTimeSolutionProvider>()
                 .GetCompileTimeSolution(currentDesignTimeSolution ?? workspace.CurrentSolution);
         }
 
@@ -98,7 +98,10 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
             _debuggingSession ?? throw new NoSessionException();
 
         private IActiveStatementTrackingService GetActiveStatementTrackingService() =>
-            WorkspaceProvider.Value.Workspace.Services.GetRequiredService<IActiveStatementTrackingService>();
+            WorkspaceProvider.Value
+                .Workspace
+                .Services
+                .GetRequiredService<IActiveStatementTrackingService>();
 
         internal void Disable() => _disabled = true;
 

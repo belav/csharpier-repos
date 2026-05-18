@@ -148,11 +148,12 @@ namespace System.Data.Services.Client
                 }
 
                 if (
-                    this.graph.ExistsEdge(
-                        edgeSource,
-                        target,
-                        sourceVertex.IsCollection ? null : sourceProperty
-                    )
+                    this.graph
+                        .ExistsEdge(
+                            edgeSource,
+                            target,
+                            sourceVertex.IsCollection ? null : sourceProperty
+                        )
                 )
                 {
                     throw new InvalidOperationException(
@@ -160,34 +161,33 @@ namespace System.Data.Services.Client
                     );
                 }
 
-                this.graph.AddEdge(
-                    edgeSource,
-                    target,
-                    sourceVertex.IsCollection ? null : sourceProperty
-                );
+                this.graph
+                    .AddEdge(edgeSource, target, sourceVertex.IsCollection ? null : sourceProperty);
             }
 
             if (!sourceVertex.IsCollection)
             {
-                this.observer.HandleUpdateEntityReference(
-                    source,
-                    sourceProperty,
-                    sourceVertex.EntitySet,
-                    target,
-                    entityVertex == null ? null : entityVertex.EntitySet
-                );
+                this.observer
+                    .HandleUpdateEntityReference(
+                        source,
+                        sourceProperty,
+                        sourceVertex.EntitySet,
+                        target,
+                        entityVertex == null ? null : entityVertex.EntitySet
+                    );
             }
             else
             {
                 Debug.Assert(target != null, "Target must be non-null when adding to collections");
-                this.observer.HandleAddEntity(
-                    source,
-                    sourceProperty,
-                    sourceVertex.Parent != null ? sourceVertex.Parent.EntitySet : null,
-                    edgeSource as ICollection,
-                    target,
-                    entityVertex.EntitySet
-                );
+                this.observer
+                    .HandleAddEntity(
+                        source,
+                        sourceProperty,
+                        sourceVertex.Parent != null ? sourceVertex.Parent.EntitySet : null,
+                        edgeSource as ICollection,
+                        target,
+                        entityVertex.EntitySet
+                    );
             }
 
             if (addedNewEntity)
@@ -238,14 +238,15 @@ namespace System.Data.Services.Client
 
             targetEntitySet = BindingEntityInfo.GetEntitySet(item, targetEntitySet);
 
-            this.observer.HandleDeleteEntity(
-                source,
-                sourceProperty,
-                sourceEntitySet,
-                parent as ICollection,
-                item,
-                targetEntitySet
-            );
+            this.observer
+                .HandleDeleteEntity(
+                    source,
+                    sourceProperty,
+                    sourceEntitySet,
+                    parent as ICollection,
+                    item,
+                    targetEntitySet
+                );
 
             this.graph.RemoveEdge(parent, item, null);
         }
@@ -268,9 +269,10 @@ namespace System.Data.Services.Client
 
         public void RemoveRelation(object source, string relation)
         {
-            Edge edge = this
-                .graph.LookupVertex(source)
-                .OutgoingEdges.SingleOrDefault(e => e.Source.Item == source && e.Label == relation);
+            Edge edge = this.graph
+                .LookupVertex(source)
+                .OutgoingEdges
+                .SingleOrDefault(e => e.Source.Item == source && e.Label == relation);
             if (edge != null)
             {
                 this.graph.RemoveEdge(edge.Source.Item, edge.Target.Item, edge.Label);
@@ -289,10 +291,11 @@ namespace System.Data.Services.Client
         public void RemoveNonTrackedEntities()
         {
             foreach (
-                var entity in this.graph.Select(o =>
-                    BindingEntityInfo.IsEntityType(o.GetType())
-                    && !this.observer.IsContextTrackingEntity(o)
-                )
+                var entity in this.graph
+                    .Select(o =>
+                        BindingEntityInfo.IsEntityType(o.GetType())
+                        && !this.observer.IsContextTrackingEntity(o)
+                    )
             )
             {
                 this.graph.ClearEdgesForVertex(this.graph.LookupVertex(entity));
@@ -338,7 +341,8 @@ namespace System.Data.Services.Client
                 "Vertex corresponding to 'collection' must exist in the graph."
             );
 
-            this.graph.LookupVertex(collection)
+            this.graph
+                .LookupVertex(collection)
                 .GetEntityCollectionInfo(
                     out source,
                     out sourceProperty,

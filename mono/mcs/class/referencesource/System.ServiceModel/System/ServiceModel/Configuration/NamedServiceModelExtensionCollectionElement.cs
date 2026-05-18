@@ -55,16 +55,17 @@ namespace System.ServiceModel.Configuration
                 if (this.properties == null)
                 {
                     this.properties = base.Properties;
-                    this.properties.Add(
-                        new ConfigurationProperty(
-                            ConfigurationStrings.Name,
-                            typeof(System.String),
-                            null,
-                            null,
-                            new StringValidator(0, 2147483647, null),
-                            System.Configuration.ConfigurationPropertyOptions.IsKey
-                        )
-                    );
+                    this.properties
+                        .Add(
+                            new ConfigurationProperty(
+                                ConfigurationStrings.Name,
+                                typeof(System.String),
+                                null,
+                                null,
+                                new StringValidator(0, 2147483647, null),
+                                System.Configuration.ConfigurationPropertyOptions.IsKey
+                            )
+                        );
                 }
                 return this.properties;
             }

@@ -23,16 +23,14 @@ namespace System.Web.Compilation
 
         internal static VirtualPath GetAppThemeVirtualDir(string themeName)
         {
-            return HttpRuntime.AppDomainAppVirtualPathObject.SimpleCombineWithDir(
-                HttpRuntime.ThemesDirectoryName + "/" + themeName
-            );
+            return HttpRuntime.AppDomainAppVirtualPathObject
+                .SimpleCombineWithDir(HttpRuntime.ThemesDirectoryName + "/" + themeName);
         }
 
         internal static VirtualPath GetGlobalThemeVirtualDir(string themeName)
         {
-            return BuildManager.ScriptVirtualDir.SimpleCombineWithDir(
-                HttpRuntime.GlobalThemesDirectoryName + "/" + themeName
-            );
+            return BuildManager.ScriptVirtualDir
+                .SimpleCombineWithDir(HttpRuntime.GlobalThemesDirectoryName + "/" + themeName);
         }
 
         // We need to Assert here since there could be user code on the stack (VSWhidbey 259563)

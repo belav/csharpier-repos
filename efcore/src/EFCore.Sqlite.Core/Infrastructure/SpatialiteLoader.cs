@@ -121,9 +121,11 @@ public static class SpatialiteLoader
             var candidateAssets = new Dictionary<(string, string), int>();
             var rid = RuntimeInformation.RuntimeIdentifier;
             var rids =
-                DependencyContext
-                    .Default!.RuntimeGraph.FirstOrDefault(g => g.Runtime == rid)
-                    ?.Fallbacks.ToList()
+                DependencyContext.Default!
+                    .RuntimeGraph
+                    .FirstOrDefault(g => g.Runtime == rid)
+                    ?.Fallbacks
+                    .ToList()
                 ?? new List<string?>();
             rids.Insert(0, rid);
 

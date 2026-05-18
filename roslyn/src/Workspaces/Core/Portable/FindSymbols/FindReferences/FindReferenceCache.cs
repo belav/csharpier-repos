@@ -113,8 +113,9 @@ internal sealed class FindReferenceCache
         )
         {
             var syntaxFacts = document.GetRequiredLanguageService<ISyntaxFactsService>();
-            var root = await cache
-                ._semanticModel.SyntaxTree.GetRootAsync(cancellationToken)
+            var root = await cache._semanticModel
+                .SyntaxTree
+                .GetRootAsync(cancellationToken)
                 .ConfigureAwait(false);
 
             // If the identifier was escaped in the file then we'll have to do a more involved search that actually
@@ -123,27 +124,29 @@ internal sealed class FindReferenceCache
             // otherwise, we can use the text of the document to quickly find candidates and test those directly.
             if (info.ProbablyContainsEscapedIdentifier(identifier))
             {
-                return cache._identifierCache.GetOrAdd(
-                    identifier,
-                    _ => FindMatchingIdentifierTokensFromTree(syntaxFacts, identifier, root)
-                );
+                return cache._identifierCache
+                    .GetOrAdd(
+                        identifier,
+                        _ => FindMatchingIdentifierTokensFromTree(syntaxFacts, identifier, root)
+                    );
             }
             else
             {
                 var text = await document
                     .GetValueTextAsync(cancellationToken)
                     .ConfigureAwait(false);
-                return cache._identifierCache.GetOrAdd(
-                    identifier,
-                    _ =>
-                        FindMatchingIdentifierTokensFromText(
-                            syntaxFacts,
-                            identifier,
-                            root,
-                            text,
-                            cancellationToken
-                        )
-                );
+                return cache._identifierCache
+                    .GetOrAdd(
+                        identifier,
+                        _ =>
+                            FindMatchingIdentifierTokensFromText(
+                                syntaxFacts,
+                                identifier,
+                                root,
+                                text,
+                                cancellationToken
+                            )
+                    );
             }
         }
 

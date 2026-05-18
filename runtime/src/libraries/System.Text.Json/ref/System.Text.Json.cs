@@ -3773,8 +3773,7 @@ namespace System.Text.Json.Serialization
 
         public JsonConverterAttribute(
             [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(
-                System
-                    .Diagnostics
+                System.Diagnostics
                     .CodeAnalysis
                     .DynamicallyAccessedMemberTypes
                     .PublicParameterlessConstructor
@@ -3783,8 +3782,7 @@ namespace System.Text.Json.Serialization
         ) { }
 
         [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(
-            System
-                .Diagnostics
+            System.Diagnostics
                 .CodeAnalysis
                 .DynamicallyAccessedMemberTypes
                 .PublicParameterlessConstructor

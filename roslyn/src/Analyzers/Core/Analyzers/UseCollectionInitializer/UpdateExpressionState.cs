@@ -275,11 +275,8 @@ internal readonly struct UpdateExpressionState<TExpressionSyntax, TStatementSynt
                 return true;
 
             // For single argument case, have to determine which form we're calling.
-            var convertedType = this
-                .SemanticModel.GetTypeInfo(
-                    SyntaxFacts.GetExpressionOfArgument(arguments[0]),
-                    cancellationToken
-                )
+            var convertedType = this.SemanticModel
+                .GetTypeInfo(SyntaxFacts.GetExpressionOfArgument(arguments[0]), cancellationToken)
                 .ConvertedType;
             useSpread = parameter.Type.Equals(convertedType);
         }
@@ -325,17 +322,17 @@ internal readonly struct UpdateExpressionState<TExpressionSyntax, TStatementSynt
         if (requiredArgumentName != null && arguments.Count != 1)
             return false;
 
-        var memberAccess = this.SyntaxFacts.GetExpressionOfInvocationExpression(
-            invocationExpression
-        );
+        var memberAccess = this.SyntaxFacts
+            .GetExpressionOfInvocationExpression(invocationExpression);
         if (!this.SyntaxFacts.IsSimpleMemberAccessExpression(memberAccess))
             return false;
 
-        this.SyntaxFacts.GetPartsOfMemberAccessExpression(
-            memberAccess,
-            out var localInstance,
-            out var memberName
-        );
+        this.SyntaxFacts
+            .GetPartsOfMemberAccessExpression(
+                memberAccess,
+                out var localInstance,
+                out var memberName
+            );
         this.SyntaxFacts.GetNameAndArityOfSimpleName(memberName, out var name, out var arity);
 
         if (arity != 0 || !Equals(name, methodName))
@@ -375,11 +372,8 @@ internal readonly struct UpdateExpressionState<TExpressionSyntax, TStatementSynt
                 if (!this.SyntaxFacts.IsIdentifierName(argumentExpression))
                     return false;
 
-                this.SyntaxFacts.GetNameAndArityOfSimpleName(
-                    argumentExpression,
-                    out var suppliedName,
-                    out _
-                );
+                this.SyntaxFacts
+                    .GetNameAndArityOfSimpleName(argumentExpression, out var suppliedName, out _);
                 if (requiredArgumentName != suppliedName)
                     return false;
             }
@@ -514,9 +508,8 @@ internal readonly struct UpdateExpressionState<TExpressionSyntax, TStatementSynt
                 if (whenFalse is null)
                 {
                     // add the form `.. x ? [y] : []` to the result
-                    return @this.SyntaxFacts.SupportsCollectionExpressionNaturalType(
-                        ifStatement.SyntaxTree.Options
-                    )
+                    return @this.SyntaxFacts
+                        .SupportsCollectionExpressionNaturalType(ifStatement.SyntaxTree.Options)
                         ? new Match<TStatementSyntax>(ifStatement, UseSpread: true)
                         : null;
                 }
@@ -527,9 +520,8 @@ internal readonly struct UpdateExpressionState<TExpressionSyntax, TStatementSynt
                     && @this.SyntaxFacts.IsExpressionStatement(falseChildStatement)
                     && @this.TryAnalyzeAddInvocation(
                         (TExpressionSyntax)
-                            @this.SyntaxFacts.GetExpressionOfExpressionStatement(
-                                falseChildStatement
-                            ),
+                            @this.SyntaxFacts
+                                .GetExpressionOfExpressionStatement(falseChildStatement),
                         requiredArgumentName: null,
                         forCollectionExpression: true,
                         cancellationToken,

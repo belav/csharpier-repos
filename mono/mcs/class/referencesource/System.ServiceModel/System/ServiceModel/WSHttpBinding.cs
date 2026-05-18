@@ -68,9 +68,8 @@ namespace System.ServiceModel
             {
                 if (value == null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ArgumentNullException("value")
-                    );
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperError(new ArgumentNullException("value"));
                 }
                 this.security = value;
             }
@@ -83,15 +82,16 @@ namespace System.ServiceModel
             WSHttpBindingElement element = section.Bindings[configurationName];
             if (element == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ConfigurationErrorsException(
-                        SR.GetString(
-                            SR.ConfigInvalidBindingConfigurationName,
-                            configurationName,
-                            ConfigurationStrings.WSHttpBindingCollectionElementName
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        new ConfigurationErrorsException(
+                            SR.GetString(
+                                SR.ConfigInvalidBindingConfigurationName,
+                                configurationName,
+                                ConfigurationStrings.WSHttpBindingCollectionElementName
+                            )
                         )
-                    )
-                );
+                    );
             }
             else
             {
@@ -109,14 +109,15 @@ namespace System.ServiceModel
                     == HttpClientCredentialType.InheritedFromHost
             )
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(
-                        SR.GetString(
-                            SR.HttpClientCredentialTypeInvalid,
-                            security.Transport.ClientCredentialType
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(
+                                SR.HttpClientCredentialTypeInvalid,
+                                security.Transport.ClientCredentialType
+                            )
                         )
-                    )
-                );
+                    );
             }
 
             return base.BuildChannelFactory<TChannel>(parameters);
@@ -127,11 +128,12 @@ namespace System.ServiceModel
             if (ReliableSession.Enabled)
             {
                 if (this.security.Mode == SecurityMode.Transport)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(
-                            SR.GetString(SR.WSHttpDoesNotSupportRMWithHttps)
-                        )
-                    );
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(
+                                SR.GetString(SR.WSHttpDoesNotSupportRMWithHttps)
+                            )
+                        );
             }
 
             return base.CreateBindingElements();
@@ -209,8 +211,7 @@ namespace System.ServiceModel
         {
             if (security.Mode == SecurityMode.None || security.Mode == SecurityMode.Message)
             {
-                this.HttpTransport.ExtendedProtectionPolicy = security
-                    .Transport
+                this.HttpTransport.ExtendedProtectionPolicy = security.Transport
                     .ExtendedProtectionPolicy;
                 return this.HttpTransport;
             }

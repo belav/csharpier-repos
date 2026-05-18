@@ -118,21 +118,23 @@ namespace System.Runtime.Serialization.Json
             {
                 XmlDictionaryReader tempDictionaryReader =
                     XmlDictionaryReader.CreateDictionaryReader(reader);
-                buffer = ByteArrayHelperWithString.Instance.ReadArray(
-                    tempDictionaryReader,
-                    JsonGlobals.itemString,
-                    string.Empty,
-                    tempDictionaryReader.Quotas.MaxArrayLength
-                );
+                buffer = ByteArrayHelperWithString.Instance
+                    .ReadArray(
+                        tempDictionaryReader,
+                        JsonGlobals.itemString,
+                        string.Empty,
+                        tempDictionaryReader.Quotas.MaxArrayLength
+                    );
             }
             else
             {
-                buffer = ByteArrayHelperWithString.Instance.ReadArray(
-                    dictionaryReader,
-                    JsonGlobals.itemString,
-                    string.Empty,
-                    dictionaryReader.Quotas.MaxArrayLength
-                );
+                buffer = ByteArrayHelperWithString.Instance
+                    .ReadArray(
+                        dictionaryReader,
+                        JsonGlobals.itemString,
+                        string.Empty,
+                        dictionaryReader.Quotas.MaxArrayLength
+                    );
             }
             return buffer;
         }
@@ -145,14 +147,18 @@ namespace System.Runtime.Serialization.Json
         {
             if (isEndOfEmptyElement)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new XmlException(
-                        System.Runtime.Serialization.SR.GetString(
-                            System.Runtime.Serialization.SR.XmlStartElementExpected,
-                            "EndElement"
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        new XmlException(
+                            System.Runtime
+                                .Serialization
+                                .SR
+                                .GetString(
+                                    System.Runtime.Serialization.SR.XmlStartElementExpected,
+                                    "EndElement"
+                                )
                         )
-                    )
-                );
+                    );
             }
 
             bool isEmptyElement = reader.IsStartElement() && reader.IsEmptyElement;
@@ -226,16 +232,17 @@ namespace System.Runtime.Serialization.Json
                 )
             )
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new FormatException(
-                        SR.GetString(
-                            SR.JsonInvalidDateTimeString,
-                            originalDateTimeValue,
-                            JsonGlobals.DateTimeStartGuardWriter,
-                            JsonGlobals.DateTimeEndGuardWriter
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        new FormatException(
+                            SR.GetString(
+                                SR.JsonInvalidDateTimeString,
+                                originalDateTimeValue,
+                                JsonGlobals.DateTimeStartGuardWriter,
+                                JsonGlobals.DateTimeEndGuardWriter
+                            )
                         )
-                    )
-                );
+                    );
             }
 
             string ticksvalue = dateTimeValue.Substring(6, dateTimeValue.Length - 8);
@@ -260,21 +267,24 @@ namespace System.Runtime.Serialization.Json
             }
             catch (ArgumentException exception)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    XmlExceptionHelper.CreateConversionException(ticksvalue, "Int64", exception)
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        XmlExceptionHelper.CreateConversionException(ticksvalue, "Int64", exception)
+                    );
             }
             catch (FormatException exception)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    XmlExceptionHelper.CreateConversionException(ticksvalue, "Int64", exception)
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        XmlExceptionHelper.CreateConversionException(ticksvalue, "Int64", exception)
+                    );
             }
             catch (OverflowException exception)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    XmlExceptionHelper.CreateConversionException(ticksvalue, "Int64", exception)
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        XmlExceptionHelper.CreateConversionException(ticksvalue, "Int64", exception)
+                    );
             }
 
             // Convert from # millseconds since epoch to # of 100-nanosecond units, which is what DateTime understands
@@ -299,9 +309,14 @@ namespace System.Runtime.Serialization.Json
             }
             catch (ArgumentException exception)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    XmlExceptionHelper.CreateConversionException(ticksvalue, "DateTime", exception)
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        XmlExceptionHelper.CreateConversionException(
+                            ticksvalue,
+                            "DateTime",
+                            exception
+                        )
+                    );
             }
         }
 
@@ -328,12 +343,13 @@ namespace System.Runtime.Serialization.Json
                 return false;
             }
 
-            array = this.DateTimeArrayHelper.ReadArray(
-                dictionaryReader,
-                XmlDictionaryString.GetString(itemName),
-                XmlDictionaryString.GetString(itemNamespace),
-                GetArrayLengthQuota(context)
-            );
+            array = this.DateTimeArrayHelper
+                .ReadArray(
+                    dictionaryReader,
+                    XmlDictionaryString.GetString(itemName),
+                    XmlDictionaryString.GetString(itemNamespace),
+                    GetArrayLengthQuota(context)
+                );
             context.IncrementItemCount(array.Length);
 
             return true;
@@ -382,9 +398,8 @@ namespace System.Runtime.Serialization.Json
                 int count
             )
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new NotImplementedException()
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(new NotImplementedException());
             }
         }
 
@@ -395,18 +410,19 @@ namespace System.Runtime.Serialization.Json
 
             if (value == null || value.Length == 0)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new XmlException(
-                        XmlObjectSerializer.TryAddLineInfo(
-                            this,
-                            SR.GetString(
-                                System.Runtime.Serialization.SR.XmlInvalidConversion,
-                                value,
-                                "UInt64"
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        new XmlException(
+                            XmlObjectSerializer.TryAddLineInfo(
+                                this,
+                                SR.GetString(
+                                    System.Runtime.Serialization.SR.XmlInvalidConversion,
+                                    value,
+                                    "UInt64"
+                                )
                             )
                         )
-                    )
-                );
+                    );
             }
 
             try
@@ -415,21 +431,24 @@ namespace System.Runtime.Serialization.Json
             }
             catch (ArgumentException exception)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    XmlExceptionHelper.CreateConversionException(value, "UInt64", exception)
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        XmlExceptionHelper.CreateConversionException(value, "UInt64", exception)
+                    );
             }
             catch (FormatException exception)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    XmlExceptionHelper.CreateConversionException(value, "UInt64", exception)
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        XmlExceptionHelper.CreateConversionException(value, "UInt64", exception)
+                    );
             }
             catch (OverflowException exception)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    XmlExceptionHelper.CreateConversionException(value, "UInt64", exception)
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        XmlExceptionHelper.CreateConversionException(value, "UInt64", exception)
+                    );
             }
         }
 
@@ -443,32 +462,40 @@ namespace System.Runtime.Serialization.Json
         {
             if (isEndOfEmptyElement)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new XmlException(
-                        System.Runtime.Serialization.SR.GetString(
-                            System.Runtime.Serialization.SR.XmlStartElementExpected,
-                            "EndElement"
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        new XmlException(
+                            System.Runtime
+                                .Serialization
+                                .SR
+                                .GetString(
+                                    System.Runtime.Serialization.SR.XmlStartElementExpected,
+                                    "EndElement"
+                                )
                         )
-                    )
-                );
+                    );
             }
 
             string value = reader.ReadElementContentAsString();
 
             if (value == null || value.Length == 0)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new XmlException(
-                        XmlObjectSerializer.TryAddLineInfo(
-                            this,
-                            System.Runtime.Serialization.SR.GetString(
-                                System.Runtime.Serialization.SR.XmlInvalidConversion,
-                                value,
-                                "UInt64"
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        new XmlException(
+                            XmlObjectSerializer.TryAddLineInfo(
+                                this,
+                                System.Runtime
+                                    .Serialization
+                                    .SR
+                                    .GetString(
+                                        System.Runtime.Serialization.SR.XmlInvalidConversion,
+                                        value,
+                                        "UInt64"
+                                    )
                             )
                         )
-                    )
-                );
+                    );
             }
 
             try
@@ -477,21 +504,24 @@ namespace System.Runtime.Serialization.Json
             }
             catch (ArgumentException exception)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    XmlExceptionHelper.CreateConversionException(value, "UInt64", exception)
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        XmlExceptionHelper.CreateConversionException(value, "UInt64", exception)
+                    );
             }
             catch (FormatException exception)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    XmlExceptionHelper.CreateConversionException(value, "UInt64", exception)
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        XmlExceptionHelper.CreateConversionException(value, "UInt64", exception)
+                    );
             }
             catch (OverflowException exception)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    XmlExceptionHelper.CreateConversionException(value, "UInt64", exception)
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        XmlExceptionHelper.CreateConversionException(value, "UInt64", exception)
+                    );
             }
         }
     }

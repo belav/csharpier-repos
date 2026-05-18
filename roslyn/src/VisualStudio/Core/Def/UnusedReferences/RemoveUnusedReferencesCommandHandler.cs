@@ -77,9 +77,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.UnusedReference
                 .ConfigureAwait(false);
             if (menuCommandService != null)
             {
-                await _threadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(
-                    cancellationToken
-                );
+                await _threadingContext.JoinableTaskFactory
+                    .SwitchToMainThreadAsync(cancellationToken);
                 VisualStudioCommandHandlerHelpers.AddCommand(
                     menuCommandService,
                     ID.RoslynCommands.RemoveUnusedReferences,
@@ -280,26 +279,24 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.UnusedReference
             CancellationToken cancellationToken
         )
         {
-            var unusedReferences = _threadingContext.JoinableTaskFactory.Run(async () =>
-            {
-                var projectReferences = await this
-                    .ReferenceCleanupService.GetProjectReferencesAsync(
-                        projectFilePath,
-                        cancellationToken
-                    )
-                    .ConfigureAwait(true);
-                var unusedReferenceAnalysisService =
-                    solution.Services.GetRequiredService<IUnusedReferenceAnalysisService>();
-                return await unusedReferenceAnalysisService
-                    .GetUnusedReferencesAsync(
-                        solution,
-                        projectFilePath,
-                        projectAssetsFile,
-                        projectReferences,
-                        cancellationToken
-                    )
-                    .ConfigureAwait(true);
-            });
+            var unusedReferences = _threadingContext.JoinableTaskFactory
+                .Run(async () =>
+                {
+                    var projectReferences = await this.ReferenceCleanupService
+                        .GetProjectReferencesAsync(projectFilePath, cancellationToken)
+                        .ConfigureAwait(true);
+                    var unusedReferenceAnalysisService = solution.Services
+                        .GetRequiredService<IUnusedReferenceAnalysisService>();
+                    return await unusedReferenceAnalysisService
+                        .GetUnusedReferencesAsync(
+                            solution,
+                            projectFilePath,
+                            projectAssetsFile,
+                            projectReferences,
+                            cancellationToken
+                        )
+                        .ConfigureAwait(true);
+                });
 
             var referenceUpdates = unusedReferences
                 .Select(reference => new ReferenceUpdate(

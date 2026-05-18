@@ -30,12 +30,13 @@ namespace System.ServiceModel.ComIntegration
             // ServiceBehaviorAttribute needs to go first in the behaviors collection (before config stuff)
             AddBehaviors(service);
 
-            this.configLoader.LoadServiceDescription(
-                host,
-                service,
-                this.info.ServiceElement,
-                host.LoadConfigurationSectionHelper
-            );
+            this.configLoader
+                .LoadServiceDescription(
+                    host,
+                    service,
+                    this.info.ServiceElement,
+                    host.LoadConfigurationSectionHelper
+                );
 
             ValidateConfigInstanceSettings(service);
 
@@ -112,18 +113,26 @@ namespace System.ServiceModel.ComIntegration
                     if (endpoint.Contract.SessionMode == SessionMode.Required)
                     {
                         if (serviceBehavior.InstanceContextMode == InstanceContextMode.PerCall)
-                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                                System.ServiceModel.ComIntegration.Error.InconsistentSessionRequirements()
-                            );
+                            throw DiagnosticUtility.ExceptionUtility
+                                .ThrowHelperError(
+                                    System.ServiceModel
+                                        .ComIntegration
+                                        .Error
+                                        .InconsistentSessionRequirements()
+                                );
 
                         serviceBehavior.InstanceContextMode = InstanceContextMode.PerSession;
                     }
                     else
                     {
                         if (serviceBehavior.InstanceContextMode == InstanceContextMode.PerSession)
-                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                                System.ServiceModel.ComIntegration.Error.InconsistentSessionRequirements()
-                            );
+                            throw DiagnosticUtility.ExceptionUtility
+                                .ThrowHelperError(
+                                    System.ServiceModel
+                                        .ComIntegration
+                                        .Error
+                                        .InconsistentSessionRequirements()
+                                );
 
                         serviceBehavior.InstanceContextMode = InstanceContextMode.PerCall;
                     }

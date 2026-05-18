@@ -9,8 +9,10 @@ namespace System.Security.Cryptography.Pkcs.Tests
     public class SignatureSupport
     {
         public static bool SupportsRsaSha1Signatures { get; } =
-            System.Security.Cryptography.Tests.SignatureSupport.CanProduceSha1Signature(
-                RSA.Create()
-            );
+            System.Security
+                .Cryptography
+                .Tests
+                .SignatureSupport
+                .CanProduceSha1Signature(RSA.Create());
     }
 }

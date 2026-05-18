@@ -1041,9 +1041,8 @@ class Query
             for (int i = 0; i < cnt; i++)
             {
                 TestAnonymousType(
-                    module.GlobalNamespace.GetMember<NamedTypeSymbol>(
-                        "<>f__AnonymousType" + i.ToString()
-                    ),
+                    module.GlobalNamespace
+                        .GetMember<NamedTypeSymbol>("<>f__AnonymousType" + i.ToString()),
                     i,
                     typeDescrs[i]
                 );
@@ -1559,9 +1558,8 @@ class Class3
 ";
             var compilation = CreateCompilationWithMscorlib40(
                 new string[] { source1, source2, source3 },
-                options: TestOptions.ReleaseDll.WithMetadataImportOptions(
-                    MetadataImportOptions.Internal
-                ),
+                options: TestOptions.ReleaseDll
+                    .WithMetadataImportOptions(MetadataImportOptions.Internal),
                 parseOptions: TestOptions.Regular
             );
 
@@ -1571,8 +1569,8 @@ class Class3
                     compilation,
                     symbolValidator: module =>
                     {
-                        var types = module
-                            .GlobalNamespace.GetTypeMembers()
+                        var types = module.GlobalNamespace
+                            .GetTypeMembers()
                             .Where(t => t.Name.StartsWith("<>", StringComparison.Ordinal))
                             .Select(t => t.ToDisplayString())
                             .OrderBy(t => t)
@@ -1900,20 +1898,21 @@ class Program
             );
             var result = comp.Emit(new MemoryStream());
 
-            result.Diagnostics.Verify(
-                // error CS0656: Missing compiler required member 'System.Object.Equals'
-                Diagnostic(ErrorCode.ERR_MissingPredefinedMember)
-                    .WithArguments("System.Object", "Equals"),
-                // error CS0656: Missing compiler required member 'System.Object.ToString'
-                Diagnostic(ErrorCode.ERR_MissingPredefinedMember)
-                    .WithArguments("System.Object", "ToString"),
-                // error CS0656: Missing compiler required member 'System.Object.GetHashCode'
-                Diagnostic(ErrorCode.ERR_MissingPredefinedMember)
-                    .WithArguments("System.Object", "GetHashCode"),
-                // error CS0656: Missing compiler required member 'System.String.Format'
-                Diagnostic(ErrorCode.ERR_MissingPredefinedMember)
-                    .WithArguments("System.String", "Format")
-            );
+            result.Diagnostics
+                .Verify(
+                    // error CS0656: Missing compiler required member 'System.Object.Equals'
+                    Diagnostic(ErrorCode.ERR_MissingPredefinedMember)
+                        .WithArguments("System.Object", "Equals"),
+                    // error CS0656: Missing compiler required member 'System.Object.ToString'
+                    Diagnostic(ErrorCode.ERR_MissingPredefinedMember)
+                        .WithArguments("System.Object", "ToString"),
+                    // error CS0656: Missing compiler required member 'System.Object.GetHashCode'
+                    Diagnostic(ErrorCode.ERR_MissingPredefinedMember)
+                        .WithArguments("System.Object", "GetHashCode"),
+                    // error CS0656: Missing compiler required member 'System.String.Format'
+                    Diagnostic(ErrorCode.ERR_MissingPredefinedMember)
+                        .WithArguments("System.String", "Format")
+                );
         }
 
         [Fact, WorkItem(530365, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/530365")]
@@ -1968,20 +1967,21 @@ class Program
             );
             var result = comp.Emit(new MemoryStream());
 
-            result.Diagnostics.Verify(
-                // error CS0656: Missing compiler required member 'System.Object.Equals'
-                Diagnostic(ErrorCode.ERR_MissingPredefinedMember)
-                    .WithArguments("System.Object", "Equals"),
-                // error CS0656: Missing compiler required member 'System.Object.ToString'
-                Diagnostic(ErrorCode.ERR_MissingPredefinedMember)
-                    .WithArguments("System.Object", "ToString"),
-                // error CS0656: Missing compiler required member 'System.Object.GetHashCode'
-                Diagnostic(ErrorCode.ERR_MissingPredefinedMember)
-                    .WithArguments("System.Object", "GetHashCode"),
-                // error CS0656: Missing compiler required member 'System.String.Format'
-                Diagnostic(ErrorCode.ERR_MissingPredefinedMember)
-                    .WithArguments("System.String", "Format")
-            );
+            result.Diagnostics
+                .Verify(
+                    // error CS0656: Missing compiler required member 'System.Object.Equals'
+                    Diagnostic(ErrorCode.ERR_MissingPredefinedMember)
+                        .WithArguments("System.Object", "Equals"),
+                    // error CS0656: Missing compiler required member 'System.Object.ToString'
+                    Diagnostic(ErrorCode.ERR_MissingPredefinedMember)
+                        .WithArguments("System.Object", "ToString"),
+                    // error CS0656: Missing compiler required member 'System.Object.GetHashCode'
+                    Diagnostic(ErrorCode.ERR_MissingPredefinedMember)
+                        .WithArguments("System.Object", "GetHashCode"),
+                    // error CS0656: Missing compiler required member 'System.String.Format'
+                    Diagnostic(ErrorCode.ERR_MissingPredefinedMember)
+                        .WithArguments("System.String", "Format")
+                );
         }
 
         [Fact]

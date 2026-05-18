@@ -463,9 +463,10 @@ namespace System.Data.Common.CommandTrees
             EntityUtil.CheckArgumentNull(expression, "expression");
 
             throw EntityUtil.NotSupported(
-                System.Data.Entity.Strings.Cqt_General_UnsupportedExpression(
-                    expression.GetType().FullName
-                )
+                System.Data
+                    .Entity
+                    .Strings
+                    .Cqt_General_UnsupportedExpression(expression.GetType().FullName)
             );
         }
 
@@ -1121,13 +1122,13 @@ namespace System.Data.Common.CommandTrees
                     TypeHelpers.GetEdmType<CollectionType>(expression.ResultType).TypeUsage
                 );
 
-                var boundKeys = groupOutput
-                    .Properties.Take(newKeys.Count)
+                var boundKeys = groupOutput.Properties
+                    .Take(newKeys.Count)
                     .Select(p => p.Name)
                     .Zip(newKeys)
                     .ToList();
-                var boundAggs = groupOutput
-                    .Properties.Skip(newKeys.Count)
+                var boundAggs = groupOutput.Properties
+                    .Skip(newKeys.Count)
                     .Select(p => p.Name)
                     .Zip(newAggs)
                     .ToList();

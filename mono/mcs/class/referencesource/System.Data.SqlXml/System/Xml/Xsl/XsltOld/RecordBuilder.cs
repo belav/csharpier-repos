@@ -560,10 +560,8 @@ namespace System.Xml.Xsl.XsltOld
             else
             {
                 bool thisScope = false;
-                string nspace = this.scopeManager.ResolveNamespace(
-                    this.mainNode.Prefix,
-                    out thisScope
-                );
+                string nspace = this.scopeManager
+                    .ResolveNamespace(this.mainNode.Prefix, out thisScope);
                 if (nspace != null)
                 {
                     if (!Ref.Equal(this.mainNode.NamespaceURI, nspace))
@@ -608,10 +606,8 @@ namespace System.Xml.Xsl.XsltOld
                     else
                     {
                         bool thisScope = false;
-                        string nspace = this.scopeManager.ResolveNamespace(
-                            info.Prefix,
-                            out thisScope
-                        );
+                        string nspace = this.scopeManager
+                            .ResolveNamespace(info.Prefix, out thisScope);
                         if (nspace != null)
                         {
                             if (!Ref.Equal(info.NamespaceURI, nspace))

@@ -110,21 +110,22 @@ namespace System.Threading.Tasks.Dataflow
             // In those cases we need to fault the target half to drop its buffered messages and to release its
             // reservations. This should not create an infinite loop, because all our implementations are designed
             // to handle multiple completion requests and to carry over only one.
-            _source.Completion.ContinueWith(
-                static (completed, state) =>
-                {
-                    var thisBlock = ((BroadcastBlock<T>)state!) as IDataflowBlock;
-                    Debug.Assert(
-                        completed.IsFaulted,
-                        "The source must be faulted in order to trigger a target completion."
-                    );
-                    thisBlock.Fault(completed.Exception!);
-                },
-                this,
-                CancellationToken.None,
-                Common.GetContinuationOptions() | TaskContinuationOptions.OnlyOnFaulted,
-                TaskScheduler.Default
-            );
+            _source.Completion
+                .ContinueWith(
+                    static (completed, state) =>
+                    {
+                        var thisBlock = ((BroadcastBlock<T>)state!) as IDataflowBlock;
+                        Debug.Assert(
+                            completed.IsFaulted,
+                            "The source must be faulted in order to trigger a target completion."
+                        );
+                        thisBlock.Fault(completed.Exception!);
+                    },
+                    this,
+                    CancellationToken.None,
+                    Common.GetContinuationOptions() | TaskContinuationOptions.OnlyOnFaulted,
+                    TaskScheduler.Default
+                );
 
             // Handle async cancellation requests by declining on the target
             Common.WireCancellationToComplete(
@@ -371,18 +372,19 @@ namespace System.Threading.Tasks.Dataflow
                 if (exception != null)
                 {
                     // Get out from under currently held locks. Complete re-acquires the locks it needs.
-                    Task.Factory.StartNew(
-                        exc =>
-                            CompleteCore(
-                                exception: (Exception)exc!,
-                                storeExceptionEvenIfAlreadyCompleting: true,
-                                revertProcessingState: true
-                            ),
-                        exception,
-                        CancellationToken.None,
-                        Common.GetCreationOptionsForTask(),
-                        TaskScheduler.Default
-                    );
+                    Task.Factory
+                        .StartNew(
+                            exc =>
+                                CompleteCore(
+                                    exception: (Exception)exc!,
+                                    storeExceptionEvenIfAlreadyCompleting: true,
+                                    revertProcessingState: true
+                                ),
+                            exception,
+                            CancellationToken.None,
+                            Common.GetCreationOptionsForTask(),
+                            TaskScheduler.Default
+                        );
                 }
             }
         }
@@ -473,11 +475,8 @@ namespace System.Threading.Tasks.Dataflow
                 bool consumed = false;
                 try
                 {
-                    T? consumedValue = sourceAndMessage.Key.ConsumeMessage(
-                        sourceAndMessage.Value,
-                        this,
-                        out consumed
-                    );
+                    T? consumedValue = sourceAndMessage.Key
+                        .ConsumeMessage(sourceAndMessage.Value, this, out consumed);
                     if (consumed)
                     {
                         _source.AddMessage(consumedValue!);
@@ -512,37 +511,38 @@ namespace System.Threading.Tasks.Dataflow
                 // which means calling back to the source, which means we need to escape the incoming lock.
                 if (_boundingState != null && _boundingState.PostponedMessages.Count > 0)
                 {
-                    Task.Factory.StartNew(
-                        static state =>
-                        {
-                            var thisBroadcastBlock = (BroadcastBlock<T>)state!;
-
-                            // Release any postponed messages
-                            List<Exception>? exceptions = null;
-                            if (thisBroadcastBlock._boundingState != null)
+                    Task.Factory
+                        .StartNew(
+                            static state =>
                             {
-                                // Note: No locks should be held at this point
-                                Common.ReleaseAllPostponedMessages(
-                                    thisBroadcastBlock,
-                                    thisBroadcastBlock._boundingState.PostponedMessages,
-                                    ref exceptions
-                                );
-                            }
+                                var thisBroadcastBlock = (BroadcastBlock<T>)state!;
 
-                            if (exceptions != null)
-                            {
-                                // It is important to migrate these exceptions to the source part of the owning batch,
-                                // because that is the completion task that is publicly exposed.
-                                thisBroadcastBlock._source.AddExceptions(exceptions);
-                            }
+                                // Release any postponed messages
+                                List<Exception>? exceptions = null;
+                                if (thisBroadcastBlock._boundingState != null)
+                                {
+                                    // Note: No locks should be held at this point
+                                    Common.ReleaseAllPostponedMessages(
+                                        thisBroadcastBlock,
+                                        thisBroadcastBlock._boundingState.PostponedMessages,
+                                        ref exceptions
+                                    );
+                                }
 
-                            thisBroadcastBlock._source.Complete();
-                        },
-                        this,
-                        CancellationToken.None,
-                        Common.GetCreationOptionsForTask(),
-                        TaskScheduler.Default
-                    );
+                                if (exceptions != null)
+                                {
+                                    // It is important to migrate these exceptions to the source part of the owning batch,
+                                    // because that is the completion task that is publicly exposed.
+                                    thisBroadcastBlock._source.AddExceptions(exceptions);
+                                }
+
+                                thisBroadcastBlock._source.Complete();
+                            },
+                            this,
+                            CancellationToken.None,
+                            Common.GetCreationOptionsForTask(),
+                            TaskScheduler.Default
+                        );
                 }
                 // Otherwise, we can just decline the source directly.
                 else
@@ -874,23 +874,24 @@ namespace System.Threading.Tasks.Dataflow
                     // However, now that _decliningPermanently has been set, the timing of
                     // CompleteBlockIfPossible doesn't matter, so we schedule it to run asynchronously
                     // and take the necessary locks in a situation where we're sure it won't cause a problem.
-                    Task.Factory.StartNew(
-                        static state =>
-                        {
-                            var thisSourceCore = (BroadcastingSourceCore<TOutput>)state!;
-                            lock (thisSourceCore.OutgoingLock)
+                    Task.Factory
+                        .StartNew(
+                            static state =>
                             {
-                                lock (thisSourceCore.ValueLock)
+                                var thisSourceCore = (BroadcastingSourceCore<TOutput>)state!;
+                                lock (thisSourceCore.OutgoingLock)
                                 {
-                                    thisSourceCore.CompleteBlockIfPossible();
+                                    lock (thisSourceCore.ValueLock)
+                                    {
+                                        thisSourceCore.CompleteBlockIfPossible();
+                                    }
                                 }
-                            }
-                        },
-                        this,
-                        CancellationToken.None,
-                        Common.GetCreationOptionsForTask(),
-                        TaskScheduler.Default
-                    );
+                            },
+                            this,
+                            CancellationToken.None,
+                            Common.GetCreationOptionsForTask(),
+                            TaskScheduler.Default
+                        );
                 }
             }
 
@@ -1125,23 +1126,24 @@ namespace System.Threading.Tasks.Dataflow
 
                         // Get out from under currently held locks - ValueLock is taken, but OutgoingLock may not be.
                         // Re-take the locks on a separate thread.
-                        Task.Factory.StartNew(
-                            static state =>
-                            {
-                                var thisSourceCore = (BroadcastingSourceCore<TOutput>)state!;
-                                lock (thisSourceCore.OutgoingLock)
+                        Task.Factory
+                            .StartNew(
+                                static state =>
                                 {
-                                    lock (thisSourceCore.ValueLock)
+                                    var thisSourceCore = (BroadcastingSourceCore<TOutput>)state!;
+                                    lock (thisSourceCore.OutgoingLock)
                                     {
-                                        thisSourceCore.CompleteBlockIfPossible();
+                                        lock (thisSourceCore.ValueLock)
+                                        {
+                                            thisSourceCore.CompleteBlockIfPossible();
+                                        }
                                     }
-                                }
-                            },
-                            this,
-                            CancellationToken.None,
-                            Common.GetCreationOptionsForTask(),
-                            TaskScheduler.Default
-                        );
+                                },
+                                this,
+                                CancellationToken.None,
+                                Common.GetCreationOptionsForTask(),
+                                TaskScheduler.Default
+                            );
                     }
                 }
             }
@@ -1233,16 +1235,17 @@ namespace System.Threading.Tasks.Dataflow
                 _completionReserved = true;
 
                 // Run asynchronously to get out of the currently held locks
-                Task.Factory.StartNew(
-                    static thisSourceCore =>
-                        (
-                            (BroadcastingSourceCore<TOutput>)thisSourceCore!
-                        ).CompleteBlockOncePossible(),
-                    this,
-                    CancellationToken.None,
-                    Common.GetCreationOptionsForTask(),
-                    TaskScheduler.Default
-                );
+                Task.Factory
+                    .StartNew(
+                        static thisSourceCore =>
+                            (
+                                (BroadcastingSourceCore<TOutput>)thisSourceCore!
+                            ).CompleteBlockOncePossible(),
+                        this,
+                        CancellationToken.None,
+                        Common.GetCreationOptionsForTask(),
+                        TaskScheduler.Default
+                    );
             }
 
             /// <summary>

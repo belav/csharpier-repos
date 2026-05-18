@@ -1183,8 +1183,8 @@ namespace System.Reflection.Emit
                 if (vaMeth.m_dynamicMethod == null)
                 {
                     methodHandle = vaMeth.m_method.MethodHandle.Value;
-                    typeHandle = vaMeth
-                        .m_method.GetDeclaringTypeInternal()
+                    typeHandle = vaMeth.m_method
+                        .GetDeclaringTypeInternal()
                         .GetTypeHandleInternal()
                         .Value;
                 }

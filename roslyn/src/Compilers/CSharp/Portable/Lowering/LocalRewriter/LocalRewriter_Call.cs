@@ -53,18 +53,19 @@ namespace Microsoft.CodeAnalysis.CSharp
                     if (methodGroup.ReceiverOpt == null)
                     {
                         // Calling a static method defined on an outer class via its simple name.
-                        NamedTypeSymbol firstContainer = node
-                            .ApplicableMethods.First()
+                        NamedTypeSymbol firstContainer = node.ApplicableMethods
+                            .First()
                             .ContainingType;
                         Debug.Assert(
-                            node.ApplicableMethods.All(m =>
-                                !m.RequiresInstanceReceiver
-                                && TypeSymbol.Equals(
-                                    m.ContainingType,
-                                    firstContainer,
-                                    TypeCompareKind.ConsiderEverything2
+                            node.ApplicableMethods
+                                .All(m =>
+                                    !m.RequiresInstanceReceiver
+                                    && TypeSymbol.Equals(
+                                        m.ContainingType,
+                                        firstContainer,
+                                        TypeCompareKind.ConsiderEverything2
+                                    )
                                 )
-                            )
                         );
 
                         loweredReceiver = new BoundTypeExpression(
@@ -152,11 +153,12 @@ namespace Microsoft.CodeAnalysis.CSharp
                 {
                     foreach (var m in methods)
                     {
-                        module.EmbeddedTypesManagerOpt.EmbedMethodIfNeedTo(
-                            m.OriginalDefinition.GetCciAdapter(),
-                            syntaxNode,
-                            _diagnostics.DiagnosticBag
-                        );
+                        module.EmbeddedTypesManagerOpt
+                            .EmbedMethodIfNeedTo(
+                                m.OriginalDefinition.GetCciAdapter(),
+                                syntaxNode,
+                                _diagnostics.DiagnosticBag
+                            );
                     }
                 }
             }
@@ -179,11 +181,12 @@ namespace Microsoft.CodeAnalysis.CSharp
                 {
                     foreach (var p in properties)
                     {
-                        module.EmbeddedTypesManagerOpt.EmbedPropertyIfNeedTo(
-                            p.OriginalDefinition.GetCciAdapter(),
-                            syntaxNode,
-                            _diagnostics.DiagnosticBag
-                        );
+                        module.EmbeddedTypesManagerOpt
+                            .EmbedPropertyIfNeedTo(
+                                p.OriginalDefinition.GetCciAdapter(),
+                                syntaxNode,
+                                _diagnostics.DiagnosticBag
+                            );
                     }
                 }
             }
@@ -222,24 +225,26 @@ namespace Microsoft.CodeAnalysis.CSharp
                 var netArity = typeArgumentsBuilder.Count;
                 if (netArity == 0)
                 {
-                    this._diagnostics.Add(
-                        ErrorCode.ERR_InterceptorCannotBeGeneric,
-                        attributeLocation,
-                        interceptor,
-                        method
-                    );
+                    this._diagnostics
+                        .Add(
+                            ErrorCode.ERR_InterceptorCannotBeGeneric,
+                            attributeLocation,
+                            interceptor,
+                            method
+                        );
                     typeArgumentsBuilder.Free();
                     return;
                 }
                 else if (interceptor.Arity != netArity)
                 {
-                    this._diagnostics.Add(
-                        ErrorCode.ERR_InterceptorArityNotCompatible,
-                        attributeLocation,
-                        interceptor,
-                        netArity,
-                        method
-                    );
+                    this._diagnostics
+                        .Add(
+                            ErrorCode.ERR_InterceptorArityNotCompatible,
+                            attributeLocation,
+                            interceptor,
+                            netArity,
+                            method
+                        );
                     typeArgumentsBuilder.Free();
                     return;
                 }
@@ -263,11 +268,12 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             if (method.MethodKind is not MethodKind.Ordinary)
             {
-                this._diagnostics.Add(
-                    ErrorCode.ERR_InterceptableMethodMustBeOrdinary,
-                    attributeLocation,
-                    nameSyntax.Identifier.ValueText
-                );
+                this._diagnostics
+                    .Add(
+                        ErrorCode.ERR_InterceptableMethodMustBeOrdinary,
+                        attributeLocation,
+                        nameSyntax.Identifier.ValueText
+                    );
                 return;
             }
 
@@ -283,12 +289,13 @@ namespace Microsoft.CodeAnalysis.CSharp
             this._diagnostics.Add(attributeLocation, useSiteInfo);
             if (!isAccessible)
             {
-                this._diagnostics.Add(
-                    ErrorCode.ERR_InterceptorNotAccessible,
-                    attributeLocation,
-                    interceptor,
-                    containingMethod
-                );
+                this._diagnostics
+                    .Add(
+                        ErrorCode.ERR_InterceptorNotAccessible,
+                        attributeLocation,
+                        interceptor,
+                        containingMethod
+                    );
                 return;
             }
 
@@ -308,12 +315,13 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             if (!MemberSignatureComparer.InterceptorsComparer.Equals(method, symbolForCompare))
             {
-                this._diagnostics.Add(
-                    ErrorCode.ERR_InterceptorSignatureMismatch,
-                    attributeLocation,
-                    method,
-                    interceptor
-                );
+                this._diagnostics
+                    .Add(
+                        ErrorCode.ERR_InterceptorSignatureMismatch,
+                        attributeLocation,
+                        method,
+                        interceptor
+                    );
                 return;
             }
 
@@ -353,12 +361,13 @@ namespace Microsoft.CodeAnalysis.CSharp
                 !MemberSignatureComparer.InterceptorsStrictComparer.Equals(method, symbolForCompare)
             )
             {
-                this._diagnostics.Add(
-                    ErrorCode.WRN_InterceptorSignatureMismatch,
-                    attributeLocation,
-                    method,
-                    interceptor
-                );
+                this._diagnostics
+                    .Add(
+                        ErrorCode.WRN_InterceptorSignatureMismatch,
+                        attributeLocation,
+                        method,
+                        interceptor
+                    );
             }
 
             method.TryGetThisParameter(out var methodThisParameter);
@@ -367,25 +376,28 @@ namespace Microsoft.CodeAnalysis.CSharp
             {
                 case (not null, null):
                 case (not null, not null)
-                    when !methodThisParameter.Type.Equals(
-                        interceptorThisParameterForCompare.Type,
-                        TypeCompareKind.ObliviousNullableModifierMatchesAny
-                    )
+                    when !methodThisParameter.Type
+                        .Equals(
+                            interceptorThisParameterForCompare.Type,
+                            TypeCompareKind.ObliviousNullableModifierMatchesAny
+                        )
                         || methodThisParameter.RefKind
                             != interceptorThisParameterForCompare.RefKind:
-                    this._diagnostics.Add(
-                        ErrorCode.ERR_InterceptorMustHaveMatchingThisParameter,
-                        attributeLocation,
-                        methodThisParameter,
-                        method
-                    );
+                    this._diagnostics
+                        .Add(
+                            ErrorCode.ERR_InterceptorMustHaveMatchingThisParameter,
+                            attributeLocation,
+                            methodThisParameter,
+                            method
+                        );
                     return;
                 case (null, not null):
-                    this._diagnostics.Add(
-                        ErrorCode.ERR_InterceptorMustNotHaveThisParameter,
-                        attributeLocation,
-                        method
-                    );
+                    this._diagnostics
+                        .Add(
+                            ErrorCode.ERR_InterceptorMustNotHaveThisParameter,
+                            attributeLocation,
+                            method
+                        );
                     return;
                 default:
                     break;
@@ -394,12 +406,13 @@ namespace Microsoft.CodeAnalysis.CSharp
             if (invokedAsExtensionMethod && interceptor.IsStatic && !interceptor.IsExtensionMethod)
             {
                 // Special case when intercepting an extension method call in reduced form with a non-extension.
-                this._diagnostics.Add(
-                    ErrorCode.ERR_InterceptorMustHaveMatchingThisParameter,
-                    attributeLocation,
-                    method.Parameters[0],
-                    method
-                );
+                this._diagnostics
+                    .Add(
+                        ErrorCode.ERR_InterceptorMustHaveMatchingThisParameter,
+                        attributeLocation,
+                        method.Parameters[0],
+                        method
+                    );
                 return;
             }
 
@@ -444,9 +457,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 var thisRefKind = methodThisParameter.RefKind;
                 if (argumentRefKindsOpt.IsDefault && thisRefKind != RefKind.None)
                 {
-                    argumentRefKindsOpt = method.Parameters.SelectAsArray(static param =>
-                        param.RefKind
-                    );
+                    argumentRefKindsOpt = method.Parameters
+                        .SelectAsArray(static param => param.RefKind);
                 }
 
                 if (!argumentRefKindsOpt.IsDefault)
@@ -1804,13 +1816,14 @@ namespace Microsoft.CodeAnalysis.CSharp
                                     ArrayBuilder<BoundAssignmentOperator> storesToTemps
                                 ) arg
                             ) =>
-                                arg.rewriter.StoreArgumentToTempIfNecessary(
-                                    arg.forceLambdaSpilling,
-                                    arg.storesToTemps,
-                                    element,
-                                    RefKind.None,
-                                    RefKind.None
-                                ),
+                                arg.rewriter
+                                    .StoreArgumentToTempIfNecessary(
+                                        arg.forceLambdaSpilling,
+                                        arg.storesToTemps,
+                                        element,
+                                        RefKind.None,
+                                        RefKind.None
+                                    ),
                             ref arg
                         );
 

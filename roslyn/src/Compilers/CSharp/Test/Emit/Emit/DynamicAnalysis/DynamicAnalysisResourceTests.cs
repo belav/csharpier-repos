@@ -82,9 +82,10 @@ public class C
                 references: new[] { RefSafetyRulesAttributeLib }
             );
             var peImage = c.EmitToArray(
-                EmitOptions.Default.WithInstrumentationKinds(
-                    ImmutableArray.Create(InstrumentationKind.TestCoverage)
-                )
+                EmitOptions.Default
+                    .WithInstrumentationKinds(
+                        ImmutableArray.Create(InstrumentationKind.TestCoverage)
+                    )
             );
 
             var peReader = new PEReader(peImage);
@@ -275,9 +276,10 @@ public class C
                 references: new[] { RefSafetyRulesAttributeLib }
             );
             var peImage = c.EmitToArray(
-                EmitOptions.Default.WithInstrumentationKinds(
-                    ImmutableArray.Create(InstrumentationKind.TestCoverage)
-                )
+                EmitOptions.Default
+                    .WithInstrumentationKinds(
+                        ImmutableArray.Create(InstrumentationKind.TestCoverage)
+                    )
             );
 
             var peReader = new PEReader(peImage);
@@ -416,9 +418,10 @@ public class C
                 references: new[] { RefSafetyRulesAttributeLib }
             );
             var peImage = c.EmitToArray(
-                EmitOptions.Default.WithInstrumentationKinds(
-                    ImmutableArray.Create(InstrumentationKind.TestCoverage)
-                )
+                EmitOptions.Default
+                    .WithInstrumentationKinds(
+                        ImmutableArray.Create(InstrumentationKind.TestCoverage)
+                    )
             );
 
             var peReader = new PEReader(peImage);
@@ -568,9 +571,10 @@ class Student : Person { public double GPA; }
                 references: new[] { RefSafetyRulesAttributeLib }
             );
             var peImage = c.EmitToArray(
-                EmitOptions.Default.WithInstrumentationKinds(
-                    ImmutableArray.Create(InstrumentationKind.TestCoverage)
-                )
+                EmitOptions.Default
+                    .WithInstrumentationKinds(
+                        ImmutableArray.Create(InstrumentationKind.TestCoverage)
+                    )
             );
 
             var peReader = new PEReader(peImage);
@@ -644,9 +648,10 @@ public class C
                 references: new[] { RefSafetyRulesAttributeLib }
             );
             var peImage = c.EmitToArray(
-                EmitOptions.Default.WithInstrumentationKinds(
-                    ImmutableArray.Create(InstrumentationKind.TestCoverage)
-                )
+                EmitOptions.Default
+                    .WithInstrumentationKinds(
+                        ImmutableArray.Create(InstrumentationKind.TestCoverage)
+                    )
             );
 
             var peReader = new PEReader(peImage);
@@ -698,9 +703,10 @@ public class C
                 references: new[] { RefSafetyRulesAttributeLib }
             );
             var peImage = c.EmitToArray(
-                EmitOptions.Default.WithInstrumentationKinds(
-                    ImmutableArray.Create(InstrumentationKind.TestCoverage)
-                )
+                EmitOptions.Default
+                    .WithInstrumentationKinds(
+                        ImmutableArray.Create(InstrumentationKind.TestCoverage)
+                    )
             );
 
             var peReader = new PEReader(peImage);
@@ -744,9 +750,10 @@ public class C
                 references: new[] { RefSafetyRulesAttributeLib }
             );
             var peImage = c.EmitToArray(
-                EmitOptions.Default.WithInstrumentationKinds(
-                    ImmutableArray.Create(InstrumentationKind.TestCoverage)
-                )
+                EmitOptions.Default
+                    .WithInstrumentationKinds(
+                        ImmutableArray.Create(InstrumentationKind.TestCoverage)
+                    )
             );
 
             var peReader = new PEReader(peImage);
@@ -798,9 +805,10 @@ public class C
                 references: new[] { RefSafetyRulesAttributeLib }
             );
             var peImage = c.EmitToArray(
-                EmitOptions.Default.WithInstrumentationKinds(
-                    ImmutableArray.Create(InstrumentationKind.TestCoverage)
-                )
+                EmitOptions.Default
+                    .WithInstrumentationKinds(
+                        ImmutableArray.Create(InstrumentationKind.TestCoverage)
+                    )
             );
 
             var peReader = new PEReader(peImage);
@@ -880,9 +888,10 @@ public class C
                 references: new[] { RefSafetyRulesAttributeLib }
             );
             var peImage = c.EmitToArray(
-                EmitOptions.Default.WithInstrumentationKinds(
-                    ImmutableArray.Create(InstrumentationKind.TestCoverage)
-                )
+                EmitOptions.Default
+                    .WithInstrumentationKinds(
+                        ImmutableArray.Create(InstrumentationKind.TestCoverage)
+                    )
             );
 
             var peReader = new PEReader(peImage);
@@ -1000,9 +1009,10 @@ public class C
                 references: new[] { RefSafetyRulesAttributeLib }
             );
             var peImage = c.EmitToArray(
-                EmitOptions.Default.WithInstrumentationKinds(
-                    ImmutableArray.Create(InstrumentationKind.TestCoverage)
-                )
+                EmitOptions.Default
+                    .WithInstrumentationKinds(
+                        ImmutableArray.Create(InstrumentationKind.TestCoverage)
+                    )
             );
 
             var peReader = new PEReader(peImage);
@@ -1112,9 +1122,10 @@ partial struct E
                 references: new[] { RefSafetyRulesAttributeLib }
             );
             var peImage = c.EmitToArray(
-                EmitOptions.Default.WithInstrumentationKinds(
-                    ImmutableArray.Create(InstrumentationKind.TestCoverage)
-                )
+                EmitOptions.Default
+                    .WithInstrumentationKinds(
+                        ImmutableArray.Create(InstrumentationKind.TestCoverage)
+                    )
             );
 
             var peReader = new PEReader(peImage);
@@ -1245,9 +1256,10 @@ public class D
                 references: new[] { RefSafetyRulesAttributeLib }
             );
             var peImage = c.EmitToArray(
-                EmitOptions.Default.WithInstrumentationKinds(
-                    ImmutableArray.Create(InstrumentationKind.TestCoverage)
-                )
+                EmitOptions.Default
+                    .WithInstrumentationKinds(
+                        ImmutableArray.Create(InstrumentationKind.TestCoverage)
+                    )
             );
 
             var peReader = new PEReader(peImage);
@@ -1324,9 +1336,8 @@ class C
 
     static object obj = null!;
 }" + InstrumentationHelperSource;
-            var emitOptions = EmitOptions.Default.WithInstrumentationKinds(
-                ImmutableArray.Create(InstrumentationKind.TestCoverage)
-            );
+            var emitOptions = EmitOptions.Default
+                .WithInstrumentationKinds(ImmutableArray.Create(InstrumentationKind.TestCoverage));
             CompileAndVerify(source, emitOptions: emitOptions)
                 .VerifyIL(
                     "C..cctor()",
@@ -1369,9 +1380,8 @@ class C
 {
     static object obj = null!;
 }" + InstrumentationHelperSource;
-            var emitOptions = EmitOptions.Default.WithInstrumentationKinds(
-                ImmutableArray.Create(InstrumentationKind.TestCoverage)
-            );
+            var emitOptions = EmitOptions.Default
+                .WithInstrumentationKinds(ImmutableArray.Create(InstrumentationKind.TestCoverage));
             CompileAndVerify(
                 source,
                 options: TestOptions.DebugDll.WithMetadataImportOptions(MetadataImportOptions.All),

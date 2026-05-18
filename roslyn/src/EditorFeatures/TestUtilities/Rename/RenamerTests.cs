@@ -79,12 +79,13 @@ namespace Microsoft.CodeAnalysis.UnitTests.Renamer
             foreach (var (documentId, endDocument) in documentIdToDocumentInfoMap)
             {
                 var document = solution.GetDocument(documentId);
-                var documentRenameResult = await Rename.Renamer.RenameDocumentAsync(
-                    document,
-                    options,
-                    endDocument.DocumentName,
-                    endDocument.DocumentFolders
-                );
+                var documentRenameResult = await Rename.Renamer
+                    .RenameDocumentAsync(
+                        document,
+                        options,
+                        endDocument.DocumentName,
+                        endDocument.DocumentFolders
+                    );
 
                 foreach (var action in documentRenameResult.ApplicableActions)
                 {
@@ -246,12 +247,13 @@ namespace Microsoft.CodeAnalysis.UnitTests.Renamer
             foreach (var (documentId, endDocument) in documentIdToDocumentInfoMap)
             {
                 var document = solution.GetDocument(documentId);
-                var documentRenameResult = await Rename.Renamer.RenameDocumentAsync(
-                    document,
-                    options,
-                    endDocument.DocumentName,
-                    endDocument.DocumentFolders
-                );
+                var documentRenameResult = await Rename.Renamer
+                    .RenameDocumentAsync(
+                        document,
+                        options,
+                        endDocument.DocumentName,
+                        endDocument.DocumentFolders
+                    );
                 Assert.Empty(documentRenameResult.ApplicableActions);
             }
         }
@@ -301,12 +303,13 @@ namespace Microsoft.CodeAnalysis.UnitTests.Renamer
 
             var options = new DocumentRenameOptions();
             var document = solution.GetDocument(documentId);
-            var documentRenameResult = await Rename.Renamer.RenameDocumentAsync(
-                document,
-                options,
-                newDocumentName,
-                GetDocumentFolders(s_defaultDocumentPath)
-            );
+            var documentRenameResult = await Rename.Renamer
+                .RenameDocumentAsync(
+                    document,
+                    options,
+                    newDocumentName,
+                    GetDocumentFolders(s_defaultDocumentPath)
+                );
             Assert.Empty(documentRenameResult.ApplicableActions);
         }
     }

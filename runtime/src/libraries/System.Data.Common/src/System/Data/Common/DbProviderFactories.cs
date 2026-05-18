@@ -119,22 +119,23 @@ namespace System.Data.Common
             {
                 Locale = CultureInfo.InvariantCulture,
             };
-            toReturn.Columns.AddRange(
-                new[]
-                {
-                    nameColumn,
-                    descriptionColumn,
-                    invariantNameColumn,
-                    assemblyQualifiedNameColumn,
-                }
-            );
+            toReturn.Columns
+                .AddRange(
+                    new[]
+                    {
+                        nameColumn,
+                        descriptionColumn,
+                        invariantNameColumn,
+                        assemblyQualifiedNameColumn,
+                    }
+                );
             toReturn.PrimaryKey = new[] { invariantNameColumn };
             foreach (var kvp in _registeredFactories)
             {
                 DataRow newRow = toReturn.NewRow();
                 newRow[InvariantNameColumnName] = kvp.Key;
-                newRow[AssemblyQualifiedNameColumnName] =
-                    kvp.Value.FactoryTypeAssemblyQualifiedName;
+                newRow[AssemblyQualifiedNameColumnName] = kvp.Value
+                    .FactoryTypeAssemblyQualifiedName;
                 newRow[NameColumnName] = string.Empty;
                 newRow[DescriptionColumnName] = string.Empty;
                 toReturn.AddRow(newRow);

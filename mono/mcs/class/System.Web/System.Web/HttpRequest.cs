@@ -343,10 +343,8 @@ namespace System.Web
             get
             {
                 if (browser_capabilities == null)
-                    browser_capabilities =
-                        HttpCapabilitiesBase.BrowserCapabilitiesProvider.GetBrowserCapabilities(
-                            this
-                        );
+                    browser_capabilities = HttpCapabilitiesBase.BrowserCapabilitiesProvider
+                        .GetBrowserCapabilities(this);
 
                 return browser_capabilities;
             }

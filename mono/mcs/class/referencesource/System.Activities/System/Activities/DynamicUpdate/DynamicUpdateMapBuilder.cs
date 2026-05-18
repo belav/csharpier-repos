@@ -126,8 +126,8 @@ namespace System.Activities.DynamicUpdate
             bool includeExpressions
         )
         {
-            IEnumerable<Activity> result = activity
-                .Children.Concat(activity.ImportedChildren)
+            IEnumerable<Activity> result = activity.Children
+                .Concat(activity.ImportedChildren)
                 .Concat(activity.Delegates.Select(d => d.Handler))
                 .Concat(activity.ImportedDelegates.Select(d => d.Handler));
             if (includeExpressions)
@@ -135,9 +135,8 @@ namespace System.Activities.DynamicUpdate
                 result = result
                     .Concat(activity.RuntimeVariables.Select(v => v.Default))
                     .Concat(
-                        activity.RuntimeArguments.Select(a =>
-                            a.IsBound ? a.BoundArgument.Expression : null
-                        )
+                        activity.RuntimeArguments
+                            .Select(a => a.IsBound ? a.BoundArgument.Expression : null)
                     );
             }
 
@@ -155,9 +154,10 @@ namespace System.Activities.DynamicUpdate
         {
             if (value == null)
             {
-                throw FxTrace.Exception.AsError(
-                    new InvalidOperationException(SR.UpdateMapBuilderRequiredProperty(name))
-                );
+                throw FxTrace.Exception
+                    .AsError(
+                        new InvalidOperationException(SR.UpdateMapBuilderRequiredProperty(name))
+                    );
             }
         }
 
@@ -369,11 +369,12 @@ namespace System.Activities.DynamicUpdate
                         this.builder.ForImplementation,
                         "An activity must be a member of an IdSpace"
                     );
-                    throw FxTrace.Exception.AsError(
-                        new InvalidOperationException(
-                            SR.InvalidOriginalWorkflowDefinitionForImplementationMapCreation
-                        )
-                    );
+                    throw FxTrace.Exception
+                        .AsError(
+                            new InvalidOperationException(
+                                SR.InvalidOriginalWorkflowDefinitionForImplementationMapCreation
+                            )
+                        );
                 }
                 this.Matcher.OldIdSpace = originalIdSpace;
                 this.foundOriginalElements = new BitArray(originalIdSpace.MemberCount);
@@ -394,11 +395,12 @@ namespace System.Activities.DynamicUpdate
                         this.builder.ForImplementation,
                         "An activity must be a member of an IdSpace"
                     );
-                    throw FxTrace.Exception.AsError(
-                        new InvalidOperationException(
-                            SR.InvalidUpdatedWorkflowDefinitionForImplementationMapCreation
-                        )
-                    );
+                    throw FxTrace.Exception
+                        .AsError(
+                            new InvalidOperationException(
+                                SR.InvalidUpdatedWorkflowDefinitionForImplementationMapCreation
+                            )
+                        );
                 }
                 this.Matcher.NewIdSpace = idSpace;
 
@@ -519,13 +521,14 @@ namespace System.Activities.DynamicUpdate
                     }
                     entry.ImplementationUpdateMap = null;
 
-                    this.blockList.Add(
-                        new ActivityBlockingUpdate(
-                            activity,
-                            originalActivityId,
-                            message ?? UpdateBlockedReasonMessages.Get(reason)
-                        )
-                    );
+                    this.blockList
+                        .Add(
+                            new ActivityBlockingUpdate(
+                                activity,
+                                originalActivityId,
+                                message ?? UpdateBlockedReasonMessages.Get(reason)
+                            )
+                        );
                 }
             }
 
@@ -801,11 +804,12 @@ namespace System.Activities.DynamicUpdate
                     for (int i = 0; i < newVariables.Count; i++)
                     {
                         Variable newVariable = newVariables[i];
-                        int originalIndex = this.Matcher.GetMatchIndex(
-                            newVariable,
-                            originalElement,
-                            forImplementationVariables
-                        );
+                        int originalIndex = this.Matcher
+                            .GetMatchIndex(
+                                newVariable,
+                                originalElement,
+                                forImplementationVariables
+                            );
 
                         if (originalIndex != i)
                         {
@@ -819,9 +823,9 @@ namespace System.Activities.DynamicUpdate
 
                             if (forImplementationVariables)
                             {
-                                mapEntry.EnvironmentUpdateMap.PrivateVariableEntries.Add(
-                                    environmentEntry
-                                );
+                                mapEntry.EnvironmentUpdateMap
+                                    .PrivateVariableEntries
+                                    .Add(environmentEntry);
                             }
                             else
                             {
@@ -928,13 +932,15 @@ namespace System.Activities.DynamicUpdate
                         if (oldIndex != i)
                         {
                             EnsureEnvironmentUpdateMap(mapEntry);
-                            mapEntry.EnvironmentUpdateMap.ArgumentEntries.Add(
-                                new EnvironmentUpdateMapEntry
-                                {
-                                    OldOffset = oldIndex,
-                                    NewOffset = i,
-                                }
-                            );
+                            mapEntry.EnvironmentUpdateMap
+                                .ArgumentEntries
+                                .Add(
+                                    new EnvironmentUpdateMapEntry
+                                    {
+                                        OldOffset = oldIndex,
+                                        NewOffset = i,
+                                    }
+                                );
 
                             if (
                                 oldIndex == EnvironmentUpdateMapEntry.NonExistent
@@ -1034,11 +1040,12 @@ namespace System.Activities.DynamicUpdate
             {
                 if (activity.RootActivity != this.builder.OriginalWorkflowDefinition)
                 {
-                    throw FxTrace.Exception.AsError(
-                        new InvalidWorkflowException(
-                            SR.OriginalActivityReusedInModifiedDefinition(activity)
-                        )
-                    );
+                    throw FxTrace.Exception
+                        .AsError(
+                            new InvalidWorkflowException(
+                                SR.OriginalActivityReusedInModifiedDefinition(activity)
+                            )
+                        );
                 }
 
                 IList<Variable> variables = activity.RuntimeVariables;
@@ -1046,11 +1053,12 @@ namespace System.Activities.DynamicUpdate
                 {
                     if (variables[i].Owner.RootActivity != this.builder.OriginalWorkflowDefinition)
                     {
-                        throw FxTrace.Exception.AsError(
-                            new InvalidWorkflowException(
-                                SR.OriginalVariableReusedInModifiedDefinition(variables[i].Name)
-                            )
-                        );
+                        throw FxTrace.Exception
+                            .AsError(
+                                new InvalidWorkflowException(
+                                    SR.OriginalVariableReusedInModifiedDefinition(variables[i].Name)
+                                )
+                            );
                     }
                 }
             }
@@ -1197,36 +1205,34 @@ namespace System.Activities.DynamicUpdate
 
                 if (newChild.Parent != source)
                 {
-                    throw FxTrace.Exception.Argument(
-                        "newChild",
-                        SR.AddMatchActivityNewParentMismatch(source, newChild, newChild.Parent)
-                    );
+                    throw FxTrace.Exception
+                        .Argument(
+                            "newChild",
+                            SR.AddMatchActivityNewParentMismatch(source, newChild, newChild.Parent)
+                        );
                 }
                 if (newChild.MemberOf != newChild.Parent.MemberOf)
                 {
-                    throw FxTrace.Exception.Argument(
-                        "newChild",
-                        SR.AddMatchActivityPrivateChild(newChild)
-                    );
+                    throw FxTrace.Exception
+                        .Argument("newChild", SR.AddMatchActivityPrivateChild(newChild));
                 }
                 if (oldChild.Parent != null && oldChild.MemberOf != oldChild.Parent.MemberOf)
                 {
-                    throw FxTrace.Exception.Argument(
-                        "oldChild",
-                        SR.AddMatchActivityPrivateChild(oldChild)
-                    );
+                    throw FxTrace.Exception
+                        .Argument("oldChild", SR.AddMatchActivityPrivateChild(oldChild));
                 }
                 if (!ParentsMatch(newChild, oldChild))
                 {
-                    throw FxTrace.Exception.Argument(
-                        "oldChild",
-                        SR.AddMatchActivityNewAndOldParentMismatch(
-                            newChild,
-                            oldChild,
-                            newChild.Parent,
-                            oldChild.Parent
-                        )
-                    );
+                    throw FxTrace.Exception
+                        .Argument(
+                            "oldChild",
+                            SR.AddMatchActivityNewAndOldParentMismatch(
+                                newChild,
+                                oldChild,
+                                newChild.Parent,
+                                oldChild.Parent
+                            )
+                        );
                 }
 
                 // Only one updated activity can match a given original activity
@@ -1246,56 +1252,55 @@ namespace System.Activities.DynamicUpdate
             {
                 if (!ActivityComparer.SignatureEquals(newVariable, oldVariable))
                 {
-                    throw FxTrace.Exception.Argument(
-                        "newVariable",
-                        SR.AddMatchVariableSignatureMismatch(
-                            source,
-                            newVariable.Name,
-                            newVariable.Type,
-                            newVariable.Modifiers,
-                            oldVariable.Name,
-                            oldVariable.Type,
-                            oldVariable.Modifiers
-                        )
-                    );
+                    throw FxTrace.Exception
+                        .Argument(
+                            "newVariable",
+                            SR.AddMatchVariableSignatureMismatch(
+                                source,
+                                newVariable.Name,
+                                newVariable.Type,
+                                newVariable.Modifiers,
+                                oldVariable.Name,
+                                oldVariable.Type,
+                                oldVariable.Modifiers
+                            )
+                        );
                 }
 
                 if (newVariable.Owner != source)
                 {
-                    throw FxTrace.Exception.Argument(
-                        "newVariable",
-                        SR.AddMatchVariableNewParentMismatch(
-                            source,
-                            newVariable.Name,
-                            newVariable.Owner
-                        )
-                    );
+                    throw FxTrace.Exception
+                        .Argument(
+                            "newVariable",
+                            SR.AddMatchVariableNewParentMismatch(
+                                source,
+                                newVariable.Name,
+                                newVariable.Owner
+                            )
+                        );
                 }
                 if (GetMatch(newVariable.Owner) != oldVariable.Owner)
                 {
-                    throw FxTrace.Exception.Argument(
-                        "oldVariable",
-                        SR.AddMatchVariableNewAndOldParentMismatch(
-                            newVariable.Name,
-                            oldVariable.Name,
-                            newVariable.Owner,
-                            oldVariable.Owner
-                        )
-                    );
+                    throw FxTrace.Exception
+                        .Argument(
+                            "oldVariable",
+                            SR.AddMatchVariableNewAndOldParentMismatch(
+                                newVariable.Name,
+                                oldVariable.Name,
+                                newVariable.Owner,
+                                oldVariable.Owner
+                            )
+                        );
                 }
                 if (!newVariable.IsPublic)
                 {
-                    throw FxTrace.Exception.Argument(
-                        "newVariable",
-                        SR.AddMatchVariablePrivateChild(newVariable.Name)
-                    );
+                    throw FxTrace.Exception
+                        .Argument("newVariable", SR.AddMatchVariablePrivateChild(newVariable.Name));
                 }
                 if (!oldVariable.IsPublic)
                 {
-                    throw FxTrace.Exception.Argument(
-                        "oldVariable",
-                        SR.AddMatchVariablePrivateChild(oldVariable.Name)
-                    );
+                    throw FxTrace.Exception
+                        .Argument("oldVariable", SR.AddMatchVariablePrivateChild(oldVariable.Name));
                 }
 
                 // Only one updated variable can match a given original variable
@@ -1308,9 +1313,9 @@ namespace System.Activities.DynamicUpdate
                     }
                 }
 
-                this.newToOldMatches[newVariable] = oldVariable.Owner.RuntimeVariables.IndexOf(
-                    oldVariable
-                );
+                this.newToOldMatches[newVariable] = oldVariable.Owner
+                    .RuntimeVariables
+                    .IndexOf(oldVariable);
             }
 
             public Activity GetMatch(Activity newChild)
@@ -1672,14 +1677,15 @@ namespace System.Activities.DynamicUpdate
                 RuntimeArgument newIdleArgument;
                 Activity idleActivity;
                 if (
-                    !DynamicUpdateMapBuilder.Finalizer.CreateArgumentEntries(
-                        mapEntry,
-                        newArguments,
-                        oldArguments,
-                        this.finalizer.ExpressionRootsThatCanInduceIdle,
-                        out newIdleArgument,
-                        out idleActivity
-                    )
+                    !DynamicUpdateMapBuilder.Finalizer
+                        .CreateArgumentEntries(
+                            mapEntry,
+                            newArguments,
+                            oldArguments,
+                            this.finalizer.ExpressionRootsThatCanInduceIdle,
+                            out newIdleArgument,
+                            out idleActivity
+                        )
                 )
                 {
                     // If an argument expression goes idle, the activity it is declared on can potentially
@@ -1703,13 +1709,8 @@ namespace System.Activities.DynamicUpdate
             {
                 Activity originalActivity = GetMatch(updatedActivity);
                 Fx.Assert(originalActivity != null, "Cannot block update inside an added activity");
-                this.finalizer.BlockUpdate(
-                    updatedActivity,
-                    originalActivity.Id,
-                    reason,
-                    entry,
-                    message
-                );
+                this.finalizer
+                    .BlockUpdate(updatedActivity, originalActivity.Id, reason, entry, message);
             }
 
             // This method allows activities in the implementation IdSpace to participate in map creation.
@@ -1729,10 +1730,8 @@ namespace System.Activities.DynamicUpdate
                     DynamicUpdateMapEntry providedEntry = null;
                     if (this.userProvidedMap != null && !this.userProvidedMap.IsNoChanges)
                     {
-                        bool isNewlyAdded = !this.userProvidedMap.TryGetUpdateEntryByNewId(
-                            i,
-                            out providedEntry
-                        );
+                        bool isNewlyAdded = !this.userProvidedMap
+                            .TryGetUpdateEntryByNewId(i, out providedEntry);
                         if (
                             isNewlyAdded
                             || providedEntry.IsRuntimeUpdateBlocked
@@ -1847,12 +1846,8 @@ namespace System.Activities.DynamicUpdate
 
                 // Allow the activity to participate
                 this.invalidMatchInCurrentActivity = false;
-                this.finalizer.OnCreateDynamicUpdateMap(
-                    updatedChild,
-                    originalChild,
-                    generatedEntry,
-                    this
-                );
+                this.finalizer
+                    .OnCreateDynamicUpdateMap(updatedChild, originalChild, generatedEntry, this);
                 if (this.invalidMatchInCurrentActivity && !generatedEntry.IsRuntimeUpdateBlocked)
                 {
                     BlockUpdate(
@@ -1863,8 +1858,8 @@ namespace System.Activities.DynamicUpdate
                 }
 
                 // Fill in the rest of the map entry;
-                generatedEntry.SavedOriginalValueFromParent =
-                    this.finalizer.GetSavedOriginalValueFromParent(updatedChild);
+                generatedEntry.SavedOriginalValueFromParent = this.finalizer
+                    .GetSavedOriginalValueFromParent(updatedChild);
                 DynamicUpdateMap childImplementationMap =
                     providedEntry != null ? providedEntry.ImplementationUpdateMap : null;
                 if (!generatedEntry.IsRuntimeUpdateBlocked)
@@ -1965,10 +1960,8 @@ namespace System.Activities.DynamicUpdate
                 // Get or create the matching entry
                 DynamicUpdateMapEntry generatedEntry;
                 if (
-                    !this.generatedMap.TryGetUpdateEntry(
-                        providedEntry.OldActivityId,
-                        out generatedEntry
-                    )
+                    !this.generatedMap
+                        .TryGetUpdateEntry(providedEntry.OldActivityId, out generatedEntry)
                 )
                 {
                     generatedEntry = new DynamicUpdateMapEntry(
@@ -1999,10 +1992,8 @@ namespace System.Activities.DynamicUpdate
                 if (providedEntry.Parent != null)
                 {
                     DynamicUpdateMapEntry parentEntry;
-                    this.generatedMap.TryGetUpdateEntry(
-                        providedEntry.Parent.OldActivityId,
-                        out parentEntry
-                    );
+                    this.generatedMap
+                        .TryGetUpdateEntry(providedEntry.Parent.OldActivityId, out parentEntry);
                     Fx.Assert(
                         parentEntry != null,
                         "We process in IdSpace order, so we always process parents before their children"

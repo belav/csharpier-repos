@@ -323,15 +323,16 @@ namespace System.Runtime.Diagnostics
                         )
                     )
                     {
-                        this.etwProvider.WriteTransferEvent(
-                            ref EtwDiagnosticTrace.transferEventDescriptor,
-                            new EventTraceActivity(oldId),
-                            newId,
-                            EtwDiagnosticTrace.traceAnnotation == null
-                                ? string.Empty
-                                : EtwDiagnosticTrace.traceAnnotation(),
-                            DiagnosticTraceBase.AppDomainFriendlyName
-                        );
+                        this.etwProvider
+                            .WriteTransferEvent(
+                                ref EtwDiagnosticTrace.transferEventDescriptor,
+                                new EventTraceActivity(oldId),
+                                newId,
+                                EtwDiagnosticTrace.traceAnnotation == null
+                                    ? string.Empty
+                                    : EtwDiagnosticTrace.traceAnnotation(),
+                                DiagnosticTraceBase.AppDomainFriendlyName
+                            );
                     }
                 }
                 catch (Exception e)
@@ -383,14 +384,15 @@ namespace System.Runtime.Diagnostics
                     XmlDocument traceDocument = new XmlDocument();
                     traceDocument.LoadXml(traceString);
                     navigator = traceDocument.CreateNavigator();
-                    this.TraceSource.TraceData(
-                        TraceLevelHelper.GetTraceEventType(
-                            eventDescriptor.Level,
-                            eventDescriptor.Opcode
-                        ),
-                        legacyEventId,
-                        navigator
-                    );
+                    this.TraceSource
+                        .TraceData(
+                            TraceLevelHelper.GetTraceEventType(
+                                eventDescriptor.Level,
+                                eventDescriptor.Opcode
+                            ),
+                            legacyEventId,
+                            navigator
+                        );
 
                     if (this.CalledShutdown)
                     {
@@ -987,10 +989,8 @@ namespace System.Runtime.Diagnostics
                     exceptionInfo.Add(
                         new Tuple<string, string>(
                             DiagnosticStrings.NativeErrorCodeTag,
-                            win32Exception.NativeErrorCode.ToString(
-                                "X",
-                                CultureInfo.InvariantCulture
-                            )
+                            win32Exception.NativeErrorCode
+                                .ToString("X", CultureInfo.InvariantCulture)
                         )
                     );
                 }

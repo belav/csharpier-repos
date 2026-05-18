@@ -23,9 +23,8 @@ namespace System.Runtime
 
             if (task.Status == TaskStatus.Created)
             {
-                throw Fx.Exception.AsError(
-                    new InvalidOperationException(InternalSR.SFxTaskNotStarted)
-                );
+                throw Fx.Exception
+                    .AsError(new InvalidOperationException(InternalSR.SFxTaskNotStarted));
             }
 
             var tcs = new TaskCompletionSource<T>(state);
@@ -72,9 +71,8 @@ namespace System.Runtime
 
             if (task.Status == TaskStatus.Created)
             {
-                throw Fx.Exception.AsError(
-                    new InvalidOperationException(InternalSR.SFxTaskNotStarted)
-                );
+                throw Fx.Exception
+                    .AsError(new InvalidOperationException(InternalSR.SFxTaskNotStarted));
             }
 
             var tcs = new TaskCompletionSource<object>(state);
@@ -203,9 +201,8 @@ namespace System.Runtime
 
             if (timedOut)
             {
-                throw Fx.Exception.AsError(
-                    new TimeoutException(InternalSR.TaskTimedOutError(timeout))
-                );
+                throw Fx.Exception
+                    .AsError(new TimeoutException(InternalSR.TaskTimedOutError(timeout)));
             }
         }
 

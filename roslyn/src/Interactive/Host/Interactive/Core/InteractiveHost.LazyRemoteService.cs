@@ -103,11 +103,8 @@ namespace Microsoft.CodeAnalysis.Interactive
                             )
                         );
 
-                        Host.ProcessInitialized?.Invoke(
-                            remoteService.PlatformInfo,
-                            Options,
-                            result
-                        );
+                        Host.ProcessInitialized
+                            ?.Invoke(remoteService.PlatformInfo, Options, result);
                         return new InitializedRemoteService(remoteService, result);
                     }
 
@@ -206,10 +203,8 @@ namespace Microsoft.CodeAnalysis.Interactive
                         e.Message
                     );
 
-                    Host.InteractiveHostProcessCreationFailed?.Invoke(
-                        e,
-                        TryGetExitCode(newProcess)
-                    );
+                    Host.InteractiveHostProcessCreationFailed
+                        ?.Invoke(e, TryGetExitCode(newProcess));
                     return null;
                 }
 
@@ -235,10 +230,8 @@ namespace Microsoft.CodeAnalysis.Interactive
 
                 void ProcessExitedBeforeEstablishingConnection(object sender, EventArgs e)
                 {
-                    Host.InteractiveHostProcessCreationFailed?.Invoke(
-                        null,
-                        TryGetExitCode(newProcess)
-                    );
+                    Host.InteractiveHostProcessCreationFailed
+                        ?.Invoke(null, TryGetExitCode(newProcess));
                     _cancellationSource.Cancel();
                 }
 
@@ -251,10 +244,8 @@ namespace Microsoft.CodeAnalysis.Interactive
                 {
                     if (!CheckAlive(newProcess, hostPath))
                     {
-                        Host.InteractiveHostProcessCreationFailed?.Invoke(
-                            null,
-                            TryGetExitCode(newProcess)
-                        );
+                        Host.InteractiveHostProcessCreationFailed
+                            ?.Invoke(null, TryGetExitCode(newProcess));
                         return null;
                     }
 
@@ -283,10 +274,8 @@ namespace Microsoft.CodeAnalysis.Interactive
 
                     jsonRpc?.Dispose();
 
-                    Host.InteractiveHostProcessCreationFailed?.Invoke(
-                        e,
-                        TryGetExitCode(newProcess)
-                    );
+                    Host.InteractiveHostProcessCreationFailed
+                        ?.Invoke(e, TryGetExitCode(newProcess));
                     return null;
                 }
                 finally

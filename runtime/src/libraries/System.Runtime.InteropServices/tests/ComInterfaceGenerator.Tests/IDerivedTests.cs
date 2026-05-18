@@ -20,13 +20,11 @@ namespace ComInterfaceGenerator.Tests
             Assert.Contains(typeof(IGetAndSetInt), typeof(IDerived).GetInterfaces());
 
             IIUnknownDerivedDetails baseInterfaceDetails =
-                StrategyBasedComWrappers.DefaultIUnknownInterfaceDetailsStrategy.GetIUnknownDerivedDetails(
-                    typeof(IGetAndSetInt).TypeHandle
-                );
+                StrategyBasedComWrappers.DefaultIUnknownInterfaceDetailsStrategy
+                    .GetIUnknownDerivedDetails(typeof(IGetAndSetInt).TypeHandle);
             IIUnknownDerivedDetails derivedInterfaceDetails =
-                StrategyBasedComWrappers.DefaultIUnknownInterfaceDetailsStrategy.GetIUnknownDerivedDetails(
-                    typeof(IDerived).TypeHandle
-                );
+                StrategyBasedComWrappers.DefaultIUnknownInterfaceDetailsStrategy
+                    .GetIUnknownDerivedDetails(typeof(IDerived).TypeHandle);
 
             var numBaseMethods = typeof(IGetAndSetInt).GetMethods().Length;
 

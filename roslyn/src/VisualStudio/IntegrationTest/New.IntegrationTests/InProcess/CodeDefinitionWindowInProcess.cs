@@ -72,10 +72,11 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.InProcess
         {
             await JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
 
-            await TestServices.Workspace.WaitForAsyncOperationsAsync(
-                FeatureAttribute.CodeDefinitionWindow,
-                cancellationToken
-            );
+            await TestServices.Workspace
+                .WaitForAsyncOperationsAsync(
+                    FeatureAttribute.CodeDefinitionWindow,
+                    cancellationToken
+                );
 
             var codeDefinitionWindow = await GetRequiredGlobalServiceAsync<
                 SVsCodeDefView,

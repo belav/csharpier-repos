@@ -942,9 +942,8 @@ namespace Microsoft.Build.BuildEngine
 
                 if (SchemaFile != null)
                 {
-                    xmlDocument.Schemas.Add(
-                        XmlSchema.Read(new StreamReader(SchemaFile), ValidationCallBack)
-                    );
+                    xmlDocument.Schemas
+                        .Add(XmlSchema.Read(new StreamReader(SchemaFile), ValidationCallBack));
                     xmlDocument.Validate(ValidationCallBack);
                 }
 
@@ -1020,19 +1019,21 @@ namespace Microsoft.Build.BuildEngine
                 {
                     case "InitialTargets":
                         initialTargets.AddRange(
-                            attr.Value.Split(
-                                new char[] { ';', ' ' },
-                                StringSplitOptions.RemoveEmptyEntries
-                            )
+                            attr.Value
+                                .Split(
+                                    new char[] { ';', ' ' },
+                                    StringSplitOptions.RemoveEmptyEntries
+                                )
                         );
                         break;
                     case "DefaultTargets":
                         // first non-empty DefaultTargets found is used
                         if (defaultTargets == null || defaultTargets.Length == 0)
-                            defaultTargets = attr.Value.Split(
-                                new char[] { ';', ' ' },
-                                StringSplitOptions.RemoveEmptyEntries
-                            );
+                            defaultTargets = attr.Value
+                                .Split(
+                                    new char[] { ';', ' ' },
+                                    StringSplitOptions.RemoveEmptyEntries
+                                );
                         EvaluatedProperties.AddProperty(
                             new BuildProperty(
                                 "MSBuildProjectDefaultTargets",

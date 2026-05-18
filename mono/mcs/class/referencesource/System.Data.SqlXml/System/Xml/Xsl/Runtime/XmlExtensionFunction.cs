@@ -328,13 +328,8 @@ namespace System.Xml.Xsl.Runtime
 
             try
             {
-                return this.meth.Invoke(
-                    extObj,
-                    this.flags,
-                    null,
-                    args,
-                    CultureInfo.InvariantCulture
-                );
+                return this.meth
+                    .Invoke(extObj, this.flags, null, args, CultureInfo.InvariantCulture);
             }
             catch (TargetInvocationException e)
             {

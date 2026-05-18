@@ -54,9 +54,8 @@ namespace Microsoft.Interop.UnitTests.Verifiers
                 TestBehaviors = TestBehaviors.SkipGeneratedSourcesCheck,
             };
 
-            test.DisabledDiagnostics.Add(
-                GeneratorDiagnostics.Ids.NotRecommendedGeneratedComInterfaceUsage
-            );
+            test.DisabledDiagnostics
+                .Add(GeneratorDiagnostics.Ids.NotRecommendedGeneratedComInterfaceUsage);
             test.ExpectedDiagnostics.AddRange(expected);
             await test.RunAsync(CancellationToken.None);
         }
@@ -104,20 +103,17 @@ namespace Microsoft.Interop.UnitTests.Verifiers
                     // Clear out the default reference assemblies. We explicitly add references from the live ref pack,
                     // so we don't want the Roslyn test infrastructure to resolve/add any default reference assemblies
                     ReferenceAssemblies = new ReferenceAssemblies(string.Empty);
-                    TestState.AdditionalReferences.AddRange(
-                        SourceGenerators.Tests.LiveReferencePack.GetMetadataReferences()
-                    );
+                    TestState.AdditionalReferences
+                        .AddRange(SourceGenerators.Tests.LiveReferencePack.GetMetadataReferences());
                 }
                 else
                 {
                     ReferenceAssemblies = targetFramework switch
                     {
-                        TestTargetFramework.Framework => ReferenceAssemblies
-                            .NetFramework
+                        TestTargetFramework.Framework => ReferenceAssemblies.NetFramework
                             .Net48
                             .Default,
-                        TestTargetFramework.Standard => ReferenceAssemblies
-                            .NetStandard
+                        TestTargetFramework.Standard => ReferenceAssemblies.NetStandard
                             .NetStandard21,
                         TestTargetFramework.Core => ReferenceAssemblies.NetCore.NetCoreApp31,
                         TestTargetFramework.Net6 => ReferenceAssemblies.Net.Net60,

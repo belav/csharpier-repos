@@ -77,8 +77,9 @@ namespace System.Activities.Core.Presentation
 
         void AttachDisplayName()
         {
-            AttachedPropertiesService attachedPropertiesService =
-                this.Context.Services.GetService<AttachedPropertiesService>();
+            AttachedPropertiesService attachedPropertiesService = this.Context
+                .Services
+                .GetService<AttachedPropertiesService>();
             Fx.Assert(
                 attachedPropertiesService != null,
                 "AttachedPropertiesService is not available."
@@ -199,13 +200,14 @@ namespace System.Activities.Core.Presentation
 
         private ModelItem FindSwitch()
         {
-            return this.ModelItem.FindParent(
-                (ModelItem item) =>
-                {
-                    return item.ItemType.IsGenericType
-                        && item.ItemType.GetGenericTypeDefinition() == typeof(Switch<>);
-                }
-            );
+            return this.ModelItem
+                .FindParent(
+                    (ModelItem item) =>
+                    {
+                        return item.ItemType.IsGenericType
+                            && item.ItemType.GetGenericTypeDefinition() == typeof(Switch<>);
+                    }
+                );
         }
     }
 }

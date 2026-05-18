@@ -44,21 +44,22 @@ namespace System.Threading.Tasks.Tests
                 throw new ArgumentNullException(
                     "When requesting to QueueTask, the input task can not be null"
                 );
-            Task.Factory.StartNew(
-                () =>
-                {
-                    lock (_lockObj) //Locking so that if multiple threads in threadpool does not incorrectly increment the counter.
+            Task.Factory
+                .StartNew(
+                    () =>
                     {
-                        //store the current value of the counter (This becomes the unique ID for this scheduler's Task)
-                        SchedulerID.Value = _counter;
-                        _counter++;
-                    }
-                    ExecuteTask(task); //Extracted out due to security attribute reason.
-                },
-                CancellationToken.None,
-                TaskCreationOptions.None,
-                TaskScheduler.Default
-            );
+                        lock (_lockObj) //Locking so that if multiple threads in threadpool does not incorrectly increment the counter.
+                        {
+                            //store the current value of the counter (This becomes the unique ID for this scheduler's Task)
+                            SchedulerID.Value = _counter;
+                            _counter++;
+                        }
+                        ExecuteTask(task); //Extracted out due to security attribute reason.
+                    },
+                    CancellationToken.None,
+                    TaskCreationOptions.None,
+                    TaskScheduler.Default
+                );
         }
 
         private void ExecuteTask(Task task)
@@ -222,12 +223,13 @@ namespace System.Threading.Tasks.Tests
                 Exception caughtException = null;
                 try
                 {
-                    Task.Factory.StartNew(
-                        () => { },
-                        CancellationToken.None,
-                        TaskCreationOptions.None,
-                        schedPairScheduler
-                    );
+                    Task.Factory
+                        .StartNew(
+                            () => { },
+                            CancellationToken.None,
+                            TaskCreationOptions.None,
+                            schedPairScheduler
+                        );
                 }
                 catch (Exception exc)
                 {
@@ -558,18 +560,20 @@ namespace System.Threading.Tasks.Tests
                 for (int i = 0; i < cesps.Length; i++)
                 {
                     Action work = () => new ManualResetEvent(false).WaitOne(2);
-                    Task.Factory.StartNew(
-                        work,
-                        CancellationToken.None,
-                        TaskCreationOptions.None,
-                        cesps[i].ConcurrentScheduler
-                    );
-                    Task.Factory.StartNew(
-                        work,
-                        CancellationToken.None,
-                        TaskCreationOptions.None,
-                        cesps[i].ExclusiveScheduler
-                    );
+                    Task.Factory
+                        .StartNew(
+                            work,
+                            CancellationToken.None,
+                            TaskCreationOptions.None,
+                            cesps[i].ConcurrentScheduler
+                        );
+                    Task.Factory
+                        .StartNew(
+                            work,
+                            CancellationToken.None,
+                            TaskCreationOptions.None,
+                            cesps[i].ExclusiveScheduler
+                        );
                 }
                 for (int i = 0; i < cesps.Length; i++)
                 {
@@ -662,12 +666,13 @@ namespace System.Threading.Tasks.Tests
                 for (int i = 0; i < 2; i++)
                 {
                     tasks.Add(
-                        Task.Factory.StartNew(
-                            () => recursiveWork(2),
-                            CancellationToken.None,
-                            TaskCreationOptions.None,
-                            scheduler
-                        )
+                        Task.Factory
+                            .StartNew(
+                                () => recursiveWork(2),
+                                CancellationToken.None,
+                                TaskCreationOptions.None,
+                                scheduler
+                            )
                     );
                 }
             }
@@ -726,66 +731,73 @@ namespace System.Threading.Tasks.Tests
             // parent/child
             {
                 var errorString = "hello faulty world";
-                var root = Task.Factory.StartNew(
-                    () =>
-                    {
-                        Task.Factory.StartNew(
-                            () =>
-                            {
-                                Task.Factory.StartNew(
+                var root = Task.Factory
+                    .StartNew(
+                        () =>
+                        {
+                            Task.Factory
+                                .StartNew(
                                     () =>
                                     {
-                                        Task.Factory.StartNew(
-                                            () =>
-                                            {
-                                                Task.Factory.StartNew(
-                                                    () =>
-                                                    {
-                                                        Task.Factory.StartNew(
+                                        Task.Factory
+                                            .StartNew(
+                                                () =>
+                                                {
+                                                    Task.Factory
+                                                        .StartNew(
                                                             () =>
                                                             {
-                                                                Task.Factory.StartNew(
+                                                                Task.Factory
+                                                                    .StartNew(
                                                                         () =>
                                                                         {
-                                                                            throw new InvalidOperationException(
-                                                                                errorString
-                                                                            );
+                                                                            Task.Factory
+                                                                                .StartNew(
+                                                                                    () =>
+                                                                                    {
+                                                                                        Task.Factory
+                                                                                            .StartNew(
+                                                                                                () =>
+                                                                                                {
+                                                                                                    throw new InvalidOperationException(
+                                                                                                        errorString
+                                                                                                    );
+                                                                                                },
+                                                                                                CancellationToken.None,
+                                                                                                TaskCreationOptions.AttachedToParent,
+                                                                                                cesp.ExclusiveScheduler
+                                                                                            )
+                                                                                            .Wait();
+                                                                                    },
+                                                                                    CancellationToken.None,
+                                                                                    TaskCreationOptions.AttachedToParent,
+                                                                                    cesp.ExclusiveScheduler
+                                                                                );
                                                                         },
                                                                         CancellationToken.None,
                                                                         TaskCreationOptions.AttachedToParent,
-                                                                        cesp.ExclusiveScheduler
-                                                                    )
-                                                                    .Wait();
+                                                                        cesp.ConcurrentScheduler
+                                                                    );
                                                             },
                                                             CancellationToken.None,
                                                             TaskCreationOptions.AttachedToParent,
                                                             cesp.ExclusiveScheduler
                                                         );
-                                                    },
-                                                    CancellationToken.None,
-                                                    TaskCreationOptions.AttachedToParent,
-                                                    cesp.ConcurrentScheduler
-                                                );
-                                            },
-                                            CancellationToken.None,
-                                            TaskCreationOptions.AttachedToParent,
-                                            cesp.ExclusiveScheduler
-                                        );
+                                                },
+                                                CancellationToken.None,
+                                                TaskCreationOptions.AttachedToParent,
+                                                cesp.ConcurrentScheduler
+                                            );
                                     },
                                     CancellationToken.None,
                                     TaskCreationOptions.AttachedToParent,
-                                    cesp.ConcurrentScheduler
+                                    cesp.ExclusiveScheduler
                                 );
-                            },
-                            CancellationToken.None,
-                            TaskCreationOptions.AttachedToParent,
-                            cesp.ExclusiveScheduler
-                        );
-                    },
-                    CancellationToken.None,
-                    TaskCreationOptions.None,
-                    cesp.ConcurrentScheduler
-                );
+                        },
+                        CancellationToken.None,
+                        TaskCreationOptions.None,
+                        cesp.ConcurrentScheduler
+                    );
 
                 ((IAsyncResult)root).AsyncWaitHandle.WaitOne();
                 Assert.True(root.IsFaulted, "Root should have been faulted by child's error");

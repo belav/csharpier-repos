@@ -81,29 +81,25 @@ namespace System.Activities.XamlIntegration
                 this.xamlTypeXamlType = this.SchemaContext.GetXamlType(typeof(XamlType));
                 this.typeXamlType = this.SchemaContext.GetXamlType(typeof(Type));
 
-                this.activityPropertyXamlType = this.SchemaContext.GetXamlType(
-                    typeof(DynamicActivityProperty)
-                );
+                this.activityPropertyXamlType = this.SchemaContext
+                    .GetXamlType(typeof(DynamicActivityProperty));
                 this.activityPropertyType = this.activityPropertyXamlType.GetMember("Type");
                 this.activityPropertyName = this.activityPropertyXamlType.GetMember("Name");
                 this.activityPropertyValue = this.activityPropertyXamlType.GetMember("Value");
 
                 this.activityBuilderName = this.activityBuilderXamlType.GetMember("Name");
-                this.activityBuilderAttributes = this.activityBuilderXamlType.GetMember(
-                    "Attributes"
-                );
-                this.activityBuilderProperties = this.activityBuilderXamlType.GetMember(
-                    "Properties"
-                );
-                this.activityBuilderPropertyReference = this
-                    .SchemaContext.GetXamlType(typeof(ActivityBuilder))
+                this.activityBuilderAttributes = this.activityBuilderXamlType
+                    .GetMember("Attributes");
+                this.activityBuilderProperties = this.activityBuilderXamlType
+                    .GetMember("Properties");
+                this.activityBuilderPropertyReference = this.SchemaContext
+                    .GetXamlType(typeof(ActivityBuilder))
                     .GetAttachableMember("PropertyReference");
-                this.activityBuilderPropertyReferences = this
-                    .SchemaContext.GetXamlType(typeof(ActivityBuilder))
+                this.activityBuilderPropertyReferences = this.SchemaContext
+                    .GetXamlType(typeof(ActivityBuilder))
                     .GetAttachableMember("PropertyReferences");
-                this.activityPropertyReferenceXamlType = this.SchemaContext.GetXamlType(
-                    typeof(ActivityPropertyReference)
-                );
+                this.activityPropertyReferenceXamlType = this.SchemaContext
+                    .GetXamlType(typeof(ActivityPropertyReference));
             }
         }
 
@@ -362,9 +358,8 @@ namespace System.Activities.XamlIntegration
                     )
                     {
                         Type activityType = xamlType.TypeArguments[0].UnderlyingType;
-                        activityXamlType = Writer.SchemaContext.GetXamlType(
-                            typeof(Activity<>).MakeGenericType(activityType)
-                        );
+                        activityXamlType = Writer.SchemaContext
+                            .GetXamlType(typeof(Activity<>).MakeGenericType(activityType));
                     }
 
                     Writer.SetActivityType(activityXamlType, xamlType);
@@ -624,9 +619,14 @@ namespace System.Activities.XamlIntegration
                                 {
                                     deferredPropertyNodes = new XamlNodeQueue(Writer.SchemaContext);
                                 }
-                                deferredPropertyNodes.Writer.WriteStartMember(
-                                    new XamlMember(defaultValueNode.Key, this.xClassXamlType, true)
-                                );
+                                deferredPropertyNodes.Writer
+                                    .WriteStartMember(
+                                        new XamlMember(
+                                            defaultValueNode.Key,
+                                            this.xClassXamlType,
+                                            true
+                                        )
+                                    );
                                 deferredPropertyNodes.Writer.WriteNode(reader);
                                 XamlServices.Transform(
                                     defaultValueNode.Value.Reader,
@@ -704,11 +704,14 @@ namespace System.Activities.XamlIntegration
                             xamlMember = Writer.activityXamlType.GetMember(xamlMember.Name);
                             if (xamlMember == null)
                             {
-                                throw FxTrace.Exception.AsError(
-                                    new InvalidOperationException(
-                                        SR.MemberNotSupportedByActivityXamlServices(xamlMember.Name)
-                                    )
-                                );
+                                throw FxTrace.Exception
+                                    .AsError(
+                                        new InvalidOperationException(
+                                            SR.MemberNotSupportedByActivityXamlServices(
+                                                xamlMember.Name
+                                            )
+                                        )
+                                    );
                             }
 
                             if (xamlMember.Name == "Implementation")
@@ -869,9 +872,8 @@ namespace System.Activities.XamlIntegration
                     );
                 }
 
-                this.defaultValueNodes.Add(
-                    new KeyValuePair<string, XamlNodeQueue>(propertyName, value)
-                );
+                this.defaultValueNodes
+                    .Add(new KeyValuePair<string, XamlNodeQueue>(propertyName, value));
             }
         }
 
@@ -1293,9 +1295,8 @@ namespace System.Activities.XamlIntegration
                         typeof(PropertyReferenceExtension<>).MakeGenericType(
                             targetProperty.Type.UnderlyingType ?? typeof(object)
                         );
-                    XamlType propertyReferenceXamlType = parentWriter.SchemaContext.GetXamlType(
-                        propertyReferenceType
-                    );
+                    XamlType propertyReferenceXamlType = parentWriter.SchemaContext
+                        .GetXamlType(propertyReferenceType);
                     parentWriter.WriteStartObject(propertyReferenceXamlType);
 
                     if (sourceProperty != null)
@@ -1366,10 +1367,11 @@ namespace System.Activities.XamlIntegration
                 if (this.HasUntransformedChildren)
                 {
                     // Some ActivityPropertyReferences couldn't be transformed to properties. Leave them unchanged.
-                    this.Parent.SetUntransformedPropertyReferences(
-                        this.originalStartMember,
-                        this.untransformedNodes
-                    );
+                    this.Parent
+                        .SetUntransformedPropertyReferences(
+                            this.originalStartMember,
+                            this.untransformedNodes
+                        );
                 }
             }
         }
@@ -1446,9 +1448,9 @@ namespace System.Activities.XamlIntegration
                 {
                     // can't transform to <Foo.></Foo.>, dump original nodes <ActivityBuilder.PropertyReference(s) .../>
                     this.parent.HasUntransformedChildren = true;
-                    this.parent.UntransformedNodesWriter.WriteStartObject(
-                        Writer.activityPropertyReferenceXamlType
-                    );
+                    this.parent
+                        .UntransformedNodesWriter
+                        .WriteStartObject(Writer.activityPropertyReferenceXamlType);
                     XamlServices.Transform(
                         this.propertyReferenceNodes.Reader,
                         this.parent.UntransformedNodesWriter,

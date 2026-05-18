@@ -562,8 +562,9 @@ public class CSharpTestMethodFinderTests
                 ? new TextSpan(testDocument.CursorPosition.Value, 0)
                 : testDocument.SelectedSpans.Single();
 
-        var testMethodFinder = workspace
-            .CurrentSolution.Projects.Single()
+        var testMethodFinder = workspace.CurrentSolution
+            .Projects
+            .Single()
             .GetRequiredLanguageService<ITestMethodFinder>();
         var testMethods = await testMethodFinder.GetPotentialTestMethodsAsync(
             workspace.CurrentSolution.GetRequiredDocument(testDocument.Id),
@@ -592,16 +593,17 @@ public class CSharpTestMethodFinderTests
                 ? new TextSpan(testDocument.CursorPosition.Value, 0)
                 : testDocument.SelectedSpans.Single();
 
-        var testMethodFinder = workspace
-            .CurrentSolution.Projects.Single()
+        var testMethodFinder = workspace.CurrentSolution
+            .Projects
+            .Single()
             .GetRequiredLanguageService<ITestMethodFinder>();
         var testMethods = await testMethodFinder.GetPotentialTestMethodsAsync(
             workspace.CurrentSolution.GetRequiredDocument(testDocument.Id),
             span,
             CancellationToken.None
         );
-        var semanticModel = await workspace
-            .CurrentSolution.GetRequiredDocument(testDocument.Id)
+        var semanticModel = await workspace.CurrentSolution
+            .GetRequiredDocument(testDocument.Id)
             .GetRequiredSemanticModelAsync(CancellationToken.None);
 
         List<string> unmatchedTestNames = new();

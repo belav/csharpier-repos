@@ -35,10 +35,12 @@ namespace System.CommandLine.Tests
 
             var result = rootCommand.Parse("child");
 
-            result
-                .Errors.Should()
+            result.Errors
+                .Should()
                 .ContainSingle()
-                .Which.Message.Should()
+                .Which
+                .Message
+                .Should()
                 .Be("Option '--i-must-be-set' is required.");
         }
 
@@ -55,10 +57,12 @@ namespace System.CommandLine.Tests
 
             var result = rootCommand.Parse("");
 
-            result
-                .Errors.Should()
+            result.Errors
+                .Should()
                 .ContainSingle()
-                .Which.Message.Should()
+                .Which
+                .Message
+                .Should()
                 .Be("Option '-i' is required.");
         }
 

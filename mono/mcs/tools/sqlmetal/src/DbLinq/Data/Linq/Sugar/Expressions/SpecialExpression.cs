@@ -310,7 +310,8 @@ namespace DbLinq.Data.Linq.Sugar.Expressions
         )
         {
             return operands[0]
-                .Type.GetProperty(propertyName)
+                .Type
+                .GetProperty(propertyName)
                 .GetValue(operands.First().Evaluate(), null);
         }
 
@@ -320,7 +321,8 @@ namespace DbLinq.Data.Linq.Sugar.Expressions
         )
         {
             return operands[0]
-                .Type.GetMethod(methodName, operands.Skip(1).Select(op => op.Type).ToArray())
+                .Type
+                .GetMethod(methodName, operands.Skip(1).Select(op => op.Type).ToArray())
                 .Invoke(
                     operands[0].Evaluate(),
                     operands.Skip(1).Select(op => op.Evaluate()).ToArray()

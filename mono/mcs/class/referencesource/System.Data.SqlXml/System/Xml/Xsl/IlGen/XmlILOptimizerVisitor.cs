@@ -264,10 +264,8 @@ namespace System.Xml.Xsl.IlGen
                         if (IsConstructedExpression(ndFunc.Definition))
                         {
                             // Perform state analysis on function's content
-                            ndFunc.Definition = this.contentAnalyzer.Analyze(
-                                ndFunc,
-                                ndFunc.Definition
-                            );
+                            ndFunc.Definition = this.contentAnalyzer
+                                .Analyze(ndFunc, ndFunc.Definition);
                         }
                     }
 
@@ -5009,7 +5007,8 @@ namespace System.Xml.Xsl.IlGen
                 {
                     XmlILConstructInfo
                         .Write(local1)
-                        .CallersInfo.Add(XmlILConstructInfo.Write(local0));
+                        .CallersInfo
+                        .Add(XmlILConstructInfo.Write(local0));
                 }
             }
             if (this[XmlILOptimization.AnnotateInvoke])
@@ -6912,9 +6911,8 @@ namespace System.Xml.Xsl.IlGen
                     else if (typTarget == XmlQueryTypeFactory.IntegerX)
                         return this.f.LiteralInt64(value.ValueAsLong);
                     else if (typTarget == XmlQueryTypeFactory.DecimalX)
-                        return this.f.LiteralDecimal(
-                            (decimal)value.ValueAs(XsltConvert.DecimalType)
-                        );
+                        return this.f
+                            .LiteralDecimal((decimal)value.ValueAs(XsltConvert.DecimalType));
                     else if (typTarget == XmlQueryTypeFactory.DoubleX)
                         return this.f.LiteralDouble(value.ValueAsDouble);
                     else if (typTarget == XmlQueryTypeFactory.BooleanX)

@@ -179,10 +179,8 @@ namespace System.Security.Cryptography.X509Certificates
             if (storeLocation == StoreLocation.CurrentUser)
             {
                 if (
-                    X509Store.DisallowedStoreName.Equals(
-                        storeName,
-                        StringComparison.OrdinalIgnoreCase
-                    )
+                    X509Store.DisallowedStoreName
+                        .Equals(storeName, StringComparison.OrdinalIgnoreCase)
                 )
                 {
                     return OpenSslDirectoryBasedStoreProvider.OpenDisallowedStore(openFlags);
@@ -213,10 +211,8 @@ namespace System.Security.Cryptography.X509Certificates
             }
 
             if (
-                X509Store.IntermediateCAStoreName.Equals(
-                    storeName,
-                    StringComparison.OrdinalIgnoreCase
-                )
+                X509Store.IntermediateCAStoreName
+                    .Equals(storeName, StringComparison.OrdinalIgnoreCase)
             )
             {
                 return OpenSslCachedSystemStoreProvider.MachineIntermediate;

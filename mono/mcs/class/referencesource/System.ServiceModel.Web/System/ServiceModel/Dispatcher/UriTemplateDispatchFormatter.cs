@@ -85,10 +85,8 @@ namespace System.ServiceModel.Dispatcher
                 else if (this.queryMapping.ContainsKey(i) && utmr != null)
                 {
                     string queryVal = nvc[this.queryMapping[i].Key];
-                    parameters[i] = this.qsc.ConvertStringToValue(
-                        queryVal,
-                        this.queryMapping[i].Value
-                    );
+                    parameters[i] = this.qsc
+                        .ConvertStringToValue(queryVal, this.queryMapping[i].Value);
                 }
                 else
                 {
@@ -137,11 +135,12 @@ namespace System.ServiceModel.Dispatcher
             object result
         )
         {
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                new NotSupportedException(
-                    SR2.GetString(SR2.QueryStringFormatterOperationNotSupportedServerSide)
-                )
-            );
+            throw DiagnosticUtility.ExceptionUtility
+                .ThrowHelperError(
+                    new NotSupportedException(
+                        SR2.GetString(SR2.QueryStringFormatterOperationNotSupportedServerSide)
+                    )
+                );
         }
     }
 }

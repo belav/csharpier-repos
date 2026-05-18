@@ -1166,11 +1166,8 @@ namespace Microsoft.CodeAnalysis.BuildTasks.UnitTests
                 Dictionary<string, string> parameters
             )
             {
-                var task = proj.Xml.AddUsingTask(
-                    taskName,
-                    string.Empty,
-                    Assembly.GetExecutingAssembly().FullName
-                );
+                var task = proj.Xml
+                    .AddUsingTask(taskName, string.Empty, Assembly.GetExecutingAssembly().FullName);
                 task.TaskFactory = nameof(DummyTaskFactory);
 
                 var taskParams = task.AddParameterGroup();

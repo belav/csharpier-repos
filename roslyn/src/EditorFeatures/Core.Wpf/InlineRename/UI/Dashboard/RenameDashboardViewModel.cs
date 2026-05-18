@@ -258,10 +258,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
             {
                 if (IsRenameOverloadsEditable)
                 {
-                    _session.RenameService.GlobalOptions.SetGlobalOption(
-                        InlineRenameSessionOptionsStorage.RenameOverloads,
-                        value
-                    );
+                    _session.RenameService
+                        .GlobalOptions
+                        .SetGlobalOption(InlineRenameSessionOptionsStorage.RenameOverloads, value);
                     _session.RefreshRenameSessionWithOptionsChanged(
                         _session.Options with
                         {
@@ -277,10 +276,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
             get => _session.Options.RenameInStrings;
             set
             {
-                _session.RenameService.GlobalOptions.SetGlobalOption(
-                    InlineRenameSessionOptionsStorage.RenameInStrings,
-                    value
-                );
+                _session.RenameService
+                    .GlobalOptions
+                    .SetGlobalOption(InlineRenameSessionOptionsStorage.RenameInStrings, value);
                 _session.RefreshRenameSessionWithOptionsChanged(
                     _session.Options with
                     {
@@ -295,10 +293,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
             get => _session.Options.RenameInComments;
             set
             {
-                _session.RenameService.GlobalOptions.SetGlobalOption(
-                    InlineRenameSessionOptionsStorage.RenameInComments,
-                    value
-                );
+                _session.RenameService
+                    .GlobalOptions
+                    .SetGlobalOption(InlineRenameSessionOptionsStorage.RenameInComments, value);
                 _session.RefreshRenameSessionWithOptionsChanged(
                     _session.Options with
                     {
@@ -313,10 +310,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
             get => _session.Options.RenameFile;
             set
             {
-                _session.RenameService.GlobalOptions.SetGlobalOption(
-                    InlineRenameSessionOptionsStorage.RenameFile,
-                    value
-                );
+                _session.RenameService
+                    .GlobalOptions
+                    .SetGlobalOption(InlineRenameSessionOptionsStorage.RenameFile, value);
                 _session.RefreshRenameSessionWithOptionsChanged(
                     _session.Options with
                     {
@@ -331,10 +327,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
             get => _session.PreviewChanges;
             set
             {
-                _session.RenameService.GlobalOptions.SetGlobalOption(
-                    InlineRenameSessionOptionsStorage.PreviewChanges,
-                    value
-                );
+                _session.RenameService
+                    .GlobalOptions
+                    .SetGlobalOption(InlineRenameSessionOptionsStorage.PreviewChanges, value);
                 _session.SetPreviewChanges(value);
             }
         }

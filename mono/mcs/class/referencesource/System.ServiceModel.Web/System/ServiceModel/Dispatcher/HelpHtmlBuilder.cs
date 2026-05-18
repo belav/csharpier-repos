@@ -733,8 +733,8 @@ namespace System.ServiceModel.Dispatcher
             UriTemplate template = new UriTemplate(uriTemplate);
             Uri result = template.BindByPosition(
                 baseUri,
-                template
-                    .PathSegmentVariableNames.Concat(template.QueryValueVariableNames)
+                template.PathSegmentVariableNames
+                    .Concat(template.QueryValueVariableNames)
                     .Select(name => "{" + name + "}")
                     .ToArray()
             );

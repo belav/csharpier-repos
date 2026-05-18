@@ -46,7 +46,12 @@ namespace System.ServiceModel.Routing
                     this.messageRpc.EventTraceActivity,
                     this.messageRpc.UniqueID,
                     message.Headers.Action,
-                    this.messageRpc.OperationContext.EndpointDispatcher.EndpointAddress.Uri.ToString(),
+                    this.messageRpc
+                        .OperationContext
+                        .EndpointDispatcher
+                        .EndpointAddress
+                        .Uri
+                        .ToString(),
                     messageRpc.Transaction != null ? "True" : "False"
                 );
             }
@@ -62,14 +67,15 @@ namespace System.ServiceModel.Routing
             catch (MultipleFilterMatchesException matchesException)
             {
                 // Wrap this exception with one that is more meaningful to users of RoutingService:
-                throw FxTrace.Exception.AsError(
-                    new ConfigurationErrorsException(
-                        SR.ReqReplyMulticastNotSupported(
-                            this.messageRpc.OperationContext.Channel.LocalAddress
-                        ),
-                        matchesException
-                    )
-                );
+                throw FxTrace.Exception
+                    .AsError(
+                        new ConfigurationErrorsException(
+                            SR.ReqReplyMulticastNotSupported(
+                                this.messageRpc.OperationContext.Channel.LocalAddress
+                            ),
+                            matchesException
+                        )
+                    );
             }
 
             while (this.StartProcessing()) { }
@@ -79,10 +85,11 @@ namespace System.ServiceModel.Routing
         {
             bool callAgain = false;
             SendOperation sendOperation = this.messageRpc.Operations[0];
-            this.currentClient = this.service.GetOrCreateClient<TContract>(
-                sendOperation.CurrentEndpoint,
-                this.messageRpc.Impersonating
-            );
+            this.currentClient = this.service
+                .GetOrCreateClient<TContract>(
+                    sendOperation.CurrentEndpoint,
+                    this.messageRpc.Impersonating
+                );
 
             if (TD.RoutingServiceTransmittingMessageIsEnabled())
             {
@@ -98,13 +105,14 @@ namespace System.ServiceModel.Routing
             {
                 if (messageRpc.Transaction != null && sendOperation.HasAlternate)
                 {
-                    throw FxTrace.Exception.AsError(
-                        new ConfigurationErrorsException(
-                            SR.ErrorHandlingNotSupportedReqReplyTxn(
-                                this.messageRpc.OperationContext.Channel.LocalAddress
+                    throw FxTrace.Exception
+                        .AsError(
+                            new ConfigurationErrorsException(
+                                SR.ErrorHandlingNotSupportedReqReplyTxn(
+                                    this.messageRpc.OperationContext.Channel.LocalAddress
+                                )
                             )
-                        )
-                    );
+                        );
                 }
 
                 // We always work on cloned message when there are backup endpoints to handle exception cases
@@ -132,12 +140,13 @@ namespace System.ServiceModel.Routing
                         {
                             impersonationContext = messageRpc.PrepareCall();
                         }
-                        result = this.currentClient.BeginOperation(
-                            message,
-                            messageRpc.Transaction,
-                            this.PrepareAsyncCompletion(operationCallback),
-                            this
-                        );
+                        result = this.currentClient
+                            .BeginOperation(
+                                message,
+                                messageRpc.Transaction,
+                                this.PrepareAsyncCompletion(operationCallback),
+                                this
+                            );
                     }
                     finally
                     {
@@ -299,9 +308,8 @@ namespace System.ServiceModel.Routing
             {
                 // The channel may not fault for this exception for bindings other than netTcpBinding
                 // We abort the channel in that case. We proactively clean up so that we don't have to cleanup later
-                SessionChannels sessionChannels = this.service.GetSessionChannels(
-                    this.messageRpc.Impersonating
-                );
+                SessionChannels sessionChannels = this.service
+                    .GetSessionChannels(this.messageRpc.Impersonating);
                 if (sessionChannels != null)
                 {
                     sessionChannels.AbortChannel(sendOperation.CurrentEndpoint);
@@ -326,9 +334,8 @@ namespace System.ServiceModel.Routing
                 // We will then retry the request one more time only. In retried request, it will create a new channel because the cached channel has been cleaned up.
                 if (!this.abortedRetry)
                 {
-                    SessionChannels sessionChannels = this.service.GetSessionChannels(
-                        this.messageRpc.Impersonating
-                    );
+                    SessionChannels sessionChannels = this.service
+                        .GetSessionChannels(this.messageRpc.Impersonating);
                     if (sessionChannels != null)
                     {
                         this.abortedRetry = true;

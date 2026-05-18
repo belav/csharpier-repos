@@ -93,17 +93,18 @@ namespace tests.system_data_dll.System_Data
             Compare(dt.Rows.Count, 6);
             dt.Rows.Remove(dt.Rows[0]);
             Compare(dt.Rows.Count, 5);
-            dt.Rows.Add(
-                new object[]
-                {
-                    1,
-                    "1-String1",
-                    "1-String2",
-                    new DateTime(2005, 1, 1, 0, 0, 0, 0),
-                    1.534,
-                    true,
-                }
-            );
+            dt.Rows
+                .Add(
+                    new object[]
+                    {
+                        1,
+                        "1-String1",
+                        "1-String2",
+                        new DateTime(2005, 1, 1, 0, 0, 0, 0),
+                        1.534,
+                        true,
+                    }
+                );
             Compare(dt.Rows.Count, 6);
         }
     }

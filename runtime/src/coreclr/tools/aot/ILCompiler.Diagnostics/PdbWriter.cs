@@ -105,8 +105,8 @@ namespace ILCompiler.Diagnostics
             IntPtr libraryHandle = IntPtr.Zero;
             if (libraryName == DiaSymReaderLibrary)
             {
-                string archSuffix = RuntimeInformation
-                    .ProcessArchitecture.ToString()
+                string archSuffix = RuntimeInformation.ProcessArchitecture
+                    .ToString()
                     .ToLowerInvariant();
                 if (archSuffix == "x64")
                 {
@@ -521,10 +521,8 @@ namespace ILCompiler.Diagnostics
 
                 Version compilerVersion = null;
                 foreach (
-                    AssemblyFileVersionAttribute versionAttribute in typeof(PdbWriter).Assembly.GetCustomAttributes(
-                        typeof(AssemblyFileVersionAttribute),
-                        true
-                    )
+                    AssemblyFileVersionAttribute versionAttribute in typeof(PdbWriter).Assembly
+                        .GetCustomAttributes(typeof(AssemblyFileVersionAttribute), true)
                 )
                 {
                     string versionString = versionAttribute.Version;
@@ -543,10 +541,8 @@ namespace ILCompiler.Diagnostics
                 // compiler version string
                 string informationalVersion = null;
                 foreach (
-                    AssemblyInformationalVersionAttribute versionAttribute in typeof(PdbWriter).Assembly.GetCustomAttributes(
-                        typeof(AssemblyInformationalVersionAttribute),
-                        true
-                    )
+                    AssemblyInformationalVersionAttribute versionAttribute in typeof(PdbWriter).Assembly
+                        .GetCustomAttributes(typeof(AssemblyInformationalVersionAttribute), true)
                 )
                 {
                     informationalVersion = versionAttribute.InformationalVersion;

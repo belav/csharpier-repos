@@ -581,21 +581,19 @@ namespace System.Workflow.Runtime
                                 Activity activity;
                                 if (type != null)
                                 {
-                                    activity = this.dispenser.LoadRootActivity(
-                                        type,
-                                        true,
-                                        initForRuntime
-                                    );
+                                    activity = this.dispenser
+                                        .LoadRootActivity(type, true, initForRuntime);
                                 }
                                 else
                                 {
-                                    activity = this.dispenser.LoadRootActivity(
-                                        xomlText,
-                                        rulesText,
-                                        key as byte[],
-                                        true,
-                                        initForRuntime
-                                    );
+                                    activity = this.dispenser
+                                        .LoadRootActivity(
+                                            xomlText,
+                                            rulesText,
+                                            key as byte[],
+                                            true,
+                                            initForRuntime
+                                        );
                                 }
                                 lock (this.mruList)
                                 {

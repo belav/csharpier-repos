@@ -61,9 +61,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Suggestions
             CancellationToken cancellationToken
         )
         {
-            await this.ThreadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(
-                cancellationToken
-            );
+            await this.ThreadingContext
+                .JoinableTaskFactory
+                .SwitchToMainThreadAsync(cancellationToken);
 
             var fixAllKind = FixAllState.FixAllKind;
             var functionId = fixAllKind switch

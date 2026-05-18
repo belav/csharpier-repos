@@ -45,19 +45,14 @@ namespace System.Data.Metadata.Edm
             typeUsage = null;
             EdmType edmType = null;
             if (
-                this.MetadataWorkspace.TryGetItem<EdmType>(
-                    fullName,
-                    ignoreCase,
-                    this.TargetDataspace,
-                    out edmType
-                )
+                this.MetadataWorkspace
+                    .TryGetItem<EdmType>(fullName, ignoreCase, this.TargetDataspace, out edmType)
             )
             {
                 if (Helper.IsPrimitiveType(edmType))
                 {
-                    typeUsage = this.MetadataWorkspace.GetCanonicalModelTypeUsage(
-                        ((PrimitiveType)edmType).PrimitiveTypeKind
-                    );
+                    typeUsage = this.MetadataWorkspace
+                        .GetCanonicalModelTypeUsage(((PrimitiveType)edmType).PrimitiveTypeKind);
                 }
                 else
                 {

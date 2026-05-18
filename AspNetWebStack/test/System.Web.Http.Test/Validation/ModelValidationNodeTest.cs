@@ -183,9 +183,8 @@ namespace System.Web.Http.Validation
             ModelValidationNode node = new ModelValidationNode(modelMetadata, "theKey");
             node.Validating += (sender, e) => log.Add("In OnValidating()");
             node.Validated += (sender, e) => log.Add("In OnValidated()");
-            node.ChildNodes.Add(
-                new ModelValidationNode(childMetadata, "theKey.ValidStringProperty")
-            );
+            node.ChildNodes
+                .Add(new ModelValidationNode(childMetadata, "theKey.ValidStringProperty"));
 
             // Act
             node.Validate(ContextUtil.CreateActionContext());
@@ -218,9 +217,8 @@ namespace System.Web.Http.Validation
                 "InvalidStringProperty"
             );
             ModelValidationNode node = new ModelValidationNode(modelMetadata, "theKey");
-            node.ChildNodes.Add(
-                new ModelValidationNode(childMetadata, "theKey.InvalidStringProperty")
-            );
+            node.ChildNodes
+                .Add(new ModelValidationNode(childMetadata, "theKey.InvalidStringProperty"));
             node.Validating += (sender, e) => log.Add("In OnValidating()");
             node.Validated += (sender, e) => log.Add("In OnValidated()");
             HttpActionContext context = ContextUtil.CreateActionContext();

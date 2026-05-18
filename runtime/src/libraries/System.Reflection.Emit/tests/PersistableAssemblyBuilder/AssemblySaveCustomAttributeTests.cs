@@ -646,10 +646,10 @@ namespace System.Reflection.Emit.Tests
                                     Assert.Equal(
                                         typeof(EmptyTestClass).AssemblyQualifiedName,
                                         paramAttributes[i]
-                                            .NamedArguments.First(na =>
-                                                na.MemberName == "MarshalType"
-                                            )
-                                            .TypedValue.Value
+                                            .NamedArguments
+                                            .First(na => na.MemberName == "MarshalType")
+                                            .TypedValue
+                                            .Value
                                     );
                                     break;
                                 case "GuidAttribute":
@@ -763,23 +763,26 @@ namespace System.Reflection.Emit.Tests
                     case UnmanagedType.CustomMarshaler:
                         Assert.Equal(
                             typeof(EmptyTestClass).AssemblyQualifiedName,
-                            attributeFromDisk
-                                .NamedArguments.First(na => na.MemberName == "MarshalType")
-                                .TypedValue.Value
+                            attributeFromDisk.NamedArguments
+                                .First(na => na.MemberName == "MarshalType")
+                                .TypedValue
+                                .Value
                         );
                         Assert.Equal(
                             "MyCookie",
-                            attributeFromDisk
-                                .NamedArguments.First(na => na.MemberName == "MarshalCookie")
-                                .TypedValue.Value
+                            attributeFromDisk.NamedArguments
+                                .First(na => na.MemberName == "MarshalCookie")
+                                .TypedValue
+                                .Value
                         );
                         break;
                     case UnmanagedType.ByValTStr:
                         Assert.Equal(
                             256,
-                            attributeFromDisk
-                                .NamedArguments.First(na => na.MemberName == "SizeConst")
-                                .TypedValue.Value
+                            attributeFromDisk.NamedArguments
+                                .First(na => na.MemberName == "SizeConst")
+                                .TypedValue
+                                .Value
                         );
                         break;
                 }
@@ -816,7 +819,8 @@ namespace System.Reflection.Emit.Tests
 
                 Type testEnum = AssemblySaveTools
                     .LoadAssemblyFromPath(file.Path)
-                    .Modules.First()
+                    .Modules
+                    .First()
                     .GetType("TestEnum");
 
                 Assert.True(testEnum.IsEnum);

@@ -22,9 +22,8 @@ namespace System.ServiceModel.Activation
         {
             AspNetPartialTrustHelpers.FailIfInPartialTrustOutsideAspNet();
 
-            string[] bindings = HostedTransportConfigurationManager.MetabaseSettings.GetBindings(
-                addressing.Scheme
-            );
+            string[] bindings = HostedTransportConfigurationManager.MetabaseSettings
+                .GetBindings(addressing.Scheme);
 
             this.uniqueManager = new MsmqHostedTransportManager(bindings, addressing);
 
@@ -35,9 +34,10 @@ namespace System.ServiceModel.Activation
                     HostingEnvironment.ApplicationVirtualPath,
                     false
                 );
-                this.ListenAddresses.Add(
-                    new BaseUriWithWildcard(address, TransportDefaults.HostNameComparisonMode)
-                );
+                this.ListenAddresses
+                    .Add(
+                        new BaseUriWithWildcard(address, TransportDefaults.HostNameComparisonMode)
+                    );
 
                 UniqueTransportManagerRegistration registration =
                     new UniqueTransportManagerRegistration(
@@ -45,11 +45,8 @@ namespace System.ServiceModel.Activation
                         address,
                         TransportDefaults.HostNameComparisonMode
                     );
-                Msmq.StaticTransportManagerTable.RegisterUri(
-                    address,
-                    TransportDefaults.HostNameComparisonMode,
-                    registration
-                );
+                Msmq.StaticTransportManagerTable
+                    .RegisterUri(address, TransportDefaults.HostNameComparisonMode, registration);
             }
 
             this.uniqueManager.Start(null);

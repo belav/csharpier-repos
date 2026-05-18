@@ -111,12 +111,8 @@ namespace System.Activities.Debugger
             int numberOfEarlyLocals
         )
         {
-            return this.dynamicModuleManager.DefineState(
-                location,
-                name,
-                earlyLocals,
-                numberOfEarlyLocals
-            );
+            return this.dynamicModuleManager
+                .DefineState(location, name, earlyLocals, numberOfEarlyLocals);
         }
 
         internal State DefineStateWithDebugInfo(SourceLocation location, string name)
@@ -349,10 +345,11 @@ namespace System.Activities.Debugger
                 this.threadId = threadId;
                 this.callStack = new Stack<VirtualStackFrame>();
                 this.controller = new ThreadWorkerController();
-                this.controller.Initialize(
-                    threadName + "." + threadId.ToString(CultureInfo.InvariantCulture),
-                    stateManager
-                );
+                this.controller
+                    .Initialize(
+                        threadName + "." + threadId.ToString(CultureInfo.InvariantCulture),
+                        stateManager
+                    );
             }
 
             // Unwind call stack cleanly.
@@ -552,10 +549,8 @@ namespace System.Activities.Debugger
                             ++suffix;
                         }
 
-                        TypeBuilder typeBuilder = this.dynamicModule.DefineType(
-                            typeName,
-                            TypeAttributes.Public | TypeAttributes.Class
-                        );
+                        TypeBuilder typeBuilder = this.dynamicModule
+                            .DefineType(typeName, TypeAttributes.Public | TypeAttributes.Class);
 
                         for (int i = indexLastBaked; i < this.states.Count; i++)
                         {
@@ -776,13 +771,14 @@ namespace System.Activities.Debugger
                     new Object[] { }
                 );
 
-                assemblyBuilder = AppDomain.CurrentDomain.DefineDynamicAssembly(
-                    assemblyName,
-                    AssemblyBuilderAccess.Run,
-                    null,
-                    true,
-                    new CustomAttributeBuilder[] { transparent }
-                );
+                assemblyBuilder = AppDomain.CurrentDomain
+                    .DefineDynamicAssembly(
+                        assemblyName,
+                        AssemblyBuilderAccess.Run,
+                        null,
+                        true,
+                        new CustomAttributeBuilder[] { transparent }
+                    );
 
                 // Mark generated code as debuggable.
                 // See http://blogs.msdn.com/rmbyers/archive/2005/06/26/432922.aspx for explanation.

@@ -33,8 +33,9 @@ namespace Microsoft.CodeAnalysis.Formatting
                 return false;
             }
 
-            var document =
-                args.SubjectBuffer.CurrentSnapshot.GetOpenDocumentInCurrentContextWithChanges();
+            var document = args.SubjectBuffer
+                .CurrentSnapshot
+                .GetOpenDocumentInCurrentContextWithChanges();
             if (document == null)
             {
                 return false;
@@ -47,10 +48,11 @@ namespace Microsoft.CodeAnalysis.Formatting
             }
 
             using (
-                context.OperationContext.AddScope(
-                    allowCancellation: true,
-                    EditorFeaturesResources.Formatting_currently_selected_text
-                )
+                context.OperationContext
+                    .AddScope(
+                        allowCancellation: true,
+                        EditorFeaturesResources.Formatting_currently_selected_text
+                    )
             )
             {
                 var buffer = args.SubjectBuffer;
@@ -81,10 +83,11 @@ namespace Microsoft.CodeAnalysis.Formatting
                         SpanTrackingMode.EdgeExclusive
                     );
                 args.TextView.SetSelection(currentSelection);
-                args.TextView.TryMoveCaretToAndEnsureVisible(
-                    currentSelection.End,
-                    ensureSpanVisibleOptions: EnsureSpanVisibleOptions.MinimumScroll
-                );
+                args.TextView
+                    .TryMoveCaretToAndEnsureVisible(
+                        currentSelection.End,
+                        ensureSpanVisibleOptions: EnsureSpanVisibleOptions.MinimumScroll
+                    );
 
                 // We have handled this command
                 return true;

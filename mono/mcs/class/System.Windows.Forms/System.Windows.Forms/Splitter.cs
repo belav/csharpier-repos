@@ -664,10 +664,11 @@ namespace System.Windows.Forms
 
         internal override void OnPaintInternal(PaintEventArgs e)
         {
-            e.Graphics.FillRectangle(
-                ThemeEngine.Current.ResPool.GetSolidBrush(this.BackColor),
-                e.ClipRectangle
-            );
+            e.Graphics
+                .FillRectangle(
+                    ThemeEngine.Current.ResPool.GetSolidBrush(this.BackColor),
+                    e.ClipRectangle
+                );
         }
 
         private void LayoutSplitter(object sender, LayoutEventArgs e)

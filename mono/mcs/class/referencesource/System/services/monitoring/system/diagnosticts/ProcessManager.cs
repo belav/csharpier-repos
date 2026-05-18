@@ -1510,9 +1510,8 @@ namespace System.Diagnostics
                     else
                     {
                         // for normal process without name, using the process ID.
-                        processInfo.processName = processInfo.processId.ToString(
-                            CultureInfo.InvariantCulture
-                        );
+                        processInfo.processName = processInfo.processId
+                            .ToString(CultureInfo.InvariantCulture);
                     }
                 }
                 else

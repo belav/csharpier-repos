@@ -318,9 +318,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             try
             {
                 MethodSymbol methodToInvoke = this.IsGenericMethod
-                    ? this.ImplementingMethod.Construct(
-                        this.TypeParameters.Cast<TypeParameterSymbol, TypeSymbol>()
-                    )
+                    ? this.ImplementingMethod
+                        .Construct(this.TypeParameters.Cast<TypeParameterSymbol, TypeSymbol>())
                     : this.ImplementingMethod;
 
                 F.CloseMethod(
@@ -433,9 +432,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     if (this.Arity > 0)
                     {
                         Debug.Assert(this.Arity == methodBeingWrapped.Arity);
-                        methodBeingWrapped = methodBeingWrapped.ConstructedFrom.Construct(
-                            StaticCast<TypeSymbol>.From(this.TypeParameters)
-                        );
+                        methodBeingWrapped = methodBeingWrapped.ConstructedFrom
+                            .Construct(StaticCast<TypeSymbol>.From(this.TypeParameters));
                     }
 
                     BoundBlock body = MethodBodySynthesizer.ConstructSingleInvocationMethodBody(

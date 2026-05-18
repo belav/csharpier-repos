@@ -78,24 +78,26 @@ namespace System.ServiceModel.Channels
             {
                 if (value < TimeSpan.Zero && value != Timeout.InfiniteTimeSpan)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ArgumentOutOfRangeException(
-                            "value",
-                            value,
-                            SR.GetString(SR.SFxTimeoutOutOfRange0)
-                        )
-                    );
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperError(
+                            new ArgumentOutOfRangeException(
+                                "value",
+                                value,
+                                SR.GetString(SR.SFxTimeoutOutOfRange0)
+                            )
+                        );
                 }
 
                 if (TimeoutHelper.IsTooLarge(value))
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ArgumentOutOfRangeException(
-                            "value",
-                            value,
-                            SR.GetString(SR.SFxTimeoutOutOfRangeTooBig)
-                        )
-                    );
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperError(
+                            new ArgumentOutOfRangeException(
+                                "value",
+                                value,
+                                SR.GetString(SR.SFxTimeoutOutOfRangeTooBig)
+                            )
+                        );
                 }
 
                 this.keepAliveInterval = value;
@@ -112,34 +114,37 @@ namespace System.ServiceModel.Channels
                 {
                     if (value == string.Empty)
                     {
-                        throw FxTrace.Exception.Argument(
-                            "value",
-                            SR.GetString(SR.WebSocketInvalidProtocolEmptySubprotocolString)
-                        );
+                        throw FxTrace.Exception
+                            .Argument(
+                                "value",
+                                SR.GetString(SR.WebSocketInvalidProtocolEmptySubprotocolString)
+                            );
                     }
 
                     if (value.Split(WebSocketHelper.ProtocolSeparators).Length > 1)
                     {
-                        throw FxTrace.Exception.Argument(
-                            "value",
-                            SR.GetString(
-                                SR.WebSocketInvalidProtocolContainsMultipleSubProtocolString,
-                                value
-                            )
-                        );
+                        throw FxTrace.Exception
+                            .Argument(
+                                "value",
+                                SR.GetString(
+                                    SR.WebSocketInvalidProtocolContainsMultipleSubProtocolString,
+                                    value
+                                )
+                            );
                     }
 
                     string invalidChar;
                     if (WebSocketHelper.IsSubProtocolInvalid(value, out invalidChar))
                     {
-                        throw FxTrace.Exception.Argument(
-                            "value",
-                            SR.GetString(
-                                SR.WebSocketInvalidProtocolInvalidCharInProtocolString,
-                                value,
-                                invalidChar
-                            )
-                        );
+                        throw FxTrace.Exception
+                            .Argument(
+                                "value",
+                                SR.GetString(
+                                    SR.WebSocketInvalidProtocolInvalidCharInProtocolString,
+                                    value,
+                                    invalidChar
+                                )
+                            );
                     }
                 }
 
@@ -162,13 +167,14 @@ namespace System.ServiceModel.Channels
             {
                 if (value < 0)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ArgumentOutOfRangeException(
-                            "value",
-                            value,
-                            SR.GetString(SR.ValueMustBePositive)
-                        )
-                    );
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperError(
+                            new ArgumentOutOfRangeException(
+                                "value",
+                                value,
+                                SR.GetString(SR.ValueMustBePositive)
+                            )
+                        );
                 }
 
                 this.maxPendingConnections = value;

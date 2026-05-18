@@ -314,9 +314,8 @@ namespace System.Xml.Schema
                 {
                     if (!prefix.Equals("xml") && !prefix.Equals("xmlns"))
                     {
-                        String ns = this.NamespaceManager.LookupNamespace(
-                            this.nametable.Get(prefix)
-                        );
+                        String ns = this.NamespaceManager
+                            .LookupNamespace(this.nametable.Get(prefix));
                         if (ns.Length != 0)
                         { //Do not add xmlns=""
                             rootSchema.Namespaces.Add(prefix, ns);
@@ -1390,9 +1389,8 @@ namespace System.Xml.Schema
                         InferElement(actualElement, false, parentSchema);
                         for (int i = 0; i < xss.Items.Count; ++i)
                         {
-                            xsc.Items.Add(
-                                CreateNewElementforChoice((XmlSchemaElement)xss.Items[i])
-                            );
+                            xsc.Items
+                                .Add(CreateNewElementforChoice((XmlSchemaElement)xss.Items[i]));
                         }
                         xss.Items.Clear();
                         xss.Items.Add(xsc);

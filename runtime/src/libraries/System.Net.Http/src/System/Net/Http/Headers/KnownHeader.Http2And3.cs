@@ -19,9 +19,10 @@ namespace System.Net.Http.Headers
                 : HPackEncoder.EncodeLiteralHeaderFieldWithoutIndexingNewNameToAllocatedArray(Name);
 
             Http3EncodedName = http3StaticTableIndex.HasValue
-                ? QPack.QPackEncoder.EncodeLiteralHeaderFieldWithStaticNameReferenceToArray(
-                    http3StaticTableIndex.GetValueOrDefault()
-                )
+                ? QPack.QPackEncoder
+                    .EncodeLiteralHeaderFieldWithStaticNameReferenceToArray(
+                        http3StaticTableIndex.GetValueOrDefault()
+                    )
                 : QPack.QPackEncoder.EncodeLiteralHeaderFieldWithoutNameReferenceToArray(Name);
         }
 

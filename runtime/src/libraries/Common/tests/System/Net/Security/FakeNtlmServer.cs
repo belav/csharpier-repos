@@ -242,9 +242,8 @@ namespace System.Net.Security
         private byte[] GenerateChallenge(Flags flags)
         {
             byte[] buffer = new byte[1000];
-            byte[] targetName = Encoding.Unicode.GetBytes(
-                TargetIsServer ? "Server" : _expectedCredential.Domain
-            );
+            byte[] targetName = Encoding.Unicode
+                .GetBytes(TargetIsServer ? "Server" : _expectedCredential.Domain);
             int payloadOffset = 56;
 
             // Loosely follow the flag manipulation in
@@ -327,9 +326,10 @@ namespace System.Net.Security
             using (IncrementalHash hmac = IncrementalHash.CreateHMAC(HashAlgorithmName.MD5, pwHash))
             {
                 hmac.AppendData(
-                    Encoding.Unicode.GetBytes(
-                        _expectedCredential.UserName.ToUpper() + _expectedCredential.Domain
-                    )
+                    Encoding.Unicode
+                        .GetBytes(
+                            _expectedCredential.UserName.ToUpper() + _expectedCredential.Domain
+                        )
                 );
                 return hmac.GetHashAndReset();
             }

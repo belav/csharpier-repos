@@ -82,9 +82,10 @@ class Program2
 </Workspace>",
                 codeActionTransform: solution =>
                 {
-                    var document1 = solution
-                        .Projects.Single()
-                        .Documents.Single(d => d.FilePath!.Contains("Program1"));
+                    var document1 = solution.Projects
+                        .Single()
+                        .Documents
+                        .Single(d => d.FilePath!.Contains("Program1"));
                     return solution.WithDocumentText(
                         document1.Id,
                         SourceText.From("NewProgram1Content")
@@ -92,9 +93,10 @@ class Program2
                 },
                 intermediaryTransform: solution =>
                 {
-                    var document2 = solution
-                        .Projects.Single()
-                        .Documents.Single(d => d.FilePath!.Contains("Program2"));
+                    var document2 = solution.Projects
+                        .Single()
+                        .Documents
+                        .Single(d => d.FilePath!.Contains("Program2"));
                     return solution.WithDocumentText(
                         document2.Id,
                         SourceText.From("NewProgram2Content")
@@ -125,9 +127,10 @@ class Program2
 </Workspace>",
                 codeActionTransform: solution =>
                 {
-                    var document1 = solution
-                        .Projects.Single()
-                        .Documents.Single(d => d.FilePath!.Contains("Program1"));
+                    var document1 = solution.Projects
+                        .Single()
+                        .Documents
+                        .Single(d => d.FilePath!.Contains("Program1"));
                     return solution.WithDocumentText(
                         document1.Id,
                         SourceText.From("NewProgram1Content")
@@ -135,9 +138,10 @@ class Program2
                 },
                 intermediaryTransform: solution =>
                 {
-                    var document2 = solution
-                        .Projects.Single()
-                        .Documents.Single(d => d.FilePath!.Contains("Program2"));
+                    var document2 = solution.Projects
+                        .Single()
+                        .Documents
+                        .Single(d => d.FilePath!.Contains("Program2"));
                     return solution.RemoveDocument(document2.Id);
                 }
             );
@@ -165,9 +169,10 @@ class Program2
 </Workspace>",
                 codeActionTransform: solution =>
                 {
-                    var document1 = solution
-                        .Projects.Single()
-                        .Documents.Single(d => d.FilePath!.Contains("Program1"));
+                    var document1 = solution.Projects
+                        .Single()
+                        .Documents
+                        .Single(d => d.FilePath!.Contains("Program1"));
                     return solution.WithDocumentText(
                         document1.Id,
                         SourceText.From("NewProgram1Content1")
@@ -175,9 +180,10 @@ class Program2
                 },
                 intermediaryTransform: solution =>
                 {
-                    var document1 = solution
-                        .Projects.Single()
-                        .Documents.Single(d => d.FilePath!.Contains("Program1"));
+                    var document1 = solution.Projects
+                        .Single()
+                        .Documents
+                        .Single(d => d.FilePath!.Contains("Program1"));
                     return solution.WithDocumentText(
                         document1.Id,
                         SourceText.From("NewProgram1Content2")
@@ -207,9 +213,10 @@ class Program2
 </Workspace>",
                 codeActionTransform: solution =>
                 {
-                    var document1 = solution
-                        .Projects.Single()
-                        .Documents.Single(d => d.FilePath!.Contains("Program1"));
+                    var document1 = solution.Projects
+                        .Single()
+                        .Documents
+                        .Single(d => d.FilePath!.Contains("Program1"));
                     return solution.WithDocumentText(
                         document1.Id,
                         SourceText.From("NewProgram1Content1")
@@ -217,9 +224,10 @@ class Program2
                 },
                 intermediaryTransform: solution =>
                 {
-                    var document1 = solution
-                        .Projects.Single()
-                        .Documents.Single(d => d.FilePath!.Contains("Program1"));
+                    var document1 = solution.Projects
+                        .Single()
+                        .Documents
+                        .Single(d => d.FilePath!.Contains("Program1"));
                     return solution.RemoveDocument(document1.Id);
                 }
             );
@@ -247,16 +255,18 @@ class Program2
 </Workspace>",
                 codeActionTransform: solution =>
                 {
-                    var document1 = solution
-                        .Projects.Single()
-                        .Documents.Single(d => d.FilePath!.Contains("Program1"));
+                    var document1 = solution.Projects
+                        .Single()
+                        .Documents
+                        .Single(d => d.FilePath!.Contains("Program1"));
                     return solution.RemoveDocument(document1.Id);
                 },
                 intermediaryTransform: solution =>
                 {
-                    var document2 = solution
-                        .Projects.Single()
-                        .Documents.Single(d => d.FilePath!.Contains("Program2"));
+                    var document2 = solution.Projects
+                        .Single()
+                        .Documents
+                        .Single(d => d.FilePath!.Contains("Program2"));
                     return solution.WithDocumentText(
                         document2.Id,
                         SourceText.From("NewProgram1Content2")

@@ -117,10 +117,9 @@ namespace System.ServiceModel.Security.Tokens
             this.userName = userName;
             this.passwordHash = ComputeHMACSHA256Hash(password, salt);
             this.salt = salt;
-            this.authorizationPolicies =
-                System.IdentityModel.SecurityUtils.CloneAuthorizationPoliciesIfNecessary(
-                    authorizationPolicies
-                );
+            this.authorizationPolicies = System.IdentityModel
+                .SecurityUtils
+                .CloneAuthorizationPoliciesIfNecessary(authorizationPolicies);
         }
 
         public bool PasswordEquals(string password)
@@ -136,16 +135,16 @@ namespace System.ServiceModel.Security.Tokens
 
         public ReadOnlyCollection<IAuthorizationPolicy> GetAuthorizationPolicies()
         {
-            return System.IdentityModel.SecurityUtils.CloneAuthorizationPoliciesIfNecessary(
-                this.authorizationPolicies
-            );
+            return System.IdentityModel
+                .SecurityUtils
+                .CloneAuthorizationPoliciesIfNecessary(this.authorizationPolicies);
         }
 
         public void Dispose()
         {
-            System.IdentityModel.SecurityUtils.DisposeAuthorizationPoliciesIfNecessary(
-                this.authorizationPolicies
-            );
+            System.IdentityModel
+                .SecurityUtils
+                .DisposeAuthorizationPoliciesIfNecessary(this.authorizationPolicies);
         }
 
         static byte[] ComputeHMACSHA256Hash(string password, byte[] key)

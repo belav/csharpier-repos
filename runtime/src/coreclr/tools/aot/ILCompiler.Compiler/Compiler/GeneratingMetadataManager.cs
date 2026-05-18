@@ -215,9 +215,8 @@ namespace ILCompiler
             foreach (var field in GetFieldsWithRuntimeMapping())
             {
                 FieldDesc fieldToAdd = field;
-                TypeDesc canonOwningType = field.OwningType.ConvertToCanonForm(
-                    CanonicalFormKind.Specific
-                );
+                TypeDesc canonOwningType = field.OwningType
+                    .ConvertToCanonForm(CanonicalFormKind.Specific);
                 if (canonOwningType.IsCanonicalSubtype(CanonicalFormKind.Any))
                 {
                     FieldDesc canonField = _typeSystemContext.GetFieldForInstantiatedType(

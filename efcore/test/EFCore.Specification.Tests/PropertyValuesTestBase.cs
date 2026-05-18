@@ -940,8 +940,8 @@ public abstract class PropertyValuesTestBase<TFixture> : IClassFixture<TFixture>
         var buildingValues = entry.CurrentValues;
         var clonedBuildingValues = buildingValues.Clone();
 
-        var property = context
-            .Model.FindEntityType(typeof(Whiteboard))
+        var property = context.Model
+            .FindEntityType(typeof(Whiteboard))
             .FindProperty(nameof(Whiteboard.AssetTag));
 
         Assert.Equal(
@@ -1063,11 +1063,11 @@ public abstract class PropertyValuesTestBase<TFixture> : IClassFixture<TFixture>
         var values = entry.CurrentValues;
         var clonedValues = values.Clone();
 
-        var shadowProperty = context
-            .Model.FindEntityType(typeof(PastEmployee))
+        var shadowProperty = context.Model
+            .FindEntityType(typeof(PastEmployee))
             .FindProperty("Shadow4");
-        var termProperty = context
-            .Model.FindEntityType(typeof(PastEmployee))
+        var termProperty = context.Model
+            .FindEntityType(typeof(PastEmployee))
             .FindProperty(nameof(PastEmployee.TerminationDate));
 
         Assert.Equal(
@@ -2306,7 +2306,8 @@ public abstract class PropertyValuesTestBase<TFixture> : IClassFixture<TFixture>
         var building = (Building)
             context
                 .Entry(context.Set<Building>().Single(b => b.Name == "Building One"))
-                .CurrentValues.ToObject();
+                .CurrentValues
+                .ToObject();
 
         building.BuildingId = new Guid();
 
@@ -2335,7 +2336,8 @@ public abstract class PropertyValuesTestBase<TFixture> : IClassFixture<TFixture>
         var building = (Building)
             context
                 .Entry(context.Set<Building>().Single(b => b.Name == "Building One"))
-                .CurrentValues.ToObject();
+                .CurrentValues
+                .ToObject();
         building.BuildingId = new Guid();
 
         context.Set<Building>().Attach(building);
@@ -2372,7 +2374,8 @@ public abstract class PropertyValuesTestBase<TFixture> : IClassFixture<TFixture>
                         .OfType<CurrentEmployee>()
                         .Single(b => b.FirstName == "Rowan")
                 )
-                .CurrentValues.ToObject();
+                .CurrentValues
+                .ToObject();
         employee.EmployeeId = -77;
 
         context.Set<Employee>().Attach(employee);
@@ -2405,7 +2408,8 @@ public abstract class PropertyValuesTestBase<TFixture> : IClassFixture<TFixture>
                         .OfType<CurrentEmployee>()
                         .Single(b => b.FirstName == "Rowan")
                 )
-                .CurrentValues.ToObject();
+                .CurrentValues
+                .ToObject();
         employee.EmployeeId = -77;
 
         context.Set<Employee>().Attach(employee);
@@ -2446,7 +2450,8 @@ public abstract class PropertyValuesTestBase<TFixture> : IClassFixture<TFixture>
                         .OfType<CurrentEmployee>()
                         .Single(b => b.FirstName == "Rowan")
                 )
-                .CurrentValues.ToObject();
+                .CurrentValues
+                .ToObject();
         employee.EmployeeId = pastEmployeeId;
 
         context.Set<Employee>().Attach(employee);
@@ -2487,7 +2492,8 @@ public abstract class PropertyValuesTestBase<TFixture> : IClassFixture<TFixture>
                         .OfType<CurrentEmployee>()
                         .Single(b => b.FirstName == "Rowan")
                 )
-                .CurrentValues.ToObject();
+                .CurrentValues
+                .ToObject();
         employee.EmployeeId = pastEmployeeId;
 
         context.Set<Employee>().Attach(employee);

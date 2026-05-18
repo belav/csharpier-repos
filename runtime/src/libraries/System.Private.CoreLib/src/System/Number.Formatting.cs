@@ -1061,11 +1061,12 @@ namespace System
             }
             else
             {
-                return Encoding.UTF8.TryGetBytes(
-                    source,
-                    MemoryMarshal.Cast<TChar, byte>(destination),
-                    out charsWritten
-                );
+                return Encoding.UTF8
+                    .TryGetBytes(
+                        source,
+                        MemoryMarshal.Cast<TChar, byte>(destination),
+                        out charsWritten
+                    );
             }
         }
 

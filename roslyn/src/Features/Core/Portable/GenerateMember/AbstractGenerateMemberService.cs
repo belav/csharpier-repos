@@ -94,8 +94,8 @@ namespace Microsoft.CodeAnalysis.GenerateMember
             isStatic = false;
             isColorColorCase = false;
 
-            var syntaxFacts =
-                semanticDocument.Document.GetRequiredLanguageService<ISyntaxFactsService>();
+            var syntaxFacts = semanticDocument.Document
+                .GetRequiredLanguageService<ISyntaxFactsService>();
             var semanticModel = semanticDocument.SemanticModel;
             if (syntaxFacts.IsSimpleMemberAccessExpression(expression))
             {
@@ -208,8 +208,8 @@ namespace Microsoft.CodeAnalysis.GenerateMember
                 if (propertyPatternClause != null)
                 {
                     // something like: { [|X|]: int i } or like: Blah { [|X|]: int i }
-                    var inferenceService =
-                        semanticDocument.Document.GetRequiredLanguageService<ITypeInferenceService>();
+                    var inferenceService = semanticDocument.Document
+                        .GetRequiredLanguageService<ITypeInferenceService>();
                     typeToGenerateIn =
                         inferenceService.InferType(
                             semanticModel,

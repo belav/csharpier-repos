@@ -33,7 +33,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                 .Execute()
                 .Should()
                 .Pass()
-                .And.HaveStdOutContaining("Hello World");
+                .And
+                .HaveStdOutContaining("Hello World");
 
             dotnet
                 .Exec("exec", appDll)
@@ -42,7 +43,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                 .Execute()
                 .Should()
                 .Pass()
-                .And.HaveStdOutContaining("Hello World");
+                .And
+                .HaveStdOutContaining("Hello World");
         }
 
         [Fact]
@@ -56,32 +58,31 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
             File.Copy(appDll, appExe, true);
             File.Delete(appDll);
 
-            TestContext
-                .BuiltDotNet.Exec("exec", appExe)
+            TestContext.BuiltDotNet
+                .Exec("exec", appExe)
                 .CaptureStdErr()
                 .Execute(expectedToFail: true)
                 .Should()
                 .Fail()
-                .And.HaveStdErrContaining(
-                    "has already been found but with a different file extension"
-                );
+                .And
+                .HaveStdErrContaining("has already been found but with a different file extension");
         }
 
         [Fact]
         public void Muxer_AltDirectorySeparatorChar()
         {
-            var appDll = sharedTestState.App.AppDll.Replace(
-                Path.DirectorySeparatorChar,
-                Path.AltDirectorySeparatorChar
-            );
-            TestContext
-                .BuiltDotNet.Exec(appDll)
+            var appDll = sharedTestState.App
+                .AppDll
+                .Replace(Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar);
+            TestContext.BuiltDotNet
+                .Exec(appDll)
                 .CaptureStdErr()
                 .CaptureStdOut()
                 .Execute()
                 .Should()
                 .Pass()
-                .And.HaveStdOutContaining("Hello World");
+                .And
+                .HaveStdOutContaining("Hello World");
         }
 
         [Fact]
@@ -95,14 +96,15 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
             var runtimeConfig = Path.Combine(subdirectory, Path.GetFileName(app.RuntimeConfigJson));
             File.Move(app.RuntimeConfigJson, runtimeConfig, overwrite: true);
 
-            TestContext
-                .BuiltDotNet.Exec("exec", "--runtimeconfig", runtimeConfig, app.AppDll)
+            TestContext.BuiltDotNet
+                .Exec("exec", "--runtimeconfig", runtimeConfig, app.AppDll)
                 .CaptureStdErr()
                 .CaptureStdOut()
                 .Execute()
                 .Should()
                 .Pass()
-                .And.HaveStdOutContaining("Hello World");
+                .And
+                .HaveStdOutContaining("Hello World");
         }
 
         [Fact]
@@ -123,8 +125,10 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                 .Execute()
                 .Should()
                 .Pass()
-                .And.HaveStdOutContaining("Hello World")
-                .And.HaveStdOutContaining(TestContext.MicrosoftNETCoreAppVersion);
+                .And
+                .HaveStdOutContaining("Hello World")
+                .And
+                .HaveStdOutContaining(TestContext.MicrosoftNETCoreAppVersion);
 
             // Verify running from within the working directory
             Command
@@ -137,8 +141,10 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                 .Execute()
                 .Should()
                 .Pass()
-                .And.HaveStdOutContaining("Hello World")
-                .And.HaveStdOutContaining(TestContext.MicrosoftNETCoreAppVersion);
+                .And
+                .HaveStdOutContaining("Hello World")
+                .And
+                .HaveStdOutContaining(TestContext.MicrosoftNETCoreAppVersion);
         }
 
         [Theory]
@@ -180,9 +186,12 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                     .Execute()
                     .Should()
                     .Pass()
-                    .And.HaveStdOutContaining("Hello World")
-                    .And.HaveStdOutContaining(TestContext.MicrosoftNETCoreAppVersion)
-                    .And.NotHaveStdErr();
+                    .And
+                    .HaveStdOutContaining("Hello World")
+                    .And
+                    .HaveStdOutContaining(TestContext.MicrosoftNETCoreAppVersion)
+                    .And
+                    .NotHaveStdErr();
 
                 // Verify running from within the working directory
                 Command
@@ -200,9 +209,12 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                     .Execute()
                     .Should()
                     .Pass()
-                    .And.HaveStdOutContaining("Hello World")
-                    .And.HaveStdOutContaining(TestContext.MicrosoftNETCoreAppVersion)
-                    .And.NotHaveStdErr();
+                    .And
+                    .HaveStdOutContaining("Hello World")
+                    .And
+                    .HaveStdOutContaining(TestContext.MicrosoftNETCoreAppVersion)
+                    .And
+                    .NotHaveStdErr();
             }
         }
 
@@ -238,19 +250,21 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                 .Execute()
                 .Should()
                 .Pass()
-                .And.HaveStdOutContaining("Hello World");
+                .And
+                .HaveStdOutContaining("Hello World");
         }
 
         [Fact]
         public void ComputedTPA_NoTrailingPathSeparator()
         {
-            TestContext
-                .BuiltDotNet.Exec(sharedTestState.App.AppDll)
+            TestContext.BuiltDotNet
+                .Exec(sharedTestState.App.AppDll)
                 .EnableTracingAndCaptureOutputs()
                 .Execute()
                 .Should()
                 .Pass()
-                .And.HaveStdErrMatching(
+                .And
+                .HaveStdErrMatching(
                     $"Property TRUSTED_PLATFORM_ASSEMBLIES = .*[^{Path.PathSeparator}]$",
                     System.Text.RegularExpressions.RegexOptions.Multiline
                 );
@@ -279,11 +293,14 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                 .Execute()
                 .Should()
                 .Fail()
-                .And.HaveStdErrContaining(
+                .And
+                .HaveStdErrContaining(
                     $"The library '{Binaries.HostPolicy.FileName}' required to execute the application was not found"
                 )
-                .And.HaveStdErrContaining("Failed to run as a self-contained app")
-                .And.HaveStdErrContaining(
+                .And
+                .HaveStdErrContaining("Failed to run as a self-contained app")
+                .And
+                .HaveStdErrContaining(
                     $"'{sharedTestState.MockApp.RuntimeConfigJson}' was not found"
                 );
         }
@@ -314,11 +331,14 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                 .Execute()
                 .Should()
                 .Fail()
-                .And.HaveStdErrContaining(
+                .And
+                .HaveStdErrContaining(
                     $"The library '{Binaries.HostPolicy.FileName}' required to execute the application was not found"
                 )
-                .And.HaveStdErrContaining("Failed to run as a self-contained app")
-                .And.HaveStdErrContaining($"'{app.RuntimeConfigJson}' did not specify a framework");
+                .And
+                .HaveStdErrContaining("Failed to run as a self-contained app")
+                .And
+                .HaveStdErrContaining($"'{app.RuntimeConfigJson}' did not specify a framework");
         }
 
         [Theory]
@@ -371,11 +391,14 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                 result
                     .Should()
                     .Fail()
-                    .And.HaveStdErrContaining(
+                    .And
+                    .HaveStdErrContaining(
                         $"https://aka.ms/dotnet-core-applaunch?{expectedUrlQuery}"
                     )
-                    .And.HaveStdErrContaining($"&rid={TestContext.BuildRID}")
-                    .And.HaveStdErrContaining(expectedStdErr);
+                    .And
+                    .HaveStdErrContaining($"&rid={TestContext.BuildRID}")
+                    .And
+                    .HaveStdErrContaining(expectedStdErr);
 
                 // Some Unix systems will have 8 bit exit codes.
                 Assert.True(
@@ -429,15 +452,20 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                     .WaitForExit(true)
                     .Should()
                     .Fail()
-                    .And.HaveStdErrContaining(
+                    .And
+                    .HaveStdErrContaining(
                         $"Showing error dialog for application: '{Path.GetFileName(appExe)}' - error code: 0x{expectedErrorCode}"
                     )
-                    .And.HaveStdErrContaining(
+                    .And
+                    .HaveStdErrContaining(
                         $"url: 'https://aka.ms/dotnet-core-applaunch?{expectedUrlQuery}"
                     )
-                    .And.HaveStdErrContaining("&gui=true")
-                    .And.HaveStdErrContaining($"&rid={TestContext.BuildRID}")
-                    .And.HaveStdErrMatching(
+                    .And
+                    .HaveStdErrContaining("&gui=true")
+                    .And
+                    .HaveStdErrContaining($"&rid={TestContext.BuildRID}")
+                    .And
+                    .HaveStdErrMatching(
                         $"details: (?>.|\\s)*{System.Text.RegularExpressions.Regex.Escape(expectedMissingFramework)}"
                     );
             }
@@ -472,14 +500,18 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                     .WaitForExit(true)
                     .Should()
                     .Fail()
-                    .And.HaveStdErrContaining(
+                    .And
+                    .HaveStdErrContaining(
                         $"Showing error dialog for application: '{Path.GetFileName(appExe)}' - error code: 0x{expectedErrorCode}"
                     )
-                    .And.HaveStdErrContaining(
+                    .And
+                    .HaveStdErrContaining(
                         $"url: 'https://aka.ms/dotnet-core-applaunch?missing_runtime=true"
                     )
-                    .And.HaveStdErrContaining("gui=true")
-                    .And.HaveStdErrContaining(
+                    .And
+                    .HaveStdErrContaining("gui=true")
+                    .And
+                    .HaveStdErrContaining(
                         $"&apphost_version={TestContext.MicrosoftNETCoreAppVersion}"
                     );
             }
@@ -499,9 +531,9 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
             using (new TestArtifact(dotnetWithMockHostFxr))
             {
                 Directory.CreateDirectory(dotnetWithMockHostFxr);
-                string expectedErrorCode = Constants.ErrorCode.FrameworkMissingFailure.ToString(
-                    "x"
-                );
+                string expectedErrorCode = Constants.ErrorCode
+                    .FrameworkMissingFailure
+                    .ToString("x");
 
                 var dotnetBuilder = new DotNetBuilder(
                     dotnetWithMockHostFxr,
@@ -526,14 +558,18 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                     .WaitForExit(true)
                     .Should()
                     .Fail()
-                    .And.HaveStdErrContaining(
+                    .And
+                    .HaveStdErrContaining(
                         $"Showing error dialog for application: '{Path.GetFileName(appExe)}' - error code: 0x{expectedErrorCode}"
                     )
-                    .And.HaveStdErrContaining(
+                    .And
+                    .HaveStdErrContaining(
                         "You must install or update .NET to run this application."
                     )
-                    .And.HaveStdErrContaining("App host version:")
-                    .And.HaveStdErrContaining("apphost_version=");
+                    .And
+                    .HaveStdErrContaining("App host version:")
+                    .And
+                    .HaveStdErrContaining("apphost_version=");
             }
         }
 
@@ -560,7 +596,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                     .Execute()
                     .Should()
                     .Fail()
-                    .And.NotHaveStdErrContaining("Showing error dialog for application");
+                    .And
+                    .NotHaveStdErrContaining("Showing error dialog for application");
             }
         }
 

@@ -114,8 +114,8 @@ namespace System.ServiceModel.Channels
 
         void ConfigureRequestor(ReliableRequestor requestor)
         {
-            ReliableMessagingVersion reliableMessagingVersion =
-                this.settings.ReliableMessagingVersion;
+            ReliableMessagingVersion reliableMessagingVersion = this.settings
+                .ReliableMessagingVersion;
             requestor.MessageVersion = this.settings.MessageVersion;
             requestor.Binder = this.binder;
             requestor.SetRequestResponsePattern();
@@ -341,11 +341,12 @@ namespace System.ServiceModel.Channels
                     || this.State == CommunicationState.Closing
                 )
                 {
-                    this.session.OnLocalFault(
-                        exception,
-                        SequenceTerminatedFault.CreateQuotaExceededFault(this.session.OutputID),
-                        null
-                    );
+                    this.session
+                        .OnLocalFault(
+                            exception,
+                            SequenceTerminatedFault.CreateQuotaExceededFault(this.session.OutputID),
+                            null
+                        );
                 }
             }
             else
@@ -411,14 +412,17 @@ namespace System.ServiceModel.Channels
                 {
                     TD.MaxRetryCyclesExceeded(SR.GetString(SR.MaximumRetryCountExceeded));
                 }
-                this.session.OnLocalFault(
-                    new CommunicationException(
-                        SR.GetString(SR.MaximumRetryCountExceeded),
-                        this.maxRetryCountException
-                    ),
-                    SequenceTerminatedFault.CreateMaxRetryCountExceededFault(this.session.OutputID),
-                    null
-                );
+                this.session
+                    .OnLocalFault(
+                        new CommunicationException(
+                            SR.GetString(SR.MaximumRetryCountExceeded),
+                            this.maxRetryCountException
+                        ),
+                        SequenceTerminatedFault.CreateMaxRetryCountExceededFault(
+                            this.session.OutputID
+                        ),
+                        null
+                    );
                 return new CompletedAsyncResult(callback, state);
             }
             else
@@ -493,16 +497,17 @@ namespace System.ServiceModel.Channels
                     {
                         TD.MaxRetryCyclesExceeded(SR.GetString(SR.MaximumRetryCountExceeded));
                     }
-                    this.session.OnLocalFault(
-                        new CommunicationException(
-                            SR.GetString(SR.MaximumRetryCountExceeded),
-                            this.maxRetryCountException
-                        ),
-                        SequenceTerminatedFault.CreateMaxRetryCountExceededFault(
-                            this.session.OutputID
-                        ),
-                        null
-                    );
+                    this.session
+                        .OnLocalFault(
+                            new CommunicationException(
+                                SR.GetString(SR.MaximumRetryCountExceeded),
+                                this.maxRetryCountException
+                            ),
+                            SequenceTerminatedFault.CreateMaxRetryCountExceededFault(
+                                this.session.OutputID
+                            ),
+                            null
+                        );
                     return;
                 }
 
@@ -673,8 +678,8 @@ namespace System.ServiceModel.Channels
                 throw Fx.AssertAndThrow("Argument reply cannot be null.");
             }
 
-            ReliableMessagingVersion reliableMessagingVersion =
-                this.settings.ReliableMessagingVersion;
+            ReliableMessagingVersion reliableMessagingVersion = this.settings
+                .ReliableMessagingVersion;
 
             if (
                 reliableMessagingVersion == ReliableMessagingVersion.WSReliableMessagingFebruary2005
@@ -728,9 +733,8 @@ namespace System.ServiceModel.Channels
                     if (fault != null)
                     {
                         this.session.OnLocalFault(null, fault, null);
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            fault.CreateException()
-                        );
+                        throw DiagnosticUtility.ExceptionUtility
+                            .ThrowHelperError(fault.CreateException());
                     }
                 }
                 finally
@@ -885,11 +889,12 @@ namespace System.ServiceModel.Channels
 
             try
             {
-                this.connection.ProcessTransferred(
-                    requestSequenceNumber,
-                    messageInfo.AcknowledgementInfo.Ranges,
-                    bufferRemaining
-                );
+                this.connection
+                    .ProcessTransferred(
+                        requestSequenceNumber,
+                        messageInfo.AcknowledgementInfo.Ranges,
+                        bufferRemaining
+                    );
 
                 this.session.OnRemoteActivity(this.connection.Strategy.QuotaRemaining == 0);
 
@@ -897,9 +902,8 @@ namespace System.ServiceModel.Channels
                 {
                     lock (this.ThisLock)
                     {
-                        this.ranges = this.ranges.MergeWith(
-                            messageInfo.SequencedMessageInfo.SequenceNumber
-                        );
+                        this.ranges = this.ranges
+                            .MergeWith(messageInfo.SequencedMessageInfo.SequenceNumber);
                     }
                 }
             }
@@ -1130,9 +1134,8 @@ namespace System.ServiceModel.Channels
             {
                 this.originalTimeout = timeout;
                 if (!parent.connection.AddMessage(message, timeout, this))
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        this.parent.GetInvalidAddException()
-                    );
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperError(this.parent.GetInvalidAddException());
             }
 
             public void Set(Message reply)
@@ -1199,23 +1202,22 @@ namespace System.ServiceModel.Channels
 
                     if (this.aborted)
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            this.parent.CreateClosedException()
-                        );
+                        throw DiagnosticUtility.ExceptionUtility
+                            .ThrowHelperError(this.parent.CreateClosedException());
                     }
                     else if (this.faulted)
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            this.parent.GetTerminalException()
-                        );
+                        throw DiagnosticUtility.ExceptionUtility
+                            .ThrowHelperError(this.parent.GetTerminalException());
                     }
                     else if (expired)
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new TimeoutException(
-                                SR.GetString(SR.TimeoutOnRequest, this.originalTimeout)
-                            )
-                        );
+                        throw DiagnosticUtility.ExceptionUtility
+                            .ThrowHelperError(
+                                new TimeoutException(
+                                    SR.GetString(SR.TimeoutOnRequest, this.originalTimeout)
+                                )
+                            );
                     }
                     else
                     {
@@ -1305,13 +1307,14 @@ namespace System.ServiceModel.Channels
 
             public void BeginSendRequest(Message message, TimeSpan timeout)
             {
-                parent.connection.BeginAddMessage(
-                    message,
-                    timeout,
-                    this,
-                    Fx.ThunkCallback(new AsyncCallback(AddCompleted)),
-                    null
-                );
+                parent.connection
+                    .BeginAddMessage(
+                        message,
+                        timeout,
+                        this,
+                        Fx.ThunkCallback(new AsyncCallback(AddCompleted)),
+                        null
+                    );
             }
 
             public void Complete()

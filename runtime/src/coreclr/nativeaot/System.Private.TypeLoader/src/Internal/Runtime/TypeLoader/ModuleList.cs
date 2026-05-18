@@ -156,10 +156,8 @@ namespace Internal.Runtime.TypeLoader
 
             if (
                 !preferredModuleHandle.IsNull
-                && !moduleMap.HandleToModuleIndex.TryGetValue(
-                    preferredModuleHandle,
-                    out _preferredIndex
-                )
+                && !moduleMap.HandleToModuleIndex
+                    .TryGetValue(preferredModuleHandle, out _preferredIndex)
             )
             {
                 Environment.FailFast(
@@ -294,10 +292,8 @@ namespace Internal.Runtime.TypeLoader
 
             if (
                 !preferredModuleHandle.IsNull
-                && !moduleMap.HandleToModuleIndex.TryGetValue(
-                    preferredModuleHandle,
-                    out _preferredIndex
-                )
+                && !moduleMap.HandleToModuleIndex
+                    .TryGetValue(preferredModuleHandle, out _preferredIndex)
             )
             {
                 Environment.FailFast(
@@ -554,17 +550,17 @@ namespace Internal.Runtime.TypeLoader
         {
             if (methodSignature.IsNativeLayoutSignature)
             {
-                return ModuleList.Instance.GetModuleInfoByHandle(
-                    new TypeManagerHandle(methodSignature.ModuleHandle)
-                );
+                return ModuleList.Instance
+                    .GetModuleInfoByHandle(new TypeManagerHandle(methodSignature.ModuleHandle));
             }
             else
             {
                 ModuleInfo moduleInfo;
-                bool success = ModuleList.Instance.TryGetModuleInfoByHandle(
-                    new TypeManagerHandle(methodSignature.ModuleHandle),
-                    out moduleInfo
-                );
+                bool success = ModuleList.Instance
+                    .TryGetModuleInfoByHandle(
+                        new TypeManagerHandle(methodSignature.ModuleHandle),
+                        out moduleInfo
+                    );
                 Debug.Assert(success);
                 return moduleInfo;
             }

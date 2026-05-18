@@ -111,9 +111,10 @@ namespace System.Data.EntityModel.SchemaObjectModel
                     usingElement.AddError(
                         ErrorCode.InvalidNamespaceInUsing,
                         EdmSchemaErrorSeverity.Error,
-                        System.Data.Entity.Strings.InvalidNamespaceInUsing(
-                            usingElement.NamespaceName
-                        )
+                        System.Data
+                            .Entity
+                            .Strings
+                            .InvalidNamespaceInUsing(usingElement.NamespaceName)
                     );
                 }
             }

@@ -45,9 +45,8 @@ namespace System.ServiceModel.Description
             set
             {
                 if (!AuditLogLocationHelper.IsDefined(value))
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ArgumentOutOfRangeException("value")
-                    );
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperError(new ArgumentOutOfRangeException("value"));
 
                 this.auditLogLocation = value;
             }
@@ -65,9 +64,8 @@ namespace System.ServiceModel.Description
             set
             {
                 if (!AuditLevelHelper.IsDefined(value))
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ArgumentOutOfRangeException("value")
-                    );
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperError(new ArgumentOutOfRangeException("value"));
 
                 this.serviceAuthorizationAuditLevel = value;
             }
@@ -79,9 +77,8 @@ namespace System.ServiceModel.Description
             set
             {
                 if (!AuditLevelHelper.IsDefined(value))
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ArgumentOutOfRangeException("value")
-                    );
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperError(new ArgumentOutOfRangeException("value"));
 
                 this.messageAuthenticationAuditLevel = value;
             }
@@ -105,9 +102,8 @@ namespace System.ServiceModel.Description
         )
         {
             if (parameters == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentNullException("parameters")
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(new ArgumentNullException("parameters"));
 
             parameters.Add(this);
         }
@@ -118,13 +114,11 @@ namespace System.ServiceModel.Description
         )
         {
             if (description == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentNullException("description")
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(new ArgumentNullException("description"));
             if (serviceHostBase == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentNullException("serviceHostBase")
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(new ArgumentNullException("serviceHostBase"));
 
             for (int i = 0; i < serviceHostBase.ChannelDispatchers.Count; i++)
             {

@@ -76,8 +76,7 @@ namespace System.ServiceModel.Configuration
 
         [ConfigurationProperty(
             ConfigurationStrings.DefaultKeyEntropyMode,
-            DefaultValue = System
-                .ServiceModel
+            DefaultValue = System.ServiceModel
                 .Security
                 .AcceleratedTokenProvider
                 .defaultKeyEntropyMode
@@ -104,9 +103,10 @@ namespace System.ServiceModel.Configuration
         {
             if (this.IsReadOnly())
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ConfigurationErrorsException(SR.GetString(SR.ConfigReadOnly))
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        new ConfigurationErrorsException(SR.GetString(SR.ConfigReadOnly))
+                    );
             }
             if (null == from)
             {
@@ -206,10 +206,8 @@ namespace System.ServiceModel.Configuration
                             this.EvaluationContext,
                             issuerBehaviors
                         );
-                        issuedToken.IssuerChannelBehaviors.Add(
-                            new Uri(issuerBehaviorElement.IssuerAddress),
-                            issuerBehaviors
-                        );
+                        issuedToken.IssuerChannelBehaviors
+                            .Add(new Uri(issuerBehaviorElement.IssuerAddress), issuerBehaviors);
                     }
                 }
             }

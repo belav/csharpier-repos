@@ -149,15 +149,11 @@ namespace Microsoft.CodeAnalysis.CSharp
             )
             {
                 Debug.Assert(
-                    AssemblyIdentityComparer.SimpleNameComparer.Equals(
-                        identity1.Name,
-                        identity2.Name
-                    )
+                    AssemblyIdentityComparer.SimpleNameComparer
+                        .Equals(identity1.Name, identity2.Name)
                 );
-                return AssemblyIdentityComparer.CultureComparer.Equals(
-                    identity1.CultureName,
-                    identity2.CultureName
-                );
+                return AssemblyIdentityComparer.CultureComparer
+                    .Equals(identity1.CultureName, identity2.CultureName);
             }
 
             protected override void GetActualBoundReferencesUsedBy(
@@ -313,10 +309,11 @@ namespace Microsoft.CodeAnalysis.CSharp
 
                 var assembly = metadata.GetAssembly();
                 Debug.Assert(assembly is object);
-                var peReferences = assembly.AssemblyReferences.SelectAsArray(
-                    MapAssemblyIdentityToResolvedSymbol,
-                    referencedAssembliesByIdentity
-                );
+                var peReferences = assembly.AssemblyReferences
+                    .SelectAsArray(
+                        MapAssemblyIdentityToResolvedSymbol,
+                        referencedAssembliesByIdentity
+                    );
 
                 assemblyReferenceIdentityMap = GetAssemblyReferenceIdentityBaselineMap(
                     peReferences,
@@ -330,14 +327,15 @@ namespace Microsoft.CodeAnalysis.CSharp
                     importOptions: importOptions
                 );
 
-                var unifiedAssemblies = this.UnifiedAssemblies.WhereAsArray(
-                    (unified, referencedAssembliesByIdentity) =>
-                        referencedAssembliesByIdentity.Contains(
-                            unified.OriginalReference,
-                            allowHigherVersion: false
-                        ),
-                    referencedAssembliesByIdentity
-                );
+                var unifiedAssemblies = this.UnifiedAssemblies
+                    .WhereAsArray(
+                        (unified, referencedAssembliesByIdentity) =>
+                            referencedAssembliesByIdentity.Contains(
+                                unified.OriginalReference,
+                                allowHigherVersion: false
+                            ),
+                        referencedAssembliesByIdentity
+                    );
 
                 InitializeAssemblyReuseData(assemblySymbol, peReferences, unifiedAssemblies);
 
@@ -485,8 +483,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                     // Avoid resolving previously resolved missing references. If we call to the resolver again we would create new assembly symbols for them,
                     // which would not match the previously created ones. As a result we would get duplicate PE types and conversion errors.
                     var implicitReferenceResolutions =
-                        compilation
-                            .ScriptCompilationInfo?.PreviousScriptCompilation?.GetBoundReferenceManager()
+                        compilation.ScriptCompilationInfo
+                            ?.PreviousScriptCompilation
+                            ?.GetBoundReferenceManager()
                             .ImplicitReferenceResolutions
                         ?? ImmutableDictionary<
                             AssemblyIdentity,
@@ -728,9 +727,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
                     if (assemblies[i].ContainsNoPiaLocalTypes)
                     {
-                        currentBindingResult.AssemblySymbol.SetNoPiaResolutionAssemblies(
-                            noPiaResolutionAssemblies
-                        );
+                        currentBindingResult.AssemblySymbol
+                            .SetNoPiaResolutionAssemblies(noPiaResolutionAssemblies);
                     }
 
                     // Setup linked referenced assemblies.
@@ -759,9 +757,10 @@ namespace Microsoft.CodeAnalysis.CSharp
                     if (linkedReferencedAssembliesBuilder.Count > 0)
                     {
                         linkedReferencedAssembliesBuilder.RemoveDuplicates();
-                        currentBindingResult.AssemblySymbol.SetLinkedReferencedAssemblies(
-                            linkedReferencedAssembliesBuilder.ToImmutable()
-                        );
+                        currentBindingResult.AssemblySymbol
+                            .SetLinkedReferencedAssemblies(
+                                linkedReferencedAssembliesBuilder.ToImmutable()
+                            );
                     }
 
                     currentBindingResult.AssemblySymbol.SetCorLibrary(corLibrary);
@@ -793,9 +792,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     var compilationData = assemblies[i] as AssemblyDataForCompilation;
                     if (compilationData != null)
                     {
-                        compilationData.Compilation.CacheRetargetingAssemblySymbolNoLock(
-                            current.AssemblySymbol
-                        );
+                        compilationData.Compilation
+                            .CacheRetargetingAssemblySymbolNoLock(current.AssemblySymbol);
                     }
                     else
                     {
@@ -823,16 +821,16 @@ namespace Microsoft.CodeAnalysis.CSharp
                 for (int j = 0; j < moduleCount; j++)
                 {
                     ImmutableArray<AssemblyIdentity> referencedAssemblies =
-                        retargetingAssemblySymbol
-                            .UnderlyingAssembly.Modules[j]
+                        retargetingAssemblySymbol.UnderlyingAssembly
+                            .Modules[j]
                             .GetReferencedAssemblies();
 
                     // For source module skip underlying linked references
                     if (j == 0)
                     {
                         ImmutableArray<AssemblySymbol> underlyingReferencedAssemblySymbols =
-                            retargetingAssemblySymbol
-                                .UnderlyingAssembly.Modules[0]
+                            retargetingAssemblySymbol.UnderlyingAssembly
+                                .Modules[0]
                                 .GetReferencedAssemblySymbols();
 
                         int linkedUnderlyingReferences = 0;
@@ -925,12 +923,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     var identities = new AssemblyIdentity[moduleReferenceCount];
                     var symbols = new AssemblySymbol[moduleReferenceCount];
 
-                    fileData.AssemblyReferences.CopyTo(
-                        refsUsed,
-                        identities,
-                        0,
-                        moduleReferenceCount
-                    );
+                    fileData.AssemblyReferences
+                        .CopyTo(refsUsed, identities, 0, moduleReferenceCount);
 
                     ArrayBuilder<UnifiedAssembly<AssemblySymbol>>? unifiedAssemblies = null;
                     for (int k = 0; k < moduleReferenceCount; k++)

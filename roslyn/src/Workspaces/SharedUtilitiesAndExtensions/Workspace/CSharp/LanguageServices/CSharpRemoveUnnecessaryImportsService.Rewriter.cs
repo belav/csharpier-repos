@@ -181,8 +181,8 @@ namespace Microsoft.CodeAnalysis.CSharp.RemoveUnnecessaryImports
                 // blank line as well.
                 if (compilationUnit.Usings.Count > 0 && finalUsings.Count == 0)
                 {
-                    var nextToken = compilationUnit
-                        .Usings.Last()
+                    var nextToken = compilationUnit.Usings
+                        .Last()
                         .GetLastToken()
                         .GetNextTokenOrEndOfFile();
                     if (nextToken.HasLeadingTrivia && nextToken.LeadingTrivia[0].IsEndOfLine())
@@ -198,8 +198,8 @@ namespace Microsoft.CodeAnalysis.CSharp.RemoveUnnecessaryImports
                 // follows the usings.
                 if (finalTrivia.Count > 0)
                 {
-                    var nextToken = compilationUnit
-                        .Usings.Last()
+                    var nextToken = compilationUnit.Usings
+                        .Last()
                         .GetLastToken()
                         .GetNextTokenOrEndOfFile();
                     compilationUnit = compilationUnit.ReplaceToken(
@@ -265,8 +265,8 @@ namespace Microsoft.CodeAnalysis.CSharp.RemoveUnnecessaryImports
                 // blank line as well.
                 if (namespaceDeclaration.Usings.Count > 0 && finalUsings.Count == 0)
                 {
-                    var nextToken = namespaceDeclaration
-                        .Usings.Last()
+                    var nextToken = namespaceDeclaration.Usings
+                        .Last()
                         .GetLastToken()
                         .GetNextTokenOrEndOfFile();
                     if (nextToken.HasLeadingTrivia && nextToken.LeadingTrivia[0].IsEndOfLine())
@@ -282,8 +282,8 @@ namespace Microsoft.CodeAnalysis.CSharp.RemoveUnnecessaryImports
                 // follows the usings.
                 if (finalTrivia.Count > 0)
                 {
-                    var nextToken = namespaceDeclaration
-                        .Usings.Last()
+                    var nextToken = namespaceDeclaration.Usings
+                        .Last()
                         .GetLastToken()
                         .GetNextToken();
                     namespaceDeclaration = namespaceDeclaration.ReplaceToken(

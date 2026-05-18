@@ -39,8 +39,9 @@ namespace Microsoft.CodeAnalysis.CSharp
         {
             if (_possiblyNullableTypeSymbol.IsNullableType())
             {
-                return _possiblyNullableTypeSymbol
-                    .Type.OriginalDefinition.GetUseSiteInfo()
+                return _possiblyNullableTypeSymbol.Type
+                    .OriginalDefinition
+                    .GetUseSiteInfo()
                     .DiagnosticInfo;
             }
             return Binder.GetNullableUnconstrainedTypeParameterDiagnosticIfNecessary(

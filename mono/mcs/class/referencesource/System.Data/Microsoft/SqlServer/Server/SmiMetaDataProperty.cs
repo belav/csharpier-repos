@@ -96,9 +96,10 @@ namespace Microsoft.SqlServer.Server
         {
             if (IsReadOnly)
             {
-                throw System.Data.Common.ADP.InternalError(
-                    System.Data.Common.ADP.InternalErrorCode.InvalidSmiCall
-                );
+                throw System.Data
+                    .Common
+                    .ADP
+                    .InternalError(System.Data.Common.ADP.InternalErrorCode.InvalidSmiCall);
             }
         }
     }

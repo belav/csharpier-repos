@@ -268,14 +268,15 @@ public class ManualDeepTypeMapper : IObjectToObjectMapper
         dto.WorkAddresses = new List<AddressDTO>();
         foreach (var workAddress in _customer.WorkAddresses)
         {
-            dto.WorkAddresses.Add(
-                new AddressDTO()
-                {
-                    Id = workAddress.Id,
-                    Country = workAddress.Country,
-                    City = workAddress.City,
-                }
-            );
+            dto.WorkAddresses
+                .Add(
+                    new AddressDTO()
+                    {
+                        Id = workAddress.Id,
+                        Country = workAddress.Country,
+                        City = workAddress.City,
+                    }
+                );
         }
         return dto;
     }
@@ -437,14 +438,15 @@ public class ManualComplexTypeMapper : IObjectToObjectMapper
         };
         foreach (var foo in _foo.Foos)
         {
-            dest.Foos.Add(
-                new InnerFooDest
-                {
-                    Name = foo.Name,
-                    Int64 = foo.Int64,
-                    NullInt = foo.NullInt,
-                }
-            );
+            dest.Foos
+                .Add(
+                    new InnerFooDest
+                    {
+                        Name = foo.Name,
+                        Int64 = foo.Int64,
+                        NullInt = foo.NullInt,
+                    }
+                );
         }
         ;
         for (int index = 0; index < _foo.Foos.Count; index++)

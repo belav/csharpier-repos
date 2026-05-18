@@ -108,9 +108,8 @@ namespace ILCompiler
             ConfigureImageBase(targetDetails);
 
             bool versionBubbleIncludesCoreLib = false;
-            Dictionary<string, string> inputFilePathsArg = _command.Result.GetValue(
-                _command.InputFilePaths
-            );
+            Dictionary<string, string> inputFilePathsArg = _command.Result
+                .GetValue(_command.InputFilePaths);
             Dictionary<string, string> unrootedInputFilePathsArg = Get(
                 _command.UnrootedInputFilePaths
             );
@@ -648,14 +647,12 @@ namespace ILCompiler
                     MIbcProfileParser.MibcGroupParseRules parseRule;
                     if (nonLocalGenericsHome != null)
                     {
-                        parseRule = MIbcProfileParser
-                            .MibcGroupParseRules
+                        parseRule = MIbcProfileParser.MibcGroupParseRules
                             .VersionBubbleWithCrossModule2;
                     }
                     else
                     {
-                        parseRule = MIbcProfileParser
-                            .MibcGroupParseRules
+                        parseRule = MIbcProfileParser.MibcGroupParseRules
                             .VersionBubbleWithCrossModule1;
                     }
 

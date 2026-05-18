@@ -36,12 +36,16 @@ namespace System.ServiceModel.Channels
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("messageVersion");
 
             if (messageVersion == MessageVersion.None)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentException(
-                        SR.GetString(SR.MtomEncoderBadMessageVersion, messageVersion.ToString()),
-                        "messageVersion"
-                    )
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        new ArgumentException(
+                            SR.GetString(
+                                SR.MtomEncoderBadMessageVersion,
+                                messageVersion.ToString()
+                            ),
+                            "messageVersion"
+                        )
+                    );
 
             if (writeEncoding == null)
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("writeEncoding");
@@ -76,13 +80,14 @@ namespace System.ServiceModel.Channels
             {
                 if (value <= 0)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ArgumentOutOfRangeException(
-                            "value",
-                            value,
-                            SR.GetString(SR.ValueMustBePositive)
-                        )
-                    );
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperError(
+                            new ArgumentOutOfRangeException(
+                                "value",
+                                value,
+                                SR.GetString(SR.ValueMustBePositive)
+                            )
+                        );
                 }
                 this.maxReadPoolSize = value;
             }
@@ -96,13 +101,14 @@ namespace System.ServiceModel.Channels
             {
                 if (value <= 0)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ArgumentOutOfRangeException(
-                            "value",
-                            value,
-                            SR.GetString(SR.ValueMustBePositive)
-                        )
-                    );
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperError(
+                            new ArgumentOutOfRangeException(
+                                "value",
+                                value,
+                                SR.GetString(SR.ValueMustBePositive)
+                            )
+                        );
                 }
                 this.maxWritePoolSize = value;
             }
@@ -121,13 +127,14 @@ namespace System.ServiceModel.Channels
             {
                 if (value <= 0)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ArgumentOutOfRangeException(
-                            "value",
-                            value,
-                            SR.GetString(SR.ValueMustBePositive)
-                        )
-                    );
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperError(
+                            new ArgumentOutOfRangeException(
+                                "value",
+                                value,
+                                SR.GetString(SR.ValueMustBePositive)
+                            )
+                        );
                 }
                 this.maxBufferSize = value;
             }
@@ -158,12 +165,13 @@ namespace System.ServiceModel.Channels
                 }
                 if (value == MessageVersion.None)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ArgumentException(
-                            SR.GetString(SR.MtomEncoderBadMessageVersion, value.ToString()),
-                            "value"
-                        )
-                    );
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperError(
+                            new ArgumentException(
+                                SR.GetString(SR.MtomEncoderBadMessageVersion, value.ToString()),
+                                "value"
+                            )
+                        );
                 }
 
                 this.messageVersion = value;

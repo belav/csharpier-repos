@@ -126,10 +126,11 @@ namespace ILCompiler.DependencyAnalysis
                         continue;
 
                     if (interfaceOnDefinitionType != null)
-                        declMethod = factory.TypeSystemContext.GetMethodForInstantiatedType(
-                            declMethod.GetTypicalMethodDefinition(),
-                            interfaceOnDefinitionType
-                        );
+                        declMethod = factory.TypeSystemContext
+                            .GetMethodForInstantiatedType(
+                                declMethod.GetTypicalMethodDefinition(),
+                                interfaceOnDefinitionType
+                            );
 
                     var implMethod = declMethod.Signature.IsStatic
                         ? declType
@@ -225,10 +226,11 @@ namespace ILCompiler.DependencyAnalysis
                         continue;
 
                     if (!interfaceType.IsTypeDefinition)
-                        declMethod = factory.TypeSystemContext.GetMethodForInstantiatedType(
-                            declMethod.GetTypicalMethodDefinition(),
-                            (InstantiatedType)definitionInterfaceType
-                        );
+                        declMethod = factory.TypeSystemContext
+                            .GetMethodForInstantiatedType(
+                                declMethod.GetTypicalMethodDefinition(),
+                                (InstantiatedType)definitionInterfaceType
+                            );
 
                     var implMethod = declMethod.Signature.IsStatic
                         ? declTypeDefinition.ResolveInterfaceMethodToStaticVirtualMethodOnType(
@@ -248,10 +250,11 @@ namespace ILCompiler.DependencyAnalysis
 
                         MethodDesc targetMethod = implMethod;
                         if (!implType.IsTypeDefinition)
-                            targetMethod = factory.TypeSystemContext.GetMethodForInstantiatedType(
-                                implMethod.GetTypicalMethodDefinition(),
-                                (InstantiatedType)implType
-                            );
+                            targetMethod = factory.TypeSystemContext
+                                .GetMethodForInstantiatedType(
+                                    implMethod.GetTypicalMethodDefinition(),
+                                    (InstantiatedType)implType
+                                );
 
                         int emittedInterfaceSlot =
                             interfaceMethodSlot

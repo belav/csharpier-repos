@@ -181,8 +181,7 @@ namespace System.Net.Sockets
             this.socketType = socketType;
             this.protocolType = protocolType;
 
-            IPProtectionLevel defaultProtectionLevel = SettingsSectionInternal
-                .Section
+            IPProtectionLevel defaultProtectionLevel = SettingsSectionInternal.Section
                 .IPProtectionLevel;
             if (defaultProtectionLevel != IPProtectionLevel.Unspecified)
             {
@@ -290,11 +289,8 @@ namespace System.Net.Sockets
                 SocketError errorCode;
                 try
                 {
-                    errorCode = UnsafeNclNativeMethods.OSSOCK.getsockname(
-                        m_Handle,
-                        socketAddress.m_Buffer,
-                        ref socketAddress.m_Size
-                    );
+                    errorCode = UnsafeNclNativeMethods.OSSOCK
+                        .getsockname(m_Handle, socketAddress.m_Buffer, ref socketAddress.m_Size);
                 }
                 catch (ObjectDisposedException)
                 {
@@ -428,11 +424,8 @@ namespace System.Net.Sockets
                 int argp = 0;
 
                 // This may throw ObjectDisposedException.
-                SocketError errorCode = UnsafeNclNativeMethods.OSSOCK.ioctlsocket(
-                    m_Handle,
-                    IoctlSocketConstants.FIONREAD,
-                    ref argp
-                );
+                SocketError errorCode = UnsafeNclNativeMethods.OSSOCK
+                    .ioctlsocket(m_Handle, IoctlSocketConstants.FIONREAD, ref argp);
 
                 GlobalLog.Print(
                     "Socket#"
@@ -490,11 +483,8 @@ namespace System.Net.Sockets
                 SocketAddress socketAddress = m_RightEndPoint.Serialize();
 
                 // This may throw ObjectDisposedException.
-                SocketError errorCode = UnsafeNclNativeMethods.OSSOCK.getsockname(
-                    m_Handle,
-                    socketAddress.m_Buffer,
-                    ref socketAddress.m_Size
-                );
+                SocketError errorCode = UnsafeNclNativeMethods.OSSOCK
+                    .getsockname(m_Handle, socketAddress.m_Buffer, ref socketAddress.m_Size);
 
                 if (errorCode != SocketError.Success)
                 {
@@ -544,11 +534,8 @@ namespace System.Net.Sockets
                     SocketAddress socketAddress = m_RightEndPoint.Serialize();
 
                     // This may throw ObjectDisposedException.
-                    SocketError errorCode = UnsafeNclNativeMethods.OSSOCK.getpeername(
-                        m_Handle,
-                        socketAddress.m_Buffer,
-                        ref socketAddress.m_Size
-                    );
+                    SocketError errorCode = UnsafeNclNativeMethods.OSSOCK
+                        .getpeername(m_Handle, socketAddress.m_Buffer, ref socketAddress.m_Size);
 
                     if (errorCode != SocketError.Success)
                     {
@@ -1197,11 +1184,8 @@ namespace System.Net.Sockets
             }
 
             // This may throw ObjectDisposedException.
-            SocketError errorCode = UnsafeNclNativeMethods.OSSOCK.bind(
-                m_Handle,
-                socketAddress.m_Buffer,
-                socketAddress.m_Size
-            );
+            SocketError errorCode = UnsafeNclNativeMethods.OSSOCK
+                .bind(m_Handle, socketAddress.m_Buffer, socketAddress.m_Size);
 
 #if TRAVE
             try
@@ -1732,15 +1716,16 @@ namespace System.Net.Sockets
                 }
 
                 // This may throw ObjectDisposedException.
-                errorCode = UnsafeNclNativeMethods.OSSOCK.WSASend_Blocking(
-                    m_Handle.DangerousGetHandle(),
-                    WSABuffers,
-                    count,
-                    out bytesTransferred,
-                    socketFlags,
-                    SafeNativeOverlapped.Zero,
-                    IntPtr.Zero
-                );
+                errorCode = UnsafeNclNativeMethods.OSSOCK
+                    .WSASend_Blocking(
+                        m_Handle.DangerousGetHandle(),
+                        WSABuffers,
+                        count,
+                        out bytesTransferred,
+                        socketFlags,
+                        SafeNativeOverlapped.Zero,
+                        IntPtr.Zero
+                    );
 
                 if ((SocketError)errorCode == SocketError.SocketError)
                 {
@@ -1798,15 +1783,12 @@ namespace System.Net.Sockets
             {
                 if (bytesTransferred > 0)
                 {
-                    NetworkingPerfCounters.Instance.Increment(
-                        NetworkingPerfCounterName.SocketBytesSent,
-                        bytesTransferred
-                    );
+                    NetworkingPerfCounters.Instance
+                        .Increment(NetworkingPerfCounterName.SocketBytesSent, bytesTransferred);
                     if (Transport == TransportType.Udp)
                     {
-                        NetworkingPerfCounters.Instance.Increment(
-                            NetworkingPerfCounterName.SocketDatagramsSent
-                        );
+                        NetworkingPerfCounters.Instance
+                            .Increment(NetworkingPerfCounterName.SocketDatagramsSent);
                     }
                 }
             }
@@ -1905,24 +1887,26 @@ namespace System.Net.Sockets
                 // This can throw ObjectDisposedException.
                 if (
                     fileHandle != null
-                        ? !UnsafeNclNativeMethods.OSSOCK.TransmitFile_Blocking(
-                            m_Handle.DangerousGetHandle(),
-                            fileHandle,
-                            0,
-                            0,
-                            SafeNativeOverlapped.Zero,
-                            asyncResult.TransmitFileBuffers,
-                            flags
-                        )
-                        : !UnsafeNclNativeMethods.OSSOCK.TransmitFile_Blocking2(
-                            m_Handle.DangerousGetHandle(),
-                            IntPtr.Zero,
-                            0,
-                            0,
-                            SafeNativeOverlapped.Zero,
-                            asyncResult.TransmitFileBuffers,
-                            flags
-                        )
+                        ? !UnsafeNclNativeMethods.OSSOCK
+                            .TransmitFile_Blocking(
+                                m_Handle.DangerousGetHandle(),
+                                fileHandle,
+                                0,
+                                0,
+                                SafeNativeOverlapped.Zero,
+                                asyncResult.TransmitFileBuffers,
+                                flags
+                            )
+                        : !UnsafeNclNativeMethods.OSSOCK
+                            .TransmitFile_Blocking2(
+                                m_Handle.DangerousGetHandle(),
+                                IntPtr.Zero,
+                                0,
+                                0,
+                                SafeNativeOverlapped.Zero,
+                                asyncResult.TransmitFileBuffers,
+                                flags
+                            )
                 )
                 {
                     errorCode = (SocketError)Marshal.GetLastWin32Error();
@@ -2049,22 +2033,19 @@ namespace System.Net.Sockets
             unsafe
             {
                 if (buffer.Length == 0)
-                    bytesTransferred = UnsafeNclNativeMethods.OSSOCK.send(
-                        m_Handle.DangerousGetHandle(),
-                        null,
-                        0,
-                        socketFlags
-                    );
+                    bytesTransferred = UnsafeNclNativeMethods.OSSOCK
+                        .send(m_Handle.DangerousGetHandle(), null, 0, socketFlags);
                 else
                 {
                     fixed (byte* pinnedBuffer = buffer)
                     {
-                        bytesTransferred = UnsafeNclNativeMethods.OSSOCK.send(
-                            m_Handle.DangerousGetHandle(),
-                            pinnedBuffer + offset,
-                            size,
-                            socketFlags
-                        );
+                        bytesTransferred = UnsafeNclNativeMethods.OSSOCK
+                            .send(
+                                m_Handle.DangerousGetHandle(),
+                                pinnedBuffer + offset,
+                                size,
+                                socketFlags
+                            );
                     }
                 }
             }
@@ -2097,15 +2078,12 @@ namespace System.Net.Sockets
             {
                 if (bytesTransferred > 0)
                 {
-                    NetworkingPerfCounters.Instance.Increment(
-                        NetworkingPerfCounterName.SocketBytesSent,
-                        bytesTransferred
-                    );
+                    NetworkingPerfCounters.Instance
+                        .Increment(NetworkingPerfCounterName.SocketBytesSent, bytesTransferred);
                     if (Transport == TransportType.Udp)
                     {
-                        NetworkingPerfCounters.Instance.Increment(
-                            NetworkingPerfCounterName.SocketDatagramsSent
-                        );
+                        NetworkingPerfCounters.Instance
+                            .Increment(NetworkingPerfCounterName.SocketDatagramsSent);
                     }
                 }
             }
@@ -2185,27 +2163,29 @@ namespace System.Net.Sockets
             {
                 if (buffer.Length == 0)
                 {
-                    bytesTransferred = UnsafeNclNativeMethods.OSSOCK.sendto(
-                        m_Handle.DangerousGetHandle(),
-                        null,
-                        0,
-                        socketFlags,
-                        socketAddress.m_Buffer,
-                        socketAddress.m_Size
-                    );
+                    bytesTransferred = UnsafeNclNativeMethods.OSSOCK
+                        .sendto(
+                            m_Handle.DangerousGetHandle(),
+                            null,
+                            0,
+                            socketFlags,
+                            socketAddress.m_Buffer,
+                            socketAddress.m_Size
+                        );
                 }
                 else
                 {
                     fixed (byte* pinnedBuffer = buffer)
                     {
-                        bytesTransferred = UnsafeNclNativeMethods.OSSOCK.sendto(
-                            m_Handle.DangerousGetHandle(),
-                            pinnedBuffer + offset,
-                            size,
-                            socketFlags,
-                            socketAddress.m_Buffer,
-                            socketAddress.m_Size
-                        );
+                        bytesTransferred = UnsafeNclNativeMethods.OSSOCK
+                            .sendto(
+                                m_Handle.DangerousGetHandle(),
+                                pinnedBuffer + offset,
+                                size,
+                                socketFlags,
+                                socketAddress.m_Buffer,
+                                socketAddress.m_Size
+                            );
                     }
                 }
             }
@@ -2238,15 +2218,12 @@ namespace System.Net.Sockets
             {
                 if (bytesTransferred > 0)
                 {
-                    NetworkingPerfCounters.Instance.Increment(
-                        NetworkingPerfCounterName.SocketBytesSent,
-                        bytesTransferred
-                    );
+                    NetworkingPerfCounters.Instance
+                        .Increment(NetworkingPerfCounterName.SocketBytesSent, bytesTransferred);
                     if (Transport == TransportType.Udp)
                     {
-                        NetworkingPerfCounters.Instance.Increment(
-                            NetworkingPerfCounterName.SocketDatagramsSent
-                        );
+                        NetworkingPerfCounters.Instance
+                            .Increment(NetworkingPerfCounterName.SocketDatagramsSent);
                     }
                 }
             }
@@ -2387,22 +2364,19 @@ namespace System.Net.Sockets
             {
                 if (buffer.Length == 0)
                 {
-                    bytesTransferred = UnsafeNclNativeMethods.OSSOCK.recv(
-                        m_Handle.DangerousGetHandle(),
-                        null,
-                        0,
-                        socketFlags
-                    );
+                    bytesTransferred = UnsafeNclNativeMethods.OSSOCK
+                        .recv(m_Handle.DangerousGetHandle(), null, 0, socketFlags);
                 }
                 else
                     fixed (byte* pinnedBuffer = buffer)
                     {
-                        bytesTransferred = UnsafeNclNativeMethods.OSSOCK.recv(
-                            m_Handle.DangerousGetHandle(),
-                            pinnedBuffer + offset,
-                            size,
-                            socketFlags
-                        );
+                        bytesTransferred = UnsafeNclNativeMethods.OSSOCK
+                            .recv(
+                                m_Handle.DangerousGetHandle(),
+                                pinnedBuffer + offset,
+                                size,
+                                socketFlags
+                            );
                     }
             }
 
@@ -2433,15 +2407,12 @@ namespace System.Net.Sockets
 
                 if (bytesTransferred > 0 && !peek)
                 {
-                    NetworkingPerfCounters.Instance.Increment(
-                        NetworkingPerfCounterName.SocketBytesReceived,
-                        bytesTransferred
-                    );
+                    NetworkingPerfCounters.Instance
+                        .Increment(NetworkingPerfCounterName.SocketBytesReceived, bytesTransferred);
                     if (Transport == TransportType.Udp)
                     {
-                        NetworkingPerfCounters.Instance.Increment(
-                            NetworkingPerfCounterName.SocketDatagramsReceived
-                        );
+                        NetworkingPerfCounters.Instance
+                            .Increment(NetworkingPerfCounterName.SocketDatagramsReceived);
                     }
                 }
             }
@@ -2551,15 +2522,16 @@ namespace System.Net.Sockets
                 }
 
                 // This can throw ObjectDisposedException.
-                errorCode = UnsafeNclNativeMethods.OSSOCK.WSARecv_Blocking(
-                    m_Handle.DangerousGetHandle(),
-                    WSABuffers,
-                    count,
-                    out bytesTransferred,
-                    ref socketFlags,
-                    SafeNativeOverlapped.Zero,
-                    IntPtr.Zero
-                );
+                errorCode = UnsafeNclNativeMethods.OSSOCK
+                    .WSARecv_Blocking(
+                        m_Handle.DangerousGetHandle(),
+                        WSABuffers,
+                        count,
+                        out bytesTransferred,
+                        ref socketFlags,
+                        SafeNativeOverlapped.Zero,
+                        IntPtr.Zero
+                    );
 
                 if ((SocketError)errorCode == SocketError.SocketError)
                 {
@@ -2618,15 +2590,12 @@ namespace System.Net.Sockets
 
                 if (bytesTransferred > 0 && !peek)
                 {
-                    NetworkingPerfCounters.Instance.Increment(
-                        NetworkingPerfCounterName.SocketBytesReceived,
-                        bytesTransferred
-                    );
+                    NetworkingPerfCounters.Instance
+                        .Increment(NetworkingPerfCounterName.SocketBytesReceived, bytesTransferred);
                     if (Transport == TransportType.Udp)
                     {
-                        NetworkingPerfCounters.Instance.Increment(
-                            NetworkingPerfCounterName.SocketDatagramsReceived
-                        );
+                        NetworkingPerfCounters.Instance
+                            .Increment(NetworkingPerfCounterName.SocketDatagramsReceived);
                     }
                 }
             }
@@ -2865,25 +2834,27 @@ namespace System.Net.Sockets
             unsafe
             {
                 if (buffer.Length == 0)
-                    bytesTransferred = UnsafeNclNativeMethods.OSSOCK.recvfrom(
-                        m_Handle.DangerousGetHandle(),
-                        null,
-                        0,
-                        socketFlags,
-                        socketAddress.m_Buffer,
-                        ref socketAddress.m_Size
-                    );
-                else
-                    fixed (byte* pinnedBuffer = buffer)
-                    {
-                        bytesTransferred = UnsafeNclNativeMethods.OSSOCK.recvfrom(
+                    bytesTransferred = UnsafeNclNativeMethods.OSSOCK
+                        .recvfrom(
                             m_Handle.DangerousGetHandle(),
-                            pinnedBuffer + offset,
-                            size,
+                            null,
+                            0,
                             socketFlags,
                             socketAddress.m_Buffer,
                             ref socketAddress.m_Size
                         );
+                else
+                    fixed (byte* pinnedBuffer = buffer)
+                    {
+                        bytesTransferred = UnsafeNclNativeMethods.OSSOCK
+                            .recvfrom(
+                                m_Handle.DangerousGetHandle(),
+                                pinnedBuffer + offset,
+                                size,
+                                socketFlags,
+                                socketAddress.m_Buffer,
+                                ref socketAddress.m_Size
+                            );
                     }
             }
 
@@ -2929,15 +2900,12 @@ namespace System.Net.Sockets
             {
                 if (bytesTransferred > 0)
                 {
-                    NetworkingPerfCounters.Instance.Increment(
-                        NetworkingPerfCounterName.SocketBytesReceived,
-                        bytesTransferred
-                    );
+                    NetworkingPerfCounters.Instance
+                        .Increment(NetworkingPerfCounterName.SocketBytesReceived, bytesTransferred);
                     if (Transport == TransportType.Udp)
                     {
-                        NetworkingPerfCounters.Instance.Increment(
-                            NetworkingPerfCounterName.SocketDatagramsReceived
-                        );
+                        NetworkingPerfCounters.Instance
+                            .Increment(NetworkingPerfCounterName.SocketDatagramsReceived);
                     }
                 }
             }
@@ -3014,17 +2982,18 @@ namespace System.Net.Sockets
             int realOptionLength = 0;
 
             // This can throw ObjectDisposedException.
-            SocketError errorCode = UnsafeNclNativeMethods.OSSOCK.WSAIoctl_Blocking(
-                m_Handle.DangerousGetHandle(),
-                ioControlCode,
-                optionInValue,
-                optionInValue != null ? optionInValue.Length : 0,
-                optionOutValue,
-                optionOutValue != null ? optionOutValue.Length : 0,
-                out realOptionLength,
-                SafeNativeOverlapped.Zero,
-                IntPtr.Zero
-            );
+            SocketError errorCode = UnsafeNclNativeMethods.OSSOCK
+                .WSAIoctl_Blocking(
+                    m_Handle.DangerousGetHandle(),
+                    ioControlCode,
+                    optionInValue,
+                    optionInValue != null ? optionInValue.Length : 0,
+                    optionOutValue,
+                    optionOutValue != null ? optionOutValue.Length : 0,
+                    out realOptionLength,
+                    SafeNativeOverlapped.Zero,
+                    IntPtr.Zero
+                );
 
             GlobalLog.Print(
                 "Socket#"
@@ -3086,17 +3055,18 @@ namespace System.Net.Sockets
             int realOptionLength = 0;
 
             // This can throw ObjectDisposedException.
-            SocketError errorCode = UnsafeNclNativeMethods.OSSOCK.WSAIoctl_Blocking_Internal(
-                m_Handle.DangerousGetHandle(),
-                (uint)ioControlCode,
-                optionInValue,
-                inValueSize,
-                optionOutValue,
-                outValueSize,
-                out realOptionLength,
-                SafeNativeOverlapped.Zero,
-                IntPtr.Zero
-            );
+            SocketError errorCode = UnsafeNclNativeMethods.OSSOCK
+                .WSAIoctl_Blocking_Internal(
+                    m_Handle.DangerousGetHandle(),
+                    (uint)ioControlCode,
+                    optionInValue,
+                    inValueSize,
+                    optionOutValue,
+                    outValueSize,
+                    out realOptionLength,
+                    SafeNativeOverlapped.Zero,
+                    IntPtr.Zero
+                );
 
             GlobalLog.Print(
                 "Socket#"
@@ -3214,13 +3184,14 @@ namespace System.Net.Sockets
             );
 
             // This can throw ObjectDisposedException.
-            SocketError errorCode = UnsafeNclNativeMethods.OSSOCK.setsockopt(
-                m_Handle,
-                optionLevel,
-                optionName,
-                optionValue,
-                optionValue != null ? optionValue.Length : 0
-            );
+            SocketError errorCode = UnsafeNclNativeMethods.OSSOCK
+                .setsockopt(
+                    m_Handle,
+                    optionLevel,
+                    optionName,
+                    optionValue,
+                    optionValue != null ? optionValue.Length : 0
+                );
 
             GlobalLog.Print(
                 "Socket#"
@@ -3407,13 +3378,14 @@ namespace System.Net.Sockets
                 int optionLength = 4;
 
                 // This can throw ObjectDisposedException.
-                SocketError errorCode = UnsafeNclNativeMethods.OSSOCK.getsockopt(
-                    m_Handle,
-                    optionLevel,
-                    optionName,
-                    out optionValue,
-                    ref optionLength
-                );
+                SocketError errorCode = UnsafeNclNativeMethods.OSSOCK
+                    .getsockopt(
+                        m_Handle,
+                        optionLevel,
+                        optionName,
+                        out optionValue,
+                        ref optionLength
+                    );
 
                 GlobalLog.Print(
                     "Socket#"
@@ -3464,13 +3436,8 @@ namespace System.Net.Sockets
             int optionLength = optionValue != null ? optionValue.Length : 0;
 
             // This can throw ObjectDisposedException.
-            SocketError errorCode = UnsafeNclNativeMethods.OSSOCK.getsockopt(
-                m_Handle,
-                optionLevel,
-                optionName,
-                optionValue,
-                ref optionLength
-            );
+            SocketError errorCode = UnsafeNclNativeMethods.OSSOCK
+                .getsockopt(m_Handle, optionLevel, optionName, optionValue, ref optionLength);
 
             GlobalLog.Print(
                 "Socket#"
@@ -3514,13 +3481,8 @@ namespace System.Net.Sockets
             int realOptionLength = optionLength;
 
             // This can throw ObjectDisposedException.
-            SocketError errorCode = UnsafeNclNativeMethods.OSSOCK.getsockopt(
-                m_Handle,
-                optionLevel,
-                optionName,
-                optionValue,
-                ref realOptionLength
-            );
+            SocketError errorCode = UnsafeNclNativeMethods.OSSOCK
+                .getsockopt(m_Handle, optionLevel, optionName, optionValue, ref realOptionLength);
 
             GlobalLog.Print(
                 "Socket#"
@@ -3577,23 +3539,25 @@ namespace System.Net.Sockets
             if (microSeconds != -1)
             {
                 MicrosecondsToTimeValue((long)(uint)microSeconds, ref IOwait);
-                socketCount = UnsafeNclNativeMethods.OSSOCK.select(
-                    0,
-                    mode == SelectMode.SelectRead ? fileDescriptorSet : null,
-                    mode == SelectMode.SelectWrite ? fileDescriptorSet : null,
-                    mode == SelectMode.SelectError ? fileDescriptorSet : null,
-                    ref IOwait
-                );
+                socketCount = UnsafeNclNativeMethods.OSSOCK
+                    .select(
+                        0,
+                        mode == SelectMode.SelectRead ? fileDescriptorSet : null,
+                        mode == SelectMode.SelectWrite ? fileDescriptorSet : null,
+                        mode == SelectMode.SelectError ? fileDescriptorSet : null,
+                        ref IOwait
+                    );
             }
             else
             {
-                socketCount = UnsafeNclNativeMethods.OSSOCK.select(
-                    0,
-                    mode == SelectMode.SelectRead ? fileDescriptorSet : null,
-                    mode == SelectMode.SelectWrite ? fileDescriptorSet : null,
-                    mode == SelectMode.SelectError ? fileDescriptorSet : null,
-                    IntPtr.Zero
-                );
+                socketCount = UnsafeNclNativeMethods.OSSOCK
+                    .select(
+                        0,
+                        mode == SelectMode.SelectRead ? fileDescriptorSet : null,
+                        mode == SelectMode.SelectWrite ? fileDescriptorSet : null,
+                        mode == SelectMode.SelectError ? fileDescriptorSet : null,
+                        IntPtr.Zero
+                    );
             }
             GlobalLog.Print(
                 "Socket#"
@@ -3699,23 +3663,25 @@ namespace System.Net.Sockets
                 TimeValue IOwait = new TimeValue();
                 MicrosecondsToTimeValue((long)(uint)microSeconds, ref IOwait);
 
-                socketCount = UnsafeNclNativeMethods.OSSOCK.select(
-                    0, // ignored value
-                    readfileDescriptorSet,
-                    writefileDescriptorSet,
-                    errfileDescriptorSet,
-                    ref IOwait
-                );
+                socketCount = UnsafeNclNativeMethods.OSSOCK
+                    .select(
+                        0, // ignored value
+                        readfileDescriptorSet,
+                        writefileDescriptorSet,
+                        errfileDescriptorSet,
+                        ref IOwait
+                    );
             }
             else
             {
-                socketCount = UnsafeNclNativeMethods.OSSOCK.select(
-                    0, // ignored value
-                    readfileDescriptorSet,
-                    writefileDescriptorSet,
-                    errfileDescriptorSet,
-                    IntPtr.Zero
-                );
+                socketCount = UnsafeNclNativeMethods.OSSOCK
+                    .select(
+                        0, // ignored value
+                        readfileDescriptorSet,
+                        writefileDescriptorSet,
+                        errfileDescriptorSet,
+                        IntPtr.Zero
+                    );
             }
 
             GlobalLog.Print(
@@ -3883,11 +3849,8 @@ namespace System.Net.Sockets
                 fixed (byte* pinnedBuffer = info.ProtocolInformation)
                 {
                     errorCode = (SocketError)
-                        UnsafeNclNativeMethods.OSSOCK.WSADuplicateSocket(
-                            m_Handle,
-                            (uint)targetProcessId,
-                            pinnedBuffer
-                        );
+                        UnsafeNclNativeMethods.OSSOCK
+                            .WSADuplicateSocket(m_Handle, (uint)targetProcessId, pinnedBuffer);
                 }
             }
 #else
@@ -3982,15 +3945,16 @@ namespace System.Net.Sockets
                 m_RightEndPoint = endPointSnapshot;
             }
 
-            SocketError errorCode = UnsafeNclNativeMethods.OSSOCK.WSAConnect(
-                handle,
-                socketAddress.m_Buffer,
-                socketAddress.m_Size,
-                IntPtr.Zero,
-                IntPtr.Zero,
-                IntPtr.Zero,
-                IntPtr.Zero
-            );
+            SocketError errorCode = UnsafeNclNativeMethods.OSSOCK
+                .WSAConnect(
+                    handle,
+                    socketAddress.m_Buffer,
+                    socketAddress.m_Size,
+                    IntPtr.Zero,
+                    IntPtr.Zero,
+                    IntPtr.Zero,
+                    IntPtr.Zero
+                );
 
             if (errorCode != SocketError.Success)
             {
@@ -4134,11 +4098,12 @@ namespace System.Net.Sockets
                 {
                     try
                     {
-                        errorCode = UnsafeNclNativeMethods.OSSOCK.WSAEnumNetworkEvents(
-                            m_Handle,
-                            m_AsyncEvent.SafeWaitHandle,
-                            ref networkEvents
-                        );
+                        errorCode = UnsafeNclNativeMethods.OSSOCK
+                            .WSAEnumNetworkEvents(
+                                m_Handle,
+                                m_AsyncEvent.SafeWaitHandle,
+                                ref networkEvents
+                            );
 
                         if (errorCode != SocketError.Success)
                         {
@@ -4918,15 +4883,16 @@ namespace System.Net.Sockets
                 int bytesTransferred;
 
                 // This can throw ObjectDisposedException.
-                errorCode = UnsafeNclNativeMethods.OSSOCK.WSASend(
-                    m_Handle,
-                    ref asyncResult.m_SingleBuffer,
-                    1, // only ever 1 buffer being sent
-                    out bytesTransferred,
-                    socketFlags,
-                    asyncResult.OverlappedHandle,
-                    IntPtr.Zero
-                );
+                errorCode = UnsafeNclNativeMethods.OSSOCK
+                    .WSASend(
+                        m_Handle,
+                        ref asyncResult.m_SingleBuffer,
+                        1, // only ever 1 buffer being sent
+                        out bytesTransferred,
+                        socketFlags,
+                        asyncResult.OverlappedHandle,
+                        IntPtr.Zero
+                    );
 
                 if (errorCode != SocketError.Success)
                 {
@@ -5086,27 +5052,29 @@ namespace System.Net.Sockets
                 // This can throw ObjectDisposedException.
                 if (fileHandle != null)
                 {
-                    result = UnsafeNclNativeMethods.OSSOCK.TransmitFile(
-                        m_Handle,
-                        fileHandle,
-                        0,
-                        0,
-                        asyncResult.OverlappedHandle,
-                        asyncResult.TransmitFileBuffers,
-                        flags
-                    );
+                    result = UnsafeNclNativeMethods.OSSOCK
+                        .TransmitFile(
+                            m_Handle,
+                            fileHandle,
+                            0,
+                            0,
+                            asyncResult.OverlappedHandle,
+                            asyncResult.TransmitFileBuffers,
+                            flags
+                        );
                 }
                 else
                 {
-                    result = UnsafeNclNativeMethods.OSSOCK.TransmitFile2(
-                        m_Handle,
-                        IntPtr.Zero,
-                        0,
-                        0,
-                        asyncResult.OverlappedHandle,
-                        asyncResult.TransmitFileBuffers,
-                        flags
-                    );
+                    result = UnsafeNclNativeMethods.OSSOCK
+                        .TransmitFile2(
+                            m_Handle,
+                            IntPtr.Zero,
+                            0,
+                            0,
+                            asyncResult.OverlappedHandle,
+                            asyncResult.TransmitFileBuffers,
+                            flags
+                        );
                 }
                 if (!result)
                 {
@@ -5259,15 +5227,16 @@ namespace System.Net.Sockets
 
                 // This can throw ObjectDisposedException.
                 int bytesTransferred;
-                errorCode = UnsafeNclNativeMethods.OSSOCK.WSASend(
-                    m_Handle,
-                    asyncResult.m_WSABuffers,
-                    asyncResult.m_WSABuffers.Length,
-                    out bytesTransferred,
-                    socketFlags,
-                    asyncResult.OverlappedHandle,
-                    IntPtr.Zero
-                );
+                errorCode = UnsafeNclNativeMethods.OSSOCK
+                    .WSASend(
+                        m_Handle,
+                        asyncResult.m_WSABuffers,
+                        asyncResult.m_WSABuffers.Length,
+                        out bytesTransferred,
+                        socketFlags,
+                        asyncResult.OverlappedHandle,
+                        IntPtr.Zero
+                    );
 
                 if (errorCode != SocketError.Success)
                 {
@@ -5377,15 +5346,12 @@ namespace System.Net.Sockets
             {
                 if (bytesTransferred > 0)
                 {
-                    NetworkingPerfCounters.Instance.Increment(
-                        NetworkingPerfCounterName.SocketBytesSent,
-                        bytesTransferred
-                    );
+                    NetworkingPerfCounters.Instance
+                        .Increment(NetworkingPerfCounterName.SocketBytesSent, bytesTransferred);
                     if (Transport == TransportType.Udp)
                     {
-                        NetworkingPerfCounters.Instance.Increment(
-                            NetworkingPerfCounterName.SocketDatagramsSent
-                        );
+                        NetworkingPerfCounters.Instance
+                            .Increment(NetworkingPerfCounterName.SocketDatagramsSent);
                     }
                 }
             }
@@ -5636,17 +5602,18 @@ namespace System.Net.Sockets
                 }
 
                 int bytesTransferred;
-                errorCode = UnsafeNclNativeMethods.OSSOCK.WSASendTo(
-                    m_Handle,
-                    ref asyncResult.m_SingleBuffer,
-                    1, // only ever 1 buffer being sent
-                    out bytesTransferred,
-                    socketFlags,
-                    asyncResult.GetSocketAddressPtr(),
-                    asyncResult.SocketAddress.Size,
-                    asyncResult.OverlappedHandle,
-                    IntPtr.Zero
-                );
+                errorCode = UnsafeNclNativeMethods.OSSOCK
+                    .WSASendTo(
+                        m_Handle,
+                        ref asyncResult.m_SingleBuffer,
+                        1, // only ever 1 buffer being sent
+                        out bytesTransferred,
+                        socketFlags,
+                        asyncResult.GetSocketAddressPtr(),
+                        asyncResult.SocketAddress.Size,
+                        asyncResult.OverlappedHandle,
+                        IntPtr.Zero
+                    );
 
                 if (errorCode != SocketError.Success)
                 {
@@ -5759,15 +5726,12 @@ namespace System.Net.Sockets
             {
                 if (bytesTransferred > 0)
                 {
-                    NetworkingPerfCounters.Instance.Increment(
-                        NetworkingPerfCounterName.SocketBytesSent,
-                        bytesTransferred
-                    );
+                    NetworkingPerfCounters.Instance
+                        .Increment(NetworkingPerfCounterName.SocketBytesSent, bytesTransferred);
                     if (Transport == TransportType.Udp)
                     {
-                        NetworkingPerfCounters.Instance.Increment(
-                            NetworkingPerfCounterName.SocketDatagramsSent
-                        );
+                        NetworkingPerfCounters.Instance
+                            .Increment(NetworkingPerfCounterName.SocketDatagramsSent);
                     }
                 }
             }
@@ -5980,15 +5944,16 @@ namespace System.Net.Sockets
 
                 // This can throw ObjectDisposedException.
                 int bytesTransferred;
-                errorCode = UnsafeNclNativeMethods.OSSOCK.WSARecv(
-                    m_Handle,
-                    ref asyncResult.m_SingleBuffer,
-                    1,
-                    out bytesTransferred,
-                    ref socketFlags,
-                    asyncResult.OverlappedHandle,
-                    IntPtr.Zero
-                );
+                errorCode = UnsafeNclNativeMethods.OSSOCK
+                    .WSARecv(
+                        m_Handle,
+                        ref asyncResult.m_SingleBuffer,
+                        1,
+                        out bytesTransferred,
+                        ref socketFlags,
+                        asyncResult.OverlappedHandle,
+                        IntPtr.Zero
+                    );
 
                 if (errorCode != SocketError.Success)
                 {
@@ -6147,15 +6112,16 @@ namespace System.Net.Sockets
 
                 // This can throw ObjectDisposedException.
                 int bytesTransferred;
-                errorCode = UnsafeNclNativeMethods.OSSOCK.WSARecv(
-                    m_Handle,
-                    asyncResult.m_WSABuffers,
-                    asyncResult.m_WSABuffers.Length,
-                    out bytesTransferred,
-                    ref socketFlags,
-                    asyncResult.OverlappedHandle,
-                    IntPtr.Zero
-                );
+                errorCode = UnsafeNclNativeMethods.OSSOCK
+                    .WSARecv(
+                        m_Handle,
+                        asyncResult.m_WSABuffers,
+                        asyncResult.m_WSABuffers.Length,
+                        out bytesTransferred,
+                        ref socketFlags,
+                        asyncResult.OverlappedHandle,
+                        IntPtr.Zero
+                    );
 
                 if (errorCode != SocketError.Success)
                 {
@@ -6290,15 +6256,12 @@ namespace System.Net.Sockets
             {
                 if (bytesTransferred > 0)
                 {
-                    NetworkingPerfCounters.Instance.Increment(
-                        NetworkingPerfCounterName.SocketBytesReceived,
-                        bytesTransferred
-                    );
+                    NetworkingPerfCounters.Instance
+                        .Increment(NetworkingPerfCounterName.SocketBytesReceived, bytesTransferred);
                     if (Transport == TransportType.Udp)
                     {
-                        NetworkingPerfCounters.Instance.Increment(
-                            NetworkingPerfCounterName.SocketDatagramsReceived
-                        );
+                        NetworkingPerfCounters.Instance
+                            .Increment(NetworkingPerfCounterName.SocketDatagramsReceived);
                     }
                 }
             }
@@ -6613,15 +6576,12 @@ namespace System.Net.Sockets
             {
                 if (bytesTransferred > 0)
                 {
-                    NetworkingPerfCounters.Instance.Increment(
-                        NetworkingPerfCounterName.SocketBytesReceived,
-                        bytesTransferred
-                    );
+                    NetworkingPerfCounters.Instance
+                        .Increment(NetworkingPerfCounterName.SocketBytesReceived, bytesTransferred);
                     if (Transport == TransportType.Udp)
                     {
-                        NetworkingPerfCounters.Instance.Increment(
-                            NetworkingPerfCounterName.SocketDatagramsReceived
-                        );
+                        NetworkingPerfCounters.Instance
+                            .Increment(NetworkingPerfCounterName.SocketDatagramsReceived);
                     }
                 }
             }
@@ -6835,17 +6795,18 @@ namespace System.Net.Sockets
                 }
 
                 int bytesTransferred;
-                errorCode = UnsafeNclNativeMethods.OSSOCK.WSARecvFrom(
-                    m_Handle,
-                    ref asyncResult.m_SingleBuffer,
-                    1,
-                    out bytesTransferred,
-                    ref socketFlags,
-                    asyncResult.GetSocketAddressPtr(),
-                    asyncResult.GetSocketAddressSizePtr(),
-                    asyncResult.OverlappedHandle,
-                    IntPtr.Zero
-                );
+                errorCode = UnsafeNclNativeMethods.OSSOCK
+                    .WSARecvFrom(
+                        m_Handle,
+                        ref asyncResult.m_SingleBuffer,
+                        1,
+                        out bytesTransferred,
+                        ref socketFlags,
+                        asyncResult.GetSocketAddressPtr(),
+                        asyncResult.GetSocketAddressSizePtr(),
+                        asyncResult.OverlappedHandle,
+                        IntPtr.Zero
+                    );
 
                 if (errorCode != SocketError.Success)
                 {
@@ -6989,15 +6950,12 @@ namespace System.Net.Sockets
             {
                 if (bytesTransferred > 0)
                 {
-                    NetworkingPerfCounters.Instance.Increment(
-                        NetworkingPerfCounterName.SocketBytesReceived,
-                        bytesTransferred
-                    );
+                    NetworkingPerfCounters.Instance
+                        .Increment(NetworkingPerfCounterName.SocketBytesReceived, bytesTransferred);
                     if (Transport == TransportType.Udp)
                     {
-                        NetworkingPerfCounters.Instance.Increment(
-                            NetworkingPerfCounterName.SocketDatagramsReceived
-                        );
+                        NetworkingPerfCounters.Instance
+                            .Increment(NetworkingPerfCounterName.SocketDatagramsReceived);
                     }
                 }
             }
@@ -7784,10 +7742,8 @@ namespace System.Net.Sockets
             {
                 if (bytesTransferred > 0)
                 {
-                    NetworkingPerfCounters.Instance.Increment(
-                        NetworkingPerfCounterName.SocketBytesReceived,
-                        bytesTransferred
-                    );
+                    NetworkingPerfCounters.Instance
+                        .Increment(NetworkingPerfCounterName.SocketBytesReceived, bytesTransferred);
                 }
             }
 #endif
@@ -8298,10 +8254,11 @@ namespace System.Net.Sockets
 #if !MONO
                         WSAData wsaData = new WSAData();
 
-                        SocketError errorCode = UnsafeNclNativeMethods.OSSOCK.WSAStartup(
-                            (short)0x0202, // we need 2.2
-                            out wsaData
-                        );
+                        SocketError errorCode = UnsafeNclNativeMethods.OSSOCK
+                            .WSAStartup(
+                                (short)0x0202, // we need 2.2
+                                out wsaData
+                            );
 
                         if (errorCode != SocketError.Success)
                         {
@@ -8343,14 +8300,15 @@ namespace System.Net.Sockets
                         );
 #else
                         SafeCloseSocket.InnerSafeCloseSocket socketV4 =
-                            UnsafeNclNativeMethods.OSSOCK.WSASocket(
-                                AddressFamily.InterNetwork,
-                                SocketType.Dgram,
-                                ProtocolType.IP,
-                                IntPtr.Zero,
-                                0,
-                                (SocketConstructorFlags)0
-                            );
+                            UnsafeNclNativeMethods.OSSOCK
+                                .WSASocket(
+                                    AddressFamily.InterNetwork,
+                                    SocketType.Dgram,
+                                    ProtocolType.IP,
+                                    IntPtr.Zero,
+                                    0,
+                                    (SocketConstructorFlags)0
+                                );
                         if (socketV4.IsInvalid)
                         {
                             errorCode = (SocketError)Marshal.GetLastWin32Error();
@@ -8361,14 +8319,15 @@ namespace System.Net.Sockets
                         socketV4.Close();
 
                         SafeCloseSocket.InnerSafeCloseSocket socketV6 =
-                            UnsafeNclNativeMethods.OSSOCK.WSASocket(
-                                AddressFamily.InterNetworkV6,
-                                SocketType.Dgram,
-                                ProtocolType.IP,
-                                IntPtr.Zero,
-                                0,
-                                (SocketConstructorFlags)0
-                            );
+                            UnsafeNclNativeMethods.OSSOCK
+                                .WSASocket(
+                                    AddressFamily.InterNetworkV6,
+                                    SocketType.Dgram,
+                                    ProtocolType.IP,
+                                    IntPtr.Zero,
+                                    0,
+                                    (SocketConstructorFlags)0
+                                );
                         if (socketV6.IsInvalid)
                         {
                             errorCode = (SocketError)Marshal.GetLastWin32Error();
@@ -8439,15 +8398,16 @@ namespace System.Net.Sockets
                 Logging.Enter(Logging.Sockets, this, "Connect", endPointSnapshot);
 
             // This can throw ObjectDisposedException.
-            SocketError errorCode = UnsafeNclNativeMethods.OSSOCK.WSAConnect(
-                m_Handle.DangerousGetHandle(),
-                socketAddress.m_Buffer,
-                socketAddress.m_Size,
-                IntPtr.Zero,
-                IntPtr.Zero,
-                IntPtr.Zero,
-                IntPtr.Zero
-            );
+            SocketError errorCode = UnsafeNclNativeMethods.OSSOCK
+                .WSAConnect(
+                    m_Handle.DangerousGetHandle(),
+                    socketAddress.m_Buffer,
+                    socketAddress.m_Size,
+                    IntPtr.Zero,
+                    IntPtr.Zero,
+                    IntPtr.Zero,
+                    IntPtr.Zero
+                );
 
 #if TRAVE
             try
@@ -8609,11 +8569,8 @@ namespace System.Net.Sockets
                     if (!willBlock || !willBlockInternal)
                     {
                         int nonBlockCmd = 0;
-                        errorCode = UnsafeNclNativeMethods.OSSOCK.ioctlsocket(
-                            m_Handle,
-                            IoctlSocketConstants.FIONBIO,
-                            ref nonBlockCmd
-                        );
+                        errorCode = UnsafeNclNativeMethods.OSSOCK
+                            .ioctlsocket(m_Handle, IoctlSocketConstants.FIONBIO, ref nonBlockCmd);
                         GlobalLog.Print(
                             "SafeCloseSocket::Dispose(handle:"
                                 + m_Handle.DangerousGetHandle().ToString("x")
@@ -8639,10 +8596,8 @@ namespace System.Net.Sockets
                     else
                     {
                         // Since our timeout is in ms and linger is in seconds, implement our own sortof linger here.
-                        errorCode = UnsafeNclNativeMethods.OSSOCK.shutdown(
-                            m_Handle,
-                            (int)SocketShutdown.Send
-                        );
+                        errorCode = UnsafeNclNativeMethods.OSSOCK
+                            .shutdown(m_Handle, (int)SocketShutdown.Send);
                         GlobalLog.Print(
                             "SafeCloseSocket::Dispose(handle:"
                                 + m_Handle.DangerousGetHandle().ToString("x")
@@ -8655,13 +8610,14 @@ namespace System.Net.Sockets
                         );
 
                         // This should give us a timeout in milliseconds.
-                        errorCode = UnsafeNclNativeMethods.OSSOCK.setsockopt(
-                            m_Handle,
-                            SocketOptionLevel.Socket,
-                            SocketOptionName.ReceiveTimeout,
-                            ref timeout,
-                            sizeof(int)
-                        );
+                        errorCode = UnsafeNclNativeMethods.OSSOCK
+                            .setsockopt(
+                                m_Handle,
+                                SocketOptionLevel.Socket,
+                                SocketOptionName.ReceiveTimeout,
+                                ref timeout,
+                                sizeof(int)
+                            );
                         GlobalLog.Print(
                             "SafeCloseSocket::Dispose(handle:"
                                 + m_Handle.DangerousGetHandle().ToString("x")
@@ -8682,12 +8638,13 @@ namespace System.Net.Sockets
                             unsafe
                             {
                                 errorCode = (SocketError)
-                                    UnsafeNclNativeMethods.OSSOCK.recv(
-                                        m_Handle.DangerousGetHandle(),
-                                        null,
-                                        0,
-                                        SocketFlags.None
-                                    );
+                                    UnsafeNclNativeMethods.OSSOCK
+                                        .recv(
+                                            m_Handle.DangerousGetHandle(),
+                                            null,
+                                            0,
+                                            SocketFlags.None
+                                        );
                             }
                             GlobalLog.Print(
                                 "SafeCloseSocket::Dispose(handle:"
@@ -8705,11 +8662,12 @@ namespace System.Net.Sockets
                             {
                                 // We got a FIN or data.  Use ioctlsocket to find out which.
                                 int dataAvailable = 0;
-                                errorCode = UnsafeNclNativeMethods.OSSOCK.ioctlsocket(
-                                    m_Handle,
-                                    IoctlSocketConstants.FIONREAD,
-                                    ref dataAvailable
-                                );
+                                errorCode = UnsafeNclNativeMethods.OSSOCK
+                                    .ioctlsocket(
+                                        m_Handle,
+                                        IoctlSocketConstants.FIONREAD,
+                                        ref dataAvailable
+                                    );
                                 GlobalLog.Print(
                                     "SafeCloseSocket::Dispose(handle:"
                                         + m_Handle.DangerousGetHandle().ToString("x")
@@ -8898,13 +8856,8 @@ namespace System.Net.Sockets
             try
             {
                 // This can throw ObjectDisposedException.
-                errorCode = UnsafeNclNativeMethods.OSSOCK.setsockopt(
-                    m_Handle,
-                    optionLevel,
-                    optionName,
-                    ref optionValue,
-                    sizeof(int)
-                );
+                errorCode = UnsafeNclNativeMethods.OSSOCK
+                    .setsockopt(m_Handle, optionLevel, optionName, ref optionValue, sizeof(int));
 
                 GlobalLog.Print(
                     "Socket#"
@@ -9002,13 +8955,14 @@ namespace System.Net.Sockets
             );
 
             // This can throw ObjectDisposedException.
-            SocketError errorCode = UnsafeNclNativeMethods.OSSOCK.setsockopt(
-                m_Handle,
-                SocketOptionLevel.IP,
-                optionName,
-                ref ipmr,
-                IPMulticastRequest.Size
-            );
+            SocketError errorCode = UnsafeNclNativeMethods.OSSOCK
+                .setsockopt(
+                    m_Handle,
+                    SocketOptionLevel.IP,
+                    optionName,
+                    ref ipmr,
+                    IPMulticastRequest.Size
+                );
 
             GlobalLog.Print(
                 "Socket#"
@@ -9059,13 +9013,14 @@ namespace System.Net.Sockets
             );
 
             // This can throw ObjectDisposedException.
-            SocketError errorCode = UnsafeNclNativeMethods.OSSOCK.setsockopt(
-                m_Handle,
-                SocketOptionLevel.IPv6,
-                optionName,
-                ref ipmr,
-                IPv6MulticastRequest.Size
-            );
+            SocketError errorCode = UnsafeNclNativeMethods.OSSOCK
+                .setsockopt(
+                    m_Handle,
+                    SocketOptionLevel.IPv6,
+                    optionName,
+                    ref ipmr,
+                    IPv6MulticastRequest.Size
+                );
 
             GlobalLog.Print(
                 "Socket#"
@@ -9109,13 +9064,14 @@ namespace System.Net.Sockets
             );
 
             // This can throw ObjectDisposedException.
-            SocketError errorCode = UnsafeNclNativeMethods.OSSOCK.setsockopt(
-                m_Handle,
-                SocketOptionLevel.Socket,
-                SocketOptionName.Linger,
-                ref lngopt,
-                4
-            );
+            SocketError errorCode = UnsafeNclNativeMethods.OSSOCK
+                .setsockopt(
+                    m_Handle,
+                    SocketOptionLevel.Socket,
+                    SocketOptionName.Linger,
+                    ref lngopt,
+                    4
+                );
 
             GlobalLog.Print(
                 "Socket#"
@@ -9146,13 +9102,14 @@ namespace System.Net.Sockets
             int optlen = 4;
 
             // This can throw ObjectDisposedException.
-            SocketError errorCode = UnsafeNclNativeMethods.OSSOCK.getsockopt(
-                m_Handle,
-                SocketOptionLevel.Socket,
-                SocketOptionName.Linger,
-                out lngopt,
-                ref optlen
-            );
+            SocketError errorCode = UnsafeNclNativeMethods.OSSOCK
+                .getsockopt(
+                    m_Handle,
+                    SocketOptionLevel.Socket,
+                    SocketOptionName.Linger,
+                    out lngopt,
+                    ref optlen
+                );
 
             GlobalLog.Print(
                 "Socket#"
@@ -9186,13 +9143,8 @@ namespace System.Net.Sockets
             int optlen = IPMulticastRequest.Size;
 
             // This can throw ObjectDisposedException.
-            SocketError errorCode = UnsafeNclNativeMethods.OSSOCK.getsockopt(
-                m_Handle,
-                SocketOptionLevel.IP,
-                optionName,
-                out ipmr,
-                ref optlen
-            );
+            SocketError errorCode = UnsafeNclNativeMethods.OSSOCK
+                .getsockopt(m_Handle, SocketOptionLevel.IP, optionName, out ipmr, ref optlen);
 
             GlobalLog.Print(
                 "Socket#"
@@ -9251,13 +9203,8 @@ namespace System.Net.Sockets
             int optlen = IPv6MulticastRequest.Size;
 
             // This can throw ObjectDisposedException.
-            SocketError errorCode = UnsafeNclNativeMethods.OSSOCK.getsockopt(
-                m_Handle,
-                SocketOptionLevel.IP,
-                optionName,
-                out ipmr,
-                ref optlen
-            );
+            SocketError errorCode = UnsafeNclNativeMethods.OSSOCK
+                .getsockopt(m_Handle, SocketOptionLevel.IP, optionName, out ipmr, ref optlen);
 
             GlobalLog.Print(
                 "Socket#"
@@ -9326,11 +9273,8 @@ namespace System.Net.Sockets
             SocketError errorCode;
             try
             {
-                errorCode = UnsafeNclNativeMethods.OSSOCK.ioctlsocket(
-                    m_Handle,
-                    IoctlSocketConstants.FIONBIO,
-                    ref intBlocking
-                );
+                errorCode = UnsafeNclNativeMethods.OSSOCK
+                    .ioctlsocket(m_Handle, IoctlSocketConstants.FIONBIO, ref intBlocking);
 
                 if (errorCode == SocketError.SocketError)
                 {
@@ -9404,9 +9348,8 @@ namespace System.Net.Sockets
                         "socketList"
                     );
                 }
-                fileDescriptorSet[current + 1] = (
-                    (Socket)socketList[current]
-                ).m_Handle.DangerousGetHandle();
+                fileDescriptorSet[current + 1] = ((Socket)socketList[current]).m_Handle
+                    .DangerousGetHandle();
             }
             return fileDescriptorSet;
         }
@@ -9652,15 +9595,16 @@ namespace System.Net.Sockets
                 }
 
                 // This can throw ObjectDisposedException.
-                errorCode = UnsafeNclNativeMethods.OSSOCK.WSASend_Blocking(
-                    m_Handle.DangerousGetHandle(),
-                    WSABuffers,
-                    WSABuffers.Length,
-                    out bytesTransferred,
-                    socketFlags,
-                    SafeNativeOverlapped.Zero,
-                    IntPtr.Zero
-                );
+                errorCode = UnsafeNclNativeMethods.OSSOCK
+                    .WSASend_Blocking(
+                        m_Handle.DangerousGetHandle(),
+                        WSABuffers,
+                        WSABuffers.Length,
+                        out bytesTransferred,
+                        socketFlags,
+                        SafeNativeOverlapped.Zero,
+                        IntPtr.Zero
+                    );
 
                 GlobalLog.Print(
                     "Socket#"
@@ -9782,11 +9726,12 @@ namespace System.Net.Sockets
                 // MSRC 11081 - Do the necessary security demand
                 context.socket.CheckCacheRemote(ref endPoint, true);
 
-                IAsyncResult connectResult = context.socket.UnsafeBeginConnect(
-                    endPoint,
-                    new AsyncCallback(MultipleAddressConnectCallback),
-                    context
-                );
+                IAsyncResult connectResult = context.socket
+                    .UnsafeBeginConnect(
+                        endPoint,
+                        new AsyncCallback(MultipleAddressConnectCallback),
+                        context
+                    );
 
                 if (connectResult.CompletedSynchronously)
                 {
@@ -9946,15 +9891,16 @@ namespace System.Net.Sockets
 
                 // This can throw ObjectDisposedException.
                 int bytesTransferred;
-                errorCode = UnsafeNclNativeMethods.OSSOCK.WSASend(
-                    m_Handle,
-                    asyncResult.m_WSABuffers,
-                    asyncResult.m_WSABuffers.Length,
-                    out bytesTransferred,
-                    socketFlags,
-                    asyncResult.OverlappedHandle,
-                    IntPtr.Zero
-                );
+                errorCode = UnsafeNclNativeMethods.OSSOCK
+                    .WSASend(
+                        m_Handle,
+                        asyncResult.m_WSABuffers,
+                        asyncResult.m_WSABuffers.Length,
+                        out bytesTransferred,
+                        socketFlags,
+                        asyncResult.OverlappedHandle,
+                        IntPtr.Zero
+                    );
 
                 if (errorCode != SocketError.Success)
                 {
@@ -10036,15 +9982,12 @@ namespace System.Net.Sockets
             {
                 if (bytesTransferred > 0)
                 {
-                    NetworkingPerfCounters.Instance.Increment(
-                        NetworkingPerfCounterName.SocketBytesSent,
-                        bytesTransferred
-                    );
+                    NetworkingPerfCounters.Instance
+                        .Increment(NetworkingPerfCounterName.SocketBytesSent, bytesTransferred);
                     if (Transport == TransportType.Udp)
                     {
-                        NetworkingPerfCounters.Instance.Increment(
-                            NetworkingPerfCounterName.SocketDatagramsSent
-                        );
+                        NetworkingPerfCounters.Instance
+                            .Increment(NetworkingPerfCounterName.SocketDatagramsSent);
                     }
                 }
             }
@@ -10160,9 +10103,8 @@ namespace System.Net.Sockets
 #if !FEATURE_PAL // perfcounter
             if (s_PerfCountersEnabled)
             {
-                NetworkingPerfCounters.Instance.Increment(
-                    NetworkingPerfCounterName.SocketConnectionsEstablished
-                );
+                NetworkingPerfCounters.Instance
+                    .Increment(NetworkingPerfCounterName.SocketConnectionsEstablished);
             }
 #endif //!FEATURE_PAL
         }
@@ -10281,11 +10223,8 @@ namespace System.Net.Sockets
             SocketError errorCode = SocketError.NotSocket;
             try
             {
-                errorCode = UnsafeNclNativeMethods.OSSOCK.WSAEventSelect(
-                    m_Handle,
-                    IntPtr.Zero,
-                    AsyncEventBits.FdNone
-                );
+                errorCode = UnsafeNclNativeMethods.OSSOCK
+                    .WSAEventSelect(m_Handle, IntPtr.Zero, AsyncEventBits.FdNone);
             }
             catch (Exception e)
             {
@@ -10423,11 +10362,8 @@ namespace System.Net.Sockets
             //
             try
             {
-                errorCode = UnsafeNclNativeMethods.OSSOCK.WSAEventSelect(
-                    m_Handle,
-                    m_AsyncEvent.SafeWaitHandle,
-                    blockEventBits
-                );
+                errorCode = UnsafeNclNativeMethods.OSSOCK
+                    .WSAEventSelect(m_Handle, m_AsyncEvent.SafeWaitHandle, blockEventBits);
             }
             catch (Exception e)
             {
@@ -11010,28 +10946,30 @@ namespace System.Net.Sockets
                 if (e.m_Buffer != null)
                 {
                     // Single buffer case
-                    socketError = UnsafeNclNativeMethods.OSSOCK.WSARecv(
-                        m_Handle,
-                        ref e.m_WSABuffer,
-                        1,
-                        out bytesTransferred,
-                        ref flags,
-                        e.m_PtrNativeOverlapped,
-                        IntPtr.Zero
-                    );
+                    socketError = UnsafeNclNativeMethods.OSSOCK
+                        .WSARecv(
+                            m_Handle,
+                            ref e.m_WSABuffer,
+                            1,
+                            out bytesTransferred,
+                            ref flags,
+                            e.m_PtrNativeOverlapped,
+                            IntPtr.Zero
+                        );
                 }
                 else
                 {
                     // Multi buffer case
-                    socketError = UnsafeNclNativeMethods.OSSOCK.WSARecv(
-                        m_Handle,
-                        e.m_WSABufferArray,
-                        e.m_WSABufferArray.Length,
-                        out bytesTransferred,
-                        ref flags,
-                        e.m_PtrNativeOverlapped,
-                        IntPtr.Zero
-                    );
+                    socketError = UnsafeNclNativeMethods.OSSOCK
+                        .WSARecv(
+                            m_Handle,
+                            e.m_WSABufferArray,
+                            e.m_WSABufferArray.Length,
+                            out bytesTransferred,
+                            ref flags,
+                            e.m_PtrNativeOverlapped,
+                            IntPtr.Zero
+                        );
                 }
             }
             catch (Exception ex)
@@ -11121,31 +11059,33 @@ namespace System.Net.Sockets
             {
                 if (e.m_Buffer != null)
                 {
-                    socketError = UnsafeNclNativeMethods.OSSOCK.WSARecvFrom(
-                        m_Handle,
-                        ref e.m_WSABuffer,
-                        1,
-                        out bytesTransferred,
-                        ref flags,
-                        e.m_PtrSocketAddressBuffer,
-                        e.m_PtrSocketAddressBufferSize,
-                        e.m_PtrNativeOverlapped,
-                        IntPtr.Zero
-                    );
+                    socketError = UnsafeNclNativeMethods.OSSOCK
+                        .WSARecvFrom(
+                            m_Handle,
+                            ref e.m_WSABuffer,
+                            1,
+                            out bytesTransferred,
+                            ref flags,
+                            e.m_PtrSocketAddressBuffer,
+                            e.m_PtrSocketAddressBufferSize,
+                            e.m_PtrNativeOverlapped,
+                            IntPtr.Zero
+                        );
                 }
                 else
                 {
-                    socketError = UnsafeNclNativeMethods.OSSOCK.WSARecvFrom(
-                        m_Handle,
-                        e.m_WSABufferArray,
-                        e.m_WSABufferArray.Length,
-                        out bytesTransferred,
-                        ref flags,
-                        e.m_PtrSocketAddressBuffer,
-                        e.m_PtrSocketAddressBufferSize,
-                        e.m_PtrNativeOverlapped,
-                        IntPtr.Zero
-                    );
+                    socketError = UnsafeNclNativeMethods.OSSOCK
+                        .WSARecvFrom(
+                            m_Handle,
+                            e.m_WSABufferArray,
+                            e.m_WSABufferArray.Length,
+                            out bytesTransferred,
+                            ref flags,
+                            e.m_PtrSocketAddressBuffer,
+                            e.m_PtrSocketAddressBufferSize,
+                            e.m_PtrNativeOverlapped,
+                            IntPtr.Zero
+                        );
                 }
             }
             catch (Exception ex)
@@ -11304,28 +11244,30 @@ namespace System.Net.Sockets
                 if (e.m_Buffer != null)
                 {
                     // Single buffer case
-                    socketError = UnsafeNclNativeMethods.OSSOCK.WSASend(
-                        m_Handle,
-                        ref e.m_WSABuffer,
-                        1,
-                        out bytesTransferred,
-                        e.m_SocketFlags,
-                        e.m_PtrNativeOverlapped,
-                        IntPtr.Zero
-                    );
+                    socketError = UnsafeNclNativeMethods.OSSOCK
+                        .WSASend(
+                            m_Handle,
+                            ref e.m_WSABuffer,
+                            1,
+                            out bytesTransferred,
+                            e.m_SocketFlags,
+                            e.m_PtrNativeOverlapped,
+                            IntPtr.Zero
+                        );
                 }
                 else
                 {
                     // Multi buffer case
-                    socketError = UnsafeNclNativeMethods.OSSOCK.WSASend(
-                        m_Handle,
-                        e.m_WSABufferArray,
-                        e.m_WSABufferArray.Length,
-                        out bytesTransferred,
-                        e.m_SocketFlags,
-                        e.m_PtrNativeOverlapped,
-                        IntPtr.Zero
-                    );
+                    socketError = UnsafeNclNativeMethods.OSSOCK
+                        .WSASend(
+                            m_Handle,
+                            e.m_WSABufferArray,
+                            e.m_WSABufferArray.Length,
+                            out bytesTransferred,
+                            e.m_SocketFlags,
+                            e.m_PtrNativeOverlapped,
+                            IntPtr.Zero
+                        );
                 }
             }
             catch (Exception ex)
@@ -11484,31 +11426,33 @@ namespace System.Net.Sockets
                 if (e.m_Buffer != null)
                 {
                     // Single buffer case
-                    socketError = UnsafeNclNativeMethods.OSSOCK.WSASendTo(
-                        m_Handle,
-                        ref e.m_WSABuffer,
-                        1,
-                        out bytesTransferred,
-                        e.m_SocketFlags,
-                        e.m_PtrSocketAddressBuffer,
-                        e.m_SocketAddress.m_Size,
-                        e.m_PtrNativeOverlapped,
-                        IntPtr.Zero
-                    );
+                    socketError = UnsafeNclNativeMethods.OSSOCK
+                        .WSASendTo(
+                            m_Handle,
+                            ref e.m_WSABuffer,
+                            1,
+                            out bytesTransferred,
+                            e.m_SocketFlags,
+                            e.m_PtrSocketAddressBuffer,
+                            e.m_SocketAddress.m_Size,
+                            e.m_PtrNativeOverlapped,
+                            IntPtr.Zero
+                        );
                 }
                 else
                 {
-                    socketError = UnsafeNclNativeMethods.OSSOCK.WSASendTo(
-                        m_Handle,
-                        e.m_WSABufferArray,
-                        e.m_WSABufferArray.Length,
-                        out bytesTransferred,
-                        e.m_SocketFlags,
-                        e.m_PtrSocketAddressBuffer,
-                        e.m_SocketAddress.m_Size,
-                        e.m_PtrNativeOverlapped,
-                        IntPtr.Zero
-                    );
+                    socketError = UnsafeNclNativeMethods.OSSOCK
+                        .WSASendTo(
+                            m_Handle,
+                            e.m_WSABufferArray,
+                            e.m_WSABufferArray.Length,
+                            out bytesTransferred,
+                            e.m_SocketFlags,
+                            e.m_PtrSocketAddressBuffer,
+                            e.m_SocketAddress.m_Size,
+                            e.m_PtrNativeOverlapped,
+                            IntPtr.Zero
+                        );
                 }
             }
             catch (Exception ex)
@@ -13169,28 +13113,22 @@ namespace System.Net.Sockets
 #if !FEATURE_PAL // perfcounter
             if (sendOp)
             {
-                NetworkingPerfCounters.Instance.Increment(
-                    NetworkingPerfCounterName.SocketBytesSent,
-                    size
-                );
+                NetworkingPerfCounters.Instance
+                    .Increment(NetworkingPerfCounterName.SocketBytesSent, size);
                 if (m_CurrentSocket.Transport == TransportType.Udp)
                 {
-                    NetworkingPerfCounters.Instance.Increment(
-                        NetworkingPerfCounterName.SocketDatagramsSent
-                    );
+                    NetworkingPerfCounters.Instance
+                        .Increment(NetworkingPerfCounterName.SocketDatagramsSent);
                 }
             }
             else
             {
-                NetworkingPerfCounters.Instance.Increment(
-                    NetworkingPerfCounterName.SocketBytesReceived,
-                    size
-                );
+                NetworkingPerfCounters.Instance
+                    .Increment(NetworkingPerfCounterName.SocketBytesReceived, size);
                 if (m_CurrentSocket.Transport == TransportType.Udp)
                 {
-                    NetworkingPerfCounters.Instance.Increment(
-                        NetworkingPerfCounterName.SocketDatagramsReceived
-                    );
+                    NetworkingPerfCounters.Instance
+                        .Increment(NetworkingPerfCounterName.SocketDatagramsReceived);
                 }
             }
 #endif
@@ -13353,13 +13291,14 @@ namespace System.Net.Sockets
                         // Set the socket context.
                         IntPtr handle = m_CurrentSocket.SafeHandle.DangerousGetHandle();
 
-                        socketError = UnsafeNclNativeMethods.OSSOCK.setsockopt(
-                            m_AcceptSocket.SafeHandle,
-                            SocketOptionLevel.Socket,
-                            SocketOptionName.UpdateAcceptContext,
-                            ref handle,
-                            Marshal.SizeOf(handle)
-                        );
+                        socketError = UnsafeNclNativeMethods.OSSOCK
+                            .setsockopt(
+                                m_AcceptSocket.SafeHandle,
+                                SocketOptionLevel.Socket,
+                                SocketOptionName.UpdateAcceptContext,
+                                ref handle,
+                                Marshal.SizeOf(handle)
+                            );
 
                         if (socketError == SocketError.SocketError)
                         {
@@ -13411,13 +13350,14 @@ namespace System.Net.Sockets
                     // Update the socket context.
                     try
                     {
-                        socketError = UnsafeNclNativeMethods.OSSOCK.setsockopt(
-                            m_CurrentSocket.SafeHandle,
-                            SocketOptionLevel.Socket,
-                            SocketOptionName.UpdateConnectContext,
-                            null,
-                            0
-                        );
+                        socketError = UnsafeNclNativeMethods.OSSOCK
+                            .setsockopt(
+                                m_CurrentSocket.SafeHandle,
+                                SocketOptionLevel.Socket,
+                                SocketOptionName.UpdateConnectContext,
+                                null,
+                                0
+                            );
                         if (socketError == SocketError.SocketError)
                         {
                             socketError = (SocketError)Marshal.GetLastWin32Error();
@@ -13679,13 +13619,14 @@ namespace System.Net.Sockets
 
                             // The Async IO completed with a failure.
                             // here we need to call WSAGetOverlappedResult() just so Marshal.GetLastWin32Error() will return the correct error.
-                            bool success = UnsafeNclNativeMethods.OSSOCK.WSAGetOverlappedResult(
-                                m_CurrentSocket.SafeHandle,
-                                m_PtrNativeOverlapped,
-                                out numBytes,
-                                false,
-                                out socketFlags
-                            );
+                            bool success = UnsafeNclNativeMethods.OSSOCK
+                                .WSAGetOverlappedResult(
+                                    m_CurrentSocket.SafeHandle,
+                                    m_PtrNativeOverlapped,
+                                    out numBytes,
+                                    false,
+                                    out socketFlags
+                                );
                             socketError = (SocketError)Marshal.GetLastWin32Error();
                         }
                         catch
@@ -13725,12 +13666,8 @@ namespace System.Net.Sockets
 
             // bind to completion port
 
-            IntPtr handle = UnsafeNclNativeMethods.OSSOCK.CreateIoCompletionPort(
-                osHandle,
-                m_hIOCP,
-                1111,
-                0
-            );
+            IntPtr handle = UnsafeNclNativeMethods.OSSOCK
+                .CreateIoCompletionPort(osHandle, m_hIOCP, 1111, 0);
             if (handle == IntPtr.Zero)
             {
                 throw new Exception(
@@ -13771,12 +13708,8 @@ namespace System.Net.Sockets
                     {
                         // Create completion port
 
-                        m_hIOCP = UnsafeNclNativeMethods.OSSOCK.CreateIoCompletionPort(
-                            c_InvalidHandleValue,
-                            IntPtr.Zero,
-                            1111,
-                            0
-                        );
+                        m_hIOCP = UnsafeNclNativeMethods.OSSOCK
+                            .CreateIoCompletionPort(c_InvalidHandleValue, IntPtr.Zero, 1111, 0);
                         if (m_hIOCP == c_InvalidHandleValue)
                         {
                             throw new Exception(
@@ -13827,13 +13760,14 @@ namespace System.Net.Sockets
 
                     // Read the completion port queue.
 
-                    result = UnsafeNclNativeMethods.OSSOCK.GetQueuedCompletionStatus(
-                        m_hIOCP,
-                        out bytesTransferred,
-                        out completionKey,
-                        out nativeOverlappedPtr,
-                        c_threadIOCPTimeout
-                    );
+                    result = UnsafeNclNativeMethods.OSSOCK
+                        .GetQueuedCompletionStatus(
+                            m_hIOCP,
+                            out bytesTransferred,
+                            out completionKey,
+                            out nativeOverlappedPtr,
+                            c_threadIOCPTimeout
+                        );
 
                     // Thread woke up and might have something to do.
 

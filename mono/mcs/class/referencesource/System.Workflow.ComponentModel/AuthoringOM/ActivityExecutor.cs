@@ -120,10 +120,12 @@ namespace System.Workflow.ComponentModel
             if (executionContext == null)
                 throw new ArgumentNullException("executionContext");
 
-            System.Diagnostics.Debug.Assert(
-                activity is ICompensatableActivity,
-                "should not get Compensate, if activity is not compensatable"
-            );
+            System.Diagnostics
+                .Debug
+                .Assert(
+                    activity is ICompensatableActivity,
+                    "should not get Compensate, if activity is not compensatable"
+                );
             return ((ICompensatableActivity)activity).Compensate(executionContext);
         }
 

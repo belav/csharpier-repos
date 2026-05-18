@@ -66,11 +66,9 @@ namespace System.Windows.Forms
         #region Local variables
 
         protected static readonly Color DefaultMonthBackColor = ThemeEngine.Current.ColorWindow;
-        protected static readonly Color DefaultTitleBackColor = ThemeEngine
-            .Current
+        protected static readonly Color DefaultTitleBackColor = ThemeEngine.Current
             .ColorActiveCaption;
-        protected static readonly Color DefaultTitleForeColor = ThemeEngine
-            .Current
+        protected static readonly Color DefaultTitleForeColor = ThemeEngine.Current
             .ColorActiveCaptionText;
         protected static readonly Color DefaultTrailingForeColor = SystemColors.GrayText;
 
@@ -1056,22 +1054,19 @@ namespace System.Windows.Forms
             switch (this.format)
             {
                 case DateTimePickerFormat.Long:
-                    return Threading
-                        .Thread
+                    return Threading.Thread
                         .CurrentThread
                         .CurrentCulture
                         .DateTimeFormat
                         .LongDatePattern;
                 case DateTimePickerFormat.Short:
-                    return Threading
-                        .Thread
+                    return Threading.Thread
                         .CurrentThread
                         .CurrentCulture
                         .DateTimeFormat
                         .ShortDatePattern;
                 case DateTimePickerFormat.Time:
-                    return Threading
-                        .Thread
+                    return Threading.Thread
                         .CurrentThread
                         .CurrentCulture
                         .DateTimeFormat
@@ -1079,8 +1074,7 @@ namespace System.Windows.Forms
                 case DateTimePickerFormat.Custom:
                     return this.custom_format == null ? String.Empty : this.custom_format;
                 default:
-                    return Threading
-                        .Thread
+                    return Threading.Thread
                         .CurrentThread
                         .CurrentCulture
                         .DateTimeFormat

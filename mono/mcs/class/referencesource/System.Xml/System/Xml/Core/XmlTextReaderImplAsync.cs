@@ -82,12 +82,8 @@ namespace System.Xml
         private async Task FinishInitUriStringAsync()
         {
             Stream stream = (Stream)(
-                await laterInitParam
-                    .inputUriResolver.GetEntityAsync(
-                        laterInitParam.inputbaseUri,
-                        string.Empty,
-                        typeof(Stream)
-                    )
+                await laterInitParam.inputUriResolver
+                    .GetEntityAsync(laterInitParam.inputbaseUri, string.Empty, typeof(Stream))
                     .ConfigureAwait(false)
             );
 
@@ -1354,12 +1350,8 @@ namespace System.Xml
                     // read new bytes
                     if (ps.bytePos == ps.bytesUsed && ps.bytes.Length - ps.bytesUsed > 0)
                     {
-                        int read = await ps
-                            .stream.ReadAsync(
-                                ps.bytes,
-                                ps.bytesUsed,
-                                ps.bytes.Length - ps.bytesUsed
-                            )
+                        int read = await ps.stream
+                            .ReadAsync(ps.bytes, ps.bytesUsed, ps.bytes.Length - ps.bytesUsed)
                             .ConfigureAwait(false);
                         if (read == 0)
                         {
@@ -1382,12 +1374,8 @@ namespace System.Xml
             else if (ps.textReader != null)
             {
                 // read chars
-                charsRead = await ps
-                    .textReader.ReadAsync(
-                        ps.chars,
-                        ps.charsUsed,
-                        ps.chars.Length - ps.charsUsed - 1
-                    )
+                charsRead = await ps.textReader
+                    .ReadAsync(ps.chars, ps.charsUsed, ps.chars.Length - ps.charsUsed - 1)
                     .ConfigureAwait(false);
                 ps.charsUsed += charsRead;
             }

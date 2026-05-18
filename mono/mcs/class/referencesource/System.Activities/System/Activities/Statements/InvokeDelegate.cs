@@ -68,8 +68,8 @@ namespace System.Activities.Statements
 
             if (this.Delegate != null)
             {
-                IList<RuntimeDelegateArgument> targetDelegateArguments =
-                    this.Delegate.RuntimeDelegateArguments;
+                IList<RuntimeDelegateArgument> targetDelegateArguments = this.Delegate
+                    .RuntimeDelegateArguments;
                 if (this.DelegateArguments.Count != targetDelegateArguments.Count)
                 {
                     metadata.AddValidationError(SR.WrongNumberOfArgumentsForActivityDelegate);

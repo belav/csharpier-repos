@@ -843,13 +843,13 @@ namespace MonoTests.System.Web.UI.WebControls
             fr.Controls.Add(new BaseControl(GetDecoratedId(html, "Answer"), "answer"));
             string button = GetDecoratedId(html, "StepNextButtonButton");
             if (button.Length > 0)
-                fr.Controls.Add(
-                    new BaseControl(GetDecoratedId(html, "StepNextButtonButton"), "Create User")
-                );
+                fr.Controls
+                    .Add(
+                        new BaseControl(GetDecoratedId(html, "StepNextButtonButton"), "Create User")
+                    );
             else
-                fr.Controls.Add(
-                    new BaseControl(GetDecoratedId(html, "StartNextButton"), "Create User")
-                );
+                fr.Controls
+                    .Add(new BaseControl(GetDecoratedId(html, "StartNextButton"), "Create User"));
             //fr.Controls.Add (new BaseControl ("__EVENTTARGET", GetEventTarget (html, "StartNextButton")));
 
             test.Request = fr;
@@ -904,13 +904,13 @@ namespace MonoTests.System.Web.UI.WebControls
             fr.Controls.Add(new BaseControl(GetDecoratedId(html, "Answer"), "123"));
             string button = GetDecoratedId(html, "StepNextButtonButton");
             if (button.Length > 0)
-                fr.Controls.Add(
-                    new BaseControl(GetDecoratedId(html, "StepNextButtonButton"), "Create User")
-                );
+                fr.Controls
+                    .Add(
+                        new BaseControl(GetDecoratedId(html, "StepNextButtonButton"), "Create User")
+                    );
             else
-                fr.Controls.Add(
-                    new BaseControl(GetDecoratedId(html, "StartNextButton"), "Create User")
-                );
+                fr.Controls
+                    .Add(new BaseControl(GetDecoratedId(html, "StartNextButton"), "Create User"));
 
             test.Request = fr;
             html = test.Run();
@@ -927,13 +927,13 @@ namespace MonoTests.System.Web.UI.WebControls
             fr.Controls.Add(new BaseControl(GetDecoratedId(html, "Answer"), "123"));
             button = GetDecoratedId(html, "StepNextButtonButton");
             if (button.Length > 0)
-                fr.Controls.Add(
-                    new BaseControl(GetDecoratedId(html, "StepNextButtonButton"), "Create User")
-                );
+                fr.Controls
+                    .Add(
+                        new BaseControl(GetDecoratedId(html, "StepNextButtonButton"), "Create User")
+                    );
             else
-                fr.Controls.Add(
-                    new BaseControl(GetDecoratedId(html, "StartNextButton"), "Create User")
-                );
+                fr.Controls
+                    .Add(new BaseControl(GetDecoratedId(html, "StartNextButton"), "Create User"));
 
             test.Request = fr;
             html = test.Run();
@@ -950,13 +950,13 @@ namespace MonoTests.System.Web.UI.WebControls
             fr.Controls.Add(new BaseControl(GetDecoratedId(html, "Answer"), "123"));
             button = GetDecoratedId(html, "StepNextButtonButton");
             if (button.Length > 0)
-                fr.Controls.Add(
-                    new BaseControl(GetDecoratedId(html, "StepNextButtonButton"), "Create User")
-                );
+                fr.Controls
+                    .Add(
+                        new BaseControl(GetDecoratedId(html, "StepNextButtonButton"), "Create User")
+                    );
             else
-                fr.Controls.Add(
-                    new BaseControl(GetDecoratedId(html, "StartNextButton"), "Create User")
-                );
+                fr.Controls
+                    .Add(new BaseControl(GetDecoratedId(html, "StartNextButton"), "Create User"));
 
             test.Request = fr;
             html = test.Run();
@@ -973,13 +973,13 @@ namespace MonoTests.System.Web.UI.WebControls
             fr.Controls.Add(new BaseControl(GetDecoratedId(html, "Answer"), "123"));
             button = GetDecoratedId(html, "StepNextButtonButton");
             if (button.Length > 0)
-                fr.Controls.Add(
-                    new BaseControl(GetDecoratedId(html, "StepNextButtonButton"), "Create User")
-                );
+                fr.Controls
+                    .Add(
+                        new BaseControl(GetDecoratedId(html, "StepNextButtonButton"), "Create User")
+                    );
             else
-                fr.Controls.Add(
-                    new BaseControl(GetDecoratedId(html, "StartNextButton"), "Create User")
-                );
+                fr.Controls
+                    .Add(new BaseControl(GetDecoratedId(html, "StartNextButton"), "Create User"));
 
             test.Request = fr;
             html = test.Run();
@@ -996,13 +996,13 @@ namespace MonoTests.System.Web.UI.WebControls
             fr.Controls.Add(new BaseControl(GetDecoratedId(html, "Answer"), "123"));
             button = GetDecoratedId(html, "StepNextButtonButton");
             if (button.Length > 0)
-                fr.Controls.Add(
-                    new BaseControl(GetDecoratedId(html, "StepNextButtonButton"), "Create User")
-                );
+                fr.Controls
+                    .Add(
+                        new BaseControl(GetDecoratedId(html, "StepNextButtonButton"), "Create User")
+                    );
             else
-                fr.Controls.Add(
-                    new BaseControl(GetDecoratedId(html, "StartNextButton"), "Create User")
-                );
+                fr.Controls
+                    .Add(new BaseControl(GetDecoratedId(html, "StartNextButton"), "Create User"));
 
             test.Request = fr;
             html = test.Run();
@@ -1019,13 +1019,13 @@ namespace MonoTests.System.Web.UI.WebControls
             fr.Controls.Add(new BaseControl(GetDecoratedId(html, "Answer"), "123"));
             button = GetDecoratedId(html, "StepNextButtonButton");
             if (button.Length > 0)
-                fr.Controls.Add(
-                    new BaseControl(GetDecoratedId(html, "StepNextButtonButton"), "Create User")
-                );
+                fr.Controls
+                    .Add(
+                        new BaseControl(GetDecoratedId(html, "StepNextButtonButton"), "Create User")
+                    );
             else
-                fr.Controls.Add(
-                    new BaseControl(GetDecoratedId(html, "StartNextButton"), "Create User")
-                );
+                fr.Controls
+                    .Add(new BaseControl(GetDecoratedId(html, "StartNextButton"), "Create User"));
 
             test.Request = fr;
             html = test.Run();
@@ -1042,13 +1042,13 @@ namespace MonoTests.System.Web.UI.WebControls
             fr.Controls.Add(new BaseControl(GetDecoratedId(html, "Answer"), "incorrect"));
             button = GetDecoratedId(html, "StepNextButtonButton");
             if (button.Length > 0)
-                fr.Controls.Add(
-                    new BaseControl(GetDecoratedId(html, "StepNextButtonButton"), "Create User")
-                );
+                fr.Controls
+                    .Add(
+                        new BaseControl(GetDecoratedId(html, "StepNextButtonButton"), "Create User")
+                    );
             else
-                fr.Controls.Add(
-                    new BaseControl(GetDecoratedId(html, "StartNextButton"), "Create User")
-                );
+                fr.Controls
+                    .Add(new BaseControl(GetDecoratedId(html, "StartNextButton"), "Create User"));
 
             test.Request = fr;
             html = test.Run();

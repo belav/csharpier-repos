@@ -568,10 +568,9 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                 {
                     var lineSpan = diagnostic.Location.GetLineSpan();
 
-                    var documentIds =
-                        targetTextDocument.Project.Solution.GetDocumentIdsWithFilePath(
-                            lineSpan.Path
-                        );
+                    var documentIds = targetTextDocument.Project
+                        .Solution
+                        .GetDocumentIdsWithFilePath(lineSpan.Path);
                     return documentIds.Any(
                         static (id, targetTextDocument) => id == targetTextDocument.Id,
                         targetTextDocument

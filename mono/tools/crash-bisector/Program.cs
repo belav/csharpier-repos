@@ -46,14 +46,16 @@ namespace crashbisector
 
             using (var process = Process.Start(startInfo))
             {
-                var stdoutTask = Task.Factory.StartNew(
-                    () => new StreamReader(process.StandardOutput.BaseStream).ReadToEnd(),
-                    TaskCreationOptions.LongRunning
-                );
-                var stderrTask = Task.Factory.StartNew(
-                    () => new StreamReader(process.StandardError.BaseStream).ReadToEnd(),
-                    TaskCreationOptions.LongRunning
-                );
+                var stdoutTask = Task.Factory
+                    .StartNew(
+                        () => new StreamReader(process.StandardOutput.BaseStream).ReadToEnd(),
+                        TaskCreationOptions.LongRunning
+                    );
+                var stderrTask = Task.Factory
+                    .StartNew(
+                        () => new StreamReader(process.StandardError.BaseStream).ReadToEnd(),
+                        TaskCreationOptions.LongRunning
+                    );
 
                 var success = process.WaitForExit(
                     timeout < 0 ? -1 : (Math.Min(Int32.MaxValue / 1000, timeout) * 1000)
@@ -246,9 +248,10 @@ namespace crashbisector
     {
         static void UsageAndExit(int exitCode)
         {
-            Console.Error.WriteLine(
-                "Usage: crash-bisector.exe --mono MONO-EXECUTABLE --opt OPTION-NAME -- MONO-ARG ..."
-            );
+            Console.Error
+                .WriteLine(
+                    "Usage: crash-bisector.exe --mono MONO-EXECUTABLE --opt OPTION-NAME -- MONO-ARG ..."
+                );
             Environment.Exit(exitCode);
         }
 

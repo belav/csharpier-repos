@@ -398,8 +398,9 @@ namespace System.Xaml
                 if (state.FactoryMethod != null)
                 {
                     var contents = (List<object>)state.Value;
-                    var mi = state
-                        .Type.UnderlyingType.GetMethods(static_flags)
+                    var mi = state.Type
+                        .UnderlyingType
+                        .GetMethods(static_flags)
                         .FirstOrDefault(mii =>
                             mii.Name == state.FactoryMethod
                             && mii.GetParameters().Length == contents.Count
@@ -603,11 +604,12 @@ namespace System.Xaml
             )
             {
                 if (xt.IsDictionary)
-                    mt.Invoker.AddToDictionary(
-                        parent,
-                        GetCorrectlyTypedValue(null, xt.KeyType, keyObj),
-                        GetCorrectlyTypedValue(null, xt.ItemType, obj)
-                    );
+                    mt.Invoker
+                        .AddToDictionary(
+                            parent,
+                            GetCorrectlyTypedValue(null, xt.KeyType, keyObj),
+                            GetCorrectlyTypedValue(null, xt.ItemType, obj)
+                        );
                 else // collection. Note that state.Type isn't usable for PositionalParameters to identify collection kind.
                     mt.Invoker.AddToCollection(parent, GetCorrectlyTypedValue(null, xt.ItemType, obj));
                 return true;

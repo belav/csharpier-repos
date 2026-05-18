@@ -252,12 +252,13 @@ namespace Mono.Debugger.Soft
             // FIXME: Check for return value
             try
             {
-                vm.conn.StackFrame_SetValues(
-                    thread.Id,
-                    Id,
-                    new int[] { var.GetValueIndex },
-                    new ValueImpl[] { vm.EncodeValue(value) }
-                );
+                vm.conn
+                    .StackFrame_SetValues(
+                        thread.Id,
+                        Id,
+                        new int[] { var.GetValueIndex },
+                        new ValueImpl[] { vm.EncodeValue(value) }
+                    );
             }
             catch (CommandException ex)
             {
@@ -286,12 +287,13 @@ namespace Mono.Debugger.Soft
             // FIXME: Allow setting the frame return value if possible
             try
             {
-                vm.conn.StackFrame_SetValues(
-                    thread.Id,
-                    Id,
-                    new int[] { (-param.Position) - 1 },
-                    new ValueImpl[] { vm.EncodeValue(value) }
-                );
+                vm.conn
+                    .StackFrame_SetValues(
+                        thread.Id,
+                        Id,
+                        new int[] { (-param.Position) - 1 },
+                        new ValueImpl[] { vm.EncodeValue(value) }
+                    );
             }
             catch (CommandException ex)
             {

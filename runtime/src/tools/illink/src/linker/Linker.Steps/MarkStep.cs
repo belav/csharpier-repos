@@ -300,16 +300,15 @@ namespace Mono.Linker.Steps
             // Because the attribute XML can reference other assemblies, they must go in the global store,
             // instead of the per-assembly stores.
             foreach (var (provider, annotations) in xmlInfo.CustomAttributes)
-                Context.CustomAttributes.PrimaryAttributeInfo.AddCustomAttributes(
-                    provider,
-                    annotations
-                );
+                Context.CustomAttributes
+                    .PrimaryAttributeInfo
+                    .AddCustomAttributes(provider, annotations);
 
             foreach (var (ca, origin) in xmlInfo.CustomAttributesOrigins)
-                Context.CustomAttributes.PrimaryAttributeInfo.CustomAttributesOrigins.Add(
-                    ca,
-                    origin
-                );
+                Context.CustomAttributes
+                    .PrimaryAttributeInfo
+                    .CustomAttributesOrigins
+                    .Add(ca, origin);
         }
 
         protected virtual void Complete()
@@ -379,10 +378,11 @@ namespace Mono.Linker.Steps
             foreach (var ca in type.CustomAttributes)
             {
                 if (
-                    ca.AttributeType.IsTypeOf(
-                        "System.Runtime.InteropServices",
-                        "DynamicInterfaceCastableImplementationAttribute"
-                    )
+                    ca.AttributeType
+                        .IsTypeOf(
+                            "System.Runtime.InteropServices",
+                            "DynamicInterfaceCastableImplementationAttribute"
+                        )
                 )
                     return true;
             }
@@ -1743,9 +1743,8 @@ namespace Mono.Linker.Steps
             TypeDefinition? type = inputType;
             while (type != null)
             {
-                PropertyDefinition? property = type.Properties.FirstOrDefault(p =>
-                    p.Name == propertyname
-                );
+                PropertyDefinition? property = type.Properties
+                    .FirstOrDefault(p => p.Name == propertyname);
                 if (property != null)
                     return property;
 
@@ -1807,9 +1806,8 @@ namespace Mono.Linker.Steps
             TypeDefinition? type = inputType;
             while (type != null)
             {
-                MethodDefinition? method = type.Methods.FirstOrDefault(m =>
-                    m.Name == methodname && !m.HasMetadataParameters()
-                );
+                MethodDefinition? method = type.Methods
+                    .FirstOrDefault(m => m.Name == methodname && !m.HasMetadataParameters());
                 if (method != null)
                     return method;
 
@@ -2037,9 +2035,9 @@ namespace Mono.Linker.Steps
         void ProcessModuleType(AssemblyDefinition assembly)
         {
             // The <Module> type may have an initializer, in which case we want to keep it.
-            TypeDefinition? moduleType = assembly.MainModule.Types.FirstOrDefault(t =>
-                t.MetadataToken.RID == 1
-            );
+            TypeDefinition? moduleType = assembly.MainModule
+                .Types
+                .FirstOrDefault(t => t.MetadataToken.RID == 1);
             if (moduleType != null && moduleType.HasMethods)
                 MarkType(moduleType, new DependencyInfo(DependencyKind.TypeInAssembly, assembly));
         }
@@ -2090,10 +2088,9 @@ namespace Mono.Linker.Steps
                     continue;
 
                 if (
-                    customAttribute.AttributeType.IsTypeOf(
-                        "System.Runtime.CompilerServices",
-                        "InternalsVisibleToAttribute"
-                    ) && !Annotations.IsMarked(customAttribute)
+                    customAttribute.AttributeType
+                        .IsTypeOf("System.Runtime.CompilerServices", "InternalsVisibleToAttribute")
+                    && !Annotations.IsMarked(customAttribute)
                 )
                 {
                     _ivt_attributes.Add(assemblyLevelAttribute);
@@ -2288,8 +2285,8 @@ namespace Mono.Linker.Steps
                     new DiagnosticContext(origin, diagnosticsEnabled: true, Context)
                 );
 
-            bool isReflectionAccessCoveredByDAM =
-                Annotations.FlowAnnotations.ShouldWarnWhenAccessedForReflection(method);
+            bool isReflectionAccessCoveredByDAM = Annotations.FlowAnnotations
+                .ShouldWarnWhenAccessedForReflection(method);
             if (isReflectionAccessCoveredByDAM && (!isCompilerGenerated || forceRUCCheck))
             {
                 // ReflectionMethodBodyScanner handles more cases for data flow annotations
@@ -2391,8 +2388,8 @@ namespace Mono.Linker.Steps
                 );
             }
 
-            bool isReflectionAccessCoveredByDAM =
-                Annotations.FlowAnnotations.ShouldWarnWhenAccessedForReflection(member);
+            bool isReflectionAccessCoveredByDAM = Annotations.FlowAnnotations
+                .ShouldWarnWhenAccessedForReflection(member);
             if (isReflectionAccessCoveredByDAM && !isCompilerGenerated)
             {
                 var id = reportOnMember
@@ -2605,8 +2602,8 @@ namespace Mono.Linker.Steps
                 case DependencyKind.Ldtoken:
                 case DependencyKind.UnsafeAccessorTarget:
                     if (
-                        isReflectionAccessCoveredByDAM =
-                            Annotations.FlowAnnotations.ShouldWarnWhenAccessedForReflection(field)
+                        isReflectionAccessCoveredByDAM = Annotations.FlowAnnotations
+                            .ShouldWarnWhenAccessedForReflection(field)
                     )
                         Context.LogWarning(
                             origin,
@@ -3336,10 +3333,8 @@ namespace Mono.Linker.Steps
                 {
                     if (constructorArgument is string proxyTypeReferenceString)
                     {
-                        proxyTypeReference = type.Module.GetType(
-                            proxyTypeReferenceString,
-                            runtimeName: true
-                        );
+                        proxyTypeReference = type.Module
+                            .GetType(proxyTypeReferenceString, runtimeName: true);
                     }
                 }
 
@@ -4683,10 +4678,8 @@ namespace Mono.Linker.Steps
 
             foreach (var customAttribute in type.CustomAttributes)
                 if (
-                    customAttribute.AttributeType.IsTypeOf(
-                        "System.Runtime.CompilerServices",
-                        "InlineArrayAttribute"
-                    )
+                    customAttribute.AttributeType
+                        .IsTypeOf("System.Runtime.CompilerServices", "InlineArrayAttribute")
                 )
                     return true;
 
@@ -4922,14 +4915,15 @@ namespace Mono.Linker.Steps
                 );
                 if (!string.IsNullOrEmpty(Context.PInvokesListFile))
                 {
-                    Context.PInvokes.Add(
-                        new PInvokeInfo(
-                            assemblyName: method.DeclaringType.Module.Name,
-                            entryPoint: pii.EntryPoint,
-                            fullName: method.FullName,
-                            moduleName: pii.Module.Name
-                        )
-                    );
+                    Context.PInvokes
+                        .Add(
+                            new PInvokeInfo(
+                                assemblyName: method.DeclaringType.Module.Name,
+                                entryPoint: pii.EntryPoint,
+                                fullName: method.FullName,
+                                moduleName: pii.Module.Name
+                            )
+                        );
                 }
             }
 
@@ -5173,10 +5167,8 @@ namespace Mono.Linker.Steps
                 );
                 MethodDefinition owningMethod = methodIL.Method;
                 while (
-                    Context.CompilerGeneratedState.TryGetOwningMethodForCompilerGeneratedMember(
-                        owningMethod,
-                        out var owner
-                    )
+                    Context.CompilerGeneratedState
+                        .TryGetOwningMethodForCompilerGeneratedMember(owningMethod, out var owner)
                 )
                     owningMethod = owner;
                 Debug.Assert(owningMethod != methodIL.Method);
@@ -5311,20 +5303,19 @@ namespace Mono.Linker.Steps
 
                 case OperandType.InlineMethod:
                 {
-                    (DependencyKind dependencyKind, bool markForReflectionAccess) = instruction
-                        .OpCode
-                        .Code switch
-                    {
-                        Code.Jmp => (DependencyKind.DirectCall, false),
-                        Code.Call => (DependencyKind.DirectCall, false),
-                        Code.Callvirt => (DependencyKind.VirtualCall, false),
-                        Code.Newobj => (DependencyKind.Newobj, false),
-                        Code.Ldvirtftn => (DependencyKind.Ldvirtftn, true),
-                        Code.Ldftn => (DependencyKind.Ldftn, true),
-                        _ => throw new InvalidOperationException(
-                            $"unexpected opcode {instruction.OpCode}"
-                        ),
-                    };
+                    (DependencyKind dependencyKind, bool markForReflectionAccess) =
+                        instruction.OpCode.Code switch
+                        {
+                            Code.Jmp => (DependencyKind.DirectCall, false),
+                            Code.Call => (DependencyKind.DirectCall, false),
+                            Code.Callvirt => (DependencyKind.VirtualCall, false),
+                            Code.Newobj => (DependencyKind.Newobj, false),
+                            Code.Ldvirtftn => (DependencyKind.Ldvirtftn, true),
+                            Code.Ldftn => (DependencyKind.Ldftn, true),
+                            _ => throw new InvalidOperationException(
+                                $"unexpected opcode {instruction.OpCode}"
+                            ),
+                        };
 
                     MethodReference methodReference = (MethodReference)instruction.Operand;
 
@@ -5497,10 +5488,11 @@ namespace Mono.Linker.Steps
             // If the method body owns any compiler-generated code, we might still need to do a scan of it together with
             // all of the compiler-generated code it owns, so first check any compiler-generated callees.
             if (
-                Context.CompilerGeneratedState.TryGetCompilerGeneratedCalleesForUserMethod(
-                    methodIL.Method,
-                    out List<IMemberDefinition>? compilerGeneratedCallees
-                )
+                Context.CompilerGeneratedState
+                    .TryGetCompilerGeneratedCalleesForUserMethod(
+                        methodIL.Method,
+                        out List<IMemberDefinition>? compilerGeneratedCallees
+                    )
             )
             {
                 foreach (var compilerGeneratedCallee in compilerGeneratedCallees)

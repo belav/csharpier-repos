@@ -223,11 +223,8 @@ namespace System.Web.UI.WebControls
                             );
                             writer.AddAttribute(
                                 HtmlTextWriterAttribute.Href,
-                                Page.ClientScript.GetPostBackClientHyperlink(
-                                    this,
-                                    eventArgument,
-                                    true
-                                )
+                                Page.ClientScript
+                                    .GetPostBackClientHyperlink(this, eventArgument, true)
                             );
                         }
                     }

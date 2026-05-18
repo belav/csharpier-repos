@@ -731,9 +731,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     // we have a winner
                     var decl = (BaseTypeDeclarationSyntax)parent.Parent.Parent;
                     var symbol = this.GetDeclaredSymbol(decl);
-                    return ConsList<TypeSymbol>.Empty.Prepend(
-                        symbol.GetSymbol().OriginalDefinition
-                    );
+                    return ConsList<TypeSymbol>.Empty
+                        .Prepend(symbol.GetSymbol().OriginalDefinition);
                 }
             }
 
@@ -1014,9 +1013,10 @@ namespace Microsoft.CodeAnalysis.CSharp
         {
             position = CheckAndAdjustPosition(position);
 
-            var existingConstructorInitializer = this
-                .Root.FindToken(position)
-                .Parent.AncestorsAndSelf()
+            var existingConstructorInitializer = this.Root
+                .FindToken(position)
+                .Parent
+                .AncestorsAndSelf()
                 .OfType<ConstructorInitializerSyntax>()
                 .FirstOrDefault();
 
@@ -1047,9 +1047,10 @@ namespace Microsoft.CodeAnalysis.CSharp
         {
             position = CheckAndAdjustPosition(position);
 
-            var existingConstructorInitializer = this
-                .Root.FindToken(position)
-                .Parent.AncestorsAndSelf()
+            var existingConstructorInitializer = this.Root
+                .FindToken(position)
+                .Parent
+                .AncestorsAndSelf()
                 .OfType<PrimaryConstructorBaseTypeSyntax>()
                 .FirstOrDefault();
 
@@ -1192,8 +1193,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                             }
                             else
                             {
-                                var argumentList = typeDecl
-                                    .PrimaryConstructorBaseTypeIfClass
+                                var argumentList = typeDecl.PrimaryConstructorBaseTypeIfClass
                                     ?.ArgumentList;
                                 outsideMemberDecl =
                                     argumentList is null
@@ -1467,8 +1467,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                                 this,
                                 tuple.paramDecl,
                                 tuple.parameterSymbol,
-                                tuple
-                                    .containing.GetEnclosingBinder(tuple.paramDecl.SpanStart)
+                                tuple.containing
+                                    .GetEnclosingBinder(tuple.paramDecl.SpanStart)
                                     .CreateBinderForParameterDefaultValue(
                                         tuple.parameterSymbol,
                                         (EqualsValueClauseSyntax)equalsValue
@@ -2309,9 +2309,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
                 case SyntaxKind.ConstructorDeclaration:
                     if (
-                        ((ConstructorDeclarationSyntax)declaration).Modifiers.Any(
-                            SyntaxKind.StaticKeyword
-                        )
+                        ((ConstructorDeclarationSyntax)declaration).Modifiers
+                            .Any(SyntaxKind.StaticKeyword)
                     )
                     {
                         return WellKnownMemberNames.StaticConstructorName;
@@ -3343,8 +3342,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                                     && !(
                                         node.Kind() == SyntaxKind.ArgumentList
                                         && node
-                                            == typeDeclaration
-                                                .PrimaryConstructorBaseTypeIfClass
+                                            == typeDeclaration.PrimaryConstructorBaseTypeIfClass
                                                 ?.ArgumentList
                                     );
 

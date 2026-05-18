@@ -325,11 +325,12 @@ namespace System.Formats.Tar
                 case TarEntryFormat.Pax:
                     if (entry._header._typeFlag is TarEntryType.GlobalExtendedAttributes)
                     {
-                        entry._header.WriteAsPaxGlobalExtendedAttributes(
-                            _archiveStream,
-                            buffer,
-                            _nextGlobalExtendedAttributesEntryNumber++
-                        );
+                        entry._header
+                            .WriteAsPaxGlobalExtendedAttributes(
+                                _archiveStream,
+                                buffer,
+                                _nextGlobalExtendedAttributesEntryNumber++
+                            );
                     }
                     else
                     {
@@ -363,34 +364,23 @@ namespace System.Formats.Tar
 
             Task task = entry.Format switch
             {
-                TarEntryFormat.V7 => entry._header.WriteAsV7Async(
-                    _archiveStream,
-                    buffer,
-                    cancellationToken
-                ),
-                TarEntryFormat.Ustar => entry._header.WriteAsUstarAsync(
-                    _archiveStream,
-                    buffer,
-                    cancellationToken
-                ),
+                TarEntryFormat.V7 => entry._header
+                    .WriteAsV7Async(_archiveStream, buffer, cancellationToken),
+                TarEntryFormat.Ustar => entry._header
+                    .WriteAsUstarAsync(_archiveStream, buffer, cancellationToken),
                 TarEntryFormat.Pax
                     when entry._header._typeFlag is TarEntryType.GlobalExtendedAttributes =>
-                    entry._header.WriteAsPaxGlobalExtendedAttributesAsync(
-                        _archiveStream,
-                        buffer,
-                        _nextGlobalExtendedAttributesEntryNumber++,
-                        cancellationToken
-                    ),
-                TarEntryFormat.Pax => entry._header.WriteAsPaxAsync(
-                    _archiveStream,
-                    buffer,
-                    cancellationToken
-                ),
-                TarEntryFormat.Gnu => entry._header.WriteAsGnuAsync(
-                    _archiveStream,
-                    buffer,
-                    cancellationToken
-                ),
+                    entry._header
+                        .WriteAsPaxGlobalExtendedAttributesAsync(
+                            _archiveStream,
+                            buffer,
+                            _nextGlobalExtendedAttributesEntryNumber++,
+                            cancellationToken
+                        ),
+                TarEntryFormat.Pax => entry._header
+                    .WriteAsPaxAsync(_archiveStream, buffer, cancellationToken),
+                TarEntryFormat.Gnu => entry._header
+                    .WriteAsGnuAsync(_archiveStream, buffer, cancellationToken),
                 _ => throw new InvalidDataException(SR.Format(SR.TarInvalidFormat, Format)),
             };
             await task.ConfigureAwait(false);

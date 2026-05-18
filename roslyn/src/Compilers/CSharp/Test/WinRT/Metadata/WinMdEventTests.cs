@@ -2904,10 +2904,10 @@ class C : Interface<int>
             Assert.False(implementingNormalEvent.IsWindowsRuntimeEvent);
             Assert.True(implementingWinRTEvent.IsWindowsRuntimeEvent);
 
-            var substitutedNormalEvent =
-                implementingNormalEvent.ExplicitInterfaceImplementations.Single();
-            var substitutedWinRTEvent =
-                implementingWinRTEvent.ExplicitInterfaceImplementations.Single();
+            var substitutedNormalEvent = implementingNormalEvent.ExplicitInterfaceImplementations
+                .Single();
+            var substitutedWinRTEvent = implementingWinRTEvent.ExplicitInterfaceImplementations
+                .Single();
 
             Assert.IsType<SubstitutedEventSymbol>(substitutedNormalEvent);
             Assert.IsType<SubstitutedEventSymbol>(substitutedWinRTEvent);
@@ -2922,9 +2922,8 @@ class C : Interface<int>
             );
             retargetingAssembly.SetCorLibrary(comp.Assembly.CorLibrary);
 
-            var retargetingType = retargetingAssembly.GlobalNamespace.GetMember<NamedTypeSymbol>(
-                "C"
-            );
+            var retargetingType = retargetingAssembly.GlobalNamespace
+                .GetMember<NamedTypeSymbol>("C");
             var retargetingNormalEvent = retargetingType
                 .GetMembers()
                 .OfType<EventSymbol>()
@@ -3130,9 +3129,8 @@ class OverrideAndImplIncorrectly : ReversedBase, Interface
                 );
 
                 {
-                    var overrideNoImplClass = comp.GlobalNamespace.GetMember<NamedTypeSymbol>(
-                        "OverrideNoImpl"
-                    );
+                    var overrideNoImplClass = comp.GlobalNamespace
+                        .GetMember<NamedTypeSymbol>("OverrideNoImpl");
                     var normalEvent = overrideNoImplClass.GetMember<EventSymbol>("Normal");
                     var winRTEvent = overrideNoImplClass.GetMember<EventSymbol>("WinRT");
 
@@ -3141,8 +3139,8 @@ class OverrideAndImplIncorrectly : ReversedBase, Interface
                 }
 
                 {
-                    var overrideAndImplCorrectlyClass =
-                        comp.GlobalNamespace.GetMember<NamedTypeSymbol>("OverrideAndImplCorrectly");
+                    var overrideAndImplCorrectlyClass = comp.GlobalNamespace
+                        .GetMember<NamedTypeSymbol>("OverrideAndImplCorrectly");
                     var normalEvent = overrideAndImplCorrectlyClass.GetMember<EventSymbol>(
                         "Normal"
                     );
@@ -3153,10 +3151,8 @@ class OverrideAndImplIncorrectly : ReversedBase, Interface
                 }
 
                 {
-                    var overrideAndImplIncorrectlyClass =
-                        comp.GlobalNamespace.GetMember<NamedTypeSymbol>(
-                            "OverrideAndImplIncorrectly"
-                        );
+                    var overrideAndImplIncorrectlyClass = comp.GlobalNamespace
+                        .GetMember<NamedTypeSymbol>("OverrideAndImplIncorrectly");
                     var normalEvent = overrideAndImplIncorrectlyClass.GetMember<EventSymbol>(
                         "Normal"
                     );

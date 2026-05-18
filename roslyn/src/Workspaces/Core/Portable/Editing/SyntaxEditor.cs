@@ -65,8 +65,7 @@ namespace Microsoft.CodeAnalysis.Editing
         public SyntaxEditor(SyntaxNode root, Workspace workspace)
             : this(
                 root,
-                (workspace ?? throw new ArgumentNullException(nameof(workspace)))
-                    .Services
+                (workspace ?? throw new ArgumentNullException(nameof(workspace))).Services
                     .SolutionServices
             ) { }
 

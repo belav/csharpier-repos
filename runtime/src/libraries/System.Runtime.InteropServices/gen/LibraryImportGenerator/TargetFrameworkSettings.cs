@@ -35,9 +35,10 @@ namespace Microsoft.Interop
         // Parse from the informational version as that is the only version that always matches the TFM version
         // even in debug builds.
         private static readonly Version ThisAssemblyVersion = Version.Parse(
-            typeof(TargetFrameworkSettingsExtensions)
-                .Assembly.GetCustomAttribute<AssemblyInformationalVersionAttribute>()
-                .InformationalVersion.Split('-', '+')[0]
+            typeof(TargetFrameworkSettingsExtensions).Assembly
+                .GetCustomAttribute<AssemblyInformationalVersionAttribute>()
+                .InformationalVersion
+                .Split('-', '+')[0]
         );
 
         public static TargetFrameworkSettings GetTargetFrameworkSettings(

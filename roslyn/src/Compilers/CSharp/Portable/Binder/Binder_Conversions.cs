@@ -197,10 +197,11 @@ namespace Microsoft.CodeAnalysis.CSharp
                     // or that was explicitly written in code (so that GetSemanticInfo can find the syntax in the bound tree).
                     if (
                         !isCast
-                        && source.Type.Equals(
-                            destination,
-                            TypeCompareKind.IgnoreNullableModifiersForReferenceTypes
-                        )
+                        && source.Type
+                            .Equals(
+                                destination,
+                                TypeCompareKind.IgnoreNullableModifiersForReferenceTypes
+                            )
                     )
                     {
                         return source;
@@ -669,8 +670,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                                 );
 
                                 if (
-                                    !Compilation
-                                        .Assembly
+                                    !Compilation.Assembly
                                         .RuntimeSupportsStaticAbstractMembersInInterfaces
                                 )
                                 {
@@ -715,10 +715,11 @@ namespace Microsoft.CodeAnalysis.CSharp
                     diagnostics.ReportUseSite(source.Type!.TryGetInlineArrayElementField(), syntax);
 
                     if (
-                        destination.OriginalDefinition.Equals(
-                            Compilation.GetWellKnownType(WellKnownType.System_ReadOnlySpan_T),
-                            TypeCompareKind.AllIgnoreOptions
-                        )
+                        destination.OriginalDefinition
+                            .Equals(
+                                Compilation.GetWellKnownType(WellKnownType.System_ReadOnlySpan_T),
+                                TypeCompareKind.AllIgnoreOptions
+                            )
                     )
                     {
                         if (
@@ -760,10 +761,11 @@ namespace Microsoft.CodeAnalysis.CSharp
                     else
                     {
                         Debug.Assert(
-                            destination.OriginalDefinition.Equals(
-                                Compilation.GetWellKnownType(WellKnownType.System_Span_T),
-                                TypeCompareKind.AllIgnoreOptions
-                            )
+                            destination.OriginalDefinition
+                                .Equals(
+                                    Compilation.GetWellKnownType(WellKnownType.System_Span_T),
+                                    TypeCompareKind.AllIgnoreOptions
+                                )
                         );
 
                         if (
@@ -1076,10 +1078,13 @@ namespace Microsoft.CodeAnalysis.CSharp
                         var parameterType = (NamedTypeSymbol)
                             collectionBuilderMethod.Parameters[0].Type;
                         Debug.Assert(
-                            parameterType.OriginalDefinition.Equals(
-                                Compilation.GetWellKnownType(WellKnownType.System_ReadOnlySpan_T),
-                                TypeCompareKind.AllIgnoreOptions
-                            )
+                            parameterType.OriginalDefinition
+                                .Equals(
+                                    Compilation.GetWellKnownType(
+                                        WellKnownType.System_ReadOnlySpan_T
+                                    ),
+                                    TypeCompareKind.AllIgnoreOptions
+                                )
                         );
 
                         elementType = parameterType
@@ -1119,12 +1124,13 @@ namespace Microsoft.CodeAnalysis.CSharp
                 case CollectionExpressionTypeKind.ImplementsIEnumerableT:
                 case CollectionExpressionTypeKind.ImplementsIEnumerable:
                     if (
-                        targetType.OriginalDefinition.Equals(
-                            Compilation.GetWellKnownType(
-                                WellKnownType.System_Collections_Immutable_ImmutableArray_T
-                            ),
-                            TypeCompareKind.ConsiderEverything
-                        )
+                        targetType.OriginalDefinition
+                            .Equals(
+                                Compilation.GetWellKnownType(
+                                    WellKnownType.System_Collections_Immutable_ImmutableArray_T
+                                ),
+                                TypeCompareKind.ConsiderEverything
+                            )
                     )
                     {
                         diagnostics.Add(
@@ -1611,9 +1617,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     var allTypeParameters = TypeMap.TypeParametersAsTypeSymbolsWithAnnotations(
                         targetType.OriginalDefinition.GetAllTypeParameters()
                     );
-                    methodWithTargetTypeParameters = method.OriginalDefinition.Construct(
-                        allTypeParameters
-                    );
+                    methodWithTargetTypeParameters = method.OriginalDefinition
+                        .Construct(allTypeParameters);
                     method = method.Construct(allTypeArguments);
                 }
                 else
@@ -1888,8 +1893,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                 diagnostics: diagnostics
             );
 
-            TypeSymbol conversionParameterType =
-                conversion.BestUserDefinedConversionAnalysis.Operator.GetParameterType(0);
+            TypeSymbol conversionParameterType = conversion.BestUserDefinedConversionAnalysis
+                .Operator
+                .GetParameterType(0);
             CompoundUseSiteInfo<AssemblySymbol> useSiteInfo = GetNewCompoundUseSiteInfo(
                 diagnostics
             );
@@ -1923,8 +1929,7 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             BoundExpression userDefinedConversion;
 
-            TypeSymbol conversionReturnType = conversion
-                .BestUserDefinedConversionAnalysis
+            TypeSymbol conversionReturnType = conversion.BestUserDefinedConversionAnalysis
                 .Operator
                 .ReturnType;
             TypeSymbol conversionToType = conversion.BestUserDefinedConversionAnalysis.ToType;

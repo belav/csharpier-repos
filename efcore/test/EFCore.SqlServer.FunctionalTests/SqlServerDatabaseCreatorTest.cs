@@ -60,8 +60,8 @@ public class SqlServerDatabaseCreatorExistsTest : SqlServerDatabaseCreatorTest
         using var context = new BloggingContext(testDatabase);
         var creator = GetDatabaseCreator(context);
 
-        await context
-            .Database.CreateExecutionStrategy()
+        await context.Database
+            .CreateExecutionStrategy()
             .ExecuteAsync(async () =>
             {
                 using (CreateTransactionScope(ambientTransaction))
@@ -130,8 +130,8 @@ public class SqlServerDatabaseCreatorExistsTest : SqlServerDatabaseCreatorTest
         using var context = new BloggingContext(testDatabase);
         var creator = GetDatabaseCreator(context);
 
-        await context
-            .Database.CreateExecutionStrategy()
+        await context.Database
+            .CreateExecutionStrategy()
             .ExecuteAsync(async () =>
             {
                 using (CreateTransactionScope(ambientTransaction))
@@ -435,25 +435,28 @@ public class SqlServerDatabaseCreatorHasTablesTest : SqlServerDatabaseCreatorTes
     {
         using var testDatabase = SqlServerTestStore.GetOrCreate("NonExisting");
         var databaseCreator = GetDatabaseCreator(testDatabase);
-        await databaseCreator.ExecutionStrategy.ExecuteAsync(
-            databaseCreator,
-            async creator =>
-            {
-                var errorNumber = async
-                    ? (
-                        await Assert.ThrowsAsync<SqlException>(() => creator.HasTablesAsyncBase())
-                    ).Number
-                    : Assert.Throws<SqlException>(() => creator.HasTablesBase()).Number;
-
-                if (errorNumber != 233) // skip if no-process transient failure
+        await databaseCreator.ExecutionStrategy
+            .ExecuteAsync(
+                databaseCreator,
+                async creator =>
                 {
-                    Assert.Equal(
-                        4060, // Login failed error number
-                        errorNumber
-                    );
+                    var errorNumber = async
+                        ? (
+                            await Assert.ThrowsAsync<SqlException>(() =>
+                                creator.HasTablesAsyncBase()
+                            )
+                        ).Number
+                        : Assert.Throws<SqlException>(() => creator.HasTablesBase()).Number;
+
+                    if (errorNumber != 233) // skip if no-process transient failure
+                    {
+                        Assert.Equal(
+                            4060, // Login failed error number
+                            errorNumber
+                        );
+                    }
                 }
-            }
-        );
+            );
     }
 
     [ConditionalTheory]

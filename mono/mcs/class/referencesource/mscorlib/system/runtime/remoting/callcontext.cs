@@ -69,9 +69,10 @@ namespace System.Runtime.Remoting.Messaging
         [System.Security.SecurityCritical] // auto-generated
         public static Object LogicalGetData(String name)
         {
-            return Thread
-                .CurrentThread.GetExecutionContextReader()
-                .LogicalCallContext.GetData(name);
+            return Thread.CurrentThread
+                .GetExecutionContextReader()
+                .LogicalCallContext
+                .GetData(name);
         }
 
         /*=========================================================================
@@ -79,9 +80,10 @@ namespace System.Runtime.Remoting.Messaging
         =========================================================================*/
         private static Object IllogicalGetData(String name)
         {
-            return Thread
-                .CurrentThread.GetExecutionContextReader()
-                .IllogicalCallContext.GetData(name);
+            return Thread.CurrentThread
+                .GetExecutionContextReader()
+                .IllogicalCallContext
+                .GetData(name);
         }
 
         internal static IPrincipal Principal
@@ -89,9 +91,10 @@ namespace System.Runtime.Remoting.Messaging
             [System.Security.SecurityCritical] // auto-generated
             get
             {
-                return Thread
-                    .CurrentThread.GetExecutionContextReader()
-                    .LogicalCallContext.Principal;
+                return Thread.CurrentThread
+                    .GetExecutionContextReader()
+                    .LogicalCallContext
+                    .Principal;
             }
             [System.Security.SecurityCritical] // auto-generated
             set
@@ -173,8 +176,8 @@ namespace System.Runtime.Remoting.Messaging
         public static Header[] GetHeaders()
         {
             // Header is mutable, so we need to get these from a mutable ExecutionContext
-            LogicalCallContext lcc = Thread
-                .CurrentThread.GetMutableExecutionContext()
+            LogicalCallContext lcc = Thread.CurrentThread
+                .GetMutableExecutionContext()
                 .LogicalCallContext;
             return lcc.InternalGetHeaders();
         } // GetHeaders
@@ -182,8 +185,8 @@ namespace System.Runtime.Remoting.Messaging
         [System.Security.SecurityCritical] // auto-generated
         public static void SetHeaders(Header[] headers)
         {
-            LogicalCallContext lcc = Thread
-                .CurrentThread.GetMutableExecutionContext()
+            LogicalCallContext lcc = Thread.CurrentThread
+                .GetMutableExecutionContext()
                 .LogicalCallContext;
             lcc.InternalSetHeaders(headers);
         } // SetHeaders

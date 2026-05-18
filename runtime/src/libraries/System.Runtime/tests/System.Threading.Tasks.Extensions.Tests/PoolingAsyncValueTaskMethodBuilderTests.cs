@@ -638,10 +638,8 @@ namespace System.Threading.Tasks.Tests
             var psi = new ProcessStartInfo();
             if (limitEnvVar != null)
             {
-                psi.Environment.Add(
-                    "DOTNET_SYSTEM_THREADING_POOLINGASYNCVALUETASKSCACHESIZE",
-                    limitEnvVar
-                );
+                psi.Environment
+                    .Add("DOTNET_SYSTEM_THREADING_POOLINGASYNCVALUETASKSCACHESIZE", limitEnvVar);
             }
 
             RemoteExecutor

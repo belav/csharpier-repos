@@ -77,33 +77,34 @@ namespace Microsoft.VisualStudio.LanguageServices.EditorConfigSettings
             }
 
             var solution = _workspace.CurrentSolution;
-            var analyzerConfigDocument = solution
-                .Projects.Select(p => p.TryGetExistingAnalyzerConfigDocumentAtPath(_filepath))
+            var analyzerConfigDocument = solution.Projects
+                .Select(p => p.TryGetExistingAnalyzerConfigDocumentAtPath(_filepath))
                 .FirstOrDefault();
             if (analyzerConfigDocument is null)
             {
                 return;
             }
 
-            _threadingContext.JoinableTaskFactory.Run(async () =>
-            {
-                var originalText = await analyzerConfigDocument
-                    .GetValueTextAsync(default)
-                    .ConfigureAwait(false);
-                var updatedText = originalText;
-                foreach (var view in _views)
+            _threadingContext.JoinableTaskFactory
+                .Run(async () =>
                 {
-                    // Get any changes for the editors. This will return the source text if there are no changes.
-                    updatedText = await view.UpdateEditorConfigAsync(updatedText)
+                    var originalText = await analyzerConfigDocument
+                        .GetValueTextAsync(default)
                         .ConfigureAwait(false);
-                }
+                    var updatedText = originalText;
+                    foreach (var view in _views)
+                    {
+                        // Get any changes for the editors. This will return the source text if there are no changes.
+                        updatedText = await view.UpdateEditorConfigAsync(updatedText)
+                            .ConfigureAwait(false);
+                    }
 
-                // Save the updates if they are different from what is currently saved
-                if (updatedText != originalText)
-                {
-                    _textUpdater.UpdateText(updatedText.GetTextChanges(originalText));
-                }
-            });
+                    // Save the updates if they are different from what is currently saved
+                    if (updatedText != originalText)
+                    {
+                        _textUpdater.UpdateText(updatedText.GetTextChanges(originalText));
+                    }
+                });
         }
 
         internal IWpfTableControl[] GetTableControls() => _tableControls;

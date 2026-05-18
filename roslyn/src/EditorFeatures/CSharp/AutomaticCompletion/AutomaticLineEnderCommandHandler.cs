@@ -118,8 +118,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.AutomaticCompletion
                 return SpecializedCollections.EmptyList<TextChange>();
             }
 
-            var formatter =
-                document.LanguageServices.GetRequiredService<ISyntaxFormattingService>();
+            var formatter = document.LanguageServices
+                .GetRequiredService<ISyntaxFormattingService>();
             return formatter
                 .GetFormattingResult(
                     root,
@@ -382,11 +382,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.AutomaticCompletion
             CancellationToken cancellationToken
         )
         {
-            var formattingOptions = args.SubjectBuffer.GetSyntaxFormattingOptions(
-                EditorOptionsService,
-                document.LanguageServices,
-                explicitFormat: false
-            );
+            var formattingOptions = args.SubjectBuffer
+                .GetSyntaxFormattingOptions(
+                    EditorOptionsService,
+                    document.LanguageServices,
+                    explicitFormat: false
+                );
 
             // Add braces for the selected node
             if (addBrace)
@@ -420,9 +421,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.AutomaticCompletion
 
                     var newDocument = document.WithChangedRoot(newRoot, cancellationToken);
                     args.SubjectBuffer.ApplyChanges(newDocument.GetChanges(document));
-                    args.TextView.TryMoveCaretToAndEnsureVisible(
-                        new SnapshotPoint(args.SubjectBuffer.CurrentSnapshot, nextCaretPosition)
-                    );
+                    args.TextView
+                        .TryMoveCaretToAndEnsureVisible(
+                            new SnapshotPoint(args.SubjectBuffer.CurrentSnapshot, nextCaretPosition)
+                        );
                 }
                 else
                 {
@@ -475,9 +477,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.AutomaticCompletion
 
                 var newDocument = document.WithChangedRoot(newRoot, cancellationToken);
                 args.SubjectBuffer.ApplyChanges(newDocument.GetChanges(document));
-                args.TextView.TryMoveCaretToAndEnsureVisible(
-                    new SnapshotPoint(args.SubjectBuffer.CurrentSnapshot, nextCaretPosition)
-                );
+                args.TextView
+                    .TryMoveCaretToAndEnsureVisible(
+                        new SnapshotPoint(args.SubjectBuffer.CurrentSnapshot, nextCaretPosition)
+                    );
             }
         }
 
@@ -695,7 +698,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.AutomaticCompletion
                     .GetAnnotatedNodes(s_replacementNodeAnnotation)
                     .Single()
                     .GetLastToken()
-                    .Span.End;
+                    .Span
+                    .End;
                 return (newRoot, nextCaretPosition);
             }
         }
@@ -741,22 +745,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.AutomaticCompletion
                 TryStatementSyntax tryStatementNode => tryStatementNode.TryKeyword.Span.End,
                 CatchClauseSyntax catchClauseNode => catchClauseNode.Block.SpanStart,
                 FinallyClauseSyntax finallyClauseNode => finallyClauseNode.Block.SpanStart,
-                CheckedStatementSyntax checkedStatementNode => checkedStatementNode
-                    .Keyword
+                CheckedStatementSyntax checkedStatementNode => checkedStatementNode.Keyword
                     .Span
                     .End,
-                FieldDeclarationSyntax fieldDeclarationNode => fieldDeclarationNode
-                    .Declaration
+                FieldDeclarationSyntax fieldDeclarationNode => fieldDeclarationNode.Declaration
                     .Variables[0]
                     .Identifier
                     .Span
                     .End,
-                EventFieldDeclarationSyntax eventFieldDeclarationNode => eventFieldDeclarationNode
-                    .Declaration
-                    .Variables[0]
-                    .Identifier
-                    .Span
-                    .End,
+                EventFieldDeclarationSyntax eventFieldDeclarationNode =>
+                    eventFieldDeclarationNode.Declaration.Variables[0].Identifier.Span.End,
                 _ => throw ExceptionUtilities.Unreachable(),
             };
         }

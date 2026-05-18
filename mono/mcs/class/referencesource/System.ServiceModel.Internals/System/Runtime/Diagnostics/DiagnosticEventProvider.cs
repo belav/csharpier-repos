@@ -589,12 +589,15 @@ namespace System.Runtime.Diagnostics
                             //
                             //too many arguments to log
                             //
-                            throw Fx.Exception.AsError(
-                                new ArgumentOutOfRangeException(
-                                    "eventPayload",
-                                    InternalSR.EtwMaxNumberArgumentsExceeded(etwMaxNumberArguments)
-                                )
-                            );
+                            throw Fx.Exception
+                                .AsError(
+                                    new ArgumentOutOfRangeException(
+                                        "eventPayload",
+                                        InternalSR.EtwMaxNumberArgumentsExceeded(
+                                            etwMaxNumberArguments
+                                        )
+                                    )
+                                );
                         }
 
                         uint totalEventSize = 0;
@@ -639,14 +642,15 @@ namespace System.Runtime.Diagnostics
                                     }
                                     else
                                     {
-                                        throw Fx.Exception.AsError(
-                                            new ArgumentOutOfRangeException(
-                                                "eventPayload",
-                                                InternalSR.EtwAPIMaxStringCountExceeded(
-                                                    etwAPIMaxStringCount
+                                        throw Fx.Exception
+                                            .AsError(
+                                                new ArgumentOutOfRangeException(
+                                                    "eventPayload",
+                                                    InternalSR.EtwAPIMaxStringCountExceeded(
+                                                        etwAPIMaxStringCount
+                                                    )
                                                 )
-                                            )
-                                        );
+                                            );
                                     }
                                 }
                             }
@@ -879,12 +883,15 @@ namespace System.Runtime.Diagnostics
                             //
                             //too many arguments to log
                             //
-                            throw Fx.Exception.AsError(
-                                new ArgumentOutOfRangeException(
-                                    "eventPayload",
-                                    InternalSR.EtwMaxNumberArgumentsExceeded(etwMaxNumberArguments)
-                                )
-                            );
+                            throw Fx.Exception
+                                .AsError(
+                                    new ArgumentOutOfRangeException(
+                                        "eventPayload",
+                                        InternalSR.EtwMaxNumberArgumentsExceeded(
+                                            etwMaxNumberArguments
+                                        )
+                                    )
+                                );
                         }
 
                         uint totalEventSize = 0;
@@ -929,14 +936,15 @@ namespace System.Runtime.Diagnostics
                                     }
                                     else
                                     {
-                                        throw Fx.Exception.AsError(
-                                            new ArgumentOutOfRangeException(
-                                                "eventPayload",
-                                                InternalSR.EtwAPIMaxStringCountExceeded(
-                                                    etwAPIMaxStringCount
+                                        throw Fx.Exception
+                                            .AsError(
+                                                new ArgumentOutOfRangeException(
+                                                    "eventPayload",
+                                                    InternalSR.EtwAPIMaxStringCountExceeded(
+                                                        etwAPIMaxStringCount
+                                                    )
                                                 )
-                                            )
-                                        );
+                                            );
                                     }
                                 }
                             }

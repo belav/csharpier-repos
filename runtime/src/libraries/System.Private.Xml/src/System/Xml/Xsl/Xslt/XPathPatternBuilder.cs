@@ -170,10 +170,8 @@ namespace System.Xml.Xsl.Xslt
                     return _f.Nop(_fixupNode); // We using Nop as a flag that DescendantOrSelf exis was used between steps.
                 case XPathAxis.Root:
                     QilIterator i;
-                    result = _f.BaseFactory.Filter(
-                        i = _f.For(_fixupNode),
-                        _f.IsType(i, T.Document)
-                    );
+                    result = _f.BaseFactory
+                        .Filter(i = _f.For(_fixupNode), _f.IsType(i, T.Document));
                     priority = 0.5;
                     break;
                 default:
@@ -312,11 +310,8 @@ namespace System.Xml.Xsl.Xslt
                 {
                     nodeFilter.Body = _f.And(nodeFilter.Body, predicate);
                 }
-                nodeFilter.Body = _predicateEnvironment.fixupVisitor.Fixup(
-                    nodeFilter.Body,
-                    current,
-                    null
-                );
+                nodeFilter.Body = _predicateEnvironment.fixupVisitor
+                    .Fixup(nodeFilter.Body, current, null);
             }
             //If any preidcate contains last() or position() node, then the current node is based on previous predicates,
             //for instance, a[...][2] is match second node after filter 'a[...]' instead of second 'a'.
@@ -390,10 +385,8 @@ namespace System.Xml.Xsl.Xslt
             }
 
             QilIterator j;
-            QilLoop result = _f.BaseFactory.Filter(
-                i,
-                _f.Not(_f.IsEmpty(_f.Filter(j = _f.For(matches), _f.Is(j, i))))
-            );
+            QilLoop result = _f.BaseFactory
+                .Filter(i, _f.Not(_f.IsEmpty(_f.Filter(j = _f.For(matches), _f.Is(j, i)))));
             SetPriority(result, 0.5);
             SetLastParent(result, result);
             return result;

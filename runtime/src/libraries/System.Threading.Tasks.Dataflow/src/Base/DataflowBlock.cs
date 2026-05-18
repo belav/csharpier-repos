@@ -666,13 +666,17 @@ namespace System.Threading.Tasks.Dataflow
                 // If we're meant to run asynchronously, launch a task.
                 if (runAsync)
                 {
-                    System.Threading.Tasks.Task.Factory.StartNew(
-                        completionAction,
-                        completionActionState,
-                        CancellationToken.None,
-                        Common.GetCreationOptionsForTask(),
-                        TaskScheduler.Default
-                    );
+                    System.Threading
+                        .Tasks
+                        .Task
+                        .Factory
+                        .StartNew(
+                            completionAction,
+                            completionActionState,
+                            CancellationToken.None,
+                            Common.GetCreationOptionsForTask(),
+                            TaskScheduler.Default
+                        );
                 }
                 // Otherwise, execute directly.
                 else
@@ -684,13 +688,17 @@ namespace System.Threading.Tasks.Dataflow
             /// <summary>Offers the message to the target asynchronously.</summary>
             private void OfferToTargetAsync()
             {
-                System.Threading.Tasks.Task.Factory.StartNew(
-                    state => ((SendAsyncSource<TOutput>)state!).OfferToTarget(),
-                    this,
-                    CancellationToken.None,
-                    Common.GetCreationOptionsForTask(),
-                    TaskScheduler.Default
-                );
+                System.Threading
+                    .Tasks
+                    .Task
+                    .Factory
+                    .StartNew(
+                        state => ((SendAsyncSource<TOutput>)state!).OfferToTarget(),
+                        this,
+                        CancellationToken.None,
+                        Common.GetCreationOptionsForTask(),
+                        TaskScheduler.Default
+                    );
             }
 
             /// <summary>Cached delegate used to cancel a send in response to a cancellation request.</summary>
@@ -1401,10 +1409,9 @@ namespace System.Threading.Tasks.Dataflow
 
                 if (target._cts.Token.CanBeCanceled)
                 {
-                    target._cts.Token.Register(
-                        ReceiveTarget<TOutput>.CachedLinkingCancellationCallback,
-                        target
-                    ); // we don't have to cleanup this registration, as this cts is short-lived
+                    target._cts
+                        .Token
+                        .Register(ReceiveTarget<TOutput>.CachedLinkingCancellationCallback, target); // we don't have to cleanup this registration, as this cts is short-lived
                 }
 
                 // Link the target to the source
@@ -1671,46 +1678,54 @@ namespace System.Threading.Tasks.Dataflow
                 {
                     // Task final state: RanToCompletion
                     case ReceiveCoreByLinkingCleanupReason.Success:
-                        System.Threading.Tasks.Task.Factory.StartNew(
-                            static state =>
-                            {
-                                // Complete with the received value
-                                var target = (ReceiveTarget<T>)state!;
-                                try
+                        System.Threading
+                            .Tasks
+                            .Task
+                            .Factory
+                            .StartNew(
+                                static state =>
                                 {
-                                    target.TrySetResult(target._receivedValue!);
-                                }
-                                catch (ObjectDisposedException)
-                                { /* benign race if returned task is already disposed */
-                                }
-                            },
-                            this,
-                            CancellationToken.None,
-                            TaskCreationOptions.None,
-                            TaskScheduler.Default
-                        );
+                                    // Complete with the received value
+                                    var target = (ReceiveTarget<T>)state!;
+                                    try
+                                    {
+                                        target.TrySetResult(target._receivedValue!);
+                                    }
+                                    catch (ObjectDisposedException)
+                                    { /* benign race if returned task is already disposed */
+                                    }
+                                },
+                                this,
+                                CancellationToken.None,
+                                TaskCreationOptions.None,
+                                TaskScheduler.Default
+                            );
                         break;
 
                     // Task final state: Canceled
                     case ReceiveCoreByLinkingCleanupReason.Cancellation:
-                        System.Threading.Tasks.Task.Factory.StartNew(
-                            static state =>
-                            {
-                                // Complete as canceled
-                                var target = (ReceiveTarget<T>)state!;
-                                try
+                        System.Threading
+                            .Tasks
+                            .Task
+                            .Factory
+                            .StartNew(
+                                static state =>
                                 {
-                                    target.TrySetCanceled();
-                                }
-                                catch (ObjectDisposedException)
-                                { /* benign race if returned task is already disposed */
-                                }
-                            },
-                            this,
-                            CancellationToken.None,
-                            TaskCreationOptions.None,
-                            TaskScheduler.Default
-                        );
+                                    // Complete as canceled
+                                    var target = (ReceiveTarget<T>)state!;
+                                    try
+                                    {
+                                        target.TrySetCanceled();
+                                    }
+                                    catch (ObjectDisposedException)
+                                    { /* benign race if returned task is already disposed */
+                                    }
+                                },
+                                this,
+                                CancellationToken.None,
+                                TaskCreationOptions.None,
+                                TaskScheduler.Default
+                            );
                         break;
                     default:
                         Debug.Assert(false, "Invalid linking cleanup reason specified.");
@@ -1725,29 +1740,33 @@ namespace System.Threading.Tasks.Dataflow
                         goto case ReceiveCoreByLinkingCleanupReason.SourceProtocolError;
                     case ReceiveCoreByLinkingCleanupReason.SourceProtocolError:
                     case ReceiveCoreByLinkingCleanupReason.ErrorDuringCleanup:
-                        System.Threading.Tasks.Task.Factory.StartNew(
-                            state =>
-                            {
-                                // Complete with the received exception
-                                var target = (ReceiveTarget<T>)state!;
-                                try
+                        System.Threading
+                            .Tasks
+                            .Task
+                            .Factory
+                            .StartNew(
+                                state =>
                                 {
-                                    target.TrySetException(
-                                        target._receivedException
-                                            ?? new InvalidOperationException(
-                                                SR.InvalidOperation_ErrorDuringCleanup
-                                            )
-                                    );
-                                }
-                                catch (ObjectDisposedException)
-                                { /* benign race if returned task is already disposed */
-                                }
-                            },
-                            this,
-                            CancellationToken.None,
-                            TaskCreationOptions.None,
-                            TaskScheduler.Default
-                        );
+                                    // Complete with the received exception
+                                    var target = (ReceiveTarget<T>)state!;
+                                    try
+                                    {
+                                        target.TrySetException(
+                                            target._receivedException
+                                                ?? new InvalidOperationException(
+                                                    SR.InvalidOperation_ErrorDuringCleanup
+                                                )
+                                        );
+                                    }
+                                    catch (ObjectDisposedException)
+                                    { /* benign race if returned task is already disposed */
+                                    }
+                                },
+                                this,
+                                CancellationToken.None,
+                                TaskCreationOptions.None,
+                                TaskScheduler.Default
+                            );
                         break;
                 }
             }
@@ -2579,13 +2598,14 @@ namespace System.Threading.Tasks.Dataflow
             }
 
             // We successfully received an item.  Launch a task to process it.
-            task = Task.Factory.StartNew(
-                ChooseTarget<T>.s_processBranchFunction,
-                Tuple.Create<Action<T>, T, int>(action, result, branchId),
-                CancellationToken.None,
-                Common.GetCreationOptionsForTask(),
-                scheduler
-            );
+            task = Task.Factory
+                .StartNew(
+                    ChooseTarget<T>.s_processBranchFunction,
+                    Tuple.Create<Action<T>, T, int>(action, result, branchId),
+                    CancellationToken.None,
+                    Common.GetCreationOptionsForTask(),
+                    scheduler
+                );
             return true;
         }
 
@@ -2671,75 +2691,76 @@ namespace System.Threading.Tasks.Dataflow
             // Asynchronously wait for all branches to complete, then complete
             // a task to be returned to the caller.
             var result = new TaskCompletionSource<int>();
-            Task.Factory.ContinueWhenAll(
-                branchTasks,
-                tasks =>
-                {
-                    // Process the outcome of all branches.  At most one will have completed
-                    // successfully, returning its branch ID.  Others may have faulted,
-                    // in which case we need to propagate their exceptions, regardless
-                    // of whether a branch completed successfully.  Others may have been
-                    // canceled (or run but found they were not needed), and those
-                    // we just ignore.
-                    List<Exception>? exceptions = null;
-                    int successfulBranchId = -1;
-                    foreach (Task<int> task in tasks)
+            Task.Factory
+                .ContinueWhenAll(
+                    branchTasks,
+                    tasks =>
                     {
-                        switch (task.Status)
+                        // Process the outcome of all branches.  At most one will have completed
+                        // successfully, returning its branch ID.  Others may have faulted,
+                        // in which case we need to propagate their exceptions, regardless
+                        // of whether a branch completed successfully.  Others may have been
+                        // canceled (or run but found they were not needed), and those
+                        // we just ignore.
+                        List<Exception>? exceptions = null;
+                        int successfulBranchId = -1;
+                        foreach (Task<int> task in tasks)
                         {
-                            case TaskStatus.Faulted:
-                                Common.AddException(
-                                    ref exceptions,
-                                    task.Exception!,
-                                    unwrapInnerExceptions: true
-                                );
-                                break;
-                            case TaskStatus.RanToCompletion:
-                                int resultBranchId = task.Result;
-                                if (resultBranchId >= 0)
-                                {
-                                    Debug.Assert(
-                                        resultBranchId < tasks.Length,
-                                        "Expected a valid branch ID"
+                            switch (task.Status)
+                            {
+                                case TaskStatus.Faulted:
+                                    Common.AddException(
+                                        ref exceptions,
+                                        task.Exception!,
+                                        unwrapInnerExceptions: true
                                     );
-                                    Debug.Assert(
-                                        successfulBranchId == -1,
-                                        "There should be at most one successful branch."
-                                    );
-                                    successfulBranchId = resultBranchId;
-                                }
-                                else
-                                    Debug.Assert(
-                                        resultBranchId == -1,
-                                        "Expected -1 as a signal of a non-successful branch"
-                                    );
-                                break;
+                                    break;
+                                case TaskStatus.RanToCompletion:
+                                    int resultBranchId = task.Result;
+                                    if (resultBranchId >= 0)
+                                    {
+                                        Debug.Assert(
+                                            resultBranchId < tasks.Length,
+                                            "Expected a valid branch ID"
+                                        );
+                                        Debug.Assert(
+                                            successfulBranchId == -1,
+                                            "There should be at most one successful branch."
+                                        );
+                                        successfulBranchId = resultBranchId;
+                                    }
+                                    else
+                                        Debug.Assert(
+                                            resultBranchId == -1,
+                                            "Expected -1 as a signal of a non-successful branch"
+                                        );
+                                    break;
+                            }
                         }
-                    }
 
-                    // If we found any exceptions, fault the Choose task.  Otherwise, if any branch completed
-                    // successfully, store its result, or if cancellation was request
-                    if (exceptions != null)
-                    {
-                        result.TrySetException(exceptions);
-                    }
-                    else if (successfulBranchId >= 0)
-                    {
-                        result.TrySetResult(successfulBranchId);
-                    }
-                    else
-                    {
-                        result.TrySetCanceled(dataflowBlockOptions.CancellationToken);
-                    }
+                        // If we found any exceptions, fault the Choose task.  Otherwise, if any branch completed
+                        // successfully, store its result, or if cancellation was request
+                        if (exceptions != null)
+                        {
+                            result.TrySetException(exceptions);
+                        }
+                        else if (successfulBranchId >= 0)
+                        {
+                            result.TrySetResult(successfulBranchId);
+                        }
+                        else
+                        {
+                            result.TrySetCanceled(dataflowBlockOptions.CancellationToken);
+                        }
 
-                    // By now we know that all of the tasks have completed, so there
-                    // can't be any more use of the CancellationTokenSource.
-                    cts.Dispose();
-                },
-                CancellationToken.None,
-                Common.GetContinuationOptions(),
-                TaskScheduler.Default
-            );
+                        // By now we know that all of the tasks have completed, so there
+                        // can't be any more use of the CancellationTokenSource.
+                        cts.Dispose();
+                    },
+                    CancellationToken.None,
+                    Common.GetContinuationOptions(),
+                    TaskScheduler.Default
+                );
             return result.Task;
         }
 
@@ -2788,39 +2809,40 @@ namespace System.Threading.Tasks.Dataflow
             // as CreateChooseBranch is called synchronously from Choose, so we
             // don't need to additionally capture and marshal an ExecutionContext.
 
-            return target.Task.ContinueWith(
-                completed =>
-                {
-                    try
+            return target.Task
+                .ContinueWith(
+                    completed =>
                     {
-                        // If the target ran to completion, i.e. it got a message,
-                        // cancel the other branch(es) and proceed with the user callback.
-                        if (completed.Status == TaskStatus.RanToCompletion)
+                        try
                         {
-                            // Cancel the cts to trigger completion of the other branches.
-                            cts.Cancel();
+                            // If the target ran to completion, i.e. it got a message,
+                            // cancel the other branch(es) and proceed with the user callback.
+                            if (completed.Status == TaskStatus.RanToCompletion)
+                            {
+                                // Cancel the cts to trigger completion of the other branches.
+                                cts.Cancel();
 
-                            // Proceed with the user callback.
-                            action(completed.Result);
+                                // Proceed with the user callback.
+                                action(completed.Result);
 
-                            // Return the ID of our branch to indicate.
-                            return branchId;
+                                // Return the ID of our branch to indicate.
+                                return branchId;
+                            }
+                            return -1;
                         }
-                        return -1;
-                    }
-                    finally
-                    {
-                        // Unlink from the source.  This could throw if the block is faulty,
-                        // in which case our branch's task will fault.  If this
-                        // does throw, it'll end up propagating instead of the
-                        // original action's exception if there was one.
-                        unlink.Dispose();
-                    }
-                },
-                CancellationToken.None,
-                Common.GetContinuationOptions(),
-                scheduler
-            );
+                        finally
+                        {
+                            // Unlink from the source.  This could throw if the block is faulty,
+                            // in which case our branch's task will fault.  If this
+                            // does throw, it'll end up propagating instead of the
+                            // original action's exception if there was one.
+                            unlink.Dispose();
+                        }
+                    },
+                    CancellationToken.None,
+                    Common.GetContinuationOptions(),
+                    scheduler
+                );
         }
 
         /// <summary>Provides a dataflow target used by Choose to receive data from a single source.</summary>
@@ -3241,17 +3263,18 @@ namespace System.Threading.Tasks.Dataflow
 
                     // If the target block fails due to an unexpected exception (e.g. it calls back to the source and the source throws an error),
                     // we fault currently registered observers and reset the observable.
-                    Target.Completion.ContinueWith(
-                        static (t, state) =>
-                            ((ObserversState)state!).NotifyObserversOfCompletion(t.Exception!),
-                        this,
-                        CancellationToken.None,
-                        Common.GetContinuationOptions(
-                            TaskContinuationOptions.OnlyOnFaulted
-                                | TaskContinuationOptions.ExecuteSynchronously
-                        ),
-                        TaskScheduler.Default
-                    );
+                    Target.Completion
+                        .ContinueWith(
+                            static (t, state) =>
+                                ((ObserversState)state!).NotifyObserversOfCompletion(t.Exception!),
+                            this,
+                            CancellationToken.None,
+                            Common.GetContinuationOptions(
+                                TaskContinuationOptions.OnlyOnFaulted
+                                    | TaskContinuationOptions.ExecuteSynchronously
+                            ),
+                            TaskScheduler.Default
+                        );
 
                     // When the source completes, complete the target. Then when the target completes,
                     // send completion messages to any observers still registered.
@@ -3263,17 +3286,19 @@ namespace System.Threading.Tasks.Dataflow
                         {
                             var ti = (ObserversState)state1!;
                             ti.Target.Complete();
-                            ti.Target.Completion.ContinueWith(
-                                static (_2, state2) =>
-                                    ((ObserversState)state2!).NotifyObserversOfCompletion(),
-                                state1,
-                                CancellationToken.None,
-                                Common.GetContinuationOptions(
-                                    TaskContinuationOptions.NotOnFaulted
-                                        | TaskContinuationOptions.ExecuteSynchronously
-                                ),
-                                TaskScheduler.Default
-                            );
+                            ti.Target
+                                .Completion
+                                .ContinueWith(
+                                    static (_2, state2) =>
+                                        ((ObserversState)state2!).NotifyObserversOfCompletion(),
+                                    state1,
+                                    CancellationToken.None,
+                                    Common.GetContinuationOptions(
+                                        TaskContinuationOptions.NotOnFaulted
+                                            | TaskContinuationOptions.ExecuteSynchronously
+                                    ),
+                                    TaskScheduler.Default
+                                );
                         },
                         this,
                         Canceler.Token,

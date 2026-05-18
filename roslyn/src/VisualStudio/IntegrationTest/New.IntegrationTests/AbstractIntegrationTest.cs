@@ -116,43 +116,40 @@ namespace Roslyn.VisualStudio.IntegrationTests
         {
             await base.InitializeAsync();
 
-            s_listenerProvider ??=
-                await TestServices.Shell.GetComponentModelServiceAsync<AsynchronousOperationListenerProvider>(
+            s_listenerProvider ??= await TestServices.Shell
+                .GetComponentModelServiceAsync<AsynchronousOperationListenerProvider>(
                     HangMitigatingCancellationToken
                 );
-            s_workspace ??=
-                await TestServices.Shell.GetComponentModelServiceAsync<VisualStudioWorkspace>(
+            s_workspace ??= await TestServices.Shell
+                .GetComponentModelServiceAsync<VisualStudioWorkspace>(
                     HangMitigatingCancellationToken
                 );
 
             if (
-                await TestServices.SolutionExplorer.IsSolutionOpenAsync(
-                    HangMitigatingCancellationToken
-                )
+                await TestServices.SolutionExplorer
+                    .IsSolutionOpenAsync(HangMitigatingCancellationToken)
             )
             {
-                var dte = await TestServices.Shell.GetRequiredGlobalServiceAsync<SDTE, EnvDTE.DTE>(
-                    HangMitigatingCancellationToken
-                );
+                var dte = await TestServices.Shell
+                    .GetRequiredGlobalServiceAsync<SDTE, EnvDTE.DTE>(
+                        HangMitigatingCancellationToken
+                    );
                 if (dte.Debugger.CurrentMode != EnvDTE.dbgDebugMode.dbgDesignMode)
                 {
                     dte.Debugger.TerminateAll();
                 }
 
-                await TestServices.SolutionExplorer.CloseSolutionAsync(
-                    HangMitigatingCancellationToken
-                );
+                await TestServices.SolutionExplorer
+                    .CloseSolutionAsync(HangMitigatingCancellationToken);
             }
 
-            await TestServices.Workarounds.RemoveConflictingKeyBindingsAsync(
-                HangMitigatingCancellationToken
-            );
+            await TestServices.Workarounds
+                .RemoveConflictingKeyBindingsAsync(HangMitigatingCancellationToken);
             await TestServices.StateReset.ResetGlobalOptionsAsync(HangMitigatingCancellationToken);
             await TestServices.StateReset.ResetHostSettingsAsync(HangMitigatingCancellationToken);
 
-            await TestServices.Workarounds.WaitForGitHubCoPilotAsync(
-                HangMitigatingCancellationToken
-            );
+            await TestServices.Workarounds
+                .WaitForGitHubCoPilotAsync(HangMitigatingCancellationToken);
         }
 
         public override async Task DisposeAsync()
@@ -164,16 +161,16 @@ namespace Roslyn.VisualStudio.IntegrationTests
 
             await TestServices.StateReset.CloseActiveWindowsAsync(cleanupCancellationToken);
 
-            var dte = await TestServices.Shell.GetRequiredGlobalServiceAsync<SDTE, EnvDTE.DTE>(
-                cleanupCancellationToken
-            );
+            var dte = await TestServices.Shell
+                .GetRequiredGlobalServiceAsync<SDTE, EnvDTE.DTE>(cleanupCancellationToken);
             if (dte.Debugger.CurrentMode != EnvDTE.dbgDebugMode.dbgDesignMode)
             {
                 dte.Debugger.TerminateAll();
-                await TestServices.Workspace.WaitForAllAsyncOperationsAsync(
-                    [FeatureAttribute.Workspace, FeatureAttribute.EditAndContinue],
-                    cleanupCancellationToken
-                );
+                await TestServices.Workspace
+                    .WaitForAllAsyncOperationsAsync(
+                        [FeatureAttribute.Workspace, FeatureAttribute.EditAndContinue],
+                        cleanupCancellationToken
+                    );
             }
 
             await base.DisposeAsync();

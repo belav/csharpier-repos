@@ -365,8 +365,7 @@ public partial class RelationalShapedQueryCompilingExpressionVisitor
                 relationalCommandCache = new RelationalCommandCache(
                     _parentVisitor.Dependencies.MemoryCache,
                     _parentVisitor.RelationalDependencies.QuerySqlGeneratorFactory,
-                    _parentVisitor
-                        .RelationalDependencies
+                    _parentVisitor.RelationalDependencies
                         .RelationalParameterBasedSqlProcessorFactory,
                     _selectExpression,
                     _parentVisitor._useRelationalNulls
@@ -398,8 +397,7 @@ public partial class RelationalShapedQueryCompilingExpressionVisitor
                     ? new RelationalCommandCache(
                         _parentVisitor.Dependencies.MemoryCache,
                         _parentVisitor.RelationalDependencies.QuerySqlGeneratorFactory,
-                        _parentVisitor
-                            .RelationalDependencies
+                        _parentVisitor.RelationalDependencies
                             .RelationalParameterBasedSqlProcessorFactory,
                         _selectExpression,
                         _parentVisitor._useRelationalNulls
@@ -514,8 +512,7 @@ public partial class RelationalShapedQueryCompilingExpressionVisitor
                     ? new RelationalCommandCache(
                         _parentVisitor.Dependencies.MemoryCache,
                         _parentVisitor.RelationalDependencies.QuerySqlGeneratorFactory,
-                        _parentVisitor
-                            .RelationalDependencies
+                        _parentVisitor.RelationalDependencies
                             .RelationalParameterBasedSqlProcessorFactory,
                         _selectExpression,
                         _parentVisitor._useRelationalNulls
@@ -1737,8 +1734,8 @@ public partial class RelationalShapedQueryCompilingExpressionVisitor
                     navigation: ownedNavigation
                 );
 
-                var navigationJsonPropertyName =
-                    ownedNavigation.TargetEntityType.GetJsonPropertyName()!;
+                var navigationJsonPropertyName = ownedNavigation.TargetEntityType
+                    .GetJsonPropertyName()!;
                 innerShapersMap[navigationJsonPropertyName] = innerShaper;
 
                 if (ownedNavigation.IsCollection)
@@ -1929,9 +1926,9 @@ public partial class RelationalShapedQueryCompilingExpressionVisitor
                         Constant(_isTracking)
                     );
 
-                    return navigation.DeclaringEntityType.ClrType.IsAssignableFrom(
-                        parentEntityExpression.Type
-                    )
+                    return navigation.DeclaringEntityType
+                        .ClrType
+                        .IsAssignableFrom(parentEntityExpression.Type)
                         ? includeJsonEntityCollectionMethodCall
                         : IfThen(
                             TypeIs(parentEntityExpression, navigation.DeclaringEntityType.ClrType),
@@ -1953,9 +1950,9 @@ public partial class RelationalShapedQueryCompilingExpressionVisitor
                     Constant(_isTracking)
                 );
 
-                return navigation.DeclaringEntityType.ClrType.IsAssignableFrom(
-                    parentEntityExpression.Type
-                )
+                return navigation.DeclaringEntityType
+                    .ClrType
+                    .IsAssignableFrom(parentEntityExpression.Type)
                     ? includeJsonEntityReferenceMethodCall
                     : IfThen(
                         TypeIs(parentEntityExpression, navigation.DeclaringEntityType.ClrType),
@@ -2224,9 +2221,8 @@ public partial class RelationalShapedQueryCompilingExpressionVisitor
                     }
 
                     foreach (
-                        var jsonEntityTypeInitializerBlockExpression in jsonEntityTypeInitializerBlock.Expressions.ToArray()[
-                            ..^1
-                        ]
+                        var jsonEntityTypeInitializerBlockExpression in jsonEntityTypeInitializerBlock.Expressions
+                            .ToArray()[..^1]
                     )
                     {
                         finalBlockExpressions.Add(
@@ -2465,21 +2461,22 @@ public partial class RelationalShapedQueryCompilingExpressionVisitor
                             testBinaryExpression,
                             Block(
                                 ifTrueBlock.Variables,
-                                ifTrueBlock.Expressions.Concat(
-                                    new Expression[]
-                                    {
-                                        Assign(entityAlreadyTrackedVariable, Constant(true)),
-                                        Default(typeof(void)),
-                                    }
-                                )
+                                ifTrueBlock.Expressions
+                                    .Concat(
+                                        new Expression[]
+                                        {
+                                            Assign(entityAlreadyTrackedVariable, Constant(true)),
+                                            Default(typeof(void)),
+                                        }
+                                    )
                             )
                         ),
                     };
 
                     resultBlockVariables.AddRange(ifFalseBlock.Variables.ToList());
 
-                    var instanceAssignment = ifFalseBlock
-                        .Expressions.OfType<BinaryExpression>()
+                    var instanceAssignment = ifFalseBlock.Expressions
+                        .OfType<BinaryExpression>()
                         .Single(e =>
                             e
                                 is {
@@ -2561,8 +2558,8 @@ public partial class RelationalShapedQueryCompilingExpressionVisitor
                         Assign(instanceAssignment.Left, newInstanceAssignmentBlock)
                     );
 
-                    var startTrackingAssignment = ifFalseBlock
-                        .Expressions.OfType<BinaryExpression>()
+                    var startTrackingAssignment = ifFalseBlock.Expressions
+                        .OfType<BinaryExpression>()
                         .Single(e =>
                             e
                                 is {
@@ -2702,9 +2699,8 @@ public partial class RelationalShapedQueryCompilingExpressionVisitor
                                         : MakeBinary(node.NodeType, node.Left, parameter),
                                     Call(
                                         PopulateListMethod.MakeGenericMethod(
-                                            property.ClrType.TryGetElementType(
-                                                typeof(IEnumerable<>)
-                                            )!
+                                            property.ClrType
+                                                .TryGetElementType(typeof(IEnumerable<>))!
                                         ),
                                         parameter,
                                         currentVariable
@@ -3339,10 +3335,11 @@ public partial class RelationalShapedQueryCompilingExpressionVisitor
                     ?? property.GetTypeMapping().JsonValueReaderWriter!
             );
 
-            var fromJsonMethod = jsonReaderWriterExpression.Type.GetMethod(
-                nameof(JsonValueReaderWriter<object>.FromJsonTyped),
-                new[] { typeof(Utf8JsonReaderManager).MakeByRefType(), typeof(object) }
-            )!;
+            var fromJsonMethod = jsonReaderWriterExpression.Type
+                .GetMethod(
+                    nameof(JsonValueReaderWriter<object>.FromJsonTyped),
+                    new[] { typeof(Utf8JsonReaderManager).MakeByRefType(), typeof(object) }
+                )!;
 
             Expression resultExpression = Convert(
                 Call(

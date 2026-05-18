@@ -308,15 +308,16 @@ namespace System.Workflow.Runtime
             this.rootActivity.SetValue(WorkflowExecutor.ContextIdProperty, 0);
             this.rootActivity.SetValue(WorkflowInstanceIdProperty, instanceId);
             this.WorkflowStatus = WorkflowStatus.Created;
-            this.rootActivity.SetValue(
-                Activity.ActivityExecutionContextInfoProperty,
-                new ActivityExecutionContextInfo(
-                    this.rootActivity.QualifiedName,
-                    GetNewContextId(),
-                    instanceId,
-                    -1
-                )
-            );
+            this.rootActivity
+                .SetValue(
+                    Activity.ActivityExecutionContextInfoProperty,
+                    new ActivityExecutionContextInfo(
+                        this.rootActivity.QualifiedName,
+                        GetNewContextId(),
+                        instanceId,
+                        -1
+                    )
+                );
             this.rootActivity.SetValue(Activity.ActivityContextGuidProperty, instanceId);
             this.rootActivity.SetValue(WorkflowExecutor.IsIdleProperty, true);
             this.isInstanceIdle = true;
@@ -341,9 +342,8 @@ namespace System.Workflow.Runtime
             {
                 List<string> calleeBase = new List<string>();
                 TrackingCallingState parentTCS = (TrackingCallingState)
-                    invokerExec.rootActivity.GetValue(
-                        WorkflowExecutor.TrackingCallingStateProperty
-                    );
+                    invokerExec.rootActivity
+                        .GetValue(WorkflowExecutor.TrackingCallingStateProperty);
                 if ((parentTCS != null) && (parentTCS.CallerActivityPathProxy != null))
                 {
                     foreach (string qualifiedID in parentTCS.CallerActivityPathProxy)
@@ -374,10 +374,8 @@ namespace System.Workflow.Runtime
                                 .ContextActivity(invokerExec.CurrentActivity.Parent)
                                 .GetValue(Activity.ActivityExecutionContextInfoProperty)
                     ).ContextGuid;
-                this.rootActivity.SetValue(
-                    WorkflowExecutor.TrackingCallingStateProperty,
-                    trackingCallingState
-                );
+                this.rootActivity
+                    .SetValue(WorkflowExecutor.TrackingCallingStateProperty, trackingCallingState);
             }
 
             _setInArgsOnCompanion(namedArguments);
@@ -511,12 +509,13 @@ namespace System.Workflow.Runtime
             this.schedulingContext = new Scheduler(this, false);
             this.qService = new WorkflowQueuingService(this);
 
-            WorkflowTrace.Runtime.TraceEvent(
-                TraceEventType.Information,
-                0,
-                "Workflow Runtime: WorkflowExecutor: Loading instance {0}",
-                this.InstanceIdString
-            );
+            WorkflowTrace.Runtime
+                .TraceEvent(
+                    TraceEventType.Information,
+                    0,
+                    "Workflow Runtime: WorkflowExecutor: Loading instance {0}",
+                    this.InstanceIdString
+                );
             DiagnosticStackTrace("load request");
 
             using (new ServiceEnvironment(this.rootActivity))
@@ -526,12 +525,13 @@ namespace System.Workflow.Runtime
                 {
                     case WorkflowStatus.Completed:
                     case WorkflowStatus.Terminated:
-                        WorkflowTrace.Runtime.TraceEvent(
-                            TraceEventType.Error,
-                            0,
-                            "Workflow Runtime: WorkflowExecutor: attempt to load a completed/terminated instance: {0}",
-                            this.InstanceIdString
-                        );
+                        WorkflowTrace.Runtime
+                            .TraceEvent(
+                                TraceEventType.Error,
+                                0,
+                                "Workflow Runtime: WorkflowExecutor: attempt to load a completed/terminated instance: {0}",
+                                this.InstanceIdString
+                            );
                         throw new InvalidOperationException(
                             ExecutionStringManager.InvalidAttemptToLoad
                         );
@@ -748,10 +748,12 @@ namespace System.Workflow.Runtime
         {
             get
             {
-                System.Diagnostics.Debug.Assert(
-                    this._workflowInstance != null,
-                    "WorkflowInstance property should not be called before the proxy is initialized."
-                );
+                System.Diagnostics
+                    .Debug
+                    .Assert(
+                        this._workflowInstance != null,
+                        "WorkflowInstance property should not be called before the proxy is initialized."
+                    );
                 return this._workflowInstance;
             }
         }
@@ -896,12 +898,13 @@ namespace System.Workflow.Runtime
                                         }
                                         else
                                         {
-                                            WorkflowTrace.Host.TraceEvent(
-                                                TraceEventType.Information,
-                                                0,
-                                                "Delivering timer subscription for instance {0}",
-                                                this.InstanceIdString
-                                            );
+                                            WorkflowTrace.Host
+                                                .TraceEvent(
+                                                    TraceEventType.Information,
+                                                    0,
+                                                    "Delivering timer subscription for instance {0}",
+                                                    this.InstanceIdString
+                                                );
                                             stateChangedSincePersistence = true;
                                             lock (qService.SyncRoot)
                                             {
@@ -978,14 +981,15 @@ namespace System.Workflow.Runtime
                                     }
                                     else
                                     {
-                                        WorkflowTrace.Runtime.TraceEvent(
-                                            TraceEventType.Error,
-                                            0,
-                                            "Workflow Runtime: WorkflowExecutor: Fatal exception thrown in the scheduler. Terminating the workflow instance '{0}'. Exception:{1}\n{2}",
-                                            this.InstanceIdString,
-                                            e.Message,
-                                            e.StackTrace
-                                        );
+                                        WorkflowTrace.Runtime
+                                            .TraceEvent(
+                                                TraceEventType.Error,
+                                                0,
+                                                "Workflow Runtime: WorkflowExecutor: Fatal exception thrown in the scheduler. Terminating the workflow instance '{0}'. Exception:{1}\n{2}",
+                                                this.InstanceIdString,
+                                                e.Message,
+                                                e.StackTrace
+                                            );
                                         this.TerminateOnIdle(
                                             WorkflowExecutor.GetNestedExceptionMessage(e)
                                         );
@@ -1051,18 +1055,19 @@ namespace System.Workflow.Runtime
                         this.ProcessQueuedEvents(); // deliver any outstanding queued events before persisting
                         if (this.Scheduler.IsStalledNow)
                         {
-                            WorkflowTrace.Runtime.TraceEvent(
-                                TraceEventType.Information,
-                                0,
-                                "Workflow Runtime: WorkflowExecutor: workflow instance '{0}' has no work.",
-                                this.InstanceIdString
-                            );
+                            WorkflowTrace.Runtime
+                                .TraceEvent(
+                                    TraceEventType.Information,
+                                    0,
+                                    "Workflow Runtime: WorkflowExecutor: workflow instance '{0}' has no work.",
+                                    this.InstanceIdString
+                                );
                             FireWorkflowExecutionEvent(this, WorkflowEventInternal.SchedulerEmpty);
 
                             FireEventAfterSchedulerLockDrop(WorkflowEventInternal.Idle);
 
-                            WorkflowPersistenceService persistence =
-                                this.WorkflowRuntime.WorkflowPersistenceService;
+                            WorkflowPersistenceService persistence = this.WorkflowRuntime
+                                .WorkflowPersistenceService;
 
                             // instance is not done.. must be idle
                             // can potentially dehydrate now..
@@ -1081,13 +1086,14 @@ namespace System.Workflow.Runtime
                                 )
                                 {
                                     PerformUnloading(true);
-                                    WorkflowTrace.Runtime.TraceEvent(
-                                        TraceEventType.Information,
-                                        0,
-                                        "WorkflowExecutor: unloaded workflow instance '{0}'.  IsInstanceValid={1}",
-                                        this.InstanceIdString,
-                                        IsInstanceValid
-                                    );
+                                    WorkflowTrace.Runtime
+                                        .TraceEvent(
+                                            TraceEventType.Information,
+                                            0,
+                                            "WorkflowExecutor: unloaded workflow instance '{0}'.  IsInstanceValid={1}",
+                                            this.InstanceIdString,
+                                            IsInstanceValid
+                                        );
                                 }
                             }
                             else
@@ -1097,12 +1103,13 @@ namespace System.Workflow.Runtime
                                     && this.currentAtomicActivity == null
                                 )
                                 {
-                                    WorkflowTrace.Runtime.TraceEvent(
-                                        TraceEventType.Information,
-                                        0,
-                                        "Workflow Runtime: WorkflowExecutor: workflow instance '{0}' has no work and the batch is dirty. Persisting state and commiting batch.",
-                                        this.InstanceIdString
-                                    );
+                                    WorkflowTrace.Runtime
+                                        .TraceEvent(
+                                            TraceEventType.Information,
+                                            0,
+                                            "Workflow Runtime: WorkflowExecutor: workflow instance '{0}' has no work and the batch is dirty. Persisting state and commiting batch.",
+                                            this.InstanceIdString
+                                        );
                                     this.Persist(this.rootActivity, false, false);
                                 }
                             }
@@ -1122,10 +1129,8 @@ namespace System.Workflow.Runtime
                 )
                 {
                     this.SuspendOnIdle(this.AdditionalInformation);
-                    this.rootActivity.SetValue(
-                        WorkflowExecutor.IsSuspensionRequestedProperty,
-                        false
-                    );
+                    this.rootActivity
+                        .SetValue(WorkflowExecutor.IsSuspensionRequestedProperty, false);
                 }
             }
 
@@ -1204,9 +1209,8 @@ namespace System.Workflow.Runtime
                 if (_timerQueue == null)
                 {
                     _timerQueue = (TimerEventSubscriptionCollection)
-                        this.rootActivity.GetValue(
-                            TimerEventSubscriptionCollection.TimerCollectionProperty
-                        );
+                        this.rootActivity
+                            .GetValue(TimerEventSubscriptionCollection.TimerCollectionProperty);
                     Debug.Assert(
                         _timerQueue != null,
                         "TimerEventSubscriptionCollection on root activity should never be null, but it was"
@@ -1217,10 +1221,11 @@ namespace System.Workflow.Runtime
             private set
             {
                 _timerQueue = value;
-                this.rootActivity.SetValue(
-                    TimerEventSubscriptionCollection.TimerCollectionProperty,
-                    _timerQueue
-                );
+                this.rootActivity
+                    .SetValue(
+                        TimerEventSubscriptionCollection.TimerCollectionProperty,
+                        _timerQueue
+                    );
             }
         }
 
@@ -1305,12 +1310,13 @@ namespace System.Workflow.Runtime
                             if (!this.stateChangedSincePersistence && !unlock)
                             {
                                 // the instance state is not dirty
-                                WorkflowTrace.Runtime.TraceEvent(
-                                    TraceEventType.Information,
-                                    0,
-                                    "Workflow Runtime: WorkflowExecutor: NOT Persisting Instance '{0}' since the batch is NOT dirty and the instance state is NOT dirty",
-                                    this.InstanceIdString
-                                );
+                                WorkflowTrace.Runtime
+                                    .TraceEvent(
+                                        TraceEventType.Information,
+                                        0,
+                                        "Workflow Runtime: WorkflowExecutor: NOT Persisting Instance '{0}' since the batch is NOT dirty and the instance state is NOT dirty",
+                                        this.InstanceIdString
+                                    );
                                 return;
                             }
                         }
@@ -1325,8 +1331,8 @@ namespace System.Workflow.Runtime
                             this.qService.MoveAllMessagesToPendingQueue();
                         }
                         // give the state to the persistence provider
-                        WorkflowPersistenceService persistence =
-                            this.WorkflowRuntime.WorkflowPersistenceService;
+                        WorkflowPersistenceService persistence = this.WorkflowRuntime
+                            .WorkflowPersistenceService;
 
                         // Create a transient batch for Persistence Service.
                         currentActivity.SetValue(
@@ -1339,7 +1345,8 @@ namespace System.Workflow.Runtime
                         if (persistence != null)
                         {
                             foreach (
-                                Activity completedContextActivity in this.completedContextActivities.Values
+                                Activity completedContextActivity in this.completedContextActivities
+                                    .Values
                             )
                             {
                                 // Save the committing activity
@@ -1372,13 +1379,14 @@ namespace System.Workflow.Runtime
                                     firedPersistingEvent = true;
                                 }
 
-                                WorkflowTrace.Runtime.TraceEvent(
-                                    TraceEventType.Information,
-                                    0,
-                                    "Workflow Runtime: WorkflowExecutor: Calling SaveWorkflowInstanceState for instance {0} hc {1}",
-                                    this.InstanceIdString,
-                                    this.GetHashCode()
-                                );
+                                WorkflowTrace.Runtime
+                                    .TraceEvent(
+                                        TraceEventType.Information,
+                                        0,
+                                        "Workflow Runtime: WorkflowExecutor: Calling SaveWorkflowInstanceState for instance {0} hc {1}",
+                                        this.InstanceIdString,
+                                        this.GetHashCode()
+                                    );
                                 persistence.SaveWorkflowInstanceState(this.rootActivity, unlock);
                             }
                             else if (unlock)
@@ -1402,13 +1410,14 @@ namespace System.Workflow.Runtime
                             || (unlock && HasNonEmptyWorkBatch())
                         )
                         {
-                            WorkflowTrace.Runtime.TraceEvent(
-                                TraceEventType.Information,
-                                0,
-                                "Workflow Runtime: WorkflowExecutor: Calling CommitTransaction for instance {0} hc {1}",
-                                this.InstanceIdString,
-                                this.GetHashCode()
-                            );
+                            WorkflowTrace.Runtime
+                                .TraceEvent(
+                                    TraceEventType.Information,
+                                    0,
+                                    "Workflow Runtime: WorkflowExecutor: Calling CommitTransaction for instance {0} hc {1}",
+                                    this.InstanceIdString,
+                                    this.GetHashCode()
+                                );
                             this.CommitTransaction(currentActivity);
                         }
 
@@ -1432,14 +1441,15 @@ namespace System.Workflow.Runtime
                 catch (PersistenceException e)
                 {
                     this.Rollback(oldStatus);
-                    WorkflowTrace.Runtime.TraceEvent(
-                        TraceEventType.Error,
-                        0,
-                        "Workflow Runtime: WorkflowExecutor: Persist attempt on instance '{0}' threw an exception '{1}' at {2}",
-                        this.InstanceIdString,
-                        e.Message,
-                        e.StackTrace
-                    );
+                    WorkflowTrace.Runtime
+                        .TraceEvent(
+                            TraceEventType.Error,
+                            0,
+                            "Workflow Runtime: WorkflowExecutor: Persist attempt on instance '{0}' threw an exception '{1}' at {2}",
+                            this.InstanceIdString,
+                            e.Message,
+                            e.StackTrace
+                        );
                     throw;
                 }
                 catch (Exception e)
@@ -1449,14 +1459,15 @@ namespace System.Workflow.Runtime
                         throw;
                     }
                     this.Rollback(oldStatus);
-                    WorkflowTrace.Runtime.TraceEvent(
-                        TraceEventType.Error,
-                        0,
-                        "Workflow Runtime: WorkflowExecutor: Persist attempt on instance '{0}' threw an exception '{1}' at {2}",
-                        this.InstanceIdString,
-                        e.Message,
-                        e.StackTrace
-                    );
+                    WorkflowTrace.Runtime
+                        .TraceEvent(
+                            TraceEventType.Error,
+                            0,
+                            "Workflow Runtime: WorkflowExecutor: Persist attempt on instance '{0}' threw an exception '{1}' at {2}",
+                            this.InstanceIdString,
+                            e.Message,
+                            e.StackTrace
+                        );
                     throw new PersistenceException(e.Message, e);
                 }
                 finally
@@ -1590,9 +1601,8 @@ namespace System.Workflow.Runtime
                         // add work items to the current batch if exists
                         if (pendingWork != null)
                         {
-                            IWorkBatch batch = _resourceManager.BatchCollection.GetBatch(
-                                this.rootActivity
-                            );
+                            IWorkBatch batch = _resourceManager.BatchCollection
+                                .GetBatch(this.rootActivity);
                             batch.Add(pendingWork, workItem);
                         }
 
@@ -1664,9 +1674,8 @@ namespace System.Workflow.Runtime
                                 if (pendingWork != null)
                                 {
                                     IWorkBatch batch = (IWorkBatch)
-                                        this.rootActivity.GetValue(
-                                            WorkflowExecutor.TransientBatchProperty
-                                        );
+                                        this.rootActivity
+                                            .GetValue(WorkflowExecutor.TransientBatchProperty);
                                     batch.Add(pendingWork, workItem);
                                 }
 
@@ -1763,13 +1772,17 @@ namespace System.Workflow.Runtime
             int contextId = ContextActivityUtils.ContextId(dynamicActivity);
             this.subStateMap.Add(contextId, dynamicActivity);
 
-            System.Workflow.Runtime.WorkflowTrace.Runtime.TraceEvent(
-                TraceEventType.Information,
-                0,
-                "Adding context {0}:{1}",
-                contextId,
-                dynamicActivity.QualifiedName + (load ? " for load" : "")
-            );
+            System.Workflow
+                .Runtime
+                .WorkflowTrace
+                .Runtime
+                .TraceEvent(
+                    TraceEventType.Information,
+                    0,
+                    "Adding context {0}:{1}",
+                    contextId,
+                    dynamicActivity.QualifiedName + (load ? " for load" : "")
+                );
 
             dynamicActivity.OnActivityExecutionContextLoad(this);
         }
@@ -1779,13 +1792,17 @@ namespace System.Workflow.Runtime
             int contextId = ContextActivityUtils.ContextId(dynamicActivity);
             this.subStateMap.Remove(contextId);
 
-            System.Workflow.Runtime.WorkflowTrace.Runtime.TraceEvent(
-                TraceEventType.Information,
-                0,
-                "Removing context {0}:{1}",
-                contextId,
-                dynamicActivity.QualifiedName
-            );
+            System.Workflow
+                .Runtime
+                .WorkflowTrace
+                .Runtime
+                .TraceEvent(
+                    TraceEventType.Information,
+                    0,
+                    "Removing context {0}:{1}",
+                    contextId,
+                    dynamicActivity.QualifiedName
+                );
 
             dynamicActivity.OnActivityExecutionContextUnload(this);
         }
@@ -1822,12 +1839,13 @@ namespace System.Workflow.Runtime
         /// <returns>true if successful</returns>
         internal bool TryUnload()
         {
-            WorkflowTrace.Runtime.TraceEvent(
-                TraceEventType.Information,
-                0,
-                "Workflow Runtime: WorkflowExecutor: Got a TryUnload request for instance {0}",
-                this.InstanceIdString
-            );
+            WorkflowTrace.Runtime
+                .TraceEvent(
+                    TraceEventType.Information,
+                    0,
+                    "Workflow Runtime: WorkflowExecutor: Got a TryUnload request for instance {0}",
+                    this.InstanceIdString
+                );
             DiagnosticStackTrace("try unload request");
 
             try
@@ -1900,14 +1918,15 @@ namespace System.Workflow.Runtime
             }
             catch (Exception e)
             {
-                WorkflowTrace.Runtime.TraceEvent(
-                    TraceEventType.Error,
-                    0,
-                    "Workflow Runtime: WorkflowExecutor: TryUnloading attempt on instance '{0}' threw an exception '{1}' at {2}",
-                    this.InstanceIdString,
-                    e.Message,
-                    e.StackTrace
-                );
+                WorkflowTrace.Runtime
+                    .TraceEvent(
+                        TraceEventType.Error,
+                        0,
+                        "Workflow Runtime: WorkflowExecutor: TryUnloading attempt on instance '{0}' threw an exception '{1}' at {2}",
+                        this.InstanceIdString,
+                        e.Message,
+                        e.StackTrace
+                    );
                 throw;
             }
             return false;
@@ -1918,12 +1937,13 @@ namespace System.Workflow.Runtime
         {
             InstanceLock.AssertIsLocked(this._schedulerLock);
 
-            WorkflowTrace.Runtime.TraceEvent(
-                TraceEventType.Information,
-                0,
-                "Workflow Runtime: WorkflowExecutor: Unloading instance {0}",
-                this.InstanceIdString
-            );
+            WorkflowTrace.Runtime
+                .TraceEvent(
+                    TraceEventType.Information,
+                    0,
+                    "Workflow Runtime: WorkflowExecutor: Unloading instance {0}",
+                    this.InstanceIdString
+                );
             DiagnosticStackTrace("unload request");
 
             FireWorkflowExecutionEvent(this, WorkflowEventInternal.Unloading);
@@ -1936,42 +1956,47 @@ namespace System.Workflow.Runtime
                 bool persisted;
                 if (handleExceptions)
                 {
-                    WorkflowTrace.Runtime.TraceEvent(
-                        TraceEventType.Information,
-                        0,
-                        InstanceId + ": Calling PerformUnloading(false): InstanceId {0}, hc: {1}",
-                        InstanceIdString,
-                        this.GetHashCode()
-                    );
+                    WorkflowTrace.Runtime
+                        .TraceEvent(
+                            TraceEventType.Information,
+                            0,
+                            InstanceId
+                                + ": Calling PerformUnloading(false): InstanceId {0}, hc: {1}",
+                            InstanceIdString,
+                            this.GetHashCode()
+                        );
                     persisted = this.ProtectedPersist(true);
-                    WorkflowTrace.Runtime.TraceEvent(
-                        TraceEventType.Information,
-                        0,
-                        InstanceId
-                            + ": Returning from ProtectedPersist: InstanceId {0}, hc: {1}, ret={2}",
-                        InstanceIdString,
-                        this.GetHashCode(),
-                        persisted
-                    );
+                    WorkflowTrace.Runtime
+                        .TraceEvent(
+                            TraceEventType.Information,
+                            0,
+                            InstanceId
+                                + ": Returning from ProtectedPersist: InstanceId {0}, hc: {1}, ret={2}",
+                            InstanceIdString,
+                            this.GetHashCode(),
+                            persisted
+                        );
                 }
                 else
                 {
-                    WorkflowTrace.Runtime.TraceEvent(
-                        TraceEventType.Information,
-                        0,
-                        InstanceId + ": Calling Persist"
-                    );
+                    WorkflowTrace.Runtime
+                        .TraceEvent(
+                            TraceEventType.Information,
+                            0,
+                            InstanceId + ": Calling Persist"
+                        );
                     this.Persist(this.rootActivity, true, false);
                     persisted = true;
-                    WorkflowTrace.Runtime.TraceEvent(
-                        TraceEventType.Information,
-                        0,
-                        InstanceId
-                            + ": Returning from Persist: InstanceId {0}, hc: {1}, IsInstanceValid={2}",
-                        InstanceIdString,
-                        this.GetHashCode(),
-                        IsInstanceValid
-                    );
+                    WorkflowTrace.Runtime
+                        .TraceEvent(
+                            TraceEventType.Information,
+                            0,
+                            InstanceId
+                                + ": Returning from Persist: InstanceId {0}, hc: {1}, IsInstanceValid={2}",
+                            InstanceIdString,
+                            this.GetHashCode(),
+                            IsInstanceValid
+                        );
                 }
                 if (persisted)
                 {
@@ -1989,12 +2014,13 @@ namespace System.Workflow.Runtime
         // shutsdown the schedule instance sync
         internal void Unload()
         {
-            WorkflowTrace.Runtime.TraceEvent(
-                TraceEventType.Information,
-                0,
-                "Workflow Runtime: WorkflowExecutor: Got an unload request for instance {0}",
-                this.InstanceIdString
-            );
+            WorkflowTrace.Runtime
+                .TraceEvent(
+                    TraceEventType.Information,
+                    0,
+                    "Workflow Runtime: WorkflowExecutor: Got an unload request for instance {0}",
+                    this.InstanceIdString
+                );
             DiagnosticStackTrace("unload request");
 
             try
@@ -2035,23 +2061,25 @@ namespace System.Workflow.Runtime
                                 // the scheduler must be idle now
                                 if (this.currentAtomicActivity == null)
                                 {
-                                    WorkflowTrace.Runtime.TraceEvent(
-                                        TraceEventType.Information,
-                                        0,
-                                        InstanceId
-                                            + ": Calling PerformUnloading(false) on instance {0} hc {1}",
-                                        InstanceIdString,
-                                        this.GetHashCode()
-                                    );
+                                    WorkflowTrace.Runtime
+                                        .TraceEvent(
+                                            TraceEventType.Information,
+                                            0,
+                                            InstanceId
+                                                + ": Calling PerformUnloading(false) on instance {0} hc {1}",
+                                            InstanceIdString,
+                                            this.GetHashCode()
+                                        );
                                     // unload
                                     PerformUnloading(false);
-                                    WorkflowTrace.Runtime.TraceEvent(
-                                        TraceEventType.Information,
-                                        0,
-                                        InstanceId
-                                            + ": Returning from PerformUnloading(false): IsInstanceValue: "
-                                            + IsInstanceValid
-                                    );
+                                    WorkflowTrace.Runtime
+                                        .TraceEvent(
+                                            TraceEventType.Information,
+                                            0,
+                                            InstanceId
+                                                + ": Returning from PerformUnloading(false): IsInstanceValue: "
+                                                + IsInstanceValid
+                                        );
                                 }
                                 else
                                 {
@@ -2065,14 +2093,15 @@ namespace System.Workflow.Runtime
             }
             catch (Exception e)
             {
-                WorkflowTrace.Runtime.TraceEvent(
-                    TraceEventType.Error,
-                    0,
-                    "Workflow Runtime: WorkflowExecutor: Unload attempt on instance '{0}' threw an exception '{1}' at {2}",
-                    this.InstanceIdString,
-                    e.Message,
-                    e.StackTrace
-                );
+                WorkflowTrace.Runtime
+                    .TraceEvent(
+                        TraceEventType.Error,
+                        0,
+                        "Workflow Runtime: WorkflowExecutor: Unload attempt on instance '{0}' threw an exception '{1}' at {2}",
+                        this.InstanceIdString,
+                        e.Message,
+                        e.StackTrace
+                    );
                 throw;
             }
         }
@@ -2086,12 +2115,13 @@ namespace System.Workflow.Runtime
         // never call this method... it should call TerminateOnIdle instead.
         internal void Terminate(string error)
         {
-            WorkflowTrace.Runtime.TraceEvent(
-                TraceEventType.Information,
-                0,
-                "Workflow Runtime: WorkflowExecutor::Terminate : Got a terminate request for instance {0}",
-                this.InstanceIdString
-            );
+            WorkflowTrace.Runtime
+                .TraceEvent(
+                    TraceEventType.Information,
+                    0,
+                    "Workflow Runtime: WorkflowExecutor::Terminate : Got a terminate request for instance {0}",
+                    this.InstanceIdString
+                );
 
             try
             {
@@ -2126,14 +2156,15 @@ namespace System.Workflow.Runtime
             }
             catch (Exception e)
             {
-                WorkflowTrace.Runtime.TraceEvent(
-                    TraceEventType.Error,
-                    0,
-                    "Workflow Runtime: WorkflowExecutor: Terminate attempt on instance '{0}' threw an exception '{1}' at {2}",
-                    this.InstanceIdString,
-                    e.Message,
-                    e.StackTrace
-                );
+                WorkflowTrace.Runtime
+                    .TraceEvent(
+                        TraceEventType.Error,
+                        0,
+                        "Workflow Runtime: WorkflowExecutor: Terminate attempt on instance '{0}' threw an exception '{1}' at {2}",
+                        this.InstanceIdString,
+                        e.Message,
+                        e.StackTrace
+                    );
                 throw;
             }
         }
@@ -2152,12 +2183,13 @@ namespace System.Workflow.Runtime
 
             try
             {
-                WorkflowTrace.Runtime.TraceEvent(
-                    TraceEventType.Information,
-                    0,
-                    "Workflow Runtime: WorkflowExecutor: Terminating instance {0}",
-                    this.InstanceIdString
-                );
+                WorkflowTrace.Runtime
+                    .TraceEvent(
+                        TraceEventType.Information,
+                        0,
+                        "Workflow Runtime: WorkflowExecutor: Terminating instance {0}",
+                        this.InstanceIdString
+                    );
 
                 if (null != ThrownException)
                     FireWorkflowTerminating(ThrownException);
@@ -2174,10 +2206,11 @@ namespace System.Workflow.Runtime
                 using (_msgDeliveryLock.Enter())
                 {
                     TimerQueue.SuspendDelivery();
-                    this.rootActivity.SetValue(
-                        Activity.ExecutionResultProperty,
-                        ActivityExecutionResult.Canceled
-                    );
+                    this.rootActivity
+                        .SetValue(
+                            Activity.ExecutionResultProperty,
+                            ActivityExecutionResult.Canceled
+                        );
                     try
                     {
                         // persist the instance state
@@ -2187,18 +2220,20 @@ namespace System.Workflow.Runtime
                     {
                         // the persistence at terminate threw an exception.
                         this.WorkflowStatus = oldStatus;
-                        this.rootActivity.SetValue(
-                            Activity.ExecutionResultProperty,
-                            ActivityExecutionResult.None
-                        );
-                        WorkflowTrace.Runtime.TraceEvent(
-                            TraceEventType.Error,
-                            0,
-                            "Workflow Runtime: WorkflowExecutor: Persistence attempt at instance '{0}' termination threw an exception. Aborting the instance. The termination event would be raised. The instance would execute from the last persisted point whenever started by the host explicitly. Exception:{1}\n{2}",
-                            this.InstanceIdString,
-                            e.Message,
-                            e.StackTrace
-                        );
+                        this.rootActivity
+                            .SetValue(
+                                Activity.ExecutionResultProperty,
+                                ActivityExecutionResult.None
+                            );
+                        WorkflowTrace.Runtime
+                            .TraceEvent(
+                                TraceEventType.Error,
+                                0,
+                                "Workflow Runtime: WorkflowExecutor: Persistence attempt at instance '{0}' termination threw an exception. Aborting the instance. The termination event would be raised. The instance would execute from the last persisted point whenever started by the host explicitly. Exception:{1}\n{2}",
+                                this.InstanceIdString,
+                                e.Message,
+                                e.StackTrace
+                            );
                         this.AbortOnIdle();
                         return false;
                     }
@@ -2258,12 +2293,13 @@ namespace System.Workflow.Runtime
         // never call this method... it should call AbortOnIdle instead.
         internal void Abort()
         {
-            WorkflowTrace.Runtime.TraceEvent(
-                TraceEventType.Information,
-                0,
-                "Workflow Runtime: WorkflowExecutor::Abort : Got a abort request for instance {0}",
-                this.InstanceIdString
-            );
+            WorkflowTrace.Runtime
+                .TraceEvent(
+                    TraceEventType.Information,
+                    0,
+                    "Workflow Runtime: WorkflowExecutor::Abort : Got a abort request for instance {0}",
+                    this.InstanceIdString
+                );
 
             try
             {
@@ -2298,14 +2334,15 @@ namespace System.Workflow.Runtime
             }
             catch (Exception e)
             {
-                WorkflowTrace.Runtime.TraceEvent(
-                    TraceEventType.Error,
-                    0,
-                    "Workflow Runtime: WorkflowExecutor: Abort attempt on instance '{0}' threw an exception '{1}' at {2}",
-                    this.InstanceIdString,
-                    e.Message,
-                    e.StackTrace
-                );
+                WorkflowTrace.Runtime
+                    .TraceEvent(
+                        TraceEventType.Error,
+                        0,
+                        "Workflow Runtime: WorkflowExecutor: Abort attempt on instance '{0}' threw an exception '{1}' at {2}",
+                        this.InstanceIdString,
+                        e.Message,
+                        e.StackTrace
+                    );
                 throw;
             }
         }
@@ -2327,12 +2364,13 @@ namespace System.Workflow.Runtime
             // tell the scheduler to stop running
             this.Scheduler.CanRun = false;
 
-            WorkflowTrace.Runtime.TraceEvent(
-                TraceEventType.Information,
-                0,
-                "Workflow Runtime: WorkflowExecutor: Aborting instance {0}",
-                this.InstanceIdString
-            );
+            WorkflowTrace.Runtime
+                .TraceEvent(
+                    TraceEventType.Information,
+                    0,
+                    "Workflow Runtime: WorkflowExecutor: Aborting instance {0}",
+                    this.InstanceIdString
+                );
 
             try
             {
@@ -2347,8 +2385,8 @@ namespace System.Workflow.Runtime
                 this.ResourceManager.ClearAllBatchedWork();
 
                 // unlock instance state w/o saving it
-                WorkflowPersistenceService persistenceSvc =
-                    this.WorkflowRuntime.WorkflowPersistenceService;
+                WorkflowPersistenceService persistenceSvc = this.WorkflowRuntime
+                    .WorkflowPersistenceService;
                 if (persistenceSvc != null)
                 {
                     persistenceSvc.UnlockWorkflowInstanceState(
@@ -2390,12 +2428,13 @@ namespace System.Workflow.Runtime
         // never call this method... it should call SuspendOnIdle instead.
         internal bool Suspend(string error)
         {
-            WorkflowTrace.Runtime.TraceEvent(
-                TraceEventType.Information,
-                0,
-                "Workflow Runtime: WorkflowExecutor: Got a suspend request for instance {0}",
-                this.InstanceIdString
-            );
+            WorkflowTrace.Runtime
+                .TraceEvent(
+                    TraceEventType.Information,
+                    0,
+                    "Workflow Runtime: WorkflowExecutor: Got a suspend request for instance {0}",
+                    this.InstanceIdString
+                );
 
             try
             {
@@ -2435,14 +2474,15 @@ namespace System.Workflow.Runtime
             }
             catch (Exception e)
             {
-                WorkflowTrace.Runtime.TraceEvent(
-                    TraceEventType.Error,
-                    0,
-                    "Workflow Runtime: WorkflowExecutor: Suspend attempt on instance '{0}' threw an exception '{1}' at {2}",
-                    this.InstanceIdString,
-                    e.Message,
-                    e.StackTrace
-                );
+                WorkflowTrace.Runtime
+                    .TraceEvent(
+                        TraceEventType.Error,
+                        0,
+                        "Workflow Runtime: WorkflowExecutor: Suspend attempt on instance '{0}' threw an exception '{1}' at {2}",
+                        this.InstanceIdString,
+                        e.Message,
+                        e.StackTrace
+                    );
                 throw;
             }
         }
@@ -2489,12 +2529,13 @@ namespace System.Workflow.Runtime
                         return false;
                 }
 
-                WorkflowTrace.Runtime.TraceEvent(
-                    TraceEventType.Information,
-                    0,
-                    "Workflow Runtime: WorkflowExecutor: Suspending instance {0}",
-                    this.InstanceIdString
-                );
+                WorkflowTrace.Runtime
+                    .TraceEvent(
+                        TraceEventType.Information,
+                        0,
+                        "Workflow Runtime: WorkflowExecutor: Suspending instance {0}",
+                        this.InstanceIdString
+                    );
 
                 // mark it as suspended
                 this.stateChangedSincePersistence = true;
@@ -2516,12 +2557,13 @@ namespace System.Workflow.Runtime
         // never call this method... it should call ResumeOnIdle instead.
         internal void Resume()
         {
-            WorkflowTrace.Runtime.TraceEvent(
-                TraceEventType.Information,
-                0,
-                "Workflow Runtime: WorkflowExecutor: Got a resume request for instance {0}",
-                this.InstanceIdString
-            );
+            WorkflowTrace.Runtime
+                .TraceEvent(
+                    TraceEventType.Information,
+                    0,
+                    "Workflow Runtime: WorkflowExecutor: Got a resume request for instance {0}",
+                    this.InstanceIdString
+                );
 
             try
             {
@@ -2565,14 +2607,15 @@ namespace System.Workflow.Runtime
             }
             catch (Exception e)
             {
-                WorkflowTrace.Runtime.TraceEvent(
-                    TraceEventType.Error,
-                    0,
-                    "Workflow Runtime: WorkflowExecutor: Resume attempt on instance '{0}' threw an exception '{1}' at {2}",
-                    this.InstanceIdString,
-                    e.Message,
-                    e.StackTrace
-                );
+                WorkflowTrace.Runtime
+                    .TraceEvent(
+                        TraceEventType.Error,
+                        0,
+                        "Workflow Runtime: WorkflowExecutor: Resume attempt on instance '{0}' threw an exception '{1}' at {2}",
+                        this.InstanceIdString,
+                        e.Message,
+                        e.StackTrace
+                    );
                 throw;
             }
         }
@@ -2592,12 +2635,13 @@ namespace System.Workflow.Runtime
 
             FireWorkflowExecutionEvent(this, WorkflowEventInternal.Resuming);
 
-            WorkflowTrace.Runtime.TraceEvent(
-                TraceEventType.Information,
-                0,
-                "Workflow Runtime: WorkflowExecutor: Resuming instance {0}",
-                this.InstanceIdString
-            );
+            WorkflowTrace.Runtime
+                .TraceEvent(
+                    TraceEventType.Information,
+                    0,
+                    "Workflow Runtime: WorkflowExecutor: Resuming instance {0}",
+                    this.InstanceIdString
+                );
 
             this.stateChangedSincePersistence = true;
             this.WorkflowStatus = WorkflowStatus.Running;
@@ -2674,18 +2718,19 @@ namespace System.Workflow.Runtime
             // transaction.TransactionCompleted += new TransactionCompletedEventHandler(TransactionCompletionHandler);
             //transaction.EnlistVolatile(new TransactionNotificationEnlistment(this, transaction, atomicActivity), EnlistmentOptions.None);
             transactionalProperties.Transaction = transaction;
-            WorkflowTrace.Runtime.TraceEvent(
-                TraceEventType.Information,
-                0,
-                "Workflow Runtime: WorkflowExecutor: instanceId: "
-                    + this.InstanceIdString
-                    + " .Created enlistable transaction "
-                    + ((System.Transactions.Transaction)transaction).GetHashCode()
-                    + " with timeout "
-                    + tranOpts.Timeout
-                    + ", isolation "
-                    + tranOpts.IsolationLevel
-            );
+            WorkflowTrace.Runtime
+                .TraceEvent(
+                    TraceEventType.Information,
+                    0,
+                    "Workflow Runtime: WorkflowExecutor: instanceId: "
+                        + this.InstanceIdString
+                        + " .Created enlistable transaction "
+                        + ((System.Transactions.Transaction)transaction).GetHashCode()
+                        + " with timeout "
+                        + tranOpts.Timeout
+                        + ", isolation "
+                        + tranOpts.IsolationLevel
+                );
 
             // create a local queuing service per atomic context
             transactionalProperties.LocalQueuingService = new WorkflowQueuingService(this.qService);
@@ -2696,14 +2741,15 @@ namespace System.Workflow.Runtime
             // Set current atomic activity
             this.currentAtomicActivity = atomicActivity;
             atomicActivityEvent = new ManualResetEvent(false);
-            WorkflowTrace.Runtime.TraceEvent(
-                TraceEventType.Information,
-                0,
-                "Workflow Runtime: WorkflowExecutor: instanceId: "
-                    + this.InstanceIdString
-                    + " .Set CurrentAtomicActivity to "
-                    + atomicActivity.Name
-            );
+            WorkflowTrace.Runtime
+                .TraceEvent(
+                    TraceEventType.Information,
+                    0,
+                    "Workflow Runtime: WorkflowExecutor: instanceId: "
+                        + this.InstanceIdString
+                        + " .Set CurrentAtomicActivity to "
+                        + atomicActivity.Name
+                );
         }
 
         private void DisposeTransaction(Activity atomicActivity)
@@ -2718,16 +2764,17 @@ namespace System.Workflow.Runtime
 
             // release transaction
             transactionalProperties.Transaction.Dispose();
-            WorkflowTrace.Runtime.TraceEvent(
-                TraceEventType.Information,
-                0,
-                "Workflow Runtime: WorkflowExecutor: instanceId: "
-                    + this.InstanceIdString
-                    + " .Disposed enlistable transaction "
-                    + (
-                        (System.Transactions.Transaction)transactionalProperties.Transaction
-                    ).GetHashCode()
-            );
+            WorkflowTrace.Runtime
+                .TraceEvent(
+                    TraceEventType.Information,
+                    0,
+                    "Workflow Runtime: WorkflowExecutor: instanceId: "
+                        + this.InstanceIdString
+                        + " .Disposed enlistable transaction "
+                        + (
+                            (System.Transactions.Transaction)transactionalProperties.Transaction
+                        ).GetHashCode()
+                );
 
             // cleanup properties
             transactionalProperties.Transaction = null;
@@ -2756,9 +2803,9 @@ namespace System.Workflow.Runtime
                     //
                     // Pass a delegate that does the batch commit
                     // so that it can do retries
-                    this.WorkflowRuntime.TransactionService.CommitWorkBatch(
-                        DoResourceManagerCommit
-                    );
+                    this.WorkflowRuntime
+                        .TransactionService
+                        .CommitWorkBatch(DoResourceManagerCommit);
                     this.ResourceManager.Complete();
                 }
                 catch
@@ -2787,9 +2834,9 @@ namespace System.Workflow.Runtime
                 // TxService must use the ambient transaction directly or do a dependent clone.
                 try
                 {
-                    this.WorkflowRuntime.TransactionService.CommitWorkBatch(
-                        DoResourceManagerCommit
-                    );
+                    this.WorkflowRuntime
+                        .TransactionService
+                        .CommitWorkBatch(DoResourceManagerCommit);
                 }
                 catch
                 {
@@ -2836,17 +2883,18 @@ namespace System.Workflow.Runtime
                                 throw;
                             }
 
-                            WorkflowTrace.Runtime.TraceEvent(
-                                TraceEventType.Information,
-                                0,
-                                "Workflow Runtime: WorkflowExecutor: instanceId: "
-                                    + this.InstanceIdString
-                                    + " .Committed CommittableTransaction "
-                                    + (
-                                        (System.Transactions.Transaction)
-                                            transactionalProperties.Transaction
-                                    ).GetHashCode()
-                            );
+                            WorkflowTrace.Runtime
+                                .TraceEvent(
+                                    TraceEventType.Information,
+                                    0,
+                                    "Workflow Runtime: WorkflowExecutor: instanceId: "
+                                        + this.InstanceIdString
+                                        + " .Committed CommittableTransaction "
+                                        + (
+                                            (System.Transactions.Transaction)
+                                                transactionalProperties.Transaction
+                                        ).GetHashCode()
+                                );
                         }
 
                         DependentTransaction dtx =
@@ -2862,17 +2910,18 @@ namespace System.Workflow.Runtime
                                 qService.PostPersist(false);
                                 throw;
                             }
-                            WorkflowTrace.Runtime.TraceEvent(
-                                TraceEventType.Information,
-                                0,
-                                "Workflow Runtime: WorkflowExecutor: instanceId: "
-                                    + this.InstanceIdString
-                                    + " .Completed DependentTransaction "
-                                    + (
-                                        (System.Transactions.Transaction)
-                                            transactionalProperties.Transaction
-                                    ).GetHashCode()
-                            );
+                            WorkflowTrace.Runtime
+                                .TraceEvent(
+                                    TraceEventType.Information,
+                                    0,
+                                    "Workflow Runtime: WorkflowExecutor: instanceId: "
+                                        + this.InstanceIdString
+                                        + " .Completed DependentTransaction "
+                                        + (
+                                            (System.Transactions.Transaction)
+                                                transactionalProperties.Transaction
+                                        ).GetHashCode()
+                                );
                         }
                     }
                     catch
@@ -2891,13 +2940,14 @@ namespace System.Workflow.Runtime
                     DisposeTransaction(activityContext);
                     this.currentAtomicActivity = null;
 
-                    WorkflowTrace.Runtime.TraceEvent(
-                        TraceEventType.Information,
-                        0,
-                        "Workflow Runtime: WorkflowExecutor: instanceId: "
-                            + this.InstanceIdString
-                            + "Reset CurrentAtomicActivity to null"
-                    );
+                    WorkflowTrace.Runtime
+                        .TraceEvent(
+                            TraceEventType.Information,
+                            0,
+                            "Workflow Runtime: WorkflowExecutor: instanceId: "
+                                + this.InstanceIdString
+                                + "Reset CurrentAtomicActivity to null"
+                        );
                 }
                 //
                 // Tell the batches that we committed successfully
@@ -2965,14 +3015,15 @@ namespace System.Workflow.Runtime
                         != transaction.TransactionInformation.Status
                     )
                         transaction.Rollback();
-                    WorkflowTrace.Runtime.TraceEvent(
-                        TraceEventType.Information,
-                        0,
-                        "Workflow Runtime: WorkflowExecutor: instanceId: "
-                            + this.InstanceIdString
-                            + " .Aborted enlistable transaction "
-                            + ((System.Transactions.Transaction)transaction).GetHashCode()
-                    );
+                    WorkflowTrace.Runtime
+                        .TraceEvent(
+                            TraceEventType.Information,
+                            0,
+                            "Workflow Runtime: WorkflowExecutor: instanceId: "
+                                + this.InstanceIdString
+                                + " .Aborted enlistable transaction "
+                                + ((System.Transactions.Transaction)transaction).GetHashCode()
+                        );
                 }
                 finally
                 {
@@ -3136,18 +3187,19 @@ namespace System.Workflow.Runtime
                 transactionalProperties.TransactionScope.Complete();
                 transactionalProperties.TransactionScope.Dispose();
                 transactionalProperties.TransactionScope = null;
-                WorkflowTrace.Runtime.TraceEvent(
-                    TraceEventType.Information,
-                    0,
-                    "Workflow Runtime: WorkflowExecutor: instanceId: "
-                        + this.InstanceIdString
-                        + "Left TransactionScope, Current atomic acitivity was "
-                        + (
-                            (this.currentAtomicActivity == null)
-                                ? null
-                                : this.currentAtomicActivity.Name
-                        )
-                );
+                WorkflowTrace.Runtime
+                    .TraceEvent(
+                        TraceEventType.Information,
+                        0,
+                        "Workflow Runtime: WorkflowExecutor: instanceId: "
+                            + this.InstanceIdString
+                            + "Left TransactionScope, Current atomic acitivity was "
+                            + (
+                                (this.currentAtomicActivity == null)
+                                    ? null
+                                    : this.currentAtomicActivity.Name
+                            )
+                    );
             }
         }
 
@@ -3196,15 +3248,16 @@ namespace System.Workflow.Runtime
                 if (items == null)
                     return;
 
-                WorkflowTrace.Runtime.TraceEvent(
-                    TraceEventType.Information,
-                    0,
-                    "Workflow Runtime: WorkflowExecutor: instanceId: "
-                        + this.InstanceIdString
-                        + " .Scheduling delayed "
-                        + items.Count
-                        + " number of items"
-                );
+                WorkflowTrace.Runtime
+                    .TraceEvent(
+                        TraceEventType.Information,
+                        0,
+                        "Workflow Runtime: WorkflowExecutor: instanceId: "
+                            + this.InstanceIdString
+                            + " .Scheduling delayed "
+                            + items.Count
+                            + " number of items"
+                    );
 
                 foreach (SchedulableItem item in items)
                 {
@@ -3442,36 +3495,39 @@ namespace System.Workflow.Runtime
             }
             catch (Exception e)
             {
-                WorkflowTrace.Runtime.TraceEvent(
-                    TraceEventType.Error,
-                    0,
-                    "Workflow Runtime: WorkflowExecutor: dynamic update attempt from outside on instance '{0}' threw an exception '{1}' at {2}",
-                    this.InstanceIdString,
-                    e.Message,
-                    e.StackTrace
-                );
+                WorkflowTrace.Runtime
+                    .TraceEvent(
+                        TraceEventType.Error,
+                        0,
+                        "Workflow Runtime: WorkflowExecutor: dynamic update attempt from outside on instance '{0}' threw an exception '{1}' at {2}",
+                        this.InstanceIdString,
+                        e.Message,
+                        e.StackTrace
+                    );
                 throw;
             }
         }
         #endregion Dynamic Update From Outside the instance
         internal bool OnBeforeDynamicChange(IList<WorkflowChangeAction> changes)
         {
-            WorkflowTrace.Runtime.TraceEvent(
-                TraceEventType.Information,
-                0,
-                "Workflow Runtime: WorkflowExecutor: Got a dynamic update request for instance {0}",
-                this.InstanceIdString
-            );
+            WorkflowTrace.Runtime
+                .TraceEvent(
+                    TraceEventType.Information,
+                    0,
+                    "Workflow Runtime: WorkflowExecutor: Got a dynamic update request for instance {0}",
+                    this.InstanceIdString
+                );
 
             if (!this.IsInstanceValid)
                 throw new InvalidOperationException(ExecutionStringManager.WorkflowNotValid);
 
-            WorkflowTrace.Runtime.TraceEvent(
-                TraceEventType.Information,
-                0,
-                "Workflow Runtime: WorkflowExecutor: Found a match for the schedule in updating instance {0}",
-                this.InstanceIdString
-            );
+            WorkflowTrace.Runtime
+                .TraceEvent(
+                    TraceEventType.Information,
+                    0,
+                    "Workflow Runtime: WorkflowExecutor: Found a match for the schedule in updating instance {0}",
+                    this.InstanceIdString
+                );
 
             FireDynamicUpdateBegin(changes);
 
@@ -3496,12 +3552,13 @@ namespace System.Workflow.Runtime
                 FireDynamicUpdateRollback(changes);
             }
 
-            WorkflowTrace.Runtime.TraceEvent(
-                TraceEventType.Information,
-                0,
-                "Workflow Runtime: WorkflowExecutor: Done updating a schedule in instance {0}",
-                this.InstanceIdString
-            );
+            WorkflowTrace.Runtime
+                .TraceEvent(
+                    TraceEventType.Information,
+                    0,
+                    "Workflow Runtime: WorkflowExecutor: Done updating a schedule in instance {0}",
+                    this.InstanceIdString
+                );
         }
 
         bool IWorkflowCoreRuntime.IsDynamicallyUpdated
@@ -3521,14 +3578,15 @@ namespace System.Workflow.Runtime
         void DiagnosticStackTrace(string reason)
         {
             StackTrace st = new StackTrace(true);
-            WorkflowTrace.Runtime.TraceEvent(
-                TraceEventType.Information,
-                0,
-                "Workflow Runtime: WorkflowExecutor: InstanceId: {0} : {1} stack trace: {2}",
-                this.InstanceIdString,
-                reason,
-                st.ToString()
-            );
+            WorkflowTrace.Runtime
+                .TraceEvent(
+                    TraceEventType.Information,
+                    0,
+                    "Workflow Runtime: WorkflowExecutor: InstanceId: {0} : {1} stack trace: {2}",
+                    this.InstanceIdString,
+                    reason,
+                    st.ToString()
+                );
         }
 
         #endregion
@@ -3579,15 +3637,16 @@ namespace System.Workflow.Runtime
                 throw new InvalidOperationException(ExecutionStringManager.MustUseRuntimeThread);
 
             Guid instanceId = Guid.Empty;
-            WorkflowInstance instance = this.WorkflowRuntime.InternalCreateWorkflow(
-                new CreationContext(
-                    workflowType,
-                    this,
-                    this.CurrentActivity.QualifiedName,
-                    namedArgumentValues
-                ),
-                Guid.NewGuid()
-            );
+            WorkflowInstance instance = this.WorkflowRuntime
+                .InternalCreateWorkflow(
+                    new CreationContext(
+                        workflowType,
+                        this,
+                        this.CurrentActivity.QualifiedName,
+                        namedArgumentValues
+                    ),
+                    Guid.NewGuid()
+                );
             if (instance != null)
             {
                 instanceId = instance.InstanceId;
@@ -3707,13 +3766,14 @@ namespace System.Workflow.Runtime
         {
             if (!ServiceEnvironment.IsInServiceThread(this.InstanceId))
                 throw new InvalidOperationException(ExecutionStringManager.MustUseRuntimeThread);
-            this.WorkflowStateRollbackService.RequestRevertToCheckpointState(
-                currentActivity,
-                callbackHandler,
-                callbackData,
-                suspendOnRevert,
-                suspendInfo
-            );
+            this.WorkflowStateRollbackService
+                .RequestRevertToCheckpointState(
+                    currentActivity,
+                    callbackHandler,
+                    callbackData,
+                    suspendOnRevert,
+                    suspendInfo
+                );
         }
 
         void IWorkflowCoreRuntime.DisposeCheckpointState()
@@ -3880,11 +3940,9 @@ namespace System.Workflow.Runtime
             {
                 using (RuntimeEnvironment runtimeEnv = new RuntimeEnvironment(this.WorkflowRuntime))
                 {
-                    contextActivity =
-                        this.WorkflowRuntime.WorkflowPersistenceService.LoadCompletedContextActivity(
-                            contextInfo.ContextGuid,
-                            outerActivity
-                        );
+                    contextActivity = this.WorkflowRuntime
+                        .WorkflowPersistenceService
+                        .LoadCompletedContextActivity(contextInfo.ContextGuid, outerActivity);
                     if (contextActivity == null)
                         throw new InvalidOperationException(
                             ExecutionStringManager.LoadContextActivityFailed
@@ -3898,11 +3956,12 @@ namespace System.Workflow.Runtime
         {
             if (!ServiceEnvironment.IsInServiceThread(this.InstanceId))
                 throw new InvalidOperationException(ExecutionStringManager.MustUseRuntimeThread);
-            this.completedContextActivities.Add(
-                (ActivityExecutionContextInfo)
-                    contextActivity.GetValue(Activity.ActivityExecutionContextInfoProperty),
-                contextActivity
-            );
+            this.completedContextActivities
+                .Add(
+                    (ActivityExecutionContextInfo)
+                        contextActivity.GetValue(Activity.ActivityExecutionContextInfoProperty),
+                    contextActivity
+                );
         }
 
         Activity IWorkflowCoreRuntime.RootActivity

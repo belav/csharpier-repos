@@ -26,14 +26,10 @@ internal static class ComponentFacts
             .GetAttributes()
             .Any(a =>
             {
-                return SymbolEqualityComparer.Default.Equals(
-                        a.AttributeClass,
-                        symbols.ParameterAttribute
-                    )
-                    || SymbolEqualityComparer.Default.Equals(
-                        a.AttributeClass,
-                        symbols.CascadingParameterAttribute
-                    );
+                return SymbolEqualityComparer.Default
+                        .Equals(a.AttributeClass, symbols.ParameterAttribute)
+                    || SymbolEqualityComparer.Default
+                        .Equals(a.AttributeClass, symbols.CascadingParameterAttribute);
             });
     }
 
@@ -113,10 +109,8 @@ internal static class ComponentFacts
         return property
             .GetAttributes()
             .Any(a =>
-                SymbolEqualityComparer.Default.Equals(
-                    a.AttributeClass,
-                    symbols.CascadingParameterAttribute
-                )
+                SymbolEqualityComparer.Default
+                    .Equals(a.AttributeClass, symbols.CascadingParameterAttribute)
             );
     }
 

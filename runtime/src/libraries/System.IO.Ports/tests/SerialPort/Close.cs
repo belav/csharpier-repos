@@ -94,13 +94,8 @@ namespace System.IO.Ports.Tests
                 com2.Open();
 
                 // BeginWrite is used so we can fill the read buffer then go onto to verify
-                com1.BaseStream.BeginWrite(
-                    new byte[s_numWriteBytes],
-                    0,
-                    s_numWriteBytes,
-                    null,
-                    null
-                );
+                com1.BaseStream
+                    .BeginWrite(new byte[s_numWriteBytes], 0, s_numWriteBytes, null, null);
                 com2.Write(new byte[numReadBytes], 0, numReadBytes);
                 Thread.Sleep(500);
 

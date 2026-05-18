@@ -38,8 +38,8 @@ class Test
                 verify: Verification.Fails,
                 symbolValidator: module =>
                 {
-                    var method = module
-                        .ContainingAssembly.GetTypeByMetadataName("Test")
+                    var method = module.ContainingAssembly
+                        .GetTypeByMetadataName("Test")
                         .GetMethod("M");
                     Assert.Equal(RefKind.RefReadOnly, method.RefKind);
                     Assert.True(method.ReturnsByRefReadonly);
@@ -52,14 +52,14 @@ class Test
 
                     var peModule = (PEModuleSymbol)module;
                     Assert.True(
-                        peModule.Module.HasIsReadOnlyAttribute(
-                            ((PEMethodSymbol)method).Signature.ReturnParam.Handle
-                        )
+                        peModule.Module
+                            .HasIsReadOnlyAttribute(
+                                ((PEMethodSymbol)method).Signature.ReturnParam.Handle
+                            )
                     );
                     Assert.True(
-                        peModule.Module.HasIsReadOnlyAttribute(
-                            ((PEParameterSymbol)parameter).Handle
-                        )
+                        peModule.Module
+                            .HasIsReadOnlyAttribute(((PEParameterSymbol)parameter).Handle)
                     );
 
                     AssertDeclaresType(
@@ -86,8 +86,8 @@ class Test
                 text,
                 symbolValidator: module =>
                 {
-                    var parameter = module
-                        .ContainingAssembly.GetTypeByMetadataName("Test")
+                    var parameter = module.ContainingAssembly
+                        .GetTypeByMetadataName("Test")
                         .GetMethod("M")
                         .GetParameters()
                         .Single();
@@ -96,9 +96,8 @@ class Test
 
                     var peModule = (PEModuleSymbol)module;
                     Assert.True(
-                        peModule.Module.HasIsReadOnlyAttribute(
-                            ((PEParameterSymbol)parameter).Handle
-                        )
+                        peModule.Module
+                            .HasIsReadOnlyAttribute(((PEParameterSymbol)parameter).Handle)
                     );
 
                     AssertDeclaresType(
@@ -126,8 +125,8 @@ class Test
                 text,
                 symbolValidator: module =>
                 {
-                    var method = module
-                        .ContainingAssembly.GetTypeByMetadataName("Test")
+                    var method = module.ContainingAssembly
+                        .GetTypeByMetadataName("Test")
                         .GetMethod("M");
                     Assert.Equal(RefKind.RefReadOnly, method.RefKind);
                     Assert.True(method.ReturnsByRefReadonly);
@@ -163,8 +162,8 @@ class Test
                 references: new[] { referenceA },
                 symbolValidator: module =>
                 {
-                    var method = module
-                        .ContainingAssembly.GetTypeByMetadataName("Test")
+                    var method = module.ContainingAssembly
+                        .GetTypeByMetadataName("Test")
                         .GetMethod("M");
                     Assert.Equal(RefKind.RefReadOnly, method.RefKind);
                     Assert.True(method.ReturnsByRefReadonly);
@@ -199,8 +198,8 @@ struct Test
                 text,
                 symbolValidator: module =>
                 {
-                    var method = module
-                        .ContainingAssembly.GetTypeByMetadataName("Test")
+                    var method = module.ContainingAssembly
+                        .GetTypeByMetadataName("Test")
                         .GetMethod("op_Addition");
                     Assert.Equal(2, method.ParameterCount);
 
@@ -228,8 +227,8 @@ struct Test
                 text,
                 symbolValidator: module =>
                 {
-                    var method = module
-                        .ContainingAssembly.GetTypeByMetadataName("Test")
+                    var method = module.ContainingAssembly
+                        .GetTypeByMetadataName("Test")
                         .GetMethod("op_Addition");
                     Assert.Equal(2, method.ParameterCount);
 
@@ -266,8 +265,8 @@ struct Test
                 references: new[] { referenceA },
                 symbolValidator: module =>
                 {
-                    var method = module
-                        .ContainingAssembly.GetTypeByMetadataName("Test")
+                    var method = module.ContainingAssembly
+                        .GetTypeByMetadataName("Test")
                         .GetMethod("op_Addition");
                     Assert.Equal(2, method.ParameterCount);
                     foreach (var parameter in method.Parameters)
@@ -300,10 +299,11 @@ class Test
                 text,
                 symbolValidator: module =>
                 {
-                    var parameter = module
-                        .ContainingAssembly.GetTypeByMetadataName("Test")
+                    var parameter = module.ContainingAssembly
+                        .GetTypeByMetadataName("Test")
                         .GetMethod(".ctor")
-                        .Parameters.Single();
+                        .Parameters
+                        .Single();
 
                     Assert.Equal(RefKind.In, parameter.RefKind);
                     Assert.Empty(parameter.GetAttributes());
@@ -326,10 +326,11 @@ class Test
                 text,
                 symbolValidator: module =>
                 {
-                    var parameter = module
-                        .ContainingAssembly.GetTypeByMetadataName("Test")
+                    var parameter = module.ContainingAssembly
+                        .GetTypeByMetadataName("Test")
                         .GetMethod(".ctor")
-                        .Parameters.Single();
+                        .Parameters
+                        .Single();
                     Assert.Empty(parameter.GetAttributes());
                 }
             );
@@ -360,10 +361,11 @@ class Test
                 references: new[] { referenceA },
                 symbolValidator: module =>
                 {
-                    var parameter = module
-                        .ContainingAssembly.GetTypeByMetadataName("Test")
+                    var parameter = module.ContainingAssembly
+                        .GetTypeByMetadataName("Test")
                         .GetMethod(".ctor")
-                        .Parameters.Single();
+                        .Parameters
+                        .Single();
 
                     Assert.Equal(RefKind.In, parameter.RefKind);
                     Assert.Empty(parameter.GetAttributes());
@@ -507,8 +509,8 @@ class Test
                 verify: Verification.Fails,
                 symbolValidator: module =>
                 {
-                    var indexer = module
-                        .ContainingAssembly.GetTypeByMetadataName("Test")
+                    var indexer = module.ContainingAssembly
+                        .GetTypeByMetadataName("Test")
                         .GetProperty("this[]");
                     Assert.Equal(RefKind.RefReadOnly, indexer.RefKind);
                     Assert.True(indexer.ReturnsByRefReadonly);
@@ -537,8 +539,8 @@ class Test
                 text,
                 symbolValidator: module =>
                 {
-                    var parameter = module
-                        .ContainingAssembly.GetTypeByMetadataName("Test")
+                    var parameter = module.ContainingAssembly
+                        .GetTypeByMetadataName("Test")
                         .GetProperty("this[]")
                         .GetParameters()
                         .Single();
@@ -565,8 +567,8 @@ class Test
                 text,
                 symbolValidator: module =>
                 {
-                    var indexer = module
-                        .ContainingAssembly.GetTypeByMetadataName("Test")
+                    var indexer = module.ContainingAssembly
+                        .GetTypeByMetadataName("Test")
                         .GetProperty("this[]");
                     Assert.Equal(RefKind.RefReadOnly, indexer.RefKind);
                     Assert.True(indexer.ReturnsByRefReadonly);
@@ -602,8 +604,8 @@ class Test
                 references: new[] { referenceA },
                 symbolValidator: module =>
                 {
-                    var indexer = module
-                        .ContainingAssembly.GetTypeByMetadataName("Test")
+                    var indexer = module.ContainingAssembly
+                        .GetTypeByMetadataName("Test")
                         .GetProperty("this[]");
                     Assert.Equal(RefKind.RefReadOnly, indexer.RefKind);
                     Assert.True(indexer.ReturnsByRefReadonly);
@@ -635,8 +637,8 @@ public delegate ref readonly int D(in int x);
                 text,
                 symbolValidator: module =>
                 {
-                    var method = module
-                        .ContainingAssembly.GetTypeByMetadataName("D")
+                    var method = module.ContainingAssembly
+                        .GetTypeByMetadataName("D")
                         .DelegateInvokeMethod;
                     Assert.Equal(RefKind.RefReadOnly, method.RefKind);
                     Assert.True(method.ReturnsByRefReadonly);
@@ -662,9 +664,10 @@ public delegate void D(in int x);
                 text,
                 symbolValidator: module =>
                 {
-                    var parameter = module
-                        .ContainingAssembly.GetTypeByMetadataName("D")
-                        .DelegateInvokeMethod.GetParameters()
+                    var parameter = module.ContainingAssembly
+                        .GetTypeByMetadataName("D")
+                        .DelegateInvokeMethod
+                        .GetParameters()
                         .Single();
                     Assert.Equal(RefKind.In, parameter.RefKind);
                     Assert.Empty(parameter.GetAttributes());
@@ -684,8 +687,8 @@ public delegate ref readonly int D();
                 text,
                 symbolValidator: module =>
                 {
-                    var method = module
-                        .ContainingAssembly.GetTypeByMetadataName("D")
+                    var method = module.ContainingAssembly
+                        .GetTypeByMetadataName("D")
                         .DelegateInvokeMethod;
                     Assert.Equal(RefKind.RefReadOnly, method.RefKind);
                     Assert.True(method.ReturnsByRefReadonly);
@@ -716,8 +719,8 @@ public delegate ref readonly int D(in int x);
                 references: new[] { referenceA },
                 symbolValidator: module =>
                 {
-                    var method = module
-                        .ContainingAssembly.GetTypeByMetadataName("D")
+                    var method = module.ContainingAssembly
+                        .GetTypeByMetadataName("D")
                         .DelegateInvokeMethod;
                     Assert.Equal(RefKind.RefReadOnly, method.RefKind);
                     Assert.True(method.ReturnsByRefReadonly);
@@ -761,8 +764,8 @@ public class Test
                 options: options,
                 symbolValidator: module =>
                 {
-                    var method = module
-                        .ContainingAssembly.GetTypeByMetadataName("Test")
+                    var method = module.ContainingAssembly
+                        .GetTypeByMetadataName("Test")
                         .GetMethod("<M>g__Inner|0_0");
                     Assert.Equal(RefKind.RefReadOnly, method.RefKind);
                     Assert.True(method.ReturnsByRefReadonly);
@@ -796,8 +799,8 @@ public class Test
                 options: options,
                 symbolValidator: module =>
                 {
-                    var parameter = module
-                        .ContainingAssembly.GetTypeByMetadataName("Test")
+                    var parameter = module.ContainingAssembly
+                        .GetTypeByMetadataName("Test")
                         .GetMethod("<M>g__Inner|0_0")
                         .GetParameters()
                         .Single();
@@ -832,8 +835,8 @@ public class Test
                 options: options,
                 symbolValidator: module =>
                 {
-                    var method = module
-                        .ContainingAssembly.GetTypeByMetadataName("Test")
+                    var method = module.ContainingAssembly
+                        .GetTypeByMetadataName("Test")
                         .GetMethod("<M>g__Inner|1_0");
                     Assert.Equal(RefKind.RefReadOnly, method.RefKind);
                     Assert.True(method.ReturnsByRefReadonly);
@@ -876,8 +879,8 @@ public class Test
                 options: options,
                 symbolValidator: module =>
                 {
-                    var method = module
-                        .ContainingAssembly.GetTypeByMetadataName("Test")
+                    var method = module.ContainingAssembly
+                        .GetTypeByMetadataName("Test")
                         .GetMethod("<M>g__Inner|0_0");
                     Assert.Equal(RefKind.RefReadOnly, method.RefKind);
                     Assert.True(method.ReturnsByRefReadonly);
@@ -923,9 +926,8 @@ class Test
                 options: options,
                 symbolValidator: module =>
                 {
-                    var method = module.GlobalNamespace.GetMember<MethodSymbol>(
-                        "Test.<>c.<M1>b__0_0"
-                    );
+                    var method = module.GlobalNamespace
+                        .GetMember<MethodSymbol>("Test.<>c.<M1>b__0_0");
                     Assert.Equal(RefKind.RefReadOnly, method.RefKind);
                     Assert.True(method.ReturnsByRefReadonly);
 
@@ -962,8 +964,8 @@ class Test
                 options: options,
                 symbolValidator: module =>
                 {
-                    var parameter = module
-                        .GlobalNamespace.GetMember<MethodSymbol>("Test.<>c.<M1>b__0_0")
+                    var parameter = module.GlobalNamespace
+                        .GetMember<MethodSymbol>("Test.<>c.<M1>b__0_0")
                         .GetParameters()
                         .Single();
                     Assert.Equal(RefKind.In, parameter.RefKind);
@@ -1040,9 +1042,8 @@ class Test
                 references: new[] { referenceA },
                 symbolValidator: module =>
                 {
-                    var method = module.GlobalNamespace.GetMember<MethodSymbol>(
-                        "Test.<>c.<M1>b__0_0"
-                    );
+                    var method = module.GlobalNamespace
+                        .GetMember<MethodSymbol>("Test.<>c.<M1>b__0_0");
                     Assert.Equal(RefKind.RefReadOnly, method.RefKind);
                     Assert.True(method.ReturnsByRefReadonly);
 
@@ -1496,8 +1497,8 @@ public class Test
                 {
                     AssertNoIsReadOnlyAttributeExists(module.ContainingAssembly);
 
-                    var parameter = module
-                        .ContainingAssembly.GetTypeByMetadataName("Test")
+                    var parameter = module.ContainingAssembly
+                        .GetTypeByMetadataName("Test")
                         .GetMethod("M")
                         .GetParameters()
                         .Single();
@@ -1584,9 +1585,10 @@ class Test
                 symbolValidator: module =>
                 {
                     Assert.Null(
-                        module.ContainingAssembly.GetTypeByMetadataName(
-                            AttributeDescription.CodeAnalysisEmbeddedAttribute.FullName
-                        )
+                        module.ContainingAssembly
+                            .GetTypeByMetadataName(
+                                AttributeDescription.CodeAnalysisEmbeddedAttribute.FullName
+                            )
                     );
                 }
             );
@@ -2073,9 +2075,8 @@ namespace System.Runtime.CompilerServices
                     var isReadOnlyAttributeName = WellKnownTypes.GetMetadataName(
                         WellKnownType.System_Runtime_CompilerServices_IsReadOnlyAttribute
                     );
-                    var type = module.ContainingAssembly.GetTypeByMetadataName(
-                        isReadOnlyAttributeName
-                    );
+                    var type = module.ContainingAssembly
+                        .GetTypeByMetadataName(isReadOnlyAttributeName);
 
                     var method = type.GetMethod("Method");
                     Assert.Empty(method.GetReturnTypeAttributes());
@@ -2124,9 +2125,8 @@ namespace System.Runtime.CompilerServices
                     var isReadOnlyAttributeName = WellKnownTypes.GetMetadataName(
                         WellKnownType.System_Runtime_CompilerServices_IsReadOnlyAttribute
                     );
-                    var type = module.ContainingAssembly.GetTypeByMetadataName(
-                        isReadOnlyAttributeName
-                    );
+                    var type = module.ContainingAssembly
+                        .GetTypeByMetadataName(isReadOnlyAttributeName);
 
                     var method = type.GetMethod("Method");
                     Assert.Empty(method.GetReturnTypeAttributes());
@@ -2444,9 +2444,8 @@ namespace System.Runtime.CompilerServices
                     var isReadOnlyAttributeName = WellKnownTypes.GetMetadataName(
                         WellKnownType.System_Runtime_CompilerServices_IsReadOnlyAttribute
                     );
-                    var type = module.ContainingAssembly.GetTypeByMetadataName(
-                        isReadOnlyAttributeName
-                    );
+                    var type = module.ContainingAssembly
+                        .GetTypeByMetadataName(isReadOnlyAttributeName);
 
                     var method = type.GetMethod("Method");
                     Assert.Empty(method.GetReturnTypeAttributes());
@@ -3034,8 +3033,8 @@ public class Test
                 options: TestOptions.DebugDll.WithMetadataImportOptions(MetadataImportOptions.All),
                 symbolValidator: module =>
                 {
-                    var method = module
-                        .ContainingAssembly.GetTypeByMetadataName("Program+<>c")
+                    var method = module.ContainingAssembly
+                        .GetTypeByMetadataName("Program+<>c")
                         .GetMethod("<Main>b__0_0");
                     Assert.Equal(RefKind.RefReadOnly, method.RefKind);
                 }
@@ -3061,8 +3060,8 @@ public class Test
                 options: TestOptions.DebugDll.WithMetadataImportOptions(MetadataImportOptions.All),
                 symbolValidator: module =>
                 {
-                    var method = module
-                        .ContainingAssembly.GetTypeByMetadataName("Program+<>c")
+                    var method = module.ContainingAssembly
+                        .GetTypeByMetadataName("Program+<>c")
                         .GetMethod("<Main>b__0_0");
                     Assert.Equal(RefKind.RefReadOnly, method.Parameters[0].RefKind);
                     Assert.Equal(RefKind.Ref, method.Parameters[1].RefKind);
@@ -3087,8 +3086,8 @@ public class Test
                 options: TestOptions.DebugDll.WithMetadataImportOptions(MetadataImportOptions.All),
                 symbolValidator: module =>
                 {
-                    var method = module
-                        .ContainingAssembly.GetTypeByMetadataName("Program")
+                    var method = module.ContainingAssembly
+                        .GetTypeByMetadataName("Program")
                         .GetMethod("<Main>g__L|0_0");
                     Assert.Equal(RefKind.RefReadOnly, method.RefKind);
                 }
@@ -3114,8 +3113,8 @@ public class Test
                 options: TestOptions.DebugDll.WithMetadataImportOptions(MetadataImportOptions.All),
                 symbolValidator: module =>
                 {
-                    var method = module
-                        .ContainingAssembly.GetTypeByMetadataName("Program")
+                    var method = module.ContainingAssembly
+                        .GetTypeByMetadataName("Program")
                         .GetMethod("<Main>g__L|0_0");
                     Assert.Equal(RefKind.Ref, method.Parameters[0].RefKind);
                     Assert.Equal(RefKind.RefReadOnly, method.Parameters[1].RefKind);

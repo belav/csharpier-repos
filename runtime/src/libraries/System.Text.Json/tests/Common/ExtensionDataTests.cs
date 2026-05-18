@@ -113,7 +113,8 @@ namespace System.Text.Json.Serialization.Tests
                     properties
                         .Where(prop => prop.Name == "MyBooleanTrue")
                         .First()
-                        .Value.GetBoolean()
+                        .Value
+                        .GetBoolean()
                 );
             }
         }
@@ -173,7 +174,8 @@ namespace System.Text.Json.Serialization.Tests
                     properties
                         .Where(prop => prop.Name == "MyBooleanTrue")
                         .First()
-                        .Value.GetBoolean()
+                        .Value
+                        .GetBoolean()
                 );
             }
         }
@@ -860,10 +862,11 @@ namespace System.Text.Json.Serialization.Tests
             obj.MyOverflow.Add("test2", "text");
             obj.MyOverflow.Add("test3", new DummyObj() { Prop = "ObjectProp" });
             obj.MyOverflow.Add("test4", new DummyStruct() { Prop = "StructProp" });
-            obj.MyOverflow.Add(
-                "test5",
-                new Dictionary<string, object>() { { "Key", "Value" }, { "Key1", "Value1" } }
-            );
+            obj.MyOverflow
+                .Add(
+                    "test5",
+                    new Dictionary<string, object>() { { "Key", "Value" }, { "Key1", "Value1" } }
+                );
 
             string json = await Serializer.SerializeWrapper(obj);
             ClassWithExtensionPropertyAlreadyInstantiated roundTripObj =
@@ -1134,20 +1137,22 @@ namespace System.Text.Json.Serialization.Tests
         public async Task NestedClassWithJsonElementExtensionDataProperty()
         {
             var child = new ChildClassWithJsonElement { Number = 4 };
-            child.ExtensionData.Add(
-                "SpecialInformation",
-                JsonDocument
-                    .Parse(await Serializer.SerializeWrapper("I am child class"))
-                    .RootElement
-            );
+            child.ExtensionData
+                .Add(
+                    "SpecialInformation",
+                    JsonDocument
+                        .Parse(await Serializer.SerializeWrapper("I am child class"))
+                        .RootElement
+                );
 
             var parent = new ParentClassWithJsonElement { Text = "Hello World" };
-            parent.ExtensionData.Add(
-                "SpecialInformation",
-                JsonDocument
-                    .Parse(await Serializer.SerializeWrapper("I am parent class"))
-                    .RootElement
-            );
+            parent.ExtensionData
+                .Add(
+                    "SpecialInformation",
+                    JsonDocument
+                        .Parse(await Serializer.SerializeWrapper("I am parent class"))
+                        .RootElement
+                );
             parent.Children.Add(child);
 
             Verify();
@@ -1197,7 +1202,8 @@ namespace System.Text.Json.Serialization.Tests
                 ((JsonElement)obj.MyOverflow["MyOverflow"])
                     .EnumerateObject()
                     .First()
-                    .Value.GetInt32()
+                    .Value
+                    .GetInt32()
             );
 
             // Attempt to deserialize null into the overflow property. This is also treated as a missing property.
@@ -1237,7 +1243,8 @@ namespace System.Text.Json.Serialization.Tests
                 ((JsonElement)obj.ActualDictionary["Key"])
                     .EnumerateObject()
                     .First()
-                    .Value.GetInt32()
+                    .Value
+                    .GetInt32()
             );
 
             // Attempt to deserialize null into the dictionary and overflow property. This is also treated as a missing property.

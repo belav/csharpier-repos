@@ -123,8 +123,8 @@ namespace System.ServiceModel.Activation
             ServiceDescription description
         )
         {
-            VirtualPathExtension virtualPathExtension =
-                serviceHost.Extensions.Find<VirtualPathExtension>();
+            VirtualPathExtension virtualPathExtension = serviceHost.Extensions
+                .Find<VirtualPathExtension>();
             if (virtualPathExtension != null)
             {
                 description.Behaviors.Add(new HostedBindingBehavior(virtualPathExtension));
@@ -224,11 +224,12 @@ namespace System.ServiceModel.Activation
                 baseAddress = hostedConfiguration.FindBaseAddress(listenUri);
                 if (baseAddress == null)
                 {
-                    throw FxTrace.Exception.AsError(
-                        new InvalidOperationException(
-                            SR.Hosting_TransportBindingNotFound(listenUri.ToString())
-                        )
-                    );
+                    throw FxTrace.Exception
+                        .AsError(
+                            new InvalidOperationException(
+                                SR.Hosting_TransportBindingNotFound(listenUri.ToString())
+                            )
+                        );
                 }
             }
             return baseAddress;
@@ -245,9 +246,8 @@ namespace System.ServiceModel.Activation
         {
             // Verify the authentication settings
             AuthenticationSchemes hostSupportedSchemes =
-                HostedTransportConfigurationManager.MetabaseSettings.GetAuthenticationSchemes(
-                    virtualPath
-                );
+                HostedTransportConfigurationManager.MetabaseSettings
+                    .GetAuthenticationSchemes(virtualPath);
 
             if ((bindingElementAuthenticationSchemes & hostSupportedSchemes) == 0)
             {
@@ -258,19 +258,21 @@ namespace System.ServiceModel.Activation
                         == AuthenticationSchemes.IntegratedWindowsAuthentication
                 )
                 {
-                    throw FxTrace.Exception.AsError(
-                        new NotSupportedException(SR.Hosting_AuthSchemesRequireWindowsAuth)
-                    );
+                    throw FxTrace.Exception
+                        .AsError(
+                            new NotSupportedException(SR.Hosting_AuthSchemesRequireWindowsAuth)
+                        );
                 }
                 else
                 {
-                    throw FxTrace.Exception.AsError(
-                        new NotSupportedException(
-                            SR.Hosting_AuthSchemesRequireOtherAuth(
-                                bindingElementAuthenticationSchemes.ToString()
+                    throw FxTrace.Exception
+                        .AsError(
+                            new NotSupportedException(
+                                SR.Hosting_AuthSchemesRequireOtherAuth(
+                                    bindingElementAuthenticationSchemes.ToString()
+                                )
                             )
-                        )
-                    );
+                        );
                 }
             }
 
@@ -281,17 +283,15 @@ namespace System.ServiceModel.Activation
             {
                 //Compare the ExtendedProtectionPolicy setttings to IIS
                 ExtendedProtectionPolicy iisPolicy =
-                    HostedTransportConfigurationManager.MetabaseSettings.GetExtendedProtectionPolicy(
-                        virtualPath
-                    );
+                    HostedTransportConfigurationManager.MetabaseSettings
+                        .GetExtendedProtectionPolicy(virtualPath);
 
                 if (iisPolicy == null) //OS doesn't support CBT
                 {
                     if (extendedProtectionPolicy.PolicyEnforcement == PolicyEnforcement.Always)
                     {
-                        throw FxTrace.Exception.AsError(
-                            new NotSupportedException(SR.ExtendedProtectionNotSupported)
-                        );
+                        throw FxTrace.Exception
+                            .AsError(new NotSupportedException(SR.ExtendedProtectionNotSupported));
                     }
                 }
                 else
@@ -344,13 +344,14 @@ namespace System.ServiceModel.Activation
 
                             if (mismatchErrorMessage != null)
                             {
-                                throw FxTrace.Exception.AsError(
-                                    new NotSupportedException(
-                                        SR.Hosting_ExtendedProtectionPoliciesMustMatch(
-                                            mismatchErrorMessage
+                                throw FxTrace.Exception
+                                    .AsError(
+                                        new NotSupportedException(
+                                            SR.Hosting_ExtendedProtectionPoliciesMustMatch(
+                                                mismatchErrorMessage
+                                            )
                                         )
-                                    )
-                                );
+                                    );
                             }
                         }
 
@@ -365,13 +366,14 @@ namespace System.ServiceModel.Activation
                             )
                         )
                         {
-                            throw FxTrace.Exception.AsError(
-                                new NotSupportedException(
-                                    SR.Hosting_ExtendedProtectionPoliciesMustMatch(
-                                        SR.Hosting_ExtendedProtectionSPNListNotSubset
+                            throw FxTrace.Exception
+                                .AsError(
+                                    new NotSupportedException(
+                                        SR.Hosting_ExtendedProtectionPoliciesMustMatch(
+                                            SR.Hosting_ExtendedProtectionSPNListNotSubset
+                                        )
                                     )
-                                )
-                            );
+                                );
                         }
                     }
                 }
@@ -397,8 +399,8 @@ namespace System.ServiceModel.Activation
             }
 
             // Validate Ssl Settings
-            HttpAccessSslFlags sslFlags =
-                HostedTransportConfigurationManager.MetabaseSettings.GetAccessSslFlags(virtualPath);
+            HttpAccessSslFlags sslFlags = HostedTransportConfigurationManager.MetabaseSettings
+                .GetAccessSslFlags(virtualPath);
             HttpAccessSslFlags channelListenerSslFlags = HttpAccessSslFlags.None;
 
             // Validating SSL flags. SslRequireCert means "require client certificate" in IIS terminology.
@@ -422,14 +424,15 @@ namespace System.ServiceModel.Activation
                 // IIS ignores client cert but the binding requires it.
                 channelListenerSslFlags |= HttpAccessSslFlags.SslRequireCert;
 
-                throw FxTrace.Exception.AsError(
-                    new NotSupportedException(
-                        SR.Hosting_SslSettingsMisconfigured(
-                            channelListenerSslFlags.ToString(),
-                            sslFlags.ToString()
+                throw FxTrace.Exception
+                    .AsError(
+                        new NotSupportedException(
+                            SR.Hosting_SslSettingsMisconfigured(
+                                channelListenerSslFlags.ToString(),
+                                sslFlags.ToString()
+                            )
                         )
-                    )
-                );
+                    );
             }
 
             return (sslFlags & HttpAccessSslFlags.SslMapCert) != 0;
@@ -442,11 +445,12 @@ namespace System.ServiceModel.Activation
                 && !object.ReferenceEquals(uri.Scheme, Uri.UriSchemeHttps)
             )
             {
-                throw FxTrace.Exception.AsError(
-                    new InvalidOperationException(
-                        SR.Hosting_NonHTTPInCompatibilityMode(endpointName)
-                    )
-                );
+                throw FxTrace.Exception
+                    .AsError(
+                        new InvalidOperationException(
+                            SR.Hosting_NonHTTPInCompatibilityMode(endpointName)
+                        )
+                    );
             }
         }
 
@@ -463,18 +467,18 @@ namespace System.ServiceModel.Activation
                 && compatibilityMode == AspNetCompatibilityRequirementsMode.NotAllowed
             )
             {
-                throw FxTrace.Exception.AsError(
-                    new InvalidOperationException(SR.Hosting_ServiceCompatibilityNotAllowed)
-                );
+                throw FxTrace.Exception
+                    .AsError(
+                        new InvalidOperationException(SR.Hosting_ServiceCompatibilityNotAllowed)
+                    );
             }
             else if (
                 !ServiceHostingEnvironment.AspNetCompatibilityEnabled
                 && compatibilityMode == AspNetCompatibilityRequirementsMode.Required
             )
             {
-                throw FxTrace.Exception.AsError(
-                    new InvalidOperationException(SR.Hosting_ServiceCompatibilityRequire)
-                );
+                throw FxTrace.Exception
+                    .AsError(new InvalidOperationException(SR.Hosting_ServiceCompatibilityRequire));
             }
         }
 
@@ -524,13 +528,13 @@ namespace System.ServiceModel.Activation
             BindingContext context
         )
         {
-            VirtualPathExtension virtualPathExtension =
-                context.BindingParameters.Find<VirtualPathExtension>();
+            VirtualPathExtension virtualPathExtension = context.BindingParameters
+                .Find<VirtualPathExtension>();
 
             if (virtualPathExtension != null)
             {
-                HostedMetadataBindingParameter metadataBindingParameter =
-                    context.BindingParameters.Find<HostedMetadataBindingParameter>();
+                HostedMetadataBindingParameter metadataBindingParameter = context.BindingParameters
+                    .Find<HostedMetadataBindingParameter>();
                 listener.ApplyHostedContext(
                     virtualPathExtension.VirtualPath,
                     metadataBindingParameter != null
@@ -554,8 +558,8 @@ namespace System.ServiceModel.Activation
 
             if (virtualPathExtension != null)
             {
-                AuthenticationSchemes hostSupportedAuthenticationSchemes =
-                    AspNetEnvironment.Current.GetAuthenticationSchemes(listenUri);
+                AuthenticationSchemes hostSupportedAuthenticationSchemes = AspNetEnvironment.Current
+                    .GetAuthenticationSchemes(listenUri);
 
                 if (hostSupportedAuthenticationSchemes != AuthenticationSchemes.None)
                 {
@@ -663,9 +667,8 @@ namespace System.ServiceModel.Activation
                 );
             }
             AuthenticationSchemes supportedSchemes =
-                HostedTransportConfigurationManager.MetabaseSettings.GetAuthenticationSchemes(
-                    completePath
-                );
+                HostedTransportConfigurationManager.MetabaseSettings
+                    .GetAuthenticationSchemes(completePath);
 
             return supportedSchemes;
         }
@@ -747,9 +750,8 @@ namespace System.ServiceModel.Activation
 
         public override bool IsWithinApp(string absoluteVirtualPath)
         {
-            return HostedTransportConfigurationManager.MetabaseSettings.IsWithinApp(
-                absoluteVirtualPath
-            );
+            return HostedTransportConfigurationManager.MetabaseSettings
+                .IsWithinApp(absoluteVirtualPath);
         }
 
         // This class is intended to be empty.

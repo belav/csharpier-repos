@@ -56,8 +56,8 @@ public static class ScaffoldingModelExtensions
     ///     many-to-many relationship from both of its ends.
     /// </remarks>
     public static bool IsLeftNavigation(this ISkipNavigation skipNavigation) =>
-        skipNavigation
-            .JoinEntityType.FindPrimaryKey()!
+        skipNavigation.JoinEntityType
+            .FindPrimaryKey()!
             .Properties[0]
             .GetContainingForeignKeys()
             .Single()
@@ -81,12 +81,13 @@ public static class ScaffoldingModelExtensions
     /// <returns><see langword="true" /> if the key would be configured by conventions.</returns>
     public static bool IsHandledByConvention(this IKey key) =>
         key is IConventionKey conventionKey
-        && conventionKey.Properties.SequenceEqual(
-            KeyDiscoveryConvention.DiscoverKeyProperties(
-                conventionKey.DeclaringEntityType,
-                conventionKey.DeclaringEntityType.GetProperties()
-            )
-        );
+        && conventionKey.Properties
+            .SequenceEqual(
+                KeyDiscoveryConvention.DiscoverKeyProperties(
+                    conventionKey.DeclaringEntityType,
+                    conventionKey.DeclaringEntityType.GetProperties()
+                )
+            );
 
     /// <summary>
     ///     Gets value indicating whether this index can be entirely reperesented by a data annotation.
@@ -827,19 +828,21 @@ public static class ScaffoldingModelExtensions
 
             if (useStrings)
             {
-                hasPrincipalKey.Arguments = foreignKey
-                    .PrincipalKey.Properties.Select(p => p.Name)
+                hasPrincipalKey.Arguments = foreignKey.PrincipalKey
+                    .Properties
+                    .Select(p => p.Name)
                     .Cast<object?>()
                     .ToList();
             }
             else
             {
-                hasPrincipalKey.Arguments.Add(
-                    new PropertyAccessorCodeFragment(
-                        "p",
-                        foreignKey.PrincipalKey.Properties.Select(p => p.Name).ToList()
-                    )
-                );
+                hasPrincipalKey.Arguments
+                    .Add(
+                        new PropertyAccessorCodeFragment(
+                            "p",
+                            foreignKey.PrincipalKey.Properties.Select(p => p.Name).ToList()
+                        )
+                    );
             }
 
             root = root?.Chain(hasPrincipalKey) ?? hasPrincipalKey;
@@ -865,19 +868,20 @@ public static class ScaffoldingModelExtensions
 
         if (useStrings)
         {
-            hasForeignKey.Arguments = foreignKey
-                .Properties.Select(p => p.Name)
+            hasForeignKey.Arguments = foreignKey.Properties
+                .Select(p => p.Name)
                 .Cast<object?>()
                 .ToList();
         }
         else
         {
-            hasForeignKey.Arguments.Add(
-                new PropertyAccessorCodeFragment(
-                    "d",
-                    foreignKey.Properties.Select(p => p.Name).ToList()
-                )
-            );
+            hasForeignKey.Arguments
+                .Add(
+                    new PropertyAccessorCodeFragment(
+                        "d",
+                        foreignKey.Properties.Select(p => p.Name).ToList()
+                    )
+                );
         }
 
         root = root?.Chain(hasForeignKey) ?? hasForeignKey;

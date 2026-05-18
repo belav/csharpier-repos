@@ -129,11 +129,8 @@ namespace System.Runtime.Serialization
                         );
                         if (isDictionary)
                         {
-                            collectionDataContract.ItemContract.WriteXmlValue(
-                                xmlWriter,
-                                current,
-                                context
-                            );
+                            collectionDataContract.ItemContract
+                                .WriteXmlValue(xmlWriter, current, context);
                         }
                         else
                         {

@@ -24,8 +24,7 @@ namespace Microsoft.VSDesigner.WCFModel
         internal class DISCO
         {
             internal const string Prefix = "disco";
-            internal const string NamespaceUri = System
-                .Web
+            internal const string NamespaceUri = System.Web
                 .Services
                 .Discovery
                 .DiscoveryDocument
@@ -44,8 +43,7 @@ namespace Microsoft.VSDesigner.WCFModel
         internal class WSDL
         {
             internal const string Prefix = "wsdl";
-            internal const string NamespaceUri = System
-                .Web
+            internal const string NamespaceUri = System.Web
                 .Services
                 .Description
                 .ServiceDescription

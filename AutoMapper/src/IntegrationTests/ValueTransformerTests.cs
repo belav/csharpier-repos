@@ -303,7 +303,8 @@
                         p =>
                         {
                             p.CreateProjection<Source, Dest>()
-                                .ValueTransformers.Add<string>(dest => dest + ", for real,");
+                                .ValueTransformers
+                                .Add<string>(dest => dest + ", for real,");
                             p.ValueTransformers.Add<string>(dest => dest + " is straight up dope");
                         }
                     );
@@ -377,9 +378,8 @@
                 {
                     var dest = await ProjectTo<Dest>(context.Sources).SingleAsync();
 
-                    dest.Value.ShouldBe(
-                        "Jimmy, seriously, for real, is straight up dope! No joke!"
-                    );
+                    dest.Value
+                        .ShouldBe("Jimmy, seriously, for real, is straight up dope! No joke!");
                 }
             }
         }

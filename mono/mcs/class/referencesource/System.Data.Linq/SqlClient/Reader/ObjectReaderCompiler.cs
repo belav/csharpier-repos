@@ -225,11 +225,8 @@ namespace System.Data.Linq.SqlClient
                 AssemblyName assemblyName = new AssemblyName(
                     System.IO.Path.GetFileNameWithoutExtension(name)
                 );
-                captureAssembly = AppDomain.CurrentDomain.DefineDynamicAssembly(
-                    assemblyName,
-                    AssemblyBuilderAccess.Save,
-                    dir
-                );
+                captureAssembly = AppDomain.CurrentDomain
+                    .DefineDynamicAssembly(assemblyName, AssemblyBuilderAccess.Save, dir);
                 captureModule = captureAssembly.DefineDynamicModule(name);
                 captureAssemblyFilename = filename;
             }
@@ -297,15 +294,17 @@ namespace System.Data.Linq.SqlClient
                 BindingFlags.Instance | BindingFlags.Public
             );
 
-            System.Diagnostics.Debug.Assert(
-                this.miDRisDBNull != null
-                    && this.miBRisDBNull != null
-                    && this.readerField != null
-                    && this.bufferReaderField != null
-                    && this.ordinalsField != null
-                    && this.globalsField != null
-                    && this.argsField != null
-            );
+            System.Diagnostics
+                .Debug
+                .Assert(
+                    this.miDRisDBNull != null
+                        && this.miBRisDBNull != null
+                        && this.readerField != null
+                        && this.bufferReaderField != null
+                        && this.ordinalsField != null
+                        && this.globalsField != null
+                        && this.argsField != null
+                );
         }
 
         [ResourceExposure(ResourceScope.None)] // Consumed by Thread.AllocateDataSource result being unique.
@@ -457,9 +456,8 @@ namespace System.Data.Linq.SqlClient
             Type elementType
         )
         {
-            TypeBuilder tb = ObjectReaderCompiler.CaptureModule.DefineType(
-                "reader_type_" + ObjectReaderCompiler.GetNextId()
-            );
+            TypeBuilder tb = ObjectReaderCompiler.CaptureModule
+                .DefineType("reader_type_" + ObjectReaderCompiler.GetNextId());
             MethodBuilder mb = tb.DefineMethod(
                 "Read_" + elementType.Name,
                 MethodAttributes.Static | MethodAttributes.Public,
@@ -569,18 +567,19 @@ namespace System.Data.Linq.SqlClient
                 IObjectReaderFactory factory
             )
             {
-                this.list.AddFirst(
-                    new LinkedListNode<CacheInfo>(
-                        new CacheInfo(
-                            elementType,
-                            dataReaderType,
-                            mapping,
-                            options,
-                            projection,
-                            factory
+                this.list
+                    .AddFirst(
+                        new LinkedListNode<CacheInfo>(
+                            new CacheInfo(
+                                elementType,
+                                dataReaderType,
+                                mapping,
+                                options,
+                                projection,
+                                factory
+                            )
                         )
-                    )
-                );
+                    );
                 if (this.list.Count > this.maxCacheSize)
                 {
                     this.list.RemoveLast();
@@ -1398,9 +1397,8 @@ namespace System.Data.Linq.SqlClient
 
                 // read/write key bindings if there are any
                 foreach (
-                    SqlMemberAssign ma in sn.Members.OrderBy(m =>
-                        sn.MetaType.GetDataMember(m.Member).Ordinal
-                    )
+                    SqlMemberAssign ma in sn.Members
+                        .OrderBy(m => sn.MetaType.GetDataMember(m.Member).Ordinal)
                 )
                 {
                     MetaDataMember mm = sn.MetaType.GetDataMember(ma.Member);
@@ -1462,9 +1460,8 @@ namespace System.Data.Linq.SqlClient
 
                 // read/write non-key bindings
                 foreach (
-                    SqlMemberAssign ma in sn.Members.OrderBy(m =>
-                        sn.MetaType.GetDataMember(m.Member).Ordinal
-                    )
+                    SqlMemberAssign ma in sn.Members
+                        .OrderBy(m => sn.MetaType.GetDataMember(m.Member).Ordinal)
                 )
                 {
                     MetaDataMember mm = sn.MetaType.GetDataMember(ma.Member);
@@ -1672,10 +1669,12 @@ namespace System.Data.Linq.SqlClient
             {
                 MemberInfo m = mm.StorageMember != null ? mm.StorageMember : mm.Member;
                 Type memberType = TypeSystem.GetMemberType(m);
-                System.Diagnostics.Debug.Assert(
-                    memberType.IsGenericType
-                        && memberType.GetGenericTypeDefinition() == typeof(EntitySet<>)
-                );
+                System.Diagnostics
+                    .Debug
+                    .Assert(
+                        memberType.IsGenericType
+                            && memberType.GetGenericTypeDefinition() == typeof(EntitySet<>)
+                    );
                 Label labExit = gen.DefineLabel();
                 Type argType = typeof(IEnumerable<>).MakeGenericType(
                     memberType.GetGenericArguments()
@@ -1755,10 +1754,12 @@ namespace System.Data.Linq.SqlClient
             {
                 MemberInfo m = mm.StorageMember != null ? mm.StorageMember : mm.Member;
                 Type memberType = TypeSystem.GetMemberType(m);
-                System.Diagnostics.Debug.Assert(
-                    memberType.IsGenericType
-                        && memberType.GetGenericTypeDefinition() == typeof(EntitySet<>)
-                );
+                System.Diagnostics
+                    .Debug
+                    .Assert(
+                        memberType.IsGenericType
+                            && memberType.GetGenericTypeDefinition() == typeof(EntitySet<>)
+                    );
                 Label labExit = gen.DefineLabel();
                 Type argType = typeof(IEnumerable<>).MakeGenericType(
                     memberType.GetGenericArguments()
@@ -1833,13 +1834,15 @@ namespace System.Data.Linq.SqlClient
             {
                 MemberInfo m = mm.StorageMember != null ? mm.StorageMember : mm.Member;
                 Type memberType = TypeSystem.GetMemberType(m);
-                System.Diagnostics.Debug.Assert(
-                    memberType.IsGenericType
-                        && (
-                            memberType.GetGenericTypeDefinition() == typeof(EntityRef<>)
-                            || memberType.GetGenericTypeDefinition() == typeof(Link<>)
-                        )
-                );
+                System.Diagnostics
+                    .Debug
+                    .Assert(
+                        memberType.IsGenericType
+                            && (
+                                memberType.GetGenericTypeDefinition() == typeof(EntityRef<>)
+                                || memberType.GetGenericTypeDefinition() == typeof(Link<>)
+                            )
+                    );
                 Label labExit = gen.DefineLabel();
                 Type argType = typeof(IEnumerable<>).MakeGenericType(
                     memberType.GetGenericArguments()
@@ -3051,12 +3054,13 @@ namespace System.Data.Linq.SqlClient
                 int iGlobal = this.globals.Count;
                 if (type.IsValueType)
                 {
-                    this.globals.Add(
-                        Activator.CreateInstance(
-                            typeof(StrongBox<>).MakeGenericType(type),
-                            new object[] { value }
-                        )
-                    );
+                    this.globals
+                        .Add(
+                            Activator.CreateInstance(
+                                typeof(StrongBox<>).MakeGenericType(type),
+                                new object[] { value }
+                            )
+                        );
                 }
                 else
                 {

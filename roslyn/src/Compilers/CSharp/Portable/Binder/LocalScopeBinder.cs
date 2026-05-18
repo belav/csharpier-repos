@@ -208,20 +208,22 @@ namespace Microsoft.CodeAnalysis.CSharp
                             enclosingBinder.GetBinder(innerStatement) ?? enclosingBinder;
                         var decl = (LocalDeclarationStatementSyntax)innerStatement;
 
-                        decl.Declaration.Type.VisitRankSpecifiers(
-                            (rankSpecifier, args) =>
-                            {
-                                foreach (var expression in rankSpecifier.Sizes)
+                        decl.Declaration
+                            .Type
+                            .VisitRankSpecifiers(
+                                (rankSpecifier, args) =>
                                 {
-                                    findExpressionVariablesInRankSpecifier(expression, args);
-                                }
-                            },
-                            (
-                                localScopeBinder: this,
-                                locals: locals,
-                                localDeclarationBinder: localDeclarationBinder
-                            )
-                        );
+                                    foreach (var expression in rankSpecifier.Sizes)
+                                    {
+                                        findExpressionVariablesInRankSpecifier(expression, args);
+                                    }
+                                },
+                                (
+                                    localScopeBinder: this,
+                                    locals: locals,
+                                    localDeclarationBinder: localDeclarationBinder
+                                )
+                            );
 
                         LocalDeclarationKind kind;
                         if (decl.IsConst)
@@ -267,20 +269,24 @@ namespace Microsoft.CodeAnalysis.CSharp
 
                         foreach (var parameter in decl.ParameterList.Parameters)
                         {
-                            parameter.Type?.VisitRankSpecifiers(
-                                (rankSpecifier, args) =>
-                                {
-                                    foreach (var expression in rankSpecifier.Sizes)
+                            parameter.Type
+                                ?.VisitRankSpecifiers(
+                                    (rankSpecifier, args) =>
                                     {
-                                        findExpressionVariablesInRankSpecifier(expression, args);
-                                    }
-                                },
-                                (
-                                    localScopeBinder: this,
-                                    locals: locals,
-                                    localDeclarationBinder: localFunctionDeclarationBinder
-                                )
-                            );
+                                        foreach (var expression in rankSpecifier.Sizes)
+                                        {
+                                            findExpressionVariablesInRankSpecifier(
+                                                expression,
+                                                args
+                                            );
+                                        }
+                                    },
+                                    (
+                                        localScopeBinder: this,
+                                        locals: locals,
+                                        localDeclarationBinder: localFunctionDeclarationBinder
+                                    )
+                                );
                         }
 
                         foreach (var constraintClause in decl.ConstraintClauses)
@@ -289,23 +295,24 @@ namespace Microsoft.CodeAnalysis.CSharp
                             {
                                 if (constraint is TypeConstraintSyntax typeConstraint)
                                 {
-                                    typeConstraint.Type.VisitRankSpecifiers(
-                                        (rankSpecifier, args) =>
-                                        {
-                                            foreach (var expression in rankSpecifier.Sizes)
+                                    typeConstraint.Type
+                                        .VisitRankSpecifiers(
+                                            (rankSpecifier, args) =>
                                             {
-                                                findExpressionVariablesInRankSpecifier(
-                                                    expression,
-                                                    args
-                                                );
-                                            }
-                                        },
-                                        (
-                                            localScopeBinder: this,
-                                            locals: locals,
-                                            localDeclarationBinder: localFunctionDeclarationBinder
-                                        )
-                                    );
+                                                foreach (var expression in rankSpecifier.Sizes)
+                                                {
+                                                    findExpressionVariablesInRankSpecifier(
+                                                        expression,
+                                                        args
+                                                    );
+                                                }
+                                            },
+                                            (
+                                                localScopeBinder: this,
+                                                locals: locals,
+                                                localDeclarationBinder: localFunctionDeclarationBinder
+                                            )
+                                        );
                                 }
                             }
                         }

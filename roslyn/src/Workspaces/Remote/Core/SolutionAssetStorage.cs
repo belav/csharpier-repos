@@ -137,9 +137,10 @@ internal partial class SolutionAssetStorage
             CancellationToken cancellationToken
         )
         {
-            return await _solutionAssetStorage
-                ._checksumToScope.Single()
-                .Value.GetTestAccessor()
+            return await _solutionAssetStorage._checksumToScope
+                .Single()
+                .Value
+                .GetTestAccessor()
                 .GetAssetAsync(checksum, cancellationToken)
                 .ConfigureAwait(false);
         }

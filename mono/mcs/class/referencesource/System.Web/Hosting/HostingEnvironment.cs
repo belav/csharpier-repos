@@ -1235,8 +1235,8 @@ namespace System.Web.Hosting
         private static string GetFixedMappingSlotName(VirtualPath virtualPath)
         {
             return "MapPath_"
-                + virtualPath
-                    .VirtualPathString.ToLowerInvariant()
+                + virtualPath.VirtualPathString
+                    .ToLowerInvariant()
                     .GetHashCode()
                     .ToString(CultureInfo.InvariantCulture);
         }

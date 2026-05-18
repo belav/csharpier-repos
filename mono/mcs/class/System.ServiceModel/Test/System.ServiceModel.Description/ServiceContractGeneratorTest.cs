@@ -70,9 +70,8 @@ namespace MonoTests.System.ServiceModel.Description
             g.GenerateServiceContractType(ContractDescription.GetContract(typeof(ITestService)));
             var cns = g.TargetCompileUnit.Namespaces[0];
             Assert.AreEqual(3, cns.Types.Count, "#1");
-            var iface = cns.Types.FirstOrDefault<CodeTypeDeclaration>(t =>
-                t.Name == "ITestService"
-            );
+            var iface = cns.Types
+                .FirstOrDefault<CodeTypeDeclaration>(t => t.Name == "ITestService");
             Assert.AreEqual(2, iface.Members.Count, "#2-0");
             Assert.IsNotNull(
                 iface.Members.FirstOrDefault<CodeTypeMember>(m => m.Name == "DoWork"),
@@ -82,9 +81,8 @@ namespace MonoTests.System.ServiceModel.Description
                 iface.Members.FirstOrDefault<CodeTypeMember>(m => m.Name == "DoWork2"),
                 "#2-2"
             );
-            var proxy = cns.Types.FirstOrDefault<CodeTypeDeclaration>(t =>
-                t.Name == "TestServiceClient"
-            );
+            var proxy = cns.Types
+                .FirstOrDefault<CodeTypeDeclaration>(t => t.Name == "TestServiceClient");
             Assert.AreEqual(7, proxy.Members.Count, "#3-0");
             Assert.AreEqual(
                 5,
@@ -109,9 +107,8 @@ namespace MonoTests.System.ServiceModel.Description
             g.GenerateServiceContractType(ContractDescription.GetContract(typeof(ITestService)));
             var cns = g.TargetCompileUnit.Namespaces[0];
             Assert.AreEqual(3, cns.Types.Count, "#1");
-            var iface = cns.Types.FirstOrDefault<CodeTypeDeclaration>(t =>
-                t.Name == "ITestService"
-            );
+            var iface = cns.Types
+                .FirstOrDefault<CodeTypeDeclaration>(t => t.Name == "ITestService");
             Assert.AreEqual(6, iface.Members.Count, "#2-0");
             Assert.IsNotNull(
                 iface.Members.FirstOrDefault<CodeTypeMember>(m => m.Name == "DoWork"),
@@ -137,9 +134,8 @@ namespace MonoTests.System.ServiceModel.Description
                 iface.Members.FirstOrDefault<CodeTypeMember>(m => m.Name == "EndDoWork2"),
                 "#2-6"
             );
-            var proxy = cns.Types.FirstOrDefault<CodeTypeDeclaration>(t =>
-                t.Name == "TestServiceClient"
-            );
+            var proxy = cns.Types
+                .FirstOrDefault<CodeTypeDeclaration>(t => t.Name == "TestServiceClient");
             Assert.AreEqual(11, proxy.Members.Count, "#3-0");
             Assert.AreEqual(
                 5,

@@ -110,9 +110,10 @@ namespace System.Activities.Core.Presentation
                 this.CaptureMouse();
                 if (this.scope != null)
                 {
-                    this.ParentStateContainerEditor.StoreShapeSizeWithUndoRecursively(
-                        this.ParentStateContainerEditor.ModelItem
-                    );
+                    this.ParentStateContainerEditor
+                        .StoreShapeSizeWithUndoRecursively(
+                            this.ParentStateContainerEditor.ModelItem
+                        );
                 }
                 // Select the designer when it is being resized
                 WorkflowViewElement designer =
@@ -172,8 +173,10 @@ namespace System.Activities.Core.Presentation
             if (e != null && !this.Disabled && this.scope != null)
             {
                 ModelItem stateContainerModelItem = this.ParentStateContainerEditor.ModelItem;
-                ViewStateService viewStateService =
-                    this.ParentStateContainerEditor.Context.Services.GetService<ViewStateService>();
+                ViewStateService viewStateService = this.ParentStateContainerEditor
+                    .Context
+                    .Services
+                    .GetService<ViewStateService>();
                 viewStateService.StoreViewStateWithUndo(
                     stateContainerModelItem,
                     StateContainerEditor.StateContainerWidthViewStateKey,

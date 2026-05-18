@@ -34,14 +34,14 @@ public class CosmosDbContextOptionsExtensionsTests
 
         using (var serviceScope = services.GetRequiredService<IServiceScopeFactory>().CreateScope())
         {
-            var coreOptions = serviceScope
-                .ServiceProvider.GetRequiredService<DbContextOptions<ApplicationDbContext>>()
+            var coreOptions = serviceScope.ServiceProvider
+                .GetRequiredService<DbContextOptions<ApplicationDbContext>>()
                 .GetExtension<CoreOptionsExtension>();
 
             Assert.True(coreOptions.DetailedErrorsEnabled);
 
-            var cosmosOptions = serviceScope
-                .ServiceProvider.GetRequiredService<DbContextOptions<ApplicationDbContext>>()
+            var cosmosOptions = serviceScope.ServiceProvider
+                .GetRequiredService<DbContextOptions<ApplicationDbContext>>()
                 .GetExtension<CosmosOptionsExtension>();
 
             Assert.Equal(new TimeSpan(0, 5, 50), cosmosOptions.IdleTcpConnectionTimeout);
@@ -139,7 +139,8 @@ public class CosmosDbContextOptionsExtensionsTests
                 "databaseName",
                 cosmosOptionsAction
             )
-            .Options.FindExtension<CosmosOptionsExtension>();
+            .Options
+            .FindExtension<CosmosOptionsExtension>();
 
         Assert.Equal(
             extension.Info.GetServiceProviderHashCode(),

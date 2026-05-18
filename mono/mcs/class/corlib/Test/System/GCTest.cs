@@ -120,15 +120,16 @@ namespace MonoTests.System
                     Run_ReRegisterForFinalizeTest();
                 }
             );
-            var t = Task.Factory.StartNew(() =>
-            {
-                do
+            var t = Task.Factory
+                .StartNew(() =>
                 {
-                    GC.Collect();
-                    GC.WaitForPendingFinalizers();
-                    Task.Yield();
-                } while (MyFinalizeObject.finalized != 2);
-            });
+                    do
+                    {
+                        GC.Collect();
+                        GC.WaitForPendingFinalizers();
+                        Task.Yield();
+                    } while (MyFinalizeObject.finalized != 2);
+                });
 
             Assert.IsTrue(t.Wait(5000));
         }
@@ -164,8 +165,7 @@ namespace MonoTests.System
 
             for (int i = 0; i < 10000000; i++)
             {
-                expectedSize += objectAllocators[r.Next(0, objectAllocators.Length)]
-                    ()
+                expectedSize += objectAllocators[r.Next(0, objectAllocators.Length)]()
                     .ExpectedSize();
             }
 

@@ -209,24 +209,26 @@ namespace Internal.Runtime.TypeLoader
             {
                 TypeDesc[] typeArguments = GetTypeSequence(ref parser);
                 Debug.Assert(typeArguments.Length > 0);
-                retVal = this._typeSystemContext.ResolveGenericMethodInstantiation(
-                    unboxingStub,
-                    containingType,
-                    nameAndSignature,
-                    new Instantiation(typeArguments),
-                    functionPointer,
-                    (flags & MethodFlags.FunctionPointerIsUSG) != 0
-                );
+                retVal = this._typeSystemContext
+                    .ResolveGenericMethodInstantiation(
+                        unboxingStub,
+                        containingType,
+                        nameAndSignature,
+                        new Instantiation(typeArguments),
+                        functionPointer,
+                        (flags & MethodFlags.FunctionPointerIsUSG) != 0
+                    );
             }
             else
             {
-                retVal = this._typeSystemContext.ResolveRuntimeMethod(
-                    unboxingStub,
-                    containingType,
-                    nameAndSignature,
-                    functionPointer,
-                    (flags & MethodFlags.FunctionPointerIsUSG) != 0
-                );
+                retVal = this._typeSystemContext
+                    .ResolveRuntimeMethod(
+                        unboxingStub,
+                        containingType,
+                        nameAndSignature,
+                        functionPointer,
+                        (flags & MethodFlags.FunctionPointerIsUSG) != 0
+                    );
             }
 
             if ((flags & MethodFlags.FunctionPointerIsUSG) != 0)

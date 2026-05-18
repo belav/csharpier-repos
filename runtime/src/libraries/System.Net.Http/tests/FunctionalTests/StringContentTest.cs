@@ -43,11 +43,8 @@ namespace System.Net.Http.Functional.Tests
             var destination = new MemoryStream(12);
             await content.CopyToAsync(destination);
 
-            string destinationString = Encoding.UTF8.GetString(
-                destination.ToArray(),
-                0,
-                (int)destination.Length
-            );
+            string destinationString = Encoding.UTF8
+                .GetString(destination.ToArray(), 0, (int)destination.Length);
 
             Assert.Equal(sourceString, destinationString);
         }
@@ -119,11 +116,8 @@ namespace System.Net.Http.Functional.Tests
             var destination = new MemoryStream(12);
             await content.CopyToAsync(destination);
 
-            string destinationString = Encoding.UTF8.GetString(
-                destination.ToArray(),
-                0,
-                (int)destination.Length
-            );
+            string destinationString = Encoding.UTF8
+                .GetString(destination.ToArray(), 0, (int)destination.Length);
 
             Assert.Equal(sourceString, destinationString);
         }
@@ -147,11 +141,8 @@ namespace System.Net.Http.Functional.Tests
             var destination = new MemoryStream(12);
             await content.CopyToAsync(destination);
 
-            string destinationString = Encoding.UTF8.GetString(
-                destination.ToArray(),
-                0,
-                (int)destination.Length
-            );
+            string destinationString = Encoding.UTF8
+                .GetString(destination.ToArray(), 0, (int)destination.Length);
 
             Assert.Equal(sourceString, destinationString);
         }
@@ -171,11 +162,8 @@ namespace System.Net.Http.Functional.Tests
             var destination = new MemoryStream(12);
             await content.CopyToAsync(destination);
 
-            string destinationString = Encoding.UTF8.GetString(
-                destination.ToArray(),
-                0,
-                (int)destination.Length
-            );
+            string destinationString = Encoding.UTF8
+                .GetString(destination.ToArray(), 0, (int)destination.Length);
 
             Assert.Equal(sourceString, destinationString);
         }

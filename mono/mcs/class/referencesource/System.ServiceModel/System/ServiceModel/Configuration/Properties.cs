@@ -107,10 +107,8 @@ namespace System.ServiceModel.Activation.Configuration
                             new System.ServiceModel.Configuration.TimeSpanOrInfiniteConverter(),
                             new System.ServiceModel.Configuration.TimeSpanOrInfiniteValidator(
                                 System.TimeSpan.Parse("00:00:00", CultureInfo.InvariantCulture),
-                                System.TimeSpan.Parse(
-                                    "24.20:31:23.6470000",
-                                    CultureInfo.InvariantCulture
-                                )
+                                System.TimeSpan
+                                    .Parse("24.20:31:23.6470000", CultureInfo.InvariantCulture)
                             ),
                             System.Configuration.ConfigurationPropertyOptions.None
                         )
@@ -187,10 +185,8 @@ namespace System.ServiceModel.Activation.Configuration
                             new System.ServiceModel.Configuration.TimeSpanOrInfiniteConverter(),
                             new System.ServiceModel.Configuration.TimeSpanOrInfiniteValidator(
                                 System.TimeSpan.Parse("00:00:00", CultureInfo.InvariantCulture),
-                                System.TimeSpan.Parse(
-                                    "24.20:31:23.6470000",
-                                    CultureInfo.InvariantCulture
-                                )
+                                System.TimeSpan
+                                    .Parse("24.20:31:23.6470000", CultureInfo.InvariantCulture)
                             ),
                             System.Configuration.ConfigurationPropertyOptions.None
                         )
@@ -1153,8 +1149,7 @@ namespace System.ServiceModel.Configuration
                         new ConfigurationProperty(
                             "storeLocation",
                             typeof(System.Security.Cryptography.X509Certificates.StoreLocation),
-                            System
-                                .Security
+                            System.Security
                                 .Cryptography
                                 .X509Certificates
                                 .StoreLocation
@@ -1170,8 +1165,7 @@ namespace System.ServiceModel.Configuration
                         new ConfigurationProperty(
                             "x509FindType",
                             typeof(System.Security.Cryptography.X509Certificates.X509FindType),
-                            System
-                                .Security
+                            System.Security
                                 .Cryptography
                                 .X509Certificates
                                 .X509FindType
@@ -1359,10 +1353,8 @@ namespace System.ServiceModel.Configuration
                             new System.ServiceModel.Configuration.TimeSpanOrInfiniteConverter(),
                             new System.ServiceModel.Configuration.TimeSpanOrInfiniteValidator(
                                 System.TimeSpan.Parse("00:00:00", CultureInfo.InvariantCulture),
-                                System.TimeSpan.Parse(
-                                    "24.20:31:23.6470000",
-                                    CultureInfo.InvariantCulture
-                                )
+                                System.TimeSpan
+                                    .Parse("24.20:31:23.6470000", CultureInfo.InvariantCulture)
                             ),
                             System.Configuration.ConfigurationPropertyOptions.None
                         )
@@ -1375,10 +1367,8 @@ namespace System.ServiceModel.Configuration
                             new System.ServiceModel.Configuration.TimeSpanOrInfiniteConverter(),
                             new System.ServiceModel.Configuration.TimeSpanOrInfiniteValidator(
                                 System.TimeSpan.Parse("00:00:00", CultureInfo.InvariantCulture),
-                                System.TimeSpan.Parse(
-                                    "24.20:31:23.6470000",
-                                    CultureInfo.InvariantCulture
-                                )
+                                System.TimeSpan
+                                    .Parse("24.20:31:23.6470000", CultureInfo.InvariantCulture)
                             ),
                             System.Configuration.ConfigurationPropertyOptions.None
                         )
@@ -1582,10 +1572,8 @@ namespace System.ServiceModel.Configuration
                             new System.ServiceModel.Configuration.TimeSpanOrInfiniteConverter(),
                             new System.ServiceModel.Configuration.TimeSpanOrInfiniteValidator(
                                 System.TimeSpan.Parse("00:00:00", CultureInfo.InvariantCulture),
-                                System.TimeSpan.Parse(
-                                    "24.20:31:23.6470000",
-                                    CultureInfo.InvariantCulture
-                                )
+                                System.TimeSpan
+                                    .Parse("24.20:31:23.6470000", CultureInfo.InvariantCulture)
                             ),
                             System.Configuration.ConfigurationPropertyOptions.None
                         )
@@ -1834,14 +1822,10 @@ namespace System.ServiceModel.Configuration
                             System.TimeSpan.Parse("00:00:30", CultureInfo.InvariantCulture),
                             new System.ServiceModel.Configuration.TimeSpanOrInfiniteConverter(),
                             new System.ServiceModel.Configuration.TimeSpanOrInfiniteValidator(
-                                System.TimeSpan.Parse(
-                                    "00:00:00.0000001",
-                                    CultureInfo.InvariantCulture
-                                ),
-                                System.TimeSpan.Parse(
-                                    "24.20:31:23.6470000",
-                                    CultureInfo.InvariantCulture
-                                )
+                                System.TimeSpan
+                                    .Parse("00:00:00.0000001", CultureInfo.InvariantCulture),
+                                System.TimeSpan
+                                    .Parse("24.20:31:23.6470000", CultureInfo.InvariantCulture)
                             ),
                             System.Configuration.ConfigurationPropertyOptions.None
                         )
@@ -1874,10 +1858,8 @@ namespace System.ServiceModel.Configuration
                             new System.ServiceModel.Configuration.TimeSpanOrInfiniteConverter(),
                             new System.ServiceModel.Configuration.TimeSpanOrInfiniteValidator(
                                 System.TimeSpan.Parse("00:00:00", CultureInfo.InvariantCulture),
-                                System.TimeSpan.Parse(
-                                    "24.20:31:23.6470000",
-                                    CultureInfo.InvariantCulture
-                                )
+                                System.TimeSpan
+                                    .Parse("24.20:31:23.6470000", CultureInfo.InvariantCulture)
                             ),
                             System.Configuration.ConfigurationPropertyOptions.None
                         )
@@ -1935,10 +1917,8 @@ namespace System.ServiceModel.Configuration
                             new System.ServiceModel.Configuration.TimeSpanOrInfiniteConverter(),
                             new System.ServiceModel.Configuration.TimeSpanOrInfiniteValidator(
                                 System.TimeSpan.Parse("00:00:00", CultureInfo.InvariantCulture),
-                                System.TimeSpan.Parse(
-                                    "24.20:31:23.6470000",
-                                    CultureInfo.InvariantCulture
-                                )
+                                System.TimeSpan
+                                    .Parse("24.20:31:23.6470000", CultureInfo.InvariantCulture)
                             ),
                             System.Configuration.ConfigurationPropertyOptions.None
                         )
@@ -1951,10 +1931,8 @@ namespace System.ServiceModel.Configuration
                             new System.ServiceModel.Configuration.TimeSpanOrInfiniteConverter(),
                             new System.ServiceModel.Configuration.TimeSpanOrInfiniteValidator(
                                 System.TimeSpan.Parse("00:00:00", CultureInfo.InvariantCulture),
-                                System.TimeSpan.Parse(
-                                    "24.20:31:23.6470000",
-                                    CultureInfo.InvariantCulture
-                                )
+                                System.TimeSpan
+                                    .Parse("24.20:31:23.6470000", CultureInfo.InvariantCulture)
                             ),
                             System.Configuration.ConfigurationPropertyOptions.None
                         )
@@ -1967,10 +1945,8 @@ namespace System.ServiceModel.Configuration
                             new System.ServiceModel.Configuration.TimeSpanOrInfiniteConverter(),
                             new System.ServiceModel.Configuration.TimeSpanOrInfiniteValidator(
                                 System.TimeSpan.Parse("00:00:00", CultureInfo.InvariantCulture),
-                                System.TimeSpan.Parse(
-                                    "24.20:31:23.6470000",
-                                    CultureInfo.InvariantCulture
-                                )
+                                System.TimeSpan
+                                    .Parse("24.20:31:23.6470000", CultureInfo.InvariantCulture)
                             ),
                             System.Configuration.ConfigurationPropertyOptions.None
                         )
@@ -1983,10 +1959,8 @@ namespace System.ServiceModel.Configuration
                             new System.ServiceModel.Configuration.TimeSpanOrInfiniteConverter(),
                             new System.ServiceModel.Configuration.TimeSpanOrInfiniteValidator(
                                 System.TimeSpan.Parse("00:00:00", CultureInfo.InvariantCulture),
-                                System.TimeSpan.Parse(
-                                    "24.20:31:23.6470000",
-                                    CultureInfo.InvariantCulture
-                                )
+                                System.TimeSpan
+                                    .Parse("24.20:31:23.6470000", CultureInfo.InvariantCulture)
                             ),
                             System.Configuration.ConfigurationPropertyOptions.None
                         )
@@ -2569,10 +2543,8 @@ namespace System.ServiceModel.Configuration
                             new System.ServiceModel.Configuration.TimeSpanOrInfiniteConverter(),
                             new System.ServiceModel.Configuration.TimeSpanOrInfiniteValidator(
                                 System.TimeSpan.Parse("00:00:00", CultureInfo.InvariantCulture),
-                                System.TimeSpan.Parse(
-                                    "24.20:31:23.6470000",
-                                    CultureInfo.InvariantCulture
-                                )
+                                System.TimeSpan
+                                    .Parse("24.20:31:23.6470000", CultureInfo.InvariantCulture)
                             ),
                             System.Configuration.ConfigurationPropertyOptions.None
                         )
@@ -2585,10 +2557,8 @@ namespace System.ServiceModel.Configuration
                             new System.ServiceModel.Configuration.TimeSpanOrInfiniteConverter(),
                             new System.ServiceModel.Configuration.TimeSpanOrInfiniteValidator(
                                 System.TimeSpan.Parse("00:00:00", CultureInfo.InvariantCulture),
-                                System.TimeSpan.Parse(
-                                    "24.20:31:23.6470000",
-                                    CultureInfo.InvariantCulture
-                                )
+                                System.TimeSpan
+                                    .Parse("24.20:31:23.6470000", CultureInfo.InvariantCulture)
                             ),
                             System.Configuration.ConfigurationPropertyOptions.None
                         )
@@ -2884,10 +2854,8 @@ namespace System.ServiceModel.Configuration
                             new System.ServiceModel.Configuration.TimeSpanOrInfiniteConverter(),
                             new System.ServiceModel.Configuration.TimeSpanOrInfiniteValidator(
                                 System.TimeSpan.Parse("00:00:00", CultureInfo.InvariantCulture),
-                                System.TimeSpan.Parse(
-                                    "24.20:31:23.6470000",
-                                    CultureInfo.InvariantCulture
-                                )
+                                System.TimeSpan
+                                    .Parse("24.20:31:23.6470000", CultureInfo.InvariantCulture)
                             ),
                             System.Configuration.ConfigurationPropertyOptions.None
                         )
@@ -3278,17 +3246,13 @@ namespace System.ServiceModel.Configuration
                         new ConfigurationProperty(
                             "maxIssuedTokenCachingTime",
                             typeof(System.TimeSpan),
-                            System.TimeSpan.Parse(
-                                "10675199.02:48:05.4775807",
-                                CultureInfo.InvariantCulture
-                            ),
+                            System.TimeSpan
+                                .Parse("10675199.02:48:05.4775807", CultureInfo.InvariantCulture),
                             new System.ServiceModel.Configuration.TimeSpanOrInfiniteConverter(),
                             new System.ServiceModel.Configuration.TimeSpanOrInfiniteValidator(
                                 System.TimeSpan.Parse("00:00:00", CultureInfo.InvariantCulture),
-                                System.TimeSpan.Parse(
-                                    "24.20:31:23.6470000",
-                                    CultureInfo.InvariantCulture
-                                )
+                                System.TimeSpan
+                                    .Parse("24.20:31:23.6470000", CultureInfo.InvariantCulture)
                             ),
                             System.Configuration.ConfigurationPropertyOptions.None
                         )
@@ -3399,8 +3363,7 @@ namespace System.ServiceModel.Configuration
                         new ConfigurationProperty(
                             "trustedStoreLocation",
                             typeof(System.Security.Cryptography.X509Certificates.StoreLocation),
-                            System
-                                .Security
+                            System.Security
                                 .Cryptography
                                 .X509Certificates
                                 .StoreLocation
@@ -3708,10 +3671,8 @@ namespace System.ServiceModel.Configuration
                             new System.ServiceModel.Configuration.TimeSpanOrInfiniteConverter(),
                             new System.ServiceModel.Configuration.TimeSpanOrInfiniteValidator(
                                 System.TimeSpan.Parse("00:00:00", CultureInfo.InvariantCulture),
-                                System.TimeSpan.Parse(
-                                    "24.20:31:23.6470000",
-                                    CultureInfo.InvariantCulture
-                                )
+                                System.TimeSpan
+                                    .Parse("24.20:31:23.6470000", CultureInfo.InvariantCulture)
                             ),
                             System.Configuration.ConfigurationPropertyOptions.None
                         )
@@ -3720,17 +3681,13 @@ namespace System.ServiceModel.Configuration
                         new ConfigurationProperty(
                             "maxCookieCachingTime",
                             typeof(System.TimeSpan),
-                            System.TimeSpan.Parse(
-                                "10675199.02:48:05.4775807",
-                                CultureInfo.InvariantCulture
-                            ),
+                            System.TimeSpan
+                                .Parse("10675199.02:48:05.4775807", CultureInfo.InvariantCulture),
                             new System.ServiceModel.Configuration.TimeSpanOrInfiniteConverter(),
                             new System.ServiceModel.Configuration.TimeSpanOrInfiniteValidator(
                                 System.TimeSpan.Parse("00:00:00", CultureInfo.InvariantCulture),
-                                System.TimeSpan.Parse(
-                                    "24.20:31:23.6470000",
-                                    CultureInfo.InvariantCulture
-                                )
+                                System.TimeSpan
+                                    .Parse("24.20:31:23.6470000", CultureInfo.InvariantCulture)
                             ),
                             System.Configuration.ConfigurationPropertyOptions.None
                         )
@@ -3743,10 +3700,8 @@ namespace System.ServiceModel.Configuration
                             new System.ServiceModel.Configuration.TimeSpanOrInfiniteConverter(),
                             new System.ServiceModel.Configuration.TimeSpanOrInfiniteValidator(
                                 System.TimeSpan.Parse("00:00:00", CultureInfo.InvariantCulture),
-                                System.TimeSpan.Parse(
-                                    "24.20:31:23.6470000",
-                                    CultureInfo.InvariantCulture
-                                )
+                                System.TimeSpan
+                                    .Parse("24.20:31:23.6470000", CultureInfo.InvariantCulture)
                             ),
                             System.Configuration.ConfigurationPropertyOptions.None
                         )
@@ -3759,10 +3714,8 @@ namespace System.ServiceModel.Configuration
                             new System.ServiceModel.Configuration.TimeSpanOrInfiniteConverter(),
                             new System.ServiceModel.Configuration.TimeSpanOrInfiniteValidator(
                                 System.TimeSpan.Parse("00:00:00", CultureInfo.InvariantCulture),
-                                System.TimeSpan.Parse(
-                                    "24.20:31:23.6470000",
-                                    CultureInfo.InvariantCulture
-                                )
+                                System.TimeSpan
+                                    .Parse("24.20:31:23.6470000", CultureInfo.InvariantCulture)
                             ),
                             System.Configuration.ConfigurationPropertyOptions.None
                         )
@@ -3775,10 +3728,8 @@ namespace System.ServiceModel.Configuration
                             new System.ServiceModel.Configuration.TimeSpanOrInfiniteConverter(),
                             new System.ServiceModel.Configuration.TimeSpanOrInfiniteValidator(
                                 System.TimeSpan.Parse("00:00:00", CultureInfo.InvariantCulture),
-                                System.TimeSpan.Parse(
-                                    "24.20:31:23.6470000",
-                                    CultureInfo.InvariantCulture
-                                )
+                                System.TimeSpan
+                                    .Parse("24.20:31:23.6470000", CultureInfo.InvariantCulture)
                             ),
                             System.Configuration.ConfigurationPropertyOptions.None
                         )
@@ -3801,10 +3752,8 @@ namespace System.ServiceModel.Configuration
                             new System.ServiceModel.Configuration.TimeSpanOrInfiniteConverter(),
                             new System.ServiceModel.Configuration.TimeSpanOrInfiniteValidator(
                                 System.TimeSpan.Parse("00:00:00", CultureInfo.InvariantCulture),
-                                System.TimeSpan.Parse(
-                                    "24.20:31:23.6470000",
-                                    CultureInfo.InvariantCulture
-                                )
+                                System.TimeSpan
+                                    .Parse("24.20:31:23.6470000", CultureInfo.InvariantCulture)
                             ),
                             System.Configuration.ConfigurationPropertyOptions.None
                         )
@@ -3861,10 +3810,8 @@ namespace System.ServiceModel.Configuration
                             new System.ServiceModel.Configuration.TimeSpanOrInfiniteConverter(),
                             new System.ServiceModel.Configuration.TimeSpanOrInfiniteValidator(
                                 System.TimeSpan.Parse("00:00:00", CultureInfo.InvariantCulture),
-                                System.TimeSpan.Parse(
-                                    "24.20:31:23.6470000",
-                                    CultureInfo.InvariantCulture
-                                )
+                                System.TimeSpan
+                                    .Parse("24.20:31:23.6470000", CultureInfo.InvariantCulture)
                             ),
                             System.Configuration.ConfigurationPropertyOptions.None
                         )
@@ -3897,10 +3844,8 @@ namespace System.ServiceModel.Configuration
                             new System.ServiceModel.Configuration.TimeSpanOrInfiniteConverter(),
                             new System.ServiceModel.Configuration.TimeSpanOrInfiniteValidator(
                                 System.TimeSpan.Parse("00:00:00", CultureInfo.InvariantCulture),
-                                System.TimeSpan.Parse(
-                                    "24.20:31:23.6470000",
-                                    CultureInfo.InvariantCulture
-                                )
+                                System.TimeSpan
+                                    .Parse("24.20:31:23.6470000", CultureInfo.InvariantCulture)
                             ),
                             System.Configuration.ConfigurationPropertyOptions.None
                         )
@@ -3913,10 +3858,8 @@ namespace System.ServiceModel.Configuration
                             new System.ServiceModel.Configuration.TimeSpanOrInfiniteConverter(),
                             new System.ServiceModel.Configuration.TimeSpanOrInfiniteValidator(
                                 System.TimeSpan.Parse("00:00:00", CultureInfo.InvariantCulture),
-                                System.TimeSpan.Parse(
-                                    "24.20:31:23.6470000",
-                                    CultureInfo.InvariantCulture
-                                )
+                                System.TimeSpan
+                                    .Parse("24.20:31:23.6470000", CultureInfo.InvariantCulture)
                             ),
                             System.Configuration.ConfigurationPropertyOptions.None
                         )
@@ -3929,10 +3872,8 @@ namespace System.ServiceModel.Configuration
                             new System.ServiceModel.Configuration.TimeSpanOrInfiniteConverter(),
                             new System.ServiceModel.Configuration.TimeSpanOrInfiniteValidator(
                                 System.TimeSpan.Parse("00:00:00", CultureInfo.InvariantCulture),
-                                System.TimeSpan.Parse(
-                                    "24.20:31:23.6470000",
-                                    CultureInfo.InvariantCulture
-                                )
+                                System.TimeSpan
+                                    .Parse("24.20:31:23.6470000", CultureInfo.InvariantCulture)
                             ),
                             System.Configuration.ConfigurationPropertyOptions.None
                         )
@@ -3945,10 +3886,8 @@ namespace System.ServiceModel.Configuration
                             new System.ServiceModel.Configuration.TimeSpanOrInfiniteConverter(),
                             new System.ServiceModel.Configuration.TimeSpanOrInfiniteValidator(
                                 System.TimeSpan.Parse("00:00:00", CultureInfo.InvariantCulture),
-                                System.TimeSpan.Parse(
-                                    "24.20:31:23.6470000",
-                                    CultureInfo.InvariantCulture
-                                )
+                                System.TimeSpan
+                                    .Parse("24.20:31:23.6470000", CultureInfo.InvariantCulture)
                             ),
                             System.Configuration.ConfigurationPropertyOptions.None
                         )
@@ -3961,10 +3900,8 @@ namespace System.ServiceModel.Configuration
                             new System.ServiceModel.Configuration.TimeSpanOrInfiniteConverter(),
                             new System.ServiceModel.Configuration.TimeSpanOrInfiniteValidator(
                                 System.TimeSpan.Parse("00:00:00", CultureInfo.InvariantCulture),
-                                System.TimeSpan.Parse(
-                                    "24.20:31:23.6470000",
-                                    CultureInfo.InvariantCulture
-                                )
+                                System.TimeSpan
+                                    .Parse("24.20:31:23.6470000", CultureInfo.InvariantCulture)
                             ),
                             System.Configuration.ConfigurationPropertyOptions.None
                         )
@@ -3977,10 +3914,8 @@ namespace System.ServiceModel.Configuration
                             new System.ServiceModel.Configuration.TimeSpanOrInfiniteConverter(),
                             new System.ServiceModel.Configuration.TimeSpanOrInfiniteValidator(
                                 System.TimeSpan.Parse("00:00:00", CultureInfo.InvariantCulture),
-                                System.TimeSpan.Parse(
-                                    "24.20:31:23.6470000",
-                                    CultureInfo.InvariantCulture
-                                )
+                                System.TimeSpan
+                                    .Parse("24.20:31:23.6470000", CultureInfo.InvariantCulture)
                             ),
                             System.Configuration.ConfigurationPropertyOptions.None
                         )
@@ -4023,10 +3958,8 @@ namespace System.ServiceModel.Configuration
                             new System.ServiceModel.Configuration.TimeSpanOrInfiniteConverter(),
                             new System.ServiceModel.Configuration.TimeSpanOrInfiniteValidator(
                                 System.TimeSpan.Parse("00:00:00", CultureInfo.InvariantCulture),
-                                System.TimeSpan.Parse(
-                                    "24.20:31:23.6470000",
-                                    CultureInfo.InvariantCulture
-                                )
+                                System.TimeSpan
+                                    .Parse("24.20:31:23.6470000", CultureInfo.InvariantCulture)
                             ),
                             System.Configuration.ConfigurationPropertyOptions.None
                         )
@@ -4452,10 +4385,8 @@ namespace System.ServiceModel.Configuration
                             new System.ServiceModel.Configuration.TimeSpanOrInfiniteConverter(),
                             new System.ServiceModel.Configuration.TimeSpanOrInfiniteValidator(
                                 System.TimeSpan.Parse("00:00:00", CultureInfo.InvariantCulture),
-                                System.TimeSpan.Parse(
-                                    "24.20:31:23.6470000",
-                                    CultureInfo.InvariantCulture
-                                )
+                                System.TimeSpan
+                                    .Parse("24.20:31:23.6470000", CultureInfo.InvariantCulture)
                             ),
                             System.Configuration.ConfigurationPropertyOptions.None
                         )
@@ -4468,10 +4399,8 @@ namespace System.ServiceModel.Configuration
                             new System.ServiceModel.Configuration.TimeSpanOrInfiniteConverter(),
                             new System.ServiceModel.Configuration.TimeSpanOrInfiniteValidator(
                                 System.TimeSpan.Parse("00:00:00", CultureInfo.InvariantCulture),
-                                System.TimeSpan.Parse(
-                                    "24.20:31:23.6470000",
-                                    CultureInfo.InvariantCulture
-                                )
+                                System.TimeSpan
+                                    .Parse("24.20:31:23.6470000", CultureInfo.InvariantCulture)
                             ),
                             System.Configuration.ConfigurationPropertyOptions.None
                         )
@@ -4504,10 +4433,8 @@ namespace System.ServiceModel.Configuration
                             new System.ServiceModel.Configuration.TimeSpanOrInfiniteConverter(),
                             new System.ServiceModel.Configuration.TimeSpanOrInfiniteValidator(
                                 System.TimeSpan.Parse("00:00:00", CultureInfo.InvariantCulture),
-                                System.TimeSpan.Parse(
-                                    "24.20:31:23.6470000",
-                                    CultureInfo.InvariantCulture
-                                )
+                                System.TimeSpan
+                                    .Parse("24.20:31:23.6470000", CultureInfo.InvariantCulture)
                             ),
                             System.Configuration.ConfigurationPropertyOptions.None
                         )
@@ -4620,8 +4547,7 @@ namespace System.ServiceModel.Configuration
                         new ConfigurationProperty(
                             "mode",
                             typeof(System.ServiceModel.MsmqIntegration.MsmqIntegrationSecurityMode),
-                            System
-                                .ServiceModel
+                            System.ServiceModel
                                 .MsmqIntegration
                                 .MsmqIntegrationSecurityMode
                                 .Transport,
@@ -4757,10 +4683,8 @@ namespace System.ServiceModel.Configuration
                             new System.ServiceModel.Configuration.TimeSpanOrInfiniteConverter(),
                             new System.ServiceModel.Configuration.TimeSpanOrInfiniteValidator(
                                 System.TimeSpan.Parse("00:00:00", CultureInfo.InvariantCulture),
-                                System.TimeSpan.Parse(
-                                    "24.20:31:23.6470000",
-                                    CultureInfo.InvariantCulture
-                                )
+                                System.TimeSpan
+                                    .Parse("24.20:31:23.6470000", CultureInfo.InvariantCulture)
                             ),
                             System.Configuration.ConfigurationPropertyOptions.None
                         )
@@ -4783,10 +4707,8 @@ namespace System.ServiceModel.Configuration
                             new System.ServiceModel.Configuration.TimeSpanOrInfiniteConverter(),
                             new System.ServiceModel.Configuration.TimeSpanOrInfiniteValidator(
                                 System.TimeSpan.Parse("00:00:00", CultureInfo.InvariantCulture),
-                                System.TimeSpan.Parse(
-                                    "24.20:31:23.6470000",
-                                    CultureInfo.InvariantCulture
-                                )
+                                System.TimeSpan
+                                    .Parse("24.20:31:23.6470000", CultureInfo.InvariantCulture)
                             ),
                             System.Configuration.ConfigurationPropertyOptions.None
                         )
@@ -4819,10 +4741,8 @@ namespace System.ServiceModel.Configuration
                             new System.ServiceModel.Configuration.TimeSpanOrInfiniteConverter(),
                             new System.ServiceModel.Configuration.TimeSpanOrInfiniteValidator(
                                 System.TimeSpan.Parse("00:00:00", CultureInfo.InvariantCulture),
-                                System.TimeSpan.Parse(
-                                    "24.20:31:23.6470000",
-                                    CultureInfo.InvariantCulture
-                                )
+                                System.TimeSpan
+                                    .Parse("24.20:31:23.6470000", CultureInfo.InvariantCulture)
                             ),
                             System.Configuration.ConfigurationPropertyOptions.None
                         )
@@ -5080,10 +5000,8 @@ namespace System.ServiceModel.Configuration
                             new System.ServiceModel.Configuration.TimeSpanOrInfiniteConverter(),
                             new System.ServiceModel.Configuration.TimeSpanOrInfiniteValidator(
                                 System.TimeSpan.Parse("00:00:00", CultureInfo.InvariantCulture),
-                                System.TimeSpan.Parse(
-                                    "24.20:31:23.6470000",
-                                    CultureInfo.InvariantCulture
-                                )
+                                System.TimeSpan
+                                    .Parse("24.20:31:23.6470000", CultureInfo.InvariantCulture)
                             ),
                             System.Configuration.ConfigurationPropertyOptions.None
                         )
@@ -5474,14 +5392,10 @@ namespace System.ServiceModel.Configuration
                             System.TimeSpan.Parse("00:00:00", CultureInfo.InvariantCulture),
                             new System.ServiceModel.Configuration.TimeSpanOrInfiniteConverter(),
                             new System.ServiceModel.Configuration.TimeSpanOrInfiniteValidator(
-                                System.TimeSpan.Parse(
-                                    "-00:00:00.0010000",
-                                    CultureInfo.InvariantCulture
-                                ),
-                                System.TimeSpan.Parse(
-                                    "24.20:31:23.6470000",
-                                    CultureInfo.InvariantCulture
-                                )
+                                System.TimeSpan
+                                    .Parse("-00:00:00.0010000", CultureInfo.InvariantCulture),
+                                System.TimeSpan
+                                    .Parse("24.20:31:23.6470000", CultureInfo.InvariantCulture)
                             ),
                             System.Configuration.ConfigurationPropertyOptions.None
                         )
@@ -6636,10 +6550,8 @@ namespace System.ServiceModel.Configuration
                             new System.ServiceModel.Configuration.TimeSpanOrInfiniteConverter(),
                             new System.ServiceModel.Configuration.TimeSpanOrInfiniteValidator(
                                 System.TimeSpan.Parse("00:00:00", CultureInfo.InvariantCulture),
-                                System.TimeSpan.Parse(
-                                    "24.20:31:23.6470000",
-                                    CultureInfo.InvariantCulture
-                                )
+                                System.TimeSpan
+                                    .Parse("24.20:31:23.6470000", CultureInfo.InvariantCulture)
                             ),
                             System.Configuration.ConfigurationPropertyOptions.None
                         )
@@ -6652,10 +6564,8 @@ namespace System.ServiceModel.Configuration
                             new System.ServiceModel.Configuration.TimeSpanOrInfiniteConverter(),
                             new System.ServiceModel.Configuration.TimeSpanOrInfiniteValidator(
                                 System.TimeSpan.Parse("00:00:00", CultureInfo.InvariantCulture),
-                                System.TimeSpan.Parse(
-                                    "24.20:31:23.6470000",
-                                    CultureInfo.InvariantCulture
-                                )
+                                System.TimeSpan
+                                    .Parse("24.20:31:23.6470000", CultureInfo.InvariantCulture)
                             ),
                             System.Configuration.ConfigurationPropertyOptions.None
                         )
@@ -6668,10 +6578,8 @@ namespace System.ServiceModel.Configuration
                             new System.ServiceModel.Configuration.TimeSpanOrInfiniteConverter(),
                             new System.ServiceModel.Configuration.TimeSpanOrInfiniteValidator(
                                 System.TimeSpan.Parse("00:00:00", CultureInfo.InvariantCulture),
-                                System.TimeSpan.Parse(
-                                    "24.20:31:23.6470000",
-                                    CultureInfo.InvariantCulture
-                                )
+                                System.TimeSpan
+                                    .Parse("24.20:31:23.6470000", CultureInfo.InvariantCulture)
                             ),
                             System.Configuration.ConfigurationPropertyOptions.None
                         )
@@ -6684,10 +6592,8 @@ namespace System.ServiceModel.Configuration
                             new System.ServiceModel.Configuration.TimeSpanOrInfiniteConverter(),
                             new System.ServiceModel.Configuration.TimeSpanOrInfiniteValidator(
                                 System.TimeSpan.Parse("00:00:00", CultureInfo.InvariantCulture),
-                                System.TimeSpan.Parse(
-                                    "24.20:31:23.6470000",
-                                    CultureInfo.InvariantCulture
-                                )
+                                System.TimeSpan
+                                    .Parse("24.20:31:23.6470000", CultureInfo.InvariantCulture)
                             ),
                             System.Configuration.ConfigurationPropertyOptions.None
                         )
@@ -7072,14 +6978,10 @@ namespace System.ServiceModel.Configuration
                             System.TimeSpan.Parse("00:10:00", CultureInfo.InvariantCulture),
                             new System.ServiceModel.Configuration.TimeSpanOrInfiniteConverter(),
                             new System.ServiceModel.Configuration.TimeSpanOrInfiniteValidator(
-                                System.TimeSpan.Parse(
-                                    "00:00:00.0000001",
-                                    CultureInfo.InvariantCulture
-                                ),
-                                System.TimeSpan.Parse(
-                                    "24.20:31:23.6470000",
-                                    CultureInfo.InvariantCulture
-                                )
+                                System.TimeSpan
+                                    .Parse("00:00:00.0000001", CultureInfo.InvariantCulture),
+                                System.TimeSpan
+                                    .Parse("24.20:31:23.6470000", CultureInfo.InvariantCulture)
                             ),
                             System.Configuration.ConfigurationPropertyOptions.None
                         )
@@ -7149,14 +7051,10 @@ namespace System.ServiceModel.Configuration
                             System.TimeSpan.Parse("00:00:00.2", CultureInfo.InvariantCulture),
                             new System.ServiceModel.Configuration.TimeSpanOrInfiniteConverter(),
                             new System.ServiceModel.Configuration.TimeSpanOrInfiniteValidator(
-                                System.TimeSpan.Parse(
-                                    "00:00:00.0000001",
-                                    CultureInfo.InvariantCulture
-                                ),
-                                System.TimeSpan.Parse(
-                                    "24.20:31:23.6470000",
-                                    CultureInfo.InvariantCulture
-                                )
+                                System.TimeSpan
+                                    .Parse("00:00:00.0000001", CultureInfo.InvariantCulture),
+                                System.TimeSpan
+                                    .Parse("24.20:31:23.6470000", CultureInfo.InvariantCulture)
                             ),
                             System.Configuration.ConfigurationPropertyOptions.None
                         )
@@ -7178,14 +7076,10 @@ namespace System.ServiceModel.Configuration
                             System.TimeSpan.Parse("00:10:00", CultureInfo.InvariantCulture),
                             new System.ServiceModel.Configuration.TimeSpanOrInfiniteConverter(),
                             new System.ServiceModel.Configuration.TimeSpanOrInfiniteValidator(
-                                System.TimeSpan.Parse(
-                                    "00:00:00.0000001",
-                                    CultureInfo.InvariantCulture
-                                ),
-                                System.TimeSpan.Parse(
-                                    "24.20:31:23.6470000",
-                                    CultureInfo.InvariantCulture
-                                )
+                                System.TimeSpan
+                                    .Parse("00:00:00.0000001", CultureInfo.InvariantCulture),
+                                System.TimeSpan
+                                    .Parse("24.20:31:23.6470000", CultureInfo.InvariantCulture)
                             ),
                             System.Configuration.ConfigurationPropertyOptions.None
                         )
@@ -7428,8 +7322,7 @@ namespace System.ServiceModel.Configuration
                         new ConfigurationProperty(
                             "messageProtectionOrder",
                             typeof(System.ServiceModel.Security.MessageProtectionOrder),
-                            System
-                                .ServiceModel
+                            System.ServiceModel
                                 .Security
                                 .MessageProtectionOrder
                                 .SignBeforeEncryptAndEncryptSignature,
@@ -7606,8 +7499,7 @@ namespace System.ServiceModel.Configuration
                         new ConfigurationProperty(
                             "principalPermissionMode",
                             typeof(System.ServiceModel.Description.PrincipalPermissionMode),
-                            System
-                                .ServiceModel
+                            System.ServiceModel
                                 .Description
                                 .PrincipalPermissionMode
                                 .UseWindowsGroups,
@@ -9114,14 +9006,10 @@ namespace System.ServiceModel.Configuration
                             System.TimeSpan.Parse("00:15:00", CultureInfo.InvariantCulture),
                             new System.ServiceModel.Configuration.TimeSpanOrInfiniteConverter(),
                             new System.ServiceModel.Configuration.TimeSpanOrInfiniteValidator(
-                                System.TimeSpan.Parse(
-                                    "00:00:00.0000001",
-                                    CultureInfo.InvariantCulture
-                                ),
-                                System.TimeSpan.Parse(
-                                    "24.20:31:23.6470000",
-                                    CultureInfo.InvariantCulture
-                                )
+                                System.TimeSpan
+                                    .Parse("00:00:00.0000001", CultureInfo.InvariantCulture),
+                                System.TimeSpan
+                                    .Parse("24.20:31:23.6470000", CultureInfo.InvariantCulture)
                             ),
                             System.Configuration.ConfigurationPropertyOptions.None
                         )
@@ -9771,8 +9659,7 @@ namespace System.ServiceModel.Configuration
                         new ConfigurationProperty(
                             "storeLocation",
                             typeof(System.Security.Cryptography.X509Certificates.StoreLocation),
-                            System
-                                .Security
+                            System.Security
                                 .Cryptography
                                 .X509Certificates
                                 .StoreLocation
@@ -9800,8 +9687,7 @@ namespace System.ServiceModel.Configuration
                         new ConfigurationProperty(
                             "x509FindType",
                             typeof(System.Security.Cryptography.X509Certificates.X509FindType),
-                            System
-                                .Security
+                            System.Security
                                 .Cryptography
                                 .X509Certificates
                                 .X509FindType
@@ -9875,8 +9761,7 @@ namespace System.ServiceModel.Configuration
                         new ConfigurationProperty(
                             "trustedStoreLocation",
                             typeof(System.Security.Cryptography.X509Certificates.StoreLocation),
-                            System
-                                .Security
+                            System.Security
                                 .Cryptography
                                 .X509Certificates
                                 .StoreLocation
@@ -9946,8 +9831,7 @@ namespace System.ServiceModel.Configuration
                         new ConfigurationProperty(
                             "storeLocation",
                             typeof(System.Security.Cryptography.X509Certificates.StoreLocation),
-                            System
-                                .Security
+                            System.Security
                                 .Cryptography
                                 .X509Certificates
                                 .StoreLocation
@@ -9975,8 +9859,7 @@ namespace System.ServiceModel.Configuration
                         new ConfigurationProperty(
                             "x509FindType",
                             typeof(System.Security.Cryptography.X509Certificates.X509FindType),
-                            System
-                                .Security
+                            System.Security
                                 .Cryptography
                                 .X509Certificates
                                 .X509FindType
@@ -10050,8 +9933,7 @@ namespace System.ServiceModel.Configuration
                         new ConfigurationProperty(
                             "x509FindType",
                             typeof(System.Security.Cryptography.X509Certificates.X509FindType),
-                            System
-                                .Security
+                            System.Security
                                 .Cryptography
                                 .X509Certificates
                                 .X509FindType
@@ -10125,8 +10007,7 @@ namespace System.ServiceModel.Configuration
                         new ConfigurationProperty(
                             "x509FindType",
                             typeof(System.Security.Cryptography.X509Certificates.X509FindType),
-                            System
-                                .Security
+                            System.Security
                                 .Cryptography
                                 .X509Certificates
                                 .X509FindType
@@ -10284,8 +10165,7 @@ namespace System.ServiceModel.Configuration
                         new ConfigurationProperty(
                             "storeLocation",
                             typeof(System.Security.Cryptography.X509Certificates.StoreLocation),
-                            System
-                                .Security
+                            System.Security
                                 .Cryptography
                                 .X509Certificates
                                 .StoreLocation
@@ -10313,8 +10193,7 @@ namespace System.ServiceModel.Configuration
                         new ConfigurationProperty(
                             "x509FindType",
                             typeof(System.Security.Cryptography.X509Certificates.X509FindType),
-                            System
-                                .Security
+                            System.Security
                                 .Cryptography
                                 .X509Certificates
                                 .X509FindType
@@ -10399,8 +10278,7 @@ namespace System.ServiceModel.Configuration
                         new ConfigurationProperty(
                             "x509FindType",
                             typeof(System.Security.Cryptography.X509Certificates.X509FindType),
-                            System
-                                .Security
+                            System.Security
                                 .Cryptography
                                 .X509Certificates
                                 .X509FindType
@@ -10961,8 +10839,7 @@ namespace System.ServiceModel.Configuration
                         new ConfigurationProperty(
                             "x509FindType",
                             typeof(System.Security.Cryptography.X509Certificates.X509FindType),
-                            System
-                                .Security
+                            System.Security
                                 .Cryptography
                                 .X509Certificates
                                 .X509FindType
@@ -11012,8 +10889,7 @@ namespace System.ServiceModel.Configuration
                         new ConfigurationProperty(
                             "certificateValidationMode",
                             typeof(System.ServiceModel.Security.X509CertificateValidationMode),
-                            System
-                                .ServiceModel
+                            System.ServiceModel
                                 .Security
                                 .X509CertificateValidationMode
                                 .PeerOrChainTrust,
@@ -11194,10 +11070,8 @@ namespace System.ServiceModel.Configuration
                             new System.ServiceModel.Configuration.TimeSpanOrInfiniteConverter(),
                             new System.ServiceModel.Configuration.TimeSpanOrInfiniteValidator(
                                 System.TimeSpan.Parse("00:00:00", CultureInfo.InvariantCulture),
-                                System.TimeSpan.Parse(
-                                    "24.20:31:23.6470000",
-                                    CultureInfo.InvariantCulture
-                                )
+                                System.TimeSpan
+                                    .Parse("24.20:31:23.6470000", CultureInfo.InvariantCulture)
                             ),
                             System.Configuration.ConfigurationPropertyOptions.None
                         )
@@ -11244,10 +11118,8 @@ namespace System.ServiceModel.Configuration
                             new System.ServiceModel.Configuration.TimeSpanOrInfiniteConverter(),
                             new System.ServiceModel.Configuration.TimeSpanOrInfiniteValidator(
                                 System.TimeSpan.Parse("00:00:00", CultureInfo.InvariantCulture),
-                                System.TimeSpan.Parse(
-                                    "24.20:31:23.6470000",
-                                    CultureInfo.InvariantCulture
-                                )
+                                System.TimeSpan
+                                    .Parse("24.20:31:23.6470000", CultureInfo.InvariantCulture)
                             ),
                             System.Configuration.ConfigurationPropertyOptions.None
                         )
@@ -11260,10 +11132,8 @@ namespace System.ServiceModel.Configuration
                             new System.ServiceModel.Configuration.TimeSpanOrInfiniteConverter(),
                             new System.ServiceModel.Configuration.TimeSpanOrInfiniteValidator(
                                 System.TimeSpan.Parse("00:00:00", CultureInfo.InvariantCulture),
-                                System.TimeSpan.Parse(
-                                    "24.20:31:23.6470000",
-                                    CultureInfo.InvariantCulture
-                                )
+                                System.TimeSpan
+                                    .Parse("24.20:31:23.6470000", CultureInfo.InvariantCulture)
                             ),
                             System.Configuration.ConfigurationPropertyOptions.None
                         )

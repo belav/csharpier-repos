@@ -120,17 +120,19 @@ namespace TaskCoverage
             int? taskId12 = 0;
             int? taskId22 = 0;
 
-            Task t1 = Task.Factory.StartNew(() =>
-            {
-                mre.WaitOne();
-                taskId1 = Task.CurrentId;
-            });
-            Task t2 = Task.Factory.StartNew(() =>
-            {
-                mre.WaitOne();
-                taskId2 = Task.CurrentId;
-                cts.Cancel();
-            });
+            Task t1 = Task.Factory
+                .StartNew(() =>
+                {
+                    mre.WaitOne();
+                    taskId1 = Task.CurrentId;
+                });
+            Task t2 = Task.Factory
+                .StartNew(() =>
+                {
+                    mre.WaitOne();
+                    taskId2 = Task.CurrentId;
+                    cts.Cancel();
+                });
 
             List<Task<int?>> whenAllTaskResult = new List<Task<int?>>();
             List<Task> whenAllTask = new List<Task>();
@@ -158,24 +160,26 @@ namespace TaskCoverage
             );
 
             whenAllTaskResult.Add(
-                Task<int?>.Factory.StartNew(
-                    (o) =>
-                    {
-                        mre.WaitOne((int)o);
-                        return Task.CurrentId;
-                    },
-                    10
-                )
+                Task<int?>.Factory
+                    .StartNew(
+                        (o) =>
+                        {
+                            mre.WaitOne((int)o);
+                            return Task.CurrentId;
+                        },
+                        10
+                    )
             );
             whenAllTaskResult.Add(
-                Task<int?>.Factory.StartNew(
-                    (o) =>
-                    {
-                        mre.WaitOne((int)o);
-                        return Task.CurrentId;
-                    },
-                    10
-                )
+                Task<int?>.Factory
+                    .StartNew(
+                        (o) =>
+                        {
+                            mre.WaitOne((int)o);
+                            return Task.CurrentId;
+                        },
+                        10
+                    )
             );
 
             t1.Wait(5, cts.Token);
@@ -216,36 +220,41 @@ namespace TaskCoverage
 
             CancellationTokenSource cts = new CancellationTokenSource();
 
-            Task t1 = Task.Factory.StartNew(() =>
-            {
-                mre.WaitOne();
-            });
-            Task t2 = Task.Factory.StartNew(() =>
-            {
-                mre.WaitOne();
-            });
+            Task t1 = Task.Factory
+                .StartNew(() =>
+                {
+                    mre.WaitOne();
+                });
+            Task t2 = Task.Factory
+                .StartNew(() =>
+                {
+                    mre.WaitOne();
+                });
 
-            Task<int?> t11 = Task.Factory.StartNew(() =>
-            {
-                mre2.WaitOne();
-                return Task.CurrentId;
-            });
-            Task<int?> t21 = Task.Factory.StartNew(() =>
-            {
-                mre2.WaitOne();
-                return Task.CurrentId;
-            });
+            Task<int?> t11 = Task.Factory
+                .StartNew(() =>
+                {
+                    mre2.WaitOne();
+                    return Task.CurrentId;
+                });
+            Task<int?> t21 = Task.Factory
+                .StartNew(() =>
+                {
+                    mre2.WaitOne();
+                    return Task.CurrentId;
+                });
 
             //waitAny with token and timeout
             Task[] waitAny = new Task[] { t1, t2 };
             int timeout = Task.WaitAny(waitAny, 1, cts.Token);
 
             //task whenany
-            Task.Factory.StartNew(() =>
-            {
-                Task.Delay(20);
-                mre.Set();
-            });
+            Task.Factory
+                .StartNew(() =>
+                {
+                    Task.Delay(20);
+                    mre.Set();
+                });
             List<Task> whenAnyTask = new List<Task>();
             whenAnyTask.Add(t1);
             whenAnyTask.Add(t2);
@@ -452,14 +461,15 @@ namespace TaskCoverage
             ManualResetEvent mre2 = new ManualResetEvent(false);
 
             CancellationTokenSource cts = new CancellationTokenSource();
-            cts.Token.Register(
-                (o) =>
-                {
-                    mre.Set();
-                },
-                1,
-                true
-            );
+            cts.Token
+                .Register(
+                    (o) =>
+                    {
+                        mre.Set();
+                    },
+                    1,
+                    true
+                );
 
             cts.CancelAfter(5);
             Debug.WriteLine("Wait on the scenario to finish");
@@ -481,15 +491,17 @@ namespace TaskCoverage
             ManualResetEvent mre2 = new ManualResetEvent(false);
             ManualResetEvent mre3 = new ManualResetEvent(false);
 
-            Task t1 = Task.Factory.StartNew(() =>
-            {
-                mre.WaitOne();
-            });
-            Task<int> t11 = Task.Factory.StartNew(() =>
-            {
-                mre.WaitOne();
-                return 1;
-            });
+            Task t1 = Task.Factory
+                .StartNew(() =>
+                {
+                    mre.WaitOne();
+                });
+            Task<int> t11 = Task.Factory
+                .StartNew(() =>
+                {
+                    mre.WaitOne();
+                    return 1;
+                });
             t1.GetAwaiter()
                 .UnsafeOnCompleted(() =>
                 {
@@ -517,15 +529,17 @@ namespace TaskCoverage
             ManualResetEvent mre2 = new ManualResetEvent(false);
             ManualResetEvent mre3 = new ManualResetEvent(false);
 
-            Task t1 = Task.Factory.StartNew(() =>
-            {
-                mre.WaitOne();
-            });
-            Task<int> t11 = Task.Factory.StartNew(() =>
-            {
-                mre.WaitOne();
-                return 1;
-            });
+            Task t1 = Task.Factory
+                .StartNew(() =>
+                {
+                    mre.WaitOne();
+                });
+            Task<int> t11 = Task.Factory
+                .StartNew(() =>
+                {
+                    mre.WaitOne();
+                    return 1;
+                });
             t1.ConfigureAwait(false)
                 .GetAwaiter()
                 .UnsafeOnCompleted(() =>
@@ -555,25 +569,27 @@ namespace TaskCoverage
             ManualResetEvent mre1 = new ManualResetEvent(false);
             ManualResetEvent mre2 = new ManualResetEvent(false);
 
-            Task.Factory.FromAsync(
-                emptyTask,
-                (iar) =>
-                {
-                    mre1.Set();
-                },
-                TaskCreationOptions.None,
-                TaskScheduler.Current
-            );
-            Task<int>.Factory.FromAsync(
-                emptyTask,
-                (iar) =>
-                {
-                    mre2.Set();
-                    return 1;
-                },
-                TaskCreationOptions.None,
-                TaskScheduler.Current
-            );
+            Task.Factory
+                .FromAsync(
+                    emptyTask,
+                    (iar) =>
+                    {
+                        mre1.Set();
+                    },
+                    TaskCreationOptions.None,
+                    TaskScheduler.Current
+                );
+            Task<int>.Factory
+                .FromAsync(
+                    emptyTask,
+                    (iar) =>
+                    {
+                        mre2.Set();
+                        return 1;
+                    },
+                    TaskCreationOptions.None,
+                    TaskScheduler.Current
+                );
             emptyTask.Start();
 
             Debug.WriteLine("Wait on the scenario to finish");

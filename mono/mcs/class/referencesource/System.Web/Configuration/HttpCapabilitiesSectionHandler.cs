@@ -102,9 +102,8 @@ namespace System.Web.Configuration
 
             if (sublist.Count > 0)
             {
-                parseState.RuleList.Add(
-                    new CapabilitiesSection(CapabilitiesRule.Filter, null, null, sublist)
-                );
+                parseState.RuleList
+                    .Add(new CapabilitiesSection(CapabilitiesRule.Filter, null, null, sublist));
             }
 
             if (parseState.FileList.Count > 0)
@@ -455,9 +454,8 @@ namespace System.Web.Configuration
 
                 if (sublist.Count > 0)
                 {
-                    parseState.RuleList.Add(
-                        new CapabilitiesSection(CapabilitiesRule.Filter, null, null, sublist)
-                    );
+                    parseState.RuleList
+                        .Add(new CapabilitiesSection(CapabilitiesRule.Filter, null, null, sublist));
                 }
             }
         }
@@ -498,11 +496,10 @@ namespace System.Web.Configuration
 
                 if ((match = wsRegex.Match(text, textpos)).Success)
                 {
-                    lineNumber += System.Web.UI.Util.LineCount(
-                        text,
-                        textpos,
-                        match.Index + match.Length
-                    );
+                    lineNumber += System.Web
+                        .UI
+                        .Util
+                        .LineCount(text, textpos, match.Index + match.Length);
                     textpos = match.Index + match.Length;
                 }
 
@@ -518,11 +515,10 @@ namespace System.Web.Configuration
                         )
                     );
 
-                    lineNumber += System.Web.UI.Util.LineCount(
-                        text,
-                        textpos,
-                        match.Index + match.Length
-                    );
+                    lineNumber += System.Web
+                        .UI
+                        .Util
+                        .LineCount(text, textpos, match.Index + match.Length);
                     textpos = match.Index + match.Length;
                 }
                 else

@@ -390,11 +390,12 @@ namespace System.Web.UI.MobileControls
             try
             {
                 return (IndividualDeviceConfig.DeviceQualifiesDelegate)
-                    IndividualDeviceConfig.DeviceQualifiesDelegate.CreateDelegate(
-                        typeof(IndividualDeviceConfig.DeviceQualifiesDelegate),
-                        PredicateClass,
-                        PredicateMethod
-                    );
+                    IndividualDeviceConfig.DeviceQualifiesDelegate
+                        .CreateDelegate(
+                            typeof(IndividualDeviceConfig.DeviceQualifiesDelegate),
+                            PredicateClass,
+                            PredicateMethod
+                        );
             }
             catch
             {

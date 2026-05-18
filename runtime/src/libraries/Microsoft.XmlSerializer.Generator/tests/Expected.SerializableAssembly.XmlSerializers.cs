@@ -2878,9 +2878,11 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                                     WriteElementStringRaw(
                                         @"int",
                                         @"",
-                                        System.Xml.XmlConvert.ToString(
-                                            (global::System.Int32)((global::System.Int32)a[ia])
-                                        )
+                                        System.Xml
+                                            .XmlConvert
+                                            .ToString(
+                                                (global::System.Int32)((global::System.Int32)a[ia])
+                                            )
                                     );
                                 }
                             }
@@ -2932,9 +2934,13 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                                     WriteElementStringRaw(
                                         @"double",
                                         @"",
-                                        System.Xml.XmlConvert.ToString(
-                                            (global::System.Double)((global::System.Double)a[ia])
-                                        )
+                                        System.Xml
+                                            .XmlConvert
+                                            .ToString(
+                                                (global::System.Double)(
+                                                    (global::System.Double)a[ia]
+                                                )
+                                            )
                                     );
                                 }
                             }
@@ -3340,9 +3346,13 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                                     WriteElementStringRaw(
                                         @"QualifiedParameter",
                                         @"",
-                                        System.Xml.XmlConvert.ToString(
-                                            (global::System.Boolean)((global::System.Boolean)a[ia])
-                                        )
+                                        System.Xml
+                                            .XmlConvert
+                                            .ToString(
+                                                (global::System.Boolean)(
+                                                    (global::System.Boolean)a[ia]
+                                                )
+                                            )
                                     );
                                 }
                             }
@@ -3943,9 +3953,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
             WriteElementStringRaw(
                 @"IsValved",
                 @"",
-                System.Xml.XmlConvert.ToString(
-                    (global::System.Boolean)((global::System.Boolean)o.@IsValved)
-                )
+                System.Xml
+                    .XmlConvert
+                    .ToString((global::System.Boolean)((global::System.Boolean)o.@IsValved))
             );
             WriteElementString(@"Modulation", @"", FromChar(((global::System.Char)o.@Modulation)));
             WriteEndElement(o);
@@ -3980,9 +3990,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
             WriteElementStringRaw(
                 @"IsValved",
                 @"",
-                System.Xml.XmlConvert.ToString(
-                    (global::System.Boolean)((global::System.Boolean)o.@IsValved)
-                )
+                System.Xml
+                    .XmlConvert
+                    .ToString((global::System.Boolean)((global::System.Boolean)o.@IsValved))
             );
             WriteEndElement(o);
         }
@@ -4026,23 +4036,23 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
             WriteElementStringRaw(
                 @"UnitPrice",
                 @"http://www.contoso1.com",
-                System.Xml.XmlConvert.ToString(
-                    (global::System.Decimal)((global::System.Decimal)o.@UnitPrice)
-                )
+                System.Xml
+                    .XmlConvert
+                    .ToString((global::System.Decimal)((global::System.Decimal)o.@UnitPrice))
             );
             WriteElementStringRaw(
                 @"Quantity",
                 @"http://www.contoso1.com",
-                System.Xml.XmlConvert.ToString(
-                    (global::System.Int32)((global::System.Int32)o.@Quantity)
-                )
+                System.Xml
+                    .XmlConvert
+                    .ToString((global::System.Int32)((global::System.Int32)o.@Quantity))
             );
             WriteElementStringRaw(
                 @"LineTotal",
                 @"http://www.contoso1.com",
-                System.Xml.XmlConvert.ToString(
-                    (global::System.Decimal)((global::System.Decimal)o.@LineTotal)
-                )
+                System.Xml
+                    .XmlConvert
+                    .ToString((global::System.Decimal)((global::System.Decimal)o.@LineTotal))
             );
             WriteEndElement(o);
         }
@@ -4229,16 +4239,20 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
             WriteElementStringRaw(
                 @"DTO",
                 @"",
-                System.Xml.XmlConvert.ToString(
-                    (global::System.DateTimeOffset)((global::System.DateTimeOffset)o.@DTO)
-                )
+                System.Xml
+                    .XmlConvert
+                    .ToString(
+                        (global::System.DateTimeOffset)((global::System.DateTimeOffset)o.@DTO)
+                    )
             );
             WriteElementStringRaw(
                 @"DTO2",
                 @"",
-                System.Xml.XmlConvert.ToString(
-                    (global::System.DateTimeOffset)((global::System.DateTimeOffset)o.@DTO2)
-                )
+                System.Xml
+                    .XmlConvert
+                    .ToString(
+                        (global::System.DateTimeOffset)((global::System.DateTimeOffset)o.@DTO2)
+                    )
             );
             if (
                 ((global::System.DateTimeOffset)o.@DTOWithDefault)
@@ -4248,11 +4262,13 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                 WriteElementStringRaw(
                     @"DefaultDTO",
                     @"",
-                    System.Xml.XmlConvert.ToString(
-                        (global::System.DateTimeOffset)(
-                            (global::System.DateTimeOffset)o.@DTOWithDefault
+                    System.Xml
+                        .XmlConvert
+                        .ToString(
+                            (global::System.DateTimeOffset)(
+                                (global::System.DateTimeOffset)o.@DTOWithDefault
+                            )
                         )
-                    )
                 );
             }
             if (o.@NullableDTO != null)
@@ -4260,11 +4276,13 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                 WriteNullableStringLiteralRaw(
                     @"NullableDTO",
                     @"",
-                    System.Xml.XmlConvert.ToString(
-                        (global::System.DateTimeOffset)(
-                            (global::System.DateTimeOffset)o.@NullableDTO
+                    System.Xml
+                        .XmlConvert
+                        .ToString(
+                            (global::System.DateTimeOffset)(
+                                (global::System.DateTimeOffset)o.@NullableDTO
+                            )
                         )
-                    )
                 );
             }
             else
@@ -4276,11 +4294,13 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                 WriteNullableStringLiteralRaw(
                     @"NullableDefaultDTO",
                     @"",
-                    System.Xml.XmlConvert.ToString(
-                        (global::System.DateTimeOffset)(
-                            (global::System.DateTimeOffset)o.@NullableDTOWithDefault
+                    System.Xml
+                        .XmlConvert
+                        .ToString(
+                            (global::System.DateTimeOffset)(
+                                (global::System.DateTimeOffset)o.@NullableDTOWithDefault
+                            )
                         )
-                    )
                 );
             }
             else
@@ -4319,9 +4339,11 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
             WriteElementStringRaw(
                 @"TimeSpanProperty",
                 @"",
-                System.Xml.XmlConvert.ToString(
-                    (global::System.TimeSpan)((global::System.TimeSpan)o.@TimeSpanProperty)
-                )
+                System.Xml
+                    .XmlConvert
+                    .ToString(
+                        (global::System.TimeSpan)((global::System.TimeSpan)o.@TimeSpanProperty)
+                    )
             );
             WriteEndElement(o);
         }
@@ -4357,9 +4379,11 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                 WriteElementStringRaw(
                     @"TimeSpanProperty",
                     @"",
-                    System.Xml.XmlConvert.ToString(
-                        (global::System.TimeSpan)((global::System.TimeSpan)o.@TimeSpanProperty)
-                    )
+                    System.Xml
+                        .XmlConvert
+                        .ToString(
+                            (global::System.TimeSpan)((global::System.TimeSpan)o.@TimeSpanProperty)
+                        )
                 );
             }
             if (((global::System.TimeSpan)o.@TimeSpanProperty2) != new System.TimeSpan(10000000))
@@ -4367,9 +4391,11 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                 WriteElementStringRaw(
                     @"TimeSpanProperty2",
                     @"",
-                    System.Xml.XmlConvert.ToString(
-                        (global::System.TimeSpan)((global::System.TimeSpan)o.@TimeSpanProperty2)
-                    )
+                    System.Xml
+                        .XmlConvert
+                        .ToString(
+                            (global::System.TimeSpan)((global::System.TimeSpan)o.@TimeSpanProperty2)
+                        )
                 );
             }
             WriteEndElement(o);
@@ -4404,9 +4430,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
             WriteElementStringRaw(
                 @"ByteProperty",
                 @"",
-                System.Xml.XmlConvert.ToString(
-                    (global::System.Byte)((global::System.Byte)o.@ByteProperty)
-                )
+                System.Xml
+                    .XmlConvert
+                    .ToString((global::System.Byte)((global::System.Byte)o.@ByteProperty))
             );
             WriteEndElement(o);
         }
@@ -4764,23 +4790,23 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
             WriteElementStringRaw(
                 @"SubTotal",
                 @"http://www.contoso1.com",
-                System.Xml.XmlConvert.ToString(
-                    (global::System.Decimal)((global::System.Decimal)o.@SubTotal)
-                )
+                System.Xml
+                    .XmlConvert
+                    .ToString((global::System.Decimal)((global::System.Decimal)o.@SubTotal))
             );
             WriteElementStringRaw(
                 @"ShipCost",
                 @"http://www.contoso1.com",
-                System.Xml.XmlConvert.ToString(
-                    (global::System.Decimal)((global::System.Decimal)o.@ShipCost)
-                )
+                System.Xml
+                    .XmlConvert
+                    .ToString((global::System.Decimal)((global::System.Decimal)o.@ShipCost))
             );
             WriteElementStringRaw(
                 @"TotalCost",
                 @"http://www.contoso1.com",
-                System.Xml.XmlConvert.ToString(
-                    (global::System.Decimal)((global::System.Decimal)o.@TotalCost)
-                )
+                System.Xml
+                    .XmlConvert
+                    .ToString((global::System.Decimal)((global::System.Decimal)o.@TotalCost))
             );
             WriteEndElement(o);
         }
@@ -4844,23 +4870,23 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
             WriteElementStringRaw(
                 @"UnitPrice",
                 @"",
-                System.Xml.XmlConvert.ToString(
-                    (global::System.Decimal)((global::System.Decimal)o.@UnitPrice)
-                )
+                System.Xml
+                    .XmlConvert
+                    .ToString((global::System.Decimal)((global::System.Decimal)o.@UnitPrice))
             );
             WriteElementStringRaw(
                 @"Quantity",
                 @"",
-                System.Xml.XmlConvert.ToString(
-                    (global::System.Int32)((global::System.Int32)o.@Quantity)
-                )
+                System.Xml
+                    .XmlConvert
+                    .ToString((global::System.Int32)((global::System.Int32)o.@Quantity))
             );
             WriteElementStringRaw(
                 @"LineTotal",
                 @"",
-                System.Xml.XmlConvert.ToString(
-                    (global::System.Decimal)((global::System.Decimal)o.@LineTotal)
-                )
+                System.Xml
+                    .XmlConvert
+                    .ToString((global::System.Decimal)((global::System.Decimal)o.@LineTotal))
             );
             WriteEndElement(o);
         }
@@ -4909,9 +4935,11 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                                 WriteElementStringRaw(
                                     @"int",
                                     @"",
-                                    System.Xml.XmlConvert.ToString(
-                                        (global::System.Int32)((global::System.Int32)a[ia])
-                                    )
+                                    System.Xml
+                                        .XmlConvert
+                                        .ToString(
+                                            (global::System.Int32)((global::System.Int32)a[ia])
+                                        )
                                 );
                             }
                             WriteEndElement();
@@ -4961,9 +4989,11 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                                 WriteElementStringRaw(
                                     @"double",
                                     @"",
-                                    System.Xml.XmlConvert.ToString(
-                                        (global::System.Double)((global::System.Double)a[ia])
-                                    )
+                                    System.Xml
+                                        .XmlConvert
+                                        .ToString(
+                                            (global::System.Double)((global::System.Double)a[ia])
+                                        )
                                 );
                             }
                             WriteEndElement();
@@ -5187,9 +5217,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                 WriteElementStringRaw(
                     @"DoubleField",
                     @"",
-                    System.Xml.XmlConvert.ToString(
-                        (global::System.Double)((global::System.Double)o.@DoubleField)
-                    )
+                    System.Xml
+                        .XmlConvert
+                        .ToString((global::System.Double)((global::System.Double)o.@DoubleField))
                 );
             }
             if (!((global::System.Single)o.@SingleField).Equals(System.Single.NaN))
@@ -5197,9 +5227,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                 WriteElementStringRaw(
                     @"SingleField",
                     @"",
-                    System.Xml.XmlConvert.ToString(
-                        (global::System.Single)((global::System.Single)o.@SingleField)
-                    )
+                    System.Xml
+                        .XmlConvert
+                        .ToString((global::System.Single)((global::System.Single)o.@SingleField))
                 );
             }
             if (!((global::System.Double)o.@DoubleProp).Equals(System.Double.NaN))
@@ -5207,9 +5237,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                 WriteElementStringRaw(
                     @"DoubleProp",
                     @"",
-                    System.Xml.XmlConvert.ToString(
-                        (global::System.Double)((global::System.Double)o.@DoubleProp)
-                    )
+                    System.Xml
+                        .XmlConvert
+                        .ToString((global::System.Double)((global::System.Double)o.@DoubleProp))
                 );
             }
             if (!((global::System.Single)o.@FloatProp).Equals(System.Single.NaN))
@@ -5217,9 +5247,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                 WriteElementStringRaw(
                     @"FloatProp",
                     @"",
-                    System.Xml.XmlConvert.ToString(
-                        (global::System.Single)((global::System.Single)o.@FloatProp)
-                    )
+                    System.Xml
+                        .XmlConvert
+                        .ToString((global::System.Single)((global::System.Single)o.@FloatProp))
                 );
             }
             WriteEndElement(o);
@@ -5256,9 +5286,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                 WriteElementStringRaw(
                     @"DoubleField",
                     @"",
-                    System.Xml.XmlConvert.ToString(
-                        (global::System.Double)((global::System.Double)o.@DoubleField)
-                    )
+                    System.Xml
+                        .XmlConvert
+                        .ToString((global::System.Double)((global::System.Double)o.@DoubleField))
                 );
             }
             if (!((global::System.Single)o.@SingleField).Equals(System.Single.PositiveInfinity))
@@ -5266,9 +5296,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                 WriteElementStringRaw(
                     @"SingleField",
                     @"",
-                    System.Xml.XmlConvert.ToString(
-                        (global::System.Single)((global::System.Single)o.@SingleField)
-                    )
+                    System.Xml
+                        .XmlConvert
+                        .ToString((global::System.Single)((global::System.Single)o.@SingleField))
                 );
             }
             if (!((global::System.Double)o.@DoubleProp).Equals(System.Double.PositiveInfinity))
@@ -5276,9 +5306,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                 WriteElementStringRaw(
                     @"DoubleProp",
                     @"",
-                    System.Xml.XmlConvert.ToString(
-                        (global::System.Double)((global::System.Double)o.@DoubleProp)
-                    )
+                    System.Xml
+                        .XmlConvert
+                        .ToString((global::System.Double)((global::System.Double)o.@DoubleProp))
                 );
             }
             if (!((global::System.Single)o.@FloatProp).Equals(System.Single.PositiveInfinity))
@@ -5286,9 +5316,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                 WriteElementStringRaw(
                     @"FloatProp",
                     @"",
-                    System.Xml.XmlConvert.ToString(
-                        (global::System.Single)((global::System.Single)o.@FloatProp)
-                    )
+                    System.Xml
+                        .XmlConvert
+                        .ToString((global::System.Single)((global::System.Single)o.@FloatProp))
                 );
             }
             WriteEndElement(o);
@@ -5325,9 +5355,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                 WriteElementStringRaw(
                     @"DoubleField",
                     @"",
-                    System.Xml.XmlConvert.ToString(
-                        (global::System.Double)((global::System.Double)o.@DoubleField)
-                    )
+                    System.Xml
+                        .XmlConvert
+                        .ToString((global::System.Double)((global::System.Double)o.@DoubleField))
                 );
             }
             if (!((global::System.Single)o.@SingleField).Equals(System.Single.NegativeInfinity))
@@ -5335,9 +5365,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                 WriteElementStringRaw(
                     @"SingleField",
                     @"",
-                    System.Xml.XmlConvert.ToString(
-                        (global::System.Single)((global::System.Single)o.@SingleField)
-                    )
+                    System.Xml
+                        .XmlConvert
+                        .ToString((global::System.Single)((global::System.Single)o.@SingleField))
                 );
             }
             if (!((global::System.Double)o.@DoubleProp).Equals(System.Double.NegativeInfinity))
@@ -5345,9 +5375,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                 WriteElementStringRaw(
                     @"DoubleProp",
                     @"",
-                    System.Xml.XmlConvert.ToString(
-                        (global::System.Double)((global::System.Double)o.@DoubleProp)
-                    )
+                    System.Xml
+                        .XmlConvert
+                        .ToString((global::System.Double)((global::System.Double)o.@DoubleProp))
                 );
             }
             if (!((global::System.Single)o.@FloatProp).Equals(System.Single.NegativeInfinity))
@@ -5355,9 +5385,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                 WriteElementStringRaw(
                     @"FloatProp",
                     @"",
-                    System.Xml.XmlConvert.ToString(
-                        (global::System.Single)((global::System.Single)o.@FloatProp)
-                    )
+                    System.Xml
+                        .XmlConvert
+                        .ToString((global::System.Single)((global::System.Single)o.@FloatProp))
                 );
             }
             WriteEndElement(o);
@@ -5394,9 +5424,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                 WriteAttribute(
                     @"IntValue",
                     @"",
-                    System.Xml.XmlConvert.ToString(
-                        (global::System.Int32)((global::System.Int32)o.@IntValue)
-                    )
+                    System.Xml
+                        .XmlConvert
+                        .ToString((global::System.Int32)((global::System.Int32)o.@IntValue))
                 );
             }
             WriteEndElement(o);
@@ -5704,9 +5734,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                         WriteElementStringRaw(
                             @"int",
                             @"",
-                            System.Xml.XmlConvert.ToString(
-                                (global::System.Int32)((global::System.Int32)a[ia])
-                            )
+                            System.Xml
+                                .XmlConvert
+                                .ToString((global::System.Int32)((global::System.Int32)a[ia]))
                         );
                     }
                     WriteEndElement();
@@ -5743,9 +5773,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                         WriteElementStringRaw(
                             @"int",
                             @"",
-                            System.Xml.XmlConvert.ToString(
-                                (global::System.Int32)((global::System.Int32)a[ia])
-                            )
+                            System.Xml
+                                .XmlConvert
+                                .ToString((global::System.Int32)((global::System.Int32)a[ia]))
                         );
                     }
                     WriteEndElement();
@@ -5805,9 +5835,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
             WriteElementStringRaw(
                 @"value",
                 @"",
-                System.Xml.XmlConvert.ToString(
-                    (global::System.Int32)((global::System.Int32)o.@value)
-                )
+                System.Xml
+                    .XmlConvert
+                    .ToString((global::System.Int32)((global::System.Int32)o.@value))
             );
             WriteEndElement(o);
         }
@@ -6188,9 +6218,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
             WriteElementStringRaw(
                 @"IntProperty",
                 @"",
-                System.Xml.XmlConvert.ToString(
-                    (global::System.Int32)((global::System.Int32)o.@IntProperty)
-                )
+                System.Xml
+                    .XmlConvert
+                    .ToString((global::System.Int32)((global::System.Int32)o.@IntProperty))
             );
             WriteElementStringRaw(
                 @"DateTimeProperty",
@@ -6257,9 +6287,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
             WriteElementStringRaw(
                 @"IntProperty",
                 @"",
-                System.Xml.XmlConvert.ToString(
-                    (global::System.Int32)((global::System.Int32)o.@IntProperty)
-                )
+                System.Xml
+                    .XmlConvert
+                    .ToString((global::System.Int32)((global::System.Int32)o.@IntProperty))
             );
             WriteElementStringRaw(
                 @"DateTimeProperty",
@@ -6337,9 +6367,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
             WriteElementStringRaw(
                 @"IntProperty",
                 @"",
-                System.Xml.XmlConvert.ToString(
-                    (global::System.Int32)((global::System.Int32)o.@IntProperty)
-                )
+                System.Xml
+                    .XmlConvert
+                    .ToString((global::System.Int32)((global::System.Int32)o.@IntProperty))
             );
             WriteElementStringRaw(
                 @"DateTimeProperty",
@@ -6537,9 +6567,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
             WriteElementStringRaw(
                 @"IsLoaded",
                 @"",
-                System.Xml.XmlConvert.ToString(
-                    (global::System.Boolean)((global::System.Boolean)o.@IsLoaded)
-                )
+                System.Xml
+                    .XmlConvert
+                    .ToString((global::System.Boolean)((global::System.Boolean)o.@IsLoaded))
             );
             WriteEndElement(o);
         }
@@ -6705,9 +6735,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                 WriteNullableStringLiteralRaw(
                     @"OptionalInt",
                     @"",
-                    System.Xml.XmlConvert.ToString(
-                        (global::System.Int32)((global::System.Int32)o.@OptionalInt)
-                    )
+                    System.Xml
+                        .XmlConvert
+                        .ToString((global::System.Int32)((global::System.Int32)o.@OptionalInt))
                 );
             }
             else
@@ -6719,9 +6749,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                 WriteNullableStringLiteralRaw(
                     @"OptionullInt",
                     @"",
-                    System.Xml.XmlConvert.ToString(
-                        (global::System.Int32)((global::System.Int32)o.@OptionullInt)
-                    )
+                    System.Xml
+                        .XmlConvert
+                        .ToString((global::System.Int32)((global::System.Int32)o.@OptionullInt))
                 );
             }
             else
@@ -6786,9 +6816,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
             WriteAttribute(
                 @"XmlAttributeName",
                 @"",
-                System.Xml.XmlConvert.ToString(
-                    (global::System.Int32)((global::System.Int32)o.@XmlAttributeProperty)
-                )
+                System.Xml
+                    .XmlConvert
+                    .ToString((global::System.Int32)((global::System.Int32)o.@XmlAttributeProperty))
             );
             {
                 if (
@@ -6818,9 +6848,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                     WriteElementStringRaw(
                         @"Number",
                         @"",
-                        System.Xml.XmlConvert.ToString(
-                            (global::System.Int32)((global::System.Int32)o.@MyChoice)
-                        )
+                        System.Xml
+                            .XmlConvert
+                            .ToString((global::System.Int32)((global::System.Int32)o.@MyChoice))
                     );
                 }
                 else if (
@@ -6837,9 +6867,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                     WriteElementStringRaw(
                         @"DecimalNumber",
                         @"",
-                        System.Xml.XmlConvert.ToString(
-                            (global::System.Double)((global::System.Double)o.@MyChoice)
-                        )
+                        System.Xml
+                            .XmlConvert
+                            .ToString((global::System.Double)((global::System.Double)o.@MyChoice))
                     );
                 }
                 else if ((object)(o.@MyChoice) != null)
@@ -6887,9 +6917,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
             WriteElementStringRaw(
                 @"XmlElementPropertyNode",
                 @"http://element",
-                System.Xml.XmlConvert.ToString(
-                    (global::System.Int32)((global::System.Int32)o.@XmlElementProperty)
-                )
+                System.Xml
+                    .XmlConvert
+                    .ToString((global::System.Int32)((global::System.Int32)o.@XmlElementProperty))
             );
             {
                 global::System.Object[] a = (global::System.Object[])(
@@ -6946,9 +6976,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
             WriteAttribute(
                 @"IntProperty",
                 @"",
-                System.Xml.XmlConvert.ToString(
-                    (global::System.Int32)((global::System.Int32)o.@IntProperty)
-                )
+                System.Xml
+                    .XmlConvert
+                    .ToString((global::System.Int32)((global::System.Int32)o.@IntProperty))
             );
             {
                 global::System.Xml.XmlAttribute[] a = (global::System.Xml.XmlAttribute[])
@@ -7068,9 +7098,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                 WriteElementStringRaw(
                     @"MyFieldIgnored",
                     @"",
-                    System.Xml.XmlConvert.ToString(
-                        (global::System.Int32)((global::System.Int32)o.@MyFieldIgnored)
-                    )
+                    System.Xml
+                        .XmlConvert
+                        .ToString((global::System.Int32)((global::System.Int32)o.@MyFieldIgnored))
                 );
             }
             WriteEndElement(o);
@@ -7116,9 +7146,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                         WriteElementStringRaw(
                             @"int",
                             @"",
-                            System.Xml.XmlConvert.ToString(
-                                (global::System.Int32)((global::System.Int32)a[ia])
-                            )
+                            System.Xml
+                                .XmlConvert
+                                .ToString((global::System.Int32)((global::System.Int32)a[ia]))
                         );
                     }
                     WriteEndElement();
@@ -7154,9 +7184,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                         WriteElementStringRaw(
                             @"QualifiedParameter",
                             @"",
-                            System.Xml.XmlConvert.ToString(
-                                (global::System.Boolean)((global::System.Boolean)a[ia])
-                            )
+                            System.Xml
+                                .XmlConvert
+                                .ToString((global::System.Boolean)((global::System.Boolean)a[ia]))
                         );
                     }
                     WriteEndElement();
@@ -7409,9 +7439,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                 WriteElementStringRaw(
                     @"IntProperty",
                     @"",
-                    System.Xml.XmlConvert.ToString(
-                        (global::System.Int32)((global::System.Int32)o.@IntProperty)
-                    )
+                    System.Xml
+                        .XmlConvert
+                        .ToString((global::System.Int32)((global::System.Int32)o.@IntProperty))
                 );
             }
             WriteElementString(
@@ -7765,9 +7795,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                                 WriteElementStringRaw(
                                     @"Amount",
                                     @"",
-                                    System.Xml.XmlConvert.ToString(
-                                        (global::System.Int32)((global::System.Int32)ai)
-                                    )
+                                    System.Xml
+                                        .XmlConvert
+                                        .ToString((global::System.Int32)((global::System.Int32)ai))
                                 );
                             }
                             else if ((object)(ai) != null)
@@ -7810,16 +7840,16 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
             WriteElementStringRaw(
                 @"IntField1",
                 @"",
-                System.Xml.XmlConvert.ToString(
-                    (global::System.Int32)((global::System.Int32)o.@IntField1)
-                )
+                System.Xml
+                    .XmlConvert
+                    .ToString((global::System.Int32)((global::System.Int32)o.@IntField1))
             );
             WriteElementStringRaw(
                 @"IntField2",
                 @"",
-                System.Xml.XmlConvert.ToString(
-                    (global::System.Int32)((global::System.Int32)o.@IntField2)
-                )
+                System.Xml
+                    .XmlConvert
+                    .ToString((global::System.Int32)((global::System.Int32)o.@IntField2))
             );
             WriteElementString(@"StringField2", @"", ((global::System.String)o.@StringField2));
             WriteElementString(@"StringField1", @"", ((global::System.String)o.@StringField1));
@@ -12400,9 +12430,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                                             {
                                                 {
                                                     z_0_0.Add(
-                                                        System.Xml.XmlConvert.ToInt32(
-                                                            Reader.ReadElementString()
-                                                        )
+                                                        System.Xml
+                                                            .XmlConvert
+                                                            .ToInt32(Reader.ReadElementString())
                                                     );
                                                 }
                                                 break;
@@ -12531,9 +12561,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                                             {
                                                 {
                                                     z_0_0.Add(
-                                                        System.Xml.XmlConvert.ToDouble(
-                                                            Reader.ReadElementString()
-                                                        )
+                                                        System.Xml
+                                                            .XmlConvert
+                                                            .ToDouble(Reader.ReadElementString())
                                                     );
                                                 }
                                                 break;
@@ -13486,9 +13516,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                                             {
                                                 {
                                                     z_0_0.Add(
-                                                        System.Xml.XmlConvert.ToBoolean(
-                                                            Reader.ReadElementString()
-                                                        )
+                                                        System.Xml
+                                                            .XmlConvert
+                                                            .ToBoolean(Reader.ReadElementString())
                                                     );
                                                 }
                                                 break;
@@ -14575,9 +14605,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                         )
                         {
                             {
-                                o.@IsValved = System.Xml.XmlConvert.ToBoolean(
-                                    Reader.ReadElementString()
-                                );
+                                o.@IsValved = System.Xml
+                                    .XmlConvert
+                                    .ToBoolean(Reader.ReadElementString());
                             }
                             paramsRead[1] = true;
                             break;
@@ -14691,9 +14721,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                         )
                         {
                             {
-                                o.@IsValved = System.Xml.XmlConvert.ToBoolean(
-                                    Reader.ReadElementString()
-                                );
+                                o.@IsValved = System.Xml
+                                    .XmlConvert
+                                    .ToBoolean(Reader.ReadElementString());
                             }
                             paramsRead[1] = true;
                             break;
@@ -14799,9 +14829,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                         )
                         {
                             {
-                                o.@UnitPrice = System.Xml.XmlConvert.ToDecimal(
-                                    Reader.ReadElementString()
-                                );
+                                o.@UnitPrice = System.Xml
+                                    .XmlConvert
+                                    .ToDecimal(Reader.ReadElementString());
                             }
                             paramsRead[2] = true;
                             break;
@@ -14815,9 +14845,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                         )
                         {
                             {
-                                o.@Quantity = System.Xml.XmlConvert.ToInt32(
-                                    Reader.ReadElementString()
-                                );
+                                o.@Quantity = System.Xml
+                                    .XmlConvert
+                                    .ToInt32(Reader.ReadElementString());
                             }
                             paramsRead[3] = true;
                             break;
@@ -14831,9 +14861,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                         )
                         {
                             {
-                                o.@LineTotal = System.Xml.XmlConvert.ToDecimal(
-                                    Reader.ReadElementString()
-                                );
+                                o.@LineTotal = System.Xml
+                                    .XmlConvert
+                                    .ToDecimal(Reader.ReadElementString());
                             }
                             paramsRead[4] = true;
                             break;
@@ -15190,9 +15220,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                                 }
                                 else
                                 {
-                                    o.@DTO = System.Xml.XmlConvert.ToDateTimeOffset(
-                                        Reader.ReadElementString()
-                                    );
+                                    o.@DTO = System.Xml
+                                        .XmlConvert
+                                        .ToDateTimeOffset(Reader.ReadElementString());
                                 }
                             }
                             paramsRead[0] = true;
@@ -15214,9 +15244,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                                 }
                                 else
                                 {
-                                    o.@DTO2 = System.Xml.XmlConvert.ToDateTimeOffset(
-                                        Reader.ReadElementString()
-                                    );
+                                    o.@DTO2 = System.Xml
+                                        .XmlConvert
+                                        .ToDateTimeOffset(Reader.ReadElementString());
                                 }
                             }
                             paramsRead[1] = true;
@@ -15243,9 +15273,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                                 }
                                 else
                                 {
-                                    o.@DTOWithDefault = System.Xml.XmlConvert.ToDateTimeOffset(
-                                        Reader.ReadElementString()
-                                    );
+                                    o.@DTOWithDefault = System.Xml
+                                        .XmlConvert
+                                        .ToDateTimeOffset(Reader.ReadElementString());
                                 }
                             }
                             paramsRead[2] = true;
@@ -15386,9 +15416,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                                 }
                                 else
                                 {
-                                    o.@TimeSpanProperty = System.Xml.XmlConvert.ToTimeSpan(
-                                        Reader.ReadElementString()
-                                    );
+                                    o.@TimeSpanProperty = System.Xml
+                                        .XmlConvert
+                                        .ToTimeSpan(Reader.ReadElementString());
                                 }
                             }
                             paramsRead[0] = true;
@@ -15478,9 +15508,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                                 }
                                 else
                                 {
-                                    o.@TimeSpanProperty = System.Xml.XmlConvert.ToTimeSpan(
-                                        Reader.ReadElementString()
-                                    );
+                                    o.@TimeSpanProperty = System.Xml
+                                        .XmlConvert
+                                        .ToTimeSpan(Reader.ReadElementString());
                                 }
                             }
                             paramsRead[0] = true;
@@ -15507,9 +15537,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                                 }
                                 else
                                 {
-                                    o.@TimeSpanProperty2 = System.Xml.XmlConvert.ToTimeSpan(
-                                        Reader.ReadElementString()
-                                    );
+                                    o.@TimeSpanProperty2 = System.Xml
+                                        .XmlConvert
+                                        .ToTimeSpan(Reader.ReadElementString());
                                 }
                             }
                             paramsRead[1] = true;
@@ -15588,9 +15618,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                         )
                         {
                             {
-                                o.@ByteProperty = System.Xml.XmlConvert.ToByte(
-                                    Reader.ReadElementString()
-                                );
+                                o.@ByteProperty = System.Xml
+                                    .XmlConvert
+                                    .ToByte(Reader.ReadElementString());
                             }
                             paramsRead[0] = true;
                             break;
@@ -16640,9 +16670,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                         )
                         {
                             {
-                                o.@SubTotal = System.Xml.XmlConvert.ToDecimal(
-                                    Reader.ReadElementString()
-                                );
+                                o.@SubTotal = System.Xml
+                                    .XmlConvert
+                                    .ToDecimal(Reader.ReadElementString());
                             }
                             paramsRead[3] = true;
                             break;
@@ -16656,9 +16686,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                         )
                         {
                             {
-                                o.@ShipCost = System.Xml.XmlConvert.ToDecimal(
-                                    Reader.ReadElementString()
-                                );
+                                o.@ShipCost = System.Xml
+                                    .XmlConvert
+                                    .ToDecimal(Reader.ReadElementString());
                             }
                             paramsRead[4] = true;
                             break;
@@ -16672,9 +16702,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                         )
                         {
                             {
-                                o.@TotalCost = System.Xml.XmlConvert.ToDecimal(
-                                    Reader.ReadElementString()
-                                );
+                                o.@TotalCost = System.Xml
+                                    .XmlConvert
+                                    .ToDecimal(Reader.ReadElementString());
                             }
                             paramsRead[5] = true;
                             break;
@@ -16916,9 +16946,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                         )
                         {
                             {
-                                o.@UnitPrice = System.Xml.XmlConvert.ToDecimal(
-                                    Reader.ReadElementString()
-                                );
+                                o.@UnitPrice = System.Xml
+                                    .XmlConvert
+                                    .ToDecimal(Reader.ReadElementString());
                             }
                             paramsRead[2] = true;
                             break;
@@ -16932,9 +16962,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                         )
                         {
                             {
-                                o.@Quantity = System.Xml.XmlConvert.ToInt32(
-                                    Reader.ReadElementString()
-                                );
+                                o.@Quantity = System.Xml
+                                    .XmlConvert
+                                    .ToInt32(Reader.ReadElementString());
                             }
                             paramsRead[3] = true;
                             break;
@@ -16948,9 +16978,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                         )
                         {
                             {
-                                o.@LineTotal = System.Xml.XmlConvert.ToDecimal(
-                                    Reader.ReadElementString()
-                                );
+                                o.@LineTotal = System.Xml
+                                    .XmlConvert
+                                    .ToDecimal(Reader.ReadElementString());
                             }
                             paramsRead[4] = true;
                             break;
@@ -17069,9 +17099,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                                                 {
                                                     {
                                                         a_0_0.Add(
-                                                            System.Xml.XmlConvert.ToInt32(
-                                                                Reader.ReadElementString()
-                                                            )
+                                                            System.Xml
+                                                                .XmlConvert
+                                                                .ToInt32(Reader.ReadElementString())
                                                         );
                                                     }
                                                     break;
@@ -17202,9 +17232,11 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                                                 {
                                                     {
                                                         a_0_0.Add(
-                                                            System.Xml.XmlConvert.ToDouble(
-                                                                Reader.ReadElementString()
-                                                            )
+                                                            System.Xml
+                                                                .XmlConvert
+                                                                .ToDouble(
+                                                                    Reader.ReadElementString()
+                                                                )
                                                         );
                                                     }
                                                     break;
@@ -17691,9 +17723,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                             }
                             else
                             {
-                                o.@DoubleField = System.Xml.XmlConvert.ToDouble(
-                                    Reader.ReadElementString()
-                                );
+                                o.@DoubleField = System.Xml
+                                    .XmlConvert
+                                    .ToDouble(Reader.ReadElementString());
                             }
                             paramsRead[0] = true;
                             break;
@@ -17712,9 +17744,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                             }
                             else
                             {
-                                o.@SingleField = System.Xml.XmlConvert.ToSingle(
-                                    Reader.ReadElementString()
-                                );
+                                o.@SingleField = System.Xml
+                                    .XmlConvert
+                                    .ToSingle(Reader.ReadElementString());
                             }
                             paramsRead[1] = true;
                             break;
@@ -17733,9 +17765,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                             }
                             else
                             {
-                                o.@DoubleProp = System.Xml.XmlConvert.ToDouble(
-                                    Reader.ReadElementString()
-                                );
+                                o.@DoubleProp = System.Xml
+                                    .XmlConvert
+                                    .ToDouble(Reader.ReadElementString());
                             }
                             paramsRead[2] = true;
                             break;
@@ -17754,9 +17786,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                             }
                             else
                             {
-                                o.@FloatProp = System.Xml.XmlConvert.ToSingle(
-                                    Reader.ReadElementString()
-                                );
+                                o.@FloatProp = System.Xml
+                                    .XmlConvert
+                                    .ToSingle(Reader.ReadElementString());
                             }
                             paramsRead[3] = true;
                             break;
@@ -17841,9 +17873,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                             }
                             else
                             {
-                                o.@DoubleField = System.Xml.XmlConvert.ToDouble(
-                                    Reader.ReadElementString()
-                                );
+                                o.@DoubleField = System.Xml
+                                    .XmlConvert
+                                    .ToDouble(Reader.ReadElementString());
                             }
                             paramsRead[0] = true;
                             break;
@@ -17862,9 +17894,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                             }
                             else
                             {
-                                o.@SingleField = System.Xml.XmlConvert.ToSingle(
-                                    Reader.ReadElementString()
-                                );
+                                o.@SingleField = System.Xml
+                                    .XmlConvert
+                                    .ToSingle(Reader.ReadElementString());
                             }
                             paramsRead[1] = true;
                             break;
@@ -17883,9 +17915,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                             }
                             else
                             {
-                                o.@DoubleProp = System.Xml.XmlConvert.ToDouble(
-                                    Reader.ReadElementString()
-                                );
+                                o.@DoubleProp = System.Xml
+                                    .XmlConvert
+                                    .ToDouble(Reader.ReadElementString());
                             }
                             paramsRead[2] = true;
                             break;
@@ -17904,9 +17936,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                             }
                             else
                             {
-                                o.@FloatProp = System.Xml.XmlConvert.ToSingle(
-                                    Reader.ReadElementString()
-                                );
+                                o.@FloatProp = System.Xml
+                                    .XmlConvert
+                                    .ToSingle(Reader.ReadElementString());
                             }
                             paramsRead[3] = true;
                             break;
@@ -17991,9 +18023,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                             }
                             else
                             {
-                                o.@DoubleField = System.Xml.XmlConvert.ToDouble(
-                                    Reader.ReadElementString()
-                                );
+                                o.@DoubleField = System.Xml
+                                    .XmlConvert
+                                    .ToDouble(Reader.ReadElementString());
                             }
                             paramsRead[0] = true;
                             break;
@@ -18012,9 +18044,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                             }
                             else
                             {
-                                o.@SingleField = System.Xml.XmlConvert.ToSingle(
-                                    Reader.ReadElementString()
-                                );
+                                o.@SingleField = System.Xml
+                                    .XmlConvert
+                                    .ToSingle(Reader.ReadElementString());
                             }
                             paramsRead[1] = true;
                             break;
@@ -18033,9 +18065,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                             }
                             else
                             {
-                                o.@DoubleProp = System.Xml.XmlConvert.ToDouble(
-                                    Reader.ReadElementString()
-                                );
+                                o.@DoubleProp = System.Xml
+                                    .XmlConvert
+                                    .ToDouble(Reader.ReadElementString());
                             }
                             paramsRead[2] = true;
                             break;
@@ -18054,9 +18086,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                             }
                             else
                             {
-                                o.@FloatProp = System.Xml.XmlConvert.ToSingle(
-                                    Reader.ReadElementString()
-                                );
+                                o.@FloatProp = System.Xml
+                                    .XmlConvert
+                                    .ToSingle(Reader.ReadElementString());
                             }
                             paramsRead[3] = true;
                             break;
@@ -18489,16 +18521,17 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
             try
             {
                 o = (global::XElementStruct)
-                    System.Activator.CreateInstance(
-                        typeof(global::XElementStruct),
-                        System.Reflection.BindingFlags.Instance
-                            | System.Reflection.BindingFlags.Public
-                            | System.Reflection.BindingFlags.CreateInstance
-                            | System.Reflection.BindingFlags.NonPublic,
-                        null,
-                        new object[0],
-                        null
-                    );
+                    System.Activator
+                        .CreateInstance(
+                            typeof(global::XElementStruct),
+                            System.Reflection.BindingFlags.Instance
+                                | System.Reflection.BindingFlags.Public
+                                | System.Reflection.BindingFlags.CreateInstance
+                                | System.Reflection.BindingFlags.NonPublic,
+                            null,
+                            new object[0],
+                            null
+                        );
             }
             catch (System.MissingMethodException)
             {
@@ -18968,10 +19001,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                                                                 ca_1_0,
                                                                 typeof(global::System.Int32)
                                                             );
-                                                        a_1_0[ca_1_0++] =
-                                                            System.Xml.XmlConvert.ToInt32(
-                                                                Reader.ReadElementString()
-                                                            );
+                                                        a_1_0[ca_1_0++] = System.Xml
+                                                            .XmlConvert
+                                                            .ToInt32(Reader.ReadElementString());
                                                     }
                                                     break;
                                                 }
@@ -19105,10 +19137,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                                                                 ca_3_0,
                                                                 typeof(global::System.Int32)
                                                             );
-                                                        a_3_0[ca_3_0++] =
-                                                            System.Xml.XmlConvert.ToInt32(
-                                                                Reader.ReadElementString()
-                                                            );
+                                                        a_3_0[ca_3_0++] = System.Xml
+                                                            .XmlConvert
+                                                            .ToInt32(Reader.ReadElementString());
                                                     }
                                                     break;
                                                 }
@@ -19235,16 +19266,17 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
             try
             {
                 o = (global::SerializationTypes.StructNotSerializable)
-                    System.Activator.CreateInstance(
-                        typeof(global::SerializationTypes.StructNotSerializable),
-                        System.Reflection.BindingFlags.Instance
-                            | System.Reflection.BindingFlags.Public
-                            | System.Reflection.BindingFlags.CreateInstance
-                            | System.Reflection.BindingFlags.NonPublic,
-                        null,
-                        new object[0],
-                        null
-                    );
+                    System.Activator
+                        .CreateInstance(
+                            typeof(global::SerializationTypes.StructNotSerializable),
+                            System.Reflection.BindingFlags.Instance
+                                | System.Reflection.BindingFlags.Public
+                                | System.Reflection.BindingFlags.CreateInstance
+                                | System.Reflection.BindingFlags.NonPublic,
+                            null,
+                            new object[0],
+                            null
+                        );
             }
             catch (System.MissingMethodException)
             {
@@ -19292,9 +19324,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                         )
                         {
                             {
-                                o.@value = System.Xml.XmlConvert.ToInt32(
-                                    Reader.ReadElementString()
-                                );
+                                o.@value = System.Xml
+                                    .XmlConvert
+                                    .ToInt32(Reader.ReadElementString());
                             }
                             paramsRead[0] = true;
                             break;
@@ -19697,16 +19729,17 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
             try
             {
                 o = (global::SerializationTypes.DCStruct)
-                    System.Activator.CreateInstance(
-                        typeof(global::SerializationTypes.DCStruct),
-                        System.Reflection.BindingFlags.Instance
-                            | System.Reflection.BindingFlags.Public
-                            | System.Reflection.BindingFlags.CreateInstance
-                            | System.Reflection.BindingFlags.NonPublic,
-                        null,
-                        new object[0],
-                        null
-                    );
+                    System.Activator
+                        .CreateInstance(
+                            typeof(global::SerializationTypes.DCStruct),
+                            System.Reflection.BindingFlags.Instance
+                                | System.Reflection.BindingFlags.Public
+                                | System.Reflection.BindingFlags.CreateInstance
+                                | System.Reflection.BindingFlags.NonPublic,
+                            null,
+                            new object[0],
+                            null
+                        );
             }
             catch (System.MissingMethodException)
             {
@@ -20316,9 +20349,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                         )
                         {
                             {
-                                o.@IntProperty = System.Xml.XmlConvert.ToInt32(
-                                    Reader.ReadElementString()
-                                );
+                                o.@IntProperty = System.Xml
+                                    .XmlConvert
+                                    .ToInt32(Reader.ReadElementString());
                             }
                             paramsRead[1] = true;
                             break;
@@ -20512,9 +20545,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                         )
                         {
                             {
-                                o.@IntProperty = System.Xml.XmlConvert.ToInt32(
-                                    Reader.ReadElementString()
-                                );
+                                o.@IntProperty = System.Xml
+                                    .XmlConvert
+                                    .ToInt32(Reader.ReadElementString());
                             }
                             paramsRead[1] = true;
                             break;
@@ -20717,9 +20750,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                         )
                         {
                             {
-                                o.@IntProperty = System.Xml.XmlConvert.ToInt32(
-                                    Reader.ReadElementString()
-                                );
+                                o.@IntProperty = System.Xml
+                                    .XmlConvert
+                                    .ToInt32(Reader.ReadElementString());
                             }
                             paramsRead[1] = true;
                             break;
@@ -21243,9 +21276,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                         )
                         {
                             {
-                                o.@IsLoaded = System.Xml.XmlConvert.ToBoolean(
-                                    Reader.ReadElementString()
-                                );
+                                o.@IsLoaded = System.Xml
+                                    .XmlConvert
+                                    .ToBoolean(Reader.ReadElementString());
                             }
                             paramsRead[3] = true;
                             break;
@@ -21287,16 +21320,17 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
             try
             {
                 o = (global::SerializationTypes.SomeStruct)
-                    System.Activator.CreateInstance(
-                        typeof(global::SerializationTypes.SomeStruct),
-                        System.Reflection.BindingFlags.Instance
-                            | System.Reflection.BindingFlags.Public
-                            | System.Reflection.BindingFlags.CreateInstance
-                            | System.Reflection.BindingFlags.NonPublic,
-                        null,
-                        new object[0],
-                        null
-                    );
+                    System.Activator
+                        .CreateInstance(
+                            typeof(global::SerializationTypes.SomeStruct),
+                            System.Reflection.BindingFlags.Instance
+                                | System.Reflection.BindingFlags.Public
+                                | System.Reflection.BindingFlags.CreateInstance
+                                | System.Reflection.BindingFlags.NonPublic,
+                            null,
+                            new object[0],
+                            null
+                        );
             }
             catch (System.MissingMethodException)
             {
@@ -21819,9 +21853,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                         )
                         {
                             {
-                                o.@MyChoice = System.Xml.XmlConvert.ToInt32(
-                                    Reader.ReadElementString()
-                                );
+                                o.@MyChoice = System.Xml
+                                    .XmlConvert
+                                    .ToInt32(Reader.ReadElementString());
                             }
                             o.@EnumType = global::SerializationTypes.ItemChoiceType.@Number;
                             paramsRead[0] = true;
@@ -21836,9 +21870,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                         )
                         {
                             {
-                                o.@MyChoice = System.Xml.XmlConvert.ToDouble(
-                                    Reader.ReadElementString()
-                                );
+                                o.@MyChoice = System.Xml
+                                    .XmlConvert
+                                    .ToDouble(Reader.ReadElementString());
                             }
                             o.@EnumType = global::SerializationTypes.ItemChoiceType.@DecimalNumber;
                             paramsRead[0] = true;
@@ -21950,9 +21984,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                         )
                         {
                             {
-                                o.@XmlElementProperty = System.Xml.XmlConvert.ToInt32(
-                                    Reader.ReadElementString()
-                                );
+                                o.@XmlElementProperty = System.Xml
+                                    .XmlConvert
+                                    .ToInt32(Reader.ReadElementString());
                             }
                             paramsRead[5] = true;
                             break;
@@ -22437,9 +22471,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                         {
                             o.@MyFieldIgnoredSpecified = true;
                             {
-                                o.@MyFieldIgnored = System.Xml.XmlConvert.ToInt32(
-                                    Reader.ReadElementString()
-                                );
+                                o.@MyFieldIgnored = System.Xml
+                                    .XmlConvert
+                                    .ToInt32(Reader.ReadElementString());
                             }
                             paramsRead[1] = true;
                             break;
@@ -22572,9 +22606,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                                                 {
                                                     {
                                                         a_0_0.Add(
-                                                            System.Xml.XmlConvert.ToInt32(
-                                                                Reader.ReadElementString()
-                                                            )
+                                                            System.Xml
+                                                                .XmlConvert
+                                                                .ToInt32(Reader.ReadElementString())
                                                         );
                                                     }
                                                     break;
@@ -22696,9 +22730,11 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                                                 {
                                                     {
                                                         a_2_0.Add(
-                                                            System.Xml.XmlConvert.ToBoolean(
-                                                                Reader.ReadElementString()
-                                                            )
+                                                            System.Xml
+                                                                .XmlConvert
+                                                                .ToBoolean(
+                                                                    Reader.ReadElementString()
+                                                                )
                                                         );
                                                     }
                                                     break;
@@ -22841,16 +22877,17 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
             try
             {
                 o = (global::SerializationTypes.TypeWithNonPublicDefaultConstructor)
-                    System.Activator.CreateInstance(
-                        typeof(global::SerializationTypes.TypeWithNonPublicDefaultConstructor),
-                        System.Reflection.BindingFlags.Instance
-                            | System.Reflection.BindingFlags.Public
-                            | System.Reflection.BindingFlags.CreateInstance
-                            | System.Reflection.BindingFlags.NonPublic,
-                        null,
-                        new object[0],
-                        null
-                    );
+                    System.Activator
+                        .CreateInstance(
+                            typeof(global::SerializationTypes.TypeWithNonPublicDefaultConstructor),
+                            System.Reflection.BindingFlags.Instance
+                                | System.Reflection.BindingFlags.Public
+                                | System.Reflection.BindingFlags.CreateInstance
+                                | System.Reflection.BindingFlags.NonPublic,
+                            null,
+                            new object[0],
+                            null
+                        );
             }
             catch (System.MissingMethodException)
             {
@@ -23200,8 +23237,7 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                                                             Reader.MoveToContent();
                                                             while (
                                                                 Reader.NodeType
-                                                                    != System
-                                                                        .Xml
+                                                                    != System.Xml
                                                                         .XmlNodeType
                                                                         .EndElement
                                                                 && Reader.NodeType
@@ -23210,8 +23246,7 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                                                             {
                                                                 if (
                                                                     Reader.NodeType
-                                                                    == System
-                                                                        .Xml
+                                                                    == System.Xml
                                                                         .XmlNodeType
                                                                         .Element
                                                                 )
@@ -23404,9 +23439,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                             }
                             else
                             {
-                                o.@IntProperty = System.Xml.XmlConvert.ToInt32(
-                                    Reader.ReadElementString()
-                                );
+                                o.@IntProperty = System.Xml
+                                    .XmlConvert
+                                    .ToInt32(Reader.ReadElementString());
                             }
                             paramsRead[2] = true;
                             break;
@@ -24155,8 +24190,7 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                                 cchoice_a_0,
                                 typeof(global::SerializationTypes.MoreChoices)
                             );
-                            choice_a_0[cchoice_a_0++] = global::SerializationTypes
-                                .MoreChoices
+                            choice_a_0[cchoice_a_0++] = global::SerializationTypes.MoreChoices
                                 .@Item;
                             break;
                         }
@@ -24173,17 +24207,16 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                                     ca_0,
                                     typeof(global::System.Object)
                                 );
-                                a_0[ca_0++] = System.Xml.XmlConvert.ToInt32(
-                                    Reader.ReadElementString()
-                                );
+                                a_0[ca_0++] = System.Xml
+                                    .XmlConvert
+                                    .ToInt32(Reader.ReadElementString());
                             }
                             choice_a_0 = (global::SerializationTypes.MoreChoices[])EnsureArrayIndex(
                                 choice_a_0,
                                 cchoice_a_0,
                                 typeof(global::SerializationTypes.MoreChoices)
                             );
-                            choice_a_0[cchoice_a_0++] = global::SerializationTypes
-                                .MoreChoices
+                            choice_a_0[cchoice_a_0++] = global::SerializationTypes.MoreChoices
                                 .@Amount;
                             break;
                         }
@@ -24276,9 +24309,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                             )
                             {
                                 {
-                                    o.@IntField1 = System.Xml.XmlConvert.ToInt32(
-                                        Reader.ReadElementString()
-                                    );
+                                    o.@IntField1 = System.Xml
+                                        .XmlConvert
+                                        .ToInt32(Reader.ReadElementString());
                                 }
                             }
                             state = 1;
@@ -24292,9 +24325,9 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                             )
                             {
                                 {
-                                    o.@IntField2 = System.Xml.XmlConvert.ToInt32(
-                                        Reader.ReadElementString()
-                                    );
+                                    o.@IntField2 = System.Xml
+                                        .XmlConvert
+                                        .ToInt32(Reader.ReadElementString());
                                 }
                             }
                             state = 2;
@@ -24743,9 +24776,8 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
             id142_NoneParameter = Reader.NameTable.Add(@"NoneParameter");
             id141_ArrayOfString1 = Reader.NameTable.Add(@"ArrayOfString1");
             id215_ClassID = Reader.NameTable.Add(@"ClassID");
-            id100_TypeWithShouldSerializeMethod = Reader.NameTable.Add(
-                @"TypeWithShouldSerializeMethod"
-            );
+            id100_TypeWithShouldSerializeMethod = Reader.NameTable
+                .Add(@"TypeWithShouldSerializeMethod");
             id26_dateTime = Reader.NameTable.Add(@"dateTime");
             id6_TypeWithTimeSpanProperty = Reader.NameTable.Add(@"TypeWithTimeSpanProperty");
             id162_DefaultDTO = Reader.NameTable.Add(@"DefaultDTO");
@@ -24764,9 +24796,8 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
             id42_XElementStruct = Reader.NameTable.Add(@"XElementStruct");
             id113_MiddleName = Reader.NameTable.Add(@"MiddleName");
             id41_XElementWrapper = Reader.NameTable.Add(@"XElementWrapper");
-            id44_TypeWithDateTimeStringProperty = Reader.NameTable.Add(
-                @"TypeWithDateTimeStringProperty"
-            );
+            id44_TypeWithDateTimeStringProperty = Reader.NameTable
+                .Add(@"TypeWithDateTimeStringProperty");
             id226_Struct1 = Reader.NameTable.Add(@"Struct1");
             id183_ShipCost = Reader.NameTable.Add(@"ShipCost");
             id145_ArrayOfArrayOfSimpleType = Reader.NameTable.Add(@"ArrayOfArrayOfSimpleType");
@@ -24842,9 +24873,8 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
             id190_Comment2 = Reader.NameTable.Add(@"Comment2");
             id83_AttributeTesting = Reader.NameTable.Add(@"AttributeTesting");
             id30_Trumpet = Reader.NameTable.Add(@"Trumpet");
-            id47_TypeWithGetOnlyArrayProperties = Reader.NameTable.Add(
-                @"TypeWithGetOnlyArrayProperties"
-            );
+            id47_TypeWithGetOnlyArrayProperties = Reader.NameTable
+                .Add(@"TypeWithGetOnlyArrayProperties");
             id65_Item = Reader.NameTable.Add(@"TypeWithDateTimePropertyAsXmlTime");
             id51_ArrayOfAnyType = Reader.NameTable.Add(@"ArrayOfAnyType");
             id255_IntArrayValue = Reader.NameTable.Add(@"IntArrayValue");
@@ -24855,18 +24885,15 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
             id24_DerivedClass1 = Reader.NameTable.Add(@"DerivedClass1");
             id81_LongEnum = Reader.NameTable.Add(@"LongEnum");
             id94_ServerSettings = Reader.NameTable.Add(@"ServerSettings");
-            id62_BaseClassWithSamePropertyName = Reader.NameTable.Add(
-                @"BaseClassWithSamePropertyName"
-            );
+            id62_BaseClassWithSamePropertyName = Reader.NameTable
+                .Add(@"BaseClassWithSamePropertyName");
             id146_P1 = Reader.NameTable.Add(@"P1");
-            id133_ArrayOfTypeWithLinkedProperty = Reader.NameTable.Add(
-                @"ArrayOfTypeWithLinkedProperty"
-            );
+            id133_ArrayOfTypeWithLinkedProperty = Reader.NameTable
+                .Add(@"ArrayOfTypeWithLinkedProperty");
             id230_Number = Reader.NameTable.Add(@"Number");
             id239_SimpleTypeValue = Reader.NameTable.Add(@"SimpleTypeValue");
-            id89_TypeWithPropertyNameSpecified = Reader.NameTable.Add(
-                @"TypeWithPropertyNameSpecified"
-            );
+            id89_TypeWithPropertyNameSpecified = Reader.NameTable
+                .Add(@"TypeWithPropertyNameSpecified");
             id269_StringField2 = Reader.NameTable.Add(@"StringField2");
             id159_Base64Content = Reader.NameTable.Add(@"Base64Content");
             id122_ParameterOfString = Reader.NameTable.Add(@"ParameterOfString");
@@ -24889,14 +24916,12 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
             id240_StrProperty = Reader.NameTable.Add(@"StrProperty");
             id106_TypeWithFieldsOrdered = Reader.NameTable.Add(@"TypeWithFieldsOrdered");
             id256_DateTimeContent = Reader.NameTable.Add(@"DateTimeContent");
-            id63_DerivedClassWithSameProperty = Reader.NameTable.Add(
-                @"DerivedClassWithSameProperty"
-            );
+            id63_DerivedClassWithSameProperty = Reader.NameTable
+                .Add(@"DerivedClassWithSameProperty");
             id261_NMTOKENContent = Reader.NameTable.Add(@"NMTOKENContent");
             id7_Item = Reader.NameTable.Add(@"TypeWithDefaultTimeSpanProperty");
-            id86_KnownTypesThroughConstructor = Reader.NameTable.Add(
-                @"KnownTypesThroughConstructor"
-            );
+            id86_KnownTypesThroughConstructor = Reader.NameTable
+                .Add(@"KnownTypesThroughConstructor");
             id247_DS2Root = Reader.NameTable.Add(@"DS2Root");
             id1_TypeWithXmlElementProperty = Reader.NameTable.Add(@"TypeWithXmlElementProperty");
             id225_OptionullInt = Reader.NameTable.Add(@"OptionullInt");
@@ -24904,9 +24929,8 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
             id67_SimpleDC = Reader.NameTable.Add(@"SimpleDC");
             id14_Vehicle = Reader.NameTable.Add(@"Vehicle");
             id84_ItemChoiceType = Reader.NameTable.Add(@"ItemChoiceType");
-            id60_TypeHasArrayOfASerializedAsB = Reader.NameTable.Add(
-                @"TypeHasArrayOfASerializedAsB"
-            );
+            id60_TypeHasArrayOfASerializedAsB = Reader.NameTable
+                .Add(@"TypeHasArrayOfASerializedAsB");
             id49_TypeWithMyCollectionField = Reader.NameTable.Add(@"TypeWithMyCollectionField");
             id176_City = Reader.NameTable.Add(@"City");
             id52_anyType = Reader.NameTable.Add(@"anyType");
@@ -24932,9 +24956,8 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
             id103_Item = Reader.NameTable.Add(@"TypeWithTypesHavingCustomFormatter");
             id245_Item = Reader.NameTable.Add(@"QualifiedSchemaFormListProperty");
             id267_IntField1 = Reader.NameTable.Add(@"IntField1");
-            id90_TypeWithXmlSchemaFormAttribute = Reader.NameTable.Add(
-                @"TypeWithXmlSchemaFormAttribute"
-            );
+            id90_TypeWithXmlSchemaFormAttribute = Reader.NameTable
+                .Add(@"TypeWithXmlSchemaFormAttribute");
             id76_ByteEnum = Reader.NameTable.Add(@"ByteEnum");
             id93_Item = Reader.NameTable.Add(@"TypeWithNonPublicDefaultConstructor");
             id202_CurrentDateTime = Reader.NameTable.Add(@"CurrentDateTime");
@@ -24971,20 +24994,17 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
             id180_OrderDate = Reader.NameTable.Add(@"OrderDate");
             id70_EnumFlags = Reader.NameTable.Add(@"EnumFlags");
             id266_Amount = Reader.NameTable.Add(@"Amount");
-            id9_TypeWithXmlNodeArrayProperty = Reader.NameTable.Add(
-                @"TypeWithXmlNodeArrayProperty"
-            );
+            id9_TypeWithXmlNodeArrayProperty = Reader.NameTable
+                .Add(@"TypeWithXmlNodeArrayProperty");
             id259_NameContent = Reader.NameTable.Add(@"NameContent");
             id220_Int = Reader.NameTable.Add(@"Int");
-            id64_DerivedClassWithSameProperty2 = Reader.NameTable.Add(
-                @"DerivedClassWithSameProperty2"
-            );
+            id64_DerivedClassWithSameProperty2 = Reader.NameTable
+                .Add(@"DerivedClassWithSameProperty2");
             id125_ArrayOfOrderedItem = Reader.NameTable.Add(@"ArrayOfOrderedItem");
             id157_LineTotal = Reader.NameTable.Add(@"LineTotal");
             id254_StringArrayValue = Reader.NameTable.Add(@"StringArrayValue");
-            id107_Item = Reader.NameTable.Add(
-                @"TypeWithKnownTypesOfCollectionsWithConflictingXmlName"
-            );
+            id107_Item = Reader.NameTable
+                .Add(@"TypeWithKnownTypesOfCollectionsWithConflictingXmlName");
             id56_DCClassWithEnumAndStruct = Reader.NameTable.Add(@"DCClassWithEnumAndStruct");
             id270_StringField1 = Reader.NameTable.Add(@"StringField1");
             id182_SubTotal = Reader.NameTable.Add(@"SubTotal");

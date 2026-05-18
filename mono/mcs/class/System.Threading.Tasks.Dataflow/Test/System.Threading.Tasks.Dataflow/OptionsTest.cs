@@ -405,15 +405,16 @@ namespace MonoTests.System.Threading.Tasks.Dataflow
             var evt = new ManualResetEventSlim();
 
             Func<Task<Tuple<DataflowMessageStatus, bool>>> startTask = () =>
-                Task.Factory.StartNew(() =>
-                {
-                    var sourceBlock = new TestSourceBlock<int> { ConsumeWaiter = evt.Wait };
-                    var header = new DataflowMessageHeader(1);
-                    sourceBlock.AddMessage(header, 1);
-                    var status = block.OfferMessage(header, 1, sourceBlock, true);
+                Task.Factory
+                    .StartNew(() =>
+                    {
+                        var sourceBlock = new TestSourceBlock<int> { ConsumeWaiter = evt.Wait };
+                        var header = new DataflowMessageHeader(1);
+                        sourceBlock.AddMessage(header, 1);
+                        var status = block.OfferMessage(header, 1, sourceBlock, true);
 
-                    return Tuple.Create(status, sourceBlock.WasConsumed(header));
-                });
+                        return Tuple.Create(status, sourceBlock.WasConsumed(header));
+                    });
 
             var task1 = startTask();
             var task2 = startTask();

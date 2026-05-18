@@ -117,10 +117,8 @@ namespace System.Configuration
                 Configuration parentFile = GetParentWithFile();
                 if (parentFile != null)
                 {
-                    string parentRelativePath = system.Host.GetConfigPathFromLocationSubPath(
-                        configPath,
-                        relativePath
-                    );
+                    string parentRelativePath = system.Host
+                        .GetConfigPathFromLocationSubPath(configPath, relativePath);
                     parentConfig = parentFile.FindLocationConfiguration(
                         parentRelativePath,
                         defaultConfiguration
@@ -248,10 +246,8 @@ namespace System.Configuration
             {
                 if (evaluationContext == null)
                 {
-                    object ctx = system.Host.CreateConfigurationContext(
-                        configPath,
-                        GetLocationSubPath()
-                    );
+                    object ctx = system.Host
+                        .CreateConfigurationContext(configPath, GetLocationSubPath());
                     evaluationContext = new ContextInformation(this, ctx);
                 }
 
@@ -419,11 +415,12 @@ namespace System.Configuration
                 );
 
             if (
-                !system.Host.IsDefinitionAllowed(
-                    configPath,
-                    sec.SectionInformation.AllowDefinition,
-                    sec.SectionInformation.AllowExeDefinition
-                )
+                !system.Host
+                    .IsDefinitionAllowed(
+                        configPath,
+                        sec.SectionInformation.AllowDefinition,
+                        sec.SectionInformation.AllowExeDefinition
+                    )
             )
             {
                 object ctx =

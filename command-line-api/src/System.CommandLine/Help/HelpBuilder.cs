@@ -165,8 +165,9 @@ namespace System.CommandLine.Help
 
         private bool WriteSubcommands(HelpContext context)
         {
-            var subcommands = context
-                .Command.Subcommands.Where(x => !x.Hidden)
+            var subcommands = context.Command
+                .Subcommands
+                .Where(x => !x.Hidden)
                 .Select(x => GetTwoColumnRow(x, context))
                 .ToArray();
             if (subcommands.Length > 0)

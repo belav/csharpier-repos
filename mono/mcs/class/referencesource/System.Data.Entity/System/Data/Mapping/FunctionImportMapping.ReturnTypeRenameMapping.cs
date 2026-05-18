@@ -66,13 +66,19 @@ namespace System.Data.Mapping
         internal IEnumerable<EntityType> GetMappedEntityTypes(ItemCollection itemCollection)
         {
             const bool includeAbstractTypes = false;
-            return this.EntityTypes.Concat(
-                this.IsOfTypeEntityTypes.SelectMany(entityType =>
-                    MetadataHelper
-                        .GetTypeAndSubtypesOf(entityType, itemCollection, includeAbstractTypes)
-                        .Cast<EntityType>()
-                )
-            );
+            return this.EntityTypes
+                .Concat(
+                    this.IsOfTypeEntityTypes
+                        .SelectMany(entityType =>
+                            MetadataHelper
+                                .GetTypeAndSubtypesOf(
+                                    entityType,
+                                    itemCollection,
+                                    includeAbstractTypes
+                                )
+                                .Cast<EntityType>()
+                        )
+                );
         }
 
         internal IEnumerable<String> GetDiscriminatorColumns()

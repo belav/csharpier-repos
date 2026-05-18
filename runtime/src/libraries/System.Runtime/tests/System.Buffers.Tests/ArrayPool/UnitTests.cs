@@ -805,14 +805,13 @@ namespace System.Buffers.ArrayPool.Tests
             // If those details change, this test will need to be updated accordingly.
 
             var psi = new ProcessStartInfo();
-            psi.Environment.Add(
-                "DOTNET_SYSTEM_BUFFERS_SHAREDARRAYPOOL_MAXPARTITIONCOUNT",
-                partitionCount
-            );
-            psi.Environment.Add(
-                "DOTNET_SYSTEM_BUFFERS_SHAREDARRAYPOOL_MAXARRAYSPERPARTITION",
-                maxArraysPerPartition
-            );
+            psi.Environment
+                .Add("DOTNET_SYSTEM_BUFFERS_SHAREDARRAYPOOL_MAXPARTITIONCOUNT", partitionCount);
+            psi.Environment
+                .Add(
+                    "DOTNET_SYSTEM_BUFFERS_SHAREDARRAYPOOL_MAXARRAYSPERPARTITION",
+                    maxArraysPerPartition
+                );
 
             RemoteExecutor
                 .Invoke(
@@ -823,9 +822,8 @@ namespace System.Buffers.ArrayPool.Tests
                         expectedMaxArraysPerPartition
                     ) =>
                     {
-                        Type staticsType = typeof(ArrayPool<>).Assembly.GetType(
-                            "System.Buffers.SharedArrayPoolStatics"
-                        );
+                        Type staticsType = typeof(ArrayPool<>).Assembly
+                            .GetType("System.Buffers.SharedArrayPoolStatics");
                         Assert.NotNull(staticsType);
 
                         FieldInfo partitionCountField = staticsType.GetField(

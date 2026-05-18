@@ -39,11 +39,12 @@ namespace System.Activities.Validation
 
             if (toValidate.HasBeenAssociatedWithAnInstance)
             {
-                throw FxTrace.Exception.AsError(
-                    new InvalidOperationException(
-                        SR.RootActivityAlreadyAssociatedWithInstance(toValidate.DisplayName)
-                    )
-                );
+                throw FxTrace.Exception
+                    .AsError(
+                        new InvalidOperationException(
+                            SR.RootActivityAlreadyAssociatedWithInstance(toValidate.DisplayName)
+                        )
+                    );
             }
 
             if (
@@ -55,10 +56,8 @@ namespace System.Activities.Validation
                 )
             )
             {
-                throw FxTrace.Exception.Argument(
-                    "settings",
-                    SR.InvalidPrepareForRuntimeValidationSettings
-                );
+                throw FxTrace.Exception
+                    .Argument("settings", SR.InvalidPrepareForRuntimeValidationSettings);
             }
 
             InternalActivityValidationServices validator = new InternalActivityValidationServices(
@@ -163,9 +162,8 @@ namespace System.Activities.Validation
             if (inputs != null)
             {
                 List<string> unusedArguments = null;
-                IEnumerable<RuntimeArgument> arguments = rootActivity.RuntimeArguments.Where(
-                    (a) => ArgumentDirectionHelper.IsIn(a.Direction)
-                );
+                IEnumerable<RuntimeArgument> arguments = rootActivity.RuntimeArguments
+                    .Where((a) => ArgumentDirectionHelper.IsIn(a.Direction));
 
                 foreach (string key in inputs.Keys)
                 {
@@ -697,10 +695,9 @@ namespace System.Activities.Validation
                         {
                             IList<Constraint> policyConstraints;
                             if (
-                                this.settings.AdditionalConstraints.TryGetValue(
-                                    currentType,
-                                    out policyConstraints
-                                )
+                                this.settings
+                                    .AdditionalConstraints
+                                    .TryGetValue(currentType, out policyConstraints)
                             )
                             {
                                 RunConstraints(
@@ -720,10 +717,12 @@ namespace System.Activities.Validation
                                 {
                                     IList<Constraint> genericTypePolicyConstraints;
                                     if (
-                                        this.settings.AdditionalConstraints.TryGetValue(
-                                            genericDefinitionType,
-                                            out genericTypePolicyConstraints
-                                        )
+                                        this.settings
+                                            .AdditionalConstraints
+                                            .TryGetValue(
+                                                genericDefinitionType,
+                                                out genericTypePolicyConstraints
+                                            )
                                     )
                                     {
                                         RunConstraints(
@@ -749,10 +748,10 @@ namespace System.Activities.Validation
                             this.expressionRoot = childActivity.Activity;
                             // Back-compat: In Dev10 we always used ProcessActivityTreeOptions.FullCachingOptions here, and ignored this.options.
                             // So we need to continue to do that, unless the new Dev11 flag SkipRootConfigurationValidation is passed.
-                            ProcessActivityTreeOptions options =
-                                this.options.SkipRootConfigurationValidation
-                                    ? this.options
-                                    : ProcessActivityTreeOptions.FullCachingOptions;
+                            ProcessActivityTreeOptions options = this.options
+                                .SkipRootConfigurationValidation
+                                ? this.options
+                                : ProcessActivityTreeOptions.FullCachingOptions;
                             ActivityUtilities.FinishCachingSubtree(
                                 childActivity,
                                 parentChain,

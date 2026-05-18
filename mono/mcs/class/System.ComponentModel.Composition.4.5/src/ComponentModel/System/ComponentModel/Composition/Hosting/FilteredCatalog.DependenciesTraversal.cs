@@ -76,10 +76,8 @@ namespace System.ComponentModel.Composition.Hosting
                     foreach (var contractName in import.GetCandidateContractNames(part))
                     {
                         if (
-                            this._exportersIndex.TryGetValue(
-                                contractName,
-                                out candidateReachableParts
-                            )
+                            this._exportersIndex
+                                .TryGetValue(contractName, out candidateReachableParts)
                         )
                         {
                             // find if they actually match

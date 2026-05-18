@@ -72,12 +72,13 @@ public sealed class Conflict<TValue>
         ArgumentNullException.ThrowIfNull(method);
         ArgumentNullException.ThrowIfNull(builder);
 
-        builder.Metadata.Add(
-            new ProducesResponseTypeMetadata(
-                StatusCodes.Status409Conflict,
-                typeof(TValue),
-                new[] { "application/json" }
-            )
-        );
+        builder.Metadata
+            .Add(
+                new ProducesResponseTypeMetadata(
+                    StatusCodes.Status409Conflict,
+                    typeof(TValue),
+                    new[] { "application/json" }
+                )
+            );
     }
 }

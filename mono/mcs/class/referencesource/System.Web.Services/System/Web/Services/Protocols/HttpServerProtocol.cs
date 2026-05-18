@@ -238,9 +238,8 @@ namespace System.Web.Services.Protocols
                 {
                     // it's possible that the method name came in as UTF-8 but was mangled by IIS so we try it
                     // again as UTF8...
-                    string utf8MethodName = Encoding.UTF8.GetString(
-                        Encoding.Default.GetBytes(methodName)
-                    );
+                    string utf8MethodName = Encoding.UTF8
+                        .GetString(Encoding.Default.GetBytes(methodName));
                     serverMethod = serverType.GetMethod(utf8MethodName);
                     if (serverMethod == null)
                         throw new InvalidOperationException(
@@ -326,8 +325,7 @@ namespace System.Web.Services.Protocols
             );
             StreamWriter writer = new StreamWriter(outputStream, new UTF8Encoding(false));
             if (
-                System
-                    .Web
+                System.Web
                     .Services
                     .Configuration
                     .WebServicesSection

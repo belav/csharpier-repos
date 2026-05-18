@@ -504,10 +504,15 @@ namespace System.Data.SqlClient
                         else
                         {
                             hasDelegatedTransaction = (bool)
-                                SysTxForGlobalTransactions.EnlistPromotableSinglePhase.Invoke(
-                                    tx,
-                                    new object[] { delegatedTransaction, _globalTransactionTMID }
-                                );
+                                SysTxForGlobalTransactions.EnlistPromotableSinglePhase
+                                    .Invoke(
+                                        tx,
+                                        new object[]
+                                        {
+                                            delegatedTransaction,
+                                            _globalTransactionTMID,
+                                        }
+                                    );
                         }
                     }
                     else
@@ -839,10 +844,8 @@ namespace System.Data.SqlClient
             byte[] transactionCookie = null;
             if (null != transaction)
             {
-                transactionCookie = SysTx.TransactionInterop.GetExportCookie(
-                    transaction,
-                    whereAbouts
-                );
+                transactionCookie = SysTx.TransactionInterop
+                    .GetExportCookie(transaction, whereAbouts);
             }
             return transactionCookie;
         }

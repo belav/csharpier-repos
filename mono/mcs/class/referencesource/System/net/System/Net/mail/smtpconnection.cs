@@ -679,13 +679,14 @@ namespace System.Net.Mail
         private static void AuthenticateCallback(object state)
         {
             AuthenticateCallbackContext context = (AuthenticateCallbackContext)state;
-            context.result = context.module.Authenticate(
-                null,
-                context.credential,
-                context.thisPtr,
-                context.spn,
-                context.token
-            );
+            context.result = context.module
+                .Authenticate(
+                    null,
+                    context.credential,
+                    context.thisPtr,
+                    context.spn,
+                    context.token
+                );
         }
 
         private class AuthenticateCallbackContext
@@ -801,18 +802,22 @@ namespace System.Net.Mail
                                 + "::Connect pooledStream has wrong creds "
                                 + ValidationHelper.HashString(pooledStream)
                         );
-                        ConnectAndHandshakeAsyncResult.connection.connectionPool.PutConnection(
-                            pooledStream,
-                            pooledStream.Owner,
-                            ConnectAndHandshakeAsyncResult.connection.Timeout,
-                            false
-                        );
-                        pooledStream = (SmtpPooledStream)
-                            ConnectAndHandshakeAsyncResult.connection.connectionPool.GetConnection(
-                                (object)ConnectAndHandshakeAsyncResult,
-                                ConnectAndHandshakeAsyncResult.m_ConnectionCreatedCallback,
-                                ConnectAndHandshakeAsyncResult.connection.Timeout
+                        ConnectAndHandshakeAsyncResult.connection
+                            .connectionPool
+                            .PutConnection(
+                                pooledStream,
+                                pooledStream.Owner,
+                                ConnectAndHandshakeAsyncResult.connection.Timeout,
+                                false
                             );
+                        pooledStream = (SmtpPooledStream)
+                            ConnectAndHandshakeAsyncResult.connection
+                                .connectionPool
+                                .GetConnection(
+                                    (object)ConnectAndHandshakeAsyncResult,
+                                    ConnectAndHandshakeAsyncResult.m_ConnectionCreatedCallback,
+                                    ConnectAndHandshakeAsyncResult.connection.Timeout
+                                );
                         if (pooledStream == null)
                         {
                             GlobalLog.Leave(
@@ -837,12 +842,14 @@ namespace System.Net.Mail
                         //if we were cancelled while getting the connection, we should close and return
                         if (ConnectAndHandshakeAsyncResult.connection.isClosed)
                         {
-                            ConnectAndHandshakeAsyncResult.connection.connectionPool.PutConnection(
-                                pooledStream,
-                                pooledStream.Owner,
-                                ConnectAndHandshakeAsyncResult.connection.Timeout,
-                                false
-                            );
+                            ConnectAndHandshakeAsyncResult.connection
+                                .connectionPool
+                                .PutConnection(
+                                    pooledStream,
+                                    pooledStream.Owner,
+                                    ConnectAndHandshakeAsyncResult.connection.Timeout,
+                                    false
+                                );
                             GlobalLog.Print(
                                 "ConnectAndHandshakeAsyncResult#"
                                     + ValidationHelper.HashString(request)
@@ -893,11 +900,12 @@ namespace System.Net.Mail
                 }
 
                 SmtpPooledStream pooledStream = (SmtpPooledStream)
-                    connection.connectionPool.GetConnection(
-                        (object)this,
-                        (synchronous ? null : m_ConnectionCreatedCallback),
-                        connection.Timeout
-                    );
+                    connection.connectionPool
+                        .GetConnection(
+                            (object)this,
+                            (synchronous ? null : m_ConnectionCreatedCallback),
+                            connection.Timeout
+                        );
                 GlobalLog.Print(
                     "ConnectAndHandshakeAsyncResult#"
                         + ValidationHelper.HashString(this)
@@ -920,18 +928,20 @@ namespace System.Net.Mail
                                     + "::Connect pooledStream has wrong creds "
                                     + ValidationHelper.HashString(pooledStream)
                             );
-                            connection.connectionPool.PutConnection(
-                                pooledStream,
-                                pooledStream.Owner,
-                                connection.Timeout,
-                                false
-                            );
-                            pooledStream = (SmtpPooledStream)
-                                connection.connectionPool.GetConnection(
-                                    (object)this,
-                                    (synchronous ? null : m_ConnectionCreatedCallback),
-                                    connection.Timeout
+                            connection.connectionPool
+                                .PutConnection(
+                                    pooledStream,
+                                    pooledStream.Owner,
+                                    connection.Timeout,
+                                    false
                                 );
+                            pooledStream = (SmtpPooledStream)
+                                connection.connectionPool
+                                    .GetConnection(
+                                        (object)this,
+                                        (synchronous ? null : m_ConnectionCreatedCallback),
+                                        connection.Timeout
+                                    );
                             if (pooledStream == null)
                             {
                                 GlobalLog.Leave(
@@ -1021,9 +1031,10 @@ namespace System.Net.Mail
                     {
                         try
                         {
-                            LineInfo info = thisPtr.connection.Reader.CurrentReader.EndReadLine(
-                                result
-                            );
+                            LineInfo info = thisPtr.connection
+                                .Reader
+                                .CurrentReader
+                                .EndReadLine(result);
                             if (info.StatusCode != SmtpStatusCode.ServiceReady)
                             {
                                 thisPtr.InvokeCallback(
@@ -1283,11 +1294,8 @@ namespace System.Net.Mail
                             continue;
                         }
 
-                        NetworkCredential credential = connection.credentials.GetCredential(
-                            host,
-                            port,
-                            module.AuthenticationType
-                        );
+                        NetworkCredential credential = connection.credentials
+                            .GetCredential(host, port, module.AuthenticationType);
                         if (credential == null)
                             continue;
                         Authorization auth = connection.SetContextAndTryAuthenticate(
@@ -1359,8 +1367,8 @@ namespace System.Net.Mail
                         }
                         else if ((int)info.StatusCode == 235)
                         {
-                            thisPtr
-                                .connection.authenticationModules[thisPtr.currentModule]
+                            thisPtr.connection
+                                .authenticationModules[thisPtr.currentModule]
                                 .CloseContext(thisPtr.connection);
                             thisPtr.connection.isConnected = true;
                             thisPtr.InvokeCallback();
@@ -1434,8 +1442,8 @@ namespace System.Net.Mail
                         LineInfo info = AuthCommand.EndSend(result);
                         if ((int)info.StatusCode == 235)
                         {
-                            thisPtr
-                                .connection.authenticationModules[thisPtr.currentModule]
+                            thisPtr.connection
+                                .authenticationModules[thisPtr.currentModule]
                                 .CloseContext(thisPtr.connection);
                             thisPtr.connection.isConnected = true;
                             thisPtr.InvokeCallback();

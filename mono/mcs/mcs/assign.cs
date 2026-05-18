@@ -395,17 +395,17 @@ namespace Mono.CSharp
             System.Linq.Expressions.UnaryExpression source_object;
             if (ctx.HasSet(BuilderContext.Options.CheckedScope))
             {
-                source_object = System.Linq.Expressions.Expression.ConvertChecked(
-                    source.MakeExpression(ctx),
-                    target_object.Type
-                );
+                source_object = System.Linq
+                    .Expressions
+                    .Expression
+                    .ConvertChecked(source.MakeExpression(ctx), target_object.Type);
             }
             else
             {
-                source_object = System.Linq.Expressions.Expression.Convert(
-                    source.MakeExpression(ctx),
-                    target_object.Type
-                );
+                source_object = System.Linq
+                    .Expressions
+                    .Expression
+                    .Convert(source.MakeExpression(ctx), target_object.Type);
             }
 
             return System.Linq.Expressions.Expression.Assign(target_object, source_object);
@@ -509,12 +509,13 @@ namespace Mono.CSharp
                 return e;
 
             if (CheckEqualAssign(target))
-                ec.Report.Warning(
-                    1717,
-                    3,
-                    loc,
-                    "Assignment made to same variable; did you mean to assign something else?"
-                );
+                ec.Report
+                    .Warning(
+                        1717,
+                        3,
+                        loc,
+                        "Assignment made to same variable; did you mean to assign something else?"
+                    );
 
             return this;
         }
@@ -743,8 +744,9 @@ namespace Mono.CSharp
         protected override Expression DoResolve(ResolveContext rc)
         {
             target = new FieldExpr(field, loc);
-            source = rc
-                .CurrentBlock.ParametersBlock.GetParameterInfo(parameter)
+            source = rc.CurrentBlock
+                .ParametersBlock
+                .GetParameterInfo(parameter)
                 .CreateReferenceExpression(rc, loc);
             return base.DoResolve(rc);
         }
@@ -849,13 +851,14 @@ namespace Mono.CSharp
 
             if (target is MethodGroupExpr)
             {
-                ec.Report.Error(
-                    1656,
-                    loc,
-                    "Cannot assign to `{0}' because it is a `{1}'",
-                    ((MethodGroupExpr)target).Name,
-                    target.ExprClassName
-                );
+                ec.Report
+                    .Error(
+                        1656,
+                        loc,
+                        "Cannot assign to `{0}' because it is a `{1}'",
+                        ((MethodGroupExpr)target).Name,
+                        target.ExprClassName
+                    );
                 return null;
             }
 

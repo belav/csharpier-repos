@@ -257,12 +257,13 @@ namespace System.Runtime.Serialization.Json
                 }
                 if ((tickCount > DateTime.MaxValue.Ticks) || (tickCount < DateTime.MinValue.Ticks))
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        XmlObjectSerializer.CreateSerializationException(
-                            SR.GetString(SR.JsonDateTimeOutOfRange),
-                            new ArgumentOutOfRangeException("value")
-                        )
-                    );
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperError(
+                            XmlObjectSerializer.CreateSerializationException(
+                                SR.GetString(SR.JsonDateTimeOutOfRange),
+                                new ArgumentOutOfRangeException("value")
+                            )
+                        );
                 }
             }
 

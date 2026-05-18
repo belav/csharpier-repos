@@ -84,9 +84,8 @@ namespace tests.system_data_dll.System_Data
                 BeginCase("NoNullAllowedException - Add Row");
                 try
                 {
-                    tbl.Rows.Add(
-                        new object[] { null, "value", "value", new DateTime(0), 0.5, true }
-                    );
+                    tbl.Rows
+                        .Add(new object[] { null, "value", "value", new DateTime(0), 0.5, true });
                 }
                 catch (NoNullAllowedException ex)
                 {
@@ -111,9 +110,18 @@ namespace tests.system_data_dll.System_Data
                 BeginCase("NoNullAllowedException - Add Row");
                 try
                 {
-                    tbl.Rows.Add(
-                        new object[] { DBNull.Value, "value", "value", new DateTime(0), 0.5, true }
-                    );
+                    tbl.Rows
+                        .Add(
+                            new object[]
+                            {
+                                DBNull.Value,
+                                "value",
+                                "value",
+                                new DateTime(0),
+                                0.5,
+                                true,
+                            }
+                        );
                 }
                 catch (NoNullAllowedException ex)
                 {
@@ -281,18 +289,19 @@ namespace tests.system_data_dll.System_Data
                 BeginCase("NoNullAllowedException - Add Row");
                 try
                 {
-                    tbl.Rows.Add(
-                        new object[]
-                        {
-                            1,
-                            "value",
-                            "value",
-                            new DateTime(0),
-                            0.5,
-                            true,
-                            DBNull.Value,
-                        }
-                    );
+                    tbl.Rows
+                        .Add(
+                            new object[]
+                            {
+                                1,
+                                "value",
+                                "value",
+                                new DateTime(0),
+                                0.5,
+                                true,
+                                DBNull.Value,
+                            }
+                        );
                 }
                 catch (NoNullAllowedException ex)
                 {

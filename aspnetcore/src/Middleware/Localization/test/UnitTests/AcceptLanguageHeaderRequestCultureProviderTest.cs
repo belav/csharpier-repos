@@ -35,8 +35,8 @@ public class AcceptLanguageHeaderRequestCultureProviderTest
                         );
                         app.Run(context =>
                         {
-                            var requestCultureFeature =
-                                context.Features.Get<IRequestCultureFeature>();
+                            var requestCultureFeature = context.Features
+                                .Get<IRequestCultureFeature>();
                             var requestCulture = requestCultureFeature.RequestCulture;
                             Assert.Equal("ar-SA", requestCulture.Culture.Name);
                             return Task.FromResult(0);
@@ -80,8 +80,8 @@ public class AcceptLanguageHeaderRequestCultureProviderTest
                         );
                         app.Run(context =>
                         {
-                            var requestCultureFeature =
-                                context.Features.Get<IRequestCultureFeature>();
+                            var requestCultureFeature = context.Features
+                                .Get<IRequestCultureFeature>();
                             var requestCulture = requestCultureFeature.RequestCulture;
                             Assert.Equal("ar-SA", requestCulture.Culture.Name);
                             return Task.FromResult(0);
@@ -124,8 +124,8 @@ public class AcceptLanguageHeaderRequestCultureProviderTest
                         );
                         app.Run(context =>
                         {
-                            var requestCultureFeature =
-                                context.Features.Get<IRequestCultureFeature>();
+                            var requestCultureFeature = context.Features
+                                .Get<IRequestCultureFeature>();
                             var requestCulture = requestCultureFeature.RequestCulture;
                             Assert.Equal("fr-FR", requestCulture.Culture.Name);
                             return Task.FromResult(0);
@@ -172,8 +172,8 @@ public class AcceptLanguageHeaderRequestCultureProviderTest
                         );
                         app.Run(context =>
                         {
-                            var requestCultureFeature =
-                                context.Features.Get<IRequestCultureFeature>();
+                            var requestCultureFeature = context.Features
+                                .Get<IRequestCultureFeature>();
                             var requestCulture = requestCultureFeature.RequestCulture;
 
                             Assert.Equal("ar-YE", requestCulture.Culture.Name);

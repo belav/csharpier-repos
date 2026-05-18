@@ -77,9 +77,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
         {
             using (_gate.DisposableWait(cancellationToken))
             {
-                var projectPath = inputNode.Id.GetNestedValueByName<Uri>(
-                    CodeGraphNodeIdName.Assembly
-                );
+                var projectPath = inputNode.Id
+                    .GetNestedValueByName<Uri>(CodeGraphNodeIdName.Assembly);
                 var filePath = inputNode.Id.GetNestedValueByName<Uri>(CodeGraphNodeIdName.File);
 
                 if (projectPath == null || filePath == null)
@@ -87,13 +86,14 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
                     return;
                 }
 
-                var project = _solution.Projects.FirstOrDefault(p =>
-                    string.Equals(
-                        p.FilePath,
-                        projectPath.OriginalString,
-                        StringComparison.OrdinalIgnoreCase
-                    )
-                );
+                var project = _solution.Projects
+                    .FirstOrDefault(p =>
+                        string.Equals(
+                            p.FilePath,
+                            projectPath.OriginalString,
+                            StringComparison.OrdinalIgnoreCase
+                        )
+                    );
                 if (project == null)
                 {
                     return;
@@ -101,13 +101,14 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
 
                 _nodeToContextProjectMap.Add(inputNode, project);
 
-                var document = project.Documents.FirstOrDefault(d =>
-                    string.Equals(
-                        d.FilePath,
-                        filePath.OriginalString,
-                        StringComparison.OrdinalIgnoreCase
-                    )
-                );
+                var document = project.Documents
+                    .FirstOrDefault(d =>
+                        string.Equals(
+                            d.FilePath,
+                            filePath.OriginalString,
+                            StringComparison.OrdinalIgnoreCase
+                        )
+                    );
                 if (document == null)
                 {
                     return;
@@ -142,8 +143,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
                     .GetRequiredCompilationAsync(cancellationToken)
                     .ConfigureAwait(false);
                 var symbolId = (SymbolKey?)inputNode[RoslynGraphProperties.SymbolId];
-                var symbol = symbolId
-                    .Value.Resolve(compilation, cancellationToken: cancellationToken)
+                var symbol = symbolId.Value
+                    .Resolve(compilation, cancellationToken: cancellationToken)
                     .Symbol;
                 if (symbol != null)
                 {
@@ -241,8 +242,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
                     .FindSourceDefinitionAsync(symbol, contextProject.Solution, cancellationToken)
                     .ConfigureAwait(false);
                 if (newSymbol != null)
-                    preferredLocation = newSymbol
-                        .Locations.Where(loc => loc.IsInSource)
+                    preferredLocation = newSymbol.Locations
+                        .Where(loc => loc.IsInSource)
                         .FirstOrDefault();
             }
 
@@ -460,8 +461,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
 
         private static void UpdateLabelsForNode(ISymbol symbol, Solution solution, GraphNode node)
         {
-            var progressionLanguageService = solution
-                .Services.GetLanguageServices(symbol.Language)
+            var progressionLanguageService = solution.Services
+                .GetLanguageServices(symbol.Language)
                 .GetService<IProgressionLanguageService>();
 
             // A call from unittest may not have a proper language service.
@@ -512,8 +513,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
                         );
                         commonLabel.Append(">");
                         node[
-                            Microsoft
-                                .VisualStudio
+                            Microsoft.VisualStudio
                                 .ArchitectureTools
                                 .ProgressiveReveal
                                 .ProgressiveRevealSchema
@@ -533,23 +533,18 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
                     var methodSymbol = (IMethodSymbol)symbol;
                     if (methodSymbol.MethodKind == MethodKind.Constructor)
                     {
-                        node.Label =
-                            CodeQualifiedIdentifierBuilder.SpecialNames.GetConstructorLabel(
-                                methodSymbol.ContainingSymbol.Name
-                            );
+                        node.Label = CodeQualifiedIdentifierBuilder.SpecialNames
+                            .GetConstructorLabel(methodSymbol.ContainingSymbol.Name);
                     }
                     else if (methodSymbol.MethodKind == MethodKind.StaticConstructor)
                     {
-                        node.Label =
-                            CodeQualifiedIdentifierBuilder.SpecialNames.GetStaticConstructorLabel(
-                                methodSymbol.ContainingSymbol.Name
-                            );
+                        node.Label = CodeQualifiedIdentifierBuilder.SpecialNames
+                            .GetStaticConstructorLabel(methodSymbol.ContainingSymbol.Name);
                     }
                     else if (methodSymbol.MethodKind == MethodKind.Destructor)
                     {
-                        node.Label = CodeQualifiedIdentifierBuilder.SpecialNames.GetFinalizerLabel(
-                            methodSymbol.ContainingSymbol.Name
-                        );
+                        node.Label = CodeQualifiedIdentifierBuilder.SpecialNames
+                            .GetFinalizerLabel(methodSymbol.ContainingSymbol.Name);
                     }
                     else
                     {
@@ -583,8 +578,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
             // When a node is dragged and dropped from SE to CodeMap, its label could be reset during copying to clipboard.
             // So, we try to keep its label that we computed above in a common label property, which CodeMap can access later.
             node[
-                Microsoft
-                    .VisualStudio
+                Microsoft.VisualStudio
                     .ArchitectureTools
                     .ProgressiveReveal
                     .ProgressiveRevealSchema
@@ -946,8 +940,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
             CancellationToken cancellationToken
         )
         {
-            var document = await result
-                .NavigableItem.Document.GetRequiredDocumentAsync(solution, cancellationToken)
+            var document = await result.NavigableItem
+                .Document
+                .GetRequiredDocumentAsync(solution, cancellationToken)
                 .ConfigureAwait(false);
             var project = document.Project;
 
@@ -994,9 +989,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
                 return null;
 
             var text = await document.GetValueTextAsync(cancellationToken).ConfigureAwait(false);
-            var span = text.Lines.GetLinePositionSpan(
-                NavigateToUtilities.GetBoundedSpan(result.NavigableItem, text)
-            );
+            var span = text.Lines
+                .GetLinePositionSpan(
+                    NavigateToUtilities.GetBoundedSpan(result.NavigableItem, text)
+                );
             var sourceLocation = TryCreateSourceLocation(document.FilePath, span);
             if (sourceLocation == null)
                 return null;

@@ -159,7 +159,9 @@ namespace System.Linq.Parallel
 
             if (querySettings.CancellationState.MergedCancellationToken.IsCancellationRequested)
             {
-                querySettings.CancellationState.ExternalCancellationToken.ThrowIfCancellationRequested();
+                querySettings.CancellationState
+                    .ExternalCancellationToken
+                    .ThrowIfCancellationRequested();
                 throw new OperationCanceledException();
             }
 
@@ -246,7 +248,9 @@ namespace System.Linq.Parallel
 
                 if (querySettings.CancellationState.MergedCancellationToken.IsCancellationRequested)
                 {
-                    querySettings.CancellationState.ExternalCancellationToken.ThrowIfCancellationRequested();
+                    querySettings.CancellationState
+                        .ExternalCancellationToken
+                        .ThrowIfCancellationRequested();
                     throw new OperationCanceledException();
                 }
 

@@ -47,18 +47,14 @@ namespace System.IdentityModel.Protocols.WSTrust
 
             if (!name.IsAbsoluteUri)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                    "name",
-                    SR.GetString(SR.ID0013)
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperArgument("name", SR.GetString(SR.ID0013));
             }
 
             if ((scope != null) && !scope.IsAbsoluteUri)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                    "scope",
-                    SR.GetString(SR.ID0013)
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperArgument("scope", SR.GetString(SR.ID0013));
             }
 
             _name = name;
@@ -85,10 +81,8 @@ namespace System.IdentityModel.Protocols.WSTrust
             {
                 if ((value != null) && !value.IsAbsoluteUri)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                        "value",
-                        SR.GetString(SR.ID0013)
-                    );
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperArgument("value", SR.GetString(SR.ID0013));
                 }
                 _scope = value;
             }

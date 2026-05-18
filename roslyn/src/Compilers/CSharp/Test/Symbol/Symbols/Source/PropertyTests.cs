@@ -3112,8 +3112,7 @@ End Class";
             );
         }
 
-        private static readonly MetadataReference s_propertiesDll = TestReferences
-            .SymbolsTests
+        private static readonly MetadataReference s_propertiesDll = TestReferences.SymbolsTests
             .Properties;
 
         #endregion
@@ -3301,8 +3300,8 @@ public interface IA
             Func<string[], Action<ModuleSymbol>> getValidator = expectedMembers =>
                 m =>
                 {
-                    var actualMembers = m
-                        .GlobalNamespace.GetMember<NamespaceSymbol>("Test")
+                    var actualMembers = m.GlobalNamespace
+                        .GetMember<NamespaceSymbol>("Test")
                         .GetMember<NamedTypeSymbol>("C")
                         .GetMembers()
                         .ToArray();
@@ -3520,9 +3519,8 @@ interface I1
 
             var comp = CreateCompilation(
                 source,
-                parseOptions: CSharpParseOptions.Default.WithLanguageVersion(
-                    LanguageVersion.CSharp5
-                )
+                parseOptions: CSharpParseOptions.Default
+                    .WithLanguageVersion(LanguageVersion.CSharp5)
             );
             comp.GetDeclarationDiagnostics()
                 .Verify(

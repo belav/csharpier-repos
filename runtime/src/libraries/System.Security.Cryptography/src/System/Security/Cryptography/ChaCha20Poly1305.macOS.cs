@@ -32,14 +32,8 @@ namespace System.Security.Cryptography
         )
         {
             CheckDisposed();
-            Interop.AppleCrypto.ChaCha20Poly1305Encrypt(
-                _key,
-                nonce,
-                plaintext,
-                ciphertext,
-                tag,
-                associatedData
-            );
+            Interop.AppleCrypto
+                .ChaCha20Poly1305Encrypt(_key, nonce, plaintext, ciphertext, tag, associatedData);
         }
 
         private void DecryptCore(
@@ -51,14 +45,8 @@ namespace System.Security.Cryptography
         )
         {
             CheckDisposed();
-            Interop.AppleCrypto.ChaCha20Poly1305Decrypt(
-                _key,
-                nonce,
-                ciphertext,
-                tag,
-                plaintext,
-                associatedData
-            );
+            Interop.AppleCrypto
+                .ChaCha20Poly1305Decrypt(_key, nonce, ciphertext, tag, plaintext, associatedData);
         }
 
         public void Dispose()

@@ -3214,72 +3214,78 @@ namespace MonoTests.System.Data
             dtParent.Columns.Add("ParentDouble", typeof(double));
             dtParent.Columns.Add("ParentBool", typeof(bool));
 
-            dtParent.Rows.Add(
-                new object[]
-                {
-                    1,
-                    "1-String1",
-                    "1-String2",
-                    new DateTime(2005, 1, 1, 0, 0, 0, 0),
-                    1.534,
-                    true,
-                }
-            );
-            dtParent.Rows.Add(
-                new object[]
-                {
-                    2,
-                    "2-String1",
-                    "2-String2",
-                    new DateTime(2004, 1, 1, 0, 0, 0, 1),
-                    -1.534,
-                    true,
-                }
-            );
-            dtParent.Rows.Add(
-                new object[]
-                {
-                    3,
-                    "3-String1",
-                    "3-String2",
-                    new DateTime(2003, 1, 1, 0, 0, 1, 0),
-                    double.MinValue * 10000,
-                    false,
-                }
-            );
-            dtParent.Rows.Add(
-                new object[]
-                {
-                    4,
-                    "4-String1",
-                    "4-String2",
-                    new DateTime(2002, 1, 1, 0, 1, 0, 0),
-                    double.MaxValue / 10000,
-                    true,
-                }
-            );
-            dtParent.Rows.Add(
-                new object[]
-                {
-                    5,
-                    "5-String1",
-                    "5-String2",
-                    new DateTime(2001, 1, 1, 1, 0, 0, 0),
-                    0.755,
-                    true,
-                }
-            );
-            dtParent.Rows.Add(
-                new object[]
-                {
-                    6,
-                    "6-String1",
-                    "6-String2",
-                    new DateTime(2000, 1, 1, 0, 0, 0, 0),
-                    0.001,
-                    false,
-                }
-            );
+            dtParent.Rows
+                .Add(
+                    new object[]
+                    {
+                        1,
+                        "1-String1",
+                        "1-String2",
+                        new DateTime(2005, 1, 1, 0, 0, 0, 0),
+                        1.534,
+                        true,
+                    }
+                );
+            dtParent.Rows
+                .Add(
+                    new object[]
+                    {
+                        2,
+                        "2-String1",
+                        "2-String2",
+                        new DateTime(2004, 1, 1, 0, 0, 0, 1),
+                        -1.534,
+                        true,
+                    }
+                );
+            dtParent.Rows
+                .Add(
+                    new object[]
+                    {
+                        3,
+                        "3-String1",
+                        "3-String2",
+                        new DateTime(2003, 1, 1, 0, 0, 1, 0),
+                        double.MinValue * 10000,
+                        false,
+                    }
+                );
+            dtParent.Rows
+                .Add(
+                    new object[]
+                    {
+                        4,
+                        "4-String1",
+                        "4-String2",
+                        new DateTime(2002, 1, 1, 0, 1, 0, 0),
+                        double.MaxValue / 10000,
+                        true,
+                    }
+                );
+            dtParent.Rows
+                .Add(
+                    new object[]
+                    {
+                        5,
+                        "5-String1",
+                        "5-String2",
+                        new DateTime(2001, 1, 1, 1, 0, 0, 0),
+                        0.755,
+                        true,
+                    }
+                );
+            dtParent.Rows
+                .Add(
+                    new object[]
+                    {
+                        6,
+                        "6-String1",
+                        "6-String2",
+                        new DateTime(2000, 1, 1, 0, 0, 0, 0),
+                        0.001,
+                        false,
+                    }
+                );
             dtParent.AcceptChanges();
             return dtParent;
         }
@@ -3798,13 +3804,13 @@ namespace MonoTests.System.Data
 
             ds.Tables.Add(new DataTable("ExampleDataTable"));
             ds.Tables["ExampleDataTable"]
-                .Columns.Add(
-                    new DataColumn("PrimaryKeyColumn", typeof(int), "", MappingType.Attribute)
-                );
+                .Columns
+                .Add(new DataColumn("PrimaryKeyColumn", typeof(int), "", MappingType.Attribute));
             ds.Tables["ExampleDataTable"].Columns["PrimaryKeyColumn"].AllowDBNull = false;
 
             ds.Tables["ExampleDataTable"]
-                .Constraints.Add(
+                .Constraints
+                .Add(
                     "PK_ExampleDataTable",
                     ds.Tables["ExampleDataTable"].Columns["PrimaryKeyColumn"],
                     true
@@ -3960,11 +3966,12 @@ namespace MonoTests.System.Data
             dt3.Columns.Add(new DataColumn("Title", typeof(string), "", MappingType.Attribute));
             dt3.Columns["Title"].AllowDBNull = false;
 
-            dt3.Constraints.Add(
-                "PK_Element",
-                new DataColumn[] { dt3.Columns["Dimension"], dt3.Columns["Number"] },
-                true
-            );
+            dt3.Constraints
+                .Add(
+                    "PK_Element",
+                    new DataColumn[] { dt3.Columns["Dimension"], dt3.Columns["Number"] },
+                    true
+                );
 
             ds.AcceptChanges();
 
@@ -4014,7 +4021,8 @@ namespace MonoTests.System.Data
             ds.Tables.Add("MyType");
 
             ds.Tables["MyType"]
-                .Columns.Add(new DataColumn("Desc", typeof(string), "", MappingType.Attribute));
+                .Columns
+                .Add(new DataColumn("Desc", typeof(string), "", MappingType.Attribute));
             ds.Tables["MyType"].Columns["Desc"].MaxLength = 32;
 
             ds.AcceptChanges();
@@ -4115,28 +4123,32 @@ namespace MonoTests.System.Data
             DataColumn col2_6 = table2.Columns.Add("col 6", typeof(int));
             DataColumn col2_7 = table2.Columns.Add("col 7", typeof(int));
 
-            ds1.Relations.Add(
-                "rel 1",
-                new DataColumn[] { col1_1, col1_2 },
-                new DataColumn[] { col2_1, col2_2 },
-                false
-            );
-            ds1.Relations.Add(
-                "rel 2",
-                new DataColumn[] { col1_3, col1_4 },
-                new DataColumn[] { col2_3, col2_4 },
-                true
-            );
-            table2.Constraints.Add(
-                "fk 1",
-                new DataColumn[] { col1_5, col1_6 },
-                new DataColumn[] { col2_5, col2_6 }
-            );
-            table1.Constraints.Add(
-                "fk 2",
-                new DataColumn[] { col2_5, col2_6 },
-                new DataColumn[] { col1_5, col1_6 }
-            );
+            ds1.Relations
+                .Add(
+                    "rel 1",
+                    new DataColumn[] { col1_1, col1_2 },
+                    new DataColumn[] { col2_1, col2_2 },
+                    false
+                );
+            ds1.Relations
+                .Add(
+                    "rel 2",
+                    new DataColumn[] { col1_3, col1_4 },
+                    new DataColumn[] { col2_3, col2_4 },
+                    true
+                );
+            table2.Constraints
+                .Add(
+                    "fk 1",
+                    new DataColumn[] { col1_5, col1_6 },
+                    new DataColumn[] { col2_5, col2_6 }
+                );
+            table1.Constraints
+                .Add(
+                    "fk 2",
+                    new DataColumn[] { col2_5, col2_6 },
+                    new DataColumn[] { col1_5, col1_6 }
+                );
 
             table1.Constraints.Add("pk 1", col1_7, true);
             table2.Constraints.Add("pk 2", col2_7, true);
@@ -4243,12 +4255,13 @@ namespace MonoTests.System.Data
             table2.PrimaryKey = new DataColumn[] { table2.Columns[0] };
             ds.Tables.Add(table1);
             ds.Tables.Add(table2);
-            ds.Relations.Add(
-                "CustomerOrder",
-                new DataColumn[] { table1.Columns[0] },
-                new DataColumn[] { table2.Columns[1] },
-                true
-            );
+            ds.Relations
+                .Add(
+                    "CustomerOrder",
+                    new DataColumn[] { table1.Columns[0] },
+                    new DataColumn[] { table2.Columns[1] },
+                    true
+                );
 
             StringWriter writer1 = new StringWriter();
             table1.WriteXmlSchema(writer1, false);

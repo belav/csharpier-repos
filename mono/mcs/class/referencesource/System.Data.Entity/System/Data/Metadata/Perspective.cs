@@ -113,8 +113,8 @@ namespace System.Data.Metadata.Edm
             functionImport = null;
             if (ignoreCase)
             {
-                functionImport = entityContainer
-                    .FunctionImports.Where(fi =>
+                functionImport = entityContainer.FunctionImports
+                    .Where(fi =>
                         String.Equals(
                             fi.Name,
                             functionImportName,
@@ -125,8 +125,8 @@ namespace System.Data.Metadata.Edm
             }
             else
             {
-                functionImport = entityContainer
-                    .FunctionImports.Where(fi => fi.Name == functionImportName)
+                functionImport = entityContainer.FunctionImports
+                    .Where(fi => fi.Name == functionImportName)
                     .SingleOrDefault();
             }
             return functionImport != null;

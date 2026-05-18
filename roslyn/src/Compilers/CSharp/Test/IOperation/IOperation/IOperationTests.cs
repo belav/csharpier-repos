@@ -199,8 +199,8 @@ class C
             );
             comp.VerifyDiagnostics();
 
-            var m = comp
-                .SyntaxTrees.Single()
+            var m = comp.SyntaxTrees
+                .Single()
                 .GetRoot()
                 .DescendantNodes()
                 .OfType<BlockSyntax>()
@@ -848,7 +848,8 @@ public class C
                             "System.String System.String.op_Addition(System.String left, System.String right)",
                             model
                                 .GetSymbolInfo(fieldInitializer)
-                                .Symbol.ToTestDisplayString(includeNonNullable: false)
+                                .Symbol
+                                .ToTestDisplayString(includeNonNullable: false)
                         )
                     );
             }

@@ -24,8 +24,7 @@ namespace System.ServiceModel
         {
             get
             {
-                return System
-                    .ServiceModel
+                return System.ServiceModel
                     .Channels
                     .ReliableSessionDefaults
                     .ReliableMessagingVersion;

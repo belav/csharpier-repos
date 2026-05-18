@@ -78,10 +78,8 @@ namespace System.Workflow.ComponentModel.Serialization
                 if (!canSerializeToString)
                 {
                     if (this.containedSerializer != null)
-                        canSerializeToString = this.containedSerializer.CanSerializeToString(
-                            serializationManager,
-                            value
-                        );
+                        canSerializeToString = this.containedSerializer
+                            .CanSerializeToString(serializationManager, value);
                     else
                         canSerializeToString = base.CanSerializeToString(
                             serializationManager,
@@ -118,10 +116,8 @@ namespace System.Workflow.ComponentModel.Serialization
                 if (converter != null && converter.CanConvertTo(context, typeof(string)))
                     stringValue = converter.ConvertToString(context, value);
                 else if (this.containedSerializer != null)
-                    stringValue = this.containedSerializer.SerializeToString(
-                        serializationManager,
-                        value
-                    );
+                    stringValue = this.containedSerializer
+                        .SerializeToString(serializationManager, value);
                 else
                     stringValue = base.SerializeToString(serializationManager, value);
             }
@@ -158,11 +154,8 @@ namespace System.Workflow.ComponentModel.Serialization
                 if (converter != null && converter.CanConvertFrom(context, typeof(string)))
                     convertedValue = converter.ConvertFromString(context, value);
                 else if (this.containedSerializer != null)
-                    convertedValue = this.containedSerializer.DeserializeFromString(
-                        serializationManager,
-                        propertyType,
-                        value
-                    );
+                    convertedValue = this.containedSerializer
+                        .DeserializeFromString(serializationManager, propertyType, value);
                 else
                     convertedValue = base.DeserializeFromString(
                         serializationManager,

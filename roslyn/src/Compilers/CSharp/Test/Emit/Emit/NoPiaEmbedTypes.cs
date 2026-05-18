@@ -183,9 +183,8 @@ class UsePia
                 else
                 {
                     Assert.False(result.Success);
-                    result.Diagnostics.Verify(
-                        expectedMetadataOnlyDiagnostics ?? expectedFullBuildDiagnostics
-                    );
+                    result.Diagnostics
+                        .Verify(expectedMetadataOnlyDiagnostics ?? expectedFullBuildDiagnostics);
                 }
             }
         }
@@ -6310,14 +6309,14 @@ class UsePia5
             );
 
             Assert.Null(
-                compilation1
-                    .SourceModule.GetReferencedAssemblySymbols()[1]
+                compilation1.SourceModule
+                    .GetReferencedAssemblySymbols()[1]
                     .Modules[0]
                     .LookupTopLevelMetadataType(ref fullName)
             );
             Assert.Null(
-                compilation1
-                    .SourceModule.GetReferencedAssemblySymbols()[1]
+                compilation1.SourceModule
+                    .GetReferencedAssemblySymbols()[1]
                     .GetTypeByMetadataName(fullName.FullName)
             );
 
@@ -6343,14 +6342,14 @@ class UsePia5
             );
             Assert.True(isNoPiaLocalType);
             Assert.Null(
-                compilation2
-                    .SourceModule.GetReferencedAssemblySymbols()[1]
+                compilation2.SourceModule
+                    .GetReferencedAssemblySymbols()[1]
                     .Modules[0]
                     .LookupTopLevelMetadataType(ref fullName)
             );
             Assert.Null(
-                compilation2
-                    .SourceModule.GetReferencedAssemblySymbols()[1]
+                compilation2.SourceModule
+                    .GetReferencedAssemblySymbols()[1]
                     .GetTypeByMetadataName(fullName.FullName)
             );
 
@@ -6366,14 +6365,14 @@ class UsePia5
             );
 
             Assert.Null(
-                compilation3
-                    .SourceModule.GetReferencedAssemblySymbols()[1]
+                compilation3.SourceModule
+                    .GetReferencedAssemblySymbols()[1]
                     .Modules[0]
                     .LookupTopLevelMetadataType(ref fullName)
             );
             Assert.Null(
-                compilation3
-                    .SourceModule.GetReferencedAssemblySymbols()[1]
+                compilation3.SourceModule
+                    .GetReferencedAssemblySymbols()[1]
                     .GetTypeByMetadataName(fullName.FullName)
             );
 
@@ -6399,14 +6398,14 @@ class UsePia5
             );
             Assert.True(isNoPiaLocalType);
             Assert.Null(
-                compilation4
-                    .SourceModule.GetReferencedAssemblySymbols()[1]
+                compilation4.SourceModule
+                    .GetReferencedAssemblySymbols()[1]
                     .Modules[0]
                     .LookupTopLevelMetadataType(ref fullName)
             );
             Assert.Null(
-                compilation4
-                    .SourceModule.GetReferencedAssemblySymbols()[1]
+                compilation4.SourceModule
+                    .GetReferencedAssemblySymbols()[1]
                     .GetTypeByMetadataName(fullName.FullName)
             );
 
@@ -7687,7 +7686,8 @@ namespace NetImplNS
             {
                 Assert.Equal(
                     "void EventNS.IEvents.OnEvent01()",
-                    m.GlobalNamespace.GetMember<NamespaceSymbol>("EventNS")
+                    m.GlobalNamespace
+                        .GetMember<NamespaceSymbol>("EventNS")
                         .GetMember<NamedTypeSymbol>("IEvents")
                         .GetMember<MethodSymbol>("OnEvent01")
                         .ToTestDisplayString()
@@ -8025,8 +8025,8 @@ class Program
             );
 
             AssertParametersWithoutNames(
-                compilation
-                    .GlobalNamespace.GetMember<NamedTypeSymbol>("I1")
+                compilation.GlobalNamespace
+                    .GetMember<NamedTypeSymbol>("I1")
                     .GetMember<MethodSymbol>("M1")
                     .Parameters,
                 false
@@ -8038,8 +8038,8 @@ class Program
                     {
                         ((PEModuleSymbol)module).Module.PretendThereArentNoPiaLocalTypes();
                         AssertParametersWithoutNames(
-                            module
-                                .GlobalNamespace.GetMember<NamedTypeSymbol>("I1")
+                            module.GlobalNamespace
+                                .GetMember<NamedTypeSymbol>("I1")
                                 .GetMember<MethodSymbol>("M1")
                                 .Parameters,
                             true
@@ -8047,8 +8047,8 @@ class Program
 
                         PEParameterSymbol p;
                         p = (PEParameterSymbol)
-                            module
-                                .GlobalNamespace.GetMember<NamedTypeSymbol>("Program")
+                            module.GlobalNamespace
+                                .GetMember<NamedTypeSymbol>("Program")
                                 .GetMember<MethodSymbol>("M")
                                 .Parameters[0];
                         Assert.Equal(
@@ -8058,8 +8058,8 @@ class Program
                         Assert.Equal("x", p.Name);
                         Assert.Equal("x", p.MetadataName);
                         p = (PEParameterSymbol)
-                            module
-                                .GlobalNamespace.GetMember<NamedTypeSymbol>("Program")
+                            module.GlobalNamespace
+                                .GetMember<NamedTypeSymbol>("Program")
                                 .GetMember<MethodSymbol>("M1")
                                 .Parameters[0];
                         Assert.Equal(
@@ -8069,8 +8069,8 @@ class Program
                         Assert.Equal("value", p.Name);
                         Assert.Equal("value", p.MetadataName);
                         p = (PEParameterSymbol)
-                            module
-                                .GlobalNamespace.GetMember<NamedTypeSymbol>("Program")
+                            module.GlobalNamespace
+                                .GetMember<NamedTypeSymbol>("Program")
                                 .GetMember<MethodSymbol>("M2")
                                 .Parameters[0];
                         Assert.Equal(
@@ -8095,9 +8095,11 @@ class Program
             Assert.True(p1.IsMetadataOptional);
             Assert.False(p1.Handle.IsNil);
             Assert.True(
-                ((PEModuleSymbol)p1.ContainingModule)
-                    .Module.MetadataReader.GetParameter(p1.Handle)
-                    .Name.IsNil
+                ((PEModuleSymbol)p1.ContainingModule).Module
+                    .MetadataReader
+                    .GetParameter(p1.Handle)
+                    .Name
+                    .IsNil
             );
 
             var p2 = (PEParameterSymbol)parameters[2];
@@ -8108,9 +8110,11 @@ class Program
             else
             {
                 Assert.True(
-                    ((PEModuleSymbol)p2.ContainingModule)
-                        .Module.MetadataReader.GetParameter(p2.Handle)
-                        .Name.IsNil
+                    ((PEModuleSymbol)p2.ContainingModule).Module
+                        .MetadataReader
+                        .GetParameter(p2.Handle)
+                        .Name
+                        .IsNil
                 );
             }
 

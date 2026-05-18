@@ -84,8 +84,8 @@ namespace Microsoft.CodeAnalysis.UseObjectInitializer
 
         protected AbstractUseObjectInitializerDiagnosticAnalyzer()
             : base(
-                ImmutableDictionary<DiagnosticDescriptor, IOption2>
-                    .Empty.Add(s_descriptor, CodeStyleOptions2.PreferObjectInitializer)
+                ImmutableDictionary<DiagnosticDescriptor, IOption2>.Empty
+                    .Add(s_descriptor, CodeStyleOptions2.PreferObjectInitializer)
                     .Add(s_unnecessaryCodeDescriptor, CodeStyleOptions2.PreferObjectInitializer)
             ) { }
 
@@ -201,10 +201,12 @@ namespace Microsoft.CodeAnalysis.UseObjectInitializer
                 var end = FadeOutOperatorToken
                     ? syntaxFacts
                         .GetOperatorTokenOfMemberAccessExpression(match.MemberAccessExpression)
-                        .Span.End
+                        .Span
+                        .End
                     : syntaxFacts
                         .GetExpressionOfMemberAccessExpression(match.MemberAccessExpression)!
-                        .Span.End;
+                        .Span
+                        .End;
 
                 var location1 = Location.Create(
                     syntaxTree,

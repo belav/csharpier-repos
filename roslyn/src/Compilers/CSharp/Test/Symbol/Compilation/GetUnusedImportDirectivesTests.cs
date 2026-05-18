@@ -252,9 +252,8 @@ using System.Reflection;
 
             var ivtCompilation = CreateCompilation(
                 assemblyName: "IVT",
-                options: TestOptions.ReleaseDll.WithStrongNameProvider(
-                    new DesktopStrongNameProvider()
-                ),
+                options: TestOptions.ReleaseDll
+                    .WithStrongNameProvider(new DesktopStrongNameProvider()),
                 source: new[]
                 {
                     Parse(
@@ -278,9 +277,8 @@ namespace NamespaceContainingInternalsOnly
 
             var libCompilation = CreateCompilation(
                 assemblyName: "Lib",
-                options: TestOptions.ReleaseDll.WithStrongNameProvider(
-                    new DesktopStrongNameProvider()
-                ),
+                options: TestOptions.ReleaseDll
+                    .WithStrongNameProvider(new DesktopStrongNameProvider()),
                 references: new[] { ivtCompilation.ToMetadataReference() },
                 source: new[]
                 {

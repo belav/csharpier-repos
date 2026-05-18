@@ -65,8 +65,7 @@ namespace System.Data.Objects.Internal
             if (member.BuiltInTypeKind == BuiltInTypeKind.NavigationProperty)
             {
                 NavigationProperty navProperty = (NavigationProperty)member;
-                RelationshipMultiplicity multiplicity = navProperty
-                    .ToEndMember
+                RelationshipMultiplicity multiplicity = navProperty.ToEndMember
                     .RelationshipMultiplicity;
 
                 // Given the proxy and item parameters, construct one of the following expressions:
@@ -138,8 +137,7 @@ namespace System.Data.Objects.Internal
             if (member.BuiltInTypeKind == BuiltInTypeKind.NavigationProperty)
             {
                 NavigationProperty navProperty = (NavigationProperty)member;
-                RelationshipMultiplicity multiplicity = navProperty
-                    .ToEndMember
+                RelationshipMultiplicity multiplicity = navProperty.ToEndMember
                     .RelationshipMultiplicity;
 
                 PropertyInfo propertyInfo = EntityUtil.GetTopProperty(

@@ -177,16 +177,14 @@ public class EndpointMetadataProviderTest
             Conventions = new Action<EndpointBuilder>[]
             {
                 builder =>
-                    builder.Metadata.Add(
-                        new CustomEndpointMetadata() { Source = MetadataSource.Caller }
-                    ),
+                    builder.Metadata
+                        .Add(new CustomEndpointMetadata() { Source = MetadataSource.Caller }),
             },
             FinallyConventions = new Action<EndpointBuilder>[]
             {
                 builder =>
-                    builder.Metadata.Add(
-                        new CustomEndpointMetadata() { Source = MetadataSource.Finally }
-                    ),
+                    builder.Metadata
+                        .Add(new CustomEndpointMetadata() { Source = MetadataSource.Finally }),
             },
         };
 
@@ -478,9 +476,10 @@ public class EndpointMetadataProviderTest
             Task.FromResult<AddsCustomEndpointMetadataResult>(null);
 
         public FSharp.Control.FSharpAsync<AddsCustomEndpointMetadataResult> ActionWithMetadataInFSharpAsyncOfResult() =>
-            FSharp.Core.ExtraTopLevelOperators.DefaultAsyncBuilder.Return<AddsCustomEndpointMetadataResult>(
-                null
-            );
+            FSharp.Core
+                .ExtraTopLevelOperators
+                .DefaultAsyncBuilder
+                .Return<AddsCustomEndpointMetadataResult>(null);
 
         [HttpGet("selector1")]
         [HttpGet("selector2")]
@@ -496,9 +495,10 @@ public class EndpointMetadataProviderTest
             Task.FromResult<AddsCustomEndpointMetadataActionResult>(null);
 
         public FSharp.Control.FSharpAsync<AddsCustomEndpointMetadataActionResult> ActionWithMetadataInFSharpAsyncOfActionResult() =>
-            FSharp.Core.ExtraTopLevelOperators.DefaultAsyncBuilder.Return<AddsCustomEndpointMetadataActionResult>(
-                null
-            );
+            FSharp.Core
+                .ExtraTopLevelOperators
+                .DefaultAsyncBuilder
+                .Return<AddsCustomEndpointMetadataActionResult>(null);
 
         public RemovesAcceptsMetadataResult ActionWithNoAcceptsMetadataInResult() => null;
 
@@ -509,9 +509,10 @@ public class EndpointMetadataProviderTest
             Task.FromResult<RemovesAcceptsMetadataResult>(null);
 
         public FSharp.Control.FSharpAsync<RemovesAcceptsMetadataResult> ActionWithNoAcceptsMetadataInFSharpAsyncOfResult() =>
-            FSharp.Core.ExtraTopLevelOperators.DefaultAsyncBuilder.Return<RemovesAcceptsMetadataResult>(
-                null
-            );
+            FSharp.Core
+                .ExtraTopLevelOperators
+                .DefaultAsyncBuilder
+                .Return<RemovesAcceptsMetadataResult>(null);
 
         public RemovesAcceptsMetadataActionResult ActionWithNoAcceptsMetadataInActionResult() =>
             null;
@@ -523,9 +524,10 @@ public class EndpointMetadataProviderTest
             Task.FromResult<RemovesAcceptsMetadataActionResult>(null);
 
         public FSharp.Control.FSharpAsync<RemovesAcceptsMetadataActionResult> ActionWithNoAcceptsMetadataInFSharpAsyncOfActionResult() =>
-            FSharp.Core.ExtraTopLevelOperators.DefaultAsyncBuilder.Return<RemovesAcceptsMetadataActionResult>(
-                null
-            );
+            FSharp.Core
+                .ExtraTopLevelOperators
+                .DefaultAsyncBuilder
+                .Return<RemovesAcceptsMetadataActionResult>(null);
     }
 
     private class CustomEndpointMetadata
@@ -600,9 +602,8 @@ public class EndpointMetadataProviderTest
                 return;
             }
 
-            builder.Metadata.Add(
-                new RoutePatternMetadata { RoutePattern = reb.RoutePattern.RawText }
-            );
+            builder.Metadata
+                .Add(new RoutePatternMetadata { RoutePattern = reb.RoutePattern.RawText });
         }
     }
 

@@ -71,8 +71,7 @@ namespace System.ServiceModel.Diagnostics
             PerformanceCounterStrings.SERVICEMODELSERVICE.SCallDuration,
             PerformanceCounterStrings.SERVICEMODELSERVICE.SCallDurationBase,
             PerformanceCounterStrings.SERVICEMODELSERVICE.SSecurityValidationAuthenticationFailures,
-            PerformanceCounterStrings
-                .SERVICEMODELSERVICE
+            PerformanceCounterStrings.SERVICEMODELSERVICE
                 .SSecurityValidationAuthenticationFailuresPerSecond,
             PerformanceCounterStrings.SERVICEMODELSERVICE.SSecurityCallsNotAuthorized,
             PerformanceCounterStrings.SERVICEMODELSERVICE.SSecurityCallsNotAuthorizedPerSecond,
@@ -99,8 +98,7 @@ namespace System.ServiceModel.Diagnostics
             PerformanceCounterStrings.SERVICEMODELSERVICE.CallsPercentMaxConcurrentCalls,
             PerformanceCounterStrings.SERVICEMODELSERVICE.CallsPercentMaxConcurrentCallsBase,
             PerformanceCounterStrings.SERVICEMODELSERVICE.InstancesPercentMaxConcurrentInstances,
-            PerformanceCounterStrings
-                .SERVICEMODELSERVICE
+            PerformanceCounterStrings.SERVICEMODELSERVICE
                 .InstancesPercentMaxConcurrentInstancesBase,
             PerformanceCounterStrings.SERVICEMODELSERVICE.SessionsPercentMaxConcurrentSessions,
             PerformanceCounterStrings.SERVICEMODELSERVICE.SessionsPercentMaxConcurrentSessionsBase,
@@ -239,8 +237,8 @@ namespace System.ServiceModel.Diagnostics
 
         static bool TryGetFullVirtualPath(ServiceHostBase serviceHost, out string uri)
         {
-            VirtualPathExtension pathExtension =
-                serviceHost.Extensions.Find<VirtualPathExtension>();
+            VirtualPathExtension pathExtension = serviceHost.Extensions
+                .Find<VirtualPathExtension>();
             if (pathExtension == null)
             {
                 uri = null;

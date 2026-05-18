@@ -21,10 +21,8 @@ namespace System.ServiceModel.Security.Tokens
             }
             if (claimType.Length <= 0)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                    "claimType",
-                    SR.GetString(SR.ClaimTypeCannotBeEmpty)
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperArgument("claimType", SR.GetString(SR.ClaimTypeCannotBeEmpty));
             }
 
             this.claimType = claimType;

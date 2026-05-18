@@ -25,12 +25,9 @@ namespace System.Globalization
             uint bufLen = 0;
 
             if (
-                Interop.Kernel32.GetUserPreferredUILanguages(
-                    MUI_LANGUAGE_NAME,
-                    &langCount,
-                    null,
-                    &bufLen
-                ) != Interop.BOOL.FALSE
+                Interop.Kernel32
+                    .GetUserPreferredUILanguages(MUI_LANGUAGE_NAME, &langCount, null, &bufLen)
+                != Interop.BOOL.FALSE
             )
             {
                 Span<char> languages =
@@ -38,12 +35,13 @@ namespace System.Globalization
                 fixed (char* pLanguages = languages)
                 {
                     if (
-                        Interop.Kernel32.GetUserPreferredUILanguages(
-                            MUI_LANGUAGE_NAME,
-                            &langCount,
-                            pLanguages,
-                            &bufLen
-                        ) != Interop.BOOL.FALSE
+                        Interop.Kernel32
+                            .GetUserPreferredUILanguages(
+                                MUI_LANGUAGE_NAME,
+                                &langCount,
+                                pLanguages,
+                                &bufLen
+                            ) != Interop.BOOL.FALSE
                     )
                     {
                         return GetCultureByName(languages.ToString());

@@ -94,11 +94,12 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
 
             TypeMap typeMap = null;
             var getTypeMap = new Func<TypeMap>(() => typeMap);
-            _typeParameters = this.SourceTypeParameters.SelectAsArray(
-                (tp, i, arg) =>
-                    (TypeParameterSymbol)new EETypeParameterSymbol(this, tp, i, getTypeMap),
-                (object)null
-            );
+            _typeParameters = this.SourceTypeParameters
+                .SelectAsArray(
+                    (tp, i, arg) =>
+                        (TypeParameterSymbol)new EETypeParameterSymbol(this, tp, i, getTypeMap),
+                    (object)null
+                );
 
             typeMap = new TypeMap(this.SourceTypeParameters, _typeParameters);
 

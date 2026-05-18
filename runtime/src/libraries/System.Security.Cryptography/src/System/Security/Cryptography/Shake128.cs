@@ -375,11 +375,8 @@ namespace System.Security.Cryptography
 
         private static void HashDataCore(ReadOnlySpan<byte> source, Span<byte> destination)
         {
-            HashProviderDispenser.OneShotHashProvider.HashDataXof(
-                HashAlgorithmId,
-                source,
-                destination
-            );
+            HashProviderDispenser.OneShotHashProvider
+                .HashDataXof(HashAlgorithmId, source, destination);
         }
 
         private static void CheckPlatformSupport()

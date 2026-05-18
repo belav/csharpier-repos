@@ -181,14 +181,15 @@ namespace System.ServiceModel.Channels
                 try
                 {
                     MsmqMessageProperty property;
-                    bool retval = this.receiver.TryReceive(
-                        msmqMessage,
-                        timeout,
-                        this.ReceiveParameters.ExactlyOnce
-                            ? MsmqTransactionMode.CurrentOrNone
-                            : MsmqTransactionMode.None,
-                        out property
-                    );
+                    bool retval = this.receiver
+                        .TryReceive(
+                            msmqMessage,
+                            timeout,
+                            this.ReceiveParameters.ExactlyOnce
+                                ? MsmqTransactionMode.CurrentOrNone
+                                : MsmqTransactionMode.None,
+                            out property
+                        );
                     if (retval)
                     {
                         if (null != property)
@@ -199,9 +200,8 @@ namespace System.ServiceModel.Channels
                             if (this.receiveParameters.ReceiveContextSettings.Enabled)
                             {
                                 message.Properties[MsmqReceiveContext.Name] =
-                                    this.receiveContextManager.CreateMsmqReceiveContext(
-                                        msmqMessage.LookupId.Value
-                                    );
+                                    this.receiveContextManager
+                                        .CreateMsmqReceiveContext(msmqMessage.LookupId.Value);
                             }
                             MsmqDiagnostics.DatagramReceived(msmqMessage.MessageId, message);
                             this.listener.RaiseMessageReceived();
@@ -236,15 +236,16 @@ namespace System.ServiceModel.Channels
                 return new DoneReceivingAsyncResult(callback, state);
 
             MsmqInputMessage msmqMessage = this.receiver.TakeMessage();
-            return this.receiver.BeginTryReceive(
-                msmqMessage,
-                timeout,
-                this.ReceiveParameters.ExactlyOnce
-                    ? MsmqTransactionMode.CurrentOrNone
-                    : MsmqTransactionMode.None,
-                callback,
-                state
-            );
+            return this.receiver
+                .BeginTryReceive(
+                    msmqMessage,
+                    timeout,
+                    this.ReceiveParameters.ExactlyOnce
+                        ? MsmqTransactionMode.CurrentOrNone
+                        : MsmqTransactionMode.None,
+                    callback,
+                    state
+                );
         }
 
         public bool EndTryReceive(IAsyncResult result, out Message message)
@@ -272,10 +273,8 @@ namespace System.ServiceModel.Channels
 
                         if (this.receiveParameters.ReceiveContextSettings.Enabled)
                         {
-                            message.Properties[MsmqReceiveContext.Name] =
-                                this.receiveContextManager.CreateMsmqReceiveContext(
-                                    msmqMessage.LookupId.Value
-                                );
+                            message.Properties[MsmqReceiveContext.Name] = this.receiveContextManager
+                                .CreateMsmqReceiveContext(msmqMessage.LookupId.Value);
                         }
 
                         MsmqDiagnostics.DatagramReceived(msmqMessage.MessageId, message);

@@ -66,8 +66,8 @@ namespace BuildBoss
             var targetFrameworks = GetTargetFrameworks();
             if (targetFrameworks != null)
             {
-                var all = targetFrameworks
-                    .Value.ToString()
+                var all = targetFrameworks.Value
+                    .ToString()
                     .Split(new[] { ';' }, StringSplitOptions.RemoveEmptyEntries);
                 return all;
             }
@@ -199,7 +199,8 @@ namespace BuildBoss
             var key = element.Attribute("Key")?.Value.Trim();
             var loadsWithinVisualStudio = element
                 .Attribute("LoadsWithinVisualStudio")
-                ?.Value.Trim();
+                ?.Value
+                .Trim();
             var workItem = element.Attribute("WorkItem")?.Value.Trim();
             return new InternalsVisibleTo(targetAssembly, key, loadsWithinVisualStudio, workItem);
         }

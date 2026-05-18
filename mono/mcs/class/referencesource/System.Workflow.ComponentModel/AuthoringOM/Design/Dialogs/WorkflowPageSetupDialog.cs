@@ -191,8 +191,9 @@ namespace System.Workflow.ComponentModel.Design
                     if (-1 == userHeaderIndex || this.headerCustom)
                     {
                         //this is an unknown template, put it into custom field
-                        this.headerTextComboBox.SelectedIndex =
-                            this.headerTextComboBox.Items.IndexOf(this.headerFooterCustom);
+                        this.headerTextComboBox.SelectedIndex = this.headerTextComboBox
+                            .Items
+                            .IndexOf(this.headerFooterCustom);
                         this.customHeaderText.Text = userHeader;
                     }
                     else
@@ -201,18 +202,20 @@ namespace System.Workflow.ComponentModel.Design
                     }
                 }
 
-                this.headerAlignmentComboBox.Items.AddRange(
-                    new object[]
-                    {
-                        HorizontalAlignment.Left,
-                        HorizontalAlignment.Center,
-                        HorizontalAlignment.Right,
-                    }
-                );
+                this.headerAlignmentComboBox
+                    .Items
+                    .AddRange(
+                        new object[]
+                        {
+                            HorizontalAlignment.Left,
+                            HorizontalAlignment.Center,
+                            HorizontalAlignment.Right,
+                        }
+                    );
                 if (
-                    this.headerAlignmentComboBox.Items.IndexOf(
-                        this.printDocument.PageSetupData.HeaderAlignment
-                    ) != -1
+                    this.headerAlignmentComboBox
+                        .Items
+                        .IndexOf(this.printDocument.PageSetupData.HeaderAlignment) != -1
                 )
                     this.headerAlignmentComboBox.SelectedItem = this.printDocument
                         .PageSetupData
@@ -243,8 +246,9 @@ namespace System.Workflow.ComponentModel.Design
                     if (-1 == userFooterIndex || this.footerCustom)
                     {
                         //this is an unknown template, put it into custom field
-                        this.footerTextComboBox.SelectedIndex =
-                            this.footerTextComboBox.Items.IndexOf(this.headerFooterCustom);
+                        this.footerTextComboBox.SelectedIndex = this.footerTextComboBox
+                            .Items
+                            .IndexOf(this.headerFooterCustom);
                         this.customFooterText.Text = userFooter;
                     }
                     else
@@ -253,18 +257,20 @@ namespace System.Workflow.ComponentModel.Design
                     }
                 }
 
-                this.footerAlignmentComboBox.Items.AddRange(
-                    new object[]
-                    {
-                        HorizontalAlignment.Left,
-                        HorizontalAlignment.Center,
-                        HorizontalAlignment.Right,
-                    }
-                );
+                this.footerAlignmentComboBox
+                    .Items
+                    .AddRange(
+                        new object[]
+                        {
+                            HorizontalAlignment.Left,
+                            HorizontalAlignment.Center,
+                            HorizontalAlignment.Right,
+                        }
+                    );
                 if (
-                    this.footerAlignmentComboBox.Items.IndexOf(
-                        this.printDocument.PageSetupData.FooterAlignment
-                    ) != -1
+                    this.footerAlignmentComboBox
+                        .Items
+                        .IndexOf(this.printDocument.PageSetupData.FooterAlignment) != -1
                 )
                     this.footerAlignmentComboBox.SelectedItem = this.printDocument
                         .PageSetupData
@@ -669,8 +675,7 @@ namespace System.Workflow.ComponentModel.Design
             // paperSourceComboBox
             //
             resources.ApplyResources(this.paperSourceComboBox, "paperSourceComboBox");
-            this.paperSourceComboBox.DropDownStyle = System
-                .Windows
+            this.paperSourceComboBox.DropDownStyle = System.Windows
                 .Forms
                 .ComboBoxStyle
                 .DropDownList;
@@ -771,8 +776,7 @@ namespace System.Workflow.ComponentModel.Design
             //
             resources.ApplyResources(this.footerAlignmentComboBox, "footerAlignmentComboBox");
             this.footerTableLayoutPanel.SetColumnSpan(this.footerAlignmentComboBox, 2);
-            this.footerAlignmentComboBox.DropDownStyle = System
-                .Windows
+            this.footerAlignmentComboBox.DropDownStyle = System.Windows
                 .Forms
                 .ComboBoxStyle
                 .DropDownList;
@@ -857,8 +861,7 @@ namespace System.Workflow.ComponentModel.Design
             //
             resources.ApplyResources(this.headerAlignmentComboBox, "headerAlignmentComboBox");
             this.headerTableLayoutPanel.SetColumnSpan(this.headerAlignmentComboBox, 2);
-            this.headerAlignmentComboBox.DropDownStyle = System
-                .Windows
+            this.headerAlignmentComboBox.DropDownStyle = System.Windows
                 .Forms
                 .ComboBoxStyle
                 .DropDownList;
@@ -980,10 +983,10 @@ namespace System.Workflow.ComponentModel.Design
             this.printDocument.PageSetupData.Margins = margins;
 
             //centering
-            this.printDocument.PageSetupData.CenterHorizontally =
-                this.CenterHorizontallyCheckBox.Checked;
-            this.printDocument.PageSetupData.CenterVertically =
-                this.CenterVerticallyCheckBox.Checked;
+            this.printDocument.PageSetupData.CenterHorizontally = this.CenterHorizontallyCheckBox
+                .Checked;
+            this.printDocument.PageSetupData.CenterVertically = this.CenterVerticallyCheckBox
+                .Checked;
 
             //header inputs
             if (this.headerTextComboBox.SelectedIndex == 0)
@@ -1055,8 +1058,7 @@ namespace System.Workflow.ComponentModel.Design
                 if (DialogResult.OK == printDialog.ShowDialog())
                 {
                     this.printDocument.PrinterSettings = printDialog.PrinterSettings;
-                    this.printDocument.DefaultPageSettings = printDialog
-                        .Document
+                    this.printDocument.DefaultPageSettings = printDialog.Document
                         .DefaultPageSettings;
 
                     if (this.printDocument.DefaultPageSettings.Landscape)

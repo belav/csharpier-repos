@@ -160,8 +160,7 @@ public class ProcessRunner : IDisposable
         };
 
         foreach (
-            KeyValuePair<string, string> environmentOverride in _processInfo
-                .Parameters
+            KeyValuePair<string, string> environmentOverride in _processInfo.Parameters
                 .EnvironmentOverrides
         )
         {

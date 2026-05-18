@@ -231,9 +231,8 @@ public class RuntimeModelConvention : IModelFinalizedConvention
             {
                 var runtimeNavigation = Create(navigation, runtimeEntityType);
 
-                var inverse = runtimeNavigation.TargetEntityType.FindSkipNavigation(
-                    navigation.Inverse.Name
-                );
+                var inverse = runtimeNavigation.TargetEntityType
+                    .FindSkipNavigation(navigation.Inverse.Name);
                 if (inverse != null)
                 {
                     runtimeNavigation.Inverse = inverse;
@@ -367,8 +366,8 @@ public class RuntimeModelConvention : IModelFinalizedConvention
         RuntimeEntityType entityType
     ) =>
         parameterBinding.With(
-            parameterBinding
-                .ConsumedProperties.Select(property =>
+            parameterBinding.ConsumedProperties
+                .Select(property =>
                     (
                         entityType.FindProperty(property.Name)
                         ?? entityType.FindServiceProperty(property.Name)
@@ -384,8 +383,8 @@ public class RuntimeModelConvention : IModelFinalizedConvention
         RuntimeEntityType entityType
     ) =>
         instantiationBinding?.With(
-            instantiationBinding
-                .ParameterBindings.Select(binding => Create(binding, entityType))
+            instantiationBinding.ParameterBindings
+                .Select(binding => Create(binding, entityType))
                 .ToList()
         );
 
@@ -851,9 +850,8 @@ public class RuntimeModelConvention : IModelFinalizedConvention
 
     private RuntimeForeignKey Create(IForeignKey foreignKey, RuntimeEntityType runtimeEntityType)
     {
-        var principalEntityType = runtimeEntityType.Model.FindEntityType(
-            foreignKey.PrincipalEntityType.Name
-        )!;
+        var principalEntityType = runtimeEntityType.Model
+            .FindEntityType(foreignKey.PrincipalEntityType.Name)!;
         return runtimeEntityType.AddForeignKey(
             runtimeEntityType.FindProperties(foreignKey.Properties.Select(p => p.Name))!,
             GetKey(foreignKey.PrincipalKey, principalEntityType),
@@ -976,9 +974,8 @@ public class RuntimeModelConvention : IModelFinalizedConvention
             runtimeEntityType.Model.FindEntityType(navigation.TargetEntityType.Name)!,
             GetForeignKey(
                 navigation.ForeignKey,
-                runtimeEntityType.Model.FindEntityType(
-                    navigation.ForeignKey.DeclaringEntityType.Name
-                )!
+                runtimeEntityType.Model
+                    .FindEntityType(navigation.ForeignKey.DeclaringEntityType.Name)!
             ),
             navigation.IsCollection,
             navigation.IsOnDependent,
@@ -1006,7 +1003,9 @@ public class RuntimeModelConvention : IModelFinalizedConvention
             )
             .Single(fk =>
                 fk.PrincipalEntityType.Name == foreignKey.PrincipalEntityType.Name
-                && fk.PrincipalKey.Properties.Select(p => p.Name)
+                && fk.PrincipalKey
+                    .Properties
+                    .Select(p => p.Name)
                     .SequenceEqual(foreignKey.PrincipalKey.Properties.Select(p => p.Name))
             );
 

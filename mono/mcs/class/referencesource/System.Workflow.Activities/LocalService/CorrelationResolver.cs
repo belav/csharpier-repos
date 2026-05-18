@@ -120,18 +120,17 @@ namespace System.Workflow.Activities
                         if (this.correlationProvider == null)
                         {
                             ICorrelationProvider provider = null;
-                            object[] corrProviderAttribs = this.interfaceType.GetCustomAttributes(
-                                typeof(CorrelationProviderAttribute),
-                                true
-                            );
+                            object[] corrProviderAttribs = this.interfaceType
+                                .GetCustomAttributes(typeof(CorrelationProviderAttribute), true);
                             if (corrProviderAttribs.Length == 0)
                             {
-                                corrProviderAttribs = this.interfaceType.GetCustomAttributes(
-                                    typeof(ExternalDataExchangeAttribute),
-                                    true
-                                );
-                                object[] corrParameterAttribs =
-                                    this.interfaceType.GetCustomAttributes(
+                                corrProviderAttribs = this.interfaceType
+                                    .GetCustomAttributes(
+                                        typeof(ExternalDataExchangeAttribute),
+                                        true
+                                    );
+                                object[] corrParameterAttribs = this.interfaceType
+                                    .GetCustomAttributes(
                                         typeof(CorrelationParameterAttribute),
                                         true
                                     );
@@ -296,10 +295,8 @@ namespace System.Workflow.Activities
             {
                 lock (this.cachedCorrelationPropertiesSync)
                 {
-                    this.cachedCorrelationProperties.TryGetValue(
-                        methodName,
-                        out correlationProperties
-                    );
+                    this.cachedCorrelationProperties
+                        .TryGetValue(methodName, out correlationProperties);
                     if (correlationProperties == null)
                     {
                         correlationProperties = GetCorrelationProperties(interfaceType, methodName);
@@ -523,10 +520,8 @@ namespace System.Workflow.Activities
                 );
                 if (customAttrs == null || customAttrs.Length == 0)
                 {
-                    customAttrs = eventInfo.EventHandlerType.GetCustomAttributes(
-                        typeof(CorrelationAliasAttribute),
-                        true
-                    );
+                    customAttrs = eventInfo.EventHandlerType
+                        .GetCustomAttributes(typeof(CorrelationAliasAttribute), true);
                 }
                 MethodInfo[] methInfo = eventInfo.EventHandlerType.GetMethods();
                 methodInfo = methInfo[0];

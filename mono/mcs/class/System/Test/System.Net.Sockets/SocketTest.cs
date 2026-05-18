@@ -3268,28 +3268,30 @@ namespace MonoTests.System.Net.Sockets
                 sendbuf[i] = (byte)i;
             }
 
-            Task sendTask = Task.Factory.StartNew(() =>
-            {
-                int sent = sendsock.Send(sendbuf);
+            Task sendTask = Task.Factory
+                .StartNew(() =>
+                {
+                    int sent = sendsock.Send(sendbuf);
 
-                Assert.AreEqual(BUFFER_SIZE, sent, "#1");
-            });
+                    Assert.AreEqual(BUFFER_SIZE, sent, "#1");
+                });
 
             byte[] recvbuf = new byte[BUFFER_SIZE];
 
-            Task recvTask = Task.Factory.StartNew(() =>
-            {
-                int totalReceived = 0;
-                byte[] buffer = new byte[256];
-                while (totalReceived < sendbuf.Length)
+            Task recvTask = Task.Factory
+                .StartNew(() =>
                 {
-                    int recvd = clientsock.Receive(buffer, 0, buffer.Length, SocketFlags.None);
-                    Array.Copy(buffer, 0, recvbuf, totalReceived, recvd);
-                    totalReceived += recvd;
-                }
+                    int totalReceived = 0;
+                    byte[] buffer = new byte[256];
+                    while (totalReceived < sendbuf.Length)
+                    {
+                        int recvd = clientsock.Receive(buffer, 0, buffer.Length, SocketFlags.None);
+                        Array.Copy(buffer, 0, recvbuf, totalReceived, recvd);
+                        totalReceived += recvd;
+                    }
 
-                Assert.AreEqual(BUFFER_SIZE, totalReceived, "#2");
-            });
+                    Assert.AreEqual(BUFFER_SIZE, totalReceived, "#2");
+                });
 
             Assert.IsTrue(Task.WaitAll(new[] { sendTask, recvTask }, 20 * 1000), "#2a");
 

@@ -73,9 +73,10 @@ namespace Microsoft.Extensions.Logging
         {
             ThrowHelper.ThrowIfNull(builder);
 
-            builder.Services.TryAddEnumerable(
-                ServiceDescriptor.Singleton<ILoggerProvider, EventLogLoggerProvider>()
-            );
+            builder.Services
+                .TryAddEnumerable(
+                    ServiceDescriptor.Singleton<ILoggerProvider, EventLogLoggerProvider>()
+                );
 
             return builder;
         }
@@ -94,9 +95,12 @@ namespace Microsoft.Extensions.Logging
             ThrowHelper.ThrowIfNull(builder);
             ThrowHelper.ThrowIfNull(settings);
 
-            builder.Services.TryAddEnumerable(
-                ServiceDescriptor.Singleton<ILoggerProvider>(new EventLogLoggerProvider(settings))
-            );
+            builder.Services
+                .TryAddEnumerable(
+                    ServiceDescriptor.Singleton<ILoggerProvider>(
+                        new EventLogLoggerProvider(settings)
+                    )
+                );
 
             return builder;
         }

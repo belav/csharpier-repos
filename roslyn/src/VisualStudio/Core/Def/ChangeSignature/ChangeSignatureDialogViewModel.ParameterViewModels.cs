@@ -76,7 +76,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ChangeSignature
 
                     if (
                         this
-                            == ChangeSignatureDialogViewModel._parametersWithoutDefaultValues.LastOrDefault()
+                            == ChangeSignatureDialogViewModel._parametersWithoutDefaultValues
+                                .LastOrDefault()
                         && (
                             ChangeSignatureDialogViewModel._parametersWithDefaultValues.Any()
                             || ChangeSignatureDialogViewModel._paramsParameter != null
@@ -88,7 +89,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ChangeSignature
 
                     if (
                         this
-                            == ChangeSignatureDialogViewModel._parametersWithDefaultValues.LastOrDefault()
+                            == ChangeSignatureDialogViewModel._parametersWithDefaultValues
+                                .LastOrDefault()
                         && ChangeSignatureDialogViewModel._paramsParameter != null
                     )
                     {

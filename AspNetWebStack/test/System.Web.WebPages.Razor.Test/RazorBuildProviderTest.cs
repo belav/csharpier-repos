@@ -179,8 +179,8 @@ namespace System.Web.WebPages.Razor.Test
 
             // Assert
             Assert.NotNull(
-                generated
-                    .Namespaces.OfType<CodeNamespace>()
+                generated.Namespaces
+                    .OfType<CodeNamespace>()
                     .SingleOrDefault(ns => String.Equals(ns.Name, "DummyNamespace"))
             );
         }

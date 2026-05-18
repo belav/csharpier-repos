@@ -872,12 +872,13 @@ namespace System.Runtime.Serialization
             }
             else
             {
-                array = BooleanArrayHelperWithDictionaryString.Instance.ReadArray(
-                    dictionaryReader,
-                    itemName,
-                    itemNamespace,
-                    GetArrayLengthQuota(context)
-                );
+                array = BooleanArrayHelperWithDictionaryString.Instance
+                    .ReadArray(
+                        dictionaryReader,
+                        itemName,
+                        itemNamespace,
+                        GetArrayLengthQuota(context)
+                    );
                 context.IncrementItemCount(array.Length);
             }
             return true;
@@ -921,12 +922,13 @@ namespace System.Runtime.Serialization
             }
             else
             {
-                array = DateTimeArrayHelperWithDictionaryString.Instance.ReadArray(
-                    dictionaryReader,
-                    itemName,
-                    itemNamespace,
-                    GetArrayLengthQuota(context)
-                );
+                array = DateTimeArrayHelperWithDictionaryString.Instance
+                    .ReadArray(
+                        dictionaryReader,
+                        itemName,
+                        itemNamespace,
+                        GetArrayLengthQuota(context)
+                    );
                 context.IncrementItemCount(array.Length);
             }
             return true;
@@ -970,12 +972,13 @@ namespace System.Runtime.Serialization
             }
             else
             {
-                array = DecimalArrayHelperWithDictionaryString.Instance.ReadArray(
-                    dictionaryReader,
-                    itemName,
-                    itemNamespace,
-                    GetArrayLengthQuota(context)
-                );
+                array = DecimalArrayHelperWithDictionaryString.Instance
+                    .ReadArray(
+                        dictionaryReader,
+                        itemName,
+                        itemNamespace,
+                        GetArrayLengthQuota(context)
+                    );
                 context.IncrementItemCount(array.Length);
             }
             return true;
@@ -1019,12 +1022,13 @@ namespace System.Runtime.Serialization
             }
             else
             {
-                array = Int32ArrayHelperWithDictionaryString.Instance.ReadArray(
-                    dictionaryReader,
-                    itemName,
-                    itemNamespace,
-                    GetArrayLengthQuota(context)
-                );
+                array = Int32ArrayHelperWithDictionaryString.Instance
+                    .ReadArray(
+                        dictionaryReader,
+                        itemName,
+                        itemNamespace,
+                        GetArrayLengthQuota(context)
+                    );
                 context.IncrementItemCount(array.Length);
             }
             return true;
@@ -1068,12 +1072,13 @@ namespace System.Runtime.Serialization
             }
             else
             {
-                array = Int64ArrayHelperWithDictionaryString.Instance.ReadArray(
-                    dictionaryReader,
-                    itemName,
-                    itemNamespace,
-                    GetArrayLengthQuota(context)
-                );
+                array = Int64ArrayHelperWithDictionaryString.Instance
+                    .ReadArray(
+                        dictionaryReader,
+                        itemName,
+                        itemNamespace,
+                        GetArrayLengthQuota(context)
+                    );
                 context.IncrementItemCount(array.Length);
             }
             return true;
@@ -1117,12 +1122,13 @@ namespace System.Runtime.Serialization
             }
             else
             {
-                array = SingleArrayHelperWithDictionaryString.Instance.ReadArray(
-                    dictionaryReader,
-                    itemName,
-                    itemNamespace,
-                    GetArrayLengthQuota(context)
-                );
+                array = SingleArrayHelperWithDictionaryString.Instance
+                    .ReadArray(
+                        dictionaryReader,
+                        itemName,
+                        itemNamespace,
+                        GetArrayLengthQuota(context)
+                    );
                 context.IncrementItemCount(array.Length);
             }
             return true;
@@ -1166,12 +1172,13 @@ namespace System.Runtime.Serialization
             }
             else
             {
-                array = DoubleArrayHelperWithDictionaryString.Instance.ReadArray(
-                    dictionaryReader,
-                    itemName,
-                    itemNamespace,
-                    GetArrayLengthQuota(context)
-                );
+                array = DoubleArrayHelperWithDictionaryString.Instance
+                    .ReadArray(
+                        dictionaryReader,
+                        itemName,
+                        itemNamespace,
+                        GetArrayLengthQuota(context)
+                    );
                 context.IncrementItemCount(array.Length);
             }
             return true;

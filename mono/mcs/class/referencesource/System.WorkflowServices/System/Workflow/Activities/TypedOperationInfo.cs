@@ -40,10 +40,11 @@ namespace System.Workflow.Activities
             }
             if (string.IsNullOrEmpty(operationName))
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                    "operationName",
-                    SR2.GetString(SR2.Error_ArgumentValueNullOrEmptyString)
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperArgument(
+                        "operationName",
+                        SR2.GetString(SR2.Error_ArgumentValueNullOrEmptyString)
+                    );
             }
 
             this.ContractType = contractType;

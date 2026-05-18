@@ -343,9 +343,8 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
                                             new InvalidOperationException(
                                                 SR.ExceptionChartTypeRequiresYValues(
                                                     this.Name,
-                                                    this.YValuesPerPoint.ToString(
-                                                        CultureInfo.InvariantCulture
-                                                    )
+                                                    this.YValuesPerPoint
+                                                        .ToString(CultureInfo.InvariantCulture)
                                                 )
                                             )
                                         );

@@ -14,10 +14,9 @@ namespace ILLink.RoslynAnalyzer
             string optionName
         )
         {
-            return options.AnalyzerConfigOptionsProvider.GlobalOptions.TryGetValue(
-                $"build_property.{optionName}",
-                out var value
-            )
+            return options.AnalyzerConfigOptionsProvider
+                .GlobalOptions
+                .TryGetValue($"build_property.{optionName}", out var value)
                 ? value
                 : null;
         }

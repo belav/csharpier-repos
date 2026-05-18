@@ -23,18 +23,20 @@ internal static class EntityFrameworkMemberInfoExtensions
                         && otherPropertyInfo.DeclaringType != null
                         && (
                             propertyInfo.DeclaringType == otherPropertyInfo.DeclaringType
-                            || propertyInfo
-                                .DeclaringType.GetTypeInfo()
+                            || propertyInfo.DeclaringType
+                                .GetTypeInfo()
                                 .IsSubclassOf(otherPropertyInfo.DeclaringType)
-                            || otherPropertyInfo
-                                .DeclaringType.GetTypeInfo()
+                            || otherPropertyInfo.DeclaringType
+                                .GetTypeInfo()
                                 .IsSubclassOf(propertyInfo.DeclaringType)
-                            || propertyInfo
-                                .DeclaringType.GetTypeInfo()
-                                .ImplementedInterfaces.Contains(otherPropertyInfo.DeclaringType)
-                            || otherPropertyInfo
-                                .DeclaringType.GetTypeInfo()
-                                .ImplementedInterfaces.Contains(propertyInfo.DeclaringType)
+                            || propertyInfo.DeclaringType
+                                .GetTypeInfo()
+                                .ImplementedInterfaces
+                                .Contains(otherPropertyInfo.DeclaringType)
+                            || otherPropertyInfo.DeclaringType
+                                .GetTypeInfo()
+                                .ImplementedInterfaces
+                                .Contains(propertyInfo.DeclaringType)
                         )
                     )
                 )
@@ -56,12 +58,13 @@ internal static class EntityFrameworkMemberInfoExtensions
                         && otherPropertyInfo.DeclaringType != null
                         && (
                             propertyInfo.DeclaringType == otherPropertyInfo.DeclaringType
-                            || otherPropertyInfo
-                                .DeclaringType.GetTypeInfo()
+                            || otherPropertyInfo.DeclaringType
+                                .GetTypeInfo()
                                 .IsSubclassOf(propertyInfo.DeclaringType)
-                            || otherPropertyInfo
-                                .DeclaringType.GetTypeInfo()
-                                .ImplementedInterfaces.Contains(propertyInfo.DeclaringType)
+                            || otherPropertyInfo.DeclaringType
+                                .GetTypeInfo()
+                                .ImplementedInterfaces
+                                .Contains(propertyInfo.DeclaringType)
                         )
                     )
                 )

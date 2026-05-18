@@ -1515,8 +1515,7 @@ class C : ILErrors.InterfaceEvents
     }
 }";
 
-            var delegatesWithoutInvokeReference = TestReferences
-                .SymbolsTests
+            var delegatesWithoutInvokeReference = TestReferences.SymbolsTests
                 .DelegateImplementation
                 .DelegatesWithoutInvoke;
             CreateCompilation(text, new MetadataReference[] { delegatesWithoutInvokeReference })
@@ -1688,9 +1687,8 @@ public sealed class A
             var lib1 = CreateEmptyCompilation(
                 new[] { Parse(srcLib1) },
                 new[] { TestMetadata.Net20.mscorlib, TestMetadata.Net35.SystemCore },
-                TestOptions.ReleaseDll.WithAssemblyIdentityComparer(
-                    DesktopAssemblyIdentityComparer.Default
-                )
+                TestOptions.ReleaseDll
+                    .WithAssemblyIdentityComparer(DesktopAssemblyIdentityComparer.Default)
             );
 
             string srcLib2 =
@@ -1706,9 +1704,8 @@ class Program
             var lib2 = CreateEmptyCompilation(
                 new[] { Parse(srcLib2) },
                 new[] { MscorlibRef, new CSharpCompilationReference(lib1) },
-                TestOptions.ReleaseDll.WithAssemblyIdentityComparer(
-                    DesktopAssemblyIdentityComparer.Default
-                )
+                TestOptions.ReleaseDll
+                    .WithAssemblyIdentityComparer(DesktopAssemblyIdentityComparer.Default)
             );
 
             lib2.VerifyDiagnostics(
@@ -3268,8 +3265,7 @@ namespace System
         /// </summary>
         private static CSharpCompilation CompileWithMissingReference(string source)
         {
-            var unavailableAssemblyReference = TestReferences
-                .SymbolsTests
+            var unavailableAssemblyReference = TestReferences.SymbolsTests
                 .UseSiteErrors
                 .Unavailable;
             var csharpAssemblyReference = TestReferences.SymbolsTests.UseSiteErrors.CSharp;
@@ -4034,15 +4030,16 @@ public struct S3
                     s3.ContainingAssembly
                 );
                 Assert.True(s3.IsManagedType(ref managedKindUseSiteInfo));
-                managedKindUseSiteInfo.Diagnostics.Verify(
-                    // error CS0012: The type 'S1' is defined in an assembly that is not referenced. You must add a reference to assembly 'libS1, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
-                    Diagnostic(ErrorCode.ERR_NoTypeDef)
-                        .WithArguments(
-                            "S1",
-                            "libS1, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
-                        )
-                        .WithLocation(1, 1)
-                );
+                managedKindUseSiteInfo.Diagnostics
+                    .Verify(
+                        // error CS0012: The type 'S1' is defined in an assembly that is not referenced. You must add a reference to assembly 'libS1, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
+                        Diagnostic(ErrorCode.ERR_NoTypeDef)
+                            .WithArguments(
+                                "S1",
+                                "libS1, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+                            )
+                            .WithLocation(1, 1)
+                    );
             }
 
             comp = CreateCompilation(

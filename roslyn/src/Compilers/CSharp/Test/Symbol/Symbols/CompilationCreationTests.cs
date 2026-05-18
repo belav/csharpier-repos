@@ -189,12 +189,14 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             Assert.Equal(
                 SymbolKind.ErrorType,
                 asm1[1]
-                    .GlobalNamespace.GetTypeMembers("Class4")
+                    .GlobalNamespace
+                    .GetTypeMembers("Class4")
                     .Single()
                     .GetMembers("Foo")
                     .OfType<MethodSymbol>()
                     .Single()
-                    .ReturnType.Kind
+                    .ReturnType
+                    .Kind
             );
 
             var asm2 = MetadataTestHelpers.GetSymbolsForReferences(
@@ -233,7 +235,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             );
 
             var retval1 = asm2[1]
-                .GlobalNamespace.GetTypeMembers("Class4")
+                .GlobalNamespace
+                .GetTypeMembers("Class4")
                 .Single()
                 .GetMembers("Foo")
                 .OfType<MethodSymbol>()
@@ -297,7 +300,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             );
 
             var retval2 = asm3[1]
-                .GlobalNamespace.GetTypeMembers("Class4")
+                .GlobalNamespace
+                .GetTypeMembers("Class4")
                 .Single()
                 .GetMembers("Foo")
                 .OfType<MethodSymbol>()
@@ -415,7 +419,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             );
 
             var retval6 = asm4[1]
-                .GlobalNamespace.GetTypeMembers("Class4")
+                .GlobalNamespace
+                .GetTypeMembers("Class4")
                 .Single()
                 .GetMembers("Foo")
                 .OfType<MethodSymbol>()
@@ -755,12 +760,14 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             Assert.Equal(
                 SymbolKind.ErrorType,
                 asm1[1]
-                    .GlobalNamespace.GetTypeMembers("Class4")
+                    .GlobalNamespace
+                    .GetTypeMembers("Class4")
                     .Single()
                     .GetMembers("Foo")
                     .OfType<MethodSymbol>()
                     .Single()
-                    .ReturnType.Kind
+                    .ReturnType
+                    .Kind
             );
 
             Assert.Same(asm2[0], asm1[0]);
@@ -790,7 +797,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             );
 
             retval1 = asm2[1]
-                .GlobalNamespace.GetTypeMembers("Class4")
+                .GlobalNamespace
+                .GetTypeMembers("Class4")
                 .Single()
                 .GetMembers("Foo")
                 .OfType<MethodSymbol>()
@@ -843,7 +851,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             );
 
             retval2 = asm3[1]
-                .GlobalNamespace.GetTypeMembers("Class4")
+                .GlobalNamespace
+                .GetTypeMembers("Class4")
                 .Single()
                 .GetMembers("Foo")
                 .OfType<MethodSymbol>()
@@ -949,7 +958,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             );
 
             retval6 = asm4[1]
-                .GlobalNamespace.GetTypeMembers("Class4")
+                .GlobalNamespace
+                .GetTypeMembers("Class4")
                 .Single()
                 .GetMembers("Foo")
                 .OfType<MethodSymbol>()
@@ -1291,7 +1301,8 @@ public class Class4
             );
 
             var retval1 = asm2[1]
-                .GlobalNamespace.GetTypeMembers("Class4")
+                .GlobalNamespace
+                .GetTypeMembers("Class4")
                 .Single()
                 .GetMembers("Foo")
                 .OfType<MethodSymbol>()
@@ -1429,7 +1440,8 @@ public class Class5
             );
 
             var retval2 = asm3[1]
-                .GlobalNamespace.GetTypeMembers("Class4")
+                .GlobalNamespace
+                .GetTypeMembers("Class4")
                 .Single()
                 .GetMembers("Foo")
                 .OfType<MethodSymbol>()
@@ -1640,7 +1652,8 @@ public class Class6
             );
 
             var retval6 = asm4[1]
-                .GlobalNamespace.GetTypeMembers("Class4")
+                .GlobalNamespace
+                .GetTypeMembers("Class4")
                 .Single()
                 .GetMembers("Foo")
                 .OfType<MethodSymbol>()
@@ -2023,7 +2036,8 @@ public class Class6
             );
 
             retval1 = asm2[1]
-                .GlobalNamespace.GetTypeMembers("Class4")
+                .GlobalNamespace
+                .GetTypeMembers("Class4")
                 .Single()
                 .GetMembers("Foo")
                 .OfType<MethodSymbol>()
@@ -2084,7 +2098,8 @@ public class Class6
             );
 
             retval2 = asm3[1]
-                .GlobalNamespace.GetTypeMembers("Class4")
+                .GlobalNamespace
+                .GetTypeMembers("Class4")
                 .Single()
                 .GetMembers("Foo")
                 .OfType<MethodSymbol>()
@@ -2194,7 +2209,8 @@ public class Class6
             );
 
             retval6 = asm4[1]
-                .GlobalNamespace.GetTypeMembers("Class4")
+                .GlobalNamespace
+                .GetTypeMembers("Class4")
                 .Single()
                 .GetMembers("Foo")
                 .OfType<MethodSymbol>()
@@ -2518,7 +2534,8 @@ public class Class6
             );
 
             var retval1 = asm2[1]
-                .GlobalNamespace.GetTypeMembers("Class4")
+                .GlobalNamespace
+                .GetTypeMembers("Class4")
                 .Single()
                 .GetMembers("Foo")
                 .OfType<MethodSymbol>()
@@ -2528,7 +2545,8 @@ public class Class6
             Assert.Same(
                 retval1,
                 asm2[1]
-                    .GlobalNamespace.GetTypeMembers("Class4")
+                    .GlobalNamespace
+                    .GetTypeMembers("Class4")
                     .Single()
                     .GetMembers("Bar")
                     .OfType<FieldSymbol>()
@@ -2633,7 +2651,8 @@ public class Class6
             );
 
             var retval2 = asm3[1]
-                .GlobalNamespace.GetTypeMembers("Class4")
+                .GlobalNamespace
+                .GetTypeMembers("Class4")
                 .Single()
                 .GetMembers("Foo")
                 .OfType<MethodSymbol>()
@@ -2643,7 +2662,8 @@ public class Class6
             Assert.Same(
                 retval2,
                 asm3[1]
-                    .GlobalNamespace.GetTypeMembers("Class4")
+                    .GlobalNamespace
+                    .GetTypeMembers("Class4")
                     .Single()
                     .GetMembers("Bar")
                     .OfType<FieldSymbol>()
@@ -2811,7 +2831,8 @@ public class Class6
             );
 
             var retval6 = asm4[1]
-                .GlobalNamespace.GetTypeMembers("Class4")
+                .GlobalNamespace
+                .GetTypeMembers("Class4")
                 .Single()
                 .GetMembers("Foo")
                 .OfType<MethodSymbol>()
@@ -3224,7 +3245,8 @@ public class Class6
             );
 
             retval1 = asm2[1]
-                .GlobalNamespace.GetTypeMembers("Class4")
+                .GlobalNamespace
+                .GetTypeMembers("Class4")
                 .Single()
                 .GetMembers("Foo")
                 .OfType<MethodSymbol>()
@@ -3285,7 +3307,8 @@ public class Class6
             );
 
             retval2 = asm3[1]
-                .GlobalNamespace.GetTypeMembers("Class4")
+                .GlobalNamespace
+                .GetTypeMembers("Class4")
                 .Single()
                 .GetMembers("Foo")
                 .OfType<MethodSymbol>()
@@ -3398,7 +3421,8 @@ public class Class6
             );
 
             retval6 = asm4[1]
-                .GlobalNamespace.GetTypeMembers("Class4")
+                .GlobalNamespace
+                .GetTypeMembers("Class4")
                 .Single()
                 .GetMembers("Foo")
                 .OfType<MethodSymbol>()
@@ -3869,8 +3893,8 @@ namespace ns1
 
             var asm3 = c3.SourceAssembly();
 
-            var localC3Foo2 = asm3
-                .GlobalNamespace.GetTypeMembers("C3")
+            var localC3Foo2 = asm3.GlobalNamespace
+                .GetTypeMembers("C3")
                 .Single()
                 .GetMembers("Foo2")
                 .OfType<MethodSymbol>()
@@ -3958,7 +3982,8 @@ public class C5 :
 
             Assert.Same(
                 retval4,
-                asm3.GlobalNamespace.GetTypeMembers("C3")
+                asm3.GlobalNamespace
+                    .GetTypeMembers("C3")
                     .Single()
                     .GetMembers("Foo1")
                     .OfType<MethodSymbol>()
@@ -4057,7 +4082,8 @@ public class C5 :
 
             Assert.Equal(
                 typeC301.ToTestDisplayString(),
-                asm3.GlobalNamespace.GetTypeMembers("C3")
+                asm3.GlobalNamespace
+                    .GetTypeMembers("C3")
                     .Single()
                     .GetTypeMembers("C301")
                     .Single()
@@ -4071,7 +4097,8 @@ public class C5 :
 
             Assert.Equal(
                 typeC301.ToDisplayString(SymbolDisplayFormat.QualifiedNameArityFormat),
-                asm3.GlobalNamespace.GetTypeMembers("C3")
+                asm3.GlobalNamespace
+                    .GetTypeMembers("C3")
                     .Single()
                     .GetTypeMembers("C301")
                     .Single()
@@ -4080,7 +4107,8 @@ public class C5 :
 
             Assert.Equal(
                 typeC6.ToDisplayString(SymbolDisplayFormat.QualifiedNameArityFormat),
-                asm3.GlobalNamespace.GetTypeMembers("C6")
+                asm3.GlobalNamespace
+                    .GetTypeMembers("C6")
                     .Single()
                     .ToDisplayString(SymbolDisplayFormat.QualifiedNameArityFormat)
             );
@@ -4276,7 +4304,8 @@ class Module1
 
             NamedTypeSymbol classModule1 = c1AsmRef
                 .Modules[0]
-                .GlobalNamespace.GetTypeMembers("Module1")
+                .GlobalNamespace
+                .GetTypeMembers("Module1")
                 .Single();
             MethodSymbol m1 = classModule1.GetMembers("M1").OfType<MethodSymbol>().Single();
             MethodSymbol m2 = classModule1.GetMembers("M2").OfType<MethodSymbol>().Single();
@@ -4415,9 +4444,8 @@ System.Diagnostics.Process.GetCurrentProcess();
 
             var compilation = CreateCompilationWithMscorlib45(
                 trees,
-                options: TestOptions.ReleaseDll.WithMetadataReferenceResolver(
-                    new Resolver(data, core, system)
-                )
+                options: TestOptions.ReleaseDll
+                    .WithMetadataReferenceResolver(new Resolver(data, core, system))
             );
 
             compilation.VerifyDiagnostics();
@@ -4457,9 +4485,8 @@ System.Diagnostics.Process.GetCurrentProcess();
 
             var compilation = CreateCompilationWithMscorlib45(
                 trees,
-                options: TestOptions.ReleaseDll.WithMetadataReferenceResolver(
-                    new Resolver(data, core, system)
-                )
+                options: TestOptions.ReleaseDll
+                    .WithMetadataReferenceResolver(new Resolver(data, core, system))
             );
 
             compilation.VerifyDiagnostics(
@@ -4524,9 +4551,8 @@ class C : Metadata.ICSPropImpl { }";
 
             var compilation = CreateCompilationWithMscorlib45(
                 new[] { Parse(source, options: TestOptions.Script) },
-                options: TestOptions.ReleaseDll.WithMetadataReferenceResolver(
-                    new DummyReferenceResolver(csClasses01)
-                )
+                options: TestOptions.ReleaseDll
+                    .WithMetadataReferenceResolver(new DummyReferenceResolver(csClasses01))
             );
 
             compilation.VerifyDiagnostics();
@@ -4580,9 +4606,8 @@ class C
 
             var compilation = CreateCompilationWithMscorlib45(
                 trees,
-                options: TestOptions.ReleaseDll.WithUsings(
-                    ImmutableArray.Create("System.Console", "System")
-                )
+                options: TestOptions.ReleaseDll
+                    .WithUsings(ImmutableArray.Create("System.Console", "System"))
             );
 
             var diagnostics = compilation.GetDiagnostics().ToArray();

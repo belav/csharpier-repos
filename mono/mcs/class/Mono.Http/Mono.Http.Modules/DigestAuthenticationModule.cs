@@ -88,9 +88,8 @@ namespace Mono.Http.Modules
             password = String.Empty;
             roles = new string[0];
 
-            string userFileName = app.Request.MapPath(
-                ConfigurationSettings.AppSettings["Digest.Users"]
-            );
+            string userFileName = app.Request
+                .MapPath(ConfigurationSettings.AppSettings["Digest.Users"]);
             if (userFileName == null || !File.Exists(userFileName))
                 return false;
 

@@ -1899,11 +1899,12 @@ class Program
                 )
                 {
                     var builder = ArrayBuilder<UnaryOperatorSignature>.GetInstance();
-                    comp.builtInOperators.GetSimpleBuiltInOperators(
-                        operatorKind,
-                        builder,
-                        skipNativeIntegerOperators
-                    );
+                    comp.builtInOperators
+                        .GetSimpleBuiltInOperators(
+                            operatorKind,
+                            builder,
+                            skipNativeIntegerOperators
+                        );
                     var operators = builder.ToImmutableAndFree();
                     int expectedSigned = skipNativeIntegerOperators ? 0 : 1;
                     int expectedUnsigned =
@@ -1931,11 +1932,12 @@ class Program
                 )
                 {
                     var builder = ArrayBuilder<BinaryOperatorSignature>.GetInstance();
-                    comp.builtInOperators.GetSimpleBuiltInOperators(
-                        operatorKind,
-                        builder,
-                        skipNativeIntegerOperators
-                    );
+                    comp.builtInOperators
+                        .GetSimpleBuiltInOperators(
+                            operatorKind,
+                            builder,
+                            skipNativeIntegerOperators
+                        );
                     var operators = builder.ToImmutableAndFree();
                     int expected = skipNativeIntegerOperators ? 0 : 1;
                     verifyOperators(
@@ -11330,7 +11332,8 @@ enum E {{ }}
                 {
                     var destTypeSymbol = (
                         (MethodSymbol)comp.GetMember("Program.Convert")
-                    ).ReturnType.GetPublicSymbol();
+                    ).ReturnType
+                        .GetPublicSymbol();
                     AssertMatches(
                         expectedConversions,
                         model.ClassifyConversion(expr, destTypeSymbol)
@@ -11702,11 +11705,13 @@ enum E {{ }}
                 var symbolInfo = model.GetSymbolInfo(expr);
                 Assert.Equal(
                     expectedSymbol,
-                    symbolInfo.Symbol?.ToDisplayString(
-                        SymbolDisplayFormat.TestFormat.WithMiscellaneousOptions(
-                            SymbolDisplayMiscellaneousOptions.UseSpecialTypes
+                    symbolInfo.Symbol
+                        ?.ToDisplayString(
+                            SymbolDisplayFormat.TestFormat
+                                .WithMiscellaneousOptions(
+                                    SymbolDisplayMiscellaneousOptions.UseSpecialTypes
+                                )
                         )
-                    )
                 );
 
                 if (expectedDiagnostics.Length == 0)
@@ -12245,11 +12250,13 @@ class Program
                 var symbolInfo = model.GetSymbolInfo(expr);
                 Assert.Equal(
                     expectedSymbol,
-                    symbolInfo.Symbol?.ToDisplayString(
-                        SymbolDisplayFormat.TestFormat.WithMiscellaneousOptions(
-                            SymbolDisplayMiscellaneousOptions.UseSpecialTypes
+                    symbolInfo.Symbol
+                        ?.ToDisplayString(
+                            SymbolDisplayFormat.TestFormat
+                                .WithMiscellaneousOptions(
+                                    SymbolDisplayMiscellaneousOptions.UseSpecialTypes
+                                )
                         )
-                    )
                 );
 
                 if (expectedDiagnostics.Length == 0)
@@ -12584,11 +12591,13 @@ class Program
                 var symbolInfo = model.GetSymbolInfo(expr);
                 Assert.Equal(
                     expectedSymbol,
-                    symbolInfo.Symbol?.ToDisplayString(
-                        SymbolDisplayFormat.TestFormat.WithMiscellaneousOptions(
-                            SymbolDisplayMiscellaneousOptions.UseSpecialTypes
+                    symbolInfo.Symbol
+                        ?.ToDisplayString(
+                            SymbolDisplayFormat.TestFormat
+                                .WithMiscellaneousOptions(
+                                    SymbolDisplayMiscellaneousOptions.UseSpecialTypes
+                                )
                         )
-                    )
                 );
 
                 if (expectedDiagnostics.Length == 0)
@@ -17816,11 +17825,13 @@ class Program
                 var symbolInfo = model.GetSymbolInfo(expr);
                 Assert.Equal(
                     expectedSymbol,
-                    symbolInfo.Symbol?.ToDisplayString(
-                        SymbolDisplayFormat.TestFormat.WithMiscellaneousOptions(
-                            SymbolDisplayMiscellaneousOptions.UseSpecialTypes
+                    symbolInfo.Symbol
+                        ?.ToDisplayString(
+                            SymbolDisplayFormat.TestFormat
+                                .WithMiscellaneousOptions(
+                                    SymbolDisplayMiscellaneousOptions.UseSpecialTypes
+                                )
                         )
-                    )
                 );
 
                 if (expectedDiagnostics.Length == 0)
@@ -22419,17 +22430,19 @@ interface I
                 Assert.Equal(
                     "System.IntPtr",
                     type.ToDisplayString(
-                        SymbolDisplayFormat.TestFormat.WithCompilerInternalOptions(
-                            SymbolDisplayCompilerInternalOptions.UseNativeIntegerUnderlyingType
-                        )
+                        SymbolDisplayFormat.TestFormat
+                            .WithCompilerInternalOptions(
+                                SymbolDisplayCompilerInternalOptions.UseNativeIntegerUnderlyingType
+                            )
                     )
                 );
                 Assert.Equal(
                     "nint",
                     type.ToDisplayString(
-                        SymbolDisplayFormat.TestFormat.WithMiscellaneousOptions(
-                            SymbolDisplayMiscellaneousOptions.UseSpecialTypes
-                        )
+                        SymbolDisplayFormat.TestFormat
+                            .WithMiscellaneousOptions(
+                                SymbolDisplayMiscellaneousOptions.UseSpecialTypes
+                            )
                     )
                 );
             }
@@ -22442,17 +22455,19 @@ interface I
                 Assert.Equal(
                     "System.UIntPtr",
                     type.ToDisplayString(
-                        SymbolDisplayFormat.TestFormat.WithCompilerInternalOptions(
-                            SymbolDisplayCompilerInternalOptions.UseNativeIntegerUnderlyingType
-                        )
+                        SymbolDisplayFormat.TestFormat
+                            .WithCompilerInternalOptions(
+                                SymbolDisplayCompilerInternalOptions.UseNativeIntegerUnderlyingType
+                            )
                     )
                 );
                 Assert.Equal(
                     "nuint",
                     type.ToDisplayString(
-                        SymbolDisplayFormat.TestFormat.WithMiscellaneousOptions(
-                            SymbolDisplayMiscellaneousOptions.UseSpecialTypes
-                        )
+                        SymbolDisplayFormat.TestFormat
+                            .WithMiscellaneousOptions(
+                                SymbolDisplayMiscellaneousOptions.UseSpecialTypes
+                            )
                     )
                 );
             }

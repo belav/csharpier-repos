@@ -21,11 +21,12 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.VisualBasic
             await base.InitializeAsync().ConfigureAwait(false);
 
             // The VisualBasicNetCoreClassLibrary template does not open a file automatically.
-            await TestServices.SolutionExplorer.OpenFileAsync(
-                ProjectName,
-                WellKnownProjectTemplates.VisualBasicNetCoreClassLibraryClassFileName,
-                HangMitigatingCancellationToken
-            );
+            await TestServices.SolutionExplorer
+                .OpenFileAsync(
+                    ProjectName,
+                    WellKnownProjectTemplates.VisualBasicNetCoreClassLibraryClassFileName,
+                    HangMitigatingCancellationToken
+                );
         }
     }
 }

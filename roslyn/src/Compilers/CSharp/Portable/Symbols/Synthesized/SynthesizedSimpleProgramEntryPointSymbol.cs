@@ -189,10 +189,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             CSharpCompilation compilation
         )
         {
-            return compilation
-                .SourceModule.GlobalNamespace.GetTypeMembers(
-                    WellKnownMemberNames.TopLevelStatementsEntryPointTypeName
-                )
+            return compilation.SourceModule
+                .GlobalNamespace
+                .GetTypeMembers(WellKnownMemberNames.TopLevelStatementsEntryPointTypeName)
                 .OfType<SourceNamedTypeSymbol>()
                 .SingleOrDefault(s => s.IsSimpleProgram);
         }
@@ -357,7 +356,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     foreach (
                         var global in (
                             (CompilationUnitSyntax)tree.GetRoot(cancellationToken)
-                        ).Members.OfType<GlobalStatementSyntax>()
+                        ).Members
+                            .OfType<GlobalStatementSyntax>()
                     )
                     {
                         cancellationToken.ThrowIfCancellationRequested();

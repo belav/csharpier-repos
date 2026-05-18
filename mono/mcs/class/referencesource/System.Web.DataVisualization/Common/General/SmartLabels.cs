@@ -883,17 +883,16 @@ namespace System.Web.UI.DataVisualization.Charting
                 RectangleF lp = GetLabelPosition(graph, labelPosition, labelSize, format, false);
                 if (positionFound)
                 {
-                    graph.Graphics.DrawRectangle(
-                        Pens.Green,
-                        Rectangle.Round(graph.GetAbsoluteRectangle(lp))
-                    );
+                    graph.Graphics
+                        .DrawRectangle(Pens.Green, Rectangle.Round(graph.GetAbsoluteRectangle(lp)));
                 }
                 else
                 {
-                    graph.Graphics.DrawRectangle(
-                        new Pen(Color.Magenta, 3),
-                        Rectangle.Round(graph.GetAbsoluteRectangle(lp))
-                    );
+                    graph.Graphics
+                        .DrawRectangle(
+                            new Pen(Color.Magenta, 3),
+                            Rectangle.Round(graph.GetAbsoluteRectangle(lp))
+                        );
                 }
             }
 #endif
@@ -1122,10 +1121,11 @@ namespace System.Web.UI.DataVisualization.Charting
                     && common.Chart.ShowDebugMarkings
                 )
                 {
-                    graph.Graphics.DrawRectangle(
-                        Pens.Cyan,
-                        Rectangle.Round(graph.GetAbsoluteRectangle(labelPosition))
-                    );
+                    graph.Graphics
+                        .DrawRectangle(
+                            Pens.Cyan,
+                            Rectangle.Round(graph.GetAbsoluteRectangle(labelPosition))
+                        );
                 }
 #endif
                 collisionDetected = true;
@@ -1156,10 +1156,13 @@ namespace System.Web.UI.DataVisualization.Charting
 #if DEBUG
                                 if (graph != null && common.Chart.ShowDebugMarkings)
                                 {
-                                    graph.Graphics.DrawRectangle(
-                                        Pens.Cyan,
-                                        Rectangle.Round(graph.GetAbsoluteRectangle(labelPosition))
-                                    );
+                                    graph.Graphics
+                                        .DrawRectangle(
+                                            Pens.Cyan,
+                                            Rectangle.Round(
+                                                graph.GetAbsoluteRectangle(labelPosition)
+                                            )
+                                        );
                                 }
 #endif
                                 collisionDetected = true;
@@ -1186,10 +1189,13 @@ namespace System.Web.UI.DataVisualization.Charting
 #if DEBUG
                                 if (graph != null && common.Chart.ShowDebugMarkings)
                                 {
-                                    graph.Graphics.DrawRectangle(
-                                        Pens.Cyan,
-                                        Rectangle.Round(graph.GetAbsoluteRectangle(labelPosition))
-                                    );
+                                    graph.Graphics
+                                        .DrawRectangle(
+                                            Pens.Cyan,
+                                            Rectangle.Round(
+                                                graph.GetAbsoluteRectangle(labelPosition)
+                                            )
+                                        );
                                 }
 #endif
                                 collisionDetected = true;
@@ -1211,10 +1217,11 @@ namespace System.Web.UI.DataVisualization.Charting
 #if DEBUG
                             if (graph != null && common.Chart.ShowDebugMarkings)
                             {
-                                graph.Graphics.DrawRectangle(
-                                    Pens.Cyan,
-                                    Rectangle.Round(graph.GetAbsoluteRectangle(labelPosition))
-                                );
+                                graph.Graphics
+                                    .DrawRectangle(
+                                        Pens.Cyan,
+                                        Rectangle.Round(graph.GetAbsoluteRectangle(labelPosition))
+                                    );
                             }
 #endif
                             collisionDetected = true;
@@ -1228,10 +1235,11 @@ namespace System.Web.UI.DataVisualization.Charting
 #if DEBUG
                             if (graph != null && common.Chart.ShowDebugMarkings)
                             {
-                                graph.Graphics.DrawRectangle(
-                                    Pens.Cyan,
-                                    Rectangle.Round(graph.GetAbsoluteRectangle(labelPosition))
-                                );
+                                graph.Graphics
+                                    .DrawRectangle(
+                                        Pens.Cyan,
+                                        Rectangle.Round(graph.GetAbsoluteRectangle(labelPosition))
+                                    );
                             }
 #endif
                             collisionDetected = true;
@@ -1298,20 +1306,26 @@ namespace System.Web.UI.DataVisualization.Charting
                             && common.Chart.ShowDebugMarkings
                         )
                         {
-                            common.ChartPicture.ChartGraph.Graphics.DrawRectangle(
-                                Pens.Blue,
-                                Rectangle.Round(
-                                    common.ChartPicture.ChartGraph.GetAbsoluteRectangle(pos)
-                                )
-                            );
-                            common.ChartPicture.ChartGraph.Graphics.DrawRectangle(
-                                Pens.Red,
-                                Rectangle.Round(
-                                    common.ChartPicture.ChartGraph.GetAbsoluteRectangle(
-                                        labelPosition
+                            common.ChartPicture
+                                .ChartGraph
+                                .Graphics
+                                .DrawRectangle(
+                                    Pens.Blue,
+                                    Rectangle.Round(
+                                        common.ChartPicture.ChartGraph.GetAbsoluteRectangle(pos)
                                     )
-                                )
-                            );
+                                );
+                            common.ChartPicture
+                                .ChartGraph
+                                .Graphics
+                                .DrawRectangle(
+                                    Pens.Red,
+                                    Rectangle.Round(
+                                        common.ChartPicture
+                                            .ChartGraph
+                                            .GetAbsoluteRectangle(labelPosition)
+                                    )
+                                );
                         }
 #endif
                         collisionDetected = true;
@@ -1713,18 +1727,19 @@ namespace System.Web.UI.DataVisualization.Charting
             {
                 area.smartLabels.checkAllCollisions = true;
                 if (
-                    area.smartLabels.IsSmartLabelCollide(
-                        common,
-                        graph,
-                        area,
-                        smartLabelStyle,
-                        position,
-                        size,
-                        markerPosition,
-                        format,
-                        labelAlignment,
-                        checkCalloutLineOverlapping
-                    )
+                    area.smartLabels
+                        .IsSmartLabelCollide(
+                            common,
+                            graph,
+                            area,
+                            smartLabelStyle,
+                            position,
+                            size,
+                            markerPosition,
+                            format,
+                            labelAlignment,
+                            checkCalloutLineOverlapping
+                        )
                 )
                 {
                     area.smartLabels.checkAllCollisions = false;
@@ -1769,14 +1784,16 @@ namespace System.Web.UI.DataVisualization.Charting
 #if DEBUG
                     if (graph != null && common.Chart.ShowDebugMarkings)
                     {
-                        graph.Graphics.DrawRectangle(
-                            Pens.Blue,
-                            Rectangle.Round(graph.GetAbsoluteRectangle(pos))
-                        );
-                        graph.Graphics.DrawRectangle(
-                            Pens.Red,
-                            Rectangle.Round(graph.GetAbsoluteRectangle(labelPosition))
-                        );
+                        graph.Graphics
+                            .DrawRectangle(
+                                Pens.Blue,
+                                Rectangle.Round(graph.GetAbsoluteRectangle(pos))
+                            );
+                        graph.Graphics
+                            .DrawRectangle(
+                                Pens.Red,
+                                Rectangle.Round(graph.GetAbsoluteRectangle(labelPosition))
+                            );
                     }
 #endif
                     collisionDetected = true;

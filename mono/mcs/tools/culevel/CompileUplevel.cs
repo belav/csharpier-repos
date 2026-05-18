@@ -452,16 +452,17 @@ namespace Mono.Tools
             mainMethod.Statements.Add(new CodeConditionStatement(uaNull, returnFalse));
 
             // int ualength = ua.Length;
-            mainMethod.Statements.Add(
-                new CodeVariableDeclarationStatement(
-                    typeof(int),
-                    "ualength",
-                    new CodePropertyReferenceExpression(
-                        new CodeArgumentReferenceExpression("ua"),
-                        "Length"
+            mainMethod.Statements
+                .Add(
+                    new CodeVariableDeclarationStatement(
+                        typeof(int),
+                        "ualength",
+                        new CodePropertyReferenceExpression(
+                            new CodeArgumentReferenceExpression("ua"),
+                            "Length"
+                        )
                     )
-                )
-            );
+                );
 
             // if (ualength == 0)
             //    return false;
@@ -472,13 +473,14 @@ namespace Mono.Tools
             mainMethod.Statements.Add(new CodeConditionStatement(uaEmpty, returnFalse));
 
             // bool hasJavaScript = false;
-            mainMethod.Statements.Add(
-                new CodeVariableDeclarationStatement(
-                    typeof(bool),
-                    "hasJavaScript",
-                    new CodePrimitiveExpression(false)
-                )
-            );
+            mainMethod.Statements
+                .Add(
+                    new CodeVariableDeclarationStatement(
+                        typeof(bool),
+                        "hasJavaScript",
+                        new CodePrimitiveExpression(false)
+                    )
+                );
 
             return mainMethod;
         }
@@ -488,17 +490,15 @@ namespace Mono.Tools
             CodeMemberMethod groupMethod = new CodeMemberMethod();
             groupMethod.Name = String.Format("DetermineUplevel_{0}_{1}", level, groupId);
             groupMethod.ReturnType = new CodeTypeReference(typeof(bool));
-            groupMethod.Parameters.Add(
-                new CodeParameterDeclarationExpression(typeof(string), "ua")
-            );
+            groupMethod.Parameters
+                .Add(new CodeParameterDeclarationExpression(typeof(string), "ua"));
             CodeParameterDeclarationExpression hasJavaScript =
                 new CodeParameterDeclarationExpression(typeof(bool), "hasJavaScript");
 
             hasJavaScript.Direction = FieldDirection.Out;
             groupMethod.Parameters.Add(hasJavaScript);
-            groupMethod.Parameters.Add(
-                new CodeParameterDeclarationExpression(typeof(int), "ualength")
-            );
+            groupMethod.Parameters
+                .Add(new CodeParameterDeclarationExpression(typeof(int), "ualength"));
             groupMethod.Attributes =
                 MemberAttributes.Private | MemberAttributes.Static | MemberAttributes.Final;
 
@@ -526,12 +526,13 @@ namespace Mono.Tools
                 matches.Add(match);
 
                 if (assignHasJavaScript && gd.Positional)
-                    match.TrueStatements.Add(
-                        new CodeAssignStatement(
-                            new CodeVariableReferenceExpression("hasJavaScript"),
-                            new CodePrimitiveExpression(false)
-                        )
-                    );
+                    match.TrueStatements
+                        .Add(
+                            new CodeAssignStatement(
+                                new CodeVariableReferenceExpression("hasJavaScript"),
+                                new CodePrimitiveExpression(false)
+                            )
+                        );
                 if (!assignHasJavaScript || GroupZero)
                     match.TrueStatements.Add(returnFalse);
                 else
@@ -602,9 +603,8 @@ namespace Mono.Tools
                             }
                         );
                         subMatches.TrueStatements.Add(returnHasJS);
-                        subMatches.FalseStatements.Add(
-                            new CodeMethodReturnStatement(new CodePrimitiveExpression(false))
-                        );
+                        subMatches.FalseStatements
+                            .Add(new CodeMethodReturnStatement(new CodePrimitiveExpression(false)));
 
                         matches.TrueStatements.Add(subMatches);
                     }
@@ -616,12 +616,13 @@ namespace Mono.Tools
                                 matches.TrueStatements.Add(ccs);
 
                         if (!GroupZero && gd.Positional)
-                            matches.TrueStatements.Add(
-                                new CodeAssignStatement(
-                                    new CodeVariableReferenceExpression("hasJavaScript"),
-                                    new CodePrimitiveExpression(true)
-                                )
-                            );
+                            matches.TrueStatements
+                                .Add(
+                                    new CodeAssignStatement(
+                                        new CodeVariableReferenceExpression("hasJavaScript"),
+                                        new CodePrimitiveExpression(true)
+                                    )
+                                );
                         matches.TrueStatements.Add(returnTrue);
                     }
                     method.Statements.Add(matches);
@@ -629,15 +630,13 @@ namespace Mono.Tools
                 }
 
                 // return false;
-                method.Statements.Add(
-                    new CodeMethodReturnStatement(new CodePrimitiveExpression(false))
-                );
+                method.Statements
+                    .Add(new CodeMethodReturnStatement(new CodePrimitiveExpression(false)));
             }
             else
                 // return <valueOf_DefaultJS>
-                method.Statements.Add(
-                    new CodeMethodReturnStatement(new CodePrimitiveExpression(DefaultJS))
-                );
+                method.Statements
+                    .Add(new CodeMethodReturnStatement(new CodePrimitiveExpression(DefaultJS)));
 
             return method;
         }
@@ -886,34 +885,37 @@ namespace Mono.Tools
             uaSizeCheck.Left = new CodeArgumentReferenceExpression("ualength");
             uaSizeCheck.Operator = CodeBinaryOperatorType.LessThan;
             uaSizeCheck.Right = new CodePrimitiveExpression(minsize);
-            method.Statements.Add(
-                new CodeConditionStatement(
-                    uaSizeCheck,
-                    new CodeMethodReturnStatement(new CodePrimitiveExpression(false))
-                )
-            );
+            method.Statements
+                .Add(
+                    new CodeConditionStatement(
+                        uaSizeCheck,
+                        new CodeMethodReturnStatement(new CodePrimitiveExpression(false))
+                    )
+                );
 
             // int startPosition = 0;
-            method.Statements.Add(
-                new CodeVariableDeclarationStatement(
-                    typeof(int),
-                    "startPosition",
-                    new CodePrimitiveExpression(0)
-                )
-            );
+            method.Statements
+                .Add(
+                    new CodeVariableDeclarationStatement(
+                        typeof(int),
+                        "startPosition",
+                        new CodePrimitiveExpression(0)
+                    )
+                );
 
             // int endPosition = startPosition + matchLength;
-            method.Statements.Add(
-                new CodeVariableDeclarationStatement(
-                    typeof(int),
-                    "endPosition",
-                    new CodeBinaryOperatorExpression(
-                        new CodeVariableReferenceExpression("startPosition"),
-                        CodeBinaryOperatorType.Add,
-                        new CodePrimitiveExpression(matchLength - 1)
+            method.Statements
+                .Add(
+                    new CodeVariableDeclarationStatement(
+                        typeof(int),
+                        "endPosition",
+                        new CodeBinaryOperatorExpression(
+                            new CodeVariableReferenceExpression("startPosition"),
+                            CodeBinaryOperatorType.Add,
+                            new CodePrimitiveExpression(matchLength - 1)
+                        )
                     )
-                )
-            );
+                );
 
             // for (int ualeft = ualength; ualeft >= matchlen; ualeft--) {
             //   if (<condition>) {
@@ -947,40 +949,41 @@ namespace Mono.Tools
                 GenerateScanCondition(match, matchLength, startPosition)
             );
 
-            cond.TrueStatements.Add(
-                new CodeAssignStatement(
-                    new CodeArgumentReferenceExpression("hasJavaScript"),
-                    new CodePrimitiveExpression(true)
-                )
-            );
-            cond.TrueStatements.Add(
-                new CodeMethodReturnStatement(new CodePrimitiveExpression(true))
-            );
+            cond.TrueStatements
+                .Add(
+                    new CodeAssignStatement(
+                        new CodeArgumentReferenceExpression("hasJavaScript"),
+                        new CodePrimitiveExpression(true)
+                    )
+                );
+            cond.TrueStatements
+                .Add(new CodeMethodReturnStatement(new CodePrimitiveExpression(true)));
             iter.Statements.Add(cond);
-            iter.Statements.Add(
-                new CodeAssignStatement(
-                    new CodeVariableReferenceExpression("startPosition"),
-                    new CodeBinaryOperatorExpression(
+            iter.Statements
+                .Add(
+                    new CodeAssignStatement(
                         new CodeVariableReferenceExpression("startPosition"),
-                        CodeBinaryOperatorType.Add,
-                        new CodePrimitiveExpression(1)
+                        new CodeBinaryOperatorExpression(
+                            new CodeVariableReferenceExpression("startPosition"),
+                            CodeBinaryOperatorType.Add,
+                            new CodePrimitiveExpression(1)
+                        )
                     )
-                )
-            );
-            iter.Statements.Add(
-                new CodeAssignStatement(
-                    new CodeVariableReferenceExpression("endPosition"),
-                    new CodeBinaryOperatorExpression(
+                );
+            iter.Statements
+                .Add(
+                    new CodeAssignStatement(
                         new CodeVariableReferenceExpression("endPosition"),
-                        CodeBinaryOperatorType.Add,
-                        new CodePrimitiveExpression(1)
+                        new CodeBinaryOperatorExpression(
+                            new CodeVariableReferenceExpression("endPosition"),
+                            CodeBinaryOperatorType.Add,
+                            new CodePrimitiveExpression(1)
+                        )
                     )
-                )
-            );
+                );
             method.Statements.Add(iter);
-            method.Statements.Add(
-                new CodeMethodReturnStatement(new CodePrimitiveExpression(false))
-            );
+            method.Statements
+                .Add(new CodeMethodReturnStatement(new CodePrimitiveExpression(false)));
 
             mainClass.Members.Add(method);
 
@@ -1027,14 +1030,15 @@ namespace Mono.Tools
                 Environment.Exit(1);
             }
 
-            Console.Error.WriteLine(
-                @"Usage: culevel [OPTIONS] INPUT_FILE
+            Console.Error
+                .WriteLine(
+                    @"Usage: culevel [OPTIONS] INPUT_FILE
 Options:
     -o|--o|-output|--output    file to write the generated code to.
                                If not specified, output goes to the console
     -h|--h|-help|--help        show this usage information.
 "
-            );
+                );
             Environment.Exit(0);
         }
 

@@ -42,8 +42,7 @@ namespace Microsoft.VisualBasic.Activities.XamlIntegration
                 && xamlSchemaContextProvider.SchemaContext != null
             )
             {
-                xsCtxReferenceAssemblies = xamlSchemaContextProvider
-                    .SchemaContext
+                xsCtxReferenceAssemblies = xamlSchemaContextProvider.SchemaContext
                     .ReferenceAssemblies;
                 if (xsCtxReferenceAssemblies != null && xsCtxReferenceAssemblies.Count == 0)
                 {
@@ -169,14 +168,15 @@ namespace Microsoft.VisualBasic.Activities.XamlIntegration
                 if (match.Success)
                 {
                     mapping.ImportReferences = new HashSet<VisualBasicImportReference>();
-                    mapping.ImportReferences.Add(
-                        new VisualBasicImportReference
-                        {
-                            Assembly = match.Groups["assembly"].Value,
-                            Import = match.Groups["namespace"].Value,
-                            Xmlns = xmlns,
-                        }
-                    );
+                    mapping.ImportReferences
+                        .Add(
+                            new VisualBasicImportReference
+                            {
+                                Assembly = match.Groups["assembly"].Value,
+                                Import = match.Groups["namespace"].Value,
+                                Xmlns = xmlns,
+                            }
+                        );
                 }
                 else
                 {
@@ -395,7 +395,8 @@ namespace Microsoft.VisualBasic.Activities.XamlIntegration
                 get
                 {
                     foreach (
-                        VisualBasicImportReference wrappedReference in this.wrappedMapping.ImportReferences
+                        VisualBasicImportReference wrappedReference in this.wrappedMapping
+                            .ImportReferences
                     )
                     {
                         yield return new ReadOnlyVisualBasicImportReference(wrappedReference);
@@ -462,9 +463,10 @@ namespace Microsoft.VisualBasic.Activities.XamlIntegration
                 }
                 if (
                     this.wrappedReference.AssemblyName.CultureInfo != null
-                    && !this.wrappedReference.AssemblyName.CultureInfo.Equals(
-                        assemblyName.CultureInfo
-                    )
+                    && !this.wrappedReference
+                        .AssemblyName
+                        .CultureInfo
+                        .Equals(assemblyName.CultureInfo)
                 )
                 {
                     return false;

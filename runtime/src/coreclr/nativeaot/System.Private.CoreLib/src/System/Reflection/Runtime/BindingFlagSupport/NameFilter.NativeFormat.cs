@@ -27,6 +27,7 @@ namespace System.Reflection.Runtime.BindingFlagSupport
         ) =>
             stringHandle
                 .GetConstantStringValue(reader)
-                .Value.Equals(ExpectedName, StringComparison.OrdinalIgnoreCase);
+                .Value
+                .Equals(ExpectedName, StringComparison.OrdinalIgnoreCase);
     }
 }

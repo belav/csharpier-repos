@@ -181,9 +181,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
                 workspace.TryApplyChanges(
                     project
                         .WithParseOptions(
-                            project.ParseOptions!.WithFeatures(
-                                new[] { KeyValuePairUtil.Create("Feature", "") }
-                            )
+                            project.ParseOptions!
+                                .WithFeatures(new[] { KeyValuePairUtil.Create("Feature", "") })
                         )
                         .Solution
                 )
@@ -206,9 +205,10 @@ namespace Microsoft.CodeAnalysis.UnitTests
                 workspace.TryApplyChanges(
                     project
                         .WithParseOptions(
-                            project.ParseOptions!.WithFeatures(
-                                new[] { KeyValuePairUtil.Create("Feature", "ExpectedValue") }
-                            )
+                            project.ParseOptions!
+                                .WithFeatures(
+                                    new[] { KeyValuePairUtil.Create("Feature", "ExpectedValue") }
+                                )
                         )
                         .Solution
                 )
@@ -231,9 +231,10 @@ namespace Microsoft.CodeAnalysis.UnitTests
                 workspace.TryApplyChanges(
                     project
                         .WithParseOptions(
-                            project.ParseOptions!.WithFeatures(
-                                new[] { KeyValuePairUtil.Create("Feature", "WrongThing") }
-                            )
+                            project.ParseOptions!
+                                .WithFeatures(
+                                    new[] { KeyValuePairUtil.Create("Feature", "WrongThing") }
+                                )
                         )
                         .Solution
                 )
@@ -258,7 +259,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
                 workspace.TryApplyChanges(
                     project
                         .AddAnalyzerConfigDocument(".editorconfig", SourceText.From(""))
-                        .Project.Solution
+                        .Project
+                        .Solution
                 )
             );
         }

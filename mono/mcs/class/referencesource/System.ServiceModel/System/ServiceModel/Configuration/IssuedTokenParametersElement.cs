@@ -144,9 +144,8 @@ namespace System.ServiceModel.Configuration
         internal void ApplyConfiguration(IssuedSecurityTokenParameters parameters)
         {
             if (parameters == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentNullException("parameters")
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(new ArgumentNullException("parameters"));
 
             if (this.AdditionalRequestParameters != null)
             {
@@ -160,9 +159,8 @@ namespace System.ServiceModel.Configuration
             {
                 foreach (ClaimTypeElement c in this.ClaimTypeRequirements)
                 {
-                    parameters.ClaimTypeRequirements.Add(
-                        new ClaimTypeRequirement(c.ClaimType, c.IsOptional)
-                    );
+                    parameters.ClaimTypeRequirements
+                        .Add(new ClaimTypeRequirement(c.ClaimType, c.IsOptional));
                 }
             }
 
@@ -211,9 +209,10 @@ namespace System.ServiceModel.Configuration
         {
             if (this.IsReadOnly())
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ConfigurationErrorsException(SR.GetString(SR.ConfigReadOnly))
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        new ConfigurationErrorsException(SR.GetString(SR.ConfigReadOnly))
+                    );
             }
             if (null == source)
             {
@@ -247,8 +246,7 @@ namespace System.ServiceModel.Configuration
             }
             if (
                 PropertyValueOrigin.Default
-                != source
-                    .ElementInformation
+                != source.ElementInformation
                     .Properties[ConfigurationStrings.IssuerMetadata]
                     .ValueOrigin
             )

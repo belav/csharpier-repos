@@ -202,12 +202,12 @@ namespace IntrinsicsInSystemPrivateCoreLib
                     "Runtime",
                     "Intrinsics"
                 );
-                INamedTypeSymbol? bypassReadyToRunAttribute =
-                    context.Compilation.Assembly.GetTypeByMetadataName(
-                        "System.Runtime.BypassReadyToRunAttribute"
-                    );
-                INamedTypeSymbol? compExactlyDependsOn =
-                    context.Compilation.Assembly.GetTypeByMetadataName(
+                INamedTypeSymbol? bypassReadyToRunAttribute = context.Compilation
+                    .Assembly
+                    .GetTypeByMetadataName("System.Runtime.BypassReadyToRunAttribute");
+                INamedTypeSymbol? compExactlyDependsOn = context.Compilation
+                    .Assembly
+                    .GetTypeByMetadataName(
                         "System.Runtime.CompilerServices.CompExactlyDependsOnAttribute"
                     );
 
@@ -248,10 +248,11 @@ namespace IntrinsicsInSystemPrivateCoreLib
                             if (bypassReadyToRunAttribute != null)
                             {
                                 if (
-                                    attributeData.AttributeClass.Equals(
-                                        bypassReadyToRunAttribute,
-                                        SymbolEqualityComparer.Default
-                                    )
+                                    attributeData.AttributeClass
+                                        .Equals(
+                                            bypassReadyToRunAttribute,
+                                            SymbolEqualityComparer.Default
+                                        )
                                 )
                                 {
                                     // This method isn't involved in ReadyToRun, and so doesn't need analysis
@@ -574,10 +575,8 @@ namespace IntrinsicsInSystemPrivateCoreLib
                 foreach (var attributeData in symbol.GetAttributes())
                 {
                     if (
-                        attributeData.AttributeClass.Equals(
-                            compExactlyDependsOn,
-                            SymbolEqualityComparer.Default
-                        )
+                        attributeData.AttributeClass
+                            .Equals(compExactlyDependsOn, SymbolEqualityComparer.Default)
                     )
                     {
                         if (
@@ -608,10 +607,8 @@ namespace IntrinsicsInSystemPrivateCoreLib
             {
                 INamedTypeSymbol symbol = symbolsToExamine.Pop();
                 if (
-                    symbolOfInvokeTarget.ContainingSymbol.Equals(
-                        symbol,
-                        SymbolEqualityComparer.Default
-                    )
+                    symbolOfInvokeTarget.ContainingSymbol
+                        .Equals(symbol, SymbolEqualityComparer.Default)
                 )
                     return true;
 
@@ -703,16 +700,13 @@ namespace IntrinsicsInSystemPrivateCoreLib
             if (
                 methodNeedsProtectionWithIsSupported
                 && (
-                    methodSymbol.ContainingType.Equals(
-                        symbol.ContainingSymbol,
-                        SymbolEqualityComparer.Default
-                    )
+                    methodSymbol.ContainingType
+                        .Equals(symbol.ContainingSymbol, SymbolEqualityComparer.Default)
                     || (
                         methodSymbol.ContainingType.ContainingType != null
-                        && methodSymbol.ContainingType.ContainingType.Equals(
-                            symbol.ContainingType,
-                            SymbolEqualityComparer.Default
-                        )
+                        && methodSymbol.ContainingType
+                            .ContainingType
+                            .Equals(symbol.ContainingType, SymbolEqualityComparer.Default)
                     )
                 )
             )
@@ -771,10 +765,8 @@ namespace IntrinsicsInSystemPrivateCoreLib
                         )
                         {
                             if (
-                                attributeData.AttributeClass.Equals(
-                                    compExactlyDependsOn,
-                                    SymbolEqualityComparer.Default
-                                )
+                                attributeData.AttributeClass
+                                    .Equals(compExactlyDependsOn, SymbolEqualityComparer.Default)
                             )
                             {
                                 if (

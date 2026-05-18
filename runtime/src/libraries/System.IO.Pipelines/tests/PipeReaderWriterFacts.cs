@@ -453,7 +453,8 @@ namespace System.IO.Pipelines.Tests
                 var tcs = new TaskCompletionSource<int>();
                 val.Value = 10;
 
-                pipe.Reader.ReadAsync()
+                pipe.Reader
+                    .ReadAsync()
                     .GetAwaiter()
                     .OnCompleted(() =>
                     {
@@ -520,7 +521,8 @@ namespace System.IO.Pipelines.Tests
                 val.Value = 10;
 
                 pipe.Writer.WriteEmpty(20);
-                pipe.Writer.FlushAsync()
+                pipe.Writer
+                    .FlushAsync()
                     .GetAwaiter()
                     .OnCompleted(() =>
                     {
@@ -558,10 +560,11 @@ namespace System.IO.Pipelines.Tests
         public async Task ReadingCanBeCanceled()
         {
             var cts = new CancellationTokenSource();
-            cts.Token.Register(() =>
-            {
-                _pipe.Writer.Complete(new OperationCanceledException(cts.Token));
-            });
+            cts.Token
+                .Register(() =>
+                {
+                    _pipe.Writer.Complete(new OperationCanceledException(cts.Token));
+                });
 
             Task ignore = Task.Run(async () =>
             {

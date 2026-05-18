@@ -783,8 +783,8 @@ namespace System.Data.Linq.Mapping
             this.InitDataMembers();
 
             this.identities = this.dataMembers.Where(m => m.IsPrimaryKey).ToList().AsReadOnly();
-            this.persistentDataMembers = this
-                .dataMembers.Where(m => m.IsPersistent)
+            this.persistentDataMembers = this.dataMembers
+                .Where(m => m.IsPersistent)
                 .ToList()
                 .AsReadOnly();
         }
@@ -1192,8 +1192,8 @@ namespace System.Data.Linq.Mapping
                     {
                         if (this.associations == null)
                         {
-                            this.associations = this
-                                .dataMembers.Where(m => m.IsAssociation)
+                            this.associations = this.dataMembers
+                                .Where(m => m.IsAssociation)
                                 .Select(m => m.Association)
                                 .ToList()
                                 .AsReadOnly();
@@ -1316,10 +1316,11 @@ namespace System.Data.Linq.Mapping
             this.memberMap = map;
             if (this.memberMap != null && this.memberMap.StorageMemberName != null)
             {
-                MemberInfo[] mis = mi.DeclaringType.GetMember(
-                    this.memberMap.StorageMemberName,
-                    BindingFlags.Instance | BindingFlags.NonPublic
-                );
+                MemberInfo[] mis = mi.DeclaringType
+                    .GetMember(
+                        this.memberMap.StorageMemberName,
+                        BindingFlags.Instance | BindingFlags.NonPublic
+                    );
                 if (mis == null || mis.Length != 1)
                 {
                     throw Error.BadStorageProperty(
@@ -2107,10 +2108,11 @@ namespace System.Data.Linq.Mapping
             for (int i = 0; i < names.Length; i++)
             {
                 names[i] = names[i].Trim();
-                MemberInfo[] rmis = mtype.Type.GetMember(
-                    names[i],
-                    BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic
-                );
+                MemberInfo[] rmis = mtype.Type
+                    .GetMember(
+                        names[i],
+                        BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic
+                    );
                 if (rmis == null || rmis.Length != 1)
                 {
                     throw Error.BadKeyMember(names[i], keyFields, mtype.Name);

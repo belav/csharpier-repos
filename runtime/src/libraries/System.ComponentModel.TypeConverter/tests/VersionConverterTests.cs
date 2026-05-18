@@ -57,11 +57,8 @@ namespace System.ComponentModel.Tests
         public static void ConvertFromNull_WithContext_ThrowsNotSupportedException()
         {
             Assert.Throws<NotSupportedException>(() =>
-                VersionConverterTests.s_converter.ConvertFrom(
-                    TypeConverterTests.s_context,
-                    null,
-                    null
-                )
+                VersionConverterTests.s_converter
+                    .ConvertFrom(TypeConverterTests.s_context, null, null)
             );
         }
 
@@ -75,11 +72,8 @@ namespace System.ComponentModel.Tests
         )
         {
             Assert.Throws<FormatException>(() =>
-                VersionConverterTests.s_converter.ConvertFrom(
-                    TypeConverterTests.s_context,
-                    null,
-                    version
-                )
+                VersionConverterTests.s_converter
+                    .ConvertFrom(TypeConverterTests.s_context, null, version)
             );
         }
     }

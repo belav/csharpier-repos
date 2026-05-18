@@ -520,10 +520,11 @@ namespace System.Data.Metadata.Edm
                     // expand. Note that ExpandDataDirectory() won't process the path unless
                     // it begins with the macro.
                     //
-                    string fullPath =
-                        System.Data.EntityClient.DbConnectionOptions.ExpandDataDirectory(
-                            System
-                                .Data
+                    string fullPath = System.Data
+                        .EntityClient
+                        .DbConnectionOptions
+                        .ExpandDataDirectory(
+                            System.Data
                                 .EntityClient
                                 .EntityConnectionStringBuilder
                                 .MetadataParameterName, // keyword ("Metadata")

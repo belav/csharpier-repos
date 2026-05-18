@@ -50,9 +50,8 @@ namespace System.Text.Json.SourceGeneration.Tests
                 TypeInfoResolver = ContextWithWebDefaultsAndOverriddenPropertyNamingPolicy.Default,
             };
 
-            JsonSerializerOptions options = ContextWithWebDefaultsAndOverriddenPropertyNamingPolicy
-                .Default
-                .Options;
+            JsonSerializerOptions options =
+                ContextWithWebDefaultsAndOverriddenPropertyNamingPolicy.Default.Options;
 
             JsonTestHelper.AssertOptionsEqual(expected, options);
         }

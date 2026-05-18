@@ -31,8 +31,7 @@ public class RoutingDynamicOrderTest
         var factory = Factory.WithWebHostBuilder(b =>
             b.UseSetting(
                 "Scenario",
-                RoutingWebSite
-                    .StartupForDynamicOrder
+                RoutingWebSite.StartupForDynamicOrder
                     .DynamicOrderScenarios
                     .AttributeRouteDynamicRoute
             )
@@ -93,8 +92,7 @@ public class RoutingDynamicOrderTest
         var factory = Factory.WithWebHostBuilder(b =>
             b.UseSetting(
                 "Scenario",
-                RoutingWebSite
-                    .StartupForDynamicOrder
+                RoutingWebSite.StartupForDynamicOrder
                     .DynamicOrderScenarios
                     .ConventionalRouteDynamicRoute
             )
@@ -125,8 +123,7 @@ public class RoutingDynamicOrderTest
         var factory = Factory.WithWebHostBuilder(b =>
             b.UseSetting(
                 "Scenario",
-                RoutingWebSite
-                    .StartupForDynamicOrder
+                RoutingWebSite.StartupForDynamicOrder
                     .DynamicOrderScenarios
                     .ConventionalRouteDynamicRoute
             )
@@ -158,8 +155,7 @@ public class RoutingDynamicOrderTest
         var factory = Factory.WithWebHostBuilder(b =>
             b.UseSetting(
                 "Scenario",
-                RoutingWebSite
-                    .StartupForDynamicOrder
+                RoutingWebSite.StartupForDynamicOrder
                     .DynamicOrderScenarios
                     .DynamicControllerAndPages
             )
@@ -189,8 +185,7 @@ public class RoutingDynamicOrderTest
         var factory = Factory.WithWebHostBuilder(b =>
             b.UseSetting(
                 "Scenario",
-                RoutingWebSite
-                    .StartupForDynamicOrder
+                RoutingWebSite.StartupForDynamicOrder
                     .DynamicOrderScenarios
                     .DynamicControllerAndPages
             )

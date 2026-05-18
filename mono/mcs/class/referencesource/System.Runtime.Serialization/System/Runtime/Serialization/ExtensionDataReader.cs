@@ -233,9 +233,13 @@ namespace System.Runtime.Serialization
             else
             {
                 if (index < 0 || index >= attributeCount)
-                    throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new XmlException(SR.GetString(SR.InvalidXmlDeserializingExtensionData))
-                    );
+                    throw System.Runtime
+                        .Serialization
+                        .DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new XmlException(SR.GetString(SR.InvalidXmlDeserializingExtensionData))
+                        );
 
                 this.nodeType = XmlNodeType.Attribute;
                 AttributeData attribute = element.attributes[index];
@@ -334,11 +338,15 @@ namespace System.Runtime.Serialization
                     while (depth != 0)
                     {
                         if (!Read())
-                            throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                                new XmlException(
-                                    SR.GetString(SR.InvalidXmlDeserializingExtensionData)
-                                )
-                            );
+                            throw System.Runtime
+                                .Serialization
+                                .DiagnosticUtility
+                                .ExceptionUtility
+                                .ThrowHelperError(
+                                    new XmlException(
+                                        SR.GetString(SR.InvalidXmlDeserializingExtensionData)
+                                    )
+                                );
 
                         if (IsElementNode(this.internalNodeType))
                             depth++;
@@ -412,9 +420,15 @@ namespace System.Runtime.Serialization
 
                 case ExtensionDataNodeType.None:
                     if (depth != 0)
-                        throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new XmlException(SR.GetString(SR.InvalidXmlDeserializingExtensionData))
-                        );
+                        throw System.Runtime
+                            .Serialization
+                            .DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(
+                                new XmlException(
+                                    SR.GetString(SR.InvalidXmlDeserializingExtensionData)
+                                )
+                            );
                     this.nodeType = XmlNodeType.None;
                     this.prefix = String.Empty;
                     this.ns = String.Empty;
@@ -430,11 +444,12 @@ namespace System.Runtime.Serialization
 
                 default:
                     Fx.Assert("ExtensionDataReader in invalid state");
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new SerializationException(
-                            SR.GetString(SR.InvalidStateInExtensionDataReader)
-                        )
-                    );
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperError(
+                            new SerializationException(
+                                SR.GetString(SR.InvalidStateInExtensionDataReader)
+                            )
+                        );
             }
             readState = ReadState.Interactive;
             return true;
@@ -586,11 +601,12 @@ namespace System.Runtime.Serialization
                     else
                     {
                         Fx.Assert("Encountered invalid data node when deserializing unknown data");
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new SerializationException(
-                                SR.GetString(SR.InvalidStateInExtensionDataReader)
-                            )
-                        );
+                        throw DiagnosticUtility.ExceptionUtility
+                            .ThrowHelperError(
+                                new SerializationException(
+                                    SR.GetString(SR.InvalidStateInExtensionDataReader)
+                                )
+                            );
                     }
                     break;
             }
@@ -757,11 +773,8 @@ namespace System.Runtime.Serialization
                 for (int i = 0; i < element.attributeCount; i++)
                 {
                     AttributeData a = element.attributes[i];
-                    XmlAttribute xmlAttr = dataNode.OwnerDocument.CreateAttribute(
-                        a.prefix,
-                        a.localName,
-                        a.ns
-                    );
+                    XmlAttribute xmlAttr = dataNode.OwnerDocument
+                        .CreateAttribute(a.prefix, a.localName, a.ns);
                     xmlAttr.Value = a.value;
                     wrapperElement.Attributes.Append(xmlAttr);
                 }
@@ -793,11 +806,18 @@ namespace System.Runtime.Serialization
                 }
                 else
                 {
-                    throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new XmlException(
-                            SR.GetString(SR.InvalidDataNode, DataContract.GetClrTypeFullName(type))
-                        )
-                    );
+                    throw System.Runtime
+                        .Serialization
+                        .DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new XmlException(
+                                SR.GetString(
+                                    SR.InvalidDataNode,
+                                    DataContract.GetClrTypeFullName(type)
+                                )
+                            )
+                        );
                 }
             }
         }

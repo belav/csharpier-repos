@@ -210,15 +210,15 @@ public abstract class CoreTypeMapping
 
         Check.DebugAssert(
             parameters.ProviderValueComparer == null
-                || parameters.ProviderValueComparer.Type.IsAssignableFrom(
-                    converter?.ProviderClrType ?? clrType
-                ),
+                || parameters.ProviderValueComparer
+                    .Type
+                    .IsAssignableFrom(converter?.ProviderClrType ?? clrType),
             $"Expected {converter?.ProviderClrType ?? clrType}, got {parameters.ProviderValueComparer?.Type}"
         );
         if (
-            parameters.ProviderValueComparer?.Type.IsAssignableFrom(
-                converter?.ProviderClrType ?? clrType
-            ) == true
+            parameters.ProviderValueComparer
+                ?.Type
+                .IsAssignableFrom(converter?.ProviderClrType ?? clrType) == true
         )
         {
             _providerValueComparer = parameters.ProviderValueComparer;

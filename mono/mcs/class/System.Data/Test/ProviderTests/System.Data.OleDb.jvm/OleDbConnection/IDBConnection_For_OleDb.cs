@@ -39,8 +39,7 @@ namespace MonoTests.System.Data.OleDb
         {
             try
             {
-                _ConnectionString = MonoTests
-                    .System
+                _ConnectionString = MonoTests.System
                     .Data
                     .Utils
                     .ConnectedDataProvider

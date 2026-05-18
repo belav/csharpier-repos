@@ -173,8 +173,8 @@ namespace Microsoft.Extensions.Configuration.Binder.SourceGeneration
         }
 
         public ImmutableEquatableArray<TypedInterceptorInvocationInfo>? ToIncrementalValue() =>
-            _invocationInfoBuilderCache
-                .Values.Select(b => b.ToIncrementalValue())
+            _invocationInfoBuilderCache.Values
+                .Select(b => b.ToIncrementalValue())
                 .ToImmutableEquatableArray();
     }
 
@@ -227,8 +227,7 @@ namespace Microsoft.Extensions.Configuration.Binder.SourceGeneration
             // https://github.com/dotnet/roslyn/blob/f290437fcc75dad50a38c09e0977cce13a64f5ba/src/Compilers/CSharp/Portable/Compilation/CSharpCompilation.cs#L1063-L1064
             string GetInterceptorFilePath()
             {
-                SourceReferenceResolver? sourceReferenceResolver = invocation
-                    .SemanticModel
+                SourceReferenceResolver? sourceReferenceResolver = invocation.SemanticModel
                     ?.Compilation
                     .Options
                     .SourceReferenceResolver;

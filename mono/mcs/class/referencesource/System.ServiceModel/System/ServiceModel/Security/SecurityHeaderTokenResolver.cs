@@ -65,9 +65,10 @@ namespace System.ServiceModel.Security
                 && (tokenParameters == null)
             )
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                    SR.GetString(SR.ResolvingExternalTokensRequireSecurityTokenParameters)
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperArgument(
+                        SR.GetString(SR.ResolvingExternalTokensRequireSecurityTokenParameters)
+                    );
             }
 
             EnsureCapacityToAddToken();
@@ -98,11 +99,12 @@ namespace System.ServiceModel.Security
             for (int i = 0; i < keyIdentifier.Count; i++)
             {
                 if (
-                    this.expectedWrapperTokenParameters.MatchesKeyIdentifierClause(
-                        this.expectedWrapper,
-                        keyIdentifier[i],
-                        SecurityTokenReferenceStyle.External
-                    )
+                    this.expectedWrapperTokenParameters
+                        .MatchesKeyIdentifierClause(
+                            this.expectedWrapper,
+                            keyIdentifier[i],
+                            SecurityTokenReferenceStyle.External
+                        )
                 )
                 {
                     return true;
@@ -143,9 +145,8 @@ namespace System.ServiceModel.Security
         {
             if (keyIdentifierClause == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentNullException("keyIdentifierClause")
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(new ArgumentNullException("keyIdentifierClause"));
             }
 
             SecurityKey securityKey;
@@ -191,9 +192,8 @@ namespace System.ServiceModel.Security
         {
             if (keyIdentifierClause == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                    "keyIdentifierClause"
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperArgumentNull("keyIdentifierClause");
             }
 
             SecurityToken resolvedToken = null;
@@ -211,7 +211,8 @@ namespace System.ServiceModel.Security
                 if (
                     tokens[i].TokenParameters != null
                     && tokens[i]
-                        .TokenParameters.MatchesKeyIdentifierClause(
+                        .TokenParameters
+                        .MatchesKeyIdentifierClause(
                             token,
                             keyIdentifierClause,
                             tokens[i].AllowedReferenceStyle
@@ -283,15 +284,16 @@ namespace System.ServiceModel.Security
                 {
                     // The resolved token contains no Symmetric Security key and thus we cannot create
                     // a derived key off of it.
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new MessageSecurityException(
-                            SR.GetString(
-                                SR.UnableToDeriveKeyFromKeyInfoClause,
-                                keyIdentifierClause,
-                                resolvedToken
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperError(
+                            new MessageSecurityException(
+                                SR.GetString(
+                                    SR.UnableToDeriveKeyFromKeyInfoClause,
+                                    keyIdentifierClause,
+                                    resolvedToken
+                                )
                             )
-                        )
-                    );
+                        );
                 }
 
                 int derivationLength =
@@ -299,16 +301,17 @@ namespace System.ServiceModel.Security
                         ? DerivedKeySecurityToken.DefaultDerivedKeyLength
                         : keyIdentifierClause.DerivationLength;
                 if (derivationLength > this.securityHeader.MaxDerivedKeyLength)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new MessageSecurityException(
-                            SR.GetString(
-                                SR.DerivedKeyLengthSpecifiedInImplicitDerivedKeyClauseTooLong,
-                                keyIdentifierClause.ToString(),
-                                derivationLength,
-                                this.securityHeader.MaxDerivedKeyLength
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperError(
+                            new MessageSecurityException(
+                                SR.GetString(
+                                    SR.DerivedKeyLengthSpecifiedInImplicitDerivedKeyClauseTooLong,
+                                    keyIdentifierClause.ToString(),
+                                    derivationLength,
+                                    this.securityHeader.MaxDerivedKeyLength
+                                )
                             )
-                        )
-                    );
+                        );
                 bool alreadyDerived = false;
                 for (int i = 0; i < this.tokenCount; ++i)
                 {
@@ -320,9 +323,8 @@ namespace System.ServiceModel.Security
                             (derivedKeyToken.Length == derivationLength)
                             && (CryptoHelper.IsEqual(derivedKeyToken.Nonce, derivationNonce))
                             && (
-                                derivedKeyToken.TokenToDerive.MatchesKeyIdentifierClause(
-                                    keyIdentifierClause
-                                )
+                                derivedKeyToken.TokenToDerive
+                                    .MatchesKeyIdentifierClause(keyIdentifierClause)
                             )
                         )
                         {
@@ -438,9 +440,8 @@ namespace System.ServiceModel.Security
         {
             if (keyIdentifierClause == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                    "keyIdentifierClause"
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperArgumentNull("keyIdentifierClause");
             }
             key = this.ResolveSecurityKeyCore(keyIdentifierClause, createIntrinsicKeys);
             return key != null;

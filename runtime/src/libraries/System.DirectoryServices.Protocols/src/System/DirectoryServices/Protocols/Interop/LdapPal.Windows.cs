@@ -20,14 +20,8 @@ namespace System.DirectoryServices.Protocols
             IntPtr clientcontrol,
             ref int messageNumber
         ) =>
-            Interop.Ldap.ldap_add(
-                ldapHandle,
-                dn,
-                attrs,
-                servercontrol,
-                clientcontrol,
-                ref messageNumber
-            );
+            Interop.Ldap
+                .ldap_add(ldapHandle, dn, attrs, servercontrol, clientcontrol, ref messageNumber);
 
         internal static int CompareDirectoryEntries(
             ConnectionHandle ldapHandle,
@@ -39,16 +33,17 @@ namespace System.DirectoryServices.Protocols
             IntPtr clientcontrol,
             ref int messageNumber
         ) =>
-            Interop.Ldap.ldap_compare(
-                ldapHandle,
-                dn,
-                attributeName,
-                strValue,
-                binaryValue,
-                servercontrol,
-                clientcontrol,
-                ref messageNumber
-            );
+            Interop.Ldap
+                .ldap_compare(
+                    ldapHandle,
+                    dn,
+                    attributeName,
+                    strValue,
+                    binaryValue,
+                    servercontrol,
+                    clientcontrol,
+                    ref messageNumber
+                );
 
         internal static void FreeDirectoryControl(IntPtr control) =>
             Interop.Ldap.ldap_control_free(control);
@@ -70,13 +65,8 @@ namespace System.DirectoryServices.Protocols
             IntPtr clientcontrol,
             ref int messageNumber
         ) =>
-            Interop.Ldap.ldap_delete_ext(
-                ldapHandle,
-                dn,
-                servercontrol,
-                clientcontrol,
-                ref messageNumber
-            );
+            Interop.Ldap
+                .ldap_delete_ext(ldapHandle, dn, servercontrol, clientcontrol, ref messageNumber);
 
         internal static int ExtendedDirectoryOperation(
             ConnectionHandle ldapHandle,
@@ -86,14 +76,15 @@ namespace System.DirectoryServices.Protocols
             IntPtr clientcontrol,
             ref int messageNumber
         ) =>
-            Interop.Ldap.ldap_extended_operation(
-                ldapHandle,
-                oid,
-                data,
-                servercontrol,
-                clientcontrol,
-                ref messageNumber
-            );
+            Interop.Ldap
+                .ldap_extended_operation(
+                    ldapHandle,
+                    oid,
+                    data,
+                    servercontrol,
+                    clientcontrol,
+                    ref messageNumber
+                );
 
         internal static IntPtr GetFirstAttributeFromEntry(
             ConnectionHandle ldapHandle,
@@ -166,14 +157,15 @@ namespace System.DirectoryServices.Protocols
             IntPtr clientcontrol,
             ref int messageNumber
         ) =>
-            Interop.Ldap.ldap_modify(
-                ldapHandle,
-                dn,
-                attrs,
-                servercontrol,
-                clientcontrol,
-                ref messageNumber
-            );
+            Interop.Ldap
+                .ldap_modify(
+                    ldapHandle,
+                    dn,
+                    attrs,
+                    servercontrol,
+                    clientcontrol,
+                    ref messageNumber
+                );
 
         internal static IntPtr GetNextAttributeFromResult(
             ConnectionHandle ldapHandle,
@@ -213,16 +205,17 @@ namespace System.DirectoryServices.Protocols
             ref IntPtr control,
             byte freeIt
         ) =>
-            Interop.Ldap.ldap_parse_result(
-                ldapHandle,
-                result,
-                ref serverError,
-                ref dn,
-                ref message,
-                ref referral,
-                ref control,
-                freeIt
-            );
+            Interop.Ldap
+                .ldap_parse_result(
+                    ldapHandle,
+                    result,
+                    ref serverError,
+                    ref dn,
+                    ref message,
+                    ref referral,
+                    ref control,
+                    freeIt
+                );
 
         internal static int ParseResultReferral(
             ConnectionHandle ldapHandle,
@@ -234,16 +227,17 @@ namespace System.DirectoryServices.Protocols
             IntPtr control,
             byte freeIt
         ) =>
-            Interop.Ldap.ldap_parse_result_referral(
-                ldapHandle,
-                result,
-                serverError,
-                dn,
-                message,
-                ref referral,
-                control,
-                freeIt
-            );
+            Interop.Ldap
+                .ldap_parse_result_referral(
+                    ldapHandle,
+                    result,
+                    serverError,
+                    dn,
+                    message,
+                    ref referral,
+                    control,
+                    freeIt
+                );
 
         internal static int RenameDirectoryEntry(
             ConnectionHandle ldapHandle,
@@ -255,16 +249,17 @@ namespace System.DirectoryServices.Protocols
             IntPtr clientcontrol,
             ref int messageNumber
         ) =>
-            Interop.Ldap.ldap_rename(
-                ldapHandle,
-                dn,
-                newRdn,
-                newParentDn,
-                deleteOldRdn,
-                servercontrol,
-                clientcontrol,
-                ref messageNumber
-            );
+            Interop.Ldap
+                .ldap_rename(
+                    ldapHandle,
+                    dn,
+                    newRdn,
+                    newParentDn,
+                    deleteOldRdn,
+                    servercontrol,
+                    clientcontrol,
+                    ref messageNumber
+                );
 
         internal static int GetResultFromAsyncOperation(
             ConnectionHandle ldapHandle,
@@ -293,19 +288,20 @@ namespace System.DirectoryServices.Protocols
             int sizelimit,
             ref int messageNumber
         ) =>
-            Interop.Ldap.ldap_search(
-                ldapHandle,
-                dn,
-                scope,
-                filter,
-                attributes,
-                attributeOnly,
-                servercontrol,
-                clientcontrol,
-                timelimit,
-                sizelimit,
-                ref messageNumber
-            );
+            Interop.Ldap
+                .ldap_search(
+                    ldapHandle,
+                    dn,
+                    scope,
+                    filter,
+                    attributes,
+                    attributeOnly,
+                    servercontrol,
+                    clientcontrol,
+                    timelimit,
+                    sizelimit,
+                    ref messageNumber
+                );
 
         internal static int SetClientCertOption(
             ConnectionHandle ldapHandle,
@@ -344,13 +340,14 @@ namespace System.DirectoryServices.Protocols
             IntPtr ServerControls,
             IntPtr ClientControls
         ) =>
-            Interop.Ldap.ldap_start_tls(
-                ldapHandle,
-                ref ServerReturnValue,
-                ref Message,
-                ServerControls,
-                ClientControls
-            );
+            Interop.Ldap
+                .ldap_start_tls(
+                    ldapHandle,
+                    ref ServerReturnValue,
+                    ref Message,
+                    ServerControls,
+                    ClientControls
+                );
 
         internal static byte StopTls(ConnectionHandle ldapHandle) =>
             Interop.Ldap.ldap_stop_tls(ldapHandle);

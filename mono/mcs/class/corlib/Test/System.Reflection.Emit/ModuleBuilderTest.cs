@@ -793,10 +793,8 @@ namespace MonoTests.System.Reflection.Emit
             Type resolved_type;
 
             AssemblyName aname = genAssemblyName();
-            AssemblyBuilder ab = AppDomain.CurrentDomain.DefineDynamicAssembly(
-                aname,
-                AssemblyBuilderAccess.RunAndSave
-            );
+            AssemblyBuilder ab = AppDomain.CurrentDomain
+                .DefineDynamicAssembly(aname, AssemblyBuilderAccess.RunAndSave);
             ModuleBuilder mb = ab.DefineDynamicModule("MyModule");
 
             type = typeof(object[]);
@@ -816,10 +814,8 @@ namespace MonoTests.System.Reflection.Emit
         public void GetTypeToken2_Type_String()
         {
             AssemblyName aname = genAssemblyName();
-            AssemblyBuilder ab = AppDomain.CurrentDomain.DefineDynamicAssembly(
-                aname,
-                AssemblyBuilderAccess.RunAndSave
-            );
+            AssemblyBuilder ab = AppDomain.CurrentDomain
+                .DefineDynamicAssembly(aname, AssemblyBuilderAccess.RunAndSave);
             ModuleBuilder mb = ab.DefineDynamicModule("MyModule");
             Type type = typeof(string);
             TypeToken typeToken = mb.GetTypeToken(type);
@@ -832,10 +828,8 @@ namespace MonoTests.System.Reflection.Emit
         public void ModuleBuilder_ModuleVersionId()
         {
             var name = new AssemblyName() { Name = "Foo" };
-            var assembly = AppDomain.CurrentDomain.DefineDynamicAssembly(
-                name,
-                AssemblyBuilderAccess.Run
-            );
+            var assembly = AppDomain.CurrentDomain
+                .DefineDynamicAssembly(name, AssemblyBuilderAccess.Run);
 
             var module = assembly.DefineDynamicModule("Foo");
 
@@ -846,10 +840,8 @@ namespace MonoTests.System.Reflection.Emit
         public void GetType_String_Null()
         {
             AssemblyName an = genAssemblyName();
-            AssemblyBuilder ab = AppDomain.CurrentDomain.DefineDynamicAssembly(
-                an,
-                AssemblyBuilderAccess.Run
-            );
+            AssemblyBuilder ab = AppDomain.CurrentDomain
+                .DefineDynamicAssembly(an, AssemblyBuilderAccess.Run);
             ModuleBuilder module = ab.DefineDynamicModule("GetTypeNullCheck");
 
             try
@@ -876,10 +868,8 @@ namespace MonoTests.System.Reflection.Emit
         public void GetType_String_Empty()
         {
             AssemblyName an = genAssemblyName();
-            AssemblyBuilder ab = AppDomain.CurrentDomain.DefineDynamicAssembly(
-                an,
-                AssemblyBuilderAccess.Run
-            );
+            AssemblyBuilder ab = AppDomain.CurrentDomain
+                .DefineDynamicAssembly(an, AssemblyBuilderAccess.Run);
             ModuleBuilder module = ab.DefineDynamicModule("GetTypeEmptyCheck");
 
             try
@@ -906,10 +896,8 @@ namespace MonoTests.System.Reflection.Emit
         public void GetType_Escaped_Chars()
         {
             AssemblyName an = genAssemblyName();
-            AssemblyBuilder ab = AppDomain.CurrentDomain.DefineDynamicAssembly(
-                an,
-                AssemblyBuilderAccess.Run
-            );
+            AssemblyBuilder ab = AppDomain.CurrentDomain
+                .DefineDynamicAssembly(an, AssemblyBuilderAccess.Run);
             ModuleBuilder module = ab.DefineDynamicModule("mod");
 
             var tb = module.DefineType(
@@ -946,10 +934,8 @@ namespace MonoTests.System.Reflection.Emit
         public void GetMethodTokenNullParam()
         {
             AssemblyName an = genAssemblyName();
-            AssemblyBuilder ab = AppDomain.CurrentDomain.DefineDynamicAssembly(
-                an,
-                AssemblyBuilderAccess.Run
-            );
+            AssemblyBuilder ab = AppDomain.CurrentDomain
+                .DefineDynamicAssembly(an, AssemblyBuilderAccess.Run);
             ModuleBuilder module = ab.DefineDynamicModule("mod");
 
             var method = typeof(object).GetMethod("GetType");
@@ -962,10 +948,8 @@ namespace MonoTests.System.Reflection.Emit
         public void GetConstructorTokenNullParam()
         {
             AssemblyName an = genAssemblyName();
-            AssemblyBuilder ab = AppDomain.CurrentDomain.DefineDynamicAssembly(
-                an,
-                AssemblyBuilderAccess.Run
-            );
+            AssemblyBuilder ab = AppDomain.CurrentDomain
+                .DefineDynamicAssembly(an, AssemblyBuilderAccess.Run);
             ModuleBuilder module = ab.DefineDynamicModule("mod");
 
             var method = typeof(object).GetConstructor(Type.EmptyTypes);

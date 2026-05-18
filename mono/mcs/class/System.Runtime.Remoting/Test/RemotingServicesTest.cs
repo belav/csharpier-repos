@@ -751,8 +751,8 @@ namespace MonoTests.Remoting
         {
             TestClass test = new TestClass();
             ObjRef obj = RemotingServices.Marshal(test, "TestClass", typeof(ITest2));
-            FieldInfo interfacesImplemented = obj
-                .TypeInfo.GetType()
+            FieldInfo interfacesImplemented = obj.TypeInfo
+                .GetType()
                 .GetField("interfacesImplemented", BindingFlags.NonPublic | BindingFlags.Instance);
             string[] interfaces = (string[])interfacesImplemented.GetValue(obj.TypeInfo);
             Assert.AreEqual(2, interfaces.Length);

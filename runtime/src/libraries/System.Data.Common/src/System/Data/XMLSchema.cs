@@ -454,10 +454,8 @@ namespace System.Data
         internal void HandleRefTableProperties(XmlSchemaElement element)
         {
             string typeName = GetInstanceName(element);
-            DataTable? table = _ds!.Tables.GetTable(
-                XmlConvert.DecodeName(typeName),
-                element.QualifiedName.Namespace
-            );
+            DataTable? table = _ds!.Tables
+                .GetTable(XmlConvert.DecodeName(typeName), element.QualifiedName.Namespace);
             Debug.Assert(table != null, "ref table should have been already created");
 
             SetProperties(table, element.UnhandledAttributes);
@@ -2986,10 +2984,13 @@ namespace System.Data
                             }
                             else
                             {
-                                DataTable? tempTable = _ds.Tables.GetTable(
-                                    XmlConvert.DecodeName(GetInstanceName((XmlSchemaElement)el)),
-                                    node.QualifiedName.Namespace
-                                );
+                                DataTable? tempTable = _ds.Tables
+                                    .GetTable(
+                                        XmlConvert.DecodeName(
+                                            GetInstanceName((XmlSchemaElement)el)
+                                        ),
+                                        node.QualifiedName.Namespace
+                                    );
                                 if (tempTable != null)
                                 {
                                     tableSequenceList.Add(tempTable); // if ref table is created, add it

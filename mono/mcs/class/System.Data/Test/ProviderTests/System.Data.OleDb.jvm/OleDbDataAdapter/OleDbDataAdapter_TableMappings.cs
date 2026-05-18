@@ -78,8 +78,7 @@ namespace MonoTests.System.Data.OleDb
             IDbDataAdapter Ida = (IDbDataAdapter)dbDA;
             IDbCommand ICmd = Ida.SelectCommand;
             IDbConnection IConn = ICmd.Connection;
-            IConn.ConnectionString = MonoTests
-                .System
+            IConn.ConnectionString = MonoTests.System
                 .Data
                 .Utils
                 .ConnectedDataProvider
@@ -241,7 +240,9 @@ namespace MonoTests.System.Data.OleDb
             }
 
             //
-            ((IDbDataAdapter)dbDA).SelectCommand.Transaction.Commit();
+            ((IDbDataAdapter)dbDA).SelectCommand
+                .Transaction
+                .Commit();
 
             //close connection
             if (((IDbDataAdapter)dbDA).SelectCommand.Connection.State != ConnectionState.Closed)

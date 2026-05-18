@@ -117,7 +117,8 @@ namespace System.Drawing
             {
                 using (
                     System.IO.Stream s = t.GetTypeInfo()
-                        .Assembly.GetManifestResourceStream(t.Namespace + "." + imageName)
+                        .Assembly
+                        .GetManifestResourceStream(t.Namespace + "." + imageName)
                 )
                 {
                     if (s == null)

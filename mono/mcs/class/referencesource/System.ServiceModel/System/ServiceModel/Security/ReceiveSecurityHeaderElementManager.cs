@@ -178,30 +178,32 @@ namespace System.ServiceModel.Security
                     {
                         case ReceiveSecurityHeaderElementCategory.Timestamp:
                         case ReceiveSecurityHeaderElementCategory.SignatureConfirmation:
-                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                                new MessageSecurityException(
-                                    SR.GetString(
-                                        SR.RequiredSecurityHeaderElementNotSigned,
-                                        entry.elementCategory,
-                                        entry.id
+                            throw DiagnosticUtility.ExceptionUtility
+                                .ThrowHelperError(
+                                    new MessageSecurityException(
+                                        SR.GetString(
+                                            SR.RequiredSecurityHeaderElementNotSigned,
+                                            entry.elementCategory,
+                                            entry.id
+                                        )
                                     )
-                                )
-                            );
+                                );
                         case ReceiveSecurityHeaderElementCategory.Token:
                             switch (entry.bindingMode)
                             {
                                 case ReceiveSecurityHeaderBindingModes.Signed:
                                 case ReceiveSecurityHeaderBindingModes.SignedEndorsing:
                                 case ReceiveSecurityHeaderBindingModes.Basic:
-                                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                                        new MessageSecurityException(
-                                            SR.GetString(
-                                                SR.RequiredSecurityTokenNotSigned,
-                                                entry.element,
-                                                entry.bindingMode
+                                    throw DiagnosticUtility.ExceptionUtility
+                                        .ThrowHelperError(
+                                            new MessageSecurityException(
+                                                SR.GetString(
+                                                    SR.RequiredSecurityTokenNotSigned,
+                                                    entry.element,
+                                                    entry.bindingMode
+                                                )
                                             )
-                                        )
-                                    );
+                                        );
                             }
                             break;
                     }
@@ -214,15 +216,16 @@ namespace System.ServiceModel.Security
                         && entry.bindingMode == ReceiveSecurityHeaderBindingModes.Basic
                     )
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new MessageSecurityException(
-                                SR.GetString(
-                                    SR.RequiredSecurityTokenNotEncrypted,
-                                    entry.element,
-                                    entry.bindingMode
+                        throw DiagnosticUtility.ExceptionUtility
+                            .ThrowHelperError(
+                                new MessageSecurityException(
+                                    SR.GetString(
+                                        SR.RequiredSecurityTokenNotEncrypted,
+                                        entry.element,
+                                        entry.bindingMode
+                                    )
                                 )
-                            )
-                        );
+                            );
                     }
                 }
             }
@@ -297,8 +300,8 @@ namespace System.ServiceModel.Security
                     return this.securityHeader.CreateDecryptedReader(decryptedBuffer);
                 }
             }
-            XmlDictionaryReader securityHeaderReader =
-                this.securityHeader.CreateSecurityHeaderReader();
+            XmlDictionaryReader securityHeaderReader = this.securityHeader
+                .CreateSecurityHeaderReader();
             securityHeaderReader.ReadStartElement();
             for (int i = 0; securityHeaderReader.IsStartElement() && i < index; i++)
             {
@@ -623,9 +626,10 @@ namespace System.ServiceModel.Security
                 }
             }
 
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                new MessageSecurityException(SR.GetString(SR.SignatureConfirmationWasExpected))
-            );
+            throw DiagnosticUtility.ExceptionUtility
+                .ThrowHelperError(
+                    new MessageSecurityException(SR.GetString(SR.SignatureConfirmationWasExpected))
+                );
         }
     }
 }

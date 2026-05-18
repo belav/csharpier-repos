@@ -50,8 +50,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ReplaceDefaultLiteral
 
         public override async Task RegisterCodeFixesAsync(CodeFixContext context)
         {
-            var syntaxRoot = await context
-                .Document.GetRequiredSyntaxRootAsync(context.CancellationToken)
+            var syntaxRoot = await context.Document
+                .GetRequiredSyntaxRootAsync(context.CancellationToken)
                 .ConfigureAwait(false);
             var token = syntaxRoot.FindToken(context.Span.Start);
 
@@ -62,8 +62,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ReplaceDefaultLiteral
                     is LiteralExpressionSyntax(SyntaxKind.DefaultLiteralExpression) defaultLiteral
             )
             {
-                var semanticModel = await context
-                    .Document.GetRequiredSemanticModelAsync(context.CancellationToken)
+                var semanticModel = await context.Document
+                    .GetRequiredSemanticModelAsync(context.CancellationToken)
                     .ConfigureAwait(false);
 
                 var (newExpression, displayText) = GetReplacementExpressionAndText(
@@ -133,9 +133,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ReplaceDefaultLiteral
                 }
                 else if (
                     type.Equals(
-                        semanticModel.Compilation.GetTypeByMetadataName(
-                            typeof(CancellationToken).FullName!
-                        )
+                        semanticModel.Compilation
+                            .GetTypeByMetadataName(typeof(CancellationToken).FullName!)
                     )
                 )
                 {

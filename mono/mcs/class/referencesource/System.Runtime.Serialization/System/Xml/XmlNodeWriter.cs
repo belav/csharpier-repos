@@ -338,13 +338,14 @@ namespace System.Xml
 
             protected override void OnDoWork()
             {
-                this.nodeWriter.WriteBase64Text(
-                    this.trailBuffer,
-                    this.trailCount,
-                    this.buffer,
-                    this.offset,
-                    this.count
-                );
+                this.nodeWriter
+                    .WriteBase64Text(
+                        this.trailBuffer,
+                        this.trailCount,
+                        this.buffer,
+                        this.offset,
+                        this.count
+                    );
             }
         }
     }

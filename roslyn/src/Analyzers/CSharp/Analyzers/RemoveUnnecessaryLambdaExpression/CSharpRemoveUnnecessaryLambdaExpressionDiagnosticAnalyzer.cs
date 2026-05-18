@@ -140,12 +140,13 @@ namespace Microsoft.CodeAnalysis.CSharp.RemoveUnnecessaryLambdaExpression
             // Looks like a reasonable candidate to simplify.  Now switch to semantics to check for sure.
 
             if (
-                CSharpSemanticFacts.Instance.IsInExpressionTree(
-                    semanticModel,
-                    anonymousFunction,
-                    expressionType,
-                    cancellationToken
-                )
+                CSharpSemanticFacts.Instance
+                    .IsInExpressionTree(
+                        semanticModel,
+                        anonymousFunction,
+                        expressionType,
+                        cancellationToken
+                    )
             )
                 return;
 
@@ -410,16 +411,14 @@ namespace Microsoft.CodeAnalysis.CSharp.RemoveUnnecessaryLambdaExpression
         ) =>
             expression switch
             {
-                AnonymousMethodExpressionSyntax anonymousMethod => anonymousMethod
-                    .ParameterList
+                AnonymousMethodExpressionSyntax anonymousMethod => anonymousMethod.ParameterList
                     ?.Parameters
                     ?? default,
                 SimpleLambdaExpressionSyntax simpleLambda => SyntaxFactory.SingletonSeparatedList(
                     simpleLambda.Parameter
                 ),
-                ParenthesizedLambdaExpressionSyntax parenthesizedLambda => parenthesizedLambda
-                    .ParameterList
-                    .Parameters,
+                ParenthesizedLambdaExpressionSyntax parenthesizedLambda =>
+                    parenthesizedLambda.ParameterList.Parameters,
                 _ => throw ExceptionUtilities.UnexpectedValue(expression.Kind()),
             };
 

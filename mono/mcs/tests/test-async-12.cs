@@ -7,8 +7,8 @@ class C
     static async Task<int> TestNested_1()
     {
         return Call(
-            await Task
-                .Factory.StartNew(() =>
+            await Task.Factory
+                .StartNew(() =>
                 {
                     Thread.Sleep(10);
                     return 5;

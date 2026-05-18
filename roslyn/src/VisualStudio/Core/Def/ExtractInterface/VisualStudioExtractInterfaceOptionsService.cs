@@ -93,8 +93,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ExtractInterfac
 
             if (result.HasValue && result.Value)
             {
-                var includedMembers = viewModel
-                    .MemberContainers.Where(c => c.IsChecked)
+                var includedMembers = viewModel.MemberContainers
+                    .Where(c => c.IsChecked)
                     .Select(c => c.Symbol);
 
                 return new ExtractInterfaceOptionsResult(
@@ -117,8 +117,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ExtractInterfac
         ) =>
             destination switch
             {
-                NewTypeDestination.CurrentFile => ExtractInterfaceOptionsResult
-                    .ExtractLocation
+                NewTypeDestination.CurrentFile => ExtractInterfaceOptionsResult.ExtractLocation
                     .SameFile,
                 NewTypeDestination.NewFile => ExtractInterfaceOptionsResult.ExtractLocation.NewFile,
                 _ => throw ExceptionUtilities.UnexpectedValue(destination),

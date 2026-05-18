@@ -678,14 +678,10 @@ namespace System.Net.Security.Tests
                     );
                     try
                     {
-                        Task t1 = Task.Factory.FromAsync(
-                            clientBeginAuth,
-                            clientSslStream.EndAuthenticateAsClient
-                        );
-                        Task t2 = Task.Factory.FromAsync(
-                            serverBeginAuth,
-                            serverSslStream.EndAuthenticateAsServer
-                        );
+                        Task t1 = Task.Factory
+                            .FromAsync(clientBeginAuth, clientSslStream.EndAuthenticateAsClient);
+                        Task t2 = Task.Factory
+                            .FromAsync(serverBeginAuth, serverSslStream.EndAuthenticateAsServer);
                         await TestConfiguration.WhenAllOrAnyFailedWithTimeout(t1, t2);
                     }
                     finally
@@ -706,14 +702,8 @@ namespace System.Net.Security.Tests
         ) =>
             cancellationToken.IsCancellationRequested
                 ? Task.FromCanceled<int>(cancellationToken)
-                : Task.Factory.FromAsync(
-                    stream.BeginRead,
-                    stream.EndRead,
-                    buffer,
-                    offset,
-                    count,
-                    null
-                );
+                : Task.Factory
+                    .FromAsync(stream.BeginRead, stream.EndRead, buffer, offset, count, null);
 
         protected override Task WriteAsync(
             Stream stream,
@@ -724,14 +714,8 @@ namespace System.Net.Security.Tests
         ) =>
             cancellationToken.IsCancellationRequested
                 ? Task.FromCanceled<int>(cancellationToken)
-                : Task.Factory.FromAsync(
-                    stream.BeginWrite,
-                    stream.EndWrite,
-                    buffer,
-                    offset,
-                    count,
-                    null
-                );
+                : Task.Factory
+                    .FromAsync(stream.BeginWrite, stream.EndWrite, buffer, offset, count, null);
     }
 
     public abstract class SslStreamStreamToStreamTest_SyncBase : SslStreamStreamToStreamTest

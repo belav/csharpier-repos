@@ -54,8 +54,8 @@ internal partial class XmlSnippetParser
             CancellationToken cancellationToken
         )
         {
-            var snippetFunctionService =
-                documentWithSnippet.Project.GetRequiredLanguageService<SnippetFunctionService>();
+            var snippetFunctionService = documentWithSnippet.Project
+                .GetRequiredLanguageService<SnippetFunctionService>();
             switch (FunctionName)
             {
                 case "SimpleTypeName":

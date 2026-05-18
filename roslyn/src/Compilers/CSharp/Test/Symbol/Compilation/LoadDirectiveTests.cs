@@ -18,9 +18,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         public void EmptyFile()
         {
             var code = "#load \"\"";
-            var options = TestOptions.DebugDll.WithSourceReferenceResolver(
-                TestSourceReferenceResolver.Default
-            );
+            var options = TestOptions.DebugDll
+                .WithSourceReferenceResolver(TestSourceReferenceResolver.Default);
             var compilation = CreateCompilationWithMscorlib45(
                 code,
                 options: options,
@@ -40,9 +39,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         public void MissingFile()
         {
             var code = "#load \"missing\"";
-            var options = TestOptions.DebugDll.WithSourceReferenceResolver(
-                TestSourceReferenceResolver.Default
-            );
+            var options = TestOptions.DebugDll
+                .WithSourceReferenceResolver(TestSourceReferenceResolver.Default);
             var compilation = CreateCompilationWithMscorlib45(
                 code,
                 options: options,

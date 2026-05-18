@@ -205,17 +205,13 @@ namespace System.ServiceModel.Configuration
                 this.UseSourceJournal = source.UseSourceJournal;
                 this.UseMsmqTracing = source.UseMsmqTracing;
                 this.ValidityDuration = source.ValidityDuration;
-                this.MsmqTransportSecurity.MsmqAuthenticationMode = source
-                    .MsmqTransportSecurity
+                this.MsmqTransportSecurity.MsmqAuthenticationMode = source.MsmqTransportSecurity
                     .MsmqAuthenticationMode;
-                this.MsmqTransportSecurity.MsmqProtectionLevel = source
-                    .MsmqTransportSecurity
+                this.MsmqTransportSecurity.MsmqProtectionLevel = source.MsmqTransportSecurity
                     .MsmqProtectionLevel;
-                this.MsmqTransportSecurity.MsmqEncryptionAlgorithm = source
-                    .MsmqTransportSecurity
+                this.MsmqTransportSecurity.MsmqEncryptionAlgorithm = source.MsmqTransportSecurity
                     .MsmqEncryptionAlgorithm;
-                this.MsmqTransportSecurity.MsmqSecureHashAlgorithm = source
-                    .MsmqTransportSecurity
+                this.MsmqTransportSecurity.MsmqSecureHashAlgorithm = source.MsmqTransportSecurity
                     .MsmqSecureHashAlgorithm;
             }
         }

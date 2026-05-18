@@ -33,9 +33,10 @@ namespace System.ServiceModel.Security
 #pragma warning suppress 56523 //  we check for the return code of the method instead of calling GetLastWin32Error
                         bool readPolicy = (
                             System.ServiceModel.Channels.UnsafeNativeMethods.ERROR_SUCCESS
-                            == System.ServiceModel.Channels.UnsafeNativeMethods.BCryptGetFipsAlgorithmMode(
-                                out fipsEnabled
-                            )
+                            == System.ServiceModel
+                                .Channels
+                                .UnsafeNativeMethods
+                                .BCryptGetFipsAlgorithmMode(out fipsEnabled)
                         );
 
                         if (readPolicy && fipsEnabled)
@@ -66,10 +67,8 @@ namespace System.ServiceModel.Security
         {
             int fipsAlgorithmPolicy = -1;
             using (
-                RegistryKey fipsAlgorithmPolicyKey = Registry.LocalMachine.OpenSubKey(
-                    fipsPolicyRegistryKey,
-                    false
-                )
+                RegistryKey fipsAlgorithmPolicyKey = Registry.LocalMachine
+                    .OpenSubKey(fipsPolicyRegistryKey, false)
             )
             {
                 if (fipsAlgorithmPolicyKey != null)

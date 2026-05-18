@@ -95,13 +95,14 @@ namespace System.ServiceModel.Channels
                                 reliableMessagingVersion,
                                 reason
                             );
-                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                                WsrmMessageInfo.CreateInternalFaultException(
-                                    faultReply,
-                                    reason,
-                                    new ProtocolException(reason)
-                                )
-                            );
+                            throw DiagnosticUtility.ExceptionUtility
+                                .ThrowHelperError(
+                                    WsrmMessageInfo.CreateInternalFaultException(
+                                        faultReply,
+                                        reason,
+                                        new ProtocolException(reason)
+                                    )
+                                );
                         }
                     }
 
@@ -138,13 +139,14 @@ namespace System.ServiceModel.Channels
                                     reliableMessagingVersion,
                                     reason
                                 );
-                                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                                    WsrmMessageInfo.CreateInternalFaultException(
-                                        faultReply,
-                                        reason,
-                                        new ProtocolException(reason)
-                                    )
-                                );
+                                throw DiagnosticUtility.ExceptionUtility
+                                    .ThrowHelperError(
+                                        WsrmMessageInfo.CreateInternalFaultException(
+                                            faultReply,
+                                            reason,
+                                            new ProtocolException(reason)
+                                        )
+                                    );
                             }
 
                             // Otherwise ignore the value.
@@ -186,13 +188,14 @@ namespace System.ServiceModel.Channels
                             reliableMessagingVersion,
                             reason
                         );
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            WsrmMessageInfo.CreateInternalFaultException(
-                                faultReply,
-                                reason,
-                                new ProtocolException(reason)
-                            )
-                        );
+                        throw DiagnosticUtility.ExceptionUtility
+                            .ThrowHelperError(
+                                WsrmMessageInfo.CreateInternalFaultException(
+                                    faultReply,
+                                    reason,
+                                    new ProtocolException(reason)
+                                )
+                            );
                     }
                 }
 
@@ -211,13 +214,14 @@ namespace System.ServiceModel.Channels
                         reliableMessagingVersion,
                         reason
                     );
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        WsrmMessageInfo.CreateInternalFaultException(
-                            faultReply,
-                            reason,
-                            new ProtocolException(reason)
-                        )
-                    );
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperError(
+                            WsrmMessageInfo.CreateInternalFaultException(
+                                faultReply,
+                                reason,
+                                new ProtocolException(reason)
+                            )
+                        );
                 }
 
                 return info;
@@ -233,13 +237,14 @@ namespace System.ServiceModel.Channels
                     reliableMessagingVersion,
                     reason
                 );
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    WsrmMessageInfo.CreateInternalFaultException(
-                        faultReply,
-                        reason,
-                        new ProtocolException(reason, e)
-                    )
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        WsrmMessageInfo.CreateInternalFaultException(
+                            faultReply,
+                            reason,
+                            new ProtocolException(reason, e)
+                        )
+                    );
             }
         }
 

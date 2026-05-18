@@ -190,8 +190,7 @@ namespace System.Data.Mapping.Update.Internal
                             ? (DbDataRecord)stateEntry.CurrentValues
                             : stateEntry.OriginalValues;
                     foreach (
-                        ReferentialConstraint constraint in associationSet
-                            .ElementType
+                        ReferentialConstraint constraint in associationSet.ElementType
                             .ReferentialConstraints
                     )
                     {
@@ -228,25 +227,26 @@ namespace System.Data.Mapping.Update.Internal
                                     out dependentKeyMemberCount
                                 );
 
-                                int principalIdentifier =
-                                    this.KeyManager.GetKeyIdentifierForMemberOffset(
+                                int principalIdentifier = this.KeyManager
+                                    .GetKeyIdentifierForMemberOffset(
                                         principalKey,
                                         principalOffset,
                                         principalKeyMemberCount
                                     );
-                                int dependentIdentifier =
-                                    this.KeyManager.GetKeyIdentifierForMemberOffset(
+                                int dependentIdentifier = this.KeyManager
+                                    .GetKeyIdentifierForMemberOffset(
                                         dependentKey,
                                         dependentOffset,
                                         dependentKeyMemberCount
                                     );
 
                                 // register equivalence of identifiers
-                                this.KeyManager.AddReferentialConstraint(
-                                    stateEntry,
-                                    dependentIdentifier,
-                                    principalIdentifier
-                                );
+                                this.KeyManager
+                                    .AddReferentialConstraint(
+                                        stateEntry,
+                                        dependentIdentifier,
+                                        principalIdentifier
+                                    );
                             }
                         }
                     }
@@ -314,9 +314,8 @@ namespace System.Data.Mapping.Update.Internal
                             EdmProperty keyMember = (EdmProperty)principalType.KeyMembers[i];
 
                             // Find corresponding foreign key value
-                            int constraintOrdinal = constraint.FromProperties.IndexOf(
-                                (EdmProperty)keyMember
-                            );
+                            int constraintOrdinal = constraint.FromProperties
+                                .IndexOf((EdmProperty)keyMember);
                             int recordOrdinal = record.GetOrdinal(
                                 constraint.ToProperties[constraintOrdinal].Name
                             );
@@ -398,8 +397,8 @@ namespace System.Data.Mapping.Update.Internal
                                 principalProperty,
                                 out principalKeyMemberCount
                             );
-                            int principalIdentifier =
-                                this.KeyManager.GetKeyIdentifierForMemberOffset(
+                            int principalIdentifier = this.KeyManager
+                                .GetKeyIdentifierForMemberOffset(
                                     principalKey,
                                     principalOffset,
                                     principalKeyMemberCount
@@ -414,8 +413,8 @@ namespace System.Data.Mapping.Update.Internal
                                     dependentProperty,
                                     out dependentKeyMemberCount
                                 );
-                                dependentIdentifier =
-                                    this.KeyManager.GetKeyIdentifierForMemberOffset(
+                                dependentIdentifier = this.KeyManager
+                                    .GetKeyIdentifierForMemberOffset(
                                         dependentKey,
                                         dependentOffset,
                                         dependentKeyMemberCount
@@ -423,11 +422,12 @@ namespace System.Data.Mapping.Update.Internal
                             }
                             else
                             {
-                                dependentIdentifier = this.KeyManager.GetKeyIdentifierForMember(
-                                    dependentKey,
-                                    dependentProperty.Name,
-                                    currentValues
-                                );
+                                dependentIdentifier = this.KeyManager
+                                    .GetKeyIdentifierForMember(
+                                        dependentKey,
+                                        dependentProperty.Name,
+                                        currentValues
+                                    );
                             }
 
                             // don't allow the user to insert or update an entity that refers to a deleted principal
@@ -452,11 +452,12 @@ namespace System.Data.Mapping.Update.Internal
                             }
 
                             // register equivalence of identifiers
-                            this.KeyManager.AddReferentialConstraint(
-                                stateEntry,
-                                dependentIdentifier,
-                                principalIdentifier
-                            );
+                            this.KeyManager
+                                .AddReferentialConstraint(
+                                    stateEntry,
+                                    dependentIdentifier,
+                                    principalIdentifier
+                                );
                         }
                     }
                 }
@@ -662,8 +663,7 @@ namespace System.Data.Mapping.Update.Internal
 
                 // determine if type compensation is required
                 IExtendedDataRecord recordWithMetadata = (IExtendedDataRecord)targetRecord;
-                EdmMember member = recordWithMetadata
-                    .DataRecordInfo
+                EdmMember member = recordWithMetadata.DataRecordInfo
                     .FieldMetadata[context.RecordOrdinal]
                     .FieldType;
 
@@ -691,10 +691,13 @@ namespace System.Data.Mapping.Update.Internal
                 )
                 {
                     throw EntityUtil.Update(
-                        System.Data.Entity.Strings.Update_NullReturnValueForNonNullableMember(
-                            member.Name,
-                            member.DeclaringType.FullName
-                        ),
+                        System.Data
+                            .Entity
+                            .Strings
+                            .Update_NullReturnValueForNonNullableMember(
+                                member.Name,
+                                member.DeclaringType.FullName
+                            ),
                         null
                     );
                 }
@@ -736,12 +739,15 @@ namespace System.Data.Mapping.Update.Internal
                     {
                         Type userClrType = clrEnumType ?? clrType;
                         throw EntityUtil.Update(
-                            System.Data.Entity.Strings.Update_ReturnValueHasUnexpectedType(
-                                value.GetType().FullName,
-                                userClrType.FullName,
-                                member.Name,
-                                member.DeclaringType.FullName
-                            ),
+                            System.Data
+                                .Entity
+                                .Strings
+                                .Update_ReturnValueHasUnexpectedType(
+                                    value.GetType().FullName,
+                                    userClrType.FullName,
+                                    member.Name,
+                                    member.DeclaringType.FullName
+                                ),
                             e
                         );
                     }
@@ -896,10 +902,12 @@ namespace System.Data.Mapping.Update.Internal
 
                 // add function parameters
                 IEnumerable<KeyValuePair<string, TypeUsage>> functionParams =
-                    functionMapping.Function.Parameters.Select(paramInfo => new KeyValuePair<
-                        string,
-                        TypeUsage
-                    >(paramInfo.Name, paramInfo.TypeUsage));
+                    functionMapping.Function
+                        .Parameters
+                        .Select(paramInfo => new KeyValuePair<string, TypeUsage>(
+                            paramInfo.Name,
+                            paramInfo.TypeUsage
+                        ));
 
                 // construct DbFunctionCommandTree including implict return type
                 DbFunctionCommandTree tree = new DbFunctionCommandTree(

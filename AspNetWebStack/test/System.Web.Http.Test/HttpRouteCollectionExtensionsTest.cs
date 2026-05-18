@@ -16,10 +16,12 @@ namespace System.Web.Http
         [Fact]
         public void IsCorrectType()
         {
-            Assert.Type.HasProperties(
-                typeof(HttpRouteCollectionExtensions),
-                TypeAssert.TypeProperties.IsStatic | TypeAssert.TypeProperties.IsPublicVisibleClass
-            );
+            Assert.Type
+                .HasProperties(
+                    typeof(HttpRouteCollectionExtensions),
+                    TypeAssert.TypeProperties.IsStatic
+                        | TypeAssert.TypeProperties.IsPublicVisibleClass
+                );
         }
 
         [Fact]

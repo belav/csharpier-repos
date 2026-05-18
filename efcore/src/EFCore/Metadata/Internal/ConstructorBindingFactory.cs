@@ -132,7 +132,8 @@ public class ConstructorBindingFactory : IConstructorBindingFactory
         var clrType = type.ClrType.UnwrapNullableType();
         var constructors = clrType
             .GetTypeInfo()
-            .DeclaredConstructors.Where(c => !c.IsStatic)
+            .DeclaredConstructors
+            .Where(c => !c.IsStatic)
             .ToList();
         foreach (var constructor in constructors)
         {
@@ -149,8 +150,8 @@ public class ConstructorBindingFactory : IConstructorBindingFactory
                 )
             )
             {
-                var serviceParamCount = binding
-                    .ParameterBindings.OfType<ServiceParameterBinding>()
+                var serviceParamCount = binding.ParameterBindings
+                    .OfType<ServiceParameterBinding>()
                     .Count();
                 var propertyParamCount = binding.ParameterBindings.Count - serviceParamCount;
 
@@ -244,8 +245,8 @@ public class ConstructorBindingFactory : IConstructorBindingFactory
         IEnumerable<string> ConstructConstructor(
             IGrouping<ConstructorInfo, ParameterInfo> parameters
         ) =>
-            parameters
-                .Key.GetParameters()
+            parameters.Key
+                .GetParameters()
                 .Select(y => $"{y.ParameterType.ShortDisplayName()} {y.Name}");
     }
 

@@ -45,8 +45,8 @@ internal sealed class ConnectionLimitMiddleware<T>
             KestrelEventSource.Log.ConnectionRejected(connection.ConnectionId);
             _trace.ConnectionRejected(connection.ConnectionId);
             _metrics.ConnectionRejected(
-                connection
-                    .Features.GetRequiredFeature<IConnectionMetricsContextFeature>()
+                connection.Features
+                    .GetRequiredFeature<IConnectionMetricsContextFeature>()
                     .MetricsContext
             );
             await connection.DisposeAsync();

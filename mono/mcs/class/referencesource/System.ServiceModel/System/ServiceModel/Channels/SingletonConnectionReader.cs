@@ -172,11 +172,8 @@ namespace System.ServiceModel.Channels
                         }
 
                         this.via = decoder.Via;
-                        IAsyncResult result = this.Connection.BeginValidate(
-                            this.via,
-                            onValidate,
-                            this
-                        );
+                        IAsyncResult result = this.Connection
+                            .BeginValidate(this.via, onValidate, this);
 
                         if (result.CompletedSynchronously)
                         {
@@ -413,21 +410,27 @@ namespace System.ServiceModel.Channels
             void Initialize()
             {
                 if (
-                    !this.parent.transportSettings.MessageEncoderFactory.Encoder.IsContentTypeSupported(
-                        Decoder.ContentType
-                    )
+                    !this.parent
+                        .transportSettings
+                        .MessageEncoderFactory
+                        .Encoder
+                        .IsContentTypeSupported(Decoder.ContentType)
                 )
                 {
                     SendFault(FramingEncodingString.ContentTypeInvalidFault, ref timeoutHelper);
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ProtocolException(
-                            SR.GetString(
-                                SR.ContentTypeMismatch,
-                                Decoder.ContentType,
-                                parent.transportSettings.MessageEncoderFactory.Encoder.ContentType
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperError(
+                            new ProtocolException(
+                                SR.GetString(
+                                    SR.ContentTypeMismatch,
+                                    Decoder.ContentType,
+                                    parent.transportSettings
+                                        .MessageEncoderFactory
+                                        .Encoder
+                                        .ContentType
+                                )
                             )
-                        )
-                    );
+                        );
                 }
 
                 upgrade = this.parent.transportSettings.Upgrade;
@@ -449,13 +452,14 @@ namespace System.ServiceModel.Channels
             bool BeginRead()
             {
                 this.Offset = 0;
-                return this.currentConnection.BeginRead(
-                        0,
-                        this.ConnectionBuffer.Length,
-                        timeoutHelper.RemainingTime(),
-                        onReadCompleted,
-                        this
-                    ) == AsyncCompletionResult.Completed;
+                return this.currentConnection
+                        .BeginRead(
+                            0,
+                            this.ConnectionBuffer.Length,
+                            timeoutHelper.RemainingTime(),
+                            onReadCompleted,
+                            this
+                        ) == AsyncCompletionResult.Completed;
             }
 
             void EndRead()
@@ -463,9 +467,8 @@ namespace System.ServiceModel.Channels
                 this.Size = currentConnection.EndRead();
                 if (this.Size == 0)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        this.Decoder.CreatePrematureEOFException()
-                    );
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperError(this.Decoder.CreatePrematureEOFException());
                 }
             }
 
@@ -522,14 +525,15 @@ namespace System.ServiceModel.Channels
                                                 FramingEncodingString.UpgradeInvalidFault,
                                                 ref timeoutHelper
                                             );
-                                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                                                new ProtocolException(
-                                                    SR.GetString(
-                                                        SR.UpgradeRequestToNonupgradableService,
-                                                        Decoder.Upgrade
+                                            throw DiagnosticUtility.ExceptionUtility
+                                                .ThrowHelperError(
+                                                    new ProtocolException(
+                                                        SR.GetString(
+                                                            SR.UpgradeRequestToNonupgradableService,
+                                                            Decoder.Upgrade
+                                                        )
                                                     )
-                                                )
-                                            );
+                                                );
                                         }
 
                                         if (!this.upgradeAcceptor.CanUpgrade(Decoder.Upgrade))
@@ -538,28 +542,31 @@ namespace System.ServiceModel.Channels
                                                 FramingEncodingString.UpgradeInvalidFault,
                                                 ref timeoutHelper
                                             );
-                                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                                                new ProtocolException(
-                                                    SR.GetString(
-                                                        SR.UpgradeProtocolNotSupported,
-                                                        Decoder.Upgrade
+                                            throw DiagnosticUtility.ExceptionUtility
+                                                .ThrowHelperError(
+                                                    new ProtocolException(
+                                                        SR.GetString(
+                                                            SR.UpgradeProtocolNotSupported,
+                                                            Decoder.Upgrade
+                                                        )
                                                     )
-                                                )
-                                            );
+                                                );
                                         }
 
                                         ChangeUpgradeState(UpgradeState.WritingUpgradeAck);
                                         // accept upgrade
                                         if (
-                                            this.currentConnection.BeginWrite(
-                                                ServerSingletonEncoder.UpgradeResponseBytes,
-                                                0,
-                                                ServerSingletonEncoder.UpgradeResponseBytes.Length,
-                                                true,
-                                                timeoutHelper.RemainingTime(),
-                                                onWriteCompleted,
-                                                this
-                                            ) == AsyncCompletionResult.Queued
+                                            this.currentConnection
+                                                .BeginWrite(
+                                                    ServerSingletonEncoder.UpgradeResponseBytes,
+                                                    0,
+                                                    ServerSingletonEncoder.UpgradeResponseBytes
+                                                        .Length,
+                                                    true,
+                                                    timeoutHelper.RemainingTime(),
+                                                    onWriteCompleted,
+                                                    this
+                                                ) == AsyncCompletionResult.Queued
                                         )
                                         {
                                             //OnWriteCompleted will:
@@ -603,10 +610,12 @@ namespace System.ServiceModel.Channels
                                             if (Fx.IsFatal(exception))
                                                 throw;
 
-                                            this.parent.WriteAuditFailure(
-                                                upgradeAcceptor as StreamSecurityUpgradeAcceptor,
-                                                exception
-                                            );
+                                            this.parent
+                                                .WriteAuditFailure(
+                                                    upgradeAcceptor
+                                                        as StreamSecurityUpgradeAcceptor,
+                                                    exception
+                                                );
                                             throw;
                                         }
                                         break;
@@ -621,10 +630,12 @@ namespace System.ServiceModel.Channels
                                             if (Fx.IsFatal(exception))
                                                 throw;
 
-                                            this.parent.WriteAuditFailure(
-                                                upgradeAcceptor as StreamSecurityUpgradeAcceptor,
-                                                exception
-                                            );
+                                            this.parent
+                                                .WriteAuditFailure(
+                                                    upgradeAcceptor
+                                                        as StreamSecurityUpgradeAcceptor,
+                                                    exception
+                                                );
                                             throw;
                                         }
                                         break;
@@ -645,15 +656,16 @@ namespace System.ServiceModel.Channels
                                     ChangeUpgradeState(UpgradeState.WritingPreambleEnd);
                                     // we've finished the preamble. Ack and return.
                                     if (
-                                        this.currentConnection.BeginWrite(
-                                            ServerSessionEncoder.AckResponseBytes,
-                                            0,
-                                            ServerSessionEncoder.AckResponseBytes.Length,
-                                            true,
-                                            timeoutHelper.RemainingTime(),
-                                            onWriteCompleted,
-                                            this
-                                        ) == AsyncCompletionResult.Queued
+                                        this.currentConnection
+                                            .BeginWrite(
+                                                ServerSessionEncoder.AckResponseBytes,
+                                                0,
+                                                ServerSessionEncoder.AckResponseBytes.Length,
+                                                true,
+                                                timeoutHelper.RemainingTime(),
+                                                onWriteCompleted,
+                                                this
+                                            ) == AsyncCompletionResult.Queued
                                     )
                                     {
                                         //OnWriteCompleted will:
@@ -979,9 +991,8 @@ namespace System.ServiceModel.Channels
                     Exception securityFailedException = new ProtocolException(
                         SR.GetString(SR.RemoteSecurityNotNegotiatedOnStreamUpgrade, this.Via)
                     );
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        securityFailedException
-                    );
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperError(securityFailedException);
                 }
                 // Audit Authentication Success
                 WriteAuditEvent(securityUpgradeAcceptor, AuditLevel.Success, null);
@@ -1076,9 +1087,8 @@ namespace System.ServiceModel.Channels
             isReadPending = false;
             if (size == 0)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    decoder.CreatePrematureEOFException()
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(decoder.CreatePrematureEOFException());
             }
         }
 
@@ -1208,17 +1218,16 @@ namespace System.ServiceModel.Channels
         {
             TimeoutHelper timeoutHelper = new TimeoutHelper(timeout);
             // send back EOF and then recycle the connection
-            this.Connection.Write(
-                SingletonEncoder.EndBytes,
-                0,
-                SingletonEncoder.EndBytes.Length,
-                true,
-                timeoutHelper.RemainingTime()
-            );
-            this.connectionDemuxer.ReuseConnection(
-                this.rawConnection,
-                timeoutHelper.RemainingTime()
-            );
+            this.Connection
+                .Write(
+                    SingletonEncoder.EndBytes,
+                    0,
+                    SingletonEncoder.EndBytes.Length,
+                    true,
+                    timeoutHelper.RemainingTime()
+                );
+            this.connectionDemuxer
+                .ReuseConnection(this.rawConnection, timeoutHelper.RemainingTime());
 
             ChannelBindingUtility.Dispose(ref this.channelBindingToken);
         }
@@ -1340,9 +1349,8 @@ namespace System.ServiceModel.Channels
                 // first drain our stream if necessary
                 if (this.inputStream != null)
                 {
-                    byte[] dummy = DiagnosticUtility.Utility.AllocateByteArray(
-                        transportSettings.ConnectionBufferSize
-                    );
+                    byte[] dummy = DiagnosticUtility.Utility
+                        .AllocateByteArray(transportSettings.ConnectionBufferSize);
                     while (!this.isAtEof)
                     {
                         this.inputStream.ReadTimeout = TimeoutHelper.ToMilliseconds(
@@ -1412,9 +1420,8 @@ namespace System.ServiceModel.Channels
 
         public Message Receive(TimeSpan timeout)
         {
-            byte[] buffer = DiagnosticUtility.Utility.AllocateByteArray(
-                connection.AsyncReadBufferSize
-            );
+            byte[] buffer = DiagnosticUtility.Utility
+                .AllocateByteArray(connection.AsyncReadBufferSize);
 
             if (size > 0)
             {
@@ -1486,20 +1493,23 @@ namespace System.ServiceModel.Channels
                 Message message = null;
                 try
                 {
-                    message = transportSettings.MessageEncoderFactory.Encoder.ReadMessage(
-                        this.inputStream,
-                        transportSettings.MaxBufferSize,
-                        this.ContentType
-                    );
+                    message = transportSettings.MessageEncoderFactory
+                        .Encoder
+                        .ReadMessage(
+                            this.inputStream,
+                            transportSettings.MaxBufferSize,
+                            this.ContentType
+                        );
                 }
                 catch (XmlException xmlException)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ProtocolException(
-                            SR.GetString(SR.MessageXmlProtocolError),
-                            xmlException
-                        )
-                    );
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperError(
+                            new ProtocolException(
+                                SR.GetString(SR.MessageXmlProtocolError),
+                                xmlException
+                            )
+                        );
                 }
 
                 if (DiagnosticUtility.ShouldUseActivity)
@@ -1885,9 +1895,8 @@ namespace System.ServiceModel.Channels
                         || decoder.CurrentState != SingletonMessageDecoder.State.End
                     )
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            decoder.CreatePrematureEOFException()
-                        );
+                        throw DiagnosticUtility.ExceptionUtility
+                            .ThrowHelperError(decoder.CreatePrematureEOFException());
                     }
 
                     this.reader.DoneReceiving(true);
@@ -2070,13 +2079,14 @@ namespace System.ServiceModel.Channels
                 if (size > 0)
                 {
                     int bytesEncoded = IntEncoder.Encode(size, encodedSize, 0);
-                    base.Connection.Write(
-                        encodedSize,
-                        0,
-                        bytesEncoded,
-                        false,
-                        TimeSpan.FromMilliseconds(this.WriteTimeout)
-                    );
+                    base.Connection
+                        .Write(
+                            encodedSize,
+                            0,
+                            bytesEncoded,
+                            false,
+                            TimeSpan.FromMilliseconds(this.WriteTimeout)
+                        );
                 }
             }
 
@@ -2203,8 +2213,9 @@ namespace System.ServiceModel.Channels
                         }
                         else
                         {
-                            ArraySegment<byte> messageData =
-                                settings.MessageEncoderFactory.Encoder.WriteMessage(
+                            ArraySegment<byte> messageData = settings.MessageEncoderFactory
+                                .Encoder
+                                .WriteMessage(
                                     message,
                                     int.MaxValue,
                                     this.bufferManager,

@@ -172,9 +172,16 @@ namespace System.ServiceModel.Configuration
             foreach (
                 X509CertificateTrustedIssuerElement ce in IssuedTokenAuthentication.KnownCertificates
             )
-                behavior.IssuedTokenAuthentication.KnownCertificates.Add(
-                    GetCertificate(ce.StoreLocation, ce.StoreName, ce.X509FindType, ce.FindValue)
-                );
+                behavior.IssuedTokenAuthentication
+                    .KnownCertificates
+                    .Add(
+                        GetCertificate(
+                            ce.StoreLocation,
+                            ce.StoreName,
+                            ce.X509FindType,
+                            ce.FindValue
+                        )
+                    );
 
             behavior.IssuedTokenAuthentication.SamlSerializer = (SamlSerializer)CreateInstance(
                 IssuedTokenAuthentication.SamlSerializerType
@@ -182,12 +189,13 @@ namespace System.ServiceModel.Configuration
 
             // Peer
             if (!String.IsNullOrEmpty(Peer.Certificate.FindValue))
-                behavior.Peer.SetCertificate(
-                    Peer.Certificate.StoreLocation,
-                    Peer.Certificate.StoreName,
-                    Peer.Certificate.X509FindType,
-                    Peer.Certificate.FindValue
-                );
+                behavior.Peer
+                    .SetCertificate(
+                        Peer.Certificate.StoreLocation,
+                        Peer.Certificate.StoreName,
+                        Peer.Certificate.X509FindType,
+                        Peer.Certificate.FindValue
+                    );
             // sb.Peer.MeshPassword = /* cannot fill it here */
             behavior.Peer.MessageSenderAuthentication.CustomCertificateValidator =
                 (X509CertificateValidator)CreateInstance(
@@ -203,12 +211,12 @@ namespace System.ServiceModel.Configuration
                 (X509CertificateValidator)CreateInstance(
                     Peer.PeerAuthentication.CustomCertificateValidatorType
                 );
-            behavior.Peer.PeerAuthentication.CertificateValidationMode =
-                Peer.PeerAuthentication.CertificateValidationMode;
-            behavior.Peer.PeerAuthentication.RevocationMode =
-                Peer.PeerAuthentication.RevocationMode;
-            behavior.Peer.PeerAuthentication.TrustedStoreLocation =
-                Peer.PeerAuthentication.TrustedStoreLocation;
+            behavior.Peer.PeerAuthentication.CertificateValidationMode = Peer.PeerAuthentication
+                .CertificateValidationMode;
+            behavior.Peer.PeerAuthentication.RevocationMode = Peer.PeerAuthentication
+                .RevocationMode;
+            behavior.Peer.PeerAuthentication.TrustedStoreLocation = Peer.PeerAuthentication
+                .TrustedStoreLocation;
 
             // WSSC
             behavior.SecureConversationAuthentication.SecurityStateEncoder =
@@ -218,12 +226,13 @@ namespace System.ServiceModel.Configuration
 
             // X509
             if (!String.IsNullOrEmpty(ServiceCertificate.FindValue))
-                behavior.ServiceCertificate.SetCertificate(
-                    ServiceCertificate.StoreLocation,
-                    ServiceCertificate.StoreName,
-                    ServiceCertificate.X509FindType,
-                    ServiceCertificate.FindValue
-                );
+                behavior.ServiceCertificate
+                    .SetCertificate(
+                        ServiceCertificate.StoreLocation,
+                        ServiceCertificate.StoreName,
+                        ServiceCertificate.X509FindType,
+                        ServiceCertificate.FindValue
+                    );
 
             // UserNamePassword
             behavior.UserNameAuthentication.CachedLogonTokenLifetime =

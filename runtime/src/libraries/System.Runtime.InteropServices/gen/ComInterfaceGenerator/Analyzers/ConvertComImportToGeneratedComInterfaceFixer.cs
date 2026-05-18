@@ -75,19 +75,21 @@ namespace Microsoft.Interop.Analyzers
             var optionsBuilder = ImmutableDictionary.CreateBuilder<string, Option>();
             // Only add the bool options if they are true. This simplifies our equivalence key and makes testing easier.
             if (
-                diagnostic.Properties.TryGetValue(
-                    AnalyzerDiagnostics.Metadata.MayRequireAdditionalWork,
-                    out string? mayRequireAdditionalWork
-                ) && bool.Parse(mayRequireAdditionalWork)
+                diagnostic.Properties
+                    .TryGetValue(
+                        AnalyzerDiagnostics.Metadata.MayRequireAdditionalWork,
+                        out string? mayRequireAdditionalWork
+                    ) && bool.Parse(mayRequireAdditionalWork)
             )
             {
                 optionsBuilder.Add(Option.MayRequireAdditionalWork, new Option.Bool(true));
             }
             if (
-                diagnostic.Properties.TryGetValue(
-                    AnalyzerDiagnostics.Metadata.AddStringMarshalling,
-                    out string? addStringMarshalling
-                ) && bool.Parse(addStringMarshalling)
+                diagnostic.Properties
+                    .TryGetValue(
+                        AnalyzerDiagnostics.Metadata.AddStringMarshalling,
+                        out string? addStringMarshalling
+                    ) && bool.Parse(addStringMarshalling)
             )
             {
                 optionsBuilder.Add(AddStringMarshallingOption, new Option.Bool(true));
@@ -154,12 +156,11 @@ namespace Microsoft.Interop.Analyzers
             var comImportAttribute = await declaringType
                 .GetAttributes()
                 .First(attr =>
-                    attr.AttributeClass.Equals(
-                        comImportAttributeType,
-                        SymbolEqualityComparer.Default
-                    )
+                    attr.AttributeClass
+                        .Equals(comImportAttributeType, SymbolEqualityComparer.Default)
                 )
-                .ApplicationSyntaxReference.GetSyntaxAsync(ct)
+                .ApplicationSyntaxReference
+                .GetSyntaxAsync(ct)
                 .ConfigureAwait(false);
 
             editor.ReplaceNode(comImportAttribute, generatedComInterfaceAttribute);

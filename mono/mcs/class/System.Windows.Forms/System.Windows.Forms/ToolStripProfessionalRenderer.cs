@@ -84,12 +84,13 @@ namespace System.Windows.Forms
             )
             {
                 if (this.ColorTable.UseSystemColors)
-                    e.Graphics.FillRectangle(
-                        ThemeEngine.Current.ResPool.GetSolidBrush(
-                            this.ColorTable.ButtonCheckedHighlight
-                        ),
-                        paint_here
-                    );
+                    e.Graphics
+                        .FillRectangle(
+                            ThemeEngine.Current
+                                .ResPool
+                                .GetSolidBrush(this.ColorTable.ButtonCheckedHighlight),
+                            paint_here
+                        );
                 else
                     using (
                         Brush b = new LinearGradientBrush(
@@ -208,10 +209,11 @@ namespace System.Windows.Forms
 
                 for (int i = 0; i < e.GripBounds.Height - 12; i += 4)
                 {
-                    e.Graphics.FillRectangle(
-                        ThemeEngine.Current.ResPool.GetSolidBrush(this.ColorTable.GripLight),
-                        r
-                    );
+                    e.Graphics
+                        .FillRectangle(
+                            ThemeEngine.Current.ResPool.GetSolidBrush(this.ColorTable.GripLight),
+                            r
+                        );
                     r.Offset(0, 4);
                 }
 
@@ -219,10 +221,11 @@ namespace System.Windows.Forms
 
                 for (int i = 0; i < e.GripBounds.Height - 12; i += 4)
                 {
-                    e.Graphics.FillRectangle(
-                        ThemeEngine.Current.ResPool.GetSolidBrush(this.ColorTable.GripDark),
-                        r2
-                    );
+                    e.Graphics
+                        .FillRectangle(
+                            ThemeEngine.Current.ResPool.GetSolidBrush(this.ColorTable.GripDark),
+                            r2
+                        );
                     r2.Offset(0, 4);
                 }
             }
@@ -232,10 +235,11 @@ namespace System.Windows.Forms
 
                 for (int i = 0; i < e.GripBounds.Width - 11; i += 4)
                 {
-                    e.Graphics.FillRectangle(
-                        ThemeEngine.Current.ResPool.GetSolidBrush(this.ColorTable.GripLight),
-                        r
-                    );
+                    e.Graphics
+                        .FillRectangle(
+                            ThemeEngine.Current.ResPool.GetSolidBrush(this.ColorTable.GripLight),
+                            r
+                        );
                     r.Offset(4, 0);
                 }
 
@@ -243,10 +247,11 @@ namespace System.Windows.Forms
 
                 for (int i = 0; i < e.GripBounds.Width - 11; i += 4)
                 {
-                    e.Graphics.FillRectangle(
-                        ThemeEngine.Current.ResPool.GetSolidBrush(this.ColorTable.GripDark),
-                        r2
-                    );
+                    e.Graphics
+                        .FillRectangle(
+                            ThemeEngine.Current.ResPool.GetSolidBrush(this.ColorTable.GripDark),
+                            r2
+                        );
                     r2.Offset(4, 0);
                 }
             }
@@ -277,42 +282,48 @@ namespace System.Windows.Forms
         {
             if (e.Item.Selected)
             {
-                e.Graphics.FillRectangle(
-                    ThemeEngine.Current.ResPool.GetSolidBrush(
-                        this.ColorTable.CheckPressedBackground
-                    ),
-                    e.ImageRectangle
-                );
-                e.Graphics.DrawRectangle(
-                    ThemeEngine.Current.ResPool.GetPen(this.ColorTable.ButtonPressedBorder),
-                    e.ImageRectangle
-                );
+                e.Graphics
+                    .FillRectangle(
+                        ThemeEngine.Current
+                            .ResPool
+                            .GetSolidBrush(this.ColorTable.CheckPressedBackground),
+                        e.ImageRectangle
+                    );
+                e.Graphics
+                    .DrawRectangle(
+                        ThemeEngine.Current.ResPool.GetPen(this.ColorTable.ButtonPressedBorder),
+                        e.ImageRectangle
+                    );
             }
             else if (e.Item.Pressed)
             {
-                e.Graphics.FillRectangle(
-                    ThemeEngine.Current.ResPool.GetSolidBrush(
-                        this.ColorTable.CheckSelectedBackground
-                    ),
-                    e.ImageRectangle
-                );
-                e.Graphics.DrawRectangle(
-                    ThemeEngine.Current.ResPool.GetPen(this.ColorTable.ButtonSelectedBorder),
-                    e.ImageRectangle
-                );
+                e.Graphics
+                    .FillRectangle(
+                        ThemeEngine.Current
+                            .ResPool
+                            .GetSolidBrush(this.ColorTable.CheckSelectedBackground),
+                        e.ImageRectangle
+                    );
+                e.Graphics
+                    .DrawRectangle(
+                        ThemeEngine.Current.ResPool.GetPen(this.ColorTable.ButtonSelectedBorder),
+                        e.ImageRectangle
+                    );
             }
             else
             {
-                e.Graphics.FillRectangle(
-                    ThemeEngine.Current.ResPool.GetSolidBrush(
-                        this.ColorTable.CheckSelectedBackground
-                    ),
-                    e.ImageRectangle
-                );
-                e.Graphics.DrawRectangle(
-                    ThemeEngine.Current.ResPool.GetPen(this.ColorTable.ButtonSelectedBorder),
-                    e.ImageRectangle
-                );
+                e.Graphics
+                    .FillRectangle(
+                        ThemeEngine.Current
+                            .ResPool
+                            .GetSolidBrush(this.ColorTable.CheckSelectedBackground),
+                        e.ImageRectangle
+                    );
+                e.Graphics
+                    .DrawRectangle(
+                        ThemeEngine.Current.ResPool.GetPen(this.ColorTable.ButtonSelectedBorder),
+                        e.ImageRectangle
+                    );
             }
             if (e.Item.Image == null)
                 ControlPaint.DrawMenuGlyph(
@@ -350,12 +361,13 @@ namespace System.Windows.Forms
 
                 if (e.Item.Selected || e.Item.Pressed)
                     if (e.Item.Enabled)
-                        e.Graphics.FillRectangle(
-                            ThemeEngine.Current.ResPool.GetSolidBrush(
-                                this.ColorTable.MenuItemSelectedGradientEnd
-                            ),
-                            paint_here
-                        );
+                        e.Graphics
+                            .FillRectangle(
+                                ThemeEngine.Current
+                                    .ResPool
+                                    .GetSolidBrush(this.ColorTable.MenuItemSelectedGradientEnd),
+                                paint_here
+                            );
 
                 if (tsmi.Selected || tsmi.Pressed)
                     using (Pen p = new Pen(this.ColorTable.MenuItemBorder))
@@ -465,26 +477,31 @@ namespace System.Windows.Forms
             if (e.Vertical)
             {
                 Rectangle r = new Rectangle(4, 6, 1, e.Item.Height - 10);
-                e.Graphics.FillRectangle(
-                    ThemeEngine.Current.ResPool.GetSolidBrush(this.ColorTable.SeparatorLight),
-                    r
-                );
+                e.Graphics
+                    .FillRectangle(
+                        ThemeEngine.Current.ResPool.GetSolidBrush(this.ColorTable.SeparatorLight),
+                        r
+                    );
 
                 Rectangle r2 = new Rectangle(3, 5, 1, e.Item.Height - 10);
-                e.Graphics.FillRectangle(
-                    ThemeEngine.Current.ResPool.GetSolidBrush(this.ColorTable.SeparatorDark),
-                    r2
-                );
+                e.Graphics
+                    .FillRectangle(
+                        ThemeEngine.Current.ResPool.GetSolidBrush(this.ColorTable.SeparatorDark),
+                        r2
+                    );
             }
             else
             {
                 if (!e.Item.IsOnDropDown)
                 {
                     Rectangle r = new Rectangle(6, 4, e.Item.Width - 10, 1);
-                    e.Graphics.FillRectangle(
-                        ThemeEngine.Current.ResPool.GetSolidBrush(this.ColorTable.SeparatorLight),
-                        r
-                    );
+                    e.Graphics
+                        .FillRectangle(
+                            ThemeEngine.Current
+                                .ResPool
+                                .GetSolidBrush(this.ColorTable.SeparatorLight),
+                            r
+                        );
                 }
 
                 Rectangle r3;
@@ -498,10 +515,11 @@ namespace System.Windows.Forms
                 else
                     r3 = new Rectangle(5, 3, e.Item.Width - 10, 1);
 
-                e.Graphics.FillRectangle(
-                    ThemeEngine.Current.ResPool.GetSolidBrush(this.ColorTable.SeparatorDark),
-                    r3
-                );
+                e.Graphics
+                    .FillRectangle(
+                        ThemeEngine.Current.ResPool.GetSolidBrush(this.ColorTable.SeparatorDark),
+                        r3
+                    );
             }
 
             base.OnRenderSeparator(e);
@@ -548,13 +566,8 @@ namespace System.Windows.Forms
                 using (Pen p = new Pen(this.ColorTable.ButtonSelectedBorder))
                 {
                     e.Graphics.DrawRectangle(p, paint_here);
-                    e.Graphics.DrawLine(
-                        p,
-                        button_part.Right,
-                        0,
-                        button_part.Right,
-                        button_part.Height
-                    );
+                    e.Graphics
+                        .DrawLine(p, button_part.Right, 0, button_part.Right, button_part.Height);
                 }
             else if (e.Item.Pressed)
                 using (Pen p = new Pen(this.ColorTable.MenuBorder))
@@ -569,13 +582,14 @@ namespace System.Windows.Forms
             if (e.ToolStrip.BackgroundImage != null)
             {
                 if (e.ToolStrip is StatusStrip)
-                    e.Graphics.DrawLine(
-                        Pens.White,
-                        e.AffectedBounds.Left,
-                        e.AffectedBounds.Top,
-                        e.AffectedBounds.Right,
-                        e.AffectedBounds.Top
-                    );
+                    e.Graphics
+                        .DrawLine(
+                            Pens.White,
+                            e.AffectedBounds.Left,
+                            e.AffectedBounds.Top,
+                            e.AffectedBounds.Right,
+                            e.AffectedBounds.Top
+                        );
 
                 return;
             }
@@ -614,13 +628,14 @@ namespace System.Windows.Forms
                     e.Graphics.FillRectangle(b, e.AffectedBounds);
 
             if (e.ToolStrip is StatusStrip)
-                e.Graphics.DrawLine(
-                    Pens.White,
-                    e.AffectedBounds.Left,
-                    e.AffectedBounds.Top,
-                    e.AffectedBounds.Right,
-                    e.AffectedBounds.Top
-                );
+                e.Graphics
+                    .DrawLine(
+                        Pens.White,
+                        e.AffectedBounds.Left,
+                        e.AffectedBounds.Top,
+                        e.AffectedBounds.Right,
+                        e.AffectedBounds.Top
+                    );
 
             base.OnRenderToolStripBackground(e);
         }
@@ -630,36 +645,38 @@ namespace System.Windows.Forms
             if (e.ToolStrip is ToolStripDropDown)
             {
                 if (e.ToolStrip is ToolStripOverflow)
-                    e.Graphics.DrawLines(
-                        ThemeEngine.Current.ResPool.GetPen(this.ColorTable.MenuBorder),
-                        new Point[]
-                        {
-                            e.AffectedBounds.Location,
-                            new Point(e.AffectedBounds.Left, e.AffectedBounds.Bottom - 1),
-                            new Point(e.AffectedBounds.Right - 1, e.AffectedBounds.Bottom - 1),
-                            new Point(e.AffectedBounds.Right - 1, e.AffectedBounds.Top),
-                            new Point(e.AffectedBounds.Left, e.AffectedBounds.Top),
-                        }
-                    );
+                    e.Graphics
+                        .DrawLines(
+                            ThemeEngine.Current.ResPool.GetPen(this.ColorTable.MenuBorder),
+                            new Point[]
+                            {
+                                e.AffectedBounds.Location,
+                                new Point(e.AffectedBounds.Left, e.AffectedBounds.Bottom - 1),
+                                new Point(e.AffectedBounds.Right - 1, e.AffectedBounds.Bottom - 1),
+                                new Point(e.AffectedBounds.Right - 1, e.AffectedBounds.Top),
+                                new Point(e.AffectedBounds.Left, e.AffectedBounds.Top),
+                            }
+                        );
                 else
-                    e.Graphics.DrawLines(
-                        ThemeEngine.Current.ResPool.GetPen(this.ColorTable.MenuBorder),
-                        new Point[]
-                        {
-                            new Point(
-                                e.AffectedBounds.Left + e.ConnectedArea.Left,
-                                e.AffectedBounds.Top
-                            ),
-                            e.AffectedBounds.Location,
-                            new Point(e.AffectedBounds.Left, e.AffectedBounds.Bottom - 1),
-                            new Point(e.AffectedBounds.Right - 1, e.AffectedBounds.Bottom - 1),
-                            new Point(e.AffectedBounds.Right - 1, e.AffectedBounds.Top),
-                            new Point(
-                                e.AffectedBounds.Left + e.ConnectedArea.Right,
-                                e.AffectedBounds.Top
-                            ),
-                        }
-                    );
+                    e.Graphics
+                        .DrawLines(
+                            ThemeEngine.Current.ResPool.GetPen(this.ColorTable.MenuBorder),
+                            new Point[]
+                            {
+                                new Point(
+                                    e.AffectedBounds.Left + e.ConnectedArea.Left,
+                                    e.AffectedBounds.Top
+                                ),
+                                e.AffectedBounds.Location,
+                                new Point(e.AffectedBounds.Left, e.AffectedBounds.Bottom - 1),
+                                new Point(e.AffectedBounds.Right - 1, e.AffectedBounds.Bottom - 1),
+                                new Point(e.AffectedBounds.Right - 1, e.AffectedBounds.Top),
+                                new Point(
+                                    e.AffectedBounds.Left + e.ConnectedArea.Right,
+                                    e.AffectedBounds.Top
+                                ),
+                            }
+                        );
                 return;
             }
 
@@ -670,28 +687,32 @@ namespace System.Windows.Forms
             {
                 if (this.RoundedEdges == true)
                 {
-                    e.Graphics.DrawLine(
-                        p,
-                        new Point(2, e.ToolStrip.Height - 1),
-                        new Point(e.ToolStrip.Width - 3, e.ToolStrip.Height - 1)
-                    );
-                    e.Graphics.DrawLine(
-                        p,
-                        new Point(e.ToolStrip.Width - 2, e.ToolStrip.Height - 2),
-                        new Point(e.ToolStrip.Width - 1, e.ToolStrip.Height - 2)
-                    );
-                    e.Graphics.DrawLine(
-                        p,
-                        new Point(e.ToolStrip.Width - 1, 2),
-                        new Point(e.ToolStrip.Width - 1, e.ToolStrip.Height - 3)
-                    );
+                    e.Graphics
+                        .DrawLine(
+                            p,
+                            new Point(2, e.ToolStrip.Height - 1),
+                            new Point(e.ToolStrip.Width - 3, e.ToolStrip.Height - 1)
+                        );
+                    e.Graphics
+                        .DrawLine(
+                            p,
+                            new Point(e.ToolStrip.Width - 2, e.ToolStrip.Height - 2),
+                            new Point(e.ToolStrip.Width - 1, e.ToolStrip.Height - 2)
+                        );
+                    e.Graphics
+                        .DrawLine(
+                            p,
+                            new Point(e.ToolStrip.Width - 1, 2),
+                            new Point(e.ToolStrip.Width - 1, e.ToolStrip.Height - 3)
+                        );
                 }
                 else
-                    e.Graphics.DrawLine(
-                        p,
-                        new Point(e.ToolStrip.Left, e.ToolStrip.Bottom - 1),
-                        new Point(e.ToolStrip.Width, e.ToolStrip.Bottom - 1)
-                    );
+                    e.Graphics
+                        .DrawLine(
+                            p,
+                            new Point(e.ToolStrip.Left, e.ToolStrip.Bottom - 1),
+                            new Point(e.ToolStrip.Width, e.ToolStrip.Bottom - 1)
+                        );
             }
 
             base.OnRenderToolStripBorder(e);
@@ -737,127 +758,131 @@ namespace System.Windows.Forms
                 // Paint down arrow
                 Point arrow_loc = new Point(paint_here.X + 2, paint_here.Bottom - 9);
 
-                e.Graphics.DrawLine(
-                    Pens.White,
-                    arrow_loc.X + 1,
-                    arrow_loc.Y + 1,
-                    arrow_loc.X + 5,
-                    arrow_loc.Y + 1
-                );
-                e.Graphics.DrawLine(
-                    Pens.Black,
-                    arrow_loc.X,
-                    arrow_loc.Y,
-                    arrow_loc.X + 4,
-                    arrow_loc.Y
-                );
+                e.Graphics
+                    .DrawLine(
+                        Pens.White,
+                        arrow_loc.X + 1,
+                        arrow_loc.Y + 1,
+                        arrow_loc.X + 5,
+                        arrow_loc.Y + 1
+                    );
+                e.Graphics
+                    .DrawLine(Pens.Black, arrow_loc.X, arrow_loc.Y, arrow_loc.X + 4, arrow_loc.Y);
 
-                e.Graphics.DrawLine(
-                    Pens.White,
-                    arrow_loc.X + 3,
-                    arrow_loc.Y + 4,
-                    arrow_loc.X + 5,
-                    arrow_loc.Y + 4
-                );
-                e.Graphics.DrawLine(
-                    Pens.White,
-                    arrow_loc.X + 3,
-                    arrow_loc.Y + 5,
-                    arrow_loc.X + 4,
-                    arrow_loc.Y + 5
-                );
-                e.Graphics.DrawLine(
-                    Pens.White,
-                    arrow_loc.X + 3,
-                    arrow_loc.Y + 4,
-                    arrow_loc.X + 3,
-                    arrow_loc.Y + 6
-                );
+                e.Graphics
+                    .DrawLine(
+                        Pens.White,
+                        arrow_loc.X + 3,
+                        arrow_loc.Y + 4,
+                        arrow_loc.X + 5,
+                        arrow_loc.Y + 4
+                    );
+                e.Graphics
+                    .DrawLine(
+                        Pens.White,
+                        arrow_loc.X + 3,
+                        arrow_loc.Y + 5,
+                        arrow_loc.X + 4,
+                        arrow_loc.Y + 5
+                    );
+                e.Graphics
+                    .DrawLine(
+                        Pens.White,
+                        arrow_loc.X + 3,
+                        arrow_loc.Y + 4,
+                        arrow_loc.X + 3,
+                        arrow_loc.Y + 6
+                    );
 
-                e.Graphics.DrawLine(
-                    Pens.Black,
-                    arrow_loc.X,
-                    arrow_loc.Y + 3,
-                    arrow_loc.X + 4,
-                    arrow_loc.Y + 3
-                );
-                e.Graphics.DrawLine(
-                    Pens.Black,
-                    arrow_loc.X + 1,
-                    arrow_loc.Y + 4,
-                    arrow_loc.X + 3,
-                    arrow_loc.Y + 4
-                );
-                e.Graphics.DrawLine(
-                    Pens.Black,
-                    arrow_loc.X + 2,
-                    arrow_loc.Y + 4,
-                    arrow_loc.X + 2,
-                    arrow_loc.Y + 5
-                );
+                e.Graphics
+                    .DrawLine(
+                        Pens.Black,
+                        arrow_loc.X,
+                        arrow_loc.Y + 3,
+                        arrow_loc.X + 4,
+                        arrow_loc.Y + 3
+                    );
+                e.Graphics
+                    .DrawLine(
+                        Pens.Black,
+                        arrow_loc.X + 1,
+                        arrow_loc.Y + 4,
+                        arrow_loc.X + 3,
+                        arrow_loc.Y + 4
+                    );
+                e.Graphics
+                    .DrawLine(
+                        Pens.Black,
+                        arrow_loc.X + 2,
+                        arrow_loc.Y + 4,
+                        arrow_loc.X + 2,
+                        arrow_loc.Y + 5
+                    );
             }
             else
             {
                 Point arrow_loc = new Point(paint_here.Right - 9, paint_here.Y + 2);
 
-                e.Graphics.DrawLine(
-                    Pens.White,
-                    arrow_loc.X + 1,
-                    arrow_loc.Y + 1,
-                    arrow_loc.X + 1,
-                    arrow_loc.Y + 5
-                );
-                e.Graphics.DrawLine(
-                    Pens.Black,
-                    arrow_loc.X,
-                    arrow_loc.Y,
-                    arrow_loc.X,
-                    arrow_loc.Y + 4
-                );
+                e.Graphics
+                    .DrawLine(
+                        Pens.White,
+                        arrow_loc.X + 1,
+                        arrow_loc.Y + 1,
+                        arrow_loc.X + 1,
+                        arrow_loc.Y + 5
+                    );
+                e.Graphics
+                    .DrawLine(Pens.Black, arrow_loc.X, arrow_loc.Y, arrow_loc.X, arrow_loc.Y + 4);
 
-                e.Graphics.DrawLine(
-                    Pens.White,
-                    arrow_loc.X + 4,
-                    arrow_loc.Y + 3,
-                    arrow_loc.X + 4,
-                    arrow_loc.Y + 5
-                );
-                e.Graphics.DrawLine(
-                    Pens.White,
-                    arrow_loc.X + 5,
-                    arrow_loc.Y + 3,
-                    arrow_loc.X + 5,
-                    arrow_loc.Y + 4
-                );
-                e.Graphics.DrawLine(
-                    Pens.White,
-                    arrow_loc.X + 4,
-                    arrow_loc.Y + 3,
-                    arrow_loc.X + 6,
-                    arrow_loc.Y + 3
-                );
+                e.Graphics
+                    .DrawLine(
+                        Pens.White,
+                        arrow_loc.X + 4,
+                        arrow_loc.Y + 3,
+                        arrow_loc.X + 4,
+                        arrow_loc.Y + 5
+                    );
+                e.Graphics
+                    .DrawLine(
+                        Pens.White,
+                        arrow_loc.X + 5,
+                        arrow_loc.Y + 3,
+                        arrow_loc.X + 5,
+                        arrow_loc.Y + 4
+                    );
+                e.Graphics
+                    .DrawLine(
+                        Pens.White,
+                        arrow_loc.X + 4,
+                        arrow_loc.Y + 3,
+                        arrow_loc.X + 6,
+                        arrow_loc.Y + 3
+                    );
 
-                e.Graphics.DrawLine(
-                    Pens.Black,
-                    arrow_loc.X + 3,
-                    arrow_loc.Y,
-                    arrow_loc.X + 3,
-                    arrow_loc.Y + 4
-                );
-                e.Graphics.DrawLine(
-                    Pens.Black,
-                    arrow_loc.X + 4,
-                    arrow_loc.Y + 1,
-                    arrow_loc.X + 4,
-                    arrow_loc.Y + 3
-                );
-                e.Graphics.DrawLine(
-                    Pens.Black,
-                    arrow_loc.X + 4,
-                    arrow_loc.Y + 2,
-                    arrow_loc.X + 5,
-                    arrow_loc.Y + 2
-                );
+                e.Graphics
+                    .DrawLine(
+                        Pens.Black,
+                        arrow_loc.X + 3,
+                        arrow_loc.Y,
+                        arrow_loc.X + 3,
+                        arrow_loc.Y + 4
+                    );
+                e.Graphics
+                    .DrawLine(
+                        Pens.Black,
+                        arrow_loc.X + 4,
+                        arrow_loc.Y + 1,
+                        arrow_loc.X + 4,
+                        arrow_loc.Y + 3
+                    );
+                e.Graphics
+                    .DrawLine(
+                        Pens.Black,
+                        arrow_loc.X + 4,
+                        arrow_loc.Y + 2,
+                        arrow_loc.X + 5,
+                        arrow_loc.Y + 2
+                    );
             }
         }
         #endregion

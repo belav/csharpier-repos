@@ -284,8 +284,8 @@ namespace Microsoft.CodeAnalysis.ImplementInterface
                 var tree = await document
                     .GetRequiredSyntaxTreeAsync(cancellationToken)
                     .ConfigureAwait(false);
-                var compilation = await document
-                    .Project.GetRequiredCompilationAsync(cancellationToken)
+                var compilation = await document.Project
+                    .GetRequiredCompilationAsync(cancellationToken)
                     .ConfigureAwait(false);
 
                 var isComImport = unimplementedMembers.Any(static t => t.type.IsComImport);
@@ -385,10 +385,12 @@ namespace Microsoft.CodeAnalysis.ImplementInterface
             private bool IsReservedName(string name)
             {
                 return IdentifiersMatch(State.ClassOrStructType.Name, name)
-                    || State.ClassOrStructType.TypeParameters.Any(
-                        static (t, arg) => arg.self.IdentifiersMatch(t.Name, arg.name),
-                        (self: this, name)
-                    );
+                    || State.ClassOrStructType
+                        .TypeParameters
+                        .Any(
+                            static (t, arg) => arg.self.IdentifiersMatch(t.Name, arg.name),
+                            (self: this, name)
+                        );
             }
 
             private string DetermineMemberName(
@@ -398,10 +400,8 @@ namespace Microsoft.CodeAnalysis.ImplementInterface
             {
                 if (HasConflictingMember(member, implementedVisibleMembers))
                 {
-                    var memberNames = State
-                        .ClassOrStructType.GetAccessibleMembersInThisAndBaseTypes<ISymbol>(
-                            State.ClassOrStructType
-                        )
+                    var memberNames = State.ClassOrStructType
+                        .GetAccessibleMembersInThisAndBaseTypes<ISymbol>(State.ClassOrStructType)
                         .Select(m => m.Name);
 
                     return NameGenerator.GenerateUniqueName(
@@ -521,12 +521,10 @@ namespace Microsoft.CodeAnalysis.ImplementInterface
                 if (member is not IMethodSymbol method)
                     return false;
 
-                var allowDelegateAndEnumConstraints = this.Service.AllowDelegateAndEnumConstraints(
-                    options
-                );
-                return method.TypeParameters.Any(t =>
-                    IsUnexpressibleTypeParameter(t, allowDelegateAndEnumConstraints)
-                );
+                var allowDelegateAndEnumConstraints = this.Service
+                    .AllowDelegateAndEnumConstraints(options);
+                return method.TypeParameters
+                    .Any(t => IsUnexpressibleTypeParameter(t, allowDelegateAndEnumConstraints));
             }
 
             private static bool IsUnexpressibleTypeParameter(
@@ -536,16 +534,20 @@ namespace Microsoft.CodeAnalysis.ImplementInterface
             {
                 var condition1 =
                     typeParameter.ConstraintTypes.Count(t => t.TypeKind == TypeKind.Class) >= 2;
-                var condition2 = typeParameter.ConstraintTypes.Any(
-                    static (ts, allowDelegateAndEnumConstraints) =>
-                        ts.IsUnexpressibleTypeParameterConstraint(allowDelegateAndEnumConstraints),
-                    allowDelegateAndEnumConstraints
-                );
+                var condition2 = typeParameter.ConstraintTypes
+                    .Any(
+                        static (ts, allowDelegateAndEnumConstraints) =>
+                            ts.IsUnexpressibleTypeParameterConstraint(
+                                allowDelegateAndEnumConstraints
+                            ),
+                        allowDelegateAndEnumConstraints
+                    );
                 var condition3 =
                     typeParameter.HasReferenceTypeConstraint
-                    && typeParameter.ConstraintTypes.Any(static ts =>
-                        ts.IsReferenceType && ts.SpecialType != SpecialType.System_Object
-                    );
+                    && typeParameter.ConstraintTypes
+                        .Any(static ts =>
+                            ts.IsReferenceType && ts.SpecialType != SpecialType.System_Object
+                        );
 
                 return condition1 || condition2 || condition3;
             }
@@ -719,10 +721,11 @@ namespace Microsoft.CodeAnalysis.ImplementInterface
                     return method1.MethodKind == MethodKind.Ordinary
                         && method2.MethodKind == MethodKind.Ordinary
                         && method1.TypeParameters.Length == method2.TypeParameters.Length
-                        && method1.Parameters.SequenceEqual(
-                            method2.Parameters,
-                            SymbolEquivalenceComparer.Instance.ParameterEquivalenceComparer
-                        );
+                        && method1.Parameters
+                            .SequenceEqual(
+                                method2.Parameters,
+                                SymbolEquivalenceComparer.Instance.ParameterEquivalenceComparer
+                            );
                 }
 
                 // Any non method members with the same name simple name conflict.
@@ -784,11 +787,12 @@ namespace Microsoft.CodeAnalysis.ImplementInterface
                 )
                     return false;
 
-                return SignatureComparer.Instance.HaveSameSignatureAndConstraintsAndReturnTypeAndAccessors(
-                    member1,
-                    member2,
-                    IsCaseSensitive
-                );
+                return SignatureComparer.Instance
+                    .HaveSameSignatureAndConstraintsAndReturnTypeAndAccessors(
+                        member1,
+                        member2,
+                        IsCaseSensitive
+                    );
             }
         }
     }

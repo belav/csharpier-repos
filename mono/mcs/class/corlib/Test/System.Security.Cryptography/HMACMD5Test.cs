@@ -369,9 +369,8 @@ namespace MonoTests.System.Security.Cryptography
             byte[] key = new byte[80];
             for (int i = 0; i < key.Length; i++)
                 key[i] = 0xaa;
-            byte[] data = Encoding.Default.GetBytes(
-                "Test Using Larger Than Block-Size Key - Hash Key First"
-            );
+            byte[] data = Encoding.Default
+                .GetBytes("Test Using Larger Than Block-Size Key - Hash Key First");
             byte[] digest =
             {
                 0x6b,
@@ -400,9 +399,10 @@ namespace MonoTests.System.Security.Cryptography
             byte[] key = new byte[80];
             for (int i = 0; i < key.Length; i++)
                 key[i] = 0xaa;
-            byte[] data = Encoding.Default.GetBytes(
-                "Test Using Larger Than Block-Size Key and Larger Than One Block-Size Data"
-            );
+            byte[] data = Encoding.Default
+                .GetBytes(
+                    "Test Using Larger Than Block-Size Key and Larger Than One Block-Size Data"
+                );
             byte[] digest =
             {
                 0x6f,

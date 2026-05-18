@@ -397,11 +397,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 if (typeSyntax.IsVar)
                 {
                     bool isVar;
-                    TypeWithAnnotations declType = this.TypeSyntaxBinder.BindTypeOrVarKeyword(
-                        typeSyntax,
-                        BindingDiagnosticBag.Discarded,
-                        out isVar
-                    );
+                    TypeWithAnnotations declType = this.TypeSyntaxBinder
+                        .BindTypeOrVarKeyword(
+                            typeSyntax,
+                            BindingDiagnosticBag.Discarded,
+                            out isVar
+                        );
                     return isVar;
                 }
 
@@ -481,10 +482,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             Debug.Assert(
                 (object)originalType?.DefaultType == null
                     || originalType.Value.DefaultType.IsErrorType() && newType.Type.IsErrorType()
-                    || originalType.Value.TypeSymbolEquals(
-                        newType,
-                        TypeCompareKind.ConsiderEverything
-                    )
+                    || originalType.Value
+                        .TypeSymbolEquals(newType, TypeCompareKind.ConsiderEverything)
             );
 
             if ((object)_type == null)
@@ -654,8 +653,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 BindingDiagnosticBag diagnostics
             )
             {
-                BoundExpression initializerOpt =
-                    this._initializerBinder.BindInferredVariableInitializer(
+                BoundExpression initializerOpt = this._initializerBinder
+                    .BindInferredVariableInitializer(
                         diagnostics,
                         RefKind,
                         _initializer,
@@ -847,9 +846,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
                     case SyntaxKind.ForEachVariableStatement:
                         Debug.Assert(
-                            this.ScopeBinder.GetBinder(
-                                (ForEachVariableStatementSyntax)_deconstruction
-                            ) == _nodeBinder
+                            this.ScopeBinder
+                                .GetBinder((ForEachVariableStatementSyntax)_deconstruction)
+                                == _nodeBinder
                         );
                         _nodeBinder.BindForEachDeconstruction(diagnostics, _nodeBinder);
                         break;

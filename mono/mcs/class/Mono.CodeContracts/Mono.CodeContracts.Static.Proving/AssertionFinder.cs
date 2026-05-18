@@ -59,8 +59,7 @@ namespace Mono.CodeContracts.Static.Proving
                 List<string> proofResults
             )
             {
-                APC entryAfterRequires = driver
-                    .ContextProvider
+                APC entryAfterRequires = driver.ContextProvider
                     .MethodContext
                     .CFG
                     .EntryAfterRequires;

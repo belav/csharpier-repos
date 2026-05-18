@@ -250,12 +250,12 @@ public abstract class NorthwindCompiledQueryTestBase<TFixture> : IClassFixture<T
     {
         var query = EF.CompileQuery(
             (NorthwindContext context) =>
-                context
-                    .Customers.OrderBy(c => c.CustomerID)
+                context.Customers
+                    .OrderBy(c => c.CustomerID)
                     .Select(c => c.CustomerID)
                     .FirstOrDefault()
-                + context
-                    .Orders.OrderBy(o => o.CustomerID)
+                + context.Orders
+                    .OrderBy(o => o.CustomerID)
                     .Select(o => o.CustomerID)
                     .FirstOrDefault()
         );

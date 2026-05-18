@@ -173,9 +173,8 @@ namespace Mono.Linker.Tests.Extensions
                 NPath commonParent = null;
                 foreach (var parent in RecursiveParents)
                 {
-                    commonParent = path.RecursiveParents.FirstOrDefault(otherParent =>
-                        otherParent == parent
-                    );
+                    commonParent = path.RecursiveParents
+                        .FirstOrDefault(otherParent => otherParent == parent);
 
                     if (commonParent != null)
                         break;

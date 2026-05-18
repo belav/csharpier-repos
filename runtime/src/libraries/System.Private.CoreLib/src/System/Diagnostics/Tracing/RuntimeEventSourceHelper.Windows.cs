@@ -17,18 +17,16 @@ namespace System.Diagnostics.Tracing
             double cpuUsage = 0.0;
 
             if (
-                Interop.Kernel32.GetProcessTimes(
-                    Interop.Kernel32.GetCurrentProcess(),
-                    out _,
-                    out _,
-                    out long procKernelTime,
-                    out long procUserTime
-                )
-                && Interop.Kernel32.GetSystemTimes(
-                    out _,
-                    out long systemKernelTime,
-                    out long systemUserTime
-                )
+                Interop.Kernel32
+                    .GetProcessTimes(
+                        Interop.Kernel32.GetCurrentProcess(),
+                        out _,
+                        out _,
+                        out long procKernelTime,
+                        out long procUserTime
+                    )
+                && Interop.Kernel32
+                    .GetSystemTimes(out _, out long systemKernelTime, out long systemUserTime)
             )
             {
                 long totalProcTime =

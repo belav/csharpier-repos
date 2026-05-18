@@ -59,9 +59,8 @@ namespace ILCompiler
                 InstructionSet instructionSet = _instructionSetMap[intrinsicId];
 
                 bool isSupported = _isaSupport.IsInstructionSetSupported(instructionSet);
-                bool isOptimisticallySupported = _isaSupport.OptimisticFlags.HasInstructionSet(
-                    instructionSet
-                );
+                bool isOptimisticallySupported = _isaSupport.OptimisticFlags
+                    .HasInstructionSet(instructionSet);
 
                 // If this is an instruction set that is optimistically supported, but is not one of the
                 // intrinsics that are known to be always available, emit IL that checks the support level

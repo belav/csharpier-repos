@@ -115,12 +115,13 @@ namespace System.ComponentModel.Design.Serialization
                 CodeTypeDeclaration clas = new CodeTypeDeclaration(_className);
                 clas.BaseTypes.Add(_classType);
 
-                clas.StartDirectives.Add(
-                    new CodeRegionDirective(
-                        CodeRegionMode.Start,
-                        "Windows Form Designer generated code"
-                    )
-                );
+                clas.StartDirectives
+                    .Add(
+                        new CodeRegionDirective(
+                            CodeRegionMode.Start,
+                            "Windows Form Designer generated code"
+                        )
+                    );
 
                 CodeMemberMethod initialize = new CodeMemberMethod();
                 initialize.Name = "InitializeComponent";
@@ -212,9 +213,8 @@ namespace System.ComponentModel.Design.Serialization
                 base.GetSerializer(manager, component) as CodeDomSerializer; // ComponentCodeDomSerializer
             if (serializer != null)
             {
-                this._codeMap.AddField(
-                    new CodeMemberField(component.GetType(), manager.GetName(component))
-                );
+                this._codeMap
+                    .AddField(new CodeMemberField(component.GetType(), manager.GetName(component)));
                 // statements can be a CodeExpression if the full serialization has been completed prior
                 // to this serialization call (e.g when it is requested during the serialization of another
                 // component.

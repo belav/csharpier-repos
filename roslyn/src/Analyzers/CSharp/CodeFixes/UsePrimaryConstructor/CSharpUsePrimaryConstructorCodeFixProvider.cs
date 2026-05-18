@@ -160,9 +160,8 @@ internal partial class CSharpUsePrimaryConstructorCodeFixProvider() : CodeFixPro
         );
 
         // If we're removing members, first go through and update all references to that member to use the parameter name.
-        var typeDeclarationNodes = namedType.DeclaringSyntaxReferences.Select(r =>
-            (TypeDeclarationSyntax)r.GetSyntax(cancellationToken)
-        );
+        var typeDeclarationNodes = namedType.DeclaringSyntaxReferences
+            .Select(r => (TypeDeclarationSyntax)r.GetSyntax(cancellationToken));
         var namedTypeDocuments = typeDeclarationNodes
             .Select(r => solution.GetRequiredDocument(r.SyntaxTree))
             .ToImmutableHashSet();
@@ -200,13 +199,17 @@ internal partial class CSharpUsePrimaryConstructorCodeFixProvider() : CodeFixPro
                         ? typeParameterList.GetTrailingTrivia()
                         : currentTypeDeclaration.Identifier.GetAllTrailingTrivia();
 
-                var finalAttributeLists = currentTypeDeclaration.AttributeLists.AddRange(
-                    constructorDeclaration.AttributeLists.Select(a =>
-                        a.WithTarget(AttributeTargetSpecifier(Token(SyntaxKind.MethodKeyword)))
-                            .WithoutTrivia()
-                            .WithAdditionalAnnotations(Formatter.Annotation)
-                    )
-                );
+                var finalAttributeLists = currentTypeDeclaration.AttributeLists
+                    .AddRange(
+                        constructorDeclaration.AttributeLists
+                            .Select(a =>
+                                a.WithTarget(
+                                        AttributeTargetSpecifier(Token(SyntaxKind.MethodKeyword))
+                                    )
+                                    .WithoutTrivia()
+                                    .WithAdditionalAnnotations(Formatter.Annotation)
+                            )
+                    );
 
                 var finalTrivia = CreateFinalTypeDeclarationLeadingTrivia(
                     currentTypeDeclaration,
@@ -265,9 +268,8 @@ internal partial class CSharpUsePrimaryConstructorCodeFixProvider() : CodeFixPro
                 parameterList.Parameters,
                 (_, current) =>
                 {
-                    var inKeyword = current.Modifiers.FirstOrDefault(t =>
-                        t.Kind() == SyntaxKind.InKeyword
-                    );
+                    var inKeyword = current.Modifiers
+                        .FirstOrDefault(t => t.Kind() == SyntaxKind.InKeyword);
                     if (inKeyword == default)
                         return current;
 
@@ -460,9 +462,12 @@ internal partial class CSharpUsePrimaryConstructorCodeFixProvider() : CodeFixPro
                         else
                         {
                             return currentTypeDeclaration.WithBaseList(
-                                currentTypeDeclaration.BaseList.WithTypes(
-                                    currentTypeDeclaration.BaseList.Types.Insert(0, baseTypeSyntax)
-                                )
+                                currentTypeDeclaration.BaseList
+                                    .WithTypes(
+                                        currentTypeDeclaration.BaseList
+                                            .Types
+                                            .Insert(0, baseTypeSyntax)
+                                    )
                             );
                         }
                     }
@@ -647,11 +652,12 @@ internal partial class CSharpUsePrimaryConstructorCodeFixProvider() : CodeFixPro
                         continue;
 
                     if (
-                        location.Location.FindNode(
-                            findInsideTrivia: true,
-                            getInnermostNodeForTie: true,
-                            cancellationToken
-                        )
+                        location.Location
+                            .FindNode(
+                                findInsideTrivia: true,
+                                getInnermostNodeForTie: true,
+                                cancellationToken
+                            )
                         is not IdentifierNameSyntax identifier
                     )
                         continue;

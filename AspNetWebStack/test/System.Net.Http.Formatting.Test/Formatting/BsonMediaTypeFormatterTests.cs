@@ -61,17 +61,18 @@ namespace System.Net.Http.Formatting
         {
             get
             {
-                return CommonUnitTestDataSets.ValueAndRefTypeTestDataCollection.Except(
-                    new TestData[]
-                    {
-                        CommonUnitTestDataSets.Uints,
-                        CommonUnitTestDataSets.Ulongs,
-                        CommonUnitTestDataSets.DateTimeOffsets,
-                        CommonUnitTestDataSets.DateTimes,
-                        CommonUnitTestDataSets.Decimals,
-                        CommonUnitTestDataSets.ISerializableTypes,
-                    }
-                );
+                return CommonUnitTestDataSets.ValueAndRefTypeTestDataCollection
+                    .Except(
+                        new TestData[]
+                        {
+                            CommonUnitTestDataSets.Uints,
+                            CommonUnitTestDataSets.Ulongs,
+                            CommonUnitTestDataSets.DateTimeOffsets,
+                            CommonUnitTestDataSets.DateTimes,
+                            CommonUnitTestDataSets.Decimals,
+                            CommonUnitTestDataSets.ISerializableTypes,
+                        }
+                    );
             }
         }
 
@@ -189,8 +190,7 @@ namespace System.Net.Http.Formatting
             // Replace serializable settings and switch one property's value
             JsonSerializerSettings oldSettings = formatter.SerializerSettings;
             formatter.SerializerSettings = formatter.CreateDefaultSerializerSettings();
-            formatter.SerializerSettings.CheckAdditionalContent = !formatter
-                .SerializerSettings
+            formatter.SerializerSettings.CheckAdditionalContent = !formatter.SerializerSettings
                 .CheckAdditionalContent;
 
             // Act
@@ -214,16 +214,17 @@ namespace System.Net.Http.Formatting
         public void MaxDepth_RoundTrips()
         {
             // Arrange & Act & Assert
-            Assert.Reflection.IntegerProperty(
-                new BsonMediaTypeFormatter(),
-                c => c.MaxDepth,
-                expectedDefaultValue: 256,
-                minLegalValue: 1,
-                illegalLowerValue: 0,
-                maxLegalValue: null,
-                illegalUpperValue: null,
-                roundTripTestValue: 256
-            );
+            Assert.Reflection
+                .IntegerProperty(
+                    new BsonMediaTypeFormatter(),
+                    c => c.MaxDepth,
+                    expectedDefaultValue: 256,
+                    minLegalValue: 1,
+                    illegalLowerValue: 0,
+                    maxLegalValue: null,
+                    illegalUpperValue: null,
+                    roundTripTestValue: 256
+                );
         }
 
         [Theory]
@@ -440,15 +441,16 @@ namespace System.Net.Http.Formatting
             HttpContent content = new StringContent(String.Empty);
 
             // Act & Assert
-            await Assert.Task.SucceedsAsync(
-                formatter.WriteToStreamAsync(
-                    type,
-                    null,
-                    memoryStream,
-                    content,
-                    transportContext: null
-                )
-            );
+            await Assert.Task
+                .SucceedsAsync(
+                    formatter.WriteToStreamAsync(
+                        type,
+                        null,
+                        memoryStream,
+                        content,
+                        transportContext: null
+                    )
+                );
             memoryStream.Position = 0;
             string serializedString = new StreamReader(memoryStream).ReadToEnd();
             Assert.Empty(serializedString);

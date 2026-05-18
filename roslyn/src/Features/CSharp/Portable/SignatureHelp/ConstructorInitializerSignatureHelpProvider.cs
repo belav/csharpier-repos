@@ -134,10 +134,8 @@ namespace Microsoft.CodeAnalysis.CSharp.SignatureHelp
                 cancellationToken
             );
 
-            var constructors = type
-                .InstanceConstructors.WhereAsArray(c =>
-                    c.IsAccessibleWithin(within) && !c.Equals(currentConstructor)
-                )
+            var constructors = type.InstanceConstructors
+                .WhereAsArray(c => c.IsAccessibleWithin(within) && !c.Equals(currentConstructor))
                 .WhereAsArray(c =>
                     c.IsEditorBrowsable(options.HideAdvancedMembers, semanticModel.Compilation)
                 )
@@ -252,8 +250,8 @@ namespace Microsoft.CodeAnalysis.CSharp.SignatureHelp
                 GetPreambleParts(constructor, semanticModel, position),
                 GetSeparatorParts(),
                 GetPostambleParts(),
-                constructor
-                    .Parameters.Select(p =>
+                constructor.Parameters
+                    .Select(p =>
                         Convert(p, semanticModel, position, documentationCommentFormattingService)
                     )
                     .ToList()

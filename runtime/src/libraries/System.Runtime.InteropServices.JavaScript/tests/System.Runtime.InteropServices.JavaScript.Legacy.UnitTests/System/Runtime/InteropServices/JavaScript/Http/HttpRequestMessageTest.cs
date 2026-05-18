@@ -210,10 +210,8 @@ namespace System.Runtime.InteropServices.JavaScript.Http.Tests
             Assert.NotNull(rm.Headers);
             Assert.NotNull(rm.Options);
 
-            rm.Options.TryGetValue(
-                FetchOptions,
-                out IDictionary<string, object?>? fetchOptionsValue
-            );
+            rm.Options
+                .TryGetValue(FetchOptions, out IDictionary<string, object?>? fetchOptionsValue);
             Assert.NotNull(fetchOptionsValue);
             if (fetchOptionsValue != null)
             {
@@ -249,10 +247,8 @@ namespace System.Runtime.InteropServices.JavaScript.Http.Tests
             Assert.NotNull(rm.Headers);
             Assert.NotNull(rm.Options);
 
-            rm.Options.TryGetValue(
-                FetchOptions,
-                out IDictionary<string, object?>? fetchOptionsValue
-            );
+            rm.Options
+                .TryGetValue(FetchOptions, out IDictionary<string, object?>? fetchOptionsValue);
             Assert.Null(fetchOptionsValue);
         }
 

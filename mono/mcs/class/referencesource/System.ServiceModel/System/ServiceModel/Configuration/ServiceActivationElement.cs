@@ -34,11 +34,12 @@ namespace System.ServiceModel.Configuration
                     || relativeAddress.Length < 3
                 )
                 {
-                    throw FxTrace.Exception.AsError(
-                        new ArgumentException(
-                            SR.GetString(SR.Hosting_RelativeAddressFormatError, relativeAddress)
-                        )
-                    );
+                    throw FxTrace.Exception
+                        .AsError(
+                            new ArgumentException(
+                                SR.GetString(SR.Hosting_RelativeAddressFormatError, relativeAddress)
+                            )
+                        );
                 }
 
                 //user gives an absolute address, throw, as we do not support absolute address
@@ -53,11 +54,12 @@ namespace System.ServiceModel.Configuration
                     )
                 )
                 {
-                    throw FxTrace.Exception.AsError(
-                        new ArgumentException(
-                            SR.GetString(SR.Hosting_NoAbsoluteRelativeAddress, relativeAddress)
-                        )
-                    );
+                    throw FxTrace.Exception
+                        .AsError(
+                            new ArgumentException(
+                                SR.GetString(SR.Hosting_NoAbsoluteRelativeAddress, relativeAddress)
+                            )
+                        );
                 }
             }
         }
@@ -78,9 +80,8 @@ namespace System.ServiceModel.Configuration
         {
             if (relativeAddress == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                    ConfigurationStrings.RelativeAddress
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperArgumentNull(ConfigurationStrings.RelativeAddress);
             }
             this.RelativeAddress = relativeAddress;
         }

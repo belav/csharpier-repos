@@ -74,18 +74,19 @@ namespace MonoTests.System.Runtime.ExceptionServices
         public void Throw()
         {
             Exception orig = null;
-            var t = Task.Factory.StartNew(() =>
-            {
-                try
+            var t = Task.Factory
+                .StartNew(() =>
                 {
-                    throw new ApplicationException("aaa");
-                }
-                catch (Exception e)
-                {
-                    orig = e;
-                    return ExceptionDispatchInfo.Capture(e);
-                }
-            });
+                    try
+                    {
+                        throw new ApplicationException("aaa");
+                    }
+                    catch (Exception e)
+                    {
+                        orig = e;
+                        return ExceptionDispatchInfo.Capture(e);
+                    }
+                });
 
             var ed = t.Result;
             var orig_stack = orig.StackTrace;

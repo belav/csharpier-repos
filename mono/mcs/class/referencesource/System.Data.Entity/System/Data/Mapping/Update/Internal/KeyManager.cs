@@ -207,15 +207,12 @@ namespace System.Data.Mapping.Update.Internal
                     {
                         // subsequent results are validated for consistency with the first
                         if (
-                            !ByValueEqualityComparer.Default.Equals(
-                                value,
-                                ownerResult.GetSimpleValue()
-                            )
+                            !ByValueEqualityComparer.Default
+                                .Equals(value, ownerResult.GetSimpleValue())
                         )
                         {
                             throw EntityUtil.Constraint(
-                                System
-                                    .Data
+                                System.Data
                                     .Entity
                                     .Strings
                                     .Update_ReferentialConstraintIntegrityViolation

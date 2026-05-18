@@ -72,10 +72,10 @@ namespace Microsoft.CodeAnalysis.PatternMatching
             public readonly struct TestAccessor(SimplePatternMatcher simplePatternMatcher)
             {
                 public readonly bool LastCacheResultIs(bool areSimilar, string candidateText) =>
-                    simplePatternMatcher._fullPatternSegment.TotalTextChunk.SimilarityChecker.LastCacheResultIs(
-                        areSimilar,
-                        candidateText
-                    );
+                    simplePatternMatcher._fullPatternSegment
+                        .TotalTextChunk
+                        .SimilarityChecker
+                        .LastCacheResultIs(areSimilar, candidateText);
             }
         }
     }

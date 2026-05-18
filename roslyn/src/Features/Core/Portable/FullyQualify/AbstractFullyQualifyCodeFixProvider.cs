@@ -22,8 +22,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes.FullyQualify
         {
             var cancellationToken = context.CancellationToken;
             var document = context.Document;
-            var hideAdvancedMembers = context
-                .Options.GetOptions(document.Project.Services)
+            var hideAdvancedMembers = context.Options
+                .GetOptions(document.Project.Services)
                 .HideAdvancedMembers;
 
             var service = document.GetRequiredLanguageService<IFullyQualifyService>();
@@ -37,20 +37,21 @@ namespace Microsoft.CodeAnalysis.CodeFixes.FullyQualify
             if (fixData.IndividualFixData.Length == 0)
                 return;
 
-            var codeActions = fixData.IndividualFixData.SelectAsArray(d =>
-                CodeAction.Create(
-                    d.Title,
-                    async cancellationToken =>
-                    {
-                        var sourceText = await document
-                            .GetValueTextAsync(cancellationToken)
-                            .ConfigureAwait(false);
-                        var newText = sourceText.WithChanges(d.TextChanges);
-                        return document.WithText(newText);
-                    },
-                    d.Title
-                )
-            );
+            var codeActions = fixData.IndividualFixData
+                .SelectAsArray(d =>
+                    CodeAction.Create(
+                        d.Title,
+                        async cancellationToken =>
+                        {
+                            var sourceText = await document
+                                .GetValueTextAsync(cancellationToken)
+                                .ConfigureAwait(false);
+                            var newText = sourceText.WithChanges(d.TextChanges);
+                            return document.WithText(newText);
+                        },
+                        d.Title
+                    )
+                );
 
             if (codeActions.Length >= 2)
             {

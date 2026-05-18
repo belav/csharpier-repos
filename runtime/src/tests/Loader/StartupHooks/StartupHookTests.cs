@@ -11,15 +11,14 @@ public unsafe class StartupHookTests
 {
     private const string StartupHookKey = "STARTUP_HOOKS";
 
-    private static Type s_startupHookProvider = typeof(object).Assembly.GetType(
-        "System.StartupHookProvider",
-        throwOnError: true
-    );
+    private static Type s_startupHookProvider = typeof(object).Assembly
+        .GetType("System.StartupHookProvider", throwOnError: true);
 
     private static delegate* <string, void> ProcessStartupHooks = (delegate* <string, void>)
         s_startupHookProvider
             .GetMethod("ProcessStartupHooks", BindingFlags.NonPublic | BindingFlags.Static)
-            .MethodHandle.GetFunctionPointer();
+            .MethodHandle
+            .GetFunctionPointer();
 
     private static bool IsUnsupportedPlatform =
         // these platforms need special setup for startup hooks
@@ -35,7 +34,9 @@ public unsafe class StartupHookTests
             (delegate* <bool>)
                 s_startupHookProvider
                     .GetProperty(nameof(IsSupported), BindingFlags.NonPublic | BindingFlags.Static)
-                    .GetMethod.MethodHandle.GetFunctionPointer()
+                    .GetMethod
+                    .MethodHandle
+                    .GetFunctionPointer()
         )();
 
     [Fact]

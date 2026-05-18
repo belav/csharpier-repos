@@ -1362,7 +1362,8 @@ public partial class ModelValidatorTest : ModelValidatorTestBase
                 ConfigurationSource.Convention,
                 setTargetAsPrincipal: true
             )
-            .Metadata.IsOwnership = true;
+            .Metadata
+            .IsOwnership = true;
 
         ownedTypeBuilder.Ignore(nameof(ReferencedEntity.Id), ConfigurationSource.Explicit);
         ownedTypeBuilder.Ignore(
@@ -1850,8 +1851,8 @@ public partial class ModelValidatorTest : ModelValidatorTestBase
 
         Assert.Equal(
             ValueGenerated.OnAdd,
-            modelBuilder
-                .Model.FindEntityType(typeof(NonSignedIntegerKeyEntity))
+            modelBuilder.Model
+                .FindEntityType(typeof(NonSignedIntegerKeyEntity))
                 .FindProperty(nameof(NonSignedIntegerKeyEntity.Id))
                 .ValueGenerated
         );

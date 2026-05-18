@@ -1449,18 +1449,12 @@ public class EntityTypeBuilder : IInfrastructure<IConventionEntityTypeBuilder>
         (
             navigationName == null
                 ? null
-                : Builder.ModelBuilder.Metadata.FindEntityType(
-                    relatedTypeName,
-                    navigationName,
-                    Builder.Metadata
-                )
+                : Builder.ModelBuilder
+                    .Metadata
+                    .FindEntityType(relatedTypeName, navigationName, Builder.Metadata)
         )
-        ?? Builder
-            .ModelBuilder.Entity(
-                relatedTypeName,
-                ConfigurationSource.Explicit,
-                shouldBeOwned: false
-            )!
+        ?? Builder.ModelBuilder
+            .Entity(relatedTypeName, ConfigurationSource.Explicit, shouldBeOwned: false)!
             .Metadata;
 
     /// <summary>
@@ -1477,14 +1471,12 @@ public class EntityTypeBuilder : IInfrastructure<IConventionEntityTypeBuilder>
         (
             navigationName == null || !Builder.ModelBuilder.Metadata.IsShared(relatedType)
                 ? null
-                : Builder.ModelBuilder.Metadata.FindEntityType(
-                    relatedType,
-                    navigationName,
-                    Builder.Metadata
-                )
+                : Builder.ModelBuilder
+                    .Metadata
+                    .FindEntityType(relatedType, navigationName, Builder.Metadata)
         )
-        ?? Builder
-            .ModelBuilder.Entity(relatedType, ConfigurationSource.Explicit, shouldBeOwned: false)!
+        ?? Builder.ModelBuilder
+            .Entity(relatedType, ConfigurationSource.Explicit, shouldBeOwned: false)!
             .Metadata;
 
     /// <summary>
@@ -1607,8 +1599,8 @@ public class EntityTypeBuilder : IInfrastructure<IConventionEntityTypeBuilder>
     /// <returns>A builder that can be used to configure the trigger.</returns>
     public static TriggerBuilder HasTrigger(IMutableEntityType entityType, string modelName) =>
         new(
-            ((EntityType)entityType)
-                .Builder.HasTrigger(modelName, ConfigurationSource.Explicit)!
+            ((EntityType)entityType).Builder
+                .HasTrigger(modelName, ConfigurationSource.Explicit)!
                 .Metadata
         );
 

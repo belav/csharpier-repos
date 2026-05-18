@@ -31,8 +31,9 @@ public class CommandBatchPreparer : ICommandBatchPreparer
     public CommandBatchPreparer(CommandBatchPreparerDependencies dependencies)
     {
         _minBatchSize =
-            dependencies
-                .Options.Extensions.OfType<RelationalOptionsExtension>()
+            dependencies.Options
+                .Extensions
+                .OfType<RelationalOptionsExtension>()
                 .FirstOrDefault()
                 ?.MinBatchSize
             ?? 1;
@@ -148,10 +149,11 @@ public class CommandBatchPreparer : ICommandBatchPreparer
                 {
                     if (batch.ModificationCommands.Count > 1)
                     {
-                        Dependencies.UpdateLogger.BatchReadyForExecution(
-                            batch.ModificationCommands.SelectMany(c => c.Entries),
-                            batch.ModificationCommands.Count
-                        );
+                        Dependencies.UpdateLogger
+                            .BatchReadyForExecution(
+                                batch.ModificationCommands.SelectMany(c => c.Entries),
+                                batch.ModificationCommands.Count
+                            );
                     }
 
                     batch.Complete(moreBatchesExpected: true);
@@ -160,11 +162,12 @@ public class CommandBatchPreparer : ICommandBatchPreparer
                 }
                 else
                 {
-                    Dependencies.UpdateLogger.BatchSmallerThanMinBatchSize(
-                        batch.ModificationCommands.SelectMany(c => c.Entries),
-                        batch.ModificationCommands.Count,
-                        _minBatchSize
-                    );
+                    Dependencies.UpdateLogger
+                        .BatchSmallerThanMinBatchSize(
+                            batch.ModificationCommands.SelectMany(c => c.Entries),
+                            batch.ModificationCommands.Count,
+                            _minBatchSize
+                        );
 
                     foreach (var command in batch.ModificationCommands)
                     {
@@ -186,10 +189,11 @@ public class CommandBatchPreparer : ICommandBatchPreparer
         {
             if (batch.ModificationCommands.Count > 1)
             {
-                Dependencies.UpdateLogger.BatchReadyForExecution(
-                    batch.ModificationCommands.SelectMany(c => c.Entries),
-                    batch.ModificationCommands.Count
-                );
+                Dependencies.UpdateLogger
+                    .BatchReadyForExecution(
+                        batch.ModificationCommands.SelectMany(c => c.Entries),
+                        batch.ModificationCommands.Count
+                    );
             }
 
             batch.Complete(moreBatchesExpected: moreCommandSets);
@@ -198,11 +202,12 @@ public class CommandBatchPreparer : ICommandBatchPreparer
         }
         else
         {
-            Dependencies.UpdateLogger.BatchSmallerThanMinBatchSize(
-                batch.ModificationCommands.SelectMany(c => c.Entries),
-                batch.ModificationCommands.Count,
-                _minBatchSize
-            );
+            Dependencies.UpdateLogger
+                .BatchSmallerThanMinBatchSize(
+                    batch.ModificationCommands.SelectMany(c => c.Entries),
+                    batch.ModificationCommands.Count,
+                    _minBatchSize
+                );
 
             for (
                 var commandIndex = 0;
@@ -373,32 +378,34 @@ public class CommandBatchPreparer : ICommandBatchPreparer
                 command = sharedCommandsMap.GetOrAddValue(
                     entry,
                     (t, comparer) =>
-                        Dependencies.ModificationCommandFactory.CreateModificationCommand(
-                            new ModificationCommandParameters(
-                                t,
-                                _sensitiveLoggingEnabled,
-                                _detailedErrorsEnabled,
-                                comparer,
-                                generateParameterName,
-                                Dependencies.UpdateLogger
+                        Dependencies.ModificationCommandFactory
+                            .CreateModificationCommand(
+                                new ModificationCommandParameters(
+                                    t,
+                                    _sensitiveLoggingEnabled,
+                                    _detailedErrorsEnabled,
+                                    comparer,
+                                    generateParameterName,
+                                    Dependencies.UpdateLogger
+                                )
                             )
-                        )
                 );
                 isMainEntry = sharedCommandsMap.IsMainEntry(entry);
             }
             else
             {
-                command = Dependencies.ModificationCommandFactory.CreateModificationCommand(
-                    new ModificationCommandParameters(
-                        table,
-                        sprocMapping?.StoreStoredProcedure,
-                        _sensitiveLoggingEnabled,
-                        _detailedErrorsEnabled,
-                        comparer: null,
-                        generateParameterName,
-                        Dependencies.UpdateLogger
-                    )
-                );
+                command = Dependencies.ModificationCommandFactory
+                    .CreateModificationCommand(
+                        new ModificationCommandParameters(
+                            table,
+                            sprocMapping?.StoreStoredProcedure,
+                            _sensitiveLoggingEnabled,
+                            _detailedErrorsEnabled,
+                            comparer: null,
+                            generateParameterName,
+                            Dependencies.UpdateLogger
+                        )
+                    );
             }
 
             command.AddEntry(entry, isMainEntry);
@@ -570,9 +577,8 @@ public class CommandBatchPreparer : ICommandBatchPreparer
         StringBuilder builder
     )
     {
-        var reverseDependency = !source.Entries.Any(e =>
-            foreignKey.DeclaringEntityType.IsAssignableFrom(e.EntityType)
-        );
+        var reverseDependency = !source.Entries
+            .Any(e => foreignKey.DeclaringEntityType.IsAssignableFrom(e.EntityType));
         if (reverseDependency)
         {
             builder.AppendLine(" <-");
@@ -585,9 +591,8 @@ public class CommandBatchPreparer : ICommandBatchPreparer
         builder.Append("ForeignKey ");
 
         var dependentCommand = reverseDependency ? target : source;
-        var dependentEntry = dependentCommand.Entries.First(e =>
-            foreignKey.DeclaringEntityType.IsAssignableFrom(e.EntityType)
-        );
+        var dependentEntry = dependentCommand.Entries
+            .First(e => foreignKey.DeclaringEntityType.IsAssignableFrom(e.EntityType));
         builder.Append(dependentEntry.BuildCurrentValuesString(foreignKey.Properties)).Append(' ');
 
         if (!reverseDependency)
@@ -652,9 +657,8 @@ public class CommandBatchPreparer : ICommandBatchPreparer
 
         builder.Append("Key ");
         var dependentCommand = reverseDependency ? target : source;
-        var dependentEntry = dependentCommand.Entries.First(e =>
-            key.DeclaringEntityType.IsAssignableFrom(e.EntityType)
-        );
+        var dependentEntry = dependentCommand.Entries
+            .First(e => key.DeclaringEntityType.IsAssignableFrom(e.EntityType));
         builder.Append(
             reverseDependency
                 ? dependentEntry.BuildCurrentValuesString(key.Properties)
@@ -1103,9 +1107,9 @@ public class CommandBatchPreparer : ICommandBatchPreparer
         if (command.StoreStoredProcedure != null)
         {
             if (
-                command.StoreStoredProcedure.StoredProcedures.Any(sp =>
-                    foreignKey.IsRowInternal(sp.GetStoreIdentifier())
-                )
+                command.StoreStoredProcedure
+                    .StoredProcedures
+                    .Any(sp => foreignKey.IsRowInternal(sp.GetStoreIdentifier()))
             )
             {
                 return false;

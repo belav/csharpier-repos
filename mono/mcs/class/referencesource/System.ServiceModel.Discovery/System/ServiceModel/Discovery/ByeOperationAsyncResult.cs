@@ -36,12 +36,13 @@ namespace System.ServiceModel.Discovery
                 return;
             }
 
-            IAsyncResult innerAsyncResult = this.announcementServiceImpl.OnBeginOfflineAnnouncement(
-                this.GetMessageSequence(message),
-                this.GetEndpointDiscoveryMetadata(message),
-                this.PrepareAsyncCompletion(onOnOfflineAnnoucementCompletedCallback),
-                this
-            );
+            IAsyncResult innerAsyncResult = this.announcementServiceImpl
+                .OnBeginOfflineAnnouncement(
+                    this.GetMessageSequence(message),
+                    this.GetEndpointDiscoveryMetadata(message),
+                    this.PrepareAsyncCompletion(onOnOfflineAnnoucementCompletedCallback),
+                    this
+                );
 
             if (
                 innerAsyncResult.CompletedSynchronously

@@ -354,11 +354,12 @@ namespace System.ServiceModel
             }
             else if (mode == BasicHttpSecurityMode.Message)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new NotSupportedException(
-                        SR.GetString(SR.UnsupportedSecuritySetting, "Mode", mode)
-                    )
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        new NotSupportedException(
+                            SR.GetString(SR.UnsupportedSecuritySetting, "Mode", mode)
+                        )
+                    );
             }
 
             // Message.ClientCredentialType = Certificate is not supported.
@@ -370,15 +371,16 @@ namespace System.ServiceModel
                     && (message.ClientCredentialType == BasicHttpMessageCredentialType.Certificate)
                 )
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new NotSupportedException(
-                            SR.GetString(
-                                SR.UnsupportedSecuritySetting,
-                                "Message.ClientCredentialType",
-                                message.ClientCredentialType
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperError(
+                            new NotSupportedException(
+                                SR.GetString(
+                                    SR.UnsupportedSecuritySetting,
+                                    "Message.ClientCredentialType",
+                                    message.ClientCredentialType
+                                )
                             )
-                        )
-                    );
+                        );
                 }
             }
 
@@ -400,15 +402,16 @@ namespace System.ServiceModel
                 )
             )
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new NotSupportedException(
-                        SR.GetString(
-                            SR.UnsupportedSecuritySetting,
-                            "Transport.ClientCredentialType",
-                            transport.ClientCredentialType
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        new NotSupportedException(
+                            SR.GetString(
+                                SR.UnsupportedSecuritySetting,
+                                "Transport.ClientCredentialType",
+                                transport.ClientCredentialType
+                            )
                         )
-                    )
-                );
+                    );
             }
         }
     }

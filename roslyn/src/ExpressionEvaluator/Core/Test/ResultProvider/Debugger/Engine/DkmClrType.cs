@@ -300,14 +300,16 @@ namespace Microsoft.VisualStudio.Debugger.Clr
             return new DkmClrDebuggerDisplayAttribute(type.AssemblyQualifiedName)
             {
                 Name = (string)
-                    attributeData
-                        .NamedArguments.SingleOrDefault(arg => arg.MemberName == "Name")
-                        .TypedValue.Value,
+                    attributeData.NamedArguments
+                        .SingleOrDefault(arg => arg.MemberName == "Name")
+                        .TypedValue
+                        .Value,
                 Value = (string)attributeData.ConstructorArguments.Single().Value,
                 TypeName = (string)
-                    attributeData
-                        .NamedArguments.SingleOrDefault(arg => arg.MemberName == "Type")
-                        .TypedValue.Value,
+                    attributeData.NamedArguments
+                        .SingleOrDefault(arg => arg.MemberName == "Type")
+                        .TypedValue
+                        .Value,
             };
         }
 
@@ -414,8 +416,7 @@ namespace Microsoft.VisualStudio.Debugger.Clr
                         targetMember: null,
                         uiSideVisualizerTypeName: uiSideVisualizerTypeName,
                         uiSideVisualizerAssemblyName: uiSideVisualizerAssemblyName,
-                        uiSideVisualizerAssemblyLocation: Evaluation
-                            .DkmClrCustomVisualizerAssemblyLocation
+                        uiSideVisualizerAssemblyLocation: Evaluation.DkmClrCustomVisualizerAssemblyLocation
                             .Unknown,
                         debuggeeSideVisualizerTypeName: debuggeeSideVisualizerTypeName,
                         debuggeeSideVisualizerAssemblyName: debuggeeSideVisualizerAssemblyName,

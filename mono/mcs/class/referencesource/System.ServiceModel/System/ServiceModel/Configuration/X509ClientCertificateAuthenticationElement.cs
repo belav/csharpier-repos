@@ -96,9 +96,10 @@ namespace System.ServiceModel.Configuration
         {
             if (this.IsReadOnly())
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ConfigurationErrorsException(SR.GetString(SR.ConfigReadOnly))
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        new ConfigurationErrorsException(SR.GetString(SR.ConfigReadOnly))
+                    );
             }
             if (null == from)
             {
@@ -130,15 +131,16 @@ namespace System.ServiceModel.Configuration
                 Type validatorType = System.Type.GetType(this.CustomCertificateValidatorType, true);
                 if (!typeof(X509CertificateValidator).IsAssignableFrom(validatorType))
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ConfigurationErrorsException(
-                            SR.GetString(
-                                SR.ConfigInvalidCertificateValidatorType,
-                                this.CustomCertificateValidatorType,
-                                typeof(X509CertificateValidator).ToString()
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperError(
+                            new ConfigurationErrorsException(
+                                SR.GetString(
+                                    SR.ConfigInvalidCertificateValidatorType,
+                                    this.CustomCertificateValidatorType,
+                                    typeof(X509CertificateValidator).ToString()
+                                )
                             )
-                        )
-                    );
+                        );
                 }
                 cert.CustomCertificateValidator = (X509CertificateValidator)
                     Activator.CreateInstance(validatorType);

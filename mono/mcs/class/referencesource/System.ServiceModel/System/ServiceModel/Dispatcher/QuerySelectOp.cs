@@ -226,9 +226,10 @@ namespace System.ServiceModel.Dispatcher
                     }
                     else
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperCritical(
-                            new QueryProcessingException(QueryProcessingError.Unexpected)
-                        );
+                        throw DiagnosticUtility.ExceptionUtility
+                            .ThrowHelperCritical(
+                                new QueryProcessingException(QueryProcessingError.Unexpected)
+                            );
                     }
                     break;
 
@@ -350,9 +351,10 @@ namespace System.ServiceModel.Dispatcher
                     }
                     else
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperCritical(
-                            new QueryProcessingException(QueryProcessingError.Unexpected)
-                        );
+                        throw DiagnosticUtility.ExceptionUtility
+                            .ThrowHelperCritical(
+                                new QueryProcessingException(QueryProcessingError.Unexpected)
+                            );
                     }
 
                     break;

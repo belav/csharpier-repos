@@ -61,10 +61,8 @@ public class SqlServerDatabaseCreator : RelationalDatabaseCreator
     {
         using (var masterConnection = _connection.CreateMasterConnection())
         {
-            Dependencies.MigrationCommandExecutor.ExecuteNonQuery(
-                CreateCreateOperations(),
-                masterConnection
-            );
+            Dependencies.MigrationCommandExecutor
+                .ExecuteNonQuery(CreateCreateOperations(), masterConnection);
 
             ClearPool();
         }
@@ -83,12 +81,8 @@ public class SqlServerDatabaseCreator : RelationalDatabaseCreator
         var masterConnection = _connection.CreateMasterConnection();
         await using (masterConnection.ConfigureAwait(false))
         {
-            await Dependencies
-                .MigrationCommandExecutor.ExecuteNonQueryAsync(
-                    CreateCreateOperations(),
-                    masterConnection,
-                    cancellationToken
-                )
+            await Dependencies.MigrationCommandExecutor
+                .ExecuteNonQueryAsync(CreateCreateOperations(), masterConnection, cancellationToken)
                 .ConfigureAwait(false);
 
             ClearPool();
@@ -105,23 +99,24 @@ public class SqlServerDatabaseCreator : RelationalDatabaseCreator
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     public override bool HasTables() =>
-        Dependencies.ExecutionStrategy.Execute(
-            _connection,
-            connection =>
-                (int)
-                    CreateHasTablesCommand()
-                        .ExecuteScalar(
-                            new RelationalCommandParameterObject(
-                                connection,
-                                null,
-                                null,
-                                Dependencies.CurrentContext.Context,
-                                Dependencies.CommandLogger,
-                                CommandSource.Migrations
-                            )
-                        )! != 0,
-            null
-        );
+        Dependencies.ExecutionStrategy
+            .Execute(
+                _connection,
+                connection =>
+                    (int)
+                        CreateHasTablesCommand()
+                            .ExecuteScalar(
+                                new RelationalCommandParameterObject(
+                                    connection,
+                                    null,
+                                    null,
+                                    Dependencies.CurrentContext.Context,
+                                    Dependencies.CommandLogger,
+                                    CommandSource.Migrations
+                                )
+                            )! != 0,
+                null
+            );
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -134,8 +129,8 @@ public class SqlServerDatabaseCreator : RelationalDatabaseCreator
     ) =>
         (int)
             (
-                await Dependencies
-                    .ExecutionStrategy.ExecuteAsync(
+                await Dependencies.ExecutionStrategy
+                    .ExecuteAsync(
                         _connection,
                         (connection, ct) =>
                             CreateHasTablesCommand()
@@ -178,20 +173,23 @@ SELECT 1 ELSE SELECT 0"
     private IReadOnlyList<MigrationCommand> CreateCreateOperations()
     {
         var builder = new SqlConnectionStringBuilder(_connection.DbConnection.ConnectionString);
-        return Dependencies.MigrationsSqlGenerator.Generate(
-            new[]
-            {
-                new SqlServerCreateDatabaseOperation
+        return Dependencies.MigrationsSqlGenerator
+            .Generate(
+                new[]
                 {
-                    Name = builder.InitialCatalog,
-                    FileName = builder.AttachDBFilename,
-                    Collation = Dependencies
-                        .CurrentContext.Context.GetService<IDesignTimeModel>()
-                        .Model.GetRelationalModel()
-                        .Collation,
-                },
-            }
-        );
+                    new SqlServerCreateDatabaseOperation
+                    {
+                        Name = builder.InitialCatalog,
+                        FileName = builder.AttachDBFilename,
+                        Collation = Dependencies.CurrentContext
+                            .Context
+                            .GetService<IDesignTimeModel>()
+                            .Model
+                            .GetRelationalModel()
+                            .Collation,
+                    },
+                }
+            );
     }
 
     /// <summary>
@@ -203,59 +201,60 @@ SELECT 1 ELSE SELECT 0"
     public override bool Exists() => Exists(retryOnNotExists: false);
 
     private bool Exists(bool retryOnNotExists) =>
-        Dependencies.ExecutionStrategy.Execute(
-            DateTime.UtcNow + RetryTimeout,
-            giveUp =>
-            {
-                while (true)
+        Dependencies.ExecutionStrategy
+            .Execute(
+                DateTime.UtcNow + RetryTimeout,
+                giveUp =>
                 {
-                    var opened = false;
-                    try
+                    while (true)
                     {
-                        using var _ = new TransactionScope(TransactionScopeOption.Suppress);
-                        _connection.Open(errorsExpected: true);
-                        opened = true;
-
-                        _rawSqlCommandBuilder
-                            .Build("SELECT 1")
-                            .ExecuteNonQuery(
-                                new RelationalCommandParameterObject(
-                                    _connection,
-                                    null,
-                                    null,
-                                    Dependencies.CurrentContext.Context,
-                                    Dependencies.CommandLogger,
-                                    CommandSource.Migrations
-                                )
-                            );
-
-                        return true;
-                    }
-                    catch (SqlException e)
-                    {
-                        if (!retryOnNotExists && IsDoesNotExist(e))
+                        var opened = false;
+                        try
                         {
-                            return false;
-                        }
+                            using var _ = new TransactionScope(TransactionScopeOption.Suppress);
+                            _connection.Open(errorsExpected: true);
+                            opened = true;
 
-                        if (DateTime.UtcNow > giveUp || !RetryOnExistsFailure(e))
-                        {
-                            throw;
-                        }
+                            _rawSqlCommandBuilder
+                                .Build("SELECT 1")
+                                .ExecuteNonQuery(
+                                    new RelationalCommandParameterObject(
+                                        _connection,
+                                        null,
+                                        null,
+                                        Dependencies.CurrentContext.Context,
+                                        Dependencies.CommandLogger,
+                                        CommandSource.Migrations
+                                    )
+                                );
 
-                        Thread.Sleep(RetryDelay);
-                    }
-                    finally
-                    {
-                        if (opened)
+                            return true;
+                        }
+                        catch (SqlException e)
                         {
-                            _connection.Close();
+                            if (!retryOnNotExists && IsDoesNotExist(e))
+                            {
+                                return false;
+                            }
+
+                            if (DateTime.UtcNow > giveUp || !RetryOnExistsFailure(e))
+                            {
+                                throw;
+                            }
+
+                            Thread.Sleep(RetryDelay);
+                        }
+                        finally
+                        {
+                            if (opened)
+                            {
+                                _connection.Close();
+                            }
                         }
                     }
-                }
-            },
-            null
-        );
+                },
+                null
+            );
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -267,66 +266,69 @@ SELECT 1 ELSE SELECT 0"
         ExistsAsync(retryOnNotExists: false, cancellationToken: cancellationToken);
 
     private Task<bool> ExistsAsync(bool retryOnNotExists, CancellationToken cancellationToken) =>
-        Dependencies.ExecutionStrategy.ExecuteAsync(
-            DateTime.UtcNow + RetryTimeout,
-            async (giveUp, ct) =>
-            {
-                while (true)
+        Dependencies.ExecutionStrategy
+            .ExecuteAsync(
+                DateTime.UtcNow + RetryTimeout,
+                async (giveUp, ct) =>
                 {
-                    var opened = false;
-
-                    try
+                    while (true)
                     {
-                        using var _ = new TransactionScope(
-                            TransactionScopeOption.Suppress,
-                            TransactionScopeAsyncFlowOption.Enabled
-                        );
-                        await _connection.OpenAsync(ct, errorsExpected: true).ConfigureAwait(false);
-                        opened = true;
+                        var opened = false;
 
-                        await _rawSqlCommandBuilder
-                            .Build("SELECT 1")
-                            .ExecuteNonQueryAsync(
-                                new RelationalCommandParameterObject(
-                                    _connection,
-                                    null,
-                                    null,
-                                    Dependencies.CurrentContext.Context,
-                                    Dependencies.CommandLogger,
-                                    CommandSource.Migrations
-                                ),
-                                ct
-                            )
-                            .ConfigureAwait(false);
-
-                        return true;
-                    }
-                    catch (SqlException e)
-                    {
-                        if (!retryOnNotExists && IsDoesNotExist(e))
+                        try
                         {
-                            return false;
-                        }
+                            using var _ = new TransactionScope(
+                                TransactionScopeOption.Suppress,
+                                TransactionScopeAsyncFlowOption.Enabled
+                            );
+                            await _connection
+                                .OpenAsync(ct, errorsExpected: true)
+                                .ConfigureAwait(false);
+                            opened = true;
 
-                        if (DateTime.UtcNow > giveUp || !RetryOnExistsFailure(e))
-                        {
-                            throw;
-                        }
+                            await _rawSqlCommandBuilder
+                                .Build("SELECT 1")
+                                .ExecuteNonQueryAsync(
+                                    new RelationalCommandParameterObject(
+                                        _connection,
+                                        null,
+                                        null,
+                                        Dependencies.CurrentContext.Context,
+                                        Dependencies.CommandLogger,
+                                        CommandSource.Migrations
+                                    ),
+                                    ct
+                                )
+                                .ConfigureAwait(false);
 
-                        await Task.Delay(RetryDelay, ct).ConfigureAwait(false);
-                    }
-                    finally
-                    {
-                        if (opened)
+                            return true;
+                        }
+                        catch (SqlException e)
                         {
-                            await _connection.CloseAsync().ConfigureAwait(false);
+                            if (!retryOnNotExists && IsDoesNotExist(e))
+                            {
+                                return false;
+                            }
+
+                            if (DateTime.UtcNow > giveUp || !RetryOnExistsFailure(e))
+                            {
+                                throw;
+                            }
+
+                            await Task.Delay(RetryDelay, ct).ConfigureAwait(false);
+                        }
+                        finally
+                        {
+                            if (opened)
+                            {
+                                await _connection.CloseAsync().ConfigureAwait(false);
+                            }
                         }
                     }
-                }
-            },
-            null,
-            cancellationToken
-        );
+                },
+                null,
+                cancellationToken
+            );
 
     // Login failed is thrown when database does not exist (See Issue #776)
     // Unable to attach database file is thrown when file does not exist (See Issue #2810)
@@ -377,10 +379,8 @@ SELECT 1 ELSE SELECT 0"
         ClearAllPools();
 
         using var masterConnection = _connection.CreateMasterConnection();
-        Dependencies.MigrationCommandExecutor.ExecuteNonQuery(
-            CreateDropCommands(),
-            masterConnection
-        );
+        Dependencies.MigrationCommandExecutor
+            .ExecuteNonQuery(CreateDropCommands(), masterConnection);
     }
 
     /// <summary>
@@ -395,12 +395,8 @@ SELECT 1 ELSE SELECT 0"
 
         var masterConnection = _connection.CreateMasterConnection();
         await using var _ = masterConnection.ConfigureAwait(false);
-        await Dependencies
-            .MigrationCommandExecutor.ExecuteNonQueryAsync(
-                CreateDropCommands(),
-                masterConnection,
-                cancellationToken
-            )
+        await Dependencies.MigrationCommandExecutor
+            .ExecuteNonQueryAsync(CreateDropCommands(), masterConnection, cancellationToken)
             .ConfigureAwait(false);
     }
 

@@ -59,9 +59,10 @@ namespace Microsoft.CodeAnalysis.AddPackage
             if (
                 symbolSearchService != null
                 && installerService != null
-                && context
-                    .Options.GetOptions(document.Project.Services)
-                    .SearchOptions.SearchNuGetPackages
+                && context.Options
+                    .GetOptions(document.Project.Services)
+                    .SearchOptions
+                    .SearchNuGetPackages
                 && installerService.IsEnabled(document.Project.Id)
             )
             {

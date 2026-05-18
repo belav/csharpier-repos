@@ -17,11 +17,11 @@ public class InMemoryDatabaseTest
     {
         var serviceProvider = InMemoryTestHelpers.Instance.CreateServiceProvider();
 
-        var store1 = InMemoryTestHelpers
-            .Instance.CreateContextServices(serviceProvider, CreateModel())
+        var store1 = InMemoryTestHelpers.Instance
+            .CreateContextServices(serviceProvider, CreateModel())
             .GetRequiredService<IInMemoryDatabase>();
-        var store2 = InMemoryTestHelpers
-            .Instance.CreateContextServices(serviceProvider, CreateModel())
+        var store2 = InMemoryTestHelpers.Instance
+            .CreateContextServices(serviceProvider, CreateModel())
             .GetRequiredService<IInMemoryDatabase>();
 
         Assert.Same(store1.Store, store2.Store);
@@ -58,10 +58,8 @@ public class InMemoryDatabaseTest
         var optionsBuilder = new DbContextOptionsBuilder();
         optionsBuilder.UseInMemoryDatabase(nameof(InMemoryDatabaseCreatorTest));
 
-        return InMemoryTestHelpers.Instance.CreateContextServices(
-            serviceProvider,
-            optionsBuilder.Options
-        );
+        return InMemoryTestHelpers.Instance
+            .CreateContextServices(serviceProvider, optionsBuilder.Options);
     }
 
     [ConditionalFact]
@@ -152,10 +150,8 @@ public class InMemoryDatabaseTest
         var serviceCollection = new ServiceCollection();
         serviceCollection.AddSingleton<ILoggerFactory>(loggerFactory);
 
-        var scopedServices = InMemoryTestHelpers.Instance.CreateContextServices(
-            serviceCollection,
-            CreateModel()
-        );
+        var scopedServices = InMemoryTestHelpers.Instance
+            .CreateContextServices(serviceCollection, CreateModel());
 
         var customer = new Customer { Id = 42, Name = "Unikorn" };
         var entityEntry = scopedServices
@@ -167,9 +163,8 @@ public class InMemoryDatabaseTest
 
         await inMemoryDatabase.SaveChangesAsync(new[] { entityEntry });
 
-        var (Level, _, Message, _, _) = loggerFactory.Log.Single(t =>
-            t.Id.Id == InMemoryEventId.ChangesSaved.Id
-        );
+        var (Level, _, Message, _, _) = loggerFactory.Log
+            .Single(t => t.Id.Id == InMemoryEventId.ChangesSaved.Id);
 
         Assert.Equal(LogLevel.Information, Level);
         Assert.Equal(

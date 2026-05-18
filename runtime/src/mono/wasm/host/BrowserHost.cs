@@ -69,8 +69,7 @@ internal sealed class BrowserHost
         if (_args.CommonConfig.HostProperties.EnvironmentVariables is not null)
         {
             foreach (
-                KeyValuePair<string, string> kvp in _args
-                    .CommonConfig
+                KeyValuePair<string, string> kvp in _args.CommonConfig
                     .HostProperties
                     .EnvironmentVariables
             )

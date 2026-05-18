@@ -52,8 +52,9 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeRefactoringService
             var refactoringService = workspace.GetService<ICodeRefactoringService>();
 
             var reference = new StubAnalyzerReference();
-            var project = workspace
-                .CurrentSolution.Projects.Single()
+            var project = workspace.CurrentSolution
+                .Projects
+                .Single()
                 .AddAnalyzerReference(reference);
             var document = project.Documents.Single();
             var refactorings = await refactoringService.GetRefactoringsAsync(
@@ -96,9 +97,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeRefactoringService
         [Fact]
         public async Task TestTypeScriptRefactorings()
         {
-            var composition = FeaturesTestCompositions.Features.AddParts(
-                typeof(TypeScriptCodeRefactoringProvider)
-            );
+            var composition = FeaturesTestCompositions.Features
+                .AddParts(typeof(TypeScriptCodeRefactoringProvider));
 
             using var workspace = TestWorkspace.Create(
                 @"
@@ -141,8 +141,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeRefactoringService
             errorReportingService.OnError = message => errorReported = true;
 
             var refactoringService = workspace.GetService<ICodeRefactoringService>();
-            var codeRefactoring = workspace
-                .ExportProvider.GetExportedValues<CodeRefactoringProvider>()
+            var codeRefactoring = workspace.ExportProvider
+                .GetExportedValues<CodeRefactoringProvider>()
                 .OfType<T>()
                 .Single();
 
@@ -222,17 +222,18 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeRefactoringService
                 refactoring3,
                 refactoring4
             );
-            var project = workspace
-                .CurrentSolution.Projects.Single()
+            var project = workspace.CurrentSolution
+                .Projects
+                .Single()
                 .AddAnalyzerReference(reference)
                 .AddAdditionalDocument("test.txt", "", filePath: "test.txt")
-                .Project.AddAdditionalDocument("test.log", "", filePath: "test.log")
+                .Project
+                .AddAdditionalDocument("test.log", "", filePath: "test.log")
                 .Project;
 
             // Verify available refactorings for .txt additional document
-            var txtAdditionalDocument = project.AdditionalDocuments.Single(t =>
-                t.Name == "test.txt"
-            );
+            var txtAdditionalDocument = project.AdditionalDocuments
+                .Single(t => t.Name == "test.txt");
             var txtRefactorings = await refactoringService.GetRefactoringsAsync(
                 txtAdditionalDocument,
                 TextSpan.FromBounds(0, 0),
@@ -249,15 +250,17 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeRefactoringService
             // Verify code refactoring application
             var codeAction = txtRefactorings
                 .Single(s => s.CodeActions.Single().action.Title == refactoring1.Title)
-                .CodeActions.Single()
+                .CodeActions
+                .Single()
                 .action;
             var solution = await codeAction.GetChangedSolutionInternalAsync(
                 project.Solution,
                 CodeAnalysisProgress.None
             );
-            var changedtxtDocument = solution
-                .Projects.Single()
-                .AdditionalDocuments.Single(t => t.Id == txtAdditionalDocument.Id);
+            var changedtxtDocument = solution.Projects
+                .Single()
+                .AdditionalDocuments
+                .Single(t => t.Id == txtAdditionalDocument.Id);
             Assert.Empty(
                 txtAdditionalDocument.GetTextSynchronously(CancellationToken.None).ToString()
             );
@@ -267,9 +270,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeRefactoringService
             );
 
             // Verify available refactorings for .log additional document
-            var logAdditionalDocument = project.AdditionalDocuments.Single(t =>
-                t.Name == "test.log"
-            );
+            var logAdditionalDocument = project.AdditionalDocuments
+                .Single(t => t.Name == "test.log");
             var logRefactorings = await refactoringService.GetRefactoringsAsync(
                 logAdditionalDocument,
                 TextSpan.FromBounds(0, 0),
@@ -300,15 +302,17 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeRefactoringService
                 refactoring3,
                 refactoring4
             );
-            var project = workspace
-                .CurrentSolution.Projects.Single()
+            var project = workspace.CurrentSolution
+                .Projects
+                .Single()
                 .AddAnalyzerReference(reference)
                 .AddAnalyzerConfigDocument(
                     ".editorconfig",
                     SourceText.From(""),
                     filePath: "c:\\.editorconfig"
                 )
-                .Project.AddAnalyzerConfigDocument(
+                .Project
+                .AddAnalyzerConfigDocument(
                     ".globalconfig",
                     SourceText.From("is_global = true"),
                     filePath: "c:\\.globalconfig"
@@ -316,9 +320,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeRefactoringService
                 .Project;
 
             // Verify available refactorings for .editorconfig document
-            var editorConfig = project.AnalyzerConfigDocuments.Single(t =>
-                t.Name == ".editorconfig"
-            );
+            var editorConfig = project.AnalyzerConfigDocuments
+                .Single(t => t.Name == ".editorconfig");
             var editorConfigRefactorings = await refactoringService.GetRefactoringsAsync(
                 editorConfig,
                 TextSpan.FromBounds(0, 0),
@@ -335,15 +338,17 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeRefactoringService
             // Verify code refactoring application
             var codeAction = editorConfigRefactorings
                 .Single(s => s.CodeActions.Single().action.Title == refactoring1.Title)
-                .CodeActions.Single()
+                .CodeActions
+                .Single()
                 .action;
             var solution = await codeAction.GetChangedSolutionInternalAsync(
                 project.Solution,
                 CodeAnalysisProgress.None
             );
-            var changedEditorConfig = solution
-                .Projects.Single()
-                .AnalyzerConfigDocuments.Single(t => t.Id == editorConfig.Id);
+            var changedEditorConfig = solution.Projects
+                .Single()
+                .AnalyzerConfigDocuments
+                .Single(t => t.Id == editorConfig.Id);
             Assert.Empty(editorConfig.GetTextSynchronously(CancellationToken.None).ToString());
             Assert.Equal(
                 refactoring1.Title,
@@ -351,9 +356,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeRefactoringService
             );
 
             // Verify available refactorings for .globalconfig document
-            var globalConfig = project.AnalyzerConfigDocuments.Single(t =>
-                t.Name == ".globalconfig"
-            );
+            var globalConfig = project.AnalyzerConfigDocuments
+                .Single(t => t.Name == ".globalconfig");
             var globalConfigRefactorings = await refactoringService.GetRefactoringsAsync(
                 globalConfig,
                 TextSpan.FromBounds(0, 0),
@@ -361,9 +365,10 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeRefactoringService
                 CancellationToken.None
             );
             var globalConfigRefactoring = Assert.Single(globalConfigRefactorings);
-            var globalConfigRefactoringTitle = globalConfigRefactoring
-                .CodeActions.Single()
-                .action.Title;
+            var globalConfigRefactoringTitle = globalConfigRefactoring.CodeActions
+                .Single()
+                .action
+                .Title;
             Assert.Equal(refactoring2.Title, globalConfigRefactoringTitle);
         }
 
@@ -384,14 +389,12 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeRefactoringService
                             var text = await document.GetTextAsync(ct).ConfigureAwait(false);
                             var newText = SourceText.From(text.ToString() + Title);
                             if (document.Kind == TextDocumentKind.AdditionalDocument)
-                                return document.Project.Solution.WithAdditionalDocumentText(
-                                    document.Id,
-                                    newText
-                                );
-                            return document.Project.Solution.WithAnalyzerConfigDocumentText(
-                                document.Id,
-                                newText
-                            );
+                                return document.Project
+                                    .Solution
+                                    .WithAdditionalDocumentText(document.Id, newText);
+                            return document.Project
+                                .Solution
+                                .WithAnalyzerConfigDocumentText(document.Id, newText);
                         }
                     )
                 );

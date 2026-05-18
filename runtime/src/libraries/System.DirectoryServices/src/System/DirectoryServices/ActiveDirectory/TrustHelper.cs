@@ -446,9 +446,8 @@ namespace System.DirectoryServices.ActiveDirectory
                         );
                         if (result != 0)
                         {
-                            uint win32Error = global::Interop.Advapi32.LsaNtStatusToWinError(
-                                result
-                            );
+                            uint win32Error = global::Interop.Advapi32
+                                .LsaNtStatusToWinError(result);
                             throw ExceptionHelper.GetExceptionFromErrorCode(
                                 (int)win32Error,
                                 serverName
@@ -1383,11 +1382,12 @@ namespace System.DirectoryServices.ActiveDirectory
                         policyHandle = Utils.GetPolicyHandle(serverName);
                     }
 
-                    uint result = global::Interop.Advapi32.LsaQueryInformationPolicy(
-                        policyHandle.DangerousGetHandle(),
-                        policyDnsDomainInformation,
-                        ref buffer
-                    );
+                    uint result = global::Interop.Advapi32
+                        .LsaQueryInformationPolicy(
+                            policyHandle.DangerousGetHandle(),
+                            policyDnsDomainInformation,
+                            ref buffer
+                        );
                     if (result != 0)
                     {
                         throw ExceptionHelper.GetExceptionFromErrorCode(

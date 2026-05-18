@@ -276,9 +276,9 @@ namespace System.Web.Compilation.WCFModel.DataSvcMapFileXmlSerializer
                 WriteAttribute(
                     @"Ignore",
                     @"",
-                    System.Xml.XmlConvert.ToString(
-                        (global::System.Boolean)((global::System.Boolean)o.@Ignore)
-                    )
+                    System.Xml
+                        .XmlConvert
+                        .ToString((global::System.Boolean)((global::System.Boolean)o.@Ignore))
                 );
             }
             if (o.@IsMergeResultSpecified)
@@ -286,9 +286,11 @@ namespace System.Web.Compilation.WCFModel.DataSvcMapFileXmlSerializer
                 WriteAttribute(
                     @"IsMergeResult",
                     @"",
-                    System.Xml.XmlConvert.ToString(
-                        (global::System.Boolean)((global::System.Boolean)o.@IsMergeResult)
-                    )
+                    System.Xml
+                        .XmlConvert
+                        .ToString(
+                            (global::System.Boolean)((global::System.Boolean)o.@IsMergeResult)
+                        )
                 );
             }
             if (o.@SourceIdSpecified)
@@ -296,9 +298,9 @@ namespace System.Web.Compilation.WCFModel.DataSvcMapFileXmlSerializer
                 WriteAttribute(
                     @"SourceId",
                     @"",
-                    System.Xml.XmlConvert.ToString(
-                        (global::System.Int32)((global::System.Int32)o.@SourceId)
-                    )
+                    System.Xml
+                        .XmlConvert
+                        .ToString((global::System.Int32)((global::System.Int32)o.@SourceId))
                 );
             }
             WriteAttribute(@"SourceUrl", @"", ((global::System.String)o.@SourceUrl));
@@ -378,9 +380,9 @@ namespace System.Web.Compilation.WCFModel.DataSvcMapFileXmlSerializer
             WriteAttribute(
                 @"SourceId",
                 @"",
-                System.Xml.XmlConvert.ToString(
-                    (global::System.Int32)((global::System.Int32)o.@SourceId)
-                )
+                System.Xml
+                    .XmlConvert
+                    .ToString((global::System.Int32)((global::System.Int32)o.@SourceId))
             );
             WriteEndElement(o);
         }
@@ -1137,8 +1139,7 @@ namespace System.Web.Compilation.WCFModel.DataSvcMapFileXmlSerializer
             switch (s)
             {
                 case @"Unknown":
-                    return global::System
-                        .Web
+                    return global::System.Web
                         .Compilation
                         .WCFModel
                         .MetadataFile
@@ -1149,16 +1150,14 @@ namespace System.Web.Compilation.WCFModel.DataSvcMapFileXmlSerializer
                 case @"Wsdl":
                     return global::System.Web.Compilation.WCFModel.MetadataFile.MetadataType.@Wsdl;
                 case @"Schema":
-                    return global::System
-                        .Web
+                    return global::System.Web
                         .Compilation
                         .WCFModel
                         .MetadataFile
                         .MetadataType
                         .@Schema;
                 case @"Policy":
-                    return global::System
-                        .Web
+                    return global::System.Web
                         .Compilation
                         .WCFModel
                         .MetadataFile

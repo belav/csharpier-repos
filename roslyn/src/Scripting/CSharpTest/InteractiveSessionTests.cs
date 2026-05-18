@@ -280,8 +280,8 @@ new object[] { new[] { a, c }, new[] { b, d } }
         [Fact]
         public void Dynamic_Expando()
         {
-            var options = ScriptOptions
-                .Default.AddReferences(
+            var options = ScriptOptions.Default
+                .AddReferences(
                     typeof(Microsoft.CSharp.RuntimeBinder.RuntimeBinderException)
                         .GetTypeInfo()
                         .Assembly,
@@ -710,7 +710,8 @@ Environment.ProcessorCount
             var result = CSharpScript
                 .RunAsync("using System;", globals: new C1())
                 .ContinueWith("Environment")
-                .Result.ReturnValue;
+                .Result
+                .ReturnValue;
 
             Assert.Equal(2, result);
         }
@@ -721,7 +722,8 @@ Environment.ProcessorCount
             var result = CSharpScript
                 .RunAsync("int System = 2;", globals: new C1())
                 .ContinueWith("System")
-                .Result.ReturnValue;
+                .Result
+                .ReturnValue;
 
             Assert.Equal(2, result);
         }
@@ -1097,7 +1099,8 @@ result
                 .RunAsync("using System;")
                 .ContinueWith("int Sqr(int x) {return x*x;}")
                 .ContinueWith<Func<int, int>>("new Func<int,int>(Sqr)")
-                .Result.ReturnValue;
+                .Result
+                .ReturnValue;
 
             Assert.Equal(4, f(2));
         }
@@ -1197,7 +1200,8 @@ static List<int> result = new List<int>();"
                 .ContinueWith("result.Add(f());")
                 .ContinueWith("result.Add(x);")
                 .ContinueWith<List<int>>("result")
-                .Result.ReturnValue;
+                .Result
+                .ReturnValue;
 
             Assert.Equal(2, result.Count);
             Assert.Equal(1, result[0]);
@@ -1207,9 +1211,8 @@ static List<int> result = new List<int>();"
         [Fact]
         public void ExtensionMethods()
         {
-            var options = ScriptOptions.Default.AddReferences(
-                typeof(Enumerable).GetTypeInfo().Assembly
-            );
+            var options = ScriptOptions.Default
+                .AddReferences(typeof(Enumerable).GetTypeInfo().Assembly);
 
             var result = CSharpScript
                 .EvaluateAsync<int>(
@@ -1346,8 +1349,8 @@ static T G<T>(T t, Func<T, Task<T>> f)
         [Fact]
         public void AwaitChain1()
         {
-            var options = ScriptOptions
-                .Default.AddReferences(typeof(Task).GetTypeInfo().Assembly)
+            var options = ScriptOptions.Default
+                .AddReferences(typeof(Task).GetTypeInfo().Assembly)
                 .AddImports("System.Threading.Tasks");
 
             var state = CSharpScript
@@ -1364,8 +1367,8 @@ static T G<T>(T t, Func<T, Task<T>> f)
         [Fact]
         public void AwaitChain2()
         {
-            var options = ScriptOptions
-                .Default.AddReferences(typeof(Task).GetTypeInfo().Assembly)
+            var options = ScriptOptions.Default
+                .AddReferences(typeof(Task).GetTypeInfo().Assembly)
                 .AddImports("System.Threading.Tasks");
 
             var state = CSharpScript
@@ -1391,9 +1394,8 @@ static T G<T>(T t, Func<T, Task<T>> f)
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/42368")]
         public async Task CSharp9PatternForms()
         {
-            var options = ScriptOptions.Default.WithLanguageVersion(
-                MessageID.IDS_FeatureAndPattern.RequiredVersion()
-            );
+            var options = ScriptOptions.Default
+                .WithLanguageVersion(MessageID.IDS_FeatureAndPattern.RequiredVersion());
             var state = await CSharpScript.RunAsync("object x = 1;", options: options);
             state = await state.ContinueWithAsync("x is long or int", options: options);
             Assert.Equal(true, state.ReturnValue);
@@ -1573,7 +1575,8 @@ new C()
                 .Create($@"#r ""{fileMain.Path}""")
                 .ContinueWith($@"M.X.F")
                 .RunAsync()
-                .Result.ReturnValue;
+                .Result
+                .ReturnValue;
             Assert.Equal("exe", r2);
         }
 
@@ -1622,7 +1625,8 @@ new C()
                 .Create($@"#r ""{fileMain.Path}""")
                 .ContinueWith($@"M.X.F")
                 .RunAsync()
-                .Result.ReturnValue;
+                .Result
+                .ReturnValue;
             Assert.Equal("dll", r2);
         }
 
@@ -1640,8 +1644,8 @@ public class E { }
 
             var script = CSharpScript.Create(
                 @"new C()",
-                ScriptOptions
-                    .Default.WithReferences(libRef.WithAliases(new[] { "Hidden" }))
+                ScriptOptions.Default
+                    .WithReferences(libRef.WithAliases(new[] { "Hidden" }))
                     .WithImports("Hidden::N")
             );
 
@@ -1671,8 +1675,8 @@ d
         [Fact, WorkItem(9229, "DevDiv_Projects/Roslyn")]
         public void Usings1()
         {
-            var options = ScriptOptions
-                .Default.AddImports("System", "System.Linq")
+            var options = ScriptOptions.Default
+                .AddImports("System", "System.Linq")
                 .AddReferences(typeof(Enumerable).GetTypeInfo().Assembly);
 
             object result = CSharpScript
@@ -1684,8 +1688,8 @@ d
         [Fact, WorkItem(9229, "DevDiv_Projects/Roslyn")]
         public void Usings2()
         {
-            var options = ScriptOptions
-                .Default.AddImports("System", "System.Linq")
+            var options = ScriptOptions.Default
+                .AddImports("System", "System.Linq")
                 .AddReferences(typeof(Enumerable).GetTypeInfo().Assembly);
 
             var s1 = CSharpScript.RunAsync("new int[] { 1, 2, 3 }.First()", options);
@@ -1780,11 +1784,12 @@ d
             }
             catch (CompilationErrorException e)
             {
-                e.Diagnostics.Verify(
-                    // (1,1): error CS0037: Cannot convert null to 'int' because it is a non-nullable value type
-                    // null
-                    Diagnostic(ErrorCode.ERR_ValueCantBeNull, "null").WithArguments("int")
-                );
+                e.Diagnostics
+                    .Verify(
+                        // (1,1): error CS0037: Cannot convert null to 'int' because it is a non-nullable value type
+                        // null
+                        Diagnostic(ErrorCode.ERR_ValueCantBeNull, "null").WithArguments("int")
+                    );
             }
 
             try
@@ -1794,11 +1799,13 @@ d
             }
             catch (CompilationErrorException e)
             {
-                e.Diagnostics.Verify(
-                    // (1,1): error CS0029: Cannot implicitly convert type 'int' to 'string'
-                    // 1+1
-                    Diagnostic(ErrorCode.ERR_NoImplicitConv, "1+1").WithArguments("int", "string")
-                );
+                e.Diagnostics
+                    .Verify(
+                        // (1,1): error CS0029: Cannot implicitly convert type 'int' to 'string'
+                        // 1+1
+                        Diagnostic(ErrorCode.ERR_NoImplicitConv, "1+1")
+                            .WithArguments("int", "string")
+                    );
             }
         }
 
@@ -1998,9 +2005,8 @@ new List<ArgumentException>()
             var scriptCompilation = CSharpScript
                 .Create(
                     "nameof(Microsoft.CodeAnalysis.Scripting)",
-                    ScriptOptions.Default.WithMetadataResolver(
-                        TestRuntimeMetadataReferenceResolver.Instance
-                    ),
+                    ScriptOptions.Default
+                        .WithMetadataResolver(TestRuntimeMetadataReferenceResolver.Instance),
                     globalsType: typeof(CommandLineScriptGlobals)
                 )
                 .GetCompilation();
@@ -2014,9 +2020,11 @@ new List<ArgumentException>()
             );
 
             string corAssemblyName = typeof(object).GetTypeInfo().Assembly.GetName().Name;
-            string hostObjectAssemblyName = scriptCompilation
-                .ScriptCompilationInfo.GlobalsType.GetTypeInfo()
-                .Assembly.GetName()
+            string hostObjectAssemblyName = scriptCompilation.ScriptCompilationInfo
+                .GlobalsType
+                .GetTypeInfo()
+                .Assembly
+                .GetName()
                 .Name;
 
             // The host adds
@@ -2070,8 +2078,8 @@ new List<ArgumentException>()
             var scriptCompilation = CSharpScript
                 .Create(
                     "typeof(Microsoft.CodeAnalysis.Scripting.Script)",
-                    options: ScriptOptions
-                        .Default.WithMetadataResolver(TestRuntimeMetadataReferenceResolver.Instance)
+                    options: ScriptOptions.Default
+                        .WithMetadataResolver(TestRuntimeMetadataReferenceResolver.Instance)
                         .WithReferences(typeof(CSharpScript).GetTypeInfo().Assembly),
                     globalsType: typeof(CommandLineScriptGlobals)
                 )
@@ -2080,9 +2088,11 @@ new List<ArgumentException>()
             scriptCompilation.VerifyDiagnostics();
 
             string corAssemblyName = typeof(object).GetTypeInfo().Assembly.GetName().Name;
-            string hostObjectAssemblyName = scriptCompilation
-                .ScriptCompilationInfo.GlobalsType.GetTypeInfo()
-                .Assembly.GetName()
+            string hostObjectAssemblyName = scriptCompilation.ScriptCompilationInfo
+                .GlobalsType
+                .GetTypeInfo()
+                .Assembly
+                .GetName()
                 .Name;
 
             // The host adds
@@ -2149,9 +2159,8 @@ typeof(Microsoft.CodeAnalysis.Scripting.Script)
             var scriptCompilation = CSharpScript
                 .Create(
                     source,
-                    ScriptOptions.Default.WithMetadataResolver(
-                        TestRuntimeMetadataReferenceResolver.Instance
-                    ),
+                    ScriptOptions.Default
+                        .WithMetadataResolver(TestRuntimeMetadataReferenceResolver.Instance),
                     globalsType: typeof(CommandLineScriptGlobals)
                 )
                 .GetCompilation();
@@ -2159,9 +2168,11 @@ typeof(Microsoft.CodeAnalysis.Scripting.Script)
             scriptCompilation.VerifyDiagnostics();
 
             string corAssemblyName = typeof(object).GetTypeInfo().Assembly.GetName().Name;
-            string hostObjectAssemblyName = scriptCompilation
-                .ScriptCompilationInfo.GlobalsType.GetTypeInfo()
-                .Assembly.GetName()
+            string hostObjectAssemblyName = scriptCompilation.ScriptCompilationInfo
+                .GlobalsType
+                .GetTypeInfo()
+                .Assembly
+                .GetName()
                 .Name;
 
             // The host adds
@@ -2629,7 +2640,8 @@ int F() => i + j + k + l;
 
 lambda.Invoke()"
                 )
-                .Result.ReturnValue;
+                .Result
+                .ReturnValue;
 
             Assert.Equal(4, result);
         }

@@ -295,9 +295,8 @@ public abstract class ReaderModificationCommandBatch : ModificationCommandBatch
     protected virtual void AddParameters(IReadOnlyModificationCommand modificationCommand)
     {
         Check.DebugAssert(
-            !modificationCommand.ColumnModifications.Any(m =>
-                m.Column is IStoreStoredProcedureReturnValue
-            )
+            !modificationCommand.ColumnModifications
+                .Any(m => m.Column is IStoreStoredProcedureReturnValue)
                 || modificationCommand.ColumnModifications[0].Column
                     is IStoreStoredProcedureReturnValue,
             "ResultValue column modification in non-first position"
@@ -305,9 +304,10 @@ public abstract class ReaderModificationCommandBatch : ModificationCommandBatch
 
         var modifications = modificationCommand.StoreStoredProcedure is null
             ? modificationCommand.ColumnModifications
-            : modificationCommand.ColumnModifications.Where(c =>
-                c.Column is IStoreStoredProcedureParameter or IStoreStoredProcedureReturnValue
-            );
+            : modificationCommand.ColumnModifications
+                .Where(c =>
+                    c.Column is IStoreStoredProcedureParameter or IStoreStoredProcedureReturnValue
+                );
 
         foreach (var columnModification in modifications)
         {
@@ -391,16 +391,17 @@ public abstract class ReaderModificationCommandBatch : ModificationCommandBatch
 
         try
         {
-            using var dataReader = StoreCommand.RelationalCommand.ExecuteReader(
-                new RelationalCommandParameterObject(
-                    connection,
-                    StoreCommand.ParameterValues,
-                    null,
-                    Dependencies.CurrentContext.Context,
-                    Dependencies.Logger,
-                    CommandSource.SaveChanges
-                )
-            );
+            using var dataReader = StoreCommand.RelationalCommand
+                .ExecuteReader(
+                    new RelationalCommandParameterObject(
+                        connection,
+                        StoreCommand.ParameterValues,
+                        null,
+                        Dependencies.CurrentContext.Context,
+                        Dependencies.Logger,
+                        CommandSource.SaveChanges
+                    )
+                );
 
             Consume(dataReader);
         }
@@ -435,8 +436,8 @@ public abstract class ReaderModificationCommandBatch : ModificationCommandBatch
 
         try
         {
-            var dataReader = await StoreCommand
-                .RelationalCommand.ExecuteReaderAsync(
+            var dataReader = await StoreCommand.RelationalCommand
+                .ExecuteReaderAsync(
                     new RelationalCommandParameterObject(
                         connection,
                         StoreCommand.ParameterValues,

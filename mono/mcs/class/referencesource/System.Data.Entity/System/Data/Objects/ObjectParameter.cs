@@ -93,9 +93,11 @@ namespace System.Data.Objects
 
             // If the parameter type is Nullable<>, we need to extract out the underlying
             // Nullable<> type argument.
-            this._mappableType = System.Data.Objects.ELinq.TypeSystem.GetNonNullableType(
-                this._type
-            );
+            this._mappableType = System.Data
+                .Objects
+                .ELinq
+                .TypeSystem
+                .GetNonNullableType(this._type);
         }
 
         #endregion
@@ -143,9 +145,11 @@ namespace System.Data.Objects
 
             // If the parameter type is Nullable<>, we need to extract out the underlying
             // Nullable<> type argument.
-            this._mappableType = System.Data.Objects.ELinq.TypeSystem.GetNonNullableType(
-                this._type
-            );
+            this._mappableType = System.Data
+                .Objects
+                .ELinq
+                .TypeSystem
+                .GetNonNullableType(this._type);
         }
 
         #endregion

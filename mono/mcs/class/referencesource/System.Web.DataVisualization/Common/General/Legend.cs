@@ -602,12 +602,15 @@ namespace System.Web.UI.DataVisualization.Charting
                         }
 
                         // Create new font
-                        this.autofitFont = this.Common.ChartPicture.FontCache.GetFont(
-                            this.Font.FontFamily,
-                            newFontSize,
-                            this.Font.Style,
-                            this.Font.Unit
-                        );
+                        this.autofitFont = this.Common
+                            .ChartPicture
+                            .FontCache
+                            .GetFont(
+                                this.Font.FontFamily,
+                                newFontSize,
+                                this.Font.Style,
+                                this.Font.Unit
+                            );
 
                         // Calculate number of rows and columns
                         this.GetNumberOfRowsAndColumns(
@@ -1075,12 +1078,15 @@ namespace System.Web.UI.DataVisualization.Charting
                                 }
 
                                 // Create new font
-                                this.autofitFont = this.Common.ChartPicture.FontCache.GetFont(
-                                    this.Font.FontFamily,
-                                    newFontSize,
-                                    this.Font.Style,
-                                    this.Font.Unit
-                                );
+                                this.autofitFont = this.Common
+                                    .ChartPicture
+                                    .FontCache
+                                    .GetFont(
+                                        this.Font.FontFamily,
+                                        newFontSize,
+                                        this.Font.Style,
+                                        this.Font.Unit
+                                    );
                             }
                             else
                             {
@@ -1275,12 +1281,13 @@ namespace System.Web.UI.DataVisualization.Charting
                 chartAreasRectangle.Width -= legendPosition.Width + elementSpacing;
             }
 
-            this.Position.SetPositionNoAuto(
-                legendPosition.X,
-                legendPosition.Y,
-                legendPosition.Width,
-                legendPosition.Height
-            );
+            this.Position
+                .SetPositionNoAuto(
+                    legendPosition.X,
+                    legendPosition.Y,
+                    legendPosition.Width,
+                    legendPosition.Height
+                );
         }
 
         /// <summary>
@@ -1795,12 +1802,13 @@ namespace System.Web.UI.DataVisualization.Charting
         /// </summary>
         internal void SelectLegendBackground()
         {
-            Common.HotRegionsList.AddHotRegion(
-                this.Position.ToRectangleF(),
-                this,
-                ChartElementType.LegendArea,
-                true
-            );
+            Common.HotRegionsList
+                .AddHotRegion(
+                    this.Position.ToRectangleF(),
+                    this,
+                    ChartElementType.LegendArea,
+                    true
+                );
         }
 
         #endregion Legend position & size methods
@@ -2227,9 +2235,8 @@ namespace System.Web.UI.DataVisualization.Charting
                 // Add spacer between columns
                 if (currentColumn < numberOfColumns - 1)
                 {
-                    totalTableColumnSpacingWidth += this.GetSeparatorSize(
-                        this.ItemColumnSeparator
-                    ).Width;
+                    totalTableColumnSpacingWidth += this.GetSeparatorSize(this.ItemColumnSeparator)
+                        .Width;
                 }
             }
 
@@ -2347,9 +2354,9 @@ namespace System.Web.UI.DataVisualization.Charting
                     if (series.IsVisible() && areaNameFound)
                     {
                         // Check if we should add all data points into the legend
-                        IChartType chartType = this.Common.ChartTypeRegistry.GetChartType(
-                            series.ChartTypeName
-                        );
+                        IChartType chartType = this.Common
+                            .ChartTypeRegistry
+                            .GetChartType(series.ChartTypeName);
 
                         // Check if series legend items should be reversed
                         if (this.LegendItemOrder == LegendItemOrder.Auto)
@@ -2459,10 +2466,8 @@ namespace System.Web.UI.DataVisualization.Charting
                                     if (cell.Text.Length > 0)
                                     {
                                         // #LEGENDTEXT - series name
-                                        cell.Text = cell.Text.Replace(
-                                            KeywordName.LegendText,
-                                            item.Name
-                                        );
+                                        cell.Text = cell.Text
+                                            .Replace(KeywordName.LegendText, item.Name);
 
                                         // Process rest of the keywords
                                         cell.Text = point.ReplaceKeywords(cell.Text);
@@ -2516,10 +2521,8 @@ namespace System.Web.UI.DataVisualization.Charting
                                 if (cell.Text.Length > 0)
                                 {
                                     // #LEGENDTEXT - series name
-                                    cell.Text = cell.Text.Replace(
-                                        KeywordName.LegendText,
-                                        item.Name
-                                    );
+                                    cell.Text = cell.Text
+                                        .Replace(KeywordName.LegendText, item.Name);
 
                                     // Process rest of the keywords
                                     cell.Text = series.ReplaceKeywords(cell.Text);
@@ -2669,9 +2672,8 @@ namespace System.Web.UI.DataVisualization.Charting
                     PenAlignment.Inset
                 );
 
-                Common.Chart.CallOnPrePaint(
-                    new ChartPaintEventArgs(this, chartGraph, Common, Position)
-                );
+                Common.Chart
+                    .CallOnPrePaint(new ChartPaintEventArgs(this, chartGraph, Common, Position));
             }
 
             if (Common.ProcessModeRegions)
@@ -2694,12 +2696,13 @@ namespace System.Web.UI.DataVisualization.Charting
             // Add legend title hot region
             if (Common.ProcessModeRegions && !this._titlePosition.IsEmpty)
             {
-                Common.HotRegionsList.AddHotRegion(
-                    chartGraph.GetRelativeRectangle(this._titlePosition),
-                    this,
-                    ChartElementType.LegendTitle,
-                    true
-                );
+                Common.HotRegionsList
+                    .AddHotRegion(
+                        chartGraph.GetRelativeRectangle(this._titlePosition),
+                        this,
+                        ChartElementType.LegendTitle,
+                        true
+                    );
             }
 
             //***********************************************************
@@ -2750,9 +2753,8 @@ namespace System.Web.UI.DataVisualization.Charting
                     }
                     separatorPosition.Width = right - separatorPosition.X;
                     separatorPosition.Y = legendItem.Cells[0].cellPosition.Bottom;
-                    separatorPosition.Height = this.GetSeparatorSize(
-                        legendItem.SeparatorType
-                    ).Height;
+                    separatorPosition.Height = this.GetSeparatorSize(legendItem.SeparatorType)
+                        .Height;
                     separatorPosition.Intersect(this._legendItemsAreaPosition);
 
                     // Draw separator
@@ -2863,9 +2865,8 @@ namespace System.Web.UI.DataVisualization.Charting
             // Call Paint event
             if (Common.ProcessModePaint)
             {
-                Common.Chart.CallOnPostPaint(
-                    new ChartPaintEventArgs(this, chartGraph, Common, Position)
-                );
+                Common.Chart
+                    .CallOnPostPaint(new ChartPaintEventArgs(this, chartGraph, Common, Position));
             }
 
             // Remove temporary cells from legend items
@@ -4466,12 +4467,13 @@ namespace System.Web.UI.DataVisualization.Charting
                 // Add legend header hot region
                 if (Common.ProcessModeRegions && !this._headerPosition.IsEmpty)
                 {
-                    Common.HotRegionsList.AddHotRegion(
-                        chartGraph.GetRelativeRectangle(this._headerPosition),
-                        this,
-                        ChartElementType.LegendHeader,
-                        true
-                    );
+                    Common.HotRegionsList
+                        .AddHotRegion(
+                            chartGraph.GetRelativeRectangle(this._headerPosition),
+                            this,
+                            ChartElementType.LegendHeader,
+                            true
+                        );
                 }
             }
         }
@@ -5270,12 +5272,13 @@ namespace System.Web.UI.DataVisualization.Charting
                             }
                         }
 
-                        legend.Position.SetPositionNoAuto(
-                            legendPosition.X,
-                            legendPosition.Y,
-                            legendPosition.Width,
-                            legendPosition.Height
-                        );
+                        legend.Position
+                            .SetPositionNoAuto(
+                                legendPosition.X,
+                                legendPosition.Y,
+                                legendPosition.Width,
+                                legendPosition.Height
+                            );
                     }
                 }
             }
@@ -6332,29 +6335,33 @@ namespace System.Web.UI.DataVisualization.Charting
                             && legend.Common.ChartPicture.RightToLeft == RightToLeft.Yes
                         )
                         {
-                            this.Cells.Add(
-                                LegendCellType.Text,
-                                KeywordName.LegendText,
-                                ContentAlignment.MiddleLeft
-                            );
-                            this.Cells.Add(
-                                LegendCellType.SeriesSymbol,
-                                string.Empty,
-                                ContentAlignment.MiddleCenter
-                            );
+                            this.Cells
+                                .Add(
+                                    LegendCellType.Text,
+                                    KeywordName.LegendText,
+                                    ContentAlignment.MiddleLeft
+                                );
+                            this.Cells
+                                .Add(
+                                    LegendCellType.SeriesSymbol,
+                                    string.Empty,
+                                    ContentAlignment.MiddleCenter
+                                );
                         }
                         else
                         {
-                            this.Cells.Add(
-                                LegendCellType.SeriesSymbol,
-                                string.Empty,
-                                ContentAlignment.MiddleCenter
-                            );
-                            this.Cells.Add(
-                                LegendCellType.Text,
-                                KeywordName.LegendText,
-                                ContentAlignment.MiddleLeft
-                            );
+                            this.Cells
+                                .Add(
+                                    LegendCellType.SeriesSymbol,
+                                    string.Empty,
+                                    ContentAlignment.MiddleCenter
+                                );
+                            this.Cells
+                                .Add(
+                                    LegendCellType.Text,
+                                    KeywordName.LegendText,
+                                    ContentAlignment.MiddleLeft
+                                );
                         }
                     }
                     else
@@ -6370,16 +6377,18 @@ namespace System.Web.UI.DataVisualization.Charting
                 {
                     // Add Marker plus text for everything else
                     this.clearTempCells = true;
-                    this.Cells.Add(
-                        LegendCellType.SeriesSymbol,
-                        string.Empty,
-                        ContentAlignment.MiddleCenter
-                    );
-                    this.Cells.Add(
-                        LegendCellType.Text,
-                        KeywordName.LegendText,
-                        ContentAlignment.MiddleLeft
-                    );
+                    this.Cells
+                        .Add(
+                            LegendCellType.SeriesSymbol,
+                            string.Empty,
+                            ContentAlignment.MiddleCenter
+                        );
+                    this.Cells
+                        .Add(
+                            LegendCellType.Text,
+                            KeywordName.LegendText,
+                            ContentAlignment.MiddleLeft
+                        );
                 }
             }
         }

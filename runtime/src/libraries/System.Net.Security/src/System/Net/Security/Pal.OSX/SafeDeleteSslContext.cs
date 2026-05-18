@@ -42,11 +42,8 @@ namespace System.Net
 
                 unsafe
                 {
-                    osStatus = Interop.AppleCrypto.SslSetIoCallbacks(
-                        _sslContext,
-                        &ReadFromConnection,
-                        &WriteToConnection
-                    );
+                    osStatus = Interop.AppleCrypto
+                        .SslSetIoCallbacks(_sslContext, &ReadFromConnection, &WriteToConnection);
                 }
 
                 if (osStatus != 0)
@@ -56,8 +53,7 @@ namespace System.Net
 
                 if (sslAuthenticationOptions.CipherSuitesPolicy != null)
                 {
-                    uint[] tlsCipherSuites = sslAuthenticationOptions
-                        .CipherSuitesPolicy
+                    uint[] tlsCipherSuites = sslAuthenticationOptions.CipherSuitesPolicy
                         .Pal
                         .TlsCipherSuites;
 
@@ -65,11 +61,12 @@ namespace System.Net
                     {
                         fixed (uint* cipherSuites = tlsCipherSuites)
                         {
-                            osStatus = Interop.AppleCrypto.SslSetEnabledCipherSuites(
-                                _sslContext,
-                                cipherSuites,
-                                tlsCipherSuites.Length
-                            );
+                            osStatus = Interop.AppleCrypto
+                                .SslSetEnabledCipherSuites(
+                                    _sslContext,
+                                    cipherSuites,
+                                    tlsCipherSuites.Length
+                                );
 
                             if (osStatus != 0)
                             {
@@ -87,10 +84,11 @@ namespace System.Net
                     if (sslAuthenticationOptions.IsClient)
                     {
                         // On macOS coreTls supports only client side.
-                        Interop.AppleCrypto.SslCtxSetAlpnProtos(
-                            _sslContext,
-                            sslAuthenticationOptions.ApplicationProtocols
-                        );
+                        Interop.AppleCrypto
+                            .SslCtxSetAlpnProtos(
+                                _sslContext,
+                                sslAuthenticationOptions.ApplicationProtocols
+                            );
                     }
                     else
                     {
@@ -112,10 +110,8 @@ namespace System.Net
                 && !TargetHostNameHelper.IsValidAddress(sslAuthenticationOptions.TargetHost)
             )
             {
-                Interop.AppleCrypto.SslSetTargetName(
-                    _sslContext,
-                    sslAuthenticationOptions.TargetHost
-                );
+                Interop.AppleCrypto
+                    .SslSetTargetName(_sslContext, sslAuthenticationOptions.TargetHost);
             }
 
             if (
@@ -156,11 +152,12 @@ namespace System.Net
                         handles[i] = certList[i].Handle;
                     }
 
-                    Interop.AppleCrypto.SslSetCertificateAuthorities(
-                        _sslContext,
-                        handles.Slice(0, certList.Count),
-                        true
-                    );
+                    Interop.AppleCrypto
+                        .SslSetCertificateAuthorities(
+                            _sslContext,
+                            handles.Slice(0, certList.Count),
+                            true
+                        );
                 }
             }
         }
@@ -188,9 +185,8 @@ namespace System.Net
                     );
             }
 
-            SafeSslHandle sslContext = Interop.AppleCrypto.SslCreateContext(
-                sslAuthenticationOptions.IsServer ? 1 : 0
-            );
+            SafeSslHandle sslContext = Interop.AppleCrypto
+                .SslCreateContext(sslAuthenticationOptions.IsServer ? 1 : 0);
 
             try
             {
@@ -330,8 +326,9 @@ namespace System.Net
 
                     int limit = Math.Min((int)toRead, context._inputBuffer.ActiveLength);
 
-                    context
-                        ._inputBuffer.ActiveSpan.Slice(0, limit)
+                    context._inputBuffer
+                        .ActiveSpan
+                        .Slice(0, limit)
                         .CopyTo(new Span<byte>(data, limit));
                     context._inputBuffer.Discard(limit);
                     transferred = (uint)limit;

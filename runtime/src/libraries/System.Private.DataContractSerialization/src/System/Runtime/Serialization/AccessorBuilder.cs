@@ -222,9 +222,8 @@ namespace System.Runtime.Serialization
         {
             if (typeof(DeclaringType).IsValueType)
             {
-                var getMethod = propInfo.GetMethod!.CreateDelegate<
-                    StructGetDelegate<DeclaringType, PropertyType>
-                >();
+                var getMethod = propInfo.GetMethod!
+                    .CreateDelegate<StructGetDelegate<DeclaringType, PropertyType>>();
 
                 return (obj) =>
                 {
@@ -234,9 +233,8 @@ namespace System.Runtime.Serialization
             }
             else
             {
-                var getMethod = propInfo.GetMethod!.CreateDelegate<
-                    Func<DeclaringType, PropertyType>
-                >();
+                var getMethod = propInfo.GetMethod!
+                    .CreateDelegate<Func<DeclaringType, PropertyType>>();
 
                 return (obj) =>
                 {
@@ -251,9 +249,8 @@ namespace System.Runtime.Serialization
         {
             if (typeof(DeclaringType).IsValueType)
             {
-                var setMethod = propInfo.SetMethod!.CreateDelegate<
-                    StructSetDelegate<DeclaringType, PropertyType>
-                >();
+                var setMethod = propInfo.SetMethod!
+                    .CreateDelegate<StructSetDelegate<DeclaringType, PropertyType>>();
 
                 return (ref object obj, object? val) =>
                 {
@@ -264,9 +261,8 @@ namespace System.Runtime.Serialization
             }
             else
             {
-                var setMethod = propInfo.SetMethod!.CreateDelegate<
-                    Action<DeclaringType, PropertyType>
-                >();
+                var setMethod = propInfo.SetMethod!
+                    .CreateDelegate<Action<DeclaringType, PropertyType>>();
 
                 return (ref object obj, object? val) =>
                 {

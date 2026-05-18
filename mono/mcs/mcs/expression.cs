@@ -102,10 +102,8 @@ namespace Mono.CSharp
 #if STATIC
             return base.MakeExpression(ctx);
 #else
-            return SLE.Expression.Call(
-                (MethodInfo)oper.GetMetaInfo(),
-                Arguments.MakeExpression(arguments, ctx)
-            );
+            return SLE.Expression
+                .Call((MethodInfo)oper.GetMetaInfo(), Arguments.MakeExpression(arguments, ctx));
 #endif
         }
     }
@@ -814,13 +812,14 @@ namespace Mono.CSharp
             Location loc
         )
         {
-            rc.Report.Error(
-                35,
-                loc,
-                "Operator `{0}' is ambiguous on an operand of type `{1}'",
-                oper,
-                type.GetSignatureForError()
-            );
+            rc.Report
+                .Error(
+                    35,
+                    loc,
+                    "Operator `{0}' is ambiguous on an operand of type `{1}'",
+                    oper,
+                    type.GetSignatureForError()
+                );
         }
 
         public override void FlowAnalysis(FlowAnalysisContext fc)
@@ -971,11 +970,12 @@ namespace Mono.CSharp
 
             if (!is_fixed && !ec.HasSet(ResolveContext.Options.FixedInitializerScope))
             {
-                ec.Report.Error(
-                    212,
-                    loc,
-                    "You can only take the address of unfixed expression inside of a fixed statement initializer"
-                );
+                ec.Report
+                    .Error(
+                        212,
+                        loc,
+                        "You can only take the address of unfixed expression inside of a fixed statement initializer"
+                    );
             }
 
             type = PointerContainer.MakeType(ec.Module, Expr.Type);
@@ -1494,11 +1494,12 @@ namespace Mono.CSharp
             }
             else
             {
-                ec.Report.Error(
-                    1059,
-                    loc,
-                    "The operand of an increment or decrement operator must be a variable, property or indexer"
-                );
+                ec.Report
+                    .Error(
+                        1059,
+                        loc,
+                        "The operand of an increment or decrement operator must be a variable, property or indexer"
+                    );
                 return null;
             }
 
@@ -1773,34 +1774,37 @@ namespace Mono.CSharp
 
             if (probe_type_expr.IsStatic)
             {
-                rc.Report.Error(
-                    7023,
-                    loc,
-                    "The second operand of `is' or `as' operator cannot be static type `{0}'",
-                    probe_type_expr.GetSignatureForError()
-                );
+                rc.Report
+                    .Error(
+                        7023,
+                        loc,
+                        "The second operand of `is' or `as' operator cannot be static type `{0}'",
+                        probe_type_expr.GetSignatureForError()
+                    );
                 return null;
             }
 
             if (expr.Type.IsPointer || probe_type_expr.IsPointer)
             {
-                rc.Report.Error(
-                    244,
-                    loc,
-                    "The `{0}' operator cannot be applied to an operand of pointer type",
-                    OperatorName
-                );
+                rc.Report
+                    .Error(
+                        244,
+                        loc,
+                        "The `{0}' operator cannot be applied to an operand of pointer type",
+                        OperatorName
+                    );
                 return null;
             }
 
             if (expr.Type == InternalType.AnonymousMethod || expr.Type == InternalType.MethodGroup)
             {
-                rc.Report.Error(
-                    837,
-                    loc,
-                    "The `{0}' operator cannot be applied to a lambda expression, anonymous method, or method group",
-                    OperatorName
-                );
+                rc.Report
+                    .Error(
+                        837,
+                        loc,
+                        "The `{0}' operator cannot be applied to a lambda expression, anonymous method, or method group",
+                        OperatorName
+                    );
                 return null;
             }
 
@@ -1871,11 +1875,12 @@ namespace Mono.CSharp
         public override Expression CreateExpressionTree(ResolveContext ec)
         {
             if (Variable != null)
-                ec.Report.Error(
-                    8122,
-                    loc,
-                    "An expression tree cannot contain a pattern matching operator"
-                );
+                ec.Report
+                    .Error(
+                        8122,
+                        loc,
+                        "An expression tree cannot contain a pattern matching operator"
+                    );
 
             Arguments args = Arguments.CreateForExpressionTree(
                 ec,
@@ -1890,21 +1895,23 @@ namespace Mono.CSharp
         Expression CreateConstantResult(ResolveContext rc, bool result)
         {
             if (result)
-                rc.Report.Warning(
-                    183,
-                    1,
-                    loc,
-                    "The given expression is always of the provided (`{0}') type",
-                    probe_type_expr.GetSignatureForError()
-                );
+                rc.Report
+                    .Warning(
+                        183,
+                        1,
+                        loc,
+                        "The given expression is always of the provided (`{0}') type",
+                        probe_type_expr.GetSignatureForError()
+                    );
             else
-                rc.Report.Warning(
-                    184,
-                    1,
-                    loc,
-                    "The given expression is never of the provided (`{0}') type",
-                    probe_type_expr.GetSignatureForError()
-                );
+                rc.Report
+                    .Warning(
+                        184,
+                        1,
+                        loc,
+                        "The given expression is never of the provided (`{0}') type",
+                        probe_type_expr.GetSignatureForError()
+                    );
 
             var c = new BoolConstant(rc.BuiltinTypes, result, loc);
             return expr.IsSideEffectFree
@@ -2387,13 +2394,14 @@ namespace Mono.CSharp
             {
                 if (Variable != null)
                 {
-                    ec.Report.Error(
-                        8116,
-                        loc,
-                        "The nullable type `{0}' pattern matching is not allowed. Consider using underlying type `{1}'",
-                        t.GetSignatureForError(),
-                        Nullable.NullableInfo.GetUnderlyingType(t).GetSignatureForError()
-                    );
+                    ec.Report
+                        .Error(
+                            8116,
+                            loc,
+                            "The nullable type `{0}' pattern matching is not allowed. Consider using underlying type `{1}'",
+                            t.GetSignatureForError(),
+                            Nullable.NullableInfo.GetUnderlyingType(t).GetSignatureForError()
+                        );
                 }
 
                 var ut = Nullable.NullableInfo.GetUnderlyingType(t);
@@ -2449,23 +2457,25 @@ namespace Mono.CSharp
                 {
                     if (Variable != null)
                     {
-                        ec.Report.Error(
-                            8208,
-                            loc,
-                            "The type `{0}' pattern matching is not allowed",
-                            t.GetSignatureForError()
-                        );
+                        ec.Report
+                            .Error(
+                                8208,
+                                loc,
+                                "The type `{0}' pattern matching is not allowed",
+                                t.GetSignatureForError()
+                            );
                     }
                     else
                     {
-                        ec.Report.Warning(
-                            1981,
-                            3,
-                            loc,
-                            "Using `{0}' to test compatibility with `{1}' is identical to testing compatibility with `object'",
-                            OperatorName,
-                            t.GetSignatureForError()
-                        );
+                        ec.Report
+                            .Warning(
+                                1981,
+                                3,
+                                loc,
+                                "Using `{0}' to test compatibility with `{1}' is identical to testing compatibility with `object'",
+                                OperatorName,
+                                t.GetSignatureForError()
+                            );
                     }
                 }
 
@@ -2865,12 +2875,13 @@ namespace Mono.CSharp
                 var pe = member as PropertyExpr;
                 if (pe == null || member is FieldExpr)
                 {
-                    rc.Report.Error(
-                        -2001,
-                        lookup.Location,
-                        "`{0}' is not a valid pattern member",
-                        lookup.Name
-                    );
+                    rc.Report
+                        .Error(
+                            -2001,
+                            lookup.Location,
+                            "`{0}' is not a valid pattern member",
+                            lookup.Name
+                        );
                     continue;
                 }
 
@@ -2878,12 +2889,13 @@ namespace Mono.CSharp
                 // TODO: check accessibility
                 if (pe != null && !pe.PropertyInfo.HasGet)
                 {
-                    rc.Report.Error(
-                        -2002,
-                        lookup.Location,
-                        "Property `{0}.get' accessor is required",
-                        pe.GetSignatureForError()
-                    );
+                    rc.Report
+                        .Error(
+                            -2002,
+                            lookup.Location,
+                            "Property `{0}.get' accessor is required",
+                            pe.GetSignatureForError()
+                        );
                     continue;
                 }
 
@@ -3019,11 +3031,12 @@ namespace Mono.CSharp
 
             if (expr is TupleLiteral && TupleLiteral.ContainsNoTypeElement(etype))
             {
-                ec.Report.Error(
-                    8307,
-                    expr.Location,
-                    "The first operand of an `as' operator may not be a tuple literal without a natural type"
-                );
+                ec.Report
+                    .Error(
+                        8307,
+                        expr.Location,
+                        "The first operand of an `as' operator may not be a tuple literal without a natural type"
+                    );
                 type = InternalType.ErrorType;
                 return this;
             }
@@ -3038,21 +3051,23 @@ namespace Mono.CSharp
             {
                 if (TypeManager.IsGenericParameter(type))
                 {
-                    ec.Report.Error(
-                        413,
-                        loc,
-                        "The `as' operator cannot be used with a non-reference type parameter `{0}'. Consider adding `class' or a reference type constraint",
-                        probe_type_expr.GetSignatureForError()
-                    );
+                    ec.Report
+                        .Error(
+                            413,
+                            loc,
+                            "The `as' operator cannot be used with a non-reference type parameter `{0}'. Consider adding `class' or a reference type constraint",
+                            probe_type_expr.GetSignatureForError()
+                        );
                 }
                 else
                 {
-                    ec.Report.Error(
-                        77,
-                        loc,
-                        "The `as' operator cannot be used with a non-nullable value type `{0}'",
-                        type.GetSignatureForError()
-                    );
+                    ec.Report
+                        .Error(
+                            77,
+                            loc,
+                            "The `as' operator cannot be used with a non-nullable value type `{0}'",
+                            type.GetSignatureForError()
+                        );
                 }
                 return null;
             }
@@ -3094,13 +3109,14 @@ namespace Mono.CSharp
 
             if (etype != InternalType.ErrorType)
             {
-                ec.Report.Error(
-                    39,
-                    loc,
-                    "Cannot convert type `{0}' to `{1}' via a built-in conversion",
-                    etype.GetSignatureForError(),
-                    type.GetSignatureForError()
-                );
+                ec.Report
+                    .Error(
+                        39,
+                        loc,
+                        "Cannot convert type `{0}' to `{1}' via a built-in conversion",
+                        etype.GetSignatureForError(),
+                        type.GetSignatureForError()
+                    );
             }
 
             return null;
@@ -3143,12 +3159,13 @@ namespace Mono.CSharp
 
             if (type.IsStatic)
             {
-                ec.Report.Error(
-                    716,
-                    loc,
-                    "Cannot convert to static type `{0}'",
-                    type.GetSignatureForError()
-                );
+                ec.Report
+                    .Error(
+                        716,
+                        loc,
+                        "Cannot convert to static type `{0}'",
+                        type.GetSignatureForError()
+                    );
                 return null;
             }
 
@@ -3262,11 +3279,8 @@ namespace Mono.CSharp
 
         public override Expression CreateExpressionTree(ResolveContext rc)
         {
-            rc.Report.Error(
-                8198,
-                loc,
-                "An expression tree cannot contain out variable declaration"
-            );
+            rc.Report
+                .Error(8198, loc, "An expression tree cannot contain out variable declaration");
             return null;
         }
 
@@ -3379,11 +3393,12 @@ namespace Mono.CSharp
 
             if (type.IsStatic)
             {
-                ec.Report.Error(
-                    -244,
-                    loc,
-                    "The `default value' operator cannot be applied to an operand of a static type"
-                );
+                ec.Report
+                    .Error(
+                        -244,
+                        loc,
+                        "The `default value' operator cannot be applied to an operand of a static type"
+                    );
             }
 
             if (type.IsPointer)
@@ -3917,13 +3932,15 @@ namespace Mono.CSharp
                     if (inequal_method == null)
                     {
                         if (left.BuiltinType == BuiltinTypeSpec.Type.String)
-                            inequal_method = ec.Module.PredefinedMembers.StringInequal.Resolve(
-                                b.loc
-                            );
+                            inequal_method = ec.Module
+                                .PredefinedMembers
+                                .StringInequal
+                                .Resolve(b.loc);
                         else if (left.BuiltinType == BuiltinTypeSpec.Type.Delegate)
-                            inequal_method = ec.Module.PredefinedMembers.DelegateInequal.Resolve(
-                                b.loc
-                            );
+                            inequal_method = ec.Module
+                                .PredefinedMembers
+                                .DelegateInequal
+                                .Resolve(b.loc);
                         else
                             throw new NotImplementedException(left.GetSignatureForError());
                     }
@@ -4240,14 +4257,15 @@ namespace Mono.CSharp
             l = left.Type.GetSignatureForError();
             r = right.Type.GetSignatureForError();
 
-            ec.Report.Error(
-                19,
-                loc,
-                "Operator `{0}' cannot be applied to operands of type `{1}' and `{2}'",
-                oper,
-                l,
-                r
-            );
+            ec.Report
+                .Error(
+                    19,
+                    loc,
+                    "Operator `{0}' cannot be applied to operands of type `{1}' and `{2}'",
+                    oper,
+                    l,
+                    r
+                );
         }
 
         void Error_OperatorCannotBeApplied(ResolveContext ec, Expression left, Expression right)
@@ -4846,13 +4864,14 @@ namespace Mono.CSharp
             // FIXME: consider constants
 
             var ltype = lcast != null ? lcast.UnderlyingType : rcast.UnderlyingType;
-            ec.Report.Warning(
-                675,
-                3,
-                loc,
-                "The operator `|' used on the sign-extended type `{0}'. Consider casting to a smaller unsigned type first",
-                ltype.GetSignatureForError()
-            );
+            ec.Report
+                .Warning(
+                    675,
+                    3,
+                    loc,
+                    "The operator `|' used on the sign-extended type `{0}'. Consider casting to a smaller unsigned type first",
+                    ltype.GetSignatureForError()
+                );
         }
 
         public static PredefinedOperator[] CreatePointerOperatorsTable(BuiltinTypes types)
@@ -5321,11 +5340,12 @@ namespace Mono.CSharp
 
                 if (left.eclass == ExprClass.Type)
                 {
-                    ec.Report.Error(
-                        75,
-                        loc,
-                        "To cast a negative value, you must enclose the value in parentheses"
-                    );
+                    ec.Report
+                        .Error(
+                            75,
+                            loc,
+                            "To cast a negative value, you must enclose the value in parentheses"
+                        );
                     return null;
                 }
             }
@@ -5368,12 +5388,13 @@ namespace Mono.CSharp
             {
                 if (left.Equals(right))
                 {
-                    ec.Report.Warning(
-                        1718,
-                        3,
-                        loc,
-                        "A comparison made to same variable. Did you mean to compare something else?"
-                    );
+                    ec.Report
+                        .Warning(
+                            1718,
+                            3,
+                            loc,
+                            "A comparison made to same variable. Did you mean to compare something else?"
+                        );
                 }
                 CheckOutOfRangeComparison(ec, lc, right.Type);
                 CheckOutOfRangeComparison(ec, rc, left.Type);
@@ -5394,23 +5415,25 @@ namespace Mono.CSharp
             {
                 if ((Oper & Operator.EqualityMask) == 0)
                 {
-                    ec.Report.Error(
-                        8310,
-                        loc,
-                        "Operator `{0}' cannot be applied to operand `default'",
-                        OperName(Oper)
-                    );
+                    ec.Report
+                        .Error(
+                            8310,
+                            loc,
+                            "Operator `{0}' cannot be applied to operand `default'",
+                            OperName(Oper)
+                        );
                     return null;
                 }
 
                 if (ltype == rtype)
                 {
-                    ec.Report.Error(
-                        8315,
-                        loc,
-                        "Operator `{0}' is ambiguous on operands `default' and `default'",
-                        OperName(Oper)
-                    );
+                    ec.Report
+                        .Error(
+                            8315,
+                            loc,
+                            "Operator `{0}' is ambiguous on operands `default' and `default'",
+                            OperName(Oper)
+                        );
                     return null;
                 }
 
@@ -5518,13 +5541,14 @@ namespace Mono.CSharp
                         ) == null
                     )
                     {
-                        rc.Report.Error(
-                            7083,
-                            left.Location,
-                            "Expression must be implicitly convertible to Boolean or its type `{0}' must define operator `{1}'",
-                            lt.GetSignatureForError(),
-                            oper == Operator.LogicalAnd ? "false" : "true"
-                        );
+                        rc.Report
+                            .Error(
+                                7083,
+                                left.Location,
+                                "Expression must be implicitly convertible to Boolean or its type `{0}' must define operator `{1}'",
+                                lt.GetSignatureForError(),
+                                oper == Operator.LogicalAnd ? "false" : "true"
+                            );
                         return null;
                     }
 
@@ -5967,10 +5991,11 @@ namespace Mono.CSharp
             }
 
             if (expr.Type.IsNullableType || liftType)
-                underlying_type = rc.Module.PredefinedTypes.Nullable.TypeSpec.MakeGenericType(
-                    rc.Module,
-                    new[] { underlying_type }
-                );
+                underlying_type = rc.Module
+                    .PredefinedTypes
+                    .Nullable
+                    .TypeSpec
+                    .MakeGenericType(rc.Module, new[] { underlying_type });
 
             if (expr.Type == underlying_type)
                 return expr;
@@ -6097,10 +6122,11 @@ namespace Mono.CSharp
                 }
 
                 if (expr is Nullable.LiftedBinaryOperator && !result_type.IsNullableType)
-                    result_type = rc.Module.PredefinedTypes.Nullable.TypeSpec.MakeGenericType(
-                        rc.Module,
-                        new[] { result_type }
-                    );
+                    result_type = rc.Module
+                        .PredefinedTypes
+                        .Nullable
+                        .TypeSpec
+                        .MakeGenericType(rc.Module, new[] { result_type });
             }
 
             return EmptyCast.Create(expr, result_type);
@@ -6336,13 +6362,14 @@ namespace Mono.CSharp
                 || l.IsDelegate
                 || MemberCache.GetUserOperator(l, CSharp.Operator.OpType.Equality, false) != null
             )
-                ec.Report.Warning(
-                    253,
-                    2,
-                    loc,
-                    "Possible unintended reference comparison. Consider casting the right side expression to type `{0}' to get value comparison",
-                    l.GetSignatureForError()
-                );
+                ec.Report
+                    .Warning(
+                        253,
+                        2,
+                        loc,
+                        "Possible unintended reference comparison. Consider casting the right side expression to type `{0}' to get value comparison",
+                        l.GetSignatureForError()
+                    );
 
             if (
                 r.BuiltinType == BuiltinTypeSpec.Type.String
@@ -6350,13 +6377,14 @@ namespace Mono.CSharp
                 || r.IsDelegate
                 || MemberCache.GetUserOperator(r, CSharp.Operator.OpType.Equality, false) != null
             )
-                ec.Report.Warning(
-                    252,
-                    2,
-                    loc,
-                    "Possible unintended reference comparison. Consider casting the left side expression to type `{0}' to get value comparison",
-                    r.GetSignatureForError()
-                );
+                ec.Report
+                    .Warning(
+                        252,
+                        2,
+                        loc,
+                        "Possible unintended reference comparison. Consider casting the left side expression to type `{0}' to get value comparison",
+                        r.GetSignatureForError()
+                    );
 
             return this;
         }
@@ -6440,14 +6468,15 @@ namespace Mono.CSharp
 
                 if (best_operator == null)
                 {
-                    ec.Report.Error(
-                        34,
-                        loc,
-                        "Operator `{0}' is ambiguous on operands of type `{1}' and `{2}'",
-                        OperName(oper),
-                        l.GetSignatureForError(),
-                        r.GetSignatureForError()
-                    );
+                    ec.Report
+                        .Error(
+                            34,
+                            loc,
+                            "Operator `{0}' is ambiguous on operands of type `{1}' and `{2}'",
+                            OperName(oper),
+                            l.GetSignatureForError(),
+                            r.GetSignatureForError()
+                        );
 
                     best_operator = po;
                     break;
@@ -6500,25 +6529,27 @@ namespace Mono.CSharp
 
             if ((Oper & Operator.EqualityMask) != 0)
             {
-                rc.Report.Warning(
-                    472,
-                    2,
-                    loc,
-                    "The result of comparing value type `{0}' with null is always `{1}'",
-                    valueType.GetSignatureForError(),
-                    c.GetValueAsLiteral()
-                );
+                rc.Report
+                    .Warning(
+                        472,
+                        2,
+                        loc,
+                        "The result of comparing value type `{0}' with null is always `{1}'",
+                        valueType.GetSignatureForError(),
+                        c.GetValueAsLiteral()
+                    );
             }
             else
             {
-                rc.Report.Warning(
-                    464,
-                    2,
-                    loc,
-                    "The result of comparing type `{0}' with null is always `{1}'",
-                    valueType.GetSignatureForError(),
-                    c.GetValueAsLiteral()
-                );
+                rc.Report
+                    .Warning(
+                        464,
+                        2,
+                        loc,
+                        "The result of comparing type `{0}' with null is always `{1}'",
+                        valueType.GetSignatureForError(),
+                        c.GetValueAsLiteral()
+                    );
             }
 
             return c;
@@ -6877,13 +6908,14 @@ namespace Mono.CSharp
                 }
                 catch (OverflowException)
                 {
-                    ec.Report.Warning(
-                        652,
-                        2,
-                        loc,
-                        "A comparison between a constant and a variable is useless. The constant is out of the range of the variable type `{0}'",
-                        type.GetSignatureForError()
-                    );
+                    ec.Report
+                        .Warning(
+                            652,
+                            2,
+                            loc,
+                            "A comparison between a constant and a variable is useless. The constant is out of the range of the variable type `{0}'",
+                            type.GetSignatureForError()
+                        );
                 }
             }
         }
@@ -7545,11 +7577,12 @@ namespace Mono.CSharp
                 "Concat",
                 new[] { typeof(object), typeof(object) }
             );
-            return SLE.Expression.Add(
-                arguments[0].Expr.MakeExpression(ctx),
-                arguments[1].Expr.MakeExpression(ctx),
-                concat
-            );
+            return SLE.Expression
+                .Add(
+                    arguments[0].Expr.MakeExpression(ctx),
+                    arguments[1].Expr.MakeExpression(ctx),
+                    concat
+                );
         }
     }
 
@@ -7582,12 +7615,13 @@ namespace Mono.CSharp
                 || !TypeSpecComparer.IsEqual(type, pd.Types[1])
             )
             {
-                ec.Report.Error(
-                    217,
-                    loc,
-                    "A user-defined operator `{0}' must have each parameter type and return type of the same type in order to be applicable as a short circuit operator",
-                    oper.GetSignatureForError()
-                );
+                ec.Report
+                    .Error(
+                        217,
+                        loc,
+                        "A user-defined operator `{0}' must have each parameter type and return type of the same type in order to be applicable as a short circuit operator",
+                        oper.GetSignatureForError()
+                    );
                 return null;
             }
 
@@ -7596,13 +7630,14 @@ namespace Mono.CSharp
             Expression op_false = GetOperatorFalse(ec, left_dup, loc);
             if (op_true == null || op_false == null)
             {
-                ec.Report.Error(
-                    218,
-                    loc,
-                    "The type `{0}' must have operator `true' and operator `false' defined when `{1}' is used as a short circuit operator",
-                    type.GetSignatureForError(),
-                    oper.GetSignatureForError()
-                );
+                ec.Report
+                    .Error(
+                        218,
+                        loc,
+                        "The type `{0}' must have operator `true' and operator `false' defined when `{1}' is used as a short circuit operator",
+                        type.GetSignatureForError(),
+                        oper.GetSignatureForError()
+                    );
                 return null;
             }
 
@@ -7874,12 +7909,13 @@ namespace Mono.CSharp
             Assign ass = expr as Assign;
             if (ass != null && ass.Source is Constant)
             {
-                ec.Report.Warning(
-                    665,
-                    3,
-                    loc,
-                    "Assignment in conditional expression is always constant. Did you mean to use `==' instead ?"
-                );
+                ec.Report
+                    .Warning(
+                        665,
+                        3,
+                        loc,
+                        "Assignment in conditional expression is always constant. Did you mean to use `==' instead ?"
+                    );
             }
 
             if (expr.Type.BuiltinType == BuiltinTypeSpec.Type.Bool)
@@ -8055,13 +8091,14 @@ namespace Mono.CSharp
                             && true_type != InternalType.ErrorType
                         )
                         {
-                            ec.Report.Error(
-                                172,
-                                true_expr.Location,
-                                "Type of conditional expression cannot be determined as `{0}' and `{1}' convert implicitly to each other",
-                                true_type.GetSignatureForError(),
-                                false_type.GetSignatureForError()
-                            );
+                            ec.Report
+                                .Error(
+                                    172,
+                                    true_expr.Location,
+                                    "Type of conditional expression cannot be determined as `{0}' and `{1}' convert implicitly to each other",
+                                    true_type.GetSignatureForError(),
+                                    false_type.GetSignatureForError()
+                                );
                         }
                     }
 
@@ -8079,13 +8116,14 @@ namespace Mono.CSharp
                 {
                     if (false_type != InternalType.ErrorType && true_type != InternalType.ErrorType)
                     {
-                        ec.Report.Error(
-                            173,
-                            true_expr.Location,
-                            "Type of conditional expression cannot be determined because there is no implicit conversion between `{0}' and `{1}'",
-                            true_type.GetSignatureForError(),
-                            false_type.GetSignatureForError()
-                        );
+                        ec.Report
+                            .Error(
+                                173,
+                                true_expr.Location,
+                                "Type of conditional expression cannot be determined because there is no implicit conversion between `{0}' and `{1}'",
+                                true_type.GetSignatureForError(),
+                                false_type.GetSignatureForError()
+                            );
                     }
                     return null;
                 }
@@ -8131,23 +8169,25 @@ namespace Mono.CSharp
 
             if (!(true_expr is ReferenceExpression && false_expr is ReferenceExpression))
             {
-                rc.Report.Error(
-                    8326,
-                    expr.Location,
-                    "Both ref conditional operators must be ref values"
-                );
+                rc.Report
+                    .Error(
+                        8326,
+                        expr.Location,
+                        "Both ref conditional operators must be ref values"
+                    );
                 return null;
             }
 
             if (!TypeSpecComparer.IsEqual(true_expr.Type, false_expr.Type))
             {
-                rc.Report.Error(
-                    8327,
-                    true_expr.Location,
-                    "The ref conditional expression types `{0}' and `{1}' have to match",
-                    true_expr.Type.GetSignatureForError(),
-                    false_expr.Type.GetSignatureForError()
-                );
+                rc.Report
+                    .Error(
+                        8327,
+                        true_expr.Location,
+                        "The ref conditional expression types `{0}' and `{1}' have to match",
+                        true_expr.Type.GetSignatureForError(),
+                        false_expr.Type.GetSignatureForError()
+                    );
             }
 
             eclass = ExprClass.Value;
@@ -8295,13 +8335,14 @@ namespace Mono.CSharp
         {
             if (IsLockedByStatement)
             {
-                rc.Report.Warning(
-                    728,
-                    2,
-                    loc,
-                    "Possibly incorrect assignment to `{0}' which is the argument to a using or lock statement",
-                    Name
-                );
+                rc.Report
+                    .Warning(
+                        728,
+                        2,
+                        loc,
+                        "Possibly incorrect assignment to `{0}' which is the argument to a using or lock statement",
+                        Name
+                    );
             }
 
             return this;
@@ -8537,12 +8578,13 @@ namespace Mono.CSharp
                 }
                 else if (local_info.IsFixed)
                 {
-                    ec.Report.Error(
-                        1764,
-                        loc,
-                        "Cannot use fixed variable `{0}' inside an anonymous method, lambda expression or query expression",
-                        GetSignatureForError()
-                    );
+                    ec.Report
+                        .Error(
+                            1764,
+                            loc,
+                            "Cannot use fixed variable `{0}' inside an anonymous method, lambda expression or query expression",
+                            GetSignatureForError()
+                        );
                 }
                 else if (local_info.IsByRef || local_info.Type.IsByRefLike)
                 {
@@ -8555,19 +8597,21 @@ namespace Mono.CSharp
                     }
                     else
                     {
-                        ec.Report.Error(
-                            8175,
-                            loc,
-                            "Cannot use by-reference variable `{0}' inside an anonymous method, lambda expression, or query expression",
-                            GetSignatureForError()
-                        );
+                        ec.Report
+                            .Error(
+                                8175,
+                                loc,
+                                "Cannot use by-reference variable `{0}' inside an anonymous method, lambda expression, or query expression",
+                                GetSignatureForError()
+                            );
                     }
                 }
 
                 if (ec.IsVariableCapturingRequired)
                 {
-                    AnonymousMethodStorey storey =
-                        local_info.Block.Explicit.CreateAnonymousMethodStorey(ec);
+                    AnonymousMethodStorey storey = local_info.Block
+                        .Explicit
+                        .CreateAnonymousMethodStorey(ec);
                     storey.CaptureLocalVariable(ec, local_info);
                 }
             }
@@ -8581,12 +8625,13 @@ namespace Mono.CSharp
 
             if (local_info.Type == InternalType.VarOutType)
             {
-                ec.Report.Error(
-                    8048,
-                    loc,
-                    "Cannot use uninitialized variable `{0}'",
-                    GetSignatureForError()
-                );
+                ec.Report
+                    .Error(
+                        8048,
+                        loc,
+                        "Cannot use uninitialized variable `{0}'",
+                        GetSignatureForError()
+                    );
 
                 type = InternalType.ErrorType;
             }
@@ -8794,20 +8839,21 @@ namespace Mono.CSharp
 
                 if (IsRef)
                 {
-                    ec.Report.Error(
-                        1628,
-                        loc,
-                        "Parameter `{0}' cannot be used inside `{1}' when using `ref' or `out' modifier",
-                        Name,
-                        ec.CurrentAnonymousMethod.ContainerType
-                    );
+                    ec.Report
+                        .Error(
+                            1628,
+                            loc,
+                            "Parameter `{0}' cannot be used inside `{1}' when using `ref' or `out' modifier",
+                            Name,
+                            ec.CurrentAnonymousMethod.ContainerType
+                        );
                 }
 
                 if (ec.IsVariableCapturingRequired && !pi.Block.ParametersBlock.IsExpressionTree)
                 {
-                    AnonymousMethodStorey storey = pi.Block.Explicit.CreateAnonymousMethodStorey(
-                        ec
-                    );
+                    AnonymousMethodStorey storey = pi.Block
+                        .Explicit
+                        .CreateAnonymousMethodStorey(ec);
                     storey.CaptureParameter(ec, pi, this);
                 }
             }
@@ -9067,11 +9113,8 @@ namespace Mono.CSharp
                     var arg_sn = arg.Expr as SimpleName;
                     if (arg_sn == null || arg_sn.Arity != 0)
                     {
-                        rc.Report.Error(
-                            8199,
-                            loc,
-                            "The syntax `var (...)' as an lvalue is reserved"
-                        );
+                        rc.Report
+                            .Error(8199, loc, "The syntax `var (...)' as an lvalue is reserved");
                         return ErrorExpression.Instance;
                     }
 
@@ -9173,12 +9216,13 @@ namespace Mono.CSharp
                 {
                     if (member_expr is RuntimeValueExpression)
                     {
-                        ec.Report.Error(
-                            Report.RuntimeErrorId,
-                            loc,
-                            "Cannot invoke a non-delegate type `{0}'",
-                            member_expr.Type.GetSignatureForError()
-                        );
+                        ec.Report
+                            .Error(
+                                Report.RuntimeErrorId,
+                                loc,
+                                "Cannot invoke a non-delegate type `{0}'",
+                                member_expr.Type.GetSignatureForError()
+                            );
                         return null;
                     }
 
@@ -9189,12 +9233,13 @@ namespace Mono.CSharp
                         return null;
                     }
 
-                    ec.Report.Error(
-                        1955,
-                        loc,
-                        "The member `{0}' cannot be used as method or delegate",
-                        member_expr.GetSignatureForError()
-                    );
+                    ec.Report
+                        .Error(
+                            1955,
+                            loc,
+                            "The member `{0}' cannot be used as method or delegate",
+                            member_expr.GetSignatureForError()
+                        );
                     return null;
                 }
             }
@@ -9221,17 +9266,19 @@ namespace Mono.CSharp
             )
             {
                 if (mg.IsBase)
-                    ec.Report.Error(
-                        250,
-                        loc,
-                        "Do not directly call your base class Finalize method. It is called automatically from your destructor"
-                    );
+                    ec.Report
+                        .Error(
+                            250,
+                            loc,
+                            "Do not directly call your base class Finalize method. It is called automatically from your destructor"
+                        );
                 else
-                    ec.Report.Error(
-                        245,
-                        loc,
-                        "Destructors and object.Finalize cannot be called directly. Consider calling IDisposable.Dispose if available"
-                    );
+                    ec.Report
+                        .Error(
+                            245,
+                            loc,
+                            "Destructors and object.Finalize cannot be called directly. Consider calling IDisposable.Dispose if available"
+                        );
                 return null;
             }
 
@@ -9269,12 +9316,13 @@ namespace Mono.CSharp
             {
                 if (mg.IsBase)
                 {
-                    ec.Report.Error(
-                        1971,
-                        loc,
-                        "The base call to method `{0}' cannot be dynamically dispatched. Consider casting the dynamic arguments or eliminating the base access",
-                        mg.Name
-                    );
+                    ec.Report
+                        .Error(
+                            1971,
+                            loc,
+                            "The base call to method `{0}' cannot be dynamically dispatched. Consider casting the dynamic arguments or eliminating the base access",
+                            mg.Name
+                        );
                     return null;
                 }
 
@@ -9411,12 +9459,13 @@ namespace Mono.CSharp
                 return false;
 
             ec.Report.SymbolRelatedToPreviousError(method);
-            ec.Report.Error(
-                571,
-                loc,
-                "`{0}': cannot explicitly call operator or accessor",
-                method.GetSignatureForError()
-            );
+            ec.Report
+                .Error(
+                    571,
+                    loc,
+                    "`{0}': cannot explicitly call operator or accessor",
+                    method.GetSignatureForError()
+                );
 
             return true;
         }
@@ -9466,11 +9515,12 @@ namespace Mono.CSharp
             throw new NotSupportedException();
 #else
             var instance_expr = instance == null ? null : instance.MakeExpression(ctx);
-            return SLE.Expression.Call(
-                instance_expr,
-                (MethodInfo)mi.GetMetaInfo(),
-                Arguments.MakeExpression(args, ctx)
-            );
+            return SLE.Expression
+                .Call(
+                    instance_expr,
+                    (MethodInfo)mi.GetMetaInfo(),
+                    Arguments.MakeExpression(args, ctx)
+                );
 #endif
         }
 
@@ -9626,11 +9676,12 @@ namespace Mono.CSharp
         {
             if (RequestedType is TupleTypeExpr)
             {
-                ec.Report.Error(
-                    8181,
-                    loc,
-                    "Tuple type cannot be used in an object creation expression. Use a tuple literal expression instead."
-                );
+                ec.Report
+                    .Error(
+                        8181,
+                        loc,
+                        "Tuple type cannot be used in an object creation expression. Use a tuple literal expression instead."
+                    );
             }
 
             type = RequestedType.ResolveAsType(ec);
@@ -9641,12 +9692,13 @@ namespace Mono.CSharp
 
             if (type.IsPointer)
             {
-                ec.Report.Error(
-                    1919,
-                    loc,
-                    "Unsafe type `{0}' cannot be used in an object creation expression",
-                    type.GetSignatureForError()
-                );
+                ec.Report
+                    .Error(
+                        1919,
+                        loc,
+                        "Unsafe type `{0}' cannot be used in an object creation expression",
+                        type.GetSignatureForError()
+                    );
                 return null;
             }
 
@@ -9677,22 +9729,24 @@ namespace Mono.CSharp
                     && !TypeSpec.IsValueType(tparam)
                 )
                 {
-                    ec.Report.Error(
-                        304,
-                        loc,
-                        "Cannot create an instance of the variable type `{0}' because it does not have the new() constraint",
-                        type.GetSignatureForError()
-                    );
+                    ec.Report
+                        .Error(
+                            304,
+                            loc,
+                            "Cannot create an instance of the variable type `{0}' because it does not have the new() constraint",
+                            type.GetSignatureForError()
+                        );
                 }
 
                 if ((arguments != null) && (arguments.Count != 0))
                 {
-                    ec.Report.Error(
-                        417,
-                        loc,
-                        "`{0}': cannot provide arguments when creating an instance of a variable type",
-                        type.GetSignatureForError()
-                    );
+                    ec.Report
+                        .Error(
+                            417,
+                            loc,
+                            "`{0}': cannot provide arguments when creating an instance of a variable type",
+                            type.GetSignatureForError()
+                        );
                 }
 
                 return this;
@@ -9701,12 +9755,13 @@ namespace Mono.CSharp
             if (type.IsStatic)
             {
                 ec.Report.SymbolRelatedToPreviousError(type);
-                ec.Report.Error(
-                    712,
-                    loc,
-                    "Cannot create an instance of the static class `{0}'",
-                    type.GetSignatureForError()
-                );
+                ec.Report
+                    .Error(
+                        712,
+                        loc,
+                        "Cannot create an instance of the static class `{0}'",
+                        type.GetSignatureForError()
+                    );
                 return null;
             }
 
@@ -9720,12 +9775,13 @@ namespace Mono.CSharp
                 }
 
                 ec.Report.SymbolRelatedToPreviousError(type);
-                ec.Report.Error(
-                    144,
-                    loc,
-                    "Cannot create an instance of the abstract class or interface `{0}'",
-                    type.GetSignatureForError()
-                );
+                ec.Report
+                    .Error(
+                        144,
+                        loc,
+                        "Cannot create an instance of the abstract class or interface `{0}'",
+                        type.GetSignatureForError()
+                    );
                 return null;
             }
 
@@ -9937,10 +9993,11 @@ namespace Mono.CSharp
 #if STATIC
             return base.MakeExpression(ctx);
 #else
-            return SLE.Expression.New(
-                (ConstructorInfo)method.GetMetaInfo(),
-                Arguments.MakeExpression(arguments, ctx)
-            );
+            return SLE.Expression
+                .New(
+                    (ConstructorInfo)method.GetMetaInfo(),
+                    Arguments.MakeExpression(arguments, ctx)
+                );
 #endif
         }
 
@@ -10034,11 +10091,12 @@ namespace Mono.CSharp
             {
                 if (variable.TypeExpression is VarExpr)
                 {
-                    rc.Report.Error(
-                        820,
-                        loc,
-                        "An implicitly typed local variable declarator cannot use an array initializer"
-                    );
+                    rc.Report
+                        .Error(
+                            820,
+                            loc,
+                            "An implicitly typed local variable declarator cannot use an array initializer"
+                        );
                     return EmptyExpression.Null;
                 }
 
@@ -10229,12 +10287,13 @@ namespace Mono.CSharp
                     // TODO: probe.Count does not fit ulong in
                     if (value != probe.Count)
                     {
-                        ec.Report.Error(
-                            847,
-                            loc,
-                            "An array initializer of length `{0}' was expected",
-                            value.ToString()
-                        );
+                        ec.Report
+                            .Error(
+                                847,
+                                loc,
+                                "An array initializer of length `{0}' was expected",
+                                value.ToString()
+                            );
                         return false;
                     }
 
@@ -10253,11 +10312,12 @@ namespace Mono.CSharp
                     var sub_probe = o as ArrayInitializer;
                     if (idx + 1 >= dimensions)
                     {
-                        ec.Report.Error(
-                            623,
-                            loc,
-                            "Array initializers can only be used in a variable or field initializer. Try using a new expression instead"
-                        );
+                        ec.Report
+                            .Error(
+                                623,
+                                loc,
+                                "Array initializers can only be used in a variable or field initializer. Try using a new expression instead"
+                            );
                         return false;
                     }
 
@@ -10267,12 +10327,13 @@ namespace Mono.CSharp
 
                     if (bounds[idx + 1] != sub_probe.Count)
                     {
-                        ec.Report.Error(
-                            847,
-                            sub_probe.Location,
-                            "An array initializer of length `{0}' was expected",
-                            bounds[idx + 1].ToString()
-                        );
+                        ec.Report
+                            .Error(
+                                847,
+                                sub_probe.Location,
+                                "An array initializer of length `{0}' was expected",
+                                bounds[idx + 1].ToString()
+                            );
                         return false;
                     }
 
@@ -10344,11 +10405,12 @@ namespace Mono.CSharp
 
             if (dimensions > 1)
             {
-                ec.Report.Error(
-                    838,
-                    loc,
-                    "An expression tree cannot contain a multidimensional array initializer"
-                );
+                ec.Report
+                    .Error(
+                        838,
+                        loc,
+                        "An expression tree cannot contain a multidimensional array initializer"
+                    );
                 return null;
             }
 
@@ -10505,11 +10567,12 @@ namespace Mono.CSharp
             var ac = type as ArrayContainer;
             if (ac == null)
             {
-                ec.Report.Error(
-                    622,
-                    loc,
-                    "Can only use array initializer expressions to assign to array types. Try using a new expression instead"
-                );
+                ec.Report
+                    .Error(
+                        622,
+                        loc,
+                        "Can only use array initializer expressions to assign to array types. Try using a new expression instead"
+                    );
                 return false;
             }
 
@@ -11003,11 +11066,12 @@ namespace Mono.CSharp
                 || arguments.Count != rank.Dimension
             )
             {
-                ec.Report.Error(
-                    826,
-                    loc,
-                    "The type of an implicitly typed array cannot be inferred from the initializer. Try specifying array type explicitly"
-                );
+                ec.Report
+                    .Error(
+                        826,
+                        loc,
+                        "The type of an implicitly typed array cannot be inferred from the initializer. Try specifying array type explicitly"
+                    );
                 return null;
             }
 
@@ -11169,31 +11233,34 @@ namespace Mono.CSharp
             if (fc.IsDefinitelyAssigned(variable_info))
                 return;
 
-            fc.Report.Error(
-                188,
-                loc,
-                "The `this' object cannot be used before all of its fields are assigned to"
-            );
+            fc.Report
+                .Error(
+                    188,
+                    loc,
+                    "The `this' object cannot be used before all of its fields are assigned to"
+                );
         }
 
         protected virtual void Error_ThisNotAvailable(ResolveContext ec)
         {
             if (ec.IsStatic && !ec.HasSet(ResolveContext.Options.ConstantScope))
             {
-                ec.Report.Error(
-                    26,
-                    loc,
-                    "Keyword `this' is not valid in a static property, static method, or static field initializer"
-                );
+                ec.Report
+                    .Error(
+                        26,
+                        loc,
+                        "Keyword `this' is not valid in a static property, static method, or static field initializer"
+                    );
             }
             else if (ec.CurrentAnonymousMethod != null)
             {
-                ec.Report.Error(
-                    1673,
-                    loc,
-                    "Anonymous methods inside structs cannot access instance members of `this'. "
-                        + "Consider copying `this' to a local variable outside the anonymous method and using the local instead"
-                );
+                ec.Report
+                    .Error(
+                        1673,
+                        loc,
+                        "Anonymous methods inside structs cannot access instance members of `this'. "
+                            + "Consider copying `this' to a local variable outside the anonymous method and using the local instead"
+                    );
             }
             else
             {
@@ -11287,17 +11354,19 @@ namespace Mono.CSharp
             )
             {
                 if (right_side == EmptyExpression.UnaryAddress)
-                    ec.Report.Error(
-                        459,
-                        loc,
-                        "Cannot take the address of `this' because it is read-only"
-                    );
+                    ec.Report
+                        .Error(
+                            459,
+                            loc,
+                            "Cannot take the address of `this' because it is read-only"
+                        );
                 else if (right_side == EmptyExpression.OutAccess)
-                    ec.Report.Error(
-                        1605,
-                        loc,
-                        "Cannot pass `this' as a ref or out argument because it is read-only"
-                    );
+                    ec.Report
+                        .Error(
+                            1605,
+                            loc,
+                            "Cannot pass `this' as a ref or out argument because it is read-only"
+                        );
                 else
                     ec.Report.Error(1604, loc, "Cannot assign to `this' because it is read-only");
             }
@@ -11370,11 +11439,12 @@ namespace Mono.CSharp
                 || !ec.CurrentBlock.ParametersBlock.Parameters.HasArglist
             )
             {
-                ec.Report.Error(
-                    190,
-                    loc,
-                    "The __arglist construct is valid only within a variable argument method"
-                );
+                ec.Report
+                    .Error(
+                        190,
+                        loc,
+                        "The __arglist construct is valid only within a variable argument method"
+                    );
             }
 
             return this;
@@ -11434,11 +11504,12 @@ namespace Mono.CSharp
 
         public override Expression CreateExpressionTree(ResolveContext ec)
         {
-            ec.Report.Error(
-                1952,
-                loc,
-                "An expression tree cannot contain a method with variable arguments"
-            );
+            ec.Report
+                .Error(
+                    1952,
+                    loc,
+                    "An expression tree cannot contain a method with variable arguments"
+                );
             return null;
         }
 
@@ -11724,11 +11795,12 @@ namespace Mono.CSharp
 
                 if (typearg.BuiltinType == BuiltinTypeSpec.Type.Dynamic)
                 {
-                    ec.Report.Error(
-                        1962,
-                        QueriedType.Location,
-                        "The typeof operator cannot be used on the dynamic type"
-                    );
+                    ec.Report
+                        .Error(
+                            1962,
+                            QueriedType.Location,
+                            "The typeof operator cannot be used on the dynamic type"
+                        );
                 }
             }
 
@@ -11779,12 +11851,15 @@ namespace Mono.CSharp
                 {
                     if (InflatedTypeSpec.ContainsTypeParameter(gt))
                     {
-                        rc.Module.Compiler.Report.Error(
-                            416,
-                            loc,
-                            "`{0}': an attribute argument cannot use type parameters",
-                            typearg.GetSignatureForError()
-                        );
+                        rc.Module
+                            .Compiler
+                            .Report
+                            .Error(
+                                416,
+                                loc,
+                                "`{0}': an attribute argument cannot use type parameters",
+                                typearg.GetSignatureForError()
+                            );
                         return;
                     }
 
@@ -12002,12 +12077,13 @@ namespace Mono.CSharp
 
             if (!ec.IsUnsafe)
             {
-                ec.Report.Error(
-                    233,
-                    loc,
-                    "`{0}' does not have a predefined size, therefore sizeof can only be used in an unsafe context (consider using System.Runtime.InteropServices.Marshal.SizeOf)",
-                    type_queried.GetSignatureForError()
-                );
+                ec.Report
+                    .Error(
+                        233,
+                        loc,
+                        "`{0}' does not have a predefined size, therefore sizeof can only be used in an unsafe context (consider using System.Runtime.InteropServices.Marshal.SizeOf)",
+                        type_queried.GetSignatureForError()
+                    );
             }
 
             type = ec.BuiltinTypes.Int;
@@ -12122,12 +12198,15 @@ namespace Mono.CSharp
         {
             if ((restrictions & MemberLookupRestrictions.InvocableOnly) != 0)
             {
-                rc.Module.Compiler.Report.Error(
-                    687,
-                    loc,
-                    "The namespace alias qualifier `::' cannot be used to invoke a method. Consider using `.' instead",
-                    GetSignatureForError()
-                );
+                rc.Module
+                    .Compiler
+                    .Report
+                    .Error(
+                        687,
+                        loc,
+                        "The namespace alias qualifier `::' cannot be used to invoke a method. Consider using `.' instead",
+                        GetSignatureForError()
+                    );
 
                 return null;
             }
@@ -12222,11 +12301,12 @@ namespace Mono.CSharp
         protected virtual void Error_OperatorCannotBeApplied(ResolveContext rc, TypeSpec type)
         {
             if (type == InternalType.NullLiteral && rc.IsRuntimeBinder)
-                rc.Report.Error(
-                    Report.RuntimeErrorId,
-                    loc,
-                    "Cannot perform member binding on `null' value"
-                );
+                rc.Report
+                    .Error(
+                        Report.RuntimeErrorId,
+                        loc,
+                        "Cannot perform member binding on `null' value"
+                    );
             else
                 expr.Error_OperatorCannotBeApplied(rc, loc, ".", type);
         }
@@ -12457,13 +12537,14 @@ namespace Mono.CSharp
                     && (sn == null || expr.ProbeIdenticalTypeName(rc, expr, sn) == expr)
                 )
                 {
-                    rc.Report.Error(
-                        572,
-                        loc,
-                        "`{0}': cannot reference a type through an expression. Consider using `{1}' instead",
-                        Name,
-                        texpr.GetSignatureForError()
-                    );
+                    rc.Report
+                        .Error(
+                            572,
+                            loc,
+                            "`{0}': cannot reference a type through an expression. Consider using `{1}' instead",
+                            Name,
+                            texpr.GetSignatureForError()
+                        );
                 }
 
                 if (!texpr.Type.IsAccessible(rc))
@@ -12571,24 +12652,30 @@ namespace Mono.CSharp
             TypeSpec expr_type = tnew_expr;
             if (TypeManager.IsGenericParameter(expr_type))
             {
-                rc.Module.Compiler.Report.Error(
-                    704,
-                    loc,
-                    "A nested type cannot be specified through a type parameter `{0}'",
-                    tnew_expr.GetSignatureForError()
-                );
+                rc.Module
+                    .Compiler
+                    .Report
+                    .Error(
+                        704,
+                        loc,
+                        "A nested type cannot be specified through a type parameter `{0}'",
+                        tnew_expr.GetSignatureForError()
+                    );
                 return null;
             }
 
             var qam = this as QualifiedAliasMember;
             if (qam != null)
             {
-                rc.Module.Compiler.Report.Error(
-                    431,
-                    loc,
-                    "Alias `{0}' cannot be used with `::' since it denotes a type. Consider replacing `::' with `.'",
-                    qam.Alias
-                );
+                rc.Module
+                    .Compiler
+                    .Report
+                    .Error(
+                        431,
+                        loc,
+                        "Alias `{0}' cannot be used with `::' since it denotes a type. Consider replacing `::' with `.'",
+                        qam.Alias
+                    );
             }
 
             TypeSpec nested = null;
@@ -12690,13 +12777,16 @@ namespace Mono.CSharp
                 return;
             }
 
-            rc.Module.Compiler.Report.Error(
-                426,
-                loc,
-                "The nested type `{0}' does not exist in the type `{1}'",
-                Name,
-                expr_type.GetSignatureForError()
-            );
+            rc.Module
+                .Compiler
+                .Report
+                .Error(
+                    426,
+                    loc,
+                    "The nested type `{0}' does not exist in the type `{1}'",
+                    Name,
+                    expr_type.GetSignatureForError()
+                );
         }
 
         protected override void Error_InvalidExpressionStatement(Report report, Location loc)
@@ -12718,11 +12808,9 @@ namespace Mono.CSharp
             {
                 ec.Report.SymbolRelatedToPreviousError(type);
 
-                var cand = ec.Module.GlobalRootNamespace.FindExtensionMethodNamespaces(
-                    ec,
-                    name,
-                    Arity
-                );
+                var cand = ec.Module
+                    .GlobalRootNamespace
+                    .FindExtensionMethodNamespaces(ec, name, Arity);
                 string missing;
                 // a using directive or an assembly reference
                 if (cand != null)
@@ -12734,14 +12822,15 @@ namespace Mono.CSharp
                     missing = "an assembly reference";
                 }
 
-                ec.Report.Error(
-                    1061,
-                    loc,
-                    "Type `{0}' does not contain a definition for `{1}' and no extension method `{1}' of type `{0}' could be found. Are you missing {2}?",
-                    type.GetSignatureForError(),
-                    name,
-                    missing
-                );
+                ec.Report
+                    .Error(
+                        1061,
+                        loc,
+                        "Type `{0}' does not contain a definition for `{1}' and no extension method `{1}' of type `{0}' could be found. Are you missing {2}?",
+                        type.GetSignatureForError(),
+                        name,
+                        missing
+                    );
                 return;
             }
 
@@ -13053,12 +13142,13 @@ namespace Mono.CSharp
         {
             if (type != InternalType.ErrorType)
             {
-                rc.Report.Error(
-                    21,
-                    loc,
-                    "Cannot apply indexing with [] to an expression of type `{0}'",
-                    type.GetSignatureForError()
-                );
+                rc.Report
+                    .Error(
+                        21,
+                        loc,
+                        "Cannot apply indexing with [] to an expression of type `{0}'",
+                        type.GetSignatureForError()
+                    );
             }
         }
 
@@ -13205,13 +13295,14 @@ namespace Mono.CSharp
             int rank = ea.Arguments.Count;
             if (ac.Rank != rank)
             {
-                ec.Report.Error(
-                    22,
-                    ea.Location,
-                    "Wrong number of indexes `{0}' inside [], expected `{1}'",
-                    rank.ToString(),
-                    ac.Rank.ToString()
-                );
+                ec.Report
+                    .Error(
+                        22,
+                        ea.Location,
+                        "Wrong number of indexes `{0}' inside [], expected `{1}'",
+                        rank.ToString(),
+                        ac.Rank.ToString()
+                    );
                 return null;
             }
 
@@ -13247,12 +13338,13 @@ namespace Mono.CSharp
 
         protected override void Error_NegativeArrayIndex(ResolveContext ec, Location loc)
         {
-            ec.Report.Warning(
-                251,
-                2,
-                loc,
-                "Indexing an array with a negative index (array indices always start at zero)"
-            );
+            ec.Report
+                .Warning(
+                    251,
+                    2,
+                    loc,
+                    "Indexing an array with a negative index (array indices always start at zero)"
+                );
         }
 
         public override void FlowAnalysis(FlowAnalysisContext fc)
@@ -13453,18 +13545,14 @@ namespace Mono.CSharp
 
         public SLE.Expression MakeAssignExpression(BuilderContext ctx, Expression source)
         {
-            return SLE.Expression.ArrayAccess(
-                ea.Expr.MakeExpression(ctx),
-                MakeExpressionArguments(ctx)
-            );
+            return SLE.Expression
+                .ArrayAccess(ea.Expr.MakeExpression(ctx), MakeExpressionArguments(ctx));
         }
 
         public override SLE.Expression MakeExpression(BuilderContext ctx)
         {
-            return SLE.Expression.ArrayIndex(
-                ea.Expr.MakeExpression(ctx),
-                MakeExpressionArguments(ctx)
-            );
+            return SLE.Expression
+                .ArrayIndex(ea.Expr.MakeExpression(ctx), MakeExpressionArguments(ctx));
         }
 
         SLE.Expression[] MakeExpressionArguments(BuilderContext ctx)
@@ -13682,14 +13770,16 @@ namespace Mono.CSharp
 #else
             var value = new[] { source.MakeExpression(ctx) };
             var args = Arguments.MakeExpression(arguments, ctx).Concat(value);
-            return SLE.Expression.Block(
-                SLE.Expression.Call(
-                    InstanceExpression.MakeExpression(ctx),
-                    (MethodInfo)Setter.GetMetaInfo(),
-                    args
-                ),
-                value[0]
-            );
+            return SLE.Expression
+                .Block(
+                    SLE.Expression
+                        .Call(
+                            InstanceExpression.MakeExpression(ctx),
+                            (MethodInfo)Setter.GetMetaInfo(),
+                            args
+                        ),
+                    value[0]
+                );
 #endif
         }
 
@@ -13699,11 +13789,12 @@ namespace Mono.CSharp
             return base.MakeExpression(ctx);
 #else
             var args = Arguments.MakeExpression(arguments, ctx);
-            return SLE.Expression.Call(
-                InstanceExpression.MakeExpression(ctx),
-                (MethodInfo)Getter.GetMetaInfo(),
-                args
-            );
+            return SLE.Expression
+                .Call(
+                    InstanceExpression.MakeExpression(ctx),
+                    (MethodInfo)Getter.GetMetaInfo(),
+                    args
+                );
 #endif
         }
 
@@ -13749,11 +13840,12 @@ namespace Mono.CSharp
                 Arguments args = new Arguments(arguments.Count + 1);
                 if (IsBase)
                 {
-                    rc.Report.Error(
-                        1972,
-                        loc,
-                        "The indexer base access cannot be dynamically dispatched. Consider casting the dynamic arguments or eliminating the base access"
-                    );
+                    rc.Report
+                        .Error(
+                            1972,
+                            loc,
+                            "The indexer base access cannot be dynamically dispatched. Consider casting the dynamic arguments or eliminating the base access"
+                        );
                 }
                 else
                 {
@@ -13898,11 +13990,8 @@ namespace Mono.CSharp
             }
             else
             {
-                ec.Report.Error(
-                    1512,
-                    loc,
-                    "Keyword `base' is not available in the current context"
-                );
+                ec.Report
+                    .Error(1512, loc, "Keyword `base' is not available in the current context");
             }
         }
 
@@ -13937,11 +14026,12 @@ namespace Mono.CSharp
 
             public override Expression DoResolveLValue(ResolveContext rc, Expression right_side)
             {
-                rc.Report.Error(
-                    206,
-                    right_side.Location,
-                    "A property, indexer or dynamic member access may not be passed as `ref' or `out' parameter"
-                );
+                rc.Report
+                    .Error(
+                        206,
+                        right_side.Location,
+                        "A property, indexer or dynamic member access may not be passed as `ref' or `out' parameter"
+                    );
 
                 return null;
             }
@@ -14175,11 +14265,12 @@ namespace Mono.CSharp
 #if STATIC
             return base.MakeExpression(ctx);
 #else
-            return SLE.Expression.Convert(
-                source.MakeExpression(ctx),
-                type.GetMetaInfo(),
-                (MethodInfo)method.GetMetaInfo()
-            );
+            return SLE.Expression
+                .Convert(
+                    source.MakeExpression(ctx),
+                    type.GetMetaInfo(),
+                    (MethodInfo)method.GetMetaInfo()
+                );
 #endif
         }
     }
@@ -14315,22 +14406,28 @@ namespace Mono.CSharp
             {
                 if (type.IsSpecialRuntimeType || type.IsByRefLike)
                 {
-                    ec.Module.Compiler.Report.Error(
-                        611,
-                        loc,
-                        "Array elements cannot be of type `{0}'",
-                        type.GetSignatureForError()
-                    );
+                    ec.Module
+                        .Compiler
+                        .Report
+                        .Error(
+                            611,
+                            loc,
+                            "Array elements cannot be of type `{0}'",
+                            type.GetSignatureForError()
+                        );
                 }
                 else if (type.IsStatic)
                 {
                     ec.Module.Compiler.Report.SymbolRelatedToPreviousError(type);
-                    ec.Module.Compiler.Report.Error(
-                        719,
-                        loc,
-                        "Array elements cannot be of static type `{0}'",
-                        type.GetSignatureForError()
-                    );
+                    ec.Module
+                        .Compiler
+                        .Report
+                        .Error(
+                            719,
+                            loc,
+                            "Array elements cannot be of static type `{0}'",
+                            type.GetSignatureForError()
+                        );
                 }
                 else
                 {
@@ -14618,13 +14715,14 @@ namespace Mono.CSharp
         )
         {
             var etype = ((PointerContainer)type).Element;
-            rc.Report.Error(
-                8346,
-                loc,
-                "Cannot convert a stackalloc expression of type `{0}' to type `{1}'",
-                etype.GetSignatureForError(),
-                target.GetSignatureForError()
-            );
+            rc.Report
+                .Error(
+                    8346,
+                    loc,
+                    "Cannot convert a stackalloc expression of type `{0}' to type `{1}'",
+                    etype.GetSignatureForError(),
+                    target.GetSignatureForError()
+                );
         }
 
         protected override void CloneTo(CloneContext clonectx, Expression t)
@@ -14830,24 +14928,26 @@ namespace Mono.CSharp
                 }
                 else if (!(member is PropertyExpr || member is FieldExpr))
                 {
-                    rc.Report.Error(
-                        1913,
-                        loc,
-                        "Member `{0}' cannot be initialized. An object initializer may only be used for fields, or properties",
-                        member.GetSignatureForError()
-                    );
+                    rc.Report
+                        .Error(
+                            1913,
+                            loc,
+                            "Member `{0}' cannot be initialized. An object initializer may only be used for fields, or properties",
+                            member.GetSignatureForError()
+                        );
 
                     return false;
                 }
 
                 if (me.IsStatic)
                 {
-                    rc.Report.Error(
-                        1914,
-                        loc,
-                        "Static field or property `{0}' cannot be assigned in an object initializer",
-                        me.GetSignatureForError()
-                    );
+                    rc.Report
+                        .Error(
+                            1914,
+                            loc,
+                            "Static field or property `{0}' cannot be assigned in an object initializer",
+                            me.GetSignatureForError()
+                        );
                 }
 
                 target = me;
@@ -14919,11 +15019,12 @@ namespace Mono.CSharp
             {
                 if (a.ArgType == Argument.AType.ExtensionType)
                 {
-                    ec.Report.Error(
-                        8075,
-                        a.Expr.Location,
-                        "An expression tree cannot contain a collection initializer with extension method"
-                    );
+                    ec.Report
+                        .Error(
+                            8075,
+                            a.Expr.Location,
+                            "An expression tree cannot contain a collection initializer with extension method"
+                        );
                     continue;
                 }
                 expr_initializers.Add(a.CreateExpressionTree(ec));
@@ -15112,15 +15213,16 @@ namespace Mono.CSharp
                             && t.BuiltinType != BuiltinTypeSpec.Type.Dynamic
                         )
                         {
-                            ec.Report.Error(
-                                1922,
-                                loc,
-                                "A field or property `{0}' cannot be initialized with a collection "
-                                    + "object initializer because type `{1}' does not implement `{2}' interface",
-                                ec.CurrentInitializerVariable.GetSignatureForError(),
-                                ec.CurrentInitializerVariable.Type.GetSignatureForError(),
-                                ec.BuiltinTypes.IEnumerable.GetSignatureForError()
-                            );
+                            ec.Report
+                                .Error(
+                                    1922,
+                                    loc,
+                                    "A field or property `{0}' cannot be initialized with a collection "
+                                        + "object initializer because type `{1}' does not implement `{2}' interface",
+                                    ec.CurrentInitializerVariable.GetSignatureForError(),
+                                    ec.CurrentInitializerVariable.Type.GetSignatureForError(),
+                                    ec.BuiltinTypes.IEnumerable.GetSignatureForError()
+                                );
                             return null;
                         }
                         is_collection_initialization = true;
@@ -15130,14 +15232,15 @@ namespace Mono.CSharp
                 {
                     if (is_collection_initialization != (element_initializer == null))
                     {
-                        ec.Report.Error(
-                            747,
-                            initializer.Location,
-                            "Inconsistent `{0}' member declaration",
-                            is_collection_initialization
-                                ? "collection initializer"
-                                : "object initializer"
-                        );
+                        ec.Report
+                            .Error(
+                                747,
+                                initializer.Location,
+                                "Inconsistent `{0}' member declaration",
+                                is_collection_initialization
+                                    ? "collection initializer"
+                                    : "object initializer"
+                            );
                         continue;
                     }
 
@@ -15148,12 +15251,13 @@ namespace Mono.CSharp
                     {
                         if (element_names.Contains(element_initializer.Name))
                         {
-                            ec.Report.Error(
-                                1912,
-                                element_initializer.Location,
-                                "An object initializer includes more than one member `{0}' initialization",
-                                element_initializer.Name
-                            );
+                            ec.Report
+                                .Error(
+                                    1912,
+                                    element_initializer.Location,
+                                    "An object initializer includes more than one member `{0}' initialization",
+                                    element_initializer.Name
+                                );
                         }
                         else
                         {
@@ -15174,12 +15278,13 @@ namespace Mono.CSharp
             {
                 if (TypeManager.HasElementType(type))
                 {
-                    ec.Report.Error(
-                        1925,
-                        loc,
-                        "Cannot initialize object of type `{0}' with a collection initializer",
-                        type.GetSignatureForError()
-                    );
+                    ec.Report
+                        .Error(
+                            1925,
+                            loc,
+                            "Cannot initialize object of type `{0}' with a collection initializer",
+                            type.GetSignatureForError()
+                        );
                 }
             }
 
@@ -15335,11 +15440,12 @@ namespace Mono.CSharp
 
             if (type.IsDelegate)
             {
-                rc.Report.Error(
-                    1958,
-                    Initializers.Location,
-                    "Object and collection initializers cannot be used to instantiate a delegate"
-                );
+                rc.Report
+                    .Error(
+                        1958,
+                        Initializers.Location,
+                        "Object and collection initializers cannot be used to instantiate a delegate"
+                    );
             }
 
             Expression previous = rc.CurrentInitializerVariable;
@@ -15698,13 +15804,14 @@ namespace Mono.CSharp
 
         protected virtual void Error_InvalidInitializer(ResolveContext ec, string initializer)
         {
-            ec.Report.Error(
-                828,
-                loc,
-                "An anonymous type property `{0}' cannot be initialized with `{1}'",
-                Name,
-                initializer
-            );
+            ec.Report
+                .Error(
+                    828,
+                    loc,
+                    "An anonymous type property `{0}' cannot be initialized with `{1}'",
+                    Name,
+                    initializer
+                );
         }
     }
 
@@ -15948,12 +16055,13 @@ namespace Mono.CSharp
             var value = (int)c.GetValueAsLong();
             if (value > 32767 || value < -32767)
             {
-                rc.Report.Warning(
-                    8094,
-                    1,
-                    Alignment.Location,
-                    "Alignment value has a magnitude greater than 32767 and may result in a large formatted string"
-                );
+                rc.Report
+                    .Warning(
+                        8094,
+                        1,
+                        Alignment.Location,
+                        "Alignment value has a magnitude greater than 32767 and may result in a large formatted string"
+                    );
             }
 
             return value;
@@ -16058,11 +16166,12 @@ namespace Mono.CSharp
             if (res == null || !CanBeByRef(res))
             {
                 if (res?.Type != InternalType.ErrorType)
-                    rc.Report.Error(
-                        8156,
-                        expr.Location,
-                        "An expression cannot be used in this context because it may not be returned by reference"
-                    );
+                    rc.Report
+                        .Error(
+                            8156,
+                            expr.Location,
+                            "An expression cannot be used in this context because it may not be returned by reference"
+                        );
                 return ErrorExpression.Instance;
             }
 
@@ -16091,12 +16200,13 @@ namespace Mono.CSharp
             bool expl
         )
         {
-            rc.Report.Error(
-                8173,
-                loc,
-                "The expression must be of type `{0}' because it is being assigned by reference",
-                target.GetSignatureForError()
-            );
+            rc.Report
+                .Error(
+                    8173,
+                    loc,
+                    "The expression must be of type `{0}' because it is being assigned by reference",
+                    target.GetSignatureForError()
+                );
         }
     }
 
@@ -16124,11 +16234,12 @@ namespace Mono.CSharp
 
         public override Expression CreateExpressionTree(ResolveContext rc)
         {
-            rc.Report.Error(
-                8153,
-                Location,
-                "An expression tree lambda cannot contain a call to a method, property, or indexer that returns by reference"
-            );
+            rc.Report
+                .Error(
+                    8153,
+                    Location,
+                    "An expression tree lambda cannot contain a call to a method, property, or indexer that returns by reference"
+                );
             return null;
         }
 
@@ -16177,12 +16288,13 @@ namespace Mono.CSharp
         {
             if (expr.ContainsEmitWithAwait())
             {
-                rc.Report.Error(
-                    8178,
-                    loc,
-                    "`await' cannot be used in an expression containing a call to `{0}' because it returns by reference",
-                    expr.GetSignatureForError()
-                );
+                rc.Report
+                    .Error(
+                        8178,
+                        loc,
+                        "`await' cannot be used in an expression containing a call to `{0}' because it returns by reference",
+                        expr.GetSignatureForError()
+                    );
             }
 
             return DoResolve(rc);

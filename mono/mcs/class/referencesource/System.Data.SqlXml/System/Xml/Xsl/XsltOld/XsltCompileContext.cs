@@ -92,9 +92,9 @@ namespace System.Xml.Xsl.XsltOld
             if (result == null && !variable.IsGlobal)
             {
                 // This was uninitialized local variable. May be we have sutable global var too?
-                VariableAction global = this.manager.VariableScope.ResolveGlobalVariable(
-                    variable.Name
-                );
+                VariableAction global = this.manager
+                    .VariableScope
+                    .ResolveGlobalVariable(variable.Name);
                 if (global != null)
                 {
                     result = this.processor.GetVariableValue(global);
@@ -348,12 +348,13 @@ namespace System.Xml.Xsl.XsltOld
             else
             {
                 return new XPathSingletonIterator(
-                    this.processor.GetNavigator(
-                        ComposeUri(
-                            XmlConvert.ToXPathString(arg0),
-                            baseUri ?? this.manager.Navigator.BaseURI
+                    this.processor
+                        .GetNavigator(
+                            ComposeUri(
+                                XmlConvert.ToXPathString(arg0),
+                                baseUri ?? this.manager.Navigator.BaseURI
+                            )
                         )
-                    )
                 );
             }
         }
@@ -493,9 +494,9 @@ namespace System.Xml.Xsl.XsltOld
                 PrefixQName.ParseQualifiedName(formatName, out prefix, out local);
                 ns = LookupNamespace(prefix);
             }
-            DecimalFormat formatInfo = this.processor.RootAction.GetDecimalFormat(
-                new XmlQualifiedName(local, ns)
-            );
+            DecimalFormat formatInfo = this.processor
+                .RootAction
+                .GetDecimalFormat(new XmlQualifiedName(local, ns));
             if (formatInfo == null)
             {
                 if (formatName != null)

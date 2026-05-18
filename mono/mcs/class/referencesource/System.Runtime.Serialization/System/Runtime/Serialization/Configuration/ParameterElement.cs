@@ -18,9 +18,11 @@ namespace System.Runtime.Serialization.Configuration
         {
             if (String.IsNullOrEmpty(typeName))
             {
-                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                    "typeName"
-                );
+                throw System.Runtime
+                    .Serialization
+                    .DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgumentNull("typeName");
             }
             this.Type = typeName;
         }
@@ -91,9 +93,10 @@ namespace System.Runtime.Serialization.Configuration
                 )
             )
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ConfigurationErrorsException(SR.GetString(SR.ConfigMustSetTypeOrIndex))
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        new ConfigurationErrorsException(SR.GetString(SR.ConfigMustSetTypeOrIndex))
+                    );
             }
 
             if (
@@ -107,9 +110,12 @@ namespace System.Runtime.Serialization.Configuration
                 )
             )
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ConfigurationErrorsException(SR.GetString(SR.ConfigMustOnlySetTypeOrIndex))
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        new ConfigurationErrorsException(
+                            SR.GetString(SR.ConfigMustOnlySetTypeOrIndex)
+                        )
+                    );
             }
 
             if (
@@ -120,11 +126,12 @@ namespace System.Runtime.Serialization.Configuration
                 && this.Parameters.Count > 0
             )
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ConfigurationErrorsException(
-                        SR.GetString(SR.ConfigMustOnlyAddParamsWithType)
-                    )
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        new ConfigurationErrorsException(
+                            SR.GetString(SR.ConfigMustOnlyAddParamsWithType)
+                        )
+                    );
             }
         }
 

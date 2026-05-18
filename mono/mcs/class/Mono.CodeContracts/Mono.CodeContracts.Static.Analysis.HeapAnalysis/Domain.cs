@@ -846,14 +846,15 @@ namespace Mono.CodeContracts.Static.Analysis.HeapAnalysis
             )
             {
                 var pathElement = (PathElement<Parameter>)head;
-                result = result1.Tail.Cons(
-                    new ParameterPathElement(
-                        pathElement.Element,
-                        pathElement.Description,
-                        pathElement.Func,
-                        MetaDataProvider
-                    )
-                );
+                result = result1.Tail
+                    .Cons(
+                        new ParameterPathElement(
+                            pathElement.Element,
+                            pathElement.Description,
+                            pathElement.Func,
+                            MetaDataProvider
+                        )
+                    );
                 return true;
             }
 
@@ -1162,11 +1163,8 @@ namespace Mono.CodeContracts.Static.Analysis.HeapAnalysis
         public SymValue Value(SymValue address)
         {
             bool fresh;
-            SymValue symbol = this.egraph.LookupOrManifest(
-                this.Functions.ValueOf,
-                address,
-                out fresh
-            );
+            SymValue symbol = this.egraph
+                .LookupOrManifest(this.Functions.ValueOf, address, out fresh);
 
             if (fresh && IsUnmodified(address))
                 MakeUnmodified(symbol);
@@ -1962,11 +1960,8 @@ namespace Mono.CodeContracts.Static.Analysis.HeapAnalysis
 
         public Domain Join(Domain that, bool widening, out bool weaker, out IMergeInfo mergeInfo)
         {
-            SymGraph<SymFunction, AbstractType> graph = this.egraph.Join(
-                that.egraph,
-                out mergeInfo,
-                widening
-            );
+            SymGraph<SymFunction, AbstractType> graph = this.egraph
+                .Join(that.egraph, out mergeInfo, widening);
             weaker = mergeInfo.Changed;
 
             IImmutableSet<SymValue> resultUnmodifiedSinceEntry;
@@ -2042,9 +2037,8 @@ namespace Mono.CodeContracts.Static.Analysis.HeapAnalysis
                 SymValue symValue2 = tuple.Item2;
                 SymValue elem = tuple.Item3;
 
-                bool unmodifiedSinceEntryContains = domain.unmodifiedSinceEntry.ContainsSafe(
-                    symValue1
-                );
+                bool unmodifiedSinceEntryContains = domain.unmodifiedSinceEntry
+                    .ContainsSafe(symValue1);
                 bool modifiedAtCallContains = domain.ModifiedAtCall.ContainsSafe(symValue1);
 
                 if (unmodifiedSinceEntryContains)

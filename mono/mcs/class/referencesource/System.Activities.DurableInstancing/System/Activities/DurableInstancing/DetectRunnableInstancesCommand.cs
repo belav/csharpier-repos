@@ -10,9 +10,8 @@ namespace System.Activities.DurableInstancing
     {
         public DetectRunnableInstancesCommand()
             : base(
-                SqlWorkflowInstanceStoreConstants.DurableInstancingNamespace.GetName(
-                    "DetectRunnableInstances"
-                )
+                SqlWorkflowInstanceStoreConstants.DurableInstancingNamespace
+                    .GetName("DetectRunnableInstances")
             ) { }
     }
 }

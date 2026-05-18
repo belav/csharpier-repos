@@ -19,8 +19,8 @@ public class CustomMapFromTest : IntegrationTest<CustomMapFromTest.DatabaseIniti
     {
         using (var context = new Context())
         {
-            var customerVms = context
-                .Customers.Select(c => new CustomerViewModel
+            var customerVms = context.Customers
+                .Select(c => new CustomerViewModel
                 {
                     FirstName = c.FirstName,
                     LastName = c.LastName,
@@ -80,19 +80,20 @@ public class CustomMapFromTest : IntegrationTest<CustomMapFromTest.DatabaseIniti
     {
         protected override void Seed(Context context)
         {
-            context.Customers.Add(
-                new Customer
-                {
-                    FirstName = "Bob",
-                    LastName = "Smith",
-                    Address = new Address
+            context.Customers
+                .Add(
+                    new Customer
                     {
-                        Street = "123 Anywhere",
-                        City = "Austin",
-                        State = "TX",
-                    },
-                }
-            );
+                        FirstName = "Bob",
+                        LastName = "Smith",
+                        Address = new Address
+                        {
+                            Street = "123 Anywhere",
+                            City = "Austin",
+                            State = "TX",
+                        },
+                    }
+                );
 
             base.Seed(context);
         }

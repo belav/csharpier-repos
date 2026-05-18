@@ -119,12 +119,13 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding
                     modelBuilder.Entity<LazyPropertyDelegateEntity>(b =>
                     {
                         var serviceProperty = (ServiceProperty)
-                            b.Metadata.AddServiceProperty(
-                                typeof(LazyPropertyDelegateEntity)
-                                    .GetRuntimeProperties()
-                                    .Single(p => p.Name == "LoaderState"),
-                                typeof(ILazyLoader)
-                            );
+                            b.Metadata
+                                .AddServiceProperty(
+                                    typeof(LazyPropertyDelegateEntity)
+                                        .GetRuntimeProperties()
+                                        .Single(p => p.Name == "LoaderState"),
+                                    typeof(ILazyLoader)
+                                );
 
                         serviceProperty.SetParameterBinding(
                             new DependencyInjectionParameterBinding(
@@ -139,8 +140,9 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding
                 model =>
                 {
                     var lazyConstructorEntity = model.FindEntityType(typeof(LazyConstructorEntity));
-                    var lazyParameterBinding =
-                        lazyConstructorEntity!.ConstructorBinding!.ParameterBindings.Single();
+                    var lazyParameterBinding = lazyConstructorEntity!.ConstructorBinding!
+                        .ParameterBindings
+                        .Single();
                     Assert.Equal(typeof(ILazyLoader), lazyParameterBinding.ParameterType);
 
                     var lazyPropertyEntity = model.FindEntityType(typeof(LazyPropertyEntity));
@@ -400,7 +402,8 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding
                         e =>
                         {
                             e.Property<int>("Id")
-                                .Metadata.SetTypeMapping(
+                                .Metadata
+                                .SetTypeMapping(
                                     new InMemoryTypeMapping(
                                         typeof(int),
                                         jsonValueReaderWriter: JsonInt32ReaderWriter.Instance

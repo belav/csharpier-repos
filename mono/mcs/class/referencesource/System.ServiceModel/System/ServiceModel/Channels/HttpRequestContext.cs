@@ -181,12 +181,13 @@ namespace System.ServiceModel.Channels
         {
             if ((message == null) && (requestException == null))
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ProtocolException(
-                        SR.GetString(SR.MessageXmlProtocolError),
-                        new XmlException(SR.GetString(SR.MessageIsEmpty))
-                    )
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        new ProtocolException(
+                            SR.GetString(SR.MessageXmlProtocolError),
+                            new XmlException(SR.GetString(SR.MessageIsEmpty))
+                        )
+                    );
             }
 
             this.TraceHttpMessageReceived(message);
@@ -221,10 +222,11 @@ namespace System.ServiceModel.Channels
                 // from the web headers for http since correlation might be propogated.
                 if (
                     message.Headers.MessageId == null
-                    && message.Properties.TryGetValue<HttpRequestMessageProperty>(
-                        HttpRequestMessageProperty.Name,
-                        out httpProperty
-                    )
+                    && message.Properties
+                        .TryGetValue<HttpRequestMessageProperty>(
+                            HttpRequestMessageProperty.Name,
+                            out httpProperty
+                        )
                 )
                 {
                     try
@@ -311,9 +313,8 @@ namespace System.ServiceModel.Channels
                         message.Headers.To != null
                         && (
                             listener.AnonymousUriPrefixMatcher == null
-                            || !listener.AnonymousUriPrefixMatcher.IsAnonymousUri(
-                                message.Headers.To
-                            )
+                            || !listener.AnonymousUriPrefixMatcher
+                                .IsAnonymousUri(message.Headers.To)
                         )
                     )
                     {
@@ -322,14 +323,15 @@ namespace System.ServiceModel.Channels
                 }
                 else
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ProtocolException(
-                            SR.GetString(
-                                SR.AddressingVersionNotSupported,
-                                message.Version.Addressing
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperError(
+                            new ProtocolException(
+                                SR.GetString(
+                                    SR.AddressingVersionNotSupported,
+                                    message.Version.Addressing
+                                )
                             )
-                        )
-                    );
+                        );
                 }
             }
 
@@ -545,9 +547,10 @@ namespace System.ServiceModel.Channels
                 {
                     if (!acceptTask.Wait(TimeoutHelper.ToMilliseconds(timeout)))
                     {
-                        throw FxTrace.Exception.AsError(
-                            new TimeoutException(SR.GetString(SR.AcceptWebSocketTimedOutError))
-                        );
+                        throw FxTrace.Exception
+                            .AsError(
+                                new TimeoutException(SR.GetString(SR.AcceptWebSocketTimedOutError))
+                            );
                     }
                 }
                 catch (Exception ex)
@@ -593,14 +596,15 @@ namespace System.ServiceModel.Channels
             HttpRequestMessage requestMessage
         )
         {
-            this.webSocketChannel.SetWebSocketInfo(
-                context,
-                remoteEndpointMessageProperty,
-                this.securityProperty,
-                webSocketInternalBuffer,
-                shouldDisposeWebSocketAfterClose,
-                requestMessage
-            );
+            this.webSocketChannel
+                .SetWebSocketInfo(
+                    context,
+                    remoteEndpointMessageProperty,
+                    this.securityProperty,
+                    webSocketInternalBuffer,
+                    shouldDisposeWebSocketAfterClose,
+                    requestMessage
+                );
         }
 
         public IAsyncResult BeginAcceptWebSocket(
@@ -788,11 +792,9 @@ namespace System.ServiceModel.Channels
                     }
 
                     if (
-                        context.httpPipeline.SendAsyncReply(
-                            this.responseMessage,
-                            onHttpPipelineSend,
-                            this
-                        ) == AsyncCompletionResult.Queued
+                        context.httpPipeline
+                            .SendAsyncReply(this.responseMessage, onHttpPipelineSend, this)
+                        == AsyncCompletionResult.Queued
                     )
                     {
                         //// In Async send + HTTP pipeline path, we will send the response back after the result coming out from the pipeline.
@@ -832,20 +834,18 @@ namespace System.ServiceModel.Channels
                 IAsyncResult result;
                 if (httpResponseMessage == null)
                 {
-                    result = context.httpOutput.BeginSend(
-                        this.timeoutHelper.RemainingTime(),
-                        onSendCompleted,
-                        this
-                    );
+                    result = context.httpOutput
+                        .BeginSend(this.timeoutHelper.RemainingTime(), onSendCompleted, this);
                 }
                 else
                 {
-                    result = context.httpOutput.BeginSend(
-                        httpResponseMessage,
-                        this.timeoutHelper.RemainingTime(),
-                        onSendCompleted,
-                        this
-                    );
+                    result = context.httpOutput
+                        .BeginSend(
+                            httpResponseMessage,
+                            this.timeoutHelper.RemainingTime(),
+                            onSendCompleted,
+                            this
+                        );
                 }
 
                 success = true;
@@ -866,12 +866,13 @@ namespace System.ServiceModel.Channels
             object state
         )
         {
-            return this.httpPipeline.BeginProcessInboundRequest(
-                replyChannelAcceptor,
-                acceptorCallback,
-                callback,
-                state
-            );
+            return this.httpPipeline
+                .BeginProcessInboundRequest(
+                    replyChannelAcceptor,
+                    acceptorCallback,
+                    callback,
+                    state
+                );
         }
 
         internal void EndProcessInboundRequest(IAsyncResult result)
@@ -925,8 +926,8 @@ namespace System.ServiceModel.Channels
                 );
 
                 this.webSocketInternalBuffer = this.Listener.TakeWebSocketInternalBuffer();
-                return this
-                    .listenerContext.AcceptWebSocketAsync(
+                return this.listenerContext
+                    .AcceptWebSocketAsync(
                         protocol,
                         WebSocketHelper.GetReceiveBufferSize(this.listener.MaxReceivedMessageSize),
                         this.Listener.WebSocketSettings.GetEffectiveKeepAliveInterval(),
@@ -1033,9 +1034,10 @@ namespace System.ServiceModel.Channels
                 }
                 catch (HttpListenerException listenerException)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        HttpChannelUtilities.CreateCommunicationException(listenerException)
-                    );
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperError(
+                            HttpChannelUtilities.CreateCommunicationException(listenerException)
+                        );
                 }
             }
 
@@ -1074,11 +1076,11 @@ namespace System.ServiceModel.Channels
                     {
                         this.preReadBuffer = new byte[1];
                         if (
-                            this.listenerHttpContext.listenerContext.Request.InputStream.Read(
-                                preReadBuffer,
-                                0,
-                                1
-                            ) == 0
+                            this.listenerHttpContext
+                                .listenerContext
+                                .Request
+                                .InputStream
+                                .Read(preReadBuffer, 0, 1) == 0
                         )
                         {
                             this.preReadBuffer = null;
@@ -1145,8 +1147,12 @@ namespace System.ServiceModel.Channels
                     // Uri.Query always includes the '?'
                     if (this.listenerHttpContext.listenerContext.Request.Url.Query.Length > 1)
                     {
-                        requestProperty.QueryString =
-                            this.listenerHttpContext.listenerContext.Request.Url.Query.Substring(1);
+                        requestProperty.QueryString = this.listenerHttpContext
+                            .listenerContext
+                            .Request
+                            .Url
+                            .Query
+                            .Substring(1);
                     }
 
                     message.Properties.Add(HttpRequestMessageProperty.Name, requestProperty);
@@ -1156,10 +1162,8 @@ namespace System.ServiceModel.Channels
                         new RemoteEndpointMessageProperty(
                             this.listenerHttpContext.listenerContext.Request.RemoteEndPoint
                         );
-                    message.Properties.Add(
-                        RemoteEndpointMessageProperty.Name,
-                        remoteEndpointProperty
-                    );
+                    message.Properties
+                        .Add(RemoteEndpointMessageProperty.Name, remoteEndpointProperty);
                 }
 
                 public override void ConfigureHttpRequestMessage(HttpRequestMessage message)
@@ -1181,12 +1185,13 @@ namespace System.ServiceModel.Channels
                             this.listenerHttpContext.listenerContext.Request.Headers[webHeaderKey]
                         );
                     }
-                    message.Properties.Add(
-                        RemoteEndpointMessageProperty.Name,
-                        new RemoteEndpointMessageProperty(
-                            this.listenerHttpContext.listenerContext.Request.RemoteEndPoint
-                        )
-                    );
+                    message.Properties
+                        .Add(
+                            RemoteEndpointMessageProperty.Name,
+                            new RemoteEndpointMessageProperty(
+                                this.listenerHttpContext.listenerContext.Request.RemoteEndPoint
+                            )
+                        );
                 }
 
                 protected override Stream GetInputStream()
@@ -1231,9 +1236,12 @@ namespace System.ServiceModel.Channels
                         }
                         catch (HttpListenerException listenerException)
                         {
-                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                                HttpChannelUtilities.CreateCommunicationException(listenerException)
-                            );
+                            throw DiagnosticUtility.ExceptionUtility
+                                .ThrowHelperError(
+                                    HttpChannelUtilities.CreateCommunicationException(
+                                        listenerException
+                                    )
+                                );
                         }
                     }
 
@@ -1245,9 +1253,12 @@ namespace System.ServiceModel.Channels
                         }
                         catch (HttpListenerException listenerException)
                         {
-                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                                HttpChannelUtilities.CreateCommunicationException(listenerException)
-                            );
+                            throw DiagnosticUtility.ExceptionUtility
+                                .ThrowHelperError(
+                                    HttpChannelUtilities.CreateCommunicationException(
+                                        listenerException
+                                    )
+                                );
                         }
                     }
 
@@ -1259,9 +1270,12 @@ namespace System.ServiceModel.Channels
                         }
                         catch (HttpListenerException listenerException)
                         {
-                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                                HttpChannelUtilities.CreateCommunicationException(listenerException)
-                            );
+                            throw DiagnosticUtility.ExceptionUtility
+                                .ThrowHelperError(
+                                    HttpChannelUtilities.CreateCommunicationException(
+                                        listenerException
+                                    )
+                                );
                         }
                     }
 
@@ -1273,9 +1287,12 @@ namespace System.ServiceModel.Channels
                         }
                         catch (HttpListenerException listenerException)
                         {
-                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                                HttpChannelUtilities.CreateCommunicationException(listenerException)
-                            );
+                            throw DiagnosticUtility.ExceptionUtility
+                                .ThrowHelperError(
+                                    HttpChannelUtilities.CreateCommunicationException(
+                                        listenerException
+                                    )
+                                );
                         }
                     }
                 }
@@ -1305,8 +1322,8 @@ namespace System.ServiceModel.Channels
                 Fx.Assert(response != null, "response should not be null.");
                 this.context = context;
                 this.response = response;
-                IAsyncResult result = this
-                    .context.AcceptWebSocketCore(response, protocol)
+                IAsyncResult result = this.context
+                    .AcceptWebSocketCore(response, protocol)
                     .AsAsyncResult<WebSocketContext>(onHandleAcceptWebSocketResult, this);
 
                 if (this.gate.Unlock())
@@ -1361,9 +1378,10 @@ namespace System.ServiceModel.Channels
                 {
                     this.context.OnAcceptWebSocketError();
                     //
-                    throw FxTrace.Exception.AsError(
-                        new TimeoutException(SR.GetString(SR.AcceptWebSocketTimedOutError))
-                    );
+                    throw FxTrace.Exception
+                        .AsError(
+                            new TimeoutException(SR.GetString(SR.AcceptWebSocketTimedOutError))
+                        );
                 }
 
                 this.context.SetReplySent();

@@ -45,8 +45,8 @@ namespace Microsoft.CodeAnalysis.Remote
                 {
                     // register solution crawler:
                     var workspace = GetWorkspace();
-                    workspace
-                        .Services.GetRequiredService<ISolutionCrawlerRegistrationService>()
+                    workspace.Services
+                        .GetRequiredService<ISolutionCrawlerRegistrationService>()
                         .Register(workspace);
 
                     return ValueTaskFactory.CompletedTask;
@@ -124,12 +124,13 @@ namespace Microsoft.CodeAnalysis.Remote
                                 .ConfigureAwait(false);
 
                             // save log for debugging
-                            var diagnosticCount = result.Diagnostics.Sum(entry =>
-                                entry.diagnosticMap.Syntax.Length
-                                + entry.diagnosticMap.Semantic.Length
-                                + entry.diagnosticMap.NonLocal.Length
-                                + entry.diagnosticMap.Other.Length
-                            );
+                            var diagnosticCount = result.Diagnostics
+                                .Sum(entry =>
+                                    entry.diagnosticMap.Syntax.Length
+                                    + entry.diagnosticMap.Semantic.Length
+                                    + entry.diagnosticMap.NonLocal.Length
+                                    + entry.diagnosticMap.Other.Length
+                                );
 
                             Log(
                                 TraceEventType.Information,
@@ -196,7 +197,8 @@ namespace Microsoft.CodeAnalysis.Remote
                         cancellationToken.ThrowIfCancellationRequested();
 
                         var service = GetWorkspace()
-                            .Services.GetService<IPerformanceTrackerService>();
+                            .Services
+                            .GetService<IPerformanceTrackerService>();
                         if (service == null)
                         {
                             return default;

@@ -189,10 +189,8 @@ namespace System.Web.UI
                 if (dupe)
                     ThrowParseException("Only one attribute can be specified.");
 
-                vp = HostingEnvironment.VirtualPathProvider.CombineVirtualPaths(
-                    VirtualPath.Absolute,
-                    vp
-                );
+                vp = HostingEnvironment.VirtualPathProvider
+                    .CombineVirtualPaths(VirtualPath.Absolute, vp);
                 AddDependency(vp, false);
 
                 Type ctype;

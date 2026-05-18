@@ -173,10 +173,8 @@ namespace System.Data.Mapping.ViewGeneration.QueryRewriting
             _basicView = basicViewGenerator.CreateViewExpression();
 
             // a top-level WHERE clause is needed only if the simplifiedView still contains extra tuples
-            bool noWhereClauseNeeded = _context.LeftFragmentQP.IsContainedIn(
-                _basicView.LeftFragmentQuery,
-                _domainQuery
-            );
+            bool noWhereClauseNeeded = _context.LeftFragmentQP
+                .IsContainedIn(_basicView.LeftFragmentQuery, _domainQuery);
             if (noWhereClauseNeeded)
             {
                 _topLevelWhereClause = BoolExpression.True;
@@ -666,9 +664,8 @@ namespace System.Data.Mapping.ViewGeneration.QueryRewriting
         {
             // Compute right domain query - non-simplified version of "basic view"
             // It is used below to check whether we need a default value in a case statement
-            IEnumerable<LeftCellWrapper> usedCells = _context.AllWrappersForExtent.Where(w =>
-                _usedViews.Contains(w.FragmentQuery)
-            );
+            IEnumerable<LeftCellWrapper> usedCells = _context.AllWrappersForExtent
+                .Where(w => _usedViews.Contains(w.FragmentQuery));
             CellTreeNode rightDomainQuery = new OpCellTreeNode(
                 _context,
                 CellTreeOpType.Union,
@@ -862,10 +859,8 @@ namespace System.Data.Mapping.ViewGeneration.QueryRewriting
                     "No union of rewritings for case statements"
                 );
                 CellTreeNode unionTree = TileToCellTree(unionCaseRewriting, _context);
-                FragmentQuery configurationNeedsDefault = _context.RightFragmentQP.Difference(
-                    rightDomainQuery.RightFragmentQuery,
-                    unionTree.RightFragmentQuery
-                );
+                FragmentQuery configurationNeedsDefault = _context.RightFragmentQP
+                    .Difference(rightDomainQuery.RightFragmentQuery, unionTree.RightFragmentQuery);
 
                 if (_context.RightFragmentQP.IsSatisfiable(configurationNeedsDefault))
                 {
@@ -1043,9 +1038,8 @@ namespace System.Data.Mapping.ViewGeneration.QueryRewriting
                     // otherwise it means condition on the fragment is not satisfiable
                     if (!found)
                     {
-                        LeftCellWrapper fragment = _context.AllWrappersForExtent.First(lcr =>
-                            lcr.FragmentQuery.Equals(toFill.Query)
-                        );
+                        LeftCellWrapper fragment = _context.AllWrappersForExtent
+                            .First(lcr => lcr.FragmentQuery.Equals(toFill.Query));
                         Debug.Assert(fragment != null);
 
                         ErrorLog.Record record = new ErrorLog.Record(
@@ -1698,9 +1692,8 @@ namespace System.Data.Mapping.ViewGeneration.QueryRewriting
             if (tile.OpKind == TileOpKind.Named)
             {
                 FragmentQuery view = ((TileNamed<FragmentQuery>)tile).NamedQuery;
-                LeftCellWrapper leftCellWrapper = context.AllWrappersForExtent.First(w =>
-                    w.FragmentQuery == view
-                );
+                LeftCellWrapper leftCellWrapper = context.AllWrappersForExtent
+                    .First(w => w.FragmentQuery == view);
                 return new LeafCellTreeNode(context, leftCellWrapper);
             }
             CellTreeOpType opType;
@@ -1787,11 +1780,12 @@ namespace System.Data.Mapping.ViewGeneration.QueryRewriting
                 where
                     domainConstraint.Variable.Identifier is MemberRestriction
                     && false
-                        == domainConstraint.Variable.Domain.All(constant =>
-                            domainConstraint.Range.Contains(constant)
-                        )
-                select ((MemberRestriction)domainConstraint.Variable.Identifier)
-                    .RestrictedMemberSlot
+                        == domainConstraint.Variable
+                            .Domain
+                            .All(constant => domainConstraint.Range.Contains(constant))
+                select (
+                    (MemberRestriction)domainConstraint.Variable.Identifier
+                ).RestrictedMemberSlot
                     .MemberPath;
 
             return new Set<MemberPath>(memberVariables, MemberPath.EqualityComparer);
@@ -1799,9 +1793,8 @@ namespace System.Data.Mapping.ViewGeneration.QueryRewriting
 
         private bool IsTrue(FragmentQuery query)
         {
-            return !_context.LeftFragmentQP.IsSatisfiable(
-                FragmentQuery.Create(BoolExpression.CreateNot(query.Condition))
-            );
+            return !_context.LeftFragmentQP
+                .IsSatisfiable(FragmentQuery.Create(BoolExpression.CreateNot(query.Condition)));
         }
 
         [Conditional("DEBUG")]

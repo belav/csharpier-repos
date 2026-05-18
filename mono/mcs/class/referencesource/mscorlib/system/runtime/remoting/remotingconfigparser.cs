@@ -510,101 +510,110 @@ namespace System.Runtime.Remoting.Activation
 
             node = new ConfigNode("channel", channelsNode);
             node.Attributes.Add(new DictionaryEntry("id", "http"));
-            node.Attributes.Add(
-                new DictionaryEntry(
-                    "type",
-                    "System.Runtime.Remoting.Channels.Http.HttpChannel, "
-                        + AssemblyRef.SystemRuntimeRemoting
-                )
-            );
+            node.Attributes
+                .Add(
+                    new DictionaryEntry(
+                        "type",
+                        "System.Runtime.Remoting.Channels.Http.HttpChannel, "
+                            + AssemblyRef.SystemRuntimeRemoting
+                    )
+                );
             channelsNode.Children.Add(node);
 
             node = new ConfigNode("channel", channelsNode);
             node.Attributes.Add(new DictionaryEntry("id", "http client"));
-            node.Attributes.Add(
-                new DictionaryEntry(
-                    "type",
-                    "System.Runtime.Remoting.Channels.Http.HttpClientChannel, "
-                        + AssemblyRef.SystemRuntimeRemoting
-                )
-            );
+            node.Attributes
+                .Add(
+                    new DictionaryEntry(
+                        "type",
+                        "System.Runtime.Remoting.Channels.Http.HttpClientChannel, "
+                            + AssemblyRef.SystemRuntimeRemoting
+                    )
+                );
             channelsNode.Children.Add(node);
 
             node = new ConfigNode("channel", channelsNode);
             node.Attributes.Add(new DictionaryEntry("id", "http server"));
-            node.Attributes.Add(
-                new DictionaryEntry(
-                    "type",
-                    "System.Runtime.Remoting.Channels.Http.HttpServerChannel, "
-                        + AssemblyRef.SystemRuntimeRemoting
-                )
-            );
+            node.Attributes
+                .Add(
+                    new DictionaryEntry(
+                        "type",
+                        "System.Runtime.Remoting.Channels.Http.HttpServerChannel, "
+                            + AssemblyRef.SystemRuntimeRemoting
+                    )
+                );
             channelsNode.Children.Add(node);
 
             node = new ConfigNode("channel", channelsNode);
             node.Attributes.Add(new DictionaryEntry("id", "tcp"));
-            node.Attributes.Add(
-                new DictionaryEntry(
-                    "type",
-                    "System.Runtime.Remoting.Channels.Tcp.TcpChannel, "
-                        + AssemblyRef.SystemRuntimeRemoting
-                )
-            );
+            node.Attributes
+                .Add(
+                    new DictionaryEntry(
+                        "type",
+                        "System.Runtime.Remoting.Channels.Tcp.TcpChannel, "
+                            + AssemblyRef.SystemRuntimeRemoting
+                    )
+                );
             channelsNode.Children.Add(node);
 
             node = new ConfigNode("channel", channelsNode);
             node.Attributes.Add(new DictionaryEntry("id", "tcp client"));
-            node.Attributes.Add(
-                new DictionaryEntry(
-                    "type",
-                    "System.Runtime.Remoting.Channels.Tcp.TcpClientChannel, "
-                        + AssemblyRef.SystemRuntimeRemoting
-                )
-            );
+            node.Attributes
+                .Add(
+                    new DictionaryEntry(
+                        "type",
+                        "System.Runtime.Remoting.Channels.Tcp.TcpClientChannel, "
+                            + AssemblyRef.SystemRuntimeRemoting
+                    )
+                );
             channelsNode.Children.Add(node);
 
             node = new ConfigNode("channel", channelsNode);
             node.Attributes.Add(new DictionaryEntry("id", "tcp server"));
-            node.Attributes.Add(
-                new DictionaryEntry(
-                    "type",
-                    "System.Runtime.Remoting.Channels.Tcp.TcpServerChannel, "
-                        + AssemblyRef.SystemRuntimeRemoting
-                )
-            );
+            node.Attributes
+                .Add(
+                    new DictionaryEntry(
+                        "type",
+                        "System.Runtime.Remoting.Channels.Tcp.TcpServerChannel, "
+                            + AssemblyRef.SystemRuntimeRemoting
+                    )
+                );
             channelsNode.Children.Add(node);
 
             node = new ConfigNode("channel", channelsNode);
             node.Attributes.Add(new DictionaryEntry("id", "ipc"));
-            node.Attributes.Add(
-                new DictionaryEntry(
-                    "type",
-                    "System.Runtime.Remoting.Channels.Ipc.IpcChannel, "
-                        + AssemblyRef.SystemRuntimeRemoting
-                )
-            );
+            node.Attributes
+                .Add(
+                    new DictionaryEntry(
+                        "type",
+                        "System.Runtime.Remoting.Channels.Ipc.IpcChannel, "
+                            + AssemblyRef.SystemRuntimeRemoting
+                    )
+                );
             channelsNode.Children.Add(node);
 
             node = new ConfigNode("channel", channelsNode);
             node.Attributes.Add(new DictionaryEntry("id", "ipc client"));
-            node.Attributes.Add(
-                new DictionaryEntry(
-                    "type",
-                    "System.Runtime.Remoting.Channels.Ipc.IpcClientChannel, "
-                        + AssemblyRef.SystemRuntimeRemoting
-                )
-            );
+            node.Attributes
+                .Add(
+                    new DictionaryEntry(
+                        "type",
+                        "System.Runtime.Remoting.Channels.Ipc.IpcClientChannel, "
+                            + AssemblyRef.SystemRuntimeRemoting
+                    )
+                );
             channelsNode.Children.Add(node);
 
             node = new ConfigNode("channel", channelsNode);
             node.Attributes.Add(new DictionaryEntry("id", "ipc server"));
-            node.Attributes.Add(
-                new DictionaryEntry(
-                    "type",
-                    "System.Runtime.Remoting.Channels.Ipc.IpcServerChannel, "
-                        + AssemblyRef.SystemRuntimeRemoting
-                )
-            );
+            node.Attributes
+                .Add(
+                    new DictionaryEntry(
+                        "type",
+                        "System.Runtime.Remoting.Channels.Ipc.IpcServerChannel, "
+                            + AssemblyRef.SystemRuntimeRemoting
+                    )
+                );
             channelsNode.Children.Add(node);
 
             /*
@@ -628,24 +637,26 @@ namespace System.Runtime.Remoting.Activation
 
             node = new ConfigNode("formatter", clientProvidersNode);
             node.Attributes.Add(new DictionaryEntry("id", "soap"));
-            node.Attributes.Add(
-                new DictionaryEntry(
-                    "type",
-                    "System.Runtime.Remoting.Channels.SoapClientFormatterSinkProvider, "
-                        + AssemblyRef.SystemRuntimeRemoting
-                )
-            );
+            node.Attributes
+                .Add(
+                    new DictionaryEntry(
+                        "type",
+                        "System.Runtime.Remoting.Channels.SoapClientFormatterSinkProvider, "
+                            + AssemblyRef.SystemRuntimeRemoting
+                    )
+                );
             clientProvidersNode.Children.Add(node);
 
             node = new ConfigNode("formatter", clientProvidersNode);
             node.Attributes.Add(new DictionaryEntry("id", "binary"));
-            node.Attributes.Add(
-                new DictionaryEntry(
-                    "type",
-                    "System.Runtime.Remoting.Channels.BinaryClientFormatterSinkProvider, "
-                        + AssemblyRef.SystemRuntimeRemoting
-                )
-            );
+            node.Attributes
+                .Add(
+                    new DictionaryEntry(
+                        "type",
+                        "System.Runtime.Remoting.Channels.BinaryClientFormatterSinkProvider, "
+                            + AssemblyRef.SystemRuntimeRemoting
+                    )
+                );
             clientProvidersNode.Children.Add(node);
 
             ConfigNode serverProvidersNode = new ConfigNode("serverProviders", channelsSinkNode);
@@ -653,35 +664,38 @@ namespace System.Runtime.Remoting.Activation
 
             node = new ConfigNode("formatter", serverProvidersNode);
             node.Attributes.Add(new DictionaryEntry("id", "soap"));
-            node.Attributes.Add(
-                new DictionaryEntry(
-                    "type",
-                    "System.Runtime.Remoting.Channels.SoapServerFormatterSinkProvider, "
-                        + AssemblyRef.SystemRuntimeRemoting
-                )
-            );
+            node.Attributes
+                .Add(
+                    new DictionaryEntry(
+                        "type",
+                        "System.Runtime.Remoting.Channels.SoapServerFormatterSinkProvider, "
+                            + AssemblyRef.SystemRuntimeRemoting
+                    )
+                );
             serverProvidersNode.Children.Add(node);
 
             node = new ConfigNode("formatter", serverProvidersNode);
             node.Attributes.Add(new DictionaryEntry("id", "binary"));
-            node.Attributes.Add(
-                new DictionaryEntry(
-                    "type",
-                    "System.Runtime.Remoting.Channels.BinaryServerFormatterSinkProvider, "
-                        + AssemblyRef.SystemRuntimeRemoting
-                )
-            );
+            node.Attributes
+                .Add(
+                    new DictionaryEntry(
+                        "type",
+                        "System.Runtime.Remoting.Channels.BinaryServerFormatterSinkProvider, "
+                            + AssemblyRef.SystemRuntimeRemoting
+                    )
+                );
             serverProvidersNode.Children.Add(node);
 
             node = new ConfigNode("provider", serverProvidersNode);
             node.Attributes.Add(new DictionaryEntry("id", "wsdl"));
-            node.Attributes.Add(
-                new DictionaryEntry(
-                    "type",
-                    "System.Runtime.Remoting.MetadataServices.SdlChannelSinkProvider, "
-                        + AssemblyRef.SystemRuntimeRemoting
-                )
-            );
+            node.Attributes
+                .Add(
+                    new DictionaryEntry(
+                        "type",
+                        "System.Runtime.Remoting.MetadataServices.SdlChannelSinkProvider, "
+                            + AssemblyRef.SystemRuntimeRemoting
+                    )
+                );
             serverProvidersNode.Children.Add(node);
 
             return ParseConfigNode(rootNode);

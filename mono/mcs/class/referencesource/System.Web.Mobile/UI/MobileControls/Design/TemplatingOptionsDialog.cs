@@ -162,17 +162,19 @@ namespace System.Web.UI.Design.MobileControls
             _btnClose.TabStop = true;
             _btnClose.Click += new EventHandler(this.OnClickCloseButton);
 
-            this._pnlMain.Controls.AddRange(
-                new System.Windows.Forms.Control[]
-                {
-                    this._btnClose,
-                    this._cmbSchemas,
-                    this._lblSchemas,
-                    this._btnEditChoices,
-                    this._lblChoices,
-                    this._cmbChoices,
-                }
-            );
+            this._pnlMain
+                .Controls
+                .AddRange(
+                    new System.Windows.Forms.Control[]
+                    {
+                        this._btnClose,
+                        this._cmbSchemas,
+                        this._lblSchemas,
+                        this._btnEditChoices,
+                        this._lblChoices,
+                        this._cmbChoices,
+                    }
+                );
             this._pnlMain.Location = new System.Drawing.Point(6, 5);
             this._pnlMain.Size = new System.Drawing.Size(276, 128);
             this._pnlMain.TabIndex = 0;

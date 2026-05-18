@@ -159,17 +159,18 @@ namespace System.Text.Json.Serialization.Tests
         public static void TypeInfoKindNoneNumberHandlingDirect()
         {
             DefaultJsonTypeInfoResolver r = new();
-            r.Modifiers.Add(
-                (ti) =>
-                {
-                    if (ti.Type == typeof(int))
+            r.Modifiers
+                .Add(
+                    (ti) =>
                     {
-                        ti.NumberHandling =
-                            JsonNumberHandling.WriteAsString
-                            | JsonNumberHandling.AllowReadingFromString;
+                        if (ti.Type == typeof(int))
+                        {
+                            ti.NumberHandling =
+                                JsonNumberHandling.WriteAsString
+                                | JsonNumberHandling.AllowReadingFromString;
+                        }
                     }
-                }
-            );
+                );
 
             JsonSerializerOptions o = new();
             o.TypeInfoResolver = r;
@@ -185,17 +186,18 @@ namespace System.Text.Json.Serialization.Tests
         public static void TypeInfoKindNoneNumberHandlingDirectThroughObject()
         {
             DefaultJsonTypeInfoResolver r = new();
-            r.Modifiers.Add(
-                (ti) =>
-                {
-                    if (ti.Type == typeof(int))
+            r.Modifiers
+                .Add(
+                    (ti) =>
                     {
-                        ti.NumberHandling =
-                            JsonNumberHandling.WriteAsString
-                            | JsonNumberHandling.AllowReadingFromString;
+                        if (ti.Type == typeof(int))
+                        {
+                            ti.NumberHandling =
+                                JsonNumberHandling.WriteAsString
+                                | JsonNumberHandling.AllowReadingFromString;
+                        }
                     }
-                }
-            );
+                );
 
             JsonSerializerOptions o = new();
             o.TypeInfoResolver = r;
@@ -211,17 +213,18 @@ namespace System.Text.Json.Serialization.Tests
         public static void TypeInfoKindNoneNumberHandling()
         {
             DefaultJsonTypeInfoResolver r = new();
-            r.Modifiers.Add(
-                (ti) =>
-                {
-                    if (ti.Type == typeof(int) || ti.Type == typeof(object))
+            r.Modifiers
+                .Add(
+                    (ti) =>
                     {
-                        ti.NumberHandling =
-                            JsonNumberHandling.WriteAsString
-                            | JsonNumberHandling.AllowReadingFromString;
+                        if (ti.Type == typeof(int) || ti.Type == typeof(object))
+                        {
+                            ti.NumberHandling =
+                                JsonNumberHandling.WriteAsString
+                                | JsonNumberHandling.AllowReadingFromString;
+                        }
                     }
-                }
-            );
+                );
 
             JsonSerializerOptions o = new();
             o.TypeInfoResolver = r;
@@ -276,17 +279,18 @@ namespace System.Text.Json.Serialization.Tests
         public static void RecursiveTypeNumberHandling()
         {
             DefaultJsonTypeInfoResolver r = new();
-            r.Modifiers.Add(
-                (ti) =>
-                {
-                    if (ti.Type == typeof(SomeRecursiveClass))
+            r.Modifiers
+                .Add(
+                    (ti) =>
                     {
-                        ti.NumberHandling =
-                            JsonNumberHandling.WriteAsString
-                            | JsonNumberHandling.AllowReadingFromString;
+                        if (ti.Type == typeof(SomeRecursiveClass))
+                        {
+                            ti.NumberHandling =
+                                JsonNumberHandling.WriteAsString
+                                | JsonNumberHandling.AllowReadingFromString;
+                        }
                     }
-                }
-            );
+                );
 
             JsonSerializerOptions o = new();
             o.TypeInfoResolver = r;
@@ -664,27 +668,28 @@ namespace System.Text.Json.Serialization.Tests
         public static void JsonTypeInfoAddDuplicatedPropertyNames(bool ignoreDuplicatedProperty)
         {
             DefaultJsonTypeInfoResolver r = new();
-            r.Modifiers.Add(
-                (ti) =>
-                {
-                    if (ti.Type == typeof(MyClass))
+            r.Modifiers
+                .Add(
+                    (ti) =>
                     {
-                        JsonPropertyInfo prop = ti.CreateJsonPropertyInfo(
-                            typeof(uint),
-                            ti.Properties[0].Name
-                        );
-                        uint valueHolder = 7;
-
-                        if (!ignoreDuplicatedProperty)
+                        if (ti.Type == typeof(MyClass))
                         {
-                            prop.Get = (o) => valueHolder;
-                            prop.Set = (o, val) => valueHolder = (uint)val;
-                        }
+                            JsonPropertyInfo prop = ti.CreateJsonPropertyInfo(
+                                typeof(uint),
+                                ti.Properties[0].Name
+                            );
+                            uint valueHolder = 7;
 
-                        ti.Properties.Add(prop);
+                            if (!ignoreDuplicatedProperty)
+                            {
+                                prop.Get = (o) => valueHolder;
+                                prop.Set = (o, val) => valueHolder = (uint)val;
+                            }
+
+                            ti.Properties.Add(prop);
+                        }
                     }
-                }
-            );
+                );
 
             JsonSerializerOptions o = new();
             o.TypeInfoResolver = r;
@@ -702,21 +707,22 @@ namespace System.Text.Json.Serialization.Tests
         public static void JsonTypeInfoRenameToDuplicatePropertyNames(bool ignoreDuplicatedProperty)
         {
             DefaultJsonTypeInfoResolver r = new();
-            r.Modifiers.Add(
-                (ti) =>
-                {
-                    if (ti.Type == typeof(MyClass))
+            r.Modifiers
+                .Add(
+                    (ti) =>
                     {
-                        if (ignoreDuplicatedProperty)
+                        if (ti.Type == typeof(MyClass))
                         {
-                            ti.Properties[1].Get = null;
-                            ti.Properties[1].Set = null;
-                        }
+                            if (ignoreDuplicatedProperty)
+                            {
+                                ti.Properties[1].Get = null;
+                                ti.Properties[1].Set = null;
+                            }
 
-                        ti.Properties[1].Name = ti.Properties[0].Name;
+                            ti.Properties[1].Name = ti.Properties[0].Name;
+                        }
                     }
-                }
-            );
+                );
 
             JsonSerializerOptions o = new();
             o.TypeInfoResolver = r;
@@ -765,9 +771,8 @@ namespace System.Text.Json.Serialization.Tests
                         continue;
 
                     Assert.Throws<InvalidOperationException>(() =>
-                        typeInfo1.Properties.Add(
-                            typeInfo2.CreateJsonPropertyInfo(typeof(int), "test")
-                        )
+                        typeInfo1.Properties
+                            .Add(typeInfo2.CreateJsonPropertyInfo(typeof(int), "test"))
                     );
                 }
             }
@@ -1018,19 +1023,20 @@ namespace System.Text.Json.Serialization.Tests
         public static void JsonConstructorAttributeIsOverriddenWhenCreateObjectIsSet()
         {
             DefaultJsonTypeInfoResolver resolver = new();
-            resolver.Modifiers.Add(ti =>
-            {
-                if (ti.Type == typeof(ClassWithParameterizedConstructorAndReadOnlyProperties))
+            resolver.Modifiers
+                .Add(ti =>
                 {
-                    Assert.Null(ti.CreateObject);
-                    ti.CreateObject = () =>
-                        new ClassWithParameterizedConstructorAndReadOnlyProperties(
-                            1,
-                            "test",
-                            dummyParam: true
-                        );
-                }
-            });
+                    if (ti.Type == typeof(ClassWithParameterizedConstructorAndReadOnlyProperties))
+                    {
+                        Assert.Null(ti.CreateObject);
+                        ti.CreateObject = () =>
+                            new ClassWithParameterizedConstructorAndReadOnlyProperties(
+                                1,
+                                "test",
+                                dummyParam: true
+                            );
+                    }
+                });
 
             JsonSerializerOptions o = new() { TypeInfoResolver = resolver };
             string json = """{"A":2,"B":"foo"}""";
@@ -1071,15 +1077,16 @@ namespace System.Text.Json.Serialization.Tests
         public static void JsonConstructorAttributeIsOverriddenAndPropertiesAreSetWhenCreateObjectIsSet()
         {
             DefaultJsonTypeInfoResolver resolver = new();
-            resolver.Modifiers.Add(ti =>
-            {
-                if (ti.Type == typeof(ClassWithParameterizedConstructorAndWritableProperties))
+            resolver.Modifiers
+                .Add(ti =>
                 {
-                    Assert.Null(ti.CreateObject);
-                    ti.CreateObject = () =>
-                        new ClassWithParameterizedConstructorAndWritableProperties();
-                }
-            });
+                    if (ti.Type == typeof(ClassWithParameterizedConstructorAndWritableProperties))
+                    {
+                        Assert.Null(ti.CreateObject);
+                        ti.CreateObject = () =>
+                            new ClassWithParameterizedConstructorAndWritableProperties();
+                    }
+                });
 
             JsonSerializerOptions o = new() { TypeInfoResolver = resolver };
 
@@ -1182,14 +1189,15 @@ namespace System.Text.Json.Serialization.Tests
         public static void JsonConstructorAttributeIsOverriddenAndPropertiesAreSetWhenCreateObjectIsSet_LargeConstructor()
         {
             DefaultJsonTypeInfoResolver resolver = new();
-            resolver.Modifiers.Add(ti =>
-            {
-                if (ti.Type == typeof(ClassWithLargeParameterizedConstructor))
+            resolver.Modifiers
+                .Add(ti =>
                 {
-                    Assert.Null(ti.CreateObject);
-                    ti.CreateObject = () => new ClassWithLargeParameterizedConstructor();
-                }
-            });
+                    if (ti.Type == typeof(ClassWithLargeParameterizedConstructor))
+                    {
+                        Assert.Null(ti.CreateObject);
+                        ti.CreateObject = () => new ClassWithLargeParameterizedConstructor();
+                    }
+                });
 
             JsonSerializerOptions o = new() { TypeInfoResolver = resolver };
 
@@ -1505,10 +1513,8 @@ namespace System.Text.Json.Serialization.Tests
         public static void DefaultJsonTypeInfoResolver_ClassWithConverterAttribute_ShouldResolveConverterAttribute()
         {
             var options = JsonSerializerOptions.Default;
-            JsonTypeInfo jsonTypeInfo = options.TypeInfoResolver.GetTypeInfo(
-                typeof(ClassWithConverterAttribute),
-                options
-            );
+            JsonTypeInfo jsonTypeInfo = options.TypeInfoResolver
+                .GetTypeInfo(typeof(ClassWithConverterAttribute), options);
             Assert.Equal(typeof(ClassWithConverterAttribute), jsonTypeInfo.Type);
             Assert.IsType<ClassWithConverterAttribute.CustomConverter>(jsonTypeInfo.Converter);
         }

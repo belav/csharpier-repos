@@ -213,9 +213,10 @@ namespace MonoTests.System.Data
                 dsTarget = null;
             ds.Tables.Add(DataProvider.CreateParentDataTable());
             ds.Tables.Add(DataProvider.CreateChildDataTable());
-            ds.Relations.Add(
-                new DataRelation("myRelation", ds.Tables[0].Columns[0], ds.Tables[1].Columns[0])
-            );
+            ds.Relations
+                .Add(
+                    new DataRelation("myRelation", ds.Tables[0].Columns[0], ds.Tables[1].Columns[0])
+                );
             ds.Tables[0].Rows.Add(new object[] { 9, "", "" });
             ds.Tables[1].Columns[2].ReadOnly = true;
             ds.Tables[0].PrimaryKey = new DataColumn[]
@@ -247,9 +248,10 @@ namespace MonoTests.System.Data
                 dsTarget = null;
             ds.Tables.Add(DataProvider.CreateParentDataTable());
             ds.Tables.Add(DataProvider.CreateChildDataTable());
-            ds.Relations.Add(
-                new DataRelation("myRelation", ds.Tables[0].Columns[0], ds.Tables[1].Columns[0])
-            );
+            ds.Relations
+                .Add(
+                    new DataRelation("myRelation", ds.Tables[0].Columns[0], ds.Tables[1].Columns[0])
+                );
             ds.Tables[0].Rows.Add(new object[] { 9, "", "" });
             ds.Tables[1].Columns[2].ReadOnly = true;
             ds.Tables[0].PrimaryKey = new DataColumn[]
@@ -1810,7 +1812,8 @@ namespace MonoTests.System.Data
             //add Foreign Key (different name)
             dsTarget1
                 .Tables["Child2"]
-                .Constraints.Add(
+                .Constraints
+                .Add(
                     "Child2_FK_2",
                     dsTarget1.Tables["Parent"].Columns["ParentId"],
                     dsTarget1.Tables["Child2"].Columns["ParentId"]
@@ -1836,18 +1839,20 @@ namespace MonoTests.System.Data
 
             //add Foreign Key
             ds.Tables["Child2"]
-                .Constraints.Add(
+                .Constraints
+                .Add(
                     "Child2_FK",
                     ds.Tables["Parent"].Columns["ParentId"],
                     ds.Tables["Child2"].Columns["ParentId"]
                 );
 
             //add relation
-            ds.Relations.Add(
-                "Parent_Child",
-                ds.Tables["Parent"].Columns["ParentId"],
-                ds.Tables["Child"].Columns["ParentId"]
-            );
+            ds.Relations
+                .Add(
+                    "Parent_Child",
+                    ds.Tables["Parent"].Columns["ParentId"],
+                    ds.Tables["Child"].Columns["ParentId"]
+                );
 
             //add allow null constraint
             ds.Tables["Parent"].Columns["ParentBool"].AllowDBNull = false; //will not be merged
@@ -1896,12 +1901,8 @@ namespace MonoTests.System.Data
             DataColumn ccol = table2.Columns.Add("col1", typeof(int));
 
             DataSet ds1 = ds.Copy();
-            DataRelation rel = ds1.Relations.Add(
-                "rel1",
-                ds1.Tables[0].Columns[0],
-                ds1.Tables[1].Columns[0],
-                false
-            );
+            DataRelation rel = ds1.Relations
+                .Add("rel1", ds1.Tables[0].Columns[0], ds1.Tables[1].Columns[0], false);
 
             ds.Merge(ds1);
             Assert.AreEqual(1, ds.Relations.Count, "#1");
@@ -1948,11 +1949,8 @@ namespace MonoTests.System.Data
 
             table2.Constraints.Add("fk", pcol, ccol);
             ds1.Tables[1]
-                .Constraints.Add(
-                    "fk",
-                    ds1.Tables[0].Columns["col2"],
-                    ds1.Tables[1].Columns["col2"]
-                );
+                .Constraints
+                .Add("fk", ds1.Tables[0].Columns["col2"], ds1.Tables[1].Columns["col2"]);
 
             // No Exceptions shud be thrown
             ds.Merge(ds1);
@@ -2062,7 +2060,8 @@ namespace MonoTests.System.Data
                 DataSet ds1 = ds.Copy();
                 DataSet ds2 = ds.Copy();
                 ds2.Tables[0]
-                    .Constraints.Add("fk", ds2.Tables[0].Columns[0], ds2.Tables[1].Columns[0]);
+                    .Constraints
+                    .Add("fk", ds2.Tables[0].Columns[0], ds2.Tables[1].Columns[0]);
                 ds1.Tables[0].Constraints.Add("uc", ds1.Tables[0].Columns[0], false);
                 ds1.Merge(ds2, true, MissingSchemaAction.Error);
                 Assert.Fail("#2 If foreignkeyconstraint is missing, exception shud be thrown");
@@ -2835,7 +2834,8 @@ namespace MonoTests.System.Data
 
             //add data to check GH bug of DataSet.ReadXml of empty strings
             ds1.Tables[1]
-                .Rows.Add(
+                .Rows
+                .Add(
                     new object[]
                     {
                         7,
@@ -2847,11 +2847,11 @@ namespace MonoTests.System.Data
                     }
                 );
             ds1.Tables[1]
-                .Rows.Add(
-                    new object[] { 7, 2, " ", "		", new DateTime(2000, 1, 1, 0, 0, 0, 0), 35 }
-                );
+                .Rows
+                .Add(new object[] { 7, 2, " ", "		", new DateTime(2000, 1, 1, 0, 0, 0, 0), 35 });
             ds1.Tables[1]
-                .Rows.Add(new object[] { 7, 3, "", "", new DateTime(2000, 1, 1, 0, 0, 0, 0), 35 });
+                .Rows
+                .Add(new object[] { 7, 3, "", "", new DateTime(2000, 1, 1, 0, 0, 0, 0), 35 });
 
             //write xml file, data only
             ds1.WriteXml(sTempFileName);
@@ -2887,7 +2887,8 @@ namespace MonoTests.System.Data
 
             //add data to check GH bug of DataSet.ReadXml of empty strings
             ds1.Tables[1]
-                .Rows.Add(
+                .Rows
+                .Add(
                     new object[]
                     {
                         7,
@@ -2899,11 +2900,11 @@ namespace MonoTests.System.Data
                     }
                 );
             ds1.Tables[1]
-                .Rows.Add(
-                    new object[] { 7, 2, " ", "		", new DateTime(2000, 1, 1, 0, 0, 0, 0), 35 }
-                );
+                .Rows
+                .Add(new object[] { 7, 2, " ", "		", new DateTime(2000, 1, 1, 0, 0, 0, 0), 35 });
             ds1.Tables[1]
-                .Rows.Add(new object[] { 7, 3, "", "", new DateTime(2000, 1, 1, 0, 0, 0, 0), 35 });
+                .Rows
+                .Add(new object[] { 7, 3, "", "", new DateTime(2000, 1, 1, 0, 0, 0, 0), 35 });
 
             MemoryStream ms = new MemoryStream();
             //write xml file, data only
@@ -3583,7 +3584,8 @@ namespace MonoTests.System.Data
 
             //add data to check GH bug of DataSet.ReadXml of empty strings
             ds1.Tables[1]
-                .Rows.Add(
+                .Rows
+                .Add(
                     new object[]
                     {
                         7,
@@ -3595,11 +3597,11 @@ namespace MonoTests.System.Data
                     }
                 );
             ds1.Tables[1]
-                .Rows.Add(
-                    new object[] { 7, 2, " ", "		", new DateTime(2000, 1, 1, 0, 0, 0, 0), 35 }
-                );
+                .Rows
+                .Add(new object[] { 7, 2, " ", "		", new DateTime(2000, 1, 1, 0, 0, 0, 0), 35 });
             ds1.Tables[1]
-                .Rows.Add(new object[] { 7, 3, "", "", new DateTime(2000, 1, 1, 0, 0, 0, 0), 35 });
+                .Rows
+                .Add(new object[] { 7, 3, "", "", new DateTime(2000, 1, 1, 0, 0, 0, 0), 35 });
 
             StringWriter sw = new StringWriter();
             //write xml file, data only
@@ -3637,7 +3639,8 @@ namespace MonoTests.System.Data
 
             //add data to check GH bug of DataSet.ReadXml of empty strings
             ds1.Tables[1]
-                .Rows.Add(
+                .Rows
+                .Add(
                     new object[]
                     {
                         7,
@@ -3649,11 +3652,11 @@ namespace MonoTests.System.Data
                     }
                 );
             ds1.Tables[1]
-                .Rows.Add(
-                    new object[] { 7, 2, " ", "		", new DateTime(2000, 1, 1, 0, 0, 0, 0), 35 }
-                );
+                .Rows
+                .Add(new object[] { 7, 2, " ", "		", new DateTime(2000, 1, 1, 0, 0, 0, 0), 35 });
             ds1.Tables[1]
-                .Rows.Add(new object[] { 7, 3, "", "", new DateTime(2000, 1, 1, 0, 0, 0, 0), 35 });
+                .Rows
+                .Add(new object[] { 7, 3, "", "", new DateTime(2000, 1, 1, 0, 0, 0, 0), 35 });
 
             StringWriter sw = new StringWriter();
             XmlTextWriter xmlTW = new XmlTextWriter(sw);
@@ -3760,25 +3763,28 @@ namespace MonoTests.System.Data
             DataColumn col2_5 = table2.Columns.Add("col 5", typeof(int));
             DataColumn col2_6 = table2.Columns.Add("col 6", typeof(int));
 
-            ds1.Relations.Add(
-                "rel 1",
-                new DataColumn[] { col1_1, col1_2 },
-                new DataColumn[] { col2_1, col2_2 }
-            );
-            ds1.Relations.Add(
-                "rel 2",
-                new DataColumn[] { col1_3, col1_4 },
-                new DataColumn[] { col2_3, col2_4 },
-                false
-            );
+            ds1.Relations
+                .Add(
+                    "rel 1",
+                    new DataColumn[] { col1_1, col1_2 },
+                    new DataColumn[] { col2_1, col2_2 }
+                );
+            ds1.Relations
+                .Add(
+                    "rel 2",
+                    new DataColumn[] { col1_3, col1_4 },
+                    new DataColumn[] { col2_3, col2_4 },
+                    false
+                );
 
             table1.Constraints.Add("pk 1", col1_7, true);
 
-            table2.Constraints.Add(
-                "fk 1",
-                new DataColumn[] { col1_5, col1_6 },
-                new DataColumn[] { col2_5, col2_6 }
-            );
+            table2.Constraints
+                .Add(
+                    "fk 1",
+                    new DataColumn[] { col1_5, col1_6 },
+                    new DataColumn[] { col2_5, col2_6 }
+                );
 
             ms = new MemoryStream();
             ds1.WriteXmlSchema(ms);
@@ -4327,12 +4333,13 @@ namespace MonoTests.System.Data
                 dt.Rows.Add(new object[] { 0, "aa" });
 
                 //Add a relation between parent and child table.
-                ds.Relations.Add(
-                    "ParentTable_ChildTable",
-                    ds.Tables["ParentTable"].Columns["ParentTable_Id"],
-                    ds.Tables["ChildTable"].Columns["ParentTable_Id"],
-                    true
-                );
+                ds.Relations
+                    .Add(
+                        "ParentTable_ChildTable",
+                        ds.Tables["ParentTable"].Columns["ParentTable_Id"],
+                        ds.Tables["ChildTable"].Columns["ParentTable_Id"],
+                        true
+                    );
                 ds.Relations["ParentTable_ChildTable"].Nested = true;
 
                 //Reomve the Parent_Child relation.

@@ -190,8 +190,7 @@ namespace System.Reflection
         public static System.Reflection.ConstructorInfo[] GetConstructors(
             [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(
                 System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.NonPublicConstructors
-                    | System
-                        .Diagnostics
+                    | System.Diagnostics
                         .CodeAnalysis
                         .DynamicallyAccessedMemberTypes
                         .PublicConstructors
@@ -209,13 +208,11 @@ namespace System.Reflection
                     | System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.PublicEvents
                     | System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.PublicFields
                     | System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.PublicMethods
-                    | System
-                        .Diagnostics
+                    | System.Diagnostics
                         .CodeAnalysis
                         .DynamicallyAccessedMemberTypes
                         .PublicNestedTypes
-                    | System
-                        .Diagnostics
+                    | System.Diagnostics
                         .CodeAnalysis
                         .DynamicallyAccessedMemberTypes
                         .PublicProperties
@@ -339,13 +336,11 @@ namespace System.Reflection
                     | System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.PublicEvents
                     | System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.PublicFields
                     | System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.PublicMethods
-                    | System
-                        .Diagnostics
+                    | System.Diagnostics
                         .CodeAnalysis
                         .DynamicallyAccessedMemberTypes
                         .PublicNestedTypes
-                    | System
-                        .Diagnostics
+                    | System.Diagnostics
                         .CodeAnalysis
                         .DynamicallyAccessedMemberTypes
                         .PublicProperties
@@ -375,13 +370,11 @@ namespace System.Reflection
                     | System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.PublicEvents
                     | System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.PublicFields
                     | System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.PublicMethods
-                    | System
-                        .Diagnostics
+                    | System.Diagnostics
                         .CodeAnalysis
                         .DynamicallyAccessedMemberTypes
                         .PublicNestedTypes
-                    | System
-                        .Diagnostics
+                    | System.Diagnostics
                         .CodeAnalysis
                         .DynamicallyAccessedMemberTypes
                         .PublicProperties
@@ -464,8 +457,7 @@ namespace System.Reflection
         public static System.Type? GetNestedType(
             [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(
                 System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.NonPublicNestedTypes
-                    | System
-                        .Diagnostics
+                    | System.Diagnostics
                         .CodeAnalysis
                         .DynamicallyAccessedMemberTypes
                         .PublicNestedTypes
@@ -481,8 +473,7 @@ namespace System.Reflection
         public static System.Type[] GetNestedTypes(
             [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(
                 System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.NonPublicNestedTypes
-                    | System
-                        .Diagnostics
+                    | System.Diagnostics
                         .CodeAnalysis
                         .DynamicallyAccessedMemberTypes
                         .PublicNestedTypes
@@ -507,8 +498,7 @@ namespace System.Reflection
         public static System.Reflection.PropertyInfo[] GetProperties(
             [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(
                 System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.NonPublicProperties
-                    | System
-                        .Diagnostics
+                    | System.Diagnostics
                         .CodeAnalysis
                         .DynamicallyAccessedMemberTypes
                         .PublicProperties
@@ -534,8 +524,7 @@ namespace System.Reflection
         public static System.Reflection.PropertyInfo? GetProperty(
             [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(
                 System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.NonPublicProperties
-                    | System
-                        .Diagnostics
+                    | System.Diagnostics
                         .CodeAnalysis
                         .DynamicallyAccessedMemberTypes
                         .PublicProperties

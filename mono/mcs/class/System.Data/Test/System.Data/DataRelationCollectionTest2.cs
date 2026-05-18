@@ -115,11 +115,8 @@ namespace MonoTests.System.Data
         public void Add_ByNameDataColumns()
         {
             DataSet ds = getDataSet();
-            ds.Relations.Add(
-                "rel1",
-                ds.Tables[0].Columns["ParentId"],
-                ds.Tables[1].Columns["ParentId"]
-            );
+            ds.Relations
+                .Add("rel1", ds.Tables[0].Columns["ParentId"], ds.Tables[1].Columns["ParentId"]);
 
             Assert.AreEqual(1, ds.Relations.Count, "DRC9");
 
@@ -146,12 +143,13 @@ namespace MonoTests.System.Data
         public void Add_ByNameDataColumnsWithConstraint()
         {
             DataSet ds = getDataSet();
-            ds.Relations.Add(
-                "rel1",
-                ds.Tables[0].Columns["ParentId"],
-                ds.Tables[1].Columns["ParentId"],
-                true
-            );
+            ds.Relations
+                .Add(
+                    "rel1",
+                    ds.Tables[0].Columns["ParentId"],
+                    ds.Tables[1].Columns["ParentId"],
+                    true
+                );
 
             Assert.AreEqual(1, ds.Relations.Count, "DRC17");
 
@@ -178,12 +176,13 @@ namespace MonoTests.System.Data
         public void Add_ByNameDataColumnsWithOutConstraint()
         {
             DataSet ds = getDataSet();
-            ds.Relations.Add(
-                "rel1",
-                ds.Tables[0].Columns["ParentId"],
-                ds.Tables[1].Columns["ParentId"],
-                false
-            );
+            ds.Relations
+                .Add(
+                    "rel1",
+                    ds.Tables[0].Columns["ParentId"],
+                    ds.Tables[1].Columns["ParentId"],
+                    false
+                );
 
             Assert.AreEqual(1, ds.Relations.Count, "DRC25");
 
@@ -275,11 +274,8 @@ namespace MonoTests.System.Data
         public void Contains()
         {
             DataSet ds = getDataSet();
-            ds.Relations.Add(
-                "rel1",
-                ds.Tables[0].Columns["ParentId"],
-                ds.Tables[1].Columns["ParentId"]
-            );
+            ds.Relations
+                .Add("rel1", ds.Tables[0].Columns["ParentId"], ds.Tables[1].Columns["ParentId"]);
 
             Assert.AreEqual(true, ds.Relations.Contains("rel1"), "DRC41");
             Assert.AreEqual(false, ds.Relations.Contains("RelL"), "DRC42");
@@ -293,13 +289,14 @@ namespace MonoTests.System.Data
 
             DataRelation[] dataRelArray = new DataRelation[2];
 
-            ds.Relations.Add(
-                new DataRelation(
-                    "rel1",
-                    ds.Tables[0].Columns["ParentId"],
-                    ds.Tables[1].Columns["ParentId"]
-                )
-            );
+            ds.Relations
+                .Add(
+                    new DataRelation(
+                        "rel1",
+                        ds.Tables[0].Columns["ParentId"],
+                        ds.Tables[1].Columns["ParentId"]
+                    )
+                );
 
             ds.Relations.CopyTo(dataRelArray, 1);
 
@@ -315,17 +312,11 @@ namespace MonoTests.System.Data
         {
             DataSet ds = getDataSet();
             Assert.AreEqual(0, ds.Relations.Count, "DRC46");
-            ds.Relations.Add(
-                "rel1",
-                ds.Tables[0].Columns["ParentId"],
-                ds.Tables[1].Columns["ParentId"]
-            );
+            ds.Relations
+                .Add("rel1", ds.Tables[0].Columns["ParentId"], ds.Tables[1].Columns["ParentId"]);
             Assert.AreEqual(1, ds.Relations.Count, "DRC47");
-            ds.Relations.Add(
-                "rel2",
-                ds.Tables[0].Columns["String1"],
-                ds.Tables[1].Columns["String1"]
-            );
+            ds.Relations
+                .Add("rel2", ds.Tables[0].Columns["String1"], ds.Tables[1].Columns["String1"]);
             Assert.AreEqual(2, ds.Relations.Count, "DRC48");
             ds.Relations.Remove("rel2");
             Assert.AreEqual(1, ds.Relations.Count, "DRC49");
@@ -338,16 +329,10 @@ namespace MonoTests.System.Data
         {
             DataSet ds = getDataSet();
             int counter = 0;
-            ds.Relations.Add(
-                "rel1",
-                ds.Tables[0].Columns["ParentId"],
-                ds.Tables[1].Columns["ParentId"]
-            );
-            ds.Relations.Add(
-                "rel2",
-                ds.Tables[0].Columns["String1"],
-                ds.Tables[1].Columns["String1"]
-            );
+            ds.Relations
+                .Add("rel1", ds.Tables[0].Columns["ParentId"], ds.Tables[1].Columns["ParentId"]);
+            ds.Relations
+                .Add("rel2", ds.Tables[0].Columns["String1"], ds.Tables[1].Columns["String1"]);
 
             IEnumerator myEnumerator = ds.Relations.GetEnumerator();
 
@@ -504,9 +489,8 @@ namespace MonoTests.System.Data
             DataTable dt1 = ds.Tables[0];
             DataTable dt2 = ds.Tables[1];
 
-            dt1.ChildRelations.Add(
-                new DataRelation("rel1", dt1.Columns["ParentId"], dt2.Columns["ParentId"])
-            );
+            dt1.ChildRelations
+                .Add(new DataRelation("rel1", dt1.Columns["ParentId"], dt2.Columns["ParentId"]));
 
             Assert.AreEqual(1, dt1.ChildRelations.Count, "DRC77");
             Assert.AreEqual(1, dt2.ParentRelations.Count, "DRC78");
@@ -519,7 +503,8 @@ namespace MonoTests.System.Data
             DataSet ds = GetDataSet();
 
             ds.Tables[1]
-                .ParentRelations.Add(
+                .ParentRelations
+                .Add(
                     new DataRelation(
                         "rel1",
                         ds.Tables[0].Columns["ParentId"],

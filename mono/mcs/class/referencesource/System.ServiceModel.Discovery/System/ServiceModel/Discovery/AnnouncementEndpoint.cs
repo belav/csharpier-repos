@@ -31,9 +31,8 @@ namespace System.ServiceModel.Discovery
             : base(GetAnnouncementContract(discoveryVersion))
         {
             // Send replies async to maintain performance
-            this.EndpointBehaviors.Add(
-                new DispatcherSynchronizationBehavior { AsynchronousSendEnabled = true }
-            );
+            this.EndpointBehaviors
+                .Add(new DispatcherSynchronizationBehavior { AsynchronousSendEnabled = true });
 
             this.discoveryVersion = discoveryVersion;
             base.Address = address;

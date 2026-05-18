@@ -610,10 +610,8 @@ namespace System.Runtime.Remoting.Proxies
             {
                 // Note: using ThreadPoolAware to detect if this is a
                 // ThreadAffinity or Synchronization context.
-                ar.AsyncWaitHandle.WaitOne(
-                    Timeout.Infinite,
-                    Thread.CurrentContext.IsThreadPoolAware
-                );
+                ar.AsyncWaitHandle
+                    .WaitOne(Timeout.Infinite, Thread.CurrentContext.IsThreadPoolAware);
             }
 
             lock (ar)
@@ -653,9 +651,10 @@ namespace System.Runtime.Remoting.Proxies
                 }
                 // Merge the call context back into the thread that
                 // called EndInvoke
-                Thread
-                    .CurrentThread.GetMutableExecutionContext()
-                    .LogicalCallContext.Merge(mrm.LogicalCallContext);
+                Thread.CurrentThread
+                    .GetMutableExecutionContext()
+                    .LogicalCallContext
+                    .Merge(mrm.LogicalCallContext);
             }
             // Will be non-null only for proxy case!
             return retMsg;
@@ -848,9 +847,10 @@ namespace System.Runtime.Remoting.Proxies
                 ReturnCallContextToThread(currentThread, retMsg, msgFlags, cctx);
 
                 // Pull response "Header"'s out of the message
-                Thread
-                    .CurrentThread.GetMutableExecutionContext()
-                    .LogicalCallContext.PropagateIncomingHeadersToCallContext(retMsg);
+                Thread.CurrentThread
+                    .GetMutableExecutionContext()
+                    .LogicalCallContext
+                    .PropagateIncomingHeadersToCallContext(retMsg);
             }
 
             if (!IsRemotingProxy() && ((msgFlags & Message.BeginAsync) == Message.BeginAsync))

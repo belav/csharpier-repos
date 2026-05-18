@@ -86,7 +86,9 @@ namespace System.ServiceModel.Activities
                 if (!this.checkedBinding)
                 {
                     foreach (
-                        BindingElement bindingElement in base.Endpoint.Binding.CreateBindingElements()
+                        BindingElement bindingElement in base.Endpoint
+                            .Binding
+                            .CreateBindingElements()
                     )
                     {
                         TransactionFlowBindingElement transactionFlowElement =
@@ -984,12 +986,8 @@ namespace System.ServiceModel.Activities
 
                 if (this.isTransacted)
                 {
-                    result = this.channel.BeginTransactedSuspend(
-                        instanceId,
-                        reason,
-                        callback,
-                        this
-                    );
+                    result = this.channel
+                        .BeginTransactedSuspend(instanceId, reason, callback, this);
                 }
                 else
                 {
@@ -1124,12 +1122,8 @@ namespace System.ServiceModel.Activities
 
                 if (this.isTransacted)
                 {
-                    result = this.channel.BeginTransactedTerminate(
-                        instanceId,
-                        reason,
-                        callback,
-                        this
-                    );
+                    result = this.channel
+                        .BeginTransactedTerminate(instanceId, reason, callback, this);
                 }
                 else
                 {
@@ -1196,21 +1190,18 @@ namespace System.ServiceModel.Activities
 
                 if (this.isTransacted)
                 {
-                    result = this.channel.BeginTransactedUpdate(
-                        instanceId,
-                        updatedDefinitionIdentity,
-                        callback,
-                        this
-                    );
+                    result = this.channel
+                        .BeginTransactedUpdate(
+                            instanceId,
+                            updatedDefinitionIdentity,
+                            callback,
+                            this
+                        );
                 }
                 else
                 {
-                    result = this.channel.BeginUpdate(
-                        instanceId,
-                        updatedDefinitionIdentity,
-                        callback,
-                        this
-                    );
+                    result = this.channel
+                        .BeginUpdate(instanceId, updatedDefinitionIdentity, callback, this);
                 }
 
                 if (result.CompletedSynchronously)

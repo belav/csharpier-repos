@@ -432,10 +432,8 @@ namespace System.Xml.XPath
             if (this.mapNmsp == null)
                 this.mapNmsp = new Dictionary<XPathNodeRef, XPathNodeRef>();
 
-            this.mapNmsp.Add(
-                new XPathNodeRef(pageElem, idxElem),
-                new XPathNodeRef(pageNmsp, idxNmsp)
-            );
+            this.mapNmsp
+                .Add(new XPathNodeRef(pageElem, idxElem), new XPathNodeRef(pageNmsp, idxNmsp));
         }
 
         /// <summary>

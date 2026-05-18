@@ -1138,14 +1138,15 @@ namespace System.Xml.XmlSchemaValidatorApiTests
                 settings.XmlResolver = new XmlUrlResolver();
                 settings.Schemas.XmlResolver = new XmlUrlResolver();
                 // TempDirectory path must end with a DirectorySeratorChar, otherwise it will throw in the Xml validation.
-                settings.Schemas.Add(
-                    "mainschema",
-                    XmlReader.Create(
-                        new StringReader(xsd),
-                        null,
-                        EnsureTrailingSlash(tempDirectory.Path)
-                    )
-                );
+                settings.Schemas
+                    .Add(
+                        "mainschema",
+                        XmlReader.Create(
+                            new StringReader(xsd),
+                            null,
+                            EnsureTrailingSlash(tempDirectory.Path)
+                        )
+                    );
                 settings.ValidationType = ValidationType.Schema;
                 XmlReader reader = XmlReader.Create(new StringReader(xml), settings);
                 XmlDocument doc = new XmlDocument();
@@ -1172,14 +1173,15 @@ namespace System.Xml.XmlSchemaValidatorApiTests
                 settings.XmlResolver = new XmlUrlResolver();
                 settings.Schemas.XmlResolver = new XmlUrlResolver();
                 // TempDirectory path must end with a DirectorySeratorChar, otherwise it will throw in the Xml validation.
-                settings.Schemas.Add(
-                    "mainschema",
-                    XmlReader.Create(
-                        new StringReader(xsd),
-                        null,
-                        EnsureTrailingSlash(tempDirectory.Path)
-                    )
-                );
+                settings.Schemas
+                    .Add(
+                        "mainschema",
+                        XmlReader.Create(
+                            new StringReader(xsd),
+                            null,
+                            EnsureTrailingSlash(tempDirectory.Path)
+                        )
+                    );
                 settings.ValidationType = ValidationType.Schema;
                 XmlReader reader = XmlReader.Create(new StringReader(xml), settings);
                 XmlDocument doc = new XmlDocument();
@@ -1249,10 +1251,11 @@ namespace System.Xml.XmlSchemaValidatorApiTests
             XmlReaderSettings rs = new XmlReaderSettings();
             rs.ValidationEventHandler += new ValidationEventHandler(ValidationCallback);
             rs.ValidationType = ValidationType.Schema;
-            rs.Schemas.Add(
-                "http://tempuri.org/XMLSchema.xsd",
-                XmlReader.Create(new StringReader(xsd445844))
-            );
+            rs.Schemas
+                .Add(
+                    "http://tempuri.org/XMLSchema.xsd",
+                    XmlReader.Create(new StringReader(xsd445844))
+                );
 
             using (XmlReader r = XmlReader.Create(new StringReader(xml445844), rs))
             {

@@ -379,8 +379,7 @@ namespace System.ComponentModel
     {
         public TypeDescriptionProviderAttribute(
             [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(
-                System
-                    .Diagnostics
+                System.Diagnostics
                     .CodeAnalysis
                     .DynamicallyAccessedMemberTypes
                     .PublicParameterlessConstructor
@@ -390,8 +389,7 @@ namespace System.ComponentModel
 
         public TypeDescriptionProviderAttribute(
             [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(
-                System
-                    .Diagnostics
+                System.Diagnostics
                     .CodeAnalysis
                     .DynamicallyAccessedMemberTypes
                     .PublicParameterlessConstructor
@@ -400,8 +398,7 @@ namespace System.ComponentModel
         ) { }
 
         [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(
-            System
-                .Diagnostics
+            System.Diagnostics
                 .CodeAnalysis
                 .DynamicallyAccessedMemberTypes
                 .PublicParameterlessConstructor

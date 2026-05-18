@@ -162,23 +162,25 @@ namespace Mono.CSharp
                         if (bf.Initializer != null)
                             continue;
 
-                        fc.Report.Error(
-                            843,
-                            loc,
-                            "An automatically implemented property `{0}' must be fully assigned before control leaves the constructor. Consider calling the default struct contructor from a constructor initializer",
-                            field.GetSignatureForError()
-                        );
+                        fc.Report
+                            .Error(
+                                843,
+                                loc,
+                                "An automatically implemented property `{0}' must be fully assigned before control leaves the constructor. Consider calling the default struct contructor from a constructor initializer",
+                                field.GetSignatureForError()
+                            );
 
                         ok = false;
                         continue;
                     }
 
-                    fc.Report.Error(
-                        171,
-                        loc,
-                        "Field `{0}' must be fully assigned before control leaves the constructor",
-                        field.GetSignatureForError()
-                    );
+                    fc.Report
+                        .Error(
+                            171,
+                            loc,
+                            "Field `{0}' must be fully assigned before control leaves the constructor",
+                            field.GetSignatureForError()
+                        );
                     ok = false;
                 }
             }

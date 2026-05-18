@@ -340,8 +340,8 @@ internal class RootCommand : CommandBase
     }
 
     private static string GetVersion() =>
-        typeof(RootCommand)
-            .Assembly.GetCustomAttribute<AssemblyInformationalVersionAttribute>()!
+        typeof(RootCommand).Assembly
+            .GetCustomAttribute<AssemblyInformationalVersionAttribute>()!
             .InformationalVersion;
 
     private static bool ShouldHelp(IReadOnlyList<string> commands) =>

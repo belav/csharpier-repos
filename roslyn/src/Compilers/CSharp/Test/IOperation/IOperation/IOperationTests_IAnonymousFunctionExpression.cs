@@ -476,10 +476,12 @@ class Program
                 semanticModel.GetOperation(variableDeclaration);
             var variableTreeLambdaOperation = (
                 (IDelegateCreationOperation)
-                    variableDeclarationGroupOperation
-                        .Declarations.Single()
-                        .Declarators.Single()
-                        .Initializer.Value
+                    variableDeclarationGroupOperation.Declarations
+                        .Single()
+                        .Declarators
+                        .Single()
+                        .Initializer
+                        .Value
             ).Target;
             var lambdaOperation = (IAnonymousFunctionOperation)
                 semanticModel.GetOperation(lambdaSyntax);
@@ -492,10 +494,12 @@ class Program
                 (IVariableDeclarationGroupOperation)semanticModel.GetOperation(variableDeclaration);
             var variableTreeLambdaOperationSecondRequest = (
                 (IDelegateCreationOperation)
-                    variableDeclarationGroupOperationSecondRequest
-                        .Declarations.Single()
-                        .Declarators.Single()
-                        .Initializer.Value
+                    variableDeclarationGroupOperationSecondRequest.Declarations
+                        .Single()
+                        .Declarators
+                        .Single()
+                        .Initializer
+                        .Value
             ).Target;
             var lambdaOperationSecondRequest = (IAnonymousFunctionOperation)
                 semanticModel.GetOperation(lambdaSyntax);
@@ -1010,8 +1014,8 @@ struct C
 
             IFlowAnonymousFunctionOperation getLambda(ControlFlowGraph graph)
             {
-                return graph
-                    .Blocks.SelectMany(b => b.Operations.SelectMany(o => o.DescendantsAndSelf()))
+                return graph.Blocks
+                    .SelectMany(b => b.Operations.SelectMany(o => o.DescendantsAndSelf()))
                     .OfType<IFlowAnonymousFunctionOperation>()
                     .Single();
             }
@@ -1087,8 +1091,8 @@ struct C
 
             IFlowAnonymousFunctionOperation getLambda(ControlFlowGraph graph, int index)
             {
-                return graph
-                    .Blocks.SelectMany(b => b.Operations.SelectMany(o => o.DescendantsAndSelf()))
+                return graph.Blocks
+                    .SelectMany(b => b.Operations.SelectMany(o => o.DescendantsAndSelf()))
                     .OfType<IFlowAnonymousFunctionOperation>()
                     .ElementAt(index);
             }

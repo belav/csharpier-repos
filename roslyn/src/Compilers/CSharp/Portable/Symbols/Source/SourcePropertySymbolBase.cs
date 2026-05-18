@@ -255,12 +255,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     // property (incorrectly) has a different type than the overridden property.  In such cases,
                     // we want to retain the original (incorrect) type to avoid hiding the type given in source.
                     if (
-                        type.Type.Equals(
-                            overriddenPropertyType.Type,
-                            TypeCompareKind.IgnoreCustomModifiersAndArraySizesAndLowerBounds
-                                | TypeCompareKind.IgnoreNullableModifiersForReferenceTypes
-                                | TypeCompareKind.IgnoreDynamic
-                        )
+                        type.Type
+                            .Equals(
+                                overriddenPropertyType.Type,
+                                TypeCompareKind.IgnoreCustomModifiersAndArraySizesAndLowerBounds
+                                    | TypeCompareKind.IgnoreNullableModifiersForReferenceTypes
+                                    | TypeCompareKind.IgnoreDynamic
+                            )
                     )
                     {
                         type = type.WithTypeAndModifiers(
@@ -1493,13 +1494,14 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             )
             {
                 bool hasAnyDiagnostics;
-                (attributeData, boundAttribute) = arguments.Binder.GetAttribute(
-                    arguments.AttributeSyntax,
-                    arguments.AttributeType,
-                    beforeAttributePartBound: null,
-                    afterAttributePartBound: null,
-                    out hasAnyDiagnostics
-                );
+                (attributeData, boundAttribute) = arguments.Binder
+                    .GetAttribute(
+                        arguments.AttributeSyntax,
+                        arguments.AttributeType,
+                        beforeAttributePartBound: null,
+                        afterAttributePartBound: null,
+                        out hasAnyDiagnostics
+                    );
                 if (!attributeData.HasErrors)
                 {
                     string? indexerName = attributeData
@@ -1643,10 +1645,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             }
             else if (attribute.IsTargetAttribute(AttributeDescription.MemberNotNullAttribute))
             {
-                MessageID.IDS_FeatureMemberNotNull.CheckFeatureAvailability(
-                    diagnostics,
-                    arguments.AttributeSyntaxOpt
-                );
+                MessageID.IDS_FeatureMemberNotNull
+                    .CheckFeatureAvailability(diagnostics, arguments.AttributeSyntaxOpt);
                 CSharpAttributeData.DecodeMemberNotNullAttribute<PropertyWellKnownAttributeData>(
                     ContainingType,
                     ref arguments
@@ -1654,10 +1654,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             }
             else if (attribute.IsTargetAttribute(AttributeDescription.MemberNotNullWhenAttribute))
             {
-                MessageID.IDS_FeatureMemberNotNull.CheckFeatureAvailability(
-                    diagnostics,
-                    arguments.AttributeSyntaxOpt
-                );
+                MessageID.IDS_FeatureMemberNotNull
+                    .CheckFeatureAvailability(diagnostics, arguments.AttributeSyntaxOpt);
                 CSharpAttributeData.DecodeMemberNotNullWhenAttribute<PropertyWellKnownAttributeData>(
                     ContainingType,
                     ref arguments
@@ -1869,12 +1867,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                                     foreach (var parameter in this.Parameters)
                                     {
                                         parameter.ForceComplete(locationOpt, cancellationToken);
-                                        parameter.Type.CheckAllConstraints(
-                                            DeclaringCompilation,
-                                            conversions,
-                                            parameter.GetFirstLocation(),
-                                            diagnostics
-                                        );
+                                        parameter.Type
+                                            .CheckAllConstraints(
+                                                DeclaringCompilation,
+                                                conversions,
+                                                parameter.GetFirstLocation(),
+                                                diagnostics
+                                            );
                                     }
 
                                     this.AddDeclarationDiagnostics(diagnostics);
@@ -1907,12 +1906,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                                 var conversions = this.ContainingAssembly
                                     .CorLibrary
                                     .TypeConversions;
-                                this.Type.CheckAllConstraints(
-                                    DeclaringCompilation,
-                                    conversions,
-                                    Location,
-                                    diagnostics
-                                );
+                                this.Type
+                                    .CheckAllConstraints(
+                                        DeclaringCompilation,
+                                        conversions,
+                                        Location,
+                                        diagnostics
+                                    );
 
                                 ValidatePropertyType(diagnostics);
 

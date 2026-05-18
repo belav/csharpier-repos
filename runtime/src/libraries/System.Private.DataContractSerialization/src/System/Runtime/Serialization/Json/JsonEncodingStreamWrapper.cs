@@ -150,9 +150,8 @@ namespace System.Runtime.Serialization.Json
 
                 // Convert to UTF-8
                 return new ArraySegment<byte>(
-                    DataContractSerializer.ValidatingUTF8.GetBytes(
-                        GetEncoding(dataEnc).GetChars(buffer, offset, count)
-                    )
+                    DataContractSerializer.ValidatingUTF8
+                        .GetBytes(GetEncoding(dataEnc).GetChars(buffer, offset, count))
                 );
             }
             catch (DecoderFallbackException e)
@@ -468,13 +467,8 @@ namespace System.Runtime.Serialization.Json
                     CleanupCharBreak();
                     int count = _encoding.GetChars(_bytes, _byteOffset, _byteCount, _chars, 0);
                     _byteOffset = 0;
-                    _byteCount = DataContractSerializer.ValidatingUTF8.GetBytes(
-                        _chars,
-                        0,
-                        count,
-                        _bytes,
-                        0
-                    );
+                    _byteCount = DataContractSerializer.ValidatingUTF8
+                        .GetBytes(_chars, 0, count, _bytes, 0);
                 }
             }
             catch (DecoderFallbackException ex)

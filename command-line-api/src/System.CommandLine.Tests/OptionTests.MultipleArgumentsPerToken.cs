@@ -38,13 +38,15 @@ namespace System.CommandLine.Tests
 
                     result
                         .GetResult(animalsOption)
-                        .Tokens.Select(t => t.Value)
+                        .Tokens
+                        .Select(t => t.Value)
                         .Should()
                         .BeEquivalentTo(new[] { "cat", "dog" });
 
                     result
                         .GetResult(vegetablesOption)
-                        .Tokens.Select(t => t.Value)
+                        .Tokens
+                        .Select(t => t.Value)
                         .Should()
                         .BeEquivalentTo("carrot");
 
@@ -66,13 +68,15 @@ namespace System.CommandLine.Tests
 
                     result
                         .GetResult(animalsOption)
-                        .Tokens.Select(t => t.Value)
+                        .Tokens
+                        .Select(t => t.Value)
                         .Should()
                         .BeEquivalentTo("cat");
 
                     result
                         .GetResult(vegetablesOption)
-                        .Tokens.Select(t => t.Value)
+                        .Tokens
+                        .Select(t => t.Value)
                         .Should()
                         .BeEquivalentTo("carrot");
 
@@ -116,8 +120,8 @@ namespace System.CommandLine.Tests
 
                     var optionResult = result.GetResult(option);
 
-                    optionResult
-                        .Tokens.Select(t => t.Value)
+                    optionResult.Tokens
+                        .Select(t => t.Value)
                         .Should()
                         .BeEquivalentSequenceTo("1", "2", "3", "4");
                 }
@@ -176,8 +180,8 @@ namespace System.CommandLine.Tests
                     var result = command.Parse("--option 1 2");
 
                     result.UnmatchedTokens.Should().BeEquivalentTo(new[] { "2" });
-                    result
-                        .Errors.Should()
+                    result.Errors
+                        .Should()
                         .Contain(e =>
                             e.Message == LocalizationResources.UnrecognizedCommandOrArgument("2")
                         );

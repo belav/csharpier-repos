@@ -344,10 +344,8 @@ namespace System.ComponentModel.Composition.Primitives
             Requires.NotNull(exportDefinition, "exportDefinition");
 
             if (
-                !StringComparers.ContractName.Equals(
-                    this.ContractName,
-                    exportDefinition.ContractName
-                )
+                !StringComparers.ContractName
+                    .Equals(this.ContractName, exportDefinition.ContractName)
             )
             {
                 return false;
@@ -360,15 +358,12 @@ namespace System.ComponentModel.Composition.Primitives
         {
             if (!string.IsNullOrEmpty(this.RequiredTypeIdentity))
             {
-                string exportTypeIdentity = definition.Metadata.GetValue<string>(
-                    CompositionConstants.ExportTypeIdentityMetadataName
-                );
+                string exportTypeIdentity = definition.Metadata
+                    .GetValue<string>(CompositionConstants.ExportTypeIdentityMetadataName);
 
                 if (
-                    !StringComparers.ContractName.Equals(
-                        this.RequiredTypeIdentity,
-                        exportTypeIdentity
-                    )
+                    !StringComparers.ContractName
+                        .Equals(this.RequiredTypeIdentity, exportTypeIdentity)
                 )
                 {
                     return false;
@@ -412,9 +407,8 @@ namespace System.ComponentModel.Composition.Primitives
                 return true;
             }
 
-            CreationPolicy exportPolicy = definition.Metadata.GetValue<CreationPolicy>(
-                CompositionConstants.PartCreationPolicyMetadataName
-            );
+            CreationPolicy exportPolicy = definition.Metadata
+                .GetValue<CreationPolicy>(CompositionConstants.PartCreationPolicyMetadataName);
             return exportPolicy == CreationPolicy.Any
                 || exportPolicy == this.RequiredCreationPolicy;
         }

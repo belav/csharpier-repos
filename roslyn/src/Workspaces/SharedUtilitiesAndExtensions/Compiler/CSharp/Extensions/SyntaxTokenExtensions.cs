@@ -238,11 +238,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
                 .WithPrependedLeadingTrivia(leadingTrivia)
                 .WithTrailingTrivia(
                     (
-                        token.TrailingTrivia.Concat(
-                            SyntaxNodeOrTokenExtensions
-                                .GetTrivia(trailingNodesOrTokens)
-                                .Concat(trailingTrivia)
-                        )
+                        token.TrailingTrivia
+                            .Concat(
+                                SyntaxNodeOrTokenExtensions
+                                    .GetTrivia(trailingNodesOrTokens)
+                                    .Concat(trailingTrivia)
+                            )
                     ).FilterComments(addElasticMarker: false)
                 );
 

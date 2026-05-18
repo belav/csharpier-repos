@@ -52,24 +52,26 @@ namespace Mono.CSharp
         {
             if (t.IsGenericParameter)
             {
-                ec.Report.Error(
-                    403,
-                    loc,
-                    "Cannot convert null to the type parameter `{0}' because it could be a value "
-                        + "type. Consider using `default ({0})' instead",
-                    t.Name
-                );
+                ec.Report
+                    .Error(
+                        403,
+                        loc,
+                        "Cannot convert null to the type parameter `{0}' because it could be a value "
+                            + "type. Consider using `default ({0})' instead",
+                        t.Name
+                    );
                 return;
             }
 
             if (TypeSpec.IsValueType(t))
             {
-                ec.Report.Error(
-                    37,
-                    loc,
-                    "Cannot convert null to `{0}' because it is a value type",
-                    t.GetSignatureForError()
-                );
+                ec.Report
+                    .Error(
+                        37,
+                        loc,
+                        "Cannot convert null to `{0}' because it is a value type",
+                        t.GetSignatureForError()
+                    );
                 return;
             }
 
@@ -277,13 +279,14 @@ namespace Mono.CSharp
 
         static void Error_664(ResolveContext ec, Location loc, string type, string suffix)
         {
-            ec.Report.Error(
-                664,
-                loc,
-                "Literal of type double cannot be implicitly converted to type `{0}'. Add suffix `{1}' to create a literal of this type",
-                type,
-                suffix
-            );
+            ec.Report
+                .Error(
+                    664,
+                    loc,
+                    "Literal of type double cannot be implicitly converted to type `{0}'. Add suffix `{1}' to create a literal of this type",
+                    type,
+                    suffix
+                );
         }
 
         public override bool IsLiteral

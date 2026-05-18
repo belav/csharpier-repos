@@ -60,13 +60,14 @@ namespace System.ServiceModel.Channels
                 int valueInt = (int)value;
                 if (valueInt < 100 || valueInt > 599)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ArgumentOutOfRangeException(
-                            "value",
-                            value,
-                            SR.GetString(SR.ValueMustBeInRange, 100, 599)
-                        )
-                    );
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperError(
+                            new ArgumentOutOfRangeException(
+                                "value",
+                                value,
+                                SR.GetString(SR.ValueMustBeInRange, 100, 599)
+                            )
+                        );
                 }
 
                 if (this.useHttpBackedProperty)
@@ -166,10 +167,8 @@ namespace System.ServiceModel.Channels
         {
             HttpResponseMessage httpResponseMessage = null;
 
-            HttpResponseMessageProperty property =
-                message.Properties.GetValue<HttpResponseMessageProperty>(
-                    HttpResponseMessageProperty.Name
-                );
+            HttpResponseMessageProperty property = message.Properties
+                .GetValue<HttpResponseMessageProperty>(HttpResponseMessageProperty.Name);
             if (property != null)
             {
                 httpResponseMessage = property.HttpResponseMessage;
@@ -210,9 +209,8 @@ namespace System.ServiceModel.Channels
                 {
                     if (!responseProperty.useHttpBackedProperty)
                     {
-                        this.httpBackedProperty.MergeWithTraditionalProperty(
-                            responseProperty.traditionalProperty
-                        );
+                        this.httpBackedProperty
+                            .MergeWithTraditionalProperty(responseProperty.traditionalProperty);
                         responseProperty.traditionalProperty = null;
                         responseProperty.httpBackedProperty = this.httpBackedProperty;
                         responseProperty.useHttpBackedProperty = true;

@@ -460,13 +460,8 @@ namespace System.Activities.DynamicUpdate
         )
         {
             ThrowIfDisposed();
-            this.innerContext.ScheduleAction(
-                activityAction,
-                argument1,
-                argument2,
-                onCompleted,
-                onFaulted
-            );
+            this.innerContext
+                .ScheduleAction(activityAction, argument1, argument2, onCompleted, onFaulted);
         }
 
         [SuppressMessage(
@@ -489,14 +484,15 @@ namespace System.Activities.DynamicUpdate
         )
         {
             ThrowIfDisposed();
-            this.innerContext.ScheduleAction(
-                activityAction,
-                argument1,
-                argument2,
-                argument3,
-                onCompleted,
-                onFaulted
-            );
+            this.innerContext
+                .ScheduleAction(
+                    activityAction,
+                    argument1,
+                    argument2,
+                    argument3,
+                    onCompleted,
+                    onFaulted
+                );
         }
 
         [SuppressMessage(
@@ -520,15 +516,16 @@ namespace System.Activities.DynamicUpdate
         )
         {
             ThrowIfDisposed();
-            this.innerContext.ScheduleAction(
-                activityAction,
-                argument1,
-                argument2,
-                argument3,
-                argument4,
-                onCompleted,
-                onFaulted
-            );
+            this.innerContext
+                .ScheduleAction(
+                    activityAction,
+                    argument1,
+                    argument2,
+                    argument3,
+                    argument4,
+                    onCompleted,
+                    onFaulted
+                );
         }
 
         [SuppressMessage(
@@ -553,16 +550,17 @@ namespace System.Activities.DynamicUpdate
         )
         {
             ThrowIfDisposed();
-            this.innerContext.ScheduleAction(
-                activityAction,
-                argument1,
-                argument2,
-                argument3,
-                argument4,
-                argument5,
-                onCompleted,
-                onFaulted
-            );
+            this.innerContext
+                .ScheduleAction(
+                    activityAction,
+                    argument1,
+                    argument2,
+                    argument3,
+                    argument4,
+                    argument5,
+                    onCompleted,
+                    onFaulted
+                );
         }
 
         [SuppressMessage(
@@ -588,17 +586,18 @@ namespace System.Activities.DynamicUpdate
         )
         {
             ThrowIfDisposed();
-            this.innerContext.ScheduleAction(
-                activityAction,
-                argument1,
-                argument2,
-                argument3,
-                argument4,
-                argument5,
-                argument6,
-                onCompleted,
-                onFaulted
-            );
+            this.innerContext
+                .ScheduleAction(
+                    activityAction,
+                    argument1,
+                    argument2,
+                    argument3,
+                    argument4,
+                    argument5,
+                    argument6,
+                    onCompleted,
+                    onFaulted
+                );
         }
 
         [SuppressMessage(
@@ -625,18 +624,19 @@ namespace System.Activities.DynamicUpdate
         )
         {
             ThrowIfDisposed();
-            this.innerContext.ScheduleAction(
-                activityAction,
-                argument1,
-                argument2,
-                argument3,
-                argument4,
-                argument5,
-                argument6,
-                argument7,
-                onCompleted,
-                onFaulted
-            );
+            this.innerContext
+                .ScheduleAction(
+                    activityAction,
+                    argument1,
+                    argument2,
+                    argument3,
+                    argument4,
+                    argument5,
+                    argument6,
+                    argument7,
+                    onCompleted,
+                    onFaulted
+                );
         }
 
         [SuppressMessage(
@@ -664,19 +664,20 @@ namespace System.Activities.DynamicUpdate
         )
         {
             ThrowIfDisposed();
-            this.innerContext.ScheduleAction(
-                activityAction,
-                argument1,
-                argument2,
-                argument3,
-                argument4,
-                argument5,
-                argument6,
-                argument7,
-                argument8,
-                onCompleted,
-                onFaulted
-            );
+            this.innerContext
+                .ScheduleAction(
+                    activityAction,
+                    argument1,
+                    argument2,
+                    argument3,
+                    argument4,
+                    argument5,
+                    argument6,
+                    argument7,
+                    argument8,
+                    onCompleted,
+                    onFaulted
+                );
         }
 
         [SuppressMessage(
@@ -705,20 +706,21 @@ namespace System.Activities.DynamicUpdate
         )
         {
             ThrowIfDisposed();
-            this.innerContext.ScheduleAction(
-                activityAction,
-                argument1,
-                argument2,
-                argument3,
-                argument4,
-                argument5,
-                argument6,
-                argument7,
-                argument8,
-                argument9,
-                onCompleted,
-                onFaulted
-            );
+            this.innerContext
+                .ScheduleAction(
+                    activityAction,
+                    argument1,
+                    argument2,
+                    argument3,
+                    argument4,
+                    argument5,
+                    argument6,
+                    argument7,
+                    argument8,
+                    argument9,
+                    onCompleted,
+                    onFaulted
+                );
         }
 
         [SuppressMessage(
@@ -748,21 +750,22 @@ namespace System.Activities.DynamicUpdate
         )
         {
             ThrowIfDisposed();
-            this.innerContext.ScheduleAction(
-                activityAction,
-                argument1,
-                argument2,
-                argument3,
-                argument4,
-                argument5,
-                argument6,
-                argument7,
-                argument8,
-                argument9,
-                argument10,
-                onCompleted,
-                onFaulted
-            );
+            this.innerContext
+                .ScheduleAction(
+                    activityAction,
+                    argument1,
+                    argument2,
+                    argument3,
+                    argument4,
+                    argument5,
+                    argument6,
+                    argument7,
+                    argument8,
+                    argument9,
+                    argument10,
+                    onCompleted,
+                    onFaulted
+                );
         }
 
         [SuppressMessage(
@@ -793,22 +796,23 @@ namespace System.Activities.DynamicUpdate
         )
         {
             ThrowIfDisposed();
-            this.innerContext.ScheduleAction(
-                activityAction,
-                argument1,
-                argument2,
-                argument3,
-                argument4,
-                argument5,
-                argument6,
-                argument7,
-                argument8,
-                argument9,
-                argument10,
-                argument11,
-                onCompleted,
-                onFaulted
-            );
+            this.innerContext
+                .ScheduleAction(
+                    activityAction,
+                    argument1,
+                    argument2,
+                    argument3,
+                    argument4,
+                    argument5,
+                    argument6,
+                    argument7,
+                    argument8,
+                    argument9,
+                    argument10,
+                    argument11,
+                    onCompleted,
+                    onFaulted
+                );
         }
 
         [SuppressMessage(
@@ -840,23 +844,24 @@ namespace System.Activities.DynamicUpdate
         )
         {
             ThrowIfDisposed();
-            this.innerContext.ScheduleAction(
-                activityAction,
-                argument1,
-                argument2,
-                argument3,
-                argument4,
-                argument5,
-                argument6,
-                argument7,
-                argument8,
-                argument9,
-                argument10,
-                argument11,
-                argument12,
-                onCompleted,
-                onFaulted
-            );
+            this.innerContext
+                .ScheduleAction(
+                    activityAction,
+                    argument1,
+                    argument2,
+                    argument3,
+                    argument4,
+                    argument5,
+                    argument6,
+                    argument7,
+                    argument8,
+                    argument9,
+                    argument10,
+                    argument11,
+                    argument12,
+                    onCompleted,
+                    onFaulted
+                );
         }
 
         [SuppressMessage(
@@ -889,24 +894,25 @@ namespace System.Activities.DynamicUpdate
         )
         {
             ThrowIfDisposed();
-            this.innerContext.ScheduleAction(
-                activityAction,
-                argument1,
-                argument2,
-                argument3,
-                argument4,
-                argument5,
-                argument6,
-                argument7,
-                argument8,
-                argument9,
-                argument10,
-                argument11,
-                argument12,
-                argument13,
-                onCompleted,
-                onFaulted
-            );
+            this.innerContext
+                .ScheduleAction(
+                    activityAction,
+                    argument1,
+                    argument2,
+                    argument3,
+                    argument4,
+                    argument5,
+                    argument6,
+                    argument7,
+                    argument8,
+                    argument9,
+                    argument10,
+                    argument11,
+                    argument12,
+                    argument13,
+                    onCompleted,
+                    onFaulted
+                );
         }
 
         [SuppressMessage(
@@ -955,25 +961,26 @@ namespace System.Activities.DynamicUpdate
         )
         {
             ThrowIfDisposed();
-            this.innerContext.ScheduleAction(
-                activityAction,
-                argument1,
-                argument2,
-                argument3,
-                argument4,
-                argument5,
-                argument6,
-                argument7,
-                argument8,
-                argument9,
-                argument10,
-                argument11,
-                argument12,
-                argument13,
-                argument14,
-                onCompleted,
-                onFaulted
-            );
+            this.innerContext
+                .ScheduleAction(
+                    activityAction,
+                    argument1,
+                    argument2,
+                    argument3,
+                    argument4,
+                    argument5,
+                    argument6,
+                    argument7,
+                    argument8,
+                    argument9,
+                    argument10,
+                    argument11,
+                    argument12,
+                    argument13,
+                    argument14,
+                    onCompleted,
+                    onFaulted
+                );
         }
 
         [SuppressMessage(
@@ -1040,26 +1047,27 @@ namespace System.Activities.DynamicUpdate
         )
         {
             ThrowIfDisposed();
-            this.innerContext.ScheduleAction(
-                activityAction,
-                argument1,
-                argument2,
-                argument3,
-                argument4,
-                argument5,
-                argument6,
-                argument7,
-                argument8,
-                argument9,
-                argument10,
-                argument11,
-                argument12,
-                argument13,
-                argument14,
-                argument15,
-                onCompleted,
-                onFaulted
-            );
+            this.innerContext
+                .ScheduleAction(
+                    activityAction,
+                    argument1,
+                    argument2,
+                    argument3,
+                    argument4,
+                    argument5,
+                    argument6,
+                    argument7,
+                    argument8,
+                    argument9,
+                    argument10,
+                    argument11,
+                    argument12,
+                    argument13,
+                    argument14,
+                    argument15,
+                    onCompleted,
+                    onFaulted
+                );
         }
 
         [SuppressMessage(
@@ -1129,27 +1137,28 @@ namespace System.Activities.DynamicUpdate
         )
         {
             ThrowIfDisposed();
-            this.innerContext.ScheduleAction(
-                activityAction,
-                argument1,
-                argument2,
-                argument3,
-                argument4,
-                argument5,
-                argument6,
-                argument7,
-                argument8,
-                argument9,
-                argument10,
-                argument11,
-                argument12,
-                argument13,
-                argument14,
-                argument15,
-                argument16,
-                onCompleted,
-                onFaulted
-            );
+            this.innerContext
+                .ScheduleAction(
+                    activityAction,
+                    argument1,
+                    argument2,
+                    argument3,
+                    argument4,
+                    argument5,
+                    argument6,
+                    argument7,
+                    argument8,
+                    argument9,
+                    argument10,
+                    argument11,
+                    argument12,
+                    argument13,
+                    argument14,
+                    argument15,
+                    argument16,
+                    onCompleted,
+                    onFaulted
+                );
         }
 
         [SuppressMessage(
@@ -1212,13 +1221,8 @@ namespace System.Activities.DynamicUpdate
         )
         {
             ThrowIfDisposed();
-            this.innerContext.ScheduleFunc(
-                activityFunc,
-                argument1,
-                argument2,
-                onCompleted,
-                onFaulted
-            );
+            this.innerContext
+                .ScheduleFunc(activityFunc, argument1, argument2, onCompleted, onFaulted);
         }
 
         [SuppressMessage(
@@ -1241,14 +1245,15 @@ namespace System.Activities.DynamicUpdate
         )
         {
             ThrowIfDisposed();
-            this.innerContext.ScheduleFunc(
-                activityFunc,
-                argument1,
-                argument2,
-                argument3,
-                onCompleted,
-                onFaulted
-            );
+            this.innerContext
+                .ScheduleFunc(
+                    activityFunc,
+                    argument1,
+                    argument2,
+                    argument3,
+                    onCompleted,
+                    onFaulted
+                );
         }
 
         [SuppressMessage(
@@ -1272,15 +1277,16 @@ namespace System.Activities.DynamicUpdate
         )
         {
             ThrowIfDisposed();
-            this.innerContext.ScheduleFunc(
-                activityFunc,
-                argument1,
-                argument2,
-                argument3,
-                argument4,
-                onCompleted,
-                onFaulted
-            );
+            this.innerContext
+                .ScheduleFunc(
+                    activityFunc,
+                    argument1,
+                    argument2,
+                    argument3,
+                    argument4,
+                    onCompleted,
+                    onFaulted
+                );
         }
 
         [SuppressMessage(
@@ -1305,16 +1311,17 @@ namespace System.Activities.DynamicUpdate
         )
         {
             ThrowIfDisposed();
-            this.innerContext.ScheduleFunc(
-                activityFunc,
-                argument1,
-                argument2,
-                argument3,
-                argument4,
-                argument5,
-                onCompleted,
-                onFaulted
-            );
+            this.innerContext
+                .ScheduleFunc(
+                    activityFunc,
+                    argument1,
+                    argument2,
+                    argument3,
+                    argument4,
+                    argument5,
+                    onCompleted,
+                    onFaulted
+                );
         }
 
         [SuppressMessage(
@@ -1340,17 +1347,18 @@ namespace System.Activities.DynamicUpdate
         )
         {
             ThrowIfDisposed();
-            this.innerContext.ScheduleFunc(
-                activityFunc,
-                argument1,
-                argument2,
-                argument3,
-                argument4,
-                argument5,
-                argument6,
-                onCompleted,
-                onFaulted
-            );
+            this.innerContext
+                .ScheduleFunc(
+                    activityFunc,
+                    argument1,
+                    argument2,
+                    argument3,
+                    argument4,
+                    argument5,
+                    argument6,
+                    onCompleted,
+                    onFaulted
+                );
         }
 
         [SuppressMessage(
@@ -1377,18 +1385,19 @@ namespace System.Activities.DynamicUpdate
         )
         {
             ThrowIfDisposed();
-            this.innerContext.ScheduleFunc(
-                activityFunc,
-                argument1,
-                argument2,
-                argument3,
-                argument4,
-                argument5,
-                argument6,
-                argument7,
-                onCompleted,
-                onFaulted
-            );
+            this.innerContext
+                .ScheduleFunc(
+                    activityFunc,
+                    argument1,
+                    argument2,
+                    argument3,
+                    argument4,
+                    argument5,
+                    argument6,
+                    argument7,
+                    onCompleted,
+                    onFaulted
+                );
         }
 
         [SuppressMessage(
@@ -1416,19 +1425,20 @@ namespace System.Activities.DynamicUpdate
         )
         {
             ThrowIfDisposed();
-            this.innerContext.ScheduleFunc(
-                activityFunc,
-                argument1,
-                argument2,
-                argument3,
-                argument4,
-                argument5,
-                argument6,
-                argument7,
-                argument8,
-                onCompleted,
-                onFaulted
-            );
+            this.innerContext
+                .ScheduleFunc(
+                    activityFunc,
+                    argument1,
+                    argument2,
+                    argument3,
+                    argument4,
+                    argument5,
+                    argument6,
+                    argument7,
+                    argument8,
+                    onCompleted,
+                    onFaulted
+                );
         }
 
         [SuppressMessage(
@@ -1457,20 +1467,21 @@ namespace System.Activities.DynamicUpdate
         )
         {
             ThrowIfDisposed();
-            this.innerContext.ScheduleFunc(
-                activityFunc,
-                argument1,
-                argument2,
-                argument3,
-                argument4,
-                argument5,
-                argument6,
-                argument7,
-                argument8,
-                argument9,
-                onCompleted,
-                onFaulted
-            );
+            this.innerContext
+                .ScheduleFunc(
+                    activityFunc,
+                    argument1,
+                    argument2,
+                    argument3,
+                    argument4,
+                    argument5,
+                    argument6,
+                    argument7,
+                    argument8,
+                    argument9,
+                    onCompleted,
+                    onFaulted
+                );
         }
 
         [SuppressMessage(
@@ -1500,21 +1511,22 @@ namespace System.Activities.DynamicUpdate
         )
         {
             ThrowIfDisposed();
-            this.innerContext.ScheduleFunc(
-                activityFunc,
-                argument1,
-                argument2,
-                argument3,
-                argument4,
-                argument5,
-                argument6,
-                argument7,
-                argument8,
-                argument9,
-                argument10,
-                onCompleted,
-                onFaulted
-            );
+            this.innerContext
+                .ScheduleFunc(
+                    activityFunc,
+                    argument1,
+                    argument2,
+                    argument3,
+                    argument4,
+                    argument5,
+                    argument6,
+                    argument7,
+                    argument8,
+                    argument9,
+                    argument10,
+                    onCompleted,
+                    onFaulted
+                );
         }
 
         [SuppressMessage(
@@ -1545,22 +1557,23 @@ namespace System.Activities.DynamicUpdate
         )
         {
             ThrowIfDisposed();
-            this.innerContext.ScheduleFunc(
-                activityFunc,
-                argument1,
-                argument2,
-                argument3,
-                argument4,
-                argument5,
-                argument6,
-                argument7,
-                argument8,
-                argument9,
-                argument10,
-                argument11,
-                onCompleted,
-                onFaulted
-            );
+            this.innerContext
+                .ScheduleFunc(
+                    activityFunc,
+                    argument1,
+                    argument2,
+                    argument3,
+                    argument4,
+                    argument5,
+                    argument6,
+                    argument7,
+                    argument8,
+                    argument9,
+                    argument10,
+                    argument11,
+                    onCompleted,
+                    onFaulted
+                );
         }
 
         [SuppressMessage(
@@ -1592,23 +1605,24 @@ namespace System.Activities.DynamicUpdate
         )
         {
             ThrowIfDisposed();
-            this.innerContext.ScheduleFunc(
-                activityFunc,
-                argument1,
-                argument2,
-                argument3,
-                argument4,
-                argument5,
-                argument6,
-                argument7,
-                argument8,
-                argument9,
-                argument10,
-                argument11,
-                argument12,
-                onCompleted,
-                onFaulted
-            );
+            this.innerContext
+                .ScheduleFunc(
+                    activityFunc,
+                    argument1,
+                    argument2,
+                    argument3,
+                    argument4,
+                    argument5,
+                    argument6,
+                    argument7,
+                    argument8,
+                    argument9,
+                    argument10,
+                    argument11,
+                    argument12,
+                    onCompleted,
+                    onFaulted
+                );
         }
 
         [SuppressMessage(
@@ -1656,24 +1670,25 @@ namespace System.Activities.DynamicUpdate
         )
         {
             ThrowIfDisposed();
-            this.innerContext.ScheduleFunc(
-                activityFunc,
-                argument1,
-                argument2,
-                argument3,
-                argument4,
-                argument5,
-                argument6,
-                argument7,
-                argument8,
-                argument9,
-                argument10,
-                argument11,
-                argument12,
-                argument13,
-                onCompleted,
-                onFaulted
-            );
+            this.innerContext
+                .ScheduleFunc(
+                    activityFunc,
+                    argument1,
+                    argument2,
+                    argument3,
+                    argument4,
+                    argument5,
+                    argument6,
+                    argument7,
+                    argument8,
+                    argument9,
+                    argument10,
+                    argument11,
+                    argument12,
+                    argument13,
+                    onCompleted,
+                    onFaulted
+                );
         }
 
         [SuppressMessage(
@@ -1739,25 +1754,26 @@ namespace System.Activities.DynamicUpdate
         )
         {
             ThrowIfDisposed();
-            this.innerContext.ScheduleFunc(
-                activityFunc,
-                argument1,
-                argument2,
-                argument3,
-                argument4,
-                argument5,
-                argument6,
-                argument7,
-                argument8,
-                argument9,
-                argument10,
-                argument11,
-                argument12,
-                argument13,
-                argument14,
-                onCompleted,
-                onFaulted
-            );
+            this.innerContext
+                .ScheduleFunc(
+                    activityFunc,
+                    argument1,
+                    argument2,
+                    argument3,
+                    argument4,
+                    argument5,
+                    argument6,
+                    argument7,
+                    argument8,
+                    argument9,
+                    argument10,
+                    argument11,
+                    argument12,
+                    argument13,
+                    argument14,
+                    onCompleted,
+                    onFaulted
+                );
         }
 
         [SuppressMessage(
@@ -1826,26 +1842,27 @@ namespace System.Activities.DynamicUpdate
         )
         {
             ThrowIfDisposed();
-            this.innerContext.ScheduleFunc(
-                activityFunc,
-                argument1,
-                argument2,
-                argument3,
-                argument4,
-                argument5,
-                argument6,
-                argument7,
-                argument8,
-                argument9,
-                argument10,
-                argument11,
-                argument12,
-                argument13,
-                argument14,
-                argument15,
-                onCompleted,
-                onFaulted
-            );
+            this.innerContext
+                .ScheduleFunc(
+                    activityFunc,
+                    argument1,
+                    argument2,
+                    argument3,
+                    argument4,
+                    argument5,
+                    argument6,
+                    argument7,
+                    argument8,
+                    argument9,
+                    argument10,
+                    argument11,
+                    argument12,
+                    argument13,
+                    argument14,
+                    argument15,
+                    onCompleted,
+                    onFaulted
+                );
         }
 
         [SuppressMessage(
@@ -1917,27 +1934,28 @@ namespace System.Activities.DynamicUpdate
         )
         {
             ThrowIfDisposed();
-            this.innerContext.ScheduleFunc(
-                activityFunc,
-                argument1,
-                argument2,
-                argument3,
-                argument4,
-                argument5,
-                argument6,
-                argument7,
-                argument8,
-                argument9,
-                argument10,
-                argument11,
-                argument12,
-                argument13,
-                argument14,
-                argument15,
-                argument16,
-                onCompleted,
-                onFaulted
-            );
+            this.innerContext
+                .ScheduleFunc(
+                    activityFunc,
+                    argument1,
+                    argument2,
+                    argument3,
+                    argument4,
+                    argument5,
+                    argument6,
+                    argument7,
+                    argument8,
+                    argument9,
+                    argument10,
+                    argument11,
+                    argument12,
+                    argument13,
+                    argument14,
+                    argument15,
+                    argument16,
+                    onCompleted,
+                    onFaulted
+                );
         }
 
         [SuppressMessage(
@@ -1953,12 +1971,8 @@ namespace System.Activities.DynamicUpdate
         )
         {
             ThrowIfDisposed();
-            this.innerContext.ScheduleDelegate(
-                activityDelegate,
-                inputParameters,
-                onCompleted,
-                onFaulted
-            );
+            this.innerContext
+                .ScheduleDelegate(activityDelegate, inputParameters, onCompleted, onFaulted);
         }
 
         // extra insurance against misuse (if someone stashes away the execution context to use later)
@@ -1979,9 +1993,8 @@ namespace System.Activities.DynamicUpdate
         {
             if (this.isDisposed)
             {
-                throw FxTrace.Exception.AsError(
-                    new ObjectDisposedException(this.GetType().FullName, SR.NAUCDisposed)
-                );
+                throw FxTrace.Exception
+                    .AsError(new ObjectDisposedException(this.GetType().FullName, SR.NAUCDisposed));
             }
         }
     }

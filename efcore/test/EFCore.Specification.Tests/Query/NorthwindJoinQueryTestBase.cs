@@ -816,11 +816,12 @@ public abstract class NorthwindJoinQueryTestBase<TFixture> : QueryTestBase<TFixt
                 ss.Set<Customer>()
                     .Where(c => c.CustomerID.StartsWith("F"))
                     .SelectMany(c =>
-                        c.Orders.Select(o => new
-                        {
-                            OrderProperty = ClientMethod(o),
-                            CustomerProperty = c.ContactName,
-                        })
+                        c.Orders
+                            .Select(o => new
+                            {
+                                OrderProperty = ClientMethod(o),
+                                CustomerProperty = c.ContactName,
+                            })
                     ),
             elementSorter: e => e.OrderProperty
         );
@@ -834,12 +835,13 @@ public abstract class NorthwindJoinQueryTestBase<TFixture> : QueryTestBase<TFixt
                 ss.Set<Customer>()
                     .Where(c => c.CustomerID.StartsWith("F"))
                     .SelectMany(c =>
-                        c.Orders.Select(o => new
-                        {
-                            OrderProperty = ClientMethod(o),
-                            o.OrderDetails,
-                            CustomerProperty = c.ContactName,
-                        })
+                        c.Orders
+                            .Select(o => new
+                            {
+                                OrderProperty = ClientMethod(o),
+                                o.OrderDetails,
+                                CustomerProperty = c.ContactName,
+                            })
                     ),
             elementSorter: e => e.OrderProperty,
             elementAsserter: (e, a) =>
@@ -859,12 +861,13 @@ public abstract class NorthwindJoinQueryTestBase<TFixture> : QueryTestBase<TFixt
                 ss.Set<Customer>()
                     .Where(c => c.CustomerID.StartsWith("F"))
                     .SelectMany(c =>
-                        c.Orders.Select(o => new
-                        {
-                            OrderProperty = ClientMethod(o),
-                            o.OrderDetails,
-                            CustomerProperty = c.ContactName,
-                        })
+                        c.Orders
+                            .Select(o => new
+                            {
+                                OrderProperty = ClientMethod(o),
+                                o.OrderDetails,
+                                CustomerProperty = c.ContactName,
+                            })
                     )
                     .Select(e => new { e.OrderProperty, e.CustomerProperty }),
             elementSorter: e => e.OrderProperty
@@ -884,8 +887,10 @@ public abstract class NorthwindJoinQueryTestBase<TFixture> : QueryTestBase<TFixt
                     .Select(c => new CustomerViewModel(
                         c.CustomerID,
                         c.City,
-                        c.Orders.SelectMany(o =>
-                                o.OrderDetails.Where(od => od.OrderID < 11000)
+                        c.Orders
+                            .SelectMany(o =>
+                                o.OrderDetails
+                                    .Where(od => od.OrderID < 11000)
                                     .Select(od => new OrderDetailViewModel(
                                         od.OrderID,
                                         od.ProductID
@@ -992,7 +997,8 @@ public abstract class NorthwindJoinQueryTestBase<TFixture> : QueryTestBase<TFixt
                 ss.Set<Customer>()
                     .OrderBy(c => c.CustomerID)
                     .SelectMany(c =>
-                        c.Orders.OrderBy(o => o.OrderID)
+                        c.Orders
+                            .OrderBy(o => o.OrderID)
                             .Skip(0)
                             .Select(o => new { c.City, o.OrderDate })
                     ),
@@ -1077,8 +1083,8 @@ public abstract class NorthwindJoinQueryTestBase<TFixture> : QueryTestBase<TFixt
                 ss.Set<Customer>()
                     .Select(c => new
                     {
-                        Orders = c
-                            .Orders.OrderBy(e => e.OrderDate)
+                        Orders = c.Orders
+                            .OrderBy(e => e.OrderDate)
                             .Take(1)
                             .Select(o => new
                             {

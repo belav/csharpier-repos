@@ -103,8 +103,8 @@ namespace System.ComponentModel.Composition.Hosting
             {
                 if (this._changedContractNames == null)
                 {
-                    this._changedContractNames = this
-                        .AddedExports.Concat(this.RemovedExports)
+                    this._changedContractNames = this.AddedExports
+                        .Concat(this.RemovedExports)
                         .Select(export => export.ContractName)
                         .Distinct()
                         .ToArray();

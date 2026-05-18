@@ -28,11 +28,12 @@ namespace System.ServiceModel.Discovery
         {
             if (instanceId < 0 || instanceId > UInt32.MaxValue)
             {
-                throw FxTrace.Exception.ArgumentOutOfRange(
-                    "instanceId",
-                    instanceId,
-                    SR2.DiscoveryAppSequenceInstanceIdOutOfRange
-                );
+                throw FxTrace.Exception
+                    .ArgumentOutOfRange(
+                        "instanceId",
+                        instanceId,
+                        SR2.DiscoveryAppSequenceInstanceIdOutOfRange
+                    );
             }
             this.instanceId = instanceId;
             this.sequenceId = sequenceId;

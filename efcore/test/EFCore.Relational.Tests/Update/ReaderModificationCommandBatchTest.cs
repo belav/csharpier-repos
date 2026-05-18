@@ -867,15 +867,16 @@ RETURNING 1;
     {
         var model = BuildModel(generateKeyValues, computeNonKeyValue);
 
-        return FakeRelationalTestHelpers.Instance.CreateInternalEntry(
-            model,
-            entityState,
-            new T1
-            {
-                Id = overrideKeyValues ? 1 : default,
-                Name = computeNonKeyValue ? null : "Test",
-            }
-        );
+        return FakeRelationalTestHelpers.Instance
+            .CreateInternalEntry(
+                model,
+                entityState,
+                new T1
+                {
+                    Id = overrideKeyValues ? 1 : default,
+                    Name = computeNonKeyValue ? null : "Test",
+                }
+            );
     }
 
     private static FakeDbDataReader CreateFakeDataReader(
@@ -916,8 +917,8 @@ RETURNING 1;
             var logger = new FakeRelationalCommandDiagnosticsLogger();
 
             sqlGenerator ??= new FakeSqlGenerator(
-                FakeRelationalTestHelpers
-                    .Instance.CreateContextServices()
+                FakeRelationalTestHelpers.Instance
+                    .CreateContextServices()
                     .GetRequiredService<UpdateSqlGeneratorDependencies>()
             );
 

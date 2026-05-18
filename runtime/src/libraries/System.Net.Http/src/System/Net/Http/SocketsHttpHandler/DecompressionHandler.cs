@@ -336,15 +336,15 @@ namespace System.Net.Http
                             CancellationToken cancellationToken
                         )
                         {
-                            int firstByte = await thisRef
-                                ._stream.PeekFirstByteAsync(cancellationToken)
+                            int firstByte = await thisRef._stream
+                                .PeekFirstByteAsync(cancellationToken)
                                 .ConfigureAwait(false);
                             thisRef._decompressionStream = CreateDecompressionStream(
                                 firstByte,
                                 thisRef._stream
                             );
-                            return await thisRef
-                                ._decompressionStream.ReadAsync(buffer, cancellationToken)
+                            return await thisRef._decompressionStream
+                                .ReadAsync(buffer, cancellationToken)
                                 .ConfigureAwait(false);
                         }
                     }

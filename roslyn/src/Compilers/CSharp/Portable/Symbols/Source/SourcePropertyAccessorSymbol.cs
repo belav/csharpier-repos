@@ -45,8 +45,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
             bool hasBody = syntax.Body is object;
             bool hasExpressionBody = syntax.ExpressionBody is object;
-            bool isNullableAnalysisEnabled =
-                containingType.DeclaringCompilation.IsNullableAnalysisEnabledIn(syntax);
+            bool isNullableAnalysisEnabled = containingType.DeclaringCompilation
+                .IsNullableAnalysisEnabledIn(syntax);
             CheckForBlockAndExpressionBody(syntax.Body, syntax.ExpressionBody, syntax, diagnostics);
 
             return new SourcePropertyAccessorSymbol(
@@ -75,8 +75,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             BindingDiagnosticBag diagnostics
         )
         {
-            bool isNullableAnalysisEnabled =
-                containingType.DeclaringCompilation.IsNullableAnalysisEnabledIn(syntax);
+            bool isNullableAnalysisEnabled = containingType.DeclaringCompilation
+                .IsNullableAnalysisEnabledIn(syntax);
             return new SourcePropertyAccessorSymbol(
                 containingType,
                 property,
@@ -302,10 +302,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             }
 
             if (modifiers.Count > 0)
-                MessageID.IDS_FeaturePropertyAccessorMods.CheckFeatureAvailability(
-                    diagnostics,
-                    modifiers[0]
-                );
+                MessageID.IDS_FeaturePropertyAccessorMods
+                    .CheckFeatureAvailability(diagnostics, modifiers[0]);
         }
 
         private static (DeclarationModifiers, Flags) MakeModifiersAndFlags(
@@ -901,7 +899,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
                             string? aliasQualifierOpt = _property
                                 .GetExplicitInterfaceSpecifier()
-                                ?.Name.GetAliasQualifierOpt();
+                                ?.Name
+                                .GetAliasQualifierOpt();
                             name = ExplicitInterfaceHelpers.GetMemberName(
                                 accessorName,
                                 explicitlyImplementedPropertyOpt.ContainingType,

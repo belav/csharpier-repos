@@ -1395,10 +1395,8 @@ namespace System.Linq.Expressions
                 }
             }
 
-            MethodInfo mi = array.Type.GetMethod(
-                "Get",
-                BindingFlags.Public | BindingFlags.Instance
-            );
+            MethodInfo mi = array.Type
+                .GetMethod("Get", BindingFlags.Public | BindingFlags.Instance);
             return Call(array, mi, indexList);
         }
 

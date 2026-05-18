@@ -43,8 +43,7 @@ namespace System.Activities.Runtime
         {
             if (completedInstance.Activity.HandlerOf != null)
             {
-                IList<RuntimeDelegateArgument> runtimeArguments = completedInstance
-                    .Activity
+                IList<RuntimeDelegateArgument> runtimeArguments = completedInstance.Activity
                     .HandlerOf
                     .RuntimeDelegateArguments;
                 LocationEnvironment environment = completedInstance.Environment;

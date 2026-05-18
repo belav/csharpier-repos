@@ -542,9 +542,10 @@ namespace Microsoft.CodeAnalysis.CSharp
                 if (
                     argument.Parent.IsParentKind(SyntaxKind.ImplicitElementAccess)
                     && argument.Parent.Parent.IsParentKind(SyntaxKind.SimpleAssignmentExpression)
-                    && argument.Parent.Parent.Parent.IsParentKind(
-                        SyntaxKind.ObjectInitializerExpression
-                    )
+                    && argument.Parent
+                        .Parent
+                        .Parent
+                        .IsParentKind(SyntaxKind.ObjectInitializerExpression)
                     && argument.Parent.Parent.Parent.Parent?.Parent
                         is BaseObjectCreationExpressionSyntax objectCreation
                 )
@@ -721,9 +722,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     return CreateResult(type);
                 }
 
-                var constructors = type.InstanceConstructors.Where(m =>
-                    m.Parameters.Length > index
-                );
+                var constructors = type.InstanceConstructors
+                    .Where(m => m.Parameters.Length > index);
                 return InferTypeInArgument(
                     index,
                     constructors,
@@ -989,10 +989,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                     return method;
                 }
 
-                var typeArguments = method
-                    .ConstructedFrom.TypeParameters.Select(tp =>
-                        bestMap.GetValueOrDefault(tp) ?? tp
-                    )
+                var typeArguments = method.ConstructedFrom
+                    .TypeParameters
+                    .Select(tp => bestMap.GetValueOrDefault(tp) ?? tp)
                     .ToArray();
                 return method.ConstructedFrom.Construct(typeArguments);
             }
@@ -1380,8 +1379,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 //
                 // index = (Tokidx + 1) / 2
 
-                var tokenIndex = attributeArgumentList
-                    .Arguments.GetWithSeparators()
+                var tokenIndex = attributeArgumentList.Arguments
+                    .GetWithSeparators()
                     .IndexOf(previousToken);
                 return (tokenIndex + 1) / 2;
             }
@@ -1804,16 +1803,13 @@ namespace Microsoft.CodeAnalysis.CSharp
 
                 var enumerableType =
                     forEachStatementSyntax.AwaitKeyword == default
-                        ? this.Compilation.GetSpecialType(
-                            SpecialType.System_Collections_Generic_IEnumerable_T
-                        )
-                        : this.Compilation.GetTypeByMetadataName(
-                            typeof(IAsyncEnumerable<>).FullName
-                        );
+                        ? this.Compilation
+                            .GetSpecialType(SpecialType.System_Collections_Generic_IEnumerable_T)
+                        : this.Compilation
+                            .GetTypeByMetadataName(typeof(IAsyncEnumerable<>).FullName);
 
-                enumerableType ??= this.Compilation.GetSpecialType(
-                    SpecialType.System_Collections_Generic_IEnumerable_T
-                );
+                enumerableType ??= this.Compilation
+                    .GetSpecialType(SpecialType.System_Collections_Generic_IEnumerable_T);
 
                 // foreach (int v = Goo())
                 var variableTypes = GetTypes(forEachStatementSyntax.Type);
@@ -1883,8 +1879,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     // new Dictionary<K,V> { { x, ... } }
                     // new C { Prop = { { x, ... } } }
                     var parameterIndex = previousToken.HasValue
-                        ? initializerExpression
-                            .Expressions.GetSeparators()
+                        ? initializerExpression.Expressions
+                            .GetSeparators()
                             .ToList()
                             .IndexOf(previousToken.Value) + 1
                         : initializerExpression.Expressions.IndexOf(expressionOpt);
@@ -1930,9 +1926,10 @@ namespace Microsoft.CodeAnalysis.CSharp
                         // new C { Prop = { x,
 
                         foreach (
-                            var sibling in initializerExpression.Expressions.Where(e =>
-                                e.Kind() != SyntaxKind.ComplexElementInitializerExpression
-                            )
+                            var sibling in initializerExpression.Expressions
+                                .Where(e =>
+                                    e.Kind() != SyntaxKind.ComplexElementInitializerExpression
+                                )
                         )
                         {
                             var types = GetTypes(sibling);
@@ -2043,8 +2040,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     {
                         // new Goo { a = { Goo() } }
                         var parameterIndex = previousToken.HasValue
-                            ? initializerExpression
-                                .Expressions.GetSeparators()
+                            ? initializerExpression.Expressions
+                                .GetSeparators()
                                 .ToList()
                                 .IndexOf(previousToken.Value) + 1
                             : initializerExpression.Expressions.IndexOf(expressionOpt);
@@ -2093,8 +2090,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     using var result = TemporaryArray<TypeInferenceInfo>.Empty;
 
                     foreach (
-                        var symbol in this
-                            .SemanticModel.GetSymbolInfo(subpattern.ExpressionColon.Expression)
+                        var symbol in this.SemanticModel
+                            .GetSymbolInfo(subpattern.ExpressionColon.Expression)
                             .GetAllSymbols()
                     )
                     {
@@ -2315,7 +2312,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     return types
                         .Where(t => t.InferredType.IsAnonymousType())
                         .SelectMany(t =>
-                            t.InferredType.GetValidAnonymousTypeProperties()
+                            t.InferredType
+                                .GetValidAnonymousTypeProperties()
                                 .Where(p =>
                                     p.Name == memberDeclarator.NameEquals.Name.Identifier.ValueText
                                 )
@@ -2458,8 +2456,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     {
                         if (invocation.ArgumentList.Arguments.Count > 0)
                         {
-                            var argumentExpression = invocation
-                                .ArgumentList
+                            var argumentExpression = invocation.ArgumentList
                                 .Arguments[0]
                                 .Expression;
 
@@ -2468,7 +2465,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                                 var argumentTypes = GetTypes(argumentExpression);
                                 var delegateType = argumentTypes
                                     .FirstOrDefault()
-                                    .InferredType.GetDelegateType(this.Compilation);
+                                    .InferredType
+                                    .GetDelegateType(this.Compilation);
                                 var typeArg =
                                     delegateType?.TypeArguments.Length > 0
                                         ? delegateType.TypeArguments[0]
@@ -2866,8 +2864,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     && currentSemanticModel.IsSpeculativeSemanticModel
                 )
                 {
-                    var tokenInOriginalTree = originalSemanticModel
-                        .SyntaxTree.GetRoot(CancellationToken)
+                    var tokenInOriginalTree = originalSemanticModel.SyntaxTree
+                        .GetRoot(CancellationToken)
                         .FindToken(currentSemanticModel.OriginalPositionForSpeculation);
                     var declaration = tokenInOriginalTree.GetAncestor<MemberDeclarationSyntax>();
                     return originalSemanticModel.GetDeclaredSymbol(declaration, CancellationToken);
@@ -2960,8 +2958,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
                 // Use the first case label to determine the return type.
                 if (
-                    switchStatement
-                        .Sections.SelectMany(ss => ss.Labels)
+                    switchStatement.Sections
+                        .SelectMany(ss => ss.Labels)
                         .FirstOrDefault(label => label.Kind() == SyntaxKind.CaseSwitchLabel)
                     is CaseSwitchLabelSyntax firstCase
                 )
@@ -3125,16 +3123,16 @@ namespace Microsoft.CodeAnalysis.CSharp
                         declExpr.Type.IsVar
                         && declExpr.Designation
                             is ParenthesizedVariableDesignationSyntax parenthesizedVariableDesignation
-                        && parenthesizedVariableDesignation.Variables.All(v =>
-                            v is SingleVariableDesignationSyntax
-                        )
+                        && parenthesizedVariableDesignation.Variables
+                            .All(v => v is SingleVariableDesignationSyntax)
                     )
                     {
                         using var _1 = ArrayBuilder<ITypeSymbol>.GetInstance(out var tupleTypes);
                         using var _2 = ArrayBuilder<string>.GetInstance(out var names);
 
                         foreach (
-                            var variable in parenthesizedVariableDesignation.Variables.Cast<SingleVariableDesignationSyntax>()
+                            var variable in parenthesizedVariableDesignation.Variables
+                                .Cast<SingleVariableDesignationSyntax>()
                         )
                         {
                             var symbol = SemanticModel.GetRequiredDeclaredSymbol(

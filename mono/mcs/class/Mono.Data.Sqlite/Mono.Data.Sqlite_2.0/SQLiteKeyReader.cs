@@ -211,11 +211,8 @@ namespace Mono.Data.Sqlite
                                     int rootPage = Convert.ToInt32(
                                         tblTables.Rows[0]["TABLE_ROOTPAGE"]
                                     );
-                                    int cursor = stmt._sql.GetCursorForTable(
-                                        stmt,
-                                        database,
-                                        rootPage
-                                    );
+                                    int cursor = stmt._sql
+                                        .GetCursorForTable(stmt, database, rootPage);
 
                                     // Now enumerate the members of the index we're going to use
                                     using (
@@ -452,13 +449,9 @@ namespace Mono.Data.Sqlite
             Sync(i);
             if (_keyInfo[i].query != null)
                 return _keyInfo[i]
-                    .query._reader.GetBytes(
-                        _keyInfo[i].column,
-                        fieldOffset,
-                        buffer,
-                        bufferoffset,
-                        length
-                    );
+                    .query
+                    ._reader
+                    .GetBytes(_keyInfo[i].column, fieldOffset, buffer, bufferoffset, length);
             else
                 throw new InvalidCastException();
         }
@@ -477,13 +470,9 @@ namespace Mono.Data.Sqlite
             Sync(i);
             if (_keyInfo[i].query != null)
                 return _keyInfo[i]
-                    .query._reader.GetChars(
-                        _keyInfo[i].column,
-                        fieldOffset,
-                        buffer,
-                        bufferoffset,
-                        length
-                    );
+                    .query
+                    ._reader
+                    .GetChars(_keyInfo[i].column, fieldOffset, buffer, bufferoffset, length);
             else
                 throw new InvalidCastException();
         }

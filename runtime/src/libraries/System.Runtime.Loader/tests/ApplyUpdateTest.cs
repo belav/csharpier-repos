@@ -203,8 +203,7 @@ namespace System.Reflection.Metadata
                 Assert.NotNull(ty);
                 MethodInfo mi = ty.GetMethod(
                     nameof(
-                        System
-                            .Reflection
+                        System.Reflection
                             .Metadata
                             .ApplyUpdate
                             .Test
@@ -265,8 +264,7 @@ namespace System.Reflection.Metadata
 
                 MethodInfo mi1 = ty.GetMethod(
                     nameof(
-                        System
-                            .Reflection
+                        System.Reflection
                             .Metadata
                             .ApplyUpdate
                             .Test
@@ -282,8 +280,7 @@ namespace System.Reflection.Metadata
 
                 MethodInfo mi2 = ty.GetMethod(
                     nameof(
-                        System
-                            .Reflection
+                        System.Reflection
                             .Metadata
                             .ApplyUpdate
                             .Test
@@ -299,8 +296,7 @@ namespace System.Reflection.Metadata
 
                 MethodInfo mi3 = ty.GetMethod(
                     nameof(
-                        System
-                            .Reflection
+                        System.Reflection
                             .Metadata
                             .ApplyUpdate
                             .Test
@@ -343,8 +339,9 @@ namespace System.Reflection.Metadata
                 );
                 Assert.NotNull(mi);
 
-                string result = ApplyUpdate
-                    .Test.AsyncMethodChange.TestTaskMethod()
+                string result = ApplyUpdate.Test
+                    .AsyncMethodChange
+                    .TestTaskMethod()
                     .GetAwaiter()
                     .GetResult();
                 Assert.Equal("TestTaskMethod v1", result);
@@ -949,7 +946,13 @@ namespace System.Reflection.Metadata
 
                 Assert.Equal("123", i.ItfMethod(123));
 
-                System.Reflection.Metadata.ApplyUpdate.Test.ReflectionAddNewType.ZExistingClass.ExistingMethod();
+                System.Reflection
+                    .Metadata
+                    .ApplyUpdate
+                    .Test
+                    .ReflectionAddNewType
+                    .ZExistingClass
+                    .ExistingMethod();
             });
         }
 

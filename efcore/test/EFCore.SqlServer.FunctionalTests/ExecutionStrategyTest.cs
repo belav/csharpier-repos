@@ -142,18 +142,18 @@ public class ExecutionStrategyTest : IClassFixture<ExecutionStrategyTest.Executi
                 + "Microsoft.Data.SqlClient.SqlException (0x80131904): Bang!";
             if (realFailure)
             {
-                var logEntry = Fixture.TestSqlLoggerFactory.Log.Single(l =>
-                    l.Id == CoreEventId.ExecutionStrategyRetrying
-                );
+                var logEntry = Fixture.TestSqlLoggerFactory
+                    .Log
+                    .Single(l => l.Id == CoreEventId.ExecutionStrategyRetrying);
                 Assert.Contains(retryMessage, logEntry.Message);
                 Assert.Equal(LogLevel.Information, logEntry.Level);
             }
             else
             {
                 Assert.Empty(
-                    Fixture.TestSqlLoggerFactory.Log.Where(l =>
-                        l.Id == CoreEventId.ExecutionStrategyRetrying
-                    )
+                    Fixture.TestSqlLoggerFactory
+                        .Log
+                        .Where(l => l.Id == CoreEventId.ExecutionStrategyRetrying)
                 );
             }
 
@@ -315,18 +315,18 @@ public class ExecutionStrategyTest : IClassFixture<ExecutionStrategyTest.Executi
                 + "Microsoft.Data.SqlClient.SqlException (0x80131904): Bang!";
             if (realFailure)
             {
-                var logEntry = Fixture.TestSqlLoggerFactory.Log.Single(l =>
-                    l.Id == CoreEventId.ExecutionStrategyRetrying
-                );
+                var logEntry = Fixture.TestSqlLoggerFactory
+                    .Log
+                    .Single(l => l.Id == CoreEventId.ExecutionStrategyRetrying);
                 Assert.Contains(retryMessage, logEntry.Message);
                 Assert.Equal(LogLevel.Information, logEntry.Level);
             }
             else
             {
                 Assert.Empty(
-                    Fixture.TestSqlLoggerFactory.Log.Where(l =>
-                        l.Id == CoreEventId.ExecutionStrategyRetrying
-                    )
+                    Fixture.TestSqlLoggerFactory
+                        .Log
+                        .Where(l => l.Id == CoreEventId.ExecutionStrategyRetrying)
                 );
             }
 
@@ -360,9 +360,8 @@ public class ExecutionStrategyTest : IClassFixture<ExecutionStrategyTest.Executi
                 c1 =>
                 {
                     context2.Database.UseTransaction(null);
-                    context2.Database.UseTransaction(
-                        context1.Database.CurrentTransaction.GetDbTransaction()
-                    );
+                    context2.Database
+                        .UseTransaction(context1.Database.CurrentTransaction.GetDbTransaction());
 
                     c1.SaveChanges(false);
 
@@ -537,9 +536,9 @@ public class ExecutionStrategyTest : IClassFixture<ExecutionStrategyTest.Executi
                         var result = await c.MainContext.SaveChangesAsync(false, ct);
 
                         c.AuditContext.ChangeTracker.Clear();
-                        c.AuditContext.Database.SetDbConnection(
-                            c.MainContext.Database.GetDbConnection()
-                        );
+                        c.AuditContext
+                            .Database
+                            .SetDbConnection(c.MainContext.Database.GetDbConnection());
 
                         var currentTransaction = c.AuditContext.Database.CurrentTransaction;
                         if (throwTransientError)
@@ -551,10 +550,12 @@ public class ExecutionStrategyTest : IClassFixture<ExecutionStrategyTest.Executi
                             Assert.NotNull(currentTransaction);
                         }
 
-                        await c.AuditContext.Database.UseTransactionAsync(
-                            c.MainContext.Database.CurrentTransaction!.GetDbTransaction(),
-                            ct
-                        );
+                        await c.AuditContext
+                            .Database
+                            .UseTransactionAsync(
+                                c.MainContext.Database.CurrentTransaction!.GetDbTransaction(),
+                                ct
+                            );
 
                         Assert.NotSame(
                             currentTransaction,
@@ -590,9 +591,9 @@ public class ExecutionStrategyTest : IClassFixture<ExecutionStrategyTest.Executi
                         var result = c.MainContext.SaveChanges(false);
 
                         c.AuditContext.ChangeTracker.Clear();
-                        c.AuditContext.Database.SetDbConnection(
-                            c.MainContext.Database.GetDbConnection()
-                        );
+                        c.AuditContext
+                            .Database
+                            .SetDbConnection(c.MainContext.Database.GetDbConnection());
 
                         var currentTransaction = c.AuditContext.Database.CurrentTransaction;
                         if (throwTransientError)
@@ -604,9 +605,11 @@ public class ExecutionStrategyTest : IClassFixture<ExecutionStrategyTest.Executi
                             Assert.NotNull(currentTransaction);
                         }
 
-                        c.AuditContext.Database.UseTransaction(
-                            c.MainContext.Database.CurrentTransaction!.GetDbTransaction()
-                        );
+                        c.AuditContext
+                            .Database
+                            .UseTransaction(
+                                c.MainContext.Database.CurrentTransaction!.GetDbTransaction()
+                            );
 
                         Assert.NotSame(
                             currentTransaction,

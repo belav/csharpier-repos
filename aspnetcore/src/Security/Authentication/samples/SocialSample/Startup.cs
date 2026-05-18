@@ -82,11 +82,8 @@ public class Startup
                 // http://stackoverflow.com/questions/36330675/get-users-email-from-twitter-api-for-external-login-authentication-asp-net-mvc?lq=1
                 o.RetrieveUserDetails = true;
                 o.SaveTokens = true;
-                o.ClaimActions.MapJsonKey(
-                    "urn:twitter:profilepicture",
-                    "profile_image_url",
-                    ClaimTypes.Uri
-                );
+                o.ClaimActions
+                    .MapJsonKey("urn:twitter:profilepicture", "profile_image_url", ClaimTypes.Uri);
                 o.Events = new TwitterEvents() { OnRemoteFailure = HandleOnRemoteFailure };
             })
             /* Azure AD app model v2 has restrictions that prevent the use of plain HTTP for redirect URLs.
@@ -140,14 +137,12 @@ public class Startup
                                 "Bearer",
                                 context.AccessToken
                             );
-                            request.Headers.Accept.Add(
-                                new MediaTypeWithQualityHeaderValue("application/json")
-                            );
+                            request.Headers
+                                .Accept
+                                .Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
-                            var response = await context.Backchannel.SendAsync(
-                                request,
-                                context.HttpContext.RequestAborted
-                            );
+                            var response = await context.Backchannel
+                                .SendAsync(request, context.HttpContext.RequestAborted);
                             response.EnsureSuccessStatusCode();
 
                             using (
@@ -221,14 +216,12 @@ public class Startup
                                 "Bearer",
                                 context.AccessToken
                             );
-                            request.Headers.Accept.Add(
-                                new MediaTypeWithQualityHeaderValue("application/json")
-                            );
+                            request.Headers
+                                .Accept
+                                .Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
-                            var response = await context.Backchannel.SendAsync(
-                                request,
-                                context.HttpContext.RequestAborted
-                            );
+                            var response = await context.Backchannel
+                                .SendAsync(request, context.HttpContext.RequestAborted);
                             response.EnsureSuccessStatusCode();
 
                             using (
@@ -250,22 +243,25 @@ public class Startup
         context.Response.StatusCode = 500;
         context.Response.ContentType = "text/html";
         await context.Response.WriteAsync("<html><body>");
-        await context.Response.WriteAsync(
-            "A remote failure has occurred: <br>"
-                + context
-                    .Failure.Message.Split(Environment.NewLine)
-                    .Select(s => HtmlEncoder.Default.Encode(s) + "<br>")
-                    .Aggregate((s1, s2) => s1 + s2)
-        );
+        await context.Response
+            .WriteAsync(
+                "A remote failure has occurred: <br>"
+                    + context.Failure
+                        .Message
+                        .Split(Environment.NewLine)
+                        .Select(s => HtmlEncoder.Default.Encode(s) + "<br>")
+                        .Aggregate((s1, s2) => s1 + s2)
+            );
 
         if (context.Properties != null)
         {
             await context.Response.WriteAsync("Properties:<br>");
             foreach (var pair in context.Properties.Items)
             {
-                await context.Response.WriteAsync(
-                    $"-{HtmlEncoder.Default.Encode(pair.Key)}={HtmlEncoder.Default.Encode(pair.Value)}<br>"
-                );
+                await context.Response
+                    .WriteAsync(
+                        $"-{HtmlEncoder.Default.Encode(pair.Key)}={HtmlEncoder.Default.Encode(pair.Value)}<br>"
+                    );
             }
         }
 
@@ -306,8 +302,8 @@ public class Startup
                     response.ContentType = "text/html";
                     await response.WriteAsync("<html><body>");
                     await response.WriteAsync("Choose an authentication scheme: <br>");
-                    var schemeProvider =
-                        context.RequestServices.GetRequiredService<IAuthenticationSchemeProvider>();
+                    var schemeProvider = context.RequestServices
+                        .GetRequiredService<IAuthenticationSchemeProvider>();
                     foreach (var provider in await schemeProvider.GetAllSchemesAsync())
                     {
                         await response.WriteAsync(
@@ -392,11 +388,8 @@ public class Startup
                             { "refresh_token", refreshToken },
                         };
                         var content = new FormUrlEncodedContent(pairs);
-                        var refreshResponse = await options.Backchannel.PostAsync(
-                            options.TokenEndpoint,
-                            content,
-                            context.RequestAborted
-                        );
+                        var refreshResponse = await options.Backchannel
+                            .PostAsync(options.TokenEndpoint, content, context.RequestAborted);
                         refreshResponse.EnsureSuccessStatusCode();
 
                         using (
@@ -448,9 +441,8 @@ public class Startup
                             { "fb_exchange_token", accessToken },
                         }.ToQueryString();
 
-                        var refreshResponse = await options.Backchannel.GetStringAsync(
-                            options.TokenEndpoint + query
-                        );
+                        var refreshResponse = await options.Backchannel
+                            .GetStringAsync(options.TokenEndpoint + query);
                         using (var payload = JsonDocument.Parse(refreshResponse))
                         {
                             authProperties.UpdateTokenValue(
@@ -589,32 +581,32 @@ public class Startup
         if (string.Equals(GoogleDefaults.AuthenticationScheme, currentAuthType))
         {
             return Task.FromResult<OAuthOptions>(
-                context
-                    .RequestServices.GetRequiredService<IOptionsMonitor<GoogleOptions>>()
+                context.RequestServices
+                    .GetRequiredService<IOptionsMonitor<GoogleOptions>>()
                     .Get(currentAuthType)
             );
         }
         else if (string.Equals(MicrosoftAccountDefaults.AuthenticationScheme, currentAuthType))
         {
             return Task.FromResult<OAuthOptions>(
-                context
-                    .RequestServices.GetRequiredService<IOptionsMonitor<MicrosoftAccountOptions>>()
+                context.RequestServices
+                    .GetRequiredService<IOptionsMonitor<MicrosoftAccountOptions>>()
                     .Get(currentAuthType)
             );
         }
         else if (string.Equals(FacebookDefaults.AuthenticationScheme, currentAuthType))
         {
             return Task.FromResult<OAuthOptions>(
-                context
-                    .RequestServices.GetRequiredService<IOptionsMonitor<FacebookOptions>>()
+                context.RequestServices
+                    .GetRequiredService<IOptionsMonitor<FacebookOptions>>()
                     .Get(currentAuthType)
             );
         }
         else if (string.Equals("IdentityServer", currentAuthType))
         {
             return Task.FromResult<OAuthOptions>(
-                context
-                    .RequestServices.GetRequiredService<IOptionsMonitor<OAuthOptions>>()
+                context.RequestServices
+                    .GetRequiredService<IOptionsMonitor<OAuthOptions>>()
                     .Get(currentAuthType)
             );
         }

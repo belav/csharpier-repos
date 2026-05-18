@@ -251,8 +251,8 @@ namespace BuildValidator
                 }
             }
 
-            return map
-                .Values.OrderBy(x => x.FileName, FileNameEqualityComparer.StringComparer)
+            return map.Values
+                .OrderBy(x => x.FileName, FileNameEqualityComparer.StringComparer)
                 .ToArray();
 
             static IEnumerable<string> getAssemblyPaths(string directory)

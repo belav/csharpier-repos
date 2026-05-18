@@ -54,17 +54,18 @@ namespace BasicEventSourceTests
             {
                 Debug.WriteLine("Creating a real time session " + sessionName);
 
-                Task.Factory.StartNew(
-                    delegate()
-                    {
-                        var session = new TraceEventSession(sessionName, dataFileName);
-                        session.Source.AllEvents += OnEventHelper;
-                        Debug.WriteLine("Listening for real time events");
-                        _session = session; // Indicate that we are alive.
-                        _session.Source.Process();
-                        Debug.WriteLine("Real time listening stopping.");
-                    }
-                );
+                Task.Factory
+                    .StartNew(
+                        delegate()
+                        {
+                            var session = new TraceEventSession(sessionName, dataFileName);
+                            session.Source.AllEvents += OnEventHelper;
+                            Debug.WriteLine("Listening for real time events");
+                            _session = session; // Indicate that we are alive.
+                            _session.Source.Process();
+                            Debug.WriteLine("Real time listening stopping.");
+                        }
+                    );
 
                 SpinWait.SpinUntil(() => _session != null); // Wait for real time thread to wake up.
             }

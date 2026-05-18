@@ -36,12 +36,13 @@ namespace Microsoft.Interop
             {
                 gen = ResolvedGenerator.ResolvedWithDiagnostics(
                     gen.Generator,
-                    gen.Diagnostics.Add(
-                        new GeneratorDiagnostic.NotRecommended(info, context)
-                        {
-                            Details = SR.InVariantShouldBeRef,
-                        }
-                    )
+                    gen.Diagnostics
+                        .Add(
+                            new GeneratorDiagnostic.NotRecommended(info, context)
+                            {
+                                Details = SR.InVariantShouldBeRef,
+                            }
+                        )
                 );
             }
 

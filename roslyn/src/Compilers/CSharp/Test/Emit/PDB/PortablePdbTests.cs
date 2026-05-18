@@ -177,8 +177,8 @@ class C
             var c = CreateCompilation(Parse(source, "goo.cs"), options: TestOptions.DebugDll);
 
             var peBlob = c.EmitToArray(
-                EmitOptions
-                    .Default.WithDebugInformationFormat(DebugInformationFormat.Embedded)
+                EmitOptions.Default
+                    .WithDebugInformationFormat(DebugInformationFormat.Embedded)
                     .WithPdbFilePath(@"a/b/c/d.pdb")
                     .WithPdbChecksumAlgorithm(HashAlgorithmName.SHA512)
             );
@@ -215,9 +215,8 @@ class C
                     var mdReader = embeddedMetadataProvider.GetMetadataReader();
                     AssertEx.Equal(
                         new[] { "goo.cs" },
-                        mdReader.Documents.Select(doc =>
-                            mdReader.GetString(mdReader.GetDocument(doc).Name)
-                        )
+                        mdReader.Documents
+                            .Select(doc => mdReader.GetString(mdReader.GetDocument(doc).Name))
                     );
 
                     pdbId = new BlobContentId(mdReader.DebugMetadataHeader.Id);
@@ -259,8 +258,8 @@ class C
             );
 
             var peBlob = c.EmitToArray(
-                EmitOptions
-                    .Default.WithDebugInformationFormat(DebugInformationFormat.Embedded)
+                EmitOptions.Default
+                    .WithDebugInformationFormat(DebugInformationFormat.Embedded)
                     .WithPdbChecksumAlgorithm(HashAlgorithmName.SHA384)
                     .WithPdbFilePath(@"a/b/c/d.pdb")
             );
@@ -299,9 +298,8 @@ class C
                     var mdReader = embeddedMetadataProvider.GetMetadataReader();
                     AssertEx.Equal(
                         new[] { "goo.cs" },
-                        mdReader.Documents.Select(doc =>
-                            mdReader.GetString(mdReader.GetDocument(doc).Name)
-                        )
+                        mdReader.Documents
+                            .Select(doc => mdReader.GetString(mdReader.GetDocument(doc).Name))
                     );
 
                     pdbId = new BlobContentId(mdReader.DebugMetadataHeader.Id);
@@ -343,15 +341,16 @@ class C
     }
 }
 ";
-            var sourceLinkBlob = Encoding.UTF8.GetBytes(
-                @"
+            var sourceLinkBlob = Encoding.UTF8
+                .GetBytes(
+                    @"
 {
   ""documents"": {
      ""f:/build/*"" : ""https://raw.githubusercontent.com/my-org/my-project/1111111111111111111111111111111111111111/*""
   }
 }
 "
-            );
+                );
 
             var c = CreateCompilation(
                 Parse(source, "f:/build/goo.cs"),
@@ -398,15 +397,16 @@ class C
     }
 }
 ";
-            var sourceLinkBlob = Encoding.UTF8.GetBytes(
-                @"
+            var sourceLinkBlob = Encoding.UTF8
+                .GetBytes(
+                    @"
 {
   ""documents"": {
      ""f:/build/*"" : ""https://raw.githubusercontent.com/my-org/my-project/1111111111111111111111111111111111111111/*""
   }
 }
 "
-            );
+                );
             var c = CreateCompilation(
                 Parse(source, "f:/build/goo.cs"),
                 options: TestOptions.DebugDll
@@ -474,17 +474,17 @@ class C
             var result = c.Emit(
                 new MemoryStream(),
                 new MemoryStream(),
-                options: EmitOptions.Default.WithDebugInformationFormat(
-                    DebugInformationFormat.PortablePdb
-                ),
+                options: EmitOptions.Default
+                    .WithDebugInformationFormat(DebugInformationFormat.PortablePdb),
                 sourceLinkStream: sourceLinkStream
             );
-            result.Diagnostics.Verify(
-                // error CS0041: Unexpected error writing debug information -- 'Error!'
-                Diagnostic(ErrorCode.FTL_DebugEmitFailure)
-                    .WithArguments("Error!")
-                    .WithLocation(1, 1)
-            );
+            result.Diagnostics
+                .Verify(
+                    // error CS0041: Unexpected error writing debug information -- 'Error!'
+                    Diagnostic(ErrorCode.FTL_DebugEmitFailure)
+                        .WithArguments("Error!")
+                        .WithLocation(1, 1)
+                );
         }
     }
 }

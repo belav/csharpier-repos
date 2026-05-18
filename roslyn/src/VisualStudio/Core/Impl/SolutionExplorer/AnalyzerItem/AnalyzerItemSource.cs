@@ -85,9 +85,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SolutionExplore
                 return;
             }
 
-            var project = _analyzersFolder.Workspace.CurrentSolution.GetProject(
-                _analyzersFolder.ProjectId
-            );
+            var project = _analyzersFolder.Workspace
+                .CurrentSolution
+                .GetProject(_analyzersFolder.ProjectId);
 
             if (project != null && project.AnalyzerReferences != _analyzerReferences)
             {
@@ -147,9 +147,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SolutionExplore
                     return _analyzerItems.Count > 0;
                 }
 
-                var project = _analyzersFolder.Workspace.CurrentSolution.GetProject(
-                    _analyzersFolder.ProjectId
-                );
+                var project = _analyzersFolder.Workspace
+                    .CurrentSolution
+                    .GetProject(_analyzersFolder.ProjectId);
 
                 if (project != null)
                 {
@@ -168,9 +168,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SolutionExplore
                 {
                     _analyzerItems = new BulkObservableCollection<AnalyzerItem>();
 
-                    var project = _analyzersFolder.Workspace.CurrentSolution.GetProject(
-                        _analyzersFolder.ProjectId
-                    );
+                    var project = _analyzersFolder.Workspace
+                        .CurrentSolution
+                        .GetProject(_analyzersFolder.ProjectId);
 
                     if (project != null)
                     {

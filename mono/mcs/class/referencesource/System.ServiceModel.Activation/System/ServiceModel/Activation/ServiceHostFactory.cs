@@ -40,21 +40,20 @@ namespace System.ServiceModel.Activation
         {
             if (!AspNetEnvironment.Enabled)
             {
-                throw FxTrace.Exception.AsError(
-                    new InvalidOperationException(
-                        SR.Hosting_ProcessNotExecutingUnderHostedContext(
-                            "ServiceHostFactory.CreateServiceHost"
+                throw FxTrace.Exception
+                    .AsError(
+                        new InvalidOperationException(
+                            SR.Hosting_ProcessNotExecutingUnderHostedContext(
+                                "ServiceHostFactory.CreateServiceHost"
+                            )
                         )
-                    )
-                );
+                    );
             }
 
             if (string.IsNullOrEmpty(constructorString))
             {
-                throw FxTrace.Exception.Argument(
-                    "constructorString",
-                    SR.Hosting_ServiceTypeNotProvided
-                );
+                throw FxTrace.Exception
+                    .Argument("constructorString", SR.Hosting_ServiceTypeNotProvided);
             }
 
             Type type = Type.GetType(constructorString, false);
@@ -110,11 +109,12 @@ namespace System.ServiceModel.Activation
 
             if (type == null)
             {
-                throw FxTrace.Exception.AsError(
-                    new InvalidOperationException(
-                        SR.Hosting_ServiceTypeNotResolved(constructorString)
-                    )
-                );
+                throw FxTrace.Exception
+                    .AsError(
+                        new InvalidOperationException(
+                            SR.Hosting_ServiceTypeNotResolved(constructorString)
+                        )
+                    );
             }
 
             return CreateServiceHost(type, baseAddresses);

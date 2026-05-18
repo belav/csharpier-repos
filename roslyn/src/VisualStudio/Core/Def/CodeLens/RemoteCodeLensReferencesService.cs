@@ -45,11 +45,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CodeLens
         )
         {
             // This value is more efficient to calculate in the current process
-            return CodeLensReferencesServiceFactory.Instance.GetProjectCodeLensVersionAsync(
-                solution,
-                projectId,
-                cancellationToken
-            );
+            return CodeLensReferencesServiceFactory.Instance
+                .GetProjectCodeLensVersionAsync(solution, projectId, cancellationToken);
         }
 
         public async Task<ReferenceCount?> GetReferenceCountAsync(
@@ -90,8 +87,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CodeLens
                     return result.HasValue ? result.Value : null;
                 }
 
-                return await CodeLensReferencesServiceFactory
-                    .Instance.GetReferenceCountAsync(
+                return await CodeLensReferencesServiceFactory.Instance
+                    .GetReferenceCountAsync(
                         solution,
                         documentId,
                         syntaxNode,
@@ -177,13 +174,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CodeLens
                     return result.HasValue ? result.Value : null;
                 }
 
-                return await CodeLensReferencesServiceFactory
-                    .Instance.FindReferenceMethodsAsync(
-                        solution,
-                        documentId,
-                        syntaxNode,
-                        cancellationToken
-                    )
+                return await CodeLensReferencesServiceFactory.Instance
+                    .FindReferenceMethodsAsync(solution, documentId, syntaxNode, cancellationToken)
                     .ConfigureAwait(false);
             }
         }
@@ -224,13 +216,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CodeLens
                     return result.HasValue ? result.Value : null;
                 }
 
-                return await CodeLensReferencesServiceFactory
-                    .Instance.GetFullyQualifiedNameAsync(
-                        solution,
-                        documentId,
-                        syntaxNode,
-                        cancellationToken
-                    )
+                return await CodeLensReferencesServiceFactory.Instance
+                    .GetFullyQualifiedNameAsync(solution, documentId, syntaxNode, cancellationToken)
                     .ConfigureAwait(false);
             }
         }
@@ -462,13 +449,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CodeLens
             }
 
             // remote host is not running. this can happen if remote host is disabled.
-            return await CodeLensReferencesServiceFactory
-                .Instance.FindReferenceLocationsAsync(
-                    solution,
-                    documentId,
-                    syntaxNode,
-                    cancellationToken
-                )
+            return await CodeLensReferencesServiceFactory.Instance
+                .FindReferenceLocationsAsync(solution, documentId, syntaxNode, cancellationToken)
                 .ConfigureAwait(false);
         }
     }

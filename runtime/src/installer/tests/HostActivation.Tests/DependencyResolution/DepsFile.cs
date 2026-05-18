@@ -24,16 +24,18 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.DependencyResolution
             // Without .deps.json, all assemblies in the app's directory are added to the TPA
             // and the app's directory is added to the native library search path
             TestApp app = sharedState.FrameworkReferenceApp;
-            sharedState
-                .DotNetWithNetCoreApp.Exec(app.AppDll)
+            sharedState.DotNetWithNetCoreApp
+                .Exec(app.AppDll)
                 .EnableTracingAndCaptureOutputs()
                 .Execute()
                 .Should()
                 .Pass()
-                .And.HaveResolvedAssembly(
+                .And
+                .HaveResolvedAssembly(
                     Path.Combine(app.Location, $"{SharedTestState.DependencyName}.dll")
                 )
-                .And.HaveResolvedNativeLibraryPath(app.Location);
+                .And
+                .HaveResolvedNativeLibraryPath(app.Location);
         }
 
         [Fact]
@@ -47,8 +49,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.DependencyResolution
                 Path.GetDirectoryName(sharedState.DepsJsonPath),
                 $"{SharedTestState.DependencyName}.dll"
             );
-            sharedState
-                .DotNetWithNetCoreApp.Exec(
+            sharedState.DotNetWithNetCoreApp
+                .Exec(
                     "exec",
                     Constants.DepsFile.CommandLineArgument,
                     sharedState.DepsJsonPath,
@@ -58,7 +60,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.DependencyResolution
                 .Execute()
                 .Should()
                 .Pass()
-                .And.HaveResolvedAssembly(dependencyPath);
+                .And
+                .HaveResolvedAssembly(dependencyPath);
         }
 
         public class SharedTestState : DependencyResolutionBase.SharedTestStateBase

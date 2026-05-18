@@ -260,13 +260,14 @@ namespace System.ServiceModel.Dispatcher
             {
                 if (value <= 0)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ArgumentOutOfRangeException(
-                            "NodeQuota",
-                            value,
-                            SR.GetString(SR.FilterQuotaRange)
-                        )
-                    );
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperError(
+                            new ArgumentOutOfRangeException(
+                                "NodeQuota",
+                                value,
+                                SR.GetString(SR.FilterQuotaRange)
+                            )
+                        );
                 }
 
                 this.EnsureMatcher();
@@ -428,10 +429,8 @@ namespace System.ServiceModel.Dispatcher
 
             if (!reader.IsStartElement())
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                    "reader",
-                    SR.GetString(SR.FilterReaderNotStartElem)
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperArgument("reader", SR.GetString(SR.FilterReaderNotStartElem));
             }
 
             bool found = false;
@@ -446,9 +445,12 @@ namespace System.ServiceModel.Dispatcher
                         || reader.NamespaceURI != WSEventingNamespace
                     )
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new InvalidOperationException(SR.GetString(SR.FilterInvalidAttribute))
-                        );
+                        throw DiagnosticUtility.ExceptionUtility
+                            .ThrowHelperError(
+                                new InvalidOperationException(
+                                    SR.GetString(SR.FilterInvalidAttribute)
+                                )
+                            );
                     }
                     dialect = reader.Value;
                     found = true;
@@ -461,11 +463,12 @@ namespace System.ServiceModel.Dispatcher
 
             if (dialect != null && dialect != XPathDialect)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(
-                        SR.GetString(SR.FilterInvalidDialect, XPathDialect)
-                    )
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(SR.FilterInvalidDialect, XPathDialect)
+                        )
+                    );
             }
 
             bool wasEmpty = reader.IsEmptyElement;
@@ -496,18 +499,14 @@ namespace System.ServiceModel.Dispatcher
 
             if (!reader.IsStartElement())
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                    "reader",
-                    SR.GetString(SR.FilterReaderNotStartElem)
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperArgument("reader", SR.GetString(SR.FilterReaderNotStartElem));
             }
 
             if (reader.IsEmptyElement)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                    "reader",
-                    SR.GetString(SR.FilterInvalidInner, InnerElem)
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperArgument("reader", SR.GetString(SR.FilterInvalidInner, InnerElem));
             }
 
             // Pull in the node quota
@@ -545,10 +544,8 @@ namespace System.ServiceModel.Dispatcher
 
             if (reader.LocalName != InnerElem)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                    "reader",
-                    SR.GetString(SR.FilterInvalidInner, InnerElem)
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperArgument("reader", SR.GetString(SR.FilterInvalidInner, InnerElem));
             }
             ReadFrom(reader, new XPathMessageContext());
 
@@ -749,10 +746,8 @@ namespace System.ServiceModel.Dispatcher
 
             if (localName.Length == 0)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                    "localName",
-                    SR.GetString(SR.FilterEmptyString)
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperArgument("localName", SR.GetString(SR.FilterEmptyString));
             }
 
             if (null == prefix)

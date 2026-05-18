@@ -378,9 +378,10 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
                 // Call Back Paint event
                 if (!selection)
                 {
-                    common.Chart.CallOnPrePaint(
-                        new ChartPaintEventArgs(ser, graph, common, area.PlotAreaPosition)
-                    );
+                    common.Chart
+                        .CallOnPrePaint(
+                            new ChartPaintEventArgs(ser, graph, common, area.PlotAreaPosition)
+                        );
                 }
 
                 //************************************************************
@@ -848,9 +849,10 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
                 // Call Paint event
                 if (!selection)
                 {
-                    common.Chart.CallOnPostPaint(
-                        new ChartPaintEventArgs(ser, graph, common, area.PlotAreaPosition)
-                    );
+                    common.Chart
+                        .CallOnPostPaint(
+                            new ChartPaintEventArgs(ser, graph, common, area.PlotAreaPosition)
+                        );
                 }
 
                 // Data series index
@@ -1166,18 +1168,19 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
                             );
 
                             // Adjust label position using SmartLabelStyle algorithm
-                            position = area.smartLabels.AdjustSmartLabelPosition(
-                                common,
-                                graph,
-                                area,
-                                ser.SmartLabelStyle,
-                                position,
-                                sizeFont,
-                                format,
-                                position,
-                                markerSizes,
-                                LabelAlignmentStyles.Top
-                            );
+                            position = area.smartLabels
+                                .AdjustSmartLabelPosition(
+                                    common,
+                                    graph,
+                                    area,
+                                    ser.SmartLabelStyle,
+                                    position,
+                                    sizeFont,
+                                    format,
+                                    position,
+                                    markerSizes,
+                                    LabelAlignmentStyles.Top
+                                );
 
                             // Smart labels always use 0 degrees text angle
                             textAngle = 0;
@@ -1347,9 +1350,10 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
                 // Call Back Paint event
                 if (!selection)
                 {
-                    common.Chart.CallOnPrePaint(
-                        new ChartPaintEventArgs(ser, graph, common, area.PlotAreaPosition)
-                    );
+                    common.Chart
+                        .CallOnPrePaint(
+                            new ChartPaintEventArgs(ser, graph, common, area.PlotAreaPosition)
+                        );
                 }
 
                 //************************************************************
@@ -1866,9 +1870,10 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
                 // Call Paint event
                 if (!selection)
                 {
-                    common.Chart.CallOnPrePaint(
-                        new ChartPaintEventArgs(ser, graph, common, area.PlotAreaPosition)
-                    );
+                    common.Chart
+                        .CallOnPrePaint(
+                            new ChartPaintEventArgs(ser, graph, common, area.PlotAreaPosition)
+                        );
                 }
             }
         }

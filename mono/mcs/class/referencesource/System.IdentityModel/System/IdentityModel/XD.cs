@@ -207,9 +207,10 @@ namespace System.IdentityModel
         {
             XmlDictionaryString expectedValue;
             if (!dictionary.TryLookup(value, out expectedValue))
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                    SR.GetString(SR.XDCannotFindValueInDictionaryString, value)
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperArgument(
+                        SR.GetString(SR.XDCannotFindValueInDictionaryString, value)
+                    );
 
             return expectedValue;
         }
@@ -644,9 +645,10 @@ namespace System.IdentityModel
         {
             XmlDictionaryString expectedValue;
             if (!dictionary.TryLookup(value, out expectedValue))
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                    SR.GetString(SR.XDCannotFindValueInDictionaryString, value)
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperArgument(
+                        SR.GetString(SR.XDCannotFindValueInDictionaryString, value)
+                    );
 
             return expectedValue;
         }
@@ -690,9 +692,10 @@ namespace System.IdentityModel
         {
             XmlDictionaryString expectedValue;
             if (!dictionary.TryLookup(value, out expectedValue))
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                    SR.GetString(SR.XDCannotFindValueInDictionaryString, value)
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperArgument(
+                        SR.GetString(SR.XDCannotFindValueInDictionaryString, value)
+                    );
 
             return expectedValue;
         }
@@ -875,9 +878,10 @@ namespace System.IdentityModel
         {
             XmlDictionaryString expectedValue;
             if (!dictionary.TryLookup(value, out expectedValue))
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                    SR.GetString(SR.XDCannotFindValueInDictionaryString, value)
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperArgument(
+                        SR.GetString(SR.XDCannotFindValueInDictionaryString, value)
+                    );
 
             return expectedValue;
         }
@@ -1055,9 +1059,10 @@ namespace System.IdentityModel
         {
             XmlDictionaryString expectedValue;
             if (!dictionary.TryLookup(value, out expectedValue))
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                    SR.GetString(SR.XDCannotFindValueInDictionaryString, value)
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperArgument(
+                        SR.GetString(SR.XDCannotFindValueInDictionaryString, value)
+                    );
 
             return expectedValue;
         }
@@ -1291,9 +1296,10 @@ namespace System.IdentityModel
         {
             XmlDictionaryString expectedValue;
             if (!dictionary.TryLookup(value, out expectedValue))
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                    SR.GetString(SR.XDCannotFindValueInDictionaryString, value)
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperArgument(
+                        SR.GetString(SR.XDCannotFindValueInDictionaryString, value)
+                    );
 
             return expectedValue;
         }
@@ -1323,9 +1329,10 @@ namespace System.IdentityModel
         {
             XmlDictionaryString expectedValue;
             if (!dictionary.TryLookup(value, out expectedValue))
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                    SR.GetString(SR.XDCannotFindValueInDictionaryString, value)
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperArgument(
+                        SR.GetString(SR.XDCannotFindValueInDictionaryString, value)
+                    );
 
             return expectedValue;
         }
@@ -1586,9 +1593,10 @@ namespace System.IdentityModel
         {
             XmlDictionaryString expectedValue;
             if (!dictionary.TryLookup(value, out expectedValue))
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                    SR.GetString(SR.XDCannotFindValueInDictionaryString, value)
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperArgument(
+                        SR.GetString(SR.XDCannotFindValueInDictionaryString, value)
+                    );
 
             return expectedValue;
         }
@@ -1711,9 +1719,10 @@ namespace System.IdentityModel
         {
             XmlDictionaryString expectedValue;
             if (!dictionary.TryLookup(value, out expectedValue))
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                    SR.GetString(SR.XDCannotFindValueInDictionaryString, value)
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperArgument(
+                        SR.GetString(SR.XDCannotFindValueInDictionaryString, value)
+                    );
 
             return expectedValue;
         }
@@ -1796,9 +1805,10 @@ namespace System.IdentityModel
         {
             XmlDictionaryString expectedValue;
             if (!dictionary.TryLookup(value, out expectedValue))
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                    SR.GetString(SR.XDCannotFindValueInDictionaryString, value)
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperArgument(
+                        SR.GetString(SR.XDCannotFindValueInDictionaryString, value)
+                    );
 
             return expectedValue;
         }
@@ -2269,9 +2279,10 @@ namespace System.IdentityModel
         {
             XmlDictionaryString expectedValue;
             if (!dictionary.TryLookup(value, out expectedValue))
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                    SR.GetString(SR.XDCannotFindValueInDictionaryString, value)
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperArgument(
+                        SR.GetString(SR.XDCannotFindValueInDictionaryString, value)
+                    );
 
             return expectedValue;
         }
@@ -2644,9 +2655,10 @@ namespace System.IdentityModel
         {
             XmlDictionaryString expectedValue;
             if (!dictionary.TryLookup(value, out expectedValue))
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                    SR.GetString(SR.XDCannotFindValueInDictionaryString, value)
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperArgument(
+                        SR.GetString(SR.XDCannotFindValueInDictionaryString, value)
+                    );
 
             return expectedValue;
         }
@@ -2706,9 +2718,10 @@ namespace System.IdentityModel
         {
             XmlDictionaryString expectedValue;
             if (!dictionary.TryLookup(value, out expectedValue))
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                    SR.GetString(SR.XDCannotFindValueInDictionaryString, value)
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperArgument(
+                        SR.GetString(SR.XDCannotFindValueInDictionaryString, value)
+                    );
 
             return expectedValue;
         }
@@ -2864,9 +2877,10 @@ namespace System.IdentityModel
         {
             XmlDictionaryString expectedValue;
             if (!dictionary.TryLookup(value, out expectedValue))
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                    SR.GetString(SR.XDCannotFindValueInDictionaryString, value)
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperArgument(
+                        SR.GetString(SR.XDCannotFindValueInDictionaryString, value)
+                    );
 
             return expectedValue;
         }
@@ -3070,9 +3084,10 @@ namespace System.IdentityModel
         {
             XmlDictionaryString expectedValue;
             if (!dictionary.TryLookup(value, out expectedValue))
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                    SR.GetString(SR.XDCannotFindValueInDictionaryString, value)
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperArgument(
+                        SR.GetString(SR.XDCannotFindValueInDictionaryString, value)
+                    );
 
             return expectedValue;
         }

@@ -81,8 +81,7 @@ namespace System.Web.Services.Protocols
             WebMethodReflector.IncludeTypes(methodInfos, xmlImporter);
             SoapReflectedMethod[] soapMethods = new SoapReflectedMethod[methodInfos.Length];
 
-            SoapExtensionTypeElementCollection extensionTypes = WebServicesSection
-                .Current
+            SoapExtensionTypeElementCollection extensionTypes = WebServicesSection.Current
                 .SoapExtensionTypes;
             ArrayList highPri = new ArrayList();
             ArrayList lowPri = new ArrayList();
@@ -956,10 +955,8 @@ namespace System.Web.Services.Protocols
                 else
                 {
                     values = (object[])
-                        serverMethod.parameterSerializer.Deserialize(
-                            reader,
-                            isEncodedSoap ? helper.EncodingNs : null
-                        );
+                        serverMethod.parameterSerializer
+                            .Deserialize(reader, isEncodedSoap ? helper.EncodingNs : null);
                 }
                 if (Tracing.On)
                     Tracing.Exit(Tracing.TraceId(Res.TraceReadRequest), caller);
@@ -1091,12 +1088,8 @@ namespace System.Web.Services.Protocols
                         isEncoded ? helper.EncodingNs : null
                     )
                 );
-            serverMethod.returnSerializer.Serialize(
-                writer,
-                returnValues,
-                null,
-                isEncoded ? helper.EncodingNs : null
-            );
+            serverMethod.returnSerializer
+                .Serialize(writer, returnValues, null, isEncoded ? helper.EncodingNs : null);
             if (Tracing.On)
                 Tracing.Exit(Tracing.TraceId(Res.TraceWriteResponse), caller);
 
@@ -1450,10 +1443,11 @@ namespace System.Web.Services.Protocols
             }
             else if (SoapException.IsClientFaultCode(soapException.Code))
             {
-                System.Web.Services.Protocols.ServerProtocol.SetHttpResponseStatusCode(
-                    response,
-                    (int)HttpStatusCode.InternalServerError
-                );
+                System.Web
+                    .Services
+                    .Protocols
+                    .ServerProtocol
+                    .SetHttpResponseStatusCode(response, (int)HttpStatusCode.InternalServerError);
 
                 for (Exception inner = soapException; inner != null; inner = inner.InnerException)
                 {
@@ -1465,10 +1459,11 @@ namespace System.Web.Services.Protocols
             }
             else
             {
-                System.Web.Services.Protocols.ServerProtocol.SetHttpResponseStatusCode(
-                    response,
-                    (int)HttpStatusCode.InternalServerError
-                );
+                System.Web
+                    .Services
+                    .Protocols
+                    .ServerProtocol
+                    .SetHttpResponseStatusCode(response, (int)HttpStatusCode.InternalServerError);
             }
             response.StatusDescription = HttpWorkerRequest.GetStatusDescription(
                 response.StatusCode

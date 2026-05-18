@@ -37,8 +37,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
                 || context.IsObjectCreationTypeContext
                 || (
                     context.IsGenericTypeArgumentContext
-                    && !context
-                        .TargetToken.GetRequiredParent()
+                    && !context.TargetToken
+                        .GetRequiredParent()
                         .HasAncestor<XmlCrefAttributeSyntax>()
                 )
                 || context.IsFunctionPointerTypeArgumentContext

@@ -394,12 +394,10 @@ namespace System.Runtime.Remoting
                     if (configData.Lifetime.IsRenewOnCallTimeSet)
                         LifetimeServices.RenewOnCallTime = configData.Lifetime.RenewOnCallTime;
                     if (configData.Lifetime.IsSponsorshipTimeoutSet)
-                        LifetimeServices.SponsorshipTimeout = configData
-                            .Lifetime
+                        LifetimeServices.SponsorshipTimeout = configData.Lifetime
                             .SponsorshipTimeout;
                     if (configData.Lifetime.IsLeaseManagerPollTimeSet)
-                        LifetimeServices.LeaseManagerPollTime = configData
-                            .Lifetime
+                        LifetimeServices.LeaseManagerPollTime = configData.Lifetime
                             .LeaseManagerPollTime;
                 }
 

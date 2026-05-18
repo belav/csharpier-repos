@@ -23,8 +23,8 @@ internal static partial class AnalyzerOptionsProviders
             .GetRequiredSyntaxTreeAsync(cancellationToken)
             .ConfigureAwait(false);
         var analyzerOptions = document.Project.AnalyzerOptions;
-        var configOptions = analyzerOptions
-            .AnalyzerConfigOptionsProvider.GetOptions(syntaxTree)
+        var configOptions = analyzerOptions.AnalyzerConfigOptionsProvider
+            .GetOptions(syntaxTree)
             .GetOptionsReader();
 
         return new AnalyzerOptionsProvider(

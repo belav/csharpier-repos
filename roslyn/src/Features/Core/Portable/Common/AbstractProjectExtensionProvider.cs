@@ -154,9 +154,8 @@ namespace Microsoft.CodeAnalysis
                 if (
                     document.FilePath != null
                     && extensionInfo.DocumentExtensions != null
-                    && !extensionInfo.DocumentExtensions.Contains(
-                        PathUtilities.GetExtension(document.FilePath)
-                    )
+                    && !extensionInfo.DocumentExtensions
+                        .Contains(PathUtilities.GetExtension(document.FilePath))
                 )
                 {
                     return false;

@@ -69,9 +69,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.RenameTracking
                     // Clear the state machine so that future updates to the same token work, and any text changes
                     // caused by this update are not interpreted as potential renames.  Intentionally pass
                     // CancellationToken.None.  We must clear this state out.
-                    await _stateMachine.ThreadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(
-                        CancellationToken.None
-                    );
+                    await _stateMachine.ThreadingContext
+                        .JoinableTaskFactory
+                        .SwitchToMainThreadAsync(CancellationToken.None);
                     _stateMachine.ClearTrackingSession();
                 }
             }
@@ -173,18 +173,16 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.RenameTracking
                 // text changes caused by undo and redo actions as potential renames, so carefully
                 // update the state machine after undo/redo actions.
 
-                var changedDocuments =
-                    renameTrackingSolutionSet.RenamedSolution.GetChangedDocuments(
-                        renameTrackingSolutionSet.OriginalSolution
-                    );
+                var changedDocuments = renameTrackingSolutionSet.RenamedSolution
+                    .GetChangedDocuments(renameTrackingSolutionSet.OriginalSolution);
                 try
                 {
                     // When this action is undone (the user has undone twice), restore the state
                     // machine to so that they can continue their original rename tracking session.
 
-                    await _stateMachine.ThreadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(
-                        cancellationToken
-                    );
+                    await _stateMachine.ThreadingContext
+                        .JoinableTaskFactory
+                        .SwitchToMainThreadAsync(cancellationToken);
                     var trackingSessionId =
                         _stateMachine.StoreCurrentTrackingSessionAndGenerateId();
                     var result = TryUpdateWorkspaceForResetOfTypedIdentifier(
@@ -218,17 +216,17 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.RenameTracking
                     {
                         // because changes have already been made to the workspace (UpdateWorkspaceForResetOfTypedIdentifier() above),
                         // these calls can't be cancelled and must be allowed to complete.
-                        var root = await renameTrackingSolutionSet
-                            .RenamedSolution.GetDocument(docId)
+                        var root = await renameTrackingSolutionSet.RenamedSolution
+                            .GetDocument(docId)
                             .GetSyntaxRootAsync(cancellationToken)
                             .ConfigureAwait(false);
                         finalSolution = finalSolution.WithDocumentSyntaxRoot(docId, root);
                     }
 
                     // Undo/redo on this action must always clear the state machine
-                    await _stateMachine.ThreadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(
-                        cancellationToken
-                    );
+                    await _stateMachine.ThreadingContext
+                        .JoinableTaskFactory
+                        .SwitchToMainThreadAsync(cancellationToken);
                     return TryUpdateWorkspaceForGlobalIdentifierRename(
                         workspace,
                         finalSolution,
@@ -242,9 +240,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.RenameTracking
                 finally
                 {
                     // Explicit CancellationToken.None here.  We must clean up our state no matter what.
-                    await _stateMachine.ThreadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(
-                        CancellationToken.None
-                    );
+                    await _stateMachine.ThreadingContext
+                        .JoinableTaskFactory
+                        .SwitchToMainThreadAsync(CancellationToken.None);
                     RenameTrackingDismisser.DismissRenameTracking(workspace, changedDocuments);
                 }
             }

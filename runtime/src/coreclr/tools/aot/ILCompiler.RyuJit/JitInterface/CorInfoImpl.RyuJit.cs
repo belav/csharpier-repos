@@ -480,14 +480,14 @@ namespace Internal.JitInterface
 
                     MethodDesc targetOfLookup;
                     if (constrainedType.IsRuntimeDeterminedType)
-                        targetOfLookup =
-                            _compilation.TypeSystemContext.GetMethodForRuntimeDeterminedType(
+                        targetOfLookup = _compilation.TypeSystemContext
+                            .GetMethodForRuntimeDeterminedType(
                                 directMethod.GetTypicalMethodDefinition(),
                                 (RuntimeDeterminedType)constrainedType
                             );
                     else if (constrainedType.HasInstantiation)
-                        targetOfLookup =
-                            _compilation.TypeSystemContext.GetMethodForInstantiatedType(
+                        targetOfLookup = _compilation.TypeSystemContext
+                            .GetMethodForInstantiatedType(
                                 directMethod.GetTypicalMethodDefinition(),
                                 (InstantiatedType)constrainedType
                             );
@@ -548,10 +548,8 @@ namespace Internal.JitInterface
             {
                 pLookup.lookupKind.needsRuntimeLookup = false;
                 pLookup.constLookup = CreateConstLookupToSymbol(
-                    _compilation.NodeFactory.ReadyToRunHelper(
-                        ReadyToRunHelperId.DelegateCtor,
-                        delegateInfo
-                    )
+                    _compilation.NodeFactory
+                        .ReadyToRunHelper(ReadyToRunHelperId.DelegateCtor, delegateInfo)
                 );
             }
         }
@@ -838,19 +836,25 @@ namespace Internal.JitInterface
                     break;
 
                 case CorInfoHelpFunc.CORINFO_HELP_GETSYNCFROMCLASSHANDLE:
-                    return _compilation.NodeFactory.MethodEntrypoint(
-                        _compilation.NodeFactory.TypeSystemContext.GetHelperEntryPoint(
-                            "SynchronizedMethodHelpers",
-                            "GetSyncFromClassHandle"
-                        )
-                    );
+                    return _compilation.NodeFactory
+                        .MethodEntrypoint(
+                            _compilation.NodeFactory
+                                .TypeSystemContext
+                                .GetHelperEntryPoint(
+                                    "SynchronizedMethodHelpers",
+                                    "GetSyncFromClassHandle"
+                                )
+                        );
                 case CorInfoHelpFunc.CORINFO_HELP_GETCLASSFROMMETHODPARAM:
-                    return _compilation.NodeFactory.MethodEntrypoint(
-                        _compilation.NodeFactory.TypeSystemContext.GetHelperEntryPoint(
-                            "SynchronizedMethodHelpers",
-                            "GetClassFromMethodParam"
-                        )
-                    );
+                    return _compilation.NodeFactory
+                        .MethodEntrypoint(
+                            _compilation.NodeFactory
+                                .TypeSystemContext
+                                .GetHelperEntryPoint(
+                                    "SynchronizedMethodHelpers",
+                                    "GetClassFromMethodParam"
+                                )
+                        );
 
                 case CorInfoHelpFunc.CORINFO_HELP_GVMLOOKUP_FOR_SLOT:
                     id = ReadyToRunHelper.GVMLookupForSlot;
@@ -871,13 +875,11 @@ namespace Internal.JitInterface
                     break;
 
                 case CorInfoHelpFunc.CORINFO_HELP_VALIDATE_INDIRECT_CALL:
-                    return _compilation.NodeFactory.ExternIndirectSymbol(
-                        "__guard_check_icall_fptr"
-                    );
+                    return _compilation.NodeFactory
+                        .ExternIndirectSymbol("__guard_check_icall_fptr");
                 case CorInfoHelpFunc.CORINFO_HELP_DISPATCH_INDIRECT_CALL:
-                    return _compilation.NodeFactory.ExternIndirectSymbol(
-                        "__guard_dispatch_icall_fptr"
-                    );
+                    return _compilation.NodeFactory
+                        .ExternIndirectSymbol("__guard_dispatch_icall_fptr");
 
                 default:
                     throw new NotImplementedException(ftnNum.ToString());
@@ -1201,21 +1203,23 @@ namespace Internal.JitInterface
                 || runtimeLookupKind == CORINFO_RUNTIME_LOOKUP_KIND.CORINFO_LOOKUP_CLASSPARAM
             )
             {
-                return _compilation.NodeFactory.ReadyToRunHelperFromTypeLookup(
-                    helperId,
-                    helperArgument,
-                    MethodBeingCompiled.OwningType
-                );
+                return _compilation.NodeFactory
+                    .ReadyToRunHelperFromTypeLookup(
+                        helperId,
+                        helperArgument,
+                        MethodBeingCompiled.OwningType
+                    );
             }
 
             Debug.Assert(
                 runtimeLookupKind == CORINFO_RUNTIME_LOOKUP_KIND.CORINFO_LOOKUP_METHODPARAM
             );
-            return _compilation.NodeFactory.ReadyToRunHelperFromDictionaryLookup(
-                helperId,
-                helperArgument,
-                MethodBeingCompiled
-            );
+            return _compilation.NodeFactory
+                .ReadyToRunHelperFromDictionaryLookup(
+                    helperId,
+                    helperArgument,
+                    MethodBeingCompiled
+                );
         }
 
         private CorInfoHelpFunc getCastingHelper(
@@ -1347,10 +1351,8 @@ namespace Internal.JitInterface
                 _compilation.DetectGenericCycles(methodIL.OwningMethod, method);
             }
 
-            return _compilation.NodeFactory.MethodEntrypointOrTentativeMethod(
-                method,
-                isUnboxingThunk
-            );
+            return _compilation.NodeFactory
+                .MethodEntrypointOrTentativeMethod(method, isUnboxingThunk);
         }
 
         private static bool IsTypeSpecForTypicalInstantiation(TypeDesc t)
@@ -1430,10 +1432,8 @@ namespace Internal.JitInterface
                 {
                     // Constrained calls to methods on enum methods resolve to System.Enum's methods. System.Enum is a reference
                     // type though, so we would fail to resolve and box. We have a special path for those to avoid boxing.
-                    directMethod = _compilation.TypeSystemContext.TryResolveConstrainedEnumMethod(
-                        constrainedType,
-                        method
-                    );
+                    directMethod = _compilation.TypeSystemContext
+                        .TryResolveConstrainedEnumMethod(constrainedType, method);
                 }
 
                 if (directMethod != null)
@@ -1454,10 +1454,9 @@ namespace Internal.JitInterface
 
                     exactType = directMethod.OwningType;
 
-                    _compilation.NodeFactory.MetadataManager.NoteOverridingMethod(
-                        method,
-                        directMethod
-                    );
+                    _compilation.NodeFactory
+                        .MetadataManager
+                        .NoteOverridingMethod(method, directMethod);
                 }
                 else if (method.Signature.IsStatic)
                 {
@@ -1599,16 +1598,17 @@ namespace Internal.JitInterface
 
                 MethodDesc targetOfLookup;
                 if (runtimeDeterminedConstrainedType.IsRuntimeDeterminedType)
-                    targetOfLookup =
-                        _compilation.TypeSystemContext.GetMethodForRuntimeDeterminedType(
+                    targetOfLookup = _compilation.TypeSystemContext
+                        .GetMethodForRuntimeDeterminedType(
                             targetMethod.GetTypicalMethodDefinition(),
                             (RuntimeDeterminedType)runtimeDeterminedConstrainedType
                         );
                 else if (runtimeDeterminedConstrainedType.HasInstantiation)
-                    targetOfLookup = _compilation.TypeSystemContext.GetMethodForInstantiatedType(
-                        targetMethod.GetTypicalMethodDefinition(),
-                        (InstantiatedType)runtimeDeterminedConstrainedType
-                    );
+                    targetOfLookup = _compilation.TypeSystemContext
+                        .GetMethodForInstantiatedType(
+                            targetMethod.GetTypicalMethodDefinition(),
+                            (InstantiatedType)runtimeDeterminedConstrainedType
+                        );
                 else
                     targetOfLookup = targetMethod.GetMethodDefinition();
                 if (targetOfLookup.HasInstantiation)
@@ -1747,18 +1747,16 @@ namespace Internal.JitInterface
 
                     if (targetMethod.RequiresInstMethodDescArg())
                     {
-                        instParam = _compilation.NodeFactory.MethodGenericDictionary(
-                            concreteMethod
-                        );
+                        instParam = _compilation.NodeFactory
+                            .MethodGenericDictionary(concreteMethod);
                     }
                     else if (
                         targetMethod.RequiresInstMethodTableArg() || referencingArrayAddressMethod
                     )
                     {
                         // Ask for a constructed type symbol because we need the vtable to get to the dictionary
-                        instParam = _compilation.NodeFactory.ConstructedTypeSymbol(
-                            concreteMethod.OwningType
-                        );
+                        instParam = _compilation.NodeFactory
+                            .ConstructedTypeSymbol(concreteMethod.OwningType);
                     }
 
                     if (instParam != null)
@@ -1878,13 +1876,12 @@ namespace Internal.JitInterface
                         InfoAccessType.IAT_PVALUE;
 #pragma warning disable SA1001, SA1113, SA1115 // Commas should be spaced correctly
                     pResult->codePointerOrStubLookup.constLookup.addr = (void*)ObjectToHandle(
-                        _compilation.NodeFactory.InterfaceDispatchCell(
-                            targetMethod
+                        _compilation.NodeFactory
+                            .InterfaceDispatchCell(targetMethod
 #if !SUPPORT_JIT
-                            ,
-                            _methodCodeNode
+                                , _methodCodeNode
 #endif
-                        )
+                            )
                     );
 #pragma warning restore SA1001, SA1113, SA1115 // Commas should be spaced correctly
                 }
@@ -2312,12 +2309,13 @@ namespace Internal.JitInterface
                     (void*)callSiteSig->pSig
                 );
 
-                MethodDesc stub = _compilation.PInvokeILProvider.GetCalliStub(
-                    methodSignature,
-                    (
-                        (MetadataType)HandleToObject(callSiteSig->scope).OwningMethod.OwningType
-                    ).Module
-                );
+                MethodDesc stub = _compilation.PInvokeILProvider
+                    .GetCalliStub(
+                        methodSignature,
+                        (
+                            (MetadataType)HandleToObject(callSiteSig->scope).OwningMethod.OwningType
+                        ).Module
+                    );
                 Debug.Assert(!IsPInvokeStubRequired(stub));
 #endif
 
@@ -2358,10 +2356,8 @@ namespace Internal.JitInterface
             if ((signature.Flags & MethodSignatureFlags.UnmanagedCallingConventionMask) == 0)
                 return false;
 
-            MethodDesc stub = _compilation.PInvokeILProvider.GetCalliStub(
-                signature,
-                ((MetadataType)methodIL.OwningMethod.OwningType).Module
-            );
+            MethodDesc stub = _compilation.PInvokeILProvider
+                .GetCalliStub(signature, ((MetadataType)methodIL.OwningMethod.OwningType).Module);
             if (!mustConvert && !IsPInvokeStubRequired(stub))
                 return false;
 
@@ -2551,20 +2547,22 @@ namespace Internal.JitInterface
                             || contextMethod.RequiresInstMethodTableArg()
                         )
                         {
-                            helper = _compilation.NodeFactory.ReadyToRunHelperFromTypeLookup(
-                                helperId,
-                                runtimeDeterminedField.OwningType,
-                                contextMethod.OwningType
-                            );
+                            helper = _compilation.NodeFactory
+                                .ReadyToRunHelperFromTypeLookup(
+                                    helperId,
+                                    runtimeDeterminedField.OwningType,
+                                    contextMethod.OwningType
+                                );
                         }
                         else
                         {
                             Debug.Assert(contextMethod.RequiresInstMethodDescArg());
-                            helper = _compilation.NodeFactory.ReadyToRunHelperFromDictionaryLookup(
-                                helperId,
-                                runtimeDeterminedField.OwningType,
-                                contextMethod
-                            );
+                            helper = _compilation.NodeFactory
+                                .ReadyToRunHelperFromDictionaryLookup(
+                                    helperId,
+                                    runtimeDeterminedField.OwningType,
+                                    contextMethod
+                                );
                         }
 
                         pResult->fieldLookup = CreateConstLookupToSymbol(helper);
@@ -2599,16 +2597,14 @@ namespace Internal.JitInterface
                         if (field.HasGCStaticBase)
                         {
                             pResult->fieldLookup.accessType = InfoAccessType.IAT_PVALUE;
-                            baseAddr = _compilation.NodeFactory.TypeGCStaticsSymbol(
-                                (MetadataType)field.OwningType
-                            );
+                            baseAddr = _compilation.NodeFactory
+                                .TypeGCStaticsSymbol((MetadataType)field.OwningType);
                         }
                         else
                         {
                             pResult->fieldLookup.accessType = InfoAccessType.IAT_VALUE;
-                            baseAddr = _compilation.NodeFactory.TypeNonGCStaticsSymbol(
-                                (MetadataType)field.OwningType
-                            );
+                            baseAddr = _compilation.NodeFactory
+                                .TypeNonGCStaticsSymbol((MetadataType)field.OwningType);
                         }
                         pResult->fieldLookup.addr = (void*)ObjectToHandle(baseAddr);
                     }
@@ -2720,8 +2716,7 @@ namespace Internal.JitInterface
                     return TryReadRvaFieldData(field, buffer, bufferSize, valueOffset);
                 }
 
-                PreinitializationManager preinitManager = _compilation
-                    .NodeFactory
+                PreinitializationManager preinitManager = _compilation.NodeFactory
                     .PreinitializationManager;
                 if (preinitManager.IsPreinitialized(owningType))
                 {

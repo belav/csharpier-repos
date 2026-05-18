@@ -77,12 +77,13 @@ namespace System.Net.Http.Functional.Tests
                             if (PlatformDetection.IsBrowser)
                             {
 #if !NETFRAMEWORK
-                                req.Options.Set(
-                                    new HttpRequestOptionsKey<bool>(
-                                        "WebAssemblyEnableStreamingRequest"
-                                    ),
-                                    true
-                                );
+                                req.Options
+                                    .Set(
+                                        new HttpRequestOptionsKey<bool>(
+                                            "WebAssemblyEnableStreamingRequest"
+                                        ),
+                                        true
+                                    );
 #endif
                             }
 

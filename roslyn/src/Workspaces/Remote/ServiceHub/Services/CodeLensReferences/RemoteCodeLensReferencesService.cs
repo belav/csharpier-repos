@@ -82,8 +82,8 @@ namespace Microsoft.CodeAnalysis.Remote
                                 return null;
                             }
 
-                            return await CodeLensReferencesServiceFactory
-                                .Instance.GetReferenceCountAsync(
+                            return await CodeLensReferencesServiceFactory.Instance
+                                .GetReferenceCountAsync(
                                     solution,
                                     documentId,
                                     syntaxNode,
@@ -129,8 +129,8 @@ namespace Microsoft.CodeAnalysis.Remote
                                 return null;
                             }
 
-                            return await CodeLensReferencesServiceFactory
-                                .Instance.FindReferenceLocationsAsync(
+                            return await CodeLensReferencesServiceFactory.Instance
+                                .FindReferenceLocationsAsync(
                                     solution,
                                     documentId,
                                     syntaxNode,
@@ -175,8 +175,8 @@ namespace Microsoft.CodeAnalysis.Remote
                                 return null;
                             }
 
-                            return await CodeLensReferencesServiceFactory
-                                .Instance.FindReferenceMethodsAsync(
+                            return await CodeLensReferencesServiceFactory.Instance
+                                .FindReferenceMethodsAsync(
                                     solution,
                                     documentId,
                                     syntaxNode,
@@ -224,8 +224,8 @@ namespace Microsoft.CodeAnalysis.Remote
                                         return null;
                                     }
 
-                                    return await CodeLensReferencesServiceFactory
-                                        .Instance.GetFullyQualifiedNameAsync(
+                                    return await CodeLensReferencesServiceFactory.Instance
+                                        .GetFullyQualifiedNameAsync(
                                             solution,
                                             documentId,
                                             syntaxNode,

@@ -66,10 +66,8 @@ namespace System.ServiceModel.Channels
 
             this.bufferHolder = new object[] { OverlappedContext.dummyBuffer };
             this.overlapped = new Overlapped();
-            this.nativeOverlapped = this.overlapped.UnsafePack(
-                OverlappedContext.completeCallback,
-                this.bufferHolder
-            );
+            this.nativeOverlapped = this.overlapped
+                .UnsafePack(OverlappedContext.completeCallback, this.bufferHolder);
 
             // When replacing the buffer, we need to provoke the CLR to fix up the handle of the pin.
             this.pinnedHandle = GCHandle.FromIntPtr(

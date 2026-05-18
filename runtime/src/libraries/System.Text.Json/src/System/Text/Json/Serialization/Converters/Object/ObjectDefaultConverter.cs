@@ -380,9 +380,8 @@ namespace System.Text.Json.Serialization.Converters
 
                 jsonTypeInfo.OnSerializing?.Invoke(obj);
 
-                List<KeyValuePair<string, JsonPropertyInfo>> properties = jsonTypeInfo
-                    .PropertyCache!
-                    .List;
+                List<KeyValuePair<string, JsonPropertyInfo>> properties =
+                    jsonTypeInfo.PropertyCache!.List;
                 for (int i = 0; i < properties.Count; i++)
                 {
                     JsonPropertyInfo jsonPropertyInfo = properties[i].Value;
@@ -440,9 +439,8 @@ namespace System.Text.Json.Serialization.Converters
                     state.Current.ProcessedStartToken = true;
                 }
 
-                List<KeyValuePair<string, JsonPropertyInfo>> propertyList = jsonTypeInfo
-                    .PropertyCache!
-                    .List;
+                List<KeyValuePair<string, JsonPropertyInfo>> propertyList =
+                    jsonTypeInfo.PropertyCache!.List;
                 while (state.Current.EnumeratorIndex < propertyList.Count)
                 {
                     JsonPropertyInfo jsonPropertyInfo = propertyList[

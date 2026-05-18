@@ -3142,9 +3142,8 @@ class Generics
             {
                 Type t = o.GrabManagedFnptrOverAlsoAlsoGen();
                 if (
-                    !t.TypeHandle.Equals(
-                        typeof(delegate* <AlsoAlsoGen<Atom>, MyGen<Atom>>).TypeHandle
-                    )
+                    !t.TypeHandle
+                        .Equals(typeof(delegate* <AlsoAlsoGen<Atom>, MyGen<Atom>>).TypeHandle)
                 )
                     throw new Exception();
             }

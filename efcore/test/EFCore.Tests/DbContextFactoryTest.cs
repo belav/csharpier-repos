@@ -929,8 +929,8 @@ public class DbContextFactoryTest
             scope.ServiceProvider.GetRequiredService<WoolacombeContext>();
         }
 
-        using var factoryContext = scope
-            .ServiceProvider.GetRequiredService<IDbContextFactory<WoolacombeContext>>()
+        using var factoryContext = scope.ServiceProvider
+            .GetRequiredService<IDbContextFactory<WoolacombeContext>>()
             .CreateDbContext();
     }
 
@@ -1454,8 +1454,8 @@ public class DbContextFactoryTest
         }
         else
         {
-            using var factoryContext = scope
-                .ServiceProvider.GetRequiredService<IDbContextFactory<WoolacombeContext>>()
+            using var factoryContext = scope.ServiceProvider
+                .GetRequiredService<IDbContextFactory<WoolacombeContext>>()
                 .CreateDbContext();
         }
     }

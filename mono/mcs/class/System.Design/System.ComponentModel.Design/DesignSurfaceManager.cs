@@ -70,10 +70,8 @@ namespace System.ComponentModel.Design
         public DesignSurfaceManager(IServiceProvider parentProvider)
         {
             _parentProvider = parentProvider;
-            this.ServiceContainer.AddService(
-                typeof(IDesignerEventService),
-                new DesignerEventService()
-            );
+            this.ServiceContainer
+                .AddService(typeof(IDesignerEventService), new DesignerEventService());
         }
 
         // The CreateDesignSurfaceCore method is called by both CreateDesignSurface methods.

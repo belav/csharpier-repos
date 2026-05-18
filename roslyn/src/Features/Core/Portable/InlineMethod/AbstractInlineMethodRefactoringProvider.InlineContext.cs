@@ -61,9 +61,9 @@ namespace Microsoft.CodeAnalysis.InlineMethod
             var callerSemanticModel = await document
                 .GetRequiredSemanticModelAsync(cancellationToken)
                 .ConfigureAwait(false);
-            var calleeDocument = document.Project.Solution.GetRequiredDocument(
-                calleeMethodNode.SyntaxTree
-            );
+            var calleeDocument = document.Project
+                .Solution
+                .GetRequiredDocument(calleeMethodNode.SyntaxTree);
             var calleeSemanticModel = await calleeDocument
                 .GetRequiredSemanticModelAsync(cancellationToken)
                 .ConfigureAwait(false);
@@ -122,9 +122,8 @@ namespace Microsoft.CodeAnalysis.InlineMethod
                 calleeSemanticModel,
                 calleeInvocationNode,
                 rawInlineExpression,
-                methodParametersInfo.ParametersToGenerateFreshVariablesFor.SelectAsArray(
-                    parameterAndArgument => parameterAndArgument.parameterSymbol
-                ),
+                methodParametersInfo.ParametersToGenerateFreshVariablesFor
+                    .SelectAsArray(parameterAndArgument => parameterAndArgument.parameterSymbol),
                 cancellationToken
             );
 
@@ -348,13 +347,11 @@ namespace Microsoft.CodeAnalysis.InlineMethod
                     .ConfigureAwait(false);
                 var allSyntaxNodesToReplace = allReferences
                     .SelectMany(reference =>
-                        reference
-                            .Locations.Where(location => !location.IsImplicit)
+                        reference.Locations
+                            .Where(location => !location.IsImplicit)
                             .Select(location =>
-                                location.Location.FindNode(
-                                    getInnermostNodeForTie: true,
-                                    cancellationToken
-                                )
+                                location.Location
+                                    .FindNode(getInnermostNodeForTie: true, cancellationToken)
                             )
                     )
                     .ToImmutableArray();
@@ -387,14 +384,15 @@ namespace Microsoft.CodeAnalysis.InlineMethod
             ImmutableDictionary<ISymbol, string> renameTable
         )
         {
-            var typeParametersReplacementQuery = calleeMethodSymbol.TypeParameters.Zip(
-                calleeMethodSymbol.TypeArguments,
-                (parameter, argument) =>
-                    (
-                        parameter: (ISymbol)parameter,
-                        syntaxNode: GenerateTypeSyntax(argument, allowVar: true)
-                    )
-            );
+            var typeParametersReplacementQuery = calleeMethodSymbol.TypeParameters
+                .Zip(
+                    calleeMethodSymbol.TypeArguments,
+                    (parameter, argument) =>
+                        (
+                            parameter: (ISymbol)parameter,
+                            syntaxNode: GenerateTypeSyntax(argument, allowVar: true)
+                        )
+                );
             var literalArgumentReplacementQuery = parametersToReplace.Select(
                 parameterAndExpressionPair =>
                     (

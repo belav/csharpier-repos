@@ -93,12 +93,11 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             var originalInterfaceType = interfaceMember.ContainingType.OriginalDefinition;
             var originalInterfaceMember = interfaceMember.OriginalDefinition;
 
-            var constructedInterfaces = typeSymbol.AllInterfaces.Where(i =>
-                SymbolEquivalenceComparer.Instance.Equals(
-                    i.OriginalDefinition,
-                    originalInterfaceType
-                )
-            );
+            var constructedInterfaces = typeSymbol.AllInterfaces
+                .Where(i =>
+                    SymbolEquivalenceComparer.Instance
+                        .Equals(i.OriginalDefinition, originalInterfaceType)
+                );
 
             foreach (var constructedInterface in constructedInterfaces)
             {
@@ -189,10 +188,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                 from member in typeSymbol.GetMembers().OfType<TSymbol>()
                 from explicitInterfaceMethod in member.ExplicitInterfaceImplementations()
                 where
-                    SymbolEquivalenceComparer.Instance.Equals(
-                        explicitInterfaceMethod,
-                        constructedInterfaceMember
-                    )
+                    SymbolEquivalenceComparer.Instance
+                        .Equals(explicitInterfaceMethod, constructedInterfaceMember)
                 select member;
 
             var provider = services.GetLanguageServices(typeSymbol.Language);
@@ -222,11 +219,12 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                     .OfType<TSymbol>()
                 where
                     member.DeclaredAccessibility == Accessibility.Public
-                    && SignatureComparer.Instance.HaveSameSignatureAndConstraintsAndReturnTypeAndAccessors(
-                        member,
-                        constructedInterfaceMember,
-                        syntaxFacts.IsCaseSensitive
-                    )
+                    && SignatureComparer.Instance
+                        .HaveSameSignatureAndConstraintsAndReturnTypeAndAccessors(
+                            member,
+                            constructedInterfaceMember,
+                            syntaxFacts.IsCaseSensitive
+                        )
                 select member;
 
             return explicitMatches.FirstOrDefault() ?? implicitMatches.FirstOrDefault();
@@ -313,11 +311,12 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                 return true;
             }
 
-            return type.AllInterfaces.Any(s =>
-                s.SpecialType
-                    is SpecialType.System_Collections_Generic_IEnumerable_T
-                        or SpecialType.System_Collections_IEnumerable
-            );
+            return type.AllInterfaces
+                .Any(s =>
+                    s.SpecialType
+                        is SpecialType.System_Collections_Generic_IEnumerable_T
+                            or SpecialType.System_Collections_IEnumerable
+                );
         }
 
         public static bool CanBeAsynchronouslyEnumerated(
@@ -335,10 +334,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             // Type itself is an IAsyncEnumerable<SomeType>
             if (
                 type.TypeKind == TypeKind.Interface
-                && type.OriginalDefinition.Equals(
-                    asyncEnumerableType,
-                    SymbolEqualityComparer.Default
-                )
+                && type.OriginalDefinition
+                    .Equals(asyncEnumerableType, SymbolEqualityComparer.Default)
             )
             {
                 return true;
@@ -347,10 +344,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             foreach (var @interface in type.AllInterfaces)
             {
                 if (
-                    @interface.OriginalDefinition.Equals(
-                        asyncEnumerableType,
-                        SymbolEqualityComparer.Default
-                    )
+                    @interface.OriginalDefinition
+                        .Equals(asyncEnumerableType, SymbolEqualityComparer.Default)
                 )
                 {
                     return true;

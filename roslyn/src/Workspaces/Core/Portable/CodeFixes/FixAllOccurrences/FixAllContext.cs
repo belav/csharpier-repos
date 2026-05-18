@@ -259,10 +259,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes
                 return ImmutableArray<Diagnostic>.Empty;
             }
 
-            var getDiagnosticsTask = State.DiagnosticProvider.GetDocumentDiagnosticsAsync(
-                document,
-                this.CancellationToken
-            );
+            var getDiagnosticsTask = State.DiagnosticProvider
+                .GetDocumentDiagnosticsAsync(document, this.CancellationToken);
             return await GetFilteredDiagnosticsAsync(
                     getDiagnosticsTask,
                     this.DiagnosticIds,
@@ -323,10 +321,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes
                     filterSpan,
                     this.CancellationToken
                 )
-                : State.DiagnosticProvider.GetDocumentDiagnosticsAsync(
-                    document,
-                    this.CancellationToken
-                );
+                : State.DiagnosticProvider
+                    .GetDocumentDiagnosticsAsync(document, this.CancellationToken);
             return await GetFilteredDiagnosticsAsync(
                     getDiagnosticsTask,
                     this.DiagnosticIds,

@@ -93,11 +93,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.CompleteStatement
                 _editorOperationsFactoryService
             );
 
-            var edit = args.SubjectBuffer.CreateEdit(
-                EditOptions.DefaultMinimalChange,
-                reiteratedVersionNumber: null,
-                editTag: null
-            );
+            var edit = args.SubjectBuffer
+                .CreateEdit(
+                    EditOptions.DefaultMinimalChange,
+                    reiteratedVersionNumber: null,
+                    editTag: null
+                );
             edit.Replace(
                 new Span(0, args.SubjectBuffer.CurrentSnapshot.Length),
                 convertedText.ToString()
@@ -106,9 +107,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.CompleteStatement
             edit.Apply();
 
             // Place the caret right after the semicolon of the file-scoped namespace.
-            args.TextView.Caret.MoveTo(
-                new SnapshotPoint(args.SubjectBuffer.CurrentSnapshot, semicolonSpan.End)
-            );
+            args.TextView
+                .Caret
+                .MoveTo(new SnapshotPoint(args.SubjectBuffer.CurrentSnapshot, semicolonSpan.End));
 
             transaction?.Complete();
         }
@@ -138,8 +139,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.CompleteStatement
                 return default;
 
             var caret = caretOpt.Value.Position;
-            var document =
-                subjectBuffer.CurrentSnapshot.GetOpenDocumentInCurrentContextWithChanges();
+            var document = subjectBuffer.CurrentSnapshot
+                .GetOpenDocumentInCurrentContextWithChanges();
             if (document == null)
                 return default;
 

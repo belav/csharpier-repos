@@ -106,7 +106,8 @@ public class ComplexPropertyEntryTest
                 .Entry(entity)
                 .ComplexProperty(e => e.Culture)
                 .ComplexProperty(e => e.License)
-                .Metadata.Name
+                .Metadata
+                .Name
         );
         Assert.Equal(
             "License",
@@ -114,7 +115,8 @@ public class ComplexPropertyEntryTest
                 .Entry(entity)
                 .ComplexProperty<Culture>("Culture")
                 .ComplexProperty(e => e.License)
-                .Metadata.Name
+                .Metadata
+                .Name
         );
         Assert.Equal(
             "License",
@@ -122,7 +124,8 @@ public class ComplexPropertyEntryTest
                 .Entry(entity)
                 .ComplexProperty("Culture")
                 .ComplexProperty("License")
-                .Metadata.Name
+                .Metadata
+                .Name
         );
         Assert.Equal(
             "License",
@@ -130,7 +133,8 @@ public class ComplexPropertyEntryTest
                 .Entry((object)entity)
                 .ComplexProperty("Culture")
                 .ComplexProperty("License")
-                .Metadata.Name
+                .Metadata
+                .Name
         );
         Assert.Equal(
             "License",
@@ -138,7 +142,8 @@ public class ComplexPropertyEntryTest
                 .Entry((object)entity)
                 .ComplexProperty("Culture")
                 .ComplexProperty("License")
-                .Metadata.Name
+                .Metadata
+                .Name
         );
     }
 
@@ -154,7 +159,8 @@ public class ComplexPropertyEntryTest
                 .Entry(entity)
                 .ComplexProperty(e => e.Culture)
                 .Property(e => e.Rating)
-                .Metadata.Name
+                .Metadata
+                .Name
         );
         Assert.Equal(
             "Rating",
@@ -162,7 +168,8 @@ public class ComplexPropertyEntryTest
                 .Entry(entity)
                 .ComplexProperty<Culture>("Culture")
                 .Property(e => e.Rating)
-                .Metadata.Name
+                .Metadata
+                .Name
         );
         Assert.Equal(
             "Rating",
@@ -174,7 +181,8 @@ public class ComplexPropertyEntryTest
                 .Entry((object)entity)
                 .ComplexProperty("Culture")
                 .Property("Rating")
-                .Metadata.Name
+                .Metadata
+                .Name
         );
         Assert.Equal(
             "Rating",
@@ -182,7 +190,8 @@ public class ComplexPropertyEntryTest
                 .Entry((object)entity)
                 .ComplexProperty("Culture")
                 .Property("Rating")
-                .Metadata.Name
+                .Metadata
+                .Name
         );
 
         Assert.Equal(
@@ -192,7 +201,8 @@ public class ComplexPropertyEntryTest
                 .ComplexProperty(e => e.Culture)
                 .ComplexProperty(e => e.License)
                 .Property(e => e.Charge)
-                .Metadata.Name
+                .Metadata
+                .Name
         );
         Assert.Equal(
             "Charge",
@@ -201,7 +211,8 @@ public class ComplexPropertyEntryTest
                 .ComplexProperty<Culture>("Culture")
                 .ComplexProperty(e => e.License)
                 .Property(e => e.Charge)
-                .Metadata.Name
+                .Metadata
+                .Name
         );
         Assert.Equal(
             "Charge",
@@ -210,7 +221,8 @@ public class ComplexPropertyEntryTest
                 .ComplexProperty("Culture")
                 .ComplexProperty("License")
                 .Property("Charge")
-                .Metadata.Name
+                .Metadata
+                .Name
         );
         Assert.Equal(
             "Charge",
@@ -219,7 +231,8 @@ public class ComplexPropertyEntryTest
                 .ComplexProperty("Culture")
                 .ComplexProperty("License")
                 .Property("Charge")
-                .Metadata.Name
+                .Metadata
+                .Name
         );
         Assert.Equal(
             "Charge",
@@ -228,7 +241,8 @@ public class ComplexPropertyEntryTest
                 .ComplexProperty("Culture")
                 .ComplexProperty("License")
                 .Property("Charge")
-                .Metadata.Name
+                .Metadata
+                .Name
         );
     }
 
@@ -282,8 +296,8 @@ public class ComplexPropertyEntryTest
         using var context = new YogurtContext();
         var complexEntry = context.Attach(CreateYogurt()).ComplexProperty(e => e.Culture);
 
-        var modified = complexEntry
-            .Properties.Where(e => e.IsModified)
+        var modified = complexEntry.Properties
+            .Where(e => e.IsModified)
             .Select(e => e.Metadata.Name)
             .ToList();
 
@@ -292,8 +306,8 @@ public class ComplexPropertyEntryTest
         complexEntry.Property(e => e.Species).CurrentValue = "S";
         complexEntry.Property(e => e.Subspecies).CurrentValue = "SS";
 
-        modified = complexEntry
-            .Properties.Where(e => e.IsModified)
+        modified = complexEntry.Properties
+            .Where(e => e.IsModified)
             .Select(e => e.Metadata.Name)
             .ToList();
 
@@ -498,7 +512,8 @@ public class ComplexPropertyEntryTest
                 .Entry(entity)
                 .ComplexProperty(e => e.FieldCulture)
                 .ComplexProperty(e => e.License)
-                .Metadata.Name
+                .Metadata
+                .Name
         );
         Assert.Equal(
             "License",
@@ -506,7 +521,8 @@ public class ComplexPropertyEntryTest
                 .Entry(entity)
                 .ComplexProperty<FieldCulture>("FieldCulture")
                 .ComplexProperty(e => e.License)
-                .Metadata.Name
+                .Metadata
+                .Name
         );
         Assert.Equal(
             "License",
@@ -514,7 +530,8 @@ public class ComplexPropertyEntryTest
                 .Entry(entity)
                 .ComplexProperty("FieldCulture")
                 .ComplexProperty("License")
-                .Metadata.Name
+                .Metadata
+                .Name
         );
         Assert.Equal(
             "License",
@@ -522,7 +539,8 @@ public class ComplexPropertyEntryTest
                 .Entry((object)entity)
                 .ComplexProperty("FieldCulture")
                 .ComplexProperty("License")
-                .Metadata.Name
+                .Metadata
+                .Name
         );
         Assert.Equal(
             "License",
@@ -530,7 +548,8 @@ public class ComplexPropertyEntryTest
                 .Entry((object)entity)
                 .ComplexProperty("FieldCulture")
                 .ComplexProperty("License")
-                .Metadata.Name
+                .Metadata
+                .Name
         );
     }
 
@@ -546,7 +565,8 @@ public class ComplexPropertyEntryTest
                 .Entry(entity)
                 .ComplexProperty(e => e.FieldCulture)
                 .Property(e => e.Rating)
-                .Metadata.Name
+                .Metadata
+                .Name
         );
         Assert.Equal(
             "Rating",
@@ -554,7 +574,8 @@ public class ComplexPropertyEntryTest
                 .Entry(entity)
                 .ComplexProperty<FieldCulture>("FieldCulture")
                 .Property(e => e.Rating)
-                .Metadata.Name
+                .Metadata
+                .Name
         );
         Assert.Equal(
             "Rating",
@@ -566,7 +587,8 @@ public class ComplexPropertyEntryTest
                 .Entry((object)entity)
                 .ComplexProperty("FieldCulture")
                 .Property("Rating")
-                .Metadata.Name
+                .Metadata
+                .Name
         );
         Assert.Equal(
             "Rating",
@@ -574,7 +596,8 @@ public class ComplexPropertyEntryTest
                 .Entry((object)entity)
                 .ComplexProperty("FieldCulture")
                 .Property("Rating")
-                .Metadata.Name
+                .Metadata
+                .Name
         );
 
         Assert.Equal(
@@ -584,7 +607,8 @@ public class ComplexPropertyEntryTest
                 .ComplexProperty(e => e.FieldCulture)
                 .ComplexProperty(e => e.License)
                 .Property(e => e.Charge)
-                .Metadata.Name
+                .Metadata
+                .Name
         );
         Assert.Equal(
             "Charge",
@@ -593,7 +617,8 @@ public class ComplexPropertyEntryTest
                 .ComplexProperty<FieldCulture>("FieldCulture")
                 .ComplexProperty(e => e.License)
                 .Property(e => e.Charge)
-                .Metadata.Name
+                .Metadata
+                .Name
         );
         Assert.Equal(
             "Charge",
@@ -602,7 +627,8 @@ public class ComplexPropertyEntryTest
                 .ComplexProperty("FieldCulture")
                 .ComplexProperty("License")
                 .Property("Charge")
-                .Metadata.Name
+                .Metadata
+                .Name
         );
         Assert.Equal(
             "Charge",
@@ -611,7 +637,8 @@ public class ComplexPropertyEntryTest
                 .ComplexProperty("FieldCulture")
                 .ComplexProperty("License")
                 .Property("Charge")
-                .Metadata.Name
+                .Metadata
+                .Name
         );
         Assert.Equal(
             "Charge",
@@ -620,7 +647,8 @@ public class ComplexPropertyEntryTest
                 .ComplexProperty("FieldCulture")
                 .ComplexProperty("License")
                 .Property("Charge")
-                .Metadata.Name
+                .Metadata
+                .Name
         );
     }
 
@@ -674,8 +702,8 @@ public class ComplexPropertyEntryTest
         using var context = new YogurtContext();
         var complexEntry = context.Attach(CreateYogurt()).ComplexProperty(e => e.FieldCulture);
 
-        var modified = complexEntry
-            .Properties.Where(e => e.IsModified)
+        var modified = complexEntry.Properties
+            .Where(e => e.IsModified)
             .Select(e => e.Metadata.Name)
             .ToList();
 
@@ -684,8 +712,8 @@ public class ComplexPropertyEntryTest
         complexEntry.Property(e => e.Species).CurrentValue = "S";
         complexEntry.Property(e => e.Subspecies).CurrentValue = "SS";
 
-        modified = complexEntry
-            .Properties.Where(e => e.IsModified)
+        modified = complexEntry.Properties
+            .Where(e => e.IsModified)
             .Select(e => e.Metadata.Name)
             .ToList();
 

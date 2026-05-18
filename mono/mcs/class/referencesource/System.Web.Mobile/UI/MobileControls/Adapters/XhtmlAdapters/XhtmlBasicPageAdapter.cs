@@ -223,10 +223,8 @@ namespace System.Web.UI.MobileControls.Adapters.XhtmlAdapters
                     collection.Add(postEventArgumentID, queryString.Get(i));
                 }
                 else if (
-                    Constants.UniqueFilePathSuffixVariable.StartsWith(
-                        name,
-                        StringComparison.Ordinal
-                    )
+                    Constants.UniqueFilePathSuffixVariable
+                        .StartsWith(name, StringComparison.Ordinal)
                 )
                 {
                     // At this point we know that the rest of them is
@@ -488,13 +486,14 @@ namespace System.Web.UI.MobileControls.Adapters.XhtmlAdapters
                 )
                 {
                     // Recall that Page.Cache has application scope
-                    Page.Cache.Insert(
-                        writer.CacheKey,
-                        writer.GetStyles(),
-                        null,
-                        DateTime.MaxValue,
-                        _cacheExpirationTime
-                    );
+                    Page.Cache
+                        .Insert(
+                            writer.CacheKey,
+                            writer.GetStyles(),
+                            null,
+                            DateTime.MaxValue,
+                            _cacheExpirationTime
+                        );
                 }
                 else if (
                     CssLocation == StyleSheetLocation.SessionState

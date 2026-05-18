@@ -331,8 +331,7 @@ namespace Microsoft.Extensions.Hosting
                     string? previousApplicationName = config[HostDefaults.ApplicationKey];
                     string? previousEnvironment = config[HostDefaults.EnvironmentKey];
                     string? previousContentRootConfig = config[HostDefaults.ContentRootKey];
-                    string previousContentRootPath = _hostApplicationBuilder
-                        ._hostBuilderContext
+                    string previousContentRootPath = _hostApplicationBuilder._hostBuilderContext
                         .HostingEnvironment
                         .ContentRootPath;
 

@@ -356,10 +356,8 @@ namespace UnivConstCalls
         [TestMethod]
         public static void TestRefTypeCallsOnNonGenClass()
         {
-            var instantiatedType = TypeOf.UCC_UCGReferenceConstrainedCall.MakeGenericType(
-                TypeOf.UCC_ReferenceConstrainedCallType,
-                TypeOf.Int16
-            );
+            var instantiatedType = TypeOf.UCC_UCGReferenceConstrainedCall
+                .MakeGenericType(TypeOf.UCC_ReferenceConstrainedCallType, TypeOf.Int16);
             var o = (TestReferenceConstrainedCallBase)Activator.CreateInstance(instantiatedType);
 
             ReferenceConstrainedCallType rcct = new ReferenceConstrainedCallType();
@@ -382,11 +380,12 @@ namespace UnivConstCalls
         [TestMethod]
         public static void TestUSCCallsOnNonGenStruct()
         {
-            var t = TypeOf.UCC_UCGConstrainedCall.MakeGenericType(
-                TypeOf.UCC_NonGenericStructThatImplementsInterface,
-                TypeOf.Int16,
-                TypeOf.String
-            );
+            var t = TypeOf.UCC_UCGConstrainedCall
+                .MakeGenericType(
+                    TypeOf.UCC_NonGenericStructThatImplementsInterface,
+                    TypeOf.Int16,
+                    TypeOf.String
+                );
             var o = (TestConstrainedCallBase)Activator.CreateInstance(t);
 
             {
@@ -404,11 +403,12 @@ namespace UnivConstCalls
                 Assert.AreEqual(true, o.MakeEqualsCall(testStruct));
             }
 
-            t = TypeOf.UCC_UCGConstrainedCall.MakeGenericType(
-                TypeOf.UCC_NonGenericStructThatImplementsInterfaceAndOverridesObjectFuncs,
-                TypeOf.Int16,
-                TypeOf.String
-            );
+            t = TypeOf.UCC_UCGConstrainedCall
+                .MakeGenericType(
+                    TypeOf.UCC_NonGenericStructThatImplementsInterfaceAndOverridesObjectFuncs,
+                    TypeOf.Int16,
+                    TypeOf.String
+                );
             o = (TestConstrainedCallBase)Activator.CreateInstance(t);
 
             NonGenericStructThatImplementsInterfaceAndOverridesObjectFuncs testStruct2 =
@@ -442,11 +442,12 @@ namespace UnivConstCalls
         {
             // Use an explicit typeof here for GenericStructThatImplementsInterface<string> so that
             // that case uses the normal shared generic path, and not anything else.
-            var t = TypeOf.UCC_UCGConstrainedCall.MakeGenericType(
-                typeof(GenericStructThatImplementsInterface<string>),
-                TypeOf.Int16,
-                TypeOf.String
-            );
+            var t = TypeOf.UCC_UCGConstrainedCall
+                .MakeGenericType(
+                    typeof(GenericStructThatImplementsInterface<string>),
+                    TypeOf.Int16,
+                    TypeOf.String
+                );
             var o = (TestConstrainedCallBase)Activator.CreateInstance(t);
 
             {
@@ -480,14 +481,11 @@ namespace UnivConstCalls
         [TestMethod]
         public static void TestUSCCallsOnUSCGenStruct()
         {
-            var tUniversalGenericInnerStruct =
-                TypeOf.UCC_GenericStructThatImplementsInterface.MakeGenericType(TypeOf.Int16);
+            var tUniversalGenericInnerStruct = TypeOf.UCC_GenericStructThatImplementsInterface
+                .MakeGenericType(TypeOf.Int16);
 
-            var t = TypeOf.UCC_UCGConstrainedCall.MakeGenericType(
-                tUniversalGenericInnerStruct,
-                TypeOf.Int16,
-                TypeOf.Int16
-            );
+            var t = TypeOf.UCC_UCGConstrainedCall
+                .MakeGenericType(tUniversalGenericInnerStruct, TypeOf.Int16, TypeOf.Int16);
             var o = (TestConstrainedCallBase)Activator.CreateInstance(t);
 
             {

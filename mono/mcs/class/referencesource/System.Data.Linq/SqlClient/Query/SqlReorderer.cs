@@ -231,12 +231,13 @@ namespace System.Data.Linq.SqlClient
                 {
                     select.Row.Columns.Remove(rowNumberChecker.RowNumberColumn);
                     this.PushDown(rowNumberChecker.RowNumberColumn);
-                    this.Orders.Add(
-                        new SqlOrderExpression(
-                            SqlOrderType.Ascending,
-                            new SqlColumnRef(rowNumberChecker.RowNumberColumn)
-                        )
-                    );
+                    this.Orders
+                        .Add(
+                            new SqlOrderExpression(
+                                SqlOrderType.Ascending,
+                                new SqlColumnRef(rowNumberChecker.RowNumberColumn)
+                            )
+                        );
                 }
                 if (
                     (this.topSelect || select.Top != null)
@@ -248,12 +249,13 @@ namespace System.Data.Linq.SqlClient
                     SqlDuplicator dup = new SqlDuplicator(true);
                     foreach (SqlOrderExpression sox in this.orders)
                     {
-                        select.OrderBy.Add(
-                            new SqlOrderExpression(
-                                sox.OrderType,
-                                (SqlExpression)dup.Duplicate(sox.Expression)
-                            )
-                        );
+                        select.OrderBy
+                            .Add(
+                                new SqlOrderExpression(
+                                    sox.OrderType,
+                                    (SqlExpression)dup.Duplicate(sox.Expression)
+                                )
+                            );
                     }
                 }
                 this.currentSelect = saveSelect;
@@ -338,12 +340,13 @@ namespace System.Data.Linq.SqlClient
 
                 foreach (SqlOrderExpression sox in orderBy)
                 {
-                    rowNumber.OrderBy.Add(
-                        new SqlOrderExpression(
-                            sox.OrderType,
-                            (SqlExpression)dup.Duplicate(sox.Expression)
-                        )
-                    );
+                    rowNumber.OrderBy
+                        .Add(
+                            new SqlOrderExpression(
+                                sox.OrderType,
+                                (SqlExpression)dup.Duplicate(sox.Expression)
+                            )
+                        );
                 }
 
                 return rowNumber;

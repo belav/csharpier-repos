@@ -35,9 +35,8 @@ namespace System.ServiceModel.Security
         {
             if (valueTypeDictionaryString == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                    "valueTypeDictionaryString"
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperArgumentNull("valueTypeDictionaryString");
             }
             if (negotiationData == null)
             {
@@ -52,11 +51,12 @@ namespace System.ServiceModel.Security
         {
             if (this.valueTypeUri != valueTypeUriDictionaryString.Value)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new SecurityNegotiationException(
-                        SR.GetString(SR.IncorrectBinaryNegotiationValueType, this.valueTypeUri)
-                    )
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        new SecurityNegotiationException(
+                            SR.GetString(SR.IncorrectBinaryNegotiationValueType, this.valueTypeUri)
+                        )
+                    );
             }
             this.valueTypeUriDictionaryString = valueTypeUriDictionaryString;
         }

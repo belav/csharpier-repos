@@ -10138,9 +10138,8 @@ static class Program
                 new[] { source, s_collectionExtensions },
                 symbolValidator: module =>
                 {
-                    var synthesizedType = module.GlobalNamespace.GetTypeMember(
-                        "<>z__ReadOnlyArray"
-                    );
+                    var synthesizedType = module.GlobalNamespace
+                        .GetTypeMember("<>z__ReadOnlyArray");
                     Assert.Equal("<>z__ReadOnlyArray<T>", synthesizedType.ToTestDisplayString());
                     Assert.Equal("<>z__ReadOnlyArray`1", synthesizedType.MetadataName);
                 },
@@ -11133,14 +11132,13 @@ static class Program
             var sourceType = ((CSharpCompilation)verifier.Compilation).GetMember<NamedTypeSymbol>(
                 "ReadOnlyArray"
             );
-            verifier.TestData.TryGetMethodData(
-                "<>z__ReadOnlyArray<T>..ctor(T[])",
-                out var arrayMemberData
-            );
-            verifier.TestData.TryGetMethodData(
-                "<>z__ReadOnlyList<T>..ctor(System.Collections.Generic.List<T>)",
-                out var listMemberData
-            );
+            verifier.TestData
+                .TryGetMethodData("<>z__ReadOnlyArray<T>..ctor(T[])", out var arrayMemberData);
+            verifier.TestData
+                .TryGetMethodData(
+                    "<>z__ReadOnlyList<T>..ctor(System.Collections.Generic.List<T>)",
+                    out var listMemberData
+                );
 
             compareTypes(sourceType, ((MethodSymbol)arrayMemberData.Method).ContainingType);
             compareTypes(sourceType, ((MethodSymbol)listMemberData.Method).ContainingType);
@@ -13217,8 +13215,8 @@ partial class Program
                 comp,
                 symbolValidator: module =>
                 {
-                    var type = module
-                        .GlobalNamespace.GetTypeMembers("<>y__InlineArray3")
+                    var type = module.GlobalNamespace
+                        .GetTypeMembers("<>y__InlineArray3")
                         .SingleOrDefault();
                     if (targetFramework == TargetFramework.Net80)
                     {
@@ -13357,8 +13355,8 @@ partial class Program
                 comp,
                 symbolValidator: module =>
                 {
-                    var type = module
-                        .GlobalNamespace.GetTypeMembers("<>y__InlineArray3")
+                    var type = module.GlobalNamespace
+                        .GetTypeMembers("<>y__InlineArray3")
                         .SingleOrDefault();
                     Assert.Null(type);
                 },
@@ -13514,8 +13512,8 @@ partial class Program
 
             static ImmutableArray<string> getInlineArrayTypeNames(ModuleSymbol module)
             {
-                return module
-                    .GlobalNamespace.GetTypeMembers()
+                return module.GlobalNamespace
+                    .GetTypeMembers()
                     .WhereAsArray(t => t.Name.StartsWith("<>y__InlineArray"))
                     .SelectAsArray(t => t.Name);
             }
@@ -20331,9 +20329,8 @@ partial class Program
                 {
                     if (targetFramework == TargetFramework.Net80)
                     {
-                        var synthesizedType = module.GlobalNamespace.GetTypeMember(
-                            "<>y__InlineArray1"
-                        );
+                        var synthesizedType = module.GlobalNamespace
+                            .GetTypeMember("<>y__InlineArray1");
                         Assert.Equal("<>y__InlineArray1<T>", synthesizedType.ToTestDisplayString());
                         Assert.Equal("<>y__InlineArray1`1", synthesizedType.MetadataName);
                     }
@@ -25580,9 +25577,8 @@ partial class Program
             CreateCompilation(
                     source,
                     targetFramework: TargetFramework.Net70,
-                    options: TestOptions.ReleaseDll.WithSpecificDiagnosticOptions(
-                        WithSpanAllocWarning
-                    )
+                    options: TestOptions.ReleaseDll
+                        .WithSpecificDiagnosticOptions(WithSpanAllocWarning)
                 )
                 .VerifyEmitDiagnostics(
                     // (1,2): error CS0181: Attribute constructor parameter 's' has type 'Span<int>', which is not a valid attribute parameter type
@@ -28113,9 +28109,8 @@ partial class Program
             CreateCompilation(
                     src,
                     targetFramework: TargetFramework.Net70,
-                    options: TestOptions.ReleaseExe.WithSpecificDiagnosticOptions(
-                        WithSpanAllocWarning
-                    )
+                    options: TestOptions.ReleaseExe
+                        .WithSpecificDiagnosticOptions(WithSpanAllocWarning)
                 )
                 .VerifyEmitDiagnostics(
                     // (3,7): warning CS9208: Collection expression of type 'ReadOnlySpan<string?>' may incur unexpected heap allocations. Consider explicitly creating an array, then converting to 'ReadOnlySpan<string?>' to make the allocation explicit.
@@ -28495,7 +28490,8 @@ partial class Program
                 "void M<System.String>(System.String t, MyCollection<System.String> mc)",
                 model
                     .GetSymbolInfo(invocations[0])
-                    .Symbol.ToTestDisplayString(includeNonNullable: true)
+                    .Symbol
+                    .ToTestDisplayString(includeNonNullable: true)
             );
 
             Assert.Equal("M((string?)null, [null])", invocations[1].ToString());
@@ -28503,7 +28499,8 @@ partial class Program
                 "void M<System.String?>(System.String? t, MyCollection<System.String?> mc)",
                 model
                     .GetSymbolInfo(invocations[1])
-                    .Symbol.ToTestDisplayString(includeNonNullable: true)
+                    .Symbol
+                    .ToTestDisplayString(includeNonNullable: true)
             );
         }
 
@@ -28559,7 +28556,8 @@ partial class Program
                 "void M<System.String!>(ref System.String! t, MyCollection<System.String!> mc)",
                 model
                     .GetSymbolInfo(invocations[0])
-                    .Symbol.ToTestDisplayString(includeNonNullable: true)
+                    .Symbol
+                    .ToTestDisplayString(includeNonNullable: true)
             );
 
             Assert.Equal("M(ref maybeNull, [null])", invocations[1].ToString());
@@ -28567,7 +28565,8 @@ partial class Program
                 "void M<System.String?>(ref System.String? t, MyCollection<System.String?> mc)",
                 model
                     .GetSymbolInfo(invocations[1])
-                    .Symbol.ToTestDisplayString(includeNonNullable: true)
+                    .Symbol
+                    .ToTestDisplayString(includeNonNullable: true)
             );
         }
 
@@ -28669,7 +28668,8 @@ partial class Program
                 "void M<System.String>(MyCollection<System.String> mc)",
                 model
                     .GetSymbolInfo(invocations[0])
-                    .Symbol.ToTestDisplayString(includeNonNullable: true)
+                    .Symbol
+                    .ToTestDisplayString(includeNonNullable: true)
             );
 
             Assert.Equal("""M(["hi"])""", invocations[1].ToString());
@@ -28677,7 +28677,8 @@ partial class Program
                 "void M<System.String>(MyCollection<System.String> mc)",
                 model
                     .GetSymbolInfo(invocations[1])
-                    .Symbol.ToTestDisplayString(includeNonNullable: true)
+                    .Symbol
+                    .ToTestDisplayString(includeNonNullable: true)
             );
 
             Assert.Equal("""M(["hi", null])""", invocations[2].ToString());
@@ -28685,7 +28686,8 @@ partial class Program
                 "void M<System.String>(MyCollection<System.String> mc)",
                 model
                     .GetSymbolInfo(invocations[2])
-                    .Symbol.ToTestDisplayString(includeNonNullable: true)
+                    .Symbol
+                    .ToTestDisplayString(includeNonNullable: true)
             );
         }
 

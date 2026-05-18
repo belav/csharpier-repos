@@ -43,8 +43,7 @@ namespace System.Net
                     + "::ComputeLeftToWrite() on entry m_LeftToWrite:"
                     + m_LeftToWrite
             );
-            UnsafeNclNativeMethods.HttpApi.HTTP_FLAGS flags = UnsafeNclNativeMethods
-                .HttpApi
+            UnsafeNclNativeMethods.HttpApi.HTTP_FLAGS flags = UnsafeNclNativeMethods.HttpApi
                 .HTTP_FLAGS
                 .NONE;
             if (!m_HttpContext.Response.ComputedHeaders)
@@ -227,8 +226,7 @@ namespace System.Net
                         }
                         UnsafeNclNativeMethods.HttpApi.HTTP_DATA_CHUNK dataChunk =
                             new UnsafeNclNativeMethods.HttpApi.HTTP_DATA_CHUNK();
-                        dataChunk.DataChunkType = UnsafeNclNativeMethods
-                            .HttpApi
+                        dataChunk.DataChunkType = UnsafeNclNativeMethods.HttpApi
                             .HTTP_DATA_CHUNK_TYPE
                             .HttpDataChunkFromMemory;
                         dataChunk.pBuffer = (byte*)(pBuffer + offset);
@@ -237,18 +235,13 @@ namespace System.Net
                         flags |=
                             m_LeftToWrite == size
                                 ? UnsafeNclNativeMethods.HttpApi.HTTP_FLAGS.NONE
-                                : UnsafeNclNativeMethods
-                                    .HttpApi
+                                : UnsafeNclNativeMethods.HttpApi
                                     .HTTP_FLAGS
                                     .HTTP_SEND_RESPONSE_FLAG_MORE_DATA;
                         if (!sentHeaders)
                         {
-                            statusCode = m_HttpContext.Response.SendHeaders(
-                                &dataChunk,
-                                null,
-                                flags,
-                                false
-                            );
+                            statusCode = m_HttpContext.Response
+                                .SendHeaders(&dataChunk, null, flags, false);
                         }
                         else
                         {
@@ -258,18 +251,19 @@ namespace System.Net
                                     + "::Write() calling UnsafeNclNativeMethods.HttpApi.HttpSendResponseEntityBody"
                             );
 
-                            statusCode = UnsafeNclNativeMethods.HttpApi.HttpSendResponseEntityBody(
-                                m_HttpContext.RequestQueueHandle,
-                                m_HttpContext.RequestId,
-                                (uint)flags,
-                                1,
-                                &dataChunk,
-                                null,
-                                SafeLocalFree.Zero,
-                                0,
-                                null,
-                                null
-                            );
+                            statusCode = UnsafeNclNativeMethods.HttpApi
+                                .HttpSendResponseEntityBody(
+                                    m_HttpContext.RequestQueueHandle,
+                                    m_HttpContext.RequestId,
+                                    (uint)flags,
+                                    1,
+                                    &dataChunk,
+                                    null,
+                                    SafeLocalFree.Zero,
+                                    0,
+                                    null,
+                                    null
+                                );
 
                             GlobalLog.Print(
                                 "HttpResponseStream#"
@@ -394,12 +388,8 @@ namespace System.Net
             {
                 if (!sentHeaders)
                 {
-                    statusCode = m_HttpContext.Response.SendHeaders(
-                        null,
-                        asyncResult,
-                        flags,
-                        false
-                    );
+                    statusCode = m_HttpContext.Response
+                        .SendHeaders(null, asyncResult, flags, false);
                 }
                 else
                 {
@@ -410,18 +400,19 @@ namespace System.Net
                     );
 
                     m_HttpContext.EnsureBoundHandle();
-                    statusCode = UnsafeNclNativeMethods.HttpApi.HttpSendResponseEntityBody(
-                        m_HttpContext.RequestQueueHandle,
-                        m_HttpContext.RequestId,
-                        (uint)flags,
-                        asyncResult.dataChunkCount,
-                        asyncResult.pDataChunks,
-                        &bytesSent,
-                        SafeLocalFree.Zero,
-                        0,
-                        asyncResult.m_pOverlapped,
-                        null
-                    );
+                    statusCode = UnsafeNclNativeMethods.HttpApi
+                        .HttpSendResponseEntityBody(
+                            m_HttpContext.RequestQueueHandle,
+                            m_HttpContext.RequestId,
+                            (uint)flags,
+                            asyncResult.dataChunkCount,
+                            asyncResult.pDataChunks,
+                            &bytesSent,
+                            SafeLocalFree.Zero,
+                            0,
+                            asyncResult.m_pOverlapped,
+                            null
+                        );
 
                     GlobalLog.Print(
                         "HttpResponseStream#"
@@ -639,8 +630,7 @@ namespace System.Net
                     {
                         if (m_HttpContext.Response.BoundaryType == BoundaryType.None)
                         {
-                            flags |= UnsafeNclNativeMethods
-                                .HttpApi
+                            flags |= UnsafeNclNativeMethods.HttpApi
                                 .HTTP_FLAGS
                                 .HTTP_SEND_RESPONSE_FLAG_DISCONNECT;
                         }
@@ -651,8 +641,7 @@ namespace System.Net
                             {
                                 UnsafeNclNativeMethods.HttpApi.HTTP_DATA_CHUNK dataChunk =
                                     new UnsafeNclNativeMethods.HttpApi.HTTP_DATA_CHUNK();
-                                dataChunk.DataChunkType = UnsafeNclNativeMethods
-                                    .HttpApi
+                                dataChunk.DataChunkType = UnsafeNclNativeMethods.HttpApi
                                     .HTTP_DATA_CHUNK_TYPE
                                     .HttpDataChunkFromMemory;
                                 dataChunk.pBuffer = (byte*)pBuffer;
@@ -661,12 +650,8 @@ namespace System.Net
                             }
                             if (!sentHeaders)
                             {
-                                statusCode = m_HttpContext.Response.SendHeaders(
-                                    pDataChunk,
-                                    null,
-                                    flags,
-                                    false
-                                );
+                                statusCode = m_HttpContext.Response
+                                    .SendHeaders(pDataChunk, null, flags, false);
                             }
                             else
                             {
@@ -676,8 +661,8 @@ namespace System.Net
                                         + "::Close() calling UnsafeNclNativeMethods.HttpApi.HttpSendResponseEntityBody"
                                 );
 
-                                statusCode =
-                                    UnsafeNclNativeMethods.HttpApi.HttpSendResponseEntityBody(
+                                statusCode = UnsafeNclNativeMethods.HttpApi
+                                    .HttpSendResponseEntityBody(
                                         m_HttpContext.RequestQueueHandle,
                                         m_HttpContext.RequestId,
                                         (uint)flags,
@@ -712,12 +697,8 @@ namespace System.Net
                     {
                         if (!sentHeaders)
                         {
-                            statusCode = m_HttpContext.Response.SendHeaders(
-                                null,
-                                null,
-                                flags,
-                                false
-                            );
+                            statusCode = m_HttpContext.Response
+                                .SendHeaders(null, null, flags, false);
                         }
                     }
                     if (
@@ -859,8 +840,7 @@ namespace System.Net
                     chunkHeaderBuffer = ConnectStream.GetChunkHeader(size, out chunkHeaderOffset);
 
                     m_DataChunks[0] = new UnsafeNclNativeMethods.HttpApi.HTTP_DATA_CHUNK();
-                    m_DataChunks[0].DataChunkType = UnsafeNclNativeMethods
-                        .HttpApi
+                    m_DataChunks[0].DataChunkType = UnsafeNclNativeMethods.HttpApi
                         .HTTP_DATA_CHUNK_TYPE
                         .HttpDataChunkFromMemory;
                     m_DataChunks[0].BufferLength = (uint)(
@@ -870,8 +850,7 @@ namespace System.Net
                     objectsToPin[0] = chunkHeaderBuffer;
 
                     m_DataChunks[1] = new UnsafeNclNativeMethods.HttpApi.HTTP_DATA_CHUNK();
-                    m_DataChunks[1].DataChunkType = UnsafeNclNativeMethods
-                        .HttpApi
+                    m_DataChunks[1].DataChunkType = UnsafeNclNativeMethods.HttpApi
                         .HTTP_DATA_CHUNK_TYPE
                         .HttpDataChunkFromMemory;
                     m_DataChunks[1].BufferLength = (uint)size;
@@ -879,8 +858,7 @@ namespace System.Net
                     objectsToPin[1] = buffer;
 
                     m_DataChunks[2] = new UnsafeNclNativeMethods.HttpApi.HTTP_DATA_CHUNK();
-                    m_DataChunks[2].DataChunkType = UnsafeNclNativeMethods
-                        .HttpApi
+                    m_DataChunks[2].DataChunkType = UnsafeNclNativeMethods.HttpApi
                         .HTTP_DATA_CHUNK_TYPE
                         .HttpDataChunkFromMemory;
                     m_DataChunks[2].BufferLength = (uint)NclConstants.CRLF.Length;
@@ -890,8 +868,7 @@ namespace System.Net
                 else
                 {
                     m_DataChunks[0] = new UnsafeNclNativeMethods.HttpApi.HTTP_DATA_CHUNK();
-                    m_DataChunks[0].DataChunkType = UnsafeNclNativeMethods
-                        .HttpApi
+                    m_DataChunks[0].DataChunkType = UnsafeNclNativeMethods.HttpApi
                         .HTTP_DATA_CHUNK_TYPE
                         .HttpDataChunkFromMemory;
                     m_DataChunks[0].BufferLength = (uint)size;

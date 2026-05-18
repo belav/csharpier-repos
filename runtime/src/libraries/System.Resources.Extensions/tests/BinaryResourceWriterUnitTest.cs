@@ -664,8 +664,8 @@ namespace System.Resources.Extensions.Tests
         {
             ResourceManager resourceManager = new ResourceManager(typeof(TestData));
 
-            IEnumerable<KeyValuePair<string, object>> objectPairs = TestData
-                .Primitive.Concat(TestData.PrimitiveAsString)
+            IEnumerable<KeyValuePair<string, object>> objectPairs = TestData.Primitive
+                .Concat(TestData.PrimitiveAsString)
                 .Concat(TestData.BinaryFormattedWithoutDrawing)
                 .Concat(TestData.BinaryFormattedWithoutDrawingNoType)
                 .Concat(TestData.ByteArrayConverterWithoutDrawing)
@@ -720,9 +720,10 @@ namespace System.Resources.Extensions.Tests
             // this is meant to catch a case where our embedded test resources are out of date with respect to the current writer.
             // that could be intentional, or accidental.  Regardless we want to know.
             using (
-                Stream resourcesStream = typeof(TestData).Assembly.GetManifestResourceStream(
-                    "System.Resources.Extensions.Tests.TestData.resources"
-                )
+                Stream resourcesStream = typeof(TestData).Assembly
+                    .GetManifestResourceStream(
+                        "System.Resources.Extensions.Tests.TestData.resources"
+                    )
             )
             using (
                 MemoryStream actualData = new MemoryStream(),
@@ -767,10 +768,8 @@ namespace System.Resources.Extensions.Tests
             ResourceManager manager = new(
                 typeof(TestData).FullName,
                 typeof(TestData).Assembly,
-                typeof(DeserializingResourceReader).Assembly.GetType(
-                    "System.Resources.Extensions.RuntimeResourceSet",
-                    throwOnError: true
-                )
+                typeof(DeserializingResourceReader).Assembly
+                    .GetType("System.Resources.Extensions.RuntimeResourceSet", throwOnError: true)
             );
 
             const int Threads = 10;
@@ -778,12 +777,13 @@ namespace System.Resources.Extensions.Tests
             Task[] tasks = Enumerable
                 .Range(0, Threads)
                 .Select(_ =>
-                    Task.Factory.StartNew(
-                        WaitForBarrierThenEnumerateResources,
-                        CancellationToken.None,
-                        TaskCreationOptions.LongRunning,
-                        TaskScheduler.Default
-                    )
+                    Task.Factory
+                        .StartNew(
+                            WaitForBarrierThenEnumerateResources,
+                            CancellationToken.None,
+                            TaskCreationOptions.LongRunning,
+                            TaskScheduler.Default
+                        )
                 )
                 .ToArray();
 

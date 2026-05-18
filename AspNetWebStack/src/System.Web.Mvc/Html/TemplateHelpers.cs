@@ -134,10 +134,8 @@ namespace System.Web.Mvc.Html
                 }
                 else
                 {
-                    ViewEngineResult viewEngineResult = ViewEngines.Engines.FindPartialView(
-                        html.ViewContext,
-                        fullViewName
-                    );
+                    ViewEngineResult viewEngineResult = ViewEngines.Engines
+                        .FindPartialView(html.ViewContext, fullViewName);
                     if (viewEngineResult.View != null)
                     {
                         actionCache[fullViewName] = new ActionCacheViewItem
@@ -147,16 +145,17 @@ namespace System.Web.Mvc.Html
 
                         using (StringWriter writer = new StringWriter(CultureInfo.InvariantCulture))
                         {
-                            viewEngineResult.View.Render(
-                                new ViewContext(
-                                    html.ViewContext,
-                                    viewEngineResult.View,
-                                    viewData,
-                                    html.ViewContext.TempData,
+                            viewEngineResult.View
+                                .Render(
+                                    new ViewContext(
+                                        html.ViewContext,
+                                        viewEngineResult.View,
+                                        viewData,
+                                        html.ViewContext.TempData,
+                                        writer
+                                    ),
                                     writer
-                                ),
-                                writer
-                            );
+                                );
                             return writer.ToString();
                         }
                     }
@@ -427,9 +426,11 @@ namespace System.Web.Mvc.Html
             // don't check to make sure that the object hasn't already been displayed
             object visitedObjectsKey = metadata.Model ?? metadata.RealModelType;
             if (
-                html.ViewDataContainer.ViewData.TemplateInfo.VisitedObjects.Contains(
-                    visitedObjectsKey
-                )
+                html.ViewDataContainer
+                    .ViewData
+                    .TemplateInfo
+                    .VisitedObjects
+                    .Contains(visitedObjectsKey)
             )
             {
                 // DDB #224750
@@ -443,9 +444,10 @@ namespace System.Web.Mvc.Html
                 TemplateInfo = new TemplateInfo
                 {
                     FormattedModelValue = formattedModelValue,
-                    HtmlFieldPrefix = html.ViewContext.ViewData.TemplateInfo.GetFullHtmlFieldName(
-                        htmlFieldName
-                    ),
+                    HtmlFieldPrefix = html.ViewContext
+                        .ViewData
+                        .TemplateInfo
+                        .GetFullHtmlFieldName(htmlFieldName),
                     VisitedObjects = new HashSet<object>(
                         html.ViewContext.ViewData.TemplateInfo.VisitedObjects
                     ), // DDB #224750
@@ -515,22 +517,21 @@ namespace System.Web.Mvc.Html
 
             public override string Execute(HtmlHelper html, ViewDataDictionary viewData)
             {
-                ViewEngineResult viewEngineResult = ViewEngines.Engines.FindPartialView(
-                    html.ViewContext,
-                    ViewName
-                );
+                ViewEngineResult viewEngineResult = ViewEngines.Engines
+                    .FindPartialView(html.ViewContext, ViewName);
                 using (StringWriter writer = new StringWriter(CultureInfo.InvariantCulture))
                 {
-                    viewEngineResult.View.Render(
-                        new ViewContext(
-                            html.ViewContext,
-                            viewEngineResult.View,
-                            viewData,
-                            html.ViewContext.TempData,
+                    viewEngineResult.View
+                        .Render(
+                            new ViewContext(
+                                html.ViewContext,
+                                viewEngineResult.View,
+                                viewData,
+                                html.ViewContext.TempData,
+                                writer
+                            ),
                             writer
-                        ),
-                        writer
-                    );
+                        );
                     return writer.ToString();
                 }
             }

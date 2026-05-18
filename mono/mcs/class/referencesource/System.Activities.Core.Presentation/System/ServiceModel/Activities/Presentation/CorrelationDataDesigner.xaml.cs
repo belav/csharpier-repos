@@ -115,18 +115,14 @@ namespace System.ServiceModel.Activities.Presentation
         void OnAddNewDataExecuted(object sender, ExecutedRoutedEventArgs e)
         {
             //generate unique dictionary key
-            string keyName = this.CorrelationInitializeData.GetUniqueName<CorrelationDataWrapper>(
-                KeyPrefix,
-                item => item.Key
-            );
+            string keyName = this.CorrelationInitializeData
+                .GetUniqueName<CorrelationDataWrapper>(KeyPrefix, item => item.Key);
             //create new key value pair and add it to the dictionary
             CorrelationDataWrapper wrapper = new CorrelationDataWrapper(keyName, null);
             this.CorrelationInitializeData.Add(wrapper);
             //begin row edit after adding new entry
-            this.correlationDataDGHelper.BeginRowEdit(
-                wrapper,
-                this.correlationInitializers.Columns[1]
-            );
+            this.correlationDataDGHelper
+                .BeginRowEdit(wrapper, this.correlationInitializers.Columns[1]);
         }
 
         static void OnActivityChanged(DependencyObject sender, DependencyPropertyChangedEventArgs e)
@@ -156,12 +152,12 @@ namespace System.ServiceModel.Activities.Presentation
             )
             {
                 using (
-                    ModelEditingScope scope = this.Activity.BeginEdit(
-                        (string)this.FindResource("editCorrelationDataDescription")
-                    )
+                    ModelEditingScope scope = this.Activity
+                        .BeginEdit((string)this.FindResource("editCorrelationDataDescription"))
                 )
                 {
-                    this.Activity.Properties[InitializeCorrelationDesigner.CorrelationPropertyName]
+                    this.Activity
+                        .Properties[InitializeCorrelationDesigner.CorrelationPropertyName]
                         .SetValue(this.CorrelationHandle);
                     ModelItemCollection correlationDataCollection = this.Activity
                         .Properties[InitializeCorrelationDesigner.CorrelationDataPropertyName]

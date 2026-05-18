@@ -61,9 +61,8 @@ namespace System.ServiceModel.Description
         )
         {
             if (messageContract == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentNullException("messageContract")
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(new ArgumentNullException("messageContract"));
 
             if (defaultNamespace == null)
                 defaultNamespace = NamingHelper.DefaultNamespace;
@@ -81,17 +80,17 @@ namespace System.ServiceModel.Description
         )
         {
             if (messageContract == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentNullException("messageContract")
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(new ArgumentNullException("messageContract"));
 
             if (!messageContract.IsDefined(typeof(MessageContractAttribute), false))
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentException(
-                        SR.GetString(SR.SFxMessageContractAttributeRequired, messageContract),
-                        "messageContract"
-                    )
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        new ArgumentException(
+                            SR.GetString(SR.SFxMessageContractAttributeRequired, messageContract),
+                            "messageContract"
+                        )
+                    );
 
             if (defaultNamespace == null)
                 defaultNamespace = NamingHelper.DefaultNamespace;
@@ -166,9 +165,8 @@ namespace System.ServiceModel.Description
         public override Message ToMessage(Object typedMessage, MessageVersion version)
         {
             if (typedMessage == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentNullException("typedMessage")
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(new ArgumentNullException("typedMessage"));
 
             return formatter.SerializeRequest(version, new object[] { typedMessage });
         }
@@ -181,11 +179,12 @@ namespace System.ServiceModel.Description
                 && message.Headers.Action != null
                 && message.Headers.Action != this.Action
             )
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(
-                        SR.GetString(SR.SFxActionMismatch, this.Action, message.Headers.Action)
-                    )
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(SR.SFxActionMismatch, this.Action, message.Headers.Action)
+                        )
+                    );
 
             object[] result = new object[1];
             formatter.DeserializeRequest(message, result);

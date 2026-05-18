@@ -172,8 +172,8 @@ namespace Microsoft.VisualStudio.LanguageServices.FindUsages
             {
                 var documentSpan = definition.SourceSpans[0];
                 var (guid, projectName, _) = GetGuidAndProjectInfo(documentSpan.Document);
-                var sourceText = await documentSpan
-                    .Document.GetValueTextAsync(cancellationToken)
+                var sourceText = await documentSpan.Document
+                    .GetValueTextAsync(cancellationToken)
                     .ConfigureAwait(false);
 
                 var lineText = AbstractDocumentSpanEntry.GetLineContainingPosition(

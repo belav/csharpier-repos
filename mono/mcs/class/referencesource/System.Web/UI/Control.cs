@@ -338,13 +338,15 @@ namespace System.Web.UI
                             {
                                 EffectiveClientIDModeValue = RuntimeConfig
                                     .GetConfig(context)
-                                    .Pages.ClientIDMode;
+                                    .Pages
+                                    .ClientIDMode;
                             }
                             else
                             {
                                 EffectiveClientIDModeValue = RuntimeConfig
                                     .GetConfig()
-                                    .Pages.ClientIDMode;
+                                    .Pages
+                                    .ClientIDMode;
                             }
                         }
                     }
@@ -1531,8 +1533,7 @@ namespace System.Web.UI
                     HttpContext context = Context;
                     if (context != null)
                     {
-                        VirtualPath templateSourceVirtualDirectory = context
-                            .Request
+                        VirtualPath templateSourceVirtualDirectory = context.Request
                             .CurrentExecutionFilePathObject
                             .Parent;
                         if (templateSourceVirtualDirectory != null)
@@ -3042,13 +3043,14 @@ namespace System.Web.UI
             }
 
             // give it all to the profiler
-            Page.Trace.AddNewControl(
-                UniqueID,
-                parentId,
-                this.GetType().FullName,
-                viewstatesize,
-                controlstatesize
-            );
+            Page.Trace
+                .AddNewControl(
+                    UniqueID,
+                    parentId,
+                    this.GetType().FullName,
+                    viewstatesize,
+                    controlstatesize
+                );
 
             if (_controls != null)
             {
@@ -4180,10 +4182,8 @@ namespace System.Web.UI
                 EnsureOccasionalFields();
                 if (_occasionalFields.SpacerImageUrl == null)
                 {
-                    _occasionalFields.SpacerImageUrl = Page.ClientScript.GetWebResourceUrl(
-                        typeof(WebControl),
-                        "Spacer.gif"
-                    );
+                    _occasionalFields.SpacerImageUrl = Page.ClientScript
+                        .GetWebResourceUrl(typeof(WebControl), "Spacer.gif");
                 }
                 return _occasionalFields.SpacerImageUrl;
             }
@@ -4266,11 +4266,8 @@ namespace System.Web.UI
         [EditorBrowsable(EditorBrowsableState.Never)]
         public void SetTraceData(object tracedObject, object traceDataKey, object traceDataValue)
         {
-            RenderTraceListener.CurrentListeners.SetTraceData(
-                tracedObject,
-                traceDataKey,
-                traceDataValue
-            );
+            RenderTraceListener.CurrentListeners
+                .SetTraceData(tracedObject, traceDataKey, traceDataValue);
         }
 
         #region IControlDesignerAccessor implementation

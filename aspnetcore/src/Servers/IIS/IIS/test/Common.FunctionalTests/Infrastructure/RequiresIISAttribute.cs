@@ -101,8 +101,8 @@ public sealed class RequiresIISAttribute : Attribute, ITestCondition
             return;
         }
 
-        _isMetStatic = ancmConfig
-            .Root.Descendants("attribute")
+        _isMetStatic = ancmConfig.Root
+            .Descendants("attribute")
             .Any(n => "hostingModel".Equals(n.Attribute("name")?.Value, StringComparison.Ordinal));
 
         _skipReasonStatic = _isMetStatic
@@ -120,10 +120,8 @@ public sealed class RequiresIISAttribute : Attribute, ITestCondition
             }
         }
 
-        var iisRegistryKey = Registry.LocalMachine.OpenSubKey(
-            @"Software\Microsoft\InetStp",
-            writable: false
-        );
+        var iisRegistryKey = Registry.LocalMachine
+            .OpenSubKey(@"Software\Microsoft\InetStp", writable: false);
         if (iisRegistryKey == null)
         {
             _poolEnvironmentVariablesAvailable = false;

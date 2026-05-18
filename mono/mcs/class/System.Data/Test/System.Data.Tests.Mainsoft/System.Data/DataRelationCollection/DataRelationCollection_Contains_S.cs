@@ -90,11 +90,8 @@ namespace tests.system_data_dll.System_Data
         private void DataRelationCollection_Contains_S1()
         {
             DataSet ds = getDataSet();
-            ds.Relations.Add(
-                "rel1",
-                ds.Tables[0].Columns["ParentId"],
-                ds.Tables[1].Columns["ParentId"]
-            );
+            ds.Relations
+                .Add("rel1", ds.Tables[0].Columns["ParentId"], ds.Tables[1].Columns["ParentId"]);
 
             Compare(ds.Relations.Contains("rel1"), true);
             Compare(ds.Relations.Contains("RelL"), false);

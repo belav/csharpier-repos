@@ -249,13 +249,13 @@ namespace Microsoft.CodeAnalysis
                 writer.WriteObjectStart();
                 if ((options & DeterministicKeyOptions.IgnoreToolVersions) == 0)
                 {
-                    var compilerVersion = typeof(Compilation)
-                        .Assembly.GetCustomAttribute<AssemblyInformationalVersionAttribute>()
+                    var compilerVersion = typeof(Compilation).Assembly
+                        .GetCustomAttribute<AssemblyInformationalVersionAttribute>()
                         ?.InformationalVersion;
                     writer.Write("compilerVersion", compilerVersion);
 
-                    var runtimeVersion = typeof(object)
-                        .Assembly.GetCustomAttribute<AssemblyInformationalVersionAttribute>()
+                    var runtimeVersion = typeof(object).Assembly
+                        .GetCustomAttribute<AssemblyInformationalVersionAttribute>()
                         ?.InformationalVersion;
                     writer.Write("runtimeVersion", runtimeVersion);
 

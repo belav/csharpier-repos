@@ -152,11 +152,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
             bool isRefAssembly
         )
         {
-            return SourceModule.ContainingSourceAssembly.GetCustomAttributesToEmit(
-                this,
-                isRefAssembly,
-                emittingAssemblyAttributesInNetModule: OutputKind.IsNetModule()
-            );
+            return SourceModule.ContainingSourceAssembly
+                .GetCustomAttributesToEmit(
+                    this,
+                    isRefAssembly,
+                    emittingAssemblyAttributesInNetModule: OutputKind.IsNetModule()
+                );
         }
 
         public sealed override IEnumerable<Cci.SecurityAttribute> GetSourceAssemblySecurityAttributes()
@@ -688,8 +689,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
                 return SpecializedCollections.EmptyEnumerable<Cci.INamespaceTypeDefinition>();
             }
 
-            return Compilation
-                .AnonymousTypeManager.GetAllCreatedTemplates()
+            return Compilation.AnonymousTypeManager
+                .GetAllCreatedTemplates()
 #if DEBUG
                 .Select(type => type.GetCciAdapter())
 #endif
@@ -956,9 +957,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
                 if (builder is object)
                 {
                     orderedForwardedTypes = orderedForwardedTypes.OrderBy(t =>
-                        t.OriginalDefinition.ToDisplayString(
-                            SymbolDisplayFormat.QualifiedNameArityFormat
-                        )
+                        t.OriginalDefinition
+                            .ToDisplayString(SymbolDisplayFormat.QualifiedNameArityFormat)
                     );
                 }
 
@@ -2306,12 +2306,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
             Debug.Assert(methodSymbol.Name == methodName);
 
             // use add-then-get pattern to ensure the symbol exists, and then ensure we use the single "canonical" instance added by whichever thread won the race.
-            privateImplClass.PrivateImplementationDetails.TryAddSynthesizedMethod(
-                methodSymbol.GetCciAdapter()
-            );
+            privateImplClass.PrivateImplementationDetails
+                .TryAddSynthesizedMethod(methodSymbol.GetCciAdapter());
             return (MethodSymbol)
-                privateImplClass
-                    .PrivateImplementationDetails.GetMethod(methodName)!
+                privateImplClass.PrivateImplementationDetails
+                    .GetMethod(methodName)!
                     .GetInternalSymbol()!;
         }
 

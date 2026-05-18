@@ -5133,8 +5133,7 @@ class C
             Assert.True(success);
             Assert.NotNull(speculativeModel);
 
-            var newExpression = ((InvocationExpressionSyntax)modifiedNode.Expression)
-                .ArgumentList
+            var newExpression = ((InvocationExpressionSyntax)modifiedNode.Expression).ArgumentList
                 .Arguments[0]
                 .Expression;
             var symbolInfo = speculativeModel.GetSymbolInfo(newExpression);
@@ -5404,9 +5403,8 @@ class D
         [Fact]
         public void UseSiteWarning()
         {
-            var signedDll = TestOptions.ReleaseDll.WithCryptoPublicKey(
-                TestResources.TestKeys.PublicKey_ce65828c82a341f2
-            );
+            var signedDll = TestOptions.ReleaseDll
+                .WithCryptoPublicKey(TestResources.TestKeys.PublicKey_ce65828c82a341f2);
 
             var libBTemplate =
                 @"

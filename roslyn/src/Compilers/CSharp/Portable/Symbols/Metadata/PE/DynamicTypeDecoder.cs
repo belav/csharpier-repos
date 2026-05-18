@@ -78,10 +78,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
 
             ImmutableArray<bool> dynamicTransformFlags;
             if (
-                containingModule.Module.HasDynamicAttribute(
-                    targetSymbolToken,
-                    out dynamicTransformFlags
-                )
+                containingModule.Module
+                    .HasDynamicAttribute(targetSymbolToken, out dynamicTransformFlags)
             )
             {
                 return TransformTypeInternal(
@@ -313,8 +311,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
                     return namedType.ConstructIfGeneric(transformedTypeArguments);
                 }
 
-                return namedType
-                    .ConstructedFrom.Construct(transformedTypeArguments, unbound: false)
+                return namedType.ConstructedFrom
+                    .Construct(transformedTypeArguments, unbound: false)
                     .WithTupleDataFrom(namedType);
             }
             else
@@ -388,17 +386,19 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
                 : arrayType.IsSZArray
                     ? ArrayTypeSymbol.CreateSZArray(
                         _containingAssembly,
-                        arrayType.ElementTypeWithAnnotations.WithTypeAndModifiers(
-                            transformedElementType,
-                            arrayType.ElementTypeWithAnnotations.CustomModifiers
-                        )
+                        arrayType.ElementTypeWithAnnotations
+                            .WithTypeAndModifiers(
+                                transformedElementType,
+                                arrayType.ElementTypeWithAnnotations.CustomModifiers
+                            )
                     )
                 : ArrayTypeSymbol.CreateMDArray(
                     _containingAssembly,
-                    arrayType.ElementTypeWithAnnotations.WithTypeAndModifiers(
-                        transformedElementType,
-                        arrayType.ElementTypeWithAnnotations.CustomModifiers
-                    ),
+                    arrayType.ElementTypeWithAnnotations
+                        .WithTypeAndModifiers(
+                            transformedElementType,
+                            arrayType.ElementTypeWithAnnotations.CustomModifiers
+                        ),
                     arrayType.Rank,
                     arrayType.Sizes,
                     arrayType.LowerBounds
@@ -432,10 +432,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
             )
                 ? pointerType
                 : new PointerTypeSymbol(
-                    pointerType.PointedAtTypeWithAnnotations.WithTypeAndModifiers(
-                        transformedPointedAtType,
-                        pointerType.PointedAtTypeWithAnnotations.CustomModifiers
-                    )
+                    pointerType.PointedAtTypeWithAnnotations
+                        .WithTypeAndModifiers(
+                            transformedPointedAtType,
+                            pointerType.PointedAtTypeWithAnnotations.CustomModifiers
+                        )
                 );
         }
 

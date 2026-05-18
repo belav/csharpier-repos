@@ -269,14 +269,10 @@ namespace MonoTests.System.ServiceModel.Channels
             BindingParameterCollection parameters = new BindingParameterCollection();
             parameters.Add(cred);
             ChannelProtectionRequirements cp = new ChannelProtectionRequirements();
-            cp.IncomingSignatureParts.AddParts(
-                new MessagePartSpecification(true),
-                "http://tempuri.org/MyAction"
-            );
-            cp.IncomingEncryptionParts.AddParts(
-                new MessagePartSpecification(true),
-                "http://tempuri.org/MyAction"
-            );
+            cp.IncomingSignatureParts
+                .AddParts(new MessagePartSpecification(true), "http://tempuri.org/MyAction");
+            cp.IncomingEncryptionParts
+                .AddParts(new MessagePartSpecification(true), "http://tempuri.org/MyAction");
             parameters.Add(cp);
 
             return b.BuildChannelFactory<IRequestChannel>(parameters);

@@ -863,8 +863,7 @@ namespace System.Windows.Forms
         {
             if (!RenderClientAreas)
                 return base.DateTimePickerGetDropDownButtonArea(dateTimePicker);
-            VisualStyleElement element = VisualStyleElement
-                .DatePicker
+            VisualStyleElement element = VisualStyleElement.DatePicker
                 .ShowCalendarButtonRight
                 .Pressed;
             if (!VisualStyleRenderer.IsElementDefined(element))

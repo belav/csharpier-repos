@@ -72,11 +72,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
             CancellationToken cancellationToken
         )
         {
-            var tokens = state.Cache.GetConstructorInitializerTokens(
-                state.SyntaxFacts,
-                state.Root,
-                cancellationToken
-            );
+            var tokens = state.Cache
+                .GetConstructorInitializerTokens(state.SyntaxFacts, state.Root, cancellationToken);
             if (state.SemanticModel.Language == LanguageNames.VisualBasic)
             {
                 tokens = tokens

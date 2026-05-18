@@ -464,8 +464,7 @@ namespace System.Configuration
                     }
 
                     settingsProvider.Initialize(null, null);
-                    settingsProvider.ApplicationName = ConfigurationManagerInternalFactory
-                        .Instance
+                    settingsProvider.ApplicationName = ConfigurationManagerInternalFactory.Instance
                         .ExeProductName;
 
                     // See if we already have a provider of the same name in our collection. If so,
@@ -655,8 +654,7 @@ namespace System.Configuration
 
                     //Initialize the SettingsProvider
                     provider.Initialize(null, null);
-                    provider.ApplicationName = ConfigurationManagerInternalFactory
-                        .Instance
+                    provider.ApplicationName = ConfigurationManagerInternalFactory.Instance
                         .ExeProductName;
                     _init.Provider = provider;
                 }

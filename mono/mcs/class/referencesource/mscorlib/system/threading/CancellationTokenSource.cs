@@ -904,13 +904,13 @@ namespace System.Threading
                                     {
                                         if (m_executingCallback.TargetSyncContext != null)
                                         {
-                                            m_executingCallback.TargetSyncContext.Send(
-                                                CancellationCallbackCoreWork_OnSyncContext,
-                                                args
-                                            );
+                                            m_executingCallback.TargetSyncContext
+                                                .Send(
+                                                    CancellationCallbackCoreWork_OnSyncContext,
+                                                    args
+                                                );
                                             // CancellationCallbackCoreWork_OnSyncContext may have altered ThreadIDExecutingCallbacks, so reset it.
-                                            ThreadIDExecutingCallbacks = Thread
-                                                .CurrentThread
+                                            ThreadIDExecutingCallbacks = Thread.CurrentThread
                                                 .ManagedThreadId;
                                         }
                                         else
@@ -960,18 +960,15 @@ namespace System.Threading
         {
             // remove the intended callback..and ensure that it worked.
             // otherwise the callback has disappeared in the interim and we can immediately return.
-            CancellationCallbackInfo callback = args.m_currArrayFragment.SafeAtomicRemove(
-                args.m_currArrayIndex,
-                m_executingCallback
-            );
+            CancellationCallbackInfo callback = args.m_currArrayFragment
+                .SafeAtomicRemove(args.m_currArrayIndex, m_executingCallback);
             if (callback == m_executingCallback)
             {
                 if (callback.TargetExecutionContext != null)
                 {
                     // we are running via a custom sync context, so update the executing threadID
-                    callback.CancellationTokenSource.ThreadIDExecutingCallbacks = Thread
-                        .CurrentThread
-                        .ManagedThreadId;
+                    callback.CancellationTokenSource.ThreadIDExecutingCallbacks =
+                        Thread.CurrentThread.ManagedThreadId;
                 }
                 callback.ExecuteCallback();
             }

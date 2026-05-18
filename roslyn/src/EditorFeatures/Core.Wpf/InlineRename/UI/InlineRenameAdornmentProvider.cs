@@ -115,10 +115,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
         {
             // Do we still have any buffers alive?
             if (
-                textView
-                    .BufferGraph.GetTextBuffers(b =>
-                        b.ContentType.IsOfType(ContentTypeNames.RoslynContentType)
-                    )
+                textView.BufferGraph
+                    .GetTextBuffers(b => b.ContentType.IsOfType(ContentTypeNames.RoslynContentType))
                     .Any()
             )
             {
@@ -127,10 +125,11 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
             }
 
             if (
-                textView.Properties.TryGetProperty(
-                    typeof(InlineRenameAdornmentManager),
-                    out InlineRenameAdornmentManager manager
-                )
+                textView.Properties
+                    .TryGetProperty(
+                        typeof(InlineRenameAdornmentManager),
+                        out InlineRenameAdornmentManager manager
+                    )
             )
             {
                 manager.Dispose();

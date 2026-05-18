@@ -78,9 +78,8 @@ namespace System.ServiceModel.ComIntegration
                             if (monikerSupportLibrary.IsInvalid)
                             {
                                 monikerSupportLibrary.SetHandleAsInvalid();
-                                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                                    Error.ServiceMonikerSupportLoadFailed(file)
-                                );
+                                throw DiagnosticUtility.ExceptionUtility
+                                    .ThrowHelperError(Error.ServiceMonikerSupportLoadFailed(file));
                             }
                         }
                     }
@@ -110,12 +109,13 @@ namespace System.ServiceModel.ComIntegration
                             if (Fx.IsFatal(e))
                                 throw;
 
-                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                                new ComPlusProxyProviderException(
-                                    SR.GetString(SR.FailedProxyProviderCreation),
-                                    e
-                                )
-                            );
+                            throw DiagnosticUtility.ExceptionUtility
+                                .ThrowHelperError(
+                                    new ComPlusProxyProviderException(
+                                        SR.GetString(SR.FailedProxyProviderCreation),
+                                        e
+                                    )
+                                );
                         }
                     }
                 }
@@ -137,12 +137,13 @@ namespace System.ServiceModel.ComIntegration
                 if (Fx.IsFatal(e))
                     throw;
 
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ComPlusProxyProviderException(
-                        SR.GetString(SR.FailedProxyProviderCreation),
-                        e
-                    )
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        new ComPlusProxyProviderException(
+                            SR.GetString(SR.FailedProxyProviderCreation),
+                            e
+                        )
+                    );
             }
             finally
             {
@@ -176,9 +177,10 @@ namespace System.ServiceModel.ComIntegration
             Marshal.ReleaseComObject(proxyProvider);
 
             if (hr != HR.S_OK)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new COMException(SR.GetString(SR.FailedProxyProviderCreation), hr)
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        new COMException(SR.GetString(SR.FailedProxyProviderCreation), hr)
+                    );
 
             return pOuter;
         }
@@ -197,9 +199,10 @@ namespace System.ServiceModel.ComIntegration
             Marshal.ReleaseComObject(proxyProvider);
 
             if (hr != HR.S_OK)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new COMException(SR.GetString(SR.FailedProxyProviderCreation), hr)
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        new COMException(SR.GetString(SR.FailedProxyProviderCreation), hr)
+                    );
 
             return pInner;
         }

@@ -83,10 +83,10 @@ namespace System.Data.EntityModel.SchemaObjectModel
                     AddError(
                         ErrorCode.InvalidRelationshipEndType,
                         EdmSchemaErrorSeverity.Error,
-                        System.Data.Entity.Strings.InvalidRelationshipEndType(
-                            ParentElement.Name,
-                            element.FQName
-                        )
+                        System.Data
+                            .Entity
+                            .Strings
+                            .InvalidRelationshipEndType(ParentElement.Name, element.FQName)
                     );
                 }
             }
@@ -102,10 +102,13 @@ namespace System.Data.EntityModel.SchemaObjectModel
                 AddError(
                     ErrorCode.EndWithManyMultiplicityCannotHaveOperationsSpecified,
                     EdmSchemaErrorSeverity.Error,
-                    System.Data.Entity.Strings.EndWithManyMultiplicityCannotHaveOperationsSpecified(
-                        this.Name,
-                        ParentElement.FQName
-                    )
+                    System.Data
+                        .Entity
+                        .Strings
+                        .EndWithManyMultiplicityCannotHaveOperationsSpecified(
+                            this.Name,
+                            ParentElement.FQName
+                        )
                 );
             }
 
@@ -115,10 +118,10 @@ namespace System.Data.EntityModel.SchemaObjectModel
                 AddError(
                     ErrorCode.EndWithoutMultiplicity,
                     EdmSchemaErrorSeverity.Error,
-                    System.Data.Entity.Strings.EndWithoutMultiplicity(
-                        this.Name,
-                        ParentElement.FQName
-                    )
+                    System.Data
+                        .Entity
+                        .Strings
+                        .EndWithoutMultiplicity(this.Name, ParentElement.FQName)
                 );
             }
         }
@@ -217,10 +220,10 @@ namespace System.Data.EntityModel.SchemaObjectModel
                     ErrorCode.InvalidMultiplicity,
                     EdmSchemaErrorSeverity.Error,
                     reader,
-                    System.Data.Entity.Strings.InvalidRelationshipEndMultiplicity(
-                        ParentElement.Name,
-                        reader.Value
-                    )
+                    System.Data
+                        .Entity
+                        .Strings
+                        .InvalidRelationshipEndMultiplicity(ParentElement.Name, reader.Value)
                 );
             }
             _multiplicity = multiplicity;

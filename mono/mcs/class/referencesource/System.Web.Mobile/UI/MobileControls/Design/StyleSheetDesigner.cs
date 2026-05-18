@@ -1378,15 +1378,16 @@ namespace System.Web.UI.Design.MobileControls
                 this.BtnEdit.Size = new System.Drawing.Size(75, 23);
                 this.LblHeader.Location = new System.Drawing.Point(0, 0);
                 this.LblHeader.Size = new System.Drawing.Size(240, 16);
-                this.Controls.AddRange(
-                    new System.Windows.Forms.Control[]
-                    {
-                        this.CbStyles,
-                        this.LblStyles,
-                        this.BtnEdit,
-                        this.LblHeader,
-                    }
-                );
+                this.Controls
+                    .AddRange(
+                        new System.Windows.Forms.Control[]
+                        {
+                            this.CbStyles,
+                            this.LblStyles,
+                            this.BtnEdit,
+                            this.LblHeader,
+                        }
+                    );
                 this.Size = new System.Drawing.Size(240, 70);
                 this.Location = new System.Drawing.Point(5, 6);
             }

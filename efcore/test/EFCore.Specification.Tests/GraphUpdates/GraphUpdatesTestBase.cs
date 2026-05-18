@@ -195,7 +195,8 @@ public abstract partial class GraphUpdatesTestBase<TFixture> : IClassFixture<TFi
                             v => new MyDiscriminator(v.Value)
                         )
                     )
-                    .Metadata.SetAfterSaveBehavior(PropertySaveBehavior.Save);
+                    .Metadata
+                    .SetAfterSaveBehavior(PropertySaveBehavior.Save);
             });
 
             modelBuilder
@@ -1033,13 +1034,13 @@ public abstract partial class GraphUpdatesTestBase<TFixture> : IClassFixture<TFi
         );
 
         Assert.Equal(
-            expected
-                .RequiredChildren.OrderBy(e => e.Id)
+            expected.RequiredChildren
+                .OrderBy(e => e.Id)
                 .SelectMany(e => e.Children)
                 .OrderBy(e => e.Id)
                 .Select(e => e.Id),
-            actual
-                .RequiredChildren.OrderBy(e => e.Id)
+            actual.RequiredChildren
+                .OrderBy(e => e.Id)
                 .SelectMany(e => e.Children)
                 .OrderBy(e => e.Id)
                 .Select(e => e.Id)
@@ -1056,13 +1057,13 @@ public abstract partial class GraphUpdatesTestBase<TFixture> : IClassFixture<TFi
         );
 
         Assert.Equal(
-            expected
-                .OptionalChildren.OrderBy(e => e.Id)
+            expected.OptionalChildren
+                .OrderBy(e => e.Id)
                 .SelectMany(e => e.Children)
                 .OrderBy(e => e.Id)
                 .Select(e => e.Id),
-            actual
-                .OptionalChildren.OrderBy(e => e.Id)
+            actual.OptionalChildren
+                .OrderBy(e => e.Id)
                 .SelectMany(e => e.Children)
                 .OrderBy(e => e.Id)
                 .Select(e => e.Id)
@@ -1118,26 +1119,26 @@ public abstract partial class GraphUpdatesTestBase<TFixture> : IClassFixture<TFi
         );
 
         Assert.Equal(
-            expected
-                .RequiredChildrenAk.OrderBy(e => e.Id)
+            expected.RequiredChildrenAk
+                .OrderBy(e => e.Id)
                 .SelectMany(e => e.Children)
                 .OrderBy(e => e.Id)
                 .Select(e => e.AlternateId),
-            actual
-                .RequiredChildrenAk.OrderBy(e => e.Id)
+            actual.RequiredChildrenAk
+                .OrderBy(e => e.Id)
                 .SelectMany(e => e.Children)
                 .OrderBy(e => e.Id)
                 .Select(e => e.AlternateId)
         );
 
         Assert.Equal(
-            expected
-                .RequiredChildrenAk.OrderBy(e => e.Id)
+            expected.RequiredChildrenAk
+                .OrderBy(e => e.Id)
                 .SelectMany(e => e.CompositeChildren)
                 .OrderBy(e => e.Id)
                 .Select(e => e.Id),
-            actual
-                .RequiredChildrenAk.OrderBy(e => e.Id)
+            actual.RequiredChildrenAk
+                .OrderBy(e => e.Id)
                 .SelectMany(e => e.CompositeChildren)
                 .OrderBy(e => e.Id)
                 .Select(e => e.Id)
@@ -1159,26 +1160,26 @@ public abstract partial class GraphUpdatesTestBase<TFixture> : IClassFixture<TFi
         );
 
         Assert.Equal(
-            expected
-                .OptionalChildrenAk.OrderBy(e => e.Id)
+            expected.OptionalChildrenAk
+                .OrderBy(e => e.Id)
                 .SelectMany(e => e.Children)
                 .OrderBy(e => e.Id)
                 .Select(e => e.AlternateId),
-            actual
-                .OptionalChildrenAk.OrderBy(e => e.Id)
+            actual.OptionalChildrenAk
+                .OrderBy(e => e.Id)
                 .SelectMany(e => e.Children)
                 .OrderBy(e => e.Id)
                 .Select(e => e.AlternateId)
         );
 
         Assert.Equal(
-            expected
-                .OptionalChildrenAk.OrderBy(e => e.Id)
+            expected.OptionalChildrenAk
+                .OrderBy(e => e.Id)
                 .SelectMany(e => e.CompositeChildren)
                 .OrderBy(e => e.Id)
                 .Select(e => e.Id),
-            actual
-                .OptionalChildrenAk.OrderBy(e => e.Id)
+            actual.OptionalChildrenAk
+                .OrderBy(e => e.Id)
                 .SelectMany(e => e.CompositeChildren)
                 .OrderBy(e => e.Id)
                 .Select(e => e.Id)
@@ -1245,31 +1246,31 @@ public abstract partial class GraphUpdatesTestBase<TFixture> : IClassFixture<TFi
         );
 
         Assert.Equal(
-            expected
-                .RequiredCompositeChildren.OrderBy(e => e.Id)
+            expected.RequiredCompositeChildren
+                .OrderBy(e => e.Id)
                 .Select(e => new { e.Id, e.ParentAlternateId }),
-            actual
-                .RequiredCompositeChildren.OrderBy(e => e.Id)
+            actual.RequiredCompositeChildren
+                .OrderBy(e => e.Id)
                 .Select(e => new { e.Id, e.ParentAlternateId })
         );
 
         Assert.Equal(
-            expected
-                .RequiredCompositeChildren.OrderBy(e => e.Id)
+            expected.RequiredCompositeChildren
+                .OrderBy(e => e.Id)
                 .Select(e => e.CompositeChildren.Count),
-            actual
-                .RequiredCompositeChildren.OrderBy(e => e.Id)
+            actual.RequiredCompositeChildren
+                .OrderBy(e => e.Id)
                 .Select(e => e.CompositeChildren.Count)
         );
 
         Assert.Equal(
-            expected
-                .RequiredCompositeChildren.OrderBy(e => e.Id)
+            expected.RequiredCompositeChildren
+                .OrderBy(e => e.Id)
                 .SelectMany(e => e.CompositeChildren)
                 .OrderBy(e => e.Id)
                 .Select(e => new { e.Id, e.ParentAlternateId }),
-            actual
-                .RequiredCompositeChildren.OrderBy(e => e.Id)
+            actual.RequiredCompositeChildren
+                .OrderBy(e => e.Id)
                 .SelectMany(e => e.CompositeChildren)
                 .OrderBy(e => e.Id)
                 .Select(e => new { e.Id, e.ParentAlternateId })

@@ -25,10 +25,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.Diagnostics
     public class SuppressMessageAttributeWorkspaceTests : SuppressMessageAttributeTests
     {
         private static readonly TestComposition s_compositionWithMockDiagnosticUpdateSourceRegistrationService =
-            EditorTestCompositions
-                .EditorFeatures.AddExcludedPartTypes(
-                    typeof(IDiagnosticUpdateSourceRegistrationService)
-                )
+            EditorTestCompositions.EditorFeatures
+                .AddExcludedPartTypes(typeof(IDiagnosticUpdateSourceRegistrationService))
                 .AddParts(typeof(MockDiagnosticUpdateSourceRegistrationService));
 
         private static readonly Lazy<MetadataReference> _unconditionalSuppressMessageRef = new(
@@ -80,15 +78,16 @@ namespace System.Diagnostics.CodeAnalysis
             using var workspace = CreateWorkspaceFromFile(source, language, rootNamespace);
 
             workspace.TryApplyChanges(
-                workspace
-                    .CurrentSolution.WithAnalyzerReferences(
+                workspace.CurrentSolution
+                    .WithAnalyzerReferences(
                         new[] { new AnalyzerImageReference(analyzers.ToImmutableArray()) }
                     )
                     .WithProjectMetadataReferences(
                         workspace.Projects.Single().Id,
-                        workspace
-                            .Projects.Single()
-                            .MetadataReferences.Append(_unconditionalSuppressMessageRef.Value)
+                        workspace.Projects
+                            .Single()
+                            .MetadataReferences
+                            .Append(_unconditionalSuppressMessageRef.Value)
                     )
             );
 

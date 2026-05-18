@@ -47,9 +47,8 @@ namespace System.IdentityModel.Tokens
             }
             if (localId == string.Empty)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                    SR.GetString(SR.LocalIdCannotBeEmpty)
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperArgument(SR.GetString(SR.LocalIdCannotBeEmpty));
             }
             this.localId = localId;
             this.ownerTypes = ownerTypes;

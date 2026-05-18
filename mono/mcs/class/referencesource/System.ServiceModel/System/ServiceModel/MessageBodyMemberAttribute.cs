@@ -14,13 +14,14 @@ namespace System.ServiceModel
             set
             {
                 if (value < 0)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ArgumentOutOfRangeException(
-                            "value",
-                            value,
-                            SR.GetString(SR.ValueMustBeNonNegative)
-                        )
-                    );
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperError(
+                            new ArgumentOutOfRangeException(
+                                "value",
+                                value,
+                                SR.GetString(SR.ValueMustBeNonNegative)
+                            )
+                        );
                 order = value;
             }
         }

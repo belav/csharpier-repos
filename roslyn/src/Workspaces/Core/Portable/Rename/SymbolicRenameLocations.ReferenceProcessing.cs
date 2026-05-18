@@ -420,8 +420,7 @@ namespace Microsoft.CodeAnalysis.Rename
                             new RenameLocation(
                                 location.Location,
                                 location.Document.Id,
-                                containingLocationForStringOrComment: location
-                                    .ContainingStringLocation
+                                containingLocationForStringOrComment: location.ContainingStringLocation
                                     .SourceSpan
                             )
                         );
@@ -475,8 +474,8 @@ namespace Microsoft.CodeAnalysis.Rename
                         .GroupBy(d => d.Project.Language)
                 )
                 {
-                    var syntaxFactsLanguageService = solution
-                        .Services.GetLanguageServices(documentsGroupedByLanguage.Key)
+                    var syntaxFactsLanguageService = solution.Services
+                        .GetLanguageServices(documentsGroupedByLanguage.Key)
                         .GetService<ISyntaxFactsService>();
 
                     if (syntaxFactsLanguageService != null)

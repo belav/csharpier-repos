@@ -27,15 +27,16 @@ namespace System.Diagnostics.Tests
         {
             bool listenerFound = false;
             using (
-                DiagnosticListener.AllListeners.Subscribe(
-                    new CallbackObserver<DiagnosticListener>(diagnosticListener =>
-                    {
-                        if (diagnosticListener.Name == "System.Net.Http.Desktop")
+                DiagnosticListener.AllListeners
+                    .Subscribe(
+                        new CallbackObserver<DiagnosticListener>(diagnosticListener =>
                         {
-                            listenerFound = true;
-                        }
-                    })
-                )
+                            if (diagnosticListener.Name == "System.Net.Http.Desktop")
+                            {
+                                listenerFound = true;
+                            }
+                        })
+                    )
             )
             {
                 Assert.True(
@@ -320,10 +321,11 @@ namespace System.Diagnostics.Tests
                             )
                         )
                         {
-                            request.Headers.Add(
-                                "traceparent",
-                                "00-abcdef0123456789abcdef0123456789-abcdef0123456789-01"
-                            );
+                            request.Headers
+                                .Add(
+                                    "traceparent",
+                                    "00-abcdef0123456789abcdef0123456789-abcdef0123456789-01"
+                                );
                             (await client.SendAsync(request)).Dispose();
                         }
 
@@ -408,12 +410,9 @@ namespace System.Diagnostics.Tests
             {
                 using (var client = new HttpClient())
                 {
-                    Uri uriWithRedirect =
-                        Configuration.Http.RemoteSecureHttp11Server.RedirectUriForDestinationUri(
-                            302,
-                            Configuration.Http.RemoteEchoServer,
-                            10
-                        );
+                    Uri uriWithRedirect = Configuration.Http
+                        .RemoteSecureHttp11Server
+                        .RedirectUriForDestinationUri(302, Configuration.Http.RemoteEchoServer, 10);
                     (await client.GetAsync(uriWithRedirect)).Dispose();
                 }
 
@@ -673,8 +672,9 @@ namespace System.Diagnostics.Tests
                             new Dictionary<Uri, Tuple<WebRequest, WebResponse>>();
                         for (int i = 0; i < 10; i++)
                         {
-                            Uri uriWithRedirect =
-                                Configuration.Http.RemoteSecureHttp11Server.RedirectUriForDestinationUri(
+                            Uri uriWithRedirect = Configuration.Http
+                                .RemoteSecureHttp11Server
+                                .RedirectUriForDestinationUri(
                                     302,
                                     new Uri($"{Configuration.Http.RemoteEchoServer}?q={i}"),
                                     3
@@ -864,43 +864,46 @@ namespace System.Diagnostics.Tests
 
             public EventObserverAndRecorder(Action<KeyValuePair<string, object>> onEvent = null)
             {
-                listSubscription = DiagnosticListener.AllListeners.Subscribe(
-                    new CallbackObserver<DiagnosticListener>(diagnosticListener =>
-                    {
-                        if (diagnosticListener.Name == "System.Net.Http.Desktop")
+                listSubscription = DiagnosticListener.AllListeners
+                    .Subscribe(
+                        new CallbackObserver<DiagnosticListener>(diagnosticListener =>
                         {
-                            httpSubscription = diagnosticListener.Subscribe(this);
-                        }
-                    })
-                );
+                            if (diagnosticListener.Name == "System.Net.Http.Desktop")
+                            {
+                                httpSubscription = diagnosticListener.Subscribe(this);
+                            }
+                        })
+                    );
 
                 this.onEvent = onEvent;
             }
 
             public EventObserverAndRecorder(Predicate<string> isEnabled)
             {
-                listSubscription = DiagnosticListener.AllListeners.Subscribe(
-                    new CallbackObserver<DiagnosticListener>(diagnosticListener =>
-                    {
-                        if (diagnosticListener.Name == "System.Net.Http.Desktop")
+                listSubscription = DiagnosticListener.AllListeners
+                    .Subscribe(
+                        new CallbackObserver<DiagnosticListener>(diagnosticListener =>
                         {
-                            httpSubscription = diagnosticListener.Subscribe(this, isEnabled);
-                        }
-                    })
-                );
+                            if (diagnosticListener.Name == "System.Net.Http.Desktop")
+                            {
+                                httpSubscription = diagnosticListener.Subscribe(this, isEnabled);
+                            }
+                        })
+                    );
             }
 
             public EventObserverAndRecorder(Func<string, object, object, bool> isEnabled)
             {
-                listSubscription = DiagnosticListener.AllListeners.Subscribe(
-                    new CallbackObserver<DiagnosticListener>(diagnosticListener =>
-                    {
-                        if (diagnosticListener.Name == "System.Net.Http.Desktop")
+                listSubscription = DiagnosticListener.AllListeners
+                    .Subscribe(
+                        new CallbackObserver<DiagnosticListener>(diagnosticListener =>
                         {
-                            httpSubscription = diagnosticListener.Subscribe(this, isEnabled);
-                        }
-                    })
-                );
+                            if (diagnosticListener.Name == "System.Net.Http.Desktop")
+                            {
+                                httpSubscription = diagnosticListener.Subscribe(this, isEnabled);
+                            }
+                        })
+                    );
             }
 
             public void Dispose()

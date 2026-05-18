@@ -262,14 +262,13 @@ public class TargetingPackTests
                         var attributeType = reader.GetTypeReference(
                             (TypeReferenceHandle)attributeConstructor.Parent
                         );
-                        return reader.StringComparer.Equals(
-                                attributeType.Namespace,
-                                typeof(ReferenceAssemblyAttribute).Namespace
-                            )
-                            && reader.StringComparer.Equals(
-                                attributeType.Name,
-                                nameof(ReferenceAssemblyAttribute)
-                            );
+                        return reader.StringComparer
+                                .Equals(
+                                    attributeType.Namespace,
+                                    typeof(ReferenceAssemblyAttribute).Namespace
+                                )
+                            && reader.StringComparer
+                                .Equals(attributeType.Name, nameof(ReferenceAssemblyAttribute));
                     });
 
                 Assert.True(
@@ -474,8 +473,8 @@ public class TargetingPackTests
 
         ZipArchive archive = ZipFile.OpenRead(targetingPackPath);
 
-        var actualPaths = archive
-            .Entries.Where(i =>
+        var actualPaths = archive.Entries
+            .Where(i =>
                 i.FullName.EndsWith(".dll", StringComparison.Ordinal)
                 && !i.FullName.EndsWith(".resources.dll", StringComparison.Ordinal)
             )

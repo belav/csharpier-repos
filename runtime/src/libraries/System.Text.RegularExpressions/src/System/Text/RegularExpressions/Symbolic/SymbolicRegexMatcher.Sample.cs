@@ -91,20 +91,15 @@ namespace System.Text.RegularExpressions.Symbolic
 
                         // Gather the possible endings for satisfying nullability
                         possibleEndings.Clear();
-                        StateFlags flags = SymbolicRegexMatcher<TSet>.NfaStateHandler.GetStateFlags(
-                            this,
-                            in statesWrapper
-                        );
+                        StateFlags flags = SymbolicRegexMatcher<TSet>.NfaStateHandler
+                            .GetStateFlags(this, in statesWrapper);
                         if (flags.CanBeNullable())
                         {
                             // Unconditionally final state or end of the input due to \Z anchor for example
                             if (
                                 flags.IsNullable()
-                                || SymbolicRegexMatcher<TSet>.NfaStateHandler.IsNullableFor(
-                                    this,
-                                    in statesWrapper,
-                                    CharKind.BeginningEnd
-                                )
+                                || SymbolicRegexMatcher<TSet>.NfaStateHandler
+                                    .IsNullableFor(this, in statesWrapper, CharKind.BeginningEnd)
                             )
                             {
                                 possibleEndings.Add("");
@@ -112,11 +107,8 @@ namespace System.Text.RegularExpressions.Symbolic
 
                             // End of line due to end-of-line anchor
                             if (
-                                SymbolicRegexMatcher<TSet>.NfaStateHandler.IsNullableFor(
-                                    this,
-                                    in statesWrapper,
-                                    CharKind.Newline
-                                )
+                                SymbolicRegexMatcher<TSet>.NfaStateHandler
+                                    .IsNullableFor(this, in statesWrapper, CharKind.Newline)
                             )
                             {
                                 possibleEndings.Add("\n");
@@ -124,11 +116,8 @@ namespace System.Text.RegularExpressions.Symbolic
 
                             // Related to wordborder due to \b or \B
                             if (
-                                SymbolicRegexMatcher<TSet>.NfaStateHandler.IsNullableFor(
-                                    this,
-                                    in statesWrapper,
-                                    CharKind.WordLetter
-                                )
+                                SymbolicRegexMatcher<TSet>.NfaStateHandler
+                                    .IsNullableFor(this, in statesWrapper, CharKind.WordLetter)
                             )
                             {
                                 possibleEndings.Add(
@@ -139,11 +128,8 @@ namespace System.Text.RegularExpressions.Symbolic
 
                             // Related to wordborder due to \b or \B
                             if (
-                                SymbolicRegexMatcher<TSet>.NfaStateHandler.IsNullableFor(
-                                    this,
-                                    in statesWrapper,
-                                    CharKind.General
-                                )
+                                SymbolicRegexMatcher<TSet>.NfaStateHandler
+                                    .IsNullableFor(this, in statesWrapper, CharKind.General)
                             )
                             {
                                 possibleEndings.Add(
@@ -171,21 +157,14 @@ namespace System.Text.RegularExpressions.Symbolic
                         }
 
                         // Shuffle the minterms, including the last end-of-line marker if appropriate
-                        int[] mintermIds =
-                            SymbolicRegexMatcher<TSet>.NfaStateHandler.StartsWithLineAnchor(
-                                this,
-                                in statesWrapper
-                            )
-                                ? Shuffle(random, mintermIdsWithZ)
-                                : Shuffle(random, mintermIdsWithoutZ);
+                        int[] mintermIds = SymbolicRegexMatcher<TSet>.NfaStateHandler
+                            .StartsWithLineAnchor(this, in statesWrapper)
+                            ? Shuffle(random, mintermIdsWithZ)
+                            : Shuffle(random, mintermIdsWithoutZ);
                         foreach (int mintermId in mintermIds)
                         {
-                            bool success =
-                                SymbolicRegexMatcher<TSet>.NfaStateHandler.TryTakeTransition(
-                                    this,
-                                    ref statesWrapper,
-                                    mintermId
-                                );
+                            bool success = SymbolicRegexMatcher<TSet>.NfaStateHandler
+                                .TryTakeTransition(this, ref statesWrapper, mintermId);
                             Debug.Assert(success);
                             if (states.NfaStateSet.Count > 0)
                             {

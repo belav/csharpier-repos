@@ -206,7 +206,8 @@ namespace System.Reflection.Runtime.TypeInfos
         {
             get
             {
-                return this.GenericTypeDefinitionTypeInfo.TypeRefDefOrSpecsForDirectlyImplementedInterfaces;
+                return this.GenericTypeDefinitionTypeInfo
+                    .TypeRefDefOrSpecsForDirectlyImplementedInterfaces;
             }
         }
 

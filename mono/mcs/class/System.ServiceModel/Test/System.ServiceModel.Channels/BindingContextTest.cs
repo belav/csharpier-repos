@@ -134,8 +134,7 @@ namespace MonoTests.System.ServiceModel.Channels
             );
             Assert.AreEqual(
                 3,
-                new BindingContext(b, new BindingParameterCollection())
-                    .RemainingBindingElements
+                new BindingContext(b, new BindingParameterCollection()).RemainingBindingElements
                     .Count,
                 "#1"
             );
@@ -153,8 +152,7 @@ namespace MonoTests.System.ServiceModel.Channels
 
             Assert.AreEqual(
                 3,
-                new BindingContext(b, new BindingParameterCollection())
-                    .RemainingBindingElements
+                new BindingContext(b, new BindingParameterCollection()).RemainingBindingElements
                     .Count,
                 "New BindingContext element count"
             );

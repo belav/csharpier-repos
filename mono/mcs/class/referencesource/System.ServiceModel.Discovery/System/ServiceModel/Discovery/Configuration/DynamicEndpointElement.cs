@@ -77,29 +77,30 @@ namespace System.ServiceModel.Discovery.Configuration
         {
             if (string.IsNullOrEmpty(channelEndpointElement.Contract))
             {
-                throw FxTrace.Exception.AsError(
-                    new ConfigurationErrorsException(
-                        SR.DiscoveryConfigContractNotSpecified(channelEndpointElement.Kind)
-                    )
-                );
+                throw FxTrace.Exception
+                    .AsError(
+                        new ConfigurationErrorsException(
+                            SR.DiscoveryConfigContractNotSpecified(channelEndpointElement.Kind)
+                        )
+                    );
             }
 
             if (
                 channelEndpointElement.Address != null
-                && !channelEndpointElement.Address.Equals(
-                    DiscoveryClientBindingElement.DiscoveryEndpointAddress.Uri
-                )
+                && !channelEndpointElement.Address
+                    .Equals(DiscoveryClientBindingElement.DiscoveryEndpointAddress.Uri)
             )
             {
-                throw FxTrace.Exception.AsError(
-                    new ConfigurationErrorsException(
-                        SR.DiscoveryEndpointAddressIncorrect(
-                            "address",
-                            channelEndpointElement.Address,
-                            DiscoveryClientBindingElement.DiscoveryEndpointAddress.Uri
+                throw FxTrace.Exception
+                    .AsError(
+                        new ConfigurationErrorsException(
+                            SR.DiscoveryEndpointAddressIncorrect(
+                                "address",
+                                channelEndpointElement.Address,
+                                DiscoveryClientBindingElement.DiscoveryEndpointAddress.Uri
+                            )
                         )
-                    )
-                );
+                    );
             }
         }
 
@@ -107,11 +108,12 @@ namespace System.ServiceModel.Discovery.Configuration
             ServiceEndpointElement serviceEndpointElement
         )
         {
-            throw FxTrace.Exception.AsError(
-                new InvalidOperationException(
-                    SR.DiscoveryConfigDynamicEndpointInService(serviceEndpointElement.Kind)
-                )
-            );
+            throw FxTrace.Exception
+                .AsError(
+                    new InvalidOperationException(
+                        SR.DiscoveryConfigDynamicEndpointInService(serviceEndpointElement.Kind)
+                    )
+                );
         }
 
         protected override void OnApplyConfiguration(
@@ -132,11 +134,12 @@ namespace System.ServiceModel.Discovery.Configuration
                 )
             )
             {
-                throw FxTrace.Exception.AsError(
-                    new ConfigurationErrorsException(
-                        SR.DiscoveryClientBindingElementPresentInDynamicEndpoint
-                    )
-                );
+                throw FxTrace.Exception
+                    .AsError(
+                        new ConfigurationErrorsException(
+                            SR.DiscoveryClientBindingElementPresentInDynamicEndpoint
+                        )
+                    );
             }
 
             if (
@@ -158,18 +161,20 @@ namespace System.ServiceModel.Discovery.Configuration
                     );
             }
 
-            this.DiscoveryClientSettings.FindCriteria.ApplyConfiguration(
-                dynamicEndpoint.FindCriteria
-            );
+            this.DiscoveryClientSettings
+                .FindCriteria
+                .ApplyConfiguration(dynamicEndpoint.FindCriteria);
 
             if (dynamicEndpoint.FindCriteria.ContractTypeNames.Count == 0)
             {
-                dynamicEndpoint.FindCriteria.ContractTypeNames.Add(
-                    new XmlQualifiedName(
-                        dynamicEndpoint.Contract.Name,
-                        dynamicEndpoint.Contract.Namespace
-                    )
-                );
+                dynamicEndpoint.FindCriteria
+                    .ContractTypeNames
+                    .Add(
+                        new XmlQualifiedName(
+                            dynamicEndpoint.Contract.Name,
+                            dynamicEndpoint.Contract.Namespace
+                        )
+                    );
             }
         }
     }

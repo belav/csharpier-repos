@@ -279,11 +279,8 @@ namespace System.Runtime
 
             if (size < 0)
             {
-                throw Fx.Exception.ArgumentOutOfRange(
-                    "size",
-                    size,
-                    InternalSR.ValueMustBeNonNegative
-                );
+                throw Fx.Exception
+                    .ArgumentOutOfRange("size", size, InternalSR.ValueMustBeNonNegative);
             }
 
             if ((int.MaxValue - size) < this.totalSize)

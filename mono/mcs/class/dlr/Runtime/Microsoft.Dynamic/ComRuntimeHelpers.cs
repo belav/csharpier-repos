@@ -559,10 +559,13 @@ namespace Microsoft.Scripting
                 return;
             }
 
-            System.Runtime.InteropServices.Marshal.GetNativeVariantForObject(
-                obj,
-                UnsafeMethods.ConvertVariantByrefToPtr(ref variant)
-            );
+            System.Runtime
+                .InteropServices
+                .Marshal
+                .GetNativeVariantForObject(
+                    obj,
+                    UnsafeMethods.ConvertVariantByrefToPtr(ref variant)
+                );
         }
 
 #if CLR2
@@ -779,11 +782,12 @@ namespace Microsoft.Scripting
                         };
 
                         string name = typeof(VariantArray).Namespace + ".DynamicAssembly";
-                        var assembly = AppDomain.CurrentDomain.DefineDynamicAssembly(
-                            new AssemblyName(name),
-                            AssemblyBuilderAccess.Run,
-                            attributes
-                        );
+                        var assembly = AppDomain.CurrentDomain
+                            .DefineDynamicAssembly(
+                                new AssemblyName(name),
+                                AssemblyBuilderAccess.Run,
+                                attributes
+                            );
                         assembly.DefineVersionInfoResource();
                         _dynamicModule = assembly.DefineDynamicModule(name);
                     }

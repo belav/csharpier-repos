@@ -22,8 +22,7 @@ namespace System.ServiceModel.Discovery
             MessageId = "Pv",
             Justification = "IPv4 is valid."
         )]
-        public static readonly Uri DefaultIPv4MulticastAddress = DiscoveryDefaults
-            .Udp
+        public static readonly Uri DefaultIPv4MulticastAddress = DiscoveryDefaults.Udp
             .IPv4MulticastAddress;
 
         [SuppressMessage(
@@ -36,8 +35,7 @@ namespace System.ServiceModel.Discovery
             MessageId = "Pv",
             Justification = "IPv6 is valid."
         )]
-        public static readonly Uri DefaultIPv6MulticastAddress = DiscoveryDefaults
-            .Udp
+        public static readonly Uri DefaultIPv6MulticastAddress = DiscoveryDefaults.Udp
             .IPv6MulticastAddress;
 
         DiscoveryViaBehavior viaBehavior;
@@ -71,9 +69,8 @@ namespace System.ServiceModel.Discovery
             }
 
             // Send replies async to maintain performance
-            base.Behaviors.Add(
-                new DispatcherSynchronizationBehavior { AsynchronousSendEnabled = true }
-            );
+            base.Behaviors
+                .Add(new DispatcherSynchronizationBehavior { AsynchronousSendEnabled = true });
 
             Initialize(multicastAddress);
         }
@@ -109,8 +106,8 @@ namespace System.ServiceModel.Discovery
             TextMessageEncodingBindingElement textBE = new TextMessageEncodingBindingElement();
             textBE.MessageVersion = base.DiscoveryVersion.Implementation.MessageVersion;
 
-            UdpTransportBindingElement udpBE =
-                DiscoveryDefaults.Udp.CreateUdpTransportBindingElement();
+            UdpTransportBindingElement udpBE = DiscoveryDefaults.Udp
+                .CreateUdpTransportBindingElement();
             this.udpTransportSettings = new UdpTransportSettings(udpBE);
 
             CustomBinding binding = new CustomBinding();

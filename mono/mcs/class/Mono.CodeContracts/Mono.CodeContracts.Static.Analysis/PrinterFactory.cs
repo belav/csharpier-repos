@@ -822,11 +822,12 @@ namespace Mono.CodeContracts.Static.Analysis
             public void PrintCodeAt(Label label, string prefix, TextWriter tw)
             {
                 this.prefix = prefix;
-                this.il_decoder.ForwardDecode<
-                    TextWriter,
-                    Dummy,
-                    Printer<Label, Source, Dest, Context, EdgeData>
-                >(label, this, tw);
+                this.il_decoder
+                    .ForwardDecode<
+                        TextWriter,
+                        Dummy,
+                        Printer<Label, Source, Dest, Context, EdgeData>
+                    >(label, this, tw);
             }
 
             private string SourceName(Source src)

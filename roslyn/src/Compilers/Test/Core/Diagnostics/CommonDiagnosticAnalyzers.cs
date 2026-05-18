@@ -1819,8 +1819,8 @@ namespace Microsoft.CodeAnalysis
             )> GetControlFlowGraphs()
             {
                 Assert.True(_verifyGetControlFlowGraph);
-                return _controlFlowGraphMapOpt
-                    .Values.OrderBy(flowGraphAndSymbol =>
+                return _controlFlowGraphMapOpt.Values
+                    .OrderBy(flowGraphAndSymbol =>
                         flowGraphAndSymbol.Graph.OriginalOperation.Syntax.SpanStart
                     )
                     .ToImmutableArray();
@@ -3674,8 +3674,8 @@ namespace Microsoft.CodeAnalysis
                 {
                     context.RegisterSyntaxTreeAction(context =>
                     {
-                        var fields = context
-                            .Tree.GetRoot()
+                        var fields = context.Tree
+                            .GetRoot()
                             .DescendantNodes()
                             .OfType<CSharp.Syntax.FieldDeclarationSyntax>();
                         foreach (var variable in fields.SelectMany(f => f.Declaration.Variables))
@@ -3939,8 +3939,7 @@ namespace Microsoft.CodeAnalysis
                         context.RegisterOperationBlockAction(operationBlockContext =>
                             ReportDiagnostics(
                                 "RegisterOperationBlockAction",
-                                operationBlockContext
-                                    .OwningSymbol
+                                operationBlockContext.OwningSymbol
                                     .DeclaringSyntaxReferences[0]
                                     .SyntaxTree,
                                 operationBlockContext.OwningSymbol,
@@ -3967,8 +3966,7 @@ namespace Microsoft.CodeAnalysis
                                 operationBlockEndContext =>
                                     ReportDiagnostics(
                                         "RegisterOperationBlockEndAction",
-                                        operationBlockEndContext
-                                            .OwningSymbol
+                                        operationBlockEndContext.OwningSymbol
                                             .DeclaringSyntaxReferences[0]
                                             .SyntaxTree,
                                         operationBlockEndContext.OwningSymbol,
@@ -4040,8 +4038,8 @@ namespace Microsoft.CodeAnalysis
             )
             {
                 var arg = $"{actionName}({symbol.Name})";
-                var trees = symbol
-                    .DeclaringSyntaxReferences.Select(syntaxRef => syntaxRef.SyntaxTree)
+                var trees = symbol.DeclaringSyntaxReferences
+                    .Select(syntaxRef => syntaxRef.SyntaxTree)
                     .Distinct();
                 foreach (var tree in trees)
                 {

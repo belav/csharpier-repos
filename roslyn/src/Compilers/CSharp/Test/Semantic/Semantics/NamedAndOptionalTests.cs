@@ -2222,8 +2222,8 @@ public class C
             Func<bool, Action<ModuleSymbol>> validator = isFromSource =>
                 module =>
                 {
-                    var methods = module
-                        .GlobalNamespace.GetMember<NamedTypeSymbol>("C")
+                    var methods = module.GlobalNamespace
+                        .GetMember<NamedTypeSymbol>("C")
                         .GetMembers()
                         .OfType<MethodSymbol>()
                         .Where(m => m.MethodKind == MethodKind.Ordinary)
@@ -2341,8 +2341,8 @@ public struct S
             Func<bool, Action<ModuleSymbol>> validator = isFromSource =>
                 module =>
                 {
-                    var methods = module
-                        .GlobalNamespace.GetMember<NamedTypeSymbol>("C")
+                    var methods = module.GlobalNamespace
+                        .GetMember<NamedTypeSymbol>("C")
                         .GetMembers()
                         .OfType<MethodSymbol>()
                         .Where(m => m.MethodKind == MethodKind.Ordinary)
@@ -2407,8 +2407,8 @@ public class C
             Func<bool, Action<ModuleSymbol>> validator = isFromSource =>
                 module =>
                 {
-                    var methods = module
-                        .GlobalNamespace.GetMember<NamedTypeSymbol>("C")
+                    var methods = module.GlobalNamespace
+                        .GetMember<NamedTypeSymbol>("C")
                         .GetMembers()
                         .OfType<MethodSymbol>()
                         .Where(m => m.MethodKind == MethodKind.Ordinary)
@@ -2518,8 +2518,8 @@ public class C
             Func<bool, Action<ModuleSymbol>> validator = isFromSource =>
                 module =>
                 {
-                    var methods = module
-                        .GlobalNamespace.GetMember<NamedTypeSymbol>("C")
+                    var methods = module.GlobalNamespace
+                        .GetMember<NamedTypeSymbol>("C")
                         .GetMembers()
                         .OfType<MethodSymbol>()
                         .Where(m => m.MethodKind == MethodKind.Ordinary)
@@ -2637,8 +2637,8 @@ public class C
             Func<bool, Action<ModuleSymbol>> validator = isFromSource =>
                 module =>
                 {
-                    var methods = module
-                        .GlobalNamespace.GetMember<NamedTypeSymbol>("C")
+                    var methods = module.GlobalNamespace
+                        .GetMember<NamedTypeSymbol>("C")
                         .GetMembers()
                         .OfType<MethodSymbol>()
                         .Where(m => m.MethodKind == MethodKind.Ordinary)

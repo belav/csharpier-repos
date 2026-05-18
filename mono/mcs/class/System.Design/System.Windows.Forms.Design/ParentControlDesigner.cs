@@ -569,9 +569,9 @@ namespace System.Windows.Forms.Design
                     && host.RootComponent != this.Control
                 )
                 {
-                    location = this.Control.Parent.PointToClient(
-                        this.Control.PointToScreen(new Point(x, y))
-                    );
+                    location = this.Control
+                        .Parent
+                        .PointToClient(this.Control.PointToScreen(new Point(x, y)));
                     // I have to do this, because I get DragOver events fired for the control I am actually dragging
                     //
                     this.Control.AllowDrop = false;
@@ -751,10 +751,11 @@ namespace System.Windows.Forms.Design
             if (drawGrid)
             {
                 GraphicsState state = pe.Graphics.Save();
-                pe.Graphics.TranslateTransform(
-                    this.Control.ClientRectangle.X,
-                    this.Control.ClientRectangle.Y
-                );
+                pe.Graphics
+                    .TranslateTransform(
+                        this.Control.ClientRectangle.X,
+                        this.Control.ClientRectangle.Y
+                    );
                 ControlPaint.DrawGrid(
                     pe.Graphics,
                     this.Control.ClientRectangle,

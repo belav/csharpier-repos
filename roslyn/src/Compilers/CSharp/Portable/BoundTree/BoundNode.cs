@@ -288,11 +288,9 @@ namespace Microsoft.CodeAnalysis.CSharp
 
                 var annotation = (_attributes & BoundNodeAttributes.TopLevelAnnotationMask) switch
                 {
-                    BoundNodeAttributes.TopLevelAnnotated => CodeAnalysis
-                        .NullableAnnotation
+                    BoundNodeAttributes.TopLevelAnnotated => CodeAnalysis.NullableAnnotation
                         .Annotated,
-                    BoundNodeAttributes.TopLevelNotAnnotated => CodeAnalysis
-                        .NullableAnnotation
+                    BoundNodeAttributes.TopLevelNotAnnotated => CodeAnalysis.NullableAnnotation
                         .NotAnnotated,
                     BoundNodeAttributes.TopLevelNone => CodeAnalysis.NullableAnnotation.None,
                     var mask => throw ExceptionUtilities.UnexpectedValue(mask),

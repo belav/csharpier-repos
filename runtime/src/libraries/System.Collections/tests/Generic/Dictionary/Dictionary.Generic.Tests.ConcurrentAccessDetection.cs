@@ -22,42 +22,46 @@ namespace Generic.Dictionary
             Action<Dictionary<TKey, TValue>> removeOutParam
         )
         {
-            Task task = Task.Factory.StartNew(
-                () =>
-                {
-                    // Get the Dictionary into a corrupted state, as if it had been corrupted by concurrent access.
-                    // We this deterministically by clearing the _entries array using reflection;
-                    // this means that every Entry struct has a 'next' field of zero, which causes the infinite loop
-                    // that we want Dictionary to break out of
-                    FieldInfo entriesType = dictionary
-                        .GetType()
-                        .GetField("_entries", BindingFlags.NonPublic | BindingFlags.Instance);
-                    Array entriesInstance = (Array)entriesType.GetValue(dictionary);
-                    Array entryArray = (Array)
-                        Activator.CreateInstance(
-                            entriesInstance.GetType(),
-                            new object[] { ((IDictionary)dictionary).Count }
-                        );
-                    entriesType.SetValue(dictionary, entryArray);
-
-                    Assert.Equal(
-                        comparer,
-                        dictionary
+            Task task = Task.Factory
+                .StartNew(
+                    () =>
+                    {
+                        // Get the Dictionary into a corrupted state, as if it had been corrupted by concurrent access.
+                        // We this deterministically by clearing the _entries array using reflection;
+                        // this means that every Entry struct has a 'next' field of zero, which causes the infinite loop
+                        // that we want Dictionary to break out of
+                        FieldInfo entriesType = dictionary
                             .GetType()
-                            .GetField("_comparer", BindingFlags.NonPublic | BindingFlags.Instance)
-                            .GetValue(dictionary)
-                    );
-                    Assert.Equal(
-                        isValueType,
-                        dictionary.GetType().GetGenericArguments()[0].IsValueType
-                    );
-                    Assert.Throws<InvalidOperationException>(() => add(dictionary));
-                    Assert.Throws<InvalidOperationException>(() => get(dictionary));
-                    Assert.Throws<InvalidOperationException>(() => remove(dictionary));
-                    Assert.Throws<InvalidOperationException>(() => removeOutParam(dictionary));
-                },
-                TaskCreationOptions.LongRunning
-            );
+                            .GetField("_entries", BindingFlags.NonPublic | BindingFlags.Instance);
+                        Array entriesInstance = (Array)entriesType.GetValue(dictionary);
+                        Array entryArray = (Array)
+                            Activator.CreateInstance(
+                                entriesInstance.GetType(),
+                                new object[] { ((IDictionary)dictionary).Count }
+                            );
+                        entriesType.SetValue(dictionary, entryArray);
+
+                        Assert.Equal(
+                            comparer,
+                            dictionary
+                                .GetType()
+                                .GetField(
+                                    "_comparer",
+                                    BindingFlags.NonPublic | BindingFlags.Instance
+                                )
+                                .GetValue(dictionary)
+                        );
+                        Assert.Equal(
+                            isValueType,
+                            dictionary.GetType().GetGenericArguments()[0].IsValueType
+                        );
+                        Assert.Throws<InvalidOperationException>(() => add(dictionary));
+                        Assert.Throws<InvalidOperationException>(() => get(dictionary));
+                        Assert.Throws<InvalidOperationException>(() => remove(dictionary));
+                        Assert.Throws<InvalidOperationException>(() => removeOutParam(dictionary));
+                    },
+                    TaskCreationOptions.LongRunning
+                );
 
             // If Dictionary regresses, we do not want to hang here indefinitely
             await task.WaitAsync(TimeSpan.FromSeconds(60));

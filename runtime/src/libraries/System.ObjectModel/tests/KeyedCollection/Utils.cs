@@ -160,7 +160,8 @@ namespace System.Collections.ObjectModel.Tests
             }
             MethodInfo propGet = typeof(KeyedCollection<TKey, TValue>)
                 .GetTypeInfo()
-                .DeclaredProperties.Where(f => f.Name == "Dictionary")
+                .DeclaredProperties
+                .Where(f => f.Name == "Dictionary")
                 .Select(f => f.GetMethod)
                 .Where(gm => gm != null)
                 .FirstOrDefault(gm => gm.IsFamily);

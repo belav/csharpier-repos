@@ -51,8 +51,7 @@ namespace System.DirectoryServices
         private int _PageSize = 0;
         private StringCollection _PropertiesToLoad = new StringCollection();
         private bool _PropertyNamesOnly = false;
-        private ReferralChasingOption _ReferralChasing = System
-            .DirectoryServices
+        private ReferralChasingOption _ReferralChasing = System.DirectoryServices
             .ReferralChasingOption
             .External;
         private SearchScope _SearchScope = System.DirectoryServices.SearchScope.Subtree;

@@ -82,9 +82,8 @@ internal static class WebAssemblyNetDebugProxyAppBuilderExtensions
                                 }
                                 break;
                             case "/ws-proxy":
-                                context.Response.Redirect(
-                                    $"{debugProxyBaseUrl}{browserUrl!.PathAndQuery}"
-                                );
+                                context.Response
+                                    .Redirect($"{debugProxyBaseUrl}{browserUrl!.PathAndQuery}");
                                 break;
                             default:
                                 context.Response.StatusCode = (int)HttpStatusCode.NotFound;
@@ -138,8 +137,8 @@ internal sealed class TargetPickerUi
         {
             var msg = JsonSerializer.Serialize(args);
             var bytes = Encoding.UTF8.GetBytes(msg);
-            var bytesWithHeader = Encoding
-                .UTF8.GetBytes($"{bytes.Length}:")
+            var bytesWithHeader = Encoding.UTF8
+                .GetBytes($"{bytes.Length}:")
                 .Concat(bytes)
                 .ToArray();
             await toStream.WriteAsync(bytesWithHeader, token).AsTask();
@@ -228,15 +227,16 @@ internal sealed class TargetPickerUi
             catch (Exception)
             {
                 context.Response.StatusCode = 404;
-                await context.Response.WriteAsync(
-                    $@"WARNING:
+                await context.Response
+                    .WriteAsync(
+                        $@"WARNING:
 Open about:config:
 - enable devtools.debugger.remote-enabled
 - enable devtools.chrome.enabled
 - disable devtools.debugger.prompt-connection
 Open firefox with remote debugging enabled on port 6000:
 firefox --start-debugger-server 6000 -new-tab about:debugging"
-                );
+                    );
                 return;
             }
             var source = new CancellationTokenSource();
@@ -252,10 +252,10 @@ firefox --start-debugger-server 6000 -new-tab about:debugging"
             string? toCmd = null;
             while (browserDebugClientConnect.Connected)
             {
-                var res = System
-                    .Text.Json.JsonDocument.Parse(
-                        await ReceiveMessageLoop(browserDebugClientConnect, token)
-                    )
+                var res = System.Text
+                    .Json
+                    .JsonDocument
+                    .Parse(await ReceiveMessageLoop(browserDebugClientConnect, token))
                     .RootElement;
                 var hasTabs = res.TryGetProperty("tabs", out var tabs);
                 var hasType = res.TryGetProperty("type", out var type);
@@ -334,9 +334,10 @@ firefox --start-debugger-server 6000 -new-tab about:debugging"
                         if (!foundAboutDebugging)
                         {
                             context.Response.StatusCode = 404;
-                            await context.Response.WriteAsync(
-                                "WARNING: Open about:debugging tab before pressing Debugging Hotkey"
-                            );
+                            await context.Response
+                                .WriteAsync(
+                                    "WARNING: Open about:debugging tab before pressing Debugging Hotkey"
+                                );
                             return;
                         }
                         if (string.IsNullOrEmpty(consoleActorId))
@@ -453,8 +454,9 @@ firefox --start-debugger-server 6000 -new-tab about:debugging"
         }
         catch (Exception ex)
         {
-            await context.Response.WriteAsync(
-                $@"
+            await context.Response
+                .WriteAsync(
+                    $@"
 <h1>Unable to find debuggable browser tab</h1>
 <p>
     Could not get a list of browser tabs from <code>{debuggerTabsListUrl}</code>.
@@ -473,7 +475,7 @@ firefox --start-debugger-server 6000 -new-tab about:debugging"
 <h2>Underlying exception:</h2>
 <pre>{ex}</pre>
                 "
-            );
+                );
 
             return;
         }
@@ -497,18 +499,19 @@ firefox --start-debugger-server 6000 -new-tab about:debugging"
             var suffix = string.IsNullOrEmpty(targetApplicationUrl)
                 ? string.Empty
                 : $" matching the URL {WebUtility.HtmlEncode(targetApplicationUrl)}";
-            await context.Response.WriteAsync(
-                $"<p>The list of targets returned by {WebUtility.HtmlEncode(debuggerTabsListUrl)} contains no entries{suffix}.</p>"
-            );
-            await context.Response.WriteAsync(
-                "<p>Make sure your browser is displaying the target application.</p>"
-            );
+            await context.Response
+                .WriteAsync(
+                    $"<p>The list of targets returned by {WebUtility.HtmlEncode(debuggerTabsListUrl)} contains no entries{suffix}.</p>"
+                );
+            await context.Response
+                .WriteAsync("<p>Make sure your browser is displaying the target application.</p>");
         }
         else
         {
             await context.Response.WriteAsync("<h1>Inspectable pages</h1>");
-            await context.Response.WriteAsync(
-                @"
+            await context.Response
+                .WriteAsync(
+                    @"
                     <style type='text/css'>
                         body {
                             font-family: Helvetica, Arial, sans-serif;
@@ -536,16 +539,17 @@ firefox --start-debugger-server 6000 -new-tab about:debugging"
                         }
                     </style>
                 "
-            );
+                );
 
             foreach (var tab in matchingTabs)
             {
                 var devToolsUrlWithProxy = GetDevToolsUrlWithProxy(tab);
-                await context.Response.WriteAsync(
-                    $"<a class='inspectable-page' href='{WebUtility.HtmlEncode(devToolsUrlWithProxy)}'>"
-                        + $"<h3>{WebUtility.HtmlEncode(tab.Title)}</h3>{WebUtility.HtmlEncode(tab.Url)}"
-                        + $"</a>"
-                );
+                await context.Response
+                    .WriteAsync(
+                        $"<a class='inspectable-page' href='{WebUtility.HtmlEncode(devToolsUrlWithProxy)}'>"
+                            + $"<h3>{WebUtility.HtmlEncode(tab.Title)}</h3>{WebUtility.HtmlEncode(tab.Url)}"
+                            + $"</a>"
+                    );
             }
         }
     }

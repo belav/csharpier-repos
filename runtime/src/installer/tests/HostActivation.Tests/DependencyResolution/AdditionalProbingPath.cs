@@ -29,12 +29,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.DependencyResolution
                 ? sharedState.AdditionalProbingPath
                 : sharedState.Location;
             TestApp app = sharedState.FrameworkReferenceApp;
-            CommandResult result = sharedState
-                .DotNetWithNetCoreApp.Exec(
-                    Constants.AdditionalProbingPath.CommandLineArgument,
-                    probePath,
-                    app.AppDll
-                )
+            CommandResult result = sharedState.DotNetWithNetCoreApp
+                .Exec(Constants.AdditionalProbingPath.CommandLineArgument, probePath, app.AppDll)
                 .EnableTracingAndCaptureOutputs()
                 .Execute();
 
@@ -44,8 +40,10 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.DependencyResolution
                 result
                     .Should()
                     .Pass()
-                    .And.HaveResolvedAssembly(sharedState.DependencyPath)
-                    .And.HaveResolvedNativeLibraryPath(sharedState.NativeDependencyDirectory);
+                    .And
+                    .HaveResolvedAssembly(sharedState.DependencyPath)
+                    .And
+                    .HaveResolvedNativeLibraryPath(sharedState.NativeDependencyDirectory);
             }
             else
             {
@@ -54,7 +52,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.DependencyResolution
                 result
                     .Should()
                     .Fail()
-                    .And.ErrorWithMissingAssembly(
+                    .And
+                    .ErrorWithMissingAssembly(
                         Path.GetFileName(app.DepsJson),
                         SharedTestState.DependencyName,
                         SharedTestState.DependencyVersion
@@ -68,19 +67,18 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.DependencyResolution
             // Host should replace |arch| and |tfm| with actual architecture and TFM
             string probePath = Path.Combine(sharedState.AdditionalProbingPath, "|arch|", "|tfm|");
             TestApp app = sharedState.FrameworkReferenceApp;
-            sharedState
-                .DotNetWithNetCoreApp.Exec(
-                    Constants.AdditionalProbingPath.CommandLineArgument,
-                    probePath,
-                    app.AppDll
-                )
+            sharedState.DotNetWithNetCoreApp
+                .Exec(Constants.AdditionalProbingPath.CommandLineArgument, probePath, app.AppDll)
                 .EnableTracingAndCaptureOutputs()
                 .Execute()
                 .Should()
                 .Pass()
-                .And.HaveUsedAdditionalProbingPath(sharedState.AdditionalProbingPath_ArchTfm)
-                .And.HaveResolvedAssembly(sharedState.DependencyPath_ArchTfm)
-                .And.HaveResolvedNativeLibraryPath(sharedState.NativeDependencyDirectory_ArchTfm);
+                .And
+                .HaveUsedAdditionalProbingPath(sharedState.AdditionalProbingPath_ArchTfm)
+                .And
+                .HaveResolvedAssembly(sharedState.DependencyPath_ArchTfm)
+                .And
+                .HaveResolvedNativeLibraryPath(sharedState.NativeDependencyDirectory_ArchTfm);
         }
 
         [Theory]
@@ -96,8 +94,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.DependencyResolution
                 .FromFile(app.RuntimeConfigJson)
                 .WithAdditionalProbingPath(probePath)
                 .Save();
-            CommandResult result = sharedState
-                .DotNetWithNetCoreApp.Exec(app.AppDll)
+            CommandResult result = sharedState.DotNetWithNetCoreApp
+                .Exec(app.AppDll)
                 .EnableTracingAndCaptureOutputs()
                 .Execute();
 
@@ -107,8 +105,10 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.DependencyResolution
                 result
                     .Should()
                     .Pass()
-                    .And.HaveResolvedAssembly(sharedState.DependencyPath)
-                    .And.HaveResolvedNativeLibraryPath(sharedState.NativeDependencyDirectory);
+                    .And
+                    .HaveResolvedAssembly(sharedState.DependencyPath)
+                    .And
+                    .HaveResolvedNativeLibraryPath(sharedState.NativeDependencyDirectory);
             }
             else
             {
@@ -117,7 +117,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.DependencyResolution
                 result
                     .Should()
                     .Fail()
-                    .And.ErrorWithMissingAssembly(
+                    .And
+                    .ErrorWithMissingAssembly(
                         Path.GetFileName(app.DepsJson),
                         SharedTestState.DependencyName,
                         SharedTestState.DependencyVersion

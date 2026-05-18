@@ -1179,10 +1179,9 @@ namespace System.Web.UI.DataVisualization.Charting
         {
             if (this.offsetTempSet)
             {
-                System.Diagnostics.Debug.Assert(
-                    this._intervalsStore.Count == 5,
-                    "Fail in interval store count"
-                );
+                System.Diagnostics
+                    .Debug
+                    .Assert(this._intervalsStore.Count == 5, "Fail in interval store count");
 
                 this.minorTickMark.intervalOffset = this._intervalsStore.Pop();
                 this.minorGrid.intervalOffset = this._intervalsStore.Pop();
@@ -1666,8 +1665,8 @@ namespace System.Web.UI.DataVisualization.Charting
             if (Double.IsNaN(crossing))
             {
                 if (
-                    Common
-                        .ChartTypeRegistry.GetChartType((string)ChartArea.ChartTypes[0])
+                    Common.ChartTypeRegistry
+                        .GetChartType((string)ChartArea.ChartTypes[0])
                         .ZeroCrossing
                 )
                 {
@@ -1757,13 +1756,11 @@ namespace System.Web.UI.DataVisualization.Charting
                         oppositeAxis = ChartArea.AxisY;
                     // Take opposite axis from the first series from chart area
                     else if (Common.DataManager.Series[list[0]].YAxisType == AxisType.Primary)
-                        oppositeAxis = ChartArea.AxisY.GetSubAxis(
-                            Common.DataManager.Series[list[0]].YSubAxisName
-                        );
+                        oppositeAxis = ChartArea.AxisY
+                            .GetSubAxis(Common.DataManager.Series[list[0]].YSubAxisName);
                     else
-                        oppositeAxis = ChartArea.AxisY2.GetSubAxis(
-                            Common.DataManager.Series[list[0]].YSubAxisName
-                        );
+                        oppositeAxis = ChartArea.AxisY2
+                            .GetSubAxis(Common.DataManager.Series[list[0]].YSubAxisName);
                     break;
                 // X2 Axis
                 case AxisName.X2:
@@ -1773,13 +1770,11 @@ namespace System.Web.UI.DataVisualization.Charting
                         oppositeAxis = ChartArea.AxisY2;
                     // Take opposite axis from the first series from chart area
                     else if (Common.DataManager.Series[list[0]].YAxisType == AxisType.Primary)
-                        oppositeAxis = ChartArea.AxisY.GetSubAxis(
-                            Common.DataManager.Series[list[0]].YSubAxisName
-                        );
+                        oppositeAxis = ChartArea.AxisY
+                            .GetSubAxis(Common.DataManager.Series[list[0]].YSubAxisName);
                     else
-                        oppositeAxis = ChartArea.AxisY2.GetSubAxis(
-                            Common.DataManager.Series[list[0]].YSubAxisName
-                        );
+                        oppositeAxis = ChartArea.AxisY2
+                            .GetSubAxis(Common.DataManager.Series[list[0]].YSubAxisName);
                     break;
                 // Y Axis
                 case AxisName.Y:
@@ -1789,13 +1784,11 @@ namespace System.Web.UI.DataVisualization.Charting
                         oppositeAxis = ChartArea.AxisX;
                     // Take opposite axis from the first series from chart area
                     else if (Common.DataManager.Series[list[0]].XAxisType == AxisType.Primary)
-                        oppositeAxis = ChartArea.AxisX.GetSubAxis(
-                            Common.DataManager.Series[list[0]].XSubAxisName
-                        );
+                        oppositeAxis = ChartArea.AxisX
+                            .GetSubAxis(Common.DataManager.Series[list[0]].XSubAxisName);
                     else
-                        oppositeAxis = ChartArea.AxisX2.GetSubAxis(
-                            Common.DataManager.Series[list[0]].XSubAxisName
-                        );
+                        oppositeAxis = ChartArea.AxisX2
+                            .GetSubAxis(Common.DataManager.Series[list[0]].XSubAxisName);
                     break;
                 // Y2 Axis
                 case AxisName.Y2:
@@ -1805,13 +1798,11 @@ namespace System.Web.UI.DataVisualization.Charting
                         oppositeAxis = ChartArea.AxisX2;
                     // Take opposite axis from the first series from chart area
                     else if (Common.DataManager.Series[list[0]].XAxisType == AxisType.Primary)
-                        oppositeAxis = ChartArea.AxisX.GetSubAxis(
-                            Common.DataManager.Series[list[0]].XSubAxisName
-                        );
+                        oppositeAxis = ChartArea.AxisX
+                            .GetSubAxis(Common.DataManager.Series[list[0]].XSubAxisName);
                     else
-                        oppositeAxis = ChartArea.AxisX2.GetSubAxis(
-                            Common.DataManager.Series[list[0]].XSubAxisName
-                        );
+                        oppositeAxis = ChartArea.AxisX2
+                            .GetSubAxis(Common.DataManager.Series[list[0]].XSubAxisName);
                     break;
             }
             return oppositeAxis;
@@ -1865,9 +1856,8 @@ namespace System.Web.UI.DataVisualization.Charting
             // Check if axis scale segments are enabled
             if (this.scaleSegmentsUsed)
             {
-                AxisScaleSegment scaleSegment = this.ScaleSegments.FindScaleSegmentForAxisValue(
-                    axisValue
-                );
+                AxisScaleSegment scaleSegment = this.ScaleSegments
+                    .FindScaleSegmentForAxisValue(axisValue);
                 if (scaleSegment != null)
                 {
                     double segmentSize = 0.0;

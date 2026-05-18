@@ -229,8 +229,7 @@ namespace System.Data.Objects
             get
             {
                 throw new InvalidOperationException(
-                    System
-                        .Data
+                    System.Data
                         .Entity
                         .Strings
                         .ObjectStateEntry_RelationshipAndKeyEntriesDoNotHaveRelationshipManagers
@@ -251,24 +250,26 @@ namespace System.Data.Objects
 
             if (this.RelationshipWrapper.Key0 == this.Key0)
             {
-                this.ObjectStateManager.ChangeRelationshipState(
-                    this.Key0,
-                    this.Key1,
-                    this.RelationshipWrapper.AssociationSet.ElementType.FullName,
-                    this.RelationshipWrapper.AssociationEndMembers[1].Name,
-                    state
-                );
+                this.ObjectStateManager
+                    .ChangeRelationshipState(
+                        this.Key0,
+                        this.Key1,
+                        this.RelationshipWrapper.AssociationSet.ElementType.FullName,
+                        this.RelationshipWrapper.AssociationEndMembers[1].Name,
+                        state
+                    );
             }
             else
             {
                 Debug.Assert(this.RelationshipWrapper.Key0 == this.Key1, "invalid relationship");
-                this.ObjectStateManager.ChangeRelationshipState(
-                    this.Key0,
-                    this.Key1,
-                    this.RelationshipWrapper.AssociationSet.ElementType.FullName,
-                    this.RelationshipWrapper.AssociationEndMembers[0].Name,
-                    state
-                );
+                this.ObjectStateManager
+                    .ChangeRelationshipState(
+                        this.Key0,
+                        this.Key1,
+                        this.RelationshipWrapper.AssociationSet.ElementType.FullName,
+                        this.RelationshipWrapper.AssociationEndMembers[0].Name,
+                        state
+                    );
             }
         }
 
@@ -570,11 +571,8 @@ namespace System.Data.Objects
                             _relationshipWrapper.AssociationEndMembers;
                         string toRole = endMembers[1].Name;
                         string relationshipName = ((AssociationSet)_entitySet).ElementType.FullName;
-                        wrappedEntity1.RelationshipManager.RemoveEntity(
-                            toRole,
-                            relationshipName,
-                            wrappedEntity2
-                        );
+                        wrappedEntity1.RelationshipManager
+                            .RemoveEntity(toRole, relationshipName, wrappedEntity2);
                     }
                     else
                     {
@@ -602,8 +600,8 @@ namespace System.Data.Objects
                         // even if no other relationships are added, the key value will still be correct and we won't accidentally pick up an old value.
 
                         // devnote: Since we know the target end of this relationship is a key entry, it has to be a reference, so just cast
-                        AssociationEndMember targetMember =
-                            this.RelationshipWrapper.GetAssociationEndMember(targetKey);
+                        AssociationEndMember targetMember = this.RelationshipWrapper
+                            .GetAssociationEndMember(targetKey);
                         EntityReference entityReference = (EntityReference)
                             relationshipManager.GetRelatedEndInternal(
                                 targetMember.DeclaringType.FullName,
@@ -716,11 +714,8 @@ namespace System.Data.Objects
                     switch (requestedState)
                     {
                         case EntityState.Added:
-                            this.ObjectStateManager.ChangeState(
-                                this,
-                                EntityState.Unchanged,
-                                EntityState.Added
-                            );
+                            this.ObjectStateManager
+                                .ChangeState(this, EntityState.Unchanged, EntityState.Added);
                             this.State = EntityState.Added;
                             break;
                         case EntityState.Unchanged:
@@ -752,11 +747,8 @@ namespace System.Data.Objects
                                 allowModifyingOtherEndOfRelationship: false,
                                 forceForeignKeyChanges: true
                             );
-                            this.ObjectStateManager.ChangeState(
-                                this,
-                                EntityState.Deleted,
-                                EntityState.Added
-                            );
+                            this.ObjectStateManager
+                                .ChangeState(this, EntityState.Deleted, EntityState.Added);
                             this.State = EntityState.Added;
                             break;
                         case EntityState.Unchanged:
@@ -768,11 +760,8 @@ namespace System.Data.Objects
                                 allowModifyingOtherEndOfRelationship: false,
                                 forceForeignKeyChanges: true
                             );
-                            this.ObjectStateManager.ChangeState(
-                                this,
-                                EntityState.Deleted,
-                                EntityState.Unchanged
-                            );
+                            this.ObjectStateManager
+                                .ChangeState(this, EntityState.Deleted, EntityState.Unchanged);
                             this.State = EntityState.Unchanged;
                             break;
                         case EntityState.Deleted:

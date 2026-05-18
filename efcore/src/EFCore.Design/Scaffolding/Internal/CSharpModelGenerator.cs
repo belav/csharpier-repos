@@ -75,10 +75,8 @@ public class CSharpModelGenerator : ModelCodeGenerator
         };
         contextTemplate.Session.Add("Model", model);
         contextTemplate.Session.Add("Options", options);
-        contextTemplate.Session.Add(
-            "NamespaceHint",
-            options.ContextNamespace ?? options.ModelNamespace
-        );
+        contextTemplate.Session
+            .Add("NamespaceHint", options.ContextNamespace ?? options.ModelNamespace);
         contextTemplate.Session.Add("ProjectDefaultNamespace", options.RootNamespace);
         contextTemplate.Initialize();
 
@@ -120,9 +118,8 @@ public class CSharpModelGenerator : ModelCodeGenerator
 
             // output EntityType poco .cs file
             var entityTypeFileName = entityType.Name + host.Extension;
-            resultingFiles.AdditionalFiles.Add(
-                new ScaffoldedFile { Path = entityTypeFileName, Code = generatedCode }
-            );
+            resultingFiles.AdditionalFiles
+                .Add(new ScaffoldedFile { Path = entityTypeFileName, Code = generatedCode });
         }
 
         return resultingFiles;

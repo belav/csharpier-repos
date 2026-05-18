@@ -58,8 +58,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                         && expression.Parent.Parent.Kind() == SyntaxKind.VariableDeclarator
                     )
                     {
-                        var name = ((VariableDeclaratorSyntax)expression.Parent.Parent)
-                            .Identifier
+                        var name = ((VariableDeclaratorSyntax)expression.Parent.Parent).Identifier
                             .ValueText;
                         return (name != null && name.Length > 0)
                             ? MakeMethodName("Get", name, methodName.Equals(NewMethodCamelCaseStr))
@@ -93,8 +92,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                                 );
                         }
 
-                        var unqualifiedNameIdentifierValueText = unqualifiedName
-                            .Identifier
+                        var unqualifiedNameIdentifierValueText = unqualifiedName.Identifier
                             .ValueText;
                         return (
                             unqualifiedNameIdentifierValueText != null
@@ -174,13 +172,13 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                         this.SelectionResult.GetContainingScopeOf<StatementSyntax>();
                     scope ??= this.SelectionResult.GetContainingScopeOf<FieldDeclarationSyntax>();
 
-                    scope ??=
-                        this.SelectionResult.GetContainingScopeOf<ConstructorInitializerSyntax>();
+                    scope ??= this.SelectionResult
+                        .GetContainingScopeOf<ConstructorInitializerSyntax>();
 
                     // This is similar to FieldDeclaration case but we only want to do this
                     // if the member has an expression body.
-                    scope ??= this
-                        .SelectionResult.GetContainingScopeOf<ArrowExpressionClauseSyntax>()
+                    scope ??= this.SelectionResult
+                        .GetContainingScopeOf<ArrowExpressionClauseSyntax>()
                         .Parent;
 
                     return scope;

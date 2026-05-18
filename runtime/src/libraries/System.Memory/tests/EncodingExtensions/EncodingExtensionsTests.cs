@@ -110,8 +110,8 @@ namespace System.Text.Tests
 
             // Then, a large input with no flushing and leftover data.
 
-            inputData = Encoding
-                .UTF8.GetBytes(new string('x', 20_000_000))
+            inputData = Encoding.UTF8
+                .GetBytes(new string('x', 20_000_000))
                 .Concat(new byte[] { 0xE0, 0xA0 })
                 .ToArray();
             EncodingExtensions.Convert(
@@ -385,8 +385,8 @@ namespace System.Text.Tests
             // Use SequenceEqual instead of Assert.Equal for perf.
 
             Assert.True(
-                Encoding
-                    .UTF8.GetBytes(
+                Encoding.UTF8
+                    .GetBytes(
                         "Hello"
                             + new string('x', 20_000_000)
                             + "\U00010000"
@@ -744,8 +744,8 @@ namespace System.Text.Tests
             // Now make sure all of the data was encoded properly.
 
             Assert.True(
-                Encoding
-                    .UTF8.GetBytes(largeString + "\ufffd")
+                Encoding.UTF8
+                    .GetBytes(largeString + "\ufffd")
                     .AsSpan()
                     .SequenceEqual(writer.WrittenSpan)
             );
@@ -918,8 +918,8 @@ namespace System.Text.Tests
             // that we're flowing the 'flush' parameter through the system correctly.
 
             writer = new ArrayBufferWriter<char>();
-            inputData = Encoding
-                .UTF8.GetBytes(new string('\u1234', 5_000_000))
+            inputData = Encoding.UTF8
+                .GetBytes(new string('\u1234', 5_000_000))
                 .Concat(new byte[] { 0xE0 })
                 .ToArray();
             charsWritten = EncodingExtensions.GetChars(Encoding.UTF8, inputData, writer);
@@ -1002,9 +1002,8 @@ namespace System.Text.Tests
             public void Advance(int count)
             {
                 ReadOnlySpan<T> bufferSpan = _buffer.AsSpan(0, count);
-                ReadOnlySpan<T> remainingGoodDataSpan = _knownGoodData.Span.Slice(
-                    (int)(TotalElementsWritten % _knownGoodData.Length)
-                );
+                ReadOnlySpan<T> remainingGoodDataSpan = _knownGoodData.Span
+                    .Slice((int)(TotalElementsWritten % _knownGoodData.Length));
 
                 while (!bufferSpan.IsEmpty)
                 {

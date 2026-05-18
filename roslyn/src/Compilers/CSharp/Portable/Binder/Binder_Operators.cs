@@ -94,8 +94,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                         right.Syntax,
                         left.HasDynamicType() ? left.Type : right.Type
                     ).MakeCompilerGenerated();
-                    var finalDynamicConversion =
-                        this.Compilation.Conversions.ClassifyConversionFromExpression(
+                    var finalDynamicConversion = this.Compilation
+                        .Conversions
+                        .ClassifyConversionFromExpression(
                             placeholder,
                             left.Type,
                             isChecked: CheckOverflowAtRuntime,
@@ -356,8 +357,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             }
             else if (final.Conversion.IsExplicit && isPredefinedOperator && !kind.IsShift())
             {
-                Conversion rightToLeftConversion =
-                    this.Conversions.ClassifyConversionFromExpression(
+                Conversion rightToLeftConversion = this.Conversions
+                    .ClassifyConversionFromExpression(
                         right,
                         leftType,
                         isChecked: CheckOverflowAtRuntime,
@@ -448,12 +449,13 @@ namespace Microsoft.CodeAnalysis.CSharp
             CompoundUseSiteInfo<AssemblySymbol> useSiteInfo = GetNewCompoundUseSiteInfo(
                 diagnostics
             );
-            Conversion argumentConversion = this.Conversions.ClassifyConversionFromExpression(
-                right,
-                delegateType,
-                isChecked: CheckOverflowAtRuntime,
-                ref useSiteInfo
-            );
+            Conversion argumentConversion = this.Conversions
+                .ClassifyConversionFromExpression(
+                    right,
+                    delegateType,
+                    isChecked: CheckOverflowAtRuntime,
+                    ref useSiteInfo
+                );
 
             if (!argumentConversion.IsImplicit || !argumentConversion.IsValid) // NOTE: dev10 appears to allow user-defined conversions here.
             {
@@ -732,9 +734,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             {
                 if (
                     result.Kind == BoundKind.TypeExpression
-                    && !((ParenthesizedExpressionSyntax)current).Expression.IsKind(
-                        SyntaxKind.ParenthesizedExpression
-                    )
+                    && !((ParenthesizedExpressionSyntax)current).Expression
+                        .IsKind(SyntaxKind.ParenthesizedExpression)
                 )
                 {
                     Error(diagnostics, ErrorCode.ERR_PossibleBadNegCast, node);
@@ -745,8 +746,7 @@ namespace Microsoft.CodeAnalysis.CSharp
 
                     if (
                         parenthesizedExpression.Expression.IsKind(SyntaxKind.IdentifierName)
-                        && ((IdentifierNameSyntax)parenthesizedExpression.Expression)
-                            .Identifier
+                        && ((IdentifierNameSyntax)parenthesizedExpression.Expression).Identifier
                             .ValueText == "dynamic"
                     )
                     {
@@ -875,9 +875,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 return new BoundBinaryOperator(
                     node,
                     BinaryOperatorKind.StringConcatenation,
-                    BoundBinaryOperator.UncommonData.UnconvertedInterpolatedStringAddition(
-                        stringConstant
-                    ),
+                    BoundBinaryOperator.UncommonData
+                        .UnconvertedInterpolatedStringAddition(stringConstant),
                     LookupResultKind.Empty,
                     left,
                     right,
@@ -1253,12 +1252,13 @@ namespace Microsoft.CodeAnalysis.CSharp
             {
                 // Special diagnostic for delegate += and -= about wrong right-hand-side
                 var discardedUseSiteInfo = CompoundUseSiteInfo<AssemblySymbol>.Discarded;
-                var conversion = this.Conversions.ClassifyConversionFromExpression(
-                    right,
-                    left.Type,
-                    isChecked: CheckOverflowAtRuntime,
-                    ref discardedUseSiteInfo
-                );
+                var conversion = this.Conversions
+                    .ClassifyConversionFromExpression(
+                        right,
+                        left.Type,
+                        isChecked: CheckOverflowAtRuntime,
+                        ref discardedUseSiteInfo
+                    );
                 Debug.Assert(!conversion.IsImplicit);
                 GenerateImplicitConversionError(
                     diagnostics,
@@ -1384,9 +1384,10 @@ namespace Microsoft.CodeAnalysis.CSharp
             {
                 return type is NamedTypeSymbol namedType
                     && Compilation.IsReadOnlySpanType(namedType)
-                    && namedType
-                        .TypeArgumentsWithAnnotationsNoUseSiteDiagnostics.Single()
-                        .Type.SpecialType is SpecialType.System_Byte;
+                    && namedType.TypeArgumentsWithAnnotationsNoUseSiteDiagnostics
+                        .Single()
+                        .Type
+                        .SpecialType is SpecialType.System_Byte;
             }
 #nullable disable
         }
@@ -1832,9 +1833,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     t.IsInterface
                     && (signature.Method.IsAbstract || signature.Method.IsVirtual)
                     && SourceUserDefinedOperatorSymbol.IsSelfConstrainedTypeParameter(
-                        (
-                            definition = signature.Method.OriginalDefinition
-                        ).ReturnType.StrippedType(),
+                        (definition = signature.Method.OriginalDefinition).ReturnType
+                            .StrippedType(),
                         definition.ContainingType
                     )
                 );
@@ -1978,12 +1978,13 @@ namespace Microsoft.CodeAnalysis.CSharp
                     var op = operators[i];
                     if (op.ParameterCount == 1 && op.DeclaredAccessibility == Accessibility.Public)
                     {
-                        var conversion = this.Conversions.ClassifyConversionFromType(
-                            argumentType,
-                            op.GetParameterType(0),
-                            isChecked: CheckOverflowAtRuntime,
-                            ref useSiteInfo
-                        );
+                        var conversion = this.Conversions
+                            .ClassifyConversionFromType(
+                                argumentType,
+                                op.GetParameterType(0),
+                                isChecked: CheckOverflowAtRuntime,
+                                ref useSiteInfo
+                            );
                         if (conversion.IsImplicit)
                         {
                             @operator = op;
@@ -2039,14 +2040,15 @@ namespace Microsoft.CodeAnalysis.CSharp
             CompoundUseSiteInfo<AssemblySymbol> useSiteInfo = GetNewCompoundUseSiteInfo(
                 diagnostics
             );
-            this.OverloadResolution.BinaryOperatorOverloadResolution(
-                kind,
-                isChecked,
-                left,
-                right,
-                result,
-                ref useSiteInfo
-            );
+            this.OverloadResolution
+                .BinaryOperatorOverloadResolution(
+                    kind,
+                    isChecked,
+                    left,
+                    right,
+                    result,
+                    ref useSiteInfo
+                );
             diagnostics.Add(node, useSiteInfo);
 
             var possiblyBest = result.Best;
@@ -2163,13 +2165,14 @@ namespace Microsoft.CodeAnalysis.CSharp
             CompoundUseSiteInfo<AssemblySymbol> useSiteInfo = GetNewCompoundUseSiteInfo(
                 diagnostics
             );
-            this.OverloadResolution.UnaryOperatorOverloadResolution(
-                kind,
-                isChecked: CheckOverflowAtRuntime,
-                operand,
-                result,
-                ref useSiteInfo
-            );
+            this.OverloadResolution
+                .UnaryOperatorOverloadResolution(
+                    kind,
+                    isChecked: CheckOverflowAtRuntime,
+                    operand,
+                    result,
+                    ref useSiteInfo
+                );
             diagnostics.Add(node, useSiteInfo);
 
             var possiblyBest = result.Best;
@@ -3387,10 +3390,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             BindingDiagnosticBag diagnostics
         )
         {
-            MessageID.IDS_FeatureNullableReferenceTypes.CheckFeatureAvailability(
-                diagnostics,
-                node.OperatorToken
-            );
+            MessageID.IDS_FeatureNullableReferenceTypes
+                .CheckFeatureAvailability(diagnostics, node.OperatorToken);
 
             var expr = BindExpression(node.Operand, diagnostics);
             switch (expr.Kind)
@@ -3696,8 +3697,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     case BoundKind.ThisReference:
                     case BoundKind.BaseReference:
                     {
-                        accessedLocalOrParameterOpt =
-                            this.ContainingMemberOrLambda.EnclosingThisSymbol();
+                        accessedLocalOrParameterOpt = this.ContainingMemberOrLambda
+                            .EnclosingThisSymbol();
                         return true;
                     }
                     case BoundKind.Local:
@@ -5793,10 +5794,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             BindingDiagnosticBag diagnostics
         )
         {
-            MessageID.IDS_FeatureCoalesceAssignmentExpression.CheckFeatureAvailability(
-                diagnostics,
-                node.OperatorToken
-            );
+            MessageID.IDS_FeatureCoalesceAssignmentExpression
+                .CheckFeatureAvailability(diagnostics, node.OperatorToken);
 
             BoundExpression leftOperand = BindValue(
                 node.Left,
@@ -5971,14 +5970,10 @@ namespace Microsoft.CodeAnalysis.CSharp
             BindingDiagnosticBag diagnostics
         )
         {
-            var whenTrue = node.WhenTrue.CheckAndUnwrapRefExpression(
-                diagnostics,
-                out var whenTrueRefKind
-            );
-            var whenFalse = node.WhenFalse.CheckAndUnwrapRefExpression(
-                diagnostics,
-                out var whenFalseRefKind
-            );
+            var whenTrue = node.WhenTrue
+                .CheckAndUnwrapRefExpression(diagnostics, out var whenTrueRefKind);
+            var whenFalse = node.WhenFalse
+                .CheckAndUnwrapRefExpression(diagnostics, out var whenFalseRefKind);
 
             var isRef = whenTrueRefKind == RefKind.Ref && whenFalseRefKind == RefKind.Ref;
             if (!isRef)

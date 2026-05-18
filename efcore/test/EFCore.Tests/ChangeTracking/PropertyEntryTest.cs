@@ -147,7 +147,8 @@ public class PropertyEntryTest
                         LongName = "B",
                     }
                 )
-                .Entity.Id;
+                .Entity
+                .Id;
 
             context.SaveChanges();
         }
@@ -785,16 +786,19 @@ public class PropertyEntryTest
     private void Can_get_name_generic_helper<TWotty>()
         where TWotty : class, IWotty, new()
     {
-        var entry = InMemoryTestHelpers.Instance.CreateInternalEntry(
-            BuildModel(),
-            EntityState.Unchanged,
-            new TWotty { Id = 1, Primate = "Monkey" }
-        );
+        var entry = InMemoryTestHelpers.Instance
+            .CreateInternalEntry(
+                BuildModel(),
+                EntityState.Unchanged,
+                new TWotty { Id = 1, Primate = "Monkey" }
+            );
 
         Assert.Equal(
             "Primate",
-            new PropertyEntry<Wotty, string>(entry, entry.EntityType.FindProperty("Primate")!)
-                .Metadata
+            new PropertyEntry<Wotty, string>(
+                entry,
+                entry.EntityType.FindProperty("Primate")!
+            ).Metadata
                 .Name
         );
     }
@@ -809,11 +813,12 @@ public class PropertyEntryTest
     private void Can_get_current_value_generic_helper<TWotty>()
         where TWotty : class, IWotty, new()
     {
-        var entry = InMemoryTestHelpers.Instance.CreateInternalEntry(
-            BuildModel(),
-            EntityState.Unchanged,
-            new TWotty { Id = 1, Primate = "Monkey" }
-        );
+        var entry = InMemoryTestHelpers.Instance
+            .CreateInternalEntry(
+                BuildModel(),
+                EntityState.Unchanged,
+                new TWotty { Id = 1, Primate = "Monkey" }
+            );
 
         Assert.Equal(
             "Monkey",
@@ -836,11 +841,8 @@ public class PropertyEntryTest
     {
         var entity = new TWotty { Id = 1, Primate = "Monkey" };
 
-        var entry = InMemoryTestHelpers.Instance.CreateInternalEntry(
-            BuildModel(),
-            EntityState.Unchanged,
-            entity
-        );
+        var entry = InMemoryTestHelpers.Instance
+            .CreateInternalEntry(BuildModel(), EntityState.Unchanged, entity);
 
         new PropertyEntry<Wotty, string>(
             entry,
@@ -863,11 +865,8 @@ public class PropertyEntryTest
     {
         var entity = new TWotty { Id = 1, Primate = "Monkey" };
 
-        var entry = InMemoryTestHelpers.Instance.CreateInternalEntry(
-            BuildModel(),
-            EntityState.Unchanged,
-            entity
-        );
+        var entry = InMemoryTestHelpers.Instance
+            .CreateInternalEntry(BuildModel(), EntityState.Unchanged, entity);
 
         new PropertyEntry<Wotty, string?>(
             entry,
@@ -890,11 +889,8 @@ public class PropertyEntryTest
     {
         var entity = new TWotty { Id = 1, Primate = "Monkey" };
 
-        var entry = InMemoryTestHelpers.Instance.CreateInternalEntry(
-            BuildModel(),
-            EntityState.Unchanged,
-            entity
-        );
+        var entry = InMemoryTestHelpers.Instance
+            .CreateInternalEntry(BuildModel(), EntityState.Unchanged, entity);
 
         Assert.Equal(
             "Monkey",
@@ -930,11 +926,12 @@ public class PropertyEntryTest
     private void Can_set_original_value_to_null_generic_helper<TWotty>()
         where TWotty : class, IWotty, new()
     {
-        var entry = InMemoryTestHelpers.Instance.CreateInternalEntry(
-            BuildModel(),
-            EntityState.Unchanged,
-            new TWotty { Id = 1, Primate = "Monkey" }
-        );
+        var entry = InMemoryTestHelpers.Instance
+            .CreateInternalEntry(
+                BuildModel(),
+                EntityState.Unchanged,
+                new TWotty { Id = 1, Primate = "Monkey" }
+            );
 
         new PropertyEntry<Wotty, string?>(
             entry,
@@ -962,11 +959,8 @@ public class PropertyEntryTest
     {
         var entity = new TWotty { Id = 1, Primate = "Monkey" };
 
-        var entry = InMemoryTestHelpers.Instance.CreateInternalEntry(
-            BuildModel(),
-            EntityState.Unchanged,
-            entity
-        );
+        var entry = InMemoryTestHelpers.Instance
+            .CreateInternalEntry(BuildModel(), EntityState.Unchanged, entity);
 
         Assert.False(
             new PropertyEntry<Wotty, string>(
@@ -999,11 +993,8 @@ public class PropertyEntryTest
     {
         var entity = new NotifyingWotty { Id = 1, Primate = "Monkey" };
 
-        var entry = InMemoryTestHelpers.Instance.CreateInternalEntry(
-            BuildModel(),
-            EntityState.Unchanged,
-            entity
-        );
+        var entry = InMemoryTestHelpers.Instance
+            .CreateInternalEntry(BuildModel(), EntityState.Unchanged, entity);
 
         Assert.Equal(
             "Monkey",
@@ -1022,11 +1013,12 @@ public class PropertyEntryTest
     [ConditionalFact]
     public void Can_set_original_value_to_null_notifying_entities()
     {
-        var entry = InMemoryTestHelpers.Instance.CreateInternalEntry(
-            BuildModel(),
-            EntityState.Unchanged,
-            new NotifyingWotty { Id = 1, Primate = "Monkey" }
-        );
+        var entry = InMemoryTestHelpers.Instance
+            .CreateInternalEntry(
+                BuildModel(),
+                EntityState.Unchanged,
+                new NotifyingWotty { Id = 1, Primate = "Monkey" }
+            );
 
         new PropertyEntry(entry, entry.EntityType.FindProperty("Primate")!).OriginalValue = null;
 
@@ -1040,11 +1032,8 @@ public class PropertyEntryTest
     {
         var entity = new NotifyingWotty { Id = 1, Primate = "Monkey" };
 
-        var entry = InMemoryTestHelpers.Instance.CreateInternalEntry(
-            BuildModel(),
-            EntityState.Unchanged,
-            entity
-        );
+        var entry = InMemoryTestHelpers.Instance
+            .CreateInternalEntry(BuildModel(), EntityState.Unchanged, entity);
 
         Assert.Equal(
             "Monkey",
@@ -1072,11 +1061,12 @@ public class PropertyEntryTest
     [ConditionalFact]
     public void Can_set_original_value_to_null_generic_notifying_entities()
     {
-        var entry = InMemoryTestHelpers.Instance.CreateInternalEntry(
-            BuildModel(),
-            EntityState.Unchanged,
-            new NotifyingWotty { Id = 1, Primate = "Monkey" }
-        );
+        var entry = InMemoryTestHelpers.Instance
+            .CreateInternalEntry(
+                BuildModel(),
+                EntityState.Unchanged,
+                new NotifyingWotty { Id = 1, Primate = "Monkey" }
+            );
 
         new PropertyEntry<NotifyingWotty, string?>(
             entry,
@@ -1096,11 +1086,8 @@ public class PropertyEntryTest
     {
         var entity = new FullyNotifyingWotty { Id = 1, ConcurrentPrimate = "Monkey" };
 
-        var entry = InMemoryTestHelpers.Instance.CreateInternalEntry(
-            BuildModel(),
-            EntityState.Unchanged,
-            entity
-        );
+        var entry = InMemoryTestHelpers.Instance
+            .CreateInternalEntry(BuildModel(), EntityState.Unchanged, entity);
 
         Assert.Equal(
             "Monkey",
@@ -1128,11 +1115,12 @@ public class PropertyEntryTest
     [ConditionalFact]
     public void Can_set_concurrency_token_original_value_to_null_full_notification_entities()
     {
-        var entry = InMemoryTestHelpers.Instance.CreateInternalEntry(
-            BuildModel(),
-            EntityState.Unchanged,
-            new FullyNotifyingWotty { Id = 1, ConcurrentPrimate = "Monkey" }
-        );
+        var entry = InMemoryTestHelpers.Instance
+            .CreateInternalEntry(
+                BuildModel(),
+                EntityState.Unchanged,
+                new FullyNotifyingWotty { Id = 1, ConcurrentPrimate = "Monkey" }
+            );
 
         new PropertyEntry(
             entry,
@@ -1152,11 +1140,8 @@ public class PropertyEntryTest
     {
         var entity = new FullyNotifyingWotty { Id = 1, ConcurrentPrimate = "Monkey" };
 
-        var entry = InMemoryTestHelpers.Instance.CreateInternalEntry(
-            BuildModel(),
-            EntityState.Unchanged,
-            entity
-        );
+        var entry = InMemoryTestHelpers.Instance
+            .CreateInternalEntry(BuildModel(), EntityState.Unchanged, entity);
 
         Assert.Equal(
             "Monkey",
@@ -1184,11 +1169,12 @@ public class PropertyEntryTest
     [ConditionalFact]
     public void Can_set_concurrency_token_original_value_to_null_generic_full_notification_entities()
     {
-        var entry = InMemoryTestHelpers.Instance.CreateInternalEntry(
-            BuildModel(),
-            EntityState.Unchanged,
-            new FullyNotifyingWotty { Id = 1, ConcurrentPrimate = "Monkey" }
-        );
+        var entry = InMemoryTestHelpers.Instance
+            .CreateInternalEntry(
+                BuildModel(),
+                EntityState.Unchanged,
+                new FullyNotifyingWotty { Id = 1, ConcurrentPrimate = "Monkey" }
+            );
 
         new PropertyEntry<FullyNotifyingWotty, string?>(
             entry,
@@ -1208,11 +1194,8 @@ public class PropertyEntryTest
     {
         var entity = new FullyNotifyingWotty { Id = 1, Primate = "Monkey" };
 
-        var entry = InMemoryTestHelpers.Instance.CreateInternalEntry(
-            BuildModel(),
-            EntityState.Unchanged,
-            entity
-        );
+        var entry = InMemoryTestHelpers.Instance
+            .CreateInternalEntry(BuildModel(), EntityState.Unchanged, entity);
 
         var propertyEntry = new PropertyEntry(entry, entry.EntityType.FindProperty("Primate")!);
 
@@ -1234,11 +1217,8 @@ public class PropertyEntryTest
     {
         var entity = new FullyNotifyingWotty { Id = 1, ConcurrentPrimate = "Monkey" };
 
-        var entry = InMemoryTestHelpers.Instance.CreateInternalEntry(
-            BuildModel(),
-            EntityState.Unchanged,
-            entity
-        );
+        var entry = InMemoryTestHelpers.Instance
+            .CreateInternalEntry(BuildModel(), EntityState.Unchanged, entity);
 
         var propertyEntry = new PropertyEntry<FullyNotifyingWotty, string>(
             entry,
@@ -1263,11 +1243,14 @@ public class PropertyEntryTest
     {
         var entity = new FullyNotifyingWotty { Id = 1, Primate = "Monkey" };
 
-        var entry = InMemoryTestHelpers.Instance.CreateInternalEntry(
-            BuildModel(ChangeTrackingStrategy.ChangingAndChangedNotificationsWithOriginalValues),
-            EntityState.Unchanged,
-            entity
-        );
+        var entry = InMemoryTestHelpers.Instance
+            .CreateInternalEntry(
+                BuildModel(
+                    ChangeTrackingStrategy.ChangingAndChangedNotificationsWithOriginalValues
+                ),
+                EntityState.Unchanged,
+                entity
+            );
 
         Assert.Equal(
             "Monkey",
@@ -1288,11 +1271,14 @@ public class PropertyEntryTest
     {
         var entity = new FullyNotifyingWotty { Id = 1, Primate = "Monkey" };
 
-        var entry = InMemoryTestHelpers.Instance.CreateInternalEntry(
-            BuildModel(ChangeTrackingStrategy.ChangingAndChangedNotificationsWithOriginalValues),
-            EntityState.Unchanged,
-            entity
-        );
+        var entry = InMemoryTestHelpers.Instance
+            .CreateInternalEntry(
+                BuildModel(
+                    ChangeTrackingStrategy.ChangingAndChangedNotificationsWithOriginalValues
+                ),
+                EntityState.Unchanged,
+                entity
+            );
 
         Assert.Equal(
             "Monkey",

@@ -527,9 +527,8 @@ namespace Microsoft.Extensions.Hosting.Internal
             // Want to resolve hosted services once because it's possible they might have been registered with a transient lifetime.
             public List<IHostedService> HostedServices =>
                 new List<IHostedService>(
-                    host._hostedServices ??= host.Services.GetRequiredService<
-                        IEnumerable<IHostedService>
-                    >()
+                    host._hostedServices ??= host.Services
+                        .GetRequiredService<IEnumerable<IHostedService>>()
                 );
             public bool IsRunning => host.IsRunning;
         }

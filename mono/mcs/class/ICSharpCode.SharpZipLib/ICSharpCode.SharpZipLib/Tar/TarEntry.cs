@@ -427,8 +427,9 @@ namespace ICSharpCode.SharpZipLib.Tar
                 hdr.Size = new FileInfo(file.Replace('/', Path.DirectorySeparatorChar)).Length;
             }
 
-            hdr.ModTime = System
-                .IO.File.GetLastWriteTime(file.Replace('/', Path.DirectorySeparatorChar))
+            hdr.ModTime = System.IO
+                .File
+                .GetLastWriteTime(file.Replace('/', Path.DirectorySeparatorChar))
                 .ToUniversalTime();
             hdr.DevMajor = 0;
             hdr.DevMinor = 0;

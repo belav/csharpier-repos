@@ -47,10 +47,11 @@ namespace System.ComponentModel.Composition.ReflectionModel
         )
         {
             if (
-                exportDefinition.Metadata.TryGetValue(
-                    CompositionConstants.ProductDefinitionMetadataName,
-                    out object? productValue
-                )
+                exportDefinition.Metadata
+                    .TryGetValue(
+                        CompositionConstants.ProductDefinitionMetadataName,
+                        out object? productValue
+                    )
             )
             {
                 if (productValue is ExportDefinition productDefinition)

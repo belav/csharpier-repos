@@ -153,10 +153,11 @@ namespace Mono.CodeContracts.Static.ControlFlow.Subroutines
             TypeNode endOldType
         )
         {
-            this.inferred_old_label_reverse_map.Add(
-                OverlayInstructionKey(blockIndex, instructionIndex),
-                new Pair<CFGBlock, TypeNode>(otherBlock, endOldType)
-            );
+            this.inferred_old_label_reverse_map
+                .Add(
+                    OverlayInstructionKey(blockIndex, instructionIndex),
+                    new Pair<CFGBlock, TypeNode>(otherBlock, endOldType)
+                );
         }
 
         private static int OverlayInstructionKey(int blockIndex, int instructionIndex)
@@ -174,10 +175,8 @@ namespace Mono.CodeContracts.Static.ControlFlow.Subroutines
         {
             Pair<CFGBlock, TypeNode> pair;
             if (
-                !this.inferred_old_label_reverse_map.TryGetValue(
-                    OverlayInstructionKey(pc.Block.Index, pc.Index),
-                    out pair
-                )
+                !this.inferred_old_label_reverse_map
+                    .TryGetValue(OverlayInstructionKey(pc.Block.Index, pc.Index), out pair)
             )
                 throw new InvalidOperationException("Fatal bug in ensures CFG begin/end old map");
             endOldType = pair.Value;

@@ -61,9 +61,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Venus
         )
         {
             var thisDocument = GetThisDocument();
-            var targetDocumentId = this.ContainedDocument.FindProjectDocumentIdWithItemId(
-                itemidInsertionPoint
-            );
+            var targetDocumentId = this.ContainedDocument
+                .FindProjectDocumentIdWithItemId(itemidInsertionPoint);
             var targetDocument = thisDocument.Project.Solution.GetDocument(targetDocumentId);
             if (targetDocument == null)
             {
@@ -92,8 +91,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Venus
                         pszEventHandlerName,
                         itemidInsertionPoint,
                         useHandlesClause: false,
-                        additionalFormattingRule: targetDocument
-                            .Project.Services.GetService<IAdditionalFormattingRuleLanguageService>()
+                        additionalFormattingRule: targetDocument.Project
+                            .Services
+                            .GetService<IAdditionalFormattingRuleLanguageService>()
                             .GetAdditionalCodeGenerationRule(),
                         GlobalOptions,
                         cancellationToken: c.UserCancellationToken
@@ -286,8 +286,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Venus
                 showProgress: false,
                 action: c =>
                 {
-                    var refactorNotifyServices =
-                        this.ComponentModel.DefaultExportProvider.GetExportedValues<IRefactorNotifyService>();
+                    var refactorNotifyServices = this.ComponentModel
+                        .DefaultExportProvider
+                        .GetExportedValues<IRefactorNotifyService>();
 
                     if (
                         !ContainedLanguageCodeSupport.TryRenameElement(
@@ -314,9 +315,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Venus
 
         protected Document GetThisDocument()
         {
-            var document = this
-                .ContainedDocument.GetOpenTextContainer()
-                .CurrentText.GetOpenDocumentInCurrentContextWithChanges();
+            var document = this.ContainedDocument
+                .GetOpenTextContainer()
+                .CurrentText
+                .GetOpenDocumentInCurrentContextWithChanges();
             if (document == null)
             {
                 throw new InvalidOperationException();

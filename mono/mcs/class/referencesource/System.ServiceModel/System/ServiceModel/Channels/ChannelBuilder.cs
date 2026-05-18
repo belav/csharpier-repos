@@ -72,11 +72,12 @@ namespace System.ServiceModel.Channels
                 TransportBindingElement transport = elements.Find<TransportBindingElement>();
                 if (transport == null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(
-                            SR.GetString(SR.TransportBindingElementNotFound)
-                        )
-                    );
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(
+                                SR.GetString(SR.TransportBindingElementNotFound)
+                            )
+                        );
                 }
                 // cache the context state in the demuxer so that the same context state can be provided to the transport
                 // when building auxilliary channels and listeners (for ex, for security negotiation)
@@ -91,8 +92,8 @@ namespace System.ServiceModel.Channels
         {
             if (this.context != null)
             {
-                IChannelFactory<TChannel> factory =
-                    this.context.BuildInnerChannelFactory<TChannel>();
+                IChannelFactory<TChannel> factory = this.context
+                    .BuildInnerChannelFactory<TChannel>();
                 this.context = null;
                 return factory;
             }
@@ -107,18 +108,16 @@ namespace System.ServiceModel.Channels
         {
             if (this.context != null)
             {
-                IChannelListener<TChannel> listener =
-                    this.context.BuildInnerChannelListener<TChannel>();
+                IChannelListener<TChannel> listener = this.context
+                    .BuildInnerChannelListener<TChannel>();
                 this.listenUri = listener.Uri;
                 this.context = null;
                 return listener;
             }
             else
             {
-                return this.binding.BuildChannelListener<TChannel>(
-                    this.listenUri,
-                    this.bindingParameters
-                );
+                return this.binding
+                    .BuildChannelListener<TChannel>(this.listenUri, this.bindingParameters);
             }
         }
 

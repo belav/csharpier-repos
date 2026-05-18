@@ -78,9 +78,8 @@ namespace System.ServiceModel.Channels
             get
             {
 #pragma warning suppress 56503 // Microsoft, required by the Stream.Length contract
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new NotSupportedException(SR.GetString(SR.ReadNotSupported))
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(new NotSupportedException(SR.GetString(SR.ReadNotSupported)));
             }
         }
 
@@ -89,15 +88,13 @@ namespace System.ServiceModel.Channels
             get
             {
 #pragma warning suppress 56503 // Microsoft, required by the Stream.Position contract
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new NotSupportedException(SR.GetString(SR.SeekNotSupported))
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(new NotSupportedException(SR.GetString(SR.SeekNotSupported)));
             }
             set
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new NotSupportedException(SR.GetString(SR.SeekNotSupported))
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(new NotSupportedException(SR.GetString(SR.SeekNotSupported)));
             }
         }
 
@@ -165,9 +162,10 @@ namespace System.ServiceModel.Channels
         {
             if (Interlocked.Increment(ref this.asyncWriteCount) > 1)
             {
-                throw FxTrace.Exception.AsError(
-                    new InvalidOperationException(SR.GetString(SR.WriterAsyncWritePending))
-                );
+                throw FxTrace.Exception
+                    .AsError(
+                        new InvalidOperationException(SR.GetString(SR.WriterAsyncWritePending))
+                    );
             }
         }
 
@@ -175,9 +173,8 @@ namespace System.ServiceModel.Channels
         {
             if (Interlocked.Decrement(ref this.asyncWriteCount) != 0)
             {
-                throw FxTrace.Exception.AsError(
-                    new InvalidOperationException(SR.GetString(SR.NoAsyncWritePending))
-                );
+                throw FxTrace.Exception
+                    .AsError(new InvalidOperationException(SR.GetString(SR.NoAsyncWritePending)));
             }
         }
 
@@ -185,9 +182,10 @@ namespace System.ServiceModel.Channels
         {
             if (this.asyncWriteCount != 0)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(SR.GetString(SR.WriterAsyncWritePending))
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(SR.GetString(SR.WriterAsyncWritePending))
+                    );
             }
         }
 
@@ -195,9 +193,8 @@ namespace System.ServiceModel.Channels
         {
             if (this.closed)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(SR.GetString(SR.StreamClosed))
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(new InvalidOperationException(SR.GetString(SR.StreamClosed)));
             }
         }
 
@@ -225,30 +222,26 @@ namespace System.ServiceModel.Channels
 
         public override int Read(byte[] buffer, int offset, int count)
         {
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                new NotSupportedException(SR.GetString(SR.ReadNotSupported))
-            );
+            throw DiagnosticUtility.ExceptionUtility
+                .ThrowHelperError(new NotSupportedException(SR.GetString(SR.ReadNotSupported)));
         }
 
         public override int ReadByte()
         {
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                new NotSupportedException(SR.GetString(SR.ReadNotSupported))
-            );
+            throw DiagnosticUtility.ExceptionUtility
+                .ThrowHelperError(new NotSupportedException(SR.GetString(SR.ReadNotSupported)));
         }
 
         public override long Seek(long offset, SeekOrigin origin)
         {
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                new NotSupportedException(SR.GetString(SR.SeekNotSupported))
-            );
+            throw DiagnosticUtility.ExceptionUtility
+                .ThrowHelperError(new NotSupportedException(SR.GetString(SR.SeekNotSupported)));
         }
 
         public override void SetLength(long value)
         {
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                new NotSupportedException(SR.GetString(SR.SeekNotSupported))
-            );
+            throw DiagnosticUtility.ExceptionUtility
+                .ThrowHelperError(new NotSupportedException(SR.GetString(SR.SeekNotSupported)));
         }
 
         void WaitForAllWritesToComplete()
@@ -415,9 +408,12 @@ namespace System.ServiceModel.Channels
             {
                 if (currentBuffer == null)
                 {
-                    throw FxTrace.Exception.AsError(
-                        new InvalidOperationException(SR.GetString(SR.WriteAsyncWithoutFreeBuffer))
-                    );
+                    throw FxTrace.Exception
+                        .AsError(
+                            new InvalidOperationException(
+                                SR.GetString(SR.WriteAsyncWithoutFreeBuffer)
+                            )
+                        );
                 }
 
                 int freeBytes = currentBuffer.FreeBytes; // space left in the CurrentBuffer
@@ -896,13 +892,8 @@ namespace System.ServiceModel.Channels
                     );
                 }
 
-                IAsyncResult asyncResult = this.stream.BeginWrite(
-                    this.bytes,
-                    0,
-                    bytesToWrite,
-                    flushCallback,
-                    this
-                );
+                IAsyncResult asyncResult = this.stream
+                    .BeginWrite(this.bytes, 0, bytesToWrite, flushCallback, this);
                 if (asyncResult.CompletedSynchronously)
                 {
                     if (TD.BufferedAsyncWriteStopIsEnabled())
@@ -963,9 +954,12 @@ namespace System.ServiceModel.Channels
                 {
                     if (this.writePending)
                     {
-                        throw FxTrace.Exception.AsError(
-                            new InvalidOperationException(SR.GetString(SR.FlushBufferAlreadyInUse))
-                        );
+                        throw FxTrace.Exception
+                            .AsError(
+                                new InvalidOperationException(
+                                    SR.GetString(SR.FlushBufferAlreadyInUse)
+                                )
+                            );
                     }
 
                     this.writePending = true;

@@ -34,13 +34,14 @@ namespace System.IO.Pipelines.Tests
 
             var readerCompletedTask = new TaskCompletionSource<bool>();
 #pragma warning disable CS0618 // Type or member is obsolete
-            pipe.Writer.OnReaderCompleted(
-                delegate
-                {
-                    readerCompletedTask.SetResult(true);
-                },
-                null
-            );
+            pipe.Writer
+                .OnReaderCompleted(
+                    delegate
+                    {
+                        readerCompletedTask.SetResult(true);
+                    },
+                    null
+                );
 #pragma warning restore CS0618 // Type or member is obsolete
 
             // Call Dispose{Async} multiple times; all should succeed.

@@ -17,10 +17,8 @@ namespace System.Web.Mvc.Test
         public void ConstructorGuards()
         {
             // Arrange
-            ModelMetadata metadata = ModelMetadataProviders.Current.GetMetadataForType(
-                null,
-                typeof(object)
-            );
+            ModelMetadata metadata = ModelMetadataProviders.Current
+                .GetMetadataForType(null, typeof(object));
             ControllerContext context = new ControllerContext();
             RequiredAttribute attribute = new RequiredAttribute();
 
@@ -43,11 +41,8 @@ namespace System.Web.Mvc.Test
         public void ValuesSet()
         {
             // Arrange
-            ModelMetadata metadata = ModelMetadataProviders.Current.GetMetadataForProperty(
-                () => 15,
-                typeof(string),
-                "Length"
-            );
+            ModelMetadata metadata = ModelMetadataProviders.Current
+                .GetMetadataForProperty(() => 15, typeof(string), "Length");
             ControllerContext context = new ControllerContext();
             RequiredAttribute attribute = new RequiredAttribute();
 
@@ -70,18 +65,13 @@ namespace System.Web.Mvc.Test
                 return new TheoryDataSet<ModelMetadata, string>
                 {
                     {
-                        ModelMetadataProviders.Current.GetMetadataForProperty(
-                            () => 15,
-                            typeof(string),
-                            "Length"
-                        ),
+                        ModelMetadataProviders.Current
+                            .GetMetadataForProperty(() => 15, typeof(string), "Length"),
                         "Length"
                     },
                     {
-                        ModelMetadataProviders.Current.GetMetadataForType(
-                            () => new object(),
-                            typeof(SampleModel)
-                        ),
+                        ModelMetadataProviders.Current
+                            .GetMetadataForType(() => new object(), typeof(SampleModel)),
                         "SampleModel"
                     },
                 };
@@ -132,11 +122,8 @@ namespace System.Web.Mvc.Test
         public void NoClientRulesByDefault()
         {
             // Arrange
-            ModelMetadata metadata = ModelMetadataProviders.Current.GetMetadataForProperty(
-                () => 15,
-                typeof(string),
-                "Length"
-            );
+            ModelMetadata metadata = ModelMetadataProviders.Current
+                .GetMetadataForProperty(() => 15, typeof(string), "Length");
             ControllerContext context = new ControllerContext();
             RequiredAttribute attribute = new RequiredAttribute();
 
@@ -155,11 +142,8 @@ namespace System.Web.Mvc.Test
         public void ValidateWithIsValidTrue()
         {
             // Arrange
-            ModelMetadata metadata = ModelMetadataProviders.Current.GetMetadataForProperty(
-                () => 15,
-                typeof(string),
-                "Length"
-            );
+            ModelMetadata metadata = ModelMetadataProviders.Current
+                .GetMetadataForProperty(() => 15, typeof(string), "Length");
             ControllerContext context = new ControllerContext();
             Mock<ValidationAttribute> attribute = new Mock<ValidationAttribute> { CallBase = true };
             attribute.Setup(a => a.IsValid(metadata.Model)).Returns(true);
@@ -180,11 +164,8 @@ namespace System.Web.Mvc.Test
         public void ValidateWithIsValidFalse()
         {
             // Arrange
-            ModelMetadata metadata = ModelMetadataProviders.Current.GetMetadataForProperty(
-                () => 15,
-                typeof(string),
-                "Length"
-            );
+            ModelMetadata metadata = ModelMetadataProviders.Current
+                .GetMetadataForProperty(() => 15, typeof(string), "Length");
             ControllerContext context = new ControllerContext();
             Mock<ValidationAttribute> attribute = new Mock<ValidationAttribute> { CallBase = true };
             attribute.Setup(a => a.IsValid(metadata.Model)).Returns(false);
@@ -207,11 +188,8 @@ namespace System.Web.Mvc.Test
         public void ValidatateWithValidationResultSuccess()
         {
             // Arrange
-            ModelMetadata metadata = ModelMetadataProviders.Current.GetMetadataForProperty(
-                () => 15,
-                typeof(string),
-                "Length"
-            );
+            ModelMetadata metadata = ModelMetadataProviders.Current
+                .GetMetadataForProperty(() => 15, typeof(string), "Length");
             ControllerContext context = new ControllerContext();
             Mock<ValidationAttribute> attribute = new Mock<ValidationAttribute> { CallBase = true };
             attribute
@@ -240,11 +218,8 @@ namespace System.Web.Mvc.Test
         {
             // Arrange
             const string errorMessage = "Some error message";
-            ModelMetadata metadata = ModelMetadataProviders.Current.GetMetadataForProperty(
-                () => 15,
-                typeof(string),
-                "Length"
-            );
+            ModelMetadata metadata = ModelMetadataProviders.Current
+                .GetMetadataForProperty(() => 15, typeof(string), "Length");
             ControllerContext context = new ControllerContext();
             Mock<ValidationAttribute> attribute = new Mock<ValidationAttribute> { CallBase = true };
             attribute
@@ -271,10 +246,8 @@ namespace System.Web.Mvc.Test
         {
             // Arrange
             const string errorMessage = "A different error message";
-            ModelMetadata metadata = ModelMetadataProviders.Current.GetMetadataForType(
-                () => new object(),
-                typeof(object)
-            );
+            ModelMetadata metadata = ModelMetadataProviders.Current
+                .GetMetadataForType(() => new object(), typeof(object));
             ControllerContext context = new ControllerContext();
             Mock<ValidationAttribute> attribute = new Mock<ValidationAttribute> { CallBase = true };
             attribute
@@ -300,10 +273,8 @@ namespace System.Web.Mvc.Test
         public void ValidateReturnsMemberNameIfItIsDifferentFromDisplayName()
         {
             // Arrange
-            ModelMetadata metadata = ModelMetadataProviders.Current.GetMetadataForType(
-                () => new SampleModel(),
-                typeof(SampleModel)
-            );
+            ModelMetadata metadata = ModelMetadataProviders.Current
+                .GetMetadataForType(() => new SampleModel(), typeof(SampleModel));
             ControllerContext context = new ControllerContext();
             Mock<ValidationAttribute> attribute = new Mock<ValidationAttribute> { CallBase = true };
             attribute
@@ -332,11 +303,8 @@ namespace System.Web.Mvc.Test
         public void IsRequiredTests()
         {
             // Arrange
-            ModelMetadata metadata = ModelMetadataProviders.Current.GetMetadataForProperty(
-                () => 15,
-                typeof(string),
-                "Length"
-            );
+            ModelMetadata metadata = ModelMetadataProviders.Current
+                .GetMetadataForProperty(() => 15, typeof(string), "Length");
             ControllerContext context = new ControllerContext();
 
             // Act & Assert
@@ -369,10 +337,8 @@ namespace System.Web.Mvc.Test
             // Arrange
             var expected = new ModelClientValidationStringLengthRule("Error", 1, 10);
             var context = new ControllerContext();
-            var metadata = ModelMetadataProviders.Current.GetMetadataForType(
-                () => null,
-                typeof(string)
-            );
+            var metadata = ModelMetadataProviders.Current
+                .GetMetadataForType(() => null, typeof(string));
             var attribute = new Mock<ValidationAttribute> { CallBase = true };
             attribute
                 .As<IClientValidatable>()

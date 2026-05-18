@@ -59,10 +59,11 @@ namespace System.ServiceModel.Configuration
                 }
                 if (retval == null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                        "value",
-                        SR.GetString(SR.ConfigInvalidEncodingValue, encoding)
-                    );
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperArgument(
+                            "value",
+                            SR.GetString(SR.ConfigInvalidEncodingValue, encoding)
+                        );
                 }
                 return retval;
             }

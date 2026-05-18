@@ -778,10 +778,8 @@ public class MediaTypeHeaderValue
     private bool MatchesSubtypeWithoutSuffix(MediaTypeHeaderValue set)
     {
         return set.MatchesAllSubTypesWithoutSuffix
-            || set.SubTypeWithoutSuffix.Equals(
-                SubTypeWithoutSuffix,
-                StringComparison.OrdinalIgnoreCase
-            );
+            || set.SubTypeWithoutSuffix
+                .Equals(SubTypeWithoutSuffix, StringComparison.OrdinalIgnoreCase);
     }
 
     private bool MatchesSubtypeWithoutSuffix(StringSegment subType, int startOfSuffix)

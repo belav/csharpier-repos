@@ -109,12 +109,13 @@ namespace System.ServiceModel
             {
                 if (value > int.MaxValue)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ArgumentOutOfRangeException(
-                            "value.MaxReceivedMessageSize",
-                            SR.GetString(SR.MaxReceivedMessageSizeMustBeInIntegerRange)
-                        )
-                    );
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperError(
+                            new ArgumentOutOfRangeException(
+                                "value.MaxReceivedMessageSize",
+                                SR.GetString(SR.MaxReceivedMessageSizeMustBeInIntegerRange)
+                            )
+                        );
                 }
                 httpTransport.MaxReceivedMessageSize = value;
                 mtomEncoding.MaxBufferSize = (int)value;
@@ -154,9 +155,8 @@ namespace System.ServiceModel
             {
                 if (value == null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ArgumentNullException("value")
-                    );
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperError(new ArgumentNullException("value"));
                 }
                 this.reliableSession.CopySettings(value);
             }
@@ -321,15 +321,16 @@ namespace System.ServiceModel
             WSDualHttpBindingElement element = section.Bindings[configurationName];
             if (element == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ConfigurationErrorsException(
-                        SR.GetString(
-                            SR.ConfigInvalidBindingConfigurationName,
-                            configurationName,
-                            ConfigurationStrings.WSDualHttpBindingCollectionElementName
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        new ConfigurationErrorsException(
+                            SR.GetString(
+                                SR.ConfigInvalidBindingConfigurationName,
+                                configurationName,
+                                ConfigurationStrings.WSDualHttpBindingCollectionElementName
+                            )
                         )
-                    )
-                );
+                    );
             }
             else
             {

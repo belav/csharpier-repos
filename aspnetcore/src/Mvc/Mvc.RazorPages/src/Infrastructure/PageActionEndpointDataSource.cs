@@ -105,9 +105,8 @@ internal sealed class PageActionEndpointDataSource : ActionEndpointDataSourceBas
                 .Add(b =>
                 {
                     ((RouteEndpointBuilder)b).Order = order.Value;
-                    b.Metadata.Add(
-                        new DynamicPageRouteValueTransformerMetadata(transformerType, state)
-                    );
+                    b.Metadata
+                        .Add(new DynamicPageRouteValueTransformerMetadata(transformerType, state));
                     b.Metadata.Add(new PageEndpointDataSourceIdMetadata(DataSourceId));
                 });
         }

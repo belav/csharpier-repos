@@ -294,9 +294,8 @@ namespace System.Data.Services.Client.Xml
             {
                 if (this.reader.NodeType == XmlNodeType.Element && this.reader.HasAttributes)
                 {
-                    string baseAttribute = this.reader.GetAttribute(
-                        XmlConstants.XmlBaseAttributeNameWithPrefix
-                    );
+                    string baseAttribute = this.reader
+                        .GetAttribute(XmlConstants.XmlBaseAttributeNameWithPrefix);
                     if (String.IsNullOrEmpty(baseAttribute))
                     {
                         return result;

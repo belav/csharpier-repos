@@ -47,10 +47,10 @@ namespace System.Data.EntityModel.SchemaObjectModel
                     AddError(
                         ErrorCode.InvalidBaseType,
                         EdmSchemaErrorSeverity.Error,
-                        System.Data.Entity.Strings.InvalidBaseTypeForNestedType(
-                            BaseType.FQName,
-                            FQName
-                        )
+                        System.Data
+                            .Entity
+                            .Strings
+                            .InvalidBaseTypeForNestedType(BaseType.FQName, FQName)
                     );
                 }
             }

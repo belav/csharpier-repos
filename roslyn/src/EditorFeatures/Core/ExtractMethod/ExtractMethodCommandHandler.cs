@@ -92,12 +92,11 @@ internal sealed class ExtractMethodCommandHandler : ICommandHandler<ExtractMetho
         // wait indicator for Extract Method
         if (_renameService.ActiveSession != null)
         {
-            _threadingContext.JoinableTaskFactory.Run(() =>
-                _renameService.ActiveSession.CommitAsync(
-                    previewChanges: false,
-                    CancellationToken.None
-                )
-            );
+            _threadingContext.JoinableTaskFactory
+                .Run(() =>
+                    _renameService.ActiveSession
+                        .CommitAsync(previewChanges: false, CancellationToken.None)
+                );
         }
 
         if (!args.SubjectBuffer.SupportsRefactorings())
@@ -105,8 +104,8 @@ internal sealed class ExtractMethodCommandHandler : ICommandHandler<ExtractMetho
 
         var view = args.TextView;
         var textBuffer = args.SubjectBuffer;
-        var spans = view
-            .Selection.GetSnapshotSpansOnBuffer(textBuffer)
+        var spans = view.Selection
+            .GetSnapshotSpansOnBuffer(textBuffer)
             .Where(s => s.Length > 0)
             .ToList();
         if (spans.Count != 1)
@@ -114,8 +113,9 @@ internal sealed class ExtractMethodCommandHandler : ICommandHandler<ExtractMetho
 
         var span = spans[0];
 
-        var document =
-            args.SubjectBuffer.CurrentSnapshot.GetOpenDocumentInCurrentContextWithChanges();
+        var document = args.SubjectBuffer
+            .CurrentSnapshot
+            .GetOpenDocumentInCurrentContextWithChanges();
         if (document is null)
             return false;
 
@@ -131,8 +131,10 @@ internal sealed class ExtractMethodCommandHandler : ICommandHandler<ExtractMetho
     )
     {
         _threadingContext.ThrowIfNotOnUIThread();
-        var indicatorFactory =
-            document.Project.Solution.Services.GetRequiredService<IBackgroundWorkIndicatorFactory>();
+        var indicatorFactory = document.Project
+            .Solution
+            .Services
+            .GetRequiredService<IBackgroundWorkIndicatorFactory>();
         using var indicatorContext = indicatorFactory.Create(
             view,
             span,
@@ -157,8 +159,8 @@ internal sealed class ExtractMethodCommandHandler : ICommandHandler<ExtractMetho
 
         var cancellationToken = waitContext.UserCancellationToken;
 
-        var document = await textBuffer
-            .CurrentSnapshot.GetFullyLoadedOpenDocumentInCurrentContextWithChangesAsync(waitContext)
+        var document = await textBuffer.CurrentSnapshot
+            .GetFullyLoadedOpenDocumentInCurrentContextWithChangesAsync(waitContext)
             .ConfigureAwait(false);
         if (document is null)
             return;
@@ -223,7 +225,8 @@ internal sealed class ExtractMethodCommandHandler : ICommandHandler<ExtractMetho
 
         using var undoTransaction = _undoManager
             .GetTextBufferUndoManager(textBuffer)
-            .TextBufferUndoHistory.CreateTransaction("Extract Method");
+            .TextBufferUndoHistory
+            .CreateTransaction("Extract Method");
 
         // We're about to make an edit ourselves.  so disable the cancellation that happens on editing.
         waitContext.CancelOnEdit = false;
@@ -247,8 +250,10 @@ internal sealed class ExtractMethodCommandHandler : ICommandHandler<ExtractMetho
 
         // We have some sort of issue.  See what the user wants to do.  If we have no way to inform the user bail
         // out rather than doing something wrong.
-        var notificationService =
-            document.Project.Solution.Services.GetService<INotificationService>();
+        var notificationService = document.Project
+            .Solution
+            .Services
+            .GetService<INotificationService>();
         if (notificationService is null)
             return null;
 
@@ -342,9 +347,8 @@ internal sealed class ExtractMethodCommandHandler : ICommandHandler<ExtractMetho
 
         var reason = result.Reasons.FirstOrDefault();
         var length =
-            FeaturesResources.Asynchronous_method_cannot_have_ref_out_parameters_colon_bracket_0_bracket.IndexOf(
-                ':'
-            );
+            FeaturesResources.Asynchronous_method_cannot_have_ref_out_parameters_colon_bracket_0_bracket
+                .IndexOf(':');
         if (
             reason != null
             && length > 0

@@ -277,8 +277,8 @@ namespace System.ComponentModel.Composition.ReflectionModel
 
         private object[] GetConstructorArguments()
         {
-            ReflectionParameterImportDefinition[] parameterImports = this
-                .ImportDefinitions.OfType<ReflectionParameterImportDefinition>()
+            ReflectionParameterImportDefinition[] parameterImports = this.ImportDefinitions
+                .OfType<ReflectionParameterImportDefinition>()
                 .ToArray();
             object[] arguments = new object[parameterImports.Length];
 
@@ -322,12 +322,13 @@ namespace System.ComponentModel.Composition.ReflectionModel
 
             // If we have any instance exports, then we also
             // need activation.
-            return this.ExportDefinitions.Any(definition =>
-            {
-                ExportingMember member = GetExportingMemberFromDefinition(definition);
+            return this.ExportDefinitions
+                .Any(definition =>
+                {
+                    ExportingMember member = GetExportingMemberFromDefinition(definition);
 
-                return member.RequiresInstance;
-            });
+                    return member.RequiresInstance;
+                });
         }
 
         // this is called under a lock
@@ -432,9 +433,8 @@ namespace System.ComponentModel.Composition.ReflectionModel
 
         private void SetNonPrerequisiteImports()
         {
-            IEnumerable<ImportDefinition> members = this.ImportDefinitions.Where(import =>
-                !import.IsPrerequisite
-            );
+            IEnumerable<ImportDefinition> members = this.ImportDefinitions
+                .Where(import => !import.IsPrerequisite);
 
             // NOTE: Dev10 484204 The validation is turned off for post imports because of it broke declarative composition
             this.UseImportedValues(members, SetExportedValueForImport, false);
@@ -442,9 +442,8 @@ namespace System.ComponentModel.Composition.ReflectionModel
 
         private void SetPrerequisiteImports()
         {
-            IEnumerable<ImportDefinition> members = this.ImportDefinitions.Where(import =>
-                import.IsPrerequisite
-            );
+            IEnumerable<ImportDefinition> members = this.ImportDefinitions
+                .Where(import => import.IsPrerequisite);
 
             // NOTE: Dev10 484204 The validation is turned off for post imports because of it broke declarative composition
             this.UseImportedValues(members, SetExportedValueForImport, false);

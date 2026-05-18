@@ -61,9 +61,8 @@ namespace System.ServiceModel.Channels
             set
             {
                 if (!MessageProtectionOrderHelper.IsDefined(value))
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ArgumentOutOfRangeException("value")
-                    );
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperError(new ArgumentOutOfRangeException("value"));
                 this.messageProtectionOrder = value;
             }
         }
@@ -167,20 +166,20 @@ namespace System.ServiceModel.Channels
             if (context == null)
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("context");
             if (credentialsManager == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                    "credentialsManager"
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperArgumentNull("credentialsManager");
 
             if (this.ProtectionTokenParameters == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(
-                        SR.GetString(
-                            SR.SymmetricSecurityBindingElementNeedsProtectionTokenParameters,
-                            this.ToString()
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(
+                                SR.SymmetricSecurityBindingElementNeedsProtectionTokenParameters,
+                                this.ToString()
+                            )
                         )
-                    )
-                );
+                    );
             }
 
             SymmetricSecurityProtocolFactory protocolFactory =
@@ -202,14 +201,15 @@ namespace System.ServiceModel.Channels
             protocolFactory.IdentityVerifier = this.LocalClientSettings.IdentityVerifier;
             protocolFactory.DoRequestSignatureConfirmation = this.RequireSignatureConfirmation;
             protocolFactory.MessageProtectionOrder = this.MessageProtectionOrder;
-            protocolFactory.ProtectionRequirements.Add(
-                SecurityBindingElement.ComputeProtectionRequirements(
-                    this,
-                    context.BindingParameters,
-                    context.Binding.Elements,
-                    isForService
-                )
-            );
+            protocolFactory.ProtectionRequirements
+                .Add(
+                    SecurityBindingElement.ComputeProtectionRequirements(
+                        this,
+                        context.BindingParameters,
+                        context.Binding.Elements,
+                        isForService
+                    )
+                );
             base.ConfigureProtocolFactory(
                 protocolFactory,
                 credentialsManager,
@@ -236,8 +236,8 @@ namespace System.ServiceModel.Channels
             ISecurityCapabilities securityCapabilities = this.GetProperty<ISecurityCapabilities>(
                 context
             );
-            SecurityCredentialsManager credentialsManager =
-                context.BindingParameters.Find<SecurityCredentialsManager>();
+            SecurityCredentialsManager credentialsManager = context.BindingParameters
+                .Find<SecurityCredentialsManager>();
             if (credentialsManager == null)
             {
                 credentialsManager = ClientCredentials.CreateDefaultCredentials();
@@ -259,19 +259,19 @@ namespace System.ServiceModel.Channels
                 SecureConversationSecurityTokenParameters scParameters =
                     (SecureConversationSecurityTokenParameters)this.ProtectionTokenParameters;
                 if (scParameters.BootstrapSecurityBindingElement == null)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(
-                            SR.GetString(
-                                SR.SecureConversationSecurityTokenParametersRequireBootstrapBinding
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(
+                                SR.GetString(
+                                    SR.SecureConversationSecurityTokenParametersRequireBootstrapBinding
+                                )
                             )
-                        )
-                    );
+                        );
 
                 BindingContext scIssuerBindingContext = issuerBindingContext.Clone();
                 scIssuerBindingContext.BindingParameters.Remove<ChannelProtectionRequirements>();
-                scIssuerBindingContext.BindingParameters.Add(
-                    scParameters.BootstrapProtectionRequirements
-                );
+                scIssuerBindingContext.BindingParameters
+                    .Add(scParameters.BootstrapProtectionRequirements);
 
                 if (scParameters.RequireCancellation)
                 {
@@ -291,14 +291,15 @@ namespace System.ServiceModel.Channels
                         this.RequireSignatureConfirmation;
                     sessionFactory.MessageProtectionOrder = this.MessageProtectionOrder;
                     sessionFactory.IdentityVerifier = this.LocalClientSettings.IdentityVerifier;
-                    sessionFactory.ProtectionRequirements.Add(
-                        SecurityBindingElement.ComputeProtectionRequirements(
-                            this,
-                            context.BindingParameters,
-                            context.Binding.Elements,
-                            false
-                        )
-                    );
+                    sessionFactory.ProtectionRequirements
+                        .Add(
+                            SecurityBindingElement.ComputeProtectionRequirements(
+                                this,
+                                context.BindingParameters,
+                                context.Binding.Elements,
+                                false
+                            )
+                        );
                     base.ConfigureProtocolFactory(
                         sessionFactory,
                         credentialsManager,
@@ -310,13 +311,13 @@ namespace System.ServiceModel.Channels
                     SecuritySessionClientSettings<TChannel> sessionClientSettings =
                         new SecuritySessionClientSettings<TChannel>();
                     sessionClientSettings.ChannelBuilder = channelBuilder;
-                    sessionClientSettings.KeyRenewalInterval =
-                        this.LocalClientSettings.SessionKeyRenewalInterval;
+                    sessionClientSettings.KeyRenewalInterval = this.LocalClientSettings
+                        .SessionKeyRenewalInterval;
                     sessionClientSettings.CanRenewSession = scParameters.CanRenewSession;
-                    sessionClientSettings.KeyRolloverInterval =
-                        this.LocalClientSettings.SessionKeyRolloverInterval;
-                    sessionClientSettings.TolerateTransportFailures =
-                        this.LocalClientSettings.ReconnectTransportOnFailure;
+                    sessionClientSettings.KeyRolloverInterval = this.LocalClientSettings
+                        .SessionKeyRolloverInterval;
+                    sessionClientSettings.TolerateTransportFailures = this.LocalClientSettings
+                        .ReconnectTransportOnFailure;
                     sessionClientSettings.IssuedSecurityTokenParameters = scParameters.Clone();
                     (
                         (SecureConversationSecurityTokenParameters)
@@ -349,14 +350,15 @@ namespace System.ServiceModel.Channels
                     protocolFactory.DoRequestSignatureConfirmation =
                         this.RequireSignatureConfirmation;
                     protocolFactory.MessageProtectionOrder = this.MessageProtectionOrder;
-                    protocolFactory.ProtectionRequirements.Add(
-                        SecurityBindingElement.ComputeProtectionRequirements(
-                            this,
-                            context.BindingParameters,
-                            context.Binding.Elements,
-                            false
-                        )
-                    );
+                    protocolFactory.ProtectionRequirements
+                        .Add(
+                            SecurityBindingElement.ComputeProtectionRequirements(
+                                this,
+                                context.BindingParameters,
+                                context.Binding.Elements,
+                                false
+                            )
+                        );
                     base.ConfigureProtocolFactory(
                         protocolFactory,
                         credentialsManager,
@@ -400,8 +402,8 @@ namespace System.ServiceModel.Channels
             SecurityChannelListener<TChannel> channelListener =
                 new SecurityChannelListener<TChannel>(this, context);
 
-            SecurityCredentialsManager credentialsManager =
-                context.BindingParameters.Find<SecurityCredentialsManager>();
+            SecurityCredentialsManager credentialsManager = context.BindingParameters
+                .Find<SecurityCredentialsManager>();
             if (credentialsManager == null)
                 credentialsManager = ServiceCredentials.CreateDefaultCredentials();
 
@@ -422,21 +424,21 @@ namespace System.ServiceModel.Channels
                 SecureConversationSecurityTokenParameters scParameters =
                     (SecureConversationSecurityTokenParameters)this.ProtectionTokenParameters;
                 if (scParameters.BootstrapSecurityBindingElement == null)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(
-                            SR.GetString(
-                                SR.SecureConversationSecurityTokenParametersRequireBootstrapBinding
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(
+                                SR.GetString(
+                                    SR.SecureConversationSecurityTokenParametersRequireBootstrapBinding
+                                )
                             )
-                        )
-                    );
+                        );
 
                 BindingContext scIssuerBindingContext = issuerBindingContext.Clone();
                 scIssuerBindingContext.BindingParameters.Remove<ChannelProtectionRequirements>();
-                scIssuerBindingContext.BindingParameters.Add(
-                    scParameters.BootstrapProtectionRequirements
-                );
-                IMessageFilterTable<EndpointAddress> endpointFilterTable =
-                    context.BindingParameters.Find<IMessageFilterTable<EndpointAddress>>();
+                scIssuerBindingContext.BindingParameters
+                    .Add(scParameters.BootstrapProtectionRequirements);
+                IMessageFilterTable<EndpointAddress> endpointFilterTable = context.BindingParameters
+                    .Find<IMessageFilterTable<EndpointAddress>>();
 
                 AddDemuxerForSecureConversation(channelBuilder, scIssuerBindingContext);
 
@@ -459,14 +461,15 @@ namespace System.ServiceModel.Channels
                         this.RequireSignatureConfirmation;
                     sessionFactory.MessageProtectionOrder = this.MessageProtectionOrder;
                     sessionFactory.IdentityVerifier = this.LocalClientSettings.IdentityVerifier;
-                    sessionFactory.ProtectionRequirements.Add(
-                        SecurityBindingElement.ComputeProtectionRequirements(
-                            this,
-                            context.BindingParameters,
-                            context.Binding.Elements,
-                            true
-                        )
-                    );
+                    sessionFactory.ProtectionRequirements
+                        .Add(
+                            SecurityBindingElement.ComputeProtectionRequirements(
+                                this,
+                                context.BindingParameters,
+                                context.Binding.Elements,
+                                true
+                            )
+                        );
                     base.ConfigureProtocolFactory(
                         sessionFactory,
                         credentialsManager,
@@ -497,8 +500,7 @@ namespace System.ServiceModel.Channels
                     channelListener.SessionServerSettings.SecurityStandardsManager =
                         sessionFactory.StandardsManager;
                     channelListener.SessionServerSettings.SessionProtocolFactory = sessionFactory;
-                    channelListener
-                        .SessionServerSettings
+                    channelListener.SessionServerSettings
                         .SessionProtocolFactory
                         .EndpointFilterTable = endpointFilterTable;
 
@@ -510,11 +512,12 @@ namespace System.ServiceModel.Channels
                         && !IsUnderlyingListenerDuplex<TChannel>(context)
                     )
                     {
-                        context.BindingParameters.Add(
-                            new SecuritySessionServerSettings.SecuritySessionDemuxFailureHandler(
-                                sessionFactory.StandardsManager
-                            )
-                        );
+                        context.BindingParameters
+                            .Add(
+                                new SecuritySessionServerSettings.SecuritySessionDemuxFailureHandler(
+                                    sessionFactory.StandardsManager
+                                )
+                            );
                     }
                 }
                 else
@@ -535,14 +538,15 @@ namespace System.ServiceModel.Channels
                     protocolFactory.DoRequestSignatureConfirmation =
                         this.RequireSignatureConfirmation;
                     protocolFactory.MessageProtectionOrder = this.MessageProtectionOrder;
-                    protocolFactory.ProtectionRequirements.Add(
-                        SecurityBindingElement.ComputeProtectionRequirements(
-                            this,
-                            context.BindingParameters,
-                            context.Binding.Elements,
-                            true
-                        )
-                    );
+                    protocolFactory.ProtectionRequirements
+                        .Add(
+                            SecurityBindingElement.ComputeProtectionRequirements(
+                                this,
+                                context.BindingParameters,
+                                context.Binding.Elements,
+                                true
+                            )
+                        );
                     protocolFactory.EndpointFilterTable = endpointFilterTable;
                     base.ConfigureProtocolFactory(
                         protocolFactory,
@@ -581,8 +585,9 @@ namespace System.ServiceModel.Channels
             {
                 AddressingVersion addressing = MessageVersion.Default.Addressing;
 #pragma warning suppress 56506
-                MessageEncodingBindingElement encoding =
-                    context.Binding.Elements.Find<MessageEncodingBindingElement>();
+                MessageEncodingBindingElement encoding = context.Binding
+                    .Elements
+                    .Find<MessageEncodingBindingElement>();
                 if (encoding != null)
                 {
                     addressing = encoding.MessageVersion.Addressing;

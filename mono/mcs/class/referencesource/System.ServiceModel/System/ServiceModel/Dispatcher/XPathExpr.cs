@@ -158,9 +158,10 @@ namespace System.ServiceModel.Dispatcher
         {
             if (null == left || null == right)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new QueryCompileException(QueryCompileError.InvalidExpression)
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        new QueryCompileException(QueryCompileError.InvalidExpression)
+                    );
             }
             this.SubExpr.Add(left);
             this.SubExpr.Add(right);
@@ -270,9 +271,10 @@ namespace System.ServiceModel.Dispatcher
                     return XPathResultType.String;
 
                 default:
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new QueryCompileException(QueryCompileError.InvalidTypeConversion)
-                    );
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperError(
+                            new QueryCompileException(QueryCompileError.InvalidTypeConversion)
+                        );
             }
         }
 
@@ -293,9 +295,10 @@ namespace System.ServiceModel.Dispatcher
                     return ValueDataType.String;
 
                 default:
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new QueryCompileException(QueryCompileError.InvalidTypeConversion)
-                    );
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperError(
+                            new QueryCompileException(QueryCompileError.InvalidTypeConversion)
+                        );
             }
         }
     }

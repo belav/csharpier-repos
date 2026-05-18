@@ -148,11 +148,12 @@ namespace System.ServiceModel.Channels
             else
             {
                 Fx.Assert("Invalid MessageVersion");
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(
-                        String.Format(CultureInfo.InvariantCulture, "Invalid MessageVersion")
-                    )
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(
+                            String.Format(CultureInfo.InvariantCulture, "Invalid MessageVersion")
+                        )
+                    );
             }
 
             this.version = version;
@@ -223,9 +224,8 @@ namespace System.ServiceModel.Channels
         public override bool IsContentTypeSupported(string contentType)
         {
             if (contentType == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentNullException("contentType")
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(new ArgumentNullException("contentType"));
             return (IsMTOMContentType(contentType) || IsTextContentType(contentType));
         }
 
@@ -288,9 +288,8 @@ namespace System.ServiceModel.Channels
         public override Message ReadMessage(Stream stream, int maxSizeOfHeaders, string contentType)
         {
             if (stream == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentNullException("stream")
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(new ArgumentNullException("stream"));
 
             if (contentType == this.ContentType)
                 contentType = null;
@@ -391,21 +390,23 @@ namespace System.ServiceModel.Channels
             if (bufferManager == null)
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("bufferManager");
             if (maxMessageSize < 0)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentOutOfRangeException(
-                        "maxMessageSize",
-                        maxMessageSize,
-                        SR.GetString(SR.ValueMustBeNonNegative)
-                    )
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        new ArgumentOutOfRangeException(
+                            "maxMessageSize",
+                            maxMessageSize,
+                            SR.GetString(SR.ValueMustBeNonNegative)
+                        )
+                    );
             if (messageOffset < 0 || messageOffset > maxMessageSize)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentOutOfRangeException(
-                        "messageOffset",
-                        messageOffset,
-                        SR.GetString(SR.ValueMustBeInRange, 0, maxMessageSize)
-                    )
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        new ArgumentOutOfRangeException(
+                            "messageOffset",
+                            messageOffset,
+                            SR.GetString(SR.ValueMustBeInRange, 0, maxMessageSize)
+                        )
+                    );
             ThrowIfMismatchedMessageVersion(message);
 
             EventTraceActivity eventTraceActivity = null;
@@ -529,9 +530,8 @@ namespace System.ServiceModel.Channels
         )
         {
             if (message == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentNullException("message")
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(new ArgumentNullException("message"));
             if (stream == null)
                 throw TraceUtility.ThrowHelperError(new ArgumentNullException("stream"), message);
             ThrowIfMismatchedMessageVersion(message);
@@ -777,15 +777,17 @@ namespace System.ServiceModel.Channels
             }
             catch (FormatException fe)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new CommunicationException(SR.GetString(SR.SFxErrorCreatingMtomReader), fe)
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        new CommunicationException(SR.GetString(SR.SFxErrorCreatingMtomReader), fe)
+                    );
             }
             catch (XmlException xe)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new CommunicationException(SR.GetString(SR.SFxErrorCreatingMtomReader), xe)
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        new CommunicationException(SR.GetString(SR.SFxErrorCreatingMtomReader), xe)
+                    );
             }
 
             return xmlReader;
@@ -930,15 +932,23 @@ namespace System.ServiceModel.Channels
                 }
                 catch (FormatException fe)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new CommunicationException(SR.GetString(SR.SFxErrorCreatingMtomReader), fe)
-                    );
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperError(
+                            new CommunicationException(
+                                SR.GetString(SR.SFxErrorCreatingMtomReader),
+                                fe
+                            )
+                        );
                 }
                 catch (XmlException xe)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new CommunicationException(SR.GetString(SR.SFxErrorCreatingMtomReader), xe)
-                    );
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperError(
+                            new CommunicationException(
+                                SR.GetString(SR.SFxErrorCreatingMtomReader),
+                                xe
+                            )
+                        );
                 }
             }
 
@@ -1058,14 +1068,15 @@ namespace System.ServiceModel.Channels
 
             protected override void OnDoWork()
             {
-                this.encoder.WriteMessage(
-                    this.message,
-                    this.stream,
-                    this.encoder.GenerateStartInfoString(),
-                    string.IsNullOrEmpty(this.boundary) ? null : this.boundary,
-                    this.writeBoundary ? MtomMessageEncoder.mtomStartUri : null,
-                    !this.writeBoundary /*writeMessageHeaders*/
-                );
+                this.encoder
+                    .WriteMessage(
+                        this.message,
+                        this.stream,
+                        this.encoder.GenerateStartInfoString(),
+                        string.IsNullOrEmpty(this.boundary) ? null : this.boundary,
+                        this.writeBoundary ? MtomMessageEncoder.mtomStartUri : null,
+                        !this.writeBoundary /*writeMessageHeaders*/
+                    );
             }
         }
     }

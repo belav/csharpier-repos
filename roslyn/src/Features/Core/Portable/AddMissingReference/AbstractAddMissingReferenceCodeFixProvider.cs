@@ -79,8 +79,9 @@ namespace Microsoft.CodeAnalysis.AddMissingReference
         )
         {
             var cancellationToken = context.CancellationToken;
-            var compilation = await context
-                .Document.Project.GetRequiredCompilationAsync(cancellationToken)
+            var compilation = await context.Document
+                .Project
+                .GetRequiredCompilationAsync(cancellationToken)
                 .ConfigureAwait(false);
 
             var uniqueIdentities = new HashSet<AssemblyIdentity>();

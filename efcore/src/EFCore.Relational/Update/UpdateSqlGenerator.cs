@@ -549,10 +549,8 @@ public abstract class UpdateSqlGenerator : IUpdateSqlGenerator
                             }
                             else
                             {
-                                g.SqlGenerationHelper.GenerateParameterNamePlaceholder(
-                                    sb,
-                                    o.ParameterName
-                                );
+                                g.SqlGenerationHelper
+                                    .GenerateParameterNamePlaceholder(sb, o.ParameterName);
                             }
                         }
                         else

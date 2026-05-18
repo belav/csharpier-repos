@@ -95,12 +95,8 @@ namespace Microsoft.Interop
                 StubCodeContext context,
                 out GeneratorDiagnostic? diagnostic
             ) =>
-                ByValueMarshalKindSupportDescriptor.Default.GetSupport(
-                    marshalKind,
-                    info,
-                    context,
-                    out diagnostic
-                );
+                ByValueMarshalKindSupportDescriptor.Default
+                    .GetSupport(marshalKind, info, context, out diagnostic);
 
             public bool UsesNativeIdentifier(TypePositionInfo info, StubCodeContext context) =>
                 false;
@@ -157,12 +153,8 @@ namespace Microsoft.Interop
                 StubCodeContext context,
                 out GeneratorDiagnostic? diagnostic
             ) =>
-                ByValueMarshalKindSupportDescriptor.Default.GetSupport(
-                    marshalKind,
-                    info,
-                    context,
-                    out diagnostic
-                );
+                ByValueMarshalKindSupportDescriptor.Default
+                    .GetSupport(marshalKind, info, context, out diagnostic);
 
             public bool UsesNativeIdentifier(TypePositionInfo info, StubCodeContext context) =>
                 false;

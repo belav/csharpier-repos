@@ -63,8 +63,8 @@ namespace System.Runtime.Remoting.Activation
             ctorCall.SourceProxy = proxy;
 
             if (Thread.CurrentContext.HasExitSinks && !ctorCall.IsContextOk)
-                response = Thread
-                    .CurrentContext.GetClientContextSinkChain()
+                response = Thread.CurrentContext
+                    .GetClientContextSinkChain()
                     .SyncProcessMessage(ctorCall);
             else
                 response = RemoteActivate(ctorCall);

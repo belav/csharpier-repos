@@ -82,48 +82,52 @@ namespace System.Net.Security.Tests
                 );
 
                 await TestConfiguration.WhenAllOrAnyFailedWithTimeout(
-                    Task.Factory.FromAsync(
-                        client.BeginWrite,
-                        (asyncResult) =>
-                        {
-                            NegotiateStream authStream = (NegotiateStream)asyncResult.AsyncState;
-                            AssertExtensions.Throws<ArgumentNullException>(
-                                nameof(asyncResult),
-                                () => authStream.EndWrite(null)
-                            );
+                    Task.Factory
+                        .FromAsync(
+                            client.BeginWrite,
+                            (asyncResult) =>
+                            {
+                                NegotiateStream authStream = (NegotiateStream)
+                                    asyncResult.AsyncState;
+                                AssertExtensions.Throws<ArgumentNullException>(
+                                    nameof(asyncResult),
+                                    () => authStream.EndWrite(null)
+                                );
 
-                            IAsyncResult result = new MyAsyncResult();
-                            AssertExtensions.Throws<ArgumentException>(
-                                nameof(asyncResult),
-                                () => authStream.EndWrite(result)
-                            );
-                        },
-                        s_sampleMsg,
-                        0,
-                        s_sampleMsg.Length,
-                        client
-                    ),
-                    Task.Factory.FromAsync(
-                        server.BeginRead,
-                        (asyncResult) =>
-                        {
-                            NegotiateStream authStream = (NegotiateStream)asyncResult.AsyncState;
-                            AssertExtensions.Throws<ArgumentNullException>(
-                                nameof(asyncResult),
-                                () => authStream.EndRead(null)
-                            );
+                                IAsyncResult result = new MyAsyncResult();
+                                AssertExtensions.Throws<ArgumentException>(
+                                    nameof(asyncResult),
+                                    () => authStream.EndWrite(result)
+                                );
+                            },
+                            s_sampleMsg,
+                            0,
+                            s_sampleMsg.Length,
+                            client
+                        ),
+                    Task.Factory
+                        .FromAsync(
+                            server.BeginRead,
+                            (asyncResult) =>
+                            {
+                                NegotiateStream authStream = (NegotiateStream)
+                                    asyncResult.AsyncState;
+                                AssertExtensions.Throws<ArgumentNullException>(
+                                    nameof(asyncResult),
+                                    () => authStream.EndRead(null)
+                                );
 
-                            IAsyncResult result = new MyAsyncResult();
-                            AssertExtensions.Throws<ArgumentException>(
-                                nameof(asyncResult),
-                                () => authStream.EndRead(result)
-                            );
-                        },
-                        recvBuf,
-                        0,
-                        s_sampleMsg.Length,
-                        server
-                    )
+                                IAsyncResult result = new MyAsyncResult();
+                                AssertExtensions.Throws<ArgumentException>(
+                                    nameof(asyncResult),
+                                    () => authStream.EndRead(result)
+                                );
+                            },
+                            recvBuf,
+                            0,
+                            s_sampleMsg.Length,
+                            server
+                        )
                 );
             }
         }
@@ -304,48 +308,52 @@ namespace System.Net.Security.Tests
             using (var server = new NegotiateStream(stream2))
             {
                 await TestConfiguration.WhenAllOrAnyFailedWithTimeout(
-                    Task.Factory.FromAsync(
-                        client.BeginAuthenticateAsClient,
-                        (asyncResult) =>
-                        {
-                            NegotiateStream authStream = (NegotiateStream)asyncResult.AsyncState;
-                            AssertExtensions.Throws<ArgumentNullException>(
-                                nameof(asyncResult),
-                                () => authStream.EndAuthenticateAsClient(null)
-                            );
+                    Task.Factory
+                        .FromAsync(
+                            client.BeginAuthenticateAsClient,
+                            (asyncResult) =>
+                            {
+                                NegotiateStream authStream = (NegotiateStream)
+                                    asyncResult.AsyncState;
+                                AssertExtensions.Throws<ArgumentNullException>(
+                                    nameof(asyncResult),
+                                    () => authStream.EndAuthenticateAsClient(null)
+                                );
 
-                            IAsyncResult result = new MyAsyncResult();
-                            AssertExtensions.Throws<ArgumentException>(
-                                nameof(asyncResult),
-                                () => authStream.EndAuthenticateAsClient(result)
-                            );
+                                IAsyncResult result = new MyAsyncResult();
+                                AssertExtensions.Throws<ArgumentException>(
+                                    nameof(asyncResult),
+                                    () => authStream.EndAuthenticateAsClient(result)
+                                );
 
-                            authStream.EndAuthenticateAsClient(asyncResult);
-                        },
-                        CredentialCache.DefaultNetworkCredentials,
-                        string.Empty,
-                        client
-                    ),
-                    Task.Factory.FromAsync(
-                        server.BeginAuthenticateAsServer,
-                        (asyncResult) =>
-                        {
-                            NegotiateStream authStream = (NegotiateStream)asyncResult.AsyncState;
-                            AssertExtensions.Throws<ArgumentNullException>(
-                                nameof(asyncResult),
-                                () => authStream.EndAuthenticateAsServer(null)
-                            );
+                                authStream.EndAuthenticateAsClient(asyncResult);
+                            },
+                            CredentialCache.DefaultNetworkCredentials,
+                            string.Empty,
+                            client
+                        ),
+                    Task.Factory
+                        .FromAsync(
+                            server.BeginAuthenticateAsServer,
+                            (asyncResult) =>
+                            {
+                                NegotiateStream authStream = (NegotiateStream)
+                                    asyncResult.AsyncState;
+                                AssertExtensions.Throws<ArgumentNullException>(
+                                    nameof(asyncResult),
+                                    () => authStream.EndAuthenticateAsServer(null)
+                                );
 
-                            IAsyncResult result = new MyAsyncResult();
-                            AssertExtensions.Throws<ArgumentException>(
-                                nameof(asyncResult),
-                                () => authStream.EndAuthenticateAsServer(result)
-                            );
+                                IAsyncResult result = new MyAsyncResult();
+                                AssertExtensions.Throws<ArgumentException>(
+                                    nameof(asyncResult),
+                                    () => authStream.EndAuthenticateAsServer(result)
+                                );
 
-                            authStream.EndAuthenticateAsServer(asyncResult);
-                        },
-                        server
-                    )
+                                authStream.EndAuthenticateAsServer(asyncResult);
+                            },
+                            server
+                        )
                 );
             }
         }

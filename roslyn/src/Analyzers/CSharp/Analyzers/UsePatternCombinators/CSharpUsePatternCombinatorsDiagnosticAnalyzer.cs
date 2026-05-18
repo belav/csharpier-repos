@@ -141,8 +141,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UsePatternCombinators
                     return HasIllegalPatternVariables(p.Left, permitDesignations)
                         || HasIllegalPatternVariables(p.Right, permitDesignations);
                 case Source p when !permitDesignations:
-                    return p
-                        .PatternSyntax.DescendantNodes()
+                    return p.PatternSyntax
+                        .DescendantNodes()
                         .OfType<SingleVariableDesignationSyntax>()
                         .Any(variable => !variable.Identifier.IsMissing);
                 default:

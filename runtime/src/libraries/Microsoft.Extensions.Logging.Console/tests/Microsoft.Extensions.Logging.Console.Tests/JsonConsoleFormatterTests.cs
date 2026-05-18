@@ -30,8 +30,7 @@ namespace Microsoft.Extensions.Logging.Console.Test
                     IncludeScopes = true,
                     JsonWriterOptions = new JsonWriterOptions()
                     {
-                        Encoder = System
-                            .Text
+                        Encoder = System.Text
                             .Encodings
                             .Web
                             .JavaScriptEncoder
@@ -630,13 +629,13 @@ namespace Microsoft.Extensions.Logging.Console.Test
             string json = GetJson(rootException, indented);
 
             Assert.Contains(rootException.Message, json);
-            rootException
-                .InnerExceptions.ToList()
+            rootException.InnerExceptions
+                .ToList()
                 .ForEach((inner) => Assert.Contains(inner.Message, json));
 
             Assert.Contains(GetContent(rootException), json);
-            rootException
-                .InnerExceptions.ToList()
+            rootException.InnerExceptions
+                .ToList()
                 .ForEach((inner) => Assert.Contains(GetContent(inner), json));
         }
     }

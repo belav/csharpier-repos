@@ -234,10 +234,12 @@ namespace System.Workflow.ComponentModel.Serialization
                     endColumn = linePosition + reader.Name.Length - 1;
 
                 reader.MoveToElement();
-                System.Diagnostics.Debug.Assert(
-                    startLine + 1 == lineNumber && startColumn + 1 == linePosition,
-                    "Error getting (line, column)!"
-                );
+                System.Diagnostics
+                    .Debug
+                    .Assert(
+                        startLine + 1 == lineNumber && startColumn + 1 == linePosition,
+                        "Error getting (line, column)!"
+                    );
 
                 Activity activity = (Activity)instance;
                 activity.SetValue(ActivityMarkupSerializer.StartLineProperty, startLine);
@@ -326,8 +328,8 @@ namespace System.Workflow.ComponentModel.Serialization
                     if (cs.UserData.Contains(UserDataKeys.CodeSegment_New))
                     {
                         prettySegment.AppendLine();
-                        string[] lines = cs
-                            .Text.Trim()
+                        string[] lines = cs.Text
+                            .Trim()
                             .Split(new string[] { "\r\n" }, StringSplitOptions.None);
                         foreach (string line in lines)
                         {

@@ -25,9 +25,8 @@ namespace Microsoft.CodeAnalysis.CSharp.SignatureHelp
         : AbstractSignatureHelpProvider
     {
         private static readonly SymbolDisplayFormat s_allowDefaultLiteralFormat =
-            SymbolDisplayFormat.MinimallyQualifiedFormat.AddMiscellaneousOptions(
-                SymbolDisplayMiscellaneousOptions.AllowDefaultLiteral
-            );
+            SymbolDisplayFormat.MinimallyQualifiedFormat
+                .AddMiscellaneousOptions(SymbolDisplayMiscellaneousOptions.AllowDefaultLiteral);
 
         protected AbstractCSharpSignatureHelpProvider() { }
 

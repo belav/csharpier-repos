@@ -204,8 +204,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeActions
 
             foreach (var document in workspace.Documents)
             {
-                var fixedRoot = await workspace
-                    .CurrentSolution.GetDocument(document.Id)
+                var fixedRoot = await workspace.CurrentSolution
+                    .GetDocument(document.Id)
                     .GetSyntaxRootAsync();
                 var actualText = fixedRoot.ToFullString();
                 Assert.Equal(expectedText, actualText);
@@ -220,8 +220,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeActions
         {
             if (expectedPreviewContents != null)
             {
-                var editHandler =
-                    workspace.ExportProvider.GetExportedValue<ICodeActionEditHandlerService>();
+                var editHandler = workspace.ExportProvider
+                    .GetExportedValue<ICodeActionEditHandlerService>();
                 var previews = await editHandler.GetPreviewsAsync(
                     workspace,
                     operations,
@@ -230,9 +230,12 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeActions
                 var content = (await previews.GetPreviewsAsync())[0];
                 var diffView = content as DifferenceViewerPreview;
                 Assert.NotNull(diffView.Viewer);
-                var previewContents = diffView
-                    .Viewer.RightView.TextBuffer.AsTextContainer()
-                    .CurrentText.ToString();
+                var previewContents = diffView.Viewer
+                    .RightView
+                    .TextBuffer
+                    .AsTextContainer()
+                    .CurrentText
+                    .ToString();
                 diffView.Dispose();
 
                 Assert.Equal(expectedPreviewContents, previewContents);

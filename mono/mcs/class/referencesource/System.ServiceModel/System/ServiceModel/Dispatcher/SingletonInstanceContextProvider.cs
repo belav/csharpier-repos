@@ -29,8 +29,8 @@ namespace System.ServiceModel.Dispatcher
                     {
                         if (this.singleton == null)
                         {
-                            InstanceContext instanceContext =
-                                this.DispatchRuntime.SingletonInstanceContext;
+                            InstanceContext instanceContext = this.DispatchRuntime
+                                .SingletonInstanceContext;
 
                             if (instanceContext == null)
                             {

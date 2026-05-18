@@ -236,13 +236,8 @@ namespace System.Web.UI
                     // Modify the key with the ViewStateUserKey, if any (ASURT 126375)
                     int count = Encoding.Unicode.GetByteCount(viewStateUserKey);
                     _macKeyBytes = new byte[count + 4];
-                    Encoding.Unicode.GetBytes(
-                        viewStateUserKey,
-                        0,
-                        viewStateUserKey.Length,
-                        _macKeyBytes,
-                        4
-                    );
+                    Encoding.Unicode
+                        .GetBytes(viewStateUserKey, 0, viewStateUserKey.Length, _macKeyBytes, 4);
                 }
                 else
                 {
@@ -426,8 +421,8 @@ namespace System.Web.UI
                         Purpose derivedPurpose = purpose.AppendSpecificPurposes(
                             GetSpecificPurposes()
                         );
-                        ICryptoService cryptoService =
-                            AspNetCryptoServiceProvider.Instance.GetCryptoService(derivedPurpose);
+                        ICryptoService cryptoService = AspNetCryptoServiceProvider.Instance
+                            .GetCryptoService(derivedPurpose);
                         byte[] clearData = cryptoService.Unprotect(inputBytes);
                         inputBytes = clearData;
                         length = clearData.Length;
@@ -912,8 +907,8 @@ namespace System.Web.UI
                         Purpose derivedPurpose = purpose.AppendSpecificPurposes(
                             GetSpecificPurposes()
                         );
-                        ICryptoService cryptoService =
-                            AspNetCryptoServiceProvider.Instance.GetCryptoService(derivedPurpose);
+                        ICryptoService cryptoService = AspNetCryptoServiceProvider.Instance
+                            .GetCryptoService(derivedPurpose);
                         byte[] protectedData = cryptoService.Protect(ms.ToArray());
                         buffer = protectedData;
                         length = protectedData.Length;
@@ -1377,10 +1372,10 @@ namespace System.Web.UI
                     // binary serialization if all else fails
 
                     TypeConverter converter = TypeDescriptor.GetConverter(valueType);
-                    bool canConvert = System.Web.UI.Util.CanConvertToFrom(
-                        converter,
-                        typeof(string)
-                    );
+                    bool canConvert = System.Web
+                        .UI
+                        .Util
+                        .CanConvertToFrom(converter, typeof(string));
 
                     if (canConvert)
                     {

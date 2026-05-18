@@ -151,9 +151,10 @@ namespace System.Web.UI.MobileControls.Adapters.XhtmlAdapters
             {
                 RenderPostBackEventAsAnchor(
                     writer,
-                    item.Index.ToString(
-                        CultureInfo.InvariantCulture
-                    ) /*event argument*/
+                    item.Index
+                        .ToString(
+                            CultureInfo.InvariantCulture
+                        ) /*event argument*/
                     ,
                     item.Text /*link text*/
                     ,

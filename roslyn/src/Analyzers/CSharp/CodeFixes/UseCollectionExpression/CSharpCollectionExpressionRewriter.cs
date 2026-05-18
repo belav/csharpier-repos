@@ -143,10 +143,11 @@ internal static class CSharpCollectionExpressionRewriter
                 );
 
                 // Update the doc with the new object (now with initializer).
-                var updatedRoot = document.Root.ReplaceNode(
-                    expressionToReplace,
-                    withInitializer(expressionToReplace, initializer)
-                );
+                var updatedRoot = document.Root
+                    .ReplaceNode(
+                        expressionToReplace,
+                        withInitializer(expressionToReplace, initializer)
+                    );
                 var updatedParsedDocument = document.WithChangedRoot(
                     updatedRoot,
                     cancellationToken
@@ -238,10 +239,8 @@ internal static class CSharpCollectionExpressionRewriter
             // preserve the formatting of the original initializer and the new collection expression.
 
             if (
-                !document.Text.AreOnSameLine(
-                    initializer.GetFirstToken(),
-                    initializer.GetLastToken()
-                )
+                !document.Text
+                    .AreOnSameLine(initializer.GetFirstToken(), initializer.GetLastToken())
             )
             {
                 // initializer itself was on multiple lines.  We'll want to create a collection expression whose
@@ -255,10 +254,11 @@ internal static class CSharpCollectionExpressionRewriter
 
                 if (
                     !makeMultiLineCollectionExpression
-                    && document.Text.AreOnSameLine(
-                        initializer.Expressions.First().GetFirstToken(),
-                        initializer.Expressions.Last().GetLastToken()
-                    )
+                    && document.Text
+                        .AreOnSameLine(
+                            initializer.Expressions.First().GetFirstToken(),
+                            initializer.Expressions.Last().GetLastToken()
+                        )
                 )
                 {
                     // New elements were all single line, and existing elements were on a single line.  e.g.
@@ -284,8 +284,8 @@ internal static class CSharpCollectionExpressionRewriter
                 {
                     // We want the new items to be multiline *or* existing items were on different lines already.
                     // Figure out what the preferred indentation is, and prepend each new item with it.
-                    var preferredIndentation = initializer
-                        .Expressions.First()
+                    var preferredIndentation = initializer.Expressions
+                        .First()
                         .GetFirstToken()
                         .GetPreferredIndentation(document, indentationOptions, cancellationToken);
 
@@ -315,40 +315,33 @@ internal static class CSharpCollectionExpressionRewriter
                     );
 
                 if (
-                    document.Text.AreOnSameLine(
-                        initializer.OpenBraceToken.GetPreviousToken(),
-                        initializer.OpenBraceToken
-                    )
+                    document.Text
+                        .AreOnSameLine(
+                            initializer.OpenBraceToken.GetPreviousToken(),
+                            initializer.OpenBraceToken
+                        )
                 )
                 {
                     // Determine where both the braces and the items would like to be wrapped to.
-                    var preferredBraceIndentation =
-                        initializer.OpenBraceToken.GetPreferredIndentation(
-                            document,
-                            indentationOptions,
-                            cancellationToken
-                        );
-                    var preferredItemIndentation = initializer
-                        .Expressions.First()
+                    var preferredBraceIndentation = initializer.OpenBraceToken
+                        .GetPreferredIndentation(document, indentationOptions, cancellationToken);
+                    var preferredItemIndentation = initializer.Expressions
+                        .First()
                         .GetFirstToken()
                         .GetPreferredIndentation(document, indentationOptions, cancellationToken);
 
                     // Update both the braces and initial elements to the right location.
                     initialCollection = initialCollection.Update(
                         RemoveTrailingWhitespace(
-                            initialCollection.OpenBracketToken.WithLeadingTrivia(
-                                endOfLine,
-                                Whitespace(preferredBraceIndentation)
-                            )
+                            initialCollection.OpenBracketToken
+                                .WithLeadingTrivia(endOfLine, Whitespace(preferredBraceIndentation))
                         ),
                         FixLeadingAndTrailingWhitespace(
                             initialCollection.Elements,
                             preferredItemIndentation
                         ),
-                        initialCollection.CloseBracketToken.WithLeadingTrivia(
-                            endOfLine,
-                            Whitespace(preferredBraceIndentation)
-                        )
+                        initialCollection.CloseBracketToken
+                            .WithLeadingTrivia(endOfLine, Whitespace(preferredBraceIndentation))
                     );
 
                     // Then add all new elements at the right indentation level.
@@ -373,8 +366,8 @@ internal static class CSharpCollectionExpressionRewriter
 
                     // Here, the brace is already in the right location.  So all we need to do is determine the preferred indentation for the items.
                     var braceIndentation = GetIndentationStringForToken(initializer.OpenBraceToken);
-                    var preferredItemIndentation = initializer
-                        .Expressions.First()
+                    var preferredItemIndentation = initializer.Expressions
+                        .First()
                         .GetFirstToken()
                         .GetPreferredIndentation(document, indentationOptions, cancellationToken);
 
@@ -384,10 +377,8 @@ internal static class CSharpCollectionExpressionRewriter
                             initialCollection.Elements,
                             preferredItemIndentation
                         ),
-                        initialCollection.CloseBracketToken.WithLeadingTrivia(
-                            endOfLine,
-                            Whitespace(braceIndentation)
-                        )
+                        initialCollection.CloseBracketToken
+                            .WithLeadingTrivia(endOfLine, Whitespace(braceIndentation))
                     );
 
                     var finalCollection = AddMatchesToExistingNonEmptyCollectionExpression(
@@ -688,9 +679,9 @@ internal static class CSharpCollectionExpressionRewriter
             if (preferredIndentation is null)
                 return expression.WithoutLeadingTrivia();
 
-            var startLine = document.Text.Lines.GetLineFromPosition(
-                GetAnchorNode(expression).SpanStart
-            );
+            var startLine = document.Text
+                .Lines
+                .GetLineFromPosition(GetAnchorNode(expression).SpanStart);
             var firstTokenOnLineIndentationString = GetIndentationStringForToken(
                 document.Root.FindToken(startLine.Start)
             );
@@ -940,10 +931,8 @@ internal static class CSharpCollectionExpressionRewriter
                 {
                     // if any of the expressions we're adding are multiline, then make things multiline.
                     if (
-                        !document.Text.AreOnSameLine(
-                            component.GetFirstToken(),
-                            component.GetLastToken()
-                        )
+                        !document.Text
+                            .AreOnSameLine(component.GetFirstToken(), component.GetLastToken())
                     )
                         return true;
 

@@ -373,8 +373,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ChangeSignature
                     CreateNewParameterSyntax
                 );
                 return method.WithParameterList(
-                    method
-                        .ParameterList.WithParameters(updatedParameters)
+                    method.ParameterList
+                        .WithParameters(updatedParameters)
                         .WithAdditionalAnnotations(changeSignatureFormattingAnnotation)
                 );
             }
@@ -387,8 +387,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ChangeSignature
                     CreateNewParameterSyntax
                 );
                 return typeWithParameters.WithParameterList(
-                    typeWithParameters
-                        .ParameterList.WithParameters(updatedParameters)
+                    typeWithParameters.ParameterList
+                        .WithParameters(updatedParameters)
                         .WithAdditionalAnnotations(changeSignatureFormattingAnnotation)
                 );
             }
@@ -401,8 +401,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ChangeSignature
                     CreateNewParameterSyntax
                 );
                 return localFunction.WithParameterList(
-                    localFunction
-                        .ParameterList.WithParameters(updatedParameters)
+                    localFunction.ParameterList
+                        .WithParameters(updatedParameters)
                         .WithAdditionalAnnotations(changeSignatureFormattingAnnotation)
                 );
             }
@@ -415,8 +415,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ChangeSignature
                     CreateNewParameterSyntax
                 );
                 return constructor.WithParameterList(
-                    constructor
-                        .ParameterList.WithParameters(updatedParameters)
+                    constructor.ParameterList
+                        .WithParameters(updatedParameters)
                         .WithAdditionalAnnotations(changeSignatureFormattingAnnotation)
                 );
             }
@@ -429,8 +429,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ChangeSignature
                     CreateNewParameterSyntax
                 );
                 return indexer.WithParameterList(
-                    indexer
-                        .ParameterList.WithParameters(updatedParameters)
+                    indexer.ParameterList
+                        .WithParameters(updatedParameters)
                         .WithAdditionalAnnotations(changeSignatureFormattingAnnotation)
                 );
             }
@@ -443,8 +443,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ChangeSignature
                     CreateNewParameterSyntax
                 );
                 return delegateDeclaration.WithParameterList(
-                    delegateDeclaration
-                        .ParameterList.WithParameters(updatedParameters)
+                    delegateDeclaration.ParameterList
+                        .WithParameters(updatedParameters)
                         .WithAdditionalAnnotations(changeSignatureFormattingAnnotation)
                 );
             }
@@ -463,8 +463,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ChangeSignature
                     CreateNewParameterSyntax
                 );
                 return anonymousMethod.WithParameterList(
-                    anonymousMethod
-                        .ParameterList.WithParameters(updatedParameters)
+                    anonymousMethod.ParameterList
+                        .WithParameters(updatedParameters)
                         .WithAdditionalAnnotations(changeSignatureFormattingAnnotation)
                 );
             }
@@ -1091,9 +1091,11 @@ namespace Microsoft.CodeAnalysis.CSharp.ChangeSignature
             var i = 0;
             foreach (var paramNode in paramNodes)
             {
-                var nameAttribute = paramNode.StartTag.Attributes.FirstOrDefault(a =>
-                    a.Name.ToString().Equals("name", StringComparison.OrdinalIgnoreCase)
-                );
+                var nameAttribute = paramNode.StartTag
+                    .Attributes
+                    .FirstOrDefault(a =>
+                        a.Name.ToString().Equals("name", StringComparison.OrdinalIgnoreCase)
+                    );
                 if (nameAttribute == null)
                 {
                     return ImmutableArray<SyntaxNode>.Empty;

@@ -172,12 +172,13 @@ namespace System.ServiceModel.Channels
         public IAsyncResult BeginClose(TimeSpan timeout, AsyncCallback callback, object state)
         {
             if (timeout < TimeSpan.Zero)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentOutOfRangeException(
-                        "timeout",
-                        SR.GetString(SR.SFxTimeoutOutOfRange0)
-                    )
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        new ArgumentOutOfRangeException(
+                            "timeout",
+                            SR.GetString(SR.SFxTimeoutOutOfRange0)
+                        )
+                    );
 
             using (
                 DiagnosticUtility.ShouldUseActivity && this.TraceOpenAndClose
@@ -279,12 +280,13 @@ namespace System.ServiceModel.Channels
         public IAsyncResult BeginOpen(TimeSpan timeout, AsyncCallback callback, object state)
         {
             if (timeout < TimeSpan.Zero)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentOutOfRangeException(
-                        "timeout",
-                        SR.GetString(SR.SFxTimeoutOutOfRange0)
-                    )
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        new ArgumentOutOfRangeException(
+                            "timeout",
+                            SR.GetString(SR.SFxTimeoutOutOfRange0)
+                        )
+                    );
 
             lock (ThisLock)
             {
@@ -337,12 +339,13 @@ namespace System.ServiceModel.Channels
         public void Close(TimeSpan timeout)
         {
             if (timeout < TimeSpan.Zero)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentOutOfRangeException(
-                        "timeout",
-                        SR.GetString(SR.SFxTimeoutOutOfRange0)
-                    )
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        new ArgumentOutOfRangeException(
+                            "timeout",
+                            SR.GetString(SR.SFxTimeoutOutOfRange0)
+                        )
+                    );
 
             using (
                 DiagnosticUtility.ShouldUseActivity && this.TraceOpenAndClose
@@ -731,12 +734,13 @@ namespace System.ServiceModel.Channels
         public void Open(TimeSpan timeout)
         {
             if (timeout < TimeSpan.Zero)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentOutOfRangeException(
-                        "timeout",
-                        SR.GetString(SR.SFxTimeoutOutOfRange0)
-                    )
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        new ArgumentOutOfRangeException(
+                            "timeout",
+                            SR.GetString(SR.SFxTimeoutOutOfRange0)
+                        )
+                    );
 
             using (
                 ServiceModelActivity activity =
@@ -1453,11 +1457,12 @@ namespace System.ServiceModel.Channels
 
             bool InvokeOpen()
             {
-                IAsyncResult result = this.communicationObject.OnBeginOpen(
-                    this.timeout.RemainingTime(),
-                    base.PrepareAsyncCompletion(onOpenCompletion),
-                    this
-                );
+                IAsyncResult result = this.communicationObject
+                    .OnBeginOpen(
+                        this.timeout.RemainingTime(),
+                        base.PrepareAsyncCompletion(onOpenCompletion),
+                        this
+                    );
                 if (result.CompletedSynchronously)
                 {
                     return OnOpenCompletion(result);
@@ -1474,9 +1479,8 @@ namespace System.ServiceModel.Channels
                 if (!this.communicationObject.onOpenedCalled)
                 {
                     throw TraceUtility.ThrowHelperError(
-                        this.communicationObject.CreateBaseClassMethodNotCalledException(
-                            "OnOpened"
-                        ),
+                        this.communicationObject
+                            .CreateBaseClassMethodNotCalledException("OnOpened"),
                         Guid.Empty,
                         this.communicationObject
                     );
@@ -1546,11 +1550,12 @@ namespace System.ServiceModel.Channels
 
             bool InvokeClose()
             {
-                IAsyncResult result = this.communicationObject.OnBeginClose(
-                    this.timeout.RemainingTime(),
-                    base.PrepareAsyncCompletion(onCloseCompletion),
-                    this
-                );
+                IAsyncResult result = this.communicationObject
+                    .OnBeginClose(
+                        this.timeout.RemainingTime(),
+                        base.PrepareAsyncCompletion(onCloseCompletion),
+                        this
+                    );
                 if (result.CompletedSynchronously)
                 {
                     return OnCloseCompletion(result);
@@ -1567,9 +1572,8 @@ namespace System.ServiceModel.Channels
                 if (!this.communicationObject.onClosedCalled)
                 {
                     throw TraceUtility.ThrowHelperError(
-                        this.communicationObject.CreateBaseClassMethodNotCalledException(
-                            "OnClosed"
-                        ),
+                        this.communicationObject
+                            .CreateBaseClassMethodNotCalledException("OnClosed"),
                         Guid.Empty,
                         this.communicationObject
                     );

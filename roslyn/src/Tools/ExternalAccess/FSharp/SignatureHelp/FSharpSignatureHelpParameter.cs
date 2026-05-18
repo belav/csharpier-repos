@@ -79,8 +79,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.SignatureHelp
 
         internal IEnumerable<TaggedText> GetAllParts()
         {
-            return this
-                .PrefixDisplayParts.Concat(this.DisplayParts)
+            return this.PrefixDisplayParts
+                .Concat(this.DisplayParts)
                 .Concat(this.SuffixDisplayParts)
                 .Concat(this.SelectedDisplayParts);
         }

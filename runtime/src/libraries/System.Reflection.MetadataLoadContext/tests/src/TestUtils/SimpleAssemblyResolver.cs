@@ -24,10 +24,8 @@ namespace System.Reflection.Tests
             {
                 AssemblyName assemblyNameFromContext = assembly.GetName();
                 if (
-                    assemblyName.Name.Equals(
-                        assemblyNameFromContext.Name,
-                        StringComparison.OrdinalIgnoreCase
-                    )
+                    assemblyName.Name
+                        .Equals(assemblyNameFromContext.Name, StringComparison.OrdinalIgnoreCase)
                     && NormalizeVersion(assemblyName.Version)
                         .Equals(assemblyNameFromContext.Version)
                     && pktFromAssemblyName.SequenceEqual(

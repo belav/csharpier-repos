@@ -198,9 +198,8 @@ namespace System.Data.Services.Client
                             {
                                 int shadow = this.IndexOfProperty(property.PropertyName);
                                 if (
-                                    !property.DeclaringType.IsAssignableFrom(
-                                        this.properties[shadow].DeclaringType
-                                    )
+                                    !property.DeclaringType
+                                        .IsAssignableFrom(this.properties[shadow].DeclaringType)
                                 )
                                 {
                                     this.properties.RemoveAt(shadow);
@@ -241,7 +240,8 @@ namespace System.Data.Services.Client
                                 if (
                                     (null == keyPropertyDeclaredType)
                                     || this.properties[i]
-                                        .DeclaringType.IsAssignableFrom(keyPropertyDeclaredType)
+                                        .DeclaringType
+                                        .IsAssignableFrom(keyPropertyDeclaredType)
                                 )
                                 {
                                     keyPropertyDeclaredType = this.properties[i].DeclaringType;
@@ -692,14 +692,15 @@ namespace System.Data.Services.Client
             );
 
             Delegate dlgPropValReader = Expression.Lambda(propValReaderExpr, rsrcParam).Compile();
-            this.EpmSourceTree.Add(
-                new EntityPropertyMappingInfo
-                {
-                    Attribute = epmAttr,
-                    PropValReader = dlgPropValReader,
-                    DefiningType = definingType,
-                }
-            );
+            this.EpmSourceTree
+                .Add(
+                    new EntityPropertyMappingInfo
+                    {
+                        Attribute = epmAttr,
+                        PropValReader = dlgPropValReader,
+                        DefiningType = definingType,
+                    }
+                );
         }
 
         private Expression BuildPropertyReader(
@@ -766,18 +767,15 @@ namespace System.Data.Services.Client
 
         private int IndexOfProperty(string propertyName)
         {
-            return this.properties.IndexOf(
-                propertyName,
-                ClientProperty.GetPropertyName,
-                String.Equals
-            );
+            return this.properties
+                .IndexOf(propertyName, ClientProperty.GetPropertyName, String.Equals);
         }
 
         private void WireUpMimeTypeProperties()
         {
             MimeTypePropertyAttribute attribute = (MimeTypePropertyAttribute)
-                this
-                    .ElementType.GetCustomAttributes(typeof(MimeTypePropertyAttribute), true)
+                this.ElementType
+                    .GetCustomAttributes(typeof(MimeTypePropertyAttribute), true)
                     .SingleOrDefault();
             if (null != attribute)
             {
@@ -804,10 +802,8 @@ namespace System.Data.Services.Client
 
         private void CheckMediaLinkEntry()
         {
-            object[] attributes = this.ElementType.GetCustomAttributes(
-                typeof(MediaEntryAttribute),
-                true
-            );
+            object[] attributes = this.ElementType
+                .GetCustomAttributes(typeof(MediaEntryAttribute), true);
             if (attributes != null && attributes.Length > 0)
             {
                 Debug.Assert(

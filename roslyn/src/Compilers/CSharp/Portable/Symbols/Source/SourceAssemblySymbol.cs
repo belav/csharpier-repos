@@ -1261,7 +1261,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     try
                     {
                         foreach (
-                            var referencedModuleName in m.Module.GetReferencedManagedModulesOrThrow()
+                            var referencedModuleName in m.Module
+                                .GetReferencedManagedModulesOrThrow()
                         )
                         {
                             // Do not report error for this module twice
@@ -2079,8 +2080,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
             bool isPossibleAssemblySignatureKeyAttribute(AttributeSyntax node)
             {
-                QuickAttributeChecker checker = this
-                    .DeclaringCompilation.GetBinderFactory(node.SyntaxTree)
+                QuickAttributeChecker checker = this.DeclaringCompilation
+                    .GetBinderFactory(node.SyntaxTree)
                     .GetBinder(node)
                     .QuickAttributeChecker;
                 return checker.IsPossibleMatch(node, QuickAttributes.AssemblySignatureKey);
@@ -2088,8 +2089,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
             bool isPossibleAssemblyKeyNameAttribute(AttributeSyntax node)
             {
-                QuickAttributeChecker checker = this
-                    .DeclaringCompilation.GetBinderFactory(node.SyntaxTree)
+                QuickAttributeChecker checker = this.DeclaringCompilation
+                    .GetBinderFactory(node.SyntaxTree)
                     .GetBinder(node)
                     .QuickAttributeChecker;
                 return checker.IsPossibleMatch(node, QuickAttributes.AssemblyKeyName);
@@ -2097,8 +2098,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
             bool isPossibleAssemblyKeyFileAttribute(AttributeSyntax node)
             {
-                QuickAttributeChecker checker = this
-                    .DeclaringCompilation.GetBinderFactory(node.SyntaxTree)
+                QuickAttributeChecker checker = this.DeclaringCompilation
+                    .GetBinderFactory(node.SyntaxTree)
                     .GetBinder(node)
                     .QuickAttributeChecker;
                 return checker.IsPossibleMatch(node, QuickAttributes.AssemblyKeyFile);
@@ -2173,8 +2174,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         private bool IsPossibleForwardedTypesAttribute(AttributeSyntax node)
         {
-            QuickAttributeChecker checker = this
-                .DeclaringCompilation.GetBinderFactory(node.SyntaxTree)
+            QuickAttributeChecker checker = this.DeclaringCompilation
+                .GetBinderFactory(node.SyntaxTree)
                 .GetBinder(node)
                 .QuickAttributeChecker;
 
@@ -3331,9 +3332,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     switch (namedArg.Key)
                     {
                         case "WrapNonExceptionThrows":
-                            wrapNonExceptionThrows = namedArg.Value.DecodeValue<bool>(
-                                SpecialType.System_Boolean
-                            );
+                            wrapNonExceptionThrows = namedArg.Value
+                                .DecodeValue<bool>(SpecialType.System_Boolean);
                             break;
                     }
                 }
@@ -3706,9 +3706,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                         );
 
                         string fullEmittedName = MetadataHelpers.BuildQualifiedName(
-                            originalDefinition.ContainingSymbol.ToDisplayString(
-                                SymbolDisplayFormat.QualifiedNameOnlyFormat
-                            ),
+                            originalDefinition.ContainingSymbol
+                                .ToDisplayString(SymbolDisplayFormat.QualifiedNameOnlyFormat),
                             originalDefinition.MetadataName
                         );
                         // Since we need to allow multiple constructions of the same generic type at the source

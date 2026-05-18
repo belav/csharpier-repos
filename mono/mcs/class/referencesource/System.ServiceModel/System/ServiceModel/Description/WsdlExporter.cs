@@ -35,9 +35,10 @@ namespace System.ServiceModel.Description
         public override void ExportContract(ContractDescription contract)
         {
             if (this.isFaulted)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(SR.GetString(SR.WsdlExporterIsFaulted))
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(SR.GetString(SR.WsdlExporterIsFaulted))
+                    );
 
             if (contract == null)
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("contract");
@@ -116,9 +117,10 @@ namespace System.ServiceModel.Description
         public override void ExportEndpoint(ServiceEndpoint endpoint)
         {
             if (this.isFaulted)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(SR.GetString(SR.WsdlExporterIsFaulted))
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(SR.GetString(SR.WsdlExporterIsFaulted))
+                    );
 
             if (endpoint == null)
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("endpoint");
@@ -148,16 +150,16 @@ namespace System.ServiceModel.Description
         )
         {
             if (this.isFaulted)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(SR.GetString(SR.WsdlExporterIsFaulted))
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(SR.GetString(SR.WsdlExporterIsFaulted))
+                    );
 
             if (endpoints == null)
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("endpoints");
             if (wsdlServiceQName == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                    "wsdlServiceQName"
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperArgumentNull("wsdlServiceQName");
 
             foreach (ServiceEndpoint endpoint in endpoints)
             {
@@ -194,11 +196,12 @@ namespace System.ServiceModel.Description
         )
         {
             if (endpoint.Binding == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentException(
-                        SR.GetString(SR.EndpointsMustHaveAValidBinding1, endpoint.Name)
-                    )
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        new ArgumentException(
+                            SR.GetString(SR.EndpointsMustHaveAValidBinding1, endpoint.Name)
+                        )
+                    );
 
             EndpointDictionaryKey endpointKey = new EndpointDictionaryKey(
                 endpoint,
@@ -361,15 +364,16 @@ namespace System.ServiceModel.Description
             WsdlNS.PortType wsdlPortType = new WsdlNS.PortType();
             wsdlPortType.Name = wsdlPortTypeQName.Name;
             if (wsdl.PortTypes[wsdlPortType.Name] != null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentException(
-                        SR.GetString(
-                            SR.DuplicateContractQNameNameOnExport,
-                            contract.Name,
-                            contract.Namespace
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        new ArgumentException(
+                            SR.GetString(
+                                SR.DuplicateContractQNameNameOnExport,
+                                contract.Name,
+                                contract.Namespace
+                            )
                         )
-                    )
-                );
+                    );
             NetSessionHelper.AddUsingSessionAttributeIfNeeded(wsdlPortType, contract);
             wsdl.PortTypes.Add(wsdlPortType);
 
@@ -756,19 +760,21 @@ namespace System.ServiceModel.Description
                 XmlAttribute attribute;
                 if (policyVersion == PolicyVersion.Policy12)
                 {
-                    attribute = WsdlExporter.XmlDoc.CreateAttribute(
-                        MetadataStrings.AddressingWsdl.Prefix,
-                        MetadataStrings.AddressingWsdl.Action,
-                        MetadataStrings.AddressingWsdl.NamespaceUri
-                    );
+                    attribute = WsdlExporter.XmlDoc
+                        .CreateAttribute(
+                            MetadataStrings.AddressingWsdl.Prefix,
+                            MetadataStrings.AddressingWsdl.Action,
+                            MetadataStrings.AddressingWsdl.NamespaceUri
+                        );
                 }
                 else
                 {
-                    attribute = WsdlExporter.XmlDoc.CreateAttribute(
-                        MetadataStrings.AddressingMetadata.Prefix,
-                        MetadataStrings.AddressingMetadata.Action,
-                        MetadataStrings.AddressingMetadata.NamespaceUri
-                    );
+                    attribute = WsdlExporter.XmlDoc
+                        .CreateAttribute(
+                            MetadataStrings.AddressingMetadata.Prefix,
+                            MetadataStrings.AddressingMetadata.Action,
+                            MetadataStrings.AddressingMetadata.NamespaceUri
+                        );
                 }
 
                 attribute.Value = actionUri;
@@ -810,11 +816,12 @@ namespace System.ServiceModel.Description
                 }
                 else
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(
-                            SR.GetString(SR.AddressingVersionNotSupported, addressing)
-                        )
-                    );
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(
+                                SR.GetString(SR.AddressingVersionNotSupported, addressing)
+                            )
+                        );
                 }
 
                 addr.WriteTo(addressing, xw);
@@ -874,11 +881,15 @@ namespace System.ServiceModel.Description
                         {
                             mode = (SupportedAddressingMode)exporter.State[key];
                             if (!SupportedAddressingModeHelper.IsDefined(mode))
-                                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                                    new InvalidOperationException(
-                                        SR.GetString(SR.SupportedAddressingModeNotSupported, mode)
-                                    )
-                                );
+                                throw DiagnosticUtility.ExceptionUtility
+                                    .ThrowHelperError(
+                                        new InvalidOperationException(
+                                            SR.GetString(
+                                                SR.SupportedAddressingModeNotSupported,
+                                                mode
+                                            )
+                                        )
+                                    );
                         }
 
                         if (mode != SupportedAddressingMode.Mixed)
@@ -886,15 +897,13 @@ namespace System.ServiceModel.Description
                             string responsesAssertionLocalName;
                             if (mode == SupportedAddressingMode.Anonymous)
                             {
-                                responsesAssertionLocalName = MetadataStrings
-                                    .Addressing10
+                                responsesAssertionLocalName = MetadataStrings.Addressing10
                                     .MetadataPolicy
                                     .AnonymousResponses;
                             }
                             else
                             {
-                                responsesAssertionLocalName = MetadataStrings
-                                    .Addressing10
+                                responsesAssertionLocalName = MetadataStrings.Addressing10
                                     .MetadataPolicy
                                     .NonAnonymousResponses;
                             }
@@ -923,11 +932,12 @@ namespace System.ServiceModel.Description
                 }
                 else
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(
-                            SR.GetString(SR.AddressingVersionNotSupported, addressVersion)
-                        )
-                    );
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(
+                                SR.GetString(SR.AddressingVersionNotSupported, addressVersion)
+                            )
+                        );
                 }
 
                 if (addressingAssertion != null)
@@ -965,8 +975,7 @@ namespace System.ServiceModel.Description
                     keyBase;
                 ICollection<XmlElement> assertions;
 
-                WsdlNS.ServiceDescription policyWsdl = endpointContext
-                    .WsdlBinding
+                WsdlNS.ServiceDescription policyWsdl = endpointContext.WsdlBinding
                     .ServiceDescription;
 
                 assertions = policyContext.GetBindingAssertions();
@@ -1294,14 +1303,15 @@ namespace System.ServiceModel.Description
                 if (!(scopes.Length > 0))
                 {
                     Fx.Assert("You must pass at least one namespaceScope");
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(
-                            String.Format(
-                                CultureInfo.InvariantCulture,
-                                "You must pass at least one namespaceScope"
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(
+                                String.Format(
+                                    CultureInfo.InvariantCulture,
+                                    "You must pass at least one namespaceScope"
+                                )
                             )
-                        )
-                    );
+                        );
                 }
                 string prefix = null;
 
@@ -1572,9 +1582,10 @@ namespace System.ServiceModel.Description
             {
                 if (Fx.IsFatal(e))
                     throw;
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    ThrowExtensionException(contractContext.Contract, extension, e)
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        ThrowExtensionException(contractContext.Contract, extension, e)
+                    );
             }
         }
 
@@ -1592,9 +1603,10 @@ namespace System.ServiceModel.Description
             {
                 if (Fx.IsFatal(e))
                     throw;
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    ThrowExtensionException(endpointContext.Endpoint, extension, e)
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        ThrowExtensionException(endpointContext.Endpoint, extension, e)
+                    );
             }
         }
 

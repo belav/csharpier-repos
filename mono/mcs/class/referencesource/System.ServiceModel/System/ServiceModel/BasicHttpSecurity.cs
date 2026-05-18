@@ -42,9 +42,8 @@ namespace System.ServiceModel
             {
                 if (!BasicHttpSecurityModeHelper.IsDefined(value))
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ArgumentOutOfRangeException("value")
-                    );
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperError(new ArgumentOutOfRangeException("value"));
                 }
                 this.mode = value;
             }
@@ -113,9 +112,10 @@ namespace System.ServiceModel
                 || this.mode == BasicHttpSecurityMode.TransportWithMessageCredential
             )
             {
-                return this.messageSecurity.CreateMessageSecurity(
-                    this.Mode == BasicHttpSecurityMode.TransportWithMessageCredential
-                );
+                return this.messageSecurity
+                    .CreateMessageSecurity(
+                        this.Mode == BasicHttpSecurityMode.TransportWithMessageCredential
+                    );
             }
             else
             {

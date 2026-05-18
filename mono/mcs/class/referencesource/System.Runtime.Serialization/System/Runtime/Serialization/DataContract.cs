@@ -118,14 +118,18 @@ namespace System.Runtime.Serialization
             dataContract = dataContract.GetValidContract(mode);
             if (dataContract is ClassDataContract)
             {
-                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new SerializationException(
-                        SR.GetString(
-                            SR.ClassDataContractReturnedForGetOnlyCollection,
-                            DataContract.GetClrTypeFullName(dataContract.UnderlyingType)
+                throw System.Runtime
+                    .Serialization
+                    .DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new SerializationException(
+                            SR.GetString(
+                                SR.ClassDataContractReturnedForGetOnlyCollection,
+                                DataContract.GetClrTypeFullName(dataContract.UnderlyingType)
+                            )
                         )
-                    )
-                );
+                    );
             }
             return dataContract;
         }
@@ -299,15 +303,19 @@ namespace System.Runtime.Serialization
             XmlObjectSerializerWriteContext context
         )
         {
-            throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                new InvalidDataContractException(
-                    SR.GetString(
-                        SR.UnexpectedContractType,
-                        DataContract.GetClrTypeFullName(this.GetType()),
-                        DataContract.GetClrTypeFullName(UnderlyingType)
+            throw System.Runtime
+                .Serialization
+                .DiagnosticUtility
+                .ExceptionUtility
+                .ThrowHelperError(
+                    new InvalidDataContractException(
+                        SR.GetString(
+                            SR.UnexpectedContractType,
+                            DataContract.GetClrTypeFullName(this.GetType()),
+                            DataContract.GetClrTypeFullName(UnderlyingType)
+                        )
                     )
-                )
-            );
+                );
         }
 
         public virtual object ReadXmlValue(
@@ -315,15 +323,19 @@ namespace System.Runtime.Serialization
             XmlObjectSerializerReadContext context
         )
         {
-            throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                new InvalidDataContractException(
-                    SR.GetString(
-                        SR.UnexpectedContractType,
-                        DataContract.GetClrTypeFullName(this.GetType()),
-                        DataContract.GetClrTypeFullName(UnderlyingType)
+            throw System.Runtime
+                .Serialization
+                .DiagnosticUtility
+                .ExceptionUtility
+                .ThrowHelperError(
+                    new InvalidDataContractException(
+                        SR.GetString(
+                            SR.UnexpectedContractType,
+                            DataContract.GetClrTypeFullName(this.GetType()),
+                            DataContract.GetClrTypeFullName(UnderlyingType)
+                        )
                     )
-                )
-            );
+                );
         }
 
         internal bool IsValueType
@@ -611,9 +623,10 @@ namespace System.Runtime.Serialization
                 DataContract dataContract = dataContractCache[id];
                 if (dataContract == null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new SerializationException(SR.GetString(SR.DataContractCacheOverflow))
-                    );
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperError(
+                            new SerializationException(SR.GetString(SR.DataContractCacheOverflow))
+                        );
                 }
                 return dataContract;
             }
@@ -638,9 +651,10 @@ namespace System.Runtime.Serialization
                         return i;
                     }
                 }
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new SerializationException(SR.GetString(SR.DataContractCacheOverflow))
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        new SerializationException(SR.GetString(SR.DataContractCacheOverflow))
+                    );
             }
 
             static bool ContractMatches(DataContract contract, DataContract cachedContract)
@@ -671,10 +685,8 @@ namespace System.Runtime.Serialization
                             {
                                 throw;
                             }
-                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperFatal(
-                                ex.Message,
-                                ex
-                            );
+                            throw DiagnosticUtility.ExceptionUtility
+                                .ThrowHelperFatal(ex.Message, ex);
                         }
                     }
                     return id.Value;
@@ -691,9 +703,12 @@ namespace System.Runtime.Serialization
                     if (newSize <= value)
                     {
                         Fx.Assert("DataContract cache overflow");
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new SerializationException(SR.GetString(SR.DataContractCacheOverflow))
-                        );
+                        throw DiagnosticUtility.ExceptionUtility
+                            .ThrowHelperError(
+                                new SerializationException(
+                                    SR.GetString(SR.DataContractCacheOverflow)
+                                )
+                            );
                     }
                     Array.Resize<DataContract>(ref dataContractCache, newSize);
                 }
@@ -1227,10 +1242,8 @@ namespace System.Runtime.Serialization
                             {
                                 throw;
                             }
-                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperFatal(
-                                ex.Message,
-                                ex
-                            );
+                            throw DiagnosticUtility.ExceptionUtility
+                                .ThrowHelperFatal(ex.Message, ex);
                         }
                     }
                     XmlDictionaryString value;
@@ -1270,17 +1283,17 @@ namespace System.Runtime.Serialization
                             {
                                 throw;
                             }
-                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperFatal(
-                                ex.Message,
-                                ex
-                            );
+                            throw DiagnosticUtility.ExceptionUtility
+                                .ThrowHelperFatal(ex.Message, ex);
                         }
                     }
                 }
 
-                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidDataContractException(message)
-                );
+                throw System.Runtime
+                    .Serialization
+                    .DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new InvalidDataContractException(message));
             }
 
             internal DataContractCriticalHelper() { }
@@ -1546,14 +1559,18 @@ namespace System.Runtime.Serialization
                 itemType = itemTypeQueue.Dequeue();
                 if (previousCollectionTypes.ContainsKey(itemType))
                 {
-                    throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidDataContractException(
-                            SR.GetString(
-                                SR.RecursiveCollectionType,
-                                DataContract.GetClrTypeFullName(itemType)
+                    throw System.Runtime
+                        .Serialization
+                        .DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidDataContractException(
+                                SR.GetString(
+                                    SR.RecursiveCollectionType,
+                                    DataContract.GetClrTypeFullName(itemType)
+                                )
                             )
-                        )
-                    );
+                        );
                 }
                 if (itemType.IsGenericType)
                 {
@@ -1700,14 +1717,18 @@ namespace System.Runtime.Serialization
             {
                 name = dataContractAttribute.Name;
                 if (name == null || name.Length == 0)
-                    throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidDataContractException(
-                            SR.GetString(
-                                SR.InvalidDataContractName,
-                                DataContract.GetClrTypeFullName(type)
+                    throw System.Runtime
+                        .Serialization
+                        .DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidDataContractException(
+                                SR.GetString(
+                                    SR.InvalidDataContractName,
+                                    DataContract.GetClrTypeFullName(type)
+                                )
                             )
-                        )
-                    );
+                        );
                 if (type.IsGenericType && !type.IsGenericTypeDefinition)
                     name = ExpandGenericParameters(name, type);
                 name = DataContract.EncodeLocalName(name);
@@ -1719,14 +1740,18 @@ namespace System.Runtime.Serialization
             {
                 ns = dataContractAttribute.Namespace;
                 if (ns == null)
-                    throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidDataContractException(
-                            SR.GetString(
-                                SR.InvalidDataContractNamespace,
-                                DataContract.GetClrTypeFullName(type)
+                    throw System.Runtime
+                        .Serialization
+                        .DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidDataContractException(
+                                SR.GetString(
+                                    SR.InvalidDataContractNamespace,
+                                    DataContract.GetClrTypeFullName(type)
+                                )
                             )
-                        )
-                    );
+                        );
                 CheckExplicitDataContractNamespaceUri(ns, type);
             }
             else
@@ -1830,14 +1855,18 @@ namespace System.Runtime.Serialization
             {
 #if DEBUG
                 if (dataContractAttributes.Length > 1)
-                    throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidDataContractException(
-                            SR.GetString(
-                                SR.TooManyDataContracts,
-                                DataContract.GetClrTypeFullName(type)
+                    throw System.Runtime
+                        .Serialization
+                        .DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidDataContractException(
+                                SR.GetString(
+                                    SR.TooManyDataContracts,
+                                    DataContract.GetClrTypeFullName(type)
+                                )
                             )
-                        )
-                    );
+                        );
 #endif
                 dataContractAttribute = (DataContractAttribute)dataContractAttributes[0];
             }
@@ -1876,14 +1905,18 @@ namespace System.Runtime.Serialization
             {
 #if DEBUG
                 if (collectionContractAttributes.Length > 1)
-                    throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidDataContractException(
-                            SR.GetString(
-                                SR.TooManyCollectionContracts,
-                                DataContract.GetClrTypeFullName(type)
+                    throw System.Runtime
+                        .Serialization
+                        .DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidDataContractException(
+                                SR.GetString(
+                                    SR.TooManyCollectionContracts,
+                                    DataContract.GetClrTypeFullName(type)
+                                )
                             )
-                        )
-                    );
+                        );
 #endif
                 collectionContractAttribute = (CollectionDataContractAttribute)
                     collectionContractAttributes[0];
@@ -1891,14 +1924,18 @@ namespace System.Runtime.Serialization
                 {
                     name = collectionContractAttribute.Name;
                     if (name == null || name.Length == 0)
-                        throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new InvalidDataContractException(
-                                SR.GetString(
-                                    SR.InvalidCollectionContractName,
-                                    DataContract.GetClrTypeFullName(type)
+                        throw System.Runtime
+                            .Serialization
+                            .DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(
+                                new InvalidDataContractException(
+                                    SR.GetString(
+                                        SR.InvalidCollectionContractName,
+                                        DataContract.GetClrTypeFullName(type)
+                                    )
                                 )
-                            )
-                        );
+                            );
                     if (type.IsGenericType && !type.IsGenericTypeDefinition)
                         name = ExpandGenericParameters(name, type);
                     name = DataContract.EncodeLocalName(name);
@@ -1910,14 +1947,18 @@ namespace System.Runtime.Serialization
                 {
                     ns = collectionContractAttribute.Namespace;
                     if (ns == null)
-                        throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new InvalidDataContractException(
-                                SR.GetString(
-                                    SR.InvalidCollectionContractNamespace,
-                                    DataContract.GetClrTypeFullName(type)
+                        throw System.Runtime
+                            .Serialization
+                            .DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(
+                                new InvalidDataContractException(
+                                    SR.GetString(
+                                        SR.InvalidCollectionContractNamespace,
+                                        DataContract.GetClrTypeFullName(type)
+                                    )
                                 )
-                            )
-                        );
+                            );
                     CheckExplicitDataContractNamespaceUri(ns, type);
                 }
                 else
@@ -2351,22 +2392,30 @@ namespace System.Runtime.Serialization
                 if (clrNsInAttribute == clrNs)
                 {
                     if (nsAttribute.ContractNamespace == null)
-                        throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new InvalidDataContractException(
-                                SR.GetString(SR.InvalidGlobalDataContractNamespace, clrNs)
-                            )
-                        );
-                    if (dataContractNs != null)
-                        throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new InvalidDataContractException(
-                                SR.GetString(
-                                    SR.DataContractNamespaceAlreadySet,
-                                    dataContractNs,
-                                    nsAttribute.ContractNamespace,
-                                    clrNs
+                        throw System.Runtime
+                            .Serialization
+                            .DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(
+                                new InvalidDataContractException(
+                                    SR.GetString(SR.InvalidGlobalDataContractNamespace, clrNs)
                                 )
-                            )
-                        );
+                            );
+                    if (dataContractNs != null)
+                        throw System.Runtime
+                            .Serialization
+                            .DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(
+                                new InvalidDataContractException(
+                                    SR.GetString(
+                                        SR.DataContractNamespaceAlreadySet,
+                                        dataContractNs,
+                                        nsAttribute.ContractNamespace,
+                                        clrNs
+                                    )
+                                )
+                            );
                     dataContractNs = nsAttribute.ContractNamespace;
                 }
             }
@@ -2433,15 +2482,19 @@ namespace System.Runtime.Serialization
                         if (format[i] == '}')
                             break;
                     if (i == format.Length)
-                        throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new InvalidDataContractException(
-                                SR.GetString(
-                                    SR.GenericNameBraceMismatch,
-                                    format,
-                                    genericNameProvider.GetGenericTypeName()
+                        throw System.Runtime
+                            .Serialization
+                            .DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(
+                                new InvalidDataContractException(
+                                    SR.GetString(
+                                        SR.GenericNameBraceMismatch,
+                                        format,
+                                        genericNameProvider.GetGenericTypeName()
+                                    )
                                 )
-                            )
-                        );
+                            );
                     if (format[start] == '#' && i == (start + 1))
                     {
                         if (
@@ -2469,16 +2522,17 @@ namespace System.Runtime.Serialization
                             || paramIndex < 0
                             || paramIndex >= genericNameProvider.GetParameterCount()
                         )
-                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                                new InvalidDataContractException(
-                                    SR.GetString(
-                                        SR.GenericParameterNotValid,
-                                        format.Substring(start, i - start),
-                                        genericNameProvider.GetGenericTypeName(),
-                                        genericNameProvider.GetParameterCount() - 1
+                            throw DiagnosticUtility.ExceptionUtility
+                                .ThrowHelperError(
+                                    new InvalidDataContractException(
+                                        SR.GetString(
+                                            SR.GenericParameterNotValid,
+                                            format.Substring(start, i - start),
+                                            genericNameProvider.GetGenericTypeName(),
+                                            genericNameProvider.GetParameterCount() - 1
+                                        )
                                     )
-                                )
-                            );
+                                );
                         typeName.Append(genericNameProvider.GetParameterName(paramIndex));
                     }
                 }
@@ -2794,14 +2848,15 @@ namespace System.Runtime.Serialization
                 {
                     if (t.IsGenericType && !IsOpenGenericType(t))
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new ArgumentException(
-                                SR.GetString(
-                                    SR.KnownTypeConfigClosedGenericDeclared,
-                                    collectionElementTypeName
+                        throw DiagnosticUtility.ExceptionUtility
+                            .ThrowHelperError(
+                                new ArgumentException(
+                                    SR.GetString(
+                                        SR.KnownTypeConfigClosedGenericDeclared,
+                                        collectionElementTypeName
+                                    )
                                 )
-                            )
-                        );
+                            );
                     }
                     else if (rootType.Equals(t))
                     {
@@ -2841,17 +2896,21 @@ namespace System.Runtime.Serialization
                     alreadyExistingContract.UnderlyingType
                     != DataContractCriticalHelper.GetDataContractAdapterType(type)
                 )
-                    throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(
-                            SR.GetString(
-                                SR.DupContractInKnownTypes,
-                                type,
-                                alreadyExistingContract.UnderlyingType,
-                                dataContract.StableName.Namespace,
-                                dataContract.StableName.Name
+                    throw System.Runtime
+                        .Serialization
+                        .DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(
+                                SR.GetString(
+                                    SR.DupContractInKnownTypes,
+                                    type,
+                                    alreadyExistingContract.UnderlyingType,
+                                    dataContract.StableName.Namespace,
+                                    dataContract.StableName.Name
+                                )
                             )
-                        )
-                    );
+                        );
                 return;
             }
             nameToDataContractTable.Add(dataContract.StableName, dataContract);

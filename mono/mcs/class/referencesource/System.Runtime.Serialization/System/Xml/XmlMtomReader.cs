@@ -56,9 +56,10 @@ namespace System.Xml
             if (remaining - size <= 0)
             {
                 remaining = 0;
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new XmlException(SR.GetString(SR.MtomBufferQuotaExceeded, maxBuffer))
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        new XmlException(SR.GetString(SR.MtomBufferQuotaExceeded, maxBuffer))
+                    );
             }
             else
             {
@@ -74,9 +75,10 @@ namespace System.Xml
             for (int i = 0; i < encodings.Length; i++)
             {
                 if (encodings[i] == null)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                        String.Format(CultureInfo.InvariantCulture, "encodings[{0}]", i)
-                    );
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperArgumentNull(
+                            String.Format(CultureInfo.InvariantCulture, "encodings[{0}]", i)
+                        );
             }
 
             this.encodings = new Encoding[encodings.Length];
@@ -86,9 +88,13 @@ namespace System.Xml
         void CheckContentType(string contentType)
         {
             if (contentType != null && contentType.Length == 0)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentException(SR.GetString(SR.MtomContentTypeInvalid), "contentType")
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        new ArgumentException(
+                            SR.GetString(SR.MtomContentTypeInvalid),
+                            "contentType"
+                        )
+                    );
         }
 
         public void SetInput(
@@ -160,9 +166,10 @@ namespace System.Xml
                 );
                 stream = messageReader.GetContentStream();
                 if (stream == null)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new XmlException(SR.GetString(SR.MtomMessageInvalidContent))
-                    );
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperError(
+                            new XmlException(SR.GetString(SR.MtomMessageInvalidContent))
+                        );
             }
             else
             {
@@ -216,15 +223,16 @@ namespace System.Xml
         void ReadMessageMimeVersionHeader(MimeVersionHeader header)
         {
             if (header != null && header.Version != MimeVersionHeader.Default.Version)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new XmlException(
-                        SR.GetString(
-                            SR.MtomMessageInvalidMimeVersion,
-                            header.Version,
-                            MimeVersionHeader.Default.Version
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        new XmlException(
+                            SR.GetString(
+                                SR.MtomMessageInvalidMimeVersion,
+                                header.Version,
+                                MimeVersionHeader.Default.Version
+                            )
                         )
-                    )
-                );
+                    );
         }
 
         void ReadMessageContentTypeHeader(
@@ -235,9 +243,10 @@ namespace System.Xml
         )
         {
             if (header == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new XmlException(SR.GetString(SR.MtomMessageContentTypeNotFound))
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        new XmlException(SR.GetString(SR.MtomMessageContentTypeNotFound))
+                    );
 
             if (
                 String.Compare(
@@ -251,40 +260,44 @@ namespace System.Xml
                     StringComparison.OrdinalIgnoreCase
                 ) != 0
             )
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new XmlException(
-                        SR.GetString(
-                            SR.MtomMessageNotMultipart,
-                            MtomGlobals.MediaType,
-                            MtomGlobals.MediaSubtype
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        new XmlException(
+                            SR.GetString(
+                                SR.MtomMessageNotMultipart,
+                                MtomGlobals.MediaType,
+                                MtomGlobals.MediaSubtype
+                            )
                         )
-                    )
-                );
+                    );
 
             string type;
             if (
                 !header.Parameters.TryGetValue(MtomGlobals.TypeParam, out type)
                 || MtomGlobals.XopType != type
             )
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new XmlException(
-                        SR.GetString(SR.MtomMessageNotApplicationXopXml, MtomGlobals.XopType)
-                    )
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        new XmlException(
+                            SR.GetString(SR.MtomMessageNotApplicationXopXml, MtomGlobals.XopType)
+                        )
+                    );
 
             if (!header.Parameters.TryGetValue(MtomGlobals.BoundaryParam, out boundary))
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new XmlException(
-                        SR.GetString(
-                            SR.MtomMessageRequiredParamNotSpecified,
-                            MtomGlobals.BoundaryParam
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        new XmlException(
+                            SR.GetString(
+                                SR.MtomMessageRequiredParamNotSpecified,
+                                MtomGlobals.BoundaryParam
+                            )
                         )
-                    )
-                );
+                    );
             if (!MailBnfHelper.IsValidMimeBoundary(boundary))
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new XmlException(SR.GetString(SR.MtomBoundaryInvalid, boundary))
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        new XmlException(SR.GetString(SR.MtomBoundaryInvalid, boundary))
+                    );
 
             if (!header.Parameters.TryGetValue(MtomGlobals.StartParam, out start))
                 start = null;
@@ -300,9 +313,10 @@ namespace System.Xml
         )
         {
             if (header == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new XmlException(SR.GetString(SR.MtomRootContentTypeNotFound))
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        new XmlException(SR.GetString(SR.MtomRootContentTypeNotFound))
+                    );
 
             if (
                 String.Compare(
@@ -316,15 +330,16 @@ namespace System.Xml
                     StringComparison.OrdinalIgnoreCase
                 ) != 0
             )
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new XmlException(
-                        SR.GetString(
-                            SR.MtomRootNotApplicationXopXml,
-                            MtomGlobals.XopMediaType,
-                            MtomGlobals.XopMediaSubtype
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        new XmlException(
+                            SR.GetString(
+                                SR.MtomRootNotApplicationXopXml,
+                                MtomGlobals.XopMediaType,
+                                MtomGlobals.XopMediaSubtype
+                            )
                         )
-                    )
-                );
+                    );
 
             string charset;
             if (
@@ -332,11 +347,15 @@ namespace System.Xml
                 || charset == null
                 || charset.Length == 0
             )
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new XmlException(
-                        SR.GetString(SR.MtomRootRequiredParamNotSpecified, MtomGlobals.CharsetParam)
-                    )
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        new XmlException(
+                            SR.GetString(
+                                SR.MtomRootRequiredParamNotSpecified,
+                                MtomGlobals.CharsetParam
+                            )
+                        )
+                    );
             Encoding encoding = null;
             for (int i = 0; i < encodings.Length; i++)
             {
@@ -401,15 +420,16 @@ namespace System.Xml
                             expectedCharSetStr.Append(" | ");
                         expectedCharSetStr.Append(encodings[i].WebName);
                     }
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new XmlException(
-                            SR.GetString(
-                                SR.MtomRootUnexpectedCharset,
-                                charset,
-                                expectedCharSetStr.ToString()
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperError(
+                            new XmlException(
+                                SR.GetString(
+                                    SR.MtomRootUnexpectedCharset,
+                                    charset,
+                                    expectedCharSetStr.ToString()
+                                )
                             )
-                        )
-                    );
+                        );
                 }
             }
 
@@ -421,20 +441,22 @@ namespace System.Xml
                     || rootType == null
                     || rootType.Length == 0
                 )
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new XmlException(
-                            SR.GetString(
-                                SR.MtomRootRequiredParamNotSpecified,
-                                MtomGlobals.TypeParam
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperError(
+                            new XmlException(
+                                SR.GetString(
+                                    SR.MtomRootRequiredParamNotSpecified,
+                                    MtomGlobals.TypeParam
+                                )
                             )
-                        )
-                    );
+                        );
                 if (rootType != expectedType)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new XmlException(
-                            SR.GetString(SR.MtomRootUnexpectedType, rootType, expectedType)
-                        )
-                    );
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperError(
+                            new XmlException(
+                                SR.GetString(SR.MtomRootUnexpectedType, rootType, expectedType)
+                            )
+                        );
             }
 
             return encoding;
@@ -444,40 +466,43 @@ namespace System.Xml
         void CheckContentTransferEncodingOnRoot(ContentTransferEncodingHeader header)
         {
             if (header != null && header.ContentTransferEncoding == ContentTransferEncoding.Other)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new XmlException(
-                        SR.GetString(
-                            SR.MtomContentTransferEncodingNotSupported,
-                            header.Value,
-                            ContentTransferEncodingHeader.SevenBit.ContentTransferEncodingValue,
-                            ContentTransferEncodingHeader.EightBit.ContentTransferEncodingValue,
-                            ContentTransferEncodingHeader.Binary.ContentTransferEncodingValue
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        new XmlException(
+                            SR.GetString(
+                                SR.MtomContentTransferEncodingNotSupported,
+                                header.Value,
+                                ContentTransferEncodingHeader.SevenBit.ContentTransferEncodingValue,
+                                ContentTransferEncodingHeader.EightBit.ContentTransferEncodingValue,
+                                ContentTransferEncodingHeader.Binary.ContentTransferEncodingValue
+                            )
                         )
-                    )
-                );
+                    );
         }
 
         void CheckContentTransferEncodingOnBinaryPart(ContentTransferEncodingHeader header)
         {
             if (header == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new XmlException(
-                        SR.GetString(
-                            SR.MtomContentTransferEncodingNotPresent,
-                            ContentTransferEncodingHeader.Binary.ContentTransferEncodingValue
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        new XmlException(
+                            SR.GetString(
+                                SR.MtomContentTransferEncodingNotPresent,
+                                ContentTransferEncodingHeader.Binary.ContentTransferEncodingValue
+                            )
                         )
-                    )
-                );
+                    );
             else if (header.ContentTransferEncoding != ContentTransferEncoding.Binary)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new XmlException(
-                        SR.GetString(
-                            SR.MtomInvalidTransferEncodingForMimePart,
-                            header.Value,
-                            ContentTransferEncodingHeader.Binary.ContentTransferEncodingValue
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        new XmlException(
+                            SR.GetString(
+                                SR.MtomInvalidTransferEncodingForMimePart,
+                                header.Value,
+                                ContentTransferEncodingHeader.Binary.ContentTransferEncodingValue
+                            )
                         )
-                    )
-                );
+                    );
         }
 
         string GetStartUri(string startUri)
@@ -487,9 +512,10 @@ namespace System.Xml
                 if (startUri.EndsWith(">", StringComparison.Ordinal))
                     return startUri;
                 else
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new XmlException(SR.GetString(SR.MtomInvalidStartUri, startUri))
-                    );
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperError(
+                            new XmlException(SR.GetString(SR.MtomInvalidStartUri, startUri))
+                        );
             }
             else
                 return String.Format(CultureInfo.InvariantCulture, "<{0}>", startUri);
@@ -518,25 +544,27 @@ namespace System.Xml
                         )
                             uri = xmlReader.Value;
                         else if (xmlReader.NamespaceURI == MtomGlobals.XopIncludeNamespace)
-                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            throw DiagnosticUtility.ExceptionUtility
+                                .ThrowHelperError(
+                                    new XmlException(
+                                        SR.GetString(
+                                            SR.MtomXopIncludeInvalidXopAttributes,
+                                            xmlReader.LocalName,
+                                            MtomGlobals.XopIncludeNamespace
+                                        )
+                                    )
+                                );
+                    }
+                    if (uri == null)
+                        throw DiagnosticUtility.ExceptionUtility
+                            .ThrowHelperError(
                                 new XmlException(
                                     SR.GetString(
-                                        SR.MtomXopIncludeInvalidXopAttributes,
-                                        xmlReader.LocalName,
-                                        MtomGlobals.XopIncludeNamespace
+                                        SR.MtomXopIncludeHrefNotSpecified,
+                                        MtomGlobals.XopIncludeHrefLocalName
                                     )
                                 )
                             );
-                    }
-                    if (uri == null)
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new XmlException(
-                                SR.GetString(
-                                    SR.MtomXopIncludeHrefNotSpecified,
-                                    MtomGlobals.XopIncludeHrefLocalName
-                                )
-                            )
-                        );
 
                     MimePart mimePart = ReadMimePart(uri);
 
@@ -564,15 +592,16 @@ namespace System.Xml
                                 xmlReader.IsStartElement()
                                 && xmlReader.NamespaceURI == MtomGlobals.XopIncludeNamespace
                             )
-                                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                                    new XmlException(
-                                        SR.GetString(
-                                            SR.MtomXopIncludeInvalidXopElement,
-                                            xmlReader.LocalName,
-                                            MtomGlobals.XopIncludeNamespace
+                                throw DiagnosticUtility.ExceptionUtility
+                                    .ThrowHelperError(
+                                        new XmlException(
+                                            SR.GetString(
+                                                SR.MtomXopIncludeInvalidXopElement,
+                                                xmlReader.LocalName,
+                                                MtomGlobals.XopIncludeNamespace
+                                            )
                                         )
-                                    )
-                                );
+                                    );
 
                             xmlReader.Skip();
                         }
@@ -609,9 +638,8 @@ namespace System.Xml
             MimePart part = null;
 
             if (uri == null || uri.Length == 0)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new XmlException(SR.GetString(SR.MtomInvalidEmptyURI))
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(new XmlException(SR.GetString(SR.MtomInvalidEmptyURI)));
 
             string contentID = null;
             if (uri.StartsWith(MimeGlobals.ContentIDScheme, StringComparison.Ordinal))
@@ -624,18 +652,18 @@ namespace System.Xml
                 contentID = uri;
 
             if (contentID == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new XmlException(SR.GetString(SR.MtomInvalidCIDUri, uri))
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(new XmlException(SR.GetString(SR.MtomInvalidCIDUri, uri)));
 
             if (mimeParts != null && mimeParts.TryGetValue(contentID, out part))
             {
                 if (part.ReferencedFromInfoset)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new XmlException(
-                            SR.GetString(SR.MtomMimePartReferencedMoreThanOnce, contentID)
-                        )
-                    );
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperError(
+                            new XmlException(
+                                SR.GetString(SR.MtomMimePartReferencedMoreThanOnce, contentID)
+                            )
+                        );
             }
             else
             {
@@ -648,9 +676,12 @@ namespace System.Xml
                     );
                     Stream contentStream = mimeReader.GetContentStream();
                     if (contentStream == null)
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new XmlException(SR.GetString(SR.MtomMessageInvalidContentInMimePart))
-                        );
+                        throw DiagnosticUtility.ExceptionUtility
+                            .ThrowHelperError(
+                                new XmlException(
+                                    SR.GetString(SR.MtomMessageInvalidContentInMimePart)
+                                )
+                            );
 
                     ContentIDHeader contentIDHeader = (headers == null) ? null : headers.ContentID;
                     if (contentIDHeader == null || contentIDHeader.Value == null)
@@ -675,15 +706,16 @@ namespace System.Xml
                     mimeParts.Add(currentContentID, currentPart);
 
                     if (mimeParts.Count > maxMimeParts)
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new XmlException(
-                                SR.GetString(
-                                    SR.MaxMimePartsExceeded,
-                                    maxMimeParts,
-                                    AppSettings.MaxMimePartsAppSettingsString
+                        throw DiagnosticUtility.ExceptionUtility
+                            .ThrowHelperError(
+                                new XmlException(
+                                    SR.GetString(
+                                        SR.MaxMimePartsExceeded,
+                                        maxMimeParts,
+                                        AppSettings.MaxMimePartsAppSettingsString
+                                    )
                                 )
-                            )
-                        );
+                            );
 
                     if (currentContentID.Equals(contentID))
                         part = currentPart;
@@ -692,9 +724,8 @@ namespace System.Xml
                 }
 
                 if (part == null)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new XmlException(SR.GetString(SR.MtomPartNotFound, uri))
-                    );
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperError(new XmlException(SR.GetString(SR.MtomPartNotFound, uri)));
             }
 
             part.ReferencedFromInfoset = true;
@@ -706,9 +737,8 @@ namespace System.Xml
             MimePart part = null;
 
             if (!mimeReader.ReadNextPart())
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new XmlException(SR.GetString(SR.MtomRootPartNotFound))
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(new XmlException(SR.GetString(SR.MtomRootPartNotFound)));
 
             MimeHeaders headers = mimeReader.ReadHeaders(
                 this.maxBufferSize,
@@ -716,9 +746,10 @@ namespace System.Xml
             );
             Stream contentStream = mimeReader.GetContentStream();
             if (contentStream == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new XmlException(SR.GetString(SR.MtomMessageInvalidContentInMimePart))
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        new XmlException(SR.GetString(SR.MtomMessageInvalidContentInMimePart))
+                    );
             part = new MimePart(contentStream, headers);
 
             return part;
@@ -1381,33 +1412,52 @@ namespace System.Xml
                     throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("buffer");
 
                 if (offset < 0)
-                    throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ArgumentOutOfRangeException(
-                            "offset",
-                            SR.GetString(SR.ValueMustBeNonNegative)
-                        )
-                    );
+                    throw System.Runtime
+                        .Serialization
+                        .DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new ArgumentOutOfRangeException(
+                                "offset",
+                                SR.GetString(SR.ValueMustBeNonNegative)
+                            )
+                        );
                 if (offset > buffer.Length)
-                    throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ArgumentOutOfRangeException(
-                            "offset",
-                            SR.GetString(SR.OffsetExceedsBufferSize, buffer.Length)
-                        )
-                    );
+                    throw System.Runtime
+                        .Serialization
+                        .DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new ArgumentOutOfRangeException(
+                                "offset",
+                                SR.GetString(SR.OffsetExceedsBufferSize, buffer.Length)
+                            )
+                        );
                 if (count < 0)
-                    throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ArgumentOutOfRangeException(
-                            "count",
-                            SR.GetString(SR.ValueMustBeNonNegative)
-                        )
-                    );
+                    throw System.Runtime
+                        .Serialization
+                        .DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new ArgumentOutOfRangeException(
+                                "count",
+                                SR.GetString(SR.ValueMustBeNonNegative)
+                            )
+                        );
                 if (count > buffer.Length - offset)
-                    throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ArgumentOutOfRangeException(
-                            "count",
-                            SR.GetString(SR.SizeExceedsRemainingBufferSpace, buffer.Length - offset)
-                        )
-                    );
+                    throw System.Runtime
+                        .Serialization
+                        .DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new ArgumentOutOfRangeException(
+                                "count",
+                                SR.GetString(
+                                    SR.SizeExceedsRemainingBufferSpace,
+                                    buffer.Length - offset
+                                )
+                            )
+                        );
 
                 if (this.stringValue != null)
                 {
@@ -1448,33 +1498,52 @@ namespace System.Xml
                     throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("buffer");
 
                 if (offset < 0)
-                    throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ArgumentOutOfRangeException(
-                            "offset",
-                            SR.GetString(SR.ValueMustBeNonNegative)
-                        )
-                    );
+                    throw System.Runtime
+                        .Serialization
+                        .DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new ArgumentOutOfRangeException(
+                                "offset",
+                                SR.GetString(SR.ValueMustBeNonNegative)
+                            )
+                        );
                 if (offset > buffer.Length)
-                    throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ArgumentOutOfRangeException(
-                            "offset",
-                            SR.GetString(SR.OffsetExceedsBufferSize, buffer.Length)
-                        )
-                    );
+                    throw System.Runtime
+                        .Serialization
+                        .DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new ArgumentOutOfRangeException(
+                                "offset",
+                                SR.GetString(SR.OffsetExceedsBufferSize, buffer.Length)
+                            )
+                        );
                 if (count < 0)
-                    throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ArgumentOutOfRangeException(
-                            "count",
-                            SR.GetString(SR.ValueMustBeNonNegative)
-                        )
-                    );
+                    throw System.Runtime
+                        .Serialization
+                        .DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new ArgumentOutOfRangeException(
+                                "count",
+                                SR.GetString(SR.ValueMustBeNonNegative)
+                            )
+                        );
                 if (count > buffer.Length - offset)
-                    throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ArgumentOutOfRangeException(
-                            "count",
-                            SR.GetString(SR.SizeExceedsRemainingBufferSpace, buffer.Length - offset)
-                        )
-                    );
+                    throw System.Runtime
+                        .Serialization
+                        .DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new ArgumentOutOfRangeException(
+                                "count",
+                                SR.GetString(
+                                    SR.SizeExceedsRemainingBufferSpace,
+                                    buffer.Length - offset
+                                )
+                            )
+                        );
 
                 if (this.valueCount > 0)
                 {
@@ -1513,33 +1582,52 @@ namespace System.Xml
                     throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("buffer");
 
                 if (offset < 0)
-                    throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ArgumentOutOfRangeException(
-                            "offset",
-                            SR.GetString(SR.ValueMustBeNonNegative)
-                        )
-                    );
+                    throw System.Runtime
+                        .Serialization
+                        .DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new ArgumentOutOfRangeException(
+                                "offset",
+                                SR.GetString(SR.ValueMustBeNonNegative)
+                            )
+                        );
                 if (offset > buffer.Length)
-                    throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ArgumentOutOfRangeException(
-                            "offset",
-                            SR.GetString(SR.OffsetExceedsBufferSize, buffer.Length)
-                        )
-                    );
+                    throw System.Runtime
+                        .Serialization
+                        .DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new ArgumentOutOfRangeException(
+                                "offset",
+                                SR.GetString(SR.OffsetExceedsBufferSize, buffer.Length)
+                            )
+                        );
                 if (count < 0)
-                    throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ArgumentOutOfRangeException(
-                            "count",
-                            SR.GetString(SR.ValueMustBeNonNegative)
-                        )
-                    );
+                    throw System.Runtime
+                        .Serialization
+                        .DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new ArgumentOutOfRangeException(
+                                "count",
+                                SR.GetString(SR.ValueMustBeNonNegative)
+                            )
+                        );
                 if (count > buffer.Length - offset)
-                    throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ArgumentOutOfRangeException(
-                            "count",
-                            SR.GetString(SR.SizeExceedsRemainingBufferSpace, buffer.Length - offset)
-                        )
-                    );
+                    throw System.Runtime
+                        .Serialization
+                        .DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new ArgumentOutOfRangeException(
+                                "count",
+                                SR.GetString(
+                                    SR.SizeExceedsRemainingBufferSpace,
+                                    buffer.Length - offset
+                                )
+                            )
+                        );
 
                 if (this.chunkSize < count)
                     count = this.chunkSize;
@@ -1558,9 +1646,8 @@ namespace System.Xml
                         }
                         catch (FormatException e) // Wrap format exceptions from decoding document contents
                         {
-                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                                new XmlException(e.Message, e)
-                            );
+                            throw DiagnosticUtility.ExceptionUtility
+                                .ThrowHelperError(new XmlException(e.Message, e));
                         }
                     }
 
@@ -1595,33 +1682,52 @@ namespace System.Xml
                     throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("chars");
 
                 if (offset < 0)
-                    throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ArgumentOutOfRangeException(
-                            "offset",
-                            SR.GetString(SR.ValueMustBeNonNegative)
-                        )
-                    );
+                    throw System.Runtime
+                        .Serialization
+                        .DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new ArgumentOutOfRangeException(
+                                "offset",
+                                SR.GetString(SR.ValueMustBeNonNegative)
+                            )
+                        );
                 if (offset > chars.Length)
-                    throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ArgumentOutOfRangeException(
-                            "offset",
-                            SR.GetString(SR.OffsetExceedsBufferSize, chars.Length)
-                        )
-                    );
+                    throw System.Runtime
+                        .Serialization
+                        .DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new ArgumentOutOfRangeException(
+                                "offset",
+                                SR.GetString(SR.OffsetExceedsBufferSize, chars.Length)
+                            )
+                        );
                 if (count < 0)
-                    throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ArgumentOutOfRangeException(
-                            "count",
-                            SR.GetString(SR.ValueMustBeNonNegative)
-                        )
-                    );
+                    throw System.Runtime
+                        .Serialization
+                        .DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new ArgumentOutOfRangeException(
+                                "count",
+                                SR.GetString(SR.ValueMustBeNonNegative)
+                            )
+                        );
                 if (count > chars.Length - offset)
-                    throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ArgumentOutOfRangeException(
-                            "count",
-                            SR.GetString(SR.SizeExceedsRemainingBufferSpace, chars.Length - offset)
-                        )
-                    );
+                    throw System.Runtime
+                        .Serialization
+                        .DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new ArgumentOutOfRangeException(
+                                "count",
+                                SR.GetString(
+                                    SR.SizeExceedsRemainingBufferSpace,
+                                    chars.Length - offset
+                                )
+                            )
+                        );
 
                 if (readState != ReadState.Interactive)
                     return 0;
@@ -2050,11 +2156,12 @@ namespace System.Xml
         public Stream GetContentStream()
         {
             if (getContentStreamCalled)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(
-                        SR.GetString(SR.MimeMessageGetContentStreamCalledAlready)
-                    )
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(SR.MimeMessageGetContentStreamCalledAlready)
+                        )
+                    );
 
             mimeHeaderReader.Close();
 
@@ -2172,9 +2279,8 @@ namespace System.Xml
                 }
             }
 
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                new FormatException(SR.GetString(SR.MimeReaderTruncated))
-            );
+            throw DiagnosticUtility.ExceptionUtility
+                .ThrowHelperError(new FormatException(SR.GetString(SR.MimeReaderTruncated)));
         }
 
         public MimeHeaders ReadHeaders(int maxBuffer, ref int remaining)
@@ -2364,11 +2470,8 @@ namespace System.Xml
                 )
                     this.matchBuffer = new byte[this.delimitter.Length - read];
 
-                int matched = this.stream.ReadBlock(
-                    this.matchBuffer,
-                    0,
-                    this.delimitter.Length - read
-                );
+                int matched = this.stream
+                    .ReadBlock(this.matchBuffer, 0, this.delimitter.Length - read);
 
                 if (MatchRemainder(read, matched))
                 {
@@ -2446,11 +2549,12 @@ namespace System.Xml
 #pragma warning suppress 56503 // Microsoft, required by the XmlReader
                 get
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new NotSupportedException(
-                            SR.GetString(SR.SeekNotSupportedOnStream, this.GetType().FullName)
-                        )
-                    );
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperError(
+                            new NotSupportedException(
+                                SR.GetString(SR.SeekNotSupportedOnStream, this.GetType().FullName)
+                            )
+                        );
                 }
             }
 
@@ -2459,19 +2563,21 @@ namespace System.Xml
                 get
                 {
 #pragma warning suppress 56503 // Microsoft, required by the XmlReader
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new NotSupportedException(
-                            SR.GetString(SR.SeekNotSupportedOnStream, this.GetType().FullName)
-                        )
-                    );
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperError(
+                            new NotSupportedException(
+                                SR.GetString(SR.SeekNotSupportedOnStream, this.GetType().FullName)
+                            )
+                        );
                 }
                 set
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new NotSupportedException(
-                            SR.GetString(SR.SeekNotSupportedOnStream, this.GetType().FullName)
-                        )
-                    );
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperError(
+                            new NotSupportedException(
+                                SR.GetString(SR.SeekNotSupportedOnStream, this.GetType().FullName)
+                            )
+                        );
                 }
             }
 
@@ -2483,11 +2589,12 @@ namespace System.Xml
                 object state
             )
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new NotSupportedException(
-                        SR.GetString(SR.WriteNotSupportedOnStream, this.GetType().FullName)
-                    )
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        new NotSupportedException(
+                            SR.GetString(SR.WriteNotSupportedOnStream, this.GetType().FullName)
+                        )
+                    );
             }
 
             public override void Close()
@@ -2497,20 +2604,22 @@ namespace System.Xml
 
             public override void EndWrite(IAsyncResult asyncResult)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new NotSupportedException(
-                        SR.GetString(SR.WriteNotSupportedOnStream, this.GetType().FullName)
-                    )
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        new NotSupportedException(
+                            SR.GetString(SR.WriteNotSupportedOnStream, this.GetType().FullName)
+                        )
+                    );
             }
 
             public override void Flush()
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new NotSupportedException(
-                        SR.GetString(SR.WriteNotSupportedOnStream, this.GetType().FullName)
-                    )
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        new NotSupportedException(
+                            SR.GetString(SR.WriteNotSupportedOnStream, this.GetType().FullName)
+                        )
+                    );
             }
 
             public override int Read(byte[] buffer, int offset, int count)
@@ -2519,62 +2628,84 @@ namespace System.Xml
                     throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("buffer");
 
                 if (offset < 0)
-                    throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ArgumentOutOfRangeException(
-                            "offset",
-                            SR.GetString(SR.ValueMustBeNonNegative)
-                        )
-                    );
+                    throw System.Runtime
+                        .Serialization
+                        .DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new ArgumentOutOfRangeException(
+                                "offset",
+                                SR.GetString(SR.ValueMustBeNonNegative)
+                            )
+                        );
                 if (offset > buffer.Length)
-                    throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ArgumentOutOfRangeException(
-                            "offset",
-                            SR.GetString(SR.OffsetExceedsBufferSize, buffer.Length)
-                        )
-                    );
+                    throw System.Runtime
+                        .Serialization
+                        .DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new ArgumentOutOfRangeException(
+                                "offset",
+                                SR.GetString(SR.OffsetExceedsBufferSize, buffer.Length)
+                            )
+                        );
                 if (count < 0)
-                    throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ArgumentOutOfRangeException(
-                            "count",
-                            SR.GetString(SR.ValueMustBeNonNegative)
-                        )
-                    );
+                    throw System.Runtime
+                        .Serialization
+                        .DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new ArgumentOutOfRangeException(
+                                "count",
+                                SR.GetString(SR.ValueMustBeNonNegative)
+                            )
+                        );
                 if (count > buffer.Length - offset)
-                    throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ArgumentOutOfRangeException(
-                            "count",
-                            SR.GetString(SR.SizeExceedsRemainingBufferSpace, buffer.Length - offset)
-                        )
-                    );
+                    throw System.Runtime
+                        .Serialization
+                        .DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new ArgumentOutOfRangeException(
+                                "count",
+                                SR.GetString(
+                                    SR.SizeExceedsRemainingBufferSpace,
+                                    buffer.Length - offset
+                                )
+                            )
+                        );
 
                 return reader.Read(this, buffer, offset, count);
             }
 
             public override long Seek(long offset, SeekOrigin origin)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new NotSupportedException(
-                        SR.GetString(SR.SeekNotSupportedOnStream, this.GetType().FullName)
-                    )
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        new NotSupportedException(
+                            SR.GetString(SR.SeekNotSupportedOnStream, this.GetType().FullName)
+                        )
+                    );
             }
 
             public override void SetLength(long value)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new NotSupportedException(
-                        SR.GetString(SR.WriteNotSupportedOnStream, this.GetType().FullName)
-                    )
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        new NotSupportedException(
+                            SR.GetString(SR.WriteNotSupportedOnStream, this.GetType().FullName)
+                        )
+                    );
             }
 
             public override void Write(byte[] buffer, int offset, int count)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new NotSupportedException(
-                        SR.GetString(SR.WriteNotSupportedOnStream, this.GetType().FullName)
-                    )
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        new NotSupportedException(
+                            SR.GetString(SR.WriteNotSupportedOnStream, this.GetType().FullName)
+                        )
+                    );
             }
         }
     }
@@ -2676,9 +2807,12 @@ namespace System.Xml
 
             MimeHeader existingHeader;
             if (headers.TryGetValue(header.Name, out existingHeader))
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new FormatException(SR.GetString(SR.MimeReaderHeaderAlreadyExists, header.Name))
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        new FormatException(
+                            SR.GetString(SR.MimeReaderHeaderAlreadyExists, header.Name)
+                        )
+                    );
             else
                 headers.Add(header.Name, header);
         }
@@ -2775,17 +2909,19 @@ namespace System.Xml
                 this.parameters = new Dictionary<string, string>();
                 this.mediaType = MailBnfHelper.ReadToken(Value, ref offset, null);
                 if (offset >= Value.Length || Value[offset++] != '/')
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new FormatException(SR.GetString(SR.MimeContentTypeHeaderInvalid))
-                    );
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperError(
+                            new FormatException(SR.GetString(SR.MimeContentTypeHeaderInvalid))
+                        );
                 this.subType = MailBnfHelper.ReadToken(Value, ref offset, null);
 
                 while (MailBnfHelper.SkipCFWS(Value, ref offset))
                 {
                     if (offset >= Value.Length || Value[offset++] != ';')
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new FormatException(SR.GetString(SR.MimeContentTypeHeaderInvalid))
-                        );
+                        throw DiagnosticUtility.ExceptionUtility
+                            .ThrowHelperError(
+                                new FormatException(SR.GetString(SR.MimeContentTypeHeaderInvalid))
+                            );
 
                     if (!MailBnfHelper.SkipCFWS(Value, ref offset))
                         break;
@@ -2796,9 +2932,10 @@ namespace System.Xml
                         null
                     );
                     if (paramAttribute == null || offset >= Value.Length || Value[offset++] != '=')
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new FormatException(SR.GetString(SR.MimeContentTypeHeaderInvalid))
-                        );
+                        throw DiagnosticUtility.ExceptionUtility
+                            .ThrowHelperError(
+                                new FormatException(SR.GetString(SR.MimeContentTypeHeaderInvalid))
+                            );
                     string paramValue = MailBnfHelper.ReadParameterValue(Value, ref offset, null);
 
                     this.parameters.Add(paramAttribute.ToLowerInvariant(), paramValue);
@@ -2824,11 +2961,12 @@ namespace System.Xml
                             }
                             else
                             {
-                                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                                    new FormatException(
-                                        SR.GetString(SR.MimeContentTypeHeaderInvalid)
-                                    )
-                                );
+                                throw DiagnosticUtility.ExceptionUtility
+                                    .ThrowHelperError(
+                                        new FormatException(
+                                            SR.GetString(SR.MimeContentTypeHeaderInvalid)
+                                        )
+                                    );
                             }
                             string paramAttribute = MailBnfHelper.ReadParameterAttribute(
                                 startInfo,
@@ -2840,11 +2978,12 @@ namespace System.Xml
                                 || startInfoOffset >= startInfo.Length
                                 || startInfo[startInfoOffset++] != '='
                             )
-                                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                                    new FormatException(
-                                        SR.GetString(SR.MimeContentTypeHeaderInvalid)
-                                    )
-                                );
+                                throw DiagnosticUtility.ExceptionUtility
+                                    .ThrowHelperError(
+                                        new FormatException(
+                                            SR.GetString(SR.MimeContentTypeHeaderInvalid)
+                                        )
+                                    );
                             string paramValue = MailBnfHelper.ReadParameterValue(
                                 startInfo,
                                 ref startInfoOffset,
@@ -2983,9 +3122,10 @@ namespace System.Xml
                 int offset = 0;
 
                 if (!MailBnfHelper.SkipCFWS(Value, ref offset))
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new FormatException(SR.GetString(SR.MimeVersionHeaderInvalid))
-                    );
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperError(
+                            new FormatException(SR.GetString(SR.MimeVersionHeaderInvalid))
+                        );
 
                 StringBuilder builder = new StringBuilder();
                 MailBnfHelper.ReadDigits(Value, ref offset, builder);
@@ -2997,9 +3137,10 @@ namespace System.Xml
                         || Value[offset++] != '.'
                     ) || !MailBnfHelper.SkipCFWS(Value, ref offset)
                 )
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new FormatException(SR.GetString(SR.MimeVersionHeaderInvalid))
-                    );
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperError(
+                            new FormatException(SR.GetString(SR.MimeVersionHeaderInvalid))
+                        );
 
                 builder.Append('.');
 
@@ -3116,26 +3257,30 @@ namespace System.Xml
                                         {
                                             ptr++;
                                             if (ptr >= end || *ptr != '\n')
-                                                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                                                    new FormatException(
-                                                        SR.GetString(SR.MimeReaderMalformedHeader)
-                                                    )
-                                                );
+                                                throw DiagnosticUtility.ExceptionUtility
+                                                    .ThrowHelperError(
+                                                        new FormatException(
+                                                            SR.GetString(
+                                                                SR.MimeReaderMalformedHeader
+                                                            )
+                                                        )
+                                                    );
                                             goto case ReadState.EOF;
                                         }
 
-                                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                                            new FormatException(
-                                                SR.GetString(
-                                                    SR.MimeHeaderInvalidCharacter,
-                                                    (char)(*ptr),
-                                                    ((int)(*ptr)).ToString(
-                                                        "X",
-                                                        CultureInfo.InvariantCulture
+                                        throw DiagnosticUtility.ExceptionUtility
+                                            .ThrowHelperError(
+                                                new FormatException(
+                                                    SR.GetString(
+                                                        SR.MimeHeaderInvalidCharacter,
+                                                        (char)(*ptr),
+                                                        ((int)(*ptr)).ToString(
+                                                            "X",
+                                                            CultureInfo.InvariantCulture
+                                                        )
                                                     )
                                                 )
-                                            )
-                                        );
+                                            );
                                     }
                                 }
                             }
@@ -3168,11 +3313,12 @@ namespace System.Xml
                                 }
                                 else if (*ptr == (byte)'\n')
                                 {
-                                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                                        new FormatException(
-                                            SR.GetString(SR.MimeReaderMalformedHeader)
-                                        )
-                                    );
+                                    throw DiagnosticUtility.ExceptionUtility
+                                        .ThrowHelperError(
+                                            new FormatException(
+                                                SR.GetString(SR.MimeReaderMalformedHeader)
+                                            )
+                                        );
                                 }
                             }
                             AppendValue(
@@ -3186,11 +3332,12 @@ namespace System.Xml
                             if (ptr < end)
                             {
                                 if (*ptr != (byte)'\n')
-                                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                                        new FormatException(
-                                            SR.GetString(SR.MimeReaderMalformedHeader)
-                                        )
-                                    );
+                                    throw DiagnosticUtility.ExceptionUtility
+                                        .ThrowHelperError(
+                                            new FormatException(
+                                                SR.GetString(SR.MimeReaderMalformedHeader)
+                                            )
+                                        );
                                 ptr++;
                                 goto case ReadState.ReadWS;
                             }
@@ -3225,9 +3372,10 @@ namespace System.Xml
             if (maxOffset == 0)
             {
                 if (readState != ReadState.ReadWS && readState != ReadState.ReadValue)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new FormatException(SR.GetString(SR.MimeReaderMalformedHeader))
-                    );
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperError(
+                            new FormatException(SR.GetString(SR.MimeReaderMalformedHeader))
+                        );
 
                 readState = ReadState.EOF;
                 return true;
@@ -3242,9 +3390,12 @@ namespace System.Xml
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("stream");
 
             if (readState != ReadState.EOF)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(SR.GetString(SR.MimeReaderResetCalledBeforeEOF))
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(SR.MimeReaderResetCalledBeforeEOF)
+                        )
+                    );
 
             this.stream = stream;
             readState = ReadState.ReadName;
@@ -3321,11 +3472,12 @@ namespace System.Xml
             get
             {
 #pragma warning suppress 56503 // Microsoft, required by the Stream contract
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new NotSupportedException(
-                        SR.GetString(SR.SeekNotSupportedOnStream, stream.GetType().FullName)
-                    )
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        new NotSupportedException(
+                            SR.GetString(SR.SeekNotSupportedOnStream, stream.GetType().FullName)
+                        )
+                    );
             }
         }
 
@@ -3334,19 +3486,21 @@ namespace System.Xml
             get
             {
 #pragma warning suppress 56503 // Microsoft, required by the Stream contract
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new NotSupportedException(
-                        SR.GetString(SR.SeekNotSupportedOnStream, stream.GetType().FullName)
-                    )
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        new NotSupportedException(
+                            SR.GetString(SR.SeekNotSupportedOnStream, stream.GetType().FullName)
+                        )
+                    );
             }
             set
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new NotSupportedException(
-                        SR.GetString(SR.SeekNotSupportedOnStream, stream.GetType().FullName)
-                    )
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        new NotSupportedException(
+                            SR.GetString(SR.SeekNotSupportedOnStream, stream.GetType().FullName)
+                        )
+                    );
             }
         }
 
@@ -3359,11 +3513,12 @@ namespace System.Xml
         )
         {
             if (!CanRead)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new NotSupportedException(
-                        SR.GetString(SR.ReadNotSupportedOnStream, stream.GetType().FullName)
-                    )
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        new NotSupportedException(
+                            SR.GetString(SR.ReadNotSupportedOnStream, stream.GetType().FullName)
+                        )
+                    );
 
             return stream.BeginRead(buffer, offset, count, callback, state);
         }
@@ -3376,11 +3531,12 @@ namespace System.Xml
             object state
         )
         {
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                new NotSupportedException(
-                    SR.GetString(SR.WriteNotSupportedOnStream, stream.GetType().FullName)
-                )
-            );
+            throw DiagnosticUtility.ExceptionUtility
+                .ThrowHelperError(
+                    new NotSupportedException(
+                        SR.GetString(SR.WriteNotSupportedOnStream, stream.GetType().FullName)
+                    )
+                );
         }
 
         public override void Close()
@@ -3391,22 +3547,24 @@ namespace System.Xml
         public override int EndRead(IAsyncResult asyncResult)
         {
             if (!CanRead)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new NotSupportedException(
-                        SR.GetString(SR.ReadNotSupportedOnStream, stream.GetType().FullName)
-                    )
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        new NotSupportedException(
+                            SR.GetString(SR.ReadNotSupportedOnStream, stream.GetType().FullName)
+                        )
+                    );
 
             return stream.EndRead(asyncResult);
         }
 
         public override void EndWrite(IAsyncResult asyncResult)
         {
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                new NotSupportedException(
-                    SR.GetString(SR.WriteNotSupportedOnStream, stream.GetType().FullName)
-                )
-            );
+            throw DiagnosticUtility.ExceptionUtility
+                .ThrowHelperError(
+                    new NotSupportedException(
+                        SR.GetString(SR.WriteNotSupportedOnStream, stream.GetType().FullName)
+                    )
+                );
         }
 
         public override void Flush()
@@ -3417,43 +3575,60 @@ namespace System.Xml
         public override int Read(byte[] buffer, int offset, int count)
         {
             if (!CanRead)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new NotSupportedException(
-                        SR.GetString(SR.ReadNotSupportedOnStream, stream.GetType().FullName)
-                    )
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        new NotSupportedException(
+                            SR.GetString(SR.ReadNotSupportedOnStream, stream.GetType().FullName)
+                        )
+                    );
 
             if (buffer == null)
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("buffer");
 
             if (offset < 0)
-                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentOutOfRangeException(
-                        "offset",
-                        SR.GetString(SR.ValueMustBeNonNegative)
-                    )
-                );
+                throw System.Runtime
+                    .Serialization
+                    .DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new ArgumentOutOfRangeException(
+                            "offset",
+                            SR.GetString(SR.ValueMustBeNonNegative)
+                        )
+                    );
             if (offset > buffer.Length)
-                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentOutOfRangeException(
-                        "offset",
-                        SR.GetString(SR.OffsetExceedsBufferSize, buffer.Length)
-                    )
-                );
+                throw System.Runtime
+                    .Serialization
+                    .DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new ArgumentOutOfRangeException(
+                            "offset",
+                            SR.GetString(SR.OffsetExceedsBufferSize, buffer.Length)
+                        )
+                    );
             if (count < 0)
-                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentOutOfRangeException(
-                        "count",
-                        SR.GetString(SR.ValueMustBeNonNegative)
-                    )
-                );
+                throw System.Runtime
+                    .Serialization
+                    .DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new ArgumentOutOfRangeException(
+                            "count",
+                            SR.GetString(SR.ValueMustBeNonNegative)
+                        )
+                    );
             if (count > buffer.Length - offset)
-                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentOutOfRangeException(
-                        "count",
-                        SR.GetString(SR.SizeExceedsRemainingBufferSpace, buffer.Length - offset)
-                    )
-                );
+                throw System.Runtime
+                    .Serialization
+                    .DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new ArgumentOutOfRangeException(
+                            "count",
+                            SR.GetString(SR.SizeExceedsRemainingBufferSpace, buffer.Length - offset)
+                        )
+                    );
 
             int read = 0;
             if (this.storedOffset < this.storedLength)
@@ -3538,29 +3713,32 @@ namespace System.Xml
 
         public override long Seek(long offset, SeekOrigin origin)
         {
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                new NotSupportedException(
-                    SR.GetString(SR.SeekNotSupportedOnStream, stream.GetType().FullName)
-                )
-            );
+            throw DiagnosticUtility.ExceptionUtility
+                .ThrowHelperError(
+                    new NotSupportedException(
+                        SR.GetString(SR.SeekNotSupportedOnStream, stream.GetType().FullName)
+                    )
+                );
         }
 
         public override void SetLength(long value)
         {
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                new NotSupportedException(
-                    SR.GetString(SR.SeekNotSupportedOnStream, stream.GetType().FullName)
-                )
-            );
+            throw DiagnosticUtility.ExceptionUtility
+                .ThrowHelperError(
+                    new NotSupportedException(
+                        SR.GetString(SR.SeekNotSupportedOnStream, stream.GetType().FullName)
+                    )
+                );
         }
 
         public override void Write(byte[] buffer, int offset, int count)
         {
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                new NotSupportedException(
-                    SR.GetString(SR.WriteNotSupportedOnStream, stream.GetType().FullName)
-                )
-            );
+            throw DiagnosticUtility.ExceptionUtility
+                .ThrowHelperError(
+                    new NotSupportedException(
+                        SR.GetString(SR.WriteNotSupportedOnStream, stream.GetType().FullName)
+                    )
+                );
         }
     }
 
@@ -3653,15 +3831,16 @@ namespace System.Xml
             for (; offset < data.Length; offset++)
             {
                 if (data[offset] > 127)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new FormatException(
-                            SR.GetString(
-                                SR.MimeHeaderInvalidCharacter,
-                                data[offset],
-                                ((int)data[offset]).ToString("X", CultureInfo.InvariantCulture)
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperError(
+                            new FormatException(
+                                SR.GetString(
+                                    SR.MimeHeaderInvalidCharacter,
+                                    data[offset],
+                                    ((int)data[offset]).ToString("X", CultureInfo.InvariantCulture)
+                                )
                             )
-                        )
-                    );
+                        );
                 else if (data[offset] == '\\' && comments > 0)
                     offset += 2;
                 else if (data[offset] == '(')
@@ -3695,20 +3874,20 @@ namespace System.Xml
                 }
                 else if (!(data[offset] < s_fqtext.Length && s_fqtext[data[offset]]))
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new FormatException(
-                            SR.GetString(
-                                SR.MimeHeaderInvalidCharacter,
-                                data[offset],
-                                ((int)data[offset]).ToString("X", CultureInfo.InvariantCulture)
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperError(
+                            new FormatException(
+                                SR.GetString(
+                                    SR.MimeHeaderInvalidCharacter,
+                                    data[offset],
+                                    ((int)data[offset]).ToString("X", CultureInfo.InvariantCulture)
+                                )
                             )
-                        )
-                    );
+                        );
                 }
             }
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                new FormatException(SR.GetString(SR.MimeReaderMalformedHeader))
-            );
+            throw DiagnosticUtility.ExceptionUtility
+                .ThrowHelperError(new FormatException(SR.GetString(SR.MimeReaderMalformedHeader)));
         }
 
         public static string ReadParameterAttribute(
@@ -3741,15 +3920,16 @@ namespace System.Xml
             {
                 if (data[offset] > s_ttext.Length)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new FormatException(
-                            SR.GetString(
-                                SR.MimeHeaderInvalidCharacter,
-                                data[offset],
-                                ((int)data[offset]).ToString("X", CultureInfo.InvariantCulture)
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperError(
+                            new FormatException(
+                                SR.GetString(
+                                    SR.MimeHeaderInvalidCharacter,
+                                    data[offset],
+                                    ((int)data[offset]).ToString("X", CultureInfo.InvariantCulture)
+                                )
                             )
-                        )
-                    );
+                        );
                 }
                 else if (!s_ttext[data[offset]])
                 {

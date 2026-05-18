@@ -35,9 +35,8 @@ public partial class RefReadonlyParameterTests : CSharpTestBase
 
     private static void VerifyRequiresLocationAttributeSynthesized(ModuleSymbol module)
     {
-        var attributeType = module.GlobalNamespace.GetMember<NamedTypeSymbol>(
-            RequiresLocationAttributeQualifiedName
-        );
+        var attributeType = module.GlobalNamespace
+            .GetMember<NamedTypeSymbol>(RequiresLocationAttributeQualifiedName);
         if (module is SourceModuleSymbol)
         {
             Assert.Null(attributeType);
@@ -165,9 +164,8 @@ public partial class RefReadonlyParameterTests : CSharpTestBase
 
         static void verify(ModuleSymbol m)
         {
-            var attribute = m.GlobalNamespace.GetMember<NamedTypeSymbol>(
-                RequiresLocationAttributeQualifiedName
-            );
+            var attribute = m.GlobalNamespace
+                .GetMember<NamedTypeSymbol>(RequiresLocationAttributeQualifiedName);
             Assert.NotNull(attribute);
 
             var p = m.GlobalNamespace.GetMember<MethodSymbol>("C.M").Parameters.Single();
@@ -1030,9 +1028,10 @@ public partial class RefReadonlyParameterTests : CSharpTestBase
 
             if (m is not SourceModuleSymbol)
             {
-                var p = m
-                    .GlobalNamespace.GetMember<MethodSymbol>("Program.<>c.<<Main>$>b__0_0")
-                    .Parameters.Single();
+                var p = m.GlobalNamespace
+                    .GetMember<MethodSymbol>("Program.<>c.<<Main>$>b__0_0")
+                    .Parameters
+                    .Single();
                 VerifyRefReadonlyParameter(p);
             }
         }
@@ -1060,9 +1059,10 @@ public partial class RefReadonlyParameterTests : CSharpTestBase
 
             if (m is not SourceModuleSymbol)
             {
-                var p = m
-                    .GlobalNamespace.GetMember<MethodSymbol>("Program.<<Main>$>g__local|0_0")
-                    .Parameters.Single();
+                var p = m.GlobalNamespace
+                    .GetMember<MethodSymbol>("Program.<<Main>$>g__local|0_0")
+                    .Parameters
+                    .Single();
                 VerifyRefReadonlyParameter(p);
             }
         }
@@ -1091,9 +1091,10 @@ public partial class RefReadonlyParameterTests : CSharpTestBase
 
             if (m is not SourceModuleSymbol)
             {
-                var p = m
-                    .GlobalNamespace.GetMember<MethodSymbol>("<>A{00000004}.Invoke")
-                    .Parameters.Single();
+                var p = m.GlobalNamespace
+                    .GetMember<MethodSymbol>("<>A{00000004}.Invoke")
+                    .Parameters
+                    .Single();
                 VerifyRefReadonlyParameter(
                     p,
                     // Invoke method is virtual but no modreq is emitted. https://github.com/dotnet/roslyn/issues/69079
@@ -8554,9 +8555,8 @@ public partial class RefReadonlyParameterTests : CSharpTestBase
             """;
         var comp = CreateCompilation(
                 source,
-                parseOptions: TestOptions.RegularPreview.WithDocumentationMode(
-                    DocumentationMode.Diagnose
-                )
+                parseOptions: TestOptions.RegularPreview
+                    .WithDocumentationMode(DocumentationMode.Diagnose)
             )
             .VerifyDiagnostics(
                 // (7,10): error CS0663: 'C' cannot define an overloaded method that differs only on parameter modifiers 'ref' and 'ref readonly'
@@ -8601,9 +8601,8 @@ public partial class RefReadonlyParameterTests : CSharpTestBase
             """;
         var comp = CreateCompilation(
                 source,
-                parseOptions: TestOptions.RegularPreview.WithDocumentationMode(
-                    DocumentationMode.Diagnose
-                )
+                parseOptions: TestOptions.RegularPreview
+                    .WithDocumentationMode(DocumentationMode.Diagnose)
             )
             .VerifyDiagnostics(
                 // (7,10): error CS0663: 'C' cannot define an overloaded method that differs only on parameter modifiers 'ref' and 'ref readonly'
@@ -8666,9 +8665,8 @@ public partial class RefReadonlyParameterTests : CSharpTestBase
         static void verify(ModuleSymbol module)
         {
             Assert.Null(
-                module.GlobalNamespace.GetMember<NamedTypeSymbol>(
-                    RequiresLocationAttributeQualifiedName
-                )
+                module.GlobalNamespace
+                    .GetMember<NamedTypeSymbol>(RequiresLocationAttributeQualifiedName)
             );
 
             var method = module.GlobalNamespace.GetMember<MethodSymbol>("Test.Method");

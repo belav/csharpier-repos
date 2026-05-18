@@ -54,16 +54,18 @@ public unsafe class C
         {
             var c = CreateCompilation("", new[] { CSharpRef });
             HashSet<DiagnosticInfo> useSiteDiagnostics = null;
-            var dynamicToObject = c.Conversions.ClassifyConversionFromType(
-                DynamicTypeSymbol.Instance,
-                c.GetSpecialType(SpecialType.System_Object),
-                ref useSiteDiagnostics
-            );
-            var objectToDynamic = c.Conversions.ClassifyConversionFromType(
-                c.GetSpecialType(SpecialType.System_Object),
-                DynamicTypeSymbol.Instance,
-                ref useSiteDiagnostics
-            );
+            var dynamicToObject = c.Conversions
+                .ClassifyConversionFromType(
+                    DynamicTypeSymbol.Instance,
+                    c.GetSpecialType(SpecialType.System_Object),
+                    ref useSiteDiagnostics
+                );
+            var objectToDynamic = c.Conversions
+                .ClassifyConversionFromType(
+                    c.GetSpecialType(SpecialType.System_Object),
+                    DynamicTypeSymbol.Instance,
+                    ref useSiteDiagnostics
+                );
 
             Assert.Equal(ConversionKind.Identity, dynamicToObject.Kind);
             Assert.Equal(ConversionKind.Identity, objectToDynamic.Kind);
@@ -3386,9 +3388,8 @@ class C : List<int>
                     {
                         Parse(
                             source,
-                            options: TestOptions.Regular.WithLanguageVersion(
-                                LanguageVersion.CSharp5
-                            )
+                            options: TestOptions.Regular
+                                .WithLanguageVersion(LanguageVersion.CSharp5)
                         ),
                     }
                 )
@@ -3544,9 +3545,8 @@ class C : List<int>
                     {
                         Parse(
                             source,
-                            options: TestOptions.Regular.WithLanguageVersion(
-                                LanguageVersion.CSharp5
-                            )
+                            options: TestOptions.Regular
+                                .WithLanguageVersion(LanguageVersion.CSharp5)
                         ),
                     }
                 )

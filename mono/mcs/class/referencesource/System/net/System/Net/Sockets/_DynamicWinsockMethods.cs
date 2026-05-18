@@ -117,10 +117,9 @@ namespace System.Net.Sockets
                 return (T)(object)transmitPackets;
             }
 
-            System.Diagnostics.Debug.Assert(
-                false,
-                "Invalid type passed to DynamicWinsockMethods.GetDelegate"
-            );
+            System.Diagnostics
+                .Debug
+                .Assert(false, "Invalid type passed to DynamicWinsockMethods.GetDelegate");
             return null;
         }
 
@@ -133,17 +132,18 @@ namespace System.Net.Sockets
 
             unsafe
             {
-                errorCode = UnsafeNclNativeMethods.OSSOCK.WSAIoctl(
-                    socketHandle,
-                    IoctlSocketConstants.SIOGETEXTENSIONFUNCTIONPOINTER,
-                    ref guid,
-                    sizeof(Guid),
-                    out ptr,
-                    sizeof(IntPtr),
-                    out length,
-                    IntPtr.Zero,
-                    IntPtr.Zero
-                );
+                errorCode = UnsafeNclNativeMethods.OSSOCK
+                    .WSAIoctl(
+                        socketHandle,
+                        IoctlSocketConstants.SIOGETEXTENSIONFUNCTIONPOINTER,
+                        ref guid,
+                        sizeof(Guid),
+                        out ptr,
+                        sizeof(IntPtr),
+                        out length,
+                        IntPtr.Zero,
+                        IntPtr.Zero
+                    );
             }
 
             if (errorCode != SocketError.Success)

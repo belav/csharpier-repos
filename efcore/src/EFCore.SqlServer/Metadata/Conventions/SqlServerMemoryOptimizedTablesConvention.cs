@@ -68,8 +68,8 @@ public class SqlServerMemoryOptimizedTablesConvention
             }
 
             foreach (
-                var index in entityTypeBuilder
-                    .Metadata.GetDerivedTypesInclusive()
+                var index in entityTypeBuilder.Metadata
+                    .GetDerivedTypesInclusive()
                     .SelectMany(et => et.GetDeclaredIndexes())
             )
             {
@@ -105,8 +105,9 @@ public class SqlServerMemoryOptimizedTablesConvention
     )
     {
         if (
-            indexBuilder
-                .Metadata.DeclaringEntityType.GetAllBaseTypesInclusive()
+            indexBuilder.Metadata
+                .DeclaringEntityType
+                .GetAllBaseTypesInclusive()
                 .Any(et => et.IsMemoryOptimized())
         )
         {

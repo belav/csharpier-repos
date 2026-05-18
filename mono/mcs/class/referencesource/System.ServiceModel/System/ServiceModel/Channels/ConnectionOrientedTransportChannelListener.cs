@@ -41,30 +41,33 @@ namespace System.ServiceModel.Channels
             {
                 if (bindingElement.MaxReceivedMessageSize > int.MaxValue)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ArgumentOutOfRangeException(
-                            "bindingElement.MaxReceivedMessageSize",
-                            SR.GetString(SR.MaxReceivedMessageSizeMustBeInIntegerRange)
-                        )
-                    );
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperError(
+                            new ArgumentOutOfRangeException(
+                                "bindingElement.MaxReceivedMessageSize",
+                                SR.GetString(SR.MaxReceivedMessageSizeMustBeInIntegerRange)
+                            )
+                        );
                 }
 
                 if (bindingElement.MaxBufferSize != bindingElement.MaxReceivedMessageSize)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                        "bindingElement",
-                        SR.GetString(SR.MaxBufferSizeMustMatchMaxReceivedMessageSize)
-                    );
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperArgument(
+                            "bindingElement",
+                            SR.GetString(SR.MaxBufferSizeMustMatchMaxReceivedMessageSize)
+                        );
                 }
             }
             else
             {
                 if (bindingElement.MaxBufferSize > bindingElement.MaxReceivedMessageSize)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                        "bindingElement",
-                        SR.GetString(SR.MaxBufferSizeMustNotExceedMaxReceivedMessageSize)
-                    );
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperArgument(
+                            "bindingElement",
+                            SR.GetString(SR.MaxBufferSizeMustNotExceedMaxReceivedMessageSize)
+                        );
                 }
             }
 
@@ -83,11 +86,12 @@ namespace System.ServiceModel.Channels
 
             if (upgradeBindingElements.Count > 1)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(
-                        SR.GetString(SR.MultipleStreamUpgradeProvidersInParameters)
-                    )
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(SR.MultipleStreamUpgradeProvidersInParameters)
+                        )
+                    );
             }
             else if (
                 (upgradeBindingElements.Count == 1)
@@ -370,16 +374,17 @@ namespace System.ServiceModel.Channels
             int encodedSize = Encoding.UTF8.GetByteCount(uri.AbsoluteUri);
             if (encodedSize > maxViaSize)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new QuotaExceededException(
-                        SR.GetString(
-                            SR.UriLengthExceedsMaxSupportedSize,
-                            uri,
-                            encodedSize,
-                            maxViaSize
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        new QuotaExceededException(
+                            SR.GetString(
+                                SR.UriLengthExceedsMaxSupportedSize,
+                                uri,
+                                encodedSize,
+                                maxViaSize
+                            )
                         )
-                    )
-                );
+                    );
             }
         }
 

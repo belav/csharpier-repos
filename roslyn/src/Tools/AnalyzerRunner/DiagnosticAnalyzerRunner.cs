@@ -46,16 +46,12 @@ namespace AnalyzerRunner
                 if (project.Language is not LanguageNames.CSharp and not LanguageNames.VisualBasic)
                     continue;
 
-                var modifiedSpecificDiagnosticOptions = project
-                    .CompilationOptions.SpecificDiagnosticOptions.SetItem(
-                        "AD0001",
-                        ReportDiagnostic.Error
-                    )
+                var modifiedSpecificDiagnosticOptions = project.CompilationOptions
+                    .SpecificDiagnosticOptions
+                    .SetItem("AD0001", ReportDiagnostic.Error)
                     .SetItem("AD0002", ReportDiagnostic.Error);
-                var modifiedCompilationOptions =
-                    project.CompilationOptions.WithSpecificDiagnosticOptions(
-                        modifiedSpecificDiagnosticOptions
-                    );
+                var modifiedCompilationOptions = project.CompilationOptions
+                    .WithSpecificDiagnosticOptions(modifiedSpecificDiagnosticOptions);
                 solution = solution.WithProjectCompilationOptions(
                     projectId,
                     modifiedCompilationOptions
@@ -385,9 +381,10 @@ namespace AnalyzerRunner
                 else if (options.AnalyzerNames.Count == 0)
                 {
                     if (
-                        analyzer.SupportedDiagnostics.Any(static diagnosticDescriptor =>
-                            diagnosticDescriptor.IsEnabledByDefault
-                        )
+                        analyzer.SupportedDiagnostics
+                            .Any(static diagnosticDescriptor =>
+                                diagnosticDescriptor.IsEnabledByDefault
+                            )
                     )
                     {
                         yield return analyzer;
@@ -435,8 +432,8 @@ namespace AnalyzerRunner
             );
             var csharpAnalyzers = analyzerReference.GetAnalyzers(LanguageNames.CSharp);
             var basicAnalyzers = analyzerReference.GetAnalyzers(LanguageNames.VisualBasic);
-            return ImmutableDictionary<string, ImmutableArray<DiagnosticAnalyzer>>
-                .Empty.Add(LanguageNames.CSharp, csharpAnalyzers)
+            return ImmutableDictionary<string, ImmutableArray<DiagnosticAnalyzer>>.Empty
+                .Add(LanguageNames.CSharp, csharpAnalyzers)
                 .Add(LanguageNames.VisualBasic, basicAnalyzers);
         }
 
@@ -507,8 +504,8 @@ namespace AnalyzerRunner
                     {
                         foreach (var pair in previousResult.AnalyzerTelemetryInfo)
                         {
-                            result.AnalyzerTelemetryInfo[pair.Key].ExecutionTime +=
-                                pair.Value.ExecutionTime;
+                            result.AnalyzerTelemetryInfo[pair.Key].ExecutionTime += pair.Value
+                                .ExecutionTime;
                         }
                     }
 

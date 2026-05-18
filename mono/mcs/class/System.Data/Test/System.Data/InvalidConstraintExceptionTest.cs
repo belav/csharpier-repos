@@ -51,9 +51,8 @@ namespace MonoTests.System.Data
             ds.Tables.Add(dtChild);
             ds.Tables.Add(dtParent);
 
-            ds.Relations.Add(
-                new DataRelation("myRelation", dtParent.Columns[0], dtChild.Columns[0], true)
-            );
+            ds.Relations
+                .Add(new DataRelation("myRelation", dtParent.Columns[0], dtChild.Columns[0], true));
 
             //update to value which is not exists in Parent table
             // InvalidConstraintException - update child row
@@ -76,9 +75,8 @@ namespace MonoTests.System.Data
             // InvalidConstraintException - Add Relation Child
             try
             {
-                ds.Relations.Add(
-                    new DataRelation("test", dtParent.Columns[2], dtChild.Columns[0], true)
-                );
+                ds.Relations
+                    .Add(new DataRelation("test", dtParent.Columns[2], dtChild.Columns[0], true));
                 Assert.Fail("ICE3: Relations.Add failed to raise InvalidConstraintException.");
             }
             catch (InvalidConstraintException) { }
@@ -129,14 +127,15 @@ namespace MonoTests.System.Data
             // InvalidConstraintException - Add relation with two DataSets
             try
             {
-                ds.Relations.Add(
-                    new DataRelation(
-                        "myRelation",
-                        ds1.Tables[0].Columns[0],
-                        dtChild.Columns[0],
-                        true
-                    )
-                );
+                ds.Relations
+                    .Add(
+                        new DataRelation(
+                            "myRelation",
+                            ds1.Tables[0].Columns[0],
+                            dtChild.Columns[0],
+                            true
+                        )
+                    );
                 Assert.Fail("ICE9: Relations.Add failed to raise InvalidConstraintException.");
             }
             catch (InvalidConstraintException) { }

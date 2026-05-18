@@ -231,9 +231,8 @@ public class MemberClassifier : IMemberClassifier
             return false;
         }
 
-        var configurationType = ((Model)model).Configuration?.GetConfigurationType(
-            memberInfo.GetMemberType()
-        );
+        var configurationType = ((Model)model).Configuration
+            ?.GetConfigurationType(memberInfo.GetMemberType());
         return configurationType == TypeConfigurationType.Property
             || (
                 configurationType == null

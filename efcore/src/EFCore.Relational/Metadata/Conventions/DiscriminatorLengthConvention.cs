@@ -49,8 +49,8 @@ public class DiscriminatorLengthConvention : IModelFinalizingConvention
     )
     {
         foreach (
-            var entityType in modelBuilder
-                .Metadata.GetEntityTypes()
+            var entityType in modelBuilder.Metadata
+                .GetEntityTypes()
                 .Where(entityType => entityType.BaseType == null)
         )
         {

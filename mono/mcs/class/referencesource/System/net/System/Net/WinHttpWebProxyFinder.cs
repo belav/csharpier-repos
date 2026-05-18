@@ -18,13 +18,14 @@ namespace System.Net
         {
             // Don't specify a user agent and dont' specify proxy settings. This is the same behavior WinHttp
             // uses when downloading the PAC file.
-            session = UnsafeNclNativeMethods.WinHttp.WinHttpOpen(
-                null,
-                UnsafeNclNativeMethods.WinHttp.AccessType.NoProxy,
-                null,
-                null,
-                0
-            );
+            session = UnsafeNclNativeMethods.WinHttp
+                .WinHttpOpen(
+                    null,
+                    UnsafeNclNativeMethods.WinHttp.AccessType.NoProxy,
+                    null,
+                    null,
+                    0
+                );
 
             // Don't throw on error, just log the error information. This is consistent with how auto-proxy
             // works: we never throw on error (discovery, download, execution errors).
@@ -47,13 +48,8 @@ namespace System.Net
                 int timeout = SettingsSectionInternal.Section.DownloadTimeout;
 
                 if (
-                    !UnsafeNclNativeMethods.WinHttp.WinHttpSetTimeouts(
-                        session,
-                        timeout,
-                        timeout,
-                        timeout,
-                        timeout
-                    )
+                    !UnsafeNclNativeMethods.WinHttp
+                        .WinHttpSetTimeouts(session, timeout, timeout, timeout, timeout)
                 )
                 {
                     // We weren't able to set the timeouts. Just log and continue.
@@ -201,13 +197,11 @@ namespace System.Net
             else
             {
                 // Use the provided script location for the PAC file.
-                autoProxyOptions.Flags = UnsafeNclNativeMethods
-                    .WinHttp
+                autoProxyOptions.Flags = UnsafeNclNativeMethods.WinHttp
                     .AutoProxyFlags
                     .AutoProxyConfigUrl;
                 autoProxyOptions.AutoConfigUrl = scriptLocation.ToString();
-                autoProxyOptions.AutoDetectFlags = UnsafeNclNativeMethods
-                    .WinHttp
+                autoProxyOptions.AutoDetectFlags = UnsafeNclNativeMethods.WinHttp
                     .AutoDetectType
                     .None;
             }
@@ -279,12 +273,13 @@ namespace System.Net
             RuntimeHelpers.PrepareConstrainedRegions();
             try
             {
-                success = UnsafeNclNativeMethods.WinHttp.WinHttpGetProxyForUrl(
-                    session,
-                    destination,
-                    ref autoProxyOptions,
-                    out proxyInfo
-                );
+                success = UnsafeNclNativeMethods.WinHttp
+                    .WinHttpGetProxyForUrl(
+                        session,
+                        destination,
+                        ref autoProxyOptions,
+                        out proxyInfo
+                    );
 
                 if (success)
                 {

@@ -49,10 +49,12 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                 _registration = registration;
 
                 _listener = listener;
-                _documentTrackingService =
-                    _registration.Workspace.Services.GetRequiredService<IDocumentTrackingService>();
-                _solutionCrawlerOptions =
-                    _registration.Workspace.Services.GetService<ISolutionCrawlerOptionsService>();
+                _documentTrackingService = _registration.Workspace
+                    .Services
+                    .GetRequiredService<IDocumentTrackingService>();
+                _solutionCrawlerOptions = _registration.Workspace
+                    .Services
+                    .GetService<ISolutionCrawlerOptionsService>();
 
                 // event and worker queues
                 _shutdownToken = _shutdownNotificationSource.Token;
@@ -216,7 +218,8 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                     // If we had a mix of exceptions, don't eat it
                     if (
                         ae.InnerExceptions.Any(e => e is not OperationCanceledException)
-                        || ae.InnerExceptions.Cast<OperationCanceledException>()
+                        || ae.InnerExceptions
+                            .Cast<OperationCanceledException>()
                             .Any(NotOurShutdownToken)
                     )
                     {
@@ -933,14 +936,14 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                         }
                     }
 
-                    _workCoordinator
-                        ._documentAndProjectWorkerProcessor.GetTestAccessor()
+                    _workCoordinator._documentAndProjectWorkerProcessor
+                        .GetTestAccessor()
                         .WaitUntilCompletion(workers, list);
                 }
 
                 internal void WaitUntilCompletion() =>
-                    _workCoordinator
-                        ._documentAndProjectWorkerProcessor.GetTestAccessor()
+                    _workCoordinator._documentAndProjectWorkerProcessor
+                        .GetTestAccessor()
                         .WaitUntilCompletion();
             }
         }
@@ -993,9 +996,8 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                 using var pool = SharedPools.Default<HashSet<string>>().GetPooledObject();
                 if (_solutionId != null)
                 {
-                    pool.Object.UnionWith(
-                        solution.State.ProjectStates.Select(kv => kv.Value.Language)
-                    );
+                    pool.Object
+                        .UnionWith(solution.State.ProjectStates.Select(kv => kv.Value.Language));
                     return string.Join(",", pool.Object);
                 }
 

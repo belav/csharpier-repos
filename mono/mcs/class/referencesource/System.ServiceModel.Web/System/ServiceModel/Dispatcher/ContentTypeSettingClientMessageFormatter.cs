@@ -29,9 +29,8 @@ namespace System.ServiceModel.Dispatcher
         {
             if (outgoingContentType == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                    "outgoingContentType"
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperArgumentNull("outgoingContentType");
             }
             if (innerFormatter == null)
             {

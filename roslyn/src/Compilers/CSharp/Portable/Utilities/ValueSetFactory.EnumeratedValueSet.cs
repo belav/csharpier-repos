@@ -150,30 +150,26 @@ namespace Microsoft.CodeAnalysis.CSharp
                     case (true, true):
                         return new EnumeratedValueSet<T, TTC>(
                             true,
-                            larger._membersIncludedOrExcluded.Intersect(
-                                smaller._membersIncludedOrExcluded
-                            )
+                            larger._membersIncludedOrExcluded
+                                .Intersect(smaller._membersIncludedOrExcluded)
                         );
                     case (true, false):
                         return new EnumeratedValueSet<T, TTC>(
                             true,
-                            larger._membersIncludedOrExcluded.Except(
-                                smaller._membersIncludedOrExcluded
-                            )
+                            larger._membersIncludedOrExcluded
+                                .Except(smaller._membersIncludedOrExcluded)
                         );
                     case (false, false):
                         return new EnumeratedValueSet<T, TTC>(
                             false,
-                            larger._membersIncludedOrExcluded.Union(
-                                smaller._membersIncludedOrExcluded
-                            )
+                            larger._membersIncludedOrExcluded
+                                .Union(smaller._membersIncludedOrExcluded)
                         );
                     case (false, true):
                         return new EnumeratedValueSet<T, TTC>(
                             true,
-                            smaller._membersIncludedOrExcluded.Except(
-                                larger._membersIncludedOrExcluded
-                            )
+                            smaller._membersIncludedOrExcluded
+                                .Except(larger._membersIncludedOrExcluded)
                         );
                 }
             }
@@ -194,30 +190,26 @@ namespace Microsoft.CodeAnalysis.CSharp
                     case (false, false):
                         return new EnumeratedValueSet<T, TTC>(
                             false,
-                            larger._membersIncludedOrExcluded.Intersect(
-                                smaller._membersIncludedOrExcluded
-                            )
+                            larger._membersIncludedOrExcluded
+                                .Intersect(smaller._membersIncludedOrExcluded)
                         );
                     case (false, true):
                         return new EnumeratedValueSet<T, TTC>(
                             false,
-                            larger._membersIncludedOrExcluded.Except(
-                                smaller._membersIncludedOrExcluded
-                            )
+                            larger._membersIncludedOrExcluded
+                                .Except(smaller._membersIncludedOrExcluded)
                         );
                     case (true, true):
                         return new EnumeratedValueSet<T, TTC>(
                             true,
-                            larger._membersIncludedOrExcluded.Union(
-                                smaller._membersIncludedOrExcluded
-                            )
+                            larger._membersIncludedOrExcluded
+                                .Union(smaller._membersIncludedOrExcluded)
                         );
                     case (true, false):
                         return new EnumeratedValueSet<T, TTC>(
                             false,
-                            smaller._membersIncludedOrExcluded.Except(
-                                larger._membersIncludedOrExcluded
-                            )
+                            smaller._membersIncludedOrExcluded
+                                .Except(larger._membersIncludedOrExcluded)
                         );
                 }
             }
@@ -230,9 +222,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     return false;
 
                 return this._included == other._included
-                    && this._membersIncludedOrExcluded.SetEqualsWithoutIntermediateHashSet(
-                        other._membersIncludedOrExcluded
-                    );
+                    && this._membersIncludedOrExcluded
+                        .SetEqualsWithoutIntermediateHashSet(other._membersIncludedOrExcluded);
             }
 
             public override int GetHashCode() =>

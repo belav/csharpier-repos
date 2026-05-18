@@ -64,8 +64,9 @@ namespace RunTests
 
             // Build the filter string
             var filterStringBuilder = new StringBuilder();
-            var filters = workItem
-                .Filters.Values.SelectMany(filter => filter)
+            var filters = workItem.Filters
+                .Values
+                .SelectMany(filter => filter)
                 .Where(filter => !string.IsNullOrEmpty(filter.FullyQualifiedName))
                 .ToImmutableArray();
 

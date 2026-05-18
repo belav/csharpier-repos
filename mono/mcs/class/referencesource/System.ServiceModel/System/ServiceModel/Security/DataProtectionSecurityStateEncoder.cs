@@ -85,12 +85,13 @@ namespace System.ServiceModel.Security
             }
             catch (CryptographicException exception)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new CryptographicException(
-                        SR.GetString(SR.SecurityStateEncoderDecodingFailure),
-                        exception
-                    )
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        new CryptographicException(
+                            SR.GetString(SR.SecurityStateEncoderDecodingFailure),
+                            exception
+                        )
+                    );
             }
         }
 
@@ -108,12 +109,13 @@ namespace System.ServiceModel.Security
             }
             catch (CryptographicException exception)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new CryptographicException(
-                        SR.GetString(SR.SecurityStateEncoderEncodingFailure),
-                        exception
-                    )
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        new CryptographicException(
+                            SR.GetString(SR.SecurityStateEncoderEncodingFailure),
+                            exception
+                        )
+                    );
             }
         }
     }

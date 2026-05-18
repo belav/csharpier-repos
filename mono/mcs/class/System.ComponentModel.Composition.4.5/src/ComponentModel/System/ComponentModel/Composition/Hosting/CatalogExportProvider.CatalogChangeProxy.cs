@@ -36,8 +36,8 @@ namespace System.ComponentModel.Composition.Hosting
 
             public override IEnumerator<ComposablePartDefinition> GetEnumerator()
             {
-                return this
-                    ._originalCatalog.Concat(this._addedParts)
+                return this._originalCatalog
+                    .Concat(this._addedParts)
                     .Except(this._removedParts)
                     .GetEnumerator();
             }

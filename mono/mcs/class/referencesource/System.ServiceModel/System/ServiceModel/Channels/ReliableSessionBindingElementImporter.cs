@@ -81,14 +81,15 @@ namespace System.ServiceModel.Channels
             {
                 if (gotAssertion)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidChannelBindingException(
-                            SR.GetString(
-                                SR.MultipleVersionsFoundInPolicy,
-                                ReliableSessionPolicyStrings.ReliableSessionName
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidChannelBindingException(
+                                SR.GetString(
+                                    SR.MultipleVersionsFoundInPolicy,
+                                    ReliableSessionPolicyStrings.ReliableSessionName
+                                )
                             )
-                        )
-                    );
+                        );
                 }
 
                 ProcessReliableSession11Assertion(
@@ -103,8 +104,8 @@ namespace System.ServiceModel.Channels
             PolicyConversionContext context
         )
         {
-            ReliableSessionBindingElement settings =
-                context.BindingElements.Find<ReliableSessionBindingElement>();
+            ReliableSessionBindingElement settings = context.BindingElements
+                .Find<ReliableSessionBindingElement>();
 
             if (settings == null)
             {
@@ -323,16 +324,17 @@ namespace System.ServiceModel.Channels
                 ReliableSessionPolicyStrings.Milliseconds
             ];
             if (millisecondsAttribute == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidChannelBindingException(
-                        SR.GetString(
-                            SR.RequiredAttributeIsMissing,
-                            ReliableSessionPolicyStrings.Milliseconds,
-                            wsrmNode.LocalName,
-                            ReliableSessionPolicyStrings.ReliableSessionName
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidChannelBindingException(
+                            SR.GetString(
+                                SR.RequiredAttributeIsMissing,
+                                ReliableSessionPolicyStrings.Milliseconds,
+                                wsrmNode.LocalName,
+                                ReliableSessionPolicyStrings.ReliableSessionName
+                            )
                         )
-                    )
-                );
+                    );
 
             UInt64 milliseconds = 0;
             Exception innerException = null;
@@ -351,12 +353,16 @@ namespace System.ServiceModel.Channels
             }
 
             if (innerException != null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidChannelBindingException(
-                        SR.GetString(SR.RequiredMillisecondsAttributeIncorrect, wsrmNode.LocalName),
-                        innerException
-                    )
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidChannelBindingException(
+                            SR.GetString(
+                                SR.RequiredMillisecondsAttributeIncorrect,
+                                wsrmNode.LocalName
+                            ),
+                            innerException
+                        )
+                    );
 
             if (convertToTimeSpan)
             {
@@ -368,15 +374,16 @@ namespace System.ServiceModel.Channels
                 }
                 catch (OverflowException exception)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidChannelBindingException(
-                            SR.GetString(
-                                SR.MillisecondsNotConvertibleToBindingRange,
-                                wsrmNode.LocalName
-                            ),
-                            exception
-                        )
-                    );
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidChannelBindingException(
+                                SR.GetString(
+                                    SR.MillisecondsNotConvertibleToBindingRange,
+                                    wsrmNode.LocalName
+                                ),
+                                exception
+                            )
+                        );
                 }
 
                 return interval;
@@ -399,12 +406,13 @@ namespace System.ServiceModel.Channels
             }
             catch (ArgumentOutOfRangeException exception)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidChannelBindingException(
-                        SR.GetString(SR.MillisecondsNotConvertibleToBindingRange, localName),
-                        exception
-                    )
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidChannelBindingException(
+                            SR.GetString(SR.MillisecondsNotConvertibleToBindingRange, localName),
+                            exception
+                        )
+                    );
             }
         }
 
@@ -420,12 +428,13 @@ namespace System.ServiceModel.Channels
             }
             catch (ArgumentOutOfRangeException exception)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidChannelBindingException(
-                        SR.GetString(SR.MillisecondsNotConvertibleToBindingRange, localName),
-                        exception
-                    )
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidChannelBindingException(
+                            SR.GetString(SR.MillisecondsNotConvertibleToBindingRange, localName),
+                            exception
+                        )
+                    );
             }
         }
 
@@ -493,9 +502,8 @@ namespace System.ServiceModel.Channels
                             node.NamespaceURI
                         );
 
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidChannelBindingException(exceptionString)
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(new InvalidChannelBindingException(exceptionString));
             }
 
             return (XmlElement)node;
@@ -548,9 +556,8 @@ namespace System.ServiceModel.Channels
                         ReliableSessionPolicyStrings.ReliableSessionName
                     );
 
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidChannelBindingException(exceptionString)
-                    );
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperError(new InvalidChannelBindingException(exceptionString));
                 }
 
                 return wsrmPolicy;
@@ -563,9 +570,8 @@ namespace System.ServiceModel.Channels
                     ReliableSessionPolicyStrings.ReliableSession11Prefix,
                     ReliableSessionPolicyStrings.SequenceTransportSecurity
                 );
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidChannelBindingException(exceptionString)
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(new InvalidChannelBindingException(exceptionString));
             }
 
             public void TransferSettings(ReliableSessionBindingElement settings)
@@ -639,16 +645,17 @@ namespace System.ServiceModel.Channels
                                 )
                             )
                             {
-                                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                                    new InvalidChannelBindingException(
-                                        SR.GetString(
-                                            SR.DeliveryAssuranceRequired,
-                                            wsrmNs,
-                                            element.LocalName,
-                                            element.NamespaceURI
+                                throw DiagnosticUtility.ExceptionUtility
+                                    .ThrowHelperError(
+                                        new InvalidChannelBindingException(
+                                            SR.GetString(
+                                                SR.DeliveryAssuranceRequired,
+                                                wsrmNs,
+                                                element.LocalName,
+                                                element.NamespaceURI
+                                            )
                                         )
-                                    )
-                                );
+                                    );
                             }
 
                             // Found required DeliveryAssurance, ignore the value and skip to InOrder
@@ -672,16 +679,17 @@ namespace System.ServiceModel.Channels
                             }
                         }
 
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new InvalidChannelBindingException(
-                                SR.GetString(
-                                    SR.UnexpectedXmlChildNode,
-                                    element.LocalName,
-                                    element.NodeType,
-                                    ReliableSessionPolicyStrings.DeliveryAssurance
+                        throw DiagnosticUtility.ExceptionUtility
+                            .ThrowHelperError(
+                                new InvalidChannelBindingException(
+                                    SR.GetString(
+                                        SR.UnexpectedXmlChildNode,
+                                        element.LocalName,
+                                        element.NodeType,
+                                        ReliableSessionPolicyStrings.DeliveryAssurance
+                                    )
                                 )
-                            )
-                        );
+                            );
                     }
 
                     if (state == State.Assurance)
@@ -690,9 +698,8 @@ namespace System.ServiceModel.Channels
                             SR.DeliveryAssuranceRequiredNothingFound,
                             wsrmNs
                         );
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new InvalidChannelBindingException(exceptionString)
-                        );
+                        throw DiagnosticUtility.ExceptionUtility
+                            .ThrowHelperError(new InvalidChannelBindingException(exceptionString));
                     }
                 }
 
@@ -700,16 +707,17 @@ namespace System.ServiceModel.Channels
 
                 if (policyNode != null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidChannelBindingException(
-                            SR.GetString(
-                                SR.UnexpectedXmlChildNode,
-                                policyNode.LocalName,
-                                policyNode.NodeType,
-                                node.LocalName
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidChannelBindingException(
+                                SR.GetString(
+                                    SR.UnexpectedXmlChildNode,
+                                    policyNode.LocalName,
+                                    policyNode.NodeType,
+                                    node.LocalName
+                                )
                             )
-                        )
-                    );
+                        );
                 }
 
                 return true;

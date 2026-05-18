@@ -194,12 +194,13 @@ namespace System.Data.EntityModel.Emitters
             }
             else
             {
-                this.Generator.AddError(
-                    Strings.DuplicateClassName(type, name, cache[name]),
-                    ModelBuilderErrorCode.DuplicateClassName,
-                    EdmSchemaErrorSeverity.Error,
-                    name
-                );
+                this.Generator
+                    .AddError(
+                        Strings.DuplicateClassName(type, name, cache[name]),
+                        ModelBuilderErrorCode.DuplicateClassName,
+                        EdmSchemaErrorSeverity.Error,
+                        name
+                    );
                 return false;
             }
             return true;

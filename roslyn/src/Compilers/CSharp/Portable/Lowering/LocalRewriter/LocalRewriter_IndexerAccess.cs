@@ -474,21 +474,23 @@ namespace Microsoft.CodeAnalysis.CSharp
                         or WellKnownMember.System_ReadOnlySpan_T__get_Item
                 )
                 {
-                    createSpan = _factory.ModuleBuilderOpt.EnsureInlineArrayAsReadOnlySpanExists(
-                        node.Syntax,
-                        spanType,
-                        intType,
-                        _diagnostics.DiagnosticBag
-                    );
+                    createSpan = _factory.ModuleBuilderOpt
+                        .EnsureInlineArrayAsReadOnlySpanExists(
+                            node.Syntax,
+                            spanType,
+                            intType,
+                            _diagnostics.DiagnosticBag
+                        );
                 }
                 else
                 {
-                    createSpan = _factory.ModuleBuilderOpt.EnsureInlineArrayAsSpanExists(
-                        node.Syntax,
-                        spanType,
-                        intType,
-                        _diagnostics.DiagnosticBag
-                    );
+                    createSpan = _factory.ModuleBuilderOpt
+                        .EnsureInlineArrayAsSpanExists(
+                            node.Syntax,
+                            spanType,
+                            intType,
+                            _diagnostics.DiagnosticBag
+                        );
                 }
 
                 return createSpan.Construct(
@@ -522,8 +524,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
                         if (node.GetItemOrSliceHelper is WellKnownMember.System_Span_T__get_Item)
                         {
-                            elementRef =
-                                _factory.ModuleBuilderOpt.EnsureInlineArrayFirstElementRefExists(
+                            elementRef = _factory.ModuleBuilderOpt
+                                .EnsureInlineArrayFirstElementRefExists(
                                     node.Syntax,
                                     _diagnostics.DiagnosticBag
                                 );
@@ -534,8 +536,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                                 node.GetItemOrSliceHelper
                                     is WellKnownMember.System_ReadOnlySpan_T__get_Item
                             );
-                            elementRef =
-                                _factory.ModuleBuilderOpt.EnsureInlineArrayFirstElementRefReadOnlyExists(
+                            elementRef = _factory.ModuleBuilderOpt
+                                .EnsureInlineArrayFirstElementRefReadOnlyExists(
                                     node.Syntax,
                                     _diagnostics.DiagnosticBag
                                 );
@@ -560,8 +562,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
                         if (node.GetItemOrSliceHelper is WellKnownMember.System_Span_T__get_Item)
                         {
-                            elementRef =
-                                _factory.ModuleBuilderOpt.EnsureInlineArrayElementRefExists(
+                            elementRef = _factory.ModuleBuilderOpt
+                                .EnsureInlineArrayElementRefExists(
                                     node.Syntax,
                                     intType,
                                     _diagnostics.DiagnosticBag
@@ -573,8 +575,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                                 node.GetItemOrSliceHelper
                                     is WellKnownMember.System_ReadOnlySpan_T__get_Item
                             );
-                            elementRef =
-                                _factory.ModuleBuilderOpt.EnsureInlineArrayElementRefReadOnlyExists(
+                            elementRef = _factory.ModuleBuilderOpt
+                                .EnsureInlineArrayElementRefReadOnlyExists(
                                     node.Syntax,
                                     intType,
                                     _diagnostics.DiagnosticBag

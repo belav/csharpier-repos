@@ -9,8 +9,7 @@ public class EnumPrinters
 {
     public static void Main(string[] args)
     {
-        PrinterSettings.StringCollection col = System
-            .Drawing
+        PrinterSettings.StringCollection col = System.Drawing
             .Printing
             .PrinterSettings
             .InstalledPrinters;

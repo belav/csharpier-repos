@@ -197,13 +197,14 @@ namespace System.ServiceModel.Channels
 
         IAsyncResult BeginUnregisterChannel(TimeSpan timeout, AsyncCallback callback, object state)
         {
-            return this.listener.OnReliableChannelBeginClose(
-                this.ReliableSession.InputID,
-                null,
-                timeout,
-                callback,
-                state
-            );
+            return this.listener
+                .OnReliableChannelBeginClose(
+                    this.ReliableSession.InputID,
+                    null,
+                    timeout,
+                    callback,
+                    state
+                );
         }
 
         protected override void OnClosed()
@@ -328,11 +329,12 @@ namespace System.ServiceModel.Channels
         void OnBinderException(IReliableChannelBinder sender, Exception exception)
         {
             if (exception is QuotaExceededException)
-                this.session.OnLocalFault(
-                    exception,
-                    SequenceTerminatedFault.CreateQuotaExceededFault(this.session.OutputID),
-                    null
-                );
+                this.session
+                    .OnLocalFault(
+                        exception,
+                        SequenceTerminatedFault.CreateQuotaExceededFault(this.session.OutputID),
+                        null
+                    );
             else
                 this.EnqueueAndDispatch(exception, null, false);
         }
@@ -357,11 +359,12 @@ namespace System.ServiceModel.Channels
             this.session.Close(timeoutHelper.RemainingTime());
             this.CloseGuards(timeoutHelper.RemainingTime());
             this.binder.Close(timeoutHelper.RemainingTime(), MaskingMode.Handled);
-            this.listener.OnReliableChannelClose(
-                this.ReliableSession.InputID,
-                null,
-                timeoutHelper.RemainingTime()
-            );
+            this.listener
+                .OnReliableChannelClose(
+                    this.ReliableSession.InputID,
+                    null,
+                    timeoutHelper.RemainingTime()
+                );
             base.OnClose(timeoutHelper.RemainingTime());
         }
 
@@ -390,11 +393,8 @@ namespace System.ServiceModel.Channels
         {
             while (true)
             {
-                IAsyncResult result = this.Binder.BeginTryReceive(
-                    TimeSpan.MaxValue,
-                    onReceiveCompleted,
-                    this
-                );
+                IAsyncResult result = this.Binder
+                    .BeginTryReceive(TimeSpan.MaxValue, onReceiveCompleted, this);
                 if (!result.CompletedSynchronously)
                     return;
 
@@ -676,11 +676,8 @@ namespace System.ServiceModel.Channels
                     }
                     else
                     {
-                        this.ReliableSession.OnLocalFault(
-                            info.FaultException,
-                            info.FaultReply,
-                            null
-                        );
+                        this.ReliableSession
+                            .OnLocalFault(info.FaultException, info.FaultReply, null);
                     }
 
                     return;
@@ -785,10 +782,8 @@ namespace System.ServiceModel.Channels
                         )
                         {
                             this.Connection.Merge(sequenceNumber, isLast);
-                            needDispatch = this.DeliveryStrategy.Enqueue(
-                                info.Message,
-                                sequenceNumber
-                            );
+                            needDispatch = this.DeliveryStrategy
+                                .Enqueue(info.Message, sequenceNumber);
                             closeMessage = false;
 
                             this.pendingAcknowledgements++;
@@ -875,10 +870,8 @@ namespace System.ServiceModel.Channels
                             if (isTerminate)
                             {
                                 if (
-                                    this.Connection.SetTerminateSequenceLast(
-                                        last,
-                                        out isLastLargeEnough
-                                    )
+                                    this.Connection
+                                        .SetTerminateSequenceLast(last, out isLastLargeEnough)
                                 )
                                 {
                                     scheduleShutdown = true;
@@ -1173,11 +1166,8 @@ namespace System.ServiceModel.Channels
                     }
                     else
                     {
-                        this.ReliableSession.OnLocalFault(
-                            info.FaultException,
-                            info.FaultReply,
-                            context
-                        );
+                        this.ReliableSession
+                            .OnLocalFault(info.FaultException, info.FaultReply, context);
                     }
 
                     closeContext = false;
@@ -1274,10 +1264,8 @@ namespace System.ServiceModel.Channels
                         )
                         {
                             this.Connection.Merge(sequenceNumber, isLast);
-                            needDispatch = this.DeliveryStrategy.Enqueue(
-                                info.Message,
-                                sequenceNumber
-                            );
+                            needDispatch = this.DeliveryStrategy
+                                .Enqueue(info.Message, sequenceNumber);
                             scheduleShutdown = this.Connection.AllAdded;
                             closeMessage = false;
                         }
@@ -1349,10 +1337,8 @@ namespace System.ServiceModel.Channels
                             if (isTerminate)
                             {
                                 if (
-                                    this.Connection.SetTerminateSequenceLast(
-                                        last,
-                                        out isLastLargeEnough
-                                    )
+                                    this.Connection
+                                        .SetTerminateSequenceLast(last, out isLastLargeEnough)
                                 )
                                 {
                                     scheduleShutdown = true;

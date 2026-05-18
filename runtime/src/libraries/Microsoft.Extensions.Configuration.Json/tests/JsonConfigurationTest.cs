@@ -261,8 +261,8 @@ namespace Microsoft.Extensions.Configuration
             IConfigurationRoot config = new ConfigurationBuilder()
                 .AddJsonFile(filePath, optional: false)
                 .Build();
-            JsonConfigurationProvider jsonConfigurationProvider = config
-                .Providers.OfType<JsonConfigurationProvider>()
+            JsonConfigurationProvider jsonConfigurationProvider = config.Providers
+                .OfType<JsonConfigurationProvider>()
                 .Single();
 
             Assert.NotNull(jsonConfigurationProvider.Source.FileProvider);

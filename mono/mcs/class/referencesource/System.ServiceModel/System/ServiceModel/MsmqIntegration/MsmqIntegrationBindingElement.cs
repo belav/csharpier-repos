@@ -46,9 +46,8 @@ namespace System.ServiceModel.MsmqIntegration
             {
                 if (!MsmqMessageSerializationFormatHelper.IsDefined(value))
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ArgumentOutOfRangeException("value")
-                    );
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperError(new ArgumentOutOfRangeException("value"));
                 }
 
                 this.serializationFormat = value;
@@ -100,10 +99,11 @@ namespace System.ServiceModel.MsmqIntegration
 
             if (typeof(TChannel) != typeof(IOutputChannel))
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                    "TChannel",
-                    SR.GetString(SR.ChannelTypeNotSupported, typeof(TChannel))
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperArgument(
+                        "TChannel",
+                        SR.GetString(SR.ChannelTypeNotSupported, typeof(TChannel))
+                    );
             }
 
             MsmqChannelFactoryBase<IOutputChannel> factory = new MsmqIntegrationChannelFactory(
@@ -125,10 +125,11 @@ namespace System.ServiceModel.MsmqIntegration
 
             if (typeof(TChannel) != typeof(IInputChannel))
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                    "TChannel",
-                    SR.GetString(SR.ChannelTypeNotSupported, typeof(TChannel))
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperArgument(
+                        "TChannel",
+                        SR.GetString(SR.ChannelTypeNotSupported, typeof(TChannel))
+                    );
             }
 
             MsmqIntegrationReceiveParameters receiveParameters =

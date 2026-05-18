@@ -50,8 +50,8 @@ namespace Microsoft.VisualStudio.LanguageServices.EditorConfigSettings
             IThreadingContext threadingContext
         )
         {
-            _settingsDataProviderFactory =
-                workspace.Services.GetRequiredService<ISettingsAggregator>();
+            _settingsDataProviderFactory = workspace.Services
+                .GetRequiredService<ISettingsAggregator>();
             _workspace = workspace;
             _controlProvider = controlProvider;
             _tableMangerProvider = tableMangerProvider;
@@ -90,9 +90,9 @@ namespace Microsoft.VisualStudio.LanguageServices.EditorConfigSettings
             pbstrEditorCaption = null;
 
             if (
-                !_workspace.CurrentSolution.Projects.Any(p =>
-                    p.Language is LanguageNames.CSharp or LanguageNames.VisualBasic
-                )
+                !_workspace.CurrentSolution
+                    .Projects
+                    .Any(p => p.Language is LanguageNames.CSharp or LanguageNames.VisualBasic)
             )
             {
                 // If there are no VB or C# projects loaded in the solution (so an editorconfig file in a C++ project) then we want their
@@ -101,11 +101,15 @@ namespace Microsoft.VisualStudio.LanguageServices.EditorConfigSettings
             }
 
             if (
-                !_workspace.CurrentSolution.Projects.Any(p =>
-                    p.AnalyzerConfigDocuments.Any(editorconfig =>
-                        StringComparer.OrdinalIgnoreCase.Equals(editorconfig.FilePath, filePath)
+                !_workspace.CurrentSolution
+                    .Projects
+                    .Any(p =>
+                        p.AnalyzerConfigDocuments
+                            .Any(editorconfig =>
+                                StringComparer.OrdinalIgnoreCase
+                                    .Equals(editorconfig.FilePath, filePath)
+                            )
                     )
-                )
             )
             {
                 // If the user is simply opening an editorconfig file that does not apply to the current solution we just want to show the text view

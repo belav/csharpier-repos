@@ -770,9 +770,8 @@ namespace MonoTests.System.Security.Cryptography
                 0xaa,
                 0xaa,
             };
-            byte[] data = Encoding.Default.GetBytes(
-                "Test Using Larger Than Block-Size Key - Hash Key First"
-            );
+            byte[] data = Encoding.Default
+                .GetBytes("Test Using Larger Than Block-Size Key - Hash Key First");
             byte[] digest =
             {
                 0x4e,
@@ -966,9 +965,10 @@ namespace MonoTests.System.Security.Cryptography
                 0xaa,
                 0xaa,
             };
-            byte[] data = Encoding.Default.GetBytes(
-                "This is a test using a larger than block-size key and a larger than block-size data. The key needs to be hashed before being used by the HMAC algorithm."
-            );
+            byte[] data = Encoding.Default
+                .GetBytes(
+                    "This is a test using a larger than block-size key and a larger than block-size data. The key needs to be hashed before being used by the HMAC algorithm."
+                );
             byte[] digest =
             {
                 0x66,
@@ -1631,9 +1631,8 @@ namespace MonoTests.System.Security.Cryptography
                 0xaa,
                 0xaa,
             };
-            byte[] data = Encoding.Default.GetBytes(
-                "Test Using Larger Than Block-Size Key - Hash Key First"
-            );
+            byte[] data = Encoding.Default
+                .GetBytes("Test Using Larger Than Block-Size Key - Hash Key First");
             byte[] digest =
             {
                 0xCA,
@@ -1827,9 +1826,10 @@ namespace MonoTests.System.Security.Cryptography
                 0xaa,
                 0xaa,
             };
-            byte[] data = Encoding.Default.GetBytes(
-                "This is a test using a larger than block-size key and a larger than block-size data. The key needs to be hashed before being used by the HMAC algorithm."
-            );
+            byte[] data = Encoding.Default
+                .GetBytes(
+                    "This is a test using a larger than block-size key and a larger than block-size data. The key needs to be hashed before being used by the HMAC algorithm."
+                );
             byte[] digest =
             {
                 0x5C,

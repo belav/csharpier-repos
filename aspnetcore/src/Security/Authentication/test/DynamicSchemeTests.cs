@@ -168,15 +168,16 @@ public class DynamicSchemeTests
                                 var req = context.Request;
                                 var res = context.Response;
                                 if (
-                                    req.Path.StartsWithSegments(
-                                        new PathString("/add"),
-                                        out var remainder
-                                    )
+                                    req.Path
+                                        .StartsWithSegments(
+                                            new PathString("/add"),
+                                            out var remainder
+                                        )
                                 )
                                 {
                                     var name = remainder.Value.Substring(1);
-                                    var auth =
-                                        context.RequestServices.GetRequiredService<IAuthenticationSchemeProvider>();
+                                    var auth = context.RequestServices
+                                        .GetRequiredService<IAuthenticationSchemeProvider>();
                                     var scheme = new AuthenticationScheme(
                                         name,
                                         name,
@@ -185,10 +186,8 @@ public class DynamicSchemeTests
                                     auth.AddScheme(scheme);
                                 }
                                 else if (
-                                    req.Path.StartsWithSegments(
-                                        new PathString("/auth"),
-                                        out remainder
-                                    )
+                                    req.Path
+                                        .StartsWithSegments(new PathString("/auth"), out remainder)
                                 )
                                 {
                                     var name =
@@ -199,15 +198,16 @@ public class DynamicSchemeTests
                                     await res.DescribeAsync(result?.Ticket?.Principal);
                                 }
                                 else if (
-                                    req.Path.StartsWithSegments(
-                                        new PathString("/remove"),
-                                        out remainder
-                                    )
+                                    req.Path
+                                        .StartsWithSegments(
+                                            new PathString("/remove"),
+                                            out remainder
+                                        )
                                 )
                                 {
                                     var name = remainder.Value.Substring(1);
-                                    var auth =
-                                        context.RequestServices.GetRequiredService<IAuthenticationSchemeProvider>();
+                                    var auth = context.RequestServices
+                                        .GetRequiredService<IAuthenticationSchemeProvider>();
                                     auth.RemoveScheme(name);
                                 }
                                 else

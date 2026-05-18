@@ -82,12 +82,13 @@
             }
 
             TagBuilder tag = new TagBuilder("label");
-            tag.Attributes.Add(
-                "for",
-                TagBuilder.CreateSanitizedId(
-                    html.ViewContext.ViewData.TemplateInfo.GetFullHtmlFieldName(htmlFieldName)
-                )
-            );
+            tag.Attributes
+                .Add(
+                    "for",
+                    TagBuilder.CreateSanitizedId(
+                        html.ViewContext.ViewData.TemplateInfo.GetFullHtmlFieldName(htmlFieldName)
+                    )
+                );
             tag.SetInnerText(resolvedLabelText);
             return tag.ToMvcHtmlString(TagRenderMode.Normal);
         }

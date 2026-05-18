@@ -27,10 +27,11 @@ namespace Microsoft.Interop
         > AddDisableRuntimeMarshallingAttributeProperties = ImmutableDictionary<
             string,
             string
-        >.Empty.Add(
-            GeneratorDiagnosticProperties.AddDisableRuntimeMarshallingAttribute,
-            GeneratorDiagnosticProperties.AddDisableRuntimeMarshallingAttribute
-        );
+        >.Empty
+            .Add(
+                GeneratorDiagnosticProperties.AddDisableRuntimeMarshallingAttribute,
+                GeneratorDiagnosticProperties.AddDisableRuntimeMarshallingAttribute
+            );
 
         private static readonly BlittableMarshaller s_blittable = new BlittableMarshaller();
         private static readonly Forwarder s_forwarder = new Forwarder();
@@ -495,7 +496,8 @@ namespace Microsoft.Interop
             // Insert the unmanaged element type into the marshaller type
             TypeSyntax unmanagedElementType = elementMarshaller
                 .AsNativeType(elementInfo)
-                .Syntax.GetCompatibleGenericTypeParameterSyntax();
+                .Syntax
+                .GetCompatibleGenericTypeParameterSyntax();
             ManagedTypeInfo marshallerType = marshallerData.MarshallerType;
             TypeSyntax marshallerTypeSyntax = ReplacePlaceholderSyntaxWithUnmanagedTypeSyntax(
                 marshallerType.Syntax,
@@ -532,12 +534,11 @@ namespace Microsoft.Interop
                 if (marshallerData.Shape.HasFlag(MarshallerShape.CallerAllocatedBuffer))
                 {
                     // Check if the buffer element type is actually the unmanaged element type
-                    TypeSyntax bufferElementTypeSyntax =
-                        marshallerData.BufferElementType.Syntax.IsEquivalentTo(
-                            marshalInfo.PlaceholderTypeParameter.Syntax
-                        )
-                            ? unmanagedElementType
-                            : marshallerData.BufferElementType.Syntax;
+                    TypeSyntax bufferElementTypeSyntax = marshallerData.BufferElementType
+                        .Syntax
+                        .IsEquivalentTo(marshalInfo.PlaceholderTypeParameter.Syntax)
+                        ? unmanagedElementType
+                        : marshallerData.BufferElementType.Syntax;
                     marshallingStrategy = new StatefulCallerAllocatedBufferMarshalling(
                         marshallingStrategy,
                         marshallerTypeSyntax,
@@ -623,12 +624,11 @@ namespace Microsoft.Interop
                 if (marshallerData.Shape.HasFlag(MarshallerShape.CallerAllocatedBuffer))
                 {
                     // Check if the buffer element type is actually the unmanaged element type
-                    TypeSyntax bufferElementTypeSyntax =
-                        marshallerData.BufferElementType.Syntax.IsEquivalentTo(
-                            marshalInfo.PlaceholderTypeParameter.Syntax
-                        )
-                            ? unmanagedElementType
-                            : marshallerData.BufferElementType.Syntax;
+                    TypeSyntax bufferElementTypeSyntax = marshallerData.BufferElementType
+                        .Syntax
+                        .IsEquivalentTo(marshalInfo.PlaceholderTypeParameter.Syntax)
+                        ? unmanagedElementType
+                        : marshallerData.BufferElementType.Syntax;
                     marshallingStrategy = new StatelessCallerAllocatedBufferMarshalling(
                         marshallingStrategy,
                         marshallerTypeSyntax,

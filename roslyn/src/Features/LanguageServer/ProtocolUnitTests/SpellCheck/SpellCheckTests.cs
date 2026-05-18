@@ -471,9 +471,12 @@ class {|Identifier:A|}
 
             Assert.Equal(2, results.Length);
 
-            var document = testLspServer
-                .TestWorkspace.CurrentSolution.Projects.Single()
-                .Documents.First();
+            var document = testLspServer.TestWorkspace
+                .CurrentSolution
+                .Projects
+                .Single()
+                .Documents
+                .First();
             var sourceText = await document.GetTextAsync();
             AssertJsonEquals(
                 results[0],
@@ -558,9 +561,12 @@ class {|Identifier:A|}
 
             Assert.Equal(2, results.Length);
 
-            var document = testLspServer
-                .TestWorkspace.CurrentSolution.Projects.Single()
-                .Documents.First();
+            var document = testLspServer.TestWorkspace
+                .CurrentSolution
+                .Projects
+                .Single()
+                .Documents
+                .First();
             var sourceText = await document.GetTextAsync();
             AssertJsonEquals(
                 results[0],
@@ -575,9 +581,8 @@ class {|Identifier:A|}
             );
             Assert.Empty(results[1].Ranges);
 
-            testLspServer.TestWorkspace.OnDocumentRemoved(
-                testLspServer.TestWorkspace.Documents.First().Id
-            );
+            testLspServer.TestWorkspace
+                .OnDocumentRemoved(testLspServer.TestWorkspace.Documents.First().Id);
 
             var results2 = await RunGetWorkspaceSpellCheckSpansAsync(
                 testLspServer,
@@ -611,9 +616,12 @@ class {|Identifier:A|}
 
             Assert.Equal(2, results.Length);
 
-            var document = testLspServer
-                .TestWorkspace.CurrentSolution.Projects.Single()
-                .Documents.First();
+            var document = testLspServer.TestWorkspace
+                .CurrentSolution
+                .Projects
+                .Single()
+                .Documents
+                .First();
             var sourceText = await document.GetTextAsync();
             AssertJsonEquals(
                 results[0],
@@ -660,9 +668,12 @@ class {|Identifier:A|}
 
             Assert.Equal(2, results.Length);
 
-            var document = testLspServer
-                .TestWorkspace.CurrentSolution.Projects.Single()
-                .Documents.First();
+            var document = testLspServer.TestWorkspace
+                .CurrentSolution
+                .Projects
+                .Single()
+                .Documents
+                .First();
             var sourceText = await document.GetTextAsync();
             AssertJsonEquals(
                 results[0],
@@ -735,9 +746,12 @@ class {|Identifier:A|}
 
             Assert.Equal(2, results.Length);
 
-            var document = testLspServer
-                .TestWorkspace.CurrentSolution.Projects.Single()
-                .Documents.First();
+            var document = testLspServer.TestWorkspace
+                .CurrentSolution
+                .Projects
+                .Single()
+                .Documents
+                .First();
             var sourceText = await document.GetTextAsync();
             AssertJsonEquals(
                 results[0],
@@ -769,7 +783,8 @@ class {|Identifier:A|}
         {
             var allSpans = annotatedSpans
                 .SelectMany(kvp =>
-                    kvp.Value.Select(textSpan => (kind: kvp.Key, textSpan))
+                    kvp.Value
+                        .Select(textSpan => (kind: kvp.Key, textSpan))
                         .OrderBy(t => t.textSpan.Start)
                 )
                 .ToImmutableArray();

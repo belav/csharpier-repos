@@ -732,9 +732,8 @@ namespace System.Workflow.ComponentModel.Compiler
 
         public override Type MakeArrayType()
         {
-            return this.typeProvider.GetType(
-                String.Format(CultureInfo.InvariantCulture, "{0}[]", this.FullName)
-            );
+            return this.typeProvider
+                .GetType(String.Format(CultureInfo.InvariantCulture, "{0}[]", this.FullName));
         }
 
         #endregion

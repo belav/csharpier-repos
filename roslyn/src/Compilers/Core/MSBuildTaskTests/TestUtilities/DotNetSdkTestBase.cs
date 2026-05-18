@@ -68,8 +68,8 @@ public class TestClass
         {
             s_dotnetExeName = "dotnet" + (Path.DirectorySeparatorChar == '/' ? "" : ".exe");
             s_dotnetSdkVersion =
-                typeof(DotNetSdkTests)
-                    .Assembly.GetCustomAttribute<DotNetSdkVersionAttribute>()
+                typeof(DotNetSdkTests).Assembly
+                    .GetCustomAttribute<DotNetSdkVersionAttribute>()
                     ?.Version
                 ?? throw new InvalidOperationException(
                     $"Couldn't find {nameof(DotNetSdkVersionAttribute)}"

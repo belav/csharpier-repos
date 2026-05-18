@@ -29,11 +29,12 @@ namespace System.ServiceModel.Security
                     == ReceiveSecurityHeaderElementCategory.Timestamp
                 )
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new MessageSecurityException(
-                            SR.GetString(SR.TimestampMustOccurLastInSecurityHeaderLayout)
-                        )
-                    );
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperError(
+                            new MessageSecurityException(
+                                SR.GetString(SR.TimestampMustOccurLastInSecurityHeaderLayout)
+                            )
+                        );
                 }
             }
             base.MarkElements(elementManager, messageSecurityMode);

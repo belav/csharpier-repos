@@ -114,9 +114,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
             // it uninitialized.
 
             var sourceMethodTypeParameters = sourceMethod.TypeParameters;
-            var allSourceTypeParameters = container.SourceTypeParameters.Concat(
-                sourceMethodTypeParameters
-            );
+            var allSourceTypeParameters = container.SourceTypeParameters
+                .Concat(sourceMethodTypeParameters);
 
             sourceMethod = new EECompilationContextMethod(DeclaringCompilation, sourceMethod);
 
@@ -129,8 +128,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
                     (TypeParameterSymbol)new EETypeParameterSymbol(this, tp, i, getTypeMap),
                 (object)null
             );
-            _allTypeParameters = container
-                .TypeParameters.Concat(_typeParameters)
+            _allTypeParameters = container.TypeParameters
+                .Concat(_typeParameters)
                 .Concat(_typeParameters);
             this.TypeMap = new TypeMap(
                 allSourceTypeParameters,
@@ -144,9 +143,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
             this.SubstitutedSourceMethod = sourceMethod.AsMember(substitutedSourceType);
             if (sourceMethod.Arity > 0)
             {
-                this.SubstitutedSourceMethod = this.SubstitutedSourceMethod.Construct(
-                    _typeParameters.As<TypeSymbol>()
-                );
+                this.SubstitutedSourceMethod = this.SubstitutedSourceMethod
+                    .Construct(_typeParameters.As<TypeSymbol>());
             }
             TypeParameterChecker.Check(this.SubstitutedSourceMethod, _allTypeParameters);
 
@@ -767,7 +765,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
                             thisParameter: _thisParameter,
                             method: this,
                             methodOrdinal: _methodOrdinal,
-                            substitutedSourceMethod: this.SubstitutedSourceMethod.OriginalDefinition,
+                            substitutedSourceMethod: this.SubstitutedSourceMethod
+                                .OriginalDefinition,
                             closureDebugInfoBuilder: closureDebugInfoBuilder,
                             lambdaDebugInfoBuilder: lambdaDebugInfoBuilder,
                             slotAllocatorOpt: null,

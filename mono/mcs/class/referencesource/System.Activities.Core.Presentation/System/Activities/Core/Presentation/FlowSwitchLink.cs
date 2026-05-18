@@ -147,9 +147,8 @@ namespace System.Activities.Core.Presentation
                     {
                         using (
                             EditingScope es = (EditingScope)
-                                this.flowSwitchModelItem.BeginEdit(
-                                    SR.FlowSwitchCaseRenameEditingScopeDesc
-                                )
+                                this.flowSwitchModelItem
+                                    .BeginEdit(SR.FlowSwitchCaseRenameEditingScopeDesc)
                         )
                         {
                             ModelItem flowNodeMI = GenericFlowSwitchHelper.GetCaseModelItem(
@@ -173,9 +172,8 @@ namespace System.Activities.Core.Presentation
                     {
                         this.internalDefaultCaseChange = true;
                         this.IsDefaultCase = oldValue;
-                        throw FxTrace.Exception.AsError(
-                            new InvalidOperationException(SR.DefaultCaseExists)
-                        );
+                        throw FxTrace.Exception
+                            .AsError(new InvalidOperationException(SR.DefaultCaseExists));
                     }
                 }
                 else
@@ -184,9 +182,8 @@ namespace System.Activities.Core.Presentation
                     {
                         using (
                             EditingScope es = (EditingScope)
-                                this.flowSwitchModelItem.BeginEdit(
-                                    SR.FlowSwitchCaseRenameEditingScopeDesc
-                                )
+                                this.flowSwitchModelItem
+                                    .BeginEdit(SR.FlowSwitchCaseRenameEditingScopeDesc)
                         )
                         {
                             ModelItem defaultCase = this.flowSwitchModelItem
@@ -206,9 +203,8 @@ namespace System.Activities.Core.Presentation
                                 {
                                     this.internalDefaultCaseChange = true;
                                     this.IsDefaultCase = oldValue;
-                                    throw FxTrace.Exception.AsError(
-                                        new InvalidOperationException(errorMessage)
-                                    );
+                                    throw FxTrace.Exception
+                                        .AsError(new InvalidOperationException(errorMessage));
                                 }
                                 uniqueCase = GenericFlowSwitchHelper.GetObject(
                                     caseName,
@@ -242,16 +238,18 @@ namespace System.Activities.Core.Presentation
                                 {
                                     this.internalDefaultCaseChange = true;
                                     this.IsDefaultCase = oldValue;
-                                    throw FxTrace.Exception.AsError(
-                                        new InvalidOperationException(
-                                            SR.InvalidFlowSwitchCaseMessage
-                                        )
-                                    );
+                                    throw FxTrace.Exception
+                                        .AsError(
+                                            new InvalidOperationException(
+                                                SR.InvalidFlowSwitchCaseMessage
+                                            )
+                                        );
                                 }
                             }
 
                             this.flowSwitchModelItem.Properties["Default"].SetValue(null);
-                            this.flowSwitchModelItem.Properties[
+                            this.flowSwitchModelItem
+                                .Properties[
                                     FlowSwitchLabelFeature.DefaultCaseDisplayNamePropertyName
                                 ]
                                 .SetValue(
@@ -302,8 +300,9 @@ namespace System.Activities.Core.Presentation
             }
             else
             {
-                isUndoRedoInProgress = designer
-                    .Context.Services.GetService<UndoEngine>()
+                isUndoRedoInProgress = designer.Context
+                    .Services
+                    .GetService<UndoEngine>()
                     .IsUndoRedoInProgress;
             }
             return isUndoRedoInProgress;
@@ -328,9 +327,8 @@ namespace System.Activities.Core.Presentation
                 {
                     using (
                         EditingScope es = (EditingScope)
-                            this.flowSwitchModelItem.BeginEdit(
-                                SR.FlowSwitchCaseRenameEditingScopeDesc
-                            )
+                            this.flowSwitchModelItem
+                                .BeginEdit(SR.FlowSwitchCaseRenameEditingScopeDesc)
                     )
                     {
                         ModelItem flowElementMI = null;
@@ -368,9 +366,8 @@ namespace System.Activities.Core.Presentation
                 {
                     this.internalChange = true;
                     this.CaseObject = oldValue;
-                    throw FxTrace.Exception.AsError(
-                        new InvalidOperationException(SR.InvalidFlowSwitchCaseMessage)
-                    );
+                    throw FxTrace.Exception
+                        .AsError(new InvalidOperationException(SR.InvalidFlowSwitchCaseMessage));
                 }
             }
             this.internalChange = false;
@@ -464,11 +461,10 @@ namespace System.Activities.Core.Presentation
         {
             this.internalChange = true;
             this.DefaultCaseDisplayName = (string)
-                this
-                    .flowSwitchModelItem.Properties[
-                        FlowSwitchLabelFeature.DefaultCaseDisplayNamePropertyName
-                    ]
-                    .Value.GetCurrentValue();
+                this.flowSwitchModelItem
+                    .Properties[FlowSwitchLabelFeature.DefaultCaseDisplayNamePropertyName]
+                    .Value
+                    .GetCurrentValue();
             this.internalChange = false;
         }
 
@@ -494,14 +490,12 @@ namespace System.Activities.Core.Presentation
                 string newValue = (string)e.NewValue;
                 this.internalChange = true;
                 using (
-                    ModelEditingScope scope = this.flowSwitchModelItem.BeginEdit(
-                        SR.FlowSwitchDefaultCaseDisplayNameEditingScopeDesc
-                    )
+                    ModelEditingScope scope = this.flowSwitchModelItem
+                        .BeginEdit(SR.FlowSwitchDefaultCaseDisplayNameEditingScopeDesc)
                 )
                 {
-                    this.flowSwitchModelItem.Properties[
-                            FlowSwitchLabelFeature.DefaultCaseDisplayNamePropertyName
-                        ]
+                    this.flowSwitchModelItem
+                        .Properties[FlowSwitchLabelFeature.DefaultCaseDisplayNamePropertyName]
                         .SetValue(newValue);
                     scope.Complete();
                 }
@@ -521,14 +515,15 @@ namespace System.Activities.Core.Presentation
         public override MultiBinding CreateConnectorLabelTextBinding()
         {
             MultiBinding result = base.CreateConnectorLabelTextBinding();
-            result.Bindings.Add(
-                new Binding
-                {
-                    Source = this,
-                    Mode = BindingMode.OneWay,
-                    Path = new PropertyPath(this.DefaultCaseDisplayNameProperty),
-                }
-            );
+            result.Bindings
+                .Add(
+                    new Binding
+                    {
+                        Source = this,
+                        Mode = BindingMode.OneWay,
+                        Path = new PropertyPath(this.DefaultCaseDisplayNameProperty),
+                    }
+                );
             return result;
         }
     }

@@ -56,11 +56,9 @@ namespace Mono.CodeContracts.Static.Analysis.ExpressionAnalysis.Decoding
 
         private void Recurse(E expr, ISet<E> set)
         {
-            this.contextProvider.ExpressionContext.Decode<
-                ISet<E>,
-                Dummy,
-                VisitorForVariablesIn<V, E>
-            >(expr, this, set);
+            this.contextProvider
+                .ExpressionContext
+                .Decode<ISet<E>, Dummy, VisitorForVariablesIn<V, E>>(expr, this, set);
         }
 
         #region Implementation of IExpressionILVisitor<E,E,V,ISet<E>,Dummy>

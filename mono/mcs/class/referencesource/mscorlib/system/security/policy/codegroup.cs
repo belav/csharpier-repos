@@ -426,10 +426,10 @@ namespace System.Security.Policy
                 {
                     try
                     {
-                        membershipCondition =
-                            System.Security.Util.XMLUtil.CreateMembershipCondition(
-                                elMembershipCondition
-                            );
+                        membershipCondition = System.Security
+                            .Util
+                            .XMLUtil
+                            .CreateMembershipCondition(elMembershipCondition);
 
                         if (membershipCondition == null)
                             return false;
@@ -600,9 +600,10 @@ namespace System.Security.Policy
                         CodeGroupPositionMarker marker = (CodeGroupPositionMarker)
                             enumerator.Current;
 
-                        CodeGroup group = System.Security.Util.XMLUtil.CreateCodeGroup(
-                            marker.element
-                        );
+                        CodeGroup group = System.Security
+                            .Util
+                            .XMLUtil
+                            .CreateCodeGroup(marker.element);
 
                         if (group != null)
                         {
@@ -621,7 +622,8 @@ namespace System.Security.Policy
 
                             // Add the element back into the child list in the proper spot.
 
-                            m_element.InternalChildren.Insert(marker.elementIndex, marker.element);
+                            m_element.InternalChildren
+                                .Insert(marker.elementIndex, marker.element);
                         }
                         else
                         {

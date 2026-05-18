@@ -10,8 +10,7 @@ namespace Microsoft.Extensions.DependencyInjection
     {
         public static Microsoft.Extensions.Options.OptionsBuilder<TOptions> ValidateOnStart<
             [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembers(
-                System
-                    .Diagnostics
+                System.Diagnostics
                     .CodeAnalysis
                     .DynamicallyAccessedMemberTypes
                     .PublicParameterlessConstructor
@@ -35,8 +34,7 @@ namespace Microsoft.Extensions.DependencyInjection
 
         public static Microsoft.Extensions.Options.OptionsBuilder<TOptions> AddOptionsWithValidateOnStart<
             [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembers(
-                System
-                    .Diagnostics
+                System.Diagnostics
                     .CodeAnalysis
                     .DynamicallyAccessedMemberTypes
                     .PublicParameterlessConstructor
@@ -53,8 +51,7 @@ namespace Microsoft.Extensions.DependencyInjection
 
         public static Microsoft.Extensions.Options.OptionsBuilder<TOptions> AddOptionsWithValidateOnStart<
             [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembers(
-                System
-                    .Diagnostics
+                System.Diagnostics
                     .CodeAnalysis
                     .DynamicallyAccessedMemberTypes
                     .PublicParameterlessConstructor
@@ -447,8 +444,7 @@ namespace Microsoft.Extensions.Options
 
     public partial interface IOptionsFactory<
         [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembers(
-            System
-                .Diagnostics
+            System.Diagnostics
                 .CodeAnalysis
                 .DynamicallyAccessedMemberTypes
                 .PublicParameterlessConstructor
@@ -462,8 +458,7 @@ namespace Microsoft.Extensions.Options
 
     public partial interface IOptionsMonitorCache<
         [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembers(
-            System
-                .Diagnostics
+            System.Diagnostics
                 .CodeAnalysis
                 .DynamicallyAccessedMemberTypes
                 .PublicParameterlessConstructor
@@ -480,8 +475,7 @@ namespace Microsoft.Extensions.Options
 
     public partial interface IOptionsMonitor<
         [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembers(
-            System
-                .Diagnostics
+            System.Diagnostics
                 .CodeAnalysis
                 .DynamicallyAccessedMemberTypes
                 .PublicParameterlessConstructor
@@ -496,8 +490,7 @@ namespace Microsoft.Extensions.Options
 
     public partial interface IOptionsSnapshot<
         [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembers(
-            System
-                .Diagnostics
+            System.Diagnostics
                 .CodeAnalysis
                 .DynamicallyAccessedMemberTypes
                 .PublicParameterlessConstructor
@@ -511,8 +504,7 @@ namespace Microsoft.Extensions.Options
 
     public partial interface IOptions<
         [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembers(
-            System
-                .Diagnostics
+            System.Diagnostics
                 .CodeAnalysis
                 .DynamicallyAccessedMemberTypes
                 .PublicParameterlessConstructor
@@ -547,8 +539,7 @@ namespace Microsoft.Extensions.Options
 
         public static Microsoft.Extensions.Options.IOptions<TOptions> Create<
             [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembers(
-                System
-                    .Diagnostics
+                System.Diagnostics
                     .CodeAnalysis
                     .DynamicallyAccessedMemberTypes
                     .PublicParameterlessConstructor
@@ -853,8 +844,7 @@ namespace Microsoft.Extensions.Options
 
     public partial class OptionsCache<
         [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembers(
-            System
-                .Diagnostics
+            System.Diagnostics
                 .CodeAnalysis
                 .DynamicallyAccessedMemberTypes
                 .PublicParameterlessConstructor
@@ -885,8 +875,7 @@ namespace Microsoft.Extensions.Options
 
     public partial class OptionsFactory<
         [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembers(
-            System
-                .Diagnostics
+            System.Diagnostics
                 .CodeAnalysis
                 .DynamicallyAccessedMemberTypes
                 .PublicParameterlessConstructor
@@ -919,8 +908,7 @@ namespace Microsoft.Extensions.Options
 
     public partial class OptionsManager<
         [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembers(
-            System
-                .Diagnostics
+            System.Diagnostics
                 .CodeAnalysis
                 .DynamicallyAccessedMemberTypes
                 .PublicParameterlessConstructor
@@ -948,8 +936,7 @@ namespace Microsoft.Extensions.Options
     {
         public static System.IDisposable? OnChange<
             [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembers(
-                System
-                    .Diagnostics
+                System.Diagnostics
                     .CodeAnalysis
                     .DynamicallyAccessedMemberTypes
                     .PublicParameterlessConstructor
@@ -966,8 +953,7 @@ namespace Microsoft.Extensions.Options
 
     public partial class OptionsMonitor<
         [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembers(
-            System
-                .Diagnostics
+            System.Diagnostics
                 .CodeAnalysis
                 .DynamicallyAccessedMemberTypes
                 .PublicParameterlessConstructor
@@ -1031,8 +1017,7 @@ namespace Microsoft.Extensions.Options
 
     public partial class OptionsWrapper<
         [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembers(
-            System
-                .Diagnostics
+            System.Diagnostics
                 .CodeAnalysis
                 .DynamicallyAccessedMemberTypes
                 .PublicParameterlessConstructor

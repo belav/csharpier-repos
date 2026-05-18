@@ -37,8 +37,7 @@ namespace System.Xml.XPath.DataBinding
                 XmlSchemaParticle particle = null;
                 Shape rootShape = null;
 
-                XmlSchemaContentType contentType = complexType
-                    .ElementDecl
+                XmlSchemaContentType contentType = complexType.ElementDecl
                     .ContentValidator
                     .ContentType;
                 switch (contentType)

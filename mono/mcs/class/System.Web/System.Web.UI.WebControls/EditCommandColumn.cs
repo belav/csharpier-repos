@@ -127,9 +127,8 @@ namespace System.Web.UI.WebControls
 
                 case ListItemType.EditItem:
                 {
-                    cell.Controls.Add(
-                        CreateButton(ButtonType, UpdateText, "Update", CausesValidation)
-                    );
+                    cell.Controls
+                        .Add(CreateButton(ButtonType, UpdateText, "Update", CausesValidation));
                     cell.Controls.Add(new LiteralControl("&nbsp;"));
                     cell.Controls.Add(CreateButton(ButtonType, CancelText, "Cancel", false));
                     break;

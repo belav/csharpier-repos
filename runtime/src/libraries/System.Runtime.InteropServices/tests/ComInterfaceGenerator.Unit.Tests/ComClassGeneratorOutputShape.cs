@@ -103,9 +103,8 @@ namespace ComInterfaceGenerator.Unit.Tests
 
             private static void VerifyShape(Compilation comp, string userDefinedClassMetadataName)
             {
-                INamedTypeSymbol? userDefinedClass = comp.Assembly.GetTypeByMetadataName(
-                    userDefinedClassMetadataName
-                );
+                INamedTypeSymbol? userDefinedClass = comp.Assembly
+                    .GetTypeByMetadataName(userDefinedClassMetadataName);
                 Assert.NotNull(userDefinedClass);
 
                 INamedTypeSymbol? comExposedClassAttribute = comp.GetTypeByMetadataName(
@@ -117,10 +116,11 @@ namespace ComInterfaceGenerator.Unit.Tests
                 AttributeData iUnknownDerivedAttribute = Assert.Single(
                     userDefinedClass.GetAttributes(),
                     attr =>
-                        SymbolEqualityComparer.Default.Equals(
-                            attr.AttributeClass?.OriginalDefinition,
-                            comExposedClassAttribute
-                        )
+                        SymbolEqualityComparer.Default
+                            .Equals(
+                                attr.AttributeClass?.OriginalDefinition,
+                                comExposedClassAttribute
+                            )
                 );
 
                 Assert.Collection(

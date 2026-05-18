@@ -226,10 +226,11 @@ namespace System.Reflection.Runtime.TypeInfos.NativeFormat
                 )
                 {
                     RuntimeTypeInfo genericParameterType =
-                        NativeFormat.NativeFormatRuntimeGenericParameterTypeInfoForTypes.GetRuntimeGenericParameterTypeInfoForTypes(
-                            this,
-                            genericParameterHandle
-                        );
+                        NativeFormat.NativeFormatRuntimeGenericParameterTypeInfoForTypes
+                            .GetRuntimeGenericParameterTypeInfoForTypes(
+                                this,
+                                genericParameterHandle
+                            );
                     genericTypeParameters.Add(genericParameterType);
                 }
 

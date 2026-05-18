@@ -328,11 +328,12 @@ static class PathExtensions
         }
         else
         {
-            Console.Error.WriteLine(
-                "Failed deleting {0} output folders in {1} msecs",
-                outputFolders.Length,
-                stopwatch.ElapsedMilliseconds
-            );
+            Console.Error
+                .WriteLine(
+                    "Failed deleting {0} output folders in {1} msecs",
+                    outputFolders.Length,
+                    stopwatch.ElapsedMilliseconds
+                );
             return false;
         }
     }

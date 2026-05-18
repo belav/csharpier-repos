@@ -19,13 +19,14 @@ namespace System.Globalization
             char* buffer = stackalloc char[CULTURE_INFO_BUFFER_LEN];
             int exception;
             object exResult;
-            int resultLength = Interop.JsGlobalization.GetCultureInfo(
-                localeName,
-                buffer,
-                CULTURE_INFO_BUFFER_LEN,
-                out exception,
-                out exResult
-            );
+            int resultLength = Interop.JsGlobalization
+                .GetCultureInfo(
+                    localeName,
+                    buffer,
+                    CULTURE_INFO_BUFFER_LEN,
+                    out exception,
+                    out exResult
+                );
             if (exception != 0)
                 throw new Exception((string)exResult);
             string result = new string(buffer, 0, resultLength);
@@ -43,11 +44,8 @@ namespace System.Globalization
 
         private static unsafe int GetFirstDayOfWeek(string localeName)
         {
-            int result = Interop.JsGlobalization.GetFirstDayOfWeek(
-                localeName,
-                out int exception,
-                out object ex_result
-            );
+            int result = Interop.JsGlobalization
+                .GetFirstDayOfWeek(localeName, out int exception, out object ex_result);
             if (exception != 0)
             {
                 // Failed, just use 0
@@ -59,11 +57,8 @@ namespace System.Globalization
 
         private static unsafe int GetFirstWeekOfYear(string localeName)
         {
-            int result = Interop.JsGlobalization.GetFirstWeekOfYear(
-                localeName,
-                out int exception,
-                out object ex_result
-            );
+            int result = Interop.JsGlobalization
+                .GetFirstWeekOfYear(localeName, out int exception, out object ex_result);
             if (exception != 0)
             {
                 // Failed, just use 0

@@ -97,8 +97,8 @@ namespace MonoTests.System.Xml
         [Test]
         public void Ctor_Id()
         {
-            byte[] buf = Encoding
-                .UTF8.GetBytes("Hello!")
+            byte[] buf = Encoding.UTF8
+                .GetBytes("Hello!")
                 .Concat(new Guid().ToByteArray())
                 .ToArray();
             var g = new UniqueId(buf, "Hello!".Length);

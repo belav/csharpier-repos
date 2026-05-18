@@ -88,12 +88,13 @@ namespace System.Web.Services.Description
             }
             WebMethodAttribute methodAttr = Method.MethodAttribute;
 
-            OperationBinding.Extensions.Add(
-                CreateSoapOperationBinding(
-                    soapMethod.rpc ? SoapBindingStyle.Rpc : SoapBindingStyle.Document,
-                    soapMethod.action
-                )
-            );
+            OperationBinding.Extensions
+                .Add(
+                    CreateSoapOperationBinding(
+                        soapMethod.rpc ? SoapBindingStyle.Rpc : SoapBindingStyle.Document,
+                        soapMethod.action
+                    )
+                );
 
             CreateMessage(
                 soapMethod.rpc,
@@ -271,9 +272,8 @@ namespace System.Web.Services.Description
                 }
             }
 
-            messageBinding.Extensions.Add(
-                CreateSoapBodyBinding(SoapBindingUse.Encoded, members.Namespace)
-            );
+            messageBinding.Extensions
+                .Add(CreateSoapBodyBinding(SoapBindingUse.Encoded, members.Namespace));
         }
 
         void CreateLiteralMessage(
@@ -342,9 +342,8 @@ namespace System.Web.Services.Description
                     }
                 }
             }
-            messageBinding.Extensions.Add(
-                CreateSoapBodyBinding(SoapBindingUse.Literal, rpc ? members.Namespace : null)
-            );
+            messageBinding.Extensions
+                .Add(CreateSoapBodyBinding(SoapBindingUse.Literal, rpc ? members.Namespace : null));
         }
 
         static string[] GetParameterOrder(LogicalMethodInfo methodInfo)
@@ -383,8 +382,7 @@ namespace System.Web.Services.Description
         {
             if (extensions == null)
             {
-                TypeElementCollection extensionTypes = WebServicesSection
-                    .Current
+                TypeElementCollection extensionTypes = WebServicesSection.Current
                     .SoapExtensionReflectorTypes;
                 extensions = new SoapExtensionReflector[extensionTypes.Count];
                 for (int i = 0; i < extensions.Length; i++)
@@ -405,8 +403,7 @@ namespace System.Web.Services.Description
         {
             if (extensions == null)
             {
-                TypeElementCollection extensionTypes = WebServicesSection
-                    .Current
+                TypeElementCollection extensionTypes = WebServicesSection.Current
                     .SoapExtensionReflectorTypes;
                 extensions = new SoapExtensionReflector[extensionTypes.Count];
                 for (int i = 0; i < extensions.Length; i++)
@@ -437,15 +434,16 @@ namespace System.Web.Services.Description
             soapAddress.Location = serviceUrl;
             if (this.UriFixups != null)
             {
-                this.UriFixups.Add(
-                    delegate(Uri current)
-                    {
-                        soapAddress.Location = DiscoveryServerType.CombineUris(
-                            current,
-                            soapAddress.Location
-                        );
-                    }
-                );
+                this.UriFixups
+                    .Add(
+                        delegate(Uri current)
+                        {
+                            soapAddress.Location = DiscoveryServerType.CombineUris(
+                                current,
+                                soapAddress.Location
+                            );
+                        }
+                    );
             }
             return soapAddress;
         }

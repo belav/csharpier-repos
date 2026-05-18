@@ -25,11 +25,8 @@ namespace Mono.Linker
                 return;
 
             if (
-                assembly.MainModule.GetMatchingExportedType(
-                    typeToMatch,
-                    _context,
-                    out var exportedType
-                )
+                assembly.MainModule
+                    .GetMatchingExportedType(typeToMatch, _context, out var exportedType)
             )
                 MarkExportedType(exportedType, assembly.MainModule, reason, origin);
         }
@@ -58,11 +55,8 @@ namespace Mono.Linker
                 if (
                     assembly != null
                     && _context.TryResolve(typeReference) is TypeDefinition typeDefinition
-                    && assembly.MainModule.GetMatchingExportedType(
-                        typeDefinition,
-                        _context,
-                        out var exportedType
-                    )
+                    && assembly.MainModule
+                        .GetMatchingExportedType(typeDefinition, _context, out var exportedType)
                 )
                     MarkExportedType(
                         exportedType,

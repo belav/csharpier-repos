@@ -54,9 +54,8 @@ namespace System.IO.Packaging
             // Create new Zip item.
             // We need to remove the leading "/" character at the beginning of the part name.
             // The partUri object must be a ValidatedPartUri
-            string zipItemName = ((PackUriHelper.ValidatedPartUri)partUri).PartUriString.Substring(
-                1
-            );
+            string zipItemName = ((PackUriHelper.ValidatedPartUri)partUri).PartUriString
+                .Substring(1);
 
             ZipArchiveEntry zipArchiveEntry = _zipArchive.CreateEntry(zipItemName, level);
 
@@ -920,8 +919,8 @@ namespace System.IO.Packaging
                 foreach (ZipArchiveEntry zipFileInfo in zipFiles)
                 {
                     if (
-                        zipFileInfo
-                            .Name.ToUpperInvariant()
+                        zipFileInfo.Name
+                            .ToUpperInvariant()
                             .StartsWith(ContentTypesFileUpperInvariant, StringComparison.Ordinal)
                     )
                     {

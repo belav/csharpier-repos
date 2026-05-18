@@ -201,8 +201,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         {
             if (member.IsStatic && !member.IsAbstract && !member.IsVirtual)
             {
-                return MessageID.IDS_FeatureVarianceSafetyForStaticInterfaceMembers.RequiredVersion()
-                    <= member.DeclaringCompilation.LanguageVersion;
+                return MessageID.IDS_FeatureVarianceSafetyForStaticInterfaceMembers
+                        .RequiredVersion() <= member.DeclaringCompilation.LanguageVersion;
             }
 
             return false;
@@ -587,7 +587,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     actualVariance.Localize(),
                     expectedVariance.Localize(),
                     new CSharpRequiredLanguageVersion(
-                        MessageID.IDS_FeatureVarianceSafetyForStaticInterfaceMembers.RequiredVersion()
+                        MessageID.IDS_FeatureVarianceSafetyForStaticInterfaceMembers
+                            .RequiredVersion()
                     )
                 );
             }

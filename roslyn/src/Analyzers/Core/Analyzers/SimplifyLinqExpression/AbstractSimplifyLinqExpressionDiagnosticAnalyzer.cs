@@ -160,8 +160,9 @@ namespace Microsoft.CodeAnalysis.SimplifyLinqExpression
                 return;
 
             if (
-                context
-                    .Operation.Syntax.GetDiagnostics()
+                context.Operation
+                    .Syntax
+                    .GetDiagnostics()
                     .Any(diagnostic => diagnostic.Severity == DiagnosticSeverity.Error)
             )
             {

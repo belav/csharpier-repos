@@ -309,8 +309,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SymbolId
             var mtsym20_3 = mem20_2.Parameters[1].Type;
 
             // ====================
-            var typeTest = comp40
-                .SourceModule.GlobalNamespace.GetTypeMembers("Test")
+            var typeTest = comp40.SourceModule
+                .GlobalNamespace
+                .GetTypeMembers("Test")
                 .FirstOrDefault();
             var mem40 = typeTest.GetMembers("Main").Single() as IMethodSymbol;
             var list = GetBlockSyntaxList(mem40);

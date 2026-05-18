@@ -190,56 +190,26 @@ namespace Mono.CodeContracts.Static.ControlFlow
                 case BranchOperator.Bge:
                     return this.visitor.Binary(pc, BinaryOperator.Cge, dest, value1, value2, data);
                 case BranchOperator.Bge_Un:
-                    return this.visitor.Binary(
-                        pc,
-                        BinaryOperator.Cge_Un,
-                        dest,
-                        value1,
-                        value2,
-                        data
-                    );
+                    return this.visitor
+                        .Binary(pc, BinaryOperator.Cge_Un, dest, value1, value2, data);
                 case BranchOperator.Bgt:
                     return this.visitor.Binary(pc, BinaryOperator.Cgt, dest, value1, value2, data);
                 case BranchOperator.Bgt_Un:
-                    return this.visitor.Binary(
-                        pc,
-                        BinaryOperator.Cgt_Un,
-                        dest,
-                        value1,
-                        value2,
-                        data
-                    );
+                    return this.visitor
+                        .Binary(pc, BinaryOperator.Cgt_Un, dest, value1, value2, data);
                 case BranchOperator.Ble:
                     return this.visitor.Binary(pc, BinaryOperator.Cle, dest, value1, value2, data);
                 case BranchOperator.Ble_Un:
-                    return this.visitor.Binary(
-                        pc,
-                        BinaryOperator.Cle_Un,
-                        dest,
-                        value1,
-                        value2,
-                        data
-                    );
+                    return this.visitor
+                        .Binary(pc, BinaryOperator.Cle_Un, dest, value1, value2, data);
                 case BranchOperator.Blt:
                     return this.visitor.Binary(pc, BinaryOperator.Clt, dest, value1, value2, data);
                 case BranchOperator.Blt_Un:
-                    return this.visitor.Binary(
-                        pc,
-                        BinaryOperator.Clt_Un,
-                        dest,
-                        value1,
-                        value2,
-                        data
-                    );
+                    return this.visitor
+                        .Binary(pc, BinaryOperator.Clt_Un, dest, value1, value2, data);
                 case BranchOperator.Bne_un:
-                    return this.visitor.Binary(
-                        pc,
-                        BinaryOperator.Cne_Un,
-                        dest,
-                        value1,
-                        value2,
-                        data
-                    );
+                    return this.visitor
+                        .Binary(pc, BinaryOperator.Cne_Un, dest, value1, value2, data);
                 default:
                     return this.visitor.Nop(pc, data);
             }
@@ -292,16 +262,8 @@ namespace Mono.CodeContracts.Static.ControlFlow
             where TypeList : IIndexable<TypeNode>
             where ArgList : IIndexable<Dummy>
         {
-            return this.visitor.Calli(
-                pc,
-                returnType,
-                argTypes,
-                instance,
-                dest,
-                functionPointer,
-                args,
-                data
-            );
+            return this.visitor
+                .Calli(pc, returnType, argTypes, instance, dest, functionPointer, args, data);
         }
 
         public Result CheckFinite(APC pc, Dummy dest, Dummy source, Data data)
@@ -476,15 +438,8 @@ namespace Mono.CodeContracts.Static.ControlFlow
             where TypeList : IIndexable<TypeNode>
             where ArgList : IIndexable<Dummy>
         {
-            return this.visitor.ConstrainedCallvirt(
-                pc,
-                method,
-                constraint,
-                extraVarargs,
-                dest,
-                args,
-                data
-            );
+            return this.visitor
+                .ConstrainedCallvirt(pc, method, constraint, extraVarargs, dest, args, data);
         }
 
         public Result CastClass(APC pc, TypeNode type, Dummy dest, Dummy obj, Data data)
@@ -565,10 +520,8 @@ namespace Mono.CodeContracts.Static.ControlFlow
         {
             return args.Count == 2
                 && this.meta_data_provider.IsStatic(method)
-                && this.meta_data_provider.Equal(
-                    declaringType,
-                    this.meta_data_provider.System_Object
-                )
+                && this.meta_data_provider
+                    .Equal(declaringType, this.meta_data_provider.System_Object)
                 && this.meta_data_provider.Name(method) == "ReferenceEquals";
         }
     }

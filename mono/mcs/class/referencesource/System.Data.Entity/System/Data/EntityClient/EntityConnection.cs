@@ -112,25 +112,30 @@ namespace System.Data.EntityClient
             if (!workspace.IsItemCollectionAlreadyRegistered(DataSpace.CSpace))
             {
                 throw EntityUtil.Argument(
-                    System.Data.Entity.Strings.EntityClient_ItemCollectionsNotRegisteredInWorkspace(
-                        "EdmItemCollection"
-                    )
+                    System.Data
+                        .Entity
+                        .Strings
+                        .EntityClient_ItemCollectionsNotRegisteredInWorkspace("EdmItemCollection")
                 );
             }
             if (!workspace.IsItemCollectionAlreadyRegistered(DataSpace.SSpace))
             {
                 throw EntityUtil.Argument(
-                    System.Data.Entity.Strings.EntityClient_ItemCollectionsNotRegisteredInWorkspace(
-                        "StoreItemCollection"
-                    )
+                    System.Data
+                        .Entity
+                        .Strings
+                        .EntityClient_ItemCollectionsNotRegisteredInWorkspace("StoreItemCollection")
                 );
             }
             if (!workspace.IsItemCollectionAlreadyRegistered(DataSpace.CSSpace))
             {
                 throw EntityUtil.Argument(
-                    System.Data.Entity.Strings.EntityClient_ItemCollectionsNotRegisteredInWorkspace(
-                        "StorageMappingItemCollection"
-                    )
+                    System.Data
+                        .Entity
+                        .Strings
+                        .EntityClient_ItemCollectionsNotRegisteredInWorkspace(
+                            "StorageMappingItemCollection"
+                        )
                 );
             }
 
@@ -367,8 +372,7 @@ namespace System.Data.EntityClient
             {
                 if (this._storeConnection == null)
                     throw EntityUtil.InvalidOperation(
-                        System
-                            .Data
+                        System.Data
                             .Entity
                             .Strings
                             .EntityClient_ConnectionStringNeededBeforeOperation
@@ -834,10 +838,13 @@ namespace System.Data.EntityClient
             if (storeTransaction == null)
             {
                 throw EntityUtil.ProviderIncompatible(
-                    System.Data.Entity.Strings.EntityClient_ReturnedNullOnProviderMethod(
-                        "BeginTransaction",
-                        _storeConnection.GetType().Name
-                    )
+                    System.Data
+                        .Entity
+                        .Strings
+                        .EntityClient_ReturnedNullOnProviderMethod(
+                            "BeginTransaction",
+                            _storeConnection.GetType().Name
+                        )
                 );
             }
 
@@ -984,8 +991,7 @@ namespace System.Data.EntityClient
                     if (1 < userConnectionOptions.Parsetable.Count)
                     {
                         throw EntityUtil.Argument(
-                            System
-                                .Data
+                            System.Data
                                 .Entity
                                 .Strings
                                 .EntityClient_ExtraParametersWithNamedConnection
@@ -1018,9 +1024,10 @@ namespace System.Data.EntityClient
                     if (!string.IsNullOrEmpty(nestedNamedConnection))
                     {
                         throw EntityUtil.Argument(
-                            System.Data.Entity.Strings.EntityClient_NestedNamedConnection(
-                                namedConnection
-                            )
+                            System.Data
+                                .Entity
+                                .Strings
+                                .EntityClient_NestedNamedConnection(namedConnection)
                         );
                     }
                 }
@@ -1484,10 +1491,13 @@ namespace System.Data.EntityClient
             if (storeConnection == null)
             {
                 throw EntityUtil.ProviderIncompatible(
-                    System.Data.Entity.Strings.EntityClient_ReturnedNullOnProviderMethod(
-                        "CreateConnection",
-                        factory.GetType().Name
-                    )
+                    System.Data
+                        .Entity
+                        .Strings
+                        .EntityClient_ReturnedNullOnProviderMethod(
+                            "CreateConnection",
+                            factory.GetType().Name
+                        )
                 );
             }
             return storeConnection;

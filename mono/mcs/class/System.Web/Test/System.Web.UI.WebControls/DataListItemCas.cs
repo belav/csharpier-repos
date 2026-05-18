@@ -68,9 +68,8 @@ namespace MonoCasTests.System.Web.UI.WebControls
             AspNetHostingPermissionLevel level
         )
         {
-            ConstructorInfo ci = this.Type.GetConstructor(
-                new Type[2] { typeof(int), typeof(ListItemType) }
-            );
+            ConstructorInfo ci = this.Type
+                .GetConstructor(new Type[2] { typeof(int), typeof(ListItemType) });
             Assert.IsNotNull(ci, ".ctor(int,ListItemType)");
             return ci.Invoke(new object[2] { 0, ListItemType.Item });
         }

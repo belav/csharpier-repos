@@ -169,9 +169,8 @@ namespace System.Speech.Synthesis
             if (emphasis != PromptEmphasis.NotSet)
             {
                 emphasisElement._attributes = new Collection<AttributeItem>();
-                emphasisElement._attributes.Add(
-                    new AttributeItem("level", emphasis.ToString().ToLowerInvariant())
-                );
+                emphasisElement._attributes
+                    .Add(new AttributeItem("level", emphasis.ToString().ToLowerInvariant()));
             }
         }
 
@@ -195,9 +194,8 @@ namespace System.Speech.Synthesis
                 _elements.Add(emphasisElement);
 
                 emphasisElement._attributes = new Collection<AttributeItem>();
-                emphasisElement._attributes.Add(
-                    new AttributeItem("level", style.Emphasis.ToString().ToLowerInvariant())
-                );
+                emphasisElement._attributes
+                    .Add(new AttributeItem("level", style.Emphasis.ToString().ToLowerInvariant()));
 
                 // Set the expected children and mark the element used
                 possibleChildren = SsmlElement.AudioMarkTextWithStyle;
@@ -323,29 +321,30 @@ namespace System.Speech.Synthesis
 
             if (voice.Gender != VoiceGender.NotSet)
             {
-                startVoice._attributes.Add(
-                    new AttributeItem("gender", voice.Gender.ToString().ToLowerInvariant())
-                );
+                startVoice._attributes
+                    .Add(new AttributeItem("gender", voice.Gender.ToString().ToLowerInvariant()));
             }
 
             if (voice.Age != VoiceAge.NotSet)
             {
-                startVoice._attributes.Add(
-                    new AttributeItem(
-                        "age",
-                        ((int)voice.Age).ToString(CultureInfo.InvariantCulture)
-                    )
-                );
+                startVoice._attributes
+                    .Add(
+                        new AttributeItem(
+                            "age",
+                            ((int)voice.Age).ToString(CultureInfo.InvariantCulture)
+                        )
+                    );
             }
 
             if (voice.Variant >= 0)
             {
-                startVoice._attributes.Add(
-                    new AttributeItem(
-                        "variant",
-                        voice.Variant.ToString(CultureInfo.InvariantCulture)
-                    )
-                );
+                startVoice._attributes
+                    .Add(
+                        new AttributeItem(
+                            "variant",
+                            voice.Variant.ToString(CultureInfo.InvariantCulture)
+                        )
+                    );
             }
 
             _elementStack.Push(
@@ -716,9 +715,8 @@ namespace System.Speech.Synthesis
             _elements.Add(breakElement);
 
             breakElement._attributes = new Collection<AttributeItem>();
-            breakElement._attributes.Add(
-                new AttributeItem("time", duration.TotalMilliseconds + "ms")
-            );
+            breakElement._attributes
+                .Add(new AttributeItem("time", duration.TotalMilliseconds + "ms"));
         }
 
         // <audio>

@@ -568,10 +568,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library.ObjectB
                         builder.Add(namespaceListItem);
                     }
                     else if (
-                        namespaceListItem.SearchText.IndexOf(
-                            searchString,
-                            StringComparison.OrdinalIgnoreCase
-                        ) >= 0
+                        namespaceListItem.SearchText
+                            .IndexOf(searchString, StringComparison.OrdinalIgnoreCase) >= 0
                     )
                     {
                         builder.Add(namespaceListItem);
@@ -1014,10 +1012,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library.ObjectB
                         builder.Add(typeListItem);
                     }
                     else if (
-                        typeListItem.SearchText.IndexOf(
-                            searchString,
-                            StringComparison.OrdinalIgnoreCase
-                        ) >= 0
+                        typeListItem.SearchText
+                            .IndexOf(searchString, StringComparison.OrdinalIgnoreCase) >= 0
                     )
                     {
                         builder.Add(typeListItem);
@@ -1066,10 +1062,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library.ObjectB
                             builder.Add(memberListItem);
                         }
                         else if (
-                            memberListItem.SearchText.IndexOf(
-                                searchString,
-                                StringComparison.OrdinalIgnoreCase
-                            ) >= 0
+                            memberListItem.SearchText
+                                .IndexOf(searchString, StringComparison.OrdinalIgnoreCase) >= 0
                         )
                         {
                             builder.Add(memberListItem);

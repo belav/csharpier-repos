@@ -33,8 +33,8 @@ namespace System.ServiceModel.Dispatcher
             for (int i = 0; i < endpoint.Contract.Operations.Count; i++)
             {
                 OperationDescription operationDescription = endpoint.Contract.Operations[i];
-                TransactionFlowAttribute transactionFlow =
-                    operationDescription.Behaviors.Find<TransactionFlowAttribute>();
+                TransactionFlowAttribute transactionFlow = operationDescription.Behaviors
+                    .Find<TransactionFlowAttribute>();
                 if (
                     transactionFlow != null
                     && transactionFlow.Transactions == TransactionFlowOption.Mandatory
@@ -48,24 +48,25 @@ namespace System.ServiceModel.Dispatcher
             if (anOperationRequiresTxFlow)
             {
                 CustomBinding binding = new CustomBinding(endpoint.Binding);
-                TransactionFlowBindingElement transactionFlowBindingElement =
-                    binding.Elements.Find<TransactionFlowBindingElement>();
+                TransactionFlowBindingElement transactionFlowBindingElement = binding.Elements
+                    .Find<TransactionFlowBindingElement>();
 
                 if (
                     transactionFlowBindingElement == null
                     || !transactionFlowBindingElement.Transactions
                 )
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(
-                            String.Format(
-                                Globalization.CultureInfo.CurrentCulture,
-                                SR.GetString(resource),
-                                name,
-                                binding.Name
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(
+                                String.Format(
+                                    Globalization.CultureInfo.CurrentCulture,
+                                    SR.GetString(resource),
+                                    name,
+                                    binding.Name
+                                )
                             )
-                        )
-                    );
+                        );
                 }
             }
         }
@@ -87,15 +88,16 @@ namespace System.ServiceModel.Dispatcher
             );
             if (autoCompleteFalseOperation != null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(
-                        SR.GetString(
-                            SR.SFxTransactionAutoCompleteFalseOnCallbackContract,
-                            autoCompleteFalseOperation.Name,
-                            serviceEndpoint.Contract.Name
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(
+                                SR.SFxTransactionAutoCompleteFalseOnCallbackContract,
+                                autoCompleteFalseOperation.Name,
+                                serviceEndpoint.Contract.Name
+                            )
                         )
-                    )
-                );
+                    );
             }
         }
 
@@ -105,32 +107,34 @@ namespace System.ServiceModel.Dispatcher
             // transaction-related properties on the CallbackBehaviorAttribute
             if (!HasTransactedOperations(endpoint))
             {
-                CallbackBehaviorAttribute attribute =
-                    endpoint.Behaviors.Find<CallbackBehaviorAttribute>();
+                CallbackBehaviorAttribute attribute = endpoint.Behaviors
+                    .Find<CallbackBehaviorAttribute>();
                 if (attribute != null)
                 {
                     if (attribute.TransactionTimeoutSet)
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new InvalidOperationException(
-                                SR.GetString(
-                                    SR.SFxTransactionTransactionTimeoutNeedsScope,
-                                    endpoint.Contract.Name
+                        throw DiagnosticUtility.ExceptionUtility
+                            .ThrowHelperError(
+                                new InvalidOperationException(
+                                    SR.GetString(
+                                        SR.SFxTransactionTransactionTimeoutNeedsScope,
+                                        endpoint.Contract.Name
+                                    )
                                 )
-                            )
-                        );
+                            );
                     }
 
                     if (attribute.IsolationLevelSet)
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new InvalidOperationException(
-                                SR.GetString(
-                                    SR.SFxTransactionIsolationLevelNeedsScope,
-                                    endpoint.Contract.Name
+                        throw DiagnosticUtility.ExceptionUtility
+                            .ThrowHelperError(
+                                new InvalidOperationException(
+                                    SR.GetString(
+                                        SR.SFxTransactionIsolationLevelNeedsScope,
+                                        endpoint.Contract.Name
+                                    )
                                 )
-                            )
-                        );
+                            );
                     }
                 }
             }
@@ -209,22 +213,23 @@ namespace System.ServiceModel.Dispatcher
             if (autoCompleteFalseOperation != null)
             {
                 // Does the service have InstanceContextMode.PerSession or Shareable?
-                ServiceBehaviorAttribute serviceBehavior =
-                    service.Behaviors.Find<ServiceBehaviorAttribute>();
+                ServiceBehaviorAttribute serviceBehavior = service.Behaviors
+                    .Find<ServiceBehaviorAttribute>();
                 if (serviceBehavior != null)
                 {
                     InstanceContextMode instanceMode = serviceBehavior.InstanceContextMode;
                     if (instanceMode != InstanceContextMode.PerSession)
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new InvalidOperationException(
-                                SR.GetString(
-                                    SR.SFxTransactionAutoCompleteFalseAndInstanceContextMode,
-                                    endpoint.Contract.Name,
-                                    autoCompleteFalseOperation.Name
+                        throw DiagnosticUtility.ExceptionUtility
+                            .ThrowHelperError(
+                                new InvalidOperationException(
+                                    SR.GetString(
+                                        SR.SFxTransactionAutoCompleteFalseAndInstanceContextMode,
+                                        endpoint.Contract.Name,
+                                        autoCompleteFalseOperation.Name
+                                    )
                                 )
-                            )
-                        );
+                            );
                     }
                 }
 
@@ -233,15 +238,16 @@ namespace System.ServiceModel.Dispatcher
                 {
                     if (!RequiresSessions(endpoint))
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new InvalidOperationException(
-                                SR.GetString(
-                                    SR.SFxTransactionAutoCompleteFalseAndSupportsSession,
-                                    endpoint.Contract.Name,
-                                    autoCompleteFalseOperation.Name
+                        throw DiagnosticUtility.ExceptionUtility
+                            .ThrowHelperError(
+                                new InvalidOperationException(
+                                    SR.GetString(
+                                        SR.SFxTransactionAutoCompleteFalseAndSupportsSession,
+                                        endpoint.Contract.Name,
+                                        autoCompleteFalseOperation.Name
+                                    )
                                 )
-                            )
-                        );
+                            );
                     }
                 }
             }
@@ -261,8 +267,8 @@ namespace System.ServiceModel.Dispatcher
 
         void ValidateTransactionAutoCompleteOnSessionCloseHasSession(ServiceDescription service)
         {
-            ServiceBehaviorAttribute serviceBehavior =
-                service.Behaviors.Find<ServiceBehaviorAttribute>();
+            ServiceBehaviorAttribute serviceBehavior = service.Behaviors
+                .Find<ServiceBehaviorAttribute>();
 
             if (serviceBehavior != null)
             {
@@ -272,14 +278,15 @@ namespace System.ServiceModel.Dispatcher
                     && instanceMode != InstanceContextMode.PerSession
                 )
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(
-                            SR.GetString(
-                                SR.SFxTransactionAutoCompleteOnSessionCloseNoSession,
-                                service.Name
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(
+                                SR.GetString(
+                                    SR.SFxTransactionAutoCompleteOnSessionCloseNoSession,
+                                    service.Name
+                                )
                             )
-                        )
-                    );
+                        );
                 }
             }
         }
@@ -290,56 +297,60 @@ namespace System.ServiceModel.Dispatcher
             // transaction-related properties on the ServiceBehaviorAttribute
             if (!HasTransactedOperations(service))
             {
-                ServiceBehaviorAttribute attribute =
-                    service.Behaviors.Find<ServiceBehaviorAttribute>();
+                ServiceBehaviorAttribute attribute = service.Behaviors
+                    .Find<ServiceBehaviorAttribute>();
                 if (attribute != null)
                 {
                     if (attribute.TransactionTimeoutSet)
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new InvalidOperationException(
-                                SR.GetString(
-                                    SR.SFxTransactionTransactionTimeoutNeedsScope,
-                                    service.Name
+                        throw DiagnosticUtility.ExceptionUtility
+                            .ThrowHelperError(
+                                new InvalidOperationException(
+                                    SR.GetString(
+                                        SR.SFxTransactionTransactionTimeoutNeedsScope,
+                                        service.Name
+                                    )
                                 )
-                            )
-                        );
+                            );
                     }
 
                     if (attribute.IsolationLevelSet)
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new InvalidOperationException(
-                                SR.GetString(
-                                    SR.SFxTransactionIsolationLevelNeedsScope,
-                                    service.Name
+                        throw DiagnosticUtility.ExceptionUtility
+                            .ThrowHelperError(
+                                new InvalidOperationException(
+                                    SR.GetString(
+                                        SR.SFxTransactionIsolationLevelNeedsScope,
+                                        service.Name
+                                    )
                                 )
-                            )
-                        );
+                            );
                     }
 
                     if (attribute.ReleaseServiceInstanceOnTransactionCompleteSet)
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new InvalidOperationException(
-                                SR.GetString(
-                                    SR.SFxTransactionReleaseServiceInstanceOnTransactionCompleteNeedsScope,
-                                    service.Name
+                        throw DiagnosticUtility.ExceptionUtility
+                            .ThrowHelperError(
+                                new InvalidOperationException(
+                                    SR.GetString(
+                                        SR.SFxTransactionReleaseServiceInstanceOnTransactionCompleteNeedsScope,
+                                        service.Name
+                                    )
                                 )
-                            )
-                        );
+                            );
                     }
 
                     if (attribute.TransactionAutoCompleteOnSessionCloseSet)
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new InvalidOperationException(
-                                SR.GetString(
-                                    SR.SFxTransactionTransactionAutoCompleteOnSessionCloseNeedsScope,
-                                    service.Name
+                        throw DiagnosticUtility.ExceptionUtility
+                            .ThrowHelperError(
+                                new InvalidOperationException(
+                                    SR.GetString(
+                                        SR.SFxTransactionTransactionAutoCompleteOnSessionCloseNeedsScope,
+                                        service.Name
+                                    )
                                 )
-                            )
-                        );
+                            );
                     }
                 }
             }
@@ -348,8 +359,8 @@ namespace System.ServiceModel.Dispatcher
         void EnsureNoOneWayTransactions(ServiceEndpoint endpoint)
         {
             CustomBinding binding = new CustomBinding(endpoint.Binding);
-            TransactionFlowBindingElement txFlowBindingElement =
-                binding.Elements.Find<TransactionFlowBindingElement>();
+            TransactionFlowBindingElement txFlowBindingElement = binding.Elements
+                .Find<TransactionFlowBindingElement>();
             if (txFlowBindingElement != null)
             {
                 for (int i = 0; i < endpoint.Contract.Operations.Count; i++)
@@ -357,8 +368,8 @@ namespace System.ServiceModel.Dispatcher
                     OperationDescription operation = endpoint.Contract.Operations[i];
                     if (operation.IsOneWay)
                     {
-                        TransactionFlowAttribute tfbp =
-                            operation.Behaviors.Find<TransactionFlowAttribute>();
+                        TransactionFlowAttribute tfbp = operation.Behaviors
+                            .Find<TransactionFlowAttribute>();
                         TransactionFlowOption transactions;
                         if (tfbp != null)
                         {
@@ -370,15 +381,16 @@ namespace System.ServiceModel.Dispatcher
                         }
                         if (TransactionFlowOptionHelper.AllowedOrRequired(transactions))
                         {
-                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                                new InvalidOperationException(
-                                    SR.GetString(
-                                        SR.SFxOneWayAndTransactionsIncompatible,
-                                        endpoint.Contract.Name,
-                                        operation.Name
+                            throw DiagnosticUtility.ExceptionUtility
+                                .ThrowHelperError(
+                                    new InvalidOperationException(
+                                        SR.GetString(
+                                            SR.SFxOneWayAndTransactionsIncompatible,
+                                            endpoint.Contract.Name,
+                                            operation.Name
+                                        )
                                     )
-                                )
-                            );
+                                );
                         }
                     }
                 }
@@ -402,8 +414,8 @@ namespace System.ServiceModel.Dispatcher
             for (int j = 0; j < endpoint.Contract.Operations.Count; j++)
             {
                 OperationDescription operation = endpoint.Contract.Operations[j];
-                OperationBehaviorAttribute attribute =
-                    operation.Behaviors.Find<OperationBehaviorAttribute>();
+                OperationBehaviorAttribute attribute = operation.Behaviors
+                    .Find<OperationBehaviorAttribute>();
 
                 if (attribute != null && attribute.TransactionScopeRequired)
                 {
@@ -428,8 +440,8 @@ namespace System.ServiceModel.Dispatcher
 
         bool IsAutoComplete(OperationDescription operation)
         {
-            OperationBehaviorAttribute attribute =
-                operation.Behaviors.Find<OperationBehaviorAttribute>();
+            OperationBehaviorAttribute attribute = operation.Behaviors
+                .Find<OperationBehaviorAttribute>();
 
             if (attribute != null)
             {
@@ -451,19 +463,20 @@ namespace System.ServiceModel.Dispatcher
             string contractName
         )
         {
-            OperationBehaviorAttribute attribute =
-                operation.Behaviors.Find<OperationBehaviorAttribute>();
+            OperationBehaviorAttribute attribute = operation.Behaviors
+                .Find<OperationBehaviorAttribute>();
 
             if (attribute != null)
             {
                 if (!singleThreaded && !attribute.TransactionAutoComplete)
                 {
                     string id = SR.SFxTransactionNonConcurrentOrAutoComplete2;
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(
-                            SR.GetString(id, contractName, operation.Name)
-                        )
-                    );
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(
+                                SR.GetString(id, contractName, operation.Name)
+                            )
+                        );
                 }
             }
         }
@@ -477,11 +490,15 @@ namespace System.ServiceModel.Dispatcher
                 && bindingElements.Find<MsmqTransportBindingElement>() != null
             )
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(
-                        SR.GetString(SR.SFxTransactionFlowAndMSMQ, endpoint.Address.Uri.AbsoluteUri)
-                    )
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(
+                                SR.SFxTransactionFlowAndMSMQ,
+                                endpoint.Address.Uri.AbsoluteUri
+                            )
+                        )
+                    );
             }
         }
 
@@ -496,14 +513,15 @@ namespace System.ServiceModel.Dispatcher
                     && !IsSingleThreaded(service)
                 )
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(
-                            SR.GetString(
-                                SR.SFxTransactionNonConcurrentOrReleaseServiceInstanceOnTxComplete,
-                                service.Name
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(
+                                SR.GetString(
+                                    SR.SFxTransactionNonConcurrentOrReleaseServiceInstanceOnTxComplete,
+                                    service.Name
+                                )
                             )
-                        )
-                    );
+                        );
                 }
             }
         }

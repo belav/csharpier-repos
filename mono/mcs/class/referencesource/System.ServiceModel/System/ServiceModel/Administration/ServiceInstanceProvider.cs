@@ -243,8 +243,7 @@ namespace System.ServiceModel.Administration
                         specificBehavior.IssuedTokenAuthentication.TrustedStoreLocation
                     );
                     foreach (
-                        X509Certificate2 certificate in specificBehavior
-                            .IssuedTokenAuthentication
+                        X509Certificate2 certificate in specificBehavior.IssuedTokenAuthentication
                             .KnownCertificates
                     )
                     {
@@ -265,8 +264,7 @@ namespace System.ServiceModel.Administration
                     if (specificBehavior.IssuedTokenAuthentication.AllowedAudienceUris != null)
                     {
                         foreach (
-                            string str in specificBehavior
-                                .IssuedTokenAuthentication
+                            string str in specificBehavior.IssuedTokenAuthentication
                                 .AllowedAudienceUris
                         )
                         {
@@ -301,8 +299,7 @@ namespace System.ServiceModel.Administration
                 {
                     string result = string.Empty;
                     foreach (
-                        Type claimType in specificBehavior
-                            .SecureConversationAuthentication
+                        Type claimType in specificBehavior.SecureConversationAuthentication
                             .SecurityContextClaimTypes
                     )
                     {
@@ -338,7 +335,9 @@ namespace System.ServiceModel.Administration
                             CultureInfo.InvariantCulture,
                             "{0}: {1}",
                             AdministrationStrings.ValidationMode,
-                            specificBehavior.UserNameAuthentication.UserNamePasswordValidationMode.ToString()
+                            specificBehavior.UserNameAuthentication
+                                .UserNamePasswordValidationMode
+                                .ToString()
                         )
                     );
                 }
@@ -589,13 +588,14 @@ namespace System.ServiceModel.Administration
 
         void FillMetadataExporterInfo(IWmiInstance instance, MetadataExporter exporter)
         {
-            DiagnosticUtility.EventLog.LogEvent(
-                TraceEventType.Information,
-                (ushort)System.Runtime.Diagnostics.EventLogCategory.Wmi,
-                (uint)System.Runtime.Diagnostics.EventLogEventId.MessageLoggingOn,
-                true,
-                "metadata exporter called"
-            );
+            DiagnosticUtility.EventLog
+                .LogEvent(
+                    TraceEventType.Information,
+                    (ushort)System.Runtime.Diagnostics.EventLogCategory.Wmi,
+                    (uint)System.Runtime.Diagnostics.EventLogEventId.MessageLoggingOn,
+                    true,
+                    "metadata exporter called"
+                );
             Fx.Assert(null != instance, "");
             Fx.Assert(null != exporter, "");
             IWmiInstance metadataExporterInstance = instance.NewInstance(

@@ -27,9 +27,8 @@ namespace System.ServiceModel.Dispatcher
         {
             if (workflowDefinition == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                    "workflowDefinition"
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperArgumentNull("workflowDefinition");
             }
 
             this.workflowDefinition = workflowDefinition;
@@ -53,9 +52,8 @@ namespace System.ServiceModel.Dispatcher
                     {
                         if (canCreateInstance)
                         {
-                            this.workflowInstance = this.workflowDefinition.CreateWorkflow(
-                                this.InstanceId
-                            );
+                            this.workflowInstance = this.workflowDefinition
+                                .CreateWorkflow(this.InstanceId);
                             shouldCreateNew = false;
 
                             if (DiagnosticUtility.ShouldTraceInformation)
@@ -85,20 +83,21 @@ namespace System.ServiceModel.Dispatcher
                             //Inform InstanceLifeTimeManager to clean up record for InstanceId;
                             if (this.instanceContextProvider.InstanceLifeTimeManager != null)
                             {
-                                this.instanceContextProvider.InstanceLifeTimeManager.CleanUp(
-                                    this.InstanceId
-                                );
+                                this.instanceContextProvider
+                                    .InstanceLifeTimeManager
+                                    .CleanUp(this.InstanceId);
                             }
-                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                                new FaultException(new DurableDispatcherAddressingFault())
-                            );
+                            throw DiagnosticUtility.ExceptionUtility
+                                .ThrowHelperError(
+                                    new FaultException(new DurableDispatcherAddressingFault())
+                                );
                         }
                     }
                     else
                     {
-                        this.workflowInstance = this.workflowDefinition.WorkflowRuntime.GetWorkflow(
-                            InstanceId
-                        );
+                        this.workflowInstance = this.workflowDefinition
+                            .WorkflowRuntime
+                            .GetWorkflow(InstanceId);
 
                         if (DiagnosticUtility.ShouldTraceInformation)
                         {

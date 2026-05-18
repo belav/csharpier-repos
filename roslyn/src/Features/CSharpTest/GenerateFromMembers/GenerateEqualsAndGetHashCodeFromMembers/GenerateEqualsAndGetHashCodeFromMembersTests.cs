@@ -3301,9 +3301,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateEqualsAndGetHas
                             ),
                     },
                 },
-                ReferenceAssemblies = ReferenceAssemblies.Default.WithAssemblies(
-                    ImmutableArray<string>.Empty
-                ),
+                ReferenceAssemblies = ReferenceAssemblies.Default
+                    .WithAssemblies(ImmutableArray<string>.Empty),
             }.RunAsync();
         }
 

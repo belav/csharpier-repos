@@ -21,9 +21,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertNamespace
         internal sealed class ConvertNamespaceTestState : AbstractCommandHandlerTestState
         {
             private static readonly TestComposition s_composition =
-                EditorTestCompositions.EditorFeaturesWpf.AddParts(
-                    typeof(ConvertNamespaceCommandHandler)
-                );
+                EditorTestCompositions.EditorFeaturesWpf
+                    .AddParts(typeof(ConvertNamespaceCommandHandler));
 
             private readonly ConvertNamespaceCommandHandler _commandHandler;
 
@@ -107,10 +106,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertNamespace
                 """
             );
 
-            testState.Workspace.GlobalOptions.SetGlobalOption(
-                CompleteStatementOptionsStorage.AutomaticallyCompleteStatementOnSemicolon,
-                false
-            );
+            testState.Workspace
+                .GlobalOptions
+                .SetGlobalOption(
+                    CompleteStatementOptionsStorage.AutomaticallyCompleteStatementOnSemicolon,
+                    false
+                );
 
             testState.SendTypeChar(';');
             testState.AssertCodeIs(

@@ -201,8 +201,8 @@ namespace Microsoft.CodeAnalysis.Interactive
                 imports = initResult.Imports.ToImmutableArrayOrEmpty();
 
                 var metadataService = _workspace.Services.GetRequiredService<IMetadataService>();
-                references = initResult
-                    .MetadataReferencePaths.ToImmutableArrayOrEmpty()
+                references = initResult.MetadataReferencePaths
+                    .ToImmutableArrayOrEmpty()
                     .SelectAsArray(
                         (path, metadataService) =>
                             (MetadataReference)
@@ -271,18 +271,19 @@ namespace Microsoft.CodeAnalysis.Interactive
                             initializationScriptImports,
                             initializationScriptReferences
                         );
-                        solution = initProject.Solution.AddDocument(
-                            DocumentId.CreateNewId(
-                                initializationScriptProjectId,
-                                debugName: initializationScriptPath
-                            ),
-                            Path.GetFileName(initializationScriptPath),
-                            new WorkspaceFileTextLoader(
-                                solution.Services,
-                                initializationScriptPath,
-                                defaultEncoding: null
-                            )
-                        );
+                        solution = initProject.Solution
+                            .AddDocument(
+                                DocumentId.CreateNewId(
+                                    initializationScriptProjectId,
+                                    debugName: initializationScriptPath
+                                ),
+                                Path.GetFileName(initializationScriptPath),
+                                new WorkspaceFileTextLoader(
+                                    solution.Services,
+                                    initializationScriptPath,
+                                    defaultEncoding: null
+                                )
+                            );
                     }
 
                     var newSubmissionProject = CreateSubmissionProjectNoLock(
@@ -293,12 +294,13 @@ namespace Microsoft.CodeAnalysis.Interactive
                         imports,
                         references
                     );
-                    solution = newSubmissionProject.Solution.AddDocument(
-                        newSubmissionDocumentId,
-                        newSubmissionProjectName,
-                        newSubmissionText,
-                        filePath: newSubmissionFilePath
-                    );
+                    solution = newSubmissionProject.Solution
+                        .AddDocument(
+                            newSubmissionDocumentId,
+                            newSubmissionProjectName,
+                            newSubmissionText,
+                            filePath: newSubmissionFilePath
+                        );
 
                     return solution;
                 },
@@ -334,9 +336,9 @@ namespace Microsoft.CodeAnalysis.Interactive
                     compilationOptions.MetadataReferenceResolver!;
                 if (
                     metadataResolver.PathResolver.BaseDirectory != _workingDirectory
-                    || !metadataResolver.PathResolver.SearchPaths.SequenceEqual(
-                        _referenceSearchPaths
-                    )
+                    || !metadataResolver.PathResolver
+                        .SearchPaths
+                        .SequenceEqual(_referenceSearchPaths)
                 )
                 {
                     compilationOptions = compilationOptions.WithMetadataReferenceResolver(

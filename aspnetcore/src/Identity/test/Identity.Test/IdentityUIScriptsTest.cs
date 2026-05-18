@@ -141,9 +141,10 @@ public class IdentityUIScriptsTest : IDisposable
         var scriptTags = new List<ScriptTag>();
         foreach (var scriptElement in htmlDocument.Scripts)
         {
-            var fallbackSrcAttribute = scriptElement.Attributes.FirstOrDefault(attr =>
-                string.Equals("asp-fallback-src", attr.Name, StringComparison.OrdinalIgnoreCase)
-            );
+            var fallbackSrcAttribute = scriptElement.Attributes
+                .FirstOrDefault(attr =>
+                    string.Equals("asp-fallback-src", attr.Name, StringComparison.OrdinalIgnoreCase)
+                );
 
             scriptTags.Add(
                 new ScriptTag
@@ -171,8 +172,8 @@ public class IdentityUIScriptsTest : IDisposable
 
     private static string GetProjectBasePath()
     {
-        var projectPath = typeof(IdentityUIScriptsTest)
-            .Assembly.GetCustomAttributes<AssemblyMetadataAttribute>()
+        var projectPath = typeof(IdentityUIScriptsTest).Assembly
+            .GetCustomAttributes<AssemblyMetadataAttribute>()
             .Single(a => a.Key == "Microsoft.AspNetCore.InternalTesting.DefaultUIProjectPath")
             .Value;
         return Directory.Exists(projectPath)

@@ -23,8 +23,8 @@ public class FindAllReferencesHandlerFeaturesTests : AbstractLanguageServerProto
         : base(testOutputHelper) { }
 
     protected override TestComposition Composition =>
-        EditorTestCompositions
-            .LanguageServerProtocol.AddParts(typeof(TestDocumentTrackingService))
+        EditorTestCompositions.LanguageServerProtocol
+            .AddParts(typeof(TestDocumentTrackingService))
             .AddParts(typeof(TestWorkspaceRegistrationService));
 
     [Theory, CombinatorialData]

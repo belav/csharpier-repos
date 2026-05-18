@@ -314,11 +314,8 @@ namespace Newtonsoft.Json.Linq
                 }
 
                 return (U?)
-                    System.Convert.ChangeType(
-                        value.Value,
-                        targetType,
-                        CultureInfo.InvariantCulture
-                    );
+                    System.Convert
+                        .ChangeType(value.Value, targetType, CultureInfo.InvariantCulture);
             }
         }
 

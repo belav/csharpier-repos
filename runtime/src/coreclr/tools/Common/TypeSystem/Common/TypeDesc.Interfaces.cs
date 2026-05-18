@@ -31,8 +31,8 @@ namespace Internal.TypeSystem
 
         private DefType[] InitializeRuntimeInterfaces()
         {
-            RuntimeInterfacesAlgorithm algorithm =
-                this.Context.GetRuntimeInterfacesAlgorithmForType(this);
+            RuntimeInterfacesAlgorithm algorithm = this.Context
+                .GetRuntimeInterfacesAlgorithmForType(this);
             DefType[] computedInterfaces =
                 algorithm != null
                     ? algorithm.ComputeRuntimeInterfaces(this)

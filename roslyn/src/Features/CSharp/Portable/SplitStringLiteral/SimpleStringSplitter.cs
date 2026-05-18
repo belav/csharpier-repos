@@ -41,19 +41,19 @@ namespace Microsoft.CodeAnalysis.CSharp.SplitStringLiteral
             protected override BinaryExpressionSyntax CreateSplitString()
             {
                 // TODO(cyrusn): Deal with the positoin being after a \ character
-                var prefix = Document
-                    .Text.GetSubText(TextSpan.FromBounds(_token.SpanStart, CursorPosition))
+                var prefix = Document.Text
+                    .GetSubText(TextSpan.FromBounds(_token.SpanStart, CursorPosition))
                     .ToString();
-                var suffix = Document
-                    .Text.GetSubText(TextSpan.FromBounds(CursorPosition, _token.Span.End))
+                var suffix = Document.Text
+                    .GetSubText(TextSpan.FromBounds(CursorPosition, _token.Span.End))
                     .ToString();
 
                 // If we're spliting a UTF-8 string we need to keep the u8 suffix on the first part. We copy whatever
                 // the user had on the second part, for consistency.
                 var firstTokenSuffix =
                     _token.Kind() == SyntaxKind.Utf8StringLiteralToken
-                        ? Document
-                            .Text.GetSubText(
+                        ? Document.Text
+                            .GetSubText(
                                 TextSpan.FromBounds(_token.Span.End - "u8".Length, _token.Span.End)
                             )
                             .ToString()

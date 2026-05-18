@@ -60,23 +60,20 @@ namespace System.ServiceModel.Dispatcher
 
         public IAsyncResult BeginTryReceive(TimeSpan timeout, AsyncCallback callback, object state)
         {
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                new NotImplementedException()
-            );
+            throw DiagnosticUtility.ExceptionUtility
+                .ThrowHelperError(new NotImplementedException());
         }
 
         public bool EndTryReceive(IAsyncResult result, out RequestContext requestContext)
         {
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                new NotImplementedException()
-            );
+            throw DiagnosticUtility.ExceptionUtility
+                .ThrowHelperError(new NotImplementedException());
         }
 
         public RequestContext CreateRequestContext(Message message)
         {
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                new NotImplementedException()
-            );
+            throw DiagnosticUtility.ExceptionUtility
+                .ThrowHelperError(new NotImplementedException());
         }
 
         public IAsyncResult BeginSend(
@@ -116,9 +113,8 @@ namespace System.ServiceModel.Dispatcher
 
         public bool TryReceive(TimeSpan timeout, out RequestContext requestContext)
         {
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                new NotImplementedException()
-            );
+            throw DiagnosticUtility.ExceptionUtility
+                .ThrowHelperError(new NotImplementedException());
         }
 
         public Message Request(Message message, TimeSpan timeout)
@@ -137,9 +133,8 @@ namespace System.ServiceModel.Dispatcher
 
         public bool WaitForMessage(TimeSpan timeout)
         {
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                new NotImplementedException()
-            );
+            throw DiagnosticUtility.ExceptionUtility
+                .ThrowHelperError(new NotImplementedException());
         }
 
         public IAsyncResult BeginWaitForMessage(
@@ -148,16 +143,14 @@ namespace System.ServiceModel.Dispatcher
             object state
         )
         {
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                new NotImplementedException()
-            );
+            throw DiagnosticUtility.ExceptionUtility
+                .ThrowHelperError(new NotImplementedException());
         }
 
         public bool EndWaitForMessage(IAsyncResult result)
         {
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                new NotImplementedException()
-            );
+            throw DiagnosticUtility.ExceptionUtility
+                .ThrowHelperError(new NotImplementedException());
         }
     }
 }

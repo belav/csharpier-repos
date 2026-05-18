@@ -342,10 +342,8 @@ public class SqlServerQuerySqlGenerator : QuerySqlGenerator
                     != null:
             {
                 Sql.Append(
-                        Dependencies.SqlGenerationHelper.DelimitIdentifier(
-                            tableExpression.Name,
-                            tableExpression.Schema
-                        )
+                        Dependencies.SqlGenerationHelper
+                            .DelimitIdentifier(tableExpression.Name, tableExpression.Schema)
                     )
                     .Append(" FOR SYSTEM_TIME ");
 
@@ -427,9 +425,8 @@ public class SqlServerQuerySqlGenerator : QuerySqlGenerator
                 {
                     Sql.Append(AliasSeparator)
                         .Append(
-                            Dependencies.SqlGenerationHelper.DelimitIdentifier(
-                                tableExpression.Alias
-                            )
+                            Dependencies.SqlGenerationHelper
+                                .DelimitIdentifier(tableExpression.Alias)
                         );
                 }
 

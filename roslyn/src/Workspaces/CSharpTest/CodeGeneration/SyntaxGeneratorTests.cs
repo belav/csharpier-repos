@@ -1976,7 +1976,8 @@ public class MyAttribute : Attribute { public int Value {get; set;} }",
                 .Single(m =>
                     m.Name == WellKnownMemberNames.ImplicitConversionName
                     && m.Parameters[0]
-                        .Type.Equals(_emptyCompilation.GetSpecialType(SpecialType.System_Byte))
+                        .Type
+                        .Equals(_emptyCompilation.GetSpecialType(SpecialType.System_Byte))
                 );
             VerifySyntax<ConversionOperatorDeclarationSyntax>(
                 Generator.Declaration(conversion),
@@ -8135,9 +8136,8 @@ public class C
                 .AddSyntaxTrees(
                     SyntaxFactory.ParseSyntaxTree(
                         src,
-                        options: CSharpParseOptions.Default.WithLanguageVersion(
-                            LanguageVersion.Preview
-                        )
+                        options: CSharpParseOptions.Default
+                            .WithLanguageVersion(LanguageVersion.Preview)
                     )
                 );
 

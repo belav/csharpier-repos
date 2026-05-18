@@ -138,8 +138,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
                 string proxyMemberFullNamePrefix = null;
                 if (childFullNamePrefix != null)
                 {
-                    proxyMemberFullNamePrefix =
-                        resultProvider.FullNameProvider.GetClrObjectCreationExpression(
+                    proxyMemberFullNamePrefix = resultProvider.FullNameProvider
+                        .GetClrObjectCreationExpression(
                             inspectionContext,
                             proxyTypeAndInfo.ClrType,
                             proxyTypeAndInfo.Info,
@@ -190,17 +190,18 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             ref int index
         )
         {
-            _proxyItem?.Expansion.GetRows(
-                resultProvider,
-                rows,
-                inspectionContext,
-                _proxyItem.ToDataItem(),
-                _proxyItem.Value,
-                startIndex,
-                count,
-                visitAll,
-                ref index
-            );
+            _proxyItem?.Expansion
+                .GetRows(
+                    resultProvider,
+                    rows,
+                    inspectionContext,
+                    _proxyItem.ToDataItem(),
+                    _proxyItem.Value,
+                    startIndex,
+                    count,
+                    visitAll,
+                    ref index
+                );
 
             if (InRange(startIndex, count, index))
             {

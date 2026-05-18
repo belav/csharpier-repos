@@ -78,8 +78,8 @@ namespace System.CommandLine.Hosting
                         var kvpSeparator = new[] { '=' };
 
                         config.AddInMemoryCollection(
-                            directiveResult
-                                .Values.Select(s =>
+                            directiveResult.Values
+                                .Select(s =>
                                 {
                                     var parts = s.Split(kvpSeparator, count: 2);
                                     var key = parts[0];

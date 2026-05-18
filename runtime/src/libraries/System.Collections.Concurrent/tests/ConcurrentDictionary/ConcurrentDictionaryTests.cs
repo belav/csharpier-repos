@@ -758,10 +758,11 @@ namespace System.Collections.Concurrent.Tests
             DebuggerAttributeInfo info = DebuggerAttributes.ValidateDebuggerTypeProxyProperties(
                 dict
             );
-            PropertyInfo itemProperty = info.Properties.Single(pr =>
-                pr.GetCustomAttribute<DebuggerBrowsableAttribute>().State
-                == DebuggerBrowsableState.RootHidden
-            );
+            PropertyInfo itemProperty = info.Properties
+                .Single(pr =>
+                    pr.GetCustomAttribute<DebuggerBrowsableAttribute>().State
+                    == DebuggerBrowsableState.RootHidden
+                );
             KeyValuePair<string, int>[] items =
                 itemProperty.GetValue(info.Instance) as KeyValuePair<string, int>[];
             Assert.Equal(dict, items);
@@ -1211,32 +1212,33 @@ namespace System.Collections.Concurrent.Tests
                 // there is no guarantee that the Task will be created on another thread.
                 // There is also no guarantee that using this TaskCreationOption will force
                 // it to be run on another thread.
-                tasks[i] = Task.Factory.StartNew(
-                    (obj) =>
-                    {
-                        mres.Wait();
-                        int index = (((int)obj) + 1) + 1000;
-                        updatedKeys.Value = new ThreadData();
-                        updatedKeys.Value.ThreadIndex = index;
-
-                        for (int j = 0; j < dictionary.Count; j++)
+                tasks[i] = Task.Factory
+                    .StartNew(
+                        (obj) =>
                         {
-                            if (dictionary.TryUpdate(j.ToString(), index, j))
+                            mres.Wait();
+                            int index = (((int)obj) + 1) + 1000;
+                            updatedKeys.Value = new ThreadData();
+                            updatedKeys.Value.ThreadIndex = index;
+
+                            for (int j = 0; j < dictionary.Count; j++)
                             {
-                                if (dictionary[j.ToString()] != index)
+                                if (dictionary.TryUpdate(j.ToString(), index, j))
                                 {
-                                    updatedKeys.Value.Succeeded = false;
-                                    return;
+                                    if (dictionary[j.ToString()] != index)
+                                    {
+                                        updatedKeys.Value.Succeeded = false;
+                                        return;
+                                    }
+                                    updatedKeys.Value.Keys.Add(j.ToString());
                                 }
-                                updatedKeys.Value.Keys.Add(j.ToString());
                             }
-                        }
-                    },
-                    i,
-                    CancellationToken.None,
-                    TaskCreationOptions.LongRunning,
-                    TaskScheduler.Default
-                );
+                        },
+                        i,
+                        CancellationToken.None,
+                        TaskCreationOptions.LongRunning,
+                        TaskScheduler.Default
+                    );
             }
 
             mres.Set();

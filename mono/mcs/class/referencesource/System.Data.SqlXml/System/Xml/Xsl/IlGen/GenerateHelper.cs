@@ -1375,10 +1375,8 @@ namespace System.Xml.Xsl.IlGen
                         name + this.numLocals.ToString(CultureInfo.InvariantCulture)
                     );
 
-                this.symbols.Add(
-                    locBldr,
-                    name + this.numLocals.ToString(CultureInfo.InvariantCulture)
-                );
+                this.symbols
+                    .Add(locBldr, name + this.numLocals.ToString(CultureInfo.InvariantCulture));
                 this.numLocals++;
             }
 #endif
@@ -1564,10 +1562,11 @@ namespace System.Xml.Xsl.IlGen
                     retType = meth.ReturnType.Name;
                 }
 
-                this.writerDump.WriteLine(
-                    "  {0, -10} {1} {2}({3})",
-                    new object[] { opcode.Name, retType, meth.Name, strBldr.ToString() }
-                );
+                this.writerDump
+                    .WriteLine(
+                        "  {0, -10} {1} {2}({3})",
+                        new object[] { opcode.Name, retType, meth.Name, strBldr.ToString() }
+                    );
             }
 #endif
         }
@@ -1602,10 +1601,8 @@ namespace System.Xml.Xsl.IlGen
                 OpCode opcode = meth.IsVirtual || meth.IsAbstract ? OpCodes.Callvirt : OpCodes.Call;
 
                 TraceCall(opcode, meth);
-                this.ilgen.Emit(
-                    opcode,
-                    ((ModuleBuilder)methBldr.GetModule()).GetMethodToken(meth).Token
-                );
+                this.ilgen
+                    .Emit(opcode, ((ModuleBuilder)methBldr.GetModule()).GetMethodToken(meth).Token);
 
                 if (this.lastSourceInfo != null)
                 {
@@ -2406,24 +2403,26 @@ namespace System.Xml.Xsl.IlGen
                         this.sourceFile = sourceFile;
                         this.writerDump.WriteLine("// Source File '{0}'", this.sourceFile);
                     }
-                    this.writerDump.WriteLine(
-                        "//[{0},{1} -- {2},{3}]",
-                        sourceInfo.Start.Line,
-                        sourceInfo.Start.Pos,
-                        sourceInfo.End.Line,
-                        sourceInfo.End.Pos
-                    );
+                    this.writerDump
+                        .WriteLine(
+                            "//[{0},{1} -- {2},{3}]",
+                            sourceInfo.Start.Line,
+                            sourceInfo.Start.Pos,
+                            sourceInfo.End.Line,
+                            sourceInfo.End.Pos
+                        );
                 }
             }
 #endif
             ISymbolDocumentWriter symDoc = this.module.AddSourceDocument(sourceFile);
-            this.ilgen.MarkSequencePoint(
-                symDoc,
-                sourceInfo.Start.Line,
-                sourceInfo.Start.Pos,
-                sourceInfo.End.Line,
-                sourceInfo.End.Pos
-            );
+            this.ilgen
+                .MarkSequencePoint(
+                    symDoc,
+                    sourceInfo.Start.Line,
+                    sourceInfo.Start.Pos,
+                    sourceInfo.End.Line,
+                    sourceInfo.End.Pos
+                );
             this.lastSourceInfo = sourceInfo;
         }
 
@@ -2555,11 +2554,8 @@ namespace System.Xml.Xsl.IlGen
             );
 #if DEBUG
             if (XmlILTrace.IsEnabled)
-                this.writerDump.WriteLine(
-                    "  {0, -10} Label {1}",
-                    opcode.Name,
-                    this.symbols[lblVal]
-                );
+                this.writerDump
+                    .WriteLine("  {0, -10} Label {1}", opcode.Name, this.symbols[lblVal]);
 #endif
             this.ilgen.Emit(opcode, lblVal);
         }
@@ -2569,11 +2565,12 @@ namespace System.Xml.Xsl.IlGen
 #if DEBUG
             if (XmlILTrace.IsEnabled)
             {
-                this.writerDump.Write(
-                    "  {0, -10} (Label {1}",
-                    opcode.Name,
-                    arrLabels.Length != 0 ? this.symbols[arrLabels[0]].ToString() : ""
-                );
+                this.writerDump
+                    .Write(
+                        "  {0, -10} (Label {1}",
+                        opcode.Name,
+                        arrLabels.Length != 0 ? this.symbols[arrLabels[0]].ToString() : ""
+                    );
                 for (int i = 1; i < arrLabels.Length; i++)
                 {
                     this.writerDump.Write(", Label {0}", this.symbols[arrLabels[i]]);
@@ -2588,12 +2585,13 @@ namespace System.Xml.Xsl.IlGen
         {
 #if DEBUG
             if (XmlILTrace.IsEnabled)
-                this.writerDump.WriteLine(
-                    "  {0, -10} {1} ({2})",
-                    opcode.Name,
-                    this.symbols[locBldr],
-                    locBldr.LocalType.Name
-                );
+                this.writerDump
+                    .WriteLine(
+                        "  {0, -10} {1} ({2})",
+                        opcode.Name,
+                        this.symbols[locBldr],
+                        locBldr.LocalType.Name
+                    );
 #endif
             this.ilgen.Emit(opcode, locBldr);
         }
@@ -2690,11 +2688,8 @@ namespace System.Xml.Xsl.IlGen
 
 #if DEBUG
             if (XmlILTrace.IsEnabled)
-                this.writerDump.WriteLine(
-                    "  {0, -10} Label {1}",
-                    opcode.Name,
-                    this.symbols[lblTarget]
-                );
+                this.writerDump
+                    .WriteLine("  {0, -10} Label {1}", opcode.Name, this.symbols[lblTarget]);
 #endif
             this.ilgen.Emit(opcode, lblTarget);
 

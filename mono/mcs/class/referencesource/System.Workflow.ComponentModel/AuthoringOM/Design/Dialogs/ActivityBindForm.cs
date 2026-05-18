@@ -198,10 +198,14 @@ namespace System.Workflow.ComponentModel.Design
                     previousBinding.Name
                 );
                 if (previousBindActivity != null)
-                    this.workflowOutline.SelectActivity(
-                        previousBindActivity,
-                        ParseStringPath(GetActivityType(previousBindActivity), previousBinding.Path)
-                    );
+                    this.workflowOutline
+                        .SelectActivity(
+                            previousBindActivity,
+                            ParseStringPath(
+                                GetActivityType(previousBindActivity),
+                                previousBinding.Path
+                            )
+                        );
             }
 
             if (this.properties != null)
@@ -947,9 +951,8 @@ namespace System.Workflow.ComponentModel.Design
                         attributes[0] as AttributeInfoAttribute;
                     if (attributeInfoAttribute != null)
                     {
-                        ReadOnlyCollection<object> argumentValues = attributeInfoAttribute
-                            .AttributeInfo
-                            .ArgumentValues;
+                        ReadOnlyCollection<object> argumentValues =
+                            attributeInfoAttribute.AttributeInfo.ArgumentValues;
                         if (argumentValues.Count > 0)
                             return Convert.ToBoolean(
                                 argumentValues[0],
@@ -1258,10 +1261,8 @@ namespace System.Workflow.ComponentModel.Design
                             ? memberParentNode.PathInfo.PropertyType
                             : this.parent.GetActivityType(parentNode.Activity);
                     //we will try to parse just the latest member path since the previous is assumed to be valid
-                    List<PathInfo> reparsedPathInfoList = this.parent.ParseStringPath(
-                        memberType,
-                        newLabel
-                    );
+                    List<PathInfo> reparsedPathInfoList = this.parent
+                        .ParseStringPath(memberType, newLabel);
                     if (reparsedPathInfoList == null || reparsedPathInfoList.Count == 0)
                     {
                         incorrectChange = true;
@@ -1300,10 +1301,11 @@ namespace System.Workflow.ComponentModel.Design
                     {
                         //Poluate child members on this node...
                         MemberActivityBindTreeNode memberNode = node as MemberActivityBindTreeNode;
-                        List<PathInfo> members = this.parent.PopulateAutoCompleteList(
-                            node.Activity,
-                            (memberNode != null) ? memberNode.PathInfo : null
-                        );
+                        List<PathInfo> members = this.parent
+                            .PopulateAutoCompleteList(
+                                node.Activity,
+                                (memberNode != null) ? memberNode.PathInfo : null
+                            );
                         List<TreeNode> nodes = new List<TreeNode>();
                         foreach (PathInfo mamberPathInfo in members)
                         {
@@ -1337,10 +1339,13 @@ namespace System.Workflow.ComponentModel.Design
                 for (int i = 0; i < memberTypes.Images.Count; i++)
                 {
                     Image image = memberTypes.Images[i];
-                    this.TreeView.ImageList.Images.Add(
-                        string.Format(CultureInfo.InvariantCulture, MemberTypeFormat, i),
-                        image
-                    ); //member type key is non-localizable
+                    this.TreeView
+                        .ImageList
+                        .Images
+                        .Add(
+                            string.Format(CultureInfo.InvariantCulture, MemberTypeFormat, i),
+                            image
+                        ); //member type key is non-localizable
                 }
             }
 
@@ -1380,8 +1385,10 @@ namespace System.Workflow.ComponentModel.Design
                 {
                     node.RefreshNode();
                     int imageNumber = (int)memberNode.MemberKind + (int)memberNode.MemberAccessKind;
-                    node.ImageIndex = node.SelectedImageIndex =
-                        this.TreeView.ImageList.Images.IndexOfKey(
+                    node.ImageIndex = node.SelectedImageIndex = this.TreeView
+                        .ImageList
+                        .Images
+                        .IndexOfKey(
                             string.Format(
                                 CultureInfo.InvariantCulture,
                                 MemberTypeFormat,
@@ -1407,11 +1414,8 @@ namespace System.Workflow.ComponentModel.Design
                 MemberActivityBindTreeNode memberNode = node as MemberActivityBindTreeNode;
                 this.selectedPathInfo = (memberNode != null) ? memberNode.PathInfo : null;
                 string path = PropertyPath;
-                this.parent.SelectedActivityChanged(
-                    this.selectedActivity,
-                    this.selectedPathInfo,
-                    path
-                );
+                this.parent
+                    .SelectedActivityChanged(this.selectedActivity, this.selectedPathInfo, path);
             }
 
             public void SelectActivity(Activity activity, List<PathInfo> pathInfoList)
@@ -1438,10 +1442,8 @@ namespace System.Workflow.ComponentModel.Design
                             int indexOfOpenBracket = currentPathInfo.Path.IndexOf('[');
                             if (indexOfOpenBracket != -1)
                             {
-                                string indexPropertyName = currentPathInfo.Path.Substring(
-                                    0,
-                                    indexOfOpenBracket
-                                );
+                                string indexPropertyName = currentPathInfo.Path
+                                    .Substring(0, indexOfOpenBracket);
                                 if (node.Text.Equals(indexPropertyName, StringComparison.Ordinal))
                                 {
                                     //need to get back to the parent and select a different child with an index
@@ -1449,10 +1451,8 @@ namespace System.Workflow.ComponentModel.Design
                                     if (
                                         i > 0
                                         && pathInfoList[i - 1]
-                                            .Path.Equals(
-                                                indexPropertyName,
-                                                StringComparison.Ordinal
-                                            )
+                                            .Path
+                                            .Equals(indexPropertyName, StringComparison.Ordinal)
                                     )
                                         node = node.Parent as WorkflowOutlineNode;
                                 }

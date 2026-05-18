@@ -21,8 +21,7 @@ namespace ComInterfaceGenerator.Unit.Tests
                 GeneratorKind.VTableIndexStubGenerator => new VirtualMethodIndexAttributeProvider(),
                 GeneratorKind.ComInterfaceGeneratorManagedObjectWrapper =>
                     new GeneratedComInterfaceAttributeProvider(
-                        System
-                            .Runtime
+                        System.Runtime
                             .InteropServices
                             .Marshalling
                             .ComInterfaceOptions
@@ -30,8 +29,7 @@ namespace ComInterfaceGenerator.Unit.Tests
                     ),
                 GeneratorKind.ComInterfaceGeneratorComObjectWrapper =>
                     new GeneratedComInterfaceAttributeProvider(
-                        System
-                            .Runtime
+                        System.Runtime
                             .InteropServices
                             .Marshalling
                             .ComInterfaceOptions

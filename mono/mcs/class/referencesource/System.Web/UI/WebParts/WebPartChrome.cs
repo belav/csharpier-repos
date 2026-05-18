@@ -637,10 +637,8 @@ namespace System.Web.UI.WebControls.WebParts
                         // Confirm before exporting
                         if (Zone.RenderClientScript)
                         {
-                            link.Attributes.Add(
-                                "onclick",
-                                "return __wpm.ExportWebPart('', true, true)"
-                            );
+                            link.Attributes
+                                .Add("onclick", "return __wpm.ExportWebPart('', true, true)");
                         }
                         else
                         {
@@ -775,13 +773,14 @@ namespace System.Web.UI.WebControls.WebParts
                     {
                         // If Zone.RenderClientScript, then WebPartManager must not be null
                         Debug.Assert(WebPartManager != null);
-                        Zone.Menu.Render(
-                            writer,
-                            verbs,
-                            webPart.WholePartID + "Verbs",
-                            webPart,
-                            WebPartManager
-                        );
+                        Zone.Menu
+                            .Render(
+                                writer,
+                                verbs,
+                                webPart.WholePartID + "Verbs",
+                                webPart,
+                                WebPartManager
+                            );
                     }
                 }
                 else

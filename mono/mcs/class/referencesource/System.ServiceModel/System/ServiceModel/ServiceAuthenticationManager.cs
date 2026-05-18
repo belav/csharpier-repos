@@ -35,9 +35,8 @@ namespace System.ServiceModel
         {
             if (wrappedServiceAuthManager == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                    "wrappedServiceAuthManager"
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperArgumentNull("wrappedServiceAuthManager");
             }
 
             this.wrappedAuthenticationManager = wrappedServiceAuthManager;
@@ -64,8 +63,7 @@ namespace System.ServiceModel
                     message.Properties.Security.ServiceSecurityContext.AuthorizationPolicies
                 );
                 foreach (
-                    IAuthorizationPolicy policy in message
-                        .Properties
+                    IAuthorizationPolicy policy in message.Properties
                         .Security
                         .TransportToken
                         .SecurityTokenPolicies
@@ -76,11 +74,8 @@ namespace System.ServiceModel
                 authPolicy = authPolicies.AsReadOnly();
             }
 
-            return this.wrappedAuthenticationManager.Authenticate(
-                authPolicy,
-                listenUri,
-                ref message
-            );
+            return this.wrappedAuthenticationManager
+                .Authenticate(authPolicy, listenUri, ref message);
         }
     }
 
@@ -96,9 +91,8 @@ namespace System.ServiceModel
         {
             if (wrappedServiceAuthManager == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                    "wrappedServiceAuthManager"
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperArgumentNull("wrappedServiceAuthManager");
             }
 
             if ((actionUriFilter != null) && (actionUriFilter.Length > 0))
@@ -140,11 +134,8 @@ namespace System.ServiceModel
                 }
             }
 
-            return this.wrappedAuthenticationManager.Authenticate(
-                authPolicy,
-                listenUri,
-                ref message
-            );
+            return this.wrappedAuthenticationManager
+                .Authenticate(authPolicy, listenUri, ref message);
         }
 
         //
@@ -177,8 +168,7 @@ namespace System.ServiceModel
                 if (message.Properties.Security.HasIncomingSupportingTokens)
                 {
                     foreach (
-                        SupportingTokenSpecification tokenSpecification in message
-                            .Properties
+                        SupportingTokenSpecification tokenSpecification in message.Properties
                             .Security
                             .IncomingSupportingTokens
                     )

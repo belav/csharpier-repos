@@ -37,8 +37,7 @@ namespace System.Data.Spatial.Internal
         {
             //
             return EntityUtil.InvalidOperation(
-                System
-                    .Data
+                System.Data
                     .Entity
                     .Strings
                     .Spatial_WellKnownValueSerializationPropertyNotDirectlySettable
@@ -71,8 +70,7 @@ namespace System.Data.Spatial.Internal
         {
             //
             return EntityUtil.Argument(
-                System
-                    .Data
+                System.Data
                     .Entity
                     .Strings
                     .SqlSpatialservices_CouldNotCreateWellKnownGeographyValueNoSrid,
@@ -86,8 +84,7 @@ namespace System.Data.Spatial.Internal
         {
             //
             return EntityUtil.Argument(
-                System
-                    .Data
+                System.Data
                     .Entity
                     .Strings
                     .SqlSpatialservices_CouldNotCreateWellKnownGeographyValueNoWkbOrWkt,
@@ -121,8 +118,7 @@ namespace System.Data.Spatial.Internal
         {
             //
             return EntityUtil.Argument(
-                System
-                    .Data
+                System.Data
                     .Entity
                     .Strings
                     .SqlSpatialservices_CouldNotCreateWellKnownGeometryValueNoSrid,
@@ -136,8 +132,7 @@ namespace System.Data.Spatial.Internal
         {
             //
             return EntityUtil.Argument(
-                System
-                    .Data
+                System.Data
                     .Entity
                     .Strings
                     .SqlSpatialservices_CouldNotCreateWellKnownGeometryValueNoWkbOrWkt,
@@ -152,9 +147,10 @@ namespace System.Data.Spatial.Internal
         internal static Exception SqlSpatialServices_ProviderValueNotSqlType(Type requiredType)
         {
             return EntityUtil.Argument(
-                System.Data.Entity.Strings.SqlSpatialServices_ProviderValueNotSqlType(
-                    requiredType.AssemblyQualifiedName
-                ),
+                System.Data
+                    .Entity
+                    .Strings
+                    .SqlSpatialServices_ProviderValueNotSqlType(requiredType.AssemblyQualifiedName),
                 "providerValue"
             );
         }

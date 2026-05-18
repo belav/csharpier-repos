@@ -76,8 +76,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
         )
         {
             var op = symbol.GetPredefinedOperator();
-            var tokens = state
-                .Root.DescendantTokens(descendIntoTrivia: true)
+            var tokens = state.Root
+                .DescendantTokens(descendIntoTrivia: true)
                 .WhereAsArray(
                     static (token, tuple) =>
                         IsPotentialReference(tuple.state.SyntaxFacts, tuple.op, token),

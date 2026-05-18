@@ -67,11 +67,13 @@ End Class";
                     },
                 }
             );
-            testLspServer.TestWorkspace.GlobalOptions.SetGlobalOption(
-                InlineHintsOptionsStorage.EnabledForParameters,
-                LanguageNames.VisualBasic,
-                true
-            );
+            testLspServer.TestWorkspace
+                .GlobalOptions
+                .SetGlobalOption(
+                    InlineHintsOptionsStorage.EnabledForParameters,
+                    LanguageNames.VisualBasic,
+                    true
+                );
             await VerifyInlayHintAsync(testLspServer);
         }
     }

@@ -59,11 +59,12 @@ namespace System.Globalization.Tests
                         // Now call globalization API to ensure the binding working without any problem.
                         Assert.Equal(
                             -1,
-                            ci.CompareInfo.Compare(
-                                "sample\u0000",
-                                "Sample\u0000",
-                                CompareOptions.IgnoreSymbols
-                            )
+                            ci.CompareInfo
+                                .Compare(
+                                    "sample\u0000",
+                                    "Sample\u0000",
+                                    CompareOptions.IgnoreSymbols
+                                )
                         );
                     },
                     new RemoteInvokeOptions { CheckExitCode = false, StartInfo = psi }

@@ -57,12 +57,10 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
             _session.ReplacementsComputed += OnReplacementsComputed;
             _session.ReferenceLocationsChanged += OnReferenceLocationsChanged;
             StartingSelection = selectionSpan;
-            InitialTrackingSpan = session.TriggerSpan.CreateTrackingSpan(
-                SpanTrackingMode.EdgeInclusive
-            );
-            var smartRenameSession = smartRenameSessionFactory?.Value.CreateSmartRenameSession(
-                _session.TriggerSpan
-            );
+            InitialTrackingSpan = session.TriggerSpan
+                .CreateTrackingSpan(SpanTrackingMode.EdgeInclusive);
+            var smartRenameSession = smartRenameSessionFactory?.Value
+                .CreateSmartRenameSession(_session.TriggerSpan);
             if (smartRenameSession is not null)
             {
                 SmartRenameViewModel = new SmartRenameViewModel(

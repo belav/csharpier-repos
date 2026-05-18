@@ -179,10 +179,8 @@ namespace Mono.CSharp
 #if STATIC
             return base.MakeExpression(ctx);
 #else
-            return SLE.Expression.Block(
-                expr.MakeExpression(ctx),
-                SLE.Expression.Default(type.GetMetaInfo())
-            );
+            return SLE.Expression
+                .Block(expr.MakeExpression(ctx), SLE.Expression.Default(type.GetMetaInfo()));
 #endif
         }
     }
@@ -292,29 +290,32 @@ namespace Mono.CSharp
                 if (arg.Type == InternalType.VarOutType)
                 {
                     // Should be special error message about dynamic dispatch
-                    rc.Report.Error(
-                        8197,
-                        arg.Expr.Location,
-                        "Cannot infer the type of implicitly-typed out variable `{0}'",
-                        ((DeclarationExpression)arg.Expr).Variable.Name
-                    );
+                    rc.Report
+                        .Error(
+                            8197,
+                            arg.Expr.Location,
+                            "Cannot infer the type of implicitly-typed out variable `{0}'",
+                            ((DeclarationExpression)arg.Expr).Variable.Name
+                        );
                 }
                 else if (arg.Type == InternalType.DefaultType)
                 {
-                    rc.Report.Error(
-                        8311,
-                        arg.Expr.Location,
-                        "Cannot use a default literal as an argument to a dynamically dispatched operation"
-                    );
+                    rc.Report
+                        .Error(
+                            8311,
+                            arg.Expr.Location,
+                            "Cannot use a default literal as an argument to a dynamically dispatched operation"
+                        );
                 }
 
                 // Forced limitation because Microsoft.CSharp needs to catch up
                 if (i > 0 && arguments[i - 1] is NamedArgument && !(arguments[i] is NamedArgument))
-                    rc.Report.Error(
-                        8324,
-                        loc,
-                        "Named argument specifications must appear after all fixed arguments have been specified in a dynamic invocation"
-                    );
+                    rc.Report
+                        .Error(
+                            8324,
+                            loc,
+                            "Named argument specifications must appear after all fixed arguments have been specified in a dynamic invocation"
+                        );
                 ++i;
             }
 
@@ -339,11 +340,12 @@ namespace Mono.CSharp
             if (rc.Report.Errors == errors)
                 return true;
 
-            rc.Report.Error(
-                1969,
-                loc,
-                "Dynamic operation cannot be compiled without `Microsoft.CSharp.dll' assembly reference"
-            );
+            rc.Report
+                .Error(
+                    1969,
+                    loc,
+                    "Dynamic operation cannot be compiled without `Microsoft.CSharp.dll' assembly reference"
+                );
             return false;
         }
 
@@ -388,8 +390,8 @@ namespace Mono.CSharp
                 if (!ec.ConditionalAccess.Statement)
                 {
                     if (ec.ConditionalAccess.Type.IsNullableType)
-                        Nullable
-                            .LiftedNull.Create(ec.ConditionalAccess.Type, Location.Null)
+                        Nullable.LiftedNull
+                            .Create(ec.ConditionalAccess.Type, Location.Null)
                             .Emit(ec);
                     else
                         ec.EmitNull();

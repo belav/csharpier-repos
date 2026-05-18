@@ -444,22 +444,23 @@ namespace System.Threading.Tasks.Sources.Tests
                 var tcs = new TaskCompletionSource();
                 var ts = new TrackingTaskScheduler();
                 Assert.Equal(0, ts.QueueTasks);
-                await Task.Factory.StartNew(
-                    () =>
-                    {
-                        mrvts.OnCompleted(
-                            _ => tcs.SetResult(),
-                            null,
-                            0,
-                            captureTaskScheduler
-                                ? ValueTaskSourceOnCompletedFlags.UseSchedulingContext
-                                : ValueTaskSourceOnCompletedFlags.None
-                        );
-                    },
-                    CancellationToken.None,
-                    TaskCreationOptions.None,
-                    ts
-                );
+                await Task.Factory
+                    .StartNew(
+                        () =>
+                        {
+                            mrvts.OnCompleted(
+                                _ => tcs.SetResult(),
+                                null,
+                                0,
+                                captureTaskScheduler
+                                    ? ValueTaskSourceOnCompletedFlags.UseSchedulingContext
+                                    : ValueTaskSourceOnCompletedFlags.None
+                            );
+                        },
+                        CancellationToken.None,
+                        TaskCreationOptions.None,
+                        ts
+                    );
 
                 if (!setBeforeOnCompleted)
                 {

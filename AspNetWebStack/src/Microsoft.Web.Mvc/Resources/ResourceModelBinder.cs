@@ -108,12 +108,8 @@ namespace Microsoft.Web.Mvc.Resources
                 return true;
             }
             if (
-                !FormatManager.Current.TryDeserialize(
-                    controllerContext,
-                    bindingContext,
-                    requestFormat,
-                    out model
-                )
+                !FormatManager.Current
+                    .TryDeserialize(controllerContext, bindingContext, requestFormat, out model)
             )
             {
                 model = null;

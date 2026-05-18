@@ -212,9 +212,8 @@ namespace Mono.CodeContracts.Static.DataStructures
                 if (this.node_start_visitor != null && !this.node_start_visitor(node))
                     return;
 
-                this.todo.Push(
-                    new SearchFrame(node, this.graph.Successors(node).GetEnumerator(), info)
-                );
+                this.todo
+                    .Push(new SearchFrame(node, this.graph.Successors(node).GetEnumerator(), info));
             }
 
             private void VisitSuccessors(Info<Node> info, Node node)

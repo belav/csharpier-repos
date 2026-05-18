@@ -317,10 +317,11 @@ namespace Mono.CSharp
                             continue;
 
                         if (
-                            !TypeSpecComparer.Override.IsSame(
-                                compared_method.Parameters.Types,
-                                tested_method.Parameters.Types
-                            )
+                            !TypeSpecComparer.Override
+                                .IsSame(
+                                    compared_method.Parameters.Types,
+                                    tested_method.Parameters.Types
+                                )
                         )
                             continue;
 
@@ -360,13 +361,14 @@ namespace Mono.CSharp
 
                         pending.Report.SymbolRelatedToPreviousError(compared_method);
                         pending.Report.SymbolRelatedToPreviousError(tested_method);
-                        pending.Report.Error(
-                            767,
-                            container.Location,
-                            "Cannot implement interface `{0}' with the specified type parameters because it causes method `{1}' to differ on parameter modifiers only",
-                            p.type.GetDefinition().GetSignatureForError(),
-                            compared_method.GetSignatureForError()
-                        );
+                        pending.Report
+                            .Error(
+                                767,
+                                container.Location,
+                                "Cannot implement interface `{0}' with the specified type parameters because it causes method `{1}' to differ on parameter modifiers only",
+                                p.type.GetDefinition().GetSignatureForError(),
+                                compared_method.GetSignatureForError()
+                            );
 
                         break;
                     }
@@ -583,23 +585,25 @@ namespace Mono.CSharp
 
             var param = iface_method.Parameters;
 
-            MethodBuilder proxy = container.TypeBuilder.DefineMethod(
-                proxy_name,
-                MethodAttributes.Private
-                    | MethodAttributes.HideBySig
-                    | MethodAttributes.NewSlot
-                    | MethodAttributes.CheckAccessOnOverride
-                    | MethodAttributes.Virtual
-                    | MethodAttributes.Final,
-                CallingConventions.Standard | CallingConventions.HasThis,
-                base_method.ReturnType.GetMetaInfo(),
-                param.GetMetaInfo()
-            );
+            MethodBuilder proxy = container.TypeBuilder
+                .DefineMethod(
+                    proxy_name,
+                    MethodAttributes.Private
+                        | MethodAttributes.HideBySig
+                        | MethodAttributes.NewSlot
+                        | MethodAttributes.CheckAccessOnOverride
+                        | MethodAttributes.Virtual
+                        | MethodAttributes.Final,
+                    CallingConventions.Standard | CallingConventions.HasThis,
+                    base_method.ReturnType.GetMetaInfo(),
+                    param.GetMetaInfo()
+                );
 
             if (iface_method.IsGeneric)
             {
-                var gnames = iface_method
-                    .GenericDefinition.TypeParameters.Select(l => l.Name)
+                var gnames = iface_method.GenericDefinition
+                    .TypeParameters
+                    .Select(l => l.Name)
                     .ToArray();
                 proxy.DefineGenericParameters(gnames);
             }
@@ -628,10 +632,8 @@ namespace Mono.CSharp
             ec.Emit(OpCodes.Call, base_method);
             ec.Emit(OpCodes.Ret);
 
-            container.TypeBuilder.DefineMethodOverride(
-                proxy,
-                (MethodInfo)iface_method.GetMetaInfo()
-            );
+            container.TypeBuilder
+                .DefineMethodOverride(proxy, (MethodInfo)iface_method.GetMetaInfo());
         }
 
         /// <summary>
@@ -773,10 +775,8 @@ namespace Mono.CSharp
                                     break;
 
                                 if (
-                                    !TypeSpecComparer.Override.IsEqual(
-                                        mi.ReturnType,
-                                        ((MethodSpec)candidate).ReturnType
-                                    )
+                                    !TypeSpecComparer.Override
+                                        .IsEqual(mi.ReturnType, ((MethodSpec)candidate).ReturnType)
                                 )
                                     break;
 

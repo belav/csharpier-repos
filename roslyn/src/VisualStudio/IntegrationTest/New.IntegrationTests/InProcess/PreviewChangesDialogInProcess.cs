@@ -57,10 +57,8 @@ namespace Roslyn.VisualStudio.IntegrationTests.InProcess
                 "Apply",
                 cancellationToken
             );
-            await TestServices.Workspace.WaitForAsyncOperationsAsync(
-                featureName,
-                cancellationToken
-            );
+            await TestServices.Workspace
+                .WaitForAsyncOperationsAsync(featureName, cancellationToken);
         }
 
         public async Task ClickCancelAsync(

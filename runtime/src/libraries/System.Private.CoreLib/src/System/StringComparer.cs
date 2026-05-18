@@ -372,12 +372,13 @@ namespace System
 
             if (_ignoreCase)
             {
-                return Globalization.Ordinal.CompareStringIgnoreCase(
-                    ref x.GetRawStringData(),
-                    x.Length,
-                    ref y.GetRawStringData(),
-                    y.Length
-                );
+                return Globalization.Ordinal
+                    .CompareStringIgnoreCase(
+                        ref x.GetRawStringData(),
+                        x.Length,
+                        ref y.GetRawStringData(),
+                        y.Length
+                    );
             }
 
             return string.CompareOrdinal(x, y);
@@ -396,11 +397,8 @@ namespace System
                 {
                     return false;
                 }
-                return Globalization.Ordinal.EqualsIgnoreCase(
-                    ref x.GetRawStringData(),
-                    ref y.GetRawStringData(),
-                    x.Length
-                );
+                return Globalization.Ordinal
+                    .EqualsIgnoreCase(ref x.GetRawStringData(), ref y.GetRawStringData(), x.Length);
             }
             return x.Equals(y);
         }
@@ -498,12 +496,13 @@ namespace System
                 return 1;
             }
 
-            return Globalization.Ordinal.CompareStringIgnoreCase(
-                ref x.GetRawStringData(),
-                x.Length,
-                ref y.GetRawStringData(),
-                y.Length
-            );
+            return Globalization.Ordinal
+                .CompareStringIgnoreCase(
+                    ref x.GetRawStringData(),
+                    x.Length,
+                    ref y.GetRawStringData(),
+                    y.Length
+                );
         }
 
         public override bool Equals(string? x, string? y)
@@ -523,11 +522,8 @@ namespace System
                 return false;
             }
 
-            return Globalization.Ordinal.EqualsIgnoreCase(
-                ref x.GetRawStringData(),
-                ref y.GetRawStringData(),
-                x.Length
-            );
+            return Globalization.Ordinal
+                .EqualsIgnoreCase(ref x.GetRawStringData(), ref y.GetRawStringData(), x.Length);
         }
 
         public override int GetHashCode(string obj)

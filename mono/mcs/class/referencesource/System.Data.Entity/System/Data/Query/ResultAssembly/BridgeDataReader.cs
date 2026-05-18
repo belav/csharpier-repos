@@ -180,8 +180,7 @@ namespace System.Data.Query.ResultAssembly
 
             System.Data.Common.QueryCache.QueryCacheManager cacheManager =
                 workspace.GetQueryCacheManager();
-            const System.Data.Objects.MergeOption NoTracking = System
-                .Data
+            const System.Data.Objects.MergeOption NoTracking = System.Data
                 .Objects
                 .MergeOption
                 .NoTracking;

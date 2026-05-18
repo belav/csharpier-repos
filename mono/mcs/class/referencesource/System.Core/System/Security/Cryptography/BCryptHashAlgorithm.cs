@@ -169,15 +169,16 @@ namespace System.Security.Cryptography
                     hashObjectBuffer = Marshal.AllocCoTaskMem(hashObjectSize);
                 }
 
-                BCryptNative.ErrorCode error = BCryptNative.UnsafeNativeMethods.BCryptCreateHash(
-                    m_algorithmHandle,
-                    out newHashAlgorithm,
-                    hashObjectBuffer,
-                    hashObjectSize,
-                    IntPtr.Zero,
-                    0,
-                    0
-                );
+                BCryptNative.ErrorCode error = BCryptNative.UnsafeNativeMethods
+                    .BCryptCreateHash(
+                        m_algorithmHandle,
+                        out newHashAlgorithm,
+                        hashObjectBuffer,
+                        hashObjectSize,
+                        IntPtr.Zero,
+                        0,
+                        0
+                    );
 
                 if (error != BCryptNative.ErrorCode.Success)
                 {
@@ -233,12 +234,8 @@ namespace System.Security.Cryptography
             byte[] hashData = new byte[cbSize];
             Buffer.BlockCopy(array, ibStart, hashData, 0, cbSize);
 
-            BCryptNative.ErrorCode error = BCryptNative.UnsafeNativeMethods.BCryptHashData(
-                m_hashHandle,
-                hashData,
-                hashData.Length,
-                0
-            );
+            BCryptNative.ErrorCode error = BCryptNative.UnsafeNativeMethods
+                .BCryptHashData(m_hashHandle, hashData, hashData.Length, 0);
 
             if (error != BCryptNative.ErrorCode.Success)
             {
@@ -261,12 +258,8 @@ namespace System.Security.Cryptography
             );
 
             byte[] hashValue = new byte[hashSize];
-            BCryptNative.ErrorCode error = BCryptNative.UnsafeNativeMethods.BCryptFinishHash(
-                m_hashHandle,
-                hashValue,
-                hashValue.Length,
-                0
-            );
+            BCryptNative.ErrorCode error = BCryptNative.UnsafeNativeMethods
+                .BCryptFinishHash(m_hashHandle, hashValue, hashValue.Length, 0);
 
             if (error != BCryptNative.ErrorCode.Success)
             {

@@ -43,14 +43,15 @@ namespace Castle.DynamicProxy.Generators
                 MethodToOverride.GetParameters()
             );
 
-            emitter.CodeBuilder.AddStatement(
-                new ReturnStatement(
-                    new MethodInvocationExpression(targetReference, MethodToOverride, arguments)
-                    {
-                        VirtualCall = true,
-                    }
-                )
-            );
+            emitter.CodeBuilder
+                .AddStatement(
+                    new ReturnStatement(
+                        new MethodInvocationExpression(targetReference, MethodToOverride, arguments)
+                        {
+                            VirtualCall = true,
+                        }
+                    )
+                );
             return emitter;
         }
     }

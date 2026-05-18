@@ -54,9 +54,8 @@ namespace System.ServiceModel.Discovery
                 {
                     discoverySchema = schema;
                     if (
-                        schema.SchemaTypes.Contains(
-                            discoveryVersion.Implementation.QualifiedNames.ProbeMatchType
-                        )
+                        schema.SchemaTypes
+                            .Contains(discoveryVersion.Implementation.QualifiedNames.ProbeMatchType)
                     )
                     {
                         typesFound |= SchemaTypes.ProbeMatchType;
@@ -103,9 +102,8 @@ namespace System.ServiceModel.Discovery
                 {
                     discoverySchema = schema;
                     if (
-                        schema.SchemaTypes.Contains(
-                            discoveryVersion.Implementation.QualifiedNames.ProbeType
-                        )
+                        schema.SchemaTypes
+                            .Contains(discoveryVersion.Implementation.QualifiedNames.ProbeType)
                     )
                     {
                         typesFound |= SchemaTypes.ProbeType;
@@ -173,9 +171,8 @@ namespace System.ServiceModel.Discovery
                 {
                     discoverySchema = schema;
                     if (
-                        schema.SchemaTypes.Contains(
-                            discoveryVersion.Implementation.QualifiedNames.ResolveType
-                        )
+                        schema.SchemaTypes
+                            .Contains(discoveryVersion.Implementation.QualifiedNames.ResolveType)
                     )
                     {
                         typesFound |= SchemaTypes.ResolveType;
@@ -215,9 +212,10 @@ namespace System.ServiceModel.Discovery
                 {
                     discoverySchema = schema;
                     if (
-                        schema.SchemaTypes.Contains(
-                            discoveryVersion.Implementation.QualifiedNames.AppSequenceType
-                        )
+                        schema.SchemaTypes
+                            .Contains(
+                                discoveryVersion.Implementation.QualifiedNames.AppSequenceType
+                            )
                     )
                     {
                         add = false;
@@ -271,16 +269,14 @@ namespace System.ServiceModel.Discovery
             XmlSchemaComplexContentRestriction contentRestriction =
                 new XmlSchemaComplexContentRestriction();
             complexContent.Content = contentRestriction;
-            contentRestriction.BaseTypeName = discoveryVersion
-                .Implementation
+            contentRestriction.BaseTypeName = discoveryVersion.Implementation
                 .QualifiedNames
                 .AnyType;
 
             // <xs:attribute name="InstanceId" type="xs:unsignedInt" use="required" />
             XmlSchemaAttribute instanceId = new XmlSchemaAttribute();
             instanceId.Name = ProtocolStrings.SchemaNames.AppSequenceInstanceId;
-            instanceId.SchemaTypeName = discoveryVersion
-                .Implementation
+            instanceId.SchemaTypeName = discoveryVersion.Implementation
                 .QualifiedNames
                 .UnsignedIntType;
             instanceId.Use = XmlSchemaUse.Required;
@@ -293,8 +289,7 @@ namespace System.ServiceModel.Discovery
             // <xs:attribute name="MessageNumber" type="xs:unsignedInt" use="required" />
             XmlSchemaAttribute messageNumber = new XmlSchemaAttribute();
             messageNumber.Name = ProtocolStrings.SchemaNames.AppSequenceMessageNumber;
-            messageNumber.SchemaTypeName = discoveryVersion
-                .Implementation
+            messageNumber.SchemaTypeName = discoveryVersion.Implementation
                 .QualifiedNames
                 .UnsignedIntType;
             messageNumber.Use = XmlSchemaUse.Required;
@@ -327,8 +322,7 @@ namespace System.ServiceModel.Discovery
             // <xs:element name="MetadataVersion" type="xs:unsignedInt" />
             XmlSchemaElement metadataVersionElement = new XmlSchemaElement();
             metadataVersionElement.Name = ProtocolStrings.SchemaNames.MetadataVersionElement;
-            metadataVersionElement.SchemaTypeName = discoveryVersion
-                .Implementation
+            metadataVersionElement.SchemaTypeName = discoveryVersion.Implementation
                 .QualifiedNames
                 .UnsignedIntType;
 
@@ -400,8 +394,7 @@ namespace System.ServiceModel.Discovery
 
             //     <xs:element ref="tns:MetadataVersion" /> -- allowing minOccurs=0 because the same type is used for Bye messages
             XmlSchemaElement metadataVersionElement = new XmlSchemaElement();
-            metadataVersionElement.RefName = discoveryVersion
-                .Implementation
+            metadataVersionElement.RefName = discoveryVersion.Implementation
                 .QualifiedNames
                 .MetadataVersionElement;
             metadataVersionElement.MinOccurs = 0;
@@ -484,8 +477,7 @@ namespace System.ServiceModel.Discovery
 
             // <xs:list itemType="xs:QName" />
             XmlSchemaSimpleTypeList qNameListTypeContent = new XmlSchemaSimpleTypeList();
-            qNameListTypeContent.ItemTypeName = discoveryVersion
-                .Implementation
+            qNameListTypeContent.ItemTypeName = discoveryVersion.Implementation
                 .QualifiedNames
                 .QNameType;
 
@@ -532,8 +524,7 @@ namespace System.ServiceModel.Discovery
             // <xs:element name="Scopes" type="tns:ScopesType" />
             XmlSchemaElement scopesElement = new XmlSchemaElement();
             scopesElement.Name = ProtocolStrings.SchemaNames.ScopesElement;
-            scopesElement.SchemaTypeName = discoveryVersion
-                .Implementation
+            scopesElement.SchemaTypeName = discoveryVersion.Implementation
                 .QualifiedNames
                 .ScopesType;
 
@@ -552,8 +543,7 @@ namespace System.ServiceModel.Discovery
             //       <xs:extension base="tns:UriListType">
             XmlSchemaSimpleContentExtension scopesTypeContentExtension =
                 new XmlSchemaSimpleContentExtension();
-            scopesTypeContentExtension.BaseTypeName = discoveryVersion
-                .Implementation
+            scopesTypeContentExtension.BaseTypeName = discoveryVersion.Implementation
                 .QualifiedNames
                 .UriListType;
 
@@ -585,8 +575,7 @@ namespace System.ServiceModel.Discovery
             // <xs:element name="Types" type="tns:QNameListType" />
             XmlSchemaElement typesElement = new XmlSchemaElement();
             typesElement.Name = ProtocolStrings.SchemaNames.TypesElement;
-            typesElement.SchemaTypeName = discoveryVersion
-                .Implementation
+            typesElement.SchemaTypeName = discoveryVersion.Implementation
                 .QualifiedNames
                 .QNameListType;
 
@@ -601,8 +590,7 @@ namespace System.ServiceModel.Discovery
 
             // <xs:list itemType="xs:anyURI" />
             XmlSchemaSimpleTypeList uriListTypeContent = new XmlSchemaSimpleTypeList();
-            uriListTypeContent.ItemTypeName = discoveryVersion
-                .Implementation
+            uriListTypeContent.ItemTypeName = discoveryVersion.Implementation
                 .QualifiedNames
                 .AnyUriType;
 
@@ -617,8 +605,7 @@ namespace System.ServiceModel.Discovery
             // <xs:element name="XAddrs" type="tns:UriListType" />
             XmlSchemaElement xAddrsElement = new XmlSchemaElement();
             xAddrsElement.Name = ProtocolStrings.SchemaNames.XAddrsElement;
-            xAddrsElement.SchemaTypeName = discoveryVersion
-                .Implementation
+            xAddrsElement.SchemaTypeName = discoveryVersion.Implementation
                 .QualifiedNames
                 .UriListType;
 
@@ -645,9 +632,8 @@ namespace System.ServiceModel.Discovery
             if (
                 ((elementsFound & SchemaElements.Types) != SchemaElements.Types)
                 && (
-                    schema.Elements.Contains(
-                        discoveryVersion.Implementation.QualifiedNames.TypesElement
-                    )
+                    schema.Elements
+                        .Contains(discoveryVersion.Implementation.QualifiedNames.TypesElement)
                 )
             )
             {
@@ -656,9 +642,8 @@ namespace System.ServiceModel.Discovery
             if (
                 ((elementsFound & SchemaElements.Scopes) != SchemaElements.Scopes)
                 && (
-                    schema.Elements.Contains(
-                        discoveryVersion.Implementation.QualifiedNames.ScopesElement
-                    )
+                    schema.Elements
+                        .Contains(discoveryVersion.Implementation.QualifiedNames.ScopesElement)
                 )
             )
             {
@@ -667,9 +652,8 @@ namespace System.ServiceModel.Discovery
             if (
                 ((elementsFound & SchemaElements.XAddrs) != SchemaElements.XAddrs)
                 && (
-                    schema.Elements.Contains(
-                        discoveryVersion.Implementation.QualifiedNames.XAddrsElement
-                    )
+                    schema.Elements
+                        .Contains(discoveryVersion.Implementation.QualifiedNames.XAddrsElement)
                 )
             )
             {
@@ -678,9 +662,10 @@ namespace System.ServiceModel.Discovery
             if (
                 ((elementsFound & SchemaElements.MetadataVersion) != SchemaElements.MetadataVersion)
                 && (
-                    schema.Elements.Contains(
-                        discoveryVersion.Implementation.QualifiedNames.MetadataVersionElement
-                    )
+                    schema.Elements
+                        .Contains(
+                            discoveryVersion.Implementation.QualifiedNames.MetadataVersionElement
+                        )
                 )
             )
             {
@@ -697,9 +682,8 @@ namespace System.ServiceModel.Discovery
             if (
                 ((typesFound & SchemaTypes.QNameListType) != SchemaTypes.QNameListType)
                 && (
-                    schema.SchemaTypes.Contains(
-                        discoveryVersion.Implementation.QualifiedNames.QNameListType
-                    )
+                    schema.SchemaTypes
+                        .Contains(discoveryVersion.Implementation.QualifiedNames.QNameListType)
                 )
             )
             {
@@ -708,9 +692,8 @@ namespace System.ServiceModel.Discovery
             if (
                 ((typesFound & SchemaTypes.UriListType) != SchemaTypes.UriListType)
                 && (
-                    schema.SchemaTypes.Contains(
-                        discoveryVersion.Implementation.QualifiedNames.UriListType
-                    )
+                    schema.SchemaTypes
+                        .Contains(discoveryVersion.Implementation.QualifiedNames.UriListType)
                 )
             )
             {
@@ -719,9 +702,8 @@ namespace System.ServiceModel.Discovery
             if (
                 ((typesFound & SchemaTypes.ScopesType) != SchemaTypes.ScopesType)
                 && (
-                    schema.SchemaTypes.Contains(
-                        discoveryVersion.Implementation.QualifiedNames.ScopesType
-                    )
+                    schema.SchemaTypes
+                        .Contains(discoveryVersion.Implementation.QualifiedNames.ScopesType)
                 )
             )
             {

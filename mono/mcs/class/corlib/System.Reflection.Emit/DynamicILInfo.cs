@@ -63,9 +63,10 @@ namespace System.Reflection.Emit
 
         public int GetTokenFor(RuntimeFieldHandle field)
         {
-            return this
-                .method.GetILGenerator()
-                .TokenGenerator.GetToken(FieldInfo.GetFieldFromHandle(field), false);
+            return this.method
+                .GetILGenerator()
+                .TokenGenerator
+                .GetToken(FieldInfo.GetFieldFromHandle(field), false);
         }
 
         public int GetTokenFor(RuntimeMethodHandle method)

@@ -65,9 +65,8 @@ namespace Microsoft.CSharp.Activities
             }
             else
             {
-                throw FxTrace.Exception.AsError(
-                    new InvalidOperationException(SR.ActivityIsUncached)
-                );
+                throw FxTrace.Exception
+                    .AsError(new InvalidOperationException(SR.ActivityIsUncached));
             }
         }
     }

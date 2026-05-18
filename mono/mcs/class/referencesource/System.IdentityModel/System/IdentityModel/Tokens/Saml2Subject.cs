@@ -44,9 +44,8 @@ namespace System.IdentityModel.Tokens
         {
             if (null == subjectConfirmation)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                    "subjectConfirmation"
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperArgumentNull("subjectConfirmation");
             }
 
             this.subjectConfirmations.Add(subjectConfirmation);

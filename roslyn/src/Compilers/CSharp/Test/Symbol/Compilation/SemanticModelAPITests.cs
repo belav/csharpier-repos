@@ -2122,9 +2122,9 @@ class C
             Assert.True(success);
             Assert.NotNull(speculativeModel);
 
-            var declarator = (
-                (LocalDeclarationStatementSyntax)statement
-            ).Declaration.Variables.First();
+            var declarator = ((LocalDeclarationStatementSyntax)statement).Declaration
+                .Variables
+                .First();
             var local = speculativeModel.GetDeclaredSymbol(declarator);
             Assert.NotNull(local);
             Assert.Equal("z", local.Name);
@@ -2495,8 +2495,8 @@ foreach(short ele in a)
             Assert.Null(symbol);
             Assert.Equal(CandidateReason.OverloadResolutionFailure, info.CandidateReason);
             Assert.Equal(2, info.CandidateSymbols.Length);
-            var sortedCandidates = info
-                .CandidateSymbols.OrderBy(s => s.ToTestDisplayString())
+            var sortedCandidates = info.CandidateSymbols
+                .OrderBy(s => s.ToTestDisplayString())
                 .ToArray();
             Assert.Equal("C..ctor()", sortedCandidates[0].ToTestDisplayString());
             Assert.Equal(SymbolKind.Method, sortedCandidates[0].Kind);
@@ -3112,7 +3112,9 @@ class C
 
             var declarator = (
                 (LocalDeclarationStatementSyntax)blockStatement.Statements[0]
-            ).Declaration.Variables.First();
+            ).Declaration
+                .Variables
+                .First();
             var local = speculativeModel.GetDeclaredSymbol(declarator);
             Assert.NotNull(local);
             Assert.Equal("z", local.Name);
@@ -3130,9 +3132,9 @@ class C
             );
             Assert.True(success);
             Assert.NotNull(speculativeModel);
-            declarator = (
-                (LocalDeclarationStatementSyntax)blockStatement.Statements[0]
-            ).Declaration.Variables.First();
+            declarator = ((LocalDeclarationStatementSyntax)blockStatement.Statements[0]).Declaration
+                .Variables
+                .First();
             local = speculativeModel.GetDeclaredSymbol(declarator);
             Assert.NotNull(local);
             Assert.Equal("y", local.Name);
@@ -3150,9 +3152,9 @@ class C
             );
             Assert.True(success);
             Assert.NotNull(speculativeModel);
-            declarator = (
-                (LocalDeclarationStatementSyntax)blockStatement.Statements[0]
-            ).Declaration.Variables.First();
+            declarator = ((LocalDeclarationStatementSyntax)blockStatement.Statements[0]).Declaration
+                .Variables
+                .First();
             local = speculativeModel.GetDeclaredSymbol(declarator);
             Assert.NotNull(local);
             Assert.Equal("y", local.Name);
@@ -3807,7 +3809,8 @@ public class C
                 .DescendantNodes()
                 .OfType<SimpleLambdaExpressionSyntax>()
                 .Single()
-                .Body.DescendantNodesAndSelf()
+                .Body
+                .DescendantNodesAndSelf()
                 .OfType<IdentifierNameSyntax>()
                 .Single();
             Assert.Equal("x", syntax.Identifier.ValueText);
@@ -4355,10 +4358,13 @@ class C { }";
         {
             return SyntaxFactory
                 .ParseCompilationUnit(source + " class X {}")
-                .Members.First()
+                .Members
+                .First()
                 .AsTypeDeclarationSyntax()
-                .AttributeLists.First()
-                .Attributes.First();
+                .AttributeLists
+                .First()
+                .Attributes
+                .First();
         }
 
         [WorkItem(784255, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/784255")]
@@ -4664,8 +4670,8 @@ static class Extensions
             var comp = CreateCompilationWithMscorlib40AndSystemCore(source);
             comp.VerifyDiagnostics();
 
-            var extensionMethod = comp
-                .GlobalNamespace.GetMember<NamedTypeSymbol>("Extensions")
+            var extensionMethod = comp.GlobalNamespace
+                .GetMember<NamedTypeSymbol>("Extensions")
                 .GetMember<MethodSymbol>("ToString");
 
             var tree = comp.SyntaxTrees.Single();
@@ -4783,12 +4789,13 @@ static class Program
                 .DescendantNodes()
                 .OfType<MethodDeclarationSyntax>()
                 .Single();
-            var init0 = method
-                .Body.Statements[0]
+            var init0 = method.Body
+                .Statements[0]
                 .DescendantNodes()
                 .OfType<VariableDeclaratorSyntax>()
                 .Single()
-                .Initializer.Value;
+                .Initializer
+                .Value;
             var value0 = model.GetConstantValue(init0);
             var typeInfo0 = model.GetTypeInfo(init0);
             Assert.True(value0.HasValue);
@@ -4799,12 +4806,13 @@ static class Program
 
             // The CodePlex bug indicates this should return a constant value of 5.  While 'case2' should
             // have that value it is not constant because of the nullable cast
-            var init1 = method
-                .Body.Statements[2]
+            var init1 = method.Body
+                .Statements[2]
                 .DescendantNodes()
                 .OfType<VariableDeclaratorSyntax>()
                 .Single()
-                .Initializer.Value;
+                .Initializer
+                .Value;
             var value1 = model.GetConstantValue(init1);
             var typeInfo1 = model.GetTypeInfo(init1);
             var type1 = comp.GetSpecialType(SpecialType.System_Nullable_T)
@@ -4812,12 +4820,13 @@ static class Program
             Assert.False(value1.HasValue);
             Assert.True(typeInfo1.Type != null && typeInfo1.Type.Equals(type1));
 
-            var init2 = method
-                .Body.Statements[4]
+            var init2 = method.Body
+                .Statements[4]
                 .DescendantNodes()
                 .OfType<VariableDeclaratorSyntax>()
                 .Single()
-                .Initializer.Value;
+                .Initializer
+                .Value;
             var value2 = model.GetConstantValue(init2);
             var typeInfo2 = model.GetTypeInfo(init2);
             var type2 = comp.GetSpecialType(SpecialType.System_Nullable_T)

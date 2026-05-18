@@ -85,10 +85,8 @@ namespace System.Data.SqlClient
 
         internal static Expression Property<TPropertyType>(this Expression exp, string propertyName)
         {
-            PropertyInfo prop = exp.Type.GetProperty(
-                propertyName,
-                BindingFlags.Instance | BindingFlags.Public
-            );
+            PropertyInfo prop = exp.Type
+                .GetProperty(propertyName, BindingFlags.Instance | BindingFlags.Public);
             Debug.Assert(
                 prop != null,
                 "Type '"
@@ -223,38 +221,33 @@ namespace System.Data.SqlClient
             );
 
             // Retrieve SQL Server specific primitive types
-            MethodInfo asTextMethod = this.SqlGeometryType.GetMethod(
-                "STAsText",
-                BindingFlags.Public | BindingFlags.Instance,
-                null,
-                Type.EmptyTypes,
-                null
-            );
+            MethodInfo asTextMethod = this.SqlGeometryType
+                .GetMethod(
+                    "STAsText",
+                    BindingFlags.Public | BindingFlags.Instance,
+                    null,
+                    Type.EmptyTypes,
+                    null
+                );
             this.SqlCharsType = asTextMethod.ReturnType;
-            this.SqlStringType = this.SqlCharsType.Assembly.GetType(
-                "System.Data.SqlTypes.SqlString",
-                throwOnError: true
-            );
-            this.SqlBooleanType = this.SqlCharsType.Assembly.GetType(
-                "System.Data.SqlTypes.SqlBoolean",
-                throwOnError: true
-            );
-            this.SqlBytesType = this.SqlCharsType.Assembly.GetType(
-                "System.Data.SqlTypes.SqlBytes",
-                throwOnError: true
-            );
-            this.SqlDoubleType = this.SqlCharsType.Assembly.GetType(
-                "System.Data.SqlTypes.SqlDouble",
-                throwOnError: true
-            );
-            this.SqlInt32Type = this.SqlCharsType.Assembly.GetType(
-                "System.Data.SqlTypes.SqlInt32",
-                throwOnError: true
-            );
-            this.SqlXmlType = this.SqlCharsType.Assembly.GetType(
-                "System.Data.SqlTypes.SqlXml",
-                throwOnError: true
-            );
+            this.SqlStringType = this.SqlCharsType
+                .Assembly
+                .GetType("System.Data.SqlTypes.SqlString", throwOnError: true);
+            this.SqlBooleanType = this.SqlCharsType
+                .Assembly
+                .GetType("System.Data.SqlTypes.SqlBoolean", throwOnError: true);
+            this.SqlBytesType = this.SqlCharsType
+                .Assembly
+                .GetType("System.Data.SqlTypes.SqlBytes", throwOnError: true);
+            this.SqlDoubleType = this.SqlCharsType
+                .Assembly
+                .GetType("System.Data.SqlTypes.SqlDouble", throwOnError: true);
+            this.SqlInt32Type = this.SqlCharsType
+                .Assembly
+                .GetType("System.Data.SqlTypes.SqlInt32", throwOnError: true);
+            this.SqlXmlType = this.SqlCharsType
+                .Assembly
+                .GetType("System.Data.SqlTypes.SqlXml", throwOnError: true);
 
             // Create type conversion delegates to SQL Server types
             this.sqlBytesFromByteArray = Expressions
@@ -864,10 +857,8 @@ namespace System.Data.SqlClient
                 sqlCharsType.Name == "SqlChars",
                 "String argument used with non-SqlChars static constructor method?"
             );
-            Type sqlString = sqlCharsType.Assembly.GetType(
-                "System.Data.SqlTypes.SqlString",
-                throwOnError: true
-            );
+            Type sqlString = sqlCharsType.Assembly
+                .GetType("System.Data.SqlTypes.SqlString", throwOnError: true);
             ConstructorInfo sqlCharsFromSqlStringCtor = sqlCharsType.GetConstructor(
                 BindingFlags.Instance | BindingFlags.Public,
                 null,

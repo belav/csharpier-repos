@@ -110,9 +110,8 @@ namespace System.ServiceModel.Channels
             {
                 if (!ContextExchangeMechanismHelper.IsDefined(value))
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ArgumentOutOfRangeException("value")
-                    );
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperError(new ArgumentOutOfRangeException("value"));
                 }
                 this.contextExchangeMechanism = value;
             }
@@ -133,9 +132,8 @@ namespace System.ServiceModel.Channels
             {
                 if (!ProtectionLevelHelper.IsDefined(value))
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ArgumentOutOfRangeException("value")
-                    );
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperError(new ArgumentOutOfRangeException("value"));
                 }
                 this.protectionLevel = value;
             }
@@ -151,14 +149,15 @@ namespace System.ServiceModel.Channels
             }
             if (!this.CanBuildChannelFactory<TChannel>(context))
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(
-                        SR.GetString(
-                            SR.ContextBindingElementCannotProvideChannelFactory,
-                            typeof(TChannel).ToString()
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(
+                                SR.ContextBindingElementCannotProvideChannelFactory,
+                                typeof(TChannel).ToString()
+                            )
                         )
-                    )
-                );
+                    );
             }
 
             this.EnsureContextExchangeMechanismCompatibleWithScheme(context);
@@ -182,14 +181,15 @@ namespace System.ServiceModel.Channels
             }
             if (!this.CanBuildChannelListener<TChannel>(context))
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(
-                        SR.GetString(
-                            SR.ContextBindingElementCannotProvideChannelListener,
-                            typeof(TChannel).ToString()
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(
+                                SR.ContextBindingElementCannotProvideChannelListener,
+                                typeof(TChannel).ToString()
+                            )
                         )
-                    )
-                );
+                    );
             }
 
             this.EnsureContextExchangeMechanismCompatibleWithScheme(context);
@@ -394,16 +394,17 @@ namespace System.ServiceModel.Channels
                 {
                     if (endpoint.Binding.GetProperty<IContextBindingElement>(bpc) == null)
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new InvalidOperationException(
-                                SR.GetString(
-                                    SR.BehaviorRequiresContextProtocolSupportInBinding,
-                                    callingBehavior.GetType().Name,
-                                    endpoint.Name,
-                                    endpoint.ListenUri.ToString()
+                        throw DiagnosticUtility.ExceptionUtility
+                            .ThrowHelperError(
+                                new InvalidOperationException(
+                                    SR.GetString(
+                                        SR.BehaviorRequiresContextProtocolSupportInBinding,
+                                        callingBehavior.GetType().Name,
+                                        endpoint.Name,
+                                        endpoint.ListenUri.ToString()
+                                    )
                                 )
-                            )
-                        );
+                            );
                     }
                 }
             }
@@ -418,16 +419,17 @@ namespace System.ServiceModel.Channels
                 && !"https".Equals(context.Binding.Scheme, StringComparison.OrdinalIgnoreCase)
             )
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(
-                        SR.GetString(
-                            SR.HttpCookieContextExchangeMechanismNotCompatibleWithTransportType,
-                            context.Binding.Scheme,
-                            context.Binding.Namespace,
-                            context.Binding.Name
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(
+                                SR.HttpCookieContextExchangeMechanismNotCompatibleWithTransportType,
+                                context.Binding.Scheme,
+                                context.Binding.Namespace,
+                                context.Binding.Name
+                            )
                         )
-                    )
-                );
+                    );
             }
         }
 
@@ -446,15 +448,16 @@ namespace System.ServiceModel.Channels
                         bindingElement as HttpTransportBindingElement;
                     if (http != null && http.AllowCookies)
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new InvalidOperationException(
-                                SR.GetString(
-                                    SR.HttpCookieContextExchangeMechanismNotCompatibleWithTransportCookieSetting,
-                                    context.Binding.Namespace,
-                                    context.Binding.Name
+                        throw DiagnosticUtility.ExceptionUtility
+                            .ThrowHelperError(
+                                new InvalidOperationException(
+                                    SR.GetString(
+                                        SR.HttpCookieContextExchangeMechanismNotCompatibleWithTransportCookieSetting,
+                                        context.Binding.Namespace,
+                                        context.Binding.Name
+                                    )
                                 )
-                            )
-                        );
+                            );
                     }
                 }
             }

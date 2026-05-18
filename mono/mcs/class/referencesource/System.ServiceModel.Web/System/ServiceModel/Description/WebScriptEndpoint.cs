@@ -37,19 +37,20 @@ namespace System.ServiceModel.Description
         {
             get
             {
-                WebScriptEnablingBehavior webScriptEnablingBehavior =
-                    this.Behaviors.Find<WebScriptEnablingBehavior>();
+                WebScriptEnablingBehavior webScriptEnablingBehavior = this.Behaviors
+                    .Find<WebScriptEnablingBehavior>();
                 if (webScriptEnablingBehavior == null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(
-                            SR2.GetString(
-                                SR2.WebBehaviorNotFoundWithEndpoint,
-                                WebEndpointType.Name,
-                                typeof(WebScriptEnablingBehavior).Name
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(
+                                SR2.GetString(
+                                    SR2.WebBehaviorNotFoundWithEndpoint,
+                                    WebEndpointType.Name,
+                                    typeof(WebScriptEnablingBehavior).Name
+                                )
                             )
-                        )
-                    );
+                        );
                 }
                 return webScriptEnablingBehavior;
             }

@@ -69,9 +69,8 @@ namespace MonoCasTests.System.Web.UI
             AspNetHostingPermissionLevel level
         )
         {
-            ConstructorInfo ci = this.Type.GetConstructor(
-                new Type[1] { typeof(BuildTemplateMethod) }
-            );
+            ConstructorInfo ci = this.Type
+                .GetConstructor(new Type[1] { typeof(BuildTemplateMethod) });
             Assert.IsNotNull(ci, ".ctor(BuildTemplateMethod)");
             return ci.Invoke(new object[1] { new BuildTemplateMethod(BuildTemplate) });
         }

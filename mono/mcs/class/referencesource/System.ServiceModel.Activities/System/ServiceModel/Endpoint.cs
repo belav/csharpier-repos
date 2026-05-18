@@ -73,11 +73,12 @@ namespace System.ServiceModel
                     ContractValidationHelper.GetErrorMessageEndpointServiceContractName(
                         this.ServiceContractName
                     );
-                throw FxTrace.Exception.AsError(
-                    new InvalidOperationException(
-                        SMASR.MissingUriInEndpoint(endpointName, contractName)
-                    )
-                );
+                throw FxTrace.Exception
+                    .AsError(
+                        new InvalidOperationException(
+                            SMASR.MissingUriInEndpoint(endpointName, contractName)
+                        )
+                    );
             }
 
             Uri address = null;
@@ -96,15 +97,16 @@ namespace System.ServiceModel
                         ContractValidationHelper.GetErrorMessageEndpointServiceContractName(
                             this.ServiceContractName
                         );
-                    throw FxTrace.Exception.AsError(
-                        new InvalidOperationException(
-                            SMASR.RelativeUriRequiresBinding(
-                                endpointName,
-                                contractName,
-                                this.AddressUri
+                    throw FxTrace.Exception
+                        .AsError(
+                            new InvalidOperationException(
+                                SMASR.RelativeUriRequiresBinding(
+                                    endpointName,
+                                    contractName,
+                                    this.AddressUri
+                                )
                             )
-                        )
-                    );
+                        );
                 }
                 if (host == null)
                 {
@@ -115,15 +117,16 @@ namespace System.ServiceModel
                         ContractValidationHelper.GetErrorMessageEndpointServiceContractName(
                             this.ServiceContractName
                         );
-                    throw FxTrace.Exception.AsError(
-                        new InvalidOperationException(
-                            SMASR.RelativeUriRequiresHost(
-                                endpointName,
-                                contractName,
-                                this.AddressUri
+                    throw FxTrace.Exception
+                        .AsError(
+                            new InvalidOperationException(
+                                SMASR.RelativeUriRequiresHost(
+                                    endpointName,
+                                    contractName,
+                                    this.AddressUri
+                                )
                             )
-                        )
-                    );
+                        );
                 }
                 address = host.MakeAbsoluteUri(this.AddressUri, this.Binding);
             }

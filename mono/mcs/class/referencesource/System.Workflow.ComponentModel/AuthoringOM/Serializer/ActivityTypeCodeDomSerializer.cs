@@ -50,12 +50,13 @@ namespace System.Workflow.ComponentModel.Serialization
                 // Now create a ctor that calls this method.
                 CodeConstructor ctor = new CodeConstructor();
                 ctor.Attributes = MemberAttributes.Public;
-                ctor.Statements.Add(
-                    new CodeMethodInvokeExpression(
-                        new CodeThisReferenceExpression(),
-                        _initMethodName
-                    )
-                );
+                ctor.Statements
+                    .Add(
+                        new CodeMethodInvokeExpression(
+                            new CodeThisReferenceExpression(),
+                            _initMethodName
+                        )
+                    );
                 typeDecl.Members.Add(ctor);
             }
             return method;

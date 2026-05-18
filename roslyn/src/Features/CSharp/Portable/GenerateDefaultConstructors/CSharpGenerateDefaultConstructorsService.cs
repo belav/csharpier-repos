@@ -40,8 +40,8 @@ namespace Microsoft.CodeAnalysis.CSharp.GenerateDefaultConstructors
             // Offer the feature if we're on the header / between members of the class/struct,
             // or if we're on the first base-type of a class
 
-            var helpers =
-                semanticDocument.Document.GetRequiredLanguageService<IRefactoringHelpersService>();
+            var helpers = semanticDocument.Document
+                .GetRequiredLanguageService<IRefactoringHelpersService>();
             if (
                 helpers.IsOnTypeHeader(
                     semanticDocument.Root,
@@ -57,10 +57,8 @@ namespace Microsoft.CodeAnalysis.CSharp.GenerateDefaultConstructors
             )
             {
                 classType =
-                    semanticDocument.SemanticModel.GetDeclaredSymbol(
-                        typeDeclaration,
-                        cancellationToken
-                    ) as INamedTypeSymbol;
+                    semanticDocument.SemanticModel
+                        .GetDeclaredSymbol(typeDeclaration, cancellationToken) as INamedTypeSymbol;
                 return classType?.TypeKind is TypeKind.Class or TypeKind.Struct;
             }
 
@@ -85,10 +83,8 @@ namespace Microsoft.CodeAnalysis.CSharp.GenerateDefaultConstructors
                     && firstType.Type == node
                 )
                 {
-                    classType = semanticDocument.SemanticModel.GetDeclaredSymbol(
-                        parentTypeDecl,
-                        cancellationToken
-                    );
+                    classType = semanticDocument.SemanticModel
+                        .GetDeclaredSymbol(parentTypeDecl, cancellationToken);
                     return classType != null;
                 }
             }

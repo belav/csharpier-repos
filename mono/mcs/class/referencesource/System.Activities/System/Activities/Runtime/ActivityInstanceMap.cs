@@ -404,11 +404,12 @@ namespace System.Activities.Runtime
                     int[] oldIdArray = oldQualifiedId.AsIDArray();
                     if (oldIdArray.Length == 1 && oldIdArray[0] != 1)
                     {
-                        throw FxTrace.Exception.AsError(
-                            new InstanceUpdateException(
-                                SR.InvalidImplementationAsWorkflowRootForRuntimeState
-                            )
-                        );
+                        throw FxTrace.Exception
+                            .AsError(
+                                new InstanceUpdateException(
+                                    SR.InvalidImplementationAsWorkflowRootForRuntimeState
+                                )
+                            );
                     }
                 }
 
@@ -582,8 +583,7 @@ namespace System.Activities.Runtime
 
                     if (implementationVersionUpdateNeeded)
                     {
-                        activityInstance.ImplementationVersion = update
-                            .NewActivity
+                        activityInstance.ImplementationVersion = update.NewActivity
                             .ImplementationVersion;
                     }
                 }
@@ -683,12 +683,13 @@ namespace System.Activities.Runtime
                                 throw;
                             }
 
-                            throw FxTrace.Exception.AsError(
-                                new InstanceUpdateException(
-                                    SR.NativeActivityUpdateInstanceThrewException(e.Message),
-                                    e
-                                )
-                            );
+                            throw FxTrace.Exception
+                                .AsError(
+                                    new InstanceUpdateException(
+                                        SR.NativeActivityUpdateInstanceThrewException(e.Message),
+                                        e
+                                    )
+                                );
                         }
                         finally
                         {
@@ -836,9 +837,8 @@ namespace System.Activities.Runtime
                 Activity activity;
                 if (!QualifiedId.TryGetElementFromRoot(rootActivity, list.ActivityId, out activity))
                 {
-                    throw FxTrace.Exception.AsError(
-                        new InvalidOperationException(SR.ActivityInstanceFixupFailed)
-                    );
+                    throw FxTrace.Exception
+                        .AsError(new InvalidOperationException(SR.ActivityInstanceFixupFailed));
                 }
                 this.instanceMapping.Add(activity, list);
                 list.Load(activity, this);

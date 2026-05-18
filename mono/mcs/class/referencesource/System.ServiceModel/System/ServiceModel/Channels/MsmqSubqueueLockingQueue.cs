@@ -93,17 +93,18 @@ namespace System.ServiceModel.Channels
         {
             if (!this.validHostName)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new MsmqException(
-                        SR.GetString(
-                            SR.MsmqOpenError,
-                            MsmqError.GetErrorString(
-                                UnsafeNativeMethods.MQ_ERROR_UNSUPPORTED_FORMATNAME_OPERATION
-                            )
-                        ),
-                        UnsafeNativeMethods.MQ_ERROR_UNSUPPORTED_FORMATNAME_OPERATION
-                    )
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        new MsmqException(
+                            SR.GetString(
+                                SR.MsmqOpenError,
+                                MsmqError.GetErrorString(
+                                    UnsafeNativeMethods.MQ_ERROR_UNSUPPORTED_FORMATNAME_OPERATION
+                                )
+                            ),
+                            UnsafeNativeMethods.MQ_ERROR_UNSUPPORTED_FORMATNAME_OPERATION
+                        )
+                    );
             }
 
             this.EnsureLockQueuesOpen();
@@ -204,12 +205,13 @@ namespace System.ServiceModel.Channels
             MoveReceiveResult lookupIdReceiveResult;
             try
             {
-                lookupIdReceiveResult = this.lockQueueForReceive.TryReceiveByLookupId(
-                    lookupId,
-                    message,
-                    MsmqTransactionMode.None,
-                    UnsafeNativeMethods.MQ_LOOKUP_PEEK_CURRENT
-                );
+                lookupIdReceiveResult = this.lockQueueForReceive
+                    .TryReceiveByLookupId(
+                        lookupId,
+                        message,
+                        MsmqTransactionMode.None,
+                        UnsafeNativeMethods.MQ_LOOKUP_PEEK_CURRENT
+                    );
             }
             catch (MsmqException ex)
             {
@@ -237,11 +239,12 @@ namespace System.ServiceModel.Channels
             {
                 using (MsmqEmptyMessage emptyMessage = new MsmqEmptyMessage())
                 {
-                    receiveResult = this.lockQueueForReceive.TryReceiveByLookupId(
-                        lookupId,
-                        emptyMessage,
-                        MsmqTransactionMode.CurrentOrNone
-                    );
+                    receiveResult = this.lockQueueForReceive
+                        .TryReceiveByLookupId(
+                            lookupId,
+                            emptyMessage,
+                            MsmqTransactionMode.CurrentOrNone
+                        );
                 }
 
                 if (receiveResult != MsmqQueue.MoveReceiveResult.MessageLockedUnderTransaction)
@@ -258,14 +261,15 @@ namespace System.ServiceModel.Channels
             // ..not much we can do in any of these cases
             if (receiveResult != MoveReceiveResult.Succeeded)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new MsmqException(
-                        SR.GetString(
-                            SR.MsmqReceiveContextMessageNotReceived,
-                            lookupId.ToString(CultureInfo.InvariantCulture)
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        new MsmqException(
+                            SR.GetString(
+                                SR.MsmqReceiveContextMessageNotReceived,
+                                lookupId.ToString(CultureInfo.InvariantCulture)
+                            )
                         )
-                    )
-                );
+                    );
             }
         }
 
@@ -275,11 +279,8 @@ namespace System.ServiceModel.Channels
             IPostRollbackErrorStrategy postRollBack = new SimplePostRollbackErrorStrategy(lookupId);
             do
             {
-                moveResult = this.lockQueueForReceive.TryMoveMessage(
-                    lookupId,
-                    this.mainQueueForMove,
-                    MsmqTransactionMode.None
-                );
+                moveResult = this.lockQueueForReceive
+                    .TryMoveMessage(lookupId, this.mainQueueForMove, MsmqTransactionMode.None);
                 if (moveResult != MsmqQueue.MoveReceiveResult.MessageLockedUnderTransaction)
                     break;
 
@@ -295,14 +296,15 @@ namespace System.ServiceModel.Channels
                 //  c) ---- with Channel.Close()
                 // ..not much we can do in any of these cases
 
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new MsmqException(
-                        SR.GetString(
-                            SR.MsmqReceiveContextMessageNotMoved,
-                            lookupId.ToString(CultureInfo.InvariantCulture)
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        new MsmqException(
+                            SR.GetString(
+                                SR.MsmqReceiveContextMessageNotMoved,
+                                lookupId.ToString(CultureInfo.InvariantCulture)
+                            )
                         )
-                    )
-                );
+                    );
             }
         }
 
@@ -385,12 +387,13 @@ namespace System.ServiceModel.Channels
                     }
                     else
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new MsmqException(
-                                SR.GetString(SR.MsmqOpenError, MsmqError.GetErrorString(error)),
-                                error
-                            )
-                        );
+                        throw DiagnosticUtility.ExceptionUtility
+                            .ThrowHelperError(
+                                new MsmqException(
+                                    SR.GetString(SR.MsmqOpenError, MsmqError.GetErrorString(error)),
+                                    error
+                                )
+                            );
                     }
                 }
             }

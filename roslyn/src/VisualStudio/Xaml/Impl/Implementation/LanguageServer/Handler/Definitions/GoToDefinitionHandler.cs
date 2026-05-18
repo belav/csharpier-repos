@@ -68,8 +68,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml.Implementation.LanguageSe
                 return locations.ToArray();
             }
 
-            var xamlGoToDefinitionService =
-                document.Project.Services.GetService<IXamlGoToDefinitionService>();
+            var xamlGoToDefinitionService = document.Project
+                .Services
+                .GetService<IXamlGoToDefinitionService>();
             if (xamlGoToDefinitionService == null)
             {
                 return locations.ToArray();
@@ -165,10 +166,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml.Implementation.LanguageSe
             if (sourceDefinition.Span != null)
             {
                 // If the Span is not null, use the span.
-                var document = context
-                    .Solution?.GetDocuments(
-                        ProtocolConversions.CreateAbsoluteUri(sourceDefinition.FilePath)
-                    )
+                var document = context.Solution
+                    ?.GetDocuments(ProtocolConversions.CreateAbsoluteUri(sourceDefinition.FilePath))
                     .FirstOrDefault();
                 if (document != null)
                 {
@@ -239,8 +238,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml.Implementation.LanguageSe
                 RoslynDebug.AssertNotNull(context.Solution);
                 foreach (var item in items)
                 {
-                    var document = await item
-                        .Document.GetRequiredDocumentAsync(context.Solution, cancellationToken)
+                    var document = await item.Document
+                        .GetRequiredDocumentAsync(context.Solution, cancellationToken)
                         .ConfigureAwait(false);
                     var location = await ProtocolConversions
                         .TextSpanToLocationAsync(

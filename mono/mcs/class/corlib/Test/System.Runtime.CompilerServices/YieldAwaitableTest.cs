@@ -149,23 +149,24 @@ namespace MonoTests.System.Runtime.CompilerServices
             TaskScheduler ran_scheduler = null;
             SynchronizationContext.SetSynchronizationContext(null);
 
-            var t = Task.Factory.StartNew(
-                () =>
-                {
-                    var mre = new ManualResetEvent(false);
-
-                    a.OnCompleted(() =>
+            var t = Task.Factory
+                .StartNew(
+                    () =>
                     {
-                        ran_scheduler = TaskScheduler.Current;
-                        mre.Set();
-                    });
+                        var mre = new ManualResetEvent(false);
 
-                    mre.WaitOne(1000);
-                },
-                CancellationToken.None,
-                TaskCreationOptions.None,
-                scheduler
-            );
+                        a.OnCompleted(() =>
+                        {
+                            ran_scheduler = TaskScheduler.Current;
+                            mre.Set();
+                        });
+
+                        mre.WaitOne(1000);
+                    },
+                    CancellationToken.None,
+                    TaskCreationOptions.None,
+                    scheduler
+                );
 
             Assert.IsTrue(t.Wait(1000), "#1");
             Assert.AreEqual(scheduler, ran_scheduler, "#2");

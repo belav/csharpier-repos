@@ -373,8 +373,7 @@ namespace System.Linq.Parallel
             private void ThrowIfInTearDown()
             {
                 if (
-                    m_mergeHelper
-                        .m_taskGroupState
+                    m_mergeHelper.m_taskGroupState
                         .CancellationState
                         .MergedCancellationToken
                         .IsCancellationRequested

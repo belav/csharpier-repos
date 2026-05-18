@@ -475,22 +475,22 @@ namespace System
                 }
                 if (current.finalCompoundSegment != null)
                 {
-                    IList<IList<UriTemplatePathPartiallyEquivalentSet>> pesLists = current
-                        .finalCompoundSegment
-                        .Values;
+                    IList<IList<UriTemplatePathPartiallyEquivalentSet>> pesLists =
+                        current.finalCompoundSegment.Values;
                     for (int i = 0; i < pesLists.Count; i++)
                     {
                         if (!allowDuplicateEquivalentUriTemplates && (pesLists[i].Count > 1))
                         {
-                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                                new InvalidOperationException(
-                                    SR.GetString(
-                                        SR.UTTDuplicate,
-                                        pesLists[i][0].Items[0].Key.ToString(),
-                                        pesLists[i][1].Items[0].Key.ToString()
+                            throw DiagnosticUtility.ExceptionUtility
+                                .ThrowHelperError(
+                                    new InvalidOperationException(
+                                        SR.GetString(
+                                            SR.UTTDuplicate,
+                                            pesLists[i][0].Items[0].Key.ToString(),
+                                            pesLists[i][1].Items[0].Key.ToString()
+                                        )
                                     )
-                                )
-                            );
+                                );
                         }
                         for (int j = 0; j < pesLists[i].Count; j++)
                         {
@@ -531,8 +531,7 @@ namespace System
                 }
                 if (current.nextCompoundSegment != null)
                 {
-                    IList<IList<UriTemplateTrieLocation>> locations = current
-                        .nextCompoundSegment
+                    IList<IList<UriTemplateTrieLocation>> locations = current.nextCompoundSegment
                         .Values;
                     for (int i = 0; i < locations.Count; i++)
                     {
@@ -542,15 +541,16 @@ namespace System
                             // a potential multiple match here; for now we are throwing.
                             UriTemplate firstTemplate = FindAnyUriTemplate(locations[i][0].node);
                             UriTemplate secondTemplate = FindAnyUriTemplate(locations[i][1].node);
-                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                                new InvalidOperationException(
-                                    SR.GetString(
-                                        SR.UTTDuplicate,
-                                        firstTemplate.ToString(),
-                                        secondTemplate.ToString()
+                            throw DiagnosticUtility.ExceptionUtility
+                                .ThrowHelperError(
+                                    new InvalidOperationException(
+                                        SR.GetString(
+                                            SR.UTTDuplicate,
+                                            firstTemplate.ToString(),
+                                            secondTemplate.ToString()
+                                        )
                                     )
-                                )
-                            );
+                                );
                         }
                         for (int j = 0; j < locations[i].Count; j++)
                         {
@@ -623,7 +623,8 @@ namespace System
             {
                 Fx.Assert(
                     pes.Items[i]
-                        .Key.IsPathPartiallyEquivalentAt(pes.Items[i + 1].Key, pes.SegmentsCount),
+                        .Key
+                        .IsPathPartiallyEquivalentAt(pes.Items[i + 1].Key, pes.SegmentsCount),
                     "all elements of a PES must be path partially-equivalent"
                 );
             }
@@ -680,8 +681,8 @@ namespace System
                 }
                 if (node.finalCompoundSegment != null)
                 {
-                    UriTemplatePathPartiallyEquivalentSet pes =
-                        node.finalCompoundSegment.GetAnyValue();
+                    UriTemplatePathPartiallyEquivalentSet pes = node.finalCompoundSegment
+                        .GetAnyValue();
                     Fx.Assert(pes.Items.Count > 0, "Otherwise, why creating the collection?");
                     return pes.Items[0].Key;
                 }
@@ -810,13 +811,14 @@ namespace System
                     this,
                     UriTemplateTrieIntraNodeLocation.AfterLiteral
                 );
-                this.nextLiteralSegment.Add(
-                    lps,
-                    new UriTemplateTrieLocation(
-                        newNode,
-                        UriTemplateTrieIntraNodeLocation.BeforeLiteral
-                    )
-                );
+                this.nextLiteralSegment
+                    .Add(
+                        lps,
+                        new UriTemplateTrieLocation(
+                            newNode,
+                            UriTemplateTrieIntraNodeLocation.BeforeLiteral
+                        )
+                    );
                 return newNode;
             }
         }

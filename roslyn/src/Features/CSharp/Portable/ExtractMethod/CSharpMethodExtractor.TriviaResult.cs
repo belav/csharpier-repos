@@ -24,16 +24,19 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                 CancellationToken cancellationToken
             )
             {
-                var preservationService =
-                    selectionResult.SemanticDocument.Document.Project.Services.GetService<ISyntaxTriviaService>();
+                var preservationService = selectionResult.SemanticDocument
+                    .Document
+                    .Project
+                    .Services
+                    .GetService<ISyntaxTriviaService>();
                 var root = selectionResult.SemanticDocument.Root;
                 var result = preservationService.SaveTriviaAroundSelection(
                     root,
                     selectionResult.FinalSpan
                 );
                 return new CSharpTriviaResult(
-                    await selectionResult
-                        .SemanticDocument.WithSyntaxRootAsync(result.Root, cancellationToken)
+                    await selectionResult.SemanticDocument
+                        .WithSyntaxRootAsync(result.Root, cancellationToken)
                         .ConfigureAwait(false),
                     result
                 );
@@ -179,8 +182,9 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                             .Concat(tokenPair.NextToken.LeadingTrivia)
                     ),
                     TriviaLocation.BeforeEndOfSpan => FilterTriviaList(
-                        tokenPair
-                            .PreviousToken.TrailingTrivia.Concat(list)
+                        tokenPair.PreviousToken
+                            .TrailingTrivia
+                            .Concat(list)
                             .Concat(tokenPair.NextToken.LeadingTrivia)
                     ),
                     _ => throw ExceptionUtilities.UnexpectedValue(location),
@@ -215,8 +219,9 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
             )
             {
                 var allList = FilterTriviaList(
-                    tokenPair
-                        .PreviousToken.TrailingTrivia.Concat(list)
+                    tokenPair.PreviousToken
+                        .TrailingTrivia
+                        .Concat(list)
                         .Concat(AppendLeadingTrivia(tokenPair))
                 );
 

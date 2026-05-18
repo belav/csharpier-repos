@@ -162,11 +162,8 @@ namespace System.ServiceModel.Channels
 
                     try
                     {
-                        result = this.listener.BeginAcceptChannel(
-                            TimeSpan.MaxValue,
-                            acceptCallbackDelegate,
-                            this
-                        );
+                        result = this.listener
+                            .BeginAcceptChannel(TimeSpan.MaxValue, acceptCallbackDelegate, this);
                     }
                     catch (ObjectDisposedException e)
                     {
@@ -509,11 +506,8 @@ namespace System.ServiceModel.Channels
                             Exception exception = null;
                             try
                             {
-                                result = this.parent.CallBeginReceive(
-                                    this.channel,
-                                    receiveCallbackDelegate,
-                                    this
-                                );
+                                result = this.parent
+                                    .CallBeginReceive(this.channel, receiveCallbackDelegate, this);
                             }
                             catch (ObjectDisposedException e)
                             {
@@ -1043,9 +1037,8 @@ namespace System.ServiceModel.Channels
                 if (channelSource == null)
                 {
                     Fx.Assert("DatagramAdapterChannelBase.ctor: (channelSource == null)");
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                        "channelSource"
-                    );
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperArgumentNull("channelSource");
                 }
                 this.channelParameters = new ChannelParameterCollection(this);
                 this.channelSource = channelSource;

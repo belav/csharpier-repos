@@ -139,8 +139,10 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings
             CancellationToken cancellationToken
         )
         {
-            var extensionManager =
-                document.Project.Solution.Services.GetRequiredService<IExtensionManager>();
+            var extensionManager = document.Project
+                .Solution
+                .Services
+                .GetRequiredService<IExtensionManager>();
 
             foreach (var provider in GetProviders(document))
             {
@@ -189,8 +191,10 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings
                 )
             )
             {
-                var extensionManager =
-                    document.Project.Solution.Services.GetRequiredService<IExtensionManager>();
+                var extensionManager = document.Project
+                    .Solution
+                    .Services
+                    .GetRequiredService<IExtensionManager>();
                 using var _ = ArrayBuilder<Task<CodeRefactoring?>>.GetInstance(out var tasks);
 
                 foreach (var provider in GetProviders(document))

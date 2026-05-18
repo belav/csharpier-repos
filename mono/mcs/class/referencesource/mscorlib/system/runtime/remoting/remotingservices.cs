@@ -1935,13 +1935,8 @@ namespace System.Runtime.Remoting
             );
 
             return (ObjRef)
-                Thread.CurrentThread.InternalCrossContextCallback(
-                    null,
-                    defCtxID,
-                    appDomainId,
-                    xctxDel,
-                    null
-                );
+                Thread.CurrentThread
+                    .InternalCrossContextCallback(null, defCtxID, appDomainId, xctxDel, null);
         } // CreateDataForDomain
 
         [System.Security.SecurityCritical] // auto-generated_required
@@ -2536,8 +2531,7 @@ namespace System.Runtime.Remoting
         {
             MemoryStream stm = new MemoryStream(b);
             BinaryFormatter fmt = new BinaryFormatter();
-            fmt.AssemblyFormat = System
-                .Runtime
+            fmt.AssemblyFormat = System.Runtime
                 .Serialization
                 .Formatters
                 .FormatterAssemblyStyle

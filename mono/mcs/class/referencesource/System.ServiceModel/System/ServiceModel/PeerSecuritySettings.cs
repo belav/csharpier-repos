@@ -67,8 +67,7 @@ namespace System.ServiceModel
         {
             get
             {
-                System.Net.Security.ProtectionLevel level = System
-                    .Net
+                System.Net.Security.ProtectionLevel level = System.Net
                     .Security
                     .ProtectionLevel
                     .None;
@@ -136,9 +135,8 @@ namespace System.ServiceModel
                     break;
                 default:
                     Fx.Assert("Unsupported value for PeerSecuritySettings.Mode");
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new NotSupportedException()
-                    );
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperError(new NotSupportedException());
             }
             XmlDocument doc = new XmlDocument();
             XmlElement element = doc.CreateElement(

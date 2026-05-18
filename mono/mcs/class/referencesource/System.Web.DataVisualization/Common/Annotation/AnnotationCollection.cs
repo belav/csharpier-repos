@@ -244,19 +244,17 @@ namespace System.Web.UI.DataVisualization.Charting
                         && this.Chart.paintBufferBitmap.Size.Height >= chartPosition.Size.Height
                     )
                     {
-                        chartPicture.nonTopLevelChartBuffer = this.Chart.paintBufferBitmap.Clone(
-                            chartPosition,
-                            this.Chart.paintBufferBitmap.PixelFormat
-                        );
+                        chartPicture.nonTopLevelChartBuffer = this.Chart
+                            .paintBufferBitmap
+                            .Clone(chartPosition, this.Chart.paintBufferBitmap.PixelFormat);
                     }
                 }
                 else if (drawAnnotationOnly && chartPicture.nonTopLevelChartBuffer != null)
                 {
                     // Restore previous background
-                    this.Chart.paintBufferBitmapGraphics.DrawImageUnscaled(
-                        chartPicture.nonTopLevelChartBuffer,
-                        chartPosition
-                    );
+                    this.Chart
+                        .paintBufferBitmapGraphics
+                        .DrawImageUnscaled(chartPicture.nonTopLevelChartBuffer, chartPosition);
                 }
             }
 #endif // Microsoft_CONTROL
@@ -476,11 +474,8 @@ namespace System.Web.UI.DataVisualization.Charting
                 // Check if mouse button was pressed over one of the annotation objects
                 if (annotation == null && this.Count > 0)
                 {
-                    HitTestResult result = this.Chart.HitTest(
-                        e.X,
-                        e.Y,
-                        ChartElementType.Annotation
-                    );
+                    HitTestResult result = this.Chart
+                        .HitTest(e.X, e.Y, ChartElementType.Annotation);
                     if (result != null && result.ChartElementType == ChartElementType.Annotation)
                     {
                         annotation = (Annotation)result.Object;
@@ -777,11 +772,8 @@ namespace System.Web.UI.DataVisualization.Charting
                     // Check if mouse pointer over the annotation object movable area
                     if (annotation == null)
                     {
-                        HitTestResult result = this.Chart.HitTest(
-                            e.X,
-                            e.Y,
-                            ChartElementType.Annotation
-                        );
+                        HitTestResult result = this.Chart
+                            .HitTest(e.X, e.Y, ChartElementType.Annotation);
                         if (
                             result != null
                             && result.ChartElementType == ChartElementType.Annotation

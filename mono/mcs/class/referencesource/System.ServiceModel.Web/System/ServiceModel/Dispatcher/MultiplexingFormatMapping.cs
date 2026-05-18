@@ -58,9 +58,8 @@ namespace System.ServiceModel.Dispatcher
         {
             if (acceptHeaderElement == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                    "acceptHeaderElement"
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperArgumentNull("acceptHeaderElement");
             }
 
             // Scrub the content type so that it is only mediaType and the charset

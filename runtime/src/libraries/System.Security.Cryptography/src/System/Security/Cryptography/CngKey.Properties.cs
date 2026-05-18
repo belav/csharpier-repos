@@ -37,14 +37,8 @@ namespace System.Security.Cryptography
 
             unsafe
             {
-                ErrorCode errorCode = Interop.NCrypt.NCryptGetProperty(
-                    _keyHandle,
-                    name,
-                    null,
-                    0,
-                    out _,
-                    options
-                );
+                ErrorCode errorCode = Interop.NCrypt
+                    .NCryptGetProperty(_keyHandle, name, null, 0, out _, options);
                 if (errorCode == ErrorCode.NTE_NOT_FOUND)
                     return false;
                 if (errorCode != ErrorCode.ERROR_SUCCESS)
@@ -70,13 +64,14 @@ namespace System.Security.Cryptography
                     byte* pinnedPropertyValue = MapZeroLengthArrayToNonNullPointer(propertyValue)
                 )
                 {
-                    ErrorCode errorCode = Interop.NCrypt.NCryptSetProperty(
-                        _keyHandle,
-                        property.Name,
-                        pinnedPropertyValue,
-                        propertyValue.Length,
-                        property.Options
-                    );
+                    ErrorCode errorCode = Interop.NCrypt
+                        .NCryptSetProperty(
+                            _keyHandle,
+                            property.Name,
+                            pinnedPropertyValue,
+                            propertyValue.Length,
+                            property.Options
+                        );
                     if (errorCode != ErrorCode.ERROR_SUCCESS)
                         throw errorCode.ToCryptographicException();
                 }

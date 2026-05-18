@@ -72,9 +72,8 @@ public static class ColumnAccessorsFactory
                 return (value, valueFound);
             }
 
-            var modification = c.ColumnModifications.FirstOrDefault(m =>
-                m.ColumnName == column.Name
-            );
+            var modification = c.ColumnModifications
+                .FirstOrDefault(m => m.ColumnName == column.Name);
             return modification == null ? (default, false)
                 : modification.Value == null ? (default, false)
                 : ((TColumn)modification.Value!, true);
@@ -121,9 +120,8 @@ public static class ColumnAccessorsFactory
                 return (value, valueFound);
             }
 
-            var modification = c.ColumnModifications.FirstOrDefault(m =>
-                m.ColumnName == column.Name
-            );
+            var modification = c.ColumnModifications
+                .FirstOrDefault(m => m.ColumnName == column.Name);
             return modification == null ? (default!, false)
                 : modification.OriginalValue == null ? (default!, false)
                 : ((TColumn)modification.OriginalValue!, true);

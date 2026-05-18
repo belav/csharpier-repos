@@ -120,11 +120,12 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             var toType = node.Type;
             Debug.Assert(
-                result.Type!.Equals(
-                    toType,
-                    TypeCompareKind.IgnoreDynamicAndTupleNames
-                        | TypeCompareKind.IgnoreNullableModifiersForReferenceTypes
-                )
+                result.Type!
+                    .Equals(
+                        toType,
+                        TypeCompareKind.IgnoreDynamicAndTupleNames
+                            | TypeCompareKind.IgnoreNullableModifiersForReferenceTypes
+                    )
             );
 
             return result;
@@ -139,8 +140,10 @@ namespace Microsoft.CodeAnalysis.CSharp
         {
             Debug.Assert(node.Type is not null);
             Debug.Assert(_compilation.IsReadOnlySpanType(node.Type));
-            var byteType = ((NamedTypeSymbol)node.Type)
-                .TypeArgumentsWithAnnotationsNoUseSiteDiagnostics.Single()
+            var byteType = (
+                (NamedTypeSymbol)node.Type
+            ).TypeArgumentsWithAnnotationsNoUseSiteDiagnostics
+                .Single()
                 .Type;
             Debug.Assert(byteType.SpecialType == SpecialType.System_Byte);
 
@@ -444,10 +447,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
                     if (
                         _inExpressionLambda
-                        || !rewrittenOperand.Type.Equals(
-                            rewrittenType,
-                            TypeCompareKind.ConsiderEverything
-                        )
+                        || !rewrittenOperand.Type
+                            .Equals(rewrittenType, TypeCompareKind.ConsiderEverything)
                     )
                     {
                         break;
@@ -597,11 +598,12 @@ namespace Microsoft.CodeAnalysis.CSharp
                     // we keep tuple literal conversions in the tree for the purpose of semantic model (for example when they are casts in the source)
                     // for the purpose of lowering/codegeneration they are identity conversions.
                     Debug.Assert(
-                        rewrittenOperand.Type.Equals(
-                            rewrittenType,
-                            TypeCompareKind.IgnoreDynamicAndTupleNames
-                                | TypeCompareKind.IgnoreNullableModifiersForReferenceTypes
-                        )
+                        rewrittenOperand.Type
+                            .Equals(
+                                rewrittenType,
+                                TypeCompareKind.IgnoreDynamicAndTupleNames
+                                    | TypeCompareKind.IgnoreNullableModifiersForReferenceTypes
+                            )
                     );
                     return rewrittenOperand;
                 }
@@ -792,7 +794,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
                     if (
                         _factory.Compilation.LanguageVersion
-                            >= MessageID.IDS_FeatureCacheStaticMethodGroupConversion.RequiredVersion()
+                            >= MessageID.IDS_FeatureCacheStaticMethodGroupConversion
+                                .RequiredVersion()
                         && !_inExpressionLambda // The tree structure / meaning for expression trees should remain untouched.
                         && _factory.TopLevelMethod.MethodKind != MethodKind.StaticConstructor // Avoid caching twice if people do it manually.
                         && DelegateCacheRewriter.CanRewrite(boundDelegateCreation)
@@ -818,14 +821,15 @@ namespace Microsoft.CodeAnalysis.CSharp
                     MethodSymbol createSpan;
 
                     if (
-                        spanType.OriginalDefinition.Equals(
-                            _compilation.GetWellKnownType(WellKnownType.System_ReadOnlySpan_T),
-                            TypeCompareKind.AllIgnoreOptions
-                        )
+                        spanType.OriginalDefinition
+                            .Equals(
+                                _compilation.GetWellKnownType(WellKnownType.System_ReadOnlySpan_T),
+                                TypeCompareKind.AllIgnoreOptions
+                            )
                     )
                     {
-                        createSpan =
-                            _factory.ModuleBuilderOpt.EnsureInlineArrayAsReadOnlySpanExists(
+                        createSpan = _factory.ModuleBuilderOpt
+                            .EnsureInlineArrayAsReadOnlySpanExists(
                                 syntax,
                                 spanType.OriginalDefinition,
                                 _factory.SpecialType(SpecialType.System_Int32),
@@ -835,17 +839,19 @@ namespace Microsoft.CodeAnalysis.CSharp
                     else
                     {
                         Debug.Assert(
-                            spanType.OriginalDefinition.Equals(
-                                _compilation.GetWellKnownType(WellKnownType.System_Span_T),
-                                TypeCompareKind.AllIgnoreOptions
-                            )
+                            spanType.OriginalDefinition
+                                .Equals(
+                                    _compilation.GetWellKnownType(WellKnownType.System_Span_T),
+                                    TypeCompareKind.AllIgnoreOptions
+                                )
                         );
-                        createSpan = _factory.ModuleBuilderOpt.EnsureInlineArrayAsSpanExists(
-                            syntax,
-                            spanType.OriginalDefinition,
-                            _factory.SpecialType(SpecialType.System_Int32),
-                            _diagnostics.DiagnosticBag
-                        );
+                        createSpan = _factory.ModuleBuilderOpt
+                            .EnsureInlineArrayAsSpanExists(
+                                syntax,
+                                spanType.OriginalDefinition,
+                                _factory.SpecialType(SpecialType.System_Int32),
+                                _diagnostics.DiagnosticBag
+                            );
                     }
 
                     createSpan = createSpan.Construct(
@@ -981,12 +987,13 @@ namespace Microsoft.CodeAnalysis.CSharp
                 diagnostics,
                 compilation.Assembly
             );
-            Conversion conversion = compilation.Conversions.ClassifyConversionFromType(
-                rewrittenOperand.Type,
-                rewrittenType,
-                isChecked: @checked,
-                ref useSiteInfo
-            );
+            Conversion conversion = compilation.Conversions
+                .ClassifyConversionFromType(
+                    rewrittenOperand.Type,
+                    rewrittenType,
+                    isChecked: @checked,
+                    ref useSiteInfo
+                );
             diagnostics.Add(rewrittenOperand.Syntax, useSiteInfo);
 
             if (!conversion.IsValid)
@@ -1089,8 +1096,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 Debug.Assert(rewrittenOperand.Type is { });
                 if (
                     rewrittenOperand.Type.IsNullableType()
-                    && conversion
-                        .Method.GetParameterType(0)
+                    && conversion.Method
+                        .GetParameterType(0)
                         .Equals(
                             rewrittenOperand.Type.GetNullableUnderlyingType(),
                             TypeCompareKind.AllIgnoreOptions
@@ -1242,10 +1249,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     Conversion: { Kind: ConversionKind.ImplicitNullable },
                     Operand: var convertedArgument
                 }
-                    when convertedArgument.Type!.Equals(
-                        expression.Type.StrippedType(),
-                        TypeCompareKind.AllIgnoreOptions
-                    ):
+                    when convertedArgument.Type!
+                        .Equals(expression.Type.StrippedType(), TypeCompareKind.AllIgnoreOptions):
                     return convertedArgument;
 
                 // Detect the unlowered nullable conversion from a tuple type T1 to Nullable<T2> for a tuple type T2.
@@ -2562,12 +2567,13 @@ namespace Microsoft.CodeAnalysis.CSharp
             CompoundUseSiteInfo<AssemblySymbol> useSiteInfo = GetNewCompoundUseSiteInfo();
             var result = TryMakeConversion(
                 syntax,
-                _compilation.Conversions.ClassifyConversionFromType(
-                    fromType,
-                    toType,
-                    isChecked: @checked,
-                    ref useSiteInfo
-                ),
+                _compilation.Conversions
+                    .ClassifyConversionFromType(
+                        fromType,
+                        toType,
+                        isChecked: @checked,
+                        ref useSiteInfo
+                    ),
                 fromType,
                 toType,
                 @checked: @checked

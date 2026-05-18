@@ -719,9 +719,9 @@ namespace Mono.CSharp
                 //
                 if (
                     (ms.DeclaringType.Modifiers & Modifiers.INTERNAL) != 0
-                    && !ms.DeclaringType.MemberDefinition.IsInternalAsPublic(
-                        invocationContext.Module.DeclaringAssembly
-                    )
+                    && !ms.DeclaringType
+                        .MemberDefinition
+                        .IsInternalAsPublic(invocationContext.Module.DeclaringAssembly)
                 )
                     continue;
 
@@ -993,9 +993,9 @@ namespace Mono.CSharp
                 (mod & Modifiers.PRIVATE) == 0
                 && (
                     (mod & Modifiers.INTERNAL) != 0
-                    && fs.DeclaringType.MemberDefinition.IsInternalAsPublic(
-                        context.Module.DeclaringAssembly
-                    )
+                    && fs.DeclaringType
+                        .MemberDefinition
+                        .IsInternalAsPublic(context.Module.DeclaringAssembly)
                 )
             )
                 return false;
@@ -1532,10 +1532,11 @@ namespace Mono.CSharp
                         if (container_entry is IParametersMember)
                         {
                             if (
-                                !TypeSpecComparer.Override.IsEqual(
-                                    ((IParametersMember)container_entry).Parameters,
-                                    member_param
-                                )
+                                !TypeSpecComparer.Override
+                                    .IsEqual(
+                                        ((IParametersMember)container_entry).Parameters,
+                                        member_param
+                                    )
                             )
                                 continue;
                         }
@@ -1969,8 +1970,7 @@ namespace Mono.CSharp
                                 else
                                 {
                                     method_b.SetPartialDefinition(method_a);
-                                    method_a.caching_flags |= MemberCore
-                                        .Flags
+                                    method_a.caching_flags |= MemberCore.Flags
                                         .PartialDefinitionExists;
                                 }
                                 continue;

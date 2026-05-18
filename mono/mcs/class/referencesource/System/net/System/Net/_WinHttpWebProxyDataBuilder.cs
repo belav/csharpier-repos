@@ -22,9 +22,8 @@ namespace System.Net
             try
             {
                 if (
-                    UnsafeNclNativeMethods.WinHttp.WinHttpGetIEProxyConfigForCurrentUser(
-                        ref ieProxyConfig
-                    )
+                    UnsafeNclNativeMethods.WinHttp
+                        .WinHttpGetIEProxyConfigForCurrentUser(ref ieProxyConfig)
                 )
                 {
                     string proxy = null;

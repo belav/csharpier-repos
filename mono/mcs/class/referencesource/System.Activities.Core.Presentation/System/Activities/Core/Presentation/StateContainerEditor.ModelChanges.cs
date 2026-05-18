@@ -75,11 +75,12 @@ namespace System.Activities.Core.Presentation
                         .SetValue(null);
                     if (!rerouting)
                     {
-                        this.ViewStateService.StoreViewStateWithUndo(
-                            connectorModelItem,
-                            ConnectorLocationViewStateKey,
-                            null
-                        );
+                        this.ViewStateService
+                            .StoreViewStateWithUndo(
+                                connectorModelItem,
+                                ConnectorLocationViewStateKey,
+                                null
+                            );
                     }
                     es.Complete();
                 }
@@ -94,8 +95,10 @@ namespace System.Activities.Core.Presentation
                 "Should only delete states with StateMachine."
             );
 
-            this.ModelItem.Properties[StateMachineDesigner.StatesPropertyName]
-                .Collection.Remove(stateModelItem);
+            this.ModelItem
+                .Properties[StateMachineDesigner.StatesPropertyName]
+                .Collection
+                .Remove(stateModelItem);
             if (
                 clearInitialState
                 && this.ModelItem.ItemType == typeof(StateMachine)
@@ -105,13 +108,11 @@ namespace System.Activities.Core.Presentation
                         .Value
             )
             {
-                this.ModelItem.Properties[StateMachineDesigner.InitialStatePropertyName]
+                this.ModelItem
+                    .Properties[StateMachineDesigner.InitialStatePropertyName]
                     .SetValue(null);
-                this.ViewStateService.StoreViewStateWithUndo(
-                    this.ModelItem,
-                    ConnectorLocationViewStateKey,
-                    null
-                );
+                this.ViewStateService
+                    .StoreViewStateWithUndo(this.ModelItem, ConnectorLocationViewStateKey, null);
             }
         }
 
@@ -174,7 +175,8 @@ namespace System.Activities.Core.Presentation
                     .SetValue(destModelItem);
                 srcModelItem
                     .Properties[StateDesigner.TransitionsPropertyName]
-                    .Collection.Add(transitionModelItem);
+                    .Collection
+                    .Add(transitionModelItem);
             }
             // We are creating a new connector.
             else
@@ -198,7 +200,8 @@ namespace System.Activities.Core.Presentation
                 }
                 transitionModelItem = srcModelItem
                     .Properties[StateDesigner.TransitionsPropertyName]
-                    .Collection.Add(newTransition);
+                    .Collection
+                    .Add(newTransition);
             }
             if (transitionModelItem != null)
             {
@@ -213,16 +216,18 @@ namespace System.Activities.Core.Presentation
                     .GetConnectionPoints(destConnPoint.ParentDesigner)
                     .IndexOf(destConnPoint);
                 this.StoreConnectorLocationViewState(transitionModelItem, connectorViewState, true);
-                this.ViewStateService.StoreViewStateWithUndo(
-                    transitionModelItem,
-                    SrcConnectionPointIndexStateKey,
-                    srcConnectionPointIndex
-                );
-                this.ViewStateService.StoreViewStateWithUndo(
-                    transitionModelItem,
-                    DestConnectionPointIndexStateKey,
-                    destConnectionPointIndex
-                );
+                this.ViewStateService
+                    .StoreViewStateWithUndo(
+                        transitionModelItem,
+                        SrcConnectionPointIndexStateKey,
+                        srcConnectionPointIndex
+                    );
+                this.ViewStateService
+                    .StoreViewStateWithUndo(
+                        transitionModelItem,
+                        DestConnectionPointIndexStateKey,
+                        destConnectionPointIndex
+                    );
             }
         }
 
@@ -301,9 +306,8 @@ namespace System.Activities.Core.Presentation
                                 this.ModelItem.BeginEdit(SR.SetInitialState)
                         )
                         {
-                            this.StateMachineModelItem.Properties[
-                                    StateMachineDesigner.InitialStatePropertyName
-                                ]
+                            this.StateMachineModelItem
+                                .Properties[StateMachineDesigner.InitialStatePropertyName]
                                 .SetValue(stateModelItem);
                             PointCollection connectorViewState = new PointCollection(
                                 ConnectorRouter.Route(
@@ -407,19 +411,17 @@ namespace System.Activities.Core.Presentation
                 != null
             )
             {
-                this.ViewStateService.StoreViewStateWithUndo(
-                    storageModelItem,
-                    ShapeLocationViewStateKey,
-                    newLocation
-                );
+                this.ViewStateService
+                    .StoreViewStateWithUndo(
+                        storageModelItem,
+                        ShapeLocationViewStateKey,
+                        newLocation
+                    );
             }
             else
             {
-                this.ViewStateService.StoreViewState(
-                    storageModelItem,
-                    ShapeLocationViewStateKey,
-                    newLocation
-                );
+                this.ViewStateService
+                    .StoreViewState(storageModelItem, ShapeLocationViewStateKey, newLocation);
             }
         }
 
@@ -431,19 +433,17 @@ namespace System.Activities.Core.Presentation
         {
             if (isUndoableViewState)
             {
-                this.ViewStateService.StoreViewStateWithUndo(
-                    connectorModelItem,
-                    ConnectorLocationViewStateKey,
-                    viewState
-                );
+                this.ViewStateService
+                    .StoreViewStateWithUndo(
+                        connectorModelItem,
+                        ConnectorLocationViewStateKey,
+                        viewState
+                    );
             }
             else
             {
-                this.ViewStateService.StoreViewState(
-                    connectorModelItem,
-                    ConnectorLocationViewStateKey,
-                    viewState
-                );
+                this.ViewStateService
+                    .StoreViewState(connectorModelItem, ConnectorLocationViewStateKey, viewState);
             }
         }
 
@@ -472,15 +472,17 @@ namespace System.Activities.Core.Presentation
             );
             using (
                 EditingScope es = (EditingScope)
-                    this.ModelItem.BeginEdit(
-                        System.Activities.Presentation.SR.CollectionAddEditingScopeDescription
-                    )
+                    this.ModelItem
+                        .BeginEdit(
+                            System.Activities.Presentation.SR.CollectionAddEditingScopeDescription
+                        )
             )
             {
                 StoreShapeSizeWithUndoRecursively(this.ModelItem);
-                droppedModelItem = this
-                    .ModelItem.Properties[StateMachineDesigner.StatesPropertyName]
-                    .Collection.Add(droppedObject);
+                droppedModelItem = this.ModelItem
+                    .Properties[StateMachineDesigner.StatesPropertyName]
+                    .Collection
+                    .Add(droppedObject);
                 es.Complete();
             }
             return droppedModelItem;
@@ -503,23 +505,21 @@ namespace System.Activities.Core.Presentation
 
             if (modelItem.ItemType == typeof(State) || modelItem.ItemType == typeof(StateMachine))
             {
-                this.ViewStateService.StoreViewStateWithUndo(
-                    modelItem,
-                    StateContainerWidthViewStateKey,
-                    this.ViewStateService.RetrieveViewState(
+                this.ViewStateService
+                    .StoreViewStateWithUndo(
                         modelItem,
-                        StateContainerWidthViewStateKey
-                    )
-                );
+                        StateContainerWidthViewStateKey,
+                        this.ViewStateService
+                            .RetrieveViewState(modelItem, StateContainerWidthViewStateKey)
+                    );
 
-                this.ViewStateService.StoreViewStateWithUndo(
-                    modelItem,
-                    StateContainerHeightViewStateKey,
-                    this.ViewStateService.RetrieveViewState(
+                this.ViewStateService
+                    .StoreViewStateWithUndo(
                         modelItem,
-                        StateContainerHeightViewStateKey
-                    )
-                );
+                        StateContainerHeightViewStateKey,
+                        this.ViewStateService
+                            .RetrieveViewState(modelItem, StateContainerHeightViewStateKey)
+                    );
             }
         }
     }

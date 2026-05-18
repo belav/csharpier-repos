@@ -30,28 +30,30 @@ namespace Microsoft.Extensions.DependencyInjection
             Action<SocketsHttpHandler, IServiceProvider> configure
         )
         {
-            builder.Services.Configure<HttpClientFactoryOptions>(
-                builder.Name,
-                options =>
-                {
-                    options.HttpMessageHandlerBuilderActions.Add(b =>
+            builder.Services
+                .Configure<HttpClientFactoryOptions>(
+                    builder.Name,
+                    options =>
                     {
-                        if (b.PrimaryHandler is not SocketsHttpHandler socketsHttpHandler)
-                        {
-                            string message = SR.Format(
-                                SR.SocketsHttpHandlerBuilder_PrimaryHandlerIsInvalid,
-                                nameof(b.PrimaryHandler),
-                                typeof(SocketsHttpHandler).FullName,
-                                Environment.NewLine,
-                                b.PrimaryHandler?.ToString() ?? "(null)"
-                            );
-                            throw new InvalidOperationException(message);
-                        }
+                        options.HttpMessageHandlerBuilderActions
+                            .Add(b =>
+                            {
+                                if (b.PrimaryHandler is not SocketsHttpHandler socketsHttpHandler)
+                                {
+                                    string message = SR.Format(
+                                        SR.SocketsHttpHandlerBuilder_PrimaryHandlerIsInvalid,
+                                        nameof(b.PrimaryHandler),
+                                        typeof(SocketsHttpHandler).FullName,
+                                        Environment.NewLine,
+                                        b.PrimaryHandler?.ToString() ?? "(null)"
+                                    );
+                                    throw new InvalidOperationException(message);
+                                }
 
-                        configure(socketsHttpHandler, b.Services);
-                    });
-                }
-            );
+                                configure(socketsHttpHandler, b.Services);
+                            });
+                    }
+                );
             return builder;
         }
 
@@ -120,8 +122,7 @@ namespace Microsoft.Extensions.DependencyInjection
 
             if (config.EnableMultipleHttp2Connections is not null)
             {
-                handler.EnableMultipleHttp2Connections = config
-                    .EnableMultipleHttp2Connections
+                handler.EnableMultipleHttp2Connections = config.EnableMultipleHttp2Connections
                     .Value;
             }
 

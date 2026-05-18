@@ -97,9 +97,8 @@ from all_arguments where lower(owner) = :db order by object_id, position";
                     nameFormat
                 );
 
-                Function function = schema.Functions.SingleOrDefault(f =>
-                    f.Method == procedureName.MethodName
-                );
+                Function function = schema.Functions
+                    .SingleOrDefault(f => f.Method == procedureName.MethodName);
                 if (function == null)
                 {
                     function = new Function
@@ -127,8 +126,7 @@ from all_arguments where lower(owner) = :db order by object_id, position";
                     if (parameter.In)
                     {
                         if (parameter.Out)
-                            functionParameter.Direction = DbLinq
-                                .Schema
+                            functionParameter.Direction = DbLinq.Schema
                                 .Dbml
                                 .ParameterDirection
                                 .InOut;

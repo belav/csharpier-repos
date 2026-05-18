@@ -159,8 +159,8 @@ public abstract partial class LoadTestBase<TFixture> : IClassFixture<TFixture>
             context.ChangeTracker.LazyLoadingEnabled = false;
 
             foreach (
-                var child in parent
-                    .Children.Cast<object>()
+                var child in parent.Children
+                    .Cast<object>()
                     .Concat(parent.ChildrenAk)
                     .Concat(parent.ChildrenShadowFk)
                     .Concat(parent.ChildrenCompositeKey)
@@ -6491,12 +6491,13 @@ public abstract partial class LoadTestBase<TFixture> : IClassFixture<TFixture>
             modelBuilder.Entity<ChildDelegateLoaderWithStateByProperty>(b =>
             {
                 var serviceProperty = (ServiceProperty)
-                    b.Metadata.AddServiceProperty(
-                        typeof(ChildDelegateLoaderWithStateByProperty).GetAnyProperty(
-                            "LazyLoaderState"
-                        )!,
-                        typeof(ILazyLoader)
-                    );
+                    b.Metadata
+                        .AddServiceProperty(
+                            typeof(ChildDelegateLoaderWithStateByProperty).GetAnyProperty(
+                                "LazyLoaderState"
+                            )!,
+                            typeof(ILazyLoader)
+                        );
 
                 serviceProperty.SetParameterBinding(
                     new DependencyInjectionParameterBinding(
@@ -6511,12 +6512,13 @@ public abstract partial class LoadTestBase<TFixture> : IClassFixture<TFixture>
             modelBuilder.Entity<SingleDelegateLoaderWithStateByProperty>(b =>
             {
                 var serviceProperty = (ServiceProperty)
-                    b.Metadata.AddServiceProperty(
-                        typeof(SingleDelegateLoaderWithStateByProperty).GetAnyProperty(
-                            "LazyLoaderState"
-                        )!,
-                        typeof(ILazyLoader)
-                    );
+                    b.Metadata
+                        .AddServiceProperty(
+                            typeof(SingleDelegateLoaderWithStateByProperty).GetAnyProperty(
+                                "LazyLoaderState"
+                            )!,
+                            typeof(ILazyLoader)
+                        );
 
                 serviceProperty.SetParameterBinding(
                     new DependencyInjectionParameterBinding(
@@ -6531,12 +6533,13 @@ public abstract partial class LoadTestBase<TFixture> : IClassFixture<TFixture>
             modelBuilder.Entity<ParentDelegateLoaderWithStateByProperty>(b =>
             {
                 var serviceProperty = (ServiceProperty)
-                    b.Metadata.AddServiceProperty(
-                        typeof(ParentDelegateLoaderWithStateByProperty).GetAnyProperty(
-                            "LazyLoaderState"
-                        )!,
-                        typeof(ILazyLoader)
-                    );
+                    b.Metadata
+                        .AddServiceProperty(
+                            typeof(ParentDelegateLoaderWithStateByProperty).GetAnyProperty(
+                                "LazyLoaderState"
+                            )!,
+                            typeof(ILazyLoader)
+                        );
 
                 serviceProperty.SetParameterBinding(
                     new DependencyInjectionParameterBinding(

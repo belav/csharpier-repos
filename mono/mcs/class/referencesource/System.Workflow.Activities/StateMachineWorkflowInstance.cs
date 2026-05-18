@@ -181,12 +181,13 @@ namespace System.Workflow.Activities
             if (targetState == null)
                 throw new ArgumentOutOfRangeException("targetStateName");
             SetStateEventArgs eventArgs = new SetStateEventArgs(targetStateName);
-            this.WorkflowInstance.EnqueueItemOnIdle(
-                System.Workflow.Activities.StateMachineWorkflowActivity.SetStateQueueName,
-                eventArgs,
-                null,
-                null
-            );
+            this.WorkflowInstance
+                .EnqueueItemOnIdle(
+                    System.Workflow.Activities.StateMachineWorkflowActivity.SetStateQueueName,
+                    eventArgs,
+                    null,
+                    null
+                );
         }
 
         internal Activity FindActivityByQualifiedName(string id)
@@ -196,8 +197,8 @@ namespace System.Workflow.Activities
 
         private StateActivity GetCurrentState()
         {
-            ReadOnlyCollection<WorkflowQueueInfo> workflowQueuedInfos =
-                this.WorkflowInstance.GetWorkflowQueueData();
+            ReadOnlyCollection<WorkflowQueueInfo> workflowQueuedInfos = this.WorkflowInstance
+                .GetWorkflowQueueData();
             foreach (WorkflowQueueInfo queueInfo in workflowQueuedInfos)
             {
                 if (queueInfo.QueueName.Equals(StateMachineWorkflowActivity.SetStateQueueName))
@@ -219,8 +220,8 @@ namespace System.Workflow.Activities
         private ReadOnlyCollection<string> GetPossibleStateTransitions()
         {
             List<string> targetStates = new List<string>();
-            ReadOnlyCollection<WorkflowQueueInfo> workflowQueuedInfos =
-                this.WorkflowInstance.GetWorkflowQueueData();
+            ReadOnlyCollection<WorkflowQueueInfo> workflowQueuedInfos = this.WorkflowInstance
+                .GetWorkflowQueueData();
             StateMachineWorkflowActivity stateMachineWorkflow = this.StateMachineWorkflow;
             foreach (WorkflowQueueInfo queueInfo in workflowQueuedInfos)
             {

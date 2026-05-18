@@ -33,12 +33,13 @@ namespace System.Web.Http
 
         public Task<HttpResponseMessage> AsyncUnavailableDelegate()
         {
-            return Task.Factory.StartNew<HttpResponseMessage>(() =>
-            {
-                throw new HttpResponseException(
-                    new HttpResponseMessage(HttpStatusCode.ServiceUnavailable)
-                );
-            });
+            return Task.Factory
+                .StartNew<HttpResponseMessage>(() =>
+                {
+                    throw new HttpResponseException(
+                        new HttpResponseMessage(HttpStatusCode.ServiceUnavailable)
+                    );
+                });
         }
 
         public HttpResponseMessage ArgumentNull()
@@ -48,10 +49,11 @@ namespace System.Web.Http
 
         public Task<HttpResponseMessage> AsyncArgumentNull()
         {
-            return Task.Factory.StartNew<HttpResponseMessage>(() =>
-            {
-                throw new ArgumentNullException("foo");
-            });
+            return Task.Factory
+                .StartNew<HttpResponseMessage>(() =>
+                {
+                    throw new ArgumentNullException("foo");
+                });
         }
 
         [HttpGet]
@@ -216,10 +218,10 @@ namespace System.Web.Http
         {
             IEnumerable<string> values;
             if (
-                actionContext.ControllerContext.Request.Headers.TryGetValues(
-                    ResponseExceptionHeaderKey,
-                    out values
-                )
+                actionContext.ControllerContext
+                    .Request
+                    .Headers
+                    .TryGetValues(ResponseExceptionHeaderKey, out values)
             )
             {
                 string statusString = values.First() as string;

@@ -98,9 +98,8 @@ public class BackingFieldConvention
         where TBuilder : IConventionPropertyBaseBuilder<TBuilder>
     {
         if (
-            ConfigurationSource.Convention.Overrides(
-                conventionPropertyBaseBuilder.Metadata.GetFieldInfoConfigurationSource()
-            )
+            ConfigurationSource.Convention
+                .Overrides(conventionPropertyBaseBuilder.Metadata.GetFieldInfoConfigurationSource())
         )
         {
             var field = GetFieldToSet(conventionPropertyBaseBuilder.Metadata);
@@ -115,9 +114,8 @@ public class BackingFieldConvention
     {
         if (
             propertyBase == null
-            || !ConfigurationSource.Convention.Overrides(
-                propertyBase.GetFieldInfoConfigurationSource()
-            )
+            || !ConfigurationSource.Convention
+                .Overrides(propertyBase.GetFieldInfoConfigurationSource())
             || propertyBase.IsIndexerProperty()
             || propertyBase.IsShadowProperty()
         )

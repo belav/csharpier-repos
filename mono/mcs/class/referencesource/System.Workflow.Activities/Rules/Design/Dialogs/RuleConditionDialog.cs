@@ -145,8 +145,8 @@ namespace System.Workflow.Activities.Rules.Design
                     this.ruleParser.ParseCondition(this.conditionTextBox.Text);
 
                 if (!string.IsNullOrEmpty(this.conditionTextBox.Text))
-                    this.conditionTextBox.Text = this
-                        .ruleExpressionCondition.ToString()
+                    this.conditionTextBox.Text = this.ruleExpressionCondition
+                        .ToString()
                         .Replace("\n", "\r\n");
                 conditionErrorProvider.SetError(this.conditionTextBox, string.Empty);
                 syntaxException = null;

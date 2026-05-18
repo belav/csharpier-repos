@@ -309,8 +309,8 @@ namespace Microsoft.CodeAnalysis.CodeLens
                     syntaxNode,
                     async progress =>
                     {
-                        var referenceTasks = progress
-                            .Locations.Select(location =>
+                        var referenceTasks = progress.Locations
+                            .Select(location =>
                                 GetDescriptorOfEnclosingSymbolAsync(
                                     solution,
                                     location,
@@ -405,8 +405,8 @@ namespace Microsoft.CodeAnalysis.CodeLens
                 syntaxNode,
                 async progress =>
                 {
-                    var descriptorTasks = progress
-                        .Locations.Select(location =>
+                    var descriptorTasks = progress.Locations
+                        .Select(location =>
                             TryGetMethodDescriptorAsync(location, solution, cancellationToken)
                         )
                         .ToArray();

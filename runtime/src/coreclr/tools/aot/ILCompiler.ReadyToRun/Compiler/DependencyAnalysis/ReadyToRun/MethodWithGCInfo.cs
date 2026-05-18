@@ -86,9 +86,8 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                         Debug.Assert(inlinee.IsNonVersionable());
                         continue;
                     }
-                    factory.ManifestMetadataTable.EnsureModuleIndexable(
-                        ecmaInlineeDefinition.Module
-                    );
+                    factory.ManifestMetadataTable
+                        .EnsureModuleIndexable(ecmaInlineeDefinition.Module);
                 }
             }
         }

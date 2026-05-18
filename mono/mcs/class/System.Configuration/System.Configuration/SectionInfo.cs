@@ -198,11 +198,8 @@ namespace System.Configuration
                     reader
                 );
             if (
-                !config.ConfigHost.IsDefinitionAllowed(
-                    config.ConfigPath,
-                    allowDefinition,
-                    allowExeDefinition
-                )
+                !config.ConfigHost
+                    .IsDefinitionAllowed(config.ConfigPath, allowDefinition, allowExeDefinition)
             )
             {
                 object ctx =
@@ -267,11 +264,12 @@ namespace System.Configuration
                         section.SectionInformation.ProtectionProvider.Name
                     );
                     sb.Append(
-                        config.ConfigHost.EncryptSection(
-                            xml,
-                            section.SectionInformation.ProtectionProvider,
-                            ProtectedConfiguration.Section
-                        )
+                        config.ConfigHost
+                            .EncryptSection(
+                                xml,
+                                section.SectionInformation.ProtectionProvider,
+                                ProtectedConfiguration.Section
+                            )
                     );
                     sb.AppendFormat("</{0}>", Name);
                     xml = sb.ToString();

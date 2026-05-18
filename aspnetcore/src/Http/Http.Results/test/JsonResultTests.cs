@@ -86,8 +86,7 @@ public class JsonResultTests
         var jsonOptions = new JsonSerializerOptions()
         {
             WriteIndented = true,
-            DefaultIgnoreCondition = System
-                .Text
+            DefaultIgnoreCondition = System.Text
                 .Json
                 .Serialization
                 .JsonIgnoreCondition

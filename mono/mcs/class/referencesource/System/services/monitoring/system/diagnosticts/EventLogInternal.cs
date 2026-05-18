@@ -966,10 +966,11 @@ namespace System.Diagnostics
                             this.SynchronizingObject != null
                             && this.SynchronizingObject.InvokeRequired
                         )
-                            this.SynchronizingObject.BeginInvoke(
-                                this.onEntryWrittenHandler,
-                                new object[] { this, new EntryWrittenEventArgs(entry) }
-                            );
+                            this.SynchronizingObject
+                                .BeginInvoke(
+                                    this.onEntryWrittenHandler,
+                                    new object[] { this, new EntryWrittenEventArgs(entry) }
+                                );
                         else
                             onEntryWrittenHandler(this, new EntryWrittenEventArgs(entry));
 

@@ -60,9 +60,8 @@ namespace System.Workflow.ComponentModel.Compiler
 
             foreach (DependencyProperty prop in allProperties)
             {
-                object[] validationVisibilityAtrributes = prop.DefaultMetadata.GetAttributes(
-                    typeof(ValidationOptionAttribute)
-                );
+                object[] validationVisibilityAtrributes = prop.DefaultMetadata
+                    .GetAttributes(typeof(ValidationOptionAttribute));
                 ValidationOption validationVisibility =
                     (validationVisibilityAtrributes.Length > 0)
                         ? (
@@ -86,8 +85,8 @@ namespace System.Workflow.ComponentModel.Compiler
         {
             ValidationErrorCollection errors = new ValidationErrorCollection();
 
-            Attribute[] validationVisibilityAtrributes =
-                dependencyProperty.DefaultMetadata.GetAttributes(typeof(ValidationOptionAttribute));
+            Attribute[] validationVisibilityAtrributes = dependencyProperty.DefaultMetadata
+                .GetAttributes(typeof(ValidationOptionAttribute));
             ValidationOption validationVisibility =
                 (validationVisibilityAtrributes.Length > 0)
                     ? (
@@ -127,9 +126,10 @@ namespace System.Workflow.ComponentModel.Compiler
                         );
                     }
                     else if (
-                        !dependencyProperty.PropertyType.IsAssignableFrom(
-                            dependencyProperty.DefaultMetadata.DefaultValue.GetType()
-                        )
+                        !dependencyProperty.PropertyType
+                            .IsAssignableFrom(
+                                dependencyProperty.DefaultMetadata.DefaultValue.GetType()
+                            )
                     )
                     {
                         errors.Add(
@@ -138,8 +138,9 @@ namespace System.Workflow.ComponentModel.Compiler
                                     SR.Error_PropertyDefaultTypeMismatch,
                                     dependencyProperty.Name,
                                     dependencyProperty.PropertyType.FullName,
-                                    dependencyProperty
-                                        .DefaultMetadata.DefaultValue.GetType()
+                                    dependencyProperty.DefaultMetadata
+                                        .DefaultValue
+                                        .GetType()
                                         .FullName
                                 ),
                                 ErrorNumbers.Error_PropertyDefaultTypeMismatch
@@ -225,10 +226,12 @@ namespace System.Workflow.ComponentModel.Compiler
                         }
                         finally
                         {
-                            System.Diagnostics.Debug.Assert(
-                                manager.Context.Current == childContext,
-                                "Unwinding contextStack: the item that is about to be popped is not the one we pushed."
-                            );
+                            System.Diagnostics
+                                .Debug
+                                .Assert(
+                                    manager.Context.Current == childContext,
+                                    "Unwinding contextStack: the item that is about to be popped is not the one we pushed."
+                                );
                             manager.Context.Pop();
                         }
                     }
@@ -274,10 +277,12 @@ namespace System.Workflow.ComponentModel.Compiler
             }
             finally
             {
-                System.Diagnostics.Debug.Assert(
-                    manager.Context.Current == propertyValidationContext,
-                    "Unwinding contextStack: the item that is about to be popped is not the one we pushed."
-                );
+                System.Diagnostics
+                    .Debug
+                    .Assert(
+                        manager.Context.Current == propertyValidationContext,
+                        "Unwinding contextStack: the item that is about to be popped is not the one we pushed."
+                    );
                 manager.Context.Pop();
             }
 

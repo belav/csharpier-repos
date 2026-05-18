@@ -58,9 +58,8 @@ namespace System.Activities.Validation
                 {
                     string groupName = entry.Key;
                     configurationResults.Add(groupName, false);
-                    IEnumerable<RuntimeArgument> requiredArguments = entry.Value.Where(
-                        (a) => a.IsRequired
-                    );
+                    IEnumerable<RuntimeArgument> requiredArguments = entry.Value
+                        .Where((a) => a.IsRequired);
 
                     if (requiredArguments.Count() > 0)
                     {
@@ -78,9 +77,8 @@ namespace System.Activities.Validation
                     else
                     {
                         overloadGroupsWithNoRequiredArgs++;
-                        IEnumerable<RuntimeArgument> optionalArguments = entry.Value.Where(
-                            (a) => !a.IsRequired
-                        );
+                        IEnumerable<RuntimeArgument> optionalArguments = entry.Value
+                            .Where((a) => !a.IsRequired);
                         if (
                             optionalArguments.Any(localArgument =>
                                 CheckIfArgumentIsBound(localArgument, inputs)
@@ -121,26 +119,21 @@ namespace System.Activities.Validation
                     List<string> disjointGroups = null;
                     if (!equivalenceInfo.DisjointGroupsDictionary.IsNullOrEmpty())
                     {
-                        equivalenceInfo.DisjointGroupsDictionary.TryGetValue(
-                            configuredGroupName,
-                            out disjointGroups
-                        );
+                        equivalenceInfo.DisjointGroupsDictionary
+                            .TryGetValue(configuredGroupName, out disjointGroups);
                     }
 
                     List<string> overlappingGroups = null;
                     if (!equivalenceInfo.OverlappingGroupsDictionary.IsNullOrEmpty())
                     {
-                        equivalenceInfo.OverlappingGroupsDictionary.TryGetValue(
-                            configuredGroupName,
-                            out overlappingGroups
-                        );
+                        equivalenceInfo.OverlappingGroupsDictionary
+                            .TryGetValue(configuredGroupName, out overlappingGroups);
                     }
 
                     // Iterate over the groups that may not be completely configured.
                     foreach (
-                        string groupName in configurationResults.Keys.Where(
-                            (k) => configurationResults[k] == false
-                        )
+                        string groupName in configurationResults.Keys
+                            .Where((k) => configurationResults[k] == false)
                     )
                     {
                         // Check if the partially configured group name is in the disjoint groups list.
@@ -203,8 +196,8 @@ namespace System.Activities.Validation
                 //4. If more than one overload group is configured, generate an error.
                 else
                 {
-                    IEnumerable<string> configuredGroups = configurationResults
-                        .Keys.Where((k) => configurationResults[k])
+                    IEnumerable<string> configuredGroups = configurationResults.Keys
+                        .Where((k) => configurationResults[k])
                         .OrderBy((k) => k, StringComparer.Ordinal);
                     ActivityUtilities.Add(
                         ref validationErrors,
@@ -339,8 +332,8 @@ namespace System.Activities.Validation
                     > entry in equivalenceInfo.SupersetOfGroupsDictionary
                 )
                 {
-                    IList<string> sortedList = entry
-                        .Value.OrderBy((s) => s, StringComparer.Ordinal)
+                    IList<string> sortedList = entry.Value
+                        .OrderBy((s) => s, StringComparer.Ordinal)
                         .ToList();
                     string[] subsetGroups = new string[sortedList.Count];
                     int index = 0;

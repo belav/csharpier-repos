@@ -273,9 +273,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             else if (collectionTypeKind == CollectionExpressionTypeKind.ImplementsIEnumerableT)
             {
                 var allInterfaces = targetType.GetAllInterfacesOrEffectiveInterfaces();
-                var ienumerableType = this.Compilation.GetSpecialType(
-                    SpecialType.System_Collections_Generic_IEnumerable_T
-                );
+                var ienumerableType = this.Compilation
+                    .GetSpecialType(SpecialType.System_Collections_Generic_IEnumerable_T);
                 bool isCompatible = false;
                 foreach (var @interface in allInterfaces)
                 {
@@ -629,17 +628,18 @@ namespace Microsoft.CodeAnalysis.CSharp
                 delegateInvokeMethod.Parameters,
                 Compilation
             );
-            _binder.OverloadResolution.MethodInvocationOverloadResolution(
-                methods: methodGroup.Methods,
-                typeArguments: methodGroup.TypeArguments,
-                receiver: methodGroup.Receiver,
-                arguments: analyzedArguments,
-                result: result,
-                useSiteInfo: ref useSiteInfo,
-                isMethodGroupConversion: true,
-                returnRefKind: delegateInvokeMethod.RefKind,
-                returnType: delegateInvokeMethod.ReturnType
-            );
+            _binder.OverloadResolution
+                .MethodInvocationOverloadResolution(
+                    methods: methodGroup.Methods,
+                    typeArguments: methodGroup.TypeArguments,
+                    receiver: methodGroup.Receiver,
+                    arguments: analyzedArguments,
+                    result: result,
+                    useSiteInfo: ref useSiteInfo,
+                    isMethodGroupConversion: true,
+                    returnRefKind: delegateInvokeMethod.RefKind,
+                    returnType: delegateInvokeMethod.ReturnType
+                );
             var conversion = ToConversion(
                 result,
                 methodGroup,
@@ -682,9 +682,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     );
                 }
 
-                analyzedArguments.Arguments.Add(
-                    new BoundParameter(syntax, parameter) { WasCompilerGenerated = true }
-                );
+                analyzedArguments.Arguments
+                    .Add(new BoundParameter(syntax, parameter) { WasCompilerGenerated = true });
                 analyzedArguments.RefKinds.Add(parameter.RefKind);
             }
         }

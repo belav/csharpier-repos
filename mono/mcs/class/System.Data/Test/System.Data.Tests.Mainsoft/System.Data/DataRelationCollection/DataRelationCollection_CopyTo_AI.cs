@@ -93,13 +93,14 @@ namespace tests.system_data_dll.System_Data
 
             DataRelation[] dataRelArray = new DataRelation[2];
 
-            ds.Relations.Add(
-                new DataRelation(
-                    "rel1",
-                    ds.Tables[0].Columns["ParentId"],
-                    ds.Tables[1].Columns["ParentId"]
-                )
-            );
+            ds.Relations
+                .Add(
+                    new DataRelation(
+                        "rel1",
+                        ds.Tables[0].Columns["ParentId"],
+                        ds.Tables[1].Columns["ParentId"]
+                    )
+                );
 
             ds.Relations.CopyTo(dataRelArray, 1);
 

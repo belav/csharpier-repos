@@ -31,11 +31,12 @@ namespace System.ServiceModel.Description
             set
             {
                 if (value <= 0)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(
-                            SR.GetString(SR.SFxThrottleLimitMustBeGreaterThanZero0)
-                        )
-                    );
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(
+                                SR.GetString(SR.SFxThrottleLimitMustBeGreaterThanZero0)
+                            )
+                        );
 
                 this.calls = value;
             }
@@ -47,11 +48,12 @@ namespace System.ServiceModel.Description
             set
             {
                 if (value <= 0)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(
-                            SR.GetString(SR.SFxThrottleLimitMustBeGreaterThanZero0)
-                        )
-                    );
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(
+                                SR.GetString(SR.SFxThrottleLimitMustBeGreaterThanZero0)
+                            )
+                        );
 
                 this.sessions = value;
             }
@@ -82,11 +84,12 @@ namespace System.ServiceModel.Description
             set
             {
                 if (value <= 0)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(
-                            SR.GetString(SR.SFxThrottleLimitMustBeGreaterThanZero0)
-                        )
-                    );
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(
+                                SR.GetString(SR.SFxThrottleLimitMustBeGreaterThanZero0)
+                            )
+                        );
 
                 this.instances = value;
                 this.maxInstanceSetExplicitly = true;
@@ -111,9 +114,8 @@ namespace System.ServiceModel.Description
         )
         {
             if (serviceHostBase == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentNullException("serviceHostBase")
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(new ArgumentNullException("serviceHostBase"));
 
             ServiceThrottle serviceThrottle = serviceHostBase.ServiceThrottle;
             serviceThrottle.MaxConcurrentCalls = this.calls;

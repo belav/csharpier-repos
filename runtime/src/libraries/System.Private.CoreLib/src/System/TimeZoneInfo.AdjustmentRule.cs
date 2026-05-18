@@ -298,10 +298,11 @@ namespace System
                     baseUtcOffsetDelta -= DaylightDeltaAdjustment;
                 }
 
-                Diagnostics.Debug.Assert(
-                    daylightDelta <= MaxDaylightDelta && daylightDelta >= -MaxDaylightDelta,
-                    "DaylightDelta should not ever be more than 24h"
-                );
+                Diagnostics.Debug
+                    .Assert(
+                        daylightDelta <= MaxDaylightDelta && daylightDelta >= -MaxDaylightDelta,
+                        "DaylightDelta should not ever be more than 24h"
+                    );
             }
 
             void IDeserializationCallback.OnDeserialization(object? sender)

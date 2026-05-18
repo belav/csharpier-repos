@@ -217,10 +217,11 @@ namespace System.Web.Security
                 {
                     if (EtwTrace.IsTraceEnabled(EtwTraceLevel.Verbose, EtwTraceFlags.AppSvc))
                     {
-                        string status = SR.Resources.GetString(
-                            isUserInRole ? SR.Etw_Success : SR.Etw_Failure,
-                            CultureInfo.InstalledUICulture
-                        );
+                        string status = SR.Resources
+                            .GetString(
+                                isUserInRole ? SR.Etw_Success : SR.Etw_Failure,
+                                CultureInfo.InstalledUICulture
+                            );
                         EtwTrace.Trace(
                             EtwTraceType.ETW_TYPE_ROLE_IS_USER_IN_ROLE,
                             HttpContext.Current.WorkerRequest,

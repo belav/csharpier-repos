@@ -62,12 +62,13 @@ namespace System.Linq.Expressions.Interpreter
                 bool includeDebugCookies = false
             )
             {
-                return InstructionList.DebugView.GetInstructionViews(
-                    _array.Instructions,
-                    _array.Objects,
-                    (index) => _array.Labels[index].Index,
-                    includeDebugCookies ? _array.DebugCookies : null
-                );
+                return InstructionList.DebugView
+                    .GetInstructionViews(
+                        _array.Instructions,
+                        _array.Objects,
+                        (index) => _array.Labels[index].Index,
+                        includeDebugCookies ? _array.DebugCookies : null
+                    );
             }
         }
         #endregion

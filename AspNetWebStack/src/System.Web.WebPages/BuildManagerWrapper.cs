@@ -130,10 +130,10 @@ namespace System.Web.WebPages
 
             if (
                 document.Root == null
-                || !document.Root.Name.LocalName.Equals(
-                    "precompiledApp",
-                    StringComparison.OrdinalIgnoreCase
-                )
+                || !document.Root
+                    .Name
+                    .LocalName
+                    .Equals("precompiledApp", StringComparison.OrdinalIgnoreCase)
             )
             {
                 return false;
@@ -163,15 +163,16 @@ namespace System.Web.WebPages
                     Exists = objectFactory != null,
                 };
                 // Cache the result with a sliding expiration for a long duration.
-                HttpRuntime.Cache.Add(
-                    key,
-                    buildManagerResult,
-                    null,
-                    Cache.NoAbsoluteExpiration,
-                    _objectFactoryCacheDuration,
-                    CacheItemPriority.Low,
-                    null
-                );
+                HttpRuntime.Cache
+                    .Add(
+                        key,
+                        buildManagerResult,
+                        null,
+                        Cache.NoAbsoluteExpiration,
+                        _objectFactoryCacheDuration,
+                        CacheItemPriority.Low,
+                        null
+                    );
             }
             return buildManagerResult.Exists;
         }

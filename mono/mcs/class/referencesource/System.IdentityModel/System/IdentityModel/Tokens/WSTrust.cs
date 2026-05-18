@@ -94,16 +94,14 @@ namespace System.IdentityModel.Security
 
                 if (parent.SerializerDictionary is TrustDec2005Dictionary)
                 {
-                    this.otherDictionary = parent
-                        .securityTokenSerializer
+                    this.otherDictionary = parent.securityTokenSerializer
                         .DictionaryManager
                         .TrustFeb2005Dictionary;
                 }
 
                 if (parent.SerializerDictionary is TrustFeb2005Dictionary)
                 {
-                    this.otherDictionary = parent
-                        .securityTokenSerializer
+                    this.otherDictionary = parent.securityTokenSerializer
                         .DictionaryManager
                         .TrustDec2005Dictionary;
                 }

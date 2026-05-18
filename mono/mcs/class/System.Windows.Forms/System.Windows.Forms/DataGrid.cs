@@ -208,11 +208,9 @@ namespace System.Windows.Forms
         static readonly Color def_background_color = ThemeEngine.Current.DataGridBackgroundColor;
         static readonly Color def_caption_backcolor = ThemeEngine.Current.DataGridCaptionBackColor;
         static readonly Color def_caption_forecolor = ThemeEngine.Current.DataGridCaptionForeColor;
-        static readonly Color def_parent_rows_backcolor = ThemeEngine
-            .Current
+        static readonly Color def_parent_rows_backcolor = ThemeEngine.Current
             .DataGridParentRowsBackColor;
-        static readonly Color def_parent_rows_forecolor = ThemeEngine
-            .Current
+        static readonly Color def_parent_rows_forecolor = ThemeEngine.Current
             .DataGridParentRowsForeColor;
 
         /* colors */

@@ -238,9 +238,11 @@ public class RuntimeProperty : RuntimePropertyBase, IProperty
                 (IProperty)this,
                 static property =>
                     RuntimeFeature.IsDynamicCodeSupported
-                        ? property
-                            .DeclaringType.Model.GetModelDependencies()
-                            .TypeMappingSource.FindMapping(property)!
+                        ? property.DeclaringType
+                            .Model
+                            .GetModelDependencies()
+                            .TypeMappingSource
+                            .FindMapping(property)!
                         : throw new InvalidOperationException(CoreStrings.NativeAotNoCompiledModel)
             );
         set => _typeMapping = value;

@@ -690,15 +690,18 @@ namespace System.Xml.Schema
                 { // top "." and has other element beneath, trim this "." node too
                     if (IsSelf(ast) && (ast.Input != null))
                     {
-                        this.fAxisArray.Add(
-                            new ForwardAxis(DoubleLinkAxis.ConvertTree((Axis)(ast.Input)), false)
-                        );
+                        this.fAxisArray
+                            .Add(
+                                new ForwardAxis(
+                                    DoubleLinkAxis.ConvertTree((Axis)(ast.Input)),
+                                    false
+                                )
+                            );
                     }
                     else
                     {
-                        this.fAxisArray.Add(
-                            new ForwardAxis(DoubleLinkAxis.ConvertTree(ast), false)
-                        );
+                        this.fAxisArray
+                            .Add(new ForwardAxis(DoubleLinkAxis.ConvertTree(ast), false));
                     }
                     continue;
                 }
@@ -722,9 +725,8 @@ namespace System.Xml.Schema
                 // trim top "." if it's not the only node
                 if (IsSelf(ast) && (ast.Input != null))
                 {
-                    this.fAxisArray.Add(
-                        new ForwardAxis(DoubleLinkAxis.ConvertTree((Axis)(ast.Input)), true)
-                    );
+                    this.fAxisArray
+                        .Add(new ForwardAxis(DoubleLinkAxis.ConvertTree((Axis)(ast.Input)), true));
                 }
                 else
                 {

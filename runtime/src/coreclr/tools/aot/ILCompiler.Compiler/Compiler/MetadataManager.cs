@@ -537,9 +537,8 @@ namespace ILCompiler
             // don't accidentally create a new dictionary for the same method at runtime.
             yield return new CombinedDependencyListEntry(
                 factory.GenericMethodsHashtableEntry(method),
-                factory.NativeLayout.TemplateMethodEntry(
-                    method.GetCanonMethodTarget(CanonicalFormKind.Specific)
-                ),
+                factory.NativeLayout
+                    .TemplateMethodEntry(method.GetCanonMethodTarget(CanonicalFormKind.Specific)),
                 "Runtime-constructable dictionary"
             );
         }
@@ -609,9 +608,8 @@ namespace ILCompiler
 
             if ((category & MetadataCategory.RuntimeMapping) != 0)
             {
-                TypeDesc owningCanonicalType = field.OwningType.ConvertToCanonForm(
-                    CanonicalFormKind.Specific
-                );
+                TypeDesc owningCanonicalType = field.OwningType
+                    .ConvertToCanonForm(CanonicalFormKind.Specific);
                 GenericTypesTemplateMap.GetTemplateTypeDependencies(
                     ref dependencies,
                     factory,

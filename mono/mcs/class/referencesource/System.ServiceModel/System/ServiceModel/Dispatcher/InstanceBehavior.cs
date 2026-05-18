@@ -65,18 +65,22 @@ namespace System.ServiceModel.Dispatcher
                         && (dispatch.Type.IsAbstract || dispatch.Type.IsInterface)
                     )
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new InvalidOperationException(
-                                SR.GetString(SR.SFxServiceTypeNotCreatable)
-                            )
-                        );
+                        throw DiagnosticUtility.ExceptionUtility
+                            .ThrowHelperError(
+                                new InvalidOperationException(
+                                    SR.GetString(SR.SFxServiceTypeNotCreatable)
+                                )
+                            );
                     }
 
                     if (constructor == null)
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new InvalidOperationException(SR.GetString(SR.SFxNoDefaultConstructor))
-                        );
+                        throw DiagnosticUtility.ExceptionUtility
+                            .ThrowHelperError(
+                                new InvalidOperationException(
+                                    SR.GetString(SR.SFxNoDefaultConstructor)
+                                )
+                            );
                     }
                 }
 
@@ -189,10 +193,8 @@ namespace System.ServiceModel.Dispatcher
             //User provided InstanceContextProvider. Call the provider to check for idle.
             if (!this.instanceContextProvider.IsIdle(instanceContext))
             {
-                this.instanceContextProvider.NotifyIdle(
-                    InstanceContext.NotifyIdleCallback,
-                    instanceContext
-                );
+                this.instanceContextProvider
+                    .NotifyIdle(InstanceContext.NotifyIdleCallback, instanceContext);
                 return false;
             }
             return true;
@@ -203,8 +205,8 @@ namespace System.ServiceModel.Dispatcher
             if (rpc.InstanceContext == null)
             {
                 rpc.InstanceContext = new InstanceContext(rpc.Host, false);
-                rpc.InstanceContext.ServiceThrottle =
-                    rpc.channelHandler.InstanceContextServiceThrottle;
+                rpc.InstanceContext.ServiceThrottle = rpc.channelHandler
+                    .InstanceContextServiceThrottle;
                 rpc.MessageRpcOwnsInstanceContextThrottle = false;
             }
 
@@ -233,9 +235,10 @@ namespace System.ServiceModel.Dispatcher
         {
             if (this.provider == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(SR.GetString(SR.SFxNoDefaultConstructor))
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(SR.GetString(SR.SFxNoDefaultConstructor))
+                    );
             }
 
             return this.provider.GetInstance(instanceContext);
@@ -263,11 +266,8 @@ namespace System.ServiceModel.Dispatcher
             {
                 IContextChannel transparentProxy = (IContextChannel)
                     current.InternalServiceChannel.Proxy;
-                this.instanceContextProvider.InitializeInstanceContext(
-                    instanceContext,
-                    message,
-                    transparentProxy
-                );
+                this.instanceContextProvider
+                    .InitializeInstanceContext(instanceContext, message, transparentProxy);
             }
 
             for (int i = 0; i < this.initializers.Length; i++)

@@ -231,10 +231,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
 
             if (mrEx != null)
             {
-                result._lazyCachedUseSiteInfo.Initialize(
-                    result.DeriveCompilerFeatureRequiredDiagnostic()
-                        ?? new CSDiagnosticInfo(ErrorCode.ERR_BogusType, result)
-                );
+                result._lazyCachedUseSiteInfo
+                    .Initialize(
+                        result.DeriveCompilerFeatureRequiredDiagnostic()
+                            ?? new CSDiagnosticInfo(ErrorCode.ERR_BogusType, result)
+                    );
             }
 
             return result;
@@ -250,9 +251,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
         {
             try
             {
-                genericParameterHandles = moduleSymbol.Module.GetTypeDefGenericParamsOrThrow(
-                    handle
-                );
+                genericParameterHandles = moduleSymbol.Module
+                    .GetTypeDefGenericParamsOrThrow(handle);
                 arity = (ushort)genericParameterHandles.Count;
                 mrEx = null;
             }
@@ -315,10 +315,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
 
             if (mrEx != null || metadataArity < containerMetadataArity)
             {
-                result._lazyCachedUseSiteInfo.Initialize(
-                    result.DeriveCompilerFeatureRequiredDiagnostic()
-                        ?? new CSDiagnosticInfo(ErrorCode.ERR_BogusType, result)
-                );
+                result._lazyCachedUseSiteInfo
+                    .Initialize(
+                        result.DeriveCompilerFeatureRequiredDiagnostic()
+                            ?? new CSDiagnosticInfo(ErrorCode.ERR_BogusType, result)
+                    );
             }
 
             return result;
@@ -499,8 +500,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
 
                 if (!uncommon.lazyHasInterpolatedStringHandlerAttribute.HasValue())
                 {
-                    uncommon.lazyHasInterpolatedStringHandlerAttribute = ContainingPEModule
-                        .Module.HasInterpolatedStringHandlerAttribute(_handle)
+                    uncommon.lazyHasInterpolatedStringHandlerAttribute = ContainingPEModule.Module
+                        .HasInterpolatedStringHandlerAttribute(_handle)
                         .ToThreeState();
                 }
 
@@ -520,8 +521,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
 
                 if (!uncommon.lazyHasEmbeddedAttribute.HasValue())
                 {
-                    uncommon.lazyHasEmbeddedAttribute = ContainingPEModule
-                        .Module.HasCodeAnalysisEmbeddedAttribute(_handle)
+                    uncommon.lazyHasEmbeddedAttribute = ContainingPEModule.Module
+                        .HasCodeAnalysisEmbeddedAttribute(_handle)
                         .ToThreeState();
                 }
 
@@ -672,9 +673,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
             try
             {
                 var moduleSymbol = ContainingPEModule;
-                var interfaceImpls = moduleSymbol.Module.GetInterfaceImplementationsOrThrow(
-                    _handle
-                );
+                var interfaceImpls = moduleSymbol.Module
+                    .GetInterfaceImplementationsOrThrow(_handle);
 
                 if (interfaceImpls.Count > 0)
                 {
@@ -683,8 +683,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
 
                     foreach (var interfaceImpl in interfaceImpls)
                     {
-                        EntityHandle interfaceHandle = moduleSymbol
-                            .Module.MetadataReader.GetInterfaceImplementation(interfaceImpl)
+                        EntityHandle interfaceHandle = moduleSymbol.Module
+                            .MetadataReader
+                            .GetInterfaceImplementation(interfaceImpl)
                             .Interface;
                         TypeSymbol typeSymbol = tokenDecoder.GetTypeOfToken(interfaceHandle);
 
@@ -1023,10 +1024,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
                     return uncommon.lazyHasRequiredMembers.Value();
                 }
 
-                var hasRequiredMemberAttribute = ContainingPEModule.Module.HasAttribute(
-                    _handle,
-                    AttributeDescription.RequiredMemberAttribute
-                );
+                var hasRequiredMemberAttribute = ContainingPEModule.Module
+                    .HasAttribute(_handle, AttributeDescription.RequiredMemberAttribute);
                 uncommon.lazyHasRequiredMembers = hasRequiredMemberAttribute.ToThreeState();
                 return hasRequiredMemberAttribute;
             }
@@ -1339,10 +1338,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
 
             public int Compare(Symbol x, Symbol y)
             {
-                return HandleComparer.Default.Compare(
-                    ((PENamedTypeSymbol)x).Handle,
-                    ((PENamedTypeSymbol)y).Handle
-                );
+                return HandleComparer.Default
+                    .Compare(((PENamedTypeSymbol)x).Handle, ((PENamedTypeSymbol)y).Handle);
             }
         }
 
@@ -2469,10 +2466,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
                 if (uncommon.lazyDefaultMemberName == null)
                 {
                     string defaultMemberName;
-                    this.ContainingPEModule.Module.HasDefaultMemberAttribute(
-                        _handle,
-                        out defaultMemberName
-                    );
+                    this.ContainingPEModule
+                        .Module
+                        .HasDefaultMemberAttribute(_handle, out defaultMemberName);
 
                     // NOTE: the default member name is frequently null (e.g. if there is not indexer in the type).
                     // Make sure we set a non-null value so that we don't recompute it repeatedly.
@@ -2624,10 +2620,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
                     )
                 )
                 {
-                    var type = this.ContainingPEModule.TryDecodeAttributeWithTypeArgument(
-                        this.Handle,
-                        AttributeDescription.CoClassAttribute
-                    );
+                    var type = this.ContainingPEModule
+                        .TryDecodeAttributeWithTypeArgument(
+                            this.Handle,
+                            AttributeDescription.CoClassAttribute
+                        );
                     var coClassType =
                         (
                             (object)type != null
@@ -2657,8 +2654,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
 
             if (uncommon.lazyConditionalAttributeSymbols.IsDefault)
             {
-                ImmutableArray<string> conditionalSymbols =
-                    this.ContainingPEModule.Module.GetConditionalAttributeValues(_handle);
+                ImmutableArray<string> conditionalSymbols = this.ContainingPEModule
+                    .Module
+                    .GetConditionalAttributeValues(_handle);
                 Debug.Assert(!conditionalSymbols.IsDefault);
                 ImmutableInterlocked.InterlockedCompareExchange(
                     ref uncommon.lazyConditionalAttributeSymbols,
@@ -2713,11 +2711,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
         private AttributeUsageInfo DecodeAttributeUsageInfo()
         {
             if (
-                this.ContainingPEModule.Module.HasAttributeUsageAttribute(
-                    _handle,
-                    new MetadataDecoder(ContainingPEModule),
-                    out AttributeUsageInfo info
-                )
+                this.ContainingPEModule
+                    .Module
+                    .HasAttributeUsageAttribute(
+                        _handle,
+                        new MetadataDecoder(ContainingPEModule),
+                        out AttributeUsageInfo info
+                    )
             )
             {
                 return info.HasValidAttributeTargets ? info : AttributeUsageInfo.Default;
@@ -2843,11 +2843,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
             CollectionBuilderAttributeData? getCollectionBuilderAttributeData()
             {
                 if (
-                    ContainingPEModule.Module.HasCollectionBuilderAttribute(
-                        _handle,
-                        out string builderTypeName,
-                        out string methodName
-                    )
+                    ContainingPEModule.Module
+                        .HasCollectionBuilderAttribute(
+                            _handle,
+                            out string builderTypeName,
+                            out string methodName
+                        )
                 )
                 {
                     var decoder = new MetadataDecoder(ContainingPEModule);
@@ -2862,10 +2863,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
 
         internal override bool HasAsyncMethodBuilderAttribute(out TypeSymbol? builderArgument)
         {
-            builderArgument = this.ContainingPEModule.TryDecodeAttributeWithTypeArgument(
-                this.Handle,
-                AttributeDescription.AsyncMethodBuilderAttribute
-            );
+            builderArgument = this.ContainingPEModule
+                .TryDecodeAttributeWithTypeArgument(
+                    this.Handle,
+                    AttributeDescription.AsyncMethodBuilderAttribute
+                );
             return builderArgument is not null;
         }
 

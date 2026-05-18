@@ -29,16 +29,16 @@ public sealed class HeaderDictionaryAddFixer : CodeFixProvider
 
     public sealed override async Task RegisterCodeFixesAsync(CodeFixContext context)
     {
-        var root = await context
-            .Document.GetSyntaxRootAsync(context.CancellationToken)
+        var root = await context.Document
+            .GetSyntaxRootAsync(context.CancellationToken)
             .ConfigureAwait(false);
         if (root == null)
         {
             return;
         }
 
-        var semanticModel = await context
-            .Document.GetSemanticModelAsync(context.CancellationToken)
+        var semanticModel = await context.Document
+            .GetSemanticModelAsync(context.CancellationToken)
             .ConfigureAwait(false);
         if (semanticModel == null)
         {

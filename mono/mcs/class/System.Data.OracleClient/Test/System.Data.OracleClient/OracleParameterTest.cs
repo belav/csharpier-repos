@@ -333,14 +333,14 @@ namespace MonoTests.System.Data.OracleClient
                     command.CommandText =
                         "insert into oratypes_test (id,value1,value2)"
                         + " values (:idx,:txtx,:datex)";
-                    command
-                        .Parameters.Add(new OracleParameter("IDX", OracleType.Number))
+                    command.Parameters
+                        .Add(new OracleParameter("IDX", OracleType.Number))
                         .Direction = ParameterDirection.Input;
-                    command
-                        .Parameters.Add(new OracleParameter("TXTX", OracleType.VarChar))
+                    command.Parameters
+                        .Add(new OracleParameter("TXTX", OracleType.VarChar))
                         .Direction = ParameterDirection.Input;
-                    command
-                        .Parameters.Add(new OracleParameter("DATEX", OracleType.DateTime))
+                    command.Parameters
+                        .Add(new OracleParameter("DATEX", OracleType.DateTime))
                         .Direction = ParameterDirection.Input;
 
                     command.Parameters["IDX"].Value = new OracleNumber(test_int);

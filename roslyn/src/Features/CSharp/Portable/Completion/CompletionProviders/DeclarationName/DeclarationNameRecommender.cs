@@ -166,14 +166,15 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers.DeclarationName
                     .GetMembers()
                     .OfType<IMethodSymbol>()
                     .FirstOrDefault(m => m.IsValidGetEnumerator() || m.IsValidGetAsyncEnumerator())
-                    ?.ReturnType?.GetMembers(WellKnownMemberNames.CurrentPropertyName)
+                    ?.ReturnType
+                    ?.GetMembers(WellKnownMemberNames.CurrentPropertyName)
                     .OfType<IPropertySymbol>()
                     .FirstOrDefault(p => p.GetMethod != null)
                     ?.Type;
 
                 // This can happen for an un-implemented IEnumerable or IAsyncEnumerable.
-                collectionType ??= namedType
-                    .AllInterfaces.FirstOrDefault(t =>
+                collectionType ??= namedType.AllInterfaces
+                    .FirstOrDefault(t =>
                         t.OriginalDefinition.SpecialType
                             == SpecialType.System_Collections_Generic_IEnumerable_T
                         || Equals(t.OriginalDefinition, compilation.IAsyncEnumerableOfTType())
@@ -227,8 +228,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers.DeclarationName
             // see if the user has something like `IEnumerable<Customer>` (where IEnumerable doesn't bind).  Weak
             // heuristic.  If there's a matching type under System.Collections with that name, then assume it's a
             // collection and attempt to create a name from the type arg.
-            var system = compilation
-                .GlobalNamespace.GetMembers(nameof(System))
+            var system = compilation.GlobalNamespace
+                .GetMembers(nameof(System))
                 .OfType<INamespaceSymbol>()
                 .FirstOrDefault();
             var systemCollections = system
@@ -270,7 +271,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers.DeclarationName
         {
             var rules = namingStyleOptions
                 .CreateRules()
-                .NamingRules.AddRange(FallbackNamingRules.CompletionFallbackRules);
+                .NamingRules
+                .AddRange(FallbackNamingRules.CompletionFallbackRules);
 
             var supplementaryRules = FallbackNamingRules.CompletionSupplementaryRules;
             var semanticFactsService = context.GetRequiredLanguageService<ISemanticFactsService>();
@@ -326,25 +328,25 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers.DeclarationName
                 foreach (var rule in rules)
                 {
                     if (
-                        rule.SymbolSpecification.AppliesTo(
-                            kind,
-                            declarationInfo.Modifiers,
-                            declarationInfo.DeclaredAccessibility
-                        )
+                        rule.SymbolSpecification
+                            .AppliesTo(
+                                kind,
+                                declarationInfo.Modifiers,
+                                declarationInfo.DeclaredAccessibility
+                            )
                     )
                     {
                         foreach (var baseName in baseNames)
                         {
-                            var name = rule
-                                .NamingStyle.CreateName(baseName)
+                            var name = rule.NamingStyle
+                                .CreateName(baseName)
                                 .EscapeIdentifier(context.IsInQuery);
 
                             // Don't add multiple items for the same name and only add valid identifiers
                             if (
                                 name.Length > 1
                                 && name
-                                    != CodeAnalysis
-                                        .Shared
+                                    != CodeAnalysis.Shared
                                         .Extensions
                                         .ITypeSymbolExtensions
                                         .DefaultParameterName
@@ -425,8 +427,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers.DeclarationName
             if (overloads.IsEmpty)
                 return;
 
-            var currentParameterNames = baseMethod
-                .ParameterList.Parameters.Select(p => p.Identifier.ValueText)
+            var currentParameterNames = baseMethod.ParameterList
+                .Parameters
+                .Select(p => p.Identifier.ValueText)
                 .ToImmutableHashSet();
 
             foreach (var overload in overloads)

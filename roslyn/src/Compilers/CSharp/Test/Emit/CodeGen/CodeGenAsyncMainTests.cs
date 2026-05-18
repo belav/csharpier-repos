@@ -1028,8 +1028,8 @@ class A
             var image = compilation.EmitToArray();
             using var reader = new PEReader(image);
             var metadataReader = reader.GetMetadataReader();
-            var main = metadataReader
-                .MethodDefinitions.Where(mh => getMethodName(mh) == "<Main>")
+            var main = metadataReader.MethodDefinitions
+                .Where(mh => getMethodName(mh) == "<Main>")
                 .Single();
             Assert.Equal(
                 new[]

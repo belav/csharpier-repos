@@ -66,14 +66,15 @@ namespace System.ServiceModel.Security
             }
             else
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new NotSupportedException(
-                        SR.GetString(
-                            SR.SecurityTokenManagerCannotCreateSerializerForVersion,
-                            version
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        new NotSupportedException(
+                            SR.GetString(
+                                SR.SecurityTokenManagerCannotCreateSerializerForVersion,
+                                version
+                            )
                         )
-                    )
-                );
+                    );
             }
         }
 
@@ -87,12 +88,13 @@ namespace System.ServiceModel.Security
                 recipientRequirement.SecurityBindingElement;
             if (securityBindingElement == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                    SR.GetString(
-                        SR.TokenAuthenticatorRequiresSecurityBindingElement,
-                        recipientRequirement
-                    )
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperArgument(
+                        SR.GetString(
+                            SR.TokenAuthenticatorRequiresSecurityBindingElement,
+                            recipientRequirement
+                        )
+                    );
             }
             bool isCookieMode = !recipientRequirement.SupportSecurityContextCancellation;
             LocalServiceSecuritySettings localServiceSettings =
@@ -125,8 +127,7 @@ namespace System.ServiceModel.Security
                 authenticator.ListenUri = recipientRequirement.ListenUri;
                 authenticator.SecurityAlgorithmSuite = recipientRequirement.SecurityAlgorithmSuite;
                 authenticator.SessionTokenLifetime = TimeSpan.MaxValue;
-                authenticator.KeyRenewalInterval = securityBindingElement
-                    .LocalServiceSettings
+                authenticator.KeyRenewalInterval = securityBindingElement.LocalServiceSettings
                     .SessionKeyRenewalInterval;
                 authenticator.StandardsManager = SecurityUtils.CreateSecurityStandardsManager(
                     recipientRequirement,
@@ -167,11 +168,9 @@ namespace System.ServiceModel.Security
                     recipientRequirement,
                     this
                 );
-                authenticator.SecurityStateEncoder = parent
-                    .SecureConversationAuthentication
+                authenticator.SecurityStateEncoder = parent.SecureConversationAuthentication
                     .SecurityStateEncoder;
-                authenticator.KnownTypes = parent
-                    .SecureConversationAuthentication
+                authenticator.KnownTypes = parent.SecureConversationAuthentication
                     .SecurityContextClaimTypes;
                 authenticator.PreserveBootstrapTokens = preserveBootstrapTokens;
 
@@ -202,12 +201,13 @@ namespace System.ServiceModel.Security
                 recipientRequirement.SecurityBindingElement;
             if (securityBindingElement == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                    SR.GetString(
-                        SR.TokenAuthenticatorRequiresSecurityBindingElement,
-                        recipientRequirement
-                    )
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperArgument(
+                        SR.GetString(
+                            SR.TokenAuthenticatorRequiresSecurityBindingElement,
+                            recipientRequirement
+                        )
+                    );
             }
             bool isCookieMode = !recipientRequirement.SupportSecurityContextCancellation;
             LocalServiceSecuritySettings localServiceSettings =
@@ -224,11 +224,9 @@ namespace System.ServiceModel.Security
 
             SpnegoTokenAuthenticator authenticator = new SpnegoTokenAuthenticator();
             authenticator.ExtendedProtectionPolicy = extendedProtectionPolicy;
-            authenticator.AllowUnauthenticatedCallers = parent
-                .WindowsAuthentication
+            authenticator.AllowUnauthenticatedCallers = parent.WindowsAuthentication
                 .AllowAnonymousLogons;
-            authenticator.ExtractGroupsForWindowsAccounts = parent
-                .WindowsAuthentication
+            authenticator.ExtractGroupsForWindowsAccounts = parent.WindowsAuthentication
                 .IncludeWindowsGroups;
             authenticator.IsClientAnonymous = false;
             authenticator.EncryptStateInServiceToken = isCookieMode;
@@ -246,11 +244,9 @@ namespace System.ServiceModel.Security
                 recipientRequirement,
                 this
             );
-            authenticator.SecurityStateEncoder = parent
-                .SecureConversationAuthentication
+            authenticator.SecurityStateEncoder = parent.SecureConversationAuthentication
                 .SecurityStateEncoder;
-            authenticator.KnownTypes = parent
-                .SecureConversationAuthentication
+            authenticator.KnownTypes = parent.SecureConversationAuthentication
                 .SecurityContextClaimTypes;
             // if the SPNEGO is being done in mixed-mode, the nego blobs are from an anonymous client and so there size bound needs to be enforced.
             if (securityBindingElement is TransportSecurityBindingElement)
@@ -317,12 +313,13 @@ namespace System.ServiceModel.Security
                 recipientRequirement.SecurityBindingElement;
             if (securityBindingElement == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                    SR.GetString(
-                        SR.TokenAuthenticatorRequiresSecurityBindingElement,
-                        recipientRequirement
-                    )
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperArgument(
+                        SR.GetString(
+                            SR.TokenAuthenticatorRequiresSecurityBindingElement,
+                            recipientRequirement
+                        )
+                    );
             }
             bool isCookieMode = !recipientRequirement.SupportSecurityContextCancellation;
             LocalServiceSecuritySettings localServiceSettings =
@@ -358,11 +355,9 @@ namespace System.ServiceModel.Security
                 recipientRequirement,
                 this
             );
-            authenticator.SecurityStateEncoder = parent
-                .SecureConversationAuthentication
+            authenticator.SecurityStateEncoder = parent.SecureConversationAuthentication
                 .SecurityStateEncoder;
-            authenticator.KnownTypes = parent
-                .SecureConversationAuthentication
+            authenticator.KnownTypes = parent.SecureConversationAuthentication
                 .SecurityContextClaimTypes;
             authenticator.ServerTokenProvider = CreateTlsnegoServerX509TokenProvider(
                 recipientRequirement
@@ -391,8 +386,7 @@ namespace System.ServiceModel.Security
 
         X509SecurityTokenAuthenticator CreateClientX509TokenAuthenticator()
         {
-            X509ClientCertificateAuthentication authentication = parent
-                .ClientCertificate
+            X509ClientCertificateAuthentication authentication = parent.ClientCertificate
                 .Authentication;
             return new X509SecurityTokenAuthenticator(
                 authentication.GetCertificateValidator(),
@@ -407,9 +401,8 @@ namespace System.ServiceModel.Security
         )
         {
             if (recipientRequirement == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                    "recipientRequirement"
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperArgumentNull("recipientRequirement");
 
             Collection<SecurityToken> outOfBandTokens = new Collection<SecurityToken>();
             if (parent.ServiceCertificate.Certificate != null)
@@ -431,8 +424,8 @@ namespace System.ServiceModel.Security
                 }
             }
 
-            X509CertificateValidator validator =
-                parent.IssuedTokenAuthentication.GetCertificateValidator();
+            X509CertificateValidator validator = parent.IssuedTokenAuthentication
+                .GetCertificateValidator();
             supportingAuthenticators.Add(new X509SecurityTokenAuthenticator(validator));
 
             if (parent.IssuedTokenAuthentication.AllowUntrustedRsaIssuers)
@@ -488,11 +481,12 @@ namespace System.ServiceModel.Security
         {
             if (parent.ServiceCertificate.Certificate == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(
-                        SR.GetString(SR.ServiceCertificateNotProvidedOnServiceCredentials)
-                    )
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(SR.ServiceCertificateNotProvidedOnServiceCredentials)
+                        )
+                    );
             }
             SecurityUtils.EnsureCertificateCanDoKeyExchange(parent.ServiceCertificate.Certificate);
             return new ServiceX509SecurityTokenProvider(parent.ServiceCertificate.Certificate);
@@ -502,9 +496,8 @@ namespace System.ServiceModel.Security
         {
             return (
                 requirement != null
-                && requirement.Properties.ContainsKey(
-                    ServiceModelSecurityTokenRequirement.IssuerAddressProperty
-                )
+                && requirement.Properties
+                    .ContainsKey(ServiceModelSecurityTokenRequirement.IssuerAddressProperty)
             );
         }
 
@@ -515,9 +508,8 @@ namespace System.ServiceModel.Security
         {
             if (tokenRequirement == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                    "tokenRequirement"
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperArgumentNull("tokenRequirement");
             }
             string tokenType = tokenRequirement.TokenType;
             outOfBandTokenResolver = null;
@@ -539,14 +531,15 @@ namespace System.ServiceModel.Security
                 tokenRequirement as RecipientServiceModelSecurityTokenRequirement;
             if (recipientRequirement == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new NotSupportedException(
-                        SR.GetString(
-                            SR.SecurityTokenManagerCannotCreateAuthenticatorForRequirement,
-                            tokenRequirement
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        new NotSupportedException(
+                            SR.GetString(
+                                SR.SecurityTokenManagerCannotCreateAuthenticatorForRequirement,
+                                tokenRequirement
+                            )
                         )
-                    )
-                );
+                    );
             }
             if (tokenType == SecurityTokenTypes.X509Certificate)
             {
@@ -638,14 +631,15 @@ namespace System.ServiceModel.Security
             }
 
             if (result == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new NotSupportedException(
-                        SR.GetString(
-                            SR.SecurityTokenManagerCannotCreateAuthenticatorForRequirement,
-                            tokenRequirement
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        new NotSupportedException(
+                            SR.GetString(
+                                SR.SecurityTokenManagerCannotCreateAuthenticatorForRequirement,
+                                tokenRequirement
+                            )
                         )
-                    )
-                );
+                    );
 
             return result;
         }
@@ -696,17 +690,18 @@ namespace System.ServiceModel.Security
                     )
                     {
                         // Ensure there are no inconsistencies when Basic and (Digest and/or Ntlm and/or Negotiate) are both enabled
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new NotSupportedException(
-                                SR.GetString(
-                                    SR.SecurityTokenProviderIncludeWindowsGroupsInconsistent,
-                                    (AuthenticationSchemes)authenticationScheme
-                                        - AuthenticationSchemes.Basic,
-                                    parent.UserNameAuthentication.IncludeWindowsGroups,
-                                    parent.WindowsAuthentication.IncludeWindowsGroups
+                        throw DiagnosticUtility.ExceptionUtility
+                            .ThrowHelperError(
+                                new NotSupportedException(
+                                    SR.GetString(
+                                        SR.SecurityTokenProviderIncludeWindowsGroupsInconsistent,
+                                        (AuthenticationSchemes)authenticationScheme
+                                            - AuthenticationSchemes.Basic,
+                                        parent.UserNameAuthentication.IncludeWindowsGroups,
+                                        parent.WindowsAuthentication.IncludeWindowsGroups
+                                    )
                                 )
-                            )
-                        );
+                            );
                     }
 
                     result = new SspiSecurityTokenProvider(
@@ -732,11 +727,14 @@ namespace System.ServiceModel.Security
                 {
                     if (parent.ClientCertificate.Certificate == null)
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new InvalidOperationException(
-                                SR.GetString(SR.ClientCertificateNotProvidedOnServiceCredentials)
-                            )
-                        );
+                        throw DiagnosticUtility.ExceptionUtility
+                            .ThrowHelperError(
+                                new InvalidOperationException(
+                                    SR.GetString(
+                                        SR.ClientCertificateNotProvidedOnServiceCredentials
+                                    )
+                                )
+                            );
                     }
 
                     result = new X509SecurityTokenProvider(parent.ClientCertificate.Certificate);
@@ -775,14 +773,15 @@ namespace System.ServiceModel.Security
 
             if (result == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new NotSupportedException(
-                        SR.GetString(
-                            SR.SecurityTokenManagerCannotCreateProviderForRequirement,
-                            requirement
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        new NotSupportedException(
+                            SR.GetString(
+                                SR.SecurityTokenManagerCannotCreateProviderForRequirement,
+                                requirement
+                            )
                         )
-                    )
-                );
+                    );
             }
             return result;
         }
@@ -791,9 +790,8 @@ namespace System.ServiceModel.Security
         {
             if (tokenRequirement == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                    "tokenRequirement"
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperArgumentNull("tokenRequirement");
             }
             if (tokenRequirement is RecipientServiceModelSecurityTokenRequirement)
             {

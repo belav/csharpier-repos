@@ -46,10 +46,8 @@ namespace System.ServiceModel.Dispatcher
             if (instanceContext.State == CommunicationState.Faulted || instanceContext.Aborted)
             {
                 durableInstance.Abort();
-                this.durableInstanceContextProvider.UnbindAbortedInstance(
-                    instanceContext,
-                    durableInstance.InstanceId
-                );
+                this.durableInstanceContextProvider
+                    .UnbindAbortedInstance(instanceContext, durableInstance.InstanceId);
             }
             else if (instanceContext.State == CommunicationState.Closed)
             {

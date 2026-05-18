@@ -273,10 +273,8 @@ namespace System.Activities.Statements
                     InternalTransition originalTransition;
 
                     if (
-                        originalInternalState.triggerInternalTransitionMapping.TryGetValue(
-                            triggerMatch,
-                            out originalTransition
-                        )
+                        originalInternalState.triggerInternalTransitionMapping
+                            .TryGetValue(triggerMatch, out originalTransition)
                     )
                     {
                         originalTriggerInUpdatedDefinition++;
@@ -675,8 +673,7 @@ namespace System.Activities.Statements
                             if (transition.IsUnconditional)
                             {
                                 // executing transition before persist is unconditional
-                                originalTriggerId = eventManager
-                                    .CurrentBeingProcessedEvent
+                                originalTriggerId = eventManager.CurrentBeingProcessedEvent
                                     .TriggedId;
                                 originalConditionIndex = 0;
                                 eventManager.CurrentBeingProcessedEvent.TriggedId =
@@ -732,8 +729,7 @@ namespace System.Activities.Statements
 
                                     if (eventManager.CurrentConditionIndex == savedCondIndex)
                                     {
-                                        originalTriggerId = eventManager
-                                            .CurrentBeingProcessedEvent
+                                        originalTriggerId = eventManager.CurrentBeingProcessedEvent
                                             .TriggedId;
                                         originalConditionIndex = eventManager.CurrentConditionIndex;
                                         eventManager.CurrentBeingProcessedEvent.TriggedId =
@@ -820,10 +816,11 @@ namespace System.Activities.Statements
                     context.ScheduleActivity(transition.Trigger, this.onTriggerComplete);
                 }
 
-                this.currentRunningTriggers.Set(
-                    context,
-                    this.currentRunningTriggers.Get(context) + this.internalTransitions.Count
-                );
+                this.currentRunningTriggers
+                    .Set(
+                        context,
+                        this.currentRunningTriggers.Get(context) + this.internalTransitions.Count
+                    );
             }
         }
 
@@ -840,10 +837,8 @@ namespace System.Activities.Statements
             else if (completedInstance.State == ActivityInstanceState.Closed)
             {
                 InternalTransition internalTransition = null;
-                this.triggerInternalTransitionMapping.TryGetValue(
-                    completedInstance.Activity,
-                    out internalTransition
-                );
+                this.triggerInternalTransitionMapping
+                    .TryGetValue(completedInstance.Activity, out internalTransition);
                 Fx.Assert(
                     internalTransition != null,
                     "internalTransition should be added into triggerInternalTransitionMapping in CacheMetadata."
@@ -927,10 +922,8 @@ namespace System.Activities.Statements
                 {
                     // Schedule current trigger again firstly.
                     context.ScheduleActivity(transition.Trigger, this.onTriggerComplete);
-                    this.currentRunningTriggers.Set(
-                        context,
-                        this.currentRunningTriggers.Get(context) + 1
-                    );
+                    this.currentRunningTriggers
+                        .Set(context, this.currentRunningTriggers.Get(context) + 1);
 
                     // check whether there is any other trigger completed.
                     ProcessNextTriggerCompletedEvent(context, eventManager);
@@ -993,10 +986,8 @@ namespace System.Activities.Statements
                 Activity triggerActivity = transition.ActiveTrigger;
 
                 if (
-                    !this.triggerInternalTransitionMapping.TryGetValue(
-                        triggerActivity,
-                        out internalTransition
-                    )
+                    !this.triggerInternalTransitionMapping
+                        .TryGetValue(triggerActivity, out internalTransition)
                 )
                 {
                     metadata.AddChild(triggerActivity);

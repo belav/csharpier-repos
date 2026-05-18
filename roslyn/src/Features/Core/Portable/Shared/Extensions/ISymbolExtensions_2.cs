@@ -226,8 +226,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                     compilation,
                     cancellationToken
                 ) ?? DocumentationComment.Empty,
-                ITypeParameterSymbol typeParam => typeParam
-                    .ContainingSymbol.GetDocumentationComment(
+                ITypeParameterSymbol typeParam => typeParam.ContainingSymbol
+                    .GetDocumentationComment(
                         compilation,
                         expandIncludes: true,
                         expandInheritdoc: true,
@@ -240,12 +240,13 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                     compilation,
                     cancellationToken
                 ),
-                IAliasSymbol alias => alias.Target.GetDocumentationComment(
-                    compilation,
-                    expandIncludes: true,
-                    expandInheritdoc: true,
-                    cancellationToken: cancellationToken
-                ),
+                IAliasSymbol alias => alias.Target
+                    .GetDocumentationComment(
+                        compilation,
+                        expandIncludes: true,
+                        expandInheritdoc: true,
+                        cancellationToken: cancellationToken
+                    ),
                 _ => symbol.GetDocumentationComment(
                     compilation,
                     expandIncludes: true,
@@ -294,8 +295,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             }
 
             // Get the comments from the original definition of the containing symbol.
-            return containingSymbol
-                .OriginalDefinition.GetDocumentationComment(
+            return containingSymbol.OriginalDefinition
+                .GetDocumentationComment(
                     compilation,
                     expandIncludes: true,
                     expandInheritdoc: true,
@@ -345,12 +346,13 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                 case MethodKind.EventRemove:
                 case MethodKind.PropertyGet:
                 case MethodKind.PropertySet:
-                    return method.AssociatedSymbol?.GetDocumentationComment(
-                            compilation,
-                            expandIncludes: true,
-                            expandInheritdoc: true,
-                            cancellationToken: cancellationToken
-                        ) ?? DocumentationComment.Empty;
+                    return method.AssociatedSymbol
+                            ?.GetDocumentationComment(
+                                compilation,
+                                expandIncludes: true,
+                                expandInheritdoc: true,
+                                cancellationToken: cancellationToken
+                            ) ?? DocumentationComment.Empty;
                 default:
                     return method.GetDocumentationComment(
                         compilation,

@@ -1632,174 +1632,177 @@ namespace System.Threading.Tasks.Tests
 
             TaskScheduler myTaskScheduler = new ParallelTestsScheduler();
 
-            Task t1 = Task.Factory.StartNew(
-                delegate()
-                {
-                    TaskScheduler usedScheduler = null;
-
-                    do
+            Task t1 = Task.Factory
+                .StartNew(
+                    delegate()
                     {
-                        //
-                        // Parallel.For() testing.
-                        // Not, for now, testing all flavors (For(int), For(long), ForEach(), Partitioner ForEach()).
-                        // Assuming that all use ParallelOptions in the same fashion.
-                        //
+                        TaskScheduler usedScheduler = null;
 
-                        // Make sure that TaskScheduler is used by default (no ParallelOptions)
-                        Parallel.For(
-                            0,
-                            1,
-                            delegate(int i)
-                            {
-                                usedScheduler = TaskScheduler.Current;
-                            }
-                        );
-                        Assert.True(
-                            usedScheduler == TaskScheduler.Default,
-                            "TestParallelScheduler:    > FAILED.  PFor: TaskScheduler.Default not used when no ParallelOptions are specified."
-                        );
+                        do
+                        {
+                            //
+                            // Parallel.For() testing.
+                            // Not, for now, testing all flavors (For(int), For(long), ForEach(), Partitioner ForEach()).
+                            // Assuming that all use ParallelOptions in the same fashion.
+                            //
 
-                        // Make sure that TaskScheduler is used by default (with ParallelOptions)
-                        Parallel.For(
-                            0,
-                            1,
-                            parallelOptions,
-                            delegate(int i)
-                            {
-                                usedScheduler = TaskScheduler.Current;
-                            }
-                        );
-                        Assert.True(
-                            usedScheduler == TaskScheduler.Default,
-                            "TestParallelScheduler:    > FAILED.  PFor: TaskScheduler.Default not used when none specified in ParallelOptions."
-                        );
+                            // Make sure that TaskScheduler is used by default (no ParallelOptions)
+                            Parallel.For(
+                                0,
+                                1,
+                                delegate(int i)
+                                {
+                                    usedScheduler = TaskScheduler.Current;
+                                }
+                            );
+                            Assert.True(
+                                usedScheduler == TaskScheduler.Default,
+                                "TestParallelScheduler:    > FAILED.  PFor: TaskScheduler.Default not used when no ParallelOptions are specified."
+                            );
 
-                        // Make sure that specified scheduler is actually used
-                        parallelOptions.TaskScheduler = myTaskScheduler;
-                        Parallel.For(
-                            0,
-                            1,
-                            parallelOptions,
-                            delegate(int i)
-                            {
-                                usedScheduler = TaskScheduler.Current;
-                            }
-                        );
-                        Assert.True(
-                            usedScheduler == myTaskScheduler,
-                            "TestParallelScheduler:    > FAILED.  PFor: Failed to run with specified scheduler."
-                        );
+                            // Make sure that TaskScheduler is used by default (with ParallelOptions)
+                            Parallel.For(
+                                0,
+                                1,
+                                parallelOptions,
+                                delegate(int i)
+                                {
+                                    usedScheduler = TaskScheduler.Current;
+                                }
+                            );
+                            Assert.True(
+                                usedScheduler == TaskScheduler.Default,
+                                "TestParallelScheduler:    > FAILED.  PFor: TaskScheduler.Default not used when none specified in ParallelOptions."
+                            );
 
-                        // Make sure that current scheduler is used when null is specified
-                        parallelOptions.TaskScheduler = null;
-                        Parallel.For(
-                            0,
-                            1,
-                            parallelOptions,
-                            delegate(int i)
-                            {
-                                usedScheduler = TaskScheduler.Current;
-                            }
-                        );
-                        Assert.True(
-                            usedScheduler == myTaskScheduler,
-                            "TestParallelScheduler:    > FAILED.  PFor: Failed to run with TS.Current when null was specified."
-                        );
+                            // Make sure that specified scheduler is actually used
+                            parallelOptions.TaskScheduler = myTaskScheduler;
+                            Parallel.For(
+                                0,
+                                1,
+                                parallelOptions,
+                                delegate(int i)
+                                {
+                                    usedScheduler = TaskScheduler.Current;
+                                }
+                            );
+                            Assert.True(
+                                usedScheduler == myTaskScheduler,
+                                "TestParallelScheduler:    > FAILED.  PFor: Failed to run with specified scheduler."
+                            );
 
-                        //
-                        // Parallel.Invoke testing.
-                        //
-                        parallelOptions = new ParallelOptions();
+                            // Make sure that current scheduler is used when null is specified
+                            parallelOptions.TaskScheduler = null;
+                            Parallel.For(
+                                0,
+                                1,
+                                parallelOptions,
+                                delegate(int i)
+                                {
+                                    usedScheduler = TaskScheduler.Current;
+                                }
+                            );
+                            Assert.True(
+                                usedScheduler == myTaskScheduler,
+                                "TestParallelScheduler:    > FAILED.  PFor: Failed to run with TS.Current when null was specified."
+                            );
 
-                        // Make sure that TaskScheduler is used by default (w/o ParallelOptions)
-                        Parallel.Invoke(
-                            delegate
-                            {
-                                usedScheduler = TaskScheduler.Current;
-                            }
-                        );
-                        Assert.True(
-                            usedScheduler == TaskScheduler.Default,
-                            "TestParallelScheduler:    > FAILED.  PInvoke: TaskScheduler.Default not used when no ParallelOptions are specified."
-                        );
+                            //
+                            // Parallel.Invoke testing.
+                            //
+                            parallelOptions = new ParallelOptions();
 
-                        // Make sure that TaskScheduler is used by default (with ParallelOptions)
-                        Parallel.Invoke(
-                            parallelOptions,
-                            delegate
-                            {
-                                usedScheduler = TaskScheduler.Current;
-                            }
-                        );
-                        Assert.True(
-                            usedScheduler == TaskScheduler.Default,
-                            "TestParallelScheduler:    > FAILED.  PInvoke: TaskScheduler.Default not used when none specified in ParallelOptions."
-                        );
+                            // Make sure that TaskScheduler is used by default (w/o ParallelOptions)
+                            Parallel.Invoke(
+                                delegate
+                                {
+                                    usedScheduler = TaskScheduler.Current;
+                                }
+                            );
+                            Assert.True(
+                                usedScheduler == TaskScheduler.Default,
+                                "TestParallelScheduler:    > FAILED.  PInvoke: TaskScheduler.Default not used when no ParallelOptions are specified."
+                            );
 
-                        // Make sure that specified scheduler is actually used
-                        parallelOptions.TaskScheduler = myTaskScheduler;
-                        Parallel.Invoke(
-                            parallelOptions,
-                            delegate
-                            {
-                                usedScheduler = TaskScheduler.Current;
-                            }
-                        );
-                        Assert.True(
-                            usedScheduler == myTaskScheduler,
-                            "TestParallelScheduler:    > FAILED.  PInvoke: Failed to run with specified scheduler."
-                        );
+                            // Make sure that TaskScheduler is used by default (with ParallelOptions)
+                            Parallel.Invoke(
+                                parallelOptions,
+                                delegate
+                                {
+                                    usedScheduler = TaskScheduler.Current;
+                                }
+                            );
+                            Assert.True(
+                                usedScheduler == TaskScheduler.Default,
+                                "TestParallelScheduler:    > FAILED.  PInvoke: TaskScheduler.Default not used when none specified in ParallelOptions."
+                            );
 
-                        // Make sure that current scheduler is used when null is specified
-                        parallelOptions.TaskScheduler = null;
-                        Parallel.Invoke(
-                            parallelOptions,
-                            delegate
-                            {
-                                usedScheduler = TaskScheduler.Current;
-                            }
-                        );
-                        Assert.True(
-                            usedScheduler == myTaskScheduler,
-                            "TestParallelScheduler:    > FAILED.  PInvoke: Failed to run with TS.Current when null was specified."
-                        );
+                            // Make sure that specified scheduler is actually used
+                            parallelOptions.TaskScheduler = myTaskScheduler;
+                            Parallel.Invoke(
+                                parallelOptions,
+                                delegate
+                                {
+                                    usedScheduler = TaskScheduler.Current;
+                                }
+                            );
+                            Assert.True(
+                                usedScheduler == myTaskScheduler,
+                                "TestParallelScheduler:    > FAILED.  PInvoke: Failed to run with specified scheduler."
+                            );
 
-                        // Some tests for wonky behavior seen before fixes
-                        TaskCompletionSource tcs = new TaskCompletionSource();
-                        bool timeExpired = false;
-                        Task continuation = tcs.Task.ContinueWith(
-                            delegate
-                            {
-                                Assert.True(
-                                    timeExpired,
-                                    "TestParallelScheduler:    > FAILED.  WaitAll() started/inlined a continuation task!"
+                            // Make sure that current scheduler is used when null is specified
+                            parallelOptions.TaskScheduler = null;
+                            Parallel.Invoke(
+                                parallelOptions,
+                                delegate
+                                {
+                                    usedScheduler = TaskScheduler.Current;
+                                }
+                            );
+                            Assert.True(
+                                usedScheduler == myTaskScheduler,
+                                "TestParallelScheduler:    > FAILED.  PInvoke: Failed to run with TS.Current when null was specified."
+                            );
+
+                            // Some tests for wonky behavior seen before fixes
+                            TaskCompletionSource tcs = new TaskCompletionSource();
+                            bool timeExpired = false;
+                            Task continuation = tcs.Task
+                                .ContinueWith(
+                                    delegate
+                                    {
+                                        Assert.True(
+                                            timeExpired,
+                                            "TestParallelScheduler:    > FAILED.  WaitAll() started/inlined a continuation task!"
+                                        );
+                                    }
                                 );
-                            }
-                        );
 
-                        // Arrange for another task to complete the tcs.
-                        Task delayedOperation = Task.Factory.StartNew(
-                            delegate
-                            {
-                                timeExpired = true;
-                                tcs.SetResult();
-                            }
-                        );
+                            // Arrange for another task to complete the tcs.
+                            Task delayedOperation = Task.Factory
+                                .StartNew(
+                                    delegate
+                                    {
+                                        timeExpired = true;
+                                        tcs.SetResult();
+                                    }
+                                );
 
-                        Task.WaitAll(tcs.Task, continuation);
-                        Assert.True(
-                            timeExpired,
-                            string.Format(
-                                "TestParallelScheduler:    > FAILED.  WaitAll() completed for unstarted continuation task or TCS.task! -- continuation status: {0}",
-                                continuation.Status
-                            )
-                        );
-                    } while (false);
-                },
-                CancellationToken.None,
-                TaskCreationOptions.None,
-                myTaskScheduler
-            );
+                            Task.WaitAll(tcs.Task, continuation);
+                            Assert.True(
+                                timeExpired,
+                                string.Format(
+                                    "TestParallelScheduler:    > FAILED.  WaitAll() completed for unstarted continuation task or TCS.task! -- continuation status: {0}",
+                                    continuation.Status
+                                )
+                            );
+                        } while (false);
+                    },
+                    CancellationToken.None,
+                    TaskCreationOptions.None,
+                    myTaskScheduler
+                );
 
             t1.Wait();
         }

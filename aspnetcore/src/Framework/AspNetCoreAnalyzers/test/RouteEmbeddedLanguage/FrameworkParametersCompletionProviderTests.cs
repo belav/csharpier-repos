@@ -35,10 +35,8 @@ class Program
         // Assert
         Assert.Collection(result.Completions.ItemsList, i => Assert.Equal("id", i.DisplayText));
 
-        var change = await result.Service.GetChangeAsync(
-            result.Document,
-            result.Completions.ItemsList[0]
-        );
+        var change = await result.Service
+            .GetChangeAsync(result.Document, result.Completions.ItemsList[0]);
         Assert.Equal("id", change.TextChange.NewText);
         Assert.Equal(result.CompletionListSpan, change.TextChange.Span);
     }
@@ -66,10 +64,8 @@ class Program
         // Assert
         Assert.Collection(result.Completions.ItemsList, i => Assert.Equal("id", i.DisplayText));
 
-        var change = await result.Service.GetChangeAsync(
-            result.Document,
-            result.Completions.ItemsList[0]
-        );
+        var change = await result.Service
+            .GetChangeAsync(result.Document, result.Completions.ItemsList[0]);
         Assert.Equal("id", change.TextChange.NewText);
         Assert.Equal(result.CompletionListSpan, change.TextChange.Span);
     }
@@ -97,10 +93,8 @@ class Program
         // Assert
         Assert.Collection(result.Completions.ItemsList, i => Assert.Equal("id", i.DisplayText));
 
-        var change = await result.Service.GetChangeAsync(
-            result.Document,
-            result.Completions.ItemsList[0]
-        );
+        var change = await result.Service
+            .GetChangeAsync(result.Document, result.Completions.ItemsList[0]);
         Assert.Equal("id", change.TextChange.NewText);
         Assert.Equal(result.CompletionListSpan, change.TextChange.Span);
     }
@@ -128,10 +122,8 @@ class Program
         // Assert
         Assert.Collection(result.Completions.ItemsList, i => Assert.Equal("id", i.DisplayText));
 
-        var change = await result.Service.GetChangeAsync(
-            result.Document,
-            result.Completions.ItemsList[0]
-        );
+        var change = await result.Service
+            .GetChangeAsync(result.Document, result.Completions.ItemsList[0]);
         Assert.Equal("id", change.TextChange.NewText);
         Assert.Equal(result.CompletionListSpan, change.TextChange.Span);
     }
@@ -161,10 +153,8 @@ class Program
         // Assert
         Assert.Collection(result.Completions.ItemsList, i => Assert.Equal("id", i.DisplayText));
 
-        var change = await result.Service.GetChangeAsync(
-            result.Document,
-            result.Completions.ItemsList[0]
-        );
+        var change = await result.Service
+            .GetChangeAsync(result.Document, result.Completions.ItemsList[0]);
         Assert.Equal("id", change.TextChange.NewText);
         Assert.Equal(result.CompletionListSpan, change.TextChange.Span);
     }
@@ -192,10 +182,8 @@ class Program
         // Assert
         Assert.Collection(result.Completions.ItemsList, i => Assert.Equal("id", i.DisplayText));
 
-        var change = await result.Service.GetChangeAsync(
-            result.Document,
-            result.Completions.ItemsList[0]
-        );
+        var change = await result.Service
+            .GetChangeAsync(result.Document, result.Completions.ItemsList[0]);
         Assert.Equal("id", change.TextChange.NewText);
         Assert.Equal(result.CompletionListSpan, change.TextChange.Span);
     }
@@ -224,10 +212,8 @@ class Program
         // Assert
         Assert.Collection(result.Completions.ItemsList, i => Assert.Equal("id", i.DisplayText));
 
-        var change = await result.Service.GetChangeAsync(
-            result.Document,
-            result.Completions.ItemsList[0]
-        );
+        var change = await result.Service
+            .GetChangeAsync(result.Document, result.Completions.ItemsList[0]);
         Assert.Equal("id", change.TextChange.NewText);
         Assert.Equal(result.CompletionListSpan, change.TextChange.Span);
     }
@@ -256,10 +242,8 @@ class Program
         // Assert
         Assert.Collection(result.Completions.ItemsList, i => Assert.Equal("id", i.DisplayText));
 
-        var change = await result.Service.GetChangeAsync(
-            result.Document,
-            result.Completions.ItemsList[0]
-        );
+        var change = await result.Service
+            .GetChangeAsync(result.Document, result.Completions.ItemsList[0]);
         Assert.Equal("id", change.TextChange.NewText);
         Assert.Equal(result.CompletionListSpan, change.TextChange.Span);
     }
@@ -288,10 +272,8 @@ class Program
         // Assert
         Assert.Collection(result.Completions.ItemsList, i => Assert.Equal("ids", i.DisplayText));
 
-        var change = await result.Service.GetChangeAsync(
-            result.Document,
-            result.Completions.ItemsList[0]
-        );
+        var change = await result.Service
+            .GetChangeAsync(result.Document, result.Completions.ItemsList[0]);
         Assert.Equal("ids", change.TextChange.NewText);
         Assert.Equal(result.CompletionListSpan, change.TextChange.Span);
     }
@@ -1065,10 +1047,8 @@ class Program
         // Assert
         Assert.Collection(result.Completions.ItemsList, i => Assert.Equal("id", i.DisplayText));
 
-        var change = await result.Service.GetChangeAsync(
-            result.Document,
-            result.Completions.ItemsList[0]
-        );
+        var change = await result.Service
+            .GetChangeAsync(result.Document, result.Completions.ItemsList[0]);
         Assert.Equal("id", change.TextChange.NewText);
         Assert.Equal(result.CompletionListSpan, change.TextChange.Span);
     }

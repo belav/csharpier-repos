@@ -158,18 +158,19 @@ namespace System.ServiceModel.Diagnostics
                         : null
                 )
                 {
-                    this.diagnosticTrace.TraceEvent(
-                        eventType,
-                        DiagnosticsTraceCode.ThrowingException,
-                        LegacyDiagnosticTrace.GenerateMsdnTraceCode(
-                            "System.ServiceModel.Diagnostics",
-                            "ThrowingException"
-                        ),
-                        TraceSR.GetString(TraceSR.ThrowingException),
-                        extendedData,
-                        exception,
-                        null
-                    );
+                    this.diagnosticTrace
+                        .TraceEvent(
+                            eventType,
+                            DiagnosticsTraceCode.ThrowingException,
+                            LegacyDiagnosticTrace.GenerateMsdnTraceCode(
+                                "System.ServiceModel.Diagnostics",
+                                "ThrowingException"
+                            ),
+                            TraceSR.GetString(TraceSR.ThrowingException),
+                            extendedData,
+                            exception,
+                            null
+                        );
                 }
 
                 IDictionary data = exception.Data;
@@ -318,18 +319,19 @@ namespace System.ServiceModel.Diagnostics
                         : null
                 )
                 {
-                    this.diagnosticTrace.TraceEvent(
-                        eventType,
-                        DiagnosticsTraceCode.TraceHandledException,
-                        LegacyDiagnosticTrace.GenerateMsdnTraceCode(
-                            "System.ServiceModel.Diagnostics",
-                            "TraceHandledException"
-                        ),
-                        TraceSR.GetString(TraceSR.TraceHandledException),
-                        null,
-                        exception,
-                        null
-                    );
+                    this.diagnosticTrace
+                        .TraceEvent(
+                            eventType,
+                            DiagnosticsTraceCode.TraceHandledException,
+                            LegacyDiagnosticTrace.GenerateMsdnTraceCode(
+                                "System.ServiceModel.Diagnostics",
+                                "TraceHandledException"
+                            ),
+                            TraceSR.GetString(TraceSR.TraceHandledException),
+                            null,
+                            exception,
+                            null
+                        );
                 }
             }
         }

@@ -23,8 +23,8 @@ internal sealed class FileExtensionsAttributeAdapter : AttributeAdapterBase<File
         // https://jqueryvalidation.org/extension-method/
 
         // These lines follow the same approach as the FileExtensionsAttribute.
-        var normalizedExtensions = Attribute
-            .Extensions.Replace(" ", string.Empty)
+        var normalizedExtensions = Attribute.Extensions
+            .Replace(" ", string.Empty)
             .Replace(".", string.Empty)
             .ToLowerInvariant();
         var parsedExtensions = normalizedExtensions.Split(',').Select(e => "." + e);

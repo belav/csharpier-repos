@@ -75,9 +75,12 @@ public class CustomParsingTests
 
         new CliRootCommand { argument }
             .Parse("x")
-            .Errors.Should()
+            .Errors
+            .Should()
             .ContainSingle(e => ((ArgumentResult)e.SymbolResult).Argument == argument)
-            .Which.Message.Should()
+            .Which
+            .Message
+            .Should()
             .Be("oops!");
     }
 
@@ -95,9 +98,12 @@ public class CustomParsingTests
 
         new CliRootCommand { argument }
             .Parse("")
-            .Errors.Should()
+            .Errors
+            .Should()
             .ContainSingle(e => ((ArgumentResult)e.SymbolResult).Argument == argument)
-            .Which.Message.Should()
+            .Which
+            .Message
+            .Should()
             .Be("oops!");
     }
 
@@ -115,9 +121,12 @@ public class CustomParsingTests
 
         new CliRootCommand { option }
             .Parse("")
-            .Errors.Should()
+            .Errors
+            .Should()
             .ContainSingle()
-            .Which.Message.Should()
+            .Which
+            .Message
+            .Should()
             .Be("oops!");
     }
 
@@ -202,10 +211,12 @@ public class CustomParsingTests
         CliConfiguration simpleConfig = new(command);
         command.Parse("", simpleConfig);
 
-        argumentResult
-            .Parent.Should()
+        argumentResult.Parent
+            .Should()
             .BeOfType<OptionResult>()
-            .Which.Option.Should()
+            .Which
+            .Option
+            .Should()
             .Be(command.Options.Single());
     }
 
@@ -228,10 +239,13 @@ public class CustomParsingTests
 
         command.Parse("");
 
-        argumentResult
-            .Parent.Parent.Should()
+        argumentResult.Parent
+            .Parent
+            .Should()
             .BeOfType<CommandResult>()
-            .Which.Command.Should()
+            .Which
+            .Command
+            .Should()
             .BeSameAs(command);
     }
 
@@ -278,10 +292,12 @@ public class CustomParsingTests
 
         command.Parse("");
 
-        argumentResult
-            .Parent.Should()
+        argumentResult.Parent
+            .Should()
             .BeOfType<CommandResult>()
-            .Which.Command.Should()
+            .Which
+            .Command
+            .Should()
             .BeSameAs(command);
     }
 
@@ -392,12 +408,13 @@ public class CustomParsingTests
 
         var parseResult = command.Parse(commandLine);
 
-        parseResult
-            .Errors.Single(e =>
+        parseResult.Errors
+            .Single(e =>
                 e.SymbolResult is OptionResult optResult
                 && optResult.Option == optionThatDependsOnOptionWithError
             )
-            .Message.Should()
+            .Message
+            .Should()
             .Be("one two");
     }
 
@@ -483,7 +500,9 @@ public class CustomParsingTests
         getValue
             .Should()
             .Throw<InvalidOperationException>()
-            .Which.Message.Should()
+            .Which
+            .Message
+            .Should()
             .Be("'not-an-int' is not an integer");
     }
 
@@ -618,8 +637,8 @@ public class CustomParsingTests
 
         ParseResult parseResult = new CliRootCommand() { option }.Parse("-ip a.b.c.d");
 
-        parseResult
-            .Errors.Should()
+        parseResult.Errors
+            .Should()
             .Contain(error => error.Message == "'a.b.c.d' is not a valid value");
     }
 
@@ -645,8 +664,8 @@ public class CustomParsingTests
 
         var parseResult = command.Parse("1 2 3 4 5 6 7 8");
 
-        parseResult
-            .UnmatchedTokens.Should()
+        parseResult.UnmatchedTokens
+            .Should()
             .BeEquivalentTo(
                 new[] { "4", "5", "6", "7", "8" },
                 options => options.WithStrictOrdering()
@@ -680,13 +699,15 @@ public class CustomParsingTests
 
         parseResult
             .GetResult(argument1)
-            .Tokens.Select(t => t.Value)
+            .Tokens
+            .Select(t => t.Value)
             .Should()
             .BeEquivalentTo(new[] { "1", "2", "3" }, options => options.WithStrictOrdering());
 
         parseResult
             .GetResult(argument2)
-            .Tokens.Select(t => t.Value)
+            .Tokens
+            .Select(t => t.Value)
             .Should()
             .BeEquivalentTo(
                 new[] { "4", "5", "6", "7", "8" },
@@ -711,7 +732,9 @@ public class CustomParsingTests
             .Invoking(a => new CliRootCommand { a }.Parse("1 2 3"))
             .Should()
             .Throw<ArgumentOutOfRangeException>()
-            .Which.Message.Should()
+            .Which
+            .Message
+            .Should()
             .ContainAll("Value must be at least 1.", "Actual value was -1.");
     }
 
@@ -733,7 +756,9 @@ public class CustomParsingTests
             .Invoking(a => new CliRootCommand { a }.Parse("1 2 3"))
             .Should()
             .Throw<InvalidOperationException>()
-            .Which.Message.Should()
+            .Which
+            .Message
+            .Should()
             .Be("OnlyTake can only be called once.");
     }
 

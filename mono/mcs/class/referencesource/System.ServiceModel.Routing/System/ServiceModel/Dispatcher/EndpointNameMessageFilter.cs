@@ -89,9 +89,10 @@ namespace System.ServiceModel.Dispatcher
         {
             if (!endpoints.Contains(this.endpointName))
             {
-                throw FxTrace.Exception.AsError(
-                    new ConfigurationErrorsException(SR.EndpointNameNotFound(this.endpointName))
-                );
+                throw FxTrace.Exception
+                    .AsError(
+                        new ConfigurationErrorsException(SR.EndpointNameNotFound(this.endpointName))
+                    );
             }
         }
     }

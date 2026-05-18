@@ -538,16 +538,15 @@ namespace System.Data.Query.PlanCompiler
         )
         {
             //Find all the keys that are nulls and constants
-            List<Node> constantKeys = varDefListNode
-                .Children.Where(d =>
+            List<Node> constantKeys = varDefListNode.Children
+                .Where(d =>
                     d.Op.OpType == OpType.VarDef
                     && PlanCompilerUtil.IsConstantBaseOp(d.Child0.Op.OpType)
                 )
                 .ToList();
 
-            VarVec constantKeyVars = this.m_command.CreateVarVec(
-                constantKeys.Select(d => ((VarDefOp)d.Op).Var)
-            );
+            VarVec constantKeyVars = this.m_command
+                .CreateVarVec(constantKeys.Select(d => ((VarDefOp)d.Op).Var));
 
             //Get the list of unreferenced  constant keys
             constantKeyVars.Minus(m_referencedVars);
@@ -556,9 +555,10 @@ namespace System.Data.Query.PlanCompiler
             keyVec.Minus(constantKeyVars);
             outputVec.Minus(constantKeyVars);
 
-            varDefListNode.Children.RemoveAll(c =>
-                constantKeys.Contains(c) && constantKeyVars.IsSet(((VarDefOp)c.Op).Var)
-            );
+            varDefListNode.Children
+                .RemoveAll(c =>
+                    constantKeys.Contains(c) && constantKeyVars.IsSet(((VarDefOp)c.Op).Var)
+                );
 
             //If no keys are left add one.
             if (keyVec.Count == 0)

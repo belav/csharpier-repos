@@ -36,26 +36,30 @@ namespace MonoTests.System.Threading.Tasks
 
             try
             {
-                await Task.Factory.StartNew(
-                    async () =>
-                    {
-                        var newThreadId = Thread.CurrentThread.ManagedThreadId; // on different thread.
-                        Assert.IsTrue(Thread.CurrentPrincipal.Identity.IsAuthenticated);
-                        Assert.AreEqual(mockPrincipal, Thread.CurrentPrincipal);
+                await Task.Factory
+                    .StartNew(
+                        async () =>
+                        {
+                            var newThreadId = Thread.CurrentThread.ManagedThreadId; // on different thread.
+                            Assert.IsTrue(Thread.CurrentPrincipal.Identity.IsAuthenticated);
+                            Assert.AreEqual(mockPrincipal, Thread.CurrentPrincipal);
 
-                        await Task.Factory.StartNew(
-                            () =>
-                            {
-                                // still works even when nesting..
-                                newThreadId = Thread.CurrentThread.ManagedThreadId;
-                                Assert.IsTrue(Thread.CurrentPrincipal.Identity.IsAuthenticated);
-                                Assert.AreEqual(mockPrincipal, Thread.CurrentPrincipal);
-                            },
-                            TaskCreationOptions.LongRunning
-                        );
-                    },
-                    TaskCreationOptions.LongRunning
-                );
+                            await Task.Factory
+                                .StartNew(
+                                    () =>
+                                    {
+                                        // still works even when nesting..
+                                        newThreadId = Thread.CurrentThread.ManagedThreadId;
+                                        Assert.IsTrue(
+                                            Thread.CurrentPrincipal.Identity.IsAuthenticated
+                                        );
+                                        Assert.AreEqual(mockPrincipal, Thread.CurrentPrincipal);
+                                    },
+                                    TaskCreationOptions.LongRunning
+                                );
+                        },
+                        TaskCreationOptions.LongRunning
+                    );
 
                 await Task.Run(() =>
                 {

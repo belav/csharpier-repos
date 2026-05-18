@@ -100,11 +100,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
             // The base class applies a broad filter when finding candidates, but since C# requires
             // that all parts have the "partial" modifier, the results can be trimmed further here.
             return candidates?.Where(symbol =>
-                symbol.DeclaringSyntaxReferences.Any(
-                    static (reference, cancellationToken) =>
-                        IsPartialTypeDeclaration(reference.GetSyntax(cancellationToken)),
-                    cancellationToken
-                )
+                symbol.DeclaringSyntaxReferences
+                    .Any(
+                        static (reference, cancellationToken) =>
+                            IsPartialTypeDeclaration(reference.GetSyntax(cancellationToken)),
+                        cancellationToken
+                    )
             );
         }
 

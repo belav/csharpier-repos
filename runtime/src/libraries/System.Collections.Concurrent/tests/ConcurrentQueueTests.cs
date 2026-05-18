@@ -129,41 +129,43 @@ namespace System.Collections.Concurrent.Tests
             for (int i = 0; i < consumers; i++)
             {
                 tasks.Add(
-                    Task.Factory.StartNew(
-                        () =>
-                        {
-                            while (Volatile.Read(ref remainingItems) > 0)
+                    Task.Factory
+                        .StartNew(
+                            () =>
                             {
-                                int item;
-                                if (cq.TryDequeue(out item))
+                                while (Volatile.Read(ref remainingItems) > 0)
                                 {
-                                    Interlocked.Add(ref sum, item);
-                                    Interlocked.Decrement(ref remainingItems);
+                                    int item;
+                                    if (cq.TryDequeue(out item))
+                                    {
+                                        Interlocked.Add(ref sum, item);
+                                        Interlocked.Decrement(ref remainingItems);
+                                    }
                                 }
-                            }
-                        },
-                        CancellationToken.None,
-                        TaskCreationOptions.LongRunning,
-                        TaskScheduler.Default
-                    )
+                            },
+                            CancellationToken.None,
+                            TaskCreationOptions.LongRunning,
+                            TaskScheduler.Default
+                        )
                 );
             }
 
             for (int i = 0; i < producers; i++)
             {
                 tasks.Add(
-                    Task.Factory.StartNew(
-                        () =>
-                        {
-                            for (int item = 1; item <= itemsPerProducer; item++)
+                    Task.Factory
+                        .StartNew(
+                            () =>
                             {
-                                cq.Enqueue(item);
-                            }
-                        },
-                        CancellationToken.None,
-                        TaskCreationOptions.LongRunning,
-                        TaskScheduler.Default
-                    )
+                                for (int item = 1; item <= itemsPerProducer; item++)
+                                {
+                                    cq.Enqueue(item);
+                                }
+                            },
+                            CancellationToken.None,
+                            TaskCreationOptions.LongRunning,
+                            TaskScheduler.Default
+                        )
                 );
             }
 

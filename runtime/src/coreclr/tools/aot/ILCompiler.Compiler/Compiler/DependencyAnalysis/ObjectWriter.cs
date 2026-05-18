@@ -1489,10 +1489,8 @@ namespace ILCompiler.DependencyAnalysis
 
                     if (node is ConstructedEETypeNode MethodTable)
                     {
-                        objectWriter._userDefinedTypeDescriptor.GetTypeIndex(
-                            MethodTable.Type,
-                            needsCompleteType: true
-                        );
+                        objectWriter._userDefinedTypeDescriptor
+                            .GetTypeIndex(MethodTable.Type, needsCompleteType: true);
                     }
                 }
 

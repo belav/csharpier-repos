@@ -169,13 +169,14 @@ public class RelationalScaffoldingModelFactory : IScaffoldingModelFactory
 
         if (!string.IsNullOrEmpty(databaseModel.DatabaseName))
         {
-            modelBuilder.Model.SetDatabaseName(
-                !_options.UseDatabaseNames && !string.IsNullOrEmpty(databaseModel.DatabaseName)
-                    ? _candidateNamingService.GenerateCandidateIdentifier(
-                        databaseModel.DatabaseName
-                    )
-                    : databaseModel.DatabaseName
-            );
+            modelBuilder.Model
+                .SetDatabaseName(
+                    !_options.UseDatabaseNames && !string.IsNullOrEmpty(databaseModel.DatabaseName)
+                        ? _candidateNamingService.GenerateCandidateIdentifier(
+                            databaseModel.DatabaseName
+                        )
+                        : databaseModel.DatabaseName
+                );
         }
 
         if (!string.IsNullOrEmpty(databaseModel.Collation))
@@ -190,11 +191,12 @@ public class RelationalScaffoldingModelFactory : IScaffoldingModelFactory
             databaseModel.Tables.SelectMany(table => table.ForeignKeys).ToList()
         );
 
-        modelBuilder.Model.AddAnnotations(
-            databaseModel
-                .GetAnnotations()
-                .Where(a => a.Name != ScaffoldingAnnotationNames.ConnectionString)
-        );
+        modelBuilder.Model
+            .AddAnnotations(
+                databaseModel
+                    .GetAnnotations()
+                    .Where(a => a.Name != ScaffoldingAnnotationNames.ConnectionString)
+            );
 
         return modelBuilder;
     }
@@ -530,14 +532,15 @@ public class RelationalScaffoldingModelFactory : IScaffoldingModelFactory
 
         property.Metadata.SetColumnOrder(column.Table.Columns.IndexOf(column));
 
-        property.Metadata.AddAnnotations(
-            column
-                .GetAnnotations()
-                .Where(a =>
-                    a.Name != ScaffoldingAnnotationNames.ConcurrencyToken
-                    && a.Name != ScaffoldingAnnotationNames.ClrType
-                )
-        );
+        property.Metadata
+            .AddAnnotations(
+                column
+                    .GetAnnotations()
+                    .Where(a =>
+                        a.Name != ScaffoldingAnnotationNames.ConcurrencyToken
+                        && a.Name != ScaffoldingAnnotationNames.ClrType
+                    )
+            );
 
         return property;
     }
@@ -552,8 +555,8 @@ public class RelationalScaffoldingModelFactory : IScaffoldingModelFactory
     {
         var primaryKey = table.PrimaryKey!;
 
-        var unmappedColumns = primaryKey
-            .Columns.Where(c => _unmappedColumns.Contains(c))
+        var unmappedColumns = primaryKey.Columns
+            .Where(c => _unmappedColumns.Contains(c))
             .Select(c => c.Name)
             .ToList();
         if (unmappedColumns.Count > 0)
@@ -627,8 +630,8 @@ public class RelationalScaffoldingModelFactory : IScaffoldingModelFactory
         DatabaseUniqueConstraint uniqueConstraint
     )
     {
-        var unmappedColumns = uniqueConstraint
-            .Columns.Where(c => _unmappedColumns.Contains(c))
+        var unmappedColumns = uniqueConstraint.Columns
+            .Where(c => _unmappedColumns.Contains(c))
             .Select(c => c.Name)
             .ToList();
         if (unmappedColumns.Count > 0)
@@ -679,8 +682,8 @@ public class RelationalScaffoldingModelFactory : IScaffoldingModelFactory
     /// </summary>
     protected virtual IndexBuilder? VisitIndex(EntityTypeBuilder builder, DatabaseIndex index)
     {
-        var unmappedColumns = index
-            .Columns.Where(c => _unmappedColumns.Contains(c))
+        var unmappedColumns = index.Columns
+            .Where(c => _unmappedColumns.Contains(c))
             .Select(c => c.Name)
             .ToList();
         if (unmappedColumns.Count > 0)
@@ -833,16 +836,15 @@ public class RelationalScaffoldingModelFactory : IScaffoldingModelFactory
             return null;
         }
 
-        var dependentEntityType = modelBuilder.Model.FindEntityType(
-            GetEntityTypeName(foreignKey.Table)
-        );
+        var dependentEntityType = modelBuilder.Model
+            .FindEntityType(GetEntityTypeName(foreignKey.Table));
         if (dependentEntityType == null)
         {
             return null;
         }
 
-        var unmappedDependentColumns = foreignKey
-            .Columns.Where(c => _unmappedColumns.Contains(c))
+        var unmappedDependentColumns = foreignKey.Columns
+            .Where(c => _unmappedColumns.Contains(c))
             .Select(c => c.Name)
             .ToList();
         if (unmappedDependentColumns.Count > 0)
@@ -859,15 +861,14 @@ public class RelationalScaffoldingModelFactory : IScaffoldingModelFactory
             return null;
         }
 
-        var dependentProperties = foreignKey
-            .Columns.Select(GetPropertyName)
+        var dependentProperties = foreignKey.Columns
+            .Select(GetPropertyName)
             .Select(name => dependentEntityType.FindProperty(name)!)
             .ToList()
             .AsReadOnly();
 
-        var principalEntityType = modelBuilder.Model.FindEntityType(
-            GetEntityTypeName(foreignKey.PrincipalTable)
-        );
+        var principalEntityType = modelBuilder.Model
+            .FindEntityType(GetEntityTypeName(foreignKey.PrincipalTable));
         if (principalEntityType == null)
         {
             _reporter.WriteWarning(
@@ -879,10 +880,8 @@ public class RelationalScaffoldingModelFactory : IScaffoldingModelFactory
             return null;
         }
 
-        var unmappedPrincipalColumns = foreignKey
-            .PrincipalColumns.Where(pc =>
-                principalEntityType.FindProperty(GetPropertyName(pc)) == null
-            )
+        var unmappedPrincipalColumns = foreignKey.PrincipalColumns
+            .Where(pc => principalEntityType.FindProperty(GetPropertyName(pc)) == null)
             .Select(pc => pc.Name)
             .ToList();
         if (unmappedPrincipalColumns.Count > 0)
@@ -899,8 +898,8 @@ public class RelationalScaffoldingModelFactory : IScaffoldingModelFactory
             return null;
         }
 
-        var principalPropertiesMap = foreignKey
-            .PrincipalColumns.Select(fc =>
+        var principalPropertiesMap = foreignKey.PrincipalColumns
+            .Select(fc =>
                 (property: principalEntityType.FindProperty(GetPropertyName(fc))!, column: fc)
             )
             .ToList();

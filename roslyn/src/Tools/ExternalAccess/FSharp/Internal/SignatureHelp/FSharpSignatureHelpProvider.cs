@@ -50,14 +50,15 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.Internal.SignatureHelp
             if (mappedSignatureHelpItems != null)
             {
                 return new SignatureHelpItems(
-                    mappedSignatureHelpItems
-                        .Items?.Select(x => new SignatureHelpItem(
+                    mappedSignatureHelpItems.Items
+                        ?.Select(x => new SignatureHelpItem(
                             x.IsVariadic,
                             x.DocumentationFactory,
                             x.PrefixDisplayParts,
                             x.SeparatorDisplayParts,
                             x.SuffixDisplayParts,
-                            x.Parameters.Select(y => new SignatureHelpParameter(
+                            x.Parameters
+                                .Select(y => new SignatureHelpParameter(
                                     y.Name,
                                     y.IsOptional,
                                     y.DocumentationFactory,

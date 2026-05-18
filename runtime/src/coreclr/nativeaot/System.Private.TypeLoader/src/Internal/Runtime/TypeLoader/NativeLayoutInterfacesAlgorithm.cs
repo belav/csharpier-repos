@@ -57,9 +57,9 @@ namespace Internal.Runtime.TypeLoader
             );
             TypeDesc[] implementedInterfaces;
             if (!interfaceParser.IsNull)
-                implementedInterfaces = state.NativeLayoutInfo.LoadContext.GetTypeSequence(
-                    ref interfaceParser
-                );
+                implementedInterfaces = state.NativeLayoutInfo
+                    .LoadContext
+                    .GetTypeSequence(ref interfaceParser);
             else
                 implementedInterfaces = TypeDesc.EmptyTypes;
 

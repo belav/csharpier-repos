@@ -29,9 +29,8 @@ namespace System.ServiceModel.Configuration
         {
             if (null == optionalReliableSession)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                    "optionalReliableSession"
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperArgumentNull("optionalReliableSession");
             }
             base.InitializeFrom(optionalReliableSession);
             SetPropertyValueIfNotDefaultValue(
@@ -44,9 +43,8 @@ namespace System.ServiceModel.Configuration
         {
             if (null == optionalReliableSession)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                    "optionalReliableSession"
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperArgumentNull("optionalReliableSession");
             }
             base.ApplyConfiguration(optionalReliableSession);
             optionalReliableSession.Enabled = this.Enabled;

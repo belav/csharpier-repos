@@ -130,11 +130,11 @@ namespace Roslyn.VisualStudio.IntegrationTests.InProcess
             var errorList = await GetRequiredGlobalServiceAsync<SVsErrorList, IErrorList>(
                 cancellationToken
             );
-            var args = await errorList
-                .TableControl.ForceUpdateAsync()
+            var args = await errorList.TableControl
+                .ForceUpdateAsync()
                 .WithCancellation(cancellationToken);
-            return args
-                .AllEntries.Where(item =>
+            return args.AllEntries
+                .Where(item =>
                 {
                     if (item.GetCategory() > minimumSeverity)
                     {

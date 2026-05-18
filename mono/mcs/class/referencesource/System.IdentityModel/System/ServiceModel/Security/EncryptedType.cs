@@ -18,14 +18,14 @@ namespace System.ServiceModel.Security
     )]
     abstract class EncryptedType : ISecurityElement
     {
-        internal static readonly XmlDictionaryString NamespaceUri =
-            XD.XmlEncryptionDictionary.Namespace;
-        internal static readonly XmlDictionaryString EncodingAttribute =
-            XD.XmlEncryptionDictionary.Encoding;
-        internal static readonly XmlDictionaryString MimeTypeAttribute =
-            XD.XmlEncryptionDictionary.MimeType;
-        internal static readonly XmlDictionaryString TypeAttribute =
-            XD.XmlEncryptionDictionary.Type;
+        internal static readonly XmlDictionaryString NamespaceUri = XD.XmlEncryptionDictionary
+            .Namespace;
+        internal static readonly XmlDictionaryString EncodingAttribute = XD.XmlEncryptionDictionary
+            .Encoding;
+        internal static readonly XmlDictionaryString MimeTypeAttribute = XD.XmlEncryptionDictionary
+            .MimeType;
+        internal static readonly XmlDictionaryString TypeAttribute = XD.XmlEncryptionDictionary
+            .Type;
         internal static readonly XmlDictionaryString CipherDataElementName =
             XD.XmlEncryptionDictionary.CipherData;
         internal static readonly XmlDictionaryString CipherValueElementName =
@@ -332,9 +332,12 @@ namespace System.ServiceModel.Security
         {
             if (this.State != EncryptionState.New)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new SecurityMessageSerializationException(SR.GetString(SR.BadEncryptionState))
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        new SecurityMessageSerializationException(
+                            SR.GetString(SR.BadEncryptionState)
+                        )
+                    );
             }
         }
 
@@ -346,9 +349,12 @@ namespace System.ServiceModel.Security
             }
             else if (this.State == EncryptionState.New)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new SecurityMessageSerializationException(SR.GetString(SR.BadEncryptionState))
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        new SecurityMessageSerializationException(
+                            SR.GetString(SR.BadEncryptionState)
+                        )
+                    );
             }
         }
 
@@ -366,8 +372,8 @@ namespace System.ServiceModel.Security
         {
             internal string algorithm;
             internal XmlDictionaryString algorithmDictionaryString;
-            internal static readonly XmlDictionaryString ElementName =
-                XD.XmlEncryptionDictionary.EncryptionMethod;
+            internal static readonly XmlDictionaryString ElementName = XD.XmlEncryptionDictionary
+                .EncryptionMethod;
 
             public void Init()
             {
@@ -381,15 +387,16 @@ namespace System.ServiceModel.Security
                 this.algorithm = reader.GetAttribute(XD.XmlSignatureDictionary.Algorithm, null);
                 if (this.algorithm == null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new SecurityMessageSerializationException(
-                            SR.GetString(
-                                SR.RequiredAttributeMissing,
-                                XD.XmlSignatureDictionary.Algorithm.Value,
-                                ElementName.Value
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperError(
+                            new SecurityMessageSerializationException(
+                                SR.GetString(
+                                    SR.RequiredAttributeMissing,
+                                    XD.XmlSignatureDictionary.Algorithm.Value,
+                                    ElementName.Value
+                                )
                             )
-                        )
-                    );
+                        );
                 }
                 reader.Read();
                 if (!isEmptyElement)

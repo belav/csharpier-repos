@@ -480,10 +480,8 @@ namespace System.Data.Linq.SqlClient
 
             int maxUsersPerConnection = 1;
             if (
-                con.ConnectionString.IndexOf(
-                    "MultipleActiveResultSets",
-                    StringComparison.OrdinalIgnoreCase
-                ) >= 0
+                con.ConnectionString
+                    .IndexOf("MultipleActiveResultSets", StringComparison.OrdinalIgnoreCase) >= 0
             )
             {
                 DbConnectionStringBuilder builder = new DbConnectionStringBuilder();
@@ -542,7 +540,8 @@ namespace System.Data.Linq.SqlClient
         {
             bool hasProvider = DbProviderFactories
                 .GetFactoryClasses()
-                .Rows.OfType<DataRow>()
+                .Rows
+                .OfType<DataRow>()
                 .Select(r => (string)r["InvariantName"])
                 .Contains(providerName, StringComparer.OrdinalIgnoreCase);
             if (hasProvider)
@@ -697,9 +696,11 @@ namespace System.Data.Linq.SqlClient
                 {
                     if (!File.Exists(this.dbName))
                     {
-                        Type engineType = this
-                            .conManager.Connection.GetType()
-                            .Module.GetType("System.Data.SqlServerCe.SqlCeEngine");
+                        Type engineType = this.conManager
+                            .Connection
+                            .GetType()
+                            .Module
+                            .GetType("System.Data.SqlServerCe.SqlCeEngine");
                         object engine = Activator.CreateInstance(
                             engineType,
                             new object[] { builder.ToString() }
@@ -929,9 +930,9 @@ namespace System.Data.Linq.SqlClient
             if (this.mode == ProviderMode.SqlCE)
             {
                 ((IProvider)this).ClearConnection();
-                System.Diagnostics.Debug.Assert(
-                    this.conManager.Connection.State == ConnectionState.Closed
-                );
+                System.Diagnostics
+                    .Debug
+                    .Assert(this.conManager.Connection.State == ConnectionState.Closed);
                 File.Delete(this.dbName);
                 this.deleted = true;
             }
@@ -1279,11 +1280,12 @@ namespace System.Data.Linq.SqlClient
                     cq.Query.NodeType == SqlNodeType.Multiset
                         ? TypeSystem.GetElementType(cq.ClrType)
                         : cq.ClrType;
-                ICompiledSubQuery c = this.provider.CompileSubQuery(
-                    cq.Query.Select,
-                    clientElementType,
-                    cq.Parameters.AsReadOnly()
-                );
+                ICompiledSubQuery c = this.provider
+                    .CompileSubQuery(
+                        cq.Query.Select,
+                        clientElementType,
+                        cq.Parameters.AsReadOnly()
+                    );
                 cq.Ordinal = this.subQueries.Count;
                 this.subQueries.Add(c);
                 return cq;
@@ -1574,13 +1576,8 @@ namespace System.Data.Linq.SqlClient
                     case ResultShape.MultipleResults:
                     {
                         DbDataReader reader = cmd.ExecuteReader();
-                        IObjectReaderSession session = this.readerCompiler.CreateSession(
-                            reader,
-                            this,
-                            parentArgs,
-                            userArgs,
-                            subQueries
-                        );
+                        IObjectReaderSession session = this.readerCompiler
+                            .CreateSession(reader, this, parentArgs, userArgs, subQueries);
                         this.conManager.UseConnection(session);
                         MetaFunction function = this.GetFunction(query);
                         ExecuteResult result = new ExecuteResult(
@@ -1691,9 +1688,8 @@ namespace System.Data.Linq.SqlClient
                             case SqlParameterType.UserArgument:
                                 try
                                 {
-                                    value = pi.Accessor.DynamicInvoke(
-                                        new object[] { userArguments }
-                                    );
+                                    value = pi.Accessor
+                                        .DynamicInvoke(new object[] { userArguments });
                                 }
                                 catch (System.Reflection.TargetInvocationException e)
                                 {
@@ -1752,13 +1748,8 @@ namespace System.Data.Linq.SqlClient
             {
                 throw Error.ArgumentNull("reader");
             }
-            IObjectReaderSession session = this.readerCompiler.CreateSession(
-                reader,
-                this,
-                null,
-                null,
-                null
-            );
+            IObjectReaderSession session = this.readerCompiler
+                .CreateSession(reader, this, null, null, null);
             return new MultipleResults(this, null, session, null);
         }
 

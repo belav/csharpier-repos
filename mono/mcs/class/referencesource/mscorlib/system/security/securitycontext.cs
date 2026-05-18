@@ -140,9 +140,8 @@ namespace System.Security
             {
                 // Failfast since we can't continue safely...
                 bNoException &= cssw.UndoNoThrow();
-                System.Environment.FailFast(
-                    Environment.GetResourceString("ExecutionContext_UndoFailed")
-                );
+                System.Environment
+                    .FailFast(Environment.GetResourceString("ExecutionContext_UndoFailed"));
             }
 #endif
             bNoException &= cssw.UndoNoThrow();
@@ -150,9 +149,8 @@ namespace System.Security
             if (!bNoException)
             {
                 // Failfast since we can't continue safely...
-                System.Environment.FailFast(
-                    Environment.GetResourceString("ExecutionContext_UndoFailed")
-                );
+                System.Environment
+                    .FailFast(Environment.GetResourceString("ExecutionContext_UndoFailed"));
             }
         }
     }
@@ -355,9 +353,10 @@ namespace System.Security
 #if MOBILE
             return false;
 #else
-            return Thread
-                .CurrentThread.GetExecutionContextReader()
-                .SecurityContext.IsFlowSuppressed(flags);
+            return Thread.CurrentThread
+                .GetExecutionContextReader()
+                .SecurityContext
+                .IsFlowSuppressed(flags);
 #endif
         }
 

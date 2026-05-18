@@ -57,8 +57,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.TextDiffing
 
             var diffService =
                 _differenceSelectorService.GetTextDifferencingService(
-                    oldDocument
-                        .Project.Services.GetService<IContentTypeLanguageService>()
+                    oldDocument.Project
+                        .Services
+                        .GetService<IContentTypeLanguageService>()
                         .GetDefaultContentType()
                 ) ?? _differenceSelectorService.DefaultTextDifferencingService;
 
@@ -80,8 +81,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.TextDiffing
                     differenceOptions
                 );
 
-            return diffResult
-                .Differences.Select(d => new TextChange(
+            return diffResult.Differences
+                .Select(d => new TextChange(
                     diffResult.LeftDecomposition.GetSpanInOriginal(d.Left).ToTextSpan(),
                     newText
                         .GetSubText(

@@ -176,22 +176,21 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
                     cancellationToken
                 );
 
-                var rootWithUpdatedCallSite = this.SemanticDocument.Root.ReplaceNode(
-                    outermostCallSiteContainer,
-                    await GenerateBodyForCallSiteContainerAsync(
-                            insertionPoint.GetContext(),
-                            outermostCallSiteContainer,
-                            cancellationToken
-                        )
-                        .ConfigureAwait(false)
-                );
+                var rootWithUpdatedCallSite = this.SemanticDocument
+                    .Root
+                    .ReplaceNode(
+                        outermostCallSiteContainer,
+                        await GenerateBodyForCallSiteContainerAsync(
+                                insertionPoint.GetContext(),
+                                outermostCallSiteContainer,
+                                cancellationToken
+                            )
+                            .ConfigureAwait(false)
+                    );
 
                 // Then insert the local-function/method into the updated document that contains the updated callsite.
-                var documentWithUpdatedCallSite = await this
-                    .SemanticDocument.WithSyntaxRootAsync(
-                        rootWithUpdatedCallSite,
-                        cancellationToken
-                    )
+                var documentWithUpdatedCallSite = await this.SemanticDocument
+                    .WithSyntaxRootAsync(rootWithUpdatedCallSite, cancellationToken)
                     .ConfigureAwait(false);
                 var finalRoot = LocalFunction ? InsertLocalFunction() : InsertNormalMethod();
 
@@ -224,10 +223,8 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
                         cancellationToken
                     );
 
-                    var finalRoot = documentWithUpdatedCallSite.Root.ReplaceNode(
-                        destination,
-                        updatedDestination
-                    );
+                    var finalRoot = documentWithUpdatedCallSite.Root
+                        .ReplaceNode(destination, updatedDestination);
                     return finalRoot;
                 }
 
@@ -263,10 +260,8 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
                         info,
                         cancellationToken
                     );
-                    var finalRoot = documentWithUpdatedCallSite.Root.ReplaceNode(
-                        destination,
-                        newContainer
-                    );
+                    var finalRoot = documentWithUpdatedCallSite.Root
+                        .ReplaceNode(destination, newContainer);
                     return finalRoot;
                 }
             }
@@ -284,9 +279,8 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
                 }
                 else
                 {
-                    return this.SelectionResult.GetOutermostCallSiteContainerToProcess(
-                        cancellationToken
-                    );
+                    return this.SelectionResult
+                        .GetOutermostCallSiteContainerToProcess(cancellationToken);
                 }
             }
 
@@ -309,9 +303,8 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
                 CancellationToken cancellationToken
             )
             {
-                return this.AnalyzerResult.GetOutermostVariableToMoveIntoMethodDefinition(
-                    cancellationToken
-                );
+                return this.AnalyzerResult
+                    .GetOutermostVariableToMoveIntoMethodDefinition(cancellationToken);
             }
 
             protected ImmutableArray<TStatementSyntax> AddReturnIfUnreachable(

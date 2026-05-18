@@ -93,11 +93,12 @@ namespace System.Activities.Expressions
 
             if (!this.isOperationFunctionStatic && operandValue == null)
             {
-                throw FxTrace.Exception.AsError(
-                    new InvalidOperationException(
-                        SR.MemberCannotBeNull("Operand", this.GetType().Name, this.DisplayName)
-                    )
-                );
+                throw FxTrace.Exception
+                    .AsError(
+                        new InvalidOperationException(
+                            SR.MemberCannotBeNull("Operand", this.GetType().Name, this.DisplayName)
+                        )
+                    );
             }
 
             TResult result = this.operationFunction(operandValue);

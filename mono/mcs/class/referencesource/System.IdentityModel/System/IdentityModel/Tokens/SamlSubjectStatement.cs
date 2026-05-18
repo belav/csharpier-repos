@@ -22,9 +22,8 @@ namespace System.IdentityModel.Tokens
         protected SamlSubjectStatement(SamlSubject samlSubject)
         {
             if (samlSubject == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentNullException("samlSubject")
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(new ArgumentNullException("samlSubject"));
 
             this.subject = samlSubject;
         }
@@ -35,14 +34,14 @@ namespace System.IdentityModel.Tokens
             set
             {
                 if (isReadOnly)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(SR.GetString(SR.ObjectIsReadOnly))
-                    );
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(SR.GetString(SR.ObjectIsReadOnly))
+                        );
 
                 if (value == null)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ArgumentNullException("value")
-                    );
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperError(new ArgumentNullException("value"));
 
                 this.subject = value;
             }
@@ -76,9 +75,8 @@ namespace System.IdentityModel.Tokens
             if (this.policy == null)
             {
                 List<ClaimSet> claimSets = new List<ClaimSet>();
-                ClaimSet subjectKeyClaimset = this.subject.ExtractSubjectKeyClaimSet(
-                    samlAuthenticator
-                );
+                ClaimSet subjectKeyClaimset = this.subject
+                    .ExtractSubjectKeyClaimSet(samlAuthenticator);
                 if (subjectKeyClaimset != null)
                     claimSets.Add(subjectKeyClaimset);
 
@@ -104,9 +102,8 @@ namespace System.IdentityModel.Tokens
         protected void SetSubject(SamlSubject samlSubject)
         {
             if (samlSubject == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentNullException("samlSubject")
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(new ArgumentNullException("samlSubject"));
 
             this.subject = samlSubject;
         }

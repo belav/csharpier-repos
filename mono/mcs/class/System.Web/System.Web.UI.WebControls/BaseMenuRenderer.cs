@@ -74,8 +74,7 @@ namespace System.Web.UI.WebControls
                 get
                 {
                     if (staticPopOutImageTextFormatString == null)
-                        staticPopOutImageTextFormatString = container
-                            .Owner
+                        staticPopOutImageTextFormatString = container.Owner
                             .StaticPopOutImageTextFormatString;
 
                     return staticPopOutImageTextFormatString;
@@ -87,8 +86,7 @@ namespace System.Web.UI.WebControls
                 get
                 {
                     if (dynamicPopOutImageTextFormatString == null)
-                        dynamicPopOutImageTextFormatString = container
-                            .Owner
+                        dynamicPopOutImageTextFormatString = container.Owner
                             .DynamicPopOutImageTextFormatString;
 
                     return dynamicPopOutImageTextFormatString;
@@ -111,8 +109,7 @@ namespace System.Web.UI.WebControls
                 get
                 {
                     if (dynamicBottomSeparatorImageUrl == null)
-                        dynamicBottomSeparatorImageUrl = container
-                            .Owner
+                        dynamicBottomSeparatorImageUrl = container.Owner
                             .DynamicBottomSeparatorImageUrl;
 
                     return dynamicBottomSeparatorImageUrl;
@@ -135,8 +132,7 @@ namespace System.Web.UI.WebControls
                 get
                 {
                     if (staticBottomSeparatorImageUrl == null)
-                        staticBottomSeparatorImageUrl = container
-                            .Owner
+                        staticBottomSeparatorImageUrl = container.Owner
                             .StaticBottomSeparatorImageUrl;
 
                     return staticBottomSeparatorImageUrl;

@@ -1526,9 +1526,14 @@ namespace MonoTests.System.Data
             }
             //-------------------------------------------------------------
             al.Clear();
-            ds.Relations.Add(
-                new DataRelation("ParentChild", ds.Tables[0].Columns[0], ds.Tables[1].Columns[0])
-            );
+            ds.Relations
+                .Add(
+                    new DataRelation(
+                        "ParentChild",
+                        ds.Tables[0].Columns[0],
+                        ds.Tables[1].Columns[0]
+                    )
+                );
             foreach (DataRow dr in dt.Rows)
                 if ((int)dr["ChildId"] == (int)dr.GetParentRow("ParentChild")["ParentId"])
                     al.Add(dr);
@@ -1957,9 +1962,10 @@ namespace MonoTests.System.Data
             //this test was addedd to check java exception:
             //System.ArgumentException: Cannot remove UniqueConstraint because the ForeignKeyConstraint myRelation exists.
             // check add primary key with relation
-            ds.Relations.Add(
-                new DataRelation("myRelation", ds.Tables[0].Columns[0], ds.Tables[1].Columns[0])
-            );
+            ds.Relations
+                .Add(
+                    new DataRelation("myRelation", ds.Tables[0].Columns[0], ds.Tables[1].Columns[0])
+                );
             //the following line will cause java to fail
             ds.Tables[0].PrimaryKey = new DataColumn[]
             {

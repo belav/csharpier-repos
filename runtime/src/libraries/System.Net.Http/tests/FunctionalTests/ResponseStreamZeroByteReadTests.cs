@@ -146,8 +146,10 @@ namespace System.Net.Http.Functional.Tests
                     server = sslStream;
 
                     using (
-                        X509Certificate2 cert =
-                            Test.Common.Configuration.Certificates.GetServerCertificate()
+                        X509Certificate2 cert = Test.Common
+                            .Configuration
+                            .Certificates
+                            .GetServerCertificate()
                     )
                     {
                         await ((SslStream)server)

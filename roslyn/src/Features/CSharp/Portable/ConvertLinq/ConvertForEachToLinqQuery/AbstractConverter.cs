@@ -80,9 +80,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertLinq.ConvertForEachToLinqQuery
                     ),
                     SyntaxFactory.QueryBody(
                         SyntaxFactory.List(
-                            ForEachInfo.ConvertingExtendedNodes.Select(node =>
-                                CreateQueryClause(node)
-                            )
+                            ForEachInfo.ConvertingExtendedNodes
+                                .Select(node => CreateQueryClause(node))
                         ),
                         SyntaxFactory
                             .SelectClause(selectExpression)
@@ -127,10 +126,11 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertLinq.ConvertForEachToLinqQuery
                                     ifStatement.IfKeyword.LeadingTrivia,
                                     ifStatement.IfKeyword.TrailingTrivia
                                 ),
-                            ifStatement.Condition.WithCommentsFrom(
-                                ifStatement.OpenParenToken,
-                                ifStatement.CloseParenToken
-                            )
+                            ifStatement.Condition
+                                .WithCommentsFrom(
+                                    ifStatement.OpenParenToken,
+                                    ifStatement.CloseParenToken
+                                )
                         )
                         .WithCommentsFrom(node.ExtraLeadingComments, node.ExtraTrailingComments);
             }
@@ -155,11 +155,12 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertLinq.ConvertForEachToLinqQuery
                         .KeepCommentsAndAddElasticMarkers(),
                     type: forEachStatement.Type.IsVar ? null : forEachStatement.Type,
                     identifier: forEachStatement.Type.IsVar
-                        ? forEachStatement.Identifier.WithPrependedLeadingTrivia(
-                            SyntaxNodeOrTokenExtensions
-                                .GetTrivia(forEachStatement.Type.GetFirstToken())
-                                .FilterComments(addElasticMarker: false)
-                        )
+                        ? forEachStatement.Identifier
+                            .WithPrependedLeadingTrivia(
+                                SyntaxNodeOrTokenExtensions
+                                    .GetTrivia(forEachStatement.Type.GetFirstToken())
+                                    .FilterComments(addElasticMarker: false)
+                            )
                         : forEachStatement.Identifier,
                     inKeyword: forEachStatement.InKeyword.KeepCommentsAndAddElasticMarkers(),
                     expression: forEachStatement.Expression
@@ -210,8 +211,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertLinq.ConvertForEachToLinqQuery
             ref int currentExtendedNodeIndex
         )
         {
-            leadingCommentsTrivia = forEachStatement
-                .ForEachKeyword.GetAllTrivia()
+            leadingCommentsTrivia = forEachStatement.ForEachKeyword
+                .GetAllTrivia()
                 .Concat(leadingCommentsTrivia);
 
             // Recursively create linq invocations, possibly updating the receiver (Where invocations), to get the inner expression for
@@ -236,11 +237,12 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertLinq.ConvertForEachToLinqQuery
             var lambda = SyntaxFactory
                 .SimpleLambdaExpression(
                     SyntaxFactory.Parameter(
-                        forEachStatement.Identifier.WithPrependedLeadingTrivia(
-                            SyntaxNodeOrTokenExtensions
-                                .GetTrivia(forEachStatement.Type.GetFirstToken())
-                                .FilterComments(addElasticMarker: false)
-                        )
+                        forEachStatement.Identifier
+                            .WithPrependedLeadingTrivia(
+                                SyntaxNodeOrTokenExtensions
+                                    .GetTrivia(forEachStatement.Type.GetFirstToken())
+                                    .FilterComments(addElasticMarker: false)
+                            )
                     ),
                     lambdaBody
                 )
@@ -370,10 +372,11 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertLinq.ConvertForEachToLinqQuery
                                     parentForEachStatement.Identifier.ValueText
                                 )
                             ),
-                            ifStatement.Condition.WithCommentsFrom(
-                                ifStatement.OpenParenToken,
-                                ifStatement.CloseParenToken
-                            )
+                            ifStatement.Condition
+                                .WithCommentsFrom(
+                                    ifStatement.OpenParenToken,
+                                    ifStatement.CloseParenToken
+                                )
                         )
                         .WithCommentsFrom(
                             ifStatement.IfKeyword.GetAllTrivia().Concat(node.ExtraLeadingComments),

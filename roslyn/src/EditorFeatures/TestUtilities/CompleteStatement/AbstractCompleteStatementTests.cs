@@ -103,14 +103,15 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CompleteStatement
 
                     var isReversed = selectedSpan.Start == startCaretPosition;
 
-                    view.Selection.Select(
-                        new SnapshotSpan(
-                            view.TextSnapshot,
-                            selectedSpan.Start,
-                            selectedSpan.Length
-                        ),
-                        isReversed
-                    );
+                    view.Selection
+                        .Select(
+                            new SnapshotSpan(
+                                view.TextSnapshot,
+                                selectedSpan.Start,
+                                selectedSpan.Length
+                            ),
+                            isReversed
+                        );
                 }
 
                 view.Caret.MoveTo(new SnapshotPoint(view.TextSnapshot, startCaretPosition));

@@ -445,9 +445,10 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
                 //************************************************************
                 if (!selection)
                 {
-                    common.Chart.CallOnPrePaint(
-                        new ChartPaintEventArgs(ser, graph, common, area.PlotAreaPosition)
-                    );
+                    common.Chart
+                        .CallOnPrePaint(
+                            new ChartPaintEventArgs(ser, graph, common, area.PlotAreaPosition)
+                        );
                 }
 
                 // Chart type do not supprot secondary axes
@@ -680,15 +681,16 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
                                 int insertIndex = common.HotRegionsList.FindInsertIndex();
 
                                 // Insert area
-                                common.HotRegionsList.AddHotRegion(
-                                    insertIndex,
-                                    selectionPath,
-                                    false,
-                                    graph,
-                                    point,
-                                    ser.Name,
-                                    index
-                                );
+                                common.HotRegionsList
+                                    .AddHotRegion(
+                                        insertIndex,
+                                        selectionPath,
+                                        false,
+                                        graph,
+                                        point,
+                                        ser.Name,
+                                        index
+                                    );
                             }
                             break;
                         }
@@ -814,15 +816,16 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
                             int insertIndex = common.HotRegionsList.FindInsertIndex();
 
                             // Insert area
-                            common.HotRegionsList.AddHotRegion(
-                                insertIndex,
-                                selectionPath,
-                                false,
-                                graph,
-                                point,
-                                ser.Name,
-                                index
-                            );
+                            common.HotRegionsList
+                                .AddHotRegion(
+                                    insertIndex,
+                                    selectionPath,
+                                    false,
+                                    graph,
+                                    point,
+                                    ser.Name,
+                                    index
+                                );
                         }
                     }
                     // Increase index
@@ -958,31 +961,33 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
                             circCoord[1] = relativeMarkerPosition.Y;
                             circCoord[2] = relativeMarkerSize.Width / 2f;
 
-                            common.HotRegionsList.AddHotRegion(
-                                insertIndex,
-                                graph,
-                                circCoord[0],
-                                circCoord[1],
-                                circCoord[2],
-                                point,
-                                ser.Name,
-                                index
-                            );
+                            common.HotRegionsList
+                                .AddHotRegion(
+                                    insertIndex,
+                                    graph,
+                                    circCoord[0],
+                                    circCoord[1],
+                                    circCoord[2],
+                                    point,
+                                    ser.Name,
+                                    index
+                                );
                         }
                         // All other markers represented as rectangles
                         else
                         {
-                            common.HotRegionsList.AddHotRegion(
-                                new RectangleF(
-                                    relativeMarkerPosition.X - relativeMarkerSize.Width / 2f,
-                                    relativeMarkerPosition.Y - relativeMarkerSize.Height / 2f,
-                                    relativeMarkerSize.Width,
-                                    relativeMarkerSize.Height
-                                ),
-                                point,
-                                ser.Name,
-                                index
-                            );
+                            common.HotRegionsList
+                                .AddHotRegion(
+                                    new RectangleF(
+                                        relativeMarkerPosition.X - relativeMarkerSize.Width / 2f,
+                                        relativeMarkerPosition.Y - relativeMarkerSize.Height / 2f,
+                                        relativeMarkerSize.Width,
+                                        relativeMarkerSize.Height
+                                    ),
+                                    point,
+                                    ser.Name,
+                                    index
+                                );
                         }
                     }
 
@@ -992,9 +997,10 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
                 // Call Paint event
                 if (!selection)
                 {
-                    common.Chart.CallOnPrePaint(
-                        new ChartPaintEventArgs(ser, graph, common, area.PlotAreaPosition)
-                    );
+                    common.Chart
+                        .CallOnPrePaint(
+                            new ChartPaintEventArgs(ser, graph, common, area.PlotAreaPosition)
+                        );
                 }
             }
         }
@@ -1418,18 +1424,19 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
                             sizeMarker = graph.GetRelativeSize(sizeMarker);
 
                             // Adjust label position using SmartLabelStyle algorithm
-                            position = area.smartLabels.AdjustSmartLabelPosition(
-                                common,
-                                graph,
-                                area,
-                                ser.SmartLabelStyle,
-                                position,
-                                sizeFont,
-                                format,
-                                markerPosition,
-                                sizeMarker,
-                                this._labelPosition
-                            );
+                            position = area.smartLabels
+                                .AdjustSmartLabelPosition(
+                                    common,
+                                    graph,
+                                    area,
+                                    ser.SmartLabelStyle,
+                                    position,
+                                    sizeFont,
+                                    format,
+                                    markerPosition,
+                                    sizeMarker,
+                                    this._labelPosition
+                                );
 
                             // Restore absolute coordinates
                             if (!position.IsEmpty)

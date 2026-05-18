@@ -189,10 +189,11 @@ namespace System.Activities.DurableInstancing
             {
                 retryErrorOptions |= RetryErrorOptions.RetryWhenTransaction;
             }
-            return SqlCommandAsyncResult.retryErrorCodes.Any(x =>
-                x.ErrorCode == error
-                && (x.RetryErrorOptions & retryErrorOptions) == retryErrorOptions
-            );
+            return SqlCommandAsyncResult.retryErrorCodes
+                .Any(x =>
+                    x.ErrorCode == error
+                    && (x.RetryErrorOptions & retryErrorOptions) == retryErrorOptions
+                );
         }
 
         static void StartCommandCallback(object state)
@@ -385,11 +386,12 @@ namespace System.Activities.DurableInstancing
                         );
                         if (!this.HasOperationTimedOut())
                         {
-                            result = this.sqlCommand.BeginExecuteReader(
-                                wrappedCallback,
-                                this,
-                                CommandBehavior.CloseConnection
-                            );
+                            result = this.sqlCommand
+                                .BeginExecuteReader(
+                                    wrappedCallback,
+                                    this,
+                                    CommandBehavior.CloseConnection
+                                );
                         }
                         else
                         {

@@ -33,9 +33,8 @@ namespace System.Net.Http.Functional.Tests
             // The test makes a request to a HTTP/1 or HTTP/2 server first, which supplies an Alt-Svc header pointing to the second server.
             using GenericLoopbackServer firstServer = fromVersion.Major switch
             {
-                1 => Http11LoopbackServerFactory.Singleton.CreateServer(
-                    new LoopbackServer.Options { UseSsl = true }
-                ),
+                1 => Http11LoopbackServerFactory.Singleton
+                    .CreateServer(new LoopbackServer.Options { UseSsl = true }),
                 2 => Http2LoopbackServer.CreateServer(),
                 _ => throw new Exception("Unknown HTTP version."),
             };

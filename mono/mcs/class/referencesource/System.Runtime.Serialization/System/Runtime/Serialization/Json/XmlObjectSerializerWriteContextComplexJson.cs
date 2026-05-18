@@ -185,14 +185,15 @@ namespace System.Runtime.Serialization.Json
                     // Without __type, the resulting JSON cannot be deserialized since a number cannot be directly assigned to System.Enum.
                     if (declaredContract.UnderlyingType == typeof(Enum))
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new SerializationException(
-                                SR.GetString(
-                                    SR.EnumTypeNotSupportedByDataContractJsonSerializer,
-                                    declaredContract.UnderlyingType
+                        throw DiagnosticUtility.ExceptionUtility
+                            .ThrowHelperError(
+                                new SerializationException(
+                                    SR.GetString(
+                                        SR.EnumTypeNotSupportedByDataContractJsonSerializer,
+                                        declaredContract.UnderlyingType
+                                    )
                                 )
-                            )
-                        );
+                            );
                     }
                 }
                 // Return true regardless of whether we actually wrote __type information
@@ -217,15 +218,19 @@ namespace System.Runtime.Serialization.Json
             GetObjectData(obj, serInfo, GetStreamingContext());
             if (DataContract.GetClrTypeFullName(objType) != serInfo.FullTypeName)
             {
-                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    XmlObjectSerializer.CreateSerializationException(
-                        SR.GetString(
-                            SR.ChangingFullTypeNameNotSupported,
-                            serInfo.FullTypeName,
-                            DataContract.GetClrTypeFullName(objType)
+                throw System.Runtime
+                    .Serialization
+                    .DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        XmlObjectSerializer.CreateSerializationException(
+                            SR.GetString(
+                                SR.ChangingFullTypeNameNotSupported,
+                                serInfo.FullTypeName,
+                                DataContract.GetClrTypeFullName(objType)
+                            )
                         )
-                    )
-                );
+                    );
             }
             else
             {
@@ -426,15 +431,16 @@ namespace System.Runtime.Serialization.Json
                 && !Globals.TypeOfIXmlSerializable.IsAssignableFrom(declaredType)
             )
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    XmlObjectSerializer.CreateSerializationException(
-                        SR.GetString(
-                            SR.XmlObjectAssignedToIncompatibleInterface,
-                            graph.GetType(),
-                            declaredType
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        XmlObjectSerializer.CreateSerializationException(
+                            SR.GetString(
+                                SR.XmlObjectAssignedToIncompatibleInterface,
+                                graph.GetType(),
+                                declaredType
+                            )
                         )
-                    )
-                );
+                    );
             }
 
             if (
@@ -442,15 +448,16 @@ namespace System.Runtime.Serialization.Json
                 && !CollectionDataContract.IsCollectionInterface(declaredType)
             )
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    XmlObjectSerializer.CreateSerializationException(
-                        SR.GetString(
-                            SR.CollectionAssignedToIncompatibleInterface,
-                            graph.GetType(),
-                            declaredType
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        XmlObjectSerializer.CreateSerializationException(
+                            SR.GetString(
+                                SR.CollectionAssignedToIncompatibleInterface,
+                                graph.GetType(),
+                                declaredType
+                            )
                         )
-                    )
-                );
+                    );
             }
         }
 
@@ -540,16 +547,17 @@ namespace System.Runtime.Serialization.Json
 
             if (!IsKnownType(dataContract, declaredType))
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    XmlObjectSerializer.CreateSerializationException(
-                        SR.GetString(
-                            SR.DcTypeNotFoundOnSerialize,
-                            DataContract.GetClrTypeFullName(dataContract.UnderlyingType),
-                            dataContract.StableName.Name,
-                            dataContract.StableName.Namespace
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        XmlObjectSerializer.CreateSerializationException(
+                            SR.GetString(
+                                SR.DcTypeNotFoundOnSerialize,
+                                DataContract.GetClrTypeFullName(dataContract.UnderlyingType),
+                                dataContract.StableName.Name,
+                                dataContract.StableName.Namespace
+                            )
                         )
-                    )
-                );
+                    );
             }
 
             if (knownTypesAddedInCurrentScope)
@@ -607,9 +615,8 @@ namespace System.Runtime.Serialization.Json
                 )
                 {
                     itemContract = context.GetDataContract(
-                        Globals.TypeOfKeyValuePair.MakeGenericType(
-                            collectionContract.ItemType.GetGenericArguments()
-                        )
+                        Globals.TypeOfKeyValuePair
+                            .MakeGenericType(collectionContract.ItemType.GetGenericArguments())
                     );
                 }
                 else

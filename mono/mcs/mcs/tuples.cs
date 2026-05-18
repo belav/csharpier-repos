@@ -74,12 +74,10 @@ namespace Mono.CSharp
 
                 if (IsReservedName(name))
                 {
-                    mc.Module.Compiler.Report.Error(
-                        8126,
-                        loc,
-                        "The tuple element name `{0}' is reserved",
-                        name
-                    );
+                    mc.Module
+                        .Compiler
+                        .Report
+                        .Error(8126, loc, "The tuple element name `{0}' is reserved", name);
                     names[i] = null;
                     continue;
                 }
@@ -98,13 +96,16 @@ namespace Mono.CSharp
                         && value != i + 1
                     )
                     {
-                        mc.Module.Compiler.Report.Error(
-                            8125,
-                            loc,
-                            "The tuple element name `{0}' can only be used at position {1}",
-                            name,
-                            idx
-                        );
+                        mc.Module
+                            .Compiler
+                            .Report
+                            .Error(
+                                8125,
+                                loc,
+                                "The tuple element name `{0}' can only be used at position {1}",
+                                name,
+                                idx
+                            );
                         names[i] = null;
                         continue;
                     }
@@ -120,12 +121,10 @@ namespace Mono.CSharp
                 {
                     if (name == names[ii])
                     {
-                        mc.Module.Compiler.Report.Error(
-                            8127,
-                            loc,
-                            "The tuple element name `{0}' is a duplicate",
-                            name
-                        );
+                        mc.Module
+                            .Compiler
+                            .Report
+                            .Error(8127, loc, "The tuple element name `{0}' is a duplicate", name);
                         names[i] = null;
                         break;
                     }
@@ -229,13 +228,16 @@ namespace Mono.CSharp
                 );
                 if (ms == null)
                 {
-                    mc.Module.Compiler.Report.Error(
-                        8128,
-                        loc,
-                        "Member `{0}' was not found on type '{1}'",
-                        member_name,
-                        tuple.GetSignatureForError()
-                    );
+                    mc.Module
+                        .Compiler
+                        .Report
+                        .Error(
+                            8128,
+                            loc,
+                            "Member `{0}' was not found on type '{1}'",
+                            member_name,
+                            tuple.GetSignatureForError()
+                        );
                     return null;
                 }
 
@@ -403,12 +405,13 @@ namespace Mono.CSharp
 
                 if (expr.Type.Kind == MemberKind.Void)
                 {
-                    rc.Report.Error(
-                        8210,
-                        expr.Location,
-                        "A tuple literal cannot not contain a value of type `{0}'",
-                        expr.Type.GetSignatureForError()
-                    );
+                    rc.Report
+                        .Error(
+                            8210,
+                            expr.Location,
+                            "A tuple literal cannot not contain a value of type `{0}'",
+                            expr.Type.GetSignatureForError()
+                        );
                     expr = null;
                     ta = null;
                     continue;
@@ -469,13 +472,14 @@ namespace Mono.CSharp
             bool expl
         )
         {
-            rc.Report.Error(
-                8135,
-                Location,
-                "Tuple literal `{0}' cannot be converted to type `{1}'",
-                type.GetSignatureForError(),
-                target.GetSignatureForError()
-            );
+            rc.Report
+                .Error(
+                    8135,
+                    Location,
+                    "Tuple literal `{0}' cannot be converted to type `{1}'",
+                    type.GetSignatureForError(),
+                    target.GetSignatureForError()
+                );
         }
     }
 
@@ -583,11 +587,12 @@ namespace Mono.CSharp
 
             if (InternalType.HasNoType(src.Type))
             {
-                rc.Report.Error(
-                    8131,
-                    source.Location,
-                    "Deconstruct assignment requires an expression with a type on the right-hand-side"
-                );
+                rc.Report
+                    .Error(
+                        8131,
+                        source.Location,
+                        "Deconstruct assignment requires an expression with a type on the right-hand-side"
+                    );
                 return null;
             }
 
@@ -609,13 +614,14 @@ namespace Mono.CSharp
 
                 if (src_type.Arity != target_count)
                 {
-                    rc.Report.Error(
-                        8132,
-                        loc,
-                        "Cannot deconstruct a tuple of `{0}' elements into `{1}' variables",
-                        src_type.Arity.ToString(CultureInfo.InvariantCulture),
-                        target_count.ToString(CultureInfo.InvariantCulture)
-                    );
+                    rc.Report
+                        .Error(
+                            8132,
+                            loc,
+                            "Cannot deconstruct a tuple of `{0}' elements into `{1}' variables",
+                            src_type.Arity.ToString(CultureInfo.InvariantCulture),
+                            target_count.ToString(CultureInfo.InvariantCulture)
+                        );
                     return null;
                 }
 
@@ -671,12 +677,13 @@ namespace Mono.CSharp
                         {
                             if (InternalType.HasNoType(tle))
                             {
-                                rc.Report.Error(
-                                    8130,
-                                    Location,
-                                    "Cannot infer the type of implicitly-typed deconstruction variable `{0}'",
-                                    variable.Name
-                                );
+                                rc.Report
+                                    .Error(
+                                        8130,
+                                        Location,
+                                        "Cannot infer the type of implicitly-typed deconstruction variable `{0}'",
+                                        variable.Name
+                                    );
                                 tle = InternalType.ErrorType;
                             }
 

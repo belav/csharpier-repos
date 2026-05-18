@@ -110,11 +110,8 @@ namespace System.ServiceModel.Dispatcher
                 // BeginTryReceive can be called only from one thread and
                 // the head is not yet unlocked so no items can proceed.
                 this.pendingResults.Enqueue(receiveScope);
-                IAsyncResult result = this.channelBinder.BeginTryReceive(
-                    timeout,
-                    onInnerReceiveCompleted,
-                    receiveScope
-                );
+                IAsyncResult result = this.channelBinder
+                    .BeginTryReceive(timeout, onInnerReceiveCompleted, receiveScope);
                 if (result.CompletedSynchronously)
                 {
                     this.SignalReceiveCompleted(result);
@@ -148,10 +145,8 @@ namespace System.ServiceModel.Dispatcher
                 // Ordered recevies can proceed only if its own gate has
                 // been unlocked. Head is the only gate unlocked and only the
                 // result that owns the is the gate at the head can proceed.
-                return this.pendingResults.TrySignal(
-                    (ReceiveScopeSignalGate)nestedResult.AsyncState,
-                    nestedResult
-                );
+                return this.pendingResults
+                    .TrySignal((ReceiveScopeSignalGate)nestedResult.AsyncState, nestedResult);
             }
             else
             {

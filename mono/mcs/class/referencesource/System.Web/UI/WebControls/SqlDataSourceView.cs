@@ -1139,9 +1139,10 @@ namespace System.Web.UI.WebControls
                         )
                     );
                 }
-                command.Parameters.Add(
-                    _owner.CreateParameter(ParameterPrefix + sortParameterName, sortExpression)
-                );
+                command.Parameters
+                    .Add(
+                        _owner.CreateParameter(ParameterPrefix + sortParameterName, sortExpression)
+                    );
 
                 // We reset the sort expression here so that we pretend as
                 // though we're not really sorting (since the developer is

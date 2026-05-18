@@ -59,15 +59,12 @@ namespace System.ServiceModel.Activities.Presentation
             );
 
             var categoryAttribute = new CategoryAttribute(
-                EditorCategoryTemplateDictionary.Instance.GetCategoryTitle(
-                    CorrelationsCategoryLabelKey
-                )
+                EditorCategoryTemplateDictionary.Instance
+                    .GetCategoryTitle(CorrelationsCategoryLabelKey)
             );
             var descriptionAttribute = new DescriptionAttribute(
-                StringResourceDictionary.Instance.GetString(
-                    "messagingCorrelatesWithHint",
-                    "<Correlation handle>"
-                )
+                StringResourceDictionary.Instance
+                    .GetString("messagingCorrelatesWithHint", "<Correlation handle>")
             );
             builder.AddCustomAttributes(
                 receiveType,
@@ -92,9 +89,8 @@ namespace System.ServiceModel.Activities.Presentation
             );
 
             categoryAttribute = new CategoryAttribute(
-                EditorCategoryTemplateDictionary.Instance.GetCategoryTitle(
-                    MiscellaneousCategoryLabelKey
-                )
+                EditorCategoryTemplateDictionary.Instance
+                    .GetCategoryTitle(MiscellaneousCategoryLabelKey)
             );
             builder.AddCustomAttributes(
                 receiveType,
@@ -219,7 +215,8 @@ namespace System.ServiceModel.Activities.Presentation
             {
                 ReceiveMessageContent messageContent =
                     ((Receive)this.ModelItem.GetCurrentValue()).Content as ReceiveMessageContent;
-                this.ModelItem.Properties[DeclaredMessageType]
+                this.ModelItem
+                    .Properties[DeclaredMessageType]
                     .SetValue(null == messageContent ? null : messageContent.Message.ArgumentType);
             }
         }
@@ -235,9 +232,8 @@ namespace System.ServiceModel.Activities.Presentation
             ModelItem flowStepContainer;
 
             using (
-                ModelEditingScope scope = this.ModelItem.BeginEdit(
-                    (string)this.FindResource("createSendReplyDescription")
-                )
+                ModelEditingScope scope = this.ModelItem
+                    .BeginEdit((string)this.FindResource("createSendReplyDescription"))
             )
             {
                 //special case handling for Sequence
@@ -272,8 +268,7 @@ namespace System.ServiceModel.Activities.Presentation
                     ErrorReporting.ShowAlertMessage(
                         string.Format(
                             CultureInfo.CurrentUICulture,
-                            System
-                                .Activities
+                            System.Activities
                                 .Core
                                 .Presentation
                                 .SR
@@ -315,9 +310,8 @@ namespace System.ServiceModel.Activities.Presentation
                         foreach (ModelItem item in correlations)
                         {
                             if (
-                                item.ItemType.IsAssignableFrom(
-                                    typeof(RequestReplyCorrelationInitializer)
-                                )
+                                item.ItemType
+                                    .IsAssignableFrom(typeof(RequestReplyCorrelationInitializer))
                             )
                             {
                                 hasRequestReplyHandle = true;
@@ -383,8 +377,9 @@ namespace System.ServiceModel.Activities.Presentation
         void OnDefineButtonClicked(object sender, RoutedEventArgs args)
         {
             using (
-                EditingScope scope = this
-                    .Context.Services.GetRequiredService<ModelTreeManager>()
+                EditingScope scope = this.Context
+                    .Services
+                    .GetRequiredService<ModelTreeManager>()
                     .CreateEditingScope(
                         StringResourceDictionary.Instance.GetString("editReceiveContent"),
                         true

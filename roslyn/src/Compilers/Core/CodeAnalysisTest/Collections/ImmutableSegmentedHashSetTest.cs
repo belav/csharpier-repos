@@ -35,9 +35,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
                 new[] { "apple", "APPLE" }
             );
             CustomSortTestHelper(
-                ImmutableSegmentedHashSet<string>.Empty.WithComparer(
-                    StringComparer.OrdinalIgnoreCase
-                ),
+                ImmutableSegmentedHashSet<string>.Empty
+                    .WithComparer(StringComparer.OrdinalIgnoreCase),
                 false,
                 new[] { "apple", "APPLE" },
                 new[] { "apple" }
@@ -47,8 +46,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
         [Fact]
         public void ChangeUnorderedEqualityComparer()
         {
-            var ordinalSet = ImmutableSegmentedHashSet<string>
-                .Empty.WithComparer(StringComparer.Ordinal)
+            var ordinalSet = ImmutableSegmentedHashSet<string>.Empty
+                .WithComparer(StringComparer.Ordinal)
                 .Add("apple")
                 .Add("APPLE");
             Assert.Equal(2, ordinalSet.Count); // claimed count
@@ -197,10 +196,11 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
             DebuggerAttributeInfo info = DebuggerAttributes.ValidateDebuggerTypeProxyProperties(
                 set
             );
-            PropertyInfo itemProperty = info.Properties.Single(pr =>
-                pr.GetCustomAttribute<DebuggerBrowsableAttribute>()?.State
-                == DebuggerBrowsableState.RootHidden
-            );
+            PropertyInfo itemProperty = info.Properties
+                .Single(pr =>
+                    pr.GetCustomAttribute<DebuggerBrowsableAttribute>()?.State
+                    == DebuggerBrowsableState.RootHidden
+                );
             int[]? items = itemProperty.GetValue(info.Instance) as int[];
             Assert.Equal(set, items);
         }

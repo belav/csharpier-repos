@@ -202,19 +202,20 @@ namespace System.Web.UI.Design.MobileControls.Util
             this._downButton.Size = new System.Drawing.Size(28, 27);
             this._downButton.TabIndex = 8;
             this._downButton.Click += new System.EventHandler(this.Down_Click);
-            this.Controls.AddRange(
-                new System.Windows.Forms.Control[]
-                {
-                    this._availableFieldLabel,
-                    this._selectedFieldLabel,
-                    this._upButton,
-                    this._downButton,
-                    this._removeButton,
-                    this._selectedList,
-                    this._addButton,
-                    this._availableList,
-                }
-            );
+            this.Controls
+                .AddRange(
+                    new System.Windows.Forms.Control[]
+                    {
+                        this._availableFieldLabel,
+                        this._selectedFieldLabel,
+                        this._upButton,
+                        this._downButton,
+                        this._removeButton,
+                        this._selectedList,
+                        this._addButton,
+                        this._availableList,
+                    }
+                );
             this.Size = new System.Drawing.Size(396, 119);
         }
 

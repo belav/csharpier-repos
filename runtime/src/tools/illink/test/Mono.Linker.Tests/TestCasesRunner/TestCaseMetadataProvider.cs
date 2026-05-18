@@ -63,21 +63,20 @@ namespace Mono.Linker.Tests.TestCasesRunner
             };
 
             foreach (
-                var assemblyAction in _testCaseTypeDefinition.CustomAttributes.Where(attr =>
-                    attr.AttributeType.Name == nameof(SetupLinkerActionAttribute)
-                )
+                var assemblyAction in _testCaseTypeDefinition.CustomAttributes
+                    .Where(attr => attr.AttributeType.Name == nameof(SetupLinkerActionAttribute))
             )
             {
                 var ca = assemblyAction.ConstructorArguments;
-                tclo.AssembliesAction.Add(
-                    new KeyValuePair<string, string>((string)ca[0].Value, (string)ca[1].Value)
-                );
+                tclo.AssembliesAction
+                    .Add(
+                        new KeyValuePair<string, string>((string)ca[0].Value, (string)ca[1].Value)
+                    );
             }
 
             foreach (
-                var descFile in _testCaseTypeDefinition.CustomAttributes.Where(attr =>
-                    attr.AttributeType.Name == nameof(SetupLinkerDescriptorFile)
-                )
+                var descFile in _testCaseTypeDefinition.CustomAttributes
+                    .Where(attr => attr.AttributeType.Name == nameof(SetupLinkerDescriptorFile))
             )
             {
                 var ca = descFile.ConstructorArguments;
@@ -86,9 +85,10 @@ namespace Mono.Linker.Tests.TestCasesRunner
             }
 
             foreach (
-                var subsFile in _testCaseTypeDefinition.CustomAttributes.Where(attr =>
-                    attr.AttributeType.Name == nameof(SetupLinkerSubstitutionFileAttribute)
-                )
+                var subsFile in _testCaseTypeDefinition.CustomAttributes
+                    .Where(attr =>
+                        attr.AttributeType.Name == nameof(SetupLinkerSubstitutionFileAttribute)
+                    )
             )
             {
                 var ca = subsFile.ConstructorArguments;
@@ -97,9 +97,8 @@ namespace Mono.Linker.Tests.TestCasesRunner
             }
 
             foreach (
-                var linkAttrFile in _testCaseTypeDefinition.CustomAttributes.Where(attr =>
-                    attr.AttributeType.Name == nameof(SetupLinkAttributesFile)
-                )
+                var linkAttrFile in _testCaseTypeDefinition.CustomAttributes
+                    .Where(attr => attr.AttributeType.Name == nameof(SetupLinkAttributesFile))
             )
             {
                 var ca = linkAttrFile.ConstructorArguments;
@@ -108,9 +107,8 @@ namespace Mono.Linker.Tests.TestCasesRunner
             }
 
             foreach (
-                var additionalArgumentAttr in _testCaseTypeDefinition.CustomAttributes.Where(attr =>
-                    attr.AttributeType.Name == nameof(SetupLinkerArgumentAttribute)
-                )
+                var additionalArgumentAttr in _testCaseTypeDefinition.CustomAttributes
+                    .Where(attr => attr.AttributeType.Name == nameof(SetupLinkerArgumentAttribute))
             )
             {
                 var ca = additionalArgumentAttr.ConstructorArguments;
@@ -140,9 +138,8 @@ namespace Mono.Linker.Tests.TestCasesRunner
                         break;
                 }
 
-                tclo.AdditionalArguments.Add(
-                    new KeyValuePair<string, string[]>((string)ca[0].Value, values)
-                );
+                tclo.AdditionalArguments
+                    .Add(new KeyValuePair<string, string[]>((string)ca[0].Value, values));
             }
 
             return tclo;
@@ -154,13 +151,13 @@ namespace Mono.Linker.Tests.TestCasesRunner
         )
         {
             if (
-                !_testCaseTypeDefinition.CustomAttributes.Any(a =>
-                    a.AttributeType.IsTypeOf<SkipKeptItemsValidationAttribute>()
-                )
-                || _testCaseTypeDefinition.CustomAttributes.Any(attr =>
-                    attr.AttributeType.Name == nameof(DependencyRecordedAttribute)
-                    || attr.AttributeType.Name == nameof(KeptByAttribute)
-                )
+                !_testCaseTypeDefinition.CustomAttributes
+                    .Any(a => a.AttributeType.IsTypeOf<SkipKeptItemsValidationAttribute>())
+                || _testCaseTypeDefinition.CustomAttributes
+                    .Any(attr =>
+                        attr.AttributeType.Name == nameof(DependencyRecordedAttribute)
+                        || attr.AttributeType.Name == nameof(KeptByAttribute)
+                    )
             )
             {
                 customizations.DependencyRecorder = new TestDependencyRecorder();
@@ -199,10 +196,11 @@ namespace Mono.Linker.Tests.TestCasesRunner
                     .Concat(testCaseTypeDefinition.AllDefinedTypes())
                     .Append(testCaseTypeDefinition)
                     .Any(m =>
-                        m.CustomAttributes.Any(attr =>
-                            attr.AttributeType.Name == nameof(LogContainsAttribute)
-                            || attr.AttributeType.Name == nameof(LogDoesNotContainAttribute)
-                        )
+                        m.CustomAttributes
+                            .Any(attr =>
+                                attr.AttributeType.Name == nameof(LogContainsAttribute)
+                                || attr.AttributeType.Name == nameof(LogDoesNotContainAttribute)
+                            )
                     )
             )
                 return true;
@@ -212,26 +210,22 @@ namespace Mono.Linker.Tests.TestCasesRunner
 
         public virtual IEnumerable<SourceAndDestinationPair> GetResponseFiles()
         {
-            return _testCaseTypeDefinition
-                .CustomAttributes.Where(attr =>
-                    attr.AttributeType.Name == nameof(SetupLinkerResponseFileAttribute)
-                )
+            return _testCaseTypeDefinition.CustomAttributes
+                .Where(attr => attr.AttributeType.Name == nameof(SetupLinkerResponseFileAttribute))
                 .Select(GetSourceAndRelativeDestinationValue);
         }
 
         public virtual IEnumerable<SourceAndDestinationPair> GetDescriptorFiles()
         {
-            return _testCaseTypeDefinition
-                .CustomAttributes.Where(attr =>
-                    attr.AttributeType.Name == nameof(SetupLinkerDescriptorFile)
-                )
+            return _testCaseTypeDefinition.CustomAttributes
+                .Where(attr => attr.AttributeType.Name == nameof(SetupLinkerDescriptorFile))
                 .Select(GetSourceAndRelativeDestinationValue);
         }
 
         public virtual IEnumerable<SourceAndDestinationPair> GetSubstitutionFiles()
         {
-            return _testCaseTypeDefinition
-                .CustomAttributes.Where(attr =>
+            return _testCaseTypeDefinition.CustomAttributes
+                .Where(attr =>
                     attr.AttributeType.Name == nameof(SetupLinkerSubstitutionFileAttribute)
                 )
                 .Select(GetSourceAndRelativeDestinationValue);
@@ -239,19 +233,15 @@ namespace Mono.Linker.Tests.TestCasesRunner
 
         public virtual IEnumerable<SourceAndDestinationPair> GetLinkAttributesFiles()
         {
-            return _testCaseTypeDefinition
-                .CustomAttributes.Where(attr =>
-                    attr.AttributeType.Name == nameof(SetupLinkAttributesFile)
-                )
+            return _testCaseTypeDefinition.CustomAttributes
+                .Where(attr => attr.AttributeType.Name == nameof(SetupLinkAttributesFile))
                 .Select(GetSourceAndRelativeDestinationValue);
         }
 
         public IEnumerable<string> GetDeleteBefore()
         {
-            return _testCaseTypeDefinition
-                .CustomAttributes.Where(attr =>
-                    attr.AttributeType.Name == nameof(DeleteBeforeAttribute)
-                )
+            return _testCaseTypeDefinition.CustomAttributes
+                .Where(attr => attr.AttributeType.Name == nameof(DeleteBeforeAttribute))
                 .Select(attr => (string)attr.ConstructorArguments[0].Value);
         }
 
@@ -277,9 +267,10 @@ namespace Mono.Linker.Tests.TestCasesRunner
 
         public virtual bool LinkPublicAndFamily()
         {
-            return _testCaseTypeDefinition.CustomAttributes.FirstOrDefault(attr =>
-                    attr.AttributeType.Name == nameof(SetupLinkerLinkPublicAndFamilyAttribute)
-                ) != null;
+            return _testCaseTypeDefinition.CustomAttributes
+                    .FirstOrDefault(attr =>
+                        attr.AttributeType.Name == nameof(SetupLinkerLinkPublicAndFamilyAttribute)
+                    ) != null;
         }
     }
 }

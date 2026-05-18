@@ -33,9 +33,8 @@ class Program
                 HangMitigatingCancellationToken
             );
             await TestServices.Editor.InvokeQuickInfoAsync(HangMitigatingCancellationToken);
-            var quickInfo = await TestServices.Editor.GetQuickInfoAsync(
-                HangMitigatingCancellationToken
-            );
+            var quickInfo = await TestServices.Editor
+                .GetQuickInfoAsync(HangMitigatingCancellationToken);
             Assert.Equal(
                 "class System.String\r\nRepresents text as a sequence of UTF-16 code units.To browse the .NET Framework source code for this type, see the Reference Source.",
                 quickInfo
@@ -57,9 +56,8 @@ class Program$$
                 HangMitigatingCancellationToken
             );
             await TestServices.Editor.InvokeQuickInfoAsync(HangMitigatingCancellationToken);
-            var quickInfo = await TestServices.Editor.GetQuickInfoAsync(
-                HangMitigatingCancellationToken
-            );
+            var quickInfo = await TestServices.Editor
+                .GetQuickInfoAsync(HangMitigatingCancellationToken);
             Assert.Equal("class Program\r\nHello!", quickInfo);
         }
 
@@ -81,9 +79,8 @@ class العربية123
                 HangMitigatingCancellationToken
             );
             await TestServices.Editor.InvokeQuickInfoAsync(HangMitigatingCancellationToken);
-            var quickInfo = await TestServices.Editor.GetQuickInfoAsync(
-                HangMitigatingCancellationToken
-            );
+            var quickInfo = await TestServices.Editor
+                .GetQuickInfoAsync(HangMitigatingCancellationToken);
             Assert.Equal(
                 @"class العربية123
 This is an XML doc comment defined in code.",
@@ -111,9 +108,8 @@ class C
             );
 
             await TestServices.Editor.InvokeQuickInfoAsync(HangMitigatingCancellationToken);
-            var quickInfo = await TestServices.Editor.GetQuickInfoAsync(
-                HangMitigatingCancellationToken
-            );
+            var quickInfo = await TestServices.Editor
+                .GetQuickInfoAsync(HangMitigatingCancellationToken);
             var expected = "(awaitable) Task<int> C.M()\r\n\r\nExceptions:\r\n  Exception";
             Assert.Equal(expected, quickInfo);
         }

@@ -135,33 +135,29 @@ namespace System.Reflection.Tests
             ParameterInfo[] pis = m.GetParameters();
             {
                 ParameterInfo p = pis[0];
-                CustomAttributeData cad = p.CustomAttributes.Single(c =>
-                    c.AttributeType == typeof(InAttribute).Project()
-                );
+                CustomAttributeData cad = p.CustomAttributes
+                    .Single(c => c.AttributeType == typeof(InAttribute).Project());
                 InAttribute i = cad.UnprojectAndInstantiate<InAttribute>();
             }
 
             {
                 ParameterInfo p = pis[1];
-                CustomAttributeData cad = p.CustomAttributes.Single(c =>
-                    c.AttributeType == typeof(OutAttribute).Project()
-                );
+                CustomAttributeData cad = p.CustomAttributes
+                    .Single(c => c.AttributeType == typeof(OutAttribute).Project());
                 OutAttribute o = cad.UnprojectAndInstantiate<OutAttribute>();
             }
 
             {
                 ParameterInfo p = pis[2];
-                CustomAttributeData cad = p.CustomAttributes.Single(c =>
-                    c.AttributeType == typeof(OptionalAttribute).Project()
-                );
+                CustomAttributeData cad = p.CustomAttributes
+                    .Single(c => c.AttributeType == typeof(OptionalAttribute).Project());
                 OptionalAttribute o = cad.UnprojectAndInstantiate<OptionalAttribute>();
             }
 
             {
                 ParameterInfo p = pis[3];
-                CustomAttributeData cad = p.CustomAttributes.Single(c =>
-                    c.AttributeType == typeof(MarshalAsAttribute).Project()
-                );
+                CustomAttributeData cad = p.CustomAttributes
+                    .Single(c => c.AttributeType == typeof(MarshalAsAttribute).Project());
                 MarshalAsAttribute ma = cad.UnprojectAndInstantiate<MarshalAsAttribute>();
                 Assert.Equal(UnmanagedType.I4, ma.Value);
             }

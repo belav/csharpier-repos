@@ -72,10 +72,11 @@ namespace Microsoft.Web.WebPages.OAuth.Test
                     c.RequestAuthentication(
                         context.Object,
                         It.Is<Uri>(u =>
-                            u.AbsoluteUri.StartsWith(
-                                "http://live.com/login.aspx?__provider__=windowslive",
-                                StringComparison.OrdinalIgnoreCase
-                            )
+                            u.AbsoluteUri
+                                .StartsWith(
+                                    "http://live.com/login.aspx?__provider__=windowslive",
+                                    StringComparison.OrdinalIgnoreCase
+                                )
                         )
                     )
                 )
@@ -110,10 +111,11 @@ namespace Microsoft.Web.WebPages.OAuth.Test
                     c.RequestAuthentication(
                         context.Object,
                         It.Is<Uri>(u =>
-                            u.AbsoluteUri.StartsWith(
-                                "http://yahoo.com/?__provider__=yahoo",
-                                StringComparison.OrdinalIgnoreCase
-                            )
+                            u.AbsoluteUri
+                                .StartsWith(
+                                    "http://yahoo.com/?__provider__=yahoo",
+                                    StringComparison.OrdinalIgnoreCase
+                                )
                         )
                     )
                 )

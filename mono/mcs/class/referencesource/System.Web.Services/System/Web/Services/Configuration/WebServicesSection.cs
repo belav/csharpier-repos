@@ -569,8 +569,8 @@ namespace System.Web.Services.Configuration
                     {
                         if (this.soapServerProtocolFactory == null)
                         {
-                            this.soapServerProtocolFactory =
-                                this.SoapServerProtocolFactoryType.Type;
+                            this.soapServerProtocolFactory = this.SoapServerProtocolFactoryType
+                                .Type;
                         }
                     }
                 }

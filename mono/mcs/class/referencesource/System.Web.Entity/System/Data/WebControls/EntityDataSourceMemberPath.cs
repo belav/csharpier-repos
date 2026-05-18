@@ -127,10 +127,8 @@ namespace System.Web.UI.WebControls
             else
             {
                 // get this property
-                object propertyValue = this.propertyInfo.GetValue(
-                    parentObjectValue,
-                    new object[] { }
-                );
+                object propertyValue = this.propertyInfo
+                    .GetValue(parentObjectValue, new object[] { });
 
                 return propertyValue;
             }

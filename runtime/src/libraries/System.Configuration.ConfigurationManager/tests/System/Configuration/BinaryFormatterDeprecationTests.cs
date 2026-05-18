@@ -45,10 +45,11 @@ namespace System.ConfigurationTests
         public void SerializeAndDeserializeWithSettingsSerializeAsBinary()
         {
             RemoteInvokeOptions options = new RemoteInvokeOptions();
-            options.RuntimeConfigurationOptions.Add(
-                "System.Configuration.ConfigurationManager.EnableUnsafeBinaryFormatterInPropertyValueSerialization",
-                bool.TrueString
-            );
+            options.RuntimeConfigurationOptions
+                .Add(
+                    "System.Configuration.ConfigurationManager.EnableUnsafeBinaryFormatterInPropertyValueSerialization",
+                    bool.TrueString
+                );
             RemoteExecutor
                 .Invoke(
                     () =>

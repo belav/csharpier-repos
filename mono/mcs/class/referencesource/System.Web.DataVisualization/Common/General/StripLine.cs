@@ -269,10 +269,11 @@ namespace System.Web.UI.DataVisualization.Charting
             Series axisSeries = null;
             if (Axis.axisType == AxisName.X || Axis.axisType == AxisName.X2)
             {
-                List<string> seriesArray = Axis.ChartArea.GetXAxesSeries(
-                    (Axis.axisType == AxisName.X) ? AxisType.Primary : AxisType.Secondary,
-                    Axis.SubAxisName
-                );
+                List<string> seriesArray = Axis.ChartArea
+                    .GetXAxesSeries(
+                        (Axis.axisType == AxisName.X) ? AxisType.Primary : AxisType.Secondary,
+                        Axis.SubAxisName
+                    );
                 if (seriesArray.Count > 0)
                 {
                     axisSeries = Axis.Common.DataManager.Series[seriesArray[0]];
@@ -483,27 +484,29 @@ namespace System.Web.UI.DataVisualization.Charting
                                 if (!this.Axis.ChartArea.Area3DStyle.Enable3D)
                                 {
 #if !Microsoft_CONTROL
-                                    common.HotRegionsList.AddHotRegion(
-                                        rect,
-                                        this.ToolTip,
-                                        this.Url,
-                                        this.MapAreaAttributes,
-                                        this.PostBackValue,
-                                        this,
-                                        ChartElementType.StripLines,
-                                        string.Empty
-                                    );
+                                    common.HotRegionsList
+                                        .AddHotRegion(
+                                            rect,
+                                            this.ToolTip,
+                                            this.Url,
+                                            this.MapAreaAttributes,
+                                            this.PostBackValue,
+                                            this,
+                                            ChartElementType.StripLines,
+                                            string.Empty
+                                        );
 #else
-                                    common.HotRegionsList.AddHotRegion(
-                                        rect,
-                                        this.ToolTip,
-                                        string.Empty,
-                                        string.Empty,
-                                        string.Empty,
-                                        this,
-                                        ChartElementType.StripLines,
-                                        null
-                                    );
+                                    common.HotRegionsList
+                                        .AddHotRegion(
+                                            rect,
+                                            this.ToolTip,
+                                            string.Empty,
+                                            string.Empty,
+                                            string.Empty,
+                                            this,
+                                            ChartElementType.StripLines,
+                                            null
+                                        );
 #endif // !Microsoft_CONTROL
                                 }
                             }
@@ -599,27 +602,29 @@ namespace System.Web.UI.DataVisualization.Charting
                             }
 
 #if !Microsoft_CONTROL
-                            common.HotRegionsList.AddHotRegion(
-                                lineRect,
-                                this.ToolTip,
-                                this.Url,
-                                this.MapAreaAttributes,
-                                this.PostBackValue,
-                                this,
-                                ChartElementType.StripLines,
-                                string.Empty
-                            );
+                            common.HotRegionsList
+                                .AddHotRegion(
+                                    lineRect,
+                                    this.ToolTip,
+                                    this.Url,
+                                    this.MapAreaAttributes,
+                                    this.PostBackValue,
+                                    this,
+                                    ChartElementType.StripLines,
+                                    string.Empty
+                                );
 #else
-                            common.HotRegionsList.AddHotRegion(
-                                lineRect,
-                                this.ToolTip,
-                                null,
-                                null,
-                                null,
-                                this,
-                                ChartElementType.StripLines,
-                                null
-                            );
+                            common.HotRegionsList
+                                .AddHotRegion(
+                                    lineRect,
+                                    this.ToolTip,
+                                    null,
+                                    null,
+                                    null,
+                                    this,
+                                    ChartElementType.StripLines,
+                                    null
+                                );
 #endif // !Microsoft_CONTROL
                         }
                     }
@@ -675,29 +680,35 @@ namespace System.Web.UI.DataVisualization.Charting
             if (this.Axis.Common.ProcessModeRegions)
             {
 #if !Microsoft_CONTROL
-                this.Axis.Common.HotRegionsList.AddHotRegion(
-                    graph,
-                    path,
-                    false,
-                    this.ToolTip,
-                    this.Url,
-                    this.MapAreaAttributes,
-                    this.PostBackValue,
-                    this,
-                    ChartElementType.StripLines
-                );
+                this.Axis
+                    .Common
+                    .HotRegionsList
+                    .AddHotRegion(
+                        graph,
+                        path,
+                        false,
+                        this.ToolTip,
+                        this.Url,
+                        this.MapAreaAttributes,
+                        this.PostBackValue,
+                        this,
+                        ChartElementType.StripLines
+                    );
 #else
-                this.Axis.Common.HotRegionsList.AddHotRegion(
-                    graph,
-                    path,
-                    false,
-                    this.ToolTip,
-                    null,
-                    null,
-                    null,
-                    this,
-                    ChartElementType.StripLines
-                );
+                this.Axis
+                    .Common
+                    .HotRegionsList
+                    .AddHotRegion(
+                        graph,
+                        path,
+                        false,
+                        this.ToolTip,
+                        null,
+                        null,
+                        null,
+                        this,
+                        ChartElementType.StripLines
+                    );
 #endif // !Microsoft_CONTROL
             }
 
@@ -745,29 +756,35 @@ namespace System.Web.UI.DataVisualization.Charting
             if (this.Axis.Common.ProcessModeRegions)
             {
 #if !Microsoft_CONTROL
-                this.Axis.Common.HotRegionsList.AddHotRegion(
-                    graph,
-                    path,
-                    false,
-                    this.ToolTip,
-                    this.Url,
-                    this.MapAreaAttributes,
-                    this.PostBackValue,
-                    this,
-                    ChartElementType.StripLines
-                );
+                this.Axis
+                    .Common
+                    .HotRegionsList
+                    .AddHotRegion(
+                        graph,
+                        path,
+                        false,
+                        this.ToolTip,
+                        this.Url,
+                        this.MapAreaAttributes,
+                        this.PostBackValue,
+                        this,
+                        ChartElementType.StripLines
+                    );
 #else
-                this.Axis.Common.HotRegionsList.AddHotRegion(
-                    graph,
-                    path,
-                    false,
-                    this.ToolTip,
-                    null,
-                    null,
-                    null,
-                    this,
-                    ChartElementType.StripLines
-                );
+                this.Axis
+                    .Common
+                    .HotRegionsList
+                    .AddHotRegion(
+                        graph,
+                        path,
+                        false,
+                        this.ToolTip,
+                        null,
+                        null,
+                        null,
+                        this,
+                        ChartElementType.StripLines
+                    );
 #endif // !Microsoft_CONTROL
             }
             if (path != null)

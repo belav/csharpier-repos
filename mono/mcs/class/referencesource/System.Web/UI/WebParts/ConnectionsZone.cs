@@ -980,9 +980,8 @@ namespace System.Web.UI.WebControls.WebParts
                             Debug.Assert(
                                 providerInfo != null
                                     && providerInfo.TransformerType != null
-                                    && providerInfo.TransformerType.IsSubclassOf(
-                                        typeof(WebPartTransformer)
-                                    )
+                                    && providerInfo.TransformerType
+                                        .IsSubclassOf(typeof(WebPartTransformer))
                             );
                             _pendingTransformer = (WebPartTransformer)
                                 WebPartUtil.CreateObjectFromType(providerInfo.TransformerType);
@@ -1021,9 +1020,8 @@ namespace System.Web.UI.WebControls.WebParts
                         Debug.Assert(
                             consumerInfo != null
                                 && consumerInfo.TransformerType != null
-                                && consumerInfo.TransformerType.IsSubclassOf(
-                                    typeof(WebPartTransformer)
-                                )
+                                && consumerInfo.TransformerType
+                                    .IsSubclassOf(typeof(WebPartTransformer))
                         );
                         _pendingTransformer = (WebPartTransformer)
                             WebPartUtil.CreateObjectFromType(consumerInfo.TransformerType);
@@ -2704,9 +2702,13 @@ namespace System.Web.UI.WebControls.WebParts
                     if (consumers.Count == 0)
                     {
                         list.Enabled = false;
-                        list.Items.Add(
-                            new ListItem(SR.GetString(SR.ConnectionsZone_NoConsumers), String.Empty)
-                        );
+                        list.Items
+                            .Add(
+                                new ListItem(
+                                    SR.GetString(SR.ConnectionsZone_NoConsumers),
+                                    String.Empty
+                                )
+                            );
                     }
                     else
                     {
@@ -2786,9 +2788,13 @@ namespace System.Web.UI.WebControls.WebParts
                     if (providers.Count == 0)
                     {
                         list.Enabled = false;
-                        list.Items.Add(
-                            new ListItem(SR.GetString(SR.ConnectionsZone_NoProviders), String.Empty)
-                        );
+                        list.Items
+                            .Add(
+                                new ListItem(
+                                    SR.GetString(SR.ConnectionsZone_NoProviders),
+                                    String.Empty
+                                )
+                            );
                     }
                     else
                     {

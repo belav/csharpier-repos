@@ -327,10 +327,8 @@ namespace Moq.Protected
 
         LambdaExpression ReconstructAndReplaceSetter(Action<TAnalog> setterExpression)
         {
-            var expression = ExpressionReconstructor.Instance.ReconstructExpression(
-                setterExpression,
-                mock.ConstructorArguments
-            );
+            var expression = ExpressionReconstructor.Instance
+                .ReconstructExpression(setterExpression, mock.ConstructorArguments);
             return ReplaceDuck(expression);
 
             /* Unmerged change from project 'Moq(netstandard2.0)'
@@ -531,8 +529,8 @@ namespace Moq.Protected
 
             MethodInfo FindCorrespondingMethod(MethodInfo duckMethod)
             {
-                var candidateTargetMethods = this
-                    .targetType.GetMethods(BindingFlags.NonPublic | BindingFlags.Instance)
+                var candidateTargetMethods = this.targetType
+                    .GetMethods(BindingFlags.NonPublic | BindingFlags.Instance)
                     .Where(ctm => IsCorrespondingMethod(duckMethod, ctm))
                     .ToArray();
 
@@ -583,8 +581,8 @@ namespace Moq.Protected
 
             PropertyInfo FindCorrespondingProperty(PropertyInfo duckProperty)
             {
-                var candidateTargetProperties = this
-                    .targetType.GetProperties(
+                var candidateTargetProperties = this.targetType
+                    .GetProperties(
                         BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance
                     )
                     .Where(ctp => IsCorrespondingProperty(duckProperty, ctp))

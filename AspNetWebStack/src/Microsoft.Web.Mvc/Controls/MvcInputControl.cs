@@ -52,10 +52,11 @@ namespace Microsoft.Web.Mvc.Controls
             ModelState modelState = GetModelState();
             if (modelState != null)
             {
-                return modelState.Value.ConvertTo(
-                    destinationType,
-                    null /* culture */
-                );
+                return modelState.Value
+                    .ConvertTo(
+                        destinationType,
+                        null /* culture */
+                    );
             }
             return null;
         }

@@ -639,17 +639,17 @@ namespace Mono.CSharp
                     {
                         case Modifiers.INTERNAL:
                             if (al == Modifiers.PRIVATE || al == Modifiers.INTERNAL)
-                                same_access_restrictions = p.MemberDefinition.IsInternalAsPublic(
-                                    mc.Module.DeclaringAssembly
-                                );
+                                same_access_restrictions = p.MemberDefinition
+                                    .IsInternalAsPublic(mc.Module.DeclaringAssembly);
 
                             break;
 
                         case Modifiers.PROTECTED:
                             if (al == Modifiers.PROTECTED)
                             {
-                                same_access_restrictions =
-                                    mc.Parent.PartialContainer.IsBaseTypeDefinition(p_parent);
+                                same_access_restrictions = mc.Parent
+                                    .PartialContainer
+                                    .IsBaseTypeDefinition(p_parent);
                                 break;
                             }
 
@@ -675,23 +675,20 @@ namespace Mono.CSharp
 
                         case Modifiers.PROTECTED | Modifiers.INTERNAL:
                             if (al == Modifiers.INTERNAL)
-                                same_access_restrictions = p.MemberDefinition.IsInternalAsPublic(
-                                    mc.Module.DeclaringAssembly
-                                );
+                                same_access_restrictions = p.MemberDefinition
+                                    .IsInternalAsPublic(mc.Module.DeclaringAssembly);
                             else if (al == (Modifiers.PROTECTED | Modifiers.INTERNAL))
                                 same_access_restrictions =
                                     mc.Parent.PartialContainer.IsBaseTypeDefinition(p_parent)
-                                    && p.MemberDefinition.IsInternalAsPublic(
-                                        mc.Module.DeclaringAssembly
-                                    );
+                                    && p.MemberDefinition
+                                        .IsInternalAsPublic(mc.Module.DeclaringAssembly);
                             else if (al == Modifiers.PROTECTED)
                                 goto case Modifiers.PROTECTED;
                             else if (al == Modifiers.PRIVATE)
                             {
                                 if (
-                                    p.MemberDefinition.IsInternalAsPublic(
-                                        mc.Module.DeclaringAssembly
-                                    )
+                                    p.MemberDefinition
+                                        .IsInternalAsPublic(mc.Module.DeclaringAssembly)
                                 )
                                 {
                                     same_access_restrictions = true;
@@ -1472,8 +1469,7 @@ namespace Mono.CSharp
                     }
                     else
                     {
-                        compliant = ((ITypeDefinition)MemberDefinition)
-                            .DeclaringAssembly
+                        compliant = ((ITypeDefinition)MemberDefinition).DeclaringAssembly
                             .IsCLSCompliant;
                     }
                 }

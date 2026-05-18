@@ -156,9 +156,8 @@ internal static class EndpointEmitter
                     serviceProviderEmitted = true;
                 }
                 codeWriter.Write($@"var {parameter.SymbolName}_JsonBodyOrServiceResolver = ");
-                var shortParameterTypeName = parameter.Type.ToDisplayString(
-                    SymbolDisplayFormat.CSharpShortErrorMessageFormat
-                );
+                var shortParameterTypeName = parameter.Type
+                    .ToDisplayString(SymbolDisplayFormat.CSharpShortErrorMessageFormat);
                 codeWriter.WriteLine(
                     $"ResolveJsonBodyOrService<{parameter.Type.ToDisplayString(EmitterConstants.DisplayFormat)}>(logOrThrowExceptionHelper, {SymbolDisplay.FormatLiteral(shortParameterTypeName, true)}, {SymbolDisplay.FormatLiteral(parameter.SymbolName, true)}, jsonSerializerOptions, serviceProviderIsService);"
                 );

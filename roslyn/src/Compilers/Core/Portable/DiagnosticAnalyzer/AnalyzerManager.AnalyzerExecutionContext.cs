@@ -28,7 +28,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             > s_localizableStringToException = ImmutableDictionary<
                 LocalizableString,
                 Exception?
-            >.Empty.WithComparers(Roslyn.Utilities.ReferenceEqualityComparer.Instance);
+            >.Empty
+                .WithComparers(Roslyn.Utilities.ReferenceEqualityComparer.Instance);
 
             private readonly DiagnosticAnalyzer _analyzer;
             private readonly object _gate;

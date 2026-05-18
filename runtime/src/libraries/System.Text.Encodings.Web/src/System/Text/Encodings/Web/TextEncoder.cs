@@ -632,9 +632,8 @@ namespace System.Text.Encodings.Web
                 MaxOutputCharactersPerInputCharacter,
                 EncodeStartingOutputBufferSize
             );
-            char[] rentedArray = ArrayPool<char>.Shared.Rent(
-                Math.Max(value.Length, minBufferBumpEachIteration)
-            );
+            char[] rentedArray = ArrayPool<char>.Shared
+                .Rent(Math.Max(value.Length, minBufferBumpEachIteration));
             Span<char> scratchBuffer = rentedArray;
 
             do

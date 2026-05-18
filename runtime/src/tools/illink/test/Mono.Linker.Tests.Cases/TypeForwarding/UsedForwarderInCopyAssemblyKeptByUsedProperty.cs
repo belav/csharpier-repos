@@ -36,8 +36,7 @@ namespace Mono.Linker.Tests.Cases.TypeForwarding
     {
         public static void Main()
         {
-            var accessPropertyOnNestedType = ImplementationLibrary
-                .ImplementationLibraryNestedType
+            var accessPropertyOnNestedType = ImplementationLibrary.ImplementationLibraryNestedType
                 .PropertyOnNestedType;
         }
     }

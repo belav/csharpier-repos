@@ -118,10 +118,8 @@ namespace System.Xml.Tests
                 File.Copy(xslFile, absoluteUriXslFile, true);
                 XmlDocument doc = new XmlDocument();
                 doc.Load(absoluteUriXslFile);
-                string xslString = doc.OuterXml.Replace(
-                    "ABSOLUTE_URI",
-                    s_temporaryResolverDocumentFullName
-                );
+                string xslString = doc.OuterXml
+                    .Replace("ABSOLUTE_URI", s_temporaryResolverDocumentFullName);
                 doc.LoadXml(xslString);
                 doc.Save(absoluteUriXslFile);
             }

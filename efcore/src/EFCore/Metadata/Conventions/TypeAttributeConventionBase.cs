@@ -150,10 +150,7 @@ public abstract class TypeAttributeConventionBase<TAttribute> : IEntityTypeAdded
                 break;
         }
 
-        return complexTypeBuilder.ModelBuilder.Entity(
-            complexTypeBuilder.Metadata.ClrType,
-            shouldBeOwned,
-            fromDataAnnotation: true
-        );
+        return complexTypeBuilder.ModelBuilder
+            .Entity(complexTypeBuilder.Metadata.ClrType, shouldBeOwned, fromDataAnnotation: true);
     }
 }

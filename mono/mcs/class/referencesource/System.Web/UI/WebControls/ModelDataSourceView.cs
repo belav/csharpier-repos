@@ -1070,8 +1070,9 @@ namespace System.Web.UI.WebControls
             Func<object, Task> func = async _ =>
             {
                 ValidateAsyncModelBindingRequirements();
-                CancellationTokenSource cancellationTokenSource =
-                    _owner.DataControl.Page.CreateCancellationTokenFromAsyncTimeout();
+                CancellationTokenSource cancellationTokenSource = _owner.DataControl
+                    .Page
+                    .CreateCancellationTokenFromAsyncTimeout();
                 CancellationToken cancellationToken = cancellationTokenSource.Token;
                 DataSourceSelectResultProcessingOptions selectResultProcessingOptions = null;
                 ModelDataSourceMethod modelMethod = EvaluateSelectMethodParameters(
@@ -1241,8 +1242,9 @@ namespace System.Web.UI.WebControls
 
             Func<object, Task> func = async _ =>
             {
-                CancellationTokenSource cancellationTokenSource =
-                    _owner.DataControl.Page.CreateCancellationTokenFromAsyncTimeout();
+                CancellationTokenSource cancellationTokenSource = _owner.DataControl
+                    .Page
+                    .CreateCancellationTokenFromAsyncTimeout();
                 CancellationToken cancellationToken = cancellationTokenSource.Token;
                 var viewOperationTask = _viewOperationTask;
                 if (viewOperationTask != null)
@@ -1443,8 +1445,7 @@ namespace System.Web.UI.WebControls
                 controlValues
             );
 
-            ModelBindingExecutionContext modelBindingExecutionContext = _owner
-                .DataControl
+            ModelBindingExecutionContext modelBindingExecutionContext = _owner.DataControl
                 .Page
                 .ModelBindingExecutionContext;
 
@@ -1507,10 +1508,8 @@ namespace System.Web.UI.WebControls
                     ModelBindingContext bindingContext = new ModelBindingContext()
                     {
                         ModelBinderProviders = ModelBinderProviders.Providers,
-                        ModelMetadata = ModelMetadataProviders.Current.GetMetadataForType(
-                            null,
-                            parameterInfo.ParameterType
-                        ),
+                        ModelMetadata = ModelMetadataProviders.Current
+                            .GetMetadataForType(null, parameterInfo.ParameterType),
                         ModelState = modelState,
                         ModelName = modelName,
                         ValueProvider = customValueProvider,
@@ -1736,10 +1735,8 @@ namespace System.Web.UI.WebControls
             {
                 if (
                     parameterInfo.ParameterType.IsByRef
-                    && !parameterInfo.Name.Equals(
-                        TotalRowCountParameterName,
-                        StringComparison.OrdinalIgnoreCase
-                    )
+                    && !parameterInfo.Name
+                        .Equals(TotalRowCountParameterName, StringComparison.OrdinalIgnoreCase)
                 )
                 {
                     throw new InvalidOperationException(

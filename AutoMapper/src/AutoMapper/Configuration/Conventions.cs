@@ -173,8 +173,8 @@ public class ReplaceName : ISourceToDestinationNameMapper
         {
             return null;
         }
-        var possibleDestNames = sourceTypeDetails
-            .ReadAccessors.Select(mi => (mi, possibles: PossibleNames(mi.Name)))
+        var possibleDestNames = sourceTypeDetails.ReadAccessors
+            .Select(mi => (mi, possibles: PossibleNames(mi.Name)))
             .ToArray();
         foreach (var sourceName in possibleSourceNames)
         {

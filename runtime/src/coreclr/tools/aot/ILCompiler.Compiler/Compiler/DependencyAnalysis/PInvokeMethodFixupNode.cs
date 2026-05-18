@@ -158,11 +158,12 @@ namespace ILCompiler.DependencyAnalysis
             if (!decodedAttr.HasValue && declaringModule.Assembly is EcmaAssembly asm)
             {
                 // We look for [assembly:DefaultDllImportSearchPaths(...)]
-                var attrHandle = asm.MetadataReader.GetCustomAttributeHandle(
-                    asm.AssemblyDefinition.GetCustomAttributes(),
-                    "System.Runtime.InteropServices",
-                    "DefaultDllImportSearchPathsAttribute"
-                );
+                var attrHandle = asm.MetadataReader
+                    .GetCustomAttributeHandle(
+                        asm.AssemblyDefinition.GetCustomAttributes(),
+                        "System.Runtime.InteropServices",
+                        "DefaultDllImportSearchPathsAttribute"
+                    );
                 if (!attrHandle.IsNil)
                 {
                     var attr = asm.MetadataReader.GetCustomAttribute(attrHandle);
@@ -224,10 +225,8 @@ namespace ILCompiler.DependencyAnalysis
 
         public int CompareTo(PInvokeMethodData other, CompilerComparer comparer)
         {
-            var entryPointCompare = StringComparer.Ordinal.Compare(
-                EntryPointName,
-                other.EntryPointName
-            );
+            var entryPointCompare = StringComparer.Ordinal
+                .Compare(EntryPointName, other.EntryPointName);
             if (entryPointCompare != 0)
                 return entryPointCompare;
 

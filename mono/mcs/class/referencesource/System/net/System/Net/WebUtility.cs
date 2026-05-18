@@ -429,8 +429,7 @@ namespace System.Net
                 try
                 {
                     // Read from config
-                    decodingConformance = SettingsSectionInternal
-                        .Section
+                    decodingConformance = SettingsSectionInternal.Section
                         .WebUtilityUnicodeDecodingConformance;
                     // Normalize conformance settings (turn 'Auto' into the actual setting)
                     if (
@@ -482,8 +481,7 @@ namespace System.Net
                 try
                 {
                     // Read from config
-                    encodingConformance = SettingsSectionInternal
-                        .Section
+                    encodingConformance = SettingsSectionInternal.Section
                         .WebUtilityUnicodeEncodingConformance;
 
                     // Normalize conformance settings (turn 'Auto' into the actual setting)
@@ -618,14 +616,15 @@ namespace System.Net
                 return null;
 
             byte[] bytes = Encoding.UTF8.GetBytes(value);
-            return Encoding.UTF8.GetString(
-                UrlEncode(
-                    bytes,
-                    0,
-                    bytes.Length,
-                    false /* alwaysCreateNewReturnValue */
-                )
-            );
+            return Encoding.UTF8
+                .GetString(
+                    UrlEncode(
+                        bytes,
+                        0,
+                        bytes.Length,
+                        false /* alwaysCreateNewReturnValue */
+                    )
+                );
         }
 
         public static byte[] UrlEncodeToBytes(byte[] value, int offset, int count)

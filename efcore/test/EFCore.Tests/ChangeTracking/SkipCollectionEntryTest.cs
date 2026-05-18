@@ -456,8 +456,8 @@ public class SkipCollectionEntryTest
         var relatedToChunky1 = context.Entry(chunky1).Collection(e => e.Cherries);
         var relatedToChunky2 = context.Entry(chunky2).Collection(e => e.Cherries);
 
-        var joinEntity = context
-            .ChangeTracker.Entries<Dictionary<string, object>>()
+        var joinEntity = context.ChangeTracker
+            .Entries<Dictionary<string, object>>()
             .Single(e =>
                 e.Property<int>("CherryId").CurrentValue == 1
                 && e.Property<int>("ChunkyId").CurrentValue == 2
@@ -538,8 +538,8 @@ public class SkipCollectionEntryTest
         var relatedToChunky1 = context.Entry(chunky1).Collection(e => e.Cherries);
         var relatedToChunky2 = context.Entry(chunky2).Collection(e => e.Cherries);
 
-        var joinEntity = context
-            .ChangeTracker.Entries<Dictionary<string, object>>()
+        var joinEntity = context.ChangeTracker
+            .Entries<Dictionary<string, object>>()
             .Single(e =>
                 e.Property<int>("CherryId").CurrentValue == 1
                 && e.Property<int>("ChunkyId").CurrentValue == 2

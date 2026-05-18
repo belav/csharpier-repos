@@ -881,10 +881,11 @@ namespace System.Threading.Tasks.Tests
             );
             Exception caughtException = null;
 
-            cts2.Token.Register(() =>
-            {
-                throw new ObjectDisposedException("myException");
-            });
+            cts2.Token
+                .Register(() =>
+                {
+                    throw new ObjectDisposedException("myException");
+                });
 
             try
             {
@@ -1346,13 +1347,11 @@ namespace System.Threading.Tasks.Tests
             bool registration2Invoked = false;
 
             var cts = new CancellationTokenSource();
-            CancellationTokenRegistration ctr1 = cts.Token.Register(() =>
-                registration1Invoked = true
-            );
+            CancellationTokenRegistration ctr1 = cts.Token
+                .Register(() => registration1Invoked = true);
             Assert.True(cts.TryReset());
-            CancellationTokenRegistration ctr2 = cts.Token.Register(() =>
-                registration2Invoked = true
-            );
+            CancellationTokenRegistration ctr2 = cts.Token
+                .Register(() => registration2Invoked = true);
 
             cts.Cancel();
 
@@ -1519,13 +1518,14 @@ namespace System.Threading.Tasks.Tests
 
             // -- Test 1 -- //
             CancellationTokenSource cts = new CancellationTokenSource();
-            cts.Token.Register(
-                () =>
-                {
-                    throw new Exception("testEx1");
-                },
-                true
-            );
+            cts.Token
+                .Register(
+                    () =>
+                    {
+                        throw new Exception("testEx1");
+                    },
+                    true
+                );
 
             try
             {
@@ -1540,13 +1540,14 @@ namespace System.Threading.Tasks.Tests
 
             // -- Test 2 -- //
             cts = new CancellationTokenSource();
-            cts.Token.Register(
-                () =>
-                {
-                    throw new ArgumentException("testEx2");
-                },
-                true
-            );
+            cts.Token
+                .Register(
+                    () =>
+                    {
+                        throw new ArgumentException("testEx2");
+                    },
+                    true
+                );
 
             try
             {
@@ -1636,11 +1637,12 @@ namespace System.Threading.Tasks.Tests
             bool ctr1Invoked = false;
             CancellationTokenRegistration ctr1 = cts.Token.Register(() => ctr1Invoked = true);
 
-            CancellationTokenRegistration ctr2 = cts.Token.Register(() =>
-            {
-                ctr2running.Set();
-                ctr2blocked.Wait();
-            });
+            CancellationTokenRegistration ctr2 = cts.Token
+                .Register(() =>
+                {
+                    ctr2running.Set();
+                    ctr2blocked.Wait();
+                });
 
             // Cancel.  This will trigger ctr2 to run, then ctr1, then ctr0.
             Task.Run(() => cts.Cancel());
@@ -1709,11 +1711,12 @@ namespace System.Threading.Tasks.Tests
             using (var barrier = new Barrier(2))
             {
                 var cts = new CancellationTokenSource();
-                CancellationTokenRegistration ctr = cts.Token.Register(() =>
-                {
-                    barrier.SignalAndWait();
-                    barrier.SignalAndWait();
-                });
+                CancellationTokenRegistration ctr = cts.Token
+                    .Register(() =>
+                    {
+                        barrier.SignalAndWait();
+                        barrier.SignalAndWait();
+                    });
 
                 Task.Run(() => cts.Cancel());
 
@@ -1738,11 +1741,12 @@ namespace System.Threading.Tasks.Tests
             bool ctr1Invoked = false;
             CancellationTokenRegistration ctr1 = cts.Token.Register(() => ctr1Invoked = true);
 
-            CancellationTokenRegistration ctr2 = cts.Token.Register(() =>
-            {
-                ctr2running.Set();
-                ctr2blocked.Wait();
-            });
+            CancellationTokenRegistration ctr2 = cts.Token
+                .Register(() =>
+                {
+                    ctr2running.Set();
+                    ctr2blocked.Wait();
+                });
 
             // Cancel.  This will trigger ctr2 to run, then ctr1, then ctr0.
             Task.Run(() => cts.Cancel());
@@ -1773,45 +1777,46 @@ namespace System.Threading.Tasks.Tests
                 var tasks = new Task[]
                 {
                     // Register and unregister
-                    Task.Factory.StartNew(
-                        () =>
-                        {
-                            for (int i = 0; i < Iters; i++)
+                    Task.Factory
+                        .StartNew(
+                            () =>
                             {
-                                barrier.SignalAndWait();
-                                CancellationTokenRegistration ctr = cts.Token.Register(() =>
-                                    callbackInvoked = true
-                                );
-                                barrier.SignalAndWait();
-                                unregisterResult = ctr.Unregister();
-                                barrier.SignalAndWait();
-                            }
-                        },
-                        CancellationToken.None,
-                        TaskCreationOptions.LongRunning,
-                        TaskScheduler.Default
-                    ),
+                                for (int i = 0; i < Iters; i++)
+                                {
+                                    barrier.SignalAndWait();
+                                    CancellationTokenRegistration ctr = cts.Token
+                                        .Register(() => callbackInvoked = true);
+                                    barrier.SignalAndWait();
+                                    unregisterResult = ctr.Unregister();
+                                    barrier.SignalAndWait();
+                                }
+                            },
+                            CancellationToken.None,
+                            TaskCreationOptions.LongRunning,
+                            TaskScheduler.Default
+                        ),
                     // Cancel, and validate the results
-                    Task.Factory.StartNew(
-                        () =>
-                        {
-                            for (int i = 0; i < Iters; i++)
+                    Task.Factory
+                        .StartNew(
+                            () =>
                             {
-                                barrier.SignalAndWait();
-                                barrier.SignalAndWait();
-                                cts.Cancel();
-                                barrier.SignalAndWait();
+                                for (int i = 0; i < Iters; i++)
+                                {
+                                    barrier.SignalAndWait();
+                                    barrier.SignalAndWait();
+                                    cts.Cancel();
+                                    barrier.SignalAndWait();
 
-                                Assert.True(unregisterResult ^ callbackInvoked);
+                                    Assert.True(unregisterResult ^ callbackInvoked);
 
-                                unregisterResult = callbackInvoked = false;
-                                cts = new CancellationTokenSource();
-                            }
-                        },
-                        CancellationToken.None,
-                        TaskCreationOptions.LongRunning,
-                        TaskScheduler.Default
-                    ),
+                                    unregisterResult = callbackInvoked = false;
+                                    cts = new CancellationTokenSource();
+                                }
+                            },
+                            CancellationToken.None,
+                            TaskCreationOptions.LongRunning,
+                            TaskScheduler.Default
+                        ),
                 };
 
                 // wait for one to fail or both to complete
@@ -1950,11 +1955,12 @@ namespace System.Threading.Tasks.Tests
             using (var barrier = new Barrier(2))
             {
                 var cts = new CancellationTokenSource();
-                CancellationTokenRegistration ctr = cts.Token.Register(() =>
-                {
-                    barrier.SignalAndWait();
-                    barrier.SignalAndWait();
-                });
+                CancellationTokenRegistration ctr = cts.Token
+                    .Register(() =>
+                    {
+                        barrier.SignalAndWait();
+                        barrier.SignalAndWait();
+                    });
 
                 Task ignored = Task.Run(() => cts.Cancel());
 
@@ -1981,11 +1987,12 @@ namespace System.Threading.Tasks.Tests
             bool ctr1Invoked = false;
             CancellationTokenRegistration ctr1 = cts.Token.Register(() => ctr1Invoked = true);
 
-            CancellationTokenRegistration ctr2 = cts.Token.Register(() =>
-            {
-                ctr2running.Set();
-                ctr2blocked.Wait();
-            });
+            CancellationTokenRegistration ctr2 = cts.Token
+                .Register(() =>
+                {
+                    ctr2running.Set();
+                    ctr2blocked.Wait();
+                });
 
             // Cancel.  This will trigger ctr2 to run, then ctr1, then ctr0.
             Task ignored = Task.Run(() => cts.Cancel());
@@ -2095,14 +2102,15 @@ namespace System.Threading.Tasks.Tests
             var cts = new CancellationTokenSource();
             for (int i = 1; i <= Iters; i++)
             {
-                cts.Token.Register(
-                    s =>
-                    {
-                        Assert.NotEqual(callingThreadId, Environment.CurrentManagedThreadId);
-                        sum += (int)s;
-                    },
-                    i
-                );
+                cts.Token
+                    .Register(
+                        s =>
+                        {
+                            Assert.NotEqual(callingThreadId, Environment.CurrentManagedThreadId);
+                            sum += (int)s;
+                        },
+                        i
+                    );
             }
 
             Task t = cts.CancelAsync();

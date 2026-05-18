@@ -1068,9 +1068,10 @@ namespace System.Data.ProviderBase
                         }
                         else if (timeout)
                         {
-                            next.Completion.TrySetException(
-                                ADP.ExceptionWithStackTrace(ADP.PooledOpenTimeout())
-                            );
+                            next.Completion
+                                .TrySetException(
+                                    ADP.ExceptionWithStackTrace(ADP.PooledOpenTimeout())
+                                );
                         }
                         else
                         {
@@ -1217,12 +1218,13 @@ namespace System.Data.ProviderBase
                             unsafe
                             {
                                 nint* handle = (nint*)_waitHandles.DangerousGetHandle();
-                                waitResult = Interop.Kernel32.WaitForMultipleObjects(
-                                    waitHandleCount,
-                                    handle,
-                                    false,
-                                    waitForMultipleObjectsTimeout
-                                );
+                                waitResult = Interop.Kernel32
+                                    .WaitForMultipleObjects(
+                                        waitHandleCount,
+                                        handle,
+                                        false,
+                                        waitForMultipleObjectsTimeout
+                                    );
                             }
 
                             // call GetHRForLastWin32Error immediately after after the native call
@@ -1313,9 +1315,10 @@ namespace System.Data.ProviderBase
                                     if (onlyOneCheckConnection)
                                     {
                                         if (
-                                            _waitHandles.CreationSemaphore.WaitOne(
-                                                unchecked((int)waitForMultipleObjectsTimeout)
-                                            )
+                                            _waitHandles.CreationSemaphore
+                                                .WaitOne(
+                                                    unchecked((int)waitForMultipleObjectsTimeout)
+                                                )
                                         )
                                         {
                                             RuntimeHelpers.PrepareConstrainedRegions();
@@ -1375,11 +1378,8 @@ namespace System.Data.ProviderBase
                     {
                         if (CREATION_HANDLE == waitResult)
                         {
-                            bool result = Interop.Kernel32.ReleaseSemaphore(
-                                _waitHandles.CreationHandle,
-                                1,
-                                out _
-                            );
+                            bool result = Interop.Kernel32
+                                .ReleaseSemaphore(_waitHandles.CreationHandle, 1, out _);
                             if (!result)
                             { // failure case
                                 releaseSemaphoreResult = Marshal.GetHRForLastWin32Error();
@@ -1581,10 +1581,8 @@ namespace System.Data.ProviderBase
                             try { }
                             finally
                             {
-                                waitResult = Interop.Kernel32.WaitForSingleObject(
-                                    _waitHandles.CreationHandle,
-                                    (int)timeout
-                                );
+                                waitResult = Interop.Kernel32
+                                    .WaitForSingleObject(_waitHandles.CreationHandle, (int)timeout);
                             }
                             if (WAIT_OBJECT_0 == waitResult)
                             {
@@ -1643,11 +1641,8 @@ namespace System.Data.ProviderBase
                             if (WAIT_OBJECT_0 == waitResult)
                             {
                                 // reuse waitResult and ignore its value
-                                waitResult = Interop.Kernel32.ReleaseSemaphore(
-                                    _waitHandles.CreationHandle,
-                                    1,
-                                    out _
-                                )
+                                waitResult = Interop.Kernel32
+                                    .ReleaseSemaphore(_waitHandles.CreationHandle, 1, out _)
                                     ? 1
                                     : 0;
                             }

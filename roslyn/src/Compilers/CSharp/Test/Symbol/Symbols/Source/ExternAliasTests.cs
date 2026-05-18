@@ -434,8 +434,8 @@ class A : Bar::NS.Goo {}
                 assemblyName: "A3.dll"
             );
 
-            var targets = comp3
-                .SyntaxTrees.AsParallel()
+            var targets = comp3.SyntaxTrees
+                .AsParallel()
                 .Select(tree =>
                 {
                     var model = comp3.GetSemanticModel(tree);
@@ -469,8 +469,8 @@ class A : Bar::NS.Goo {}
                 assemblyName: "A3.dll"
             );
 
-            var targets = comp3
-                .SyntaxTrees.AsParallel()
+            var targets = comp3.SyntaxTrees
+                .AsParallel()
                 .Select(tree =>
                 {
                     var model = comp3.GetSemanticModel(tree);

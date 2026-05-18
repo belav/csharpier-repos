@@ -15,9 +15,8 @@ namespace System.Runtime.Serialization.Json
         public const string KeyString = "Key";
         public const string ValueString = "Value";
         public const string ServerTypeString = "__type";
-        public static readonly int DataContractXsdBaseNamespaceLength = Globals
-            .DataContractXsdBaseNamespace
-            .Length;
+        public static readonly int DataContractXsdBaseNamespaceLength =
+            Globals.DataContractXsdBaseNamespace.Length;
         public static readonly long unixEpochTicks = new DateTime(
             1970,
             1,

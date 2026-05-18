@@ -534,11 +534,12 @@ namespace Microsoft.CodeAnalysis
                     ? null
                     : new MemoryStream();
             return c.Emit(
-                new MemoryStream(),
-                pdbStream: pdbStream,
-                options: options,
-                manifestResources: manifestResources
-            ).Diagnostics;
+                    new MemoryStream(),
+                    pdbStream: pdbStream,
+                    options: options,
+                    manifestResources: manifestResources
+                )
+                .Diagnostics;
         }
 
         public static TCompilation VerifyEmitDiagnostics<TCompilation>(

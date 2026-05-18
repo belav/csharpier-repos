@@ -3100,8 +3100,7 @@ namespace MonoTests.System.Windows.Forms
                 dt.CustomFormat = "y";
                 Assert.AreEqual("7", dt.Text, "#msfix1?");
 
-                dt.CustomFormat = Thread
-                    .CurrentThread
+                dt.CustomFormat = Thread.CurrentThread
                     .CurrentCulture
                     .DateTimeFormat
                     .ShortDatePattern;

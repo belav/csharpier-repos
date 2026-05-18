@@ -284,9 +284,10 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateConstructor
                     return true;
                 case Accessibility.ProtectedAndInternal:
                 case Accessibility.Internal:
-                    return document.SemanticModel.Compilation.Assembly.IsSameAssemblyOrHasFriendAccessTo(
-                        symbol.ContainingAssembly
-                    );
+                    return document.SemanticModel
+                        .Compilation
+                        .Assembly
+                        .IsSameAssemblyOrHasFriendAccessTo(symbol.ContainingAssembly);
 
                 default:
                     return false;

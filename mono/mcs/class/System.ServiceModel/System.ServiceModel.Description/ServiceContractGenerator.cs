@@ -291,74 +291,78 @@ namespace System.ServiceModel.Description
             // .ctor(string endpointConfigurationName)
             ctor = new CodeConstructor();
             ctor.Attributes = MemberAttributes.Public;
-            ctor.Parameters.Add(
-                new CodeParameterDeclarationExpression(
-                    new CodeTypeReference(typeof(string)),
-                    "endpointConfigurationName"
-                )
-            );
-            ctor.BaseConstructorArgs.Add(
-                new CodeArgumentReferenceExpression("endpointConfigurationName")
-            );
+            ctor.Parameters
+                .Add(
+                    new CodeParameterDeclarationExpression(
+                        new CodeTypeReference(typeof(string)),
+                        "endpointConfigurationName"
+                    )
+                );
+            ctor.BaseConstructorArgs
+                .Add(new CodeArgumentReferenceExpression("endpointConfigurationName"));
             type.Members.Add(ctor);
 
             // .ctor(string endpointConfigurationName, string remoteAddress)
             ctor = new CodeConstructor();
             ctor.Attributes = MemberAttributes.Public;
-            ctor.Parameters.Add(
-                new CodeParameterDeclarationExpression(
-                    new CodeTypeReference(typeof(string)),
-                    "endpointConfigurationName"
-                )
-            );
-            ctor.Parameters.Add(
-                new CodeParameterDeclarationExpression(
-                    new CodeTypeReference(typeof(string)),
-                    "remoteAddress"
-                )
-            );
-            ctor.BaseConstructorArgs.Add(
-                new CodeArgumentReferenceExpression("endpointConfigurationName")
-            );
+            ctor.Parameters
+                .Add(
+                    new CodeParameterDeclarationExpression(
+                        new CodeTypeReference(typeof(string)),
+                        "endpointConfigurationName"
+                    )
+                );
+            ctor.Parameters
+                .Add(
+                    new CodeParameterDeclarationExpression(
+                        new CodeTypeReference(typeof(string)),
+                        "remoteAddress"
+                    )
+                );
+            ctor.BaseConstructorArgs
+                .Add(new CodeArgumentReferenceExpression("endpointConfigurationName"));
             ctor.BaseConstructorArgs.Add(new CodeArgumentReferenceExpression("remoteAddress"));
             type.Members.Add(ctor);
 
             // .ctor(string endpointConfigurationName, EndpointAddress remoteAddress)
             ctor = new CodeConstructor();
             ctor.Attributes = MemberAttributes.Public;
-            ctor.Parameters.Add(
-                new CodeParameterDeclarationExpression(
-                    new CodeTypeReference(typeof(string)),
-                    "endpointConfigurationName"
-                )
-            );
-            ctor.Parameters.Add(
-                new CodeParameterDeclarationExpression(
-                    new CodeTypeReference(typeof(EndpointAddress)),
-                    "remoteAddress"
-                )
-            );
-            ctor.BaseConstructorArgs.Add(
-                new CodeArgumentReferenceExpression("endpointConfigurationName")
-            );
+            ctor.Parameters
+                .Add(
+                    new CodeParameterDeclarationExpression(
+                        new CodeTypeReference(typeof(string)),
+                        "endpointConfigurationName"
+                    )
+                );
+            ctor.Parameters
+                .Add(
+                    new CodeParameterDeclarationExpression(
+                        new CodeTypeReference(typeof(EndpointAddress)),
+                        "remoteAddress"
+                    )
+                );
+            ctor.BaseConstructorArgs
+                .Add(new CodeArgumentReferenceExpression("endpointConfigurationName"));
             ctor.BaseConstructorArgs.Add(new CodeArgumentReferenceExpression("remoteAddress"));
             type.Members.Add(ctor);
 
             // .ctor(Binding,EndpointAddress)
             ctor = new CodeConstructor();
             ctor.Attributes = MemberAttributes.Public;
-            ctor.Parameters.Add(
-                new CodeParameterDeclarationExpression(
-                    new CodeTypeReference(typeof(Binding)),
-                    "binding"
-                )
-            );
-            ctor.Parameters.Add(
-                new CodeParameterDeclarationExpression(
-                    new CodeTypeReference(typeof(EndpointAddress)),
-                    "endpoint"
-                )
-            );
+            ctor.Parameters
+                .Add(
+                    new CodeParameterDeclarationExpression(
+                        new CodeTypeReference(typeof(Binding)),
+                        "binding"
+                    )
+                );
+            ctor.Parameters
+                .Add(
+                    new CodeParameterDeclarationExpression(
+                        new CodeTypeReference(typeof(EndpointAddress)),
+                        "endpoint"
+                    )
+                );
             ctor.BaseConstructorArgs.Add(new CodeArgumentReferenceExpression("binding"));
             ctor.BaseConstructorArgs.Add(new CodeArgumentReferenceExpression("endpoint"));
             type.Members.Add(ctor);
@@ -409,15 +413,20 @@ namespace System.ServiceModel.Description
             CodeAttributeDeclaration ad = new CodeAttributeDeclaration(
                 new CodeTypeReference(typeof(ServiceContractAttribute))
             );
-            ad.Arguments.Add(
-                new CodeAttributeArgument("Namespace", new CodePrimitiveExpression(cd.Namespace))
-            );
-            ad.Arguments.Add(
-                new CodeAttributeArgument(
-                    "ConfigurationName",
-                    new CodePrimitiveExpression(configName)
-                )
-            );
+            ad.Arguments
+                .Add(
+                    new CodeAttributeArgument(
+                        "Namespace",
+                        new CodePrimitiveExpression(cd.Namespace)
+                    )
+                );
+            ad.Arguments
+                .Add(
+                    new CodeAttributeArgument(
+                        "ConfigurationName",
+                        new CodePrimitiveExpression(configName)
+                    )
+                );
             type.CustomAttributes.Add(ad);
             contract_context = new ServiceContractGenerationContext(this, cd, type);
 
@@ -521,11 +530,12 @@ namespace System.ServiceModel.Description
             CodeMemberMethod cm = new CodeMemberMethod();
 
             if (od.Behaviors.Find<XmlSerializerMappingBehavior>() != null)
-                cm.CustomAttributes.Add(
-                    new CodeAttributeDeclaration(
-                        new CodeTypeReference(typeof(XmlSerializerFormatAttribute))
-                    )
-                );
+                cm.CustomAttributes
+                    .Add(
+                        new CodeAttributeDeclaration(
+                            new CodeTypeReference(typeof(XmlSerializerFormatAttribute))
+                        )
+                    );
 
             if (async)
                 cm.Name = "Begin" + od.Name;
@@ -562,21 +572,27 @@ namespace System.ServiceModel.Description
             foreach (MessageDescription md in od.Messages)
             {
                 if (md.Direction == MessageDirection.Input)
-                    ad.Arguments.Add(
-                        new CodeAttributeArgument("Action", new CodePrimitiveExpression(md.Action))
-                    );
+                    ad.Arguments
+                        .Add(
+                            new CodeAttributeArgument(
+                                "Action",
+                                new CodePrimitiveExpression(md.Action)
+                            )
+                        );
                 else
-                    ad.Arguments.Add(
-                        new CodeAttributeArgument(
-                            "ReplyAction",
-                            new CodePrimitiveExpression(md.Action)
-                        )
-                    );
+                    ad.Arguments
+                        .Add(
+                            new CodeAttributeArgument(
+                                "ReplyAction",
+                                new CodePrimitiveExpression(md.Action)
+                            )
+                        );
             }
             if (async)
-                ad.Arguments.Add(
-                    new CodeAttributeArgument("AsyncPattern", new CodePrimitiveExpression(true))
-                );
+                ad.Arguments
+                    .Add(
+                        new CodeAttributeArgument("AsyncPattern", new CodePrimitiveExpression(true))
+                    );
             cm.CustomAttributes.Add(ad);
 
             return cm;
@@ -585,12 +601,13 @@ namespace System.ServiceModel.Description
         void ExportParameters(CodeMemberMethod method, ParameterInfo[] parameters)
         {
             foreach (ParameterInfo pi in parameters)
-                method.Parameters.Add(
-                    new CodeParameterDeclarationExpression(
-                        new CodeTypeReference(pi.ParameterType),
-                        pi.Name
-                    )
-                );
+                method.Parameters
+                    .Add(
+                        new CodeParameterDeclarationExpression(
+                            new CodeTypeReference(pi.ParameterType),
+                            pi.Name
+                        )
+                    );
         }
 
         void AddImplementationClientMethods(CodeTypeDeclaration type, ContractDescription cd)
@@ -757,19 +774,20 @@ namespace System.ServiceModel.Description
             for (int idx = 0; idx < method.Parameters.Count - (methodAsync ? 2 : 0); idx++)
             {
                 var p = method.Parameters[idx];
-                cm.Statements.Add(
-                    new CodeVariableDeclarationStatement(
-                        p.Type,
-                        p.Name,
-                        new CodeCastExpression(
+                cm.Statements
+                    .Add(
+                        new CodeVariableDeclarationStatement(
                             p.Type,
-                            new CodeArrayIndexerExpression(
-                                new CodeArgumentReferenceExpression("args"),
-                                new CodePrimitiveExpression(idx)
+                            p.Name,
+                            new CodeCastExpression(
+                                p.Type,
+                                new CodeArrayIndexerExpression(
+                                    new CodeArgumentReferenceExpression("args"),
+                                    new CodePrimitiveExpression(idx)
+                                )
                             )
                         )
-                    )
-                );
+                    );
                 call.Parameters.Add(new CodeVariableReferenceExpression(p.Name));
             }
             call.Parameters.Add(new CodeArgumentReferenceExpression("asyncCallback"));
@@ -811,15 +829,13 @@ namespace System.ServiceModel.Description
                 cm.Statements.Add(call);
             else
             {
-                cm.Statements.Add(
-                    new CodeVariableDeclarationStatement(typeof(object), "__ret", call)
-                );
+                cm.Statements
+                    .Add(new CodeVariableDeclarationStatement(typeof(object), "__ret", call));
                 retCreate.Initializers.Add(new CodeVariableReferenceExpression("__ret"));
             }
             foreach (var outArgRef in outArgRefs)
-                retCreate.Initializers.Add(
-                    new CodeVariableReferenceExpression(outArgRef.VariableName)
-                );
+                retCreate.Initializers
+                    .Add(new CodeVariableReferenceExpression(outArgRef.VariableName));
 
             cm.Statements.Add(new CodeMethodReturnStatement(retCreate));
 
@@ -843,48 +859,55 @@ namespace System.ServiceModel.Description
                 new CodePropertyReferenceExpression(iaref, "Cancelled"),
                 new CodePropertyReferenceExpression(iaref, "UserState")
             );
-            cm.Statements.Add(
-                new CodeConditionStatement(
-                    new CodeBinaryOperatorExpression(
-                        new CodeEventReferenceExpression(thisExpr, od.Name + "Completed"),
-                        CodeBinaryOperatorType.IdentityInequality,
-                        nullExpr
-                    ),
-                    new CodeVariableDeclarationStatement(
-                        iaargs,
-                        "args",
-                        new CodeCastExpression(iaargs, new CodeArgumentReferenceExpression("state"))
-                    ),
-                    new CodeExpressionStatement(
-                        new CodeMethodInvokeExpression(
-                            thisExpr,
-                            od.Name + "Completed",
-                            thisExpr,
-                            methodEventArgs
+            cm.Statements
+                .Add(
+                    new CodeConditionStatement(
+                        new CodeBinaryOperatorExpression(
+                            new CodeEventReferenceExpression(thisExpr, od.Name + "Completed"),
+                            CodeBinaryOperatorType.IdentityInequality,
+                            nullExpr
+                        ),
+                        new CodeVariableDeclarationStatement(
+                            iaargs,
+                            "args",
+                            new CodeCastExpression(
+                                iaargs,
+                                new CodeArgumentReferenceExpression("state")
+                            )
+                        ),
+                        new CodeExpressionStatement(
+                            new CodeMethodInvokeExpression(
+                                thisExpr,
+                                od.Name + "Completed",
+                                thisExpr,
+                                methodEventArgs
+                            )
                         )
                     )
-                )
-            );
+                );
 
             // delegate fields
-            type.Members.Add(
-                new CodeMemberField(
-                    new CodeTypeReference("BeginOperationDelegate"),
-                    "onBegin" + od.Name + "Delegate"
-                )
-            );
-            type.Members.Add(
-                new CodeMemberField(
-                    new CodeTypeReference("EndOperationDelegate"),
-                    "onEnd" + od.Name + "Delegate"
-                )
-            );
-            type.Members.Add(
-                new CodeMemberField(
-                    new CodeTypeReference(typeof(SendOrPostCallback)),
-                    "on" + od.Name + "CompletedDelegate"
-                )
-            );
+            type.Members
+                .Add(
+                    new CodeMemberField(
+                        new CodeTypeReference("BeginOperationDelegate"),
+                        "onBegin" + od.Name + "Delegate"
+                    )
+                );
+            type.Members
+                .Add(
+                    new CodeMemberField(
+                        new CodeTypeReference("EndOperationDelegate"),
+                        "onEnd" + od.Name + "Delegate"
+                    )
+                );
+            type.Members
+                .Add(
+                    new CodeMemberField(
+                        new CodeTypeReference(typeof(SendOrPostCallback)),
+                        "on" + od.Name + "CompletedDelegate"
+                    )
+                );
 
             // XxxCompletedEventArgs class
             var argsType = new CodeTypeDeclaration(argsname);
@@ -895,28 +918,25 @@ namespace System.ServiceModel.Description
             {
                 Attributes = MemberAttributes.Public | MemberAttributes.Final,
             };
-            argsCtor.Parameters.Add(
-                new CodeParameterDeclarationExpression(typeof(object[]), "results")
-            );
-            argsCtor.Parameters.Add(
-                new CodeParameterDeclarationExpression(typeof(Exception), "error")
-            );
-            argsCtor.Parameters.Add(
-                new CodeParameterDeclarationExpression(typeof(bool), "cancelled")
-            );
-            argsCtor.Parameters.Add(
-                new CodeParameterDeclarationExpression(typeof(object), "userState")
-            );
+            argsCtor.Parameters
+                .Add(new CodeParameterDeclarationExpression(typeof(object[]), "results"));
+            argsCtor.Parameters
+                .Add(new CodeParameterDeclarationExpression(typeof(Exception), "error"));
+            argsCtor.Parameters
+                .Add(new CodeParameterDeclarationExpression(typeof(bool), "cancelled"));
+            argsCtor.Parameters
+                .Add(new CodeParameterDeclarationExpression(typeof(object), "userState"));
             argsCtor.BaseConstructorArgs.Add(new CodeArgumentReferenceExpression("error"));
             argsCtor.BaseConstructorArgs.Add(new CodeArgumentReferenceExpression("cancelled"));
             argsCtor.BaseConstructorArgs.Add(new CodeArgumentReferenceExpression("userState"));
             var resultsField = new CodeFieldReferenceExpression(thisExpr, "results");
-            argsCtor.Statements.Add(
-                new CodeAssignStatement(
-                    resultsField,
-                    new CodeArgumentReferenceExpression("results")
-                )
-            );
+            argsCtor.Statements
+                .Add(
+                    new CodeAssignStatement(
+                        resultsField,
+                        new CodeArgumentReferenceExpression("results")
+                    )
+                );
             argsType.Members.Add(argsCtor);
 
             argsType.Members.Add(new CodeMemberField(typeof(object[]), "results"));
@@ -929,31 +949,33 @@ namespace System.ServiceModel.Description
                     Type = resultType,
                     Attributes = MemberAttributes.Public | MemberAttributes.Final,
                 };
-                resultProp.GetStatements.Add(
-                    new CodeMethodReturnStatement(
-                        new CodeCastExpression(
-                            resultProp.Type,
-                            new CodeArrayIndexerExpression(
-                                resultsField,
-                                new CodePrimitiveExpression(0)
+                resultProp.GetStatements
+                    .Add(
+                        new CodeMethodReturnStatement(
+                            new CodeCastExpression(
+                                resultProp.Type,
+                                new CodeArrayIndexerExpression(
+                                    resultsField,
+                                    new CodePrimitiveExpression(0)
+                                )
                             )
                         )
-                    )
-                );
+                    );
                 argsType.Members.Add(resultProp);
             }
 
             // event field
             var handlerType = new CodeTypeReference(typeof(EventHandler<>));
             handlerType.TypeArguments.Add(new CodeTypeReference(argsType.Name));
-            type.Members.Add(
-                new CodeMemberEvent()
-                {
-                    Name = od.Name + "Completed",
-                    Type = handlerType,
-                    Attributes = MemberAttributes.Public | MemberAttributes.Final,
-                }
-            );
+            type.Members
+                .Add(
+                    new CodeMemberEvent()
+                    {
+                        Name = od.Name + "Completed",
+                        Type = handlerType,
+                        Attributes = MemberAttributes.Public | MemberAttributes.Final,
+                    }
+                );
 
             // XxxAsync() implementations
             bool hasAsync = false;
@@ -993,9 +1015,8 @@ namespace System.ServiceModel.Description
 
                 // Second one is the primary one.
 
-                cm.Parameters.Add(
-                    new CodeParameterDeclarationExpression(typeof(object), "userState")
-                );
+                cm.Parameters
+                    .Add(new CodeParameterDeclarationExpression(typeof(object), "userState"));
 
                 // if (onBeginBarOperDelegate == null) onBeginBarOperDelegate = new BeginOperationDelegate (OnBeginBarOper);
                 // if (onEndBarOperDelegate == null) onEndBarOperDelegate = new EndOperationDelegate (OnEndBarOper);
@@ -1090,9 +1111,8 @@ namespace System.ServiceModel.Description
 
         void AddMethodParam(CodeMemberMethod cm, Type type, string name)
         {
-            cm.Parameters.Add(
-                new CodeParameterDeclarationExpression(new CodeTypeReference(type), name)
-            );
+            cm.Parameters
+                .Add(new CodeParameterDeclarationExpression(new CodeTypeReference(type), name));
         }
 
         const string ms_arrays_ns = "http://schemas.microsoft.com/2003/10/Serialization/Arrays";
@@ -1124,12 +1144,13 @@ namespace System.ServiceModel.Description
                 {
                     ExportDataContract(parts[i]);
 
-                    method.Parameters.Add(
-                        new CodeParameterDeclarationExpression(
-                            parts[i].CodeTypeReference,
-                            parts[i].Name
-                        )
-                    );
+                    method.Parameters
+                        .Add(
+                            new CodeParameterDeclarationExpression(
+                                parts[i].CodeTypeReference,
+                                parts[i].Name
+                            )
+                        );
 
                     if (return_args)
                         args[i] = new CodeArgumentReferenceExpression(parts[i].Name);

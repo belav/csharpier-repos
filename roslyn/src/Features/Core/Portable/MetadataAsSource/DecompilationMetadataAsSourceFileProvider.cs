@@ -95,8 +95,8 @@ namespace Microsoft.CodeAnalysis.MetadataAsSource
             if (useDecompiler)
             {
 #pragma warning disable SYSLIB0025  // 'SuppressIldasmAttribute' is obsolete: 'SuppressIldasmAttribute has no effect in .NET 6.0+.'
-                useDecompiler = !symbol
-                    .ContainingAssembly.GetAttributes()
+                useDecompiler = !symbol.ContainingAssembly
+                    .GetAttributes()
                     .Any(static attribute =>
                         attribute.AttributeClass?.Name == nameof(SuppressIldasmAttribute)
                         && attribute.AttributeClass.ToNameDisplayString()
@@ -201,8 +201,9 @@ namespace Microsoft.CodeAnalysis.MetadataAsSource
 
                 if (!useDecompiler)
                 {
-                    var sourceFromMetadataService =
-                        temporaryDocument.Project.Services.GetRequiredService<IMetadataAsSourceService>();
+                    var sourceFromMetadataService = temporaryDocument.Project
+                        .Services
+                        .GetRequiredService<IMetadataAsSourceService>();
                     temporaryDocument = await sourceFromMetadataService
                         .AddSourceToAsync(
                             temporaryDocument,
@@ -337,11 +338,12 @@ namespace Microsoft.CodeAnalysis.MetadataAsSource
                 try
                 {
                     var fullAssemblyName = containingAssembly.Identity.GetDisplayName();
-                    GlobalAssemblyCache.Instance.ResolvePartialName(
-                        fullAssemblyName,
-                        out assemblyLocation,
-                        preferredCulture: CultureInfo.CurrentCulture
-                    );
+                    GlobalAssemblyCache.Instance
+                        .ResolvePartialName(
+                            fullAssemblyName,
+                            out assemblyLocation,
+                            preferredCulture: CultureInfo.CurrentCulture
+                        );
                     isReferenceAssembly = assemblyLocation is null;
                 }
                 catch (IOException)
@@ -391,8 +393,8 @@ namespace Microsoft.CodeAnalysis.MetadataAsSource
         private static void AssertIsMainThread(MetadataAsSourceWorkspace workspace)
         {
             Contract.ThrowIfNull(workspace);
-            var threadingService = workspace
-                .Services.GetRequiredService<IWorkspaceThreadingServiceProvider>()
+            var threadingService = workspace.Services
+                .GetRequiredService<IWorkspaceThreadingServiceProvider>()
                 .Service;
             Contract.ThrowIfFalse(threadingService.IsOnMainThread);
         }

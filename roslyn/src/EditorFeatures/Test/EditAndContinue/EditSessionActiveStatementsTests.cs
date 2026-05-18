@@ -230,24 +230,26 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
                 "dummy_proj",
                 NoCompilationConstants.LanguageName
             );
-            solution = dummyProject.Solution.AddDocument(
-                DocumentId.CreateNewId(dummyProject.Id, NoCompilationConstants.LanguageName),
-                "a.dummy",
-                ""
-            );
+            solution = dummyProject.Solution
+                .AddDocument(
+                    DocumentId.CreateNewId(dummyProject.Id, NoCompilationConstants.LanguageName),
+                    "a.dummy",
+                    ""
+                );
             var project = solution.GetProject(projectId);
             var document1 = project.Documents.Single(d => d.Name == "test1.cs");
             var document2 = project.Documents.Single(d => d.Name == "test2.cs");
 
             var editSession = CreateEditSession(solution, activeStatements);
-            var baseActiveStatementsMap = await editSession
-                .BaseActiveStatements.GetValueAsync(CancellationToken.None)
+            var baseActiveStatementsMap = await editSession.BaseActiveStatements
+                .GetValueAsync(CancellationToken.None)
                 .ConfigureAwait(false);
 
             // Active Statements
 
-            var statements = baseActiveStatementsMap
-                .InstructionMap.Values.OrderBy(v => v.Ordinal)
+            var statements = baseActiveStatementsMap.InstructionMap
+                .Values
+                .OrderBy(v => v.Ordinal)
                 .ToArray();
             AssertEx.Equal(
                 new[]
@@ -309,7 +311,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
 
             var analyzer = solution
                 .GetProject(projectId)
-                .Services.GetRequiredService<IEditAndContinueAnalyzer>();
+                .Services
+                .GetRequiredService<IEditAndContinueAnalyzer>();
             var oldActiveStatements1 = await baseActiveStatementsMap
                 .GetOldActiveStatementsAsync(analyzer, document1, CancellationToken.None)
                 .ConfigureAwait(false);
@@ -352,7 +355,9 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
                     ),
                     newExceptionRegions: ImmutableArray.Create(
                         oldActiveStatements2[0]
-                            .ExceptionRegions.Spans.SelectAsArray(es => es.AddLineDelta(+1)),
+                            .ExceptionRegions
+                            .Spans
+                            .SelectAsArray(es => es.AddLineDelta(+1)),
                         oldActiveStatements2[1].ExceptionRegions.Spans,
                         oldActiveStatements2[2].ExceptionRegions.Spans
                     )
@@ -450,14 +455,15 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
             var document = project.Documents.Single();
 
             var editSession = CreateEditSession(solution, baseActiveStatementInfos);
-            var baseActiveStatementMap = await editSession
-                .BaseActiveStatements.GetValueAsync(CancellationToken.None)
+            var baseActiveStatementMap = await editSession.BaseActiveStatements
+                .GetValueAsync(CancellationToken.None)
                 .ConfigureAwait(false);
 
             // Active Statements
 
-            var baseActiveStatements = baseActiveStatementMap
-                .InstructionMap.Values.OrderBy(v => v.Ordinal)
+            var baseActiveStatements = baseActiveStatementMap.InstructionMap
+                .Values
+                .OrderBy(v => v.Ordinal)
                 .ToArray();
 
             AssertEx.Equal(
@@ -473,7 +479,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
 
             var analyzer = solution
                 .GetProject(project.Id)
-                .Services.GetRequiredService<IEditAndContinueAnalyzer>();
+                .Services
+                .GetRequiredService<IEditAndContinueAnalyzer>();
             var oldActiveStatements = await baseActiveStatementMap
                 .GetOldActiveStatementsAsync(analyzer, document, CancellationToken.None)
                 .ConfigureAwait(false);
@@ -485,9 +492,9 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
                     "["
                     + string.Join(
                         ", ",
-                        s.ExceptionRegions.Spans.Select(span =>
-                            $"{span} '{GetFirstLineText(span.Span, baseText)}'"
-                        )
+                        s.ExceptionRegions
+                            .Spans
+                            .Select(span => $"{span} '{GetFirstLineText(span.Span, baseText)}'")
                     )
                     + "]"
                 )
@@ -727,14 +734,15 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
                 activeStatementsPreRemap,
                 initialNonRemappableRegions
             );
-            var baseActiveStatementMap = await editSession
-                .BaseActiveStatements.GetValueAsync(CancellationToken.None)
+            var baseActiveStatementMap = await editSession.BaseActiveStatements
+                .GetValueAsync(CancellationToken.None)
                 .ConfigureAwait(false);
 
             // Active Statements
 
-            var baseActiveStatements = baseActiveStatementMap
-                .InstructionMap.Values.OrderBy(v => v.Ordinal)
+            var baseActiveStatements = baseActiveStatementMap.InstructionMap
+                .Values
+                .OrderBy(v => v.Ordinal)
                 .ToArray();
 
             // Note that the spans of AS:2 and AS:3 correspond to the base snapshot (V2).
@@ -755,7 +763,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
 
             var analyzer = solution
                 .GetProject(project.Id)
-                .Services.GetRequiredService<IEditAndContinueAnalyzer>();
+                .Services
+                .GetRequiredService<IEditAndContinueAnalyzer>();
             var oldActiveStatements = await baseActiveStatementMap
                 .GetOldActiveStatementsAsync(analyzer, document, CancellationToken.None)
                 .ConfigureAwait(false);
@@ -773,9 +782,9 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
                     "["
                     + string.Join(
                         ", ",
-                        s.ExceptionRegions.Spans.Select(span =>
-                            $"{span} '{GetFirstLineText(span.Span, sourceTextV2)}'"
-                        )
+                        s.ExceptionRegions
+                            .Spans
+                            .Select(span => $"{span} '{GetFirstLineText(span.Span, sourceTextV2)}'")
                     )
                     + "]"
                 )
@@ -800,10 +809,14 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
                     newExceptionRegions: ImmutableArray.Create(
                         oldActiveStatements[0].ExceptionRegions.Spans,
                         oldActiveStatements[1]
-                            .ExceptionRegions.Spans.SelectAsArray(es => es.AddLineDelta(-1)),
+                            .ExceptionRegions
+                            .Spans
+                            .SelectAsArray(es => es.AddLineDelta(-1)),
                         oldActiveStatements[2].ExceptionRegions.Spans,
                         oldActiveStatements[3]
-                            .ExceptionRegions.Spans.SelectAsArray(es => es.AddLineDelta(+2))
+                            .ExceptionRegions
+                            .Spans
+                            .SelectAsArray(es => es.AddLineDelta(+2))
                     )
                 )
             );
@@ -919,8 +932,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
             var document = project.Documents.Single();
 
             var editSession = CreateEditSession(solution, activeStatements);
-            var baseActiveStatementMap = await editSession
-                .BaseActiveStatements.GetValueAsync(CancellationToken.None)
+            var baseActiveStatementMap = await editSession.BaseActiveStatements
+                .GetValueAsync(CancellationToken.None)
                 .ConfigureAwait(false);
 
             // Active Statements
@@ -940,8 +953,9 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
 
             Assert.Equal(2, baseActiveStatementMap.InstructionMap.Count);
 
-            var statements = baseActiveStatementMap
-                .InstructionMap.Values.OrderBy(v => v.InstructionId.Method.Token)
+            var statements = baseActiveStatementMap.InstructionMap
+                .Values
+                .OrderBy(v => v.InstructionId.Method.Token)
                 .ToArray();
             var s = statements[0];
             Assert.Equal(0x06000001, s.InstructionId.Method.Token);
@@ -958,7 +972,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
 
             var analyzer = solution
                 .GetProject(project.Id)
-                .Services.GetRequiredService<IEditAndContinueAnalyzer>();
+                .Services
+                .GetRequiredService<IEditAndContinueAnalyzer>();
             var oldActiveStatements = await baseActiveStatementMap
                 .GetOldActiveStatementsAsync(analyzer, document, CancellationToken.None)
                 .ConfigureAwait(false);

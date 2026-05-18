@@ -244,9 +244,9 @@ namespace System.Workflow.Activities
                                 queueName
                             );
                             if (queue != null)
-                                queue.Enabled = this.SubscriptionManager.Subscriptions.ContainsKey(
-                                    queueName
-                                );
+                                queue.Enabled = this.SubscriptionManager
+                                    .Subscriptions
+                                    .ContainsKey(queueName);
                         }
                     }
                     else

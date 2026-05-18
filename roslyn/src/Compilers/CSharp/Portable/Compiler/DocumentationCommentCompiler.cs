@@ -655,8 +655,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             {
                 _cancellationToken.ThrowIfCancellationRequested();
 
-                bool reportDiagnosticsForCurrentTrivia =
-                    trivia.SyntaxTree.ReportDocumentationCommentDiagnostics();
+                bool reportDiagnosticsForCurrentTrivia = trivia.SyntaxTree
+                    .ReportDocumentationCommentDiagnostics();
 
                 if (!processedDocComment)
                 {
@@ -848,8 +848,7 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             foreach (SyntaxReference reference in symbol.DeclaringSyntaxReferences)
             {
-                DocumentationMode currDocumentationMode = reference
-                    .SyntaxTree
+                DocumentationMode currDocumentationMode = reference.SyntaxTree
                     .Options
                     .DocumentationMode;
                 maxDocumentationMode =

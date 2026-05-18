@@ -138,8 +138,8 @@ public abstract class FieldsOnlyLoadTestBase<TFixture> : IClassFixture<TFixture>
             context.ChangeTracker.LazyLoadingEnabled = false;
 
             foreach (
-                var child in parent
-                    .Children.Cast<object>()
+                var child in parent.Children
+                    .Cast<object>()
                     .Concat(parent.ChildrenAk)
                     .Concat(parent.ChildrenShadowFk)
                     .Concat(parent.ChildrenCompositeKey)

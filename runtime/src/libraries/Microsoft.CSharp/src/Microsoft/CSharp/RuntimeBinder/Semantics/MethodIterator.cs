@@ -130,8 +130,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                 ArgInfos args = _nonTrailingNamedArguments;
                 if (args != null)
                 {
-                    List<Name> paramNames = ExpressionBinder
-                        .GroupToArgsBinder.FindMostDerivedMethod(CurrentSymbol, _qualifyingType)
+                    List<Name> paramNames = ExpressionBinder.GroupToArgsBinder
+                        .FindMostDerivedMethod(CurrentSymbol, _qualifyingType)
                         .ParameterNames;
 
                     List<Expr> argExpressions = args.prgexpr;

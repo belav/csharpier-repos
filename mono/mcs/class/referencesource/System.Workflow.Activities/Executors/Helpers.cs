@@ -21,10 +21,11 @@ namespace System.Workflow.Activities
                 string ownerActivityId = correlator.OwnerActivityName;
                 Activity owner = activity.GetActivityByName(ownerActivityId);
                 if (owner == null)
-                    owner = System.Workflow.Activities.Common.Helpers.ParseActivityForBind(
-                        activity,
-                        ownerActivityId
-                    );
+                    owner = System.Workflow
+                        .Activities
+                        .Common
+                        .Helpers
+                        .ParseActivityForBind(activity, ownerActivityId);
                 if (owner == null)
                     throw new ArgumentException("ownerActivity");
 

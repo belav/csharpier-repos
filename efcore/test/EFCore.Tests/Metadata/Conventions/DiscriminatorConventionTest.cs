@@ -20,10 +20,8 @@ public class DiscriminatorConventionTest
         Assert.Null(((IReadOnlyEntityType)entityTypeBuilder.Metadata).FindDiscriminatorProperty());
         Assert.Null(entityTypeBuilder.Metadata.GetDiscriminatorValue());
 
-        var baseTypeBuilder = entityTypeBuilder.ModelBuilder.Entity(
-            typeof(EntityBase),
-            ConfigurationSource.Explicit
-        );
+        var baseTypeBuilder = entityTypeBuilder.ModelBuilder
+            .Entity(typeof(EntityBase), ConfigurationSource.Explicit);
         Assert.Same(
             entityTypeBuilder,
             entityTypeBuilder.HasBaseType(
@@ -64,10 +62,8 @@ public class DiscriminatorConventionTest
         Assert.Null(((IReadOnlyEntityType)entityTypeBuilder.Metadata).FindDiscriminatorProperty());
         Assert.Null(entityTypeBuilder.Metadata.GetDiscriminatorValue());
 
-        var baseTypeBuilder = entityTypeBuilder.ModelBuilder.Entity(
-            typeof(EntityBase),
-            ConfigurationSource.Explicit
-        );
+        var baseTypeBuilder = entityTypeBuilder.ModelBuilder
+            .Entity(typeof(EntityBase), ConfigurationSource.Explicit);
         Assert.Same(
             entityTypeBuilder,
             entityTypeBuilder.HasBaseType(
@@ -78,10 +74,8 @@ public class DiscriminatorConventionTest
 
         RunConvention(entityTypeBuilder, null);
 
-        var derivedTypeBuilder = entityTypeBuilder.ModelBuilder.Entity(
-            typeof(DerivedEntity),
-            ConfigurationSource.Explicit
-        );
+        var derivedTypeBuilder = entityTypeBuilder.ModelBuilder
+            .Entity(typeof(DerivedEntity), ConfigurationSource.Explicit);
         Assert.Same(
             derivedTypeBuilder,
             derivedTypeBuilder.HasBaseType(
@@ -91,8 +85,8 @@ public class DiscriminatorConventionTest
         );
         Assert.Same(
             derivedTypeBuilder.Metadata,
-            entityTypeBuilder
-                .ModelBuilder.Entity(typeof(DerivedEntity).FullName, ConfigurationSource.Convention)
+            entityTypeBuilder.ModelBuilder
+                .Entity(typeof(DerivedEntity).FullName, ConfigurationSource.Convention)
                 .Metadata
         );
 
@@ -142,10 +136,8 @@ public class DiscriminatorConventionTest
     {
         var entityTypeBuilder = CreateInternalEntityTypeBuilder<Entity>();
 
-        var baseTypeBuilder = entityTypeBuilder.ModelBuilder.Entity(
-            typeof(EntityBase),
-            ConfigurationSource.DataAnnotation
-        );
+        var baseTypeBuilder = entityTypeBuilder.ModelBuilder
+            .Entity(typeof(EntityBase), ConfigurationSource.DataAnnotation);
         entityTypeBuilder.HasBaseType(baseTypeBuilder.Metadata, ConfigurationSource.DataAnnotation);
         new EntityTypeBuilder(baseTypeBuilder.Metadata).HasDiscriminator("T", typeof(string));
 
@@ -170,10 +162,8 @@ public class DiscriminatorConventionTest
     {
         var entityTypeBuilder = CreateInternalEntityTypeBuilder<Entity>();
 
-        var baseTypeBuilder = entityTypeBuilder.ModelBuilder.Entity(
-            typeof(EntityBase),
-            ConfigurationSource.DataAnnotation
-        );
+        var baseTypeBuilder = entityTypeBuilder.ModelBuilder
+            .Entity(typeof(EntityBase), ConfigurationSource.DataAnnotation);
         entityTypeBuilder.HasBaseType(baseTypeBuilder.Metadata, ConfigurationSource.DataAnnotation);
         new EntityTypeBuilder(baseTypeBuilder.Metadata).HasDiscriminator("T", typeof(int));
 
@@ -200,10 +190,8 @@ public class DiscriminatorConventionTest
 
         new EntityTypeBuilder(entityTypeBuilder.Metadata).HasDiscriminator("T", typeof(int));
 
-        var baseTypeBuilder = entityTypeBuilder.ModelBuilder.Entity(
-            typeof(EntityBase),
-            ConfigurationSource.Convention
-        );
+        var baseTypeBuilder = entityTypeBuilder.ModelBuilder
+            .Entity(typeof(EntityBase), ConfigurationSource.Convention);
         entityTypeBuilder.HasBaseType(baseTypeBuilder.Metadata, ConfigurationSource.Convention);
 
         RunConvention(entityTypeBuilder, null);
@@ -240,8 +228,8 @@ public class DiscriminatorConventionTest
     }
 
     private ProviderConventionSetBuilderDependencies CreateDependencies() =>
-        InMemoryTestHelpers
-            .Instance.CreateContextServices()
+        InMemoryTestHelpers.Instance
+            .CreateContextServices()
             .GetRequiredService<ProviderConventionSetBuilderDependencies>();
 
     private class EntityBase { }

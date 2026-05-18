@@ -56,10 +56,8 @@ namespace System
         {
             if (baseAddress != null && !baseAddress.IsAbsoluteUri)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                    "baseAddress",
-                    SR.GetString(SR.UTTMustBeAbsolute)
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperArgument("baseAddress", SR.GetString(SR.UTTMustBeAbsolute));
             }
 
             this.addTrailingSlashToBaseAddress = addTrailingSlashToBaseAddress;
@@ -92,20 +90,22 @@ namespace System
                 {
                     if (this.IsReadOnly)
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new InvalidOperationException(
-                                SR.GetString(SR.UTTCannotChangeBaseAddress)
-                            )
-                        );
+                        throw DiagnosticUtility.ExceptionUtility
+                            .ThrowHelperError(
+                                new InvalidOperationException(
+                                    SR.GetString(SR.UTTCannotChangeBaseAddress)
+                                )
+                            );
                     }
                     else
                     {
                         if (!value.IsAbsoluteUri)
                         {
-                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                                "value",
-                                SR.GetString(SR.UTTBaseAddressMustBeAbsolute)
-                            );
+                            throw DiagnosticUtility.ExceptionUtility
+                                .ThrowHelperArgument(
+                                    "value",
+                                    SR.GetString(SR.UTTBaseAddressMustBeAbsolute)
+                                );
                         }
                         else
                         {
@@ -271,14 +271,15 @@ namespace System
             for (int i = 0; i < candidates.Count; i++)
             {
                 UriTemplateTableMatchCandidate candidate = candidates[i];
-                UriTemplateMatch match = candidate.Template.CreateUriTemplateMatch(
-                    this.originalUncanonicalizedBaseAddress,
-                    uri,
-                    candidate.Data,
-                    candidate.SegmentsCount,
-                    relativeSegments,
-                    queryParameters
-                );
+                UriTemplateMatch match = candidate.Template
+                    .CreateUriTemplateMatch(
+                        this.originalUncanonicalizedBaseAddress,
+                        uri,
+                        candidate.Data,
+                        candidate.SegmentsCount,
+                        relativeSegments,
+                        queryParameters
+                    );
                 actualResults.Add(match);
             }
             return actualResults;
@@ -295,9 +296,10 @@ namespace System
             {
                 return c[0];
             }
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                new UriTemplateMatchException(SR.GetString(SR.UTTMultipleMatches))
-            );
+            throw DiagnosticUtility.ExceptionUtility
+                .ThrowHelperError(
+                    new UriTemplateMatchException(SR.GetString(SR.UTTMultipleMatches))
+                );
         }
 
         [SuppressMessage(
@@ -311,10 +313,8 @@ namespace System
             {
                 if (
                     !list[i]
-                        .Template.IsPathPartiallyEquivalentAt(
-                            list[i + 1].Template,
-                            list[i].SegmentsCount
-                        )
+                        .Template
+                        .IsPathPartiallyEquivalentAt(list[i + 1].Template, list[i].SegmentsCount)
                 )
                 {
                     return false;
@@ -558,16 +558,18 @@ namespace System
         {
             if (this.baseAddress == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(SR.GetString(SR.UTTBaseAddressNotSet))
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(SR.GetString(SR.UTTBaseAddressNotSet))
+                    );
             }
             this.numSegmentsInBaseAddress = this.baseAddress.Segments.Length;
             if (this.templates.Count == 0)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(SR.GetString(SR.UTTEmptyKeyValuePairs))
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(SR.GetString(SR.UTTEmptyKeyValuePairs))
+                    );
             }
             // build the trie and
             // validate that forall Uri u, at most one UriTemplate is a best match for u
@@ -689,17 +691,16 @@ namespace System
             {
                 if (template == null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                        argName,
-                        SR.GetString(SR.UTTNullTemplateKey)
-                    );
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperArgument(argName, SR.GetString(SR.UTTNullTemplateKey));
                 }
                 if (template.IgnoreTrailingSlash)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                        argName,
-                        SR.GetString(SR.UTTInvalidTemplateKey, template)
-                    );
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperArgument(
+                            argName,
+                            SR.GetString(SR.UTTInvalidTemplateKey, template)
+                        );
                 }
             }
         }

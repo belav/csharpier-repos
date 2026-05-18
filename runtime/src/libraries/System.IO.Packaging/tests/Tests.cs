@@ -1813,8 +1813,8 @@ namespace System.IO.Packaging.Tests
                     using (var partStream = mainDocumentPart.GetStream(FileMode.Open))
                     {
                         xdMain = XDocument.Load(partStream);
-                        var lastPara = xdMain
-                            .Root.Elements(W + "body")
+                        var lastPara = xdMain.Root
+                            .Elements(W + "body")
                             .Elements(W + "p")
                             .LastOrDefault();
                         lastPara.AddAfterSelf(
@@ -2828,8 +2828,8 @@ namespace System.IO.Packaging.Tests
                 using (var partStream = mainDocumentPart.GetStream())
                 {
                     xdMain = XDocument.Load(partStream);
-                    var lastPara = xdMain
-                        .Root.Elements(W + "body")
+                    var lastPara = xdMain.Root
+                        .Elements(W + "body")
                         .Elements(W + "p")
                         .LastOrDefault();
                     lastPara.AddAfterSelf(

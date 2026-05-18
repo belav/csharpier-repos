@@ -54,9 +54,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml.LanguageServer.Handler
             }
 
             var text = await document.GetValueTextAsync(cancellationToken).ConfigureAwait(false);
-            var offset = text.Lines.GetPosition(
-                ProtocolConversions.PositionToLinePosition(request.Position)
-            );
+            var offset = text.Lines
+                .GetPosition(ProtocolConversions.PositionToLinePosition(request.Position));
             var result = await insertService
                 .GetAutoInsertAsync(document, request.Character[0], offset, cancellationToken)
                 .ConfigureAwait(false);

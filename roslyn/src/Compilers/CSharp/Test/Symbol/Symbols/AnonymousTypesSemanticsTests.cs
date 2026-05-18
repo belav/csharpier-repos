@@ -888,17 +888,15 @@ class ClassA
             var info0 = GetAnonymousTypeInfoSummary(
                 data,
                 0,
-                data.Tree.FindNodeOrTokenByKind(
-                    SyntaxKind.NewKeyword,
-                    NumberOfNewKeywords(LINQ) + 2
-                ).Span,
+                data.Tree
+                    .FindNodeOrTokenByKind(SyntaxKind.NewKeyword, NumberOfNewKeywords(LINQ) + 2)
+                    .Span,
                 1,
                 2
             );
 
-            var info1 = data.Model.GetSymbolInfo(
-                ((AnonymousObjectMemberDeclaratorSyntax)data.Nodes[1]).Expression
-            );
+            var info1 = data.Model
+                .GetSymbolInfo(((AnonymousObjectMemberDeclaratorSyntax)data.Nodes[1]).Expression);
             Assert.NotNull(info1.Symbol);
             Assert.Equal(SymbolKind.RangeVariable, info1.Symbol.Kind);
             Assert.Equal("x", info1.Symbol.ToDisplayString());
@@ -975,10 +973,9 @@ class ClassA
             var info0 = GetAnonymousTypeInfoSummary(
                 data,
                 0,
-                data.Tree.FindNodeOrTokenByKind(
-                    SyntaxKind.NewKeyword,
-                    NumberOfNewKeywords(LINQ) + 2
-                ).Span,
+                data.Tree
+                    .FindNodeOrTokenByKind(SyntaxKind.NewKeyword, NumberOfNewKeywords(LINQ) + 2)
+                    .Span,
                 1,
                 2
             );
@@ -988,16 +985,14 @@ class ClassA
                 info0.Type.ToTestDisplayString()
             );
 
-            var info1 = data.Model.GetSymbolInfo(
-                ((AnonymousObjectMemberDeclaratorSyntax)data.Nodes[1]).Expression
-            );
+            var info1 = data.Model
+                .GetSymbolInfo(((AnonymousObjectMemberDeclaratorSyntax)data.Nodes[1]).Expression);
             Assert.NotNull(info1.Symbol);
             Assert.Equal(SymbolKind.RangeVariable, info1.Symbol.Kind);
             Assert.Equal("x", info1.Symbol.ToDisplayString());
 
-            var info2 = data.Model.GetSymbolInfo(
-                ((AnonymousObjectMemberDeclaratorSyntax)data.Nodes[2]).Expression
-            );
+            var info2 = data.Model
+                .GetSymbolInfo(((AnonymousObjectMemberDeclaratorSyntax)data.Nodes[2]).Expression);
             Assert.NotNull(info2.Symbol);
             Assert.Equal(SymbolKind.RangeVariable, info2.Symbol.Kind);
             Assert.Equal("y", info2.Symbol.ToDisplayString());
@@ -1796,8 +1791,8 @@ public class ClassA
             );
 
             var pos = data.Nodes[0].Span.End;
-            var syms = data
-                .Model.LookupSymbols(pos, container: info0.Type)
+            var syms = data.Model
+                .LookupSymbols(pos, container: info0.Type)
                 .Select(x => x.ToTestDisplayString())
                 .OrderBy(x => x)
                 .ToArray();
@@ -1834,8 +1829,8 @@ public class ClassA
             Assert.Equal("<empty anonymous type>", info0.Type.ToTestDisplayString());
 
             pos = data.Nodes[3].Span.End;
-            syms = data
-                .Model.LookupSymbols(pos, container: info0.Type)
+            syms = data.Model
+                .LookupSymbols(pos, container: info0.Type)
                 .Select(x => x.ToTestDisplayString())
                 .OrderBy(x => x)
                 .ToArray();

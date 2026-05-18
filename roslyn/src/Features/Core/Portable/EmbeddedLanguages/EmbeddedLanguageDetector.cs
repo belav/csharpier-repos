@@ -189,14 +189,15 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages
             if (type == null)
                 return false;
 
-            var iformattable = type.AllInterfaces.FirstOrDefault(t =>
-                t
-                    is {
-                        Name: nameof(IFormattable),
-                        ContainingNamespace:
-                        { Name: nameof(System), ContainingNamespace.IsGlobalNamespace: true }
-                    }
-            );
+            var iformattable = type.AllInterfaces
+                .FirstOrDefault(t =>
+                    t
+                        is {
+                            Name: nameof(IFormattable),
+                            ContainingNamespace:
+                            { Name: nameof(System), ContainingNamespace.IsGlobalNamespace: true }
+                        }
+                );
             if (iformattable == null)
                 return false;
 
@@ -364,22 +365,24 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages
         )
         {
             // First, see if this is an `X = "..."` argument that is binding to a field/prop on the attribute.
-            var fieldOrProperty = Info.SemanticFacts.FindFieldOrPropertyForAttributeArgument(
-                semanticModel,
-                argument,
-                cancellationToken
-            );
+            var fieldOrProperty = Info.SemanticFacts
+                .FindFieldOrPropertyForAttributeArgument(
+                    semanticModel,
+                    argument,
+                    cancellationToken
+                );
             if (fieldOrProperty != null)
                 return HasMatchingStringSyntaxAttribute(fieldOrProperty, out identifier);
 
             // Otherwise, see if it's a normal named/position argument to the attribute.
-            var parameter = Info.SemanticFacts.FindParameterForAttributeArgument(
-                semanticModel,
-                argument,
-                allowUncertainCandidates: true,
-                allowParams: true,
-                cancellationToken
-            );
+            var parameter = Info.SemanticFacts
+                .FindParameterForAttributeArgument(
+                    semanticModel,
+                    argument,
+                    allowUncertainCandidates: true,
+                    allowParams: true,
+                    cancellationToken
+                );
             return HasMatchingStringSyntaxAttribute(parameter, out identifier);
         }
 
@@ -390,21 +393,19 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages
             [NotNullWhen(true)] out string? identifier
         )
         {
-            var fieldOrProperty = Info.SemanticFacts.FindFieldOrPropertyForArgument(
-                semanticModel,
-                argument,
-                cancellationToken
-            );
+            var fieldOrProperty = Info.SemanticFacts
+                .FindFieldOrPropertyForArgument(semanticModel, argument, cancellationToken);
             if (fieldOrProperty != null)
                 return HasMatchingStringSyntaxAttribute(fieldOrProperty, out identifier);
 
-            var parameter = Info.SemanticFacts.FindParameterForArgument(
-                semanticModel,
-                argument,
-                allowUncertainCandidates: true,
-                allowParams: true,
-                cancellationToken
-            );
+            var parameter = Info.SemanticFacts
+                .FindParameterForArgument(
+                    semanticModel,
+                    argument,
+                    allowUncertainCandidates: true,
+                    allowParams: true,
+                    cancellationToken
+                );
             return HasMatchingStringSyntaxAttribute(parameter, out identifier);
         }
 

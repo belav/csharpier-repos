@@ -114,11 +114,8 @@ namespace System.Net.Sockets
             this.useOverlappedIO =
                 (socketInformation.Options & SocketInformationOptions.UseOnlyOverlappedIO) != 0;
 
-            var result = Mono.DataConverter.Unpack(
-                "iiiil",
-                socketInformation.ProtocolInformation,
-                0
-            );
+            var result = Mono.DataConverter
+                .Unpack("iiiil", socketInformation.ProtocolInformation, 0);
 
             this.addressFamily = (AddressFamily)(int)result[0];
             this.socketType = (SocketType)(int)result[1];
@@ -1519,10 +1516,8 @@ namespace System.Net.Sockets
             try
             {
                 int error = (int)
-                    sockares.socket.GetSocketOption(
-                        SocketOptionLevel.Socket,
-                        SocketOptionName.Error
-                    );
+                    sockares.socket
+                        .GetSocketOption(SocketOptionLevel.Socket, SocketOptionName.Error);
 
                 if (error == 0)
                 {
@@ -2544,14 +2539,15 @@ namespace System.Net.Sockets
             try
             {
                 SocketError errorCode;
-                total = sockares.socket.ReceiveFrom(
-                    sockares.Buffer,
-                    sockares.Offset,
-                    sockares.Size,
-                    sockares.SockFlags,
-                    ref sockares.EndPoint,
-                    out errorCode
-                );
+                total = sockares.socket
+                    .ReceiveFrom(
+                        sockares.Buffer,
+                        sockares.Offset,
+                        sockares.Size,
+                        sockares.SockFlags,
+                        ref sockares.EndPoint,
+                        out errorCode
+                    );
 
                 if (errorCode != SocketError.Success)
                 {
@@ -3413,13 +3409,14 @@ namespace System.Net.Sockets
             int total = 0;
             try
             {
-                total = sockares.socket.SendTo(
-                    sockares.Buffer,
-                    sockares.Offset,
-                    sockares.Size,
-                    sockares.SockFlags,
-                    sockares.EndPoint
-                );
+                total = sockares.socket
+                    .SendTo(
+                        sockares.Buffer,
+                        sockares.Offset,
+                        sockares.Size,
+                        sockares.SockFlags,
+                        sockares.EndPoint
+                    );
 
                 if (sockares.error == 0)
                 {
@@ -3732,14 +3729,15 @@ namespace System.Net.Sockets
             )
                 throw MonoIO.GetException(error);
 
-            si.ProtocolInformation = Mono.DataConverter.Pack(
-                "iiiil",
-                (int)addressFamily,
-                (int)socketType,
-                (int)protocolType,
-                is_bound ? 1 : 0,
-                (long)duplicateHandle
-            );
+            si.ProtocolInformation = Mono.DataConverter
+                .Pack(
+                    "iiiil",
+                    (int)addressFamily,
+                    (int)socketType,
+                    (int)protocolType,
+                    is_bound ? 1 : 0,
+                    (long)duplicateHandle
+                );
             m_Handle = null;
 
             return si;

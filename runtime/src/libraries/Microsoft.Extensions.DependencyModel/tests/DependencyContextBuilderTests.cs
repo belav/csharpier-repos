@@ -206,9 +206,11 @@ namespace Microsoft.Extensions.DependencyModel.Tests
             lib.Serviceable.Should().BeTrue();
             lib.Hash.Should().Be("sha512-Hash");
             lib.Version.Should().Be("1.2.3");
-            lib.Dependencies.Should()
+            lib.Dependencies
+                .Should()
                 .OnlyContain(l => l.Name == "System.Collections" && l.Version == "3.3.3");
-            lib.ResourceAssemblies.Should()
+            lib.ResourceAssemblies
+                .Should()
                 .OnlyContain(l => l.Path == "en-US/Pack.Age.resources.dll" && l.Locale == "en-US");
 
             // When ProjectModel supports path and hashPath in the lock file library, this should assert the values
@@ -216,25 +218,29 @@ namespace Microsoft.Extensions.DependencyModel.Tests
             lib.Path.Should().BeNull();
             lib.HashPath.Should().BeNull();
 
-            lib.RuntimeAssemblyGroups.GetDefaultAssets()
+            lib.RuntimeAssemblyGroups
+                .GetDefaultAssets()
                 .Should()
                 .OnlyContain(l => l == "lib/Pack.Age.dll");
-            lib.RuntimeAssemblyGroups.GetRuntimeAssets("win8-x64")
+            lib.RuntimeAssemblyGroups
+                .GetRuntimeAssets("win8-x64")
                 .Should()
                 .OnlyContain(l => l == "win8-x64/Pack.Age.dll");
-            lib.NativeLibraryGroups.GetRuntimeAssets("win8-x64")
+            lib.NativeLibraryGroups
+                .GetRuntimeAssets("win8-x64")
                 .Should()
                 .OnlyContain(l => l == "win8-x64/Pack.Age.native.dll");
 
-            var asm = context
-                .RuntimeLibraries.Should()
+            var asm = context.RuntimeLibraries
+                .Should()
                 .Contain(l => l.Name == "System.Collections")
                 .Subject;
             asm.Type.Should().Be("referenceassembly");
             asm.Version.Should().Be("3.3.3");
             asm.Hash.Should().BeEmpty();
             asm.Dependencies.Should().BeEmpty();
-            asm.RuntimeAssemblyGroups.GetDefaultAssets()
+            asm.RuntimeAssemblyGroups
+                .GetDefaultAssets()
                 .Should()
                 .OnlyContain(l => l == "System.Collections.dll");
             asm.Path.Should().BeNull();
@@ -280,7 +286,8 @@ namespace Microsoft.Extensions.DependencyModel.Tests
 
             var lib = context.RuntimeLibraries.Should().Contain(l => l.Name == "Pack.Age").Subject;
             lib.Dependencies.Should().HaveCount(1);
-            lib.Dependencies.Should()
+            lib.Dependencies
+                .Should()
                 .OnlyContain(l => l.Name == "System.Collections" && l.Version == "2.0.0");
         }
 
@@ -333,7 +340,8 @@ namespace Microsoft.Extensions.DependencyModel.Tests
             lib.Serviceable.Should().BeTrue();
             lib.Hash.Should().Be("sha512-Hash");
             lib.Version.Should().Be("1.2.3");
-            lib.Dependencies.Should()
+            lib.Dependencies
+                .Should()
                 .OnlyContain(l => l.Name == "System.Collections" && l.Version == "3.3.3");
             lib.Assemblies.Should().OnlyContain(a => a == "lib/Pack.Age.dll");
 
@@ -342,8 +350,8 @@ namespace Microsoft.Extensions.DependencyModel.Tests
             lib.Path.Should().BeNull();
             lib.HashPath.Should().BeNull();
 
-            var asm = context
-                .CompileLibraries.Should()
+            var asm = context.CompileLibraries
+                .Should()
                 .Contain(l => l.Name == "System.Collections")
                 .Subject;
             asm.Type.Should().Be("referenceassembly");
@@ -377,7 +385,8 @@ namespace Microsoft.Extensions.DependencyModel.Tests
             context.RuntimeLibraries.Should().HaveCount(1);
 
             var lib = context.RuntimeLibraries.Should().Contain(l => l.Name == "Pack.Age").Subject;
-            lib.ResourceAssemblies.Should()
+            lib.ResourceAssemblies
+                .Should()
                 .OnlyContain(l => l.Locale == "en-US" && l.Path == "resources/en-US/Pack.Age.dll");
         }
 
@@ -408,11 +417,12 @@ namespace Microsoft.Extensions.DependencyModel.Tests
                 }
             );
 
-            var asm = context
-                .CompileLibraries.Should()
+            var asm = context.CompileLibraries
+                .Should()
                 .Contain(l => l.Name == "System.Collections")
                 .Subject;
-            asm.Assemblies.Should()
+            asm.Assemblies
+                .Should()
                 .OnlyContain(a => a == Path.Combine("sub", "System.Collections.dll"));
         }
 

@@ -90,9 +90,8 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                 ),
                 enforceDefEncoding: true,
                 enforceOwningType: moduleToken.Module is EcmaModule
-                    ? factory.CompilationModuleGroup.EnforceOwningType(
-                        (EcmaModule)moduleToken.Module
-                    )
+                    ? factory.CompilationModuleGroup
+                        .EnforceOwningType((EcmaModule)moduleToken.Module)
                     : true,
                 factory.SignatureContext,
                 isInstantiatingStub: false

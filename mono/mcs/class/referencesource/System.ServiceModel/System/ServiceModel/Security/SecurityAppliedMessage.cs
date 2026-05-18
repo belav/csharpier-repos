@@ -79,11 +79,12 @@ namespace System.ServiceModel.Security
         {
             if (this.delayedApplicationHandled)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(
-                        SR.GetString(SR.DelayedSecurityApplicationAlreadyCompleted)
-                    )
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(SR.DelayedSecurityApplicationAlreadyCompleted)
+                        )
+                    );
             }
             this.delayedApplicationHandled = true;
         }
@@ -148,9 +149,8 @@ namespace System.ServiceModel.Security
                     }
                     return;
                 default:
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        CreateBadStateException("OnWriteStartBody")
-                    );
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperError(CreateBadStateException("OnWriteStartBody"));
             }
         }
 
@@ -172,15 +172,12 @@ namespace System.ServiceModel.Security
                     return;
                 case BodyState.Encrypted:
                 case BodyState.SignedThenEncrypted:
-                    this.encryptedBodyContent.WriteTo(
-                        writer,
-                        ServiceModelDictionaryManager.Instance
-                    );
+                    this.encryptedBodyContent
+                        .WriteTo(writer, ServiceModelDictionaryManager.Instance);
                     break;
                 default:
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        CreateBadStateException("OnWriteBodyContents")
-                    );
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperError(CreateBadStateException("OnWriteBodyContents"));
             }
         }
 
@@ -285,10 +282,11 @@ namespace System.ServiceModel.Security
 
         void SetBodyId()
         {
-            this.bodyId = this.InnerMessage.GetBodyAttribute(
-                UtilityStrings.IdAttribute,
-                this.securityHeader.StandardsManager.IdManager.DefaultIdNamespaceUri
-            );
+            this.bodyId = this.InnerMessage
+                .GetBodyAttribute(
+                    UtilityStrings.IdAttribute,
+                    this.securityHeader.StandardsManager.IdManager.DefaultIdNamespaceUri
+                );
             if (this.bodyId == null)
             {
                 this.bodyId = this.securityHeader.GenerateId();
@@ -339,9 +337,8 @@ namespace System.ServiceModel.Security
             );
 
             this.fullBodyBuffer = new XmlBuffer(int.MaxValue);
-            XmlDictionaryWriter canonicalWriter = this.fullBodyBuffer.OpenSection(
-                XmlDictionaryReaderQuotas.Max
-            );
+            XmlDictionaryWriter canonicalWriter = this.fullBodyBuffer
+                .OpenSection(XmlDictionaryReaderQuotas.Max);
 
             canonicalWriter.StartCanonicalization(canonicalStream, false, null);
             WriteStartInnerMessageWithId(canonicalWriter);
@@ -361,9 +358,8 @@ namespace System.ServiceModel.Security
             SetBodyId();
 
             this.fullBodyBuffer = new XmlBuffer(int.MaxValue);
-            XmlDictionaryWriter canonicalWriter = this.fullBodyBuffer.OpenSection(
-                XmlDictionaryReaderQuotas.Max
-            );
+            XmlDictionaryWriter canonicalWriter = this.fullBodyBuffer
+                .OpenSection(XmlDictionaryReaderQuotas.Max);
             canonicalWriter.StartCanonicalization(canonicalStream, false, null);
             WriteInnerMessageWithId(canonicalWriter);
             canonicalWriter.EndCanonicalization();
@@ -512,10 +508,10 @@ namespace System.ServiceModel.Security
             this.InnerMessage.WriteStartBody(writer);
             if (this.bodyIdInserted)
             {
-                this.securityHeader.StandardsManager.IdManager.WriteIdAttribute(
-                    writer,
-                    this.bodyId
-                );
+                this.securityHeader
+                    .StandardsManager
+                    .IdManager
+                    .WriteIdAttribute(writer, this.bodyId);
             }
         }
 

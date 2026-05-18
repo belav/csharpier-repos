@@ -25,12 +25,13 @@ namespace Microsoft.Interop
 
         public void Initialize(IncrementalGeneratorInitializationContext context)
         {
-            var unsafeCodeIsEnabled = context.CompilationProvider.Select(
-                (comp, ct) => comp.Options is CSharpCompilationOptions { AllowUnsafe: true }
-            ); // Unsafe code enabled
+            var unsafeCodeIsEnabled = context.CompilationProvider
+                .Select(
+                    (comp, ct) => comp.Options is CSharpCompilationOptions { AllowUnsafe: true }
+                ); // Unsafe code enabled
             // Get all types with the [GeneratedComClassAttribute] attribute.
-            var attributedClassesOrDiagnostics = context
-                .SyntaxProvider.ForAttributeWithMetadataName(
+            var attributedClassesOrDiagnostics = context.SyntaxProvider
+                .ForAttributeWithMetadataName(
                     TypeNames.GeneratedComClassAttribute,
                     static (node, ct) => node is ClassDeclarationSyntax,
                     static (context, ct) => context
@@ -81,9 +82,8 @@ namespace Microsoft.Interop
                                         generatedComInterfaceAttribute
                                     );
                                 if (
-                                    attributeData.Options.HasFlag(
-                                        ComInterfaceOptions.ManagedObjectWrapper
-                                    )
+                                    attributeData.Options
+                                        .HasFlag(ComInterfaceOptions.ManagedObjectWrapper)
                                 )
                                 {
                                     names.Add(iface.ToDisplayString());
@@ -257,9 +257,8 @@ namespace Microsoft.Interop
                     AssignmentStatement(
                         IdentifierName(detailsTempLocal),
                         MethodInvocation(
-                            TypeSyntaxes.StrategyBasedComWrappers.Dot(
-                                IdentifierName("DefaultIUnknownInterfaceDetailsStrategy")
-                            ),
+                            TypeSyntaxes.StrategyBasedComWrappers
+                                .Dot(IdentifierName("DefaultIUnknownInterfaceDetailsStrategy")),
                             IdentifierName("GetIUnknownDerivedDetails"),
                             Argument(
                                 MemberAccessExpression(

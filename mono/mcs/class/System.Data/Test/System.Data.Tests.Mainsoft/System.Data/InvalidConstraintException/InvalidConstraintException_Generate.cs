@@ -81,9 +81,8 @@ namespace tests.system_data_dll.System_Data
             ds.Tables.Add(dtChild);
             ds.Tables.Add(dtParent);
 
-            ds.Relations.Add(
-                new DataRelation("myRelation", dtParent.Columns[0], dtChild.Columns[0], true)
-            );
+            ds.Relations
+                .Add(new DataRelation("myRelation", dtParent.Columns[0], dtChild.Columns[0], true));
 
             //update to value which is not exists in Parent table
             try
@@ -116,9 +115,10 @@ namespace tests.system_data_dll.System_Data
                 BeginCase("InvalidConstraintException - Add Relation Child");
                 try
                 {
-                    ds.Relations.Add(
-                        new DataRelation("test", dtParent.Columns[2], dtChild.Columns[0], true)
-                    );
+                    ds.Relations
+                        .Add(
+                            new DataRelation("test", dtParent.Columns[2], dtChild.Columns[0], true)
+                        );
                 }
                 catch (InvalidConstraintException ex)
                 {
@@ -189,14 +189,15 @@ namespace tests.system_data_dll.System_Data
                 BeginCase("InvalidConstraintException - Add relation with two DataSets");
                 try
                 {
-                    ds.Relations.Add(
-                        new DataRelation(
-                            "myRelation",
-                            ds1.Tables[0].Columns[0],
-                            dtChild.Columns[0],
-                            true
-                        )
-                    );
+                    ds.Relations
+                        .Add(
+                            new DataRelation(
+                                "myRelation",
+                                ds1.Tables[0].Columns[0],
+                                dtChild.Columns[0],
+                                true
+                            )
+                        );
                 }
                 catch (InvalidConstraintException ex)
                 {

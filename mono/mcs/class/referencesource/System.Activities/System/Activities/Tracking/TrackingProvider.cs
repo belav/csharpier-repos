@@ -323,8 +323,8 @@ namespace System.Activities.Tracking
                         TrackingParticipant participant = this.provider.trackingParticipants[
                             this.currentParticipant
                         ];
-                        RuntimeTrackingProfile runtimeProfile =
-                            this.provider.GetRuntimeTrackingProfile(participant);
+                        RuntimeTrackingProfile runtimeProfile = this.provider
+                            .GetRuntimeTrackingProfile(participant);
 
                         if (this.provider.pendingTrackingRecords != null)
                         {

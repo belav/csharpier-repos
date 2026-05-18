@@ -83,18 +83,20 @@ public static class OpenIdConnectExtensions
         Action<OpenIdConnectOptions> configureOptions
     )
     {
-        builder.Services.TryAddEnumerable(
-            ServiceDescriptor.Singleton<
-                IConfigureOptions<OpenIdConnectOptions>,
-                OpenIdConnectConfigureOptions
-            >()
-        );
-        builder.Services.TryAddEnumerable(
-            ServiceDescriptor.Singleton<
-                IPostConfigureOptions<OpenIdConnectOptions>,
-                OpenIdConnectPostConfigureOptions
-            >()
-        );
+        builder.Services
+            .TryAddEnumerable(
+                ServiceDescriptor.Singleton<
+                    IConfigureOptions<OpenIdConnectOptions>,
+                    OpenIdConnectConfigureOptions
+                >()
+            );
+        builder.Services
+            .TryAddEnumerable(
+                ServiceDescriptor.Singleton<
+                    IPostConfigureOptions<OpenIdConnectOptions>,
+                    OpenIdConnectPostConfigureOptions
+                >()
+            );
         return builder.AddRemoteScheme<OpenIdConnectOptions, OpenIdConnectHandler>(
             authenticationScheme,
             displayName,

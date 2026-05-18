@@ -52,9 +52,8 @@ namespace System.ServiceModel.Security.Tokens
 #pragma warning suppress 56503 // Property does not make sense for Derived Key tokens.
             get
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new NotImplementedException()
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(new NotImplementedException());
             }
         }
 
@@ -63,9 +62,8 @@ namespace System.ServiceModel.Security.Tokens
 #pragma warning suppress 56503 // Property does not make sense for Derived Key tokens.
             get
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new NotImplementedException()
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(new NotImplementedException());
             }
         }
 

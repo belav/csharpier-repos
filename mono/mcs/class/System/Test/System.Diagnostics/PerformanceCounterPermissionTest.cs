@@ -230,13 +230,14 @@ namespace MonoTests.System.Diagnostics
                 pcp1.Intersect(pcp2);
             Assert.IsNull(result, "Empty N Empty");
             // 2. None N Entry
-            pcp2.PermissionEntries.Add(
-                new PerformanceCounterPermissionEntry(
-                    PerformanceCounterPermissionAccess.None,
-                    "localhost",
-                    String.Empty
-                )
-            );
+            pcp2.PermissionEntries
+                .Add(
+                    new PerformanceCounterPermissionEntry(
+                        PerformanceCounterPermissionAccess.None,
+                        "localhost",
+                        String.Empty
+                    )
+                );
             result = (PerformanceCounterPermission)pcp1.Intersect(pcp2);
             Assert.IsNull(result, "Empty N Entry");
             // 3. Entry N None
@@ -277,13 +278,14 @@ namespace MonoTests.System.Diagnostics
             );
 
             // 4. Unrestricted N Entry
-            pcp2.PermissionEntries.Add(
-                new PerformanceCounterPermissionEntry(
-                    PerformanceCounterPermissionAccess.None,
-                    "localhost",
-                    String.Empty
-                )
-            );
+            pcp2.PermissionEntries
+                .Add(
+                    new PerformanceCounterPermissionEntry(
+                        PerformanceCounterPermissionAccess.None,
+                        "localhost",
+                        String.Empty
+                    )
+                );
             result = (PerformanceCounterPermission)pcp1.Intersect(pcp2);
             Assert.IsFalse(result.IsUnrestricted(), "(Unrestricted N Entry).IsUnrestricted");
             Assert.AreEqual(1, result.PermissionEntries.Count, "(Unrestricted N Entry).Count");
@@ -294,13 +296,14 @@ namespace MonoTests.System.Diagnostics
             Assert.AreEqual(1, result.PermissionEntries.Count, "(Entry N Unrestricted).Count");
 
             // 6. Unrestricted N Unrestricted
-            pcp1.PermissionEntries.Add(
-                new PerformanceCounterPermissionEntry(
-                    PerformanceCounterPermissionAccess.None,
-                    "localhost",
-                    String.Empty
-                )
-            );
+            pcp1.PermissionEntries
+                .Add(
+                    new PerformanceCounterPermissionEntry(
+                        PerformanceCounterPermissionAccess.None,
+                        "localhost",
+                        String.Empty
+                    )
+                );
             result = (PerformanceCounterPermission)pcp1.Intersect(pcp1);
             Assert.IsTrue(result.IsUnrestricted(), "(Unrestricted N Unrestricted).IsUnrestricted");
             Assert.AreEqual(
@@ -343,9 +346,10 @@ namespace MonoTests.System.Diagnostics
                 PerformanceCounterPermission pcp2 = new PerformanceCounterPermission(
                     PermissionState.None
                 );
-                pcp2.PermissionEntries.Add(
-                    new PerformanceCounterPermissionEntry(pcpa, pcpa.ToString(), String.Empty)
-                );
+                pcp2.PermissionEntries
+                    .Add(
+                        new PerformanceCounterPermissionEntry(pcpa, pcpa.ToString(), String.Empty)
+                    );
                 Assert.IsTrue(pcp1.IsSubsetOf(pcp2), "target " + pcpa.ToString());
                 Assert.IsFalse(pcp2.IsSubsetOf(pcp1), "source " + pcpa.ToString());
             }
@@ -359,9 +363,10 @@ namespace MonoTests.System.Diagnostics
                 PerformanceCounterPermission pcp = new PerformanceCounterPermission(
                     PermissionState.None
                 );
-                pcp.PermissionEntries.Add(
-                    new PerformanceCounterPermissionEntry(pcpa, pcpa.ToString(), String.Empty)
-                );
+                pcp.PermissionEntries
+                    .Add(
+                        new PerformanceCounterPermissionEntry(pcpa, pcpa.ToString(), String.Empty)
+                    );
                 Assert.IsTrue(pcp.IsSubsetOf(pcp), pcpa.ToString());
             }
         }
@@ -380,9 +385,10 @@ namespace MonoTests.System.Diagnostics
                 PerformanceCounterPermission pcp2 = new PerformanceCounterPermission(
                     PermissionState.None
                 );
-                pcp2.PermissionEntries.Add(
-                    new PerformanceCounterPermissionEntry(pcpa, pcpa.ToString(), String.Empty)
-                );
+                pcp2.PermissionEntries
+                    .Add(
+                        new PerformanceCounterPermissionEntry(pcpa, pcpa.ToString(), String.Empty)
+                    );
                 Assert.IsFalse(pcp1.IsSubsetOf(pcp2), "target " + pcpa.ToString());
                 Assert.IsTrue(pcp2.IsSubsetOf(pcp1), "source " + pcpa.ToString());
             }
@@ -408,13 +414,14 @@ namespace MonoTests.System.Diagnostics
             PerformanceCounterPermission pcp = new PerformanceCounterPermission(
                 PermissionState.None
             );
-            pcp.PermissionEntries.Add(
-                new PerformanceCounterPermissionEntry(
-                    PerformanceCounterPermissionAccess.None,
-                    "localhost",
-                    String.Empty
-                )
-            );
+            pcp.PermissionEntries
+                .Add(
+                    new PerformanceCounterPermissionEntry(
+                        PerformanceCounterPermissionAccess.None,
+                        "localhost",
+                        String.Empty
+                    )
+                );
             // Union with null is a simple copy
             PerformanceCounterPermission union = (PerformanceCounterPermission)pcp.Union(null);
             Assert.IsNotNull(pcp.PermissionEntries.Count, "Count");
@@ -431,9 +438,10 @@ namespace MonoTests.System.Diagnostics
                 PerformanceCounterPermission pcp2 = new PerformanceCounterPermission(
                     PermissionState.None
                 );
-                pcp2.PermissionEntries.Add(
-                    new PerformanceCounterPermissionEntry(pcpa, pcpa.ToString(), String.Empty)
-                );
+                pcp2.PermissionEntries
+                    .Add(
+                        new PerformanceCounterPermissionEntry(pcpa, pcpa.ToString(), String.Empty)
+                    );
                 PerformanceCounterPermission union = (PerformanceCounterPermission)pcp1.Union(pcp2);
                 Assert.IsFalse(union.IsUnrestricted(), "target.IsUnrestricted " + pcpa.ToString());
                 Assert.AreEqual(
@@ -460,9 +468,10 @@ namespace MonoTests.System.Diagnostics
                 PerformanceCounterPermission pcp = new PerformanceCounterPermission(
                     PermissionState.None
                 );
-                pcp.PermissionEntries.Add(
-                    new PerformanceCounterPermissionEntry(pcpa, pcpa.ToString(), String.Empty)
-                );
+                pcp.PermissionEntries
+                    .Add(
+                        new PerformanceCounterPermissionEntry(pcpa, pcpa.ToString(), String.Empty)
+                    );
                 PerformanceCounterPermission union = (PerformanceCounterPermission)pcp.Union(pcp);
                 Assert.IsFalse(union.IsUnrestricted(), "IsUnrestricted " + pcpa.ToString());
                 Assert.AreEqual(1, union.PermissionEntries.Count, "Count " + pcpa.ToString());
@@ -481,9 +490,10 @@ namespace MonoTests.System.Diagnostics
                 PerformanceCounterPermission pcp2 = new PerformanceCounterPermission(
                     PermissionState.None
                 );
-                pcp2.PermissionEntries.Add(
-                    new PerformanceCounterPermissionEntry(pcpa, pcpa.ToString(), String.Empty)
-                );
+                pcp2.PermissionEntries
+                    .Add(
+                        new PerformanceCounterPermissionEntry(pcpa, pcpa.ToString(), String.Empty)
+                    );
                 PerformanceCounterPermission union = (PerformanceCounterPermission)pcp1.Union(pcp2);
                 Assert.IsTrue(union.IsUnrestricted(), "target.IsUnrestricted " + pcpa.ToString());
                 Assert.AreEqual(

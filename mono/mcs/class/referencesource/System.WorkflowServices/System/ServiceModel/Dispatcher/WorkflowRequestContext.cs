@@ -84,15 +84,15 @@ namespace System.ServiceModel.Dispatcher
         {
             if (OperationContext.Current == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(SR2.GetString(SR2.NoOperationContext))
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(SR2.GetString(SR2.NoOperationContext))
+                    );
             }
 
             if (OperationContext.Current.ServiceSecurityContext != null)
             {
-                this.authorizationContext = OperationContext
-                    .Current
+                this.authorizationContext = OperationContext.Current
                     .ServiceSecurityContext
                     .AuthorizationContext;
             }
@@ -188,9 +188,10 @@ namespace System.ServiceModel.Dispatcher
         {
             if (this.asyncResult == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(SR2.GetString(SR2.UnloadedBeforeResponse))
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(SR2.GetString(SR2.UnloadedBeforeResponse))
+                    );
             }
             return asyncResult;
         }

@@ -313,9 +313,10 @@ namespace System.ServiceModel.Discovery
             if (timeoutException != null)
             {
                 ((ICommunicationObject)this).Abort();
-                throw FxTrace.Exception.AsError(
-                    new TimeoutException(SR2.DiscoveryCloseTimedOut(timeout), timeoutException)
-                );
+                throw FxTrace.Exception
+                    .AsError(
+                        new TimeoutException(SR2.DiscoveryCloseTimedOut(timeout), timeoutException)
+                    );
             }
             else
             {
@@ -427,9 +428,8 @@ namespace System.ServiceModel.Discovery
                 && (criteria.Duration.Equals(TimeSpan.MaxValue))
             )
             {
-                throw FxTrace.Exception.AsError(
-                    new ArgumentException(SR2.DiscoveryFindCanNeverComplete)
-                );
+                throw FxTrace.Exception
+                    .AsError(new ArgumentException(SR2.DiscoveryFindCanNeverComplete));
             }
 
             SyncOperationState syncOperationState = new SyncOperationState();
@@ -585,11 +585,12 @@ namespace System.ServiceModel.Discovery
             {
                 if (context != null)
                 {
-                    throw FxTrace.Exception.AsError(
-                        new InvalidOperationException(
-                            SR2.DiscoveryMultiplePendingOperationsPerUserState
-                        )
-                    );
+                    throw FxTrace.Exception
+                        .AsError(
+                            new InvalidOperationException(
+                                SR2.DiscoveryMultiplePendingOperationsPerUserState
+                            )
+                        );
                 }
             }
         }
@@ -610,8 +611,8 @@ namespace System.ServiceModel.Discovery
             Exception error
         )
         {
-            FindAsyncOperationContext context =
-                this.asyncOperationsLifetimeManager.Remove<FindAsyncOperationContext>(operationId);
+            FindAsyncOperationContext context = this.asyncOperationsLifetimeManager
+                .Remove<FindAsyncOperationContext>(operationId);
             if (context != null)
             {
                 this.PostFindCompleted(context, cancelled, error);
@@ -624,10 +625,8 @@ namespace System.ServiceModel.Discovery
             Exception error
         )
         {
-            ResolveAsyncOperationContext context =
-                this.asyncOperationsLifetimeManager.Remove<ResolveAsyncOperationContext>(
-                    operationId
-                );
+            ResolveAsyncOperationContext context = this.asyncOperationsLifetimeManager
+                .Remove<ResolveAsyncOperationContext>(operationId);
             if (context != null)
             {
                 this.PostResolveCompleted(context, cancelled, error);
@@ -667,10 +666,8 @@ namespace System.ServiceModel.Discovery
 
             FindAsyncOperationContext context = null;
             if (
-                !this.asyncOperationsLifetimeManager.TryLookup<FindAsyncOperationContext>(
-                    relatesTo,
-                    out context
-                )
+                !this.asyncOperationsLifetimeManager
+                    .TryLookup<FindAsyncOperationContext>(relatesTo, out context)
             )
             {
                 if (
@@ -705,21 +702,23 @@ namespace System.ServiceModel.Discovery
                         EndpointDiscoveryMetadata endpointDiscoveryMetadata in endpointDiscoveryMetadataCollection
                     )
                     {
-                        context.Result.AddDiscoveredEndpoint(
-                            endpointDiscoveryMetadata,
-                            discoveryMessageSequence
-                        );
+                        context.Result
+                            .AddDiscoveredEndpoint(
+                                endpointDiscoveryMetadata,
+                                discoveryMessageSequence
+                            );
                         if (postProgress)
                         {
-                            context.AsyncOperation.Post(
-                                this.findProgressChangedDelegate,
-                                new FindProgressChangedEventArgs(
-                                    context.Progress,
-                                    context.UserState,
-                                    endpointDiscoveryMetadata,
-                                    discoveryMessageSequence
-                                )
-                            );
+                            context.AsyncOperation
+                                .Post(
+                                    this.findProgressChangedDelegate,
+                                    new FindProgressChangedEventArgs(
+                                        context.Progress,
+                                        context.UserState,
+                                        endpointDiscoveryMetadata,
+                                        discoveryMessageSequence
+                                    )
+                                );
                         }
 
                         if (context.Result.Endpoints.Count == context.MaxResults)
@@ -788,10 +787,8 @@ namespace System.ServiceModel.Discovery
 
             ResolveAsyncOperationContext context = null;
             if (
-                !this.asyncOperationsLifetimeManager.TryLookup<ResolveAsyncOperationContext>(
-                    relatesTo,
-                    out context
-                )
+                !this.asyncOperationsLifetimeManager
+                    .TryLookup<ResolveAsyncOperationContext>(relatesTo, out context)
             )
             {
                 if (
@@ -912,23 +909,22 @@ namespace System.ServiceModel.Discovery
                 && discoveryEndpoint.Binding.MessageVersion.Addressing == AddressingVersion.None
             )
             {
-                throw FxTrace.Exception.Argument(
-                    "discoveryEndpoint",
-                    SR.EndpointWithInvalidMessageVersion(
-                        discoveryEndpoint.GetType().Name,
-                        AddressingVersion.None,
-                        this.GetType().Name,
-                        AddressingVersion.WSAddressing10,
-                        AddressingVersion.WSAddressingAugust2004
-                    )
-                );
+                throw FxTrace.Exception
+                    .Argument(
+                        "discoveryEndpoint",
+                        SR.EndpointWithInvalidMessageVersion(
+                            discoveryEndpoint.GetType().Name,
+                            AddressingVersion.None,
+                            this.GetType().Name,
+                            AddressingVersion.WSAddressing10,
+                            AddressingVersion.WSAddressingAugust2004
+                        )
+                    );
             }
 
-            this.innerClient =
-                discoveryEndpoint.DiscoveryVersion.Implementation.CreateDiscoveryInnerClient(
-                    discoveryEndpoint,
-                    this
-                );
+            this.innerClient = discoveryEndpoint.DiscoveryVersion
+                .Implementation
+                .CreateDiscoveryInnerClient(discoveryEndpoint, this);
 
             this.asyncOperationsLifetimeManager = new AsyncOperationLifetimeManager();
 
@@ -1122,17 +1118,17 @@ namespace System.ServiceModel.Discovery
                     || this.asyncOperationsLifetimeManager.IsAborted
                 )
                 {
-                    throw FxTrace.Exception.AsError(
-                        new ObjectDisposedException(this.GetType().Name)
-                    );
+                    throw FxTrace.Exception
+                        .AsError(new ObjectDisposedException(this.GetType().Name));
                 }
                 else
                 {
-                    throw FxTrace.Exception.AsError(
-                        new InvalidOperationException(
-                            SR.DiscoveryDuplicateOperationId(context.OperationId)
-                        )
-                    );
+                    throw FxTrace.Exception
+                        .AsError(
+                            new InvalidOperationException(
+                                SR.DiscoveryDuplicateOperationId(context.OperationId)
+                            )
+                        );
                 }
             }
         }
@@ -1503,11 +1499,13 @@ namespace System.ServiceModel.Discovery
                 this.client = client;
                 this.timeoutHelper = new TimeoutHelper(timeout);
 
-                IAsyncResult result = this.client.asyncOperationsLifetimeManager.BeginClose(
-                    this.timeoutHelper.RemainingTime(),
-                    this.PrepareAsyncCompletion(onAsyncLifetimeManangerCloseCompleted),
-                    this
-                );
+                IAsyncResult result = this.client
+                    .asyncOperationsLifetimeManager
+                    .BeginClose(
+                        this.timeoutHelper.RemainingTime(),
+                        this.PrepareAsyncCompletion(onAsyncLifetimeManangerCloseCompleted),
+                        this
+                    );
 
                 if (result.CompletedSynchronously && OnAsyncLifetimeManagerCloseCompleted(result))
                 {
@@ -1536,19 +1534,22 @@ namespace System.ServiceModel.Discovery
                 if (timeoutException != null)
                 {
                     ((ICommunicationObject)thisPtr.client).Abort();
-                    throw FxTrace.Exception.AsError(
-                        new TimeoutException(
-                            SR2.DiscoveryCloseTimedOut(thisPtr.timeoutHelper.OriginalTimeout),
-                            timeoutException
-                        )
-                    );
+                    throw FxTrace.Exception
+                        .AsError(
+                            new TimeoutException(
+                                SR2.DiscoveryCloseTimedOut(thisPtr.timeoutHelper.OriginalTimeout),
+                                timeoutException
+                            )
+                        );
                 }
 
-                IAsyncResult closeAsyncResult = thisPtr.client.InnerCommunicationObject.BeginClose(
-                    thisPtr.timeoutHelper.RemainingTime(),
-                    thisPtr.PrepareAsyncCompletion(onInnerCommunicationObjectCloseCompleted),
-                    thisPtr
-                );
+                IAsyncResult closeAsyncResult = thisPtr.client
+                    .InnerCommunicationObject
+                    .BeginClose(
+                        thisPtr.timeoutHelper.RemainingTime(),
+                        thisPtr.PrepareAsyncCompletion(onInnerCommunicationObjectCloseCompleted),
+                        thisPtr
+                    );
 
                 if (closeAsyncResult.CompletedSynchronously)
                 {
@@ -1580,8 +1581,7 @@ namespace System.ServiceModel.Discovery
                 if (DiscoveryUtility.IsCompatible(OperationContext.Current, clientChannel))
                 {
                     // reuse the same context
-                    this.originalMessageId = OperationContext
-                        .Current
+                    this.originalMessageId = OperationContext.Current
                         .OutgoingMessageHeaders
                         .MessageId;
                     this.originalReplyTo = OperationContext.Current.OutgoingMessageHeaders.ReplyTo;
@@ -1601,8 +1601,7 @@ namespace System.ServiceModel.Discovery
 
                 OperationContext.Current.OutgoingMessageHeaders.ReplyTo =
                     clientChannel.LocalAddress;
-                OperationContext.Current.OutgoingMessageHeaders.To = clientChannel
-                    .RemoteAddress
+                OperationContext.Current.OutgoingMessageHeaders.To = clientChannel.RemoteAddress
                     .Uri;
             }
 

@@ -24,8 +24,8 @@ namespace ILCompiler
         {
             var metadataReader = wrappedMethod.MetadataReader;
             var _module = wrappedMethod.Module;
-            var rva = wrappedMethod
-                .MetadataReader.GetMethodDefinition(wrappedMethod.Handle)
+            var rva = wrappedMethod.MetadataReader
+                .GetMethodDefinition(wrappedMethod.Handle)
                 .RelativeVirtualAddress;
             var _methodBody = _module.PEReader.GetMethodBody(rva);
 
@@ -61,11 +61,12 @@ namespace ILCompiler
             BlobReader localsBlob = default(BlobReader);
             if (!_methodBody.LocalSignature.IsNil)
             {
-                localsBlob = wrappedMethod.MetadataReader.GetBlobReader(
-                    wrappedMethod
-                        .MetadataReader.GetStandaloneSignature(_methodBody.LocalSignature)
-                        .Signature
-                );
+                localsBlob = wrappedMethod.MetadataReader
+                    .GetBlobReader(
+                        wrappedMethod.MetadataReader
+                            .GetStandaloneSignature(_methodBody.LocalSignature)
+                            .Signature
+                    );
             }
 
             AlternativeTypeRefProvider alternateTypes = new AlternativeTypeRefProvider();

@@ -27,8 +27,8 @@ internal static class IncrementalGeneratorInitializationContextExtensions
     )
         where T : SyntaxNode
     {
-        return context
-            .SyntaxProvider.ForAttributeWithSimpleName(simpleName, (node, _) => node is T)
+        return context.SyntaxProvider
+            .ForAttributeWithSimpleName(simpleName, (node, _) => node is T)
             .SelectMany((t, _) => t.matches.Cast<T>())
             .WithTrackingName("result_ForAttribute");
     }
@@ -39,11 +39,12 @@ internal static class IncrementalGeneratorInitializationContextExtensions
     )
         where T : SyntaxNode
     {
-        return context.SyntaxProvider.ForAttributeWithMetadataName(
-            fullyQualifiedMetadataName,
-            (node, _) => node is T,
-            (context, cancellationToken) => (T)context.TargetNode
-        );
+        return context.SyntaxProvider
+            .ForAttributeWithMetadataName(
+                fullyQualifiedMetadataName,
+                (node, _) => node is T,
+                (context, cancellationToken) => (T)context.TargetNode
+            );
     }
 }
 
@@ -1674,15 +1675,16 @@ class XAttribute : System.Attribute { }
         var generator = new IncrementalGeneratorWrapper(
             new PipelineCallbackGenerator(ctx =>
             {
-                var input = ctx.SyntaxProvider.ForAttributeWithMetadataName<ClassDeclarationSyntax>(
-                    "XAttribute",
-                    (_, _) => true,
-                    (ctx, _) =>
-                    {
-                        Assert.True(ctx.Attributes.Length == 2);
-                        return (ClassDeclarationSyntax)ctx.TargetNode;
-                    }
-                );
+                var input = ctx.SyntaxProvider
+                    .ForAttributeWithMetadataName<ClassDeclarationSyntax>(
+                        "XAttribute",
+                        (_, _) => true,
+                        (ctx, _) =>
+                        {
+                            Assert.True(ctx.Attributes.Length == 2);
+                            return (ClassDeclarationSyntax)ctx.TargetNode;
+                        }
+                    );
                 ctx.RegisterSourceOutput(
                     input,
                     (spc, node) =>
@@ -1738,15 +1740,16 @@ class XAttribute : System.Attribute { }
         var generator = new IncrementalGeneratorWrapper(
             new PipelineCallbackGenerator(ctx =>
             {
-                var input = ctx.SyntaxProvider.ForAttributeWithMetadataName<ClassDeclarationSyntax>(
-                    "XAttribute",
-                    (_, _) => true,
-                    (ctx, _) =>
-                    {
-                        Assert.True(ctx.Attributes.Length == 2);
-                        return (ClassDeclarationSyntax)ctx.TargetNode;
-                    }
-                );
+                var input = ctx.SyntaxProvider
+                    .ForAttributeWithMetadataName<ClassDeclarationSyntax>(
+                        "XAttribute",
+                        (_, _) => true,
+                        (ctx, _) =>
+                        {
+                            Assert.True(ctx.Attributes.Length == 2);
+                            return (ClassDeclarationSyntax)ctx.TargetNode;
+                        }
+                    );
                 ctx.RegisterSourceOutput(
                     input,
                     (spc, node) =>
@@ -1803,15 +1806,16 @@ class YAttribute : System.Attribute { }
         var generator = new IncrementalGeneratorWrapper(
             new PipelineCallbackGenerator(ctx =>
             {
-                var input = ctx.SyntaxProvider.ForAttributeWithMetadataName<ClassDeclarationSyntax>(
-                    "XAttribute",
-                    (_, _) => true,
-                    (ctx, _) =>
-                    {
-                        Assert.True(ctx.Attributes.Length == 1);
-                        return (ClassDeclarationSyntax)ctx.TargetNode;
-                    }
-                );
+                var input = ctx.SyntaxProvider
+                    .ForAttributeWithMetadataName<ClassDeclarationSyntax>(
+                        "XAttribute",
+                        (_, _) => true,
+                        (ctx, _) =>
+                        {
+                            Assert.True(ctx.Attributes.Length == 1);
+                            return (ClassDeclarationSyntax)ctx.TargetNode;
+                        }
+                    );
                 ctx.RegisterSourceOutput(
                     input,
                     (spc, node) =>
@@ -1868,15 +1872,16 @@ class YAttribute : System.Attribute { }
         var generator = new IncrementalGeneratorWrapper(
             new PipelineCallbackGenerator(ctx =>
             {
-                var input = ctx.SyntaxProvider.ForAttributeWithMetadataName<ClassDeclarationSyntax>(
-                    "XAttribute",
-                    (_, _) => true,
-                    (ctx, _) =>
-                    {
-                        Assert.True(ctx.Attributes.Length == 1);
-                        return (ClassDeclarationSyntax)ctx.TargetNode;
-                    }
-                );
+                var input = ctx.SyntaxProvider
+                    .ForAttributeWithMetadataName<ClassDeclarationSyntax>(
+                        "XAttribute",
+                        (_, _) => true,
+                        (ctx, _) =>
+                        {
+                            Assert.True(ctx.Attributes.Length == 1);
+                            return (ClassDeclarationSyntax)ctx.TargetNode;
+                        }
+                    );
                 ctx.RegisterSourceOutput(
                     input,
                     (spc, node) =>
@@ -1933,15 +1938,16 @@ class YAttribute : System.Attribute { }
         var generator = new IncrementalGeneratorWrapper(
             new PipelineCallbackGenerator(ctx =>
             {
-                var input = ctx.SyntaxProvider.ForAttributeWithMetadataName<ClassDeclarationSyntax>(
-                    "XAttribute",
-                    (_, _) => true,
-                    (ctx, _) =>
-                    {
-                        Assert.True(ctx.Attributes.Length == 1);
-                        return (ClassDeclarationSyntax)ctx.TargetNode;
-                    }
-                );
+                var input = ctx.SyntaxProvider
+                    .ForAttributeWithMetadataName<ClassDeclarationSyntax>(
+                        "XAttribute",
+                        (_, _) => true,
+                        (ctx, _) =>
+                        {
+                            Assert.True(ctx.Attributes.Length == 1);
+                            return (ClassDeclarationSyntax)ctx.TargetNode;
+                        }
+                    );
                 ctx.RegisterSourceOutput(
                     input,
                     (spc, node) =>
@@ -1998,15 +2004,16 @@ class YAttribute : System.Attribute { }
         var generator = new IncrementalGeneratorWrapper(
             new PipelineCallbackGenerator(ctx =>
             {
-                var input = ctx.SyntaxProvider.ForAttributeWithMetadataName<ClassDeclarationSyntax>(
-                    "XAttribute",
-                    (_, _) => true,
-                    (ctx, _) =>
-                    {
-                        Assert.True(ctx.Attributes.Length == 1);
-                        return (ClassDeclarationSyntax)ctx.TargetNode;
-                    }
-                );
+                var input = ctx.SyntaxProvider
+                    .ForAttributeWithMetadataName<ClassDeclarationSyntax>(
+                        "XAttribute",
+                        (_, _) => true,
+                        (ctx, _) =>
+                        {
+                            Assert.True(ctx.Attributes.Length == 1);
+                            return (ClassDeclarationSyntax)ctx.TargetNode;
+                        }
+                    );
                 ctx.RegisterSourceOutput(
                     input,
                     (spc, node) =>
@@ -2145,8 +2152,10 @@ class YAttribute : System.Attribute { }
                 expectedGeneratedSources,
                 driver
                     .GetRunResult()
-                    .Results.Single()
-                    .GeneratedSources.Select(s => (s.HintName, s.SourceText.ToString()))
+                    .Results
+                    .Single()
+                    .GeneratedSources
+                    .Select(s => (s.HintName, s.SourceText.ToString()))
             );
         }
 
@@ -2159,7 +2168,8 @@ class YAttribute : System.Attribute { }
         {
             var tree = compilation
                 .GetMember(className)
-                .DeclaringSyntaxReferences.Single()
+                .DeclaringSyntaxReferences
+                .Single()
                 .SyntaxTree;
             compilation = compilation.ReplaceSyntaxTree(
                 tree,
@@ -2244,7 +2254,8 @@ class XAttribute : System.Attribute
             runResult
                 .TrackedSteps["collectedGlobalAliases_ForAttribute"]
                 .Single()
-                .Outputs.Single()
+                .Outputs
+                .Single()
                 .Reason
         );
         Assert.Equal(
@@ -2252,7 +2263,8 @@ class XAttribute : System.Attribute
             runResult
                 .TrackedSteps["compilationGlobalAliases_ForAttribute"]
                 .Single()
-                .Outputs.Single()
+                .Outputs
+                .Single()
                 .Reason
         );
         Assert.Equal(
@@ -2260,7 +2272,8 @@ class XAttribute : System.Attribute
             runResult
                 .TrackedSteps["allUpGlobalAliases_ForAttribute"]
                 .Single()
-                .Outputs.Single()
+                .Outputs
+                .Single()
                 .Reason
         );
         Assert.Equal(
@@ -2272,7 +2285,8 @@ class XAttribute : System.Attribute
             runResult
                 .TrackedSteps["compilationUnitAndGlobalAliases_ForAttribute"]
                 .Single()
-                .Outputs.Single()
+                .Outputs
+                .Single()
                 .Reason
         );
         Assert.Equal(
@@ -2284,7 +2298,8 @@ class XAttribute : System.Attribute
             runResult
                 .TrackedSteps["compilationAndGroupedNodes_ForAttributeWithMetadataName"]
                 .Single()
-                .Outputs.Single()
+                .Outputs
+                .Single()
                 .Reason
         );
         Assert.Equal(
@@ -2292,7 +2307,8 @@ class XAttribute : System.Attribute
             runResult
                 .TrackedSteps["result_ForAttributeWithMetadataName"]
                 .Single()
-                .Outputs.Single()
+                .Outputs
+                .Single()
                 .Reason
         );
     }
@@ -2367,7 +2383,8 @@ class XAttribute : System.Attribute
             runResult
                 .TrackedSteps["collectedGlobalAliases_ForAttribute"]
                 .Single()
-                .Outputs.Single()
+                .Outputs
+                .Single()
                 .Reason
         );
         Assert.Equal(
@@ -2375,7 +2392,8 @@ class XAttribute : System.Attribute
             runResult
                 .TrackedSteps["compilationGlobalAliases_ForAttribute"]
                 .Single()
-                .Outputs.Single()
+                .Outputs
+                .Single()
                 .Reason
         );
         Assert.Equal(
@@ -2383,7 +2401,8 @@ class XAttribute : System.Attribute
             runResult
                 .TrackedSteps["allUpGlobalAliases_ForAttribute"]
                 .Single()
-                .Outputs.Single()
+                .Outputs
+                .Single()
                 .Reason
         );
         Assert.Equal(
@@ -2395,7 +2414,8 @@ class XAttribute : System.Attribute
             runResult
                 .TrackedSteps["compilationUnitAndGlobalAliases_ForAttribute"]
                 .Single()
-                .Outputs.Single()
+                .Outputs
+                .Single()
                 .Reason
         );
         Assert.Equal(
@@ -2407,7 +2427,8 @@ class XAttribute : System.Attribute
             runResult
                 .TrackedSteps["compilationAndGroupedNodes_ForAttributeWithMetadataName"]
                 .Single()
-                .Outputs.Single()
+                .Outputs
+                .Single()
                 .Reason
         );
         Assert.Equal(
@@ -2415,7 +2436,8 @@ class XAttribute : System.Attribute
             runResult
                 .TrackedSteps["result_ForAttributeWithMetadataName"]
                 .Single()
-                .Outputs.Single()
+                .Outputs
+                .Single()
                 .Reason
         );
     }
@@ -2493,7 +2515,8 @@ class XAttribute : System.Attribute
             runResult
                 .TrackedSteps["collectedGlobalAliases_ForAttribute"]
                 .Single()
-                .Outputs.Single()
+                .Outputs
+                .Single()
                 .Reason
         );
         Assert.Equal(
@@ -2501,7 +2524,8 @@ class XAttribute : System.Attribute
             runResult
                 .TrackedSteps["compilationGlobalAliases_ForAttribute"]
                 .Single()
-                .Outputs.Single()
+                .Outputs
+                .Single()
                 .Reason
         );
         Assert.Equal(
@@ -2509,7 +2533,8 @@ class XAttribute : System.Attribute
             runResult
                 .TrackedSteps["allUpGlobalAliases_ForAttribute"]
                 .Single()
-                .Outputs.Single()
+                .Outputs
+                .Single()
                 .Reason
         );
         Assert.Collection(
@@ -2521,7 +2546,8 @@ class XAttribute : System.Attribute
             runResult
                 .TrackedSteps["compilationUnitAndGlobalAliases_ForAttribute"]
                 .Single()
-                .Outputs.Single()
+                .Outputs
+                .Single()
                 .Reason
         );
         Assert.Equal(
@@ -2533,7 +2559,8 @@ class XAttribute : System.Attribute
             runResult
                 .TrackedSteps["compilationAndGroupedNodes_ForAttributeWithMetadataName"]
                 .Single()
-                .Outputs.Single()
+                .Outputs
+                .Single()
                 .Reason
         );
         Assert.Equal(
@@ -2541,7 +2568,8 @@ class XAttribute : System.Attribute
             runResult
                 .TrackedSteps["result_ForAttributeWithMetadataName"]
                 .Single()
-                .Outputs.Single()
+                .Outputs
+                .Single()
                 .Reason
         );
     }
@@ -2586,8 +2614,8 @@ class C { }
 
         driver = driver.RunGenerators(
             compilation.AddSyntaxTrees(
-                compilation
-                    .SyntaxTrees.First()
+                compilation.SyntaxTrees
+                    .First()
                     .WithChangedText(
                         SourceText.From(
                             @"
@@ -2617,7 +2645,8 @@ class XAttribute : System.Attribute
             runResult
                 .TrackedSteps["collectedGlobalAliases_ForAttribute"]
                 .Single()
-                .Outputs.Single()
+                .Outputs
+                .Single()
                 .Reason
         );
         Assert.Equal(
@@ -2625,7 +2654,8 @@ class XAttribute : System.Attribute
             runResult
                 .TrackedSteps["compilationGlobalAliases_ForAttribute"]
                 .Single()
-                .Outputs.Single()
+                .Outputs
+                .Single()
                 .Reason
         );
         Assert.Equal(
@@ -2633,7 +2663,8 @@ class XAttribute : System.Attribute
             runResult
                 .TrackedSteps["allUpGlobalAliases_ForAttribute"]
                 .Single()
-                .Outputs.Single()
+                .Outputs
+                .Single()
                 .Reason
         );
         Assert.Collection(
@@ -2645,7 +2676,8 @@ class XAttribute : System.Attribute
             runResult
                 .TrackedSteps["compilationUnitAndGlobalAliases_ForAttribute"]
                 .Single()
-                .Outputs.Single()
+                .Outputs
+                .Single()
                 .Reason
         );
         Assert.Equal(
@@ -2657,7 +2689,8 @@ class XAttribute : System.Attribute
             runResult
                 .TrackedSteps["compilationAndGroupedNodes_ForAttributeWithMetadataName"]
                 .Single()
-                .Outputs.Single()
+                .Outputs
+                .Single()
                 .Reason
         );
         Assert.Equal(
@@ -2665,7 +2698,8 @@ class XAttribute : System.Attribute
             runResult
                 .TrackedSteps["result_ForAttributeWithMetadataName"]
                 .Single()
-                .Outputs.Single()
+                .Outputs
+                .Single()
                 .Reason
         );
     }
@@ -2712,8 +2746,8 @@ class C2 { }
 
         driver = driver.RunGenerators(
             compilation.AddSyntaxTrees(
-                compilation
-                    .SyntaxTrees.First()
+                compilation.SyntaxTrees
+                    .First()
                     .WithChangedText(
                         SourceText.From(
                             @"
@@ -2750,7 +2784,8 @@ class XAttribute : System.Attribute
             runResult
                 .TrackedSteps["collectedGlobalAliases_ForAttribute"]
                 .Single()
-                .Outputs.Single()
+                .Outputs
+                .Single()
                 .Reason
         );
         Assert.Equal(
@@ -2758,7 +2793,8 @@ class XAttribute : System.Attribute
             runResult
                 .TrackedSteps["compilationGlobalAliases_ForAttribute"]
                 .Single()
-                .Outputs.Single()
+                .Outputs
+                .Single()
                 .Reason
         );
         Assert.Equal(
@@ -2766,7 +2802,8 @@ class XAttribute : System.Attribute
             runResult
                 .TrackedSteps["allUpGlobalAliases_ForAttribute"]
                 .Single()
-                .Outputs.Single()
+                .Outputs
+                .Single()
                 .Reason
         );
         Assert.Collection(
@@ -2778,7 +2815,8 @@ class XAttribute : System.Attribute
             runResult
                 .TrackedSteps["compilationUnitAndGlobalAliases_ForAttribute"]
                 .Single()
-                .Outputs.Single()
+                .Outputs
+                .Single()
                 .Reason
         );
         Assert.Collection(
@@ -2790,7 +2828,8 @@ class XAttribute : System.Attribute
             runResult
                 .TrackedSteps["compilationAndGroupedNodes_ForAttributeWithMetadataName"]
                 .Single()
-                .Outputs.Single()
+                .Outputs
+                .Single()
                 .Reason
         );
         Assert.Collection(
@@ -2843,8 +2882,8 @@ class C2 { }
 
         driver = driver.RunGenerators(
             compilation.AddSyntaxTrees(
-                compilation
-                    .SyntaxTrees.First()
+                compilation.SyntaxTrees
+                    .First()
                     .WithChangedText(
                         SourceText.From(
                             @"
@@ -2885,7 +2924,8 @@ class XAttribute : System.Attribute
             runResult
                 .TrackedSteps["collectedGlobalAliases_ForAttribute"]
                 .Single()
-                .Outputs.Single()
+                .Outputs
+                .Single()
                 .Reason
         );
         Assert.Equal(
@@ -2893,7 +2933,8 @@ class XAttribute : System.Attribute
             runResult
                 .TrackedSteps["compilationGlobalAliases_ForAttribute"]
                 .Single()
-                .Outputs.Single()
+                .Outputs
+                .Single()
                 .Reason
         );
         Assert.Equal(
@@ -2901,7 +2942,8 @@ class XAttribute : System.Attribute
             runResult
                 .TrackedSteps["allUpGlobalAliases_ForAttribute"]
                 .Single()
-                .Outputs.Single()
+                .Outputs
+                .Single()
                 .Reason
         );
         Assert.Collection(
@@ -2975,8 +3017,8 @@ class XAttribute : System.Attribute
         driver = driver.RunGenerators(
             compilation.ReplaceSyntaxTree(
                 compilation.SyntaxTrees.First(),
-                compilation
-                    .SyntaxTrees.First()
+                compilation.SyntaxTrees
+                    .First()
                     .WithChangedText(
                         SourceText.From(
                             @"
@@ -3010,7 +3052,8 @@ class XAttribute : System.Attribute
             runResult
                 .TrackedSteps["collectedGlobalAliases_ForAttribute"]
                 .Single()
-                .Outputs.Single()
+                .Outputs
+                .Single()
                 .Reason
         );
         Assert.Equal(
@@ -3018,7 +3061,8 @@ class XAttribute : System.Attribute
             runResult
                 .TrackedSteps["compilationGlobalAliases_ForAttribute"]
                 .Single()
-                .Outputs.Single()
+                .Outputs
+                .Single()
                 .Reason
         );
         Assert.Equal(
@@ -3026,7 +3070,8 @@ class XAttribute : System.Attribute
             runResult
                 .TrackedSteps["allUpGlobalAliases_ForAttribute"]
                 .Single()
-                .Outputs.Single()
+                .Outputs
+                .Single()
                 .Reason
         );
         Assert.Equal(
@@ -3038,7 +3083,8 @@ class XAttribute : System.Attribute
             runResult
                 .TrackedSteps["compilationUnitAndGlobalAliases_ForAttribute"]
                 .Single()
-                .Outputs.Single()
+                .Outputs
+                .Single()
                 .Reason
         );
         Assert.Equal(
@@ -3050,7 +3096,8 @@ class XAttribute : System.Attribute
             runResult
                 .TrackedSteps["compilationAndGroupedNodes_ForAttributeWithMetadataName"]
                 .Single()
-                .Outputs.Single()
+                .Outputs
+                .Single()
                 .Reason
         );
         Assert.Equal(
@@ -3058,7 +3105,8 @@ class XAttribute : System.Attribute
             runResult
                 .TrackedSteps["result_ForAttributeWithMetadataName"]
                 .Single()
-                .Outputs.Single()
+                .Outputs
+                .Single()
                 .Reason
         );
     }
@@ -3107,8 +3155,8 @@ class XAttribute : System.Attribute
         driver = driver.RunGenerators(
             compilation.ReplaceSyntaxTree(
                 compilation.SyntaxTrees.First(),
-                compilation
-                    .SyntaxTrees.First()
+                compilation.SyntaxTrees
+                    .First()
                     .WithChangedText(
                         SourceText.From(
                             @"
@@ -3138,7 +3186,8 @@ class C { }
             runResult
                 .TrackedSteps["collectedGlobalAliases_ForAttribute"]
                 .Single()
-                .Outputs.Single()
+                .Outputs
+                .Single()
                 .Reason
         );
         Assert.Equal(
@@ -3146,7 +3195,8 @@ class C { }
             runResult
                 .TrackedSteps["compilationGlobalAliases_ForAttribute"]
                 .Single()
-                .Outputs.Single()
+                .Outputs
+                .Single()
                 .Reason
         );
         Assert.Equal(
@@ -3154,7 +3204,8 @@ class C { }
             runResult
                 .TrackedSteps["allUpGlobalAliases_ForAttribute"]
                 .Single()
-                .Outputs.Single()
+                .Outputs
+                .Single()
                 .Reason
         );
         Assert.Collection(
@@ -3166,7 +3217,8 @@ class C { }
             runResult
                 .TrackedSteps["compilationUnitAndGlobalAliases_ForAttribute"]
                 .Single()
-                .Outputs.Single()
+                .Outputs
+                .Single()
                 .Reason
         );
         Assert.Equal(
@@ -3178,7 +3230,8 @@ class C { }
             runResult
                 .TrackedSteps["compilationAndGroupedNodes_ForAttributeWithMetadataName"]
                 .Single()
-                .Outputs.Single()
+                .Outputs
+                .Single()
                 .Reason
         );
         Assert.Equal(
@@ -3186,7 +3239,8 @@ class C { }
             runResult
                 .TrackedSteps["result_ForAttributeWithMetadataName"]
                 .Single()
-                .Outputs.Single()
+                .Outputs
+                .Single()
                 .Reason
         );
     }

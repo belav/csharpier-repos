@@ -335,7 +335,8 @@ public partial class HelloWorldServiceClient
         get
         {
             System.ServiceModel.Channels.IHttpCookieContainerManager httpCookieContainerManager =
-                this.InnerChannel.GetProperty<System.ServiceModel.Channels.IHttpCookieContainerManager>();
+                this.InnerChannel
+                    .GetProperty<System.ServiceModel.Channels.IHttpCookieContainerManager>();
             if ((httpCookieContainerManager != null))
             {
                 return httpCookieContainerManager.CookieContainer;
@@ -348,7 +349,8 @@ public partial class HelloWorldServiceClient
         set
         {
             System.ServiceModel.Channels.IHttpCookieContainerManager httpCookieContainerManager =
-                this.InnerChannel.GetProperty<System.ServiceModel.Channels.IHttpCookieContainerManager>();
+                this.InnerChannel
+                    .GetProperty<System.ServiceModel.Channels.IHttpCookieContainerManager>();
             if ((httpCookieContainerManager != null))
             {
                 httpCookieContainerManager.CookieContainer = value;

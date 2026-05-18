@@ -23,7 +23,8 @@ public readonly struct AnonymousObject
     /// </summary>
     public static readonly ConstructorInfo AnonymousObjectCtor = typeof(AnonymousObject)
         .GetTypeInfo()
-        .DeclaredConstructors.Single(c => c.GetParameters().Length == 1);
+        .DeclaredConstructors
+        .Single(c => c.GetParameters().Length == 1);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to

@@ -2092,7 +2092,8 @@ public abstract class NorthwindMiscellaneousQueryTestBase<TFixture> : QueryTestB
                         select new { Foo = e2 }
                     )
                         .First()
-                        .Foo.FirstName
+                        .Foo
+                        .FirstName
                 select e1
         );
 
@@ -2125,7 +2126,8 @@ public abstract class NorthwindMiscellaneousQueryTestBase<TFixture> : QueryTestB
                         select new { Foo = e2 }
                     )
                         .FirstOrDefault()
-                        .Foo.FirstName
+                        .Foo
+                        .FirstName
                 select e1
         );
 
@@ -2162,7 +2164,8 @@ public abstract class NorthwindMiscellaneousQueryTestBase<TFixture> : QueryTestB
                             select new { c3 }
                         )
                             .First()
-                            .c3.City
+                            .c3
+                            .City
                     select c1
             )
         );
@@ -2199,7 +2202,8 @@ public abstract class NorthwindMiscellaneousQueryTestBase<TFixture> : QueryTestB
                                 .OrderBy(c => c.CustomerID)
                                 .Select(c => new { Foo = c })
                                 .First()
-                                .Foo.IsLondon
+                                .Foo
+                                .IsLondon
                         select c1
                 ),
             CoreStrings.QueryUnableToTranslateMember(nameof(Customer.IsLondon), nameof(Customer))
@@ -3564,8 +3568,8 @@ public abstract class NorthwindMiscellaneousQueryTestBase<TFixture> : QueryTestB
         {
             try
             {
-                context
-                    .Customers.Select(c => Process(c, synchronizationEvent, blockingSemaphore))
+                context.Customers
+                    .Select(c => Process(c, synchronizationEvent, blockingSemaphore))
                     .ToList();
             }
             finally
@@ -3609,8 +3613,8 @@ public abstract class NorthwindMiscellaneousQueryTestBase<TFixture> : QueryTestB
         {
             try
             {
-                context
-                    .Customers.Select(c => Process(c, synchronizationEvent, blockingSemaphore))
+                context.Customers
+                    .Select(c => Process(c, synchronizationEvent, blockingSemaphore))
                     .ToList();
             }
             finally
@@ -4357,10 +4361,9 @@ public abstract class NorthwindMiscellaneousQueryTestBase<TFixture> : QueryTestB
                     .Where(o => o.OrderDate != null)
                     .Select(o => new Order
                     {
-                        OrderDate = o
-                            .OrderDate.Value.AddDays(
-                                o.OrderDate.Value.Millisecond / millisecondsPerDay
-                            )
+                        OrderDate = o.OrderDate
+                            .Value
+                            .AddDays(o.OrderDate.Value.Millisecond / millisecondsPerDay)
                             .AddMilliseconds(o.OrderDate.Value.Millisecond % millisecondsPerDay),
                     }),
             e => e.OrderDate
@@ -5033,8 +5036,8 @@ public abstract class NorthwindMiscellaneousQueryTestBase<TFixture> : QueryTestB
                     .Where(c => c.Orders.Count > 1)
                     .Select(c => new DTO<DateTime?>
                     {
-                        Property = c
-                            .Orders.OrderByDescending(o => o.OrderID)
+                        Property = c.Orders
+                            .OrderByDescending(o => o.OrderID)
                             .FirstOrDefault()
                             .OrderDate,
                     })
@@ -5126,8 +5129,8 @@ public abstract class NorthwindMiscellaneousQueryTestBase<TFixture> : QueryTestB
             async,
             ss =>
                 from c in ss.Set<Customer>()
-                let lastOrder = c
-                    .Orders.OrderByDescending(o => o.OrderID)
+                let lastOrder = c.Orders
+                    .OrderByDescending(o => o.OrderID)
                     .Select(o => o.CustomerID)
                     .FirstOrDefault()
                 where lastOrder == null
@@ -5141,8 +5144,8 @@ public abstract class NorthwindMiscellaneousQueryTestBase<TFixture> : QueryTestB
             async,
             ss =>
                 from c in ss.Set<Customer>()
-                let lastOrder = c
-                    .Orders.OrderByDescending(o => o.OrderID)
+                let lastOrder = c.Orders
+                    .OrderByDescending(o => o.OrderID)
                     .Select(o => o.CustomerID)
                     .FirstOrDefault()
                 where lastOrder != null
@@ -5516,12 +5519,8 @@ public abstract class NorthwindMiscellaneousQueryTestBase<TFixture> : QueryTestB
                     .Select(c => new
                     {
                         c.CustomerID,
-                        OuterOrders = c
-                            .Orders.Select(o => new
-                            {
-                                InnerOrder = c.Orders.Count(),
-                                Id = c.CustomerID,
-                            })
+                        OuterOrders = c.Orders
+                            .Select(o => new { InnerOrder = c.Orders.Count(), Id = c.CustomerID })
                             .ToList(),
                     }),
             elementAsserter: (e, a) =>
@@ -5891,7 +5890,8 @@ public abstract class NorthwindMiscellaneousQueryTestBase<TFixture> : QueryTestB
                 ss.Set<Customer>()
                     .OrderBy(c => c.CustomerID)
                     .Select(c =>
-                        c.Orders.AsQueryable()
+                        c.Orders
+                            .AsQueryable()
                             .Where(ValidYear)
                             .OrderBy(o => o.OrderID)
                             .Take(1)
@@ -6299,8 +6299,8 @@ public abstract class NorthwindMiscellaneousQueryTestBase<TFixture> : QueryTestB
     )
     {
         using var context = CreateContext();
-        var orderIds = context
-            .Customers.Where(c => c.CustomerID == "ALFKI")
+        var orderIds = context.Customers
+            .Where(c => c.CustomerID == "ALFKI")
             .SelectMany(c => c.Orders)
             .Select(o => o.OrderID)
             .ToList();
@@ -6389,7 +6389,8 @@ public abstract class NorthwindMiscellaneousQueryTestBase<TFixture> : QueryTestB
             ss =>
                 ss.Set<Customer>()
                     .Select(c =>
-                        c.Orders.OrderBy(o => o.OrderDate)
+                        c.Orders
+                            .OrderBy(o => o.OrderDate)
                             .ThenBy(o => o.OrderID)
                             .Skip(2)
                             .FirstOrDefault()
@@ -6489,10 +6490,12 @@ public abstract class NorthwindMiscellaneousQueryTestBase<TFixture> : QueryTestB
                     .Select(c => new
                     {
                         Complex = (bool?)
-                            c
-                                .Orders.OrderBy(e => e.OrderDate)
+                            c.Orders
+                                .OrderBy(e => e.OrderDate)
                                 .FirstOrDefault()
-                                .Customer.Orders.Any(e => e.OrderID < 11000),
+                                .Customer
+                                .Orders
+                                .Any(e => e.OrderID < 11000),
                     }),
             ss =>
                 ss.Set<Customer>()
@@ -6501,10 +6504,12 @@ public abstract class NorthwindMiscellaneousQueryTestBase<TFixture> : QueryTestB
                     .Select(c => new
                     {
                         Complex = c.Orders.OrderBy(e => e.OrderDate).FirstOrDefault() != null
-                            ? c
-                                .Orders.OrderBy(e => e.OrderDate)
+                            ? c.Orders
+                                .OrderBy(e => e.OrderDate)
                                 .FirstOrDefault()
-                                .Customer.Orders.Any(e => e.OrderID < 11000)
+                                .Customer
+                                .Orders
+                                .Any(e => e.OrderID < 11000)
                             : (bool?)false,
                     }),
             assertOrder: true
@@ -6589,8 +6594,8 @@ public abstract class NorthwindMiscellaneousQueryTestBase<TFixture> : QueryTestB
                     .Select(x => new TestDto
                     {
                         CustomerID = x.CustomerID,
-                        OrderDate = x
-                            .Orders.FirstOrDefault(t => t.OrderID == t.OrderID)
+                        OrderDate = x.Orders
+                            .FirstOrDefault(t => t.OrderID == t.OrderID)
                             .MaybeScalar(e => e.OrderDate),
                     }),
             assertOrder: true,
@@ -6737,8 +6742,8 @@ public abstract class NorthwindMiscellaneousQueryTestBase<TFixture> : QueryTestB
         await Assert.ThrowsAsync<InvalidOperationException>(async () =>
         {
             var results = (
-                await context
-                    .Customers.Select(c => new
+                await context.Customers
+                    .Select(c => new
                     {
                         c.CustomerID,
                         Orders = context.Orders.Where(o => o.Customer.CustomerID == c.CustomerID),
@@ -6747,12 +6752,13 @@ public abstract class NorthwindMiscellaneousQueryTestBase<TFixture> : QueryTestB
             )
                 .Select(x => new
                 {
-                    Orders = x.Orders.GroupJoin(
-                        new[] { "ALFKI" },
-                        y => x.CustomerID,
-                        y => y,
-                        (h, id) => new { h.Customer }
-                    ),
+                    Orders = x.Orders
+                        .GroupJoin(
+                            new[] { "ALFKI" },
+                            y => x.CustomerID,
+                            y => y,
+                            (h, id) => new { h.Customer }
+                        ),
                 })
                 .ToList();
 
@@ -6765,10 +6771,8 @@ public abstract class NorthwindMiscellaneousQueryTestBase<TFixture> : QueryTestB
     )
     {
         using var ctx = CreateContext();
-        var result = await ctx.Customers.SingleAsync(
-            c => c.CustomerID == "ALFKI",
-            cancellationToken
-        );
+        var result = await ctx.Customers
+            .SingleAsync(c => c.CustomerID == "ALFKI", cancellationToken);
 
         Assert.Equal("ALFKI", result.CustomerID);
     }
@@ -6810,8 +6814,8 @@ public abstract class NorthwindMiscellaneousQueryTestBase<TFixture> : QueryTestB
                     .Select(c => new
                     {
                         Key = c.CustomerID,
-                        Subquery = c
-                            .Orders.Select(o => new { First = o.OrderID, Second = o.OrderDate })
+                        Subquery = c.Orders
+                            .Select(o => new { First = o.OrderID, Second = o.OrderDate })
                             .Distinct()
                             .ToList(),
                     }),
@@ -6844,8 +6848,8 @@ public abstract class NorthwindMiscellaneousQueryTestBase<TFixture> : QueryTestB
                     .Select(c => new
                     {
                         Key = c.CustomerID,
-                        Subquery = c
-                            .Orders.Select(o => new
+                        Subquery = c.Orders
+                            .Select(o => new
                             {
                                 First = o.OrderID,
                                 Second = o.OrderDate,

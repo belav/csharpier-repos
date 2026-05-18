@@ -145,10 +145,11 @@ namespace Tests.System
                         {
                             case 2:
                                 s.Period = 400;
-                                s.Timer.Change(
-                                    TimeSpan.FromMilliseconds(s.Period),
-                                    TimeSpan.FromMilliseconds(s.Period)
-                                );
+                                s.Timer
+                                    .Change(
+                                        TimeSpan.FromMilliseconds(s.Period),
+                                        TimeSpan.FromMilliseconds(s.Period)
+                                    );
                                 break;
 
                             case 4:
@@ -539,28 +540,26 @@ namespace Tests.System
             Assert.Throws<InvalidOperationException>(() => clock.GetElapsedTime(1, 2));
 
             Assert.Throws<ArgumentNullException>(() =>
-                TimeProvider.System.CreateTimer(
-                    null,
-                    null,
-                    Timeout.InfiniteTimeSpan,
-                    Timeout.InfiniteTimeSpan
-                )
+                TimeProvider.System
+                    .CreateTimer(null, null, Timeout.InfiniteTimeSpan, Timeout.InfiniteTimeSpan)
             );
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                TimeProvider.System.CreateTimer(
-                    obj => { },
-                    null,
-                    TimeSpan.FromMilliseconds(-2),
-                    Timeout.InfiniteTimeSpan
-                )
+                TimeProvider.System
+                    .CreateTimer(
+                        obj => { },
+                        null,
+                        TimeSpan.FromMilliseconds(-2),
+                        Timeout.InfiniteTimeSpan
+                    )
             );
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                TimeProvider.System.CreateTimer(
-                    obj => { },
-                    null,
-                    Timeout.InfiniteTimeSpan,
-                    TimeSpan.FromMilliseconds(-2)
-                )
+                TimeProvider.System
+                    .CreateTimer(
+                        obj => { },
+                        null,
+                        Timeout.InfiniteTimeSpan,
+                        TimeSpan.FromMilliseconds(-2)
+                    )
             );
 
 #if !NETFRAMEWORK

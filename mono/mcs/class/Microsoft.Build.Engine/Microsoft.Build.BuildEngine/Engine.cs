@@ -568,8 +568,8 @@ namespace Microsoft.Build.BuildEngine
         internal void ClearBuiltTargetsForProject(Project project)
         {
             string project_key = project.GetKeyForTarget(String.Empty, false);
-            var to_remove_keys = BuiltTargetsOutputByName
-                .Keys.Where(key => key.StartsWith(project_key))
+            var to_remove_keys = BuiltTargetsOutputByName.Keys
+                .Where(key => key.StartsWith(project_key))
                 .ToList();
             foreach (string to_remove_key in to_remove_keys)
                 BuiltTargetsOutputByName.Remove(to_remove_key);

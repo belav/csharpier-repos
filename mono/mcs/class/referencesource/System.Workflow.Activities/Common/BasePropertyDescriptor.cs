@@ -462,14 +462,15 @@ namespace System.Workflow.Activities.Common
             )
             {
                 if (
-                    memberInfo.Name.Equals(
-                        name,
-                        (
-                            (ignoreCase)
-                                ? StringComparison.CurrentCultureIgnoreCase
-                                : StringComparison.CurrentCulture
+                    memberInfo.Name
+                        .Equals(
+                            name,
+                            (
+                                (ignoreCase)
+                                    ? StringComparison.CurrentCultureIgnoreCase
+                                    : StringComparison.CurrentCulture
+                            )
                         )
-                    )
                 )
                 {
                     matchingMember = memberInfo;

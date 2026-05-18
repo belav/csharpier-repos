@@ -65,11 +65,13 @@ namespace System.Activities.Statements
                 context.GetExtension<CompensationExtension>();
             if (compensationExtension == null)
             {
-                throw SA.FxTrace.Exception.AsError(
-                    new InvalidOperationException(
-                        SA.SR.CompensateWithoutCompensableActivity(this.DisplayName)
-                    )
-                );
+                throw SA.FxTrace
+                    .Exception
+                    .AsError(
+                        new InvalidOperationException(
+                            SA.SR.CompensateWithoutCompensableActivity(this.DisplayName)
+                        )
+                    );
             }
 
             CompensationToken token = Target.Get(context);
@@ -85,10 +87,8 @@ namespace System.Activities.Statements
                     this.onChildCompensated = new CompletionCallback(InternalExecute);
                 }
 
-                this.toCompensateToken.Set(
-                    context,
-                    new CompensationToken(tokenData.ExecutionTracker.Get())
-                );
+                this.toCompensateToken
+                    .Set(context, new CompensationToken(tokenData.ExecutionTracker.Get()));
 
                 Fx.Assert(Body != null, "Body must be valid");
                 context.ScheduleActivity(Body, this.onChildCompensated);

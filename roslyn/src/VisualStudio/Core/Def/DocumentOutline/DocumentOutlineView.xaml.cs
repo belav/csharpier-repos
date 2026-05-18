@@ -397,11 +397,9 @@ namespace Microsoft.VisualStudio.LanguageServices.DocumentOutline
                 {
                     var textView = _viewTracker.GetActiveView();
                     textView.TryMoveCaretToAndEnsureVisible(
-                        symbolModel
-                            .Data.SelectionRangeSpan.TranslateTo(
-                                textView.TextSnapshot,
-                                SpanTrackingMode.EdgeInclusive
-                            )
+                        symbolModel.Data
+                            .SelectionRangeSpan
+                            .TranslateTo(textView.TextSnapshot, SpanTrackingMode.EdgeInclusive)
                             .Start,
                         _outliningManagerService
                     );

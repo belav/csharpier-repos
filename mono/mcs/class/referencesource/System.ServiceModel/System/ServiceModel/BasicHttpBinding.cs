@@ -130,15 +130,16 @@ namespace System.ServiceModel
             BasicHttpBindingElement element = section.Bindings[configurationName];
             if (element == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ConfigurationErrorsException(
-                        SR.GetString(
-                            SR.ConfigInvalidBindingConfigurationName,
-                            configurationName,
-                            ConfigurationStrings.BasicHttpBindingCollectionElementName
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        new ConfigurationErrorsException(
+                            SR.GetString(
+                                SR.ConfigInvalidBindingConfigurationName,
+                                configurationName,
+                                ConfigurationStrings.BasicHttpBindingCollectionElementName
+                            )
                         )
-                    )
-                );
+                    );
             }
             else
             {
@@ -159,14 +160,15 @@ namespace System.ServiceModel
                     == HttpClientCredentialType.InheritedFromHost
             )
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(
-                        SR.GetString(
-                            SR.HttpClientCredentialTypeInvalid,
-                            this.BasicHttpSecurity.Transport.ClientCredentialType
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(
+                                SR.HttpClientCredentialTypeInvalid,
+                                this.BasicHttpSecurity.Transport.ClientCredentialType
+                            )
                         )
-                    )
-                );
+                    );
             }
 
             return base.BuildChannelFactory<TChannel>(parameters);

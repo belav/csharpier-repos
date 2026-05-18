@@ -100,15 +100,16 @@ namespace System.Web.Services.Description
             soapAddress.Location = serviceUrl;
             if (this.UriFixups != null)
             {
-                this.UriFixups.Add(
-                    delegate(Uri current)
-                    {
-                        soapAddress.Location = DiscoveryServerType.CombineUris(
-                            current,
-                            soapAddress.Location
-                        );
-                    }
-                );
+                this.UriFixups
+                    .Add(
+                        delegate(Uri current)
+                        {
+                            soapAddress.Location = DiscoveryServerType.CombineUris(
+                                current,
+                                soapAddress.Location
+                            );
+                        }
+                    );
             }
             return soapAddress;
         }

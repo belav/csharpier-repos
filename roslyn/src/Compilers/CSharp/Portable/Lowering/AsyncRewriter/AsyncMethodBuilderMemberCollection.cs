@@ -282,8 +282,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             if (method.IsAsyncEffectivelyReturningGenericTask(F.Compilation))
             {
                 var returnType = (NamedTypeSymbol)method.ReturnType;
-                var resultType = returnType
-                    .TypeArgumentsWithAnnotationsNoUseSiteDiagnostics.Single()
+                var resultType = returnType.TypeArgumentsWithAnnotationsNoUseSiteDiagnostics
+                    .Single()
                     .Type;
                 if (resultType.IsDynamic())
                 {
@@ -414,11 +414,12 @@ namespace Microsoft.CodeAnalysis.CSharp
                     }
                     else
                     {
-                        F.Diagnostics.Add(
-                            ErrorCode.ERR_WrongArityAsyncReturn,
-                            F.Syntax.Location,
-                            builderType
-                        );
+                        F.Diagnostics
+                            .Add(
+                                ErrorCode.ERR_WrongArityAsyncReturn,
+                                F.Syntax.Location,
+                                builderType
+                            );
                         return null;
                     }
                 }
@@ -604,12 +605,13 @@ namespace Microsoft.CodeAnalysis.CSharp
                     return method;
                 }
             }
-            F.Diagnostics.Add(
-                ErrorCode.ERR_MissingPredefinedMember,
-                F.Syntax.Location,
-                builderType,
-                methodName
-            );
+            F.Diagnostics
+                .Add(
+                    ErrorCode.ERR_MissingPredefinedMember,
+                    F.Syntax.Location,
+                    builderType,
+                    methodName
+                );
             return null;
         }
 

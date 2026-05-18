@@ -75,9 +75,8 @@ namespace System.ServiceModel
             {
                 if (!AddressFilterModeHelper.IsDefined(value))
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ArgumentOutOfRangeException("value")
-                    );
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperError(new ArgumentOutOfRangeException("value"));
                 }
 
                 this.addressFilterMode = value;
@@ -103,12 +102,13 @@ namespace System.ServiceModel
                 }
                 if (value == string.Empty)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ArgumentOutOfRangeException(
-                            "value",
-                            SR.GetString(SR.SFxConfigurationNameCannotBeEmpty)
-                        )
-                    );
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperError(
+                            new ArgumentOutOfRangeException(
+                                "value",
+                                SR.GetString(SR.SFxConfigurationNameCannotBeEmpty)
+                            )
+                        );
                 }
                 this.configurationName = value;
             }
@@ -131,9 +131,8 @@ namespace System.ServiceModel
                         break;
 
                     default:
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new ArgumentOutOfRangeException("value")
-                        );
+                        throw DiagnosticUtility.ExceptionUtility
+                            .ThrowHelperError(new ArgumentOutOfRangeException("value"));
                 }
 
                 this.transactionIsolationLevel = value;
@@ -166,9 +165,8 @@ namespace System.ServiceModel
             {
                 if (!ConcurrencyModeHelper.IsDefined(value))
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ArgumentOutOfRangeException("value")
-                    );
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperError(new ArgumentOutOfRangeException("value"));
                 }
 
                 this.concurrencyMode = value;
@@ -190,9 +188,8 @@ namespace System.ServiceModel
             {
                 if (!InstanceContextModeHelper.IsDefined(value))
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ArgumentOutOfRangeException("value")
-                    );
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperError(new ArgumentOutOfRangeException("value"));
                 }
 
                 this.instanceMode = value;
@@ -251,9 +248,8 @@ namespace System.ServiceModel
             {
                 if (value == null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ArgumentNullException("value")
-                    );
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperError(new ArgumentNullException("value"));
                 }
 
                 try
@@ -263,9 +259,10 @@ namespace System.ServiceModel
                     if (timeout < TimeSpan.Zero)
                     {
                         string message = SR.GetString(SR.SFxTimeoutOutOfRange0);
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new ArgumentOutOfRangeException("value", value, message)
-                        );
+                        throw DiagnosticUtility.ExceptionUtility
+                            .ThrowHelperError(
+                                new ArgumentOutOfRangeException("value", value, message)
+                            );
                     }
 
                     this.transactionTimeout = timeout;
@@ -274,19 +271,19 @@ namespace System.ServiceModel
                 }
                 catch (FormatException e)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ArgumentException(
-                            SR.GetString(SR.SFxTimeoutInvalidStringFormat),
-                            "value",
-                            e
-                        )
-                    );
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperError(
+                            new ArgumentException(
+                                SR.GetString(SR.SFxTimeoutInvalidStringFormat),
+                                "value",
+                                e
+                            )
+                        );
                 }
                 catch (OverflowException)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ArgumentOutOfRangeException("value")
-                    );
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperError(new ArgumentOutOfRangeException("value"));
                 }
             }
         }
@@ -364,9 +361,8 @@ namespace System.ServiceModel
         void SetIsolationLevel(ChannelDispatcher channelDispatcher)
         {
             if (channelDispatcher == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                    "channelDispatcher"
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperArgumentNull("channelDispatcher");
 
             channelDispatcher.TransactionIsolationLevel = this.transactionIsolationLevel;
         }
@@ -378,11 +374,15 @@ namespace System.ServiceModel
         {
             if (this.concurrencyMode != ConcurrencyMode.Single && this.ensureOrderedDispatch)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(
-                        SR.GetString(SR.SFxNonConcurrentOrEnsureOrderedDispatch, description.Name)
-                    )
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(
+                                SR.SFxNonConcurrentOrEnsureOrderedDispatch,
+                                description.Name
+                            )
+                        )
+                    );
             }
         }
 
@@ -492,23 +492,25 @@ namespace System.ServiceModel
                             if (instanceProvider == null)
                             {
                                 if (serviceType == null && this.wellKnownSingleton == null)
-                                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                                        new InvalidOperationException(
-                                            SR.GetString(
-                                                SR.InstanceSettingsMustHaveTypeOrWellKnownObject0
+                                    throw DiagnosticUtility.ExceptionUtility
+                                        .ThrowHelperError(
+                                            new InvalidOperationException(
+                                                SR.GetString(
+                                                    SR.InstanceSettingsMustHaveTypeOrWellKnownObject0
+                                                )
                                             )
-                                        )
-                                    );
+                                        );
 
                                 if (
                                     this.instanceMode != InstanceContextMode.Single
                                     && this.wellKnownSingleton != null
                                 )
-                                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                                        new InvalidOperationException(
-                                            SR.GetString(SR.SFxWellKnownNonSingleton0)
-                                        )
-                                    );
+                                    throw DiagnosticUtility.ExceptionUtility
+                                        .ThrowHelperError(
+                                            new InvalidOperationException(
+                                                SR.GetString(SR.SFxWellKnownNonSingleton0)
+                                            )
+                                        );
                             }
                             else
                             {

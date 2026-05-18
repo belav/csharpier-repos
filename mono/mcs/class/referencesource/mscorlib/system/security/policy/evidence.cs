@@ -1487,16 +1487,15 @@ namespace System.Security.Policy
                 EvidenceBase hostEvidence = null;
                 if (targetDomain != null)
                 {
-                    hostEvidence =
-                        AppDomain.CurrentDomain.HostSecurityManager.GenerateAppDomainEvidence(type);
+                    hostEvidence = AppDomain.CurrentDomain
+                        .HostSecurityManager
+                        .GenerateAppDomainEvidence(type);
                 }
                 else if (targetAssembly != null)
                 {
-                    hostEvidence =
-                        AppDomain.CurrentDomain.HostSecurityManager.GenerateAssemblyEvidence(
-                            type,
-                            targetAssembly
-                        );
+                    hostEvidence = AppDomain.CurrentDomain
+                        .HostSecurityManager
+                        .GenerateAssemblyEvidence(type, targetAssembly);
                 }
 
                 // If the host generated the evidence, verify that it generated the evidence we expected
@@ -1505,8 +1504,9 @@ namespace System.Security.Policy
                 {
                     if (!type.IsAssignableFrom(hostEvidence.GetType()))
                     {
-                        string hostType = AppDomain
-                            .CurrentDomain.HostSecurityManager.GetType()
+                        string hostType = AppDomain.CurrentDomain
+                            .HostSecurityManager
+                            .GetType()
                             .FullName;
                         string recievedType = hostEvidence.GetType().FullName;
                         string requestedType = type.FullName;

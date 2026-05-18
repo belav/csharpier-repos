@@ -189,9 +189,8 @@ namespace Microsoft.Extensions.DependencyInjection
                 nameof(TestTypedClient),
                 options =>
                 {
-                    options.HttpClientActions.Add(
-                        (c) => c.BaseAddress = new Uri("http://example.com")
-                    );
+                    options.HttpClientActions
+                        .Add((c) => c.BaseAddress = new Uri("http://example.com"));
                 }
             );
 
@@ -217,9 +216,8 @@ namespace Microsoft.Extensions.DependencyInjection
                 "TestGenericTypedClient<string>",
                 options =>
                 {
-                    options.HttpClientActions.Add(
-                        (c) => c.BaseAddress = new Uri("http://example.com")
-                    );
+                    options.HttpClientActions
+                        .Add((c) => c.BaseAddress = new Uri("http://example.com"));
                 }
             );
 
@@ -245,9 +243,8 @@ namespace Microsoft.Extensions.DependencyInjection
                 nameof(ITestTypedClient),
                 options =>
                 {
-                    options.HttpClientActions.Add(
-                        (c) => c.BaseAddress = new Uri("http://example.com")
-                    );
+                    options.HttpClientActions
+                        .Add((c) => c.BaseAddress = new Uri("http://example.com"));
                 }
             );
 
@@ -273,9 +270,8 @@ namespace Microsoft.Extensions.DependencyInjection
                 "test",
                 options =>
                 {
-                    options.HttpClientActions.Add(
-                        (c) => c.BaseAddress = new Uri("http://example.com")
-                    );
+                    options.HttpClientActions
+                        .Add((c) => c.BaseAddress = new Uri("http://example.com"));
                 }
             );
 
@@ -301,9 +297,8 @@ namespace Microsoft.Extensions.DependencyInjection
                 "test",
                 options =>
                 {
-                    options.HttpClientActions.Add(
-                        (c) => c.BaseAddress = new Uri("http://example.com")
-                    );
+                    options.HttpClientActions
+                        .Add((c) => c.BaseAddress = new Uri("http://example.com"));
                 }
             );
 
@@ -329,9 +324,8 @@ namespace Microsoft.Extensions.DependencyInjection
                 nameof(TestTypedClient),
                 options =>
                 {
-                    options.HttpClientActions.Add(
-                        (c) => c.BaseAddress = new Uri("http://example.com")
-                    );
+                    options.HttpClientActions
+                        .Add((c) => c.BaseAddress = new Uri("http://example.com"));
                 }
             );
 
@@ -363,9 +357,8 @@ namespace Microsoft.Extensions.DependencyInjection
                 nameof(ITestTypedClient),
                 options =>
                 {
-                    options.HttpClientActions.Add(
-                        (c) => c.BaseAddress = new Uri("http://example.com")
-                    );
+                    options.HttpClientActions
+                        .Add((c) => c.BaseAddress = new Uri("http://example.com"));
                 }
             );
 
@@ -397,9 +390,8 @@ namespace Microsoft.Extensions.DependencyInjection
                 "test",
                 options =>
                 {
-                    options.HttpClientActions.Add(
-                        (c) => c.BaseAddress = new Uri("http://example.com")
-                    );
+                    options.HttpClientActions
+                        .Add((c) => c.BaseAddress = new Uri("http://example.com"));
                 }
             );
 
@@ -425,9 +417,8 @@ namespace Microsoft.Extensions.DependencyInjection
                 "test",
                 options =>
                 {
-                    options.HttpClientActions.Add(
-                        (c) => c.BaseAddress = new Uri("http://example.com")
-                    );
+                    options.HttpClientActions
+                        .Add((c) => c.BaseAddress = new Uri("http://example.com"));
                 }
             );
 
@@ -455,9 +446,8 @@ namespace Microsoft.Extensions.DependencyInjection
                 "test",
                 options =>
                 {
-                    options.HttpClientActions.Add(
-                        (c) => c.BaseAddress = new Uri("http://example.com")
-                    );
+                    options.HttpClientActions
+                        .Add((c) => c.BaseAddress = new Uri("http://example.com"));
                 }
             );
 
@@ -492,9 +482,8 @@ namespace Microsoft.Extensions.DependencyInjection
                 "test",
                 options =>
                 {
-                    options.HttpClientActions.Add(
-                        (c) => c.BaseAddress = new Uri("http://example.com")
-                    );
+                    options.HttpClientActions
+                        .Add((c) => c.BaseAddress = new Uri("http://example.com"));
                 }
             );
 
@@ -528,9 +517,8 @@ namespace Microsoft.Extensions.DependencyInjection
                 "test",
                 options =>
                 {
-                    options.HttpClientActions.Add(
-                        (c) => c.BaseAddress = new Uri("http://example.com")
-                    );
+                    options.HttpClientActions
+                        .Add((c) => c.BaseAddress = new Uri("http://example.com"));
                 }
             );
 
@@ -564,9 +552,8 @@ namespace Microsoft.Extensions.DependencyInjection
                 "test",
                 options =>
                 {
-                    options.HttpClientActions.Add(
-                        (c) => c.BaseAddress = new Uri("http://example.com")
-                    );
+                    options.HttpClientActions
+                        .Add((c) => c.BaseAddress = new Uri("http://example.com"));
                 }
             );
 
@@ -600,9 +587,8 @@ namespace Microsoft.Extensions.DependencyInjection
                 "test",
                 options =>
                 {
-                    options.HttpClientActions.Add(
-                        (c) => c.BaseAddress = new Uri("http://example.com")
-                    );
+                    options.HttpClientActions
+                        .Add((c) => c.BaseAddress = new Uri("http://example.com"));
                 }
             );
 
@@ -831,9 +817,8 @@ namespace Microsoft.Extensions.DependencyInjection
                 "test",
                 options =>
                 {
-                    options.HttpClientActions.Add(
-                        (c) => c.BaseAddress = new Uri("http://example.com")
-                    );
+                    options.HttpClientActions
+                        .Add((c) => c.BaseAddress = new Uri("http://example.com"));
                 }
             );
 
@@ -868,9 +853,8 @@ namespace Microsoft.Extensions.DependencyInjection
                 "test",
                 options =>
                 {
-                    options.HttpClientActions.Add(
-                        (c) => c.BaseAddress = new Uri("http://example.com")
-                    );
+                    options.HttpClientActions
+                        .Add((c) => c.BaseAddress = new Uri("http://example.com"));
                 }
             );
 
@@ -1142,10 +1126,11 @@ namespace Microsoft.Extensions.DependencyInjection
 
             Assert.Same(client.Service, request.Properties[nameof(SingletonService)]);
 #else
-            request.Options.TryGetValue(
-                new HttpRequestOptionsKey<SingletonService>(nameof(SingletonService)),
-                out SingletonService? optService
-            );
+            request.Options
+                .TryGetValue(
+                    new HttpRequestOptionsKey<SingletonService>(nameof(SingletonService)),
+                    out SingletonService? optService
+                );
 
             Assert.Same(services.GetRequiredService<SingletonService>(), optService);
 
@@ -1169,8 +1154,8 @@ namespace Microsoft.Extensions.DependencyInjection
             using (var scope = services.GetRequiredService<IServiceScopeFactory>().CreateScope())
             {
                 // Act
-                var client =
-                    scope.ServiceProvider.GetRequiredService<TypedClientWithSingletonService>();
+                var client = scope.ServiceProvider
+                    .GetRequiredService<TypedClientWithSingletonService>();
 
                 // Assert
                 var request = new HttpRequestMessage(HttpMethod.Get, "http://example.com/");
@@ -1189,10 +1174,11 @@ namespace Microsoft.Extensions.DependencyInjection
 
                 Assert.Same(client.Service, request.Properties[nameof(SingletonService)]);
 #else
-                request.Options.TryGetValue(
-                    new HttpRequestOptionsKey<SingletonService>(nameof(SingletonService)),
-                    out SingletonService? optService
-                );
+                request.Options
+                    .TryGetValue(
+                        new HttpRequestOptionsKey<SingletonService>(nameof(SingletonService)),
+                        out SingletonService? optService
+                    );
 
                 Assert.Same(services.GetRequiredService<SingletonService>(), optService);
 
@@ -1242,8 +1228,8 @@ namespace Microsoft.Extensions.DependencyInjection
             using (var scope = services.GetRequiredService<IServiceScopeFactory>().CreateScope())
             {
                 // Act
-                var client =
-                    scope.ServiceProvider.GetRequiredService<TypedClientWithScopedService>();
+                var client = scope.ServiceProvider
+                    .GetRequiredService<TypedClientWithScopedService>();
 
                 // Assert
                 var request = new HttpRequestMessage(HttpMethod.Get, "http://example.com/");
@@ -1262,10 +1248,11 @@ namespace Microsoft.Extensions.DependencyInjection
 
                 Assert.NotSame(client.Service, request.Properties[nameof(ScopedService)]);
 #else
-                request.Options.TryGetValue(
-                    new HttpRequestOptionsKey<ScopedService>(nameof(ScopedService)),
-                    out ScopedService? optService
-                );
+                request.Options
+                    .TryGetValue(
+                        new HttpRequestOptionsKey<ScopedService>(nameof(ScopedService)),
+                        out ScopedService? optService
+                    );
 
                 Assert.NotSame(
                     scope.ServiceProvider.GetRequiredService<ScopedService>(),
@@ -1310,10 +1297,11 @@ namespace Microsoft.Extensions.DependencyInjection
 
             Assert.NotSame(client.Service, request.Properties[nameof(TransientService)]);
 #else
-            request.Options.TryGetValue(
-                new HttpRequestOptionsKey<TransientService>(nameof(TransientService)),
-                out TransientService? optService
-            );
+            request.Options
+                .TryGetValue(
+                    new HttpRequestOptionsKey<TransientService>(nameof(TransientService)),
+                    out TransientService? optService
+                );
 
             Assert.NotSame(services.GetRequiredService<TransientService>(), optService);
 
@@ -1337,8 +1325,8 @@ namespace Microsoft.Extensions.DependencyInjection
             using (var scope = services.GetRequiredService<IServiceScopeFactory>().CreateScope())
             {
                 // Act
-                var client =
-                    scope.ServiceProvider.GetRequiredService<TypedClientWithTransientService>();
+                var client = scope.ServiceProvider
+                    .GetRequiredService<TypedClientWithTransientService>();
 
                 // Assert
                 var request = new HttpRequestMessage(HttpMethod.Get, "http://example.com/");
@@ -1352,10 +1340,11 @@ namespace Microsoft.Extensions.DependencyInjection
 
                 Assert.NotSame(client.Service, request.Properties[nameof(TransientService)]);
 #else
-                request.Options.TryGetValue(
-                    new HttpRequestOptionsKey<TransientService>(nameof(TransientService)),
-                    out TransientService? optService
-                );
+                request.Options
+                    .TryGetValue(
+                        new HttpRequestOptionsKey<TransientService>(nameof(TransientService)),
+                        out TransientService? optService
+                    );
 
                 Assert.NotSame(services.GetRequiredService<TransientService>(), optService);
 
@@ -1692,10 +1681,11 @@ namespace Microsoft.Extensions.DependencyInjection
 #if NETFRAMEWORK
                 request.Properties[nameof(SingletonService)] = Service;
 #else
-                request.Options.Set(
-                    new HttpRequestOptionsKey<SingletonService>(nameof(SingletonService)),
-                    Service
-                );
+                request.Options
+                    .Set(
+                        new HttpRequestOptionsKey<SingletonService>(nameof(SingletonService)),
+                        Service
+                    );
 #endif
                 return Task.FromResult(new HttpResponseMessage());
             }
@@ -1718,10 +1708,8 @@ namespace Microsoft.Extensions.DependencyInjection
 #if NETFRAMEWORK
                 request.Properties[nameof(ScopedService)] = Service;
 #else
-                request.Options.Set(
-                    new HttpRequestOptionsKey<ScopedService>(nameof(ScopedService)),
-                    Service
-                );
+                request.Options
+                    .Set(new HttpRequestOptionsKey<ScopedService>(nameof(ScopedService)), Service);
 #endif
                 return Task.FromResult(new HttpResponseMessage());
             }
@@ -1744,10 +1732,11 @@ namespace Microsoft.Extensions.DependencyInjection
 #if NETFRAMEWORK
                 request.Properties[nameof(TransientService)] = Service;
 #else
-                request.Options.Set(
-                    new HttpRequestOptionsKey<TransientService>(nameof(TransientService)),
-                    Service
-                );
+                request.Options
+                    .Set(
+                        new HttpRequestOptionsKey<TransientService>(nameof(TransientService)),
+                        Service
+                    );
 #endif
                 return Task.FromResult(new HttpResponseMessage());
             }

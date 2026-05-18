@@ -939,13 +939,14 @@ namespace Microsoft.CodeAnalysis.CSharp
         {
             // Verify we're only skipping placeholders for int values, where the escape scope is always CallingMethod.
             Debug.Assert(
-                node.ArgumentPlaceholders.All(p =>
-                    p
-                        is BoundImplicitIndexerValuePlaceholder
-                        {
-                            Type.SpecialType: SpecialType.System_Int32
-                        }
-                )
+                node.ArgumentPlaceholders
+                    .All(p =>
+                        p
+                            is BoundImplicitIndexerValuePlaceholder
+                            {
+                                Type.SpecialType: SpecialType.System_Int32
+                            }
+                    )
             );
 
             base.VisitImplicitIndexerAccess(node);

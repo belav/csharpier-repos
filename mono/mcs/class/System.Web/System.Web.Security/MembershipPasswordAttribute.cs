@@ -51,12 +51,10 @@ namespace System.Web.Security
         {
             if (Membership.Provider != null)
             {
-                MinRequiredNonAlphanumericCharacters = Membership
-                    .Provider
+                MinRequiredNonAlphanumericCharacters = Membership.Provider
                     .MinRequiredNonAlphanumericCharacters;
                 MinRequiredPasswordLength = Membership.Provider.MinRequiredPasswordLength;
-                PasswordStrengthRegularExpression = Membership
-                    .Provider
+                PasswordStrengthRegularExpression = Membership.Provider
                     .PasswordStrengthRegularExpression;
             }
             else

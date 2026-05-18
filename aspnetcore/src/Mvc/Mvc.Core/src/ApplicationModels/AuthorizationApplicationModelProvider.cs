@@ -42,8 +42,8 @@ internal sealed class AuthorizationApplicationModelProvider : IApplicationModelP
 
         foreach (var controllerModel in context.Result.Controllers)
         {
-            var controllerModelAuthData = controllerModel
-                .Attributes.OfType<IAuthorizeData>()
+            var controllerModelAuthData = controllerModel.Attributes
+                .OfType<IAuthorizeData>()
                 .ToArray();
             if (controllerModelAuthData.Length > 0)
             {

@@ -133,9 +133,8 @@ namespace System.ServiceModel.Channels
         {
             if (this.IsDisposed)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ObjectDisposedException(this.GetType().FullName)
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(new ObjectDisposedException(this.GetType().FullName));
             }
         }
     }

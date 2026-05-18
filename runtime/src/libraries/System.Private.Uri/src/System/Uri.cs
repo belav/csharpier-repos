@@ -550,11 +550,8 @@ namespace System
             else
             {
                 dontEscape = false;
-                relativeUri = baseUri.Syntax.InternalResolve(
-                    baseUri,
-                    this,
-                    out UriFormatException? e
-                );
+                relativeUri = baseUri.Syntax
+                    .InternalResolve(baseUri, this, out UriFormatException? e);
                 if (e != null)
                     throw e;
             }
@@ -605,11 +602,8 @@ namespace System
             else
             {
                 dontEscape = false;
-                newUriString = baseUri.Syntax.InternalResolve(
-                    baseUri,
-                    this,
-                    out UriFormatException? e
-                );
+                newUriString = baseUri.Syntax
+                    .InternalResolve(baseUri, this, out UriFormatException? e);
                 if (e != null)
                     throw e;
             }
@@ -3311,10 +3305,9 @@ namespace System
                 dest.Append(':');
 
                 const int MaxUshortLength = 5;
-                bool success = _info.Offset.PortValue.TryFormat(
-                    dest.AppendSpan(MaxUshortLength),
-                    out int charsWritten
-                );
+                bool success = _info.Offset
+                    .PortValue
+                    .TryFormat(dest.AppendSpan(MaxUshortLength), out int charsWritten);
                 Debug.Assert(success);
                 dest.Length -= MaxUshortLength - charsWritten;
             }

@@ -144,11 +144,12 @@ namespace System.ServiceModel.Discovery
                 Guid guid;
                 if (!TryGetUuidGuid(scope, out guid))
                 {
-                    throw FxTrace.Exception.AsError(
-                        new FormatException(
-                            SR2.DiscoveryFormatInvalidScopeUuidUri(scope.ToString())
-                        )
-                    );
+                    throw FxTrace.Exception
+                        .AsError(
+                            new FormatException(
+                                SR2.DiscoveryFormatInvalidScopeUuidUri(scope.ToString())
+                            )
+                        );
                 }
                 compiledScope = CompileForMatchByUuid(guid);
                 compiledMatchBy = CompiledScopeCriteriaMatchBy.Exact;
@@ -157,11 +158,12 @@ namespace System.ServiceModel.Discovery
             {
                 if (string.Compare(scope.Scheme, "ldap", StringComparison.OrdinalIgnoreCase) != 0)
                 {
-                    throw FxTrace.Exception.AsError(
-                        new FormatException(
-                            SR2.DiscoveryFormatInvalidScopeLdapUri(scope.ToString())
-                        )
-                    );
+                    throw FxTrace.Exception
+                        .AsError(
+                            new FormatException(
+                                SR2.DiscoveryFormatInvalidScopeLdapUri(scope.ToString())
+                            )
+                        );
                 }
                 compiledScope = CompileForMatchByLdap(scope);
                 compiledMatchBy = CompiledScopeCriteriaMatchBy.StartsWith;
@@ -173,16 +175,17 @@ namespace System.ServiceModel.Discovery
             }
             else
             {
-                throw FxTrace.Exception.ArgumentOutOfRange(
-                    "matchBy",
-                    matchBy,
-                    SR2.DiscoveryMatchingRuleNotSupported(
-                        FindCriteria.ScopeMatchByExact,
-                        FindCriteria.ScopeMatchByPrefix,
-                        FindCriteria.ScopeMatchByUuid,
-                        FindCriteria.ScopeMatchByLdap
-                    )
-                );
+                throw FxTrace.Exception
+                    .ArgumentOutOfRange(
+                        "matchBy",
+                        matchBy,
+                        SR2.DiscoveryMatchingRuleNotSupported(
+                            FindCriteria.ScopeMatchByExact,
+                            FindCriteria.ScopeMatchByPrefix,
+                            FindCriteria.ScopeMatchByUuid,
+                            FindCriteria.ScopeMatchByLdap
+                        )
+                    );
             }
 
             return new CompiledScopeCriteria(compiledScope, compiledMatchBy);

@@ -366,8 +366,8 @@ namespace System.Web.UI
                         CompilationSection compilationSection = RuntimeConfig
                             .GetAppConfig()
                             .Compilation;
-                        referencedAssemblies = compilationSection
-                            .Assemblies.OfType<AssemblyInfo>()
+                        referencedAssemblies = compilationSection.Assemblies
+                            .OfType<AssemblyInfo>()
                             .SelectMany(assemblyInfo => assemblyInfo.AssemblyInternal);
                     }
 
@@ -1034,18 +1034,19 @@ namespace System.Web.UI
         private void AddFrameworkLoadedCheck()
         {
             // Add check for Sys to give better error message when the framework failed to load.
-            IPage.ClientScript.RegisterClientScriptBlock(
-                typeof(ScriptManager),
-                "FrameworkLoadedCheck",
-                ClientScriptManager.ClientScriptStart
-                    + "if (typeof(Sys) === 'undefined') throw new Error('"
-                    + HttpUtility.JavaScriptStringEncode(
-                        AtlasWeb.ScriptManager_FrameworkFailedToLoad
-                    )
-                    + "');\r\n"
-                    + ClientScriptManager.ClientScriptEnd,
-                addScriptTags: false
-            );
+            IPage.ClientScript
+                .RegisterClientScriptBlock(
+                    typeof(ScriptManager),
+                    "FrameworkLoadedCheck",
+                    ClientScriptManager.ClientScriptStart
+                        + "if (typeof(Sys) === 'undefined') throw new Error('"
+                        + HttpUtility.JavaScriptStringEncode(
+                            AtlasWeb.ScriptManager_FrameworkFailedToLoad
+                        )
+                        + "');\r\n"
+                        + ClientScriptManager.ClientScriptEnd,
+                    addScriptTags: false
+                );
         }
 
         private ScriptReferenceBase AddFrameworkScript(
@@ -1246,14 +1247,13 @@ namespace System.Web.UI
                     if (
                         scriptReference.IsAjaxFrameworkScript(this)
                         && (
-                            scriptReference.Name.StartsWith(
-                                "MicrosoftAjax.",
-                                StringComparison.OrdinalIgnoreCase
-                            )
-                            || scriptReference.Name.StartsWith(
-                                "MicrosoftAjaxCore.",
-                                StringComparison.OrdinalIgnoreCase
-                            )
+                            scriptReference.Name
+                                .StartsWith("MicrosoftAjax.", StringComparison.OrdinalIgnoreCase)
+                            || scriptReference.Name
+                                .StartsWith(
+                                    "MicrosoftAjaxCore.",
+                                    StringComparison.OrdinalIgnoreCase
+                                )
                         )
                     )
                     {
@@ -1618,19 +1618,20 @@ namespace System.Web.UI
                     // (since it won't be defined).
                     // We also need to force it to include the ASP.NET WebForms.js since it
                     // has other required functionality.
-                    IPage.ClientScript.GetPostBackEventReference(
-                        new PostBackOptions(
-                            this,
-                            null,
-                            null,
-                            false,
-                            false,
-                            false,
-                            false,
-                            true,
-                            null
-                        )
-                    );
+                    IPage.ClientScript
+                        .GetPostBackEventReference(
+                            new PostBackOptions(
+                                this,
+                                null,
+                                null,
+                                false,
+                                false,
+                                false,
+                                false,
+                                true,
+                                null
+                            )
+                        );
                 }
                 // on GET request we register the glob block...
                 RegisterGlobalizationScriptBlock();
@@ -1919,9 +1920,8 @@ namespace System.Web.UI
             if (page != null)
             {
                 ScriptManager sm = GetCurrent(page);
-                ScriptResourceDefinition def = ScriptManager.ScriptResourceMapping.GetDefinition(
-                    resourceName
-                );
+                ScriptResourceDefinition def = ScriptManager.ScriptResourceMapping
+                    .GetDefinition(resourceName);
                 if (sm != null && def != null)
                 {
                     sm.Scripts.Add(new ScriptReference() { Name = resourceName });
@@ -2317,12 +2317,14 @@ namespace System.Web.UI
 
                     if (hasAppServicesScript && (script == _applicationServicesReference))
                     {
-                        this.IPage.ClientScript.RegisterClientScriptBlock(
-                            typeof(ScriptManager),
-                            "AppServicesConfig",
-                            _appServicesInitializationScript,
-                            true
-                        );
+                        this.IPage
+                            .ClientScript
+                            .RegisterClientScriptBlock(
+                                typeof(ScriptManager),
+                                "AppServicesConfig",
+                                _appServicesInitializationScript,
+                                true
+                            );
                         hasAppServicesScript = false;
                     }
                 }
@@ -2607,10 +2609,11 @@ namespace System.Web.UI
                                 (ajaxFrameworkMode == AjaxFrameworkMode.Explicit)
                                 && sr.IsAjaxFrameworkScript(this)
                                 && (applicationServicesReference == null)
-                                && sr.EffectiveResourceName.StartsWith(
-                                    "MicrosoftAjaxApplicationServices.",
-                                    StringComparison.Ordinal
-                                )
+                                && sr.EffectiveResourceName
+                                    .StartsWith(
+                                        "MicrosoftAjaxApplicationServices.",
+                                        StringComparison.Ordinal
+                                    )
                             )
                             {
                                 applicationServicesReference = csr;
@@ -2655,10 +2658,8 @@ namespace System.Web.UI
                                 (ajaxFrameworkMode == AjaxFrameworkMode.Explicit)
                                 && sr.IsAjaxFrameworkScript(this)
                                 && (
-                                    sr.EffectiveResourceName.StartsWith(
-                                        "MicrosoftAjax.",
-                                        StringComparison.Ordinal
-                                    )
+                                    sr.EffectiveResourceName
+                                        .StartsWith("MicrosoftAjax.", StringComparison.Ordinal)
                                 )
                             ) && !uniqueScriptDict.Contains(key)
                         )
@@ -2672,10 +2673,11 @@ namespace System.Web.UI
                                 (ajaxFrameworkMode == AjaxFrameworkMode.Explicit)
                                 && sr.IsAjaxFrameworkScript(this)
                                 && (applicationServicesReference == null)
-                                && sr.EffectiveResourceName.StartsWith(
-                                    "MicrosoftAjaxApplicationServices.",
-                                    StringComparison.Ordinal
-                                )
+                                && sr.EffectiveResourceName
+                                    .StartsWith(
+                                        "MicrosoftAjaxApplicationServices.",
+                                        StringComparison.Ordinal
+                                    )
                             )
                             {
                                 applicationServicesReference = sr;

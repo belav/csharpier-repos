@@ -35,12 +35,13 @@ namespace System.Activities
                 throw FxTrace.Exception.ArgumentNull("transaction");
             }
 
-            this.executor.SetTransaction(
-                this.transactionHandle,
-                transaction,
-                transactionHandle.Owner,
-                this.CurrentInstance
-            );
+            this.executor
+                .SetTransaction(
+                    this.transactionHandle,
+                    transaction,
+                    transactionHandle.Owner,
+                    this.CurrentInstance
+                );
         }
     }
 }

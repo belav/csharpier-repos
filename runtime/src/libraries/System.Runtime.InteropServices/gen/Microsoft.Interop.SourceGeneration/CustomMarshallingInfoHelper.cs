@@ -67,10 +67,11 @@ namespace Microsoft.Interop
                         return NoMarshallingInfo.Instance;
                     }
 
-                    entryPointType = entryPointType.ConstructedFrom.Construct(
-                        arrayManagedType.ElementType,
-                        entryPointType.TypeArguments.Last()
-                    );
+                    entryPointType = entryPointType.ConstructedFrom
+                        .Construct(
+                            arrayManagedType.ElementType,
+                            entryPointType.TypeArguments.Last()
+                        );
                 }
                 else if (
                     type is INamedTypeSymbol namedManagedCollectionType

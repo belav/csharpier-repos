@@ -31,9 +31,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             {
                 if (_lazyType == null)
                 {
-                    var type = _containingType.TypeSubstitution.SubstituteType(
-                        OriginalDefinition.TypeWithAnnotations
-                    );
+                    var type = _containingType.TypeSubstitution
+                        .SubstituteType(OriginalDefinition.TypeWithAnnotations);
                     Interlocked.CompareExchange(
                         ref _lazyType,
                         new TypeWithAnnotations.Boxed(type),
@@ -69,9 +68,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         {
             get
             {
-                return _containingType.TypeSubstitution.SubstituteCustomModifiers(
-                    OriginalDefinition.RefCustomModifiers
-                );
+                return _containingType.TypeSubstitution
+                    .SubstituteCustomModifiers(OriginalDefinition.RefCustomModifiers);
             }
         }
 

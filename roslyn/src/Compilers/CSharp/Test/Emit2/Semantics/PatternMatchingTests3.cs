@@ -659,9 +659,8 @@ class Source2
             var expectedOutput = "Source1 Source1 Source2 Source2 ";
             var compilation = CreateCompilation(
                 source,
-                options: TestOptions.DebugExe.WithNullableContextOptions(
-                    NullableContextOptions.Disable
-                )
+                options: TestOptions.DebugExe
+                    .WithNullableContextOptions(NullableContextOptions.Disable)
             );
             compilation.VerifyDiagnostics();
             var comp = CompileAndVerify(compilation, expectedOutput: expectedOutput);
@@ -707,9 +706,8 @@ class Source2
             var expectedOutput = "Source1 Source1 Source2 Source2 ";
             var compilation = CreateCompilation(
                 source,
-                options: TestOptions.DebugExe.WithNullableContextOptions(
-                    NullableContextOptions.Disable
-                )
+                options: TestOptions.DebugExe
+                    .WithNullableContextOptions(NullableContextOptions.Disable)
             );
             compilation.VerifyDiagnostics();
             var comp = CompileAndVerify(compilation, expectedOutput: expectedOutput);
@@ -755,9 +753,8 @@ class Source2
             var expectedOutput = "Source1 Source1 Source2 Source2 ";
             var compilation = CreateCompilation(
                 source,
-                options: TestOptions.DebugExe.WithNullableContextOptions(
-                    NullableContextOptions.Disable
-                )
+                options: TestOptions.DebugExe
+                    .WithNullableContextOptions(NullableContextOptions.Disable)
             );
             compilation.VerifyDiagnostics();
             var comp = CompileAndVerify(compilation, expectedOutput: expectedOutput);
@@ -803,9 +800,8 @@ class Source2
             var expectedOutput = "Source1 Source2 ";
             var compilation = CreateCompilation(
                 source,
-                options: TestOptions.DebugExe.WithNullableContextOptions(
-                    NullableContextOptions.Disable
-                )
+                options: TestOptions.DebugExe
+                    .WithNullableContextOptions(NullableContextOptions.Disable)
             );
             compilation.VerifyDiagnostics();
             var comp = CompileAndVerify(compilation, expectedOutput: expectedOutput);
@@ -832,9 +828,8 @@ class Program
             var expectedOutput = "Int16";
             var compilation = CreateCompilation(
                 source,
-                options: TestOptions.DebugExe.WithNullableContextOptions(
-                    NullableContextOptions.Disable
-                )
+                options: TestOptions.DebugExe
+                    .WithNullableContextOptions(NullableContextOptions.Disable)
             );
             compilation.VerifyDiagnostics();
             var comp = CompileAndVerify(compilation, expectedOutput: expectedOutput);
@@ -860,9 +855,8 @@ class Program
             var expectedOutput = "Int16";
             var compilation = CreateCompilation(
                 source,
-                options: TestOptions.DebugExe.WithNullableContextOptions(
-                    NullableContextOptions.Disable
-                )
+                options: TestOptions.DebugExe
+                    .WithNullableContextOptions(NullableContextOptions.Disable)
             );
             compilation.VerifyDiagnostics();
             var comp = CompileAndVerify(compilation, expectedOutput: expectedOutput);
@@ -908,9 +902,8 @@ class Source2
             var expectedOutput = "Source1 Source2 ";
             var compilation = CreateCompilation(
                 source,
-                options: TestOptions.DebugExe.WithNullableContextOptions(
-                    NullableContextOptions.Disable
-                )
+                options: TestOptions.DebugExe
+                    .WithNullableContextOptions(NullableContextOptions.Disable)
             );
             compilation.VerifyDiagnostics();
             var comp = CompileAndVerify(compilation, expectedOutput: expectedOutput);
@@ -955,9 +948,8 @@ class Source2
             var expectedOutput = "Source1 Source1 ";
             var compilation = CreateCompilation(
                 source,
-                options: TestOptions.DebugExe.WithNullableContextOptions(
-                    NullableContextOptions.Disable
-                )
+                options: TestOptions.DebugExe
+                    .WithNullableContextOptions(NullableContextOptions.Disable)
             );
             compilation.VerifyDiagnostics();
             var comp = CompileAndVerify(compilation, expectedOutput: expectedOutput);
@@ -1008,9 +1000,8 @@ class Source2
 ";
             var compilation = CreateCompilation(
                 source,
-                options: TestOptions.DebugExe.WithNullableContextOptions(
-                    NullableContextOptions.Disable
-                )
+                options: TestOptions.DebugExe
+                    .WithNullableContextOptions(NullableContextOptions.Disable)
             );
             compilation.VerifyDiagnostics(
                 // (10,42): error CS0029: Cannot implicitly convert type 'Source1' to 'Ultimate'
@@ -1082,9 +1073,8 @@ class Source2
 ";
             var compilation = CreateCompilation(
                 source,
-                options: TestOptions.DebugExe.WithNullableContextOptions(
-                    NullableContextOptions.Disable
-                )
+                options: TestOptions.DebugExe
+                    .WithNullableContextOptions(NullableContextOptions.Disable)
             );
             compilation.VerifyDiagnostics(
                 // (11,42): error CS0029: Cannot implicitly convert type 'Source1' to 'Ultimate'
@@ -1125,9 +1115,8 @@ class Program
 ";
             var compilation = CreateCompilation(
                 source,
-                options: TestOptions.DebugExe.WithNullableContextOptions(
-                    NullableContextOptions.Disable
-                )
+                options: TestOptions.DebugExe
+                    .WithNullableContextOptions(NullableContextOptions.Disable)
             );
             compilation.VerifyDiagnostics(
                 // (6,18): error CS8506: No best type was found for the switch expression.
@@ -1180,9 +1169,8 @@ TargetSubtype
 TargetSubtype";
             var compilation = CreateCompilation(
                 source,
-                options: TestOptions.DebugExe.WithNullableContextOptions(
-                    NullableContextOptions.Disable
-                )
+                options: TestOptions.DebugExe
+                    .WithNullableContextOptions(NullableContextOptions.Disable)
             );
             compilation.VerifyDiagnostics();
             var comp = CompileAndVerify(compilation, expectedOutput: expectedOutput);
@@ -1239,9 +1227,8 @@ Target->Ultimate
 Ultimate";
             var compilation = CreateCompilation(
                 source,
-                options: TestOptions.DebugExe.WithNullableContextOptions(
-                    NullableContextOptions.Disable
-                )
+                options: TestOptions.DebugExe
+                    .WithNullableContextOptions(NullableContextOptions.Disable)
             );
             compilation.VerifyDiagnostics();
             var comp = CompileAndVerify(compilation, expectedOutput: expectedOutput);
@@ -1298,9 +1285,8 @@ Target->Ultimate
 Ultimate";
             var compilation = CreateCompilation(
                 source,
-                options: TestOptions.DebugExe.WithNullableContextOptions(
-                    NullableContextOptions.Disable
-                )
+                options: TestOptions.DebugExe
+                    .WithNullableContextOptions(NullableContextOptions.Disable)
             );
             compilation.VerifyDiagnostics();
             var comp = CompileAndVerify(compilation, expectedOutput: expectedOutput);
@@ -1357,9 +1343,8 @@ Target->Ultimate
 (2, Ultimate)";
             var compilation = CreateCompilation(
                 source,
-                options: TestOptions.DebugExe.WithNullableContextOptions(
-                    NullableContextOptions.Disable
-                )
+                options: TestOptions.DebugExe
+                    .WithNullableContextOptions(NullableContextOptions.Disable)
             );
             compilation.VerifyDiagnostics();
             var comp = CompileAndVerify(compilation, expectedOutput: expectedOutput);
@@ -3315,9 +3300,8 @@ class C
 }";
                     var compilation = CreateCompilation(
                         source,
-                        parseOptions: TestOptions.Regular.WithLanguageVersion(
-                            LanguageVersion.CSharp9
-                        )
+                        parseOptions: TestOptions.Regular
+                            .WithLanguageVersion(LanguageVersion.CSharp9)
                     );
                     if (withExhaustive)
                     {
@@ -4606,7 +4590,8 @@ class Program
                             "System.Int32 N",
                             model
                                 .GetSymbolInfo(((ConstantPatternSyntax)pattern).Expression)
-                                .Symbol.ToTestDisplayString()
+                                .Symbol
+                                .ToTestDisplayString()
                         );
                         Assert.Equal(
                             "System.Object",
@@ -4620,13 +4605,15 @@ class Program
                             "System.Int32",
                             model
                                 .GetTypeInfo(((ConstantPatternSyntax)pattern).Expression)
-                                .Type.ToTestDisplayString()
+                                .Type
+                                .ToTestDisplayString()
                         );
                         Assert.Equal(
                             "System.Int32",
                             model
                                 .GetTypeInfo(((ConstantPatternSyntax)pattern).Expression)
-                                .ConvertedType.ToTestDisplayString()
+                                .ConvertedType
+                                .ToTestDisplayString()
                         );
                         break;
                     case 4:
@@ -4674,7 +4661,8 @@ class Program
                             "System.Int64",
                             model
                                 .GetSymbolInfo(((TypePatternSyntax)pattern).Type)
-                                .Symbol.ToTestDisplayString()
+                                .Symbol
+                                .ToTestDisplayString()
                         );
                         Assert.Equal(
                             "System.Object",
@@ -4706,7 +4694,8 @@ class Program
                             "System.Int32",
                             model
                                 .GetSymbolInfo(((TypePatternSyntax)pattern).Type)
-                                .Symbol.ToTestDisplayString()
+                                .Symbol
+                                .ToTestDisplayString()
                         );
                         Assert.Equal(
                             "System.Object",
@@ -4736,7 +4725,8 @@ class Program
                             "System.Int64",
                             model
                                 .GetSymbolInfo(((ConstantPatternSyntax)pattern).Expression)
-                                .Symbol.ToTestDisplayString()
+                                .Symbol
+                                .ToTestDisplayString()
                         );
                         Assert.Equal(
                             "System.Object",
@@ -4754,7 +4744,8 @@ class Program
                             "System.Int32",
                             model
                                 .GetSymbolInfo(((ConstantPatternSyntax)pattern).Expression)
-                                .Symbol.ToTestDisplayString()
+                                .Symbol
+                                .ToTestDisplayString()
                         );
                         Assert.Equal(
                             "System.Object",
@@ -4808,7 +4799,8 @@ class Program
                             "System.Char A",
                             model
                                 .GetSymbolInfo(((RelationalPatternSyntax)pattern).Expression)
-                                .Symbol.ToTestDisplayString()
+                                .Symbol
+                                .ToTestDisplayString()
                         );
                         Assert.Equal(
                             "System.Object",
@@ -4826,7 +4818,8 @@ class Program
                             "System.Char Z",
                             model
                                 .GetSymbolInfo(((RelationalPatternSyntax)pattern).Expression)
-                                .Symbol.ToTestDisplayString()
+                                .Symbol
+                                .ToTestDisplayString()
                         );
                         Assert.Equal(
                             "System.Char",
@@ -4868,7 +4861,8 @@ class Program
                             "System.Char a",
                             model
                                 .GetSymbolInfo(((RelationalPatternSyntax)pattern).Expression)
-                                .Symbol.ToTestDisplayString()
+                                .Symbol
+                                .ToTestDisplayString()
                         );
                         Assert.Equal(
                             "System.Object",
@@ -4886,7 +4880,8 @@ class Program
                             "System.Char z",
                             model
                                 .GetSymbolInfo(((RelationalPatternSyntax)pattern).Expression)
-                                .Symbol.ToTestDisplayString()
+                                .Symbol
+                                .ToTestDisplayString()
                         );
                         Assert.Equal(
                             "System.Char",
@@ -4940,7 +4935,8 @@ class Program
                             "System.Char c0",
                             model
                                 .GetSymbolInfo(((RelationalPatternSyntax)pattern).Expression)
-                                .Symbol.ToTestDisplayString()
+                                .Symbol
+                                .ToTestDisplayString()
                         );
                         Assert.Equal(
                             "System.Object",
@@ -4958,7 +4954,8 @@ class Program
                             "System.Char c9",
                             model
                                 .GetSymbolInfo(((RelationalPatternSyntax)pattern).Expression)
-                                .Symbol.ToTestDisplayString()
+                                .Symbol
+                                .ToTestDisplayString()
                         );
                         Assert.Equal(
                             "System.Char",
@@ -5053,7 +5050,8 @@ class Program
                             "System.Int32 N",
                             model
                                 .GetSymbolInfo(((ConstantPatternSyntax)pattern).Expression)
-                                .Symbol.ToTestDisplayString()
+                                .Symbol
+                                .ToTestDisplayString()
                         );
                         Assert.Equal(
                             "System.Object",
@@ -5067,13 +5065,15 @@ class Program
                             "System.Int32",
                             model
                                 .GetTypeInfo(((ConstantPatternSyntax)pattern).Expression)
-                                .Type.ToTestDisplayString()
+                                .Type
+                                .ToTestDisplayString()
                         );
                         Assert.Equal(
                             "System.Int32",
                             model
                                 .GetTypeInfo(((ConstantPatternSyntax)pattern).Expression)
-                                .ConvertedType.ToTestDisplayString()
+                                .ConvertedType
+                                .ToTestDisplayString()
                         );
                         break;
                     case 4:
@@ -5121,7 +5121,8 @@ class Program
                             "System.Int64",
                             model
                                 .GetSymbolInfo(((TypePatternSyntax)pattern).Type)
-                                .Symbol.ToTestDisplayString()
+                                .Symbol
+                                .ToTestDisplayString()
                         );
                         Assert.Equal(
                             "System.Object",
@@ -5147,13 +5148,15 @@ class Program
                             "System.Int32",
                             model
                                 .GetTypeInfo(((ConstantPatternSyntax)pattern).Expression)
-                                .Type.ToTestDisplayString()
+                                .Type
+                                .ToTestDisplayString()
                         );
                         Assert.Equal(
                             "System.Int32",
                             model
                                 .GetTypeInfo(((ConstantPatternSyntax)pattern).Expression)
-                                .ConvertedType.ToTestDisplayString()
+                                .ConvertedType
+                                .ToTestDisplayString()
                         );
                         break;
                     case 11:
@@ -5176,7 +5179,8 @@ class Program
                             "System.Int32",
                             model
                                 .GetSymbolInfo(((TypePatternSyntax)pattern).Type)
-                                .Symbol.ToTestDisplayString()
+                                .Symbol
+                                .ToTestDisplayString()
                         );
                         Assert.Equal(
                             "System.Object",
@@ -5206,7 +5210,8 @@ class Program
                             "System.Int64",
                             model
                                 .GetSymbolInfo(((ConstantPatternSyntax)pattern).Expression)
-                                .Symbol.ToTestDisplayString()
+                                .Symbol
+                                .ToTestDisplayString()
                         );
                         Assert.Equal(
                             "System.Object",
@@ -5224,7 +5229,8 @@ class Program
                             "System.Int32",
                             model
                                 .GetSymbolInfo(((ConstantPatternSyntax)pattern).Expression)
-                                .Symbol.ToTestDisplayString()
+                                .Symbol
+                                .ToTestDisplayString()
                         );
                         Assert.Equal(
                             "System.Object",
@@ -5278,7 +5284,8 @@ class Program
                             "System.Char A",
                             model
                                 .GetSymbolInfo(((RelationalPatternSyntax)pattern).Expression)
-                                .Symbol.ToTestDisplayString()
+                                .Symbol
+                                .ToTestDisplayString()
                         );
                         Assert.Equal(
                             "System.Object",
@@ -5296,7 +5303,8 @@ class Program
                             "System.Char Z",
                             model
                                 .GetSymbolInfo(((RelationalPatternSyntax)pattern).Expression)
-                                .Symbol.ToTestDisplayString()
+                                .Symbol
+                                .ToTestDisplayString()
                         );
                         Assert.Equal(
                             "System.Char",
@@ -5338,7 +5346,8 @@ class Program
                             "System.Char a",
                             model
                                 .GetSymbolInfo(((RelationalPatternSyntax)pattern).Expression)
-                                .Symbol.ToTestDisplayString()
+                                .Symbol
+                                .ToTestDisplayString()
                         );
                         Assert.Equal(
                             "System.Object",
@@ -5356,7 +5365,8 @@ class Program
                             "System.Char z",
                             model
                                 .GetSymbolInfo(((RelationalPatternSyntax)pattern).Expression)
-                                .Symbol.ToTestDisplayString()
+                                .Symbol
+                                .ToTestDisplayString()
                         );
                         Assert.Equal(
                             "System.Char",
@@ -5410,7 +5420,8 @@ class Program
                             "System.Char c0",
                             model
                                 .GetSymbolInfo(((RelationalPatternSyntax)pattern).Expression)
-                                .Symbol.ToTestDisplayString()
+                                .Symbol
+                                .ToTestDisplayString()
                         );
                         Assert.Equal(
                             "System.Object",
@@ -5428,7 +5439,8 @@ class Program
                             "System.Char c9",
                             model
                                 .GetSymbolInfo(((RelationalPatternSyntax)pattern).Expression)
-                                .Symbol.ToTestDisplayString()
+                                .Symbol
+                                .ToTestDisplayString()
                         );
                         Assert.Equal(
                             "System.Char",

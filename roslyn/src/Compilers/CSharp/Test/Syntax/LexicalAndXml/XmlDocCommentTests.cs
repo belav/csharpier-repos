@@ -69,12 +69,13 @@ public class C
                     default(CancellationToken)
                 );
 
-                diags.DiagnosticBag.Verify(
-                    // error CS1569: Error writing to XML documentation file: I/O error occurred.
-                    Diagnostic(ErrorCode.ERR_DocFileGen)
-                        .WithArguments("I/O error occurred.")
-                        .WithLocation(1, 1)
-                );
+                diags.DiagnosticBag
+                    .Verify(
+                        // error CS1569: Error writing to XML documentation file: I/O error occurred.
+                        Diagnostic(ErrorCode.ERR_DocFileGen)
+                            .WithArguments("I/O error occurred.")
+                            .WithLocation(1, 1)
+                    );
                 diags.Free();
             }
         }
@@ -2156,7 +2157,9 @@ x
             // we grab the open bracket for the Goo method decl
             var typeParameter = (
                 tree.GetCompilationUnitRoot().Members[0] as TypeDeclarationSyntax
-            ).TypeParameterList.Parameters.Single();
+            ).TypeParameterList
+                .Parameters
+                .Single();
 
             var trivias = typeParameter.GetLeadingTrivia();
 
@@ -2480,8 +2483,7 @@ class C{}";
                 (
                     (trivias[0].GetStructure() as DocumentationCommentTriviaSyntax).Content[0]
                     as XmlElementSyntax
-                )
-                    .StartTag
+                ).StartTag
                     .Attributes,
                 new Dictionary<string, string>()
                 {

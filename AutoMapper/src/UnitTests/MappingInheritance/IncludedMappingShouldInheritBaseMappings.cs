@@ -60,7 +60,8 @@ public class ReadonlyCollectionPropertiesOverride : AutoMapperSpecBase
     public void ShouldMapOk() =>
         Mapper
             .Map<Destination>(new Source { CodeList = { "DMItemCode1" } })
-            .CodeList.ShouldNotBeOfType<HashSet<string>>();
+            .CodeList
+            .ShouldNotBeOfType<HashSet<string>>();
 }
 
 public class ReadonlyCollectionProperties : AutoMapperSpecBase

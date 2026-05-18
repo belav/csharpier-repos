@@ -83,9 +83,8 @@ namespace System.ServiceModel.Activities
                                 ContractDescription.GetContract(
                                     typeof(IWorkflowUpdateableInstanceManagement)
                                 );
-                            tempControlServiceContract.Behaviors.Add(
-                                new ServiceMetadataContractBehavior(true)
-                            );
+                            tempControlServiceContract.Behaviors
+                                .Add(new ServiceMetadataContractBehavior(true));
                             ApplyOperationBehaviors(tempControlServiceContract);
                             // For back-compat, need to support existing code which expects the old contract type
                             tempControlServiceContract.ContractType =
@@ -194,8 +193,8 @@ namespace System.ServiceModel.Activities
 
         static void EnsureTransactedInvoke(OperationDescription operationDescription)
         {
-            OperationBehaviorAttribute operationAttribute =
-                operationDescription.Behaviors.Find<OperationBehaviorAttribute>();
+            OperationBehaviorAttribute operationAttribute = operationDescription.Behaviors
+                .Find<OperationBehaviorAttribute>();
             operationAttribute.TransactionScopeRequired = true;
         }
     }

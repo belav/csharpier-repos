@@ -166,10 +166,8 @@ namespace System.Data.Linq.SqlClient
                                 }
 
                                 join.JoinType = SqlJoinType.LeftOuter;
-                                join.Condition = this.factory.AndAccumulate(
-                                    leftOuter.Condition,
-                                    liftedPredicate
-                                );
+                                join.Condition = this.factory
+                                    .AndAccumulate(leftOuter.Condition, liftedPredicate);
                                 join.Right = leftOuter.Right;
                             }
                             else
@@ -225,13 +223,14 @@ namespace System.Data.Linq.SqlClient
                 params SqlProvider.ProviderMode[] providers
             )
             {
-                this.annotations.Add(
-                    node,
-                    new SqlServerCompatibilityAnnotation(
-                        Strings.SourceExpressionAnnotation(node.SourceExpression),
-                        providers
-                    )
-                );
+                this.annotations
+                    .Add(
+                        node,
+                        new SqlServerCompatibilityAnnotation(
+                            Strings.SourceExpressionAnnotation(node.SourceExpression),
+                            providers
+                        )
+                    );
             }
 
             [SuppressMessage(
@@ -643,9 +642,8 @@ namespace System.Data.Linq.SqlClient
                     List<SqlColumn> keep = null;
                     foreach (SqlColumn sc in select.Row.Columns)
                     {
-                        bool referencesAliasesForLifting = this.aliases.ReferencesAny(
-                            sc.Expression
-                        );
+                        bool referencesAliasesForLifting = this.aliases
+                            .ReferencesAny(sc.Expression);
                         bool isLockedExpression = this.referencedColumns.Contains(sc);
                         if (referencesAliasesForLifting)
                         {

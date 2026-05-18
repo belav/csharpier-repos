@@ -179,26 +179,22 @@ namespace System.IdentityModel.Protocols.WSTrust
         internal class WSTrustElementNames
         {
             private string allowPostdating = WSTrustFeb2005Constants.ElementNames.AllowPostdating;
-            private string authenticationType = WSTrustFeb2005Constants
-                .ElementNames
+            private string authenticationType = WSTrustFeb2005Constants.ElementNames
                 .AuthenticationType;
             private string binarySecret = WSTrustFeb2005Constants.ElementNames.BinarySecret;
             private string binaryExchange = WSTrustFeb2005Constants.ElementNames.BinaryExchange;
             private string cancelTarget = WSTrustFeb2005Constants.ElementNames.CancelTarget;
             private string claims = WSTrustFeb2005Constants.ElementNames.Claims;
             private string computedKey = WSTrustFeb2005Constants.ElementNames.ComputedKey;
-            private string computedKeyAlgorithm = WSTrustFeb2005Constants
-                .ElementNames
+            private string computedKeyAlgorithm = WSTrustFeb2005Constants.ElementNames
                 .ComputedKeyAlgorithm;
-            private string canonicalizationAlgorithm = WSTrustFeb2005Constants
-                .ElementNames
+            private string canonicalizationAlgorithm = WSTrustFeb2005Constants.ElementNames
                 .CanonicalizationAlgorithm;
             private string code = WSTrustFeb2005Constants.ElementNames.Code;
             private string delegatable = WSTrustFeb2005Constants.ElementNames.Delegatable;
             private string delegateTo = WSTrustFeb2005Constants.ElementNames.DelegateTo;
             private string encryption = WSTrustFeb2005Constants.ElementNames.Encryption;
-            private string encryptionAlgorithm = WSTrustFeb2005Constants
-                .ElementNames
+            private string encryptionAlgorithm = WSTrustFeb2005Constants.ElementNames
                 .EncryptionAlgorithm;
             private string encryptWith = WSTrustFeb2005Constants.ElementNames.EncryptWith;
             private string entropy = WSTrustFeb2005Constants.ElementNames.Entropy;
@@ -215,35 +211,26 @@ namespace System.IdentityModel.Protocols.WSTrust
             private string reason = WSTrustFeb2005Constants.ElementNames.Reason;
             private string renewing = WSTrustFeb2005Constants.ElementNames.Renewing;
             private string renewTarget = WSTrustFeb2005Constants.ElementNames.RenewTarget;
-            private string requestedAttachedReference = WSTrustFeb2005Constants
-                .ElementNames
+            private string requestedAttachedReference = WSTrustFeb2005Constants.ElementNames
                 .RequestedAttachedReference;
-            private string requestedProofToken = WSTrustFeb2005Constants
-                .ElementNames
+            private string requestedProofToken = WSTrustFeb2005Constants.ElementNames
                 .RequestedProofToken;
-            private string requestedSecurityToken = WSTrustFeb2005Constants
-                .ElementNames
+            private string requestedSecurityToken = WSTrustFeb2005Constants.ElementNames
                 .RequestedSecurityToken;
-            private string requestedTokenCancelled = WSTrustFeb2005Constants
-                .ElementNames
+            private string requestedTokenCancelled = WSTrustFeb2005Constants.ElementNames
                 .RequestedTokenCancelled;
-            private string requestedUnattachedReference = WSTrustFeb2005Constants
-                .ElementNames
+            private string requestedUnattachedReference = WSTrustFeb2005Constants.ElementNames
                 .RequestedUnattachedReference;
             private string requestKeySize = WSTrustFeb2005Constants.ElementNames.RequestKeySize;
-            private string requestSecurityToken = WSTrustFeb2005Constants
-                .ElementNames
+            private string requestSecurityToken = WSTrustFeb2005Constants.ElementNames
                 .RequestSecurityToken;
-            private string requestSecurityTokenResponse = WSTrustFeb2005Constants
-                .ElementNames
+            private string requestSecurityTokenResponse = WSTrustFeb2005Constants.ElementNames
                 .RequestSecurityTokenResponse;
             private string requestType = WSTrustFeb2005Constants.ElementNames.RequestType;
-            private string securityContextToken = WSTrustFeb2005Constants
-                .ElementNames
+            private string securityContextToken = WSTrustFeb2005Constants.ElementNames
                 .SecurityContextToken;
             private string signWith = WSTrustFeb2005Constants.ElementNames.SignWith;
-            private string signatureAlgorithm = WSTrustFeb2005Constants
-                .ElementNames
+            private string signatureAlgorithm = WSTrustFeb2005Constants.ElementNames
                 .SignatureAlgorithm;
             private string status = WSTrustFeb2005Constants.ElementNames.Status;
             private string tokenType = WSTrustFeb2005Constants.ElementNames.TokenType;

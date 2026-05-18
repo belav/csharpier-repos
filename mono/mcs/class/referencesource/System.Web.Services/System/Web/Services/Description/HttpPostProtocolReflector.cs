@@ -38,15 +38,16 @@ namespace System.Web.Services.Description
             httpAddressBinding.Location = ServiceUrl;
             if (this.UriFixups != null)
             {
-                this.UriFixups.Add(
-                    delegate(Uri current)
-                    {
-                        httpAddressBinding.Location = DiscoveryServerType.CombineUris(
-                            current,
-                            httpAddressBinding.Location
-                        );
-                    }
-                );
+                this.UriFixups
+                    .Add(
+                        delegate(Uri current)
+                        {
+                            httpAddressBinding.Location = DiscoveryServerType.CombineUris(
+                                current,
+                                httpAddressBinding.Location
+                            );
+                        }
+                    );
             }
             Port.Extensions.Add(httpAddressBinding);
         }

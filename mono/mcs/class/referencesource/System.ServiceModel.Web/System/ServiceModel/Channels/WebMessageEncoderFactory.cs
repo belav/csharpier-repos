@@ -93,9 +93,8 @@ namespace System.ServiceModel.Channels
             {
                 if (writeEncoding == null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                        "writeEncoding"
-                    );
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperArgumentNull("writeEncoding");
                 }
 
                 this.thisLock = new object();
@@ -236,9 +235,8 @@ namespace System.ServiceModel.Channels
             {
                 if (bufferManager == null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ArgumentNullException("bufferManager")
-                    );
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperError(new ArgumentNullException("bufferManager"));
                 }
 
                 WebContentFormat format = GetFormatForContentType(contentType);
@@ -252,10 +250,11 @@ namespace System.ServiceModel.Channels
                             bufferManager,
                             contentType
                         );
-                        message.Properties.Add(
-                            WebBodyFormatMessageProperty.Name,
-                            WebBodyFormatMessageProperty.JsonProperty
-                        );
+                        message.Properties
+                            .Add(
+                                WebBodyFormatMessageProperty.Name,
+                                WebBodyFormatMessageProperty.JsonProperty
+                            );
                         break;
                     case WebContentFormat.Xml:
                         message = TextMessageEncoder.ReadMessage(
@@ -263,17 +262,19 @@ namespace System.ServiceModel.Channels
                             bufferManager,
                             contentType
                         );
-                        message.Properties.Add(
-                            WebBodyFormatMessageProperty.Name,
-                            WebBodyFormatMessageProperty.XmlProperty
-                        );
+                        message.Properties
+                            .Add(
+                                WebBodyFormatMessageProperty.Name,
+                                WebBodyFormatMessageProperty.XmlProperty
+                            );
                         break;
                     case WebContentFormat.Raw:
                         message = RawMessageEncoder.ReadMessage(buffer, bufferManager, contentType);
-                        message.Properties.Add(
-                            WebBodyFormatMessageProperty.Name,
-                            WebBodyFormatMessageProperty.RawProperty
-                        );
+                        message.Properties
+                            .Add(
+                                WebBodyFormatMessageProperty.Name,
+                                WebBodyFormatMessageProperty.RawProperty
+                            );
                         break;
                     default:
                         throw Fx.AssertAndThrow(
@@ -291,9 +292,8 @@ namespace System.ServiceModel.Channels
             {
                 if (stream == null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ArgumentNullException("stream")
-                    );
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperError(new ArgumentNullException("stream"));
                 }
 
                 WebContentFormat format = GetFormatForContentType(contentType);
@@ -306,10 +306,11 @@ namespace System.ServiceModel.Channels
                             maxSizeOfHeaders,
                             contentType
                         );
-                        message.Properties.Add(
-                            WebBodyFormatMessageProperty.Name,
-                            WebBodyFormatMessageProperty.JsonProperty
-                        );
+                        message.Properties
+                            .Add(
+                                WebBodyFormatMessageProperty.Name,
+                                WebBodyFormatMessageProperty.JsonProperty
+                            );
                         break;
                     case WebContentFormat.Xml:
                         message = TextMessageEncoder.ReadMessage(
@@ -317,10 +318,11 @@ namespace System.ServiceModel.Channels
                             maxSizeOfHeaders,
                             contentType
                         );
-                        message.Properties.Add(
-                            WebBodyFormatMessageProperty.Name,
-                            WebBodyFormatMessageProperty.XmlProperty
-                        );
+                        message.Properties
+                            .Add(
+                                WebBodyFormatMessageProperty.Name,
+                                WebBodyFormatMessageProperty.XmlProperty
+                            );
                         break;
                     case WebContentFormat.Raw:
                         message = RawMessageEncoder.ReadMessage(
@@ -328,10 +330,11 @@ namespace System.ServiceModel.Channels
                             maxSizeOfHeaders,
                             contentType
                         );
-                        message.Properties.Add(
-                            WebBodyFormatMessageProperty.Name,
-                            WebBodyFormatMessageProperty.RawProperty
-                        );
+                        message.Properties
+                            .Add(
+                                WebBodyFormatMessageProperty.Name,
+                                WebBodyFormatMessageProperty.RawProperty
+                            );
                         break;
                     default:
                         throw Fx.AssertAndThrow(
@@ -350,9 +353,8 @@ namespace System.ServiceModel.Channels
             {
                 if (message == null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ArgumentNullException("message")
-                    );
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperError(new ArgumentNullException("message"));
                 }
                 if (bufferManager == null)
                 {
@@ -398,10 +400,11 @@ namespace System.ServiceModel.Channels
                         );
                     case WebContentFormat.Xml:
                         if (
-                            message.Properties.TryGetValue<JavascriptCallbackResponseMessageProperty>(
-                                JavascriptCallbackResponseMessageProperty.Name,
-                                out javascriptResponseMessageProperty
-                            )
+                            message.Properties
+                                .TryGetValue<JavascriptCallbackResponseMessageProperty>(
+                                    JavascriptCallbackResponseMessageProperty.Name,
+                                    out javascriptResponseMessageProperty
+                                )
                             && javascriptResponseMessageProperty != null
                             && !String.IsNullOrEmpty(
                                 javascriptResponseMessageProperty.CallbackFunctionName
@@ -421,10 +424,11 @@ namespace System.ServiceModel.Channels
                         );
                     case WebContentFormat.Raw:
                         if (
-                            message.Properties.TryGetValue<JavascriptCallbackResponseMessageProperty>(
-                                JavascriptCallbackResponseMessageProperty.Name,
-                                out javascriptResponseMessageProperty
-                            )
+                            message.Properties
+                                .TryGetValue<JavascriptCallbackResponseMessageProperty>(
+                                    JavascriptCallbackResponseMessageProperty.Name,
+                                    out javascriptResponseMessageProperty
+                                )
                             && javascriptResponseMessageProperty != null
                             && !String.IsNullOrEmpty(
                                 javascriptResponseMessageProperty.CallbackFunctionName
@@ -453,9 +457,8 @@ namespace System.ServiceModel.Channels
             {
                 if (message == null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ArgumentNullException("message")
-                    );
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperError(new ArgumentNullException("message"));
                 }
                 if (stream == null)
                 {
@@ -475,10 +478,11 @@ namespace System.ServiceModel.Channels
                         break;
                     case WebContentFormat.Xml:
                         if (
-                            message.Properties.TryGetValue<JavascriptCallbackResponseMessageProperty>(
-                                JavascriptCallbackResponseMessageProperty.Name,
-                                out javascriptResponseMessageProperty
-                            )
+                            message.Properties
+                                .TryGetValue<JavascriptCallbackResponseMessageProperty>(
+                                    JavascriptCallbackResponseMessageProperty.Name,
+                                    out javascriptResponseMessageProperty
+                                )
                             && javascriptResponseMessageProperty != null
                             && !String.IsNullOrEmpty(
                                 javascriptResponseMessageProperty.CallbackFunctionName
@@ -494,10 +498,11 @@ namespace System.ServiceModel.Channels
                         break;
                     case WebContentFormat.Raw:
                         if (
-                            message.Properties.TryGetValue<JavascriptCallbackResponseMessageProperty>(
-                                JavascriptCallbackResponseMessageProperty.Name,
-                                out javascriptResponseMessageProperty
-                            )
+                            message.Properties
+                                .TryGetValue<JavascriptCallbackResponseMessageProperty>(
+                                    JavascriptCallbackResponseMessageProperty.Name,
+                                    out javascriptResponseMessageProperty
+                                )
                             && javascriptResponseMessageProperty != null
                             && !String.IsNullOrEmpty(
                                 javascriptResponseMessageProperty.CallbackFunctionName
@@ -527,9 +532,8 @@ namespace System.ServiceModel.Channels
             {
                 if (message == null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ArgumentNullException("message")
-                    );
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperError(new ArgumentNullException("message"));
                 }
                 if (stream == null)
                 {
@@ -558,10 +562,8 @@ namespace System.ServiceModel.Channels
             WebContentFormat ExtractFormatFromMessage(Message message)
             {
                 object messageFormatProperty;
-                message.Properties.TryGetValue(
-                    WebBodyFormatMessageProperty.Name,
-                    out messageFormatProperty
-                );
+                message.Properties
+                    .TryGetValue(WebBodyFormatMessageProperty.Name, out messageFormatProperty);
                 if (messageFormatProperty == null)
                 {
                     return WebContentFormat.Xml;
@@ -657,11 +659,12 @@ namespace System.ServiceModel.Channels
                     format = contentTypeMapper.GetMessageFormatForContentType(contentType);
                     if (!WebContentFormatHelper.IsDefined(format))
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new ArgumentException(
-                                SR2.GetString(SR2.UnknownWebEncodingFormat, contentType, format)
-                            )
-                        );
+                        throw DiagnosticUtility.ExceptionUtility
+                            .ThrowHelperError(
+                                new ArgumentException(
+                                    SR2.GetString(SR2.UnknownWebEncodingFormat, contentType, format)
+                                )
+                            );
                     }
                     return true;
                 }
@@ -672,12 +675,13 @@ namespace System.ServiceModel.Channels
                         throw;
                     }
 
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new CommunicationException(
-                            SR2.GetString(SR2.ErrorEncounteredInContentTypeMapper),
-                            e
-                        )
-                    );
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperError(
+                            new CommunicationException(
+                                SR2.GetString(SR2.ErrorEncounteredInContentTypeMapper),
+                                e
+                            )
+                        );
                 }
             }
 
@@ -716,10 +720,11 @@ namespace System.ServiceModel.Channels
 
                         case WebContentFormat.Xml:
                             if (
-                                message.Properties.TryGetValue<JavascriptCallbackResponseMessageProperty>(
-                                    JavascriptCallbackResponseMessageProperty.Name,
-                                    out javascriptResponseMessageProperty
-                                )
+                                message.Properties
+                                    .TryGetValue<JavascriptCallbackResponseMessageProperty>(
+                                        JavascriptCallbackResponseMessageProperty.Name,
+                                        out javascriptResponseMessageProperty
+                                    )
                                 && javascriptResponseMessageProperty != null
                                 && !String.IsNullOrEmpty(
                                     javascriptResponseMessageProperty.CallbackFunctionName
@@ -739,10 +744,11 @@ namespace System.ServiceModel.Channels
 
                         case WebContentFormat.Raw:
                             if (
-                                message.Properties.TryGetValue<JavascriptCallbackResponseMessageProperty>(
-                                    JavascriptCallbackResponseMessageProperty.Name,
-                                    out javascriptResponseMessageProperty
-                                )
+                                message.Properties
+                                    .TryGetValue<JavascriptCallbackResponseMessageProperty>(
+                                        JavascriptCallbackResponseMessageProperty.Name,
+                                        out javascriptResponseMessageProperty
+                                    )
                                 && javascriptResponseMessageProperty != null
                                 && !String.IsNullOrEmpty(
                                     javascriptResponseMessageProperty.CallbackFunctionName
@@ -758,8 +764,8 @@ namespace System.ServiceModel.Channels
                             }
 
                             handleEndWriteMessage = new AsyncCompletion(HandleEndWriteMessage);
-                            IAsyncResult result =
-                                webMessageEncoder.RawMessageEncoder.BeginWriteMessage(
+                            IAsyncResult result = webMessageEncoder.RawMessageEncoder
+                                .BeginWriteMessage(
                                     message,
                                     stream,
                                     PrepareAsyncCompletion(HandleEndWriteMessage),

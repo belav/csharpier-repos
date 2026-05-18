@@ -374,13 +374,16 @@ namespace System.Data.Mapping.Update.Internal
                         )
                         {
                             throw EntityUtil.NotSupported(
-                                System.Data.Entity.Strings.Update_NotSupportedComputedKeyColumn(
-                                    EdmProviderManifest.StoreGeneratedPatternFacetName,
-                                    XmlConstants.Computed,
-                                    XmlConstants.Identity,
-                                    property.Name,
-                                    property.DeclaringType.FullName
-                                )
+                                System.Data
+                                    .Entity
+                                    .Strings
+                                    .Update_NotSupportedComputedKeyColumn(
+                                        EdmProviderManifest.StoreGeneratedPatternFacetName,
+                                        XmlConstants.Computed,
+                                        XmlConstants.Identity,
+                                        property.Name,
+                                        property.DeclaringType.FullName
+                                    )
                             );
                         }
                     }
@@ -420,18 +423,22 @@ namespace System.Data.Mapping.Update.Internal
                     );
 
                     if (
-                        !ByValueEqualityComparer.Default.Equals(
-                            originalPropertyResult.GetSimpleValue(),
-                            propertyResult.GetSimpleValue()
-                        )
+                        !ByValueEqualityComparer.Default
+                            .Equals(
+                                originalPropertyResult.GetSimpleValue(),
+                                propertyResult.GetSimpleValue()
+                            )
                     )
                     {
                         throw EntityUtil.InvalidOperation(
-                            System.Data.Entity.Strings.Update_ModifyingIdentityColumn(
-                                XmlConstants.Identity,
-                                property.Name,
-                                property.DeclaringType.FullName
-                            )
+                            System.Data
+                                .Entity
+                                .Strings
+                                .Update_ModifyingIdentityColumn(
+                                    XmlConstants.Identity,
+                                    property.Name,
+                                    property.DeclaringType.FullName
+                                )
                         );
                     }
                     else

@@ -405,13 +405,15 @@ namespace MonoTests.System.Web.UI.WebControls
             {
                 Assert.AreEqual(
                     true,
-                    ex.Message.Contains(
-                        "type 'System.DBNull' cannot be converted to type 'System.String'"
-                    )
-                        || // dotnet
-                        ex.Message.Contains(
-                            "type System.DBNull cannot be converted to target type: System.String"
+                    ex.Message
+                        .Contains(
+                            "type 'System.DBNull' cannot be converted to type 'System.String'"
                         )
+                        || // dotnet
+                        ex.Message
+                            .Contains(
+                                "type System.DBNull cannot be converted to target type: System.String"
+                            )
                 ); // mono
                 dbnull = true;
             }

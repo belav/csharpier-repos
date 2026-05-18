@@ -11,8 +11,8 @@ class Program
 
         Action a = async () =>
         {
-            await Task
-                .Factory.StartNew(() =>
+            await Task.Factory
+                .StartNew(() =>
                 {
                     if (!mre_l.WaitOne(3000))
                         throw new ApplicationException("1");
@@ -33,8 +33,8 @@ class Program
 
         Action a2 = async delegate
         {
-            await Task
-                .Factory.StartNew(() =>
+            await Task.Factory
+                .StartNew(() =>
                 {
                     if (!mre_l.WaitOne(3000))
                         throw new ApplicationException("2");
@@ -54,8 +54,8 @@ class Program
 
         Func<string, Task<string>> f = async l =>
         {
-            var t = await Task
-                .Factory.StartNew(() =>
+            var t = await Task.Factory
+                .StartNew(() =>
                 {
                     if (!mre_l.WaitOne(3000))
                         throw new ApplicationException("3");
@@ -79,8 +79,8 @@ class Program
 
         Func<decimal, Task<decimal>> f2 = async delegate(decimal l)
         {
-            var t = await Task
-                .Factory.StartNew(() =>
+            var t = await Task.Factory
+                .StartNew(() =>
                 {
                     if (!mre_l.WaitOne(3000))
                         throw new ApplicationException("4");

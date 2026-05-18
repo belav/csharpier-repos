@@ -59,8 +59,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
         {
             var pid = ProjectId.CreateNewId();
             var did = DocumentId.CreateNewId(pid);
-            return workspace
-                .CurrentSolution.AddProject(pid, "goo", "goo", languageName)
+            return workspace.CurrentSolution
+                .AddProject(pid, "goo", "goo", languageName)
                 .AddMetadataReference(pid, MscorlibRef)
                 .AddDocument(did, "goo.cs", SourceText.From(sourceText));
         }
@@ -72,8 +72,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
         {
             var pid = ProjectId.CreateNewId();
 
-            var solution = workspace
-                .CurrentSolution.AddProject(pid, "goo", "goo", LanguageNames.CSharp)
+            var solution = workspace.CurrentSolution
+                .AddProject(pid, "goo", "goo", LanguageNames.CSharp)
                 .AddMetadataReference(pid, MscorlibRef);
 
             var docCounter = 1;
@@ -130,8 +130,8 @@ public class C {
             using var workspace = CreateWorkspace();
             var pid = ProjectId.CreateNewId();
             var did = DocumentId.CreateNewId(pid);
-            var solution = workspace
-                .CurrentSolution.AddProject(pid, "goo", "goo.dll", LanguageNames.CSharp)
+            var solution = workspace.CurrentSolution
+                .AddProject(pid, "goo", "goo.dll", LanguageNames.CSharp)
                 .AddMetadataReference(pid, MscorlibRef)
                 .AddMetadataReference(
                     pid,
@@ -158,8 +158,11 @@ public class C {
         [Fact]
         public async Task PinvokeMethodReferences_VB()
         {
-            var tree = Microsoft.CodeAnalysis.VisualBasic.VisualBasicSyntaxTree.ParseText(
-                @"
+            var tree = Microsoft.CodeAnalysis
+                .VisualBasic
+                .VisualBasicSyntaxTree
+                .ParseText(
+                    @"
 Module Module1
         Declare Function CreateDirectory Lib ""kernel32"" Alias ""CreateDirectoryA"" (ByVal lpPathName As String) As Integer
  
@@ -185,13 +188,14 @@ Module Module1
        End Sub
  End Module
             "
-            );
+                );
 
             var prj1Id = ProjectId.CreateNewId();
             var docId = DocumentId.CreateNewId(prj1Id);
 
             var sln = CreateWorkspace()
-                .CurrentSolution.AddProject(
+                .CurrentSolution
+                .AddProject(
                     prj1Id,
                     "testDeclareReferences",
                     "testAssembly",
@@ -235,20 +239,24 @@ Module Module1
         [Fact, WorkItem("https://devdiv.visualstudio.com/DevDiv/_workitems/edit/1744118")]
         public async Task TestSymbolWithEmptyIdentifier()
         {
-            var tree = Microsoft.CodeAnalysis.VisualBasic.VisualBasicSyntaxTree.ParseText(
-                @"
+            var tree = Microsoft.CodeAnalysis
+                .VisualBasic
+                .VisualBasicSyntaxTree
+                .ParseText(
+                    @"
 Imports System
 Public Class C
     private readonly property
 End Class
             "
-            );
+                );
 
             var prj1Id = ProjectId.CreateNewId();
             var docId = DocumentId.CreateNewId(prj1Id);
 
             var sln = CreateWorkspace()
-                .CurrentSolution.AddProject(
+                .CurrentSolution
+                .AddProject(
                     prj1Id,
                     "testDeclareReferences",
                     "testAssembly",
@@ -282,8 +290,11 @@ End Class
         [Fact]
         public async Task PinvokeMethodReferences_CS()
         {
-            var tree = Microsoft.CodeAnalysis.CSharp.CSharpSyntaxTree.ParseText(
-                @"
+            var tree = Microsoft.CodeAnalysis
+                .CSharp
+                .CSharpSyntaxTree
+                .ParseText(
+                    @"
 
 using System;
 using System.Collections;
@@ -321,18 +332,14 @@ static class Module1
         }
     }
                 "
-            );
+                );
 
             var prj1Id = ProjectId.CreateNewId();
             var docId = DocumentId.CreateNewId(prj1Id);
 
             var sln = CreateWorkspace()
-                .CurrentSolution.AddProject(
-                    prj1Id,
-                    "testDeclareReferences",
-                    "testAssembly",
-                    LanguageNames.CSharp
-                )
+                .CurrentSolution
+                .AddProject(prj1Id, "testDeclareReferences", "testAssembly", LanguageNames.CSharp)
                 .AddMetadataReference(prj1Id, MscorlibRef)
                 .AddDocument(docId, "testFile", tree.GetText());
 
@@ -589,14 +596,14 @@ namespace M
             );
 
             // get symbols for methods
-            var portableCompilation = await solution
-                .Projects.Single(p => p.Name == "PortableProject")
+            var portableCompilation = await solution.Projects
+                .Single(p => p.Name == "PortableProject")
                 .GetCompilationAsync();
             var baseType = portableCompilation.GetTypeByMetadataName("N.BaseClass");
             var baseVirtualMethodSymbol = baseType.GetMembers("SomeMethod").Single();
 
-            var normalCompilation = await solution
-                .Projects.Single(p => p.Name == "NormalProject")
+            var normalCompilation = await solution.Projects
+                .Single(p => p.Name == "NormalProject")
                 .GetCompilationAsync();
             var derivedType = normalCompilation.GetTypeByMetadataName("M.DerivedClass");
             var overriddenMethodSymbol = derivedType.GetMembers("SomeMethod").Single();
@@ -644,8 +651,10 @@ abstract class C<T> where T : unmanaged         // Line 4
             var comp = await project.GetCompilationAsync();
 
             var constraint = comp.GetTypeByMetadataName("C`1")
-                .TypeParameters.Single()
-                .ConstraintTypes.Single();
+                .TypeParameters
+                .Single()
+                .ConstraintTypes
+                .Single();
             var result = (await SymbolFinder.FindReferencesAsync(constraint, solution)).Single();
 
             Verify(result, new HashSet<int> { 1, 4 });
@@ -769,10 +778,11 @@ namespace Test
 
             // those locations should not be the same
             Assert.True(
-                typeResult.Locations.All(loc =>
-                    loc.Location.SourceSpan
-                    != constructorResult.Locations.Single().Location.SourceSpan
-                )
+                typeResult.Locations
+                    .All(loc =>
+                        loc.Location.SourceSpan
+                        != constructorResult.Locations.Single().Location.SourceSpan
+                    )
             );
 
             // Constructor still binds to the alias.

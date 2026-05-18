@@ -49,9 +49,10 @@ public abstract class BadDataJsonDeserializationTestBase
     public virtual void Throws_for_bad_point_as_GeoJson(string json) =>
         Throws_for_bad_JSON_property_value<PointType, Point>(
             b =>
-                b.Metadata.SetJsonValueReaderWriterType(
-                    typeof(JsonTypesTestBase.JsonGeoJsonReaderWriter)
-                ),
+                b.Metadata
+                    .SetJsonValueReaderWriterType(
+                        typeof(JsonTypesTestBase.JsonGeoJsonReaderWriter)
+                    ),
             nameof(PointType.Point),
             json
         );

@@ -23,8 +23,7 @@ namespace Microsoft.CodeAnalysis.ExtractInterface
 
         public override object GetOptions(CancellationToken cancellationToken)
         {
-            var containingNamespaceDisplay = _typeAnalysisResult
-                .TypeToExtractFrom
+            var containingNamespaceDisplay = _typeAnalysisResult.TypeToExtractFrom
                 .ContainingNamespace
                 .IsGlobalNamespace
                 ? string.Empty

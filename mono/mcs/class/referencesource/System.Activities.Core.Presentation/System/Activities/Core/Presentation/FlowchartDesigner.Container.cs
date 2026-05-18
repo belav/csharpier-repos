@@ -299,11 +299,10 @@ namespace System.Activities.Core.Presentation
                 "this.ModelItem must implement IModelTreeItem"
             );
             using (
-                EditingScope editingScope = (
-                    (IModelTreeItem)this.ModelItem
-                ).ModelTreeManager.CreateEditingScope(
-                    System.Activities.Presentation.SR.CollectionAddEditingScopeDescription
-                )
+                EditingScope editingScope = ((IModelTreeItem)this.ModelItem).ModelTreeManager
+                    .CreateEditingScope(
+                        System.Activities.Presentation.SR.CollectionAddEditingScopeDescription
+                    )
             )
             {
                 if (metaData != null)
@@ -329,9 +328,10 @@ namespace System.Activities.Core.Presentation
                                     shouldStoreCurrentSizeViewState = false;
                                 }
 
-                                ModelItem item = this
-                                    .ModelItem.Properties["Nodes"]
-                                    .Collection.Add(element);
+                                ModelItem item = this.ModelItem
+                                    .Properties["Nodes"]
+                                    .Collection
+                                    .Add(element);
 
                                 // if the pasted item is a flowswitch but the default target is not in the pasted selection,
                                 // reset the DefaultCaseDisplayName to "Default".
@@ -371,9 +371,8 @@ namespace System.Activities.Core.Presentation
                                 {
                                     if (
                                         pastePointReference.ModelItem != null
-                                        && this.modelElement.ContainsKey(
-                                            pastePointReference.ModelItem
-                                        )
+                                        && this.modelElement
+                                            .ContainsKey(pastePointReference.ModelItem)
                                     )
                                     {
                                         panelPoint = pastePointReference.TranslatePoint(
@@ -418,9 +417,10 @@ namespace System.Activities.Core.Presentation
                         // When paste a non-flowstep object to flowchart, the existing hintsize of the object
                         // should be removed, and let flowchart panel to compute the right size.
                         VirtualizedContainerService.SetHintSize(workflowElementToPaste, null);
-                        ModelItem flowStepItem = this
-                            .ModelItem.Properties["Nodes"]
-                            .Collection.Add(flowStep);
+                        ModelItem flowStepItem = this.ModelItem
+                            .Properties["Nodes"]
+                            .Collection
+                            .Add(flowStep);
 
                         if (flowStepItem != null)
                         {
@@ -432,17 +432,18 @@ namespace System.Activities.Core.Presentation
                 editingScope.Complete();
             }
 
-            this.Dispatcher.BeginInvoke(
-                () =>
-                {
-                    if (modelItemsToSelect.Count > 0 && modelItemsToSelect[0] != null)
+            this.Dispatcher
+                .BeginInvoke(
+                    () =>
                     {
-                        Keyboard.Focus(modelItemsToSelect[0].View as IInputElement);
-                    }
-                    this.Context.Items.SetValue(new Selection(modelItemsToSelect));
-                },
-                DispatcherPriority.ApplicationIdle
-            );
+                        if (modelItemsToSelect.Count > 0 && modelItemsToSelect[0] != null)
+                        {
+                            Keyboard.Focus(modelItemsToSelect[0].View as IInputElement);
+                        }
+                        this.Context.Items.SetValue(new Selection(modelItemsToSelect));
+                    },
+                    DispatcherPriority.ApplicationIdle
+                );
         }
 
         void UpdateViewStateToAvoidOverlapOnPaste(List<ModelItem> modelItemsPerMetaData)
@@ -453,10 +454,8 @@ namespace System.Activities.Core.Presentation
             {
                 //Check to see if the first element in the input list needs offset. Generalize that information for all ModelItems in the input list.
                 //Get location information of the first element
-                object location = this.ViewStateService.RetrieveViewState(
-                    modelItemsPerMetaData[0],
-                    shapeLocation
-                );
+                object location = this.ViewStateService
+                    .RetrieveViewState(modelItemsPerMetaData[0], shapeLocation);
                 if (location != null)
                 {
                     Point locationOfShape = (Point)location;
@@ -498,9 +497,8 @@ namespace System.Activities.Core.Presentation
             Point topLeft = new Point(Double.PositiveInfinity, Double.PositiveInfinity);
             foreach (ModelItem modelItem in modelItemsInMetaData)
             {
-                Dictionary<string, object> viewState = this.ViewStateService.RetrieveAllViewState(
-                    modelItem
-                );
+                Dictionary<string, object> viewState = this.ViewStateService
+                    .RetrieveAllViewState(modelItem);
 
                 foreach (object viewStateValue in viewState.Values)
                 {
@@ -546,9 +544,8 @@ namespace System.Activities.Core.Presentation
         void OffSetViewState(Vector offsetVector, ModelItem modelItem, bool isUndoableViewState)
         {
             Dictionary<string, object> modifiedValues = new Dictionary<string, object>();
-            Dictionary<string, object> viewState = this.ViewStateService.RetrieveAllViewState(
-                modelItem
-            );
+            Dictionary<string, object> viewState = this.ViewStateService
+                .RetrieveAllViewState(modelItem);
             foreach (KeyValuePair<string, object> viewStatePair in viewState)
             {
                 PointCollection viewStatePoints = viewStatePair.Value as PointCollection;
@@ -571,11 +568,8 @@ namespace System.Activities.Core.Presentation
             {
                 if (isUndoableViewState)
                 {
-                    this.ViewStateService.StoreViewStateWithUndo(
-                        modelItem,
-                        kvPair.Key,
-                        kvPair.Value
-                    );
+                    this.ViewStateService
+                        .StoreViewStateWithUndo(modelItem, kvPair.Key, kvPair.Value);
                 }
                 else
                 {

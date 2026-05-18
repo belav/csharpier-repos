@@ -323,10 +323,11 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
                     "_root"
                 ) ?? throw new InvalidOperationException();
             DebuggerAttributes.ValidateDebuggerDisplayReferences(rootNode);
-            PropertyInfo itemProperty = info.Properties.Single(pr =>
-                pr.GetCustomAttribute<DebuggerBrowsableAttribute>()!.State
-                == DebuggerBrowsableState.RootHidden
-            );
+            PropertyInfo itemProperty = info.Properties
+                .Single(pr =>
+                    pr.GetCustomAttribute<DebuggerBrowsableAttribute>()!.State
+                    == DebuggerBrowsableState.RootHidden
+                );
             KeyValuePair<string, int>[]? items =
                 itemProperty.GetValue(info.Instance) as KeyValuePair<string, int>[];
             Assert.Equal(dict, items);
@@ -490,10 +491,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
 
             public override bool Equals(object? obj)
             {
-                return StringComparer.OrdinalIgnoreCase.Equals(
-                    this.Value,
-                    ((CaseInsensitiveString?)obj)!.Value
-                );
+                return StringComparer.OrdinalIgnoreCase
+                    .Equals(this.Value, ((CaseInsensitiveString?)obj)!.Value);
             }
         }
     }

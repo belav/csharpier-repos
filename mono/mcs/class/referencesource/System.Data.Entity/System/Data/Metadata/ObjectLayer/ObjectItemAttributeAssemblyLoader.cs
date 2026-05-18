@@ -80,11 +80,12 @@ namespace System.Data.Metadata.Edm
                 "LoadAssembly shouldn't be called with assembly having no schema attribute"
             );
             Debug.Assert(
-                !SessionData.KnownAssemblies.Contains(
-                    SourceAssembly,
-                    SessionData.ObjectItemAssemblyLoaderFactory,
-                    SessionData.EdmItemCollection
-                ),
+                !SessionData.KnownAssemblies
+                    .Contains(
+                        SourceAssembly,
+                        SessionData.ObjectItemAssemblyLoaderFactory,
+                        SessionData.EdmItemCollection
+                    ),
                 "InternalLoadAssemblyFromCache: This assembly must not be present in the list of known assemblies"
             );
 
@@ -113,15 +114,19 @@ namespace System.Data.Metadata.Edm
                 // Check to make sure the CLR type we got is the same as the given one
                 if (edmType.ClrType != clrType)
                 {
-                    SessionData.EdmItemErrors.Add(
-                        new EdmItemError(
-                            System.Data.Entity.Strings.NewTypeConflictsWithExistingType(
-                                clrType.AssemblyQualifiedName,
-                                edmType.ClrType.AssemblyQualifiedName
-                            ),
-                            edmType
-                        )
-                    );
+                    SessionData.EdmItemErrors
+                        .Add(
+                            new EdmItemError(
+                                System.Data
+                                    .Entity
+                                    .Strings
+                                    .NewTypeConflictsWithExistingType(
+                                        clrType.AssemblyQualifiedName,
+                                        edmType.ClrType.AssemblyQualifiedName
+                                    ),
+                                edmType
+                            )
+                        );
                     edmType = null;
                     return false;
                 }
@@ -183,18 +188,17 @@ namespace System.Data.Metadata.Edm
 
             ImmutableAssemblyCacheEntry immutableCacheEntry;
             if (
-                SessionData.LockedAssemblyCache.TryGetValue(
-                    clrType.Assembly,
-                    out immutableCacheEntry
-                )
+                SessionData.LockedAssemblyCache
+                    .TryGetValue(clrType.Assembly, out immutableCacheEntry)
             )
             {
                 Debug.Assert(
-                    SessionData.KnownAssemblies.Contains(
-                        clrType.Assembly,
-                        SessionData.LoaderCookie,
-                        SessionData.EdmItemCollection
-                    ),
+                    SessionData.KnownAssemblies
+                        .Contains(
+                            clrType.Assembly,
+                            SessionData.LoaderCookie,
+                            SessionData.EdmItemCollection
+                        ),
                     "We should only be loading things directly from the cache if they are already in the collection"
                 );
                 return immutableCacheEntry.TryGetEdmType(clrType.FullName, out edmType);
@@ -230,12 +234,13 @@ namespace System.Data.Metadata.Edm
                 // failing at a much later point of OC type mapping lookup with a super generic error message
                 if (type.IsGenericType)
                 {
-                    SessionData.EdmItemErrors.Add(
-                        new EdmItemError(
-                            System.Data.Entity.Strings.GenericTypeNotSupported(type.FullName),
-                            null
-                        )
-                    );
+                    SessionData.EdmItemErrors
+                        .Add(
+                            new EdmItemError(
+                                System.Data.Entity.Strings.GenericTypeNotSupported(type.FullName),
+                                null
+                            )
+                        );
                     continue;
                 }
 
@@ -280,15 +285,19 @@ namespace System.Data.Metadata.Edm
                 // return error if the role names are the same
                 if (roleAttribute.Role1Name == roleAttribute.Role2Name)
                 {
-                    SessionData.EdmItemErrors.Add(
-                        new EdmItemError(
-                            System.Data.Entity.Strings.SameRoleNameOnRelationshipAttribute(
-                                roleAttribute.RelationshipName,
-                                roleAttribute.Role2Name
-                            ),
-                            null
-                        )
-                    );
+                    SessionData.EdmItemErrors
+                        .Add(
+                            new EdmItemError(
+                                System.Data
+                                    .Entity
+                                    .Strings
+                                    .SameRoleNameOnRelationshipAttribute(
+                                        roleAttribute.RelationshipName,
+                                        roleAttribute.Role2Name
+                                    ),
+                                null
+                            )
+                        );
                     errorEncountered = true;
                 }
 
@@ -340,16 +349,20 @@ namespace System.Data.Metadata.Edm
             EntityType entityType;
             if (!TryGetRelationshipEndEntityType(clrType, out entityType))
             {
-                SessionData.EdmItemErrors.Add(
-                    new EdmItemError(
-                        System.Data.Entity.Strings.RoleTypeInEdmRelationshipAttributeIsInvalidType(
-                            associationType.Name,
-                            roleName,
-                            clrType
-                        ),
-                        null
-                    )
-                );
+                SessionData.EdmItemErrors
+                    .Add(
+                        new EdmItemError(
+                            System.Data
+                                .Entity
+                                .Strings
+                                .RoleTypeInEdmRelationshipAttributeIsInvalidType(
+                                    associationType.Name,
+                                    roleName,
+                                    clrType
+                                ),
+                            null
+                        )
+                    );
                 return;
             }
             associationType.AddKeyMember(
@@ -390,15 +403,19 @@ namespace System.Data.Metadata.Edm
             {
                 if (clrType.IsNested)
                 {
-                    SessionData.EdmItemErrors.Add(
-                        new EdmItemError(
-                            System.Data.Entity.Strings.NestedClassNotSupported(
-                                clrType.FullName,
-                                clrType.Assembly.FullName
-                            ),
-                            null
-                        )
-                    );
+                    SessionData.EdmItemErrors
+                        .Add(
+                            new EdmItemError(
+                                System.Data
+                                    .Entity
+                                    .Strings
+                                    .NestedClassNotSupported(
+                                        clrType.FullName,
+                                        clrType.Assembly.FullName
+                                    ),
+                                null
+                            )
+                        );
                     return;
                 }
                 EdmTypeAttribute typeAttribute = typeAttributes[0];
@@ -407,9 +424,8 @@ namespace System.Data.Metadata.Edm
                     : typeAttribute.Name;
                 if (String.IsNullOrEmpty(typeAttribute.NamespaceName) && clrType.Namespace == null)
                 {
-                    SessionData.EdmItemErrors.Add(
-                        new EdmItemError(Strings.Validator_TypeHasNoNamespace, edmType)
-                    );
+                    SessionData.EdmItemErrors
+                        .Add(new EdmItemError(Strings.Validator_TypeHasNoNamespace, edmType));
                     return;
                 }
 
@@ -437,20 +453,22 @@ namespace System.Data.Metadata.Edm
                     // a valid Edm primitive types (e.g. ulong)
                     PrimitiveType underlyingEnumType;
                     if (
-                        !ClrProviderManifest.Instance.TryGetPrimitiveType(
-                            clrType.GetEnumUnderlyingType(),
-                            out underlyingEnumType
-                        )
+                        !ClrProviderManifest.Instance
+                            .TryGetPrimitiveType(
+                                clrType.GetEnumUnderlyingType(),
+                                out underlyingEnumType
+                            )
                     )
                     {
-                        SessionData.EdmItemErrors.Add(
-                            new EdmItemError(
-                                Strings.Validator_UnsupportedEnumUnderlyingType(
-                                    clrType.GetEnumUnderlyingType().FullName
-                                ),
-                                edmType
-                            )
-                        );
+                        SessionData.EdmItemErrors
+                            .Add(
+                                new EdmItemError(
+                                    Strings.Validator_UnsupportedEnumUnderlyingType(
+                                        clrType.GetEnumUnderlyingType().FullName
+                                    ),
+                                    edmType
+                                )
+                            );
 
                         return;
                     }
@@ -515,14 +533,18 @@ namespace System.Data.Metadata.Edm
         {
             if (roleAttribute.RelationshipName == null)
             {
-                SessionData.EdmItemErrors.Add(
-                    new EdmItemError(
-                        System.Data.Entity.Strings.NullRelationshipNameforEdmRelationshipAttribute(
-                            SourceAssembly.FullName
-                        ),
-                        null
-                    )
-                );
+                SessionData.EdmItemErrors
+                    .Add(
+                        new EdmItemError(
+                            System.Data
+                                .Entity
+                                .Strings
+                                .NullRelationshipNameforEdmRelationshipAttribute(
+                                    SourceAssembly.FullName
+                                ),
+                            null
+                        )
+                    );
                 return true;
             }
 
@@ -530,71 +552,91 @@ namespace System.Data.Metadata.Edm
 
             if (roleAttribute.RelationshipNamespaceName == null)
             {
-                SessionData.EdmItemErrors.Add(
-                    new EdmItemError(
-                        System.Data.Entity.Strings.NullParameterForEdmRelationshipAttribute(
-                            "RelationshipNamespaceName",
-                            roleAttribute.RelationshipName
-                        ),
-                        null
-                    )
-                );
+                SessionData.EdmItemErrors
+                    .Add(
+                        new EdmItemError(
+                            System.Data
+                                .Entity
+                                .Strings
+                                .NullParameterForEdmRelationshipAttribute(
+                                    "RelationshipNamespaceName",
+                                    roleAttribute.RelationshipName
+                                ),
+                            null
+                        )
+                    );
                 nullsFound = true;
             }
 
             if (roleAttribute.Role1Name == null)
             {
-                SessionData.EdmItemErrors.Add(
-                    new EdmItemError(
-                        System.Data.Entity.Strings.NullParameterForEdmRelationshipAttribute(
-                            "Role1Name",
-                            roleAttribute.RelationshipName
-                        ),
-                        null
-                    )
-                );
+                SessionData.EdmItemErrors
+                    .Add(
+                        new EdmItemError(
+                            System.Data
+                                .Entity
+                                .Strings
+                                .NullParameterForEdmRelationshipAttribute(
+                                    "Role1Name",
+                                    roleAttribute.RelationshipName
+                                ),
+                            null
+                        )
+                    );
                 nullsFound = true;
             }
 
             if (roleAttribute.Role1Type == null)
             {
-                SessionData.EdmItemErrors.Add(
-                    new EdmItemError(
-                        System.Data.Entity.Strings.NullParameterForEdmRelationshipAttribute(
-                            "Role1Type",
-                            roleAttribute.RelationshipName
-                        ),
-                        null
-                    )
-                );
+                SessionData.EdmItemErrors
+                    .Add(
+                        new EdmItemError(
+                            System.Data
+                                .Entity
+                                .Strings
+                                .NullParameterForEdmRelationshipAttribute(
+                                    "Role1Type",
+                                    roleAttribute.RelationshipName
+                                ),
+                            null
+                        )
+                    );
                 nullsFound = true;
             }
 
             if (roleAttribute.Role2Name == null)
             {
-                SessionData.EdmItemErrors.Add(
-                    new EdmItemError(
-                        System.Data.Entity.Strings.NullParameterForEdmRelationshipAttribute(
-                            "Role2Name",
-                            roleAttribute.RelationshipName
-                        ),
-                        null
-                    )
-                );
+                SessionData.EdmItemErrors
+                    .Add(
+                        new EdmItemError(
+                            System.Data
+                                .Entity
+                                .Strings
+                                .NullParameterForEdmRelationshipAttribute(
+                                    "Role2Name",
+                                    roleAttribute.RelationshipName
+                                ),
+                            null
+                        )
+                    );
                 nullsFound = true;
             }
 
             if (roleAttribute.Role2Type == null)
             {
-                SessionData.EdmItemErrors.Add(
-                    new EdmItemError(
-                        System.Data.Entity.Strings.NullParameterForEdmRelationshipAttribute(
-                            "Role2Type",
-                            roleAttribute.RelationshipName
-                        ),
-                        null
-                    )
-                );
+                SessionData.EdmItemErrors
+                    .Add(
+                        new EdmItemError(
+                            System.Data
+                                .Entity
+                                .Strings
+                                .NullParameterForEdmRelationshipAttribute(
+                                    "Role2Type",
+                                    roleAttribute.RelationshipName
+                                ),
+                            null
+                        )
+                    );
                 nullsFound = true;
             }
 
@@ -629,9 +671,8 @@ namespace System.Data.Metadata.Edm
         {
             // Look at both public, internal, and private instanced properties declared at this type, inherited members
             // are not looked at.  Internal and private properties are also looked at because they are also schematized fields
-            PropertyInfo[] properties = structuralType.ClrType.GetProperties(
-                PropertyReflectionBindingFlags
-            );
+            PropertyInfo[] properties = structuralType.ClrType
+                .GetProperties(PropertyReflectionBindingFlags);
 
             foreach (PropertyInfo property in properties)
             {
@@ -744,16 +785,20 @@ namespace System.Data.Metadata.Edm
             {
                 // Once an error is detected the property does not need to be validated further, just add to the errors
                 // collection and continue with the next property. The failure will cause an exception to be thrown later during validation of all of the types.
-                SessionData.EdmItemErrors.Add(
-                    new EdmItemError(
-                        System.Data.Entity.Strings.Validator_OSpace_InvalidNavPropReturnType(
-                            propertyInfo.Name,
-                            propertyInfo.DeclaringType.FullName,
-                            propertyInfo.PropertyType.FullName
-                        ),
-                        null
-                    )
-                );
+                SessionData.EdmItemErrors
+                    .Add(
+                        new EdmItemError(
+                            System.Data
+                                .Entity
+                                .Strings
+                                .Validator_OSpace_InvalidNavPropReturnType(
+                                    propertyInfo.Name,
+                                    propertyInfo.DeclaringType.FullName,
+                                    propertyInfo.PropertyType.FullName
+                                ),
+                            null
+                        )
+                    );
                 return;
             }
             // else we have a valid EntityType or CollectionType that contains EntityType. ResolveNonSchemaType enforces that a collection type
@@ -767,10 +812,11 @@ namespace System.Data.Metadata.Edm
             EdmMember member = null;
             EdmType type;
             if (
-                SessionData.TypesInLoading.TryGetValue(
-                    attribute.RelationshipNamespaceName + "." + attribute.RelationshipName,
-                    out type
-                ) && Helper.IsAssociationType(type)
+                SessionData.TypesInLoading
+                    .TryGetValue(
+                        attribute.RelationshipNamespaceName + "." + attribute.RelationshipName,
+                        out type
+                    ) && Helper.IsAssociationType(type)
             )
             {
                 AssociationType relationshipType = (AssociationType)type;
@@ -801,57 +847,72 @@ namespace System.Data.Metadata.Edm
                     }
                     else
                     {
-                        SessionData.EdmItemErrors.Add(
-                            new EdmItemError(
-                                System.Data.Entity.Strings.TargetRoleNameInNavigationPropertyNotValid(
-                                    propertyInfo.Name,
-                                    propertyInfo.DeclaringType.FullName,
-                                    attribute.TargetRoleName,
-                                    attribute.RelationshipName
-                                ),
-                                navigationProperty
-                            )
-                        );
+                        SessionData.EdmItemErrors
+                            .Add(
+                                new EdmItemError(
+                                    System.Data
+                                        .Entity
+                                        .Strings
+                                        .TargetRoleNameInNavigationPropertyNotValid(
+                                            propertyInfo.Name,
+                                            propertyInfo.DeclaringType.FullName,
+                                            attribute.TargetRoleName,
+                                            attribute.RelationshipName
+                                        ),
+                                    navigationProperty
+                                )
+                            );
                         member = null;
                     }
 
                     if (
                         member != null
-                        && ((RefType)navigationProperty.FromEndMember.TypeUsage.EdmType)
-                            .ElementType
+                        && ((RefType)navigationProperty.FromEndMember.TypeUsage.EdmType).ElementType
                             .ClrType != declaringType.ClrType
                     )
                     {
-                        SessionData.EdmItemErrors.Add(
-                            new EdmItemError(
-                                System.Data.Entity.Strings.NavigationPropertyRelationshipEndTypeMismatch(
-                                    declaringType.FullName,
-                                    navigationProperty.Name,
-                                    relationshipType.FullName,
-                                    navigationProperty.FromEndMember.Name,
-                                    ((RefType)navigationProperty.FromEndMember.TypeUsage.EdmType)
-                                        .ElementType
-                                        .ClrType
-                                ),
-                                navigationProperty
-                            )
-                        );
+                        SessionData.EdmItemErrors
+                            .Add(
+                                new EdmItemError(
+                                    System.Data
+                                        .Entity
+                                        .Strings
+                                        .NavigationPropertyRelationshipEndTypeMismatch(
+                                            declaringType.FullName,
+                                            navigationProperty.Name,
+                                            relationshipType.FullName,
+                                            navigationProperty.FromEndMember.Name,
+                                            (
+                                                (RefType)
+                                                    navigationProperty.FromEndMember
+                                                        .TypeUsage
+                                                        .EdmType
+                                            ).ElementType
+                                                .ClrType
+                                        ),
+                                    navigationProperty
+                                )
+                            );
                         member = null;
                     }
                 }
             }
             else
             {
-                SessionData.EdmItemErrors.Add(
-                    new EdmItemError(
-                        System.Data.Entity.Strings.RelationshipNameInNavigationPropertyNotValid(
-                            propertyInfo.Name,
-                            propertyInfo.DeclaringType.FullName,
-                            attribute.RelationshipName
-                        ),
-                        declaringType
-                    )
-                );
+                SessionData.EdmItemErrors
+                    .Add(
+                        new EdmItemError(
+                            System.Data
+                                .Entity
+                                .Strings
+                                .RelationshipNameInNavigationPropertyNotValid(
+                                    propertyInfo.Name,
+                                    propertyInfo.DeclaringType.FullName,
+                                    attribute.RelationshipName
+                                ),
+                            declaringType
+                        )
+                    );
             }
 
             if (member != null)
@@ -891,16 +952,20 @@ namespace System.Data.Metadata.Edm
             {
                 // This property does not need to be validated further, just add to the errors collection and continue with the next property
                 // This failure will cause an exception to be thrown later during validation of all of the types
-                SessionData.EdmItemErrors.Add(
-                    new EdmItemError(
-                        System.Data.Entity.Strings.Validator_OSpace_ScalarPropertyNotPrimitive(
-                            property.Name,
-                            property.DeclaringType.FullName,
-                            property.PropertyType.FullName
-                        ),
-                        null
-                    )
-                );
+                SessionData.EdmItemErrors
+                    .Add(
+                        new EdmItemError(
+                            System.Data
+                                .Entity
+                                .Strings
+                                .Validator_OSpace_ScalarPropertyNotPrimitive(
+                                    property.Name,
+                                    property.DeclaringType.FullName,
+                                    property.PropertyType.FullName
+                                ),
+                            null
+                        )
+                    );
             }
             else
             {
@@ -950,16 +1015,20 @@ namespace System.Data.Metadata.Edm
                 || !Helper.IsEnumType(propertyType)
             )
             {
-                SessionData.EdmItemErrors.Add(
-                    new EdmItemError(
-                        System.Data.Entity.Strings.Validator_OSpace_ScalarPropertyNotPrimitive(
-                            clrProperty.Name,
-                            clrProperty.DeclaringType.FullName,
-                            clrProperty.PropertyType.FullName
-                        ),
-                        null
-                    )
-                );
+                SessionData.EdmItemErrors
+                    .Add(
+                        new EdmItemError(
+                            System.Data
+                                .Entity
+                                .Strings
+                                .Validator_OSpace_ScalarPropertyNotPrimitive(
+                                    clrProperty.Name,
+                                    clrProperty.DeclaringType.FullName,
+                                    clrProperty.PropertyType.FullName
+                                ),
+                            null
+                        )
+                    );
             }
             else
             {
@@ -1003,16 +1072,20 @@ namespace System.Data.Metadata.Edm
             {
                 // This property does not need to be validated further, just add to the errors collection and continue with the next property
                 // This failure will cause an exception to be thrown later during validation of all of the types
-                SessionData.EdmItemErrors.Add(
-                    new EdmItemError(
-                        System.Data.Entity.Strings.Validator_OSpace_ComplexPropertyNotComplex(
-                            clrProperty.Name,
-                            clrProperty.DeclaringType.FullName,
-                            clrProperty.PropertyType.FullName
-                        ),
-                        null
-                    )
-                );
+                SessionData.EdmItemErrors
+                    .Add(
+                        new EdmItemError(
+                            System.Data
+                                .Entity
+                                .Strings
+                                .Validator_OSpace_ComplexPropertyNotComplex(
+                                    clrProperty.Name,
+                                    clrProperty.DeclaringType.FullName,
+                                    clrProperty.PropertyType.FullName
+                                ),
+                            null
+                        )
+                    );
             }
             else
             {

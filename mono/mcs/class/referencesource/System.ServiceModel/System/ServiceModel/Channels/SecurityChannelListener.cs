@@ -190,9 +190,8 @@ namespace System.ServiceModel.Channels
                 {
                     return (T)
                         (object)
-                            this.SecurityProtocolFactory.GetProperty<
-                                Collection<ISecurityContextSecurityTokenCache>
-                            >();
+                            this.SecurityProtocolFactory
+                                .GetProperty<Collection<ISecurityContextSecurityTokenCache>>();
                 }
                 else
                 {
@@ -216,7 +215,8 @@ namespace System.ServiceModel.Channels
                 )
                 {
                     foreach (
-                        SupportingTokenAuthenticatorSpecification spec in this.securityProtocolFactory.ChannelSupportingTokenAuthenticatorSpecification
+                        SupportingTokenAuthenticatorSpecification spec in this.securityProtocolFactory
+                            .ChannelSupportingTokenAuthenticatorSpecification
                     )
                     {
                         if (spec.TokenAuthenticator is ILogonTokenCacheManager)
@@ -445,13 +445,14 @@ namespace System.ServiceModel.Channels
                 // we do not support custom channel bindings in Win7
                 if (extendedProtectionPolicy.CustomChannelBinding != null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new NotSupportedException(
-                            SR.GetString(
-                                SR.ExtendedProtectionPolicyCustomChannelBindingNotSupported
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperError(
+                            new NotSupportedException(
+                                SR.GetString(
+                                    SR.ExtendedProtectionPolicyCustomChannelBindingNotSupported
+                                )
                             )
-                        )
-                    );
+                        );
                 }
 
                 if (extendedProtectionPolicy.PolicyEnforcement == PolicyEnforcement.Never)
@@ -474,13 +475,14 @@ namespace System.ServiceModel.Channels
                         )
                     )
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new InvalidOperationException(
-                                SR.GetString(
-                                    SR.SecurityChannelListenerChannelExtendedProtectionNotSupported
+                        throw DiagnosticUtility.ExceptionUtility
+                            .ThrowHelperError(
+                                new InvalidOperationException(
+                                    SR.GetString(
+                                        SR.SecurityChannelListenerChannelExtendedProtectionNotSupported
+                                    )
                                 )
-                            )
-                        );
+                            );
                     }
                 }
 
@@ -507,11 +509,12 @@ namespace System.ServiceModel.Channels
         {
             if (this.securityProtocolFactory == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(
-                        SR.GetString(SR.SecurityProtocolFactoryShouldBeSetBeforeThisOperation)
-                    )
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(SR.SecurityProtocolFactoryShouldBeSetBeforeThisOperation)
+                        )
+                    );
             }
         }
 
@@ -540,9 +543,8 @@ namespace System.ServiceModel.Channels
             )
             {
                 if (cacheManagers == null)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                        "cacheManagers"
-                    );
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperArgumentNull("cacheManagers");
 
                 this.cacheManagers = cacheManagers;
             }
@@ -598,8 +600,8 @@ namespace System.ServiceModel.Channels
             protected override TChannel OnAcceptChannel(TChannel innerChannel)
             {
                 SecurityChannelListener<TChannel> listener = this.SecurityChannelListener;
-                SecurityProtocol securityProtocol =
-                    listener.SecurityProtocolFactory.CreateSecurityProtocol(
+                SecurityProtocol securityProtocol = listener.SecurityProtocolFactory
+                    .CreateSecurityProtocol(
                         null,
                         null,
                         this.listenerSecurityProtocolState,
@@ -670,11 +672,12 @@ namespace System.ServiceModel.Channels
                 }
                 else
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new NotSupportedException(
-                            SR.GetString(SR.UnsupportedChannelInterfaceType, typeof(TChannel))
-                        )
-                    );
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperError(
+                            new NotSupportedException(
+                                SR.GetString(SR.UnsupportedChannelInterfaceType, typeof(TChannel))
+                            )
+                        );
                 }
 
                 return (TChannel)securityChannel;
@@ -702,12 +705,9 @@ namespace System.ServiceModel.Channels
                     if (this.securityListener.hasSecurityStateReference)
                     {
                         this.securityListener.hasSecurityStateReference = false;
-                        IAsyncResult result =
-                            this.securityListener.settingsLifetimeManager.BeginClose(
-                                timeout,
-                                lifetimeManagerCloseCallback,
-                                this
-                            );
+                        IAsyncResult result = this.securityListener
+                            .settingsLifetimeManager
+                            .BeginClose(timeout, lifetimeManagerCloseCallback, this);
                         if (!result.CompletedSynchronously)
                         {
                             return;
@@ -782,11 +782,9 @@ namespace System.ServiceModel.Channels
                 }
                 if (openState)
                 {
-                    IAsyncResult result = this.securityListener.settingsLifetimeManager.BeginOpen(
-                        timeout,
-                        lifetimeManagerOpenCallback,
-                        this
-                    );
+                    IAsyncResult result = this.securityListener
+                        .settingsLifetimeManager
+                        .BeginOpen(timeout, lifetimeManagerOpenCallback, this);
                     if (!result.CompletedSynchronously)
                     {
                         return;
@@ -844,9 +842,8 @@ namespace System.ServiceModel.Channels
             {
                 if (settingsLifetimeManager == null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                        "settingsLifetimeManager"
-                    );
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperArgumentNull("settingsLifetimeManager");
                 }
                 this.settingsLifetimeManager = settingsLifetimeManager;
             }
@@ -1016,13 +1013,14 @@ namespace System.ServiceModel.Channels
             {
                 if (message.Headers.Action == this.secureConversationCloseAction)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperWarning(
-                        new MessageSecurityException(
-                            SR.GetString(SR.SecureConversationCancelNotAllowedFaultReason),
-                            null,
-                            GetSecureConversationCloseNotSupportedFault()
-                        )
-                    );
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperWarning(
+                            new MessageSecurityException(
+                                SR.GetString(SR.SecureConversationCancelNotAllowedFaultReason),
+                                null,
+                                GetSecureConversationCloseNotSupportedFault()
+                            )
+                        );
                 }
             }
 
@@ -1034,8 +1032,8 @@ namespace System.ServiceModel.Channels
             IDisposable ApplyHostingIntegrationContext(Message message)
             {
                 IDisposable hostingContext = null;
-                IAspNetMessageProperty hostingProperty =
-                    AspNetEnvironment.Current.GetHostingProperty(message);
+                IAspNetMessageProperty hostingProperty = AspNetEnvironment.Current
+                    .GetHostingProperty(message);
                 if (hostingProperty != null)
                 {
                     hostingContext = hostingProperty.ApplyIntegrationContext();
@@ -1061,11 +1059,8 @@ namespace System.ServiceModel.Channels
                 ThrowIfSecureConversationCloseMessage(message);
                 using (this.ApplyHostingIntegrationContext(message))
                 {
-                    return this.SecurityProtocol.VerifyIncomingMessage(
-                        ref message,
-                        timeout,
-                        correlationState
-                    );
+                    return this.SecurityProtocol
+                        .VerifyIncomingMessage(ref message, timeout, correlationState);
                 }
             }
 
@@ -1108,12 +1103,9 @@ namespace System.ServiceModel.Channels
                         if (this.securityChannel.hasSecurityStateReference)
                         {
                             this.securityChannel.hasSecurityStateReference = false;
-                            IAsyncResult result =
-                                this.securityChannel.settingsLifetimeManager.BeginClose(
-                                    timeout,
-                                    lifetimeManagerCloseCallback,
-                                    this
-                                );
+                            IAsyncResult result = this.securityChannel
+                                .settingsLifetimeManager
+                                .BeginClose(timeout, lifetimeManagerCloseCallback, this);
                             if (!result.CompletedSynchronously)
                             {
                                 return;
@@ -1377,10 +1369,8 @@ namespace System.ServiceModel.Channels
                 ThrowIfFaulted();
                 ThrowIfDisposedOrNotOpen(message);
                 TimeoutHelper timeoutHelper = new TimeoutHelper(timeout);
-                this.SecurityProtocol.SecureOutgoingMessage(
-                    ref message,
-                    timeoutHelper.RemainingTime()
-                );
+                this.SecurityProtocol
+                    .SecureOutgoingMessage(ref message, timeoutHelper.RemainingTime());
                 this.innerDuplexChannel.Send(message, timeoutHelper.RemainingTime());
             }
         }
@@ -1636,11 +1626,15 @@ namespace System.ServiceModel.Channels
                 Message message = requestContext.RequestMessage;
                 if (message == null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new CommunicationException(
-                            SR.GetString(SR.ReceivedMessageInRequestContextNull, this.InnerChannel)
-                        )
-                    );
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperError(
+                            new CommunicationException(
+                                SR.GetString(
+                                    SR.ReceivedMessageInRequestContextNull,
+                                    this.InnerChannel
+                                )
+                            )
+                        );
                 }
                 SecurityProtocolCorrelationState correlationState = this.VerifyIncomingMessage(
                     ref message,
@@ -1726,10 +1720,8 @@ namespace System.ServiceModel.Channels
                     }
 
                     if (
-                        !this.InnerChannel.TryReceiveRequest(
-                            timeoutHelper.RemainingTime(),
-                            out innerContext
-                        )
+                        !this.InnerChannel
+                            .TryReceiveRequest(timeoutHelper.RemainingTime(), out innerContext)
                     )
                     {
                         requestContext = null;
@@ -1874,11 +1866,12 @@ namespace System.ServiceModel.Channels
                 TimeoutHelper timeoutHelper = new TimeoutHelper(timeout);
                 if (message != null)
                 {
-                    this.securityProtocol.SecureOutgoingMessage(
-                        ref message,
-                        timeoutHelper.RemainingTime(),
-                        correlationState
-                    );
+                    this.securityProtocol
+                        .SecureOutgoingMessage(
+                            ref message,
+                            timeoutHelper.RemainingTime(),
+                            correlationState
+                        );
                 }
                 this.innerContext.Reply(message, timeoutHelper.RemainingTime());
             }
@@ -2302,9 +2295,8 @@ namespace System.ServiceModel.Channels
                     state as ReceiveRequestAndVerifySecurityAsyncResult;
                 if (securityAsyncResult == null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ArgumentException()
-                    );
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperError(new ArgumentException());
                 }
 
                 securityAsyncResult.Start();
@@ -2534,9 +2526,8 @@ namespace System.ServiceModel.Channels
                     state as InputChannelReceiveMessageAndVerifySecurityAsyncResult;
                 if (securityAsyncResult == null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ArgumentException()
-                    );
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperError(new ArgumentException());
                 }
 
                 securityAsyncResult.Start();
@@ -2581,9 +2572,8 @@ namespace System.ServiceModel.Channels
 
             protected override Message CreateFaultMessage(MessageFault fault, Message innerItem)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new NotSupportedException()
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(new NotSupportedException());
             }
 
             protected override IAsyncResult BeginSendFault(
@@ -2594,16 +2584,14 @@ namespace System.ServiceModel.Channels
                 object state
             )
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new NotSupportedException()
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(new NotSupportedException());
             }
 
             protected override void EndSendFault(Message innerItem, IAsyncResult result)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new NotSupportedException()
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(new NotSupportedException());
             }
 
             public static bool End(IAsyncResult result, out Message message)

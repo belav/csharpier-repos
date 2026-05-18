@@ -221,10 +221,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                         // PERF: Avoid accessing Locations for performance, but assert that the alternative approach is
                         // equivalent.
                         Debug.Assert(
-                            memberT
-                                .MergedDeclaration.Declarations.SelectAsArray(decl =>
-                                    decl.NameLocation
-                                )
+                            memberT.MergedDeclaration
+                                .Declarations
+                                .SelectAsArray(decl => decl.NameLocation)
                                 .SequenceEqual(memberT.Locations)
                         );
                         foreach (var declaration in memberT.MergedDeclaration.Declarations)

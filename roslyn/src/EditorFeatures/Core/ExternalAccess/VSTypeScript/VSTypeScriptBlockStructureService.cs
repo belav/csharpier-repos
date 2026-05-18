@@ -34,16 +34,17 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.VSTypeScript
                 .ConfigureAwait(false);
 
             return new BlockStructure(
-                blockStructure.Spans.SelectAsArray(x => new BlockSpan(
-                    x.Type!,
-                    x.IsCollapsible,
-                    x.TextSpan,
-                    x.HintSpan,
-                    primarySpans: null,
-                    x.BannerText,
-                    x.AutoCollapse,
-                    x.IsDefaultCollapsed
-                ))
+                blockStructure.Spans
+                    .SelectAsArray(x => new BlockSpan(
+                        x.Type!,
+                        x.IsCollapsible,
+                        x.TextSpan,
+                        x.HintSpan,
+                        primarySpans: null,
+                        x.BannerText,
+                        x.AutoCollapse,
+                        x.IsDefaultCollapsed
+                    ))
             );
         }
     }

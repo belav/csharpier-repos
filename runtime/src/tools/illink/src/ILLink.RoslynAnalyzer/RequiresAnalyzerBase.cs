@@ -242,10 +242,8 @@ namespace ILLink.RoslynAnalyzer
             while (
                 member is IMethodSymbol method
                 && method.OverriddenMethod != null
-                && SymbolEqualityComparer.Default.Equals(
-                    method.ReturnType,
-                    method.OverriddenMethod.ReturnType
-                )
+                && SymbolEqualityComparer.Default
+                    .Equals(method.ReturnType, method.OverriddenMethod.ReturnType)
             )
                 member = method.OverriddenMethod;
 
@@ -383,9 +381,11 @@ namespace ILLink.RoslynAnalyzer
 
         public static string GetUrlFromAttribute(AttributeData? requiresAttribute)
         {
-            var url = requiresAttribute
-                ?.NamedArguments.FirstOrDefault(na => na.Key == "Url")
-                .Value.Value?.ToString();
+            var url = requiresAttribute?.NamedArguments
+                .FirstOrDefault(na => na.Key == "Url")
+                .Value
+                .Value
+                ?.ToString();
             return MessageFormat.FormatRequiresAttributeUrlArg(url);
         }
 

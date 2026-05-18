@@ -55,11 +55,12 @@ namespace System.Activities
             ValidateAccessor(context);
             if (!this.allowGetLocation)
             {
-                throw FxTrace.Exception.AsError(
-                    new InvalidOperationException(
-                        SR.GetLocationOnPublicAccessReference(context.Activity)
-                    )
-                );
+                throw FxTrace.Exception
+                    .AsError(
+                        new InvalidOperationException(
+                            SR.GetLocationOnPublicAccessReference(context.Activity)
+                        )
+                    );
             }
             return GetLocationCore(context);
         }
@@ -69,11 +70,12 @@ namespace System.Activities
             ValidateAccessor(context);
             if (!this.allowReads)
             {
-                throw FxTrace.Exception.AsError(
-                    new InvalidOperationException(
-                        SR.ReadAccessToWriteOnlyPublicReference(context.Activity)
-                    )
-                );
+                throw FxTrace.Exception
+                    .AsError(
+                        new InvalidOperationException(
+                            SR.ReadAccessToWriteOnlyPublicReference(context.Activity)
+                        )
+                    );
             }
             return GetLocationCore(context);
         }
@@ -83,11 +85,12 @@ namespace System.Activities
             ValidateAccessor(context);
             if (!this.allowWrites)
             {
-                throw FxTrace.Exception.AsError(
-                    new InvalidOperationException(
-                        SR.WriteAccessToReadOnlyPublicReference(context.Activity)
-                    )
-                );
+                throw FxTrace.Exception
+                    .AsError(
+                        new InvalidOperationException(
+                            SR.WriteAccessToReadOnlyPublicReference(context.Activity)
+                        )
+                    );
             }
             return GetLocationCore(context);
         }
@@ -100,14 +103,15 @@ namespace System.Activities
 
             if (!object.ReferenceEquals(context.Activity, this.validAccessor))
             {
-                throw FxTrace.Exception.AsError(
-                    new InvalidOperationException(
-                        SR.InlinedLocationReferenceOnlyAccessibleByOwner(
-                            context.Activity,
-                            this.validAccessor
+                throw FxTrace.Exception
+                    .AsError(
+                        new InvalidOperationException(
+                            SR.InlinedLocationReferenceOnlyAccessibleByOwner(
+                                context.Activity,
+                                this.validAccessor
+                            )
                         )
-                    )
-                );
+                    );
             }
         }
 

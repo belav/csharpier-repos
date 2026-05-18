@@ -46,8 +46,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.Pythia
             CancellationToken cancellationToken
         )
         {
-            var (items, selectedItemIndex) = await _lazyImplementation
-                .Value.GetMethodGroupItemsAndSelectionAsync(
+            var (items, selectedItemIndex) = await _lazyImplementation.Value
+                .GetMethodGroupItemsAndSelectionAsync(
                     accessibleMethods,
                     document,
                     invocationExpression,

@@ -31,8 +31,8 @@ namespace IOperationGenerator
         {
             _tree = tree;
             _location = location;
-            _typeMap = _tree
-                .Types.OfType<AbstractNode>()
+            _typeMap = _tree.Types
+                .OfType<AbstractNode>()
                 .ToDictionary(t => t.Name, t => (AbstractNode?)t);
             _typeMap.Add("IOperation", null);
         }
@@ -265,10 +265,8 @@ namespace IOperationGenerator
                     WriteLine($"/// <{el.LocalName}>");
 
                     string[] separators = ["\r", "\n", "\r\n"];
-                    string[] lines = el.InnerXml.Split(
-                        separators,
-                        StringSplitOptions.RemoveEmptyEntries
-                    );
+                    string[] lines = el.InnerXml
+                        .Split(separators, StringSplitOptions.RemoveEmptyEntries);
 
                     int indentation = lines[0].Length - lines[0].TrimStart().Length;
 
@@ -346,19 +344,20 @@ namespace IOperationGenerator
             );
             WriteLine("None = 0x0,");
 
-            Dictionary<int, IEnumerable<(OperationKindEntry, AbstractNode)>> explicitKinds = _tree
-                .Types.OfType<AbstractNode>()
-                .Where(n => n.OperationKind?.Entries is object)
-                .SelectMany(n => n.OperationKind!.Entries.Select(e => (entry: e, node: n)))
-                .GroupBy(e => e.entry.Value)
-                .ToDictionary(g => g.Key, g => g.Select(k => (entryName: k.entry, k.node)));
+            Dictionary<int, IEnumerable<(OperationKindEntry, AbstractNode)>> explicitKinds =
+                _tree.Types
+                    .OfType<AbstractNode>()
+                    .Where(n => n.OperationKind?.Entries is object)
+                    .SelectMany(n => n.OperationKind!.Entries.Select(e => (entry: e, node: n)))
+                    .GroupBy(e => e.entry.Value)
+                    .ToDictionary(g => g.Key, g => g.Select(k => (entryName: k.entry, k.node)));
 
             // Conditions for inclusion in the OperationKind enum:
             //  1. Concrete Node types that do not have an explicit false include flag OR AbstractNodes that have an explicit true include flag
             //  2. No explicit kind entries: those are handled above.
             //  3. No internal nodes.
-            List<AbstractNode> elementsToKind = _tree
-                .Types.OfType<AbstractNode>()
+            List<AbstractNode> elementsToKind = _tree.Types
+                .OfType<AbstractNode>()
                 .Where(n =>
                     (
                         (n is Node && (n.OperationKind?.Include != false))
@@ -643,8 +642,8 @@ namespace IOperationGenerator
 
                     Outdent();
 
-                    List<Property> propsToInitialize = type
-                        .Properties.Where(p => !p.SkipGeneration && !p.MakeAbstract)
+                    List<Property> propsToInitialize = type.Properties
+                        .Where(p => !p.SkipGeneration && !p.MakeAbstract)
                         .ToList();
 
                     if (propsToInitialize.Count == 0 && !hasType)
@@ -763,8 +762,9 @@ namespace IOperationGenerator
 
                     if (node.OperationKind?.Entries.Count > 0)
                     {
-                        return node
-                            .OperationKind.Entries.Where(e => e.EditorBrowsable != false)
+                        return node.OperationKind
+                            .Entries
+                            .Where(e => e.EditorBrowsable != false)
                             .Single()
                             .Name;
                     }
@@ -1245,8 +1245,8 @@ namespace IOperationGenerator
             bool includeSkipGenerationProperties = false
         )
         {
-            var properties = node
-                .Properties.Where(p => !p.SkipGeneration || includeSkipGenerationProperties)
+            var properties = node.Properties
+                .Where(p => !p.SkipGeneration || includeSkipGenerationProperties)
                 .ToList();
 
             AbstractNode? @base = node;
@@ -1257,9 +1257,8 @@ namespace IOperationGenerator
                 if (@base is null)
                     break;
                 properties.AddRange(
-                    @base.Properties.Where(p =>
-                        !p.SkipGeneration || includeSkipGenerationProperties
-                    )
+                    @base.Properties
+                        .Where(p => !p.SkipGeneration || includeSkipGenerationProperties)
                 );
             }
 
@@ -1303,7 +1302,8 @@ namespace IOperationGenerator
         }
 
         private static List<string> GetPropertyOrder(Node node) =>
-            node.ChildrenOrder?.Split(",", StringSplitOptions.RemoveEmptyEntries)
+            node.ChildrenOrder
+                ?.Split(",", StringSplitOptions.RemoveEmptyEntries)
                 .Select(s => s.Trim())
                 .ToList()
             ?? new List<string>();

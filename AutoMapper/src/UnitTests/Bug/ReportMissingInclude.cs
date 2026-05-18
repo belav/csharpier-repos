@@ -35,9 +35,10 @@ public class ReportMissingIncludeCreateMissingMap
                     .Include<ReportMissingIncludeCreateMissingMap, ChildType>();
             })
         ).ShouldThrowException<InvalidOperationException>(ex =>
-            ex.Message.ShouldStartWith(
-                $"Missing map from {typeof(ReportMissingIncludeCreateMissingMap)} to {typeof(ChildType)}."
-            )
+            ex.Message
+                .ShouldStartWith(
+                    $"Missing map from {typeof(ReportMissingIncludeCreateMissingMap)} to {typeof(ChildType)}."
+                )
         );
     }
 
@@ -84,9 +85,10 @@ public class ReportMissingIncludeBaseCreateMissingMap
                     .IncludeBase<ReportMissingIncludeBaseCreateMissingMap, BaseType>();
             })
         ).ShouldThrowException<InvalidOperationException>(ex =>
-            ex.Message.ShouldStartWith(
-                $"Missing map from {typeof(ReportMissingIncludeBaseCreateMissingMap)} to {typeof(BaseType)}."
-            )
+            ex.Message
+                .ShouldStartWith(
+                    $"Missing map from {typeof(ReportMissingIncludeBaseCreateMissingMap)} to {typeof(BaseType)}."
+                )
         );
     }
 

@@ -86,11 +86,13 @@ internal readonly record struct OptionsTestInfo(
                                 && (
                                     isBackingField
                                         ? type.GetProperty(
-                                            unmangledName,
-                                            BindingFlags.Public
-                                                | BindingFlags.NonPublic
-                                                | BindingFlags.Static
-                                        )!.GetMethod!.IsPublic
+                                                unmangledName,
+                                                BindingFlags.Public
+                                                    | BindingFlags.NonPublic
+                                                    | BindingFlags.Static
+                                            )!
+                                            .GetMethod!
+                                            .IsPublic
                                         : field.IsPublic
                                 );
                             var accessorNamespace = type.Namespace;
@@ -101,9 +103,8 @@ internal readonly record struct OptionsTestInfo(
                             {
                                 optionInfo = optionInfo with
                                 {
-                                    Accessors = optionInfo.Accessors.Add(
-                                        (accessorNamespace!, accessor, isPublic, option)
-                                    ),
+                                    Accessors = optionInfo.Accessors
+                                        .Add((accessorNamespace!, accessor, isPublic, option)),
                                 };
                             }
                             else

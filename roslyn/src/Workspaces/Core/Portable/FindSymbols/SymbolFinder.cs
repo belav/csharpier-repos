@@ -326,8 +326,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
                     continue;
                 }
 
-                var originalRoot = await location
-                    .SyntaxTree.GetRootAsync(cancellationToken)
+                var originalRoot = await location.SyntaxTree
+                    .GetRootAsync(cancellationToken)
                     .ConfigureAwait(false);
                 foreach (var linkedDocumentId in originalDocument.GetLinkedDocumentIds())
                 {
@@ -368,11 +368,11 @@ namespace Microsoft.CodeAnalysis.FindSymbols
                             && symbol.IsConstructor()
                         )
                         {
-                            linkedSymbol = linkedNamedType.Constructors.FirstOrDefault(c =>
-                                c.DeclaringSyntaxReferences.Any(r =>
-                                    linkedNode.Equals(r.GetSyntax(cancellationToken))
-                                )
-                            );
+                            linkedSymbol = linkedNamedType.Constructors
+                                .FirstOrDefault(c =>
+                                    c.DeclaringSyntaxReferences
+                                        .Any(r => linkedNode.Equals(r.GetSyntax(cancellationToken)))
+                                );
                             if (linkedSymbol is null)
                                 continue;
                         }

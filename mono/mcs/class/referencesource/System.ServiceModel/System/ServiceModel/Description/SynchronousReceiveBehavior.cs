@@ -25,9 +25,8 @@ namespace System.ServiceModel.Description
         {
             if (endpointDispatcher == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                    "endpointDispatcher"
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperArgumentNull("endpointDispatcher");
             }
 
             endpointDispatcher.ChannelDispatcher.ReceiveSynchronously = true;

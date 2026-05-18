@@ -12,8 +12,7 @@ namespace Microsoft.VisualStudio.LanguageServices.LiveShare.UnitTests
     internal static class LiveShareTestCompositions
     {
         public static readonly TestComposition Features =
-            EditorTestCompositions.LanguageServerProtocol.AddAssemblies(
-                typeof(LiveShareResources).Assembly
-            );
+            EditorTestCompositions.LanguageServerProtocol
+                .AddAssemblies(typeof(LiveShareResources).Assembly);
     }
 }

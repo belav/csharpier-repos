@@ -42,9 +42,8 @@ namespace Mono.CodeContracts.Static.Analysis.HeapAnalysis
 
         public override TypeNode FieldAddressType()
         {
-            return this.MetaDataProvider.ManagedPointer(
-                this.MetaDataProvider.ReturnType(this.Item)
-            );
+            return this.MetaDataProvider
+                .ManagedPointer(this.MetaDataProvider.ReturnType(this.Item));
         }
     }
 }

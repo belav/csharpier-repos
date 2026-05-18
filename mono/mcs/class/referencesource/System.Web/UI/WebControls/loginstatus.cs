@@ -310,10 +310,8 @@ namespace System.Web.UI.WebControls
                         )
                     )
                     {
-                        Page.Response.Redirect(
-                            Page.Request.ClientFilePath.VirtualPathString,
-                            false
-                        );
+                        Page.Response
+                            .Redirect(Page.Request.ClientFilePath.VirtualPathString, false);
                     }
                     else
                     {

@@ -36,8 +36,8 @@ namespace System.Data.Query.InternalTrees
         {
             m_typeMap = template.TypeMap;
             m_discriminatorProperty = template.Discriminator.Property;
-            m_properties = template
-                .PropertyMap.Select(propertyValuePair => propertyValuePair.Key)
+            m_properties = template.PropertyMap
+                .Select(propertyValuePair => propertyValuePair.Key)
                 .ToList()
                 .AsReadOnly();
         }

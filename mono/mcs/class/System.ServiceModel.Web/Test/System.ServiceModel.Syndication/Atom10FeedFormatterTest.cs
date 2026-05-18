@@ -159,12 +159,10 @@ namespace MonoTests.System.ServiceModel.Syndication
             // It however automatically fills ...
             SyndicationFeed feed = new SyndicationFeed();
             feed.Categories.Add(new SyndicationCategory("myname", "myscheme", "mylabel"));
-            feed.Authors.Add(
-                new SyndicationPerson("john@doe.com", "John Doe", "http://john.doe.name")
-            );
-            feed.Contributors.Add(
-                new SyndicationPerson("jane@doe.com", "Jane Doe", "http://jane.doe.name")
-            );
+            feed.Authors
+                .Add(new SyndicationPerson("john@doe.com", "John Doe", "http://john.doe.name"));
+            feed.Contributors
+                .Add(new SyndicationPerson("jane@doe.com", "Jane Doe", "http://jane.doe.name"));
             StringWriter sw = new StringWriter();
             using (XmlWriter w = CreateWriter(sw))
                 new Atom10FeedFormatter(feed).WriteTo(w);
@@ -222,24 +220,26 @@ namespace MonoTests.System.ServiceModel.Syndication
         {
             // ... and it passes.
             SyndicationFeed feed = new SyndicationFeed();
-            feed.Links.Add(
-                new SyndicationLink(
-                    new Uri("http://example.com/Page1"),
-                    "alternate",
-                    "Page 1",
-                    "text/html",
-                    0
-                )
-            );
-            feed.Links.Add(
-                new SyndicationLink(
-                    new Uri("http://example.com/Page2"),
-                    "alternate",
-                    "Page 2",
-                    "text/html",
-                    0
-                )
-            );
+            feed.Links
+                .Add(
+                    new SyndicationLink(
+                        new Uri("http://example.com/Page1"),
+                        "alternate",
+                        "Page 1",
+                        "text/html",
+                        0
+                    )
+                );
+            feed.Links
+                .Add(
+                    new SyndicationLink(
+                        new Uri("http://example.com/Page2"),
+                        "alternate",
+                        "Page 2",
+                        "text/html",
+                        0
+                    )
+                );
             StringWriter sw = new StringWriter();
             using (XmlWriter w = CreateWriter(sw))
                 new Atom10FeedFormatter(feed).WriteTo(w);

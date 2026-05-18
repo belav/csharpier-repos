@@ -41,8 +41,8 @@ public class EntityMaterializerSource : IEntityMaterializerSource
     public EntityMaterializerSource(EntityMaterializerSourceDependencies dependencies)
     {
         Dependencies = dependencies;
-        _bindingInterceptors = dependencies
-            .SingletonInterceptors.OfType<IInstantiationBindingInterceptor>()
+        _bindingInterceptors = dependencies.SingletonInterceptors
+            .OfType<IInstantiationBindingInterceptor>()
             .ToList();
 
         _materializationInterceptor = (IMaterializationInterceptor?)
@@ -131,9 +131,8 @@ public class EntityMaterializerSource : IEntityMaterializerSource
         }
 
         foreach (
-            var consumedProperty in constructorBinding.ParameterBindings.SelectMany(p =>
-                p.ConsumedProperties
-            )
+            var consumedProperty in constructorBinding.ParameterBindings
+                .SelectMany(p => p.ConsumedProperties)
         )
         {
             properties.Remove(consumedProperty);
@@ -191,8 +190,8 @@ public class EntityMaterializerSource : IEntityMaterializerSource
                     property
                 ),
 
-                IServiceProperty serviceProperty =>
-                    serviceProperty.ParameterBinding.BindToParameter(bindingInfo),
+                IServiceProperty serviceProperty => serviceProperty.ParameterBinding
+                    .BindToParameter(bindingInfo),
 
                 IComplexProperty complexProperty => CreateMaterializeExpression(
                     new EntityMaterializerSourceParameters(
@@ -511,14 +510,15 @@ public class EntityMaterializerSource : IEntityMaterializerSource
         blockExpressions.Add(instanceVariable);
 
         return Expression.Block(
-            bindingInfo.ServiceInstances.Concat(
-                new[]
-                {
-                    accessorDictionaryVariable,
-                    materializationDataVariable,
-                    creatingResultVariable,
-                }
-            ),
+            bindingInfo.ServiceInstances
+                .Concat(
+                    new[]
+                    {
+                        accessorDictionaryVariable,
+                        materializationDataVariable,
+                        creatingResultVariable,
+                    }
+                ),
             blockExpressions
         );
 
@@ -763,7 +763,8 @@ public class EntityMaterializerSource : IEntityMaterializerSource
     )
     {
         foreach (
-            var parameterBinding in constructorBinding.ParameterBindings.OfType<ServiceParameterBinding>()
+            var parameterBinding in constructorBinding.ParameterBindings
+                .OfType<ServiceParameterBinding>()
         )
         {
             if (bindingInfo.ServiceInstances.All(s => s.Type != parameterBinding.ServiceType))

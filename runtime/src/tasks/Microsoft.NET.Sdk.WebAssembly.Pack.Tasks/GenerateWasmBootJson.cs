@@ -214,10 +214,8 @@ public class GenerateWasmBootJson : Task
                         resourceName = assetTraitValue + "/" + resourceName;
 
                     if (
-                        !resourceData.satelliteResources.TryGetValue(
-                            assetTraitValue,
-                            out resourceList
-                        )
+                        !resourceData.satelliteResources
+                            .TryGetValue(assetTraitValue, out resourceList)
                     )
                     {
                         resourceList = new ResourceHashesByNameDictionary();

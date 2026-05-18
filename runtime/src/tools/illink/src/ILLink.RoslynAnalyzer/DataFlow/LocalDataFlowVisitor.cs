@@ -542,9 +542,10 @@ namespace ILLink.RoslynAnalyzer.DataFlow
             Debug.Assert(
                 flowCaptureReference.GetValueUsageInfo(OwningSymbol).HasFlag(ValueUsageInfo.Write)
             );
-            var capturedReferences = state.Current.LocalState.CapturedReferences.Get(
-                flowCaptureReference.Id
-            );
+            var capturedReferences = state.Current
+                .LocalState
+                .CapturedReferences
+                .Get(flowCaptureReference.Id);
             Debug.Assert(!capturedReferences.IsUnknown());
             if (!capturedReferences.HasMultipleValues)
             {
@@ -580,10 +581,10 @@ namespace ILLink.RoslynAnalyzer.DataFlow
                     state,
                     merge: true
                 );
-                value = LocalStateAndContextLattice.LocalStateLattice.Lattice.ValueLattice.Meet(
-                    value,
-                    singleValue
-                );
+                value = LocalStateAndContextLattice.LocalStateLattice
+                    .Lattice
+                    .ValueLattice
+                    .Meet(value, singleValue);
             }
 
             return value;
@@ -730,18 +731,18 @@ namespace ILLink.RoslynAnalyzer.DataFlow
                         // If an r-value captures an l-value, we must dereference the l-value
                         // and copy out the value to capture.
                         capturedValue = TopValue;
-                        var capturedReferences = state.Current.LocalState.CapturedReferences.Get(
-                            captureRef.Id
-                        );
+                        var capturedReferences = state.Current
+                            .LocalState
+                            .CapturedReferences
+                            .Get(captureRef.Id);
                         Debug.Assert(!capturedReferences.IsUnknown());
                         foreach (var capturedReference in capturedReferences.GetKnownValues())
                         {
                             var value = Visit(capturedReference.Reference, state);
-                            capturedValue =
-                                LocalStateAndContextLattice.LocalStateLattice.Lattice.ValueLattice.Meet(
-                                    capturedValue,
-                                    value
-                                );
+                            capturedValue = LocalStateAndContextLattice.LocalStateLattice
+                                .Lattice
+                                .ValueLattice
+                                .Meet(capturedValue, value);
                         }
                     }
                     else

@@ -485,17 +485,18 @@ namespace System.Runtime.Serialization.Json
                         case CollectionKind.GenericCollection:
                         case CollectionKind.GenericList:
                             incrementCollectionCountMethod =
-                                XmlFormatGeneratorStatics.IncrementCollectionCountGenericMethod.MakeGenericMethod(
-                                    collectionContract.ItemType
-                                );
+                                XmlFormatGeneratorStatics.IncrementCollectionCountGenericMethod
+                                    .MakeGenericMethod(collectionContract.ItemType);
                             break;
                         case CollectionKind.GenericDictionary:
                             incrementCollectionCountMethod =
-                                XmlFormatGeneratorStatics.IncrementCollectionCountGenericMethod.MakeGenericMethod(
-                                    Globals.TypeOfKeyValuePair.MakeGenericType(
-                                        collectionContract.ItemType.GetGenericArguments()
-                                    )
-                                );
+                                XmlFormatGeneratorStatics.IncrementCollectionCountGenericMethod
+                                    .MakeGenericMethod(
+                                        Globals.TypeOfKeyValuePair
+                                            .MakeGenericType(
+                                                collectionContract.ItemType.GetGenericArguments()
+                                            )
+                                    );
                             break;
                     }
                     if (incrementCollectionCountMethod != null)
@@ -516,9 +517,8 @@ namespace System.Runtime.Serialization.Json
                     {
                         isGenericDictionary = true;
                         keyValueTypes = collectionContract.ItemType.GetGenericArguments();
-                        enumeratorType = Globals.TypeOfGenericDictionaryEnumerator.MakeGenericType(
-                            keyValueTypes
-                        );
+                        enumeratorType = Globals.TypeOfGenericDictionaryEnumerator
+                            .MakeGenericType(keyValueTypes);
                     }
                     else if (collectionContract.Kind == CollectionKind.Dictionary)
                     {
@@ -606,9 +606,10 @@ namespace System.Runtime.Serialization.Json
                     else if (isGenericDictionary)
                     {
                         Debug.Assert(keyValueTypes != null);
-                        Type ctorParam = Globals.TypeOfIEnumeratorGeneric.MakeGenericType(
-                            Globals.TypeOfKeyValuePair.MakeGenericType(keyValueTypes)
-                        );
+                        Type ctorParam = Globals.TypeOfIEnumeratorGeneric
+                            .MakeGenericType(
+                                Globals.TypeOfKeyValuePair.MakeGenericType(keyValueTypes)
+                            );
                         ConstructorInfo dictEnumCtor = enumeratorType.GetConstructor(
                             Globals.ScanAllMembers,
                             new Type[] { ctorParam }
@@ -625,9 +626,8 @@ namespace System.Runtime.Serialization.Json
                     if (canWriteSimpleDictionary)
                     {
                         Debug.Assert(keyValueTypes != null);
-                        Type genericDictionaryKeyValueType = Globals.TypeOfKeyValue.MakeGenericType(
-                            keyValueTypes
-                        );
+                        Type genericDictionaryKeyValueType = Globals.TypeOfKeyValue
+                            .MakeGenericType(keyValueTypes);
                         PropertyInfo genericDictionaryKeyProperty =
                             genericDictionaryKeyValueType.GetProperty(JsonGlobals.KeyString)!;
                         PropertyInfo genericDictionaryValueProperty =

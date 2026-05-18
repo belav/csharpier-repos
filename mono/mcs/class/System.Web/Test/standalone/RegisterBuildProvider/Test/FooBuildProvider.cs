@@ -27,9 +27,8 @@ namespace RegisterBuildProvider.Test
             }
             catch (Exception ex)
             {
-                Log.Data.Add(
-                    String.Format("Registering typeof (string) failed ({0})", ex.GetType())
-                );
+                Log.Data
+                    .Add(String.Format("Registering typeof (string) failed ({0})", ex.GetType()));
             }
 
             try
@@ -43,9 +42,13 @@ namespace RegisterBuildProvider.Test
             }
             catch (Exception ex)
             {
-                Log.Data.Add(
-                    String.Format("Registering typeof (BuildProvider) failed ({0})", ex.GetType())
-                );
+                Log.Data
+                    .Add(
+                        String.Format(
+                            "Registering typeof (BuildProvider) failed ({0})",
+                            ex.GetType()
+                        )
+                    );
             }
 
             try
@@ -59,12 +62,13 @@ namespace RegisterBuildProvider.Test
             }
             catch (Exception ex)
             {
-                Log.Data.Add(
-                    String.Format(
-                        "Registering typeof (FooBuildProvider) failed ({0})",
-                        ex.GetType()
-                    )
-                );
+                Log.Data
+                    .Add(
+                        String.Format(
+                            "Registering typeof (FooBuildProvider) failed ({0})",
+                            ex.GetType()
+                        )
+                    );
             }
         }
 

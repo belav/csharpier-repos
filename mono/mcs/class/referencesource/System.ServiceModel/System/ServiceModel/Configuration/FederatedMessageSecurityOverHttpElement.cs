@@ -160,9 +160,8 @@ namespace System.ServiceModel.Configuration
             }
             foreach (ClaimTypeElement claimType in this.ClaimTypeRequirements)
             {
-                security.ClaimTypeRequirements.Add(
-                    new ClaimTypeRequirement(claimType.ClaimType, claimType.IsOptional)
-                );
+                security.ClaimTypeRequirements
+                    .Add(new ClaimTypeRequirement(claimType.ClaimType, claimType.IsOptional));
             }
         }
 
@@ -205,9 +204,12 @@ namespace System.ServiceModel.Configuration
             {
                 if (null == this.Issuer.Address)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ConfigurationErrorsException(SR.GetString(SR.ConfigNullIssuerAddress))
-                    );
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperError(
+                            new ConfigurationErrorsException(
+                                SR.GetString(SR.ConfigNullIssuerAddress)
+                            )
+                        );
                 }
 
                 this.Issuer.BindingConfiguration = this.Issuer.Address.ToString();

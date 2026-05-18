@@ -1501,8 +1501,7 @@ namespace LibraryImportGenerator.UnitTests
             yield return new object[]
             {
                 ID(),
-                customCollectionMarshallingCodeSnippets
-                    .Stateless
+                customCollectionMarshallingCodeSnippets.Stateless
                     .GenericCollectionMarshallingArityMismatch,
                 new[]
                 {
@@ -1728,9 +1727,8 @@ namespace LibraryImportGenerator.UnitTests
                 {{CodeSnippets.ValidateDisableRuntimeMarshalling.NonBlittableUserDefinedTypeWithNativeType}}
                 """;
 
-            string testSource = CodeSnippets.ValidateDisableRuntimeMarshalling.TypeUsage(
-                string.Empty
-            );
+            string testSource = CodeSnippets.ValidateDisableRuntimeMarshalling
+                .TypeUsage(string.Empty);
 
             const string AdditionalProjectName = "AdditionalProject";
 
@@ -1748,55 +1746,62 @@ namespace LibraryImportGenerator.UnitTests
                 TestBehaviors = TestBehaviors.SkipGeneratedSourcesCheck,
             };
 
-            test.TestState.AdditionalProjects[AdditionalProjectName]
-                .AdditionalReferences.AddRange(test.TestState.AdditionalReferences);
+            test.TestState
+                .AdditionalProjects[AdditionalProjectName]
+                .AdditionalReferences
+                .AddRange(test.TestState.AdditionalReferences);
 
             // The errors should indicate the DisableRuntimeMarshalling is required.
-            test.ExpectedDiagnostics.Add(
-                VerifyCS
-                    .Diagnostic(GeneratorDiagnostics.ReturnTypeNotSupportedWithDetails)
-                    .WithLocation(0)
-                    .WithArguments(
-                        "Runtime marshalling must be disabled in this project by applying the 'System.Runtime.CompilerServices.DisableRuntimeMarshallingAttribute' to the assembly to enable marshalling this type.",
-                        "Method"
-                    )
-            );
-            test.ExpectedDiagnostics.Add(
-                VerifyCS
-                    .Diagnostic(GeneratorDiagnostics.ParameterTypeNotSupportedWithDetails)
-                    .WithLocation(1)
-                    .WithArguments(
-                        "Runtime marshalling must be disabled in this project by applying the 'System.Runtime.CompilerServices.DisableRuntimeMarshallingAttribute' to the assembly to enable marshalling this type.",
-                        "p"
-                    )
-            );
-            test.ExpectedDiagnostics.Add(
-                VerifyCS
-                    .Diagnostic(GeneratorDiagnostics.ParameterTypeNotSupportedWithDetails)
-                    .WithLocation(2)
-                    .WithArguments(
-                        "Runtime marshalling must be disabled in this project by applying the 'System.Runtime.CompilerServices.DisableRuntimeMarshallingAttribute' to the assembly to enable marshalling this type.",
-                        "pIn"
-                    )
-            );
-            test.ExpectedDiagnostics.Add(
-                VerifyCS
-                    .Diagnostic(GeneratorDiagnostics.ParameterTypeNotSupportedWithDetails)
-                    .WithLocation(3)
-                    .WithArguments(
-                        "Runtime marshalling must be disabled in this project by applying the 'System.Runtime.CompilerServices.DisableRuntimeMarshallingAttribute' to the assembly to enable marshalling this type.",
-                        "pRef"
-                    )
-            );
-            test.ExpectedDiagnostics.Add(
-                VerifyCS
-                    .Diagnostic(GeneratorDiagnostics.ParameterTypeNotSupportedWithDetails)
-                    .WithLocation(4)
-                    .WithArguments(
-                        "Runtime marshalling must be disabled in this project by applying the 'System.Runtime.CompilerServices.DisableRuntimeMarshallingAttribute' to the assembly to enable marshalling this type.",
-                        "pOut"
-                    )
-            );
+            test.ExpectedDiagnostics
+                .Add(
+                    VerifyCS
+                        .Diagnostic(GeneratorDiagnostics.ReturnTypeNotSupportedWithDetails)
+                        .WithLocation(0)
+                        .WithArguments(
+                            "Runtime marshalling must be disabled in this project by applying the 'System.Runtime.CompilerServices.DisableRuntimeMarshallingAttribute' to the assembly to enable marshalling this type.",
+                            "Method"
+                        )
+                );
+            test.ExpectedDiagnostics
+                .Add(
+                    VerifyCS
+                        .Diagnostic(GeneratorDiagnostics.ParameterTypeNotSupportedWithDetails)
+                        .WithLocation(1)
+                        .WithArguments(
+                            "Runtime marshalling must be disabled in this project by applying the 'System.Runtime.CompilerServices.DisableRuntimeMarshallingAttribute' to the assembly to enable marshalling this type.",
+                            "p"
+                        )
+                );
+            test.ExpectedDiagnostics
+                .Add(
+                    VerifyCS
+                        .Diagnostic(GeneratorDiagnostics.ParameterTypeNotSupportedWithDetails)
+                        .WithLocation(2)
+                        .WithArguments(
+                            "Runtime marshalling must be disabled in this project by applying the 'System.Runtime.CompilerServices.DisableRuntimeMarshallingAttribute' to the assembly to enable marshalling this type.",
+                            "pIn"
+                        )
+                );
+            test.ExpectedDiagnostics
+                .Add(
+                    VerifyCS
+                        .Diagnostic(GeneratorDiagnostics.ParameterTypeNotSupportedWithDetails)
+                        .WithLocation(3)
+                        .WithArguments(
+                            "Runtime marshalling must be disabled in this project by applying the 'System.Runtime.CompilerServices.DisableRuntimeMarshallingAttribute' to the assembly to enable marshalling this type.",
+                            "pRef"
+                        )
+                );
+            test.ExpectedDiagnostics
+                .Add(
+                    VerifyCS
+                        .Diagnostic(GeneratorDiagnostics.ParameterTypeNotSupportedWithDetails)
+                        .WithLocation(4)
+                        .WithArguments(
+                            "Runtime marshalling must be disabled in this project by applying the 'System.Runtime.CompilerServices.DisableRuntimeMarshallingAttribute' to the assembly to enable marshalling this type.",
+                            "pOut"
+                        )
+                );
 
             await test.RunAsync();
         }

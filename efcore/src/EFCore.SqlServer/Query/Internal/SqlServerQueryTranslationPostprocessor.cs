@@ -68,8 +68,7 @@ public class SqlServerQueryTranslationPostprocessor : RelationalQueryTranslation
 
                 case RelationalSplitCollectionShaperExpression relationalSplitCollectionShaperExpression:
                     foreach (
-                        var table in relationalSplitCollectionShaperExpression
-                            .SelectExpression
+                        var table in relationalSplitCollectionShaperExpression.SelectExpression
                             .Tables
                     )
                     {

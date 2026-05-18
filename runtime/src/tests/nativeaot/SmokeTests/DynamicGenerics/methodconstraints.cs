@@ -262,9 +262,8 @@ public class MethodConstraintsTests
         );
         Assert.Throws<ArgumentException>(() =>
             MakeGenericMethod(
-                TypeOf.MCT_GenericType.MakeGenericType(
-                    new Type[] { typeof(string), typeof(string) }
-                ),
+                TypeOf.MCT_GenericType
+                    .MakeGenericType(new Type[] { typeof(string), typeof(string) }),
                 typeof(object)
             )
         );

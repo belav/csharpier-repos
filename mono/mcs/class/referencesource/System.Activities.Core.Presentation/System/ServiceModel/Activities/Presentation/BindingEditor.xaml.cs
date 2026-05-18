@@ -42,32 +42,35 @@ namespace System.ServiceModel.Activities.Presentation
         {
             try
             {
-                this.bindingElements.Add(
-                    new BindingDescriptor
-                    {
-                        BindingName = (string)(
-                            this.TryFindResource("bindingEditorEmptyBindingLabel") ?? "none"
-                        ),
-                        Value = null,
-                    }
-                );
+                this.bindingElements
+                    .Add(
+                        new BindingDescriptor
+                        {
+                            BindingName = (string)(
+                                this.TryFindResource("bindingEditorEmptyBindingLabel") ?? "none"
+                            ),
+                            Value = null,
+                        }
+                    );
                 Configuration machineConfig = ConfigurationManager.OpenMachineConfiguration();
                 ServiceModelSectionGroup section = ServiceModelSectionGroup.GetSectionGroup(
                     machineConfig
                 );
                 if (null != section && null != section.Bindings)
                 {
-                    this.bindingElements.AddRange(
-                        section
-                            .Bindings.BindingCollections.OrderBy(p => p.BindingName)
-                            .Select<BindingCollectionElement, BindingDescriptor>(
-                                p => new BindingDescriptor()
-                                {
-                                    BindingName = p.BindingName,
-                                    Value = p,
-                                }
-                            )
-                    );
+                    this.bindingElements
+                        .AddRange(
+                            section.Bindings
+                                .BindingCollections
+                                .OrderBy(p => p.BindingName)
+                                .Select<BindingCollectionElement, BindingDescriptor>(
+                                    p => new BindingDescriptor()
+                                    {
+                                        BindingName = p.BindingName,
+                                        Value = p,
+                                    }
+                                )
+                        );
                 }
             }
             catch (ConfigurationErrorsException err)
@@ -141,8 +144,8 @@ namespace System.ServiceModel.Activities.Presentation
                 null != p.Value && p.Value.BindingType == bindingType;
             if (editor.bindingElements.Count(where) > 1)
             {
-                toSelect = editor
-                    .bindingElements.Where(where)
+                toSelect = editor.bindingElements
+                    .Where(where)
                     .Where(p => string.Equals(p.BindingName, bindingName))
                     .FirstOrDefault();
             }

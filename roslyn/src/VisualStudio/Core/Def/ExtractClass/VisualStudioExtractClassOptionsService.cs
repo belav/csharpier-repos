@@ -57,8 +57,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ExtractClass
             CancellationToken cancellationToken
         )
         {
-            var notificationService =
-                document.Project.Solution.Services.GetRequiredService<INotificationService>();
+            var notificationService = document.Project
+                .Solution
+                .Services
+                .GetRequiredService<INotificationService>();
 
             var membersInType = selectedType
                 .GetMembers()
@@ -82,8 +84,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ExtractClass
                 cancellationToken
             );
 
-            var conflictingTypeNames = selectedType
-                .ContainingNamespace.GetAllTypes(cancellationToken)
+            var conflictingTypeNames = selectedType.ContainingNamespace
+                .GetAllTypes(cancellationToken)
                 .Select(t => t.Name);
             var candidateName = selectedType.Name + "Base";
             var defaultTypeName = NameGenerator.GenerateUniqueName(
@@ -132,9 +134,12 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ExtractClass
                     viewModel.DestinationViewModel.TypeName,
                     viewModel.DestinationViewModel.Destination
                         == CommonControls.NewTypeDestination.CurrentFile,
-                    viewModel.MemberSelectionViewModel.CheckedMembers.SelectAsArray(
-                        m => new ExtractClassMemberAnalysisResult(m.Symbol, m.MakeAbstract)
-                    )
+                    viewModel.MemberSelectionViewModel
+                        .CheckedMembers
+                        .SelectAsArray(m => new ExtractClassMemberAnalysisResult(
+                            m.Symbol,
+                            m.MakeAbstract
+                        ))
                 );
             }
 

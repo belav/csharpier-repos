@@ -23,11 +23,12 @@ namespace ILCompiler
         )
         {
             _supportsLazyCctors =
-                context.SystemModule.GetType(
-                    "System.Runtime.CompilerServices",
-                    "ClassConstructorRunner",
-                    throwIfNotFound: false
-                ) != null;
+                context.SystemModule
+                    .GetType(
+                        "System.Runtime.CompilerServices",
+                        "ClassConstructorRunner",
+                        throwIfNotFound: false
+                    ) != null;
             _preinitHashTable = new PreinitializationInfoHashtable(
                 compilationGroup,
                 ilprovider,
@@ -127,7 +128,8 @@ namespace ILCompiler
                     var item in LockFreeReaderHashtable<
                         MetadataType,
                         TypePreinit.PreinitializationInfo
-                    >.Enumerator.Get(_preinitHashTable)
+                    >.Enumerator
+                        .Get(_preinitHashTable)
                 )
                 {
                     // Canonical types are not actual types. They represent the pessimized version of all types that share the form.

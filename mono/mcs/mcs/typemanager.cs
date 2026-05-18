@@ -1035,8 +1035,7 @@ namespace Mono.CSharp
                 () =>
                     new TypeSpec[]
                     {
-                        types
-                            .AsyncTaskMethodBuilderGeneric
+                        types.AsyncTaskMethodBuilderGeneric
                             .TypeSpec
                             .MemberDefinition
                             .TypeParameters[0],
@@ -1772,12 +1771,14 @@ namespace Mono.CSharp
             if (found == null)
             {
                 if (reportErrors)
-                    module.Compiler.Report.Error(
-                        518,
-                        "The predefined type `{0}.{1}' is not defined or imported",
-                        ns,
-                        name
-                    );
+                    module.Compiler
+                        .Report
+                        .Error(
+                            518,
+                            "The predefined type `{0}.{1}' is not defined or imported",
+                            ns,
+                            name
+                        );
 
                 return null;
             }
@@ -1842,14 +1843,16 @@ namespace Mono.CSharp
                 module.Compiler.Report.SymbolRelatedToPreviousError(other_match);
                 module.Compiler.Report.SymbolRelatedToPreviousError(candidate);
 
-                module.Compiler.Report.Warning(
-                    1685,
-                    1,
-                    "The predefined type `{0}.{1}' is defined multiple times. Using definition from `{2}'",
-                    ns,
-                    name,
-                    location
-                );
+                module.Compiler
+                    .Report
+                    .Warning(
+                        1685,
+                        1,
+                        "The predefined type `{0}.{1}' is defined multiple times. Using definition from `{2}'",
+                        ns,
+                        name,
+                        location
+                    );
 
                 break;
             }
@@ -1861,12 +1864,14 @@ namespace Mono.CSharp
                 if (found_member.Kind == MemberKind.MissingType)
                 {
                     // CSC: should be different error number
-                    module.Compiler.Report.Error(
-                        518,
-                        "The predefined type `{0}.{1}' is defined in an assembly that is not referenced.",
-                        ns,
-                        name
-                    );
+                    module.Compiler
+                        .Report
+                        .Error(
+                            518,
+                            "The predefined type `{0}.{1}' is defined in an assembly that is not referenced.",
+                            ns,
+                            name
+                        );
                 }
                 else
                 {
@@ -1881,13 +1886,15 @@ namespace Mono.CSharp
                         module.Compiler.Report.SymbolRelatedToPreviousError(found_member);
                     }
 
-                    module.Compiler.Report.Error(
-                        520,
-                        loc,
-                        "The predefined type `{0}.{1}' is not declared correctly",
-                        ns,
-                        name
-                    );
+                    module.Compiler
+                        .Report
+                        .Error(
+                            520,
+                            loc,
+                            "The predefined type `{0}.{1}' is not declared correctly",
+                            ns,
+                            name
+                        );
                 }
             }
 
@@ -2062,14 +2069,16 @@ namespace Mono.CSharp
             if (filter.Parameters != null)
                 method_args = filter.Parameters.GetSignatureForError();
 
-            module.Compiler.Report.Error(
-                656,
-                loc,
-                "The compiler required member `{0}.{1}{2}' could not be found or is inaccessible",
-                declaring_type.GetSignatureForError(),
-                filter.Name,
-                method_args
-            );
+            module.Compiler
+                .Report
+                .Error(
+                    656,
+                    loc,
+                    "The compiler required member `{0}.{1}{2}' could not be found or is inaccessible",
+                    declaring_type.GetSignatureForError(),
+                    filter.Name,
+                    method_args
+                );
 
             return null;
         }
@@ -2189,12 +2198,14 @@ namespace Mono.CSharp
                 t = ((ElementTypeSpec)t).Element;
 
             rc.Compiler.Report.SymbolRelatedToPreviousError(t);
-            rc.Compiler.Report.Error(
-                208,
-                loc,
-                "Cannot take the address of, get the size of, or declare a pointer to a managed type `{0}'",
-                t.GetSignatureForError()
-            );
+            rc.Compiler
+                .Report
+                .Error(
+                    208,
+                    loc,
+                    "Cannot take the address of, get the size of, or declare a pointer to a managed type `{0}'",
+                    t.GetSignatureForError()
+                );
 
             return false;
         }

@@ -745,10 +745,8 @@ namespace System.Data.OleDb
                             }
                         }
                         else if (
-                            info._description.EndsWith(
-                                " Provider",
-                                StringComparison.OrdinalIgnoreCase
-                            )
+                            info._description
+                                .EndsWith(" Provider", StringComparison.OrdinalIgnoreCase)
                         )
                         {
                             attributes = new Attribute[]

@@ -252,34 +252,36 @@ namespace MonoTests.System.Runtime.CompilerServices
 
         static async Task<int> TestCS(TaskScheduler schedulerA, TaskScheduler schedulerB)
         {
-            var res = await Task.Factory.StartNew(
-                async () =>
-                {
-                    if (TaskScheduler.Current != schedulerA)
-                        return 1;
+            var res = await Task.Factory
+                .StartNew(
+                    async () =>
+                    {
+                        if (TaskScheduler.Current != schedulerA)
+                            return 1;
 
-                    await Task.Factory.StartNew(
-                        () =>
-                        {
-                            if (TaskScheduler.Current != schedulerB)
-                                return 2;
+                        await Task.Factory
+                            .StartNew(
+                                () =>
+                                {
+                                    if (TaskScheduler.Current != schedulerB)
+                                        return 2;
 
-                            return 0;
-                        },
-                        CancellationToken.None,
-                        TaskCreationOptions.None,
-                        schedulerB
-                    );
+                                    return 0;
+                                },
+                                CancellationToken.None,
+                                TaskCreationOptions.None,
+                                schedulerB
+                            );
 
-                    if (TaskScheduler.Current != schedulerA)
-                        return 3;
+                        if (TaskScheduler.Current != schedulerA)
+                            return 3;
 
-                    return 0;
-                },
-                CancellationToken.None,
-                TaskCreationOptions.None,
-                schedulerA
-            );
+                        return 0;
+                    },
+                    CancellationToken.None,
+                    TaskCreationOptions.None,
+                    schedulerA
+                );
 
             return res.Result;
         }

@@ -163,7 +163,8 @@ namespace System.ServiceModel.Security
             {
                 get
                 {
-                    return DXD.SecureConversationDec2005Dictionary.RequestSecurityContextCloseResponse;
+                    return DXD.SecureConversationDec2005Dictionary
+                        .RequestSecurityContextCloseResponse;
                 }
             }
 
@@ -181,7 +182,8 @@ namespace System.ServiceModel.Security
             {
                 get
                 {
-                    return DXD.SecureConversationDec2005Dictionary.RequestSecurityContextRenewResponse;
+                    return DXD.SecureConversationDec2005Dictionary
+                        .RequestSecurityContextRenewResponse;
                 }
             }
 

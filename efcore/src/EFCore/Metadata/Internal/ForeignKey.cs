@@ -206,12 +206,10 @@ public class ForeignKey
         IConventionAnnotation? annotation,
         IConventionAnnotation? oldAnnotation
     ) =>
-        Builder.ModelBuilder.Metadata.ConventionDispatcher.OnForeignKeyAnnotationChanged(
-            Builder,
-            name,
-            annotation,
-            oldAnnotation
-        );
+        Builder.ModelBuilder
+            .Metadata
+            .ConventionDispatcher
+            .OnForeignKeyAnnotationChanged(Builder, name, annotation, oldAnnotation);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -257,11 +255,9 @@ public class ForeignKey
         }
 
         return (IReadOnlyList<Property>)
-            DeclaringEntityType.Model.ConventionDispatcher.OnForeignKeyPropertiesChanged(
-                Builder,
-                oldProperties,
-                oldPrincipalKey
-            )!;
+            DeclaringEntityType.Model
+                .ConventionDispatcher
+                .OnForeignKeyPropertiesChanged(Builder, oldProperties, oldPrincipalKey)!;
     }
 
     /// <summary>
@@ -526,10 +522,9 @@ public class ForeignKey
 
             if (name == null && configurationSource.OverridesStrictly(oldConfigurationSource))
             {
-                DeclaringEntityType.Model.ConventionDispatcher.OnForeignKeyNullNavigationSet(
-                    Builder,
-                    pointsToPrincipal
-                );
+                DeclaringEntityType.Model
+                    .ConventionDispatcher
+                    .OnForeignKeyNullNavigationSet(Builder, pointsToPrincipal);
             }
 
             return oldNavigation!;
@@ -594,8 +589,9 @@ public class ForeignKey
             string? removedNavigationName;
             if (pointsToPrincipal)
             {
-                removedNavigationName =
-                    DeclaringEntityType.Model.ConventionDispatcher.OnNavigationRemoved(
+                removedNavigationName = DeclaringEntityType.Model
+                    .ConventionDispatcher
+                    .OnNavigationRemoved(
                         DeclaringEntityType.Builder,
                         PrincipalEntityType.Builder,
                         oldNavigation.Name,
@@ -604,8 +600,9 @@ public class ForeignKey
             }
             else
             {
-                removedNavigationName =
-                    DeclaringEntityType.Model.ConventionDispatcher.OnNavigationRemoved(
+                removedNavigationName = DeclaringEntityType.Model
+                    .ConventionDispatcher
+                    .OnNavigationRemoved(
                         PrincipalEntityType.Builder,
                         DeclaringEntityType.Builder,
                         oldNavigation.Name,
@@ -615,10 +612,9 @@ public class ForeignKey
 
             if (navigation == null)
             {
-                DeclaringEntityType.Model.ConventionDispatcher.OnForeignKeyNullNavigationSet(
-                    Builder,
-                    pointsToPrincipal
-                );
+                DeclaringEntityType.Model
+                    .ConventionDispatcher
+                    .OnForeignKeyNullNavigationSet(Builder, pointsToPrincipal);
                 return oldNavigation.Name == removedNavigationName ? oldNavigation : null;
             }
         }
@@ -626,16 +622,16 @@ public class ForeignKey
         if (navigation != null)
         {
             navigation = (Navigation?)
-                DeclaringEntityType
-                    .Model.ConventionDispatcher.OnNavigationAdded(navigation.Builder)
+                DeclaringEntityType.Model
+                    .ConventionDispatcher
+                    .OnNavigationAdded(navigation.Builder)
                     ?.Metadata;
         }
         else
         {
-            DeclaringEntityType.Model.ConventionDispatcher.OnForeignKeyNullNavigationSet(
-                Builder,
-                pointsToPrincipal
-            );
+            DeclaringEntityType.Model
+                .ConventionDispatcher
+                .OnForeignKeyNullNavigationSet(Builder, pointsToPrincipal);
         }
 
         return navigation;
@@ -680,14 +676,15 @@ public class ForeignKey
         if (unique.HasValue && navigationMember != null)
         {
             if (
-                !Internal.Navigation.IsCompatible(
-                    PrincipalToDependent!.Name,
-                    navigationMember,
-                    PrincipalEntityType,
-                    DeclaringEntityType,
-                    !unique,
-                    shouldThrow: false
-                )
+                !Internal.Navigation
+                    .IsCompatible(
+                        PrincipalToDependent!.Name,
+                        navigationMember,
+                        PrincipalEntityType,
+                        DeclaringEntityType,
+                        !unique,
+                        shouldThrow: false
+                    )
             )
             {
                 throw new InvalidOperationException(
@@ -749,9 +746,9 @@ public class ForeignKey
             required == null ? null : configurationSource.Max(_isRequiredConfigurationSource);
 
         return IsRequired != oldRequired
-            ? DeclaringEntityType.Model.ConventionDispatcher.OnForeignKeyRequirednessChanged(
-                Builder
-            )
+            ? DeclaringEntityType.Model
+                .ConventionDispatcher
+                .OnForeignKeyRequirednessChanged(Builder)
             : oldRequired;
     }
 
@@ -819,9 +816,9 @@ public class ForeignKey
             required == null ? null : configurationSource.Max(_isRequiredConfigurationSource);
 
         return IsRequiredDependent != oldRequired
-            ? DeclaringEntityType.Model.ConventionDispatcher.OnForeignKeyDependentRequirednessChanged(
-                Builder
-            )
+            ? DeclaringEntityType.Model
+                .ConventionDispatcher
+                .OnForeignKeyDependentRequirednessChanged(Builder)
             : oldRequired;
     }
 
@@ -1196,14 +1193,15 @@ public class ForeignKey
 
         if (
             navigationToPrincipal != null
-            && !Internal.Navigation.IsCompatible(
-                navigationToPrincipal.Name,
-                navigationToPrincipal,
-                dependentEntityType,
-                principalEntityType,
-                shouldBeCollection: false,
-                shouldThrow: shouldThrow
-            )
+            && !Internal.Navigation
+                .IsCompatible(
+                    navigationToPrincipal.Name,
+                    navigationToPrincipal,
+                    dependentEntityType,
+                    principalEntityType,
+                    shouldBeCollection: false,
+                    shouldThrow: shouldThrow
+                )
         )
         {
             return false;
@@ -1211,14 +1209,15 @@ public class ForeignKey
 
         if (
             navigationToDependent != null
-            && !Internal.Navigation.IsCompatible(
-                navigationToDependent.Name,
-                navigationToDependent,
-                principalEntityType,
-                dependentEntityType,
-                shouldBeCollection: !unique,
-                shouldThrow: shouldThrow
-            )
+            && !Internal.Navigation
+                .IsCompatible(
+                    navigationToDependent.Name,
+                    navigationToDependent,
+                    principalEntityType,
+                    dependentEntityType,
+                    shouldBeCollection: !unique,
+                    shouldThrow: shouldThrow
+                )
         )
         {
             return false;

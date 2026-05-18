@@ -80,8 +80,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
 
                     var location = await ProtocolConversions
                         .TextSpanToLocationAsync(
-                            await definition
-                                .Document.GetRequiredDocumentAsync(
+                            await definition.Document
+                                .GetRequiredDocumentAsync(
                                     document.Project.Solution,
                                     cancellationToken
                                 )

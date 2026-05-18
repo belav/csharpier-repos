@@ -560,9 +560,8 @@ namespace System.Web.Services.Description
                         CodeFlags.IsPublic | (cancelAsync != cancelMethodName ? 0 : CodeFlags.IsNew)
                     );
 
-                    asyncCancelMethod.Comments.Add(
-                        new CodeCommentStatement(Res.GetString(Res.CodeRemarks), true)
-                    );
+                    asyncCancelMethod.Comments
+                        .Add(new CodeCommentStatement(Res.GetString(Res.CodeRemarks), true));
                     CodeMethodInvokeExpression invoke = new CodeMethodInvokeExpression(
                         new CodeBaseReferenceExpression(),
                         cancelAsync
@@ -918,9 +917,8 @@ namespace System.Web.Services.Description
                     propertyReference,
                     new CodeExpression[] { new CodePrimitiveExpression(appSettingUrlKey) }
                 );
-                ctor.Statements.Add(
-                    new CodeVariableDeclarationStatement(typeof(string), "urlSetting", value)
-                );
+                ctor.Statements
+                    .Add(new CodeVariableDeclarationStatement(typeof(string), "urlSetting", value));
 
                 if (appSettingBaseUrl == null || appSettingBaseUrl.Length == 0)
                 {
@@ -958,13 +956,14 @@ namespace System.Web.Services.Description
                     new CodePrimitiveExpression(null)
                 );
                 if (generateFixedUrlAssignment)
-                    ctor.Statements.Add(
-                        new CodeConditionStatement(
-                            checkIfNull,
-                            trueStatements,
-                            new CodeStatement[] { assignUrlStatement }
-                        )
-                    );
+                    ctor.Statements
+                        .Add(
+                            new CodeConditionStatement(
+                                checkIfNull,
+                                trueStatements,
+                                new CodeStatement[] { assignUrlStatement }
+                            )
+                        );
                 else
                     ctor.Statements.Add(new CodeConditionStatement(checkIfNull, trueStatements));
             }

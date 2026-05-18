@@ -103,13 +103,14 @@ namespace System.Data.Tests
             ds.Tables.Add(dtChildInDS);
 
             // Set up the relation in the dataset.
-            ds.Relations.Add(
-                new DataRelation(
-                    "MainToChild",
-                    dtMainInDS.Columns["ID"],
-                    dtChildInDS.Columns["PID"]
-                )
-            );
+            ds.Relations
+                .Add(
+                    new DataRelation(
+                        "MainToChild",
+                        dtMainInDS.Columns["ID"],
+                        dtChildInDS.Columns["PID"]
+                    )
+                );
         }
 
         [Fact]

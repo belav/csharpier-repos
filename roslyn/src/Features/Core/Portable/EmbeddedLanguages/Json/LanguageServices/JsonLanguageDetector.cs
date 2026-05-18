@@ -226,19 +226,16 @@ internal sealed class JsonLanguageDetector(
                         );
                         var propName = syntaxFacts.GetIdentifierOfIdentifierName(name).ValueText;
                         if (
-                            syntaxFacts.StringComparer.Equals(
-                                propName,
-                                nameof(JsonDocumentOptions.AllowTrailingCommas)
-                            ) && semanticModel.GetConstantValue(initExpr).Value is true
+                            syntaxFacts.StringComparer
+                                .Equals(propName, nameof(JsonDocumentOptions.AllowTrailingCommas))
+                            && semanticModel.GetConstantValue(initExpr).Value is true
                         )
                         {
                             options |= JsonOptions.TrailingCommas;
                         }
                         else if (
-                            syntaxFacts.StringComparer.Equals(
-                                propName,
-                                nameof(JsonDocumentOptions.CommentHandling)
-                            )
+                            syntaxFacts.StringComparer
+                                .Equals(propName, nameof(JsonDocumentOptions.CommentHandling))
                             && semanticModel.GetConstantValue(initExpr).Value
                                 is (byte)JsonCommentHandling.Allow
                                     or (byte)JsonCommentHandling.Skip
@@ -260,13 +257,14 @@ internal sealed class JsonLanguageDetector(
         CancellationToken cancellationToken
     )
     {
-        var parameter = Info.SemanticFacts.FindParameterForArgument(
-            semanticModel,
-            argumentNode,
-            allowUncertainCandidates: true,
-            allowParams: true,
-            cancellationToken
-        );
+        var parameter = Info.SemanticFacts
+            .FindParameterForArgument(
+                semanticModel,
+                argumentNode,
+                allowUncertainCandidates: true,
+                allowParams: true,
+                cancellationToken
+            );
         return parameter?.Name == JsonParameterName;
     }
 }

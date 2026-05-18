@@ -19,8 +19,8 @@ public class AppendCorrelatedCollectionExpressionMutator : ExpressionMutator
     public override Expression Apply(Expression expression, Random random)
     {
         var typeArgument = expression.Type.GetGenericArguments()[0];
-        var navigations = Context
-            .Model.FindEntityType(typeArgument)
+        var navigations = Context.Model
+            .FindEntityType(typeArgument)
             .GetNavigations()
             .Where(n => n.IsCollection)
             .ToList();

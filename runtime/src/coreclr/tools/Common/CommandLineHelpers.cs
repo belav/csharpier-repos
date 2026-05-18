@@ -172,10 +172,9 @@ namespace System.CommandLine
             try
             {
                 details.Add(
-                    System
-                        .Diagnostics.FileVersionInfo.GetVersionInfo(
-                            Environment.GetCommandLineArgs()[0]
-                        )
+                    System.Diagnostics
+                        .FileVersionInfo
+                        .GetVersionInfo(Environment.GetCommandLineArgs()[0])
                         .ToString()
                 );
             }

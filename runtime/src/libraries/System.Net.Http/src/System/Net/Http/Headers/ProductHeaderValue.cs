@@ -96,12 +96,8 @@ namespace System.Net.Http.Headers
             parsedValue = null;
 
             if (
-                GenericHeaderParser.SingleValueProductParser.TryParseValue(
-                    input,
-                    null,
-                    ref index,
-                    out object? output
-                )
+                GenericHeaderParser.SingleValueProductParser
+                    .TryParseValue(input, null, ref index, out object? output)
             )
             {
                 parsedValue = (ProductHeaderValue)output!;

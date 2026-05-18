@@ -251,8 +251,8 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
                     cancellationToken: cancellationToken
                 )
                 .ConfigureAwait(false);
-            return await selection
-                .SemanticDocument.WithSyntaxRootAsync(
+            return await selection.SemanticDocument
+                .WithSyntaxRootAsync(
                     selection.SemanticDocument.Root.ReplaceNode(lastExpression, newExpression),
                     cancellationToken
                 )
@@ -341,16 +341,17 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
 
             var insertionPointAnnotation = new SyntaxAnnotation();
 
-            var finalRoot = document.Root.ReplaceSyntax(
-                nodes: new[] { insertionPointNode },
-                // intentionally using 'n' (new) here.  We want to see any updated sub tokens that were updated in computeReplacementToken
-                computeReplacementNode: (o, n) =>
-                    n.WithAdditionalAnnotations(insertionPointAnnotation),
-                tokens: tokenMap.Keys,
-                computeReplacementToken: (o, n) => o.WithAdditionalAnnotations(tokenMap[o]),
-                trivia: null,
-                computeReplacementTrivia: null
-            );
+            var finalRoot = document.Root
+                .ReplaceSyntax(
+                    nodes: new[] { insertionPointNode },
+                    // intentionally using 'n' (new) here.  We want to see any updated sub tokens that were updated in computeReplacementToken
+                    computeReplacementNode: (o, n) =>
+                        n.WithAdditionalAnnotations(insertionPointAnnotation),
+                    tokens: tokenMap.Keys,
+                    computeReplacementToken: (o, n) => o.WithAdditionalAnnotations(tokenMap[o]),
+                    trivia: null,
+                    computeReplacementTrivia: null
+                );
 
             var finalDocument = await document
                 .WithSyntaxRootAsync(finalRoot, cancellationToken)
@@ -464,10 +465,8 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
                     .Type;
                 if (
                     currentType == null
-                    || !SymbolEqualityComparer.Default.Equals(
-                        currentType,
-                        semanticModel.ResolveType(typeParameter)
-                    )
+                    || !SymbolEqualityComparer.Default
+                        .Equals(currentType, semanticModel.ResolveType(typeParameter))
                 )
                 {
                     return new OperationStatus(

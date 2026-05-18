@@ -173,10 +173,14 @@ namespace Microsoft.CodeAnalysis.Rename
             {
                 var prop = (IPropertySymbol)symbol;
 
-                var conflictingParameter = prop.Parameters.FirstOrDefault(param =>
-                    string.Compare(param.Name, newPropertyName, StringComparison.OrdinalIgnoreCase)
-                    == 0
-                );
+                var conflictingParameter = prop.Parameters
+                    .FirstOrDefault(param =>
+                        string.Compare(
+                            param.Name,
+                            newPropertyName,
+                            StringComparison.OrdinalIgnoreCase
+                        ) == 0
+                    );
 
                 if (conflictingParameter != null)
                 {

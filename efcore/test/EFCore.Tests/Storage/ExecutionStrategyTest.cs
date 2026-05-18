@@ -779,15 +779,17 @@ public class ExecutionStrategyTest : IDisposable
     }
 
     protected DbContext CreateContext() =>
-        InMemoryTestHelpers.Instance.CreateContext(
-            InMemoryTestHelpers.Instance.CreateServiceProvider(
-                new ServiceCollection().AddScoped<
-                    IDbContextTransactionManager,
-                    TestInMemoryTransactionManager
-                >()
-            ),
-            InMemoryTestHelpers.Instance.CreateOptions()
-        );
+        InMemoryTestHelpers.Instance
+            .CreateContext(
+                InMemoryTestHelpers.Instance
+                    .CreateServiceProvider(
+                        new ServiceCollection().AddScoped<
+                            IDbContextTransactionManager,
+                            TestInMemoryTransactionManager
+                        >()
+                    ),
+                InMemoryTestHelpers.Instance.CreateOptions()
+            );
 
     public class TestExecutionStrategy : ExecutionStrategy
     {

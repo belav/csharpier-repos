@@ -302,9 +302,10 @@ namespace System.Diagnostics.Tracing
             )]
             protected static Delegate GetGetMethod(PropertyInfo property, Type propertyType)
             {
-                return property.GetMethod!.CreateDelegate(
-                    typeof(Func<,>).MakeGenericType(property.DeclaringType!, propertyType)
-                );
+                return property.GetMethod!
+                    .CreateDelegate(
+                        typeof(Func<,>).MakeGenericType(property.DeclaringType!, propertyType)
+                    );
             }
         }
 

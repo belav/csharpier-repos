@@ -34,8 +34,10 @@ namespace System.ServiceModel.Diagnostics
         )
         {
             EventLogger logger = new EventLogger();
-            logger.innerEventLogger =
-                System.Runtime.Diagnostics.EventLogger.UnsafeCreateEventLogger(
+            logger.innerEventLogger = System.Runtime
+                .Diagnostics
+                .EventLogger
+                .UnsafeCreateEventLogger(
                     eventLogSourceName,
                     (System.Runtime.Diagnostics.DiagnosticTraceBase)diagnosticTrace
                 );
@@ -50,13 +52,8 @@ namespace System.ServiceModel.Diagnostics
             params string[] values
         )
         {
-            this.innerEventLogger.LogEvent(
-                type,
-                (ushort)category,
-                (uint)eventId,
-                shouldTrace,
-                values
-            );
+            this.innerEventLogger
+                .LogEvent(type, (ushort)category, (uint)eventId, shouldTrace, values);
         }
 
         [System.Runtime.Fx.Tag.SecurityNote(Critical = "Calling SecurityCritical method/property")]
@@ -69,13 +66,8 @@ namespace System.ServiceModel.Diagnostics
             params string[] values
         )
         {
-            this.innerEventLogger.UnsafeLogEvent(
-                type,
-                (ushort)category,
-                (uint)eventId,
-                shouldTrace,
-                values
-            );
+            this.innerEventLogger
+                .UnsafeLogEvent(type, (ushort)category, (uint)eventId, shouldTrace, values);
         }
 
         internal void LogEvent(

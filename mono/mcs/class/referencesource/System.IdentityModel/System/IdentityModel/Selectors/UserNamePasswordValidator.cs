@@ -50,14 +50,15 @@ namespace System.IdentityModel.Selectors
             {
                 if (!this.provider.ValidateUser(userName, password))
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new SecurityTokenValidationException(
-                            SR.GetString(
-                                SR.UserNameAuthenticationFailed,
-                                this.provider.GetType().Name
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperError(
+                            new SecurityTokenValidationException(
+                                SR.GetString(
+                                    SR.UserNameAuthenticationFailed,
+                                    this.provider.GetType().Name
+                                )
                             )
-                        )
-                    );
+                        );
                 }
             }
         }

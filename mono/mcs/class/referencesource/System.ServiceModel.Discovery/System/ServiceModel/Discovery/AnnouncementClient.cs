@@ -208,9 +208,12 @@ namespace System.ServiceModel.Discovery
                 }
                 if (((ICommunicationObject)this).State != CommunicationState.Created)
                 {
-                    throw FxTrace.Exception.AsError(
-                        new InvalidOperationException(SR2.DiscoverySetMessageSequenceInvalidState)
-                    );
+                    throw FxTrace.Exception
+                        .AsError(
+                            new InvalidOperationException(
+                                SR2.DiscoverySetMessageSequenceInvalidState
+                            )
+                        );
                 }
                 this.innerClient.DiscoveryMessageSequenceGenerator = value;
             }
@@ -372,23 +375,25 @@ namespace System.ServiceModel.Discovery
         [Fx.Tag.Throws(typeof(AggregateException), "Inherits from Task exception contract")]
         public Task AnnounceOnlineTaskAsync(EndpointDiscoveryMetadata discoveryMetadata)
         {
-            return Task.Factory.FromAsync<EndpointDiscoveryMetadata>(
-                this.BeginAnnounceOnline,
-                this.EndAnnounceOnline,
-                discoveryMetadata, /* state */
-                null
-            );
+            return Task.Factory
+                .FromAsync<EndpointDiscoveryMetadata>(
+                    this.BeginAnnounceOnline,
+                    this.EndAnnounceOnline,
+                    discoveryMetadata, /* state */
+                    null
+                );
         }
 
         [Fx.Tag.Throws(typeof(AggregateException), "Inherits from Task exception contract")]
         public Task AnnounceOfflineTaskAsync(EndpointDiscoveryMetadata discoveryMetadata)
         {
-            return Task.Factory.FromAsync<EndpointDiscoveryMetadata>(
-                this.BeginAnnounceOffline,
-                this.EndAnnounceOffline,
-                discoveryMetadata, /* state */
-                null
-            );
+            return Task.Factory
+                .FromAsync<EndpointDiscoveryMetadata>(
+                    this.BeginAnnounceOffline,
+                    this.EndAnnounceOffline,
+                    discoveryMetadata, /* state */
+                    null
+                );
         }
 
         [Fx.Tag.Throws(typeof(CommunicationException), "Inherits from Channel exception contract")]
@@ -535,22 +540,22 @@ namespace System.ServiceModel.Discovery
                 && announcementEndpoint.Binding.MessageVersion.Addressing == AddressingVersion.None
             )
             {
-                throw FxTrace.Exception.Argument(
-                    "announcementEndpoint",
-                    SR.EndpointWithInvalidMessageVersion(
-                        announcementEndpoint.GetType().Name,
-                        AddressingVersion.None,
-                        this.GetType().Name,
-                        AddressingVersion.WSAddressing10,
-                        AddressingVersion.WSAddressingAugust2004
-                    )
-                );
+                throw FxTrace.Exception
+                    .Argument(
+                        "announcementEndpoint",
+                        SR.EndpointWithInvalidMessageVersion(
+                            announcementEndpoint.GetType().Name,
+                            AddressingVersion.None,
+                            this.GetType().Name,
+                            AddressingVersion.WSAddressing10,
+                            AddressingVersion.WSAddressingAugust2004
+                        )
+                    );
             }
 
-            this.innerClient =
-                announcementEndpoint.DiscoveryVersion.Implementation.CreateAnnouncementInnerClient(
-                    announcementEndpoint
-                );
+            this.innerClient = announcementEndpoint.DiscoveryVersion
+                .Implementation
+                .CreateAnnouncementInnerClient(announcementEndpoint);
         }
 
         void RaiseEvent(EventHandler handler, EventArgs e)
@@ -614,8 +619,7 @@ namespace System.ServiceModel.Discovery
                 if (DiscoveryUtility.IsCompatible(OperationContext.Current, clientChannel))
                 {
                     // reuse the same context
-                    this.originalMessageId = OperationContext
-                        .Current
+                    this.originalMessageId = OperationContext.Current
                         .OutgoingMessageHeaders
                         .MessageId;
                 }

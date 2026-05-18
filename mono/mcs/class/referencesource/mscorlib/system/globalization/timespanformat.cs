@@ -21,13 +21,15 @@ namespace System.Globalization
         }
 
         internal static readonly FormatLiterals PositiveInvariantFormatLiterals =
-            TimeSpanFormat.FormatLiterals.InitInvariant(
-                false /*isNegative*/
-            );
+            TimeSpanFormat.FormatLiterals
+                .InitInvariant(
+                    false /*isNegative*/
+                );
         internal static readonly FormatLiterals NegativeInvariantFormatLiterals =
-            TimeSpanFormat.FormatLiterals.InitInvariant(
-                true /*isNegative*/
-            );
+            TimeSpanFormat.FormatLiterals
+                .InitInvariant(
+                    true /*isNegative*/
+                );
 
         internal enum Pattern
         {

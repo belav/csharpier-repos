@@ -572,12 +572,8 @@ namespace System.Net
             //
             // Set the url group property using Http Api.
             //
-            statusCode = UnsafeNclNativeMethods.HttpApi.HttpSetUrlGroupProperty(
-                m_UrlGroupId,
-                property,
-                info,
-                infosize
-            );
+            statusCode = UnsafeNclNativeMethods.HttpApi
+                .HttpSetUrlGroupProperty(m_UrlGroupId, property, info, infosize);
 
             if (statusCode != UnsafeNclNativeMethods.ErrorCodes.ERROR_SUCCESS)
             {
@@ -600,8 +596,7 @@ namespace System.Net
             UnsafeNclNativeMethods.HttpApi.HTTP_TIMEOUT_LIMIT_INFO timeoutinfo =
                 new UnsafeNclNativeMethods.HttpApi.HTTP_TIMEOUT_LIMIT_INFO();
 
-            timeoutinfo.Flags = UnsafeNclNativeMethods
-                .HttpApi
+            timeoutinfo.Flags = UnsafeNclNativeMethods.HttpApi
                 .HTTP_FLAGS
                 .HTTP_PROPERTY_FLAG_PRESENT;
             timeoutinfo.DrainEntityBody = (ushort)
@@ -988,11 +983,8 @@ namespace System.Net
 
             try
             {
-                statusCode = UnsafeNclNativeMethods.HttpApi.HttpCreateServerSession(
-                    UnsafeNclNativeMethods.HttpApi.Version,
-                    &id,
-                    0
-                );
+                statusCode = UnsafeNclNativeMethods.HttpApi
+                    .HttpCreateServerSession(UnsafeNclNativeMethods.HttpApi.Version, &id, 0);
 
                 if (statusCode != UnsafeNclNativeMethods.ErrorCodes.ERROR_SUCCESS)
                 {
@@ -1004,11 +996,12 @@ namespace System.Net
                 m_ServerSessionHandle = new HttpServerSessionHandle(id);
 
                 id = 0;
-                statusCode = UnsafeNclNativeMethods.HttpApi.HttpCreateUrlGroup(
-                    m_ServerSessionHandle.DangerousGetServerSessionId(),
-                    &id,
-                    0
-                );
+                statusCode = UnsafeNclNativeMethods.HttpApi
+                    .HttpCreateUrlGroup(
+                        m_ServerSessionHandle.DangerousGetServerSessionId(),
+                        &id,
+                        0
+                    );
 
                 if (statusCode != UnsafeNclNativeMethods.ErrorCodes.ERROR_SUCCESS)
                 {
@@ -1190,12 +1183,13 @@ namespace System.Net
 
             IntPtr infoptr = new IntPtr(&info);
 
-            uint statusCode = UnsafeNclNativeMethods.HttpApi.HttpSetUrlGroupProperty(
-                m_UrlGroupId,
-                UnsafeNclNativeMethods.HttpApi.HTTP_SERVER_PROPERTY.HttpServerBindingProperty,
-                infoptr,
-                (uint)Marshal.SizeOf(typeof(UnsafeNclNativeMethods.HttpApi.HTTP_BINDING_INFO))
-            );
+            uint statusCode = UnsafeNclNativeMethods.HttpApi
+                .HttpSetUrlGroupProperty(
+                    m_UrlGroupId,
+                    UnsafeNclNativeMethods.HttpApi.HTTP_SERVER_PROPERTY.HttpServerBindingProperty,
+                    infoptr,
+                    (uint)Marshal.SizeOf(typeof(UnsafeNclNativeMethods.HttpApi.HTTP_BINDING_INFO))
+                );
 
             if (statusCode != UnsafeNclNativeMethods.ErrorCodes.ERROR_SUCCESS)
             {
@@ -1255,13 +1249,14 @@ namespace System.Net
             uint statusCode = UnsafeNclNativeMethods.ErrorCodes.ERROR_SUCCESS;
 
             HttpRequestQueueV2Handle requestQueueHandle = null;
-            statusCode = UnsafeNclNativeMethods.SafeNetHandles.HttpCreateRequestQueue(
-                UnsafeNclNativeMethods.HttpApi.Version,
-                null,
-                null,
-                0,
-                out requestQueueHandle
-            );
+            statusCode = UnsafeNclNativeMethods.SafeNetHandles
+                .HttpCreateRequestQueue(
+                    UnsafeNclNativeMethods.HttpApi.Version,
+                    null,
+                    null,
+                    0,
+                    out requestQueueHandle
+                );
 
             if (statusCode != UnsafeNclNativeMethods.ErrorCodes.ERROR_SUCCESS)
             {
@@ -1273,11 +1268,9 @@ namespace System.Net
                 SkipIOCPCallbackOnSuccess
                 && !UnsafeNclNativeMethods.SetFileCompletionNotificationModes(
                     requestQueueHandle,
-                    UnsafeNclNativeMethods
-                        .FileCompletionNotificationModes
+                    UnsafeNclNativeMethods.FileCompletionNotificationModes
                         .SkipCompletionPortOnSuccess
-                        | UnsafeNclNativeMethods
-                            .FileCompletionNotificationModes
+                        | UnsafeNclNativeMethods.FileCompletionNotificationModes
                             .SkipSetEventOnHandle
                 )
             )
@@ -1410,12 +1403,8 @@ namespace System.Net
         {
             uint statusCode = 0;
 
-            statusCode = UnsafeNclNativeMethods.HttpApi.HttpAddUrlToUrlGroup(
-                m_UrlGroupId,
-                uriPrefix,
-                0,
-                0
-            );
+            statusCode = UnsafeNclNativeMethods.HttpApi
+                .HttpAddUrlToUrlGroup(m_UrlGroupId, uriPrefix, 0, 0);
 
             return statusCode;
         }
@@ -1424,11 +1413,8 @@ namespace System.Net
         {
             uint statusCode = 0;
 
-            statusCode = UnsafeNclNativeMethods.HttpApi.HttpRemoveUrlFromUrlGroup(
-                m_UrlGroupId,
-                uriPrefix,
-                0
-            );
+            statusCode = UnsafeNclNativeMethods.HttpApi
+                .HttpRemoveUrlFromUrlGroup(m_UrlGroupId, uriPrefix, 0);
 
             if (statusCode == UnsafeNclNativeMethods.ErrorCodes.ERROR_NOT_FOUND)
             {
@@ -1498,19 +1484,19 @@ namespace System.Net
                                 + requestId
                         );
                         uint bytesTransferred = 0;
-                        statusCode = UnsafeNclNativeMethods.HttpApi.HttpReceiveHttpRequest(
-                            m_RequestQueueHandle,
-                            requestId,
-                            (uint)
-                                UnsafeNclNativeMethods
-                                    .HttpApi
-                                    .HTTP_FLAGS
-                                    .HTTP_RECEIVE_REQUEST_FLAG_COPY_BODY,
-                            memoryBlob.RequestBlob,
-                            size,
-                            &bytesTransferred,
-                            null
-                        );
+                        statusCode = UnsafeNclNativeMethods.HttpApi
+                            .HttpReceiveHttpRequest(
+                                m_RequestQueueHandle,
+                                requestId,
+                                (uint)
+                                    UnsafeNclNativeMethods.HttpApi
+                                        .HTTP_FLAGS
+                                        .HTTP_RECEIVE_REQUEST_FLAG_COPY_BODY,
+                                memoryBlob.RequestBlob,
+                                size,
+                                &bytesTransferred,
+                                null
+                            );
 
                         GlobalLog.Print(
                             "HttpListener#"
@@ -1753,11 +1739,8 @@ namespace System.Net
         [HostProtection(ExternalThreading = true)]
         public Task<HttpListenerContext> GetContextAsync()
         {
-            return Task<HttpListenerContext>.Factory.FromAsync(
-                BeginGetContext,
-                EndGetContext,
-                null
-            );
+            return Task<HttpListenerContext>.Factory
+                .FromAsync(BeginGetContext, EndGetContext, null);
         }
 
         [SecurityPermission(SecurityAction.Assert, Flags = SecurityPermissionFlag.UnmanagedCode)]
@@ -1789,10 +1772,8 @@ namespace System.Net
 
             // Some things we need right away.  Lift them out now while it's convenient.
             string verb = UnsafeNclNativeMethods.HttpApi.GetVerb(memoryBlob.RequestBlob);
-            string authorizationHeader = UnsafeNclNativeMethods.HttpApi.GetKnownHeader(
-                memoryBlob.RequestBlob,
-                (int)HttpRequestHeader.Authorization
-            );
+            string authorizationHeader = UnsafeNclNativeMethods.HttpApi
+                .GetKnownHeader(memoryBlob.RequestBlob, (int)HttpRequestHeader.Authorization);
             ulong connectionId = memoryBlob.RequestBlob->ConnectionId;
             ulong requestId = memoryBlob.RequestBlob->RequestId;
             bool isSecureConnection = memoryBlob.RequestBlob->pSslInfo != null;
@@ -2517,11 +2498,8 @@ namespace System.Net
                             {
                                 bytes = Convert.FromBase64String(inBlob);
 
-                                inBlob = WebHeaderCollection.HeaderEncoding.GetString(
-                                    bytes,
-                                    0,
-                                    bytes.Length
-                                );
+                                inBlob = WebHeaderCollection.HeaderEncoding
+                                    .GetString(bytes, 0, bytes.Length);
                                 index = inBlob.IndexOf(':');
 
                                 if (index != -1)
@@ -3283,11 +3261,12 @@ namespace System.Net
                 DisconnectAsyncResult result = new DisconnectAsyncResult(this, connectionId);
 
                 EnsureBoundHandle();
-                uint statusCode = UnsafeNclNativeMethods.HttpApi.HttpWaitForDisconnect(
-                    m_RequestQueueHandle,
-                    connectionId,
-                    result.NativeOverlapped
-                );
+                uint statusCode = UnsafeNclNativeMethods.HttpApi
+                    .HttpWaitForDisconnect(
+                        m_RequestQueueHandle,
+                        connectionId,
+                        result.NativeOverlapped
+                    );
 
                 GlobalLog.Print(
                     "HttpListener#"
@@ -3393,9 +3372,8 @@ namespace System.Net
 
                             for (int i = 0; i < challengeHandles.Length; i++)
                             {
-                                byte[] byteChallenge = Encoding.Default.GetBytes(
-                                    (string)challenges[i]
-                                );
+                                byte[] byteChallenge = Encoding.Default
+                                    .GetBytes((string)challenges[i]);
                                 challengeHandles[i] = GCHandle.Alloc(
                                     byteChallenge,
                                     GCHandleType.Pinned
@@ -3415,18 +3393,19 @@ namespace System.Net
                                 + ValidationHelper.HashString(this)
                                 + "::SendInternalError() calling UnsafeNclNativeMethods.HttpApi.HttpSendHtthttpResponse"
                         );
-                        statusCode = UnsafeNclNativeMethods.HttpApi.HttpSendHttpResponse(
-                            m_RequestQueueHandle,
-                            requestId,
-                            0,
-                            &httpResponse,
-                            null,
-                            &DataWritten,
-                            SafeLocalFree.Zero,
-                            0,
-                            null,
-                            null
-                        );
+                        statusCode = UnsafeNclNativeMethods.HttpApi
+                            .HttpSendHttpResponse(
+                                m_RequestQueueHandle,
+                                requestId,
+                                0,
+                                &httpResponse,
+                                null,
+                                &DataWritten,
+                                SafeLocalFree.Zero,
+                                0,
+                                null,
+                                null
+                            );
                     }
                     finally
                     {
@@ -3523,19 +3502,19 @@ namespace System.Net
                 {
                     // Http.sys team: ServiceName will always be null if
                     // HTTP_RECEIVE_SECURE_CHANNEL_TOKEN flag is set.
-                    statusCode = UnsafeNclNativeMethods.HttpApi.HttpReceiveClientCertificate(
-                        RequestQueueHandle,
-                        connectionId,
-                        (uint)
-                            UnsafeNclNativeMethods
-                                .HttpApi
-                                .HTTP_FLAGS
-                                .HTTP_RECEIVE_SECURE_CHANNEL_TOKEN,
-                        blobPtr,
-                        (uint)size,
-                        &bytesReceived,
-                        null
-                    );
+                    statusCode = UnsafeNclNativeMethods.HttpApi
+                        .HttpReceiveClientCertificate(
+                            RequestQueueHandle,
+                            connectionId,
+                            (uint)
+                                UnsafeNclNativeMethods.HttpApi
+                                    .HTTP_FLAGS
+                                    .HTTP_RECEIVE_SECURE_CHANNEL_TOKEN,
+                            blobPtr,
+                            (uint)size,
+                            &bytesReceived,
+                            null
+                        );
 
                     if (statusCode == UnsafeNclNativeMethods.ErrorCodes.ERROR_SUCCESS)
                     {

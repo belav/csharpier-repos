@@ -21,13 +21,14 @@ namespace System.ServiceModel.Security
         {
             if (!IsDefined(value))
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidEnumArgumentException(
-                        "value",
-                        (int)value,
-                        typeof(X509CertificateValidationMode)
-                    )
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidEnumArgumentException(
+                            "value",
+                            (int)value,
+                            typeof(X509CertificateValidationMode)
+                        )
+                    );
             }
         }
     }

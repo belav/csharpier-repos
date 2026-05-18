@@ -552,15 +552,17 @@ namespace System.Data.Linq.SqlClient
             Expression sourceExpression
         )
         {
-            System.Diagnostics.Debug.Assert(
-                !targetSqlType.IsRuntimeOnlyType,
-                "Attempted coversion to a runtime type: from = "
-                    + expression.SqlType.ToQueryString()
-                    + "; to = "
-                    + targetSqlType.ToQueryString()
-                    + "; source = "
-                    + sourceExpression.ToString()
-            );
+            System.Diagnostics
+                .Debug
+                .Assert(
+                    !targetSqlType.IsRuntimeOnlyType,
+                    "Attempted coversion to a runtime type: from = "
+                        + expression.SqlType.ToQueryString()
+                        + "; to = "
+                        + targetSqlType.ToQueryString()
+                        + "; source = "
+                        + sourceExpression.ToString()
+                );
             return new SqlUnary(
                 SqlNodeType.Convert,
                 targetClrType,
@@ -633,11 +635,8 @@ namespace System.Data.Linq.SqlClient
             }
             else
             {
-                ProviderType resultType = this.typeProvider.PredictTypeForBinary(
-                    nodeType,
-                    left.SqlType,
-                    right.SqlType
-                );
+                ProviderType resultType = this.typeProvider
+                    .PredictTypeForBinary(nodeType, left.SqlType, right.SqlType);
                 if (resultType == right.SqlType)
                 {
                     if (clrType == null)

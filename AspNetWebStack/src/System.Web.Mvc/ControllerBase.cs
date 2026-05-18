@@ -56,9 +56,8 @@ namespace System.Web.Mvc
             {
                 if (_valueProvider == null)
                 {
-                    _valueProvider = ValueProviderFactories.Factories.GetValueProvider(
-                        ControllerContext
-                    );
+                    _valueProvider = ValueProviderFactories.Factories
+                        .GetValueProvider(ControllerContext);
                 }
                 return _valueProvider;
             }

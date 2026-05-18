@@ -1280,10 +1280,11 @@ public class CosmosQueryableMethodTranslatingExpressionVisitor
                     valueExpression is ConstantExpression
                     || (
                         valueExpression is ParameterExpression valueParameterExpression
-                        && valueParameterExpression.Name?.StartsWith(
-                            QueryCompilationContext.QueryParameterPrefix,
-                            StringComparison.Ordinal
-                        ) == true
+                        && valueParameterExpression.Name
+                            ?.StartsWith(
+                                QueryCompilationContext.QueryParameterPrefix,
+                                StringComparison.Ordinal
+                            ) == true
                     )
                 )
                 {

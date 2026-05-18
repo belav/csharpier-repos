@@ -175,15 +175,16 @@ namespace System.Windows.Forms
             toolbar.Size = new System.Drawing.Size(256, 27);
             toolbar.TabIndex = 0;
 
-            toolbar.Items.AddRange(
-                new ToolStripItem[]
-                {
-                    categorized_toolbarbutton,
-                    alphabetic_toolbarbutton,
-                    new PropertyToolBarSeparator(),
-                    propertypages_toolbarbutton,
-                }
-            );
+            toolbar.Items
+                .AddRange(
+                    new ToolStripItem[]
+                    {
+                        categorized_toolbarbutton,
+                        alphabetic_toolbarbutton,
+                        new PropertyToolBarSeparator(),
+                        propertypages_toolbarbutton,
+                    }
+                );
             //toolbar.ButtonSize = new System.Drawing.Size (20, 20);
             categorized_toolbarbutton.Click += new EventHandler(toolbarbutton_clicked);
             alphabetic_toolbarbutton.Click += new EventHandler(toolbarbutton_clicked);
@@ -1185,10 +1186,11 @@ namespace System.Windows.Forms
 
         protected override void OnPaint(PaintEventArgs pevent)
         {
-            pevent.Graphics.FillRectangle(
-                ThemeEngine.Current.ResPool.GetSolidBrush(BackColor),
-                pevent.ClipRectangle
-            );
+            pevent.Graphics
+                .FillRectangle(
+                    ThemeEngine.Current.ResPool.GetSolidBrush(BackColor),
+                    pevent.ClipRectangle
+                );
             base.OnPaint(pevent);
         }
 
@@ -1786,17 +1788,19 @@ namespace System.Windows.Forms
 
         private void help_panel_Paint(object sender, PaintEventArgs e)
         {
-            e.Graphics.FillRectangle(
-                ThemeEngine.Current.ResPool.GetSolidBrush(help_panel.BackColor),
-                help_panel.ClientRectangle
-            );
-            e.Graphics.DrawRectangle(
-                SystemPens.ControlDark,
-                0,
-                0,
-                help_panel.Width - 1,
-                help_panel.Height - 1
-            );
+            e.Graphics
+                .FillRectangle(
+                    ThemeEngine.Current.ResPool.GetSolidBrush(help_panel.BackColor),
+                    help_panel.ClientRectangle
+                );
+            e.Graphics
+                .DrawRectangle(
+                    SystemPens.ControlDark,
+                    0,
+                    0,
+                    help_panel.Width - 1,
+                    help_panel.Height - 1
+                );
         }
 
         #endregion	// Private Helper Methods

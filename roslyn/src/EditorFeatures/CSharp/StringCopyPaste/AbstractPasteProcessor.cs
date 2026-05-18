@@ -122,8 +122,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.StringCopyPaste
                 TextBeforePaste,
                 stringExpressionBeforePaste
             );
-            TextContentsSpansAfterPaste =
-                StringExpressionBeforePasteInfo.ContentSpans.SelectAsArray(MapSpanForward);
+            TextContentsSpansAfterPaste = StringExpressionBeforePasteInfo.ContentSpans
+                .SelectAsArray(MapSpanForward);
 
             Contract.ThrowIfTrue(StringExpressionBeforePasteInfo.ContentSpans.IsEmpty);
         }

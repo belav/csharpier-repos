@@ -280,10 +280,11 @@ namespace System.Text.Json.SourceGeneration.UnitTests
             static IncrementalGeneratorRunStep[]? GetSourceGenRunStep(GeneratorRunResult runResult)
             {
                 if (
-                    !runResult.TrackedSteps.TryGetValue(
-                        JsonSourceGenerator.SourceGenerationSpecTrackingName,
-                        out var runSteps
-                    )
+                    !runResult.TrackedSteps
+                        .TryGetValue(
+                            JsonSourceGenerator.SourceGenerationSpecTrackingName,
+                            out var runSteps
+                        )
                 )
                 {
                     return null;

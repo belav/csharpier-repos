@@ -224,8 +224,8 @@ namespace Moq.Tests
         {
             var mock = new Mock<AddWriteAccessToInterface>();
             mock.SetupAllProperties();
-            IWithReadOnlyProperty asReimplementedInterface =
-                mock.As<IWithReadOnlyProperty>().Object;
+            IWithReadOnlyProperty asReimplementedInterface = mock.As<IWithReadOnlyProperty>()
+                .Object;
 
             mock.Object.WriteAccessInDerived = "test";
 

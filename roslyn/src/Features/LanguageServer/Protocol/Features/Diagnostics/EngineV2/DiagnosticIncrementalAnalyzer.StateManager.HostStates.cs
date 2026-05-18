@@ -16,8 +16,7 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
         {
             public IEnumerable<StateSet> GetAllHostStateSets()
             {
-                var analyzerReferences = _workspace
-                    .CurrentSolution
+                var analyzerReferences = _workspace.CurrentSolution
                     .State
                     .Analyzers
                     .HostAnalyzerReferences;
@@ -101,8 +100,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
                     // order statesets
                     // order will be in this order
                     // BuiltIn Compiler Analyzer (C#/VB) < Regular DiagnosticAnalyzers < Document/ProjectDiagnosticAnalyzers
-                    OrderedStateSets = StateSetMap
-                        .Values.OrderBy(PriorityComparison)
+                    OrderedStateSets = StateSetMap.Values
+                        .OrderBy(PriorityComparison)
                         .ToImmutableArray();
                 }
 

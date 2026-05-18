@@ -17,11 +17,12 @@ namespace System.ServiceModel.Channels
         {
             if (format == WebContentFormat.Default)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentException(
-                        SR2.GetString(SR2.DefaultContentFormatNotAllowedInProperty)
-                    )
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        new ArgumentException(
+                            SR2.GetString(SR2.DefaultContentFormatNotAllowedInProperty)
+                        )
+                    );
             }
             this.format = format;
         }

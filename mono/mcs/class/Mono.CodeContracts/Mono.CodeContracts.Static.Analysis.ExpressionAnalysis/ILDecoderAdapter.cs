@@ -67,14 +67,8 @@ namespace Mono.CodeContracts.Static.Analysis.ExpressionAnalysis
             Data data
         )
         {
-            return this.visitor.Binary(
-                pc,
-                op,
-                dest,
-                Convert(pc, operand1),
-                Convert(pc, operand2),
-                data
-            );
+            return this.visitor
+                .Binary(pc, op, dest, Convert(pc, operand1), Convert(pc, operand2), data);
         }
 
         public Result Isinst(
@@ -175,15 +169,8 @@ namespace Mono.CodeContracts.Static.Analysis.ExpressionAnalysis
             Data data
         )
         {
-            return this.visitor.LoadStackAddress(
-                pc,
-                offset,
-                dest,
-                Convert(pc, source),
-                type,
-                isOld,
-                data
-            );
+            return this.visitor
+                .LoadStackAddress(pc, offset, dest, Convert(pc, source), type, isOld, data);
         }
 
         public Result LoadResult(
@@ -262,16 +249,17 @@ namespace Mono.CodeContracts.Static.Analysis.ExpressionAnalysis
             where TypeList : IIndexable<TypeNode>
             where ArgList : IIndexable<SymbolicValue>
         {
-            return this.visitor.Calli(
-                pc,
-                returnType,
-                argTypes,
-                instance,
-                dest,
-                Convert(pc, functionPointer),
-                Convert(pc, args),
-                data
-            );
+            return this.visitor
+                .Calli(
+                    pc,
+                    returnType,
+                    argTypes,
+                    instance,
+                    dest,
+                    Convert(pc, functionPointer),
+                    Convert(pc, args),
+                    data
+                );
         }
 
         public Result CheckFinite(APC pc, SymbolicValue dest, SymbolicValue source, Data data)
@@ -287,13 +275,14 @@ namespace Mono.CodeContracts.Static.Analysis.ExpressionAnalysis
             Data data
         )
         {
-            return this.visitor.CopyBlock(
-                pc,
-                Convert(pc, destAddress),
-                Convert(pc, srcAddress),
-                Convert(pc, len),
-                data
-            );
+            return this.visitor
+                .CopyBlock(
+                    pc,
+                    Convert(pc, destAddress),
+                    Convert(pc, srcAddress),
+                    Convert(pc, len),
+                    data
+                );
         }
 
         public Result EndFilter(APC pc, SymbolicValue decision, Data data)
@@ -396,15 +385,16 @@ namespace Mono.CodeContracts.Static.Analysis.ExpressionAnalysis
             where TypeList : IIndexable<TypeNode>
             where ArgList : IIndexable<SymbolicValue>
         {
-            return this.visitor.ConstrainedCallvirt(
-                pc,
-                method,
-                constraint,
-                extraVarargs,
-                dest,
-                Convert(pc, args),
-                data
-            );
+            return this.visitor
+                .ConstrainedCallvirt(
+                    pc,
+                    method,
+                    constraint,
+                    extraVarargs,
+                    dest,
+                    Convert(pc, args),
+                    data
+                );
         }
 
         public Result CastClass(
@@ -426,13 +416,8 @@ namespace Mono.CodeContracts.Static.Analysis.ExpressionAnalysis
             Data data
         )
         {
-            return this.visitor.CopyObj(
-                pc,
-                type,
-                Convert(pc, destPtr),
-                Convert(pc, sourcePtr),
-                data
-            );
+            return this.visitor
+                .CopyObj(pc, type, Convert(pc, destPtr), Convert(pc, sourcePtr), data);
         }
 
         public Result Initobj(APC pc, TypeNode type, SymbolicValue ptr, Data data)
@@ -449,14 +434,8 @@ namespace Mono.CodeContracts.Static.Analysis.ExpressionAnalysis
             Data data
         )
         {
-            return this.visitor.LoadElement(
-                pc,
-                type,
-                dest,
-                Convert(pc, array),
-                Convert(pc, index),
-                data
-            );
+            return this.visitor
+                .LoadElement(pc, type, dest, Convert(pc, array), Convert(pc, index), data);
         }
 
         public Result LoadField(
@@ -576,14 +555,15 @@ namespace Mono.CodeContracts.Static.Analysis.ExpressionAnalysis
             Data data
         )
         {
-            return this.visitor.StoreElement(
-                pc,
-                type,
-                Convert(pc, array),
-                Convert(pc, index),
-                Convert(pc, value),
-                data
-            );
+            return this.visitor
+                .StoreElement(
+                    pc,
+                    type,
+                    Convert(pc, array),
+                    Convert(pc, index),
+                    Convert(pc, value),
+                    data
+                );
         }
 
         public Result StoreField(

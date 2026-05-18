@@ -759,8 +759,7 @@ namespace System.Windows.Forms
             DataGridViewPaintParts paintParts
         )
         {
-            List<DataGridViewColumn> sortedColumns = DataGridView
-                .Columns
+            List<DataGridViewColumn> sortedColumns = DataGridView.Columns
                 .ColumnDisplayIndexSortedArrayList;
 
             Rectangle bounds = rowBounds;

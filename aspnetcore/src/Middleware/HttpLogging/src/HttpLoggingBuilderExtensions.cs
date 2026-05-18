@@ -45,8 +45,8 @@ public static class HttpLoggingBuilderExtensions
 
     private static void VerifyHttpLoggingServicesAreRegistered(IApplicationBuilder app)
     {
-        var serviceProviderIsService =
-            app.ApplicationServices.GetService<IServiceProviderIsService>();
+        var serviceProviderIsService = app.ApplicationServices
+            .GetService<IServiceProviderIsService>();
         if (
             serviceProviderIsService != null
             && (
@@ -67,8 +67,8 @@ public static class HttpLoggingBuilderExtensions
 
     private static void VerifyW3CLoggingServicesAreRegistered(IApplicationBuilder app)
     {
-        var serviceProviderIsService =
-            app.ApplicationServices.GetService<IServiceProviderIsService>();
+        var serviceProviderIsService = app.ApplicationServices
+            .GetService<IServiceProviderIsService>();
         if (
             serviceProviderIsService != null
             && (

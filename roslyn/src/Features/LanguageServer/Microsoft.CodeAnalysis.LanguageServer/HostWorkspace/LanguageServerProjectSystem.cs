@@ -313,9 +313,9 @@ internal sealed class LanguageServerProjectSystem
                 var projectLanguage = loadedProjectInfos.FirstOrDefault()?.Language;
                 if (
                     projectLanguage != null
-                    && _workspaceFactory.Workspace.Services.GetLanguageService<ICommandLineParserService>(
-                        projectLanguage
-                    ) == null
+                    && _workspaceFactory.Workspace
+                        .Services
+                        .GetLanguageService<ICommandLineParserService>(projectLanguage) == null
                 )
                 {
                     return (null, null);
@@ -356,12 +356,13 @@ internal sealed class LanguageServerProjectSystem
                         };
 
                         var projectSystemProject =
-                            await _workspaceFactory.ProjectSystemProjectFactory.CreateAndAddToWorkspaceAsync(
-                                projectSystemName,
-                                loadedProjectInfo.Language,
-                                projectCreationInfo,
-                                _workspaceFactory.ProjectSystemHostInfo
-                            );
+                            await _workspaceFactory.ProjectSystemProjectFactory
+                                .CreateAndAddToWorkspaceAsync(
+                                    projectSystemName,
+                                    loadedProjectInfo.Language,
+                                    projectCreationInfo,
+                                    _workspaceFactory.ProjectSystemHostInfo
+                                );
 
                         var loadedProject = new LoadedProject(
                             projectSystemProject,

@@ -309,13 +309,14 @@ namespace System.Xml.Xsl.Runtime
                 this.extFuncsLate = new XmlExtensionFunctionTable();
 
             // Bind to the instance, looking for a matching method (throws if no matching method)
-            XmlExtensionFunction extFunc = this.extFuncsLate.Bind(
-                name,
-                namespaceUri,
-                args.Length,
-                instance.GetType(),
-                XmlQueryRuntime.LateBoundFlags
-            );
+            XmlExtensionFunction extFunc = this.extFuncsLate
+                .Bind(
+                    name,
+                    namespaceUri,
+                    args.Length,
+                    instance.GetType(),
+                    XmlQueryRuntime.LateBoundFlags
+                );
 
             // Create array which will contain the actual arguments
             objActualArgs = new object[args.Length];
@@ -363,11 +364,12 @@ namespace System.Xml.Xsl.Runtime
                     xmlTypeFormalArg.TypeCode == XmlTypeCode.Item
                     || !clrTypeFormalArg.IsAssignableFrom(objActualArgs[i].GetType())
                 )
-                    objActualArgs[i] = this.runtime.ChangeTypeXsltArgument(
-                        xmlTypeFormalArg,
-                        objActualArgs[i],
-                        clrTypeFormalArg
-                    );
+                    objActualArgs[i] = this.runtime
+                        .ChangeTypeXsltArgument(
+                            xmlTypeFormalArg,
+                            objActualArgs[i],
+                            clrTypeFormalArg
+                        );
             }
 
             // 1. Invoke the late bound method

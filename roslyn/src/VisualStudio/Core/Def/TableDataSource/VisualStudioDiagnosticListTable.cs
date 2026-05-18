@@ -65,9 +65,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
                         + "."
                         + nameof(StartListening)
                 );
-                await _threadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(
-                    cancellationToken
-                );
+                await _threadingContext.JoinableTaskFactory
+                    .SwitchToMainThreadAsync(cancellationToken);
 
                 var errorList =
                     (

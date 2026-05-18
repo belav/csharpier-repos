@@ -410,9 +410,8 @@ namespace System.Windows.Forms
         {
             base.OnPaintBackground(e);
 
-            this.Renderer.DrawToolStripPanelBackground(
-                new ToolStripPanelRenderEventArgs(e.Graphics, this)
-            );
+            this.Renderer
+                .DrawToolStripPanelBackground(new ToolStripPanelRenderEventArgs(e.Graphics, this));
         }
 
         protected override void OnParentChanged(EventArgs e)

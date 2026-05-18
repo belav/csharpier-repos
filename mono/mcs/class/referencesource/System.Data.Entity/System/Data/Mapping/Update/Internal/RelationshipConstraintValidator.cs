@@ -139,8 +139,7 @@ namespace System.Data.Mapping.Update.Internal
                                 if (
                                     0
                                     == MetadataHelper.GetLowerBoundOfMultiplicity(
-                                        fromEnd
-                                            .CorrespondingAssociationEndMember
+                                        fromEnd.CorrespondingAssociationEndMember
                                             .RelationshipMultiplicity
                                     )
                                 )

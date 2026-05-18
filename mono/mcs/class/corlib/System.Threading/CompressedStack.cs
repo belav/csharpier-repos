@@ -69,8 +69,7 @@ namespace System.Threading
             cs._list = new ArrayList();
 
             // include any current CompressedStack inside the new Capture
-            CompressedStack currentCs = Thread
-                .CurrentThread
+            CompressedStack currentCs = Thread.CurrentThread
                 .ExecutionContext
                 .SecurityContext
                 .CompressedStack;
@@ -96,8 +95,7 @@ namespace System.Threading
             // like Thread.CurrentThread.GetCompressedStack if no compressed
             // stack is present.
 
-            CompressedStack cs = Thread
-                .CurrentThread
+            CompressedStack cs = Thread.CurrentThread
                 .ExecutionContext
                 .SecurityContext
                 .CompressedStack;

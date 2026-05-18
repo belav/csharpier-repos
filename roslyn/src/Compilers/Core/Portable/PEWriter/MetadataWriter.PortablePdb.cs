@@ -1041,8 +1041,8 @@ namespace Microsoft.Cci
             }
             else
             {
-                var compilerVersion = typeof(Compilation)
-                    .Assembly.GetCustomAttribute<AssemblyInformationalVersionAttribute>()
+                var compilerVersion = typeof(Compilation).Assembly
+                    .GetCustomAttribute<AssemblyInformationalVersionAttribute>()
                     .InformationalVersion;
                 WriteValue(
                     CompilationOptionNames.CompilationOptionsVersion,
@@ -1082,13 +1082,11 @@ namespace Microsoft.Cci
                     is DesktopAssemblyIdentityComparer identityComparer
                 )
                 {
-                    portabilityPolicy |= identityComparer
-                        .PortabilityPolicy
+                    portabilityPolicy |= identityComparer.PortabilityPolicy
                         .SuppressSilverlightLibraryAssembliesPortability
                         ? 0b1
                         : 0;
-                    portabilityPolicy |= identityComparer
-                        .PortabilityPolicy
+                    portabilityPolicy |= identityComparer.PortabilityPolicy
                         .SuppressSilverlightPlatformAssembliesPortability
                         ? 0b10
                         : 0;
@@ -1115,8 +1113,8 @@ namespace Microsoft.Cci
                 var platform = module.CommonCompilation.Options.Platform;
                 WriteValue(CompilationOptionNames.Platform, platform.ToString());
 
-                var runtimeVersion = typeof(object)
-                    .Assembly.GetCustomAttribute<AssemblyInformationalVersionAttribute>()
+                var runtimeVersion = typeof(object).Assembly
+                    .GetCustomAttribute<AssemblyInformationalVersionAttribute>()
                     ?.InformationalVersion;
                 WriteValue(CompilationOptionNames.RuntimeVersion, runtimeVersion);
 

@@ -72,8 +72,7 @@ namespace System.Linq.Parallel
                         ex is OperationCanceledException cancelEx
                         && cancelEx.CancellationToken
                             == SpecifiedQuerySettings.CancellationState.ExternalCancellationToken
-                        && SpecifiedQuerySettings
-                            .CancellationState
+                        && SpecifiedQuerySettings.CancellationState
                             .ExternalCancellationToken
                             .IsCancellationRequested
                     )

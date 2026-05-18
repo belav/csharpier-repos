@@ -816,10 +816,8 @@ namespace System.Diagnostics.Tests
         public void IdFormat_WithTheEnvironmentSwitch()
         {
             var psi = new ProcessStartInfo();
-            psi.Environment.Add(
-                "DOTNET_SYSTEM_DIAGNOSTICS_DEFAULTACTIVITYIDFORMATISHIERARCHIAL",
-                "true"
-            );
+            psi.Environment
+                .Add("DOTNET_SYSTEM_DIAGNOSTICS_DEFAULTACTIVITYIDFORMATISHIERARCHIAL", "true");
 
             RemoteExecutor
                 .Invoke(

@@ -30,8 +30,8 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue.UnitTests
     public abstract class EditAndContinueTestBase : EmitMetadataTestBase
     {
         // PDB reader can only be accessed from a single thread, so avoid concurrent compilation:
-        internal static readonly CSharpCompilationOptions ComSafeDebugDll =
-            TestOptions.DebugDll.WithConcurrentBuild(false);
+        internal static readonly CSharpCompilationOptions ComSafeDebugDll = TestOptions.DebugDll
+            .WithConcurrentBuild(false);
 
         internal static readonly Func<
             MethodDefinitionHandle,
@@ -107,9 +107,10 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue.UnitTests
                 {
                     if (newNode.IsKind(kind))
                     {
-                        return method0
-                            .DeclaringSyntaxReferences.Single()
-                            .SyntaxTree.GetRoot()
+                        return method0.DeclaringSyntaxReferences
+                            .Single()
+                            .SyntaxTree
+                            .GetRoot()
                             .DescendantNodes()
                             .Single(n => n.IsKind(kind));
                     }

@@ -109,10 +109,8 @@ namespace System.Workflow.Activities
                         ListenEventActivitySubscriber eventActivitySubscriber = this.ActivityState[
                             i
                         ];
-                        eventDrivenChild.EventActivity.Unsubscribe(
-                            executionContext,
-                            eventActivitySubscriber
-                        );
+                        eventDrivenChild.EventActivity
+                            .Unsubscribe(executionContext, eventActivitySubscriber);
                     }
                 }
             }
@@ -165,10 +163,11 @@ namespace System.Workflow.Activities
                 ListenEventActivitySubscriber eventActivitySubscriber =
                     new ListenEventActivitySubscriber(eda);
                 eda.EventActivity.Subscribe(executionContext, eventActivitySubscriber);
-                listen.ActivityState.Insert(
-                    listen.EnabledActivities.IndexOf(addedActivity),
-                    eventActivitySubscriber
-                );
+                listen.ActivityState
+                    .Insert(
+                        listen.EnabledActivities.IndexOf(addedActivity),
+                        eventActivitySubscriber
+                    );
             }
         }
 
@@ -197,9 +196,9 @@ namespace System.Workflow.Activities
                     ListenEventActivitySubscriber listenEventSubscriber = listen.ActivityState[i];
 
                     if (
-                        listenEventSubscriber.eventDrivenActivity.QualifiedName.Equals(
-                            eda.QualifiedName
-                        )
+                        listenEventSubscriber.eventDrivenActivity
+                            .QualifiedName
+                            .Equals(eda.QualifiedName)
                     )
                     {
                         eda.EventActivity.Unsubscribe(executionContext, listenEventSubscriber);

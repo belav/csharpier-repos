@@ -23,10 +23,9 @@ namespace Internal.TypeSystem
         public override int GetHashCode()
         {
             // ComputeArrayTypeHashCode expects -1 for an SzArray
-            return Internal.NativeFormat.TypeHashingAlgorithms.ComputeArrayTypeHashCode(
-                this.ElementType.GetHashCode(),
-                _rank
-            );
+            return Internal.NativeFormat
+                .TypeHashingAlgorithms
+                .ComputeArrayTypeHashCode(this.ElementType.GetHashCode(), _rank);
         }
 
         public override DefType BaseType
@@ -218,9 +217,8 @@ namespace Internal.TypeSystem
                         {
                             var parameters = new TypeDesc[_owningType.Rank];
                             for (int i = 0; i < _owningType.Rank; i++)
-                                parameters[i] = _owningType.Context.GetWellKnownType(
-                                    WellKnownType.Int32
-                                );
+                                parameters[i] = _owningType.Context
+                                    .GetWellKnownType(WellKnownType.Int32);
                             _signature = new MethodSignature(
                                 0,
                                 0,
@@ -234,9 +232,8 @@ namespace Internal.TypeSystem
                         {
                             var parameters = new TypeDesc[_owningType.Rank + 1];
                             for (int i = 0; i < _owningType.Rank; i++)
-                                parameters[i] = _owningType.Context.GetWellKnownType(
-                                    WellKnownType.Int32
-                                );
+                                parameters[i] = _owningType.Context
+                                    .GetWellKnownType(WellKnownType.Int32);
                             parameters[_owningType.Rank] = _owningType.ElementType;
                             _signature = new MethodSignature(
                                 0,
@@ -251,9 +248,8 @@ namespace Internal.TypeSystem
                             {
                                 var parameters = new TypeDesc[_owningType.Rank];
                                 for (int i = 0; i < _owningType.Rank; i++)
-                                    parameters[i] = _owningType.Context.GetWellKnownType(
-                                        WellKnownType.Int32
-                                    );
+                                    parameters[i] = _owningType.Context
+                                        .GetWellKnownType(WellKnownType.Int32);
                                 _signature = new MethodSignature(
                                     0,
                                     0,
@@ -270,9 +266,8 @@ namespace Internal.TypeSystem
                                     Context.GetWellKnownType(WellKnownType.Void)
                                 );
                                 for (int i = 0; i < _owningType.Rank; i++)
-                                    parameters[i + 1] = _owningType.Context.GetWellKnownType(
-                                        WellKnownType.Int32
-                                    );
+                                    parameters[i + 1] = _owningType.Context
+                                        .GetWellKnownType(WellKnownType.Int32);
                                 _signature = new MethodSignature(
                                     0,
                                     0,
@@ -299,9 +294,8 @@ namespace Internal.TypeSystem
 
                                 var argTypes = new TypeDesc[numArgs];
                                 for (int i = 0; i < argTypes.Length; i++)
-                                    argTypes[i] = _owningType.Context.GetWellKnownType(
-                                        WellKnownType.Int32
-                                    );
+                                    argTypes[i] = _owningType.Context
+                                        .GetWellKnownType(WellKnownType.Int32);
                                 _signature = new MethodSignature(
                                     0,
                                     0,

@@ -123,12 +123,10 @@ public class ElementType
         IConventionAnnotation? annotation,
         IConventionAnnotation? oldAnnotation
     ) =>
-        CollectionProperty.DeclaringType.Model.ConventionDispatcher.OnElementTypeAnnotationChanged(
-            Builder,
-            name,
-            annotation,
-            oldAnnotation
-        );
+        CollectionProperty.DeclaringType
+            .Model
+            .ConventionDispatcher
+            .OnElementTypeAnnotationChanged(Builder, name, annotation, oldAnnotation);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -215,9 +213,10 @@ public class ElementType
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     protected virtual bool? OnElementTypeNullableChanged() =>
-        CollectionProperty.DeclaringType.Model.ConventionDispatcher.OnElementTypeNullabilityChanged(
-            Builder
-        );
+        CollectionProperty.DeclaringType
+            .Model
+            .ConventionDispatcher
+            .OnElementTypeNullabilityChanged(Builder);
 
     private bool DefaultIsNullable => ClrType.IsNullableType();
 
@@ -525,9 +524,12 @@ public class ElementType
                     ref _typeMapping,
                     (IElementType)this,
                     static elementType =>
-                        elementType
-                            .CollectionProperty.DeclaringType.Model.GetModelDependencies()
-                            .TypeMappingSource.FindMapping(elementType)!
+                        elementType.CollectionProperty
+                            .DeclaringType
+                            .Model
+                            .GetModelDependencies()
+                            .TypeMappingSource
+                            .FindMapping(elementType)!
                 )
                 : _typeMapping;
         set => SetTypeMapping(value, ConfigurationSource.Explicit);

@@ -17,24 +17,26 @@ namespace System.IdentityModel
         {
             if (maxBufferPoolSize < 0)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentOutOfRangeException(
-                        "maxBufferPoolSize",
-                        maxBufferPoolSize,
-                        SR.GetString(SR.ValueMustBeNonNegative)
-                    )
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        new ArgumentOutOfRangeException(
+                            "maxBufferPoolSize",
+                            maxBufferPoolSize,
+                            SR.GetString(SR.ValueMustBeNonNegative)
+                        )
+                    );
             }
 
             if (maxBufferSize < 0)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentOutOfRangeException(
-                        "maxBufferSize",
-                        maxBufferSize,
-                        SR.GetString(SR.ValueMustBeNonNegative)
-                    )
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        new ArgumentOutOfRangeException(
+                            "maxBufferSize",
+                            maxBufferSize,
+                            SR.GetString(SR.ValueMustBeNonNegative)
+                        )
+                    );
             }
 
             return new WrappingBufferManager(
@@ -72,13 +74,14 @@ namespace System.IdentityModel
             {
                 if (bufferSize < 0)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ArgumentOutOfRangeException(
-                            "bufferSize",
-                            bufferSize,
-                            SR.GetString(SR.ValueMustBeNonNegative)
-                        )
-                    );
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperError(
+                            new ArgumentOutOfRangeException(
+                                "bufferSize",
+                                bufferSize,
+                                SR.GetString(SR.ValueMustBeNonNegative)
+                            )
+                        );
                 }
 
                 return this.innerBufferManager.TakeBuffer(bufferSize);

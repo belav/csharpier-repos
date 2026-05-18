@@ -556,7 +556,8 @@ namespace System.Data.Tests
             DataSet ds = new DataSet("Example");
             ds.Tables.Add("MyType");
             ds.Tables["MyType"]
-                .Columns.Add(new DataColumn("Desc", typeof(string), "", MappingType.SimpleContent));
+                .Columns
+                .Add(new DataColumn("Desc", typeof(string), "", MappingType.SimpleContent));
             Assert.Throws<ArgumentException>(() =>
                 ds.Tables["MyType"].Columns["Desc"].MaxLength = 32
             );
@@ -569,7 +570,8 @@ namespace System.Data.Tests
             DataSet ds = new DataSet("Example");
             ds.Tables.Add("MyType");
             ds.Tables["MyType"]
-                .Columns.Add(new DataColumn("Desc", typeof(string), "", MappingType.SimpleContent));
+                .Columns
+                .Add(new DataColumn("Desc", typeof(string), "", MappingType.SimpleContent));
             ds.Tables["MyType"].Columns["Desc"].MaxLength = -1;
         }
 

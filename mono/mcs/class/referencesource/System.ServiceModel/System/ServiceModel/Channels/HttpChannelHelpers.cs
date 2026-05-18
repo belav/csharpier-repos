@@ -167,9 +167,8 @@ namespace System.ServiceModel.Channels
                     settings.MaxReceivedMessageSize
                 );
                 Exception inner = new QuotaExceededException(message);
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new CommunicationException(message, inner)
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(new CommunicationException(message, inner));
             }
         }
 
@@ -194,12 +193,13 @@ namespace System.ServiceModel.Channels
                 }
                 catch (XmlException xmlException)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ProtocolException(
-                            SR.GetString(SR.MessageXmlProtocolError),
-                            xmlException
-                        )
-                    );
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperError(
+                            new ProtocolException(
+                                SR.GetString(SR.MessageXmlProtocolError),
+                                xmlException
+                            )
+                        );
                 }
             }
             finally
@@ -222,9 +222,10 @@ namespace System.ServiceModel.Channels
                 {
                     if (ContentLength != -1)
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new ProtocolException(SR.GetString(SR.HttpContentLengthIncorrect))
-                        );
+                        throw DiagnosticUtility.ExceptionUtility
+                            .ThrowHelperError(
+                                new ProtocolException(SR.GetString(SR.HttpContentLengthIncorrect))
+                            );
                     }
 
                     break;
@@ -249,9 +250,13 @@ namespace System.ServiceModel.Channels
             }
             catch (XmlException xmlException)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ProtocolException(SR.GetString(SR.MessageXmlProtocolError), xmlException)
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        new ProtocolException(
+                            SR.GetString(SR.MessageXmlProtocolError),
+                            xmlException
+                        )
+                    );
             }
         }
 
@@ -272,9 +277,13 @@ namespace System.ServiceModel.Channels
             }
             catch (XmlException xmlException)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ProtocolException(SR.GetString(SR.MessageXmlProtocolError), xmlException)
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        new ProtocolException(
+                            SR.GetString(SR.MessageXmlProtocolError),
+                            xmlException
+                        )
+                    );
             }
         }
 
@@ -702,11 +711,12 @@ namespace System.ServiceModel.Channels
 
                     //
 
-                    message = this.messageEncoder.ReadMessage(
-                        new ArraySegment<byte>(buffer, 0, length),
-                        this.bufferManager,
-                        this.ContentType
-                    );
+                    message = this.messageEncoder
+                        .ReadMessage(
+                            new ArraySegment<byte>(buffer, 0, length),
+                            this.bufferManager,
+                            this.ContentType
+                        );
                     success = true;
                 }
                 finally
@@ -732,9 +742,15 @@ namespace System.ServiceModel.Channels
             string statusDescription
         )
         {
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                CreateHttpProtocolException(message, statusCode, statusDescription, webException)
-            );
+            throw DiagnosticUtility.ExceptionUtility
+                .ThrowHelperError(
+                    CreateHttpProtocolException(
+                        message,
+                        statusCode,
+                        statusDescription,
+                        webException
+                    )
+                );
         }
 
         internal static ProtocolException CreateHttpProtocolException(
@@ -748,10 +764,8 @@ namespace System.ServiceModel.Channels
             exception.Data.Add(HttpChannelUtilities.HttpStatusCodeExceptionKey, statusCode);
             if (statusDescription != null && statusDescription.Length > 0)
             {
-                exception.Data.Add(
-                    HttpChannelUtilities.HttpStatusDescriptionExceptionKey,
-                    statusDescription
-                );
+                exception.Data
+                    .Add(HttpChannelUtilities.HttpStatusDescriptionExceptionKey, statusDescription);
             }
 
             return exception;
@@ -934,10 +948,11 @@ namespace System.ServiceModel.Channels
                             );
                         }
 
-                        this.message = this.httpInput.DecodeBufferedMessage(
-                            new ArraySegment<byte>(buffer.Array, 0, offset),
-                            inputStream
-                        );
+                        this.message = this.httpInput
+                            .DecodeBufferedMessage(
+                                new ArraySegment<byte>(buffer.Array, 0, offset),
+                                inputStream
+                            );
                         this.requestException = this.httpInput.ProcessHttpAddressing(this.message);
                     }
                     return true;
@@ -1170,21 +1185,23 @@ namespace System.ServiceModel.Channels
                     }
                     catch (ObjectDisposedException objectDisposedException)
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new CommunicationException(
-                                objectDisposedException.Message,
-                                objectDisposedException
-                            )
-                        );
+                        throw DiagnosticUtility.ExceptionUtility
+                            .ThrowHelperError(
+                                new CommunicationException(
+                                    objectDisposedException.Message,
+                                    objectDisposedException
+                                )
+                            );
                     }
                     catch (WebException webException)
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            HttpChannelUtilities.CreateResponseWebException(
-                                webException,
-                                this.webResponse
-                            )
-                        );
+                        throw DiagnosticUtility.ExceptionUtility
+                            .ThrowHelperError(
+                                HttpChannelUtilities.CreateResponseWebException(
+                                    webException,
+                                    this.webResponse
+                                )
+                            );
                     }
                 }
 
@@ -1200,21 +1217,23 @@ namespace System.ServiceModel.Channels
                     }
                     catch (ObjectDisposedException objectDisposedException)
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new CommunicationException(
-                                objectDisposedException.Message,
-                                objectDisposedException
-                            )
-                        );
+                        throw DiagnosticUtility.ExceptionUtility
+                            .ThrowHelperError(
+                                new CommunicationException(
+                                    objectDisposedException.Message,
+                                    objectDisposedException
+                                )
+                            );
                     }
                     catch (WebException webException)
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            HttpChannelUtilities.CreateResponseWebException(
-                                webException,
-                                this.webResponse
-                            )
-                        );
+                        throw DiagnosticUtility.ExceptionUtility
+                            .ThrowHelperError(
+                                HttpChannelUtilities.CreateResponseWebException(
+                                    webException,
+                                    this.webResponse
+                                )
+                            );
                     }
                 }
 
@@ -1226,12 +1245,13 @@ namespace System.ServiceModel.Channels
                     }
                     catch (ObjectDisposedException objectDisposedException)
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new CommunicationException(
-                                objectDisposedException.Message,
-                                objectDisposedException
-                            )
-                        );
+                        throw DiagnosticUtility.ExceptionUtility
+                            .ThrowHelperError(
+                                new CommunicationException(
+                                    objectDisposedException.Message,
+                                    objectDisposedException
+                                )
+                            );
                     }
                     catch (IOException ioException)
                     {
@@ -1239,12 +1259,13 @@ namespace System.ServiceModel.Channels
                     }
                     catch (WebException webException)
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            HttpChannelUtilities.CreateResponseWebException(
-                                webException,
-                                this.webResponse
-                            )
-                        );
+                        throw DiagnosticUtility.ExceptionUtility
+                            .ThrowHelperError(
+                                HttpChannelUtilities.CreateResponseWebException(
+                                    webException,
+                                    this.webResponse
+                                )
+                            );
                     }
                 }
 
@@ -1256,12 +1277,13 @@ namespace System.ServiceModel.Channels
                     }
                     catch (ObjectDisposedException objectDisposedException)
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new CommunicationException(
-                                objectDisposedException.Message,
-                                objectDisposedException
-                            )
-                        );
+                        throw DiagnosticUtility.ExceptionUtility
+                            .ThrowHelperError(
+                                new CommunicationException(
+                                    objectDisposedException.Message,
+                                    objectDisposedException
+                                )
+                            );
                     }
                     catch (IOException ioException)
                     {
@@ -1269,12 +1291,13 @@ namespace System.ServiceModel.Channels
                     }
                     catch (WebException webException)
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            HttpChannelUtilities.CreateResponseWebException(
-                                webException,
-                                this.webResponse
-                            )
-                        );
+                        throw DiagnosticUtility.ExceptionUtility
+                            .ThrowHelperError(
+                                HttpChannelUtilities.CreateResponseWebException(
+                                    webException,
+                                    this.webResponse
+                                )
+                            );
                     }
                 }
 
@@ -1284,9 +1307,10 @@ namespace System.ServiceModel.Channels
                         ? TimeoutHelper.FromMilliseconds(this.ReadTimeout)
                         : TimeSpan.MaxValue;
 
-                    return DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        HttpChannelUtilities.CreateResponseIOException(ioException, timeSpan)
-                    );
+                    return DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperError(
+                            HttpChannelUtilities.CreateResponseIOException(ioException, timeSpan)
+                        );
                 }
             }
         }
@@ -1507,10 +1531,8 @@ namespace System.ServiceModel.Channels
             {
                 if (MessageLogger.LogMessagesAtTransportLevel)
                 {
-                    message.Properties.Add(
-                        AddressingProperty.Name,
-                        new AddressingProperty(message.Headers)
-                    );
+                    message.Properties
+                        .Add(AddressingProperty.Name, new AddressingProperty(message.Headers));
                 }
 
                 message.Headers.Action = null;
@@ -1530,11 +1552,12 @@ namespace System.ServiceModel.Channels
                 responseProperty.Headers.Remove(HttpResponseHeader.ContentType);
                 if (!messageEncoder.IsContentTypeSupported(contentType))
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ProtocolException(
-                            SR.GetString(SR.ResponseContentTypeNotSupported, contentType)
-                        )
-                    );
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperError(
+                            new ProtocolException(
+                                SR.GetString(SR.ResponseContentTypeNotSupported, contentType)
+                            )
+                        );
                 }
             }
 
@@ -1549,10 +1572,8 @@ namespace System.ServiceModel.Channels
                 {
                     contentType = mtomMessageEncoder.GetContentType(out this.mtomBoundary);
                     // For MTOM messages, add a MIME version header
-                    httpResponseMessage.Headers.Add(
-                        HttpChannelUtilities.MIMEVersionHeader,
-                        DefaultMimeVersion
-                    );
+                    httpResponseMessage.Headers
+                        .Add(HttpChannelUtilities.MIMEVersionHeader, DefaultMimeVersion);
                 }
             }
 
@@ -1582,10 +1603,11 @@ namespace System.ServiceModel.Channels
                 MediaTypeHeaderValue mediaTypeHeaderValue;
                 if (!MediaTypeHeaderValue.TryParse(contentType, out mediaTypeHeaderValue))
                 {
-                    throw FxTrace.Exception.Argument(
-                        "contentType",
-                        SR.GetString(SR.InvalidContentTypeError, contentType)
-                    );
+                    throw FxTrace.Exception
+                        .Argument(
+                            "contentType",
+                            SR.GetString(SR.InvalidContentTypeError, contentType)
+                        );
                 }
                 httpResponseMessage.Content.Headers.ContentType = mediaTypeHeaderValue;
             }
@@ -1675,10 +1697,8 @@ namespace System.ServiceModel.Channels
             {
                 if (MessageLogger.LogMessagesAtTransportLevel)
                 {
-                    message.Properties.Add(
-                        AddressingProperty.Name,
-                        new AddressingProperty(message.Headers)
-                    );
+                    message.Properties
+                        .Add(AddressingProperty.Name, new AddressingProperty(message.Headers));
                 }
 
                 message.Headers.Action = null;
@@ -1703,11 +1723,15 @@ namespace System.ServiceModel.Channels
                         contentType = responseProperty.Headers[HttpResponseHeader.ContentType];
                         if (!messageEncoder.IsContentTypeSupported(contentType))
                         {
-                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                                new ProtocolException(
-                                    SR.GetString(SR.ResponseContentTypeNotSupported, contentType)
-                                )
-                            );
+                            throw DiagnosticUtility.ExceptionUtility
+                                .ThrowHelperError(
+                                    new ProtocolException(
+                                        SR.GetString(
+                                            SR.ResponseContentTypeNotSupported,
+                                            contentType
+                                        )
+                                    )
+                                );
                         }
                     }
                 }
@@ -1762,19 +1786,21 @@ namespace System.ServiceModel.Channels
 
                 HttpRequestMessageProperty httpProperties;
                 if (
-                    !message.Properties.TryGetValue<HttpRequestMessageProperty>(
-                        HttpRequestMessageProperty.Name,
-                        out httpProperties
-                    )
+                    !message.Properties
+                        .TryGetValue<HttpRequestMessageProperty>(
+                            HttpRequestMessageProperty.Name,
+                            out httpProperties
+                        )
                 )
                 {
                     httpProperties = new HttpRequestMessageProperty();
                     message.Properties.Add(HttpRequestMessageProperty.Name, httpProperties);
                 }
-                httpProperties.Headers.Add(
-                    EventTraceActivity.Name,
-                    Convert.ToBase64String(eventTraceActivity.ActivityId.ToByteArray())
-                );
+                httpProperties.Headers
+                    .Add(
+                        EventTraceActivity.Name,
+                        Convert.ToBase64String(eventTraceActivity.ActivityId.ToByteArray())
+                    );
             }
         }
 
@@ -2033,12 +2059,13 @@ namespace System.ServiceModel.Channels
                             httpOutput.messageEncoder as MtomMessageEncoder;
                         if (mtomMessageEncoder == null)
                         {
-                            result = httpOutput.messageEncoder.BeginWriteMessage(
-                                httpOutput.message,
-                                httpOutput.outputStream,
-                                onWriteStreamedMessage,
-                                this
-                            );
+                            result = httpOutput.messageEncoder
+                                .BeginWriteMessage(
+                                    httpOutput.message,
+                                    httpOutput.outputStream,
+                                    onWriteStreamedMessage,
+                                    this
+                                );
                         }
                         else
                         {
@@ -2086,8 +2113,9 @@ namespace System.ServiceModel.Channels
                         }
                         else
                         {
-                            result = this
-                                .httpResponseMessage.Content.CopyToAsync(httpOutput.outputStream)
+                            result = this.httpResponseMessage
+                                .Content
+                                .CopyToAsync(httpOutput.outputStream)
                                 .AsAsyncResult(onWriteStreamedMessage, this);
                         }
 
@@ -2287,14 +2315,13 @@ namespace System.ServiceModel.Channels
                 else
                 {
                     if (
-                        !httpResponseMessage
-                            .Content.CopyToAsync(this.outputStream)
+                        !httpResponseMessage.Content
+                            .CopyToAsync(this.outputStream)
                             .Wait<CommunicationException>(timeout)
                     )
                     {
-                        throw FxTrace.Exception.AsError(
-                            new TimeoutException(SR.GetString(SR.TimeoutOnSend, timeout))
-                        );
+                        throw FxTrace.Exception
+                            .AsError(new TimeoutException(SR.GetString(SR.TimeoutOnSend, timeout)));
                     }
                 }
             }
@@ -2601,13 +2628,8 @@ namespace System.ServiceModel.Channels
                         onWriteBody = Fx.ThunkCallback(new AsyncCallback(OnWriteBody));
                     }
 
-                    IAsyncResult writeResult = httpOutput.outputStream.BeginWrite(
-                        buffer.Array,
-                        buffer.Offset,
-                        buffer.Count,
-                        onWriteBody,
-                        this
-                    );
+                    IAsyncResult writeResult = httpOutput.outputStream
+                        .BeginWrite(buffer.Array, buffer.Offset, buffer.Count, onWriteBody, this);
 
                     if (!writeResult.CompletedSynchronously)
                     {
@@ -2716,9 +2738,8 @@ namespace System.ServiceModel.Channels
                         && thisPtr.httpOutput.IsChannelBindingSupportEnabled
                     )
                     {
-                        thisPtr.buffer = thisPtr.httpOutput.SerializeBufferedMessage(
-                            thisPtr.httpOutput.message
-                        );
+                        thisPtr.buffer = thisPtr.httpOutput
+                            .SerializeBufferedMessage(thisPtr.httpOutput.message);
                         thisPtr.httpOutput.SetContentLength(thisPtr.buffer.Count);
                     }
 
@@ -2872,10 +2893,9 @@ namespace System.ServiceModel.Channels
 
             protected override void SetContentEncoding(string contentEncoding)
             {
-                this.httpWebRequest.Headers.Add(
-                    HttpChannelUtilities.ContentEncodingHeader,
-                    contentEncoding
-                );
+                this.httpWebRequest
+                    .Headers
+                    .Add(HttpChannelUtilities.ContentEncodingHeader, contentEncoding);
             }
 
             protected override void SetContentLength(int contentLength)
@@ -2949,13 +2969,14 @@ namespace System.ServiceModel.Channels
                 }
                 catch (WebException webException)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        HttpChannelUtilities.CreateRequestWebException(
-                            webException,
-                            httpWebRequest,
-                            abortReason
-                        )
-                    );
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperError(
+                            HttpChannelUtilities.CreateRequestWebException(
+                                webException,
+                                httpWebRequest,
+                                abortReason
+                            )
+                        );
                 }
             }
 
@@ -3047,11 +3068,16 @@ namespace System.ServiceModel.Channels
                                     && string.Compare(value, action, StringComparison.Ordinal) != 0
                                 )
                                 {
-                                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                                        new ProtocolException(
-                                            SR.GetString(SR.HttpSoapActionMismatch, action, value)
-                                        )
-                                    );
+                                    throw DiagnosticUtility.ExceptionUtility
+                                        .ThrowHelperError(
+                                            new ProtocolException(
+                                                SR.GetString(
+                                                    SR.HttpSoapActionMismatch,
+                                                    action,
+                                                    value
+                                                )
+                                            )
+                                        );
                                 }
                             }
                         }
@@ -3154,11 +3180,12 @@ namespace System.ServiceModel.Channels
                             }
                             else
                             {
-                                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                                    new ProtocolException(
-                                        SR.GetString(SR.HttpIfModifiedSinceParseError, value)
-                                    )
-                                );
+                                throw DiagnosticUtility.ExceptionUtility
+                                    .ThrowHelperError(
+                                        new ProtocolException(
+                                            SR.GetString(SR.HttpIfModifiedSinceParseError, value)
+                                        )
+                                    );
                             }
                         }
                         else if (
@@ -3205,8 +3232,8 @@ namespace System.ServiceModel.Channels
                             {
                                 if (
                                     httpWebRequest.ContentType.Contains("action")
-                                    || httpWebRequest
-                                        .ContentType.ToUpperInvariant()
+                                    || httpWebRequest.ContentType
+                                        .ToUpperInvariant()
                                         .IndexOf("ACTION", StringComparison.OrdinalIgnoreCase) != -1
                                 )
                                 {
@@ -3230,31 +3257,33 @@ namespace System.ServiceModel.Channels
                                                 ) != 0
                                             )
                                             {
-                                                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                                                    new ProtocolException(
-                                                        SR.GetString(
-                                                            SR.HttpSoapActionMismatchContentType,
-                                                            action,
-                                                            value
+                                                throw DiagnosticUtility.ExceptionUtility
+                                                    .ThrowHelperError(
+                                                        new ProtocolException(
+                                                            SR.GetString(
+                                                                SR.HttpSoapActionMismatchContentType,
+                                                                action,
+                                                                value
+                                                            )
                                                         )
-                                                    )
-                                                );
+                                                    );
                                             }
                                             shouldSetContentType = false;
                                         }
                                     }
                                     catch (FormatException formatException)
                                     {
-                                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                                            new ProtocolException(
-                                                SR.GetString(
-                                                    SR.HttpContentTypeFormatException,
-                                                    formatException.Message,
-                                                    httpWebRequest.ContentType
-                                                ),
-                                                formatException
-                                            )
-                                        );
+                                        throw DiagnosticUtility.ExceptionUtility
+                                            .ThrowHelperError(
+                                                new ProtocolException(
+                                                    SR.GetString(
+                                                        SR.HttpContentTypeFormatException,
+                                                        formatException.Message,
+                                                        httpWebRequest.ContentType
+                                                    ),
+                                                    formatException
+                                                )
+                                            );
                                     }
                                 }
                             }
@@ -3272,14 +3301,15 @@ namespace System.ServiceModel.Channels
                     }
                     else if (message.Version.Envelope != EnvelopeVersion.None)
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new ProtocolException(
-                                SR.GetString(
-                                    SR.EnvelopeVersionUnknown,
-                                    message.Version.Envelope.ToString()
+                        throw DiagnosticUtility.ExceptionUtility
+                            .ThrowHelperError(
+                                new ProtocolException(
+                                    SR.GetString(
+                                        SR.EnvelopeVersionUnknown,
+                                        message.Version.Envelope.ToString()
+                                    )
                                 )
-                            )
-                        );
+                            );
                     }
                 }
 
@@ -3336,13 +3366,14 @@ namespace System.ServiceModel.Channels
                     }
                     catch (WebException webException)
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            HttpChannelUtilities.CreateRequestWebException(
-                                webException,
-                                httpWebRequest,
-                                httpOutput.abortReason
-                            )
-                        );
+                        throw DiagnosticUtility.ExceptionUtility
+                            .ThrowHelperError(
+                                HttpChannelUtilities.CreateRequestWebException(
+                                    webException,
+                                    httpWebRequest,
+                                    httpOutput.abortReason
+                                )
+                            );
                     }
 
                     if (result.CompletedSynchronously)
@@ -3366,13 +3397,14 @@ namespace System.ServiceModel.Channels
                     }
                     catch (WebException webException)
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            HttpChannelUtilities.CreateRequestWebException(
-                                webException,
-                                httpWebRequest,
-                                httpOutput.abortReason
-                            )
-                        );
+                        throw DiagnosticUtility.ExceptionUtility
+                            .ThrowHelperError(
+                                HttpChannelUtilities.CreateRequestWebException(
+                                    webException,
+                                    httpWebRequest,
+                                    httpOutput.abortReason
+                                )
+                            );
                     }
                 }
 
@@ -3438,32 +3470,35 @@ namespace System.ServiceModel.Channels
                     }
                     catch (ObjectDisposedException objectDisposedException)
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            HttpChannelUtilities.CreateRequestCanceledException(
-                                objectDisposedException,
-                                httpWebRequest,
-                                httpOutput.abortReason
-                            )
-                        );
+                        throw DiagnosticUtility.ExceptionUtility
+                            .ThrowHelperError(
+                                HttpChannelUtilities.CreateRequestCanceledException(
+                                    objectDisposedException,
+                                    httpWebRequest,
+                                    httpOutput.abortReason
+                                )
+                            );
                     }
                     catch (IOException ioException)
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            HttpChannelUtilities.CreateRequestIOException(
-                                ioException,
-                                httpWebRequest
-                            )
-                        );
+                        throw DiagnosticUtility.ExceptionUtility
+                            .ThrowHelperError(
+                                HttpChannelUtilities.CreateRequestIOException(
+                                    ioException,
+                                    httpWebRequest
+                                )
+                            );
                     }
                     catch (WebException webException)
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            HttpChannelUtilities.CreateRequestWebException(
-                                webException,
-                                httpWebRequest,
-                                httpOutput.abortReason
-                            )
-                        );
+                        throw DiagnosticUtility.ExceptionUtility
+                            .ThrowHelperError(
+                                HttpChannelUtilities.CreateRequestWebException(
+                                    webException,
+                                    httpWebRequest,
+                                    httpOutput.abortReason
+                                )
+                            );
                     }
                 }
 
@@ -3472,9 +3507,10 @@ namespace System.ServiceModel.Channels
                     get { return bytesSent; }
                     set
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new NotSupportedException(SR.GetString(SR.SeekNotSupported))
-                        );
+                        throw DiagnosticUtility.ExceptionUtility
+                            .ThrowHelperError(
+                                new NotSupportedException(SR.GetString(SR.SeekNotSupported))
+                            );
                     }
                 }
 
@@ -3493,32 +3529,35 @@ namespace System.ServiceModel.Channels
                     }
                     catch (ObjectDisposedException objectDisposedException)
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            HttpChannelUtilities.CreateRequestCanceledException(
-                                objectDisposedException,
-                                httpWebRequest,
-                                httpOutput.abortReason
-                            )
-                        );
+                        throw DiagnosticUtility.ExceptionUtility
+                            .ThrowHelperError(
+                                HttpChannelUtilities.CreateRequestCanceledException(
+                                    objectDisposedException,
+                                    httpWebRequest,
+                                    httpOutput.abortReason
+                                )
+                            );
                     }
                     catch (IOException ioException)
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            HttpChannelUtilities.CreateRequestIOException(
-                                ioException,
-                                httpWebRequest
-                            )
-                        );
+                        throw DiagnosticUtility.ExceptionUtility
+                            .ThrowHelperError(
+                                HttpChannelUtilities.CreateRequestIOException(
+                                    ioException,
+                                    httpWebRequest
+                                )
+                            );
                     }
                     catch (WebException webException)
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            HttpChannelUtilities.CreateRequestWebException(
-                                webException,
-                                httpWebRequest,
-                                httpOutput.abortReason
-                            )
-                        );
+                        throw DiagnosticUtility.ExceptionUtility
+                            .ThrowHelperError(
+                                HttpChannelUtilities.CreateRequestWebException(
+                                    webException,
+                                    httpWebRequest,
+                                    httpOutput.abortReason
+                                )
+                            );
                     }
                 }
 
@@ -3530,32 +3569,35 @@ namespace System.ServiceModel.Channels
                     }
                     catch (ObjectDisposedException objectDisposedException)
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            HttpChannelUtilities.CreateRequestCanceledException(
-                                objectDisposedException,
-                                httpWebRequest,
-                                httpOutput.abortReason
-                            )
-                        );
+                        throw DiagnosticUtility.ExceptionUtility
+                            .ThrowHelperError(
+                                HttpChannelUtilities.CreateRequestCanceledException(
+                                    objectDisposedException,
+                                    httpWebRequest,
+                                    httpOutput.abortReason
+                                )
+                            );
                     }
                     catch (IOException ioException)
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            HttpChannelUtilities.CreateRequestIOException(
-                                ioException,
-                                httpWebRequest
-                            )
-                        );
+                        throw DiagnosticUtility.ExceptionUtility
+                            .ThrowHelperError(
+                                HttpChannelUtilities.CreateRequestIOException(
+                                    ioException,
+                                    httpWebRequest
+                                )
+                            );
                     }
                     catch (WebException webException)
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            HttpChannelUtilities.CreateRequestWebException(
-                                webException,
-                                httpWebRequest,
-                                httpOutput.abortReason
-                            )
-                        );
+                        throw DiagnosticUtility.ExceptionUtility
+                            .ThrowHelperError(
+                                HttpChannelUtilities.CreateRequestWebException(
+                                    webException,
+                                    httpWebRequest,
+                                    httpOutput.abortReason
+                                )
+                            );
                     }
                 }
 
@@ -3567,32 +3609,35 @@ namespace System.ServiceModel.Channels
                     }
                     catch (ObjectDisposedException objectDisposedException)
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            HttpChannelUtilities.CreateRequestCanceledException(
-                                objectDisposedException,
-                                httpWebRequest,
-                                httpOutput.abortReason
-                            )
-                        );
+                        throw DiagnosticUtility.ExceptionUtility
+                            .ThrowHelperError(
+                                HttpChannelUtilities.CreateRequestCanceledException(
+                                    objectDisposedException,
+                                    httpWebRequest,
+                                    httpOutput.abortReason
+                                )
+                            );
                     }
                     catch (IOException ioException)
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            HttpChannelUtilities.CreateRequestIOException(
-                                ioException,
-                                httpWebRequest
-                            )
-                        );
+                        throw DiagnosticUtility.ExceptionUtility
+                            .ThrowHelperError(
+                                HttpChannelUtilities.CreateRequestIOException(
+                                    ioException,
+                                    httpWebRequest
+                                )
+                            );
                     }
                     catch (WebException webException)
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            HttpChannelUtilities.CreateRequestWebException(
-                                webException,
-                                httpWebRequest,
-                                httpOutput.abortReason
-                            )
-                        );
+                        throw DiagnosticUtility.ExceptionUtility
+                            .ThrowHelperError(
+                                HttpChannelUtilities.CreateRequestWebException(
+                                    webException,
+                                    httpWebRequest,
+                                    httpOutput.abortReason
+                                )
+                            );
                     }
                     this.bytesSent += count;
                 }
@@ -3669,11 +3714,8 @@ namespace System.ServiceModel.Channels
                     }
                 }
 
-                HttpResponseMessageProperty responseProperty =
-                    message.Properties.GetValue<HttpResponseMessageProperty>(
-                        HttpResponseMessageProperty.Name,
-                        true
-                    );
+                HttpResponseMessageProperty responseProperty = message.Properties
+                    .GetValue<HttpResponseMessageProperty>(HttpResponseMessageProperty.Name, true);
                 bool httpResponseMessagePropertyFound = responseProperty != null;
                 bool httpMethodIsHead =
                     string.Compare(this.httpMethod, "HEAD", StringComparison.OrdinalIgnoreCase)
@@ -3790,10 +3832,8 @@ namespace System.ServiceModel.Channels
 
             protected override void SetContentEncoding(string contentEncoding)
             {
-                this.listenerResponse.AddHeader(
-                    HttpChannelUtilities.ContentEncodingHeader,
-                    contentEncoding
-                );
+                this.listenerResponse
+                    .AddHeader(HttpChannelUtilities.ContentEncodingHeader, contentEncoding);
             }
 
             protected override void SetContentLength(int contentLength)
@@ -3829,9 +3869,10 @@ namespace System.ServiceModel.Channels
                     }
                     catch (HttpListenerException listenerException)
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            HttpChannelUtilities.CreateCommunicationException(listenerException)
-                        );
+                        throw DiagnosticUtility.ExceptionUtility
+                            .ThrowHelperError(
+                                HttpChannelUtilities.CreateCommunicationException(listenerException)
+                            );
                     }
                 }
 
@@ -3849,18 +3890,20 @@ namespace System.ServiceModel.Channels
                     }
                     catch (HttpListenerException listenerException)
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            HttpChannelUtilities.CreateCommunicationException(listenerException)
-                        );
+                        throw DiagnosticUtility.ExceptionUtility
+                            .ThrowHelperError(
+                                HttpChannelUtilities.CreateCommunicationException(listenerException)
+                            );
                     }
                     catch (ApplicationException applicationException)
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new CommunicationObjectAbortedException(
-                                SR.GetString(SR.HttpResponseAborted),
-                                applicationException
-                            )
-                        );
+                        throw DiagnosticUtility.ExceptionUtility
+                            .ThrowHelperError(
+                                new CommunicationObjectAbortedException(
+                                    SR.GetString(SR.HttpResponseAborted),
+                                    applicationException
+                                )
+                            );
                     }
                 }
 
@@ -3872,18 +3915,20 @@ namespace System.ServiceModel.Channels
                     }
                     catch (HttpListenerException listenerException)
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            HttpChannelUtilities.CreateCommunicationException(listenerException)
-                        );
+                        throw DiagnosticUtility.ExceptionUtility
+                            .ThrowHelperError(
+                                HttpChannelUtilities.CreateCommunicationException(listenerException)
+                            );
                     }
                     catch (ApplicationException applicationException)
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new CommunicationObjectAbortedException(
-                                SR.GetString(SR.HttpResponseAborted),
-                                applicationException
-                            )
-                        );
+                        throw DiagnosticUtility.ExceptionUtility
+                            .ThrowHelperError(
+                                new CommunicationObjectAbortedException(
+                                    SR.GetString(SR.HttpResponseAborted),
+                                    applicationException
+                                )
+                            );
                     }
                 }
 
@@ -3895,18 +3940,20 @@ namespace System.ServiceModel.Channels
                     }
                     catch (HttpListenerException listenerException)
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            HttpChannelUtilities.CreateCommunicationException(listenerException)
-                        );
+                        throw DiagnosticUtility.ExceptionUtility
+                            .ThrowHelperError(
+                                HttpChannelUtilities.CreateCommunicationException(listenerException)
+                            );
                     }
                     catch (ApplicationException applicationException)
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new CommunicationObjectAbortedException(
-                                SR.GetString(SR.HttpResponseAborted),
-                                applicationException
-                            )
-                        );
+                        throw DiagnosticUtility.ExceptionUtility
+                            .ThrowHelperError(
+                                new CommunicationObjectAbortedException(
+                                    SR.GetString(SR.HttpResponseAborted),
+                                    applicationException
+                                )
+                            );
                     }
                 }
             }
@@ -4057,9 +4104,8 @@ namespace System.ServiceModel.Channels
             }
             else if (task.IsCanceled)
             {
-                throw FxTrace.Exception.AsError(
-                    new TimeoutException(SR.GetString(SR.TaskCancelledError))
-                );
+                throw FxTrace.Exception
+                    .AsError(new TimeoutException(SR.GetString(SR.TaskCancelledError)));
             }
         }
 
@@ -4073,11 +4119,12 @@ namespace System.ServiceModel.Channels
             int millisecondsTimeout = TimeoutHelper.ToMilliseconds(timeout);
             if (millisecondsTimeout == 0)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new TimeoutException(
-                        SR.GetString(SR.HttpRequestTimedOut, request.RequestUri, timeout)
-                    )
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        new TimeoutException(
+                            SR.GetString(SR.HttpRequestTimedOut, request.RequestUri, timeout)
+                        )
+                    );
             }
             request.Timeout = millisecondsTimeout;
             request.ReadWriteTimeout = millisecondsTimeout;
@@ -4323,9 +4370,12 @@ namespace System.ServiceModel.Channels
                     );
                     if (authenticationLevel == AuthenticationLevel.MutualAuthRequired)
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new InvalidOperationException(SR.GetString(SR.CredentialDisallowsNtlm))
-                        );
+                        throw DiagnosticUtility.ExceptionUtility
+                            .ThrowHelperError(
+                                new InvalidOperationException(
+                                    SR.GetString(SR.CredentialDisallowsNtlm)
+                                )
+                            );
                     }
                     break;
 
@@ -4366,29 +4416,32 @@ namespace System.ServiceModel.Channels
                     throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(convertedException);
                 }
 
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new CommunicationException(webException.Message, webException)
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        new CommunicationException(webException.Message, webException)
+                    );
             }
 
             if (response.StatusCode == HttpStatusCode.NotFound)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new EndpointNotFoundException(
-                        SR.GetString(SR.EndpointNotFound, request.RequestUri.AbsoluteUri),
-                        webException
-                    )
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        new EndpointNotFoundException(
+                            SR.GetString(SR.EndpointNotFound, request.RequestUri.AbsoluteUri),
+                            webException
+                        )
+                    );
             }
 
             if (response.StatusCode == HttpStatusCode.ServiceUnavailable)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ServerTooBusyException(
-                        SR.GetString(SR.HttpServerTooBusy, request.RequestUri.AbsoluteUri),
-                        webException
-                    )
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        new ServerTooBusyException(
+                            SR.GetString(SR.HttpServerTooBusy, request.RequestUri.AbsoluteUri),
+                            webException
+                        )
+                    );
             }
 
             if (response.StatusCode == HttpStatusCode.UnsupportedMediaType)
@@ -4404,31 +4457,32 @@ namespace System.ServiceModel.Channels
                         ) == 0
                     )
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new ProtocolException(
-                                SR.GetString(SR.MissingContentType, request.RequestUri),
-                                webException
-                            )
-                        );
+                        throw DiagnosticUtility.ExceptionUtility
+                            .ThrowHelperError(
+                                new ProtocolException(
+                                    SR.GetString(SR.MissingContentType, request.RequestUri),
+                                    webException
+                                )
+                            );
                     }
                 }
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ProtocolException(
-                        SR.GetString(
-                            SR.FramingContentTypeMismatch,
-                            request.ContentType,
-                            request.RequestUri
-                        ),
-                        webException
-                    )
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        new ProtocolException(
+                            SR.GetString(
+                                SR.FramingContentTypeMismatch,
+                                request.ContentType,
+                                request.RequestUri
+                            ),
+                            webException
+                        )
+                    );
             }
 
             if (response.StatusCode == HttpStatusCode.GatewayTimeout)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new TimeoutException(webException.Message, webException)
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(new TimeoutException(webException.Message, webException));
             }
 
             // if http.sys has a request queue on the TCP port, then if the path fails to match it will send
@@ -4464,12 +4518,16 @@ namespace System.ServiceModel.Channels
                         && notFoundTestString == UTF8Encoding.ASCII.GetString(responseBytes)
                     )
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new EndpointNotFoundException(
-                                SR.GetString(SR.EndpointNotFound, request.RequestUri.AbsoluteUri),
-                                webException
-                            )
-                        );
+                        throw DiagnosticUtility.ExceptionUtility
+                            .ThrowHelperError(
+                                new EndpointNotFoundException(
+                                    SR.GetString(
+                                        SR.EndpointNotFound,
+                                        request.RequestUri.AbsoluteUri
+                                    ),
+                                    webException
+                                )
+                            );
                     }
                 }
             }
@@ -4529,8 +4587,7 @@ namespace System.ServiceModel.Channels
                         response.StatusCode == HttpStatusCode.InternalServerError
                         && string.Compare(
                             response.StatusDescription,
-                            HttpChannelUtilities
-                                .StatusDescriptionStrings
+                            HttpChannelUtilities.StatusDescriptionStrings
                                 .HttpStatusServiceActivationException,
                             StringComparison.OrdinalIgnoreCase
                         ) == 0
@@ -4757,9 +4814,8 @@ namespace System.ServiceModel.Channels
                 bufferSize = ResponseStreamExcerptSize;
             }
 
-            byte[] responseBuffer = DiagnosticUtility.Utility.AllocateByteArray(
-                checked((int)bufferSize)
-            );
+            byte[] responseBuffer = DiagnosticUtility.Utility
+                .AllocateByteArray(checked((int)bufferSize));
             bytesRead = responseStream.Read(responseBuffer, 0, (int)bufferSize);
             responseStream.Close();
 
@@ -4814,9 +4870,12 @@ namespace System.ServiceModel.Channels
                     factory.AuthenticationScheme,
                     response.Headers[HttpResponseHeader.WwwAuthenticate]
                 );
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    TraceResponseException(new MessageSecurityException(message, responseException))
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        TraceResponseException(
+                            new MessageSecurityException(message, responseException)
+                        )
+                    );
             }
 
             if (response.StatusCode == HttpStatusCode.Forbidden)
@@ -4825,9 +4884,12 @@ namespace System.ServiceModel.Channels
                     SR.HttpAuthorizationForbidden,
                     factory.AuthenticationScheme
                 );
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    TraceResponseException(new MessageSecurityException(message, responseException))
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        TraceResponseException(
+                            new MessageSecurityException(message, responseException)
+                        )
+                    );
             }
 
             if (
@@ -4835,14 +4897,15 @@ namespace System.ServiceModel.Channels
                 && !response.IsMutuallyAuthenticated
             )
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    TraceResponseException(
-                        new SecurityNegotiationException(
-                            SR.GetString(SR.HttpMutualAuthNotSatisfied),
-                            responseException
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        TraceResponseException(
+                            new SecurityNegotiationException(
+                                SR.GetString(SR.HttpMutualAuthNotSatisfied),
+                                responseException
+                            )
                         )
-                    )
-                );
+                    );
             }
         }
 
@@ -4864,14 +4927,15 @@ namespace System.ServiceModel.Channels
                     )
                 )
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(
-                            SR.GetString(
-                                SR.DigestExplicitCredsImpersonationLevel,
-                                impersonationLevel
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(
+                                SR.GetString(
+                                    SR.DigestExplicitCredsImpersonationLevel,
+                                    impersonationLevel
+                                )
                             )
-                        )
-                    );
+                        );
                 }
             }
         }
@@ -4902,18 +4966,18 @@ namespace System.ServiceModel.Channels
                     response.StatusCode == HttpStatusCode.InternalServerError
                     && string.Compare(
                         response.StatusDescription,
-                        HttpChannelUtilities
-                            .StatusDescriptionStrings
+                        HttpChannelUtilities.StatusDescriptionStrings
                             .HttpStatusServiceActivationException,
                         StringComparison.OrdinalIgnoreCase
                     ) == 0
                 )
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ServiceActivationException(
-                            SR.GetString(SR.Hosting_ServiceActivationFailed, request.RequestUri)
-                        )
-                    );
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperError(
+                            new ServiceActivationException(
+                                SR.GetString(SR.Hosting_ServiceActivationFailed, request.RequestUri)
+                            )
+                        );
                 }
                 else
                 {
@@ -4924,14 +4988,15 @@ namespace System.ServiceModel.Channels
                         {
                             if (!ValidateEmptyContent(response))
                             {
-                                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                                    TraceResponseException(
-                                        new ProtocolException(
-                                            SR.GetString(SR.HttpContentTypeHeaderRequired),
-                                            responseException
+                                throw DiagnosticUtility.ExceptionUtility
+                                    .ThrowHelperError(
+                                        TraceResponseException(
+                                            new ProtocolException(
+                                                SR.GetString(SR.HttpContentTypeHeaderRequired),
+                                                responseException
+                                            )
                                         )
-                                    )
-                                );
+                                    );
                             }
                         }
                         else if (response.ContentLength != 0)
@@ -4945,20 +5010,21 @@ namespace System.ServiceModel.Channels
                                     out bytesRead
                                 );
 
-                                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                                    TraceResponseException(
-                                        new ProtocolException(
-                                            SR.GetString(
-                                                SR.ResponseContentTypeMismatch,
-                                                response.ContentType,
-                                                encoder.ContentType,
-                                                bytesRead,
-                                                responseExcerpt
-                                            ),
-                                            responseException
+                                throw DiagnosticUtility.ExceptionUtility
+                                    .ThrowHelperError(
+                                        TraceResponseException(
+                                            new ProtocolException(
+                                                SR.GetString(
+                                                    SR.ResponseContentTypeMismatch,
+                                                    response.ContentType,
+                                                    encoder.ContentType,
+                                                    bytesRead,
+                                                    responseExcerpt
+                                                ),
+                                                responseException
+                                            )
                                         )
-                                    )
-                                );
+                                    );
                             }
 
                             httpInput = HttpInput.CreateHttpInput(
@@ -5001,9 +5067,10 @@ namespace System.ServiceModel.Channels
             }
             else
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    CreateUnexpectedResponseException(responseException, response)
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        CreateUnexpectedResponseException(responseException, response)
+                    );
             }
 
             return httpInput;
@@ -5129,9 +5196,8 @@ namespace System.ServiceModel.Channels
             get { return bytesSent; }
             set
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new NotSupportedException(SR.GetString(SR.SeekNotSupported))
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(new NotSupportedException(SR.GetString(SR.SeekNotSupported)));
             }
         }
 
@@ -5181,24 +5247,26 @@ namespace System.ServiceModel.Channels
 
                 if (offset >= buffer.Length)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ArgumentOutOfRangeException(
-                            "offset",
-                            offset,
-                            SR.GetString(SR.OffsetExceedsBufferBound, buffer.Length - 1)
-                        )
-                    );
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperError(
+                            new ArgumentOutOfRangeException(
+                                "offset",
+                                offset,
+                                SR.GetString(SR.OffsetExceedsBufferBound, buffer.Length - 1)
+                            )
+                        );
                 }
 
                 if (count < 0)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ArgumentOutOfRangeException(
-                            "count",
-                            count,
-                            SR.GetString(SR.ValueMustBeNonNegative)
-                        )
-                    );
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperError(
+                            new ArgumentOutOfRangeException(
+                                "count",
+                                count,
+                                SR.GetString(SR.ValueMustBeNonNegative)
+                            )
+                        );
                 }
 
                 if (count == 0)

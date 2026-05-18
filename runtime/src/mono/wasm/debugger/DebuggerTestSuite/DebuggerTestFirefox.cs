@@ -482,7 +482,9 @@ public class DebuggerTestFirefox : DebuggerTestBase
                 {
                     to = propertyIterator
                         .Value["result"]["value"]
-                        ?["iterator"]?["actor"].Value<string>()
+                        ?["iterator"]
+                        ?["actor"]
+                        .Value<string>()
                         .Replace("propertyIterator", ""),
                     type = "prototypeAndProperties",
                 }

@@ -30,8 +30,8 @@ public class EntityEntryGraphIterator : IEntityEntryGraphIterator
         }
 
         var internalEntityEntry = node.GetInfrastructure();
-        var navigations = internalEntityEntry
-            .EntityType.GetNavigations()
+        var navigations = internalEntityEntry.EntityType
+            .GetNavigations()
             .Concat<INavigationBase>(internalEntityEntry.EntityType.GetSkipNavigations());
 
         var stateManager = internalEntityEntry.StateManager;
@@ -94,8 +94,8 @@ public class EntityEntryGraphIterator : IEntityEntryGraphIterator
         }
 
         var internalEntityEntry = node.GetInfrastructure();
-        var navigations = internalEntityEntry
-            .EntityType.GetNavigations()
+        var navigations = internalEntityEntry.EntityType
+            .GetNavigations()
             .Concat<INavigationBase>(internalEntityEntry.EntityType.GetSkipNavigations());
         var stateManager = internalEntityEntry.StateManager;
 

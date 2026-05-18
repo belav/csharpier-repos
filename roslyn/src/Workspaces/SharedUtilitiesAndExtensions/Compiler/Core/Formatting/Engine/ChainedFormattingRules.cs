@@ -176,7 +176,8 @@ namespace Microsoft.CodeAnalysis.Formatting
             return s_typeImplementingMethod.GetOrAdd(
                 (obj.GetType(), name),
                 key =>
-                    key.type.GetRuntimeMethods()
+                    key.type
+                        .GetRuntimeMethods()
                         .FirstOrDefault(method => method.Name == key.name)
                         ?.DeclaringType
             );

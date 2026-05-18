@@ -555,20 +555,22 @@ namespace System.Threading.Tasks.Tests
             {
                 throw new Exception("uh oh");
             });
-            var twa2 = Task.Factory.StartNew(() =>
-            {
-                throw new Exception("uh oh");
-            });
+            var twa2 = Task.Factory
+                .StartNew(() =>
+                {
+                    throw new Exception("uh oh");
+                });
             var tasks = new Task[]
             {
                 Task.Run(() =>
                 {
                     throw new Exception("uh oh");
                 }),
-                Task.Factory.StartNew<int>(() =>
-                {
-                    throw new Exception("uh oh");
-                }),
+                Task.Factory
+                    .StartNew<int>(() =>
+                    {
+                        throw new Exception("uh oh");
+                    }),
                 Task.WhenAll(
                     Task.Run(() =>
                     {
@@ -603,20 +605,22 @@ namespace System.Threading.Tasks.Tests
                         )
                     )
                     .Unwrap(),
-                Task
-                    .Factory.StartNew(() =>
-                        Task.Factory.StartNew(() =>
-                        {
-                            throw new Exception("uh oh");
-                        })
+                Task.Factory
+                    .StartNew(() =>
+                        Task.Factory
+                            .StartNew(() =>
+                            {
+                                throw new Exception("uh oh");
+                            })
                     )
                     .Unwrap(),
-                Task
-                    .Factory.StartNew<Task<int>>(() =>
-                        Task.Factory.StartNew<int>(() =>
-                        {
-                            throw new Exception("uh oh");
-                        })
+                Task.Factory
+                    .StartNew<Task<int>>(() =>
+                        Task.Factory
+                            .StartNew<int>(() =>
+                            {
+                                throw new Exception("uh oh");
+                            })
                     )
                     .Unwrap(),
                 Task.Run(() =>
@@ -667,15 +671,16 @@ namespace System.Threading.Tasks.Tests
 
             // A Task that throws an exception to cancel
             var b = new Barrier(2);
-            Task t1 = Task.Factory.StartNew(
-                () =>
-                {
-                    b.SignalAndWait();
-                    b.SignalAndWait();
-                    throw oce;
-                },
-                cts.Token
-            );
+            Task t1 = Task.Factory
+                .StartNew(
+                    () =>
+                    {
+                        b.SignalAndWait();
+                        b.SignalAndWait();
+                        throw oce;
+                    },
+                    cts.Token
+                );
             b.SignalAndWait(); // make sure task is started before we cancel
             cts.Cancel();
             b.SignalAndWait(); // release task to complete

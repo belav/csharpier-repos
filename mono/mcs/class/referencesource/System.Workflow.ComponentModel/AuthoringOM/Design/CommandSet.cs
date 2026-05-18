@@ -75,161 +75,162 @@ namespace System.Workflow.ComponentModel.Design
                 );
 
             this.commandSet = new List<CommandSetItem>();
-            this.commandSet.AddRange(
-                new CommandSetItem[]
-                {
-                    //Save commands
-                    new CommandSetItem(
-                        new EventHandler(OnStatusAlways),
-                        new EventHandler(OnMenuSaveWorkflowAsImage),
-                        WorkflowMenuCommands.SaveAsImage
-                    ),
-                    new CommandSetItem(
-                        new EventHandler(OnStatusAlways),
-                        new EventHandler(OnMenuCopyToClipboard),
-                        WorkflowMenuCommands.CopyToClipboard
-                    ),
-                    // Printing commands
-                    new CommandSetItem(
-                        new EventHandler(OnStatusPrint),
-                        new EventHandler(OnMenuPrint),
-                        WorkflowMenuCommands.Print
-                    ),
-                    new CommandSetItem(
-                        new EventHandler(OnStatusPageSetup),
-                        new EventHandler(OnMenuPageSetup),
-                        WorkflowMenuCommands.PageSetup
-                    ),
-                    // Editing commands
-                    new CommandSetItem(
-                        new EventHandler(OnStatusDelete),
-                        new EventHandler(OnMenuDelete),
-                        MenuCommands.Delete
-                    ),
-                    new CommandSetItem(
-                        new EventHandler(OnStatusCopy),
-                        new EventHandler(OnMenuCopy),
-                        MenuCommands.Copy
-                    ),
-                    new CommandSetItem(
-                        new EventHandler(OnStatusCut),
-                        new EventHandler(OnMenuCut),
-                        MenuCommands.Cut
-                    ),
-                    new CommandSetItem(
-                        new EventHandler(OnStatusPaste),
-                        new EventHandler(OnMenuPaste),
-                        MenuCommands.Paste,
-                        true
-                    ),
-                    new CommandSetItem(
-                        new EventHandler(OnStatusAlways),
-                        new EventHandler(OnMenuSelectAll),
-                        MenuCommands.SelectAll
-                    ),
-                    // Properties
-                    new CommandSetItem(
-                        new EventHandler(OnStatusAlways),
-                        new EventHandler(OnMenuDesignerProperties),
-                        WorkflowMenuCommands.DesignerProperties
-                    ),
-                    // IMPORTANT: Microsoft does not handle this command, so VS.NET sends it to solution explorer
-                    // window, which enables this meu item on the for the current file node
-                    new CommandSetItem(
-                        new EventHandler(OnStatusAlways),
-                        new EventHandler(OnViewCode),
-                        new CommandID(StandardCommands.Cut.Guid, 333)
-                    ),
-                    // Keyboard commands
-                    new CommandSetItem(
-                        new EventHandler(OnStatusAlways),
-                        new EventHandler(OnKeyCancel),
-                        MenuCommands.KeyCancel
-                    ),
-                    new CommandSetItem(
-                        new EventHandler(OnStatusAlways),
-                        new EventHandler(OnKeyCancel),
-                        MenuCommands.KeyReverseCancel
-                    ),
-                    new CommandSetItem(
-                        new EventHandler(OnStatusAlways),
-                        new EventHandler(OnKeyMove),
-                        MenuCommands.KeyMoveUp
-                    ),
-                    new CommandSetItem(
-                        new EventHandler(OnStatusAlways),
-                        new EventHandler(OnKeyMove),
-                        MenuCommands.KeyMoveDown
-                    ),
-                    new CommandSetItem(
-                        new EventHandler(OnStatusAlways),
-                        new EventHandler(OnKeyMove),
-                        MenuCommands.KeyMoveLeft
-                    ),
-                    new CommandSetItem(
-                        new EventHandler(OnStatusAlways),
-                        new EventHandler(OnKeyMove),
-                        MenuCommands.KeyMoveRight
-                    ),
-                    new CommandSetItem(
-                        new EventHandler(OnStatusAlways),
-                        new EventHandler(OnKeyMove),
-                        MenuCommands.KeySelectNext
-                    ),
-                    new CommandSetItem(
-                        new EventHandler(OnStatusAlways),
-                        new EventHandler(OnKeyMove),
-                        MenuCommands.KeySelectPrevious
-                    ),
-                    new CommandSetItem(
-                        new EventHandler(OnStatusExpandCollapse),
-                        new EventHandler(OnExpandCollapse),
-                        WorkflowMenuCommands.Expand
-                    ),
-                    new CommandSetItem(
-                        new EventHandler(OnStatusExpandCollapse),
-                        new EventHandler(OnExpandCollapse),
-                        WorkflowMenuCommands.Collapse
-                    ),
-                    new CommandSetItem(
-                        new EventHandler(OnStatusEnable),
-                        new EventHandler(OnEnable),
-                        WorkflowMenuCommands.Disable,
-                        true
-                    ),
-                    new CommandSetItem(
-                        new EventHandler(OnStatusEnable),
-                        new EventHandler(OnEnable),
-                        WorkflowMenuCommands.Enable,
-                        true
-                    ),
-                    new CommandSetItem(
-                        new EventHandler(OnStatusAlways),
-                        new EventHandler(OnCreateTheme),
-                        WorkflowMenuCommands.CreateTheme
-                    ),
-                    new CommandSetItem(
-                        new EventHandler(OnStatusAlways),
-                        new EventHandler(OnChangeTheme),
-                        WorkflowMenuCommands.ChangeTheme
-                    ),
-                    new CommandSetItem(
-                        new EventHandler(OnStatusAnySelection),
-                        new EventHandler(OnKeyDefault),
-                        MenuCommands.KeyDefaultAction
-                    ),
-                    new CommandSetItem(
-                        new EventHandler(OnStatusAlways),
-                        new EventHandler(OnKeyPageDnUp),
-                        WorkflowMenuCommands.PageUp
-                    ),
-                    new CommandSetItem(
-                        new EventHandler(OnStatusAlways),
-                        new EventHandler(OnKeyPageDnUp),
-                        WorkflowMenuCommands.PageDown
-                    ),
-                }
-            );
+            this.commandSet
+                .AddRange(
+                    new CommandSetItem[]
+                    {
+                        //Save commands
+                        new CommandSetItem(
+                            new EventHandler(OnStatusAlways),
+                            new EventHandler(OnMenuSaveWorkflowAsImage),
+                            WorkflowMenuCommands.SaveAsImage
+                        ),
+                        new CommandSetItem(
+                            new EventHandler(OnStatusAlways),
+                            new EventHandler(OnMenuCopyToClipboard),
+                            WorkflowMenuCommands.CopyToClipboard
+                        ),
+                        // Printing commands
+                        new CommandSetItem(
+                            new EventHandler(OnStatusPrint),
+                            new EventHandler(OnMenuPrint),
+                            WorkflowMenuCommands.Print
+                        ),
+                        new CommandSetItem(
+                            new EventHandler(OnStatusPageSetup),
+                            new EventHandler(OnMenuPageSetup),
+                            WorkflowMenuCommands.PageSetup
+                        ),
+                        // Editing commands
+                        new CommandSetItem(
+                            new EventHandler(OnStatusDelete),
+                            new EventHandler(OnMenuDelete),
+                            MenuCommands.Delete
+                        ),
+                        new CommandSetItem(
+                            new EventHandler(OnStatusCopy),
+                            new EventHandler(OnMenuCopy),
+                            MenuCommands.Copy
+                        ),
+                        new CommandSetItem(
+                            new EventHandler(OnStatusCut),
+                            new EventHandler(OnMenuCut),
+                            MenuCommands.Cut
+                        ),
+                        new CommandSetItem(
+                            new EventHandler(OnStatusPaste),
+                            new EventHandler(OnMenuPaste),
+                            MenuCommands.Paste,
+                            true
+                        ),
+                        new CommandSetItem(
+                            new EventHandler(OnStatusAlways),
+                            new EventHandler(OnMenuSelectAll),
+                            MenuCommands.SelectAll
+                        ),
+                        // Properties
+                        new CommandSetItem(
+                            new EventHandler(OnStatusAlways),
+                            new EventHandler(OnMenuDesignerProperties),
+                            WorkflowMenuCommands.DesignerProperties
+                        ),
+                        // IMPORTANT: Microsoft does not handle this command, so VS.NET sends it to solution explorer
+                        // window, which enables this meu item on the for the current file node
+                        new CommandSetItem(
+                            new EventHandler(OnStatusAlways),
+                            new EventHandler(OnViewCode),
+                            new CommandID(StandardCommands.Cut.Guid, 333)
+                        ),
+                        // Keyboard commands
+                        new CommandSetItem(
+                            new EventHandler(OnStatusAlways),
+                            new EventHandler(OnKeyCancel),
+                            MenuCommands.KeyCancel
+                        ),
+                        new CommandSetItem(
+                            new EventHandler(OnStatusAlways),
+                            new EventHandler(OnKeyCancel),
+                            MenuCommands.KeyReverseCancel
+                        ),
+                        new CommandSetItem(
+                            new EventHandler(OnStatusAlways),
+                            new EventHandler(OnKeyMove),
+                            MenuCommands.KeyMoveUp
+                        ),
+                        new CommandSetItem(
+                            new EventHandler(OnStatusAlways),
+                            new EventHandler(OnKeyMove),
+                            MenuCommands.KeyMoveDown
+                        ),
+                        new CommandSetItem(
+                            new EventHandler(OnStatusAlways),
+                            new EventHandler(OnKeyMove),
+                            MenuCommands.KeyMoveLeft
+                        ),
+                        new CommandSetItem(
+                            new EventHandler(OnStatusAlways),
+                            new EventHandler(OnKeyMove),
+                            MenuCommands.KeyMoveRight
+                        ),
+                        new CommandSetItem(
+                            new EventHandler(OnStatusAlways),
+                            new EventHandler(OnKeyMove),
+                            MenuCommands.KeySelectNext
+                        ),
+                        new CommandSetItem(
+                            new EventHandler(OnStatusAlways),
+                            new EventHandler(OnKeyMove),
+                            MenuCommands.KeySelectPrevious
+                        ),
+                        new CommandSetItem(
+                            new EventHandler(OnStatusExpandCollapse),
+                            new EventHandler(OnExpandCollapse),
+                            WorkflowMenuCommands.Expand
+                        ),
+                        new CommandSetItem(
+                            new EventHandler(OnStatusExpandCollapse),
+                            new EventHandler(OnExpandCollapse),
+                            WorkflowMenuCommands.Collapse
+                        ),
+                        new CommandSetItem(
+                            new EventHandler(OnStatusEnable),
+                            new EventHandler(OnEnable),
+                            WorkflowMenuCommands.Disable,
+                            true
+                        ),
+                        new CommandSetItem(
+                            new EventHandler(OnStatusEnable),
+                            new EventHandler(OnEnable),
+                            WorkflowMenuCommands.Enable,
+                            true
+                        ),
+                        new CommandSetItem(
+                            new EventHandler(OnStatusAlways),
+                            new EventHandler(OnCreateTheme),
+                            WorkflowMenuCommands.CreateTheme
+                        ),
+                        new CommandSetItem(
+                            new EventHandler(OnStatusAlways),
+                            new EventHandler(OnChangeTheme),
+                            WorkflowMenuCommands.ChangeTheme
+                        ),
+                        new CommandSetItem(
+                            new EventHandler(OnStatusAnySelection),
+                            new EventHandler(OnKeyDefault),
+                            MenuCommands.KeyDefaultAction
+                        ),
+                        new CommandSetItem(
+                            new EventHandler(OnStatusAlways),
+                            new EventHandler(OnKeyPageDnUp),
+                            WorkflowMenuCommands.PageUp
+                        ),
+                        new CommandSetItem(
+                            new EventHandler(OnStatusAlways),
+                            new EventHandler(OnKeyPageDnUp),
+                            WorkflowMenuCommands.PageDown
+                        ),
+                    }
+                );
 
             //WorkflowView commands
             this.zoomCommands = new CommandSetItem[]
@@ -611,9 +612,8 @@ namespace System.Workflow.ComponentModel.Design
                                 activity.Site.GetService(typeof(IDesignerHost)) as IDesignerHost;
                             if (
                                 designerHost != null
-                                && this.selectionService.GetComponentSelected(
-                                    designerHost.RootComponent
-                                )
+                                && this.selectionService
+                                    .GetComponentSelected(designerHost.RootComponent)
                             )
                             {
                                 enable = false;
@@ -951,15 +951,13 @@ namespace System.Workflow.ComponentModel.Design
                 }
             }
 
-            MenuCommand expandCommand = this.menuCommandService.FindCommand(
-                WorkflowMenuCommands.Expand
-            );
+            MenuCommand expandCommand = this.menuCommandService
+                .FindCommand(WorkflowMenuCommands.Expand);
             if (expandCommand != null)
                 OnStatusExpandCollapse(expandCommand, EventArgs.Empty);
 
-            MenuCommand collapseCommand = this.menuCommandService.FindCommand(
-                WorkflowMenuCommands.Collapse
-            );
+            MenuCommand collapseCommand = this.menuCommandService
+                .FindCommand(WorkflowMenuCommands.Collapse);
             if (collapseCommand != null)
                 OnStatusExpandCollapse(collapseCommand, EventArgs.Empty);
         }
@@ -1007,15 +1005,13 @@ namespace System.Workflow.ComponentModel.Design
                     ((IDisposable)trans).Dispose();
             }
 
-            MenuCommand commentCommand = this.menuCommandService.FindCommand(
-                WorkflowMenuCommands.Disable
-            );
+            MenuCommand commentCommand = this.menuCommandService
+                .FindCommand(WorkflowMenuCommands.Disable);
             if (commentCommand != null)
                 OnStatusEnable(commentCommand, EventArgs.Empty);
 
-            MenuCommand uncommentCommand = this.menuCommandService.FindCommand(
-                WorkflowMenuCommands.Enable
-            );
+            MenuCommand uncommentCommand = this.menuCommandService
+                .FindCommand(WorkflowMenuCommands.Enable);
             if (uncommentCommand != null)
                 OnStatusEnable(uncommentCommand, EventArgs.Empty);
         }
@@ -1132,10 +1128,11 @@ namespace System.Workflow.ComponentModel.Design
                 && saveFileDialog.FilterIndex > 0
                 && saveFileDialog.FilterIndex <= supportedFormats.Count
             )
-                this.workflowView.SaveWorkflowImage(
-                    saveFileDialog.FileName,
-                    supportedFormats[saveFileDialog.FilterIndex - 1].Format
-                );
+                this.workflowView
+                    .SaveWorkflowImage(
+                        saveFileDialog.FileName,
+                        supportedFormats[saveFileDialog.FilterIndex - 1].Format
+                    );
         }
 
         private void OnMenuCopyToClipboard(object sender, EventArgs e)
@@ -1372,10 +1369,8 @@ namespace System.Workflow.ComponentModel.Design
                 Helpers.DeserializeDesignersFromStream(components, componentStateStream);
 
             // set something on selections service
-            this.selectionService.SetSelectedComponents(
-                topLevelActivities.ToArray(),
-                SelectionTypes.Replace
-            );
+            this.selectionService
+                .SetSelectedComponents(topLevelActivities.ToArray(), SelectionTypes.Replace);
             this.workflowView.EnsureVisible(this.selectionService.PrimarySelection);
         }
 
@@ -1390,10 +1385,8 @@ namespace System.Workflow.ComponentModel.Design
                     activities.AddRange(
                         Helpers.GetNestedActivities(rootDesigner.Activity as CompositeActivity)
                     );
-                this.selectionService.SetSelectedComponents(
-                    activities.ToArray(),
-                    SelectionTypes.Replace
-                );
+                this.selectionService
+                    .SetSelectedComponents(activities.ToArray(), SelectionTypes.Replace);
             }
         }
 

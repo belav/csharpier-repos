@@ -18,10 +18,8 @@ namespace System.ServiceModel.Channels
 
         public static void AddHeadersTo(Message message, MessageHeader header)
         {
-            int index = message.Headers.FindHeader(
-                DotNetOneWayStrings.HeaderName,
-                DotNetOneWayStrings.Namespace
-            );
+            int index = message.Headers
+                .FindHeader(DotNetOneWayStrings.HeaderName, DotNetOneWayStrings.Namespace);
             if (index == -1)
             {
                 if (header == null)
@@ -45,10 +43,8 @@ namespace System.ServiceModel.Channels
 
         public static bool TryValidateMessage(Message message)
         {
-            int index = message.Headers.FindHeader(
-                DotNetOneWayStrings.HeaderName,
-                DotNetOneWayStrings.Namespace
-            );
+            int index = message.Headers
+                .FindHeader(DotNetOneWayStrings.HeaderName, DotNetOneWayStrings.Namespace);
 
             return (index != -1);
         }
@@ -425,8 +421,8 @@ namespace System.ServiceModel.Channels
         {
             this.packetRoutable = bindingElement.PacketRoutable;
 
-            ISecurityCapabilities innerSecurityCapabilities =
-                this.InnerChannelFactory.GetProperty<ISecurityCapabilities>();
+            ISecurityCapabilities innerSecurityCapabilities = this.InnerChannelFactory
+                .GetProperty<ISecurityCapabilities>();
 
             // can't pool across outer channels if the inner channels support client auth
             if (
@@ -707,12 +703,13 @@ namespace System.ServiceModel.Channels
             {
                 if (isConnectionFromPool)
                 {
-                    this.channelPool.ReturnConnection(
-                        key,
-                        channel,
-                        connectionStillGood,
-                        timeoutHelper.RemainingTime()
-                    );
+                    this.channelPool
+                        .ReturnConnection(
+                            key,
+                            channel,
+                            connectionStillGood,
+                            timeoutHelper.RemainingTime()
+                        );
                 }
                 else
                 {
@@ -736,12 +733,13 @@ namespace System.ServiceModel.Channels
                 isConnectionFromPool = true;
                 while (true)
                 {
-                    IDuplexSessionChannel pooledChannel = this.channelPool.TakeConnection(
-                        this.RemoteAddress,
-                        this.Via,
-                        timeoutHelper.RemainingTime(),
-                        out key
-                    );
+                    IDuplexSessionChannel pooledChannel = this.channelPool
+                        .TakeConnection(
+                            this.RemoteAddress,
+                            this.Via,
+                            timeoutHelper.RemainingTime(),
+                            out key
+                        );
 
                     if (pooledChannel == null)
                     {
@@ -756,12 +754,8 @@ namespace System.ServiceModel.Channels
                     }
 
                     // Abort stale connections from the pool
-                    this.channelPool.ReturnConnection(
-                        key,
-                        pooledChannel,
-                        false,
-                        timeoutHelper.RemainingTime()
-                    );
+                    this.channelPool
+                        .ReturnConnection(key, pooledChannel, false, timeoutHelper.RemainingTime());
                 }
             }
 
@@ -848,11 +842,8 @@ namespace System.ServiceModel.Channels
                     }
 
                     this.parent.StampInitialMessage(this.message);
-                    IAsyncResult result = this.innerChannel.BeginOpen(
-                        timeoutHelper.RemainingTime(),
-                        onOpen,
-                        this
-                    );
+                    IAsyncResult result = this.innerChannel
+                        .BeginOpen(timeoutHelper.RemainingTime(), onOpen, this);
                     if (!result.CompletedSynchronously)
                     {
                         return false;

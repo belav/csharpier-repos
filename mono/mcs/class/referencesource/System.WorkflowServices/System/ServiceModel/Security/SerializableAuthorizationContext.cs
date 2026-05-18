@@ -57,9 +57,8 @@ namespace System.ServiceModel.Security
         {
             if (authorizationContext == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                    "authorizationContext"
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperArgumentNull("authorizationContext");
             }
 
             IList<Type> knownTypes = BuildKnownClaimTypes(authorizationContext);
@@ -126,9 +125,8 @@ namespace System.ServiceModel.Security
         {
             if (authorizationContext == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                    "authorizationContext"
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperArgumentNull("authorizationContext");
             }
 
             MemoryStream stream = new MemoryStream();
@@ -237,14 +235,15 @@ namespace System.ServiceModel.Security
 
                     if (versionNumber != 1)
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new NotSupportedException(
-                                SR2.GetString(
-                                    SR2.SerializedAuthorizationContextVersionUnsupported,
-                                    versionNumber
+                        throw DiagnosticUtility.ExceptionUtility
+                            .ThrowHelperError(
+                                new NotSupportedException(
+                                    SR2.GetString(
+                                        SR2.SerializedAuthorizationContextVersionUnsupported,
+                                        versionNumber
+                                    )
                                 )
-                            )
-                        );
+                            );
                     }
                 }
                 else

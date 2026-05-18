@@ -92,25 +92,29 @@ namespace System.ServiceModel.Activities
                 || this.definitionCollection.ContainsKey(identityKey)
             )
             {
-                throw FxTrace.Exception.AsError(
-                    new InvalidOperationException(
-                        SR.DuplicateDefinitionIdentity(
-                            identityKey.Identity == null ? "null" : identityKey.Identity.ToString()
+                throw FxTrace.Exception
+                    .AsError(
+                        new InvalidOperationException(
+                            SR.DuplicateDefinitionIdentity(
+                                identityKey.Identity == null
+                                    ? "null"
+                                    : identityKey.Identity.ToString()
+                            )
                         )
-                    )
-                );
+                    );
             }
 
             if (workflowService.Name != this.defaultWorkflowService.Name)
             {
-                throw FxTrace.Exception.AsError(
-                    new InvalidOperationException(
-                        SR.DifferentWorkflowServiceNameNotSupported(
-                            workflowService.Name,
-                            this.defaultWorkflowService.Name
+                throw FxTrace.Exception
+                    .AsError(
+                        new InvalidOperationException(
+                            SR.DifferentWorkflowServiceNameNotSupported(
+                                workflowService.Name,
+                                this.defaultWorkflowService.Name
+                            )
                         )
-                    )
-                );
+                    );
             }
 
             this.ThrowIfNotConfigurable();
@@ -126,9 +130,8 @@ namespace System.ServiceModel.Activities
             if (this.definitionCollection.Values.Contains(workflowService))
             {
                 workflowService.DetachFromVersioning(this.defaultWorkflowService);
-                return this.definitionCollection.Remove(
-                    new WorkflowIdentityKey(workflowService.DefinitionIdentity)
-                );
+                return this.definitionCollection
+                    .Remove(new WorkflowIdentityKey(workflowService.DefinitionIdentity));
             }
             return false;
         }
@@ -149,11 +152,12 @@ namespace System.ServiceModel.Activities
         {
             if (!this.wfsh.IsConfigurable)
             {
-                throw FxTrace.Exception.AsError(
-                    new InvalidOperationException(
-                        SR.WorkflowServiceHostCannotAddOrRemoveServiceDefinitionAfterOpen
-                    )
-                );
+                throw FxTrace.Exception
+                    .AsError(
+                        new InvalidOperationException(
+                            SR.WorkflowServiceHostCannotAddOrRemoveServiceDefinitionAfterOpen
+                        )
+                    );
             }
         }
 
@@ -171,10 +175,8 @@ namespace System.ServiceModel.Activities
                 found = true;
             }
             else if (
-                this.definitionCollection.TryGetValue(
-                    new WorkflowIdentityKey(workflowIdentity),
-                    out workflowService
-                )
+                this.definitionCollection
+                    .TryGetValue(new WorkflowIdentityKey(workflowIdentity), out workflowService)
             )
             {
                 workflowDefinition = workflowService.Body;
@@ -197,10 +199,8 @@ namespace System.ServiceModel.Activities
             }
             else
             {
-                this.definitionCollection.TryGetValue(
-                    new WorkflowIdentityKey(updatedIdentity),
-                    out workflowService
-                );
+                this.definitionCollection
+                    .TryGetValue(new WorkflowIdentityKey(updatedIdentity), out workflowService);
             }
 
             if (
@@ -246,10 +246,10 @@ namespace System.ServiceModel.Activities
 
             public void CopyTo(WorkflowService[] array, int arrayIndex)
             {
-                this.workflowDefinitionProvider.definitionCollection.Values.CopyTo(
-                    array,
-                    arrayIndex
-                );
+                this.workflowDefinitionProvider
+                    .definitionCollection
+                    .Values
+                    .CopyTo(array, arrayIndex);
             }
 
             public int Count

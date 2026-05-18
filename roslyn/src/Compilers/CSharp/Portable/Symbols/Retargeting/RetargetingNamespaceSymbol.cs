@@ -125,10 +125,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Retargeting
 
                 Debug.Assert(t.PrimitiveTypeCode == Cci.PrimitiveTypeCode.NotPrimitive);
                 builder.Add(
-                    this.RetargetingTranslator.Retarget(
-                        t,
-                        RetargetOptions.RetargetPrimitiveTypesByName
-                    )
+                    this.RetargetingTranslator
+                        .Retarget(t, RetargetOptions.RetargetPrimitiveTypesByName)
                 );
             }
 
@@ -224,10 +222,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Retargeting
                 return null;
             }
 
-            return this.RetargetingTranslator.Retarget(
-                underlying,
-                RetargetOptions.RetargetPrimitiveTypesByName
-            );
+            return this.RetargetingTranslator
+                .Retarget(underlying, RetargetOptions.RetargetPrimitiveTypesByName);
         }
 
 #nullable disable

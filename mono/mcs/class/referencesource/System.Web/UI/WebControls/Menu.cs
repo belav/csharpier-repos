@@ -820,10 +820,8 @@ namespace System.Web.UI.WebControls
                 {
                     return _cachedPopOutImageUrl;
                 }
-                _cachedPopOutImageUrl = Page.ClientScript.GetWebResourceUrl(
-                    typeof(Menu),
-                    ("Menu_Popout.gif")
-                );
+                _cachedPopOutImageUrl = Page.ClientScript
+                    .GetWebResourceUrl(typeof(Menu), ("Menu_Popout.gif"));
                 return _cachedPopOutImageUrl;
             }
         }
@@ -941,10 +939,8 @@ namespace System.Web.UI.WebControls
                 {
                     return _cachedScrollDownImageUrl;
                 }
-                _cachedScrollDownImageUrl = Page.ClientScript.GetWebResourceUrl(
-                    typeof(Menu),
-                    ("Menu_ScrollDown.gif")
-                );
+                _cachedScrollDownImageUrl = Page.ClientScript
+                    .GetWebResourceUrl(typeof(Menu), ("Menu_ScrollDown.gif"));
                 return _cachedScrollDownImageUrl;
             }
         }
@@ -997,10 +993,8 @@ namespace System.Web.UI.WebControls
                 {
                     return _cachedScrollUpImageUrl;
                 }
-                _cachedScrollUpImageUrl = Page.ClientScript.GetWebResourceUrl(
-                    typeof(Menu),
-                    ("Menu_ScrollUp.gif")
-                );
+                _cachedScrollUpImageUrl = Page.ClientScript
+                    .GetWebResourceUrl(typeof(Menu), ("Menu_ScrollUp.gif"));
                 return _cachedScrollUpImageUrl;
             }
         }

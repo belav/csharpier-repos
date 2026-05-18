@@ -62,8 +62,8 @@ namespace Microsoft.CodeAnalysis.MoveStaticMembers
             // add annotations to the symbols that we selected so we can find them later to pull up
             // These symbols should all have (singular) definitions, but in the case that we can't find
             // any location, we just won't move that particular symbol
-            var memberNodes = moveOptions
-                .SelectedMembers.Select(symbol => symbol.Locations.FirstOrDefault())
+            var memberNodes = moveOptions.SelectedMembers
+                .Select(symbol => symbol.Locations.FirstOrDefault())
                 .WhereNotNull()
                 .SelectAsArray(loc => loc.FindNode(cancellationToken));
             root = root.TrackNodes(memberNodes);
@@ -74,8 +74,9 @@ namespace Microsoft.CodeAnalysis.MoveStaticMembers
                 // we already have our destination type, but we need to find the document it is in
                 // When it is an existing type, "FileName" points to a full path rather than just the name
                 // There should be no two docs that have the same file path
-                var destinationDocId = _document
-                    .Project.Solution.GetDocumentIdsWithFilePath(moveOptions.FileName)
+                var destinationDocId = _document.Project
+                    .Solution
+                    .GetDocumentIdsWithFilePath(moveOptions.FileName)
                     .Single();
                 var fixedSolution = await RefactorAndMoveAsync(
                         moveOptions.SelectedMembers,
@@ -230,8 +231,8 @@ namespace Microsoft.CodeAnalysis.MoveStaticMembers
             var newTypeRoot = await newTypeDoc
                 .GetRequiredSyntaxRootAsync(cancellationToken)
                 .ConfigureAwait(false);
-            var newTypeNode = newType
-                .DeclaringSyntaxReferences.SelectAsArray(sRef => sRef.GetSyntax(cancellationToken))
+            var newTypeNode = newType.DeclaringSyntaxReferences
+                .SelectAsArray(sRef => sRef.GetSyntax(cancellationToken))
                 .First(node => newTypeRoot.Contains(node));
             newTypeRoot = newTypeRoot.TrackNodes(newTypeNode);
             oldSolution = newTypeDoc.WithSyntaxRoot(newTypeRoot).Project.Solution;
@@ -489,8 +490,8 @@ namespace Microsoft.CodeAnalysis.MoveStaticMembers
             return symbolRefs
                 .Flatten()
                 .SelectMany(refSymbol =>
-                    refSymbol
-                        .Locations.Where(loc => !loc.IsCandidateLocation && !loc.IsImplicit)
+                    refSymbol.Locations
+                        .Where(loc => !loc.IsCandidateLocation && !loc.IsImplicit)
                         .Select(loc => (loc, refSymbol.Definition.IsExtensionMethod()))
                 )
                 .ToImmutableArrayOrEmpty();

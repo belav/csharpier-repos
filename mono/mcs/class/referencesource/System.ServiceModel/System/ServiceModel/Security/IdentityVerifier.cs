@@ -123,9 +123,8 @@ namespace System.ServiceModel.Security
         {
             if (authorizationPolicies == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                    "authorizationPolicies"
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperArgumentNull("authorizationPolicies");
             }
             AuthorizationContext ac = AuthorizationContext.CreateDefaultAuthorizationContext(
                 authorizationPolicies
@@ -141,9 +140,8 @@ namespace System.ServiceModel.Security
         {
             if (authorizationContext == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                    "authorizationContext"
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperArgumentNull("authorizationContext");
             }
             EndpointIdentity identity;
             if (!TryGetIdentity(serviceReference, out identity))
@@ -153,11 +151,12 @@ namespace System.ServiceModel.Security
                     authorizationContext,
                     this.GetType()
                 );
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperWarning(
-                    new MessageSecurityException(
-                        SR.GetString(errorString, identity, serviceReference)
-                    )
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperWarning(
+                        new MessageSecurityException(
+                            SR.GetString(errorString, identity, serviceReference)
+                        )
+                    );
             }
             else
             {

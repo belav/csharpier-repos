@@ -155,11 +155,8 @@ namespace System
                     );
 
                 if (
-                    IsolationInterop.IdentityAuthority.AreDefinitionsEqual(
-                        0,
-                        cms.Identity,
-                        asbId[0]
-                    )
+                    IsolationInterop.IdentityAuthority
+                        .AreDefinitionsEqual(0, cms.Identity, asbId[0])
                 )
                 {
                     _manifests.Add(cms);
@@ -531,10 +528,8 @@ namespace System
             if (applicationIdentityFullName == null)
                 throw new ArgumentNullException("applicationIdentityFullName");
             Contract.EndContractBlock();
-            _appId = IsolationInterop.AppIdAuthority.TextToDefinition(
-                0,
-                applicationIdentityFullName
-            );
+            _appId = IsolationInterop.AppIdAuthority
+                .TextToDefinition(0, applicationIdentityFullName);
         }
 
         [SecurityCritical]

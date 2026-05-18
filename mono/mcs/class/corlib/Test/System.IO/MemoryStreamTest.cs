@@ -390,22 +390,23 @@ namespace MonoTests.System.IO
                         null
                     );
 
-                    begin_read_task = Task.Factory.StartNew(() =>
-                    {
-                        IAsyncResult begin_read_2_ares = testStream.BeginRead(
-                            readBytes2,
-                            0,
-                            3,
-                            null,
-                            null
-                        );
-                        begin_read_blocking.Set();
+                    begin_read_task = Task.Factory
+                        .StartNew(() =>
+                        {
+                            IAsyncResult begin_read_2_ares = testStream.BeginRead(
+                                readBytes2,
+                                0,
+                                3,
+                                null,
+                                null
+                            );
+                            begin_read_blocking.Set();
 
-                        Assert.IsTrue(begin_read_2_ares.AsyncWaitHandle.WaitOne(2000), "#10");
-                        Assert.IsTrue(begin_read_2_ares.IsCompleted, "#11");
-                        Assert.AreEqual(3, testStream.EndRead(begin_read_2_ares), "#12");
-                        Assert.AreEqual(95, readBytes2[0], "#13");
-                    });
+                            Assert.IsTrue(begin_read_2_ares.AsyncWaitHandle.WaitOne(2000), "#10");
+                            Assert.IsTrue(begin_read_2_ares.IsCompleted, "#11");
+                            Assert.AreEqual(3, testStream.EndRead(begin_read_2_ares), "#12");
+                            Assert.AreEqual(95, readBytes2[0], "#13");
+                        });
 
                     Assert.IsFalse(begin_read_1_ares.IsCompleted, "#1");
                     Assert.IsFalse(begin_read_blocking.WaitOne(500), "#2");
@@ -469,14 +470,15 @@ namespace MonoTests.System.IO
                 {
                     IAsyncResult begin_read_ares = stream.BeginRead(readBytes, 0, 5, null, null);
 
-                    begin_write_task = Task.Factory.StartNew(() =>
-                    {
-                        var begin_write_ares = stream.BeginWrite(readBytes2, 0, 3, null, null);
-                        begin_write_blocking.Set();
-                        Assert.IsTrue(begin_write_ares.AsyncWaitHandle.WaitOne(2000), "#10");
-                        Assert.IsTrue(begin_write_ares.IsCompleted, "#11");
-                        stream.EndWrite(begin_write_ares);
-                    });
+                    begin_write_task = Task.Factory
+                        .StartNew(() =>
+                        {
+                            var begin_write_ares = stream.BeginWrite(readBytes2, 0, 3, null, null);
+                            begin_write_blocking.Set();
+                            Assert.IsTrue(begin_write_ares.AsyncWaitHandle.WaitOne(2000), "#10");
+                            Assert.IsTrue(begin_write_ares.IsCompleted, "#11");
+                            stream.EndWrite(begin_write_ares);
+                        });
 
                     Assert.IsFalse(begin_read_ares.IsCompleted, "#1");
                     Assert.IsFalse(begin_write_blocking.WaitOne(500), "#2");

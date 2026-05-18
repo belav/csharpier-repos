@@ -43,8 +43,8 @@ namespace Microsoft.CodeAnalysis.UseCoalesceExpression
             );
 
         protected override bool IncludeDiagnosticDuringFixAll(Diagnostic diagnostic) =>
-            !diagnostic
-                .Descriptor.ImmutableCustomTags()
+            !diagnostic.Descriptor
+                .ImmutableCustomTags()
                 .Contains(WellKnownDiagnosticTags.Unnecessary);
 
         public override Task RegisterCodeFixesAsync(CodeFixContext context)

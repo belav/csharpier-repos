@@ -171,15 +171,12 @@ namespace System.Net.Configuration
             if (section == null)
                 section = new SettingsSection();
 
-            this.alwaysUseCompletionPortsForConnect = section
-                .Socket
+            this.alwaysUseCompletionPortsForConnect = section.Socket
                 .AlwaysUseCompletionPortsForConnect;
-            this.alwaysUseCompletionPortsForAccept = section
-                .Socket
+            this.alwaysUseCompletionPortsForAccept = section.Socket
                 .AlwaysUseCompletionPortsForAccept;
             this.checkCertificateName = section.ServicePointManager.CheckCertificateName;
-            this.checkCertificateRevocationList = section
-                .ServicePointManager
+            this.checkCertificateRevocationList = section.ServicePointManager
                 .CheckCertificateRevocationList;
             this.dnsRefreshTimeout = section.ServicePointManager.DnsRefreshTimeout;
             this.ipProtectionLevel = section.Socket.IPProtectionLevel;
@@ -187,8 +184,7 @@ namespace System.Net.Configuration
             this.enableDnsRoundRobin = section.ServicePointManager.EnableDnsRoundRobin;
             this.encryptionPolicy = section.ServicePointManager.EncryptionPolicy;
             this.expect100Continue = section.ServicePointManager.Expect100Continue;
-            this.maximumUnauthorizedUploadLength = section
-                .HttpWebRequest
+            this.maximumUnauthorizedUploadLength = section.HttpWebRequest
                 .MaximumUnauthorizedUploadLength;
             this.maximumResponseHeadersLength = section.HttpWebRequest.MaximumResponseHeadersLength;
             this.maximumErrorResponseLength = section.HttpWebRequest.MaximumErrorResponseLength;

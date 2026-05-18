@@ -40,9 +40,8 @@ namespace System.ServiceModel
             {
                 if (!WSFederationHttpSecurityModeHelper.IsDefined(value))
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ArgumentOutOfRangeException("value")
-                    );
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperError(new ArgumentOutOfRangeException("value"));
                 }
                 this.mode = value;
             }
@@ -64,11 +63,12 @@ namespace System.ServiceModel
                 || this.mode == WSFederationHttpSecurityMode.TransportWithMessageCredential
             )
             {
-                return this.messageSecurity.CreateSecurityBindingElement(
-                    this.Mode == WSFederationHttpSecurityMode.TransportWithMessageCredential,
-                    isReliableSessionEnabled,
-                    version
-                );
+                return this.messageSecurity
+                    .CreateSecurityBindingElement(
+                        this.Mode == WSFederationHttpSecurityMode.TransportWithMessageCredential,
+                        isReliableSessionEnabled,
+                        version
+                    );
             }
             else
             {

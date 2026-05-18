@@ -298,12 +298,13 @@ namespace System.Threading.Tests
                     // there is no guarantee that the Task will be created on another thread.
                     // There is also no guarantee that using this TaskCreationOption will force
                     // it to be run on another thread.
-                    var task = Task.Factory.StartNew(
-                        () => threadLocal.Value = i,
-                        CancellationToken.None,
-                        TaskCreationOptions.LongRunning,
-                        TaskScheduler.Default
-                    );
+                    var task = Task.Factory
+                        .StartNew(
+                            () => threadLocal.Value = i,
+                            CancellationToken.None,
+                            TaskCreationOptions.LongRunning,
+                            TaskScheduler.Default
+                        );
                     task.Wait();
                 }
 

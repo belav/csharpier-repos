@@ -72,18 +72,19 @@ namespace MonoCasTests.System.Web.UI
             AspNetHostingPermissionLevel level
         )
         {
-            ConstructorInfo ci = this.Type.GetConstructor(
-                new Type[7]
-                {
-                    typeof(string),
-                    typeof(string),
-                    typeof(int),
-                    typeof(string),
-                    typeof(string),
-                    typeof(string),
-                    typeof(BuildMethod),
-                }
-            );
+            ConstructorInfo ci = this.Type
+                .GetConstructor(
+                    new Type[7]
+                    {
+                        typeof(string),
+                        typeof(string),
+                        typeof(int),
+                        typeof(string),
+                        typeof(string),
+                        typeof(string),
+                        typeof(BuildMethod),
+                    }
+                );
             Assert.IsNotNull(ci, ".ctor(2xstring,int,3xstring,BuildMethod)");
             return ci.Invoke(new object[7] { null, null, null, null, null, null, null });
         }

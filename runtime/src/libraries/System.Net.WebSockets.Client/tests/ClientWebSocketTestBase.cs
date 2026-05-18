@@ -14,15 +14,13 @@ namespace System.Net.WebSockets.Client.Tests
 {
     public class ClientWebSocketTestBase
     {
-        public static readonly object[][] EchoServers = System
-            .Net
+        public static readonly object[][] EchoServers = System.Net
             .Test
             .Common
             .Configuration
             .WebSockets
             .EchoServers;
-        public static readonly object[][] EchoHeadersServers = System
-            .Net
+        public static readonly object[][] EchoHeadersServers = System.Net
             .Test
             .Common
             .Configuration

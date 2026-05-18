@@ -250,11 +250,14 @@ namespace System.Data.EntityModel.SchemaObjectModel
                             AddError(
                                 ErrorCode.UnexpectedXmlElement,
                                 EdmSchemaErrorSeverity.Error,
-                                System.Data.Entity.Strings.UnexpectedRootElement(
-                                    sourceReader.NamespaceURI,
-                                    sourceReader.LocalName,
-                                    SchemaXmlNamespace
-                                )
+                                System.Data
+                                    .Entity
+                                    .Strings
+                                    .UnexpectedRootElement(
+                                        sourceReader.NamespaceURI,
+                                        sourceReader.LocalName,
+                                        SchemaXmlNamespace
+                                    )
                             );
                             break;
                     }
@@ -304,18 +307,15 @@ namespace System.Data.EntityModel.SchemaObjectModel
             // remove flags
             // the ProcessInlineSchema, and ProcessSchemaLocation flags must be removed for the same
             // xsd schema to be used on multiple threads
-            readerSettings.ValidationFlags &= ~System
-                .Xml
+            readerSettings.ValidationFlags &= ~System.Xml
                 .Schema
                 .XmlSchemaValidationFlags
                 .ProcessIdentityConstraints;
-            readerSettings.ValidationFlags &= ~System
-                .Xml
+            readerSettings.ValidationFlags &= ~System.Xml
                 .Schema
                 .XmlSchemaValidationFlags
                 .ProcessSchemaLocation;
-            readerSettings.ValidationFlags &= ~System
-                .Xml
+            readerSettings.ValidationFlags &= ~System.Xml
                 .Schema
                 .XmlSchemaValidationFlags
                 .ProcessInlineSchema;
@@ -328,8 +328,7 @@ namespace System.Data.EntityModel.SchemaObjectModel
             XmlReaderSettings readerSettings = CreateEdmStandardXmlReaderSettings();
 
             // add flags
-            readerSettings.ValidationFlags |= System
-                .Xml
+            readerSettings.ValidationFlags |= System.Xml
                 .Schema
                 .XmlSchemaValidationFlags
                 .ReportValidationWarnings;
@@ -981,11 +980,14 @@ namespace System.Data.EntityModel.SchemaObjectModel
                         usingElement.AddError(
                             ErrorCode.NotInNamespace,
                             EdmSchemaErrorSeverity.Error,
-                            System.Data.Entity.Strings.NotInNamespaceAlias(
-                                unqualifiedTypeName,
-                                namespaceName,
-                                definingQualification
-                            )
+                            System.Data
+                                .Entity
+                                .Strings
+                                .NotInNamespaceAlias(
+                                    unqualifiedTypeName,
+                                    namespaceName,
+                                    definingQualification
+                                )
                         );
                     }
                     else
@@ -993,10 +995,10 @@ namespace System.Data.EntityModel.SchemaObjectModel
                         usingElement.AddError(
                             ErrorCode.NotInNamespace,
                             EdmSchemaErrorSeverity.Error,
-                            System.Data.Entity.Strings.NotInNamespaceNoAlias(
-                                unqualifiedTypeName,
-                                namespaceName
-                            )
+                            System.Data
+                                .Entity
+                                .Strings
+                                .NotInNamespaceNoAlias(unqualifiedTypeName, namespaceName)
                         );
                     }
                 }
@@ -1307,21 +1309,21 @@ namespace System.Data.EntityModel.SchemaObjectModel
 
         protected void TryAddType(SchemaType schemaType, bool doNotAddErrorForEmptyName)
         {
-            this.SchemaManager.SchemaTypes.Add(
-                schemaType,
-                doNotAddErrorForEmptyName,
-                Strings.TypeNameAlreadyDefinedDuplicate
-            );
+            this.SchemaManager
+                .SchemaTypes
+                .Add(
+                    schemaType,
+                    doNotAddErrorForEmptyName,
+                    Strings.TypeNameAlreadyDefinedDuplicate
+                );
             this.SchemaTypes.Add(schemaType);
         }
 
         protected void TryAddContainer(SchemaType schemaType, bool doNotAddErrorForEmptyName)
         {
-            this.SchemaManager.SchemaTypes.Add(
-                schemaType,
-                doNotAddErrorForEmptyName,
-                Strings.EntityContainerAlreadyExists
-            );
+            this.SchemaManager
+                .SchemaTypes
+                .Add(schemaType, doNotAddErrorForEmptyName, Strings.EntityContainerAlreadyExists);
             this.SchemaTypes.Add(schemaType);
         }
 
@@ -1470,8 +1472,9 @@ namespace System.Data.EntityModel.SchemaObjectModel
                 Debug.Assert(resourceName != null, "resourceName cannot be null");
 
                 Stream resourceStream = null;
-                System.Reflection.Assembly executingAssembly =
-                    System.Reflection.Assembly.GetExecutingAssembly();
+                System.Reflection.Assembly executingAssembly = System.Reflection
+                    .Assembly
+                    .GetExecutingAssembly();
                 if (executingAssembly != null)
                 {
                     resourceStream = executingAssembly.GetManifestResourceStream(resourceName);

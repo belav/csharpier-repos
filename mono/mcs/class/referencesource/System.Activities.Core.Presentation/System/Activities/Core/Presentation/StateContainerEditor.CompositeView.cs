@@ -61,9 +61,8 @@ namespace System.Activities.Core.Presentation
                 ModelItem item = itemsToCopy.First();
                 if (item != null && item.ItemType == typeof(Transition))
                 {
-                    ModelItem destinationState = item.Properties[
-                        TransitionDesigner.ToPropertyName
-                    ].Value;
+                    ModelItem destinationState = item.Properties[TransitionDesigner.ToPropertyName]
+                        .Value;
 
                     if (!modelItemToGuid.ContainsKey(destinationState))
                     {
@@ -82,10 +81,8 @@ namespace System.Activities.Core.Presentation
             PointCollection metaData = new PointCollection();
             foreach (ModelItem modelItem in itemsToCopy)
             {
-                object viewState = this.ViewStateService.RetrieveViewState(
-                    modelItem,
-                    ShapeLocationViewStateKey
-                );
+                object viewState = this.ViewStateService
+                    .RetrieveViewState(modelItem, ShapeLocationViewStateKey);
                 Point location = (Point)viewState;
                 StateContainerEditor parentDesigner =
                     VisualTreeUtils.FindVisualAncestor<StateContainerEditor>(
@@ -125,9 +122,11 @@ namespace System.Activities.Core.Presentation
 
             HashSet<Connector> connectorsToDelete = new HashSet<Connector>();
             List<ModelItem> allStateModelItemsToDelete = new List<ModelItem>();
-            IEnumerable<ModelItem> selectedStateModelItems = this
-                .Context.Items.GetValue<Selection>()
-                .SelectedObjects.Where<ModelItem>(
+            IEnumerable<ModelItem> selectedStateModelItems = this.Context
+                .Items
+                .GetValue<Selection>()
+                .SelectedObjects
+                .Where<ModelItem>(
                     (p) =>
                     {
                         return p.ItemType == typeof(State);
@@ -188,7 +187,8 @@ namespace System.Activities.Core.Presentation
                         StateContainerEditor
                             .GetParentStateModelItemForTransition(connectorModelItem)
                             .Properties[StateDesigner.TransitionsPropertyName]
-                            .Collection.Add(connectorModelItem);
+                            .Collection
+                            .Add(connectorModelItem);
                     }
                 }
             }
@@ -206,8 +206,9 @@ namespace System.Activities.Core.Presentation
                 if (itemsToPaste.Count == 1 && itemsToPaste.First() is Transition)
                 {
                     string errorMessage;
-                    IEnumerable<ModelItem> selectedStateModelItems = this
-                        .Context.Items.GetValue<Selection>()
+                    IEnumerable<ModelItem> selectedStateModelItems = this.Context
+                        .Items
+                        .GetValue<Selection>()
                         .SelectedObjects;
                     return selectedStateModelItems.All(item =>
                         CanPasteTransition(item, out errorMessage)
@@ -364,9 +365,11 @@ namespace System.Activities.Core.Presentation
 
                 this.PopulateVirtualizingContainer(destinationState);
 
-                ModelItem[] selectedItems = this
-                    .Context.Items.GetValue<Selection>()
-                    .SelectedObjects.ToArray();
+                ModelItem[] selectedItems = this.Context
+                    .Items
+                    .GetValue<Selection>()
+                    .SelectedObjects
+                    .ToArray();
                 string errorMessage;
                 if (!CanPasteTransition(destinationState, out errorMessage, selectedItems))
                 {
@@ -379,9 +382,13 @@ namespace System.Activities.Core.Presentation
 
                 using (
                     EditingScope es = (EditingScope)
-                        this.ModelItem.BeginEdit(
-                            System.Activities.Presentation.SR.PropertyChangeEditingScopeDescription
-                        )
+                        this.ModelItem
+                            .BeginEdit(
+                                System.Activities
+                                    .Presentation
+                                    .SR
+                                    .PropertyChangeEditingScopeDescription
+                            )
                 )
                 {
                     string displayName = pastedTransition.DisplayName;
@@ -396,31 +403,36 @@ namespace System.Activities.Core.Presentation
                             pastedTransition = (Transition)XamlServices.Load(reader);
                         }
 
-                        ModelItem transitionModelItem = this
-                            .Context.Services.GetRequiredService<ModelTreeManager>()
+                        ModelItem transitionModelItem = this.Context
+                            .Services
+                            .GetRequiredService<ModelTreeManager>()
                             .WrapAsModelItem(pastedTransition);
                         ModelItem sourceState = selectedItem;
                         sourceState
                             .Properties[StateDesigner.TransitionsPropertyName]
-                            .Collection.Add(transitionModelItem);
+                            .Collection
+                            .Add(transitionModelItem);
                         transitionModelItem
                             .Properties[TransitionDesigner.ToPropertyName]
                             .SetValue(destinationState);
 
                         if (isFirst)
                         {
-                            this.ViewStateService.RemoveViewState(
-                                transitionModelItem,
-                                ConnectorLocationViewStateKey
-                            );
-                            this.ViewStateService.RemoveViewState(
-                                transitionModelItem,
-                                SrcConnectionPointIndexStateKey
-                            );
-                            this.ViewStateService.RemoveViewState(
-                                transitionModelItem,
-                                DestConnectionPointIndexStateKey
-                            );
+                            this.ViewStateService
+                                .RemoveViewState(
+                                    transitionModelItem,
+                                    ConnectorLocationViewStateKey
+                                );
+                            this.ViewStateService
+                                .RemoveViewState(
+                                    transitionModelItem,
+                                    SrcConnectionPointIndexStateKey
+                                );
+                            this.ViewStateService
+                                .RemoveViewState(
+                                    transitionModelItem,
+                                    DestConnectionPointIndexStateKey
+                                );
                             isFirst = false;
                         }
                     }
@@ -459,9 +471,13 @@ namespace System.Activities.Core.Presentation
 
                 using (
                     EditingScope es = (EditingScope)
-                        this.ModelItem.BeginEdit(
-                            System.Activities.Presentation.SR.CollectionAddEditingScopeDescription
-                        )
+                        this.ModelItem
+                            .BeginEdit(
+                                System.Activities
+                                    .Presentation
+                                    .SR
+                                    .CollectionAddEditingScopeDescription
+                            )
                 )
                 {
                     // Fix 157591 by storing the height and width of the container "before" the new states are added to the
@@ -473,12 +489,14 @@ namespace System.Activities.Core.Presentation
                     {
                         ModelItem stateModelItem =
                             (this.ModelItem.ItemType == typeof(StateMachine))
-                                ? this
-                                    .ModelItem.Properties[StateMachineDesigner.StatesPropertyName]
-                                    .Collection.Add(state)
+                                ? this.ModelItem
+                                    .Properties[StateMachineDesigner.StatesPropertyName]
+                                    .Collection
+                                    .Add(state)
                                 : GetStateMachineModelItem(this.ModelItem)
                                     .Properties[StateMachineDesigner.StatesPropertyName]
-                                    .Collection.Add(state);
+                                    .Collection
+                                    .Add(state);
                         modelItemsPasted.Add(stateModelItem);
                     }
 
@@ -512,17 +530,18 @@ namespace System.Activities.Core.Presentation
                     }
                 }
 
-                this.Dispatcher.BeginInvoke(
-                    () =>
-                    {
-                        if (modelItemsPasted.Count > 0 && modelItemsPasted[0] != null)
+                this.Dispatcher
+                    .BeginInvoke(
+                        () =>
                         {
-                            Keyboard.Focus(modelItemsPasted[0].View as IInputElement);
-                        }
-                        this.Context.Items.SetValue(new Selection(modelItemsPasted));
-                    },
-                    DispatcherPriority.ApplicationIdle
-                );
+                            if (modelItemsPasted.Count > 0 && modelItemsPasted[0] != null)
+                            {
+                                Keyboard.Focus(modelItemsPasted[0].View as IInputElement);
+                            }
+                            this.Context.Items.SetValue(new Selection(modelItemsPasted));
+                        },
+                        DispatcherPriority.ApplicationIdle
+                    );
             }
         }
 
@@ -559,10 +578,8 @@ namespace System.Activities.Core.Presentation
             Point topLeft = new Point(Double.PositiveInfinity, Double.PositiveInfinity);
             foreach (ModelItem stateModelItem in itemsPasted)
             {
-                object viewState = this.ViewStateService.RetrieveViewState(
-                    stateModelItem,
-                    ShapeLocationViewStateKey
-                );
+                object viewState = this.ViewStateService
+                    .RetrieveViewState(stateModelItem, ShapeLocationViewStateKey);
                 if (viewState != null)
                 {
                     Point location = (Point)viewState;
@@ -599,11 +616,12 @@ namespace System.Activities.Core.Presentation
                     foreach (Point point in points)
                     {
                         // translate location view states to be in the coordinate system of the pasting target
-                        this.ViewStateService.StoreViewState(
-                            itemsPasted[ii],
-                            ShapeLocationViewStateKey,
-                            container.panel.TranslatePoint(point, container.panel)
-                        );
+                        this.ViewStateService
+                            .StoreViewState(
+                                itemsPasted[ii],
+                                ShapeLocationViewStateKey,
+                                container.panel.TranslatePoint(point, container.panel)
+                            );
                         ++ii;
                     }
                 }
@@ -623,28 +641,24 @@ namespace System.Activities.Core.Presentation
             {
                 foreach (ModelItem modelItem in stateModelItems)
                 {
-                    object viewState = this.ViewStateService.RetrieveViewState(
-                        modelItem,
-                        ShapeLocationViewStateKey
-                    );
+                    object viewState = this.ViewStateService
+                        .RetrieveViewState(modelItem, ShapeLocationViewStateKey);
                     if (viewState != null)
                     {
                         viewState = Point.Add((Point)viewState, offsetVector);
                         if (enableUndo)
                         {
-                            this.ViewStateService.StoreViewStateWithUndo(
-                                modelItem,
-                                ShapeLocationViewStateKey,
-                                viewState
-                            );
+                            this.ViewStateService
+                                .StoreViewStateWithUndo(
+                                    modelItem,
+                                    ShapeLocationViewStateKey,
+                                    viewState
+                                );
                         }
                         else
                         {
-                            this.ViewStateService.StoreViewState(
-                                modelItem,
-                                ShapeLocationViewStateKey,
-                                viewState
-                            );
+                            this.ViewStateService
+                                .StoreViewState(modelItem, ShapeLocationViewStateKey, viewState);
                         }
                     }
                 }
@@ -654,10 +668,8 @@ namespace System.Activities.Core.Presentation
             {
                 foreach (ModelItem modelItem in transitionModelItems)
                 {
-                    object viewState = this.ViewStateService.RetrieveViewState(
-                        modelItem,
-                        ConnectorLocationViewStateKey
-                    );
+                    object viewState = this.ViewStateService
+                        .RetrieveViewState(modelItem, ConnectorLocationViewStateKey);
                     if (viewState != null)
                     {
                         PointCollection locations = (PointCollection)viewState;
@@ -671,19 +683,21 @@ namespace System.Activities.Core.Presentation
                         }
                         if (enableUndo)
                         {
-                            this.ViewStateService.StoreViewStateWithUndo(
-                                modelItem,
-                                ConnectorLocationViewStateKey,
-                                newLocations
-                            );
+                            this.ViewStateService
+                                .StoreViewStateWithUndo(
+                                    modelItem,
+                                    ConnectorLocationViewStateKey,
+                                    newLocations
+                                );
                         }
                         else
                         {
-                            this.ViewStateService.StoreViewState(
-                                modelItem,
-                                ConnectorLocationViewStateKey,
-                                newLocations
-                            );
+                            this.ViewStateService
+                                .StoreViewState(
+                                    modelItem,
+                                    ConnectorLocationViewStateKey,
+                                    newLocations
+                                );
                         }
                     }
                 }
@@ -696,10 +710,8 @@ namespace System.Activities.Core.Presentation
             if (itemsPasted.Count > 0)
             {
                 //Check to see if the first element in the input list needs offset. Generalize that information for all ModelItems in the input list.
-                object location = this.ViewStateService.RetrieveViewState(
-                    itemsPasted[0],
-                    ShapeLocationViewStateKey
-                );
+                object location = this.ViewStateService
+                    .RetrieveViewState(itemsPasted[0], ShapeLocationViewStateKey);
                 HashSet<Point> targetOccupiedLocations = null;
 
                 if (this.ModelItem.ItemType == typeof(StateMachine))

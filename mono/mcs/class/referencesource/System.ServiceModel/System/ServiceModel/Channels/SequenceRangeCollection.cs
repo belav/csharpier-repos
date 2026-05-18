@@ -203,9 +203,8 @@ namespace System.ServiceModel.Channels
             {
                 get
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ArgumentOutOfRangeException("index")
-                    );
+                    throw DiagnosticUtility.ExceptionUtility
+                        .ThrowHelperError(new ArgumentOutOfRangeException("index"));
                 }
             }
 
@@ -244,13 +243,14 @@ namespace System.ServiceModel.Channels
                 get
                 {
                     if (index < 0 || index >= ranges.Length)
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new ArgumentOutOfRangeException(
-                                "index",
-                                index,
-                                SR.GetString(SR.ValueMustBeInRange, 0, ranges.Length - 1)
-                            )
-                        );
+                        throw DiagnosticUtility.ExceptionUtility
+                            .ThrowHelperError(
+                                new ArgumentOutOfRangeException(
+                                    "index",
+                                    index,
+                                    SR.GetString(SR.ValueMustBeInRange, 0, ranges.Length - 1)
+                                )
+                            );
                     return this.ranges[index];
                 }
             }
@@ -319,9 +319,8 @@ namespace System.ServiceModel.Channels
                 get
                 {
                     if (index != 0)
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new ArgumentOutOfRangeException("index")
-                        );
+                        throw DiagnosticUtility.ExceptionUtility
+                            .ThrowHelperError(new ArgumentOutOfRangeException("index"));
                     return this.range;
                 }
             }

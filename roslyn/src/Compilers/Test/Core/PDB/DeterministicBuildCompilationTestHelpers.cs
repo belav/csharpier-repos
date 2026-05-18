@@ -86,13 +86,11 @@ namespace Roslyn.Test.Utilities.PDB
                 is DesktopAssemblyIdentityComparer identityComparer
             )
             {
-                portabilityPolicy |= identityComparer
-                    .PortabilityPolicy
+                portabilityPolicy |= identityComparer.PortabilityPolicy
                     .SuppressSilverlightLibraryAssembliesPortability
                     ? 0b1
                     : 0;
-                portabilityPolicy |= identityComparer
-                    .PortabilityPolicy
+                portabilityPolicy |= identityComparer.PortabilityPolicy
                     .SuppressSilverlightPlatformAssembliesPortability
                     ? 0b10
                     : 0;
@@ -100,13 +98,13 @@ namespace Roslyn.Test.Utilities.PDB
 
             pdbOptions.VerifyPdbOption("portability-policy", portabilityPolicy);
 
-            var compilerVersion = typeof(Compilation)
-                .Assembly.GetCustomAttribute<AssemblyInformationalVersionAttribute>()
+            var compilerVersion = typeof(Compilation).Assembly
+                .GetCustomAttribute<AssemblyInformationalVersionAttribute>()
                 ?.InformationalVersion;
             Assert.Equal(compilerVersion.ToString(), pdbOptions["compiler-version"]);
 
-            var runtimeVersion = typeof(object)
-                .Assembly.GetCustomAttribute<AssemblyInformationalVersionAttribute>()
+            var runtimeVersion = typeof(object).Assembly
+                .GetCustomAttribute<AssemblyInformationalVersionAttribute>()
                 ?.InformationalVersion;
             Assert.Equal(runtimeVersion, pdbOptions[CompilationOptionNames.RuntimeVersion]);
 

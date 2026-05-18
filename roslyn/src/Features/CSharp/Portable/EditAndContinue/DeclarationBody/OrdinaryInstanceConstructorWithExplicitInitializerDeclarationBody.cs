@@ -28,7 +28,8 @@ internal sealed class OrdinaryInstanceConstructorWithExplicitInitializerDeclarat
     public override ImmutableArray<ISymbol> GetCapturedVariables(SemanticModel model) =>
         model
             .AnalyzeDataFlow(Initializer)!
-            .CapturedInside.AddRange(model.AnalyzeDataFlow(Body).CapturedInside)
+            .CapturedInside
+            .AddRange(model.AnalyzeDataFlow(Body).CapturedInside)
             .Distinct();
 
     public override TextSpan Envelope =>

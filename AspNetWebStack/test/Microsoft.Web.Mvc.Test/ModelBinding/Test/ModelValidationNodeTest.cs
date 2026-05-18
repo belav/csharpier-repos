@@ -216,9 +216,8 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
                 model.GetType(),
                 "ValidStringProperty"
             );
-            node.ChildNodes.Add(
-                new ModelValidationNode(childMetadata, "theKey.ValidStringProperty")
-            );
+            node.ChildNodes
+                .Add(new ModelValidationNode(childMetadata, "theKey.ValidStringProperty"));
 
             node.Validating += delegate
             {
@@ -293,9 +292,8 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
                 model.GetType(),
                 "InvalidStringProperty"
             );
-            node.ChildNodes.Add(
-                new ModelValidationNode(childMetadata, "theKey.InvalidStringProperty")
-            );
+            node.ChildNodes
+                .Add(new ModelValidationNode(childMetadata, "theKey.InvalidStringProperty"));
 
             node.Validating += delegate
             {
@@ -321,8 +319,7 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
             );
             Assert.Equal(
                 "Sample error message",
-                controllerContext
-                    .Controller
+                controllerContext.Controller
                     .ViewData
                     .ModelState["theKey.InvalidStringProperty"]
                     .Errors[0]
@@ -436,10 +433,10 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
                 ValidateAllProperties = true,
             };
 
-            controllerContext.Controller.ViewData.ModelState.AddModelError(
-                "theKey.RequiredString.Dummy",
-                "existing Error Text"
-            );
+            controllerContext.Controller
+                .ViewData
+                .ModelState
+                .AddModelError("theKey.RequiredString.Dummy", "existing Error Text");
 
             // Act
             node.Validate(controllerContext);
@@ -448,8 +445,7 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
             Assert.Null(controllerContext.Controller.ViewData.ModelState["theKey.RequiredString"]);
             Assert.Equal(
                 "existing Error Text",
-                controllerContext
-                    .Controller
+                controllerContext.Controller
                     .ViewData
                     .ModelState["theKey.RequiredString.Dummy"]
                     .Errors[0]
@@ -457,8 +453,7 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
             );
             Assert.Equal(
                 "The field RangedInt must be between 10 and 30.",
-                controllerContext
-                    .Controller
+                controllerContext.Controller
                     .ViewData
                     .ModelState["theKey.RangedInt"]
                     .Errors[0]

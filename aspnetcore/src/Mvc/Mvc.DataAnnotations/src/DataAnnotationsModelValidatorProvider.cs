@@ -50,10 +50,11 @@ internal sealed class DataAnnotationsModelValidatorProvider : IMetadataBasedMode
             && _options.Value.DataAnnotationLocalizerProvider != null
         )
         {
-            stringLocalizer = _options.Value.DataAnnotationLocalizerProvider(
-                context.ModelMetadata.ContainerType ?? context.ModelMetadata.ModelType,
-                _stringLocalizerFactory
-            );
+            stringLocalizer = _options.Value
+                .DataAnnotationLocalizerProvider(
+                    context.ModelMetadata.ContainerType ?? context.ModelMetadata.ModelType,
+                    _stringLocalizerFactory
+                );
         }
 
         var results = context.Results;
@@ -92,9 +93,14 @@ internal sealed class DataAnnotationsModelValidatorProvider : IMetadataBasedMode
         // Produce a validator if the type supports IValidatableObject
         if (typeof(IValidatableObject).IsAssignableFrom(context.ModelMetadata.ModelType))
         {
-            context.Results.Add(
-                new ValidatorItem { Validator = new ValidatableObjectAdapter(), IsReusable = true }
-            );
+            context.Results
+                .Add(
+                    new ValidatorItem
+                    {
+                        Validator = new ValidatableObjectAdapter(),
+                        IsReusable = true,
+                    }
+                );
         }
     }
 

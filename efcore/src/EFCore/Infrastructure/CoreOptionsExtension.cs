@@ -668,20 +668,22 @@ public class CoreOptionsExtension : IDbContextOptionsExtension
                 Extension.GetMemoryCache()?.GetHashCode() ?? 0L
             ).ToString(CultureInfo.InvariantCulture);
             debugInfo["Core:" + nameof(DbContextOptionsBuilder.EnableSensitiveDataLogging)] =
-                Extension
-                    ._sensitiveDataLoggingEnabled.GetHashCode()
+                Extension._sensitiveDataLoggingEnabled
+                    .GetHashCode()
                     .ToString(CultureInfo.InvariantCulture);
-            debugInfo["Core:" + nameof(DbContextOptionsBuilder.EnableDetailedErrors)] = Extension
-                ._detailedErrorsEnabled.GetHashCode()
-                .ToString(CultureInfo.InvariantCulture);
+            debugInfo["Core:" + nameof(DbContextOptionsBuilder.EnableDetailedErrors)] =
+                Extension._detailedErrorsEnabled
+                    .GetHashCode()
+                    .ToString(CultureInfo.InvariantCulture);
             debugInfo["Core:" + nameof(DbContextOptionsBuilder.EnableThreadSafetyChecks)] = (
                 !Extension._threadSafetyChecksEnabled
             )
                 .GetHashCode()
                 .ToString(CultureInfo.InvariantCulture);
-            debugInfo["Core:" + nameof(DbContextOptionsBuilder.ConfigureWarnings)] = Extension
-                ._warningsConfiguration.GetServiceProviderHashCode()
-                .ToString(CultureInfo.InvariantCulture);
+            debugInfo["Core:" + nameof(DbContextOptionsBuilder.ConfigureWarnings)] =
+                Extension._warningsConfiguration
+                    .GetServiceProviderHashCode()
+                    .ToString(CultureInfo.InvariantCulture);
 
             if (Extension._replacedServices != null)
             {
@@ -748,9 +750,8 @@ public class CoreOptionsExtension : IDbContextOptionsExtension
                 == otherInfo.Extension.RootApplicationServiceProvider
             && Extension._threadSafetyChecksEnabled
                 == otherInfo.Extension._threadSafetyChecksEnabled
-            && Extension._warningsConfiguration.ShouldUseSameServiceProvider(
-                otherInfo.Extension._warningsConfiguration
-            )
+            && Extension._warningsConfiguration
+                .ShouldUseSameServiceProvider(otherInfo.Extension._warningsConfiguration)
             && (
                 Extension._replacedServices == otherInfo.Extension._replacedServices
                 || (
@@ -758,9 +759,8 @@ public class CoreOptionsExtension : IDbContextOptionsExtension
                     && otherInfo.Extension._replacedServices != null
                     && Extension._replacedServices.Count
                         == otherInfo.Extension._replacedServices.Count
-                    && Extension._replacedServices.SequenceEqual(
-                        otherInfo.Extension._replacedServices
-                    )
+                    && Extension._replacedServices
+                        .SequenceEqual(otherInfo.Extension._replacedServices)
                 )
             )
             && (
@@ -768,9 +768,8 @@ public class CoreOptionsExtension : IDbContextOptionsExtension
                 || (
                     Extension._singletonInterceptors != null
                     && otherInfo.Extension._singletonInterceptors != null
-                    && Extension._singletonInterceptors.SequenceEqual(
-                        otherInfo.Extension._singletonInterceptors
-                    )
+                    && Extension._singletonInterceptors
+                        .SequenceEqual(otherInfo.Extension._singletonInterceptors)
                 )
             );
     }

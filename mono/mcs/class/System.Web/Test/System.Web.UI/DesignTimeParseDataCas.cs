@@ -74,9 +74,8 @@ namespace MonoCasTests.System.Web.UI
             AspNetHostingPermissionLevel level
         )
         {
-            ConstructorInfo ci = this.Type.GetConstructor(
-                new Type[2] { typeof(IDesignerHost), typeof(string) }
-            );
+            ConstructorInfo ci = this.Type
+                .GetConstructor(new Type[2] { typeof(IDesignerHost), typeof(string) });
             Assert.IsNotNull(ci, ".ctor(IDesignerHost,String)");
             return ci.Invoke(new object[2] { null, "parseText" });
         }

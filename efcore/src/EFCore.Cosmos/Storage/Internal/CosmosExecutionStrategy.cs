@@ -122,10 +122,10 @@ public class CosmosExecutionStrategy : ExecutionStrategy
             case HttpException httpException:
             {
                 if (
-                    httpException.Response.Headers.TryGetValues(
-                        "x-ms-retry-after-ms",
-                        out var values
-                    ) && TryParseMsRetryAfter(values.FirstOrDefault(), out var delay)
+                    httpException.Response
+                        .Headers
+                        .TryGetValues("x-ms-retry-after-ms", out var values)
+                    && TryParseMsRetryAfter(values.FirstOrDefault(), out var delay)
                 )
                 {
                     return delay;
@@ -146,8 +146,8 @@ public class CosmosExecutionStrategy : ExecutionStrategy
             {
                 var response = (HttpWebResponse)webException.Response!;
 
-                var delayString = response
-                    .Headers.GetValues("x-ms-retry-after-ms")
+                var delayString = response.Headers
+                    .GetValues("x-ms-retry-after-ms")
                     ?.FirstOrDefault();
                 if (TryParseMsRetryAfter(delayString, out var delay))
                 {

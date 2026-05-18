@@ -232,9 +232,9 @@ namespace Microsoft.CodeAnalysis.SQLite.v2
 
                 if (!Storage._shutdownTokenSource.IsCancellationRequested)
                 {
-                    using var _ = Storage._connectionPool.Target.GetPooledConnection(
-                        out var connection
-                    );
+                    using var _ = Storage._connectionPool
+                        .Target
+                        .GetPooledConnection(out var connection);
 
                     // We're in the reading-only scheduler path, so we can't allow TryGetDatabaseId to write.  Note that
                     // this is ok, and actually provides the semantics we want.  Specifically, we can be trying to read
@@ -313,13 +313,8 @@ namespace Microsoft.CodeAnalysis.SQLite.v2
             ) =>
                 Storage.PerformWriteAsync(
                     static t =>
-                        t.self.WriteStream(
-                            t.key,
-                            t.name,
-                            t.stream,
-                            t.checksum,
-                            t.cancellationToken
-                        ),
+                        t.self
+                            .WriteStream(t.key, t.name, t.stream, t.checksum, t.cancellationToken),
                     (self: this, key, name, stream, checksum, cancellationToken),
                     cancellationToken
                 );
@@ -342,9 +337,9 @@ namespace Microsoft.CodeAnalysis.SQLite.v2
 
                 if (!Storage._shutdownTokenSource.IsCancellationRequested)
                 {
-                    using var _ = Storage._connectionPool.Target.GetPooledConnection(
-                        out var connection
-                    );
+                    using var _ = Storage._connectionPool
+                        .Target
+                        .GetPooledConnection(out var connection);
 
                     // Determine the appropriate data-id to store this stream at.  We already are running
                     // with an exclusive write lock on the DB, so it's safe for us to write the data id to
@@ -404,22 +399,20 @@ namespace Microsoft.CodeAnalysis.SQLite.v2
                         // out the data value at all.
                         if (
                             t.checksum != null
-                            && !t.self.ChecksumsMatch_MustRunInTransaction(
-                                t.connection,
-                                t.database,
-                                t.rowId,
-                                t.checksum.Value
-                            )
+                            && !t.self
+                                .ChecksumsMatch_MustRunInTransaction(
+                                    t.connection,
+                                    t.database,
+                                    t.rowId,
+                                    t.checksum.Value
+                                )
                         )
                         {
                             return default;
                         }
 
-                        return t.connection.ReadDataBlob_MustRunInTransaction(
-                            t.database,
-                            t.self.Table,
-                            t.rowId
-                        );
+                        return t.connection
+                            .ReadDataBlob_MustRunInTransaction(t.database, t.self.Table, t.rowId);
                     },
                     (self: this, connection, database, checksum, rowId),
                     throwOnSqlException: true
@@ -442,11 +435,8 @@ namespace Microsoft.CodeAnalysis.SQLite.v2
                 // writing to the blob.
                 var (stream, exception) = connection.RunInTransaction(
                     static t =>
-                        t.connection.ReadChecksum_MustRunInTransaction(
-                            t.database,
-                            t.self.Table,
-                            t.rowId
-                        ),
+                        t.connection
+                            .ReadChecksum_MustRunInTransaction(t.database, t.self.Table, t.rowId),
                     (self: this, connection, database, rowId),
                     throwOnSqlException: true
                 );

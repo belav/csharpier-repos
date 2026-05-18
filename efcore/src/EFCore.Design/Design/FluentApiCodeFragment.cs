@@ -117,8 +117,8 @@ public class FluentApiCodeFragment : IMethodCallCodeFragment
             }
 
             foreach (
-                var argumentNamespace in current
-                    .Arguments.Where(a =>
+                var argumentNamespace in current.Arguments
+                    .Where(a =>
                         a
                             is not null
                                 and not NestedClosureCodeFragment

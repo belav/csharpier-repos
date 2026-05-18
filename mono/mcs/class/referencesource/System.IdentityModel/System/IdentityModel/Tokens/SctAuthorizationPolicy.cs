@@ -28,9 +28,8 @@ namespace System.IdentityModel.Tokens
         {
             if (evaluationContext == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                    "evaluationContext"
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperArgumentNull("evaluationContext");
             }
             evaluationContext.AddClaimSet(this, _issuer);
             return true;

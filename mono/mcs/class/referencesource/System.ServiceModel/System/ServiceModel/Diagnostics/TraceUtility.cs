@@ -928,10 +928,8 @@ namespace System.ServiceModel.Diagnostics
         {
             object activityIdFromProprties;
             if (
-                !operationContext.IncomingMessageProperties.TryGetValue(
-                    E2EActivityId,
-                    out activityIdFromProprties
-                )
+                !operationContext.IncomingMessageProperties
+                    .TryGetValue(E2EActivityId, out activityIdFromProprties)
             )
             {
                 return TraceUtility.ExtractActivityId(operationContext.IncomingMessage);
@@ -1118,16 +1116,17 @@ namespace System.ServiceModel.Diagnostics
             Guid activityId = TraceUtility.ExtractActivityId(message);
             if (DiagnosticUtility.ShouldTrace(severity))
             {
-                DiagnosticUtility.DiagnosticTrace.TraceEvent(
-                    severity,
-                    traceCode,
-                    GenerateMsdnTraceCode(traceCode),
-                    traceDescription,
-                    new MessageTraceRecord(message),
-                    null,
-                    activityId,
-                    message
-                );
+                DiagnosticUtility.DiagnosticTrace
+                    .TraceEvent(
+                        severity,
+                        traceCode,
+                        GenerateMsdnTraceCode(traceCode),
+                        traceDescription,
+                        new MessageTraceRecord(message),
+                        null,
+                        activityId,
+                        message
+                    );
             }
         }
 
@@ -1142,16 +1141,17 @@ namespace System.ServiceModel.Diagnostics
             Guid activityId = TraceUtility.ExtractActivityId(message);
             if (DiagnosticUtility.ShouldTrace(severity))
             {
-                DiagnosticUtility.DiagnosticTrace.TraceEvent(
-                    severity,
-                    traceCode,
-                    GenerateMsdnTraceCode(traceCode),
-                    traceDescription,
-                    new MessageTraceRecord(message),
-                    exception,
-                    activityId,
-                    null
-                );
+                DiagnosticUtility.DiagnosticTrace
+                    .TraceEvent(
+                        severity,
+                        traceCode,
+                        GenerateMsdnTraceCode(traceCode),
+                        traceDescription,
+                        new MessageTraceRecord(message),
+                        exception,
+                        activityId,
+                        null
+                    );
             }
         }
 
@@ -1164,15 +1164,16 @@ namespace System.ServiceModel.Diagnostics
             Exception exception
         )
         {
-            DiagnosticUtility.DiagnosticTrace.TraceEvent(
-                severity,
-                traceCode,
-                GenerateMsdnTraceCode(traceCode),
-                traceDescription,
-                extendedData,
-                exception,
-                source
-            );
+            DiagnosticUtility.DiagnosticTrace
+                .TraceEvent(
+                    severity,
+                    traceCode,
+                    GenerateMsdnTraceCode(traceCode),
+                    traceDescription,
+                    extendedData,
+                    exception,
+                    source
+                );
         }
 
         // These methods require a TraceRecord to be allocated, so we want them to show up on profiles if the caller didn't avoid
@@ -1189,15 +1190,16 @@ namespace System.ServiceModel.Diagnostics
         {
             if (DiagnosticUtility.ShouldTrace(severity))
             {
-                DiagnosticUtility.DiagnosticTrace.TraceEvent(
-                    severity,
-                    traceCode,
-                    GenerateMsdnTraceCode(traceCode),
-                    traceDescription,
-                    extendedData,
-                    exception,
-                    source
-                );
+                DiagnosticUtility.DiagnosticTrace
+                    .TraceEvent(
+                        severity,
+                        traceCode,
+                        GenerateMsdnTraceCode(traceCode),
+                        traceDescription,
+                        extendedData,
+                        exception,
+                        source
+                    );
             }
         }
 
@@ -1215,16 +1217,17 @@ namespace System.ServiceModel.Diagnostics
             Guid activityId = TraceUtility.ExtractActivityId(message);
             if (DiagnosticUtility.ShouldTrace(severity))
             {
-                DiagnosticUtility.DiagnosticTrace.TraceEvent(
-                    severity,
-                    traceCode,
-                    GenerateMsdnTraceCode(traceCode),
-                    traceDescription,
-                    extendedData,
-                    exception,
-                    activityId,
-                    source
-                );
+                DiagnosticUtility.DiagnosticTrace
+                    .TraceEvent(
+                        severity,
+                        traceCode,
+                        GenerateMsdnTraceCode(traceCode),
+                        traceDescription,
+                        extendedData,
+                        exception,
+                        activityId,
+                        source
+                    );
             }
         }
 
@@ -1238,16 +1241,17 @@ namespace System.ServiceModel.Diagnostics
             Guid activityId
         )
         {
-            DiagnosticUtility.DiagnosticTrace.TraceEvent(
-                severity,
-                traceCode,
-                GenerateMsdnTraceCode(traceCode),
-                traceDescription,
-                extendedData,
-                exception,
-                activityId,
-                source
-            );
+            DiagnosticUtility.DiagnosticTrace
+                .TraceEvent(
+                    severity,
+                    traceCode,
+                    GenerateMsdnTraceCode(traceCode),
+                    traceDescription,
+                    extendedData,
+                    exception,
+                    activityId,
+                    source
+                );
         }
 
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -1263,16 +1267,17 @@ namespace System.ServiceModel.Diagnostics
         {
             if (DiagnosticUtility.ShouldTrace(severity))
             {
-                DiagnosticUtility.DiagnosticTrace.TraceEvent(
-                    severity,
-                    traceCode,
-                    GenerateMsdnTraceCode(traceCode),
-                    traceDescription,
-                    extendedData,
-                    exception,
-                    activityId,
-                    source
-                );
+                DiagnosticUtility.DiagnosticTrace
+                    .TraceEvent(
+                        severity,
+                        traceCode,
+                        GenerateMsdnTraceCode(traceCode),
+                        traceDescription,
+                        extendedData,
+                        exception,
+                        activityId,
+                        source
+                    );
             }
         }
 
@@ -1337,16 +1342,17 @@ namespace System.ServiceModel.Diagnostics
             Guid activityId = TraceUtility.ExtractActivityId(message);
             if (DiagnosticUtility.ShouldTraceError)
             {
-                DiagnosticUtility.DiagnosticTrace.TraceEvent(
-                    TraceEventType.Error,
-                    TraceCode.ThrowingException,
-                    GenerateMsdnTraceCode(TraceCode.ThrowingException),
-                    TraceSR.GetString(TraceSR.ThrowingException),
-                    null,
-                    exception,
-                    activityId,
-                    null
-                );
+                DiagnosticUtility.DiagnosticTrace
+                    .TraceEvent(
+                        TraceEventType.Error,
+                        TraceCode.ThrowingException,
+                        GenerateMsdnTraceCode(TraceCode.ThrowingException),
+                        TraceSR.GetString(TraceSR.ThrowingException),
+                        null,
+                        exception,
+                        activityId,
+                        null
+                    );
             }
             return exception;
         }
@@ -1359,16 +1365,17 @@ namespace System.ServiceModel.Diagnostics
         {
             if (DiagnosticUtility.ShouldTraceError)
             {
-                DiagnosticUtility.DiagnosticTrace.TraceEvent(
-                    TraceEventType.Error,
-                    TraceCode.ThrowingException,
-                    GenerateMsdnTraceCode(TraceCode.ThrowingException),
-                    TraceSR.GetString(TraceSR.ThrowingException),
-                    null,
-                    exception,
-                    activityId,
-                    source
-                );
+                DiagnosticUtility.DiagnosticTrace
+                    .TraceEvent(
+                        TraceEventType.Error,
+                        TraceCode.ThrowingException,
+                        GenerateMsdnTraceCode(TraceCode.ThrowingException),
+                        TraceSR.GetString(TraceSR.ThrowingException),
+                        null,
+                        exception,
+                        activityId,
+                        source
+                    );
             }
             return exception;
         }
@@ -1378,16 +1385,17 @@ namespace System.ServiceModel.Diagnostics
             if (DiagnosticUtility.ShouldTraceWarning)
             {
                 Guid activityId = TraceUtility.ExtractActivityId(message);
-                DiagnosticUtility.DiagnosticTrace.TraceEvent(
-                    TraceEventType.Warning,
-                    TraceCode.ThrowingException,
-                    GenerateMsdnTraceCode(TraceCode.ThrowingException),
-                    TraceSR.GetString(TraceSR.ThrowingException),
-                    null,
-                    exception,
-                    activityId,
-                    null
-                );
+                DiagnosticUtility.DiagnosticTrace
+                    .TraceEvent(
+                        TraceEventType.Warning,
+                        TraceCode.ThrowingException,
+                        GenerateMsdnTraceCode(TraceCode.ThrowingException),
+                        TraceSR.GetString(TraceSR.ThrowingException),
+                        null,
+                        exception,
+                        activityId,
+                        null
+                    );
             }
             return exception;
         }
@@ -1454,19 +1462,20 @@ namespace System.ServiceModel.Diagnostics
                         method.Name
                     )
                 );
-                DiagnosticUtility.DiagnosticTrace.TraceEvent(
-                    TraceEventType.Warning,
-                    TraceCode.UnhandledExceptionInUserOperation,
-                    GenerateMsdnTraceCode(TraceCode.UnhandledExceptionInUserOperation),
-                    SR.GetString(
-                        SR.TraceCodeUnhandledExceptionInUserOperation,
-                        method.DeclaringType.FullName,
-                        method.Name
-                    ),
-                    record,
-                    e,
-                    null
-                );
+                DiagnosticUtility.DiagnosticTrace
+                    .TraceEvent(
+                        TraceEventType.Warning,
+                        TraceCode.UnhandledExceptionInUserOperation,
+                        GenerateMsdnTraceCode(TraceCode.UnhandledExceptionInUserOperation),
+                        SR.GetString(
+                            SR.TraceCodeUnhandledExceptionInUserOperation,
+                            method.DeclaringType.FullName,
+                            method.Name
+                        ),
+                        record,
+                        e,
+                        null
+                    );
             }
         }
 
@@ -1547,10 +1556,11 @@ namespace System.ServiceModel.Diagnostics
             {
                 object endpointMessageProperty;
                 if (
-                    context.IncomingMessageProperties.TryGetValue(
-                        RemoteEndpointMessageProperty.Name,
-                        out endpointMessageProperty
-                    )
+                    context.IncomingMessageProperties
+                        .TryGetValue(
+                            RemoteEndpointMessageProperty.Name,
+                            out endpointMessageProperty
+                        )
                 )
                 {
                     RemoteEndpointMessageProperty endpoint =
@@ -1689,8 +1699,7 @@ namespace System.ServiceModel.Diagnostics
                     if (activityIdFound)
                     {
                         FxTrace.Trace.SetAndTraceTransfer(activityId, !createNewActivityId);
-                        message.Properties[TraceUtility.E2EActivityId] = Trace
-                            .CorrelationManager
+                        message.Properties[TraceUtility.E2EActivityId] = Trace.CorrelationManager
                             .ActivityId;
                     }
                 }
@@ -1720,10 +1729,8 @@ namespace System.ServiceModel.Diagnostics
             )
             {
                 if (
-                    !context.IncomingMessageProperties.TryGetValue(
-                        TraceApplicationReference,
-                        out hostReference
-                    )
+                    !context.IncomingMessageProperties
+                        .TryGetValue(TraceApplicationReference, out hostReference)
                 )
                 {
                     hostReference = AspNetEnvironment.Current.GetAnnotationFromHost(context.Host);
@@ -1814,15 +1821,14 @@ namespace System.ServiceModel.Diagnostics
             object data = null;
             if (
                 OperationContext.Current != null
-                && OperationContext.Current.OutgoingMessageProperties.TryGetValue(
-                    TraceUtility.AsyncOperationActivityKey,
-                    out data
-                )
+                && OperationContext.Current
+                    .OutgoingMessageProperties
+                    .TryGetValue(TraceUtility.AsyncOperationActivityKey, out data)
             )
             {
-                OperationContext.Current.OutgoingMessageProperties.Remove(
-                    TraceUtility.AsyncOperationActivityKey
-                );
+                OperationContext.Current
+                    .OutgoingMessageProperties
+                    .Remove(TraceUtility.AsyncOperationActivityKey);
             }
             return data;
         }
@@ -1850,15 +1856,17 @@ namespace System.ServiceModel.Diagnostics
             startTime = 0;
             if (
                 OperationContext.Current != null
-                && OperationContext.Current.OutgoingMessageProperties.TryGetValue<EventTraceActivityTimeProperty>(
-                    TraceUtility.AsyncOperationStartTimeKey,
-                    out data
-                )
+                && OperationContext.Current
+                    .OutgoingMessageProperties
+                    .TryGetValue<EventTraceActivityTimeProperty>(
+                        TraceUtility.AsyncOperationStartTimeKey,
+                        out data
+                    )
             )
             {
-                OperationContext.Current.OutgoingMessageProperties.Remove(
-                    TraceUtility.AsyncOperationStartTimeKey
-                );
+                OperationContext.Current
+                    .OutgoingMessageProperties
+                    .Remove(TraceUtility.AsyncOperationStartTimeKey);
                 eventTraceActivity = data.EventTraceActivity;
                 startTime = data.StartTime;
             }

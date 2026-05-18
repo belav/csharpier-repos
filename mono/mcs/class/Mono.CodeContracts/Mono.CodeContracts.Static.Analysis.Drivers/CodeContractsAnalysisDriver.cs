@@ -181,12 +181,11 @@ namespace Mono.CodeContracts.Static.Analysis.Drivers
                 if (DebugOptions.Debug)
                 {
                     Console.WriteLine("------------Value based CFG-----------------");
-                    ValueLayer.ILDecoder.ContextProvider.MethodContext.CFG.Print(
-                        Console.Out,
-                        ValueLayer.Printer,
-                        null,
-                        null
-                    );
+                    ValueLayer.ILDecoder
+                        .ContextProvider
+                        .MethodContext
+                        .CFG
+                        .Print(Console.Out, ValueLayer.Printer, null, null);
                 }
 
                 IILDecoder<
@@ -208,12 +207,11 @@ namespace Mono.CodeContracts.Static.Analysis.Drivers
                 if (DebugOptions.Debug)
                 {
                     Console.WriteLine("------------Expression based CFG-------------");
-                    ExpressionLayer.ILDecoder.ContextProvider.MethodContext.CFG.Print(
-                        Console.Out,
-                        ExpressionLayer.Printer,
-                        null,
-                        null
-                    );
+                    ExpressionLayer.ILDecoder
+                        .ContextProvider
+                        .MethodContext
+                        .CFG
+                        .Print(Console.Out, ExpressionLayer.Printer, null, null);
                 }
 
                 HybridLayer = CodeLayerFactory.Create(

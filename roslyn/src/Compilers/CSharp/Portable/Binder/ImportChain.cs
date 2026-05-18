@@ -133,11 +133,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                         var ns = (NamespaceSymbol)target;
                         var assemblyRef = TryGetAssemblyScope(ns, moduleBuilder, diagnostics);
                         usedNamespaces.Add(
-                            Cci.UsedNamespaceOrType.CreateNamespace(
-                                ns.GetCciAdapter(),
-                                assemblyRef,
-                                alias
-                            )
+                            Cci.UsedNamespaceOrType
+                                .CreateNamespace(ns.GetCciAdapter(), assemblyRef, alias)
                         );
                     }
                     else if (

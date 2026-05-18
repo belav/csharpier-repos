@@ -44,12 +44,13 @@ namespace System.ServiceModel.Channels
                 && bindingElement.MaxReceivedMessageSize > int.MaxValue
             )
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentOutOfRangeException(
-                        "bindingElement.MaxReceivedMessageSize",
-                        SR.GetString(SR.MaxReceivedMessageSizeMustBeInIntegerRange)
-                    )
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        new ArgumentOutOfRangeException(
+                            "bindingElement.MaxReceivedMessageSize",
+                            SR.GetString(SR.MaxReceivedMessageSizeMustBeInIntegerRange)
+                        )
+                    );
             }
 
             this.connectionBufferSize = bindingElement.ConnectionBufferSize;
@@ -66,11 +67,12 @@ namespace System.ServiceModel.Channels
 
             if (upgradeBindingElements.Count > 1)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(
-                        SR.GetString(SR.MultipleStreamUpgradeProvidersInParameters)
-                    )
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(SR.MultipleStreamUpgradeProvidersInParameters)
+                        )
+                    );
             }
             else if (
                 (upgradeBindingElements.Count == 1)
@@ -180,11 +182,12 @@ namespace System.ServiceModel.Channels
 #pragma warning suppress 56503 // Internal method.
             get
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new NotSupportedException(
-                        SR.GetString(SR.SecurityAuditNotSupportedOnChannelFactory)
-                    )
-                );
+                throw DiagnosticUtility.ExceptionUtility
+                    .ThrowHelperError(
+                        new NotSupportedException(
+                            SR.GetString(SR.SecurityAuditNotSupportedOnChannelFactory)
+                        )
+                    );
             }
         }
 
@@ -371,11 +374,8 @@ namespace System.ServiceModel.Channels
                     return;
                 }
 
-                IAsyncResult result = this.communicationObject.BeginOpen(
-                    timeout,
-                    onOpenComplete,
-                    this
-                );
+                IAsyncResult result = this.communicationObject
+                    .BeginOpen(timeout, onOpenComplete, this);
                 if (result.CompletedSynchronously)
                 {
                     this.communicationObject.EndOpen(result);
@@ -448,10 +448,8 @@ namespace System.ServiceModel.Channels
                 this.parent = parent;
                 this.timeoutHelper = new TimeoutHelper(timeout);
 
-                this.parent.GetUpgradeAndConnectionPool(
-                    out this.upgradeProvider,
-                    out this.connectionPool
-                );
+                this.parent
+                    .GetUpgradeAndConnectionPool(out this.upgradeProvider, out this.connectionPool);
 
                 if (this.connectionPool == null)
                 {
@@ -480,11 +478,8 @@ namespace System.ServiceModel.Channels
                 }
                 else
                 {
-                    IAsyncResult result = this.upgradeProvider.BeginClose(
-                        this.timeoutHelper.RemainingTime(),
-                        onCloseComplete,
-                        this
-                    );
+                    IAsyncResult result = this.upgradeProvider
+                        .BeginClose(this.timeoutHelper.RemainingTime(), onCloseComplete, this);
 
                     if (result.CompletedSynchronously)
                     {
@@ -497,10 +492,8 @@ namespace System.ServiceModel.Channels
 
             bool OnReleaseConnectionPoolScheduled()
             {
-                this.parent.ReleaseConnectionPool(
-                    this.connectionPool,
-                    this.timeoutHelper.RemainingTime()
-                );
+                this.parent
+                    .ReleaseConnectionPool(this.connectionPool, this.timeoutHelper.RemainingTime());
                 return this.HandleReleaseConnectionPoolComplete();
             }
 

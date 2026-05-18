@@ -154,10 +154,11 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
 
                 Contract.ThrowIfFalse(
                     firstStatementToRemove.Parent == lastStatementToRemove.Parent
-                        || CSharpSyntaxFacts.Instance.AreStatementsInSameContainer(
-                            firstStatementToRemove,
-                            lastStatementToRemove
-                        )
+                        || CSharpSyntaxFacts.Instance
+                            .AreStatementsInSameContainer(
+                                firstStatementToRemove,
+                                lastStatementToRemove
+                            )
                 );
 
                 var statementsToInsert = await CreateStatementsOrInitializerToInsertAtCallSiteAsync(
@@ -517,9 +518,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                                     declarationStatement.Declaration.Type,
                                     SyntaxFactory.SeparatedList(list)
                                 ),
-                                declarationStatement.SemicolonToken.WithPrependedLeadingTrivia(
-                                    triviaList
-                                )
+                                declarationStatement.SemicolonToken
+                                    .WithPrependedLeadingTrivia(triviaList)
                             )
                         );
                         triviaList.Clear();
@@ -763,8 +763,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                     if (this.SelectionResult.ShouldCallConfigureAwaitFalse())
                     {
                         if (
-                            AnalyzerResult
-                                .ReturnType.GetMembers()
+                            AnalyzerResult.ReturnType
+                                .GetMembers()
                                 .Any(static x =>
                                     x
                                         is IMethodSymbol
@@ -901,22 +901,24 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                 {
                     return method.ReplaceToken(
                         body.OpenBraceToken,
-                        body.OpenBraceToken.WithAppendedTrailingTrivia(
-                            SpecializedCollections.SingletonEnumerable(
-                                SyntaxFactory.ElasticCarriageReturnLineFeed
+                        body.OpenBraceToken
+                            .WithAppendedTrailingTrivia(
+                                SpecializedCollections.SingletonEnumerable(
+                                    SyntaxFactory.ElasticCarriageReturnLineFeed
+                                )
                             )
-                        )
                     );
                 }
                 else if (expressionBody != null)
                 {
                     return method.ReplaceToken(
                         expressionBody.ArrowToken,
-                        expressionBody.ArrowToken.WithPrependedLeadingTrivia(
-                            SpecializedCollections.SingletonEnumerable(
-                                SyntaxFactory.ElasticCarriageReturnLineFeed
+                        expressionBody.ArrowToken
+                            .WithPrependedLeadingTrivia(
+                                SpecializedCollections.SingletonEnumerable(
+                                    SyntaxFactory.ElasticCarriageReturnLineFeed
+                                )
                             )
-                        )
                     );
                 }
                 else
@@ -948,8 +950,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                 if (methodSymbol.ReturnType.NullableAnnotation != NullableAnnotation.Annotated)
                     return originalDocument;
 
-                var syntaxNode = originalDocument
-                    .Root.GetAnnotatedNodesAndTokens(MethodDefinitionAnnotation)
+                var syntaxNode = originalDocument.Root
+                    .GetAnnotatedNodesAndTokens(MethodDefinitionAnnotation)
                     .FirstOrDefault()
                     .AsNode();
                 var nodeIsMethodOrLocalFunction =
@@ -1044,12 +1046,11 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                 )
                 {
                     // Return type can be updated to not be null
-                    var newType = methodSymbol.ReturnType.WithNullableAnnotation(
-                        NullableAnnotation.NotAnnotated
-                    );
+                    var newType = methodSymbol.ReturnType
+                        .WithNullableAnnotation(NullableAnnotation.NotAnnotated);
 
-                    var oldRoot = await originalDocument
-                        .Document.GetSyntaxRootAsync(cancellationToken)
+                    var oldRoot = await originalDocument.Document
+                        .GetSyntaxRootAsync(cancellationToken)
                         .ConfigureAwait(false);
                     var newRoot = oldRoot.ReplaceNode(returnType, newType.GenerateTypeSyntax());
 
@@ -1086,14 +1087,15 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                 }
 
                 // For local functions, pascal case and camel case should be the most common and therefore we only consider those cases.
-                var localFunctionPreferences = Options.NamingStyle.SymbolSpecifications.Where(
-                    symbol =>
+                var localFunctionPreferences = Options.NamingStyle
+                    .SymbolSpecifications
+                    .Where(symbol =>
                         symbol.AppliesTo(
                             new SymbolSpecification.SymbolKindOrTypeKind(MethodKind.LocalFunction),
                             CreateMethodModifiers(),
                             null
                         )
-                );
+                    );
 
                 var namingRules = Options.NamingStyle.Rules.NamingRules;
                 var localFunctionKind = new SymbolSpecification.SymbolKindOrTypeKind(
@@ -1104,14 +1106,15 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                     if (
                         namingRules.Any(
                             static (rule, arg) =>
-                                rule.NamingStyle.CapitalizationScheme.Equals(
-                                    Capitalization.CamelCase
-                                )
-                                && rule.SymbolSpecification.AppliesTo(
-                                    arg.localFunctionKind,
-                                    arg.self.CreateMethodModifiers(),
-                                    null
-                                ),
+                                rule.NamingStyle
+                                    .CapitalizationScheme
+                                    .Equals(Capitalization.CamelCase)
+                                && rule.SymbolSpecification
+                                    .AppliesTo(
+                                        arg.localFunctionKind,
+                                        arg.self.CreateMethodModifiers(),
+                                        null
+                                    ),
                             (self: this, localFunctionKind)
                         )
                     )

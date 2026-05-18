@@ -354,25 +354,27 @@ namespace System.Web.UI.WebControls
                 {
                     if (ShowEditButton)
                     {
-                        cell.Controls.Add(
-                            CreateButton(
-                                UpdateText,
-                                UpdateImageUrl,
-                                DataControlCommands.UpdateCommandName,
-                                index
-                            )
-                        );
-                        if (ShowCancelButton)
-                        {
-                            AddSeparator(cell);
-                            cell.Controls.Add(
+                        cell.Controls
+                            .Add(
                                 CreateButton(
-                                    CancelText,
-                                    CancelImageUrl,
-                                    DataControlCommands.CancelCommandName,
+                                    UpdateText,
+                                    UpdateImageUrl,
+                                    DataControlCommands.UpdateCommandName,
                                     index
                                 )
                             );
+                        if (ShowCancelButton)
+                        {
+                            AddSeparator(cell);
+                            cell.Controls
+                                .Add(
+                                    CreateButton(
+                                        CancelText,
+                                        CancelImageUrl,
+                                        DataControlCommands.CancelCommandName,
+                                        index
+                                    )
+                                );
                         }
                     }
                 }
@@ -380,25 +382,27 @@ namespace System.Web.UI.WebControls
                 {
                     if (ShowInsertButton)
                     {
-                        cell.Controls.Add(
-                            CreateButton(
-                                InsertText,
-                                InsertImageUrl,
-                                DataControlCommands.InsertCommandName,
-                                index
-                            )
-                        );
-                        if (ShowCancelButton)
-                        {
-                            AddSeparator(cell);
-                            cell.Controls.Add(
+                        cell.Controls
+                            .Add(
                                 CreateButton(
-                                    CancelText,
-                                    CancelImageUrl,
-                                    DataControlCommands.CancelCommandName,
+                                    InsertText,
+                                    InsertImageUrl,
+                                    DataControlCommands.InsertCommandName,
                                     index
                                 )
                             );
+                        if (ShowCancelButton)
+                        {
+                            AddSeparator(cell);
+                            cell.Controls
+                                .Add(
+                                    CreateButton(
+                                        CancelText,
+                                        CancelImageUrl,
+                                        DataControlCommands.CancelCommandName,
+                                        index
+                                    )
+                                );
                         }
                     }
                 }
@@ -407,50 +411,54 @@ namespace System.Web.UI.WebControls
                     if (ShowEditButton)
                     {
                         AddSeparator(cell);
-                        cell.Controls.Add(
-                            CreateButton(
-                                EditText,
-                                EditImageUrl,
-                                DataControlCommands.EditCommandName,
-                                index
-                            )
-                        );
+                        cell.Controls
+                            .Add(
+                                CreateButton(
+                                    EditText,
+                                    EditImageUrl,
+                                    DataControlCommands.EditCommandName,
+                                    index
+                                )
+                            );
                     }
                     if (ShowDeleteButton)
                     {
                         AddSeparator(cell);
-                        cell.Controls.Add(
-                            CreateButton(
-                                DeleteText,
-                                DeleteImageUrl,
-                                DataControlCommands.DeleteCommandName,
-                                index
-                            )
-                        );
+                        cell.Controls
+                            .Add(
+                                CreateButton(
+                                    DeleteText,
+                                    DeleteImageUrl,
+                                    DataControlCommands.DeleteCommandName,
+                                    index
+                                )
+                            );
                     }
                     if (ShowInsertButton)
                     {
                         AddSeparator(cell);
-                        cell.Controls.Add(
-                            CreateButton(
-                                NewText,
-                                NewImageUrl,
-                                DataControlCommands.NewCommandName,
-                                index
-                            )
-                        );
+                        cell.Controls
+                            .Add(
+                                CreateButton(
+                                    NewText,
+                                    NewImageUrl,
+                                    DataControlCommands.NewCommandName,
+                                    index
+                                )
+                            );
                     }
                     if (ShowSelectButton)
                     {
                         AddSeparator(cell);
-                        cell.Controls.Add(
-                            CreateButton(
-                                SelectText,
-                                SelectImageUrl,
-                                DataControlCommands.SelectCommandName,
-                                index
-                            )
-                        );
+                        cell.Controls
+                            .Add(
+                                CreateButton(
+                                    SelectText,
+                                    SelectImageUrl,
+                                    DataControlCommands.SelectCommandName,
+                                    index
+                                )
+                            );
                     }
                 }
             }

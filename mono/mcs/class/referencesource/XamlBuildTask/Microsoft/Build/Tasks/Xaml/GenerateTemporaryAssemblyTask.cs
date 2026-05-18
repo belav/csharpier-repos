@@ -121,12 +121,13 @@ namespace Microsoft.Build.Tasks.Xaml
                 globalProperties["IntermediateOutputPath"] = this.OutputPath;
                 globalProperties["AssemblyName"] = this.AssemblyName;
                 globalProperties["OutputType"] = "Library";
-                retVal = base.BuildEngine.BuildProjectFile(
-                    filename,
-                    new string[] { this.CompileTargetName },
-                    globalProperties,
-                    null
-                );
+                retVal = base.BuildEngine
+                    .BuildProjectFile(
+                        filename,
+                        new string[] { this.CompileTargetName },
+                        globalProperties,
+                        null
+                    );
                 File.Delete(filename);
                 return retVal;
             }

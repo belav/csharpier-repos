@@ -196,9 +196,10 @@ namespace Microsoft.CodeAnalysis.CSharp.BraceCompletion
                     )
                 )
                 {
-                    return options.NewLines.HasFlag(
-                        NewLinePlacement.BeforeOpenBraceInObjectCollectionArrayInitializers
-                    );
+                    return options.NewLines
+                        .HasFlag(
+                            NewLinePlacement.BeforeOpenBraceInObjectCollectionArrayInitializers
+                        );
                 }
 
                 var currentTokenParentParent = currentToken.Parent?.Parent;
@@ -212,25 +213,22 @@ namespace Microsoft.CodeAnalysis.CSharp.BraceCompletion
                 // * { - in the anonymous Method context
                 if (currentTokenParentParent.IsKind(SyntaxKind.AnonymousMethodExpression))
                 {
-                    return options.NewLines.HasFlag(
-                        NewLinePlacement.BeforeOpenBraceInAnonymousMethods
-                    );
+                    return options.NewLines
+                        .HasFlag(NewLinePlacement.BeforeOpenBraceInAnonymousMethods);
                 }
 
                 // new { - Anonymous object creation
                 if (currentToken.Parent.IsKind(SyntaxKind.AnonymousObjectCreationExpression))
                 {
-                    return options.NewLines.HasFlag(
-                        NewLinePlacement.BeforeOpenBraceInAnonymousTypes
-                    );
+                    return options.NewLines
+                        .HasFlag(NewLinePlacement.BeforeOpenBraceInAnonymousTypes);
                 }
 
                 // * { - in the control statement context
                 if (IsControlBlock(currentToken.Parent))
                 {
-                    return options.NewLines.HasFlag(
-                        NewLinePlacement.BeforeOpenBraceInControlBlocks
-                    );
+                    return options.NewLines
+                        .HasFlag(NewLinePlacement.BeforeOpenBraceInControlBlocks);
                 }
 
                 // * { - in the simple Lambda context
@@ -242,9 +240,8 @@ namespace Microsoft.CodeAnalysis.CSharp.BraceCompletion
                     )
                 )
                 {
-                    return options.NewLines.HasFlag(
-                        NewLinePlacement.BeforeOpenBraceInLambdaExpressionBody
-                    );
+                    return options.NewLines
+                        .HasFlag(NewLinePlacement.BeforeOpenBraceInLambdaExpressionBody);
                 }
 
                 // * { - in the member declaration context

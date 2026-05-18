@@ -657,9 +657,10 @@ namespace Mono.Options
             {
                 throw new OptionException(
                     string.Format(
-                        c.OptionSet.MessageLocalizer(
-                            "Could not convert string `{0}' to type {1} for option `{2}'."
-                        ),
+                        c.OptionSet
+                            .MessageLocalizer(
+                                "Could not convert string `{0}' to type {1} for option `{2}'."
+                            ),
                         value,
                         targetType.Name,
                         c.OptionName
@@ -2344,9 +2345,10 @@ namespace Mono.Options
             if (command == this || extra.Contains("--help"))
             {
                 CommandSet.Out.WriteLine(_($"Usage: {CommandSet.Suite} COMMAND [OPTIONS]"));
-                CommandSet.Out.WriteLine(
-                    _($"Use `{CommandSet.Suite} help COMMAND` for help on a specific command.")
-                );
+                CommandSet.Out
+                    .WriteLine(
+                        _($"Use `{CommandSet.Suite} help COMMAND` for help on a specific command.")
+                    );
                 CommandSet.Out.WriteLine();
                 CommandSet.Out.WriteLine(_($"Available commands:"));
                 CommandSet.Out.WriteLine();
@@ -2422,16 +2424,18 @@ namespace Mono.Options
 
         internal void WriteUnknownCommand(string unknownCommand)
         {
-            CommandSet.Error.WriteLine(
-                CommandSet.Options.MessageLocalizer(
-                    $"{CommandSet.Suite}: Unknown command: {unknownCommand}"
-                )
-            );
-            CommandSet.Error.WriteLine(
-                CommandSet.Options.MessageLocalizer(
-                    $"{CommandSet.Suite}: Use `{CommandSet.Suite} help` for usage."
-                )
-            );
+            CommandSet.Error
+                .WriteLine(
+                    CommandSet.Options
+                        .MessageLocalizer($"{CommandSet.Suite}: Unknown command: {unknownCommand}")
+                );
+            CommandSet.Error
+                .WriteLine(
+                    CommandSet.Options
+                        .MessageLocalizer(
+                            $"{CommandSet.Suite}: Use `{CommandSet.Suite} help` for usage."
+                        )
+                );
         }
     }
 }
