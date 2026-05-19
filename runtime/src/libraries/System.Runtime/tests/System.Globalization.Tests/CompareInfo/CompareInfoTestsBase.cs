@@ -3,8 +3,8 @@
 
 using System.Buffers;
 using System.Collections.Generic;
-using System.Runtime.InteropServices;
 using System.Reflection;
+using System.Runtime.InteropServices;
 using System.Text;
 using Xunit;
 
@@ -14,12 +14,14 @@ namespace System.Globalization.Tests
     {
         // On Windows's NLS, hiragana characters sort after katakana.
         // On ICU, it is the opposite
-        protected static int s_expectedHiraganaToKatakanaCompare = PlatformDetection.IsNlsGlobalization ? 1 : -1;
+        protected static int s_expectedHiraganaToKatakanaCompare =
+            PlatformDetection.IsNlsGlobalization ? 1 : -1;
 
         // On Windows's NLS, all halfwidth characters sort before fullwidth characters.
         // On ICU, half and fullwidth characters that aren't in the "Halfwidth and fullwidth forms" block U+FF00-U+FFEF
         // sort before the corresponding characters that are in the block U+FF00-U+FFEF
-        protected static int s_expectedHalfToFullFormsComparison = PlatformDetection.IsNlsGlobalization ? -1 : 1;
+        protected static int s_expectedHalfToFullFormsComparison =
+            PlatformDetection.IsNlsGlobalization ? -1 : 1;
 
         protected static CompareInfo s_invariantCompare = CultureInfo.InvariantCulture.CompareInfo;
         protected static CompareInfo s_currentCompare = CultureInfo.CurrentCulture.CompareInfo;
@@ -30,21 +32,33 @@ namespace System.Globalization.Tests
         protected static CompareInfo s_slovakCompare = new CultureInfo("sk-SK").CompareInfo;
         protected static CompareInfo s_frenchCompare = new CultureInfo("fr-FR").CompareInfo;
         protected static CompareOptions supportedIgnoreNonSpaceOption =
-            PlatformDetection.IsHybridGlobalizationOnBrowser ?
-            CompareOptions.IgnoreNonSpace | CompareOptions.IgnoreKanaType :
-            CompareOptions.IgnoreNonSpace;
+            PlatformDetection.IsHybridGlobalizationOnBrowser
+                ? CompareOptions.IgnoreNonSpace | CompareOptions.IgnoreKanaType
+                : CompareOptions.IgnoreNonSpace;
 
         protected static CompareOptions supportedIgnoreCaseIgnoreNonSpaceOptions =
-            PlatformDetection.IsHybridGlobalizationOnBrowser ?
-            CompareOptions.IgnoreCase | CompareOptions.IgnoreNonSpace | CompareOptions.IgnoreKanaType :
-            CompareOptions.IgnoreCase | CompareOptions.IgnoreNonSpace;
+            PlatformDetection.IsHybridGlobalizationOnBrowser
+                ? CompareOptions.IgnoreCase
+                    | CompareOptions.IgnoreNonSpace
+                    | CompareOptions.IgnoreKanaType
+                : CompareOptions.IgnoreCase | CompareOptions.IgnoreNonSpace;
 
         // There is a regression in Windows 190xx version with the Kana comparison. Avoid running this test there.
-        protected static bool IsNotWindowsKanaRegressedVersion() => !PlatformDetection.IsWindows10Version1903OrGreater ||
-                                                              PlatformDetection.IsIcuGlobalization ||
-                                                              s_invariantCompare.Compare("\u3060", "\uFF80\uFF9E", CompareOptions.IgnoreKanaType | CompareOptions.IgnoreWidth | CompareOptions.IgnoreCase) == 0;
+        protected static bool IsNotWindowsKanaRegressedVersion() =>
+            !PlatformDetection.IsWindows10Version1903OrGreater
+            || PlatformDetection.IsIcuGlobalization
+            || s_invariantCompare.Compare(
+                "\u3060",
+                "\uFF80\uFF9E",
+                CompareOptions.IgnoreKanaType
+                    | CompareOptions.IgnoreWidth
+                    | CompareOptions.IgnoreCase
+            ) == 0;
 
-        protected static bool IsNotWindowsKanaRegressedVersionAndNotHybridGlobalizationOnWasm() => !PlatformDetection.IsHybridGlobalizationOnBrowser && IsNotWindowsKanaRegressedVersion();
-        protected static bool IsNotWindowsKanaRegressedVersionAndNotHybridGlobalization() => IsNotWindowsKanaRegressedVersion() && PlatformDetection.IsNotHybridGlobalization;
+        protected static bool IsNotWindowsKanaRegressedVersionAndNotHybridGlobalizationOnWasm() =>
+            !PlatformDetection.IsHybridGlobalizationOnBrowser && IsNotWindowsKanaRegressedVersion();
+
+        protected static bool IsNotWindowsKanaRegressedVersionAndNotHybridGlobalization() =>
+            IsNotWindowsKanaRegressedVersion() && PlatformDetection.IsNotHybridGlobalization;
     }
 }

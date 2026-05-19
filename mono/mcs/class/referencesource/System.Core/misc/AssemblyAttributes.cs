@@ -1,7 +1,7 @@
 using System.Runtime.CompilerServices;
 
-[assembly:System.Security.SecurityCritical]
+[assembly: System.Security.SecurityCritical]
 
-[assembly:StringFreezingAttribute()]
+[assembly: StringFreezingAttribute()]
 
-[assembly:DefaultDependencyAttribute(LoadHint.Always)]
+[assembly: DefaultDependencyAttribute(LoadHint.Always)]

@@ -20,9 +20,7 @@ namespace Microsoft.CodeAnalysis.CSharp.InlineHints
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpInlineTypeHintsService()
-        {
-        }
+        public CSharpInlineTypeHintsService() { }
 
         protected override TypeHint? TryGetTypeHint(
             SemanticModel semanticModel,
@@ -31,37 +29,80 @@ namespace Microsoft.CodeAnalysis.CSharp.InlineHints
             bool forImplicitVariableTypes,
             bool forLambdaParameterTypes,
             bool forImplicitObjectCreation,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             if (forImplicitVariableTypes || displayAllOverride)
             {
-                if (node is VariableDeclarationSyntax { Type.IsVar: true } variableDeclaration &&
-                    variableDeclaration.Variables.Count == 1 &&
-                    !variableDeclaration.Variables[0].Identifier.IsMissing)
+                if (
+                    node is VariableDeclarationSyntax { Type.IsVar: true } variableDeclaration
+                    && variableDeclaration.Variables.Count == 1
+                    && !variableDeclaration.Variables[0].Identifier.IsMissing
+                )
                 {
-                    var type = semanticModel.GetTypeInfo(variableDeclaration.Type, cancellationToken).Type;
+                    var type = semanticModel
+                        .GetTypeInfo(variableDeclaration.Type, cancellationToken)
+                        .Type;
                     if (IsValidType(type))
-                        return CreateTypeHint(type, displayAllOverride, forImplicitVariableTypes, variableDeclaration.Type, variableDeclaration.Variables[0].Identifier);
+                        return CreateTypeHint(
+                            type,
+                            displayAllOverride,
+                            forImplicitVariableTypes,
+                            variableDeclaration.Type,
+                            variableDeclaration.Variables[0].Identifier
+                        );
                 }
 
                 // We handle individual variables of ParenthesizedVariableDesignationSyntax separately.
                 // For example, in `var (x, y) = (0, "")`, we should `int` for `x` and `string` for `y`.
                 // It's redundant to show `(int, string)` for `var`
-                if (node is DeclarationExpressionSyntax { Type.IsVar: true, Designation: not ParenthesizedVariableDesignationSyntax } declarationExpression)
+                if (
+                    node is DeclarationExpressionSyntax
+                    {
+                        Type.IsVar: true,
+                        Designation: not ParenthesizedVariableDesignationSyntax
+                    } declarationExpression
+                )
                 {
-                    var type = semanticModel.GetTypeInfo(declarationExpression.Type, cancellationToken).Type;
+                    var type = semanticModel
+                        .GetTypeInfo(declarationExpression.Type, cancellationToken)
+                        .Type;
                     if (IsValidType(type))
-                        return CreateTypeHint(type, displayAllOverride, forImplicitVariableTypes, declarationExpression.Type, declarationExpression.Designation);
+                        return CreateTypeHint(
+                            type,
+                            displayAllOverride,
+                            forImplicitVariableTypes,
+                            declarationExpression.Type,
+                            declarationExpression.Designation
+                        );
                 }
-                else if (node is SingleVariableDesignationSyntax { Parent: not DeclarationPatternSyntax and not DeclarationExpressionSyntax } variableDesignation)
+                else if (
+                    node is SingleVariableDesignationSyntax
+                    {
+                        Parent: not DeclarationPatternSyntax and not DeclarationExpressionSyntax
+                    } variableDesignation
+                )
                 {
-                    var local = semanticModel.GetDeclaredSymbol(variableDesignation, cancellationToken) as ILocalSymbol;
+                    var local =
+                        semanticModel.GetDeclaredSymbol(variableDesignation, cancellationToken)
+                        as ILocalSymbol;
                     var type = local?.Type;
                     if (IsValidType(type))
                     {
                         return node.Parent is VarPatternSyntax varPattern
-                            ? CreateTypeHint(type, displayAllOverride, forImplicitVariableTypes, varPattern.VarKeyword, variableDesignation.Identifier)
-                            : new(type, new TextSpan(variableDesignation.Identifier.SpanStart, 0), textChange: null, trailingSpace: true);
+                            ? CreateTypeHint(
+                                type,
+                                displayAllOverride,
+                                forImplicitVariableTypes,
+                                varPattern.VarKeyword,
+                                variableDesignation.Identifier
+                            )
+                            : new(
+                                type,
+                                new TextSpan(variableDesignation.Identifier.SpanStart, 0),
+                                textChange: null,
+                                trailingSpace: true
+                            );
                     }
                 }
                 else if (node is ForEachStatementSyntax { Type.IsVar: true } forEachStatement)
@@ -69,7 +110,13 @@ namespace Microsoft.CodeAnalysis.CSharp.InlineHints
                     var info = semanticModel.GetForEachStatementInfo(forEachStatement);
                     var type = info.ElementType;
                     if (IsValidType(type))
-                        return CreateTypeHint(type, displayAllOverride, forImplicitVariableTypes, forEachStatement.Type, forEachStatement.Identifier);
+                        return CreateTypeHint(
+                            type,
+                            displayAllOverride,
+                            forImplicitVariableTypes,
+                            forEachStatement.Type,
+                            forEachStatement.Identifier
+                        );
                 }
             }
 
@@ -78,13 +125,34 @@ namespace Microsoft.CodeAnalysis.CSharp.InlineHints
                 if (node is ParameterSyntax { Type: null } parameterNode)
                 {
                     var span = new TextSpan(parameterNode.Identifier.SpanStart, 0);
-                    var parameter = semanticModel.GetDeclaredSymbol(parameterNode, cancellationToken);
-                    if (parameter?.ContainingSymbol is IMethodSymbol { MethodKind: MethodKind.AnonymousFunction } &&
-                        IsValidType(parameter?.Type))
+                    var parameter = semanticModel.GetDeclaredSymbol(
+                        parameterNode,
+                        cancellationToken
+                    );
+                    if (
+                        parameter?.ContainingSymbol
+                            is IMethodSymbol { MethodKind: MethodKind.AnonymousFunction }
+                        && IsValidType(parameter?.Type)
+                    )
                     {
-                        return parameterNode.Parent?.Parent?.Kind() is SyntaxKind.ParenthesizedLambdaExpression
-                            ? new TypeHint(parameter.Type, span, textChange: new TextChange(span, parameter.Type.ToDisplayString(s_minimalTypeStyle) + " "), trailingSpace: true)
-                            : new TypeHint(parameter.Type, span, textChange: null, trailingSpace: true);
+                        return
+                            parameterNode.Parent?.Parent?.Kind()
+                            is SyntaxKind.ParenthesizedLambdaExpression
+                            ? new TypeHint(
+                                parameter.Type,
+                                span,
+                                textChange: new TextChange(
+                                    span,
+                                    parameter.Type.ToDisplayString(s_minimalTypeStyle) + " "
+                                ),
+                                trailingSpace: true
+                            )
+                            : new TypeHint(
+                                parameter.Type,
+                                span,
+                                textChange: null,
+                                trailingSpace: true
+                            );
                     }
                 }
             }
@@ -97,7 +165,12 @@ namespace Microsoft.CodeAnalysis.CSharp.InlineHints
                     if (IsValidType(type))
                     {
                         var span = new TextSpan(implicitNew.NewKeyword.Span.End, 0);
-                        return new(type, span, new TextChange(span, " " + type.ToDisplayString(s_minimalTypeStyle)), leadingSpace: true);
+                        return new(
+                            type,
+                            span,
+                            new TextChange(span, " " + type.ToDisplayString(s_minimalTypeStyle)),
+                            leadingSpace: true
+                        );
                     }
                 }
             }
@@ -110,20 +183,27 @@ namespace Microsoft.CodeAnalysis.CSharp.InlineHints
             bool displayAllOverride,
             bool normalOption,
             SyntaxNodeOrToken displayAllSpan,
-            SyntaxNodeOrToken normalSpan)
+            SyntaxNodeOrToken normalSpan
+        )
         {
             var span = GetSpan(displayAllOverride, normalOption, displayAllSpan, normalSpan);
             // if this is a hint that is placed in-situ (i.e. it's not overwriting text like 'var'), then place
             // a space after it to make things feel less cramped.
             var trailingSpace = span.Length == 0;
-            return new TypeHint(type, span, new TextChange(displayAllSpan.Span, type.ToDisplayString(s_minimalTypeStyle)), trailingSpace: trailingSpace);
+            return new TypeHint(
+                type,
+                span,
+                new TextChange(displayAllSpan.Span, type.ToDisplayString(s_minimalTypeStyle)),
+                trailingSpace: trailingSpace
+            );
         }
 
         private static TextSpan GetSpan(
             bool displayAllOverride,
             bool normalOption,
             SyntaxNodeOrToken displayAllSpan,
-            SyntaxNodeOrToken normalSpan)
+            SyntaxNodeOrToken normalSpan
+        )
         {
             // If we're showing this because the normal option is on, then place the hint prior to the node being marked.
             if (normalOption)

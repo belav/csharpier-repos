@@ -20,7 +20,12 @@ namespace System.Security.Cryptography.EcDsa.Tests
             return false;
         }
 
-        protected override byte[] HashData(byte[] data, int offset, int count, HashAlgorithmName hashAlgorithm)
+        protected override byte[] HashData(
+            byte[] data,
+            int offset,
+            int count,
+            HashAlgorithmName hashAlgorithm
+        )
         {
             throw new NotImplementedException();
         }

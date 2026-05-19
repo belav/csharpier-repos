@@ -16,7 +16,10 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal;
 ///     any release. You should only use it directly in your code with extreme caution and knowing that
 ///     doing so can result in application failures when updating to a new Entity Framework Core release.
 /// </summary>
-public class TextTemplatingEngineHost : ITextTemplatingSessionHost, ITextTemplatingEngineHost, IServiceProvider
+public class TextTemplatingEngineHost
+    : ITextTemplatingSessionHost,
+        ITextTemplatingEngineHost,
+        IServiceProvider
 {
     private static readonly List<string> _noWarn = new() { "CS1701", "CS1702" };
 
@@ -57,10 +60,12 @@ public class TextTemplatingEngineHost : ITextTemplatingSessionHost, ITextTemplat
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual IList<string> StandardAssemblyReferences { get; } = new[]
-    {
-        typeof(ITextTemplatingEngineHost).Assembly.Location, typeof(CompilerErrorCollection).Assembly.Location
-    };
+    public virtual IList<string> StandardAssemblyReferences { get; } =
+        new[]
+        {
+            typeof(ITextTemplatingEngineHost).Assembly.Location,
+            typeof(CompilerErrorCollection).Assembly.Location,
+        };
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -84,8 +89,7 @@ public class TextTemplatingEngineHost : ITextTemplatingSessionHost, ITextTemplat
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual string Extension
-        => _extension ?? ".cs";
+    public virtual string Extension => _extension ?? ".cs";
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -93,8 +97,7 @@ public class TextTemplatingEngineHost : ITextTemplatingSessionHost, ITextTemplat
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual CompilerErrorCollection Errors
-        => _errors ??= new CompilerErrorCollection();
+    public virtual CompilerErrorCollection Errors => _errors ??= new CompilerErrorCollection();
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -102,8 +105,7 @@ public class TextTemplatingEngineHost : ITextTemplatingSessionHost, ITextTemplat
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual Encoding OutputEncoding
-        => _outputEncoding ?? Encoding.UTF8;
+    public virtual Encoding OutputEncoding => _outputEncoding ?? Encoding.UTF8;
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -126,8 +128,7 @@ public class TextTemplatingEngineHost : ITextTemplatingSessionHost, ITextTemplat
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual ITextTemplatingSession CreateSession()
-        => new TextTemplatingSession();
+    public virtual ITextTemplatingSession CreateSession() => new TextTemplatingSession();
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -135,8 +136,7 @@ public class TextTemplatingEngineHost : ITextTemplatingSessionHost, ITextTemplat
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual object? GetHostOption(string optionName)
-        => null;
+    public virtual object? GetHostOption(string optionName) => null;
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -144,14 +144,16 @@ public class TextTemplatingEngineHost : ITextTemplatingSessionHost, ITextTemplat
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual bool LoadIncludeText(string requestFileName, out string content, out string location)
+    public virtual bool LoadIncludeText(
+        string requestFileName,
+        out string content,
+        out string location
+    )
     {
         // TODO: Expand variables?
         location = ResolvePath(requestFileName);
         var exists = File.Exists(location);
-        content = exists
-            ? File.ReadAllText(location)
-            : string.Empty;
+        content = exists ? File.ReadAllText(location) : string.Empty;
 
         return exists;
     }
@@ -162,8 +164,10 @@ public class TextTemplatingEngineHost : ITextTemplatingSessionHost, ITextTemplat
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual void LogErrors(CompilerErrorCollection errors)
-        => Errors.AddRange(errors.Cast<CompilerError>().Where(e => !_noWarn.Contains(e.ErrorNumber)).ToArray());
+    public virtual void LogErrors(CompilerErrorCollection errors) =>
+        Errors.AddRange(
+            errors.Cast<CompilerError>().Where(e => !_noWarn.Contains(e.ErrorNumber)).ToArray()
+        );
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -171,8 +175,7 @@ public class TextTemplatingEngineHost : ITextTemplatingSessionHost, ITextTemplat
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual AppDomain ProvideTemplatingAppDomain(string content)
-        => AppDomain.CurrentDomain;
+    public virtual AppDomain ProvideTemplatingAppDomain(string content) => AppDomain.CurrentDomain;
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -187,8 +190,10 @@ public class TextTemplatingEngineHost : ITextTemplatingSessionHost, ITextTemplat
             return assemblyReference;
         }
 
-        var path = DependencyContext.Default?.CompileLibraries
-            .FirstOrDefault(l => l.Assemblies.Any(a => Path.GetFileNameWithoutExtension(a) == assemblyReference))
+        var path = DependencyContext
+            .Default?.CompileLibraries.FirstOrDefault(l =>
+                l.Assemblies.Any(a => Path.GetFileNameWithoutExtension(a) == assemblyReference)
+            )
             ?.ResolveReferencePaths()
             .First(p => Path.GetFileNameWithoutExtension(p) == assemblyReference);
         if (path is not null)
@@ -200,9 +205,7 @@ public class TextTemplatingEngineHost : ITextTemplatingSessionHost, ITextTemplat
         {
             return Assembly.Load(assemblyReference).Location;
         }
-        catch
-        {
-        }
+        catch { }
 
         // TODO: Expand variables?
         return assemblyReference;
@@ -214,8 +217,8 @@ public class TextTemplatingEngineHost : ITextTemplatingSessionHost, ITextTemplat
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual Type ResolveDirectiveProcessor(string processorName)
-        => throw new FileNotFoundException(DesignStrings.UnknownDirectiveProcessor(processorName));
+    public virtual Type ResolveDirectiveProcessor(string processorName) =>
+        throw new FileNotFoundException(DesignStrings.UnknownDirectiveProcessor(processorName));
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -223,8 +226,11 @@ public class TextTemplatingEngineHost : ITextTemplatingSessionHost, ITextTemplat
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual string ResolveParameterValue(string directiveId, string processorName, string parameterName)
-        => string.Empty;
+    public virtual string ResolveParameterValue(
+        string directiveId,
+        string processorName,
+        string parameterName
+    ) => string.Empty;
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -232,8 +238,8 @@ public class TextTemplatingEngineHost : ITextTemplatingSessionHost, ITextTemplat
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual string ResolvePath(string path)
-        => !Path.IsPathRooted(path) && Path.IsPathRooted(TemplateFile)
+    public virtual string ResolvePath(string path) =>
+        !Path.IsPathRooted(path) && Path.IsPathRooted(TemplateFile)
             ? Path.Combine(Path.GetDirectoryName(TemplateFile)!, path)
             : path;
 
@@ -243,8 +249,7 @@ public class TextTemplatingEngineHost : ITextTemplatingSessionHost, ITextTemplat
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual void SetFileExtension(string extension)
-        => _extension = extension;
+    public virtual void SetFileExtension(string extension) => _extension = extension;
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -269,6 +274,6 @@ public class TextTemplatingEngineHost : ITextTemplatingSessionHost, ITextTemplat
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual object? GetService(Type serviceType)
-        => _serviceProvider?.GetService(serviceType);
+    public virtual object? GetService(Type serviceType) =>
+        _serviceProvider?.GetService(serviceType);
 }

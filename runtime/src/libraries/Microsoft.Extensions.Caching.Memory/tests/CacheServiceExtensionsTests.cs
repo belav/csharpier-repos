@@ -24,7 +24,9 @@ namespace Microsoft.Extensions.Caching.Distributed
             services.AddMemoryCache();
 
             // Assert
-            var memoryCache = services.FirstOrDefault(desc => desc.ServiceType == typeof(IMemoryCache));
+            var memoryCache = services.FirstOrDefault(desc =>
+                desc.ServiceType == typeof(IMemoryCache)
+            );
 
             Assert.NotNull(memoryCache);
             Assert.Equal(ServiceLifetime.Singleton, memoryCache.Lifetime);
@@ -69,15 +71,21 @@ namespace Microsoft.Extensions.Caching.Distributed
 
             // Assert
             var serviceProvider = services.BuildServiceProvider();
-            var memoryCache = services.FirstOrDefault(desc => desc.ServiceType == typeof(IMemoryCache));
+            var memoryCache = services.FirstOrDefault(desc =>
+                desc.ServiceType == typeof(IMemoryCache)
+            );
             Assert.NotNull(memoryCache);
             Assert.Equal(ServiceLifetime.Scoped, memoryCache.Lifetime);
             Assert.IsType<TestMemoryCache>(serviceProvider.GetRequiredService<IMemoryCache>());
 
-            var distributedCache = services.FirstOrDefault(desc => desc.ServiceType == typeof(IDistributedCache));
+            var distributedCache = services.FirstOrDefault(desc =>
+                desc.ServiceType == typeof(IDistributedCache)
+            );
             Assert.NotNull(distributedCache);
             Assert.Equal(ServiceLifetime.Scoped, memoryCache.Lifetime);
-            Assert.IsType<TestDistributedCache>(serviceProvider.GetRequiredService<IDistributedCache>());
+            Assert.IsType<TestDistributedCache>(
+                serviceProvider.GetRequiredService<IDistributedCache>()
+            );
         }
 
         [Fact]
@@ -144,7 +152,10 @@ namespace Microsoft.Extensions.Caching.Distributed
                 throw new NotImplementedException();
             }
 
-            public Task<byte[]> GetAsync(string key, CancellationToken token = default(CancellationToken))
+            public Task<byte[]> GetAsync(
+                string key,
+                CancellationToken token = default(CancellationToken)
+            )
             {
                 throw new NotImplementedException();
             }
@@ -154,7 +165,10 @@ namespace Microsoft.Extensions.Caching.Distributed
                 throw new NotImplementedException();
             }
 
-            public Task RefreshAsync(string key, CancellationToken token = default(CancellationToken))
+            public Task RefreshAsync(
+                string key,
+                CancellationToken token = default(CancellationToken)
+            )
             {
                 throw new NotImplementedException();
             }
@@ -164,7 +178,10 @@ namespace Microsoft.Extensions.Caching.Distributed
                 throw new NotImplementedException();
             }
 
-            public Task RemoveAsync(string key, CancellationToken token = default(CancellationToken))
+            public Task RemoveAsync(
+                string key,
+                CancellationToken token = default(CancellationToken)
+            )
             {
                 throw new NotImplementedException();
             }
@@ -174,7 +191,12 @@ namespace Microsoft.Extensions.Caching.Distributed
                 throw new NotImplementedException();
             }
 
-            public Task SetAsync(string key, byte[] value, DistributedCacheEntryOptions options, CancellationToken token = default(CancellationToken))
+            public Task SetAsync(
+                string key,
+                byte[] value,
+                DistributedCacheEntryOptions options,
+                CancellationToken token = default(CancellationToken)
+            )
             {
                 throw new NotImplementedException();
             }

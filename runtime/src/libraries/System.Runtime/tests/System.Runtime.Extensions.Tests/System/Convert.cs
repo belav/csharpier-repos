@@ -1,13 +1,12 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
+using System.Collections.Generic;
 using System.Globalization;
-using Xunit;
 using System.Linq;
 using System.Text;
-using System.Collections.Generic;
-
 using Test.Cryptography;
+using Xunit;
 
 namespace System.Tests
 {
@@ -26,8 +25,22 @@ namespace System.Tests
         {
             byte[] barray = new byte[256];
             char[] carray = new char[352];
-            int length = Convert.ToBase64CharArray(barray, 0, barray.Length, carray, 0, Base64FormattingOptions.InsertLineBreaks);
-            int length2 = Convert.ToBase64CharArray(barray, 0, barray.Length, carray, 0, Base64FormattingOptions.None);
+            int length = Convert.ToBase64CharArray(
+                barray,
+                0,
+                barray.Length,
+                carray,
+                0,
+                Base64FormattingOptions.InsertLineBreaks
+            );
+            int length2 = Convert.ToBase64CharArray(
+                barray,
+                0,
+                barray.Length,
+                carray,
+                0,
+                Base64FormattingOptions.None
+            );
             Assert.Equal(352, length);
             Assert.Equal(344, length2);
         }
@@ -58,7 +71,13 @@ namespace System.Tests
                 string encodedString = Convert.ToBase64String(original);
 
                 char[] encodedArray = new char[encodedString.Length];
-                int charsWritten = Convert.ToBase64CharArray(original, 0, original.Length, encodedArray, 0);
+                int charsWritten = Convert.ToBase64CharArray(
+                    original,
+                    0,
+                    original.Length,
+                    encodedArray,
+                    0
+                );
                 Assert.Equal(encodedArray.Length, charsWritten);
                 AssertExtensions.SequenceEqual<char>(encodedString, encodedArray);
 
@@ -68,10 +87,15 @@ namespace System.Tests
                 AssertExtensions.SequenceEqual<char>(encodedString, encodedSpan);
 
                 AssertExtensions.SequenceEqual(original, Convert.FromBase64String(encodedString));
-                AssertExtensions.SequenceEqual(original, Convert.FromBase64CharArray(encodedArray, 0, encodedArray.Length));
+                AssertExtensions.SequenceEqual(
+                    original,
+                    Convert.FromBase64CharArray(encodedArray, 0, encodedArray.Length)
+                );
 
                 byte[] actualBytes = new byte[original.Length];
-                Assert.True(Convert.TryFromBase64Chars(encodedSpan, actualBytes, out int bytesWritten));
+                Assert.True(
+                    Convert.TryFromBase64Chars(encodedSpan, actualBytes, out int bytesWritten)
+                );
                 Assert.Equal(original.Length, bytesWritten);
                 AssertExtensions.SequenceEqual(original, actualBytes);
             }
@@ -201,8 +225,14 @@ namespace System.Tests
         public void ToBase64String_Span_ProducesExpectedOutput(byte[] input, string expected)
         {
             Assert.Equal(expected, Convert.ToBase64String(input.AsSpan()));
-            Assert.Equal(expected, Convert.ToBase64String(input.AsSpan(), Base64FormattingOptions.None));
-            Assert.Equal(expected, Convert.ToBase64String(input.AsSpan(), Base64FormattingOptions.InsertLineBreaks));
+            Assert.Equal(
+                expected,
+                Convert.ToBase64String(input.AsSpan(), Base64FormattingOptions.None)
+            );
+            Assert.Equal(
+                expected,
+                Convert.ToBase64String(input.AsSpan(), Base64FormattingOptions.InsertLineBreaks)
+            );
         }
 
         [Fact]
@@ -211,22 +241,25 @@ namespace System.Tests
             byte[] input = Enumerable.Range(0, 120).Select(i => (byte)i).ToArray();
 
             Assert.Equal(
-                "AAECAwQFBgcICQoLDA0ODxAREhMUFRYXGBkaGxwdHh8gISIjJCUmJygpKissLS4vMDEyMzQ1Njc4" +
-                "OTo7PD0+P0BBQkNERUZHSElKS0xNTk9QUVJTVFVWV1hZWltcXV5fYGFiY2RlZmdoaWprbG1ub3Bx" +
-                "cnN0dXZ3",
-                Convert.ToBase64String(input));
+                "AAECAwQFBgcICQoLDA0ODxAREhMUFRYXGBkaGxwdHh8gISIjJCUmJygpKissLS4vMDEyMzQ1Njc4"
+                    + "OTo7PD0+P0BBQkNERUZHSElKS0xNTk9QUVJTVFVWV1hZWltcXV5fYGFiY2RlZmdoaWprbG1ub3Bx"
+                    + "cnN0dXZ3",
+                Convert.ToBase64String(input)
+            );
 
             Assert.Equal(
-                "AAECAwQFBgcICQoLDA0ODxAREhMUFRYXGBkaGxwdHh8gISIjJCUmJygpKissLS4vMDEyMzQ1Njc4" +
-                "OTo7PD0+P0BBQkNERUZHSElKS0xNTk9QUVJTVFVWV1hZWltcXV5fYGFiY2RlZmdoaWprbG1ub3Bx" +
-                "cnN0dXZ3",
-                Convert.ToBase64String(input, Base64FormattingOptions.None));
+                "AAECAwQFBgcICQoLDA0ODxAREhMUFRYXGBkaGxwdHh8gISIjJCUmJygpKissLS4vMDEyMzQ1Njc4"
+                    + "OTo7PD0+P0BBQkNERUZHSElKS0xNTk9QUVJTVFVWV1hZWltcXV5fYGFiY2RlZmdoaWprbG1ub3Bx"
+                    + "cnN0dXZ3",
+                Convert.ToBase64String(input, Base64FormattingOptions.None)
+            );
 
             Assert.Equal(
-                "AAECAwQFBgcICQoLDA0ODxAREhMUFRYXGBkaGxwdHh8gISIjJCUmJygpKissLS4vMDEyMzQ1Njc4\r\n" +
-                "OTo7PD0+P0BBQkNERUZHSElKS0xNTk9QUVJTVFVWV1hZWltcXV5fYGFiY2RlZmdoaWprbG1ub3Bx\r\n" +
-                "cnN0dXZ3",
-                Convert.ToBase64String(input, Base64FormattingOptions.InsertLineBreaks));
+                "AAECAwQFBgcICQoLDA0ODxAREhMUFRYXGBkaGxwdHh8gISIjJCUmJygpKissLS4vMDEyMzQ1Njc4\r\n"
+                    + "OTo7PD0+P0BBQkNERUZHSElKS0xNTk9QUVJTVFVWV1hZWltcXV5fYGFiY2RlZmdoaWprbG1ub3Bx\r\n"
+                    + "cnN0dXZ3",
+                Convert.ToBase64String(input, Base64FormattingOptions.InsertLineBreaks)
+            );
         }
 
         [Theory]
@@ -234,7 +267,10 @@ namespace System.Tests
         [InlineData((Base64FormattingOptions)(2))]
         public void ToBase64String_Span_InvalidOptions_Throws(Base64FormattingOptions invalidOption)
         {
-            AssertExtensions.Throws<ArgumentException>("options", () => Convert.ToBase64String(new byte[0].AsSpan(), invalidOption));
+            AssertExtensions.Throws<ArgumentException>(
+                "options",
+                () => Convert.ToBase64String(new byte[0].AsSpan(), invalidOption)
+            );
         }
 
         [Theory]
@@ -271,8 +307,16 @@ namespace System.Tests
         [InlineData((Base64FormattingOptions)(2))]
         public void TryToBase64Chars_InvalidOptions_Throws(Base64FormattingOptions invalidOption)
         {
-            AssertExtensions.Throws<ArgumentException>("options",
-                () => Convert.TryToBase64Chars(new byte[0].AsSpan(), new char[0].AsSpan(), out int charsWritten, invalidOption));
+            AssertExtensions.Throws<ArgumentException>(
+                "options",
+                () =>
+                    Convert.TryToBase64Chars(
+                        new byte[0].AsSpan(),
+                        new char[0].AsSpan(),
+                        out int charsWritten,
+                        invalidOption
+                    )
+            );
         }
 
         [Theory]
@@ -291,7 +335,11 @@ namespace System.Tests
                 // Exact-sized buffer
                 {
                     byte[] actual = new byte[expected.Length];
-                    bool success = Convert.TryFromBase64String(encoded, actual, out int bytesWritten);
+                    bool success = Convert.TryFromBase64String(
+                        encoded,
+                        actual,
+                        out int bytesWritten
+                    );
                     Assert.True(success);
                     Assert.Equal<byte>(expected, actual);
                     Assert.Equal(expected.Length, bytesWritten);
@@ -301,7 +349,11 @@ namespace System.Tests
                 if (expected.Length != 0)
                 {
                     byte[] actual = new byte[expected.Length - 1];
-                    bool success = Convert.TryFromBase64String(encoded, actual, out int bytesWritten);
+                    bool success = Convert.TryFromBase64String(
+                        encoded,
+                        actual,
+                        out int bytesWritten
+                    );
                     Assert.False(success);
                     Assert.Equal(0, bytesWritten);
                 }
@@ -310,7 +362,11 @@ namespace System.Tests
                 {
                     byte[] actual = new byte[expected.Length + 1];
                     actual[expected.Length] = 99;
-                    bool success = Convert.TryFromBase64String(encoded, actual, out int bytesWritten);
+                    bool success = Convert.TryFromBase64String(
+                        encoded,
+                        actual,
+                        out int bytesWritten
+                    );
                     Assert.True(success);
                     Assert.Equal(99, actual[expected.Length]);
                     Assert.Equal<byte>(expected, actual.Take(expected.Length));
@@ -323,7 +379,7 @@ namespace System.Tests
         [MemberData(nameof(Base64TestData))]
         public static void TryFromBase64Chars(string encodedAsString, byte[] expected)
         {
-            ReadOnlySpan<char> encoded = encodedAsString;  // Executing the conversion to ROS here so people debugging don't have to step through it at the api callsite.
+            ReadOnlySpan<char> encoded = encodedAsString; // Executing the conversion to ROS here so people debugging don't have to step through it at the api callsite.
             if (expected == null)
             {
                 Span<byte> actual = new byte[1000];
@@ -336,7 +392,11 @@ namespace System.Tests
                 // Exact-sized buffer
                 {
                     byte[] actual = new byte[expected.Length];
-                    bool success = Convert.TryFromBase64Chars(encoded, actual, out int bytesWritten);
+                    bool success = Convert.TryFromBase64Chars(
+                        encoded,
+                        actual,
+                        out int bytesWritten
+                    );
                     Assert.True(success);
                     Assert.Equal<byte>(expected, actual);
                     Assert.Equal(expected.Length, bytesWritten);
@@ -346,7 +406,11 @@ namespace System.Tests
                 if (expected.Length != 0)
                 {
                     byte[] actual = new byte[expected.Length - 1];
-                    bool success = Convert.TryFromBase64Chars(encoded, actual, out int bytesWritten);
+                    bool success = Convert.TryFromBase64Chars(
+                        encoded,
+                        actual,
+                        out int bytesWritten
+                    );
                     Assert.False(success);
                     Assert.Equal(0, bytesWritten);
                 }
@@ -355,7 +419,11 @@ namespace System.Tests
                 {
                     byte[] actual = new byte[expected.Length + 1];
                     actual[expected.Length] = 99;
-                    bool success = Convert.TryFromBase64Chars(encoded, actual, out int bytesWritten);
+                    bool success = Convert.TryFromBase64Chars(
+                        encoded,
+                        actual,
+                        out int bytesWritten
+                    );
                     Assert.True(success);
                     Assert.Equal(99, actual[expected.Length]);
                     Assert.Equal<byte>(expected, actual.Take(expected.Length));
@@ -388,16 +456,20 @@ namespace System.Tests
                 yield return Tuple.Create<string, byte[]>(" \t\r\n", Array.Empty<byte>());
 
                 // Pad characters
-                yield return Tuple.Create<string, byte[]>("BQYHCAZ=", "0506070806".HexToByteArray());
+                yield return Tuple.Create<string, byte[]>(
+                    "BQYHCAZ=",
+                    "0506070806".HexToByteArray()
+                );
                 yield return Tuple.Create<string, byte[]>("BQYHCA==", "05060708".HexToByteArray());
 
                 // Typical
                 yield return Tuple.Create<string, byte[]>(
-                    "AAECAwQFBgcICQoLDA0ODxAREhMUFRYXGBkaGxwdHh8gISIjJCUmJygpKissLS4vMDEyMzQ1Njc4OTo7PD0+P0" +
-                    "BBQkNERUZHSElKS0xNTk9QUVJTVFVWV1hZWltcXV5fYGFiY2RlZmdoaWprbG1ub3BxcnN0dXZ3",
-
-                    ("000102030405060708090A0B0C0D0E0F101112131415161718191A1B1C1D1E1F202122232425262728292A2B2C2D2E2F303132333435363738393A3B3C3D3E" +
-                     "3F404142434445464748494A4B4C4D4E4F505152535455565758595A5B5C5D5E5F606162636465666768696A6B6C6D6E6F7071727374757677").HexToByteArray()
+                    "AAECAwQFBgcICQoLDA0ODxAREhMUFRYXGBkaGxwdHh8gISIjJCUmJygpKissLS4vMDEyMzQ1Njc4OTo7PD0+P0"
+                        + "BBQkNERUZHSElKS0xNTk9QUVJTVFVWV1hZWltcXV5fYGFiY2RlZmdoaWprbG1ub3BxcnN0dXZ3",
+                    (
+                        "000102030405060708090A0B0C0D0E0F101112131415161718191A1B1C1D1E1F202122232425262728292A2B2C2D2E2F303132333435363738393A3B3C3D3E"
+                        + "3F404142434445464748494A4B4C4D4E4F505152535455565758595A5B5C5D5E5F606162636465666768696A6B6C6D6E6F7071727374757677"
+                    ).HexToByteArray()
                 );
 
                 // Input length not multiple of 4
@@ -434,8 +506,14 @@ namespace System.Tests
                 yield return Tuple.Create<string, byte[]>("AA" + largerThanByte + "A", null);
                 yield return Tuple.Create<string, byte[]>("AAA" + largerThanByte, null);
                 yield return Tuple.Create<string, byte[]>("AAAA" + largerThanByte + "AAA", null);
-                yield return Tuple.Create<string, byte[]>("AAAA" + "A" + largerThanByte + "AA", null);
-                yield return Tuple.Create<string, byte[]>("AAAA" + "AA" + largerThanByte + "A", null);
+                yield return Tuple.Create<string, byte[]>(
+                    "AAAA" + "A" + largerThanByte + "AA",
+                    null
+                );
+                yield return Tuple.Create<string, byte[]>(
+                    "AAAA" + "AA" + largerThanByte + "A",
+                    null
+                );
                 yield return Tuple.Create<string, byte[]>("AAAA" + "AAA" + largerThanByte, null);
 
                 // Verify positive entries of charmap.

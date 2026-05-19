@@ -7,22 +7,21 @@
 // @backupOwner Microsoft
 //---------------------------------------------------------------------
 
-
 namespace System.Data
 {
     using System;
+    using System.Collections.Generic;
+    using System.Collections.ObjectModel;
     using System.Data;
     using System.Runtime.Serialization;
     using System.Security;
     using System.Security.Permissions;
-    using System.Collections.Generic;
-    using System.Collections.ObjectModel;
 
     /// <summary>
     /// Property constraint exception class. Note that this class has state - so if you change even
     /// its internals, it can be a breaking change
     /// </summary>
-    /// 
+    ///
     [Serializable]
     public sealed class PropertyConstraintException : ConstraintException
     {
@@ -32,28 +31,22 @@ namespace System.Data
         /// constructor with default message
         /// </summary>
         public PropertyConstraintException() // required ctor
-            : base()
-        {
-        }
+            : base() { }
 
         /// <summary>
         /// costructor with supplied message
         /// </summary>
         /// <param name="message">localized error message</param>
-        public PropertyConstraintException(string message)  // required ctor
-            : base(message)
-        {
-        }
+        public PropertyConstraintException(string message) // required ctor
+            : base(message) { }
 
         /// <summary>
         /// costructor with supplied message and inner exception
         /// </summary>
         /// <param name="message">localized error message</param>
         /// <param name="innerException">inner exception</param>
-        public PropertyConstraintException(string message, Exception innerException)  // required ctor
-            : base(message, innerException)
-        {
-        }
+        public PropertyConstraintException(string message, Exception innerException) // required ctor
+            : base(message, innerException) { }
 
         /// <summary>
         /// default constructor
@@ -71,7 +64,11 @@ namespace System.Data
         /// </summary>
         /// <param name="message">localized error message</param>
         /// <param name="innerException">inner exception</param>
-        public PropertyConstraintException(string message, string propertyName, Exception innerException) // required ctor
+        public PropertyConstraintException(
+            string message,
+            string propertyName,
+            Exception innerException
+        ) // required ctor
             : base(message, innerException)
         {
             EntityUtil.CheckStringArgument(propertyName, "propertyName");

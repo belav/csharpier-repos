@@ -8,6 +8,6 @@ namespace System
     {
         Literal,
         Compound,
-        Variable
+        Variable,
     }
 }

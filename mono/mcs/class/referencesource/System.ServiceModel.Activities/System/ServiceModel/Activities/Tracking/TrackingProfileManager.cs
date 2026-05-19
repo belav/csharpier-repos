@@ -5,21 +5,20 @@
 namespace System.ServiceModel.Activities.Tracking
 {
     using System;
-    using System.Runtime;
     using System.Activities.Tracking;
+    using System.Runtime;
 
     abstract class TrackingProfileManager
     {
-        protected TrackingProfileManager()
-        {
-        }
+        protected TrackingProfileManager() { }
 
         public virtual IAsyncResult BeginLoad(
             string profileName,
             string activityDefinitionId,
             TimeSpan timeout,
             AsyncCallback callback,
-            object state)
+            object state
+        )
         {
             TrackingProfile profile = Load(profileName, activityDefinitionId, timeout);
             return new CompletedAsyncResult<TrackingProfile>(profile, callback, state);
@@ -28,7 +27,8 @@ namespace System.ServiceModel.Activities.Tracking
         public abstract TrackingProfile Load(
             string profileName,
             string activityDefinitionId,
-            TimeSpan timeout);
+            TimeSpan timeout
+        );
 
         public virtual TrackingProfile EndLoad(IAsyncResult result)
         {

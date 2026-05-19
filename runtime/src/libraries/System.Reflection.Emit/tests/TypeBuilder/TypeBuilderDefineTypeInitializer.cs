@@ -13,7 +13,11 @@ namespace System.Reflection.Emit.Tests
         {
             TypeBuilder type = Helpers.DynamicType(TypeAttributes.Public);
 
-            FieldBuilder greetingField = type.DefineField("Greeting", typeof(string), FieldAttributes.Private | FieldAttributes.Static);
+            FieldBuilder greetingField = type.DefineField(
+                "Greeting",
+                typeof(string),
+                FieldAttributes.Private | FieldAttributes.Static
+            );
             ConstructorBuilder constructor = type.DefineTypeInitializer();
 
             // Generate IL for the method. The constructor calls its base class
@@ -23,10 +27,19 @@ namespace System.Reflection.Emit.Tests
             constructorIlGenerator.Emit(OpCodes.Stsfld, greetingField);
             constructorIlGenerator.Emit(OpCodes.Ret);
 
-            Helpers.VerifyConstructor(constructor, type, MethodAttributes.Private | MethodAttributes.Static | MethodAttributes.SpecialName, CallingConventions.Standard, new Type[0]);
+            Helpers.VerifyConstructor(
+                constructor,
+                type,
+                MethodAttributes.Private | MethodAttributes.Static | MethodAttributes.SpecialName,
+                CallingConventions.Standard,
+                new Type[0]
+            );
 
             Type createdType = type.CreateType();
-            FieldInfo createdField = createdType.GetField("Greeting", BindingFlags.NonPublic | BindingFlags.Static);
+            FieldInfo createdField = createdType.GetField(
+                "Greeting",
+                BindingFlags.NonPublic | BindingFlags.Static
+            );
             Assert.Equal("hello", createdField.GetValue(Activator.CreateInstance(createdType)));
         }
 

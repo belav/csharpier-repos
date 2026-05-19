@@ -20,7 +20,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options.Style.N
 
         public string OK => ServicesVSResources.OK;
         public string Cancel => ServicesVSResources.Cancel;
-        public string CannotBeDeletedExplanation => ServicesVSResources.This_item_cannot_be_deleted_because_it_is_used_by_an_existing_Naming_Rule;
+        public string CannotBeDeletedExplanation =>
+            ServicesVSResources.This_item_cannot_be_deleted_because_it_is_used_by_an_existing_Naming_Rule;
         public string AddItemAutomationText => ServicesVSResources.Add_item;
         public string EditButtonAutomationText => ServicesVSResources.Edit_item;
         public string RemoveButtonAutomationText => ServicesVSResources.Remove_item;
@@ -33,8 +34,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options.Style.N
             DataContext = viewModel;
         }
 
-        private void AddButton_Click(object sender, RoutedEventArgs e)
-            => _viewModel.AddItem();
+        private void AddButton_Click(object sender, RoutedEventArgs e) => _viewModel.AddItem();
 
         private void RemoveButton_Click(object sender, RoutedEventArgs e)
         {
@@ -50,10 +50,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options.Style.N
             _viewModel.EditItem(item);
         }
 
-        private void OK_Click(object sender, RoutedEventArgs e)
-            => DialogResult = true;
+        private void OK_Click(object sender, RoutedEventArgs e) => DialogResult = true;
 
-        private void Cancel_Click(object sender, RoutedEventArgs e)
-            => DialogResult = false;
+        private void Cancel_Click(object sender, RoutedEventArgs e) => DialogResult = false;
     }
 }

@@ -19,9 +19,12 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
         public static string EnsureUniqueness(
             string baseName,
             IEnumerable<string> reservedNames,
-            bool isCaseSensitive = true)
+            bool isCaseSensitive = true
+        )
         {
-            using var nameSetPool = (isCaseSensitive ? SharedPools.StringHashSet : SharedPools.StringIgnoreCaseHashSet).GetPooledObject();
+            using var nameSetPool = (
+                isCaseSensitive ? SharedPools.StringHashSet : SharedPools.StringIgnoreCaseHashSet
+            ).GetPooledObject();
             var nameSet = nameSetPool.Object;
 
             nameSet.AddRange(reservedNames);
@@ -41,9 +44,14 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
         public static ImmutableArray<string> EnsureUniqueness(
             ImmutableArray<string> names,
             Func<string, bool>? canUse = null,
-            bool isCaseSensitive = true)
+            bool isCaseSensitive = true
+        )
         {
-            using var isFixedDisposer = ArrayBuilder<bool>.GetInstance(names.Length, fillWithValue: false, out var isFixed);
+            using var isFixedDisposer = ArrayBuilder<bool>.GetInstance(
+                names.Length,
+                fillWithValue: false,
+                out var isFixed
+            );
 
             var result = ArrayBuilder<string>.GetInstance(names.Length);
             result.AddRange(names);
@@ -61,7 +69,8 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
             ImmutableArray<string> names,
             ImmutableArray<bool> isFixed,
             Func<string, bool>? canUse = null,
-            bool isCaseSensitive = true)
+            bool isCaseSensitive = true
+        )
         {
             using var _1 = ArrayBuilder<bool>.GetInstance(names.Length, out var isFixedBuilder);
             using var _2 = ArrayBuilder<string>.GetInstance(names.Length, out var result);
@@ -84,14 +93,21 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
             ArrayBuilder<string> names,
             ArrayBuilder<bool> isFixed,
             Func<string, bool>? canUse = null,
-            bool isCaseSensitive = true)
+            bool isCaseSensitive = true
+        )
         {
             canUse ??= Functions<string>.True;
 
-            using var usedNamesPool = (isCaseSensitive ? SharedPools.StringHashSet : SharedPools.StringIgnoreCaseHashSet).GetPooledObject();
+            using var usedNamesPool = (
+                isCaseSensitive ? SharedPools.StringHashSet : SharedPools.StringIgnoreCaseHashSet
+            ).GetPooledObject();
             var usedNames = usedNamesPool.Object;
 
-            using var collisionMapPool = (isCaseSensitive ? SharedPools.Default<Dictionary<string, bool>>() : SharedPools.StringIgnoreCaseDictionary<bool>()).GetPooledObject();
+            using var collisionMapPool = (
+                isCaseSensitive
+                    ? SharedPools.Default<Dictionary<string, bool>>()
+                    : SharedPools.StringIgnoreCaseDictionary<bool>()
+            ).GetPooledObject();
             var collisionMap = collisionMapPool.Object;
 
             // Initial pass through names to determine which names are in collision
@@ -131,13 +147,20 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
             }
         }
 
-        public static string GenerateUniqueName(string baseName, Func<string, bool> canUse)
-            => GenerateUniqueName(baseName, string.Empty, canUse);
+        public static string GenerateUniqueName(string baseName, Func<string, bool> canUse) =>
+            GenerateUniqueName(baseName, string.Empty, canUse);
 
-        public static string GenerateUniqueName(string baseName, ISet<string> names, StringComparer comparer)
-            => GenerateUniqueName(baseName, x => !names.Contains(x, comparer));
+        public static string GenerateUniqueName(
+            string baseName,
+            ISet<string> names,
+            StringComparer comparer
+        ) => GenerateUniqueName(baseName, x => !names.Contains(x, comparer));
 
-        public static string GenerateUniqueName(string baseName, string extension, Func<string, bool> canUse)
+        public static string GenerateUniqueName(
+            string baseName,
+            string extension,
+            Func<string, bool> canUse
+        )
         {
             if (!string.IsNullOrEmpty(extension) && extension[0] != '.')
             {
@@ -157,7 +180,10 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
             return name;
         }
 
-        public static string GenerateUniqueName(IEnumerable<string> baseNames, Func<string, bool> canUse)
+        public static string GenerateUniqueName(
+            IEnumerable<string> baseNames,
+            Func<string, bool> canUse
+        )
         {
             int? index = null;
 

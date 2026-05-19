@@ -18,10 +18,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml.Features.QuickInfo
 
         public ISymbol Symbol { get; }
 
-        private XamlQuickInfo(
-            TextSpan span,
-            IEnumerable<TaggedText> description,
-            ISymbol symbol)
+        private XamlQuickInfo(TextSpan span, IEnumerable<TaggedText> description, ISymbol symbol)
         {
             Span = span;
             Description = description;
@@ -31,7 +28,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml.Features.QuickInfo
         public static XamlQuickInfo Create(
             TextSpan span,
             IEnumerable<TaggedText> description,
-            ISymbol symbol = null)
+            ISymbol symbol = null
+        )
         {
             return new XamlQuickInfo(span, description, symbol);
         }

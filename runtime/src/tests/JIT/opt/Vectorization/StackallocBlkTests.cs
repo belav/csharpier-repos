@@ -7,23 +7,24 @@ using System.Reflection;
 using System.Runtime.CompilerServices;
 using Xunit;
 
-
 public unsafe class StackallocTests
 {
     [Fact]
     public static int TestEntryPoint()
     {
         int numberOftests = 0;
-        foreach (var method in typeof(StackallocTests)
-            .GetMethods(BindingFlags.Public | BindingFlags.Static)
-            .Where(t => t.Name.StartsWith("Test") && (t.Name != "TestEntryPoint")))
+        foreach (
+            var method in typeof(StackallocTests)
+                .GetMethods(BindingFlags.Public | BindingFlags.Static)
+                .Where(t => t.Name.StartsWith("Test") && (t.Name != "TestEntryPoint"))
+        )
         {
             // Invoke the test and make sure both return value and out
             // parameters are empty guids
             var args = new object[1];
             args[0] = Guid.NewGuid();
             var value = (Guid)method.Invoke(null, args);
-            
+
             if ((Guid)args[0] != Guid.Empty || value != Guid.Empty)
                 throw new InvalidOperationException();
             numberOftests++;
@@ -48,9 +49,9 @@ public unsafe class StackallocTests
                 throw new InvalidOperationException();
         }
     }
-    
+
     [MethodImpl(MethodImplOptions.NoInlining)]
-    static void Consume(byte* ptr) {} // to avoid dead-code elimination
+    static void Consume(byte* ptr) { } // to avoid dead-code elimination
 
     [MethodImpl(MethodImplOptions.NoInlining)]
     static T ToVar<T>(T o) => o; // convert a constant to a variable
@@ -348,7 +349,7 @@ public unsafe class StackallocTests
     [MethodImpl(MethodImplOptions.NoInlining)]
     public static Guid Test20000_var(out Guid g)
     {
-        int size = ToVar(20000); 
+        int size = ToVar(20000);
         PoisonStack();
         byte* p = stackalloc byte[size];
         EnsureZeroed(p, size);

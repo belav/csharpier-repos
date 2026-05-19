@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 // <copyright file="RegexBoyerMoore.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
 // The RegexBoyerMoore object precomputes the Boyer-Moore
@@ -15,12 +15,12 @@
 
 namespace System.Text.RegularExpressions
 {
-
     using System.Collections;
     using System.Diagnostics;
     using System.Globalization;
 
-    internal sealed class RegexBoyerMoore {
+    internal sealed class RegexBoyerMoore
+    {
         internal int[] _positive;
         internal int[] _negativeASCII;
         internal int[][] _negativeUnicode;
@@ -37,12 +37,21 @@ namespace System.Text.RegularExpressions
          * Constructs a Boyer-Moore state machine for searching for the string
          * pattern. The string must not be zero-length.
          */
-        internal RegexBoyerMoore(String pattern, bool caseInsensitive, bool rightToLeft, CultureInfo culture) {
+        internal RegexBoyerMoore(
+            String pattern,
+            bool caseInsensitive,
+            bool rightToLeft,
+            CultureInfo culture
+        )
+        {
             /*
              * Sorry,  you just can't use Boyer-Moore to find an empty pattern.
              * We're doing this for your own protection. (Really, for speed.)
              */
-            Debug.Assert(pattern.Length != 0, "RegexBoyerMoore called with an empty string.  This is bad for perf");
+            Debug.Assert(
+                pattern.Length != 0,
+                "RegexBoyerMoore called with an empty string.  This is bad for perf"
+            );
 
             int beforefirst;
             int last;
@@ -51,14 +60,15 @@ namespace System.Text.RegularExpressions
             int scan;
             int match;
             char ch;
-            
+
             // We do the ToLower character by character for consistency.  With surrogate chars, doing
             // a ToLower on the entire string could actually change the surrogate pair.  This is more correct
-            // linguistically, but since Regex doesn't support surrogates, it's more important to be 
-            // consistent. 
-            if (caseInsensitive) {
+            // linguistically, but since Regex doesn't support surrogates, it's more important to be
+            // consistent.
+            if (caseInsensitive)
+            {
                 StringBuilder sb = new StringBuilder(pattern.Length);
-                for (int i=0; i<pattern.Length; i++)
+                for (int i = 0; i < pattern.Length; i++)
                     sb.Append(Char.ToLower(pattern[i], culture));
                 pattern = sb.ToString();
             }
@@ -67,13 +77,15 @@ namespace System.Text.RegularExpressions
             _rightToLeft = rightToLeft;
             _caseInsensitive = caseInsensitive;
             _culture = culture;
-            
-            if (!rightToLeft) {
+
+            if (!rightToLeft)
+            {
                 beforefirst = -1;
                 last = pattern.Length - 1;
                 bump = 1;
             }
-            else {
+            else
+            {
                 beforefirst = pattern.Length;
                 last = 0;
                 bump = -1;
@@ -81,7 +93,7 @@ namespace System.Text.RegularExpressions
 
             /*
              * PART I - the good-suffix shift table
-             * 
+             *
              * compute the positive requirement:
              * if char "i" is the first one from the right that doesn't match,
              * then we know the matcher can advance by _positive[i].
@@ -101,10 +113,12 @@ namespace System.Text.RegularExpressions
             _positive[examine] = bump;
             examine -= bump;
 
-            for (;;) {
+            for (; ; )
+            {
                 // find an internal char (examine) that matches the tail
 
-                for (;;) {
+                for (; ; )
+                {
                     if (examine == beforefirst)
                         goto OuterloopBreak;
                     if (pattern[examine] == ch)
@@ -117,11 +131,13 @@ namespace System.Text.RegularExpressions
 
                 // find the length of the match
 
-                for (;;) {
-                    if (scan == beforefirst || pattern[match] != pattern[scan]) {
+                for (; ; )
+                {
+                    if (scan == beforefirst || pattern[match] != pattern[scan])
+                    {
                         // at the end of the match, note the difference in _positive
                         // this is not the length of the match, but the distance from the internal match
-                        // to the tail suffix. 
+                        // to the tail suffix.
                         if (_positive[match] == 0)
                             _positive[match] = match - scan;
 
@@ -152,7 +168,8 @@ namespace System.Text.RegularExpressions
 
 
 */
-            while (match != beforefirst) {
+            while (match != beforefirst)
+            {
                 if (_positive[match] == 0)
                     _positive[match] = bump;
 
@@ -162,11 +179,10 @@ namespace System.Text.RegularExpressions
             //System.Diagnostics.Debug.WriteLine("good suffix shift table:");
             //for (int i=0; i<_positive.Length; i++)
             //    System.Diagnostics.Debug.WriteLine("\t_positive[" + i + "] = " + _positive[i]);
-                
 
             /*
              * PART II - the bad-character shift table
-             * 
+             *
              * compute the negative requirement:
              * if char "ch" is the reject character when testing position "i",
              * we can slide up by _negative[ch];
@@ -186,10 +202,12 @@ namespace System.Text.RegularExpressions
             _lowASCII = 127;
             _highASCII = 0;
 
-            for (examine = last; examine != beforefirst; examine -= bump) {
+            for (examine = last; examine != beforefirst; examine -= bump)
+            {
                 ch = pattern[examine];
 
-                if (ch < 128) {
+                if (ch < 128)
+                {
                     if (_lowASCII > ch)
                         _lowASCII = ch;
 
@@ -199,21 +217,25 @@ namespace System.Text.RegularExpressions
                     if (_negativeASCII[ch] == last - beforefirst)
                         _negativeASCII[ch] = last - examine;
                 }
-                else {
+                else
+                {
                     int i = ch >> 8;
                     int j = ch & 0xFF;
 
-                    if (_negativeUnicode == null) {
+                    if (_negativeUnicode == null)
+                    {
                         _negativeUnicode = new int[256][];
                     }
 
-                    if (_negativeUnicode[i] == null) {
+                    if (_negativeUnicode[i] == null)
+                    {
                         int[] newarray = new int[256];
 
                         for (int k = 0; k < 256; k++)
                             newarray[k] = last - beforefirst;
 
-                        if (i == 0) {
+                        if (i == 0)
+                        {
                             System.Array.Copy(_negativeASCII, newarray, 128);
                             _negativeASCII = newarray;
                         }
@@ -227,45 +249,55 @@ namespace System.Text.RegularExpressions
             }
         }
 
-        private bool MatchPattern(string text, int index) {
-                if (_caseInsensitive) {
-                    if( text.Length - index < _pattern.Length) {
+        private bool MatchPattern(string text, int index)
+        {
+            if (_caseInsensitive)
+            {
+                if (text.Length - index < _pattern.Length)
+                {
+                    return false;
+                }
+
+                TextInfo textinfo = _culture.TextInfo;
+                for (int i = 0; i < _pattern.Length; i++)
+                {
+                    Debug.Assert(
+                        textinfo.ToLower(_pattern[i]) == _pattern[i],
+                        "pattern should be converted to lower case in constructor!"
+                    );
+                    if (textinfo.ToLower(text[index + i]) != _pattern[i])
+                    {
                         return false;
                     }
-
-                    TextInfo textinfo = _culture.TextInfo;
-                    for( int i = 0; i < _pattern.Length; i++) {
-                        Debug.Assert(textinfo.ToLower(_pattern[i]) == _pattern[i], "pattern should be converted to lower case in constructor!"); 
-                        if( textinfo.ToLower(text[index + i]) != _pattern[i]) {
-                            return false;
-                        }
-                    }
-                    return true;
                 }
-                else {
-                    return(0 == String.CompareOrdinal(_pattern, 0, text, index, _pattern.Length));
-                }                            
+                return true;
+            }
+            else
+            {
+                return (0 == String.CompareOrdinal(_pattern, 0, text, index, _pattern.Length));
+            }
         }
-        
+
         /*
          * When a regex is anchored, we can do a quick IsMatch test instead of a Scan
          */
-        internal bool IsMatch(String text, int index, int beglimit, int endlimit) {
-           
-            if (!_rightToLeft) {
+        internal bool IsMatch(String text, int index, int beglimit, int endlimit)
+        {
+            if (!_rightToLeft)
+            {
                 if (index < beglimit || endlimit - index < _pattern.Length)
                     return false;
 
                 return MatchPattern(text, index);
             }
-            else {
+            else
+            {
                 if (index > endlimit || index - beglimit < _pattern.Length)
                     return false;
 
                 return MatchPattern(text, index - _pattern.Length);
             }
         }
-
 
         /*
          * Scan uses the Boyer-Moore algorithm to find the first occurrance
@@ -275,7 +307,8 @@ namespace System.Text.RegularExpressions
          * The direction and case-sensitivity of the match is determined
          * by the arguments to the RegexBoyerMoore constructor.
          */
-        internal int Scan(String text, int index, int beglimit, int endlimit) {
+        internal int Scan(String text, int index, int beglimit, int endlimit)
+        {
             int test;
             int test2;
             int match;
@@ -288,14 +321,16 @@ namespace System.Text.RegularExpressions
             char chTest;
             int[] unicodeLookup;
 
-            if (!_rightToLeft) {
+            if (!_rightToLeft)
+            {
                 defadv = _pattern.Length;
                 startmatch = _pattern.Length - 1;
                 endmatch = 0;
                 test = index + defadv - 1;
                 bump = 1;
             }
-            else {
+            else
+            {
                 defadv = -_pattern.Length;
                 startmatch = 0;
                 endmatch = -defadv - 1;
@@ -305,7 +340,8 @@ namespace System.Text.RegularExpressions
 
             chMatch = _pattern[startmatch];
 
-            for (;;) {
+            for (; ; )
+            {
                 if (test >= endlimit || test < beglimit)
                     return -1;
 
@@ -314,23 +350,29 @@ namespace System.Text.RegularExpressions
                 if (_caseInsensitive)
                     chTest = Char.ToLower(chTest, _culture);
 
-                if (chTest != chMatch) {
+                if (chTest != chMatch)
+                {
                     if (chTest < 128)
                         advance = _negativeASCII[chTest];
-                    else if (null != _negativeUnicode && (null != (unicodeLookup = _negativeUnicode[chTest >> 8])))
+                    else if (
+                        null != _negativeUnicode
+                        && (null != (unicodeLookup = _negativeUnicode[chTest >> 8]))
+                    )
                         advance = unicodeLookup[chTest & 0xFF];
                     else
                         advance = defadv;
 
                     test += advance;
                 }
-                else { // if (chTest == chMatch)
+                else
+                { // if (chTest == chMatch)
                     test2 = test;
                     match = startmatch;
 
-                    for (;;) {
+                    for (; ; )
+                    {
                         if (match == endmatch)
-                            return(_rightToLeft ? test2 + 1 : test2);
+                            return (_rightToLeft ? test2 + 1 : test2);
 
                         match -= bump;
                         test2 -= bump;
@@ -340,13 +382,18 @@ namespace System.Text.RegularExpressions
                         if (_caseInsensitive)
                             chTest = Char.ToLower(chTest, _culture);
 
-                        if (chTest != _pattern[match]) {
+                        if (chTest != _pattern[match])
+                        {
                             advance = _positive[match];
                             if ((chTest & 0xFF80) == 0)
                                 test2 = (match - startmatch) + _negativeASCII[chTest];
-                            else if (null != _negativeUnicode && (null != (unicodeLookup = _negativeUnicode[chTest >> 8])))
+                            else if (
+                                null != _negativeUnicode
+                                && (null != (unicodeLookup = _negativeUnicode[chTest >> 8]))
+                            )
                                 test2 = (match - startmatch) + unicodeLookup[chTest & 0xFF];
-                            else {
+                            else
+                            {
                                 test += advance;
                                 break;
                             }
@@ -365,26 +412,41 @@ namespace System.Text.RegularExpressions
         /*
          * Used when dumping for debugging.
          */
-        public override String ToString() {
+        public override String ToString()
+        {
             return _pattern;
         }
 
 #if DBG
-        public String Dump(String indent) {
+        public String Dump(String indent)
+        {
             StringBuilder sb = new StringBuilder();
 
             sb.Append(indent + "BM Pattern: " + _pattern + "\n");
             sb.Append(indent + "Positive: ");
-            for (int i = 0; i < _positive.Length; i++) {
+            for (int i = 0; i < _positive.Length; i++)
+            {
                 sb.Append(_positive[i].ToString(CultureInfo.InvariantCulture) + " ");
             }
             sb.Append("\n");
 
-            if (_negativeASCII != null) {
+            if (_negativeASCII != null)
+            {
                 sb.Append(indent + "Negative table\n");
-                for (int i = 0; i < _negativeASCII.Length; i++) {
-                    if (_negativeASCII[i] != _pattern.Length) {
-                        sb.Append(indent + "  " + Regex.Escape(Convert.ToString((char)i, CultureInfo.InvariantCulture)) + " " + _negativeASCII[i].ToString(CultureInfo.InvariantCulture) + "\n");
+                for (int i = 0; i < _negativeASCII.Length; i++)
+                {
+                    if (_negativeASCII[i] != _pattern.Length)
+                    {
+                        sb.Append(
+                            indent
+                                + "  "
+                                + Regex.Escape(
+                                    Convert.ToString((char)i, CultureInfo.InvariantCulture)
+                                )
+                                + " "
+                                + _negativeASCII[i].ToString(CultureInfo.InvariantCulture)
+                                + "\n"
+                        );
                     }
                 }
             }

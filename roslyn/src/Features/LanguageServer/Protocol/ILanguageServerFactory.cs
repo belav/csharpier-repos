@@ -17,6 +17,7 @@ namespace Microsoft.CodeAnalysis.LanguageServer
             ICapabilitiesProvider capabilitiesProvider,
             WellKnownLspServerKinds serverKind,
             ILspServiceLogger logger,
-            HostServices hostServices);
+            HostServices hostServices
+        );
     }
 }

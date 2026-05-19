@@ -22,9 +22,18 @@ namespace MS.Internal.Xml.XPath
             _val = val;
         }
 
-        public override AstType Type { get { return AstType.ConstantOperand; } }
-        public override XPathResultType ReturnType { get { return _type; } }
+        public override AstType Type
+        {
+            get { return AstType.ConstantOperand; }
+        }
+        public override XPathResultType ReturnType
+        {
+            get { return _type; }
+        }
 
-        public object OperandValue { get { return _val; } }
+        public object OperandValue
+        {
+            get { return _val; }
+        }
     }
 }

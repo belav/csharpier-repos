@@ -3,12 +3,12 @@
 //------------------------------------------------------------
 namespace System.ServiceModel.Channels
 {
+    using System.ComponentModel;
     using System.Runtime;
+    using System.Runtime.Versioning;
     using System.ServiceModel.Diagnostics;
     using System.Threading;
     using System.Transactions;
-    using System.ComponentModel;
-    using System.Runtime.Versioning;
 
     // PostRollbackErrorStrategy
     interface IPostRollbackErrorStrategy
@@ -61,7 +61,13 @@ namespace System.ServiceModel.Channels
         ServiceModelActivity activity;
         string msmqRuntimeNativeLibrary;
 
-        internal MsmqReceiveHelper(MsmqReceiveParameters receiveParameters, Uri uri, IMsmqMessagePool messagePool, MsmqInputChannelBase channel, MsmqChannelListenerBase listener)
+        internal MsmqReceiveHelper(
+            MsmqReceiveParameters receiveParameters,
+            Uri uri,
+            IMsmqMessagePool messagePool,
+            MsmqInputChannelBase channel,
+            MsmqChannelListenerBase listener
+        )
         {
             this.queueName = receiveParameters.AddressTranslator.UriToFormatName(uri);
             this.receiveParameters = receiveParameters;
@@ -125,7 +131,8 @@ namespace System.ServiceModel.Channels
             {
                 if (this.msmqRuntimeNativeLibrary == null)
                 {
-                    this.msmqRuntimeNativeLibrary = Environment.SystemDirectory + "\\" + UnsafeNativeMethods.MQRT;
+                    this.msmqRuntimeNativeLibrary =
+                        Environment.SystemDirectory + "\\" + UnsafeNativeMethods.MQRT;
                 }
                 return this.msmqRuntimeNativeLibrary;
             }
@@ -185,20 +192,34 @@ namespace System.ServiceModel.Channels
             this.DropOrRejectReceivedMessage(this.Queue, messageProperty, reject);
         }
 
-        internal void DropOrRejectReceivedMessage(MsmqQueue queue, MsmqMessageProperty messageProperty, bool reject)
+        internal void DropOrRejectReceivedMessage(
+            MsmqQueue queue,
+            MsmqMessageProperty messageProperty,
+            bool reject
+        )
         {
             if (this.Transactional)
             {
                 TryAbortTransactionCurrent();
-                IPostRollbackErrorStrategy postRollback = new SimplePostRollbackErrorStrategy(messageProperty.LookupId);
+                IPostRollbackErrorStrategy postRollback = new SimplePostRollbackErrorStrategy(
+                    messageProperty.LookupId
+                );
                 MsmqQueue.MoveReceiveResult result = MsmqQueue.MoveReceiveResult.Unknown;
                 do
                 {
                     using (MsmqEmptyMessage emptyMessage = new MsmqEmptyMessage())
                     {
-                        using (TransactionScope scope = new TransactionScope(TransactionScopeOption.RequiresNew))
+                        using (
+                            TransactionScope scope = new TransactionScope(
+                                TransactionScopeOption.RequiresNew
+                            )
+                        )
                         {
-                            result = queue.TryReceiveByLookupId(messageProperty.LookupId, emptyMessage, MsmqTransactionMode.CurrentOrThrow);
+                            result = queue.TryReceiveByLookupId(
+                                messageProperty.LookupId,
+                                emptyMessage,
+                                MsmqTransactionMode.CurrentOrThrow
+                            );
                             if (MsmqQueue.MoveReceiveResult.Succeeded == result && reject)
                                 queue.MarkMessageRejected(messageProperty.LookupId);
                             scope.Complete();
@@ -207,12 +228,15 @@ namespace System.ServiceModel.Channels
 
                     if (result == MsmqQueue.MoveReceiveResult.Succeeded)
                         // If 'Reject' supported and 'Reject' requested, put reject in the trace, otherwise put 'Drop'
-                        MsmqDiagnostics.MessageConsumed(instanceId, messageProperty.MessageId, (Msmq.IsRejectMessageSupported && reject));
+                        MsmqDiagnostics.MessageConsumed(
+                            instanceId,
+                            messageProperty.MessageId,
+                            (Msmq.IsRejectMessageSupported && reject)
+                        );
 
                     if (result != MsmqQueue.MoveReceiveResult.MessageLockedUnderTransaction)
                         break;
-                }
-                while (postRollback.AnotherTryNeeded());
+                } while (postRollback.AnotherTryNeeded());
             }
             else
             {
@@ -221,7 +245,11 @@ namespace System.ServiceModel.Channels
         }
 
         //
-        internal static void MoveReceivedMessage(MsmqQueue queueFrom, MsmqQueue queueTo, long lookupId)
+        internal static void MoveReceivedMessage(
+            MsmqQueue queueFrom,
+            MsmqQueue queueTo,
+            long lookupId
+        )
         {
             TryAbortTransactionCurrent();
 
@@ -233,8 +261,7 @@ namespace System.ServiceModel.Channels
 
                 if (result != MsmqQueue.MoveReceiveResult.MessageLockedUnderTransaction)
                     break;
-            }
-            while (postRollback.AnotherTryNeeded());
+            } while (postRollback.AnotherTryNeeded());
         }
 
         internal void FinalDisposition(MsmqMessageProperty messageProperty)
@@ -250,22 +277,37 @@ namespace System.ServiceModel.Channels
                 return (MsmqQueue.ReceiveResult.Timeout != this.queue.TryPeek(message, timeout));
             }
         }
+
         //
-        internal IAsyncResult BeginWaitForMessage(TimeSpan timeout, AsyncCallback callback, object state)
+        internal IAsyncResult BeginWaitForMessage(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             return new WaitForMessageAsyncResult(this.queue, timeout, callback, state);
         }
+
         //
         public bool EndWaitForMessage(IAsyncResult result)
         {
             return WaitForMessageAsyncResult.End(result);
         }
 
-        internal bool TryReceive(MsmqInputMessage msmqMessage, TimeSpan timeout, MsmqTransactionMode transactionMode, out MsmqMessageProperty property)
+        internal bool TryReceive(
+            MsmqInputMessage msmqMessage,
+            TimeSpan timeout,
+            MsmqTransactionMode transactionMode,
+            out MsmqMessageProperty property
+        )
         {
             property = null;
 
-            MsmqQueue.ReceiveResult receiveResult = this.Queue.TryReceive(msmqMessage, timeout, transactionMode);
+            MsmqQueue.ReceiveResult receiveResult = this.Queue.TryReceive(
+                msmqMessage,
+                timeout,
+                transactionMode
+            );
             if (MsmqQueue.ReceiveResult.OperationCancelled == receiveResult)
                 return true;
             if (MsmqQueue.ReceiveResult.Timeout == receiveResult)
@@ -279,22 +321,49 @@ namespace System.ServiceModel.Channels
                     {
                         long lookupId = property.LookupId;
                         property = null;
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperCritical(new MsmqPoisonMessageException(lookupId));
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperCritical(
+                            new MsmqPoisonMessageException(lookupId)
+                        );
                     }
                 }
                 return true;
             }
         }
+
         //
-        internal IAsyncResult BeginTryReceive(MsmqInputMessage msmqMessage, TimeSpan timeout, MsmqTransactionMode transactionMode, AsyncCallback callback, object state)
+        internal IAsyncResult BeginTryReceive(
+            MsmqInputMessage msmqMessage,
+            TimeSpan timeout,
+            MsmqTransactionMode transactionMode,
+            AsyncCallback callback,
+            object state
+        )
         {
             if (this.receiveParameters.ExactlyOnce || this.queue is ILockingQueue)
-                return new TryTransactedReceiveAsyncResult(this, msmqMessage, timeout, transactionMode, callback, state);
+                return new TryTransactedReceiveAsyncResult(
+                    this,
+                    msmqMessage,
+                    timeout,
+                    transactionMode,
+                    callback,
+                    state
+                );
             else
-                return new TryNonTransactedReceiveAsyncResult(this, msmqMessage, timeout, callback, state);
+                return new TryNonTransactedReceiveAsyncResult(
+                    this,
+                    msmqMessage,
+                    timeout,
+                    callback,
+                    state
+                );
         }
+
         //
-        internal bool EndTryReceive(IAsyncResult result, out MsmqInputMessage msmqMessage, out MsmqMessageProperty msmqProperty)
+        internal bool EndTryReceive(
+            IAsyncResult result,
+            out MsmqInputMessage msmqMessage,
+            out MsmqMessageProperty msmqProperty
+        )
         {
             msmqMessage = null;
             msmqProperty = null;
@@ -304,17 +373,31 @@ namespace System.ServiceModel.Channels
 
             if (this.receiveParameters.ExactlyOnce)
             {
-                TryTransactedReceiveAsyncResult receiveResult = result as TryTransactedReceiveAsyncResult;
+                TryTransactedReceiveAsyncResult receiveResult =
+                    result as TryTransactedReceiveAsyncResult;
                 if (null == receiveResult)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(SR.GetString(SR.InvalidAsyncResult));
-                return TryTransactedReceiveAsyncResult.End(receiveResult, out msmqMessage, out msmqProperty);
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                        SR.GetString(SR.InvalidAsyncResult)
+                    );
+                return TryTransactedReceiveAsyncResult.End(
+                    receiveResult,
+                    out msmqMessage,
+                    out msmqProperty
+                );
             }
             else
             {
-                TryNonTransactedReceiveAsyncResult receiveResult = result as TryNonTransactedReceiveAsyncResult;
+                TryNonTransactedReceiveAsyncResult receiveResult =
+                    result as TryNonTransactedReceiveAsyncResult;
                 if (null == receiveResult)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(SR.GetString(SR.InvalidAsyncResult));
-                return TryNonTransactedReceiveAsyncResult.End(receiveResult, out msmqMessage, out msmqProperty);
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                        SR.GetString(SR.InvalidAsyncResult)
+                    );
+                return TryNonTransactedReceiveAsyncResult.End(
+                    receiveResult,
+                    out msmqMessage,
+                    out msmqProperty
+                );
             }
         }
 
@@ -330,8 +413,14 @@ namespace System.ServiceModel.Channels
             MsmqTransactionMode transactionMode;
             static Action<object> onComplete = new Action<object>(OnComplete);
 
-            internal TryTransactedReceiveAsyncResult(MsmqReceiveHelper receiver, MsmqInputMessage msmqMessage,
-                TimeSpan timeout, MsmqTransactionMode transactionMode, AsyncCallback callback, object state)
+            internal TryTransactedReceiveAsyncResult(
+                MsmqReceiveHelper receiver,
+                MsmqInputMessage msmqMessage,
+                TimeSpan timeout,
+                MsmqTransactionMode transactionMode,
+                AsyncCallback callback,
+                object state
+            )
                 : base(callback, state)
             {
                 this.timeoutHelper = new TimeoutHelper(timeout);
@@ -344,7 +433,8 @@ namespace System.ServiceModel.Channels
 
             static void OnComplete(object parameter)
             {
-                TryTransactedReceiveAsyncResult result = parameter as TryTransactedReceiveAsyncResult;
+                TryTransactedReceiveAsyncResult result =
+                    parameter as TryTransactedReceiveAsyncResult;
                 Transaction savedTransaction = Transaction.Current;
                 Transaction.Current = result.txCurrent;
                 try
@@ -352,7 +442,12 @@ namespace System.ServiceModel.Channels
                     Exception ex = null;
                     try
                     {
-                        result.expired = !result.receiver.TryReceive(result.msmqMessage, result.timeoutHelper.RemainingTime(), result.transactionMode, out result.messageProperty);
+                        result.expired = !result.receiver.TryReceive(
+                            result.msmqMessage,
+                            result.timeoutHelper.RemainingTime(),
+                            result.transactionMode,
+                            out result.messageProperty
+                        );
                     }
                     catch (Exception e)
                     {
@@ -368,9 +463,14 @@ namespace System.ServiceModel.Channels
                 }
             }
 
-            internal static bool End(IAsyncResult result, out MsmqInputMessage msmqMessage, out MsmqMessageProperty property)
+            internal static bool End(
+                IAsyncResult result,
+                out MsmqInputMessage msmqMessage,
+                out MsmqMessageProperty property
+            )
             {
-                TryTransactedReceiveAsyncResult receiveResult = AsyncResult.End<TryTransactedReceiveAsyncResult>(result);
+                TryTransactedReceiveAsyncResult receiveResult =
+                    AsyncResult.End<TryTransactedReceiveAsyncResult>(result);
                 msmqMessage = receiveResult.msmqMessage;
                 property = receiveResult.messageProperty;
                 return !receiveResult.expired;
@@ -383,10 +483,17 @@ namespace System.ServiceModel.Channels
             MsmqQueue.ReceiveResult receiveResult;
             MsmqReceiveHelper receiver;
             MsmqInputMessage msmqMessage;
-            static AsyncCallback onCompleteStatic = Fx.ThunkCallback(new AsyncCallback(OnCompleteStatic));
+            static AsyncCallback onCompleteStatic = Fx.ThunkCallback(
+                new AsyncCallback(OnCompleteStatic)
+            );
 
-
-            internal TryNonTransactedReceiveAsyncResult(MsmqReceiveHelper receiver, MsmqInputMessage msmqMessage, TimeSpan timeout, AsyncCallback callback, object state)
+            internal TryNonTransactedReceiveAsyncResult(
+                MsmqReceiveHelper receiver,
+                MsmqInputMessage msmqMessage,
+                TimeSpan timeout,
+                AsyncCallback callback,
+                object state
+            )
                 : base(callback, state)
             {
                 this.receiver = receiver;
@@ -415,9 +522,14 @@ namespace System.ServiceModel.Channels
                 Complete(result.CompletedSynchronously, ex);
             }
 
-            internal static bool End(IAsyncResult result, out MsmqInputMessage msmqMessage, out MsmqMessageProperty property)
+            internal static bool End(
+                IAsyncResult result,
+                out MsmqInputMessage msmqMessage,
+                out MsmqMessageProperty property
+            )
             {
-                TryNonTransactedReceiveAsyncResult asyncResult = AsyncResult.End<TryNonTransactedReceiveAsyncResult>(result);
+                TryNonTransactedReceiveAsyncResult asyncResult =
+                    AsyncResult.End<TryNonTransactedReceiveAsyncResult>(result);
                 msmqMessage = asyncResult.msmqMessage;
                 property = null;
                 if (MsmqQueue.ReceiveResult.Timeout == asyncResult.receiveResult)
@@ -438,9 +550,16 @@ namespace System.ServiceModel.Channels
             MsmqQueue msmqQueue;
             MsmqEmptyMessage msmqMessage;
             bool successResult;
-            static AsyncCallback onCompleteStatic = Fx.ThunkCallback(new AsyncCallback(OnCompleteStatic));
+            static AsyncCallback onCompleteStatic = Fx.ThunkCallback(
+                new AsyncCallback(OnCompleteStatic)
+            );
 
-            public WaitForMessageAsyncResult(MsmqQueue msmqQueue, TimeSpan timeout, AsyncCallback callback, object state)
+            public WaitForMessageAsyncResult(
+                MsmqQueue msmqQueue,
+                TimeSpan timeout,
+                AsyncCallback callback,
+                object state
+            )
                 : base(callback, state)
             {
                 this.msmqMessage = new MsmqEmptyMessage();
@@ -475,7 +594,9 @@ namespace System.ServiceModel.Channels
 
             public static bool End(IAsyncResult result)
             {
-                WaitForMessageAsyncResult thisPtr = AsyncResult.End<WaitForMessageAsyncResult>(result);
+                WaitForMessageAsyncResult thisPtr = AsyncResult.End<WaitForMessageAsyncResult>(
+                    result
+                );
                 return thisPtr.successResult;
             }
         }

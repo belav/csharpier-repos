@@ -36,10 +36,19 @@ namespace System.Reflection.Tests
                     continue;
 
                 properties.Clear();
-                properties.AddRange((IEnumerable<string>)type.GetDeclaredField("DeclaredPropertyNames").GetValue(null));
-                properties.AddRange((IEnumerable<string>)type.GetDeclaredField("InheritedPropertyNames").GetValue(null));
+                properties.AddRange(
+                    (IEnumerable<string>)
+                        type.GetDeclaredField("DeclaredPropertyNames").GetValue(null)
+                );
+                properties.AddRange(
+                    (IEnumerable<string>)
+                        type.GetDeclaredField("InheritedPropertyNames").GetValue(null)
+                );
 
-                Assert.All(type.AsType().GetRuntimeProperties(), p => Assert.True(properties.Remove(p.Name)));
+                Assert.All(
+                    type.AsType().GetRuntimeProperties(),
+                    p => Assert.True(properties.Remove(p.Name))
+                );
                 Assert.Empty(properties);
             }
         }
@@ -65,10 +74,17 @@ namespace System.Reflection.Tests
                     continue;
 
                 events.Clear();
-                events.AddRange((IEnumerable<string>)type.GetDeclaredField("DeclaredEvents").GetValue(null));
-                events.AddRange((IEnumerable<string>)type.GetDeclaredField("InheritedEvents").GetValue(null));
+                events.AddRange(
+                    (IEnumerable<string>)type.GetDeclaredField("DeclaredEvents").GetValue(null)
+                );
+                events.AddRange(
+                    (IEnumerable<string>)type.GetDeclaredField("InheritedEvents").GetValue(null)
+                );
 
-                Assert.All(type.AsType().GetRuntimeEvents(), e => Assert.True(events.Remove(e.Name)));
+                Assert.All(
+                    type.AsType().GetRuntimeEvents(),
+                    e => Assert.True(events.Remove(e.Name))
+                );
                 Assert.Empty(events);
             }
         }
@@ -79,7 +95,8 @@ namespace System.Reflection.Tests
             var list = new List<TypeInfo>();
             foreach (var t in asm.DefinedTypes)
             {
-                if (t.Namespace == null) continue; // These are classes in the global namespace; not under test
+                if (t.Namespace == null)
+                    continue; // These are classes in the global namespace; not under test
                 list.Add(t);
             }
             return list.ToArray();

@@ -4,4 +4,7 @@
 using Xunit;
 
 // We don't want to run the tests in parallel because they need exclusive access to serial ports
-[assembly: CollectionBehavior(CollectionBehavior.CollectionPerAssembly, DisableTestParallelization = true)]
+[assembly: CollectionBehavior(
+    CollectionBehavior.CollectionPerAssembly,
+    DisableTestParallelization = true
+)]

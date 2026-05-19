@@ -46,10 +46,7 @@ namespace System.Xml
 
         object IEnumerator.Current
         {
-            get
-            {
-                return this.Current;
-            }
+            get { return this.Current; }
         }
 
         internal XmlNode Current

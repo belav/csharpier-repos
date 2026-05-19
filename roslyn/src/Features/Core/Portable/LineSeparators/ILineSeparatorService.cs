@@ -12,6 +12,10 @@ namespace Microsoft.CodeAnalysis.LineSeparators
 {
     internal interface ILineSeparatorService : ILanguageService
     {
-        Task<ImmutableArray<TextSpan>> GetLineSeparatorsAsync(Document document, TextSpan textSpan, CancellationToken cancellationToken);
+        Task<ImmutableArray<TextSpan>> GetLineSeparatorsAsync(
+            Document document,
+            TextSpan textSpan,
+            CancellationToken cancellationToken
+        );
     }
 }

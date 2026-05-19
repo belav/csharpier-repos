@@ -7,9 +7,11 @@ namespace CoreXml.Test.XLinq
 {
     public class DNException : Exception
     {
-        public DNException() : base() { }
+        public DNException()
+            : base() { }
 
-        public DNException(string s) : base(s) { }
+        public DNException(string s)
+            : base(s) { }
 
         internal static Exception DocumentNavigatorNotOnLastNode()
         {

@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -27,200 +27,256 @@
 //
 using System;
 using System.Collections.Generic;
-using System.Xml;
 using System.IdentityModel.Policy;
 using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
 using System.Security.Cryptography.Xml;
+using System.Xml;
 
 namespace System.IdentityModel.Tokens
 {
-	public class X509AsymmetricSecurityKey : AsymmetricSecurityKey
-	{
-		public X509AsymmetricSecurityKey (X509Certificate2 certificate)
-		{
-			if (certificate == null)
-				throw new ArgumentNullException ("certificate");
-			cert = certificate;
-		}
+    public class X509AsymmetricSecurityKey : AsymmetricSecurityKey
+    {
+        public X509AsymmetricSecurityKey(X509Certificate2 certificate)
+        {
+            if (certificate == null)
+                throw new ArgumentNullException("certificate");
+            cert = certificate;
+        }
 
-		X509Certificate2 cert;
+        X509Certificate2 cert;
 
-		// AsymmetricSecurityKey implementation
+        // AsymmetricSecurityKey implementation
 
-		public override AsymmetricAlgorithm GetAsymmetricAlgorithm (
-			string algorithm, bool privateKey)
-		{
-			if (algorithm == null)
-				throw new ArgumentNullException ("algorithm");
-			if (privateKey && !cert.HasPrivateKey)
-				throw new NotSupportedException ("The certificate does not contain a private key.");
+        public override AsymmetricAlgorithm GetAsymmetricAlgorithm(
+            string algorithm,
+            bool privateKey
+        )
+        {
+            if (algorithm == null)
+                throw new ArgumentNullException("algorithm");
+            if (privateKey && !cert.HasPrivateKey)
+                throw new NotSupportedException("The certificate does not contain a private key.");
 
-			AsymmetricAlgorithm alg = privateKey ?
-				cert.PrivateKey : cert.PublicKey.Key;
+            AsymmetricAlgorithm alg = privateKey ? cert.PrivateKey : cert.PublicKey.Key;
 
-			switch (algorithm) {
-//			case SignedXml.XmlDsigDSAUrl:
-//				if (alg is DSA)
-//					return alg;
-//				throw new NotSupportedException (String.Format ("The certificate does not contain DSA private key while '{0}' requires it.", algorithm));
-			case EncryptedXml.XmlEncRSA15Url:
-			case EncryptedXml.XmlEncRSAOAEPUrl:
-			case SignedXml.XmlDsigRSASHA1Url:
-			case SecurityAlgorithms.RsaSha256Signature:
-				if (alg is RSA)
-					return alg;
-				throw new NotSupportedException (String.Format ("The certificate does not contain RSA private key while '{0}' requires it.", algorithm));
-			}
+            switch (algorithm)
+            {
+                //			case SignedXml.XmlDsigDSAUrl:
+                //				if (alg is DSA)
+                //					return alg;
+                //				throw new NotSupportedException (String.Format ("The certificate does not contain DSA private key while '{0}' requires it.", algorithm));
+                case EncryptedXml.XmlEncRSA15Url:
+                case EncryptedXml.XmlEncRSAOAEPUrl:
+                case SignedXml.XmlDsigRSASHA1Url:
+                case SecurityAlgorithms.RsaSha256Signature:
+                    if (alg is RSA)
+                        return alg;
+                    throw new NotSupportedException(
+                        String.Format(
+                            "The certificate does not contain RSA private key while '{0}' requires it.",
+                            algorithm
+                        )
+                    );
+            }
 
-			throw new NotSupportedException (String.Format ("The asymmetric algorithm '{0}' is not supported.", algorithm));
-		}
+            throw new NotSupportedException(
+                String.Format("The asymmetric algorithm '{0}' is not supported.", algorithm)
+            );
+        }
 
-		public override HashAlgorithm GetHashAlgorithmForSignature (
-			string algorithm)
-		{
-			if (algorithm == null)
-				throw new ArgumentNullException ("algorithm");
-			switch (algorithm) {
-			//case SignedXml.XmlDsigDSAUrl: // it is documented as supported, but it isn't in reality and it wouldn't be possible.
-			case SignedXml.XmlDsigRSASHA1Url:
-				return new SHA1Managed ();
-			case SecurityAlgorithms.RsaSha256Signature:
-				return new SHA256Managed ();
-			default:
-				throw new NotSupportedException (String.Format ("'{0}' Hash algorithm is not supported in this security key.", algorithm));
-			}
-		}
+        public override HashAlgorithm GetHashAlgorithmForSignature(string algorithm)
+        {
+            if (algorithm == null)
+                throw new ArgumentNullException("algorithm");
+            switch (algorithm)
+            {
+                //case SignedXml.XmlDsigDSAUrl: // it is documented as supported, but it isn't in reality and it wouldn't be possible.
+                case SignedXml.XmlDsigRSASHA1Url:
+                    return new SHA1Managed();
+                case SecurityAlgorithms.RsaSha256Signature:
+                    return new SHA256Managed();
+                default:
+                    throw new NotSupportedException(
+                        String.Format(
+                            "'{0}' Hash algorithm is not supported in this security key.",
+                            algorithm
+                        )
+                    );
+            }
+        }
 
-		public override AsymmetricSignatureDeformatter GetSignatureDeformatter (string algorithm)
-		{
-			switch (algorithm) {
-				//case SignedXml.XmlDsigDSAUrl:
-				//	DSA dsa = (cert.PublicKey.Key as DSA);
-				//	if (dsa == null) {
-				//		throw new NotSupportedException (String.Format ("The certificate does not contain DSA public key while '{0}' requires it.", algorithm));
-				//	}
-				//	else {
-				//		return new DSASignatureDeformatter(dsa);
-				//	}
-				case SignedXml.XmlDsigRSASHA1Url:
-				case SecurityAlgorithms.RsaSha256Signature:
-					RSA rsa = (cert.PublicKey.Key as RSA);
-					if (rsa == null) {
-						throw new NotSupportedException (String.Format ("The certificate does not contain RSA public key while '{0}' requires it.", algorithm));
-					}
-					else {
-						return new RSAPKCS1SignatureDeformatter (rsa);
-					}
-				default:
-					throw new NotSupportedException (String.Format ("'{0}' Hash algorithm is not supported in this security key.", algorithm));
-			}
-		}
+        public override AsymmetricSignatureDeformatter GetSignatureDeformatter(string algorithm)
+        {
+            switch (algorithm)
+            {
+                //case SignedXml.XmlDsigDSAUrl:
+                //	DSA dsa = (cert.PublicKey.Key as DSA);
+                //	if (dsa == null) {
+                //		throw new NotSupportedException (String.Format ("The certificate does not contain DSA public key while '{0}' requires it.", algorithm));
+                //	}
+                //	else {
+                //		return new DSASignatureDeformatter(dsa);
+                //	}
+                case SignedXml.XmlDsigRSASHA1Url:
+                case SecurityAlgorithms.RsaSha256Signature:
+                    RSA rsa = (cert.PublicKey.Key as RSA);
+                    if (rsa == null)
+                    {
+                        throw new NotSupportedException(
+                            String.Format(
+                                "The certificate does not contain RSA public key while '{0}' requires it.",
+                                algorithm
+                            )
+                        );
+                    }
+                    else
+                    {
+                        return new RSAPKCS1SignatureDeformatter(rsa);
+                    }
+                default:
+                    throw new NotSupportedException(
+                        String.Format(
+                            "'{0}' Hash algorithm is not supported in this security key.",
+                            algorithm
+                        )
+                    );
+            }
+        }
 
-		public override AsymmetricSignatureFormatter GetSignatureFormatter (string algorithm)
-		{
-			switch (algorithm) {
-				//case SignedXml.XmlDsigDSAUrl:
-				//	DSA dsa = (cert.PrivateKey as DSA);
-				//	if (dsa == null) {
-				//		throw new NotSupportedException (String.Format ("The certificate does not contain DSA private key while '{0}' requires it.", algorithm));
-				//	}
-				//	else {
-				//		return new DSASignatureFormatter(dsa);
-				//	}
-				case SignedXml.XmlDsigRSASHA1Url:
-				case SecurityAlgorithms.RsaSha256Signature:
-					RSA rsa = (cert.PrivateKey as RSA);
-					if (rsa == null) {
-						throw new NotSupportedException (String.Format ("The certificate does not contain RSA private key while '{0}' requires it.", algorithm));
-					}
-					else {
-						return new RSAPKCS1SignatureFormatter (rsa);
-					}
-				default:
-					throw new NotSupportedException (String.Format ("'{0}' Hash algorithm is not supported in this security key.", algorithm));
-			}
-		}
+        public override AsymmetricSignatureFormatter GetSignatureFormatter(string algorithm)
+        {
+            switch (algorithm)
+            {
+                //case SignedXml.XmlDsigDSAUrl:
+                //	DSA dsa = (cert.PrivateKey as DSA);
+                //	if (dsa == null) {
+                //		throw new NotSupportedException (String.Format ("The certificate does not contain DSA private key while '{0}' requires it.", algorithm));
+                //	}
+                //	else {
+                //		return new DSASignatureFormatter(dsa);
+                //	}
+                case SignedXml.XmlDsigRSASHA1Url:
+                case SecurityAlgorithms.RsaSha256Signature:
+                    RSA rsa = (cert.PrivateKey as RSA);
+                    if (rsa == null)
+                    {
+                        throw new NotSupportedException(
+                            String.Format(
+                                "The certificate does not contain RSA private key while '{0}' requires it.",
+                                algorithm
+                            )
+                        );
+                    }
+                    else
+                    {
+                        return new RSAPKCS1SignatureFormatter(rsa);
+                    }
+                default:
+                    throw new NotSupportedException(
+                        String.Format(
+                            "'{0}' Hash algorithm is not supported in this security key.",
+                            algorithm
+                        )
+                    );
+            }
+        }
 
-		public override bool HasPrivateKey ()
-		{
-			return cert.HasPrivateKey;
-		}
+        public override bool HasPrivateKey()
+        {
+            return cert.HasPrivateKey;
+        }
 
-		// SecurityKey implementation
+        // SecurityKey implementation
 
-		public override int KeySize {
-			get { return cert.PublicKey.Key.KeySize; }
-		}
+        public override int KeySize
+        {
+            get { return cert.PublicKey.Key.KeySize; }
+        }
 
-		public override byte [] DecryptKey (string algorithm, byte [] keyData)
-		{
-			if (algorithm == null)
-				throw new ArgumentNullException ("algorithm");
-			if (keyData == null)
-				throw new ArgumentNullException ("keyData");
+        public override byte[] DecryptKey(string algorithm, byte[] keyData)
+        {
+            if (algorithm == null)
+                throw new ArgumentNullException("algorithm");
+            if (keyData == null)
+                throw new ArgumentNullException("keyData");
 
-			if (!HasPrivateKey ())
-				throw new NotSupportedException ("This X509 certificate does not contain private key.");
+            if (!HasPrivateKey())
+                throw new NotSupportedException(
+                    "This X509 certificate does not contain private key."
+                );
 
-			if (cert.PrivateKey.KeyExchangeAlgorithm == null)
-				throw new NotSupportedException ("The exchange algorithm of the X509 certificate private key is null");
+            if (cert.PrivateKey.KeyExchangeAlgorithm == null)
+                throw new NotSupportedException(
+                    "The exchange algorithm of the X509 certificate private key is null"
+                );
 
-			switch (algorithm) {
-			case EncryptedXml.XmlEncRSA15Url:
-			case EncryptedXml.XmlEncRSAOAEPUrl:
-				break;
-			default:
-				throw new NotSupportedException (String.Format ("This X509 security key does not support specified algorithm '{0}'", algorithm));
-			}
+            switch (algorithm)
+            {
+                case EncryptedXml.XmlEncRSA15Url:
+                case EncryptedXml.XmlEncRSAOAEPUrl:
+                    break;
+                default:
+                    throw new NotSupportedException(
+                        String.Format(
+                            "This X509 security key does not support specified algorithm '{0}'",
+                            algorithm
+                        )
+                    );
+            }
 
-			bool useOAEP =
-				algorithm == EncryptedXml.XmlEncRSAOAEPUrl;
-			return EncryptedXml.DecryptKey (keyData, cert.PrivateKey as RSA, useOAEP);
-		}
+            bool useOAEP = algorithm == EncryptedXml.XmlEncRSAOAEPUrl;
+            return EncryptedXml.DecryptKey(keyData, cert.PrivateKey as RSA, useOAEP);
+        }
 
-		public override byte [] EncryptKey (string algorithm, byte [] keyData)
-		{
-			if (algorithm == null)
-				throw new ArgumentNullException ("algorithm");
-			if (keyData == null)
-				throw new ArgumentNullException ("keyData");
+        public override byte[] EncryptKey(string algorithm, byte[] keyData)
+        {
+            if (algorithm == null)
+                throw new ArgumentNullException("algorithm");
+            if (keyData == null)
+                throw new ArgumentNullException("keyData");
 
-			switch (algorithm) {
-			case EncryptedXml.XmlEncRSA15Url:
-			case EncryptedXml.XmlEncRSAOAEPUrl:
-				break;
-			default:
-				throw new NotSupportedException (String.Format ("This X509 security key does not support specified algorithm '{0}'", algorithm));
-			}
+            switch (algorithm)
+            {
+                case EncryptedXml.XmlEncRSA15Url:
+                case EncryptedXml.XmlEncRSAOAEPUrl:
+                    break;
+                default:
+                    throw new NotSupportedException(
+                        String.Format(
+                            "This X509 security key does not support specified algorithm '{0}'",
+                            algorithm
+                        )
+                    );
+            }
 
-			bool useOAEP =
-				algorithm == EncryptedXml.XmlEncRSAOAEPUrl;
+            bool useOAEP = algorithm == EncryptedXml.XmlEncRSAOAEPUrl;
 
-			return EncryptedXml.EncryptKey (keyData, cert.PublicKey.Key as RSA, useOAEP);
-		}
+            return EncryptedXml.EncryptKey(keyData, cert.PublicKey.Key as RSA, useOAEP);
+        }
 
-		public override bool IsAsymmetricAlgorithm (string algorithm)
-		{
-			return GetAlgorithmSupportType (algorithm) == AlgorithmSupportType.Asymmetric;
-		}
+        public override bool IsAsymmetricAlgorithm(string algorithm)
+        {
+            return GetAlgorithmSupportType(algorithm) == AlgorithmSupportType.Asymmetric;
+        }
 
-		public override bool IsSupportedAlgorithm (string algorithm)
-		{
-			switch (algorithm) {
-			case SecurityAlgorithms.RsaV15KeyWrap:
-			case SecurityAlgorithms.RsaOaepKeyWrap:
-			case SecurityAlgorithms.RsaSha1Signature:
-			case SecurityAlgorithms.RsaSha256Signature:
-				return true;
-			default:
-				return false;
-			}
-		}
+        public override bool IsSupportedAlgorithm(string algorithm)
+        {
+            switch (algorithm)
+            {
+                case SecurityAlgorithms.RsaV15KeyWrap:
+                case SecurityAlgorithms.RsaOaepKeyWrap:
+                case SecurityAlgorithms.RsaSha1Signature:
+                case SecurityAlgorithms.RsaSha256Signature:
+                    return true;
+                default:
+                    return false;
+            }
+        }
 
-		public override bool IsSymmetricAlgorithm (string algorithm)
-		{
-			return GetAlgorithmSupportType (algorithm) == AlgorithmSupportType.Symmetric;
-		}
-	}
+        public override bool IsSymmetricAlgorithm(string algorithm)
+        {
+            return GetAlgorithmSupportType(algorithm) == AlgorithmSupportType.Symmetric;
+        }
+    }
 }

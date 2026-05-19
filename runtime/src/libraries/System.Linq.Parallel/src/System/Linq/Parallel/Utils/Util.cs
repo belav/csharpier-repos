@@ -24,7 +24,9 @@ namespace System.Linq.Parallel
 
         internal static int Sign(int x)
         {
-            return x < 0 ? -1 : x == 0 ? 0 : 1;
+            return x < 0 ? -1
+                : x == 0 ? 0
+                : 1;
         }
 
         //-----------------------------------------------------------------------------------
@@ -99,7 +101,8 @@ namespace System.Linq.Parallel
             }
         }
 
-        private static readonly FastDateTimeComparer s_fastDateTimeComparer = new FastDateTimeComparer();
+        private static readonly FastDateTimeComparer s_fastDateTimeComparer =
+            new FastDateTimeComparer();
 
         private sealed class FastDateTimeComparer : Comparer<DateTime>
         {

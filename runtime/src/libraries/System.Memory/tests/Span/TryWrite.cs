@@ -26,29 +26,69 @@ namespace System.SpanTests
         {
             bool shouldAppend;
 
-            new MemoryExtensions.TryWriteInterpolatedStringHandler(literalLength, formattedCount, new char[Math.Max(0, literalLength)], out shouldAppend);
+            new MemoryExtensions.TryWriteInterpolatedStringHandler(
+                literalLength,
+                formattedCount,
+                new char[Math.Max(0, literalLength)],
+                out shouldAppend
+            );
             Assert.True(shouldAppend);
 
-            new MemoryExtensions.TryWriteInterpolatedStringHandler(literalLength, formattedCount, new char[1 + Math.Max(0, literalLength)], out shouldAppend);
+            new MemoryExtensions.TryWriteInterpolatedStringHandler(
+                literalLength,
+                formattedCount,
+                new char[1 + Math.Max(0, literalLength)],
+                out shouldAppend
+            );
             Assert.True(shouldAppend);
 
             if (literalLength > 0)
             {
-                new MemoryExtensions.TryWriteInterpolatedStringHandler(literalLength, formattedCount, new char[literalLength - 1], out shouldAppend);
+                new MemoryExtensions.TryWriteInterpolatedStringHandler(
+                    literalLength,
+                    formattedCount,
+                    new char[literalLength - 1],
+                    out shouldAppend
+                );
                 Assert.False(shouldAppend);
             }
 
-            foreach (IFormatProvider provider in new IFormatProvider[] { null, new ConcatFormatter(), CultureInfo.InvariantCulture, CultureInfo.CurrentCulture, new CultureInfo("en-US"), new CultureInfo("fr-FR") })
+            foreach (
+                IFormatProvider provider in new IFormatProvider[]
+                {
+                    null,
+                    new ConcatFormatter(),
+                    CultureInfo.InvariantCulture,
+                    CultureInfo.CurrentCulture,
+                    new CultureInfo("en-US"),
+                    new CultureInfo("fr-FR"),
+                }
+            )
             {
-                new MemoryExtensions.TryWriteInterpolatedStringHandler(literalLength, formattedCount, new char[Math.Max(0, literalLength)], out shouldAppend);
+                new MemoryExtensions.TryWriteInterpolatedStringHandler(
+                    literalLength,
+                    formattedCount,
+                    new char[Math.Max(0, literalLength)],
+                    out shouldAppend
+                );
                 Assert.True(shouldAppend);
 
-                new MemoryExtensions.TryWriteInterpolatedStringHandler(literalLength, formattedCount, new char[1 + Math.Max(0, literalLength)], out shouldAppend);
+                new MemoryExtensions.TryWriteInterpolatedStringHandler(
+                    literalLength,
+                    formattedCount,
+                    new char[1 + Math.Max(0, literalLength)],
+                    out shouldAppend
+                );
                 Assert.True(shouldAppend);
 
                 if (literalLength > 0)
                 {
-                    new MemoryExtensions.TryWriteInterpolatedStringHandler(literalLength, formattedCount, new char[literalLength - 1], out shouldAppend);
+                    new MemoryExtensions.TryWriteInterpolatedStringHandler(
+                        literalLength,
+                        formattedCount,
+                        new char[literalLength - 1],
+                        out shouldAppend
+                    );
                     Assert.False(shouldAppend);
                 }
             }
@@ -58,7 +98,8 @@ namespace System.SpanTests
         public void AppendLiteral()
         {
             var expected = new StringBuilder();
-            MemoryExtensions.TryWriteInterpolatedStringHandler actual = new MemoryExtensions.TryWriteInterpolatedStringHandler(0, 0, _largeBuffer, out _);
+            MemoryExtensions.TryWriteInterpolatedStringHandler actual =
+                new MemoryExtensions.TryWriteInterpolatedStringHandler(0, 0, _largeBuffer, out _);
 
             foreach (string s in new[] { "", "a", "bc", "def", "this is a long string", "!" })
             {
@@ -74,7 +115,8 @@ namespace System.SpanTests
         public void AppendFormatted_ReadOnlySpanChar()
         {
             var expected = new StringBuilder();
-            MemoryExtensions.TryWriteInterpolatedStringHandler actual = new MemoryExtensions.TryWriteInterpolatedStringHandler(0, 0, _largeBuffer, out _);
+            MemoryExtensions.TryWriteInterpolatedStringHandler actual =
+                new MemoryExtensions.TryWriteInterpolatedStringHandler(0, 0, _largeBuffer, out _);
 
             foreach (string s in new[] { "", "a", "bc", "def", "this is a longer string", "!" })
             {
@@ -89,11 +131,17 @@ namespace System.SpanTests
                 foreach (int alignment in new[] { 0, 3, -3 })
                 {
                     // span, alignment
-                    expected.AppendFormat("{0," + alignment.ToString(CultureInfo.InvariantCulture) + "}", s);
+                    expected.AppendFormat(
+                        "{0," + alignment.ToString(CultureInfo.InvariantCulture) + "}",
+                        s
+                    );
                     actual.AppendFormatted((ReadOnlySpan<char>)s, alignment);
 
                     // span, alignment, format
-                    expected.AppendFormat("{0," + alignment.ToString(CultureInfo.InvariantCulture) + ":X2}", s);
+                    expected.AppendFormat(
+                        "{0," + alignment.ToString(CultureInfo.InvariantCulture) + ":X2}",
+                        s
+                    );
                     actual.AppendFormatted((ReadOnlySpan<char>)s, alignment, "X2");
                 }
             }
@@ -106,9 +154,12 @@ namespace System.SpanTests
         public void AppendFormatted_String()
         {
             var expected = new StringBuilder();
-            MemoryExtensions.TryWriteInterpolatedStringHandler actual = new MemoryExtensions.TryWriteInterpolatedStringHandler(0, 0, _largeBuffer, out _);
+            MemoryExtensions.TryWriteInterpolatedStringHandler actual =
+                new MemoryExtensions.TryWriteInterpolatedStringHandler(0, 0, _largeBuffer, out _);
 
-            foreach (string s in new[] { null, "", "a", "bc", "def", "this is a longer string", "!" })
+            foreach (
+                string s in new[] { null, "", "a", "bc", "def", "this is a longer string", "!" }
+            )
             {
                 // string
                 expected.AppendFormat("{0}", s);
@@ -121,11 +172,17 @@ namespace System.SpanTests
                 foreach (int alignment in new[] { 0, 3, -3 })
                 {
                     // string, alignment
-                    expected.AppendFormat("{0," + alignment.ToString(CultureInfo.InvariantCulture) + "}", s);
+                    expected.AppendFormat(
+                        "{0," + alignment.ToString(CultureInfo.InvariantCulture) + "}",
+                        s
+                    );
                     actual.AppendFormatted(s, alignment);
 
                     // string, alignment, format
-                    expected.AppendFormat("{0," + alignment.ToString(CultureInfo.InvariantCulture) + ":X2}", s);
+                    expected.AppendFormat(
+                        "{0," + alignment.ToString(CultureInfo.InvariantCulture) + ":X2}",
+                        s
+                    );
                     actual.AppendFormatted(s, alignment, "X2");
                 }
             }
@@ -140,7 +197,14 @@ namespace System.SpanTests
             var provider = new ConcatFormatter();
 
             var expected = new StringBuilder();
-            MemoryExtensions.TryWriteInterpolatedStringHandler actual = new MemoryExtensions.TryWriteInterpolatedStringHandler(0, 0, _largeBuffer, provider, out _);
+            MemoryExtensions.TryWriteInterpolatedStringHandler actual =
+                new MemoryExtensions.TryWriteInterpolatedStringHandler(
+                    0,
+                    0,
+                    _largeBuffer,
+                    provider,
+                    out _
+                );
 
             foreach (string s in new[] { null, "", "a" })
             {
@@ -169,17 +233,31 @@ namespace System.SpanTests
         public void AppendFormatted_ReferenceTypes()
         {
             var expected = new StringBuilder();
-            MemoryExtensions.TryWriteInterpolatedStringHandler actual = new MemoryExtensions.TryWriteInterpolatedStringHandler(0, 0, _largeBuffer, out _);
+            MemoryExtensions.TryWriteInterpolatedStringHandler actual =
+                new MemoryExtensions.TryWriteInterpolatedStringHandler(0, 0, _largeBuffer, out _);
 
-            foreach (string rawInput in new[] { null, "", "a", "bc", "def", "this is a longer string", "!" })
-            {
-                foreach (object o in new object[]
+            foreach (
+                string rawInput in new[]
                 {
-                    rawInput, // raw string directly; ToString will return itself
-                    new StringWrapper(rawInput), // wrapper object that returns string from ToString
-                    new FormattableStringWrapper(rawInput), // IFormattable wrapper around string
-                    new SpanFormattableStringWrapper(rawInput) // ISpanFormattable wrapper around string
-                })
+                    null,
+                    "",
+                    "a",
+                    "bc",
+                    "def",
+                    "this is a longer string",
+                    "!",
+                }
+            )
+            {
+                foreach (
+                    object o in new object[]
+                    {
+                        rawInput, // raw string directly; ToString will return itself
+                        new StringWrapper(rawInput), // wrapper object that returns string from ToString
+                        new FormattableStringWrapper(rawInput), // IFormattable wrapper around string
+                        new SpanFormattableStringWrapper(rawInput), // ISpanFormattable wrapper around string
+                    }
+                )
                 {
                     // object
                     expected.AppendFormat("{0}", o);
@@ -202,7 +280,10 @@ namespace System.SpanTests
                     foreach (int alignment in new[] { 0, 3, -3 })
                     {
                         // object, alignment
-                        expected.AppendFormat("{0," + alignment.ToString(CultureInfo.InvariantCulture) + "}", o);
+                        expected.AppendFormat(
+                            "{0," + alignment.ToString(CultureInfo.InvariantCulture) + "}",
+                            o
+                        );
                         actual.AppendFormatted(o, alignment);
                         if (o is IHasToStringState tss3)
                         {
@@ -211,7 +292,10 @@ namespace System.SpanTests
                         }
 
                         // object, alignment, format
-                        expected.AppendFormat("{0," + alignment.ToString(CultureInfo.InvariantCulture) + ":X2}", o);
+                        expected.AppendFormat(
+                            "{0," + alignment.ToString(CultureInfo.InvariantCulture) + ":X2}",
+                            o
+                        );
                         actual.AppendFormatted(o, alignment, "X2");
                         if (o is IHasToStringState tss4)
                         {
@@ -230,9 +314,22 @@ namespace System.SpanTests
         public void AppendFormatted_ReferenceTypes_CreateProviderFlowed()
         {
             var provider = new CultureInfo("en-US");
-            MemoryExtensions.TryWriteInterpolatedStringHandler handler = new MemoryExtensions.TryWriteInterpolatedStringHandler(1, 2, _largeBuffer, provider, out _);
+            MemoryExtensions.TryWriteInterpolatedStringHandler handler =
+                new MemoryExtensions.TryWriteInterpolatedStringHandler(
+                    1,
+                    2,
+                    _largeBuffer,
+                    provider,
+                    out _
+                );
 
-            foreach (IHasToStringState tss in new IHasToStringState[] { new FormattableStringWrapper("hello"), new SpanFormattableStringWrapper("hello") })
+            foreach (
+                IHasToStringState tss in new IHasToStringState[]
+                {
+                    new FormattableStringWrapper("hello"),
+                    new SpanFormattableStringWrapper("hello"),
+                }
+            )
             {
                 handler.AppendFormatted(tss);
                 Assert.Same(provider, tss.ToStringState.LastProvider);
@@ -254,17 +351,33 @@ namespace System.SpanTests
             var provider = new ConcatFormatter();
 
             var expected = new StringBuilder();
-            MemoryExtensions.TryWriteInterpolatedStringHandler actual = new MemoryExtensions.TryWriteInterpolatedStringHandler(0, 0, _largeBuffer, provider, out _);
+            MemoryExtensions.TryWriteInterpolatedStringHandler actual =
+                new MemoryExtensions.TryWriteInterpolatedStringHandler(
+                    0,
+                    0,
+                    _largeBuffer,
+                    provider,
+                    out _
+                );
 
             foreach (string s in new[] { null, "", "a" })
             {
-                foreach (IHasToStringState tss in new IHasToStringState[] { new FormattableStringWrapper(s), new SpanFormattableStringWrapper(s) })
+                foreach (
+                    IHasToStringState tss in new IHasToStringState[]
+                    {
+                        new FormattableStringWrapper(s),
+                        new SpanFormattableStringWrapper(s),
+                    }
+                )
                 {
                     void AssertTss(IHasToStringState tss, string format)
                     {
                         Assert.Equal(format, tss.ToStringState.LastFormat);
                         Assert.Same(provider, tss.ToStringState.LastProvider);
-                        Assert.Equal(ToStringMode.ICustomFormatterFormat, tss.ToStringState.ToStringMode);
+                        Assert.Equal(
+                            ToStringMode.ICustomFormatterFormat,
+                            tss.ToStringState.ToStringMode
+                        );
                     }
 
                     // object
@@ -299,7 +412,13 @@ namespace System.SpanTests
             void Test<T>(T t)
             {
                 var expected = new StringBuilder();
-                MemoryExtensions.TryWriteInterpolatedStringHandler actual = new MemoryExtensions.TryWriteInterpolatedStringHandler(0, 0, _largeBuffer, out _);
+                MemoryExtensions.TryWriteInterpolatedStringHandler actual =
+                    new MemoryExtensions.TryWriteInterpolatedStringHandler(
+                        0,
+                        0,
+                        _largeBuffer,
+                        out _
+                    );
 
                 // struct
                 expected.AppendFormat("{0}", t);
@@ -316,19 +435,29 @@ namespace System.SpanTests
                 foreach (int alignment in new[] { 0, 3, -3 })
                 {
                     // struct, alignment
-                    expected.AppendFormat("{0," + alignment.ToString(CultureInfo.InvariantCulture) + "}", t);
+                    expected.AppendFormat(
+                        "{0," + alignment.ToString(CultureInfo.InvariantCulture) + "}",
+                        t
+                    );
                     actual.AppendFormatted(t, alignment);
-                    Assert.True(string.IsNullOrEmpty(((IHasToStringState)t).ToStringState.LastFormat));
+                    Assert.True(
+                        string.IsNullOrEmpty(((IHasToStringState)t).ToStringState.LastFormat)
+                    );
                     AssertModeMatchesType(((IHasToStringState)t));
 
                     // struct, alignment, format
-                    expected.AppendFormat("{0," + alignment.ToString(CultureInfo.InvariantCulture) + ":X2}", t);
+                    expected.AppendFormat(
+                        "{0," + alignment.ToString(CultureInfo.InvariantCulture) + ":X2}",
+                        t
+                    );
                     actual.AppendFormatted(t, alignment, "X2");
                     Assert.Equal("X2", ((IHasToStringState)t).ToStringState.LastFormat);
                     AssertModeMatchesType(((IHasToStringState)t));
                 }
 
-                Assert.True(MemoryExtensions.TryWrite(_largeBuffer, ref actual, out int charsWritten));
+                Assert.True(
+                    MemoryExtensions.TryWrite(_largeBuffer, ref actual, out int charsWritten)
+                );
                 Assert.Equal(expected.ToString(), _largeBuffer.AsSpan(0, charsWritten).ToString());
             }
 
@@ -344,7 +473,14 @@ namespace System.SpanTests
             void Test<T>(T t)
             {
                 var provider = new CultureInfo("en-US");
-                MemoryExtensions.TryWriteInterpolatedStringHandler handler = new MemoryExtensions.TryWriteInterpolatedStringHandler(1, 2, _largeBuffer, provider, out _);
+                MemoryExtensions.TryWriteInterpolatedStringHandler handler =
+                    new MemoryExtensions.TryWriteInterpolatedStringHandler(
+                        1,
+                        2,
+                        _largeBuffer,
+                        provider,
+                        out _
+                    );
 
                 handler.AppendFormatted(t);
                 Assert.Same(provider, ((IHasToStringState)t).ToStringState.LastProvider);
@@ -376,11 +512,21 @@ namespace System.SpanTests
                 {
                     Assert.Equal(format, ((IHasToStringState)tss).ToStringState.LastFormat);
                     Assert.Same(provider, ((IHasToStringState)tss).ToStringState.LastProvider);
-                    Assert.Equal(ToStringMode.ICustomFormatterFormat, ((IHasToStringState)tss).ToStringState.ToStringMode);
+                    Assert.Equal(
+                        ToStringMode.ICustomFormatterFormat,
+                        ((IHasToStringState)tss).ToStringState.ToStringMode
+                    );
                 }
 
                 var expected = new StringBuilder();
-                MemoryExtensions.TryWriteInterpolatedStringHandler actual = new MemoryExtensions.TryWriteInterpolatedStringHandler(0, 0, _largeBuffer, provider, out _);
+                MemoryExtensions.TryWriteInterpolatedStringHandler actual =
+                    new MemoryExtensions.TryWriteInterpolatedStringHandler(
+                        0,
+                        0,
+                        _largeBuffer,
+                        provider,
+                        out _
+                    );
 
                 // struct
                 expected.AppendFormat(provider, "{0}", t);
@@ -402,7 +548,9 @@ namespace System.SpanTests
                 actual.AppendFormatted(t, -3, "X2");
                 AssertTss(t, "X2");
 
-                Assert.True(MemoryExtensions.TryWrite(_largeBuffer, ref actual, out int charsWritten));
+                Assert.True(
+                    MemoryExtensions.TryWrite(_largeBuffer, ref actual, out int charsWritten)
+                );
                 Assert.Equal(expected.ToString(), _largeBuffer.AsSpan(0, charsWritten).ToString());
             }
 
@@ -417,7 +565,13 @@ namespace System.SpanTests
         {
             var buffer = new char[100];
 
-            MemoryExtensions.TryWriteInterpolatedStringHandler b = new MemoryExtensions.TryWriteInterpolatedStringHandler(0, 0, buffer.AsSpan(0, 0), out bool shouldAppend);
+            MemoryExtensions.TryWriteInterpolatedStringHandler b =
+                new MemoryExtensions.TryWriteInterpolatedStringHandler(
+                    0,
+                    0,
+                    buffer.AsSpan(0, 0),
+                    out bool shouldAppend
+                );
             Assert.True(shouldAppend);
 
             Assert.True(b.AppendLiteral(""));
@@ -432,7 +586,9 @@ namespace System.SpanTests
             Assert.True(b.AppendFormatted("".AsSpan()));
             Assert.True(b.AppendFormatted("".AsSpan(), alignment: 0, format: "X2"));
 
-            Assert.True(MemoryExtensions.TryWrite(buffer.AsSpan(0, 0), ref b, out int charsWritten));
+            Assert.True(
+                MemoryExtensions.TryWrite(buffer.AsSpan(0, 0), ref b, out int charsWritten)
+            );
             Assert.Equal(0, charsWritten);
         }
 
@@ -445,7 +601,13 @@ namespace System.SpanTests
 
             for (int i = 0; i <= 29; i++)
             {
-                MemoryExtensions.TryWriteInterpolatedStringHandler b = new MemoryExtensions.TryWriteInterpolatedStringHandler(0, 0, buffer, out bool shouldAppend);
+                MemoryExtensions.TryWriteInterpolatedStringHandler b =
+                    new MemoryExtensions.TryWriteInterpolatedStringHandler(
+                        0,
+                        0,
+                        buffer,
+                        out bool shouldAppend
+                    );
                 Assert.True(shouldAppend);
 
                 Assert.True(b.AppendLiteral(new string('s', bufferLength)));
@@ -465,19 +627,35 @@ namespace System.SpanTests
                     10 => b.AppendFormatted(new FormattableStringWrapper(" ")),
                     11 => b.AppendFormatted(new FormattableStringWrapper(" "), alignment: 0),
                     12 => b.AppendFormatted(new FormattableStringWrapper(" "), format: "X2"),
-                    13 => b.AppendFormatted(new FormattableStringWrapper(" "), alignment: 0, format: "X2"),
+                    13 => b.AppendFormatted(
+                        new FormattableStringWrapper(" "),
+                        alignment: 0,
+                        format: "X2"
+                    ),
                     14 => b.AppendFormatted(new SpanFormattableStringWrapper(" ")),
                     15 => b.AppendFormatted(new SpanFormattableStringWrapper(" "), alignment: 0),
                     16 => b.AppendFormatted(new SpanFormattableStringWrapper(" "), format: "X2"),
-                    17 => b.AppendFormatted(new SpanFormattableStringWrapper(" "), alignment: 0, format: "X2"),
+                    17 => b.AppendFormatted(
+                        new SpanFormattableStringWrapper(" "),
+                        alignment: 0,
+                        format: "X2"
+                    ),
                     18 => b.AppendFormatted(new FormattableInt32Wrapper(1)),
                     19 => b.AppendFormatted(new FormattableInt32Wrapper(1), alignment: 0),
                     20 => b.AppendFormatted(new FormattableInt32Wrapper(1), format: "X2"),
-                    21 => b.AppendFormatted(new FormattableInt32Wrapper(1), alignment: 0, format: "X2"),
+                    21 => b.AppendFormatted(
+                        new FormattableInt32Wrapper(1),
+                        alignment: 0,
+                        format: "X2"
+                    ),
                     22 => b.AppendFormatted(new SpanFormattableInt32Wrapper(1)),
                     23 => b.AppendFormatted(new SpanFormattableInt32Wrapper(1), alignment: 0),
                     24 => b.AppendFormatted(new SpanFormattableInt32Wrapper(1), format: "X2"),
-                    25 => b.AppendFormatted(new SpanFormattableInt32Wrapper(1), alignment: 0, format: "X2"),
+                    25 => b.AppendFormatted(
+                        new SpanFormattableInt32Wrapper(1),
+                        alignment: 0,
+                        format: "X2"
+                    ),
                     26 => b.AppendFormatted<string>("", alignment: 1),
                     27 => b.AppendFormatted<string>("", alignment: -1),
                     28 => b.AppendFormatted<string>(" ", alignment: 1, format: "X2"),
@@ -486,10 +664,13 @@ namespace System.SpanTests
                 };
                 Assert.False(result);
 
-                Assert.False(MemoryExtensions.TryWrite(buffer.AsSpan(0, 0), ref b, out int charsWritten));
+                Assert.False(
+                    MemoryExtensions.TryWrite(buffer.AsSpan(0, 0), ref b, out int charsWritten)
+                );
                 Assert.Equal(0, charsWritten);
             }
         }
+
         [Fact]
         public void AppendFormatted_BufferTooSmall_CustomFormatter()
         {
@@ -497,7 +678,14 @@ namespace System.SpanTests
             var provider = new ConstFormatter(" ");
 
             {
-                MemoryExtensions.TryWriteInterpolatedStringHandler b = new MemoryExtensions.TryWriteInterpolatedStringHandler(0, 0, buffer.AsSpan(0, 0), provider, out bool shouldAppend);
+                MemoryExtensions.TryWriteInterpolatedStringHandler b =
+                    new MemoryExtensions.TryWriteInterpolatedStringHandler(
+                        0,
+                        0,
+                        buffer.AsSpan(0, 0),
+                        provider,
+                        out bool shouldAppend
+                    );
                 Assert.True(shouldAppend);
 
                 // don't use custom formatter
@@ -515,28 +703,39 @@ namespace System.SpanTests
                 Assert.False(b.AppendFormatted<string>("", format: "X2"));
                 Assert.False(b.AppendFormatted<string>("", alignment: 0, format: "X2"));
 
-                Assert.False(MemoryExtensions.TryWrite(buffer.AsSpan(0, 0), ref b, out int charsWritten));
+                Assert.False(
+                    MemoryExtensions.TryWrite(buffer.AsSpan(0, 0), ref b, out int charsWritten)
+                );
                 Assert.Equal(0, charsWritten);
             }
         }
 
-        private static void AssertModeMatchesType<T>(T tss) where T : IHasToStringState
+        private static void AssertModeMatchesType<T>(T tss)
+            where T : IHasToStringState
         {
             ToStringMode expected =
-                tss is ISpanFormattable ? ToStringMode.ISpanFormattableTryFormat :
-                tss is IFormattable ? ToStringMode.IFormattableToString :
-                ToStringMode.ObjectToString;
+                tss is ISpanFormattable ? ToStringMode.ISpanFormattableTryFormat
+                : tss is IFormattable ? ToStringMode.IFormattableToString
+                : ToStringMode.ObjectToString;
             Assert.Equal(expected, tss.ToStringState.ToStringMode);
         }
 
-        private sealed class SpanFormattableStringWrapper : IFormattable, ISpanFormattable, IHasToStringState
+        private sealed class SpanFormattableStringWrapper
+            : IFormattable,
+                ISpanFormattable,
+                IHasToStringState
         {
             private readonly string _value;
             public ToStringState ToStringState { get; } = new ToStringState();
 
             public SpanFormattableStringWrapper(string value) => _value = value;
 
-            public bool TryFormat(Span<char> destination, out int charsWritten, ReadOnlySpan<char> format, IFormatProvider provider)
+            public bool TryFormat(
+                Span<char> destination,
+                out int charsWritten,
+                ReadOnlySpan<char> format,
+                IFormatProvider provider
+            )
             {
                 ToStringState.LastFormat = format.ToString();
                 ToStringState.LastProvider = provider;
@@ -576,7 +775,10 @@ namespace System.SpanTests
             }
         }
 
-        private struct SpanFormattableInt32Wrapper : IFormattable, ISpanFormattable, IHasToStringState
+        private struct SpanFormattableInt32Wrapper
+            : IFormattable,
+                ISpanFormattable,
+                IHasToStringState
         {
             private readonly int _value;
             public ToStringState ToStringState { get; }
@@ -587,7 +789,12 @@ namespace System.SpanTests
                 _value = value;
             }
 
-            public bool TryFormat(Span<char> destination, out int charsWritten, ReadOnlySpan<char> format, IFormatProvider provider)
+            public bool TryFormat(
+                Span<char> destination,
+                out int charsWritten,
+                ReadOnlySpan<char> format,
+                IFormatProvider provider
+            )
             {
                 ToStringState.LastFormat = format.ToString();
                 ToStringState.LastProvider = provider;
@@ -696,7 +903,8 @@ namespace System.SpanTests
 
         private sealed class ConcatFormatter : IFormatProvider, ICustomFormatter
         {
-            public object GetFormat(Type formatType) => formatType == typeof(ICustomFormatter) ? this : null;
+            public object GetFormat(Type formatType) =>
+                formatType == typeof(ICustomFormatter) ? this : null;
 
             public string Format(string format, object arg, IFormatProvider formatProvider)
             {
@@ -720,9 +928,11 @@ namespace System.SpanTests
 
             public ConstFormatter(string value) => _value = value;
 
-            public object GetFormat(Type formatType) => formatType == typeof(ICustomFormatter) ? this : null;
+            public object GetFormat(Type formatType) =>
+                formatType == typeof(ICustomFormatter) ? this : null;
 
-            public string Format(string format, object arg, IFormatProvider formatProvider) => _value;
+            public string Format(string format, object arg, IFormatProvider formatProvider) =>
+                _value;
         }
     }
 }

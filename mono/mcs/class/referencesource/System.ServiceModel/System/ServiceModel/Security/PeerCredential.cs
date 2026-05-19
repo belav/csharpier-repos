@@ -30,17 +30,18 @@ namespace System.ServiceModel.Security
         {
             this.certificate = other.certificate;
             this.meshPassword = other.meshPassword;
-            this.peerAuthentication = new X509PeerCertificateAuthentication(other.peerAuthentication);
-            this.messageSenderAuthentication = new X509PeerCertificateAuthentication(other.messageSenderAuthentication);
+            this.peerAuthentication = new X509PeerCertificateAuthentication(
+                other.peerAuthentication
+            );
+            this.messageSenderAuthentication = new X509PeerCertificateAuthentication(
+                other.messageSenderAuthentication
+            );
             this.isReadOnly = other.isReadOnly;
         }
 
         public X509Certificate2 Certificate
         {
-            get
-            {
-                return this.certificate;
-            }
+            get { return this.certificate; }
             set
             {
                 ThrowIfImmutable();
@@ -50,10 +51,7 @@ namespace System.ServiceModel.Security
 
         public string MeshPassword
         {
-            get
-            {
-                return this.meshPassword;
-            }
+            get { return this.meshPassword; }
             set
             {
                 ThrowIfImmutable();
@@ -63,10 +61,7 @@ namespace System.ServiceModel.Security
 
         public X509PeerCertificateAuthentication PeerAuthentication
         {
-            get
-            {
-                return this.peerAuthentication;
-            }
+            get { return this.peerAuthentication; }
             set
             {
                 ThrowIfImmutable();
@@ -76,10 +71,7 @@ namespace System.ServiceModel.Security
 
         public X509PeerCertificateAuthentication MessageSenderAuthentication
         {
-            get
-            {
-                return this.messageSenderAuthentication;
-            }
+            get { return this.messageSenderAuthentication; }
             set
             {
                 ThrowIfImmutable();
@@ -87,7 +79,11 @@ namespace System.ServiceModel.Security
             }
         }
 
-        public void SetCertificate(string subjectName, StoreLocation storeLocation, StoreName storeName)
+        public void SetCertificate(
+            string subjectName,
+            StoreLocation storeLocation,
+            StoreName storeName
+        )
         {
             if (subjectName == null)
             {
@@ -96,14 +92,25 @@ namespace System.ServiceModel.Security
             this.SetCertificate(storeLocation, storeName, DefaultFindType, subjectName);
         }
 
-        public void SetCertificate(StoreLocation storeLocation, StoreName storeName, X509FindType findType, object findValue)
+        public void SetCertificate(
+            StoreLocation storeLocation,
+            StoreName storeName,
+            X509FindType findType,
+            object findValue
+        )
         {
             if (findValue == null)
             {
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("findValue");
             }
             ThrowIfImmutable();
-            this.certificate = SecurityUtils.GetCertificateFromStore(storeName, storeLocation, findType, findValue, null);
+            this.certificate = SecurityUtils.GetCertificateFromStore(
+                storeName,
+                storeLocation,
+                findType,
+                findValue,
+                null
+            );
         }
 
         internal void MakeReadOnly()
@@ -117,11 +124,16 @@ namespace System.ServiceModel.Security
         {
             if (this.isReadOnly)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.ObjectIsReadOnly)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(SR.GetString(SR.ObjectIsReadOnly))
+                );
             }
         }
 
-        bool SameAuthenticators(X509PeerCertificateAuthentication one, X509PeerCertificateAuthentication two)
+        bool SameAuthenticators(
+            X509PeerCertificateAuthentication one,
+            X509PeerCertificateAuthentication two
+        )
         {
             if (one.CertificateValidationMode != two.CertificateValidationMode)
                 return false;
@@ -131,20 +143,34 @@ namespace System.ServiceModel.Security
             }
             else
             {
-                System.IdentityModel.Selectors.X509CertificateValidator first = null, second = null;
+                System.IdentityModel.Selectors.X509CertificateValidator first = null,
+                    second = null;
                 one.TryGetCertificateValidator(out first);
                 two.TryGetCertificateValidator(out second);
                 return (first != null && second != null && first.Equals(second));
             }
         }
 
-        internal bool Equals(PeerCredential that, PeerAuthenticationMode mode, bool messageAuthentication)
+        internal bool Equals(
+            PeerCredential that,
+            PeerAuthenticationMode mode,
+            bool messageAuthentication
+        )
         {
             if (messageAuthentication)
             {
-                if (!SameAuthenticators(this.MessageSenderAuthentication, that.messageSenderAuthentication))
+                if (
+                    !SameAuthenticators(
+                        this.MessageSenderAuthentication,
+                        that.messageSenderAuthentication
+                    )
+                )
                     return false;
-                if (this.Certificate != null && that.Certificate != null && !this.Certificate.Equals(that.Certificate))
+                if (
+                    this.Certificate != null
+                    && that.Certificate != null
+                    && !this.Certificate.Equals(that.Certificate)
+                )
                     return false;
             }
             switch (mode)

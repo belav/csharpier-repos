@@ -5,47 +5,52 @@
 //------------------------------------------------------------------------------
 
 using System;
-using System.Configuration.Internal;
 using System.Collections;
-using System.Collections.Specialized;
 using System.Collections.Generic;
+using System.Collections.Specialized;
+using System.ComponentModel;
+using System.Configuration.Internal;
+using System.Globalization;
 using System.IO;
 using System.Reflection;
-using System.Security.Permissions;
-using System.Xml;
-using System.Globalization;
-using System.ComponentModel;
 using System.Security;
+using System.Security.Permissions;
 using System.Text;
+using System.Xml;
 
-namespace System.Configuration {
-
-    internal class ConfigurationValues : NameObjectCollectionBase {
+namespace System.Configuration
+{
+    internal class ConfigurationValues : NameObjectCollectionBase
+    {
         private BaseConfigurationRecord _configRecord;
         private volatile bool _containsElement;
         private volatile bool _containsInvalidValue;
 
-        internal ConfigurationValues() : base(StringComparer.Ordinal) {
-        }
+        internal ConfigurationValues()
+            : base(StringComparer.Ordinal) { }
 
         // AssociateContext
         //
         // Associate a collection of values with a configRecord
         //
-        internal void AssociateContext(BaseConfigurationRecord configRecord) {
+        internal void AssociateContext(BaseConfigurationRecord configRecord)
+        {
             _configRecord = configRecord;
 
             // Associate with children
-            foreach (ConfigurationElement currentElement in ConfigurationElements) {
+            foreach (ConfigurationElement currentElement in ConfigurationElements)
+            {
                 currentElement.AssociateContext(_configRecord);
             }
         }
 
-        internal bool Contains(string key) {
+        internal bool Contains(string key)
+        {
             return (BaseGet(key) != null);
         }
 
-        internal string GetKey(int index) {
+        internal string GetKey(int index)
+        {
             return BaseGetKey(index);
         }
 
@@ -56,38 +61,53 @@ namespace System.Configuration {
         }
         */
 
-        internal ConfigurationValue GetConfigValue(string key) {
+        internal ConfigurationValue GetConfigValue(string key)
+        {
             return (ConfigurationValue)BaseGet(key);
         }
 
-        internal ConfigurationValue GetConfigValue(int index) {
+        internal ConfigurationValue GetConfigValue(int index)
+        {
             return (ConfigurationValue)BaseGet(index);
         }
 
-        internal PropertySourceInfo GetSourceInfo(string key) {
+        internal PropertySourceInfo GetSourceInfo(string key)
+        {
             ConfigurationValue configurationValue = GetConfigValue(key);
-            if (configurationValue != null) {
+            if (configurationValue != null)
+            {
                 return configurationValue.SourceInfo;
             }
-            else {
+            else
+            {
                 return null;
             }
         }
 
-        internal void ChangeSourceInfo(string key, PropertySourceInfo sourceInfo) {
+        internal void ChangeSourceInfo(string key, PropertySourceInfo sourceInfo)
+        {
             ConfigurationValue configurationValue = GetConfigValue(key);
-            if (configurationValue != null) {
+            if (configurationValue != null)
+            {
                 configurationValue.SourceInfo = sourceInfo;
             }
         }
 
-        private ConfigurationValue CreateConfigValue(object value, ConfigurationValueFlags valueFlags, PropertySourceInfo sourceInfo) {
-            if (value != null) {
-                if (value is ConfigurationElement) {
+        private ConfigurationValue CreateConfigValue(
+            object value,
+            ConfigurationValueFlags valueFlags,
+            PropertySourceInfo sourceInfo
+        )
+        {
+            if (value != null)
+            {
+                if (value is ConfigurationElement)
+                {
                     _containsElement = true;
                     ((ConfigurationElement)value).AssociateContext(_configRecord);
                 }
-                else if (value is InvalidPropValue) {
+                else if (value is InvalidPropValue)
+                {
                     _containsInvalidValue = true;
                 }
             }
@@ -96,114 +116,152 @@ namespace System.Configuration {
             return configValue;
         }
 
-        internal void SetValue(string key, object value, ConfigurationValueFlags valueFlags, PropertySourceInfo sourceInfo) {
+        internal void SetValue(
+            string key,
+            object value,
+            ConfigurationValueFlags valueFlags,
+            PropertySourceInfo sourceInfo
+        )
+        {
             ConfigurationValue configValue = CreateConfigValue(value, valueFlags, sourceInfo);
             BaseSet(key, configValue);
         }
 
 #if UNUSED_CODE
-        private void SetValue(int index, object value, ConfigurationValueFlags valueFlags, PropertySourceInfo sourceInfo) {
+        private void SetValue(
+            int index,
+            object value,
+            ConfigurationValueFlags valueFlags,
+            PropertySourceInfo sourceInfo
+        )
+        {
             ConfigurationValue configValue = CreateConfigValue(value, valueFlags, sourceInfo);
             BaseSet(index, configValue);
         }
 #endif
 
-        internal object this[string key] {
-            get {
+        internal object this[string key]
+        {
+            get
+            {
                 ConfigurationValue configValue = GetConfigValue(key);
-                if (configValue != null) {
+                if (configValue != null)
+                {
                     return configValue.Value;
                 }
-                else {
+                else
+                {
                     return null;
                 }
             }
-            set {
-                SetValue(key, value, ConfigurationValueFlags.Modified, null);
-            }
+            set { SetValue(key, value, ConfigurationValueFlags.Modified, null); }
         }
 
-        internal object this[int index] {
-            get {
+        internal object this[int index]
+        {
+            get
+            {
                 ConfigurationValue configValue = GetConfigValue(index);
-                if (configValue != null) {
+                if (configValue != null)
+                {
                     return configValue.Value;
                 }
-                else {
+                else
+                {
                     return null;
                 }
             }
-
 #if UNUSED_CODE
-            set {
-                SetValue(index, value, ConfigurationValueFlags.Modified, null);
-            }
+            set { SetValue(index, value, ConfigurationValueFlags.Modified, null); }
 #endif
         }
 
-        internal void Clear() {
+        internal void Clear()
+        {
             BaseClear();
         }
 
-        internal object SyncRoot { get { return this; } }
+        internal object SyncRoot
+        {
+            get { return this; }
+        }
 
-        internal ConfigurationValueFlags RetrieveFlags(string key) {
+        internal ConfigurationValueFlags RetrieveFlags(string key)
+        {
             ConfigurationValue configurationValue = (ConfigurationValue)BaseGet(key);
-            if (configurationValue != null) {
+            if (configurationValue != null)
+            {
                 return configurationValue.ValueFlags;
             }
-            else {
+            else
+            {
                 return ConfigurationValueFlags.Default;
             }
         }
 
-        internal bool IsModified(string key) {
+        internal bool IsModified(string key)
+        {
             ConfigurationValue configurationValue = (ConfigurationValue)BaseGet(key);
-            if (configurationValue != null) {
+            if (configurationValue != null)
+            {
                 return ((configurationValue.ValueFlags & ConfigurationValueFlags.Modified) != 0);
             }
-            else {
+            else
+            {
                 return false;
             }
         }
 
-        internal bool IsInherited(string key) {
+        internal bool IsInherited(string key)
+        {
             ConfigurationValue configurationValue = (ConfigurationValue)BaseGet(key);
-            if (configurationValue != null) {
+            if (configurationValue != null)
+            {
                 return ((configurationValue.ValueFlags & ConfigurationValueFlags.Inherited) != 0);
             }
-            else {
+            else
+            {
                 return false;
             }
-
         }
 
-        internal IEnumerable ConfigurationElements {
-            get {
-                if (_containsElement) {
+        internal IEnumerable ConfigurationElements
+        {
+            get
+            {
+                if (_containsElement)
+                {
                     return new ConfigurationElementsCollection(this);
                 }
-                else {
+                else
+                {
                     return EmptyCollectionInstance;
                 }
             }
         }
 
-        internal IEnumerable InvalidValues {
-            get {
-                if (_containsInvalidValue) {
+        internal IEnumerable InvalidValues
+        {
+            get
+            {
+                if (_containsInvalidValue)
+                {
                     return new InvalidValuesCollection(this);
                 }
-                else {
+                else
+                {
                     return EmptyCollectionInstance;
                 }
             }
         }
 
         static volatile IEnumerable s_emptyCollection;
-        static IEnumerable EmptyCollectionInstance {
-            get {
-                if (s_emptyCollection == null) {
+        static IEnumerable EmptyCollectionInstance
+        {
+            get
+            {
+                if (s_emptyCollection == null)
+                {
                     s_emptyCollection = new EmptyCollection();
                 }
 
@@ -211,45 +269,54 @@ namespace System.Configuration {
             }
         }
 
-        private class EmptyCollection : IEnumerable {
+        private class EmptyCollection : IEnumerable
+        {
             IEnumerator _emptyEnumerator;
 
-            private class EmptyCollectionEnumerator : IEnumerator {
-                bool IEnumerator.MoveNext() {
+            private class EmptyCollectionEnumerator : IEnumerator
+            {
+                bool IEnumerator.MoveNext()
+                {
                     return false;
                 }
 
-                Object IEnumerator.Current {
-                    get {
-                        return null;
-                    }
+                Object IEnumerator.Current
+                {
+                    get { return null; }
                 }
 
-                void IEnumerator.Reset() {
-                }
+                void IEnumerator.Reset() { }
             }
 
-            internal EmptyCollection() {
+            internal EmptyCollection()
+            {
                 _emptyEnumerator = new EmptyCollectionEnumerator();
             }
 
-            IEnumerator IEnumerable.GetEnumerator() {
+            IEnumerator IEnumerable.GetEnumerator()
+            {
                 return _emptyEnumerator;
             }
         }
 
-        private class ConfigurationElementsCollection : IEnumerable {
+        private class ConfigurationElementsCollection : IEnumerable
+        {
             ConfigurationValues _values;
 
-            internal ConfigurationElementsCollection(ConfigurationValues values) {
+            internal ConfigurationElementsCollection(ConfigurationValues values)
+            {
                 _values = values;
             }
 
-            IEnumerator IEnumerable.GetEnumerator() {
-                if (_values._containsElement) {
-                    for (int index = 0; index < _values.Count; index++) {
+            IEnumerator IEnumerable.GetEnumerator()
+            {
+                if (_values._containsElement)
+                {
+                    for (int index = 0; index < _values.Count; index++)
+                    {
                         object value = _values[index];
-                        if (value is ConfigurationElement) {
+                        if (value is ConfigurationElement)
+                        {
                             yield return value;
                         }
                     }
@@ -257,18 +324,24 @@ namespace System.Configuration {
             }
         }
 
-        private class InvalidValuesCollection : IEnumerable {
+        private class InvalidValuesCollection : IEnumerable
+        {
             ConfigurationValues _values;
 
-            internal InvalidValuesCollection(ConfigurationValues values) {
+            internal InvalidValuesCollection(ConfigurationValues values)
+            {
                 _values = values;
             }
 
-            IEnumerator IEnumerable.GetEnumerator() {
-                if (_values._containsInvalidValue) {
-                    for (int index = 0; index < _values.Count; index++) {
+            IEnumerator IEnumerable.GetEnumerator()
+            {
+                if (_values._containsInvalidValue)
+                {
+                    for (int index = 0; index < _values.Count; index++)
+                    {
                         object value = _values[index];
-                        if (value is InvalidPropValue) {
+                        if (value is InvalidPropValue)
+                        {
                             yield return value;
                         }
                     }
@@ -276,7 +349,7 @@ namespace System.Configuration {
             }
         }
 
-        /* 
+        /*
         internal bool IsLocked(string key)
         {
             ConfigurationValue configurationValue = (ConfigurationValue)BaseGet(key);
@@ -296,6 +369,5 @@ namespace System.Configuration {
 
         }
         */
-
     }
 }

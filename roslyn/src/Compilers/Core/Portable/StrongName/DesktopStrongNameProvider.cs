@@ -29,40 +29,56 @@ namespace Microsoft.CodeAnalysis
 
         // The path from where this is thrown to where it is caught is all internal,
         // so there's no chance of an API consumer seeing it.
-        internal sealed class ClrStrongNameMissingException : Exception
-        {
-        }
+        internal sealed class ClrStrongNameMissingException : Exception { }
 
         private readonly ImmutableArray<string> _keyFileSearchPaths;
         internal override StrongNameFileSystem FileSystem { get; }
 
-        public DesktopStrongNameProvider(ImmutableArray<string> keyFileSearchPaths) : this(keyFileSearchPaths, StrongNameFileSystem.Instance)
-        {
-        }
+        public DesktopStrongNameProvider(ImmutableArray<string> keyFileSearchPaths)
+            : this(keyFileSearchPaths, StrongNameFileSystem.Instance) { }
 
         /// <summary>
         /// Creates an instance of <see cref="DesktopStrongNameProvider"/>.
         /// </summary>
         /// <param name="tempPath">Path to use for any temporary file generation.</param>
         /// <param name="keyFileSearchPaths">An ordered set of fully qualified paths which are searched when locating a cryptographic key file.</param>
-        public DesktopStrongNameProvider(ImmutableArray<string> keyFileSearchPaths = default, string? tempPath = null)
-           : this(keyFileSearchPaths, tempPath == null ? StrongNameFileSystem.Instance : new StrongNameFileSystem(tempPath))
-        {
+        public DesktopStrongNameProvider(
+            ImmutableArray<string> keyFileSearchPaths = default,
+            string? tempPath = null
+        )
+            : this(
+                keyFileSearchPaths,
+                tempPath == null
+                    ? StrongNameFileSystem.Instance
+                    : new StrongNameFileSystem(tempPath)
+            ) { }
 
-        }
-
-        internal DesktopStrongNameProvider(ImmutableArray<string> keyFileSearchPaths, StrongNameFileSystem strongNameFileSystem)
+        internal DesktopStrongNameProvider(
+            ImmutableArray<string> keyFileSearchPaths,
+            StrongNameFileSystem strongNameFileSystem
+        )
         {
-            if (!keyFileSearchPaths.IsDefault && keyFileSearchPaths.Any(static path => !PathUtilities.IsAbsolute(path)))
+            if (
+                !keyFileSearchPaths.IsDefault
+                && keyFileSearchPaths.Any(static path => !PathUtilities.IsAbsolute(path))
+            )
             {
-                throw new ArgumentException(CodeAnalysisResources.AbsolutePathExpected, nameof(keyFileSearchPaths));
+                throw new ArgumentException(
+                    CodeAnalysisResources.AbsolutePathExpected,
+                    nameof(keyFileSearchPaths)
+                );
             }
 
             FileSystem = strongNameFileSystem ?? StrongNameFileSystem.Instance;
             _keyFileSearchPaths = keyFileSearchPaths.NullToEmpty();
         }
 
-        internal override StrongNameKeys CreateKeys(string? keyFilePath, string? keyContainerName, bool hasCounterSignature, CommonMessageProvider messageProvider)
+        internal override StrongNameKeys CreateKeys(
+            string? keyFilePath,
+            string? keyContainerName,
+            bool hasCounterSignature,
+            CommonMessageProvider messageProvider
+        )
         {
             var keyPair = default(ImmutableArray<byte>);
             var publicKey = default(ImmutableArray<byte>);
@@ -72,19 +88,37 @@ namespace Microsoft.CodeAnalysis
             {
                 try
                 {
-                    string? resolvedKeyFile = ResolveStrongNameKeyFile(keyFilePath, FileSystem, _keyFileSearchPaths);
+                    string? resolvedKeyFile = ResolveStrongNameKeyFile(
+                        keyFilePath,
+                        FileSystem,
+                        _keyFileSearchPaths
+                    );
                     if (resolvedKeyFile == null)
                     {
-                        return new StrongNameKeys(StrongNameKeys.GetKeyFileError(messageProvider, keyFilePath, CodeAnalysisResources.FileNotFound));
+                        return new StrongNameKeys(
+                            StrongNameKeys.GetKeyFileError(
+                                messageProvider,
+                                keyFilePath,
+                                CodeAnalysisResources.FileNotFound
+                            )
+                        );
                     }
 
                     Debug.Assert(PathUtilities.IsAbsolute(resolvedKeyFile));
-                    var fileContent = ImmutableArray.Create(FileSystem.ReadAllBytes(resolvedKeyFile));
-                    return StrongNameKeys.CreateHelper(fileContent, keyFilePath, hasCounterSignature);
+                    var fileContent = ImmutableArray.Create(
+                        FileSystem.ReadAllBytes(resolvedKeyFile)
+                    );
+                    return StrongNameKeys.CreateHelper(
+                        fileContent,
+                        keyFilePath,
+                        hasCounterSignature
+                    );
                 }
                 catch (Exception ex)
                 {
-                    return new StrongNameKeys(StrongNameKeys.GetKeyFileError(messageProvider, keyFilePath, ex.Message));
+                    return new StrongNameKeys(
+                        StrongNameKeys.GetKeyFileError(messageProvider, keyFilePath, ex.Message)
+                    );
                 }
             }
             else if (!string.IsNullOrEmpty(keyContainerName))
@@ -96,23 +130,47 @@ namespace Microsoft.CodeAnalysis
                 }
                 catch (ClrStrongNameMissingException)
                 {
-                    return new StrongNameKeys(StrongNameKeys.GetContainerError(messageProvider, keyContainerName,
-                        new CodeAnalysisResourcesLocalizableErrorArgument(nameof(CodeAnalysisResources.AssemblySigningNotSupported))));
+                    return new StrongNameKeys(
+                        StrongNameKeys.GetContainerError(
+                            messageProvider,
+                            keyContainerName,
+                            new CodeAnalysisResourcesLocalizableErrorArgument(
+                                nameof(CodeAnalysisResources.AssemblySigningNotSupported)
+                            )
+                        )
+                    );
                 }
                 catch (Exception ex)
                 {
-                    return new StrongNameKeys(StrongNameKeys.GetContainerError(messageProvider, keyContainerName, ex.Message));
+                    return new StrongNameKeys(
+                        StrongNameKeys.GetContainerError(
+                            messageProvider,
+                            keyContainerName,
+                            ex.Message
+                        )
+                    );
                 }
             }
 
-            return new StrongNameKeys(keyPair, publicKey, privateKey: null, container, keyFilePath, hasCounterSignature);
+            return new StrongNameKeys(
+                keyPair,
+                publicKey,
+                privateKey: null,
+                container,
+                keyFilePath,
+                hasCounterSignature
+            );
         }
 
         /// <summary>
         /// Resolves assembly strong name key file path.
         /// </summary>
         /// <returns>Normalized key file path or null if not found.</returns>
-        internal static string? ResolveStrongNameKeyFile(string path, StrongNameFileSystem fileSystem, ImmutableArray<string> keyFileSearchPaths)
+        internal static string? ResolveStrongNameKeyFile(
+            string path,
+            StrongNameFileSystem fileSystem,
+            ImmutableArray<string> keyFileSearchPaths
+        )
         {
             // Dev11: key path is simply appended to the search paths, even if it starts with the current (parent) directory ("." or "..").
             // This is different from PathUtilities.ResolveRelativePath.
@@ -129,7 +187,10 @@ namespace Microsoft.CodeAnalysis
 
             foreach (var searchPath in keyFileSearchPaths)
             {
-                string? combinedPath = PathUtilities.CombineAbsoluteAndRelativePaths(searchPath, path);
+                string? combinedPath = PathUtilities.CombineAbsoluteAndRelativePaths(
+                    searchPath,
+                    path
+                );
 
                 Debug.Assert(combinedPath == null || PathUtilities.IsAbsolute(combinedPath));
 
@@ -142,7 +203,10 @@ namespace Microsoft.CodeAnalysis
             return null;
         }
 
-        internal virtual void ReadKeysFromContainer(string keyContainer, out ImmutableArray<byte> publicKey)
+        internal virtual void ReadKeysFromContainer(
+            string keyContainer,
+            out ImmutableArray<byte> publicKey
+        )
         {
             try
             {
@@ -161,7 +225,9 @@ namespace Microsoft.CodeAnalysis
 
         internal override void SignFile(StrongNameKeys keys, string filePath)
         {
-            Debug.Assert(string.IsNullOrEmpty(keys.KeyFilePath) != string.IsNullOrEmpty(keys.KeyContainer));
+            Debug.Assert(
+                string.IsNullOrEmpty(keys.KeyFilePath) != string.IsNullOrEmpty(keys.KeyContainer)
+            );
 
             if (!string.IsNullOrEmpty(keys.KeyFilePath))
             {
@@ -173,9 +239,16 @@ namespace Microsoft.CodeAnalysis
             }
         }
 
-        internal override void SignBuilder(ExtendedPEBuilder peBuilder, BlobBuilder peBlob, RSAParameters privateKey)
+        internal override void SignBuilder(
+            ExtendedPEBuilder peBuilder,
+            BlobBuilder peBlob,
+            RSAParameters privateKey
+        )
         {
-            peBuilder.Sign(peBlob, content => SigningUtilities.CalculateRsaSignature(content, privateKey));
+            peBuilder.Sign(
+                peBlob,
+                content => SigningUtilities.CalculateRsaSignature(content, privateKey)
+            );
         }
 
         // EDMAURER in the event that the key is supplied as a file,
@@ -212,7 +285,13 @@ namespace Microsoft.CodeAnalysis
             IntPtr keyBlob;
             int keyBlobByteCount;
 
-            strongName.StrongNameGetPublicKey(keyContainer, pbKeyBlob: default, 0, out keyBlob, out keyBlobByteCount);
+            strongName.StrongNameGetPublicKey(
+                keyContainer,
+                pbKeyBlob: default,
+                0,
+                out keyBlob,
+                out keyBlobByteCount
+            );
 
             byte[] pubKey = new byte[keyBlobByteCount];
             Marshal.Copy(keyBlob, pubKey, 0, keyBlobByteCount);
@@ -227,7 +306,14 @@ namespace Microsoft.CodeAnalysis
             try
             {
                 IClrStrongName strongName = GetStrongNameInterface();
-                strongName.StrongNameSignatureGeneration(filePath, keyName, IntPtr.Zero, 0, null, pcbSignatureBlob: out _);
+                strongName.StrongNameSignatureGeneration(
+                    filePath,
+                    keyName,
+                    IntPtr.Zero,
+                    0,
+                    null,
+                    pcbSignatureBlob: out _
+                );
             }
             catch (ClrStrongNameMissingException)
             {
@@ -248,7 +334,14 @@ namespace Microsoft.CodeAnalysis
 
                 fixed (byte* pinned = keyPair.ToArray())
                 {
-                    strongName.StrongNameSignatureGeneration(filePath, null, (IntPtr)pinned, keyPair.Length, null, pcbSignatureBlob: out _);
+                    strongName.StrongNameSignatureGeneration(
+                        filePath,
+                        null,
+                        (IntPtr)pinned,
+                        keyPair.Length,
+                        null,
+                        pcbSignatureBlob: out _
+                    );
                 }
             }
             catch (ClrStrongNameMissingException)
@@ -280,7 +373,12 @@ namespace Microsoft.CodeAnalysis
                 return false;
             }
 
-            if (!_keyFileSearchPaths.SequenceEqual(other._keyFileSearchPaths, StringComparer.Ordinal))
+            if (
+                !_keyFileSearchPaths.SequenceEqual(
+                    other._keyFileSearchPaths,
+                    StringComparer.Ordinal
+                )
+            )
             {
                 return false;
             }

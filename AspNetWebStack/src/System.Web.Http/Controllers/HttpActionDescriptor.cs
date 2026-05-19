@@ -18,7 +18,8 @@ namespace System.Web.Http.Controllers
 {
     public abstract class HttpActionDescriptor
     {
-        private readonly ConcurrentDictionary<object, object> _properties = new ConcurrentDictionary<object, object>();
+        private readonly ConcurrentDictionary<object, object> _properties =
+            new ConcurrentDictionary<object, object>();
 
         private IActionResultConverter _converter;
         private readonly Lazy<Collection<FilterInfo>> _filterPipeline;
@@ -27,12 +28,15 @@ namespace System.Web.Http.Controllers
 
         private HttpConfiguration _configuration;
         private HttpControllerDescriptor _controllerDescriptor;
-        private readonly Collection<HttpMethod> _supportedHttpMethods = new Collection<HttpMethod>();
+        private readonly Collection<HttpMethod> _supportedHttpMethods =
+            new Collection<HttpMethod>();
 
         private HttpActionBinding _actionBinding;
 
-        private static readonly ResponseMessageResultConverter _responseMessageResultConverter = new ResponseMessageResultConverter();
-        private static readonly VoidResultConverter _voidResultConverter = new VoidResultConverter();
+        private static readonly ResponseMessageResultConverter _responseMessageResultConverter =
+            new ResponseMessageResultConverter();
+        private static readonly VoidResultConverter _voidResultConverter =
+            new VoidResultConverter();
 
         protected HttpActionDescriptor()
         {
@@ -72,8 +76,11 @@ namespace System.Web.Http.Controllers
             {
                 if (_actionBinding == null)
                 {
-                    ServicesContainer controllerServices = _controllerDescriptor.Configuration.Services;
-                    IActionValueBinder actionValueBinder = controllerServices.GetActionValueBinder();
+                    ServicesContainer controllerServices = _controllerDescriptor
+                        .Configuration
+                        .Services;
+                    IActionValueBinder actionValueBinder =
+                        controllerServices.GetActionValueBinder();
                     HttpActionBinding actionBinding = actionValueBinder.GetBinding(this);
                     _actionBinding = actionBinding;
                 }
@@ -115,7 +122,7 @@ namespace System.Web.Http.Controllers
         /// <summary>
         /// Gets the converter for correctly transforming the result of calling
         /// <see cref="ExecuteAsync(HttpControllerContext, IDictionary{string, object}, CancellationToken)"/> into an instance of
-        /// <see cref="HttpResponseMessage"/>. 
+        /// <see cref="HttpResponseMessage"/>.
         /// </summary>
         /// <remarks>
         /// <para>This converter is not used when the runtime return value of an action is an <see cref="IHttpActionResult"/>.</para>
@@ -159,7 +166,8 @@ namespace System.Web.Http.Controllers
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <returns></returns>
-        public virtual Collection<T> GetCustomAttributes<T>() where T : class
+        public virtual Collection<T> GetCustomAttributes<T>()
+            where T : class
         {
             return GetCustomAttributes<T>(inherit: true);
         }
@@ -170,18 +178,27 @@ namespace System.Web.Http.Controllers
         /// <typeparam name="T">The type of attribute to search for.</typeparam>
         /// <param name="inherit"><c>true</c> to search this action's inheritance chain to find the attributes; otherwise, <c>false</c>.</param>
         /// <returns>The collection of custom attributes applied to this action.</returns>
-        public virtual Collection<T> GetCustomAttributes<T>(bool inherit) where T : class
+        public virtual Collection<T> GetCustomAttributes<T>(bool inherit)
+            where T : class
         {
             return new Collection<T>();
         }
 
-        [SuppressMessage("Microsoft.Design", "CA1024:UsePropertiesWhereAppropriate", Justification = "Filters can be built dynamically")]
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1024:UsePropertiesWhereAppropriate",
+            Justification = "Filters can be built dynamically"
+        )]
         public virtual Collection<IFilter> GetFilters()
         {
             return new Collection<IFilter>();
         }
 
-        [SuppressMessage("Microsoft.Design", "CA1024:UsePropertiesWhereAppropriate", Justification = "Parameters can be built dynamically")]
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1024:UsePropertiesWhereAppropriate",
+            Justification = "Parameters can be built dynamically"
+        )]
         public abstract Collection<HttpParameterDescriptor> GetParameters();
 
         internal static IActionResultConverter GetResultConverter(Type type)
@@ -190,7 +207,10 @@ namespace System.Web.Http.Controllers
             {
                 // This can happen if somebody declares an action method as:
                 // public T Get<T>() { }
-                throw Error.InvalidOperation(SRResources.HttpActionDescriptor_NoConverterForGenericParamterTypeExists, type);
+                throw Error.InvalidOperation(
+                    SRResources.HttpActionDescriptor_NoConverterForGenericParamterTypeExists,
+                    type
+                );
             }
 
             if (type == null)
@@ -220,19 +240,27 @@ namespace System.Web.Http.Controllers
         /// <param name="arguments">The arguments.</param>
         /// <param name="cancellationToken">The token to monitor for cancellation requests.</param>
         /// <returns>A <see cref="Task{T}"/> that once completed will contain the return value of the action.</returns>
-        public abstract Task<object> ExecuteAsync(HttpControllerContext controllerContext, IDictionary<string, object> arguments, CancellationToken cancellationToken);
+        public abstract Task<object> ExecuteAsync(
+            HttpControllerContext controllerContext,
+            IDictionary<string, object> arguments,
+            CancellationToken cancellationToken
+        );
 
         /// <summary>
         /// Returns the filters for the given configuration and action. The filter collection is ordered
         /// according to the FilterScope (in order from least specific to most specific: First, Global, Controller, Action).
-        /// 
+        ///
         /// If a given filter disallows duplicates (AllowMultiple=False) then the most specific filter is maintained
         /// and less specific filters get removed (e.g. if there is a Authorize filter with a Controller scope and another
         /// one with an Action scope then the one with the Action scope will be maintained and the one with the Controller
         /// scope will be discarded).
         /// </summary>
         /// <returns>A <see cref="Collection{T}"/> of all filters associated with this <see cref="HttpActionDescriptor"/>.</returns>
-        [SuppressMessage("Microsoft.Design", "CA1024:UsePropertiesWhereAppropriate", Justification = "Filter pipeline can be built dynamically")]
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1024:UsePropertiesWhereAppropriate",
+            Justification = "Filter pipeline can be built dynamically"
+        )]
         public virtual Collection<FilterInfo> GetFilterPipeline()
         {
             return _filterPipeline.Value;
@@ -254,9 +282,12 @@ namespace System.Web.Http.Controllers
 
         private Collection<FilterInfo> InitializeFilterPipeline()
         {
-            IEnumerable<IFilterProvider> filterProviders = _configuration.Services.GetFilterProviders();
+            IEnumerable<IFilterProvider> filterProviders =
+                _configuration.Services.GetFilterProviders();
 
-            IEnumerable<FilterInfo> filters = filterProviders.SelectMany(fp => fp.GetFilters(_configuration, this)).OrderBy(f => f, FilterInfoComparer.Instance);
+            IEnumerable<FilterInfo> filters = filterProviders
+                .SelectMany(fp => fp.GetFilters(_configuration, this))
+                .OrderBy(f => f, FilterInfoComparer.Instance);
 
             // Need to discard duplicate filters from the end, so that most specific ones get kept (Action scope) and
             // less specific ones get removed (Global)

@@ -4,8 +4,8 @@
 namespace System.ServiceModel.ComIntegration
 {
     using System;
-    using System.Runtime.InteropServices;
     using System.Collections.Generic;
+    using System.Runtime.InteropServices;
     using System.ServiceModel;
     using System.ServiceModel.Channels;
 
@@ -17,12 +17,16 @@ namespace System.ServiceModel.ComIntegration
         {
             this.channelBuilderSettings = channelBuilderSettings;
         }
-        internal static ComProxy Create(IntPtr outer, IProvideChannelBuilderSettings channelBuilderSettings)
+
+        internal static ComProxy Create(
+            IntPtr outer,
+            IProvideChannelBuilderSettings channelBuilderSettings
+        )
         {
-
             if (channelBuilderSettings == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.CannotCreateChannelOption)));
-
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(SR.GetString(SR.CannotCreateChannelOption))
+                );
 
             ChannelOptions channelOptions = null;
             ComProxy proxy = null;
@@ -39,13 +43,9 @@ namespace System.ServiceModel.ComIntegration
                     if (channelOptions != null)
                         ((IDisposable)channelOptions).Dispose();
                 }
-
             }
         }
-        void IDisposable.Dispose()
-        {
-        }
+
+        void IDisposable.Dispose() { }
     }
 }
-
-

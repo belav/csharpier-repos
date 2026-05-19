@@ -33,9 +33,15 @@ namespace System.Runtime.Serialization.Formatters.Binary
                 _securityLevel = _securityLevel,
             };
 
-            var reader = new ObjectReader(serializationStream, _surrogates, _context, formatterEnums, _binder)
+            var reader = new ObjectReader(
+                serializationStream,
+                _surrogates,
+                _context,
+                formatterEnums,
+                _binder
+            )
             {
-                _crossAppDomainArray = _crossAppDomainArray
+                _crossAppDomainArray = _crossAppDomainArray,
             };
             try
             {
@@ -79,7 +85,11 @@ namespace System.Runtime.Serialization.Formatters.Binary
             {
                 BinaryFormatterEventSource.Log.SerializationStart();
                 var sow = new ObjectWriter(_surrogates, _context, formatterEnums, _binder);
-                BinaryFormatterWriter binaryWriter = new BinaryFormatterWriter(serializationStream, sow, _typeFormat);
+                BinaryFormatterWriter binaryWriter = new BinaryFormatterWriter(
+                    serializationStream,
+                    sow,
+                    _typeFormat
+                );
                 sow.Serialize(graph, binaryWriter);
                 _crossAppDomainArray = sow._crossAppDomainArray;
             }

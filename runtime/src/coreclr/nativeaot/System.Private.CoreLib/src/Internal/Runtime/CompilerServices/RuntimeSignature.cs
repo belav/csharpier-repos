@@ -4,7 +4,6 @@
 using System;
 using System.Diagnostics;
 using System.Runtime;
-
 using Internal.Runtime.Augments;
 
 namespace Internal.Runtime.CompilerServices
@@ -16,7 +15,10 @@ namespace Internal.Runtime.CompilerServices
         private bool _isNativeLayoutSignature;
 
         [CLSCompliant(false)]
-        public static RuntimeSignature CreateFromNativeLayoutSignature(TypeManagerHandle moduleHandle, uint nativeLayoutOffset)
+        public static RuntimeSignature CreateFromNativeLayoutSignature(
+            TypeManagerHandle moduleHandle,
+            uint nativeLayoutOffset
+        )
         {
             return new RuntimeSignature
             {
@@ -27,7 +29,10 @@ namespace Internal.Runtime.CompilerServices
         }
 
         [CLSCompliant(false)]
-        public static RuntimeSignature CreateFromNativeLayoutSignature(RuntimeSignature oldSignature, uint newNativeLayoutOffset)
+        public static RuntimeSignature CreateFromNativeLayoutSignature(
+            RuntimeSignature oldSignature,
+            uint newNativeLayoutOffset
+        )
         {
             return new RuntimeSignature
             {
@@ -37,7 +42,10 @@ namespace Internal.Runtime.CompilerServices
             };
         }
 
-        public static RuntimeSignature CreateFromMethodHandle(TypeManagerHandle moduleHandle, int token)
+        public static RuntimeSignature CreateFromMethodHandle(
+            TypeManagerHandle moduleHandle,
+            int token
+        )
         {
             return new RuntimeSignature
             {
@@ -58,7 +66,9 @@ namespace Internal.Runtime.CompilerServices
         }
 
         [CLSCompliant(false)]
-        public static RuntimeSignature CreateFromNativeLayoutSignatureForDebugger(uint nativeLayoutOffset)
+        public static RuntimeSignature CreateFromNativeLayoutSignatureForDebugger(
+            uint nativeLayoutOffset
+        )
         {
             // This is a RuntimeSignature object used by the debugger only,
             // the fact that the _moduleHandle is NULL signify that information.
@@ -72,10 +82,7 @@ namespace Internal.Runtime.CompilerServices
 
         public bool IsNativeLayoutSignature
         {
-            get
-            {
-                return _isNativeLayoutSignature;
-            }
+            get { return _isNativeLayoutSignature; }
         }
 
         public int Token
@@ -107,17 +114,17 @@ namespace Internal.Runtime.CompilerServices
 
         public IntPtr ModuleHandle
         {
-            get
-            {
-                return _moduleHandle;
-            }
+            get { return _moduleHandle; }
         }
 
         public bool Equals(RuntimeSignature other)
         {
             if (IsNativeLayoutSignature && other.IsNativeLayoutSignature)
             {
-                if ((ModuleHandle == other.ModuleHandle) && (NativeLayoutOffset == other.NativeLayoutOffset))
+                if (
+                    (ModuleHandle == other.ModuleHandle)
+                    && (NativeLayoutOffset == other.NativeLayoutOffset)
+                )
                     return true;
             }
             else if (!IsNativeLayoutSignature && !other.IsNativeLayoutSignature)

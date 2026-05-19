@@ -25,18 +25,60 @@ using System.Security.Principal;
 
 namespace System.DirectoryServices
 {
-	public sealed class PropertySetAccessRule : ActiveDirectoryAccessRule
-	{
-		public PropertySetAccessRule (IdentityReference identity, AccessControlType type, PropertyAccess access, Guid propertySetType) : base(identity, (int)AccessControlType.Allow, type, propertySetType, false, InheritanceFlags.None, PropagationFlags.None, Guid.Empty)
-		{
-		}
+    public sealed class PropertySetAccessRule : ActiveDirectoryAccessRule
+    {
+        public PropertySetAccessRule(
+            IdentityReference identity,
+            AccessControlType type,
+            PropertyAccess access,
+            Guid propertySetType
+        )
+            : base(
+                identity,
+                (int)AccessControlType.Allow,
+                type,
+                propertySetType,
+                false,
+                InheritanceFlags.None,
+                PropagationFlags.None,
+                Guid.Empty
+            ) { }
 
-		public PropertySetAccessRule (IdentityReference identity, AccessControlType type, PropertyAccess access, Guid propertySetType, ActiveDirectorySecurityInheritance inheritanceType) : base(identity, (int)AccessControlType.Allow, type, propertySetType, false, InheritanceFlags.None, PropagationFlags.None, Guid.Empty)
-		{
-		}
+        public PropertySetAccessRule(
+            IdentityReference identity,
+            AccessControlType type,
+            PropertyAccess access,
+            Guid propertySetType,
+            ActiveDirectorySecurityInheritance inheritanceType
+        )
+            : base(
+                identity,
+                (int)AccessControlType.Allow,
+                type,
+                propertySetType,
+                false,
+                InheritanceFlags.None,
+                PropagationFlags.None,
+                Guid.Empty
+            ) { }
 
-		public PropertySetAccessRule (IdentityReference identity, AccessControlType type, PropertyAccess access, Guid propertySetType, ActiveDirectorySecurityInheritance inheritanceType, Guid inheritedObjectType) : base(identity, (int)AccessControlType.Allow, type, propertySetType, false, InheritanceFlags.None, PropagationFlags.None, inheritedObjectType)
-		{
-		}
-	}
+        public PropertySetAccessRule(
+            IdentityReference identity,
+            AccessControlType type,
+            PropertyAccess access,
+            Guid propertySetType,
+            ActiveDirectorySecurityInheritance inheritanceType,
+            Guid inheritedObjectType
+        )
+            : base(
+                identity,
+                (int)AccessControlType.Allow,
+                type,
+                propertySetType,
+                false,
+                InheritanceFlags.None,
+                PropagationFlags.None,
+                inheritedObjectType
+            ) { }
+    }
 }

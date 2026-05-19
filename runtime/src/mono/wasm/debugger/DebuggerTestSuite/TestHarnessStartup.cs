@@ -37,8 +37,7 @@ namespace DebuggerTests
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddRouting()
-                .Configure<TestHarnessOptions>(Configuration);
+            services.AddRouting().Configure<TestHarnessOptions>(Configuration);
         }
 
         async Task SendNodeVersion(HttpContext context)
@@ -57,25 +56,38 @@ namespace DebuggerTests
             Logger.LogTrace("webserver: hello chrome! json/list");
             try
             {
-                var response = new JArray(JObject.FromObject(new
-                {
-                    description = "node.js instance",
-                    devtoolsFrontendUrl = "chrome-devtools://devtools/bundled/inspector.html?experiments=true&v8only=true&ws=localhost:9300/91d87807-8a81-4f49-878c-a5604103b0a4",
-                    faviconUrl = "https://nodejs.org/static/favicon.ico",
-                    id = "91d87807-8a81-4f49-878c-a5604103b0a4",
-                    title = "foo.js",
-                    type = "node",
-                    webSocketDebuggerUrl = "ws://localhost:9300/91d87807-8a81-4f49-878c-a5604103b0a4"
-                })).ToString();
+                var response = new JArray(
+                    JObject.FromObject(
+                        new
+                        {
+                            description = "node.js instance",
+                            devtoolsFrontendUrl = "chrome-devtools://devtools/bundled/inspector.html?experiments=true&v8only=true&ws=localhost:9300/91d87807-8a81-4f49-878c-a5604103b0a4",
+                            faviconUrl = "https://nodejs.org/static/favicon.ico",
+                            id = "91d87807-8a81-4f49-878c-a5604103b0a4",
+                            title = "foo.js",
+                            type = "node",
+                            webSocketDebuggerUrl = "ws://localhost:9300/91d87807-8a81-4f49-878c-a5604103b0a4",
+                        }
+                    )
+                ).ToString();
 
                 Logger.LogTrace($"webserver: sending: {response}");
                 await context.Response.WriteAsync(response, new CancellationTokenSource().Token);
             }
-            catch (Exception e) { Logger.LogError(e, "webserver: SendNodeList failed"); }
+            catch (Exception e)
+            {
+                Logger.LogError(e, "webserver: SendNodeList failed");
+            }
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IOptions<TestHarnessOptions> optionsContainer, IWebHostEnvironment env, ILogger<TestHarnessProxy> logger, ILoggerFactory loggerFactory)
+        public void Configure(
+            IApplicationBuilder app,
+            IOptions<TestHarnessOptions> optionsContainer,
+            IWebHostEnvironment env,
+            ILogger<TestHarnessProxy> logger,
+            ILoggerFactory loggerFactory
+        )
         {
             this.Logger = logger;
             this._loggerFactory = loggerFactory;
@@ -86,20 +98,29 @@ namespace DebuggerTests
             var provider = new FileExtensionContentTypeProvider();
             provider.Mappings[".wasm"] = "application/wasm";
 
-            app.UseStaticFiles(new StaticFileOptions
-            {
-                FileProvider = new PhysicalFileProvider(options.AppPath),
-                ServeUnknownFileTypes = true, //Cuz .wasm is not a known file type :cry:
-                RequestPath = "",
-                ContentTypeProvider = provider,
-                OnPrepareResponse = (context) => {
-                    if (options.WebServerUseCrossOriginPolicy)
+            app.UseStaticFiles(
+                new StaticFileOptions
+                {
+                    FileProvider = new PhysicalFileProvider(options.AppPath),
+                    ServeUnknownFileTypes = true, //Cuz .wasm is not a known file type :cry:
+                    RequestPath = "",
+                    ContentTypeProvider = provider,
+                    OnPrepareResponse = (context) =>
                     {
-                        context.Context.Response.Headers.Add("Cross-Origin-Embedder-Policy", "require-corp");
-                        context.Context.Response.Headers.Add("Cross-Origin-Opener-Policy", "same-origin");
-                    }
+                        if (options.WebServerUseCrossOriginPolicy)
+                        {
+                            context.Context.Response.Headers.Add(
+                                "Cross-Origin-Embedder-Policy",
+                                "require-corp"
+                            );
+                            context.Context.Response.Headers.Add(
+                                "Cross-Origin-Opener-Policy",
+                                "same-origin"
+                            );
+                        }
+                    },
                 }
-            });
+            );
 
             if (options.WebServerUseCors)
             {
@@ -108,72 +129,99 @@ namespace DebuggerTests
 
             app.UseRouter(router =>
             {
-                router.MapGet("launch-host-and-connect", async context =>
-                {
-                    string test_id;
-                    if (context.Request.Query.TryGetValue("test_id", out var value) && value.Count == 1)
-                        test_id = value[0];
-                    else
-                        test_id = "unknown";
-
-                    WasmHost host = WasmHost.Chrome;
-                    if (context.Request.Query.TryGetValue("host", out value) && value.Count == 1)
+                router.MapGet(
+                    "launch-host-and-connect",
+                    async context =>
                     {
-                        if (!Enum.TryParse(value[0], true, out host))
-                            throw new ArgumentException($"Unknown wasm host - {value[0]}");
-                    }
+                        string test_id;
+                        if (
+                            context.Request.Query.TryGetValue("test_id", out var value)
+                            && value.Count == 1
+                        )
+                            test_id = value[0];
+                        else
+                            test_id = "unknown";
 
-                    int firefox_proxy_port = 6002;
-                    if (context.Request.Query.TryGetValue("firefox-proxy-port", out value) && value.Count == 1 &&
-                        int.TryParse(value[0], out int port))
-                    {
-                        firefox_proxy_port = port;
-                    }
-
-                    string message_prefix = $"[testId: {test_id}]";
-                    Logger.LogInformation($"{message_prefix} New test request for test id {test_id}");
-                    CancellationTokenSource cts = new();
-                    try
-                    {
-                        int browserPort;
-                        if (host == WasmHost.Chrome)
+                        WasmHost host = WasmHost.Chrome;
+                        if (
+                            context.Request.Query.TryGetValue("host", out value)
+                            && value.Count == 1
+                        )
                         {
-                            using var provider = new ChromeProvider(test_id, Logger);
-                            browserPort = options.DevToolsUrl.Port;
-                            await provider.StartBrowserAndProxyAsync(context,
-                                                $"http://{TestHarnessProxy.Endpoint.Authority}/{options.PagePath}",
-                                                browserPort,
-                                                message_prefix,
-                                                _loggerFactory,
-                                                cts,
-                                                locale: options.Locale).ConfigureAwait(false);
+                            if (!Enum.TryParse(value[0], true, out host))
+                                throw new ArgumentException($"Unknown wasm host - {value[0]}");
                         }
-                        else if (host == WasmHost.Firefox)
+
+                        int firefox_proxy_port = 6002;
+                        if (
+                            context.Request.Query.TryGetValue("firefox-proxy-port", out value)
+                            && value.Count == 1
+                            && int.TryParse(value[0], out int port)
+                        )
                         {
-                            using var provider = new FirefoxProvider(test_id, Logger);
-                            browserPort = 6500 + int.Parse(test_id);
-                            await provider.StartBrowserAndProxyAsync(context,
-                                                $"http://{TestHarnessProxy.Endpoint.Authority}/{options.PagePath}",
-                                                browserPort,
-                                                firefox_proxy_port,
-                                                message_prefix,
-                                                _loggerFactory,
-                                                cts,
-                                                locale: options.Locale).ConfigureAwait(false);
+                            firefox_proxy_port = port;
                         }
-                        Logger.LogDebug($"{message_prefix} TestHarnessStartup done");
+
+                        string message_prefix = $"[testId: {test_id}]";
+                        Logger.LogInformation(
+                            $"{message_prefix} New test request for test id {test_id}"
+                        );
+                        CancellationTokenSource cts = new();
+                        try
+                        {
+                            int browserPort;
+                            if (host == WasmHost.Chrome)
+                            {
+                                using var provider = new ChromeProvider(test_id, Logger);
+                                browserPort = options.DevToolsUrl.Port;
+                                await provider
+                                    .StartBrowserAndProxyAsync(
+                                        context,
+                                        $"http://{TestHarnessProxy.Endpoint.Authority}/{options.PagePath}",
+                                        browserPort,
+                                        message_prefix,
+                                        _loggerFactory,
+                                        cts,
+                                        locale: options.Locale
+                                    )
+                                    .ConfigureAwait(false);
+                            }
+                            else if (host == WasmHost.Firefox)
+                            {
+                                using var provider = new FirefoxProvider(test_id, Logger);
+                                browserPort = 6500 + int.Parse(test_id);
+                                await provider
+                                    .StartBrowserAndProxyAsync(
+                                        context,
+                                        $"http://{TestHarnessProxy.Endpoint.Authority}/{options.PagePath}",
+                                        browserPort,
+                                        firefox_proxy_port,
+                                        message_prefix,
+                                        _loggerFactory,
+                                        cts,
+                                        locale: options.Locale
+                                    )
+                                    .ConfigureAwait(false);
+                            }
+                            Logger.LogDebug($"{message_prefix} TestHarnessStartup done");
+                        }
+                        catch (Exception ex)
+                        {
+                            Logger.LogError(
+                                $"{message_prefix} launch-host-and-connect failed with {ex}"
+                            );
+                            TestHarnessProxy.RegisterProxyExitState(
+                                test_id,
+                                new(RunLoopStopReason.Exception, ex)
+                            );
+                        }
+                        finally
+                        {
+                            Logger.LogDebug($"TestHarnessStartup: closing for {test_id}");
+                            cts.Cancel();
+                        }
                     }
-                    catch (Exception ex)
-                    {
-                        Logger.LogError($"{message_prefix} launch-host-and-connect failed with {ex}");
-                        TestHarnessProxy.RegisterProxyExitState(test_id, new(RunLoopStopReason.Exception, ex));
-                    }
-                    finally
-                    {
-                        Logger.LogDebug($"TestHarnessStartup: closing for {test_id}");
-                        cts.Cancel();
-                    }
-                });
+                );
             });
 
             if (options.NodeApp != null)
@@ -196,11 +244,14 @@ namespace DebuggerTests
                     router.MapGet("json", SendNodeList);
                     router.MapGet("json/list", SendNodeList);
                     router.MapGet("json/version", SendNodeVersion);
-                    router.MapGet("launch-done-and-connect", async context =>
-                    {
-                        await Task.CompletedTask;
-                        // await LaunchAndServe(psi, context, null, null, null, null);
-                    });
+                    router.MapGet(
+                        "launch-done-and-connect",
+                        async context =>
+                        {
+                            await Task.CompletedTask;
+                            // await LaunchAndServe(psi, context, null, null, null, null);
+                        }
+                    );
                 });
             }
         }

@@ -12,62 +12,54 @@ namespace Internal.IL.Stubs
     /// </summary>
     internal sealed partial class AssemblyGetExecutingAssemblyMethodThunk : ILStubMethod
     {
-        public AssemblyGetExecutingAssemblyMethodThunk(TypeDesc owningType, IAssemblyDesc executingAssembly)
+        public AssemblyGetExecutingAssemblyMethodThunk(
+            TypeDesc owningType,
+            IAssemblyDesc executingAssembly
+        )
         {
             OwningType = owningType;
             ExecutingAssembly = executingAssembly;
 
             TypeSystemContext context = owningType.Context;
 
-            Signature = new MethodSignature(MethodSignatureFlags.Static, 0,
-                context.SystemModule.GetKnownType("System.Reflection", "Assembly"), TypeDesc.EmptyTypes);
+            Signature = new MethodSignature(
+                MethodSignatureFlags.Static,
+                0,
+                context.SystemModule.GetKnownType("System.Reflection", "Assembly"),
+                TypeDesc.EmptyTypes
+            );
         }
 
         public override TypeSystemContext Context
         {
-            get
-            {
-                return OwningType.Context;
-            }
+            get { return OwningType.Context; }
         }
 
-        public IAssemblyDesc ExecutingAssembly
-        {
-            get;
-        }
+        public IAssemblyDesc ExecutingAssembly { get; }
 
         public override string Name
         {
-            get
-            {
-                return $"GetExecutingAssembly_{ExecutingAssembly.GetName().Name}";
-            }
+            get { return $"GetExecutingAssembly_{ExecutingAssembly.GetName().Name}"; }
         }
 
         public override string DiagnosticName
         {
-            get
-            {
-                return $"GetExecutingAssembly_{ExecutingAssembly.GetName().Name}";
-            }
+            get { return $"GetExecutingAssembly_{ExecutingAssembly.GetName().Name}"; }
         }
 
-        public override TypeDesc OwningType
-        {
-            get;
-        }
+        public override TypeDesc OwningType { get; }
 
-        public override MethodSignature Signature
-        {
-            get;
-        }
+        public override MethodSignature Signature { get; }
 
         public override MethodIL EmitIL()
         {
             ILEmitter emit = new ILEmitter();
             ILCodeStream codeStream = emit.NewCodeStream();
 
-            MethodDesc classlibHelper = Context.GetHelperEntryPoint("ReflectionHelpers", "GetExecutingAssembly");
+            MethodDesc classlibHelper = Context.GetHelperEntryPoint(
+                "ReflectionHelpers",
+                "GetExecutingAssembly"
+            );
 
             // Use the global module type as "a type from the assembly that has metadata"
             // Our reflection policy always makes sure this has metadata.
@@ -97,7 +89,8 @@ namespace Internal.IL.Stubs
             return _cache.GetOrCreateValue(executingAssembly);
         }
 
-        private sealed class Unifier : LockFreeReaderHashtable<IAssemblyDesc, AssemblyGetExecutingAssemblyMethodThunk>
+        private sealed class Unifier
+            : LockFreeReaderHashtable<IAssemblyDesc, AssemblyGetExecutingAssemblyMethodThunk>
         {
             private AssemblyGetExecutingAssemblyMethodThunkCache _parent;
 
@@ -110,21 +103,36 @@ namespace Internal.IL.Stubs
             {
                 return key.GetHashCode();
             }
+
             protected override int GetValueHashCode(AssemblyGetExecutingAssemblyMethodThunk value)
             {
                 return value.ExecutingAssembly.GetHashCode();
             }
-            protected override bool CompareKeyToValue(IAssemblyDesc key, AssemblyGetExecutingAssemblyMethodThunk value)
+
+            protected override bool CompareKeyToValue(
+                IAssemblyDesc key,
+                AssemblyGetExecutingAssemblyMethodThunk value
+            )
             {
                 return key == value.ExecutingAssembly;
             }
-            protected override bool CompareValueToValue(AssemblyGetExecutingAssemblyMethodThunk value1, AssemblyGetExecutingAssemblyMethodThunk value2)
+
+            protected override bool CompareValueToValue(
+                AssemblyGetExecutingAssemblyMethodThunk value1,
+                AssemblyGetExecutingAssemblyMethodThunk value2
+            )
             {
                 return value1.ExecutingAssembly == value2.ExecutingAssembly;
             }
-            protected override AssemblyGetExecutingAssemblyMethodThunk CreateValueFromKey(IAssemblyDesc key)
+
+            protected override AssemblyGetExecutingAssemblyMethodThunk CreateValueFromKey(
+                IAssemblyDesc key
+            )
             {
-                return new AssemblyGetExecutingAssemblyMethodThunk(_parent._owningTypeForThunks, key);
+                return new AssemblyGetExecutingAssemblyMethodThunk(
+                    _parent._owningTypeForThunks,
+                    key
+                );
             }
         }
     }

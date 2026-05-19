@@ -5,22 +5,26 @@
 namespace System.IdentityModel
 {
     using System.ComponentModel;
-    using System.Runtime.InteropServices;
     using System.Runtime.CompilerServices;
     using System.Runtime.ConstrainedExecution;
+    using System.Runtime.InteropServices;
     using System.Security.Cryptography;
     using System.ServiceModel.Diagnostics;
     using Microsoft.Win32.SafeHandles;
 
     class SafeProvHandle : SafeHandleZeroOrMinusOneIsInvalid
     {
-        SafeProvHandle() : base(true) { }
+        SafeProvHandle()
+            : base(true) { }
 
         // 0 is an Invalid Handle
         SafeProvHandle(IntPtr handle)
             : base(true)
         {
-            DiagnosticUtility.DebugAssert(handle == IntPtr.Zero, "SafeProvHandle constructor can only be called with IntPtr.Zero.");
+            DiagnosticUtility.DebugAssert(
+                handle == IntPtr.Zero,
+                "SafeProvHandle constructor can only be called with IntPtr.Zero."
+            );
             SetHandle(handle);
         }
 
@@ -31,7 +35,7 @@ namespace System.IdentityModel
 
         protected override bool ReleaseHandle()
         {
-            // PreSharp Bug: Call 'Marshal.GetLastWin32Error' or 'Marshal.GetHRForLastWin32Error' before any other interop call. 
+            // PreSharp Bug: Call 'Marshal.GetLastWin32Error' or 'Marshal.GetHRForLastWin32Error' before any other interop call.
 #pragma warning suppress 56523 // We are not interested in throwing an exception here if CloseHandle fails.
             return NativeMethods.CryptReleaseContext(handle, 0);
         }
@@ -41,13 +45,17 @@ namespace System.IdentityModel
     {
         SafeProvHandle provHandle = null;
 
-        SafeKeyHandle() : base(true) { }
+        SafeKeyHandle()
+            : base(true) { }
 
         // 0 is an Invalid Handle
         SafeKeyHandle(IntPtr handle)
             : base(true)
         {
-            DiagnosticUtility.DebugAssert(handle == IntPtr.Zero, "SafeKeyHandle constructor can only be called with IntPtr.Zero.");
+            DiagnosticUtility.DebugAssert(
+                handle == IntPtr.Zero,
+                "SafeKeyHandle constructor can only be called with IntPtr.Zero."
+            );
             SetHandle(handle);
         }
 
@@ -58,7 +66,7 @@ namespace System.IdentityModel
 
         protected override bool ReleaseHandle()
         {
-            // PreSharp Bug: Call 'Marshal.GetLastWin32Error' or 'Marshal.GetHRForLastWin32Error' before any other interop call. 
+            // PreSharp Bug: Call 'Marshal.GetLastWin32Error' or 'Marshal.GetHRForLastWin32Error' before any other interop call.
 #pragma warning suppress 56523 // We are not interested in throwing an exception here if CloseHandle fails.
             bool ret = NativeMethods.CryptDestroyKey(handle);
             if (this.provHandle != null)
@@ -69,7 +77,11 @@ namespace System.IdentityModel
             return ret;
         }
 
-        internal static unsafe SafeKeyHandle SafeCryptImportKey(SafeProvHandle provHandle, void* pbDataPtr, int cbData)
+        internal static unsafe SafeKeyHandle SafeCryptImportKey(
+            SafeProvHandle provHandle,
+            void* pbDataPtr,
+            int cbData
+        )
         {
             bool b = false;
             int err = 0;
@@ -83,7 +95,7 @@ namespace System.IdentityModel
             {
                 if (System.Runtime.Fx.IsFatal(e))
                     throw;
-                
+
                 if (b)
                 {
                     provHandle.DangerousRelease();
@@ -96,7 +108,14 @@ namespace System.IdentityModel
             {
                 if (b)
                 {
-                    b = NativeMethods.CryptImportKey(provHandle, pbDataPtr, (uint)cbData, IntPtr.Zero, 0, out keyHandle);
+                    b = NativeMethods.CryptImportKey(
+                        provHandle,
+                        pbDataPtr,
+                        (uint)cbData,
+                        IntPtr.Zero,
+                        0,
+                        out keyHandle
+                    );
                     if (!b)
                     {
                         err = Marshal.GetLastWin32Error();
@@ -114,7 +133,9 @@ namespace System.IdentityModel
             {
                 Utility.CloseInvalidOutSafeHandle(keyHandle);
                 string reason = (err != 0) ? new Win32Exception(err).Message : String.Empty;
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new CryptographicException(SR.GetString(SR.AESCryptImportKeyFailed, reason)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new CryptographicException(SR.GetString(SR.AESCryptImportKeyFailed, reason))
+                );
             }
             return keyHandle;
         }

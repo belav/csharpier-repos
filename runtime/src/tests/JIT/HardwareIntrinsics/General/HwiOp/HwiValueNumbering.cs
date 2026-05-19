@@ -2,9 +2,9 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
+using System.Runtime.CompilerServices;
 using System.Runtime.Intrinsics;
 using System.Runtime.Intrinsics.X86;
-using System.Runtime.CompilerServices;
 using Xunit;
 
 // Tests that we value number certain intrinsics correctly.
@@ -113,7 +113,6 @@ public unsafe class HwiValueNumbering
         }
     }
 
-
     [MethodImpl(MethodImplOptions.NoInlining)]
     private static void ProblemWithLoadHigh_Sse2()
     {
@@ -193,5 +192,6 @@ public unsafe class HwiValueNumbering
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    static void JitUse<T>(T* arg) where T : unmanaged { }
+    static void JitUse<T>(T* arg)
+        where T : unmanaged { }
 }

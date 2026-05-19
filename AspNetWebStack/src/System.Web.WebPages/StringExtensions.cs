@@ -14,13 +14,23 @@ namespace System.Web.WebPages
             return String.IsNullOrEmpty(value);
         }
 
-        [SuppressMessage("Microsoft.Naming", "CA1720:IdentifiersShouldNotContainTypeNames", MessageId = "int", Justification = "We specificaly want type names")]
+        [SuppressMessage(
+            "Microsoft.Naming",
+            "CA1720:IdentifiersShouldNotContainTypeNames",
+            MessageId = "int",
+            Justification = "We specificaly want type names"
+        )]
         public static int AsInt(this string value)
         {
             return AsInt(value, 0);
         }
 
-        [SuppressMessage("Microsoft.Naming", "CA1720:IdentifiersShouldNotContainTypeNames", MessageId = "int", Justification = "We specificaly want type names")]
+        [SuppressMessage(
+            "Microsoft.Naming",
+            "CA1720:IdentifiersShouldNotContainTypeNames",
+            MessageId = "int",
+            Justification = "We specificaly want type names"
+        )]
         public static int AsInt(this string value, int defaultValue)
         {
             int result;
@@ -38,13 +48,23 @@ namespace System.Web.WebPages
             return As<Decimal>(value, defaultValue);
         }
 
-        [SuppressMessage("Microsoft.Naming", "CA1720:IdentifiersShouldNotContainTypeNames", MessageId = "float", Justification = "We specificaly want type names")]
+        [SuppressMessage(
+            "Microsoft.Naming",
+            "CA1720:IdentifiersShouldNotContainTypeNames",
+            MessageId = "float",
+            Justification = "We specificaly want type names"
+        )]
         public static float AsFloat(this string value)
         {
             return AsFloat(value, default(float));
         }
 
-        [SuppressMessage("Microsoft.Naming", "CA1720:IdentifiersShouldNotContainTypeNames", MessageId = "float", Justification = "We specificaly want type names")]
+        [SuppressMessage(
+            "Microsoft.Naming",
+            "CA1720:IdentifiersShouldNotContainTypeNames",
+            MessageId = "float",
+            Justification = "We specificaly want type names"
+        )]
         public static float AsFloat(this string value, float defaultValue)
         {
             float result;
@@ -67,20 +87,34 @@ namespace System.Web.WebPages
             return As<TValue>(value, default(TValue));
         }
 
-        [SuppressMessage("Microsoft.Naming", "CA1720:IdentifiersShouldNotContainTypeNames", MessageId = "bool", Justification = "We specificaly want type names")]
+        [SuppressMessage(
+            "Microsoft.Naming",
+            "CA1720:IdentifiersShouldNotContainTypeNames",
+            MessageId = "bool",
+            Justification = "We specificaly want type names"
+        )]
         public static bool AsBool(this string value)
         {
             return AsBool(value, default(bool));
         }
 
-        [SuppressMessage("Microsoft.Naming", "CA1720:IdentifiersShouldNotContainTypeNames", MessageId = "bool", Justification = "We specificaly want type names")]
+        [SuppressMessage(
+            "Microsoft.Naming",
+            "CA1720:IdentifiersShouldNotContainTypeNames",
+            MessageId = "bool",
+            Justification = "We specificaly want type names"
+        )]
         public static bool AsBool(this string value, bool defaultValue)
         {
             bool result;
             return Boolean.TryParse(value, out result) ? result : defaultValue;
         }
 
-        [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "We want to make this user friendly and return the default value on all failures")]
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1031:DoNotCatchGeneralExceptionTypes",
+            Justification = "We want to make this user friendly and return the default value on all failures"
+        )]
         public static TValue As<TValue>(this string value, TValue defaultValue)
         {
             try
@@ -104,14 +138,24 @@ namespace System.Web.WebPages
             return defaultValue;
         }
 
-        [SuppressMessage("Microsoft.Naming", "CA1720:IdentifiersShouldNotContainTypeNames", MessageId = "bool", Justification = "We specificaly want type names")]
+        [SuppressMessage(
+            "Microsoft.Naming",
+            "CA1720:IdentifiersShouldNotContainTypeNames",
+            MessageId = "bool",
+            Justification = "We specificaly want type names"
+        )]
         public static bool IsBool(this string value)
         {
             bool result;
             return Boolean.TryParse(value, out result);
         }
 
-        [SuppressMessage("Microsoft.Naming", "CA1720:IdentifiersShouldNotContainTypeNames", MessageId = "int", Justification = "We specificaly want type names")]
+        [SuppressMessage(
+            "Microsoft.Naming",
+            "CA1720:IdentifiersShouldNotContainTypeNames",
+            MessageId = "int",
+            Justification = "We specificaly want type names"
+        )]
         public static bool IsInt(this string value)
         {
             int result;
@@ -125,7 +169,12 @@ namespace System.Web.WebPages
             return Is<Decimal>(value);
         }
 
-        [SuppressMessage("Microsoft.Naming", "CA1720:IdentifiersShouldNotContainTypeNames", MessageId = "float", Justification = "We specificaly want type names")]
+        [SuppressMessage(
+            "Microsoft.Naming",
+            "CA1720:IdentifiersShouldNotContainTypeNames",
+            MessageId = "float",
+            Justification = "We specificaly want type names"
+        )]
         public static bool IsFloat(this string value)
         {
             float result;
@@ -138,8 +187,18 @@ namespace System.Web.WebPages
             return DateTime.TryParse(value, out result);
         }
 
-        [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "This is the identical to the way it is done in TypeConverter.IsValid"),
-         SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter", Justification = "This is the signature we want")]
+        [
+            SuppressMessage(
+                "Microsoft.Design",
+                "CA1031:DoNotCatchGeneralExceptionTypes",
+                Justification = "This is the identical to the way it is done in TypeConverter.IsValid"
+            ),
+            SuppressMessage(
+                "Microsoft.Design",
+                "CA1004:GenericMethodsShouldProvideTypeParameter",
+                Justification = "This is the signature we want"
+            )
+        ]
         public static bool Is<TValue>(this string value)
         {
             TypeConverter converter = TypeDescriptor.GetConverter(typeof(TValue));
@@ -149,14 +208,12 @@ namespace System.Web.WebPages
                 {
                     if ((value == null) || converter.CanConvertFrom(null, value.GetType()))
                     {
-                        // TypeConverter.IsValid essentially does this - a try catch - but uses InvariantCulture to convert. 
+                        // TypeConverter.IsValid essentially does this - a try catch - but uses InvariantCulture to convert.
                         converter.ConvertFrom(null, CultureInfo.CurrentCulture, value);
                         return true;
                     }
                 }
-                catch
-                {
-                }
+                catch { }
             }
             return false;
         }

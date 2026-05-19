@@ -24,7 +24,13 @@ namespace Microsoft.Interop
         public ResolvedGenerator Create(TypePositionInfo info, StubCodeContext context)
         {
             // Value type with MarshalAs(UnmanagedType.Error), to be marshalled as an unmanaged HRESULT.
-            if (info is { ManagedType: ValueTypeInfo, MarshallingAttributeInfo: MarshalAsInfo(UnmanagedType.Error, _) })
+            if (
+                info is
+                {
+                    ManagedType: ValueTypeInfo,
+                    MarshallingAttributeInfo: MarshalAsInfo(UnmanagedType.Error, _)
+                }
+            )
             {
                 return ResolvedGenerator.Resolved(s_marshaller);
             }
@@ -36,46 +42,71 @@ namespace Microsoft.Interop
         {
             public ManagedTypeInfo AsNativeType(TypePositionInfo info) => SpecialTypeInfo.Int32;
 
-            public IEnumerable<StatementSyntax> Generate(TypePositionInfo info, StubCodeContext context)
+            public IEnumerable<StatementSyntax> Generate(
+                TypePositionInfo info,
+                StubCodeContext context
+            )
             {
                 var (managed, unmanaged) = context.GetIdentifiers(info);
 
                 switch (context.CurrentStage)
                 {
                     case StubCodeContext.Stage.Marshal:
-                        if (MarshallerHelpers.GetMarshalDirection(info, context) is MarshalDirection.ManagedToUnmanaged or MarshalDirection.Bidirectional)
+                        if (
+                            MarshallerHelpers.GetMarshalDirection(info, context)
+                            is MarshalDirection.ManagedToUnmanaged
+                                or MarshalDirection.Bidirectional
+                        )
                         {
                             // unmanaged = Unsafe.BitCast<managedType, int>(managed);
                             yield return AssignmentStatement(
                                 IdentifierName(unmanaged),
                                 MethodInvocation(
                                     ParseTypeName(TypeNames.System_Runtime_CompilerServices_Unsafe),
-                                    GenericName(Identifier("BitCast"),
+                                    GenericName(
+                                        Identifier("BitCast"),
                                         TypeArgumentList(
-                                            SeparatedList(new[]
+                                            SeparatedList(
+                                                new[]
                                                 {
                                                     info.ManagedType.Syntax,
-                                                    AsNativeType(info).Syntax
-                                                }))),
-                                    Argument(IdentifierName(managed))));
+                                                    AsNativeType(info).Syntax,
+                                                }
+                                            )
+                                        )
+                                    ),
+                                    Argument(IdentifierName(managed))
+                                )
+                            );
                         }
                         break;
                     case StubCodeContext.Stage.Unmarshal:
-                        if (MarshallerHelpers.GetMarshalDirection(info, context) is MarshalDirection.UnmanagedToManaged or MarshalDirection.Bidirectional)
+                        if (
+                            MarshallerHelpers.GetMarshalDirection(info, context)
+                            is MarshalDirection.UnmanagedToManaged
+                                or MarshalDirection.Bidirectional
+                        )
                         {
                             // managed = Unsafe.BitCast<int, managedType>(unmanaged);
                             yield return AssignmentStatement(
-                            IdentifierName(managed),
-                            MethodInvocation(
-                                ParseTypeName(TypeNames.System_Runtime_CompilerServices_Unsafe),
-                                GenericName(Identifier("BitCast"),
-                                    TypeArgumentList(
-                                        SeparatedList(new[]
-                                            {
-                                                AsNativeType(info).Syntax,
-                                                info.ManagedType.Syntax
-                                            }))),
-                                Argument(IdentifierName(unmanaged))));
+                                IdentifierName(managed),
+                                MethodInvocation(
+                                    ParseTypeName(TypeNames.System_Runtime_CompilerServices_Unsafe),
+                                    GenericName(
+                                        Identifier("BitCast"),
+                                        TypeArgumentList(
+                                            SeparatedList(
+                                                new[]
+                                                {
+                                                    AsNativeType(info).Syntax,
+                                                    info.ManagedType.Syntax,
+                                                }
+                                            )
+                                        )
+                                    ),
+                                    Argument(IdentifierName(unmanaged))
+                                )
+                            );
                         }
                         break;
                     default:
@@ -85,10 +116,15 @@ namespace Microsoft.Interop
 
             public SignatureBehavior GetNativeSignatureBehavior(TypePositionInfo info)
             {
-                return info.IsByRef ? SignatureBehavior.PointerToNativeType : SignatureBehavior.NativeType;
+                return info.IsByRef
+                    ? SignatureBehavior.PointerToNativeType
+                    : SignatureBehavior.NativeType;
             }
 
-            public ValueBoundaryBehavior GetValueBoundaryBehavior(TypePositionInfo info, StubCodeContext context)
+            public ValueBoundaryBehavior GetValueBoundaryBehavior(
+                TypePositionInfo info,
+                StubCodeContext context
+            )
             {
                 if (info.IsByRef)
                 {
@@ -98,10 +134,21 @@ namespace Microsoft.Interop
                 return ValueBoundaryBehavior.NativeIdentifier;
             }
 
-            public ByValueMarshalKindSupport SupportsByValueMarshalKind(ByValueContentsMarshalKind marshalKind, TypePositionInfo info, StubCodeContext context, out GeneratorDiagnostic? diagnostic)
-                => ByValueMarshalKindSupportDescriptor.Default.GetSupport(marshalKind, info, context, out diagnostic);
+            public ByValueMarshalKindSupport SupportsByValueMarshalKind(
+                ByValueContentsMarshalKind marshalKind,
+                TypePositionInfo info,
+                StubCodeContext context,
+                out GeneratorDiagnostic? diagnostic
+            ) =>
+                ByValueMarshalKindSupportDescriptor.Default.GetSupport(
+                    marshalKind,
+                    info,
+                    context,
+                    out diagnostic
+                );
 
-            public bool UsesNativeIdentifier(TypePositionInfo info, StubCodeContext context) => true;
+            public bool UsesNativeIdentifier(TypePositionInfo info, StubCodeContext context) =>
+                true;
         }
     }
 }

@@ -1,14 +1,14 @@
 ﻿namespace System.Workflow.ComponentModel.Design
 {
     using System;
-    using System.Drawing;
-    using System.Diagnostics;
     using System.Collections;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
-    using System.Windows.Forms;
     using System.ComponentModel;
     using System.ComponentModel.Design;
+    using System.Diagnostics;
+    using System.Drawing;
+    using System.Windows.Forms;
 
     #region Class WindowManager
     //This behavior needs the logical coordinates
@@ -17,9 +17,7 @@
         #region Members and Constructor
         private ActivityDesigner currentActiveDesigner = null;
 
-        internal WindowManager()
-        {
-        }
+        internal WindowManager() { }
         #endregion
 
         #region MessageFilter Overrides
@@ -43,9 +41,13 @@
             //Selection service handles KeyModifiers, ctrl and shift will be handled as per the standard behavior
             if (selectedObject != null)
             {
-                ISelectionService selectionService = GetService(typeof(ISelectionService)) as ISelectionService;
+                ISelectionService selectionService =
+                    GetService(typeof(ISelectionService)) as ISelectionService;
                 if (selectionService != null)
-                    selectionService.SetSelectedComponents(new object[] { selectedObject }, SelectionTypes.Primary);
+                    selectionService.SetSelectedComponents(
+                        new object[] { selectedObject },
+                        SelectionTypes.Primary
+                    );
             }
 
             //Designer designates an area as action area if there is some special significance associated with the area ie Expand Collapse
@@ -60,10 +62,15 @@
                 this.currentActiveDesigner = hitTestInfo.AssociatedDesigner;
 
                 if (this.currentActiveDesigner != null)
-                    ((IWorkflowDesignerMessageSink)this.currentActiveDesigner).OnMouseEnter(eventArgs);
+                    ((IWorkflowDesignerMessageSink)this.currentActiveDesigner).OnMouseEnter(
+                        eventArgs
+                    );
             }
 
-            if (this.currentActiveDesigner != null && ((Control.ModifierKeys & (Keys.Control | Keys.Shift)) == 0))
+            if (
+                this.currentActiveDesigner != null
+                && ((Control.ModifierKeys & (Keys.Control | Keys.Shift)) == 0)
+            )
                 ((IWorkflowDesignerMessageSink)this.currentActiveDesigner).OnMouseDown(eventArgs);
 
             return false;
@@ -92,12 +99,16 @@
                 this.currentActiveDesigner = hitTestInfo.AssociatedDesigner;
 
                 if (this.currentActiveDesigner != null)
-                    ((IWorkflowDesignerMessageSink)this.currentActiveDesigner).OnMouseEnter(eventArgs);
+                    ((IWorkflowDesignerMessageSink)this.currentActiveDesigner).OnMouseEnter(
+                        eventArgs
+                    );
             }
             else
             {
                 if (this.currentActiveDesigner != null)
-                    ((IWorkflowDesignerMessageSink)this.currentActiveDesigner).OnMouseMove(eventArgs);
+                    ((IWorkflowDesignerMessageSink)this.currentActiveDesigner).OnMouseMove(
+                        eventArgs
+                    );
             }
 
             return false;
@@ -126,7 +137,9 @@
                 this.currentActiveDesigner = hitTestInfo.AssociatedDesigner;
 
                 if (this.currentActiveDesigner != null)
-                    ((IWorkflowDesignerMessageSink)this.currentActiveDesigner).OnMouseEnter(eventArgs);
+                    ((IWorkflowDesignerMessageSink)this.currentActiveDesigner).OnMouseEnter(
+                        eventArgs
+                    );
             }
 
             //Dispatch the event
@@ -138,17 +151,21 @@
 
         protected override bool OnMouseDoubleClick(MouseEventArgs eventArgs)
         {
-            ISelectionService selectionService = GetService(typeof(ISelectionService)) as ISelectionService;
+            ISelectionService selectionService =
+                GetService(typeof(ISelectionService)) as ISelectionService;
             if (selectionService != null)
             {
-                ArrayList selectedComponents = new ArrayList(selectionService.GetSelectedComponents());
+                ArrayList selectedComponents = new ArrayList(
+                    selectionService.GetSelectedComponents()
+                );
                 for (int i = 0; i < selectedComponents.Count; i++)
                 {
                     Activity selectedComponent = selectedComponents[i] as Activity;
                     if (selectedComponent == null)
                         continue;
 
-                    IDesigner designer = ActivityDesigner.GetDesigner(selectedComponent) as IDesigner;
+                    IDesigner designer =
+                        ActivityDesigner.GetDesigner(selectedComponent) as IDesigner;
                     if (designer != null)
                     {
                         designer.DoDefaultAction();
@@ -221,15 +238,22 @@
 
         protected override bool OnKeyDown(KeyEventArgs eventArgs)
         {
-            if (eventArgs != null && (eventArgs.KeyCode == Keys.PageUp || eventArgs.KeyCode == Keys.PageDown))
+            if (
+                eventArgs != null
+                && (eventArgs.KeyCode == Keys.PageUp || eventArgs.KeyCode == Keys.PageDown)
+            )
                 UpdateViewOnPageUpDown(eventArgs.KeyCode == Keys.PageUp);
-            ISelectionService selectionService = ((IServiceProvider)this.ParentView).GetService(typeof(ISelectionService)) as ISelectionService;
+            ISelectionService selectionService =
+                ((IServiceProvider)this.ParentView).GetService(typeof(ISelectionService))
+                as ISelectionService;
 
             //enter key (
             if (eventArgs.KeyCode == Keys.Enter)
             {
                 // on enter key we want to do DoDefault of the designer
-                IDesigner designer = ActivityDesigner.GetDesigner(selectionService.PrimarySelection as Activity) as IDesigner;
+                IDesigner designer =
+                    ActivityDesigner.GetDesigner(selectionService.PrimarySelection as Activity)
+                    as IDesigner;
                 if (designer != null)
                 {
                     designer.DoDefaultAction();
@@ -240,9 +264,14 @@
             {
                 if (!eventArgs.Handled)
                 {
-                    CompositeActivityDesigner parentDesigner = ActivityDesigner.GetParentDesigner(selectionService.PrimarySelection);
+                    CompositeActivityDesigner parentDesigner = ActivityDesigner.GetParentDesigner(
+                        selectionService.PrimarySelection
+                    );
                     if (parentDesigner != null)
-                        selectionService.SetSelectedComponents(new object[] { parentDesigner.Activity }, SelectionTypes.Replace);
+                        selectionService.SetSelectedComponents(
+                            new object[] { parentDesigner.Activity },
+                            SelectionTypes.Replace
+                        );
 
                     eventArgs.Handled = true;
                 }
@@ -250,8 +279,15 @@
             else if (eventArgs.KeyCode == Keys.Delete)
             {
                 // check if we are cutting root component
-                IDesignerHost designerHost = ((IServiceProvider)this.ParentView).GetService(typeof(IDesignerHost)) as IDesignerHost;
-                if (!(designerHost == null || selectionService.GetComponentSelected(designerHost.RootComponent)))
+                IDesignerHost designerHost =
+                    ((IServiceProvider)this.ParentView).GetService(typeof(IDesignerHost))
+                    as IDesignerHost;
+                if (
+                    !(
+                        designerHost == null
+                        || selectionService.GetComponentSelected(designerHost.RootComponent)
+                    )
+                )
                 {
                     //Check that we are cutting all activities
                     //Check if we are in writable context
@@ -259,19 +295,34 @@
                     if (DesignerHelpers.AreComponentsRemovable(components))
                     {
                         // check if we can delete these
-                        List<Activity> topLevelActivities = new List<Activity>(Helpers.GetTopLevelActivities(selectionService.GetSelectedComponents()));
+                        List<Activity> topLevelActivities = new List<Activity>(
+                            Helpers.GetTopLevelActivities(selectionService.GetSelectedComponents())
+                        );
                         bool needToDelete = (topLevelActivities.Count > 0);
-                        IDictionary commonParentActivities = Helpers.PairUpCommonParentActivities(topLevelActivities);
+                        IDictionary commonParentActivities = Helpers.PairUpCommonParentActivities(
+                            topLevelActivities
+                        );
                         foreach (DictionaryEntry entry in commonParentActivities)
                         {
-                            CompositeActivityDesigner compositeActivityDesigner = ActivityDesigner.GetDesigner(entry.Key as Activity) as CompositeActivityDesigner;
-                            if (compositeActivityDesigner != null && !compositeActivityDesigner.CanRemoveActivities(new List<Activity>((Activity[])((ArrayList)entry.Value).ToArray(typeof(Activity))).AsReadOnly()))
+                            CompositeActivityDesigner compositeActivityDesigner =
+                                ActivityDesigner.GetDesigner(entry.Key as Activity)
+                                as CompositeActivityDesigner;
+                            if (
+                                compositeActivityDesigner != null
+                                && !compositeActivityDesigner.CanRemoveActivities(
+                                    new List<Activity>(
+                                        (Activity[])
+                                            ((ArrayList)entry.Value).ToArray(typeof(Activity))
+                                    ).AsReadOnly()
+                                )
+                            )
                                 needToDelete = false;
                         }
 
                         if (needToDelete)
                         {
-                            List<ConnectorHitTestInfo> connectors = new List<ConnectorHitTestInfo>();
+                            List<ConnectorHitTestInfo> connectors =
+                                new List<ConnectorHitTestInfo>();
                             foreach (object component in components)
                             {
                                 ConnectorHitTestInfo connector = component as ConnectorHitTestInfo;
@@ -280,11 +331,18 @@
                             }
 
                             //cache selcted connectors before calling this func
-                            CompositeActivityDesigner.RemoveActivities((IServiceProvider)this.ParentView, topLevelActivities.AsReadOnly(), SR.GetString(SR.DeletingActivities));
+                            CompositeActivityDesigner.RemoveActivities(
+                                (IServiceProvider)this.ParentView,
+                                topLevelActivities.AsReadOnly(),
+                                SR.GetString(SR.DeletingActivities)
+                            );
 
                             //add connectors back to the selection service
                             if (selectionService != null && connectors.Count > 0)
-                                selectionService.SetSelectedComponents(connectors, SelectionTypes.Add);
+                                selectionService.SetSelectedComponents(
+                                    connectors,
+                                    SelectionTypes.Add
+                                );
 
                             eventArgs.Handled = true;
                         }
@@ -292,15 +350,23 @@
                 }
             }
             //navigation (left, right, up, down, tab, shift-tab)
-            else if (eventArgs.KeyCode == Keys.Left || eventArgs.KeyCode == Keys.Right || eventArgs.KeyCode == Keys.Up || eventArgs.KeyCode == Keys.Down || eventArgs.KeyCode == Keys.Tab)
+            else if (
+                eventArgs.KeyCode == Keys.Left
+                || eventArgs.KeyCode == Keys.Right
+                || eventArgs.KeyCode == Keys.Up
+                || eventArgs.KeyCode == Keys.Down
+                || eventArgs.KeyCode == Keys.Tab
+            )
             {
                 //we'll pass it to the parent designer of the primary selected designer
                 //sequential designers just navigate between their children
                 //free form designers may move their children on arrow keys and navigate on tab
-                ActivityDesigner designer = ActivityDesigner.GetDesigner(selectionService.PrimarySelection as Activity) as ActivityDesigner;
+                ActivityDesigner designer =
+                    ActivityDesigner.GetDesigner(selectionService.PrimarySelection as Activity)
+                    as ActivityDesigner;
                 if (designer != null && designer.ParentDesigner != null)
                 {
-                    //we will let the parent see if it wants to handle the event, 
+                    //we will let the parent see if it wants to handle the event,
                     //otherwise the selected designer itself will be called from a designer message filter below
                     ((IWorkflowDesignerMessageSink)designer.ParentDesigner).OnKeyDown(eventArgs);
                     eventArgs.Handled = true;
@@ -337,9 +403,14 @@
 
         protected override bool OnShowContextMenu(Point screenMenuPoint)
         {
-            IMenuCommandService menuCommandService = GetService(typeof(IMenuCommandService)) as IMenuCommandService;
+            IMenuCommandService menuCommandService =
+                GetService(typeof(IMenuCommandService)) as IMenuCommandService;
             if (menuCommandService != null)
-                menuCommandService.ShowContextMenu(WorkflowMenuCommands.SelectionMenu, screenMenuPoint.X, screenMenuPoint.Y);
+                menuCommandService.ShowContextMenu(
+                    WorkflowMenuCommands.SelectionMenu,
+                    screenMenuPoint.X,
+                    screenMenuPoint.Y
+                );
             return true;
         }
 
@@ -352,7 +423,9 @@
                 {
                     try
                     {
-                        ((IWorkflowDesignerMessageSink)parentView.RootDesigner).OnLayoutSize(graphics);
+                        ((IWorkflowDesignerMessageSink)parentView.RootDesigner).OnLayoutSize(
+                            graphics
+                        );
                     }
                     catch (Exception e)
                     {
@@ -362,7 +435,9 @@
 
                     try
                     {
-                        ((IWorkflowDesignerMessageSink)parentView.RootDesigner).OnLayoutPosition(graphics);
+                        ((IWorkflowDesignerMessageSink)parentView.RootDesigner).OnLayoutPosition(
+                            graphics
+                        );
                     }
                     catch (Exception e)
                     {
@@ -395,7 +470,8 @@
         {
             ActivityDesigner designerWithFocus = null;
 
-            ISelectionService selectionService = GetService(typeof(ISelectionService)) as ISelectionService;
+            ISelectionService selectionService =
+                GetService(typeof(ISelectionService)) as ISelectionService;
             if (selectionService != null)
             {
                 object primarySelection = selectionService.PrimarySelection;
@@ -412,7 +488,8 @@
         {
             WorkflowView parentView = ParentView;
             Point scrollPosition = parentView.ScrollPosition;
-            scrollPosition.Y = scrollPosition.Y + ((pageUp ? -1 : 1) * parentView.VScrollBar.LargeChange);
+            scrollPosition.Y =
+                scrollPosition.Y + ((pageUp ? -1 : 1) * parentView.VScrollBar.LargeChange);
             parentView.ScrollPosition = scrollPosition;
         }
 

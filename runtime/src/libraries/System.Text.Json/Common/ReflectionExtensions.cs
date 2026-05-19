@@ -1,9 +1,9 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Reflection;
-using System.Collections.Generic;
 #if !BUILDING_SOURCE_GENERATOR
 using System.Diagnostics.CodeAnalysis;
 #endif
@@ -13,29 +13,46 @@ namespace System.Text.Json.Reflection
     internal static partial class ReflectionExtensions
     {
         // Immutable collection types.
-        private const string ImmutableArrayGenericTypeName = "System.Collections.Immutable.ImmutableArray`1";
-        private const string ImmutableListGenericTypeName = "System.Collections.Immutable.ImmutableList`1";
-        private const string ImmutableListGenericInterfaceTypeName = "System.Collections.Immutable.IImmutableList`1";
-        private const string ImmutableStackGenericTypeName = "System.Collections.Immutable.ImmutableStack`1";
-        private const string ImmutableStackGenericInterfaceTypeName = "System.Collections.Immutable.IImmutableStack`1";
-        private const string ImmutableQueueGenericTypeName = "System.Collections.Immutable.ImmutableQueue`1";
-        private const string ImmutableQueueGenericInterfaceTypeName = "System.Collections.Immutable.IImmutableQueue`1";
-        private const string ImmutableSortedSetGenericTypeName = "System.Collections.Immutable.ImmutableSortedSet`1";
-        private const string ImmutableHashSetGenericTypeName = "System.Collections.Immutable.ImmutableHashSet`1";
-        private const string ImmutableSetGenericInterfaceTypeName = "System.Collections.Immutable.IImmutableSet`1";
-        private const string ImmutableDictionaryGenericTypeName = "System.Collections.Immutable.ImmutableDictionary`2";
-        private const string ImmutableDictionaryGenericInterfaceTypeName = "System.Collections.Immutable.IImmutableDictionary`2";
-        private const string ImmutableSortedDictionaryGenericTypeName = "System.Collections.Immutable.ImmutableSortedDictionary`2";
+        private const string ImmutableArrayGenericTypeName =
+            "System.Collections.Immutable.ImmutableArray`1";
+        private const string ImmutableListGenericTypeName =
+            "System.Collections.Immutable.ImmutableList`1";
+        private const string ImmutableListGenericInterfaceTypeName =
+            "System.Collections.Immutable.IImmutableList`1";
+        private const string ImmutableStackGenericTypeName =
+            "System.Collections.Immutable.ImmutableStack`1";
+        private const string ImmutableStackGenericInterfaceTypeName =
+            "System.Collections.Immutable.IImmutableStack`1";
+        private const string ImmutableQueueGenericTypeName =
+            "System.Collections.Immutable.ImmutableQueue`1";
+        private const string ImmutableQueueGenericInterfaceTypeName =
+            "System.Collections.Immutable.IImmutableQueue`1";
+        private const string ImmutableSortedSetGenericTypeName =
+            "System.Collections.Immutable.ImmutableSortedSet`1";
+        private const string ImmutableHashSetGenericTypeName =
+            "System.Collections.Immutable.ImmutableHashSet`1";
+        private const string ImmutableSetGenericInterfaceTypeName =
+            "System.Collections.Immutable.IImmutableSet`1";
+        private const string ImmutableDictionaryGenericTypeName =
+            "System.Collections.Immutable.ImmutableDictionary`2";
+        private const string ImmutableDictionaryGenericInterfaceTypeName =
+            "System.Collections.Immutable.IImmutableDictionary`2";
+        private const string ImmutableSortedDictionaryGenericTypeName =
+            "System.Collections.Immutable.ImmutableSortedDictionary`2";
 
         // Immutable collection builder types.
         private const string ImmutableArrayTypeName = "System.Collections.Immutable.ImmutableArray";
         private const string ImmutableListTypeName = "System.Collections.Immutable.ImmutableList";
         private const string ImmutableStackTypeName = "System.Collections.Immutable.ImmutableStack";
         private const string ImmutableQueueTypeName = "System.Collections.Immutable.ImmutableQueue";
-        private const string ImmutableSortedSetTypeName = "System.Collections.Immutable.ImmutableSortedSet";
-        private const string ImmutableHashSetTypeName = "System.Collections.Immutable.ImmutableHashSet";
-        private const string ImmutableDictionaryTypeName = "System.Collections.Immutable.ImmutableDictionary";
-        private const string ImmutableSortedDictionaryTypeName = "System.Collections.Immutable.ImmutableSortedDictionary";
+        private const string ImmutableSortedSetTypeName =
+            "System.Collections.Immutable.ImmutableSortedSet";
+        private const string ImmutableHashSetTypeName =
+            "System.Collections.Immutable.ImmutableHashSet";
+        private const string ImmutableDictionaryTypeName =
+            "System.Collections.Immutable.ImmutableDictionary";
+        private const string ImmutableSortedDictionaryTypeName =
+            "System.Collections.Immutable.ImmutableSortedDictionary";
 
         public const string CreateRangeMethodName = "CreateRange";
 
@@ -70,11 +87,14 @@ namespace System.Text.Json.Reflection
         }
 
 #if !BUILDING_SOURCE_GENERATOR
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2070:UnrecognizedReflectionPattern",
-            Justification = "The 'interfaceType' must exist and so trimmer kept it. In which case " +
-                "It also kept it on any type which implements it. The below call to GetInterfaces " +
-                "may return fewer results when trimmed but it will return the 'interfaceType' " +
-                "if the type implemented it, even after trimming.")]
+        [UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2070:UnrecognizedReflectionPattern",
+            Justification = "The 'interfaceType' must exist and so trimmer kept it. In which case "
+                + "It also kept it on any type which implements it. The below call to GetInterfaces "
+                + "may return fewer results when trimmed but it will return the 'interfaceType' "
+                + "if the type implemented it, even after trimming."
+        )]
 #endif
         public static Type? GetCompatibleGenericInterface(this Type type, Type? interfaceType)
         {
@@ -116,7 +136,13 @@ namespace System.Text.Json.Reflection
 
         public static bool IsImmutableDictionaryType(this Type type)
         {
-            if (!type.IsGenericType || !type.Assembly.FullName!.StartsWith("System.Collections.Immutable", StringComparison.Ordinal))
+            if (
+                !type.IsGenericType
+                || !type.Assembly.FullName!.StartsWith(
+                    "System.Collections.Immutable",
+                    StringComparison.Ordinal
+                )
+            )
             {
                 return false;
             }
@@ -134,7 +160,13 @@ namespace System.Text.Json.Reflection
 
         public static bool IsImmutableEnumerableType(this Type type)
         {
-            if (!type.IsGenericType || !type.Assembly.FullName!.StartsWith("System.Collections.Immutable", StringComparison.Ordinal))
+            if (
+                !type.IsGenericType
+                || !type.Assembly.FullName!.StartsWith(
+                    "System.Collections.Immutable",
+                    StringComparison.Ordinal
+                )
+            )
             {
                 return false;
             }
@@ -218,23 +250,30 @@ namespace System.Text.Json.Reflection
 
         public static bool IsVirtual(this PropertyInfo propertyInfo)
         {
-            return propertyInfo.GetMethod?.IsVirtual == true || propertyInfo.SetMethod?.IsVirtual == true;
+            return propertyInfo.GetMethod?.IsVirtual == true
+                || propertyInfo.SetMethod?.IsVirtual == true;
         }
 
-        public static bool IsKeyValuePair(this Type type)
-            => type.IsGenericType && type.GetGenericTypeDefinition() == typeof(KeyValuePair<,>);
+        public static bool IsKeyValuePair(this Type type) =>
+            type.IsGenericType && type.GetGenericTypeDefinition() == typeof(KeyValuePair<,>);
 
         public static bool TryGetDeserializationConstructor(
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors | DynamicallyAccessedMemberTypes.NonPublicConstructors)]
-            this Type type,
+            [DynamicallyAccessedMembers(
+                DynamicallyAccessedMemberTypes.PublicConstructors
+                    | DynamicallyAccessedMemberTypes.NonPublicConstructors
+            )]
+                this Type type,
             bool useDefaultCtorInAnnotatedStructs,
-            out ConstructorInfo? deserializationCtor)
+            out ConstructorInfo? deserializationCtor
+        )
         {
             ConstructorInfo? ctorWithAttribute = null;
             ConstructorInfo? publicParameterlessCtor = null;
             ConstructorInfo? lonePublicCtor = null;
 
-            ConstructorInfo[] constructors = type.GetConstructors(BindingFlags.Public | BindingFlags.Instance);
+            ConstructorInfo[] constructors = type.GetConstructors(
+                BindingFlags.Public | BindingFlags.Instance
+            );
 
             if (constructors.Length == 1)
             {
@@ -260,7 +299,11 @@ namespace System.Text.Json.Reflection
             }
 
             // Search for non-public ctors with [JsonConstructor].
-            foreach (ConstructorInfo constructor in type.GetConstructors(BindingFlags.NonPublic | BindingFlags.Instance))
+            foreach (
+                ConstructorInfo constructor in type.GetConstructors(
+                    BindingFlags.NonPublic | BindingFlags.Instance
+                )
+            )
             {
                 if (HasJsonConstructorAttribute(constructor))
                 {
@@ -308,7 +351,10 @@ namespace System.Text.Json.Reflection
                 return Enum.ToObject(parameterType, defaultValue);
             }
 
-            if (Nullable.GetUnderlyingType(parameterType) is Type underlyingType && underlyingType.IsEnum)
+            if (
+                Nullable.GetUnderlyingType(parameterType) is Type underlyingType
+                && underlyingType.IsEnum
+            )
             {
                 return Enum.ToObject(underlyingType, defaultValue);
             }
@@ -340,7 +386,10 @@ namespace System.Text.Json.Reflection
                 // Interface hierarchies support multiple inheritance.
                 // For consistency with class hierarchy resolution order,
                 // sort topologically from most derived to least derived.
-                return JsonHelpers.TraverseGraphWithTopologicalSort(type, static t => t.GetInterfaces());
+                return JsonHelpers.TraverseGraphWithTopologicalSort(
+                    type,
+                    static t => t.GetInterfaces()
+                );
             }
         }
     }

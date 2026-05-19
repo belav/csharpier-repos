@@ -7,10 +7,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -26,58 +26,62 @@
 //
 
 using System;
-using System.Runtime.InteropServices;
 using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
 using System.Text;
 
-namespace Mono.Mozilla {
+namespace Mono.Mozilla
+{
+    [Guid("a6cf90f2-15b3-11d2-932e-00805f8add32")]
+    [InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
+    [ComImport()]
+    internal interface nsIDOMNSRange
+    {
+        #region nsIDOMNSRange
+        [PreserveSigAttribute]
+        [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int createContextualFragment(
+            /*DOMString*/HandleRef fragment,
+            [MarshalAs(UnmanagedType.Interface)] out nsIDOMDocumentFragment ret
+        );
 
-	[Guid ("a6cf90f2-15b3-11d2-932e-00805f8add32")]
-	[InterfaceType (ComInterfaceType.InterfaceIsIUnknown)]
-	[ComImport ()]
-	internal interface nsIDOMNSRange {
+        [PreserveSigAttribute]
+        [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int isPointInRange(
+            [MarshalAs(UnmanagedType.Interface)] nsIDOMNode parent,
+            int offset,
+            out bool ret
+        );
 
-#region nsIDOMNSRange
-		[PreserveSigAttribute]
-		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-		int createContextualFragment (
-				   /*DOMString*/ HandleRef fragment,[MarshalAs (UnmanagedType.Interface)]  out nsIDOMDocumentFragment ret);
+        [PreserveSigAttribute]
+        [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int comparePoint(
+            [MarshalAs(UnmanagedType.Interface)] nsIDOMNode parent,
+            int offset,
+            out short ret
+        );
 
-		[PreserveSigAttribute]
-		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-		int isPointInRange (
-				[MarshalAs (UnmanagedType.Interface)]   nsIDOMNode parent,
-				   int offset, out bool ret);
+        [PreserveSigAttribute]
+        [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int intersectsNode([MarshalAs(UnmanagedType.Interface)] nsIDOMNode n, out bool ret);
 
-		[PreserveSigAttribute]
-		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-		int comparePoint (
-				[MarshalAs (UnmanagedType.Interface)]   nsIDOMNode parent,
-				   int offset, out short ret);
+        [PreserveSigAttribute]
+        [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int compareNode([MarshalAs(UnmanagedType.Interface)] nsIDOMNode n, out ushort ret);
 
-		[PreserveSigAttribute]
-		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-		int intersectsNode (
-				[MarshalAs (UnmanagedType.Interface)]   nsIDOMNode n, out bool ret);
+        [PreserveSigAttribute]
+        [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int nSDetach();
 
-		[PreserveSigAttribute]
-		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-		int compareNode (
-				[MarshalAs (UnmanagedType.Interface)]   nsIDOMNode n, out ushort ret);
+        #endregion
+    }
 
-		[PreserveSigAttribute]
-		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-		int nSDetach ();
-
-#endregion
-	}
-
-
-	internal class nsDOMNSRange {
-		public static nsIDOMNSRange GetProxy (Mono.WebBrowser.IWebBrowser control, nsIDOMNSRange obj)
-		{
-			object o = Base.GetProxyForObject (control, typeof(nsIDOMNSRange).GUID, obj);
-			return o as nsIDOMNSRange;
-		}
-	}
+    internal class nsDOMNSRange
+    {
+        public static nsIDOMNSRange GetProxy(Mono.WebBrowser.IWebBrowser control, nsIDOMNSRange obj)
+        {
+            object o = Base.GetProxyForObject(control, typeof(nsIDOMNSRange).GUID, obj);
+            return o as nsIDOMNSRange;
+        }
+    }
 }

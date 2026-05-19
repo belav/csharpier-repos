@@ -19,35 +19,52 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.RegularExpressions.L
 {
     using RegexToken = EmbeddedSyntaxToken<RegexKind>;
 
-    [ExportEmbeddedLanguageDocumentHighlighter(
-        PredefinedEmbeddedLanguageNames.Regex,
-        new[] { LanguageNames.CSharp, LanguageNames.VisualBasic },
-        supportsUnannotatedAPIs: true, "Regex", "Regexp"), Shared]
+    [
+        ExportEmbeddedLanguageDocumentHighlighter(
+            PredefinedEmbeddedLanguageNames.Regex,
+            new[] { LanguageNames.CSharp, LanguageNames.VisualBasic },
+            supportsUnannotatedAPIs: true,
+            "Regex",
+            "Regexp"
+        ),
+        Shared
+    ]
     internal sealed class RegexDocumentHighlighter : IEmbeddedLanguageDocumentHighlighter
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public RegexDocumentHighlighter()
-        {
-        }
+        public RegexDocumentHighlighter() { }
 
         public ImmutableArray<DocumentHighlights> GetDocumentHighlights(
-            Document document, SemanticModel semanticModel, SyntaxToken token, int position, HighlightingOptions options, CancellationToken cancellationToken)
+            Document document,
+            SemanticModel semanticModel,
+            SyntaxToken token,
+            int position,
+            HighlightingOptions options,
+            CancellationToken cancellationToken
+        )
         {
             if (!options.HighlightRelatedRegexComponentsUnderCursor)
                 return default;
 
-            var info = document.GetRequiredLanguageService<IEmbeddedLanguagesProvider>().EmbeddedLanguageInfo;
+            var info = document
+                .GetRequiredLanguageService<IEmbeddedLanguagesProvider>()
+                .EmbeddedLanguageInfo;
 
             var detector = RegexLanguageDetector.GetOrCreate(semanticModel.Compilation, info);
             var tree = detector.TryParseString(token, semanticModel, cancellationToken);
 
             return tree == null
                 ? default
-                : ImmutableArray.Create(new DocumentHighlights(document, GetHighlights(tree, position)));
+                : ImmutableArray.Create(
+                    new DocumentHighlights(document, GetHighlights(tree, position))
+                );
         }
 
-        private static ImmutableArray<HighlightSpan> GetHighlights(RegexTree tree, int positionInDocument)
+        private static ImmutableArray<HighlightSpan> GetHighlights(
+            RegexTree tree,
+            int positionInDocument
+        )
         {
             var referencesOnTheRight = GetReferences(tree, positionInDocument);
             if (!referencesOnTheRight.IsEmpty)
@@ -60,7 +77,7 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.RegularExpressions.L
                 return default;
             }
 
-            // Nothing was on the right of the caret.  Return anything we were able to find on 
+            // Nothing was on the right of the caret.  Return anything we were able to find on
             // the left of the caret.
             var referencesOnTheLeft = GetReferences(tree, positionInDocument - 1);
             return referencesOnTheLeft;
@@ -76,7 +93,10 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.RegularExpressions.L
             return FindReferenceHighlights(tree, ch);
         }
 
-        private static ImmutableArray<HighlightSpan> FindReferenceHighlights(RegexTree tree, VirtualChar ch)
+        private static ImmutableArray<HighlightSpan> FindReferenceHighlights(
+            RegexTree tree,
+            VirtualChar ch
+        )
         {
             var node = FindReferenceNode(tree.Root, ch);
             if (node == null)
@@ -106,16 +126,21 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.RegularExpressions.L
         }
 
         private static ImmutableArray<HighlightSpan> CreateHighlights(
-            RegexEscapeNode node, TextSpan captureSpan)
+            RegexEscapeNode node,
+            TextSpan captureSpan
+        )
         {
-            return ImmutableArray.Create(CreateHighlightSpan(node.GetSpan()), CreateHighlightSpan(captureSpan));
+            return ImmutableArray.Create(
+                CreateHighlightSpan(node.GetSpan()),
+                CreateHighlightSpan(captureSpan)
+            );
         }
 
-        private static HighlightSpan CreateHighlightSpan(TextSpan textSpan)
-            => new(textSpan, HighlightSpanKind.None);
+        private static HighlightSpan CreateHighlightSpan(TextSpan textSpan) =>
+            new(textSpan, HighlightSpanKind.None);
 
-        private static RegexToken GetCaptureToken(RegexEscapeNode node)
-            => node switch
+        private static RegexToken GetCaptureToken(RegexEscapeNode node) =>
+            node switch
             {
                 RegexBackreferenceEscapeNode backReference => backReference.NumberToken,
                 RegexCaptureEscapeNode captureEscape => captureEscape.CaptureToken,
@@ -125,9 +150,12 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.RegularExpressions.L
 
         private static RegexEscapeNode? FindReferenceNode(RegexNode node, VirtualChar virtualChar)
         {
-            if (node.Kind is RegexKind.BackreferenceEscape or
-                RegexKind.CaptureEscape or
-                RegexKind.KCaptureEscape)
+            if (
+                node.Kind
+                is RegexKind.BackreferenceEscape
+                    or RegexKind.CaptureEscape
+                    or RegexKind.KCaptureEscape
+            )
             {
                 if (node.Contains(virtualChar))
                 {

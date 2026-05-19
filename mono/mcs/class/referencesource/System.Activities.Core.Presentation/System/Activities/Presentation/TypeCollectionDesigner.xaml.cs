@@ -11,16 +11,16 @@ namespace System.Activities.Presentation
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Collections.Specialized;
+    using System.ComponentModel;
     using System.Diagnostics.CodeAnalysis;
     using System.Globalization;
     using System.Linq;
     using System.Runtime;
     using System.Windows;
     using System.Windows.Controls;
-    using System.Windows.Input;
-    using System.ComponentModel;
-    using System.Windows.Threading;
     using System.Windows.Data;
+    using System.Windows.Input;
+    using System.Windows.Threading;
     using Microsoft.Activities.Presentation;
 
     [Fx.Tag.XamlVisible(false)]
@@ -30,12 +30,22 @@ namespace System.Activities.Presentation
             "Context",
             typeof(EditingContext),
             typeof(TypeCollectionDesigner),
-            new UIPropertyMetadata(null));
+            new UIPropertyMetadata(null)
+        );
 
-        [SuppressMessage("Microsoft.Security", "CA2104:DoNotDeclareReadOnlyMutableReferenceTypes",
-            Justification = "Type RoutedCommand is immutable.")]
-        public static readonly ICommand AddNewTypeCommand = new RoutedCommand("AddNewType", typeof(TypeCollectionDesigner));
-        public static readonly ICommand DeleteTypeCommand = new RoutedCommand("DeleteType", typeof(TypeCollectionDesigner));
+        [SuppressMessage(
+            "Microsoft.Security",
+            "CA2104:DoNotDeclareReadOnlyMutableReferenceTypes",
+            Justification = "Type RoutedCommand is immutable."
+        )]
+        public static readonly ICommand AddNewTypeCommand = new RoutedCommand(
+            "AddNewType",
+            typeof(TypeCollectionDesigner)
+        );
+        public static readonly ICommand DeleteTypeCommand = new RoutedCommand(
+            "DeleteType",
+            typeof(TypeCollectionDesigner)
+        );
 
         DataGridHelper dgHelper;
         ObservableCollection<TypeWrapper> wrapperCollection;
@@ -51,7 +61,9 @@ namespace System.Activities.Presentation
         {
             set
             {
-                this.wrapperCollection = new ObservableCollection<TypeWrapper>(value.Select(type => new TypeWrapper(type)));
+                this.wrapperCollection = new ObservableCollection<TypeWrapper>(
+                    value.Select(type => new TypeWrapper(type))
+                );
                 this.typesDataGrid.ItemsSource = this.wrapperCollection;
             }
         }
@@ -61,7 +73,9 @@ namespace System.Activities.Presentation
         {
             get
             {
-                return wrapperCollection.Where(wrapper => wrapper.Type != null).Select(wrapper => wrapper.Type);
+                return wrapperCollection
+                    .Where(wrapper => wrapper.Type != null)
+                    .Select(wrapper => wrapper.Type);
             }
         }
 
@@ -71,40 +85,33 @@ namespace System.Activities.Presentation
             set { SetValue(ContextProperty, value); }
         }
 
-        public bool AllowDuplicate
-        {
-            get;
-            set;
-        }
+        public bool AllowDuplicate { get; set; }
 
-        public Func<Type, bool> Filter
-        {
-            get;
-            set;
-        }
+        public Func<Type, bool> Filter { get; set; }
 
-        public Type DefaultType
-        {
-            get;
-            set;
-        }
+        public Type DefaultType { get; set; }
 
-        internal WorkflowElementDialog ParentDialog
-        {
-            get;
-            set;
-        }
+        internal WorkflowElementDialog ParentDialog { get; set; }
 
         internal bool OnOK()
-        {   
+        {
             if (!this.AllowDuplicate)
             {
                 List<TypeWrapper> list = new List<TypeWrapper>();
                 foreach (TypeWrapper tw in this.wrapperCollection)
                 {
-                    if (tw.Type != null && list.Any<TypeWrapper>(entry => Type.Equals(entry.Type, tw.Type)))
+                    if (
+                        tw.Type != null
+                        && list.Any<TypeWrapper>(entry => Type.Equals(entry.Type, tw.Type))
+                    )
                     {
-                        ErrorReporting.ShowErrorMessage(string.Format(CultureInfo.CurrentCulture, (string)this.FindResource("duplicateEntryErrorMessage"), TypeNameHelper.GetDisplayName(tw.Type, true)));
+                        ErrorReporting.ShowErrorMessage(
+                            string.Format(
+                                CultureInfo.CurrentCulture,
+                                (string)this.FindResource("duplicateEntryErrorMessage"),
+                                TypeNameHelper.GetDisplayName(tw.Type, true)
+                            )
+                        );
                         return false;
                     }
                     list.Add(tw);
@@ -136,15 +143,15 @@ namespace System.Activities.Presentation
         void OnDataGridSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             this.ButtonDelete.IsEnabled =
-                   (this.typesDataGrid.SelectedItems != null)
+                (this.typesDataGrid.SelectedItems != null)
                 && (this.typesDataGrid.SelectedItems.Count != 0);
         }
 
         void OnAddTypeExecuted(object sender, ExecutedRoutedEventArgs e)
-        {   
+        {
             var newEntry = new TypeWrapper(this.DefaultType);
             this.wrapperCollection.Add(newEntry);
-            this.dgHelper.BeginRowEdit(newEntry);            
+            this.dgHelper.BeginRowEdit(newEntry);
             e.Handled = true;
         }
 
@@ -165,8 +172,11 @@ namespace System.Activities.Presentation
 
         sealed class TypeWrapper : DependencyObject
         {
-            public static readonly DependencyProperty TypeProperty =
-                DependencyProperty.Register("Type", typeof(Type), typeof(TypeWrapper));
+            public static readonly DependencyProperty TypeProperty = DependencyProperty.Register(
+                "Type",
+                typeof(Type),
+                typeof(TypeWrapper)
+            );
 
             //Default constructor is required by DataGrid to load NewItemPlaceHolder row and this constructor will never be called.
             //Since we've already customized the new row template and hooked over creating new object event.

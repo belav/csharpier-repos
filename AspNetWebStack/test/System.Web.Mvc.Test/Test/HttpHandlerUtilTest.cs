@@ -19,9 +19,12 @@ namespace System.Web.Mvc.Test
 
             HttpContext httpContext = GetHttpContext();
             Mock<IHttpAsyncHandler> mockHttpHandler = new Mock<IHttpAsyncHandler>();
-            mockHttpHandler.Setup(o => o.BeginProcessRequest(httpContext, cb, "extraData")).Returns(expectedResult);
+            mockHttpHandler
+                .Setup(o => o.BeginProcessRequest(httpContext, cb, "extraData"))
+                .Returns(expectedResult);
 
-            IHttpAsyncHandler wrapper = (IHttpAsyncHandler)HttpHandlerUtil.WrapForServerExecute(mockHttpHandler.Object);
+            IHttpAsyncHandler wrapper = (IHttpAsyncHandler)
+                HttpHandlerUtil.WrapForServerExecute(mockHttpHandler.Object);
 
             // Act
             IAsyncResult actualResult = wrapper.BeginProcessRequest(httpContext, cb, "extraData");
@@ -40,7 +43,8 @@ namespace System.Web.Mvc.Test
             Mock<IHttpAsyncHandler> mockHttpHandler = new Mock<IHttpAsyncHandler>();
             mockHttpHandler.Setup(o => o.EndProcessRequest(asyncResult)).Verifiable();
 
-            IHttpAsyncHandler wrapper = (IHttpAsyncHandler)HttpHandlerUtil.WrapForServerExecute(mockHttpHandler.Object);
+            IHttpAsyncHandler wrapper = (IHttpAsyncHandler)
+                HttpHandlerUtil.WrapForServerExecute(mockHttpHandler.Object);
 
             // Act
             wrapper.EndProcessRequest(asyncResult);
@@ -72,14 +76,20 @@ namespace System.Web.Mvc.Test
             // Arrange
             HttpContext httpContext = GetHttpContext();
             Mock<IHttpHandler> mockHttpHandler = new Mock<IHttpHandler>();
-            mockHttpHandler.Setup(o => o.ProcessRequest(httpContext)).Throws(new InvalidOperationException("Some exception."));
+            mockHttpHandler
+                .Setup(o => o.ProcessRequest(httpContext))
+                .Throws(new InvalidOperationException("Some exception."));
 
             IHttpHandler wrapper = HttpHandlerUtil.WrapForServerExecute(mockHttpHandler.Object);
 
             // Act & assert
             Assert.Throws<InvalidOperationException>(
-                delegate { wrapper.ProcessRequest(httpContext); },
-                @"Some exception.");
+                delegate
+                {
+                    wrapper.ProcessRequest(httpContext);
+                },
+                @"Some exception."
+            );
         }
 
         [Fact]
@@ -88,15 +98,21 @@ namespace System.Web.Mvc.Test
             // Arrange
             HttpContext httpContext = GetHttpContext();
             Mock<IHttpHandler> mockHttpHandler = new Mock<IHttpHandler>();
-            mockHttpHandler.Setup(o => o.ProcessRequest(httpContext)).Throws(new HttpException(500, "Some exception."));
+            mockHttpHandler
+                .Setup(o => o.ProcessRequest(httpContext))
+                .Throws(new HttpException(500, "Some exception."));
 
             IHttpHandler wrapper = HttpHandlerUtil.WrapForServerExecute(mockHttpHandler.Object);
 
             // Act & assert
             Assert.ThrowsHttpException(
-                delegate { wrapper.ProcessRequest(httpContext); },
+                delegate
+                {
+                    wrapper.ProcessRequest(httpContext);
+                },
                 @"Some exception.",
-                500);
+                500
+            );
         }
 
         [Fact]
@@ -105,15 +121,21 @@ namespace System.Web.Mvc.Test
             // Arrange
             HttpContext httpContext = GetHttpContext();
             Mock<IHttpHandler> mockHttpHandler = new Mock<IHttpHandler>();
-            mockHttpHandler.Setup(o => o.ProcessRequest(httpContext)).Throws(new HttpException(404, "Some exception."));
+            mockHttpHandler
+                .Setup(o => o.ProcessRequest(httpContext))
+                .Throws(new HttpException(404, "Some exception."));
 
             IHttpHandler wrapper = HttpHandlerUtil.WrapForServerExecute(mockHttpHandler.Object);
 
             // Act & assert
             HttpException outerException = Assert.ThrowsHttpException(
-                delegate { wrapper.ProcessRequest(httpContext); },
+                delegate
+                {
+                    wrapper.ProcessRequest(httpContext);
+                },
                 @"Execution of the child request failed. Please examine the InnerException for more information.",
-                500);
+                500
+            );
 
             HttpException innerException = outerException.InnerException as HttpException;
             Assert.NotNull(innerException);
@@ -149,7 +171,9 @@ namespace System.Web.Mvc.Test
 
         private static HttpContext GetHttpContext()
         {
-            return new HttpContext(new SimpleWorkerRequest("/", "/", "Page", "Query", TextWriter.Null));
+            return new HttpContext(
+                new SimpleWorkerRequest("/", "/", "Page", "Query", TextWriter.Null)
+            );
         }
     }
 }

@@ -9,13 +9,20 @@ namespace System.Reflection.Metadata.ApplyUpdate.Test
     public class ReflectionAddNewMethod
     {
         public string ExistingMethod(string u, double f)
-	{
-            return u + f.ToString();;
+        {
+            return u + f.ToString();
+            ;
         }
 
-	public double AddedNewMethod(char c, float h, string w, CancellationToken ct = default, [CallerMemberName] string callerName = "")
-	{
-	    return ((double)Convert.ToInt32(c)) + h;
-	}
+        public double AddedNewMethod(
+            char c,
+            float h,
+            string w,
+            CancellationToken ct = default,
+            [CallerMemberName] string callerName = ""
+        )
+        {
+            return ((double)Convert.ToInt32(c)) + h;
+        }
     }
 }

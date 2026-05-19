@@ -24,8 +24,10 @@ namespace System.ServiceModel.Channels
 
             if (port < IPEndPoint.MinPort || port > IPEndPoint.MaxPort)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument("port",
-                    SR.GetString(SR.ValueMustBeInRange, IPEndPoint.MinPort, IPEndPoint.MaxPort));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                    "port",
+                    SR.GetString(SR.ValueMustBeInRange, IPEndPoint.MinPort, IPEndPoint.MaxPort)
+                );
             }
 
             this.port = port;
@@ -56,7 +58,10 @@ namespace System.ServiceModel.Channels
                 {
                     lock (ThisLock)
                     {
-                        if ((this.state & InitializationState.Address) != InitializationState.Address)
+                        if (
+                            (this.state & InitializationState.Address)
+                            != InitializationState.Address
+                        )
                         {
                             Initialize(false);
                         }
@@ -127,7 +132,7 @@ namespace System.ServiceModel.Channels
             None = 0,
             Address = 1,
             Port = 2,
-            All = 3
+            All = 3,
         }
     }
 }

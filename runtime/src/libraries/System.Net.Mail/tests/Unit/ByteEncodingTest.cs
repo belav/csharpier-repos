@@ -10,7 +10,9 @@ namespace System.Net.Mime.Tests
     {
         [Theory]
         [InlineData("some test header")]
-        [InlineData("some test header that is really long some test header that is really long some test header that is really long some test header that is really long some test header")]
+        [InlineData(
+            "some test header that is really long some test header that is really long some test header that is really long some test header that is really long some test header"
+        )]
         public void EncodeHeader_WithNoUnicode_ShouldNotEncode(string testHeader)
         {
             string result = MimeBasePart.EncodeHeaderValue(testHeader, Encoding.UTF8, true);
@@ -27,8 +29,14 @@ namespace System.Net.Mime.Tests
 
         [Theory]
         [InlineData("some test h\xE9ader to base64asdf\xE9\xE5", 1)]
-        [InlineData("some test header to base64 \xE5 \xF8\xEE asdf\xE9encode that contains some unicodeasdf\xE9\xE5 and is really really long and stuff ", 3)]
-        public void EncoderAndDecoder_ShouldEncodeAndDecode(string testHeader, int expectedFoldedCount)
+        [InlineData(
+            "some test header to base64 \xE5 \xF8\xEE asdf\xE9encode that contains some unicodeasdf\xE9\xE5 and is really really long and stuff ",
+            3
+        )]
+        public void EncoderAndDecoder_ShouldEncodeAndDecode(
+            string testHeader,
+            int expectedFoldedCount
+        )
         {
             string result = MimeBasePart.EncodeHeaderValue(testHeader, Encoding.UTF8, true);
             Assert.StartsWith("=?utf-8?B?", result, StringComparison.Ordinal);
@@ -46,13 +54,21 @@ namespace System.Net.Mime.Tests
 
         [Theory]
         [InlineData("some test header to base64", 1)]
-        [InlineData("some test header to base64asdf \xE9\xE5 encode that contains some unicode \xE5 \xF8\xEE asdf\xE9\xE5 and is really really long and stuff ", 3)]
+        [InlineData(
+            "some test header to base64asdf \xE9\xE5 encode that contains some unicode \xE5 \xF8\xEE asdf\xE9\xE5 and is really really long and stuff ",
+            3
+        )]
         public void EncoderAndDecoder_WithQEncodedString_AndNoUnicode_AndShortHeader_ShouldEncodeAndDecode(
-            string testHeader, int expectedFoldedCount)
+            string testHeader,
+            int expectedFoldedCount
+        )
         {
             string result = MimeBasePart.EncodeHeaderValue(testHeader, Encoding.UTF8, false);
 
-            string[] foldedHeaders = result.Split(new string[] { "\r\n " }, StringSplitOptions.RemoveEmptyEntries);
+            string[] foldedHeaders = result.Split(
+                new string[] { "\r\n " },
+                StringSplitOptions.RemoveEmptyEntries
+            );
             Assert.Equal(expectedFoldedCount, foldedHeaders.Length);
             foreach (string foldedHeader in foldedHeaders)
             {
@@ -66,15 +82,23 @@ namespace System.Net.Mime.Tests
         public void EncodeHeader_Base64Encoding_ShouldSplitBetweenCodepoints()
         {
             // header parts split by max line length in base64 encoding = 70 with respect to codepoints
-            string headerPart1 = "Emoji subject : \uD83D\uDD50\uD83D\uDD51\uD83D\uDD52\uD83D\uDD53\uD83D\uDD54\uD83D\uDD55";
+            string headerPart1 =
+                "Emoji subject : \uD83D\uDD50\uD83D\uDD51\uD83D\uDD52\uD83D\uDD53\uD83D\uDD54\uD83D\uDD55";
             string headerPart2 = "\uD83D\uDD56\uD83D\uDD57\uD83D\uDD58\uD83D\uDD59\uD83D\uDD5A";
             string longEmojiHeader = headerPart1 + headerPart2;
 
-            string encodedHeader = MimeBasePart.EncodeHeaderValue(longEmojiHeader, Encoding.UTF8, true);
+            string encodedHeader = MimeBasePart.EncodeHeaderValue(
+                longEmojiHeader,
+                Encoding.UTF8,
+                true
+            );
 
             string encodedPart1 = MimeBasePart.EncodeHeaderValue(headerPart1, Encoding.UTF8, true);
             string encodedPart2 = MimeBasePart.EncodeHeaderValue(headerPart2, Encoding.UTF8, true);
-            Assert.Equal("=?utf-8?B?RW1vamkgc3ViamVjdCA6IPCflZDwn5WR8J+VkvCflZPwn5WU8J+VlQ==?=", encodedPart1);
+            Assert.Equal(
+                "=?utf-8?B?RW1vamkgc3ViamVjdCA6IPCflZDwn5WR8J+VkvCflZPwn5WU8J+VlQ==?=",
+                encodedPart1
+            );
             Assert.Equal("=?utf-8?B?8J+VlvCflZfwn5WY8J+VmfCflZo=?=", encodedPart2);
 
             string expectedEncodedHeader = encodedPart1 + "\r\n " + encodedPart2;
@@ -90,16 +114,30 @@ namespace System.Net.Mime.Tests
             string headerPart3 = "\uD83D\uDD57\uD83D\uDD58\uD83D\uDD59\uD83D\uDD5A";
             string longEmojiHeader = headerPart1 + headerPart2 + headerPart3;
 
-            string encodedHeader = MimeBasePart.EncodeHeaderValue(longEmojiHeader, Encoding.UTF8, false);
+            string encodedHeader = MimeBasePart.EncodeHeaderValue(
+                longEmojiHeader,
+                Encoding.UTF8,
+                false
+            );
 
             string encodedPart1 = MimeBasePart.EncodeHeaderValue(headerPart1, Encoding.UTF8, false);
             string encodedPart2 = MimeBasePart.EncodeHeaderValue(headerPart2, Encoding.UTF8, false);
             string encodedPart3 = MimeBasePart.EncodeHeaderValue(headerPart3, Encoding.UTF8, false);
-            Assert.Equal("=?utf-8?Q?Emoji_subject_=3A_=F0=9F=95=90=F0=9F=95=91=F0=9F=95=92?=", encodedPart1);
-            Assert.Equal("=?utf-8?Q?=F0=9F=95=93=F0=9F=95=94=F0=9F=95=95=F0=9F=95=96?=", encodedPart2);
-            Assert.Equal("=?utf-8?Q?=F0=9F=95=97=F0=9F=95=98=F0=9F=95=99=F0=9F=95=9A?=", encodedPart3);
+            Assert.Equal(
+                "=?utf-8?Q?Emoji_subject_=3A_=F0=9F=95=90=F0=9F=95=91=F0=9F=95=92?=",
+                encodedPart1
+            );
+            Assert.Equal(
+                "=?utf-8?Q?=F0=9F=95=93=F0=9F=95=94=F0=9F=95=95=F0=9F=95=96?=",
+                encodedPart2
+            );
+            Assert.Equal(
+                "=?utf-8?Q?=F0=9F=95=97=F0=9F=95=98=F0=9F=95=99=F0=9F=95=9A?=",
+                encodedPart3
+            );
 
-            string expectedEncodedHeader = encodedPart1 + "\r\n " + encodedPart2 + "\r\n " + encodedPart3;
+            string expectedEncodedHeader =
+                encodedPart1 + "\r\n " + encodedPart2 + "\r\n " + encodedPart3;
             Assert.Equal(expectedEncodedHeader, encodedHeader);
         }
 
@@ -110,12 +148,29 @@ namespace System.Net.Mime.Tests
         [InlineData(false, "\uD83D\uDD5011111111111111111111111111111111111111111\r\n1111")]
         [InlineData(false, "\uD83D\uDD50111111111111111111111111111111111111111111\r\n111")]
         [InlineData(false, "\uD83D\uDD501111111111111111111111111111111111111111111\r\n11")]
-        [InlineData(true, "Emoji subject : \uD83D\uDD50\uD83D\uDD51\uD83D\uDD52\uD83D\uDD53\uD83D\uDD54\uD83D\uDD55:11111")]
-        [InlineData(true, "Emoji subject : \uD83D\uDD50\uD83D\uDD51\uD83D\uDD52\uD83D\uDD53\uD83D\uDD54\uD83D\uDD55\r\n11")]
-        public void EncodeString_IsSameAsEncodeBytes_IfOneByteCodepointOnLineWrap(bool useBase64Encoding, string value)
+        [InlineData(
+            true,
+            "Emoji subject : \uD83D\uDD50\uD83D\uDD51\uD83D\uDD52\uD83D\uDD53\uD83D\uDD54\uD83D\uDD55:11111"
+        )]
+        [InlineData(
+            true,
+            "Emoji subject : \uD83D\uDD50\uD83D\uDD51\uD83D\uDD52\uD83D\uDD53\uD83D\uDD54\uD83D\uDD55\r\n11"
+        )]
+        public void EncodeString_IsSameAsEncodeBytes_IfOneByteCodepointOnLineWrap(
+            bool useBase64Encoding,
+            string value
+        )
         {
-            IEncodableStream streamForEncodeString = EncodedStreamFactory.GetEncoderForHeader(Encoding.UTF8, useBase64Encoding, 0);
-            IEncodableStream streamForEncodeBytes = EncodedStreamFactory.GetEncoderForHeader(Encoding.UTF8, useBase64Encoding, 0);
+            IEncodableStream streamForEncodeString = EncodedStreamFactory.GetEncoderForHeader(
+                Encoding.UTF8,
+                useBase64Encoding,
+                0
+            );
+            IEncodableStream streamForEncodeBytes = EncodedStreamFactory.GetEncoderForHeader(
+                Encoding.UTF8,
+                useBase64Encoding,
+                0
+            );
 
             streamForEncodeString.EncodeString(value, Encoding.UTF8);
             string encodeStringResult = streamForEncodeString.GetEncodedString();

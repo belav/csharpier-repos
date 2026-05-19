@@ -11,10 +11,7 @@ namespace System.Web.Mvc.Routing
     internal abstract class PathSubsegment
     {
 #if ROUTE_DEBUGGING
-        public abstract string LiteralText
-        {
-            get;
-        }
+        public abstract string LiteralText { get; }
 #endif
     }
 }

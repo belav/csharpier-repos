@@ -5,18 +5,14 @@ using System.Linq.Expressions;
 
 class Repro
 {
-	int i = 2;
+    int i = 2;
 
-	void UseField ()
-	{
-		TakeExpression (() => Console.Write (i));
-	}
+    void UseField()
+    {
+        TakeExpression(() => Console.Write(i));
+    }
 
-	void TakeExpression (Expression<Action> expr)
-	{
-	}
+    void TakeExpression(Expression<Action> expr) { }
 
-	public static void Main ()
-	{
-	}
+    public static void Main() { }
 }

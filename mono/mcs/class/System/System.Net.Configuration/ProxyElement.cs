@@ -17,10 +17,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -35,105 +35,121 @@
 using System;
 using System.Configuration;
 
-namespace System.Net.Configuration 
+namespace System.Net.Configuration
 {
-	public sealed class ProxyElement : ConfigurationElement
-	{
-		#region Fields
+    public sealed class ProxyElement : ConfigurationElement
+    {
+        #region Fields
 
-		static ConfigurationPropertyCollection properties;
-		static ConfigurationProperty autoDetectProp;
-		static ConfigurationProperty bypassOnLocalProp;
-		static ConfigurationProperty proxyAddressProp;
-		static ConfigurationProperty scriptLocationProp;
-		static ConfigurationProperty useSystemDefaultProp;
+        static ConfigurationPropertyCollection properties;
+        static ConfigurationProperty autoDetectProp;
+        static ConfigurationProperty bypassOnLocalProp;
+        static ConfigurationProperty proxyAddressProp;
+        static ConfigurationProperty scriptLocationProp;
+        static ConfigurationProperty useSystemDefaultProp;
 
-		#endregion // Fields
+        #endregion // Fields
 
-		#region Constructors
+        #region Constructors
 
-		static ProxyElement ()
-		{
-			autoDetectProp = new ConfigurationProperty ("autoDetect", typeof (AutoDetectValues), AutoDetectValues.Unspecified);
-			bypassOnLocalProp = new ConfigurationProperty ("bypassonlocal", typeof (BypassOnLocalValues), BypassOnLocalValues.Unspecified);
-			proxyAddressProp = new ConfigurationProperty ("proxyaddress", typeof (Uri), null);
-			scriptLocationProp = new ConfigurationProperty ("scriptLocation", typeof (Uri), null);
-			useSystemDefaultProp = new ConfigurationProperty ("usesystemdefault", typeof (UseSystemDefaultValues), UseSystemDefaultValues.Unspecified);
+        static ProxyElement()
+        {
+            autoDetectProp = new ConfigurationProperty(
+                "autoDetect",
+                typeof(AutoDetectValues),
+                AutoDetectValues.Unspecified
+            );
+            bypassOnLocalProp = new ConfigurationProperty(
+                "bypassonlocal",
+                typeof(BypassOnLocalValues),
+                BypassOnLocalValues.Unspecified
+            );
+            proxyAddressProp = new ConfigurationProperty("proxyaddress", typeof(Uri), null);
+            scriptLocationProp = new ConfigurationProperty("scriptLocation", typeof(Uri), null);
+            useSystemDefaultProp = new ConfigurationProperty(
+                "usesystemdefault",
+                typeof(UseSystemDefaultValues),
+                UseSystemDefaultValues.Unspecified
+            );
 
-			properties = new ConfigurationPropertyCollection ();
-								    
-			properties.Add (autoDetectProp);
-			properties.Add (bypassOnLocalProp);
-			properties.Add (proxyAddressProp);
-			properties.Add (scriptLocationProp);
-			properties.Add (useSystemDefaultProp);
-		}
+            properties = new ConfigurationPropertyCollection();
 
-		public ProxyElement ()
-		{
-		}
+            properties.Add(autoDetectProp);
+            properties.Add(bypassOnLocalProp);
+            properties.Add(proxyAddressProp);
+            properties.Add(scriptLocationProp);
+            properties.Add(useSystemDefaultProp);
+        }
 
-		#endregion // Constructors
+        public ProxyElement() { }
 
-		#region Properties
+        #endregion // Constructors
 
-		[ConfigurationProperty ("autoDetect", DefaultValue = "Unspecified")]
-		public AutoDetectValues AutoDetect {
-			get { return (AutoDetectValues) base [autoDetectProp]; }
-			set { base [autoDetectProp] = value; }
-		}
+        #region Properties
 
-		[ConfigurationProperty ("bypassonlocal", DefaultValue = "Unspecified")]
-		public BypassOnLocalValues BypassOnLocal {
-			get { return (BypassOnLocalValues) base [bypassOnLocalProp]; }
-			set { base [bypassOnLocalProp] = value; }
-		}
+        [ConfigurationProperty("autoDetect", DefaultValue = "Unspecified")]
+        public AutoDetectValues AutoDetect
+        {
+            get { return (AutoDetectValues)base[autoDetectProp]; }
+            set { base[autoDetectProp] = value; }
+        }
 
-		[ConfigurationProperty ("proxyaddress")]
-		public Uri ProxyAddress {
-			get { return (Uri) base [proxyAddressProp]; }
-			set { base [proxyAddressProp] = value; }
-		}
+        [ConfigurationProperty("bypassonlocal", DefaultValue = "Unspecified")]
+        public BypassOnLocalValues BypassOnLocal
+        {
+            get { return (BypassOnLocalValues)base[bypassOnLocalProp]; }
+            set { base[bypassOnLocalProp] = value; }
+        }
 
-		[ConfigurationProperty ("scriptLocation")]
-		public Uri ScriptLocation {
-			get { return (Uri) base [scriptLocationProp]; }
-			set { base [scriptLocationProp] = value; }
-		}
+        [ConfigurationProperty("proxyaddress")]
+        public Uri ProxyAddress
+        {
+            get { return (Uri)base[proxyAddressProp]; }
+            set { base[proxyAddressProp] = value; }
+        }
 
-		[ConfigurationProperty ("usesystemdefault", DefaultValue = "Unspecified")]
-		public UseSystemDefaultValues UseSystemDefault {
-			get { return (UseSystemDefaultValues) base [useSystemDefaultProp]; }
-			set { base [useSystemDefaultProp] = value; }
-		}
+        [ConfigurationProperty("scriptLocation")]
+        public Uri ScriptLocation
+        {
+            get { return (Uri)base[scriptLocationProp]; }
+            set { base[scriptLocationProp] = value; }
+        }
 
-		protected override ConfigurationPropertyCollection Properties {
-			get { return properties; }
-		}
+        [ConfigurationProperty("usesystemdefault", DefaultValue = "Unspecified")]
+        public UseSystemDefaultValues UseSystemDefault
+        {
+            get { return (UseSystemDefaultValues)base[useSystemDefaultProp]; }
+            set { base[useSystemDefaultProp] = value; }
+        }
 
-		#endregion // Properties
+        protected override ConfigurationPropertyCollection Properties
+        {
+            get { return properties; }
+        }
 
-		public enum BypassOnLocalValues
-		{
-			Unspecified = -1,
-			True = 1,
-			False = 0
-		}
+        #endregion // Properties
 
-		public enum UseSystemDefaultValues
-		{
-			Unspecified = -1,
-			True = 1,
-			False = 0
-		}
+        public enum BypassOnLocalValues
+        {
+            Unspecified = -1,
+            True = 1,
+            False = 0,
+        }
 
-		public enum AutoDetectValues
-		{
-			Unspecified = -1,
-			True = 1,
-			False = 0
-		}
-	}
+        public enum UseSystemDefaultValues
+        {
+            Unspecified = -1,
+            True = 1,
+            False = 0,
+        }
+
+        public enum AutoDetectValues
+        {
+            Unspecified = -1,
+            True = 1,
+            False = 0,
+        }
+    }
 }
 
 #endif

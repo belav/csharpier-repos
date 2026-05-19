@@ -67,16 +67,40 @@ namespace System.Globalization
         /// <summary>Indicates that the <see cref="AllowLeadingWhite"/>, <see cref="AllowTrailingWhite"/>, and <see cref="AllowBinarySpecifier"/> styles are used. This is a composite number style.</summary>
         BinaryNumber = AllowLeadingWhite | AllowTrailingWhite | AllowBinarySpecifier,
 
-        Number = AllowLeadingWhite | AllowTrailingWhite | AllowLeadingSign | AllowTrailingSign |
-                   AllowDecimalPoint | AllowThousands,
+        Number =
+            AllowLeadingWhite
+            | AllowTrailingWhite
+            | AllowLeadingSign
+            | AllowTrailingSign
+            | AllowDecimalPoint
+            | AllowThousands,
 
-        Float = AllowLeadingWhite | AllowTrailingWhite | AllowLeadingSign |
-                   AllowDecimalPoint | AllowExponent,
+        Float =
+            AllowLeadingWhite
+            | AllowTrailingWhite
+            | AllowLeadingSign
+            | AllowDecimalPoint
+            | AllowExponent,
 
-        Currency = AllowLeadingWhite | AllowTrailingWhite | AllowLeadingSign | AllowTrailingSign |
-                   AllowParentheses | AllowDecimalPoint | AllowThousands | AllowCurrencySymbol,
+        Currency =
+            AllowLeadingWhite
+            | AllowTrailingWhite
+            | AllowLeadingSign
+            | AllowTrailingSign
+            | AllowParentheses
+            | AllowDecimalPoint
+            | AllowThousands
+            | AllowCurrencySymbol,
 
-        Any = AllowLeadingWhite | AllowTrailingWhite | AllowLeadingSign | AllowTrailingSign |
-                   AllowParentheses | AllowDecimalPoint | AllowThousands | AllowCurrencySymbol | AllowExponent,
+        Any =
+            AllowLeadingWhite
+            | AllowTrailingWhite
+            | AllowLeadingSign
+            | AllowTrailingSign
+            | AllowParentheses
+            | AllowDecimalPoint
+            | AllowThousands
+            | AllowCurrencySymbol
+            | AllowExponent,
     }
 }

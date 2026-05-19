@@ -15,9 +15,7 @@ public class AlterOperationBuilder<TOperation> : OperationBuilder<TOperation>
     /// </summary>
     /// <param name="operation">The operation.</param>
     public AlterOperationBuilder(TOperation operation)
-        : base(operation)
-    {
-    }
+        : base(operation) { }
 
     /// <summary>
     ///     Annotates the <see cref="MigrationOperation" /> with the given name/value pair.
@@ -25,10 +23,8 @@ public class AlterOperationBuilder<TOperation> : OperationBuilder<TOperation>
     /// <param name="name">The annotation name.</param>
     /// <param name="value">The annotation value.</param>
     /// <returns>The same builder so that multiple calls can be chained.</returns>
-    public new virtual AlterOperationBuilder<TOperation> Annotation(
-        string name,
-        object? value)
-        => (AlterOperationBuilder<TOperation>)base.Annotation(name, value);
+    public new virtual AlterOperationBuilder<TOperation> Annotation(string name, object? value) =>
+        (AlterOperationBuilder<TOperation>)base.Annotation(name, value);
 
     /// <summary>
     ///     Annotates the <see cref="MigrationOperation" /> with the given name/value pair as
@@ -37,9 +33,7 @@ public class AlterOperationBuilder<TOperation> : OperationBuilder<TOperation>
     /// <param name="name">The annotation name.</param>
     /// <param name="value">The annotation value.</param>
     /// <returns>The same builder so that multiple calls can be chained.</returns>
-    public virtual AlterOperationBuilder<TOperation> OldAnnotation(
-        string name,
-        object? value)
+    public virtual AlterOperationBuilder<TOperation> OldAnnotation(string name, object? value)
     {
         Check.NotEmpty(name, nameof(name));
 

@@ -46,11 +46,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion
         [Fact]
         public void FindCompletionProvider()
         {
-            using var workspace = new TestWorkspace(composition: FeaturesTestCompositions.Features.AddParts(typeof(ThirdPartyCompletionProvider)));
+            using var workspace = new TestWorkspace(
+                composition: FeaturesTestCompositions.Features.AddParts(
+                    typeof(ThirdPartyCompletionProvider)
+                )
+            );
             var text = SourceText.From("class C { }");
 
-            var document = workspace.CurrentSolution
-                .AddProject("TestProject", "Assembly", LanguageNames.CSharp)
+            var document = workspace
+                .CurrentSolution.AddProject("TestProject", "Assembly", LanguageNames.CSharp)
                 .AddDocument("TestDocument.cs", text);
 
             var service = CompletionService.GetService(document);
@@ -71,16 +75,24 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion
         {
             [ImportingConstructor]
             [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-            public ThirdPartyCompletionProvider()
-            {
-            }
+            public ThirdPartyCompletionProvider() { }
 
-            public override Task ProvideCompletionsAsync(CompletionContext context)
-                => Task.CompletedTask;
+            public override Task ProvideCompletionsAsync(CompletionContext context) =>
+                Task.CompletedTask;
 
-            public override bool ShouldTriggerCompletion(SourceText text, int caretPosition, CompletionTrigger trigger, OptionSet options)
+            public override bool ShouldTriggerCompletion(
+                SourceText text,
+                int caretPosition,
+                CompletionTrigger trigger,
+                OptionSet options
+            )
             {
-                Assert.Equal(1, options.GetOption(new OptionKey(ThirdPartyOption.Instance, LanguageNames.CSharp)));
+                Assert.Equal(
+                    1,
+                    options.GetOption(
+                        new OptionKey(ThirdPartyOption.Instance, LanguageNames.CSharp)
+                    )
+                );
                 return true;
             }
         }
@@ -94,7 +106,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion
             public Type Type => typeof(int);
             public object DefaultValue => 0;
             public bool IsPerLanguage => true;
-            public ImmutableArray<OptionStorageLocation> StorageLocations => ImmutableArray<OptionStorageLocation>.Empty;
+            public ImmutableArray<OptionStorageLocation> StorageLocations =>
+                ImmutableArray<OptionStorageLocation>.Empty;
         }
 
         /// <summary>
@@ -103,20 +116,34 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion
         [Fact]
         public async Task PassThroughOptions1()
         {
-            using var workspace = new TestWorkspace(composition: FeaturesTestCompositions.Features.AddParts(typeof(ThirdPartyCompletionProvider)));
+            using var workspace = new TestWorkspace(
+                composition: FeaturesTestCompositions.Features.AddParts(
+                    typeof(ThirdPartyCompletionProvider)
+                )
+            );
 
             var text = SourceText.From("class C { }");
 
-            var document = workspace.CurrentSolution
-                .AddProject("TestProject", "Assembly", LanguageNames.CSharp)
+            var document = workspace
+                .CurrentSolution.AddProject("TestProject", "Assembly", LanguageNames.CSharp)
                 .AddDocument("TestDocument.cs", text);
 
             var service = CompletionService.GetService(document);
-            var options = new TestOptionSet(ImmutableDictionary<OptionKey, object>.Empty.Add(new OptionKey(ThirdPartyOption.Instance, LanguageNames.CSharp), 1));
+            var options = new TestOptionSet(
+                ImmutableDictionary<OptionKey, object>.Empty.Add(
+                    new OptionKey(ThirdPartyOption.Instance, LanguageNames.CSharp),
+                    1
+                )
+            );
             service.ShouldTriggerCompletion(text, 1, CompletionTrigger.Invoke, options: options);
 
 #pragma warning disable RS0030 // Do not used banned APIs
-            await service.GetCompletionsAsync(document, 1, CompletionTrigger.Invoke, options: options);
+            await service.GetCompletionsAsync(
+                document,
+                1,
+                CompletionTrigger.Invoke,
+                options: options
+            );
 #pragma warning restore
         }
 
@@ -126,15 +153,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion
         [Fact]
         public async Task PassThroughOptions2()
         {
-            using var workspace = new TestWorkspace(composition: EditorTestCompositions.EditorFeatures.AddParts(typeof(ThirdPartyCompletionProvider)));
+            using var workspace = new TestWorkspace(
+                composition: EditorTestCompositions.EditorFeatures.AddParts(
+                    typeof(ThirdPartyCompletionProvider)
+                )
+            );
 
             var testDocument = new TestHostDocument("class C {}");
             var project = new TestHostProject(workspace, testDocument, name: "project1");
             workspace.AddTestProject(project);
             workspace.OpenDocument(testDocument.Id);
 
-            Assert.True(workspace.TryApplyChanges(workspace.CurrentSolution.WithOptions(
-                workspace.CurrentSolution.Options.WithChangedOption(new OptionKey(ThirdPartyOption.Instance, LanguageNames.CSharp), 1))));
+            Assert.True(
+                workspace.TryApplyChanges(
+                    workspace.CurrentSolution.WithOptions(
+                        workspace.CurrentSolution.Options.WithChangedOption(
+                            new OptionKey(ThirdPartyOption.Instance, LanguageNames.CSharp),
+                            1
+                        )
+                    )
+                )
+            );
 
             var document = workspace.CurrentSolution.GetDocument(testDocument.Id);
             var text = await document.GetTextAsync();
@@ -164,7 +203,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion
                     }
                 }
                 """;
-            MarkupTestFile.GetPosition(sourceMarkup.NormalizeLineEndings(), out var source, out int? position);
+            MarkupTestFile.GetPosition(
+                sourceMarkup.NormalizeLineEndings(),
+                out var source,
+                out int? position
+            );
 
             var workspace = new AdhocWorkspace();
 
@@ -175,12 +218,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion
             var completionService = document.GetLanguageService<CompletionService>();
 
             var options = CompletionOptions.Default with { PerformSort = performSort };
-            var completionList = await completionService.GetCompletionsAsync(document, position.Value, options, OptionSet.Empty);
+            var completionList = await completionService.GetCompletionsAsync(
+                document,
+                position.Value,
+                options,
+                OptionSet.Empty
+            );
 
             var completionListManuallySorted = completionList.ItemsList.ToList();
             completionListManuallySorted.Sort();
 
-            Assert.True(performSort == completionList.ItemsList.SequenceEqual(completionListManuallySorted));
+            Assert.True(
+                performSort == completionList.ItemsList.SequenceEqual(completionListManuallySorted)
+            );
         }
 
         [Theory, CombinatorialData]
@@ -197,18 +247,32 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion
                     }
                 }
                 """;
-            MarkupTestFile.GetPosition(sourceMarkup.NormalizeLineEndings(), out var source, out int? position);
+            MarkupTestFile.GetPosition(
+                sourceMarkup.NormalizeLineEndings(),
+                out var source,
+                out int? position
+            );
 
             var generatorRanCount = 0;
-            var generator = new CallbackGenerator(onInit: _ => { }, onExecute: _ => Interlocked.Increment(ref generatorRanCount));
+            var generator = new CallbackGenerator(
+                onInit: _ => { },
+                onExecute: _ => Interlocked.Increment(ref generatorRanCount)
+            );
 
             using var workspace = WorkspaceTestUtilities.CreateWorkspaceWithPartialSemantics();
             var analyzerReference = new TestGeneratorReference(generator);
-            var project = SolutionUtilities.AddEmptyProject(workspace.CurrentSolution)
+            var project = SolutionUtilities
+                .AddEmptyProject(workspace.CurrentSolution)
                 .AddAnalyzerReference(analyzerReference)
-                .AddDocument("Document1.cs", sourceMarkup, filePath: "Document1.cs").Project;
+                .AddDocument("Document1.cs", sourceMarkup, filePath: "Document1.cs")
+                .Project;
 
-            Assert.True(workspace.SetCurrentSolution(_ => project.Solution, WorkspaceChangeKind.SolutionChanged));
+            Assert.True(
+                workspace.SetCurrentSolution(
+                    _ => project.Solution,
+                    WorkspaceChangeKind.SolutionChanged
+                )
+            );
 
             var document = workspace.CurrentSolution.Projects.Single().Documents.Single();
             var completionService = document.GetLanguageService<CompletionService>();
@@ -218,19 +282,29 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion
             if (forkBeforeFreeze)
             {
                 // Forking before freezing means we'll have to do extra work to produce the final compilation,
-                // but we should still not be running generators. 
+                // but we should still not be running generators.
                 document = document.WithText(SourceText.From(sourceMarkup.Replace("C1", "C2")));
             }
 
             // We want to make sure import completion providers are also participating.
-            var options = CompletionOptions.Default with { ShowItemsFromUnimportedNamespaces = true };
-            var completionList = await completionService.GetCompletionsAsync(document, position.Value, options, OptionSet.Empty);
+            var options = CompletionOptions.Default with
+            {
+                ShowItemsFromUnimportedNamespaces = true,
+            };
+            var completionList = await completionService.GetCompletionsAsync(
+                document,
+                position.Value,
+                options,
+                OptionSet.Empty
+            );
 
             // We expect completion to run on frozen partial semantic, which won't run source generator.
             Assert.Equal(0, generatorRanCount);
 
             var expectedItem = forkBeforeFreeze ? "C2" : "C1";
-            Assert.True(completionList.ItemsList.Select(item => item.DisplayText).Contains(expectedItem));
+            Assert.True(
+                completionList.ItemsList.Select(item => item.DisplayText).Contains(expectedItem)
+            );
         }
     }
 }

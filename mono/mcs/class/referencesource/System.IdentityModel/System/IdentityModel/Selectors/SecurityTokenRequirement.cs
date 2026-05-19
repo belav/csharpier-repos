@@ -4,15 +4,16 @@
 
 namespace System.IdentityModel.Selectors
 {
-    using System.Globalization;
-    using System.Text;
     using System.Collections;
     using System.Collections.Generic;
+    using System.Globalization;
     using System.IdentityModel.Tokens;
+    using System.Text;
 
     public class SecurityTokenRequirement
     {
-        const string Namespace = "http://schemas.microsoft.com/ws/2006/05/identitymodel/securitytokenrequirement";
+        const string Namespace =
+            "http://schemas.microsoft.com/ws/2006/05/identitymodel/securitytokenrequirement";
         const string tokenTypeProperty = Namespace + "/TokenType";
         const string keyUsageProperty = Namespace + "/KeyUsage";
         const string keyTypeProperty = Namespace + "/KeyType";
@@ -20,7 +21,7 @@ namespace System.IdentityModel.Selectors
         const string requireCryptographicTokenProperty = Namespace + "/RequireCryptographicToken";
         const string peerAuthenticationMode = Namespace + "/PeerAuthenticationMode";
         const string isOptionalTokenProperty = Namespace + "/IsOptionalTokenProperty";
-        
+
         const bool defaultRequireCryptographicToken = false;
         const SecurityKeyUsage defaultKeyUsage = SecurityKeyUsage.Signature;
         const SecurityKeyType defaultKeyType = SecurityKeyType.SymmetricKey;
@@ -35,14 +36,35 @@ namespace System.IdentityModel.Selectors
             this.Initialize();
         }
 
-        static public string TokenTypeProperty { get { return tokenTypeProperty; } }
-        static public string KeyUsageProperty { get { return keyUsageProperty; } }
-        static public string KeyTypeProperty { get { return keyTypeProperty; } }
-        static public string KeySizeProperty { get { return keySizeProperty; } }
-        static public string RequireCryptographicTokenProperty { get { return requireCryptographicTokenProperty; } }
-        static public string PeerAuthenticationMode { get { return peerAuthenticationMode; } }
-        static public string IsOptionalTokenProperty { get { return isOptionalTokenProperty; } }
-        
+        public static string TokenTypeProperty
+        {
+            get { return tokenTypeProperty; }
+        }
+        public static string KeyUsageProperty
+        {
+            get { return keyUsageProperty; }
+        }
+        public static string KeyTypeProperty
+        {
+            get { return keyTypeProperty; }
+        }
+        public static string KeySizeProperty
+        {
+            get { return keySizeProperty; }
+        }
+        public static string RequireCryptographicTokenProperty
+        {
+            get { return requireCryptographicTokenProperty; }
+        }
+        public static string PeerAuthenticationMode
+        {
+            get { return peerAuthenticationMode; }
+        }
+        public static string IsOptionalTokenProperty
+        {
+            get { return isOptionalTokenProperty; }
+        }
+
         public string TokenType
         {
             get
@@ -50,10 +72,7 @@ namespace System.IdentityModel.Selectors
                 string result;
                 return (this.TryGetProperty<string>(TokenTypeProperty, out result)) ? result : null;
             }
-            set
-            {
-                this.properties[TokenTypeProperty] = value;
-            }
+            set { this.properties[TokenTypeProperty] = value; }
         }
 
         internal bool IsOptionalToken
@@ -61,12 +80,11 @@ namespace System.IdentityModel.Selectors
             get
             {
                 bool result;
-                return (this.TryGetProperty<bool>(IsOptionalTokenProperty, out result)) ? result : defaultIsOptionalToken;
+                return (this.TryGetProperty<bool>(IsOptionalTokenProperty, out result))
+                    ? result
+                    : defaultIsOptionalToken;
             }
-            set
-            {
-                this.properties[IsOptionalTokenProperty] = value;
-            }
+            set { this.properties[IsOptionalTokenProperty] = value; }
         }
 
         public bool RequireCryptographicToken
@@ -74,12 +92,11 @@ namespace System.IdentityModel.Selectors
             get
             {
                 bool result;
-                return (this.TryGetProperty<bool>(RequireCryptographicTokenProperty, out result)) ? result : defaultRequireCryptographicToken;
+                return (this.TryGetProperty<bool>(RequireCryptographicTokenProperty, out result))
+                    ? result
+                    : defaultRequireCryptographicToken;
             }
-            set
-            {
-                this.properties[RequireCryptographicTokenProperty] = (object)value;
-            }
+            set { this.properties[RequireCryptographicTokenProperty] = (object)value; }
         }
 
         public SecurityKeyUsage KeyUsage
@@ -87,7 +104,9 @@ namespace System.IdentityModel.Selectors
             get
             {
                 SecurityKeyUsage result;
-                return (this.TryGetProperty<SecurityKeyUsage>(KeyUsageProperty, out result)) ? result : defaultKeyUsage;
+                return (this.TryGetProperty<SecurityKeyUsage>(KeyUsageProperty, out result))
+                    ? result
+                    : defaultKeyUsage;
             }
             set
             {
@@ -101,7 +120,9 @@ namespace System.IdentityModel.Selectors
             get
             {
                 SecurityKeyType result;
-                return (this.TryGetProperty<SecurityKeyType>(KeyTypeProperty, out result)) ? result : defaultKeyType;
+                return (this.TryGetProperty<SecurityKeyType>(KeyTypeProperty, out result))
+                    ? result
+                    : defaultKeyType;
             }
             set
             {
@@ -115,13 +136,20 @@ namespace System.IdentityModel.Selectors
             get
             {
                 int result;
-                return (this.TryGetProperty<int>(KeySizeProperty, out result)) ? result : defaultKeySize;
+                return (this.TryGetProperty<int>(KeySizeProperty, out result))
+                    ? result
+                    : defaultKeySize;
             }
             set
             {
                 if (value < 0)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("value", SR.GetString(SR.ValueMustBeNonNegative)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentOutOfRangeException(
+                            "value",
+                            SR.GetString(SR.ValueMustBeNonNegative)
+                        )
+                    );
                 }
                 this.Properties[KeySizeProperty] = value;
             }
@@ -129,10 +157,7 @@ namespace System.IdentityModel.Selectors
 
         public IDictionary<string, object> Properties
         {
-            get
-            {
-                return this.properties;
-            }
+            get { return this.properties; }
         }
 
         void Initialize()
@@ -149,7 +174,14 @@ namespace System.IdentityModel.Selectors
             TValue result;
             if (!TryGetProperty<TValue>(propertyName, out result))
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentException(SR.GetString(SR.SecurityTokenRequirementDoesNotContainProperty, propertyName)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentException(
+                        SR.GetString(
+                            SR.SecurityTokenRequirementDoesNotContainProperty,
+                            propertyName
+                        )
+                    )
+                );
             }
             return result;
         }
@@ -162,9 +194,21 @@ namespace System.IdentityModel.Selectors
                 result = default(TValue);
                 return false;
             }
-            if (dictionaryValue != null && !typeof(TValue).IsAssignableFrom(dictionaryValue.GetType()))
+            if (
+                dictionaryValue != null
+                && !typeof(TValue).IsAssignableFrom(dictionaryValue.GetType())
+            )
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentException(SR.GetString(SR.SecurityTokenRequirementHasInvalidTypeForProperty, propertyName, dictionaryValue.GetType(), typeof(TValue))));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentException(
+                        SR.GetString(
+                            SR.SecurityTokenRequirementHasInvalidTypeForProperty,
+                            propertyName,
+                            dictionaryValue.GetType(),
+                            typeof(TValue)
+                        )
+                    )
+                );
             }
             result = (TValue)dictionaryValue;
             return true;

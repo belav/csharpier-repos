@@ -19,7 +19,8 @@ public class SqlServerModificationCommandBatchFactoryTest
 
         var typeMapper = new SqlServerTypeMappingSource(
             TestServiceFactory.Instance.Create<TypeMappingSourceDependencies>(),
-            TestServiceFactory.Instance.Create<RelationalTypeMappingSourceDependencies>());
+            TestServiceFactory.Instance.Create<RelationalTypeMappingSourceDependencies>()
+        );
 
         var logger = new FakeRelationalCommandDiagnosticsLogger();
 
@@ -28,18 +29,24 @@ public class SqlServerModificationCommandBatchFactoryTest
                 new RelationalCommandBuilderFactory(
                     new RelationalCommandBuilderDependencies(
                         typeMapper,
-                        new SqlServerExceptionDetector())),
-                new SqlServerSqlGenerationHelper(
-                    new RelationalSqlGenerationHelperDependencies()),
+                        new SqlServerExceptionDetector()
+                    )
+                ),
+                new SqlServerSqlGenerationHelper(new RelationalSqlGenerationHelperDependencies()),
                 new SqlServerUpdateSqlGenerator(
                     new UpdateSqlGeneratorDependencies(
                         new SqlServerSqlGenerationHelper(
-                            new RelationalSqlGenerationHelperDependencies()),
-                        typeMapper)),
+                            new RelationalSqlGenerationHelperDependencies()
+                        ),
+                        typeMapper
+                    )
+                ),
                 new CurrentDbContext(new FakeDbContext()),
                 logger,
-                new FakeDiagnosticsLogger<DbLoggerCategory.Update>()),
-            optionsBuilder.Options);
+                new FakeDiagnosticsLogger<DbLoggerCategory.Update>()
+            ),
+            optionsBuilder.Options
+        );
 
         var batch = factory.Create();
 
@@ -55,7 +62,8 @@ public class SqlServerModificationCommandBatchFactoryTest
 
         var typeMapper = new SqlServerTypeMappingSource(
             TestServiceFactory.Instance.Create<TypeMappingSourceDependencies>(),
-            TestServiceFactory.Instance.Create<RelationalTypeMappingSourceDependencies>());
+            TestServiceFactory.Instance.Create<RelationalTypeMappingSourceDependencies>()
+        );
 
         var logger = new FakeRelationalCommandDiagnosticsLogger();
 
@@ -64,18 +72,24 @@ public class SqlServerModificationCommandBatchFactoryTest
                 new RelationalCommandBuilderFactory(
                     new RelationalCommandBuilderDependencies(
                         typeMapper,
-                        new SqlServerExceptionDetector())),
-                new SqlServerSqlGenerationHelper(
-                    new RelationalSqlGenerationHelperDependencies()),
+                        new SqlServerExceptionDetector()
+                    )
+                ),
+                new SqlServerSqlGenerationHelper(new RelationalSqlGenerationHelperDependencies()),
                 new SqlServerUpdateSqlGenerator(
                     new UpdateSqlGeneratorDependencies(
                         new SqlServerSqlGenerationHelper(
-                            new RelationalSqlGenerationHelperDependencies()),
-                        typeMapper)),
+                            new RelationalSqlGenerationHelperDependencies()
+                        ),
+                        typeMapper
+                    )
+                ),
                 new CurrentDbContext(new FakeDbContext()),
                 logger,
-                new FakeDiagnosticsLogger<DbLoggerCategory.Update>()),
-            optionsBuilder.Options);
+                new FakeDiagnosticsLogger<DbLoggerCategory.Update>()
+            ),
+            optionsBuilder.Options
+        );
 
         var batch = factory.Create();
 
@@ -83,18 +97,18 @@ public class SqlServerModificationCommandBatchFactoryTest
         Assert.True(batch.TryAddCommand(CreateModificationCommand("T1", null, false)));
     }
 
-    private class FakeDbContext : DbContext
-    {
-    }
+    private class FakeDbContext : DbContext { }
 
     private static INonTrackedModificationCommand CreateModificationCommand(
         string name,
         string schema,
-        bool sensitiveLoggingEnabled)
+        bool sensitiveLoggingEnabled
+    )
     {
-        var modificationCommand = new ModificationCommandFactory().CreateNonTrackedModificationCommand(
-            new NonTrackedModificationCommandParameters(
-                name, schema, sensitiveLoggingEnabled));
+        var modificationCommand =
+            new ModificationCommandFactory().CreateNonTrackedModificationCommand(
+                new NonTrackedModificationCommandParameters(name, schema, sensitiveLoggingEnabled)
+            );
 
         return modificationCommand;
     }

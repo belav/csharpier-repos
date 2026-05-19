@@ -21,13 +21,19 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics
             private readonly TestDiagnosticAnalyzerDriver _testDriver;
             private readonly ImmutableHashSet<string> _diagnosticIds;
 
-            public FixAllDiagnosticProvider(TestDiagnosticAnalyzerDriver testDriver, ImmutableHashSet<string> diagnosticIds)
+            public FixAllDiagnosticProvider(
+                TestDiagnosticAnalyzerDriver testDriver,
+                ImmutableHashSet<string> diagnosticIds
+            )
             {
                 _testDriver = testDriver;
                 _diagnosticIds = diagnosticIds;
             }
 
-            public override async Task<IEnumerable<Diagnostic>> GetDocumentDiagnosticsAsync(Document document, CancellationToken cancellationToken)
+            public override async Task<IEnumerable<Diagnostic>> GetDocumentDiagnosticsAsync(
+                Document document,
+                CancellationToken cancellationToken
+            )
             {
                 var root = await document.GetSyntaxRootAsync(cancellationToken);
                 var diags = await _testDriver.GetDocumentDiagnosticsAsync(document, root.FullSpan);
@@ -35,14 +41,20 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics
                 return diags;
             }
 
-            public override Task<IEnumerable<Diagnostic>> GetAllDiagnosticsAsync(Project project, CancellationToken cancellationToken)
-                => GetProjectDiagnosticsAsync(project, true);
+            public override Task<IEnumerable<Diagnostic>> GetAllDiagnosticsAsync(
+                Project project,
+                CancellationToken cancellationToken
+            ) => GetProjectDiagnosticsAsync(project, true);
 
-            public override Task<IEnumerable<Diagnostic>> GetProjectDiagnosticsAsync(Project project, CancellationToken cancellationToken)
-                => GetProjectDiagnosticsAsync(project, false);
+            public override Task<IEnumerable<Diagnostic>> GetProjectDiagnosticsAsync(
+                Project project,
+                CancellationToken cancellationToken
+            ) => GetProjectDiagnosticsAsync(project, false);
 
             private async Task<IEnumerable<Diagnostic>> GetProjectDiagnosticsAsync(
-                Project project, bool includeAllDocumentDiagnostics)
+                Project project,
+                bool includeAllDocumentDiagnostics
+            )
             {
                 var diags = includeAllDocumentDiagnostics
                     ? await _testDriver.GetAllDiagnosticsAsync(project)

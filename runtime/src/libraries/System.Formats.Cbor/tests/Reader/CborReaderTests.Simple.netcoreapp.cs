@@ -41,7 +41,9 @@ namespace System.Formats.Cbor.Tests
         [InlineData("c202")] // tagged value
         [InlineData("fa47c35000")] // single-precision float encoding
         [InlineData("fb7ff0000000000000")] // double-precision float encoding
-        public static void ReadHalf_InvalidTypes_ShouldThrowInvalidOperationException(string hexEncoding)
+        public static void ReadHalf_InvalidTypes_ShouldThrowInvalidOperationException(
+            string hexEncoding
+        )
         {
             byte[] encoding = hexEncoding.HexToByteArray();
             var reader = new CborReader(encoding);
@@ -51,7 +53,6 @@ namespace System.Formats.Cbor.Tests
 
         public static class AssertHelpers
         {
-
             // temporary workaround for xunit's lack of support for Half equality assertions
             public static void Equal(Half expected, Half actual)
             {

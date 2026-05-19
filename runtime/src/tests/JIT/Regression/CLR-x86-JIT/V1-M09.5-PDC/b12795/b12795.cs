@@ -2,6 +2,7 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using Xunit;
+
 namespace DefaultNamespace
 {
     using System;
@@ -20,12 +21,8 @@ namespace DefaultNamespace
 
         internal static void Mainy()
         {
-            try
-            {
-            }
-            catch (Exception)
-            {
-            }
+            try { }
+            catch (Exception) { }
 
             STRMAP Strmap;
             Strmap = new STRMAP();
@@ -42,6 +39,7 @@ namespace DefaultNamespace
     class STRMAP
     {
         internal static int icFinal = 0;
+
         ~STRMAP()
         {
             STRMAP.icFinal++;

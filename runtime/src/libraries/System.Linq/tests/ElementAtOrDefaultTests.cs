@@ -11,22 +11,45 @@ namespace System.Linq.Tests
         [Fact]
         public void SameResultsRepeatCallsIntQuery()
         {
-            var q = Repeat(_ => from x in new[] { 9999, 0, 888, -1, 66, -777, 1, 2, -12345 }
-                                where x > int.MinValue
-                                select x, 3);
+            var q = Repeat(
+                _ =>
+                    from x in new[] { 9999, 0, 888, -1, 66, -777, 1, 2, -12345 }
+                    where x > int.MinValue
+                    select x,
+                3
+            );
             Assert.Equal(q[0].ElementAtOrDefault(3), q[0].ElementAtOrDefault(3));
-            Assert.Equal(q[1].ElementAtOrDefault(new Index(3)), q[1].ElementAtOrDefault(new Index(3)));
+            Assert.Equal(
+                q[1].ElementAtOrDefault(new Index(3)),
+                q[1].ElementAtOrDefault(new Index(3))
+            );
             Assert.Equal(q[2].ElementAtOrDefault(^6), q[2].ElementAtOrDefault(^6));
         }
 
         [Fact]
         public void SameResultsRepeatCallsStringQuery()
         {
-            var q = Repeat(_ => from x in new[] { "!@#$%^", "C", "AAA", "", "Calling Twice", "SoS", string.Empty }
-                                where !string.IsNullOrEmpty(x)
-                                select x, 3);
+            var q = Repeat(
+                _ =>
+                    from x in new[]
+                    {
+                        "!@#$%^",
+                        "C",
+                        "AAA",
+                        "",
+                        "Calling Twice",
+                        "SoS",
+                        string.Empty,
+                    }
+                    where !string.IsNullOrEmpty(x)
+                    select x,
+                3
+            );
             Assert.Equal(q[0].ElementAtOrDefault(4), q[0].ElementAtOrDefault(4));
-            Assert.Equal(q[1].ElementAtOrDefault(new Index(4)), q[1].ElementAtOrDefault(new Index(4)));
+            Assert.Equal(
+                q[1].ElementAtOrDefault(new Index(4)),
+                q[1].ElementAtOrDefault(new Index(4))
+            );
             Assert.Equal(q[2].ElementAtOrDefault(^2), q[2].ElementAtOrDefault(^2));
         }
 
@@ -48,7 +71,12 @@ namespace System.Linq.Tests
 
         [Theory]
         [MemberData(nameof(TestData))]
-        public void ElementAtOrDefault(IEnumerable<int> source, int index, int indexFromEnd, int expected)
+        public void ElementAtOrDefault(
+            IEnumerable<int> source,
+            int index,
+            int indexFromEnd,
+            int expected
+        )
         {
             Assert.Equal(expected, source.ElementAtOrDefault(index));
 
@@ -62,7 +90,12 @@ namespace System.Linq.Tests
 
         [Theory]
         [MemberData(nameof(TestData))]
-        public void ElementAtOrDefaultRunOnce(IEnumerable<int> source, int index, int indexFromEnd, int expected)
+        public void ElementAtOrDefaultRunOnce(
+            IEnumerable<int> source,
+            int index,
+            int indexFromEnd,
+            int expected
+        )
         {
             Assert.Equal(expected, source.RunOnce().ElementAtOrDefault(index));
 
@@ -107,9 +140,18 @@ namespace System.Linq.Tests
         [Fact]
         public void NullSource_ThrowsArgumentNullException()
         {
-            Assert.Throws<ArgumentNullException>("source", () => ((IEnumerable<int>)null).ElementAtOrDefault(2));
-            Assert.Throws<ArgumentNullException>("source", () => ((IEnumerable<int>)null).ElementAtOrDefault(new Index(2)));
-            Assert.Throws<ArgumentNullException>("source", () => ((IEnumerable<int>)null).ElementAtOrDefault(^2));
+            Assert.Throws<ArgumentNullException>(
+                "source",
+                () => ((IEnumerable<int>)null).ElementAtOrDefault(2)
+            );
+            Assert.Throws<ArgumentNullException>(
+                "source",
+                () => ((IEnumerable<int>)null).ElementAtOrDefault(new Index(2))
+            );
+            Assert.Throws<ArgumentNullException>(
+                "source",
+                () => ((IEnumerable<int>)null).ElementAtOrDefault(^2)
+            );
         }
 
         [Fact]
@@ -155,9 +197,14 @@ namespace System.Linq.Tests
                 state = -1;
                 moveNextCallCount = 0;
                 return new DelegateIterator<int?>(
-                    moveNext: () => { moveNextCallCount++; return ++state < ElementCount; },
+                    moveNext: () =>
+                    {
+                        moveNextCallCount++;
+                        return ++state < ElementCount;
+                    },
                     current: () => state,
-                    dispose: () => state = -1);
+                    dispose: () => state = -1
+                );
             };
 
             Assert.Equal(0, source().ElementAtOrDefault(0));
@@ -246,9 +293,14 @@ namespace System.Linq.Tests
                 state = -1;
                 moveNextCallCount = 0;
                 return new DelegateIterator<int?>(
-                    moveNext: () => { moveNextCallCount++; return ++state < ElementCount; },
+                    moveNext: () =>
+                    {
+                        moveNextCallCount++;
+                        return ++state < ElementCount;
+                    },
                     current: () => state,
-                    dispose: () => state = -1);
+                    dispose: () => state = -1
+                );
             };
 
             Assert.Null(getSource().ElementAtOrDefault(10));
@@ -324,7 +376,9 @@ namespace System.Linq.Tests
             Assert.Null(EnumerablePartitionOrEmpty(source).ElementAtOrDefault(^int.MaxValue));
 
             Assert.Null(EnumerablePartitionOrEmpty(source).ElementAtOrDefault(int.MaxValue));
-            Assert.Null(EnumerablePartitionOrEmpty(source).ElementAtOrDefault(new Index(int.MaxValue)));
+            Assert.Null(
+                EnumerablePartitionOrEmpty(source).ElementAtOrDefault(new Index(int.MaxValue))
+            );
         }
 
         [Fact]
@@ -408,7 +462,9 @@ namespace System.Linq.Tests
             Assert.Null(EnumerablePartitionOrEmpty(source).ElementAtOrDefault(^int.MaxValue));
 
             Assert.Null(EnumerablePartitionOrEmpty(source).ElementAtOrDefault(int.MaxValue));
-            Assert.Null(EnumerablePartitionOrEmpty(source).ElementAtOrDefault(new Index(int.MaxValue)));
+            Assert.Null(
+                EnumerablePartitionOrEmpty(source).ElementAtOrDefault(new Index(int.MaxValue))
+            );
         }
     }
 }

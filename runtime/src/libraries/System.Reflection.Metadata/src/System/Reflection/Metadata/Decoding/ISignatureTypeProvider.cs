@@ -3,7 +3,9 @@
 
 namespace System.Reflection.Metadata
 {
-    public interface ISignatureTypeProvider<TType, TGenericContext> : ISimpleTypeProvider<TType>, IConstructedTypeProvider<TType>
+    public interface ISignatureTypeProvider<TType, TGenericContext>
+        : ISimpleTypeProvider<TType>,
+            IConstructedTypeProvider<TType>
     {
         /// <summary>
         /// Gets the a type symbol for the function pointer type of the given method signature.
@@ -49,6 +51,11 @@ namespace System.Reflection.Metadata
         /// The kind of the type as specified in the signature. To interpret this value use <see cref="Ecma335.MetadataReaderExtensions.ResolveSignatureTypeKind(MetadataReader, EntityHandle, byte)"/>
         /// Note that when the signature comes from a WinMD file additional processing is needed to determine whether the target type is a value type or a reference type.
         /// </param>
-        TType GetTypeFromSpecification(MetadataReader reader, TGenericContext genericContext, TypeSpecificationHandle handle, byte rawTypeKind);
+        TType GetTypeFromSpecification(
+            MetadataReader reader,
+            TGenericContext genericContext,
+            TypeSpecificationHandle handle,
+            byte rawTypeKind
+        );
     }
 }

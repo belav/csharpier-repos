@@ -34,13 +34,19 @@ namespace Microsoft.VisualBasic.Tests
         public void Ctor_NegativeUpperBound1_ThrowsArgumentException()
         {
             AssertExtensions.Throws<ArgumentException>(null, () => new VBFixedArrayAttribute(-1));
-            AssertExtensions.Throws<ArgumentException>(null, () => new VBFixedArrayAttribute(-1, 0));
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () => new VBFixedArrayAttribute(-1, 0)
+            );
         }
 
         [Fact]
         public void Ctor_NegativeUpperBound2_ThrowsArgumentException()
         {
-            AssertExtensions.Throws<ArgumentException>(null, () => new VBFixedArrayAttribute(0, -1));
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () => new VBFixedArrayAttribute(0, -1)
+            );
         }
     }
 }

@@ -33,7 +33,10 @@ namespace System.Web.Http
         [InlineData(typeof(IHttpControllerTypeResolver), typeof(WebHostHttpControllerTypeResolver))]
         [InlineData(typeof(IHostBufferPolicySelector), typeof(WebHostBufferPolicySelector))]
         [InlineData(typeof(IExceptionHandler), typeof(WebHostExceptionHandler))]
-        public void ConfigurationService_IsWebHost(Type serviceInterfaceType, Type expectedImplementationType)
+        public void ConfigurationService_IsWebHost(
+            Type serviceInterfaceType,
+            Type expectedImplementationType
+        )
         {
             // Arrange
             HttpConfiguration configuration = GlobalConfiguration.Configuration;
@@ -59,7 +62,9 @@ namespace System.Web.Http
 
             using (HttpConfiguration standardConfiguration = new HttpConfiguration())
             {
-                defaultExceptionHandlerType = standardConfiguration.Services.GetExceptionHandler().GetType();
+                defaultExceptionHandlerType = standardConfiguration
+                    .Services.GetExceptionHandler()
+                    .GetType();
             }
 
             // Act
@@ -110,7 +115,13 @@ namespace System.Web.Http
             using (new GlobalConfigurationContext())
             {
                 // Act & Assert
-                Assert.ThrowsArgumentNull(() => { GlobalConfiguration.Configure(null); }, "configurationCallback");
+                Assert.ThrowsArgumentNull(
+                    () =>
+                    {
+                        GlobalConfiguration.Configure(null);
+                    },
+                    "configurationCallback"
+                );
             }
         }
 

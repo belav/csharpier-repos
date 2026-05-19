@@ -3,7 +3,6 @@
 
 using System.Linq;
 using System.Net.Http.Headers;
-
 using Xunit;
 
 namespace System.Net.Http.Tests
@@ -14,7 +13,9 @@ namespace System.Net.Http.Tests
         public void Clone_Call_CloneFieldsMatchSourceFields()
         {
             // This test just verifies that TransferCodingWithQualityHeaderValue calls the correct base implementation.
-            TransferCodingWithQualityHeaderValue source = new TransferCodingWithQualityHeaderValue("custom");
+            TransferCodingWithQualityHeaderValue source = new TransferCodingWithQualityHeaderValue(
+                "custom"
+            );
             TransferCodingWithQualityHeaderValue clone = (TransferCodingWithQualityHeaderValue)
                 ((ICloneable)source).Clone();
             Assert.Equal(source.Value, clone.Value);
@@ -38,7 +39,8 @@ namespace System.Net.Http.Tests
         [Fact]
         public void Ctor_AddValueAndQuality_QualityParameterAdded()
         {
-            TransferCodingWithQualityHeaderValue mediaType = new TransferCodingWithQualityHeaderValue("custom", 0.08);
+            TransferCodingWithQualityHeaderValue mediaType =
+                new TransferCodingWithQualityHeaderValue("custom", 0.08);
             Assert.Equal(0.08, mediaType.Quality);
             Assert.Equal("custom", mediaType.Value);
             Assert.Equal(1, mediaType.Parameters.Count);
@@ -47,7 +49,8 @@ namespace System.Net.Http.Tests
         [Fact]
         public void Parse_SetOfValidValueStrings_ParsedCorrectly()
         {
-            TransferCodingWithQualityHeaderValue expected = new TransferCodingWithQualityHeaderValue("custom");
+            TransferCodingWithQualityHeaderValue expected =
+                new TransferCodingWithQualityHeaderValue("custom");
             CheckValidParse(" custom  ", expected);
             CheckValidParse("custom", expected);
 
@@ -59,14 +62,17 @@ namespace System.Net.Http.Tests
             CheckValidParse("  custom;name=value", expected);
             CheckValidParse("  custom ; name=value", expected);
 
-
-            TransferCodingWithQualityHeaderValue value1 = new TransferCodingWithQualityHeaderValue("custom1");
+            TransferCodingWithQualityHeaderValue value1 = new TransferCodingWithQualityHeaderValue(
+                "custom1"
+            );
             value1.Parameters.Add(new NameValueHeaderValue("param1", "value1"));
             value1.Quality = 1.0;
 
             CheckValidParse("custom1 ; param1 =value1 ; q= 1.0 ", value1);
 
-            TransferCodingWithQualityHeaderValue value2 = new TransferCodingWithQualityHeaderValue("custom2");
+            TransferCodingWithQualityHeaderValue value2 = new TransferCodingWithQualityHeaderValue(
+                "custom2"
+            );
             value2.Parameters.Add(new NameValueHeaderValue("param2", "value2"));
             value2.Quality = 0.5;
 
@@ -85,7 +91,9 @@ namespace System.Net.Http.Tests
             CheckInvalidParse("custom , \u4F1A");
             CheckInvalidParse("\r\n , , custom ;  name =   value ");
 
-            CheckInvalidParse(",custom1; param1=value1; q=1.0,,\r\n custom2; param2=value2; q=0.5  ,");
+            CheckInvalidParse(
+                ",custom1; param1=value1; q=1.0,,\r\n custom2; param2=value2; q=0.5  ,"
+            );
             CheckInvalidParse("custom1; param1=value1; q=1.0,");
             CheckInvalidParse(",\r\n custom2; param2=value2; q=0.5");
             CheckInvalidParse("\r\n custom2; param2= value2; q =0.5  ");
@@ -98,9 +106,13 @@ namespace System.Net.Http.Tests
 
         #region Helper methods
 
-        private void CheckValidParse(string input, TransferCodingWithQualityHeaderValue expectedResult)
+        private void CheckValidParse(
+            string input,
+            TransferCodingWithQualityHeaderValue expectedResult
+        )
         {
-            TransferCodingWithQualityHeaderValue result = TransferCodingWithQualityHeaderValue.Parse(input);
+            TransferCodingWithQualityHeaderValue result =
+                TransferCodingWithQualityHeaderValue.Parse(input);
             Assert.Equal(expectedResult, result);
 
             Assert.True(TransferCodingWithQualityHeaderValue.TryParse(input, out result));
@@ -109,9 +121,17 @@ namespace System.Net.Http.Tests
 
         private void CheckInvalidParse(string input)
         {
-            Assert.Throws<FormatException>(() => { TransferCodingWithQualityHeaderValue.Parse(input); });
+            Assert.Throws<FormatException>(() =>
+            {
+                TransferCodingWithQualityHeaderValue.Parse(input);
+            });
 
-            Assert.False(TransferCodingWithQualityHeaderValue.TryParse(input, out TransferCodingWithQualityHeaderValue result));
+            Assert.False(
+                TransferCodingWithQualityHeaderValue.TryParse(
+                    input,
+                    out TransferCodingWithQualityHeaderValue result
+                )
+            );
             Assert.Null(result);
         }
 

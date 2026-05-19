@@ -6,10 +6,10 @@ namespace System.Activities.Expressions
 {
     using System.Activities;
     using System.Activities.Statements;
-    using System.Linq.Expressions;
     using System.Activities.Validation;
     using System.Collections.Generic;
     using System.ComponentModel;
+    using System.Linq.Expressions;
     using System.Runtime;
 
     public sealed class Divide<TLeft, TRight, TResult> : CodeActivity<TResult>
@@ -20,19 +20,11 @@ namespace System.Activities.Expressions
 
         [RequiredArgument]
         [DefaultValue(null)]
-        public InArgument<TLeft> Left
-        {
-            get;
-            set;
-        }
+        public InArgument<TLeft> Left { get; set; }
 
         [RequiredArgument]
         [DefaultValue(null)]
-        public InArgument<TRight> Right
-        {
-            get;
-            set;
-        }
+        public InArgument<TRight> Right { get; set; }
 
         protected override void CacheMetadata(CodeActivityMetadata metadata)
         {
@@ -41,7 +33,13 @@ namespace System.Activities.Expressions
             if (operationFunction == null)
             {
                 ValidationError validationError;
-                if (!BinaryExpressionHelper.TryGenerateLinqDelegate(ExpressionType.Divide, out operationFunction, out validationError))
+                if (
+                    !BinaryExpressionHelper.TryGenerateLinqDelegate(
+                        ExpressionType.Divide,
+                        out operationFunction,
+                        out validationError
+                    )
+                )
                 {
                     metadata.AddValidationError(validationError);
                 }

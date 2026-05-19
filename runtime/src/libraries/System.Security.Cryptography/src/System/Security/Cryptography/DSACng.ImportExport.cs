@@ -8,9 +8,9 @@ namespace System.Security.Cryptography
         private byte[] ExportKeyBlob(bool includePrivateParameters)
         {
             // Use generic blob type for multiple version support
-            CngKeyBlobFormat blobFormat = includePrivateParameters ?
-                CngKeyBlobFormat.GenericPrivateBlob :
-                CngKeyBlobFormat.GenericPublicBlob;
+            CngKeyBlobFormat blobFormat = includePrivateParameters
+                ? CngKeyBlobFormat.GenericPrivateBlob
+                : CngKeyBlobFormat.GenericPublicBlob;
 
             return Key.Export(blobFormat);
         }
@@ -18,9 +18,9 @@ namespace System.Security.Cryptography
         private void ImportKeyBlob(byte[] dsaBlob, bool includePrivate)
         {
             // Use generic blob type for multiple version support
-            CngKeyBlobFormat blobFormat = includePrivate ?
-                CngKeyBlobFormat.GenericPrivateBlob :
-                CngKeyBlobFormat.GenericPublicBlob;
+            CngKeyBlobFormat blobFormat = includePrivate
+                ? CngKeyBlobFormat.GenericPrivateBlob
+                : CngKeyBlobFormat.GenericPublicBlob;
 
             CngKey newKey = CngKey.Import(dsaBlob, blobFormat);
             try
@@ -53,7 +53,8 @@ namespace System.Security.Cryptography
             return Key.TryExportKeyBlob(
                 Interop.NCrypt.NCRYPT_PKCS8_PRIVATE_KEY_BLOB,
                 destination,
-                out bytesWritten);
+                out bytesWritten
+            );
         }
 
         private byte[] ExportEncryptedPkcs8(ReadOnlySpan<char> pkcs8Password, int kdfCount)
@@ -65,13 +66,15 @@ namespace System.Security.Cryptography
             ReadOnlySpan<char> pkcs8Password,
             int kdfCount,
             Span<byte> destination,
-            out int bytesWritten)
+            out int bytesWritten
+        )
         {
             return Key.TryExportPkcs8KeyBlob(
                 pkcs8Password,
                 kdfCount,
                 destination,
-                out bytesWritten);
+                out bytesWritten
+            );
         }
     }
 }

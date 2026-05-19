@@ -12,8 +12,7 @@ namespace System.Net.Http.Functional.Tests
 
         public CustomContent(Stream stream) => _stream = stream;
 
-        protected override Task<Stream> CreateContentReadStreamAsync() =>
-            Task.FromResult(_stream);
+        protected override Task<Stream> CreateContentReadStreamAsync() => Task.FromResult(_stream);
 
         protected override Task SerializeToStreamAsync(Stream stream, TransportContext context) =>
             _stream.CopyToAsync(stream);
@@ -83,10 +82,7 @@ namespace System.Net.Http.Functional.Tests
 
             public override long Position
             {
-                get
-                {
-                    return _position;
-                }
+                get { return _position; }
                 set
                 {
                     if (_rewindable)

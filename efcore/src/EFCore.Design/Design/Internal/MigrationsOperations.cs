@@ -35,7 +35,8 @@ public class MigrationsOperations
         string? rootNamespace,
         string? language,
         bool nullable,
-        string[]? args)
+        string[]? args
+    )
     {
         _reporter = reporter;
         _assembly = assembly;
@@ -51,7 +52,8 @@ public class MigrationsOperations
             rootNamespace,
             language,
             nullable,
-            args);
+            args
+        );
 
         _servicesBuilder = new DesignTimeServicesBuilder(assembly, startupAssembly, reporter, args);
     }
@@ -66,7 +68,8 @@ public class MigrationsOperations
         string name,
         string? outputDir,
         string? contextType,
-        string? @namespace)
+        string? @namespace
+    )
     {
         if (outputDir != null)
         {
@@ -79,8 +82,7 @@ public class MigrationsOperations
         var contextClassName = context.GetType().Name;
         if (string.Equals(name, contextClassName, StringComparison.Ordinal))
         {
-            throw new OperationException(
-                DesignStrings.ConflictingContextAndMigrationName(name));
+            throw new OperationException(DesignStrings.ConflictingContextAndMigrationName(name));
         }
 
         var services = _servicesBuilder.Build(context);
@@ -89,11 +91,15 @@ public class MigrationsOperations
 
         using var scope = services.CreateScope();
         var scaffolder = scope.ServiceProvider.GetRequiredService<IMigrationsScaffolder>();
-        var migration =
-            string.IsNullOrEmpty(@namespace)
-                // TODO: Honor _nullable (issue #18950)
-                ? scaffolder.ScaffoldMigration(name, _rootNamespace ?? string.Empty, subNamespace, _language)
-                : scaffolder.ScaffoldMigration(name, null, @namespace, _language);
+        var migration = string.IsNullOrEmpty(@namespace)
+            // TODO: Honor _nullable (issue #18950)
+            ? scaffolder.ScaffoldMigration(
+                name,
+                _rootNamespace ?? string.Empty,
+                subNamespace,
+                _language
+            )
+            : scaffolder.ScaffoldMigration(name, null, @namespace, _language);
         return scaffolder.Save(_projectDir, migration, outputDir);
     }
 
@@ -114,7 +120,9 @@ public class MigrationsOperations
                 ".",
                 subPath.Split(
                     new[] { Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar },
-                    StringSplitOptions.RemoveEmptyEntries))
+                    StringSplitOptions.RemoveEmptyEntries
+                )
+            )
             : null;
     }
 
@@ -127,7 +135,8 @@ public class MigrationsOperations
     public virtual IEnumerable<MigrationInfo> GetMigrations(
         string? contextType,
         string? connectionString,
-        bool noConnect)
+        bool noConnect
+    )
     {
         using var context = _contextOperations.CreateContext(contextType);
 
@@ -149,7 +158,8 @@ public class MigrationsOperations
             {
                 appliedMigrations = new HashSet<string>(
                     context.Database.GetAppliedMigrations(),
-                    StringComparer.OrdinalIgnoreCase);
+                    StringComparer.OrdinalIgnoreCase
+                );
             }
             catch (Exception ex)
             {
@@ -159,12 +169,12 @@ public class MigrationsOperations
         }
 
         return from id in migrationsAssembly.Migrations.Keys
-               select new MigrationInfo
-               {
-                   Id = id,
-                   Name = idGenerator.GetName(id),
-                   Applied = appliedMigrations?.Contains(id)
-               };
+            select new MigrationInfo
+            {
+                Id = id,
+                Name = idGenerator.GetName(id),
+                Applied = appliedMigrations?.Contains(id),
+            };
     }
 
     /// <summary>
@@ -177,7 +187,8 @@ public class MigrationsOperations
         string? fromMigration,
         string? toMigration,
         MigrationsSqlGenerationOptions options,
-        string? contextType)
+        string? contextType
+    )
     {
         using var context = _contextOperations.CreateContext(contextType);
         var services = _servicesBuilder.Build(context);
@@ -197,7 +208,8 @@ public class MigrationsOperations
     public virtual void UpdateDatabase(
         string? targetMigration,
         string? connectionString,
-        string? contextType)
+        string? contextType
+    )
     {
         using (var context = _contextOperations.CreateContext(contextType))
         {
@@ -223,9 +235,7 @@ public class MigrationsOperations
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual MigrationFiles RemoveMigration(
-        string? contextType,
-        bool force)
+    public virtual MigrationFiles RemoveMigration(string? contextType, bool force)
     {
         using var context = _contextOperations.CreateContext(contextType);
         var services = _servicesBuilder.Build(context);
@@ -268,7 +278,9 @@ public class MigrationsOperations
         if (migrator == null)
         {
             var databaseProvider = services.GetService<IDatabaseProvider>();
-            throw new OperationException(DesignStrings.NonRelationalProvider(databaseProvider?.Name ?? "Unknown"));
+            throw new OperationException(
+                DesignStrings.NonRelationalProvider(databaseProvider?.Name ?? "Unknown")
+            );
         }
     }
 
@@ -277,13 +289,17 @@ public class MigrationsOperations
         var assemblyName = _assembly.GetName();
         var options = services.GetRequiredService<IDbContextOptions>();
         var contextType = services.GetRequiredService<ICurrentDbContext>().Context.GetType();
-        var migrationsAssemblyName = RelationalOptionsExtension.Extract(options).MigrationsAssembly
+        var migrationsAssemblyName =
+            RelationalOptionsExtension.Extract(options).MigrationsAssembly
             ?? contextType.Assembly.GetName().Name;
-        if (assemblyName.Name != migrationsAssemblyName
-            && assemblyName.FullName != migrationsAssemblyName)
+        if (
+            assemblyName.Name != migrationsAssemblyName
+            && assemblyName.FullName != migrationsAssemblyName
+        )
         {
             throw new OperationException(
-                DesignStrings.MigrationsAssemblyMismatch(assemblyName.Name, migrationsAssemblyName));
+                DesignStrings.MigrationsAssemblyMismatch(assemblyName.Name, migrationsAssemblyName)
+            );
         }
     }
 }

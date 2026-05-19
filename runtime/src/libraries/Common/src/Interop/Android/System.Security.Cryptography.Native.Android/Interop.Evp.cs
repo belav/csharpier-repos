@@ -21,16 +21,34 @@ internal static partial class Interop
         internal static partial int EvpDigestReset(SafeEvpMdCtxHandle ctx, IntPtr type);
 
         [LibraryImport(Libraries.AndroidCryptoNative, EntryPoint = "CryptoNative_EvpDigestUpdate")]
-        internal static partial int EvpDigestUpdate(SafeEvpMdCtxHandle ctx, ReadOnlySpan<byte> d, int cnt);
+        internal static partial int EvpDigestUpdate(
+            SafeEvpMdCtxHandle ctx,
+            ReadOnlySpan<byte> d,
+            int cnt
+        );
 
         [LibraryImport(Libraries.AndroidCryptoNative, EntryPoint = "CryptoNative_EvpDigestFinalEx")]
-        internal static partial int EvpDigestFinalEx(SafeEvpMdCtxHandle ctx, ref byte md, ref uint s);
+        internal static partial int EvpDigestFinalEx(
+            SafeEvpMdCtxHandle ctx,
+            ref byte md,
+            ref uint s
+        );
 
         [LibraryImport(Libraries.AndroidCryptoNative, EntryPoint = "CryptoNative_EvpDigestCurrent")]
-        internal static partial int EvpDigestCurrent(SafeEvpMdCtxHandle ctx, ref byte md, ref uint s);
+        internal static partial int EvpDigestCurrent(
+            SafeEvpMdCtxHandle ctx,
+            ref byte md,
+            ref uint s
+        );
 
         [LibraryImport(Libraries.AndroidCryptoNative, EntryPoint = "CryptoNative_EvpDigestOneShot")]
-        internal static unsafe partial int EvpDigestOneShot(IntPtr type, byte* source, int sourceSize, byte* md, uint* mdSize);
+        internal static unsafe partial int EvpDigestOneShot(
+            IntPtr type,
+            byte* source,
+            int sourceSize,
+            byte* md,
+            uint* mdSize
+        );
 
         [LibraryImport(Libraries.AndroidCryptoNative, EntryPoint = "CryptoNative_EvpMdSize")]
         internal static partial int EvpMdSize(IntPtr md);
@@ -38,7 +56,11 @@ internal static partial class Interop
         [LibraryImport(Libraries.AndroidCryptoNative, EntryPoint = "CryptoNative_GetMaxMdSize")]
         private static partial int GetMaxMdSize();
 
-        internal static unsafe int EvpDigestXOFOneShot(IntPtr type, ReadOnlySpan<byte> source, Span<byte> destination)
+        internal static unsafe int EvpDigestXOFOneShot(
+            IntPtr type,
+            ReadOnlySpan<byte> source,
+            Span<byte> destination
+        )
         {
             // The partial needs to match the OpenSSL parameters.
             _ = type;
@@ -57,7 +79,10 @@ internal static partial class Interop
             throw new UnreachableException();
         }
 
-        internal static unsafe int EvpDigestCurrentXOF(SafeEvpMdCtxHandle ctx, Span<byte> destination)
+        internal static unsafe int EvpDigestCurrentXOF(
+            SafeEvpMdCtxHandle ctx,
+            Span<byte> destination
+        )
         {
             // The partial needs to match the OpenSSL parameters.
             _ = ctx;

@@ -36,28 +36,35 @@ namespace Microsoft.CodeAnalysis.MSBuild.UnitTests
         {
             var environmentVariables = new Dictionary<string, string>()
             {
-                ["NUGET_PACKAGES"] = _nugetCacheDir.Path
+                ["NUGET_PACKAGES"] = _nugetCacheDir.Path,
             };
 
             var dotNetExeName = "dotnet" + (Path.DirectorySeparatorChar == '/' ? "" : ".exe");
 
             var restoreResult = ProcessUtilities.Run(
-                dotNetExeName, arguments,
+                dotNetExeName,
+                arguments,
                 workingDirectory: SolutionDirectory.Path,
-                additionalEnvironmentVars: environmentVariables);
+                additionalEnvironmentVars: environmentVariables
+            );
 
-            Assert.True(restoreResult.ExitCode == 0, $"{dotNetExeName} failed with exit code {restoreResult.ExitCode}: {restoreResult.Output}");
+            Assert.True(
+                restoreResult.ExitCode == 0,
+                $"{dotNetExeName} failed with exit code {restoreResult.ExitCode}: {restoreResult.Output}"
+            );
         }
 
         private void DotNetRestore(string solutionOrProjectFileName)
         {
-            var arguments = $@"msbuild ""{solutionOrProjectFileName}"" /t:restore /bl:{Path.Combine(SolutionDirectory.Path, "restore.binlog")}";
+            var arguments =
+                $@"msbuild ""{solutionOrProjectFileName}"" /t:restore /bl:{Path.Combine(SolutionDirectory.Path, "restore.binlog")}";
             RunDotNet(arguments);
         }
 
         private void DotNetBuild(string solutionOrProjectFileName, string configuration = null)
         {
-            var arguments = $@"msbuild ""{solutionOrProjectFileName}"" /bl:{Path.Combine(SolutionDirectory.Path, "build.binlog")}";
+            var arguments =
+                $@"msbuild ""{solutionOrProjectFileName}"" /bl:{Path.Combine(SolutionDirectory.Path, "build.binlog")}";
 
             if (configuration != null)
             {
@@ -127,7 +134,10 @@ namespace Microsoft.CodeAnalysis.MSBuild.UnitTests
 
             var projectRefId = projectReference.ProjectId;
             Assert.Equal(libraryProject.Id, projectRefId);
-            Assert.Equal(libraryProject.FilePath, workspace.CurrentSolution.GetProject(projectRefId).FilePath);
+            Assert.Equal(
+                libraryProject.FilePath,
+                workspace.CurrentSolution.GetProject(projectRefId).FilePath
+            );
         }
 
         [ConditionalFact(typeof(DotNetSdkMSBuildInstalled))]
@@ -173,7 +183,10 @@ namespace Microsoft.CodeAnalysis.MSBuild.UnitTests
                 var projectReference = Assert.Single(project.ProjectReferences);
 
                 var projectRefId = projectReference.ProjectId;
-                Assert.Equal(projectRefFilePath, project.Solution.GetProject(projectRefId).FilePath);
+                Assert.Equal(
+                    projectRefFilePath,
+                    project.Solution.GetProject(projectRefId).FilePath
+                );
             }
         }
 
@@ -240,7 +253,7 @@ namespace Microsoft.CodeAnalysis.MSBuild.UnitTests
                 Assert.Equal(3, workspace.CurrentSolution.ProjectIds.Count);
 
                 // Assert the TFM is accessible from project extensions.
-                // The test project extension sets the default namespace based on the TFM.  
+                // The test project extension sets the default namespace based on the TFM.
                 foreach (var project in workspace.CurrentSolution.Projects)
                 {
                     switch (project.Name)
@@ -309,7 +322,7 @@ namespace Microsoft.CodeAnalysis.MSBuild.UnitTests
                     "Project(net6)",
                     "Project(net5)",
                     "Library(netstandard2",
-                    "Library(net5)"
+                    "Library(net5)",
                 };
 
                 var actualNames = new HashSet<string>();
@@ -317,9 +330,7 @@ namespace Microsoft.CodeAnalysis.MSBuild.UnitTests
                 foreach (var project in workspace.CurrentSolution.Projects)
                 {
                     var dotIndex = project.Name.IndexOf('.');
-                    var projectName = dotIndex >= 0
-                        ? project.Name[..dotIndex]
-                        : project.Name;
+                    var projectName = dotIndex >= 0 ? project.Name[..dotIndex] : project.Name;
 
                     actualNames.Add(projectName);
                     var fileName = PathUtilities.GetFileName(project.FilePath);
@@ -337,7 +348,10 @@ namespace Microsoft.CodeAnalysis.MSBuild.UnitTests
                             break;
 
                         default:
-                            Assert.True(false, $"Encountered unexpected project: {project.FilePath}");
+                            Assert.True(
+                                false,
+                                $"Encountered unexpected project: {project.FilePath}"
+                            );
                             return;
                     }
 
@@ -347,15 +361,22 @@ namespace Microsoft.CodeAnalysis.MSBuild.UnitTests
                     Assert.Empty(diagnostics);
                 }
 
-                Assert.True(actualNames.SetEquals(expectedNames), $"Project names differ!{Environment.NewLine}Actual: {{{actualNames.Join(",")}}}{Environment.NewLine}Expected: {{{expectedNames.Join(",")}}}");
+                Assert.True(
+                    actualNames.SetEquals(expectedNames),
+                    $"Project names differ!{Environment.NewLine}Actual: {{{actualNames.Join(",")}}}{Environment.NewLine}Expected: {{{expectedNames.Join(",")}}}"
+                );
 
                 // Verify that the projects reference the correct TFMs
-                var projects = workspace.CurrentSolution.Projects.Where(p => p.FilePath.EndsWith("Project.csproj"));
+                var projects = workspace.CurrentSolution.Projects.Where(p =>
+                    p.FilePath.EndsWith("Project.csproj")
+                );
                 foreach (var project in projects)
                 {
                     var projectReference = Assert.Single(project.ProjectReferences);
 
-                    var referencedProject = workspace.CurrentSolution.GetProject(projectReference.ProjectId);
+                    var referencedProject = workspace.CurrentSolution.GetProject(
+                        projectReference.ProjectId
+                    );
 
                     if (project.OutputFilePath.Contains("net6"))
                     {
@@ -384,7 +405,12 @@ namespace Microsoft.CodeAnalysis.MSBuild.UnitTests
 
             DotNetRestore("Solution.sln");
 
-            using (var workspace = CreateMSBuildWorkspace(throwOnWorkspaceFailed: false, skipUnrecognizedProjects: true))
+            using (
+                var workspace = CreateMSBuildWorkspace(
+                    throwOnWorkspaceFailed: false,
+                    skipUnrecognizedProjects: true
+                )
+            )
             {
                 var solution = await workspace.OpenSolutionAsync(solutionFilePath);
 
@@ -408,10 +434,22 @@ namespace Microsoft.CodeAnalysis.MSBuild.UnitTests
         {
             var files = GetBaseFiles()
                 .WithFile(@"Solution.sln", Resources.SolutionFiles.Issue30174_Solution)
-                .WithFile(@"InspectedLibrary\InspectedLibrary.csproj", Resources.ProjectFiles.CSharp.Issue30174_InspectedLibrary)
-                .WithFile(@"InspectedLibrary\InspectedClass.cs", Resources.SourceFiles.CSharp.Issue30174_InspectedClass)
-                .WithFile(@"ReferencedLibrary\ReferencedLibrary.csproj", Resources.ProjectFiles.CSharp.Issue30174_ReferencedLibrary)
-                .WithFile(@"ReferencedLibrary\SomeMetadataAttribute.cs", Resources.SourceFiles.CSharp.Issue30174_SomeMetadataAttribute);
+                .WithFile(
+                    @"InspectedLibrary\InspectedLibrary.csproj",
+                    Resources.ProjectFiles.CSharp.Issue30174_InspectedLibrary
+                )
+                .WithFile(
+                    @"InspectedLibrary\InspectedClass.cs",
+                    Resources.SourceFiles.CSharp.Issue30174_InspectedClass
+                )
+                .WithFile(
+                    @"ReferencedLibrary\ReferencedLibrary.csproj",
+                    Resources.ProjectFiles.CSharp.Issue30174_ReferencedLibrary
+                )
+                .WithFile(
+                    @"ReferencedLibrary\SomeMetadataAttribute.cs",
+                    Resources.SourceFiles.CSharp.Issue30174_SomeMetadataAttribute
+                );
 
             CreateFiles(files);
 
@@ -443,7 +481,12 @@ namespace Microsoft.CodeAnalysis.MSBuild.UnitTests
             DotNetRestore(@"Library\Library.csproj");
 
             // Override the TFM properties defined in the file
-            using (var workspace = CreateMSBuildWorkspace((PropertyNames.TargetFramework, ""), (PropertyNames.TargetFrameworks, "net6;net5")))
+            using (
+                var workspace = CreateMSBuildWorkspace(
+                    (PropertyNames.TargetFramework, ""),
+                    (PropertyNames.TargetFrameworks, "net6;net5")
+                )
+            )
             {
                 await workspace.OpenProjectAsync(projectFilePath);
 
@@ -486,14 +529,20 @@ namespace Microsoft.CodeAnalysis.MSBuild.UnitTests
 
             var compilation = await project.GetCompilationAsync();
             var option = compilation.Options as VisualBasicCompilationOptions;
-            Assert.Contains("LibraryHelperClass = Library.MyHelperClass", option.GlobalImports.Select(i => i.Name));
+            Assert.Contains(
+                "LibraryHelperClass = Library.MyHelperClass",
+                option.GlobalImports.Select(i => i.Name)
+            );
 
             static void AssertSingleProjectReference(Project project, string projectRefFilePath)
             {
                 var projectReference = Assert.Single(project.ProjectReferences);
 
                 var projectRefId = projectReference.ProjectId;
-                Assert.Equal(projectRefFilePath, project.Solution.GetProject(projectRefId).FilePath);
+                Assert.Equal(
+                    projectRefFilePath,
+                    project.Solution.GetProject(projectRefId).FilePath
+                );
             }
         }
     }

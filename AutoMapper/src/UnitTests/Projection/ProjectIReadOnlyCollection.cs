@@ -1,4 +1,5 @@
 ﻿namespace AutoMapper.UnitTests.Projection;
+
 public class ProjectIReadOnlyCollection
 {
     private MapperConfiguration _config;
@@ -17,7 +18,10 @@ public class ProjectIReadOnlyCollection
     [Fact]
     public void ProjectWithAssignedCollectionSourceProperty()
     {
-        var customer = new Customer { Addresses = new List<Address> { new Address(Street1), new Address(Street2) } };
+        var customer = new Customer
+        {
+            Addresses = new List<Address> { new Address(Street1), new Address(Street2) },
+        };
         var customers = new[] { customer }.AsQueryable();
 
         var mapped = customers.ProjectTo<CustomerDto>(_config).SingleOrDefault();

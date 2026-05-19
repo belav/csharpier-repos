@@ -4,8 +4,10 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web.UI {
-    public enum AjaxFrameworkMode {
+namespace System.Web.UI
+{
+    public enum AjaxFrameworkMode
+    {
         Enabled = 0,
         Disabled = 1,
         Explicit = 2,

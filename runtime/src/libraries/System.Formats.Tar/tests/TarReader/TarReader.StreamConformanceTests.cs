@@ -31,9 +31,11 @@ namespace System.Formats.Tar.Tests
             return Task.FromResult(new TarReader(ms).GetNextEntry().DataStream);
         }
 
-        protected override Task<Stream?> CreateWriteOnlyStreamCore(byte[]? initialData) => Task.FromResult<Stream>(null);
+        protected override Task<Stream?> CreateWriteOnlyStreamCore(byte[]? initialData) =>
+            Task.FromResult<Stream>(null);
 
-        protected override Task<Stream?> CreateReadWriteStreamCore(byte[]? initialData) => Task.FromResult<Stream>(null);
+        protected override Task<Stream?> CreateReadWriteStreamCore(byte[]? initialData) =>
+            Task.FromResult<Stream>(null);
 
         protected override bool CanSetLength => false;
     }

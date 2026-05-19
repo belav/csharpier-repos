@@ -14,33 +14,37 @@ namespace System.Net
         private int _storedOffset;
         private readonly bool _readMore;
 
-        internal BufferedReadStream(Stream stream) : this(stream, false)
-        {
-        }
+        internal BufferedReadStream(Stream stream)
+            : this(stream, false) { }
 
-        internal BufferedReadStream(Stream stream, bool readMore) : base(stream)
+        internal BufferedReadStream(Stream stream, bool readMore)
+            : base(stream)
         {
             _readMore = readMore;
         }
 
         public override bool CanWrite
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         public override bool CanSeek
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
-        public override IAsyncResult BeginRead(byte[] buffer, int offset, int count, AsyncCallback? callback, object? state) =>
-            TaskToAsyncResult.Begin(ReadAsync(buffer, offset, count, CancellationToken.None), callback, state);
+        public override IAsyncResult BeginRead(
+            byte[] buffer,
+            int offset,
+            int count,
+            AsyncCallback? callback,
+            object? state
+        ) =>
+            TaskToAsyncResult.Begin(
+                ReadAsync(buffer, offset, count, CancellationToken.None),
+                callback,
+                state
+            );
 
         public override int EndRead(IAsyncResult asyncResult) =>
             TaskToAsyncResult.End<int>(asyncResult);
@@ -64,7 +68,12 @@ namespace System.Net
             return read + base.Read(buffer, offset, count);
         }
 
-        public override Task<int> ReadAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken)
+        public override Task<int> ReadAsync(
+            byte[] buffer,
+            int offset,
+            int count,
+            CancellationToken cancellationToken
+        )
         {
             int read;
             if (_storedOffset >= _storedLength)
@@ -86,9 +95,19 @@ namespace System.Net
             return ReadMoreAsync(read, buffer, offset, count, cancellationToken);
         }
 
-        private async Task<int> ReadMoreAsync(int bytesAlreadyRead, byte[] buffer, int offset, int count, CancellationToken cancellationToken)
+        private async Task<int> ReadMoreAsync(
+            int bytesAlreadyRead,
+            byte[] buffer,
+            int offset,
+            int count,
+            CancellationToken cancellationToken
+        )
         {
-            int returnValue = await base.ReadAsync(buffer.AsMemory(offset, count), cancellationToken).ConfigureAwait(false);
+            int returnValue = await base.ReadAsync(
+                    buffer.AsMemory(offset, count),
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
             return bytesAlreadyRead + returnValue;
         }
 
@@ -132,14 +151,26 @@ namespace System.Net
                 // if there's room in the buffer but need to shift things over
                 else if (count <= _storedBuffer!.Length - _storedLength + _storedOffset)
                 {
-                    Buffer.BlockCopy(_storedBuffer, _storedOffset, _storedBuffer, count, _storedLength - _storedOffset);
+                    Buffer.BlockCopy(
+                        _storedBuffer,
+                        _storedOffset,
+                        _storedBuffer,
+                        count,
+                        _storedLength - _storedOffset
+                    );
                     _storedLength += count - _storedOffset;
                     _storedOffset = 0;
                 }
                 else
                 {
                     byte[] newBuffer = new byte[count + _storedLength - _storedOffset];
-                    Buffer.BlockCopy(_storedBuffer, _storedOffset, newBuffer, count, _storedLength - _storedOffset);
+                    Buffer.BlockCopy(
+                        _storedBuffer,
+                        _storedOffset,
+                        newBuffer,
+                        count,
+                        _storedLength - _storedOffset
+                    );
                     _storedLength += count - _storedOffset;
                     _storedOffset = 0;
                     _storedBuffer = newBuffer;

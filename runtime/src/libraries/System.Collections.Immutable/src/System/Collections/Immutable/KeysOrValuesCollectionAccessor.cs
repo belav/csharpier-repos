@@ -12,7 +12,10 @@ namespace System.Collections.Immutable
     /// <typeparam name="TKey">The type of key in the dictionary.</typeparam>
     /// <typeparam name="TValue">The type of value in the dictionary.</typeparam>
     /// <typeparam name="T">Either TKey or TValue.</typeparam>
-    internal abstract class KeysOrValuesCollectionAccessor<TKey, TValue, T> : ICollection<T>, ICollection where TKey : notnull
+    internal abstract class KeysOrValuesCollectionAccessor<TKey, TValue, T>
+        : ICollection<T>,
+            ICollection
+        where TKey : notnull
     {
         /// <summary>
         /// The underlying wrapped dictionary.
@@ -29,7 +32,10 @@ namespace System.Collections.Immutable
         /// </summary>
         /// <param name="dictionary">The dictionary to base on.</param>
         /// <param name="keysOrValues">The keys or values enumeration to wrap as a collection.</param>
-        protected KeysOrValuesCollectionAccessor(IImmutableDictionary<TKey, TValue> dictionary, IEnumerable<T> keysOrValues)
+        protected KeysOrValuesCollectionAccessor(
+            IImmutableDictionary<TKey, TValue> dictionary,
+            IEnumerable<T> keysOrValues
+        )
         {
             Requires.NotNull(dictionary, nameof(dictionary));
             Requires.NotNull(keysOrValues, nameof(keysOrValues));
@@ -164,15 +170,15 @@ namespace System.Collections.Immutable
     /// <summary>
     /// A lightweight collection view over and IEnumerable of keys.
     /// </summary>
-    internal sealed class KeysCollectionAccessor<TKey, TValue> : KeysOrValuesCollectionAccessor<TKey, TValue, TKey> where TKey : notnull
+    internal sealed class KeysCollectionAccessor<TKey, TValue>
+        : KeysOrValuesCollectionAccessor<TKey, TValue, TKey>
+        where TKey : notnull
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="KeysCollectionAccessor{TKey, TValue}"/> class.
         /// </summary>
         internal KeysCollectionAccessor(IImmutableDictionary<TKey, TValue> dictionary)
-            : base(dictionary, dictionary.Keys)
-        {
-        }
+            : base(dictionary, dictionary.Keys) { }
 
         /// <summary>
         /// See <see cref="ICollection{T}"/>
@@ -186,15 +192,15 @@ namespace System.Collections.Immutable
     /// <summary>
     /// A lightweight collection view over and IEnumerable of values.
     /// </summary>
-    internal sealed class ValuesCollectionAccessor<TKey, TValue> : KeysOrValuesCollectionAccessor<TKey, TValue, TValue> where TKey : notnull
+    internal sealed class ValuesCollectionAccessor<TKey, TValue>
+        : KeysOrValuesCollectionAccessor<TKey, TValue, TValue>
+        where TKey : notnull
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="ValuesCollectionAccessor{TKey, TValue}"/> class.
         /// </summary>
         internal ValuesCollectionAccessor(IImmutableDictionary<TKey, TValue> dictionary)
-            : base(dictionary, dictionary.Values)
-        {
-        }
+            : base(dictionary, dictionary.Values) { }
 
         /// <summary>
         /// See <see cref="ICollection{T}"/>

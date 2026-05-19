@@ -12,8 +12,8 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Utilities
     [ExportWorkspaceService(typeof(IWorkspaceThreadingServiceProvider)), Shared]
     [method: ImportingConstructor]
     [method: Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-    internal sealed class WorkspaceThreadingServiceProvider(
-        IWorkspaceThreadingService service) : IWorkspaceThreadingServiceProvider
+    internal sealed class WorkspaceThreadingServiceProvider(IWorkspaceThreadingService service)
+        : IWorkspaceThreadingServiceProvider
     {
         public IWorkspaceThreadingService Service { get; } = service;
     }

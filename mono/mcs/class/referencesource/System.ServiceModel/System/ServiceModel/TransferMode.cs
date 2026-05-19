@@ -6,7 +6,7 @@ namespace System.ServiceModel
     using System.ComponentModel;
 
     /// <summary>
-    /// Modes that can be set in a to determine whether a channel 
+    /// Modes that can be set in a to determine whether a channel
     /// supports streamed and/or buffered mode.
     /// </summary>
     public enum TransferMode
@@ -21,8 +21,12 @@ namespace System.ServiceModel
     {
         public static bool IsDefined(TransferMode v)
         {
-            return ((v == TransferMode.Buffered) || (v == TransferMode.Streamed) ||
-                (v == TransferMode.StreamedRequest) || (v == TransferMode.StreamedResponse));
+            return (
+                (v == TransferMode.Buffered)
+                || (v == TransferMode.Streamed)
+                || (v == TransferMode.StreamedRequest)
+                || (v == TransferMode.StreamedResponse)
+            );
         }
 
         public static bool IsRequestStreamed(TransferMode v)
@@ -39,11 +43,10 @@ namespace System.ServiceModel
         {
             if (!IsDefined(value))
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidEnumArgumentException("value", (int)value,
-                    typeof(TransferMode)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidEnumArgumentException("value", (int)value, typeof(TransferMode))
+                );
             }
         }
     }
 }
-
-

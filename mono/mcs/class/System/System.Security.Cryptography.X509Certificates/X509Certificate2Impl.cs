@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -25,76 +25,54 @@
 // OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
-using System.Text;
 using System.Collections.Generic;
+using System.Text;
 using Microsoft.Win32.SafeHandles;
 
 namespace System.Security.Cryptography.X509Certificates
 {
-	internal abstract class X509Certificate2Impl : X509CertificateImpl
-	{
-		public abstract bool Archived {
-			get; set;
-		}
+    internal abstract class X509Certificate2Impl : X509CertificateImpl
+    {
+        public abstract bool Archived { get; set; }
 
-		public abstract IEnumerable<X509Extension> Extensions {
-			get;
-		}
+        public abstract IEnumerable<X509Extension> Extensions { get; }
 
-		public abstract string FriendlyName {
-			get; set;
-		}
+        public abstract string FriendlyName { get; set; }
 
-		public abstract X500DistinguishedName IssuerName {
-			get;
-		}
+        public abstract X500DistinguishedName IssuerName { get; }
 
-		public abstract AsymmetricAlgorithm PrivateKey {
-			get; set;
-		}
+        public abstract AsymmetricAlgorithm PrivateKey { get; set; }
 
-		public abstract PublicKey PublicKey {
-			get;
-		}
+        public abstract PublicKey PublicKey { get; }
 
-		public abstract string SignatureAlgorithm {
-			get;
-		}
+        public abstract string SignatureAlgorithm { get; }
 
-		public abstract X500DistinguishedName SubjectName {
-			get;
-		}
+        public abstract X500DistinguishedName SubjectName { get; }
 
-		public abstract int Version {
-			get;
-		}
+        public abstract int Version { get; }
 
-		internal abstract X509CertificateImplCollection IntermediateCertificates {
-			get;
-		}
+        internal abstract X509CertificateImplCollection IntermediateCertificates { get; }
 
-		internal abstract X509Certificate2Impl FallbackImpl {
-			get;
-		}
+        internal abstract X509Certificate2Impl FallbackImpl { get; }
 
-		public abstract string GetNameInfo (X509NameType nameType, bool forIssuer);
+        public abstract string GetNameInfo(X509NameType nameType, bool forIssuer);
 
-		public abstract bool Verify (X509Certificate2 thisCertificate);
+        public abstract bool Verify(X509Certificate2 thisCertificate);
 
-		public abstract void AppendPrivateKeyInfo (StringBuilder sb);
+        public abstract void AppendPrivateKeyInfo(StringBuilder sb);
 
-		public sealed override X509CertificateImpl CopyWithPrivateKey (RSA privateKey)
-		{
-			var impl = (X509Certificate2Impl)Clone ();
-			impl.PrivateKey = privateKey;
-			return impl;
-		}
+        public sealed override X509CertificateImpl CopyWithPrivateKey(RSA privateKey)
+        {
+            var impl = (X509Certificate2Impl)Clone();
+            impl.PrivateKey = privateKey;
+            return impl;
+        }
 
-		public sealed override X509Certificate CreateCertificate ()
-		{
-			return new X509Certificate2 (this);
-		}
+        public sealed override X509Certificate CreateCertificate()
+        {
+            return new X509Certificate2(this);
+        }
 
-		public abstract void Reset ();
-	}
+        public abstract void Reset();
+    }
 }

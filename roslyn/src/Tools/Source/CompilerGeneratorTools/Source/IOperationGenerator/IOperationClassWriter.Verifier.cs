@@ -17,19 +17,25 @@ namespace IOperationGenerator
             {
                 if (!abstractNode.Name.StartsWith("I"))
                 {
-                    Console.WriteLine($"All IOperation node names must start with I. {abstractNode.Name} does not.");
+                    Console.WriteLine(
+                        $"All IOperation node names must start with I. {abstractNode.Name} does not."
+                    );
                     error = true;
                 }
 
                 if (!abstractNode.Name.EndsWith("Operation"))
                 {
-                    Console.WriteLine($"All IOperation node names must end with Operation. {abstractNode.Name} does not.");
+                    Console.WriteLine(
+                        $"All IOperation node names must end with Operation. {abstractNode.Name} does not."
+                    );
                     error = true;
                 }
 
                 if (!_typeMap.ContainsKey(abstractNode.Base))
                 {
-                    Console.WriteLine($"{abstractNode.Name}'s base type is not an IOperation type.");
+                    Console.WriteLine(
+                        $"{abstractNode.Name}'s base type is not an IOperation type."
+                    );
                     error = true;
                 }
 
@@ -37,15 +43,23 @@ namespace IOperationGenerator
                 {
                     if (abstractNode.Comments?.Elements?[0].Name != "summary")
                     {
-                        Console.WriteLine($"{abstractNode.Name} does not have correctly formatted comments, please ensure that there is a <summary> block for the type.");
+                        Console.WriteLine(
+                            $"{abstractNode.Name} does not have correctly formatted comments, please ensure that there is a <summary> block for the type."
+                        );
                         error = true;
                     }
 
                     foreach (var prop in abstractNode.Properties)
                     {
-                        if (prop.Comments?.Elements?[0].Name != "summary" && !prop.IsInternal && !prop.IsOverride)
+                        if (
+                            prop.Comments?.Elements?[0].Name != "summary"
+                            && !prop.IsInternal
+                            && !prop.IsOverride
+                        )
                         {
-                            Console.WriteLine($"{abstractNode.Name}.{prop.Name} does not have correctly formatted comments, please ensure that there is a <summary> block for the property.");
+                            Console.WriteLine(
+                                $"{abstractNode.Name}.{prop.Name} does not have correctly formatted comments, please ensure that there is a <summary> block for the property."
+                            );
                             error = true;
                         }
                     }
@@ -55,7 +69,9 @@ namespace IOperationGenerator
                 {
                     if (IsImmutableArray(prop.Type, out _) && prop.Type.Contains("?"))
                     {
-                        Console.WriteLine($"{abstractNode.Name}.{prop.Name} has nullable IOperation elements. This is not allowed in IOperation and will mess up Children generation.");
+                        Console.WriteLine(
+                            $"{abstractNode.Name}.{prop.Name} has nullable IOperation elements. This is not allowed in IOperation and will mess up Children generation."
+                        );
                         error = true;
                     }
                 }
@@ -67,23 +83,32 @@ namespace IOperationGenerator
 
                 if (node.HasTypeText is not (null or "true" or "false"))
                 {
-                    Console.WriteLine($"{node.Name} has unexpected value for {nameof(Node.HasType)}: {node.HasTypeText}");
+                    Console.WriteLine(
+                        $"{node.Name} has unexpected value for {nameof(Node.HasType)}: {node.HasTypeText}"
+                    );
                     error = true;
                 }
 
                 if (node.HasConstantValueText is not (null or "true" or "false"))
                 {
-                    Console.WriteLine($"{node.Name} has unexpected value for {nameof(Node.HasConstantValue)}: {node.HasConstantValueText}");
+                    Console.WriteLine(
+                        $"{node.Name} has unexpected value for {nameof(Node.HasConstantValue)}: {node.HasConstantValueText}"
+                    );
                     error = true;
                 }
 
                 if (node.HasConstantValue && !node.HasType)
                 {
-                    Console.WriteLine($"{node.Name} is marked as having a constant value without having a type");
+                    Console.WriteLine(
+                        $"{node.Name} is marked as having a constant value without having a type"
+                    );
                     error = true;
                 }
 
-                var properties = GetAllGeneratedIOperationProperties(node).Where(p => !p.IsInternal).Select(p => p.Name).ToList();
+                var properties = GetAllGeneratedIOperationProperties(node)
+                    .Where(p => !p.IsInternal)
+                    .Select(p => p.Name)
+                    .ToList();
 
                 if (properties.Count < 2)
                 {
@@ -91,9 +116,14 @@ namespace IOperationGenerator
                     {
                         var splitOrder = GetPropertyOrder(node);
 
-                        if (splitOrder.Count != properties.Count || (properties.Count == 1 && properties[0] != splitOrder[0]))
+                        if (
+                            splitOrder.Count != properties.Count
+                            || (properties.Count == 1 && properties[0] != splitOrder[0])
+                        )
                         {
-                            Console.WriteLine($"{node.Name} has inconsistent ChildrenOrder and properties");
+                            Console.WriteLine(
+                                $"{node.Name} has inconsistent ChildrenOrder and properties"
+                            );
                             error = true;
                         }
                     }
@@ -102,7 +132,9 @@ namespace IOperationGenerator
 
                 if (node.ChildrenOrder is null)
                 {
-                    Console.WriteLine($"{node.Name} has more than 1 IOperation property and must declare an explicit ordering with the ChildrenOrder attribute.");
+                    Console.WriteLine(
+                        $"{node.Name} has more than 1 IOperation property and must declare an explicit ordering with the ChildrenOrder attribute."
+                    );
                     Console.WriteLine($"Properties: {string.Join(", ", properties)}");
                     error = true;
                     continue;
@@ -113,7 +145,9 @@ namespace IOperationGenerator
                 {
                     if (!properties.Remove(child))
                     {
-                        Console.WriteLine($"{node.Name}'s ChildrenOrder contains unknown property {child}");
+                        Console.WriteLine(
+                            $"{node.Name}'s ChildrenOrder contains unknown property {child}"
+                        );
                         error = true;
                     }
                 }

@@ -14,9 +14,7 @@ namespace System.Data.Common
         private ushort[] _values = default!; // Late-initialized
 
         public UInt16Storage(DataColumn column)
-        : base(column, typeof(ushort), DefaultValue, StorageType.UInt16)
-        {
-        }
+            : base(column, typeof(ushort), DefaultValue, StorageType.UInt16) { }
 
         public override object Aggregate(int[] records, AggregateType kind)
         {
@@ -31,7 +29,10 @@ namespace System.Data.Common
                         {
                             if (HasValue(record))
                             {
-                                checked { sum += _values[record]; }
+                                checked
+                                {
+                                    sum += _values[record];
+                                }
                                 hasData = true;
                             }
                         }
@@ -48,7 +49,10 @@ namespace System.Data.Common
                         {
                             if (HasValue(record))
                             {
-                                checked { meanSum += _values[record]; }
+                                checked
+                                {
+                                    meanSum += _values[record];
+                                }
                                 meanCount++;
                                 hasData = true;
                             }
@@ -56,7 +60,10 @@ namespace System.Data.Common
                         if (hasData)
                         {
                             ushort mean;
-                            checked { mean = (ushort)(meanSum / meanCount); }
+                            checked
+                            {
+                                mean = (ushort)(meanSum / meanCount);
+                            }
                             return mean;
                         }
                         return _nullValue;
@@ -267,7 +274,12 @@ namespace System.Data.Common
             return new ushort[recordCount];
         }
 
-        protected override void CopyValue(int record, object store, BitArray nullbits, int storeIndex)
+        protected override void CopyValue(
+            int record,
+            object store,
+            BitArray nullbits,
+            int storeIndex
+        )
         {
             ushort[] typedStore = (ushort[])store;
             typedStore[storeIndex] = _values[record];

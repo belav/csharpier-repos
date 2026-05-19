@@ -12,7 +12,11 @@ using Microsoft.VisualStudio.LanguageServer.Protocol;
 
 namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.RequestOrdering
 {
-    [ExportCSharpVisualBasicStatelessLspService(typeof(MutatingRequestHandler)), PartNotDiscoverable, Shared]
+    [
+        ExportCSharpVisualBasicStatelessLspService(typeof(MutatingRequestHandler)),
+        PartNotDiscoverable,
+        Shared
+    ]
     [Method(MethodName)]
     internal class MutatingRequestHandler : ILspServiceRequestHandler<TestRequest, TestResponse>
     {
@@ -21,19 +25,18 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.RequestOrdering
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public MutatingRequestHandler()
-        {
-        }
+        public MutatingRequestHandler() { }
 
         public bool MutatesSolutionState => true;
         public bool RequiresLSPSolution => true;
 
-        public async Task<TestResponse> HandleRequestAsync(TestRequest request, RequestContext context, CancellationToken cancellationToken)
+        public async Task<TestResponse> HandleRequestAsync(
+            TestRequest request,
+            RequestContext context,
+            CancellationToken cancellationToken
+        )
         {
-            var response = new TestResponse
-            {
-                StartTime = DateTime.UtcNow
-            };
+            var response = new TestResponse { StartTime = DateTime.UtcNow };
 
             await Task.Delay(Delay, cancellationToken).ConfigureAwait(false);
 

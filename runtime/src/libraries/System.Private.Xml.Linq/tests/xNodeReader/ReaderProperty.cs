@@ -9,7 +9,6 @@ namespace CoreXml.Test.XLinq
 {
     public partial class XNodeReaderFunctionalTests : TestModule
     {
-
         public partial class XNodeReaderTests : XLinqTestCase
         {
             public partial class CReaderTestModule : BridgeHelpers
@@ -74,7 +73,8 @@ namespace CoreXml.Test.XLinq
                 {
                     XDocument doc = XDocument.Parse("<a b='c'><d>xxx<e/></d></a>");
                     XmlReader r = doc.CreateReader();
-                    while (r.Read()) ;
+                    while (r.Read())
+                        ;
 
                     TestLog.Compare(r.AttributeCount, 0, "Error");
                     TestLog.Compare(r.BaseURI, "", "Error");

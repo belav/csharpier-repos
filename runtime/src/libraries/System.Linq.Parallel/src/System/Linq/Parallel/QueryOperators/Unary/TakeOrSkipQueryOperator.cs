@@ -84,15 +84,27 @@ namespace System.Linq.Parallel
         }
 
         internal override void WrapPartitionedStream<TKey>(
-            PartitionedStream<TResult, TKey> inputStream, IPartitionedStreamRecipient<TResult> recipient, bool preferStriping, QuerySettings settings)
+            PartitionedStream<TResult, TKey> inputStream,
+            IPartitionedStreamRecipient<TResult> recipient,
+            bool preferStriping,
+            QuerySettings settings
+        )
         {
-            Debug.Assert(Child.OrdinalIndexState != OrdinalIndexState.Indexable, "Don't take this code path if the child is indexable.");
+            Debug.Assert(
+                Child.OrdinalIndexState != OrdinalIndexState.Indexable,
+                "Don't take this code path if the child is indexable."
+            );
 
             // If the index is not at least increasing, we need to reindex.
             if (_prematureMerge)
             {
                 ListQueryResults<TResult> results = ExecuteAndCollectResults(
-                    inputStream, inputStream.PartitionCount, Child.OutputOrdered, preferStriping, settings);
+                    inputStream,
+                    inputStream.PartitionCount,
+                    Child.OutputOrdered,
+                    preferStriping,
+                    settings
+                );
                 PartitionedStream<TResult, int> inputIntStream = results.GetPartitionedStream();
                 WrapHelper<int>(inputIntStream, recipient, settings);
             }
@@ -102,22 +114,37 @@ namespace System.Linq.Parallel
             }
         }
 
-        private void WrapHelper<TKey>(PartitionedStream<TResult, TKey> inputStream, IPartitionedStreamRecipient<TResult> recipient, QuerySettings settings)
+        private void WrapHelper<TKey>(
+            PartitionedStream<TResult, TKey> inputStream,
+            IPartitionedStreamRecipient<TResult> recipient,
+            QuerySettings settings
+        )
         {
             int partitionCount = inputStream.PartitionCount;
-            FixedMaxHeap<TKey> sharedIndices = new FixedMaxHeap<TKey>(_count, inputStream.KeyComparer); // an array used to track the sequence of indices leading up to the Nth index
+            FixedMaxHeap<TKey> sharedIndices = new FixedMaxHeap<TKey>(
+                _count,
+                inputStream.KeyComparer
+            ); // an array used to track the sequence of indices leading up to the Nth index
             CountdownEvent sharedBarrier = new CountdownEvent(partitionCount); // a barrier to synchronize before yielding
 
             if (ParallelEnumerable.SinglePartitionMode)
                 Debug.Assert(partitionCount == 1);
 
-            PartitionedStream<TResult, TKey> outputStream =
-                new PartitionedStream<TResult, TKey>(partitionCount, inputStream.KeyComparer, OrdinalIndexState);
+            PartitionedStream<TResult, TKey> outputStream = new PartitionedStream<TResult, TKey>(
+                partitionCount,
+                inputStream.KeyComparer,
+                OrdinalIndexState
+            );
             for (int i = 0; i < partitionCount; i++)
             {
                 outputStream[i] = new TakeOrSkipQueryOperatorEnumerator<TKey>(
-                    inputStream[i], _take, sharedIndices, sharedBarrier,
-                    settings.CancellationState.MergedCancellationToken, inputStream.KeyComparer);
+                    inputStream[i],
+                    _take,
+                    sharedIndices,
+                    sharedBarrier,
+                    settings.CancellationState.MergedCancellationToken,
+                    inputStream.KeyComparer
+                );
             }
 
             recipient.Receive(outputStream);
@@ -131,7 +158,12 @@ namespace System.Linq.Parallel
         internal override QueryResults<TResult> Open(QuerySettings settings, bool preferStriping)
         {
             QueryResults<TResult> childQueryResults = Child.Open(settings, true);
-            return TakeOrSkipQueryOperatorResults.NewResults(childQueryResults, this, settings, preferStriping);
+            return TakeOrSkipQueryOperatorResults.NewResults(
+                childQueryResults,
+                this,
+                settings,
+                preferStriping
+            );
         }
 
         //---------------------------------------------------------------------------------------
@@ -148,7 +180,8 @@ namespace System.Linq.Parallel
         // The enumerator type responsible for executing the Take or Skip.
         //
 
-        private sealed class TakeOrSkipQueryOperatorEnumerator<TKey> : QueryOperatorEnumerator<TResult, TKey>
+        private sealed class TakeOrSkipQueryOperatorEnumerator<TKey>
+            : QueryOperatorEnumerator<TResult, TKey>
         {
             private readonly QueryOperatorEnumerator<TResult, TKey> _source; // The data source to enumerate.
             private readonly int _count; // The number of elements to take or skip.
@@ -168,9 +201,13 @@ namespace System.Linq.Parallel
             //
 
             internal TakeOrSkipQueryOperatorEnumerator(
-                QueryOperatorEnumerator<TResult, TKey> source, bool take,
-                FixedMaxHeap<TKey> sharedIndices, CountdownEvent sharedBarrier, CancellationToken cancellationToken,
-                IComparer<TKey> keyComparer)
+                QueryOperatorEnumerator<TResult, TKey> source,
+                bool take,
+                FixedMaxHeap<TKey> sharedIndices,
+                CountdownEvent sharedBarrier,
+                CancellationToken cancellationToken,
+                IComparer<TKey> keyComparer
+            )
             {
                 Debug.Assert(source != null);
                 Debug.Assert(sharedIndices != null);
@@ -190,7 +227,10 @@ namespace System.Linq.Parallel
             // Straightforward IEnumerator<T> methods.
             //
 
-            internal override bool MoveNext([MaybeNullWhen(false), AllowNull] ref TResult currentElement, [AllowNull] ref TKey currentKey)
+            internal override bool MoveNext(
+                [MaybeNullWhen(false), AllowNull] ref TResult currentElement,
+                [AllowNull] ref TKey currentKey
+            )
             {
                 Debug.Assert(_sharedIndices != null);
 
@@ -225,7 +265,8 @@ namespace System.Linq.Parallel
                         }
                     }
 
-                    if (!ParallelEnumerable.SinglePartitionMode) {
+                    if (!ParallelEnumerable.SinglePartitionMode)
+                    {
                         // Before exiting the search phase, we will synchronize with others. This is a barrier.
                         _sharedBarrier.Signal();
                         _sharedBarrier.Wait(_cancellationToken);
@@ -255,7 +296,10 @@ namespace System.Linq.Parallel
 
                     // Only yield the element if its index is less than or equal to the max index.
                     return _sharedIndices.Count == 0
-                        || _keyComparer.Compare(_buffer[_bufferIndex.Value].Second, _sharedIndices.MaxValue) <= 0;
+                        || _keyComparer.Compare(
+                            _buffer[_bufferIndex.Value].Second,
+                            _sharedIndices.MaxValue
+                        ) <= 0;
                 }
                 else
                 {
@@ -278,11 +322,18 @@ namespace System.Linq.Parallel
                         // enumerating the data source until it is empty.
                         if (_bufferIndex.Value < _buffer.Count - 1)
                         {
-                            for (_bufferIndex.Value++; _bufferIndex.Value < _buffer.Count; _bufferIndex.Value++)
+                            for (
+                                _bufferIndex.Value++;
+                                _bufferIndex.Value < _buffer.Count;
+                                _bufferIndex.Value++
+                            )
                             {
                                 // If the current buffered element's index is greater than the 'count'-th index,
                                 // we will yield it as a result.
-                                if (_keyComparer.Compare(_buffer[_bufferIndex.Value].Second, minKey) > 0)
+                                if (
+                                    _keyComparer.Compare(_buffer[_bufferIndex.Value].Second, minKey)
+                                    > 0
+                                )
                                 {
                                     currentElement = _buffer[_bufferIndex.Value].First;
                                     currentKey = _buffer[_bufferIndex.Value].Second;
@@ -295,8 +346,10 @@ namespace System.Linq.Parallel
                     // Lastly, so long as our input still has elements, they will be yieldable.
                     if (_source.MoveNext(ref currentElement!, ref currentKey))
                     {
-                        Debug.Assert(_count <= 0 || _keyComparer.Compare(currentKey, minKey) > 0,
-                                        "expected remaining element indices to be greater than smallest");
+                        Debug.Assert(
+                            _count <= 0 || _keyComparer.Compare(currentKey, minKey) > 0,
+                            "expected remaining element indices to be greater than smallest"
+                        );
                         return true;
                     }
                 }
@@ -321,7 +374,10 @@ namespace System.Linq.Parallel
                 return Child.AsSequentialQuery(token).Take(_count);
             }
 
-            IEnumerable<TResult> wrappedChild = CancellableEnumerable.Wrap(Child.AsSequentialQuery(token), token);
+            IEnumerable<TResult> wrappedChild = CancellableEnumerable.Wrap(
+                Child.AsSequentialQuery(token),
+                token
+            );
             return wrappedChild.Skip(_count);
         }
 
@@ -336,24 +392,38 @@ namespace System.Linq.Parallel
             private readonly int _childCount; // The number of elements in child results
 
             public static QueryResults<TResult> NewResults(
-                QueryResults<TResult> childQueryResults, TakeOrSkipQueryOperator<TResult> op,
-                QuerySettings settings, bool preferStriping)
+                QueryResults<TResult> childQueryResults,
+                TakeOrSkipQueryOperator<TResult> op,
+                QuerySettings settings,
+                bool preferStriping
+            )
             {
                 if (childQueryResults.IsIndexible)
                 {
                     return new TakeOrSkipQueryOperatorResults(
-                        childQueryResults, op, settings, preferStriping);
+                        childQueryResults,
+                        op,
+                        settings,
+                        preferStriping
+                    );
                 }
                 else
                 {
                     return new UnaryQueryOperatorResults(
-                        childQueryResults, op, settings, preferStriping);
+                        childQueryResults,
+                        op,
+                        settings,
+                        preferStriping
+                    );
                 }
             }
 
             private TakeOrSkipQueryOperatorResults(
-                QueryResults<TResult> childQueryResults, TakeOrSkipQueryOperator<TResult> takeOrSkipOp,
-                QuerySettings settings, bool preferStriping)
+                QueryResults<TResult> childQueryResults,
+                TakeOrSkipQueryOperator<TResult> takeOrSkipOp,
+                QuerySettings settings,
+                bool preferStriping
+            )
                 : base(childQueryResults, takeOrSkipOp, settings, preferStriping)
             {
                 _takeOrSkipOp = takeOrSkipOp;

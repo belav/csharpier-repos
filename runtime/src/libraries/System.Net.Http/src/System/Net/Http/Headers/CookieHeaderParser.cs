@@ -12,11 +12,14 @@ namespace System.Net.Http.Headers
         // According to RFC 6265 Section 4.2 multiple cookies have
         // to be concatenated using "; " as the separator.
         private CookieHeaderParser()
-            : base(true, "; ")
-        {
-        }
+            : base(true, "; ") { }
 
-        public override bool TryParseValue(string? value, object? storeValue, ref int index, [NotNullWhen(true)] out object? parsedValue)
+        public override bool TryParseValue(
+            string? value,
+            object? storeValue,
+            ref int index,
+            [NotNullWhen(true)] out object? parsedValue
+        )
         {
             // Some headers support empty/null values. This one doesn't.
             if (string.IsNullOrEmpty(value) || (index == value.Length))

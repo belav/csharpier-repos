@@ -17,8 +17,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertLinq
     [Trait(Traits.Feature, Traits.Features.CodeActionsConvertQueryToForEach)]
     public class ConvertLinqQueryToForEachTests : AbstractCSharpCodeActionTest
     {
-        protected override CodeRefactoringProvider CreateCodeRefactoringProvider(Workspace workspace, TestParameters parameters)
-          => new CodeAnalysis.CSharp.ConvertLinq.CSharpConvertLinqQueryToForEachProvider();
+        protected override CodeRefactoringProvider CreateCodeRefactoringProvider(
+            Workspace workspace,
+            TestParameters parameters
+        ) => new CodeAnalysis.CSharp.ConvertLinq.CSharpConvertLinqQueryToForEachProvider();
 
         #region Query Expressions
 
@@ -4273,7 +4275,6 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertLinq
         [Fact]
         public async Task PreprocessorDirectives()
         {
-
             var source = """
                 using System.Collections.Generic;
                 using System.Linq;
@@ -4427,7 +4428,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertLinq
                     }
                 }
                 """;
-            await TestInRegularAndScriptAsync(source, output, parseOptions: new CSharpParseOptions(CodeAnalysis.CSharp.LanguageVersion.CSharp7_3));
+            await TestInRegularAndScriptAsync(
+                source,
+                output,
+                parseOptions: new CSharpParseOptions(CodeAnalysis.CSharp.LanguageVersion.CSharp7_3)
+            );
         }
 
         [Fact]
@@ -4471,7 +4476,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertLinq
                     }
                 }
                 """;
-            await TestInRegularAndScriptAsync(source, output, parseOptions: new CSharpParseOptions(CodeAnalysis.CSharp.LanguageVersion.CSharp8));
+            await TestInRegularAndScriptAsync(
+                source,
+                output,
+                parseOptions: new CSharpParseOptions(CodeAnalysis.CSharp.LanguageVersion.CSharp8)
+            );
         }
 
         #endregion

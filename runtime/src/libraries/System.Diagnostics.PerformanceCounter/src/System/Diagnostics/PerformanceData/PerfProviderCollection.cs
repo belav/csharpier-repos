@@ -17,7 +17,11 @@ namespace System.Diagnostics.PerformanceData
         internal PerfProvider(Guid providerGuid)
         {
             _providerGuid = providerGuid;
-            uint Status = Interop.PerfCounter.PerfStartProvider(ref _providerGuid, null, out _hProvider);
+            uint Status = Interop.PerfCounter.PerfStartProvider(
+                ref _providerGuid,
+                null,
+                out _hProvider
+            );
             // ERROR_INVALID_PARAMETER, ERROR_OUTOFMEMORY
             if (Status != (uint)Interop.Errors.ERROR_SUCCESS)
             {
@@ -32,9 +36,11 @@ namespace System.Diagnostics.PerformanceData
         // Use mutex to serialize collection initialization/update.
         private static object s_hiddenInternalSyncObject;
         private static readonly List<PerfProvider> s_providerList = new List<PerfProvider>();
-        private static readonly Dictionary<object, int> s_counterSetList = new Dictionary<object, int>();
+        private static readonly Dictionary<object, int> s_counterSetList =
+            new Dictionary<object, int>();
         private static readonly CounterType[] s_counterTypes = Enum.GetValues<CounterType>();
-        private static readonly CounterSetInstanceType[] s_counterSetInstanceTypes = Enum.GetValues<CounterSetInstanceType>();
+        private static readonly CounterSetInstanceType[] s_counterSetInstanceTypes =
+            Enum.GetValues<CounterSetInstanceType>();
 
         private static object s_lockObject
         {
@@ -97,7 +103,10 @@ namespace System.Diagnostics.PerformanceData
             {
                 if (s_counterSetList.ContainsKey(counterSetGuid))
                 {
-                    throw new ArgumentException(SR.Format(SR.Perflib_Argument_CounterSetAlreadyRegister, counterSetGuid), nameof(counterSetGuid));
+                    throw new ArgumentException(
+                        SR.Format(SR.Perflib_Argument_CounterSetAlreadyRegister, counterSetGuid),
+                        nameof(counterSetGuid)
+                    );
                 }
                 s_counterSetList.Add(counterSetGuid, 0);
             }
@@ -123,9 +132,13 @@ namespace System.Diagnostics.PerformanceData
             return false;
         }
 
-        internal static bool ValidateCounterSetInstanceType(CounterSetInstanceType inCounterSetInstanceType)
+        internal static bool ValidateCounterSetInstanceType(
+            CounterSetInstanceType inCounterSetInstanceType
+        )
         {
-            foreach (CounterSetInstanceType DefinedCounterSetInstanceType in s_counterSetInstanceTypes)
+            foreach (
+                CounterSetInstanceType DefinedCounterSetInstanceType in s_counterSetInstanceTypes
+            )
             {
                 if (DefinedCounterSetInstanceType == inCounterSetInstanceType)
                 {

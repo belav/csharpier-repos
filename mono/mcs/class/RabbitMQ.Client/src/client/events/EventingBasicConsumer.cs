@@ -72,7 +72,8 @@ namespace RabbitMQ.Client.Events
         {
             base.HandleBasicCancelOk(consumerTag);
 
-            if (Unregistered != null) {
+            if (Unregistered != null)
+            {
                 Unregistered(this, new ConsumerEventArgs(consumerTag));
             }
         }
@@ -82,35 +83,46 @@ namespace RabbitMQ.Client.Events
         {
             base.HandleBasicConsumeOk(consumerTag);
 
-            if (Registered != null) {
+            if (Registered != null)
+            {
                 Registered(this, new ConsumerEventArgs(consumerTag));
             }
         }
 
         ///<summary>Fires the Received event.</summary>
-        public override void HandleBasicDeliver(string consumerTag,
-                                                ulong deliveryTag,
-                                                bool redelivered,
-                                                string exchange,
-                                                string routingKey,
-                                                IBasicProperties properties,
-                                                byte[] body)
+        public override void HandleBasicDeliver(
+            string consumerTag,
+            ulong deliveryTag,
+            bool redelivered,
+            string exchange,
+            string routingKey,
+            IBasicProperties properties,
+            byte[] body
+        )
         {
-            base.HandleBasicDeliver(consumerTag,
-                                    deliveryTag,
-                                    redelivered,
-                                    exchange,
-                                    routingKey,
-                                    properties,
-                                    body);
-            if (Received != null) {
-                Received(this, new BasicDeliverEventArgs(consumerTag,
-                                                         deliveryTag,
-                                                         redelivered,
-                                                         exchange,
-                                                         routingKey,
-                                                         properties,
-                                                         body));
+            base.HandleBasicDeliver(
+                consumerTag,
+                deliveryTag,
+                redelivered,
+                exchange,
+                routingKey,
+                properties,
+                body
+            );
+            if (Received != null)
+            {
+                Received(
+                    this,
+                    new BasicDeliverEventArgs(
+                        consumerTag,
+                        deliveryTag,
+                        redelivered,
+                        exchange,
+                        routingKey,
+                        properties,
+                        body
+                    )
+                );
             }
         }
 
@@ -119,7 +131,8 @@ namespace RabbitMQ.Client.Events
         {
             base.HandleModelShutdown(model, reason);
 
-            if (Shutdown != null) {
+            if (Shutdown != null)
+            {
                 Shutdown(this, reason);
             }
         }

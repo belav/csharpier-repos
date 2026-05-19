@@ -16,10 +16,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -34,49 +34,52 @@ using System.Reflection;
 using System.Runtime.Remoting;
 using System.Runtime.Remoting.Contexts;
 
-namespace System.Runtime.Remoting {
+namespace System.Runtime.Remoting
+{
+    [System.Runtime.InteropServices.ComVisible(true)]
+    public class ActivatedClientTypeEntry : TypeEntry
+    {
+        string applicationUrl;
+        Type obj_type;
 
-	[System.Runtime.InteropServices.ComVisible (true)]
-	public class ActivatedClientTypeEntry : TypeEntry
-	{
-		string applicationUrl;
-		Type obj_type;
-		
-		public ActivatedClientTypeEntry (Type type, string appUrl)
-		{
-			AssemblyName = type.Assembly.FullName;
-			TypeName = type.FullName;
-			applicationUrl = appUrl;
-			obj_type = type;
-		}
+        public ActivatedClientTypeEntry(Type type, string appUrl)
+        {
+            AssemblyName = type.Assembly.FullName;
+            TypeName = type.FullName;
+            applicationUrl = appUrl;
+            obj_type = type;
+        }
 
-		public ActivatedClientTypeEntry (string typeName, string assemblyName, string appUrl)
-		{
-			AssemblyName = assemblyName;
-			TypeName = typeName;
-			applicationUrl = appUrl;
-			Assembly a = Assembly.Load (assemblyName);
-			obj_type = a.GetType (typeName);
-			if (obj_type == null)
-				throw new RemotingException ("Type not found: " + typeName + ", " + assemblyName);
-		}
+        public ActivatedClientTypeEntry(string typeName, string assemblyName, string appUrl)
+        {
+            AssemblyName = assemblyName;
+            TypeName = typeName;
+            applicationUrl = appUrl;
+            Assembly a = Assembly.Load(assemblyName);
+            obj_type = a.GetType(typeName);
+            if (obj_type == null)
+                throw new RemotingException("Type not found: " + typeName + ", " + assemblyName);
+        }
 
-		public string ApplicationUrl {
-			get { return applicationUrl; }
-		}
+        public string ApplicationUrl
+        {
+            get { return applicationUrl; }
+        }
 
-		public IContextAttribute [] ContextAttributes {
-			get { return null; }
-			set { } // This is not implemented in the MS runtime yet.
-		}
+        public IContextAttribute[] ContextAttributes
+        {
+            get { return null; }
+            set { } // This is not implemented in the MS runtime yet.
+        }
 
-		public Type ObjectType {
-			get { return obj_type; }
-		}
+        public Type ObjectType
+        {
+            get { return obj_type; }
+        }
 
-		public override string ToString ()
-		{
-			return TypeName + AssemblyName + ApplicationUrl;
-		}
-	}
+        public override string ToString()
+        {
+            return TypeName + AssemblyName + ApplicationUrl;
+        }
+    }
 }

@@ -17,12 +17,19 @@ namespace System.Web.Http.Cors.Tracing
             Mock<ITraceWriter> traceWriterMock = new Mock<ITraceWriter>();
             Mock<ICorsEngine> corsEngineMock = new Mock<ICorsEngine>();
             bool innerIsCalled = false;
-            corsEngineMock.Setup(engine => engine.EvaluatePolicy(It.IsAny<CorsRequestContext>(), It.IsAny<CorsPolicy>())).Returns(() =>
-            {
-                innerIsCalled = true;
-                return new CorsResult();
-            });
-            CorsEngineTracer tracer = new CorsEngineTracer(corsEngineMock.Object, traceWriterMock.Object);
+            corsEngineMock
+                .Setup(engine =>
+                    engine.EvaluatePolicy(It.IsAny<CorsRequestContext>(), It.IsAny<CorsPolicy>())
+                )
+                .Returns(() =>
+                {
+                    innerIsCalled = true;
+                    return new CorsResult();
+                });
+            CorsEngineTracer tracer = new CorsEngineTracer(
+                corsEngineMock.Object,
+                traceWriterMock.Object
+            );
 
             tracer.EvaluatePolicy(new CorsRequestContext(), new CorsPolicy());
 
@@ -36,25 +43,39 @@ namespace System.Web.Http.Cors.Tracing
             TraceRecord endTrace = null;
             Mock<ITraceWriter> traceWriterMock = new Mock<ITraceWriter>();
             traceWriterMock
-                .Setup(t => t.Trace(It.IsAny<HttpRequestMessage>(), It.IsAny<string>(), It.IsAny<TraceLevel>(), It.IsAny<Action<TraceRecord>>()))
-                .Callback<HttpRequestMessage, string, TraceLevel, Action<TraceRecord>>((request, category, level, traceAction) =>
-                {
-                    TraceRecord traceRecord = new TraceRecord(request, category, level);
-                    traceAction(traceRecord);
-                    if (traceRecord.Kind == TraceKind.Begin)
+                .Setup(t =>
+                    t.Trace(
+                        It.IsAny<HttpRequestMessage>(),
+                        It.IsAny<string>(),
+                        It.IsAny<TraceLevel>(),
+                        It.IsAny<Action<TraceRecord>>()
+                    )
+                )
+                .Callback<HttpRequestMessage, string, TraceLevel, Action<TraceRecord>>(
+                    (request, category, level, traceAction) =>
                     {
-                        beginTrace = traceRecord;
+                        TraceRecord traceRecord = new TraceRecord(request, category, level);
+                        traceAction(traceRecord);
+                        if (traceRecord.Kind == TraceKind.Begin)
+                        {
+                            beginTrace = traceRecord;
+                        }
+                        else if (traceRecord.Kind == TraceKind.End)
+                        {
+                            endTrace = traceRecord;
+                        }
                     }
-                    else if (traceRecord.Kind == TraceKind.End)
-                    {
-                        endTrace = traceRecord;
-                    }
-                });
+                );
             Mock<ICorsEngine> corsEngineMock = new Mock<ICorsEngine>();
             corsEngineMock
-                .Setup(engine => engine.EvaluatePolicy(It.IsAny<CorsRequestContext>(), It.IsAny<CorsPolicy>()))
+                .Setup(engine =>
+                    engine.EvaluatePolicy(It.IsAny<CorsRequestContext>(), It.IsAny<CorsPolicy>())
+                )
                 .Returns(new CorsResult());
-            CorsEngineTracer tracer = new CorsEngineTracer(corsEngineMock.Object, traceWriterMock.Object);
+            CorsEngineTracer tracer = new CorsEngineTracer(
+                corsEngineMock.Object,
+                traceWriterMock.Object
+            );
 
             tracer.EvaluatePolicy(new CorsRequestContext(), new CorsPolicy());
 
@@ -69,20 +90,31 @@ namespace System.Web.Http.Cors.Tracing
             Assert.Equal("EvaluatePolicy", endTrace.Operation);
             Assert.Equal(
                 @"CorsResult returned: 'IsValid: True, AllowCredentials: False, PreflightMaxAge: null, AllowOrigin: , AllowExposedHeaders: {}, AllowHeaders: {}, AllowMethods: {}, ErrorMessages: {}'",
-                endTrace.Message);
+                endTrace.Message
+            );
         }
 
         [Fact]
         public void EvaluatePolicy_Trace_ContainsHttpRequest()
         {
             // Arrange
-            HttpRequestMessage httpRequest = new HttpRequestMessage(HttpMethod.Options, "http://example.com/test");
+            HttpRequestMessage httpRequest = new HttpRequestMessage(
+                HttpMethod.Options,
+                "http://example.com/test"
+            );
             httpRequest.Headers.Add("Origin", "foo");
             CorsRequestContext corsRequestContext = httpRequest.GetCorsRequestContext();
 
             Mock<ITraceWriter> traceWriterMock = new Mock<ITraceWriter>();
             traceWriterMock
-                .Setup(t => t.Trace(httpRequest, It.IsAny<string>(), It.IsAny<TraceLevel>(), It.IsAny<Action<TraceRecord>>()))
+                .Setup(t =>
+                    t.Trace(
+                        httpRequest,
+                        It.IsAny<string>(),
+                        It.IsAny<TraceLevel>(),
+                        It.IsAny<Action<TraceRecord>>()
+                    )
+                )
                 .Verifiable();
 
             Mock<ICorsEngine> corsEngineMock = new Mock<ICorsEngine>();
@@ -90,12 +122,15 @@ namespace System.Web.Http.Cors.Tracing
                 .Setup(engine => engine.EvaluatePolicy(corsRequestContext, It.IsAny<CorsPolicy>()))
                 .Returns(new CorsResult());
 
-            CorsEngineTracer tracer = new CorsEngineTracer(corsEngineMock.Object, traceWriterMock.Object);
+            CorsEngineTracer tracer = new CorsEngineTracer(
+                corsEngineMock.Object,
+                traceWriterMock.Object
+            );
 
             // Act
             tracer.EvaluatePolicy(corsRequestContext, new CorsPolicy());
 
-            // Assert 
+            // Assert
             traceWriterMock.Verify();
         }
     }

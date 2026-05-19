@@ -10,7 +10,9 @@ namespace System.ServiceModel.Channels
     {
         const string PropertyName = "BufferedReceiveMessageProperty";
         MessageBuffer messageBuffer;
-        static MessageBuffer dummyMessageBuffer = BufferedMessage.CreateMessage(MessageVersion.Default, string.Empty).CreateBufferedCopy(1);
+        static MessageBuffer dummyMessageBuffer = BufferedMessage
+            .CreateMessage(MessageVersion.Default, string.Empty)
+            .CreateBufferedCopy(1);
 
         internal BufferedReceiveMessageProperty(ref MessageRpc rpc)
         {
@@ -25,41 +27,34 @@ namespace System.ServiceModel.Channels
         }
 
         // Implementation specifc storage
-        public object UserState
-        {
-            get;
-            set;
-        }
+        public object UserState { get; set; }
 
         // The original RequestContext that was created by the ChannelHandler
-        public BufferedRequestContext RequestContext
-        {
-            get;
-            private set;
-        }
+        public BufferedRequestContext RequestContext { get; private set; }
 
         // The 'Manual Concurrency' notification which allows higher layers to notify the dispatcher of an event
         // e.g. The event associated with re-pumping the above buffered RequestContext again
-        internal IInvokeReceivedNotification Notification
-        {
-            get;
-            private set;
-        }
+        internal IInvokeReceivedNotification Notification { get; private set; }
 
         public void RegisterForReplay(OperationContext operationContext)
         {
-            this.messageBuffer = (MessageBuffer)operationContext.IncomingMessageProperties[ChannelHandler.MessageBufferPropertyName];
+            this.messageBuffer = (MessageBuffer)
+                operationContext.IncomingMessageProperties[
+                    ChannelHandler.MessageBufferPropertyName
+                ];
             // cannot remove the MessageBufferProperty from messageProperties because it causes the message buffer associated with the property
             // to be disposed of.  Assigning null to the property has the same effect, so we assign dummyMessageBuffer to the property.
-            operationContext.IncomingMessageProperties[ChannelHandler.MessageBufferPropertyName] = dummyMessageBuffer;
+            operationContext.IncomingMessageProperties[ChannelHandler.MessageBufferPropertyName] =
+                dummyMessageBuffer;
         }
 
         public void ReplayRequest()
         {
             Message requestMessage = this.messageBuffer.CreateMessage();
-            // re-injecting the MessageBufferProperty here so that it can be reused by the dispatch layer 
+            // re-injecting the MessageBufferProperty here so that it can be reused by the dispatch layer
             // (ChannelHandler.DispatchAndReleasePump to be specific) instead of recreating the buffer for replay.
-            requestMessage.Properties[ChannelHandler.MessageBufferPropertyName] = this.messageBuffer;
+            requestMessage.Properties[ChannelHandler.MessageBufferPropertyName] =
+                this.messageBuffer;
             this.RequestContext.ReInitialize(requestMessage);
         }
 
@@ -70,7 +65,10 @@ namespace System.ServiceModel.Channels
             return TryGet(message.Properties, out property);
         }
 
-        public static bool TryGet(MessageProperties properties, out BufferedReceiveMessageProperty property)
+        public static bool TryGet(
+            MessageProperties properties,
+            out BufferedReceiveMessageProperty property
+        )
         {
             Fx.Assert(properties != null, "The MessageProperties parameter is null");
 

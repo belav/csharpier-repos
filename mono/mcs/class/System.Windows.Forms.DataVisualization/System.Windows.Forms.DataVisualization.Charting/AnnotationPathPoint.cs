@@ -2,7 +2,7 @@
 // Authors:
 // Jonathan Pobst (monkey@jpobst.com)
 //
-// Copyright (C) 2009 Novell, Inc (http://www.novell.com) 
+// Copyright (C) 2009 Novell, Inc (http://www.novell.com)
 //
 // Permission is hereby granted, free of charge, to any person obtaining
 // a copy of this software and associated documentation files (the
@@ -11,10 +11,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -27,29 +27,27 @@ using System;
 
 namespace System.Windows.Forms.DataVisualization.Charting
 {
-	public class AnnotationPathPoint : ChartElement
-	{
-		#region Constructors
-		public AnnotationPathPoint () : this (0, 0)
-		{
-		}
+    public class AnnotationPathPoint : ChartElement
+    {
+        #region Constructors
+        public AnnotationPathPoint()
+            : this(0, 0) { }
 
-		public AnnotationPathPoint (float x, float y) : this (x, y, 0)
-		{
-		}
+        public AnnotationPathPoint(float x, float y)
+            : this(x, y, 0) { }
 
-		public AnnotationPathPoint (float x, float y, byte type)
-		{
-			X = x;
-			Y = y;
-		}
-		#endregion
+        public AnnotationPathPoint(float x, float y, byte type)
+        {
+            X = x;
+            Y = y;
+        }
+        #endregion
 
-		#region Public Properties
-		public string Name { get; private set; }
-		public byte PointType { get; set; }
-		public float X { get; set; }
-		public float Y { get; set; }
-		#endregion
-	}
+        #region Public Properties
+        public string Name { get; private set; }
+        public byte PointType { get; set; }
+        public float X { get; set; }
+        public float Y { get; set; }
+        #endregion
+    }
 }

@@ -18,20 +18,25 @@ Revision History:
     Jan 25 2004 - Changed the visibility of the class from public to internal, compressed unused logic.
 
 --*/
-namespace System.Net.Cache {
-using System;
-using System.Collections;
-using System.Net.Configuration;
-using System.Configuration;
-
+namespace System.Net.Cache
+{
+    using System;
+    using System.Collections;
+    using System.Configuration;
+    using System.Net.Configuration;
 
     /// <summary>  Specifies app domain-wide default settings for request caching </summary>
-    internal sealed class RequestCacheManager {
-        private RequestCacheManager() {}
+    internal sealed class RequestCacheManager
+    {
+        private RequestCacheManager() { }
 
         private static volatile RequestCachingSectionInternal s_CacheConfigSettings;
 
-        private static readonly RequestCacheBinding s_BypassCacheBinding = new RequestCacheBinding (null, null, new RequestCachePolicy(RequestCacheLevel.BypassCache));
+        private static readonly RequestCacheBinding s_BypassCacheBinding = new RequestCacheBinding(
+            null,
+            null,
+            new RequestCachePolicy(RequestCacheLevel.BypassCache)
+        );
 
         private static volatile RequestCacheBinding s_DefaultGlobalBinding;
         private static volatile RequestCacheBinding s_DefaultHttpBinding;
@@ -48,13 +53,16 @@ using System.Configuration;
             if (s_CacheConfigSettings == null)
                 LoadConfigSettings();
 
-            if(s_CacheConfigSettings.DisableAllCaching)
+            if (s_CacheConfigSettings.DisableAllCaching)
                 return s_BypassCacheBinding;
 
             if (internedScheme.Length == 0)
                 return s_DefaultGlobalBinding;
 
-            if ((object)internedScheme == (object)Uri.UriSchemeHttp || (object)internedScheme == (object)Uri.UriSchemeHttps)
+            if (
+                (object)internedScheme == (object)Uri.UriSchemeHttp
+                || (object)internedScheme == (object)Uri.UriSchemeHttps
+            )
                 return s_DefaultHttpBinding;
 
             if ((object)internedScheme == (object)Uri.UriSchemeFtp)
@@ -83,7 +91,7 @@ using System.Configuration;
             if (s_CacheConfigSettings == null)
                 LoadConfigSettings();
 
-            if(s_CacheConfigSettings.DisableAllCaching)
+            if (s_CacheConfigSettings.DisableAllCaching)
                 return;
 
             if (uriScheme.Length == 0)
@@ -93,6 +101,7 @@ using System.Configuration;
             else if (uriScheme == Uri.UriSchemeFtp)
                 s_DefaultFtpBinding = binding;
         }
+
         //
         private static void LoadConfigSettings()
         {
@@ -104,11 +113,24 @@ using System.Configuration;
 #if MONO
                     var settings = new RequestCachingSectionInternal();
 #else
-                    RequestCachingSectionInternal settings = RequestCachingSectionInternal.GetSection();
+                    RequestCachingSectionInternal settings =
+                        RequestCachingSectionInternal.GetSection();
 
-                    s_DefaultGlobalBinding = new RequestCacheBinding (settings.DefaultCache, settings.DefaultHttpValidator, settings.DefaultCachePolicy);
-                    s_DefaultHttpBinding = new RequestCacheBinding (settings.DefaultCache, settings.DefaultHttpValidator, settings.DefaultHttpCachePolicy);
-                    s_DefaultFtpBinding = new RequestCacheBinding (settings.DefaultCache, settings.DefaultFtpValidator, settings.DefaultFtpCachePolicy);
+                    s_DefaultGlobalBinding = new RequestCacheBinding(
+                        settings.DefaultCache,
+                        settings.DefaultHttpValidator,
+                        settings.DefaultCachePolicy
+                    );
+                    s_DefaultHttpBinding = new RequestCacheBinding(
+                        settings.DefaultCache,
+                        settings.DefaultHttpValidator,
+                        settings.DefaultHttpCachePolicy
+                    );
+                    s_DefaultFtpBinding = new RequestCacheBinding(
+                        settings.DefaultCache,
+                        settings.DefaultFtpValidator,
+                        settings.DefaultFtpCachePolicy
+                    );
 #endif
 
                     s_CacheConfigSettings = settings;
@@ -120,9 +142,9 @@ using System.Configuration;
 #if MONO
     class RequestCacheValidator
     {
-        public object CreateValidator ()
+        public object CreateValidator()
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
     }
 
@@ -135,29 +157,36 @@ using System.Configuration;
 
     //
     //
-    internal class RequestCacheBinding  {
-        private RequestCache          m_RequestCache;
+    internal class RequestCacheBinding
+    {
+        private RequestCache m_RequestCache;
         private RequestCacheValidator m_CacheValidator;
-        private RequestCachePolicy    m_Policy;
+        private RequestCachePolicy m_Policy;
 
-
-        internal RequestCacheBinding (RequestCache requestCache, RequestCacheValidator cacheValidator, RequestCachePolicy  policy) {
+        internal RequestCacheBinding(
+            RequestCache requestCache,
+            RequestCacheValidator cacheValidator,
+            RequestCachePolicy policy
+        )
+        {
             m_RequestCache = requestCache;
             m_CacheValidator = cacheValidator;
             m_Policy = policy;
         }
 
-        internal RequestCache Cache {
-            get {return m_RequestCache;}
+        internal RequestCache Cache
+        {
+            get { return m_RequestCache; }
         }
 
-        internal RequestCacheValidator Validator {
-            get {return m_CacheValidator;}
+        internal RequestCacheValidator Validator
+        {
+            get { return m_CacheValidator; }
         }
 
-        internal RequestCachePolicy Policy {
-            get {return m_Policy;}
+        internal RequestCachePolicy Policy
+        {
+            get { return m_Policy; }
         }
-
     }
 }

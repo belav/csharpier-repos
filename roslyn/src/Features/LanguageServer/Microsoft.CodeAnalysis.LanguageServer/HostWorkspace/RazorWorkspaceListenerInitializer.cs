@@ -28,7 +28,10 @@ internal sealed class RazorWorkspaceListenerInitializer
 
     [ImportingConstructor]
     [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-    public RazorWorkspaceListenerInitializer(LanguageServerWorkspaceFactory workspaceFactory, ILoggerFactory loggerFactory)
+    public RazorWorkspaceListenerInitializer(
+        LanguageServerWorkspaceFactory workspaceFactory,
+        ILoggerFactory loggerFactory
+    )
     {
         _logger = loggerFactory.CreateLogger(nameof(RazorWorkspaceListenerInitializer));
 
@@ -70,7 +73,10 @@ internal sealed class RazorWorkspaceListenerInitializer
             if (_razorWorkspaceListener is null)
             {
                 // We haven't been initialized by the extension yet, so just store the project id, to tell Razor later
-                _logger.LogTrace("{projectId} queuing up a dynamic file notify for later", projectId);
+                _logger.LogTrace(
+                    "{projectId} queuing up a dynamic file notify for later",
+                    projectId
+                );
                 _projectIdWithDynamicFiles.Add(projectId);
 
                 return;
@@ -78,7 +84,10 @@ internal sealed class RazorWorkspaceListenerInitializer
         }
 
         // We've been initialized, so just pass the information along
-        _logger.LogTrace("{projectId} forwarding on a dynamic file notification because we're initialized", projectId);
+        _logger.LogTrace(
+            "{projectId} forwarding on a dynamic file notification because we're initialized",
+            projectId
+        );
         _razorWorkspaceListener.NotifyDynamicFile(projectId);
     }
 }

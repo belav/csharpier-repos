@@ -46,7 +46,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
             MethodSymbol? currentSourceMethod,
             ImmutableArray<LocalSymbol> locals,
             ImmutableSortedSet<int> inScopeHoistedLocalSlots,
-            MethodDebugInfo<TypeSymbol, LocalSymbol> methodDebugInfo)
+            MethodDebugInfo<TypeSymbol, LocalSymbol> methodDebugInfo
+        )
         {
             RoslynDebug.AssertNotNull(inScopeHoistedLocalSlots);
             RoslynDebug.AssertNotNull(methodDebugInfo);
@@ -73,7 +74,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
         internal static EvaluationContext CreateTypeContext(
             CSharpCompilation compilation,
             Guid moduleVersionId,
-            int typeToken)
+            int typeToken
+        )
         {
             Debug.Assert(MetadataTokens.Handle(typeToken).Kind == HandleKind.TypeDefinition);
 
@@ -87,7 +89,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
                 currentSourceMethod: null,
                 locals: default,
                 inScopeHoistedLocalSlots: ImmutableSortedSet<int>.Empty,
-                methodDebugInfo: MethodDebugInfo<TypeSymbol, LocalSymbol>.None);
+                methodDebugInfo: MethodDebugInfo<TypeSymbol, LocalSymbol>.None
+            );
         }
 
         /// <summary>
@@ -108,11 +111,15 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
             int methodToken,
             int methodVersion,
             uint ilOffset,
-            int localSignatureToken)
+            int localSignatureToken
+        )
         {
             var offset = NormalizeILOffset(ilOffset);
 
-            var compilation = metadataBlocks.ToCompilation(moduleVersionId: default, MakeAssemblyReferencesKind.AllAssemblies);
+            var compilation = metadataBlocks.ToCompilation(
+                moduleVersionId: default,
+                MakeAssemblyReferencesKind.AllAssemblies
+            );
 
             return CreateMethodContext(
                 compilation,
@@ -121,7 +128,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
                 methodToken,
                 methodVersion,
                 offset,
-                localSignatureToken);
+                localSignatureToken
+            );
         }
 
         /// <summary>
@@ -142,22 +150,40 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
             int methodToken,
             int methodVersion,
             int ilOffset,
-            int localSignatureToken)
+            int localSignatureToken
+        )
         {
             var methodHandle = (MethodDefinitionHandle)MetadataTokens.Handle(methodToken);
             var currentSourceMethod = compilation.GetSourceMethod(moduleVersionId, methodHandle);
-            var localSignatureHandle = (localSignatureToken != 0) ? (StandaloneSignatureHandle)MetadataTokens.Handle(localSignatureToken) : default;
+            var localSignatureHandle =
+                (localSignatureToken != 0)
+                    ? (StandaloneSignatureHandle)MetadataTokens.Handle(localSignatureToken)
+                    : default;
 
             var currentFrame = compilation.GetMethod(moduleVersionId, methodHandle);
             RoslynDebug.AssertNotNull(currentFrame);
-            var symbolProvider = new CSharpEESymbolProvider(compilation.SourceAssembly, (PEModuleSymbol)currentFrame.ContainingModule, currentFrame);
+            var symbolProvider = new CSharpEESymbolProvider(
+                compilation.SourceAssembly,
+                (PEModuleSymbol)currentFrame.ContainingModule,
+                currentFrame
+            );
 
-            var metadataDecoder = new MetadataDecoder((PEModuleSymbol)currentFrame.ContainingModule, currentFrame);
+            var metadataDecoder = new MetadataDecoder(
+                (PEModuleSymbol)currentFrame.ContainingModule,
+                currentFrame
+            );
             var localInfo = metadataDecoder.GetLocalInfo(localSignatureHandle);
 
             var typedSymReader = (ISymUnmanagedReader3?)symReader;
 
-            var debugInfo = MethodDebugInfo<TypeSymbol, LocalSymbol>.ReadMethodDebugInfo(typedSymReader, symbolProvider, methodToken, methodVersion, ilOffset, isVisualBasicMethod: false);
+            var debugInfo = MethodDebugInfo<TypeSymbol, LocalSymbol>.ReadMethodDebugInfo(
+                typedSymReader,
+                symbolProvider,
+                methodToken,
+                methodVersion,
+                ilOffset,
+                isVisualBasicMethod: false
+            );
 
             var reuseSpan = debugInfo.ReuseSpan;
             var localsBuilder = ArrayBuilder<LocalSymbol>.GetInstance();
@@ -167,20 +193,30 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
                 debugInfo.LocalVariableNames,
                 localInfo,
                 debugInfo.DynamicLocalMap,
-                debugInfo.TupleLocalMap);
+                debugInfo.TupleLocalMap
+            );
 
-            var inScopeHoistedLocals = debugInfo.GetInScopeHoistedLocalIndices(ilOffset, ref reuseSpan);
+            var inScopeHoistedLocals = debugInfo.GetInScopeHoistedLocalIndices(
+                ilOffset,
+                ref reuseSpan
+            );
 
             localsBuilder.AddRange(debugInfo.LocalConstants);
 
             return new EvaluationContext(
-                new MethodContextReuseConstraints(moduleVersionId, methodToken, methodVersion, reuseSpan),
+                new MethodContextReuseConstraints(
+                    moduleVersionId,
+                    methodToken,
+                    methodVersion,
+                    reuseSpan
+                ),
                 compilation,
                 currentFrame,
                 currentSourceMethod,
                 localsBuilder.ToImmutableAndFree(),
                 inScopeHoistedLocals,
-                debugInfo);
+                debugInfo
+            );
         }
 
         internal CompilationContext CreateCompilationContext()
@@ -191,7 +227,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
                 _currentSourceMethod,
                 _locals,
                 _inScopeHoistedLocalSlots,
-                _methodDebugInfo);
+                _methodDebugInfo
+            );
         }
 
         /// <summary>
@@ -209,22 +246,39 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
         internal byte[]? CompileExpressions(
             ImmutableArray<string> expressions,
             out ImmutableArray<int> methodTokens,
-            out ImmutableArray<string> errorMessages)
+            out ImmutableArray<string> errorMessages
+        )
         {
             var diagnostics = DiagnosticBag.GetInstance();
-            var syntaxNodes = expressions.SelectAsArray(expr => Parse(expr, treatAsExpression: true, diagnostics, out var formatSpecifiers));
+            var syntaxNodes = expressions.SelectAsArray(expr =>
+                Parse(expr, treatAsExpression: true, diagnostics, out var formatSpecifiers)
+            );
             byte[]? assembly = null;
             if (!diagnostics.HasAnyErrors())
             {
                 RoslynDebug.Assert(syntaxNodes.All(s => s != null));
 
                 var context = CreateCompilationContext();
-                if (context.TryCompileExpressions(syntaxNodes!, TypeName, MethodName, diagnostics, out var moduleBuilder))
+                if (
+                    context.TryCompileExpressions(
+                        syntaxNodes!,
+                        TypeName,
+                        MethodName,
+                        diagnostics,
+                        out var moduleBuilder
+                    )
+                )
                 {
                     using var stream = new MemoryStream();
 
                     Cci.PeWriter.WritePeToStream(
-                        new EmitContext(moduleBuilder, null, diagnostics, metadataOnly: false, includePrivateMembers: true),
+                        new EmitContext(
+                            moduleBuilder,
+                            null,
+                            diagnostics,
+                            metadataOnly: false,
+                            includePrivateMembers: true
+                        ),
                         context.MessageProvider,
                         () => stream,
                         getPortablePdbStreamOpt: null,
@@ -234,7 +288,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
                         isDeterministic: false,
                         emitTestCoverageData: false,
                         privateKeyOpt: null,
-                        CancellationToken.None);
+                        CancellationToken.None
+                    );
 
                     if (!diagnostics.HasAnyErrors())
                     {
@@ -247,9 +302,17 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
             {
                 methodTokens = ImmutableArray<int>.Empty;
                 errorMessages = ImmutableArray.CreateRange(
-                    diagnostics.AsEnumerable().
-                        Where(d => d.Severity == DiagnosticSeverity.Error).
-                        Select(d => GetErrorMessage(d, CSharpDiagnosticFormatter.Instance, preferredUICulture: null)));
+                    diagnostics
+                        .AsEnumerable()
+                        .Where(d => d.Severity == DiagnosticSeverity.Error)
+                        .Select(d =>
+                            GetErrorMessage(
+                                d,
+                                CSharpDiagnosticFormatter.Instance,
+                                preferredUICulture: null
+                            )
+                        )
+                );
             }
             else
             {
@@ -267,9 +330,15 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
             ImmutableArray<Alias> aliases,
             DiagnosticBag diagnostics,
             out ResultProperties resultProperties,
-            CompilationTestData? testData)
+            CompilationTestData? testData
+        )
         {
-            var syntax = Parse(expr, (compilationFlags & DkmEvaluationFlags.TreatAsExpression) != 0, diagnostics, out var formatSpecifiers);
+            var syntax = Parse(
+                expr,
+                (compilationFlags & DkmEvaluationFlags.TreatAsExpression) != 0,
+                diagnostics,
+                out var formatSpecifiers
+            );
             if (syntax == null)
             {
                 resultProperties = default;
@@ -277,7 +346,18 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
             }
 
             var context = CreateCompilationContext();
-            if (!context.TryCompileExpression(syntax, TypeName, MethodName, aliases, testData, diagnostics, out var moduleBuilder, out var synthesizedMethod))
+            if (
+                !context.TryCompileExpression(
+                    syntax,
+                    TypeName,
+                    MethodName,
+                    aliases,
+                    testData,
+                    diagnostics,
+                    out var moduleBuilder,
+                    out var synthesizedMethod
+                )
+            )
             {
                 resultProperties = default;
                 return null;
@@ -286,7 +366,13 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
             using var stream = new MemoryStream();
 
             Cci.PeWriter.WritePeToStream(
-                new EmitContext(moduleBuilder, null, diagnostics, metadataOnly: false, includePrivateMembers: true),
+                new EmitContext(
+                    moduleBuilder,
+                    null,
+                    diagnostics,
+                    metadataOnly: false,
+                    includePrivateMembers: true
+                ),
                 context.MessageProvider,
                 () => stream,
                 getPortablePdbStreamOpt: null,
@@ -296,7 +382,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
                 isDeterministic: false,
                 emitTestCoverageData: false,
                 privateKeyOpt: null,
-                CancellationToken.None);
+                CancellationToken.None
+            );
 
             if (diagnostics.HasAnyErrors())
             {
@@ -311,14 +398,16 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
             return new CSharpCompileResult(
                 stream.ToArray(),
                 synthesizedMethod,
-                formatSpecifiers: formatSpecifiers);
+                formatSpecifiers: formatSpecifiers
+            );
         }
 
         private static CSharpSyntaxNode? Parse(
             string expr,
             bool treatAsExpression,
             DiagnosticBag diagnostics,
-            out ReadOnlyCollection<string>? formatSpecifiers)
+            out ReadOnlyCollection<string>? formatSpecifiers
+        )
         {
             if (!treatAsExpression)
             {
@@ -342,7 +431,11 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
                 }
             }
 
-            return expr.ParseExpression(diagnostics, allowFormatSpecifiers: true, out formatSpecifiers);
+            return expr.ParseExpression(
+                diagnostics,
+                allowFormatSpecifiers: true,
+                out formatSpecifiers
+            );
         }
 
         internal override CompileResult? CompileAssignment(
@@ -351,7 +444,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
             ImmutableArray<Alias> aliases,
             DiagnosticBag diagnostics,
             out ResultProperties resultProperties,
-            CompilationTestData? testData)
+            CompilationTestData? testData
+        )
         {
             var assignment = target.ParseAssignment(expr, diagnostics);
             if (assignment == null)
@@ -361,7 +455,18 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
             }
 
             var context = CreateCompilationContext();
-            if (!context.TryCompileAssignment(assignment, TypeName, MethodName, aliases, testData, diagnostics, out var moduleBuilder, out var synthesizedMethod))
+            if (
+                !context.TryCompileAssignment(
+                    assignment,
+                    TypeName,
+                    MethodName,
+                    aliases,
+                    testData,
+                    diagnostics,
+                    out var moduleBuilder,
+                    out var synthesizedMethod
+                )
+            )
             {
                 resultProperties = default;
                 return null;
@@ -370,7 +475,13 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
             using var stream = new MemoryStream();
 
             Cci.PeWriter.WritePeToStream(
-                new EmitContext(moduleBuilder, null, diagnostics, metadataOnly: false, includePrivateMembers: true),
+                new EmitContext(
+                    moduleBuilder,
+                    null,
+                    diagnostics,
+                    metadataOnly: false,
+                    includePrivateMembers: true
+                ),
                 context.MessageProvider,
                 () => stream,
                 getPortablePdbStreamOpt: null,
@@ -380,7 +491,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
                 isDeterministic: false,
                 emitTestCoverageData: false,
                 privateKeyOpt: null,
-                CancellationToken.None);
+                CancellationToken.None
+            );
 
             if (diagnostics.HasAnyErrors())
             {
@@ -395,7 +507,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
             return new CSharpCompileResult(
                 stream.ToArray(),
                 synthesizedMethod,
-                formatSpecifiers: null);
+                formatSpecifiers: null
+            );
         }
 
         private static readonly ReadOnlyCollection<byte> s_emptyBytes =
@@ -407,10 +520,18 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
             ImmutableArray<Alias> aliases,
             DiagnosticBag diagnostics,
             out string typeName,
-            CompilationTestData? testData)
+            CompilationTestData? testData
+        )
         {
             var context = CreateCompilationContext();
-            var moduleBuilder = context.CompileGetLocals(TypeName, locals, argumentsOnly, aliases, testData, diagnostics);
+            var moduleBuilder = context.CompileGetLocals(
+                TypeName,
+                locals,
+                argumentsOnly,
+                aliases,
+                testData,
+                diagnostics
+            );
             ReadOnlyCollection<byte>? assembly = null;
 
             if (moduleBuilder != null && locals.Count > 0)
@@ -418,7 +539,13 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
                 using var stream = new MemoryStream();
 
                 Cci.PeWriter.WritePeToStream(
-                    new EmitContext(moduleBuilder, null, diagnostics, metadataOnly: false, includePrivateMembers: true),
+                    new EmitContext(
+                        moduleBuilder,
+                        null,
+                        diagnostics,
+                        metadataOnly: false,
+                        includePrivateMembers: true
+                    ),
                     context.MessageProvider,
                     () => stream,
                     getPortablePdbStreamOpt: null,
@@ -428,7 +555,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
                     isDeterministic: false,
                     emitTestCoverageData: false,
                     privateKeyOpt: null,
-                    CancellationToken.None);
+                    CancellationToken.None
+                );
 
                 if (!diagnostics.HasAnyErrors())
                 {
@@ -460,15 +588,26 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
             }
         }
 
-        internal override ImmutableArray<AssemblyIdentity> GetMissingAssemblyIdentities(Diagnostic diagnostic, AssemblyIdentity linqLibrary)
+        internal override ImmutableArray<AssemblyIdentity> GetMissingAssemblyIdentities(
+            Diagnostic diagnostic,
+            AssemblyIdentity linqLibrary
+        )
         {
-            return GetMissingAssemblyIdentitiesHelper((ErrorCode)diagnostic.Code, diagnostic.Arguments, linqLibrary);
+            return GetMissingAssemblyIdentitiesHelper(
+                (ErrorCode)diagnostic.Code,
+                diagnostic.Arguments,
+                linqLibrary
+            );
         }
 
         /// <remarks>
         /// Internal for testing.
         /// </remarks>
-        internal static ImmutableArray<AssemblyIdentity> GetMissingAssemblyIdentitiesHelper(ErrorCode code, IReadOnlyList<object?> arguments, AssemblyIdentity linqLibrary)
+        internal static ImmutableArray<AssemblyIdentity> GetMissingAssemblyIdentitiesHelper(
+            ErrorCode code,
+            IReadOnlyList<object?> arguments,
+            AssemblyIdentity linqLibrary
+        )
         {
             RoslynDebug.AssertNotNull(linqLibrary);
 
@@ -481,8 +620,13 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
                 case ErrorCode.ERR_NameNotInContextPossibleMissingReference: // Probably can't happen.
                     foreach (var argument in arguments)
                     {
-                        var identity = (argument as AssemblyIdentity) ?? (argument as AssemblySymbol)?.Identity;
-                        if (identity != null && !identity.Equals(MissingCorLibrarySymbol.Instance.Identity))
+                        var identity =
+                            (argument as AssemblyIdentity)
+                            ?? (argument as AssemblySymbol)?.Identity;
+                        if (
+                            identity != null
+                            && !identity.Equals(MissingCorLibrarySymbol.Instance.Identity)
+                        )
                         {
                             return ImmutableArray.Create(identity);
                         }
@@ -490,14 +634,21 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
                     break;
 
                 case ErrorCode.ERR_DottedTypeNameNotFoundInNS:
-                    if (arguments.Count == 2 &&
-                        arguments[0] is string namespaceName &&
-                        arguments[1] is NamespaceSymbol containingNamespace &&
-                        containingNamespace.ConstituentNamespaces.Any(static n => n.ContainingAssembly.Identity.IsWindowsAssemblyIdentity()))
+                    if (
+                        arguments.Count == 2
+                        && arguments[0] is string namespaceName
+                        && arguments[1] is NamespaceSymbol containingNamespace
+                        && containingNamespace.ConstituentNamespaces.Any(static n =>
+                            n.ContainingAssembly.Identity.IsWindowsAssemblyIdentity()
+                        )
+                    )
                     {
-                        // This is just a heuristic, but it has the advantage of being portable, particularly 
+                        // This is just a heuristic, but it has the advantage of being portable, particularly
                         // across different versions of (desktop) windows.
-                        var identity = new AssemblyIdentity($"{containingNamespace.ToDisplayString()}.{namespaceName}", contentType: System.Reflection.AssemblyContentType.WindowsRuntime);
+                        var identity = new AssemblyIdentity(
+                            $"{containingNamespace.ToDisplayString()}.{namespaceName}",
+                            contentType: System.Reflection.AssemblyContentType.WindowsRuntime
+                        );
                         return ImmutableArray.Create(identity);
                     }
                     break;

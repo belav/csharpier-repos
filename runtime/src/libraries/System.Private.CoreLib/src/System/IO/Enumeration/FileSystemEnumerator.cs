@@ -10,7 +10,9 @@ namespace System.IO.Enumeration
 {
     /// <summary>Enumerates the file system elements of the provided type that are being searched and filtered by a <see cref="FileSystemEnumerable{T}" />.</summary>
     /// <typeparam name="TResult">The type of the result produced by this file system enumerator.</typeparam>
-    public abstract unsafe partial class FileSystemEnumerator<TResult> : CriticalFinalizerObject, IEnumerator<TResult>
+    public abstract unsafe partial class FileSystemEnumerator<TResult>
+        : CriticalFinalizerObject,
+            IEnumerator<TResult>
     {
         private int _remainingRecursionDepth;
 
@@ -18,9 +20,7 @@ namespace System.IO.Enumeration
         /// <param name="directory">The directory to search in.</param>
         /// <param name="options">Enumeration options to use.</param>
         public FileSystemEnumerator(string directory, EnumerationOptions? options = null)
-            : this(directory, isNormalized: false, options)
-        {
-        }
+            : this(directory, isNormalized: false, options) { }
 
         /// <summary>
         /// Encapsulates a find operation.
@@ -28,7 +28,11 @@ namespace System.IO.Enumeration
         /// <param name="directory">The directory to search in.</param>
         /// <param name="isNormalized">Whether the directory path is already normalized or not.</param>
         /// <param name="options">Enumeration options to use.</param>
-        internal FileSystemEnumerator(string directory, bool isNormalized, EnumerationOptions? options = null)
+        internal FileSystemEnumerator(
+            string directory,
+            bool isNormalized,
+            EnumerationOptions? options = null
+        )
         {
             ArgumentNullException.ThrowIfNull(directory);
 
@@ -109,9 +113,7 @@ namespace System.IO.Enumeration
 
         /// <summary>When overridden in a derived class, releases the unmanaged resources used by the <see cref="FileSystemEnumerator{T}" /> class and optionally releases the managed resources.</summary>
         /// <param name="disposing"><see langword="true" /> to release both managed and unmanaged resources; <see langword="false" /> to release only unmanaged resources.</param>
-        protected virtual void Dispose(bool disposing)
-        {
-        }
+        protected virtual void Dispose(bool disposing) { }
 
         ~FileSystemEnumerator()
         {

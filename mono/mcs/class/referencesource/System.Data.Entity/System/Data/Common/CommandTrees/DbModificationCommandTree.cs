@@ -9,10 +9,9 @@
 
 using System;
 using System.Collections.Generic;
-
-using System.Data.Metadata.Edm;
 using System.Data.Common.CommandTrees.Internal;
 using System.Data.Common.Utils;
+using System.Data.Metadata.Edm;
 using System.Linq;
 
 namespace System.Data.Common.CommandTrees
@@ -20,13 +19,21 @@ namespace System.Data.Common.CommandTrees
     /// <summary>
     /// Represents a DML operation expressed as a canonical command tree
     /// </summary>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", MessageId = "Db")]
+    [System.Diagnostics.CodeAnalysis.SuppressMessage(
+        "Microsoft.Naming",
+        "CA1709:IdentifiersShouldBeCasedCorrectly",
+        MessageId = "Db"
+    )]
     public abstract class DbModificationCommandTree : DbCommandTree
     {
         private readonly DbExpressionBinding _target;
         private System.Collections.ObjectModel.ReadOnlyCollection<DbParameterReferenceExpression> _parameters;
 
-        internal DbModificationCommandTree(MetadataWorkspace metadata, DataSpace dataSpace, DbExpressionBinding target)
+        internal DbModificationCommandTree(
+            MetadataWorkspace metadata,
+            DataSpace dataSpace,
+            DbExpressionBinding target
+        )
             : base(metadata, dataSpace)
         {
             EntityUtil.CheckArgumentNull(target, "target");
@@ -39,19 +46,13 @@ namespace System.Data.Common.CommandTrees
         /// </summary>
         public DbExpressionBinding Target
         {
-            get
-            {
-                return _target;
-            }
+            get { return _target; }
         }
 
         /// <summary>
         /// Returns true if this modification command returns a reader (for instance, to return server generated values)
         /// </summary>
-        internal abstract bool HasReader
-        {
-            get;
-        }
+        internal abstract bool HasReader { get; }
 
         internal override IEnumerable<KeyValuePair<string, TypeUsage>> GetParameters()
         {
@@ -59,7 +60,10 @@ namespace System.Data.Common.CommandTrees
             {
                 this._parameters = ParameterRetriever.GetParameters(this);
             }
-            return this._parameters.Select(p => new KeyValuePair<string, TypeUsage>(p.ParameterName, p.ResultType));
+            return this._parameters.Select(p => new KeyValuePair<string, TypeUsage>(
+                p.ParameterName,
+                p.ResultType
+            ));
         }
 
         internal override void DumpStructure(ExpressionDumper dumper)

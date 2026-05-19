@@ -15,7 +15,7 @@ namespace Microsoft.VisualStudio.LanguageServices.FindUsages
     {
         /// <summary>
         /// Shows a DefinitionItem as a Row in the FindReferencesWindow.  Only used for
-        /// GoToDefinition/FindImplementations.  In these operations, we don't want to 
+        /// GoToDefinition/FindImplementations.  In these operations, we don't want to
         /// create a DefinitionBucket.  So we instead just so the symbol as a normal row.
         /// </summary>
         private class DefinitionItemEntry : AbstractDocumentSpanEntry
@@ -28,17 +28,20 @@ namespace Microsoft.VisualStudio.LanguageServices.FindUsages
                 string projectName,
                 Guid projectGuid,
                 SourceText lineText,
-                MappedSpanResult mappedSpanResult)
+                MappedSpanResult mappedSpanResult
+            )
                 : base(context, definitionBucket, projectGuid, lineText, mappedSpanResult)
             {
                 _projectName = projectName;
             }
 
-            protected override string GetProjectName()
-                => _projectName;
+            protected override string GetProjectName() => _projectName;
 
-            protected override IList<Inline> CreateLineTextInlines()
-                => DefinitionBucket.DefinitionItem.DisplayParts.ToInlines(Presenter.ClassificationFormatMap, Presenter.TypeMap);
+            protected override IList<Inline> CreateLineTextInlines() =>
+                DefinitionBucket.DefinitionItem.DisplayParts.ToInlines(
+                    Presenter.ClassificationFormatMap,
+                    Presenter.TypeMap
+                );
         }
     }
 }

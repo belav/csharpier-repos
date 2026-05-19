@@ -14,7 +14,8 @@ namespace JitTest_lcs_port
         private static String buildLCS(LCSV[,,,] b, char[] X, LCSV[] ind)
         {
             for (int i = 0; i < RANK; i++)
-                if (ind[i]._v == 0) return "";
+                if (ind[i]._v == 0)
+                    return "";
 
             LCSV L = b[ind[0]._v, ind[1]._v, ind[2]._v, ind[3]._v];
             LCSV Z;
@@ -58,7 +59,8 @@ namespace JitTest_lcs_port
                             if (eqFlag)
                             {
                                 c[ind[0]._v, ind[1]._v, ind[2]._v, ind[3]._v]._v =
-                                    c[ind[0]._v - 1, ind[1]._v - 1, ind[2]._v - 1, ind[3]._v - 1]._v + 1;
+                                    c[ind[0]._v - 1, ind[1]._v - 1, ind[2]._v - 1, ind[3]._v - 1]._v
+                                    + 1;
                                 b[ind[0]._v, ind[1]._v, ind[2]._v, ind[3]._v]._v = RANK;
                                 continue;
                             }
@@ -66,7 +68,8 @@ namespace JitTest_lcs_port
                             LCSV Z;
                             Z._v = 0;
 
-                            LCSV R, M;
+                            LCSV R,
+                                M;
                             R._v = M._v = -1;
                             for (LCSV i = Z; i._v < RANK; i._v++)
                             {
@@ -93,11 +96,12 @@ namespace JitTest_lcs_port
         public static int TestEntryPoint()
         {
             Console.WriteLine("Test searches for longest common subsequence of 4 strings\n\n");
-            String[] str = new String[RANK] {
+            String[] str = new String[RANK]
+            {
                 "The Sun has left his blackness",
                 "and has found a fresher morning",
                 "and the fair Moon rejoices",
-                "in the clear and cloudless night"
+                "in the clear and cloudless night",
             };
 
             LCSV[] len = new LCSV[RANK];

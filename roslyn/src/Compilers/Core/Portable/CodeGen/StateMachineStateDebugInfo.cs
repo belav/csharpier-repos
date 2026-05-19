@@ -9,7 +9,11 @@ using Microsoft.CodeAnalysis.Emit;
 
 namespace Microsoft.CodeAnalysis.CodeGen;
 
-internal readonly struct StateMachineStateDebugInfo(int syntaxOffset, AwaitDebugId awaitId, StateMachineState stateNumber)
+internal readonly struct StateMachineStateDebugInfo(
+    int syntaxOffset,
+    AwaitDebugId awaitId,
+    StateMachineState stateNumber
+)
 {
     public readonly int SyntaxOffset = syntaxOffset;
     public readonly AwaitDebugId AwaitId = awaitId;
@@ -27,7 +31,7 @@ internal readonly struct StateMachineStatesDebugInfo
     /// <summary>
     /// The number of the first state that has not been used in any of the previous versions of the state machine,
     /// or null if we are not generating EnC delta.
-    /// 
+    ///
     /// For 1st generation EnC delta, this is calculated by examining the <see cref="EditAndContinueMethodDebugInformation.StateMachineStates"/> stored in the baseline metadata.
     /// For subsequent generations, the number is updated to account for newly generated states in that generation.
     /// </summary>
@@ -36,28 +40,38 @@ internal readonly struct StateMachineStatesDebugInfo
     /// <summary>
     /// The number of the first state that has not been used in any of the previous versions of the state machine,
     /// or null if we are not generating EnC delta, or the state machine has no decreasing states.
-    /// 
+    ///
     /// For 1st generation EnC delta, this is calculated by examining the <see cref="EditAndContinueMethodDebugInformation.StateMachineStates"/> stored in the baseline metadata.
     /// For subsequent generations, the number is updated to account for newly generated states in that generation.
     /// </summary>
     public readonly StateMachineState? FirstUnusedDecreasingStateMachineState;
 
-    private StateMachineStatesDebugInfo(ImmutableArray<StateMachineStateDebugInfo> states, StateMachineState? firstUnusedIncreasingStateMachineState, StateMachineState? firstUnusedDecreasingStateMachineState)
+    private StateMachineStatesDebugInfo(
+        ImmutableArray<StateMachineStateDebugInfo> states,
+        StateMachineState? firstUnusedIncreasingStateMachineState,
+        StateMachineState? firstUnusedDecreasingStateMachineState
+    )
     {
         States = states;
         FirstUnusedIncreasingStateMachineState = firstUnusedIncreasingStateMachineState;
         FirstUnusedDecreasingStateMachineState = firstUnusedDecreasingStateMachineState;
     }
 
-    public static StateMachineStatesDebugInfo Create(VariableSlotAllocator? variableSlotAllocator, ImmutableArray<StateMachineStateDebugInfo> stateInfos)
+    public static StateMachineStatesDebugInfo Create(
+        VariableSlotAllocator? variableSlotAllocator,
+        ImmutableArray<StateMachineStateDebugInfo> stateInfos
+    )
     {
-        StateMachineState? firstUnusedIncreasingStateMachineState = null, firstUnusedDecreasingStateMachineState = null;
+        StateMachineState? firstUnusedIncreasingStateMachineState = null,
+            firstUnusedDecreasingStateMachineState = null;
 
         if (variableSlotAllocator != null)
         {
             // We start with first unused state numbers from the previous generation and update them based on states generated in the current one.
-            firstUnusedIncreasingStateMachineState = variableSlotAllocator.GetFirstUnusedStateMachineState(increasing: true);
-            firstUnusedDecreasingStateMachineState = variableSlotAllocator.GetFirstUnusedStateMachineState(increasing: false);
+            firstUnusedIncreasingStateMachineState =
+                variableSlotAllocator.GetFirstUnusedStateMachineState(increasing: true);
+            firstUnusedDecreasingStateMachineState =
+                variableSlotAllocator.GetFirstUnusedStateMachineState(increasing: false);
 
             if (!stateInfos.IsDefaultOrEmpty)
             {
@@ -67,11 +81,25 @@ internal readonly struct StateMachineStatesDebugInfo
                 var maxState = stateInfos.Max(info => info.StateNumber) + 1;
                 var minState = stateInfos.Min(info => info.StateNumber) - 1;
 
-                firstUnusedIncreasingStateMachineState = (firstUnusedIncreasingStateMachineState != null) ? (StateMachineState)Math.Max((int)firstUnusedIncreasingStateMachineState.Value, (int)maxState) : maxState;
+                firstUnusedIncreasingStateMachineState =
+                    (firstUnusedIncreasingStateMachineState != null)
+                        ? (StateMachineState)
+                            Math.Max(
+                                (int)firstUnusedIncreasingStateMachineState.Value,
+                                (int)maxState
+                            )
+                        : maxState;
 
                 if (minState < 0)
                 {
-                    firstUnusedDecreasingStateMachineState = (firstUnusedDecreasingStateMachineState != null) ? (StateMachineState)Math.Min((int)firstUnusedDecreasingStateMachineState.Value, (int)minState) : minState;
+                    firstUnusedDecreasingStateMachineState =
+                        (firstUnusedDecreasingStateMachineState != null)
+                            ? (StateMachineState)
+                                Math.Min(
+                                    (int)firstUnusedDecreasingStateMachineState.Value,
+                                    (int)minState
+                                )
+                            : minState;
                 }
             }
         }
@@ -79,6 +107,7 @@ internal readonly struct StateMachineStatesDebugInfo
         return new StateMachineStatesDebugInfo(
             stateInfos,
             firstUnusedIncreasingStateMachineState,
-            firstUnusedDecreasingStateMachineState);
+            firstUnusedDecreasingStateMachineState
+        );
     }
 }

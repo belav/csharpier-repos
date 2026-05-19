@@ -13,34 +13,50 @@ namespace System.Threading.RateLimiting.Tests
     internal static class Utils
     {
         // Creates a DefaultPartitionedRateLimiter with the timer effectively disabled
-        internal static PartitionedRateLimiter<TResource> CreatePartitionedLimiterWithoutTimer<TResource, TKey>(Func<TResource, RateLimitPartition<TKey>> partitioner)
+        internal static PartitionedRateLimiter<TResource> CreatePartitionedLimiterWithoutTimer<
+            TResource,
+            TKey
+        >(Func<TResource, RateLimitPartition<TKey>> partitioner)
         {
-            var limiterType = Type.GetType("System.Threading.RateLimiting.DefaultPartitionedRateLimiter`2, System.Threading.RateLimiting");
+            var limiterType = Type.GetType(
+                "System.Threading.RateLimiting.DefaultPartitionedRateLimiter`2, System.Threading.RateLimiting"
+            );
             Assert.NotNull(limiterType);
 
             var genericLimiterType = limiterType.MakeGenericType(typeof(TResource), typeof(TKey));
             Assert.NotNull(genericLimiterType);
 
-            var limiterCtor = genericLimiterType.GetConstructors(BindingFlags.Instance | BindingFlags.NonPublic)[0];
+            var limiterCtor = genericLimiterType.GetConstructors(
+                BindingFlags.Instance | BindingFlags.NonPublic
+            )[0];
             Assert.NotNull(limiterCtor);
 
-            return (PartitionedRateLimiter<TResource>)limiterCtor.Invoke(new object[] { partitioner, null, TimeSpan.FromMinutes(10) });
+            return (PartitionedRateLimiter<TResource>)
+                limiterCtor.Invoke(new object[] { partitioner, null, TimeSpan.FromMinutes(10) });
         }
 
         // Gets and runs the Heartbeat function on the DefaultPartitionedRateLimiter
         internal static Task RunTimerFunc<T>(PartitionedRateLimiter<T> limiter)
         {
             // Use Type.GetType so that trimming can see what type we're reflecting on, but assert it's the one we got
-            var limiterTypeDef = Type.GetType("System.Threading.RateLimiting.DefaultPartitionedRateLimiter`2, System.Threading.RateLimiting");
+            var limiterTypeDef = Type.GetType(
+                "System.Threading.RateLimiting.DefaultPartitionedRateLimiter`2, System.Threading.RateLimiting"
+            );
             var limiterType = limiter.GetType();
             Assert.Equal(limiterTypeDef, limiterType.GetGenericTypeDefinition());
             if (string.Empty.Length > 0)
                 limiterType = limiterTypeDef;
 
-            var innerTimer = limiterType.GetField("_timer", BindingFlags.NonPublic | BindingFlags.Instance);
+            var innerTimer = limiterType.GetField(
+                "_timer",
+                BindingFlags.NonPublic | BindingFlags.Instance
+            );
             Assert.NotNull(innerTimer);
 
-            var timerLoopMethod = limiterType.GetMethod("Heartbeat", BindingFlags.NonPublic | BindingFlags.Instance);
+            var timerLoopMethod = limiterType.GetMethod(
+                "Heartbeat",
+                BindingFlags.NonPublic | BindingFlags.Instance
+            );
             Assert.NotNull(timerLoopMethod);
 
             return (Task)timerLoopMethod.Invoke(limiter, Array.Empty<object>());
@@ -49,9 +65,17 @@ namespace System.Threading.RateLimiting.Tests
 
     internal sealed class NotImplementedPartitionedRateLimiter<T> : PartitionedRateLimiter<T>
     {
-        public override RateLimiterStatistics? GetStatistics(T resource) => throw new NotImplementedException();
-        protected override RateLimitLease AttemptAcquireCore(T resource, int permitCount) => throw new NotImplementedException();
-        protected override ValueTask<RateLimitLease> AcquireAsyncCore(T resource, int permitCount, CancellationToken cancellationToken) => throw new NotImplementedException();
+        public override RateLimiterStatistics? GetStatistics(T resource) =>
+            throw new NotImplementedException();
+
+        protected override RateLimitLease AttemptAcquireCore(T resource, int permitCount) =>
+            throw new NotImplementedException();
+
+        protected override ValueTask<RateLimitLease> AcquireAsyncCore(
+            T resource,
+            int permitCount,
+            CancellationToken cancellationToken
+        ) => throw new NotImplementedException();
     }
 
     internal sealed class TrackingRateLimiter : RateLimiter
@@ -82,7 +106,10 @@ namespace System.Threading.RateLimiting.Tests
             return new Lease();
         }
 
-        protected override ValueTask<RateLimitLease> AcquireAsyncCore(int permitCount, CancellationToken cancellationToken)
+        protected override ValueTask<RateLimitLease> AcquireAsyncCore(
+            int permitCount,
+            CancellationToken cancellationToken
+        )
         {
             Interlocked.Increment(ref _waitAsyncCallCount);
             return new ValueTask<RateLimitLease>(new Lease());
@@ -103,9 +130,11 @@ namespace System.Threading.RateLimiting.Tests
         {
             public override bool IsAcquired => true;
 
-            public override IEnumerable<string> MetadataNames => throw new NotImplementedException();
+            public override IEnumerable<string> MetadataNames =>
+                throw new NotImplementedException();
 
-            public override bool TryGetMetadata(string metadataName, out object? metadata) => throw new NotImplementedException();
+            public override bool TryGetMetadata(string metadataName, out object? metadata) =>
+                throw new NotImplementedException();
         }
     }
 
@@ -138,6 +167,7 @@ namespace System.Threading.RateLimiting.Tests
             Interlocked.Increment(ref _equalsCallCount);
             return x == y;
         }
+
         public int GetHashCode([DisallowNull] int obj)
         {
             Interlocked.Increment(ref _getHashCodeCallCount);
@@ -149,9 +179,16 @@ namespace System.Threading.RateLimiting.Tests
     {
         public override TimeSpan? IdleDuration => throw new NotImplementedException();
 
-        public override RateLimiterStatistics? GetStatistics() => throw new NotImplementedException();
-        protected override RateLimitLease AttemptAcquireCore(int permitCount) => throw new NotImplementedException();
-        protected override ValueTask<RateLimitLease> AcquireAsyncCore(int permitCount, CancellationToken cancellationToken) => throw new NotImplementedException();
+        public override RateLimiterStatistics? GetStatistics() =>
+            throw new NotImplementedException();
+
+        protected override RateLimitLease AttemptAcquireCore(int permitCount) =>
+            throw new NotImplementedException();
+
+        protected override ValueTask<RateLimitLease> AcquireAsyncCore(
+            int permitCount,
+            CancellationToken cancellationToken
+        ) => throw new NotImplementedException();
     }
 
     internal sealed class CustomizableLimiter : RateLimiter
@@ -159,28 +196,44 @@ namespace System.Threading.RateLimiting.Tests
         public Func<TimeSpan?> IdleDurationImpl { get; set; } = () => null;
         public override TimeSpan? IdleDuration => IdleDurationImpl();
 
-        public Func<RateLimiterStatistics?> GetStatisticsImpl{ get; set; } = () => throw new NotImplementedException();
+        public Func<RateLimiterStatistics?> GetStatisticsImpl { get; set; } =
+            () => throw new NotImplementedException();
+
         public override RateLimiterStatistics? GetStatistics() => GetStatisticsImpl();
 
         public Func<int, RateLimitLease> AttemptAcquireCoreImpl { get; set; } = _ => new Lease();
-        protected override RateLimitLease AttemptAcquireCore(int permitCount) => AttemptAcquireCoreImpl(permitCount);
 
-        public Func<int, CancellationToken, ValueTask<RateLimitLease>> AcquireAsyncCoreImpl { get; set; } = (_, _) => new ValueTask<RateLimitLease>(new Lease());
-        protected override ValueTask<RateLimitLease> AcquireAsyncCore(int permitCount, CancellationToken cancellationToken) => AcquireAsyncCoreImpl(permitCount, cancellationToken);
+        protected override RateLimitLease AttemptAcquireCore(int permitCount) =>
+            AttemptAcquireCoreImpl(permitCount);
+
+        public Func<
+            int,
+            CancellationToken,
+            ValueTask<RateLimitLease>
+        > AcquireAsyncCoreImpl { get; set; } = (_, _) => new ValueTask<RateLimitLease>(new Lease());
+
+        protected override ValueTask<RateLimitLease> AcquireAsyncCore(
+            int permitCount,
+            CancellationToken cancellationToken
+        ) => AcquireAsyncCoreImpl(permitCount, cancellationToken);
 
         public Action<bool> DisposeImpl { get; set; } = _ => { };
+
         protected override void Dispose(bool disposing) => DisposeImpl(disposing);
 
         public Func<ValueTask> DisposeAsyncCoreImpl { get; set; } = () => default;
+
         protected override ValueTask DisposeAsyncCore() => DisposeAsyncCoreImpl();
 
         private sealed class Lease : RateLimitLease
         {
             public override bool IsAcquired => true;
 
-            public override IEnumerable<string> MetadataNames => throw new NotImplementedException();
+            public override IEnumerable<string> MetadataNames =>
+                throw new NotImplementedException();
 
-            public override bool TryGetMetadata(string metadataName, out object? metadata) => throw new NotImplementedException();
+            public override bool TryGetMetadata(string metadataName, out object? metadata) =>
+                throw new NotImplementedException();
         }
     }
 
@@ -189,16 +242,29 @@ namespace System.Threading.RateLimiting.Tests
         public Func<TimeSpan?> IdleDurationImpl { get; set; } = () => null;
         public override TimeSpan? IdleDuration => IdleDurationImpl();
 
-        public Func<RateLimiterStatistics?> GetStatisticsImpl { get; set; } = () => throw new NotImplementedException();
+        public Func<RateLimiterStatistics?> GetStatisticsImpl { get; set; } =
+            () => throw new NotImplementedException();
+
         public override RateLimiterStatistics? GetStatistics() => GetStatisticsImpl();
 
         public Func<int, RateLimitLease> AttemptAcquireCoreImpl { get; set; } = _ => new Lease();
-        protected override RateLimitLease AttemptAcquireCore(int permitCount) => AttemptAcquireCoreImpl(permitCount);
 
-        public Func<int, CancellationToken, ValueTask<RateLimitLease>> AcquireAsyncCoreImpl { get; set; } = (_, _) => new ValueTask<RateLimitLease>(new Lease());
-        protected override ValueTask<RateLimitLease> AcquireAsyncCore(int permitCount, CancellationToken cancellationToken) => AcquireAsyncCoreImpl(permitCount, cancellationToken);
+        protected override RateLimitLease AttemptAcquireCore(int permitCount) =>
+            AttemptAcquireCoreImpl(permitCount);
+
+        public Func<
+            int,
+            CancellationToken,
+            ValueTask<RateLimitLease>
+        > AcquireAsyncCoreImpl { get; set; } = (_, _) => new ValueTask<RateLimitLease>(new Lease());
+
+        protected override ValueTask<RateLimitLease> AcquireAsyncCore(
+            int permitCount,
+            CancellationToken cancellationToken
+        ) => AcquireAsyncCoreImpl(permitCount, cancellationToken);
 
         public Func<ValueTask> DisposeAsyncCoreImpl { get; set; } = () => default;
+
         protected override ValueTask DisposeAsyncCore() => DisposeAsyncCoreImpl();
 
         public override bool IsAutoReplenishing => false;
@@ -206,15 +272,18 @@ namespace System.Threading.RateLimiting.Tests
         public override TimeSpan ReplenishmentPeriod => throw new NotImplementedException();
 
         public Func<bool> TryReplenishImpl { get; set; } = () => true;
+
         public override bool TryReplenish() => TryReplenishImpl();
 
         private sealed class Lease : RateLimitLease
         {
             public override bool IsAcquired => true;
 
-            public override IEnumerable<string> MetadataNames => throw new NotImplementedException();
+            public override IEnumerable<string> MetadataNames =>
+                throw new NotImplementedException();
 
-            public override bool TryGetMetadata(string metadataName, out object? metadata) => throw new NotImplementedException();
+            public override bool TryGetMetadata(string metadataName, out object? metadata) =>
+                throw new NotImplementedException();
         }
     }
 
@@ -228,13 +297,16 @@ namespace System.Threading.RateLimiting.Tests
 
         public delegate bool TryGetMetadataDelegate(string metadataName, out object? metadata);
         public TryGetMetadataDelegate TryGetMetadataImpl = (string name, out object? metadata) =>
-            {
-                metadata = null;
-                return false;
-            };
-        public override bool TryGetMetadata(string metadataName, out object? metadata) => TryGetMetadataImpl(metadataName, out metadata);
+        {
+            metadata = null;
+            return false;
+        };
+
+        public override bool TryGetMetadata(string metadataName, out object? metadata) =>
+            TryGetMetadataImpl(metadataName, out metadata);
 
         public Action<bool> DisposeImpl = _ => { };
+
         protected override void Dispose(bool disposing) => DisposeImpl(disposing);
     }
 }

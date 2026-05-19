@@ -4,28 +4,27 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web.UI.WebControls {
-    using System.Diagnostics;
+namespace System.Web.UI.WebControls
+{
     using System;
+    using System.Diagnostics;
 
-    public class LoginCancelEventArgs : EventArgs {
-
+    public class LoginCancelEventArgs : EventArgs
+    {
         private bool _cancel;
 
-        public LoginCancelEventArgs() : this(false) {
-        }
+        public LoginCancelEventArgs()
+            : this(false) { }
 
-        public LoginCancelEventArgs(bool cancel) {
+        public LoginCancelEventArgs(bool cancel)
+        {
             _cancel = cancel;
         }
 
-        public bool Cancel {
-            get {
-                return _cancel;
-            }
-            set {
-                _cancel = value;
-            }
+        public bool Cancel
+        {
+            get { return _cancel; }
+            set { _cancel = value; }
         }
     }
 }

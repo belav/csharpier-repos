@@ -10,13 +10,24 @@ namespace System.Diagnostics.Tests
         private const int SHCNE_ASSOCCHANGED = 0x8000000;
         private const int SHCNF_FLUSH = 0x1000;
 
-        internal static void EnsureAssociationSet(string extension, string fileTypeDescription, string exePath, string programId)
+        internal static void EnsureAssociationSet(
+            string extension,
+            string fileTypeDescription,
+            string exePath,
+            string programId
+        )
         {
             bool commit = false;
 
             commit |= SetCurrentUserRegistryKey(@"Software\Classes\" + extension, programId);
-            commit |= SetCurrentUserRegistryKey(@"Software\Classes\" + programId, fileTypeDescription);
-            commit |= SetCurrentUserRegistryKey($@"Software\Classes\{programId}\shell\open\command", "\"" + exePath + "\" \"%1\"");
+            commit |= SetCurrentUserRegistryKey(
+                @"Software\Classes\" + programId,
+                fileTypeDescription
+            );
+            commit |= SetCurrentUserRegistryKey(
+                $@"Software\Classes\{programId}\shell\open\command",
+                "\"" + exePath + "\" \"%1\""
+            );
 
             if (commit)
             {

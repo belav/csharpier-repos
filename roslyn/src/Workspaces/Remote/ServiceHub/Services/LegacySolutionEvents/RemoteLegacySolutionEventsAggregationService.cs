@@ -12,18 +12,21 @@ using Microsoft.CodeAnalysis.Shared.Extensions;
 
 namespace Microsoft.CodeAnalysis.Remote
 {
-    internal sealed class RemoteLegacySolutionEventsAggregationService : BrokeredServiceBase, IRemoteLegacySolutionEventsAggregationService
+    internal sealed class RemoteLegacySolutionEventsAggregationService
+        : BrokeredServiceBase,
+            IRemoteLegacySolutionEventsAggregationService
     {
         internal sealed class Factory : FactoryBase<IRemoteLegacySolutionEventsAggregationService>
         {
-            protected override IRemoteLegacySolutionEventsAggregationService CreateService(in ServiceConstructionArguments arguments)
-                => new RemoteLegacySolutionEventsAggregationService(arguments);
+            protected override IRemoteLegacySolutionEventsAggregationService CreateService(
+                in ServiceConstructionArguments arguments
+            ) => new RemoteLegacySolutionEventsAggregationService(arguments);
         }
 
-        public RemoteLegacySolutionEventsAggregationService(in ServiceConstructionArguments arguments)
-            : base(arguments)
-        {
-        }
+        public RemoteLegacySolutionEventsAggregationService(
+            in ServiceConstructionArguments arguments
+        )
+            : base(arguments) { }
 
         public ValueTask<bool> ShouldReportChangesAsync(CancellationToken cancellationToken)
         {
@@ -31,10 +34,12 @@ namespace Microsoft.CodeAnalysis.Remote
                 cancellationToken =>
                 {
                     var services = this.GetWorkspaceServices();
-                    var aggregationService = services.GetRequiredService<ILegacySolutionEventsAggregationService>();
+                    var aggregationService =
+                        services.GetRequiredService<ILegacySolutionEventsAggregationService>();
                     return new ValueTask<bool>(aggregationService.ShouldReportChanges(services));
                 },
-                cancellationToken);
+                cancellationToken
+            );
         }
 
         public ValueTask OnWorkspaceChangedAsync(
@@ -43,15 +48,31 @@ namespace Microsoft.CodeAnalysis.Remote
             WorkspaceChangeKind kind,
             ProjectId? projectId,
             DocumentId? documentId,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
-            return RunServiceAsync(oldSolutionChecksum, newSolutionChecksum,
+            return RunServiceAsync(
+                oldSolutionChecksum,
+                newSolutionChecksum,
                 async (oldSolution, newSolution) =>
                 {
-                    var aggregationService = oldSolution.Services.GetRequiredService<ILegacySolutionEventsAggregationService>();
-                    await aggregationService.OnWorkspaceChangedAsync(
-                        new WorkspaceChangeEventArgs(kind, oldSolution, newSolution, projectId, documentId), cancellationToken).ConfigureAwait(false);
-                }, cancellationToken);
+                    var aggregationService =
+                        oldSolution.Services.GetRequiredService<ILegacySolutionEventsAggregationService>();
+                    await aggregationService
+                        .OnWorkspaceChangedAsync(
+                            new WorkspaceChangeEventArgs(
+                                kind,
+                                oldSolution,
+                                newSolution,
+                                projectId,
+                                documentId
+                            ),
+                            cancellationToken
+                        )
+                        .ConfigureAwait(false);
+                },
+                cancellationToken
+            );
         }
     }
 }

@@ -21,8 +21,7 @@ namespace Microsoft.Extensions.FileSystemGlobbing.Abstractions
         /// </summary>
         /// <param name="directoryInfo">The <see cref="DirectoryInfo" />.</param>
         public DirectoryInfoWrapper(DirectoryInfo directoryInfo)
-            : this(directoryInfo, isParentPath: false)
-        { }
+            : this(directoryInfo, isParentPath: false) { }
 
         private DirectoryInfoWrapper(DirectoryInfo directoryInfo, bool isParentPath)
         {
@@ -38,7 +37,10 @@ namespace Microsoft.Extensions.FileSystemGlobbing.Abstractions
                 IEnumerable<FileSystemInfo> fileSystemInfos;
                 try
                 {
-                    fileSystemInfos = _directoryInfo.EnumerateFileSystemInfos("*", SearchOption.TopDirectoryOnly);
+                    fileSystemInfos = _directoryInfo.EnumerateFileSystemInfos(
+                        "*",
+                        SearchOption.TopDirectoryOnly
+                    );
                 }
                 catch (DirectoryNotFoundException)
                 {
@@ -75,7 +77,8 @@ namespace Microsoft.Extensions.FileSystemGlobbing.Abstractions
             {
                 return new DirectoryInfoWrapper(
                     new DirectoryInfo(Path.Combine(_directoryInfo.FullName, name)),
-                    isParentPath);
+                    isParentPath
+                );
             }
             else
             {
@@ -93,14 +96,15 @@ namespace Microsoft.Extensions.FileSystemGlobbing.Abstractions
                 {
                     // This shouldn't happen. The parameter name isn't supposed to contain wild card.
                     throw new InvalidOperationException(
-                        $"More than one sub directories are found under {_directoryInfo.FullName} with name {name}.");
+                        $"More than one sub directories are found under {_directoryInfo.FullName} with name {name}."
+                    );
                 }
             }
         }
 
         /// <inheritdoc />
-        public override FileInfoBase GetFile(string name)
-            => new FileInfoWrapper(new FileInfo(Path.Combine(_directoryInfo.FullName, name)));
+        public override FileInfoBase GetFile(string name) =>
+            new FileInfoWrapper(new FileInfo(Path.Combine(_directoryInfo.FullName, name)));
 
         /// <inheritdoc />
         public override string Name => _isParentPath ? ".." : _directoryInfo.Name;
@@ -119,7 +123,7 @@ namespace Microsoft.Extensions.FileSystemGlobbing.Abstractions
         /// <remarks>
         /// Equals the value of <seealso cref="System.IO.DirectoryInfo.Parent" />.
         /// </remarks>
-        public override DirectoryInfoBase? ParentDirectory
-            => new DirectoryInfoWrapper(_directoryInfo.Parent!);
+        public override DirectoryInfoBase? ParentDirectory =>
+            new DirectoryInfoWrapper(_directoryInfo.Parent!);
     }
 }

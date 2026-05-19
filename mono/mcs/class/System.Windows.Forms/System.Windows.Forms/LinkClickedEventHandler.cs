@@ -24,10 +24,7 @@
 //
 // COMPLETE
 
-namespace System.Windows.Forms  
+namespace System.Windows.Forms
 {
-	public delegate void LinkClickedEventHandler (object sender, LinkClickedEventArgs e);
+    public delegate void LinkClickedEventHandler(object sender, LinkClickedEventArgs e);
 }
-
-
-

@@ -43,8 +43,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.PublicModel
 
             PreprocessingSymbol? other = obj as PreprocessingSymbol;
 
-            return (object?)other != null &&
-                this._name.Equals(other._name);
+            return (object?)other != null && this._name.Equals(other._name);
         }
 
         bool IEquatable<ISymbol?>.Equals(ISymbol? other)
@@ -59,21 +58,31 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.PublicModel
 
         ImmutableArray<Location> ISymbol.Locations => ImmutableArray<Location>.Empty;
 
-        ImmutableArray<SyntaxReference> ISymbol.DeclaringSyntaxReferences => ImmutableArray<SyntaxReference>.Empty;
+        ImmutableArray<SyntaxReference> ISymbol.DeclaringSyntaxReferences =>
+            ImmutableArray<SyntaxReference>.Empty;
 
-        ImmutableArray<AttributeData> ISymbol.GetAttributes() => ImmutableArray<AttributeData>.Empty;
+        ImmutableArray<AttributeData> ISymbol.GetAttributes() =>
+            ImmutableArray<AttributeData>.Empty;
 
         Accessibility ISymbol.DeclaredAccessibility => Accessibility.NotApplicable;
 
         void ISymbol.Accept(SymbolVisitor visitor) => throw new System.NotSupportedException();
 
-        TResult ISymbol.Accept<TResult>(SymbolVisitor<TResult> visitor) => throw new System.NotSupportedException();
+        TResult ISymbol.Accept<TResult>(SymbolVisitor<TResult> visitor) =>
+            throw new System.NotSupportedException();
 
-        TResult ISymbol.Accept<TArgument, TResult>(SymbolVisitor<TArgument, TResult> visitor, TArgument argument) => throw new System.NotSupportedException();
+        TResult ISymbol.Accept<TArgument, TResult>(
+            SymbolVisitor<TArgument, TResult> visitor,
+            TArgument argument
+        ) => throw new System.NotSupportedException();
 
         string? ISymbol.GetDocumentationCommentId() => null;
 
-        string? ISymbol.GetDocumentationCommentXml(CultureInfo? preferredCulture, bool expandIncludes, CancellationToken cancellationToken) => null;
+        string? ISymbol.GetDocumentationCommentXml(
+            CultureInfo? preferredCulture,
+            bool expandIncludes,
+            CancellationToken cancellationToken
+        ) => null;
 
         string ISymbol.ToDisplayString(SymbolDisplayFormat? format)
         {
@@ -85,14 +94,32 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.PublicModel
             return SymbolDisplay.ToDisplayParts(this, format);
         }
 
-        string ISymbol.ToMinimalDisplayString(SemanticModel semanticModel, int position, SymbolDisplayFormat? format)
+        string ISymbol.ToMinimalDisplayString(
+            SemanticModel semanticModel,
+            int position,
+            SymbolDisplayFormat? format
+        )
         {
-            return SymbolDisplay.ToMinimalDisplayString(this, Symbol.GetCSharpSemanticModel(semanticModel), position, format);
+            return SymbolDisplay.ToMinimalDisplayString(
+                this,
+                Symbol.GetCSharpSemanticModel(semanticModel),
+                position,
+                format
+            );
         }
 
-        ImmutableArray<SymbolDisplayPart> ISymbol.ToMinimalDisplayParts(SemanticModel semanticModel, int position, SymbolDisplayFormat? format)
+        ImmutableArray<SymbolDisplayPart> ISymbol.ToMinimalDisplayParts(
+            SemanticModel semanticModel,
+            int position,
+            SymbolDisplayFormat? format
+        )
         {
-            return SymbolDisplay.ToMinimalDisplayParts(this, Symbol.GetCSharpSemanticModel(semanticModel), position, format);
+            return SymbolDisplay.ToMinimalDisplayParts(
+                this,
+                Symbol.GetCSharpSemanticModel(semanticModel),
+                position,
+                format
+            );
         }
 
         SymbolKind ISymbol.Kind => SymbolKind.Preprocessing;
@@ -127,7 +154,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.PublicModel
 
         bool ISymbol.IsImplicitlyDeclared => false;
 
-        bool ISymbol.CanBeReferencedByName => SyntaxFacts.IsValidIdentifier(_name) && !SyntaxFacts.ContainsDroppedIdentifierCharacters(_name);
+        bool ISymbol.CanBeReferencedByName =>
+            SyntaxFacts.IsValidIdentifier(_name)
+            && !SyntaxFacts.ContainsDroppedIdentifierCharacters(_name);
 
         bool ISymbol.HasUnsupportedMetadata => false;
 

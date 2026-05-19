@@ -3,13 +3,13 @@ using System.Collections;
 using System.Deployment.Internal;
 using System.Deployment.Internal.Isolation;
 using System.Deployment.Internal.Isolation.Manifest;
+using System.Diagnostics.Contracts;
 using System.IO;
 using System.Runtime.InteropServices;
 using System.Runtime.Serialization;
-using System.Security.Permissions;
 using System.Runtime.Versioning;
-using System.Diagnostics.Contracts;
 using System.Security;
+using System.Security.Permissions;
 
 namespace System
 {
@@ -35,6 +35,7 @@ namespace System
     public sealed class ActivationContext : IDisposable, ISerializable
     {
         private ApplicationIdentity _applicationIdentity;
+
         // ISSUE - can use Generic lists.
         private ArrayList _definitionIdentities;
         private ArrayList _manifests;
@@ -46,15 +47,15 @@ namespace System
 
         private const int DefaultComponentCount = 2;
 
-        private ActivationContext () {}
+        private ActivationContext() { }
 
         [ResourceExposure(ResourceScope.Machine)]
         [ResourceConsumption(ResourceScope.Machine)]
         [SecurityCritical]
-        private ActivationContext (SerializationInfo info, StreamingContext context)
+        private ActivationContext(SerializationInfo info, StreamingContext context)
         {
-            string fullName = (string) info.GetValue("FullName", typeof(string));
-            string[] manifestPaths = (string[]) info.GetValue("ManifestPaths", typeof(string[]));
+            string fullName = (string)info.GetValue("FullName", typeof(string));
+            string[] manifestPaths = (string[])info.GetValue("ManifestPaths", typeof(string[]));
             if (manifestPaths == null)
                 CreateFromName(new ApplicationIdentity(fullName));
             else
@@ -74,7 +75,7 @@ namespace System
         }
 
         [SecuritySafeCritical]
-        private void CreateFromName (ApplicationIdentity applicationIdentity)
+        private void CreateFromName(ApplicationIdentity applicationIdentity)
         {
             if (applicationIdentity == null)
                 throw new ArgumentNullException("applicationIdentity");
@@ -97,7 +98,9 @@ namespace System
 #if ISOLATION_IN_MSCORLIB
                 throw new ArgumentException(Environment.GetResourceString("Argument_InvalidAppId"));
 #else
-                throw new ArgumentException("Invalid identity: no deployment/app identity specified");
+                throw new ArgumentException(
+                    "Invalid identity: no deployment/app identity specified"
+                );
 #endif
             }
 
@@ -110,14 +113,20 @@ namespace System
             _appRunState = ApplicationStateDisposition.Undefined;
 
 #if ISOLATION_IN_MSCORLIB
-            Contract.Assert(_definitionIdentities.Count == 2, "An application must have exactly 1 deployment component and 1 application component in Whidbey");
+            Contract.Assert(
+                _definitionIdentities.Count == 2,
+                "An application must have exactly 1 deployment component and 1 application component in Whidbey"
+            );
 #endif
         }
 
         [ResourceExposure(ResourceScope.Machine)]
         [ResourceConsumption(ResourceScope.Machine)]
         [SecuritySafeCritical]
-        private void CreateFromNameAndManifests (ApplicationIdentity applicationIdentity, string[] manifestPaths)
+        private void CreateFromNameAndManifests(
+            ApplicationIdentity applicationIdentity,
+            string[] manifestPaths
+        )
         {
             if (applicationIdentity == null)
                 throw new ArgumentNullException("applicationIdentity");
@@ -135,32 +144,49 @@ namespace System
             _manifestPaths = new String[manifestPaths.Length];
 
             IDefinitionIdentity[] asbId = new IDefinitionIdentity[1];
-            int i=0;
+            int i = 0;
             while (idenum.Next(1, asbId) == 1)
             {
-                ICMS cms = (ICMS) IsolationInterop.ParseManifest(manifestPaths[i], null, ref IsolationInterop.IID_ICMS);
+                ICMS cms = (ICMS)
+                    IsolationInterop.ParseManifest(
+                        manifestPaths[i],
+                        null,
+                        ref IsolationInterop.IID_ICMS
+                    );
 
-                if (IsolationInterop.IdentityAuthority.AreDefinitionsEqual(0, cms.Identity, asbId[0]))
+                if (
+                    IsolationInterop.IdentityAuthority.AreDefinitionsEqual(
+                        0,
+                        cms.Identity,
+                        asbId[0]
+                    )
+                )
                 {
                     _manifests.Add(cms);
-                    _manifestPaths[i]=manifestPaths[i];
+                    _manifestPaths[i] = manifestPaths[i];
                 }
                 else
                 {
 #if ISOLATION_IN_MSCORLIB
-                    throw new ArgumentException(Environment.GetResourceString("Argument_IllegalAppIdMismatch"));
+                    throw new ArgumentException(
+                        Environment.GetResourceString("Argument_IllegalAppIdMismatch")
+                    );
 #else
-                    throw new ArgumentException("Application Identity does not match identity in manifests");
+                    throw new ArgumentException(
+                        "Application Identity does not match identity in manifests"
+                    );
 #endif
                 }
                 i++;
             }
-            if (i!=manifestPaths.Length)
+            if (i != manifestPaths.Length)
             {
 #if ISOLATION_IN_MSCORLIB
                 throw new ArgumentException(Environment.GetResourceString("Argument_IllegalAppId"));
 #else
-                throw new ArgumentException("Application Identity does not have same number of components as manifest paths");
+                throw new ArgumentException(
+                    "Application Identity does not have same number of components as manifest paths"
+                );
 #endif
             }
             _manifests.TrimToSize();
@@ -169,7 +195,9 @@ namespace System
 #if ISOLATION_IN_MSCORLIB
                 throw new ArgumentException(Environment.GetResourceString("Argument_InvalidAppId"));
 #else
-                throw new ArgumentException("Invalid identity: no deployment/app identity specified");
+                throw new ArgumentException(
+                    "Invalid identity: no deployment/app identity specified"
+                );
 #endif
             }
 
@@ -179,7 +207,10 @@ namespace System
             _appRunState = ApplicationStateDisposition.Undefined;
 
 #if ISOLATION_IN_MSCORLIB
-            Contract.Assert(_manifests.Count == 2, "An application must have exactly 1 deployment component and 1 application component in Whidbey");
+            Contract.Assert(
+                _manifests.Count == 2,
+                "An application must have exactly 1 deployment component and 1 application component in Whidbey"
+            );
 #endif
         }
 
@@ -195,50 +226,38 @@ namespace System
 
         [ResourceExposure(ResourceScope.Machine)]
         [ResourceConsumption(ResourceScope.Machine)]
-        public static ActivationContext CreatePartialActivationContext(ApplicationIdentity identity, string[] manifestPaths)
+        public static ActivationContext CreatePartialActivationContext(
+            ApplicationIdentity identity,
+            string[] manifestPaths
+        )
         {
             return new ActivationContext(identity, manifestPaths);
         }
 
         public ApplicationIdentity Identity
         {
-            get
-            {
-                return _applicationIdentity;
-            }
+            get { return _applicationIdentity; }
         }
 
         public ContextForm Form
         {
-            get
-            {
-                return _form;
-            }
+            get { return _form; }
         }
 
-       public byte[] ApplicationManifestBytes
+        public byte[] ApplicationManifestBytes
         {
-            get
-            {
-                return GetApplicationManifestBytes();
-            }
+            get { return GetApplicationManifestBytes(); }
         }
 
         public byte[] DeploymentManifestBytes
         {
-            get
-            {
-                return GetDeploymentManifestBytes();
-            }            
+            get { return GetDeploymentManifestBytes(); }
         }
-        
+
         internal string[] ManifestPaths
         {
             [ResourceExposure(ResourceScope.Machine)]
-            get
-            {
-                return _manifestPaths;
-            }
+            get { return _manifestPaths; }
         }
 
         public void Dispose()
@@ -251,7 +270,7 @@ namespace System
         public enum ContextForm
         {
             Loose = 0,
-            StoreBounded = 1
+            StoreBounded = 1,
         }
 
         // Internals.
@@ -263,7 +282,7 @@ namespace System
             get
             {
                 if (_form == ContextForm.Loose)
-                    return Path.GetDirectoryName(_manifestPaths[_manifestPaths.Length-1]);
+                    return Path.GetDirectoryName(_manifestPaths[_manifestPaths.Length - 1]);
 
                 string s;
                 _actContext.ApplicationBasePath(0, out s);
@@ -283,7 +302,12 @@ namespace System
 
                 string s;
                 // Note: passing in flag == 1.
-                _actContext.GetApplicationStateFilesystemLocation(1, UIntPtr.Zero, IntPtr.Zero, out s);
+                _actContext.GetApplicationStateFilesystemLocation(
+                    1,
+                    UIntPtr.Zero,
+                    IntPtr.Zero,
+                    out s
+                );
                 return s;
             }
         }
@@ -309,7 +333,7 @@ namespace System
             get
             {
                 if (_form == ContextForm.Loose)
-                    return (ICMS) _manifests[0];
+                    return (ICMS)_manifests[0];
 
                 return GetComponentManifest((IDefinitionIdentity)_definitionIdentities[0]);
             }
@@ -321,9 +345,11 @@ namespace System
             get
             {
                 if (_form == ContextForm.Loose)
-                    return (ICMS) _manifests[_manifests.Count-1];
+                    return (ICMS)_manifests[_manifests.Count - 1];
 
-                return GetComponentManifest((IDefinitionIdentity)_definitionIdentities[_definitionIdentities.Count-1]);
+                return GetComponentManifest(
+                    (IDefinitionIdentity)_definitionIdentities[_definitionIdentities.Count - 1]
+                );
             }
         }
 
@@ -349,32 +375,42 @@ namespace System
         {
             object o;
             string manifestPath;
-            
+
             if (_form == ContextForm.Loose)
                 manifestPath = _manifestPaths[0];
             else
             {
-                _actContext.GetComponentManifest(0, (IDefinitionIdentity)_definitionIdentities[0], ref IsolationInterop.IID_IManifestInformation, out o);
+                _actContext.GetComponentManifest(
+                    0,
+                    (IDefinitionIdentity)_definitionIdentities[0],
+                    ref IsolationInterop.IID_IManifestInformation,
+                    out o
+                );
                 ((IManifestInformation)o).get_FullPath(out manifestPath);
-                Marshal.ReleaseComObject(o);               
+                Marshal.ReleaseComObject(o);
             }
 
-            return ReadBytesFromFile(manifestPath);           
+            return ReadBytesFromFile(manifestPath);
         }
-        
+
         [SecuritySafeCritical]
         internal byte[] GetApplicationManifestBytes()
         {
             object o;
             string manifestPath;
-            
+
             if (_form == ContextForm.Loose)
-                manifestPath = _manifestPaths[_manifests.Count-1];
+                manifestPath = _manifestPaths[_manifests.Count - 1];
             else
             {
-                _actContext.GetComponentManifest(0, (IDefinitionIdentity)_definitionIdentities[1], ref IsolationInterop.IID_IManifestInformation, out o);                           
+                _actContext.GetComponentManifest(
+                    0,
+                    (IDefinitionIdentity)_definitionIdentities[1],
+                    ref IsolationInterop.IID_IManifestInformation,
+                    out o
+                );
                 ((IManifestInformation)o).get_FullPath(out manifestPath);
-                Marshal.ReleaseComObject(o);                               
+                Marshal.ReleaseComObject(o);
             }
 
             return ReadBytesFromFile(manifestPath);
@@ -411,7 +447,7 @@ namespace System
         {
             Undefined = 0,
             Starting = 1,
-            Running = 2
+            Running = 2,
         }
 
         internal enum ApplicationStateDisposition
@@ -420,12 +456,12 @@ namespace System
             Starting = 1,
             StartingMigrated = (1 | (1 << 16)),
             Running = 2,
-            RunningFirstTime = (2 | (1 << 17))
+            RunningFirstTime = (2 | (1 << 17)),
         }
 
         // Privates.
 
-        [System.Security.SecuritySafeCritical]  // auto-generated
+        [System.Security.SecuritySafeCritical] // auto-generated
         private void Dispose(bool fDisposing)
         {
             // ISSUE- should release unmanaged objects in array lists.
@@ -441,29 +477,28 @@ namespace System
         private static byte[] ReadBytesFromFile(string manifestPath)
         {
             byte[] rawBytes = null;
-            
+
             using (FileStream fs = new FileStream(manifestPath, FileMode.Open, FileAccess.Read))
             {
-                    int bufferSize = (int)fs.Length;
-     
-                    // zero length file will except ultimately.
-                    rawBytes = new byte[bufferSize];
-     
-                    if (fs.CanSeek)
-                    {
-                       fs.Seek(0, SeekOrigin.Begin);
-                    }
-     
-                    // Read the file into buffer.
-                    fs.Read(rawBytes, 0, bufferSize);
+                int bufferSize = (int)fs.Length;
+
+                // zero length file will except ultimately.
+                rawBytes = new byte[bufferSize];
+
+                if (fs.CanSeek)
+                {
+                    fs.Seek(0, SeekOrigin.Begin);
+                }
+
+                // Read the file into buffer.
+                fs.Read(rawBytes, 0, bufferSize);
             }
 
             return rawBytes;
-            
         }
 
         /// <internalonly/>
-        [System.Security.SecurityCritical]  // auto-generated_required
+        [System.Security.SecurityCritical] // auto-generated_required
         void ISerializable.GetObjectData(SerializationInfo info, StreamingContext context)
         {
             if (_applicationIdentity != null)
@@ -475,14 +510,16 @@ namespace System
 
     [Serializable]
     [System.Runtime.InteropServices.ComVisible(false)]
-    public sealed class ApplicationIdentity : ISerializable {
+    public sealed class ApplicationIdentity : ISerializable
+    {
         private IDefinitionAppId _appId;
 
-        private ApplicationIdentity () {}
+        private ApplicationIdentity() { }
+
         [SecurityCritical]
-        private ApplicationIdentity (SerializationInfo info, StreamingContext context)
+        private ApplicationIdentity(SerializationInfo info, StreamingContext context)
         {
-            string fullName = (string) info.GetValue("FullName", typeof(string));
+            string fullName = (string)info.GetValue("FullName", typeof(string));
             if (fullName == null)
                 throw new ArgumentNullException("fullName");
             _appId = IsolationInterop.AppIdAuthority.TextToDefinition(0, fullName);
@@ -494,7 +531,10 @@ namespace System
             if (applicationIdentityFullName == null)
                 throw new ArgumentNullException("applicationIdentityFullName");
             Contract.EndContractBlock();
-            _appId = IsolationInterop.AppIdAuthority.TextToDefinition(0, applicationIdentityFullName);
+            _appId = IsolationInterop.AppIdAuthority.TextToDefinition(
+                0,
+                applicationIdentityFullName
+            );
         }
 
         [SecurityCritical]
@@ -507,10 +547,7 @@ namespace System
         public String FullName
         {
             [SecuritySafeCritical]
-            get
-            {
-                return IsolationInterop.AppIdAuthority.DefinitionToText(0, _appId);
-            }
+            get { return IsolationInterop.AppIdAuthority.DefinitionToText(0, _appId); }
         }
 
         public String CodeBase
@@ -518,10 +555,7 @@ namespace System
             [ResourceExposure(ResourceScope.Machine)]
             [ResourceConsumption(ResourceScope.Machine)]
             [SecuritySafeCritical]
-            get
-            {
-                return _appId.get_Codebase();
-            }
+            get { return _appId.get_Codebase(); }
         }
 
         public override string ToString()
@@ -532,14 +566,11 @@ namespace System
         internal IDefinitionAppId Identity
         {
             [SecurityCritical]
-            get
-            {
-                return _appId;
-            }
+            get { return _appId; }
         }
 
         /// <internalonly/>
-        [System.Security.SecurityCritical]  // auto-generated_required
+        [System.Security.SecurityCritical] // auto-generated_required
         void ISerializable.GetObjectData(SerializationInfo info, StreamingContext context)
         {
             info.AddValue("FullName", FullName, typeof(String));
@@ -555,7 +586,8 @@ namespace System.Deployment.Internal
     public static class InternalApplicationIdentityHelper
     {
         [SecurityCritical]
-        public static object /* really IDefinitionAppId */ GetInternalAppId(ApplicationIdentity id)
+        public static object /* really IDefinitionAppId */
+        GetInternalAppId(ApplicationIdentity id)
         {
             return id.Identity;
         }
@@ -567,7 +599,8 @@ namespace System.Deployment.Internal
     public static class InternalActivationContextHelper
     {
         [SecuritySafeCritical]
-        public static object /* really ICMS */ GetActivationContextData(ActivationContext appInfo)
+        public static object /* really ICMS */
+        GetActivationContextData(ActivationContext appInfo)
         {
             return appInfo.ActivationContextData;
         }
@@ -591,17 +624,19 @@ namespace System.Deployment.Internal
 
         public static bool IsFirstRun(ActivationContext appInfo)
         {
-            return (appInfo.LastApplicationStateResult == ActivationContext.ApplicationStateDisposition.RunningFirstTime);
+            return (
+                appInfo.LastApplicationStateResult
+                == ActivationContext.ApplicationStateDisposition.RunningFirstTime
+            );
         }
 
         public static byte[] GetApplicationManifestBytes(ActivationContext appInfo)
         {
             if (appInfo == null)
                 throw new ArgumentNullException("appInfo");
-                
+
             return appInfo.GetApplicationManifestBytes();
         }
-
 
         public static byte[] GetDeploymentManifestBytes(ActivationContext appInfo)
         {
@@ -610,6 +645,5 @@ namespace System.Deployment.Internal
 
             return appInfo.GetDeploymentManifestBytes();
         }
-  }
+    }
 }
-

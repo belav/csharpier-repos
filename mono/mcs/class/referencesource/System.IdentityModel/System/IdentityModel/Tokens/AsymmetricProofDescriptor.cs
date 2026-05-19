@@ -15,21 +15,19 @@ namespace System.IdentityModel.Tokens
         SecurityKeyIdentifier _keyIdentifier;
 
         /// <summary>
-        /// Constructor for extensibility 
+        /// Constructor for extensibility
         /// </summary>
-        public AsymmetricProofDescriptor()
-        {   
-        }
+        public AsymmetricProofDescriptor() { }
 
         /// <summary>
         /// Constructs a proof token based on RSA key.
         /// </summary>
         /// <param name="rsaAlgorithm"></param>
-        public AsymmetricProofDescriptor( RSA rsaAlgorithm )
+        public AsymmetricProofDescriptor(RSA rsaAlgorithm)
         {
-            if ( rsaAlgorithm == null )
+            if (rsaAlgorithm == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull( "rsaAlgorithm" );
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("rsaAlgorithm");
             }
 
             _keyIdentifier = new SecurityKeyIdentifier(new RsaKeyIdentifierClause(rsaAlgorithm));
@@ -39,11 +37,11 @@ namespace System.IdentityModel.Tokens
         /// Constructs a proof token based on key identifier.
         /// </summary>
         /// <param name="keyIdentifier"></param>
-        public AsymmetricProofDescriptor( SecurityKeyIdentifier keyIdentifier )
+        public AsymmetricProofDescriptor(SecurityKeyIdentifier keyIdentifier)
         {
-            if ( keyIdentifier == null )
+            if (keyIdentifier == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull( "keyIdentifier" );
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("keyIdentifier");
             }
             //
             // This is a key identifier for an asymmetric key
@@ -57,11 +55,11 @@ namespace System.IdentityModel.Tokens
         /// Basically nothing to write into the RSTR's requested proof token.
         /// </summary>
         /// <param name="response"></param>
-        public override void ApplyTo( RSTR response )
+        public override void ApplyTo(RSTR response)
         {
-            if ( response == null )
+            if (response == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull( "response" );
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("response");
             }
             //
             // Nothing else to do for an asymmetric key
@@ -70,7 +68,7 @@ namespace System.IdentityModel.Tokens
 
         /// <summary>
         /// This is the key identifier that the requestor has provided from the use key.
-        /// This can be echo back inside the saml token if needed. This would be either 
+        /// This can be echo back inside the saml token if needed. This would be either
         /// </summary>
         public override SecurityKeyIdentifier KeyIdentifier
         {

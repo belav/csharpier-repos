@@ -15,23 +15,15 @@ namespace System.IdentityModel.Selectors
     public class ServiceNotStartedException : System.Exception
     {
         public ServiceNotStartedException()
-            : base()
-        {
-        }
+            : base() { }
 
-        public ServiceNotStartedException( string message )
-            : base( message )
-        {
-        }
+        public ServiceNotStartedException(string message)
+            : base(message) { }
 
-        public ServiceNotStartedException( string message, Exception innerException )
-            : base( message, innerException )
-        {
-        }
+        public ServiceNotStartedException(string message, Exception innerException)
+            : base(message, innerException) { }
 
-        protected ServiceNotStartedException( SerializationInfo info, StreamingContext context )
-            : base( info, context )
-        {
-        }
+        protected ServiceNotStartedException(SerializationInfo info, StreamingContext context)
+            : base(info, context) { }
     }
 }

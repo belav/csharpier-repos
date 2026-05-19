@@ -3,28 +3,33 @@
 
 // <Area> Nullable - Box-Unbox </Area>
 // <Title> Nullable type with unbox box expr  </Title>
-// <Description>  
+// <Description>
 // checking type of ImplementTwoInterface using is operator
-// </Description> 
-// <RelatedBugs> </RelatedBugs>  
+// </Description>
+// <RelatedBugs> </RelatedBugs>
 //<Expects Status=success></Expects>
-// <Code> 
+// <Code>
 
-
-using System.Runtime.InteropServices;
 using System;
+using System.Runtime.InteropServices;
 using Xunit;
 
 public class NullableTest
 {
     private static bool BoxUnboxToNQ(ValueType o)
     {
-        return Helper.Compare((ImplementTwoInterface)o, Helper.Create(default(ImplementTwoInterface)));
+        return Helper.Compare(
+            (ImplementTwoInterface)o,
+            Helper.Create(default(ImplementTwoInterface))
+        );
     }
 
     private static bool BoxUnboxToQ(ValueType o)
     {
-        return Helper.Compare((ImplementTwoInterface?)o, Helper.Create(default(ImplementTwoInterface)));
+        return Helper.Compare(
+            (ImplementTwoInterface?)o,
+            Helper.Create(default(ImplementTwoInterface))
+        );
     }
 
     [Fact]
@@ -38,5 +43,3 @@ public class NullableTest
             return ExitCode.Failed;
     }
 }
-
-

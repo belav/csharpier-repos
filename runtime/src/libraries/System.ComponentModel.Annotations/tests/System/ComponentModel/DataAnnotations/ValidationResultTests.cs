@@ -55,8 +55,13 @@ namespace System.ComponentModel.DataAnnotations.Tests
         [Fact]
         public void Ctor_ValidationResult_ReturnsClone()
         {
-            ValidationResult validationResult = new ValidationResult("ErrorMessage", new string[] { "Member1", "Member2" });
-            ValidationResultSubClass createdValidationResult = new ValidationResultSubClass(validationResult);
+            ValidationResult validationResult = new ValidationResult(
+                "ErrorMessage",
+                new string[] { "Member1", "Member2" }
+            );
+            ValidationResultSubClass createdValidationResult = new ValidationResultSubClass(
+                validationResult
+            );
             Assert.Equal(validationResult.ErrorMessage, createdValidationResult.ErrorMessage);
             Assert.Equal(validationResult.MemberNames, createdValidationResult.MemberNames);
         }
@@ -64,12 +69,16 @@ namespace System.ComponentModel.DataAnnotations.Tests
         [Fact]
         public void Ctor_ValidationResult_NullValidationResult_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>("validationResult", () => new ValidationResultSubClass(null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "validationResult",
+                () => new ValidationResultSubClass(null)
+            );
         }
 
         public class ValidationResultSubClass : ValidationResult
         {
-            public ValidationResultSubClass(ValidationResult validationResult) : base(validationResult) { }
+            public ValidationResultSubClass(ValidationResult validationResult)
+                : base(validationResult) { }
         }
     }
 }

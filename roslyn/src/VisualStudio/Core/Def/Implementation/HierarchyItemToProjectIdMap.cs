@@ -19,11 +19,19 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
         private readonly VisualStudioWorkspaceImpl _workspace;
 
         [ImportingConstructor]
-        [SuppressMessage("RoslynDiagnosticsReliability", "RS0033:Importing constructor should be [Obsolete]", Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814")]
-        public HierarchyItemToProjectIdMap(VisualStudioWorkspaceImpl workspace)
-            => _workspace = workspace;
+        [SuppressMessage(
+            "RoslynDiagnosticsReliability",
+            "RS0033:Importing constructor should be [Obsolete]",
+            Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814"
+        )]
+        public HierarchyItemToProjectIdMap(VisualStudioWorkspaceImpl workspace) =>
+            _workspace = workspace;
 
-        public bool TryGetProjectId(IVsHierarchyItem hierarchyItem, string? targetFrameworkMoniker, [NotNullWhen(true)] out ProjectId? projectId)
+        public bool TryGetProjectId(
+            IVsHierarchyItem hierarchyItem,
+            string? targetFrameworkMoniker,
+            [NotNullWhen(true)] out ProjectId? projectId
+        )
         {
             // A project node is represented in two different hierarchies: the solution's IVsHierarchy (where it is a leaf node)
             // and the project's own IVsHierarchy (where it is the root node). The IVsHierarchyItem joins them together for the
@@ -34,15 +42,14 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
 
             // First filter the projects by matching up properties on the input hierarchy against properties on each
             // project's hierarchy.
-            var candidateProjects = _workspace.CurrentSolution.Projects
-                .Where(p =>
+            var candidateProjects = _workspace
+                .CurrentSolution.Projects.Where(p =>
                 {
                     // We're about to access various properties of the IVsHierarchy associated with the project.
                     // The properties supported and the interpretation of their values varies from one project system
                     // to another. This code is designed with C# and VB in mind, so we need to filter out everything
                     // else.
-                    if (p.Language is not LanguageNames.CSharp
-                        and not LanguageNames.VisualBasic)
+                    if (p.Language is not LanguageNames.CSharp and not LanguageNames.VisualBasic)
                     {
                         return false;
                     }
@@ -64,7 +71,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
             // from CPS to see if this matches.
             if (targetFrameworkMoniker != null)
             {
-                var matchingProject = candidateProjects.FirstOrDefault(p => _workspace.TryGetDependencyNodeTargetIdentifier(p.Id) == targetFrameworkMoniker);
+                var matchingProject = candidateProjects.FirstOrDefault(p =>
+                    _workspace.TryGetDependencyNodeTargetIdentifier(p.Id) == targetFrameworkMoniker
+                );
 
                 if (matchingProject != null)
                 {
@@ -79,7 +88,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
             // without a ContainedDocument.
             foreach (var candidateProject in candidateProjects)
             {
-                if (!candidateProject.DocumentIds.Any(id => ContainedDocument.TryGetContainedDocument(id) != null))
+                if (
+                    !candidateProject.DocumentIds.Any(id =>
+                        ContainedDocument.TryGetContainedDocument(id) != null
+                    )
+                )
                 {
                     projectId = candidateProject.Id;
                     return true;

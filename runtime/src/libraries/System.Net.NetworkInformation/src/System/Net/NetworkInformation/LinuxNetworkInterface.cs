@@ -35,9 +35,7 @@ namespace System.Net.NetworkInformation
                     {
                         IPv4Routes = File.ReadAllLines(NetworkFiles.Ipv4RouteFile);
                     }
-                    catch (UnauthorizedAccessException)
-                    {
-                    }
+                    catch (UnauthorizedAccessException) { }
                 }
 
                 if (File.Exists(NetworkFiles.Ipv6RouteFile))
@@ -46,24 +44,30 @@ namespace System.Net.NetworkInformation
                     {
                         IPv6Routes = File.ReadAllLines(NetworkFiles.Ipv6RouteFile);
                     }
-                    catch (UnauthorizedAccessException)
-                    {
-                    }
+                    catch (UnauthorizedAccessException) { }
                 }
 
                 try
                 {
                     string resolverConfig = File.ReadAllText(NetworkFiles.EtcResolvConfFile);
-                    DnsSuffix = StringParsingHelpers.ParseDnsSuffixFromResolvConfFile(resolverConfig);
-                    DnsAddresses = new InternalIPAddressCollection(StringParsingHelpers.ParseDnsAddressesFromResolvConfFile(resolverConfig));
+                    DnsSuffix = StringParsingHelpers.ParseDnsSuffixFromResolvConfFile(
+                        resolverConfig
+                    );
+                    DnsAddresses = new InternalIPAddressCollection(
+                        StringParsingHelpers.ParseDnsAddressesFromResolvConfFile(resolverConfig)
+                    );
                 }
-                catch (Exception e) when (e is FileNotFoundException || e is UnauthorizedAccessException)
-                {
-                }
+                catch (Exception e)
+                    when (e is FileNotFoundException || e is UnauthorizedAccessException) { }
             }
         }
 
-        internal LinuxNetworkInterface(string name, int index, LinuxNetworkInterfaceSystemProperties systemProperties) : base(name)
+        internal LinuxNetworkInterface(
+            string name,
+            int index,
+            LinuxNetworkInterfaceSystemProperties systemProperties
+        )
+            : base(name)
         {
             _index = index;
             _ipProperties = new LinuxIPInterfaceProperties(this, systemProperties);
@@ -73,10 +77,10 @@ namespace System.Net.NetworkInformation
         {
             var systemProperties = new LinuxNetworkInterfaceSystemProperties();
 
-            int interfaceCount=0;
-            int addressCount=0;
-            Interop.Sys.NetworkInterfaceInfo * nii = null;
-            Interop.Sys.IpAddressInfo * ai = null;
+            int interfaceCount = 0;
+            int addressCount = 0;
+            Interop.Sys.NetworkInterfaceInfo* nii = null;
+            Interop.Sys.IpAddressInfo* ai = null;
             IntPtr globalMemory = (IntPtr)null;
 
             if (Interop.Sys.GetNetworkInterfaces(&interfaceCount, &nii, &addressCount, &ai) != 0)
@@ -89,11 +93,18 @@ namespace System.Net.NetworkInformation
             try
             {
                 NetworkInterface[] interfaces = new NetworkInterface[interfaceCount];
-                Dictionary<int, LinuxNetworkInterface> interfacesByIndex = new Dictionary<int, LinuxNetworkInterface>(interfaceCount);
+                Dictionary<int, LinuxNetworkInterface> interfacesByIndex = new Dictionary<
+                    int,
+                    LinuxNetworkInterface
+                >(interfaceCount);
 
                 for (int i = 0; i < interfaceCount; i++)
                 {
-                    var lni = new LinuxNetworkInterface(Marshal.PtrToStringUTF8((IntPtr)nii->Name)!, nii->InterfaceIndex, systemProperties);
+                    var lni = new LinuxNetworkInterface(
+                        Marshal.PtrToStringUTF8((IntPtr)nii->Name)!,
+                        nii->InterfaceIndex,
+                        systemProperties
+                    );
                     lni._interfaceType = (NetworkInterfaceType)nii->HardwareType;
                     lni._speed = nii->Speed;
                     lni._operationalStatus = (OperationalStatus)nii->OperationalState;
@@ -102,7 +113,12 @@ namespace System.Net.NetworkInformation
 
                     if (nii->NumAddressBytes > 0)
                     {
-                        lni._physicalAddress = new PhysicalAddress(new ReadOnlySpan<byte>(nii->AddressBytes, nii->NumAddressBytes).ToArray());
+                        lni._physicalAddress = new PhysicalAddress(
+                            new ReadOnlySpan<byte>(
+                                nii->AddressBytes,
+                                nii->NumAddressBytes
+                            ).ToArray()
+                        );
                     }
 
                     interfaces[i] = lni;
@@ -112,13 +128,20 @@ namespace System.Net.NetworkInformation
 
                 while (addressCount != 0)
                 {
-                    var address = new IPAddress(new ReadOnlySpan<byte>(ai->AddressBytes, ai->NumAddressBytes));
+                    var address = new IPAddress(
+                        new ReadOnlySpan<byte>(ai->AddressBytes, ai->NumAddressBytes)
+                    );
                     if (address.IsIPv6LinkLocal)
                     {
                         address.ScopeId = ai->InterfaceIndex;
                     }
 
-                    if (interfacesByIndex.TryGetValue(ai->InterfaceIndex, out LinuxNetworkInterface? lni))
+                    if (
+                        interfacesByIndex.TryGetValue(
+                            ai->InterfaceIndex,
+                            out LinuxNetworkInterface? lni
+                        )
+                    )
                     {
                         lni.AddAddress(address, ai->PrefixLength);
                     }
@@ -137,10 +160,7 @@ namespace System.Net.NetworkInformation
 
         public override bool SupportsMulticast
         {
-            get
-            {
-                return _supportsMulticast;
-            }
+            get { return _supportsMulticast; }
         }
 
         public override IPInterfaceProperties GetIPProperties()
@@ -158,18 +178,24 @@ namespace System.Net.NetworkInformation
             return new LinuxIPv4InterfaceStatistics(_name);
         }
 
-        public override OperationalStatus OperationalStatus { get { return _operationalStatus; } }
+        public override OperationalStatus OperationalStatus
+        {
+            get { return _operationalStatus; }
+        }
 
-        public override NetworkInterfaceType NetworkInterfaceType { get { return _interfaceType; } }
+        public override NetworkInterfaceType NetworkInterfaceType
+        {
+            get { return _interfaceType; }
+        }
 
         public override long Speed
         {
-            get
-            {
-                return _speed;
-            }
+            get { return _speed; }
         }
 
-        public override bool IsReceiveOnly { get { return false; } }
+        public override bool IsReceiveOnly
+        {
+            get { return false; }
+        }
     }
 }

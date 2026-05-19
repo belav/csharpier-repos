@@ -22,102 +22,123 @@
 //
 //
 
-
 using System;
 using System.Threading;
 using System.Threading.Tasks;
-
 using NUnit.Framework;
 
 namespace MonoTests.System.Threading.Tasks
 {
-	[TestFixture]
-	public class Task_T_Tests
-	{
-		Task<int> InitTestTask()
-		{
-			return Task.Factory.StartNew<int> (() => 5);
-		}
-		
-		[Test]
-		[Category ("MultiThreaded")]
-		public void SimpleTaskTestCase ()
-		{
-			Task<int> f = InitTestTask ();
-			
-			Assert.IsNotNull(f, "#1");
-			Assert.AreEqual(5, f.Result, "#2");
-		}
-		
-		[Test]
-		[Category ("MultiThreaded")]
-		public void TaskContinueWithTestCase ()
-		{
-			bool result = false;
-			
-			Task<int> f = InitTestTask ();
-			Task<int> cont = f.ContinueWith ((future) => { result = true; return future.Result * 2; });
-			f.Wait ();
-			cont.Wait ();
-			
-			Assert.IsNotNull (cont, "#1");
-			Assert.IsTrue (result, "#2");
-			Assert.AreEqual (10, cont.Result);
-		}
+    [TestFixture]
+    public class Task_T_Tests
+    {
+        Task<int> InitTestTask()
+        {
+            return Task.Factory.StartNew<int>(() => 5);
+        }
 
-		static Task<int> CreateNestedFuture(int level)
-		{
-			if (level == 0)
-				return Task.Factory.StartNew(() => { Thread.Sleep (1); return 1; });
+        [Test]
+        [Category("MultiThreaded")]
+        public void SimpleTaskTestCase()
+        {
+            Task<int> f = InitTestTask();
 
-			var t = CreateNestedFuture(level - 1);
-			return Task.Factory.StartNew(() => t.Result + 1);
-		}
+            Assert.IsNotNull(f, "#1");
+            Assert.AreEqual(5, f.Result, "#2");
+        }
 
-		[Test]
-		[Category ("MultiThreaded")]
-		public void NestedFutureTest ()
-		{
-			ParallelTestHelper.Repeat (delegate {
-				var t = CreateNestedFuture(10);
-				var t2 = CreateNestedFuture(20);
-				var t3 = CreateNestedFuture(30);
+        [Test]
+        [Category("MultiThreaded")]
+        public void TaskContinueWithTestCase()
+        {
+            bool result = false;
 
-				Assert.AreEqual (11, t.Result);
-				Assert.AreEqual (21, t2.Result);
-				Assert.AreEqual (31, t3.Result);
-		   }, 50);
-		}
+            Task<int> f = InitTestTask();
+            Task<int> cont = f.ContinueWith(
+                (future) =>
+                {
+                    result = true;
+                    return future.Result * 2;
+                }
+            );
+            f.Wait();
+            cont.Wait();
 
-		[Test]
-		[Category ("MultiThreaded")]
-		public void FaultedFutureTest ()
-		{
-			var thrown = new ApplicationException ();
-			var f = Task<int>.Factory.StartNew (() => { throw thrown; });
-			AggregateException ex = null;
-			try {
-				f.Wait ();
-			} catch (AggregateException e) {
-				ex = e;
-			}
+            Assert.IsNotNull(cont, "#1");
+            Assert.IsTrue(result, "#2");
+            Assert.AreEqual(10, cont.Result);
+        }
 
-			Assert.IsNotNull (ex);
-			Assert.AreEqual (thrown, ex.InnerException);
-			Assert.AreEqual (thrown, f.Exception.InnerException);
-			Assert.AreEqual (TaskStatus.Faulted, f.Status);
+        static Task<int> CreateNestedFuture(int level)
+        {
+            if (level == 0)
+                return Task.Factory.StartNew(() =>
+                {
+                    Thread.Sleep(1);
+                    return 1;
+                });
 
-			ex = null;
-			try {
-				var result = f.Result;
-			} catch (AggregateException e) {
-				ex = e;
-			}
+            var t = CreateNestedFuture(level - 1);
+            return Task.Factory.StartNew(() => t.Result + 1);
+        }
 
-			Assert.IsNotNull (ex);
-			Assert.AreEqual (TaskStatus.Faulted, f.Status);
-			Assert.AreEqual (thrown, f.Exception.InnerException);
-			Assert.AreEqual (thrown, ex.InnerException);
-		}
-	}
+        [Test]
+        [Category("MultiThreaded")]
+        public void NestedFutureTest()
+        {
+            ParallelTestHelper.Repeat(
+                delegate
+                {
+                    var t = CreateNestedFuture(10);
+                    var t2 = CreateNestedFuture(20);
+                    var t3 = CreateNestedFuture(30);
+
+                    Assert.AreEqual(11, t.Result);
+                    Assert.AreEqual(21, t2.Result);
+                    Assert.AreEqual(31, t3.Result);
+                },
+                50
+            );
+        }
+
+        [Test]
+        [Category("MultiThreaded")]
+        public void FaultedFutureTest()
+        {
+            var thrown = new ApplicationException();
+            var f = Task<int>.Factory.StartNew(() =>
+            {
+                throw thrown;
+            });
+            AggregateException ex = null;
+            try
+            {
+                f.Wait();
+            }
+            catch (AggregateException e)
+            {
+                ex = e;
+            }
+
+            Assert.IsNotNull(ex);
+            Assert.AreEqual(thrown, ex.InnerException);
+            Assert.AreEqual(thrown, f.Exception.InnerException);
+            Assert.AreEqual(TaskStatus.Faulted, f.Status);
+
+            ex = null;
+            try
+            {
+                var result = f.Result;
+            }
+            catch (AggregateException e)
+            {
+                ex = e;
+            }
+
+            Assert.IsNotNull(ex);
+            Assert.AreEqual(TaskStatus.Faulted, f.Status);
+            Assert.AreEqual(thrown, f.Exception.InnerException);
+            Assert.AreEqual(thrown, ex.InnerException);
+        }
+    }
 }

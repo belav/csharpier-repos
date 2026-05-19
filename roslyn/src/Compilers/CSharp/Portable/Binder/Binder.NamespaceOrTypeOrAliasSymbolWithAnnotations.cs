@@ -17,7 +17,9 @@ namespace Microsoft.CodeAnalysis.CSharp
             private readonly Symbol _symbol;
             private readonly bool _isNullableEnabled;
 
-            private NamespaceOrTypeOrAliasSymbolWithAnnotations(TypeWithAnnotations typeWithAnnotations)
+            private NamespaceOrTypeOrAliasSymbolWithAnnotations(
+                TypeWithAnnotations typeWithAnnotations
+            )
             {
                 Debug.Assert(typeWithAnnotations.HasType);
                 _typeWithAnnotations = typeWithAnnotations;
@@ -25,7 +27,10 @@ namespace Microsoft.CodeAnalysis.CSharp
                 _isNullableEnabled = false; // Not meaningful for a TypeWithAnnotations, it already baked the fact into its content.
             }
 
-            private NamespaceOrTypeOrAliasSymbolWithAnnotations(Symbol symbol, bool isNullableEnabled)
+            private NamespaceOrTypeOrAliasSymbolWithAnnotations(
+                Symbol symbol,
+                bool isNullableEnabled
+            )
             {
                 Debug.Assert(!(symbol is TypeSymbol));
                 _typeWithAnnotations = default;
@@ -49,19 +54,26 @@ namespace Microsoft.CodeAnalysis.CSharp
                 }
             }
 
-            internal static NamespaceOrTypeOrAliasSymbolWithAnnotations CreateUnannotated(bool isNullableEnabled, Symbol symbol)
+            internal static NamespaceOrTypeOrAliasSymbolWithAnnotations CreateUnannotated(
+                bool isNullableEnabled,
+                Symbol symbol
+            )
             {
                 if (symbol is null)
                 {
                     return default;
                 }
                 var type = symbol as TypeSymbol;
-                return type is null ?
-                    new NamespaceOrTypeOrAliasSymbolWithAnnotations(symbol, isNullableEnabled) :
-                    new NamespaceOrTypeOrAliasSymbolWithAnnotations(TypeWithAnnotations.Create(isNullableEnabled, type));
+                return type is null
+                    ? new NamespaceOrTypeOrAliasSymbolWithAnnotations(symbol, isNullableEnabled)
+                    : new NamespaceOrTypeOrAliasSymbolWithAnnotations(
+                        TypeWithAnnotations.Create(isNullableEnabled, type)
+                    );
             }
 
-            public static implicit operator NamespaceOrTypeOrAliasSymbolWithAnnotations(TypeWithAnnotations typeWithAnnotations)
+            public static implicit operator NamespaceOrTypeOrAliasSymbolWithAnnotations(
+                TypeWithAnnotations typeWithAnnotations
+            )
             {
                 return new NamespaceOrTypeOrAliasSymbolWithAnnotations(typeWithAnnotations);
             }

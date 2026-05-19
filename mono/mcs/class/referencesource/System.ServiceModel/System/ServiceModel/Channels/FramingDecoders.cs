@@ -4,8 +4,8 @@
 namespace System.ServiceModel.Channels
 {
     using System.Globalization;
-    using System.ServiceModel;
     using System.IO;
+    using System.ServiceModel;
     using System.Text;
 
     static class DecoderHelper
@@ -14,8 +14,13 @@ namespace System.ServiceModel.Channels
         {
             if (size <= 0)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("size", size, SR.GetString(
-                    SR.ValueMustBePositive)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentOutOfRangeException(
+                        "size",
+                        size,
+                        SR.GetString(SR.ValueMustBePositive)
+                    )
+                );
             }
         }
     }
@@ -33,7 +38,9 @@ namespace System.ServiceModel.Channels
             {
                 if (!isValueDecoded)
 #pragma warning suppress 56503 // Microsoft, not a publicly accessible API
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.FramingValueNotAvailable)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new InvalidOperationException(SR.GetString(SR.FramingValueNotAvailable))
+                    );
                 return value;
             }
         }
@@ -55,7 +62,9 @@ namespace System.ServiceModel.Channels
             DecoderHelper.ValidateSize(size);
             if (isValueDecoded)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.FramingValueNotAvailable)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(SR.GetString(SR.FramingValueNotAvailable))
+                );
             }
             int bytesConsumed = 0;
             while (bytesConsumed < size)
@@ -65,7 +74,9 @@ namespace System.ServiceModel.Channels
                 bytesConsumed++;
                 if (index == LastIndex && (next & 0xF8) != 0)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidDataException(SR.GetString(SR.FramingSizeTooLarge)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new InvalidDataException(SR.GetString(SR.FramingSizeTooLarge))
+                    );
                 }
                 index++;
                 if ((next & 0x80) == 0)
@@ -109,7 +120,9 @@ namespace System.ServiceModel.Channels
             {
                 if (currentState != State.Done)
 #pragma warning suppress 56503 // Microsoft, not a publicly accessible API
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.FramingValueNotAvailable)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new InvalidOperationException(SR.GetString(SR.FramingValueNotAvailable))
+                    );
                 return value;
             }
         }
@@ -129,7 +142,9 @@ namespace System.ServiceModel.Channels
                         if (encodedSize > sizeQuota)
                         {
                             Exception quotaExceeded = OnSizeQuotaExceeded(encodedSize);
-                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(quotaExceeded);
+                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                                quotaExceeded
+                            );
                         }
                         if (encodedBytes == null || encodedBytes.Length < encodedSize)
                         {
@@ -141,8 +156,13 @@ namespace System.ServiceModel.Channels
                     }
                     break;
                 case State.ReadingBytes:
-                    if (value != null && valueLengthInBytes == encodedSize && bytesNeeded == encodedSize &&
-                        size >= encodedSize && CompareBuffers(encodedBytes, buffer, offset))
+                    if (
+                        value != null
+                        && valueLengthInBytes == encodedSize
+                        && bytesNeeded == encodedSize
+                        && size >= encodedSize
+                        && CompareBuffers(encodedBytes, buffer, offset)
+                    )
                     {
                         bytesConsumed = bytesNeeded;
                         OnComplete(value);
@@ -152,7 +172,13 @@ namespace System.ServiceModel.Channels
                         bytesConsumed = bytesNeeded;
                         if (size < bytesNeeded)
                             bytesConsumed = size;
-                        Buffer.BlockCopy(buffer, offset, encodedBytes, encodedSize - bytesNeeded, bytesConsumed);
+                        Buffer.BlockCopy(
+                            buffer,
+                            offset,
+                            encodedBytes,
+                            encodedSize - bytesNeeded,
+                            bytesConsumed
+                        );
                         bytesNeeded -= bytesConsumed;
                         if (bytesNeeded == 0)
                         {
@@ -163,7 +189,9 @@ namespace System.ServiceModel.Channels
                     }
                     break;
                 default:
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidDataException(SR.GetString(SR.InvalidDecoderStateMachine)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new InvalidDataException(SR.GetString(SR.InvalidDecoderStateMachine))
+                    );
             }
 
             return bytesConsumed;
@@ -207,9 +235,7 @@ namespace System.ServiceModel.Channels
         Uri via;
 
         public ViaStringDecoder(int sizeQuota)
-            : base(sizeQuota)
-        {
-        }
+            : base(sizeQuota) { }
 
         protected override Exception OnSizeQuotaExceeded(int size)
         {
@@ -227,7 +253,9 @@ namespace System.ServiceModel.Channels
             }
             catch (UriFormatException exception)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidDataException(SR.GetString(SR.FramingViaNotUri, value), exception));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidDataException(SR.GetString(SR.FramingViaNotUri, value), exception)
+                );
             }
         }
 
@@ -237,7 +265,9 @@ namespace System.ServiceModel.Channels
             {
                 if (!IsValueDecoded)
 #pragma warning suppress 56503 // Microsoft, not a publicly accessible API
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.FramingValueNotAvailable)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new InvalidOperationException(SR.GetString(SR.FramingValueNotAvailable))
+                    );
                 return via;
             }
         }
@@ -248,16 +278,18 @@ namespace System.ServiceModel.Channels
         internal const int FaultSizeQuota = 256;
 
         public FaultStringDecoder()
-            : base(FaultSizeQuota)
-        {
-        }
+            : base(FaultSizeQuota) { }
 
         protected override Exception OnSizeQuotaExceeded(int size)
         {
             return new InvalidDataException(SR.GetString(SR.FramingFaultTooLong, size));
         }
 
-        public static Exception GetFaultException(string faultString, string via, string contentType)
+        public static Exception GetFaultException(
+            string faultString,
+            string via,
+            string contentType
+        )
         {
             if (faultString == FramingEncodingString.EndpointNotFoundFault)
             {
@@ -265,23 +297,33 @@ namespace System.ServiceModel.Channels
             }
             else if (faultString == FramingEncodingString.ContentTypeInvalidFault)
             {
-                return new ProtocolException(SR.GetString(SR.FramingContentTypeMismatch, contentType, via));
+                return new ProtocolException(
+                    SR.GetString(SR.FramingContentTypeMismatch, contentType, via)
+                );
             }
             else if (faultString == FramingEncodingString.ServiceActivationFailedFault)
             {
-                return new ServiceActivationException(SR.GetString(SR.Hosting_ServiceActivationFailed, via));
+                return new ServiceActivationException(
+                    SR.GetString(SR.Hosting_ServiceActivationFailed, via)
+                );
             }
             else if (faultString == FramingEncodingString.ConnectionDispatchFailedFault)
             {
-                return new CommunicationException(SR.GetString(SR.Sharing_ConnectionDispatchFailed, via));
+                return new CommunicationException(
+                    SR.GetString(SR.Sharing_ConnectionDispatchFailed, via)
+                );
             }
             else if (faultString == FramingEncodingString.EndpointUnavailableFault)
             {
-                return new EndpointNotFoundException(SR.GetString(SR.Sharing_EndpointUnavailable, via));
+                return new EndpointNotFoundException(
+                    SR.GetString(SR.Sharing_EndpointUnavailable, via)
+                );
             }
             else if (faultString == FramingEncodingString.MaxMessageSizeExceededFault)
             {
-                Exception inner = new QuotaExceededException(SR.GetString(SR.FramingMaxMessageSizeExceeded));
+                Exception inner = new QuotaExceededException(
+                    SR.GetString(SR.FramingMaxMessageSizeExceeded)
+                );
                 return new CommunicationException(inner.Message, inner);
             }
             else if (faultString == FramingEncodingString.UnsupportedModeFault)
@@ -294,12 +336,16 @@ namespace System.ServiceModel.Channels
             }
             else if (faultString == FramingEncodingString.ContentTypeTooLongFault)
             {
-                Exception inner = new QuotaExceededException(SR.GetString(SR.FramingContentTypeTooLongFault, contentType));
+                Exception inner = new QuotaExceededException(
+                    SR.GetString(SR.FramingContentTypeTooLongFault, contentType)
+                );
                 return new CommunicationException(inner.Message, inner);
             }
             else if (faultString == FramingEncodingString.ViaTooLongFault)
             {
-                Exception inner = new QuotaExceededException(SR.GetString(SR.FramingViaTooLongFault, via));
+                Exception inner = new QuotaExceededException(
+                    SR.GetString(SR.FramingViaTooLongFault, via)
+                );
                 return new CommunicationException(inner.Message, inner);
             }
             else if (faultString == FramingEncodingString.ServerTooBusyFault)
@@ -312,7 +358,9 @@ namespace System.ServiceModel.Channels
             }
             else
             {
-                return new ProtocolException(SR.GetString(SR.FramingFaultUnrecognized, faultString));
+                return new ProtocolException(
+                    SR.GetString(SR.FramingFaultUnrecognized, faultString)
+                );
             }
         }
     }
@@ -320,14 +368,17 @@ namespace System.ServiceModel.Channels
     class ContentTypeStringDecoder : StringDecoder
     {
         public ContentTypeStringDecoder(int sizeQuota)
-            : base(sizeQuota)
-        {
-        }
+            : base(sizeQuota) { }
 
         protected override Exception OnSizeQuotaExceeded(int size)
         {
-            Exception result = new InvalidDataException(SR.GetString(SR.FramingContentTypeTooLong, size));
-            FramingEncodingString.AddFaultString(result, FramingEncodingString.ContentTypeTooLongFault);
+            Exception result = new InvalidDataException(
+                SR.GetString(SR.FramingContentTypeTooLong, size)
+            );
+            FramingEncodingString.AddFaultString(
+                result,
+                FramingEncodingString.ContentTypeTooLongFault
+            );
             return result;
         }
 
@@ -363,9 +414,7 @@ namespace System.ServiceModel.Channels
     {
         long streamPosition;
 
-        protected FramingDecoder()
-        {
-        }
+        protected FramingDecoder() { }
 
         protected FramingDecoder(long streamPosition)
         {
@@ -390,19 +439,28 @@ namespace System.ServiceModel.Channels
                 case FramingMode.SingletonSized:
                     break;
                 default:
-                    {
-                        Exception exception = CreateException(new InvalidDataException(SR.GetString(
-                            SR.FramingModeNotSupported, mode.ToString())), FramingEncodingString.UnsupportedModeFault);
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(exception);
-                    }
+                {
+                    Exception exception = CreateException(
+                        new InvalidDataException(
+                            SR.GetString(SR.FramingModeNotSupported, mode.ToString())
+                        ),
+                        FramingEncodingString.UnsupportedModeFault
+                    );
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(exception);
+                }
             }
         }
 
-        protected void ValidateRecordType(FramingRecordType expectedType, FramingRecordType foundType)
+        protected void ValidateRecordType(
+            FramingRecordType expectedType,
+            FramingRecordType foundType
+        )
         {
             if (foundType != expectedType)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(CreateInvalidRecordTypeException(expectedType, foundType));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    CreateInvalidRecordTypeException(expectedType, foundType)
+                );
             }
         }
 
@@ -411,7 +469,10 @@ namespace System.ServiceModel.Channels
         {
             if (foundType != FramingRecordType.PreambleAck)
             {
-                Exception inner = CreateInvalidRecordTypeException(FramingRecordType.PreambleAck, foundType);
+                Exception inner = CreateInvalidRecordTypeException(
+                    FramingRecordType.PreambleAck,
+                    foundType
+                );
                 string exceptionString;
                 if (((byte)foundType == 'h') || ((byte)foundType == 'H'))
                 {
@@ -421,21 +482,36 @@ namespace System.ServiceModel.Channels
                 {
                     exceptionString = SR.GetString(SR.PreambleAckIncorrect);
                 }
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ProtocolException(exceptionString, inner));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ProtocolException(exceptionString, inner)
+                );
             }
         }
 
-        Exception CreateInvalidRecordTypeException(FramingRecordType expectedType, FramingRecordType foundType)
+        Exception CreateInvalidRecordTypeException(
+            FramingRecordType expectedType,
+            FramingRecordType foundType
+        )
         {
-            return new InvalidDataException(SR.GetString(SR.FramingRecordTypeMismatch, expectedType.ToString(), foundType.ToString()));
+            return new InvalidDataException(
+                SR.GetString(
+                    SR.FramingRecordTypeMismatch,
+                    expectedType.ToString(),
+                    foundType.ToString()
+                )
+            );
         }
 
         protected void ValidateMajorVersion(int majorVersion)
         {
             if (majorVersion != FramingVersion.Major)
             {
-                Exception exception = CreateException(new InvalidDataException(SR.GetString(
-                    SR.FramingVersionNotSupported, majorVersion)), FramingEncodingString.UnsupportedVersionFault);
+                Exception exception = CreateException(
+                    new InvalidDataException(
+                        SR.GetString(SR.FramingVersionNotSupported, majorVersion)
+                    ),
+                    FramingEncodingString.UnsupportedVersionFault
+                );
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(exception);
             }
         }
@@ -445,7 +521,10 @@ namespace System.ServiceModel.Channels
             return CreateException(new InvalidDataException(SR.GetString(SR.FramingPrematureEOF)));
         }
 
-        protected Exception CreateException(InvalidDataException innerException, string framingFault)
+        protected Exception CreateException(
+            InvalidDataException innerException,
+            string framingFault
+        )
         {
             Exception result = CreateException(innerException);
             FramingEncodingString.AddFaultString(result, framingFault);
@@ -454,12 +533,14 @@ namespace System.ServiceModel.Channels
 
         protected Exception CreateException(InvalidDataException innerException)
         {
-            return new ProtocolException(SR.GetString(SR.FramingError, StreamPosition, CurrentStateAsString),
-                innerException);
+            return new ProtocolException(
+                SR.GetString(SR.FramingError, StreamPosition, CurrentStateAsString),
+                innerException
+            );
         }
     }
 
-    // Pattern: 
+    // Pattern:
     //   Done
     class ServerModeDecoder : FramingDecoder
     {
@@ -483,7 +564,10 @@ namespace System.ServiceModel.Channels
                 switch (currentState)
                 {
                     case State.ReadingVersionRecord:
-                        ValidateRecordType(FramingRecordType.Version, (FramingRecordType)bytes[offset]);
+                        ValidateRecordType(
+                            FramingRecordType.Version,
+                            (FramingRecordType)bytes[offset]
+                        );
                         currentState = State.ReadingMajorVersion;
                         bytesConsumed = 1;
                         break;
@@ -499,7 +583,10 @@ namespace System.ServiceModel.Channels
                         bytesConsumed = 1;
                         break;
                     case State.ReadingModeRecord:
-                        ValidateRecordType(FramingRecordType.Mode, (FramingRecordType)bytes[offset]);
+                        ValidateRecordType(
+                            FramingRecordType.Mode,
+                            (FramingRecordType)bytes[offset]
+                        );
                         currentState = State.ReadingModeValue;
                         bytesConsumed = 1;
                         break;
@@ -511,7 +598,12 @@ namespace System.ServiceModel.Channels
                         break;
                     default:
                         throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            CreateException(new InvalidDataException(SR.GetString(SR.InvalidDecoderStateMachine))));
+                            CreateException(
+                                new InvalidDataException(
+                                    SR.GetString(SR.InvalidDecoderStateMachine)
+                                )
+                            )
+                        );
                 }
 
                 StreamPosition += bytesConsumed;
@@ -545,7 +637,9 @@ namespace System.ServiceModel.Channels
             {
                 if (currentState != State.Done)
 #pragma warning suppress 56503 // Microsoft, not a publicly accessible API
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.FramingValueNotAvailable)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new InvalidOperationException(SR.GetString(SR.FramingValueNotAvailable))
+                    );
                 return mode;
             }
         }
@@ -556,7 +650,9 @@ namespace System.ServiceModel.Channels
             {
                 if (currentState != State.Done)
 #pragma warning suppress 56503 // Microsoft, not a publicly accessible API
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.FramingValueNotAvailable)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new InvalidOperationException(SR.GetString(SR.FramingValueNotAvailable))
+                    );
                 return majorVersion;
             }
         }
@@ -567,7 +663,9 @@ namespace System.ServiceModel.Channels
             {
                 if (currentState != State.Done)
 #pragma warning suppress 56503 // Microsoft, not a publicly accessible API
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.FramingValueNotAvailable)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new InvalidOperationException(SR.GetString(SR.FramingValueNotAvailable))
+                    );
                 return minorVersion;
             }
         }
@@ -584,10 +682,10 @@ namespace System.ServiceModel.Channels
     }
 
     // Used for Duplex/Simplex
-    // Pattern: 
-    //   Start, 
-    //   (UpgradeRequest, upgrade-content-type)*, 
-    //   (EnvelopeStart, ReadingEnvelopeBytes*, EnvelopeEnd)*, 
+    // Pattern:
+    //   Start,
+    //   (UpgradeRequest, upgrade-content-type)*,
+    //   (EnvelopeStart, ReadingEnvelopeBytes*, EnvelopeEnd)*,
     //   End
     class ServerSessionDecoder : FramingDecoder
     {
@@ -625,7 +723,9 @@ namespace System.ServiceModel.Channels
             {
                 if (currentState < State.PreUpgradeStart)
 #pragma warning suppress 56503 // Microsoft, not a publicly accessible API
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.FramingValueNotAvailable)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new InvalidOperationException(SR.GetString(SR.FramingValueNotAvailable))
+                    );
                 return contentType;
             }
         }
@@ -636,7 +736,9 @@ namespace System.ServiceModel.Channels
             {
                 if (currentState < State.ReadingContentTypeRecord)
 #pragma warning suppress 56503 // Microsoft, not a publicly accessible API
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.FramingValueNotAvailable)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new InvalidOperationException(SR.GetString(SR.FramingValueNotAvailable))
+                    );
                 return viaDecoder.ValueAsUri;
             }
         }
@@ -653,7 +755,9 @@ namespace System.ServiceModel.Channels
             {
                 if (currentState != State.UpgradeRequest)
 #pragma warning suppress 56503 // Microsoft, not a publicly accessible API
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.FramingValueNotAvailable)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new InvalidOperationException(SR.GetString(SR.FramingValueNotAvailable))
+                    );
                 return upgrade;
             }
         }
@@ -664,7 +768,9 @@ namespace System.ServiceModel.Channels
             {
                 if (currentState < State.EnvelopeStart)
 #pragma warning suppress 56503 // Microsoft, not a publicly accessible API
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.FramingValueNotAvailable)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new InvalidOperationException(SR.GetString(SR.FramingValueNotAvailable))
+                    );
                 return envelopeSize;
             }
         }
@@ -709,7 +815,9 @@ namespace System.ServiceModel.Channels
                         }
                         break;
                     case State.ReadingContentTypeByte:
-                        contentType = ContentTypeStringDecoder.GetString((FramingEncodingType)bytes[offset]);
+                        contentType = ContentTypeStringDecoder.GetString(
+                            (FramingEncodingType)bytes[offset]
+                        );
                         bytesConsumed = 1;
                         currentState = State.PreUpgradeStart;
                         break;
@@ -775,7 +883,10 @@ namespace System.ServiceModel.Channels
                         }
                         break;
                     case State.ReadingEnvelopeRecord:
-                        ValidateRecordType(FramingRecordType.SizedEnvelope, (FramingRecordType)bytes[offset]);
+                        ValidateRecordType(
+                            FramingRecordType.SizedEnvelope,
+                            (FramingRecordType)bytes[offset]
+                        );
                         bytesConsumed = 1;
                         currentState = State.ReadingEnvelopeSize;
                         sizeDecoder.Reset();
@@ -807,10 +918,16 @@ namespace System.ServiceModel.Channels
                         break;
                     case State.End:
                         throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            CreateException(new InvalidDataException(SR.GetString(SR.FramingAtEnd))));
+                            CreateException(new InvalidDataException(SR.GetString(SR.FramingAtEnd)))
+                        );
                     default:
                         throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            CreateException(new InvalidDataException(SR.GetString(SR.InvalidDecoderStateMachine))));
+                            CreateException(
+                                new InvalidDataException(
+                                    SR.GetString(SR.InvalidDecoderStateMachine)
+                                )
+                            )
+                        );
                 }
 
                 StreamPosition += bytesConsumed;
@@ -881,7 +998,9 @@ namespace System.ServiceModel.Channels
                 if (currentState < State.ChunkStart)
                 {
 #pragma warning suppress 56503 // Microsoft, not a publicly accessible API
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.FramingValueNotAvailable)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new InvalidOperationException(SR.GetString(SR.FramingValueNotAvailable))
+                    );
                 }
 
                 return this.chunkSize;
@@ -942,11 +1061,17 @@ namespace System.ServiceModel.Channels
                         break;
                     case State.End:
                         throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            CreateException(new InvalidDataException(SR.GetString(SR.FramingAtEnd))));
+                            CreateException(new InvalidDataException(SR.GetString(SR.FramingAtEnd)))
+                        );
 
                     default:
                         throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            CreateException(new InvalidDataException(SR.GetString(SR.InvalidDecoderStateMachine))));
+                            CreateException(
+                                new InvalidDataException(
+                                    SR.GetString(SR.InvalidDecoderStateMachine)
+                                )
+                            )
+                        );
                 }
 
                 StreamPosition += bytesConsumed;
@@ -969,9 +1094,9 @@ namespace System.ServiceModel.Channels
         }
     }
 
-    // Pattern: 
-    //   Start, 
-    //   (UpgradeRequest, upgrade-bytes)*, 
+    // Pattern:
+    //   Start,
+    //   (UpgradeRequest, upgrade-bytes)*,
     //   EnvelopeStart,
     class ServerSingletonDecoder : FramingDecoder
     {
@@ -981,7 +1106,11 @@ namespace System.ServiceModel.Channels
         string contentType;
         string upgrade;
 
-        public ServerSingletonDecoder(long streamPosition, int maxViaLength, int maxContentTypeLength)
+        public ServerSingletonDecoder(
+            long streamPosition,
+            int maxViaLength,
+            int maxContentTypeLength
+        )
             : base(streamPosition)
         {
             this.viaDecoder = new ViaStringDecoder(maxViaLength);
@@ -1010,7 +1139,9 @@ namespace System.ServiceModel.Channels
             {
                 if (currentState < State.ReadingContentTypeRecord)
 #pragma warning suppress 56503 // Microsoft, not a publicly accessible API
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.FramingValueNotAvailable)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new InvalidOperationException(SR.GetString(SR.FramingValueNotAvailable))
+                    );
                 return viaDecoder.ValueAsUri;
             }
         }
@@ -1021,7 +1152,9 @@ namespace System.ServiceModel.Channels
             {
                 if (currentState < State.PreUpgradeStart)
 #pragma warning suppress 56503 // Microsoft, not a publicly accessible API
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.FramingValueNotAvailable)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new InvalidOperationException(SR.GetString(SR.FramingValueNotAvailable))
+                    );
                 return contentType;
             }
         }
@@ -1032,7 +1165,9 @@ namespace System.ServiceModel.Channels
             {
                 if (currentState != State.UpgradeRequest)
 #pragma warning suppress 56503 // Microsoft, not a publicly accessible API
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.FramingValueNotAvailable)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new InvalidOperationException(SR.GetString(SR.FramingValueNotAvailable))
+                    );
                 return upgrade;
             }
         }
@@ -1077,7 +1212,9 @@ namespace System.ServiceModel.Channels
                         }
                         break;
                     case State.ReadingContentTypeByte:
-                        contentType = ContentTypeStringDecoder.GetString((FramingEncodingType)bytes[offset]);
+                        contentType = ContentTypeStringDecoder.GetString(
+                            (FramingEncodingType)bytes[offset]
+                        );
                         bytesConsumed = 1;
                         currentState = State.PreUpgradeStart;
                         break;
@@ -1130,16 +1267,25 @@ namespace System.ServiceModel.Channels
                         currentState = State.ReadingEnvelopeRecord;
                         break;
                     case State.ReadingEnvelopeRecord:
-                        ValidateRecordType(FramingRecordType.UnsizedEnvelope, (FramingRecordType)bytes[offset]);
+                        ValidateRecordType(
+                            FramingRecordType.UnsizedEnvelope,
+                            (FramingRecordType)bytes[offset]
+                        );
                         bytesConsumed = 1;
                         currentState = State.EnvelopeStart;
                         break;
                     case State.EnvelopeStart:
                         throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            CreateException(new InvalidDataException(SR.GetString(SR.FramingAtEnd))));
+                            CreateException(new InvalidDataException(SR.GetString(SR.FramingAtEnd)))
+                        );
                     default:
                         throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            CreateException(new InvalidDataException(SR.GetString(SR.InvalidDecoderStateMachine))));
+                            CreateException(
+                                new InvalidDataException(
+                                    SR.GetString(SR.InvalidDecoderStateMachine)
+                                )
+                            )
+                        );
                 }
 
                 StreamPosition += bytesConsumed;
@@ -1174,8 +1320,8 @@ namespace System.ServiceModel.Channels
         }
     }
 
-    // Pattern: 
-    //   Start, 
+    // Pattern:
+    //   Start,
     //   EnvelopeStart,
     class ServerSingletonSizedDecoder : FramingDecoder
     {
@@ -1184,7 +1330,11 @@ namespace System.ServiceModel.Channels
         State currentState;
         string contentType;
 
-        public ServerSingletonSizedDecoder(long streamPosition, int maxViaLength, int maxContentTypeLength)
+        public ServerSingletonSizedDecoder(
+            long streamPosition,
+            int maxViaLength,
+            int maxContentTypeLength
+        )
             : base(streamPosition)
         {
             this.viaDecoder = new ViaStringDecoder(maxViaLength);
@@ -1230,7 +1380,9 @@ namespace System.ServiceModel.Channels
                         }
                         break;
                     case State.ReadingContentTypeByte:
-                        contentType = ContentTypeStringDecoder.GetString((FramingEncodingType)bytes[offset]);
+                        contentType = ContentTypeStringDecoder.GetString(
+                            (FramingEncodingType)bytes[offset]
+                        );
                         bytesConsumed = 1;
                         currentState = State.Start;
                         break;
@@ -1244,10 +1396,16 @@ namespace System.ServiceModel.Channels
                         break;
                     case State.Start:
                         throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            CreateException(new InvalidDataException(SR.GetString(SR.FramingAtEnd))));
+                            CreateException(new InvalidDataException(SR.GetString(SR.FramingAtEnd)))
+                        );
                     default:
                         throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            CreateException(new InvalidDataException(SR.GetString(SR.InvalidDecoderStateMachine))));
+                            CreateException(
+                                new InvalidDataException(
+                                    SR.GetString(SR.InvalidDecoderStateMachine)
+                                )
+                            )
+                        );
                 }
 
                 StreamPosition += bytesConsumed;
@@ -1281,7 +1439,9 @@ namespace System.ServiceModel.Channels
             {
                 if (currentState < State.ReadingContentTypeRecord)
 #pragma warning suppress 56503 // Microsoft, not a publicly accessible API
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.FramingValueNotAvailable)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new InvalidOperationException(SR.GetString(SR.FramingValueNotAvailable))
+                    );
                 return viaDecoder.ValueAsUri;
             }
         }
@@ -1292,7 +1452,9 @@ namespace System.ServiceModel.Channels
             {
                 if (currentState < State.Start)
 #pragma warning suppress 56503 // Microsoft, not a publicly accessible API
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.FramingValueNotAvailable)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new InvalidOperationException(SR.GetString(SR.FramingValueNotAvailable))
+                    );
                 return contentType;
             }
         }
@@ -1340,15 +1502,8 @@ namespace System.ServiceModel.Channels
 
         public ClientFramingDecoderState CurrentState
         {
-            get
-            {
-                return this.currentState;
-            }
-
-            protected set
-            {
-                this.currentState = value;
-            }
+            get { return this.currentState; }
+            protected set { this.currentState = value; }
         }
 
         protected override string CurrentStateAsString
@@ -1356,17 +1511,14 @@ namespace System.ServiceModel.Channels
             get { return currentState.ToString(); }
         }
 
-        public abstract string Fault
-        {
-            get;
-        }
+        public abstract string Fault { get; }
 
         public abstract int Decode(byte[] bytes, int offset, int size);
     }
 
-    // Pattern: 
+    // Pattern:
     //   (UpgradeResponse, upgrade-bytes)*, (Ack | Fault),
-    //   ((EnvelopeStart, ReadingEnvelopeBytes*, EnvelopeEnd) | Fault)*, 
+    //   ((EnvelopeStart, ReadingEnvelopeBytes*, EnvelopeEnd) | Fault)*,
     //   End
     class ClientDuplexDecoder : ClientFramingDecoder
     {
@@ -1387,7 +1539,9 @@ namespace System.ServiceModel.Channels
             {
                 if (CurrentState < ClientFramingDecoderState.EnvelopeStart)
 #pragma warning suppress 56503 // Microsoft, not a publicly accessible API
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.FramingValueNotAvailable)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new InvalidOperationException(SR.GetString(SR.FramingValueNotAvailable))
+                    );
                 return envelopeSize;
             }
         }
@@ -1398,7 +1552,9 @@ namespace System.ServiceModel.Channels
             {
                 if (CurrentState < ClientFramingDecoderState.Fault)
 #pragma warning suppress 56503 // Microsoft, not a publicly accessible API
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.FramingValueNotAvailable)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new InvalidOperationException(SR.GetString(SR.FramingValueNotAvailable))
+                    );
                 return faultDecoder.Value;
             }
         }
@@ -1510,10 +1666,16 @@ namespace System.ServiceModel.Channels
                         break;
                     case ClientFramingDecoderState.End:
                         throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            CreateException(new InvalidDataException(SR.GetString(SR.FramingAtEnd))));
+                            CreateException(new InvalidDataException(SR.GetString(SR.FramingAtEnd)))
+                        );
                     default:
                         throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            CreateException(new InvalidDataException(SR.GetString(SR.InvalidDecoderStateMachine))));
+                            CreateException(
+                                new InvalidDataException(
+                                    SR.GetString(SR.InvalidDecoderStateMachine)
+                                )
+                            )
+                        );
                 }
 
                 StreamPosition += bytesConsumed;
@@ -1526,7 +1688,7 @@ namespace System.ServiceModel.Channels
         }
     }
 
-    // Pattern: 
+    // Pattern:
     //   (UpgradeResponse, upgrade-bytes)*, (Ack | Fault),
     //   End
     class ClientSingletonDecoder : ClientFramingDecoder
@@ -1534,9 +1696,7 @@ namespace System.ServiceModel.Channels
         FaultStringDecoder faultDecoder;
 
         public ClientSingletonDecoder(long streamPosition)
-            : base(streamPosition)
-        {
-        }
+            : base(streamPosition) { }
 
         public override string Fault
         {
@@ -1544,7 +1704,9 @@ namespace System.ServiceModel.Channels
             {
                 if (CurrentState < ClientFramingDecoderState.Fault)
 #pragma warning suppress 56503 // Microsoft, not a publicly accessible API
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.FramingValueNotAvailable)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new InvalidOperationException(SR.GetString(SR.FramingValueNotAvailable))
+                    );
                 return faultDecoder.Value;
             }
         }
@@ -1616,7 +1778,8 @@ namespace System.ServiceModel.Channels
 
                     case ClientFramingDecoderState.EnvelopeStart:
                         throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            CreateException(new InvalidDataException(SR.GetString(SR.FramingAtEnd))));
+                            CreateException(new InvalidDataException(SR.GetString(SR.FramingAtEnd)))
+                        );
 
                     case ClientFramingDecoderState.ReadingFault:
                         recordType = (FramingRecordType)bytes[offset];
@@ -1634,10 +1797,16 @@ namespace System.ServiceModel.Channels
                         break;
                     case ClientFramingDecoderState.Fault:
                         throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            CreateException(new InvalidDataException(SR.GetString(SR.FramingAtEnd))));
+                            CreateException(new InvalidDataException(SR.GetString(SR.FramingAtEnd)))
+                        );
                     default:
                         throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            CreateException(new InvalidDataException(SR.GetString(SR.InvalidDecoderStateMachine))));
+                            CreateException(
+                                new InvalidDataException(
+                                    SR.GetString(SR.InvalidDecoderStateMachine)
+                                )
+                            )
+                        );
                 }
 
                 StreamPosition += bytesConsumed;

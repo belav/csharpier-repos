@@ -16,7 +16,8 @@ namespace Microsoft.CodeAnalysis.InheritanceMargin
         string? topLevelDisplayText,
         ImmutableArray<TaggedText> displayTexts,
         Glyph glyph,
-        ImmutableArray<InheritanceTargetItem> targetItems) : IEquatable<InheritanceMarginItem>
+        ImmutableArray<InheritanceTargetItem> targetItems
+    ) : IEquatable<InheritanceMarginItem>
     {
         /// <summary>
         /// Line number used to show the margin for the member.
@@ -49,28 +50,36 @@ namespace Microsoft.CodeAnalysis.InheritanceMargin
         [DataMember(Order = 4)]
         public readonly ImmutableArray<InheritanceTargetItem> TargetItems = targetItems;
 
-        public override int GetHashCode()
-            => throw ExceptionUtilities.Unreachable();
+        public override int GetHashCode() => throw ExceptionUtilities.Unreachable();
 
-        public override bool Equals(object? obj)
-            => obj is InheritanceMarginItem item && Equals(item);
+        public override bool Equals(object? obj) =>
+            obj is InheritanceMarginItem item && Equals(item);
 
-        public bool Equals(InheritanceMarginItem other)
-            => this.LineNumber == other.LineNumber &&
-               this.TopLevelDisplayText == other.TopLevelDisplayText &&
-               this.Glyph == other.Glyph &&
-               this.DisplayTexts.SequenceEqual(other.DisplayTexts) &&
-               this.TargetItems.SequenceEqual(other.TargetItems);
+        public bool Equals(InheritanceMarginItem other) =>
+            this.LineNumber == other.LineNumber
+            && this.TopLevelDisplayText == other.TopLevelDisplayText
+            && this.Glyph == other.Glyph
+            && this.DisplayTexts.SequenceEqual(other.DisplayTexts)
+            && this.TargetItems.SequenceEqual(other.TargetItems);
 
         public static InheritanceMarginItem? CreateOrdered(
             int lineNumber,
             string? topLevelDisplayText,
             ImmutableArray<TaggedText> displayTexts,
             Glyph glyph,
-            ImmutableArray<InheritanceTargetItem> targetItems)
-            => targetItems.IsEmpty ? null : new(lineNumber, topLevelDisplayText, displayTexts, glyph, Order(targetItems));
+            ImmutableArray<InheritanceTargetItem> targetItems
+        ) =>
+            targetItems.IsEmpty
+                ? null
+                : new(lineNumber, topLevelDisplayText, displayTexts, glyph, Order(targetItems));
 
-        public static ImmutableArray<InheritanceTargetItem> Order(ImmutableArray<InheritanceTargetItem> targetItems)
-            => targetItems.OrderBy(t => t.DisplayName).ThenByDescending(t => t.LanguageGlyph).ThenBy(t => t.ProjectName ?? "").ToImmutableArray();
+        public static ImmutableArray<InheritanceTargetItem> Order(
+            ImmutableArray<InheritanceTargetItem> targetItems
+        ) =>
+            targetItems
+                .OrderBy(t => t.DisplayName)
+                .ThenByDescending(t => t.LanguageGlyph)
+                .ThenBy(t => t.ProjectName ?? "")
+                .ToImmutableArray();
     }
 }

@@ -47,7 +47,10 @@ namespace System.Net.Sockets
             // only targeting a single address, but it already experienced a failure in a
             // previous connect call, then this is logically part of a multi endpoint connect,
             // and the same logic applies.  Either way, in such a situation we throw.
-            if (_handle.ExposedHandleOrUntrackedConfiguration && (isMultiEndpoint || _handle.LastConnectFailed))
+            if (
+                _handle.ExposedHandleOrUntrackedConfiguration
+                && (isMultiEndpoint || _handle.LastConnectFailed)
+            )
             {
                 ThrowMultiConnectNotSupported();
             }
@@ -59,13 +62,21 @@ namespace System.Net.Sockets
         }
 
         private static unsafe void LoadSocketTypeFromHandle(
-            SafeSocketHandle handle, out AddressFamily addressFamily, out SocketType socketType, out ProtocolType protocolType, out bool blocking, out bool isListening, out bool isSocket)
+            SafeSocketHandle handle,
+            out AddressFamily addressFamily,
+            out SocketType socketType,
+            out ProtocolType protocolType,
+            out bool blocking,
+            out bool isListening,
+            out bool isSocket
+        )
         {
             if (Interop.Sys.FStat(handle, out Interop.Sys.FileStatus stat) == -1)
             {
                 throw new SocketException((int)SocketError.NotSocket);
             }
-            isSocket = (stat.Mode & Interop.Sys.FileTypes.S_IFSOCK) == Interop.Sys.FileTypes.S_IFSOCK;
+            isSocket =
+                (stat.Mode & Interop.Sys.FileTypes.S_IFSOCK) == Interop.Sys.FileTypes.S_IFSOCK;
 
             handle.IsSocket = isSocket;
 
@@ -75,7 +86,13 @@ namespace System.Net.Sockets
                 // address family, socket type, and protocol type, respectively.  On macOS, this will only succeed
                 // in getting the socket type, and the others will be unknown.  Subsequently the Socket ctor
                 // can use getsockname to retrieve the address family as part of trying to get the local end point.
-                Interop.Error e = Interop.Sys.GetSocketType(handle, out addressFamily, out socketType, out protocolType, out isListening);
+                Interop.Error e = Interop.Sys.GetSocketType(
+                    handle,
+                    out addressFamily,
+                    out socketType,
+                    out protocolType,
+                    out isListening
+                );
                 Debug.Assert(e == Interop.Error.SUCCESS, e.ToString());
             }
             else
@@ -122,23 +139,42 @@ namespace System.Net.Sockets
             // we change _handle, so that we can use the helpers on Socket which internally access _handle.
             // Then once _handle is switched to the new one, we can call the setters to propagate the retrieved
             // values back out to the new underlying socket.
-            bool broadcast = false, dontFragment = false, noDelay = false;
-            int receiveSize = -1, receiveTimeout = -1, sendSize = -1, sendTimeout = -1;
+            bool broadcast = false,
+                dontFragment = false,
+                noDelay = false;
+            int receiveSize = -1,
+                receiveTimeout = -1,
+                sendSize = -1,
+                sendTimeout = -1;
             short ttl = -1;
             LingerOption? linger = null;
-            if (_handle.IsTrackedOption(TrackedSocketOptions.DontFragment)) dontFragment = DontFragment;
-            if (_handle.IsTrackedOption(TrackedSocketOptions.EnableBroadcast)) broadcast = EnableBroadcast;
-            if (_handle.IsTrackedOption(TrackedSocketOptions.LingerState)) linger = LingerState;
-            if (_handle.IsTrackedOption(TrackedSocketOptions.NoDelay)) noDelay = NoDelay;
-            if (_handle.IsTrackedOption(TrackedSocketOptions.ReceiveBufferSize)) receiveSize = ReceiveBufferSize;
-            if (_handle.IsTrackedOption(TrackedSocketOptions.ReceiveTimeout)) receiveTimeout = ReceiveTimeout;
-            if (_handle.IsTrackedOption(TrackedSocketOptions.SendBufferSize)) sendSize = SendBufferSize;
-            if (_handle.IsTrackedOption(TrackedSocketOptions.SendTimeout)) sendTimeout = SendTimeout;
-            if (_handle.IsTrackedOption(TrackedSocketOptions.Ttl)) ttl = Ttl;
+            if (_handle.IsTrackedOption(TrackedSocketOptions.DontFragment))
+                dontFragment = DontFragment;
+            if (_handle.IsTrackedOption(TrackedSocketOptions.EnableBroadcast))
+                broadcast = EnableBroadcast;
+            if (_handle.IsTrackedOption(TrackedSocketOptions.LingerState))
+                linger = LingerState;
+            if (_handle.IsTrackedOption(TrackedSocketOptions.NoDelay))
+                noDelay = NoDelay;
+            if (_handle.IsTrackedOption(TrackedSocketOptions.ReceiveBufferSize))
+                receiveSize = ReceiveBufferSize;
+            if (_handle.IsTrackedOption(TrackedSocketOptions.ReceiveTimeout))
+                receiveTimeout = ReceiveTimeout;
+            if (_handle.IsTrackedOption(TrackedSocketOptions.SendBufferSize))
+                sendSize = SendBufferSize;
+            if (_handle.IsTrackedOption(TrackedSocketOptions.SendTimeout))
+                sendTimeout = SendTimeout;
+            if (_handle.IsTrackedOption(TrackedSocketOptions.Ttl))
+                ttl = Ttl;
 
             // Then replace the handle with a new one
             SafeSocketHandle oldHandle = _handle;
-            SocketError errorCode = SocketPal.CreateSocket(_addressFamily, _socketType, _protocolType, out SafeSocketHandle newHandle);
+            SocketError errorCode = SocketPal.CreateSocket(
+                _addressFamily,
+                _socketType,
+                _protocolType,
+                out SafeSocketHandle newHandle
+            );
             Volatile.Write(ref _handle, newHandle);
             oldHandle.TransferTrackedState(_handle);
             oldHandle.Dispose();
@@ -157,27 +193,44 @@ namespace System.Net.Sockets
             // And put back the copied settings.  For DualMode, we use the value stored in the _handle
             // rather than querying the socket itself, as on Unix stacks binding a dual-mode socket to
             // an IPv6 address may cause the IPv6Only setting to revert to true.
-            if (_handle.IsTrackedOption(TrackedSocketOptions.DualMode)) DualMode = _handle.DualMode;
-            if (_handle.IsTrackedOption(TrackedSocketOptions.DontFragment)) DontFragment = dontFragment;
-            if (_handle.IsTrackedOption(TrackedSocketOptions.EnableBroadcast)) EnableBroadcast = broadcast;
-            if (_handle.IsTrackedOption(TrackedSocketOptions.LingerState)) LingerState = linger!;
-            if (_handle.IsTrackedOption(TrackedSocketOptions.NoDelay)) NoDelay = noDelay;
-            if (_handle.IsTrackedOption(TrackedSocketOptions.ReceiveBufferSize)) ReceiveBufferSize = receiveSize;
-            if (_handle.IsTrackedOption(TrackedSocketOptions.ReceiveTimeout)) ReceiveTimeout = receiveTimeout;
-            if (_handle.IsTrackedOption(TrackedSocketOptions.SendBufferSize)) SendBufferSize = sendSize;
-            if (_handle.IsTrackedOption(TrackedSocketOptions.SendTimeout)) SendTimeout = sendTimeout;
-            if (_handle.IsTrackedOption(TrackedSocketOptions.Ttl)) Ttl = ttl;
+            if (_handle.IsTrackedOption(TrackedSocketOptions.DualMode))
+                DualMode = _handle.DualMode;
+            if (_handle.IsTrackedOption(TrackedSocketOptions.DontFragment))
+                DontFragment = dontFragment;
+            if (_handle.IsTrackedOption(TrackedSocketOptions.EnableBroadcast))
+                EnableBroadcast = broadcast;
+            if (_handle.IsTrackedOption(TrackedSocketOptions.LingerState))
+                LingerState = linger!;
+            if (_handle.IsTrackedOption(TrackedSocketOptions.NoDelay))
+                NoDelay = noDelay;
+            if (_handle.IsTrackedOption(TrackedSocketOptions.ReceiveBufferSize))
+                ReceiveBufferSize = receiveSize;
+            if (_handle.IsTrackedOption(TrackedSocketOptions.ReceiveTimeout))
+                ReceiveTimeout = receiveTimeout;
+            if (_handle.IsTrackedOption(TrackedSocketOptions.SendBufferSize))
+                SendBufferSize = sendSize;
+            if (_handle.IsTrackedOption(TrackedSocketOptions.SendTimeout))
+                SendTimeout = sendTimeout;
+            if (_handle.IsTrackedOption(TrackedSocketOptions.Ttl))
+                Ttl = ttl;
 
             return SocketError.Success;
         }
 
         private static void ThrowMultiConnectNotSupported()
         {
-            throw new PlatformNotSupportedException(SR.net_sockets_connect_multiconnect_notsupported);
+            throw new PlatformNotSupportedException(
+                SR.net_sockets_connect_multiconnect_notsupported
+            );
         }
 
 #pragma warning disable IDE0060, CA1822
-        private Socket? GetOrCreateAcceptSocket(Socket? acceptSocket, bool checkDisconnected, string propertyName, out SafeSocketHandle? handle)
+        private Socket? GetOrCreateAcceptSocket(
+            Socket? acceptSocket,
+            bool checkDisconnected,
+            string propertyName,
+            out SafeSocketHandle? handle
+        )
         {
             if (acceptSocket != null)
             {
@@ -186,9 +239,14 @@ namespace System.Net.Sockets
                     throw new SocketException((int)SocketError.InvalidArgument);
                 }
 
-                if (acceptSocket._rightEndPoint != null && (!checkDisconnected || !acceptSocket._isDisconnected))
+                if (
+                    acceptSocket._rightEndPoint != null
+                    && (!checkDisconnected || !acceptSocket._isDisconnected)
+                )
                 {
-                    throw new InvalidOperationException(SR.Format(SR.net_sockets_namedmustnotbebound, propertyName));
+                    throw new InvalidOperationException(
+                        SR.Format(SR.net_sockets_namedmustnotbebound, propertyName)
+                    );
                 }
             }
 
@@ -203,11 +261,18 @@ namespace System.Net.Sockets
             // Unfortunately there is no TransmitFileOptions.None.
             if (flags != TransmitFileOptions.UseDefaultWorkerThread)
             {
-                throw new PlatformNotSupportedException(SR.net_sockets_transmitfileoptions_notsupported);
+                throw new PlatformNotSupportedException(
+                    SR.net_sockets_transmitfileoptions_notsupported
+                );
             }
         }
 
-        private void SendFileInternal(string? fileName, ReadOnlySpan<byte> preBuffer, ReadOnlySpan<byte> postBuffer, TransmitFileOptions flags)
+        private void SendFileInternal(
+            string? fileName,
+            ReadOnlySpan<byte> preBuffer,
+            ReadOnlySpan<byte> postBuffer,
+            TransmitFileOptions flags
+        )
         {
             CheckTransmitFileOptions(flags);
 
@@ -281,16 +346,29 @@ namespace System.Net.Sockets
             _singleBufferReceiveEventArgs = source._singleBufferReceiveEventArgs;
 #if DEBUG
             // Try to detect if a property gets added that we're not copying correctly.
-            foreach (PropertyInfo pi in typeof(Socket).GetProperties(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.DeclaredOnly))
+            foreach (
+                PropertyInfo pi in typeof(Socket).GetProperties(
+                    BindingFlags.Public
+                        | BindingFlags.NonPublic
+                        | BindingFlags.Instance
+                        | BindingFlags.DeclaredOnly
+                )
+            )
             {
                 try
                 {
                     object? origValue = pi.GetValue(source);
                     object? cloneValue = pi.GetValue(this);
 
-                    Debug.Assert(Equals(origValue, cloneValue), $"{pi.Name}. Expected: {origValue}, Actual: {cloneValue}");
+                    Debug.Assert(
+                        Equals(origValue, cloneValue),
+                        $"{pi.Name}. Expected: {origValue}, Actual: {cloneValue}"
+                    );
                 }
-                catch (TargetInvocationException ex) when (ex.InnerException is SocketException se && se.SocketErrorCode == SocketError.OperationNotSupported)
+                catch (TargetInvocationException ex)
+                    when (ex.InnerException is SocketException se
+                        && se.SocketErrorCode == SocketError.OperationNotSupported
+                    )
                 {
                     // macOS fails to retrieve DontFragment and MulticastLoopback at the moment
                 }

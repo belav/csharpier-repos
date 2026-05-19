@@ -1,19 +1,19 @@
 ﻿#region MIT license
-// 
+//
 // MIT license
 //
 // Copyright (c) 2007-2008 Jiri Moudry, Pascal Craponne
-// 
+//
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
 // in the Software without restriction, including without limitation the rights
 // to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 // copies of the Software, and to permit persons to whom the Software is
 // furnished to do so, subject to the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be included in
 // all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 // IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 // FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -21,7 +21,7 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
-// 
+//
 #endregion
 
 using System;
@@ -65,12 +65,15 @@ namespace DbLinq.Util
             {
                 MethodInfo propertyMethod;
                 PropertyInfo propertyInfo = (PropertyInfo)memberInfo;
-                if ((propertyMethod = propertyInfo.GetGetMethod()) != null || (propertyMethod = propertyInfo.GetSetMethod()) != null)
+                if (
+                    (propertyMethod = propertyInfo.GetGetMethod()) != null
+                    || (propertyMethod = propertyInfo.GetSetMethod()) != null
+                )
                     return GetIsStaticMember(propertyMethod);
-
             }
             if (memberInfo is MethodInfo)
-                return ((MethodInfo)memberInfo).IsStatic; ;
+                return ((MethodInfo)memberInfo).IsStatic;
+            ;
             throw new ArgumentException();
         }
 
@@ -100,7 +103,8 @@ namespace DbLinq.Util
                 ((FieldInfo)memberInfo).SetValue(o, value);
             else if (memberInfo is PropertyInfo)
                 ((PropertyInfo)memberInfo).GetSetMethod().Invoke(o, new[] { value });
-            else throw new ArgumentException();
+            else
+                throw new ArgumentException();
         }
 
         /// <summary>
@@ -113,31 +117,34 @@ namespace DbLinq.Util
             var reflectedType = memberInfo.ReflectedType;
             foreach (var propertyInfo in reflectedType.GetProperties())
             {
-                if (propertyInfo.GetGetMethod() == memberInfo || propertyInfo.GetSetMethod() == memberInfo)
+                if (
+                    propertyInfo.GetGetMethod() == memberInfo
+                    || propertyInfo.GetSetMethod() == memberInfo
+                )
                     return propertyInfo;
             }
             return null;
         }
 
-		/// <summary>
-		/// This function returns the type that is the "return type" of the member.
-		/// If it is a template it returns the first template parameter type.
-		/// </summary>
-		/// <param name="memberInfo">The member info.</param>
-		/// TODO: better function name
-		public static Type GetFirstInnerReturnType(this MemberInfo memberInfo)
-		{
-			var type = memberInfo.GetMemberType();
+        /// <summary>
+        /// This function returns the type that is the "return type" of the member.
+        /// If it is a template it returns the first template parameter type.
+        /// </summary>
+        /// <param name="memberInfo">The member info.</param>
+        /// TODO: better function name
+        public static Type GetFirstInnerReturnType(this MemberInfo memberInfo)
+        {
+            var type = memberInfo.GetMemberType();
 
-			if (type == null)
-				return null;
+            if (type == null)
+                return null;
 
-			if (type.IsGenericType)
-			{
-				return type.GetGenericArguments()[0];
-			}
+            if (type.IsGenericType)
+            {
+                return type.GetGenericArguments()[0];
+            }
 
-			return type;
-		}
+            return type;
+        }
     }
 }

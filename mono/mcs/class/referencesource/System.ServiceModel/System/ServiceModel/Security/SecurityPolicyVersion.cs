@@ -22,18 +22,12 @@ namespace System.ServiceModel.Security
 
         public String Namespace
         {
-            get
-            {
-                return this.spNamespace;
-            }
+            get { return this.spNamespace; }
         }
 
         public String Prefix
         {
-            get
-            {
-                return this.prefix;
-            }
+            get { return this.prefix; }
         }
 
         public static SecurityPolicyVersion WSSecurityPolicy11
@@ -51,16 +45,14 @@ namespace System.ServiceModel.Security
             static readonly WSSecurityPolicyVersion11 instance = new WSSecurityPolicyVersion11();
 
             protected WSSecurityPolicyVersion11()
-                : base(System.ServiceModel.Security.WSSecurityPolicy11.WsspNamespace, WSSecurityPolicy.WsspPrefix)
-            {
-            }
+                : base(
+                    System.ServiceModel.Security.WSSecurityPolicy11.WsspNamespace,
+                    WSSecurityPolicy.WsspPrefix
+                ) { }
 
             public static SecurityPolicyVersion Instance
             {
-                get
-                {
-                    return instance;
-                }
+                get { return instance; }
             }
         }
 
@@ -69,18 +61,15 @@ namespace System.ServiceModel.Security
             static readonly WSSecurityPolicyVersion12 instance = new WSSecurityPolicyVersion12();
 
             protected WSSecurityPolicyVersion12()
-                : base(System.ServiceModel.Security.WSSecurityPolicy12.WsspNamespace, WSSecurityPolicy.WsspPrefix)
-            {
-            }
+                : base(
+                    System.ServiceModel.Security.WSSecurityPolicy12.WsspNamespace,
+                    WSSecurityPolicy.WsspPrefix
+                ) { }
 
             public static SecurityPolicyVersion Instance
             {
-                get
-                {
-                    return instance;
-                }
+                get { return instance; }
             }
         }
-
     }
 }

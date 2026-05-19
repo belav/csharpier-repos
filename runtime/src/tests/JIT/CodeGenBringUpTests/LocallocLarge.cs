@@ -67,7 +67,8 @@ public class BringUpTest_LocallocLarge
         for (int j = 2; j < 1024 * 100; j += 331)
         {
             bool b = RunTest(j);
-            if (!b) return Fail;
+            if (!b)
+                return Fail;
         }
         return Pass;
     }

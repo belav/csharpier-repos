@@ -14,6 +14,7 @@ namespace Microsoft.CodeAnalysis
         {
             _compilation = compilation;
         }
+
         public int Compare(SyntaxNode? x, SyntaxNode? y)
         {
             if (x is null)

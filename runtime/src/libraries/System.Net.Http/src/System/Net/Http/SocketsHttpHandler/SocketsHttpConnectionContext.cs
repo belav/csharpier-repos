@@ -11,7 +11,10 @@ namespace System.Net.Http
         private readonly DnsEndPoint _dnsEndPoint;
         private readonly HttpRequestMessage _initialRequestMessage;
 
-        internal SocketsHttpConnectionContext(DnsEndPoint dnsEndPoint, HttpRequestMessage initialRequestMessage)
+        internal SocketsHttpConnectionContext(
+            DnsEndPoint dnsEndPoint,
+            HttpRequestMessage initialRequestMessage
+        )
         {
             _dnsEndPoint = dnsEndPoint;
             _initialRequestMessage = initialRequestMessage;

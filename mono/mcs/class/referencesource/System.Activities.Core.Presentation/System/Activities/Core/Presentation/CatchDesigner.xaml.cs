@@ -15,7 +15,6 @@ namespace System.Activities.Core.Presentation
     using System.Windows;
     using System.Windows.Input;
     using Microsoft.Activities.Presentation;
-    
 
     /// <summary>
     /// Interaction logic for CatchDesigner.xaml
@@ -35,7 +34,10 @@ namespace System.Activities.Core.Presentation
                 if (selection != null)
                 {
                     ModelItem primarySelection = selection.PrimarySelection;
-                    this.ExpandState = TryCatchDesigner.IsDescendantOfCatch(this.ModelItem, primarySelection);
+                    this.ExpandState = TryCatchDesigner.IsDescendantOfCatch(
+                        this.ModelItem,
+                        primarySelection
+                    );
 
                     if (this.ExpandState)
                     {
@@ -58,7 +60,10 @@ namespace System.Activities.Core.Presentation
             Type type = typeof(Catch<>);
             builder.AddCustomAttributes(type, new DesignerAttribute(typeof(CatchDesigner)));
             builder.AddCustomAttributes(type, type.GetProperty("Action"), BrowsableAttribute.No);
-            builder.AddCustomAttributes(type, new ActivityDesignerOptionsAttribute { AllowDrillIn = false });
+            builder.AddCustomAttributes(
+                type,
+                new ActivityDesignerOptionsAttribute { AllowDrillIn = false }
+            );
         }
 
         public string ExceptionTypeShortName
@@ -67,7 +72,10 @@ namespace System.Activities.Core.Presentation
             {
                 if (this.exceptionTypeShortName == null)
                 {
-                    this.exceptionTypeShortName = TypeNameHelper.GetDisplayName((Type)this.ModelItem.Properties["ExceptionType"].Value.GetCurrentValue(), false);
+                    this.exceptionTypeShortName = TypeNameHelper.GetDisplayName(
+                        (Type)this.ModelItem.Properties["ExceptionType"].Value.GetCurrentValue(),
+                        false
+                    );
                 }
                 return this.exceptionTypeShortName;
             }
@@ -79,7 +87,10 @@ namespace System.Activities.Core.Presentation
             {
                 if (this.exceptionTypeFullName == null)
                 {
-                    this.exceptionTypeFullName = TypeNameHelper.GetDisplayName((Type)this.ModelItem.Properties["ExceptionType"].Value.GetCurrentValue(), true);
+                    this.exceptionTypeFullName = TypeNameHelper.GetDisplayName(
+                        (Type)this.ModelItem.Properties["ExceptionType"].Value.GetCurrentValue(),
+                        true
+                    );
                 }
                 return this.exceptionTypeFullName;
             }
@@ -126,7 +137,11 @@ namespace System.Activities.Core.Presentation
         {
             if (EditingContextUtilities.GetSingleSelectedModelItem(this.Context) == this.ModelItem)
             {
-                ContextMenuUtilities.OnAddAnnotationCommandCanExecute(e, this.Context, this.FindTryCatch());
+                ContextMenuUtilities.OnAddAnnotationCommandCanExecute(
+                    e,
+                    this.Context,
+                    this.FindTryCatch()
+                );
             }
         }
 
@@ -140,7 +155,11 @@ namespace System.Activities.Core.Presentation
             if (EditingContextUtilities.GetSingleSelectedModelItem(this.Context) == this.ModelItem)
             {
                 // call the same method as delete annotation command
-                ContextMenuUtilities.OnDeleteAnnotationCommandCanExecute(e, this.Context, this.FindTryCatch());
+                ContextMenuUtilities.OnDeleteAnnotationCommandCanExecute(
+                    e,
+                    this.Context,
+                    this.FindTryCatch()
+                );
             }
         }
 
@@ -153,7 +172,11 @@ namespace System.Activities.Core.Presentation
         {
             if (EditingContextUtilities.GetSingleSelectedModelItem(this.Context) == this.ModelItem)
             {
-                ContextMenuUtilities.OnDeleteAnnotationCommandCanExecute(e, this.Context, this.FindTryCatch());
+                ContextMenuUtilities.OnDeleteAnnotationCommandCanExecute(
+                    e,
+                    this.Context,
+                    this.FindTryCatch()
+                );
             }
         }
 
@@ -164,10 +187,12 @@ namespace System.Activities.Core.Presentation
 
         private ModelItem FindTryCatch()
         {
-            return this.ModelItem.FindParent((ModelItem item) =>
+            return this.ModelItem.FindParent(
+                (ModelItem item) =>
                 {
                     return item.ItemType == typeof(TryCatch);
-                });
+                }
+            );
         }
     }
 }

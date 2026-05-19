@@ -15,7 +15,11 @@ internal static partial class Interop
         public ContextTrackingMode ContextTrackingMode;
         public BOOLEAN EffectiveOnly;
 
-        public unsafe SECURITY_QUALITY_OF_SERVICE(ImpersonationLevel impersonationLevel, ContextTrackingMode contextTrackingMode, bool effectiveOnly)
+        public unsafe SECURITY_QUALITY_OF_SERVICE(
+            ImpersonationLevel impersonationLevel,
+            ContextTrackingMode contextTrackingMode,
+            bool effectiveOnly
+        )
         {
             Length = (uint)sizeof(SECURITY_QUALITY_OF_SERVICE);
             ImpersonationLevel = impersonationLevel;
@@ -52,7 +56,7 @@ internal static partial class Interop
         ///  The server process can impersonate the client's security context on remote systems.
         ///  [SecurityDelegation]
         /// </summary>
-        Delegation
+        Delegation,
     }
 
     /// <summary>
@@ -70,6 +74,6 @@ internal static partial class Interop
         ///  The server is continually updated with changes.
         ///  [SECURITY_DYNAMIC_TRACKING]
         /// </summary>
-        Dynamic = 0x01
+        Dynamic = 0x01,
     }
 }

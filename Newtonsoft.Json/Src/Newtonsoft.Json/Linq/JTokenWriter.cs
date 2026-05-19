@@ -26,10 +26,10 @@
 using System;
 using System.Diagnostics;
 using System.Globalization;
+using Newtonsoft.Json.Utilities;
 #if HAVE_BIG_INTEGER
 using System.Numerics;
 #endif
-using Newtonsoft.Json.Utilities;
 
 namespace Newtonsoft.Json.Linq
 {
@@ -40,6 +40,7 @@ namespace Newtonsoft.Json.Linq
     {
         private JContainer? _token;
         private JContainer? _parent;
+
         // used when writer is writing single value and the value has no containing parent
         private JValue? _value;
         private JToken? _current;
@@ -81,16 +82,12 @@ namespace Newtonsoft.Json.Linq
         /// <summary>
         /// Initializes a new instance of the <see cref="JTokenWriter"/> class.
         /// </summary>
-        public JTokenWriter()
-        {
-        }
+        public JTokenWriter() { }
 
         /// <summary>
         /// Flushes whatever is in the buffer to the underlying <see cref="JContainer"/>.
         /// </summary>
-        public override void Flush()
-        {
-        }
+        public override void Flush() { }
 
         /// <summary>
         /// Closes this writer.
@@ -286,7 +283,7 @@ namespace Newtonsoft.Json.Linq
                 WriteNull();
                 return;
             }
-            
+
             base.WriteValue(value);
             AddJValue(new JValue(value), JsonToken.String);
         }
@@ -495,10 +492,20 @@ namespace Newtonsoft.Json.Linq
         }
         #endregion
 
-        internal override void WriteToken(JsonReader reader, bool writeChildren, bool writeDateConstructorAsDate, bool writeComments)
+        internal override void WriteToken(
+            JsonReader reader,
+            bool writeChildren,
+            bool writeDateConstructorAsDate,
+            bool writeComments
+        )
         {
             // cloning the token rather than reading then writing it doesn't lose some type information, e.g. Guid, byte[], etc
-            if (reader is JTokenReader tokenReader && writeChildren && writeDateConstructorAsDate && writeComments)
+            if (
+                reader is JTokenReader tokenReader
+                && writeChildren
+                && writeDateConstructorAsDate
+                && writeComments
+            )
             {
                 if (tokenReader.TokenType == JsonToken.None)
                 {

@@ -22,11 +22,17 @@ namespace System.Workflow.Activities
     internal static class DynamicContractTypeBuilder
     {
         internal static readonly DependencyProperty DynamicContractTypesProperty =
-            DependencyProperty.RegisterAttached("DynamicContractTypes",
-            typeof(Dictionary<string, ContractType>), typeof(DynamicContractTypeBuilder),
-            new PropertyMetadata(null, DependencyPropertyOptions.NonSerialized));
+            DependencyProperty.RegisterAttached(
+                "DynamicContractTypes",
+                typeof(Dictionary<string, ContractType>),
+                typeof(DynamicContractTypeBuilder),
+                new PropertyMetadata(null, DependencyPropertyOptions.NonSerialized)
+            );
 
-        public static Type GetContractType(OperationInfo operationInfo, ReceiveActivity contextActivity)
+        public static Type GetContractType(
+            OperationInfo operationInfo,
+            ReceiveActivity contextActivity
+        )
         {
             if (operationInfo == null)
             {
@@ -45,26 +51,36 @@ namespace System.Workflow.Activities
 
             Activity rootActivity = contextActivity.RootActivity;
             Dictionary<string, ContractType> contractTypes =
-                rootActivity.GetValue(DynamicContractTypeBuilder.DynamicContractTypesProperty) as Dictionary<string, ContractType>;
+                rootActivity.GetValue(DynamicContractTypeBuilder.DynamicContractTypesProperty)
+                as Dictionary<string, ContractType>;
 
             if (contractTypes == null)
             {
-                Activity definition = rootActivity.GetValue(Activity.WorkflowDefinitionProperty) as Activity;
+                Activity definition =
+                    rootActivity.GetValue(Activity.WorkflowDefinitionProperty) as Activity;
                 if (definition != null)
                 {
-                    contractTypes = definition.GetValue(DynamicContractTypeBuilder.DynamicContractTypesProperty) as Dictionary<string, ContractType>;
+                    contractTypes =
+                        definition.GetValue(DynamicContractTypeBuilder.DynamicContractTypesProperty)
+                        as Dictionary<string, ContractType>;
                 }
 
                 if (contractTypes != null)
                 {
-                    rootActivity.SetValue(DynamicContractTypeBuilder.DynamicContractTypesProperty, contractTypes);
+                    rootActivity.SetValue(
+                        DynamicContractTypeBuilder.DynamicContractTypesProperty,
+                        contractTypes
+                    );
                 }
             }
 
             if (contractTypes == null)
             {
                 contractTypes = BuildContractTypes(rootActivity);
-                rootActivity.SetValue(DynamicContractTypeBuilder.DynamicContractTypesProperty, contractTypes);
+                rootActivity.SetValue(
+                    DynamicContractTypeBuilder.DynamicContractTypesProperty,
+                    contractTypes
+                );
             }
 
             if (contractTypes.ContainsKey(operationInfo.ContractName))
@@ -98,16 +114,20 @@ namespace System.Workflow.Activities
                     return;
                 }
 
-                if (string.IsNullOrEmpty(operationInfo.ContractName) ||
-                    string.IsNullOrEmpty(operationInfo.Name))
+                if (
+                    string.IsNullOrEmpty(operationInfo.ContractName)
+                    || string.IsNullOrEmpty(operationInfo.Name)
+                )
                 {
                     return;
                 }
 
                 if (!types.ContainsKey(operationInfo.ContractName))
                 {
-                    types.Add(operationInfo.ContractName,
-                        new ContractType(operationInfo.ContractName));
+                    types.Add(
+                        operationInfo.ContractName,
+                        new ContractType(operationInfo.ContractName)
+                    );
                 }
 
                 bool hasReturnValue = false;
@@ -123,7 +143,10 @@ namespace System.Workflow.Activities
                     }
                     else
                     {
-                        maxPosition = (maxPosition < operationParameterInfo.Position) ? operationParameterInfo.Position : maxPosition;
+                        maxPosition =
+                            (maxPosition < operationParameterInfo.Position)
+                                ? operationParameterInfo.Position
+                                : maxPosition;
                     }
 
                     if (parameterIndexs.Contains(operationParameterInfo.Position))
@@ -137,8 +160,10 @@ namespace System.Workflow.Activities
                     }
                 }
 
-                if (duplicatedPositions ||
-                    maxPosition > (operationInfo.Parameters.Count - (hasReturnValue ? 2 : 1)))
+                if (
+                    duplicatedPositions
+                    || maxPosition > (operationInfo.Parameters.Count - (hasReturnValue ? 2 : 1))
+                )
                 {
                     return;
                 }

@@ -43,8 +43,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.i
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.inheritance.inherit01a.inherit01a
 {
     // <Area>Declaration of Methods with Optional Parameters</Area>
@@ -84,8 +82,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.i
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.inheritance.inherit02.inherit02
 {
@@ -127,8 +123,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.i
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.inheritance.inherit02a.inherit02a
 {
     // <Area>Declaration of Methods with Optional Parameters</Area>
@@ -168,8 +162,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.i
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.inheritance.inherit03a.inherit03a
 {
@@ -222,8 +214,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.i
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.inheritance.inherit04.inherit04
 {
     // <Area>Declaration of Methods with Optional Parameters</Area>
@@ -263,8 +253,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.i
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.inheritance.inherit04a.inherit04a
 {
@@ -306,8 +294,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.i
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.inheritance.inherit05.inherit05
 {
     // <Area>Declaration of Methods with Optional Parameters</Area>
@@ -348,8 +334,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.i
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.inheritance.inherit05a.inherit05a
 {
     // <Area>Declaration of Methods with Optional Parameters</Area>
@@ -389,8 +373,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.i
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.inheritance.inherit06.inherit06
 {
@@ -440,8 +422,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.i
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.inheritance.inherit06a.inherit06a
 {
     // <Area>Declaration of Methods with Optional Parameters</Area>
@@ -490,8 +470,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.i
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.inheritance.inherit07.inherit07
 {
     // <Area>Declaration of Methods with Optional Parameters</Area>
@@ -509,7 +487,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.i
 
     public class Child : Parent
     {
-        public virtual new dynamic Foo(dynamic i = null)
+        public new virtual dynamic Foo(dynamic i = null)
         {
             return 1;
         }
@@ -540,8 +518,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.i
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.inheritance.inherit07a.inherit07a
 {
     // <Area>Declaration of Methods with Optional Parameters</Area>
@@ -559,7 +535,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.i
 
     public class Child : Parent
     {
-        public virtual new int Foo(int? i = 20)
+        public new virtual int Foo(int? i = 20)
         {
             return 1;
         }
@@ -589,8 +565,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.i
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.inheritance.inherit08.inherit08
 {
@@ -640,8 +614,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.i
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.inheritance.inherit08a.inherit08a
 {
     // <Area>Declaration of Methods with Optional Parameters</Area>
@@ -690,8 +662,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.i
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.inheritance.inherit09.inherit09
 {
     // <Area>Declaration of Methods with Optional Parameters</Area>
@@ -728,8 +698,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.i
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.inheritance.inherit09a.inherit09a
 {
@@ -768,8 +736,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.i
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.inheritance.inherit10.inherit10
 {
     // <Area>Declaration of Methods with Optional Parameters</Area>
@@ -807,8 +773,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.i
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.inheritance.inherit10a.inherit10a
 {
     // <Area>Declaration of Methods with Optional Parameters</Area>
@@ -845,8 +809,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.i
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.inheritance.inherit11a.inherit11a
 {
@@ -895,8 +857,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.i
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.inheritance.inherit12a.inherit12a
 {
@@ -947,8 +907,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.i
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.inheritance.inherit13.inherit13
 {
     // <Area>Declaration of Methods with Optional Parameters</Area>
@@ -986,8 +944,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.i
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.inheritance.inherit13a.inherit13a
 {
     // <Area>Declaration of Methods with Optional Parameters</Area>
@@ -1024,8 +980,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.i
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.inheritance.inherit14.inherit14
 {
@@ -1073,8 +1027,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.i
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.inheritance.inherit14a.inherit14a
 {
     // <Area>Declaration of Methods with Optional Parameters</Area>
@@ -1121,8 +1073,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.i
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.inheritance.inherit15.inherit15
 {
     // <Area>Declaration of Methods with Optional Parameters</Area>
@@ -1138,7 +1088,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.i
 
     public class Child : Parent
     {
-        public virtual new dynamic Foo(int i = 1)
+        public new virtual dynamic Foo(int i = 1)
         {
             return 1;
         }
@@ -1169,8 +1119,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.i
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.inheritance.inherit15a.inherit15a
 {
     // <Area>Declaration of Methods with Optional Parameters</Area>
@@ -1186,7 +1134,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.i
 
     public class Child : Parent
     {
-        public virtual new int Foo(int? i = 1)
+        public new virtual int Foo(int? i = 1)
         {
             return 1;
         }
@@ -1216,8 +1164,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.i
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.inheritance.inherit19.inherit19
 {
@@ -1256,8 +1202,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.i
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.inheritance.inherit19a.inherit19a
 {
     // <Area>Declaration of Methods with Optional Parameters</Area>
@@ -1294,8 +1238,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.i
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.inheritance.inherit20.inherit20
 {
@@ -1334,8 +1276,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.i
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.inheritance.inherit20a.inherit20a
 {
     // <Area>Declaration of Methods with Optional Parameters</Area>
@@ -1373,8 +1313,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.i
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.inheritance.inherit21.inherit21
 {
@@ -1422,8 +1360,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.i
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.inheritance.inherit21a.inherit21a
 {
     // <Area>Declaration of Methods with Optional Parameters</Area>
@@ -1470,8 +1406,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.i
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.inheritance.inherit22.inherit22
 {
     // <Area>Declaration of Methods with Optional Parameters</Area>
@@ -1508,8 +1442,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.i
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.inheritance.inherit22a.inherit22a
 {
@@ -1549,8 +1481,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.i
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.inheritance.inherit23.inherit23
 {
     // <Area>Declaration of Methods with Optional Parameters</Area>
@@ -1587,8 +1517,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.i
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.inheritance.inherit23a.inherit23a
 {
@@ -1628,8 +1556,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.i
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.inheritance.inherit24a.inherit24a
 {

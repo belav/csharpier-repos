@@ -17,18 +17,20 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 //
-namespace Mono.Net.Dns {
-	enum ResolverError {
-		NoError,		// From DNS server
-		FormatError,		//
-		ServerFailure,		//
-		NameError,		//
-		NotImplemented,		//
-		Refused,		//
-		// Resolver specific
-		ResponseHeaderError,
-		ResponseFormatError,
-		Timeout,
-	}
-}
+namespace Mono.Net.Dns
+{
+    enum ResolverError
+    {
+        NoError, // From DNS server
+        FormatError, //
+        ServerFailure, //
+        NameError, //
+        NotImplemented, //
+        Refused, //
 
+        // Resolver specific
+        ResponseHeaderError,
+        ResponseFormatError,
+        Timeout,
+    }
+}

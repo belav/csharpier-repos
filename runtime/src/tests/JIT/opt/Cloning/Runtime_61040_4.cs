@@ -9,21 +9,21 @@ public class Runtime_61040_4
 {
     [MethodImpl(MethodImplOptions.NoInlining)]
     static void JitUse<T>(T arg) { }
-    
+
     [MethodImpl(MethodImplOptions.NoInlining | MethodImplOptions.AggressiveOptimization)]
     static int Problem()
     {
         int[] a = GetArray();
         int[] b = a;
         int[] c = GetArray();
-        
+
         JitUse(a);
         JitUse(b);
         JitUse(c);
-        
+
         int r = 0;
 
-        try 
+        try
         {
             for (int i = 0; i < a.Length; i++)
             {
@@ -38,14 +38,13 @@ public class Runtime_61040_4
 
         return -1;
     }
-    
+
     [MethodImpl(MethodImplOptions.NoInlining)]
     static int[] GetArray() => new int[] { 1, 2, 3, 4, 90 };
-    
+
     [MethodImpl(MethodImplOptions.NoInlining)]
     static int[] GetArrayLong() => new int[10000];
 
     [Fact]
     public static int TestEntryPoint() => Problem();
 }
-

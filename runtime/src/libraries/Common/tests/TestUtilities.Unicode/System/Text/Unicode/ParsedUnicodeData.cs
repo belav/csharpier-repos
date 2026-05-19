@@ -11,7 +11,10 @@ namespace System.Text.Unicode
     internal sealed class ParsedUnicodeData
     {
         // Mappings from https://www.unicode.org/Public/UCD/latest/ucd/PropertyValueAliases.txt (bc).
-        private static readonly Dictionary<string, BidiClass> BidiClassMap = new Dictionary<string, BidiClass>()
+        private static readonly Dictionary<string, BidiClass> BidiClassMap = new Dictionary<
+            string,
+            BidiClass
+        >()
         {
             ["AL"] = BidiClass.Arabic_Letter,
             ["AN"] = BidiClass.Arabic_Number,
@@ -70,7 +73,10 @@ namespace System.Text.Unicode
             {
                 // Ignore blank lines or comment lines
 
-                if (string.IsNullOrEmpty(thisLine) || thisLine[0] == '#') { continue; }
+                if (string.IsNullOrEmpty(thisLine) || thisLine[0] == '#')
+                {
+                    continue;
+                }
 
                 // Line should be in format "<code>; <status>; <mapping>; # <name>"
 
@@ -85,8 +91,10 @@ namespace System.Text.Unicode
                     continue;
                 }
 
-                int fromCodePoint = (int)uint.Parse(split[0], NumberStyles.HexNumber, CultureInfo.InvariantCulture);
-                int toCodePoint = (int)uint.Parse(split[2], NumberStyles.HexNumber, CultureInfo.InvariantCulture);
+                int fromCodePoint = (int)
+                    uint.Parse(split[0], NumberStyles.HexNumber, CultureInfo.InvariantCulture);
+                int toCodePoint = (int)
+                    uint.Parse(split[2], NumberStyles.HexNumber, CultureInfo.InvariantCulture);
                 dict.Add(fromCodePoint, toCodePoint);
             }
 
@@ -110,7 +118,13 @@ namespace System.Text.Unicode
                 {
                     BidiClass bidiClass = BidiClassMap[value.PropName];
 
-                    for (int i = value.FirstCodePoint; i <= value.LastCodePoint /* inclusive */; i++)
+                    for (
+                        int i = value.FirstCodePoint;
+                        i
+                            <= value.LastCodePoint /* inclusive */
+                        ;
+                        i++
+                    )
                     {
                         dict.Add(i, bidiClass);
                     }
@@ -149,7 +163,13 @@ namespace System.Text.Unicode
                         Assert.True(value.PropName.EndsWith('*'));
 
                         string baseName = value.PropName[..^1];
-                        for (int i = value.FirstCodePoint; i <= value.LastCodePoint /* inclusive */; i++)
+                        for (
+                            int i = value.FirstCodePoint;
+                            i
+                                <= value.LastCodePoint /* inclusive */
+                            ;
+                            i++
+                        )
                         {
                             dict.Add(i, $"{baseName}{i:X4}");
                         }
@@ -163,11 +183,21 @@ namespace System.Text.Unicode
         /// <summary>
         /// Reads GraphemeBreakProperty.txt and emoji-data.txt and parses each entry in those files.
         /// </summary>
-        private static Dictionary<int, GraphemeClusterBreakProperty> ProcessGraphemeClusterBreakAndEmojiDataFiles()
+        private static Dictionary<
+            int,
+            GraphemeClusterBreakProperty
+        > ProcessGraphemeClusterBreakAndEmojiDataFiles()
         {
-            Dictionary<int, GraphemeClusterBreakProperty> dict = new Dictionary<int, GraphemeClusterBreakProperty>();
+            Dictionary<int, GraphemeClusterBreakProperty> dict =
+                new Dictionary<int, GraphemeClusterBreakProperty>();
 
-            foreach (string resourceName in new[] { Resources.GraphemeBreakProperty, Resources.EmojiData })
+            foreach (
+                string resourceName in new[]
+                {
+                    Resources.GraphemeBreakProperty,
+                    Resources.EmojiData,
+                }
+            )
             {
                 using Stream stream = Resources.OpenResource(resourceName);
                 using StreamReader reader = new StreamReader(stream);
@@ -177,9 +207,20 @@ namespace System.Text.Unicode
                 {
                     if (PropsFileEntry.TryParseLine(thisLine, out PropsFileEntry? value))
                     {
-                        if (Enum.TryParse<GraphemeClusterBreakProperty>(value.PropName, out GraphemeClusterBreakProperty property))
+                        if (
+                            Enum.TryParse<GraphemeClusterBreakProperty>(
+                                value.PropName,
+                                out GraphemeClusterBreakProperty property
+                            )
+                        )
                         {
-                            for (int i = value.FirstCodePoint; i <= value.LastCodePoint /* inclusive */; i++)
+                            for (
+                                int i = value.FirstCodePoint;
+                                i
+                                    <= value.LastCodePoint /* inclusive */
+                                ;
+                                i++
+                            )
                             {
                                 dict.Add(i, property);
                             }
@@ -209,9 +250,18 @@ namespace System.Text.Unicode
                 if (PropsFileEntry.TryParseLine(thisLine, out PropsFileEntry? value))
                 {
                     CodePointFlags newFlag = Enum.Parse<CodePointFlags>(value.PropName);
-                    for (int i = value.FirstCodePoint; i <= value.LastCodePoint /* inclusive */; i++)
+                    for (
+                        int i = value.FirstCodePoint;
+                        i
+                            <= value.LastCodePoint /* inclusive */
+                        ;
+                        i++
+                    )
                     {
-                        dict.TryGetValue(i, out CodePointFlags flagsForThisCodePoint /* could be default(T) */);
+                        dict.TryGetValue(
+                            i,
+                            out CodePointFlags flagsForThisCodePoint /* could be default(T) */
+                        );
                         flagsForThisCodePoint |= newFlag;
                         dict[i] = flagsForThisCodePoint;
                     }
@@ -229,14 +279,18 @@ namespace System.Text.Unicode
             using Stream stream = Resources.OpenResource(Resources.UnicodeData);
             using StreamReader reader = new StreamReader(stream);
 
-            Dictionary<int, UnicodeDataFileEntry> dict = new Dictionary<int, UnicodeDataFileEntry>();
+            Dictionary<int, UnicodeDataFileEntry> dict =
+                new Dictionary<int, UnicodeDataFileEntry>();
 
             string? thisLine;
             while ((thisLine = reader.ReadLine()) != null)
             {
                 // Skip blank lines at beginning or end of the file
 
-                if (thisLine.Length == 0) { continue; }
+                if (thisLine.Length == 0)
+                {
+                    continue;
+                }
 
                 UnicodeDataFileEntry entry = new UnicodeDataFileEntry(thisLine);
 
@@ -247,10 +301,22 @@ namespace System.Text.Unicode
 
                     UnicodeDataFileEntry nextEntry = new UnicodeDataFileEntry(reader.ReadLine()!);
                     Assert.EndsWith(", Last>", nextEntry.Name, StringComparison.Ordinal);
-                    Assert.Equal(entry.Name[..^", First>".Length], nextEntry.Name[..^", Last>".Length]);
+                    Assert.Equal(
+                        entry.Name[..^", First>".Length],
+                        nextEntry.Name[..^", Last>".Length]
+                    );
 
-                    string baseName = entry.Name.Remove(entry.Name.Length - ", First>".Length, ", First".Length); // remove the ", First" part of the name
-                    for (int i = entry.CodePoint; i <= nextEntry.CodePoint /* inclusive */; i++)
+                    string baseName = entry.Name.Remove(
+                        entry.Name.Length - ", First>".Length,
+                        ", First".Length
+                    ); // remove the ", First" part of the name
+                    for (
+                        int i = entry.CodePoint;
+                        i
+                            <= nextEntry.CodePoint /* inclusive */
+                        ;
+                        i++
+                    )
                     {
                         dict.Add(i, new UnicodeDataFileEntry(i, baseName, entry.GeneralCategory));
                     }

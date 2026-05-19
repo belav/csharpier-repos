@@ -27,56 +27,64 @@ public class SqlAzureFundamentalsTest : IClassFixture<SqlAzureFixture>
     public void CanAdd()
     {
         using var context = CreateContext();
-        context.Database.CreateExecutionStrategy().Execute(
-            context, contextScoped =>
-            {
-                using (contextScoped.Database.BeginTransaction())
+        context
+            .Database.CreateExecutionStrategy()
+            .Execute(
+                context,
+                contextScoped =>
                 {
-                    contextScoped.Add(
-                        new Product
-                        {
-                            Name = "Blue Cloud",
-                            ProductNumber = "xxxxxxxxxxx",
-                            Weight = 0.01m,
-                            SellStartDate = DateTime.Now
-                        });
-                    Assert.Equal(1, contextScoped.SaveChanges());
+                    using (contextScoped.Database.BeginTransaction())
+                    {
+                        contextScoped.Add(
+                            new Product
+                            {
+                                Name = "Blue Cloud",
+                                ProductNumber = "xxxxxxxxxxx",
+                                Weight = 0.01m,
+                                SellStartDate = DateTime.Now,
+                            }
+                        );
+                        Assert.Equal(1, contextScoped.SaveChanges());
+                    }
                 }
-            });
+            );
     }
 
     [ConditionalFact]
     public void CanUpdate()
     {
         using var context = CreateContext();
-        context.Database.CreateExecutionStrategy().Execute(
-            context, contextScoped =>
-            {
-                using (contextScoped.Database.BeginTransaction())
+        context
+            .Database.CreateExecutionStrategy()
+            .Execute(
+                context,
+                contextScoped =>
                 {
-                    var product = new Product { ProductID = 999 };
-                    contextScoped.Products.Attach(product);
-                    Assert.Equal(0, contextScoped.SaveChanges());
+                    using (contextScoped.Database.BeginTransaction())
+                    {
+                        var product = new Product { ProductID = 999 };
+                        contextScoped.Products.Attach(product);
+                        Assert.Equal(0, contextScoped.SaveChanges());
 
-                    product.Color = "Blue";
+                        product.Color = "Blue";
 
-                    Assert.Equal(1, contextScoped.SaveChanges());
+                        Assert.Equal(1, contextScoped.SaveChanges());
+                    }
                 }
-            });
+            );
     }
 
     [ConditionalFact]
     public void IncludeQuery()
     {
         using var context = CreateContext();
-        var order = context.SalesOrders
-            .OrderBy(s => s.SalesOrderID)
+        var order = context
+            .SalesOrders.OrderBy(s => s.SalesOrderID)
             .Include(s => s.Customer)
             .First();
 
         Assert.NotNull(order.Customer);
     }
 
-    protected AdventureWorksContext CreateContext()
-        => Fixture.CreateContext();
+    protected AdventureWorksContext CreateContext() => Fixture.CreateContext();
 }

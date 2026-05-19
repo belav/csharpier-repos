@@ -87,11 +87,19 @@ namespace System.Reflection.Metadata
 
             if (hashCode.Length < minHashSize)
             {
-                throw new ArgumentException(SR.Format(SR.HashTooShort, minHashSize), nameof(hashCode));
+                throw new ArgumentException(
+                    SR.Format(SR.HashTooShort, minHashSize),
+                    nameof(hashCode)
+                );
             }
 
             // extract guid components from input data
-            uint a = ((uint)hashCode[3] << 24 | (uint)hashCode[2] << 16 | (uint)hashCode[1] << 8 | hashCode[0]);
+            uint a = (
+                (uint)hashCode[3] << 24
+                | (uint)hashCode[2] << 16
+                | (uint)hashCode[1] << 8
+                | hashCode[0]
+            );
             ushort b = (ushort)(hashCode[5] << 8 | hashCode[4]);
             ushort c = (ushort)(hashCode[7] << 8 | hashCode[6]);
             byte d = hashCode[8];
@@ -109,7 +117,14 @@ namespace System.Reflection.Metadata
             Guid guid = new Guid((int)a, (short)b, (short)c, d, e, f, g, h, i, j, k);
 
             // compute a random-looking stamp from the remaining bits, but with the upper bit set
-            uint stamp = 0x80000000u | ((uint)hashCode[19] << 24 | (uint)hashCode[18] << 16 | (uint)hashCode[17] << 8 | hashCode[16]);
+            uint stamp =
+                0x80000000u
+                | (
+                    (uint)hashCode[19] << 24
+                    | (uint)hashCode[18] << 16
+                    | (uint)hashCode[17] << 8
+                    | hashCode[16]
+                );
 
             return new BlobContentId(guid, stamp);
         }
@@ -124,9 +139,16 @@ namespace System.Reflection.Metadata
         }
 
         public bool Equals(BlobContentId other) => Guid == other.Guid && Stamp == other.Stamp;
-        public override bool Equals([NotNullWhen(true)] object? obj) => obj is BlobContentId bcid && Equals(bcid);
+
+        public override bool Equals([NotNullWhen(true)] object? obj) =>
+            obj is BlobContentId bcid && Equals(bcid);
+
         public override int GetHashCode() => Hash.Combine(Stamp, Guid.GetHashCode());
-        public static bool operator ==(BlobContentId left, BlobContentId right) => left.Equals(right);
-        public static bool operator !=(BlobContentId left, BlobContentId right) => !left.Equals(right);
+
+        public static bool operator ==(BlobContentId left, BlobContentId right) =>
+            left.Equals(right);
+
+        public static bool operator !=(BlobContentId left, BlobContentId right) =>
+            !left.Equals(right);
     }
 }

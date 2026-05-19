@@ -18,7 +18,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics;
 ///         for more information and examples.
 ///     </para>
 /// </remarks>
-public interface IRelationalConnectionDiagnosticsLogger : IDiagnosticsLogger<DbLoggerCategory.Database.Connection>
+public interface IRelationalConnectionDiagnosticsLogger
+    : IDiagnosticsLogger<DbLoggerCategory.Database.Connection>
 {
     /// <summary>
     ///     Logs for the <see cref="RelationalEventId.ConnectionCreating" /> event.
@@ -28,7 +29,8 @@ public interface IRelationalConnectionDiagnosticsLogger : IDiagnosticsLogger<DbL
     /// <returns>The result of execution, which may have been modified by an interceptor.</returns>
     InterceptionResult<DbConnection> ConnectionCreating(
         IRelationalConnection connection,
-        DateTimeOffset startTime);
+        DateTimeOffset startTime
+    );
 
     /// <summary>
     ///     Logs for the <see cref="RelationalEventId.ConnectionCreated" /> event.
@@ -39,7 +41,8 @@ public interface IRelationalConnectionDiagnosticsLogger : IDiagnosticsLogger<DbL
     DbConnection ConnectionCreated(
         IRelationalConnection connection,
         DateTimeOffset startTime,
-        TimeSpan duration);
+        TimeSpan duration
+    );
 
     /// <summary>
     ///     Logs for the <see cref="RelationalEventId.ConnectionDisposing" /> event.
@@ -49,7 +52,8 @@ public interface IRelationalConnectionDiagnosticsLogger : IDiagnosticsLogger<DbL
     /// <returns>The result of execution, which may have been modified by an interceptor.</returns>
     InterceptionResult ConnectionDisposing(
         IRelationalConnection connection,
-        DateTimeOffset startTime);
+        DateTimeOffset startTime
+    );
 
     /// <summary>
     ///     Logs for the <see cref="RelationalEventId.ConnectionDisposing" /> event.
@@ -59,7 +63,8 @@ public interface IRelationalConnectionDiagnosticsLogger : IDiagnosticsLogger<DbL
     /// <returns>A <see cref="Task" /> representing the async operation.</returns>
     ValueTask<InterceptionResult> ConnectionDisposingAsync(
         IRelationalConnection connection,
-        DateTimeOffset startTime);
+        DateTimeOffset startTime
+    );
 
     /// <summary>
     ///     Logs for the <see cref="RelationalEventId.ConnectionDisposed" /> event.
@@ -70,7 +75,8 @@ public interface IRelationalConnectionDiagnosticsLogger : IDiagnosticsLogger<DbL
     void ConnectionDisposed(
         IRelationalConnection connection,
         DateTimeOffset startTime,
-        TimeSpan duration);
+        TimeSpan duration
+    );
 
     /// <summary>
     ///     Logs for the <see cref="RelationalEventId.ConnectionDisposed" /> event.
@@ -82,7 +88,8 @@ public interface IRelationalConnectionDiagnosticsLogger : IDiagnosticsLogger<DbL
     Task ConnectionDisposedAsync(
         IRelationalConnection connection,
         DateTimeOffset startTime,
-        TimeSpan duration);
+        TimeSpan duration
+    );
 
     /// <summary>
     ///     Logs for the <see cref="RelationalEventId.ConnectionOpening" /> event.
@@ -92,7 +99,8 @@ public interface IRelationalConnectionDiagnosticsLogger : IDiagnosticsLogger<DbL
     /// <returns>The result of execution, which may have been modified by an interceptor.</returns>
     InterceptionResult ConnectionOpening(
         IRelationalConnection connection,
-        DateTimeOffset startTime);
+        DateTimeOffset startTime
+    );
 
     /// <summary>
     ///     Logs for the <see cref="RelationalEventId.ConnectionOpening" /> event.
@@ -105,7 +113,8 @@ public interface IRelationalConnectionDiagnosticsLogger : IDiagnosticsLogger<DbL
     ValueTask<InterceptionResult> ConnectionOpeningAsync(
         IRelationalConnection connection,
         DateTimeOffset startTime,
-        CancellationToken cancellationToken);
+        CancellationToken cancellationToken
+    );
 
     /// <summary>
     ///     Logs for the <see cref="RelationalEventId.ConnectionOpened" /> event.
@@ -116,7 +125,8 @@ public interface IRelationalConnectionDiagnosticsLogger : IDiagnosticsLogger<DbL
     void ConnectionOpened(
         IRelationalConnection connection,
         DateTimeOffset startTime,
-        TimeSpan duration);
+        TimeSpan duration
+    );
 
     /// <summary>
     ///     Logs for the <see cref="RelationalEventId.ConnectionOpened" /> event.
@@ -131,7 +141,8 @@ public interface IRelationalConnectionDiagnosticsLogger : IDiagnosticsLogger<DbL
         IRelationalConnection connection,
         DateTimeOffset startTime,
         TimeSpan duration,
-        CancellationToken cancellationToken = default);
+        CancellationToken cancellationToken = default
+    );
 
     /// <summary>
     ///     Logs for the <see cref="RelationalEventId.ConnectionClosing" /> event.
@@ -141,7 +152,8 @@ public interface IRelationalConnectionDiagnosticsLogger : IDiagnosticsLogger<DbL
     /// <returns>The result of execution, which may have been modified by an interceptor.</returns>
     InterceptionResult ConnectionClosing(
         IRelationalConnection connection,
-        DateTimeOffset startTime);
+        DateTimeOffset startTime
+    );
 
     /// <summary>
     ///     Logs for the <see cref="RelationalEventId.ConnectionClosing" /> event.
@@ -151,7 +163,8 @@ public interface IRelationalConnectionDiagnosticsLogger : IDiagnosticsLogger<DbL
     /// <returns>A <see cref="Task" /> representing the async operation.</returns>
     ValueTask<InterceptionResult> ConnectionClosingAsync(
         IRelationalConnection connection,
-        DateTimeOffset startTime);
+        DateTimeOffset startTime
+    );
 
     /// <summary>
     ///     Logs for the <see cref="RelationalEventId.ConnectionClosed" /> event.
@@ -162,7 +175,8 @@ public interface IRelationalConnectionDiagnosticsLogger : IDiagnosticsLogger<DbL
     void ConnectionClosed(
         IRelationalConnection connection,
         DateTimeOffset startTime,
-        TimeSpan duration);
+        TimeSpan duration
+    );
 
     /// <summary>
     ///     Logs for the <see cref="RelationalEventId.ConnectionClosed" /> event.
@@ -174,7 +188,8 @@ public interface IRelationalConnectionDiagnosticsLogger : IDiagnosticsLogger<DbL
     Task ConnectionClosedAsync(
         IRelationalConnection connection,
         DateTimeOffset startTime,
-        TimeSpan duration);
+        TimeSpan duration
+    );
 
     /// <summary>
     ///     Logs for the <see cref="RelationalEventId.ConnectionError" /> event.
@@ -189,7 +204,8 @@ public interface IRelationalConnectionDiagnosticsLogger : IDiagnosticsLogger<DbL
         Exception exception,
         DateTimeOffset startTime,
         TimeSpan duration,
-        bool logErrorAsDebug);
+        bool logErrorAsDebug
+    );
 
     /// <summary>
     ///     Logs for the <see cref="RelationalEventId.ConnectionError" /> event.
@@ -208,7 +224,8 @@ public interface IRelationalConnectionDiagnosticsLogger : IDiagnosticsLogger<DbL
         DateTimeOffset startTime,
         TimeSpan duration,
         bool logErrorAsDebug,
-        CancellationToken cancellationToken = default);
+        CancellationToken cancellationToken = default
+    );
 
     /// <summary>
     ///     Whether <see cref="RelationalEventId.ConnectionCreating" /> or <see cref="RelationalEventId.ConnectionCreated" /> need

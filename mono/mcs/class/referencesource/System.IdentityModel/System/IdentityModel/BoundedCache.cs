@@ -8,10 +8,11 @@ using System.Threading;
 namespace System.IdentityModel
 {
     /// <summary>
-    /// A cache of type T where items are cached and removed 
+    /// A cache of type T where items are cached and removed
     /// according to the type specified, currently only 'TimeBounded' is supported.  An items is added with an expiration time.
     /// </summary>
-    internal class BoundedCache<T> where T : class
+    internal class BoundedCache<T>
+        where T : class
     {
         Dictionary<string, ExpirableItem<T>> _items;
         int _capacity;
@@ -25,10 +26,9 @@ namespace System.IdentityModel
         /// <param name="capacity">The maximum size of the cache in number of items.
         /// If int.MaxValue is passed then the size is not bound.</param>
         /// <param name="purgeInterval">The time interval for checking expired items.</param>
-        /// 
+        ///
         public BoundedCache(int capacity, TimeSpan purgeInterval)
-            : this(capacity, purgeInterval, StringComparer.Ordinal)
-        { }
+            : this(capacity, purgeInterval, StringComparer.Ordinal) { }
 
         /// <summary>
         /// Creates a cache for items of Type 'T' where expired items will purged on a regular interval
@@ -40,16 +40,28 @@ namespace System.IdentityModel
         /// <exception cref="ArgumentOutOfRangeException">The input parameter 'capacity' is less than or equal to zero.</exception>
         /// <exception cref="ArgumentOutOfRangeException">The input parameter 'purgeInterval' is less than or equal to TimeSpan.Zero.</exception>
         /// <exception cref="ArgumentNullException">The input parameter 'keyComparer' is null.</exception>
-        public BoundedCache(int capacity, TimeSpan purgeInterval, IEqualityComparer<string> keyComparer)
+        public BoundedCache(
+            int capacity,
+            TimeSpan purgeInterval,
+            IEqualityComparer<string> keyComparer
+        )
         {
             if (capacity <= 0)
             {
-                throw DiagnosticUtility.ThrowHelperArgumentOutOfRange("capacity", capacity, SR.GetString(SR.ID0002));
+                throw DiagnosticUtility.ThrowHelperArgumentOutOfRange(
+                    "capacity",
+                    capacity,
+                    SR.GetString(SR.ID0002)
+                );
             }
 
             if (purgeInterval <= TimeSpan.Zero)
             {
-                throw DiagnosticUtility.ThrowHelperArgumentOutOfRange("purgeInterval", purgeInterval, SR.GetString(SR.ID0016));
+                throw DiagnosticUtility.ThrowHelperArgumentOutOfRange(
+                    "purgeInterval",
+                    purgeInterval,
+                    SR.GetString(SR.ID0016)
+                );
             }
 
             if (keyComparer == null)
@@ -68,10 +80,7 @@ namespace System.IdentityModel
         /// </summary>
         protected ReaderWriterLock CacheLock
         {
-            get
-            {
-                return _readWriteLock;
-            }
+            get { return _readWriteLock; }
         }
 
         /// <summary>
@@ -79,15 +88,16 @@ namespace System.IdentityModel
         /// </summary>
         public virtual int Capacity
         {
-            get
-            {
-                return _capacity;
-            }
+            get { return _capacity; }
             set
             {
                 if (value <= 0)
                 {
-                    throw DiagnosticUtility.ThrowHelperArgumentOutOfRange("value", value, SR.GetString(SR.ID0002));
+                    throw DiagnosticUtility.ThrowHelperArgumentOutOfRange(
+                        "value",
+                        value,
+                        SR.GetString(SR.ID0002)
+                    );
                 }
                 _capacity = value;
             }
@@ -95,7 +105,7 @@ namespace System.IdentityModel
 
         /// <summary>
         /// Removes all items from the Cache.
-        /// </summary>      
+        /// </summary>
         public virtual void Clear()
         {
             // -1 milleseconds is infinite timeout
@@ -125,12 +135,14 @@ namespace System.IdentityModel
 
             if (_items.Count >= _capacity)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new LimitExceededException(SR.GetString(SR.ID0021, _capacity)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new LimitExceededException(SR.GetString(SR.ID0021, _capacity))
+                );
             }
         }
 
         /// <summary>
-        /// Increases the maximum number of items that the cache will hold. 
+        /// Increases the maximum number of items that the cache will hold.
         /// </summary>
         /// <param name="size">The capacity to increase.</param>
         /// <exception cref="ArgumentOutOfRangeException">The input parameter 'size' is less than or equal to zero.</exception>
@@ -140,7 +152,11 @@ namespace System.IdentityModel
         {
             if (size <= 0)
             {
-                throw DiagnosticUtility.ThrowHelperArgumentOutOfRange("size", size, SR.GetString(SR.ID0002));
+                throw DiagnosticUtility.ThrowHelperArgumentOutOfRange(
+                    "size",
+                    size,
+                    SR.GetString(SR.ID0002)
+                );
             }
 
             // -1 milleseconds is infinite timeout
@@ -170,10 +186,7 @@ namespace System.IdentityModel
         /// </summary>
         protected Dictionary<string, ExpirableItem<T>> Items
         {
-            get
-            {
-                return _items;
-            }
+            get { return _items; }
         }
 
         /// <summary>
@@ -183,7 +196,7 @@ namespace System.IdentityModel
         void Purge()
         {
             DateTime currentTime = DateTime.UtcNow;
-            if (currentTime < _nextPurgeTime)                
+            if (currentTime < _nextPurgeTime)
             {
                 return;
             }
@@ -195,7 +208,6 @@ namespace System.IdentityModel
 
             try
             {
-
                 List<string> expiredItems = new List<string>();
                 foreach (string key in _items.Keys)
                 {
@@ -227,7 +239,11 @@ namespace System.IdentityModel
             {
                 if (value <= TimeSpan.Zero)
                 {
-                    throw DiagnosticUtility.ThrowHelperArgumentOutOfRange("value", value, SR.GetString(SR.ID0016));
+                    throw DiagnosticUtility.ThrowHelperArgumentOutOfRange(
+                        "value",
+                        value,
+                        SR.GetString(SR.ID0016)
+                    );
                 }
 
                 _purgeInterval = value;
@@ -241,7 +257,7 @@ namespace System.IdentityModel
         /// <param name="item">Item of type 'T' to add to cache</param>
         /// <param name="expirationTime">The expiration time of the entry.</param>
         /// <returns>true if item was added, false if item was not added</returns>
-        /// <exception cref="LimitExceededException">Thrown if an attempt is made to add an item when the current 
+        /// <exception cref="LimitExceededException">Thrown if an attempt is made to add an item when the current
         /// cache size is equal to the capacity</exception>
         public virtual bool TryAdd(string key, T item, DateTime expirationTime)
         {
@@ -325,7 +341,6 @@ namespace System.IdentityModel
                 }
 
                 return false;
-
             }
             finally
             {
@@ -362,7 +377,7 @@ namespace System.IdentityModel
         }
 
         /// <summary>
-        /// Wrapper class for objects contained in BoundedCache.  Contains the obj 'T' and 
+        /// Wrapper class for objects contained in BoundedCache.  Contains the obj 'T' and
         /// </summary>
         /// <typeparam name="ET">Type of the item</typeparam>
         protected class ExpirableItem<ET>
@@ -399,7 +414,7 @@ namespace System.IdentityModel
         {
             Time,
             MRU,
-            FIFO
+            FIFO,
         }
     }
 }

@@ -9,10 +9,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.overloadRes
     {
         private int this[int x]
         {
-            set
-            {
-                Status = 0;
-            }
+            set { Status = 0; }
         }
 
         public static int Status = -1;
@@ -33,22 +30,16 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.overloadRes
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.overloadResolution.indexer.setter.Oneclass.Twoparam.accessibility002.accessibility002
 {
     public class Test
     {
         protected int this[int x]
         {
-            set
-            {
-                Status = 0;
-            }
+            set { Status = 0; }
         }
 
         public static int Status = -1;
-
 
         public static void DynamicCSharpRunTest()
         {
@@ -66,8 +57,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.overloadRes
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.overloadResolution.indexer.setter.Oneclass.Twoparam.accessibility005.accessibility005
 {
     public class Test
@@ -76,10 +65,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.overloadRes
         {
             public int this[int x]
             {
-                set
-                {
-                    Test.Status = 1;
-                }
+                set { Test.Status = 1; }
             }
         }
 
@@ -102,8 +88,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.overloadRes
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.overloadResolution.indexer.setter.Oneclass.Twoparam.accessibility006.accessibility006
 {
@@ -113,10 +97,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.overloadRes
         {
             public int this[int x]
             {
-                set
-                {
-                    Test.Status = 1;
-                }
+                set { Test.Status = 1; }
             }
         }
 
@@ -139,8 +120,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.overloadRes
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.overloadResolution.indexer.setter.Oneclass.Twoparam.accessibility007.accessibility007
 {
@@ -150,10 +129,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.overloadRes
         {
             public int this[int x]
             {
-                set
-                {
-                    Test.Status = 1;
-                }
+                set { Test.Status = 1; }
             }
         }
 
@@ -177,26 +153,21 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.overloadRes
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.overloadResolution.indexer.setter.Oneclass.Twoparam.accessibility011.accessibility011
 {
     public class Test
     {
         public static int Status;
+
         public class Higher
         {
             private class Base
             {
                 public int this[int x]
                 {
-                    set
-                    {
-                        Test.Status = 1;
-                    }
+                    set { Test.Status = 1; }
                 }
             }
-
 
             public static void DynamicCSharpRunTest()
             {

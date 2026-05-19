@@ -72,10 +72,7 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
 
         public override MemberTypes MemberType
         {
-            get
-            {
-                return (MemberTypes)this.Type.MemberType;
-            }
+            get { return (MemberTypes)this.Type.MemberType; }
         }
 
         public override int MetadataToken
@@ -130,7 +127,9 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
 
         public override ConstructorInfo[] GetConstructors(BindingFlags bindingAttr)
         {
-            return Type.GetConstructors((System.Reflection.BindingFlags)bindingAttr).Select(c => new ConstructorInfoImpl(c)).ToArray();
+            return Type.GetConstructors((System.Reflection.BindingFlags)bindingAttr)
+                .Select(c => new ConstructorInfoImpl(c))
+                .ToArray();
         }
 
         public override object[] GetCustomAttributes(bool inherit)
@@ -145,7 +144,9 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
 
         public override IList<CustomAttributeData> GetCustomAttributesData()
         {
-            return Type.GetCustomAttributesData().Select(a => new CustomAttributeDataImpl(a)).ToArray();
+            return Type.GetCustomAttributesData()
+                .Select(a => new CustomAttributeDataImpl(a))
+                .ToArray();
         }
 
         public override Type GetElementType()
@@ -171,7 +172,9 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
 
         public override FieldInfo[] GetFields(BindingFlags flags)
         {
-            return Type.GetFields((System.Reflection.BindingFlags)flags).Select(f => new FieldInfoImpl(f)).ToArray();
+            return Type.GetFields((System.Reflection.BindingFlags)flags)
+                .Select(f => new FieldInfoImpl(f))
+                .ToArray();
         }
 
         public override Type GetGenericTypeDefinition()
@@ -201,12 +204,16 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
 
         public override MemberInfo[] GetMember(string name, BindingFlags bindingAttr)
         {
-            return Type.GetMember(name, (System.Reflection.BindingFlags)bindingAttr).Select(GetMember).ToArray();
+            return Type.GetMember(name, (System.Reflection.BindingFlags)bindingAttr)
+                .Select(GetMember)
+                .ToArray();
         }
 
         public override MemberInfo[] GetMembers(BindingFlags bindingAttr)
         {
-            return Type.GetMembers((System.Reflection.BindingFlags)bindingAttr).Select(GetMember).ToArray();
+            return Type.GetMembers((System.Reflection.BindingFlags)bindingAttr)
+                .Select(GetMember)
+                .ToArray();
         }
 
         private static MemberInfo GetMember(System.Reflection.MemberInfo member)
@@ -232,7 +239,10 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
 
         public override MethodInfo[] GetMethods(BindingFlags flags)
         {
-            return this.Type.GetMethods((System.Reflection.BindingFlags)flags).Select(m => new MethodInfoImpl(m)).ToArray();
+            return this
+                .Type.GetMethods((System.Reflection.BindingFlags)flags)
+                .Select(m => new MethodInfoImpl(m))
+                .ToArray();
         }
 
         public override Type GetNestedType(string name, BindingFlags bindingAttr)
@@ -250,7 +260,16 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             throw new NotImplementedException();
         }
 
-        public override object InvokeMember(string name, BindingFlags invokeAttr, Binder binder, object target, object[] args, ParameterModifier[] modifiers, CultureInfo culture, string[] namedParameters)
+        public override object InvokeMember(
+            string name,
+            BindingFlags invokeAttr,
+            Binder binder,
+            object target,
+            object[] args,
+            ParameterModifier[] modifiers,
+            CultureInfo culture,
+            string[] namedParameters
+        )
         {
             throw new NotImplementedException();
         }
@@ -300,17 +319,27 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             // be an explicit interface implementation, but will not have a dot.  Therefore, this is
             // good enough for our mock implementation.
             var infos = interfaceMaps.SelectMany(map =>
-                map.InterfaceMethods.Zip(map.TargetMethods, (interfaceMethod, implementingMethod) =>
-                    implementingMethod.Name.Contains(".")
-                        ? MakeExplicitInterfaceInfo(interfaceMethod, implementingMethod)
-                        : null));
+                map.InterfaceMethods.Zip(
+                    map.TargetMethods,
+                    (interfaceMethod, implementingMethod) =>
+                        implementingMethod.Name.Contains(".")
+                            ? MakeExplicitInterfaceInfo(interfaceMethod, implementingMethod)
+                            : null
+                )
+            );
             return infos.Where(i => i != null).ToArray();
         }
 
-        private static ExplicitInterfaceInfo MakeExplicitInterfaceInfo(System.Reflection.MethodInfo interfaceMethod, System.Reflection.MethodInfo implementingMethod)
+        private static ExplicitInterfaceInfo MakeExplicitInterfaceInfo(
+            System.Reflection.MethodInfo interfaceMethod,
+            System.Reflection.MethodInfo implementingMethod
+        )
         {
-            return (ExplicitInterfaceInfo)typeof(ExplicitInterfaceInfo).Instantiate(
-                new MethodInfoImpl(interfaceMethod), new MethodInfoImpl(implementingMethod));
+            return (ExplicitInterfaceInfo)
+                typeof(ExplicitInterfaceInfo).Instantiate(
+                    new MethodInfoImpl(interfaceMethod),
+                    new MethodInfoImpl(implementingMethod)
+                );
         }
 
         public override bool IsInstanceOfType(object o)
@@ -340,7 +369,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
 
         public override Type MakeGenericType(params Type[] argTypes)
         {
-            return (TypeImpl)this.Type.MakeGenericType(argTypes.Select(t => ((TypeImpl)t).Type).ToArray());
+            return (TypeImpl)
+                this.Type.MakeGenericType(argTypes.Select(t => ((TypeImpl)t).Type).ToArray());
         }
 
         public override Type MakePointerType()
@@ -375,23 +405,52 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             return this.Type.IsValueType;
         }
 
-        protected override ConstructorInfo GetConstructorImpl(BindingFlags bindingAttr, Binder binder, System.Reflection.CallingConventions callConvention, Type[] types, ParameterModifier[] modifiers)
+        protected override ConstructorInfo GetConstructorImpl(
+            BindingFlags bindingAttr,
+            Binder binder,
+            System.Reflection.CallingConventions callConvention,
+            Type[] types,
+            ParameterModifier[] modifiers
+        )
         {
             throw new NotImplementedException();
         }
 
-        protected override MethodInfo GetMethodImpl(string name, BindingFlags bindingAttr, Binder binder, System.Reflection.CallingConventions callConvention, Type[] types, ParameterModifier[] modifiers)
+        protected override MethodInfo GetMethodImpl(
+            string name,
+            BindingFlags bindingAttr,
+            Binder binder,
+            System.Reflection.CallingConventions callConvention,
+            Type[] types,
+            ParameterModifier[] modifiers
+        )
         {
             throw new NotImplementedException();
         }
 
-        protected override PropertyInfo GetPropertyImpl(string name, BindingFlags bindingAttr, Binder binder, Type returnType, Type[] types, ParameterModifier[] modifiers)
+        protected override PropertyInfo GetPropertyImpl(
+            string name,
+            BindingFlags bindingAttr,
+            Binder binder,
+            Type returnType,
+            Type[] types,
+            ParameterModifier[] modifiers
+        )
         {
             Debug.Assert(binder == null, "NYI");
             Debug.Assert(returnType == null, "NYI");
             Debug.Assert(types == null, "NYI");
             Debug.Assert(modifiers == null, "NYI");
-            return new PropertyInfoImpl(Type.GetProperty(name, (System.Reflection.BindingFlags)bindingAttr, binder: null, returnType: null, types: new System.Type[0], modifiers: new System.Reflection.ParameterModifier[0]));
+            return new PropertyInfoImpl(
+                Type.GetProperty(
+                    name,
+                    (System.Reflection.BindingFlags)bindingAttr,
+                    binder: null,
+                    returnType: null,
+                    types: new System.Type[0],
+                    modifiers: new System.Reflection.ParameterModifier[0]
+                )
+            );
         }
 
         protected override TypeCode GetTypeCodeImpl()

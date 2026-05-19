@@ -61,9 +61,9 @@ namespace Microsoft.Extensions.Configuration.Binder.SourceGeneration
         public INamedTypeSymbol? SerializationInfo { get; }
         public INamedTypeSymbol? IntPtr { get; }
         public INamedTypeSymbol? UIntPtr { get; }
-        public INamedTypeSymbol? MemberInfo  { get; }
+        public INamedTypeSymbol? MemberInfo { get; }
         public INamedTypeSymbol? ParameterInfo { get; }
-        public INamedTypeSymbol? Delegate   { get; }
+        public INamedTypeSymbol? Delegate { get; }
 
         public KnownTypeSymbols(CSharpCompilation compilation)
         {
@@ -84,17 +84,37 @@ namespace Microsoft.Extensions.Configuration.Binder.SourceGeneration
             Version = compilation.GetBestTypeByMetadataName(typeof(Version));
 
             // Used to verify input configuation binding API calls.
-            INamedTypeSymbol? binderOptions = compilation.GetBestTypeByMetadataName("Microsoft.Extensions.Configuration.BinderOptions");
-            ActionOfBinderOptions = binderOptions is null ? null : compilation.GetBestTypeByMetadataName(typeof(Action<>))?.Construct(binderOptions);
-            ConfigurationBinder = compilation.GetBestTypeByMetadataName("Microsoft.Extensions.Configuration.ConfigurationBinder");
-            ConfigurationKeyNameAttribute = compilation.GetBestTypeByMetadataName("Microsoft.Extensions.Configuration.ConfigurationKeyNameAttribute");
-            IConfiguration = compilation.GetBestTypeByMetadataName("Microsoft.Extensions.Configuration.IConfiguration");
-            IConfigurationSection = compilation.GetBestTypeByMetadataName("Microsoft.Extensions.Configuration.IConfigurationSection");
-            IServiceCollection = compilation.GetBestTypeByMetadataName("Microsoft.Extensions.DependencyInjection.IServiceCollection");
-            OptionsBuilderConfigurationExtensions = compilation.GetBestTypeByMetadataName("Microsoft.Extensions.DependencyInjection.OptionsBuilderConfigurationExtensions");
-            OptionsBuilderOfT = compilation.GetBestTypeByMetadataName("Microsoft.Extensions.Options.OptionsBuilder`1");
+            INamedTypeSymbol? binderOptions = compilation.GetBestTypeByMetadataName(
+                "Microsoft.Extensions.Configuration.BinderOptions"
+            );
+            ActionOfBinderOptions = binderOptions is null
+                ? null
+                : compilation.GetBestTypeByMetadataName(typeof(Action<>))?.Construct(binderOptions);
+            ConfigurationBinder = compilation.GetBestTypeByMetadataName(
+                "Microsoft.Extensions.Configuration.ConfigurationBinder"
+            );
+            ConfigurationKeyNameAttribute = compilation.GetBestTypeByMetadataName(
+                "Microsoft.Extensions.Configuration.ConfigurationKeyNameAttribute"
+            );
+            IConfiguration = compilation.GetBestTypeByMetadataName(
+                "Microsoft.Extensions.Configuration.IConfiguration"
+            );
+            IConfigurationSection = compilation.GetBestTypeByMetadataName(
+                "Microsoft.Extensions.Configuration.IConfigurationSection"
+            );
+            IServiceCollection = compilation.GetBestTypeByMetadataName(
+                "Microsoft.Extensions.DependencyInjection.IServiceCollection"
+            );
+            OptionsBuilderConfigurationExtensions = compilation.GetBestTypeByMetadataName(
+                "Microsoft.Extensions.DependencyInjection.OptionsBuilderConfigurationExtensions"
+            );
+            OptionsBuilderOfT = compilation.GetBestTypeByMetadataName(
+                "Microsoft.Extensions.Options.OptionsBuilder`1"
+            );
             OptionsBuilderOfT_Unbound = OptionsBuilderOfT?.ConstructUnboundGenericType();
-            OptionsConfigurationServiceCollectionExtensions = compilation.GetBestTypeByMetadataName("Microsoft.Extensions.DependencyInjection.OptionsConfigurationServiceCollectionExtensions");
+            OptionsConfigurationServiceCollectionExtensions = compilation.GetBestTypeByMetadataName(
+                "Microsoft.Extensions.DependencyInjection.OptionsConfigurationServiceCollectionExtensions"
+            );
 
             // Used to test what kind of collection a type is.
             IEnumerable = compilation.GetSpecialType(SpecialType.System_Collections_IEnumerable);
@@ -103,7 +123,9 @@ namespace Microsoft.Extensions.Configuration.Binder.SourceGeneration
             // Used to construct concrete type symbols for generic types, given their type parameters.
             // These concrete types are used to generating instantiation and casting logic in the emitted binding code.
             Dictionary = compilation.GetBestTypeByMetadataName(typeof(Dictionary<,>));
-            GenericICollection = compilation.GetSpecialType(SpecialType.System_Collections_Generic_ICollection_T);
+            GenericICollection = compilation.GetSpecialType(
+                SpecialType.System_Collections_Generic_ICollection_T
+            );
             GenericIDictionary = compilation.GetBestTypeByMetadataName(typeof(IDictionary<,>));
             HashSet = compilation.GetBestTypeByMetadataName(typeof(HashSet<>));
             List = compilation.GetBestTypeByMetadataName(typeof(List<>));
@@ -114,21 +136,41 @@ namespace Microsoft.Extensions.Configuration.Binder.SourceGeneration
             // generics to equal those corresponding to generic types in the input type graphs.
             GenericICollection_Unbound = GenericICollection.ConstructUnboundGenericType();
             GenericIDictionary_Unbound = GenericIDictionary?.ConstructUnboundGenericType();
-            GenericIEnumerable_Unbound = compilation.GetSpecialType(SpecialType.System_Collections_Generic_IEnumerable_T).ConstructUnboundGenericType();
-            GenericIList_Unbound = compilation.GetSpecialType(SpecialType.System_Collections_Generic_IList_T).ConstructUnboundGenericType();
-            IReadOnlyDictionary_Unbound = compilation.GetBestTypeByMetadataName(typeof(IReadOnlyDictionary<,>))?.ConstructUnboundGenericType();
-            IReadOnlyCollection_Unbound = compilation.GetBestTypeByMetadataName(typeof(IReadOnlyCollection<>))?.ConstructUnboundGenericType();
-            IReadOnlyList_Unbound = compilation.GetBestTypeByMetadataName(typeof(IReadOnlyList<>))?.ConstructUnboundGenericType();
-            IReadOnlySet_Unbound = compilation.GetBestTypeByMetadataName("System.Collections.Generic.IReadOnlySet`1")?.ConstructUnboundGenericType();
+            GenericIEnumerable_Unbound = compilation
+                .GetSpecialType(SpecialType.System_Collections_Generic_IEnumerable_T)
+                .ConstructUnboundGenericType();
+            GenericIList_Unbound = compilation
+                .GetSpecialType(SpecialType.System_Collections_Generic_IList_T)
+                .ConstructUnboundGenericType();
+            IReadOnlyDictionary_Unbound = compilation
+                .GetBestTypeByMetadataName(typeof(IReadOnlyDictionary<,>))
+                ?.ConstructUnboundGenericType();
+            IReadOnlyCollection_Unbound = compilation
+                .GetBestTypeByMetadataName(typeof(IReadOnlyCollection<>))
+                ?.ConstructUnboundGenericType();
+            IReadOnlyList_Unbound = compilation
+                .GetBestTypeByMetadataName(typeof(IReadOnlyList<>))
+                ?.ConstructUnboundGenericType();
+            IReadOnlySet_Unbound = compilation
+                .GetBestTypeByMetadataName("System.Collections.Generic.IReadOnlySet`1")
+                ?.ConstructUnboundGenericType();
             ISet_Unbound = ISet?.ConstructUnboundGenericType();
 
             // needed to be able to know if a member exist inside the compilation unit
             Enum = compilation.GetSpecialType(SpecialType.System_Enum);
-            ArgumentNullException = compilation.GetBestTypeByMetadataName(typeof(ArgumentNullException));
+            ArgumentNullException = compilation.GetBestTypeByMetadataName(
+                typeof(ArgumentNullException)
+            );
 
-            SerializationInfo = compilation.GetBestTypeByMetadataName(typeof(System.Runtime.Serialization.SerializationInfo));
-            MemberInfo = compilation.GetBestTypeByMetadataName(typeof(System.Reflection.MemberInfo));
-            ParameterInfo = compilation.GetBestTypeByMetadataName(typeof(System.Reflection.ParameterInfo));
+            SerializationInfo = compilation.GetBestTypeByMetadataName(
+                typeof(System.Runtime.Serialization.SerializationInfo)
+            );
+            MemberInfo = compilation.GetBestTypeByMetadataName(
+                typeof(System.Reflection.MemberInfo)
+            );
+            ParameterInfo = compilation.GetBestTypeByMetadataName(
+                typeof(System.Reflection.ParameterInfo)
+            );
             IntPtr = Compilation.GetSpecialType(SpecialType.System_IntPtr);
             UIntPtr = Compilation.GetSpecialType(SpecialType.System_UIntPtr);
             Delegate = Compilation.GetSpecialType(SpecialType.System_Delegate);

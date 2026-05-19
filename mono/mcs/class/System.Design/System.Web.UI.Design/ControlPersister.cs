@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -33,58 +33,64 @@ using System.IO;
 
 namespace System.Web.UI.Design
 {
-	public sealed class ControlPersister
-	{
-		private ControlPersister ()
-		{
-		}
+    public sealed class ControlPersister
+    {
+        private ControlPersister() { }
 
-		[MonoTODO]
-		public static string PersistControl (Control control)
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoTODO]
+        public static string PersistControl(Control control)
+        {
+            throw new NotImplementedException();
+        }
 
-		[MonoTODO]
-		public static void PersistControl (TextWriter sw, Control control)
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoTODO]
+        public static void PersistControl(TextWriter sw, Control control)
+        {
+            throw new NotImplementedException();
+        }
 
-		[MonoTODO]
-		public static string PersistControl (Control control, IDesignerHost host)
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoTODO]
+        public static string PersistControl(Control control, IDesignerHost host)
+        {
+            throw new NotImplementedException();
+        }
 
-		[MonoTODO]
-		public static void PersistControl (TextWriter sw, Control control, IDesignerHost host)
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoTODO]
+        public static void PersistControl(TextWriter sw, Control control, IDesignerHost host)
+        {
+            throw new NotImplementedException();
+        }
 
-		[MonoTODO]
-		public static string PersistInnerProperties (object component, IDesignerHost host)
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoTODO]
+        public static string PersistInnerProperties(object component, IDesignerHost host)
+        {
+            throw new NotImplementedException();
+        }
 
-		[MonoTODO]
-		public static void PersistInnerProperties (TextWriter sw, object component, IDesignerHost host)
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoTODO]
+        public static void PersistInnerProperties(
+            TextWriter sw,
+            object component,
+            IDesignerHost host
+        )
+        {
+            throw new NotImplementedException();
+        }
 
-		[MonoNotSupported ("")]
-		public static string PersistTemplate (ITemplate template, IDesignerHost host)
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoNotSupported("")]
+        public static string PersistTemplate(ITemplate template, IDesignerHost host)
+        {
+            throw new NotImplementedException();
+        }
 
-		[MonoNotSupported ("")]
-		public static void PersistTemplate (TextWriter writer, ITemplate template, IDesignerHost host)
-		{
-			throw new NotImplementedException ();
-		}
-	}
+        [MonoNotSupported("")]
+        public static void PersistTemplate(
+            TextWriter writer,
+            ITemplate template,
+            IDesignerHost host
+        )
+        {
+            throw new NotImplementedException();
+        }
+    }
 }

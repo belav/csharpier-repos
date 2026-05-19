@@ -17,11 +17,14 @@ namespace System.Web.Razor.Test.Parser.CSharp
         [InlineData("class")]
         public void ReservedWords(string word)
         {
-            ParseBlockTest(word,
-                           new DirectiveBlock(
-                               Factory.MetaCode(word).Accepts(AcceptedCharacters.None)
-                               ),
-                           new RazorError(String.Format(RazorResources.ParseError_ReservedWord, word), SourceLocation.Zero));
+            ParseBlockTest(
+                word,
+                new DirectiveBlock(Factory.MetaCode(word).Accepts(AcceptedCharacters.None)),
+                new RazorError(
+                    String.Format(RazorResources.ParseError_ReservedWord, word),
+                    SourceLocation.Zero
+                )
+            );
         }
 
         [Theory]
@@ -33,12 +36,15 @@ namespace System.Web.Razor.Test.Parser.CSharp
         [InlineData("NameSpace")]
         private void ReservedWordsAreCaseSensitive(string word)
         {
-            ParseBlockTest(word,
-                           new ExpressionBlock(
-                               Factory.Code(word)
-                                   .AsImplicitExpression(CSharpCodeParser.DefaultKeywords)
-                                   .Accepts(AcceptedCharacters.NonWhiteSpace)
-                               ));
+            ParseBlockTest(
+                word,
+                new ExpressionBlock(
+                    Factory
+                        .Code(word)
+                        .AsImplicitExpression(CSharpCodeParser.DefaultKeywords)
+                        .Accepts(AcceptedCharacters.NonWhiteSpace)
+                )
+            );
         }
     }
 }

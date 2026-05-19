@@ -15,10 +15,18 @@ namespace System.Activities
         Exception terminationException;
         IDictionary<string, object> outputs;
 
-        internal WorkflowApplicationCompletedEventArgs(WorkflowApplication application, Exception terminationException, ActivityInstanceState completionState, IDictionary<string, object> outputs)
+        internal WorkflowApplicationCompletedEventArgs(
+            WorkflowApplication application,
+            Exception terminationException,
+            ActivityInstanceState completionState,
+            IDictionary<string, object> outputs
+        )
             : base(application)
         {
-            Fx.Assert(ActivityUtilities.IsCompletedState(completionState), "event should only fire for completed activities");
+            Fx.Assert(
+                ActivityUtilities.IsCompletedState(completionState),
+                "event should only fire for completed activities"
+            );
             this.terminationException = terminationException;
             this.completionState = completionState;
             this.outputs = outputs;
@@ -26,17 +34,14 @@ namespace System.Activities
 
         public ActivityInstanceState CompletionState
         {
-            get
-            {
-                return this.completionState;
-            }
+            get { return this.completionState; }
         }
 
         public IDictionary<string, object> Outputs
         {
             get
             {
-                if (this.outputs == null)               
+                if (this.outputs == null)
                 {
                     this.outputs = ActivityUtilities.EmptyParameters;
                 }
@@ -46,10 +51,7 @@ namespace System.Activities
 
         public Exception TerminationException
         {
-            get
-            {
-                return this.terminationException;
-            }
+            get { return this.terminationException; }
         }
     }
 }

@@ -10,21 +10,24 @@ namespace System.Management.Tests
     {
         private static readonly bool s_isElevated = AdminHelpers.IsProcessElevated();
         private static readonly bool s_isWmiSupported =
-                                            PlatformDetection.IsWindows &&
-                                            PlatformDetection.IsNotArmProcess &&
-                                            PlatformDetection.IsNotWindowsNanoServer &&
-                                            PlatformDetection.IsNotWindowsIoTCore &&
-                                            !PlatformDetection.IsInAppContainer;
-        private static readonly string s_systemDriveId = Path.GetPathRoot(Environment.GetEnvironmentVariable("SystemDrive"));
+            PlatformDetection.IsWindows
+            && PlatformDetection.IsNotArmProcess
+            && PlatformDetection.IsNotWindowsNanoServer
+            && PlatformDetection.IsNotWindowsIoTCore
+            && !PlatformDetection.IsInAppContainer;
+        private static readonly string s_systemDriveId = Path.GetPathRoot(
+            Environment.GetEnvironmentVariable("SystemDrive")
+        );
 
         // Use the environment variable below to do manual runs against remote boxes: just ensure that the credentials running the tests have
         // rights to query the box (use wbemtest tool to validate).
-        private static readonly string s_targetMachine = Environment.GetEnvironmentVariable("WmiTestTargetMachine") ?? Environment.MachineName;
+        private static readonly string s_targetMachine =
+            Environment.GetEnvironmentVariable("WmiTestTargetMachine") ?? Environment.MachineName;
         private static readonly object[][] s_scopeRoots = new[]
         {
-            new [] { $@"\\{s_targetMachine}\" },
-            new [] { @"\\.\" },
-            new [] { string.Empty }
+            new[] { $@"\\{s_targetMachine}\" },
+            new[] { @"\\.\" },
+            new[] { string.Empty },
         };
 
         public static string Namespace => "root/WmiEBvt";

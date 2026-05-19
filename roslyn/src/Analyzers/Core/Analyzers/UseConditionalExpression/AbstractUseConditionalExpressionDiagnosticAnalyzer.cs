@@ -15,28 +15,38 @@ namespace Microsoft.CodeAnalysis.UseConditionalExpression
         : AbstractBuiltInCodeStyleDiagnosticAnalyzer
         where TIfStatementSyntax : SyntaxNode
     {
-        public sealed override DiagnosticAnalyzerCategory GetAnalyzerCategory()
-            => DiagnosticAnalyzerCategory.SemanticSpanAnalysis;
+        public sealed override DiagnosticAnalyzerCategory GetAnalyzerCategory() =>
+            DiagnosticAnalyzerCategory.SemanticSpanAnalysis;
 
         protected AbstractUseConditionalExpressionDiagnosticAnalyzer(
             string descriptorId,
             EnforceOnBuild enforceOnBuild,
             LocalizableResourceString message,
-            PerLanguageOption2<CodeStyleOption2<bool>> option)
-            : base(descriptorId,
-                   enforceOnBuild,
-                   option,
-                   new LocalizableResourceString(nameof(AnalyzersResources.Convert_to_conditional_expression), AnalyzersResources.ResourceManager, typeof(AnalyzersResources)),
-                   message)
-        {
-        }
+            PerLanguageOption2<CodeStyleOption2<bool>> option
+        )
+            : base(
+                descriptorId,
+                enforceOnBuild,
+                option,
+                new LocalizableResourceString(
+                    nameof(AnalyzersResources.Convert_to_conditional_expression),
+                    AnalyzersResources.ResourceManager,
+                    typeof(AnalyzersResources)
+                ),
+                message
+            ) { }
 
         protected abstract ISyntaxFacts GetSyntaxFacts();
-        protected abstract (bool matched, bool canSimplify) TryMatchPattern(IConditionalOperation ifOperation, ISymbol containingSymbol);
-        protected abstract CodeStyleOption2<bool> GetStylePreference(OperationAnalysisContext context);
+        protected abstract (bool matched, bool canSimplify) TryMatchPattern(
+            IConditionalOperation ifOperation,
+            ISymbol containingSymbol
+        );
+        protected abstract CodeStyleOption2<bool> GetStylePreference(
+            OperationAnalysisContext context
+        );
 
-        protected sealed override void InitializeWorker(AnalysisContext context)
-            => context.RegisterOperationAction(AnalyzeOperation, OperationKind.Conditional);
+        protected sealed override void InitializeWorker(AnalysisContext context) =>
+            context.RegisterOperationAction(AnalyzeOperation, OperationKind.Conditional);
 
         private void AnalyzeOperation(OperationAnalysisContext context)
         {
@@ -52,12 +62,17 @@ namespace Microsoft.CodeAnalysis.UseConditionalExpression
             if (!matched)
                 return;
 
-            context.ReportDiagnostic(DiagnosticHelper.Create(
-                Descriptor,
-                ifStatement.GetFirstToken().GetLocation(),
-                option.Notification,
-                additionalLocations: ImmutableArray.Create(ifStatement.GetLocation()),
-                properties: canSimplify ? UseConditionalExpressionHelpers.CanSimplifyProperties : null));
+            context.ReportDiagnostic(
+                DiagnosticHelper.Create(
+                    Descriptor,
+                    ifStatement.GetFirstToken().GetLocation(),
+                    option.Notification,
+                    additionalLocations: ImmutableArray.Create(ifStatement.GetLocation()),
+                    properties: canSimplify
+                        ? UseConditionalExpressionHelpers.CanSimplifyProperties
+                        : null
+                )
+            );
         }
     }
 }

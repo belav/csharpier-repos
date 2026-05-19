@@ -28,7 +28,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SolutionExplore
             {
                 if (!m_initialized)
                 {
-                    base.DisplayNameValue = SolutionExplorerShim.ResourceManager.GetString(m_key, CultureInfo.CurrentUICulture);
+                    base.DisplayNameValue = SolutionExplorerShim.ResourceManager.GetString(
+                        m_key,
+                        CultureInfo.CurrentUICulture
+                    );
                     m_initialized = true;
                 }
 

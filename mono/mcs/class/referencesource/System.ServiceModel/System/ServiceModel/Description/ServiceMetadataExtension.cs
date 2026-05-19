@@ -25,7 +25,7 @@ namespace System.ServiceModel.Description
         const string BaseAddressPattern = "{%BaseAddress%}";
         static readonly Uri EmptyUri = new Uri(String.Empty, UriKind.Relative);
 
-        static readonly Type[] httpGetSupportedChannels = new Type[] { typeof(IReplyChannel), };
+        static readonly Type[] httpGetSupportedChannels = new Type[] { typeof(IReplyChannel) };
 
         ServiceMetadataBehavior.MetadataExtensionInitializer initializer;
         MetadataSet metadata;
@@ -52,11 +52,11 @@ namespace System.ServiceModel.Description
         Binding httpsGetBinding;
 
         public ServiceMetadataExtension()
-            : this(null)
-        {
-        }
+            : this(null) { }
 
-        internal ServiceMetadataExtension(ServiceMetadataBehavior.MetadataExtensionInitializer initializer)
+        internal ServiceMetadataExtension(
+            ServiceMetadataBehavior.MetadataExtensionInitializer initializer
+        )
         {
             this.initializer = initializer;
         }
@@ -192,7 +192,12 @@ namespace System.ServiceModel.Description
         // This dictionary should not be mutated after open
         internal IDictionary<string, int> UpdatePortsByScheme { get; set; }
 
-        internal static bool TryGetHttpHostAndPort(Uri listenUri, Message request, out string host, out int port)
+        internal static bool TryGetHttpHostAndPort(
+            Uri listenUri,
+            Message request,
+            out string host,
+            out int port
+        )
         {
             host = null;
             port = 0;
@@ -277,10 +282,16 @@ namespace System.ServiceModel.Description
         void IExtension<ServiceHostBase>.Attach(ServiceHostBase owner)
         {
             if (owner == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentNullException("owner"));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentNullException("owner")
+                );
 
             if (this.owner != null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.TheServiceMetadataExtensionInstanceCouldNot2_0)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(
+                        SR.GetString(SR.TheServiceMetadataExtensionInstanceCouldNot2_0)
+                    )
+                );
 
             owner.ThrowIfClosedOrOpened();
 
@@ -293,17 +304,27 @@ namespace System.ServiceModel.Description
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("owner");
 
             if (this.owner == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.TheServiceMetadataExtensionInstanceCouldNot3_0)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(
+                        SR.GetString(SR.TheServiceMetadataExtensionInstanceCouldNot3_0)
+                    )
+                );
 
             if (this.owner != owner)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument("owner", SR.GetString(SR.TheServiceMetadataExtensionInstanceCouldNot4_0));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                    "owner",
+                    SR.GetString(SR.TheServiceMetadataExtensionInstanceCouldNot4_0)
+                );
 
             this.owner.ThrowIfClosedOrOpened();
 
             this.owner = null;
         }
 
-        static internal ServiceMetadataExtension EnsureServiceMetadataExtension(ServiceDescription description, ServiceHostBase host)
+        internal static ServiceMetadataExtension EnsureServiceMetadataExtension(
+            ServiceDescription description,
+            ServiceHostBase host
+        )
         {
             ServiceMetadataExtension mex = host.Extensions.Find<ServiceMetadataExtension>();
             if (mex == null)
@@ -359,7 +380,16 @@ namespace System.ServiceModel.Description
                 }
                 else
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentException(SR.GetString(SR.SFxGetChannelDispatcherDoesNotSupportScheme, typeof(ChannelDispatcher).Name, Uri.UriSchemeHttp, Uri.UriSchemeHttps)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentException(
+                            SR.GetString(
+                                SR.SFxGetChannelDispatcherDoesNotSupportScheme,
+                                typeof(ChannelDispatcher).Name,
+                                Uri.UriSchemeHttp,
+                                Uri.UriSchemeHttps
+                            )
+                        )
+                    );
                 }
                 channelDispatcher = CreateGetDispatcher(listenUri, binding);
                 owner.ChannelDispatchers.Add(channelDispatcher);
@@ -375,9 +405,16 @@ namespace System.ServiceModel.Description
                 ChannelDispatcher channelDispatcher = channelDispatcherBase as ChannelDispatcher;
                 if (channelDispatcher != null && channelDispatcher.Listener.Uri == listenUri)
                 {
-                    if (channelDispatcher.Endpoints.Count == 1 &&
-                        channelDispatcher.Endpoints[0].DispatchRuntime.SingletonInstanceContext != null &&
-                        channelDispatcher.Endpoints[0].DispatchRuntime.SingletonInstanceContext.UserObject is HttpGetImpl)
+                    if (
+                        channelDispatcher.Endpoints.Count == 1
+                        && channelDispatcher.Endpoints[0].DispatchRuntime.SingletonInstanceContext
+                            != null
+                        && channelDispatcher
+                            .Endpoints[0]
+                            .DispatchRuntime
+                            .SingletonInstanceContext
+                            .UserObject is HttpGetImpl
+                    )
                     {
                         return channelDispatcher;
                     }
@@ -398,7 +435,16 @@ namespace System.ServiceModel.Description
             }
             else
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentException(SR.GetString(SR.SFxGetChannelDispatcherDoesNotSupportScheme, typeof(ChannelDispatcher).Name, Uri.UriSchemeHttp, Uri.UriSchemeHttps)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentException(
+                        SR.GetString(
+                            SR.SFxGetChannelDispatcherDoesNotSupportScheme,
+                            typeof(ChannelDispatcher).Name,
+                            Uri.UriSchemeHttp,
+                            Uri.UriSchemeHttps
+                        )
+                    )
+                );
             }
         }
 
@@ -408,28 +454,52 @@ namespace System.ServiceModel.Description
             Uri listenUriBaseAddress = listenUri;
             string listenUriRelativeAddress = string.Empty;
 
-            //Set up binding parameter collection 
+            //Set up binding parameter collection
             BindingParameterCollection parameters = owner.GetBindingParameters();
-            AspNetEnvironment.Current.AddMetadataBindingParameters(listenUriBaseAddress, owner.Description.Behaviors, parameters);
+            AspNetEnvironment.Current.AddMetadataBindingParameters(
+                listenUriBaseAddress,
+                owner.Description.Behaviors,
+                parameters
+            );
 
             // find listener for HTTP GET
             IChannelListener listener = null;
             if (binding.CanBuildChannelListener<IReplyChannel>(parameters))
             {
-                listener = binding.BuildChannelListener<IReplyChannel>(listenUriBaseAddress, listenUriRelativeAddress, parameters);
+                listener = binding.BuildChannelListener<IReplyChannel>(
+                    listenUriBaseAddress,
+                    listenUriRelativeAddress,
+                    parameters
+                );
             }
             else
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentException(SR.GetString(SR.SFxBindingNotSupportedForMetadataHttpGet)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentException(SR.GetString(SR.SFxBindingNotSupportedForMetadataHttpGet))
+                );
             }
 
             //create dispatchers
-            ChannelDispatcher channelDispatcher = new ChannelDispatcher(listener, HttpGetImpl.MetadataHttpGetBinding, binding);
+            ChannelDispatcher channelDispatcher = new ChannelDispatcher(
+                listener,
+                HttpGetImpl.MetadataHttpGetBinding,
+                binding
+            );
             channelDispatcher.MessageVersion = binding.MessageVersion;
-            EndpointDispatcher dispatcher = new EndpointDispatcher(address, HttpGetImpl.ContractName, HttpGetImpl.ContractNamespace, true);
+            EndpointDispatcher dispatcher = new EndpointDispatcher(
+                address,
+                HttpGetImpl.ContractName,
+                HttpGetImpl.ContractNamespace,
+                true
+            );
 
             //Add operation
-            DispatchOperation operationDispatcher = new DispatchOperation(dispatcher.DispatchRuntime, HttpGetImpl.GetMethodName, HttpGetImpl.RequestAction, HttpGetImpl.ReplyAction);
+            DispatchOperation operationDispatcher = new DispatchOperation(
+                dispatcher.DispatchRuntime,
+                HttpGetImpl.GetMethodName,
+                HttpGetImpl.RequestAction,
+                HttpGetImpl.ReplyAction
+            );
             operationDispatcher.Formatter = MessageOperationFormatter.Instance;
             MethodInfo methodInfo = typeof(IHttpGetMetadata).GetMethod(HttpGetImpl.GetMethodName);
             operationDispatcher.Invoker = new SyncMethodInvoker(methodInfo);
@@ -437,22 +507,32 @@ namespace System.ServiceModel.Description
 
             //wire up dispatchers
             HttpGetImpl impl = new HttpGetImpl(this, listener.Uri);
-            dispatcher.DispatchRuntime.SingletonInstanceContext = new InstanceContext(owner, impl, false);
+            dispatcher.DispatchRuntime.SingletonInstanceContext = new InstanceContext(
+                owner,
+                impl,
+                false
+            );
             dispatcher.DispatchRuntime.MessageInspectors.Add(impl);
             channelDispatcher.Endpoints.Add(dispatcher);
             dispatcher.ContractFilter = new MatchAllMessageFilter();
             dispatcher.FilterPriority = 0;
-            dispatcher.DispatchRuntime.InstanceContextProvider = InstanceContextProviderBase.GetProviderForMode(InstanceContextMode.Single, dispatcher.DispatchRuntime);
+            dispatcher.DispatchRuntime.InstanceContextProvider =
+                InstanceContextProviderBase.GetProviderForMode(
+                    InstanceContextMode.Single,
+                    dispatcher.DispatchRuntime
+                );
             channelDispatcher.ServiceThrottle = owner.ServiceThrottle;
 
             ServiceDebugBehavior sdb = owner.Description.Behaviors.Find<ServiceDebugBehavior>();
             if (sdb != null)
-                channelDispatcher.IncludeExceptionDetailInFaults |= sdb.IncludeExceptionDetailInFaults;
+                channelDispatcher.IncludeExceptionDetailInFaults |=
+                    sdb.IncludeExceptionDetailInFaults;
 
-            ServiceBehaviorAttribute sba = owner.Description.Behaviors.Find<ServiceBehaviorAttribute>();
+            ServiceBehaviorAttribute sba =
+                owner.Description.Behaviors.Find<ServiceBehaviorAttribute>();
             if (sba != null)
-                channelDispatcher.IncludeExceptionDetailInFaults |= sba.IncludeExceptionDetailInFaults;
-
+                channelDispatcher.IncludeExceptionDetailInFaults |=
+                    sba.IncludeExceptionDetailInFaults;
 
             return channelDispatcher;
         }
@@ -480,7 +560,11 @@ namespace System.ServiceModel.Description
             return result;
         }
 
-        DynamicAddressUpdateWriter GetDynamicAddressWriter(Message request, Uri listenUri, bool removeBaseAddress)
+        DynamicAddressUpdateWriter GetDynamicAddressWriter(
+            Message request,
+            Uri listenUri,
+            bool removeBaseAddress
+        )
         {
             string requestHost;
             int requestPort;
@@ -497,14 +581,21 @@ namespace System.ServiceModel.Description
             // Perf optimization: don't do dynamic update if it would be a no-op.
             // Ordinal string comparison is okay; it just means we don't get the perf optimization
             // if the listen host and request host are case-insensitively equal.
-            if (requestHost == listenUri.Host &&
-                requestPort == listenUri.Port &&
-                (UpdatePortsByScheme == null || UpdatePortsByScheme.Count == 0))
+            if (
+                requestHost == listenUri.Host
+                && requestPort == listenUri.Port
+                && (UpdatePortsByScheme == null || UpdatePortsByScheme.Count == 0)
+            )
             {
                 return null;
             }
             return new DynamicAddressUpdateWriter(
-                listenUri, requestHost, requestPort, this.UpdatePortsByScheme, removeBaseAddress);
+                listenUri,
+                requestHost,
+                requestPort,
+                this.UpdatePortsByScheme,
+                removeBaseAddress
+            );
         }
 
         internal class MetadataBindingParameter { }
@@ -525,17 +616,28 @@ namespace System.ServiceModel.Description
 
             bool isListeningOnHttps;
 
-            internal WSMexImpl(ServiceMetadataExtension parent, bool isListeningOnHttps, Uri listenUri)
+            internal WSMexImpl(
+                ServiceMetadataExtension parent,
+                bool isListeningOnHttps,
+                Uri listenUri
+            )
             {
                 this.parent = parent;
                 this.isListeningOnHttps = isListeningOnHttps;
                 this.listenUri = listenUri;
 
-                if (this.parent.ExternalMetadataLocation != null && this.parent.ExternalMetadataLocation != EmptyUri)
+                if (
+                    this.parent.ExternalMetadataLocation != null
+                    && this.parent.ExternalMetadataLocation != EmptyUri
+                )
                 {
                     this.metadataLocationSet = new MetadataSet();
                     string location = this.GetLocationToReturn();
-                    MetadataSection metadataLocationSection = new MetadataSection(MetadataSection.ServiceDescriptionDialect, null, new MetadataLocation(location));
+                    MetadataSection metadataLocationSection = new MetadataSection(
+                        MetadataSection.ServiceDescriptionDialect,
+                        null,
+                        new MetadataLocation(location)
+                    );
                     this.metadataLocationSet.MetadataSections.Add(metadataLocationSection);
                 }
             }
@@ -566,7 +668,13 @@ namespace System.ServiceModel.Description
                     }
                     else
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument("ExternalMetadataLocation", SR.GetString(SR.SFxBadMetadataLocationNoAppropriateBaseAddress, this.parent.ExternalMetadataLocation.OriginalString));
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                            "ExternalMetadataLocation",
+                            SR.GetString(
+                                SR.SFxBadMetadataLocationNoAppropriateBaseAddress,
+                                this.parent.ExternalMetadataLocation.OriginalString
+                            )
+                        );
                     }
                 }
 
@@ -584,11 +692,13 @@ namespace System.ServiceModel.Description
                     MetadataSet metadataSet = new MetadataSet();
                     foreach (MetadataSection document in parent.Metadata.MetadataSections)
                     {
-                        if ((dialect == null || dialect == document.Dialect) &&
-                            (identifier == null || identifier == document.Identifier))
+                        if (
+                            (dialect == null || dialect == document.Dialect)
+                            && (identifier == null || identifier == document.Identifier)
+                        )
                             metadataSet.MetadataSections.Add(document);
                     }
-                    
+
                     return metadataSet;
                 }
             }
@@ -598,7 +708,11 @@ namespace System.ServiceModel.Description
                 GetResponse response = new GetResponse();
                 response.Metadata = GatherMetadata(null, null);
 
-                response.Metadata.WriteFilter = parent.GetWriteFilter(request, this.listenUri, true);
+                response.Metadata.WriteFilter = parent.GetWriteFilter(
+                    request,
+                    this.listenUri,
+                    true
+                );
 
                 if (converter == null)
                     converter = TypedMessageConverter.Create(typeof(GetResponse), ReplyAction);
@@ -608,12 +722,16 @@ namespace System.ServiceModel.Description
 
             public IAsyncResult BeginGet(Message request, AsyncCallback callback, object state)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new NotImplementedException());
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new NotImplementedException()
+                );
             }
 
             public Message EndGet(IAsyncResult result)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new NotImplementedException());
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new NotImplementedException()
+                );
             }
         }
 
@@ -621,7 +739,10 @@ namespace System.ServiceModel.Description
         [ServiceContract]
         internal interface IHttpGetMetadata
         {
-            [OperationContract(Action = MessageHeaders.WildcardAction, ReplyAction = MessageHeaders.WildcardAction)]
+            [OperationContract(
+                Action = MessageHeaders.WildcardAction,
+                ReplyAction = MessageHeaders.WildcardAction
+            )]
             Message Get(Message msg);
         }
 
@@ -641,12 +762,12 @@ namespace System.ServiceModel.Description
 
             internal const string MetadataHttpGetBinding = "ServiceMetadataBehaviorHttpGetBinding";
             internal const string ContractName = "IHttpGetHelpPageAndMetadataContract";
-            internal const string ContractNamespace = "http://schemas.microsoft.com/2006/04/http/metadata";
+            internal const string ContractNamespace =
+                "http://schemas.microsoft.com/2006/04/http/metadata";
             internal const string GetMethodName = "Get";
             internal const string RequestAction = MessageHeaders.WildcardAction;
             internal const string ReplyAction = MessageHeaders.WildcardAction;
             internal const string HtmlBreak = "<BR/>";
-
 
             static string[] NoQueries = new string[0];
 
@@ -691,8 +812,10 @@ namespace System.ServiceModel.Description
 
             string FindWsdlReference(DynamicAddressUpdateWriter addressUpdater)
             {
-
-                if (this.parent.ExternalMetadataLocation == null || this.parent.ExternalMetadataLocation == EmptyUri)
+                if (
+                    this.parent.ExternalMetadataLocation == null
+                    || this.parent.ExternalMetadataLocation == EmptyUri
+                )
                 {
                     return null;
                 }
@@ -709,7 +832,11 @@ namespace System.ServiceModel.Description
                 }
             }
 
-            bool TryHandleDocumentationRequest(Message httpGetRequest, string[] queries, out Message replyMessage)
+            bool TryHandleDocumentationRequest(
+                Message httpGetRequest,
+                string[] queries,
+                out Message replyMessage
+            )
             {
                 replyMessage = null;
 
@@ -727,7 +854,11 @@ namespace System.ServiceModel.Description
                     DynamicAddressUpdateWriter addressUpdater = null;
                     if (parent.UpdateAddressDynamically)
                     {
-                        addressUpdater = parent.GetDynamicAddressWriter(httpGetRequest, this.listenUri, false);
+                        addressUpdater = parent.GetDynamicAddressWriter(
+                            httpGetRequest,
+                            this.listenUri,
+                            false
+                        );
                     }
 
                     wsdlUrl = FindWsdlReference(addressUpdater);
@@ -749,7 +880,14 @@ namespace System.ServiceModel.Description
                         linkMetadata = false;
                     }
 
-                    replyMessage = new MetadataOnHelpPageMessage(discoUrl, wsdlUrl, singleWsdlUrl, GetInitData().ServiceName, GetInitData().ClientName, linkMetadata);
+                    replyMessage = new MetadataOnHelpPageMessage(
+                        discoUrl,
+                        wsdlUrl,
+                        singleWsdlUrl,
+                        GetInitData().ServiceName,
+                        GetInitData().ClientName,
+                        linkMetadata
+                    );
                 }
                 else
                 {
@@ -783,7 +921,10 @@ namespace System.ServiceModel.Description
                 {
                     if (addressUpdater != null)
                     {
-                        addressUpdater.UpdateUri(ref result, this.listenUri.Scheme != result.Scheme /*updateBaseAddressOnly*/);
+                        addressUpdater.UpdateUri(
+                            ref result,
+                            this.listenUri.Scheme != result.Scheme /*updateBaseAddressOnly*/
+                        );
                     }
                     return result.ToString();
                 }
@@ -806,14 +947,22 @@ namespace System.ServiceModel.Description
                 return null;
             }
 
-            bool TryHandleMetadataRequest(Message httpGetRequest, string[] queries, out Message replyMessage)
+            bool TryHandleMetadataRequest(
+                Message httpGetRequest,
+                string[] queries,
+                out Message replyMessage
+            )
             {
                 replyMessage = null;
 
                 if (!this.GetWsdlEnabled)
                     return false;
 
-                WriteFilter writeFilter = parent.GetWriteFilter(httpGetRequest, this.listenUri, false);
+                WriteFilter writeFilter = parent.GetWriteFilter(
+                    httpGetRequest,
+                    this.listenUri,
+                    false
+                );
 
                 string query = FindQuery(queries);
 
@@ -826,7 +975,9 @@ namespace System.ServiceModel.Description
                         using (httpGetRequest)
                         {
                             replyMessage = new ServiceDescriptionMessage(
-                                GetInitData().DefaultWsdl, writeFilter);
+                                GetInitData().DefaultWsdl,
+                                writeFilter
+                            );
                             AddHttpProperty(replyMessage, HttpStatusCode.OK, XmlContentType);
 
                             GetInitData().FixImportAddresses();
@@ -845,29 +996,46 @@ namespace System.ServiceModel.Description
                         if (doc is WsdlNS.ServiceDescription)
                         {
                             replyMessage = new ServiceDescriptionMessage(
-                                (WsdlNS.ServiceDescription)doc, writeFilter);
+                                (WsdlNS.ServiceDescription)doc,
+                                writeFilter
+                            );
                         }
                         else if (doc is XmlSchema)
                         {
-                            replyMessage = new XmlSchemaMessage(
-                                ((XmlSchema)doc), writeFilter);
+                            replyMessage = new XmlSchemaMessage(((XmlSchema)doc), writeFilter);
                         }
                         else if (doc is string)
                         {
                             if (((string)doc) == DiscoToken)
                             {
-                                replyMessage = CreateDiscoMessage(writeFilter as DynamicAddressUpdateWriter);
+                                replyMessage = CreateDiscoMessage(
+                                    writeFilter as DynamicAddressUpdateWriter
+                                );
                             }
                             else
                             {
                                 Fx.Assert("Bad object in HttpGetImpl docFromQuery table");
-                                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(String.Format(CultureInfo.InvariantCulture, "Bad object in HttpGetImpl docFromQuery table")));
+                                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                                    new InvalidOperationException(
+                                        String.Format(
+                                            CultureInfo.InvariantCulture,
+                                            "Bad object in HttpGetImpl docFromQuery table"
+                                        )
+                                    )
+                                );
                             }
                         }
                         else
                         {
                             Fx.Assert("Bad object in HttpGetImpl docFromQuery table");
-                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(String.Format(CultureInfo.InvariantCulture, "Bad object in HttpGetImpl docFromQuery table")));
+                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                                new InvalidOperationException(
+                                    String.Format(
+                                        CultureInfo.InvariantCulture,
+                                        "Bad object in HttpGetImpl docFromQuery table"
+                                    )
+                                )
+                            );
                         }
 
                         AddHttpProperty(replyMessage, HttpStatusCode.OK, XmlContentType);
@@ -886,7 +1054,9 @@ namespace System.ServiceModel.Description
                         using (httpGetRequest)
                         {
                             replyMessage = new ServiceDescriptionMessage(
-                                GetInitData().DefaultWsdl, writeFilter);
+                                GetInitData().DefaultWsdl,
+                                writeFilter
+                            );
                             AddHttpProperty(replyMessage, HttpStatusCode.OK, XmlContentType);
 
                             GetInitData().FixImportAddresses();
@@ -896,7 +1066,9 @@ namespace System.ServiceModel.Description
                     }
 
                     // or redirect to an external WSDL
-                    string wsdlReference = FindWsdlReference(writeFilter as DynamicAddressUpdateWriter);
+                    string wsdlReference = FindWsdlReference(
+                        writeFilter as DynamicAddressUpdateWriter
+                    );
                     if (wsdlReference != null)
                     {
                         replyMessage = CreateRedirectMessage(wsdlReference);
@@ -905,15 +1077,17 @@ namespace System.ServiceModel.Description
                 }
 
                 // ?singleWSDL
-                if (String.Compare(query, SingleWsdlQueryString, StringComparison.OrdinalIgnoreCase) == 0)
+                if (
+                    String.Compare(query, SingleWsdlQueryString, StringComparison.OrdinalIgnoreCase)
+                    == 0
+                )
                 {
                     WsdlNS.ServiceDescription singleWSDL = parent.SingleWsdl;
                     if (singleWSDL != null)
                     {
                         using (httpGetRequest)
                         {
-                            replyMessage = new ServiceDescriptionMessage(
-                                singleWSDL, writeFilter);
+                            replyMessage = new ServiceDescriptionMessage(singleWSDL, writeFilter);
                             AddHttpProperty(replyMessage, HttpStatusCode.OK, XmlContentType);
                             return true;
                         }
@@ -962,13 +1136,52 @@ namespace System.ServiceModel.Description
                 foreach (string q in queries)
                 {
                     int start = (q.Length > 0 && q[0] == '?') ? 1 : 0;
-                    if (String.Compare(q, start, WsdlQueryString, 0, WsdlQueryString.Length, StringComparison.OrdinalIgnoreCase) == 0)
+                    if (
+                        String.Compare(
+                            q,
+                            start,
+                            WsdlQueryString,
+                            0,
+                            WsdlQueryString.Length,
+                            StringComparison.OrdinalIgnoreCase
+                        ) == 0
+                    )
                         query = q;
-                    else if (String.Compare(q, start, XsdQueryString, 0, XsdQueryString.Length, StringComparison.OrdinalIgnoreCase) == 0)
+                    else if (
+                        String.Compare(
+                            q,
+                            start,
+                            XsdQueryString,
+                            0,
+                            XsdQueryString.Length,
+                            StringComparison.OrdinalIgnoreCase
+                        ) == 0
+                    )
                         query = q;
-                    else if (String.Compare(q, start, SingleWsdlQueryString, 0, SingleWsdlQueryString.Length, StringComparison.OrdinalIgnoreCase) == 0)
+                    else if (
+                        String.Compare(
+                            q,
+                            start,
+                            SingleWsdlQueryString,
+                            0,
+                            SingleWsdlQueryString.Length,
+                            StringComparison.OrdinalIgnoreCase
+                        ) == 0
+                    )
                         query = q;
-                    else if (parent.HelpPageEnabled && (String.Compare(q, start, DiscoQueryString, 0, DiscoQueryString.Length, StringComparison.OrdinalIgnoreCase) == 0))
+                    else if (
+                        parent.HelpPageEnabled
+                        && (
+                            String.Compare(
+                                q,
+                                start,
+                                DiscoQueryString,
+                                0,
+                                DiscoQueryString.Length,
+                                StringComparison.OrdinalIgnoreCase
+                            ) == 0
+                        )
+                    )
                         query = q;
                 }
                 return query;
@@ -993,11 +1206,14 @@ namespace System.ServiceModel.Description
                 if (TryHandleDocumentationRequest(httpGetRequest, queries, out replyMessage))
                     return replyMessage;
 
-
                 return CreateHttpResponseMessage(HttpStatusCode.MethodNotAllowed);
             }
 
-            public object AfterReceiveRequest(ref Message request, IClientChannel channel, InstanceContext instanceContext)
+            public object AfterReceiveRequest(
+                ref Message request,
+                IClientChannel channel,
+                InstanceContext instanceContext
+            )
             {
                 return request.Version;
             }
@@ -1009,7 +1225,10 @@ namespace System.ServiceModel.Description
                     string error = SR.GetString(SR.SFxInternalServerError);
                     ExceptionDetail exceptionDetail = null;
 
-                    MessageFault fault = MessageFault.CreateFault(reply, /* maxBufferSize */ 64 * 1024);
+                    MessageFault fault = MessageFault.CreateFault(
+                        reply, /* maxBufferSize */
+                        64 * 1024
+                    );
                     if (fault.HasDetail)
                     {
                         exceptionDetail = fault.GetDetail<ExceptionDetail>();
@@ -1045,7 +1264,8 @@ namespace System.ServiceModel.Description
                     Dictionary<string, object> docFromQuery,
                     Dictionary<object, string> queryFromDoc,
                     WsdlNS.ServiceDescriptionCollection wsdls,
-                    XmlSchemaSet xsds)
+                    XmlSchemaSet xsds
+                )
                 {
                     this.docFromQuery = docFromQuery;
                     this.queryFromDoc = queryFromDoc;
@@ -1060,7 +1280,9 @@ namespace System.ServiceModel.Description
 
                 public static InitializationData InitializeFrom(ServiceMetadataExtension extension)
                 {
-                    Dictionary<string, object> docFromQueryInit = new Dictionary<string, object>(StringComparer.OrdinalIgnoreCase);
+                    Dictionary<string, object> docFromQueryInit = new Dictionary<string, object>(
+                        StringComparer.OrdinalIgnoreCase
+                    );
                     Dictionary<object, string> queryFromDocInit = new Dictionary<object, string>();
 
                     // this collection type provides useful lookup features
@@ -1079,7 +1301,11 @@ namespace System.ServiceModel.Description
                         {
                             string query = WsdlQueryString;
                             if (wsdlDoc != defaultWsdl) // don't count the WSDL at ?WSDL
-                                query += "=wsdl" + (i++).ToString(System.Globalization.CultureInfo.InvariantCulture);
+                                query +=
+                                    "=wsdl"
+                                    + (i++).ToString(
+                                        System.Globalization.CultureInfo.InvariantCulture
+                                    );
 
                             docFromQueryInit.Add(query, wsdlDoc);
                             queryFromDocInit.Add(wsdlDoc, query);
@@ -1091,7 +1317,10 @@ namespace System.ServiceModel.Description
                         int i = 0;
                         foreach (XmlSchema xsdDoc in xsds.Schemas())
                         {
-                            string query = XsdQueryString + "=xsd" + (i++).ToString(System.Globalization.CultureInfo.InvariantCulture);
+                            string query =
+                                XsdQueryString
+                                + "=xsd"
+                                + (i++).ToString(System.Globalization.CultureInfo.InvariantCulture);
                             docFromQueryInit.Add(query, xsdDoc);
                             queryFromDocInit.Add(xsdDoc, query);
                         }
@@ -1105,18 +1334,26 @@ namespace System.ServiceModel.Description
                         queryFromDocInit.Add(DiscoToken, query);
                     }
 
-                    InitializationData data = new InitializationData(docFromQueryInit, queryFromDocInit, wsdls, xsds);
+                    InitializationData data = new InitializationData(
+                        docFromQueryInit,
+                        queryFromDocInit,
+                        wsdls,
+                        xsds
+                    );
 
                     data.DefaultWsdl = defaultWsdl;
                     data.ServiceName = GetAnyWsdlName(wsdls);
-                    data.ClientName = ClientClassGenerator.GetClientClassName(GetAnyContractName(wsdls) ?? "IHello");
+                    data.ClientName = ClientClassGenerator.GetClientClassName(
+                        GetAnyContractName(wsdls) ?? "IHello"
+                    );
 
                     return data;
                 }
 
                 static WsdlNS.ServiceDescriptionCollection CollectWsdls(MetadataSet metadata)
                 {
-                    WsdlNS.ServiceDescriptionCollection wsdls = new WsdlNS.ServiceDescriptionCollection();
+                    WsdlNS.ServiceDescriptionCollection wsdls =
+                        new WsdlNS.ServiceDescriptionCollection();
                     foreach (MetadataSection section in metadata.MetadataSections)
                     {
                         if (section.Metadata is WsdlNS.ServiceDescription)
@@ -1154,16 +1391,18 @@ namespace System.ServiceModel.Description
                     {
                         FixImportAddresses(xsdDoc);
                     }
-
                 }
 
                 void FixImportAddresses(WsdlNS.ServiceDescription wsdlDoc)
                 {
                     foreach (WsdlNS.Import import in wsdlDoc.Imports)
                     {
-                        if (!String.IsNullOrEmpty(import.Location)) continue;
+                        if (!String.IsNullOrEmpty(import.Location))
+                            continue;
 
-                        WsdlNS.ServiceDescription targetDoc = this.wsdls[import.Namespace ?? String.Empty];
+                        WsdlNS.ServiceDescription targetDoc = this.wsdls[
+                            import.Namespace ?? String.Empty
+                        ];
                         if (targetDoc != null)
                         {
                             string query = queryFromDoc[targetDoc];
@@ -1185,9 +1424,13 @@ namespace System.ServiceModel.Description
                     foreach (XmlSchemaObject o in xsdDoc.Includes)
                     {
                         XmlSchemaExternal external = o as XmlSchemaExternal;
-                        if (external == null || !String.IsNullOrEmpty(external.SchemaLocation)) continue;
+                        if (external == null || !String.IsNullOrEmpty(external.SchemaLocation))
+                            continue;
 
-                        string targetNs = external is XmlSchemaImport ? ((XmlSchemaImport)external).Namespace : xsdDoc.TargetNamespace;
+                        string targetNs =
+                            external is XmlSchemaImport
+                                ? ((XmlSchemaImport)external).Namespace
+                                : xsdDoc.TargetNamespace;
 
                         foreach (XmlSchema targetXsd in this.xsds.Schemas(targetNs ?? String.Empty))
                         {
@@ -1262,8 +1505,11 @@ namespace System.ServiceModel.Description
 
             static Message CreateRedirectMessage(string redirectedDestination)
             {
-                Message redirectMessage = CreateHttpResponseMessage(HttpStatusCode.RedirectKeepVerb);
-                HttpResponseMessageProperty httpResponseProperty = (HttpResponseMessageProperty)redirectMessage.Properties[HttpResponseMessageProperty.Name];
+                Message redirectMessage = CreateHttpResponseMessage(
+                    HttpStatusCode.RedirectKeepVerb
+                );
+                HttpResponseMessageProperty httpResponseProperty = (HttpResponseMessageProperty)
+                    redirectMessage.Properties[HttpResponseMessageProperty.Name];
                 httpResponseProperty.Headers["Location"] = redirectedDestination;
                 return redirectMessage;
             }
@@ -1271,7 +1517,8 @@ namespace System.ServiceModel.Description
             static Message CreateHttpResponseMessage(HttpStatusCode code)
             {
                 Message message = new NullMessage();
-                HttpResponseMessageProperty httpResponseProperty = new HttpResponseMessageProperty();
+                HttpResponseMessageProperty httpResponseProperty =
+                    new HttpResponseMessageProperty();
                 httpResponseProperty.StatusCode = code;
                 message.Properties.Add(HttpResponseMessageProperty.Name, httpResponseProperty);
                 return message;
@@ -1296,7 +1543,10 @@ namespace System.ServiceModel.Description
                 {
                     writer.WriteStartDocument();
                     writer.WriteStartElement("discovery", "http://schemas.xmlsoap.org/disco/");
-                    writer.WriteStartElement("contractRef", "http://schemas.xmlsoap.org/disco/scl/");
+                    writer.WriteStartElement(
+                        "contractRef",
+                        "http://schemas.xmlsoap.org/disco/scl/"
+                    );
                     writer.WriteAttributeString("ref", wsdlAddress);
                     writer.WriteAttributeString("docRef", docAddress);
                     writer.WriteEndElement(); // </contractRef>
@@ -1317,7 +1567,14 @@ namespace System.ServiceModel.Description
                 string errorMessage;
                 ExceptionDetail exceptionDetail;
 
-                public MetadataOnHelpPageMessage(string discoUrl, string metadataUrl, string singleWsdlUrl, string serviceName, string clientName, bool linkMetadata)
+                public MetadataOnHelpPageMessage(
+                    string discoUrl,
+                    string metadataUrl,
+                    string singleWsdlUrl,
+                    string serviceName,
+                    string clientName,
+                    bool linkMetadata
+                )
                     : base()
                 {
                     this.discoUrl = discoUrl;
@@ -1328,13 +1585,15 @@ namespace System.ServiceModel.Description
                     this.linkMetadata = linkMetadata;
                 }
 
-                public MetadataOnHelpPageMessage(string errorMessage, ExceptionDetail exceptionDetail)
+                public MetadataOnHelpPageMessage(
+                    string errorMessage,
+                    ExceptionDetail exceptionDetail
+                )
                     : base()
                 {
                     this.errorMessage = errorMessage;
                     this.exceptionDetail = exceptionDetail;
                 }
-
 
                 protected override void OnWriteBodyContents(XmlDictionaryWriter writer)
                 {
@@ -1350,7 +1609,11 @@ namespace System.ServiceModel.Description
 
                     page.WriteStyleSheet();
 
-                    page.WriteTitle(!String.IsNullOrEmpty(this.serviceName) ? SR.GetString(SR.SFxDocExt_MainPageTitle, this.serviceName) : SR.GetString(SR.SFxDocExt_MainPageTitleNoServiceName));
+                    page.WriteTitle(
+                        !String.IsNullOrEmpty(this.serviceName)
+                            ? SR.GetString(SR.SFxDocExt_MainPageTitle, this.serviceName)
+                            : SR.GetString(SR.SFxDocExt_MainPageTitleNoServiceName)
+                    );
 
                     if (!String.IsNullOrEmpty(this.errorMessage))
                     {
@@ -1363,7 +1626,11 @@ namespace System.ServiceModel.Description
                     }
                     else
                     {
-                        page.WriteToolUsage(this.metadataUrl, this.singleWsdlUrl, this.linkMetadata);
+                        page.WriteToolUsage(
+                            this.metadataUrl,
+                            this.singleWsdlUrl,
+                            this.linkMetadata
+                        );
                         page.WriteSampleCode(this.clientName);
                     }
 
@@ -1374,6 +1641,7 @@ namespace System.ServiceModel.Description
                 struct HelpPageWriter
                 {
                     XmlWriter writer;
+
                     public HelpPageWriter(XmlWriter writer)
                     {
                         this.writer = writer;
@@ -1410,7 +1678,6 @@ namespace System.ServiceModel.Description
                         writer.WriteAttributeString("class", "intro");
                         writer.WriteString(message);
                         writer.WriteEndElement(); // P
-
                     }
 
                     internal void WriteKeyword(string keyword)
@@ -1429,7 +1696,6 @@ namespace System.ServiceModel.Description
 
                         writer.WriteRaw(SR.GetString(SR.SFxDocExt_MainPageIntro2));
 
-
                         // C#
                         writer.WriteRaw(SR.GetString(SR.SFxDocExt_CS));
                         writer.WriteStartElement("PRE");
@@ -1445,14 +1711,17 @@ namespace System.ServiceModel.Description
                         WriteKeyword("new ");
                         WriteClass(clientName);
                         writer.WriteString("();\n\n");
-                        WriteComment("        // " + SR.GetString(SR.SFxDocExt_MainPageComment) + "\n\n");
-                        WriteComment("        // " + SR.GetString(SR.SFxDocExt_MainPageComment2) + "\n");
+                        WriteComment(
+                            "        // " + SR.GetString(SR.SFxDocExt_MainPageComment) + "\n\n"
+                        );
+                        WriteComment(
+                            "        // " + SR.GetString(SR.SFxDocExt_MainPageComment2) + "\n"
+                        );
                         writer.WriteString("        client.Close();\n");
                         writer.WriteString("    }\n");
                         writer.WriteString("}\n");
                         writer.WriteEndElement(); // PRE
                         writer.WriteRaw(HttpGetImpl.HtmlBreak);
-
 
                         // VB
                         writer.WriteRaw(SR.GetString(SR.SFxDocExt_VB));
@@ -1468,8 +1737,12 @@ namespace System.ServiceModel.Description
                         WriteKeyword("New ");
                         WriteClass(clientName);
                         writer.WriteString("()\n");
-                        WriteComment("        ' " + SR.GetString(SR.SFxDocExt_MainPageComment) + "\n\n");
-                        WriteComment("        ' " + SR.GetString(SR.SFxDocExt_MainPageComment2) + "\n");
+                        WriteComment(
+                            "        ' " + SR.GetString(SR.SFxDocExt_MainPageComment) + "\n\n"
+                        );
+                        WriteComment(
+                            "        ' " + SR.GetString(SR.SFxDocExt_MainPageComment2) + "\n"
+                        );
                         writer.WriteString("        client.Close()\n");
                         WriteKeyword("    End Sub\n");
                         WriteKeyword("End Class");
@@ -1487,11 +1760,21 @@ namespace System.ServiceModel.Description
                     {
                         writer.WriteStartElement("STYLE");
                         writer.WriteAttributeString("type", "text/css");
-                        writer.WriteString("#content{ FONT-SIZE: 0.7em; PADDING-BOTTOM: 2em; MARGIN-LEFT: 30px}");
-                        writer.WriteString("BODY{MARGIN-TOP: 0px; MARGIN-LEFT: 0px; COLOR: #000000; FONT-FAMILY: Verdana; BACKGROUND-COLOR: white}");
-                        writer.WriteString("P{MARGIN-TOP: 0px; MARGIN-BOTTOM: 12px; COLOR: #000000; FONT-FAMILY: Verdana}");
-                        writer.WriteString("PRE{BORDER-RIGHT: #f0f0e0 1px solid; PADDING-RIGHT: 5px; BORDER-TOP: #f0f0e0 1px solid; MARGIN-TOP: -5px; PADDING-LEFT: 5px; FONT-SIZE: 1.2em; PADDING-BOTTOM: 5px; BORDER-LEFT: #f0f0e0 1px solid; PADDING-TOP: 5px; BORDER-BOTTOM: #f0f0e0 1px solid; FONT-FAMILY: Courier New; BACKGROUND-COLOR: #e5e5cc}");
-                        writer.WriteString(".heading1{MARGIN-TOP: 0px; PADDING-LEFT: 15px; FONT-WEIGHT: normal; FONT-SIZE: 26px; MARGIN-BOTTOM: 0px; PADDING-BOTTOM: 3px; MARGIN-LEFT: -30px; WIDTH: 100%; COLOR: #ffffff; PADDING-TOP: 10px; FONT-FAMILY: Tahoma; BACKGROUND-COLOR: #003366}");
+                        writer.WriteString(
+                            "#content{ FONT-SIZE: 0.7em; PADDING-BOTTOM: 2em; MARGIN-LEFT: 30px}"
+                        );
+                        writer.WriteString(
+                            "BODY{MARGIN-TOP: 0px; MARGIN-LEFT: 0px; COLOR: #000000; FONT-FAMILY: Verdana; BACKGROUND-COLOR: white}"
+                        );
+                        writer.WriteString(
+                            "P{MARGIN-TOP: 0px; MARGIN-BOTTOM: 12px; COLOR: #000000; FONT-FAMILY: Verdana}"
+                        );
+                        writer.WriteString(
+                            "PRE{BORDER-RIGHT: #f0f0e0 1px solid; PADDING-RIGHT: 5px; BORDER-TOP: #f0f0e0 1px solid; MARGIN-TOP: -5px; PADDING-LEFT: 5px; FONT-SIZE: 1.2em; PADDING-BOTTOM: 5px; BORDER-LEFT: #f0f0e0 1px solid; PADDING-TOP: 5px; BORDER-BOTTOM: #f0f0e0 1px solid; FONT-FAMILY: Courier New; BACKGROUND-COLOR: #e5e5cc}"
+                        );
+                        writer.WriteString(
+                            ".heading1{MARGIN-TOP: 0px; PADDING-LEFT: 15px; FONT-WEIGHT: normal; FONT-SIZE: 26px; MARGIN-BOTTOM: 0px; PADDING-BOTTOM: 3px; MARGIN-LEFT: -30px; WIDTH: 100%; COLOR: #ffffff; PADDING-TOP: 10px; FONT-FAMILY: Tahoma; BACKGROUND-COLOR: #003366}"
+                        );
                         writer.WriteString(".intro{MARGIN-LEFT: -15px}");
                         writer.WriteEndElement(); // STYLE
                     }
@@ -1508,22 +1791,35 @@ namespace System.ServiceModel.Description
                         writer.WriteString(title);
                         writer.WriteEndElement(); // P
                         writer.WriteRaw(HttpGetImpl.HtmlBreak);
-
                     }
 
-                    internal void WriteToolUsage(string wsdlUrl, string singleWsdlUrl, bool linkMetadata)
+                    internal void WriteToolUsage(
+                        string wsdlUrl,
+                        string singleWsdlUrl,
+                        bool linkMetadata
+                    )
                     {
                         writer.WriteStartElement("P");
                         writer.WriteAttributeString("class", "intro");
 
                         if (wsdlUrl != null)
                         {
-                            WriteMetadataAddress(SR.SFxDocExt_MainPageIntro1a, "svcutil.exe ", wsdlUrl, linkMetadata);
+                            WriteMetadataAddress(
+                                SR.SFxDocExt_MainPageIntro1a,
+                                "svcutil.exe ",
+                                wsdlUrl,
+                                linkMetadata
+                            );
                             if (singleWsdlUrl != null)
                             {
                                 // ?singleWsdl message
                                 writer.WriteStartElement("P");
-                                WriteMetadataAddress(SR.SFxDocExt_MainPageIntroSingleWsdl, null, singleWsdlUrl, linkMetadata);
+                                WriteMetadataAddress(
+                                    SR.SFxDocExt_MainPageIntroSingleWsdl,
+                                    null,
+                                    singleWsdlUrl,
+                                    linkMetadata
+                                );
                                 writer.WriteEndElement();
                             }
                         }
@@ -1535,7 +1831,12 @@ namespace System.ServiceModel.Description
                         writer.WriteEndElement(); // P
                     }
 
-                    void WriteMetadataAddress(string introductionText, string clientToolName, string wsdlUrl, bool linkMetadata)
+                    void WriteMetadataAddress(
+                        string introductionText,
+                        string clientToolName,
+                        string wsdlUrl,
+                        bool linkMetadata
+                    )
                     {
                         writer.WriteRaw(SR.GetString(introductionText));
                         writer.WriteRaw(HttpGetImpl.HtmlBreak);
@@ -1565,80 +1866,163 @@ namespace System.ServiceModel.Description
 
             class MetadataOffHelpPageMessage : ContentOnlyMessage
             {
-
-                public MetadataOffHelpPageMessage(string serviceName)
-                {
-
-                }
+                public MetadataOffHelpPageMessage(string serviceName) { }
 
                 protected override void OnWriteBodyContents(XmlDictionaryWriter writer)
                 {
                     writer.WriteStartElement("HTML");
                     writer.WriteStartElement("HEAD");
-                    writer.WriteRaw(String.Format(CultureInfo.InvariantCulture,
-                        @"<STYLE type=""text/css"">#content{{ FONT-SIZE: 0.7em; PADDING-BOTTOM: 2em; MARGIN-LEFT: 30px}}BODY{{MARGIN-TOP: 0px; MARGIN-LEFT: 0px; COLOR: #000000; FONT-FAMILY: Verdana; BACKGROUND-COLOR: white}}P{{MARGIN-TOP: 0px; MARGIN-BOTTOM: 12px; COLOR: #000000; FONT-FAMILY: Verdana}}PRE{{BORDER-RIGHT: #f0f0e0 1px solid; PADDING-RIGHT: 5px; BORDER-TOP: #f0f0e0 1px solid; MARGIN-TOP: -5px; PADDING-LEFT: 5px; FONT-SIZE: 1.2em; PADDING-BOTTOM: 5px; BORDER-LEFT: #f0f0e0 1px solid; PADDING-TOP: 5px; BORDER-BOTTOM: #f0f0e0 1px solid; FONT-FAMILY: Courier New; BACKGROUND-COLOR: #e5e5cc}}.heading1{{MARGIN-TOP: 0px; PADDING-LEFT: 15px; FONT-WEIGHT: normal; FONT-SIZE: 26px; MARGIN-BOTTOM: 0px; PADDING-BOTTOM: 3px; MARGIN-LEFT: -30px; WIDTH: 100%; COLOR: #ffffff; PADDING-TOP: 10px; FONT-FAMILY: Tahoma; BACKGROUND-COLOR: #003366}}.intro{{MARGIN-LEFT: -15px}}</STYLE>
-<TITLE>Service</TITLE>"));
+                    writer.WriteRaw(
+                        String.Format(
+                            CultureInfo.InvariantCulture,
+                            @"<STYLE type=""text/css"">#content{{ FONT-SIZE: 0.7em; PADDING-BOTTOM: 2em; MARGIN-LEFT: 30px}}BODY{{MARGIN-TOP: 0px; MARGIN-LEFT: 0px; COLOR: #000000; FONT-FAMILY: Verdana; BACKGROUND-COLOR: white}}P{{MARGIN-TOP: 0px; MARGIN-BOTTOM: 12px; COLOR: #000000; FONT-FAMILY: Verdana}}PRE{{BORDER-RIGHT: #f0f0e0 1px solid; PADDING-RIGHT: 5px; BORDER-TOP: #f0f0e0 1px solid; MARGIN-TOP: -5px; PADDING-LEFT: 5px; FONT-SIZE: 1.2em; PADDING-BOTTOM: 5px; BORDER-LEFT: #f0f0e0 1px solid; PADDING-TOP: 5px; BORDER-BOTTOM: #f0f0e0 1px solid; FONT-FAMILY: Courier New; BACKGROUND-COLOR: #e5e5cc}}.heading1{{MARGIN-TOP: 0px; PADDING-LEFT: 15px; FONT-WEIGHT: normal; FONT-SIZE: 26px; MARGIN-BOTTOM: 0px; PADDING-BOTTOM: 3px; MARGIN-LEFT: -30px; WIDTH: 100%; COLOR: #ffffff; PADDING-TOP: 10px; FONT-FAMILY: Tahoma; BACKGROUND-COLOR: #003366}}.intro{{MARGIN-LEFT: -15px}}</STYLE>
+<TITLE>Service</TITLE>"
+                        )
+                    );
                     writer.WriteEndElement(); //HEAD
 
-                    writer.WriteRaw(String.Format(CultureInfo.InvariantCulture,
-                                            @"<BODY>
+                    writer.WriteRaw(
+                        String.Format(
+                            CultureInfo.InvariantCulture,
+                            @"<BODY>
 <DIV id=""content"">
 <P class=""heading1"">Service</P>
 <BR/>
 <P class=""intro"">{0}</P>
 <PRE>
-<font color=""blue"">&lt;<font color=""darkred"">" + ConfigurationStrings.BehaviorsSectionName + @"</font>&gt;</font>
-<font color=""blue"">    &lt;<font color=""darkred"">" + ConfigurationStrings.ServiceBehaviors + @"</font>&gt;</font>
-<font color=""blue"">        &lt;<font color=""darkred"">" + ConfigurationStrings.Behavior + @" </font><font color=""red"">" + ConfigurationStrings.Name + @"</font>=<font color=""black"">""</font>MyServiceTypeBehaviors<font color=""black"">"" </font>&gt;</font>
-<font color=""blue"">            &lt;<font color=""darkred"">" + ConfigurationStrings.ServiceMetadataPublishingSectionName + @" </font><font color=""red"">" + ConfigurationStrings.HttpGetEnabled + @"</font>=<font color=""black"">""</font>true<font color=""black"">"" </font>/&gt;</font>
-<font color=""blue"">        &lt;<font color=""darkred"">/" + ConfigurationStrings.Behavior + @"</font>&gt;</font>
-<font color=""blue"">    &lt;<font color=""darkred"">/" + ConfigurationStrings.ServiceBehaviors + @"</font>&gt;</font>
-<font color=""blue"">&lt;<font color=""darkred"">/" + ConfigurationStrings.BehaviorsSectionName + @"</font>&gt;</font>
+<font color=""blue"">&lt;<font color=""darkred"">"
+                                + ConfigurationStrings.BehaviorsSectionName
+                                + @"</font>&gt;</font>
+<font color=""blue"">    &lt;<font color=""darkred"">"
+                                + ConfigurationStrings.ServiceBehaviors
+                                + @"</font>&gt;</font>
+<font color=""blue"">        &lt;<font color=""darkred"">"
+                                + ConfigurationStrings.Behavior
+                                + @" </font><font color=""red"">"
+                                + ConfigurationStrings.Name
+                                + @"</font>=<font color=""black"">""</font>MyServiceTypeBehaviors<font color=""black"">"" </font>&gt;</font>
+<font color=""blue"">            &lt;<font color=""darkred"">"
+                                + ConfigurationStrings.ServiceMetadataPublishingSectionName
+                                + @" </font><font color=""red"">"
+                                + ConfigurationStrings.HttpGetEnabled
+                                + @"</font>=<font color=""black"">""</font>true<font color=""black"">"" </font>/&gt;</font>
+<font color=""blue"">        &lt;<font color=""darkred"">/"
+                                + ConfigurationStrings.Behavior
+                                + @"</font>&gt;</font>
+<font color=""blue"">    &lt;<font color=""darkred"">/"
+                                + ConfigurationStrings.ServiceBehaviors
+                                + @"</font>&gt;</font>
+<font color=""blue"">&lt;<font color=""darkred"">/"
+                                + ConfigurationStrings.BehaviorsSectionName
+                                + @"</font>&gt;</font>
 </PRE>
 <P class=""intro"">{1}</P>
 <PRE>
-<font color=""blue"">&lt;<font color=""darkred"">" + ConfigurationStrings.Service + @" </font><font color=""red"">" + ConfigurationStrings.Name + @"</font>=<font color=""black"">""</font><i>MyNamespace.MyServiceType</i><font color=""black"">"" </font><font color=""red"">" + ConfigurationStrings.BehaviorConfiguration + @"</font>=<font color=""black"">""</font><i>MyServiceTypeBehaviors</i><font color=""black"">"" </font>&gt;</font>
+<font color=""blue"">&lt;<font color=""darkred"">"
+                                + ConfigurationStrings.Service
+                                + @" </font><font color=""red"">"
+                                + ConfigurationStrings.Name
+                                + @"</font>=<font color=""black"">""</font><i>MyNamespace.MyServiceType</i><font color=""black"">"" </font><font color=""red"">"
+                                + ConfigurationStrings.BehaviorConfiguration
+                                + @"</font>=<font color=""black"">""</font><i>MyServiceTypeBehaviors</i><font color=""black"">"" </font>&gt;</font>
 </PRE>
 <P class=""intro"">{2}</P>
 <PRE>
-<font color=""blue"">&lt;<font color=""darkred"">" + ConfigurationStrings.Endpoint + @" </font><font color=""red"">" + ConfigurationStrings.Contract + @"</font>=<font color=""black"">""</font>" + ServiceMetadataBehavior.MexContractName + @"<font color=""black"">"" </font><font color=""red"">" + ConfigurationStrings.Binding + @"</font>=<font color=""black"">""</font>mexHttpBinding<font color=""black"">"" </font><font color=""red"">" + ConfigurationStrings.Address + @"</font>=<font color=""black"">""</font>mex<font color=""black"">"" </font>/&gt;</font>
+<font color=""blue"">&lt;<font color=""darkred"">"
+                                + ConfigurationStrings.Endpoint
+                                + @" </font><font color=""red"">"
+                                + ConfigurationStrings.Contract
+                                + @"</font>=<font color=""black"">""</font>"
+                                + ServiceMetadataBehavior.MexContractName
+                                + @"<font color=""black"">"" </font><font color=""red"">"
+                                + ConfigurationStrings.Binding
+                                + @"</font>=<font color=""black"">""</font>mexHttpBinding<font color=""black"">"" </font><font color=""red"">"
+                                + ConfigurationStrings.Address
+                                + @"</font>=<font color=""black"">""</font>mex<font color=""black"">"" </font>/&gt;</font>
 </PRE>
 
 <P class=""intro"">{3}</P>
 <PRE>
 <font color=""blue"">&lt;<font color=""darkred"">configuration</font>&gt;</font>
-<font color=""blue"">    &lt;<font color=""darkred"">" + ConfigurationStrings.SectionGroupName + @"</font>&gt;</font>
+<font color=""blue"">    &lt;<font color=""darkred"">"
+                                + ConfigurationStrings.SectionGroupName
+                                + @"</font>&gt;</font>
  
-<font color=""blue"">        &lt;<font color=""darkred"">" + ConfigurationStrings.ServicesSectionName + @"</font>&gt;</font>
+<font color=""blue"">        &lt;<font color=""darkred"">"
+                                + ConfigurationStrings.ServicesSectionName
+                                + @"</font>&gt;</font>
 <font color=""blue"">            &lt;!-- <font color=""green"">{4}</font> --&gt;</font>
-<font color=""blue"">            &lt;<font color=""darkred"">" + ConfigurationStrings.Service + @" </font><font color=""red"">" + ConfigurationStrings.Name + @"</font>=<font color=""black"">""</font><i>MyNamespace.MyServiceType</i><font color=""black"">"" </font><font color=""red"">" + ConfigurationStrings.BehaviorConfiguration + @"</font>=<font color=""black"">""</font><i>MyServiceTypeBehaviors</i><font color=""black"">"" </font>&gt;</font>
+<font color=""blue"">            &lt;<font color=""darkred"">"
+                                + ConfigurationStrings.Service
+                                + @" </font><font color=""red"">"
+                                + ConfigurationStrings.Name
+                                + @"</font>=<font color=""black"">""</font><i>MyNamespace.MyServiceType</i><font color=""black"">"" </font><font color=""red"">"
+                                + ConfigurationStrings.BehaviorConfiguration
+                                + @"</font>=<font color=""black"">""</font><i>MyServiceTypeBehaviors</i><font color=""black"">"" </font>&gt;</font>
 <font color=""blue"">                &lt;!-- <font color=""green"">{5}</font> --&gt;</font>
 <font color=""blue"">                &lt;!-- <font color=""green"">{6}</font> --&gt;</font>
-<font color=""blue"">                &lt;<font color=""darkred"">" + ConfigurationStrings.Endpoint + @" </font><font color=""red"">" + ConfigurationStrings.Contract + @"</font>=<font color=""black"">""</font>" + ServiceMetadataBehavior.MexContractName + @"<font color=""black"">"" </font><font color=""red"">" + ConfigurationStrings.Binding + @"</font>=<font color=""black"">""</font>mexHttpBinding<font color=""black"">"" </font><font color=""red"">" + ConfigurationStrings.Address + @"</font>=<font color=""black"">""</font>mex<font color=""black"">"" </font>/&gt;</font>
-<font color=""blue"">            &lt;<font color=""darkred"">/" + ConfigurationStrings.Service + @"</font>&gt;</font>
-<font color=""blue"">        &lt;<font color=""darkred"">/" + ConfigurationStrings.ServicesSectionName + @"</font>&gt;</font>
+<font color=""blue"">                &lt;<font color=""darkred"">"
+                                + ConfigurationStrings.Endpoint
+                                + @" </font><font color=""red"">"
+                                + ConfigurationStrings.Contract
+                                + @"</font>=<font color=""black"">""</font>"
+                                + ServiceMetadataBehavior.MexContractName
+                                + @"<font color=""black"">"" </font><font color=""red"">"
+                                + ConfigurationStrings.Binding
+                                + @"</font>=<font color=""black"">""</font>mexHttpBinding<font color=""black"">"" </font><font color=""red"">"
+                                + ConfigurationStrings.Address
+                                + @"</font>=<font color=""black"">""</font>mex<font color=""black"">"" </font>/&gt;</font>
+<font color=""blue"">            &lt;<font color=""darkred"">/"
+                                + ConfigurationStrings.Service
+                                + @"</font>&gt;</font>
+<font color=""blue"">        &lt;<font color=""darkred"">/"
+                                + ConfigurationStrings.ServicesSectionName
+                                + @"</font>&gt;</font>
  
-<font color=""blue"">        &lt;<font color=""darkred"">" + ConfigurationStrings.BehaviorsSectionName + @"</font>&gt;</font>
-<font color=""blue"">            &lt;<font color=""darkred"">" + ConfigurationStrings.ServiceBehaviors + @"</font>&gt;</font>
-<font color=""blue"">                &lt;<font color=""darkred"">" + ConfigurationStrings.Behavior + @" </font><font color=""red"">name</font>=<font color=""black"">""</font><i>MyServiceTypeBehaviors</i><font color=""black"">"" </font>&gt;</font>
+<font color=""blue"">        &lt;<font color=""darkred"">"
+                                + ConfigurationStrings.BehaviorsSectionName
+                                + @"</font>&gt;</font>
+<font color=""blue"">            &lt;<font color=""darkred"">"
+                                + ConfigurationStrings.ServiceBehaviors
+                                + @"</font>&gt;</font>
+<font color=""blue"">                &lt;<font color=""darkred"">"
+                                + ConfigurationStrings.Behavior
+                                + @" </font><font color=""red"">name</font>=<font color=""black"">""</font><i>MyServiceTypeBehaviors</i><font color=""black"">"" </font>&gt;</font>
 <font color=""blue"">                    &lt;!-- <font color=""green"">{7}</font> --&gt;</font>
-<font color=""blue"">                    &lt;<font color=""darkred"">" + ConfigurationStrings.ServiceMetadataPublishingSectionName + @" </font><font color=""red"">" + ConfigurationStrings.HttpGetEnabled + @"</font>=<font color=""black"">""</font>true<font color=""black"">"" </font>/&gt;</font>
-<font color=""blue"">                &lt;<font color=""darkred"">/" + ConfigurationStrings.Behavior + @"</font>&gt;</font>
-<font color=""blue"">            &lt;<font color=""darkred"">/" + ConfigurationStrings.ServiceBehaviors + @"</font>&gt;</font>
-<font color=""blue"">        &lt;<font color=""darkred"">/" + ConfigurationStrings.BehaviorsSectionName + @"</font>&gt;</font>
+<font color=""blue"">                    &lt;<font color=""darkred"">"
+                                + ConfigurationStrings.ServiceMetadataPublishingSectionName
+                                + @" </font><font color=""red"">"
+                                + ConfigurationStrings.HttpGetEnabled
+                                + @"</font>=<font color=""black"">""</font>true<font color=""black"">"" </font>/&gt;</font>
+<font color=""blue"">                &lt;<font color=""darkred"">/"
+                                + ConfigurationStrings.Behavior
+                                + @"</font>&gt;</font>
+<font color=""blue"">            &lt;<font color=""darkred"">/"
+                                + ConfigurationStrings.ServiceBehaviors
+                                + @"</font>&gt;</font>
+<font color=""blue"">        &lt;<font color=""darkred"">/"
+                                + ConfigurationStrings.BehaviorsSectionName
+                                + @"</font>&gt;</font>
  
-<font color=""blue"">    &lt;<font color=""darkred"">/" + ConfigurationStrings.SectionGroupName + @"</font>&gt;</font>
+<font color=""blue"">    &lt;<font color=""darkred"">/"
+                                + ConfigurationStrings.SectionGroupName
+                                + @"</font>&gt;</font>
 <font color=""blue"">&lt;<font color=""darkred"">/configuration</font>&gt;</font>
 </PRE>
 <P class=""intro"">{8}</P>
 </DIV>
 </BODY>",
-        SR.GetString(SR.SFxDocExt_NoMetadataSection1), SR.GetString(SR.SFxDocExt_NoMetadataSection2),
-        SR.GetString(SR.SFxDocExt_NoMetadataSection3), SR.GetString(SR.SFxDocExt_NoMetadataSection4),
-        SR.GetString(SR.SFxDocExt_NoMetadataConfigComment1), SR.GetString(SR.SFxDocExt_NoMetadataConfigComment2),
-        SR.GetString(SR.SFxDocExt_NoMetadataConfigComment3), SR.GetString(SR.SFxDocExt_NoMetadataConfigComment4),
-        SR.GetString(SR.SFxDocExt_NoMetadataSection5)
-        ));
+                            SR.GetString(SR.SFxDocExt_NoMetadataSection1),
+                            SR.GetString(SR.SFxDocExt_NoMetadataSection2),
+                            SR.GetString(SR.SFxDocExt_NoMetadataSection3),
+                            SR.GetString(SR.SFxDocExt_NoMetadataSection4),
+                            SR.GetString(SR.SFxDocExt_NoMetadataConfigComment1),
+                            SR.GetString(SR.SFxDocExt_NoMetadataConfigComment2),
+                            SR.GetString(SR.SFxDocExt_NoMetadataConfigComment3),
+                            SR.GetString(SR.SFxDocExt_NoMetadataConfigComment4),
+                            SR.GetString(SR.SFxDocExt_NoMetadataSection5)
+                        )
+                    );
 
                     writer.WriteEndElement(); //HTML
                 }
@@ -1649,7 +2033,10 @@ namespace System.ServiceModel.Description
                 WsdlNS.ServiceDescription description;
                 WriteFilter responseWriter;
 
-                public ServiceDescriptionMessage(WsdlNS.ServiceDescription description, WriteFilter responseWriter)
+                public ServiceDescriptionMessage(
+                    WsdlNS.ServiceDescription description,
+                    WriteFilter responseWriter
+                )
                     : base()
                 {
                     this.description = description;
@@ -1688,6 +2075,7 @@ namespace System.ServiceModel.Description
         {
             internal XmlWriter Writer;
             public abstract WriteFilter CloneWriteFilter();
+
             public override void Close()
             {
                 this.Writer.Close();
@@ -1728,7 +2116,12 @@ namespace System.ServiceModel.Description
                 this.Writer.WriteComment(text);
             }
 
-            public override void WriteDocType(string name, string pubid, string sysid, string subset)
+            public override void WriteDocType(
+                string name,
+                string pubid,
+                string sysid,
+                string subset
+            )
             {
                 this.Writer.WriteDocType(name, pubid, sysid, subset);
             }
@@ -1853,22 +2246,54 @@ namespace System.ServiceModel.Description
             readonly int requestPort;
             readonly IDictionary<string, int> updatePortsByScheme;
 
-            internal DynamicAddressUpdateWriter(Uri listenUri, string requestHost, int requestPort,
-                IDictionary<string, int> updatePortsByScheme, bool removeBaseAddress)
-                : this(listenUri.Host, requestHost, removeBaseAddress, listenUri.Scheme, requestPort, updatePortsByScheme)
+            internal DynamicAddressUpdateWriter(
+                Uri listenUri,
+                string requestHost,
+                int requestPort,
+                IDictionary<string, int> updatePortsByScheme,
+                bool removeBaseAddress
+            )
+                : this(
+                    listenUri.Host,
+                    requestHost,
+                    removeBaseAddress,
+                    listenUri.Scheme,
+                    requestPort,
+                    updatePortsByScheme
+                )
             {
                 this.newBaseAddress = UpdateUri(listenUri).ToString();
             }
 
-            DynamicAddressUpdateWriter(string oldHostName, string newHostName, string newBaseAddress, bool removeBaseAddress, string requestScheme,
-                int requestPort, IDictionary<string, int> updatePortsByScheme)
-                : this(oldHostName, newHostName, removeBaseAddress, requestScheme, requestPort, updatePortsByScheme)
+            DynamicAddressUpdateWriter(
+                string oldHostName,
+                string newHostName,
+                string newBaseAddress,
+                bool removeBaseAddress,
+                string requestScheme,
+                int requestPort,
+                IDictionary<string, int> updatePortsByScheme
+            )
+                : this(
+                    oldHostName,
+                    newHostName,
+                    removeBaseAddress,
+                    requestScheme,
+                    requestPort,
+                    updatePortsByScheme
+                )
             {
                 this.newBaseAddress = newBaseAddress;
             }
 
-            DynamicAddressUpdateWriter(string oldHostName, string newHostName, bool removeBaseAddress, string requestScheme,
-                int requestPort, IDictionary<string, int> updatePortsByScheme)
+            DynamicAddressUpdateWriter(
+                string oldHostName,
+                string newHostName,
+                bool removeBaseAddress,
+                string requestScheme,
+                int requestPort,
+                IDictionary<string, int> updatePortsByScheme
+            )
             {
                 this.oldHostName = oldHostName;
                 this.newHostName = newHostName;
@@ -1880,22 +2305,39 @@ namespace System.ServiceModel.Description
 
             public override WriteFilter CloneWriteFilter()
             {
-                return new DynamicAddressUpdateWriter(this.oldHostName, this.newHostName, this.newBaseAddress, this.removeBaseAddress,
-                    this.requestScheme, this.requestPort, this.updatePortsByScheme);
+                return new DynamicAddressUpdateWriter(
+                    this.oldHostName,
+                    this.newHostName,
+                    this.newBaseAddress,
+                    this.removeBaseAddress,
+                    this.requestScheme,
+                    this.requestPort,
+                    this.updatePortsByScheme
+                );
             }
 
             public override void WriteString(string text)
             {
                 Uri uri;
-                if (this.removeBaseAddress &&
-                    text.StartsWith(ServiceMetadataExtension.BaseAddressPattern, StringComparison.Ordinal))
+                if (
+                    this.removeBaseAddress
+                    && text.StartsWith(
+                        ServiceMetadataExtension.BaseAddressPattern,
+                        StringComparison.Ordinal
+                    )
+                )
                 {
                     text = string.Empty;
                 }
-                else if (!this.removeBaseAddress &&
-                    text.Contains(ServiceMetadataExtension.BaseAddressPattern))
+                else if (
+                    !this.removeBaseAddress
+                    && text.Contains(ServiceMetadataExtension.BaseAddressPattern)
+                )
                 {
-                    text = text.Replace(ServiceMetadataExtension.BaseAddressPattern, this.newBaseAddress);
+                    text = text.Replace(
+                        ServiceMetadataExtension.BaseAddressPattern,
+                        this.newBaseAddress
+                    );
                 }
                 else if (Uri.TryCreate(text, UriKind.Absolute, out uri))
                 {

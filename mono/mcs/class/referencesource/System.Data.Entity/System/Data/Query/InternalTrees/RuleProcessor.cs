@@ -10,8 +10,8 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Globalization;
 using System.Diagnostics;
+using System.Globalization;
 
 namespace System.Data.Query.InternalTrees
 {
@@ -42,7 +42,12 @@ namespace System.Data.Query.InternalTrees
 
         #region private methods
 
-        private static bool ApplyRulesToNode(RuleProcessingContext context, ReadOnlyCollection<ReadOnlyCollection<InternalTrees.Rule>> rules, Node currentNode, out Node newNode)
+        private static bool ApplyRulesToNode(
+            RuleProcessingContext context,
+            ReadOnlyCollection<ReadOnlyCollection<InternalTrees.Rule>> rules,
+            Node currentNode,
+            out Node newNode
+        )
         {
             newNode = currentNode;
 
@@ -65,7 +70,10 @@ namespace System.Data.Query.InternalTrees
                 }
                 else
                 {
-                    Debug.Assert(newNode == currentNode, "Liar! This rule should have returned 'true'");
+                    Debug.Assert(
+                        newNode == currentNode,
+                        "Liar! This rule should have returned 'true'"
+                    );
                 }
             }
 
@@ -74,7 +82,7 @@ namespace System.Data.Query.InternalTrees
         }
 
         /// <summary>
-        /// Apply rules to the current subtree in a bottom-up fashion. 
+        /// Apply rules to the current subtree in a bottom-up fashion.
         /// </summary>
         /// <param name="context">Current rule processing context</param>
         /// <param name="rules">The look-up table with the rules to be applied</param>
@@ -82,12 +90,17 @@ namespace System.Data.Query.InternalTrees
         /// <param name="parent">Parent node</param>
         /// <param name="childIndexInParent">Index of this child within the parent</param>
         /// <returns>the result of the transformation</returns>
-        private Node ApplyRulesToSubtree(RuleProcessingContext context, 
+        private Node ApplyRulesToSubtree(
+            RuleProcessingContext context,
             ReadOnlyCollection<ReadOnlyCollection<InternalTrees.Rule>> rules,
-            Node subTreeRoot, Node parent, int childIndexInParent)
+            Node subTreeRoot,
+            Node parent,
+            int childIndexInParent
+        )
         {
             int loopCount = 0;
-            Dictionary<SubTreeId, SubTreeId> localProcessedMap = new Dictionary<SubTreeId, SubTreeId>();
+            Dictionary<SubTreeId, SubTreeId> localProcessedMap =
+                new Dictionary<SubTreeId, SubTreeId>();
             SubTreeId subTreeId;
 
             while (true)
@@ -97,13 +110,13 @@ namespace System.Data.Query.InternalTrees
                 loopCount++;
 
                 //
-                // We may need to update state regardless of whether this subTree has 
-                // changed after it has been processed last. For example, it may be 
+                // We may need to update state regardless of whether this subTree has
+                // changed after it has been processed last. For example, it may be
                 // affected by transformation in its siblings due to external references.
                 //
                 context.PreProcessSubTree(subTreeRoot);
                 subTreeId = new SubTreeId(context, subTreeRoot, parent, childIndexInParent);
-   
+
                 // Have I seen this subtree already? Just return, if so
                 if (m_processedNodeMap.ContainsKey(subTreeId))
                 {
@@ -123,10 +136,16 @@ namespace System.Data.Query.InternalTrees
                 // Walk my children
                 for (int i = 0; i < subTreeRoot.Children.Count; i++)
                 {
-                    subTreeRoot.Children[i] = ApplyRulesToSubtree(context, rules, subTreeRoot.Children[i], subTreeRoot, i);
+                    subTreeRoot.Children[i] = ApplyRulesToSubtree(
+                        context,
+                        rules,
+                        subTreeRoot.Children[i],
+                        subTreeRoot,
+                        i
+                    );
                 }
 
-                // Apply rules to myself. If no transformations were performed, 
+                // Apply rules to myself. If no transformations were performed,
                 // then mark this subtree as processed, and break out
                 Node newSubTreeRoot;
                 if (!ApplyRulesToNode(context, rules, subTreeRoot, out newSubTreeRoot))
@@ -152,7 +171,11 @@ namespace System.Data.Query.InternalTrees
         /// <param name="context">Rule processing context</param>
         /// <param name="subTreeRoot">current subtree</param>
         /// <returns>transformed subtree</returns>
-        internal Node ApplyRulesToSubtree(RuleProcessingContext context, ReadOnlyCollection<ReadOnlyCollection<InternalTrees.Rule>> rules, Node subTreeRoot)
+        internal Node ApplyRulesToSubtree(
+            RuleProcessingContext context,
+            ReadOnlyCollection<ReadOnlyCollection<InternalTrees.Rule>> rules,
+            Node subTreeRoot
+        )
         {
             return ApplyRulesToSubtree(context, rules, subTreeRoot, null, 0);
         }
@@ -188,12 +211,21 @@ namespace System.Data.Query.InternalTrees
         {
             return m_hashCode;
         }
+
         public override bool Equals(object obj)
         {
             SubTreeId other = obj as SubTreeId;
-            return ((other != null) && (m_hashCode == other.m_hashCode) &&
-                ((other.m_subTreeRoot == this.m_subTreeRoot) ||
-                  ((other.m_parent == this.m_parent) && (other.m_childIndex == this.m_childIndex))));
+            return (
+                (other != null)
+                && (m_hashCode == other.m_hashCode)
+                && (
+                    (other.m_subTreeRoot == this.m_subTreeRoot)
+                    || (
+                        (other.m_parent == this.m_parent)
+                        && (other.m_childIndex == this.m_childIndex)
+                    )
+                )
+            );
         }
         #endregion
     }
@@ -202,7 +234,7 @@ namespace System.Data.Query.InternalTrees
     #region RuleProcessingContext
 
     /// <summary>
-    /// Delegate that describes the processing 
+    /// Delegate that describes the processing
     /// </summary>
     /// <param name="context">RuleProcessing context</param>
     /// <param name="node">Node to process</param>
@@ -224,19 +256,14 @@ namespace System.Data.Query.InternalTrees
         /// Callback function to be applied to a node before any rules are applied
         /// </summary>
         /// <param name="node">the node</param>
-        internal virtual void PreProcess(Node node)
-        {
-
-        }
+        internal virtual void PreProcess(Node node) { }
 
         /// <summary>
-        /// Callback function to be applied to the subtree rooted at the given 
+        /// Callback function to be applied to the subtree rooted at the given
         /// node before any rules are applied
         /// </summary>
         /// <param name="node">the node that is the root of the subtree</param>
-        internal virtual void PreProcessSubTree(Node node)
-        {
-        }
+        internal virtual void PreProcessSubTree(Node node) { }
 
         /// <summary>
         /// Callback function to be applied on a node after a rule has been applied
@@ -244,18 +271,14 @@ namespace System.Data.Query.InternalTrees
         /// </summary>
         /// <param name="node">current node</param>
         /// <param name="rule">the rule that modified the node</param>
-        internal virtual void PostProcess(Node node, Rule rule)
-        {
-        }
+        internal virtual void PostProcess(Node node, Rule rule) { }
 
         /// <summary>
-        /// Callback function to be applied to the subtree rooted at the given 
+        /// Callback function to be applied to the subtree rooted at the given
         /// node after any rules are applied
         /// </summary>
         /// <param name="node">the node that is the root of the subtree</param>
-        internal virtual void PostProcessSubTree(Node node)
-        {
-        }
+        internal virtual void PostProcessSubTree(Node node) { }
 
         /// <summary>
         /// Get the hashcode for this node - to ensure that we don't loop forever

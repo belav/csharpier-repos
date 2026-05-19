@@ -24,11 +24,14 @@ namespace System.Memory.Tests.SequenceReader
         [Fact]
         public void TryCopyTo_Multisegment()
         {
-            ReadOnlySequence<char> chars = SequenceFactory.Create(new char[][] {
-                new char[] { 'A'           },
-                new char[] { 'B', 'C'      },
-                new char[] { 'D', 'E', 'F' }
-            });
+            ReadOnlySequence<char> chars = SequenceFactory.Create(
+                new char[][]
+                {
+                    new char[] { 'A' },
+                    new char[] { 'B', 'C' },
+                    new char[] { 'D', 'E', 'F' },
+                }
+            );
 
             ReadOnlySpan<char> linear = new char[] { 'A', 'B', 'C', 'D', 'E', 'F' };
 

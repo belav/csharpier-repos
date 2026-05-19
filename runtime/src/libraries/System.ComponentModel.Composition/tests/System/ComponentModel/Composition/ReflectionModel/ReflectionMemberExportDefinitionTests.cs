@@ -15,18 +15,34 @@ namespace System.ComponentModel.Composition.ReflectionModel
 {
     public class ReflectionMemberExportDefinitionTests
     {
-        private static ReflectionMemberExportDefinition CreateReflectionExportDefinition(LazyMemberInfo exportMember, string contractname, IDictionary<string, object> metadata)
+        private static ReflectionMemberExportDefinition CreateReflectionExportDefinition(
+            LazyMemberInfo exportMember,
+            string contractname,
+            IDictionary<string, object> metadata
+        )
         {
             return CreateReflectionExportDefinition(exportMember, contractname, metadata, null);
         }
 
-        private static ReflectionMemberExportDefinition CreateReflectionExportDefinition(LazyMemberInfo exportMember, string contractname, IDictionary<string, object> metadata, ICompositionElement origin)
+        private static ReflectionMemberExportDefinition CreateReflectionExportDefinition(
+            LazyMemberInfo exportMember,
+            string contractname,
+            IDictionary<string, object> metadata,
+            ICompositionElement origin
+        )
         {
-            return (ReflectionMemberExportDefinition)ReflectionModelServices.CreateExportDefinition(
-                exportMember, contractname, CreateLazyMetadata(metadata), origin);
+            return (ReflectionMemberExportDefinition)
+                ReflectionModelServices.CreateExportDefinition(
+                    exportMember,
+                    contractname,
+                    CreateLazyMetadata(metadata),
+                    origin
+                );
         }
 
-        private static Lazy<IDictionary<string, object>> CreateLazyMetadata(IDictionary<string, object> metadata)
+        private static Lazy<IDictionary<string, object>> CreateLazyMetadata(
+            IDictionary<string, object> metadata
+        )
         {
             return new Lazy<IDictionary<string, object>>(() => metadata, false);
         }
@@ -42,7 +58,11 @@ namespace System.ComponentModel.Composition.ReflectionModel
             expectedMetadata["Key1"] = 1;
             expectedMetadata["Key2"] = "Value2";
 
-            ReflectionMemberExportDefinition definition = CreateReflectionExportDefinition(expectedExportingMemberInfo, expectedContractName, expectedMetadata);
+            ReflectionMemberExportDefinition definition = CreateReflectionExportDefinition(
+                expectedExportingMemberInfo,
+                expectedContractName,
+                expectedMetadata
+            );
 
             Assert.Equal(expectedExportingMemberInfo, definition.ExportingLazyMember);
             Assert.Same(expectedMember, definition.ExportingLazyMember.GetAccessors()[0]);
@@ -65,7 +85,11 @@ namespace System.ComponentModel.Composition.ReflectionModel
 
             string expectedContractName = "Contract";
 
-            ReflectionMemberExportDefinition definition = CreateReflectionExportDefinition(expectedExportingMemberInfo, expectedContractName, null);
+            ReflectionMemberExportDefinition definition = CreateReflectionExportDefinition(
+                expectedExportingMemberInfo,
+                expectedContractName,
+                null
+            );
 
             Assert.Equal(expectedExportingMemberInfo, definition.ExportingLazyMember);
             Assert.Same(expectedMember, definition.ExportingLazyMember.GetAccessors()[0]);
@@ -83,7 +107,12 @@ namespace System.ComponentModel.Composition.ReflectionModel
         public void SetDefinition_OriginIsSet()
         {
             var expectedPartDefinition = PartDefinitionFactory.CreateAttributed(typeof(object));
-            var exportDefinition = CreateReflectionExportDefinition(new LazyMemberInfo(this.GetType()), "ContractName", null, expectedPartDefinition);
+            var exportDefinition = CreateReflectionExportDefinition(
+                new LazyMemberInfo(this.GetType()),
+                "ContractName",
+                null,
+                expectedPartDefinition
+            );
 
             Assert.Same(expectedPartDefinition, ((ICompositionElement)exportDefinition).Origin);
         }
@@ -92,9 +121,17 @@ namespace System.ComponentModel.Composition.ReflectionModel
         public void SetDefinition_PartDefinitionDoesNotContainCreationPolicy_CreationPolicyShouldNotBeInMetadata()
         {
             var expectedPartDefinition = PartDefinitionFactory.CreateAttributed(typeof(object));
-            var exportDefinition = CreateReflectionExportDefinition(new LazyMemberInfo(this.GetType()), "ContractName", null);
+            var exportDefinition = CreateReflectionExportDefinition(
+                new LazyMemberInfo(this.GetType()),
+                "ContractName",
+                null
+            );
 
-            Assert.False(exportDefinition.Metadata.ContainsKey(CompositionConstants.PartCreationPolicyMetadataName));
+            Assert.False(
+                exportDefinition.Metadata.ContainsKey(
+                    CompositionConstants.PartCreationPolicyMetadataName
+                )
+            );
         }
 
         [Fact]
@@ -104,8 +141,13 @@ namespace System.ComponentModel.Composition.ReflectionModel
 
             foreach (var contractName in contractNames)
             {
-                if (string.IsNullOrEmpty(contractName)) continue;
-                var definition = (ICompositionElement)CreateReflectionExportDefinition(new LazyMemberInfo(typeof(string)), contractName, null);
+                if (string.IsNullOrEmpty(contractName))
+                    continue;
+                var definition = (ICompositionElement)CreateReflectionExportDefinition(
+                    new LazyMemberInfo(typeof(string)),
+                    contractName,
+                    null
+                );
 
                 var e = CreateDisplayNameExpectation(contractName);
 
@@ -120,7 +162,11 @@ namespace System.ComponentModel.Composition.ReflectionModel
 
             foreach (var type in types)
             {
-                var definition = (ICompositionElement)CreateReflectionExportDefinition(new LazyMemberInfo(type), "Contract", null);
+                var definition = (ICompositionElement)CreateReflectionExportDefinition(
+                    new LazyMemberInfo(type),
+                    "Contract",
+                    null
+                );
 
                 var e = CreateDisplayNameExpectation(type);
 
@@ -135,7 +181,11 @@ namespace System.ComponentModel.Composition.ReflectionModel
 
             foreach (var member in members)
             {
-                var definition = (ICompositionElement)CreateReflectionExportDefinition(new LazyMemberInfo(member), "Contract", null);
+                var definition = (ICompositionElement)CreateReflectionExportDefinition(
+                    new LazyMemberInfo(member),
+                    "Contract",
+                    null
+                );
 
                 var e = CreateDisplayNameExpectation(member);
 
@@ -150,7 +200,11 @@ namespace System.ComponentModel.Composition.ReflectionModel
 
             foreach (var member in members)
             {
-                var definition = (ICompositionElement)CreateReflectionExportDefinition(new LazyMemberInfo(member), "Contract", null);
+                var definition = (ICompositionElement)CreateReflectionExportDefinition(
+                    new LazyMemberInfo(member),
+                    "Contract",
+                    null
+                );
 
                 Assert.Equal(definition.DisplayName, definition.ToString());
             }
@@ -165,6 +219,5 @@ namespace System.ComponentModel.Composition.ReflectionModel
         {
             return string.Format("{0} (ContractName=\"Contract\")", member.GetDisplayName());
         }
-
     }
 }

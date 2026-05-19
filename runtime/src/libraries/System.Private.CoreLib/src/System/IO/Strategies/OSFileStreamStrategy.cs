@@ -37,13 +37,29 @@ namespace System.IO.Strategies
             _fileHandle = handle;
         }
 
-        internal OSFileStreamStrategy(string path, FileMode mode, FileAccess access, FileShare share, FileOptions options, long preallocationSize, UnixFileMode? unixCreateMode)
+        internal OSFileStreamStrategy(
+            string path,
+            FileMode mode,
+            FileAccess access,
+            FileShare share,
+            FileOptions options,
+            long preallocationSize,
+            UnixFileMode? unixCreateMode
+        )
         {
             string fullPath = Path.GetFullPath(path);
 
             _access = access;
 
-            _fileHandle = SafeFileHandle.Open(fullPath, mode, access, share, options, preallocationSize, unixCreateMode);
+            _fileHandle = SafeFileHandle.Open(
+                fullPath,
+                mode,
+                access,
+                share,
+                options,
+                preallocationSize,
+                unixCreateMode
+            );
 
             try
             {
@@ -70,16 +86,20 @@ namespace System.IO.Strategies
 
         public sealed override bool CanSeek => _fileHandle.CanSeek;
 
-        public sealed override bool CanRead => !_fileHandle.IsClosed && (_access & FileAccess.Read) != 0;
+        public sealed override bool CanRead =>
+            !_fileHandle.IsClosed && (_access & FileAccess.Read) != 0;
 
-        public sealed override bool CanWrite => !_fileHandle.IsClosed && (_access & FileAccess.Write) != 0;
+        public sealed override bool CanWrite =>
+            !_fileHandle.IsClosed && (_access & FileAccess.Write) != 0;
 
         public sealed override unsafe long Length => _fileHandle.GetFileLength();
 
         // in case of concurrent incomplete reads, there can be multiple threads trying to update the position
         // at the same time. That is why we are using Interlocked here.
-        internal void OnIncompleteOperation(int expectedBytesTransferred, int actualBytesTransferred)
-            => Interlocked.Add(ref _filePosition, actualBytesTransferred - expectedBytesTransferred);
+        internal void OnIncompleteOperation(
+            int expectedBytesTransferred,
+            int actualBytesTransferred
+        ) => Interlocked.Add(ref _filePosition, actualBytesTransferred - expectedBytesTransferred);
 
         /// <summary>Gets or sets the position within the current stream</summary>
         public sealed override long Position
@@ -130,9 +150,10 @@ namespace System.IO.Strategies
             }
         }
 
-        public sealed override void Flush() { }  // no buffering = nothing to flush
+        public sealed override void Flush() { } // no buffering = nothing to flush
 
-        public sealed override Task FlushAsync(CancellationToken cancellationToken) => Task.CompletedTask; // no buffering = nothing to flush
+        public sealed override Task FlushAsync(CancellationToken cancellationToken) =>
+            Task.CompletedTask; // no buffering = nothing to flush
 
         internal sealed override void Flush(bool flushToDisk)
         {
@@ -149,7 +170,7 @@ namespace System.IO.Strategies
             {
                 SeekOrigin.Begin => offset,
                 SeekOrigin.End => Length + offset,
-                _ => _filePosition + offset // SeekOrigin.Current
+                _ => _filePosition + offset, // SeekOrigin.Current
             };
 
             if (pos >= 0)
@@ -172,9 +193,11 @@ namespace System.IO.Strategies
             return pos;
         }
 
-        internal sealed override void Lock(long position, long length) => FileStreamHelpers.Lock(_fileHandle, CanWrite, position, length);
+        internal sealed override void Lock(long position, long length) =>
+            FileStreamHelpers.Lock(_fileHandle, CanWrite, position, length);
 
-        internal sealed override void Unlock(long position, long length) => FileStreamHelpers.Unlock(_fileHandle, position, length);
+        internal sealed override void Unlock(long position, long length) =>
+            FileStreamHelpers.Unlock(_fileHandle, position, length);
 
         public sealed override void SetLength(long value)
         {
@@ -189,7 +212,10 @@ namespace System.IO.Strategies
             Debug.Assert(value >= 0, "value >= 0");
 
             RandomAccess.SetFileLength(_fileHandle, value);
-            Debug.Assert(!_fileHandle.TryGetCachedLength(out _), "If length can be cached (file opened for reading, not shared for writing), it should be impossible to modify file length");
+            Debug.Assert(
+                !_fileHandle.TryGetCachedLength(out _),
+                "If length can be cached (file opened for reading, not shared for writing), it should be impossible to modify file length"
+            );
 
             if (_filePosition > value)
             {
@@ -245,38 +271,79 @@ namespace System.IO.Strategies
             _filePosition += buffer.Length;
         }
 
-        public sealed override IAsyncResult BeginWrite(byte[] buffer, int offset, int count, AsyncCallback? callback, object? state) =>
-            TaskToAsyncResult.Begin(WriteAsync(buffer, offset, count), callback, state);
+        public sealed override IAsyncResult BeginWrite(
+            byte[] buffer,
+            int offset,
+            int count,
+            AsyncCallback? callback,
+            object? state
+        ) => TaskToAsyncResult.Begin(WriteAsync(buffer, offset, count), callback, state);
 
         public sealed override void EndWrite(IAsyncResult asyncResult) =>
             TaskToAsyncResult.End(asyncResult);
 
-        public sealed override Task WriteAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken) =>
+        public sealed override Task WriteAsync(
+            byte[] buffer,
+            int offset,
+            int count,
+            CancellationToken cancellationToken
+        ) =>
             WriteAsync(new ReadOnlyMemory<byte>(buffer, offset, count), cancellationToken).AsTask();
 
-        public sealed override ValueTask WriteAsync(ReadOnlyMemory<byte> source, CancellationToken cancellationToken)
+        public sealed override ValueTask WriteAsync(
+            ReadOnlyMemory<byte> source,
+            CancellationToken cancellationToken
+        )
         {
-            long writeOffset = CanSeek ? Interlocked.Add(ref _filePosition, source.Length) - source.Length : -1;
-            return RandomAccess.WriteAtOffsetAsync(_fileHandle, source, writeOffset, cancellationToken, this);
+            long writeOffset = CanSeek
+                ? Interlocked.Add(ref _filePosition, source.Length) - source.Length
+                : -1;
+            return RandomAccess.WriteAtOffsetAsync(
+                _fileHandle,
+                source,
+                writeOffset,
+                cancellationToken,
+                this
+            );
         }
 
-        public sealed override IAsyncResult BeginRead(byte[] buffer, int offset, int count, AsyncCallback? callback, object? state) =>
-            TaskToAsyncResult.Begin(ReadAsync(buffer, offset, count), callback, state);
+        public sealed override IAsyncResult BeginRead(
+            byte[] buffer,
+            int offset,
+            int count,
+            AsyncCallback? callback,
+            object? state
+        ) => TaskToAsyncResult.Begin(ReadAsync(buffer, offset, count), callback, state);
 
         public sealed override int EndRead(IAsyncResult asyncResult) =>
             TaskToAsyncResult.End<int>(asyncResult);
 
-        public sealed override Task<int> ReadAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken) =>
-            ReadAsync(new Memory<byte>(buffer, offset, count), cancellationToken).AsTask();
+        public sealed override Task<int> ReadAsync(
+            byte[] buffer,
+            int offset,
+            int count,
+            CancellationToken cancellationToken
+        ) => ReadAsync(new Memory<byte>(buffer, offset, count), cancellationToken).AsTask();
 
-        public sealed override ValueTask<int> ReadAsync(Memory<byte> destination, CancellationToken cancellationToken)
+        public sealed override ValueTask<int> ReadAsync(
+            Memory<byte> destination,
+            CancellationToken cancellationToken
+        )
         {
             if (!CanSeek)
             {
-                return RandomAccess.ReadAtOffsetAsync(_fileHandle, destination, fileOffset: -1, cancellationToken);
+                return RandomAccess.ReadAtOffsetAsync(
+                    _fileHandle,
+                    destination,
+                    fileOffset: -1,
+                    cancellationToken
+                );
             }
 
-            if (_fileHandle.TryGetCachedLength(out long cachedLength) && Volatile.Read(ref _filePosition) >= cachedLength)
+            if (
+                _fileHandle.TryGetCachedLength(out long cachedLength)
+                && Volatile.Read(ref _filePosition) >= cachedLength
+            )
             {
                 // We know for sure that the file length can be safely cached and it has already been obtained.
                 // If we have reached EOF we just return here and avoid a sys-call.
@@ -286,8 +353,15 @@ namespace System.IO.Strategies
             // This implementation updates the file position before the operation starts and updates it after incomplete read.
             // This is done to keep backward compatibility for concurrent reads.
             // It uses Interlocked as there can be multiple concurrent incomplete reads updating position at the same time.
-            long readOffset = Interlocked.Add(ref _filePosition, destination.Length) - destination.Length;
-            return RandomAccess.ReadAtOffsetAsync(_fileHandle, destination, readOffset, cancellationToken, this);
+            long readOffset =
+                Interlocked.Add(ref _filePosition, destination.Length) - destination.Length;
+            return RandomAccess.ReadAtOffsetAsync(
+                _fileHandle,
+                destination,
+                readOffset,
+                cancellationToken,
+                this
+            );
         }
     }
 }

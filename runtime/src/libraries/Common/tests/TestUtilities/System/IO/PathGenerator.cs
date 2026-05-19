@@ -10,8 +10,10 @@ namespace System.IO
     {
         private static Random _rand = new Random();
 
-        public static string GenerateTestFileName([CallerMemberName] string memberName = null, [CallerLineNumber] int lineNumber = 0)
-            => GenerateTestFileName(null, memberName, lineNumber);
+        public static string GenerateTestFileName(
+            [CallerMemberName] string memberName = null,
+            [CallerLineNumber] int lineNumber = 0
+        ) => GenerateTestFileName(null, memberName, lineNumber);
 
         public static string GenerateTestFileName(int? index, string memberName, int lineNumber) =>
             string.Format(
@@ -19,7 +21,8 @@ namespace System.IO
                 memberName ?? "TestBase",
                 lineNumber,
                 index.GetValueOrDefault(),
-                GenerateRandomFileSafeString(8)); // randomness to avoid collisions between derived test classes using same base method concurrently
+                GenerateRandomFileSafeString(8)
+            ); // randomness to avoid collisions between derived test classes using same base method concurrently
 
         private static string GenerateRandomFileSafeString(int length)
         {

@@ -32,7 +32,8 @@ public class TemporalAsOfQueryRootExpression : TemporalQueryRootExpression
     public TemporalAsOfQueryRootExpression(
         IAsyncQueryProvider queryProvider,
         IEntityType entityType,
-        DateTime pointInTime)
+        DateTime pointInTime
+    )
         : base(queryProvider, entityType)
     {
         PointInTime = pointInTime;
@@ -52,8 +53,8 @@ public class TemporalAsOfQueryRootExpression : TemporalQueryRootExpression
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public override Expression DetachQueryProvider()
-        => new TemporalAsOfQueryRootExpression(EntityType, PointInTime);
+    public override Expression DetachQueryProvider() =>
+        new TemporalAsOfQueryRootExpression(EntityType, PointInTime);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -61,11 +62,12 @@ public class TemporalAsOfQueryRootExpression : TemporalQueryRootExpression
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public override EntityQueryRootExpression UpdateEntityType(IEntityType entityType)
-        => entityType.ClrType != EntityType.ClrType
-            || entityType.Name != EntityType.Name
-                ? throw new InvalidOperationException(CoreStrings.QueryRootDifferentEntityType(entityType.DisplayName()))
-                : new TemporalAsOfQueryRootExpression(entityType, PointInTime);
+    public override EntityQueryRootExpression UpdateEntityType(IEntityType entityType) =>
+        entityType.ClrType != EntityType.ClrType || entityType.Name != EntityType.Name
+            ? throw new InvalidOperationException(
+                CoreStrings.QueryRootDifferentEntityType(entityType.DisplayName())
+            )
+            : new TemporalAsOfQueryRootExpression(entityType, PointInTime);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -85,15 +87,16 @@ public class TemporalAsOfQueryRootExpression : TemporalQueryRootExpression
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public override bool Equals(object? obj)
-        => obj != null
-            && (ReferenceEquals(this, obj)
-                || obj is TemporalAsOfQueryRootExpression queryRootExpression
-                && Equals(queryRootExpression));
+    public override bool Equals(object? obj) =>
+        obj != null
+        && (
+            ReferenceEquals(this, obj)
+            || obj is TemporalAsOfQueryRootExpression queryRootExpression
+                && Equals(queryRootExpression)
+        );
 
-    private bool Equals(TemporalAsOfQueryRootExpression queryRootExpression)
-        => base.Equals(queryRootExpression)
-            && Equals(PointInTime, queryRootExpression.PointInTime);
+    private bool Equals(TemporalAsOfQueryRootExpression queryRootExpression) =>
+        base.Equals(queryRootExpression) && Equals(PointInTime, queryRootExpression.PointInTime);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to

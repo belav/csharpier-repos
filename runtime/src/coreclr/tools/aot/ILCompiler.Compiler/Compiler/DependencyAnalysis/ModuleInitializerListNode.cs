@@ -3,14 +3,16 @@
 
 using System;
 using System.Collections.Generic;
-
 using Internal.Text;
 using Internal.TypeSystem;
 using Internal.TypeSystem.Ecma;
 
 namespace ILCompiler.DependencyAnalysis
 {
-    internal sealed class ModuleInitializerListNode : ObjectNode, ISymbolDefinitionNode, INodeWithSize
+    internal sealed class ModuleInitializerListNode
+        : ObjectNode,
+            ISymbolDefinitionNode,
+            INodeWithSize
     {
         private int? _size;
 
@@ -25,25 +27,35 @@ namespace ILCompiler.DependencyAnalysis
 
         public override bool IsShareable => false;
 
-        public override ObjectNodeSection GetSection(NodeFactory factory) => ObjectNodeSection.DataSection;
+        public override ObjectNodeSection GetSection(NodeFactory factory) =>
+            ObjectNodeSection.DataSection;
 
         public override bool StaticDependenciesAreComputed => true;
 
-        protected override string GetName(NodeFactory factory) => this.GetMangledName(factory.NameMangler);
+        protected override string GetName(NodeFactory factory) =>
+            this.GetMangledName(factory.NameMangler);
 
         public override ObjectData GetData(NodeFactory factory, bool relocsOnly = false)
         {
             // This is a summary node that doesn't introduce dependencies.
             if (relocsOnly)
-                return new ObjectData(Array.Empty<byte>(), Array.Empty<Relocation>(), 1, new ISymbolDefinitionNode[] { this });
+                return new ObjectData(
+                    Array.Empty<byte>(),
+                    Array.Empty<Relocation>(),
+                    1,
+                    new ISymbolDefinitionNode[] { this }
+                );
 
             var modulesWithCctor = new List<ModuleDesc>();
 
             foreach (var methodNode in factory.MetadataManager.GetCompiledMethodBodies())
             {
                 MethodDesc method = methodNode.Method;
-                if (method.OwningType is MetadataType mdType
-                    && mdType.IsModuleType && method.IsStaticConstructor)
+                if (
+                    method.OwningType is MetadataType mdType
+                    && mdType.IsModuleType
+                    && method.IsStaticConstructor
+                )
                 {
                     modulesWithCctor.Add(mdType.Module);
                 }
@@ -134,7 +146,9 @@ namespace ILCompiler.DependencyAnalysis
 
             foreach (var module in sortedModules)
             {
-                IMethodNode entrypoint = factory.MethodEntrypoint(module.GetGlobalModuleType().GetStaticConstructor());
+                IMethodNode entrypoint = factory.MethodEntrypoint(
+                    module.GetGlobalModuleType().GetStaticConstructor()
+                );
                 if (factory.Target.SupportsRelativePointers)
                     builder.EmitReloc(entrypoint, RelocType.IMAGE_REL_BASED_RELPTR32);
                 else
@@ -172,6 +186,7 @@ namespace ILCompiler.DependencyAnalysis
                     return _edgeNodes = edgeNodes.ToArray();
                 }
             }
+
             public bool Satisfies(HashSet<ModuleGraphNode> markedNodes)
             {
                 foreach (var edge in Edges)
@@ -179,13 +194,18 @@ namespace ILCompiler.DependencyAnalysis
                         return false;
                 return true;
             }
-            public ModuleGraphNode(ModuleGraphFactory factory, ModuleDesc module, ModuleDesc[] edges)
-                => (_factory, Module, _edges) = (factory, module, edges);
+
+            public ModuleGraphNode(
+                ModuleGraphFactory factory,
+                ModuleDesc module,
+                ModuleDesc[] edges
+            ) => (_factory, Module, _edges) = (factory, module, edges);
         }
 
         private sealed class ModuleGraphFactory
         {
-            private readonly Dictionary<ModuleDesc, ModuleGraphNode> _nodes = new Dictionary<ModuleDesc, ModuleGraphNode>();
+            private readonly Dictionary<ModuleDesc, ModuleGraphNode> _nodes =
+                new Dictionary<ModuleDesc, ModuleGraphNode>();
 
             public ModuleGraphNode GetNode(ModuleDesc module)
             {
@@ -194,16 +214,21 @@ namespace ILCompiler.DependencyAnalysis
 
                 if (module is EcmaModule ecmaModule)
                 {
-                    ArrayBuilder<ModuleDesc> referencedAssemblies = default(ArrayBuilder<ModuleDesc>);
+                    ArrayBuilder<ModuleDesc> referencedAssemblies =
+                        default(ArrayBuilder<ModuleDesc>);
                     var reader = ecmaModule.MetadataReader;
                     foreach (var assemblyReferenceHandle in reader.AssemblyReferences)
                     {
-                        var assemblyReference = reader.GetAssemblyReference(assemblyReferenceHandle);
+                        var assemblyReference = reader.GetAssemblyReference(
+                            assemblyReferenceHandle
+                        );
                         string assemblyName = reader.GetString(assemblyReference.Name);
 
                         try
                         {
-                            var reference = module.Context.ResolveAssembly(new System.Reflection.AssemblyName(assemblyName));
+                            var reference = module.Context.ResolveAssembly(
+                                new System.Reflection.AssemblyName(assemblyName)
+                            );
                             referencedAssemblies.Add(reference);
                         }
                         catch (TypeSystemException) { }

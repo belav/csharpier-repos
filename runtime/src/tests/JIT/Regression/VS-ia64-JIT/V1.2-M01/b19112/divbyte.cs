@@ -3,11 +3,13 @@
 //
 
 using Xunit;
+
 public class foo
 {
-
 #pragma warning disable 0414
-    public static sbyte a, b, c;
+    public static sbyte a,
+        b,
+        c;
 #pragma warning restore 0414
 
     [Fact]
@@ -21,10 +23,8 @@ public class foo
 
     internal static void div()
     {
-
         sbyte b = 3;
 
         c = (sbyte)(a / b);
     }
-
 }

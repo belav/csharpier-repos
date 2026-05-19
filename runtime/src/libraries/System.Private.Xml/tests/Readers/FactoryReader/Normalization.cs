@@ -18,7 +18,6 @@ namespace System.Xml.FactoryReaderTests
         protected const string ST_ATTR_EXP_STRING_MS = "x     x";
         protected const string ST_ELEM_EXP_STRING = "x\nx";
 
-
         public override int Init(object objParam)
         {
             int ret = base.Init(objParam);
@@ -27,7 +26,6 @@ namespace System.Xml.FactoryReaderTests
             return ret;
         }
 
-
         public override int Terminate(object objParam)
         {
             // just in case it failed without closing
@@ -35,7 +33,6 @@ namespace System.Xml.FactoryReaderTests
 
             return base.Terminate(objParam);
         }
-
 
         ////////////////////////////////////////////////////////////////
         // Variations
@@ -47,10 +44,13 @@ namespace System.Xml.FactoryReaderTests
 
             ReloadSource();
             DataReader.PositionOnElement(ST_ATTR_TEST_NAME);
-            bPassed = CError.Equals(DataReader.GetAttribute("CRLF"), ST_ATTR_EXP_STRING, CurVariation.Desc);
+            bPassed = CError.Equals(
+                DataReader.GetAttribute("CRLF"),
+                ST_ATTR_EXP_STRING,
+                CurVariation.Desc
+            );
             return BoolToLTMResult(bPassed);
         }
-
 
         [Variation("XmlTextReader Normalization - CR in Attribute value")]
         public int TestNormalization2()
@@ -59,10 +59,13 @@ namespace System.Xml.FactoryReaderTests
 
             ReloadSource();
             DataReader.PositionOnElement(ST_ATTR_TEST_NAME);
-            bPassed = CError.Equals(DataReader.GetAttribute("CR"), ST_ATTR_EXP_STRING, CurVariation.Desc);
+            bPassed = CError.Equals(
+                DataReader.GetAttribute("CR"),
+                ST_ATTR_EXP_STRING,
+                CurVariation.Desc
+            );
             return BoolToLTMResult(bPassed);
         }
-
 
         [Variation("XmlTextReader Normalization - LF in Attribute value")]
         public int TestNormalization3()
@@ -71,10 +74,13 @@ namespace System.Xml.FactoryReaderTests
 
             ReloadSource();
             DataReader.PositionOnElement(ST_ATTR_TEST_NAME);
-            bPassed = CError.Equals(DataReader.GetAttribute("LF"), ST_ATTR_EXP_STRING, CurVariation.Desc);
+            bPassed = CError.Equals(
+                DataReader.GetAttribute("LF"),
+                ST_ATTR_EXP_STRING,
+                CurVariation.Desc
+            );
             return BoolToLTMResult(bPassed);
         }
-
 
         [Variation("XmlTextReader Normalization - multiple spaces in Attribute value", Pri = 0)]
         public int TestNormalization4()
@@ -85,10 +91,13 @@ namespace System.Xml.FactoryReaderTests
             DataReader.PositionOnElement(ST_ATTR_TEST_NAME);
 
             // as far as the MS attribute is CDATA internal spaces are not compacted
-            bPassed = CError.Equals(DataReader.GetAttribute("MS"), ST_ATTR_EXP_STRING_MS, CurVariation.Desc);
+            bPassed = CError.Equals(
+                DataReader.GetAttribute("MS"),
+                ST_ATTR_EXP_STRING_MS,
+                CurVariation.Desc
+            );
             return BoolToLTMResult(bPassed);
         }
-
 
         [Variation("XmlTextReader Normalization - tab in Attribute value", Pri = 0)]
         public int TestNormalization5()
@@ -97,10 +106,13 @@ namespace System.Xml.FactoryReaderTests
 
             ReloadSource();
             DataReader.PositionOnElement(ST_ATTR_TEST_NAME);
-            bPassed = CError.Equals(DataReader.GetAttribute("TAB"), ST_ATTR_EXP_STRING, CurVariation.Desc);
+            bPassed = CError.Equals(
+                DataReader.GetAttribute("TAB"),
+                ST_ATTR_EXP_STRING,
+                CurVariation.Desc
+            );
             return BoolToLTMResult(bPassed);
         }
-
 
         [Variation("XmlTextReader Normalization - CRLF in text node", Pri = 0)]
         public int TestNormalization6()
@@ -114,7 +126,6 @@ namespace System.Xml.FactoryReaderTests
             return BoolToLTMResult(bPassed);
         }
 
-
         [Variation("XmlTextReader Normalization - CR in text node")]
         public int TestNormalization7()
         {
@@ -126,7 +137,6 @@ namespace System.Xml.FactoryReaderTests
             bPassed = CError.Equals(DataReader.Value, ST_ELEM_EXP_STRING, CurVariation.Desc);
             return BoolToLTMResult(bPassed);
         }
-
 
         [Variation("XmlTextReader Normalization - LF in text node")]
         public int TestNormalization8()
@@ -140,7 +150,6 @@ namespace System.Xml.FactoryReaderTests
             return BoolToLTMResult(bPassed);
         }
 
-
         [Variation("XmlTextReader Normalization = true with invalid chars", Pri = 0)]
         public int TestNormalization9()
         {
@@ -148,7 +157,8 @@ namespace System.Xml.FactoryReaderTests
 
             try
             {
-                while (DataReader.Read()) ;
+                while (DataReader.Read())
+                    ;
             }
             catch (XmlException)
             {
@@ -156,7 +166,6 @@ namespace System.Xml.FactoryReaderTests
             }
             throw new CTestException(CTestBase.TEST_FAIL, WRONG_EXCEPTION);
         }
-
 
         // XML 1.0 SE
         [Variation("Line breaks normalization in document entity")]
@@ -171,7 +180,12 @@ namespace System.Xml.FactoryReaderTests
                 {
                     if (DataReader.Value.IndexOf('\r') != -1)
                     {
-                        CError.WriteLine("#xD found in node {0}, line {1} col {2}", DataReader.NodeType, DataReader.LineNumber, DataReader.LinePosition);
+                        CError.WriteLine(
+                            "#xD found in node {0}, line {1} col {2}",
+                            DataReader.NodeType,
+                            DataReader.LineNumber,
+                            DataReader.LinePosition
+                        );
                         return TEST_FAIL;
                     }
                 }
@@ -179,7 +193,6 @@ namespace System.Xml.FactoryReaderTests
 
             return TEST_PASS;
         }
-
 
         [Variation("XmlTextReader Normalization = true with invalid chars")]
         public int TestNormalization14()
@@ -193,7 +206,8 @@ namespace System.Xml.FactoryReaderTests
                 ReloadSourceStr(strxml);
                 try
                 {
-                    while (DataReader.Read()) ;
+                    while (DataReader.Read())
+                        ;
 
                     CError.WriteLine("Accepted invalid character XML");
                     return TEST_FAIL;
@@ -229,10 +243,13 @@ namespace System.Xml.FactoryReaderTests
 
             CError.Compare(valueGet, expNormalizedValue, "Wrong normalization (GetAttributeValue)");
             CError.Compare(valueMove, expNormalizedValue, "Wrong normalization (MoveToAttribute)");
-            CError.Compare(valueRead, expNormalizedValue, "Wrong normalization (ReadAttributeValue)");
+            CError.Compare(
+                valueRead,
+                expNormalizedValue,
+                "Wrong normalization (ReadAttributeValue)"
+            );
             return TEST_PASS;
         }
-
 
         [Variation("Character entities with in text nodes")]
         public int TestNormalization17()

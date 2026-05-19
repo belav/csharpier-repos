@@ -13,6 +13,7 @@ namespace Microsoft.Extensions.Logging.Console
         /// Produces messages in the default console format.
         /// </summary>
         Default,
+
         /// <summary>
         /// Produces messages in a format suitable for console output to the systemd journal.
         /// </summary>

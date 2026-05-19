@@ -4,16 +4,13 @@
 using System;
 using System.Runtime;
 
-
-
 namespace LOHCompactAPI
 {
     class Program
     {
-
         public static int Main()
         {
-            for(int i = 0; i <= 5; i++)
+            for (int i = 0; i <= 5; i++)
             {
                 Console.WriteLine(i);
                 if ((GCLargeObjectHeapCompactionMode)(i) == GCLargeObjectHeapCompactionMode.Default)
@@ -21,7 +18,10 @@ namespace LOHCompactAPI
                     Console.WriteLine("Default");
                     continue;
                 }
-                if ((GCLargeObjectHeapCompactionMode)(i) == GCLargeObjectHeapCompactionMode.CompactOnce)
+                if (
+                    (GCLargeObjectHeapCompactionMode)(i)
+                    == GCLargeObjectHeapCompactionMode.CompactOnce
+                )
                 {
                     Console.WriteLine("CompactOnce");
                     continue;
@@ -46,17 +46,15 @@ namespace LOHCompactAPI
 
                 if (!exc)
                 {
-                    Console.WriteLine("Expected ArgumentOutOfrangeException for out of range input for LargeObjectHeapCompactionMode");
+                    Console.WriteLine(
+                        "Expected ArgumentOutOfrangeException for out of range input for LargeObjectHeapCompactionMode"
+                    );
                     return 2;
                 }
             }
-           
+
             Console.WriteLine("Test passed");
             return 100;
         }
-
-
     }
 }
-
-

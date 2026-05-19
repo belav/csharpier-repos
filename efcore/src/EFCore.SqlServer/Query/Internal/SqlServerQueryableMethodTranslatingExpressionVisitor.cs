@@ -16,7 +16,8 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal;
 ///     any release. You should only use it directly in your code with extreme caution and knowing that
 ///     doing so can result in application failures when updating to a new Entity Framework Core release.
 /// </summary>
-public class SqlServerQueryableMethodTranslatingExpressionVisitor : RelationalQueryableMethodTranslatingExpressionVisitor
+public class SqlServerQueryableMethodTranslatingExpressionVisitor
+    : RelationalQueryableMethodTranslatingExpressionVisitor
 {
     private readonly QueryCompilationContext _queryCompilationContext;
     private readonly IRelationalTypeMappingSource _typeMappingSource;
@@ -35,7 +36,8 @@ public class SqlServerQueryableMethodTranslatingExpressionVisitor : RelationalQu
         QueryableMethodTranslatingExpressionVisitorDependencies dependencies,
         RelationalQueryableMethodTranslatingExpressionVisitorDependencies relationalDependencies,
         QueryCompilationContext queryCompilationContext,
-        ISqlServerSingletonOptions sqlServerSingletonOptions)
+        ISqlServerSingletonOptions sqlServerSingletonOptions
+    )
         : base(dependencies, relationalDependencies, queryCompilationContext)
     {
         _queryCompilationContext = queryCompilationContext;
@@ -52,7 +54,8 @@ public class SqlServerQueryableMethodTranslatingExpressionVisitor : RelationalQu
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     protected SqlServerQueryableMethodTranslatingExpressionVisitor(
-        SqlServerQueryableMethodTranslatingExpressionVisitor parentVisitor)
+        SqlServerQueryableMethodTranslatingExpressionVisitor parentVisitor
+    )
         : base(parentVisitor)
     {
         _queryCompilationContext = parentVisitor._queryCompilationContext;
@@ -68,8 +71,8 @@ public class SqlServerQueryableMethodTranslatingExpressionVisitor : RelationalQu
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    protected override QueryableMethodTranslatingExpressionVisitor CreateSubqueryVisitor()
-        => new SqlServerQueryableMethodTranslatingExpressionVisitor(this);
+    protected override QueryableMethodTranslatingExpressionVisitor CreateSubqueryVisitor() =>
+        new SqlServerQueryableMethodTranslatingExpressionVisitor(this);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -81,31 +84,72 @@ public class SqlServerQueryableMethodTranslatingExpressionVisitor : RelationalQu
     {
         if (extensionExpression is TemporalQueryRootExpression queryRootExpression)
         {
-            var selectExpression = RelationalDependencies.SqlExpressionFactory.Select(queryRootExpression.EntityType);
-            Func<TableExpression, TableExpressionBase> annotationApplyingFunc = queryRootExpression switch
-            {
-                TemporalAllQueryRootExpression => te => te
-                    .AddAnnotation(SqlServerAnnotationNames.TemporalOperationType, TemporalOperationType.All),
-                TemporalAsOfQueryRootExpression asOf => te => te
-                    .AddAnnotation(SqlServerAnnotationNames.TemporalOperationType, TemporalOperationType.AsOf)
-                    .AddAnnotation(SqlServerAnnotationNames.TemporalAsOfPointInTime, asOf.PointInTime),
-                TemporalBetweenQueryRootExpression between => te => te
-                    .AddAnnotation(SqlServerAnnotationNames.TemporalOperationType, TemporalOperationType.Between)
-                    .AddAnnotation(SqlServerAnnotationNames.TemporalRangeOperationFrom, between.From)
-                    .AddAnnotation(SqlServerAnnotationNames.TemporalRangeOperationTo, between.To),
-                TemporalContainedInQueryRootExpression containedIn => te => te
-                    .AddAnnotation(SqlServerAnnotationNames.TemporalOperationType, TemporalOperationType.ContainedIn)
-                    .AddAnnotation(SqlServerAnnotationNames.TemporalRangeOperationFrom, containedIn.From)
-                    .AddAnnotation(SqlServerAnnotationNames.TemporalRangeOperationTo, containedIn.To),
-                TemporalFromToQueryRootExpression fromTo => te => te
-                    .AddAnnotation(SqlServerAnnotationNames.TemporalOperationType, TemporalOperationType.FromTo)
-                    .AddAnnotation(SqlServerAnnotationNames.TemporalRangeOperationFrom, fromTo.From)
-                    .AddAnnotation(SqlServerAnnotationNames.TemporalRangeOperationTo, fromTo.To),
-                _ => throw new InvalidOperationException(queryRootExpression.Print()),
-            };
+            var selectExpression = RelationalDependencies.SqlExpressionFactory.Select(
+                queryRootExpression.EntityType
+            );
+            Func<TableExpression, TableExpressionBase> annotationApplyingFunc =
+                queryRootExpression switch
+                {
+                    TemporalAllQueryRootExpression => te =>
+                        te.AddAnnotation(
+                            SqlServerAnnotationNames.TemporalOperationType,
+                            TemporalOperationType.All
+                        ),
+                    TemporalAsOfQueryRootExpression asOf => te =>
+                        te.AddAnnotation(
+                                SqlServerAnnotationNames.TemporalOperationType,
+                                TemporalOperationType.AsOf
+                            )
+                            .AddAnnotation(
+                                SqlServerAnnotationNames.TemporalAsOfPointInTime,
+                                asOf.PointInTime
+                            ),
+                    TemporalBetweenQueryRootExpression between => te =>
+                        te.AddAnnotation(
+                                SqlServerAnnotationNames.TemporalOperationType,
+                                TemporalOperationType.Between
+                            )
+                            .AddAnnotation(
+                                SqlServerAnnotationNames.TemporalRangeOperationFrom,
+                                between.From
+                            )
+                            .AddAnnotation(
+                                SqlServerAnnotationNames.TemporalRangeOperationTo,
+                                between.To
+                            ),
+                    TemporalContainedInQueryRootExpression containedIn => te =>
+                        te.AddAnnotation(
+                                SqlServerAnnotationNames.TemporalOperationType,
+                                TemporalOperationType.ContainedIn
+                            )
+                            .AddAnnotation(
+                                SqlServerAnnotationNames.TemporalRangeOperationFrom,
+                                containedIn.From
+                            )
+                            .AddAnnotation(
+                                SqlServerAnnotationNames.TemporalRangeOperationTo,
+                                containedIn.To
+                            ),
+                    TemporalFromToQueryRootExpression fromTo => te =>
+                        te.AddAnnotation(
+                                SqlServerAnnotationNames.TemporalOperationType,
+                                TemporalOperationType.FromTo
+                            )
+                            .AddAnnotation(
+                                SqlServerAnnotationNames.TemporalRangeOperationFrom,
+                                fromTo.From
+                            )
+                            .AddAnnotation(
+                                SqlServerAnnotationNames.TemporalRangeOperationTo,
+                                fromTo.To
+                            ),
+                    _ => throw new InvalidOperationException(queryRootExpression.Print()),
+                };
 
-            selectExpression = (SelectExpression)new TemporalAnnotationApplyingExpressionVisitor(annotationApplyingFunc)
-                .Visit(selectExpression);
+            selectExpression = (SelectExpression)
+                new TemporalAnnotationApplyingExpressionVisitor(annotationApplyingFunc).Visit(
+                    selectExpression
+                );
 
             return new ShapedQueryExpression(
                 selectExpression,
@@ -114,8 +158,11 @@ public class SqlServerQueryableMethodTranslatingExpressionVisitor : RelationalQu
                     new ProjectionBindingExpression(
                         selectExpression,
                         new ProjectionMember(),
-                        typeof(ValueBuffer)),
-                    false));
+                        typeof(ValueBuffer)
+                    ),
+                    false
+                )
+            );
         }
 
         return base.VisitExtension(extensionExpression);
@@ -130,11 +177,16 @@ public class SqlServerQueryableMethodTranslatingExpressionVisitor : RelationalQu
     protected override ShapedQueryExpression? TranslatePrimitiveCollection(
         SqlExpression sqlExpression,
         IProperty? property,
-        string tableAlias)
+        string tableAlias
+    )
     {
         if (_sqlServerCompatibilityLevel < 130)
         {
-            AddTranslationErrorDetails(SqlServerStrings.CompatibilityLevelTooLowForScalarCollections(_sqlServerCompatibilityLevel));
+            AddTranslationErrorDetails(
+                SqlServerStrings.CompatibilityLevelTooLowForScalarCollections(
+                    _sqlServerCompatibilityLevel
+                )
+            );
 
             return null;
         }
@@ -145,21 +197,24 @@ public class SqlServerQueryableMethodTranslatingExpressionVisitor : RelationalQu
         // (i.e. with a columnInfo), which determines the type conversion to apply to the JSON elements coming out.
         // For parameter collections, the element type mapping will only be inferred and applied later (see
         // SqlServerInferredTypeMappingApplier below), at which point the we'll apply it to add the WITH clause.
-        var elementTypeMapping = (RelationalTypeMapping?)sqlExpression.TypeMapping?.ElementTypeMapping;
+        var elementTypeMapping = (RelationalTypeMapping?)
+            sqlExpression.TypeMapping?.ElementTypeMapping;
 
         var openJsonExpression = elementTypeMapping is null
             ? new SqlServerOpenJsonExpression(tableAlias, sqlExpression)
             : new SqlServerOpenJsonExpression(
-                tableAlias, sqlExpression,
+                tableAlias,
+                sqlExpression,
                 columnInfos: new[]
                 {
                     new SqlServerOpenJsonExpression.ColumnInfo
                     {
                         Name = "value",
                         TypeMapping = elementTypeMapping,
-                        Path = Array.Empty<PathSegment>()
-                    }
-                });
+                        Path = Array.Empty<PathSegment>(),
+                    },
+                }
+            );
 
         var elementClrType = sqlExpression.Type.GetSequenceType();
 
@@ -178,7 +233,8 @@ public class SqlServerQueryableMethodTranslatingExpressionVisitor : RelationalQu
             isElementNullable,
             identifierColumnName: "key",
             identifierColumnType: typeof(string),
-            identifierColumnTypeMapping: _typeMappingSource.FindMapping("nvarchar(4000)"));
+            identifierColumnTypeMapping: _typeMappingSource.FindMapping("nvarchar(4000)")
+        );
 #pragma warning restore EF1001 // Internal EF Core API usage.
 
         // OPENJSON doesn't guarantee the ordering of the elements coming out; when using OPENJSON without WITH, a [key] column is returned
@@ -198,18 +254,27 @@ public class SqlServerQueryableMethodTranslatingExpressionVisitor : RelationalQu
                         "key",
                         typeof(string),
                         typeMapping: _typeMappingSource.FindMapping("nvarchar(4000)"),
-                        columnNullable: false),
+                        columnNullable: false
+                    ),
                     typeof(int),
-                    _typeMappingSource.FindMapping(typeof(int))),
-                ascending: true));
+                    _typeMappingSource.FindMapping(typeof(int))
+                ),
+                ascending: true
+            )
+        );
 
-        var shaperExpression = (Expression)new ProjectionBindingExpression(
-            selectExpression, new ProjectionMember(), elementClrType.MakeNullable());
+        var shaperExpression = (Expression)
+            new ProjectionBindingExpression(
+                selectExpression,
+                new ProjectionMember(),
+                elementClrType.MakeNullable()
+            );
         if (shaperExpression.Type != elementClrType)
         {
             Check.DebugAssert(
                 elementClrType.MakeNullable() == shaperExpression.Type,
-                "expression.Type must be nullable of targetType");
+                "expression.Type must be nullable of targetType"
+            );
 
             shaperExpression = Expression.Convert(shaperExpression, elementClrType);
         }
@@ -223,12 +288,19 @@ public class SqlServerQueryableMethodTranslatingExpressionVisitor : RelationalQu
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    protected override ShapedQueryExpression TransformJsonQueryToTable(JsonQueryExpression jsonQueryExpression)
+    protected override ShapedQueryExpression TransformJsonQueryToTable(
+        JsonQueryExpression jsonQueryExpression
+    )
     {
         // Calculate the table alias for the OPENJSON expression based on the last named path segment
         // (or the JSON column name if there are none)
-        var lastNamedPathSegment = jsonQueryExpression.Path.LastOrDefault(ps => ps.PropertyName is not null);
-        var tableAlias = char.ToLowerInvariant((lastNamedPathSegment.PropertyName ?? jsonQueryExpression.JsonColumn.Name)[0]).ToString();
+        var lastNamedPathSegment = jsonQueryExpression.Path.LastOrDefault(ps =>
+            ps.PropertyName is not null
+        );
+        var tableAlias = char.ToLowerInvariant(
+                (lastNamedPathSegment.PropertyName ?? jsonQueryExpression.JsonColumn.Name)[0]
+            )
+            .ToString();
 
         // We now add all of projected entity's the properties and navigations into the OPENJSON's WITH clause. Note that navigations
         // get AS JSON, which projects out the JSON sub-document for them as text, which can be further navigated into.
@@ -245,32 +317,45 @@ public class SqlServerQueryableMethodTranslatingExpressionVisitor : RelationalQu
                         Name = jsonPropertyName,
                         TypeMapping = property.GetRelationalTypeMapping(),
                         Path = new PathSegment[] { new(jsonPropertyName) },
-                        AsJson = property.GetRelationalTypeMapping().ElementTypeMapping is not null
-                    });
+                        AsJson = property.GetRelationalTypeMapping().ElementTypeMapping is not null,
+                    }
+                );
             }
         }
 
-        foreach (var navigation in GetAllNavigationsInHierarchy(jsonQueryExpression.EntityType)
-                     .Where(
-                         n => n.ForeignKey.IsOwnership
-                             && n.TargetEntityType.IsMappedToJson()
-                             && n.ForeignKey.PrincipalToDependent == n))
+        foreach (
+            var navigation in GetAllNavigationsInHierarchy(jsonQueryExpression.EntityType)
+                .Where(n =>
+                    n.ForeignKey.IsOwnership
+                    && n.TargetEntityType.IsMappedToJson()
+                    && n.ForeignKey.PrincipalToDependent == n
+                )
+        )
         {
             var jsonNavigationName = navigation.TargetEntityType.GetJsonPropertyName();
-            Check.DebugAssert(jsonNavigationName is not null, $"No JSON property name for navigation {navigation.Name}");
+            Check.DebugAssert(
+                jsonNavigationName is not null,
+                $"No JSON property name for navigation {navigation.Name}"
+            );
 
             columnInfos.Add(
                 new SqlServerOpenJsonExpression.ColumnInfo
                 {
                     Name = jsonNavigationName,
-                    TypeMapping = _nvarcharMaxTypeMapping ??= _typeMappingSource.FindMapping("nvarchar(max)")!,
+                    TypeMapping = _nvarcharMaxTypeMapping ??=
+                        _typeMappingSource.FindMapping("nvarchar(max)")!,
                     Path = new PathSegment[] { new(jsonNavigationName) },
-                    AsJson = true
-                });
+                    AsJson = true,
+                }
+            );
         }
 
         var openJsonExpression = new SqlServerOpenJsonExpression(
-            tableAlias, jsonQueryExpression.JsonColumn, jsonQueryExpression.Path, columnInfos);
+            tableAlias,
+            jsonQueryExpression.JsonColumn,
+            jsonQueryExpression.Path,
+            columnInfos
+        );
 
 #pragma warning disable EF1001 // Internal EF Core API usage.
         var selectExpression = new SelectExpression(
@@ -278,7 +363,8 @@ public class SqlServerQueryableMethodTranslatingExpressionVisitor : RelationalQu
             openJsonExpression,
             "key",
             typeof(string),
-            _typeMappingSource.FindMapping("nvarchar(4000)")!);
+            _typeMappingSource.FindMapping("nvarchar(4000)")!
+        );
 #pragma warning restore EF1001 // Internal EF Core API usage.
 
         // See note on OPENJSON and ordering in TranslateCollection
@@ -290,10 +376,14 @@ public class SqlServerQueryableMethodTranslatingExpressionVisitor : RelationalQu
                         "key",
                         typeof(string),
                         typeMapping: _typeMappingSource.FindMapping("nvarchar(4000)"),
-                        columnNullable: false),
+                        columnNullable: false
+                    ),
                     typeof(int),
-                    _typeMappingSource.FindMapping(typeof(int))),
-                ascending: true));
+                    _typeMappingSource.FindMapping(typeof(int))
+                ),
+                ascending: true
+            )
+        );
 
         return new ShapedQueryExpression(
             selectExpression,
@@ -302,16 +392,23 @@ public class SqlServerQueryableMethodTranslatingExpressionVisitor : RelationalQu
                 new ProjectionBindingExpression(
                     selectExpression,
                     new ProjectionMember(),
-                    typeof(ValueBuffer)),
-                false));
+                    typeof(ValueBuffer)
+                ),
+                false
+            )
+        );
 
         // TODO: Move these to IEntityType?
-        static IEnumerable<IProperty> GetAllPropertiesInHierarchy(IEntityType entityType)
-            => entityType.GetAllBaseTypes().Concat(entityType.GetDerivedTypesInclusive())
+        static IEnumerable<IProperty> GetAllPropertiesInHierarchy(IEntityType entityType) =>
+            entityType
+                .GetAllBaseTypes()
+                .Concat(entityType.GetDerivedTypesInclusive())
                 .SelectMany(t => t.GetDeclaredProperties());
 
-        static IEnumerable<INavigation> GetAllNavigationsInHierarchy(IEntityType entityType)
-            => entityType.GetAllBaseTypes().Concat(entityType.GetDerivedTypesInclusive())
+        static IEnumerable<INavigation> GetAllNavigationsInHierarchy(IEntityType entityType) =>
+            entityType
+                .GetAllBaseTypes()
+                .Concat(entityType.GetDerivedTypesInclusive())
                 .SelectMany(t => t.GetDeclaredNavigations());
     }
 
@@ -324,65 +421,88 @@ public class SqlServerQueryableMethodTranslatingExpressionVisitor : RelationalQu
     protected override ShapedQueryExpression? TranslateElementAtOrDefault(
         ShapedQueryExpression source,
         Expression index,
-        bool returnDefault)
+        bool returnDefault
+    )
     {
         // TODO: Make sure we want to actually transform to JSON_VALUE, #30981
-        if (!returnDefault
-            && source.QueryExpression is SelectExpression
-            {
-                Tables: [SqlServerOpenJsonExpression { Arguments: [var jsonArrayColumn] } openJsonExpression],
-                GroupBy: [],
-                Having: null,
-                IsDistinct: false,
-                Limit: null,
-                Offset: null,
-                // We can only apply the indexing if the JSON array is ordered by its natural ordered, i.e. by the "key" column that
-                // we created in TranslateCollection. For example, if another ordering has been applied (e.g. by the JSON elements
-                // themselves), we can no longer simply index into the original array.
-                Orderings:
-                [
-                    {
-                        Expression: SqlUnaryExpression
+        if (
+            !returnDefault
+            && source.QueryExpression
+                is SelectExpression
+                {
+                    Tables: [
+                        SqlServerOpenJsonExpression
                         {
-                            OperatorType: ExpressionType.Convert,
-                            Operand: ColumnExpression { Name: "key", Table: var orderingTable }
-                        }
-                    }
-                ]
-            } selectExpression
+                            Arguments: [var jsonArrayColumn]
+                        } openJsonExpression,
+                    ],
+                    GroupBy: [],
+                    Having: null,
+                    IsDistinct: false,
+                    Limit: null,
+                    Offset: null,
+                    // We can only apply the indexing if the JSON array is ordered by its natural ordered, i.e. by the "key" column that
+                    // we created in TranslateCollection. For example, if another ordering has been applied (e.g. by the JSON elements
+                    // themselves), we can no longer simply index into the original array.
+                    Orderings: [
+                        {
+                            Expression: SqlUnaryExpression
+                            {
+                                OperatorType: ExpressionType.Convert,
+                                Operand: ColumnExpression { Name: "key", Table: var orderingTable }
+                            }
+                        },
+                    ]
+                } selectExpression
             && TranslateExpression(index) is { } translatedIndex
-            && orderingTable == openJsonExpression)
+            && orderingTable == openJsonExpression
+        )
         {
             // Index on JSON array
 
             // Extract the column projected out of the source, and simplify the subquery to a simple JsonScalarExpression
             var shaperExpression = source.ShaperExpression;
-            if (shaperExpression is UnaryExpression { NodeType: ExpressionType.Convert } unaryExpression
+            if (
+                shaperExpression
+                    is UnaryExpression { NodeType: ExpressionType.Convert } unaryExpression
                 && unaryExpression.Operand.Type.IsNullableType()
-                && unaryExpression.Operand.Type.UnwrapNullableType() == unaryExpression.Type)
+                && unaryExpression.Operand.Type.UnwrapNullableType() == unaryExpression.Type
+            )
             {
                 shaperExpression = unaryExpression.Operand;
             }
 
-            if (shaperExpression is ProjectionBindingExpression projectionBindingExpression
-                && selectExpression.GetProjection(projectionBindingExpression) is SqlExpression projection)
+            if (
+                shaperExpression is ProjectionBindingExpression projectionBindingExpression
+                && selectExpression.GetProjection(projectionBindingExpression)
+                    is SqlExpression projection
+            )
             {
                 // OPENJSON's value column is an nvarchar(max); if this is a collection column whose type mapping is know, the projection
                 // contains a CAST node which we unwrap
                 var projectionColumn = projection switch
                 {
                     ColumnExpression c => c,
-                    SqlUnaryExpression { OperatorType: ExpressionType.Convert, Operand: ColumnExpression c } => c,
-                    _ => null
+                    SqlUnaryExpression
+                    {
+                        OperatorType: ExpressionType.Convert,
+                        Operand: ColumnExpression c
+                    } => c,
+                    _ => null,
                 };
 
                 if (projectionColumn is not null)
                 {
                     // If the inner expression happens to itself be a JsonScalarExpression, simply append the two paths to avoid creating
                     // JSON_VALUE within JSON_VALUE.
-                    var (json, path) = jsonArrayColumn is JsonScalarExpression innerJsonScalarExpression
-                        ? (innerJsonScalarExpression.Json,
-                            innerJsonScalarExpression.Path.Append(new PathSegment(translatedIndex)).ToArray())
+                    var (json, path) = jsonArrayColumn
+                        is JsonScalarExpression innerJsonScalarExpression
+                        ? (
+                            innerJsonScalarExpression.Json,
+                            innerJsonScalarExpression
+                                .Path.Append(new PathSegment(translatedIndex))
+                                .ToArray()
+                        )
                         : (jsonArrayColumn, new PathSegment[] { new(translatedIndex) });
 
                     var translation = new JsonScalarExpression(
@@ -390,7 +510,8 @@ public class SqlServerQueryableMethodTranslatingExpressionVisitor : RelationalQu
                         path,
                         projection.Type,
                         projection.TypeMapping,
-                        projectionColumn.IsNullable);
+                        projectionColumn.IsNullable
+                    );
 
                     return source.UpdateQueryExpression(_sqlExpressionFactory.Select(translation));
                 }
@@ -406,12 +527,11 @@ public class SqlServerQueryableMethodTranslatingExpressionVisitor : RelationalQu
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    protected override bool IsNaturallyOrdered(SelectExpression selectExpression)
-        => selectExpression is
-            {
+    protected override bool IsNaturallyOrdered(SelectExpression selectExpression) =>
+        selectExpression
+            is {
                 Tables: [SqlServerOpenJsonExpression openJsonExpression, ..],
-                Orderings:
-                [
+                Orderings: [
                     {
                         Expression: SqlUnaryExpression
                         {
@@ -419,10 +539,10 @@ public class SqlServerQueryableMethodTranslatingExpressionVisitor : RelationalQu
                             Operand: ColumnExpression { Name: "key", Table: var orderingTable }
                         },
                         IsAscending: true
-                    }
+                    },
                 ]
             }
-            && orderingTable == openJsonExpression;
+        && orderingTable == openJsonExpression;
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -433,12 +553,15 @@ public class SqlServerQueryableMethodTranslatingExpressionVisitor : RelationalQu
     protected override bool IsValidSelectExpressionForExecuteDelete(
         SelectExpression selectExpression,
         StructuralTypeShaperExpression shaper,
-        [NotNullWhen(true)] out TableExpression? tableExpression)
+        [NotNullWhen(true)] out TableExpression? tableExpression
+    )
     {
-        if (selectExpression.Offset == null
+        if (
+            selectExpression.Offset == null
             && selectExpression.GroupBy.Count == 0
             && selectExpression.Having == null
-            && selectExpression.Orderings.Count == 0)
+            && selectExpression.Orderings.Count == 0
+        )
         {
             TableExpressionBase table;
             if (selectExpression.Tables.Count == 1)
@@ -447,8 +570,10 @@ public class SqlServerQueryableMethodTranslatingExpressionVisitor : RelationalQu
             }
             else
             {
-                var projectionBindingExpression = (ProjectionBindingExpression)shaper.ValueBufferExpression;
-                var projection = (StructuralTypeProjectionExpression)selectExpression.GetProjection(projectionBindingExpression);
+                var projectionBindingExpression = (ProjectionBindingExpression)
+                    shaper.ValueBufferExpression;
+                var projection = (StructuralTypeProjectionExpression)
+                    selectExpression.GetProjection(projectionBindingExpression);
                 var column = projection.BindProperty(shaper.StructuralType.GetProperties().First());
                 table = column.Table;
                 if (table is JoinExpressionBase joinExpressionBase)
@@ -477,16 +602,13 @@ public class SqlServerQueryableMethodTranslatingExpressionVisitor : RelationalQu
     protected override bool IsValidSelectExpressionForExecuteUpdate(
         SelectExpression selectExpression,
         TableExpressionBase table,
-        [NotNullWhen(true)] out TableExpression? tableExpression)
+        [NotNullWhen(true)] out TableExpression? tableExpression
+    )
     {
-        if (selectExpression is
-            {
-                Offset: null,
-                IsDistinct: false,
-                GroupBy: [],
-                Having: null,
-                Orderings: []
-            })
+        if (
+            selectExpression is
+            { Offset: null, IsDistinct: false, GroupBy: [], Having: null, Orderings: [] }
+        )
         {
             if (selectExpression.Tables.Count > 1 && table is JoinExpressionBase joinExpressionBase)
             {
@@ -508,14 +630,16 @@ public class SqlServerQueryableMethodTranslatingExpressionVisitor : RelationalQu
     {
         private readonly Func<TableExpression, TableExpressionBase> _annotationApplyingFunc;
 
-        public TemporalAnnotationApplyingExpressionVisitor(Func<TableExpression, TableExpressionBase> annotationApplyingFunc)
+        public TemporalAnnotationApplyingExpressionVisitor(
+            Func<TableExpression, TableExpressionBase> annotationApplyingFunc
+        )
         {
             _annotationApplyingFunc = annotationApplyingFunc;
         }
 
         [return: NotNullIfNotNull("expression")]
-        public override Expression? Visit(Expression? expression)
-            => expression is TableExpression tableExpression
+        public override Expression? Visit(Expression? expression) =>
+            expression is TableExpression tableExpression
                 ? _annotationApplyingFunc(tableExpression)
                 : base.Visit(expression);
     }
@@ -528,9 +652,17 @@ public class SqlServerQueryableMethodTranslatingExpressionVisitor : RelationalQu
     /// </summary>
     protected override Expression ApplyInferredTypeMappings(
         Expression expression,
-        IReadOnlyDictionary<(TableExpressionBase, string), RelationalTypeMapping?> inferredTypeMappings)
-        => new SqlServerInferredTypeMappingApplier(
-            RelationalDependencies.Model, _typeMappingSource, _sqlExpressionFactory, inferredTypeMappings).Visit(expression);
+        IReadOnlyDictionary<
+            (TableExpressionBase, string),
+            RelationalTypeMapping?
+        > inferredTypeMappings
+    ) =>
+        new SqlServerInferredTypeMappingApplier(
+            RelationalDependencies.Model,
+            _typeMappingSource,
+            _sqlExpressionFactory,
+            inferredTypeMappings
+        ).Visit(expression);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -552,7 +684,11 @@ public class SqlServerQueryableMethodTranslatingExpressionVisitor : RelationalQu
             IModel model,
             IRelationalTypeMappingSource typeMappingSource,
             ISqlExpressionFactory sqlExpressionFactory,
-            IReadOnlyDictionary<(TableExpressionBase, string), RelationalTypeMapping?> inferredTypeMappings)
+            IReadOnlyDictionary<
+                (TableExpressionBase, string),
+                RelationalTypeMapping?
+            > inferredTypeMappings
+        )
             : base(model, sqlExpressionFactory, inferredTypeMappings)
         {
             _typeMappingSource = typeMappingSource;
@@ -564,14 +700,20 @@ public class SqlServerQueryableMethodTranslatingExpressionVisitor : RelationalQu
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        protected override Expression VisitExtension(Expression expression)
-            => expression switch
+        protected override Expression VisitExtension(Expression expression) =>
+            expression switch
             {
                 SqlServerOpenJsonExpression openJsonExpression
-                    when TryGetInferredTypeMapping(openJsonExpression, "value", out var typeMapping)
-                    => ApplyTypeMappingsOnOpenJsonExpression(openJsonExpression, new[] { typeMapping }),
+                    when TryGetInferredTypeMapping(
+                        openJsonExpression,
+                        "value",
+                        out var typeMapping
+                    ) => ApplyTypeMappingsOnOpenJsonExpression(
+                    openJsonExpression,
+                    new[] { typeMapping }
+                ),
 
-                _ => base.VisitExtension(expression)
+                _ => base.VisitExtension(expression),
             };
 
         /// <summary>
@@ -582,43 +724,64 @@ public class SqlServerQueryableMethodTranslatingExpressionVisitor : RelationalQu
         /// </summary>
         protected virtual SqlServerOpenJsonExpression ApplyTypeMappingsOnOpenJsonExpression(
             SqlServerOpenJsonExpression openJsonExpression,
-            IReadOnlyList<RelationalTypeMapping> typeMappings)
+            IReadOnlyList<RelationalTypeMapping> typeMappings
+        )
         {
             Check.DebugAssert(typeMappings.Count == 1, "typeMappings.Count == 1");
             var elementTypeMapping = typeMappings[0];
 
             // Constant queryables are translated to VALUES, no need for JSON.
             // Column queryables have their type mapping from the model, so we don't ever need to apply an inferred mapping on them.
-            if (openJsonExpression.JsonExpression is not SqlParameterExpression { TypeMapping: null } parameterExpression)
+            if (
+                openJsonExpression.JsonExpression
+                is not SqlParameterExpression { TypeMapping: null } parameterExpression
+            )
             {
                 Check.DebugAssert(
                     openJsonExpression.JsonExpression.TypeMapping is not null,
-                    "Non-parameter expression without a type mapping in ApplyTypeMappingsOnOpenJsonExpression");
+                    "Non-parameter expression without a type mapping in ApplyTypeMappingsOnOpenJsonExpression"
+                );
                 return openJsonExpression;
             }
 
             Check.DebugAssert(
-                openJsonExpression.Path is null, "OpenJsonExpression path is non-null when applying an inferred type mapping");
+                openJsonExpression.Path is null,
+                "OpenJsonExpression path is non-null when applying an inferred type mapping"
+            );
             Check.DebugAssert(
-                openJsonExpression.ColumnInfos is null, "OpenJsonExpression has no ColumnInfos when applying an inferred type mapping");
+                openJsonExpression.ColumnInfos is null,
+                "OpenJsonExpression has no ColumnInfos when applying an inferred type mapping"
+            );
 
             // We need to apply the inferred type mapping in two places: the collection type mapping on the parameter expanded by OPENJSON,
             // and on the WITH clause determining the conversion out on the SQL Server side
 
             // First, find the collection type mapping and apply it to the parameter
-            if (_typeMappingSource.FindMapping(parameterExpression.Type, Model, elementTypeMapping) is not SqlServerStringTypeMapping
-                    {
-                        ElementTypeMapping: not null
-                    }
-                    parameterTypeMapping)
+            if (
+                _typeMappingSource.FindMapping(parameterExpression.Type, Model, elementTypeMapping)
+                is not SqlServerStringTypeMapping
+                {
+                    ElementTypeMapping: not null
+                } parameterTypeMapping
+            )
             {
-                throw new UnreachableException("A SqlServerStringTypeMapping collection type mapping could not be found");
+                throw new UnreachableException(
+                    "A SqlServerStringTypeMapping collection type mapping could not be found"
+                );
             }
 
             return openJsonExpression.Update(
                 parameterExpression.ApplyTypeMapping(parameterTypeMapping),
                 path: null,
-                new[] { new SqlServerOpenJsonExpression.ColumnInfo("value", elementTypeMapping, Array.Empty<PathSegment>()) });
+                new[]
+                {
+                    new SqlServerOpenJsonExpression.ColumnInfo(
+                        "value",
+                        elementTypeMapping,
+                        Array.Empty<PathSegment>()
+                    ),
+                }
+            );
         }
     }
 }

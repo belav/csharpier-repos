@@ -29,6 +29,6 @@ namespace Microsoft.CodeAnalysis.Contracts.EditAndContinue
         /// <summary>
         /// Whether it supports applying changes once a module has been loaded.
         /// </summary>
-        SupportsEditAndContinueOnModuleLoad = 0x4
+        SupportsEditAndContinueOnModuleLoad = 0x4,
     }
 }

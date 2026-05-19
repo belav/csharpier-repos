@@ -22,15 +22,12 @@ namespace System.Net.Http.Formatting.Internal
     {
 #if !NETSTANDARD1_3 // NameValueCollection is not serializable in netstandard1.3.
         protected HttpValueCollection(SerializationInfo info, StreamingContext context)
-            : base(info, context)
-        {
-        }
+            : base(info, context) { }
 #endif
 
         private HttpValueCollection()
             : base(StringComparer.OrdinalIgnoreCase) // case-insensitive keys
-        {
-        }
+        { }
 
         // Use a builder function instead of a ctor to avoid virtual calls from the ctor.
         // The above condition is only important in the Full .NET fx implementation.
@@ -84,7 +81,11 @@ namespace System.Net.Http.Formatting.Internal
         {
             if (count >= MediaTypeFormatter.MaxHttpCollectionKeys)
             {
-                throw Error.InvalidOperation(System.Net.Http.Properties.Resources.MaxHttpCollectionKeyLimitReached, MediaTypeFormatter.MaxHttpCollectionKeys, typeof(MediaTypeFormatter));
+                throw Error.InvalidOperation(
+                    System.Net.Http.Properties.Resources.MaxHttpCollectionKeyLimitReached,
+                    MediaTypeFormatter.MaxHttpCollectionKeys,
+                    typeof(MediaTypeFormatter)
+                );
             }
         }
 
@@ -116,7 +117,13 @@ namespace System.Net.Http.Formatting.Internal
             return builder.ToString();
         }
 
-        private static bool AppendNameValuePair(StringBuilder builder, bool first, bool urlEncode, string name, string value)
+        private static bool AppendNameValuePair(
+            StringBuilder builder,
+            bool first,
+            bool urlEncode,
+            string name,
+            string value
+        )
         {
             string effectiveName = name ?? String.Empty;
             string encodedName = urlEncode ? WebUtility.UrlEncode(effectiveName) : effectiveName;

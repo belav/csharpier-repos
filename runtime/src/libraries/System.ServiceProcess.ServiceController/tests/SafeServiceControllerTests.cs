@@ -11,7 +11,10 @@ namespace System.ServiceProcess.Tests
         private const string KeyIsoSvcName = "KEYISO";
 
         [ActiveIssue("https://github.com/dotnet/runtime/issues/21463")]
-        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsNotWindowsNanoServer))] // https://github.com/dotnet/runtime/issues/21463
+        [ConditionalFact(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsNotWindowsNanoServer)
+        )] // https://github.com/dotnet/runtime/issues/21463
         public static void GetServices()
         {
             bool foundKeyIsoSvc = false;
@@ -27,7 +30,10 @@ namespace System.ServiceProcess.Tests
                 {
                     case KeyIsoSvcName:
                         foundKeyIsoSvc = true;
-                        Assert.False(string.IsNullOrEmpty(service.DisplayName), "string.IsNullOrEmpty(KeyIso.DisplayName)");
+                        Assert.False(
+                            string.IsNullOrEmpty(service.DisplayName),
+                            "string.IsNullOrEmpty(KeyIso.DisplayName)"
+                        );
                         Assert.Equal(PlatformDetection.IsNotWindowsNanoServer, service.CanStop);
                         Assert.False(service.CanPauseAndContinue, "KeyIso.CanPauseAndContinue");
                         Assert.False(service.CanShutdown, "KeyIso.CanShutdown");
@@ -36,7 +42,10 @@ namespace System.ServiceProcess.Tests
                         break;
                     case "SAMSS":
                         foundSamSvc = true;
-                        Assert.False(string.IsNullOrEmpty(service.DisplayName), "string.IsNullOrEmpty(SamSs.DisplayName)");
+                        Assert.False(
+                            string.IsNullOrEmpty(service.DisplayName),
+                            "string.IsNullOrEmpty(SamSs.DisplayName)"
+                        );
                         Assert.False(service.CanStop, "SamSs.CanStop");
                         Assert.False(service.CanPauseAndContinue, "SamSs.CanPauseAndContinue");
                         Assert.False(service.CanShutdown, "SamSs.CanShutdown");
@@ -44,7 +53,10 @@ namespace System.ServiceProcess.Tests
                         Assert.Equal(ServiceStartMode.Automatic, service.StartType);
                         break;
                     case "EVENTLOG":
-                        Assert.False(string.IsNullOrEmpty(service.DisplayName), "string.IsNullOrEmpty(EventLog.DisplayName)");
+                        Assert.False(
+                            string.IsNullOrEmpty(service.DisplayName),
+                            "string.IsNullOrEmpty(EventLog.DisplayName)"
+                        );
                         Assert.True(service.CanStop, "EventLog.CanStop");
                         Assert.True(service.CanShutdown, "EventLog.CanShutdown");
                         break;
@@ -67,7 +79,10 @@ namespace System.ServiceProcess.Tests
         }
 
         [Fact]
-        [SkipOnTargetFramework(TargetFrameworkMonikers.NetFramework, ".NET Framework does not throw")]
+        [SkipOnTargetFramework(
+            TargetFrameworkMonikers.NetFramework,
+            ".NET Framework does not throw"
+        )]
         public static void Initialize_GetNames()
         {
             Assert.Throws<InvalidOperationException>(() => new ServiceController().ServiceName);
@@ -81,11 +96,14 @@ namespace System.ServiceProcess.Tests
             Assert.True(devices.Length != 0);
 
             const ServiceType SERVICE_DRIVER =
-                ServiceType.FileSystemDriver |
-                ServiceType.KernelDriver |
-                ServiceType.RecognizerDriver;
+                ServiceType.FileSystemDriver
+                | ServiceType.KernelDriver
+                | ServiceType.RecognizerDriver;
 
-            Assert.All(devices, device => Assert.NotEqual(0, (int)(device.ServiceType & SERVICE_DRIVER)));
+            Assert.All(
+                devices,
+                device => Assert.NotEqual(0, (int)(device.ServiceType & SERVICE_DRIVER))
+            );
         }
 
         [Fact]
@@ -114,7 +132,9 @@ namespace System.ServiceProcess.Tests
         public static void NonExistentService_GetDisplayName()
         {
             var controller = new ServiceController(Guid.NewGuid().ToString("N"));
-            Exception exception = Assert.Throws<InvalidOperationException>(() => controller.DisplayName);
+            Exception exception = Assert.Throws<InvalidOperationException>(() =>
+                controller.DisplayName
+            );
             Assert.IsType<Win32Exception>(exception.InnerException);
         }
 
@@ -132,7 +152,9 @@ namespace System.ServiceProcess.Tests
         {
             var controller = new ServiceController();
             controller.ServiceName = Guid.NewGuid().ToString("N");
-            Exception exception = Assert.Throws<InvalidOperationException>(() => controller.DisplayName);
+            Exception exception = Assert.Throws<InvalidOperationException>(() =>
+                controller.DisplayName
+            );
             Assert.IsType<Win32Exception>(exception.InnerException);
         }
 
@@ -150,7 +172,9 @@ namespace System.ServiceProcess.Tests
         {
             var controller = new ServiceController();
             controller.DisplayName = Guid.NewGuid().ToString("N");
-            Exception exception = Assert.Throws<InvalidOperationException>(() => controller.ServiceName);
+            Exception exception = Assert.Throws<InvalidOperationException>(() =>
+                controller.ServiceName
+            );
             Assert.IsType<Win32Exception>(exception.InnerException);
         }
 
@@ -163,7 +187,11 @@ namespace System.ServiceProcess.Tests
             controller.ServiceName = KeyIsoSvcName;
 
             // On Nano Server >=1809 the casing is sometimes changed during normalization: Expected: KEYISO, Actual: KeyIso
-            Assert.Equal(keyIsoDisplayName, controller.DisplayName, ignoreCase: PlatformDetection.IsWindowsNanoServer);
+            Assert.Equal(
+                keyIsoDisplayName,
+                controller.DisplayName,
+                ignoreCase: PlatformDetection.IsWindowsNanoServer
+            );
         }
 
         [Fact]
@@ -174,7 +202,10 @@ namespace System.ServiceProcess.Tests
 
             var controller = new ServiceController();
             controller.DisplayName = keyIsoDisplayName;
-            Assert.Equal(KeyIsoSvcName.ToLowerInvariant(), controller.ServiceName.ToLowerInvariant());
+            Assert.Equal(
+                KeyIsoSvcName.ToLowerInvariant(),
+                controller.ServiceName.ToLowerInvariant()
+            );
         }
 
         [Fact]
@@ -192,7 +223,10 @@ namespace System.ServiceProcess.Tests
             var keyIsoDisplayName = new ServiceController(KeyIsoSvcName).DisplayName;
 
             var controller = new ServiceController(keyIsoDisplayName);
-            Assert.Equal(KeyIsoSvcName.ToLowerInvariant(), controller.ServiceName.ToLowerInvariant());
+            Assert.Equal(
+                KeyIsoSvcName.ToLowerInvariant(),
+                controller.ServiceName.ToLowerInvariant()
+            );
             Assert.Equal(keyIsoDisplayName, controller.DisplayName);
         }
 
@@ -200,7 +234,9 @@ namespace System.ServiceProcess.Tests
         public static void WaitForStatusTimeout()
         {
             var controller = new ServiceController(KeyIsoSvcName);
-            Assert.Throws<System.ServiceProcess.TimeoutException>(() => controller.WaitForStatus(ServiceControllerStatus.Paused, TimeSpan.Zero));
+            Assert.Throws<System.ServiceProcess.TimeoutException>(() =>
+                controller.WaitForStatus(ServiceControllerStatus.Paused, TimeSpan.Zero)
+            );
         }
     }
 }

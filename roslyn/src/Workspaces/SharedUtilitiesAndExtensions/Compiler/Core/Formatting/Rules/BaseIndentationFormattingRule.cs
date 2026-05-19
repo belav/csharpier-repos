@@ -19,7 +19,12 @@ namespace Microsoft.CodeAnalysis.Formatting.Rules
         private readonly SyntaxNode? _commonNode;
         private readonly TextSpan _span;
 
-        public BaseIndentationFormattingRule(SyntaxNode root, TextSpan span, int baseIndentation, AbstractFormattingRule? vbHelperFormattingRule = null)
+        public BaseIndentationFormattingRule(
+            SyntaxNode root,
+            TextSpan span,
+            int baseIndentation,
+            AbstractFormattingRule? vbHelperFormattingRule = null
+        )
         {
             _span = span;
             SetInnermostNodeForSpan(root, ref _span, out _token1, out _token2, out _commonNode);
@@ -28,15 +33,27 @@ namespace Microsoft.CodeAnalysis.Formatting.Rules
             _vbHelperFormattingRule = vbHelperFormattingRule;
         }
 
-        public override void AddIndentBlockOperations(List<IndentBlockOperation> list, SyntaxNode node, in NextIndentBlockOperationAction nextOperation)
+        public override void AddIndentBlockOperations(
+            List<IndentBlockOperation> list,
+            SyntaxNode node,
+            in NextIndentBlockOperationAction nextOperation
+        )
         {
             // for the common node itself, return absolute indentation
             if (_commonNode == node)
             {
-                // TODO: If the first line of the span includes a node, we want to align with the position of that node 
+                // TODO: If the first line of the span includes a node, we want to align with the position of that node
                 // in the primary buffer.  That's what Dev12 does for C#, but it doesn't match Roslyn's current model
                 // of each statement being formatted independently with respect to it's parent.
-                list.Add(new IndentBlockOperation(_token1, _token2, _span, _baseIndentation, IndentBlockOption.AbsolutePosition));
+                list.Add(
+                    new IndentBlockOperation(
+                        _token1,
+                        _token2,
+                        _span,
+                        _baseIndentation,
+                        IndentBlockOption.AbsolutePosition
+                    )
+                );
             }
             else if (node.Span.Contains(_span))
             {
@@ -51,7 +68,11 @@ namespace Microsoft.CodeAnalysis.Formatting.Rules
             AdjustIndentBlockOperation(list);
         }
 
-        private void AddNextIndentBlockOperations(List<IndentBlockOperation> list, SyntaxNode node, in NextIndentBlockOperationAction nextOperation)
+        private void AddNextIndentBlockOperations(
+            List<IndentBlockOperation> list,
+            SyntaxNode node,
+            in NextIndentBlockOperationAction nextOperation
+        )
         {
             if (_vbHelperFormattingRule == null)
             {
@@ -101,36 +122,61 @@ namespace Microsoft.CodeAnalysis.Formatting.Rules
 
                     return operation;
                 },
-                this);
+                this
+            );
         }
 
         private bool Myself(IndentBlockOperation operation)
         {
-            return operation.TextSpan == _span &&
-                   operation.StartToken == _token1 &&
-                   operation.EndToken == _token2 &&
-                   operation.IndentationDeltaOrPosition == _baseIndentation &&
-                   operation.Option == IndentBlockOption.AbsolutePosition;
+            return operation.TextSpan == _span
+                && operation.StartToken == _token1
+                && operation.EndToken == _token2
+                && operation.IndentationDeltaOrPosition == _baseIndentation
+                && operation.Option == IndentBlockOption.AbsolutePosition;
         }
 
-        private IndentBlockOperation CloneAndAdjustFormattingOperation(IndentBlockOperation operation)
+        private IndentBlockOperation CloneAndAdjustFormattingOperation(
+            IndentBlockOperation operation
+        )
         {
             switch (operation.Option & IndentBlockOption.PositionMask)
             {
                 case IndentBlockOption.RelativeToFirstTokenOnBaseTokenLine:
-                    return FormattingOperations.CreateRelativeIndentBlockOperation(operation.BaseToken, operation.StartToken, operation.EndToken, AdjustTextSpan(operation.TextSpan), operation.IndentationDeltaOrPosition, operation.Option);
+                    return FormattingOperations.CreateRelativeIndentBlockOperation(
+                        operation.BaseToken,
+                        operation.StartToken,
+                        operation.EndToken,
+                        AdjustTextSpan(operation.TextSpan),
+                        operation.IndentationDeltaOrPosition,
+                        operation.Option
+                    );
                 case IndentBlockOption.RelativePosition:
                 case IndentBlockOption.AbsolutePosition:
-                    return FormattingOperations.CreateIndentBlockOperation(operation.StartToken, operation.EndToken, AdjustTextSpan(operation.TextSpan), operation.IndentationDeltaOrPosition, operation.Option);
+                    return FormattingOperations.CreateIndentBlockOperation(
+                        operation.StartToken,
+                        operation.EndToken,
+                        AdjustTextSpan(operation.TextSpan),
+                        operation.IndentationDeltaOrPosition,
+                        operation.Option
+                    );
                 default:
                     throw ExceptionUtilities.UnexpectedValue(operation.Option);
             }
         }
 
-        private TextSpan AdjustTextSpan(TextSpan textSpan)
-            => TextSpan.FromBounds(Math.Max(_span.Start, textSpan.Start), Math.Min(_span.End, textSpan.End));
+        private TextSpan AdjustTextSpan(TextSpan textSpan) =>
+            TextSpan.FromBounds(
+                Math.Max(_span.Start, textSpan.Start),
+                Math.Min(_span.End, textSpan.End)
+            );
 
-        private static void SetInnermostNodeForSpan(SyntaxNode root, ref TextSpan span, out SyntaxToken token1, out SyntaxToken token2, out SyntaxNode? commonNode)
+        private static void SetInnermostNodeForSpan(
+            SyntaxNode root,
+            ref TextSpan span,
+            out SyntaxToken token1,
+            out SyntaxToken token2,
+            out SyntaxNode? commonNode
+        )
         {
             commonNode = null;
 
@@ -146,13 +192,18 @@ namespace Microsoft.CodeAnalysis.Formatting.Rules
             commonNode = token1.GetCommonRoot(token2);
         }
 
-        private static void GetTokens(SyntaxNode root, TextSpan span, out SyntaxToken token1, out SyntaxToken token2)
+        private static void GetTokens(
+            SyntaxNode root,
+            TextSpan span,
+            out SyntaxToken token1,
+            out SyntaxToken token2
+        )
         {
             // get tokens within given span
             token1 = root.FindToken(span.Start);
             token2 = root.FindTokenFromEnd(span.End);
 
-            // It is possible the given span doesn't have any tokens in them. In that case, 
+            // It is possible the given span doesn't have any tokens in them. In that case,
             // make tokens to be the adjacent ones to the given span.
             if (span.End < token1.Span.Start)
             {
@@ -165,7 +216,11 @@ namespace Microsoft.CodeAnalysis.Formatting.Rules
             }
         }
 
-        private static TextSpan GetSpanFromTokens(TextSpan span, SyntaxToken token1, SyntaxToken token2)
+        private static TextSpan GetSpanFromTokens(
+            TextSpan span,
+            SyntaxToken token1,
+            SyntaxToken token2
+        )
         {
             var tree = token1.SyntaxTree;
             RoslynDebug.AssertNotNull(tree);

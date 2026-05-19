@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -34,31 +34,40 @@ using System.Web.UI;
 
 namespace System.Web.UI.WebControls
 {
-	[AspNetHostingPermissionAttribute(SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-	[AspNetHostingPermissionAttribute(SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-	public class PageEventArgs : EventArgs
-	{
-		int startRowIndex;
-		int maximumRows;
-		int totalRowCount;
-		
-		public PageEventArgs(int startRowIndex, int maximumRows, int totalRowCount)
-		{
-			this.startRowIndex = startRowIndex;
-			this.maximumRows = maximumRows;
-			this.totalRowCount = totalRowCount;
-		}
+    [AspNetHostingPermissionAttribute(
+        SecurityAction.LinkDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    [AspNetHostingPermissionAttribute(
+        SecurityAction.InheritanceDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    public class PageEventArgs : EventArgs
+    {
+        int startRowIndex;
+        int maximumRows;
+        int totalRowCount;
 
-		public int MaximumRows {
-			get { return maximumRows; }
-		}
+        public PageEventArgs(int startRowIndex, int maximumRows, int totalRowCount)
+        {
+            this.startRowIndex = startRowIndex;
+            this.maximumRows = maximumRows;
+            this.totalRowCount = totalRowCount;
+        }
 
-		public int StartRowIndex {
-			get { return startRowIndex; }
-		}
+        public int MaximumRows
+        {
+            get { return maximumRows; }
+        }
 
-		public int TotalRowCount {
-			get { return totalRowCount; }
-		}
-	}
+        public int StartRowIndex
+        {
+            get { return startRowIndex; }
+        }
+
+        public int TotalRowCount
+        {
+            get { return totalRowCount; }
+        }
+    }
 }

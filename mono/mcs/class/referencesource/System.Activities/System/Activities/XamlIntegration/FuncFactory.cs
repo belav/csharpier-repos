@@ -20,37 +20,28 @@ namespace System.Activities.XamlIntegration
             return factory.GetFunc();
         }
 
-        public static Func<T> CreateFunc<T>(XamlReader reader) where T : class
+        public static Func<T> CreateFunc<T>(XamlReader reader)
+            where T : class
         {
             FuncFactory<T> factory = new FuncFactory<T>(null, reader);
             return factory.GetTypedFunc();
         }
 
-        internal IList<NamespaceDeclaration> ParentNamespaces
-        {
-            get;
-            set;
-        }
+        internal IList<NamespaceDeclaration> ParentNamespaces { get; set; }
 
-        internal XamlNodeList Nodes
-        {
-            get;
-            set;
-        }
+        internal XamlNodeList Nodes { get; set; }
 
         // Back-compat switch: we don't want to copy parent settings on Activity/DynamicActivity
-        internal bool IgnoreParentSettings
-        {
-            get;
-            set;
-        }
+        internal bool IgnoreParentSettings { get; set; }
 
         internal abstract Func<object> GetFunc();
 
         internal static FuncFactory CreateFactory(XamlReader xamlReader, IServiceProvider context)
         {
-            IXamlObjectWriterFactory objectWriterFactory = context.GetService(typeof(IXamlObjectWriterFactory)) as IXamlObjectWriterFactory;
-            IProvideValueTarget provideValueService = context.GetService(typeof(IProvideValueTarget)) as IProvideValueTarget;
+            IXamlObjectWriterFactory objectWriterFactory =
+                context.GetService(typeof(IXamlObjectWriterFactory)) as IXamlObjectWriterFactory;
+            IProvideValueTarget provideValueService =
+                context.GetService(typeof(IProvideValueTarget)) as IProvideValueTarget;
 
             Type propertyType = null;
             //
@@ -63,21 +54,31 @@ namespace System.Activities.XamlIntegration
                 propertyType = propertyInfo.PropertyType;
             }
 
-            FuncFactory funcFactory = CreateFactory(objectWriterFactory, xamlReader, propertyType.GetGenericArguments());
+            FuncFactory funcFactory = CreateFactory(
+                objectWriterFactory,
+                xamlReader,
+                propertyType.GetGenericArguments()
+            );
             return funcFactory;
         }
 
         // Back-compat workaround: returnType should only be a single value. But in 4.0 we didn't
         // validate this; we just passed the array in to MakeGenericType, which would throw if there
         // were multiple values. To preserve the same exception, we allow passing in an array here.
-        static FuncFactory CreateFactory(IXamlObjectWriterFactory objectWriterFactory, XamlReader xamlReader, params Type[] returnType)
+        static FuncFactory CreateFactory(
+            IXamlObjectWriterFactory objectWriterFactory,
+            XamlReader xamlReader,
+            params Type[] returnType
+        )
         {
             Type closedType = typeof(FuncFactory<>).MakeGenericType(returnType);
-            return (FuncFactory)Activator.CreateInstance(closedType, objectWriterFactory, xamlReader);
+            return (FuncFactory)
+                Activator.CreateInstance(closedType, objectWriterFactory, xamlReader);
         }
     }
 
-    class FuncFactory<T> : FuncFactory where T : class
+    class FuncFactory<T> : FuncFactory
+        where T : class
     {
         IXamlObjectWriterFactory objectWriterFactory;
 
@@ -123,7 +124,9 @@ namespace System.Activities.XamlIntegration
             {
                 return new XamlObjectWriterSettings();
             }
-            XamlObjectWriterSettings result = new XamlObjectWriterSettings(this.objectWriterFactory.GetParentSettings());
+            XamlObjectWriterSettings result = new XamlObjectWriterSettings(
+                this.objectWriterFactory.GetParentSettings()
+            );
             // The delegate settings are already stripped by XOW. Some other settings don't make sense to copy.
             result.ExternalNameScope = null;
             result.RegisterNamesOnExternalNamescope = false;
@@ -133,5 +136,3 @@ namespace System.Activities.XamlIntegration
         }
     }
 }
-
-

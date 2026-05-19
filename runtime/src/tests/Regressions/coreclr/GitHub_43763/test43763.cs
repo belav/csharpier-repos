@@ -2,12 +2,15 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using Xunit;
+
 public class Program
 {
     [Fact]
     public static void TestEntryPoint()
     {
-        System.Console.WriteLine(System.Runtime.InteropServices.RuntimeInformation.FrameworkDescription);
+        System.Console.WriteLine(
+            System.Runtime.InteropServices.RuntimeInformation.FrameworkDescription
+        );
         CallC();
         CallB();
         CallC2();
@@ -15,8 +18,11 @@ public class Program
     }
 
     static void CallB() => new B();
+
     static void CallC() => new C();
+
     static void CallB2() => new B2();
+
     static void CallC2() => new C2();
 }
 

@@ -22,5 +22,6 @@ public interface IComplexPropertyFieldChangedConvention : IConvention
         IConventionComplexPropertyBuilder propertyBuilder,
         FieldInfo? newFieldInfo,
         FieldInfo? oldFieldInfo,
-        IConventionContext<FieldInfo> context);
+        IConventionContext<FieldInfo> context
+    );
 }

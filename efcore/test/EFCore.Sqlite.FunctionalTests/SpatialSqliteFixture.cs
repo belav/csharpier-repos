@@ -7,12 +7,10 @@ namespace Microsoft.EntityFrameworkCore;
 
 public class SpatialSqliteFixture : SpatialFixtureBase
 {
-    protected override ITestStoreFactory TestStoreFactory
-        => SqliteTestStoreFactory.Instance;
+    protected override ITestStoreFactory TestStoreFactory => SqliteTestStoreFactory.Instance;
 
-    protected override IServiceCollection AddServices(IServiceCollection serviceCollection)
-        => base.AddServices(serviceCollection)
-            .AddEntityFrameworkSqliteNetTopologySuite();
+    protected override IServiceCollection AddServices(IServiceCollection serviceCollection) =>
+        base.AddServices(serviceCollection).AddEntityFrameworkSqliteNetTopologySuite();
 
     public override DbContextOptionsBuilder AddOptions(DbContextOptionsBuilder builder)
     {

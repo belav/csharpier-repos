@@ -14,7 +14,6 @@
 // (C) 2003 Aleksey Sanin (aleksey@aleksey.com)
 // (C) 2004 Novell (http://www.novell.com)
 
-
 using System.IO;
 using System.Text;
 using System.Xml;
@@ -23,29 +22,23 @@ using Xunit;
 
 namespace System.Security.Cryptography.Xml.Tests
 {
-
     // Note: GetInnerXml is protected in XmlDsigExcC14NTransform making it
     // difficult to test properly. This class "open it up" :-)
     public class UnprotectedXmlDsigExcC14NTransform : XmlDsigExcC14NTransform
     {
-        public UnprotectedXmlDsigExcC14NTransform()
-        {
-        }
+        public UnprotectedXmlDsigExcC14NTransform() { }
 
         public UnprotectedXmlDsigExcC14NTransform(bool includeComments)
-            : base(includeComments)
-        {
-        }
+            : base(includeComments) { }
 
         public UnprotectedXmlDsigExcC14NTransform(string inclusiveNamespacesPrefixList)
-            : base(inclusiveNamespacesPrefixList)
-        {
-        }
+            : base(inclusiveNamespacesPrefixList) { }
 
-        public UnprotectedXmlDsigExcC14NTransform(bool includeComments, string inclusiveNamespacesPrefixList)
-            : base(includeComments, inclusiveNamespacesPrefixList)
-        {
-        }
+        public UnprotectedXmlDsigExcC14NTransform(
+            bool includeComments,
+            string inclusiveNamespacesPrefixList
+        )
+            : base(includeComments, inclusiveNamespacesPrefixList) { }
 
         public XmlNodeList UnprotectedGetInnerXml()
         {
@@ -55,7 +48,6 @@ namespace System.Security.Cryptography.Xml.Tests
 
     public class XmlDsigExcC14NTransformTest
     {
-
         protected UnprotectedXmlDsigExcC14NTransform transform;
 
         public XmlDsigExcC14NTransformTest()
@@ -75,7 +67,10 @@ namespace System.Security.Cryptography.Xml.Tests
         public void Constructor2()
         {
             transform = new UnprotectedXmlDsigExcC14NTransform(true);
-            Assert.Equal("http://www.w3.org/2001/10/xml-exc-c14n#WithComments", transform.Algorithm);
+            Assert.Equal(
+                "http://www.w3.org/2001/10/xml-exc-c14n#WithComments",
+                transform.Algorithm
+            );
             Assert.Null(transform.InclusiveNamespacesPrefixList);
             CheckProperties(transform);
 
@@ -108,17 +103,26 @@ namespace System.Security.Cryptography.Xml.Tests
         public void Constructor4()
         {
             transform = new UnprotectedXmlDsigExcC14NTransform(true, null);
-            Assert.Equal("http://www.w3.org/2001/10/xml-exc-c14n#WithComments", transform.Algorithm);
+            Assert.Equal(
+                "http://www.w3.org/2001/10/xml-exc-c14n#WithComments",
+                transform.Algorithm
+            );
             Assert.Null(transform.InclusiveNamespacesPrefixList);
             CheckProperties(transform);
 
             transform = new UnprotectedXmlDsigExcC14NTransform(true, string.Empty);
-            Assert.Equal("http://www.w3.org/2001/10/xml-exc-c14n#WithComments", transform.Algorithm);
+            Assert.Equal(
+                "http://www.w3.org/2001/10/xml-exc-c14n#WithComments",
+                transform.Algorithm
+            );
             Assert.Equal(string.Empty, transform.InclusiveNamespacesPrefixList);
             CheckProperties(transform);
 
             transform = new UnprotectedXmlDsigExcC14NTransform(true, "#default xsd");
-            Assert.Equal("http://www.w3.org/2001/10/xml-exc-c14n#WithComments", transform.Algorithm);
+            Assert.Equal(
+                "http://www.w3.org/2001/10/xml-exc-c14n#WithComments",
+                transform.Algorithm
+            );
             Assert.Equal("#default xsd", transform.InclusiveNamespacesPrefixList);
             CheckProperties(transform);
 
@@ -210,13 +214,18 @@ namespace System.Security.Cryptography.Xml.Tests
             return sb.ToString();
         }
 
-        static string xml = "<Test  attrib='at ' xmlns=\"http://www.go-mono.com/\" > \r\n &#xD; <Toto/> text &amp; </Test   >";
+        static string xml =
+            "<Test  attrib='at ' xmlns=\"http://www.go-mono.com/\" > \r\n &#xD; <Toto/> text &amp; </Test   >";
+
         // GOOD for Stream input
-        static string c14xml2 = "<Test xmlns=\"http://www.go-mono.com/\" attrib=\"at \"> \n &#xD; <Toto></Toto> text &amp; </Test>";
+        static string c14xml2 =
+            "<Test xmlns=\"http://www.go-mono.com/\" attrib=\"at \"> \n &#xD; <Toto></Toto> text &amp; </Test>";
+
         // GOOD for XmlDocument input. The difference is because once
         // xml string is loaded to XmlDocument, there is no difference
         // between \r and &#xD;, so every \r must be handled as &#xD;.
-        static string c14xml3 = "<Test xmlns=\"http://www.go-mono.com/\" attrib=\"at \"> &#xD;\n &#xD; <Toto></Toto> text &amp; </Test>";
+        static string c14xml3 =
+            "<Test xmlns=\"http://www.go-mono.com/\" attrib=\"at \"> &#xD;\n &#xD; <Toto></Toto> text &amp; </Test>";
 
         private XmlDocument GetDoc()
         {
@@ -288,7 +297,10 @@ namespace System.Security.Cryptography.Xml.Tests
         public void UnsupportedOutput()
         {
             XmlDocument doc = new XmlDocument();
-            AssertExtensions.Throws<ArgumentException>("type", () => transform.GetOutput(doc.GetType()));
+            AssertExtensions.Throws<ArgumentException>(
+                "type",
+                () => transform.GetOutput(doc.GetType())
+            );
         }
 
         [Fact]
@@ -356,13 +368,13 @@ namespace System.Security.Cryptography.Xml.Tests
             {
                 ValidationType = ValidationType.None,
                 DtdProcessing = DtdProcessing.Parse,
-                XmlResolver = resolver
+                XmlResolver = resolver,
             };
             using (XmlReader reader = XmlReader.Create(stream, settings))
             {
                 doc.Load(reader);
                 transform.LoadInput(doc);
-                return Stream2String((Stream) transform.GetOutput());
+                return Stream2String((Stream)transform.GetOutput());
             }
         }
 
@@ -374,93 +386,93 @@ namespace System.Security.Cryptography.Xml.Tests
         // removed reference to an empty external DTD
         //
         static string ExcC14NSpecExample1Input =
-                "<?xml version=\"1.0\"?>\n" +
-                "\n" +
-                "<?xml-stylesheet   href=\"doc.xsl\"\n" +
-                "   type=\"text/xsl\"   ?>\n" +
-                "\n" +
-                "<!DOCTYPE doc SYSTEM \"doc.dtd\">\n" +
-                "\n" +
-                "<doc>Hello, world!<!-- Comment 1 --></doc>\n" +
-                "\n" +
-                "<?pi-without-data     ?>\n\n" +
-                "<!-- Comment 2 -->\n\n" +
-                "<!-- Comment 3 -->\n";
+            "<?xml version=\"1.0\"?>\n"
+            + "\n"
+            + "<?xml-stylesheet   href=\"doc.xsl\"\n"
+            + "   type=\"text/xsl\"   ?>\n"
+            + "\n"
+            + "<!DOCTYPE doc SYSTEM \"doc.dtd\">\n"
+            + "\n"
+            + "<doc>Hello, world!<!-- Comment 1 --></doc>\n"
+            + "\n"
+            + "<?pi-without-data     ?>\n\n"
+            + "<!-- Comment 2 -->\n\n"
+            + "<!-- Comment 3 -->\n";
         static string ExcC14NSpecExample1Output =
-                "<?xml-stylesheet href=\"doc.xsl\"\n" +
-                "   type=\"text/xsl\"   ?>\n" +
-                "<doc>Hello, world!</doc>\n" +
-                "<?pi-without-data?>";
+            "<?xml-stylesheet href=\"doc.xsl\"\n"
+            + "   type=\"text/xsl\"   ?>\n"
+            + "<doc>Hello, world!</doc>\n"
+            + "<?pi-without-data?>";
 
         //
         // Example 2 from ExcC14N spec - Whitespace in Document Content:
         // http://www.w3.org/TR/xml-c14n#Example-WhitespaceInContent
         //
         static string ExcC14NSpecExample2Input =
-                "<doc>\n" +
-                "  <clean>   </clean>\n" +
-                "   <dirty>   A   B   </dirty>\n" +
-                "   <mixed>\n" +
-                "      A\n" +
-                "      <clean>   </clean>\n" +
-                "      B\n" +
-                "      <dirty>   A   B   </dirty>\n" +
-                "      C\n" +
-                "   </mixed>\n" +
-                "</doc>\n";
+            "<doc>\n"
+            + "  <clean>   </clean>\n"
+            + "   <dirty>   A   B   </dirty>\n"
+            + "   <mixed>\n"
+            + "      A\n"
+            + "      <clean>   </clean>\n"
+            + "      B\n"
+            + "      <dirty>   A   B   </dirty>\n"
+            + "      C\n"
+            + "   </mixed>\n"
+            + "</doc>\n";
         static string ExcC14NSpecExample2Output =
-                "<doc>\n" +
-                "  <clean>   </clean>\n" +
-                "   <dirty>   A   B   </dirty>\n" +
-                "   <mixed>\n" +
-                "      A\n" +
-                "      <clean>   </clean>\n" +
-                "      B\n" +
-                "      <dirty>   A   B   </dirty>\n" +
-                "      C\n" +
-                "   </mixed>\n" +
-                "</doc>";
+            "<doc>\n"
+            + "  <clean>   </clean>\n"
+            + "   <dirty>   A   B   </dirty>\n"
+            + "   <mixed>\n"
+            + "      A\n"
+            + "      <clean>   </clean>\n"
+            + "      B\n"
+            + "      <dirty>   A   B   </dirty>\n"
+            + "      C\n"
+            + "   </mixed>\n"
+            + "</doc>";
 
         //
         // Example 3 from ExcC14N spec - Start and End Tags:
         // http://www.w3.org/TR/xml-c14n#Example-SETags
         //
         static string ExcC14NSpecExample3Input =
-                "<!DOCTYPE doc [<!ATTLIST e9 attr CDATA \"default\">]>\n" +
-                "<doc>\n" +
-                "   <e1   />\n" +
-                "   <e2   ></e2>\n" +
-                "   <e3    name = \"elem3\"   id=\"elem3\"    />\n" +
-                "   <e4    name=\"elem4\"   id=\"elem4\"    ></e4>\n" +
-                "   <e5 a:attr=\"out\" b:attr=\"sorted\" attr2=\"all\" attr=\"I\'m\"\n" +
-                "       xmlns:b=\"http://www.ietf.org\" \n" +
-                "       xmlns:a=\"http://www.w3.org\"\n" +
-                "       xmlns=\"http://www.uvic.ca\"/>\n" +
-                "   <e6 xmlns=\"\" xmlns:a=\"http://www.w3.org\">\n" +
-                "       <e7 xmlns=\"http://www.ietf.org\">\n" +
-                "           <e8 xmlns=\"\" xmlns:a=\"http://www.w3.org\">\n" +
-                "               <e9 xmlns=\"\" xmlns:a=\"http://www.ietf.org\"/>\n" +
-                "           </e8>\n" +
-                "       </e7>\n" +
-                "   </e6>\n" +
-                "</doc>\n";
+            "<!DOCTYPE doc [<!ATTLIST e9 attr CDATA \"default\">]>\n"
+            + "<doc>\n"
+            + "   <e1   />\n"
+            + "   <e2   ></e2>\n"
+            + "   <e3    name = \"elem3\"   id=\"elem3\"    />\n"
+            + "   <e4    name=\"elem4\"   id=\"elem4\"    ></e4>\n"
+            + "   <e5 a:attr=\"out\" b:attr=\"sorted\" attr2=\"all\" attr=\"I\'m\"\n"
+            + "       xmlns:b=\"http://www.ietf.org\" \n"
+            + "       xmlns:a=\"http://www.w3.org\"\n"
+            + "       xmlns=\"http://www.uvic.ca\"/>\n"
+            + "   <e6 xmlns=\"\" xmlns:a=\"http://www.w3.org\">\n"
+            + "       <e7 xmlns=\"http://www.ietf.org\">\n"
+            + "           <e8 xmlns=\"\" xmlns:a=\"http://www.w3.org\">\n"
+            + "               <e9 xmlns=\"\" xmlns:a=\"http://www.ietf.org\"/>\n"
+            + "           </e8>\n"
+            + "       </e7>\n"
+            + "   </e6>\n"
+            + "</doc>\n";
         static string ExcC14NSpecExample3Output =
-                "<doc>\n" +
-                "   <e1></e1>\n" +
-                "   <e2></e2>\n" +
-                "   <e3 id=\"elem3\" name=\"elem3\"></e3>\n" +
-                "   <e4 id=\"elem4\" name=\"elem4\"></e4>\n" +
-                "   <e5 xmlns=\"http://www.uvic.ca\" xmlns:a=\"http://www.w3.org\" xmlns:b=\"http://www.ietf.org\" attr=\"I\'m\" attr2=\"all\" b:attr=\"sorted\" a:attr=\"out\"></e5>\n" +
-                    "   <e6>\n" +
-                "       <e7 xmlns=\"http://www.ietf.org\">\n" +
-                "           <e8 xmlns=\"\">\n" +
-                "               <e9 attr=\"default\"></e9>\n" +
-                //                    "               <e9 xmlns:a=\"http://www.ietf.org\"></e9>\n" +
-                "           </e8>\n" +
-                "       </e7>\n" +
-                "   </e6>\n" +
-                "</doc>";
-
+            "<doc>\n"
+            + "   <e1></e1>\n"
+            + "   <e2></e2>\n"
+            + "   <e3 id=\"elem3\" name=\"elem3\"></e3>\n"
+            + "   <e4 id=\"elem4\" name=\"elem4\"></e4>\n"
+            + "   <e5 xmlns=\"http://www.uvic.ca\" xmlns:a=\"http://www.w3.org\" xmlns:b=\"http://www.ietf.org\" attr=\"I\'m\" attr2=\"all\" b:attr=\"sorted\" a:attr=\"out\"></e5>\n"
+            + "   <e6>\n"
+            + "       <e7 xmlns=\"http://www.ietf.org\">\n"
+            + "           <e8 xmlns=\"\">\n"
+            + "               <e9 attr=\"default\"></e9>\n"
+            +
+            //                    "               <e9 xmlns:a=\"http://www.ietf.org\"></e9>\n" +
+            "           </e8>\n"
+            + "       </e7>\n"
+            + "   </e6>\n"
+            + "</doc>";
 
         //
         // Example 4 from ExcC14N spec - Character Modifications and Character References:
@@ -473,63 +485,62 @@ namespace System.Security.Cryptography.Xml.Tests
         // does not support this (see comment after this example
         // in the spec).
         static string ExcC14NSpecExample4Input =
-                "<!DOCTYPE doc [<!ATTLIST normId id ID #IMPLIED>]>\n" +
-                "<doc>\n" +
-                "   <text>First line&#x0d;&#10;Second line</text>\n" +
-                "   <value>&#x32;</value>\n" +
-                "   <compute><![CDATA[value>\"0\" && value<\"10\" ?\"valid\":\"error\"]]></compute>\n" +
-                "   <compute expr=\'value>\"0\" &amp;&amp; value&lt;\"10\" ?\"valid\":\"error\"\'>valid</compute>\n" +
-                "   <norm attr=\' &apos;   &#x20;&#13;&#xa;&#9;   &apos; \'/>\n" +
-                // "   <normId id=\' &apos;   &#x20;&#13;&#xa;&#9;   &apos; \'/>\n" +
-                "</doc>\n";
+            "<!DOCTYPE doc [<!ATTLIST normId id ID #IMPLIED>]>\n"
+            + "<doc>\n"
+            + "   <text>First line&#x0d;&#10;Second line</text>\n"
+            + "   <value>&#x32;</value>\n"
+            + "   <compute><![CDATA[value>\"0\" && value<\"10\" ?\"valid\":\"error\"]]></compute>\n"
+            + "   <compute expr=\'value>\"0\" &amp;&amp; value&lt;\"10\" ?\"valid\":\"error\"\'>valid</compute>\n"
+            + "   <norm attr=\' &apos;   &#x20;&#13;&#xa;&#9;   &apos; \'/>\n"
+            +
+            // "   <normId id=\' &apos;   &#x20;&#13;&#xa;&#9;   &apos; \'/>\n" +
+            "</doc>\n";
         static string ExcC14NSpecExample4Output =
-                "<doc>\n" +
-                "   <text>First line&#xD;\n" +
-                "Second line</text>\n" +
-                "   <value>2</value>\n" +
-                "   <compute>value&gt;\"0\" &amp;&amp; value&lt;\"10\" ?\"valid\":\"error\"</compute>\n" +
-                "   <compute expr=\"value>&quot;0&quot; &amp;&amp; value&lt;&quot;10&quot; ?&quot;valid&quot;:&quot;error&quot;\">valid</compute>\n" +
-                "   <norm attr=\" \'    &#xD;&#xA;&#x9;   \' \"></norm>\n" +
-                // "   <normId id=\"\' &#xD;&#xA;&#x9; \'\"></normId>\n" +
-                "</doc>";
+            "<doc>\n"
+            + "   <text>First line&#xD;\n"
+            + "Second line</text>\n"
+            + "   <value>2</value>\n"
+            + "   <compute>value&gt;\"0\" &amp;&amp; value&lt;\"10\" ?\"valid\":\"error\"</compute>\n"
+            + "   <compute expr=\"value>&quot;0&quot; &amp;&amp; value&lt;&quot;10&quot; ?&quot;valid&quot;:&quot;error&quot;\">valid</compute>\n"
+            + "   <norm attr=\" \'    &#xD;&#xA;&#x9;   \' \"></norm>\n"
+            +
+            // "   <normId id=\"\' &#xD;&#xA;&#x9; \'\"></normId>\n" +
+            "</doc>";
 
         //
         // Example 5 from ExcC14N spec - Entity References:
         // http://www.w3.org/TR/xml-c14n#Example-Entities
         //
         static string ExcC14NSpecExample5Input =>
-                "<!DOCTYPE doc [\n" +
-                "<!ATTLIST doc attrExtEnt ENTITY #IMPLIED>\n" +
-                "<!ENTITY ent1 \"Hello\">\n" +
-                $"<!ENTITY ent2 SYSTEM \"doc.txt\">\n" +
-                "<!ENTITY entExt SYSTEM \"earth.gif\" NDATA gif>\n" +
-                "<!NOTATION gif SYSTEM \"viewgif.exe\">\n" +
-                "]>\n" +
-                "<doc attrExtEnt=\"entExt\">\n" +
-                "   &ent1;, &ent2;!\n" +
-                "</doc>\n" +
-                "\n" +
-                $"<!-- Let doc.txt contain \"world\" (excluding the quotes) -->\n";
+            "<!DOCTYPE doc [\n"
+            + "<!ATTLIST doc attrExtEnt ENTITY #IMPLIED>\n"
+            + "<!ENTITY ent1 \"Hello\">\n"
+            + $"<!ENTITY ent2 SYSTEM \"doc.txt\">\n"
+            + "<!ENTITY entExt SYSTEM \"earth.gif\" NDATA gif>\n"
+            + "<!NOTATION gif SYSTEM \"viewgif.exe\">\n"
+            + "]>\n"
+            + "<doc attrExtEnt=\"entExt\">\n"
+            + "   &ent1;, &ent2;!\n"
+            + "</doc>\n"
+            + "\n"
+            + $"<!-- Let doc.txt contain \"world\" (excluding the quotes) -->\n";
         static string ExcC14NSpecExample5Output =
-                "<doc attrExtEnt=\"entExt\">\n" +
-                "   Hello, world!\n" +
-                "</doc>";
+            "<doc attrExtEnt=\"entExt\">\n" + "   Hello, world!\n" + "</doc>";
 
         //
         // Example 6 from ExcC14N spec - UTF-8 Encoding:
         // http://www.w3.org/TR/xml-c14n#Example-UTF8
         //
         static string ExcC14NSpecExample6Input =
-                    "<?xml version=\"1.0\" encoding=\"ISO-8859-1\"?>\n" +
-                    "<doc>&#169;</doc>\n";
-        static string ExcC14NSpecExample6Output =
-                "<doc>\xC2\xA9</doc>";
+            "<?xml version=\"1.0\" encoding=\"ISO-8859-1\"?>\n" + "<doc>&#169;</doc>\n";
+        static string ExcC14NSpecExample6Output = "<doc>\xC2\xA9</doc>";
 
         [Fact]
         public void SimpleNamespacePrefixes()
         {
             string input = "<a:Action xmlns:a='urn:foo'>http://tempuri.org/IFoo/Echo</a:Action>";
-            string expected = @"<a:Action xmlns:a=""urn:foo"">http://tempuri.org/IFoo/Echo</a:Action>";
+            string expected =
+                @"<a:Action xmlns:a=""urn:foo"">http://tempuri.org/IFoo/Echo</a:Action>";
 
             XmlDocument doc = new XmlDocument();
             doc.LoadXml(input);
@@ -542,7 +553,9 @@ namespace System.Security.Cryptography.Xml.Tests
         [Fact]
         public void GetDigestedOutput_Null()
         {
-            Assert.Throws<NullReferenceException>(() => new XmlDsigExcC14NTransform().GetDigestedOutput(null));
+            Assert.Throws<NullReferenceException>(() =>
+                new XmlDsigExcC14NTransform().GetDigestedOutput(null)
+            );
         }
     }
 }

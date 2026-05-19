@@ -43,12 +43,21 @@ namespace System.ServiceModel.Syndication.Tests
         [Fact]
         public void Ctor_NullSource_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>("source", () => new SyndicationContentSubclass(null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "source",
+                () => new SyndicationContentSubclass(null)
+            );
         }
 
         public static IEnumerable<object[]> WriteTo_TestData()
         {
-            yield return new object[] { null, "OuterName", null, @"<OuterName type=""CustomType"" name=""value"" />" };
+            yield return new object[]
+            {
+                null,
+                "OuterName",
+                null,
+                @"<OuterName type=""CustomType"" name=""value"" />",
+            };
             yield return new object[]
             {
                 new Dictionary<XmlQualifiedName, string>
@@ -57,16 +66,22 @@ namespace System.ServiceModel.Syndication.Tests
                     { new XmlQualifiedName("type"), "value2" },
                     { new XmlQualifiedName("name1"), "value3" },
                     { new XmlQualifiedName("name2"), "" },
-                    { new XmlQualifiedName("name3"), null }
+                    { new XmlQualifiedName("name3"), null },
                 },
-                "OuterName", "OuterNamespace",
-                @"<OuterName type=""CustomType"" d1p1:type=""value1"" name1=""value3"" name2="""" name3="""" name=""value"" xmlns:d1p1=""namespace"" xmlns=""OuterNamespace"" />"
+                "OuterName",
+                "OuterNamespace",
+                @"<OuterName type=""CustomType"" d1p1:type=""value1"" name1=""value3"" name2="""" name3="""" name=""value"" xmlns:d1p1=""namespace"" xmlns=""OuterNamespace"" />",
             };
         }
 
         [Theory]
         [MemberData(nameof(WriteTo_TestData))]
-        public void WriteTo_Invoke_Success(Dictionary<XmlQualifiedName, string> attributeExtensions, string outerElementName, string outerElementNamespace, string expected)
+        public void WriteTo_Invoke_Success(
+            Dictionary<XmlQualifiedName, string> attributeExtensions,
+            string outerElementName,
+            string outerElementNamespace,
+            string expected
+        )
         {
             var content = new SyndicationContentSubclass();
             if (attributeExtensions != null)
@@ -76,14 +91,20 @@ namespace System.ServiceModel.Syndication.Tests
                     content.AttributeExtensions.Add(name, attributeExtensions[name]);
                 }
             }
-            CompareHelper.AssertEqualWriteOutput(expected, writer => content.WriteTo(writer, outerElementName, outerElementNamespace));
+            CompareHelper.AssertEqualWriteOutput(
+                expected,
+                writer => content.WriteTo(writer, outerElementName, outerElementNamespace)
+            );
         }
 
         [Fact]
         public void WriteTo_NullWriter_ThrowsArgumentNullException()
         {
             var content = new SyndicationContentSubclass();
-            AssertExtensions.Throws<ArgumentNullException>("writer", () => content.WriteTo(null, "outerElementName", "outerElementNamespace"));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "writer",
+                () => content.WriteTo(null, "outerElementName", "outerElementNamespace")
+            );
         }
 
         [Theory]
@@ -95,7 +116,11 @@ namespace System.ServiceModel.Syndication.Tests
             using (var stringWriter = new StringWriter())
             using (XmlWriter writer = XmlWriter.Create(stringWriter))
             {
-                AssertExtensions.Throws<ArgumentException>("outerElementName", null, () => content.WriteTo(writer, outerElementName, "outerElementNamespace"));
+                AssertExtensions.Throws<ArgumentException>(
+                    "outerElementName",
+                    null,
+                    () => content.WriteTo(writer, outerElementName, "outerElementNamespace")
+                );
             }
         }
 
@@ -105,7 +130,9 @@ namespace System.ServiceModel.Syndication.Tests
         [InlineData("content")]
         public void CreateHtmlContent_Invoke_ReturnsExpected(string content)
         {
-            TextSyndicationContent syndicationContent = SyndicationContent.CreateHtmlContent(content);
+            TextSyndicationContent syndicationContent = SyndicationContent.CreateHtmlContent(
+                content
+            );
             Assert.Empty(syndicationContent.AttributeExtensions);
             Assert.Equal(content, syndicationContent.Text);
             Assert.Equal("html", syndicationContent.Type);
@@ -117,7 +144,9 @@ namespace System.ServiceModel.Syndication.Tests
         [InlineData("content")]
         public void CreatePlainContent_Invoke_ReturnsExpected(string content)
         {
-            TextSyndicationContent syndicationContent = SyndicationContent.CreatePlaintextContent(content);
+            TextSyndicationContent syndicationContent = SyndicationContent.CreatePlaintextContent(
+                content
+            );
             Assert.Empty(syndicationContent.AttributeExtensions);
             Assert.Equal(content, syndicationContent.Text);
             Assert.Equal("text", syndicationContent.Type);
@@ -129,7 +158,9 @@ namespace System.ServiceModel.Syndication.Tests
         [InlineData("content")]
         public void CreateXhtmlContent_Invoke_ReturnsExpected(string content)
         {
-            TextSyndicationContent syndicationContent = SyndicationContent.CreateXhtmlContent(content);
+            TextSyndicationContent syndicationContent = SyndicationContent.CreateXhtmlContent(
+                content
+            );
             Assert.Empty(syndicationContent.AttributeExtensions);
             Assert.Equal(content, syndicationContent.Text);
             Assert.Equal("xhtml", syndicationContent.Type);
@@ -146,7 +177,10 @@ namespace System.ServiceModel.Syndication.Tests
         [MemberData(nameof(CreateUrlContent_TestData))]
         public void CreateUrlContent_Invoke_ReturnsExpected(Uri url, string mediaType)
         {
-            UrlSyndicationContent syndicationContent = SyndicationContent.CreateUrlContent(url, mediaType);
+            UrlSyndicationContent syndicationContent = SyndicationContent.CreateUrlContent(
+                url,
+                mediaType
+            );
             Assert.Empty(syndicationContent.AttributeExtensions);
             Assert.Equal(url, syndicationContent.Url);
             Assert.Equal(mediaType, syndicationContent.Type);
@@ -155,26 +189,40 @@ namespace System.ServiceModel.Syndication.Tests
         [Fact]
         public void CreateUrlContent_NullUrl_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>("url", () => SyndicationContent.CreateUrlContent(null, "mediaType"));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "url",
+                () => SyndicationContent.CreateUrlContent(null, "mediaType")
+            );
         }
 
         [Fact]
         public void CreateXmlContent_Reader_NoAttributes()
         {
             XmlSyndicationContent content = SyndicationContent.CreateXmlContent(
-                new XElement("ParentObject",
-                    new XElement("ExtensionObject",
-                        new XElement("Value", 10)
-                    )
+                new XElement(
+                    "ParentObject",
+                    new XElement("ExtensionObject", new XElement("Value", 10))
                 ).CreateReader()
             );
             Assert.Empty(content.AttributeExtensions);
             Assert.Equal("text/xml", content.Type);
             Assert.Null(content.Extension);
             Assert.Equal(0, content.ReadContent<ExtensionObject>().Value);
-            Assert.Equal(0, content.ReadContent<ExtensionObject>(new DataContractSerializer(typeof(ExtensionObject))).Value);
+            Assert.Equal(
+                0,
+                content
+                    .ReadContent<ExtensionObject>(
+                        new DataContractSerializer(typeof(ExtensionObject))
+                    )
+                    .Value
+            );
             Assert.Equal(0, content.ReadContent<ExtensionObject>((XmlObjectSerializer)null).Value);
-            Assert.Equal(10, content.ReadContent<ExtensionObject>(new XmlSerializer(typeof(ExtensionObject))).Value);
+            Assert.Equal(
+                10,
+                content
+                    .ReadContent<ExtensionObject>(new XmlSerializer(typeof(ExtensionObject)))
+                    .Value
+            );
             Assert.Equal(10, content.ReadContent<ExtensionObject>((XmlSerializer)null).Value);
         }
 
@@ -182,41 +230,87 @@ namespace System.ServiceModel.Syndication.Tests
         public void CreateXmlContent_Reader_Attributes()
         {
             XmlSyndicationContent content = SyndicationContent.CreateXmlContent(
-                new XElement("ParentObject", new XAttribute("type", "CustomType"), new XAttribute(XNamespace.Xmlns + "name", "ignored"), new XAttribute("name1", "value1"), new XAttribute(XNamespace.Get("namespace") + "name2", "value2"),
-                    new XElement("ExtensionObject", new XAttribute("ignored", "value"),
+                new XElement(
+                    "ParentObject",
+                    new XAttribute("type", "CustomType"),
+                    new XAttribute(XNamespace.Xmlns + "name", "ignored"),
+                    new XAttribute("name1", "value1"),
+                    new XAttribute(XNamespace.Get("namespace") + "name2", "value2"),
+                    new XElement(
+                        "ExtensionObject",
+                        new XAttribute("ignored", "value"),
                         new XElement("Value", 10)
                     )
                 ).CreateReader()
             );
             Assert.Equal(2, content.AttributeExtensions.Count);
             Assert.Equal("value1", content.AttributeExtensions[new XmlQualifiedName("name1")]);
-            Assert.Equal("value2", content.AttributeExtensions[new XmlQualifiedName("name2", "namespace")]);
+            Assert.Equal(
+                "value2",
+                content.AttributeExtensions[new XmlQualifiedName("name2", "namespace")]
+            );
             Assert.Equal("CustomType", content.Type);
             Assert.Null(content.Extension);
             Assert.Equal(0, content.ReadContent<ExtensionObject>().Value);
-            Assert.Equal(0, content.ReadContent<ExtensionObject>(new DataContractSerializer(typeof(ExtensionObject))).Value);
+            Assert.Equal(
+                0,
+                content
+                    .ReadContent<ExtensionObject>(
+                        new DataContractSerializer(typeof(ExtensionObject))
+                    )
+                    .Value
+            );
             Assert.Equal(0, content.ReadContent<ExtensionObject>((XmlObjectSerializer)null).Value);
-            Assert.Equal(10, content.ReadContent<ExtensionObject>(new XmlSerializer(typeof(ExtensionObject))).Value);
+            Assert.Equal(
+                10,
+                content
+                    .ReadContent<ExtensionObject>(new XmlSerializer(typeof(ExtensionObject)))
+                    .Value
+            );
             Assert.Equal(10, content.ReadContent<ExtensionObject>((XmlSerializer)null).Value);
         }
 
         [Fact]
         public void CreateXmlContent_NullReader_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>("reader", () => SyndicationContent.CreateXmlContent(null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "reader",
+                () => SyndicationContent.CreateXmlContent(null)
+            );
         }
 
         [Fact]
         public void CreateXmlContent_Object_ReturnsExpected()
         {
-            XmlSyndicationContent content = SyndicationContent.CreateXmlContent(new ExtensionObject { Value = 10 });
+            XmlSyndicationContent content = SyndicationContent.CreateXmlContent(
+                new ExtensionObject { Value = 10 }
+            );
             Assert.Empty(content.AttributeExtensions);
             Assert.Equal("text/xml", content.Type);
-            Assert.Equal(10, content.Extension.GetObject<ExtensionObject>(new XmlSerializer(typeof(ExtensionObject))).Value);
+            Assert.Equal(
+                10,
+                content
+                    .Extension.GetObject<ExtensionObject>(
+                        new XmlSerializer(typeof(ExtensionObject))
+                    )
+                    .Value
+            );
             Assert.Equal(10, content.ReadContent<ExtensionObject>().Value);
-            Assert.Equal(10, content.ReadContent<ExtensionObject>(new DataContractSerializer(typeof(ExtensionObject))).Value);
+            Assert.Equal(
+                10,
+                content
+                    .ReadContent<ExtensionObject>(
+                        new DataContractSerializer(typeof(ExtensionObject))
+                    )
+                    .Value
+            );
             Assert.Equal(10, content.ReadContent<ExtensionObject>((XmlObjectSerializer)null).Value);
-            Assert.Equal(10, content.ReadContent<ExtensionObject>(new XmlSerializer(typeof(ExtensionObject))).Value);
+            Assert.Equal(
+                10,
+                content
+                    .ReadContent<ExtensionObject>(new XmlSerializer(typeof(ExtensionObject)))
+                    .Value
+            );
             Assert.Equal(10, content.ReadContent<ExtensionObject>((XmlSerializer)null).Value);
         }
 
@@ -228,16 +322,40 @@ namespace System.ServiceModel.Syndication.Tests
 
         [Theory]
         [MemberData(nameof(CreateXmlContent_XmlObjectSerializer_TestData))]
-        public void CreateXmlContent_XmlObjectSerializer_ReturnsExpected(XmlObjectSerializer dataContractSerializer)
+        public void CreateXmlContent_XmlObjectSerializer_ReturnsExpected(
+            XmlObjectSerializer dataContractSerializer
+        )
         {
-            XmlSyndicationContent content = SyndicationContent.CreateXmlContent(new ExtensionObject { Value = 10 }, dataContractSerializer);
+            XmlSyndicationContent content = SyndicationContent.CreateXmlContent(
+                new ExtensionObject { Value = 10 },
+                dataContractSerializer
+            );
             Assert.Empty(content.AttributeExtensions);
             Assert.Equal("text/xml", content.Type);
-            Assert.Equal(10, content.Extension.GetObject<ExtensionObject>(new XmlSerializer(typeof(ExtensionObject))).Value);
+            Assert.Equal(
+                10,
+                content
+                    .Extension.GetObject<ExtensionObject>(
+                        new XmlSerializer(typeof(ExtensionObject))
+                    )
+                    .Value
+            );
             Assert.Equal(10, content.ReadContent<ExtensionObject>().Value);
-            Assert.Equal(10, content.ReadContent<ExtensionObject>(new DataContractSerializer(typeof(ExtensionObject))).Value);
+            Assert.Equal(
+                10,
+                content
+                    .ReadContent<ExtensionObject>(
+                        new DataContractSerializer(typeof(ExtensionObject))
+                    )
+                    .Value
+            );
             Assert.Equal(10, content.ReadContent<ExtensionObject>((XmlObjectSerializer)null).Value);
-            Assert.Equal(10, content.ReadContent<ExtensionObject>(new XmlSerializer(typeof(ExtensionObject))).Value);
+            Assert.Equal(
+                10,
+                content
+                    .ReadContent<ExtensionObject>(new XmlSerializer(typeof(ExtensionObject)))
+                    .Value
+            );
             Assert.Equal(10, content.ReadContent<ExtensionObject>((XmlSerializer)null).Value);
         }
 
@@ -251,14 +369,36 @@ namespace System.ServiceModel.Syndication.Tests
         [MemberData(nameof(CreateXmlContent_XmlSerializer_TestData))]
         public void CreateXmlContent_XmlSerializer_ReturnsExpected(XmlSerializer serializer)
         {
-            XmlSyndicationContent content = SyndicationContent.CreateXmlContent(new ExtensionObject { Value = 10 }, serializer);
+            XmlSyndicationContent content = SyndicationContent.CreateXmlContent(
+                new ExtensionObject { Value = 10 },
+                serializer
+            );
             Assert.Empty(content.AttributeExtensions);
             Assert.Equal("text/xml", content.Type);
-            Assert.Equal(10, content.Extension.GetObject<ExtensionObject>(new XmlSerializer(typeof(ExtensionObject))).Value);
+            Assert.Equal(
+                10,
+                content
+                    .Extension.GetObject<ExtensionObject>(
+                        new XmlSerializer(typeof(ExtensionObject))
+                    )
+                    .Value
+            );
             Assert.Equal(10, content.ReadContent<ExtensionObject>().Value);
-            Assert.Equal(10, content.ReadContent<ExtensionObject>(new DataContractSerializer(typeof(ExtensionObject))).Value);
+            Assert.Equal(
+                10,
+                content
+                    .ReadContent<ExtensionObject>(
+                        new DataContractSerializer(typeof(ExtensionObject))
+                    )
+                    .Value
+            );
             Assert.Equal(10, content.ReadContent<ExtensionObject>((XmlObjectSerializer)null).Value);
-            Assert.Equal(10, content.ReadContent<ExtensionObject>(new XmlSerializer(typeof(ExtensionObject))).Value);
+            Assert.Equal(
+                10,
+                content
+                    .ReadContent<ExtensionObject>(new XmlSerializer(typeof(ExtensionObject)))
+                    .Value
+            );
             Assert.Equal(10, content.ReadContent<ExtensionObject>((XmlSerializer)null).Value);
         }
 
@@ -266,13 +406,15 @@ namespace System.ServiceModel.Syndication.Tests
         {
             public SyndicationContentSubclass() { }
 
-            public SyndicationContentSubclass(SyndicationContentSubclass source) : base(source) { }
+            public SyndicationContentSubclass(SyndicationContentSubclass source)
+                : base(source) { }
 
             public override string Type => "CustomType";
 
             public override SyndicationContent Clone() => throw new NotImplementedException();
 
-            protected override void WriteContentsTo(XmlWriter writer) => writer.WriteAttributeString("name", "value");
+            protected override void WriteContentsTo(XmlWriter writer) =>
+                writer.WriteAttributeString("name", "value");
         }
 
         public class ExtensionObject

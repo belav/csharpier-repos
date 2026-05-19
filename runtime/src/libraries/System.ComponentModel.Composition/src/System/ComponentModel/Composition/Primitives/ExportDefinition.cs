@@ -27,9 +27,7 @@ namespace System.ComponentModel.Composition.Primitives
         ///         returns an empty, read-only dictionary.
         ///     </note>
         /// </remarks>
-        protected ExportDefinition()
-        {
-        }
+        protected ExportDefinition() { }
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="ExportDefinition"/> class with

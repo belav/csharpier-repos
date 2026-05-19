@@ -8,36 +8,25 @@ using System;
 // of the aliases
 namespace MyAssembly01
 {
-	public class Test
-	{
-	}
+    public class Test { }
 
-	namespace Namespace1
-	{
-		public class Test
-		{
-		}
-	}
+    namespace Namespace1
+    {
+        public class Test { }
+    }
 }
 
 namespace MyAssembly02
 {
-	public class Test
-	{
-	}
+    public class Test { }
 
-	namespace Namespace1
-	{
-		public class Test
-		{
-		}
-	}
+    namespace Namespace1
+    {
+        public class Test { }
+    }
 }
 
 public class Test
 {
-	public static void Main ()
-	{
-	}
+    public static void Main() { }
 }
-

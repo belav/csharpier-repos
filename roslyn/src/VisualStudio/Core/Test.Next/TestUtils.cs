@@ -14,15 +14,18 @@ namespace Roslyn.VisualStudio.Next.UnitTests
 {
     internal static class TestUtils
     {
-        public static void VerifyAssetStorage<T>(IEnumerable<KeyValuePair<Checksum, T>> items, SolutionAssetCache storage)
+        public static void VerifyAssetStorage<T>(
+            IEnumerable<KeyValuePair<Checksum, T>> items,
+            SolutionAssetCache storage
+        )
         {
             foreach (var kv in items)
             {
                 if (kv.Value is ChecksumCollection)
                 {
                     // ChecksumCollection itself won't be in asset storage. since
-                    // it will be never asked from OOP side to host to sync. 
-                    // the collection is already part of 
+                    // it will be never asked from OOP side to host to sync.
+                    // the collection is already part of
                     // Solution/Project/DocumentStateCheckum so syncing
                     // state checksum automatically bring in the collection.
                     // it only exist to calculate hierarchical checksum

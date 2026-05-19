@@ -3,5 +3,9 @@
 
 namespace System.Reflection.Runtime.MethodInfos
 {
-    internal delegate object CustomMethodInvokerAction(object thisObject, object[] args, Type thisType);
+    internal delegate object CustomMethodInvokerAction(
+        object thisObject,
+        object[] args,
+        Type thisType
+    );
 }

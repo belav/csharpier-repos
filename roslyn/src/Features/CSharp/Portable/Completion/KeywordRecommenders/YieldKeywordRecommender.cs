@@ -10,11 +10,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
     internal class YieldKeywordRecommender : AbstractSyntacticSingleKeywordRecommender
     {
         public YieldKeywordRecommender()
-            : base(SyntaxKind.YieldKeyword)
-        {
-        }
+            : base(SyntaxKind.YieldKeyword) { }
 
-        protected override bool IsValidContext(int position, CSharpSyntaxContext context, CancellationToken cancellationToken)
-            => context.IsStatementContext;
+        protected override bool IsValidContext(
+            int position,
+            CSharpSyntaxContext context,
+            CancellationToken cancellationToken
+        ) => context.IsStatementContext;
     }
 }

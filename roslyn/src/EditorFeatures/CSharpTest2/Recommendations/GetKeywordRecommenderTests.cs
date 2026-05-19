@@ -14,59 +14,61 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         [Fact]
         public async Task TestNotAtRoot_Interactive()
         {
-            await VerifyAbsenceAsync(SourceCodeKind.Script,
-@"$$");
+            await VerifyAbsenceAsync(SourceCodeKind.Script, @"$$");
         }
 
         [Fact]
         public async Task TestNotAfterClass_Interactive()
         {
-            await VerifyAbsenceAsync(SourceCodeKind.Script,
+            await VerifyAbsenceAsync(
+                SourceCodeKind.Script,
                 """
                 class C { }
                 $$
-                """);
+                """
+            );
         }
 
         [Fact]
         public async Task TestNotAfterGlobalStatement_Interactive()
         {
-            await VerifyAbsenceAsync(SourceCodeKind.Script,
+            await VerifyAbsenceAsync(
+                SourceCodeKind.Script,
                 """
                 System.Console.WriteLine();
                 $$
-                """);
+                """
+            );
         }
 
         [Fact]
         public async Task TestNotAfterGlobalVariableDeclaration_Interactive()
         {
-            await VerifyAbsenceAsync(SourceCodeKind.Script,
+            await VerifyAbsenceAsync(
+                SourceCodeKind.Script,
                 """
                 int i = 0;
                 $$
-                """);
+                """
+            );
         }
 
         [Fact]
         public async Task TestNotInUsingAlias()
         {
-            await VerifyAbsenceAsync(
-@"using Goo = $$");
+            await VerifyAbsenceAsync(@"using Goo = $$");
         }
 
         [Fact]
         public async Task TestNotInGlobalUsingAlias()
         {
-            await VerifyAbsenceAsync(
-@"global using Goo = $$");
+            await VerifyAbsenceAsync(@"global using Goo = $$");
         }
 
         [Fact]
         public async Task TestNotInEmptyStatement()
         {
-            await VerifyAbsenceAsync(AddInsideMethod(
-@"$$"));
+            await VerifyAbsenceAsync(AddInsideMethod(@"$$"));
         }
 
         [Fact]
@@ -76,7 +78,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 """
                 class C {
                    int Goo { $$
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -86,7 +89,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 """
                 class C {
                    int Goo { private $$
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -96,7 +100,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 """
                 class C {
                    int Goo { [Bar] $$
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -106,7 +111,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 """
                 class C {
                    int Goo { [Bar] private $$
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -116,7 +122,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 """
                 class C {
                    int Goo { set; $$
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -126,7 +133,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 """
                 class C {
                    int Goo { set; private $$
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -136,7 +144,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 """
                 class C {
                    int Goo { set; [Bar] $$
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -146,7 +155,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 """
                 class C {
                    int Goo { set; [Bar] private $$
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -156,7 +166,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 """
                 class C {
                    int Goo { set { } $$
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -166,7 +177,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 """
                 class C {
                    int Goo { set { } private $$
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -176,7 +188,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 """
                 class C {
                    int Goo { set { } [Bar] $$
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -186,7 +199,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 """
                 class C {
                    int Goo { set { } [Bar] private $$
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -196,7 +210,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 """
                 class C {
                    int Goo { get $$
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -206,7 +221,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 """
                 class C {
                    int Goo { get; $$
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -216,7 +232,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 """
                 class C {
                    event Goo E { $$
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -226,7 +243,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 """
                 class C {
                    int this[int i] { $$
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -236,7 +254,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 """
                 class C {
                    int this[int i] { private $$
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -246,7 +265,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 """
                 class C {
                    int this[int i] { [Bar] $$
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -256,7 +276,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 """
                 class C {
                    int this[int i] { [Bar] private $$
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -266,7 +287,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 """
                 class C {
                    int this[int i] { set; $$
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -276,7 +298,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 """
                 class C {
                    int this[int i] { set; private $$
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -286,7 +309,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 """
                 class C {
                    int this[int i] { set; [Bar] $$
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -296,7 +320,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 """
                 class C {
                    int this[int i] { set; [Bar] private $$
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -306,7 +331,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 """
                 class C {
                    int this[int i] { set { } $$
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -316,7 +342,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 """
                 class C {
                    int this[int i] { set { } private $$
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -326,7 +353,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 """
                 class C {
                    int this[int i] { set { } [Bar] $$
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -336,7 +364,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 """
                 class C {
                    int this[int i] { set { } [Bar] private $$
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -346,7 +375,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 """
                 class C {
                    int this[int i] { get $$
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -356,7 +386,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 """
                 class C {
                    int this[int i] { get; $$
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -366,7 +397,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 """
                 class C {
                    int this[int i] { $$; }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -376,7 +408,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 """
                 class C {
                    int this[int i] { protected internal $$ }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -386,7 +419,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 """
                 class C {
                    int this[int i] { internal protected $$ }
-                """);
+                """
+            );
         }
     }
 }

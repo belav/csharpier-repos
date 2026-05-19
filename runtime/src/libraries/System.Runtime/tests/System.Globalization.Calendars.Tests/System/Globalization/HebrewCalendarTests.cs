@@ -11,8 +11,10 @@ namespace System.Globalization.Tests
 
         public override DateTime MinSupportedDateTime => new DateTime(1583, 01, 01);
 
-        public override DateTime MaxSupportedDateTime => new DateTime(2239, 09, 29, 23, 59, 59).AddTicks(9999999);
+        public override DateTime MaxSupportedDateTime =>
+            new DateTime(2239, 09, 29, 23, 59, 59).AddTicks(9999999);
 
-        public override CalendarAlgorithmType AlgorithmType => CalendarAlgorithmType.LunisolarCalendar;
+        public override CalendarAlgorithmType AlgorithmType =>
+            CalendarAlgorithmType.LunisolarCalendar;
     }
 }

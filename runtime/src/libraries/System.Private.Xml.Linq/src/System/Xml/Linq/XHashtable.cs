@@ -62,7 +62,7 @@ namespace System.Xml.Linq
     /// </remarks>
     internal sealed class XHashtable<TValue>
     {
-        private XHashtableState _state;                          // SHARED STATE: Contains all XHashtable state, so it can be atomically swapped when resizes occur
+        private XHashtableState _state; // SHARED STATE: Contains all XHashtable state, so it can be atomically swapped when resizes occur
 
         /// <summary>
         /// Prototype of function which is called to extract a string key value from a hashed value.
@@ -81,7 +81,12 @@ namespace System.Xml.Linq
         /// <summary>
         /// Get an existing value from the hash table.  Return false if no such value exists.
         /// </summary>
-        public bool TryGetValue(string key, int index, int count, [MaybeNullWhen(false)] out TValue value)
+        public bool TryGetValue(
+            string key,
+            int index,
+            int count,
+            [MaybeNullWhen(false)] out TValue value
+        )
         {
             return _state.TryGetValue(key, index, count, out value);
         }
@@ -131,13 +136,13 @@ namespace System.Xml.Linq
         /// </remarks>
         private sealed class XHashtableState
         {
-            private readonly int[] _buckets;                  // Buckets contain indexes into entries array (bucket values are SHARED STATE)
-            private readonly Entry[] _entries;                // Entries contain linked lists of buckets (next pointers are SHARED STATE)
-            private int _numEntries;                 // SHARED STATE: Current number of entries (including orphaned entries)
-            private readonly ExtractKeyDelegate _extractKey;  // Delegate called in order to extract string key embedded in hashed TValue
+            private readonly int[] _buckets; // Buckets contain indexes into entries array (bucket values are SHARED STATE)
+            private readonly Entry[] _entries; // Entries contain linked lists of buckets (next pointers are SHARED STATE)
+            private int _numEntries; // SHARED STATE: Current number of entries (including orphaned entries)
+            private readonly ExtractKeyDelegate _extractKey; // Delegate called in order to extract string key embedded in hashed TValue
 
-            private const int EndOfList = 0;        // End of linked list marker
-            private const int FullList = -1;        // Indicates entries should not be added to end of linked list
+            private const int EndOfList = 0; // End of linked list marker
+            private const int FullList = -1; // Indicates entries should not be added to end of linked list
 
             /// <summary>
             /// Construct a new XHashtableState object with the specified capacity.
@@ -176,7 +181,11 @@ namespace System.Xml.Linq
                     if (entryIdx == EndOfList)
                     {
                         // Replace EndOfList with FullList, so that any threads still attempting to add will be forced to resize
-                        entryIdx = Interlocked.CompareExchange(ref _buckets[bucketIdx], FullList, EndOfList);
+                        entryIdx = Interlocked.CompareExchange(
+                            ref _buckets[bucketIdx],
+                            FullList,
+                            EndOfList
+                        );
                     }
 
                     // Loop until we've guaranteed that the list has been counted and closed to further adds
@@ -189,7 +198,11 @@ namespace System.Xml.Linq
                         if (_entries[entryIdx].Next == EndOfList)
                         {
                             // Replace EndOfList with FullList, so that any threads still attempting to add will be forced to resize
-                            entryIdx = Interlocked.CompareExchange(ref _entries[entryIdx].Next, FullList, EndOfList);
+                            entryIdx = Interlocked.CompareExchange(
+                                ref _entries[entryIdx].Next,
+                                FullList,
+                                EndOfList
+                            );
                         }
                         else
                         {
@@ -197,7 +210,10 @@ namespace System.Xml.Linq
                             entryIdx = _entries[entryIdx].Next;
                         }
                     }
-                    Debug.Assert(entryIdx == EndOfList, "Resize() should only be called by one thread");
+                    Debug.Assert(
+                        entryIdx == EndOfList,
+                        "Resize() should only be called by one thread"
+                    );
                 }
 
                 // Double number of valid entries; if result is less than current capacity, then use current capacity
@@ -229,7 +245,10 @@ namespace System.Xml.Linq
 
                         entryIdx = _entries[entryIdx].Next;
                     }
-                    Debug.Assert(entryIdx == FullList, "Linked list should have been closed when it was counted");
+                    Debug.Assert(
+                        entryIdx == FullList,
+                        "Linked list should have been closed when it was counted"
+                    );
                 }
 
                 return newHashtable;
@@ -239,7 +258,12 @@ namespace System.Xml.Linq
             /// Attempt to find "key" in the table.  If the key exists, return the associated value in "value" and
             /// return true.  Otherwise return false.
             /// </summary>
-            public bool TryGetValue(string key, int index, int count, [MaybeNullWhen(false)] out TValue value)
+            public bool TryGetValue(
+                string key,
+                int index,
+                int count,
+                [MaybeNullWhen(false)] out TValue value
+            )
             {
                 int hashCode = ComputeHashCode(key, index, count);
                 int entryIndex = 0;
@@ -264,7 +288,8 @@ namespace System.Xml.Linq
             /// </summary>
             public bool TryAdd(TValue value, out TValue newValue)
             {
-                int newEntry, entryIndex;
+                int newEntry,
+                    entryIndex;
                 string? key;
                 int hashCode;
 
@@ -301,9 +326,17 @@ namespace System.Xml.Linq
                     // PUBLISH (buckets slot)
                     // No matching entry found, so add the new entry to the end of the list ("entryIndex" is index of last entry)
                     if (entryIndex == 0)
-                        entryIndex = Interlocked.CompareExchange(ref _buckets[hashCode & (_buckets.Length - 1)], newEntry, EndOfList);
+                        entryIndex = Interlocked.CompareExchange(
+                            ref _buckets[hashCode & (_buckets.Length - 1)],
+                            newEntry,
+                            EndOfList
+                        );
                     else
-                        entryIndex = Interlocked.CompareExchange(ref _entries[entryIndex].Next, newEntry, EndOfList);
+                        entryIndex = Interlocked.CompareExchange(
+                            ref _entries[entryIndex].Next,
+                            newEntry,
+                            EndOfList
+                        );
 
                     // Return true only if the CompareExchange succeeded (happens when replaced value is EndOfList).
                     // Return false if the linked list turned out to be full because another thread is currently resizing
@@ -329,7 +362,13 @@ namespace System.Xml.Linq
             /// <remarks>
             /// This method has the side effect of removing invalid entries from the list as it is traversed.
             /// </remarks>
-            private bool FindEntry(int hashCode, string key, int index, int count, ref int entryIndex)
+            private bool FindEntry(
+                int hashCode,
+                string key,
+                int index,
+                int count,
+                ref int entryIndex
+            )
             {
                 int previousIndex = entryIndex;
                 int currentIndex;
@@ -371,7 +410,10 @@ namespace System.Xml.Linq
                         else
                         {
                             // Valid key, so compare keys
-                            if (count == keyCompare.Length && string.CompareOrdinal(key, index, keyCompare, 0, count) == 0)
+                            if (
+                                count == keyCompare.Length
+                                && string.CompareOrdinal(key, index, keyCompare, 0, count) == 0
+                            )
                             {
                                 // Found match, so return true and matching entry in list
                                 entryIndex = currentIndex;
@@ -406,9 +448,9 @@ namespace System.Xml.Linq
             /// </summary>
             private struct Entry
             {
-                public TValue Value;    // Hashed value
-                public int HashCode;    // Hash code of string key (equal to extractKey(Value).GetHashCode())
-                public int Next;        // SHARED STATE: Points to next entry in linked list
+                public TValue Value; // Hashed value
+                public int HashCode; // Hash code of string key (equal to extractKey(Value).GetHashCode())
+                public int Next; // SHARED STATE: Points to next entry in linked list
             }
         }
     }

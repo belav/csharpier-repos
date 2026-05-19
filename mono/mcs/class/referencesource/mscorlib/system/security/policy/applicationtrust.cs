@@ -4,7 +4,7 @@
 //
 // ==--==
 // <OWNER>Microsoft</OWNER>
-// 
+//
 
 //
 // ApplicationTrust.cs
@@ -12,31 +12,34 @@
 // This class encapsulates security decisions about an application.
 //
 
-namespace System.Security.Policy {
+namespace System.Security.Policy
+{
     using System.Collections;
     using System.Collections.Generic;
-#if FEATURE_CLICKONCE        
-    using System.Deployment.Internal.Isolation;
-    using System.Deployment.Internal.Isolation.Manifest;
-#endif    
+    using System.Diagnostics.Contracts;
     using System.Globalization;
     using System.IO;
     using System.Runtime.InteropServices;
-#if FEATURE_SERIALIZATION
-    using System.Runtime.Serialization;
-    using System.Runtime.Serialization.Formatters.Binary;
-#endif // FEATURE_SERIALIZATION
     using System.Runtime.Versioning;
     using System.Security.Permissions;
     using System.Security.Util;
     using System.Text;
     using System.Threading;
-    using System.Diagnostics.Contracts;
+#if FEATURE_SERIALIZATION
+    using System.Runtime.Serialization;
+    using System.Runtime.Serialization.Formatters.Binary;
+#endif // FEATURE_SERIALIZATION
+
+#if FEATURE_CLICKONCE
+    using System.Deployment.Internal.Isolation;
+    using System.Deployment.Internal.Isolation.Manifest;
+#endif
 
     [System.Runtime.InteropServices.ComVisible(true)]
-    public enum ApplicationVersionMatch {
+    public enum ApplicationVersionMatch
+    {
         MatchExactVersion,
-        MatchAllVersions
+        MatchAllVersions,
     }
 
     [System.Runtime.InteropServices.ComVisible(true)]
@@ -47,7 +50,7 @@ namespace System.Security.Policy {
         private ApplicationIdentity m_appId;
         private bool m_appTrustedToRun;
         private bool m_persist;
-        
+
         private object m_extraInfo;
         private SecurityElement m_elExtraInfo;
 #endif
@@ -56,48 +59,61 @@ namespace System.Security.Policy {
 
         // Permission special flags for the default grant set in this ApplicationTrust.  This should be
         // updated in sync with any updates to the default grant set.
-        // 
+        //
         // In the general case, these values cannot be trusted - we only store a reference to the
         // DefaultGrantSet, and return the reference directly, which means that code can update the
         // permission set without our knowledge.  That would lead to the flags getting out of sync with the
         // grant set.
-        // 
+        //
         // However, we only care about these flags when we're creating a homogenous AppDomain, and in that
         // case we control the ApplicationTrust object end-to-end, and know that the permission set will not
         // change after the flags are calculated.
         [NonSerialized]
         private int m_grantSetSpecialFlags;
 
-#if FEATURE_CLICKONCE        
-        public ApplicationTrust (ApplicationIdentity applicationIdentity) : this () {
+#if FEATURE_CLICKONCE
+        public ApplicationTrust(ApplicationIdentity applicationIdentity)
+            : this()
+        {
             ApplicationIdentity = applicationIdentity;
         }
-#endif 
-        public ApplicationTrust () : this (new PermissionSet(PermissionState.None))
-        {
-        }
+#endif
 
-        internal ApplicationTrust (PermissionSet defaultGrantSet)
+        public ApplicationTrust()
+            : this(new PermissionSet(PermissionState.None)) { }
+
+        internal ApplicationTrust(PermissionSet defaultGrantSet)
         {
             InitDefaultGrantSet(defaultGrantSet);
 
             m_fullTrustAssemblies = new List<StrongName>().AsReadOnly();
         }
 
-        public ApplicationTrust(PermissionSet defaultGrantSet, IEnumerable<StrongName> fullTrustAssemblies) {
-            if (fullTrustAssemblies == null) {
+        public ApplicationTrust(
+            PermissionSet defaultGrantSet,
+            IEnumerable<StrongName> fullTrustAssemblies
+        )
+        {
+            if (fullTrustAssemblies == null)
+            {
                 throw new ArgumentNullException("fullTrustAssemblies");
             }
 
             InitDefaultGrantSet(defaultGrantSet);
 
             List<StrongName> fullTrustList = new List<StrongName>();
-            foreach (StrongName strongName in fullTrustAssemblies) {
-                if (strongName == null) {
-                    throw new ArgumentException(Environment.GetResourceString("Argument_NullFullTrustAssembly"));
+            foreach (StrongName strongName in fullTrustAssemblies)
+            {
+                if (strongName == null)
+                {
+                    throw new ArgumentException(
+                        Environment.GetResourceString("Argument_NullFullTrustAssembly")
+                    );
                 }
 
-                fullTrustList.Add(new StrongName(strongName.PublicKey, strongName.Name, strongName.Version));
+                fullTrustList.Add(
+                    new StrongName(strongName.PublicKey, strongName.Name, strongName.Version)
+                );
             }
 
             m_fullTrustAssemblies = fullTrustList.AsReadOnly();
@@ -105,8 +121,10 @@ namespace System.Security.Policy {
 
         // Sets up the default grant set for all constructors. Extracted to avoid the cost of
         // IEnumerable virtual dispatches on startup when there are no fullTrustAssemblies (CoreCLR)
-        private void InitDefaultGrantSet(PermissionSet defaultGrantSet) {
-            if (defaultGrantSet == null) {
+        private void InitDefaultGrantSet(PermissionSet defaultGrantSet)
+        {
+            if (defaultGrantSet == null)
+            {
                 throw new ArgumentNullException("defaultGrantSet");
             }
 
@@ -116,70 +134,77 @@ namespace System.Security.Policy {
             DefaultGrantSet = new PolicyStatement(defaultGrantSet);
         }
 
-#if FEATURE_CLICKONCE        
-        public ApplicationIdentity ApplicationIdentity {
-            get {
-                return m_appId;
-            }
-            set {
+#if FEATURE_CLICKONCE
+        public ApplicationIdentity ApplicationIdentity
+        {
+            get { return m_appId; }
+            set
+            {
                 if (value == null)
-                    throw new ArgumentNullException(Environment.GetResourceString("Argument_InvalidAppId"));
+                    throw new ArgumentNullException(
+                        Environment.GetResourceString("Argument_InvalidAppId")
+                    );
                 Contract.EndContractBlock();
                 m_appId = value;
             }
         }
 #endif
-        public PolicyStatement DefaultGrantSet {
-            get {
+        public PolicyStatement DefaultGrantSet
+        {
+            get
+            {
                 if (m_psDefaultGrant == null)
                     return new PolicyStatement(new PermissionSet(PermissionState.None));
                 return m_psDefaultGrant;
             }
-            set {
-                if (value == null) {
+            set
+            {
+                if (value == null)
+                {
                     m_psDefaultGrant = null;
                     m_grantSetSpecialFlags = 0;
                 }
-                else {
+                else
+                {
                     m_psDefaultGrant = value;
-                    m_grantSetSpecialFlags = SecurityManager.GetSpecialFlags(m_psDefaultGrant.PermissionSet, null);
+                    m_grantSetSpecialFlags = SecurityManager.GetSpecialFlags(
+                        m_psDefaultGrant.PermissionSet,
+                        null
+                    );
                 }
             }
         }
 
-        public IList<StrongName> FullTrustAssemblies {
-            get {
-                return m_fullTrustAssemblies;
-            }
+        public IList<StrongName> FullTrustAssemblies
+        {
+            get { return m_fullTrustAssemblies; }
         }
-#if FEATURE_CLICKONCE        
-        public bool IsApplicationTrustedToRun {
-            get {
-                return m_appTrustedToRun;
-            }
-            set {
-                m_appTrustedToRun = value;
-            }
+#if FEATURE_CLICKONCE
+        public bool IsApplicationTrustedToRun
+        {
+            get { return m_appTrustedToRun; }
+            set { m_appTrustedToRun = value; }
         }
 
-        public bool Persist {
-            get {
-                return m_persist;
-            }
-            set {
-                m_persist = value;
-            }
+        public bool Persist
+        {
+            get { return m_persist; }
+            set { m_persist = value; }
         }
 
-         public object ExtraInfo {
-            get {
-                if (m_elExtraInfo != null) {
+        public object ExtraInfo
+        {
+            get
+            {
+                if (m_elExtraInfo != null)
+                {
                     m_extraInfo = ObjectFromXml(m_elExtraInfo);
                     m_elExtraInfo = null;
                 }
                 return m_extraInfo;
             }
-            set {
+            set
+            {
                 m_elExtraInfo = null;
                 m_extraInfo = value;
             }
@@ -187,44 +212,52 @@ namespace System.Security.Policy {
 #endif //FEATURE_CLICKONCE
 
 #if FEATURE_CAS_POLICY
-        public SecurityElement ToXml () {
+        public SecurityElement ToXml()
+        {
             SecurityElement elRoot = new SecurityElement("ApplicationTrust");
             elRoot.AddAttribute("version", "1");
 
 #if FEATURE_CLICKONCE
-            if (m_appId != null) {
+            if (m_appId != null)
+            {
                 elRoot.AddAttribute("FullName", SecurityElement.Escape(m_appId.FullName));
             }
-            if (m_appTrustedToRun) {
+            if (m_appTrustedToRun)
+            {
                 elRoot.AddAttribute("TrustedToRun", "true");
             }
-            if (m_persist) {
+            if (m_persist)
+            {
                 elRoot.AddAttribute("Persist", "true");
             }
 #endif // FEATURE_CLICKONCE
- 
-            if (m_psDefaultGrant != null) {
+            if (m_psDefaultGrant != null)
+            {
                 SecurityElement elDefaultGrant = new SecurityElement("DefaultGrant");
                 elDefaultGrant.AddChild(m_psDefaultGrant.ToXml());
                 elRoot.AddChild(elDefaultGrant);
             }
-            if (m_fullTrustAssemblies.Count > 0) {
+            if (m_fullTrustAssemblies.Count > 0)
+            {
                 SecurityElement elFullTrustAssemblies = new SecurityElement("FullTrustAssemblies");
-                foreach (StrongName fullTrustAssembly in m_fullTrustAssemblies) {
+                foreach (StrongName fullTrustAssembly in m_fullTrustAssemblies)
+                {
                     elFullTrustAssemblies.AddChild(fullTrustAssembly.ToXml());
                 }
                 elRoot.AddChild(elFullTrustAssemblies);
             }
 
 #if FEATURE_CLICKONCE
-            if (ExtraInfo != null) {
+            if (ExtraInfo != null)
+            {
                 elRoot.AddChild(ObjectToXml("ExtraInfo", ExtraInfo));
             }
 #endif // FEATURE_CLICKONCE
             return elRoot;
         }
 
-        public void FromXml (SecurityElement element) {
+        public void FromXml(SecurityElement element)
+        {
             if (element == null)
                 throw new ArgumentNullException("element");
             if (String.Compare(element.Tag, "ApplicationTrust", StringComparison.Ordinal) != 0)
@@ -233,19 +266,25 @@ namespace System.Security.Policy {
 #if FEATURE_CLICKONCE
             m_appTrustedToRun = false;
             string isAppTrustedToRun = element.Attribute("TrustedToRun");
-            if (isAppTrustedToRun != null && String.Compare(isAppTrustedToRun, "true", StringComparison.Ordinal) == 0) {
+            if (
+                isAppTrustedToRun != null
+                && String.Compare(isAppTrustedToRun, "true", StringComparison.Ordinal) == 0
+            )
+            {
                 m_appTrustedToRun = true;
             }
 
             m_persist = false;
             string persist = element.Attribute("Persist");
-            if (persist != null && String.Compare(persist, "true", StringComparison.Ordinal) == 0) {
+            if (persist != null && String.Compare(persist, "true", StringComparison.Ordinal) == 0)
+            {
                 m_persist = true;
             }
 
             m_appId = null;
             string fullName = element.Attribute("FullName");
-            if (fullName != null && fullName.Length > 0) {
+            if (fullName != null && fullName.Length > 0)
+            {
                 m_appId = new ApplicationIdentity(fullName);
             }
 #endif // FEATURE_CLICKONCE
@@ -253,21 +292,32 @@ namespace System.Security.Policy {
             m_psDefaultGrant = null;
             m_grantSetSpecialFlags = 0;
             SecurityElement elDefaultGrant = element.SearchForChildByTag("DefaultGrant");
-            if (elDefaultGrant != null) {
-                SecurityElement elDefaultGrantPS = elDefaultGrant.SearchForChildByTag("PolicyStatement");
-                if (elDefaultGrantPS != null) {
+            if (elDefaultGrant != null)
+            {
+                SecurityElement elDefaultGrantPS = elDefaultGrant.SearchForChildByTag(
+                    "PolicyStatement"
+                );
+                if (elDefaultGrantPS != null)
+                {
                     PolicyStatement ps = new PolicyStatement(null);
                     ps.FromXml(elDefaultGrantPS);
                     m_psDefaultGrant = ps;
-                    m_grantSetSpecialFlags = SecurityManager.GetSpecialFlags(ps.PermissionSet, null);
+                    m_grantSetSpecialFlags = SecurityManager.GetSpecialFlags(
+                        ps.PermissionSet,
+                        null
+                    );
                 }
             }
 
             List<StrongName> fullTrustAssemblies = new List<StrongName>();
-            SecurityElement elFullTrustAssemblies = element.SearchForChildByTag("FullTrustAssemblies");
-            if (elFullTrustAssemblies != null && elFullTrustAssemblies.InternalChildren != null) {
+            SecurityElement elFullTrustAssemblies = element.SearchForChildByTag(
+                "FullTrustAssemblies"
+            );
+            if (elFullTrustAssemblies != null && elFullTrustAssemblies.InternalChildren != null)
+            {
                 IEnumerator enumerator = elFullTrustAssemblies.Children.GetEnumerator();
-                while (enumerator.MoveNext()) {
+                while (enumerator.MoveNext())
+                {
                     StrongName fullTrustAssembly = new StrongName();
                     fullTrustAssembly.FromXml(enumerator.Current as SecurityElement);
                     fullTrustAssemblies.Add(fullTrustAssembly);
@@ -282,16 +332,20 @@ namespace System.Security.Policy {
         }
 
 #if FEATURE_CLICKONCE
-        private static SecurityElement ObjectToXml (string tag, Object obj) {
+        private static SecurityElement ObjectToXml(string tag, Object obj)
+        {
             BCLDebug.Assert(obj != null, "You need to pass in an object");
 
             ISecurityEncodable encodableObj = obj as ISecurityEncodable;
 
             SecurityElement elObject;
-            if (encodableObj != null) {
+            if (encodableObj != null)
+            {
                 elObject = encodableObj.ToXml();
                 if (!elObject.Tag.Equals(tag))
-                    throw new ArgumentException(Environment.GetResourceString("Argument_InvalidXML"));
+                    throw new ArgumentException(
+                        Environment.GetResourceString("Argument_InvalidXML")
+                    );
             }
 
             MemoryStream stream = new MemoryStream();
@@ -304,12 +358,16 @@ namespace System.Security.Policy {
             return elObject;
         }
 
-        private static Object ObjectFromXml (SecurityElement elObject) {
+        private static Object ObjectFromXml(SecurityElement elObject)
+        {
             BCLDebug.Assert(elObject != null, "You need to pass in a security element");
 
-            if (elObject.Attribute("class") != null) {
-                ISecurityEncodable encodableObj = XMLUtil.CreateCodeGroup(elObject) as ISecurityEncodable;
-                if (encodableObj != null) {
+            if (elObject.Attribute("class") != null)
+            {
+                ISecurityEncodable encodableObj =
+                    XMLUtil.CreateCodeGroup(elObject) as ISecurityEncodable;
+                if (encodableObj != null)
+                {
                     encodableObj.FromXml(elObject);
                     return encodableObj;
                 }
@@ -334,45 +392,75 @@ namespace System.Security.Policy {
     }
 
 #if FEATURE_CLICKONCE
-    [System.Security.SecurityCritical]  // auto-generated_required
+    [System.Security.SecurityCritical] // auto-generated_required
     [System.Runtime.InteropServices.ComVisible(true)]
-    public sealed class ApplicationTrustCollection : ICollection {
+    public sealed class ApplicationTrustCollection : ICollection
+    {
         private const string ApplicationTrustProperty = "ApplicationTrust";
         private const string InstallerIdentifier = "{60051b8f-4f12-400a-8e50-dd05ebd438d1}";
         private static Guid ClrPropertySet = new Guid("c989bb7a-8385-4715-98cf-a741a8edb823");
 
         // The CLR specific constant install reference.
         private static object s_installReference = null;
-        private static StoreApplicationReference InstallReference {
-            get {
-                if (s_installReference == null) {
-                    Interlocked.CompareExchange(ref s_installReference,
-                                                new StoreApplicationReference(
-                                                    IsolationInterop.GUID_SXS_INSTALL_REFERENCE_SCHEME_OPAQUESTRING,
-                                                    InstallerIdentifier,
-                                                    null),
-                                                null);
+        private static StoreApplicationReference InstallReference
+        {
+            get
+            {
+                if (s_installReference == null)
+                {
+                    Interlocked.CompareExchange(
+                        ref s_installReference,
+                        new StoreApplicationReference(
+                            IsolationInterop.GUID_SXS_INSTALL_REFERENCE_SCHEME_OPAQUESTRING,
+                            InstallerIdentifier,
+                            null
+                        ),
+                        null
+                    );
                 }
-                return (StoreApplicationReference) s_installReference;
+                return (StoreApplicationReference)s_installReference;
             }
         }
 
         private object m_appTrusts = null;
-        private ArrayList AppTrusts {
-            [System.Security.SecurityCritical]  // auto-generated
-            get {
-                if (m_appTrusts == null) {
+        private ArrayList AppTrusts
+        {
+            [System.Security.SecurityCritical] // auto-generated
+            get
+            {
+                if (m_appTrusts == null)
+                {
                     ArrayList appTrusts = new ArrayList();
-                    if (m_storeBounded) {
+                    if (m_storeBounded)
+                    {
                         RefreshStorePointer();
                         // enumerate the user store and populate the collection
-                        StoreDeploymentMetadataEnumeration deplEnum = m_pStore.EnumInstallerDeployments(IsolationInterop.GUID_SXS_INSTALL_REFERENCE_SCHEME_OPAQUESTRING, InstallerIdentifier, ApplicationTrustProperty, null);
-                        foreach (IDefinitionAppId defAppId in deplEnum) {
-                            StoreDeploymentMetadataPropertyEnumeration metadataEnum = m_pStore.EnumInstallerDeploymentProperties(IsolationInterop.GUID_SXS_INSTALL_REFERENCE_SCHEME_OPAQUESTRING, InstallerIdentifier, ApplicationTrustProperty, defAppId);
-                            foreach (StoreOperationMetadataProperty appTrustProperty in metadataEnum) {
+                        StoreDeploymentMetadataEnumeration deplEnum =
+                            m_pStore.EnumInstallerDeployments(
+                                IsolationInterop.GUID_SXS_INSTALL_REFERENCE_SCHEME_OPAQUESTRING,
+                                InstallerIdentifier,
+                                ApplicationTrustProperty,
+                                null
+                            );
+                        foreach (IDefinitionAppId defAppId in deplEnum)
+                        {
+                            StoreDeploymentMetadataPropertyEnumeration metadataEnum =
+                                m_pStore.EnumInstallerDeploymentProperties(
+                                    IsolationInterop.GUID_SXS_INSTALL_REFERENCE_SCHEME_OPAQUESTRING,
+                                    InstallerIdentifier,
+                                    ApplicationTrustProperty,
+                                    defAppId
+                                );
+                            foreach (
+                                StoreOperationMetadataProperty appTrustProperty in metadataEnum
+                            )
+                            {
                                 string appTrustXml = appTrustProperty.Value;
-                                if (appTrustXml != null && appTrustXml.Length > 0) {
-                                    SecurityElement seTrust = SecurityElement.FromString(appTrustXml);
+                                if (appTrustXml != null && appTrustXml.Length > 0)
+                                {
+                                    SecurityElement seTrust = SecurityElement.FromString(
+                                        appTrustXml
+                                    );
                                     ApplicationTrust appTrust = new ApplicationTrust();
                                     appTrust.FromXml(seTrust);
                                     appTrusts.Add(appTrust);
@@ -390,14 +478,18 @@ namespace System.Security.Policy {
         private Store m_pStore = null; // Component store interface pointer.
 
         // Only internal constructors are exposed.
-        [System.Security.SecurityCritical]  // auto-generated
-        internal ApplicationTrustCollection () : this(false) {}
-        internal ApplicationTrustCollection (bool storeBounded) {
+        [System.Security.SecurityCritical] // auto-generated
+        internal ApplicationTrustCollection()
+            : this(false) { }
+
+        internal ApplicationTrustCollection(bool storeBounded)
+        {
             m_storeBounded = storeBounded;
         }
 
-        [System.Security.SecurityCritical]  // auto-generated
-        private void RefreshStorePointer () {
+        [System.Security.SecurityCritical] // auto-generated
+        private void RefreshStorePointer()
+        {
             // Refresh store pointer.
             if (m_pStore != null)
                 Marshal.ReleaseComObject(m_pStore.InternalStore);
@@ -407,36 +499,47 @@ namespace System.Security.Policy {
         public int Count
         {
             [System.Security.SecuritySafeCritical] // overrides public transparent member
-            get {
-                return AppTrusts.Count;
-            }
+            get { return AppTrusts.Count; }
         }
 
-        public ApplicationTrust this[int index] {
-            [System.Security.SecurityCritical]  // auto-generated
-            get {
-                return AppTrusts[index] as ApplicationTrust;
-            }
+        public ApplicationTrust this[int index]
+        {
+            [System.Security.SecurityCritical] // auto-generated
+            get { return AppTrusts[index] as ApplicationTrust; }
         }
 
-        public ApplicationTrust this[string appFullName] {
-            [System.Security.SecurityCritical]  // auto-generated
-            get {
+        public ApplicationTrust this[string appFullName]
+        {
+            [System.Security.SecurityCritical] // auto-generated
+            get
+            {
                 ApplicationIdentity identity = new ApplicationIdentity(appFullName);
-                ApplicationTrustCollection appTrusts = Find(identity, ApplicationVersionMatch.MatchExactVersion);
+                ApplicationTrustCollection appTrusts = Find(
+                    identity,
+                    ApplicationVersionMatch.MatchExactVersion
+                );
                 if (appTrusts.Count > 0)
                     return appTrusts[0];
                 return null;
             }
         }
 
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [ResourceConsumption(ResourceScope.Machine, ResourceScope.Machine)]
-        private void CommitApplicationTrust(ApplicationIdentity applicationIdentity, string trustXml) {
-            StoreOperationMetadataProperty[] properties = new StoreOperationMetadataProperty[] {
-                    new StoreOperationMetadataProperty(ClrPropertySet, ApplicationTrustProperty, trustXml)
-                };
+        private void CommitApplicationTrust(
+            ApplicationIdentity applicationIdentity,
+            string trustXml
+        )
+        {
+            StoreOperationMetadataProperty[] properties = new StoreOperationMetadataProperty[]
+            {
+                new StoreOperationMetadataProperty(
+                    ClrPropertySet,
+                    ApplicationTrustProperty,
+                    trustXml
+                ),
+            };
 
             IEnumDefinitionIdentity idenum = applicationIdentity.Identity.EnumAppPath();
             IDefinitionIdentity[] asbId = new IDefinitionIdentity[1];
@@ -445,11 +548,14 @@ namespace System.Security.Policy {
                 deplId = asbId[0];
 
             IDefinitionAppId defAppId = IsolationInterop.AppIdAuthority.CreateDefinition();
-            defAppId.SetAppPath(1, new IDefinitionIdentity[] {deplId});
+            defAppId.SetAppPath(1, new IDefinitionIdentity[] { deplId });
             defAppId.put_Codebase(applicationIdentity.CodeBase);
 
-            using (StoreTransaction storeTxn = new StoreTransaction()) {
-                storeTxn.Add(new StoreOperationSetDeploymentMetadata(defAppId, InstallReference, properties));
+            using (StoreTransaction storeTxn = new StoreTransaction())
+            {
+                storeTxn.Add(
+                    new StoreOperationSetDeploymentMetadata(defAppId, InstallReference, properties)
+                );
                 RefreshStorePointer();
                 m_pStore.Transact(storeTxn.Operations);
             }
@@ -457,141 +563,199 @@ namespace System.Security.Policy {
             m_appTrusts = null; // reset the app trusts in the collection.
         }
 
-        [System.Security.SecurityCritical]  // auto-generated
-        public int Add (ApplicationTrust trust) {
+        [System.Security.SecurityCritical] // auto-generated
+        public int Add(ApplicationTrust trust)
+        {
             if (trust == null)
                 throw new ArgumentNullException("trust");
             if (trust.ApplicationIdentity == null)
-                throw new ArgumentException(Environment.GetResourceString("Argument_ApplicationTrustShouldHaveIdentity"));
+                throw new ArgumentException(
+                    Environment.GetResourceString("Argument_ApplicationTrustShouldHaveIdentity")
+                );
             Contract.EndContractBlock();
 
             // Add the trust decision of the application to the fusion store.
-            if (m_storeBounded) {
+            if (m_storeBounded)
+            {
                 CommitApplicationTrust(trust.ApplicationIdentity, trust.ToXml().ToString());
                 return -1;
-            } else {
+            }
+            else
+            {
                 return AppTrusts.Add(trust);
             }
         }
 
-        [System.Security.SecurityCritical]  // auto-generated
-        public void AddRange (ApplicationTrust[] trusts) {
-            if (trusts == null)
-                throw new ArgumentNullException("trusts");
-            Contract.EndContractBlock();
-
-            int i=0;
-            try {
-                for (; i<trusts.Length; i++) {
-                    Add(trusts[i]);
-                }
-            } catch {
-                for (int j=0; j<i; j++) {
-                    Remove(trusts[j]);
-                }
-                throw;
-            }
-        }
-
-        [System.Security.SecurityCritical]  // auto-generated
-        public void AddRange (ApplicationTrustCollection trusts) {
+        [System.Security.SecurityCritical] // auto-generated
+        public void AddRange(ApplicationTrust[] trusts)
+        {
             if (trusts == null)
                 throw new ArgumentNullException("trusts");
             Contract.EndContractBlock();
 
             int i = 0;
-            try {
-                foreach (ApplicationTrust trust in trusts) {
-                    Add(trust);
-                    i++;
+            try
+            {
+                for (; i < trusts.Length; i++)
+                {
+                    Add(trusts[i]);
                 }
-            } catch {
-                for (int j=0; j<i; j++) {
+            }
+            catch
+            {
+                for (int j = 0; j < i; j++)
+                {
                     Remove(trusts[j]);
                 }
                 throw;
             }
         }
 
-        [System.Security.SecurityCritical]  // auto-generated
-        public ApplicationTrustCollection Find (ApplicationIdentity applicationIdentity, ApplicationVersionMatch versionMatch) {
+        [System.Security.SecurityCritical] // auto-generated
+        public void AddRange(ApplicationTrustCollection trusts)
+        {
+            if (trusts == null)
+                throw new ArgumentNullException("trusts");
+            Contract.EndContractBlock();
+
+            int i = 0;
+            try
+            {
+                foreach (ApplicationTrust trust in trusts)
+                {
+                    Add(trust);
+                    i++;
+                }
+            }
+            catch
+            {
+                for (int j = 0; j < i; j++)
+                {
+                    Remove(trusts[j]);
+                }
+                throw;
+            }
+        }
+
+        [System.Security.SecurityCritical] // auto-generated
+        public ApplicationTrustCollection Find(
+            ApplicationIdentity applicationIdentity,
+            ApplicationVersionMatch versionMatch
+        )
+        {
             ApplicationTrustCollection collection = new ApplicationTrustCollection(false);
-            foreach (ApplicationTrust trust in this) {
-                if (CmsUtils.CompareIdentities(trust.ApplicationIdentity, applicationIdentity, versionMatch))
+            foreach (ApplicationTrust trust in this)
+            {
+                if (
+                    CmsUtils.CompareIdentities(
+                        trust.ApplicationIdentity,
+                        applicationIdentity,
+                        versionMatch
+                    )
+                )
                     collection.Add(trust);
             }
             return collection;
         }
 
-        [System.Security.SecurityCritical]  // auto-generated
-        public void Remove (ApplicationIdentity applicationIdentity, ApplicationVersionMatch versionMatch) {
+        [System.Security.SecurityCritical] // auto-generated
+        public void Remove(
+            ApplicationIdentity applicationIdentity,
+            ApplicationVersionMatch versionMatch
+        )
+        {
             ApplicationTrustCollection collection = Find(applicationIdentity, versionMatch);
             RemoveRange(collection);
         }
 
-        [System.Security.SecurityCritical]  // auto-generated
-        public void Remove (ApplicationTrust trust) {
+        [System.Security.SecurityCritical] // auto-generated
+        public void Remove(ApplicationTrust trust)
+        {
             if (trust == null)
                 throw new ArgumentNullException("trust");
             if (trust.ApplicationIdentity == null)
-                throw new ArgumentException(Environment.GetResourceString("Argument_ApplicationTrustShouldHaveIdentity"));
+                throw new ArgumentException(
+                    Environment.GetResourceString("Argument_ApplicationTrustShouldHaveIdentity")
+                );
             Contract.EndContractBlock();
 
             // Remove the trust decision of the application from the fusion store.
-            if (m_storeBounded) {
+            if (m_storeBounded)
+            {
                 CommitApplicationTrust(trust.ApplicationIdentity, null);
-            } else {
+            }
+            else
+            {
                 AppTrusts.Remove(trust);
             }
         }
 
-        [System.Security.SecurityCritical]  // auto-generated
-        public void RemoveRange (ApplicationTrust[] trusts) {
-            if (trusts == null)
-                throw new ArgumentNullException("trusts");
-            Contract.EndContractBlock();
-
-            int i=0;
-            try {
-                for (; i<trusts.Length; i++) {
-                    Remove(trusts[i]);
-                }
-            } catch {
-                for (int j=0; j<i; j++) {
-                    Add(trusts[j]);
-                }
-                throw;
-            }
-        }
-
-        [System.Security.SecurityCritical]  // auto-generated
-        public void RemoveRange (ApplicationTrustCollection trusts) {
+        [System.Security.SecurityCritical] // auto-generated
+        public void RemoveRange(ApplicationTrust[] trusts)
+        {
             if (trusts == null)
                 throw new ArgumentNullException("trusts");
             Contract.EndContractBlock();
 
             int i = 0;
-            try {
-                foreach (ApplicationTrust trust in trusts) {
-                    Remove(trust);
-                    i++;
+            try
+            {
+                for (; i < trusts.Length; i++)
+                {
+                    Remove(trusts[i]);
                 }
-            } catch {
-                for (int j=0; j<i; j++) {
+            }
+            catch
+            {
+                for (int j = 0; j < i; j++)
+                {
                     Add(trusts[j]);
                 }
                 throw;
             }
         }
 
-        [System.Security.SecurityCritical]  // auto-generated
-        public void Clear() {
+        [System.Security.SecurityCritical] // auto-generated
+        public void RemoveRange(ApplicationTrustCollection trusts)
+        {
+            if (trusts == null)
+                throw new ArgumentNullException("trusts");
+            Contract.EndContractBlock();
+
+            int i = 0;
+            try
+            {
+                foreach (ApplicationTrust trust in trusts)
+                {
+                    Remove(trust);
+                    i++;
+                }
+            }
+            catch
+            {
+                for (int j = 0; j < i; j++)
+                {
+                    Add(trusts[j]);
+                }
+                throw;
+            }
+        }
+
+        [System.Security.SecurityCritical] // auto-generated
+        public void Clear()
+        {
             // remove all trust decisions in the collection.
             ArrayList trusts = this.AppTrusts;
-            if (m_storeBounded) {
-                foreach (ApplicationTrust trust in trusts) {
+            if (m_storeBounded)
+            {
+                foreach (ApplicationTrust trust in trusts)
+                {
                     if (trust.ApplicationIdentity == null)
-                        throw new ArgumentException(Environment.GetResourceString("Argument_ApplicationTrustShouldHaveIdentity"));
+                        throw new ArgumentException(
+                            Environment.GetResourceString(
+                                "Argument_ApplicationTrustShouldHaveIdentity"
+                            )
+                        );
 
                     // Remove the trust decision of the application from the fusion store.
                     CommitApplicationTrust(trust.ApplicationIdentity, null);
@@ -600,7 +764,8 @@ namespace System.Security.Policy {
             trusts.Clear();
         }
 
-        public ApplicationTrustEnumerator GetEnumerator() {
+        public ApplicationTrustEnumerator GetEnumerator()
+        {
             return new ApplicationTrustEnumerator(this);
         }
 
@@ -613,82 +778,91 @@ namespace System.Security.Policy {
 
         /// <internalonly/>
         [System.Security.SecuritySafeCritical] // overrides public transparent member
-        void ICollection.CopyTo(Array array, int index) {
+        void ICollection.CopyTo(Array array, int index)
+        {
             if (array == null)
                 throw new ArgumentNullException("array");
             if (array.Rank != 1)
-                throw new ArgumentException(Environment.GetResourceString("Arg_RankMultiDimNotSupported"));
+                throw new ArgumentException(
+                    Environment.GetResourceString("Arg_RankMultiDimNotSupported")
+                );
             if (index < 0 || index >= array.Length)
-                throw new ArgumentOutOfRangeException("index", Environment.GetResourceString("ArgumentOutOfRange_Index"));
+                throw new ArgumentOutOfRangeException(
+                    "index",
+                    Environment.GetResourceString("ArgumentOutOfRange_Index")
+                );
             if (array.Length - index < this.Count)
-                throw new ArgumentException(Environment.GetResourceString("Argument_InvalidOffLen"));
+                throw new ArgumentException(
+                    Environment.GetResourceString("Argument_InvalidOffLen")
+                );
             Contract.EndContractBlock();
 
-            for (int i=0; i < this.Count; i++) {
+            for (int i = 0; i < this.Count; i++)
+            {
                 array.SetValue(this[i], index++);
             }
         }
 
-        public void CopyTo (ApplicationTrust[] array, int index) {
+        public void CopyTo(ApplicationTrust[] array, int index)
+        {
             ((ICollection)this).CopyTo(array, index);
         }
 
-        public bool IsSynchronized {
+        public bool IsSynchronized
+        {
             [System.Security.SecuritySafeCritical] // overrides public transparent member
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
-        public object SyncRoot {
+        public object SyncRoot
+        {
             [System.Security.SecuritySafeCritical] // overrides public transparent member
-            get
-            {
-                return this;
-            }
+            get { return this; }
         }
     }
 
     [System.Runtime.InteropServices.ComVisible(true)]
-    public sealed class ApplicationTrustEnumerator : IEnumerator {
+    public sealed class ApplicationTrustEnumerator : IEnumerator
+    {
         [System.Security.SecurityCritical] // auto-generated
         private ApplicationTrustCollection m_trusts;
         private int m_current;
 
-        private ApplicationTrustEnumerator() {}
-        [System.Security.SecurityCritical]  // auto-generated
-        internal ApplicationTrustEnumerator(ApplicationTrustCollection trusts) {
+        private ApplicationTrustEnumerator() { }
+
+        [System.Security.SecurityCritical] // auto-generated
+        internal ApplicationTrustEnumerator(ApplicationTrustCollection trusts)
+        {
             m_trusts = trusts;
             m_current = -1;
         }
 
-        public ApplicationTrust Current {
-            [System.Security.SecuritySafeCritical]  // auto-generated
-            get {
-                return m_trusts[m_current];
-            }
+        public ApplicationTrust Current
+        {
+            [System.Security.SecuritySafeCritical] // auto-generated
+            get { return m_trusts[m_current]; }
         }
 
         /// <internalonly/>
-        object IEnumerator.Current {
-            [System.Security.SecuritySafeCritical]  // auto-generated
-            get {
-                return (object) m_trusts[m_current];
-            }
+        object IEnumerator.Current
+        {
+            [System.Security.SecuritySafeCritical] // auto-generated
+            get { return (object)m_trusts[m_current]; }
         }
 
-        [System.Security.SecuritySafeCritical]  // auto-generated
-        public bool MoveNext() {
-            if (m_current == ((int) m_trusts.Count - 1))
+        [System.Security.SecuritySafeCritical] // auto-generated
+        public bool MoveNext()
+        {
+            if (m_current == ((int)m_trusts.Count - 1))
                 return false;
             m_current++;
             return true;
         }
 
-        public void Reset() {
+        public void Reset()
+        {
             m_current = -1;
         }
     }
-#endif // FEATURE_CLICKONCE    
+#endif // FEATURE_CLICKONCE
 }

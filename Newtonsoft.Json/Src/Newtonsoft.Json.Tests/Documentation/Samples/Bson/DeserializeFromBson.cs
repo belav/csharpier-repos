@@ -55,7 +55,9 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Bson
         public void Example()
         {
             #region Usage
-            byte[] data = Convert.FromBase64String("MQAAAAJOYW1lAA8AAABNb3ZpZSBQcmVtaWVyZQAJU3RhcnREYXRlAMDgKWE8AQAAAA==");
+            byte[] data = Convert.FromBase64String(
+                "MQAAAAJOYW1lAA8AAABNb3ZpZSBQcmVtaWVyZQAJU3RhcnREYXRlAMDgKWE8AQAAAA=="
+            );
 
             MemoryStream ms = new MemoryStream(data);
             using (BsonReader reader = new BsonReader(ms))

@@ -50,7 +50,8 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
         [Test]
         public async Task ParseAdditionalContent_WhitespaceAsync()
         {
-            string json = @"[
+            string json =
+                @"[
 ""Small"",
 ""Medium"",
 ""Large""
@@ -59,9 +60,7 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
 ";
 
             JsonTextReader reader = new JsonTextReader(new StringReader(json));
-            while (await reader.ReadAsync())
-            {
-            }
+            while (await reader.ReadAsync()) { }
         }
 
         [Test]
@@ -102,22 +101,41 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
             Assert.AreEqual(int.MinValue, await reader.ReadAsInt32Async());
 
             reader = new JsonTextReader(new StringReader(long.MaxValue.ToString()));
-            await ExceptionAssert.ThrowsAsync<JsonReaderException>(async () => await reader.ReadAsInt32Async(), "JSON integer 9223372036854775807 is too large or small for an Int32. Path '', line 1, position 19.");
+            await ExceptionAssert.ThrowsAsync<JsonReaderException>(
+                async () => await reader.ReadAsInt32Async(),
+                "JSON integer 9223372036854775807 is too large or small for an Int32. Path '', line 1, position 19."
+            );
 
-            reader = new JsonTextReader(new StringReader("9999999999999999999999999999999999999999999999999999999999999999999999999999asdasdasd"));
-            await ExceptionAssert.ThrowsAsync<JsonReaderException>(async () => await reader.ReadAsInt32Async(), "Unexpected character encountered while parsing number: s. Path '', line 1, position 77.");
+            reader = new JsonTextReader(
+                new StringReader(
+                    "9999999999999999999999999999999999999999999999999999999999999999999999999999asdasdasd"
+                )
+            );
+            await ExceptionAssert.ThrowsAsync<JsonReaderException>(
+                async () => await reader.ReadAsInt32Async(),
+                "Unexpected character encountered while parsing number: s. Path '', line 1, position 77."
+            );
 
             reader = new JsonTextReader(new StringReader("1E-06"));
-            await ExceptionAssert.ThrowsAsync<JsonReaderException>(async () => await reader.ReadAsInt32Async(), "Input string '1E-06' is not a valid integer. Path '', line 1, position 5.");
+            await ExceptionAssert.ThrowsAsync<JsonReaderException>(
+                async () => await reader.ReadAsInt32Async(),
+                "Input string '1E-06' is not a valid integer. Path '', line 1, position 5."
+            );
 
             reader = new JsonTextReader(new StringReader("1.1"));
-            await ExceptionAssert.ThrowsAsync<JsonReaderException>(async () => await reader.ReadAsInt32Async(), "Input string '1.1' is not a valid integer. Path '', line 1, position 3.");
+            await ExceptionAssert.ThrowsAsync<JsonReaderException>(
+                async () => await reader.ReadAsInt32Async(),
+                "Input string '1.1' is not a valid integer. Path '', line 1, position 3."
+            );
 
             reader = new JsonTextReader(new StringReader(""));
             Assert.AreEqual(null, await reader.ReadAsInt32Async());
 
             reader = new JsonTextReader(new StringReader("-"));
-            await ExceptionAssert.ThrowsAsync<JsonReaderException>(async () => await reader.ReadAsInt32Async(), "Input string '-' is not a valid integer. Path '', line 1, position 1.");
+            await ExceptionAssert.ThrowsAsync<JsonReaderException>(
+                async () => await reader.ReadAsInt32Async(),
+                "Input string '-' is not a valid integer. Path '', line 1, position 1."
+            );
         }
 
         [Test]
@@ -135,12 +153,26 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
             reader = new JsonTextReader(new StringReader("-0.0"));
             Assert.AreEqual(0, await reader.ReadAsDecimalAsync());
 
-            reader = new JsonTextReader(new StringReader("9999999999999999999999999999999999999999999999999999999999999999999999999999asdasdasd"));
-            await ExceptionAssert.ThrowsAsync<JsonReaderException>(async () => await reader.ReadAsDecimalAsync(), "Unexpected character encountered while parsing number: s. Path '', line 1, position 77.");
+            reader = new JsonTextReader(
+                new StringReader(
+                    "9999999999999999999999999999999999999999999999999999999999999999999999999999asdasdasd"
+                )
+            );
+            await ExceptionAssert.ThrowsAsync<JsonReaderException>(
+                async () => await reader.ReadAsDecimalAsync(),
+                "Unexpected character encountered while parsing number: s. Path '', line 1, position 77."
+            );
 
-            reader = new JsonTextReader(new StringReader("9999999999999999999999999999999999999999999999999999999999999999999999999999asdasdasd"));
+            reader = new JsonTextReader(
+                new StringReader(
+                    "9999999999999999999999999999999999999999999999999999999999999999999999999999asdasdasd"
+                )
+            );
             reader.FloatParseHandling = FloatParseHandling.Decimal;
-            await ExceptionAssert.ThrowsAsync<JsonReaderException>(async () => await reader.ReadAsync(), "Unexpected character encountered while parsing number: s. Path '', line 1, position 77.");
+            await ExceptionAssert.ThrowsAsync<JsonReaderException>(
+                async () => await reader.ReadAsync(),
+                "Unexpected character encountered while parsing number: s. Path '', line 1, position 77."
+            );
 
             reader = new JsonTextReader(new StringReader("1E-06"));
             Assert.AreEqual(0.000001m, await reader.ReadAsDecimalAsync());
@@ -149,7 +181,10 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
             Assert.AreEqual(null, await reader.ReadAsDecimalAsync());
 
             reader = new JsonTextReader(new StringReader("-"));
-            await ExceptionAssert.ThrowsAsync<JsonReaderException>(async () => await reader.ReadAsDecimalAsync(), "Input string '-' is not a valid decimal. Path '', line 1, position 1.");
+            await ExceptionAssert.ThrowsAsync<JsonReaderException>(
+                async () => await reader.ReadAsDecimalAsync(),
+                "Input string '-' is not a valid decimal. Path '', line 1, position 1."
+            );
         }
 
         [Test]
@@ -175,8 +210,15 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
             Assert.AreEqual(typeof(double), reader.ValueType);
             Assert.AreEqual(-0.0d, reader.Value);
 
-            reader = new JsonTextReader(new StringReader("9999999999999999999999999999999999999999999999999999999999999999999999999999asdasdasd"));
-            await ExceptionAssert.ThrowsAsync<JsonReaderException>(async () => await reader.ReadAsync(), "Unexpected character encountered while parsing number: s. Path '', line 1, position 77.");
+            reader = new JsonTextReader(
+                new StringReader(
+                    "9999999999999999999999999999999999999999999999999999999999999999999999999999asdasdasd"
+                )
+            );
+            await ExceptionAssert.ThrowsAsync<JsonReaderException>(
+                async () => await reader.ReadAsync(),
+                "Unexpected character encountered while parsing number: s. Path '', line 1, position 77."
+            );
 
             reader = new JsonTextReader(new StringReader("1E-06"));
             Assert.IsTrue(await reader.ReadAsync());
@@ -187,7 +229,10 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
             Assert.IsFalse(await reader.ReadAsync());
 
             reader = new JsonTextReader(new StringReader("-"));
-            await ExceptionAssert.ThrowsAsync<JsonReaderException>(async () => await reader.ReadAsync(), "Input string '-' is not a valid number. Path '', line 1, position 1.");
+            await ExceptionAssert.ThrowsAsync<JsonReaderException>(
+                async () => await reader.ReadAsync(),
+                "Input string '-' is not a valid number. Path '', line 1, position 1."
+            );
 
             reader = new JsonTextReader(new StringReader("1.7976931348623157E+308"));
             Assert.IsTrue(await reader.ReadAsync());
@@ -201,7 +246,10 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
 
             reader = new JsonTextReader(new StringReader("1E+309"));
 #if !(NETSTANDARD2_0 || NETSTANDARD1_3 || NET6_0_OR_GREATER)
-            await ExceptionAssert.ThrowsAsync<JsonReaderException>(async () => await reader.ReadAsync(), "Input string '1E+309' is not a valid number. Path '', line 1, position 6.");
+            await ExceptionAssert.ThrowsAsync<JsonReaderException>(
+                async () => await reader.ReadAsync(),
+                "Input string '1E+309' is not a valid number. Path '', line 1, position 6."
+            );
 #else
             Assert.IsTrue(await reader.ReadAsync());
             Assert.AreEqual(typeof(double), reader.ValueType);
@@ -210,7 +258,10 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
 
             reader = new JsonTextReader(new StringReader("-1E+5000"));
 #if !(NETSTANDARD2_0 || NETSTANDARD1_3 || NET6_0_OR_GREATER)
-            await ExceptionAssert.ThrowsAsync<JsonReaderException>(async () => await reader.ReadAsync(), "Input string '-1E+5000' is not a valid number. Path '', line 1, position 8.");
+            await ExceptionAssert.ThrowsAsync<JsonReaderException>(
+                async () => await reader.ReadAsync(),
+                "Input string '-1E+5000' is not a valid number. Path '', line 1, position 8."
+            );
 #else
             Assert.IsTrue(await reader.ReadAsync());
             Assert.AreEqual(typeof(double), reader.ValueType);
@@ -218,7 +269,10 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
 #endif
 
             reader = new JsonTextReader(new StringReader("5.1231231E"));
-            await ExceptionAssert.ThrowsAsync<JsonReaderException>(async () => await reader.ReadAsync(), "Input string '5.1231231E' is not a valid number. Path '', line 1, position 10.");
+            await ExceptionAssert.ThrowsAsync<JsonReaderException>(
+                async () => await reader.ReadAsync(),
+                "Input string '5.1231231E' is not a valid number. Path '', line 1, position 10."
+            );
 
             reader = new JsonTextReader(new StringReader("1E-23"));
             Assert.IsTrue(await reader.ReadAsync());
@@ -268,8 +322,11 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
         [Test]
         public async Task ParseContentDelimitedByNonStandardWhitespaceAsync()
         {
-            string json = "\x00a0{\x00a0'h\x00a0i\x00a0'\x00a0:\x00a0[\x00a0true\x00a0,\x00a0new\x00a0Date\x00a0(\x00a0)\x00a0]\x00a0/*\x00a0comment\x00a0*/\x00a0}\x00a0";
-            JsonTextReader reader = new JsonTextReader(new StreamReader(new SlowStream(json, new UTF8Encoding(false), 1)));
+            string json =
+                "\x00a0{\x00a0'h\x00a0i\x00a0'\x00a0:\x00a0[\x00a0true\x00a0,\x00a0new\x00a0Date\x00a0(\x00a0)\x00a0]\x00a0/*\x00a0comment\x00a0*/\x00a0}\x00a0";
+            JsonTextReader reader = new JsonTextReader(
+                new StreamReader(new SlowStream(json, new UTF8Encoding(false), 1))
+            );
 
             Assert.IsTrue(await reader.ReadAsync());
             Assert.AreEqual(JsonToken.StartObject, reader.TokenType);
@@ -443,10 +500,16 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
 
             Assert.IsTrue(await reader.ReadAsync());
             Assert.IsTrue(await reader.ReadAsync());
-            Assert.AreEqual(new DateTime(DateTimeUtils.InitialJavaScriptDateTicks, DateTimeKind.Utc), reader.Value);
+            Assert.AreEqual(
+                new DateTime(DateTimeUtils.InitialJavaScriptDateTicks, DateTimeKind.Utc),
+                reader.Value
+            );
             Assert.AreEqual(typeof(DateTime), reader.ValueType);
             Assert.IsTrue(await reader.ReadAsync());
-            Assert.AreEqual(new DateTime(DateTimeUtils.InitialJavaScriptDateTicks, DateTimeKind.Utc), reader.Value);
+            Assert.AreEqual(
+                new DateTime(DateTimeUtils.InitialJavaScriptDateTicks, DateTimeKind.Utc),
+                reader.Value
+            );
             Assert.AreEqual(typeof(DateTime), reader.ValueType);
             Assert.IsTrue(await reader.ReadAsync());
 
@@ -455,10 +518,16 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
 
             Assert.IsTrue(await reader.ReadAsync());
             Assert.IsTrue(await reader.ReadAsync());
-            Assert.AreEqual(new DateTimeOffset(DateTimeUtils.InitialJavaScriptDateTicks, TimeSpan.Zero), reader.Value);
+            Assert.AreEqual(
+                new DateTimeOffset(DateTimeUtils.InitialJavaScriptDateTicks, TimeSpan.Zero),
+                reader.Value
+            );
             Assert.AreEqual(typeof(DateTimeOffset), reader.ValueType);
             Assert.IsTrue(await reader.ReadAsync());
-            Assert.AreEqual(new DateTimeOffset(DateTimeUtils.InitialJavaScriptDateTicks, TimeSpan.Zero), reader.Value);
+            Assert.AreEqual(
+                new DateTimeOffset(DateTimeUtils.InitialJavaScriptDateTicks, TimeSpan.Zero),
+                reader.Value
+            );
             Assert.AreEqual(typeof(DateTimeOffset), reader.ValueType);
             Assert.IsTrue(await reader.ReadAsync());
 
@@ -479,10 +548,16 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
 
             Assert.IsTrue(await reader.ReadAsync());
             await reader.ReadAsDateTimeOffsetAsync();
-            Assert.AreEqual(new DateTimeOffset(DateTimeUtils.InitialJavaScriptDateTicks, TimeSpan.Zero), reader.Value);
+            Assert.AreEqual(
+                new DateTimeOffset(DateTimeUtils.InitialJavaScriptDateTicks, TimeSpan.Zero),
+                reader.Value
+            );
             Assert.AreEqual(typeof(DateTimeOffset), reader.ValueType);
             await reader.ReadAsDateTimeOffsetAsync();
-            Assert.AreEqual(new DateTimeOffset(DateTimeUtils.InitialJavaScriptDateTicks, TimeSpan.Zero), reader.Value);
+            Assert.AreEqual(
+                new DateTimeOffset(DateTimeUtils.InitialJavaScriptDateTicks, TimeSpan.Zero),
+                reader.Value
+            );
             Assert.AreEqual(typeof(DateTimeOffset), reader.ValueType);
             Assert.IsTrue(await reader.ReadAsync());
 
@@ -491,10 +566,16 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
 
             Assert.IsTrue(await reader.ReadAsync());
             await reader.ReadAsDateTimeAsync();
-            Assert.AreEqual(new DateTime(DateTimeUtils.InitialJavaScriptDateTicks, DateTimeKind.Utc), reader.Value);
+            Assert.AreEqual(
+                new DateTime(DateTimeUtils.InitialJavaScriptDateTicks, DateTimeKind.Utc),
+                reader.Value
+            );
             Assert.AreEqual(typeof(DateTime), reader.ValueType);
             await reader.ReadAsDateTimeAsync();
-            Assert.AreEqual(new DateTime(DateTimeUtils.InitialJavaScriptDateTicks, DateTimeKind.Utc), reader.Value);
+            Assert.AreEqual(
+                new DateTime(DateTimeUtils.InitialJavaScriptDateTicks, DateTimeKind.Utc),
+                reader.Value
+            );
             Assert.AreEqual(typeof(DateTime), reader.ValueType);
             Assert.IsTrue(await reader.ReadAsync());
         }

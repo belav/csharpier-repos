@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -35,43 +35,44 @@ using NUnit.Framework;
 
 namespace MonoTests.System.ServiceModel.Channels
 {
-	[TestFixture]
-	public class BindingTest
-	{
-		class MyBinding : Binding
-		{
-			public override string Scheme {
-				get { return "my"; }
-			}
+    [TestFixture]
+    public class BindingTest
+    {
+        class MyBinding : Binding
+        {
+            public override string Scheme
+            {
+                get { return "my"; }
+            }
 
-			public override BindingElementCollection CreateBindingElements ()
-			{
-				return new BindingElementCollection (
-					new BindingElement [] { new HttpTransportBindingElement () });
-			}
-		}
+            public override BindingElementCollection CreateBindingElements()
+            {
+                return new BindingElementCollection(
+                    new BindingElement[] { new HttpTransportBindingElement() }
+                );
+            }
+        }
 
-		[Test]
-		[ExpectedException (typeof (ArgumentNullException))]
-		public void BuildChannelFactoryGeneric ()
-		{
-			// i.e. it should not reuse non-generic version of
-			// BuildChannelFactory().
-			new MyBinding ().BuildChannelFactory<IRequestChannel> ((BindingParameterCollection) null);
-		}
+        [Test]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void BuildChannelFactoryGeneric()
+        {
+            // i.e. it should not reuse non-generic version of
+            // BuildChannelFactory().
+            new MyBinding().BuildChannelFactory<IRequestChannel>((BindingParameterCollection)null);
+        }
 
-		[Test]
-		public void BuildChannelFactoryGeneric2 ()
-		{
-			new MyBinding ().BuildChannelFactory<IRequestChannel> (
-				new BindingParameterCollection ());
-		}
+        [Test]
+        public void BuildChannelFactoryGeneric2()
+        {
+            new MyBinding().BuildChannelFactory<IRequestChannel>(new BindingParameterCollection());
+        }
 
-		[Test]
-		public void MessageVersionProperty ()
-		{
-			Assert.AreEqual (MessageVersion.Soap11, new BasicHttpBinding ().MessageVersion, "#1");
-			Assert.IsNull (new CustomBinding ().MessageVersion, "#2");
-		}
-	}
+        [Test]
+        public void MessageVersionProperty()
+        {
+            Assert.AreEqual(MessageVersion.Soap11, new BasicHttpBinding().MessageVersion, "#1");
+            Assert.IsNull(new CustomBinding().MessageVersion, "#2");
+        }
+    }
 }

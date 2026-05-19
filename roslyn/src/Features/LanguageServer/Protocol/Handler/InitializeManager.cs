@@ -3,16 +3,14 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
-using Roslyn.Utilities;
 using Microsoft.VisualStudio.LanguageServer.Protocol;
+using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.LanguageServer.Handler;
 
 internal class InitializeManager : IInitializeManager
 {
-    public InitializeManager()
-    {
-    }
+    public InitializeManager() { }
 
     private InitializeParams? _initializeParams;
 
@@ -20,7 +18,9 @@ internal class InitializeManager : IInitializeManager
     {
         if (_initializeParams?.Capabilities is null)
         {
-            throw new InvalidOperationException($"Tried to get required {nameof(ClientCapabilities)} before it was set");
+            throw new InvalidOperationException(
+                $"Tried to get required {nameof(ClientCapabilities)} before it was set"
+            );
         }
 
         return _initializeParams.Capabilities;

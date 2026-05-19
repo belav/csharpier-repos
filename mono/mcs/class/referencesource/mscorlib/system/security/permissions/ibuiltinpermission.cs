@@ -1,10 +1,10 @@
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 //  IBuiltInPermission.cs
-// 
+//
 // <OWNER>ShawnFa</OWNER>
 //
 
@@ -38,7 +38,7 @@ namespace System.Security.Permissions
         // Normal permissions
 #if !FEATURE_PAL
         internal const int PublisherIdentityPermissionIndex = 0 + NUM_BUILTIN_UNRESTRICTED;
-#endif // !FEATURE_PAL        
+#endif // !FEATURE_PAL
         internal const int SiteIdentityPermissionIndex = 1 + NUM_BUILTIN_UNRESTRICTED;
         internal const int StrongNameIdentityPermissionIndex = 2 + NUM_BUILTIN_UNRESTRICTED;
         internal const int UrlIdentityPermissionIndex = 3 + NUM_BUILTIN_UNRESTRICTED;

@@ -3,5 +3,8 @@
 
 namespace System.Web.Mvc.Async
 {
-    internal delegate TResult EndInvokeDelegate<TState, TResult>(IAsyncResult asyncResult, TState state);
+    internal delegate TResult EndInvokeDelegate<TState, TResult>(
+        IAsyncResult asyncResult,
+        TState state
+    );
 }

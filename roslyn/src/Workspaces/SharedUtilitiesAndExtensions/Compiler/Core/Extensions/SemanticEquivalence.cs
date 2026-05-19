@@ -14,15 +14,19 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
 {
     internal static class SemanticEquivalence
     {
-        public static bool AreEquivalent(SemanticModel semanticModel, SyntaxNode node1, SyntaxNode node2)
-            => AreEquivalent(semanticModel, semanticModel, node1, node2);
+        public static bool AreEquivalent(
+            SemanticModel semanticModel,
+            SyntaxNode node1,
+            SyntaxNode node2
+        ) => AreEquivalent(semanticModel, semanticModel, node1, node2);
 
         public static bool AreEquivalent(
             SemanticModel semanticModel1,
             SemanticModel semanticModel2,
             SyntaxNode node1,
             SyntaxNode node2,
-            Func<SyntaxNode, bool> predicate = null)
+            Func<SyntaxNode, bool> predicate = null
+        )
         {
             // First check for syntactic equivalency.  If two nodes aren't structurally equivalent,
             // then they're not semantically equivalent.
@@ -44,7 +48,12 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             // From this point on we can assume the tree structure is the same.  So no need to check
             // kinds, child counts or token contents.
             return AreSemanticallyEquivalentWorker(
-                semanticModel1, semanticModel2, node1, node2, predicate);
+                semanticModel1,
+                semanticModel2,
+                node1,
+                node2,
+                predicate
+            );
         }
 
         private static bool AreSemanticallyEquivalentWorker(
@@ -52,7 +61,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             SemanticModel semanticModel2,
             SyntaxNode node1,
             SyntaxNode node2,
-            Func<SyntaxNode, bool> predicate)
+            Func<SyntaxNode, bool> predicate
+        )
         {
             if (node1 == node2)
             {
@@ -70,9 +80,9 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                 }
             }
 
-            // Original expression and current node being semantically equivalent isn't enough when the original expression 
+            // Original expression and current node being semantically equivalent isn't enough when the original expression
             // is a member access via instance reference (either implicit or explicit), the check only ensures that the expression
-            // and current node are both backed by the same member symbol. So in this case, in addition to SemanticEquivalence check, 
+            // and current node are both backed by the same member symbol. So in this case, in addition to SemanticEquivalence check,
             // we also check if expression and current node are both instance member access.
             //
             // For example, even though the first `c` binds to a field and we are introducing a local for it,
@@ -117,7 +127,15 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
 
                 if (c1.IsNode && c2.IsNode)
                 {
-                    if (!AreSemanticallyEquivalentWorker(semanticModel1, semanticModel2, c1.AsNode(), c2.AsNode(), predicate))
+                    if (
+                        !AreSemanticallyEquivalentWorker(
+                            semanticModel1,
+                            semanticModel2,
+                            c1.AsNode(),
+                            c2.AsNode(),
+                            predicate
+                        )
+                    )
                     {
                         return false;
                     }
@@ -125,14 +143,16 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             }
         }
 
-        private static bool IsInstanceMemberReference(IOperation operation)
-            => operation is IMemberReferenceOperation { Instance.Kind: OperationKind.InstanceReference };
+        private static bool IsInstanceMemberReference(IOperation operation) =>
+            operation
+                is IMemberReferenceOperation { Instance.Kind: OperationKind.InstanceReference };
 
         private static bool AreEquals(
             SemanticModel semanticModel1,
             SemanticModel semanticModel2,
             SymbolInfo info1,
-            SymbolInfo info2)
+            SymbolInfo info2
+        )
         {
             if (semanticModel1 == semanticModel2)
             {

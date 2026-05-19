@@ -11,11 +11,11 @@ using Microsoft.CodeAnalysis.Text;
 namespace Microsoft.CodeAnalysis.MapCode;
 
 /// <summary>
-/// A service to identify, map, and integrate code snippets obtained from the AI model into a target document. 
+/// A service to identify, map, and integrate code snippets obtained from the AI model into a target document.
 /// A Mapper's primary responsibility is twofold:
 /// <list>
 ///  <item>Replace existing code. The mapper should determine if the code provided by the model already exists in the target and needs to be replaced.</item>
-///  <item>Insert new code. The mapper should recognize new code and identify the correct location for its insertion in the target document.</item> 
+///  <item>Insert new code. The mapper should recognize new code and identify the correct location for its insertion in the target document.</item>
 /// </list>
 /// </summary>
 internal interface IMapCodeService : ILanguageService
@@ -31,5 +31,6 @@ internal interface IMapCodeService : ILanguageService
         Document document,
         ImmutableArray<string> contents,
         ImmutableArray<(Document, TextSpan)> prioritizedFocusLocations,
-        CancellationToken cancellationToken);
+        CancellationToken cancellationToken
+    );
 }

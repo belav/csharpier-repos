@@ -15,9 +15,11 @@ using Xunit;
 struct VT
 {
     public static readonly int Size = Marshal.SizeOf<VT>();
-    
-    public int F1, F2, F3;
-    
+
+    public int F1,
+        F2,
+        F3;
+
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public void Get(out int v1, out int v2, out int v3)
     {
@@ -30,35 +32,41 @@ struct VT
 public class P
 {
     [MethodImpl(MethodImplOptions.NoInlining)]
-    unsafe static int TestMethodInlining(VT* pVT)
+    static unsafe int TestMethodInlining(VT* pVT)
     {
-        int v1, v2, v3;
+        int v1,
+            v2,
+            v3;
         pVT->Get(out v1, out v2, out v3);
         return Do(v1, v2);
     }
-    
+
     [MethodImpl(MethodImplOptions.NoInlining)]
     static int TestByRef(ref VT VTRef)
     {
-        int v1, v2, v3;
+        int v1,
+            v2,
+            v3;
         v1 = VTRef.F1;
         v2 = VTRef.F2;
         v3 = VTRef.F3;
         return Do(v1, v2);
     }
-    
+
     [MethodImpl(MethodImplOptions.NoInlining)]
-    unsafe static int TestByPtr(VT* pVT)
+    static unsafe int TestByPtr(VT* pVT)
     {
-        int v1, v2, v3;
+        int v1,
+            v2,
+            v3;
         v1 = pVT->F1;
         v2 = pVT->F2;
         v3 = pVT->F3;
         return Do(v1, v2);
     }
-    
+
     [Fact]
-    public unsafe static int TestEntryPoint()
+    public static unsafe int TestEntryPoint()
     {
         byte* pDataBytes = stackalloc byte[VT.Size];
         VT* pVT = (VT*)pDataBytes;
@@ -73,12 +81,10 @@ public class P
 
         return result;
     }
-    
+
     [MethodImpl(MethodImplOptions.NoInlining)]
     static int Do(int v1, int v2)
     {
         return v1 + v2;
     }
 }
-
-

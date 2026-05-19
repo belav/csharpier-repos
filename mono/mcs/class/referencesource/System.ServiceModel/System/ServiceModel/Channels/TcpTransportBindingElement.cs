@@ -4,15 +4,15 @@
 
 namespace System.ServiceModel.Channels
 {
-    using System.ServiceModel.Activation;
     using System.Collections.Generic;
+    using System.ComponentModel;
     using System.Net;
     using System.Net.Security;
     using System.Net.Sockets;
     using System.Runtime.Serialization;
     using System.Security.Authentication.ExtendedProtection;
+    using System.ServiceModel.Activation;
     using System.Xml;
-    using System.ComponentModel;
 
     public class TcpTransportBindingElement : ConnectionOrientedTransportBindingElement
     {
@@ -51,17 +51,17 @@ namespace System.ServiceModel.Channels
 
         public int ListenBacklog
         {
-            get
-            {
-                return this.listenBacklog;
-            }
-
+            get { return this.listenBacklog; }
             set
             {
                 if (value <= 0)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("value",
-                        SR.GetString(SR.ValueMustBePositive)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentOutOfRangeException(
+                            "value",
+                            SR.GetString(SR.ValueMustBePositive)
+                        )
+                    );
                 }
 
                 this.listenBacklog = value;
@@ -78,14 +78,8 @@ namespace System.ServiceModel.Channels
         [DefaultValue(TcpTransportDefaults.PortSharingEnabled)]
         public bool PortSharingEnabled
         {
-            get
-            {
-                return this.portSharingEnabled;
-            }
-            set
-            {
-                this.portSharingEnabled = value;
-            }
+            get { return this.portSharingEnabled; }
+            set { this.portSharingEnabled = value; }
         }
 
         public override string Scheme
@@ -97,23 +91,13 @@ namespace System.ServiceModel.Channels
         [DefaultValue(TcpTransportDefaults.TeredoEnabled)]
         public bool TeredoEnabled
         {
-            get
-            {
-                return this.teredoEnabled;
-            }
-
-            set
-            {
-                this.teredoEnabled = value;
-            }
+            get { return this.teredoEnabled; }
+            set { this.teredoEnabled = value; }
         }
 
         public ExtendedProtectionPolicy ExtendedProtectionPolicy
         {
-            get
-            {
-                return this.extendedProtectionPolicy;
-            }
+            get { return this.extendedProtectionPolicy; }
             set
             {
                 if (value == null)
@@ -121,11 +105,21 @@ namespace System.ServiceModel.Channels
                     throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("value");
                 }
 
-                if (value.PolicyEnforcement == PolicyEnforcement.Always &&
-                    !System.Security.Authentication.ExtendedProtection.ExtendedProtectionPolicy.OSSupportsExtendedProtection)
+                if (
+                    value.PolicyEnforcement == PolicyEnforcement.Always
+                    && !System
+                        .Security
+                        .Authentication
+                        .ExtendedProtection
+                        .ExtendedProtectionPolicy
+                        .OSSupportsExtendedProtection
+                )
                 {
                     throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new PlatformNotSupportedException(SR.GetString(SR.ExtendedProtectionNotSupported)));
+                        new PlatformNotSupportedException(
+                            SR.GetString(SR.ExtendedProtectionNotSupported)
+                        )
+                    );
                 }
 
                 this.extendedProtectionPolicy = value;
@@ -134,10 +128,7 @@ namespace System.ServiceModel.Channels
 
         internal override string WsdlTransportUri
         {
-            get
-            {
-                return TransportPolicyConstants.TcpTransportUri;
-            }
+            get { return TransportPolicyConstants.TcpTransportUri; }
         }
 
         public override BindingElement Clone()
@@ -145,7 +136,9 @@ namespace System.ServiceModel.Channels
             return new TcpTransportBindingElement(this);
         }
 
-        public override IChannelFactory<TChannel> BuildChannelFactory<TChannel>(BindingContext context)
+        public override IChannelFactory<TChannel> BuildChannelFactory<TChannel>(
+            BindingContext context
+        )
         {
             if (context == null)
             {
@@ -154,13 +147,19 @@ namespace System.ServiceModel.Channels
 
             if (!this.CanBuildChannelFactory<TChannel>(context))
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument("TChannel", SR.GetString(SR.ChannelTypeNotSupported, typeof(TChannel)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                    "TChannel",
+                    SR.GetString(SR.ChannelTypeNotSupported, typeof(TChannel))
+                );
             }
 
-            return (IChannelFactory<TChannel>)(object)new TcpChannelFactory<TChannel>(this, context);
+            return (IChannelFactory<TChannel>)
+                (object)new TcpChannelFactory<TChannel>(this, context);
         }
 
-        public override IChannelListener<TChannel> BuildChannelListener<TChannel>(BindingContext context)
+        public override IChannelListener<TChannel> BuildChannelListener<TChannel>(
+            BindingContext context
+        )
         {
             if (context == null)
             {
@@ -169,7 +168,10 @@ namespace System.ServiceModel.Channels
 
             if (!this.CanBuildChannelListener<TChannel>(context))
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument("TChannel", SR.GetString(SR.ChannelTypeNotSupported, typeof(TChannel)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                    "TChannel",
+                    SR.GetString(SR.ChannelTypeNotSupported, typeof(TChannel))
+                );
             }
 
             TcpChannelListener listener;
@@ -183,7 +185,10 @@ namespace System.ServiceModel.Channels
             }
             else
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument("TChannel", SR.GetString(SR.ChannelTypeNotSupported, typeof(TChannel)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                    "TChannel",
+                    SR.GetString(SR.ChannelTypeNotSupported, typeof(TChannel))
+                );
             }
 
             AspNetEnvironment.Current.ApplyHostedContext(listener, context);
@@ -244,7 +249,12 @@ namespace System.ServiceModel.Channels
                 return false;
             }
 
-            if (!ChannelBindingUtility.AreEqual(this.ExtendedProtectionPolicy, tcp.ExtendedProtectionPolicy))
+            if (
+                !ChannelBindingUtility.AreEqual(
+                    this.ExtendedProtectionPolicy,
+                    tcp.ExtendedProtectionPolicy
+                )
+            )
             {
                 return false;
             }
@@ -255,7 +265,10 @@ namespace System.ServiceModel.Channels
         [EditorBrowsable(EditorBrowsableState.Never)]
         public bool ShouldSerializeExtendedProtectionPolicy()
         {
-            return !ChannelBindingUtility.AreEqual(this.ExtendedProtectionPolicy, ChannelBindingUtility.DefaultPolicy);
+            return !ChannelBindingUtility.AreEqual(
+                this.ExtendedProtectionPolicy,
+                ChannelBindingUtility.DefaultPolicy
+            );
         }
 
         [EditorBrowsable(EditorBrowsableState.Never)]
@@ -266,9 +279,8 @@ namespace System.ServiceModel.Channels
 
         class BindingDeliveryCapabilitiesHelper : IBindingDeliveryCapabilities
         {
-            internal BindingDeliveryCapabilitiesHelper()
-            {
-            }
+            internal BindingDeliveryCapabilitiesHelper() { }
+
             bool IBindingDeliveryCapabilities.AssuresOrderedDelivery
             {
                 get { return true; }

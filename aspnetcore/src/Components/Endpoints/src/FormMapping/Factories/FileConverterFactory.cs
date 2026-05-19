@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Components.Forms;
 #endif
 
-
 namespace Microsoft.AspNetCore.Components.Endpoints.FormMapping;
 
 internal sealed class FileConverterFactory : IFormDataConverterFactory

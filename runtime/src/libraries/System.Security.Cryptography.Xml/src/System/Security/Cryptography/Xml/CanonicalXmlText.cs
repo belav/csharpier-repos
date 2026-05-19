@@ -23,13 +23,21 @@ namespace System.Security.Cryptography.Xml
             set { _isInNodeSet = value; }
         }
 
-        public void Write(StringBuilder strBuilder, DocPosition docPos, AncestralNamespaceContextManager anc)
+        public void Write(
+            StringBuilder strBuilder,
+            DocPosition docPos,
+            AncestralNamespaceContextManager anc
+        )
         {
             if (IsInNodeSet)
                 strBuilder.Append(Utils.EscapeTextData(Value));
         }
 
-        public void WriteHash(HashAlgorithm hash, DocPosition docPos, AncestralNamespaceContextManager anc)
+        public void WriteHash(
+            HashAlgorithm hash,
+            DocPosition docPos,
+            AncestralNamespaceContextManager anc
+        )
         {
             if (IsInNodeSet)
             {

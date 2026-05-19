@@ -19,8 +19,10 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         /// <exception cref="InvalidOperationException">
         /// If <paramref name="diagnosticSeverity"/> is not one of the expected values.
         /// </exception>
-        public static ReportDiagnostic ToReportDiagnostic(this DiagnosticSeverity diagnosticSeverity)
-            => diagnosticSeverity switch
+        public static ReportDiagnostic ToReportDiagnostic(
+            this DiagnosticSeverity diagnosticSeverity
+        ) =>
+            diagnosticSeverity switch
             {
                 DiagnosticSeverity.Hidden => ReportDiagnostic.Hidden,
                 DiagnosticSeverity.Info => ReportDiagnostic.Info,
@@ -37,7 +39,7 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                 DiagnosticSeverity.Info => EditorConfigSeverityStrings.Suggestion,
                 DiagnosticSeverity.Warning => EditorConfigSeverityStrings.Warning,
                 DiagnosticSeverity.Error => EditorConfigSeverityStrings.Error,
-                _ => throw ExceptionUtilities.UnexpectedValue(diagnosticSeverity)
+                _ => throw ExceptionUtilities.UnexpectedValue(diagnosticSeverity),
             };
         }
     }

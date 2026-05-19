@@ -26,7 +26,6 @@ internal static partial class Interop
             internal const int PROCESS_QUERY_LIMITED_INFORMATION = 0x1000;
             internal const int PROCESS_ALL_ACCESS = STANDARD_RIGHTS_REQUIRED | SYNCHRONIZE | 0xFFF;
 
-
             internal const int STANDARD_RIGHTS_REQUIRED = 0x000F0000;
             internal const int SYNCHRONIZE = 0x00100000;
         }

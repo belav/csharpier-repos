@@ -3,10 +3,8 @@
 
 using System;
 using System.Collections.Generic;
-
 using Internal.Text;
 using Internal.TypeSystem;
-
 using Debug = System.Diagnostics.Debug;
 
 namespace ILCompiler.DependencyAnalysis
@@ -17,12 +15,18 @@ namespace ILCompiler.DependencyAnalysis
     /// with the class constructor context if the type has a class constructor that
     /// needs to be triggered before the type members can be accessed.
     /// </summary>
-    public class NonGCStaticsNode : DehydratableObjectNode, ISymbolDefinitionNode, ISortableSymbolNode
+    public class NonGCStaticsNode
+        : DehydratableObjectNode,
+            ISymbolDefinitionNode,
+            ISortableSymbolNode
     {
         private readonly MetadataType _type;
         private readonly PreinitializationManager _preinitializationManager;
 
-        public NonGCStaticsNode(MetadataType type, PreinitializationManager preinitializationManager)
+        public NonGCStaticsNode(
+            MetadataType type,
+            PreinitializationManager preinitializationManager
+        )
         {
             Debug.Assert(!type.IsCanonicalSubtype(CanonicalFormKind.Specific));
             Debug.Assert(!type.IsGenericDefinition);
@@ -30,12 +34,12 @@ namespace ILCompiler.DependencyAnalysis
             _preinitializationManager = preinitializationManager;
         }
 
-        protected override string GetName(NodeFactory factory) => this.GetMangledName(factory.NameMangler);
+        protected override string GetName(NodeFactory factory) =>
+            this.GetMangledName(factory.NameMangler);
 
         protected override ObjectNodeSection GetDehydratedSection(NodeFactory factory)
         {
-            if (HasCCtorContext
-                || _preinitializationManager.IsPreinitialized(_type))
+            if (HasCCtorContext || _preinitializationManager.IsPreinitialized(_type))
             {
                 // We have data to be emitted so this needs to be in an initialized data section
                 return ObjectNodeSection.DataSection;
@@ -75,7 +79,10 @@ namespace ILCompiler.DependencyAnalysis
             }
         }
 
-        public static bool TypeHasCctorContext(PreinitializationManager preinitializationManager, MetadataType type)
+        public static bool TypeHasCctorContext(
+            PreinitializationManager preinitializationManager,
+            MetadataType type
+        )
         {
             // If the type has a lazy static constructor, we need the cctor context.
             if (preinitializationManager.HasLazyStaticConstructor(type))
@@ -93,7 +100,8 @@ namespace ILCompiler.DependencyAnalysis
 
         public bool HasCCtorContext => TypeHasCctorContext(_preinitializationManager, _type);
 
-        public bool HasLazyStaticConstructor => _preinitializationManager.HasLazyStaticConstructor(_type);
+        public bool HasLazyStaticConstructor =>
+            _preinitializationManager.HasLazyStaticConstructor(_type);
 
         public override bool IsShareable => EETypeNode.IsTypeNodeShareable(_type);
 
@@ -106,10 +114,19 @@ namespace ILCompiler.DependencyAnalysis
             return target.PointerSize;
         }
 
-        private static int GetClassConstructorContextStorageSize(TargetDetails target, MetadataType type)
+        private static int GetClassConstructorContextStorageSize(
+            TargetDetails target,
+            MetadataType type
+        )
         {
-            int alignmentRequired = Math.Max(type.NonGCStaticFieldAlignment.AsInt, GetClassConstructorContextAlignment(target));
-            return AlignmentHelper.AlignUp(GetClassConstructorContextSize(type.Context.Target), alignmentRequired);
+            int alignmentRequired = Math.Max(
+                type.NonGCStaticFieldAlignment.AsInt,
+                GetClassConstructorContextAlignment(target)
+            );
+            return AlignmentHelper.AlignUp(
+                GetClassConstructorContextSize(type.Context.Target),
+                alignmentRequired
+            );
         }
 
         private static int GetClassConstructorContextAlignment(TargetDetails target)
@@ -119,17 +136,24 @@ namespace ILCompiler.DependencyAnalysis
             return target.PointerSize;
         }
 
-        public override bool HasConditionalStaticDependencies => _type.ConvertToCanonForm(CanonicalFormKind.Specific) != _type;
+        public override bool HasConditionalStaticDependencies =>
+            _type.ConvertToCanonForm(CanonicalFormKind.Specific) != _type;
 
-        public override IEnumerable<CombinedDependencyListEntry> GetConditionalStaticDependencies(NodeFactory factory)
+        public override IEnumerable<CombinedDependencyListEntry> GetConditionalStaticDependencies(
+            NodeFactory factory
+        )
         {
             // If we have a type loader template for this type, we need to keep track of the generated
             // bases in the type info hashtable. The type symbol node does such accounting.
             return new CombinedDependencyListEntry[]
             {
-                new CombinedDependencyListEntry(factory.NecessaryTypeSymbol(_type),
-                    factory.NativeLayout.TemplateTypeLayout(_type.ConvertToCanonForm(CanonicalFormKind.Specific)),
-                    "Keeping track of template-constructable type static bases"),
+                new CombinedDependencyListEntry(
+                    factory.NecessaryTypeSymbol(_type),
+                    factory.NativeLayout.TemplateTypeLayout(
+                        _type.ConvertToCanonForm(CanonicalFormKind.Specific)
+                    ),
+                    "Keeping track of template-constructable type static bases"
+                ),
             };
         }
 
@@ -141,10 +165,17 @@ namespace ILCompiler.DependencyAnalysis
 
             if (factory.PreinitializationManager.HasEagerStaticConstructor(_type))
             {
-                dependencyList.Add(factory.EagerCctorIndirection(_type.GetStaticConstructor()), "Eager .cctor");
+                dependencyList.Add(
+                    factory.EagerCctorIndirection(_type.GetStaticConstructor()),
+                    "Eager .cctor"
+                );
             }
 
-            ModuleUseBasedDependencyAlgorithm.AddDependenciesDueToModuleUse(ref dependencyList, factory, _type.Module);
+            ModuleUseBasedDependencyAlgorithm.AddDependenciesDueToModuleUse(
+                ref dependencyList,
+                factory,
+                _type.Module
+            );
 
             return dependencyList;
         }
@@ -157,14 +188,26 @@ namespace ILCompiler.DependencyAnalysis
             // by System.Runtime.CompilerServices.StaticClassConstructionContext struct.
             if (HasCCtorContext)
             {
-                int alignmentRequired = Math.Max(_type.NonGCStaticFieldAlignment.AsInt, GetClassConstructorContextAlignment(_type.Context.Target));
-                int classConstructorContextStorageSize = GetClassConstructorContextStorageSize(factory.Target, _type);
+                int alignmentRequired = Math.Max(
+                    _type.NonGCStaticFieldAlignment.AsInt,
+                    GetClassConstructorContextAlignment(_type.Context.Target)
+                );
+                int classConstructorContextStorageSize = GetClassConstructorContextStorageSize(
+                    factory.Target,
+                    _type
+                );
                 builder.RequireInitialAlignment(alignmentRequired);
 
-                Debug.Assert(classConstructorContextStorageSize >= GetClassConstructorContextSize(_type.Context.Target));
+                Debug.Assert(
+                    classConstructorContextStorageSize
+                        >= GetClassConstructorContextSize(_type.Context.Target)
+                );
 
                 // Add padding before the context if alignment forces us to do so
-                builder.EmitZeros(classConstructorContextStorageSize - GetClassConstructorContextSize(_type.Context.Target));
+                builder.EmitZeros(
+                    classConstructorContextStorageSize
+                        - GetClassConstructorContextSize(_type.Context.Target)
+                );
 
                 // Emit the actual StaticClassConstructionContext
 
@@ -189,11 +232,18 @@ namespace ILCompiler.DependencyAnalysis
 
             if (_preinitializationManager.IsPreinitialized(_type))
             {
-                TypePreinit.PreinitializationInfo preinitInfo = _preinitializationManager.GetPreinitializationInfo(_type);
+                TypePreinit.PreinitializationInfo preinitInfo =
+                    _preinitializationManager.GetPreinitializationInfo(_type);
                 int initialOffset = builder.CountBytes;
                 foreach (FieldDesc field in _type.GetFields())
                 {
-                    if (!field.IsStatic || field.HasRva || field.IsLiteral || field.IsThreadStatic || field.HasGCStaticBase)
+                    if (
+                        !field.IsStatic
+                        || field.HasRva
+                        || field.IsLiteral
+                        || field.IsThreadStatic
+                        || field.HasGCStaticBase
+                    )
                         continue;
 
                     int padding = field.Offset.AsInt - builder.CountBytes + initialOffset;
@@ -203,7 +253,9 @@ namespace ILCompiler.DependencyAnalysis
                     TypePreinit.ISerializableValue val = preinitInfo.GetFieldValue(field);
                     int currentOffset = builder.CountBytes;
                     val.WriteFieldData(ref builder, factory);
-                    Debug.Assert(builder.CountBytes - currentOffset == field.FieldType.GetElementSize().AsInt);
+                    Debug.Assert(
+                        builder.CountBytes - currentOffset == field.FieldType.GetElementSize().AsInt
+                    );
                 }
 
                 int pad = _type.NonGCStaticFieldSize.AsInt - builder.CountBytes + initialOffset;

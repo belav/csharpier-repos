@@ -15,7 +15,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Metho
             private readonly AbstractMethodXmlBuilder _xmlBuilder;
             private readonly string _name;
 
-            public AutoTag(AbstractMethodXmlBuilder xmlBuilder, string name, AttributeInfo[] attributes)
+            public AutoTag(
+                AbstractMethodXmlBuilder xmlBuilder,
+                string name,
+                AttributeInfo[] attributes
+            )
             {
                 _xmlBuilder = xmlBuilder;
                 _name = name;
@@ -23,8 +27,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Metho
                 _xmlBuilder.AppendOpenTag(name, attributes);
             }
 
-            public void Dispose()
-                => _xmlBuilder.AppendCloseTag(_name);
+            public void Dispose() => _xmlBuilder.AppendCloseTag(_name);
         }
     }
 }

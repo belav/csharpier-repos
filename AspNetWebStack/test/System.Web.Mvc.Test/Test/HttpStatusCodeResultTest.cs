@@ -14,7 +14,9 @@ namespace System.Web.Mvc.Test
         {
             // Arrange
             Mock<ControllerContext> mockControllerContext = new Mock<ControllerContext>();
-            mockControllerContext.SetupSet(c => c.HttpContext.Response.StatusCode = 666).Verifiable();
+            mockControllerContext
+                .SetupSet(c => c.HttpContext.Response.StatusCode = 666)
+                .Verifiable();
 
             HttpStatusCodeResult result = new HttpStatusCodeResult(666);
 
@@ -30,8 +32,12 @@ namespace System.Web.Mvc.Test
         {
             // Arrange
             Mock<ControllerContext> mockControllerContext = new Mock<ControllerContext>();
-            mockControllerContext.SetupSet(c => c.HttpContext.Response.StatusCode = 666).Verifiable();
-            mockControllerContext.SetupSet(c => c.HttpContext.Response.StatusDescription = "Foo Bar").Verifiable();
+            mockControllerContext
+                .SetupSet(c => c.HttpContext.Response.StatusCode = 666)
+                .Verifiable();
+            mockControllerContext
+                .SetupSet(c => c.HttpContext.Response.StatusDescription = "Foo Bar")
+                .Verifiable();
             HttpStatusCodeResult result = new HttpStatusCodeResult(666, "Foo Bar");
 
             // Act
@@ -45,7 +51,13 @@ namespace System.Web.Mvc.Test
         public void ExecuteResultWithNullContextThrows()
         {
             // Act and Assert
-            Assert.ThrowsArgumentNull(delegate { new HttpStatusCodeResult(1).ExecuteResult(context: null); }, "context");
+            Assert.ThrowsArgumentNull(
+                delegate
+                {
+                    new HttpStatusCodeResult(1).ExecuteResult(context: null);
+                },
+                "context"
+            );
         }
 
         [Fact]
@@ -84,7 +96,9 @@ namespace System.Web.Mvc.Test
             // Arrange
             int unusedStatusCode = 306;
             Mock<ControllerContext> mockControllerContext = new Mock<ControllerContext>();
-            mockControllerContext.SetupSet(c => c.HttpContext.Response.StatusCode = unusedStatusCode).Verifiable();
+            mockControllerContext
+                .SetupSet(c => c.HttpContext.Response.StatusCode = unusedStatusCode)
+                .Verifiable();
 
             HttpStatusCodeResult result = new HttpStatusCodeResult(HttpStatusCode.Unused);
 

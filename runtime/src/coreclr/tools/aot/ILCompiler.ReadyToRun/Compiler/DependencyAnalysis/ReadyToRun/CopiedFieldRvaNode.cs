@@ -24,7 +24,8 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
             _module = module;
         }
 
-        public override ObjectNodeSection GetSection(NodeFactory factory) => ObjectNodeSection.TextSection;
+        public override ObjectNodeSection GetSection(NodeFactory factory) =>
+            ObjectNodeSection.TextSection;
 
         public override bool IsShareable => false;
 
@@ -42,7 +43,8 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                     data: Array.Empty<byte>(),
                     relocs: Array.Empty<Relocation>(),
                     alignment: 1,
-                    definedSymbols: new ISymbolDefinitionNode[] { this });
+                    definedSymbols: new ISymbolDefinitionNode[] { this }
+                );
             }
 
             ObjectDataBuilder builder = new ObjectDataBuilder(factory, relocsOnly);
@@ -59,10 +61,13 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
             requiredAlignment = targetPointerSize;
 
             MetadataReader metadataReader = _module.MetadataReader;
-            BlobReader metadataBlob = new BlobReader(_module.PEReader.GetMetadata().Pointer, _module.PEReader.GetMetadata().Length);
+            BlobReader metadataBlob = new BlobReader(
+                _module.PEReader.GetMetadata().Pointer,
+                _module.PEReader.GetMetadata().Length
+            );
             metadataBlob.Offset = metadataReader.GetTableMetadataOffset(TableIndex.FieldRva);
             bool compressedFieldRef = 6 == metadataReader.GetTableRowSize(TableIndex.FieldRva);
-            
+
             for (int i = 1; i <= metadataReader.GetTableRowCount(TableIndex.FieldRva); i++)
             {
                 int currentFieldRva = metadataBlob.ReadInt32();
@@ -78,11 +83,15 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                 if (currentFieldRva != _rva)
                     continue;
 
-                EcmaField field = (EcmaField)_module.GetField(MetadataTokens.FieldDefinitionHandle(currentFieldRid));
+                EcmaField field = (EcmaField)
+                    _module.GetField(MetadataTokens.FieldDefinitionHandle(currentFieldRid));
                 Debug.Assert(field.HasRva);
 
                 int currentSize = field.FieldType.GetElementSize().AsInt;
-                requiredAlignment = Math.Max(requiredAlignment, (field.FieldType as MetadataType)?.GetClassLayout().PackingSize ?? 1);
+                requiredAlignment = Math.Max(
+                    requiredAlignment,
+                    (field.FieldType as MetadataType)?.GetClassLayout().PackingSize ?? 1
+                );
                 if (currentSize > size)
                 {
                     // We need to handle overlapping fields by reusing blobs based on the rva, and just update
@@ -102,7 +111,8 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
             return result;
         }
 
-        protected override string GetName(NodeFactory factory) => this.GetMangledName(factory.NameMangler);
+        protected override string GetName(NodeFactory factory) =>
+            this.GetMangledName(factory.NameMangler);
 
         public void AppendMangledName(NameMangler nameMangler, Utf8StringBuilder sb)
         {

@@ -10,21 +10,12 @@ namespace System.ServiceModel.Activities
 
     // These are information passed from CallbackContextMessageProperty.
     [DataContract]
-    class CorrelationCallbackContext 
+    class CorrelationCallbackContext
     {
         [DataMember]
-        public EndpointAddress10 ListenAddress
-        {
-            get;
-            set;
-        }
+        public EndpointAddress10 ListenAddress { get; set; }
 
         [DataMember]
-        public IDictionary<string, string> Context
-        {
-            get;
-            set;
-        }
-      
+        public IDictionary<string, string> Context { get; set; }
     }
 }

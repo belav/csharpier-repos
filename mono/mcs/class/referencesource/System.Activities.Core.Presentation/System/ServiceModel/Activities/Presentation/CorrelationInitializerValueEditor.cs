@@ -17,14 +17,24 @@ namespace System.ServiceModel.Activities.Presentation
     {
         public CorrelationInitializerValueEditor()
         {
-            this.InlineEditorTemplate = EditorCategoryTemplateDictionary.Instance.GetCategoryTemplate("CorrelationInitializer_InlineTemplate");
+            this.InlineEditorTemplate =
+                EditorCategoryTemplateDictionary.Instance.GetCategoryTemplate(
+                    "CorrelationInitializer_InlineTemplate"
+                );
         }
 
         public override void ShowDialog(PropertyValue propertyValue, IInputElement commandSource)
         {
-            ModelPropertyEntryToOwnerActivityConverter propertyEntryConverter = new ModelPropertyEntryToOwnerActivityConverter();
+            ModelPropertyEntryToOwnerActivityConverter propertyEntryConverter =
+                new ModelPropertyEntryToOwnerActivityConverter();
 
-            ModelItem modelItem = (ModelItem)propertyEntryConverter.Convert(propertyValue.ParentProperty, typeof(ModelItem), false, null);
+            ModelItem modelItem = (ModelItem)
+                propertyEntryConverter.Convert(
+                    propertyValue.ParentProperty,
+                    typeof(ModelItem),
+                    false,
+                    null
+                );
             EditingContext context = modelItem.GetEditingContext();
 
             this.ShowDialog(modelItem, context);
@@ -35,13 +45,17 @@ namespace System.ServiceModel.Activities.Presentation
             Fx.Assert(modelItem != null, "Activity model item shouldn't be null!");
             Fx.Assert(context != null, "EditingContext shouldn't be null!");
 
-
             string bookmarkTitle = (string)this.InlineEditorTemplate.Resources["bookmarkTitle"];
 
             UndoEngine undoEngine = context.Services.GetService<UndoEngine>();
             Fx.Assert(null != undoEngine, "UndoEngine should be available");
 
-            using (ModelEditingScope editingScope = modelItem.BeginEdit(bookmarkTitle, shouldApplyChangesImmediately: true))
+            using (
+                ModelEditingScope editingScope = modelItem.BeginEdit(
+                    bookmarkTitle,
+                    shouldApplyChangesImmediately: true
+                )
+            )
             {
                 if ((new EditorWindow(modelItem, context)).ShowOkCancel())
                 {
@@ -64,7 +78,7 @@ namespace System.ServiceModel.Activities.Presentation
                 this.EnableMaximizeButton = false;
                 this.EnableMinimizeButton = false;
                 this.MinWidth = 450;
-                this.MinHeight = 250; 
+                this.MinHeight = 250;
                 this.WindowResizeMode = ResizeMode.CanResize;
                 this.WindowSizeToContent = SizeToContent.Manual;
                 var content = new CorrelationInitializerDesigner() { Activity = activity };

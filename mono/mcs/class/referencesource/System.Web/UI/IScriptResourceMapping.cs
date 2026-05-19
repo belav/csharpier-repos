@@ -4,11 +4,13 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web.UI {
+namespace System.Web.UI
+{
     using System;
     using System.Reflection;
 
-    internal interface IScriptResourceMapping {
+    internal interface IScriptResourceMapping
+    {
         IScriptResourceDefinition GetDefinition(string resourceName);
         IScriptResourceDefinition GetDefinition(string resourceName, Assembly resourceAssembly);
     }

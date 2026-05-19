@@ -16,7 +16,8 @@ namespace Microsoft.Web.Mvc.Resources
         /// <typeparam name="T"></typeparam>
         /// <param name="collection"></param>
         /// <returns></returns>
-        public static IEnumerable<T> AsSerializable<T>(this IEnumerable<T> collection) where T : class
+        public static IEnumerable<T> AsSerializable<T>(this IEnumerable<T> collection)
+            where T : class
         {
             return new IEnumerableWrapper<T>(collection);
         }
@@ -42,8 +43,17 @@ namespace Microsoft.Web.Mvc.Resources
 
             // The DataContractSerilizer needs an Add method to ensure the object can be
             // deserialized. We have a dummy one since we don't actually need deserialization.
-            [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Justification = "Needed to satisfy the deserialization contract")]
-            [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "item", Justification = "Needed to satisfy the deserialization contract")]
+            [SuppressMessage(
+                "Microsoft.Performance",
+                "CA1822:MarkMembersAsStatic",
+                Justification = "Needed to satisfy the deserialization contract"
+            )]
+            [SuppressMessage(
+                "Microsoft.Usage",
+                "CA1801:ReviewUnusedParameters",
+                MessageId = "item",
+                Justification = "Needed to satisfy the deserialization contract"
+            )]
             public void Add(T item)
             {
                 throw new NotImplementedException();

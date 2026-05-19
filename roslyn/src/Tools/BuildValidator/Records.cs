@@ -17,7 +17,12 @@ namespace BuildValidator
         internal string TargetFramework => Path.GetFileName(Path.GetDirectoryName(FilePath))!;
     }
 
-    internal sealed record PortableExecutableInfo(string FilePath, Guid Mvid, bool IsReadyToRun, bool IsReferenceAssembly);
+    internal sealed record PortableExecutableInfo(
+        string FilePath,
+        Guid Mvid,
+        bool IsReadyToRun,
+        bool IsReferenceAssembly
+    );
 
     internal record Options(
         string[] AssembliesPaths,
@@ -27,7 +32,8 @@ namespace BuildValidator
         bool Verbose,
         bool Quiet,
         bool Debug,
-        string DebugPath);
+        string DebugPath
+    );
 
     /// <summary>An entry in the source-link.json dictionary.</summary>
     public record SourceLinkEntry

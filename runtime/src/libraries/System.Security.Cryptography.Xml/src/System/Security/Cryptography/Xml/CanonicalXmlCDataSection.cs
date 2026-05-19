@@ -10,7 +10,13 @@ namespace System.Security.Cryptography.Xml
     internal sealed class CanonicalXmlCDataSection : XmlCDataSection, ICanonicalizableNode
     {
         private bool _isInNodeSet;
-        public CanonicalXmlCDataSection(string? data, XmlDocument doc, bool defaultNodeSetInclusionState) : base(data, doc)
+
+        public CanonicalXmlCDataSection(
+            string? data,
+            XmlDocument doc,
+            bool defaultNodeSetInclusionState
+        )
+            : base(data, doc)
         {
             _isInNodeSet = defaultNodeSetInclusionState;
         }
@@ -21,13 +27,21 @@ namespace System.Security.Cryptography.Xml
             set { _isInNodeSet = value; }
         }
 
-        public void Write(StringBuilder strBuilder, DocPosition docPos, AncestralNamespaceContextManager anc)
+        public void Write(
+            StringBuilder strBuilder,
+            DocPosition docPos,
+            AncestralNamespaceContextManager anc
+        )
         {
             if (IsInNodeSet)
                 strBuilder.Append(Utils.EscapeCData(Data));
         }
 
-        public void WriteHash(HashAlgorithm hash, DocPosition docPos, AncestralNamespaceContextManager anc)
+        public void WriteHash(
+            HashAlgorithm hash,
+            DocPosition docPos,
+            AncestralNamespaceContextManager anc
+        )
         {
             if (IsInNodeSet)
             {

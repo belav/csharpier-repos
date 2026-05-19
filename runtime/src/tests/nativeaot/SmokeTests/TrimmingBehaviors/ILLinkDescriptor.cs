@@ -3,7 +3,6 @@
 
 using System;
 using System.Diagnostics.CodeAnalysis;
-
 using BindingFlags = System.Reflection.BindingFlags;
 
 class ILLinkDescriptor
@@ -11,7 +10,10 @@ class ILLinkDescriptor
     public static int Run()
     {
         ThrowIfMemberNotPresent(typeof(ILLinkDescriptor), nameof(methodKeptViaDescriptor));
-        ThrowIfMemberNotPresent(typeof(ILLinkDescriptor), nameof(methodKeptViaStandaloneDescriptor));
+        ThrowIfMemberNotPresent(
+            typeof(ILLinkDescriptor),
+            nameof(methodKeptViaStandaloneDescriptor)
+        );
         ThrowIfMemberPresent(typeof(ILLinkDescriptor), nameof(methodNotKept));
         ThrowIfMemberNotPresent(typeof(ILLinkDescriptor), nameof(fieldKeptViaDescriptor));
         ThrowIfMemberNotPresent(typeof(ILLinkDescriptor), nameof(PropertyKeptViaDescriptor));
@@ -21,39 +23,41 @@ class ILLinkDescriptor
         return 100;
     }
 
-    public static void methodKeptViaDescriptor()
-    {
-    }
+    public static void methodKeptViaDescriptor() { }
 
-    public static void methodKeptViaStandaloneDescriptor()
-    {
-    }
+    public static void methodKeptViaStandaloneDescriptor() { }
 
-    public static void methodNotKept()
-    {
-    }
+    public static void methodNotKept() { }
 
     public int fieldKeptViaDescriptor;
 
     public int PropertyKeptViaDescriptor { get; set; }
 
-    public event EventHandler EventKeptViaDescriptor { add { } remove { } }
-
-    class NestedTypeKeptViaDescriptor
+    public event EventHandler EventKeptViaDescriptor
     {
+        add { }
+        remove { }
     }
 
-    class NestedTypeNonKept
+    class NestedTypeKeptViaDescriptor { }
+
+    class NestedTypeNonKept { }
+
+    [UnconditionalSuppressMessage(
+        "ReflectionAnalysis",
+        "IL2070:UnrecognizedReflectionPattern",
+        Justification = "That's the point"
+    )]
+    private static bool IsTypePresent(Type testType, string typeName) =>
+        testType.GetNestedType(typeName, BindingFlags.NonPublic | BindingFlags.Public) != null;
+
+    [UnconditionalSuppressMessage(
+        "ReflectionAnalysis",
+        "IL2070:UnrecognizedReflectionPattern",
+        Justification = "That's the point"
+    )]
+    private static bool IsMemberPresent(Type testType, string memberName)
     {
-    }
-
-    [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2070:UnrecognizedReflectionPattern",
-        Justification = "That's the point")]
-    private static bool IsTypePresent(Type testType, string typeName) => testType.GetNestedType(typeName, BindingFlags.NonPublic | BindingFlags.Public) != null;
-
-    [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2070:UnrecognizedReflectionPattern",
-        Justification = "That's the point")]
-    private static bool IsMemberPresent(Type testType, string memberName) {
         foreach (var member in testType.GetMembers())
         {
             if (member.Name == memberName)

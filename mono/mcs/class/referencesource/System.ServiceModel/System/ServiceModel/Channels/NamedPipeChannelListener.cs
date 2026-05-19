@@ -12,14 +12,16 @@ namespace System.ServiceModel.Channels
     using System.ServiceModel.Diagnostics;
 
     abstract class NamedPipeChannelListener<TChannel, TChannelAcceptor>
-        : NamedPipeChannelListener, IChannelListener<TChannel>
+        : NamedPipeChannelListener,
+            IChannelListener<TChannel>
         where TChannel : class, IChannel
         where TChannelAcceptor : ChannelAcceptor<TChannel>
     {
-        protected NamedPipeChannelListener(NamedPipeTransportBindingElement bindingElement, BindingContext context)
-            : base(bindingElement, context)
-        {
-        }
+        protected NamedPipeChannelListener(
+            NamedPipeTransportBindingElement bindingElement,
+            BindingContext context
+        )
+            : base(bindingElement, context) { }
 
         protected abstract TChannelAcceptor ChannelAcceptor { get; }
 
@@ -30,9 +32,20 @@ namespace System.ServiceModel.Channels
             ChannelAcceptor.Open(timeoutHelper.RemainingTime());
         }
 
-        protected override IAsyncResult OnBeginOpen(TimeSpan timeout, AsyncCallback callback, object state)
+        protected override IAsyncResult OnBeginOpen(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
-            return new ChainedOpenAsyncResult(timeout, callback, state, base.OnBeginOpen, base.OnEndOpen, ChannelAcceptor);
+            return new ChainedOpenAsyncResult(
+                timeout,
+                callback,
+                state,
+                base.OnBeginOpen,
+                base.OnEndOpen,
+                ChannelAcceptor
+            );
         }
 
         protected override void OnEndOpen(IAsyncResult result)
@@ -53,9 +66,20 @@ namespace System.ServiceModel.Channels
             base.OnAbort();
         }
 
-        protected override IAsyncResult OnBeginClose(TimeSpan timeout, AsyncCallback callback, object state)
+        protected override IAsyncResult OnBeginClose(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
-            return new ChainedCloseAsyncResult(timeout, callback, state, base.OnBeginClose, base.OnEndClose, ChannelAcceptor);
+            return new ChainedCloseAsyncResult(
+                timeout,
+                callback,
+                state,
+                base.OnBeginClose,
+                base.OnEndClose,
+                ChannelAcceptor
+            );
         }
 
         protected override void OnEndClose(IAsyncResult result)
@@ -79,7 +103,11 @@ namespace System.ServiceModel.Channels
             return ChannelAcceptor.AcceptChannel(timeout);
         }
 
-        public IAsyncResult BeginAcceptChannel(TimeSpan timeout, AsyncCallback callback, object state)
+        public IAsyncResult BeginAcceptChannel(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             base.ThrowIfNotOpened();
             return ChannelAcceptor.BeginAcceptChannel(timeout, callback, state);
@@ -96,7 +124,11 @@ namespace System.ServiceModel.Channels
             return ChannelAcceptor.WaitForChannel(timeout);
         }
 
-        protected override IAsyncResult OnBeginWaitForChannel(TimeSpan timeout, AsyncCallback callback, object state)
+        protected override IAsyncResult OnBeginWaitForChannel(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             return ChannelAcceptor.BeginWaitForChannel(timeout, callback, state);
         }
@@ -108,11 +140,15 @@ namespace System.ServiceModel.Channels
     }
 
     class NamedPipeReplyChannelListener
-        : NamedPipeChannelListener<IReplyChannel, ReplyChannelAcceptor>, ISingletonChannelListener
+        : NamedPipeChannelListener<IReplyChannel, ReplyChannelAcceptor>,
+            ISingletonChannelListener
     {
         ReplyChannelAcceptor replyAcceptor;
 
-        public NamedPipeReplyChannelListener(NamedPipeTransportBindingElement bindingElement, BindingContext context)
+        public NamedPipeReplyChannelListener(
+            NamedPipeTransportBindingElement bindingElement,
+            BindingContext context
+        )
             : base(bindingElement, context)
         {
             this.replyAcceptor = new ConnectionOrientedTransportReplyChannelAcceptor(this);
@@ -128,23 +164,38 @@ namespace System.ServiceModel.Channels
             get { return this.InternalReceiveTimeout; }
         }
 
-        void ISingletonChannelListener.ReceiveRequest(RequestContext requestContext, Action callback, bool canDispatchOnThisThread)
+        void ISingletonChannelListener.ReceiveRequest(
+            RequestContext requestContext,
+            Action callback,
+            bool canDispatchOnThisThread
+        )
         {
             if (DiagnosticUtility.ShouldTraceVerbose)
             {
-                TraceUtility.TraceEvent(TraceEventType.Verbose, TraceCode.NamedPipeChannelMessageReceived,
-                    SR.GetString(SR.TraceCodeNamedPipeChannelMessageReceived), requestContext.RequestMessage);
+                TraceUtility.TraceEvent(
+                    TraceEventType.Verbose,
+                    TraceCode.NamedPipeChannelMessageReceived,
+                    SR.GetString(SR.TraceCodeNamedPipeChannelMessageReceived),
+                    requestContext.RequestMessage
+                );
             }
             replyAcceptor.Enqueue(requestContext, callback, canDispatchOnThisThread);
         }
     }
 
     class NamedPipeDuplexChannelListener
-        : NamedPipeChannelListener<IDuplexSessionChannel, InputQueueChannelAcceptor<IDuplexSessionChannel>>, ISessionPreambleHandler
+        : NamedPipeChannelListener<
+            IDuplexSessionChannel,
+            InputQueueChannelAcceptor<IDuplexSessionChannel>
+        >,
+            ISessionPreambleHandler
     {
         InputQueueChannelAcceptor<IDuplexSessionChannel> duplexAcceptor;
 
-        public NamedPipeDuplexChannelListener(NamedPipeTransportBindingElement bindingElement, BindingContext context)
+        public NamedPipeDuplexChannelListener(
+            NamedPipeTransportBindingElement bindingElement,
+            BindingContext context
+        )
             : base(bindingElement, context)
         {
             this.duplexAcceptor = new InputQueueChannelAcceptor<IDuplexSessionChannel>(this);
@@ -155,11 +206,17 @@ namespace System.ServiceModel.Channels
             get { return this.duplexAcceptor; }
         }
 
-        void ISessionPreambleHandler.HandleServerSessionPreamble(ServerSessionPreambleConnectionReader preambleReader,
-            ConnectionDemuxer connectionDemuxer)
+        void ISessionPreambleHandler.HandleServerSessionPreamble(
+            ServerSessionPreambleConnectionReader preambleReader,
+            ConnectionDemuxer connectionDemuxer
+        )
         {
             IDuplexSessionChannel channel = preambleReader.CreateDuplexSessionChannel(
-                this, new EndpointAddress(this.Uri), ExposeConnectionProperty, connectionDemuxer);
+                this,
+                new EndpointAddress(this.Uri),
+                ExposeConnectionProperty,
+                connectionDemuxer
+            );
 
             duplexAcceptor.EnqueueAndDispatch(channel, preambleReader.ConnectionDequeuedCallback);
         }
@@ -169,11 +226,16 @@ namespace System.ServiceModel.Channels
     {
         List<SecurityIdentifier> allowedUsers;
 
-        protected NamedPipeChannelListener(NamedPipeTransportBindingElement bindingElement, BindingContext context)
+        protected NamedPipeChannelListener(
+            NamedPipeTransportBindingElement bindingElement,
+            BindingContext context
+        )
             : base(bindingElement, context)
         {
             SetIdleTimeout(bindingElement.ConnectionPoolSettings.IdleTimeout);
-            InitializeMaxPooledConnections(bindingElement.ConnectionPoolSettings.MaxOutboundConnectionsPerEndpoint);
+            InitializeMaxPooledConnections(
+                bindingElement.ConnectionPoolSettings.MaxOutboundConnectionsPerEndpoint
+            );
         }
 
         static UriPrefixTable<ITransportManagerRegistration> transportManagerTable =
@@ -186,10 +248,7 @@ namespace System.ServiceModel.Channels
 
         internal List<SecurityIdentifier> AllowedUsers
         {
-            get
-            {
-                return allowedUsers;
-            }
+            get { return allowedUsers; }
             set
             {
                 lock (ThisLock)
@@ -202,21 +261,17 @@ namespace System.ServiceModel.Channels
 
         internal static UriPrefixTable<ITransportManagerRegistration> StaticTransportManagerTable
         {
-            get
-            {
-                return transportManagerTable;
-            }
+            get { return transportManagerTable; }
         }
 
         internal override UriPrefixTable<ITransportManagerRegistration> TransportManagerTable
         {
-            get
-            {
-                return transportManagerTable;
-            }
+            get { return transportManagerTable; }
         }
 
-        internal override ITransportManagerRegistration CreateTransportManagerRegistration(Uri listenUri)
+        internal override ITransportManagerRegistration CreateTransportManagerRegistration(
+            Uri listenUri
+        )
         {
             return new ExclusiveNamedPipeTransportManager(listenUri, this);
         }

@@ -14,7 +14,6 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.Json
 {
     using static EmbeddedSyntaxHelpers;
     using static JsonHelpers;
-
     using JsonToken = EmbeddedSyntaxToken<JsonKind>;
     using JsonTrivia = EmbeddedSyntaxTrivia<JsonKind>;
 
@@ -24,18 +23,19 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.Json
         public readonly VirtualCharSequence Text;
         public int Position;
 
-        public JsonLexer(VirtualCharSequence text) : this()
+        public JsonLexer(VirtualCharSequence text)
+            : this()
         {
             Text = text;
         }
 
         public readonly VirtualChar CurrentChar => Text[Position];
 
-        public readonly VirtualCharSequence GetCharsToCurrentPosition(int start)
-            => GetSubSequence(start, Position);
+        public readonly VirtualCharSequence GetCharsToCurrentPosition(int start) =>
+            GetSubSequence(start, Position);
 
-        public readonly VirtualCharSequence GetSubSequence(int start, int end)
-            => Text.GetSubSequence(TextSpan.FromBounds(start, end));
+        public readonly VirtualCharSequence GetSubSequence(int start, int end) =>
+            Text.GetSubSequence(TextSpan.FromBounds(start, end));
 
         public JsonToken ScanNextToken()
         {
@@ -43,8 +43,11 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.Json
             if (Position == Text.Length)
             {
                 return CreateToken(
-                    JsonKind.EndOfFile, leadingTrivia,
-                    VirtualCharSequence.Empty, ImmutableArray<JsonTrivia>.Empty);
+                    JsonKind.EndOfFile,
+                    leadingTrivia,
+                    VirtualCharSequence.Empty,
+                    ImmutableArray<JsonTrivia>.Empty
+                );
             }
 
             var (chars, kind, diagnostic) = ScanNextTokenWorker();
@@ -53,12 +56,14 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.Json
             var trailingTrivia = ScanTrivia(leading: false);
             var token = CreateToken(kind, leadingTrivia, chars, trailingTrivia);
 
-            return diagnostic == null
-                ? token
-                : token.AddDiagnosticIfNone(diagnostic.Value);
+            return diagnostic == null ? token : token.AddDiagnosticIfNone(diagnostic.Value);
         }
 
-        private (VirtualCharSequence, JsonKind, EmbeddedDiagnostic? diagnostic) ScanNextTokenWorker()
+        private (
+            VirtualCharSequence,
+            JsonKind,
+            EmbeddedDiagnostic? diagnostic
+        ) ScanNextTokenWorker()
         {
             Debug.Assert(Position < Text.Length);
             return this.CurrentChar.Value switch
@@ -99,7 +104,11 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.Json
                     case '"':
                     case '\'':
                         if (currentCh.Value == openChar.Value)
-                            return (GetCharsToCurrentPosition(start), JsonKind.StringToken, diagnostic);
+                            return (
+                                GetCharsToCurrentPosition(start),
+                                JsonKind.StringToken,
+                                diagnostic
+                            );
 
                         continue;
 
@@ -112,7 +121,9 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.Json
 
             var chars = GetCharsToCurrentPosition(start);
             diagnostic ??= new EmbeddedDiagnostic(
-                FeaturesResources.Unterminated_string, GetSpan(chars));
+                FeaturesResources.Unterminated_string,
+                GetSpan(chars)
+            );
             return (chars, JsonKind.StringToken, diagnostic);
         }
 
@@ -125,7 +136,10 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.Json
             if (this.Position == Text.Length)
             {
                 var chars = GetCharsToCurrentPosition(stringStart);
-                return new EmbeddedDiagnostic(FeaturesResources.Unterminated_string, GetSpan(chars));
+                return new EmbeddedDiagnostic(
+                    FeaturesResources.Unterminated_string,
+                    GetSpan(chars)
+                );
             }
 
             var currentCh = this.CurrentChar;
@@ -135,7 +149,10 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.Json
             {
                 'b' or 't' or 'n' or 'f' or 'r' or '\\' or '"' or '\'' or '/' => null,
                 'u' => ScanUnicodeChars(escapeStart, Position),
-                _ => new EmbeddedDiagnostic(FeaturesResources.Invalid_escape_sequence, GetSpan(GetCharsToCurrentPosition(escapeStart))),
+                _ => new EmbeddedDiagnostic(
+                    FeaturesResources.Invalid_escape_sequence,
+                    GetSpan(GetCharsToCurrentPosition(escapeStart))
+                ),
             };
         }
 
@@ -153,16 +170,17 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.Json
             if (invalid || (Position - unicodeCharStart != 4))
             {
                 var chars = GetCharsToCurrentPosition(escapeStart);
-                return new EmbeddedDiagnostic(FeaturesResources.Invalid_escape_sequence, GetSpan(chars));
+                return new EmbeddedDiagnostic(
+                    FeaturesResources.Invalid_escape_sequence,
+                    GetSpan(chars)
+                );
             }
 
             return null;
         }
 
-        private static bool IsHexDigit(VirtualChar c)
-            => c.Value is (>= '0' and <= '9') or
-                          (>= 'A' and <= 'F') or
-                          (>= 'a' and <= 'f');
+        private static bool IsHexDigit(VirtualChar c) =>
+            c.Value is (>= '0' and <= '9') or (>= 'A' and <= 'F') or (>= 'a' and <= 'f');
 
         private (VirtualCharSequence, JsonKind, EmbeddedDiagnostic?) ScanText()
         {
@@ -173,8 +191,8 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.Json
 
             return (GetCharsToCurrentPosition(start), JsonKind.TextToken, null);
 
-            static bool IsNotPartOfText(VirtualChar ch)
-                => ch.Value switch
+            static bool IsNotPartOfText(VirtualChar ch) =>
+                ch.Value switch
                 {
                     // Standard tokens.
                     '{' or '}' or '[' or ']' or '(' or ')' or ',' or ':' or '\'' or '"' => true,
@@ -185,7 +203,9 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.Json
                 };
         }
 
-        private (VirtualCharSequence, JsonKind, EmbeddedDiagnostic?) ScanSingleCharToken(JsonKind kind)
+        private (VirtualCharSequence, JsonKind, EmbeddedDiagnostic?) ScanSingleCharToken(
+            JsonKind kind
+        )
         {
             var chars = this.Text.GetSubSequence(new TextSpan(Position, 1));
             Position++;
@@ -266,8 +286,11 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.Json
                 Position++;
 
                 var chars = GetCharsToCurrentPosition(start);
-                return CreateTrivia(JsonKind.SingleLineCommentTrivia, chars,
-                    new EmbeddedDiagnostic(FeaturesResources.Error_parsing_comment, GetSpan(chars)));
+                return CreateTrivia(
+                    JsonKind.SingleLineCommentTrivia,
+                    chars,
+                    new EmbeddedDiagnostic(FeaturesResources.Error_parsing_comment, GetSpan(chars))
+                );
             }
 
             return null;
@@ -287,8 +310,11 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.Json
             {
                 // Note: json.net reports an error if the file ends with "//", so we just
                 // preserve that behavior.
-                return CreateTrivia(JsonKind.SingleLineCommentTrivia, chars,
-                    new EmbeddedDiagnostic(FeaturesResources.Unterminated_comment, GetSpan(chars)));
+                return CreateTrivia(
+                    JsonKind.SingleLineCommentTrivia,
+                    chars,
+                    new EmbeddedDiagnostic(FeaturesResources.Unterminated_comment, GetSpan(chars))
+                );
             }
 
             return CreateTrivia(JsonKind.SingleLineCommentTrivia, chars);
@@ -306,19 +332,27 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.Json
             if (IsAt("*/"))
             {
                 Position += 2;
-                return CreateTrivia(JsonKind.MultiLineCommentTrivia, GetCharsToCurrentPosition(start));
+                return CreateTrivia(
+                    JsonKind.MultiLineCommentTrivia,
+                    GetCharsToCurrentPosition(start)
+                );
             }
 
             Debug.Assert(Position == Text.Length);
-            return CreateTrivia(JsonKind.MultiLineCommentTrivia, GetCharsToCurrentPosition(start),
-                new EmbeddedDiagnostic(FeaturesResources.Unterminated_comment, GetTextSpan(start, Position)));
+            return CreateTrivia(
+                JsonKind.MultiLineCommentTrivia,
+                GetCharsToCurrentPosition(start),
+                new EmbeddedDiagnostic(
+                    FeaturesResources.Unterminated_comment,
+                    GetTextSpan(start, Position)
+                )
+            );
         }
 
-        private readonly TextSpan GetTextSpan(int startInclusive, int endExclusive)
-            => TextSpan.FromBounds(Text[startInclusive].Span.Start, Text[endExclusive - 1].Span.End);
+        private readonly TextSpan GetTextSpan(int startInclusive, int endExclusive) =>
+            TextSpan.FromBounds(Text[startInclusive].Span.Start, Text[endExclusive - 1].Span.End);
 
-        private readonly bool IsAt(string val)
-            => TextAt(this.Position, val);
+        private readonly bool IsAt(string val) => TextAt(this.Position, val);
 
         private readonly bool TextAt(int position, string val)
         {

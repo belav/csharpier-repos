@@ -17,10 +17,14 @@ namespace System.Reflection.Emit.Tests
             yield return TypeAttributes.AutoLayout | TypeAttributes.NestedPublic;
             yield return TypeAttributes.BeforeFieldInit | TypeAttributes.NestedPublic;
             yield return TypeAttributes.Class | TypeAttributes.NestedPublic;
-            yield return TypeAttributes.ClassSemanticsMask | TypeAttributes.Abstract | TypeAttributes.NestedPublic;
+            yield return TypeAttributes.ClassSemanticsMask
+                | TypeAttributes.Abstract
+                | TypeAttributes.NestedPublic;
             yield return TypeAttributes.ExplicitLayout | TypeAttributes.NestedPublic;
             yield return TypeAttributes.Import | TypeAttributes.NestedPublic;
-            yield return TypeAttributes.Interface | TypeAttributes.Abstract | TypeAttributes.NestedPublic;
+            yield return TypeAttributes.Interface
+                | TypeAttributes.Abstract
+                | TypeAttributes.NestedPublic;
             yield return TypeAttributes.Sealed | TypeAttributes.NestedPublic;
             yield return TypeAttributes.SequentialLayout | TypeAttributes.NestedPublic;
             yield return TypeAttributes.Serializable | TypeAttributes.NestedPublic;
@@ -35,28 +39,147 @@ namespace System.Reflection.Emit.Tests
         {
             foreach (TypeAttributes attributes in TypeAttributes_TestData())
             {
-                yield return new object[] { "TestName", attributes, null, PackingSize.Unspecified, 0, new Type[0] };
-                yield return new object[] { "testname", attributes, typeof(TypeBuilderDefineNestedType), PackingSize.Size1, 0, new Type[0] };
-                yield return new object[] { "class", attributes, typeof(TypeBuilderDefineNestedType), PackingSize.Size2, 0, new Type[0] };
-                yield return new object[] { "\uD800\uDC00", attributes, typeof(bool), PackingSize.Size4, 0, new Type[0] };
-                yield return new object[] { "a\0b\0c", attributes, typeof(int).MakePointerType(), PackingSize.Size8, 0, new Type[0] };
-                yield return new object[] { "Test Name With Spaces", attributes, typeof(DateTime), PackingSize.Size16, 0, new Type[0] };
-                yield return new object[] { "TestName", attributes, typeof(int[]), PackingSize.Size32, 0, new Type[0] };
-                yield return new object[] { "TestName", attributes, typeof(string), PackingSize.Size64, 0, new Type[0] };
-                yield return new object[] { "TestName", attributes, typeof(EmptyGenericClass<int>), PackingSize.Size128, 0, new Type[0] };
-                yield return new object[] { "TestName", attributes, typeof(EmptyEnum), PackingSize.Unspecified, 2048, new Type[0] };
-                yield return new object[] { "TestName", attributes, typeof(Delegate), PackingSize.Unspecified, int.MaxValue, new Type[0] };
-                yield return new object[] { "TestName", attributes, typeof(EmptyGenericClass<>), PackingSize.Unspecified, int.MinValue, new Type[0] };
+                yield return new object[]
+                {
+                    "TestName",
+                    attributes,
+                    null,
+                    PackingSize.Unspecified,
+                    0,
+                    new Type[0],
+                };
+                yield return new object[]
+                {
+                    "testname",
+                    attributes,
+                    typeof(TypeBuilderDefineNestedType),
+                    PackingSize.Size1,
+                    0,
+                    new Type[0],
+                };
+                yield return new object[]
+                {
+                    "class",
+                    attributes,
+                    typeof(TypeBuilderDefineNestedType),
+                    PackingSize.Size2,
+                    0,
+                    new Type[0],
+                };
+                yield return new object[]
+                {
+                    "\uD800\uDC00",
+                    attributes,
+                    typeof(bool),
+                    PackingSize.Size4,
+                    0,
+                    new Type[0],
+                };
+                yield return new object[]
+                {
+                    "a\0b\0c",
+                    attributes,
+                    typeof(int).MakePointerType(),
+                    PackingSize.Size8,
+                    0,
+                    new Type[0],
+                };
+                yield return new object[]
+                {
+                    "Test Name With Spaces",
+                    attributes,
+                    typeof(DateTime),
+                    PackingSize.Size16,
+                    0,
+                    new Type[0],
+                };
+                yield return new object[]
+                {
+                    "TestName",
+                    attributes,
+                    typeof(int[]),
+                    PackingSize.Size32,
+                    0,
+                    new Type[0],
+                };
+                yield return new object[]
+                {
+                    "TestName",
+                    attributes,
+                    typeof(string),
+                    PackingSize.Size64,
+                    0,
+                    new Type[0],
+                };
+                yield return new object[]
+                {
+                    "TestName",
+                    attributes,
+                    typeof(EmptyGenericClass<int>),
+                    PackingSize.Size128,
+                    0,
+                    new Type[0],
+                };
+                yield return new object[]
+                {
+                    "TestName",
+                    attributes,
+                    typeof(EmptyEnum),
+                    PackingSize.Unspecified,
+                    2048,
+                    new Type[0],
+                };
+                yield return new object[]
+                {
+                    "TestName",
+                    attributes,
+                    typeof(Delegate),
+                    PackingSize.Unspecified,
+                    int.MaxValue,
+                    new Type[0],
+                };
+                yield return new object[]
+                {
+                    "TestName",
+                    attributes,
+                    typeof(EmptyGenericClass<>),
+                    PackingSize.Unspecified,
+                    int.MinValue,
+                    new Type[0],
+                };
 
-                yield return new object[] { "TestName", attributes, typeof(object), PackingSize.Unspecified, 0, null };
-                yield return new object[] { "Name", attributes, null, PackingSize.Unspecified, 0, new Type[] { typeof(IComparable) } };
+                yield return new object[]
+                {
+                    "TestName",
+                    attributes,
+                    typeof(object),
+                    PackingSize.Unspecified,
+                    0,
+                    null,
+                };
+                yield return new object[]
+                {
+                    "Name",
+                    attributes,
+                    null,
+                    PackingSize.Unspecified,
+                    0,
+                    new Type[] { typeof(IComparable) },
+                };
             }
         }
 
         [Theory]
         [ActiveIssue("https://github.com/dotnet/runtime/issues/2389", TestRuntimes.Mono)]
         [MemberData(nameof(TestData))]
-        public void DefineNestedType(string name, TypeAttributes attributes, Type parent, PackingSize packingSize, int typesize, Type[] implementedInterfaces)
+        public void DefineNestedType(
+            string name,
+            TypeAttributes attributes,
+            Type parent,
+            PackingSize packingSize,
+            int typesize,
+            Type[] implementedInterfaces
+        )
         {
             bool isDefaultImplementedInterfaces = implementedInterfaces?.Length == 0;
             bool isDefaultPackingSize = packingSize == PackingSize.Unspecified;
@@ -66,9 +189,21 @@ namespace System.Reflection.Emit.Tests
 
             void Verify(TypeBuilder type, TypeBuilder declaringType)
             {
-                bool allowsNullParent = attributes.HasFlag(TypeAttributes.Abstract) && attributes.HasFlag(TypeAttributes.ClassSemanticsMask);
+                bool allowsNullParent =
+                    attributes.HasFlag(TypeAttributes.Abstract)
+                    && attributes.HasFlag(TypeAttributes.ClassSemanticsMask);
                 Type baseType = allowsNullParent ? parent : (parent ?? typeof(object));
-                Helpers.VerifyType(type, declaringType.Module, declaringType, name, attributes, baseType, typesize, packingSize, implementedInterfaces);
+                Helpers.VerifyType(
+                    type,
+                    declaringType.Module,
+                    declaringType,
+                    name,
+                    attributes,
+                    baseType,
+                    typesize,
+                    packingSize,
+                    implementedInterfaces
+                );
             }
 
             if (isDefaultImplementedInterfaces)
@@ -105,14 +240,20 @@ namespace System.Reflection.Emit.Tests
                 }
                 // Use DefineNestedType(string, TypeAttributes, Type, PackingSize, int);
                 TypeBuilder type6 = Helpers.DynamicType(TypeAttributes.Public);
-                Verify(type6.DefineNestedType(name, attributes, parent, packingSize, typesize), type6);
+                Verify(
+                    type6.DefineNestedType(name, attributes, parent, packingSize, typesize),
+                    type6
+                );
             }
             else
             {
                 // Use DefineNestedType(string, TypeAttributes, Type, Type[])
                 Assert.True(isDefaultSize && isDefaultPackingSize); // Sanity check
                 TypeBuilder type7 = Helpers.DynamicType(TypeAttributes.Public);
-                Verify(type7.DefineNestedType(name, attributes, parent, implementedInterfaces), type7);
+                Verify(
+                    type7.DefineNestedType(name, attributes, parent, implementedInterfaces),
+                    type7
+                );
             }
         }
 
@@ -120,12 +261,37 @@ namespace System.Reflection.Emit.Tests
         public void DefineNestedType_NullName_ThrowsArgumentNullException()
         {
             TypeBuilder type = Helpers.DynamicType(TypeAttributes.NotPublic);
-            AssertExtensions.Throws<ArgumentNullException>("name", () => type.DefineNestedType(null));
-            AssertExtensions.Throws<ArgumentNullException>("name", () => type.DefineNestedType(null, TypeAttributes.Public));
-            AssertExtensions.Throws<ArgumentNullException>("name", () => type.DefineNestedType(null, TypeAttributes.Public, type.GetType()));
-            AssertExtensions.Throws<ArgumentNullException>("name", () => type.DefineNestedType(null, TypeAttributes.Public, type.GetType(), 2048));
-            AssertExtensions.Throws<ArgumentNullException>("name", () => type.DefineNestedType(null, TypeAttributes.Public, type.GetType(), PackingSize.Size8));
-            AssertExtensions.Throws<ArgumentNullException>("name", () => type.DefineNestedType(null, TypeAttributes.Public, type.GetType(), new Type[0]));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "name",
+                () => type.DefineNestedType(null)
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "name",
+                () => type.DefineNestedType(null, TypeAttributes.Public)
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "name",
+                () => type.DefineNestedType(null, TypeAttributes.Public, type.GetType())
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "name",
+                () => type.DefineNestedType(null, TypeAttributes.Public, type.GetType(), 2048)
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "name",
+                () =>
+                    type.DefineNestedType(
+                        null,
+                        TypeAttributes.Public,
+                        type.GetType(),
+                        PackingSize.Size8
+                    )
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "name",
+                () =>
+                    type.DefineNestedType(null, TypeAttributes.Public, type.GetType(), new Type[0])
+            );
         }
 
         [Theory]
@@ -135,12 +301,42 @@ namespace System.Reflection.Emit.Tests
         public void DefineNestedType_EmptyName_ThrowsArgumentException(string fullname)
         {
             TypeBuilder type = Helpers.DynamicType(TypeAttributes.NotPublic);
-            AssertExtensions.Throws<ArgumentException>("name", () => type.DefineNestedType(fullname));
-            AssertExtensions.Throws<ArgumentException>("name", () => type.DefineNestedType(fullname, TypeAttributes.Public));
-            AssertExtensions.Throws<ArgumentException>("name", () => type.DefineNestedType(fullname, TypeAttributes.Public, type.GetType()));
-            AssertExtensions.Throws<ArgumentException>("name", () => type.DefineNestedType(fullname, TypeAttributes.Public, type.GetType(), 2048));
-            AssertExtensions.Throws<ArgumentException>("name", () => type.DefineNestedType(fullname, TypeAttributes.Public, type.GetType(), PackingSize.Size8));
-            AssertExtensions.Throws<ArgumentException>("name", () => type.DefineNestedType(fullname, TypeAttributes.Public, type.GetType(), new Type[0]));
+            AssertExtensions.Throws<ArgumentException>(
+                "name",
+                () => type.DefineNestedType(fullname)
+            );
+            AssertExtensions.Throws<ArgumentException>(
+                "name",
+                () => type.DefineNestedType(fullname, TypeAttributes.Public)
+            );
+            AssertExtensions.Throws<ArgumentException>(
+                "name",
+                () => type.DefineNestedType(fullname, TypeAttributes.Public, type.GetType())
+            );
+            AssertExtensions.Throws<ArgumentException>(
+                "name",
+                () => type.DefineNestedType(fullname, TypeAttributes.Public, type.GetType(), 2048)
+            );
+            AssertExtensions.Throws<ArgumentException>(
+                "name",
+                () =>
+                    type.DefineNestedType(
+                        fullname,
+                        TypeAttributes.Public,
+                        type.GetType(),
+                        PackingSize.Size8
+                    )
+            );
+            AssertExtensions.Throws<ArgumentException>(
+                "name",
+                () =>
+                    type.DefineNestedType(
+                        fullname,
+                        TypeAttributes.Public,
+                        type.GetType(),
+                        new Type[0]
+                    )
+            );
         }
 
         [Fact]
@@ -148,7 +344,10 @@ namespace System.Reflection.Emit.Tests
         public void DefineNestedType_LongName_ThrowsArgumentException()
         {
             TypeBuilder type = Helpers.DynamicType(TypeAttributes.NotPublic);
-            AssertExtensions.Throws<ArgumentException>("name", () => type.DefineNestedType(new string('a', 1024)));
+            AssertExtensions.Throws<ArgumentException>(
+                "name",
+                () => type.DefineNestedType(new string('a', 1024))
+            );
         }
 
         [Theory]
@@ -161,10 +360,16 @@ namespace System.Reflection.Emit.Tests
         [InlineData((TypeAttributes)0x00040800, "attr")]
         [InlineData((TypeAttributes)(-1), null)]
         [InlineData((TypeAttributes)(-5000), "attr")]
-        public void DefineNestedType_InvalidAttributes_ThrowsArgumentException(TypeAttributes attributes, string paramName)
+        public void DefineNestedType_InvalidAttributes_ThrowsArgumentException(
+            TypeAttributes attributes,
+            string paramName
+        )
         {
             TypeBuilder type = Helpers.DynamicType(TypeAttributes.Public);
-            AssertExtensions.Throws<ArgumentException>(paramName, () => type.DefineNestedType("Name", attributes));
+            AssertExtensions.Throws<ArgumentException>(
+                paramName,
+                () => type.DefineNestedType("Name", attributes)
+            );
         }
 
         [Fact]
@@ -172,8 +377,24 @@ namespace System.Reflection.Emit.Tests
         public void DefineNestedType_InvalidParent_ThrowsArgumentException()
         {
             TypeBuilder type = Helpers.DynamicType(TypeAttributes.Public);
-            AssertExtensions.Throws<ArgumentException>("attr", () => type.DefineNestedType("Name", TypeAttributes.Public, typeof(int).MakeByRefType()));
-            AssertExtensions.Throws<ArgumentException>("attr", () => type.DefineNestedType("Name", TypeAttributes.Public, typeof(EmptyNonGenericInterface1)));
+            AssertExtensions.Throws<ArgumentException>(
+                "attr",
+                () =>
+                    type.DefineNestedType(
+                        "Name",
+                        TypeAttributes.Public,
+                        typeof(int).MakeByRefType()
+                    )
+            );
+            AssertExtensions.Throws<ArgumentException>(
+                "attr",
+                () =>
+                    type.DefineNestedType(
+                        "Name",
+                        TypeAttributes.Public,
+                        typeof(EmptyNonGenericInterface1)
+                    )
+            );
         }
 
         [Theory]
@@ -182,10 +403,16 @@ namespace System.Reflection.Emit.Tests
         [InlineData(typeof(EmptyGenericStruct<>))]
         [InlineData(typeof(EmptyGenericStruct<int>))]
         [InlineData(typeof(SealedClass))]
-        public void DefineNestedType_ParentNotInheritable_ThrowsTypeLoadExceptionOnCreation(Type parentType)
+        public void DefineNestedType_ParentNotInheritable_ThrowsTypeLoadExceptionOnCreation(
+            Type parentType
+        )
         {
             TypeBuilder type = Helpers.DynamicType(TypeAttributes.Public);
-            TypeBuilder nestedType = type.DefineNestedType("NestedType", TypeAttributes.NestedPublic, parentType);
+            TypeBuilder nestedType = type.DefineNestedType(
+                "NestedType",
+                TypeAttributes.NestedPublic,
+                parentType
+            );
 
             Assert.Throws<TypeLoadException>(() => nestedType.CreateTypeInfo());
         }
@@ -195,10 +422,16 @@ namespace System.Reflection.Emit.Tests
         [InlineData(typeof(StaticClass))]
         [InlineData(typeof(int*))]
         [InlineData(typeof(EmptyNonGenericClass[]))]
-        public void DefineNestedType_ParentHasNoDefaultConstructor_ThrowsNotSupportedExceptionOnCreation(Type parentType)
+        public void DefineNestedType_ParentHasNoDefaultConstructor_ThrowsNotSupportedExceptionOnCreation(
+            Type parentType
+        )
         {
             TypeBuilder type = Helpers.DynamicType(TypeAttributes.Public);
-            TypeBuilder nestedType = type.DefineNestedType("NestedType", TypeAttributes.NestedPublic, parentType);
+            TypeBuilder nestedType = type.DefineNestedType(
+                "NestedType",
+                TypeAttributes.NestedPublic,
+                parentType
+            );
 
             Assert.Throws<NotSupportedException>(() => nestedType.CreateTypeInfo());
         }
@@ -207,7 +440,16 @@ namespace System.Reflection.Emit.Tests
         public void DefineNestedType_NullInterface_ThrowsArgumentNullException()
         {
             TypeBuilder type = Helpers.DynamicType(TypeAttributes.Public);
-            AssertExtensions.Throws<ArgumentNullException>("interfaces", () => type.DefineNestedType("Name", TypeAttributes.NestedPublic, typeof(object), new Type[] { null }));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "interfaces",
+                () =>
+                    type.DefineNestedType(
+                        "Name",
+                        TypeAttributes.NestedPublic,
+                        typeof(object),
+                        new Type[] { null }
+                    )
+            );
         }
 
         public static IEnumerable<object[]> InvalidInterfaceType_TestData()
@@ -218,17 +460,27 @@ namespace System.Reflection.Emit.Tests
             yield return new object[] { typeof(EmptyGenericClass<int>) };
             yield return new object[] { typeof(EmptyGenericStruct<>) };
             yield return new object[] { typeof(EmptyGenericStruct<int>) };
-            yield return new object[] { typeof(EmptyGenericInterface<int>).GetGenericArguments()[0] };
+            yield return new object[]
+            {
+                typeof(EmptyGenericInterface<int>).GetGenericArguments()[0],
+            };
             yield return new object[] { typeof(EmptyGenericInterface<>).GetGenericArguments()[0] };
         }
 
         [Theory]
         [ActiveIssue("https://github.com/dotnet/runtime/issues/2389", TestRuntimes.Mono)]
         [MemberData(nameof(InvalidInterfaceType_TestData))]
-        public void DefineNestedType_InvalidInterfaceType_ThrowsTypeLoadExceptionOnCreation(Type interfaceType)
+        public void DefineNestedType_InvalidInterfaceType_ThrowsTypeLoadExceptionOnCreation(
+            Type interfaceType
+        )
         {
             TypeBuilder type = Helpers.DynamicType(TypeAttributes.Public);
-            TypeBuilder nestedType = type.DefineNestedType("Name", TypeAttributes.NestedPublic, typeof(object), new Type[] { interfaceType });
+            TypeBuilder nestedType = type.DefineNestedType(
+                "Name",
+                TypeAttributes.NestedPublic,
+                typeof(object),
+                new Type[] { interfaceType }
+            );
 
             Assert.Throws<TypeLoadException>(() => nestedType.CreateTypeInfo());
         }
@@ -236,10 +488,17 @@ namespace System.Reflection.Emit.Tests
         [Theory]
         [InlineData(typeof(EmptyGenericClass<>))]
         [InlineData(typeof(EmptyGenericInterface<>))]
-        public void DefineNestedType_OpenGenericInterfaceType_ThrowsBadImageFormatExceptionOnCreation(Type interfaceType)
+        public void DefineNestedType_OpenGenericInterfaceType_ThrowsBadImageFormatExceptionOnCreation(
+            Type interfaceType
+        )
         {
             TypeBuilder type = Helpers.DynamicType(TypeAttributes.Public);
-            TypeBuilder nestedType = type.DefineNestedType("Name", TypeAttributes.NestedPublic, typeof(object), new Type[] { interfaceType });
+            TypeBuilder nestedType = type.DefineNestedType(
+                "Name",
+                TypeAttributes.NestedPublic,
+                typeof(object),
+                new Type[] { interfaceType }
+            );
 
             Assert.Throws<BadImageFormatException>(() => nestedType.CreateTypeInfo());
         }
@@ -248,14 +507,18 @@ namespace System.Reflection.Emit.Tests
         public void GetNestedType_TypeNotCreated_ThrowsNotSupportedException()
         {
             TypeBuilder type = Helpers.DynamicType(TypeAttributes.Public);
-            Assert.Throws<NotSupportedException>(() => type.AsType().GetNestedType("Any", Helpers.AllFlags));
+            Assert.Throws<NotSupportedException>(() =>
+                type.AsType().GetNestedType("Any", Helpers.AllFlags)
+            );
         }
 
         [Fact]
         public void GetNestedTypes_TypeNotCreated_ThrowsNotSupportedException()
         {
             TypeBuilder type = Helpers.DynamicType(TypeAttributes.Public);
-            Assert.Throws<NotSupportedException>(() => type.AsType().GetNestedTypes(Helpers.AllFlags));
+            Assert.Throws<NotSupportedException>(() =>
+                type.AsType().GetNestedTypes(Helpers.AllFlags)
+            );
         }
     }
 }

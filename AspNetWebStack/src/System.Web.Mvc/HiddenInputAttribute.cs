@@ -3,7 +3,11 @@
 
 namespace System.Web.Mvc
 {
-    [AttributeUsage(AttributeTargets.Class | AttributeTargets.Property, AllowMultiple = false, Inherited = true)]
+    [AttributeUsage(
+        AttributeTargets.Class | AttributeTargets.Property,
+        AllowMultiple = false,
+        Inherited = true
+    )]
     public sealed class HiddenInputAttribute : Attribute
     {
         public HiddenInputAttribute()

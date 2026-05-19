@@ -12,7 +12,12 @@ namespace System.Reflection.Emit.Tests
         {
             TypeBuilder type = Helpers.DynamicType(TypeAttributes.NotPublic);
 
-            MethodBuilder methodBuilder = type.DefineMethod("DoThrow", MethodAttributes.Public | MethodAttributes.Static, typeof(int), new Type[] { typeof(bool) });
+            MethodBuilder methodBuilder = type.DefineMethod(
+                "DoThrow",
+                MethodAttributes.Public | MethodAttributes.Static,
+                typeof(int),
+                new Type[] { typeof(bool) }
+            );
 
             ILGenerator ilGenerator = methodBuilder.GetILGenerator();
             Type overflow = typeof(OverflowException);

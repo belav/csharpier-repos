@@ -4,15 +4,19 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web.Hosting {
+namespace System.Web.Hosting
+{
     using System;
 
     // Used to locate a custom loader implementation within a bin-deployed assembly.
 
     [AttributeUsage(AttributeTargets.Assembly, AllowMultiple = false, Inherited = false)]
-    public sealed class CustomLoaderAttribute : Attribute {
-        public CustomLoaderAttribute(Type customLoaderType) {
-            if (customLoaderType == null) {
+    public sealed class CustomLoaderAttribute : Attribute
+    {
+        public CustomLoaderAttribute(Type customLoaderType)
+        {
+            if (customLoaderType == null)
+            {
                 throw new ArgumentNullException("customLoaderType");
             }
 

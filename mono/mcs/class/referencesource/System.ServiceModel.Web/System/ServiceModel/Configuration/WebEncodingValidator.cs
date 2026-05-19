@@ -19,13 +19,21 @@ namespace System.ServiceModel.Configuration
         public override void Validate(object value)
         {
             Encoding encoding = value as Encoding;
-            if ((encoding == null) ||
+            if (
+                (encoding == null)
+                ||
                 // utf-8 case. EncodingConverter generates TextEncoderDefaults.Encoding for utf-8, different from System.Text.Encoding.UTF8
-                ((encoding.WebName != Encoding.UTF8.WebName) &&
-                (encoding.WebName != Encoding.Unicode.WebName) &&
-                (encoding.WebName != Encoding.BigEndianUnicode.WebName)))
+                (
+                    (encoding.WebName != Encoding.UTF8.WebName)
+                    && (encoding.WebName != Encoding.Unicode.WebName)
+                    && (encoding.WebName != Encoding.BigEndianUnicode.WebName)
+                )
+            )
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument("value", SR2.GetString(SR2.JsonEncodingNotSupported));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                    "value",
+                    SR2.GetString(SR2.JsonEncodingNotSupported)
+                );
             }
         }
     }

@@ -25,16 +25,37 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             DelegateDeclarationSyntax syntax,
             MethodKind methodKind,
             RefKind refKind,
-            DeclarationModifiers declarationModifiers)
-            : base(delegateType, syntax.GetReference(), location: syntax.Identifier.GetLocation(), isIterator: false,
-                   (declarationModifiers, MakeFlags(
-                                                    methodKind, refKind, declarationModifiers, returnType.IsVoidType(), returnsVoidIsSet: true, isExpressionBodied: false,
-                                                    isExtensionMethod: false, isVarArg: false, isNullableAnalysisEnabled: false, isExplicitInterfaceImplementation: false)))
+            DeclarationModifiers declarationModifiers
+        )
+            : base(
+                delegateType,
+                syntax.GetReference(),
+                location: syntax.Identifier.GetLocation(),
+                isIterator: false,
+                (
+                    declarationModifiers,
+                    MakeFlags(
+                        methodKind,
+                        refKind,
+                        declarationModifiers,
+                        returnType.IsVoidType(),
+                        returnsVoidIsSet: true,
+                        isExpressionBodied: false,
+                        isExtensionMethod: false,
+                        isVarArg: false,
+                        isNullableAnalysisEnabled: false,
+                        isExplicitInterfaceImplementation: false
+                    )
+                )
+            )
         {
             _returnType = returnType;
         }
 
-        internal sealed override ExecutableCodeBinder TryGetBodyBinder(BinderFactory binderFactoryOpt = null, bool ignoreAccessibility = false) => throw ExceptionUtilities.Unreachable();
+        internal sealed override ExecutableCodeBinder TryGetBodyBinder(
+            BinderFactory binderFactoryOpt = null,
+            bool ignoreAccessibility = false
+        ) => throw ExceptionUtilities.Unreachable();
 
         protected void InitializeParameters(ImmutableArray<ParameterSymbol> parameters)
         {
@@ -46,46 +67,83 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             SourceMemberContainerTypeSymbol delegateType,
             ArrayBuilder<Symbol> symbols,
             DelegateDeclarationSyntax syntax,
-            BindingDiagnosticBag diagnostics)
+            BindingDiagnosticBag diagnostics
+        )
         {
             Binder binder = delegateType.GetBinder(syntax.ParameterList);
             TypeSyntax returnTypeSyntax = syntax.ReturnType;
             Debug.Assert(returnTypeSyntax is not ScopedTypeSyntax);
 
-            returnTypeSyntax = returnTypeSyntax.SkipScoped(out _).SkipRefInLocalOrReturn(diagnostics, out RefKind refKind);
+            returnTypeSyntax = returnTypeSyntax
+                .SkipScoped(out _)
+                .SkipRefInLocalOrReturn(diagnostics, out RefKind refKind);
             var returnType = binder.BindType(returnTypeSyntax, diagnostics);
 
             // reuse types to avoid reporting duplicate errors if missing:
-            var voidType = TypeWithAnnotations.Create(binder.GetSpecialType(SpecialType.System_Void, diagnostics, syntax));
+            var voidType = TypeWithAnnotations.Create(
+                binder.GetSpecialType(SpecialType.System_Void, diagnostics, syntax)
+            );
             // https://github.com/dotnet/roslyn/issues/30079: Should the 'object', IAsyncResult and AsyncCallback parameters be considered nullable or not nullable?
-            var objectType = TypeWithAnnotations.Create(binder.GetSpecialType(SpecialType.System_Object, diagnostics, syntax));
-            var intPtrType = TypeWithAnnotations.Create(binder.GetSpecialType(SpecialType.System_IntPtr, diagnostics, syntax));
+            var objectType = TypeWithAnnotations.Create(
+                binder.GetSpecialType(SpecialType.System_Object, diagnostics, syntax)
+            );
+            var intPtrType = TypeWithAnnotations.Create(
+                binder.GetSpecialType(SpecialType.System_IntPtr, diagnostics, syntax)
+            );
 
             if (returnType.IsRestrictedType(ignoreSpanLikeTypes: true))
             {
                 // The return type of a method, delegate, or function pointer cannot be '{0}'
-                diagnostics.Add(ErrorCode.ERR_MethodReturnCantBeRefAny, returnTypeSyntax.Location, returnType.Type);
+                diagnostics.Add(
+                    ErrorCode.ERR_MethodReturnCantBeRefAny,
+                    returnTypeSyntax.Location,
+                    returnType.Type
+                );
             }
 
             // A delegate has the following members: (see CLI spec 13.6)
             // (1) a method named Invoke with the specified signature
-            var invoke = new InvokeMethod(delegateType, refKind, returnType, syntax, binder, diagnostics);
+            var invoke = new InvokeMethod(
+                delegateType,
+                refKind,
+                returnType,
+                syntax,
+                binder,
+                diagnostics
+            );
             invoke.CheckDelegateVarianceSafety(diagnostics);
             symbols.Add(invoke);
 
             // (2) a constructor with argument types (object, System.IntPtr)
             symbols.Add(new Constructor(delegateType, voidType, objectType, intPtrType, syntax));
 
-            if (binder.Compilation.GetSpecialType(SpecialType.System_IAsyncResult).TypeKind != TypeKind.Error &&
-                binder.Compilation.GetSpecialType(SpecialType.System_AsyncCallback).TypeKind != TypeKind.Error &&
+            if (
+                binder.Compilation.GetSpecialType(SpecialType.System_IAsyncResult).TypeKind
+                    != TypeKind.Error
+                && binder.Compilation.GetSpecialType(SpecialType.System_AsyncCallback).TypeKind
+                    != TypeKind.Error
+                &&
                 // WinRT delegates don't have Begin/EndInvoke methods
-                !delegateType.IsCompilationOutputWinMdObj())
+                !delegateType.IsCompilationOutputWinMdObj()
+            )
             {
-                var iAsyncResultType = TypeWithAnnotations.Create(binder.GetSpecialType(SpecialType.System_IAsyncResult, diagnostics, syntax));
-                var asyncCallbackType = TypeWithAnnotations.Create(binder.GetSpecialType(SpecialType.System_AsyncCallback, diagnostics, syntax));
+                var iAsyncResultType = TypeWithAnnotations.Create(
+                    binder.GetSpecialType(SpecialType.System_IAsyncResult, diagnostics, syntax)
+                );
+                var asyncCallbackType = TypeWithAnnotations.Create(
+                    binder.GetSpecialType(SpecialType.System_AsyncCallback, diagnostics, syntax)
+                );
 
                 // (3) BeginInvoke
-                symbols.Add(new BeginInvokeMethod(invoke, iAsyncResultType, objectType, asyncCallbackType, syntax));
+                symbols.Add(
+                    new BeginInvokeMethod(
+                        invoke,
+                        iAsyncResultType,
+                        objectType,
+                        asyncCallbackType,
+                        syntax
+                    )
+                );
 
                 // and (4) EndInvoke methods
                 symbols.Add(new EndInvokeMethod(invoke, iAsyncResultType, syntax));
@@ -96,31 +154,61 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 return;
             }
 
-            var useSiteInfo = new CompoundUseSiteInfo<AssemblySymbol>(diagnostics, delegateType.ContainingAssembly);
+            var useSiteInfo = new CompoundUseSiteInfo<AssemblySymbol>(
+                diagnostics,
+                delegateType.ContainingAssembly
+            );
 
-            if (!delegateType.IsNoMoreVisibleThan(invoke.ReturnTypeWithAnnotations, ref useSiteInfo))
+            if (
+                !delegateType.IsNoMoreVisibleThan(invoke.ReturnTypeWithAnnotations, ref useSiteInfo)
+            )
             {
                 // Inconsistent accessibility: return type '{1}' is less accessible than delegate '{0}'
-                diagnostics.Add(ErrorCode.ERR_BadVisDelegateReturn, delegateType.GetFirstLocation(), delegateType, invoke.ReturnType);
+                diagnostics.Add(
+                    ErrorCode.ERR_BadVisDelegateReturn,
+                    delegateType.GetFirstLocation(),
+                    delegateType,
+                    invoke.ReturnType
+                );
             }
 
             var delegateTypeIsFile = delegateType.HasFileLocalTypes();
             if (!delegateTypeIsFile && invoke.ReturnType.HasFileLocalTypes())
             {
-                diagnostics.Add(ErrorCode.ERR_FileTypeDisallowedInSignature, delegateType.GetFirstLocation(), invoke.ReturnType, delegateType);
+                diagnostics.Add(
+                    ErrorCode.ERR_FileTypeDisallowedInSignature,
+                    delegateType.GetFirstLocation(),
+                    invoke.ReturnType,
+                    delegateType
+                );
             }
 
             for (int i = 0; i < invoke.Parameters.Length; i++)
             {
                 var parameterSymbol = invoke.Parameters[i];
-                if (!parameterSymbol.TypeWithAnnotations.IsAtLeastAsVisibleAs(delegateType, ref useSiteInfo))
+                if (
+                    !parameterSymbol.TypeWithAnnotations.IsAtLeastAsVisibleAs(
+                        delegateType,
+                        ref useSiteInfo
+                    )
+                )
                 {
                     // Inconsistent accessibility: parameter type '{1}' is less accessible than delegate '{0}'
-                    diagnostics.Add(ErrorCode.ERR_BadVisDelegateParam, delegateType.GetFirstLocation(), delegateType, parameterSymbol.Type);
+                    diagnostics.Add(
+                        ErrorCode.ERR_BadVisDelegateParam,
+                        delegateType.GetFirstLocation(),
+                        delegateType,
+                        parameterSymbol.Type
+                    );
                 }
                 else if (!delegateTypeIsFile && parameterSymbol.Type.HasFileLocalTypes())
                 {
-                    diagnostics.Add(ErrorCode.ERR_FileTypeDisallowedInSignature, delegateType.GetFirstLocation(), parameterSymbol.Type, delegateType);
+                    diagnostics.Add(
+                        ErrorCode.ERR_FileTypeDisallowedInSignature,
+                        delegateType.GetFirstLocation(),
+                        parameterSymbol.Type,
+                        delegateType
+                    );
                 }
             }
 
@@ -136,39 +224,35 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         {
             get
             {
-                Debug.Assert(!_parameters.IsDefault, $"Expected {nameof(InitializeParameters)} prior to accessing this property.");
+                Debug.Assert(
+                    !_parameters.IsDefault,
+                    $"Expected {nameof(InitializeParameters)} prior to accessing this property."
+                );
                 return _parameters.NullToEmpty();
             }
         }
 
         public override ImmutableArray<TypeParameterSymbol> TypeParameters
         {
-            get
-            {
-                return ImmutableArray<TypeParameterSymbol>.Empty;
-            }
+            get { return ImmutableArray<TypeParameterSymbol>.Empty; }
         }
 
-        public override ImmutableArray<ImmutableArray<TypeWithAnnotations>> GetTypeParameterConstraintTypes()
-            => ImmutableArray<ImmutableArray<TypeWithAnnotations>>.Empty;
+        public override ImmutableArray<
+            ImmutableArray<TypeWithAnnotations>
+        > GetTypeParameterConstraintTypes() =>
+            ImmutableArray<ImmutableArray<TypeWithAnnotations>>.Empty;
 
-        public override ImmutableArray<TypeParameterConstraintKind> GetTypeParameterConstraintKinds()
-            => ImmutableArray<TypeParameterConstraintKind>.Empty;
+        public override ImmutableArray<TypeParameterConstraintKind> GetTypeParameterConstraintKinds() =>
+            ImmutableArray<TypeParameterConstraintKind>.Empty;
 
         public sealed override TypeWithAnnotations ReturnTypeWithAnnotations
         {
-            get
-            {
-                return _returnType;
-            }
+            get { return _returnType; }
         }
 
         public sealed override bool IsImplicitlyDeclared
         {
-            get
-            {
-                return true;
-            }
+            get { return true; }
         }
 
         internal override bool GenerateDebugInfo
@@ -178,10 +262,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         protected sealed override IAttributeTargetSymbol AttributeOwner
         {
-            get
-            {
-                return (SourceNamedTypeSymbol)ContainingSymbol;
-            }
+            get { return (SourceNamedTypeSymbol)ContainingSymbol; }
         }
 
         internal sealed override System.Reflection.MethodImplAttributes ImplementationAttributes
@@ -189,11 +270,15 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             get { return System.Reflection.MethodImplAttributes.Runtime; }
         }
 
-        internal sealed override OneOrMany<SyntaxList<AttributeListSyntax>> GetAttributeDeclarations()
+        internal sealed override OneOrMany<
+            SyntaxList<AttributeListSyntax>
+        > GetAttributeDeclarations()
         {
             // TODO: This implementation looks strange. It might make sense for the Invoke method, but
             //       not for constructor and other methods.
-            return OneOrMany.Create(((SourceNamedTypeSymbol)ContainingSymbol).GetAttributeDeclarations());
+            return OneOrMany.Create(
+                ((SourceNamedTypeSymbol)ContainingSymbol).GetAttributeDeclarations()
+            );
         }
 
         internal sealed override System.AttributeTargets GetAttributeTarget()
@@ -208,12 +293,35 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 TypeWithAnnotations voidType,
                 TypeWithAnnotations objectType,
                 TypeWithAnnotations intPtrType,
-                DelegateDeclarationSyntax syntax)
-                : base(delegateType, voidType, syntax, MethodKind.Constructor, RefKind.None, DeclarationModifiers.Public)
+                DelegateDeclarationSyntax syntax
+            )
+                : base(
+                    delegateType,
+                    voidType,
+                    syntax,
+                    MethodKind.Constructor,
+                    RefKind.None,
+                    DeclarationModifiers.Public
+                )
             {
-                InitializeParameters(ImmutableArray.Create<ParameterSymbol>(
-                    SynthesizedParameterSymbol.Create(this, objectType, 0, RefKind.None, "object"),
-                    SynthesizedParameterSymbol.Create(this, intPtrType, 1, RefKind.None, "method")));
+                InitializeParameters(
+                    ImmutableArray.Create<ParameterSymbol>(
+                        SynthesizedParameterSymbol.Create(
+                            this,
+                            objectType,
+                            0,
+                            RefKind.None,
+                            "object"
+                        ),
+                        SynthesizedParameterSymbol.Create(
+                            this,
+                            intPtrType,
+                            1,
+                            RefKind.None,
+                            "method"
+                        )
+                    )
+                );
             }
 
             public override string Name
@@ -221,7 +329,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 get { return WellKnownMemberNames.InstanceConstructorName; }
             }
 
-            internal override OneOrMany<SyntaxList<AttributeListSyntax>> GetReturnTypeAttributeDeclarations()
+            internal override OneOrMany<
+                SyntaxList<AttributeListSyntax>
+            > GetReturnTypeAttributeDeclarations()
             {
                 // Constructors don't have return type attributes
                 return OneOrMany.Create(default(SyntaxList<AttributeListSyntax>));
@@ -233,9 +343,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 // other methods will be associated with delegate's identifier
                 // we want this just to keep the order of synthesized methods the same as in Dev12
                 // Dev12 order is not strictly alphabetical - .ctor and Invoke go before other members.
-                // there are no real reasons for emitting the members in one order or another, 
+                // there are no real reasons for emitting the members in one order or another,
                 // so we will keep them the same.
-                return new LexicalSortKey(this.syntaxReferenceOpt.GetLocation(), this.DeclaringCompilation);
+                return new LexicalSortKey(
+                    this.syntaxReferenceOpt.GetLocation(),
+                    this.DeclaringCompilation
+                );
             }
 
             protected override bool HasSetsRequiredMembersImpl => false;
@@ -253,16 +366,28 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 TypeWithAnnotations returnType,
                 DelegateDeclarationSyntax syntax,
                 Binder binder,
-                BindingDiagnosticBag diagnostics)
-                : base(delegateType, returnType, syntax, MethodKind.DelegateInvoke, refKind, DeclarationModifiers.Virtual | DeclarationModifiers.Public)
+                BindingDiagnosticBag diagnostics
+            )
+                : base(
+                    delegateType,
+                    returnType,
+                    syntax,
+                    MethodKind.DelegateInvoke,
+                    refKind,
+                    DeclarationModifiers.Virtual | DeclarationModifiers.Public
+                )
             {
                 SyntaxToken arglistToken;
                 var parameters = ParameterHelpers.MakeParameters(
-                    binder, this, syntax.ParameterList, out arglistToken,
+                    binder,
+                    this,
+                    syntax.ParameterList,
+                    out arglistToken,
                     allowRefOrOut: true,
                     allowThis: false,
                     addRefReadOnlyModifier: true,
-                    diagnostics: diagnostics);
+                    diagnostics: diagnostics
+                );
 
                 if (arglistToken.Kind() == SyntaxKind.ArgListKeyword)
                 {
@@ -274,8 +399,14 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
                 if (this.RefKind == RefKind.RefReadOnly)
                 {
-                    var modifierType = binder.GetWellKnownType(WellKnownType.System_Runtime_InteropServices_InAttribute, diagnostics, syntax.ReturnType);
-                    _refCustomModifiers = ImmutableArray.Create(CSharpCustomModifier.CreateRequired(modifierType));
+                    var modifierType = binder.GetWellKnownType(
+                        WellKnownType.System_Runtime_InteropServices_InAttribute,
+                        diagnostics,
+                        syntax.ReturnType
+                    );
+                    _refCustomModifiers = ImmutableArray.Create(
+                        CSharpCustomModifier.CreateRequired(modifierType)
+                    );
                 }
                 else
                 {
@@ -296,12 +427,18 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 // other methods will be associated with delegate's identifier
                 // we want this just to keep the order of synthesized methods the same as in Dev12
                 // Dev12 order is not strictly alphabetical - .ctor and Invoke go before other members.
-                // there are no real reasons for emitting the members in one order or another, 
+                // there are no real reasons for emitting the members in one order or another,
                 // so we will keep them the same.
-                return new LexicalSortKey(this.syntaxReferenceOpt.GetLocation(), this.DeclaringCompilation);
+                return new LexicalSortKey(
+                    this.syntaxReferenceOpt.GetLocation(),
+                    this.DeclaringCompilation
+                );
             }
 
-            internal override void AfterAddingTypeMembersChecks(ConversionsBase conversions, BindingDiagnosticBag diagnostics)
+            internal override void AfterAddingTypeMembersChecks(
+                ConversionsBase conversions,
+                BindingDiagnosticBag diagnostics
+            )
             {
                 var syntax = (DelegateDeclarationSyntax)SyntaxRef.GetSyntax();
                 var location = syntax.ReturnType.GetLocation();
@@ -313,29 +450,65 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
                 if (this.RefKind == RefKind.RefReadOnly)
                 {
-                    compilation.EnsureIsReadOnlyAttributeExists(diagnostics, location, modifyCompilation: true);
+                    compilation.EnsureIsReadOnlyAttributeExists(
+                        diagnostics,
+                        location,
+                        modifyCompilation: true
+                    );
                 }
 
-                ParameterHelpers.EnsureRefKindAttributesExist(compilation, Parameters, diagnostics, modifyCompilation: true);
+                ParameterHelpers.EnsureRefKindAttributesExist(
+                    compilation,
+                    Parameters,
+                    diagnostics,
+                    modifyCompilation: true
+                );
 
                 if (compilation.ShouldEmitNativeIntegerAttributes(ReturnType))
                 {
-                    compilation.EnsureNativeIntegerAttributeExists(diagnostics, location, modifyCompilation: true);
+                    compilation.EnsureNativeIntegerAttributeExists(
+                        diagnostics,
+                        location,
+                        modifyCompilation: true
+                    );
                 }
 
-                ParameterHelpers.EnsureNativeIntegerAttributeExists(compilation, Parameters, diagnostics, modifyCompilation: true);
-                ParameterHelpers.EnsureScopedRefAttributeExists(compilation, Parameters, diagnostics, modifyCompilation: true);
+                ParameterHelpers.EnsureNativeIntegerAttributeExists(
+                    compilation,
+                    Parameters,
+                    diagnostics,
+                    modifyCompilation: true
+                );
+                ParameterHelpers.EnsureScopedRefAttributeExists(
+                    compilation,
+                    Parameters,
+                    diagnostics,
+                    modifyCompilation: true
+                );
 
-                if (compilation.ShouldEmitNullableAttributes(this) &&
-                    ReturnTypeWithAnnotations.NeedsNullableAttribute())
+                if (
+                    compilation.ShouldEmitNullableAttributes(this)
+                    && ReturnTypeWithAnnotations.NeedsNullableAttribute()
+                )
                 {
-                    compilation.EnsureNullableAttributeExists(diagnostics, location, modifyCompilation: true);
+                    compilation.EnsureNullableAttributeExists(
+                        diagnostics,
+                        location,
+                        modifyCompilation: true
+                    );
                 }
 
-                ParameterHelpers.EnsureNullableAttributeExists(compilation, this, Parameters, diagnostics, modifyCompilation: true);
+                ParameterHelpers.EnsureNullableAttributeExists(
+                    compilation,
+                    this,
+                    Parameters,
+                    diagnostics,
+                    modifyCompilation: true
+                );
             }
 
-            public override ImmutableArray<CustomModifier> RefCustomModifiers => _refCustomModifiers;
+            public override ImmutableArray<CustomModifier> RefCustomModifiers =>
+                _refCustomModifiers;
         }
 
         private sealed class BeginInvokeMethod : SourceDelegateMethodSymbol
@@ -345,19 +518,48 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 TypeWithAnnotations iAsyncResultType,
                 TypeWithAnnotations objectType,
                 TypeWithAnnotations asyncCallbackType,
-                DelegateDeclarationSyntax syntax)
-                : base((SourceNamedTypeSymbol)invoke.ContainingType, iAsyncResultType, syntax, MethodKind.Ordinary, RefKind.None, DeclarationModifiers.Virtual | DeclarationModifiers.Public)
+                DelegateDeclarationSyntax syntax
+            )
+                : base(
+                    (SourceNamedTypeSymbol)invoke.ContainingType,
+                    iAsyncResultType,
+                    syntax,
+                    MethodKind.Ordinary,
+                    RefKind.None,
+                    DeclarationModifiers.Virtual | DeclarationModifiers.Public
+                )
             {
                 var parameters = ArrayBuilder<ParameterSymbol>.GetInstance();
                 foreach (SourceParameterSymbol p in invoke.Parameters)
                 {
-                    var synthesizedParam = new SourceDelegateClonedParameterSymbolForBeginAndEndInvoke(originalParam: p, newOwner: this, newOrdinal: p.Ordinal);
+                    var synthesizedParam =
+                        new SourceDelegateClonedParameterSymbolForBeginAndEndInvoke(
+                            originalParam: p,
+                            newOwner: this,
+                            newOrdinal: p.Ordinal
+                        );
                     parameters.Add(synthesizedParam);
                 }
 
                 int paramCount = invoke.ParameterCount;
-                parameters.Add(SynthesizedParameterSymbol.Create(this, asyncCallbackType, paramCount, RefKind.None, GetUniqueParameterName(parameters, "callback")));
-                parameters.Add(SynthesizedParameterSymbol.Create(this, objectType, paramCount + 1, RefKind.None, GetUniqueParameterName(parameters, "object")));
+                parameters.Add(
+                    SynthesizedParameterSymbol.Create(
+                        this,
+                        asyncCallbackType,
+                        paramCount,
+                        RefKind.None,
+                        GetUniqueParameterName(parameters, "callback")
+                    )
+                );
+                parameters.Add(
+                    SynthesizedParameterSymbol.Create(
+                        this,
+                        objectType,
+                        paramCount + 1,
+                        RefKind.None,
+                        GetUniqueParameterName(parameters, "object")
+                    )
+                );
 
                 InitializeParameters(parameters.ToImmutableAndFree());
             }
@@ -367,7 +569,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 get { return WellKnownMemberNames.DelegateBeginInvokeName; }
             }
 
-            internal override OneOrMany<SyntaxList<AttributeListSyntax>> GetReturnTypeAttributeDeclarations()
+            internal override OneOrMany<
+                SyntaxList<AttributeListSyntax>
+            > GetReturnTypeAttributeDeclarations()
             {
                 // BeginInvoke method doesn't have return type attributes
                 // because it doesn't inherit Delegate declaration's return type.
@@ -383,8 +587,16 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             internal EndInvokeMethod(
                 InvokeMethod invoke,
                 TypeWithAnnotations iAsyncResultType,
-                DelegateDeclarationSyntax syntax)
-                : base((SourceNamedTypeSymbol)invoke.ContainingType, invoke.ReturnTypeWithAnnotations, syntax, MethodKind.Ordinary, invoke.RefKind, DeclarationModifiers.Virtual | DeclarationModifiers.Public)
+                DelegateDeclarationSyntax syntax
+            )
+                : base(
+                    (SourceNamedTypeSymbol)invoke.ContainingType,
+                    invoke.ReturnTypeWithAnnotations,
+                    syntax,
+                    MethodKind.Ordinary,
+                    invoke.RefKind,
+                    DeclarationModifiers.Virtual | DeclarationModifiers.Public
+                )
             {
                 _invoke = invoke;
 
@@ -395,12 +607,25 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 {
                     if (p.RefKind != RefKind.None)
                     {
-                        var synthesizedParam = new SourceDelegateClonedParameterSymbolForBeginAndEndInvoke(originalParam: p, newOwner: this, newOrdinal: ordinal++);
+                        var synthesizedParam =
+                            new SourceDelegateClonedParameterSymbolForBeginAndEndInvoke(
+                                originalParam: p,
+                                newOwner: this,
+                                newOrdinal: ordinal++
+                            );
                         parameters.Add(synthesizedParam);
                     }
                 }
 
-                parameters.Add(SynthesizedParameterSymbol.Create(this, iAsyncResultType, ordinal++, RefKind.None, GetUniqueParameterName(parameters, "result")));
+                parameters.Add(
+                    SynthesizedParameterSymbol.Create(
+                        this,
+                        iAsyncResultType,
+                        ordinal++,
+                        RefKind.None,
+                        GetUniqueParameterName(parameters, "result")
+                    )
+                );
                 InitializeParameters(parameters.ToImmutableAndFree());
             }
 
@@ -408,10 +633,14 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
             public override string Name => WellKnownMemberNames.DelegateEndInvokeName;
 
-            public override ImmutableArray<CustomModifier> RefCustomModifiers => _invoke.RefCustomModifiers;
+            public override ImmutableArray<CustomModifier> RefCustomModifiers =>
+                _invoke.RefCustomModifiers;
         }
 
-        private static string GetUniqueParameterName(ArrayBuilder<ParameterSymbol> currentParameters, string name)
+        private static string GetUniqueParameterName(
+            ArrayBuilder<ParameterSymbol> currentParameters,
+            string name
+        )
         {
             while (!IsUnique(currentParameters, name))
             {

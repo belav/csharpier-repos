@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 // <copyright file="HtmlTableCellCollection.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
 /*
@@ -10,31 +10,31 @@
  * Copyright (c) 2000 Microsoft Corporation
  */
 
-namespace System.Web.UI.HtmlControls {
-    using System.Runtime.InteropServices;
-
+namespace System.Web.UI.HtmlControls
+{
     using System;
     using System.Collections;
+    using System.Runtime.InteropServices;
+    using System.Security.Permissions;
     using System.Web;
     using System.Web.UI;
-    using System.Security.Permissions;
 
-
-/// <devdoc>
-///    <para>
-///       The <see langword='HtmlTableCellCollection'/> contains all of the table
-///       cells, both &lt;td&gt; and &lt;th&gt; elements, found within an <see langword='HtmlTable'/>
-///       server control.
-///    </para>
-/// </devdoc>
-    public sealed class HtmlTableCellCollection : ICollection {
-
+    /// <devdoc>
+    ///    <para>
+    ///       The <see langword='HtmlTableCellCollection'/> contains all of the table
+    ///       cells, both &lt;td&gt; and &lt;th&gt; elements, found within an <see langword='HtmlTable'/>
+    ///       server control.
+    ///    </para>
+    /// </devdoc>
+    public sealed class HtmlTableCellCollection : ICollection
+    {
         /// <internalonly/>
         /// <devdoc>
         /// </devdoc>
         private HtmlTableRow owner;
 
-        internal HtmlTableCellCollection(HtmlTableRow owner) {
+        internal HtmlTableCellCollection(HtmlTableRow owner)
+        {
             this.owner = owner;
         }
 
@@ -48,8 +48,10 @@ namespace System.Web.UI.HtmlControls {
         ///       collection.
         ///    </para>
         /// </devdoc>
-        public int Count {
-            get {
+        public int Count
+        {
+            get
+            {
                 if (owner.HasControls())
                     return owner.Controls.Count;
 
@@ -57,20 +59,16 @@ namespace System.Web.UI.HtmlControls {
             }
         }
 
-
         /// <devdoc>
         ///    <para>
         ///       Gets an <see langword='HtmlTableCell'/> control from an
-        ///    <see langword='HtmlTable'/> control thorugh the cell's ordinal index value. 
+        ///    <see langword='HtmlTable'/> control thorugh the cell's ordinal index value.
         ///    </para>
         /// </devdoc>
         public HtmlTableCell this[int index]
         {
-            get {
-                return(HtmlTableCell)owner.Controls[index];
-            }
+            get { return (HtmlTableCell)owner.Controls[index]; }
         }
-
 
         /// <devdoc>
         ///    <para>
@@ -78,10 +76,10 @@ namespace System.Web.UI.HtmlControls {
         ///       collection.
         ///    </para>
         /// </devdoc>
-        public void Add(HtmlTableCell cell) {
+        public void Add(HtmlTableCell cell)
+        {
             Insert(-1, cell);
         }
-
 
         /// <devdoc>
         ///    <para>
@@ -89,10 +87,10 @@ namespace System.Web.UI.HtmlControls {
         ///       collection.
         ///    </para>
         /// </devdoc>
-        public void Insert(int index, HtmlTableCell cell) {
+        public void Insert(int index, HtmlTableCell cell)
+        {
             owner.Controls.AddAt(index, cell);
         }
-
 
         /// <devdoc>
         ///    <para>
@@ -100,7 +98,8 @@ namespace System.Web.UI.HtmlControls {
         ///       controls from the collection.
         ///    </para>
         /// </devdoc>
-        public void Clear() {
+        public void Clear()
+        {
             if (owner.HasControls())
                 owner.Controls.Clear();
         }
@@ -111,39 +110,39 @@ namespace System.Web.UI.HtmlControls {
 
         /// <devdoc>
         /// </devdoc>
-        public IEnumerator GetEnumerator() {
+        public IEnumerator GetEnumerator()
+        {
             return owner.Controls.GetEnumerator();
         }
 
-
         /// <devdoc>
         /// </devdoc>
-        public void CopyTo(Array array, int index) {
-            for (IEnumerator e = this.GetEnumerator(); e.MoveNext();)
+        public void CopyTo(Array array, int index)
+        {
+            for (IEnumerator e = this.GetEnumerator(); e.MoveNext(); )
                 array.SetValue(e.Current, index++);
         }
 
+        /// <devdoc>
+        /// </devdoc>
+        public Object SyncRoot
+        {
+            get { return this; }
+        }
 
         /// <devdoc>
         /// </devdoc>
-        public Object SyncRoot {
-            get { return this;}
+        public bool IsReadOnly
+        {
+            get { return false; }
         }
-
 
         /// <devdoc>
         /// </devdoc>
-        public bool IsReadOnly {
-            get { return false;}
+        public bool IsSynchronized
+        {
+            get { return false; }
         }
-
-
-        /// <devdoc>
-        /// </devdoc>
-        public bool IsSynchronized {
-            get { return false;}
-        }
-
 
         /// <devdoc>
         ///    <para>
@@ -151,10 +150,10 @@ namespace System.Web.UI.HtmlControls {
         ///       collection.
         ///    </para>
         /// </devdoc>
-        public void Remove(HtmlTableCell cell) {
+        public void Remove(HtmlTableCell cell)
+        {
             owner.Controls.Remove(cell);
         }
-
 
         /// <devdoc>
         ///    <para>
@@ -162,7 +161,8 @@ namespace System.Web.UI.HtmlControls {
         ///       location from the collection.
         ///    </para>
         /// </devdoc>
-        public void RemoveAt(int index) {
+        public void RemoveAt(int index)
+        {
             owner.Controls.RemoveAt(index);
         }
     }

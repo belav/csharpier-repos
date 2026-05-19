@@ -20,17 +20,25 @@ namespace System.DirectoryServices.Protocols.Tests
         [Fact]
         public void Operation_SetValid_GetReturnsExpected()
         {
-            var modification = new DirectoryAttributeModification { Operation = DirectoryAttributeOperation.Delete };
+            var modification = new DirectoryAttributeModification
+            {
+                Operation = DirectoryAttributeOperation.Delete,
+            };
             Assert.Equal(DirectoryAttributeOperation.Delete, modification.Operation);
         }
 
         [Theory]
         [InlineData(DirectoryAttributeOperation.Add - 1)]
         [InlineData(DirectoryAttributeOperation.Replace + 1)]
-        public void Operation_SetInvalid_InvalidEnumArgumentException(DirectoryAttributeOperation operation)
+        public void Operation_SetInvalid_InvalidEnumArgumentException(
+            DirectoryAttributeOperation operation
+        )
         {
             var modification = new DirectoryAttributeModification();
-            AssertExtensions.Throws<InvalidEnumArgumentException>("value", () => modification.Operation = operation);
+            AssertExtensions.Throws<InvalidEnumArgumentException>(
+                "value",
+                () => modification.Operation = operation
+            );
         }
     }
 }

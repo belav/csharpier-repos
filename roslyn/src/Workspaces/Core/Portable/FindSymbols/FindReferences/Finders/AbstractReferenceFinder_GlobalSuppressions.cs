@@ -17,7 +17,10 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
 {
     internal abstract partial class AbstractReferenceFinder : IReferenceFinder
     {
-        private static bool ShouldFindReferencesInGlobalSuppressions(ISymbol symbol, [NotNullWhen(returnValue: true)] out string? documentationCommentId)
+        private static bool ShouldFindReferencesInGlobalSuppressions(
+            ISymbol symbol,
+            [NotNullWhen(returnValue: true)] out string? documentationCommentId
+        )
         {
             if (!SupportsGlobalSuppression(symbol))
             {
@@ -30,8 +33,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
 
             // Global suppressions are currently supported for types, members and
             // namespaces, except global namespace.
-            static bool SupportsGlobalSuppression(ISymbol symbol)
-                => symbol.Kind switch
+            static bool SupportsGlobalSuppression(ISymbol symbol) =>
+                symbol.Kind switch
                 {
                     SymbolKind.Namespace => !((INamespaceSymbol)symbol).IsGlobalNamespace,
                     SymbolKind.NamedType => true,
@@ -50,17 +53,25 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
         /// A reference to this field inside a global suppression would be as following:
         ///     [assembly: SuppressMessage("RuleCategory", "RuleId', Scope = "member", Target = "~F:C.Field")]
         /// </summary>
-        [PerformanceSensitive("https://devdiv.visualstudio.com/DevDiv/_workitems/edit/1224834", OftenCompletesSynchronously = true)]
-        protected static async ValueTask<ImmutableArray<FinderLocation>> FindReferencesInDocumentInsideGlobalSuppressionsAsync(
+        [PerformanceSensitive(
+            "https://devdiv.visualstudio.com/DevDiv/_workitems/edit/1224834",
+            OftenCompletesSynchronously = true
+        )]
+        protected static async ValueTask<
+            ImmutableArray<FinderLocation>
+        > FindReferencesInDocumentInsideGlobalSuppressionsAsync(
             ISymbol symbol,
             FindReferencesDocumentState state,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             if (!ShouldFindReferencesInGlobalSuppressions(symbol, out var docCommentId))
                 return ImmutableArray<FinderLocation>.Empty;
 
             // Check if we have any relevant global attributes in this document.
-            var info = await SyntaxTreeIndex.GetRequiredIndexAsync(state.Document, cancellationToken).ConfigureAwait(false);
+            var info = await SyntaxTreeIndex
+                .GetRequiredIndexAsync(state.Document, cancellationToken)
+                .ConfigureAwait(false);
             if (!info.ContainsGlobalSuppressMessageAttribute)
                 return ImmutableArray<FinderLocation>.Empty;
 
@@ -79,13 +90,30 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
             // We map the positions of documentation ID literals in tree to string literal tokens,
             // perform semantic checks to ensure these are valid references to the symbol
             // and if so, add these locations to the computed references.
-            var root = await semanticModel.SyntaxTree.GetRootAsync(cancellationToken).ConfigureAwait(false);
+            var root = await semanticModel
+                .SyntaxTree.GetRootAsync(cancellationToken)
+                .ConfigureAwait(false);
             using var _ = ArrayBuilder<FinderLocation>.GetInstance(out var locations);
             foreach (var token in root.DescendantTokens())
             {
-                if (IsCandidate(state, token, expectedDocCommentId.Span, suppressMessageAttribute, cancellationToken, out var offsetOfReferenceInToken))
+                if (
+                    IsCandidate(
+                        state,
+                        token,
+                        expectedDocCommentId.Span,
+                        suppressMessageAttribute,
+                        cancellationToken,
+                        out var offsetOfReferenceInToken
+                    )
+                )
                 {
-                    var referenceLocation = CreateReferenceLocation(offsetOfReferenceInToken, token, root, state.Document, syntaxFacts);
+                    var referenceLocation = CreateReferenceLocation(
+                        offsetOfReferenceInToken,
+                        token,
+                        root,
+                        state.Document,
+                        syntaxFacts
+                    );
                     locations.Add(new FinderLocation(token.GetRequiredParent(), referenceLocation));
                 }
             }
@@ -94,20 +122,38 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
 
             // Local functions
             static bool IsCandidate(
-                FindReferencesDocumentState state, SyntaxToken token, ReadOnlySpan<char> expectedDocCommentId,
-                INamedTypeSymbol suppressMessageAttribute, CancellationToken cancellationToken, out int offsetOfReferenceInToken)
+                FindReferencesDocumentState state,
+                SyntaxToken token,
+                ReadOnlySpan<char> expectedDocCommentId,
+                INamedTypeSymbol suppressMessageAttribute,
+                CancellationToken cancellationToken,
+                out int offsetOfReferenceInToken
+            )
             {
                 offsetOfReferenceInToken = -1;
 
                 // Check if this token is a named attribute argument to "Target" property of "SuppressMessageAttribute".
-                if (!IsValidTargetOfGlobalSuppressionAttribute(
-                        token, suppressMessageAttribute, state.SemanticModel, state.SyntaxFacts, cancellationToken))
+                if (
+                    !IsValidTargetOfGlobalSuppressionAttribute(
+                        token,
+                        suppressMessageAttribute,
+                        state.SemanticModel,
+                        state.SyntaxFacts,
+                        cancellationToken
+                    )
+                )
                 {
                     return false;
                 }
 
                 // Target string must contain a valid symbol DocumentationCommentId.
-                if (!ValidateAndSplitDocumentationCommentId(token.ValueText, out var prefix, out var docCommentId))
+                if (
+                    !ValidateAndSplitDocumentationCommentId(
+                        token.ValueText,
+                        out var prefix,
+                        out var docCommentId
+                    )
+                )
                 {
                     return false;
                 }
@@ -116,7 +162,7 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
                 // 1. The FAR symbol is the same one as the target of the suppression. In this case,
                 //    target string for the suppression exactly matches the expectedDocCommentId.
                 // 2. The FAR symbol is one of the containing symbols of the target symbol of suppression.
-                //    In this case, the target string for the suppression starts with the expectedDocCommentId. 
+                //    In this case, the target string for the suppression starts with the expectedDocCommentId.
                 //
                 // For example, consider the below suppression applied to field 'Field' of type 'C'
                 //      [assembly: SuppressMessage("RuleCategory", "RuleId', Scope = "member", Target = "~F:C.Field")]
@@ -155,7 +201,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
                 INamedTypeSymbol suppressMessageAttribute,
                 SemanticModel semanticModel,
                 ISyntaxFacts syntaxFacts,
-                CancellationToken cancellationToken)
+                CancellationToken cancellationToken
+            )
             {
                 // We need to check if the given token is a non-null, non-empty string literal token
                 // passed as a named argument to 'Target' property of a global SuppressMessageAttribute.
@@ -195,7 +242,9 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
                 }
 
                 // Check the attribute type matches 'SuppressMessageAttribute'.
-                var attributeSymbol = semanticModel.GetSymbolInfo(attributeNode, cancellationToken).Symbol?.ContainingType;
+                var attributeSymbol = semanticModel
+                    .GetSymbolInfo(attributeNode, cancellationToken)
+                    .Symbol?.ContainingType;
                 return suppressMessageAttribute.Equals(attributeSymbol);
             }
 
@@ -204,7 +253,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
                 SyntaxToken token,
                 SyntaxNode root,
                 Document document,
-                ISyntaxFacts syntaxFacts)
+                ISyntaxFacts syntaxFacts
+            )
             {
                 // We found a valid reference to the symbol in documentation comment ID string literal.
                 // Compute the reference span within this string literal for the identifier.
@@ -230,7 +280,10 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
                 // We also add the location for the containing documentation comment ID string literal.
                 // For the suppression example above, location points to the span of 'Field' inside "F:C.Field"
                 // and containing string location points to the span of the entire string literal "F:C.Field".
-                var location = Location.Create(root.SyntaxTree, new TextSpan(positionOfReferenceInTree, length));
+                var location = Location.Create(
+                    root.SyntaxTree,
+                    new TextSpan(positionOfReferenceInTree, length)
+                );
                 var containingStringLocation = token.GetLocation();
                 return new ReferenceLocation(document, location, containingStringLocation);
             }
@@ -238,7 +291,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
 
         private static bool TryGetExpectedDocumentationCommentId(
             string id,
-            out ReadOnlyMemory<char> docCommentId)
+            out ReadOnlyMemory<char> docCommentId
+        )
         {
             return ValidateAndSplitDocumentationCommentId(id, out _, out docCommentId);
         }
@@ -248,11 +302,15 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
         /// <paramref name="docCommentId"/> <c>~M:C.X(System.String)</c>, the <paramref name="prefix"/> would be
         /// <c>~M:</c> and <paramref name="id"/> would be <c>C.X(System.String)</c>.
         /// </summary>
-        [PerformanceSensitive("https://devdiv.visualstudio.com/DevDiv/_workitems/edit/1224834", Constraint = "Avoid Regex splitting due to high allocation costs.")]
+        [PerformanceSensitive(
+            "https://devdiv.visualstudio.com/DevDiv/_workitems/edit/1224834",
+            Constraint = "Avoid Regex splitting due to high allocation costs."
+        )]
         private static bool ValidateAndSplitDocumentationCommentId(
             [NotNullWhen(true)] string? docCommentId,
             out ReadOnlyMemory<char> prefix,
-            out ReadOnlyMemory<char> id)
+            out ReadOnlyMemory<char> id
+        )
         {
             prefix = ReadOnlyMemory<char>.Empty;
             id = ReadOnlyMemory<char>.Empty;
@@ -300,7 +358,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
         private static void SplitIdAndArguments(
             ReadOnlyMemory<char> id,
             out ReadOnlyMemory<char> idPartBeforeArguments,
-            out ReadOnlyMemory<char> arguments)
+            out ReadOnlyMemory<char> arguments
+        )
         {
             ReadOnlySpan<char> argumentSeparators = stackalloc[] { '(', '[' };
             var indexOfArguments = id.Span.IndexOfAny(argumentSeparators);
@@ -335,7 +394,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
             [NotNullWhen(true)] string? docCommentId,
             out ReadOnlyMemory<char> prefix,
             out ReadOnlyMemory<char> idPartBeforeArguments,
-            out ReadOnlyMemory<char> arguments)
+            out ReadOnlyMemory<char> arguments
+        )
         {
             idPartBeforeArguments = ReadOnlyMemory<char>.Empty;
             arguments = ReadOnlyMemory<char>.Empty;

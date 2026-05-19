@@ -1,4 +1,4 @@
-public class outer {
-	public class inner<T> {
-	}
+public class outer
+{
+    public class inner<T> { }
 }

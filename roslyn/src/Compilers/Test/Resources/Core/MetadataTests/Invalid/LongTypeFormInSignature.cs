@@ -9,7 +9,7 @@ public class C
 {
     public static System.Attribute RT()
     {
-		return null;
+        return null;
     }
 
     public static System.DateTime VT()

@@ -23,7 +23,12 @@ namespace System.Web.Mvc.Test
         {
             // Act & assert
             Assert.ThrowsArgumentNullOrEmpty(
-                delegate { new FilePathResult(String.Empty, "contentType"); }, "fileName");
+                delegate
+                {
+                    new FilePathResult(String.Empty, "contentType");
+                },
+                "fileName"
+            );
         }
 
         [Fact]
@@ -31,7 +36,12 @@ namespace System.Web.Mvc.Test
         {
             // Act & assert
             Assert.ThrowsArgumentNullOrEmpty(
-                delegate { new FilePathResult(null, "contentType"); }, "fileName");
+                delegate
+                {
+                    new FilePathResult(null, "contentType");
+                },
+                "fileName"
+            );
         }
 
         [Fact]
@@ -41,7 +51,10 @@ namespace System.Web.Mvc.Test
             Mock<HttpResponseBase> mockResponse = new Mock<HttpResponseBase>();
             mockResponse.Setup(r => r.TransmitFile("someFile")).Verifiable();
 
-            FilePathResultHelper helper = new FilePathResultHelper("someFile", "application/octet-stream");
+            FilePathResultHelper helper = new FilePathResultHelper(
+                "someFile",
+                "application/octet-stream"
+            );
 
             // Act
             helper.PublicWriteFile(mockResponse.Object);
@@ -53,9 +66,7 @@ namespace System.Web.Mvc.Test
         private class FilePathResultHelper : FilePathResult
         {
             public FilePathResultHelper(string fileName, string contentType)
-                : base(fileName, contentType)
-            {
-            }
+                : base(fileName, contentType) { }
 
             public void PublicWriteFile(HttpResponseBase response)
             {

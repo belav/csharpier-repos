@@ -6,7 +6,11 @@ namespace System.Text.Json.Serialization
     /// <summary>
     /// When placed on a type declaration, indicates that the specified subtype should be opted into polymorphic serialization.
     /// </summary>
-    [AttributeUsage(AttributeTargets.Class | AttributeTargets.Interface, AllowMultiple = true, Inherited = false)]
+    [AttributeUsage(
+        AttributeTargets.Class | AttributeTargets.Interface,
+        AllowMultiple = true,
+        Inherited = false
+    )]
     public class JsonDerivedTypeAttribute : JsonAttribute
     {
         /// <summary>

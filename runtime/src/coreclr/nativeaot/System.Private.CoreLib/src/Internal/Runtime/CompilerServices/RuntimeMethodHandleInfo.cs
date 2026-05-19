@@ -5,7 +5,6 @@ using System;
 using System.Diagnostics;
 using System.Reflection;
 using System.Runtime.InteropServices;
-
 using Internal.Runtime.Augments;
 
 namespace Internal.Runtime.CompilerServices

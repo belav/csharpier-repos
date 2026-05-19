@@ -83,11 +83,12 @@ namespace NetCoreServer
 
         public static RequestInformation DeSerializeFromJson(string json)
         {
-            return (RequestInformation)JsonConvert.DeserializeObject(
-                json,
-                typeof(RequestInformation),
-                new NameValueCollectionConverter());
-
+            return (RequestInformation)
+                JsonConvert.DeserializeObject(
+                    json,
+                    typeof(RequestInformation),
+                    new NameValueCollectionConverter()
+                );
         }
 
         public string SerializeToJson()
@@ -95,8 +96,6 @@ namespace NetCoreServer
             return JsonConvert.SerializeObject(this, new NameValueCollectionConverter());
         }
 
-        private RequestInformation()
-        {
-        }
+        private RequestInformation() { }
     }
 }

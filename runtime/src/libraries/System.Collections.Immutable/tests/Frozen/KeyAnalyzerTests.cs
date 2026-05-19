@@ -12,17 +12,28 @@ namespace System.Collections.Frozen.Tests
     {
         private static KeyAnalyzer.AnalysisResults RunAnalysis(string[] values, bool ignoreCase)
         {
-            int minLength = int.MaxValue, maxLength = 0;
+            int minLength = int.MaxValue,
+                maxLength = 0;
             foreach (string s in values)
             {
-                if (s.Length < minLength) minLength = s.Length;
-                if (s.Length > maxLength) maxLength = s.Length;
+                if (s.Length < minLength)
+                    minLength = s.Length;
+                if (s.Length > maxLength)
+                    maxLength = s.Length;
             }
 
-            KeyAnalyzer.AnalysisResults r = KeyAnalyzer.Analyze(values, ignoreCase, minLength, maxLength);
+            KeyAnalyzer.AnalysisResults r = KeyAnalyzer.Analyze(
+                values,
+                ignoreCase,
+                minLength,
+                maxLength
+            );
 
             Assert.All(values, s => Assert.InRange(s.Length, r.MinimumLength, int.MaxValue));
-            Assert.All(values, s => Assert.InRange(s.Length, 0, r.MinimumLength + r.MaximumLengthDiff));
+            Assert.All(
+                values,
+                s => Assert.InRange(s.Length, 0, r.MinimumLength + r.MaximumLengthDiff)
+            );
 
             return r;
         }
@@ -93,7 +104,10 @@ namespace System.Collections.Frozen.Tests
             Assert.Equal(6, r.HashIndex);
             Assert.Equal(1, r.HashCount);
 
-            r = RunAnalysis(new[] { "ABCÉDEFÉ1ABCDEF", "ABCÉDEFTA1ABCDEF", "ABCÉDEFSB1ABCDEF" }, true);
+            r = RunAnalysis(
+                new[] { "ABCÉDEFÉ1ABCDEF", "ABCÉDEFTA1ABCDEF", "ABCÉDEFSB1ABCDEF" },
+                true
+            );
             Assert.False(r.RightJustifiedSubstring);
             Assert.True(r.IgnoreCase);
             Assert.False(r.AllAsciiIfIgnoreCase);
@@ -106,7 +120,6 @@ namespace System.Collections.Frozen.Tests
             Assert.True(r.AllAsciiIfIgnoreCase);
             Assert.Equal(0, r.HashIndex);
             Assert.Equal(1, r.HashCount);
-
         }
 
         [Fact]
@@ -191,7 +204,10 @@ namespace System.Collections.Frozen.Tests
         [Fact]
         public static void Full()
         {
-            KeyAnalyzer.AnalysisResults r = RunAnalysis(new[] { "ABC", "DBC", "ADC", "ABD", "ABDABD" }, false);
+            KeyAnalyzer.AnalysisResults r = RunAnalysis(
+                new[] { "ABC", "DBC", "ADC", "ABD", "ABDABD" },
+                false
+            );
             Assert.False(r.SubstringHashing);
             Assert.False(r.IgnoreCase);
             Assert.True(r.AllAsciiIfIgnoreCase);
@@ -200,7 +216,10 @@ namespace System.Collections.Frozen.Tests
         [Fact]
         public static void FullCaseInsensitive()
         {
-            KeyAnalyzer.AnalysisResults r = RunAnalysis(new[] { "æbc", "DBC", "æDC", "æbd", "æbdæbd" }, true);
+            KeyAnalyzer.AnalysisResults r = RunAnalysis(
+                new[] { "æbc", "DBC", "æDC", "æbd", "æbdæbd" },
+                true
+            );
             Assert.False(r.SubstringHashing);
             Assert.True(r.IgnoreCase);
             Assert.False(r.AllAsciiIfIgnoreCase);
@@ -209,7 +228,10 @@ namespace System.Collections.Frozen.Tests
         [Fact]
         public static void FullCaseInsensitiveAscii()
         {
-            KeyAnalyzer.AnalysisResults r = RunAnalysis(new[] { "abc", "DBC", "aDC", "abd", "abdabd" }, true);
+            KeyAnalyzer.AnalysisResults r = RunAnalysis(
+                new[] { "abc", "DBC", "aDC", "abd", "abdabd" },
+                true
+            );
             Assert.False(r.SubstringHashing);
             Assert.True(r.IgnoreCase);
             Assert.True(r.AllAsciiIfIgnoreCase);
@@ -244,7 +266,9 @@ namespace System.Collections.Frozen.Tests
             Assert.True(KeyAnalyzer.HasSufficientUniquenessFactor(set, new[] { "a", "b", "a" }, 1));
             Assert.Equal(2, set.Count); // set should only have the non-collided ones
 
-            Assert.False(KeyAnalyzer.HasSufficientUniquenessFactor(set, new[] { "aa", "ab", "aa" }, 0));
+            Assert.False(
+                KeyAnalyzer.HasSufficientUniquenessFactor(set, new[] { "aa", "ab", "aa" }, 0)
+            );
             Assert.Equal(2, set.Count);
         }
 
@@ -273,11 +297,14 @@ namespace System.Collections.Frozen.Tests
             Assert.True(KeyAnalyzer.HasSufficientUniquenessFactor(set, new[] { "a", "b", "a" }, 1));
             Assert.Equal(2, set.Count); // set should only have the non-collided ones
 
-            Assert.False(KeyAnalyzer.HasSufficientUniquenessFactor(set, new[] { "a", "a", "a" }, 1));
+            Assert.False(
+                KeyAnalyzer.HasSufficientUniquenessFactor(set, new[] { "a", "a", "a" }, 1)
+            );
         }
 
         // reuse the typical data declared in the FrozenFromKnownValuesTests
-        public static IEnumerable<object[]> TypicalData() => FrozenFromKnownValuesTests.StringStringData();
+        public static IEnumerable<object[]> TypicalData() =>
+            FrozenFromKnownValuesTests.StringStringData();
 
         [Theory]
         [MemberData(nameof(TypicalData))]
@@ -287,7 +314,11 @@ namespace System.Collections.Frozen.Tests
             HashSet<string> set = new HashSet<string>(source.Comparer);
 
             int allowedCollisions = keys.Length / 20;
-            bool passable = KeyAnalyzer.HasSufficientUniquenessFactor(set, keys.AsSpan(), allowedCollisions);
+            bool passable = KeyAnalyzer.HasSufficientUniquenessFactor(
+                set,
+                keys.AsSpan(),
+                allowedCollisions
+            );
 
             if (passable)
                 Assert.InRange(set.Count, keys.Length - allowedCollisions, keys.Length);

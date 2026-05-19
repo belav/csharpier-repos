@@ -34,7 +34,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.InheritanceMarg
             IStreamingFindUsagesPresenter streamingFindUsagesPresenter,
             IUIThreadOperationExecutor operationExecutor,
             Workspace workspace,
-            IAsynchronousOperationListener listener)
+            IAsynchronousOperationListener listener
+        )
         {
             _threadingContext = threadingContext;
             _streamingFindUsagesPresenter = streamingFindUsagesPresenter;
@@ -59,21 +60,34 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.InheritanceMarg
         {
             using var context = _operationExecutor.BeginExecute(
                 title: EditorFeaturesResources.Navigating,
-                defaultDescription: string.Format(ServicesVSResources.Navigate_to_0, viewModel.DisplayContent),
+                defaultDescription: string.Format(
+                    ServicesVSResources.Navigate_to_0,
+                    viewModel.DisplayContent
+                ),
                 allowCancellation: true,
-                showProgress: false);
+                showProgress: false
+            );
 
             var cancellationToken = context.UserCancellationToken;
-            var rehydrated = await viewModel.DefinitionItem.TryRehydrateAsync(_workspace.CurrentSolution, cancellationToken).ConfigureAwait(false);
+            var rehydrated = await viewModel
+                .DefinitionItem.TryRehydrateAsync(_workspace.CurrentSolution, cancellationToken)
+                .ConfigureAwait(false);
             if (rehydrated == null)
                 return;
 
-            await _streamingFindUsagesPresenter.TryPresentLocationOrNavigateIfOneAsync(
-                _threadingContext,
-                _workspace,
-                string.Format(CultureInfo.InvariantCulture, EditorFeaturesResources._0_declarations, viewModel.DisplayContent),
-                ImmutableArray.Create<DefinitionItem>(rehydrated),
-                cancellationToken).ConfigureAwait(false);
+            await _streamingFindUsagesPresenter
+                .TryPresentLocationOrNavigateIfOneAsync(
+                    _threadingContext,
+                    _workspace,
+                    string.Format(
+                        CultureInfo.InvariantCulture,
+                        EditorFeaturesResources._0_declarations,
+                        viewModel.DisplayContent
+                    ),
+                    ImmutableArray.Create<DefinitionItem>(rehydrated),
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
         }
 
         private void TargetsSubmenu_OnOpen(object sender, RoutedEventArgs e)

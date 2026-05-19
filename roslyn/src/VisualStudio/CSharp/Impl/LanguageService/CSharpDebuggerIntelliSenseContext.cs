@@ -33,17 +33,20 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.LanguageService
             ITextBuffer contextBuffer,
             TextSpan[] currentStatementSpan,
             IComponentModel componentModel,
-            IServiceProvider serviceProvider)
-            : base(view,
+            IServiceProvider serviceProvider
+        )
+            : base(
+                view,
                 vsTextView,
                 debuggerBuffer,
                 contextBuffer,
                 currentStatementSpan,
                 componentModel,
                 serviceProvider,
-                componentModel.GetService<IContentTypeRegistryService>().GetContentType(ContentTypeNames.CSharpContentType))
-        {
-        }
+                componentModel
+                    .GetService<IContentTypeRegistryService>()
+                    .GetContentType(ContentTypeNames.CSharpContentType)
+            ) { }
 
         // Test constructor
         internal CSharpDebuggerIntelliSenseContext(
@@ -51,35 +54,42 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.LanguageService
             ITextBuffer contextBuffer,
             TextSpan[] currentStatementSpan,
             IComponentModel componentModel,
-            bool immediateWindow)
-            : base(view,
+            bool immediateWindow
+        )
+            : base(
+                view,
                 contextBuffer,
                 currentStatementSpan,
                 componentModel,
-                componentModel.GetService<IContentTypeRegistryService>().GetContentType(ContentTypeNames.CSharpContentType),
-                immediateWindow)
-        {
-        }
+                componentModel
+                    .GetService<IContentTypeRegistryService>()
+                    .GetContentType(ContentTypeNames.CSharpContentType),
+                immediateWindow
+            ) { }
 
         protected override int GetAdjustedContextPoint(int contextPoint, Document document)
         {
             // Determine the position in the buffer at which to end the tracking span representing
-            // the part of the imaginary buffer before the text in the view. 
+            // the part of the imaginary buffer before the text in the view.
             var tree = document.GetSyntaxTreeSynchronously(CancellationToken.None);
             var token = tree.FindTokenOnLeftOfPosition(contextPoint, CancellationToken.None);
 
             // Special case to handle class designer because it asks for debugger IntelliSense using
             // spans between members.
-            if (contextPoint > token.Span.End &&
-                token.IsKindOrHasMatchingText(SyntaxKind.CloseBraceToken) &&
-                token.Parent.IsKind(SyntaxKind.Block) &&
-                token.Parent.Parent is MemberDeclarationSyntax)
+            if (
+                contextPoint > token.Span.End
+                && token.IsKindOrHasMatchingText(SyntaxKind.CloseBraceToken)
+                && token.Parent.IsKind(SyntaxKind.Block)
+                && token.Parent.Parent is MemberDeclarationSyntax
+            )
             {
                 return contextPoint;
             }
 
-            if (token.IsKindOrHasMatchingText(SyntaxKind.CloseBraceToken) &&
-                token.Parent.IsKind(SyntaxKind.Block))
+            if (
+                token.IsKindOrHasMatchingText(SyntaxKind.CloseBraceToken)
+                && token.Parent.IsKind(SyntaxKind.Block)
+            )
             {
                 return token.SpanStart;
             }
@@ -87,18 +97,29 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.LanguageService
             return token.FullSpan.End;
         }
 
-        protected override ITrackingSpan GetPreviousStatementBufferAndSpan(int contextPoint, Document document)
+        protected override ITrackingSpan GetPreviousStatementBufferAndSpan(
+            int contextPoint,
+            Document document
+        )
         {
-            var previousTrackingSpan = ContextBuffer.CurrentSnapshot.CreateTrackingSpan(Span.FromBounds(0, contextPoint), SpanTrackingMode.EdgeNegative);
+            var previousTrackingSpan = ContextBuffer.CurrentSnapshot.CreateTrackingSpan(
+                Span.FromBounds(0, contextPoint),
+                SpanTrackingMode.EdgeNegative
+            );
 
             // terminate the previous expression/statement
             var buffer = ProjectionBufferFactoryService.CreateProjectionBuffer(
                 projectionEditResolver: null,
                 sourceSpans: new object[] { previousTrackingSpan, this.StatementTerminator },
                 options: ProjectionBufferOptions.None,
-                contentType: this.ContentType);
+                contentType: this.ContentType
+            );
 
-            return buffer.CurrentSnapshot.CreateTrackingSpan(0, buffer.CurrentSnapshot.Length, SpanTrackingMode.EdgeNegative);
+            return buffer.CurrentSnapshot.CreateTrackingSpan(
+                0,
+                buffer.CurrentSnapshot.Length,
+                SpanTrackingMode.EdgeNegative
+            );
         }
 
         public override bool CompletionStartsOnQuestionMark

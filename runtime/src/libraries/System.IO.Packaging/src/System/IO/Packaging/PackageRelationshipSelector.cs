@@ -3,7 +3,7 @@
 
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;                  // for Debug.Assert
+using System.Diagnostics; // for Debug.Assert
 
 namespace System.IO.Packaging
 {
@@ -28,7 +28,11 @@ namespace System.IO.Packaging
         /// <exception cref="ArgumentException">If PackageRelationshipSelectorType.Type and selection criteria is not valid relationship type</exception>
         /// <exception cref="ArgumentException">If sourceUri is not "/" to indicate the PackageRoot, then it must conform to the
         /// valid PartUri syntax</exception>
-        public PackageRelationshipSelector(Uri sourceUri, PackageRelationshipSelectorType selectorType, string selectionCriteria)
+        public PackageRelationshipSelector(
+            Uri sourceUri,
+            PackageRelationshipSelectorType selectorType,
+            string selectionCriteria
+        )
         {
             if (sourceUri is null)
             {
@@ -40,15 +44,22 @@ namespace System.IO.Packaging
             }
 
             //If the sourceUri is not equal to "/", it must be a valid part name.
-            if (Uri.Compare(sourceUri, PackUriHelper.PackageRootUri, UriComponents.SerializationInfoString, UriFormat.UriEscaped, StringComparison.Ordinal) != 0)
+            if (
+                Uri.Compare(
+                    sourceUri,
+                    PackUriHelper.PackageRootUri,
+                    UriComponents.SerializationInfoString,
+                    UriFormat.UriEscaped,
+                    StringComparison.Ordinal
+                ) != 0
+            )
                 sourceUri = PackUriHelper.ValidatePartUri(sourceUri);
 
             //selectionCriteria is tested here as per the value of the selectorType.
             //If selectionCriteria is empty string we will throw the appropriate error message.
             if (selectorType == PackageRelationshipSelectorType.Type)
                 InternalRelationshipCollection.ThrowIfInvalidRelationshipType(selectionCriteria);
-            else
-            if (selectorType == PackageRelationshipSelectorType.Id)
+            else if (selectorType == PackageRelationshipSelectorType.Id)
                 InternalRelationshipCollection.ThrowIfInvalidXsdId(selectionCriteria);
             else
                 throw new ArgumentOutOfRangeException(nameof(selectorType));
@@ -68,12 +79,8 @@ namespace System.IO.Packaging
         /// <value>PackagePart</value>
         public Uri SourceUri
         {
-            get
-            {
-                return _sourceUri;
-            }
+            get { return _sourceUri; }
         }
-
 
         /// <summary>
         /// Enumeration value indicating the interpretations of the SelectionCriteria.
@@ -81,12 +88,8 @@ namespace System.IO.Packaging
         /// <value></value>
         public PackageRelationshipSelectorType SelectorType
         {
-            get
-            {
-                return _selectorType;
-            }
+            get { return _selectorType; }
         }
-
 
         /// <summary>
         /// Selection Criteria - actual value (could be ID or type) on which the selection is based
@@ -94,12 +97,8 @@ namespace System.IO.Packaging
         /// <value></value>
         public string SelectionCriteria
         {
-            get
-            {
-                return _selectionCriteria;
-            }
+            get { return _selectionCriteria; }
         }
-
 
         #endregion Public Properties
 
@@ -143,14 +142,22 @@ namespace System.IO.Packaging
                 case PackageRelationshipSelectorType.Type:
                     if (SourceUri.Equals(PackUriHelper.PackageRootUri))
                     {
-                        foreach (PackageRelationship r in package.GetRelationshipsByType(SelectionCriteria))
+                        foreach (
+                            PackageRelationship r in package.GetRelationshipsByType(
+                                SelectionCriteria
+                            )
+                        )
                             relationships.Add(r);
                     }
                     else
                     {
                         if (package.PartExists(SourceUri))
                         {
-                            foreach (PackageRelationship r in package.GetPart(SourceUri).GetRelationshipsByType(SelectionCriteria))
+                            foreach (
+                                PackageRelationship r in package
+                                    .GetPart(SourceUri)
+                                    .GetRelationshipsByType(SelectionCriteria)
+                            )
                                 relationships.Add(r);
                         }
                     }

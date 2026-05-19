@@ -15,21 +15,11 @@ namespace Microsoft.DotNet.Build.Tasks
             get { return _log ??= new TaskLoggingHelper(this); }
         }
 
-        public BuildTask()
-        {
-        }
+        public BuildTask() { }
 
-        public IBuildEngine BuildEngine
-        {
-            get;
-            set;
-        }
+        public IBuildEngine BuildEngine { get; set; }
 
-        public ITaskHost HostObject
-        {
-            get;
-            set;
-        }
+        public ITaskHost HostObject { get; set; }
 
         public abstract bool Execute();
     }

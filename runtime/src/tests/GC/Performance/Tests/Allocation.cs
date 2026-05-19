@@ -8,7 +8,7 @@ using System.Runtime.InteropServices;
 //Should be run with server GC
 
 class Allocation
-{     
+{
     static void Main(string[] args)
     {
         if ((args.Length > 0) && (args.Length < 2))
@@ -41,7 +41,6 @@ class Allocation
                 return;
             }
         }
-
 
         //check if running on server GC:
         if (!System.Runtime.GCSettings.IsServerGC)
@@ -80,9 +79,5 @@ class Allocation
         Console.WriteLine("gen0: " + GC.CollectionCount(0));
         Console.WriteLine("gen1: " + GC.CollectionCount(1));
         Console.WriteLine("gen2: " + GC.CollectionCount(2));
-
     }
-
 }
-
-

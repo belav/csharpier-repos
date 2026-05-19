@@ -19,8 +19,8 @@ public abstract class OrdersContextBase : DbContext
     public DbSet<OrderLine> OrderLines { get; set; }
     public DbSet<Product> Products { get; set; }
 
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        => ConfigureProvider(optionsBuilder.UseInternalServiceProvider(_serviceProvider));
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) =>
+        ConfigureProvider(optionsBuilder.UseInternalServiceProvider(_serviceProvider));
 
     protected abstract void ConfigureProvider(DbContextOptionsBuilder optionsBuilder);
 }

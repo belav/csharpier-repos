@@ -45,14 +45,16 @@ namespace System.Xml.Xsl.Runtime
         /// Reposition the navigator to the next following node (inc. descendants); skip over filtered nodes.
         /// If there are no matching nodes, then return false.
         /// </summary>
-        public abstract bool MoveToFollowing(XPathNavigator navigator, XPathNavigator? navigatorEnd);
+        public abstract bool MoveToFollowing(
+            XPathNavigator navigator,
+            XPathNavigator? navigatorEnd
+        );
 
         /// <summary>
         /// Return true if the navigator's current node matches the filter condition.
         /// </summary>
         public abstract bool IsFiltered(XPathNavigator navigator);
     }
-
 
     /// <summary>
     /// Filters any non-element and any element with a non-matching local name or namespace uri.
@@ -128,7 +130,6 @@ namespace System.Xml.Xsl.Runtime
         }
     }
 
-
     /// <summary>
     /// Filters any node not of the specified type (type may not be attribute or namespace).
     /// </summary>
@@ -146,7 +147,9 @@ namespace System.Xml.Xsl.Runtime
             var filters = new XmlNavigatorFilter[(int)XPathNodeType.Comment + 1];
             filters[(int)XPathNodeType.Element] = new XmlNavTypeFilter(XPathNodeType.Element);
             filters[(int)XPathNodeType.Text] = new XmlNavTypeFilter(XPathNodeType.Text);
-            filters[(int)XPathNodeType.ProcessingInstruction] = new XmlNavTypeFilter(XPathNodeType.ProcessingInstruction);
+            filters[(int)XPathNodeType.ProcessingInstruction] = new XmlNavTypeFilter(
+                XPathNodeType.ProcessingInstruction
+            );
             filters[(int)XPathNodeType.Comment] = new XmlNavTypeFilter(XPathNodeType.Comment);
             return filters;
         }
@@ -165,7 +168,9 @@ namespace System.Xml.Xsl.Runtime
         /// </summary>
         private XmlNavTypeFilter(XPathNodeType nodeType)
         {
-            Debug.Assert(nodeType != XPathNodeType.Attribute && nodeType != XPathNodeType.Namespace);
+            Debug.Assert(
+                nodeType != XPathNodeType.Attribute && nodeType != XPathNodeType.Namespace
+            );
             _nodeType = nodeType;
             _mask = XPathNavigator.GetContentKindMask(nodeType);
         }
@@ -219,7 +224,6 @@ namespace System.Xml.Xsl.Runtime
         }
     }
 
-
     /// <summary>
     /// Filters all attribute nodes.
     /// </summary>
@@ -238,9 +242,7 @@ namespace System.Xml.Xsl.Runtime
         /// <summary>
         /// Constructor.
         /// </summary>
-        private XmlNavAttrFilter()
-        {
-        }
+        private XmlNavAttrFilter() { }
 
         /// <summary>
         /// Reposition the navigator on the first non-attribute child.
@@ -291,7 +293,6 @@ namespace System.Xml.Xsl.Runtime
         }
     }
 
-
     /// <summary>
     /// Never filter nodes.
     /// </summary>
@@ -310,9 +311,7 @@ namespace System.Xml.Xsl.Runtime
         /// <summary>
         /// Constructor.
         /// </summary>
-        private XmlNavNeverFilter()
-        {
-        }
+        private XmlNavNeverFilter() { }
 
         /// <summary>
         /// Reposition the navigator on the first child (attribute or non-attribute).

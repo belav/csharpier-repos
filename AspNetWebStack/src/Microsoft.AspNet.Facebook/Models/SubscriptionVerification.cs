@@ -26,7 +26,11 @@ namespace Microsoft.AspNet.Facebook.Models
         /// <value>
         /// The verify_token.
         /// </value>
-        [SuppressMessage("Microsoft.Naming", "CA1707:IdentifiersShouldNotContainUnderscores", Justification = "This is a shipped API")]
+        [SuppressMessage(
+            "Microsoft.Naming",
+            "CA1707:IdentifiersShouldNotContainUnderscores",
+            Justification = "This is a shipped API"
+        )]
         public string Verify_Token { get; set; }
 
         /// <summary>

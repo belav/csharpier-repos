@@ -14,10 +14,7 @@ namespace System.Net.NetworkInformation
 
         public override IPAddress Address
         {
-            get
-            {
-                return _address;
-            }
+            get { return _address; }
         }
     }
 }

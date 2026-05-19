@@ -7,16 +7,16 @@
 namespace System.Net
 {
     using System;
-    using System.Reflection;
-    using System.Net.Sockets;
-    using System.Diagnostics;
-    using System.Security.Permissions;
     using System.ComponentModel;
+    using System.Diagnostics;
     using System.Globalization;
-    using System.Text;
-    using System.Runtime.Versioning;
-    using System.Threading;
     using System.Net.Configuration;
+    using System.Net.Sockets;
+    using System.Reflection;
+    using System.Runtime.Versioning;
+    using System.Security.Permissions;
+    using System.Text;
+    using System.Threading;
 
     internal enum NetworkingPerfCounterName
     {
@@ -32,12 +32,11 @@ namespace System.Net
         HttpWebRequestAvgQueueTime,
         HttpWebRequestAvgQueueTimeBase,
         HttpWebRequestAborted,
-        HttpWebRequestFailed
+        HttpWebRequestFailed,
     }
 
     internal sealed class NetworkingPerfCounters
     {
-
         private class CounterPair
         {
             private PerformanceCounter instanceCounter;
@@ -66,21 +65,22 @@ namespace System.Net
         private const int instanceNameMaxLength = 127;
         private const string categoryName = ".NET CLR Networking 4.0.0.0";
         private const string globalInstanceName = "_Global_";
-        private static readonly string[] counterNames = {
-                                                            "Connections Established",
-                                                            "Bytes Received",
-                                                            "Bytes Sent",
-                                                            "Datagrams Received",
-                                                            "Datagrams Sent",
-                                                            "HttpWebRequests Created/Sec",
-                                                            "HttpWebRequests Average Lifetime",
-                                                            "HttpWebRequests Average Lifetime Base",
-                                                            "HttpWebRequests Queued/Sec",
-                                                            "HttpWebRequests Average Queue Time",
-                                                            "HttpWebRequests Average Queue Time Base",
-                                                            "HttpWebRequests Aborted/Sec",
-                                                            "HttpWebRequests Failed/Sec",
-                                                        };
+        private static readonly string[] counterNames =
+        {
+            "Connections Established",
+            "Bytes Received",
+            "Bytes Sent",
+            "Datagrams Received",
+            "Datagrams Sent",
+            "HttpWebRequests Created/Sec",
+            "HttpWebRequests Average Lifetime",
+            "HttpWebRequests Average Lifetime Base",
+            "HttpWebRequests Queued/Sec",
+            "HttpWebRequests Average Queue Time",
+            "HttpWebRequests Average Queue Time Base",
+            "HttpWebRequests Aborted/Sec",
+            "HttpWebRequests Failed/Sec",
+        };
 
         private static volatile NetworkingPerfCounters instance;
         private static object lockObject = new object();
@@ -143,11 +143,13 @@ namespace System.Net
                 // in case there is something wrong with the counter instance, just log and continue
                 catch (InvalidOperationException e)
                 {
-                    if (Logging.On) Logging.Exception(Logging.Web, "NetworkingPerfCounters", "Increment", e);
+                    if (Logging.On)
+                        Logging.Exception(Logging.Web, "NetworkingPerfCounters", "Increment", e);
                 }
                 catch (Win32Exception e)
                 {
-                    if (Logging.On) Logging.Exception(Logging.Web, "NetworkingPerfCounters", "Increment", e);
+                    if (Logging.On)
+                        Logging.Exception(Logging.Web, "NetworkingPerfCounters", "Increment", e);
                 }
             }
         }
@@ -180,23 +182,35 @@ namespace System.Net
 
         private void Initialize(object state)
         {
-            if (Logging.On) Logging.PrintInfo(Logging.Web, SR.GetString(SR.net_perfcounter_initialization_started));
+            if (Logging.On)
+                Logging.PrintInfo(
+                    Logging.Web,
+                    SR.GetString(SR.net_perfcounter_initialization_started)
+                );
 
-            PerformanceCounterPermission perfCounterPermission = new PerformanceCounterPermission(PermissionState.Unrestricted);
+            PerformanceCounterPermission perfCounterPermission = new PerformanceCounterPermission(
+                PermissionState.Unrestricted
+            );
             perfCounterPermission.Assert();
             try
             {
                 if (!PerformanceCounterCategory.Exists(categoryName))
                 {
                     // if the perf. counter category doesn't exist, just log this information and exit.
-                    if (Logging.On) Logging.PrintError(Logging.Web, SR.GetString(SR.net_perfcounter_nocategory, categoryName));
+                    if (Logging.On)
+                        Logging.PrintError(
+                            Logging.Web,
+                            SR.GetString(SR.net_perfcounter_nocategory, categoryName)
+                        );
                     return;
                 }
 
                 string instanceName = GetInstanceName();
 
-                Debug.Assert(counterNames.Length == Enum.GetValues(typeof(NetworkingPerfCounterName)).Length,
-                    "The number of NetworkingPerfCounterName items must match the number of CounterNames");
+                Debug.Assert(
+                    counterNames.Length == Enum.GetValues(typeof(NetworkingPerfCounterName)).Length,
+                    "The number of NetworkingPerfCounterName items must match the number of CounterNames"
+                );
 
                 // create the counters, this will check for the right permissions (false)
                 // means the counter is not readonly (it's read/write) and cache them while
@@ -209,19 +223,23 @@ namespace System.Net
 
                 AppDomain.CurrentDomain.DomainUnload += new EventHandler(UnloadEventHandler);
                 AppDomain.CurrentDomain.ProcessExit += new EventHandler(ExitEventHandler);
-                AppDomain.CurrentDomain.UnhandledException += new UnhandledExceptionEventHandler(ExceptionEventHandler);
+                AppDomain.CurrentDomain.UnhandledException += new UnhandledExceptionEventHandler(
+                    ExceptionEventHandler
+                );
 
                 initSuccessful = true;
             }
             catch (Win32Exception e)
             {
-                if (Logging.On) Logging.Exception(Logging.Web, "NetworkingPerfCounters", "Initialize", e);
+                if (Logging.On)
+                    Logging.Exception(Logging.Web, "NetworkingPerfCounters", "Initialize", e);
                 Cleanup();
                 return;
             }
             catch (InvalidOperationException e)
             {
-                if (Logging.On) Logging.Exception(Logging.Web, "NetworkingPerfCounters", "Initialize", e);
+                if (Logging.On)
+                    Logging.Exception(Logging.Web, "NetworkingPerfCounters", "Initialize", e);
                 Cleanup();
                 return;
             }
@@ -235,11 +253,17 @@ namespace System.Net
                 {
                     if (initSuccessful)
                     {
-                        Logging.PrintInfo(Logging.Web, SR.GetString(SR.net_perfcounter_initialized_success));
+                        Logging.PrintInfo(
+                            Logging.Web,
+                            SR.GetString(SR.net_perfcounter_initialized_success)
+                        );
                     }
                     else
                     {
-                        Logging.PrintInfo(Logging.Web, SR.GetString(SR.net_perfcounter_initialized_error));
+                        Logging.PrintInfo(
+                            Logging.Web,
+                            SR.GetString(SR.net_perfcounter_initialized_error)
+                        );
                     }
                 }
             }
@@ -254,7 +278,11 @@ namespace System.Net
                 // since initialization may take a long time. Therefore we should not block.
                 if (!ThreadPool.QueueUserWorkItem(instance.Initialize))
                 {
-                    if (Logging.On) Logging.PrintError(Logging.Web, SR.GetString(SR.net_perfcounter_cant_queue_workitem));
+                    if (Logging.On)
+                        Logging.PrintError(
+                            Logging.Web,
+                            SR.GetString(SR.net_perfcounter_cant_queue_workitem)
+                        );
                 }
             }
         }
@@ -269,8 +297,12 @@ namespace System.Net
             // we would use the ctor without params, as for the instance counters, the global counter
             // would not be initialized => only when we increment it the first time it gets initialized. But
             // at that point, we're no more under the permission assertion.
-            PerformanceCounter globalCounter = new PerformanceCounter(categoryName, counterName,
-                globalInstanceName, false);
+            PerformanceCounter globalCounter = new PerformanceCounter(
+                categoryName,
+                counterName,
+                globalInstanceName,
+                false
+            );
 
             // for instance counters we use the default ctor, since we also need to set the lifetime. The
             // counter gets actually initialized when we set RawValue.
@@ -336,13 +368,23 @@ namespace System.Net
                                 // in case there is something wrong with the counter instance, just log.
                                 catch (InvalidOperationException e)
                                 {
-                                    if (Logging.On) Logging.Exception(Logging.Web, "NetworkingPerfCounters",
-                                        "Cleanup", e);
+                                    if (Logging.On)
+                                        Logging.Exception(
+                                            Logging.Web,
+                                            "NetworkingPerfCounters",
+                                            "Cleanup",
+                                            e
+                                        );
                                 }
                                 catch (Win32Exception e)
                                 {
-                                    if (Logging.On) Logging.Exception(Logging.Web, "NetworkingPerfCounters",
-                                        "Cleanup", e);
+                                    if (Logging.On)
+                                        Logging.Exception(
+                                            Logging.Web,
+                                            "NetworkingPerfCounters",
+                                            "Cleanup",
+                                            e
+                                        );
                                 }
                             }
                         }
@@ -356,14 +398,18 @@ namespace System.Net
         private static string GetInstanceName()
         {
             string friendlyName = ReplaceInvalidChars(AppDomain.CurrentDomain.FriendlyName);
-            string postfix = VersioningHelper.MakeVersionSafeName(string.Empty, ResourceScope.Machine,
-                ResourceScope.AppDomain);
+            string postfix = VersioningHelper.MakeVersionSafeName(
+                string.Empty,
+                ResourceScope.Machine,
+                ResourceScope.AppDomain
+            );
 
             string result = friendlyName + postfix;
 
             if (result.Length > instanceNameMaxLength)
             {
-                result = friendlyName.Substring(0, instanceNameMaxLength - postfix.Length) + postfix;
+                result =
+                    friendlyName.Substring(0, instanceNameMaxLength - postfix.Length) + postfix;
             }
 
             return result;
@@ -416,4 +462,3 @@ namespace System.Net
         }
     }
 }
-

@@ -11,7 +11,11 @@ namespace Microsoft.CodeAnalysis
 {
     internal static class GreenNodeExtensions
     {
-        public static TNode WithAnnotationsGreen<TNode>(this TNode node, IEnumerable<SyntaxAnnotation> annotations) where TNode : GreenNode
+        public static TNode WithAnnotationsGreen<TNode>(
+            this TNode node,
+            IEnumerable<SyntaxAnnotation> annotations
+        )
+            where TNode : GreenNode
         {
             var newAnnotations = ArrayBuilder<SyntaxAnnotation>.GetInstance();
             foreach (var candidate in annotations)
@@ -41,7 +45,11 @@ namespace Microsoft.CodeAnalysis
             }
         }
 
-        public static TNode WithAdditionalAnnotationsGreen<TNode>(this TNode node, IEnumerable<SyntaxAnnotation>? annotations) where TNode : GreenNode
+        public static TNode WithAdditionalAnnotationsGreen<TNode>(
+            this TNode node,
+            IEnumerable<SyntaxAnnotation>? annotations
+        )
+            where TNode : GreenNode
         {
             var existingAnnotations = node.GetAnnotations();
 
@@ -72,7 +80,11 @@ namespace Microsoft.CodeAnalysis
             }
         }
 
-        public static TNode WithoutAnnotationsGreen<TNode>(this TNode node, IEnumerable<SyntaxAnnotation>? annotations) where TNode : GreenNode
+        public static TNode WithoutAnnotationsGreen<TNode>(
+            this TNode node,
+            IEnumerable<SyntaxAnnotation>? annotations
+        )
+            where TNode : GreenNode
         {
             var existingAnnotations = node.GetAnnotations();
 
@@ -107,12 +119,17 @@ namespace Microsoft.CodeAnalysis
             }
         }
 
-        public static TNode WithDiagnosticsGreen<TNode>(this TNode node, DiagnosticInfo[]? diagnostics) where TNode : GreenNode
+        public static TNode WithDiagnosticsGreen<TNode>(
+            this TNode node,
+            DiagnosticInfo[]? diagnostics
+        )
+            where TNode : GreenNode
         {
             return (TNode)node.SetDiagnostics(diagnostics);
         }
 
-        public static TNode WithoutDiagnosticsGreen<TNode>(this TNode node) where TNode : GreenNode
+        public static TNode WithoutDiagnosticsGreen<TNode>(this TNode node)
+            where TNode : GreenNode
         {
             var current = node.GetDiagnostics();
             if (current == null || current.Length == 0)

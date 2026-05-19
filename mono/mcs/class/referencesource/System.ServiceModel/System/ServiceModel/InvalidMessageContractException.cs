@@ -10,25 +10,15 @@ namespace System.ServiceModel
     public class InvalidMessageContractException : SystemException
     {
         public InvalidMessageContractException()
-            : base()
-        {
-        }
+            : base() { }
 
         public InvalidMessageContractException(String message)
-            : base(message)
-        {
-        }
+            : base(message) { }
 
         public InvalidMessageContractException(String message, Exception innerException)
-            : base(message, innerException)
-        {
-        }
+            : base(message, innerException) { }
 
         protected InvalidMessageContractException(SerializationInfo info, StreamingContext context)
-            : base(info, context)
-        {
-        }
-
+            : base(info, context) { }
     }
 }
-

@@ -12,7 +12,9 @@ namespace System.ServiceModel.Channels
         const string PropertyName = "CorrelationCallbackMessageProperty";
         CorrelationDataMessageProperty data;
         List<string> neededData;
-        static ReadOnlyCollection<string> emptyNeededData = new ReadOnlyCollection<string>(new List<string>(0));
+        static ReadOnlyCollection<string> emptyNeededData = new ReadOnlyCollection<string>(
+            new List<string>(0)
+        );
 
         protected CorrelationCallbackMessageProperty(ICollection<string> neededData)
         {
@@ -77,7 +79,10 @@ namespace System.ServiceModel.Channels
             return TryGet(message.Properties, out property);
         }
 
-        public static bool TryGet(MessageProperties properties, out CorrelationCallbackMessageProperty property)
+        public static bool TryGet(
+            MessageProperties properties,
+            out CorrelationCallbackMessageProperty property
+        )
         {
             if (properties == null)
             {
@@ -120,7 +125,12 @@ namespace System.ServiceModel.Channels
             }
         }
 
-        public IAsyncResult BeginFinalizeCorrelation(Message message, TimeSpan timeout, AsyncCallback callback, object state)
+        public IAsyncResult BeginFinalizeCorrelation(
+            Message message,
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             if (message == null)
             {
@@ -130,10 +140,17 @@ namespace System.ServiceModel.Channels
             if (timeout < TimeSpan.Zero)
             {
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentOutOfRangeException("timeout", SR.GetString(SR.SFxTimeoutOutOfRange0)));
+                    new ArgumentOutOfRangeException(
+                        "timeout",
+                        SR.GetString(SR.SFxTimeoutOutOfRange0)
+                    )
+                );
             }
 
-            if (this.data != null && !message.Properties.ContainsKey(CorrelationDataMessageProperty.Name))
+            if (
+                this.data != null
+                && !message.Properties.ContainsKey(CorrelationDataMessageProperty.Name)
+            )
             {
                 message.Properties[CorrelationDataMessageProperty.Name] = this.data;
             }
@@ -163,10 +180,17 @@ namespace System.ServiceModel.Channels
             if (timeout < TimeSpan.Zero)
             {
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentOutOfRangeException("timeout", SR.GetString(SR.SFxTimeoutOutOfRange0)));
+                    new ArgumentOutOfRangeException(
+                        "timeout",
+                        SR.GetString(SR.SFxTimeoutOutOfRange0)
+                    )
+                );
             }
 
-            if (this.data != null && !message.Properties.ContainsKey(CorrelationDataMessageProperty.Name))
+            if (
+                this.data != null
+                && !message.Properties.ContainsKey(CorrelationDataMessageProperty.Name)
+            )
             {
                 message.Properties[CorrelationDataMessageProperty.Name] = this.data;
             }
@@ -174,7 +198,12 @@ namespace System.ServiceModel.Channels
             return this.OnFinalizeCorrelation(message, timeout);
         }
 
-        protected abstract IAsyncResult OnBeginFinalizeCorrelation(Message message, TimeSpan timeout, AsyncCallback callback, object state);
+        protected abstract IAsyncResult OnBeginFinalizeCorrelation(
+            Message message,
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        );
         protected abstract Message OnEndFinalizeCorrelation(IAsyncResult result);
         protected abstract Message OnFinalizeCorrelation(Message message, TimeSpan timeout);
     }

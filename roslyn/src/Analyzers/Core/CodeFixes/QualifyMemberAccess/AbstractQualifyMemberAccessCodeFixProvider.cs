@@ -14,16 +14,21 @@ using Microsoft.CodeAnalysis.Shared.Extensions;
 
 namespace Microsoft.CodeAnalysis.QualifyMemberAccess
 {
-    internal abstract class AbstractQualifyMemberAccessCodeFixprovider<TSimpleNameSyntax, TInvocationSyntax>
-        : SyntaxEditorBasedCodeFixProvider
+    internal abstract class AbstractQualifyMemberAccessCodeFixprovider<
+        TSimpleNameSyntax,
+        TInvocationSyntax
+    > : SyntaxEditorBasedCodeFixProvider
         where TSimpleNameSyntax : SyntaxNode
         where TInvocationSyntax : SyntaxNode
     {
         protected abstract string GetTitle();
-        protected abstract TSimpleNameSyntax? GetNode(Diagnostic diagnostic, CancellationToken cancellationToken);
+        protected abstract TSimpleNameSyntax? GetNode(
+            Diagnostic diagnostic,
+            CancellationToken cancellationToken
+        );
 
-        public sealed override ImmutableArray<string> FixableDiagnosticIds
-            => ImmutableArray.Create(IDEDiagnosticIds.AddThisOrMeQualificationDiagnosticId);
+        public sealed override ImmutableArray<string> FixableDiagnosticIds =>
+            ImmutableArray.Create(IDEDiagnosticIds.AddThisOrMeQualificationDiagnosticId);
 
         public override Task RegisterCodeFixesAsync(CodeFixContext context)
         {
@@ -33,8 +38,12 @@ namespace Microsoft.CodeAnalysis.QualifyMemberAccess
         }
 
         protected override Task FixAllAsync(
-            Document document, ImmutableArray<Diagnostic> diagnostics,
-            SyntaxEditor editor, CodeActionOptionsProvider fallbackOptions, CancellationToken cancellationToken)
+            Document document,
+            ImmutableArray<Diagnostic> diagnostics,
+            SyntaxEditor editor,
+            CodeActionOptionsProvider fallbackOptions,
+            CancellationToken cancellationToken
+        )
         {
             var generator = document.GetRequiredLanguageService<SyntaxGenerator>();
 
@@ -43,10 +52,11 @@ namespace Microsoft.CodeAnalysis.QualifyMemberAccess
                 var node = GetNode(diagnostic, cancellationToken);
                 if (node != null)
                 {
-                    var qualifiedAccess =
-                        generator.MemberAccessExpression(
+                    var qualifiedAccess = generator
+                        .MemberAccessExpression(
                             generator.ThisExpression(),
-                            node.WithLeadingTrivia())
+                            node.WithLeadingTrivia()
+                        )
                         .WithLeadingTrivia(node.GetLeadingTrivia());
 
                     editor.ReplaceNode(node, qualifiedAccess);

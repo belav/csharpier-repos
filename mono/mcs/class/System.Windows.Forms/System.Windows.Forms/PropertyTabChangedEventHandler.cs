@@ -25,9 +25,7 @@
 
 // COMPLETE
 
-namespace System.Windows.Forms 
+namespace System.Windows.Forms
 {
-	public delegate void PropertyTabChangedEventHandler(object s, PropertyTabChangedEventArgs e);
+    public delegate void PropertyTabChangedEventHandler(object s, PropertyTabChangedEventArgs e);
 }
-
-

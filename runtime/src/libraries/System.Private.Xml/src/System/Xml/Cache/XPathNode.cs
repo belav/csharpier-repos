@@ -27,26 +27,25 @@ namespace MS.Internal.Xml.Cache
     /// </summary>
     internal struct XPathNode
     {
-        private XPathNodeInfoAtom _info;                           // Atomized node information
-        private ushort _idxSibling;                     // Page index of sibling node
-        private ushort _idxParent;                      // Page index of parent node
-        private ushort _idxSimilar;                     // Page index of next node in document order that has local name with same hashcode
-        private ushort _posOffset;                      // Line position offset of node (added to LinePositionBase)
-        private uint _props;                          // Node properties (broken down into bits below)
-        private string? _value;                          // String value of node
+        private XPathNodeInfoAtom _info; // Atomized node information
+        private ushort _idxSibling; // Page index of sibling node
+        private ushort _idxParent; // Page index of parent node
+        private ushort _idxSimilar; // Page index of next node in document order that has local name with same hashcode
+        private ushort _posOffset; // Line position offset of node (added to LinePositionBase)
+        private uint _props; // Node properties (broken down into bits below)
+        private string? _value; // String value of node
 
         private const uint NodeTypeMask = 0xF;
         private const uint HasAttributeBit = 0x10;
         private const uint HasContentChildBit = 0x20;
         private const uint HasElementChildBit = 0x40;
         private const uint HasCollapsedTextBit = 0x80;
-        private const uint AllowShortcutTagBit = 0x100;    // True if this is an element that allows shortcut tag syntax
-        private const uint HasNmspDeclsBit = 0x200;        // True if this is an element with namespace declarations declared on it
+        private const uint AllowShortcutTagBit = 0x100; // True if this is an element that allows shortcut tag syntax
+        private const uint HasNmspDeclsBit = 0x200; // True if this is an element with namespace declarations declared on it
 
-        private const uint LineNumberMask = 0x00FFFC00;    // 14 bits for line number offset (0 - 16K)
+        private const uint LineNumberMask = 0x00FFFC00; // 14 bits for line number offset (0 - 16K)
         private const int LineNumberShift = 10;
-        private const int CollapsedPositionShift = 24;    // 8 bits for collapsed text position offset (0 - 256)
-
+        private const int CollapsedPositionShift = 24; // 8 bits for collapsed text position offset (0 - 256)
 #if DEBUG
         public const int MaxLineNumberOffset = 0x20;
         public const int MaxLinePositionOffset = 0x20;
@@ -132,7 +131,10 @@ namespace MS.Internal.Xml.Cache
         /// </summary>
         public int LineNumber
         {
-            get { return _info.LineNumberBase + (int)((_props & LineNumberMask) >> LineNumberShift); }
+            get
+            {
+                return _info.LineNumberBase + (int)((_props & LineNumberMask) >> LineNumberShift);
+            }
         }
 
         /// <summary>
@@ -151,7 +153,10 @@ namespace MS.Internal.Xml.Cache
         {
             get
             {
-                Debug.Assert(HasCollapsedText, "Do not call CollapsedLinePosition unless HasCollapsedText is true.");
+                Debug.Assert(
+                    HasCollapsedText,
+                    "Do not call CollapsedLinePosition unless HasCollapsedText is true."
+                );
                 return LinePosition + (int)(_props >> CollapsedPositionShift);
             }
         }
@@ -208,10 +213,14 @@ namespace MS.Internal.Xml.Cache
         /// </summary>
         public bool NameMatch(string? localName, string namespaceName)
         {
-            Debug.Assert(localName == null || (object?)Document.NameTable.Get(localName) == (object)localName, "localName must be atomized.");
+            Debug.Assert(
+                localName == null
+                    || (object?)Document.NameTable.Get(localName) == (object)localName,
+                "localName must be atomized."
+            );
 
-            return (object)_info.LocalName == (object?)localName &&
-                   _info.NamespaceUri == namespaceName;
+            return (object)_info.LocalName == (object?)localName
+                && _info.NamespaceUri == namespaceName;
         }
 
         /// <summary>
@@ -220,11 +229,15 @@ namespace MS.Internal.Xml.Cache
         /// </summary>
         public bool ElementMatch(string? localName, string namespaceName)
         {
-            Debug.Assert(localName == null || (object?)Document.NameTable.Get(localName) == (object)localName, "localName must be atomized.");
+            Debug.Assert(
+                localName == null
+                    || (object?)Document.NameTable.Get(localName) == (object)localName,
+                "localName must be atomized."
+            );
 
-            return NodeType == XPathNodeType.Element &&
-                   (object)_info.LocalName == (object?)localName &&
-                   _info.NamespaceUri == namespaceName;
+            return NodeType == XPathNodeType.Element
+                && (object)_info.LocalName == (object?)localName
+                && _info.NamespaceUri == namespaceName;
         }
 
         /// <summary>
@@ -235,7 +248,9 @@ namespace MS.Internal.Xml.Cache
             get
             {
                 string localName = _info.LocalName;
-                return NodeType == XPathNodeType.Namespace && localName.Length == 3 && localName == "xml";
+                return NodeType == XPathNodeType.Namespace
+                    && localName.Length == 3
+                    && localName == "xml";
             }
         }
 
@@ -311,8 +326,13 @@ namespace MS.Internal.Xml.Cache
             get { return (_props & HasNmspDeclsBit) != 0; }
             set
             {
-                if (value) _props |= HasNmspDeclsBit;
-                else unchecked { _props &= (byte)~((uint)HasNmspDeclsBit); }
+                if (value)
+                    _props |= HasNmspDeclsBit;
+                else
+                    unchecked
+                    {
+                        _props &= (byte)~((uint)HasNmspDeclsBit);
+                    }
             }
         }
 
@@ -339,7 +359,6 @@ namespace MS.Internal.Xml.Cache
         {
             get { return _value; }
         }
-
 
         //-----------------------------------------------
         // Node construction
@@ -369,8 +388,14 @@ namespace MS.Internal.Xml.Cache
         /// </summary>
         public void SetLineInfoOffsets(int lineNumOffset, int linePosOffset)
         {
-            Debug.Assert(lineNumOffset >= 0 && lineNumOffset <= MaxLineNumberOffset, $"Line number offset too large or small: {lineNumOffset}");
-            Debug.Assert(linePosOffset >= 0 && linePosOffset <= MaxLinePositionOffset, $"Line position offset too large or small: {linePosOffset}");
+            Debug.Assert(
+                lineNumOffset >= 0 && lineNumOffset <= MaxLineNumberOffset,
+                $"Line number offset too large or small: {lineNumOffset}"
+            );
+            Debug.Assert(
+                linePosOffset >= 0 && linePosOffset <= MaxLinePositionOffset,
+                $"Line position offset too large or small: {linePosOffset}"
+            );
             _props |= ((uint)lineNumOffset << LineNumberShift);
             _posOffset = (ushort)linePosOffset;
         }
@@ -380,7 +405,10 @@ namespace MS.Internal.Xml.Cache
         /// </summary>
         public void SetCollapsedLineInfoOffset(int posOffset)
         {
-            Debug.Assert(posOffset >= 0 && posOffset <= MaxCollapsedPositionOffset, $"Collapsed text line position offset too large or small: {posOffset}");
+            Debug.Assert(
+                posOffset >= 0 && posOffset <= MaxCollapsedPositionOffset,
+                $"Collapsed text line position offset too large or small: {posOffset}"
+            );
             _props |= ((uint)posOffset << CollapsedPositionShift);
         }
 
@@ -434,18 +462,34 @@ namespace MS.Internal.Xml.Cache
         /// <summary>
         /// Link this node to its next sibling.  If "pageSibling" is different than the one stored in the InfoAtom, re-atomize.
         /// </summary>
-        public void SetSibling(XPathNodeInfoTable infoTable, XPathNode[] pageSibling, int idxSibling)
+        public void SetSibling(
+            XPathNodeInfoTable infoTable,
+            XPathNode[] pageSibling,
+            int idxSibling
+        )
         {
-            Debug.Assert(pageSibling != null && idxSibling != 0 && idxSibling <= ushort.MaxValue, "Bad argument");
+            Debug.Assert(
+                pageSibling != null && idxSibling != 0 && idxSibling <= ushort.MaxValue,
+                "Bad argument"
+            );
             Debug.Assert(_idxSibling == 0, "SetSibling should not be called more than once.");
             _idxSibling = (ushort)idxSibling;
 
             if (pageSibling != _info.SiblingPage)
             {
                 // Re-atomize the InfoAtom
-                _info = infoTable.Create(_info.LocalName, _info.NamespaceUri, _info.Prefix, _info.BaseUri,
-                                             _info.ParentPage, pageSibling, _info.SimilarElementPage,
-                                             _info.Document, _info.LineNumberBase, _info.LinePositionBase);
+                _info = infoTable.Create(
+                    _info.LocalName,
+                    _info.NamespaceUri,
+                    _info.Prefix,
+                    _info.BaseUri,
+                    _info.ParentPage,
+                    pageSibling,
+                    _info.SimilarElementPage,
+                    _info.Document,
+                    _info.LineNumberBase,
+                    _info.LinePositionBase
+                );
             }
         }
 
@@ -453,22 +497,40 @@ namespace MS.Internal.Xml.Cache
         /// Link this element to the next element in document order that shares a local name having the same hash code.
         /// If "pageSimilar" is different than the one stored in the InfoAtom, re-atomize.
         /// </summary>
-        public void SetSimilarElement(XPathNodeInfoTable infoTable, XPathNode[] pageSimilar, int idxSimilar)
+        public void SetSimilarElement(
+            XPathNodeInfoTable infoTable,
+            XPathNode[] pageSimilar,
+            int idxSimilar
+        )
         {
-            Debug.Assert(pageSimilar != null && idxSimilar != 0 && idxSimilar <= ushort.MaxValue, "Bad argument");
-            Debug.Assert(_idxSimilar == 0, "SetSimilarElement should not be called more than once.");
+            Debug.Assert(
+                pageSimilar != null && idxSimilar != 0 && idxSimilar <= ushort.MaxValue,
+                "Bad argument"
+            );
+            Debug.Assert(
+                _idxSimilar == 0,
+                "SetSimilarElement should not be called more than once."
+            );
             _idxSimilar = (ushort)idxSimilar;
 
             if (pageSimilar != _info.SimilarElementPage)
             {
                 // Re-atomize the InfoAtom
-                _info = infoTable.Create(_info.LocalName, _info.NamespaceUri, _info.Prefix, _info.BaseUri,
-                                             _info.ParentPage, _info.SiblingPage, pageSimilar,
-                                             _info.Document, _info.LineNumberBase, _info.LinePositionBase);
+                _info = infoTable.Create(
+                    _info.LocalName,
+                    _info.NamespaceUri,
+                    _info.Prefix,
+                    _info.BaseUri,
+                    _info.ParentPage,
+                    _info.SiblingPage,
+                    pageSimilar,
+                    _info.Document,
+                    _info.LineNumberBase,
+                    _info.LinePositionBase
+                );
             }
         }
     }
-
 
     /// <summary>
     /// A reference to a XPathNode is composed of two values: the page on which the node is located, and the node's

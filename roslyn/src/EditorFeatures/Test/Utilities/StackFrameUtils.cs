@@ -12,7 +12,10 @@ using Xunit;
 
 namespace Microsoft.CodeAnalysis.Editor.UnitTests.Utilities
 {
-    using StackFrameNodeOrToken = CodeAnalysis.EmbeddedLanguages.Common.EmbeddedSyntaxNodeOrToken<StackFrameKind, StackFrameNode>;
+    using StackFrameNodeOrToken = CodeAnalysis.EmbeddedLanguages.Common.EmbeddedSyntaxNodeOrToken<
+        StackFrameKind,
+        StackFrameNode
+    >;
     using StackFrameToken = CodeAnalysis.EmbeddedLanguages.Common.EmbeddedSyntaxToken<StackFrameKind>;
     using StackFrameTrivia = CodeAnalysis.EmbeddedLanguages.Common.EmbeddedSyntaxTrivia<StackFrameKind>;
 
@@ -42,7 +45,10 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Utilities
             AssertEx.NotNull(actual);
 
             Assert.Equal(expected.Kind, actual.Kind);
-            Assert.True(expected.ChildCount == actual.ChildCount, PrintChildDifference(expected, actual));
+            Assert.True(
+                expected.ChildCount == actual.ChildCount,
+                PrintChildDifference(expected, actual)
+            );
 
             for (var i = 0; i < expected.ChildCount; i++)
             {
@@ -118,7 +124,11 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Utilities
             AssertEqual(expected.TrailingTrivia, actual.TrailingTrivia, expected);
         }
 
-        public static void AssertEqual(ImmutableArray<StackFrameTrivia> expected, ImmutableArray<StackFrameTrivia> actual, StackFrameToken token)
+        public static void AssertEqual(
+            ImmutableArray<StackFrameTrivia> expected,
+            ImmutableArray<StackFrameTrivia> actual,
+            StackFrameToken token
+        )
         {
             var diffMessage = PrintDiff();
 
@@ -182,7 +192,9 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Utilities
             Assert.Equal(expected.VirtualChars.CreateString(), actual.VirtualChars.CreateString());
         }
 
-        public static IEnumerable<CodeAnalysis.EmbeddedLanguages.VirtualChars.VirtualCharSequence> Enumerate(StackFrameToken token)
+        public static IEnumerable<CodeAnalysis.EmbeddedLanguages.VirtualChars.VirtualCharSequence> Enumerate(
+            StackFrameToken token
+        )
         {
             foreach (var trivia in token.LeadingTrivia)
             {
@@ -197,7 +209,9 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Utilities
             }
         }
 
-        public static IEnumerable<CodeAnalysis.EmbeddedLanguages.VirtualChars.VirtualCharSequence> Enumerate(StackFrameNode node)
+        public static IEnumerable<CodeAnalysis.EmbeddedLanguages.VirtualChars.VirtualCharSequence> Enumerate(
+            StackFrameNode node
+        )
         {
             foreach (var nodeOrToken in node)
             {

@@ -22,6 +22,9 @@ namespace System.Data.Objects.DataClasses
         /// <param name="navigation">RelationshipNavigation to be set on new RelatedEnd</param>
         /// <param name="relationshipManager">RelationshipManager to use for creating the new end</param>
         /// <returns>Reference to the new collection or reference on the other end of the relationship</returns>
-        RelatedEnd CreateSourceEnd(RelationshipNavigation navigation, RelationshipManager relationshipManager);            
+        RelatedEnd CreateSourceEnd(
+            RelationshipNavigation navigation,
+            RelationshipManager relationshipManager
+        );
     }
 }

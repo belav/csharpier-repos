@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -35,101 +35,108 @@ using System.Xml;
 
 namespace System.ServiceModel.Channels
 {
-	[MonoTODO]
-	public class HttpsTransportBindingElement
-		: HttpTransportBindingElement, ITransportTokenAssertionProvider,
-		IPolicyExportExtension, IWsdlExportExtension
-	{
-		bool req_cli_cert = false;
+    [MonoTODO]
+    public class HttpsTransportBindingElement
+        : HttpTransportBindingElement,
+            ITransportTokenAssertionProvider,
+            IPolicyExportExtension,
+            IWsdlExportExtension
+    {
+        bool req_cli_cert = false;
 
-		public HttpsTransportBindingElement ()
-		{
-		}
+        public HttpsTransportBindingElement() { }
 
-		protected HttpsTransportBindingElement (
-			HttpsTransportBindingElement elementToBeCloned)
-			: base (elementToBeCloned)
-		{
-			req_cli_cert = elementToBeCloned.req_cli_cert;
-		}
+        protected HttpsTransportBindingElement(HttpsTransportBindingElement elementToBeCloned)
+            : base(elementToBeCloned)
+        {
+            req_cli_cert = elementToBeCloned.req_cli_cert;
+        }
 
-		public bool RequireClientCertificate {
-			get { return req_cli_cert; }
-			set { req_cli_cert = value; }
-		}
+        public bool RequireClientCertificate
+        {
+            get { return req_cli_cert; }
+            set { req_cli_cert = value; }
+        }
 
-		public override string Scheme {
-			get { return Uri.UriSchemeHttps; }
-		}
+        public override string Scheme
+        {
+            get { return Uri.UriSchemeHttps; }
+        }
 
-		public override IChannelFactory<TChannel> BuildChannelFactory<TChannel> (
-			BindingContext context)
-		{
-			return base.BuildChannelFactory <TChannel> (context);
-		}
-
-#if !MOBILE && !XAMMAC_4_5
-		[MonoTODO]
-		public override IChannelListener<TChannel>
-			BuildChannelListener<TChannel> (
-			BindingContext context)
-		{
-			return base.BuildChannelListener <TChannel> (context);
-		}
-#endif
-
-		public override BindingElement Clone ()
-		{
-			return new HttpsTransportBindingElement (this);
-		}
+        public override IChannelFactory<TChannel> BuildChannelFactory<TChannel>(
+            BindingContext context
+        )
+        {
+            return base.BuildChannelFactory<TChannel>(context);
+        }
 
 #if !MOBILE && !XAMMAC_4_5
-		public XmlElement GetTransportTokenAssertion ()
-		{
-			var doc = new XmlDocument ();
-			var token = doc.CreateElement ("sp", "HttpsToken", PolicyImportHelper.SecurityPolicyNS);
-			token.SetAttribute ("RequireClientCertificate", req_cli_cert ? "true" : "false");
-			return token;
-		}
+        [MonoTODO]
+        public override IChannelListener<TChannel> BuildChannelListener<TChannel>(
+            BindingContext context
+        )
+        {
+            return base.BuildChannelListener<TChannel>(context);
+        }
 #endif
 
-		// overriden only in full profile
-		public override T GetProperty<T> (BindingContext context)
-		{
-			if (typeof (T) == typeof (ISecurityCapabilities))
-				return (T) (object) new HttpsBindingProperties (this);
-			return base.GetProperty<T> (context);
-		}
-	}
+        public override BindingElement Clone()
+        {
+            return new HttpsTransportBindingElement(this);
+        }
 
-	class HttpsBindingProperties : HttpBindingProperties
-	{
-		HttpsTransportBindingElement source;
+#if !MOBILE && !XAMMAC_4_5
+        public XmlElement GetTransportTokenAssertion()
+        {
+            var doc = new XmlDocument();
+            var token = doc.CreateElement("sp", "HttpsToken", PolicyImportHelper.SecurityPolicyNS);
+            token.SetAttribute("RequireClientCertificate", req_cli_cert ? "true" : "false");
+            return token;
+        }
+#endif
 
-		public HttpsBindingProperties (HttpsTransportBindingElement source)
-			: base (source)
-		{
-			this.source = source;
-		}
+        // overriden only in full profile
+        public override T GetProperty<T>(BindingContext context)
+        {
+            if (typeof(T) == typeof(ISecurityCapabilities))
+                return (T)(object)new HttpsBindingProperties(this);
+            return base.GetProperty<T>(context);
+        }
+    }
 
-		public override ProtectionLevel SupportedRequestProtectionLevel {
-			get { return ProtectionLevel.EncryptAndSign; }
-		}
+    class HttpsBindingProperties : HttpBindingProperties
+    {
+        HttpsTransportBindingElement source;
 
-		public override ProtectionLevel SupportedResponseProtectionLevel {
-			get { return ProtectionLevel.EncryptAndSign; }
-		}
+        public HttpsBindingProperties(HttpsTransportBindingElement source)
+            : base(source)
+        {
+            this.source = source;
+        }
 
-		public override bool SupportsClientAuthentication {
-			get { return source.RequireClientCertificate || base.SupportsClientAuthentication; }
-		}
+        public override ProtectionLevel SupportedRequestProtectionLevel
+        {
+            get { return ProtectionLevel.EncryptAndSign; }
+        }
 
-		public override bool SupportsServerAuthentication {
-			get { return true; }
-		}
+        public override ProtectionLevel SupportedResponseProtectionLevel
+        {
+            get { return ProtectionLevel.EncryptAndSign; }
+        }
 
-		public override bool SupportsClientWindowsIdentity {
-			get { return source.RequireClientCertificate || base.SupportsClientWindowsIdentity; }
-		}
-	}
+        public override bool SupportsClientAuthentication
+        {
+            get { return source.RequireClientCertificate || base.SupportsClientAuthentication; }
+        }
+
+        public override bool SupportsServerAuthentication
+        {
+            get { return true; }
+        }
+
+        public override bool SupportsClientWindowsIdentity
+        {
+            get { return source.RequireClientCertificate || base.SupportsClientWindowsIdentity; }
+        }
+    }
 }

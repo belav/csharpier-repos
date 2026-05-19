@@ -6,10 +6,7 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities;
 public class TestTypeMappingSource : TypeMappingSource
 {
     public TestTypeMappingSource(TypeMappingSourceDependencies dependencies)
-        : base(dependencies)
-    {
-    }
+        : base(dependencies) { }
 
-    protected override CoreTypeMapping FindMapping(in TypeMappingInfo mappingInfo)
-        => null;
+    protected override CoreTypeMapping FindMapping(in TypeMappingInfo mappingInfo) => null;
 }

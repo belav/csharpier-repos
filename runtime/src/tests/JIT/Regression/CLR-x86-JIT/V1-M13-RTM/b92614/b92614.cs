@@ -4,13 +4,14 @@
 
 using System;
 using Xunit;
+
 public struct CC
 {
     static float Static3(short N)
     {
-        return
-            82 * (ulong)N * (float)(((ulong)N) ^ (82u * (ulong)N));
+        return 82 * (ulong)N * (float)(((ulong)N) ^ (82u * (ulong)N));
     }
+
     [Fact]
     public static void TestEntryPoint()
     {

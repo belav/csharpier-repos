@@ -20,9 +20,8 @@ internal class RequiredMemberAttributesVisitor : TestAttributesVisitor
         return builder.ToString();
     }
 
-    private RequiredMemberAttributesVisitor(StringBuilder builder) : base(builder)
-    {
-    }
+    private RequiredMemberAttributesVisitor(StringBuilder builder)
+        : base(builder) { }
 
     protected override SymbolDisplayFormat DisplayFormat => SymbolDisplayFormat.TestFormat;
 
@@ -53,7 +52,10 @@ internal class RequiredMemberAttributesVisitor : TestAttributesVisitor
                 return;
         }
 
-        var attribute = module.GetAttributeHandle(handle, AttributeDescription.RequiredMemberAttribute);
+        var attribute = module.GetAttributeHandle(
+            handle,
+            AttributeDescription.RequiredMemberAttribute
+        );
 
         if (attribute.IsNil)
         {
@@ -70,8 +72,9 @@ internal class RequiredMemberAttributesVisitor : TestAttributesVisitor
         base.ReportSymbol(symbol);
     }
 
-    protected override CSharpAttributeData? GetTargetAttribute(ImmutableArray<CSharpAttributeData> attributes)
-        => GetAttribute(attributes, "System.Runtime.CompilerServices", "RequiredMemberAttribute");
+    protected override CSharpAttributeData? GetTargetAttribute(
+        ImmutableArray<CSharpAttributeData> attributes
+    ) => GetAttribute(attributes, "System.Runtime.CompilerServices", "RequiredMemberAttribute");
 
     protected override bool TypeRequiresAttribute(TypeSymbol? type)
     {

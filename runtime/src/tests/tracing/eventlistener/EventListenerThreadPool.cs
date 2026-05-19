@@ -24,7 +24,7 @@ namespace Tracing.Tests
         public ManualResetEvent TPWaitIOPackEvent = new ManualResetEvent(false);
         public ManualResetEvent TPWaitIOEnqueueEvent = new ManualResetEvent(false);
         public ManualResetEvent TPWaitIODequeueEvent = new ManualResetEvent(false);
-        
+
         protected override void OnEventSourceCreated(EventSource source)
         {
             if (source.Name.Equals("Microsoft-Windows-DotNETRuntime"))
@@ -71,9 +71,12 @@ namespace Tracing.Tests
                 // This should fire at least one ThreadPoolWorkerThreadWait
                 int someNumber = 0;
                 Task[] tasks = new Task[100];
-                for (int i = 0; i < tasks.Length; i++) 
+                for (int i = 0; i < tasks.Length; i++)
                 {
-                    tasks[i] = Task.Run(() => { someNumber += 1; });
+                    tasks[i] = Task.Run(() =>
+                    {
+                        someNumber += 1;
+                    });
                 }
 
                 if (TestLibrary.Utilities.IsWindows)
@@ -82,7 +85,7 @@ namespace Tracing.Tests
                     listener.TPIOPackGoal += 1;
                     listener.TPIOEnqueueGoal += 1;
                     listener.TPIODequeueGoal += 1;
-                
+
                     Overlapped overlapped = new Overlapped();
                     unsafe
                     {
@@ -93,13 +96,19 @@ namespace Tracing.Tests
 
                 // RegisterWaitForSingleObject should fire an IOEnqueue and IODequeue event
                 ManualResetEvent manualResetEvent = new ManualResetEvent(false);
-                WaitOrTimerCallback work = (x, timedOut) => { int y = (int)x; };
+                WaitOrTimerCallback work = (x, timedOut) =>
+                {
+                    int y = (int)x;
+                };
                 ThreadPool.RegisterWaitForSingleObject(manualResetEvent, work, 1, 100, true);
                 manualResetEvent.Set();
 
-                ManualResetEvent[] waitEvents = new ManualResetEvent[] {listener.TPWaitIOPackEvent,
-                                                                        listener.TPWaitIOEnqueueEvent,
-                                                                        listener.TPWaitIODequeueEvent};
+                ManualResetEvent[] waitEvents = new ManualResetEvent[]
+                {
+                    listener.TPWaitIOPackEvent,
+                    listener.TPWaitIOEnqueueEvent,
+                    listener.TPWaitIODequeueEvent,
+                };
 
                 WaitHandle.WaitAll(waitEvents, TimeSpan.FromMinutes(1));
 
@@ -109,14 +118,20 @@ namespace Tracing.Tests
                     if (listener.TPWorkerThreadWaitCount == 0)
                     {
                         Console.WriteLine("Test Failed: Did not see the expected event.");
-                        Console.WriteLine($"ThreadPoolWorkerThreadWaitCount: {listener.TPWorkerThreadWaitCount}");
+                        Console.WriteLine(
+                            $"ThreadPoolWorkerThreadWaitCount: {listener.TPWorkerThreadWaitCount}"
+                        );
                         return -1;
                     }
                 }
 
-                if (!(listener.TPIOPack >= listener.TPIOPackGoal &&
-                    listener.TPIOEnqueue >= listener.TPIOEnqueueGoal &&
-                    listener.TPIODequeue >= listener.TPIODequeueGoal))
+                if (
+                    !(
+                        listener.TPIOPack >= listener.TPIOPackGoal
+                        && listener.TPIOEnqueue >= listener.TPIOEnqueueGoal
+                        && listener.TPIODequeue >= listener.TPIODequeueGoal
+                    )
+                )
                 {
                     Console.WriteLine("Test Failed: Did not see all of the expected events.");
                     Console.WriteLine($"ThreadPoolIOPack: {listener.TPIOPack}");

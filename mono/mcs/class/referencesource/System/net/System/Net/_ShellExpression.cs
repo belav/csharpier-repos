@@ -18,7 +18,7 @@ namespace System.Net
             AugmentedAsterisk = -4,
             AugmentedQuestion = -5,
             Start = -6,
-            End = -7
+            End = -7,
         }
 
         private ShExpTokens[] pattern;
@@ -29,7 +29,12 @@ namespace System.Net
         {
             this.pattern = null;
             this.match = null;
-            GlobalLog.Print("ShellServices.ShellExpression#" + ValidationHelper.HashString(this) + "::.ctor() pattern:" + ValidationHelper.ToString(pattern));
+            GlobalLog.Print(
+                "ShellServices.ShellExpression#"
+                    + ValidationHelper.HashString(this)
+                    + "::.ctor() pattern:"
+                    + ValidationHelper.ToString(pattern)
+            );
             Parse(pattern);
         }
 
@@ -44,7 +49,12 @@ namespace System.Net
 
         internal bool IsMatch(string target)
         {
-            GlobalLog.Print("ShellServices.ShellExpression#" + ValidationHelper.HashString(this) + "::IsMatch() target:" + ValidationHelper.ToString(target));
+            GlobalLog.Print(
+                "ShellServices.ShellExpression#"
+                    + ValidationHelper.HashString(this)
+                    + "::IsMatch() target:"
+                    + ValidationHelper.ToString(target)
+            );
             int i = 0;
             int j = 0;
             bool reverse = false;
@@ -131,7 +141,10 @@ namespace System.Net
                             continue;
 
                         default:
-                            if (j < target.Length && (int) pattern[i] == (int) char.ToLowerInvariant(target[j]))
+                            if (
+                                j < target.Length
+                                && (int)pattern[i] == (int)char.ToLowerInvariant(target[j])
+                            )
                             {
                                 match[i++] = ++j;
                             }
@@ -169,13 +182,18 @@ namespace System.Net
                 break;
             }
 
-            GlobalLog.Print("ShellServices.ShellExpression#" + ValidationHelper.HashString(this) + "::IsMatch() return:" + matched.ToString());
+            GlobalLog.Print(
+                "ShellServices.ShellExpression#"
+                    + ValidationHelper.HashString(this)
+                    + "::IsMatch() return:"
+                    + matched.ToString()
+            );
             return matched;
         }
 
         private void Parse(string patString)
         {
-            pattern = new ShExpTokens[patString.Length + 2];  // 2 for the start, end
+            pattern = new ShExpTokens[patString.Length + 2]; // 2 for the start, end
             match = null;
             int i = 0;
 
@@ -200,7 +218,14 @@ namespace System.Net
                         else
                         {
                             pattern = null;
-                            if (Logging.On) Logging.PrintWarning(Logging.Web, SR.GetString(SR.net_log_shell_expression_pattern_format_warning, patString));
+                            if (Logging.On)
+                                Logging.PrintWarning(
+                                    Logging.Web,
+                                    SR.GetString(
+                                        SR.net_log_shell_expression_pattern_format_warning,
+                                        patString
+                                    )
+                                );
                             throw new FormatException(SR.GetString(SR.net_format_shexp, patString));
                         }
                         switch (patString[j])
@@ -219,13 +244,22 @@ namespace System.Net
 
                             default:
                                 pattern = null;
-                                if (Logging.On) Logging.PrintWarning(Logging.Web, SR.GetString(SR.net_log_shell_expression_pattern_format_warning, patString));
-                                throw new FormatException(SR.GetString(SR.net_format_shexp, patString));
+                                if (Logging.On)
+                                    Logging.PrintWarning(
+                                        Logging.Web,
+                                        SR.GetString(
+                                            SR.net_log_shell_expression_pattern_format_warning,
+                                            patString
+                                        )
+                                    );
+                                throw new FormatException(
+                                    SR.GetString(SR.net_format_shexp, patString)
+                                );
                         }
                         break;
 
                     default:
-                        pattern[i++] = (ShExpTokens) (int) char.ToLowerInvariant(patString[j]);
+                        pattern[i++] = (ShExpTokens)(int)char.ToLowerInvariant(patString[j]);
                         break;
                 }
             }

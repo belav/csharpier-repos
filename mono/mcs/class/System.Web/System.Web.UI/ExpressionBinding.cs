@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -30,65 +30,77 @@
 
 using System;
 
-namespace System.Web.UI {
-	public sealed class ExpressionBinding
-	{
-		string propertyName;
-		Type propertyType;
-		string expression;
-        	string prefix;
-        	bool generated;
+namespace System.Web.UI
+{
+    public sealed class ExpressionBinding
+    {
+        string propertyName;
+        Type propertyType;
+        string expression;
+        string prefix;
+        bool generated;
 
-        	public ExpressionBinding (string propertyName, Type propertyType, 
-					string expressionPrefix, string expression)
-		{
-			this.propertyName = propertyName;
-			this.propertyType = propertyType;
-            		this.prefix = expressionPrefix;
-			this.expression = expression;            
-            		this.generated = false;
-		}
+        public ExpressionBinding(
+            string propertyName,
+            Type propertyType,
+            string expressionPrefix,
+            string expression
+        )
+        {
+            this.propertyName = propertyName;
+            this.propertyType = propertyType;
+            this.prefix = expressionPrefix;
+            this.expression = expression;
+            this.generated = false;
+        }
 
-		public string Expression {
-			get { return expression; }
-			set { expression = value; }
-		}
+        public string Expression
+        {
+            get { return expression; }
+            set { expression = value; }
+        }
 
-        	public string ExpressionPrefix {
-			get { return prefix; }
-			set { prefix = value; }
-		}
-        
-        	public bool Generated {
-            		get { return generated; }
-        	}
+        public string ExpressionPrefix
+        {
+            get { return prefix; }
+            set { prefix = value; }
+        }
 
-		public string PropertyName {
-			get { return propertyName; }
-		}
+        public bool Generated
+        {
+            get { return generated; }
+        }
 
-		public Type PropertyType {
-			get { return propertyType; }
-		}
+        public string PropertyName
+        {
+            get { return propertyName; }
+        }
 
-		public override bool Equals (object obj)
-		{
-            		if (!(obj is ExpressionBinding))
-                		return false;
+        public Type PropertyType
+        {
+            get { return propertyType; }
+        }
 
-            		ExpressionBinding o = (ExpressionBinding)obj;
-            		return (o.Expression == expression &&
-                		o.ExpressionPrefix == prefix &&
-				o.PropertyName == propertyName &&
-				o.PropertyType == propertyType);
-		}
+        public override bool Equals(object obj)
+        {
+            if (!(obj is ExpressionBinding))
+                return false;
 
-		public override int GetHashCode ()
-		{
-			return propertyName.GetHashCode () +
-			       (propertyType.GetHashCode () << 1) +
-			       (prefix.GetHashCode () << 2) +
-                   		(expression.GetHashCode () << 3);
-		}
-	}
+            ExpressionBinding o = (ExpressionBinding)obj;
+            return (
+                o.Expression == expression
+                && o.ExpressionPrefix == prefix
+                && o.PropertyName == propertyName
+                && o.PropertyType == propertyType
+            );
+        }
+
+        public override int GetHashCode()
+        {
+            return propertyName.GetHashCode()
+                + (propertyType.GetHashCode() << 1)
+                + (prefix.GetHashCode() << 2)
+                + (expression.GetHashCode() << 3);
+        }
+    }
 }

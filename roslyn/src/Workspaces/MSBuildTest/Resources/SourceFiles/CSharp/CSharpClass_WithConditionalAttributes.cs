@@ -14,13 +14,8 @@ namespace CSharpProject
     /// <summary>
     /// This is a C# class
     /// </summary>
-    public class CSharpClass
-    {
-    }
+    public class CSharpClass { }
 }
 
 [System.Diagnostics.Conditional("EnableMyAttribute")]
-public class MyAttr : Attribute
-{
-}
-
+public class MyAttr : Attribute { }

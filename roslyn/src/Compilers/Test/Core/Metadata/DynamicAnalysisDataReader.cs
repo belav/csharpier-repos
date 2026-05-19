@@ -50,7 +50,13 @@ namespace Microsoft.CodeAnalysis
         public readonly int EndLine;
         public readonly int EndColumn;
 
-        public DynamicAnalysisSpan(int documentRowId, int startLine, int startColumn, int endLine, int endColumn)
+        public DynamicAnalysisSpan(
+            int documentRowId,
+            int startLine,
+            int startColumn,
+            int endLine,
+            int endColumn
+        )
         {
             DocumentRowId = documentRowId;
             StartLine = startLine;
@@ -75,7 +81,12 @@ namespace Microsoft.CodeAnalysis
             var reader = new BlobReader(buffer, size);
 
             // header:
-            if (reader.ReadByte() != 'D' || reader.ReadByte() != 'A' || reader.ReadByte() != 'M' || reader.ReadByte() != 'D')
+            if (
+                reader.ReadByte() != 'D'
+                || reader.ReadByte() != 'A'
+                || reader.ReadByte() != 'M'
+                || reader.ReadByte() != 'D'
+            )
             {
                 throw new BadImageFormatException();
             }
@@ -103,12 +114,16 @@ namespace Microsoft.CodeAnalysis
             bool isBlobHeapSmall = blobHeapSize <= ushort.MaxValue;
             bool isGuidHeapSmall = guidHeapSize / GuidSize <= ushort.MaxValue;
 
-            var documentsBuilder = ArrayBuilder<DynamicAnalysisDocument>.GetInstance(documentRowCount);
+            var documentsBuilder = ArrayBuilder<DynamicAnalysisDocument>.GetInstance(
+                documentRowCount
+            );
 
             for (int i = 0; i < documentRowCount; i++)
             {
                 var name = MetadataTokens.BlobHandle(ReadReference(ref reader, isBlobHeapSmall));
-                var hashAlgorithm = MetadataTokens.GuidHandle(ReadReference(ref reader, isGuidHeapSmall));
+                var hashAlgorithm = MetadataTokens.GuidHandle(
+                    ReadReference(ref reader, isGuidHeapSmall)
+                );
                 var hash = MetadataTokens.BlobHandle(ReadReference(ref reader, isBlobHeapSmall));
 
                 documentsBuilder.Add(new DynamicAnalysisDocument(name, hashAlgorithm, hash));
@@ -116,11 +131,17 @@ namespace Microsoft.CodeAnalysis
 
             Documents = documentsBuilder.ToImmutableAndFree();
 
-            var methodsBuilder = ArrayBuilder<DynamicAnalysisMethod>.GetInstance(methodSpanRowCount);
+            var methodsBuilder = ArrayBuilder<DynamicAnalysisMethod>.GetInstance(
+                methodSpanRowCount
+            );
 
             for (int i = 0; i < methodSpanRowCount; i++)
             {
-                methodsBuilder.Add(new DynamicAnalysisMethod(MetadataTokens.BlobHandle(ReadReference(ref reader, isBlobHeapSmall))));
+                methodsBuilder.Add(
+                    new DynamicAnalysisMethod(
+                        MetadataTokens.BlobHandle(ReadReference(ref reader, isBlobHeapSmall))
+                    )
+                );
             }
 
             Methods = methodsBuilder.ToImmutableAndFree();
@@ -139,7 +160,10 @@ namespace Microsoft.CodeAnalysis
             _blobHeapBlob = new Blob(buffer + blobHeapOffset, blobHeapSize);
         }
 
-        public static DynamicAnalysisDataReader TryCreateFromPE(PEReader peReader, string resourceName)
+        public static DynamicAnalysisDataReader TryCreateFromPE(
+            PEReader peReader,
+            string resourceName
+        )
         {
             // TODO: review all range checks, better error messages
 
@@ -148,9 +172,11 @@ namespace Microsoft.CodeAnalysis
             foreach (var resourceHandle in mdReader.ManifestResources)
             {
                 var resource = mdReader.GetManifestResource(resourceHandle);
-                if (resource.Implementation.IsNil &&
-                    resource.Attributes == ManifestResourceAttributes.Private &&
-                    mdReader.StringComparer.Equals(resource.Name, resourceName))
+                if (
+                    resource.Implementation.IsNil
+                    && resource.Attributes == ManifestResourceAttributes.Private
+                    && mdReader.StringComparer.Equals(resource.Name, resourceName)
+                )
                 {
                     offset = resource.Offset;
                 }
@@ -235,7 +261,10 @@ namespace Microsoft.CodeAnalysis
                 else
                 {
                     startLine = AddLines(previousStartLine, reader.ReadCompressedSignedInteger());
-                    startColumn = AddColumns(previousStartColumn, reader.ReadCompressedSignedInteger());
+                    startColumn = AddColumns(
+                        previousStartColumn,
+                        reader.ReadCompressedSignedInteger()
+                    );
                 }
 
                 previousStartLine = startLine;
@@ -243,7 +272,13 @@ namespace Microsoft.CodeAnalysis
 
                 int endLine = AddLines(startLine, deltaLines);
                 int endColumn = AddColumns(startColumn, deltaColumns);
-                var linePositionSpan = new DynamicAnalysisSpan(documentRowId, startLine, startColumn, endLine, endColumn);
+                var linePositionSpan = new DynamicAnalysisSpan(
+                    documentRowId,
+                    startLine,
+                    startColumn,
+                    endLine,
+                    endColumn
+                );
                 builder.Add(linePositionSpan);
             }
 
@@ -303,7 +338,9 @@ namespace Microsoft.CodeAnalysis
             int separator = blobReader.ReadByte();
             if (separator > 0x7f)
             {
-                throw new BadImageFormatException(string.Format("Invalid document name", separator));
+                throw new BadImageFormatException(
+                    string.Format("Invalid document name", separator)
+                );
             }
 
             var pooledBuilder = PooledStringBuilder.GetInstance();
@@ -326,10 +363,17 @@ namespace Microsoft.CodeAnalysis
             return pooledBuilder.ToStringAndFree();
         }
 
-        private void ReadDeltaLinesAndColumns(ref BlobReader reader, out int deltaLines, out int deltaColumns)
+        private void ReadDeltaLinesAndColumns(
+            ref BlobReader reader,
+            out int deltaLines,
+            out int deltaColumns
+        )
         {
             deltaLines = reader.ReadCompressedInteger();
-            deltaColumns = (deltaLines == 0) ? reader.ReadCompressedInteger() : reader.ReadCompressedSignedInteger();
+            deltaColumns =
+                (deltaLines == 0)
+                    ? reader.ReadCompressedInteger()
+                    : reader.ReadCompressedSignedInteger();
         }
 
         private int ReadLine(ref BlobReader reader)

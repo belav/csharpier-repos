@@ -13,7 +13,8 @@ public class RelationalCompiledQueryCacheKeyGenerator : CompiledQueryCacheKeyGen
     /// <param name="relationalDependencies">Parameter object containing relational dependencies for this service.</param>
     public RelationalCompiledQueryCacheKeyGenerator(
         CompiledQueryCacheKeyGeneratorDependencies dependencies,
-        RelationalCompiledQueryCacheKeyGeneratorDependencies relationalDependencies)
+        RelationalCompiledQueryCacheKeyGeneratorDependencies relationalDependencies
+    )
         : base(dependencies)
     {
         RelationalDependencies = relationalDependencies;
@@ -25,8 +26,8 @@ public class RelationalCompiledQueryCacheKeyGenerator : CompiledQueryCacheKeyGen
     protected virtual RelationalCompiledQueryCacheKeyGeneratorDependencies RelationalDependencies { get; }
 
     /// <inheritdoc />
-    public override object GenerateCacheKey(Expression query, bool async)
-        => GenerateCacheKeyCore(query, async);
+    public override object GenerateCacheKey(Expression query, bool async) =>
+        GenerateCacheKeyCore(query, async);
 
     /// <summary>
     ///     Generates the cache key for the given query.
@@ -34,16 +35,19 @@ public class RelationalCompiledQueryCacheKeyGenerator : CompiledQueryCacheKeyGen
     /// <param name="query">The query to get the cache key for.</param>
     /// <param name="async">A value indicating whether the query will be executed asynchronously.</param>
     /// <returns>The cache key.</returns>
-    protected new RelationalCompiledQueryCacheKey
-        GenerateCacheKeyCore(Expression query, bool async) // Intentionally non-virtual
+    protected new RelationalCompiledQueryCacheKey GenerateCacheKeyCore(Expression query, bool async) // Intentionally non-virtual
     {
-        var relationalOptions = RelationalOptionsExtension.Extract(RelationalDependencies.ContextOptions);
+        var relationalOptions = RelationalOptionsExtension.Extract(
+            RelationalDependencies.ContextOptions
+        );
 
         return new RelationalCompiledQueryCacheKey(
             base.GenerateCacheKeyCore(query, async),
             relationalOptions.UseRelationalNulls,
             relationalOptions.QuerySplittingBehavior,
-            shouldBuffer: ExecutionStrategy.Current?.RetriesOnFailure ?? Dependencies.IsRetryingExecutionStrategy);
+            shouldBuffer: ExecutionStrategy.Current?.RetriesOnFailure
+                ?? Dependencies.IsRetryingExecutionStrategy
+        );
     }
 
     /// <summary>
@@ -56,7 +60,8 @@ public class RelationalCompiledQueryCacheKeyGenerator : CompiledQueryCacheKeyGen
     ///         not used in application code.
     ///     </para>
     /// </summary>
-    protected readonly struct RelationalCompiledQueryCacheKey : IEquatable<RelationalCompiledQueryCacheKey>
+    protected readonly struct RelationalCompiledQueryCacheKey
+        : IEquatable<RelationalCompiledQueryCacheKey>
     {
         private readonly CompiledQueryCacheKey _compiledQueryCacheKey;
         private readonly bool _useRelationalNulls;
@@ -74,7 +79,8 @@ public class RelationalCompiledQueryCacheKeyGenerator : CompiledQueryCacheKeyGen
             CompiledQueryCacheKey compiledQueryCacheKey,
             bool useRelationalNulls,
             QuerySplittingBehavior? querySplittingBehavior,
-            bool shouldBuffer)
+            bool shouldBuffer
+        )
         {
             _compiledQueryCacheKey = compiledQueryCacheKey;
             _useRelationalNulls = useRelationalNulls;
@@ -83,20 +89,23 @@ public class RelationalCompiledQueryCacheKeyGenerator : CompiledQueryCacheKeyGen
         }
 
         /// <inheritdoc />
-        public override bool Equals(object? obj)
-            => obj is RelationalCompiledQueryCacheKey key
-                && Equals(key);
+        public override bool Equals(object? obj) =>
+            obj is RelationalCompiledQueryCacheKey key && Equals(key);
 
         /// <inheritdoc />
-        public bool Equals(RelationalCompiledQueryCacheKey other)
-            => _compiledQueryCacheKey.Equals(other._compiledQueryCacheKey)
-                && _useRelationalNulls == other._useRelationalNulls
-                && _querySplittingBehavior == other._querySplittingBehavior
-                && _shouldBuffer == other._shouldBuffer;
+        public bool Equals(RelationalCompiledQueryCacheKey other) =>
+            _compiledQueryCacheKey.Equals(other._compiledQueryCacheKey)
+            && _useRelationalNulls == other._useRelationalNulls
+            && _querySplittingBehavior == other._querySplittingBehavior
+            && _shouldBuffer == other._shouldBuffer;
 
         /// <inheritdoc />
-        public override int GetHashCode()
-            => HashCode.Combine(
-                _compiledQueryCacheKey, _useRelationalNulls, _querySplittingBehavior, _shouldBuffer);
+        public override int GetHashCode() =>
+            HashCode.Combine(
+                _compiledQueryCacheKey,
+                _useRelationalNulls,
+                _querySplittingBehavior,
+                _shouldBuffer
+            );
     }
 }

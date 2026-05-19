@@ -18,8 +18,7 @@ namespace Microsoft.CodeAnalysis.Editing
     {
         private readonly Modifiers _modifiers;
 
-        private DeclarationModifiers(Modifiers modifiers)
-            => _modifiers = modifiers;
+        private DeclarationModifiers(Modifiers modifiers) => _modifiers = modifiers;
 
         internal DeclarationModifiers(
             bool isStatic = false,
@@ -39,36 +38,39 @@ namespace Microsoft.CodeAnalysis.Editing
             bool isVolatile = false,
             bool isExtern = false,
             bool isRequired = false,
-            bool isFile = false)
+            bool isFile = false
+        )
             : this(
-                  (isStatic ? Modifiers.Static : Modifiers.None) |
-                  (isAbstract ? Modifiers.Abstract : Modifiers.None) |
-                  (isNew ? Modifiers.New : Modifiers.None) |
-                  (isUnsafe ? Modifiers.Unsafe : Modifiers.None) |
-                  (isReadOnly ? Modifiers.ReadOnly : Modifiers.None) |
-                  (isVirtual ? Modifiers.Virtual : Modifiers.None) |
-                  (isOverride ? Modifiers.Override : Modifiers.None) |
-                  (isSealed ? Modifiers.Sealed : Modifiers.None) |
-                  (isConst ? Modifiers.Const : Modifiers.None) |
-                  (isWithEvents ? Modifiers.WithEvents : Modifiers.None) |
-                  (isPartial ? Modifiers.Partial : Modifiers.None) |
-                  (isAsync ? Modifiers.Async : Modifiers.None) |
-                  (isWriteOnly ? Modifiers.WriteOnly : Modifiers.None) |
-                  (isRef ? Modifiers.Ref : Modifiers.None) |
-                  (isVolatile ? Modifiers.Volatile : Modifiers.None) |
-                  (isExtern ? Modifiers.Extern : Modifiers.None) |
-                  (isRequired ? Modifiers.Required : Modifiers.None) |
-                  (isFile ? Modifiers.File : Modifiers.None))
-        {
-        }
+                (isStatic ? Modifiers.Static : Modifiers.None)
+                    | (isAbstract ? Modifiers.Abstract : Modifiers.None)
+                    | (isNew ? Modifiers.New : Modifiers.None)
+                    | (isUnsafe ? Modifiers.Unsafe : Modifiers.None)
+                    | (isReadOnly ? Modifiers.ReadOnly : Modifiers.None)
+                    | (isVirtual ? Modifiers.Virtual : Modifiers.None)
+                    | (isOverride ? Modifiers.Override : Modifiers.None)
+                    | (isSealed ? Modifiers.Sealed : Modifiers.None)
+                    | (isConst ? Modifiers.Const : Modifiers.None)
+                    | (isWithEvents ? Modifiers.WithEvents : Modifiers.None)
+                    | (isPartial ? Modifiers.Partial : Modifiers.None)
+                    | (isAsync ? Modifiers.Async : Modifiers.None)
+                    | (isWriteOnly ? Modifiers.WriteOnly : Modifiers.None)
+                    | (isRef ? Modifiers.Ref : Modifiers.None)
+                    | (isVolatile ? Modifiers.Volatile : Modifiers.None)
+                    | (isExtern ? Modifiers.Extern : Modifiers.None)
+                    | (isRequired ? Modifiers.Required : Modifiers.None)
+                    | (isFile ? Modifiers.File : Modifiers.None)
+            ) { }
 
         public static DeclarationModifiers From(ISymbol symbol)
         {
-            if (symbol is INamedTypeSymbol or
-                 IFieldSymbol or
-                 IPropertySymbol or
-                 IMethodSymbol or
-                 IEventSymbol)
+            if (
+                symbol
+                is INamedTypeSymbol
+                    or IFieldSymbol
+                    or IPropertySymbol
+                    or IMethodSymbol
+                    or IEventSymbol
+            )
             {
                 var field = symbol as IFieldSymbol;
                 var property = symbol as IPropertySymbol;
@@ -79,7 +81,10 @@ namespace Microsoft.CodeAnalysis.Editing
                 return new DeclarationModifiers(
                     isStatic: symbol.IsStatic && !isConst,
                     isAbstract: symbol.IsAbstract,
-                    isReadOnly: field?.IsReadOnly == true || property?.IsReadOnly == true || type?.IsReadOnly == true || method?.IsReadOnly == true,
+                    isReadOnly: field?.IsReadOnly == true
+                        || property?.IsReadOnly == true
+                        || type?.IsReadOnly == true
+                        || method?.IsReadOnly == true,
                     isVirtual: symbol.IsVirtual,
                     isOverride: symbol.IsOverride,
                     isSealed: symbol.IsSealed,
@@ -90,7 +95,8 @@ namespace Microsoft.CodeAnalysis.Editing
                     isExtern: symbol.IsExtern,
                     isAsync: method?.IsAsync == true,
                     isRequired: symbol.IsRequired(),
-                    isFile: type?.IsFileLocal == true);
+                    isFile: type?.IsFileLocal == true
+                );
             }
 
             // Only named types, members of named types, and local functions have modifiers.
@@ -134,87 +140,91 @@ namespace Microsoft.CodeAnalysis.Editing
 
         public bool IsFile => (_modifiers & Modifiers.File) != 0;
 
-        public DeclarationModifiers WithIsStatic(bool isStatic)
-            => new(SetFlag(_modifiers, Modifiers.Static, isStatic));
+        public DeclarationModifiers WithIsStatic(bool isStatic) =>
+            new(SetFlag(_modifiers, Modifiers.Static, isStatic));
 
-        public DeclarationModifiers WithIsAbstract(bool isAbstract)
-            => new(SetFlag(_modifiers, Modifiers.Abstract, isAbstract));
+        public DeclarationModifiers WithIsAbstract(bool isAbstract) =>
+            new(SetFlag(_modifiers, Modifiers.Abstract, isAbstract));
 
-        public DeclarationModifiers WithIsNew(bool isNew)
-            => new(SetFlag(_modifiers, Modifiers.New, isNew));
+        public DeclarationModifiers WithIsNew(bool isNew) =>
+            new(SetFlag(_modifiers, Modifiers.New, isNew));
 
-        public DeclarationModifiers WithIsUnsafe(bool isUnsafe)
-            => new(SetFlag(_modifiers, Modifiers.Unsafe, isUnsafe));
+        public DeclarationModifiers WithIsUnsafe(bool isUnsafe) =>
+            new(SetFlag(_modifiers, Modifiers.Unsafe, isUnsafe));
 
-        public DeclarationModifiers WithIsReadOnly(bool isReadOnly)
-            => new(SetFlag(_modifiers, Modifiers.ReadOnly, isReadOnly));
+        public DeclarationModifiers WithIsReadOnly(bool isReadOnly) =>
+            new(SetFlag(_modifiers, Modifiers.ReadOnly, isReadOnly));
 
-        public DeclarationModifiers WithIsVirtual(bool isVirtual)
-            => new(SetFlag(_modifiers, Modifiers.Virtual, isVirtual));
+        public DeclarationModifiers WithIsVirtual(bool isVirtual) =>
+            new(SetFlag(_modifiers, Modifiers.Virtual, isVirtual));
 
-        public DeclarationModifiers WithIsOverride(bool isOverride)
-            => new(SetFlag(_modifiers, Modifiers.Override, isOverride));
+        public DeclarationModifiers WithIsOverride(bool isOverride) =>
+            new(SetFlag(_modifiers, Modifiers.Override, isOverride));
 
-        public DeclarationModifiers WithIsSealed(bool isSealed)
-            => new(SetFlag(_modifiers, Modifiers.Sealed, isSealed));
+        public DeclarationModifiers WithIsSealed(bool isSealed) =>
+            new(SetFlag(_modifiers, Modifiers.Sealed, isSealed));
 
-        public DeclarationModifiers WithIsConst(bool isConst)
-            => new(SetFlag(_modifiers, Modifiers.Const, isConst));
+        public DeclarationModifiers WithIsConst(bool isConst) =>
+            new(SetFlag(_modifiers, Modifiers.Const, isConst));
 
-        public DeclarationModifiers WithWithEvents(bool withEvents)
-            => new(SetFlag(_modifiers, Modifiers.WithEvents, withEvents));
+        public DeclarationModifiers WithWithEvents(bool withEvents) =>
+            new(SetFlag(_modifiers, Modifiers.WithEvents, withEvents));
 
-        public DeclarationModifiers WithPartial(bool isPartial)
-            => new(SetFlag(_modifiers, Modifiers.Partial, isPartial));
+        public DeclarationModifiers WithPartial(bool isPartial) =>
+            new(SetFlag(_modifiers, Modifiers.Partial, isPartial));
 
-        [SuppressMessage("Style", "VSTHRD200:Use \"Async\" suffix for async methods", Justification = "Public API.")]
-        public DeclarationModifiers WithAsync(bool isAsync)
-            => new(SetFlag(_modifiers, Modifiers.Async, isAsync));
+        [SuppressMessage(
+            "Style",
+            "VSTHRD200:Use \"Async\" suffix for async methods",
+            Justification = "Public API."
+        )]
+        public DeclarationModifiers WithAsync(bool isAsync) =>
+            new(SetFlag(_modifiers, Modifiers.Async, isAsync));
 
-        public DeclarationModifiers WithIsWriteOnly(bool isWriteOnly)
-            => new(SetFlag(_modifiers, Modifiers.WriteOnly, isWriteOnly));
+        public DeclarationModifiers WithIsWriteOnly(bool isWriteOnly) =>
+            new(SetFlag(_modifiers, Modifiers.WriteOnly, isWriteOnly));
 
-        public DeclarationModifiers WithIsRef(bool isRef)
-            => new(SetFlag(_modifiers, Modifiers.Ref, isRef));
+        public DeclarationModifiers WithIsRef(bool isRef) =>
+            new(SetFlag(_modifiers, Modifiers.Ref, isRef));
 
-        public DeclarationModifiers WithIsVolatile(bool isVolatile)
-            => new(SetFlag(_modifiers, Modifiers.Volatile, isVolatile));
+        public DeclarationModifiers WithIsVolatile(bool isVolatile) =>
+            new(SetFlag(_modifiers, Modifiers.Volatile, isVolatile));
 
-        public DeclarationModifiers WithIsExtern(bool isExtern)
-            => new(SetFlag(_modifiers, Modifiers.Extern, isExtern));
+        public DeclarationModifiers WithIsExtern(bool isExtern) =>
+            new(SetFlag(_modifiers, Modifiers.Extern, isExtern));
 
-        public DeclarationModifiers WithIsRequired(bool isRequired)
-            => new(SetFlag(_modifiers, Modifiers.Required, isRequired));
+        public DeclarationModifiers WithIsRequired(bool isRequired) =>
+            new(SetFlag(_modifiers, Modifiers.Required, isRequired));
 
-        public DeclarationModifiers WithIsFile(bool isFile)
-            => new(SetFlag(_modifiers, Modifiers.File, isFile));
+        public DeclarationModifiers WithIsFile(bool isFile) =>
+            new(SetFlag(_modifiers, Modifiers.File, isFile));
 
-        private static Modifiers SetFlag(Modifiers existing, Modifiers modifier, bool isSet)
-            => isSet ? (existing | modifier) : (existing & ~modifier);
+        private static Modifiers SetFlag(Modifiers existing, Modifiers modifier, bool isSet) =>
+            isSet ? (existing | modifier) : (existing & ~modifier);
 
         [Flags]
         private enum Modifiers
         {
 #pragma warning disable format
-            None        = 0,
-            Static      = 1 << 0,
-            Abstract    = 1 << 1,
-            New         = 1 << 2,
-            Unsafe      = 1 << 3,
-            ReadOnly    = 1 << 4,
-            Virtual     = 1 << 5,
-            Override    = 1 << 6,
-            Sealed      = 1 << 7,
-            Const       = 1 << 8,
-            WithEvents  = 1 << 9,
-            Partial     = 1 << 10,
-            Async       = 1 << 11,
-            WriteOnly   = 1 << 12,
-            Ref         = 1 << 13,
-            Volatile    = 1 << 14,
-            Extern      = 1 << 15,
-            Required    = 1 << 16,
-            File        = 1 << 17,
+            None = 0,
+            Static = 1 << 0,
+            Abstract = 1 << 1,
+            New = 1 << 2,
+            Unsafe = 1 << 3,
+            ReadOnly = 1 << 4,
+            Virtual = 1 << 5,
+            Override = 1 << 6,
+            Sealed = 1 << 7,
+            Const = 1 << 8,
+            WithEvents = 1 << 9,
+            Partial = 1 << 10,
+            Async = 1 << 11,
+            WriteOnly = 1 << 12,
+            Ref = 1 << 13,
+            Volatile = 1 << 14,
+            Extern = 1 << 15,
+            Required = 1 << 16,
+            File = 1 << 17,
 #pragma warning restore format
         }
 
@@ -239,20 +249,27 @@ namespace Microsoft.CodeAnalysis.Editing
         public static DeclarationModifiers Required => new(Modifiers.Required);
         public static DeclarationModifiers File => new(Modifiers.File);
 
-        public static DeclarationModifiers operator |(DeclarationModifiers left, DeclarationModifiers right)
-            => new(left._modifiers | right._modifiers);
+        public static DeclarationModifiers operator |(
+            DeclarationModifiers left,
+            DeclarationModifiers right
+        ) => new(left._modifiers | right._modifiers);
 
-        public static DeclarationModifiers operator &(DeclarationModifiers left, DeclarationModifiers right)
-            => new(left._modifiers & right._modifiers);
+        public static DeclarationModifiers operator &(
+            DeclarationModifiers left,
+            DeclarationModifiers right
+        ) => new(left._modifiers & right._modifiers);
 
-        public static DeclarationModifiers operator +(DeclarationModifiers left, DeclarationModifiers right)
-            => new(left._modifiers | right._modifiers);
+        public static DeclarationModifiers operator +(
+            DeclarationModifiers left,
+            DeclarationModifiers right
+        ) => new(left._modifiers | right._modifiers);
 
-        public static DeclarationModifiers operator -(DeclarationModifiers left, DeclarationModifiers right)
-            => new(left._modifiers & ~right._modifiers);
+        public static DeclarationModifiers operator -(
+            DeclarationModifiers left,
+            DeclarationModifiers right
+        ) => new(left._modifiers & ~right._modifiers);
 
-        public override string ToString()
-            => _modifiers.ToString();
+        public override string ToString() => _modifiers.ToString();
 
         public static bool TryParse(string value, out DeclarationModifiers modifiers)
         {

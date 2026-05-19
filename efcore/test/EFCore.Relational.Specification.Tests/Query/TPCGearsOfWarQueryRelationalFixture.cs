@@ -7,21 +7,18 @@ namespace Microsoft.EntityFrameworkCore.Query;
 
 public abstract class TPCGearsOfWarQueryRelationalFixture : GearsOfWarQueryFixtureBase
 {
-    protected override string StoreName
-        => "TPCGearsOfWarQueryTest";
+    protected override string StoreName => "TPCGearsOfWarQueryTest";
 
-    public new RelationalTestStore TestStore
-        => (RelationalTestStore)base.TestStore;
+    public new RelationalTestStore TestStore => (RelationalTestStore)base.TestStore;
 
-    public TestSqlLoggerFactory TestSqlLoggerFactory
-        => (TestSqlLoggerFactory)ListLoggerFactory;
+    public TestSqlLoggerFactory TestSqlLoggerFactory => (TestSqlLoggerFactory)ListLoggerFactory;
 
-    protected override bool ShouldLogCategory(string logCategory)
-        => logCategory == DbLoggerCategory.Query.Name;
+    protected override bool ShouldLogCategory(string logCategory) =>
+        logCategory == DbLoggerCategory.Query.Name;
 
-    public override DbContextOptionsBuilder AddOptions(DbContextOptionsBuilder builder)
-        => base.AddOptions(builder).ConfigureWarnings(
-            w => w.Log(RelationalEventId.ForeignKeyTpcPrincipalWarning));
+    public override DbContextOptionsBuilder AddOptions(DbContextOptionsBuilder builder) =>
+        base.AddOptions(builder)
+            .ConfigureWarnings(w => w.Log(RelationalEventId.ForeignKeyTpcPrincipalWarning));
 
     protected override void OnModelCreating(ModelBuilder modelBuilder, DbContext context)
     {

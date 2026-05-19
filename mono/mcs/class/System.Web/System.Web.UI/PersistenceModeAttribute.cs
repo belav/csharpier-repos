@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -28,58 +28,63 @@
 
 using System.Security.Permissions;
 
-namespace System.Web.UI {
+namespace System.Web.UI
+{
+    // CAS - no InheritanceDemand here as the class is sealed
+    [AspNetHostingPermission(
+        SecurityAction.LinkDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    // attributes
+    [AttributeUsage(AttributeTargets.All)]
+    public sealed class PersistenceModeAttribute : Attribute
+    {
+        PersistenceMode mode;
 
-	// CAS - no InheritanceDemand here as the class is sealed
-	[AspNetHostingPermission (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-	// attributes
-	[AttributeUsage (AttributeTargets.All)]
-	public sealed class PersistenceModeAttribute : Attribute
-	{
-		PersistenceMode mode;
-		
-		public PersistenceModeAttribute (PersistenceMode mode)
-		{
-			this.mode = mode;
-		}
+        public PersistenceModeAttribute(PersistenceMode mode)
+        {
+            this.mode = mode;
+        }
 
-		public static readonly PersistenceModeAttribute Attribute =
-						new PersistenceModeAttribute (PersistenceMode.Attribute);
+        public static readonly PersistenceModeAttribute Attribute = new PersistenceModeAttribute(
+            PersistenceMode.Attribute
+        );
 
-		public static readonly PersistenceModeAttribute Default =
-						new PersistenceModeAttribute (PersistenceMode.Attribute);
+        public static readonly PersistenceModeAttribute Default = new PersistenceModeAttribute(
+            PersistenceMode.Attribute
+        );
 
-		public static readonly PersistenceModeAttribute EncodedInnerDefaultProperty =
-						new PersistenceModeAttribute (PersistenceMode.EncodedInnerDefaultProperty);
+        public static readonly PersistenceModeAttribute EncodedInnerDefaultProperty =
+            new PersistenceModeAttribute(PersistenceMode.EncodedInnerDefaultProperty);
 
-		public static readonly PersistenceModeAttribute InnerDefaultProperty =
-						new PersistenceModeAttribute (PersistenceMode.InnerDefaultProperty);
+        public static readonly PersistenceModeAttribute InnerDefaultProperty =
+            new PersistenceModeAttribute(PersistenceMode.InnerDefaultProperty);
 
-		public static readonly PersistenceModeAttribute InnerProperty =
-						new PersistenceModeAttribute (PersistenceMode.InnerProperty);
-		
-		public PersistenceMode Mode {
-			get { return mode; }
-		}
+        public static readonly PersistenceModeAttribute InnerProperty =
+            new PersistenceModeAttribute(PersistenceMode.InnerProperty);
 
-		public override bool Equals (object obj)
-		{
-			PersistenceModeAttribute pma = (obj as PersistenceModeAttribute);
-			if (pma == null)
-				return false;
+        public PersistenceMode Mode
+        {
+            get { return mode; }
+        }
 
-			return (pma.mode == mode);
-		}
+        public override bool Equals(object obj)
+        {
+            PersistenceModeAttribute pma = (obj as PersistenceModeAttribute);
+            if (pma == null)
+                return false;
 
-		public override int GetHashCode ()
-		{
-			return (int) mode;
-		}
+            return (pma.mode == mode);
+        }
 
-		public override bool IsDefaultAttribute ()
-		{
-			return (mode == PersistenceMode.Attribute);
-		}
-	}
+        public override int GetHashCode()
+        {
+            return (int)mode;
+        }
+
+        public override bool IsDefaultAttribute()
+        {
+            return (mode == PersistenceMode.Attribute);
+        }
+    }
 }
-	

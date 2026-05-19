@@ -11,27 +11,28 @@ namespace Microsoft.CodeAnalysis.Collections
     internal static class ImmutableSegmentedList
     {
         /// <inheritdoc cref="ImmutableList.Create{T}()"/>
-        public static ImmutableSegmentedList<T> Create<T>()
-            => ImmutableSegmentedList<T>.Empty;
+        public static ImmutableSegmentedList<T> Create<T>() => ImmutableSegmentedList<T>.Empty;
 
         /// <inheritdoc cref="ImmutableList.Create{T}(T)"/>
-        public static ImmutableSegmentedList<T> Create<T>(T item)
-            => ImmutableSegmentedList<T>.Empty.Add(item);
+        public static ImmutableSegmentedList<T> Create<T>(T item) =>
+            ImmutableSegmentedList<T>.Empty.Add(item);
 
         /// <inheritdoc cref="ImmutableList.Create{T}(T[])"/>
-        public static ImmutableSegmentedList<T> Create<T>(params T[] items)
-            => ImmutableSegmentedList<T>.Empty.AddRange(items);
+        public static ImmutableSegmentedList<T> Create<T>(params T[] items) =>
+            ImmutableSegmentedList<T>.Empty.AddRange(items);
 
         /// <inheritdoc cref="ImmutableList.CreateBuilder{T}()"/>
-        public static ImmutableSegmentedList<T>.Builder CreateBuilder<T>()
-            => ImmutableSegmentedList<T>.Empty.ToBuilder();
+        public static ImmutableSegmentedList<T>.Builder CreateBuilder<T>() =>
+            ImmutableSegmentedList<T>.Empty.ToBuilder();
 
         /// <inheritdoc cref="ImmutableList.CreateRange{T}(IEnumerable{T})"/>
-        public static ImmutableSegmentedList<T> CreateRange<T>(IEnumerable<T> items)
-            => ImmutableSegmentedList<T>.Empty.AddRange(items);
+        public static ImmutableSegmentedList<T> CreateRange<T>(IEnumerable<T> items) =>
+            ImmutableSegmentedList<T>.Empty.AddRange(items);
 
         /// <inheritdoc cref="ImmutableList.ToImmutableList{TSource}(IEnumerable{TSource})"/>
-        public static ImmutableSegmentedList<T> ToImmutableSegmentedList<T>(this IEnumerable<T> source)
+        public static ImmutableSegmentedList<T> ToImmutableSegmentedList<T>(
+            this IEnumerable<T> source
+        )
         {
             if (source is ImmutableSegmentedList<T> existingList)
                 return existingList;
@@ -40,7 +41,9 @@ namespace Microsoft.CodeAnalysis.Collections
         }
 
         /// <inheritdoc cref="ImmutableList.ToImmutableList{TSource}(ImmutableList{TSource}.Builder)"/>
-        public static ImmutableSegmentedList<T> ToImmutableSegmentedList<T>(this ImmutableSegmentedList<T>.Builder builder)
+        public static ImmutableSegmentedList<T> ToImmutableSegmentedList<T>(
+            this ImmutableSegmentedList<T>.Builder builder
+        )
         {
             if (builder is null)
                 throw new ArgumentNullException(nameof(builder));

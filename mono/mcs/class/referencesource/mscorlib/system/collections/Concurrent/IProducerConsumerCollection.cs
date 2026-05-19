@@ -1,7 +1,7 @@
 ﻿// ==++==
 //
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 // =+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+
 //
@@ -19,7 +19,6 @@ using System.Diagnostics;
 
 namespace System.Collections.Concurrent
 {
-
     /// <summary>
     /// Defines methods to manipulate thread-safe collections intended for producer/consumer usage.
     /// </summary>
@@ -30,7 +29,6 @@ namespace System.Collections.Concurrent
     /// </remarks>
     public interface IProducerConsumerCollection<T> : IEnumerable<T>, ICollection
     {
-
         /// <summary>
         /// Copies the elements of the <see cref="IProducerConsumerCollection{T}"/> to
         /// an
@@ -79,9 +77,7 @@ namespace System.Collections.Concurrent
         /// </summary>
         /// <returns>A new array containing the elements copied from the <see cref="IProducerConsumerCollection{T}"/>.</returns>
         T[] ToArray();
-
     }
-
 
     /// <summary>
     /// A debugger view of the IProducerConsumerCollection that makes it simple to browse the
@@ -96,7 +92,9 @@ namespace System.Collections.Concurrent
         /// Constructs a new debugger view object for the provided collection object.
         /// </summary>
         /// <param name="collection">A collection to browse in the debugger.</param>
-        public SystemCollectionsConcurrent_ProducerConsumerCollectionDebugView(IProducerConsumerCollection<T> collection)
+        public SystemCollectionsConcurrent_ProducerConsumerCollectionDebugView(
+            IProducerConsumerCollection<T> collection
+        )
         {
             if (collection == null)
             {
@@ -114,6 +112,5 @@ namespace System.Collections.Concurrent
         {
             get { return m_collection.ToArray(); }
         }
-
     }
 }

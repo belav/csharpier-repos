@@ -25,18 +25,18 @@ namespace hello_tryfinally_basics_cs
             testLog = new TestUtil.TestLog(expectedOut);
         }
 
-        static public void inTry()
+        public static void inTry()
         {
             Console.WriteLine("in Try");
         }
 
-        static public void inFinally()
+        public static void inFinally()
         {
             Console.WriteLine("in Finally");
         }
 
         [Fact]
-        static public int TestEntryPoint()
+        public static int TestEntryPoint()
         {
             //Start recording
             testLog.StartRecording();

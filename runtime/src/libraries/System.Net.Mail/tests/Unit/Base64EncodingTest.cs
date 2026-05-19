@@ -31,7 +31,9 @@ namespace System.Net.Mime.Tests
         [Theory]
         [InlineData("some test header to base64 encode")]
         [InlineData("some test h\xE9ader to base64asdf\xE9\xE5")]
-        public void Base64Stream_EncodeString_WithBasicAsciiString_ShouldEncodeAndDecode(string testHeader)
+        public void Base64Stream_EncodeString_WithBasicAsciiString_ShouldEncodeAndDecode(
+            string testHeader
+        )
         {
             var s = new Base64Stream(new Base64WriteStateInfo());
             s.EncodeString(testHeader, Encoding.UTF8);
@@ -116,7 +118,7 @@ namespace System.Net.Mime.Tests
         }
 
         private const string LongString =
-@"01234567
+            @"01234567
 11234567
 21234567
 31234567

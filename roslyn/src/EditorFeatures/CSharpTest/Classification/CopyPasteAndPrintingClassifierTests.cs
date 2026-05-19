@@ -38,15 +38,21 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 workspace.GetService<IThreadingContext>(),
                 workspace.GetService<ClassificationTypeMap>(),
                 listenerProvider,
-                workspace.GlobalOptions);
+                workspace.GlobalOptions
+            );
 
             var tagger = provider.CreateTagger<IClassificationTag>(document.GetTextBuffer())!;
             using var disposable = (IDisposable)tagger;
             var waiter = listenerProvider.GetWaiter(FeatureAttribute.Classification);
             await waiter.ExpeditedWaitAsync();
 
-            var tags = tagger.GetTags(document.GetTextBuffer().CurrentSnapshot.GetSnapshotSpanCollection());
-            var allTags = tagger.GetAllTags(document.GetTextBuffer().CurrentSnapshot.GetSnapshotSpanCollection(), CancellationToken.None);
+            var tags = tagger.GetTags(
+                document.GetTextBuffer().CurrentSnapshot.GetSnapshotSpanCollection()
+            );
+            var allTags = tagger.GetAllTags(
+                document.GetTextBuffer().CurrentSnapshot.GetSnapshotSpanCollection(),
+                CancellationToken.None
+            );
 
             Assert.Empty(tags);
             Assert.NotEmpty(allTags);

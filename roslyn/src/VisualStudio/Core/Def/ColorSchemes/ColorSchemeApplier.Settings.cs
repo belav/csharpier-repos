@@ -32,7 +32,8 @@ namespace Microsoft.CodeAnalysis.ColorSchemes
             public ColorSchemeSettings(
                 IThreadingContext threadingContext,
                 IServiceProvider serviceProvider,
-                IGlobalOptionService globalOptions)
+                IGlobalOptionService globalOptions
+            )
             {
                 _threadingContext = threadingContext;
                 _serviceProvider = serviceProvider;
@@ -44,7 +45,7 @@ namespace Microsoft.CodeAnalysis.ColorSchemes
                 return new[]
                 {
                     ColorSchemeName.VisualStudio2019,
-                    ColorSchemeName.VisualStudio2017
+                    ColorSchemeName.VisualStudio2017,
                 }.ToImmutableDictionary(name => name, GetColorScheme);
             }
 
@@ -57,15 +58,26 @@ namespace Microsoft.CodeAnalysis.ColorSchemes
             private static Stream GetColorSchemeXmlStream(ColorSchemeName schemeName)
             {
                 var assembly = Assembly.GetExecutingAssembly();
-                return assembly.GetManifestResourceStream($"Microsoft.VisualStudio.LanguageServices.ColorSchemes.{schemeName}.xml");
+                return assembly.GetManifestResourceStream(
+                    $"Microsoft.VisualStudio.LanguageServices.ColorSchemes.{schemeName}.xml"
+                );
             }
 
             public async Task ApplyColorSchemeAsync(
-                ColorSchemeName schemeName, ImmutableArray<RegistryItem> registryItems, CancellationToken cancellationToken)
+                ColorSchemeName schemeName,
+                ImmutableArray<RegistryItem> registryItems,
+                CancellationToken cancellationToken
+            )
             {
-                await _threadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
+                await _threadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(
+                    cancellationToken
+                );
 
-                using var registryRoot = VSRegistry.RegistryRoot(_serviceProvider, __VsLocalRegistryType.RegType_Configuration, writable: true);
+                using var registryRoot = VSRegistry.RegistryRoot(
+                    _serviceProvider,
+                    __VsLocalRegistryType.RegType_Configuration,
+                    writable: true
+                );
 
                 foreach (var item in registryItems)
                 {
@@ -80,19 +92,32 @@ namespace Microsoft.CodeAnalysis.ColorSchemes
                 SetAppliedColorScheme(schemeName);
 
                 // Broadcast that system color settings have changed to force the ColorThemeService to reload colors.
-                NativeMethods.PostMessage(NativeMethods.HWND_BROADCAST, NativeMethods.WM_SYSCOLORCHANGE, wparam: IntPtr.Zero, lparam: IntPtr.Zero);
+                NativeMethods.PostMessage(
+                    NativeMethods.HWND_BROADCAST,
+                    NativeMethods.WM_SYSCOLORCHANGE,
+                    wparam: IntPtr.Zero,
+                    lparam: IntPtr.Zero
+                );
             }
 
             /// <summary>
             /// Get the color scheme that is applied to the configuration registry.
             /// </summary>
-            public async Task<ColorSchemeName> GetAppliedColorSchemeAsync(CancellationToken cancellationToken)
+            public async Task<ColorSchemeName> GetAppliedColorSchemeAsync(
+                CancellationToken cancellationToken
+            )
             {
-                await _threadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
+                await _threadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(
+                    cancellationToken
+                );
 
                 // The applied color scheme is stored in the configuration registry with the color theme information because
                 // when the hive gets rebuilt during upgrades, we need to reapply the color scheme information.
-                using var registryRoot = VSRegistry.RegistryRoot(_serviceProvider, __VsLocalRegistryType.RegType_Configuration, writable: false);
+                using var registryRoot = VSRegistry.RegistryRoot(
+                    _serviceProvider,
+                    __VsLocalRegistryType.RegType_Configuration,
+                    writable: false
+                );
                 using var itemKey = registryRoot.OpenSubKey(ColorSchemeApplierKey);
                 return itemKey is object
                     ? (ColorSchemeName)itemKey.GetValue(AppliedColorSchemeName)
@@ -105,7 +130,11 @@ namespace Microsoft.CodeAnalysis.ColorSchemes
 
                 // The applied color scheme is stored in the configuration registry with the color theme information because
                 // when the hive gets rebuilt during upgrades, we need to reapply the color scheme information.
-                using var registryRoot = VSRegistry.RegistryRoot(_serviceProvider, __VsLocalRegistryType.RegType_Configuration, writable: true);
+                using var registryRoot = VSRegistry.RegistryRoot(
+                    _serviceProvider,
+                    __VsLocalRegistryType.RegType_Configuration,
+                    writable: true
+                );
                 using var itemKey = registryRoot.CreateSubKey(ColorSchemeApplierKey);
                 itemKey.SetValue(AppliedColorSchemeName, (int)schemeName);
                 // Flush RegistryKeys out of paranoia
@@ -123,20 +152,28 @@ namespace Microsoft.CodeAnalysis.ColorSchemes
             public void MigrateToColorSchemeSetting()
             {
                 // Get the preview feature flag value.
-                var useEnhancedColorsSetting = _globalOptions.GetOption(ColorSchemeOptionsStorage.LegacyUseEnhancedColors);
+                var useEnhancedColorsSetting = _globalOptions.GetOption(
+                    ColorSchemeOptionsStorage.LegacyUseEnhancedColors
+                );
 
                 // Return if we have already migrated.
-                if (useEnhancedColorsSetting == ColorSchemeOptionsStorage.UseEnhancedColors.Migrated)
+                if (
+                    useEnhancedColorsSetting == ColorSchemeOptionsStorage.UseEnhancedColors.Migrated
+                )
                 {
                     return;
                 }
 
-                var colorScheme = useEnhancedColorsSetting == ColorSchemeOptionsStorage.UseEnhancedColors.DoNotUse
-                    ? ColorSchemeName.VisualStudio2017
-                    : ColorSchemeName.VisualStudio2019;
+                var colorScheme =
+                    useEnhancedColorsSetting == ColorSchemeOptionsStorage.UseEnhancedColors.DoNotUse
+                        ? ColorSchemeName.VisualStudio2017
+                        : ColorSchemeName.VisualStudio2019;
 
                 _globalOptions.SetGlobalOption(ColorSchemeOptionsStorage.ColorScheme, colorScheme);
-                _globalOptions.SetGlobalOption(ColorSchemeOptionsStorage.LegacyUseEnhancedColors, ColorSchemeOptionsStorage.UseEnhancedColors.Migrated);
+                _globalOptions.SetGlobalOption(
+                    ColorSchemeOptionsStorage.LegacyUseEnhancedColors,
+                    ColorSchemeOptionsStorage.UseEnhancedColors.Migrated
+                );
             }
         }
     }

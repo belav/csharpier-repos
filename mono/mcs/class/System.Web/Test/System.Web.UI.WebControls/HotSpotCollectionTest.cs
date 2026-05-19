@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -26,31 +26,30 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-using NUnit.Framework;
 using System;
-using System.IO;
 using System.Globalization;
+using System.IO;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using MonoTests.stand_alone.WebHarness;
 using MonoTests.SystemWeb.Framework;
+using NUnit.Framework;
 
 namespace MonoTests.System.Web.UI.WebControls
 {
     [TestFixture]
     public class HotSpotCollectionTest
     {
-
         [Test]
         public void HotSpotCollection_Add()
-         {
-             HotSpotCollection spots = new HotSpotCollection();
-             Assert.AreEqual(0, spots.Count, "BeforeAdd");
-             CircleHotSpot circle = new CircleHotSpot();
-             spots.Add(circle);
-             Assert.AreEqual(1, spots.Count, "AfterAdd");
-             Assert.AreEqual(circle.ToString(), spots[0].ToString(), "AfterAdd");
+        {
+            HotSpotCollection spots = new HotSpotCollection();
+            Assert.AreEqual(0, spots.Count, "BeforeAdd");
+            CircleHotSpot circle = new CircleHotSpot();
+            spots.Add(circle);
+            Assert.AreEqual(1, spots.Count, "AfterAdd");
+            Assert.AreEqual(circle.ToString(), spots[0].ToString(), "AfterAdd");
         }
 
         [Test]
@@ -61,7 +60,7 @@ namespace MonoTests.System.Web.UI.WebControls
             spots.Add(new CircleHotSpot());
             Assert.AreEqual(2, spots.Count, "BeforeInsert");
             RectangleHotSpot rect = new RectangleHotSpot();
-            spots.Insert(1,rect);
+            spots.Insert(1, rect);
             Assert.AreEqual(3, spots.Count, "AfterInsert");
             Assert.AreEqual(rect.ToString(), spots[1].ToString(), "AfterInsert");
         }
@@ -97,5 +96,3 @@ namespace MonoTests.System.Web.UI.WebControls
         }
     }
 }
-
-

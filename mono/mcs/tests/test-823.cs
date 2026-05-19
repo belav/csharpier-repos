@@ -2,12 +2,12 @@
 
 class Test
 {
-	public static int Main ()
-	{
-		var a = new A ();
-		if (a.Prop != 1)
-			return 1;
-		
-		return 0;
-	}
+    public static int Main()
+    {
+        var a = new A();
+        if (a.Prop != 1)
+            return 1;
+
+        return 0;
+    }
 }

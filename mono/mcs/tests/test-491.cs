@@ -1,12 +1,10 @@
-
 [AttrB]
-public class M {
-	public static void Main()
-	{
-	}
+public class M
+{
+    public static void Main() { }
 }
 
 [AttrB]
-public class AttrA : System.Attribute {}
+public class AttrA : System.Attribute { }
 
-public class AttrB : AttrA {}
+public class AttrB : AttrA { }

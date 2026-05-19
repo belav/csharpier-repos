@@ -53,40 +53,61 @@ namespace ILCompiler
         /// Note that if <paramref name="implType"/> is a value type, the result of the resolution
         /// might have to be treated as an unboxing thunk by the caller.
         /// </remarks>
-        public MethodDesc ResolveVirtualMethod(MethodDesc declMethod, TypeDesc implType, out CORINFO_DEVIRTUALIZATION_DETAIL devirtualizationDetail)
+        public MethodDesc ResolveVirtualMethod(
+            MethodDesc declMethod,
+            TypeDesc implType,
+            out CORINFO_DEVIRTUALIZATION_DETAIL devirtualizationDetail
+        )
         {
             Debug.Assert(declMethod.IsVirtual);
 
             // We're operating on virtual methods. This means that if implType is an array, we need
             // to get the type that has all the virtual methods provided by the class library.
-            return ResolveVirtualMethod(declMethod, implType.GetClosestDefType(), out devirtualizationDetail);
+            return ResolveVirtualMethod(
+                declMethod,
+                implType.GetClosestDefType(),
+                out devirtualizationDetail
+            );
         }
 
-        protected virtual MethodDesc ResolveVirtualMethod(MethodDesc declMethod, DefType implType, out CORINFO_DEVIRTUALIZATION_DETAIL devirtualizationDetail)
+        protected virtual MethodDesc ResolveVirtualMethod(
+            MethodDesc declMethod,
+            DefType implType,
+            out CORINFO_DEVIRTUALIZATION_DETAIL devirtualizationDetail
+        )
         {
-            devirtualizationDetail = CORINFO_DEVIRTUALIZATION_DETAIL.CORINFO_DEVIRTUALIZATION_UNKNOWN;
+            devirtualizationDetail =
+                CORINFO_DEVIRTUALIZATION_DETAIL.CORINFO_DEVIRTUALIZATION_UNKNOWN;
 
             MethodDesc impl;
 
             if (declMethod.OwningType.IsInterface)
             {
-                if (declMethod.OwningType.IsCanonicalSubtype(CanonicalFormKind.Any) || implType.IsCanonicalSubtype(CanonicalFormKind.Any))
+                if (
+                    declMethod.OwningType.IsCanonicalSubtype(CanonicalFormKind.Any)
+                    || implType.IsCanonicalSubtype(CanonicalFormKind.Any)
+                )
                 {
                     DefType[] implTypeRuntimeInterfaces = implType.RuntimeInterfaces;
                     int canonicallyMatchingInterfacesFound = 0;
-                    DefType canonicalInterfaceType = (DefType)declMethod.OwningType.ConvertToCanonForm(CanonicalFormKind.Specific);
+                    DefType canonicalInterfaceType = (DefType)
+                        declMethod.OwningType.ConvertToCanonForm(CanonicalFormKind.Specific);
                     for (int i = 0; i < implTypeRuntimeInterfaces.Length; i++)
                     {
                         DefType runtimeInterface = implTypeRuntimeInterfaces[i];
-                        if (canonicalInterfaceType.HasSameTypeDefinition(runtimeInterface) &&
-                            runtimeInterface.ConvertToCanonForm(CanonicalFormKind.Specific) == canonicalInterfaceType)
+                        if (
+                            canonicalInterfaceType.HasSameTypeDefinition(runtimeInterface)
+                            && runtimeInterface.ConvertToCanonForm(CanonicalFormKind.Specific)
+                                == canonicalInterfaceType
+                        )
                         {
                             canonicallyMatchingInterfacesFound++;
                             if (canonicallyMatchingInterfacesFound > 1)
                             {
                                 // We cannot resolve the interface as we don't know with exact enough detail which interface
                                 // of multiple possible interfaces is being called.
-                                devirtualizationDetail = CORINFO_DEVIRTUALIZATION_DETAIL.CORINFO_DEVIRTUALIZATION_MULTIPLE_IMPL;
+                                devirtualizationDetail =
+                                    CORINFO_DEVIRTUALIZATION_DETAIL.CORINFO_DEVIRTUALIZATION_MULTIPLE_IMPL;
                                 return null;
                             }
                         }
@@ -95,7 +116,8 @@ namespace ILCompiler
 
                 if (!implType.CanCastTo(declMethod.OwningType))
                 {
-                    devirtualizationDetail = CORINFO_DEVIRTUALIZATION_DETAIL.CORINFO_DEVIRTUALIZATION_FAILED_CAST;
+                    devirtualizationDetail =
+                        CORINFO_DEVIRTUALIZATION_DETAIL.CORINFO_DEVIRTUALIZATION_FAILED_CAST;
                     return null;
                 }
 
@@ -119,9 +141,13 @@ namespace ILCompiler
                             defaultInterfaceDispatchDeclMethod = declMethod;
                             break;
                         }
-                        if (iface.HasSameTypeDefinition(declMethod.OwningType) && iface.CanCastTo(declMethod.OwningType))
+                        if (
+                            iface.HasSameTypeDefinition(declMethod.OwningType)
+                            && iface.CanCastTo(declMethod.OwningType)
+                        )
                         {
-                            defaultInterfaceDispatchDeclMethod = iface.FindMethodOnTypeWithMatchingTypicalMethod(declMethod);
+                            defaultInterfaceDispatchDeclMethod =
+                                iface.FindMethodOnTypeWithMatchingTypicalMethod(declMethod);
                             // Prefer to find the exact match, so don't break immediately
                         }
                     }
@@ -129,22 +155,32 @@ namespace ILCompiler
                     if (defaultInterfaceDispatchDeclMethod != null)
                     {
                         MethodDesc dimMethod;
-                        switch (implType.ResolveInterfaceMethodToDefaultImplementationOnType(defaultInterfaceDispatchDeclMethod, out dimMethod))
+                        switch (
+                            implType.ResolveInterfaceMethodToDefaultImplementationOnType(
+                                defaultInterfaceDispatchDeclMethod,
+                                out dimMethod
+                            )
+                        )
                         {
                             case DefaultInterfaceMethodResolution.Diamond:
                             case DefaultInterfaceMethodResolution.Reabstraction:
-                                devirtualizationDetail = CORINFO_DEVIRTUALIZATION_DETAIL.CORINFO_DEVIRTUALIZATION_FAILED_DIM;
+                                devirtualizationDetail =
+                                    CORINFO_DEVIRTUALIZATION_DETAIL.CORINFO_DEVIRTUALIZATION_FAILED_DIM;
                                 return null;
 
                             case DefaultInterfaceMethodResolution.DefaultImplementation:
-                                if (dimMethod.OwningType.HasInstantiation || (declMethod != defaultInterfaceDispatchDeclMethod))
+                                if (
+                                    dimMethod.OwningType.HasInstantiation
+                                    || (declMethod != defaultInterfaceDispatchDeclMethod)
+                                )
                                 {
                                     // If we devirtualized into a default interface method on a generic type, we should actually return an
                                     // instantiating stub but this is not happening.
                                     // Making this work is tracked by https://github.com/dotnet/runtime/issues/9588
 
                                     // In addition, we fail here for variant default interface dispatch
-                                    devirtualizationDetail = CORINFO_DEVIRTUALIZATION_DETAIL.CORINFO_DEVIRTUALIZATION_FAILED_DIM;
+                                    devirtualizationDetail =
+                                        CORINFO_DEVIRTUALIZATION_DETAIL.CORINFO_DEVIRTUALIZATION_FAILED_DIM;
                                     return null;
                                 }
                                 else
@@ -161,13 +197,23 @@ namespace ILCompiler
                 // The derived class should be a subclass of the base class.
                 // this check is performed via typedef checking instead of casting, as we accept canon methods calling exact types
                 TypeDesc checkType;
-                for (checkType = implType; checkType != null && !checkType.HasSameTypeDefinition(declMethod.OwningType); checkType = checkType.BaseType)
-                { }
+                for (
+                    checkType = implType;
+                    checkType != null && !checkType.HasSameTypeDefinition(declMethod.OwningType);
+                    checkType = checkType.BaseType
+                ) { }
 
-                if ((checkType == null) || (checkType.ConvertToCanonForm(CanonicalFormKind.Specific) != declMethod.OwningType.ConvertToCanonForm(CanonicalFormKind.Specific)))
+                if (
+                    (checkType == null)
+                    || (
+                        checkType.ConvertToCanonForm(CanonicalFormKind.Specific)
+                        != declMethod.OwningType.ConvertToCanonForm(CanonicalFormKind.Specific)
+                    )
+                )
                 {
                     // The derived class should be a subclass of the base class.
-                    devirtualizationDetail = CORINFO_DEVIRTUALIZATION_DETAIL.CORINFO_DEVIRTUALIZATION_FAILED_SUBCLASS;
+                    devirtualizationDetail =
+                        CORINFO_DEVIRTUALIZATION_DETAIL.CORINFO_DEVIRTUALIZATION_FAILED_SUBCLASS;
                     return null;
                 }
                 else
@@ -180,8 +226,12 @@ namespace ILCompiler
                 impl = implType.FindVirtualFunctionTargetMethodOnObjectType(declMethod);
                 if (impl != null && (impl != declMethod))
                 {
-                    MethodDesc slotDefiningMethodImpl = MetadataVirtualMethodAlgorithm.FindSlotDefiningMethodForVirtualMethod(impl);
-                    MethodDesc slotDefiningMethodDecl = MetadataVirtualMethodAlgorithm.FindSlotDefiningMethodForVirtualMethod(declMethod);
+                    MethodDesc slotDefiningMethodImpl =
+                        MetadataVirtualMethodAlgorithm.FindSlotDefiningMethodForVirtualMethod(impl);
+                    MethodDesc slotDefiningMethodDecl =
+                        MetadataVirtualMethodAlgorithm.FindSlotDefiningMethodForVirtualMethod(
+                            declMethod
+                        );
 
                     if (slotDefiningMethodImpl != slotDefiningMethodDecl)
                     {
@@ -192,7 +242,8 @@ namespace ILCompiler
                         //
                         // Note the jit could still safely devirtualize if it had an exact
                         // class, but such cases are likely rare.
-                        devirtualizationDetail = CORINFO_DEVIRTUALIZATION_DETAIL.CORINFO_DEVIRTUALIZATION_FAILED_SLOT;
+                        devirtualizationDetail =
+                            CORINFO_DEVIRTUALIZATION_DETAIL.CORINFO_DEVIRTUALIZATION_FAILED_SLOT;
                         impl = null;
                     }
                 }

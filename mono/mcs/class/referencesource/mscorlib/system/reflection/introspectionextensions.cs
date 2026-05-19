@@ -1,7 +1,7 @@
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 /*=============================================================================
 **
@@ -21,17 +21,21 @@ namespace System.Reflection
 
     public static class IntrospectionExtensions
     {
-	    public static TypeInfo GetTypeInfo(this Type type){
-            if(type == null){
+        public static TypeInfo GetTypeInfo(this Type type)
+        {
+            if (type == null)
+            {
                 throw new ArgumentNullException("type");
             }
-            var rcType=(IReflectableType)type;
-            if(rcType==null){
+            var rcType = (IReflectableType)type;
+            if (rcType == null)
+            {
                 return null;
-            }else{
+            }
+            else
+            {
                 return rcType.GetTypeInfo();
             }
-        }   
+        }
     }
 }
-

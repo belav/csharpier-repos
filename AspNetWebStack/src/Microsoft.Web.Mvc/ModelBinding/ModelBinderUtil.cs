@@ -43,10 +43,20 @@ namespace Microsoft.Web.Mvc.ModelBinding
             }
         }
 
-        public static IExtensibleModelBinder GetPossibleBinderInstance(Type closedModelType, Type openModelType, Type openBinderType)
+        public static IExtensibleModelBinder GetPossibleBinderInstance(
+            Type closedModelType,
+            Type openModelType,
+            Type openBinderType
+        )
         {
-            Type[] typeArguments = TypeHelpers.GetTypeArgumentsIfMatch(closedModelType, openModelType);
-            return (typeArguments != null) ? (IExtensibleModelBinder)Activator.CreateInstance(openBinderType.MakeGenericType(typeArguments)) : null;
+            Type[] typeArguments = TypeHelpers.GetTypeArgumentsIfMatch(
+                closedModelType,
+                openModelType
+            );
+            return (typeArguments != null)
+                ? (IExtensibleModelBinder)
+                    Activator.CreateInstance(openBinderType.MakeGenericType(typeArguments))
+                : null;
         }
 
         public static object[] RawValueToObjectArray(object rawValue)
@@ -77,7 +87,9 @@ namespace Microsoft.Web.Mvc.ModelBinding
 
         public static void ReplaceEmptyStringWithNull(ModelMetadata modelMetadata, ref object model)
         {
-            if (modelMetadata.ConvertEmptyStringToNull && StringIsEmptyOrWhitespace(model as string))
+            if (
+                modelMetadata.ConvertEmptyStringToNull && StringIsEmptyOrWhitespace(model as string)
+            )
             {
                 model = null;
             }
@@ -91,7 +103,8 @@ namespace Microsoft.Web.Mvc.ModelBinding
         /// <returns>New <see cref="MissingMethodException"/> if an update is required; null otherwise.</returns>
         public static MissingMethodException EnsureDebuggableException(
             MissingMethodException originalException,
-            string fullTypeName)
+            string fullTypeName
+        )
         {
             MissingMethodException replacementException = null;
             if (!originalException.Message.Contains(fullTypeName))
@@ -100,7 +113,8 @@ namespace Microsoft.Web.Mvc.ModelBinding
                     CultureInfo.CurrentCulture,
                     MvcResources.ModelBinderUtil_CannotCreateInstance,
                     originalException.Message,
-                    fullTypeName);
+                    fullTypeName
+                );
                 replacementException = new MissingMethodException(message, originalException);
             }
 
@@ -141,13 +155,20 @@ namespace Microsoft.Web.Mvc.ModelBinding
             }
         }
 
-        public static void ValidateBindingContext(ExtensibleModelBindingContext bindingContext, Type requiredType, bool allowNullModel)
+        public static void ValidateBindingContext(
+            ExtensibleModelBindingContext bindingContext,
+            Type requiredType,
+            bool allowNullModel
+        )
         {
             ValidateBindingContext(bindingContext);
 
             if (bindingContext.ModelType != requiredType)
             {
-                throw Error.ModelBinderUtil_ModelTypeIsWrong(bindingContext.ModelType, requiredType);
+                throw Error.ModelBinderUtil_ModelTypeIsWrong(
+                    bindingContext.ModelType,
+                    requiredType
+                );
             }
 
             if (!allowNullModel && bindingContext.Model == null)
@@ -155,9 +176,15 @@ namespace Microsoft.Web.Mvc.ModelBinding
                 throw Error.ModelBinderUtil_ModelCannotBeNull(requiredType);
             }
 
-            if (bindingContext.Model != null && !requiredType.IsInstanceOfType(bindingContext.Model))
+            if (
+                bindingContext.Model != null
+                && !requiredType.IsInstanceOfType(bindingContext.Model)
+            )
             {
-                throw Error.ModelBinderUtil_ModelInstanceIsWrong(bindingContext.Model.GetType(), requiredType);
+                throw Error.ModelBinderUtil_ModelInstanceIsWrong(
+                    bindingContext.Model.GetType(),
+                    requiredType
+                );
             }
         }
     }

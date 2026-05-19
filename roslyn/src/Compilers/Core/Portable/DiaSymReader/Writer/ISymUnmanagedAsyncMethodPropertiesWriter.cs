@@ -4,7 +4,7 @@
 
 #nullable disable
 
-#pragma warning disable 436 // SuppressUnmanagedCodeSecurityAttribute defined in source and mscorlib 
+#pragma warning disable 436 // SuppressUnmanagedCodeSecurityAttribute defined in source and mscorlib
 
 using System;
 using System.Runtime.InteropServices;
@@ -21,6 +21,11 @@ namespace Microsoft.DiaSymReader
         void DefineKickoffMethod(int kickoffMethod);
         void DefineCatchHandlerILOffset(int catchHandlerOffset);
 
-        unsafe void DefineAsyncStepInfo(int count, int* yieldOffsets, int* breakpointOffset, int* breakpointMethod);
+        unsafe void DefineAsyncStepInfo(
+            int count,
+            int* yieldOffsets,
+            int* breakpointOffset,
+            int* breakpointMethod
+        );
     }
 }

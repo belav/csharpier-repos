@@ -20,7 +20,7 @@ namespace System.IdentityModel.Tokens
         SecurityKeyIdentifier _ski;
 
         //
-        // It is for encrypting the proof token or the entropy that can decrypted 
+        // It is for encrypting the proof token or the entropy that can decrypted
         // by the token requestor
         //
         EncryptingCredentials _requestorWrappingCredentials;
@@ -33,7 +33,7 @@ namespace System.IdentityModel.Tokens
 
         /// <summary>
         /// Use this constructor if you want the sts to use the given key bytes.
-        /// This happens when client sends the entropy, and the sts would just use that 
+        /// This happens when client sends the entropy, and the sts would just use that
         /// as the key for the issued token.
         /// </summary>
         /// <param name="key">The symmetric key that are used inside the issued token.</param>
@@ -57,9 +57,10 @@ namespace System.IdentityModel.Tokens
         /// </summary>
         /// <param name="targetWrappingCredentials">The <see cref="EncryptingCredentials"/> to be used.</param>
         public SymmetricProofDescriptor(EncryptingCredentials targetWrappingCredentials)
-            : this(SecurityTokenServiceConfiguration.DefaultKeySizeInBitsConstant, targetWrappingCredentials)
-        {
-        }
+            : this(
+                SecurityTokenServiceConfiguration.DefaultKeySizeInBitsConstant,
+                targetWrappingCredentials
+            ) { }
 
         /// <summary>
         /// Use this constructor if you want to the sts to autogenerate key using random number generator and
@@ -67,10 +68,11 @@ namespace System.IdentityModel.Tokens
         /// </summary>
         /// <param name="keySizeInBits">The size of the symmetric key.</param>
         /// <param name="targetWrappingCredentials">The key encrypting credentials for the relying party.</param>
-        public SymmetricProofDescriptor(int keySizeInBits, EncryptingCredentials targetWrappingCredentials)
-            : this(keySizeInBits, targetWrappingCredentials, null)
-        {
-        }
+        public SymmetricProofDescriptor(
+            int keySizeInBits,
+            EncryptingCredentials targetWrappingCredentials
+        )
+            : this(keySizeInBits, targetWrappingCredentials, null) { }
 
         /// <summary>
         /// Use this constructor to have the STS autogenerate a key and
@@ -82,10 +84,17 @@ namespace System.IdentityModel.Tokens
         /// <param name="targetWrappingCredentials">The key encrypting credentials for the relying party.</param>
         /// <param name="requestorWrappingCredentials">The key encrypting credentials for the requestor.</param>
         /// <exception cref="ArgumentOutOfRangeException">When keySizeInBits is less than or equal to zero.</exception>
-        public SymmetricProofDescriptor(int keySizeInBits, EncryptingCredentials targetWrappingCredentials, EncryptingCredentials requestorWrappingCredentials)
-            : this(keySizeInBits, targetWrappingCredentials, requestorWrappingCredentials, (string)null)
-        {
-        }
+        public SymmetricProofDescriptor(
+            int keySizeInBits,
+            EncryptingCredentials targetWrappingCredentials,
+            EncryptingCredentials requestorWrappingCredentials
+        )
+            : this(
+                keySizeInBits,
+                targetWrappingCredentials,
+                requestorWrappingCredentials,
+                (string)null
+            ) { }
 
         /// <summary>
         /// Use this constructor to have the STS autogenerate a key and
@@ -99,14 +108,20 @@ namespace System.IdentityModel.Tokens
         /// <param name="encryptWith">The a----thm specified in the EncryptWith element of the RST.</param>
         /// <exception cref="ArgumentOutOfRangeException">When keySizeInBits is less than or equal to zero.</exception>
         /// <remarks>If EncryptWith is a DES algorithm, the key is guaranteed not to be a weak DES key.</remarks>
-        public SymmetricProofDescriptor(int keySizeInBits, EncryptingCredentials targetWrappingCredentials,
-                                         EncryptingCredentials requestorWrappingCredentials, string encryptWith)
+        public SymmetricProofDescriptor(
+            int keySizeInBits,
+            EncryptingCredentials targetWrappingCredentials,
+            EncryptingCredentials requestorWrappingCredentials,
+            string encryptWith
+        )
         {
             _keySizeInBits = keySizeInBits;
 
-            if (encryptWith == SecurityAlgorithms.DesEncryption ||
-                 encryptWith == SecurityAlgorithms.TripleDesEncryption ||
-                 encryptWith == SecurityAlgorithms.TripleDesKeyWrap)
+            if (
+                encryptWith == SecurityAlgorithms.DesEncryption
+                || encryptWith == SecurityAlgorithms.TripleDesEncryption
+                || encryptWith == SecurityAlgorithms.TripleDesKeyWrap
+            )
             {
                 _key = CryptoHelper.KeyGenerator.GenerateDESKey(_keySizeInBits);
             }
@@ -128,11 +143,19 @@ namespace System.IdentityModel.Tokens
         /// <param name="sourceEntropy">The requestor's entropy.</param>
         /// <exception cref="ArgumentOutOfRangeException">When keySizeInBits is less than or equal to zero.</exception>
         /// <exception cref="ArgumentNullException">When source entorpy is null or is an empty array.</exception>
-        public SymmetricProofDescriptor(int keySizeInBits, EncryptingCredentials targetWrappingCredentials,
-                                         EncryptingCredentials requestorWrappingCredentials, byte[] sourceEntropy)
-            : this(keySizeInBits, targetWrappingCredentials, requestorWrappingCredentials, sourceEntropy, null)
-        {
-        }
+        public SymmetricProofDescriptor(
+            int keySizeInBits,
+            EncryptingCredentials targetWrappingCredentials,
+            EncryptingCredentials requestorWrappingCredentials,
+            byte[] sourceEntropy
+        )
+            : this(
+                keySizeInBits,
+                targetWrappingCredentials,
+                requestorWrappingCredentials,
+                sourceEntropy,
+                null
+            ) { }
 
         /// <summary>
         /// Use this constructor to send combined entropy.
@@ -144,8 +167,13 @@ namespace System.IdentityModel.Tokens
         /// <param name="encryptWith">The algorithm Uri using which to encrypt the proof key.</param>
         /// <exception cref="ArgumentOutOfRangeException">When keySizeInBits is less than or equal to zero.</exception>
         /// <exception cref="ArgumentNullException">When source entorpy is null or is an empty array.</exception>
-        public SymmetricProofDescriptor(int keySizeInBits, EncryptingCredentials targetWrappingCredentials,
-                                         EncryptingCredentials requestorWrappingCredentials, byte[] sourceEntropy, string encryptWith)
+        public SymmetricProofDescriptor(
+            int keySizeInBits,
+            EncryptingCredentials targetWrappingCredentials,
+            EncryptingCredentials requestorWrappingCredentials,
+            byte[] sourceEntropy,
+            string encryptWith
+        )
         {
             if (sourceEntropy == null)
             {
@@ -154,7 +182,10 @@ namespace System.IdentityModel.Tokens
 
             if (sourceEntropy.Length == 0)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument("sourceEntropy", SR.GetString(SR.ID2058));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                    "sourceEntropy",
+                    SR.GetString(SR.ID2058)
+                );
             }
 
             _keySizeInBits = keySizeInBits;
@@ -162,15 +193,25 @@ namespace System.IdentityModel.Tokens
             //
             // Generate proof key using sender entropy
             //
-            if (encryptWith == SecurityAlgorithms.DesEncryption ||
-                 encryptWith == SecurityAlgorithms.TripleDesEncryption ||
-                 encryptWith == SecurityAlgorithms.TripleDesKeyWrap)
+            if (
+                encryptWith == SecurityAlgorithms.DesEncryption
+                || encryptWith == SecurityAlgorithms.TripleDesEncryption
+                || encryptWith == SecurityAlgorithms.TripleDesKeyWrap
+            )
             {
-                _key = CryptoHelper.KeyGenerator.GenerateDESKey(_keySizeInBits, _sourceEntropy, out _targetEntropy);
+                _key = CryptoHelper.KeyGenerator.GenerateDESKey(
+                    _keySizeInBits,
+                    _sourceEntropy,
+                    out _targetEntropy
+                );
             }
             else
             {
-                _key = CryptoHelper.KeyGenerator.GenerateSymmetricKey(_keySizeInBits, _sourceEntropy, out _targetEntropy);
+                _key = CryptoHelper.KeyGenerator.GenerateSymmetricKey(
+                    _keySizeInBits,
+                    _sourceEntropy,
+                    out _targetEntropy
+                );
             }
 
             //
@@ -189,7 +230,7 @@ namespace System.IdentityModel.Tokens
         }
 
         /// <summary>
-        /// Gets the requestor's encrypting credentials, which may be used to encrypt the 
+        /// Gets the requestor's encrypting credentials, which may be used to encrypt the
         /// requested proof token or the entropy in the response.
         /// </summary>
         protected EncryptingCredentials RequestorEncryptingCredentials
@@ -225,8 +266,8 @@ namespace System.IdentityModel.Tokens
         #region ProofDescriptor Overrides
 
         /// <summary>
-        /// Sets the appropriate things, such as requested proof token, inside the RSTR 
-        /// based on what is inside the proof descriptor instance.  
+        /// Sets the appropriate things, such as requested proof token, inside the RSTR
+        /// based on what is inside the proof descriptor instance.
         /// </summary>
         /// <param name="response">The RSTR object that this proof descriptor needs to modify.</param>
         /// <exception cref="ArgumentNullException">When the response is null.</exception>
@@ -254,13 +295,16 @@ namespace System.IdentityModel.Tokens
                 // When there is no target entroypy, then we will send back the key either in
                 // binary secret format or in the encrypted key format
                 //
-                response.RequestedProofToken = new RequestedProofToken(_key, _requestorWrappingCredentials);
+                response.RequestedProofToken = new RequestedProofToken(
+                    _key,
+                    _requestorWrappingCredentials
+                );
             }
         }
 
         /// <summary>
         /// Gets the key identifier that can be used inside issued to define the key.
-        /// It is usually the binary secret or the encrypted key. 
+        /// It is usually the binary secret or the encrypted key.
         /// </summary>
         public override SecurityKeyIdentifier KeyIdentifier
         {
@@ -268,7 +312,10 @@ namespace System.IdentityModel.Tokens
             {
                 if (_ski == null)
                 {
-                    _ski = CryptoHelper.KeyGenerator.GetSecurityKeyIdentifier(_key, _targetWrappingCredentials);
+                    _ski = CryptoHelper.KeyGenerator.GetSecurityKeyIdentifier(
+                        _key,
+                        _targetWrappingCredentials
+                    );
                 }
 
                 return _ski;

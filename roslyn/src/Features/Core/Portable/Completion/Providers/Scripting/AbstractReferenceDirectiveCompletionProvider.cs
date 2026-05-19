@@ -13,13 +13,20 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.Completion.Providers
 {
-    internal abstract class AbstractReferenceDirectiveCompletionProvider : AbstractDirectivePathCompletionProvider
+    internal abstract class AbstractReferenceDirectiveCompletionProvider
+        : AbstractDirectivePathCompletionProvider
     {
         private static readonly CompletionItemRules s_rules = CompletionItemRules.Create(
             filterCharacterRules: ImmutableArray<CharacterSetModificationRule>.Empty,
-            commitCharacterRules: ImmutableArray.Create(CharacterSetModificationRule.Create(CharacterSetModificationKind.Replace, GetCommitCharacters())),
+            commitCharacterRules: ImmutableArray.Create(
+                CharacterSetModificationRule.Create(
+                    CharacterSetModificationKind.Replace,
+                    GetCommitCharacters()
+                )
+            ),
             enterKeyRule: EnterKeyRule.Never,
-            selectionBehavior: CompletionItemSelectionBehavior.HardSelection);
+            selectionBehavior: CompletionItemSelectionBehavior.HardSelection
+        );
 
         private static readonly char[] s_pathIndicators = ['/', '\\', ':'];
 
@@ -47,28 +54,60 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
             return builder.ToImmutable();
         }
 
-        protected override async Task ProvideCompletionsAsync(CompletionContext context, string pathThroughLastSlash)
+        protected override async Task ProvideCompletionsAsync(
+            CompletionContext context,
+            string pathThroughLastSlash
+        )
         {
-            var resolver = context.Document.Project.CompilationOptions.MetadataReferenceResolver as RuntimeMetadataReferenceResolver;
+            var resolver =
+                context.Document.Project.CompilationOptions.MetadataReferenceResolver
+                as RuntimeMetadataReferenceResolver;
             if (resolver != null && pathThroughLastSlash.IndexOfAny(s_pathIndicators) < 0)
             {
                 foreach (var (name, path) in resolver.TrustedPlatformAssemblies)
                 {
-                    context.AddItem(CommonCompletionItem.Create(name, displayTextSuffix: "", glyph: Glyph.Assembly, rules: s_rules));
-                    context.AddItem(CommonCompletionItem.Create(PathUtilities.GetFileName(path, includeExtension: true), displayTextSuffix: "", glyph: Glyph.Assembly, rules: s_rules));
+                    context.AddItem(
+                        CommonCompletionItem.Create(
+                            name,
+                            displayTextSuffix: "",
+                            glyph: Glyph.Assembly,
+                            rules: s_rules
+                        )
+                    );
+                    context.AddItem(
+                        CommonCompletionItem.Create(
+                            PathUtilities.GetFileName(path, includeExtension: true),
+                            displayTextSuffix: "",
+                            glyph: Glyph.Assembly,
+                            rules: s_rules
+                        )
+                    );
                 }
 
                 if (resolver.GacFileResolver is object)
                 {
                     var gacHelper = new GlobalAssemblyCacheCompletionHelper(s_rules);
-                    context.AddItems(await gacHelper.GetItemsAsync(pathThroughLastSlash, context.CancellationToken).ConfigureAwait(false));
+                    context.AddItems(
+                        await gacHelper
+                            .GetItemsAsync(pathThroughLastSlash, context.CancellationToken)
+                            .ConfigureAwait(false)
+                    );
                 }
             }
 
             if (pathThroughLastSlash.IndexOf(',') < 0)
             {
-                var helper = GetFileSystemCompletionHelper(context.Document, Glyph.Assembly, RuntimeMetadataReferenceResolver.AssemblyExtensions, s_rules);
-                context.AddItems(await helper.GetItemsAsync(pathThroughLastSlash, context.CancellationToken).ConfigureAwait(false));
+                var helper = GetFileSystemCompletionHelper(
+                    context.Document,
+                    Glyph.Assembly,
+                    RuntimeMetadataReferenceResolver.AssemblyExtensions,
+                    s_rules
+                );
+                context.AddItems(
+                    await helper
+                        .GetItemsAsync(pathThroughLastSlash, context.CancellationToken)
+                        .ConfigureAwait(false)
+                );
             }
         }
     }

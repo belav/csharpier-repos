@@ -2,15 +2,16 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
-using Roslyn.Utilities;
 using System;
 using System.Diagnostics;
 using System.Globalization;
 using System.IO;
+using System.IO.Pipes;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.CodeAnalysis.CommandLine;
-using System.IO.Pipes;
+using Roslyn.Utilities;
+
 namespace Microsoft.CodeAnalysis.CompilerServer
 {
     internal enum CompletionReason
@@ -25,7 +26,7 @@ namespace Microsoft.CodeAnalysis.CompilerServer
         /// The request contained an error that should cause the server to shutdown. This can happen for cases
         /// like:
         ///    - server state is invalid because of a collision between analyzer assemblies
-        ///    - client disconnected during build which is a treated as Ctrl-C event that should bring down 
+        ///    - client disconnected during build which is a treated as Ctrl-C event that should bring down
         ///      the server.
         /// </summary>
         RequestError,
@@ -37,18 +38,24 @@ namespace Microsoft.CodeAnalysis.CompilerServer
         internal TimeSpan? NewKeepAlive { get; }
         internal bool ShutdownRequest { get; }
 
-        internal CompletionData(CompletionReason reason, TimeSpan? newKeepAlive = null, bool shutdownRequested = false)
+        internal CompletionData(
+            CompletionReason reason,
+            TimeSpan? newKeepAlive = null,
+            bool shutdownRequested = false
+        )
         {
             Reason = reason;
             NewKeepAlive = newKeepAlive;
             ShutdownRequest = shutdownRequested;
         }
 
-        internal static CompletionData RequestCompleted { get; } = new CompletionData(CompletionReason.RequestCompleted);
+        internal static CompletionData RequestCompleted { get; } =
+            new CompletionData(CompletionReason.RequestCompleted);
 
-        internal static CompletionData RequestError { get; } = new CompletionData(CompletionReason.RequestError);
+        internal static CompletionData RequestError { get; } =
+            new CompletionData(CompletionReason.RequestError);
 
-        public override string ToString() => $"{Reason} KeepAlive:{NewKeepAlive} ShutdownRequest:{ShutdownRequest}";
+        public override string ToString() =>
+            $"{Reason} KeepAlive:{NewKeepAlive} ShutdownRequest:{ShutdownRequest}";
     }
 }
-

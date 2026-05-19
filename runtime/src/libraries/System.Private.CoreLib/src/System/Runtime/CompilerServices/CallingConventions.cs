@@ -7,10 +7,12 @@ namespace System.Runtime.CompilerServices
     {
         public CallConvCdecl() { }
     }
+
     public class CallConvFastcall
     {
         public CallConvFastcall() { }
     }
+
     public class CallConvStdcall
     {
         public CallConvStdcall() { }

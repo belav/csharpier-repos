@@ -4,44 +4,40 @@
 namespace System.ServiceModel.Dispatcher
 {
     using System;
-    using System.ServiceModel.Channels;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Runtime.Serialization;
-    
+    using System.ServiceModel.Channels;
+
     [Serializable]
     public class MultipleFilterMatchesException : SystemException
     {
         [NonSerialized]
         Collection<MessageFilter> filters;
-        
+
         protected MultipleFilterMatchesException(SerializationInfo info, StreamingContext context)
             : base(info, context)
         {
             this.filters = null;
         }
-        
+
         public MultipleFilterMatchesException()
-            : this(SR.GetString(SR.FilterMultipleMatches))
-        {
-        }
+            : this(SR.GetString(SR.FilterMultipleMatches)) { }
 
         public MultipleFilterMatchesException(string message)
-            : this(message, null, null)
-        {
-        }
+            : this(message, null, null) { }
 
         public MultipleFilterMatchesException(string message, Exception innerException)
-            : this(message, innerException, null)
-        {
-        }
+            : this(message, innerException, null) { }
 
         public MultipleFilterMatchesException(string message, Collection<MessageFilter> filters)
-            : this(message, null, filters)
-        {
-        }
+            : this(message, null, filters) { }
 
-        public MultipleFilterMatchesException(string message, Exception innerException, Collection<MessageFilter> filters)
+        public MultipleFilterMatchesException(
+            string message,
+            Exception innerException,
+            Collection<MessageFilter> filters
+        )
             : base(message, innerException)
         {
             this.filters = filters;
@@ -49,10 +45,7 @@ namespace System.ServiceModel.Dispatcher
 
         public Collection<MessageFilter> Filters
         {
-            get
-            {
-                return this.filters;
-            }
+            get { return this.filters; }
         }
     }
 }

@@ -14,11 +14,36 @@ namespace System.Net.Mail.Tests
 
         public static IEnumerable<object[]> MailAddressTestData()
         {
-            yield return new object[]{ Address, DisplayName, null, $"\"{DisplayName}\" <{Address}>" };
-            yield return new object[]{ Address, UnicodeDisplayName, null, $"\"{UnicodeDisplayName}\" <{Address}>" };
-            yield return new object[]{ Address, $"\"{DisplayName}\"", DisplayName, $"\"{DisplayName}\" <{Address}>" };
-            yield return new object[]{ Address, $"\"{UnicodeDisplayName}\"", UnicodeDisplayName, $"\"{UnicodeDisplayName}\" <{Address}>" };
+            yield return new object[]
+            {
+                Address,
+                DisplayName,
+                null,
+                $"\"{DisplayName}\" <{Address}>",
+            };
+            yield return new object[]
+            {
+                Address,
+                UnicodeDisplayName,
+                null,
+                $"\"{UnicodeDisplayName}\" <{Address}>",
+            };
+            yield return new object[]
+            {
+                Address,
+                $"\"{DisplayName}\"",
+                DisplayName,
+                $"\"{DisplayName}\" <{Address}>",
+            };
+            yield return new object[]
+            {
+                Address,
+                $"\"{UnicodeDisplayName}\"",
+                UnicodeDisplayName,
+                $"\"{UnicodeDisplayName}\" <{Address}>",
+            };
         }
+
         public static IEnumerable<object[]> MailAddressTestDataQuotes()
         {
             var displayNamesWithQuotes = new[]
@@ -31,18 +56,35 @@ namespace System.Net.Mail.Tests
             };
             foreach (var displayName in displayNamesWithQuotes)
             {
-                yield return new object[]{ Address, displayName, null, $"\"{displayName.Replace("\"", "\\\"")}\" <{Address}>" };
-                yield return new object[]{ Address, $"\"{displayName}\"", displayName, $"\"{displayName.Replace("\"", "\\\"")}\" <{Address}>" };
+                yield return new object[]
+                {
+                    Address,
+                    displayName,
+                    null,
+                    $"\"{displayName.Replace("\"", "\\\"")}\" <{Address}>",
+                };
+                yield return new object[]
+                {
+                    Address,
+                    $"\"{displayName}\"",
+                    displayName,
+                    $"\"{displayName.Replace("\"", "\\\"")}\" <{Address}>",
+                };
             }
 
-            yield return new object[]{ Address, null, "", Address };
-            yield return new object[]{ Address, "\"\"", "", Address };
+            yield return new object[] { Address, null, "", Address };
+            yield return new object[] { Address, "\"\"", "", Address };
         }
 
         [Theory]
         [MemberData(nameof(MailAddressTestData))]
         [MemberData(nameof(MailAddressTestDataQuotes))]
-        public void MailAddress_Ctor_Succeeds(string address, string displayName, string expectedDisplayName, string expectedToString)
+        public void MailAddress_Ctor_Succeeds(
+            string address,
+            string displayName,
+            string expectedDisplayName,
+            string expectedToString
+        )
         {
             var mailAddress = new MailAddress(address, displayName);
 
@@ -53,7 +95,12 @@ namespace System.Net.Mail.Tests
 
         [Theory]
         [MemberData(nameof(MailAddressTestData))]
-        public void MailAddress_Ctor_FullString_Succeeds(string address, string displayName, string expectedDisplayName, string expectedToString)
+        public void MailAddress_Ctor_FullString_Succeeds(
+            string address,
+            string displayName,
+            string expectedDisplayName,
+            string expectedToString
+        )
         {
             var mailAddress = new MailAddress($"{displayName} <{Address}>");
 

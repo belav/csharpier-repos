@@ -6,8 +6,7 @@ namespace System.Text.Json.Serialization.Tests
     public class ConstructorTests_String : ConstructorTests
     {
         public ConstructorTests_String()
-            : base(JsonSerializerWrapper.StringSerializer)
-        { }
+            : base(JsonSerializerWrapper.StringSerializer) { }
     }
 
     public class ConstructorTests_AsyncStream : ConstructorTests

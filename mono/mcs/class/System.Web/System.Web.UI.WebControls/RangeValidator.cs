@@ -5,10 +5,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -31,92 +31,133 @@ using System.Web.Util;
 
 // Modeled after Nikhil Kothari's sample in "ASP Server Controls and Components", pp368
 
-namespace System.Web.UI.WebControls {
+namespace System.Web.UI.WebControls
+{
+    // CAS
+    [AspNetHostingPermissionAttribute(
+        SecurityAction.LinkDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    [AspNetHostingPermissionAttribute(
+        SecurityAction.InheritanceDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    // attributes
+    [ToolboxData(
+        "<{0}:RangeValidator runat=\"server\" ErrorMessage=\"RangeValidator\"></{0}:RangeValidator>"
+    )]
+    public class RangeValidator : BaseCompareValidator
+    {
+        #region Public Constructors
+        public RangeValidator() { }
+        #endregion	// Public Constructors
 
-	// CAS
-	[AspNetHostingPermissionAttribute (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-	[AspNetHostingPermissionAttribute (SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-	// attributes
-	[ToolboxData("<{0}:RangeValidator runat=\"server\" ErrorMessage=\"RangeValidator\"></{0}:RangeValidator>")]
-	public class RangeValidator : BaseCompareValidator {
-		#region Public Constructors
-		public RangeValidator() {
-		}
-		#endregion	// Public Constructors
+        #region Public Instance Properties
+        [Themeable(false)]
+        [DefaultValue("")]
+        [WebSysDescription("")]
+        [WebCategory("Behavior")]
+        public string MaximumValue
+        {
+            get { return ViewState.GetString("MaximumValue", String.Empty); }
+            set { ViewState["MaximumValue"] = value; }
+        }
 
-		#region Public Instance Properties
-		[Themeable (false)]
-		[DefaultValue("")]
-		[WebSysDescription ("")]
-		[WebCategory ("Behavior")]
-		public string MaximumValue {
-			get {
-				return ViewState.GetString("MaximumValue", String.Empty);
-			}
+        [Themeable(false)]
+        [DefaultValue("")]
+        [WebSysDescription("")]
+        [WebCategory("Behavior")]
+        public string MinimumValue
+        {
+            get { return ViewState.GetString("MinimumValue", String.Empty); }
+            set { ViewState["MinimumValue"] = value; }
+        }
+        #endregion	// Public Instance Properties
 
-			set {
-				ViewState["MaximumValue"] = value;
-			}
-		}
+        #region Public Instance Methods
+        protected override void AddAttributesToRender(HtmlTextWriter writer)
+        {
+            base.AddAttributesToRender(writer);
 
-		[Themeable (false)]
-		[DefaultValue("")]
-		[WebSysDescription ("")]
-		[WebCategory ("Behavior")]
-		public string MinimumValue {
-			get {
-				return ViewState.GetString("MinimumValue", String.Empty);
-			}
+            if (RenderUplevel)
+            {
+                RegisterExpandoAttribute(
+                    ClientID,
+                    "evaluationfunction",
+                    "RangeValidatorEvaluateIsValid"
+                );
+                RegisterExpandoAttribute(ClientID, "minimumvalue", MinimumValue, true);
+                RegisterExpandoAttribute(ClientID, "maximumvalue", MaximumValue, true);
+            }
+        }
 
-			set {
-				ViewState["MinimumValue"] = value;
-			}
-		}
-		#endregion	// Public Instance Properties
+        protected override bool ControlPropertiesValid()
+        {
+            if (!CanConvert(MinimumValue, this.Type))
+            {
+                throw new HttpException(
+                    "Minimum value cannot be converterd to type " + this.Type.ToString()
+                );
+            }
+            if (!CanConvert(MaximumValue, this.Type))
+            {
+                throw new HttpException(
+                    "Maximum value cannot be converterd to type " + this.Type.ToString()
+                );
+            }
+            if (this.Type != ValidationDataType.String)
+            {
+                if (
+                    Compare(
+                        MinimumValue,
+                        MaximumValue,
+                        ValidationCompareOperator.GreaterThan,
+                        this.Type
+                    )
+                )
+                {
+                    throw new HttpException(
+                        "Maximum value must be equal or bigger than Minimum value"
+                    );
+                }
+            }
+            return base.ControlPropertiesValid();
+        }
 
-		#region Public Instance Methods
-		protected override void AddAttributesToRender(HtmlTextWriter writer) {
-			base.AddAttributesToRender (writer);
+        protected override bool EvaluateIsValid()
+        {
+            string control_value;
 
-			if (RenderUplevel) {
-				RegisterExpandoAttribute (ClientID, "evaluationfunction", "RangeValidatorEvaluateIsValid");
-				RegisterExpandoAttribute (ClientID, "minimumvalue", MinimumValue, true);
-				RegisterExpandoAttribute (ClientID, "maximumvalue", MaximumValue, true);
-			}
-		}
+            control_value = GetControlValidationValue(this.ControlToValidate);
+            if (control_value == null)
+                return true;
+            control_value = control_value.Trim();
+            if (control_value.Length == 0)
+                return true;
 
-		protected override bool ControlPropertiesValid() {
-			if (!CanConvert(MinimumValue, this.Type)) {
-				throw new HttpException("Minimum value cannot be converterd to type " + this.Type.ToString());
-			}
-			if (!CanConvert(MaximumValue, this.Type)) {
-				throw new HttpException("Maximum value cannot be converterd to type " + this.Type.ToString());
-			}
-			if (this.Type != ValidationDataType.String) {
-				if (Compare(MinimumValue, MaximumValue, ValidationCompareOperator.GreaterThan, this.Type)) {
-					throw new HttpException("Maximum value must be equal or bigger than Minimum value");
-				}
-			}
-			return base.ControlPropertiesValid ();
-		}
-
-		protected override bool EvaluateIsValid() {
-			string	control_value;
-
-			control_value = GetControlValidationValue(this.ControlToValidate);
-			if (control_value == null)
-				return true;
-			control_value = control_value.Trim();
-			if (control_value.Length == 0)
-				return true;
-
-			if (Compare(control_value, MinimumValue, ValidationCompareOperator.GreaterThanEqual, this.Type)) {
-				if (Compare(control_value, MaximumValue, ValidationCompareOperator.LessThanEqual, this.Type)) {
-					return true;
-				}
-			}
-			return false;
-		}
-		#endregion	// Public Instance Methods
-	}
+            if (
+                Compare(
+                    control_value,
+                    MinimumValue,
+                    ValidationCompareOperator.GreaterThanEqual,
+                    this.Type
+                )
+            )
+            {
+                if (
+                    Compare(
+                        control_value,
+                        MaximumValue,
+                        ValidationCompareOperator.LessThanEqual,
+                        this.Type
+                    )
+                )
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+        #endregion	// Public Instance Methods
+    }
 }

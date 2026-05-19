@@ -18,10 +18,7 @@ namespace System.Collections.Generic
         //
         public static IEnumerable<T> Enumerable
         {
-            get
-            {
-                return _enumerable;
-            }
+            get { return _enumerable; }
         }
 
         private sealed class EmptyEnumImpl : IEnumerable<T>, IEnumerator<T>
@@ -51,13 +48,9 @@ namespace System.Collections.Generic
                 return false;
             }
 
-            public void Reset()
-            {
-            }
+            public void Reset() { }
 
-            public void Dispose()
-            {
-            }
+            public void Dispose() { }
         }
 
         private static IEnumerable<T> _enumerable = new EmptyEnumImpl();

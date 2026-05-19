@@ -1,44 +1,37 @@
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 
-namespace System.Globalization {
-
+namespace System.Globalization
+{
     using System;
+    using System.Diagnostics.Contracts;
     using System.Runtime.Serialization;
     using System.Threading;
-    using System.Diagnostics.Contracts;
-    
+
     [System.Runtime.InteropServices.ComVisible(true)]
     [Serializable]
     public class CultureNotFoundException : ArgumentException, ISerializable
     {
-        private string          m_invalidCultureName; // unrecognized culture name
+        private string m_invalidCultureName; // unrecognized culture name
 #if !FEATURE_CORECLR
-        private Nullable<int>   m_invalidCultureId;   // unrecognized culture Lcid
+        private Nullable<int> m_invalidCultureId; // unrecognized culture Lcid
 #endif //!FEATURE_CORECLR
 
         public CultureNotFoundException()
-            : base(DefaultMessage)
-        {
-        }
+            : base(DefaultMessage) { }
 
         public CultureNotFoundException(String message)
-            : base(message)
-        {
-        }
+            : base(message) { }
 
         public CultureNotFoundException(String paramName, String message)
-            : base(message, paramName)
-        {
-        }
+            : base(message, paramName) { }
 
         public CultureNotFoundException(String message, Exception innerException)
-            : base(message, innerException)
-        {
-        }
+            : base(message, innerException) { }
+
 #if !FEATURE_CORECLR
         public CultureNotFoundException(String paramName, int invalidCultureId, String message)
             : base(message, paramName)
@@ -46,7 +39,11 @@ namespace System.Globalization {
             m_invalidCultureId = invalidCultureId;
         }
 
-        public CultureNotFoundException(String message, int invalidCultureId, Exception innerException)
+        public CultureNotFoundException(
+            String message,
+            int invalidCultureId,
+            Exception innerException
+        )
             : base(message, innerException)
         {
             m_invalidCultureId = invalidCultureId;
@@ -59,22 +56,31 @@ namespace System.Globalization {
             m_invalidCultureName = invalidCultureName;
         }
 
-        public CultureNotFoundException(String message, string invalidCultureName, Exception innerException)
+        public CultureNotFoundException(
+            String message,
+            string invalidCultureName,
+            Exception innerException
+        )
             : base(message, innerException)
         {
             m_invalidCultureName = invalidCultureName;
         }
 
-        protected CultureNotFoundException(SerializationInfo info, StreamingContext context) : base(info, context) {
+        protected CultureNotFoundException(SerializationInfo info, StreamingContext context)
+            : base(info, context)
+        {
 #if !FEATURE_CORECLR
-            m_invalidCultureId      = (Nullable<int>) info.GetValue("InvalidCultureId", typeof(Nullable<int>));
+            m_invalidCultureId =
+                (Nullable<int>)info.GetValue("InvalidCultureId", typeof(Nullable<int>));
 #endif //!FEATURE_CORECLR
-            m_invalidCultureName    = (string) info.GetValue("InvalidCultureName", typeof(string));
+            m_invalidCultureName = (string)info.GetValue("InvalidCultureName", typeof(string));
         }
 
-        [System.Security.SecurityCritical]  // auto-generated_required
-        public override void GetObjectData(SerializationInfo info, StreamingContext context) {
-            if (info==null) {
+        [System.Security.SecurityCritical] // auto-generated_required
+        public override void GetObjectData(SerializationInfo info, StreamingContext context)
+        {
+            if (info == null)
+            {
                 throw new ArgumentNullException("info");
             }
             Contract.EndContractBlock();
@@ -86,6 +92,7 @@ namespace System.Globalization {
             info.AddValue("InvalidCultureId", invalidCultureId, typeof(Nullable<int>));
             info.AddValue("InvalidCultureName", m_invalidCultureName, typeof(string));
         }
+
 #if !FEATURE_CORECLR
         public virtual Nullable<int> InvalidCultureId
         {
@@ -100,46 +107,48 @@ namespace System.Globalization {
 
         private static String DefaultMessage
         {
-            get 
-            {
-                return Environment.GetResourceString("Argument_CultureNotSupported");
-            }
+            get { return Environment.GetResourceString("Argument_CultureNotSupported"); }
         }
-        
-        private String FormatedInvalidCultureId 
+
+        private String FormatedInvalidCultureId
         {
             get
             {
 #if !FEATURE_CORECLR
                 if (InvalidCultureId != null)
                 {
-                    return String.Format(CultureInfo.InvariantCulture,
-                                        "{0} (0x{0:x4})", (int)InvalidCultureId);
+                    return String.Format(
+                        CultureInfo.InvariantCulture,
+                        "{0} (0x{0:x4})",
+                        (int)InvalidCultureId
+                    );
                 }
 #endif //!FEATURE_CORECLR
                 return InvalidCultureName;
             }
         }
 
-        public override String Message 
+        public override String Message
         {
-            get 
+            get
             {
                 String s = base.Message;
                 if (
 #if !FEATURE_CORECLR
-                    m_invalidCultureId != null || 
+                    m_invalidCultureId != null ||
 #endif //!FEATURE_CORECLR
-                    m_invalidCultureName != null) 
+                    m_invalidCultureName != null)
                 {
-                    String valueMessage = Environment.GetResourceString("Argument_CultureInvalidIdentifier", FormatedInvalidCultureId);
+                    String valueMessage = Environment.GetResourceString(
+                        "Argument_CultureInvalidIdentifier",
+                        FormatedInvalidCultureId
+                    );
                     if (s == null)
                         return valueMessage;
-                    return s + Environment.NewLine + valueMessage; 
+                    return s + Environment.NewLine + valueMessage;
                 }
                 return s;
             }
         }
-
     }
 }

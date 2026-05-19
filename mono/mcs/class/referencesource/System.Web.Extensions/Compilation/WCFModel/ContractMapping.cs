@@ -37,14 +37,8 @@ namespace Microsoft.VSDesigner.WCFModel
         [XmlSerialization.XmlAttribute()]
         public string Name
         {
-            get
-            {
-                return m_Name;
-            }
-            set
-            {
-                m_Name = value;
-            }
+            get { return m_Name; }
+            set { m_Name = value; }
         }
 
         /// <summary>
@@ -55,14 +49,8 @@ namespace Microsoft.VSDesigner.WCFModel
         [XmlSerialization.XmlAttribute()]
         public string TargetNamespace
         {
-            get
-            {
-                return m_TargetNamespace;
-            }
-            set
-            {
-                m_TargetNamespace = value;
-            }
+            get { return m_TargetNamespace; }
+            set { m_TargetNamespace = value; }
         }
 
         /// <summary>
@@ -73,14 +61,8 @@ namespace Microsoft.VSDesigner.WCFModel
         [XmlSerialization.XmlAttribute()]
         public string TypeName
         {
-            get
-            {
-                return m_TypeName;
-            }
-            set
-            {
-                m_TypeName = value;
-            }
+            get { return m_TypeName; }
+            set { m_TypeName = value; }
         }
     }
 }

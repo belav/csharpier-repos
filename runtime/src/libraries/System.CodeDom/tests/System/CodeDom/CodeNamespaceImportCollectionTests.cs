@@ -18,9 +18,12 @@ namespace System.CodeDom.Tests
         protected override bool Enumerator_Current_UndefinedOperation_Throws => true;
         protected override bool ICollection_NonGeneric_HasNullSyncRoot => true;
 
-        protected override Type ICollection_NonGeneric_CopyTo_NonZeroLowerBound_ThrowType => typeof(ArgumentOutOfRangeException);
-        protected override Type ICollection_NonGeneric_CopyTo_ArrayOfIncorrectReferenceType_ThrowType => typeof(InvalidCastException);
-        protected override Type ICollection_NonGeneric_CopyTo_ArrayOfIncorrectValueType_ThrowType => typeof(InvalidCastException);
+        protected override Type ICollection_NonGeneric_CopyTo_NonZeroLowerBound_ThrowType =>
+            typeof(ArgumentOutOfRangeException);
+        protected override Type ICollection_NonGeneric_CopyTo_ArrayOfIncorrectReferenceType_ThrowType =>
+            typeof(InvalidCastException);
+        protected override Type ICollection_NonGeneric_CopyTo_ArrayOfIncorrectValueType_ThrowType =>
+            typeof(InvalidCastException);
 
         [Fact]
         public void Add()
@@ -78,15 +81,23 @@ namespace System.CodeDom.Tests
         public void AddRange_Null_ThrowsArgumentNullException()
         {
             var collection = new CodeNamespaceImportCollection();
-            AssertExtensions.Throws<ArgumentNullException>("value", () => collection.AddRange(null));
-            AssertExtensions.Throws<ArgumentNullException>("value", () => collection.AddRange(null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "value",
+                () => collection.AddRange(null)
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "value",
+                () => collection.AddRange(null)
+            );
         }
 
         [Fact]
         public void AddRange_NullObjectInValue_ThrowsNullReferenceException()
         {
             var collection = new CodeNamespaceImportCollection();
-            Assert.Throws<NullReferenceException>(() => collection.AddRange(new CodeNamespaceImport[] { null }));
+            Assert.Throws<NullReferenceException>(() =>
+                collection.AddRange(new CodeNamespaceImport[] { null })
+            );
         }
 
         [Theory]
@@ -96,7 +107,10 @@ namespace System.CodeDom.Tests
         {
             var collection = new CodeNamespaceCollection();
             AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () => collection[index]);
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () => collection[index] = new CodeNamespace());
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "index",
+                () => collection[index] = new CodeNamespace()
+            );
         }
 
         [Fact]
@@ -112,7 +126,10 @@ namespace System.CodeDom.Tests
             Assert.Same(value2, collection[0]);
         }
 
-        private static void VerifyCollection(CodeNamespaceCollection collection, CodeNamespace[] contents)
+        private static void VerifyCollection(
+            CodeNamespaceCollection collection,
+            CodeNamespace[] contents
+        )
         {
             Assert.Equal(contents.Length, collection.Count);
             for (int i = 0; i < contents.Length; i++)

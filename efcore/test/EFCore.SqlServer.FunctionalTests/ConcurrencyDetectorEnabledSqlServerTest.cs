@@ -3,8 +3,8 @@
 
 namespace Microsoft.EntityFrameworkCore;
 
-public class ConcurrencyDetectorEnabledSqlServerTest : ConcurrencyDetectorEnabledRelationalTestBase<
-    ConcurrencyDetectorEnabledSqlServerTest.ConcurrencyDetectorSqlServerFixture>
+public class ConcurrencyDetectorEnabledSqlServerTest
+    : ConcurrencyDetectorEnabledRelationalTestBase<ConcurrencyDetectorEnabledSqlServerTest.ConcurrencyDetectorSqlServerFixture>
 {
     public ConcurrencyDetectorEnabledSqlServerTest(ConcurrencyDetectorSqlServerFixture fixture)
         : base(fixture)
@@ -12,7 +12,9 @@ public class ConcurrencyDetectorEnabledSqlServerTest : ConcurrencyDetectorEnable
         Fixture.TestSqlLoggerFactory.Clear();
     }
 
-    protected override async Task ConcurrencyDetectorTest(Func<ConcurrencyDetectorDbContext, Task<object>> test)
+    protected override async Task ConcurrencyDetectorTest(
+        Func<ConcurrencyDetectorDbContext, Task<object>> test
+    )
     {
         await base.ConcurrencyDetectorTest(test);
 
@@ -21,10 +23,8 @@ public class ConcurrencyDetectorEnabledSqlServerTest : ConcurrencyDetectorEnable
 
     public class ConcurrencyDetectorSqlServerFixture : ConcurrencyDetectorFixtureBase
     {
-        protected override ITestStoreFactory TestStoreFactory
-            => SqlServerTestStoreFactory.Instance;
+        protected override ITestStoreFactory TestStoreFactory => SqlServerTestStoreFactory.Instance;
 
-        public TestSqlLoggerFactory TestSqlLoggerFactory
-            => (TestSqlLoggerFactory)ListLoggerFactory;
+        public TestSqlLoggerFactory TestSqlLoggerFactory => (TestSqlLoggerFactory)ListLoggerFactory;
     }
 }

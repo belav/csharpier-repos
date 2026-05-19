@@ -6,10 +6,7 @@ using System.Security;
 
 namespace Microsoft.Test.ModuleCore
 {
-    public class LtmContext
-    {
-    }
-
+    public class LtmContext { }
 
     ////////////////////////////////////////////////////////////////////////
     // TestResult
@@ -26,7 +23,7 @@ namespace Microsoft.Test.ModuleCore
         Warning,
         Exception,
         Aborted,
-        Assert
+        Assert,
     }
 
     ////////////////////////////////////////////////////////////////////////
@@ -60,9 +57,7 @@ namespace Microsoft.Test.ModuleCore
     // TestFlags
     //
     ////////////////////////////////////////////////////////////////////////
-    public enum TestFlags
-    {
-    }
+    public enum TestFlags { }
 
     ////////////////////////////////////////////////////////////////////////
     // TestMethod
@@ -81,10 +76,10 @@ namespace Microsoft.Test.ModuleCore
     ////////////////////////////////////////////////////////////////////////
     public enum TestLogFlags
     {
-        Raw = 0x00000000,   //No fixup - Don't use, unless you know the text contains no CR/LF, no Xml reserverd tokens, or no other non-respresentable characters
-        Text = 0x00000001,  //Default  - Automatically fixup CR/LF correctly for log files, fixup xml tokens, etc
-        Xml = 0x00000002,   //For Xml  - User text is placed into a CDATA section (with no xml fixups)
-        Ignore = 0x00000004,    //Ignore   - User text is placed into ignore tags (can combine this with console_xml as well)
+        Raw = 0x00000000, //No fixup - Don't use, unless you know the text contains no CR/LF, no Xml reserverd tokens, or no other non-respresentable characters
+        Text = 0x00000001, //Default  - Automatically fixup CR/LF correctly for log files, fixup xml tokens, etc
+        Xml = 0x00000002, //For Xml  - User text is placed into a CDATA section (with no xml fixups)
+        Ignore = 0x00000004, //Ignore   - User text is placed into ignore tags (can combine this with console_xml as well)
         Trace = 0x00000010, //Trace    - User text is not displayed unless epxlicitly enabled
     }
 
@@ -182,17 +177,17 @@ namespace Microsoft.Test.ModuleCore
 
         //Execution
         void Init();
-        ITestItem CreateTest( string assembly, string test);
+        ITestItem CreateTest(string assembly, string test);
         void Terminate();
 
         //Enumeration
-        string[] Enumerate( string assembly);
+        string[] Enumerate(string assembly);
 
         //Input (get/set)
-        ITestProperties Properties {  set; get; }
+        ITestProperties Properties { set; get; }
 
         //Logging (get/set)
-        ITestLog Log {  set; get; }
+        ITestLog Log { set; get; }
     }
 
     ////////////////////////////////////////////////////////////////////////
@@ -212,17 +207,16 @@ namespace Microsoft.Test.ModuleCore
         void Terminate();
 
         //Console
-        void Write(TestLogFlags flags,
-                                                string text);
-        void WriteLine(TestLogFlags flags,
-                                                string text);
+        void Write(TestLogFlags flags, string text);
+        void WriteLine(TestLogFlags flags, string text);
 
         //Scoping
         void Enter(ITestItem item, TestMethod method);
         void Leave(ITestItem item, TestMethod method, TestResult result);
 
         //(Error) Logging routines
-        void Error(TestResult result,
+        void Error(
+            TestResult result,
             TestLogFlags flags,
             string actual,
             string expected,
@@ -230,6 +224,7 @@ namespace Microsoft.Test.ModuleCore
             string message,
             string stack,
             string filename,
-            int lineno);
+            int lineno
+        );
     }
 }

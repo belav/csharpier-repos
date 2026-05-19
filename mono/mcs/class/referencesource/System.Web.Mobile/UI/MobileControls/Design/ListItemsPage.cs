@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 // <copyright file="ListItemsPage.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
 namespace System.Web.UI.Design.MobileControls
@@ -12,46 +12,47 @@ namespace System.Web.UI.Design.MobileControls
     using System.ComponentModel.Design;
     using System.Diagnostics;
     using System.Drawing;
-    using System.Windows.Forms;
-    using System.Windows.Forms.Design;
-//    using System.Web.UI.Design.Util;
+    using System.Web.UI.Design.MobileControls.Util;
+    //    using System.Web.UI.Design.Util;
 
     using System.Web.UI.MobileControls;
-    using System.Web.UI.Design.MobileControls.Util;
-
-    using Button     = System.Windows.Forms.Button;
-    using Label      = System.Windows.Forms.Label;
-    using TextBox    = System.Windows.Forms.TextBox;
-    using CheckBox   = System.Windows.Forms.CheckBox;
-    using TreeView   = System.Windows.Forms.TreeView;
+    using System.Windows.Forms;
+    using System.Windows.Forms.Design;
+    using Button = System.Windows.Forms.Button;
+    using CheckBox = System.Windows.Forms.CheckBox;
+    using Label = System.Windows.Forms.Label;
+    using TextBox = System.Windows.Forms.TextBox;
+    using TreeView = System.Windows.Forms.TreeView;
 
     /// <summary>
     ///   The Items page for the List control.
     /// </summary>
     /// <internalonly/>
-    [
-        System.Security.Permissions.SecurityPermission(System.Security.Permissions.SecurityAction.Demand,
-        Flags=System.Security.Permissions.SecurityPermissionFlag.UnmanagedCode)
-    ]
-    [Obsolete("The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231.")]
+    [System.Security.Permissions.SecurityPermission(
+        System.Security.Permissions.SecurityAction.Demand,
+        Flags = System.Security.Permissions.SecurityPermissionFlag.UnmanagedCode
+    )]
+    [Obsolete(
+        "The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231."
+    )]
     internal sealed class ListItemsPage : ListComponentEditorPage
     {
         private IListDesigner _listDesigner;
-        private CheckBox      _itemsAsLinksCheckBox;
-        private TextBox       _txtValue;
-        private CheckBox      _ckbSelected;
-        private bool          _isBaseControlList;
+        private CheckBox _itemsAsLinksCheckBox;
+        private TextBox _txtValue;
+        private CheckBox _ckbSelected;
+        private bool _isBaseControlList;
 
         public ListItemsPage()
         {
-            TreeViewTitle  = SR.GetString(SR.ListItemsPage_ItemCaption);
+            TreeViewTitle = SR.GetString(SR.ListItemsPage_ItemCaption);
             AddButtonTitle = SR.GetString(SR.ListItemsPage_NewItemCaption);
-            DefaultName    = SR.GetString(SR.ListItemsPage_DefaultItemText);
+            DefaultName = SR.GetString(SR.ListItemsPage_DefaultItemText);
         }
 
-        protected override String HelpKeyword 
+        protected override String HelpKeyword
         {
-            get 
+            get
             {
                 if (_isBaseControlList)
                 {
@@ -122,12 +123,7 @@ namespace System.Web.UI.Design.MobileControls
             _txtValue.TextChanged += new EventHandler(this.OnPropertyChanged);
             _txtValue.TabIndex = Index + 1;
 
-            this.Controls.AddRange(new Control[] 
-                                    {
-                                        grplblItemList,
-                                        lblValue,
-                                        _txtValue
-                                    });
+            this.Controls.AddRange(new Control[] { grplblItemList, lblValue, _txtValue });
 
             if (_isBaseControlList)
             {
@@ -139,14 +135,14 @@ namespace System.Web.UI.Design.MobileControls
                 _ckbSelected = new CheckBox();
                 _ckbSelected.SetBounds(X, Y, 134, LabelHeight);
                 _ckbSelected.FlatStyle = System.Windows.Forms.FlatStyle.System;
-                _ckbSelected.Text = SR.GetString(SR.ListItemsPage_ItemSelectedCaption); 
+                _ckbSelected.Text = SR.GetString(SR.ListItemsPage_ItemSelectedCaption);
                 _ckbSelected.CheckedChanged += new EventHandler(this.OnPropertyChanged);
                 _ckbSelected.TabIndex = Index + 2;
                 this.Controls.Add(_ckbSelected);
             }
         }
 
-        protected override void InitPage() 
+        protected override void InitPage()
         {
             base.InitPage();
 
@@ -174,7 +170,7 @@ namespace System.Web.UI.Design.MobileControls
             }
         }
 
-        protected override void LoadItemProperties() 
+        protected override void LoadItemProperties()
         {
             using (new LoadingModeResource(this))
             {
@@ -228,7 +224,7 @@ namespace System.Web.UI.Design.MobileControls
             SetDirty();
         }
 
-        private void OnSetPageDirty(Object source, EventArgs e) 
+        private void OnSetPageDirty(Object source, EventArgs e)
         {
             if (IsLoading())
             {
@@ -271,7 +267,7 @@ namespace System.Web.UI.Design.MobileControls
             {
                 if (itemNode.Dirty)
                 {
-                    itemNode.RuntimeItem.Text  = itemNode.Text;
+                    itemNode.RuntimeItem.Text = itemNode.Text;
                     itemNode.RuntimeItem.Value = itemNode.Value;
                     if (!_isBaseControlList)
                     {
@@ -309,7 +305,7 @@ namespace System.Web.UI.Design.MobileControls
 
             if (!_isBaseControlList)
             {
-                SelectionList selectionListControl = (SelectionList) GetBaseControl();
+                SelectionList selectionListControl = (SelectionList)GetBaseControl();
                 if (TreeList.TvList.SelectedNode == null)
                 {
                     _ckbSelected.Enabled = false;
@@ -325,10 +321,10 @@ namespace System.Web.UI.Design.MobileControls
         /// <summary>
         ///    Internal object used to store all items properties
         /// </summary>
-        [
-            System.Security.Permissions.SecurityPermission(System.Security.Permissions.SecurityAction.Demand,
-            Flags=System.Security.Permissions.SecurityPermissionFlag.UnmanagedCode)
-        ]
+        [System.Security.Permissions.SecurityPermission(
+            System.Security.Permissions.SecurityAction.Demand,
+            Flags = System.Security.Permissions.SecurityPermissionFlag.UnmanagedCode
+        )]
         private class ItemTreeNode : ListTreeNode
         {
             private MobileListItem _runtimeItem;
@@ -338,7 +334,8 @@ namespace System.Web.UI.Design.MobileControls
 
             /// <summary>
             /// </summary>
-            internal ItemTreeNode(String itemText) : base(itemText)
+            internal ItemTreeNode(String itemText)
+                : base(itemText)
             {
                 this._runtimeItem = new MobileListItem();
                 this._value = null;
@@ -347,7 +344,8 @@ namespace System.Web.UI.Design.MobileControls
 
             /// <summary>
             /// </summary>
-            internal ItemTreeNode(MobileListItem runtimeItem) : base(runtimeItem.Text)
+            internal ItemTreeNode(MobileListItem runtimeItem)
+                : base(runtimeItem.Text)
             {
                 Debug.Assert(runtimeItem != null, "runtimeItem is null");
 
@@ -359,19 +357,12 @@ namespace System.Web.UI.Design.MobileControls
 
             internal MobileListItem RuntimeItem
             {
-                get
-                {
-                    return _runtimeItem;
-                }
+                get { return _runtimeItem; }
             }
 
             internal String Value
             {
-                get
-                {
-                    return _value;
-                }
-
+                get { return _value; }
                 set
                 {
                     _value = value;
@@ -381,23 +372,13 @@ namespace System.Web.UI.Design.MobileControls
 
             internal bool Selected
             {
-                get
-                {
-                    return _selected;
-                }
-
-                set
-                {
-                    _selected = value;
-                }
+                get { return _selected; }
+                set { _selected = value; }
             }
 
             internal bool ValueSet
             {
-                get
-                {
-                    return _valueSet;
-                }
+                get { return _valueSet; }
             }
         }
     }

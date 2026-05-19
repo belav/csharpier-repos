@@ -4,49 +4,52 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web.Profile {
-    using  System.Web;
-    using  System.Web.Configuration;
-    using  System.Security.Principal;
-    using  System.Security.Permissions;
-    using  System.Globalization;
-    using  System.Runtime.Serialization;
-    using  System.Collections;
-    using  System.Collections.Specialized;
-    using  System.Data;
-    using  System.Data.SqlClient;
-    using  System.Data.SqlTypes;
-    using  System.Runtime.Serialization.Formatters.Binary;
-    using  System.IO;
-    using  System.Reflection;
-    using  System.Xml.Serialization;
-    using  System.Text;
-    using  System.Configuration.Provider;
-    using  System.Configuration;
-    using  System.Web.Hosting;
-    using  System.Web.DataAccess;
-    using  System.Web.Util;
-
+namespace System.Web.Profile
+{
+    using System.Collections;
+    using System.Collections.Specialized;
+    using System.Configuration;
+    using System.Configuration.Provider;
+    using System.Data;
+    using System.Data.SqlClient;
+    using System.Data.SqlTypes;
+    using System.Globalization;
+    using System.IO;
+    using System.Reflection;
+    using System.Runtime.Serialization;
+    using System.Runtime.Serialization.Formatters.Binary;
+    using System.Security.Permissions;
+    using System.Security.Principal;
+    using System.Text;
+    using System.Web;
+    using System.Web.Configuration;
+    using System.Web.DataAccess;
+    using System.Web.Hosting;
+    using System.Web.Util;
+    using System.Xml.Serialization;
 
     /// <devdoc>
     ///    <para>[To be supplied.]</para>
     /// </devdoc>
     public class SqlProfileProvider : ProfileProvider
     {
-        private string  _AppName;
-        private string  _sqlConnectionString;
-        private int     _SchemaVersionCheck;
-        private int     _CommandTimeout;
-
+        private string _AppName;
+        private string _sqlConnectionString;
+        private int _SchemaVersionCheck;
+        private int _CommandTimeout;
 
         public override void Initialize(string name, NameValueCollection config)
         {
-            HttpRuntime.CheckAspNetHostingPermission (AspNetHostingPermissionLevel.Low, SR.Feature_not_supported_at_this_level);
+            HttpRuntime.CheckAspNetHostingPermission(
+                AspNetHostingPermissionLevel.Low,
+                SR.Feature_not_supported_at_this_level
+            );
             if (config == null)
-               throw new ArgumentNullException("config");
+                throw new ArgumentNullException("config");
             if (name == null || name.Length < 1)
                 name = "SqlProfileProvider";
-            if (string.IsNullOrEmpty(config["description"])) {
+            if (string.IsNullOrEmpty(config["description"]))
+            {
                 config.Remove("description");
                 config.Add("description", SR.GetString(SR.ProfileSqlProvider_description));
             }
@@ -60,12 +63,12 @@ namespace System.Web.Profile {
             if (string.IsNullOrEmpty(_AppName))
                 _AppName = SecUtility.GetDefaultAppName();
 
-            if( _AppName.Length > 256 )
+            if (_AppName.Length > 256)
             {
                 throw new ProviderException(SR.GetString(SR.Provider_application_name_too_long));
             }
 
-            _CommandTimeout = SecUtility.GetIntValue( config, "commandTimeout", 30, true, 0 );
+            _CommandTimeout = SecUtility.GetIntValue(config, "commandTimeout", 30, true, 0);
 
             config.Remove("commandTimeout");
             config.Remove("connectionStringName");
@@ -75,46 +78,54 @@ namespace System.Web.Profile {
             {
                 string attribUnrecognized = config.GetKey(0);
                 if (!String.IsNullOrEmpty(attribUnrecognized))
-                    throw new ProviderException(SR.GetString(SR.Provider_unrecognized_attribute, attribUnrecognized));
+                    throw new ProviderException(
+                        SR.GetString(SR.Provider_unrecognized_attribute, attribUnrecognized)
+                    );
             }
         }
 
-        private void CheckSchemaVersion( SqlConnection connection )
+        private void CheckSchemaVersion(SqlConnection connection)
         {
             string[] features = { "Profile" };
-            string   version  = "1";
+            string version = "1";
 
-            SecUtility.CheckSchemaVersion( this,
-                                           connection,
-                                           features,
-                                           version,
-                                           ref _SchemaVersionCheck );
+            SecUtility.CheckSchemaVersion(
+                this,
+                connection,
+                features,
+                version,
+                ref _SchemaVersionCheck
+            );
         }
-
 
         public override string ApplicationName
         {
-            get { return _AppName;  }
-            set {
-                if ( value.Length > 256 )
+            get { return _AppName; }
+            set
+            {
+                if (value.Length > 256)
                 {
-                    throw new ProviderException( SR.GetString(SR.Provider_application_name_too_long)  );
+                    throw new ProviderException(
+                        SR.GetString(SR.Provider_application_name_too_long)
+                    );
                 }
                 _AppName = value;
-
             }
         }
 
         private int CommandTimeout
         {
-            get{ return _CommandTimeout; }
+            get { return _CommandTimeout; }
         }
 
         ////////////////////////////////////////////////////////////
         ////////////////////////////////////////////////////////////
         ////////////////////////////////////////////////////////////
 
-        public override SettingsPropertyValueCollection GetPropertyValues(SettingsContext sc, SettingsPropertyCollection properties)
+        public override SettingsPropertyValueCollection GetPropertyValues(
+            SettingsContext sc,
+            SettingsPropertyCollection properties
+        )
         {
             SettingsPropertyValueCollection svc = new SettingsPropertyValueCollection();
 
@@ -134,16 +145,28 @@ namespace System.Web.Profile {
                 svc.Add(new SettingsPropertyValue(prop));
             }
             if (!String.IsNullOrEmpty(username))
-                GetPropertyValuesFromDatabase (username, svc);
+                GetPropertyValuesFromDatabase(username, svc);
             return svc;
         }
 
         ////////////////////////////////////////////////////////////
         ////////////////////////////////////////////////////////////
-        private void GetPropertyValuesFromDatabase(string userName, SettingsPropertyValueCollection svc) {
+        private void GetPropertyValuesFromDatabase(
+            string userName,
+            SettingsPropertyValueCollection svc
+        )
+        {
             HttpContext context = HttpContext.Current;
 
-            if (context != null && HostingEnvironment.IsHosted && EtwTrace.IsTraceEnabled(EtwTraceLevel.Information, EtwTraceFlags.AppSvc)) EtwTrace.Trace(EtwTraceType.ETW_TYPE_PROFILE_BEGIN, HttpContext.Current.WorkerRequest);
+            if (
+                context != null
+                && HostingEnvironment.IsHosted
+                && EtwTrace.IsTraceEnabled(EtwTraceLevel.Information, EtwTraceFlags.AppSvc)
+            )
+                EtwTrace.Trace(
+                    EtwTraceType.ETW_TYPE_PROFILE_BEGIN,
+                    HttpContext.Current.WorkerRequest
+                );
 
             string[] names = null;
             string values = null;
@@ -151,22 +174,34 @@ namespace System.Web.Profile {
             string sName = null;
 
             if (context != null)
-                sName = (context.Request.IsAuthenticated ? context.User.Identity.Name : context.Request.AnonymousID);
+                sName = (
+                    context.Request.IsAuthenticated
+                        ? context.User.Identity.Name
+                        : context.Request.AnonymousID
+                );
 
-            try {
+            try
+            {
                 SqlConnectionHolder holder = null;
                 SqlDataReader reader = null;
                 try
                 {
                     holder = SqlConnectionHelper.GetConnection(_sqlConnectionString, true);
                     CheckSchemaVersion(holder.Connection);
-                    SqlCommand cmd = new SqlCommand("dbo.aspnet_Profile_GetProperties", holder.Connection);
+                    SqlCommand cmd = new SqlCommand(
+                        "dbo.aspnet_Profile_GetProperties",
+                        holder.Connection
+                    );
 
                     cmd.CommandTimeout = CommandTimeout;
                     cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.Parameters.Add(CreateInputParam("@ApplicationName", SqlDbType.NVarChar, ApplicationName));
+                    cmd.Parameters.Add(
+                        CreateInputParam("@ApplicationName", SqlDbType.NVarChar, ApplicationName)
+                    );
                     cmd.Parameters.Add(CreateInputParam("@UserName", SqlDbType.NVarChar, userName));
-                    cmd.Parameters.Add(CreateInputParam("@CurrentTimeUtc", SqlDbType.DateTime, DateTime.UtcNow));
+                    cmd.Parameters.Add(
+                        CreateInputParam("@CurrentTimeUtc", SqlDbType.DateTime, DateTime.UtcNow)
+                    );
                     reader = cmd.ExecuteReader(CommandBehavior.SingleRow);
                     if (reader.Read())
                     {
@@ -178,8 +213,10 @@ namespace System.Web.Profile {
                         buf = new byte[size];
                         reader.GetBytes(2, 0, buf, 0, size);
                     }
-                } finally {
-                    if( holder != null )
+                }
+                finally
+                {
+                    if (holder != null)
                     {
                         holder.Close();
                         holder = null;
@@ -191,18 +228,31 @@ namespace System.Web.Profile {
 
                 ProfileModule.ParseDataFromDB(names, values, buf, svc);
 
-                if (context != null && HostingEnvironment.IsHosted && EtwTrace.IsTraceEnabled(EtwTraceLevel.Information, EtwTraceFlags.AppSvc)) EtwTrace.Trace(EtwTraceType.ETW_TYPE_PROFILE_END, HttpContext.Current.WorkerRequest, userName);
-            } catch {
+                if (
+                    context != null
+                    && HostingEnvironment.IsHosted
+                    && EtwTrace.IsTraceEnabled(EtwTraceLevel.Information, EtwTraceFlags.AppSvc)
+                )
+                    EtwTrace.Trace(
+                        EtwTraceType.ETW_TYPE_PROFILE_END,
+                        HttpContext.Current.WorkerRequest,
+                        userName
+                    );
+            }
+            catch
+            {
                 throw;
             }
         }
 
-
         ////////////////////////////////////////////////////////////
         ////////////////////////////////////////////////////////////
         ////////////////////////////////////////////////////////////
 
-        public override void SetPropertyValues(SettingsContext sc, SettingsPropertyValueCollection properties)
+        public override void SetPropertyValues(
+            SettingsContext sc,
+            SettingsPropertyValueCollection properties
+        )
         {
             string username = (string)sc["UserName"];
             bool userIsAuthenticated = (bool)sc["IsAuthenticated"];
@@ -210,42 +260,66 @@ namespace System.Web.Profile {
             if (username == null || username.Length < 1 || properties.Count < 1)
                 return;
 
-            string        names   = String.Empty;
-            string        values  = String.Empty;
-            byte []       buf     = null;
+            string names = String.Empty;
+            string values = String.Empty;
+            byte[] buf = null;
 
-            ProfileModule.PrepareDataForSaving(ref names, ref values, ref buf, true, properties, userIsAuthenticated);
+            ProfileModule.PrepareDataForSaving(
+                ref names,
+                ref values,
+                ref buf,
+                true,
+                properties,
+                userIsAuthenticated
+            );
             if (names.Length == 0)
                 return;
 
-            try {
+            try
+            {
                 SqlConnectionHolder holder = null;
                 try
                 {
-                    holder = SqlConnectionHelper.GetConnection (_sqlConnectionString, true);
-                    CheckSchemaVersion( holder.Connection );
+                    holder = SqlConnectionHelper.GetConnection(_sqlConnectionString, true);
+                    CheckSchemaVersion(holder.Connection);
 
-                    SqlCommand    cmd     = new SqlCommand("dbo.aspnet_Profile_SetProperties", holder.Connection);
+                    SqlCommand cmd = new SqlCommand(
+                        "dbo.aspnet_Profile_SetProperties",
+                        holder.Connection
+                    );
 
                     cmd.CommandTimeout = CommandTimeout;
                     cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.Parameters.Add(CreateInputParam("@ApplicationName", SqlDbType.NVarChar, ApplicationName));
+                    cmd.Parameters.Add(
+                        CreateInputParam("@ApplicationName", SqlDbType.NVarChar, ApplicationName)
+                    );
                     cmd.Parameters.Add(CreateInputParam("@UserName", SqlDbType.NVarChar, username));
                     cmd.Parameters.Add(CreateInputParam("@PropertyNames", SqlDbType.NText, names));
-                    cmd.Parameters.Add(CreateInputParam("@PropertyValuesString", SqlDbType.NText, values));
-                    cmd.Parameters.Add(CreateInputParam("@PropertyValuesBinary", SqlDbType.Image, buf));
-                    cmd.Parameters.Add(CreateInputParam("@IsUserAnonymous", SqlDbType.Bit, !userIsAuthenticated));
-                    cmd.Parameters.Add(CreateInputParam("@CurrentTimeUtc", SqlDbType.DateTime, DateTime.UtcNow));
+                    cmd.Parameters.Add(
+                        CreateInputParam("@PropertyValuesString", SqlDbType.NText, values)
+                    );
+                    cmd.Parameters.Add(
+                        CreateInputParam("@PropertyValuesBinary", SqlDbType.Image, buf)
+                    );
+                    cmd.Parameters.Add(
+                        CreateInputParam("@IsUserAnonymous", SqlDbType.Bit, !userIsAuthenticated)
+                    );
+                    cmd.Parameters.Add(
+                        CreateInputParam("@CurrentTimeUtc", SqlDbType.DateTime, DateTime.UtcNow)
+                    );
                     cmd.ExecuteNonQuery();
                 }
-                finally {
-                    if( holder != null )
+                finally
+                {
+                    if (holder != null)
                     {
                         holder.Close();
                         holder = null;
                     }
                 }
-            } catch {
+            }
+            catch
+            {
                 throw;
             }
         }
@@ -254,7 +328,8 @@ namespace System.Web.Profile {
         ////////////////////////////////////////////////////////////
         ////////////////////////////////////////////////////////////
 
-        private SqlParameter CreateInputParam(string paramName, SqlDbType dbType, object objValue){
+        private SqlParameter CreateInputParam(string paramName, SqlDbType dbType, object objValue)
+        {
             SqlParameter param = new SqlParameter(paramName, dbType);
             if (objValue == null)
                 objValue = String.Empty;
@@ -270,48 +345,45 @@ namespace System.Web.Profile {
 
         public override int DeleteProfiles(ProfileInfoCollection profiles)
         {
-            if( profiles == null )
+            if (profiles == null)
             {
-                throw new ArgumentNullException( "profiles" );
+                throw new ArgumentNullException("profiles");
             }
 
-            if ( profiles.Count < 1 )
+            if (profiles.Count < 1)
             {
                 throw new ArgumentException(
-                    SR.GetString(SR.Parameter_collection_empty,
-                        "profiles" ),
-                    "profiles" );
+                    SR.GetString(SR.Parameter_collection_empty, "profiles"),
+                    "profiles"
+                );
             }
 
-            string[] usernames = new string[ profiles.Count ];
+            string[] usernames = new string[profiles.Count];
 
             int iter = 0;
-            foreach ( ProfileInfo profile in profiles )
+            foreach (ProfileInfo profile in profiles)
             {
-                usernames[ iter++ ] = profile.UserName;
+                usernames[iter++] = profile.UserName;
             }
 
-            return DeleteProfiles( usernames );
+            return DeleteProfiles(usernames);
         }
+
         /////////////////////////////////////////////////////////////////////////////
         /////////////////////////////////////////////////////////////////////////////
         public override int DeleteProfiles(string[] usernames)
         {
-            SecUtility.CheckArrayParameter( ref usernames,
-                                            true,
-                                            true,
-                                            true,
-                                            256,
-                                            "usernames");
+            SecUtility.CheckArrayParameter(ref usernames, true, true, true, 256, "usernames");
 
             int numProfilesDeleted = 0;
             bool beginTranCalled = false;
-            try {
+            try
+            {
                 SqlConnectionHolder holder = null;
                 try
                 {
                     holder = SqlConnectionHelper.GetConnection(_sqlConnectionString, true);
-                    CheckSchemaVersion( holder.Connection );
+                    CheckSchemaVersion(holder.Connection);
 
                     SqlCommand cmd;
 
@@ -320,7 +392,11 @@ namespace System.Web.Profile {
                     {
                         string allUsers = usernames[usernames.Length - numUsersRemaing];
                         numUsersRemaing--;
-                        for (int iter = usernames.Length - numUsersRemaing; iter < usernames.Length; iter++)
+                        for (
+                            int iter = usernames.Length - numUsersRemaing;
+                            iter < usernames.Length;
+                            iter++
+                        )
                         {
                             if (allUsers.Length + usernames[iter].Length + 1 >= 4000)
                                 break;
@@ -329,44 +405,63 @@ namespace System.Web.Profile {
                         }
 
                         // We don't need to start a transaction if we can finish this in one sql command
-                        if (!beginTranCalled && numUsersRemaing > 0) {
+                        if (!beginTranCalled && numUsersRemaing > 0)
+                        {
                             cmd = new SqlCommand("BEGIN TRANSACTION", holder.Connection);
                             cmd.ExecuteNonQuery();
                             beginTranCalled = true;
                         }
 
-                        cmd = new SqlCommand("dbo.aspnet_Profile_DeleteProfiles", holder.Connection);
+                        cmd = new SqlCommand(
+                            "dbo.aspnet_Profile_DeleteProfiles",
+                            holder.Connection
+                        );
 
                         cmd.CommandTimeout = CommandTimeout;
                         cmd.CommandType = CommandType.StoredProcedure;
-                        cmd.Parameters.Add(CreateInputParam("@ApplicationName", SqlDbType.NVarChar, ApplicationName));
-                        cmd.Parameters.Add(CreateInputParam("@UserNames", SqlDbType.NVarChar, allUsers));
+                        cmd.Parameters.Add(
+                            CreateInputParam(
+                                "@ApplicationName",
+                                SqlDbType.NVarChar,
+                                ApplicationName
+                            )
+                        );
+                        cmd.Parameters.Add(
+                            CreateInputParam("@UserNames", SqlDbType.NVarChar, allUsers)
+                        );
                         object o = cmd.ExecuteScalar();
                         if (o != null && o is int)
                             numProfilesDeleted += (int)o;
-
                     }
 
-                    if (beginTranCalled) {
+                    if (beginTranCalled)
+                    {
                         cmd = new SqlCommand("COMMIT TRANSACTION", holder.Connection);
                         cmd.ExecuteNonQuery();
                         beginTranCalled = false;
                     }
-                } catch  {
-                    if (beginTranCalled) {
+                }
+                catch
+                {
+                    if (beginTranCalled)
+                    {
                         SqlCommand cmd = new SqlCommand("ROLLBACK TRANSACTION", holder.Connection);
                         cmd.ExecuteNonQuery();
                         beginTranCalled = false;
                     }
                     throw;
-                } finally {
-                    if( holder != null )
+                }
+                finally
+                {
+                    if (holder != null)
                     {
                         holder.Close();
                         holder = null;
                     }
                 }
-            } catch {
+            }
+            catch
+            {
                 throw;
             }
             return numProfilesDeleted;
@@ -374,108 +469,213 @@ namespace System.Web.Profile {
 
         /////////////////////////////////////////////////////////////////////////////
         /////////////////////////////////////////////////////////////////////////////
-        public override int DeleteInactiveProfiles(ProfileAuthenticationOption authenticationOption, DateTime userInactiveSinceDate)
+        public override int DeleteInactiveProfiles(
+            ProfileAuthenticationOption authenticationOption,
+            DateTime userInactiveSinceDate
+        )
         {
-            try {
+            try
+            {
                 SqlConnectionHolder holder = null;
                 try
                 {
                     holder = SqlConnectionHelper.GetConnection(_sqlConnectionString, true);
-                    CheckSchemaVersion( holder.Connection );
+                    CheckSchemaVersion(holder.Connection);
 
-                    SqlCommand cmd = new SqlCommand("dbo.aspnet_Profile_DeleteInactiveProfiles", holder.Connection);
+                    SqlCommand cmd = new SqlCommand(
+                        "dbo.aspnet_Profile_DeleteInactiveProfiles",
+                        holder.Connection
+                    );
 
                     cmd.CommandTimeout = CommandTimeout;
                     cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.Parameters.Add(CreateInputParam("@ApplicationName", SqlDbType.NVarChar, ApplicationName));
-                    cmd.Parameters.Add(CreateInputParam("@ProfileAuthOptions", SqlDbType.Int, (int) authenticationOption));
-                    cmd.Parameters.Add(CreateInputParam("@InactiveSinceDate", SqlDbType.DateTime, userInactiveSinceDate.ToUniversalTime()));
+                    cmd.Parameters.Add(
+                        CreateInputParam("@ApplicationName", SqlDbType.NVarChar, ApplicationName)
+                    );
+                    cmd.Parameters.Add(
+                        CreateInputParam(
+                            "@ProfileAuthOptions",
+                            SqlDbType.Int,
+                            (int)authenticationOption
+                        )
+                    );
+                    cmd.Parameters.Add(
+                        CreateInputParam(
+                            "@InactiveSinceDate",
+                            SqlDbType.DateTime,
+                            userInactiveSinceDate.ToUniversalTime()
+                        )
+                    );
                     object o = cmd.ExecuteScalar();
                     if (o == null || !(o is int))
                         return 0;
-                    return (int) o;
+                    return (int)o;
                 }
-                finally {
-                    if( holder != null )
+                finally
+                {
+                    if (holder != null)
                     {
                         holder.Close();
                         holder = null;
                     }
                 }
-            } catch {
-                throw;
             }
-        }
-        /////////////////////////////////////////////////////////////////////////////
-        /////////////////////////////////////////////////////////////////////////////
-        public override int GetNumberOfInactiveProfiles(ProfileAuthenticationOption authenticationOption, DateTime userInactiveSinceDate)
-        {
-            try {
-                SqlConnectionHolder holder = null;
-                try
-                {
-                    holder = SqlConnectionHelper.GetConnection(_sqlConnectionString, true);
-                    CheckSchemaVersion( holder.Connection );
-
-                    SqlCommand cmd = new SqlCommand("dbo.aspnet_Profile_GetNumberOfInactiveProfiles", holder.Connection);
-                    
-                    cmd.CommandTimeout = CommandTimeout;
-                    cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.Parameters.Add(CreateInputParam("@ApplicationName", SqlDbType.NVarChar, ApplicationName));
-                    cmd.Parameters.Add(CreateInputParam("@ProfileAuthOptions", SqlDbType.Int, (int) authenticationOption));
-                    cmd.Parameters.Add(CreateInputParam("@InactiveSinceDate", SqlDbType.DateTime, userInactiveSinceDate.ToUniversalTime()));
-                    object o = cmd.ExecuteScalar();
-                    if (o == null || !(o is int))
-                        return 0;
-                    return (int) o;
-                }
-                finally {
-                    if( holder != null )
-                    {
-                        holder.Close();
-                        holder = null;
-                    }
-                }
-            } catch {
+            catch
+            {
                 throw;
             }
         }
 
         /////////////////////////////////////////////////////////////////////////////
         /////////////////////////////////////////////////////////////////////////////
-        public override ProfileInfoCollection GetAllProfiles(ProfileAuthenticationOption authenticationOption, int pageIndex, int pageSize, out int totalRecords)
+        public override int GetNumberOfInactiveProfiles(
+            ProfileAuthenticationOption authenticationOption,
+            DateTime userInactiveSinceDate
+        )
         {
-            return GetProfilesForQuery(new SqlParameter[0], authenticationOption, pageIndex, pageSize, out totalRecords);
+            try
+            {
+                SqlConnectionHolder holder = null;
+                try
+                {
+                    holder = SqlConnectionHelper.GetConnection(_sqlConnectionString, true);
+                    CheckSchemaVersion(holder.Connection);
+
+                    SqlCommand cmd = new SqlCommand(
+                        "dbo.aspnet_Profile_GetNumberOfInactiveProfiles",
+                        holder.Connection
+                    );
+
+                    cmd.CommandTimeout = CommandTimeout;
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.Add(
+                        CreateInputParam("@ApplicationName", SqlDbType.NVarChar, ApplicationName)
+                    );
+                    cmd.Parameters.Add(
+                        CreateInputParam(
+                            "@ProfileAuthOptions",
+                            SqlDbType.Int,
+                            (int)authenticationOption
+                        )
+                    );
+                    cmd.Parameters.Add(
+                        CreateInputParam(
+                            "@InactiveSinceDate",
+                            SqlDbType.DateTime,
+                            userInactiveSinceDate.ToUniversalTime()
+                        )
+                    );
+                    object o = cmd.ExecuteScalar();
+                    if (o == null || !(o is int))
+                        return 0;
+                    return (int)o;
+                }
+                finally
+                {
+                    if (holder != null)
+                    {
+                        holder.Close();
+                        holder = null;
+                    }
+                }
+            }
+            catch
+            {
+                throw;
+            }
         }
 
+        /////////////////////////////////////////////////////////////////////////////
+        /////////////////////////////////////////////////////////////////////////////
+        public override ProfileInfoCollection GetAllProfiles(
+            ProfileAuthenticationOption authenticationOption,
+            int pageIndex,
+            int pageSize,
+            out int totalRecords
+        )
+        {
+            return GetProfilesForQuery(
+                new SqlParameter[0],
+                authenticationOption,
+                pageIndex,
+                pageSize,
+                out totalRecords
+            );
+        }
 
         /////////////////////////////////////////////////////////////////////////////
         /////////////////////////////////////////////////////////////////////////////
-        public override ProfileInfoCollection GetAllInactiveProfiles(ProfileAuthenticationOption authenticationOption, DateTime userInactiveSinceDate, int pageIndex, int pageSize, out int totalRecords)
+        public override ProfileInfoCollection GetAllInactiveProfiles(
+            ProfileAuthenticationOption authenticationOption,
+            DateTime userInactiveSinceDate,
+            int pageIndex,
+            int pageSize,
+            out int totalRecords
+        )
         {
-            SqlParameter [] args = new SqlParameter[1];
-            args[0] = CreateInputParam("@InactiveSinceDate", SqlDbType.DateTime, userInactiveSinceDate.ToUniversalTime());
-            return GetProfilesForQuery(args, authenticationOption, pageIndex, pageSize, out totalRecords);
+            SqlParameter[] args = new SqlParameter[1];
+            args[0] = CreateInputParam(
+                "@InactiveSinceDate",
+                SqlDbType.DateTime,
+                userInactiveSinceDate.ToUniversalTime()
+            );
+            return GetProfilesForQuery(
+                args,
+                authenticationOption,
+                pageIndex,
+                pageSize,
+                out totalRecords
+            );
         }
+
         /////////////////////////////////////////////////////////////////////////////
         /////////////////////////////////////////////////////////////////////////////
-        public override ProfileInfoCollection FindProfilesByUserName(ProfileAuthenticationOption authenticationOption, string usernameToMatch, int pageIndex, int pageSize, out int totalRecords)
+        public override ProfileInfoCollection FindProfilesByUserName(
+            ProfileAuthenticationOption authenticationOption,
+            string usernameToMatch,
+            int pageIndex,
+            int pageSize,
+            out int totalRecords
+        )
         {
             SecUtility.CheckParameter(ref usernameToMatch, true, true, false, 256, "username");
             SqlParameter[] args = new SqlParameter[1];
             args[0] = CreateInputParam("@UserNameToMatch", SqlDbType.NVarChar, usernameToMatch);
-            return GetProfilesForQuery(args, authenticationOption, pageIndex, pageSize, out totalRecords);
+            return GetProfilesForQuery(
+                args,
+                authenticationOption,
+                pageIndex,
+                pageSize,
+                out totalRecords
+            );
         }
 
         /////////////////////////////////////////////////////////////////////////////
         /////////////////////////////////////////////////////////////////////////////
-        public override ProfileInfoCollection FindInactiveProfilesByUserName(ProfileAuthenticationOption authenticationOption, string usernameToMatch, DateTime userInactiveSinceDate, int pageIndex, int pageSize, out int totalRecords)
+        public override ProfileInfoCollection FindInactiveProfilesByUserName(
+            ProfileAuthenticationOption authenticationOption,
+            string usernameToMatch,
+            DateTime userInactiveSinceDate,
+            int pageIndex,
+            int pageSize,
+            out int totalRecords
+        )
         {
             SecUtility.CheckParameter(ref usernameToMatch, true, true, false, 256, "username");
             SqlParameter[] args = new SqlParameter[2];
             args[0] = CreateInputParam("@UserNameToMatch", SqlDbType.NVarChar, usernameToMatch);
-            args[1] = CreateInputParam("@InactiveSinceDate", SqlDbType.DateTime, userInactiveSinceDate.ToUniversalTime());
-            return GetProfilesForQuery(args, authenticationOption, pageIndex, pageSize, out totalRecords);
+            args[1] = CreateInputParam(
+                "@InactiveSinceDate",
+                SqlDbType.DateTime,
+                userInactiveSinceDate.ToUniversalTime()
+            );
+            return GetProfilesForQuery(
+                args,
+                authenticationOption,
+                pageIndex,
+                pageSize,
+                out totalRecords
+            );
         }
 
         /////////////////////////////////////////////////////////////////////////////
@@ -484,32 +684,54 @@ namespace System.Web.Profile {
 
         /////////////////////////////////////////////////////////////////////////////
         /////////////////////////////////////////////////////////////////////////////
-        private ProfileInfoCollection GetProfilesForQuery(SqlParameter [] args, ProfileAuthenticationOption authenticationOption, int pageIndex, int pageSize, out int totalRecords)
+        private ProfileInfoCollection GetProfilesForQuery(
+            SqlParameter[] args,
+            ProfileAuthenticationOption authenticationOption,
+            int pageIndex,
+            int pageSize,
+            out int totalRecords
+        )
         {
-            if ( pageIndex < 0 )
+            if (pageIndex < 0)
                 throw new ArgumentException(SR.GetString(SR.PageIndex_bad), "pageIndex");
-            if ( pageSize < 1 )
+            if (pageSize < 1)
                 throw new ArgumentException(SR.GetString(SR.PageSize_bad), "pageSize");
 
             long upperBound = (long)pageIndex * pageSize + pageSize - 1;
-            if ( upperBound > Int32.MaxValue )
+            if (upperBound > Int32.MaxValue)
             {
-                throw new ArgumentException(SR.GetString(SR.PageIndex_PageSize_bad), "pageIndex and pageSize");
+                throw new ArgumentException(
+                    SR.GetString(SR.PageIndex_PageSize_bad),
+                    "pageIndex and pageSize"
+                );
             }
 
-            try {
+            try
+            {
                 SqlConnectionHolder holder = null;
                 SqlDataReader reader = null;
-                try {
+                try
+                {
                     holder = SqlConnectionHelper.GetConnection(_sqlConnectionString, true);
-                    CheckSchemaVersion( holder.Connection );
+                    CheckSchemaVersion(holder.Connection);
 
-                    SqlCommand cmd = new SqlCommand("dbo.aspnet_Profile_GetProfiles", holder.Connection);
+                    SqlCommand cmd = new SqlCommand(
+                        "dbo.aspnet_Profile_GetProfiles",
+                        holder.Connection
+                    );
 
                     cmd.CommandTimeout = CommandTimeout;
                     cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.Parameters.Add(CreateInputParam("@ApplicationName", SqlDbType.NVarChar, ApplicationName));
-                    cmd.Parameters.Add(CreateInputParam("@ProfileAuthOptions", SqlDbType.Int, (int) authenticationOption));
+                    cmd.Parameters.Add(
+                        CreateInputParam("@ApplicationName", SqlDbType.NVarChar, ApplicationName)
+                    );
+                    cmd.Parameters.Add(
+                        CreateInputParam(
+                            "@ProfileAuthOptions",
+                            SqlDbType.Int,
+                            (int)authenticationOption
+                        )
+                    );
                     cmd.Parameters.Add(CreateInputParam("@PageIndex", SqlDbType.Int, pageIndex));
                     cmd.Parameters.Add(CreateInputParam("@PageSize", SqlDbType.Int, pageSize));
                     foreach (SqlParameter arg in args)
@@ -519,38 +741,47 @@ namespace System.Web.Profile {
                     while (reader.Read())
                     {
                         string username;
-                        DateTime dtLastActivity, dtLastUpdated;
+                        DateTime dtLastActivity,
+                            dtLastUpdated;
                         bool isAnon;
 
                         username = reader.GetString(0);
                         isAnon = reader.GetBoolean(1);
-                        dtLastActivity = DateTime.SpecifyKind(reader.GetDateTime(2), DateTimeKind.Utc);
-                        dtLastUpdated = DateTime.SpecifyKind(reader.GetDateTime(3), DateTimeKind.Utc);
+                        dtLastActivity = DateTime.SpecifyKind(
+                            reader.GetDateTime(2),
+                            DateTimeKind.Utc
+                        );
+                        dtLastUpdated = DateTime.SpecifyKind(
+                            reader.GetDateTime(3),
+                            DateTimeKind.Utc
+                        );
                         int size = reader.GetInt32(4);
-                        profiles.Add(new ProfileInfo(username, isAnon, dtLastActivity, dtLastUpdated, size));
+                        profiles.Add(
+                            new ProfileInfo(username, isAnon, dtLastActivity, dtLastUpdated, size)
+                        );
                     }
                     totalRecords = profiles.Count;
                     if (reader.NextResult())
                         if (reader.Read())
                             totalRecords = reader.GetInt32(0);
                     return profiles;
-                } finally {
+                }
+                finally
+                {
                     if (reader != null)
                         reader.Close();
-                    
-                    if( holder != null )
+
+                    if (holder != null)
                     {
                         holder.Close();
                         holder = null;
                     }
                 }
             }
-            catch {
+            catch
+            {
                 throw;
             }
         }
     }
 }
-
-
-

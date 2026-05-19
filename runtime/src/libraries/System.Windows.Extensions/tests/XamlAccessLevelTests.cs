@@ -17,7 +17,9 @@ namespace System.Security.Permissions.Tests
             XamlAccessLevel accessLevel = XamlAccessLevel.AssemblyAccessTo(execAssembly);
             XamlAccessLevel accessLevel2 = XamlAccessLevel.AssemblyAccessTo(execAssembly.GetName());
             XamlAccessLevel accessLevel3 = XamlAccessLevel.PrivateAccessTo(type);
-            XamlAccessLevel accessLevel4 = XamlAccessLevel.PrivateAccessTo(type.AssemblyQualifiedName);
+            XamlAccessLevel accessLevel4 = XamlAccessLevel.PrivateAccessTo(
+                type.AssemblyQualifiedName
+            );
             AssemblyName an = accessLevel.AssemblyAccessToAssemblyName;
         }
     }

@@ -14,10 +14,7 @@ namespace System.ServiceModel.Dispatcher
     using System.Xml;
     using System.Xml.XPath;
 
-    // Anything marked 
-
-
-
+    // Anything marked
 
     class SeekableMessageNavigator : SeekableXPathNavigator, INodeCounter
     {
@@ -114,7 +111,6 @@ namespace System.ServiceModel.Dispatcher
             //BlankDom[HeaderIndex].nextSibling = bodyIndex;
             //BlankDom[HeaderIndex].firstChild = this.bodyIndex != FirstHeaderIndex ? FirstHeaderIndex : NullIndex;
             BlankDom[HeaderIndex].firstNamespace = SoapNSIndex;
-
         }
 
         internal SeekableMessageNavigator(SeekableMessageNavigator nav)
@@ -131,7 +127,13 @@ namespace System.ServiceModel.Dispatcher
             }
         }
 
-        internal SeekableMessageNavigator(Message msg, int countMax, XmlSpace space, bool includeBody, bool atomize)
+        internal SeekableMessageNavigator(
+            Message msg,
+            int countMax,
+            XmlSpace space,
+            bool includeBody,
+            bool atomize
+        )
         {
             Init(msg, countMax, space, includeBody, atomize);
         }
@@ -152,7 +154,7 @@ namespace System.ServiceModel.Dispatcher
 
         // Get/Set an opaque position value.
         // This property will save and restore a navigator's position without cloning
-        // The two integers needed to uniquely identify this navigators location within the DOM are encoded in 
+        // The two integers needed to uniquely identify this navigators location within the DOM are encoded in
         // a long.  The high 32 bits is the parent index, and the low 32 bits is the current node index.
         public override long CurrentPosition
         {
@@ -187,7 +189,12 @@ namespace System.ServiceModel.Dispatcher
                         // validator
                         if (n == NullIndex)
                         {
-                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new QueryProcessingException(QueryProcessingError.InvalidNavigatorPosition, SR.GetString(SR.SeekableMessageNavInvalidPosition)));
+                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                                new QueryProcessingException(
+                                    QueryProcessingError.InvalidNavigatorPosition,
+                                    SR.GetString(SR.SeekableMessageNavInvalidPosition)
+                                )
+                            );
                         }
 
                         this.nsStack.Push(this.dom.nodes[n].name);
@@ -245,19 +252,13 @@ namespace System.ServiceModel.Dispatcher
         // Returns the message that was used to construct this navigator's DOM
         internal Message Message
         {
-            get
-            {
-                return this.dom.message;
-            }
+            get { return this.dom.message; }
         }
 
         // Returns the qualified name of the current node
         public override string Name
         {
-            get
-            {
-                return GetName(this.location);
-            }
+            get { return GetName(this.location); }
         }
 
         // Returns the namespace URI of the current node
@@ -287,10 +288,7 @@ namespace System.ServiceModel.Dispatcher
         // Returns the type of the current node
         public override XPathNodeType NodeType
         {
-            get
-            {
-                return this.dom.nodes[this.location].type;
-            }
+            get { return this.dom.nodes[this.location].type; }
         }
 
         // Returns the prefix of the current node
@@ -307,10 +305,7 @@ namespace System.ServiceModel.Dispatcher
         // Returns the text value of the current node
         public override string Value
         {
-            get
-            {
-                return this.dom.GetValue(this.location);
-            }
+            get { return this.dom.GetValue(this.location); }
         }
 
         // Returns the value of xml:lang that is currently in scope.
@@ -328,18 +323,12 @@ namespace System.ServiceModel.Dispatcher
         // The default value of xml:space for the DOM
         internal XmlSpace DefaultXmlSpace
         {
-            get
-            {
-                return this.dom.space;
-            }
+            get { return this.dom.space; }
         }
 
         internal SeekableMessageNavigator DomNavigator
         {
-            get
-            {
-                return this.dom;
-            }
+            get { return this.dom; }
         }
 #endif
 
@@ -379,7 +368,12 @@ namespace System.ServiceModel.Dispatcher
                 return XmlNodeOrder.Unknown;
             }
 
-            return this.dom.ComparePosition(this.specialParent, this.location, nav.specialParent, nav.location);
+            return this.dom.ComparePosition(
+                this.specialParent,
+                this.location,
+                nav.specialParent,
+                nav.location
+            );
         }
 
         // Compare two position values that are valid for this navigator's DOM
@@ -395,10 +389,15 @@ namespace System.ServiceModel.Dispatcher
         // Evaluate an xpath expression against the current navigator
         public override object Evaluate(string xpath)
         {
-            // We can only evaluate atomized navigators        
+            // We can only evaluate atomized navigators
             if (!this.dom.atomize)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperCritical(new QueryProcessingException(QueryProcessingError.NotAtomized, SR.GetString(SR.SeekableMessageNavNonAtomized, "Evaluate")));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperCritical(
+                    new QueryProcessingException(
+                        QueryProcessingError.NotAtomized,
+                        SR.GetString(SR.SeekableMessageNavNonAtomized, "Evaluate")
+                    )
+                );
             }
             return base.Evaluate(xpath);
         }
@@ -406,10 +405,15 @@ namespace System.ServiceModel.Dispatcher
         // Evaluate an xpath expression against the current navigator
         public override object Evaluate(XPathExpression expr)
         {
-            // We can only evaluate atomized navigators        
+            // We can only evaluate atomized navigators
             if (!this.dom.atomize)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperCritical(new QueryProcessingException(QueryProcessingError.NotAtomized, SR.GetString(SR.SeekableMessageNavNonAtomized, "Evaluate")));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperCritical(
+                    new QueryProcessingException(
+                        QueryProcessingError.NotAtomized,
+                        SR.GetString(SR.SeekableMessageNavNonAtomized, "Evaluate")
+                    )
+                );
             }
             return base.Evaluate(expr);
         }
@@ -417,10 +421,15 @@ namespace System.ServiceModel.Dispatcher
         // Evaluate an xpath expression against the current navigator
         public override object Evaluate(XPathExpression expr, XPathNodeIterator context)
         {
-            // We can only evaluate atomized navigators        
+            // We can only evaluate atomized navigators
             if (!this.dom.atomize)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperCritical(new QueryProcessingException(QueryProcessingError.NotAtomized, SR.GetString(SR.SeekableMessageNavNonAtomized, "Evaluate")));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperCritical(
+                    new QueryProcessingException(
+                        QueryProcessingError.NotAtomized,
+                        SR.GetString(SR.SeekableMessageNavNonAtomized, "Evaluate")
+                    )
+                );
             }
             return base.Evaluate(expr, context);
         }
@@ -453,7 +462,10 @@ namespace System.ServiceModel.Dispatcher
             a = this.dom.nodes[this.location].firstAttribute;
             while (a != NullIndex)
             {
-                if (String.CompareOrdinal(this.dom.nodes[a].name, name) == 0 && String.CompareOrdinal(this.dom.nodes[a].ns, ns) == 0)
+                if (
+                    String.CompareOrdinal(this.dom.nodes[a].name, name) == 0
+                    && String.CompareOrdinal(this.dom.nodes[a].ns, ns) == 0
+                )
                 {
                     ret = this.dom.nodes[a].val;
                     break;
@@ -619,16 +631,23 @@ namespace System.ServiceModel.Dispatcher
                 return false;
             }
 
-            return this.dom == nav.dom && this.location == nav.location && this.specialParent == nav.specialParent;
+            return this.dom == nav.dom
+                && this.location == nav.location
+                && this.specialParent == nav.specialParent;
         }
 
         // Test if the given xpath matches this navigator
         public override bool Matches(string xpath)
         {
-            // We can only match atomized navigators        
+            // We can only match atomized navigators
             if (!this.dom.atomize)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperCritical(new QueryProcessingException(QueryProcessingError.NotAtomized, SR.GetString(SR.SeekableMessageNavNonAtomized, "Matches")));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperCritical(
+                    new QueryProcessingException(
+                        QueryProcessingError.NotAtomized,
+                        SR.GetString(SR.SeekableMessageNavNonAtomized, "Matches")
+                    )
+                );
             }
             return base.Matches(xpath);
         }
@@ -636,10 +655,15 @@ namespace System.ServiceModel.Dispatcher
         // Test if the given xpath matches this navigator
         public override bool Matches(XPathExpression expr)
         {
-            // We can only match atomized navigators        
+            // We can only match atomized navigators
             if (!this.dom.atomize)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperCritical(new QueryProcessingException(QueryProcessingError.NotAtomized, SR.GetString(SR.SeekableMessageNavNonAtomized, "Matches")));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperCritical(
+                    new QueryProcessingException(
+                        QueryProcessingError.NotAtomized,
+                        SR.GetString(SR.SeekableMessageNavNonAtomized, "Matches")
+                    )
+                );
             }
             return base.Matches(expr);
         }
@@ -707,8 +731,10 @@ namespace System.ServiceModel.Dispatcher
             int n = this.dom.nodes[this.location].firstAttribute;
             while (n != NullIndex)
             {
-                if (String.CompareOrdinal(this.dom.nodes[n].name, localName) == 0 &&
-                    String.CompareOrdinal(this.dom.nodes[n].ns, namespaceURI) == 0)
+                if (
+                    String.CompareOrdinal(this.dom.nodes[n].name, localName) == 0
+                    && String.CompareOrdinal(this.dom.nodes[n].ns, namespaceURI) == 0
+                )
                 {
                     // If we find it, we're done
                     this.location = n;
@@ -781,7 +807,10 @@ namespace System.ServiceModel.Dispatcher
         {
             // PERF, Microsoft, do we need this check?  The null check may be enough
             // Only valid for the root or an element node
-            if (this.location == RootIndex || this.dom.nodes[this.location].type == XPathNodeType.Element)
+            if (
+                this.location == RootIndex
+                || this.dom.nodes[this.location].type == XPathNodeType.Element
+            )
             {
                 // Get the first child
                 LoadOnDemand();
@@ -819,7 +848,11 @@ namespace System.ServiceModel.Dispatcher
 
             // Find the namespace
             LoadOnDemand();
-            int n = FindNamespace(this.location, this.dom.nodes[this.location].firstNamespace, scope);
+            int n = FindNamespace(
+                this.location,
+                this.dom.nodes[this.location].firstNamespace,
+                scope
+            );
 
             // If one was found, move there
             if (n != NullIndex)
@@ -837,7 +870,12 @@ namespace System.ServiceModel.Dispatcher
         public override bool MoveToId(string id)
         {
             // SOAP prohibits the inclusion of a DTD, so unique IDs cannot be defined.
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new QueryProcessingException(QueryProcessingError.NotSupported, SR.GetString(SR.SeekableMessageNavIDNotSupported)));
+            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                new QueryProcessingException(
+                    QueryProcessingError.NotSupported,
+                    SR.GetString(SR.SeekableMessageNavIDNotSupported)
+                )
+            );
         }
 
         // Move the navigator to the namespace manager the given prefix
@@ -881,7 +919,10 @@ namespace System.ServiceModel.Dispatcher
                     this.nsStack.Push(nodeName);
                     ++nsCount;
                     nodeVal = this.dom.nodes[n].val;
-                    if ((nodeName.Length > 0 || nodeVal.Length > 0) && String.CompareOrdinal(nodeName, name) == 0)
+                    if (
+                        (nodeName.Length > 0 || nodeVal.Length > 0)
+                        && String.CompareOrdinal(nodeName, name) == 0
+                    )
                     {
                         this.specialParent = this.location;
                         this.location = n;
@@ -957,7 +998,11 @@ namespace System.ServiceModel.Dispatcher
             }
 
             // Successful if the a namespace was found in the given scope
-            int n = FindNamespace(this.specialParent, this.dom.nodes[this.location].nextSibling, scope);
+            int n = FindNamespace(
+                this.specialParent,
+                this.dom.nodes[this.location].nextSibling,
+                scope
+            );
             if (n != NullIndex)
             {
                 // Move to the namespace
@@ -1028,7 +1073,12 @@ namespace System.ServiceModel.Dispatcher
             // Cannot select from an unatomized navigator
             if (!this.dom.atomize)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperCritical(new QueryProcessingException(QueryProcessingError.NotAtomized, SR.GetString(SR.SeekableMessageNavNonAtomized, "Select")));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperCritical(
+                    new QueryProcessingException(
+                        QueryProcessingError.NotAtomized,
+                        SR.GetString(SR.SeekableMessageNavNonAtomized, "Select")
+                    )
+                );
             }
             return base.Select(xpath);
         }
@@ -1039,7 +1089,12 @@ namespace System.ServiceModel.Dispatcher
             // Cannot select from an unatomized navigator
             if (!this.dom.atomize)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperCritical(new QueryProcessingException(QueryProcessingError.NotAtomized, SR.GetString(SR.SeekableMessageNavNonAtomized, "Select")));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperCritical(
+                    new QueryProcessingException(
+                        QueryProcessingError.NotAtomized,
+                        SR.GetString(SR.SeekableMessageNavNonAtomized, "Select")
+                    )
+                );
             }
             return base.Select(xpath);
         }
@@ -1050,18 +1105,32 @@ namespace System.ServiceModel.Dispatcher
             // Cannot select from an unatomized navigator
             if (!this.dom.atomize)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperCritical(new QueryProcessingException(QueryProcessingError.NotAtomized, SR.GetString(SR.SeekableMessageNavNonAtomized, "SelectAncestors")));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperCritical(
+                    new QueryProcessingException(
+                        QueryProcessingError.NotAtomized,
+                        SR.GetString(SR.SeekableMessageNavNonAtomized, "SelectAncestors")
+                    )
+                );
             }
             return base.SelectAncestors(type, matchSelf);
         }
 
         // Select ancestor nodes from the navigator with a particular name and namespace
-        public override XPathNodeIterator SelectAncestors(string name, string namespaceURI, bool matchSelf)
+        public override XPathNodeIterator SelectAncestors(
+            string name,
+            string namespaceURI,
+            bool matchSelf
+        )
         {
             // Cannot select from an unatomized navigator
             if (!this.dom.atomize)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperCritical(new QueryProcessingException(QueryProcessingError.NotAtomized, SR.GetString(SR.SeekableMessageNavNonAtomized, "SelectAncestors")));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperCritical(
+                    new QueryProcessingException(
+                        QueryProcessingError.NotAtomized,
+                        SR.GetString(SR.SeekableMessageNavNonAtomized, "SelectAncestors")
+                    )
+                );
             }
             return base.SelectAncestors(name, namespaceURI, matchSelf);
         }
@@ -1072,7 +1141,12 @@ namespace System.ServiceModel.Dispatcher
             // Cannot select from an unatomized navigator
             if (!this.dom.atomize)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperCritical(new QueryProcessingException(QueryProcessingError.NotAtomized, SR.GetString(SR.SeekableMessageNavNonAtomized, "SelectChildren")));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperCritical(
+                    new QueryProcessingException(
+                        QueryProcessingError.NotAtomized,
+                        SR.GetString(SR.SeekableMessageNavNonAtomized, "SelectChildren")
+                    )
+                );
             }
             return base.SelectChildren(type);
         }
@@ -1083,7 +1157,12 @@ namespace System.ServiceModel.Dispatcher
             // Cannot select from an unatomized navigator
             if (!this.dom.atomize)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperCritical(new QueryProcessingException(QueryProcessingError.NotAtomized, SR.GetString(SR.SeekableMessageNavNonAtomized, "SelectChildren")));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperCritical(
+                    new QueryProcessingException(
+                        QueryProcessingError.NotAtomized,
+                        SR.GetString(SR.SeekableMessageNavNonAtomized, "SelectChildren")
+                    )
+                );
             }
             return base.SelectChildren(name, namespaceURI);
         }
@@ -1094,18 +1173,32 @@ namespace System.ServiceModel.Dispatcher
             // Cannot select from an unatomized navigator
             if (!this.dom.atomize)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperCritical(new QueryProcessingException(QueryProcessingError.NotAtomized, SR.GetString(SR.SeekableMessageNavNonAtomized, "SelectDescendants")));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperCritical(
+                    new QueryProcessingException(
+                        QueryProcessingError.NotAtomized,
+                        SR.GetString(SR.SeekableMessageNavNonAtomized, "SelectDescendants")
+                    )
+                );
             }
             return base.SelectDescendants(type, matchSelf);
         }
 
         // Selectg descendant nodes from the navigator with a certain name and namespace
-        public override XPathNodeIterator SelectDescendants(string name, string namespaceURI, bool matchSelf)
+        public override XPathNodeIterator SelectDescendants(
+            string name,
+            string namespaceURI,
+            bool matchSelf
+        )
         {
             // Cannot select from an unatomized navigator
             if (!this.dom.atomize)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperCritical(new QueryProcessingException(QueryProcessingError.NotAtomized, SR.GetString(SR.SeekableMessageNavNonAtomized, "SelectDescendants")));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperCritical(
+                    new QueryProcessingException(
+                        QueryProcessingError.NotAtomized,
+                        SR.GetString(SR.SeekableMessageNavNonAtomized, "SelectDescendants")
+                    )
+                );
             }
             return base.SelectDescendants(name, namespaceURI, matchSelf);
         }
@@ -1137,7 +1230,13 @@ namespace System.ServiceModel.Dispatcher
         }
 
         // THREAD: Synchronize this function if multiple threads can try to re-initialize an instance at the same time.  Also, if you reinitialize the navigator that holds information referenced by clones, the clones will be affected as well.
-        internal void Init(Message msg, int countMax, XmlSpace space, bool includeBody, bool atomize)
+        internal void Init(
+            Message msg,
+            int countMax,
+            XmlSpace space,
+            bool includeBody,
+            bool atomize
+        )
         {
             Fx.Assert(countMax > 0, "Maximum node count must be greater than zero");
             this.counter = this;
@@ -1177,7 +1276,8 @@ namespace System.ServiceModel.Dispatcher
             this.nodes[HeaderIndex].ns = soapNS;
 
             this.nodes[HeaderIndex].nextSibling = bodyIndex;
-            this.nodes[HeaderIndex].firstChild = this.bodyIndex != FirstHeaderIndex ? FirstHeaderIndex : NullIndex;
+            this.nodes[HeaderIndex].firstChild =
+                this.bodyIndex != FirstHeaderIndex ? FirstHeaderIndex : NullIndex;
 
             // Headers
             if (msg.Headers.Count > 0)
@@ -1301,10 +1401,16 @@ namespace System.ServiceModel.Dispatcher
         {
             if (!IsValidPosition(elem, parent))
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new QueryProcessingException(QueryProcessingError.InvalidNavigatorPosition, SR.GetString(SR.SeekableMessageNavInvalidPosition)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new QueryProcessingException(
+                        QueryProcessingError.InvalidNavigatorPosition,
+                        SR.GetString(SR.SeekableMessageNavInvalidPosition)
+                    )
+                );
             }
         }
 #endif
+
         // Create a copy of the current namespace stack
         Stack<string> CloneNSStack()
         {
@@ -1416,7 +1522,6 @@ namespace System.ServiceModel.Dispatcher
                         return XmlNodeOrder.Before;
                     }
                 }
-
             }
 
             // Need to find out which upper level element is the parent of each node
@@ -1444,7 +1549,7 @@ namespace System.ServiceModel.Dispatcher
             }
         }
 
-        // Decompose the 'long' position into it's element and parent components 
+        // Decompose the 'long' position into it's element and parent components
         // Must be called on the DOM node
         Position DecodePosition(long pos)
         {
@@ -1459,7 +1564,12 @@ namespace System.ServiceModel.Dispatcher
                 }
 
                 // If the parent is not null, make sure it is a valid parent and that the element is a namespace node
-                if (p.parent > NullIndex && p.parent < this.nextFreeIndex && this.nodes[p.parent].type == XPathNodeType.Element && this.nodes[p.elem].type == XPathNodeType.Namespace)
+                if (
+                    p.parent > NullIndex
+                    && p.parent < this.nextFreeIndex
+                    && this.nodes[p.parent].type == XPathNodeType.Element
+                    && this.nodes[p.elem].type == XPathNodeType.Namespace
+                )
                 {
                     // Check that 'parent' is a descendant-or-self of elem->parent
                     int n = this.nodes[p.elem].parent;
@@ -1473,12 +1583,16 @@ namespace System.ServiceModel.Dispatcher
                         }
 
                         par = this.nodes[par].parent;
-
                     } while (par != NullIndex);
                 }
             }
 
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new QueryProcessingException(QueryProcessingError.InvalidNavigatorPosition, SR.GetString(SR.SeekableMessageNavInvalidPosition)));
+            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                new QueryProcessingException(
+                    QueryProcessingError.InvalidNavigatorPosition,
+                    SR.GetString(SR.SeekableMessageNavInvalidPosition)
+                )
+            );
         }
 
         // Get the index of the next namespace that matches the scope
@@ -1494,7 +1608,8 @@ namespace System.ServiceModel.Dispatcher
             {
                 Increase();
 
-                string nodeName, nodeVal;
+                string nodeName,
+                    nodeVal;
 
                 // Skip any prefixes that are already defined
                 nodeName = this.dom.nodes[ns].name;
@@ -1564,7 +1679,8 @@ namespace System.ServiceModel.Dispatcher
         // Returns the qualified name of the given node
         string GetName(int elem)
         {
-            string p, n;
+            string p,
+                n;
             LoadOnDemand(elem);
             p = this.dom.nodes[elem].prefix;
             n = this.dom.nodes[elem].name;
@@ -1660,13 +1776,13 @@ namespace System.ServiceModel.Dispatcher
         bool IsValidPosition(int elem, int parent)
         {
             // Make sure both nodes are valid
-            if ( elem > NullIndex && elem < this.nextFreeIndex)
+            if (elem > NullIndex && elem < this.nextFreeIndex)
             {
                 if (parent == NullIndex)
                 {
                     return true;
                 }
-                
+
                 // If the parent is not null, make sure it is a valid parent
                 if (parent > NullIndex && parent < this.nextFreeIndex)
                 {
@@ -1702,6 +1818,7 @@ namespace System.ServiceModel.Dispatcher
             return false;
         }
 #endif
+
         // Find the last child of a node
         // Must be called on the DOM object
         int LastChild(int n)
@@ -1775,7 +1892,9 @@ namespace System.ServiceModel.Dispatcher
 
             // Finish populating the header element
             this.nodes[self].firstNamespace = SoapNSIndex;
-            this.nodes[self].prefix = this.atomize ? this.nameTable.Add(reader.Prefix) : reader.Prefix;
+            this.nodes[self].prefix = this.atomize
+                ? this.nameTable.Add(reader.Prefix)
+                : reader.Prefix;
             this.nodes[self].baseUri = reader.BaseURI;
             this.nodes[self].xmlLang = reader.XmlLang;
 
@@ -1837,7 +1956,11 @@ namespace System.ServiceModel.Dispatcher
                     else
                     {
                         // Throw an exception if we try to navigate into the body.
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new NavigatorInvalidBodyAccessException(SR.GetString(SR.SeekableMessageNavBodyForbidden)));
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new NavigatorInvalidBodyAccessException(
+                                SR.GetString(SR.SeekableMessageNavBodyForbidden)
+                            )
+                        );
                     }
                 }
                 else
@@ -1848,7 +1971,11 @@ namespace System.ServiceModel.Dispatcher
             else if (elem == this.bodyIndex && !this.includeBody)
             {
                 // Throw an exception if we try to navigate into the body.
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new NavigatorInvalidBodyAccessException(SR.GetString(SR.SeekableMessageNavBodyForbidden)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new NavigatorInvalidBodyAccessException(
+                        SR.GetString(SR.SeekableMessageNavBodyForbidden)
+                    )
+                );
             }
         }
 
@@ -1872,7 +1999,7 @@ namespace System.ServiceModel.Dispatcher
                     size = this.nodes.Length + GrowInc;
                 }
 
-                // Resize the node array                
+                // Resize the node array
                 Node[] tmp = new Node[size];
                 this.nodes.CopyTo(tmp, 0);
                 this.nodes = tmp;
@@ -1886,7 +2013,8 @@ namespace System.ServiceModel.Dispatcher
         // Must be called on the DOM object
         void ReadAttributes(int elem, XmlReader reader)
         {
-            int a, n;
+            int a,
+                n;
             while (reader.MoveToNextAttribute())
             {
                 if (QueryDataModel.IsAttribute(reader.NamespaceURI))
@@ -1906,9 +2034,17 @@ namespace System.ServiceModel.Dispatcher
                     string name = reader.Prefix.Length == 0 ? string.Empty : reader.LocalName;
 
                     // It is illegal to override the 'xml' and 'xmlns' prefixes
-                    if (String.CompareOrdinal(name, XmlP) == 0 || String.CompareOrdinal(name, XmlnsP) == 0)
+                    if (
+                        String.CompareOrdinal(name, XmlP) == 0
+                        || String.CompareOrdinal(name, XmlnsP) == 0
+                    )
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new QueryProcessingException(QueryProcessingError.InvalidNamespacePrefix, SR.GetString(SR.SeekableMessageNavOverrideForbidden, reader.Name)));
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new QueryProcessingException(
+                                QueryProcessingError.InvalidNamespacePrefix,
+                                SR.GetString(SR.SeekableMessageNavOverrideForbidden, reader.Name)
+                            )
+                        );
                     }
 
                     n = NewNode();
@@ -1986,9 +2122,14 @@ namespace System.ServiceModel.Dispatcher
                             // If we're preserving whitespace, try to append it to a text node instead
                             // of creating a new node
                             n = LastChild(parent);
-                            if (n != NullIndex && (this.nodes[n].type == XPathNodeType.Text ||
-                                this.nodes[n].type == XPathNodeType.Whitespace ||
-                                this.nodes[n].type == XPathNodeType.SignificantWhitespace))
+                            if (
+                                n != NullIndex
+                                && (
+                                    this.nodes[n].type == XPathNodeType.Text
+                                    || this.nodes[n].type == XPathNodeType.Whitespace
+                                    || this.nodes[n].type == XPathNodeType.SignificantWhitespace
+                                )
+                            )
                             {
                                 this.nodes[n].val = this.nodes[n].val + reader.Value;
                             }
@@ -2014,9 +2155,14 @@ namespace System.ServiceModel.Dispatcher
                             // If we're preserving whitespace, try to append it to a text node instead
                             // of creating a new node
                             n = LastChild(parent);
-                            if (n != NullIndex && (this.nodes[n].type == XPathNodeType.Text ||
-                                this.nodes[n].type == XPathNodeType.Whitespace ||
-                                this.nodes[n].type == XPathNodeType.SignificantWhitespace))
+                            if (
+                                n != NullIndex
+                                && (
+                                    this.nodes[n].type == XPathNodeType.Text
+                                    || this.nodes[n].type == XPathNodeType.Whitespace
+                                    || this.nodes[n].type == XPathNodeType.SignificantWhitespace
+                                )
+                            )
                             {
                                 this.nodes[n].val = this.nodes[n].val + reader.Value;
                             }
@@ -2036,14 +2182,16 @@ namespace System.ServiceModel.Dispatcher
                     case XmlNodeType.Text:
                         // Try to append it to a text node instead of creating a new node
                         n = LastChild(parent);
-                        if (n == NullIndex || (this.nodes[n].type != XPathNodeType.Text &&
-                            this.nodes[n].type != XPathNodeType.Whitespace &&
-                            this.nodes[n].type != XPathNodeType.SignificantWhitespace))
+                        if (
+                            n == NullIndex
+                            || (
+                                this.nodes[n].type != XPathNodeType.Text
+                                && this.nodes[n].type != XPathNodeType.Whitespace
+                                && this.nodes[n].type != XPathNodeType.SignificantWhitespace
+                            )
+                        )
                         {
                             n = NewNode();
-
-
-
 
                             this.nodes[n].baseUri = reader.BaseURI;
                             this.nodes[n].xmlLang = reader.XmlLang;
@@ -2057,9 +2205,6 @@ namespace System.ServiceModel.Dispatcher
                         reader.ResolveEntity();
                         reader.Read();
                         ReadChildNodes(reader, parent, parentNS);
-
-
-
 
                         break;
 
@@ -2082,22 +2227,13 @@ namespace System.ServiceModel.Dispatcher
 
         int INodeCounter.CounterMarker
         {
-            get
-            {
-                return this.counter.nodeCount;
-            }
-            set
-            {
-                this.counter.nodeCount = value;
-            }
+            get { return this.counter.nodeCount; }
+            set { this.counter.nodeCount = value; }
         }
 
         int INodeCounter.MaxCounter
         {
-            set
-            {
-                this.counter.nodeCountMax = value;
-            }
+            set { this.counter.nodeCountMax = value; }
         }
 
         int INodeCounter.ElapsedCount(int marker)
@@ -2114,7 +2250,11 @@ namespace System.ServiceModel.Dispatcher
             }
             else
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new XPathNavigatorException(SR.GetString(SR.FilterNodeQuotaExceeded, this.counter.nodeCountMax)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new XPathNavigatorException(
+                        SR.GetString(SR.FilterNodeQuotaExceeded, this.counter.nodeCountMax)
+                    )
+                );
             }
         }
 

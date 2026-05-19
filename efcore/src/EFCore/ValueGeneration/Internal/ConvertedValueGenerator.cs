@@ -20,9 +20,7 @@ public class ConvertedValueGenerator : ValueGenerator
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public ConvertedValueGenerator(
-        ValueGenerator providerGenerator,
-        ValueConverter converter)
+    public ConvertedValueGenerator(ValueGenerator providerGenerator, ValueConverter converter)
     {
         _providerGenerator = providerGenerator;
         _converter = converter;
@@ -34,8 +32,8 @@ public class ConvertedValueGenerator : ValueGenerator
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    protected override object? NextValue(EntityEntry entry)
-        => _converter.ConvertFromProvider(_providerGenerator.Next(entry));
+    protected override object? NextValue(EntityEntry entry) =>
+        _converter.ConvertFromProvider(_providerGenerator.Next(entry));
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -43,8 +41,13 @@ public class ConvertedValueGenerator : ValueGenerator
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public override async ValueTask<object?> NextAsync(EntityEntry entry, CancellationToken cancellationToken = default)
-        => _converter.ConvertFromProvider(await _providerGenerator.NextAsync(entry, cancellationToken).ConfigureAwait(false));
+    public override async ValueTask<object?> NextAsync(
+        EntityEntry entry,
+        CancellationToken cancellationToken = default
+    ) =>
+        _converter.ConvertFromProvider(
+            await _providerGenerator.NextAsync(entry, cancellationToken).ConfigureAwait(false)
+        );
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -52,8 +55,7 @@ public class ConvertedValueGenerator : ValueGenerator
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public override bool GeneratesTemporaryValues
-        => _providerGenerator.GeneratesTemporaryValues;
+    public override bool GeneratesTemporaryValues => _providerGenerator.GeneratesTemporaryValues;
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -61,6 +63,5 @@ public class ConvertedValueGenerator : ValueGenerator
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public override bool GeneratesStableValues
-        => _providerGenerator.GeneratesStableValues;
+    public override bool GeneratesStableValues => _providerGenerator.GeneratesStableValues;
 }

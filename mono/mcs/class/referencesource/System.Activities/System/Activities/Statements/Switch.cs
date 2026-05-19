@@ -10,18 +10,16 @@ namespace System.Activities.Statements
     using System.Collections.ObjectModel;
     using System.ComponentModel;
     using System.Linq.Expressions;
-    using System.Windows.Markup;
     using System.Runtime;
     using System.Runtime.Collections;
+    using System.Windows.Markup;
 
     [ContentProperty("Cases")]
-    public sealed class Switch<T> : NativeActivity  
+    public sealed class Switch<T> : NativeActivity
     {
         IDictionary<T, Activity> cases;
 
-        public Switch()
-        {
-        }
+        public Switch() { }
 
         public Switch(Expression<Func<ActivityContext, T>> expression)
             : this()
@@ -58,11 +56,7 @@ namespace System.Activities.Statements
 
         [RequiredArgument]
         [DefaultValue(null)]
-        public InArgument<T> Expression
-        {
-            get; 
-            set;
-        }
+        public InArgument<T> Expression { get; set; }
 
         public IDictionary<T, Activity> Cases
         {
@@ -77,20 +71,24 @@ namespace System.Activities.Statements
         }
 
         [DefaultValue(null)]
-        public Activity Default
-        {
-            get;
-            set;
-        }
+        public Activity Default { get; set; }
 
-        protected override void OnCreateDynamicUpdateMap(DynamicUpdate.NativeActivityUpdateMapMetadata metadata, Activity originalActivity)
+        protected override void OnCreateDynamicUpdateMap(
+            DynamicUpdate.NativeActivityUpdateMapMetadata metadata,
+            Activity originalActivity
+        )
         {
             metadata.AllowUpdateInsideThisActivity();
         }
 
         protected override void CacheMetadata(NativeActivityMetadata metadata)
         {
-            RuntimeArgument expressionArgument = new RuntimeArgument("Expression", typeof(T), ArgumentDirection.In, true);
+            RuntimeArgument expressionArgument = new RuntimeArgument(
+                "Expression",
+                typeof(T),
+                ArgumentDirection.In,
+                true
+            );
             metadata.Bind(Expression, expressionArgument);
             metadata.SetArgumentsCollection(new Collection<RuntimeArgument> { expressionArgument });
 

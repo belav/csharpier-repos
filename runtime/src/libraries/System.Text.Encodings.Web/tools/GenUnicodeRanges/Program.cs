@@ -7,7 +7,6 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
-
 using static System.FormattableString;
 
 namespace GenDefinedCharList
@@ -17,7 +16,8 @@ namespace GenDefinedCharList
     /// </summary>
     class Program
     {
-        private const string _codePointFiltersTestsGeneratedFormat = @"[InlineData('\u{1}', '\u{2}', nameof(UnicodeRanges.{0}))]";
+        private const string _codePointFiltersTestsGeneratedFormat =
+            @"[InlineData('\u{1}', '\u{2}', nameof(UnicodeRanges.{0}))]";
 
         static void Main(string[] args)
         {
@@ -51,12 +51,16 @@ namespace GenDefinedCharList
             testCodeBuilder.AppendLine("{");
             testCodeBuilder.AppendLine("    public static partial class UnicodeRangesTests");
             testCodeBuilder.AppendLine("    {");
-            testCodeBuilder.AppendLine("        public static IEnumerable<object[]> UnicodeRanges_GeneratedData => new[]");
+            testCodeBuilder.AppendLine(
+                "        public static IEnumerable<object[]> UnicodeRanges_GeneratedData => new[]"
+            );
             testCodeBuilder.AppendLine("        {");
 
             string[] allInputLines = File.ReadAllLines(args[0]);
 
-            Regex inputLineRegex = new Regex(@"^(?<startCode>[0-9A-F]{4})\.\.(?<endCode>[0-9A-F]{4}); (?<blockName>.+)$");
+            Regex inputLineRegex = new Regex(
+                @"^(?<startCode>[0-9A-F]{4})\.\.(?<endCode>[0-9A-F]{4}); (?<blockName>.+)$"
+            );
             bool isFirstLine = true;
 
             foreach (string inputLine in allInputLines)
@@ -71,13 +75,22 @@ namespace GenDefinedCharList
                 string startCode = match.Groups["startCode"].Value;
                 string endCode = match.Groups["endCode"].Value;
                 string blockName = match.Groups["blockName"].Value;
-                string blockNameAsProperty = WithDotNetPropertyCasing(RemoveAllNonAlphanumeric(blockName));
+                string blockNameAsProperty = WithDotNetPropertyCasing(
+                    RemoveAllNonAlphanumeric(blockName)
+                );
                 string blockNameAsField = Invariant($"_u{startCode}");
 
                 // Exclude the surrogate range and everything outside the BMP.
 
-                uint startCodeAsInt = uint.Parse(startCode, NumberStyles.HexNumber, CultureInfo.InvariantCulture);
-                if (startCodeAsInt >= 0x10000 || (startCodeAsInt >= 0xD800 && startCodeAsInt <= 0xDFFF))
+                uint startCodeAsInt = uint.Parse(
+                    startCode,
+                    NumberStyles.HexNumber,
+                    CultureInfo.InvariantCulture
+                );
+                if (
+                    startCodeAsInt >= 0x10000
+                    || (startCodeAsInt >= 0xD800 && startCodeAsInt <= 0xDFFF)
+                )
                 {
                     continue;
                 }
@@ -97,15 +110,33 @@ namespace GenDefinedCharList
                 isFirstLine = false;
 
                 runtimeCodeBuilder.AppendLine(Invariant($"        /// <summary>"));
-                runtimeCodeBuilder.AppendLine(Invariant($"        /// A <see cref=\"UnicodeRange\"/> corresponding to the '{blockName}' Unicode block (U+{startCode}..U+{endCode})."));
+                runtimeCodeBuilder.AppendLine(
+                    Invariant(
+                        $"        /// A <see cref=\"UnicodeRange\"/> corresponding to the '{blockName}' Unicode block (U+{startCode}..U+{endCode})."
+                    )
+                );
                 runtimeCodeBuilder.AppendLine(Invariant($"        /// </summary>"));
                 runtimeCodeBuilder.AppendLine(Invariant($"        /// <remarks>"));
-                runtimeCodeBuilder.AppendLine(Invariant($"        /// See https://www.unicode.org/charts/PDF/U{startCode}.pdf for the full set of characters in this block."));
+                runtimeCodeBuilder.AppendLine(
+                    Invariant(
+                        $"        /// See https://www.unicode.org/charts/PDF/U{startCode}.pdf for the full set of characters in this block."
+                    )
+                );
                 runtimeCodeBuilder.AppendLine(Invariant($"        /// </remarks>"));
-                runtimeCodeBuilder.AppendLine(Invariant($"        public static UnicodeRange {blockNameAsProperty} => {blockNameAsField} ?? CreateRange(ref {blockNameAsField}, first: '\\u{startCode}', last: '\\u{endCode}');"));
-                runtimeCodeBuilder.AppendLine(Invariant($"        private static UnicodeRange? {blockNameAsField};"));
+                runtimeCodeBuilder.AppendLine(
+                    Invariant(
+                        $"        public static UnicodeRange {blockNameAsProperty} => {blockNameAsField} ?? CreateRange(ref {blockNameAsField}, first: '\\u{startCode}', last: '\\u{endCode}');"
+                    )
+                );
+                runtimeCodeBuilder.AppendLine(
+                    Invariant($"        private static UnicodeRange? {blockNameAsField};")
+                );
 
-                testCodeBuilder.AppendLine(Invariant($"            new object[] {{ '\\u{startCode}', '\\u{endCode}', nameof(UnicodeRanges.{blockNameAsProperty}) }},"));
+                testCodeBuilder.AppendLine(
+                    Invariant(
+                        $"            new object[] {{ '\\u{startCode}', '\\u{endCode}', nameof(UnicodeRanges.{blockNameAsProperty}) }},"
+                    )
+                );
             }
 
             runtimeCodeBuilder.AppendLine("    }");
@@ -122,7 +153,14 @@ namespace GenDefinedCharList
         private static string RemoveAllNonAlphanumeric(string blockName)
         {
             // Allow only A-Z 0-9
-            return new String(blockName.ToCharArray().Where(c => ('A' <= c && c <= 'Z') || ('a' <= c && c <= 'z') || ('0' <= c && c <= '9')).ToArray());
+            return new String(
+                blockName
+                    .ToCharArray()
+                    .Where(c =>
+                        ('A' <= c && c <= 'Z') || ('a' <= c && c <= 'z') || ('0' <= c && c <= '9')
+                    )
+                    .ToArray()
+            );
         }
 
         private static string WithDotNetPropertyCasing(string originalInput)
@@ -172,11 +210,15 @@ namespace GenDefinedCharList
         private static void WriteCopyrightAndHeader(StringBuilder builder)
         {
             builder.AppendLine("// Licensed to the .NET Foundation under one or more agreements.");
-            builder.AppendLine("// The .NET Foundation licenses this file to you under the MIT license.");
+            builder.AppendLine(
+                "// The .NET Foundation licenses this file to you under the MIT license."
+            );
             builder.AppendLine();
             builder.AppendLine("// This file was generated by a tool.");
             builder.AppendLine("// See src/System.Text.Encodings.Web/tools/GenUnicodeRanges");
-            builder.AppendLine("// IF YOU NEED TO UPDATE UNICODE VERSION FOLLOW THE GUIDE AT src/libraries/System.Private.CoreLib/Tools/GenUnicodeProp/Updating-Unicode-Versions.md");
+            builder.AppendLine(
+                "// IF YOU NEED TO UPDATE UNICODE VERSION FOLLOW THE GUIDE AT src/libraries/System.Private.CoreLib/Tools/GenUnicodeProp/Updating-Unicode-Versions.md"
+            );
         }
     }
 }

@@ -20,7 +20,10 @@ namespace ILCompiler.Metadata
             _map = new Dictionary<TEntity, TRecord>(comparer);
         }
 
-        public TRecord GetOrCreate<TConcreteEntity, TConcreteRecord>(TConcreteEntity entity, Action<TConcreteEntity, TConcreteRecord> initializer)
+        public TRecord GetOrCreate<TConcreteEntity, TConcreteRecord>(
+            TConcreteEntity entity,
+            Action<TConcreteEntity, TConcreteRecord> initializer
+        )
             where TConcreteEntity : TEntity
             where TConcreteRecord : TRecord, new()
         {
@@ -64,7 +67,10 @@ namespace ILCompiler.Metadata
             return _map.TryGetValue(entity, out record);
         }
 
-        public TConcreteRecord Create<TConcreteEntity, TConcreteRecord>(TConcreteEntity entity, Action<TConcreteEntity, TConcreteRecord> initializer)
+        public TConcreteRecord Create<TConcreteEntity, TConcreteRecord>(
+            TConcreteEntity entity,
+            Action<TConcreteEntity, TConcreteRecord> initializer
+        )
             where TConcreteEntity : TEntity
             where TConcreteRecord : TRecord, new()
         {

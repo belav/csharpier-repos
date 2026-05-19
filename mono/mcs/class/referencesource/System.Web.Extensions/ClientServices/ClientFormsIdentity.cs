@@ -6,22 +6,44 @@
 namespace System.Web.ClientServices
 {
     using System;
+    using System.Diagnostics.CodeAnalysis;
     using System.Net;
-    using System.Security.Principal;
     using System.Runtime.InteropServices;
     using System.Security;
+    using System.Security.Principal;
     using System.Web.Security;
-    using System.Diagnostics.CodeAnalysis;
 
     public class ClientFormsIdentity : IIdentity, IDisposable
     {
-        public  string              Name                    { get { return _Name; }}
-        public  bool                IsAuthenticated         { get { return _IsAuthenticated; }}
-        public  string              AuthenticationType      { get { return _AuthenticationType; } }
-        public  CookieContainer     AuthenticationCookies   { get { return _AuthenticationCookies; } }
-        public  MembershipProvider  Provider                { get { return _Provider; } }
+        public string Name
+        {
+            get { return _Name; }
+        }
+        public bool IsAuthenticated
+        {
+            get { return _IsAuthenticated; }
+        }
+        public string AuthenticationType
+        {
+            get { return _AuthenticationType; }
+        }
+        public CookieContainer AuthenticationCookies
+        {
+            get { return _AuthenticationCookies; }
+        }
+        public MembershipProvider Provider
+        {
+            get { return _Provider; }
+        }
 
-        public ClientFormsIdentity(string name, string password, MembershipProvider provider, string authenticationType, bool isAuthenticated, CookieContainer authenticationCookies)
+        public ClientFormsIdentity(
+            string name,
+            string password,
+            MembershipProvider provider,
+            string authenticationType,
+            bool isAuthenticated,
+            CookieContainer authenticationCookies
+        )
         {
             _Name = name;
             _AuthenticationType = authenticationType;
@@ -58,13 +80,13 @@ namespace System.Web.ClientServices
             _Disposed = true;
         }
 
-        private string              _Name;
-        private bool                _IsAuthenticated;
-        private string              _AuthenticationType;
-        private CookieContainer     _AuthenticationCookies;
-        private SecureString        _Password;
-        private MembershipProvider  _Provider;
-        private bool                _Disposed;
+        private string _Name;
+        private bool _IsAuthenticated;
+        private string _AuthenticationType;
+        private CookieContainer _AuthenticationCookies;
+        private SecureString _Password;
+        private MembershipProvider _Provider;
+        private bool _Disposed;
 
         private static SecureString GetSecureStringFromString(string password)
         {
@@ -76,16 +98,22 @@ namespace System.Web.ClientServices
             return ss;
         }
 
-        [SuppressMessage("Microsoft.Security", "CA2122:DoNotIndirectlyExposeMethodsWithLinkDemands", Justification="Reviewed and approved by feature crew")]
+        [SuppressMessage(
+            "Microsoft.Security",
+            "CA2122:DoNotIndirectlyExposeMethodsWithLinkDemands",
+            Justification = "Reviewed and approved by feature crew"
+        )]
         [SecuritySafeCritical]
         private static string GetStringFromSecureString(SecureString securePass)
         {
-
             IntPtr bstr = IntPtr.Zero;
-            try {
+            try
+            {
                 bstr = Marshal.SecureStringToBSTR(securePass);
                 return Marshal.PtrToStringBSTR(bstr);
-            } finally {
+            }
+            finally
+            {
                 if (bstr != IntPtr.Zero)
                     Marshal.FreeBSTR(bstr);
             }

@@ -9,6 +9,7 @@ using Xunit;
 public class MatrixCls
 {
     public double[,] arr;
+
     public MatrixCls(int n, int m)
     {
         arr = new double[n, m];
@@ -18,11 +19,11 @@ public class MatrixCls
 public class classarr
 {
     private static double s_tolerance = 0.0000000000001;
+
     public static bool AreEqual(double left, double right)
     {
         return Math.Abs(left - right) < s_tolerance;
     }
-
 
     public static void swap(double a, double b)
     {
@@ -34,8 +35,16 @@ public class classarr
 
     public static void gaussj(MatrixCls a, int n, MatrixCls b, int m)
     {
-        int i, icol = 0, irow = 0, j, k, l, ll;
-        double big = 0.0, dum = 0.0, pivinv = 0.0;
+        int i,
+            icol = 0,
+            irow = 0,
+            j,
+            k,
+            l,
+            ll;
+        double big = 0.0,
+            dum = 0.0,
+            pivinv = 0.0;
 
         int[] indxc = new int[3];
         int[] indxr = new int[3];
@@ -66,8 +75,10 @@ public class classarr
             ++(ipiv[icol]);
             if (irow != icol)
             {
-                for (l = 0; l < n; l++) swap(a.arr[irow, l], a.arr[icol, l]);
-                for (l = 0; l < m; l++) swap(b.arr[irow, l], b.arr[icol, l]);
+                for (l = 0; l < n; l++)
+                    swap(a.arr[irow, l], a.arr[icol, l]);
+                for (l = 0; l < m; l++)
+                    swap(b.arr[irow, l], b.arr[icol, l]);
             }
 
             indxr[i] = irow;
@@ -76,15 +87,19 @@ public class classarr
                 Console.WriteLine("GAUSSJ: Singular Matrix-2. icol is {0}\n", icol);
             pivinv = 1.0 / a.arr[icol, icol];
             a.arr[icol, icol] = 1.0;
-            for (l = 0; l < n; l++) a.arr[icol, l] *= pivinv;
-            for (l = 0; l < m; l++) b.arr[icol, l] *= pivinv;
+            for (l = 0; l < n; l++)
+                a.arr[icol, l] *= pivinv;
+            for (l = 0; l < m; l++)
+                b.arr[icol, l] *= pivinv;
             for (ll = 0; ll < n; ll++)
                 if (ll != icol)
                 {
                     dum = a.arr[ll, icol];
                     a.arr[ll, icol] = 0.0;
-                    for (l = 0; l < n; l++) a.arr[ll, l] -= a.arr[icol, l] * dum;
-                    for (l = 0; l < m; l++) b.arr[ll, l] -= b.arr[icol, l] * dum;
+                    for (l = 0; l < n; l++)
+                        a.arr[ll, l] -= a.arr[icol, l] * dum;
+                    for (l = 0; l < m; l++)
+                        b.arr[ll, l] -= b.arr[icol, l] * dum;
                 }
         }
         for (l = n - 1; l >= 0; l--)
@@ -122,54 +137,54 @@ public class classarr
         b.arr[2, 0] = 3;
 
         /*
-		int i, j;
-				
-		Console.WriteLine("Matrix A is \n");
-		for (i=0; i<n; i++)
-		{
-			for (j=0; j<n; j++)
-				Console.Write("{0}\t", a.arr[i,j]);
-			Console.WriteLine();
-		}
+        int i, j;
+                
+        Console.WriteLine("Matrix A is \n");
+        for (i=0; i<n; i++)
+        {
+            for (j=0; j<n; j++)
+                Console.Write("{0}\t", a.arr[i,j]);
+            Console.WriteLine();
+        }
 
-		Console.WriteLine();
-		Console.WriteLine("Matrix B is:\n");
-		for (i=0; i<n; i++)
-		{
-			for (j=0; j<m; j++)
-				Console.Write("{0}\t", b.arr[i,j]);
-			Console.WriteLine();
-		}
-		*/
+        Console.WriteLine();
+        Console.WriteLine("Matrix B is:\n");
+        for (i=0; i<n; i++)
+        {
+            for (j=0; j<m; j++)
+                Console.Write("{0}\t", b.arr[i,j]);
+            Console.WriteLine();
+        }
+        */
 
         gaussj(a, n, b, m);
 
         /*
-		Console.WriteLine();
-		Console.WriteLine("The inverse of matrix A is:\n");
-		for (i=0; i<n; i++)
-		{
-			for (j=0; j<n; j++)
-				Console.Write("{0}\t", a.arr[i,j]);
-			Console.WriteLine();
-		}
+        Console.WriteLine();
+        Console.WriteLine("The inverse of matrix A is:\n");
+        for (i=0; i<n; i++)
+        {
+            for (j=0; j<n; j++)
+                Console.Write("{0}\t", a.arr[i,j]);
+            Console.WriteLine();
+        }
 
-		Console.WriteLine();
-		Console.WriteLine("The solution X of AX=B is:\n");
-		for (i=0; i<n; i++)
-		{
-			for (j=0; j<m; j++)
-				Console.Write("{0}\t", b.arr[i,j]);
-			Console.WriteLine();
-		}
-		*/
+        Console.WriteLine();
+        Console.WriteLine("The solution X of AX=B is:\n");
+        for (i=0; i<n; i++)
+        {
+            for (j=0; j<m; j++)
+                Console.Write("{0}\t", b.arr[i,j]);
+            Console.WriteLine();
+        }
+        */
 
         if (
-               AreEqual(a.arr[0, 0], 3)
+            AreEqual(a.arr[0, 0], 3)
             && AreEqual(a.arr[1, 1], 4)
             && AreEqual(b.arr[0, 0], -9)
             && AreEqual(b.arr[1, 0], 10)
-            )
+        )
             pass = true;
 
         if (!pass)

@@ -8,10 +8,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -30,32 +30,34 @@ using System.ComponentModel;
 
 namespace System.Windows.Forms
 {
-	public class ColumnWidthChangingEventArgs : CancelEventArgs
-	{
-		private int column_index;
-		private int new_width;
+    public class ColumnWidthChangingEventArgs : CancelEventArgs
+    {
+        private int column_index;
+        private int new_width;
 
-		#region Public Constructors
-		public ColumnWidthChangingEventArgs (int columnIndex, int newWidth) : this (columnIndex, newWidth, false)
-		{
-		}
+        #region Public Constructors
+        public ColumnWidthChangingEventArgs(int columnIndex, int newWidth)
+            : this(columnIndex, newWidth, false) { }
 
-		public ColumnWidthChangingEventArgs (int columnIndex, int newWidth, bool cancel) : base (cancel)
-		{
-			this.column_index = columnIndex;
-			this.new_width = newWidth;
-		}
-		#endregion	// Public Constructors
+        public ColumnWidthChangingEventArgs(int columnIndex, int newWidth, bool cancel)
+            : base(cancel)
+        {
+            this.column_index = columnIndex;
+            this.new_width = newWidth;
+        }
+        #endregion	// Public Constructors
 
-		#region Public Instance Properties
-		public int ColumnIndex {
-			get { return this.column_index; }
-		}
-		
-		public int NewWidth {
-			get { return this.new_width; }
-			set { this.new_width = value; }
-		}
-		#endregion	// Public Instance Properties
-	}
+        #region Public Instance Properties
+        public int ColumnIndex
+        {
+            get { return this.column_index; }
+        }
+
+        public int NewWidth
+        {
+            get { return this.new_width; }
+            set { this.new_width = value; }
+        }
+        #endregion	// Public Instance Properties
+    }
 }

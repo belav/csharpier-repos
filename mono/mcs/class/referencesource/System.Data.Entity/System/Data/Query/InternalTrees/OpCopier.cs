@@ -73,6 +73,7 @@ namespace System.Data.Query.InternalTrees
         #region Private State
         private Command m_srcCmd;
         protected Command m_destCmd;
+
         // Map of var to cloned Var
         protected VarMap m_varMap;
         #endregion
@@ -82,7 +83,8 @@ namespace System.Data.Query.InternalTrees
         /// Constructor. Allows for cloning of nodes within the same command
         /// </summary>
         /// <param name="cmd">The command</param>
-        protected OpCopier(Command cmd) : this(cmd, cmd) {}
+        protected OpCopier(Command cmd)
+            : this(cmd, cmd) { }
 
         /// <summary>
         /// Constructor. Allows for cloning of nodes across commands
@@ -123,7 +125,7 @@ namespace System.Data.Query.InternalTrees
             //
             if (m_destCmd != m_srcCmd)
             {
-                throw EntityUtil.InternalError(EntityUtil.InternalErrorCode.UnknownVar, 6); 
+                throw EntityUtil.InternalError(EntityUtil.InternalErrorCode.UnknownVar, 6);
             }
 
             //
@@ -279,7 +281,9 @@ namespace System.Data.Query.InternalTrees
         /// <exception cref="NotSupportedException">By design to indicate that the Op was not recognized and is therefore unsupported</exception>
         public override Node Visit(Op op, Node n)
         {
-            throw new NotSupportedException(System.Data.Entity.Strings.Iqt_General_UnsupportedOp(op.GetType().FullName));
+            throw new NotSupportedException(
+                System.Data.Entity.Strings.Iqt_General_UnsupportedOp(op.GetType().FullName)
+            );
         }
 
         #region ScalarOps
@@ -441,11 +445,18 @@ namespace System.Data.Query.InternalTrees
             NewEntityOp opCopy;
             if (op.Scoped)
             {
-                opCopy = m_destCmd.CreateScopedNewEntityOp(op.Type, op.RelationshipProperties, op.EntitySet);
+                opCopy = m_destCmd.CreateScopedNewEntityOp(
+                    op.Type,
+                    op.RelationshipProperties,
+                    op.EntitySet
+                );
             }
             else
             {
-                Debug.Assert(op.EntitySet == null, "op.EntitySet must be null for the constructor that hasn't been scoped yet.");
+                Debug.Assert(
+                    op.EntitySet == null,
+                    "op.EntitySet must be null for the constructor that hasn't been scoped yet."
+                );
                 opCopy = m_destCmd.CreateNewEntityOp(op.Type, op.RelationshipProperties);
             }
             return CopyDefault(opCopy, n);
@@ -456,10 +467,18 @@ namespace System.Data.Query.InternalTrees
         /// </summary>
         /// <param name="op">The Op to Copy</param>
         /// <param name="n">The Node that references the Op</param>
-        /// <returns>A copy of the original Node that references a copy of the original Op</returns>        
+        /// <returns>A copy of the original Node that references a copy of the original Op</returns>
         public override Node Visit(DiscriminatedNewEntityOp op, Node n)
         {
-            return CopyDefault(m_destCmd.CreateDiscriminatedNewEntityOp(op.Type, op.DiscriminatorMap, op.EntitySet, op.RelationshipProperties), n);
+            return CopyDefault(
+                m_destCmd.CreateDiscriminatedNewEntityOp(
+                    op.Type,
+                    op.DiscriminatorMap,
+                    op.EntitySet,
+                    op.RelationshipProperties
+                ),
+                n
+            );
         }
 
         /// <summary>
@@ -543,7 +562,9 @@ namespace System.Data.Query.InternalTrees
         /// <returns>A copy of the original Node that references a copy of the original Op</returns>
         public override Node Visit(TreatOp op, Node n)
         {
-            TreatOp newTreatOp = op.IsFakeTreat ? m_destCmd.CreateFakeTreatOp(op.Type) : m_destCmd.CreateTreatOp(op.Type);
+            TreatOp newTreatOp = op.IsFakeTreat
+                ? m_destCmd.CreateFakeTreatOp(op.Type)
+                : m_destCmd.CreateTreatOp(op.Type);
             return CopyDefault(newTreatOp, n);
         }
 
@@ -794,7 +815,10 @@ namespace System.Data.Query.InternalTrees
             List<SortKey> newSortKeys = Copy(op.Keys);
 
             // Create a new ConstrainedSortOp that uses the copied SortKeys and the original Op's WithTies value
-            ConstrainedSortOp newSortOp = m_destCmd.CreateConstrainedSortOp(newSortKeys, op.WithTies);
+            ConstrainedSortOp newSortOp = m_destCmd.CreateConstrainedSortOp(
+                newSortKeys,
+                op.WithTies
+            );
 
             // Return a new Node that references the copied SortOp and has the copied child Nodes as its children
             return m_destCmd.CreateNode(newSortOp, children);
@@ -830,7 +854,11 @@ namespace System.Data.Query.InternalTrees
             List<Node> children = ProcessChildren(n);
 
             // Create a new GroupByOp that uses copies of the Key and Output VarSets of the original GroupByOp
-            GroupByIntoOp newGroupOp = m_destCmd.CreateGroupByIntoOp(Copy(op.Keys), Copy(op.Inputs),  Copy(op.Outputs));
+            GroupByIntoOp newGroupOp = m_destCmd.CreateGroupByIntoOp(
+                Copy(op.Keys),
+                Copy(op.Inputs),
+                Copy(op.Outputs)
+            );
 
             // Return a new Node that references the copied GroupByOp and has the copied child Nodes as its children
             return m_destCmd.CreateNode(newGroupOp, children);
@@ -916,7 +944,6 @@ namespace System.Data.Query.InternalTrees
             VarMap leftMap = new VarMap();
             VarMap rightMap = new VarMap();
 
-            
             foreach (KeyValuePair<Var, Var> kv in op.VarMap[0])
             {
                 // Create a new output Var that is a copy of the original output Var
@@ -931,16 +958,20 @@ namespace System.Data.Query.InternalTrees
             }
 
             SetOp newSetOp = null;
-            switch(op.OpType)
+            switch (op.OpType)
             {
                 case OpType.UnionAll:
                     {
                         Var branchDiscriminator = ((UnionAllOp)op).BranchDiscriminator;
-                        if (null != branchDiscriminator) 
+                        if (null != branchDiscriminator)
                         {
                             branchDiscriminator = GetMappedVar(branchDiscriminator);
                         }
-                        newSetOp = m_destCmd.CreateUnionAllOp(leftMap, rightMap, branchDiscriminator);
+                        newSetOp = m_destCmd.CreateUnionAllOp(
+                            leftMap,
+                            rightMap,
+                            branchDiscriminator
+                        );
                     }
                     break;
 
@@ -1084,10 +1115,17 @@ namespace System.Data.Query.InternalTrees
             // Copy the ProjectOp's VarSet
             VarList newVarList = Copy(op.Outputs);
 
-            SimpleCollectionColumnMap newColumnMap = Copy(op.ColumnMap) as SimpleCollectionColumnMap;
-            Debug.Assert(newColumnMap != null, "Coping of a physical project's columnMap did not return a SimpleCollectionColumnMap" );
+            SimpleCollectionColumnMap newColumnMap =
+                Copy(op.ColumnMap) as SimpleCollectionColumnMap;
+            Debug.Assert(
+                newColumnMap != null,
+                "Coping of a physical project's columnMap did not return a SimpleCollectionColumnMap"
+            );
             // Create a new ProjectOp based on the copied VarSet
-            PhysicalProjectOp newProject = m_destCmd.CreatePhysicalProjectOp(newVarList, newColumnMap);
+            PhysicalProjectOp newProject = m_destCmd.CreatePhysicalProjectOp(
+                newVarList,
+                newColumnMap
+            );
 
             // Return a new Node that references the copied ProjectOp and has the copied child Nodes as its children
             return m_destCmd.CreateNode(newProject, children);
@@ -1118,7 +1156,14 @@ namespace System.Data.Query.InternalTrees
                 VarList newFlattendElementVars = Copy(ci.FlattenedElementVars);
                 VarVec newKeys = Copy(ci.Keys);
                 List<SortKey> newSortKeys = Copy(ci.SortKeys);
-                CollectionInfo newCollectionInfo = Command.CreateCollectionInfo(newCollectionVar, newColumnMap, newFlattendElementVars, newKeys, newSortKeys, ci.DiscriminatorValue);
+                CollectionInfo newCollectionInfo = Command.CreateCollectionInfo(
+                    newCollectionVar,
+                    newColumnMap,
+                    newFlattendElementVars,
+                    newKeys,
+                    newSortKeys,
+                    ci.DiscriminatorValue
+                );
                 newCollectionInfoList.Add(newCollectionInfo);
             }
 
@@ -1131,11 +1176,22 @@ namespace System.Data.Query.InternalTrees
                 VarVec newKeys = Copy(ssnOp.Keys);
                 // Copy the SortOp's SortKeys
                 List<SortKey> newPostfixSortKeys = Copy(ssnOp.PostfixSortKeys);
-                newOp = m_destCmd.CreateSingleStreamNestOp(newKeys, newPrefixSortKeys, newPostfixSortKeys, newOutputs, newCollectionInfoList, newDiscriminator);
+                newOp = m_destCmd.CreateSingleStreamNestOp(
+                    newKeys,
+                    newPrefixSortKeys,
+                    newPostfixSortKeys,
+                    newOutputs,
+                    newCollectionInfoList,
+                    newDiscriminator
+                );
             }
             else
             {
-                newOp = m_destCmd.CreateMultiStreamNestOp(newPrefixSortKeys, newOutputs, newCollectionInfoList);
+                newOp = m_destCmd.CreateMultiStreamNestOp(
+                    newPrefixSortKeys,
+                    newOutputs,
+                    newCollectionInfoList
+                );
             }
 
             return m_destCmd.CreateNode(newOp, newChildren);

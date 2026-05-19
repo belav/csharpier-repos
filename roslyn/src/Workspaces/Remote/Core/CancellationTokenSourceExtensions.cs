@@ -16,7 +16,10 @@ namespace Microsoft.CodeAnalysis.Remote
         /// </summary>
         /// <param name="cancellationTokenSource">The cancellation token source.</param>
         /// <param name="task">The task to monitor.</param>
-        public static void CancelOnAbnormalCompletion(this CancellationTokenSource cancellationTokenSource, Task task)
+        public static void CancelOnAbnormalCompletion(
+            this CancellationTokenSource cancellationTokenSource,
+            Task task
+        )
         {
             if (cancellationTokenSource is null)
                 throw new ArgumentNullException(nameof(cancellationTokenSource));
@@ -35,8 +38,10 @@ namespace Microsoft.CodeAnalysis.Remote
                 },
                 state: cancellationTokenSource,
                 CancellationToken.None,
-                TaskContinuationOptions.NotOnRanToCompletion | TaskContinuationOptions.ExecuteSynchronously,
-                TaskScheduler.Default);
+                TaskContinuationOptions.NotOnRanToCompletion
+                    | TaskContinuationOptions.ExecuteSynchronously,
+                TaskScheduler.Default
+            );
         }
     }
 }

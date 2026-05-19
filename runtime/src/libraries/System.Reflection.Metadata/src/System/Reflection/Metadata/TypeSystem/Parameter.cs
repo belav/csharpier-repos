@@ -28,26 +28,17 @@ namespace System.Reflection.Metadata
 
         public ParameterAttributes Attributes
         {
-            get
-            {
-                return _reader.ParamTable.GetFlags(Handle);
-            }
+            get { return _reader.ParamTable.GetFlags(Handle); }
         }
 
         public int SequenceNumber
         {
-            get
-            {
-                return _reader.ParamTable.GetSequence(Handle);
-            }
+            get { return _reader.ParamTable.GetSequence(Handle); }
         }
 
         public StringHandle Name
         {
-            get
-            {
-                return _reader.ParamTable.GetName(Handle);
-            }
+            get { return _reader.ParamTable.GetName(Handle); }
         }
 
         public ConstantHandle GetDefaultValue()

@@ -15,19 +15,23 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public DefaultDocumentTrackingService()
-        {
-        }
+        public DefaultDocumentTrackingService() { }
 
         public bool SupportsDocumentTracking => false;
 
-        public event EventHandler<DocumentId?> ActiveDocumentChanged { add { } remove { } }
-        public event EventHandler<EventArgs> NonRoslynBufferTextChanged { add { } remove { } }
+        public event EventHandler<DocumentId?> ActiveDocumentChanged
+        {
+            add { }
+            remove { }
+        }
+        public event EventHandler<EventArgs> NonRoslynBufferTextChanged
+        {
+            add { }
+            remove { }
+        }
 
-        public ImmutableArray<DocumentId> GetVisibleDocuments()
-            => ImmutableArray<DocumentId>.Empty;
+        public ImmutableArray<DocumentId> GetVisibleDocuments() => ImmutableArray<DocumentId>.Empty;
 
-        public DocumentId? TryGetActiveDocument()
-            => null;
+        public DocumentId? TryGetActiveDocument() => null;
     }
 }

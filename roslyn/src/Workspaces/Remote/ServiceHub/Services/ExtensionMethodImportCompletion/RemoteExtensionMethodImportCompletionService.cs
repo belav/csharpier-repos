@@ -14,18 +14,21 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.Remote
 {
-    internal sealed class RemoteExtensionMethodImportCompletionService : BrokeredServiceBase, IRemoteExtensionMethodImportCompletionService
+    internal sealed class RemoteExtensionMethodImportCompletionService
+        : BrokeredServiceBase,
+            IRemoteExtensionMethodImportCompletionService
     {
         internal sealed class Factory : FactoryBase<IRemoteExtensionMethodImportCompletionService>
         {
-            protected override IRemoteExtensionMethodImportCompletionService CreateService(in ServiceConstructionArguments arguments)
-                => new RemoteExtensionMethodImportCompletionService(arguments);
+            protected override IRemoteExtensionMethodImportCompletionService CreateService(
+                in ServiceConstructionArguments arguments
+            ) => new RemoteExtensionMethodImportCompletionService(arguments);
         }
 
-        public RemoteExtensionMethodImportCompletionService(in ServiceConstructionArguments arguments)
-            : base(arguments)
-        {
-        }
+        public RemoteExtensionMethodImportCompletionService(
+            in ServiceConstructionArguments arguments
+        )
+            : base(arguments) { }
 
         public ValueTask<SerializableUnimportedExtensionMethods?> GetUnimportedExtensionMethodsAsync(
             Checksum solutionChecksum,
@@ -36,47 +39,94 @@ namespace Microsoft.CodeAnalysis.Remote
             ImmutableArray<string> targetTypesSymbolKeyData,
             bool forceCacheCreation,
             bool hideAdvancedMembers,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             var stopwatch = SharedStopwatch.StartNew();
-            return RunServiceAsync(solutionChecksum, async solution =>
-            {
-                var assetSyncTime = stopwatch.Elapsed;
-
-                // Completion always uses frozen-partial semantic in-proc, which is not automatically passed to OOP, so enable it explicitly
-                var document = solution.GetRequiredDocument(documentId).WithFrozenPartialSemantics(cancellationToken);
-                var compilation = await document.Project.GetRequiredCompilationAsync(cancellationToken).ConfigureAwait(false);
-                var symbol = SymbolKey.ResolveString(receiverTypeSymbolKeyData, compilation, cancellationToken: cancellationToken).GetAnySymbol();
-
-                if (symbol is ITypeSymbol receiverTypeSymbol)
+            return RunServiceAsync(
+                solutionChecksum,
+                async solution =>
                 {
-                    var syntaxFacts = document.GetRequiredLanguageService<ISyntaxFactsService>();
-                    var namespaceInScopeSet = new HashSet<string>(namespaceInScope, syntaxFacts.StringComparer);
-                    var targetTypes = targetTypesSymbolKeyData
-                            .Select(symbolKey => SymbolKey.ResolveString(symbolKey, compilation, cancellationToken: cancellationToken).GetAnySymbol() as ITypeSymbol)
-                            .WhereNotNull().ToImmutableArray();
+                    var assetSyncTime = stopwatch.Elapsed;
 
-                    var intialGetSymbolsTime = stopwatch.Elapsed - assetSyncTime;
+                    // Completion always uses frozen-partial semantic in-proc, which is not automatically passed to OOP, so enable it explicitly
+                    var document = solution
+                        .GetRequiredDocument(documentId)
+                        .WithFrozenPartialSemantics(cancellationToken);
+                    var compilation = await document
+                        .Project.GetRequiredCompilationAsync(cancellationToken)
+                        .ConfigureAwait(false);
+                    var symbol = SymbolKey
+                        .ResolveString(
+                            receiverTypeSymbolKeyData,
+                            compilation,
+                            cancellationToken: cancellationToken
+                        )
+                        .GetAnySymbol();
 
-                    var result = await ExtensionMethodImportCompletionHelper.GetUnimportedExtensionMethodsInCurrentProcessAsync(
-                        document, position, receiverTypeSymbol, namespaceInScopeSet, targetTypes, forceCacheCreation, hideAdvancedMembers, assetSyncTime, cancellationToken).ConfigureAwait(false);
+                    if (symbol is ITypeSymbol receiverTypeSymbol)
+                    {
+                        var syntaxFacts =
+                            document.GetRequiredLanguageService<ISyntaxFactsService>();
+                        var namespaceInScopeSet = new HashSet<string>(
+                            namespaceInScope,
+                            syntaxFacts.StringComparer
+                        );
+                        var targetTypes = targetTypesSymbolKeyData
+                            .Select(symbolKey =>
+                                SymbolKey
+                                    .ResolveString(
+                                        symbolKey,
+                                        compilation,
+                                        cancellationToken: cancellationToken
+                                    )
+                                    .GetAnySymbol() as ITypeSymbol
+                            )
+                            .WhereNotNull()
+                            .ToImmutableArray();
 
-                    result.GetSymbolsTime += intialGetSymbolsTime;
-                    return result;
-                }
+                        var intialGetSymbolsTime = stopwatch.Elapsed - assetSyncTime;
 
-                return null;
-            }, cancellationToken);
+                        var result = await ExtensionMethodImportCompletionHelper
+                            .GetUnimportedExtensionMethodsInCurrentProcessAsync(
+                                document,
+                                position,
+                                receiverTypeSymbol,
+                                namespaceInScopeSet,
+                                targetTypes,
+                                forceCacheCreation,
+                                hideAdvancedMembers,
+                                assetSyncTime,
+                                cancellationToken
+                            )
+                            .ConfigureAwait(false);
+
+                        result.GetSymbolsTime += intialGetSymbolsTime;
+                        return result;
+                    }
+
+                    return null;
+                },
+                cancellationToken
+            );
         }
 
-        public ValueTask WarmUpCacheAsync(Checksum solutionChecksum, ProjectId projectId, CancellationToken cancellationToken)
+        public ValueTask WarmUpCacheAsync(
+            Checksum solutionChecksum,
+            ProjectId projectId,
+            CancellationToken cancellationToken
+        )
         {
-            return RunServiceAsync(solutionChecksum, solution =>
-            {
-                var project = solution.GetRequiredProject(projectId);
-                ExtensionMethodImportCompletionHelper.WarmUpCacheInCurrentProcess(project);
-                return ValueTaskFactory.CompletedTask;
-            }, cancellationToken);
+            return RunServiceAsync(
+                solutionChecksum,
+                solution =>
+                {
+                    var project = solution.GetRequiredProject(projectId);
+                    ExtensionMethodImportCompletionHelper.WarmUpCacheInCurrentProcess(project);
+                    return ValueTaskFactory.CompletedTask;
+                },
+                cancellationToken
+            );
         }
     }
 }

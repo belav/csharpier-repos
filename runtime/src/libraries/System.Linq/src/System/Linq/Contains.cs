@@ -8,10 +8,15 @@ namespace System.Linq
     public static partial class Enumerable
     {
         public static bool Contains<TSource>(this IEnumerable<TSource> source, TSource value) =>
-            source is ICollection<TSource> collection ? collection.Contains(value) :
-            Contains(source, value, null);
+            source is ICollection<TSource> collection
+                ? collection.Contains(value)
+                : Contains(source, value, null);
 
-        public static bool Contains<TSource>(this IEnumerable<TSource> source, TSource value, IEqualityComparer<TSource>? comparer)
+        public static bool Contains<TSource>(
+            this IEnumerable<TSource> source,
+            TSource value,
+            IEqualityComparer<TSource>? comparer
+        )
         {
             if (source == null)
             {

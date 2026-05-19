@@ -13,15 +13,15 @@ public partial class Program
     public static void TestIsAssignableTo()
     {
         // Primitive types
-        IsTrue (typeof(void).IsAssignableTo(typeof(void)));
-        IsTrue (typeof(byte).IsAssignableTo(typeof(byte)));
-        IsTrue (typeof(int).IsAssignableTo(typeof(int)));
-        IsTrue (typeof(float).IsAssignableTo(typeof(float)));
-        IsTrue (typeof(double).IsAssignableTo(typeof(double)));
-        IsTrue (typeof(byte*).IsAssignableTo(typeof(byte*)));
-        IsTrue (typeof(byte*).IsAssignableTo(typeof(sbyte*)));
-        IsTrue (typeof(void*).IsAssignableTo(typeof(void*)));
-        IsTrue (typeof(byte**).IsAssignableTo(typeof(byte**)));
+        IsTrue(typeof(void).IsAssignableTo(typeof(void)));
+        IsTrue(typeof(byte).IsAssignableTo(typeof(byte)));
+        IsTrue(typeof(int).IsAssignableTo(typeof(int)));
+        IsTrue(typeof(float).IsAssignableTo(typeof(float)));
+        IsTrue(typeof(double).IsAssignableTo(typeof(double)));
+        IsTrue(typeof(byte*).IsAssignableTo(typeof(byte*)));
+        IsTrue(typeof(byte*).IsAssignableTo(typeof(sbyte*)));
+        IsTrue(typeof(void*).IsAssignableTo(typeof(void*)));
+        IsTrue(typeof(byte**).IsAssignableTo(typeof(byte**)));
         IsFalse(typeof(sbyte).IsAssignableTo(typeof(byte)));
         IsFalse(typeof(byte).IsAssignableTo(typeof(sbyte)));
         IsFalse(typeof(long).IsAssignableTo(typeof(int)));
@@ -41,11 +41,11 @@ public partial class Program
         IsFalse(typeof(byte**).IsAssignableTo(typeof(byte*)));
 
         // Nullable
-        IsTrue (typeof(int).IsAssignableTo(typeof(int?)));
-        IsTrue (typeof(int?).IsAssignableTo(typeof(int?)));
-        IsTrue (typeof(GenericStruct1<int>?).IsAssignableTo(typeof(GenericStruct1<int>?)));
-        IsTrue (typeof(GenericStruct1<string>?).IsAssignableTo(typeof(GenericStruct1<string>?)));
-        IsTrue (typeof(SimpleEnum_int?).IsAssignableTo(typeof(SimpleEnum_int?)));
+        IsTrue(typeof(int).IsAssignableTo(typeof(int?)));
+        IsTrue(typeof(int?).IsAssignableTo(typeof(int?)));
+        IsTrue(typeof(GenericStruct1<int>?).IsAssignableTo(typeof(GenericStruct1<int>?)));
+        IsTrue(typeof(GenericStruct1<string>?).IsAssignableTo(typeof(GenericStruct1<string>?)));
+        IsTrue(typeof(SimpleEnum_int?).IsAssignableTo(typeof(SimpleEnum_int?)));
         IsFalse(typeof(int?).IsAssignableTo(typeof(int)));
         IsFalse(typeof(int?).IsAssignableTo(typeof(uint?)));
         IsFalse(typeof(uint?).IsAssignableTo(typeof(int?)));
@@ -54,11 +54,11 @@ public partial class Program
         IsFalse(typeof(GenericStruct1<uint>?).IsAssignableTo(typeof(GenericStruct1<int>?)));
 
         // Enums
-        IsTrue (typeof(SimpleEnum_int).IsAssignableTo(typeof(SimpleEnum_int)));
-        IsTrue (typeof(SimpleEnum_int?).IsAssignableTo(typeof(SimpleEnum_int?)));
-        IsTrue (typeof(SimpleEnum_uint).IsAssignableTo(typeof(SimpleEnum_uint)));
-        IsTrue (typeof(SimpleEnum_byte).IsAssignableTo(typeof(SimpleEnum_byte)));
-        IsTrue (typeof(SimpleEnum_uint).IsAssignableTo(typeof(ValueType)));
+        IsTrue(typeof(SimpleEnum_int).IsAssignableTo(typeof(SimpleEnum_int)));
+        IsTrue(typeof(SimpleEnum_int?).IsAssignableTo(typeof(SimpleEnum_int?)));
+        IsTrue(typeof(SimpleEnum_uint).IsAssignableTo(typeof(SimpleEnum_uint)));
+        IsTrue(typeof(SimpleEnum_byte).IsAssignableTo(typeof(SimpleEnum_byte)));
+        IsTrue(typeof(SimpleEnum_uint).IsAssignableTo(typeof(ValueType)));
         IsFalse(typeof(SimpleEnum_uint).IsAssignableTo(typeof(SimpleEnum_int)));
         IsFalse(typeof(SimpleEnum_int).IsAssignableTo(typeof(SimpleEnum_uint)));
         IsFalse(typeof(SimpleEnum_byte).IsAssignableTo(typeof(SimpleEnum_uint)));
@@ -72,15 +72,15 @@ public partial class Program
         IsFalse(typeof(ValueType).IsAssignableTo(typeof(SimpleEnum_uint)));
 
         // Covariance/Contravariance
-        IsTrue (typeof(List<string>).IsAssignableTo(typeof(IEnumerable<object>)));
-        IsTrue (typeof(List<ClassB>).IsAssignableTo(typeof(IEnumerable<ClassA>)));
-        IsTrue (typeof(IList<ClassB>).IsAssignableTo(typeof(IEnumerable<ClassA>)));
-        IsTrue (typeof(IList<ClassD>).IsAssignableTo(typeof(IEnumerable<ClassA>)));
-        IsTrue (typeof(IList<ClassA>).IsAssignableTo(typeof(IEnumerable<ClassA>)));
-        IsTrue (typeof(Action<object>).IsAssignableTo(typeof(Action<string>)));
-        IsTrue (typeof(string[]).IsAssignableTo(typeof(object[])));
-        IsTrue (typeof(string[,]).IsAssignableTo(typeof(object[,])));
-        IsTrue (typeof(SimpleEnum_uint[,]).IsAssignableTo(typeof(SimpleEnum_int[,])));
+        IsTrue(typeof(List<string>).IsAssignableTo(typeof(IEnumerable<object>)));
+        IsTrue(typeof(List<ClassB>).IsAssignableTo(typeof(IEnumerable<ClassA>)));
+        IsTrue(typeof(IList<ClassB>).IsAssignableTo(typeof(IEnumerable<ClassA>)));
+        IsTrue(typeof(IList<ClassD>).IsAssignableTo(typeof(IEnumerable<ClassA>)));
+        IsTrue(typeof(IList<ClassA>).IsAssignableTo(typeof(IEnumerable<ClassA>)));
+        IsTrue(typeof(Action<object>).IsAssignableTo(typeof(Action<string>)));
+        IsTrue(typeof(string[]).IsAssignableTo(typeof(object[])));
+        IsTrue(typeof(string[,]).IsAssignableTo(typeof(object[,])));
+        IsTrue(typeof(SimpleEnum_uint[,]).IsAssignableTo(typeof(SimpleEnum_int[,])));
         IsFalse(typeof(object[,]).IsAssignableTo(typeof(string[,])));
         IsFalse(typeof(string[,,]).IsAssignableTo(typeof(object[,])));
         IsFalse(typeof(IDictionary<ClassB, int>).IsAssignableTo(typeof(IDictionary<ClassA, int>)));
@@ -118,32 +118,34 @@ public partial class Program
         IsFalse(typeof(GenericStruct1<int>[]).IsAssignableTo(typeof(GenericStruct1<uint>[])));
 
         // Misc
-        IsTrue (typeof(byte).IsAssignableTo(typeof(object)));
-        IsTrue (typeof(int).IsAssignableTo(typeof(object)));
-        IsTrue (typeof(float).IsAssignableTo(typeof(object)));
-        IsTrue (typeof(SimpleEnum_uint).IsAssignableTo(typeof(object)));
-        IsTrue (typeof(IDisposable).IsAssignableTo(typeof(object)));
-        IsTrue (typeof(IDictionary<string, string>).IsAssignableTo(typeof(object)));
-        IsTrue (typeof(List<int>).IsAssignableTo(typeof(object)));
-        IsTrue (typeof(List<>).IsAssignableTo(typeof(object)));
-        IsTrue (typeof(Action<>).IsAssignableTo(typeof(object)));
-        IsTrue (typeof(Action<int>).IsAssignableTo(typeof(object)));
-        IsTrue (typeof(Vector128<float>).IsAssignableTo(typeof(object)));
-        IsTrue (typeof(Vector256<int>).IsAssignableTo(typeof(object)));
-        IsTrue (typeof(ClassA).IsAssignableTo(typeof(ClassA)));
-        IsTrue (typeof(ClassB).IsAssignableTo(typeof(ClassA)));
-        IsTrue (typeof(ClassC).IsAssignableTo(typeof(ClassA)));
-        IsTrue (typeof(decimal).IsAssignableTo(typeof(decimal)));
-        IsTrue (typeof(Struct1).IsAssignableTo(typeof(Struct1)));
-        IsTrue (typeof(Struct3).IsAssignableTo(typeof(IDisposable)));
-        IsTrue (typeof(Dictionary<,>).IsAssignableTo(typeof(Dictionary<,>)));
-        IsTrue (typeof(IDictionary<,>).IsAssignableTo(typeof(IDictionary<,>)));
-        IsTrue (typeof(GenericStruct1<>).IsAssignableTo(typeof(GenericStruct1<>)));
-        IsTrue (typeof(GenericStruct1<int>).IsAssignableTo(typeof(GenericStruct1<int>)));
-        IsTrue (typeof(GenericStruct1<string>).IsAssignableTo(typeof(GenericStruct1<string>)));
+        IsTrue(typeof(byte).IsAssignableTo(typeof(object)));
+        IsTrue(typeof(int).IsAssignableTo(typeof(object)));
+        IsTrue(typeof(float).IsAssignableTo(typeof(object)));
+        IsTrue(typeof(SimpleEnum_uint).IsAssignableTo(typeof(object)));
+        IsTrue(typeof(IDisposable).IsAssignableTo(typeof(object)));
+        IsTrue(typeof(IDictionary<string, string>).IsAssignableTo(typeof(object)));
+        IsTrue(typeof(List<int>).IsAssignableTo(typeof(object)));
+        IsTrue(typeof(List<>).IsAssignableTo(typeof(object)));
+        IsTrue(typeof(Action<>).IsAssignableTo(typeof(object)));
+        IsTrue(typeof(Action<int>).IsAssignableTo(typeof(object)));
+        IsTrue(typeof(Vector128<float>).IsAssignableTo(typeof(object)));
+        IsTrue(typeof(Vector256<int>).IsAssignableTo(typeof(object)));
+        IsTrue(typeof(ClassA).IsAssignableTo(typeof(ClassA)));
+        IsTrue(typeof(ClassB).IsAssignableTo(typeof(ClassA)));
+        IsTrue(typeof(ClassC).IsAssignableTo(typeof(ClassA)));
+        IsTrue(typeof(decimal).IsAssignableTo(typeof(decimal)));
+        IsTrue(typeof(Struct1).IsAssignableTo(typeof(Struct1)));
+        IsTrue(typeof(Struct3).IsAssignableTo(typeof(IDisposable)));
+        IsTrue(typeof(Dictionary<,>).IsAssignableTo(typeof(Dictionary<,>)));
+        IsTrue(typeof(IDictionary<,>).IsAssignableTo(typeof(IDictionary<,>)));
+        IsTrue(typeof(GenericStruct1<>).IsAssignableTo(typeof(GenericStruct1<>)));
+        IsTrue(typeof(GenericStruct1<int>).IsAssignableTo(typeof(GenericStruct1<int>)));
+        IsTrue(typeof(GenericStruct1<string>).IsAssignableTo(typeof(GenericStruct1<string>)));
         IsFalse(typeof(IDisposable).IsAssignableTo(typeof(byte)));
         IsFalse(typeof(IEnumerable).IsAssignableTo(typeof(IDisposable)));
-        IsFalse(typeof(IDictionary<string, int>).IsAssignableTo(typeof(IDictionary<string, string>)));
+        IsFalse(
+            typeof(IDictionary<string, int>).IsAssignableTo(typeof(IDictionary<string, string>))
+        );
         IsFalse(typeof(IList<int>).IsAssignableTo(typeof(List<int>)));
         IsFalse(typeof(List<IDisposable>).IsAssignableTo(typeof(List<>)));
         IsFalse(typeof(Action<int>).IsAssignableTo(typeof(Action<>)));
@@ -151,7 +153,7 @@ public partial class Program
         IsFalse(typeof(CustomAction).IsAssignableTo(typeof(Action)));
         IsFalse(typeof(void).IsAssignableTo(typeof(Action<int>)));
         IsFalse(typeof(ClassD).IsAssignableTo(typeof(ClassB)));
-        IsFalse(typeof(Dictionary<int,int>).IsAssignableTo(typeof(Dictionary<,>)));
+        IsFalse(typeof(Dictionary<int, int>).IsAssignableTo(typeof(Dictionary<,>)));
         IsFalse(typeof(GenericStruct1<ClassB>).IsAssignableTo(typeof(GenericStruct1<ClassA>)));
         IsFalse(typeof(Struct2).IsAssignableTo(typeof(Struct1)));
         IsFalse(typeof(GenericStruct2<>).IsAssignableTo(typeof(GenericStruct1<>)));
@@ -170,41 +172,116 @@ public partial class Program
         // Order here is important as we've hit cases where the type system
         // has introduced non-deterministic results: open, specific, specific, open is intentional.
         IsFalse(typeof(ImplementingStruct1).IsAssignableTo(typeof(IGenericInterface<>)));
-        IsTrue(typeof(ImplementingStruct1).IsAssignableTo(typeof(IGenericInterface<ImplementingStruct1>)));
-        IsTrue(typeof(ImplementingStruct2).IsAssignableTo(typeof(IGenericInterface<ImplementingStruct2>)));
+        IsTrue(
+            typeof(ImplementingStruct1).IsAssignableTo(
+                typeof(IGenericInterface<ImplementingStruct1>)
+            )
+        );
+        IsTrue(
+            typeof(ImplementingStruct2).IsAssignableTo(
+                typeof(IGenericInterface<ImplementingStruct2>)
+            )
+        );
         IsFalse(typeof(ImplementingStruct2).IsAssignableTo(typeof(IGenericInterface<>)));
 
         // null type
         IsFalse(typeof(int).IsAssignableTo(null));
         IsFalse(typeof(object).IsAssignableTo(null));
-        ThrowsNRE(() => { _ = ((Type)null).IsAssignableTo(typeof(int)); });
-        ThrowsNRE(() => { _ = ((Type)null).IsAssignableTo(typeof(object)); });
-        ThrowsNRE(() => { _ = ((Type)null).IsAssignableTo(null); });
-        ThrowsNRE(() => { _ = ((Type)null).IsAssignableTo(null); });
+        ThrowsNRE(() =>
+        {
+            _ = ((Type)null).IsAssignableTo(typeof(int));
+        });
+        ThrowsNRE(() =>
+        {
+            _ = ((Type)null).IsAssignableTo(typeof(object));
+        });
+        ThrowsNRE(() =>
+        {
+            _ = ((Type)null).IsAssignableTo(null);
+        });
+        ThrowsNRE(() =>
+        {
+            _ = ((Type)null).IsAssignableTo(null);
+        });
         IsFalse(typeof(int).IsAssignableTo(__reftype(default)));
         IsFalse(typeof(object).IsAssignableTo(__reftype(default)));
-        ThrowsNRE(() => { _ = __reftype(default).IsAssignableTo(typeof(int)); });
-        ThrowsNRE(() => { _ = __reftype(default).IsAssignableTo(typeof(object)); });
-        ThrowsNRE(() => { _ = __reftype(default).IsAssignableTo(__reftype(default)); });
-        ThrowsNRE(() => { _ = __reftype(default).IsAssignableTo(__reftype(default)); });
+        ThrowsNRE(() =>
+        {
+            _ = __reftype(default).IsAssignableTo(typeof(int));
+        });
+        ThrowsNRE(() =>
+        {
+            _ = __reftype(default).IsAssignableTo(typeof(object));
+        });
+        ThrowsNRE(() =>
+        {
+            _ = __reftype(default).IsAssignableTo(__reftype(default));
+        });
+        ThrowsNRE(() =>
+        {
+            _ = __reftype(default).IsAssignableTo(__reftype(default));
+        });
 
         // System.__Canon
-        IsTrue (IsAssignableTo<KeyValuePair<IDisposable, IDisposable>, KeyValuePair<IDisposable, IDisposable>>());
-        IsTrue (IsAssignableTo<KeyValuePair<IDisposable, object>, KeyValuePair<IDisposable, object>>());
-        IsTrue (IsAssignableTo<IDictionary<IDisposable, IDisposable>, IDictionary<IDisposable, IDisposable>>());
-        IsTrue (IsAssignableTo<IDictionary<IDisposable, object>, IDictionary<IDisposable, object>>());
-        IsTrue (IsAssignableTo<Dictionary<IDisposable, IDisposable>, Dictionary<IDisposable, IDisposable>>());
-        IsTrue (IsAssignableTo<Dictionary<IDisposable, object>, Dictionary<IDisposable, object>>());
-        IsTrue (IsAssignableTo<KeyValuePair<int, int>, KeyValuePair<int, int>>());
-        IsTrue (IsAssignableTo<KeyValuePair<IEnumerable<int>, IEnumerable<int>>, KeyValuePair<IEnumerable<int>, IEnumerable<int>>>());
-        IsFalse(IsAssignableTo<KeyValuePair<IDisposable, object>, KeyValuePair<IDisposable, IDisposable>>());
-        IsFalse(IsAssignableTo<KeyValuePair<IDisposable, object>, KeyValuePair<IDisposable, int>>());
-        IsFalse(IsAssignableTo<IDictionary<IDisposable, object>, IDictionary<IDisposable, IDisposable>>());
+        IsTrue(
+            IsAssignableTo<
+                KeyValuePair<IDisposable, IDisposable>,
+                KeyValuePair<IDisposable, IDisposable>
+            >()
+        );
+        IsTrue(
+            IsAssignableTo<KeyValuePair<IDisposable, object>, KeyValuePair<IDisposable, object>>()
+        );
+        IsTrue(
+            IsAssignableTo<
+                IDictionary<IDisposable, IDisposable>,
+                IDictionary<IDisposable, IDisposable>
+            >()
+        );
+        IsTrue(
+            IsAssignableTo<IDictionary<IDisposable, object>, IDictionary<IDisposable, object>>()
+        );
+        IsTrue(
+            IsAssignableTo<
+                Dictionary<IDisposable, IDisposable>,
+                Dictionary<IDisposable, IDisposable>
+            >()
+        );
+        IsTrue(IsAssignableTo<Dictionary<IDisposable, object>, Dictionary<IDisposable, object>>());
+        IsTrue(IsAssignableTo<KeyValuePair<int, int>, KeyValuePair<int, int>>());
+        IsTrue(
+            IsAssignableTo<
+                KeyValuePair<IEnumerable<int>, IEnumerable<int>>,
+                KeyValuePair<IEnumerable<int>, IEnumerable<int>>
+            >()
+        );
+        IsFalse(
+            IsAssignableTo<
+                KeyValuePair<IDisposable, object>,
+                KeyValuePair<IDisposable, IDisposable>
+            >()
+        );
+        IsFalse(
+            IsAssignableTo<KeyValuePair<IDisposable, object>, KeyValuePair<IDisposable, int>>()
+        );
+        IsFalse(
+            IsAssignableTo<
+                IDictionary<IDisposable, object>,
+                IDictionary<IDisposable, IDisposable>
+            >()
+        );
         IsFalse(IsAssignableTo<IDictionary<IDisposable, object>, IDictionary<IDisposable, int>>());
-        IsFalse(IsAssignableTo<Dictionary<IDisposable, object>, Dictionary<IDisposable, IDisposable>>());
+        IsFalse(
+            IsAssignableTo<Dictionary<IDisposable, object>, Dictionary<IDisposable, IDisposable>>()
+        );
         IsFalse(IsAssignableTo<Dictionary<IDisposable, object>, Dictionary<IDisposable, int>>());
         IsFalse(IsAssignableTo<KeyValuePair<int, object>, KeyValuePair<int, int>>());
-        IsFalse(IsAssignableTo<KeyValuePair<IEnumerable<int>, IEnumerable<uint>>, KeyValuePair<IEnumerable<int>, IEnumerable<int>>>());
+        IsFalse(
+            IsAssignableTo<
+                KeyValuePair<IEnumerable<int>, IEnumerable<uint>>,
+                KeyValuePair<IEnumerable<int>, IEnumerable<int>>
+            >()
+        );
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]

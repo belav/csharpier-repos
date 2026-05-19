@@ -12,6 +12,7 @@ namespace XPathTests
     {
         private ICreateNavigator _xmlDocNavCreator = new CreateNavigatorFromXmlDocument();
         private ICreateNavigator _xDocNavCreator = new CreateNavigatorFromXDocument();
+
         public XPathNavigator CreateNavigatorFromFile(string fileName)
         {
             var nav1 = _xmlDocNavCreator.CreateNavigatorFromFile(fileName);

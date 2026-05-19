@@ -7,10 +7,7 @@ namespace Internal.TypeSystem
     {
         public sealed override bool IsRuntimeDeterminedSubtype
         {
-            get
-            {
-                return _parameterType.IsRuntimeDeterminedSubtype;
-            }
+            get { return _parameterType.IsRuntimeDeterminedSubtype; }
         }
     }
 }

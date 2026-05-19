@@ -6,9 +6,7 @@ namespace Microsoft.EntityFrameworkCore.TestModels.InheritanceModel;
 public class InheritanceContext : PoolableDbContext
 {
     public InheritanceContext(DbContextOptions options)
-        : base(options)
-    {
-    }
+        : base(options) { }
 
     public DbSet<Animal> Animals { get; set; }
     public DbSet<AnimalQuery> AnimalQueries { get; set; }

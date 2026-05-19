@@ -2,10 +2,11 @@ namespace System.IO.Compression
 {
     using System.Diagnostics;
 
-    internal enum CompressionTracingSwitchLevel {
+    internal enum CompressionTracingSwitchLevel
+    {
         Off = 0,
         Informational = 1,
-        Verbose = 2
+        Verbose = 2,
     }
 
     // No tracing on Silverlight nor Windows Phone 7.
@@ -14,18 +15,19 @@ namespace System.IO.Compression
         : Switch
 #endif // !FEATURE_NETCORE
     {
-        internal readonly static CompressionTracingSwitch tracingSwitch =
+        internal static readonly CompressionTracingSwitch tracingSwitch =
             new CompressionTracingSwitch("CompressionSwitch", "Compression Library Tracing Switch");
 
         internal CompressionTracingSwitch(string displayName, string description)
 #if !FEATURE_NETCORE
             : base(displayName, description)
 #endif // !FEATURE_NETCORE
-        {
-        }
+        { }
 
-        public static bool Verbose {
-            get {
+        public static bool Verbose
+        {
+            get
+            {
 #if FEATURE_NETCORE
                 return false;
 #else
@@ -34,25 +36,31 @@ namespace System.IO.Compression
             }
         }
 
-        public static bool Informational {
-            get {
+        public static bool Informational
+        {
+            get
+            {
 #if FEATURE_NETCORE
                 return false;
 #else
-                return tracingSwitch.SwitchSetting >= (int)CompressionTracingSwitchLevel.Informational;
+                return tracingSwitch.SwitchSetting
+                    >= (int)CompressionTracingSwitchLevel.Informational;
 #endif
             }
         }
 
 #if ENABLE_TRACING
-        public void SetSwitchSetting(CompressionTracingSwitchLevel level) {
-            if (level < CompressionTracingSwitchLevel.Off || level > CompressionTracingSwitchLevel.Verbose) {
+        public void SetSwitchSetting(CompressionTracingSwitchLevel level)
+        {
+            if (
+                level < CompressionTracingSwitchLevel.Off
+                || level > CompressionTracingSwitchLevel.Verbose
+            )
+            {
                 throw new ArgumentOutOfRangeException("level");
             }
             this.SwitchSetting = (int)level;
         }
 #endif
-
-    }    
+    }
 }
-

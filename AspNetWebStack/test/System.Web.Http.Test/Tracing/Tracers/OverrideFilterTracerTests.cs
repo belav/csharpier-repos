@@ -36,7 +36,10 @@ namespace System.Web.Http.Tracing.Tracers
             // Arrange
             IOverrideFilter expectedInnerFilter = CreateDummyInnerFilter();
             ITraceWriter traceWriter = CreateDummyTraceWriter();
-            IDecorator<IOverrideFilter> product = CreateProductUnderTest(expectedInnerFilter, traceWriter);
+            IDecorator<IOverrideFilter> product = CreateProductUnderTest(
+                expectedInnerFilter,
+                traceWriter
+            );
 
             // Act
             IOverrideFilter innerFilter = product.Inner;
@@ -86,8 +89,10 @@ namespace System.Web.Http.Tracing.Tracers
             return new Mock<ITraceWriter>(MockBehavior.Strict).Object;
         }
 
-        private static OverrideFilterTracer CreateProductUnderTest(IOverrideFilter innerFilter,
-            ITraceWriter traceWriter)
+        private static OverrideFilterTracer CreateProductUnderTest(
+            IOverrideFilter innerFilter,
+            ITraceWriter traceWriter
+        )
         {
             return new OverrideFilterTracer(innerFilter, traceWriter);
         }

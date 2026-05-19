@@ -14,13 +14,18 @@ namespace Microsoft.CodeAnalysis.CSharp
         public readonly SyntaxReference? UsingDirectiveReference;
         public readonly ImmutableArray<AssemblySymbol> Dependencies;
 
-        public NamespaceOrTypeAndUsingDirective(NamespaceOrTypeSymbol namespaceOrType, UsingDirectiveSyntax? usingDirective, ImmutableArray<AssemblySymbol> dependencies)
+        public NamespaceOrTypeAndUsingDirective(
+            NamespaceOrTypeSymbol namespaceOrType,
+            UsingDirectiveSyntax? usingDirective,
+            ImmutableArray<AssemblySymbol> dependencies
+        )
         {
             this.NamespaceOrType = namespaceOrType;
             this.UsingDirectiveReference = usingDirective?.GetReference();
             this.Dependencies = dependencies.NullToEmpty();
         }
 
-        public UsingDirectiveSyntax? UsingDirective => (UsingDirectiveSyntax?)UsingDirectiveReference?.GetSyntax();
+        public UsingDirectiveSyntax? UsingDirective =>
+            (UsingDirectiveSyntax?)UsingDirectiveReference?.GetSyntax();
     }
 }

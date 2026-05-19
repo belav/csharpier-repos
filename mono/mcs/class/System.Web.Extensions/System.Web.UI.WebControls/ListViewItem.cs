@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -32,49 +32,35 @@ using System.ComponentModel;
 
 namespace System.Web.UI.WebControls
 {
-	[ToolboxItemAttribute (false)]
-	public class ListViewItem : Control, INamingContainer
-	, IDataItemContainer
-	{
-		internal ListViewItem ()
-			: this (ListViewItemType.DataItem)
-		{
-		}
-		
-		public ListViewItem (ListViewItemType itemType)
-		{
-			ItemType = itemType;
-		}
-		
-		protected override bool OnBubbleEvent (object source, EventArgs e)
-		{
-			CommandEventArgs args = e as CommandEventArgs;
-			if (args != null) {
-				RaiseBubbleEvent (this, new ListViewCommandEventArgs (this, source, args));
-				return true;
-			}
-			
-			return base.OnBubbleEvent (source, e);
-		}
-		
-		public ListViewItemType ItemType {
-			get;
-			private set;
-		}
-		
-		public virtual object DataItem {
-			get;
-			set;
-		}
-		
-		public virtual int DataItemIndex {
-			get;
-			protected set;
-		}
-		
-		public virtual int DisplayIndex {
-			get;
-			protected set;
-		}
-	}
+    [ToolboxItemAttribute(false)]
+    public class ListViewItem : Control, INamingContainer, IDataItemContainer
+    {
+        internal ListViewItem()
+            : this(ListViewItemType.DataItem) { }
+
+        public ListViewItem(ListViewItemType itemType)
+        {
+            ItemType = itemType;
+        }
+
+        protected override bool OnBubbleEvent(object source, EventArgs e)
+        {
+            CommandEventArgs args = e as CommandEventArgs;
+            if (args != null)
+            {
+                RaiseBubbleEvent(this, new ListViewCommandEventArgs(this, source, args));
+                return true;
+            }
+
+            return base.OnBubbleEvent(source, e);
+        }
+
+        public ListViewItemType ItemType { get; private set; }
+
+        public virtual object DataItem { get; set; }
+
+        public virtual int DataItemIndex { get; protected set; }
+
+        public virtual int DisplayIndex { get; protected set; }
+    }
 }

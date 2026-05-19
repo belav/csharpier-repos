@@ -16,8 +16,8 @@ namespace System.Data.Objects.Internal
 {
     using System.Collections.Generic;
     using System.Data.Objects;
-    using System.Diagnostics;
     using System.Data.Objects.DataClasses;
+    using System.Diagnostics;
 
     class TransactionManager
     {
@@ -30,25 +30,13 @@ namespace System.Data.Objects.Internal
         }
 
         // Dictionary used to recovery after exception in ObjectContext.AttachTo()
-        internal Dictionary<object, EntityEntry> PromotedKeyEntries
-        {
-            get;
-            private set;
-        }
+        internal Dictionary<object, EntityEntry> PromotedKeyEntries { get; private set; }
 
         // HashSet used to recover after exception in ObjectContext.Add and related methods
-        internal HashSet<EntityReference> PopulatedEntityReferences
-        {
-            get;
-            private set;
-        }
+        internal HashSet<EntityReference> PopulatedEntityReferences { get; private set; }
 
         // HashSet used to recover after exception in ObjectContext.Add and related methods
-        internal HashSet<EntityReference> AlignedEntityReferences
-        {
-            get;
-            private set;
-        }
+        internal HashSet<EntityReference> AlignedEntityReferences { get; private set; }
 
         // Used in recovery after exception in ObjectContext.AttachTo()
         private MergeOption? _originalMergeOption = null;
@@ -56,82 +44,57 @@ namespace System.Data.Objects.Internal
         {
             get
             {
-                Debug.Assert(_originalMergeOption != null, "OriginalMergeOption used before being initialized");
+                Debug.Assert(
+                    _originalMergeOption != null,
+                    "OriginalMergeOption used before being initialized"
+                );
                 return _originalMergeOption;
             }
-            set
-            {
-                _originalMergeOption = value;
-            }
+            set { _originalMergeOption = value; }
         }
 
         // Dictionary used to recovery after exception in ObjectContext.AttachTo() and ObjectContext.AddObject()
-        internal HashSet<IEntityWrapper> ProcessedEntities
-        {
-            get;
-            private set;
-        }
+        internal HashSet<IEntityWrapper> ProcessedEntities { get; private set; }
 
         // Used in Add/Attach/DetectChanges
-        internal Dictionary<object, IEntityWrapper> WrappedEntities
-        {
-            get;
-            private set;
-        }
+        internal Dictionary<object, IEntityWrapper> WrappedEntities { get; private set; }
 
         // Used in Add/Attach/DetectChanges
-        internal bool TrackProcessedEntities
-        {
-            get;
-            private set;
-        }
+        internal bool TrackProcessedEntities { get; private set; }
 
-        internal bool IsAddTracking
-        {
-            get;
-            private set;
-        }
+        internal bool IsAddTracking { get; private set; }
 
-        internal bool IsAttachTracking
-        {
-            get;
-            private set;
-        }
+        internal bool IsAttachTracking { get; private set; }
 
         // Used in DetectChanges
-        internal Dictionary<IEntityWrapper, Dictionary<RelatedEnd, HashSet<IEntityWrapper>>> AddedRelationshipsByGraph
-        {
-            get;
-            private set;
-        }
+        internal Dictionary<
+            IEntityWrapper,
+            Dictionary<RelatedEnd, HashSet<IEntityWrapper>>
+        > AddedRelationshipsByGraph { get; private set; }
 
         // Used in DetectChanges
-        internal Dictionary<IEntityWrapper, Dictionary<RelatedEnd, HashSet<IEntityWrapper>>> DeletedRelationshipsByGraph
-        {
-            get;
-            private set;
-        }
+        internal Dictionary<
+            IEntityWrapper,
+            Dictionary<RelatedEnd, HashSet<IEntityWrapper>>
+        > DeletedRelationshipsByGraph { get; private set; }
 
         // Used in DetectChanges
-        internal Dictionary<IEntityWrapper, Dictionary<RelatedEnd, HashSet<EntityKey>>> AddedRelationshipsByForeignKey
-        {
-            get;
-            private set;
-        }
+        internal Dictionary<
+            IEntityWrapper,
+            Dictionary<RelatedEnd, HashSet<EntityKey>>
+        > AddedRelationshipsByForeignKey { get; private set; }
 
         // Used in DetectChanges
-        internal Dictionary<IEntityWrapper, Dictionary<RelatedEnd, HashSet<EntityKey>>> AddedRelationshipsByPrincipalKey
-        {
-            get;
-            private set;
-        }
+        internal Dictionary<
+            IEntityWrapper,
+            Dictionary<RelatedEnd, HashSet<EntityKey>>
+        > AddedRelationshipsByPrincipalKey { get; private set; }
 
         // Used in DetectChanges
-        internal Dictionary<IEntityWrapper, Dictionary<RelatedEnd, HashSet<EntityKey>>> DeletedRelationshipsByForeignKey
-        {
-            get;
-            private set;
-        }
+        internal Dictionary<
+            IEntityWrapper,
+            Dictionary<RelatedEnd, HashSet<EntityKey>>
+        > DeletedRelationshipsByForeignKey { get; private set; }
 
         // Used in DetectChanges
         internal Dictionary<IEntityWrapper, HashSet<RelatedEnd>> ChangedForeignKeys
@@ -140,74 +103,31 @@ namespace System.Data.Objects.Internal
             private set;
         }
 
-        internal bool IsDetectChanges
-        {
-            get;
-            private set;
-        }
+        internal bool IsDetectChanges { get; private set; }
 
-        internal bool IsAlignChanges
-        {
-            get;
-            private set;
-        }
+        internal bool IsAlignChanges { get; private set; }
 
-        internal bool IsLocalPublicAPI
-        {
-            get;
-            private set;
-        }
+        internal bool IsLocalPublicAPI { get; private set; }
 
-        internal bool IsOriginalValuesGetter
-        {
-            get;
-            private set;
-        }
+        internal bool IsOriginalValuesGetter { get; private set; }
 
-        internal bool IsForeignKeyUpdate 
-        { 
-            get; 
-            private set; 
-        }
+        internal bool IsForeignKeyUpdate { get; private set; }
 
-        internal bool IsRelatedEndAdd
-        {
-            get;
-            private set;
-        }
+        internal bool IsRelatedEndAdd { get; private set; }
 
         private int _graphUpdateCount;
         internal bool IsGraphUpdate
         {
-            get
-            {
-                return _graphUpdateCount != 0;
-            }
+            get { return _graphUpdateCount != 0; }
         }
 
-        internal object EntityBeingReparented
-        {
-            get;
-            set;
-        }
+        internal object EntityBeingReparented { get; set; }
 
-        internal bool IsDetaching
-        {
-            get;
-            private set;
-        }
+        internal bool IsDetaching { get; private set; }
 
-        internal EntityReference RelationshipBeingUpdated
-        {
-            get;
-            private set;
-        }
+        internal EntityReference RelationshipBeingUpdated { get; private set; }
 
-        internal bool IsFixupByReference
-        {
-            get;
-            private set;
-        }
+        internal bool IsFixupByReference { get; private set; }
 
         #endregion Properties
 
@@ -218,8 +138,14 @@ namespace System.Data.Objects.Internal
         internal void BeginAddTracking()
         {
             Debug.Assert(!this.IsAddTracking);
-            Debug.Assert(this.PopulatedEntityReferences == null, "Expected promotion index to be null when begining tracking.");
-            Debug.Assert(this.AlignedEntityReferences == null, "Expected promotion index to be null when begining tracking.");
+            Debug.Assert(
+                this.PopulatedEntityReferences == null,
+                "Expected promotion index to be null when begining tracking."
+            );
+            Debug.Assert(
+                this.AlignedEntityReferences == null,
+                "Expected promotion index to be null when begining tracking."
+            );
             this.IsAddTracking = true;
             this.PopulatedEntityReferences = new HashSet<EntityReference>();
             this.AlignedEntityReferences = new HashSet<EntityReference>();
@@ -267,7 +193,7 @@ namespace System.Data.Objects.Internal
             this.ProcessedEntities = new HashSet<IEntityWrapper>();
             this.WrappedEntities = new Dictionary<object, IEntityWrapper>();
 
-            this.OriginalMergeOption = null;  // this must be set explicitely to value!=null later when the merge option is known
+            this.OriginalMergeOption = null; // this must be set explicitely to value!=null later when the merge option is known
         }
 
         internal void EndAttachTracking()
@@ -302,11 +228,16 @@ namespace System.Data.Objects.Internal
             this.ProcessedEntities = new HashSet<IEntityWrapper>();
             this.WrappedEntities = new Dictionary<object, IEntityWrapper>();
 
-            this.DeletedRelationshipsByGraph = new Dictionary<IEntityWrapper, Dictionary<RelatedEnd, HashSet<IEntityWrapper>>>();
-            this.AddedRelationshipsByGraph = new Dictionary<IEntityWrapper, Dictionary<RelatedEnd, HashSet<IEntityWrapper>>>();
-            this.DeletedRelationshipsByForeignKey = new Dictionary<IEntityWrapper, Dictionary<RelatedEnd, HashSet<EntityKey>>>();
-            this.AddedRelationshipsByForeignKey = new Dictionary<IEntityWrapper, Dictionary<RelatedEnd, HashSet<EntityKey>>>();
-            this.AddedRelationshipsByPrincipalKey = new Dictionary<IEntityWrapper, Dictionary<RelatedEnd, HashSet<EntityKey>>>();
+            this.DeletedRelationshipsByGraph =
+                new Dictionary<IEntityWrapper, Dictionary<RelatedEnd, HashSet<IEntityWrapper>>>();
+            this.AddedRelationshipsByGraph =
+                new Dictionary<IEntityWrapper, Dictionary<RelatedEnd, HashSet<IEntityWrapper>>>();
+            this.DeletedRelationshipsByForeignKey =
+                new Dictionary<IEntityWrapper, Dictionary<RelatedEnd, HashSet<EntityKey>>>();
+            this.AddedRelationshipsByForeignKey =
+                new Dictionary<IEntityWrapper, Dictionary<RelatedEnd, HashSet<EntityKey>>>();
+            this.AddedRelationshipsByPrincipalKey =
+                new Dictionary<IEntityWrapper, Dictionary<RelatedEnd, HashSet<EntityKey>>>();
             this.ChangedForeignKeys = new Dictionary<IEntityWrapper, HashSet<RelatedEnd>>();
             return true;
         }
@@ -437,6 +368,5 @@ namespace System.Data.Objects.Internal
         }
 
         #endregion Methods
-
     }
 }

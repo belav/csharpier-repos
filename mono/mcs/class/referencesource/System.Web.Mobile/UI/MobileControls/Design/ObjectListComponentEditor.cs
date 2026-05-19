@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 // <copyright file="ObjectListComponentEditor.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
 namespace System.Web.UI.Design.MobileControls
@@ -20,21 +20,22 @@ namespace System.Web.UI.Design.MobileControls
     /// </summary>
     /// <seealso cref='System.Web.UI.MobileControls.ObjectList'/>
     /// <seealso cref='System.Web.UI.Design.MobileControls.ObjectListDesigner'/>
-    [
-        System.Security.Permissions.SecurityPermission(System.Security.Permissions.SecurityAction.Demand,
-        Flags=System.Security.Permissions.SecurityPermissionFlag.UnmanagedCode)
-    ]
-    [Obsolete("The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231.")]
-    internal class ObjectListComponentEditor : BaseTemplatedMobileComponentEditor 
+    [System.Security.Permissions.SecurityPermission(
+        System.Security.Permissions.SecurityAction.Demand,
+        Flags = System.Security.Permissions.SecurityPermissionFlag.UnmanagedCode
+    )]
+    [Obsolete(
+        "The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231."
+    )]
+    internal class ObjectListComponentEditor : BaseTemplatedMobileComponentEditor
     {
-
         // The set of pages used within the ObjectList ComponentEditor
         private static Type[] _editorPages = new Type[]
-                                             {
-                                                 typeof(ObjectListGeneralPage),
-                                                 typeof(ObjectListCommandsPage),
-                                                 typeof(ObjectListFieldsPage)
-                                             };
+        {
+            typeof(ObjectListGeneralPage),
+            typeof(ObjectListCommandsPage),
+            typeof(ObjectListFieldsPage),
+        };
 
         internal const int IDX_GENERAL = 0;
         internal const int IDX_COMMANDS = 1;
@@ -45,9 +46,8 @@ namespace System.Web.UI.Design.MobileControls
         ///       Initializes a new instance of <see cref='System.Web.UI.Design.MobileControls.ObjectListComponentEditor'/>.
         ///    </para>
         /// </summary>
-        public ObjectListComponentEditor() : this(IDX_GENERAL)
-        {
-        }
+        public ObjectListComponentEditor()
+            : this(IDX_GENERAL) { }
 
         /// <summary>
         ///    <para>
@@ -57,9 +57,8 @@ namespace System.Web.UI.Design.MobileControls
         /// <param name='initialPage'>
         ///    The index of the initial page.
         /// </param>
-        public ObjectListComponentEditor(int initialPage) : base(initialPage)
-        {
-        }
+        public ObjectListComponentEditor(int initialPage)
+            : base(initialPage) { }
 
         /// <summary>
         ///    <para>

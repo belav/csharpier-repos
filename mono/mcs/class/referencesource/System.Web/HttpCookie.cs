@@ -10,16 +10,16 @@
  * Copyright (c) 1998 Microsoft Corporation
  */
 
-namespace System.Web {
-    using System.Text;
+namespace System.Web
+{
     using System.Collections;
     using System.Collections.Specialized;
     using System.Globalization;
     using System.Security.Permissions;
+    using System.Text;
     using System.Web.Configuration;
     using System.Web.Management;
     using Util;
-
 
     /// <devdoc>
     ///    <para>
@@ -27,7 +27,8 @@ namespace System.Web {
     ///       to access multiple HTTP cookies.
     ///    </para>
     /// </devdoc>
-    public sealed class HttpCookie {
+    public sealed class HttpCookie
+    {
         private String _name;
         private String _path = "/";
         private bool _secure;
@@ -40,7 +41,8 @@ namespace System.Web {
         private bool _changed;
         private bool _added;
 
-        internal HttpCookie() {
+        internal HttpCookie()
+        {
             _changed = true;
         }
 
@@ -54,7 +56,8 @@ namespace System.Web {
         ///       class.
         ///    </para>
         /// </devdoc>
-        public HttpCookie(String name) {
+        public HttpCookie(String name)
+        {
             _name = name;
 
             SetDefaultsFromConfig();
@@ -71,7 +74,8 @@ namespace System.Web {
         ///       class.
         ///    </para>
         /// </devdoc>
-        public HttpCookie(String name, String value) {
+        public HttpCookie(String name, String value)
+        {
             _name = name;
             _stringValue = value;
 
@@ -79,11 +83,12 @@ namespace System.Web {
             _changed = true;
         }
 
-        private void SetDefaultsFromConfig() {
+        private void SetDefaultsFromConfig()
+        {
             HttpCookiesSection config = RuntimeConfig.GetConfig().HttpCookies;
             _secure = config.RequireSSL;
             _httpOnly = config.HttpOnlyCookies;
-            
+
             if (config.Domain != null && config.Domain.Length > 0)
                 _domain = config.Domain;
         }
@@ -91,7 +96,8 @@ namespace System.Web {
         /*
          * Whether the cookie contents have changed
          */
-        internal bool Changed {
+        internal bool Changed
+        {
             get { return _changed; }
             set { _changed = value; }
         }
@@ -99,18 +105,16 @@ namespace System.Web {
         /*
          * Whether the cookie has been added
          */
-        internal bool Added {
+        internal bool Added
+        {
             get { return _added; }
             set { _added = value; }
         }
 
         // DevID 251951	Cookie is getting duplicated by ASP.NET when they are added via a native module
-        // This flag is used to remember that this cookie came from an IIS Set-Header flag, 
+        // This flag is used to remember that this cookie came from an IIS Set-Header flag,
         // so we don't duplicate it and send it back to IIS
-        internal bool IsInResponseHeader {
-            get;
-            set;
-        }
+        internal bool IsInResponseHeader { get; set; }
 
         /*
          * Cookie name
@@ -122,9 +126,11 @@ namespace System.Web {
         ///       or sets the name of cookie.
         ///    </para>
         /// </devdoc>
-        public String Name {
-            get { return _name;}
-            set { 
+        public String Name
+        {
+            get { return _name; }
+            set
+            {
                 _name = value;
                 _changed = true;
             }
@@ -140,9 +146,11 @@ namespace System.Web {
         ///       current cookie.
         ///    </para>
         /// </devdoc>
-        public String Path {
-            get { return _path;}
-            set { 
+        public String Path
+        {
+            get { return _path; }
+            set
+            {
                 _path = value;
                 _changed = true;
             }
@@ -157,9 +165,11 @@ namespace System.Web {
         ///       Indicates whether the cookie should be transmitted only over HTTPS.
         ///    </para>
         /// </devdoc>
-        public bool Secure {
-            get { return _secure;}
-            set { 
+        public bool Secure
+        {
+            get { return _secure; }
+            set
+            {
                 _secure = value;
                 _changed = true;
             }
@@ -176,9 +186,7 @@ namespace System.Web {
         /// caching as normal for the response, e.g. via the OutputCache directive, MVC's [OutputCache] attribute,
         /// etc., and he should make sure that all outbound cookies are marked Shareable = true.
         /// </remarks>
-        public bool Shareable {
-            get;
-            set; // don't need to set _changed flag since Set-Cookie header isn't affected by value of Shareable
+        public bool Shareable { get; set; // don't need to set _changed flag since Set-Cookie header isn't affected by value of Shareable
         }
 
         /// <devdoc>
@@ -186,9 +194,11 @@ namespace System.Web {
         ///       Indicates whether the cookie should have HttpOnly attribute
         ///    </para>
         /// </devdoc>
-        public bool HttpOnly {
-            get { return _httpOnly;}
-            set { 
+        public bool HttpOnly
+        {
+            get { return _httpOnly; }
+            set
+            {
                 _httpOnly = value;
                 _changed = true;
             }
@@ -203,9 +213,11 @@ namespace System.Web {
         ///       Restricts domain cookie is to be used with.
         ///    </para>
         /// </devdoc>
-        public String Domain {
-            get { return _domain;}
-            set { 
+        public String Domain
+        {
+            get { return _domain; }
+            set
+            {
                 _domain = value;
                 _changed = true;
             }
@@ -220,12 +232,11 @@ namespace System.Web {
         ///       Expiration time for cookie (in minutes).
         ///    </para>
         /// </devdoc>
-        public DateTime Expires {
-            get {
-                return(_expirationSet ? _expires : DateTime.MinValue);
-            }
-
-            set {
+        public DateTime Expires
+        {
+            get { return (_expirationSet ? _expires : DateTime.MinValue); }
+            set
+            {
                 _expires = value;
                 _expirationSet = true;
                 _changed = true;
@@ -243,22 +254,26 @@ namespace System.Web {
         ///       sets an individual cookie value.
         ///    </para>
         /// </devdoc>
-        public String Value {
-            get {
+        public String Value
+        {
+            get
+            {
                 if (_multiValue != null)
                     return _multiValue.ToString(false);
                 else
                     return _stringValue;
             }
-
-            set {
-                if (_multiValue != null) {
+            set
+            {
+                if (_multiValue != null)
+                {
                     // reset multivalue collection to contain
                     // single keyless value
                     _multiValue.Reset();
                     _multiValue.Add(null, value);
                 }
-                else {
+                else
+                {
                     // remember as string
                     _stringValue = value;
                 }
@@ -274,12 +289,15 @@ namespace System.Web {
         ///    <para>Gets a
         ///       value indicating whether the cookie has sub-keys.</para>
         /// </devdoc>
-        public bool HasKeys {
-            get { return Values.HasKeys();}
+        public bool HasKeys
+        {
+            get { return Values.HasKeys(); }
         }
 
-        private bool SupportsHttpOnly(HttpContext context) {
-            if (context != null && context.Request != null) {
+        private bool SupportsHttpOnly(HttpContext context)
+        {
+            if (context != null && context.Request != null)
+            {
                 HttpBrowserCapabilities browser = context.Request.Browser;
                 return (browser != null && (browser.Type != "IE5" || browser.Platform != "MacPPC"));
             }
@@ -293,14 +311,18 @@ namespace System.Web {
         /// <devdoc>
         ///    <para>Gets individual key:value pairs within a single cookie object.</para>
         /// </devdoc>
-        public NameValueCollection Values {
-            get {
-                if (_multiValue == null) {
+        public NameValueCollection Values
+        {
+            get
+            {
+                if (_multiValue == null)
+                {
                     // create collection on demand
                     _multiValue = new HttpValueCollection();
 
                     // convert existing string value into multivalue
-                    if (_stringValue != null) {
+                    if (_stringValue != null)
+                    {
                         if (_stringValue.IndexOf('&') >= 0 || _stringValue.IndexOf('=') >= 0)
                             _multiValue.FillFromString(_stringValue);
                         else
@@ -327,11 +349,9 @@ namespace System.Web {
         /// </devdoc>
         public String this[String key]
         {
-            get {
-                return Values[key];
-            }
-
-            set {
+            get { return Values[key]; }
+            set
+            {
                 Values[key] = value;
                 _changed = true;
             }
@@ -343,10 +363,12 @@ namespace System.Web {
         /// <param name="input"></param>
         /// <param name="result"></param>
         /// <returns></returns>
-        public static bool TryParse(string input, out HttpCookie result) {
+        public static bool TryParse(string input, out HttpCookie result)
+        {
             result = null;
 
-            if (string.IsNullOrEmpty(input)) {
+            if (string.IsNullOrEmpty(input))
+            {
                 return false;
             }
 
@@ -357,53 +379,76 @@ namespace System.Web {
             HttpCookie cookie = HttpRequest.CreateCookieFromString(cookiePair.Trim());
 
             // If there was no cookie name being created, stop parsing and return
-            if (string.IsNullOrEmpty(cookie.Name)) {
+            if (string.IsNullOrEmpty(cookie.Name))
+            {
                 return false;
             }
 
             //
-            // Parse the collections of cookie-av 
+            // Parse the collections of cookie-av
             // cookie-av = expires-av/max-age-av/domain-av/path-av/secure-av/httponly-av/extension-av
-            // https://tools.ietf.org/html/rfc6265 
+            // https://tools.ietf.org/html/rfc6265
 
-            while (dividerIndex >= 0 && dividerIndex < input.Length - 1) {
+            while (dividerIndex >= 0 && dividerIndex < input.Length - 1)
+            {
                 int cookieAvStartIndex = dividerIndex + 1;
                 dividerIndex = input.IndexOf(';', cookieAvStartIndex);
-                string cookieAv = dividerIndex >= 0 ? input.Substring(cookieAvStartIndex, dividerIndex - cookieAvStartIndex).Trim() : input.Substring(cookieAvStartIndex).Trim();
+                string cookieAv =
+                    dividerIndex >= 0
+                        ? input
+                            .Substring(cookieAvStartIndex, dividerIndex - cookieAvStartIndex)
+                            .Trim()
+                        : input.Substring(cookieAvStartIndex).Trim();
 
                 int assignmentIndex = cookieAv.IndexOf('=');
-                string attributeName = assignmentIndex >= 0 ? cookieAv.Substring(0, assignmentIndex).Trim() : cookieAv;
-                string attributeValue = assignmentIndex >= 0 && assignmentIndex < cookieAv.Length - 1 ? cookieAv.Substring(assignmentIndex + 1).Trim() : null;
+                string attributeName =
+                    assignmentIndex >= 0 ? cookieAv.Substring(0, assignmentIndex).Trim() : cookieAv;
+                string attributeValue =
+                    assignmentIndex >= 0 && assignmentIndex < cookieAv.Length - 1
+                        ? cookieAv.Substring(assignmentIndex + 1).Trim()
+                        : null;
 
                 //
                 // Parse supported cookie-av Attribute
 
                 //
                 // Expires
-                if (StringUtil.EqualsIgnoreCase(attributeName, "Expires")) {
+                if (StringUtil.EqualsIgnoreCase(attributeName, "Expires"))
+                {
                     DateTime dt;
-                    if (DateTime.TryParse(attributeValue, out dt)) {
+                    if (DateTime.TryParse(attributeValue, out dt))
+                    {
                         cookie.Expires = dt;
                     }
                 }
                 //
                 // Domain
-                else if (attributeValue != null && StringUtil.EqualsIgnoreCase(attributeName, "Domain")) {
+                else if (
+                    attributeValue != null
+                    && StringUtil.EqualsIgnoreCase(attributeName, "Domain")
+                )
+                {
                     cookie.Domain = attributeValue;
                 }
                 //
                 // Path
-                else if (attributeValue != null && StringUtil.EqualsIgnoreCase(attributeName, "Path")) {
+                else if (
+                    attributeValue != null
+                    && StringUtil.EqualsIgnoreCase(attributeName, "Path")
+                )
+                {
                     cookie.Path = attributeValue;
                 }
                 //
                 // Secure
-                else if (StringUtil.EqualsIgnoreCase(attributeName, "Secure")) {
+                else if (StringUtil.EqualsIgnoreCase(attributeName, "Secure"))
+                {
                     cookie.Secure = true;
                 }
                 //
                 // HttpOnly
-                else if (StringUtil.EqualsIgnoreCase(attributeName, "HttpOnly")) {
+                else if (StringUtil.EqualsIgnoreCase(attributeName, "HttpOnly"))
+                {
                     cookie.HttpOnly = true;
                 }
             }
@@ -416,11 +461,13 @@ namespace System.Web {
         /*
          * Construct set-cookie header
          */
-        internal HttpResponseHeader GetSetCookieHeader(HttpContext context) {
+        internal HttpResponseHeader GetSetCookieHeader(HttpContext context)
+        {
             StringBuilder s = new StringBuilder();
 
             // cookiename=
-            if (!String.IsNullOrEmpty(_name)) {
+            if (!String.IsNullOrEmpty(_name))
+            {
                 s.Append(_name);
                 s.Append('=');
             }
@@ -432,19 +479,22 @@ namespace System.Web {
                 s.Append(_stringValue);
 
             // domain
-            if (!String.IsNullOrEmpty(_domain)) {
+            if (!String.IsNullOrEmpty(_domain))
+            {
                 s.Append("; domain=");
                 s.Append(_domain);
             }
 
             // expiration
-            if (_expirationSet && _expires != DateTime.MinValue) {
+            if (_expirationSet && _expires != DateTime.MinValue)
+            {
                 s.Append("; expires=");
                 s.Append(HttpUtility.FormatHttpCookieDateTime(_expires));
             }
 
             // path
-            if (!String.IsNullOrEmpty(_path)) {
+            if (!String.IsNullOrEmpty(_path))
+            {
                 s.Append("; path=");
                 s.Append(_path);
             }
@@ -454,7 +504,8 @@ namespace System.Web {
                 s.Append("; secure");
 
             // httponly, Note: IE5 on the Mac doesn't support this
-            if (_httpOnly && SupportsHttpOnly(context)) {
+            if (_httpOnly && SupportsHttpOnly(context))
+            {
                 s.Append("; HttpOnly");
             }
 
@@ -467,14 +518,14 @@ namespace System.Web {
     /////////////////////////////////////////////////////////////////////////////
     /////////////////////////////////////////////////////////////////////////////
 
-    public enum HttpCookieMode {
+    public enum HttpCookieMode
+    {
+        UseUri, // cookieless=true
 
-        UseUri,          // cookieless=true
+        UseCookies, // cookieless=false
 
-        UseCookies,      // cookieless=false
+        AutoDetect, // cookieless=AutoDetect; Probe if device is cookied
 
-        AutoDetect,      // cookieless=AutoDetect; Probe if device is cookied
-
-        UseDeviceProfile // cookieless=UseDeviceProfile; Base decision on caps
+        UseDeviceProfile, // cookieless=UseDeviceProfile; Base decision on caps
     }
 }

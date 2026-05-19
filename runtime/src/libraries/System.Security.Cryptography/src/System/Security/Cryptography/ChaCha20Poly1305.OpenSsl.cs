@@ -9,8 +9,9 @@ namespace System.Security.Cryptography
 {
     public sealed partial class ChaCha20Poly1305
     {
-        public static bool IsSupported { get; } = Interop.OpenSslNoInit.OpenSslIsAvailable &&
-            Interop.Crypto.EvpChaCha20Poly1305() != IntPtr.Zero;
+        public static bool IsSupported { get; } =
+            Interop.OpenSslNoInit.OpenSslIsAvailable
+            && Interop.Crypto.EvpChaCha20Poly1305() != IntPtr.Zero;
 
         private SafeEvpCipherCtxHandle _ctxHandle;
 
@@ -24,7 +25,8 @@ namespace System.Security.Cryptography
                 _ctxHandle,
                 key,
                 Span<byte>.Empty,
-                Interop.Crypto.EvpCipherDirection.NoChange);
+                Interop.Crypto.EvpCipherDirection.NoChange
+            );
         }
 
         private void EncryptCore(
@@ -32,31 +34,50 @@ namespace System.Security.Cryptography
             ReadOnlySpan<byte> plaintext,
             Span<byte> ciphertext,
             Span<byte> tag,
-            ReadOnlySpan<byte> associatedData = default)
+            ReadOnlySpan<byte> associatedData = default
+        )
         {
             Interop.Crypto.EvpCipherSetKeyAndIV(
                 _ctxHandle,
                 Span<byte>.Empty,
                 nonce,
-                Interop.Crypto.EvpCipherDirection.Encrypt);
+                Interop.Crypto.EvpCipherDirection.Encrypt
+            );
 
             if (associatedData.Length != 0)
             {
-                if (!Interop.Crypto.EvpCipherUpdate(_ctxHandle, Span<byte>.Empty, out _, associatedData))
+                if (
+                    !Interop.Crypto.EvpCipherUpdate(
+                        _ctxHandle,
+                        Span<byte>.Empty,
+                        out _,
+                        associatedData
+                    )
+                )
                 {
                     throw Interop.Crypto.CreateOpenSslCryptographicException();
                 }
             }
 
-            if (!Interop.Crypto.EvpCipherUpdate(_ctxHandle, ciphertext, out int ciphertextBytesWritten, plaintext))
+            if (
+                !Interop.Crypto.EvpCipherUpdate(
+                    _ctxHandle,
+                    ciphertext,
+                    out int ciphertextBytesWritten,
+                    plaintext
+                )
+            )
             {
                 throw Interop.Crypto.CreateOpenSslCryptographicException();
             }
 
-            if (!Interop.Crypto.EvpCipherFinalEx(
-                _ctxHandle,
-                ciphertext.Slice(ciphertextBytesWritten),
-                out int bytesWritten))
+            if (
+                !Interop.Crypto.EvpCipherFinalEx(
+                    _ctxHandle,
+                    ciphertext.Slice(ciphertextBytesWritten),
+                    out int bytesWritten
+                )
+            )
             {
                 throw Interop.Crypto.CreateOpenSslCryptographicException();
             }
@@ -65,7 +86,9 @@ namespace System.Security.Cryptography
 
             if (ciphertextBytesWritten != ciphertext.Length)
             {
-                Debug.Fail($"ChaCha20Poly1305 encrypt wrote {ciphertextBytesWritten} of {ciphertext.Length} bytes.");
+                Debug.Fail(
+                    $"ChaCha20Poly1305 encrypt wrote {ciphertextBytesWritten} of {ciphertext.Length} bytes."
+                );
                 throw new CryptographicException();
             }
 
@@ -77,33 +100,52 @@ namespace System.Security.Cryptography
             ReadOnlySpan<byte> ciphertext,
             ReadOnlySpan<byte> tag,
             Span<byte> plaintext,
-            ReadOnlySpan<byte> associatedData)
+            ReadOnlySpan<byte> associatedData
+        )
         {
             Interop.Crypto.EvpCipherSetKeyAndIV(
                 _ctxHandle,
                 ReadOnlySpan<byte>.Empty,
                 nonce,
-                Interop.Crypto.EvpCipherDirection.Decrypt);
+                Interop.Crypto.EvpCipherDirection.Decrypt
+            );
 
             if (associatedData.Length != 0)
             {
-                if (!Interop.Crypto.EvpCipherUpdate(_ctxHandle, Span<byte>.Empty, out _, associatedData))
+                if (
+                    !Interop.Crypto.EvpCipherUpdate(
+                        _ctxHandle,
+                        Span<byte>.Empty,
+                        out _,
+                        associatedData
+                    )
+                )
                 {
                     throw Interop.Crypto.CreateOpenSslCryptographicException();
                 }
             }
 
-            if (!Interop.Crypto.EvpCipherUpdate(_ctxHandle, plaintext, out int plaintextBytesWritten, ciphertext))
+            if (
+                !Interop.Crypto.EvpCipherUpdate(
+                    _ctxHandle,
+                    plaintext,
+                    out int plaintextBytesWritten,
+                    ciphertext
+                )
+            )
             {
                 throw Interop.Crypto.CreateOpenSslCryptographicException();
             }
 
             Interop.Crypto.EvpCipherSetAeadTag(_ctxHandle, tag);
 
-            if (!Interop.Crypto.EvpCipherFinalEx(
-                _ctxHandle,
-                plaintext.Slice(plaintextBytesWritten),
-                out int bytesWritten))
+            if (
+                !Interop.Crypto.EvpCipherFinalEx(
+                    _ctxHandle,
+                    plaintext.Slice(plaintextBytesWritten),
+                    out int bytesWritten
+                )
+            )
             {
                 CryptographicOperations.ZeroMemory(plaintext);
                 throw new AuthenticationTagMismatchException();
@@ -113,7 +155,9 @@ namespace System.Security.Cryptography
 
             if (plaintextBytesWritten != plaintext.Length)
             {
-                Debug.Fail($"ChaCha20Poly1305 decrypt wrote {plaintextBytesWritten} of {plaintext.Length} bytes.");
+                Debug.Fail(
+                    $"ChaCha20Poly1305 decrypt wrote {plaintextBytesWritten} of {plaintext.Length} bytes."
+                );
                 throw new CryptographicException();
             }
         }
@@ -122,7 +166,8 @@ namespace System.Security.Cryptography
         {
             switch (keySizeInBits)
             {
-                case 256: return Interop.Crypto.EvpChaCha20Poly1305();
+                case 256:
+                    return Interop.Crypto.EvpChaCha20Poly1305();
                 default:
                     Debug.Fail("Key size should already be validated");
                     return IntPtr.Zero;

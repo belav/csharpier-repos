@@ -20,6 +20,8 @@ public static class ComplexTypeExtensions
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public static bool UseEagerSnapshots(this IReadOnlyComplexType complexType)
-        => complexType.GetChangeTrackingStrategy() is ChangeTrackingStrategy.Snapshot or ChangeTrackingStrategy.ChangedNotifications;
+    public static bool UseEagerSnapshots(this IReadOnlyComplexType complexType) =>
+        complexType.GetChangeTrackingStrategy()
+            is ChangeTrackingStrategy.Snapshot
+                or ChangeTrackingStrategy.ChangedNotifications;
 }

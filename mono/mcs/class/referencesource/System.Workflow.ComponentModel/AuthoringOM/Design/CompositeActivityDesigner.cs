@@ -2,41 +2,49 @@
 namespace System.Workflow.ComponentModel.Design
 {
     using System;
-    using System.IO;
-    using System.Drawing;
     using System.CodeDom;
-    using System.Diagnostics;
     using System.Collections;
     using System.Collections.Generic;
-    using System.Windows.Forms;
-    using System.ComponentModel;
-    using System.Globalization;
-    using System.Drawing.Design;
-    using System.Drawing.Imaging;
-    using System.Drawing.Drawing2D;
-    using System.Windows.Forms.Design;
-    using System.ComponentModel.Design;
-    using System.Collections.Specialized;
-    using System.ComponentModel.Design.Serialization;
-    using System.Workflow.ComponentModel.Compiler;
-    using System.Workflow.ComponentModel.Serialization;
     using System.Collections.ObjectModel;
+    using System.Collections.Specialized;
+    using System.ComponentModel;
+    using System.ComponentModel.Design;
+    using System.ComponentModel.Design.Serialization;
+    using System.Diagnostics;
+    using System.Drawing;
+    using System.Drawing.Design;
+    using System.Drawing.Drawing2D;
+    using System.Drawing.Imaging;
+    using System.Globalization;
+    using System.IO;
     using System.Reflection;
-    using System.Workflow.ComponentModel.Design;
     using System.Runtime.Serialization.Formatters.Binary;
+    using System.Windows.Forms;
+    using System.Windows.Forms.Design;
+    using System.Workflow.ComponentModel.Compiler;
+    using System.Workflow.ComponentModel.Design;
+    using System.Workflow.ComponentModel.Serialization;
 
     //
 
     #region CompositeActivityDesigner Class
     /// <summary>
-    /// CompositeActivityDesigner provides a designer which allows user to visually design composite activities in the design mode. 
+    /// CompositeActivityDesigner provides a designer which allows user to visually design composite activities in the design mode.
     /// CompositeActivityDesigner enables the user to customize layouting, drawing associated with the CompositeActivity, it also allows
     /// managing the layouting, drawing and eventing for the contained activity designers.
     /// </summary>
     [ActivityDesignerTheme(typeof(CompositeDesignerTheme))]
-    [SRCategory("CompositeActivityDesigners", "System.Workflow.ComponentModel.Design.DesignerResources")]
-    [DesignerSerializer(typeof(CompositeActivityDesignerLayoutSerializer), typeof(WorkflowMarkupSerializer))]
-    [Obsolete("The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*")]
+    [SRCategory(
+        "CompositeActivityDesigners",
+        "System.Workflow.ComponentModel.Design.DesignerResources"
+    )]
+    [DesignerSerializer(
+        typeof(CompositeActivityDesignerLayoutSerializer),
+        typeof(WorkflowMarkupSerializer)
+    )]
+    [Obsolete(
+        "The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*"
+    )]
     public abstract class CompositeActivityDesigner : ActivityDesigner
     {
         #region Fields
@@ -55,9 +63,7 @@ namespace System.Workflow.ComponentModel.Design
         /// <summary>
         /// Default constructor for CompositeActivityDesigner
         /// </summary>
-        protected CompositeActivityDesigner()
-        {
-        }
+        protected CompositeActivityDesigner() { }
         #endregion
 
         #region Properties
@@ -88,10 +94,7 @@ namespace System.Workflow.ComponentModel.Design
         /// </summary>
         public virtual bool CanExpandCollapse
         {
-            get
-            {
-                return !IsRootDesigner;
-            }
+            get { return !IsRootDesigner; }
         }
 
         /// <summary>
@@ -106,7 +109,6 @@ namespace System.Workflow.ComponentModel.Design
                     Expanded = true;
                 return this.expanded;
             }
-
             set
             {
                 if (this.expanded == value)
@@ -141,12 +143,14 @@ namespace System.Workflow.ComponentModel.Design
 
                         //In certain cases users might try to access the activity designers
                         //in Initialize method of composite activity. In that case the child activities
-                        //might not be inserted in the container. If this happens then we might not get the 
+                        //might not be inserted in the container. If this happens then we might not get the
                         //designer of the contained activity. When such a case happens we should not buffer the
                         //designers as it might lead to erroneous results
                         foreach (Activity activity in compositeActivity.Activities)
                         {
-                            ActivityDesigner activityDesigner = ActivityDesigner.GetDesigner(activity);
+                            ActivityDesigner activityDesigner = ActivityDesigner.GetDesigner(
+                                activity
+                            );
                             if (activityDesigner != null)
                                 designers.Add(activityDesigner);
                             else
@@ -171,10 +175,7 @@ namespace System.Workflow.ComponentModel.Design
         /// </summary>
         public virtual object FirstSelectableObject
         {
-            get
-            {
-                return null;
-            }
+            get { return null; }
         }
 
         /// <summary>
@@ -182,10 +183,7 @@ namespace System.Workflow.ComponentModel.Design
         /// </summary>
         public virtual object LastSelectableObject
         {
-            get
-            {
-                return null;
-            }
+            get { return null; }
         }
 
         public override AccessibleObject AccessibilityObject
@@ -200,11 +198,7 @@ namespace System.Workflow.ComponentModel.Design
 
         public override Point Location
         {
-            get
-            {
-                return base.Location;
-            }
-
+            get { return base.Location; }
             set
             {
                 ///If designers's location changes then we need to change location of children
@@ -213,7 +207,10 @@ namespace System.Workflow.ComponentModel.Design
 
                 Size moveDelta = new Size(value.X - base.Location.X, value.Y - base.Location.Y);
                 foreach (ActivityDesigner activityDesigner in ContainedDesigners)
-                    activityDesigner.Location = new Point(activityDesigner.Location.X + moveDelta.Width, activityDesigner.Location.Y + moveDelta.Height);
+                    activityDesigner.Location = new Point(
+                        activityDesigner.Location.X + moveDelta.Width,
+                        activityDesigner.Location.Y + moveDelta.Height
+                    );
 
                 base.Location = value;
             }
@@ -240,11 +237,20 @@ namespace System.Workflow.ComponentModel.Design
                 Rectangle bounds = Bounds;
 
                 Size anchorSize = (!textSize.IsEmpty) ? textSize : imageSize;
-                Rectangle expandButtonRectangle = new Rectangle(bounds.Location, designerTheme.ExpandButtonSize);
-                expandButtonRectangle.X += (bounds.Width - ((3 * designerTheme.ExpandButtonSize.Width / 2) + anchorSize.Width)) / 2;
-                expandButtonRectangle.Y += 2 * WorkflowTheme.CurrentTheme.AmbientTheme.Margin.Height;
+                Rectangle expandButtonRectangle = new Rectangle(
+                    bounds.Location,
+                    designerTheme.ExpandButtonSize
+                );
+                expandButtonRectangle.X +=
+                    (
+                        bounds.Width
+                        - ((3 * designerTheme.ExpandButtonSize.Width / 2) + anchorSize.Width)
+                    ) / 2;
+                expandButtonRectangle.Y +=
+                    2 * WorkflowTheme.CurrentTheme.AmbientTheme.Margin.Height;
                 if (anchorSize.Height > expandButtonRectangle.Height)
-                    expandButtonRectangle.Y += (anchorSize.Height - expandButtonRectangle.Height) / 2;
+                    expandButtonRectangle.Y +=
+                        (anchorSize.Height - expandButtonRectangle.Height) / 2;
                 return expandButtonRectangle;
             }
         }
@@ -272,7 +278,11 @@ namespace System.Workflow.ComponentModel.Design
                     titleHeight = Math.Max(expandButtonRectangle.Height, imageRectangle.Height);
                 }
 
-                if (!expandButtonRectangle.Size.IsEmpty || !textRectangle.Size.IsEmpty || !imageRectangle.Size.IsEmpty)
+                if (
+                    !expandButtonRectangle.Size.IsEmpty
+                    || !textRectangle.Size.IsEmpty
+                    || !imageRectangle.Size.IsEmpty
+                )
                     titleHeight += (Expanded ? 2 : 3) * margin.Height;
 
                 if (!imageRectangle.Size.IsEmpty && !textRectangle.Size.IsEmpty)
@@ -306,7 +316,8 @@ namespace System.Workflow.ComponentModel.Design
                 }
                 else
                 {
-                    imageRectangle.X += (bounds.Width - (imageSize.Width + 3 * expandButtonSize.Width / 2)) / 2;
+                    imageRectangle.X +=
+                        (bounds.Width - (imageSize.Width + 3 * expandButtonSize.Width / 2)) / 2;
                     imageRectangle.X += 3 * expandButtonSize.Width / 2;
                 }
 
@@ -330,15 +341,20 @@ namespace System.Workflow.ComponentModel.Design
 
                 Rectangle bounds = Bounds;
                 Size margin = WorkflowTheme.CurrentTheme.AmbientTheme.Margin;
-                Size expandButtonSize = (CanExpandCollapse) ? designerTheme.ExpandButtonSize : Size.Empty;
+                Size expandButtonSize =
+                    (CanExpandCollapse) ? designerTheme.ExpandButtonSize : Size.Empty;
 
                 //Calculate the text size
-                int maxAvailableWidth = bounds.Width - (2 * margin.Width + 3 * expandButtonSize.Width / 2);
+                int maxAvailableWidth =
+                    bounds.Width - (2 * margin.Width + 3 * expandButtonSize.Width / 2);
 
                 Size requestedLineSize = this.actualTextSize;
                 requestedLineSize.Width /= Text.Length;
                 requestedLineSize.Width += ((requestedLineSize.Width % Text.Length) > 0) ? 1 : 0;
-                requestedLineSize.Width *= Math.Min(Text.Length, CompositeActivityDesigner.MaximumCharsPerLine - 1);
+                requestedLineSize.Width *= Math.Min(
+                    Text.Length,
+                    CompositeActivityDesigner.MaximumCharsPerLine - 1
+                );
 
                 Size textSize = Size.Empty;
                 textSize.Width = Math.Min(maxAvailableWidth, this.actualTextSize.Width);
@@ -352,7 +368,8 @@ namespace System.Workflow.ComponentModel.Design
 
                 //Calculate the text rectangle
                 Rectangle textRectangle = new Rectangle(bounds.Location, textSize);
-                textRectangle.X += (bounds.Width - (3 * expandButtonSize.Width / 2 + textSize.Width)) / 2;
+                textRectangle.X +=
+                    (bounds.Width - (3 * expandButtonSize.Width / 2 + textSize.Width)) / 2;
                 textRectangle.X += 3 * expandButtonSize.Width / 2;
                 textRectangle.Y += 2 * margin.Height;
                 if (expandButtonSize.Height > textSize.Height)
@@ -395,7 +412,8 @@ namespace System.Workflow.ComponentModel.Design
                 {
                     foreach (Activity childActivity in compositeActivity.Activities)
                     {
-                        ActivityDesigner designer = host.GetDesigner(childActivity) as ActivityDesigner;
+                        ActivityDesigner designer =
+                            host.GetDesigner(childActivity) as ActivityDesigner;
                         if (designer != null)
                             childDesigners.Add(designer);
                     }
@@ -420,14 +438,21 @@ namespace System.Workflow.ComponentModel.Design
         /// <param name="insertLocation">Insertion location</param>
         /// <param name="activitiesToInsert">Array of activities to insert</param>
         /// <param name="undoTransactionDescription">Text for the designer transaction which will be created</param>
-        public static void InsertActivities(CompositeActivityDesigner compositeActivityDesigner, HitTestInfo insertLocation, ReadOnlyCollection<Activity> activitiesToInsert, string undoTransactionDescription)
+        public static void InsertActivities(
+            CompositeActivityDesigner compositeActivityDesigner,
+            HitTestInfo insertLocation,
+            ReadOnlyCollection<Activity> activitiesToInsert,
+            string undoTransactionDescription
+        )
         {
             if (compositeActivityDesigner == null)
                 throw new ArgumentNullException("compositeActivityDesigner");
 
-            if (compositeActivityDesigner.Activity == null ||
-                compositeActivityDesigner.Activity.Site == null ||
-                !(compositeActivityDesigner.Activity is CompositeActivity))
+            if (
+                compositeActivityDesigner.Activity == null
+                || compositeActivityDesigner.Activity.Site == null
+                || !(compositeActivityDesigner.Activity is CompositeActivity)
+            )
                 throw new ArgumentException("compositeActivityDesigner");
 
             if (insertLocation == null)
@@ -451,7 +476,10 @@ namespace System.Workflow.ComponentModel.Design
                 foreach (Activity activity in activitiesToInsert)
                 {
                     if (activity == null)
-                        throw new ArgumentException("activitiesToInsert", SR.GetString(SR.Error_CollectionHasNullEntry));
+                        throw new ArgumentException(
+                            "activitiesToInsert",
+                            SR.GetString(SR.Error_CollectionHasNullEntry)
+                        );
 
                     moveCase = ((IComponent)activity).Site != null;
                     break;
@@ -486,7 +514,9 @@ namespace System.Workflow.ComponentModel.Design
                 {
                     allActivities.Add(activity);
                     if (activity is CompositeActivity)
-                        allActivities.AddRange(Helpers.GetNestedActivities((CompositeActivity)activity));
+                        allActivities.AddRange(
+                            Helpers.GetNestedActivities((CompositeActivity)activity)
+                        );
                 }
             }
         }
@@ -497,7 +527,11 @@ namespace System.Workflow.ComponentModel.Design
         /// <param name="serviceProvider">Service Provider associated to providing services</param>
         /// <param name="activitiesToRemove">Array of activities to remove</param>
         /// <param name="transactionDescription">Transaction text used to name the designer transaction</param>
-        public static void RemoveActivities(IServiceProvider serviceProvider, ReadOnlyCollection<Activity> activitiesToRemove, string transactionDescription)
+        public static void RemoveActivities(
+            IServiceProvider serviceProvider,
+            ReadOnlyCollection<Activity> activitiesToRemove,
+            string transactionDescription
+        )
         {
             if (serviceProvider == null)
                 throw new ArgumentNullException();
@@ -507,7 +541,8 @@ namespace System.Workflow.ComponentModel.Design
 
             Activity nextSelectableActivity = null;
 
-            IDesignerHost designerHost = serviceProvider.GetService(typeof(IDesignerHost)) as IDesignerHost;
+            IDesignerHost designerHost =
+                serviceProvider.GetService(typeof(IDesignerHost)) as IDesignerHost;
             DesignerTransaction trans = null;
             if (designerHost != null && !string.IsNullOrEmpty(transactionDescription))
                 trans = designerHost.CreateTransaction(transactionDescription);
@@ -522,8 +557,12 @@ namespace System.Workflow.ComponentModel.Design
                         CompositeActivityDesigner parentDesigner = designer.ParentDesigner;
                         if (parentDesigner != null)
                         {
-                            nextSelectableActivity = DesignerHelpers.GetNextSelectableActivity(activity);
-                            parentDesigner.RemoveActivities(new List<Activity>(new Activity[] { activity }).AsReadOnly());
+                            nextSelectableActivity = DesignerHelpers.GetNextSelectableActivity(
+                                activity
+                            );
+                            parentDesigner.RemoveActivities(
+                                new List<Activity>(new Activity[] { activity }).AsReadOnly()
+                            );
                         }
                     }
                 }
@@ -540,13 +579,21 @@ namespace System.Workflow.ComponentModel.Design
 
             if (nextSelectableActivity != null && nextSelectableActivity.Site != null)
             {
-                ISelectionService selectionService = nextSelectableActivity.Site.GetService(typeof(ISelectionService)) as ISelectionService;
+                ISelectionService selectionService =
+                    nextSelectableActivity.Site.GetService(typeof(ISelectionService))
+                    as ISelectionService;
                 if (selectionService != null)
-                    selectionService.SetSelectedComponents(new Activity[] { nextSelectableActivity }, SelectionTypes.Replace);
+                    selectionService.SetSelectedComponents(
+                        new Activity[] { nextSelectableActivity },
+                        SelectionTypes.Replace
+                    );
             }
         }
 
-        public static IDataObject SerializeActivitiesToDataObject(IServiceProvider serviceProvider, Activity[] activities)
+        public static IDataObject SerializeActivitiesToDataObject(
+            IServiceProvider serviceProvider,
+            Activity[] activities
+        )
         {
             if (serviceProvider == null)
                 throw new ArgumentNullException("serviceProvider");
@@ -555,9 +602,15 @@ namespace System.Workflow.ComponentModel.Design
                 throw new ArgumentNullException("activities");
 
             // get component serialization service
-            ComponentSerializationService css = (ComponentSerializationService)serviceProvider.GetService(typeof(ComponentSerializationService));
+            ComponentSerializationService css = (ComponentSerializationService)
+                serviceProvider.GetService(typeof(ComponentSerializationService));
             if (css == null)
-                throw new InvalidOperationException(SR.GetString(SR.General_MissingService, typeof(ComponentSerializationService).Name));
+                throw new InvalidOperationException(
+                    SR.GetString(
+                        SR.General_MissingService,
+                        typeof(ComponentSerializationService).Name
+                    )
+                );
 
             // serialize all activities to the store
             SerializationStore store = css.CreateStore();
@@ -577,12 +630,19 @@ namespace System.Workflow.ComponentModel.Design
             return dataObject;
         }
 
-        public static Activity[] DeserializeActivitiesFromDataObject(IServiceProvider serviceProvider, IDataObject dataObj)
+        public static Activity[] DeserializeActivitiesFromDataObject(
+            IServiceProvider serviceProvider,
+            IDataObject dataObj
+        )
         {
             return DeserializeActivitiesFromDataObject(serviceProvider, dataObj, false);
         }
 
-        internal static Activity[] DeserializeActivitiesFromDataObject(IServiceProvider serviceProvider, IDataObject dataObj, bool addAssemblyReference)
+        internal static Activity[] DeserializeActivitiesFromDataObject(
+            IServiceProvider serviceProvider,
+            IDataObject dataObj,
+            bool addAssemblyReference
+        )
         {
             if (serviceProvider == null)
                 throw new ArgumentNullException("serviceProvider");
@@ -590,9 +650,12 @@ namespace System.Workflow.ComponentModel.Design
             if (dataObj == null)
                 return new Activity[] { };
 
-            IDesignerHost designerHost = (IDesignerHost)serviceProvider.GetService(typeof(IDesignerHost));
+            IDesignerHost designerHost = (IDesignerHost)
+                serviceProvider.GetService(typeof(IDesignerHost));
             if (designerHost == null)
-                throw new InvalidOperationException(SR.GetString(SR.General_MissingService, typeof(IDesignerHost).Name));
+                throw new InvalidOperationException(
+                    SR.GetString(SR.General_MissingService, typeof(IDesignerHost).Name)
+                );
 
             object data = dataObj.GetData(CF_DESIGNER);
             ICollection activities = null;
@@ -605,9 +668,16 @@ namespace System.Workflow.ComponentModel.Design
                 if (serializationData is SerializationStore)
                 {
                     // get component serialization service
-                    ComponentSerializationService css = serviceProvider.GetService(typeof(ComponentSerializationService)) as ComponentSerializationService;
+                    ComponentSerializationService css =
+                        serviceProvider.GetService(typeof(ComponentSerializationService))
+                        as ComponentSerializationService;
                     if (css == null)
-                        throw new Exception(SR.GetString(SR.General_MissingService, typeof(ComponentSerializationService).Name));
+                        throw new Exception(
+                            SR.GetString(
+                                SR.General_MissingService,
+                                typeof(ComponentSerializationService).Name
+                            )
+                        );
 
                     // deserialize data
                     activities = css.Deserialize((SerializationStore)serializationData);
@@ -616,13 +686,20 @@ namespace System.Workflow.ComponentModel.Design
             else
             {
                 // Now check for a toolbox item.
-                IToolboxService ts = (IToolboxService)serviceProvider.GetService(typeof(IToolboxService));
+                IToolboxService ts = (IToolboxService)
+                    serviceProvider.GetService(typeof(IToolboxService));
                 if (ts != null && ts.IsSupported(dataObj, designerHost))
                 {
                     ToolboxItem toolBoxItem = ts.DeserializeToolboxItem(dataObj, designerHost);
                     if (toolBoxItem != null)
                     {
-                        activities = GetActivitiesFromToolboxItem(serviceProvider, addAssemblyReference, designerHost, activities, toolBoxItem);
+                        activities = GetActivitiesFromToolboxItem(
+                            serviceProvider,
+                            addAssemblyReference,
+                            designerHost,
+                            activities,
+                            toolBoxItem
+                        );
                     }
                 }
             }
@@ -633,12 +710,20 @@ namespace System.Workflow.ComponentModel.Design
                 return new Activity[] { };
         }
 
-        private static ICollection GetActivitiesFromToolboxItem(IServiceProvider serviceProvider, bool addAssemblyReference, IDesignerHost designerHost, ICollection activities, ToolboxItem toolBoxItem)
+        private static ICollection GetActivitiesFromToolboxItem(
+            IServiceProvider serviceProvider,
+            bool addAssemblyReference,
+            IDesignerHost designerHost,
+            ICollection activities,
+            ToolboxItem toolBoxItem
+        )
         {
             // this will make sure that we add the assembly reference to project
             if (addAssemblyReference && toolBoxItem.AssemblyName != null)
             {
-                ITypeResolutionService trs = serviceProvider.GetService(typeof(ITypeResolutionService)) as ITypeResolutionService;
+                ITypeResolutionService trs =
+                    serviceProvider.GetService(typeof(ITypeResolutionService))
+                    as ITypeResolutionService;
                 if (trs != null)
                     trs.ReferenceAssembly(toolBoxItem.AssemblyName);
             }
@@ -651,20 +736,33 @@ namespace System.Workflow.ComponentModel.Design
             return activities;
         }
 
-        internal static Activity[] DeserializeActivitiesFromToolboxItem(IServiceProvider serviceProvider, ToolboxItem toolboxItem, bool addAssemblyReference)
+        internal static Activity[] DeserializeActivitiesFromToolboxItem(
+            IServiceProvider serviceProvider,
+            ToolboxItem toolboxItem,
+            bool addAssemblyReference
+        )
         {
             if (serviceProvider == null)
                 throw new ArgumentNullException("serviceProvider");
 
-            IDesignerHost designerHost = (IDesignerHost)serviceProvider.GetService(typeof(IDesignerHost));
+            IDesignerHost designerHost = (IDesignerHost)
+                serviceProvider.GetService(typeof(IDesignerHost));
             if (designerHost == null)
-                throw new InvalidOperationException(SR.GetString(SR.General_MissingService, typeof(IDesignerHost).Name));
+                throw new InvalidOperationException(
+                    SR.GetString(SR.General_MissingService, typeof(IDesignerHost).Name)
+                );
 
             ICollection activities = null;
 
             if (toolboxItem != null)
             {
-                activities = GetActivitiesFromToolboxItem(serviceProvider, addAssemblyReference, designerHost, activities, toolboxItem);
+                activities = GetActivitiesFromToolboxItem(
+                    serviceProvider,
+                    addAssemblyReference,
+                    designerHost,
+                    activities,
+                    toolboxItem
+                );
             }
 
             if (activities != null && Helpers.AreAllActivities(activities))
@@ -673,7 +771,10 @@ namespace System.Workflow.ComponentModel.Design
                 return new Activity[] { };
         }
 
-        public static ActivityDesigner[] GetIntersectingDesigners(ActivityDesigner topLevelDesigner, Rectangle rectangle)
+        public static ActivityDesigner[] GetIntersectingDesigners(
+            ActivityDesigner topLevelDesigner,
+            Rectangle rectangle
+        )
         {
             if (topLevelDesigner == null)
                 throw new ArgumentNullException("topLevelDesigner");
@@ -692,14 +793,20 @@ namespace System.Workflow.ComponentModel.Design
                 compositeDesigners.Enqueue(topLevelDesigner);
                 while (compositeDesigners.Count > 0)
                 {
-                    CompositeActivityDesigner compositeDesigner = compositeDesigners.Dequeue() as CompositeActivityDesigner;
+                    CompositeActivityDesigner compositeDesigner =
+                        compositeDesigners.Dequeue() as CompositeActivityDesigner;
                     if (compositeDesigner != null)
                     {
                         bool bDrawingVisibleChildren = false;
 
-                        foreach (ActivityDesigner activityDesigner in compositeDesigner.ContainedDesigners)
+                        foreach (
+                            ActivityDesigner activityDesigner in compositeDesigner.ContainedDesigners
+                        )
                         {
-                            if (activityDesigner.IsVisible && rectangle.IntersectsWith(activityDesigner.Bounds))
+                            if (
+                                activityDesigner.IsVisible
+                                && rectangle.IntersectsWith(activityDesigner.Bounds)
+                            )
                             {
                                 bDrawingVisibleChildren = true;
 
@@ -711,7 +818,10 @@ namespace System.Workflow.ComponentModel.Design
                             }
                             else
                             {
-                                if ((!(compositeDesigner is FreeformActivityDesigner)) && bDrawingVisibleChildren)
+                                if (
+                                    (!(compositeDesigner is FreeformActivityDesigner))
+                                    && bDrawingVisibleChildren
+                                )
                                     break;
                             }
                         }
@@ -729,7 +839,10 @@ namespace System.Workflow.ComponentModel.Design
         /// <param name="insertLocation">Location at which to insert activities</param>
         /// <param name="activitiesToInsert">Array of activities to be inserted</param>
         /// <returns>True of activities can be inserted, false otherwise</returns>
-        public virtual bool CanInsertActivities(HitTestInfo insertLocation, ReadOnlyCollection<Activity> activitiesToInsert)
+        public virtual bool CanInsertActivities(
+            HitTestInfo insertLocation,
+            ReadOnlyCollection<Activity> activitiesToInsert
+        )
         {
             if (insertLocation == null)
                 throw new ArgumentNullException("insertLocation");
@@ -745,12 +858,16 @@ namespace System.Workflow.ComponentModel.Design
             if (!IsEditable)
                 return false;
 
-            IExtendedUIService2 extendedUIService = this.GetService(typeof(IExtendedUIService2)) as IExtendedUIService2;
+            IExtendedUIService2 extendedUIService =
+                this.GetService(typeof(IExtendedUIService2)) as IExtendedUIService2;
 
             foreach (Activity activity in activitiesToInsert)
             {
                 if (activity == null)
-                    throw new ArgumentException("activitiesToInsert", SR.GetString(SR.Error_CollectionHasNullEntry));
+                    throw new ArgumentException(
+                        "activitiesToInsert",
+                        SR.GetString(SR.Error_CollectionHasNullEntry)
+                    );
 
                 if (extendedUIService != null)
                 {
@@ -768,8 +885,12 @@ namespace System.Workflow.ComponentModel.Design
                 if (activity.Site != null)
                 {
                     //get an existing designer
-                    IDesignerHost designerHost = activity.Site.GetService(typeof(IDesignerHost)) as IDesignerHost;
-                    designerToInsert = (designerHost != null) ? designerHost.GetDesigner((IComponent)activity) as ActivityDesigner : null;
+                    IDesignerHost designerHost =
+                        activity.Site.GetService(typeof(IDesignerHost)) as IDesignerHost;
+                    designerToInsert =
+                        (designerHost != null)
+                            ? designerHost.GetDesigner((IComponent)activity) as ActivityDesigner
+                            : null;
                 }
                 else
                 {
@@ -778,7 +899,8 @@ namespace System.Workflow.ComponentModel.Design
                     //from a toolbox
                     if (activity.UserData.Contains(typeof(ActivityDesigner)))
                     {
-                        designerToInsert = activity.UserData[typeof(ActivityDesigner)] as ActivityDesigner;
+                        designerToInsert =
+                            activity.UserData[typeof(ActivityDesigner)] as ActivityDesigner;
                     }
                     else
                     {
@@ -804,7 +926,10 @@ namespace System.Workflow.ComponentModel.Design
         /// </summary>
         /// <param name="insertLocation">Location at which to insert activities</param>
         /// <param name="activitiesToInsert">Array of activities to insert</param>
-        public virtual void InsertActivities(HitTestInfo insertLocation, ReadOnlyCollection<Activity> activitiesToInsert)
+        public virtual void InsertActivities(
+            HitTestInfo insertLocation,
+            ReadOnlyCollection<Activity> activitiesToInsert
+        )
         {
             if (insertLocation == null)
                 throw new ArgumentNullException("insertLocation");
@@ -818,16 +943,28 @@ namespace System.Workflow.ComponentModel.Design
 
             int index = insertLocation.MapToIndex();
 
-            IIdentifierCreationService identifierCreationService = GetService(typeof(IIdentifierCreationService)) as IIdentifierCreationService;
+            IIdentifierCreationService identifierCreationService =
+                GetService(typeof(IIdentifierCreationService)) as IIdentifierCreationService;
             if (identifierCreationService != null)
-                identifierCreationService.EnsureUniqueIdentifiers(compositeActivity, activitiesToInsert);
+                identifierCreationService.EnsureUniqueIdentifiers(
+                    compositeActivity,
+                    activitiesToInsert
+                );
             else
-                throw new InvalidOperationException(SR.GetString(SR.General_MissingService, typeof(IIdentifierCreationService).FullName));
+                throw new InvalidOperationException(
+                    SR.GetString(
+                        SR.General_MissingService,
+                        typeof(IIdentifierCreationService).FullName
+                    )
+                );
 
             foreach (Activity activity in activitiesToInsert)
             {
                 if (activity == null)
-                    throw new ArgumentException("activitiesToInsert", SR.GetString(SR.Error_CollectionHasNullEntry));
+                    throw new ArgumentException(
+                        "activitiesToInsert",
+                        SR.GetString(SR.Error_CollectionHasNullEntry)
+                    );
 
                 if (activity.Parent == null)
                 {
@@ -842,11 +979,13 @@ namespace System.Workflow.ComponentModel.Design
                 Walker walker = new Walker();
                 walker.FoundActivity += delegate(Walker w, WalkerEventArgs walkerEventArgs)
                 {
-                    ExtenderHelpers.FilterDependencyProperties(this.Activity.Site, walkerEventArgs.CurrentActivity);
+                    ExtenderHelpers.FilterDependencyProperties(
+                        this.Activity.Site,
+                        walkerEventArgs.CurrentActivity
+                    );
                 };
                 walker.Walk(activity);
             }
-
         }
 
         /// <summary>
@@ -855,7 +994,10 @@ namespace System.Workflow.ComponentModel.Design
         /// <param name="moveLocation">Location from which to move the activities</param>
         /// <param name="activitiesToMove">Array of activities to move</param>
         /// <returns></returns>
-        public virtual bool CanMoveActivities(HitTestInfo moveLocation, ReadOnlyCollection<Activity> activitiesToMove)
+        public virtual bool CanMoveActivities(
+            HitTestInfo moveLocation,
+            ReadOnlyCollection<Activity> activitiesToMove
+        )
         {
             if (moveLocation == null)
                 throw new ArgumentNullException("moveLocation");
@@ -883,7 +1025,10 @@ namespace System.Workflow.ComponentModel.Design
         /// </summary>
         /// <param name="moveLocation">Location at which to move the activities</param>
         /// <param name="activitiesToMove">Array of activities to move</param>
-        public virtual void MoveActivities(HitTestInfo moveLocation, ReadOnlyCollection<Activity> activitiesToMove)
+        public virtual void MoveActivities(
+            HitTestInfo moveLocation,
+            ReadOnlyCollection<Activity> activitiesToMove
+        )
         {
             if (moveLocation == null)
                 throw new ArgumentNullException("moveLocation");
@@ -896,13 +1041,21 @@ namespace System.Workflow.ComponentModel.Design
             if (compositeActivity == null)
                 throw new Exception(SR.GetString(SR.Error_DragDropInvalid));
 
-            IIdentifierCreationService identifierCreationService = GetService(typeof(IIdentifierCreationService)) as IIdentifierCreationService;
+            IIdentifierCreationService identifierCreationService =
+                GetService(typeof(IIdentifierCreationService)) as IIdentifierCreationService;
             if (identifierCreationService == null)
-                throw new InvalidOperationException(SR.GetString(SR.General_MissingService, typeof(IIdentifierCreationService).FullName));
+                throw new InvalidOperationException(
+                    SR.GetString(
+                        SR.General_MissingService,
+                        typeof(IIdentifierCreationService).FullName
+                    )
+                );
 
             IDesignerHost designerHost = GetService(typeof(IDesignerHost)) as IDesignerHost;
             if (designerHost == null)
-                throw new InvalidOperationException(SR.GetString(SR.General_MissingService, typeof(IDesignerHost).FullName));
+                throw new InvalidOperationException(
+                    SR.GetString(SR.General_MissingService, typeof(IDesignerHost).FullName)
+                );
 
             int index = moveLocation.MapToIndex();
             foreach (Activity activity in activitiesToMove)
@@ -928,18 +1081,28 @@ namespace System.Workflow.ComponentModel.Design
 
                 //We need to make sure that the activity is going to have unique identifier
                 //This might just cause problems
-                identifierCreationService.EnsureUniqueIdentifiers(compositeActivity, new Activity[] { activity });
+                identifierCreationService.EnsureUniqueIdentifiers(
+                    compositeActivity,
+                    new Activity[] { activity }
+                );
 
                 //We do not need to read the activity in the designer host as this is move operation
-                //assign unique temporary name to avoid conflicts 
+                //assign unique temporary name to avoid conflicts
                 DesignerHelpers.UpdateSiteName(activity, "_activityonthemove_");
                 CompositeActivity compositeActivityMoved = activity as CompositeActivity;
                 if (compositeActivityMoved != null)
                 {
                     int i = 1;
-                    foreach (Activity nestedActivity in Helpers.GetNestedActivities(compositeActivityMoved))
+                    foreach (
+                        Activity nestedActivity in Helpers.GetNestedActivities(
+                            compositeActivityMoved
+                        )
+                    )
                     {
-                        DesignerHelpers.UpdateSiteName(nestedActivity, "_activityonthemove_" + i.ToString(CultureInfo.InvariantCulture));
+                        DesignerHelpers.UpdateSiteName(
+                            nestedActivity,
+                            "_activityonthemove_" + i.ToString(CultureInfo.InvariantCulture)
+                        );
                         i += 1;
                     }
                 }
@@ -961,7 +1124,11 @@ namespace System.Workflow.ComponentModel.Design
                 DesignerHelpers.UpdateSiteName(activity, activity.Name);
                 if (compositeActivityMoved != null)
                 {
-                    foreach (Activity nestedActivity in Helpers.GetNestedActivities(compositeActivityMoved))
+                    foreach (
+                        Activity nestedActivity in Helpers.GetNestedActivities(
+                            compositeActivityMoved
+                        )
+                    )
                         DesignerHelpers.UpdateSiteName(nestedActivity, nestedActivity.Name);
                 }
             }
@@ -972,7 +1139,10 @@ namespace System.Workflow.ComponentModel.Design
                 Walker walker = new Walker();
                 walker.FoundActivity += delegate(Walker w, WalkerEventArgs walkerEventArgs)
                 {
-                    ExtenderHelpers.FilterDependencyProperties(this.Activity.Site, walkerEventArgs.CurrentActivity);
+                    ExtenderHelpers.FilterDependencyProperties(
+                        this.Activity.Site,
+                        walkerEventArgs.CurrentActivity
+                    );
                     TypeDescriptor.Refresh(walkerEventArgs.CurrentActivity);
                 };
                 walker.Walk(activity);
@@ -1029,7 +1199,11 @@ namespace System.Workflow.ComponentModel.Design
                 activity.SetParent(null);
                 if (activity is CompositeActivity)
                 {
-                    foreach (Activity nestedActivity in Helpers.GetNestedActivities(activity as CompositeActivity))
+                    foreach (
+                        Activity nestedActivity in Helpers.GetNestedActivities(
+                            activity as CompositeActivity
+                        )
+                    )
                         nestedActivity.SetParent(null);
                 }
 
@@ -1068,7 +1242,10 @@ namespace System.Workflow.ComponentModel.Design
         /// <param name="current">Current object in the navigation order</param>
         /// <param name="navigate">Navigation direction</param>
         /// <returns></returns>
-        public virtual object GetNextSelectableObject(object current, DesignerNavigationDirection direction)
+        public virtual object GetNextSelectableObject(
+            object current,
+            DesignerNavigationDirection direction
+        )
         {
             return null;
         }
@@ -1079,7 +1256,10 @@ namespace System.Workflow.ComponentModel.Design
 
             if (ExpandButtonRectangle.Contains(point))
             {
-                hitInfo = new HitTestInfo(this, HitTestLocations.Designer | HitTestLocations.ActionArea);
+                hitInfo = new HitTestInfo(
+                    this,
+                    HitTestLocations.Designer | HitTestLocations.ActionArea
+                );
             }
             else if (Expanded && Bounds.Contains(point))
             {
@@ -1102,8 +1282,14 @@ namespace System.Workflow.ComponentModel.Design
                 hitInfo = base.HitTest(point);
 
             //This is to create default hittest info in case the drawing state is invalid
-            if (hitInfo.AssociatedDesigner != null && hitInfo.AssociatedDesigner.DrawingState != DrawingStates.Valid)
-                hitInfo = new HitTestInfo(hitInfo.AssociatedDesigner, HitTestLocations.Designer | HitTestLocations.ActionArea);
+            if (
+                hitInfo.AssociatedDesigner != null
+                && hitInfo.AssociatedDesigner.DrawingState != DrawingStates.Valid
+            )
+                hitInfo = new HitTestInfo(
+                    hitInfo.AssociatedDesigner,
+                    HitTestLocations.Designer | HitTestLocations.ActionArea
+                );
 
             return hitInfo;
         }
@@ -1124,7 +1310,9 @@ namespace System.Workflow.ComponentModel.Design
         /// Notifies that number of activities contained within the designers are changing
         /// </summary>
         /// <param name="listChangeArgs">ActivityCollectionChangeEventArgs containing information about what is about to change</param>
-        protected virtual void OnContainedActivitiesChanging(ActivityCollectionChangeEventArgs listChangeArgs)
+        protected virtual void OnContainedActivitiesChanging(
+            ActivityCollectionChangeEventArgs listChangeArgs
+        )
         {
             if (listChangeArgs == null)
                 throw new ArgumentNullException("listChangeArgs");
@@ -1134,7 +1322,9 @@ namespace System.Workflow.ComponentModel.Design
         /// Notifies that number of activities contained within the designers have changed
         /// </summary>
         /// <param name="listChangeArgs">ItemListChangeEventArgs containing information about what has changed</param>
-        protected virtual void OnContainedActivitiesChanged(ActivityCollectionChangeEventArgs listChangeArgs)
+        protected virtual void OnContainedActivitiesChanged(
+            ActivityCollectionChangeEventArgs listChangeArgs
+        )
         {
             if (listChangeArgs == null)
                 throw new ArgumentNullException("listChangeArgs");
@@ -1162,21 +1352,27 @@ namespace System.Workflow.ComponentModel.Design
             base.Initialize(activity);
 
             ///
-
             CompositeActivity compositeActivity = activity as CompositeActivity;
             if (compositeActivity != null)
             {
-                compositeActivity.Activities.ListChanging += new EventHandler<ActivityCollectionChangeEventArgs>(OnActivityListChanging);
-                compositeActivity.Activities.ListChanged += new EventHandler<ActivityCollectionChangeEventArgs>(OnActivityListChanged);
+                compositeActivity.Activities.ListChanging +=
+                    new EventHandler<ActivityCollectionChangeEventArgs>(OnActivityListChanging);
+                compositeActivity.Activities.ListChanged +=
+                    new EventHandler<ActivityCollectionChangeEventArgs>(OnActivityListChanged);
             }
 
             if (IsRootDesigner)
             {
-                IComponentChangeService componentChangeService = GetService(typeof(IComponentChangeService)) as IComponentChangeService;
+                IComponentChangeService componentChangeService =
+                    GetService(typeof(IComponentChangeService)) as IComponentChangeService;
                 if (componentChangeService != null)
                 {
-                    componentChangeService.ComponentAdded += new ComponentEventHandler(OnComponentAdded);
-                    componentChangeService.ComponentChanged += new ComponentChangedEventHandler(OnComponentChanged);
+                    componentChangeService.ComponentAdded += new ComponentEventHandler(
+                        OnComponentAdded
+                    );
+                    componentChangeService.ComponentChanged += new ComponentChangedEventHandler(
+                        OnComponentChanged
+                    );
                 }
             }
         }
@@ -1188,17 +1384,24 @@ namespace System.Workflow.ComponentModel.Design
                 CompositeActivity compositeActivity = Activity as CompositeActivity;
                 if (compositeActivity != null)
                 {
-                    compositeActivity.Activities.ListChanging -= new EventHandler<ActivityCollectionChangeEventArgs>(OnActivityListChanging);
-                    compositeActivity.Activities.ListChanged -= new EventHandler<ActivityCollectionChangeEventArgs>(OnActivityListChanged);
+                    compositeActivity.Activities.ListChanging -=
+                        new EventHandler<ActivityCollectionChangeEventArgs>(OnActivityListChanging);
+                    compositeActivity.Activities.ListChanged -=
+                        new EventHandler<ActivityCollectionChangeEventArgs>(OnActivityListChanged);
                 }
 
                 if (IsRootDesigner)
                 {
-                    IComponentChangeService componentChangeService = GetService(typeof(IComponentChangeService)) as IComponentChangeService;
+                    IComponentChangeService componentChangeService =
+                        GetService(typeof(IComponentChangeService)) as IComponentChangeService;
                     if (componentChangeService != null)
                     {
-                        componentChangeService.ComponentAdded -= new ComponentEventHandler(OnComponentAdded);
-                        componentChangeService.ComponentChanged -= new ComponentChangedEventHandler(OnComponentChanged);
+                        componentChangeService.ComponentAdded -= new ComponentEventHandler(
+                            OnComponentAdded
+                        );
+                        componentChangeService.ComponentChanged -= new ComponentChangedEventHandler(
+                            OnComponentChanged
+                        );
                     }
                 }
             }
@@ -1214,9 +1417,12 @@ namespace System.Workflow.ComponentModel.Design
             {
                 //In order to property update the menu items for expand collapse, rather than setting the property
                 //directly we go thru menu command service
-                IMenuCommandService menuCommandService = GetService(typeof(IMenuCommandService)) as IMenuCommandService;
+                IMenuCommandService menuCommandService =
+                    GetService(typeof(IMenuCommandService)) as IMenuCommandService;
                 if (menuCommandService != null)
-                    menuCommandService.GlobalInvoke((Expanded) ? WorkflowMenuCommands.Collapse : WorkflowMenuCommands.Expand);
+                    menuCommandService.GlobalInvoke(
+                        (Expanded) ? WorkflowMenuCommands.Collapse : WorkflowMenuCommands.Expand
+                    );
                 else
                     Expanded = !Expanded;
             }
@@ -1226,7 +1432,8 @@ namespace System.Workflow.ComponentModel.Design
         {
             base.OnPaint(e);
 
-            CompositeDesignerTheme compositeDesignerTheme = e.DesignerTheme as CompositeDesignerTheme;
+            CompositeDesignerTheme compositeDesignerTheme =
+                e.DesignerTheme as CompositeDesignerTheme;
             if (compositeDesignerTheme == null)
                 return;
 
@@ -1236,7 +1443,12 @@ namespace System.Workflow.ComponentModel.Design
                 Rectangle expandButtonRectangle = ExpandButtonRectangle;
                 if (!expandButtonRectangle.Size.IsEmpty)
                 {
-                    ActivityDesignerPaint.DrawExpandButton(e.Graphics, expandButtonRectangle, !Expanded, compositeDesignerTheme);
+                    ActivityDesignerPaint.DrawExpandButton(
+                        e.Graphics,
+                        expandButtonRectangle,
+                        !Expanded,
+                        compositeDesignerTheme
+                    );
                 }
             }
 
@@ -1287,14 +1499,21 @@ namespace System.Workflow.ComponentModel.Design
             }
 
             if (!String.IsNullOrEmpty(Text))
-                this.actualTextSize = ActivityDesignerPaint.MeasureString(e.Graphics, e.DesignerTheme.BoldFont, Text, StringAlignment.Center, Size.Empty);
+                this.actualTextSize = ActivityDesignerPaint.MeasureString(
+                    e.Graphics,
+                    e.DesignerTheme.BoldFont,
+                    Text,
+                    StringAlignment.Center,
+                    Size.Empty
+                );
             else
                 this.actualTextSize = Size.Empty;
 
             if (Expanded)
                 containerSize.Height = TitleHeight;
             else
-                containerSize.Height = TitleHeight + WorkflowTheme.CurrentTheme.AmbientTheme.Margin.Height;
+                containerSize.Height =
+                    TitleHeight + WorkflowTheme.CurrentTheme.AmbientTheme.Margin.Height;
 
             return containerSize;
         }
@@ -1326,7 +1545,8 @@ namespace System.Workflow.ComponentModel.Design
             {
                 foreach (Activity activity in compositeActivity.Activities)
                 {
-                    IWorkflowDesignerMessageSink containedDesigner = ActivityDesigner.GetDesigner(activity) as IWorkflowDesignerMessageSink;
+                    IWorkflowDesignerMessageSink containedDesigner =
+                        ActivityDesigner.GetDesigner(activity) as IWorkflowDesignerMessageSink;
                     if (containedDesigner != null)
                         containedDesigner.OnThemeChange();
                 }
@@ -1347,8 +1567,10 @@ namespace System.Workflow.ComponentModel.Design
             if (e == null)
                 throw new ArgumentNullException("e");
 
-            ISelectionService selectionService = GetService(typeof(ISelectionService)) as ISelectionService;
-            object selectedObject = (selectionService != null) ? selectionService.PrimarySelection : null;
+            ISelectionService selectionService =
+                GetService(typeof(ISelectionService)) as ISelectionService;
+            object selectedObject =
+                (selectionService != null) ? selectionService.PrimarySelection : null;
             if (selectedObject == null)
                 return;
 
@@ -1356,10 +1578,11 @@ namespace System.Workflow.ComponentModel.Design
             //the freeform designer will override that to allow moving of the designers vs moving selection
             object nextSelectedObject = null;
 
-            if (e.KeyCode == Keys.Down ||
-                (e.KeyCode == Keys.Tab && !e.Shift))
+            if (e.KeyCode == Keys.Down || (e.KeyCode == Keys.Tab && !e.Shift))
             {
-                CompositeActivityDesigner selectedDesigner = ActivityDesigner.GetDesigner(selectedObject as Activity) as CompositeActivityDesigner;
+                CompositeActivityDesigner selectedDesigner =
+                    ActivityDesigner.GetDesigner(selectedObject as Activity)
+                    as CompositeActivityDesigner;
                 if (selectedDesigner != null)
                     nextSelectedObject = selectedDesigner.FirstSelectableObject;
 
@@ -1368,7 +1591,8 @@ namespace System.Workflow.ComponentModel.Design
                     do
                     {
                         // get parent designer
-                        CompositeActivityDesigner parentDesigner = ActivityDesigner.GetParentDesigner(selectedObject);
+                        CompositeActivityDesigner parentDesigner =
+                            ActivityDesigner.GetParentDesigner(selectedObject);
                         if (parentDesigner == null)
                         {
                             // IMPORTANT: This will only happen when the focus is on the last connector in ServiceDesigner
@@ -1376,7 +1600,10 @@ namespace System.Workflow.ComponentModel.Design
                             break;
                         }
 
-                        nextSelectedObject = parentDesigner.GetNextSelectableObject(selectedObject, DesignerNavigationDirection.Down);
+                        nextSelectedObject = parentDesigner.GetNextSelectableObject(
+                            selectedObject,
+                            DesignerNavigationDirection.Down
+                        );
                         if (nextSelectedObject != null)
                             break;
 
@@ -1384,25 +1611,33 @@ namespace System.Workflow.ComponentModel.Design
                     } while (true);
                 }
             }
-            else if (e.KeyCode == Keys.Up ||
-                    (e.KeyCode == Keys.Tab && e.Shift))
+            else if (e.KeyCode == Keys.Up || (e.KeyCode == Keys.Tab && e.Shift))
             {
                 // get parent designer
-                CompositeActivityDesigner parentDesigner = ActivityDesigner.GetParentDesigner(selectedObject);
+                CompositeActivityDesigner parentDesigner = ActivityDesigner.GetParentDesigner(
+                    selectedObject
+                );
                 if (parentDesigner == null)
                 {
                     // IMPORTANT: This will only happen when the focus is on the ServiceDesigner it self
-                    CompositeActivityDesigner selectedDesigner = ActivityDesigner.GetDesigner(selectedObject as Activity) as CompositeActivityDesigner;
+                    CompositeActivityDesigner selectedDesigner =
+                        ActivityDesigner.GetDesigner(selectedObject as Activity)
+                        as CompositeActivityDesigner;
                     if (selectedDesigner != null)
                         nextSelectedObject = selectedDesigner.LastSelectableObject;
                 }
                 else
                 {
                     // ask for previous component
-                    nextSelectedObject = parentDesigner.GetNextSelectableObject(selectedObject, DesignerNavigationDirection.Up);
+                    nextSelectedObject = parentDesigner.GetNextSelectableObject(
+                        selectedObject,
+                        DesignerNavigationDirection.Up
+                    );
                     if (nextSelectedObject != null)
                     {
-                        CompositeActivityDesigner nextSelectedDesigner = ActivityDesigner.GetDesigner(nextSelectedObject as Activity) as CompositeActivityDesigner;
+                        CompositeActivityDesigner nextSelectedDesigner =
+                            ActivityDesigner.GetDesigner(nextSelectedObject as Activity)
+                            as CompositeActivityDesigner;
                         // when we go up, and then upper selection is parent designer then we look for last component
                         if (nextSelectedDesigner != null)
                         {
@@ -1421,11 +1656,16 @@ namespace System.Workflow.ComponentModel.Design
             {
                 do
                 {
-                    CompositeActivityDesigner parentDesigner = ActivityDesigner.GetParentDesigner(selectedObject);
+                    CompositeActivityDesigner parentDesigner = ActivityDesigner.GetParentDesigner(
+                        selectedObject
+                    );
                     if (parentDesigner == null)
                         break;
 
-                    nextSelectedObject = parentDesigner.GetNextSelectableObject(selectedObject, DesignerNavigationDirection.Left);
+                    nextSelectedObject = parentDesigner.GetNextSelectableObject(
+                        selectedObject,
+                        DesignerNavigationDirection.Left
+                    );
                     if (nextSelectedObject != null)
                         break;
 
@@ -1436,11 +1676,16 @@ namespace System.Workflow.ComponentModel.Design
             {
                 do
                 {
-                    CompositeActivityDesigner parentDesigner = ActivityDesigner.GetParentDesigner(selectedObject);
+                    CompositeActivityDesigner parentDesigner = ActivityDesigner.GetParentDesigner(
+                        selectedObject
+                    );
                     if (parentDesigner == null)
                         break;
 
-                    nextSelectedObject = parentDesigner.GetNextSelectableObject(selectedObject, DesignerNavigationDirection.Right);
+                    nextSelectedObject = parentDesigner.GetNextSelectableObject(
+                        selectedObject,
+                        DesignerNavigationDirection.Right
+                    );
                     if (nextSelectedObject != null)
                         break;
 
@@ -1451,7 +1696,10 @@ namespace System.Workflow.ComponentModel.Design
             // now select the component
             if (nextSelectedObject != null)
             {
-                selectionService.SetSelectedComponents(new object[] { nextSelectedObject }, SelectionTypes.Replace);
+                selectionService.SetSelectedComponents(
+                    new object[] { nextSelectedObject },
+                    SelectionTypes.Replace
+                );
 
                 // make the selected designer visible
                 ParentView.EnsureVisible(nextSelectedObject);
@@ -1466,7 +1714,10 @@ namespace System.Workflow.ComponentModel.Design
             {
                 using (PaintEventArgs paintEventArgs = new PaintEventArgs(e.Graphics, e.ViewPort))
                 {
-                    ((IWorkflowDesignerMessageSink)activityDesigner).OnPaint(paintEventArgs, e.ViewPort);
+                    ((IWorkflowDesignerMessageSink)activityDesigner).OnPaint(
+                        paintEventArgs,
+                        e.ViewPort
+                    );
                 }
             }
         }
@@ -1480,8 +1731,12 @@ namespace System.Workflow.ComponentModel.Design
 
         private void OnComponentChanged(object sender, ComponentChangedEventArgs e)
         {
-            IReferenceService referenceService = GetService(typeof(IReferenceService)) as IReferenceService;
-            Activity changedActivity = (referenceService != null) ? referenceService.GetComponent(e.Component) as Activity : e.Component as Activity;
+            IReferenceService referenceService =
+                GetService(typeof(IReferenceService)) as IReferenceService;
+            Activity changedActivity =
+                (referenceService != null)
+                    ? referenceService.GetComponent(e.Component) as Activity
+                    : e.Component as Activity;
             if (changedActivity != null)
             {
                 ActivityDesigner designer = ActivityDesigner.GetDesigner(changedActivity);
@@ -1489,7 +1744,14 @@ namespace System.Workflow.ComponentModel.Design
                 {
                     CompositeActivityDesigner parentDesigner = designer.ParentDesigner;
                     if (parentDesigner != null)
-                        parentDesigner.OnContainedActivityChanged(new ActivityChangedEventArgs(changedActivity, e.Member, e.OldValue, e.NewValue));
+                        parentDesigner.OnContainedActivityChanged(
+                            new ActivityChangedEventArgs(
+                                changedActivity,
+                                e.Member,
+                                e.OldValue,
+                                e.NewValue
+                            )
+                        );
                 }
             }
         }
@@ -1527,17 +1789,22 @@ namespace System.Workflow.ComponentModel.Design
             if (index < 0 || index >= compositeActivity.Activities.Count)
                 return;
 
-            IDesignerHost designerHost = compositeActivity.Site.GetService(typeof(IDesignerHost)) as IDesignerHost;
+            IDesignerHost designerHost =
+                compositeActivity.Site.GetService(typeof(IDesignerHost)) as IDesignerHost;
             if (designerHost == null)
                 return;
 
-            DesignerTransaction trans = designerHost.CreateTransaction(SR.GetString(SR.MovingActivities));
+            DesignerTransaction trans = designerHost.CreateTransaction(
+                SR.GetString(SR.MovingActivities)
+            );
             try
             {
                 compositeActivity.Activities.Remove(activity);
                 compositeActivity.Activities.Insert(index, activity);
 
-                ISelectionService selectionService = compositeActivity.Site.GetService(typeof(ISelectionService)) as ISelectionService;
+                ISelectionService selectionService =
+                    compositeActivity.Site.GetService(typeof(ISelectionService))
+                    as ISelectionService;
                 if (selectionService != null)
                     selectionService.SetSelectedComponents(new object[] { activity });
 
@@ -1551,12 +1818,12 @@ namespace System.Workflow.ComponentModel.Design
                 throw;
             }
 
-            CompositeActivityDesigner compositeDesigner = ActivityDesigner.GetDesigner(compositeActivity) as CompositeActivityDesigner;
+            CompositeActivityDesigner compositeDesigner =
+                ActivityDesigner.GetDesigner(compositeActivity) as CompositeActivityDesigner;
             if (compositeDesigner != null)
                 compositeDesigner.PerformLayout();
         }
         #endregion
     }
     #endregion
-
 }

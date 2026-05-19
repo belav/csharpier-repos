@@ -22,7 +22,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.InlayHint
 {
     [ExportCSharpVisualBasicStatelessLspService(typeof(InlayHintHandler)), Shared]
     [Method(Methods.TextDocumentInlayHintName)]
-    internal sealed class InlayHintHandler : ILspServiceDocumentRequestHandler<InlayHintParams, LSP.InlayHint[]?>
+    internal sealed class InlayHintHandler
+        : ILspServiceDocumentRequestHandler<InlayHintParams, LSP.InlayHint[]?>
     {
         private readonly IGlobalOptionService _optionsService;
 
@@ -37,10 +38,14 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.InlayHint
 
         public bool RequiresLSPSolution => true;
 
-        public TextDocumentIdentifier GetTextDocumentIdentifier(InlayHintParams request)
-            => request.TextDocument;
+        public TextDocumentIdentifier GetTextDocumentIdentifier(InlayHintParams request) =>
+            request.TextDocument;
 
-        public async Task<LSP.InlayHint[]?> HandleRequestAsync(InlayHintParams request, RequestContext context, CancellationToken cancellationToken)
+        public async Task<LSP.InlayHint[]?> HandleRequestAsync(
+            InlayHintParams request,
+            RequestContext context,
+            CancellationToken cancellationToken
+        )
         {
             var document = context.GetRequiredDocument();
             var text = await document.GetValueTextAsync(cancellationToken).ConfigureAwait(false);
@@ -48,31 +53,47 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.InlayHint
 
             var inlineHintService = document.GetRequiredLanguageService<IInlineHintsService>();
             var options = _optionsService.GetInlineHintsOptions(document.Project.Language);
-            var hints = await inlineHintService.GetInlineHintsAsync(document, textSpan, options, displayAllOverride: false, cancellationToken).ConfigureAwait(false);
+            var hints = await inlineHintService
+                .GetInlineHintsAsync(
+                    document,
+                    textSpan,
+                    options,
+                    displayAllOverride: false,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
 
             using var _ = ArrayBuilder<LSP.InlayHint>.GetInstance(hints.Length, out var inlayHints);
-            var syntaxVersion = await document.GetSyntaxVersionAsync(cancellationToken).ConfigureAwait(false);
+            var syntaxVersion = await document
+                .GetSyntaxVersionAsync(cancellationToken)
+                .ConfigureAwait(false);
             var inlayHintCache = context.GetRequiredLspService<InlayHintCache>();
 
             // Store the members in the resolve cache so that when we get a resolve request for a particular
             // member we can re-use the inline hint.
-            var resultId = inlayHintCache.UpdateCache(new InlayHintCache.InlayHintCacheEntry(hints, syntaxVersion));
+            var resultId = inlayHintCache.UpdateCache(
+                new InlayHintCache.InlayHintCacheEntry(hints, syntaxVersion)
+            );
 
             for (var i = 0; i < hints.Length; i++)
             {
                 var hint = hints[i];
                 var (label, leftPadding, rightPadding) = Trim(hint.DisplayParts);
                 var linePosition = text.Lines.GetLinePosition(hint.Span.Start);
-                var kind = hint.Ranking == InlineHintsConstants.ParameterRanking
-                    ? InlayHintKind.Parameter
-                    : InlayHintKind.Type;
+                var kind =
+                    hint.Ranking == InlineHintsConstants.ParameterRanking
+                        ? InlayHintKind.Parameter
+                        : InlayHintKind.Type;
 
                 // TextChange is calculated at the same time as the InlineHint,
                 // so it should not need to be resolved.
                 TextEdit[]? textEdits = null;
                 if (hint.ReplacementTextChange.HasValue)
                 {
-                    var textEdit = ProtocolConversions.TextChangeToTextEdit(hint.ReplacementTextChange.Value, text);
+                    var textEdit = ProtocolConversions.TextChangeToTextEdit(
+                        hint.ReplacementTextChange.Value,
+                        text
+                    );
                     textEdits = [textEdit];
                 }
 
@@ -85,7 +106,7 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.InlayHint
                     ToolTip = null,
                     PaddingLeft = leftPadding,
                     PaddingRight = rightPadding,
-                    Data = new InlayHintResolveData(resultId, i, request.TextDocument)
+                    Data = new InlayHintResolveData(resultId, i, request.TextDocument),
                 };
 
                 inlayHints.Add(inlayHint);
@@ -95,10 +116,12 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.InlayHint
         }
 
         /// <summary>
-        /// Goes through the tagged text of the hint and trims off leading and trailing spaces. 
+        /// Goes through the tagged text of the hint and trims off leading and trailing spaces.
         /// If there is leading or trailing space, then we want to add padding to the left and right accordingly.
         /// </summary>
-        private static (string label, bool leftPadding, bool rightPadding) Trim(ImmutableArray<TaggedText> taggedTexts)
+        private static (string label, bool leftPadding, bool rightPadding) Trim(
+            ImmutableArray<TaggedText> taggedTexts
+        )
         {
             using var _ = ArrayBuilder<TaggedText>.GetInstance(out var result);
             var leftPadding = false;
@@ -134,4 +157,3 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.InlayHint
         }
     }
 }
-

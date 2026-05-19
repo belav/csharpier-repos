@@ -143,7 +143,10 @@ namespace Microsoft.CodeAnalysis.Collections.Internal
         /// <returns>The bit mask to obtain the index within a page from an absolute index within a segmented array.</returns>
         private static int CalculateOffsetMask(int segmentSize)
         {
-            Debug.Assert(segmentSize == 1 || (segmentSize & (segmentSize - 1)) == 0, "Expected size of 1, or a power of 2");
+            Debug.Assert(
+                segmentSize == 1 || (segmentSize & (segmentSize - 1)) == 0,
+                "Expected size of 1, or a power of 2"
+            );
             return segmentSize - 1;
         }
 
@@ -162,7 +165,9 @@ namespace Microsoft.CodeAnalysis.Collections.Internal
             // Default Large Object Heap size threshold
             // https://github.com/dotnet/runtime/blob/c9d69e38d0e54bea5d188593ef6c3b30139f3ab1/src/coreclr/src/gc/gc.h#L111
             const uint Threshold = 85000;
-            return System.Numerics.BitOperations.Log2((uint)((Threshold / elementSize) - (2 * Unsafe.SizeOf<object>() + 8)));
+            return System.Numerics.BitOperations.Log2(
+                (uint)((Threshold / elementSize) - (2 * Unsafe.SizeOf<object>() + 8))
+            );
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -174,14 +179,14 @@ namespace Microsoft.CodeAnalysis.Collections.Internal
 
         internal static class TestAccessor
         {
-            public static int CalculateSegmentSize(int elementSize)
-                => SegmentedArrayHelper.CalculateSegmentSize(elementSize);
+            public static int CalculateSegmentSize(int elementSize) =>
+                SegmentedArrayHelper.CalculateSegmentSize(elementSize);
 
-            public static int CalculateSegmentShift(int segmentSize)
-                => SegmentedArrayHelper.CalculateSegmentShift(segmentSize);
+            public static int CalculateSegmentShift(int segmentSize) =>
+                SegmentedArrayHelper.CalculateSegmentShift(segmentSize);
 
-            public static int CalculateOffsetMask(int segmentSize)
-                => SegmentedArrayHelper.CalculateOffsetMask(segmentSize);
+            public static int CalculateOffsetMask(int segmentSize) =>
+                SegmentedArrayHelper.CalculateOffsetMask(segmentSize);
         }
 
 #if !NETCOREAPP3_0_OR_NEWER

@@ -8,10 +8,8 @@ namespace Mono.Linker.Tests.Cases.Expectations.Metadata;
 /// <summary>
 /// Deletes a file before the linker is ran
 /// </summary>
-[AttributeUsage (AttributeTargets.Class)]
+[AttributeUsage(AttributeTargets.Class)]
 public class DeleteBeforeAttribute : BaseMetadataAttribute
 {
-	public DeleteBeforeAttribute (string fileName)
-	{
-	}
+    public DeleteBeforeAttribute(string fileName) { }
 }

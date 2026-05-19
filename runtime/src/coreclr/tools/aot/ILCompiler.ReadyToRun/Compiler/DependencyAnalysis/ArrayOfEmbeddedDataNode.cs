@@ -22,11 +22,12 @@ namespace ILCompiler.DependencyAnalysis
         private List<TEmbedded> _nestedNodesList = new List<TEmbedded>();
         private IComparer<TEmbedded> _sorter;
 
-        public ArrayOfEmbeddedDataNode(string mangledName, IComparer<TEmbedded> nodeSorter) : base(mangledName)
+        public ArrayOfEmbeddedDataNode(string mangledName, IComparer<TEmbedded> nodeSorter)
+            : base(mangledName)
         {
             _sorter = nodeSorter;
         }
-        
+
         public void AddEmbeddedObject(TEmbedded symbol)
         {
             lock (_nestedNodes)
@@ -38,18 +39,25 @@ namespace ILCompiler.DependencyAnalysis
             }
         }
 
-        protected override string GetName(NodeFactory factory) => $"Region {this.GetMangledName(factory.NameMangler)}";
+        protected override string GetName(NodeFactory factory) =>
+            $"Region {this.GetMangledName(factory.NameMangler)}";
 
-        public override ObjectNodeSection GetSection(NodeFactory factory) => ObjectNodeSection.DataSection;
+        public override ObjectNodeSection GetSection(NodeFactory factory) =>
+            ObjectNodeSection.DataSection;
+
         public override bool IsShareable => false;
 
         public override bool StaticDependenciesAreComputed => true;
 
-        protected IEnumerable<TEmbedded> NodesList =>  _nestedNodesList;
+        protected IEnumerable<TEmbedded> NodesList => _nestedNodesList;
         private TEmbedded _nextElementToEncode;
         public TEmbedded NextElementToEncode => _nextElementToEncode;
 
-        protected virtual void GetElementDataForNodes(ref ObjectDataBuilder builder, NodeFactory factory, bool relocsOnly)
+        protected virtual void GetElementDataForNodes(
+            ref ObjectDataBuilder builder,
+            NodeFactory factory,
+            bool relocsOnly
+        )
         {
             int index = 0;
             _nextElementToEncode = null;

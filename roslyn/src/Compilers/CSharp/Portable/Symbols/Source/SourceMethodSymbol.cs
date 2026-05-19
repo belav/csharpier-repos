@@ -20,7 +20,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// If there are no constraints, returns an empty immutable array. Otherwise, returns an immutable
         /// array of types, indexed by the constrained type parameter in <see cref="MethodSymbol.TypeParameters"/>.
         /// </summary>
-        public abstract ImmutableArray<ImmutableArray<TypeWithAnnotations>> GetTypeParameterConstraintTypes();
+        public abstract ImmutableArray<
+            ImmutableArray<TypeWithAnnotations>
+        > GetTypeParameterConstraintTypes();
 
         /// <summary>
         /// If there are no constraints, returns an empty immutable array. Otherwise, returns an immutable
@@ -28,12 +30,19 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// </summary>
         public abstract ImmutableArray<TypeParameterConstraintKind> GetTypeParameterConstraintKinds();
 
-        protected static void ReportBadRefToken(TypeSyntax returnTypeSyntax, BindingDiagnosticBag diagnostics)
+        protected static void ReportBadRefToken(
+            TypeSyntax returnTypeSyntax,
+            BindingDiagnosticBag diagnostics
+        )
         {
             if (!returnTypeSyntax.HasErrors)
             {
                 var refKeyword = returnTypeSyntax.GetFirstToken();
-                diagnostics.Add(ErrorCode.ERR_UnexpectedToken, refKeyword.GetLocation(), refKeyword.ToString());
+                diagnostics.Add(
+                    ErrorCode.ERR_UnexpectedToken,
+                    refKeyword.GetLocation(),
+                    refKeyword.ToString()
+                );
             }
         }
 
@@ -58,35 +67,53 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             }
         }
 
-        internal void ReportAsyncParameterErrors(BindingDiagnosticBag diagnostics, Location location)
+        internal void ReportAsyncParameterErrors(
+            BindingDiagnosticBag diagnostics,
+            Location location
+        )
         {
             foreach (var parameter in Parameters)
             {
                 if (parameter.RefKind != RefKind.None)
                 {
-                    diagnostics.Add(ErrorCode.ERR_BadAsyncArgType, getLocation(parameter, location));
+                    diagnostics.Add(
+                        ErrorCode.ERR_BadAsyncArgType,
+                        getLocation(parameter, location)
+                    );
                 }
                 else if (parameter.Type.IsPointerOrFunctionPointer())
                 {
-                    diagnostics.Add(ErrorCode.ERR_UnsafeAsyncArgType, getLocation(parameter, location));
+                    diagnostics.Add(
+                        ErrorCode.ERR_UnsafeAsyncArgType,
+                        getLocation(parameter, location)
+                    );
                 }
                 else if (parameter.Type.IsRestrictedType())
                 {
-                    diagnostics.Add(ErrorCode.ERR_BadSpecialByRefLocal, getLocation(parameter, location), parameter.Type);
+                    diagnostics.Add(
+                        ErrorCode.ERR_BadSpecialByRefLocal,
+                        getLocation(parameter, location),
+                        parameter.Type
+                    );
                 }
             }
 
-            static Location getLocation(ParameterSymbol parameter, Location location)
-                => parameter.TryGetFirstLocation() ?? location;
+            static Location getLocation(ParameterSymbol parameter, Location location) =>
+                parameter.TryGetFirstLocation() ?? location;
         }
 
-        protected override bool HasSetsRequiredMembersImpl => throw ExceptionUtilities.Unreachable();
+        protected override bool HasSetsRequiredMembersImpl =>
+            throw ExceptionUtilities.Unreachable();
 
-        internal sealed override bool UseUpdatedEscapeRules => ContainingModule.UseUpdatedEscapeRules;
+        internal sealed override bool UseUpdatedEscapeRules =>
+            ContainingModule.UseUpdatedEscapeRules;
 
         internal override bool HasAsyncMethodBuilderAttribute(out TypeSymbol? builderArgument)
         {
-            return SourceMemberContainerTypeSymbol.HasAsyncMethodBuilderAttribute(this, out builderArgument);
+            return SourceMemberContainerTypeSymbol.HasAsyncMethodBuilderAttribute(
+                this,
+                out builderArgument
+            );
         }
     }
 }

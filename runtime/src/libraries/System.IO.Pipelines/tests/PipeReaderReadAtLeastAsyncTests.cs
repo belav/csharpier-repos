@@ -12,7 +12,10 @@ namespace System.IO.Pipelines.Tests
 {
     public class ReadAtLeastAsyncTests
     {
-        private static readonly PipeOptions s_testOptions = new PipeOptions(readerScheduler: PipeScheduler.Inline, useSynchronizationContext: false);
+        private static readonly PipeOptions s_testOptions = new PipeOptions(
+            readerScheduler: PipeScheduler.Inline,
+            useSynchronizationContext: false
+        );
 
         protected Pipe Pipe { get; set; }
         protected virtual PipeReader PipeReader => Pipe.Reader;
@@ -22,9 +25,17 @@ namespace System.IO.Pipelines.Tests
             Pipe = new Pipe(s_testOptions);
         }
 
-        protected virtual void SetPipeReaderOptions(MemoryPool<byte>? pool = null, int bufferSize = -1)
+        protected virtual void SetPipeReaderOptions(
+            MemoryPool<byte>? pool = null,
+            int bufferSize = -1
+        )
         {
-            PipeOptions options = new PipeOptions(pool, readerScheduler: PipeScheduler.Inline, useSynchronizationContext: false , minimumSegmentSize: bufferSize);
+            PipeOptions options = new PipeOptions(
+                pool,
+                readerScheduler: PipeScheduler.Inline,
+                useSynchronizationContext: false,
+                minimumSegmentSize: bufferSize
+            );
             Pipe = new Pipe(options);
         }
 
@@ -129,7 +140,8 @@ namespace System.IO.Pipelines.Tests
 
             var isSingleSegment = bufferSize == -1;
             // Optimization in StreamPipeReader.ReadAtLeastAsync()
-            if (PipeReader is StreamPipeReader) isSingleSegment |= !bufferedRead; 
+            if (PipeReader is StreamPipeReader)
+                isSingleSegment |= !bufferedRead;
             Assert.Equal(isSingleSegment, buffer.IsSingleSegment);
 
             Assert.Equal("Hello Pipelines World", Encoding.ASCII.GetString(buffer.ToArray()));
@@ -143,7 +155,9 @@ namespace System.IO.Pipelines.Tests
         {
             CancellationToken token = new CancellationToken(canceled: true);
             ValueTask<ReadResult> task = PipeReader.ReadAtLeastAsync(0, token);
-            TaskCanceledException tce = await Assert.ThrowsAsync<TaskCanceledException>(async () => await task);
+            TaskCanceledException tce = await Assert.ThrowsAsync<TaskCanceledException>(async () =>
+                await task
+            );
             Assert.Equal(token, tce.CancellationToken);
             Assert.Null(tce.InnerException);
         }

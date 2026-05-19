@@ -7,18 +7,19 @@ namespace System.ServiceModel.Security
     using System.Runtime;
     using System.ServiceModel.Channels;
 
-    abstract class SecurityChannel<TChannel> :
-        LayeredChannel<TChannel>
+    abstract class SecurityChannel<TChannel> : LayeredChannel<TChannel>
         where TChannel : class, IChannel
     {
         SecurityProtocol securityProtocol;
 
         protected SecurityChannel(ChannelManagerBase channelManager, TChannel innerChannel)
-            : this(channelManager, innerChannel, null)
-        {
-        }
+            : this(channelManager, innerChannel, null) { }
 
-        protected SecurityChannel(ChannelManagerBase channelManager, TChannel innerChannel, SecurityProtocol securityProtocol)
+        protected SecurityChannel(
+            ChannelManagerBase channelManager,
+            TChannel innerChannel,
+            SecurityProtocol securityProtocol
+        )
             : base(channelManager, innerChannel)
         {
             this.securityProtocol = securityProtocol;
@@ -36,15 +37,14 @@ namespace System.ServiceModel.Security
 
         public SecurityProtocol SecurityProtocol
         {
-            get
-            {
-                return this.securityProtocol;
-            }
+            get { return this.securityProtocol; }
             protected set
             {
                 if (value == null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentNullException("value"));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentNullException("value")
+                    );
                 }
                 this.securityProtocol = value;
             }
@@ -60,10 +60,21 @@ namespace System.ServiceModel.Security
             base.OnAbort();
         }
 
-        protected override IAsyncResult OnBeginClose(TimeSpan timeout, AsyncCallback callback, object state)
+        protected override IAsyncResult OnBeginClose(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
-            return new ChainedAsyncResult(timeout, callback, state, this.BeginCloseSecurityProtocol, this.EndCloseSecurityProtocol,
-                base.OnBeginClose, base.OnEndClose);
+            return new ChainedAsyncResult(
+                timeout,
+                callback,
+                state,
+                this.BeginCloseSecurityProtocol,
+                this.EndCloseSecurityProtocol,
+                base.OnBeginClose,
+                base.OnEndClose
+            );
         }
 
         protected override void OnEndClose(IAsyncResult result)
@@ -71,7 +82,11 @@ namespace System.ServiceModel.Security
             ChainedAsyncResult.End(result);
         }
 
-        IAsyncResult BeginCloseSecurityProtocol(TimeSpan timeout, AsyncCallback callback, object state)
+        IAsyncResult BeginCloseSecurityProtocol(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             if (this.securityProtocol != null)
             {
@@ -95,7 +110,6 @@ namespace System.ServiceModel.Security
             }
         }
 
-
         protected override void OnClose(TimeSpan timeout)
         {
             TimeoutHelper timeoutHelper = new TimeoutHelper(timeout);
@@ -118,26 +132,37 @@ namespace System.ServiceModel.Security
         class NullSecurityProtocolCloseAsyncResult : CompletedAsyncResult
         {
             public NullSecurityProtocolCloseAsyncResult(AsyncCallback callback, object state)
-                : base(callback, state)
-            {
-            }
+                : base(callback, state) { }
 
-            new public static void End(IAsyncResult result)
+            public static new void End(IAsyncResult result)
             {
                 AsyncResult.End<NullSecurityProtocolCloseAsyncResult>(result);
             }
         }
 
-        protected sealed class OutputChannelSendAsyncResult : ApplySecurityAndSendAsyncResult<IOutputChannel>
+        protected sealed class OutputChannelSendAsyncResult
+            : ApplySecurityAndSendAsyncResult<IOutputChannel>
         {
-            public OutputChannelSendAsyncResult(Message message, SecurityProtocol binding, IOutputChannel channel, TimeSpan timeout,
-                AsyncCallback callback, object state)
+            public OutputChannelSendAsyncResult(
+                Message message,
+                SecurityProtocol binding,
+                IOutputChannel channel,
+                TimeSpan timeout,
+                AsyncCallback callback,
+                object state
+            )
                 : base(binding, channel, timeout, callback, state)
             {
                 this.Begin(message, null);
             }
 
-            protected override IAsyncResult BeginSendCore(IOutputChannel channel, Message message, TimeSpan timeout, AsyncCallback callback, object state)
+            protected override IAsyncResult BeginSendCore(
+                IOutputChannel channel,
+                Message message,
+                TimeSpan timeout,
+                AsyncCallback callback,
+                object state
+            )
             {
                 return channel.BeginSend(message, timeout, callback, state);
             }
@@ -153,9 +178,7 @@ namespace System.ServiceModel.Security
                 channel.EndSend(result);
             }
 
-            protected override void OnSendCompleteCore(TimeSpan timeout)
-            {
-            }
+            protected override void OnSendCompleteCore(TimeSpan timeout) { }
         }
     }
 }

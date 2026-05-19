@@ -8,14 +8,21 @@ namespace System.Configuration.Internal
 {
     internal sealed class InternalConfigHost : IInternalConfigHost
     {
-        private const FileAttributes InvalidAttributesForWrite = FileAttributes.ReadOnly | FileAttributes.Hidden;
+        private const FileAttributes InvalidAttributesForWrite =
+            FileAttributes.ReadOnly | FileAttributes.Hidden;
 
-        void IInternalConfigHost.Init(IInternalConfigRoot configRoot, params object[] hostInitParams)
-        { }
+        void IInternalConfigHost.Init(
+            IInternalConfigRoot configRoot,
+            params object[] hostInitParams
+        ) { }
 
-        void IInternalConfigHost.InitForConfiguration(ref string locationSubPath, out string configPath,
+        void IInternalConfigHost.InitForConfiguration(
+            ref string locationSubPath,
+            out string configPath,
             out string locationConfigPath,
-            IInternalConfigRoot configRoot, params object[] hostInitConfigurationParams)
+            IInternalConfigRoot configRoot,
+            params object[] hostInitConfigurationParams
+        )
         {
             configPath = null;
             locationConfigPath = null;
@@ -44,7 +51,10 @@ namespace System.Configuration.Internal
             throw ExceptionUtil.UnexpectedError("IInternalConfigHost.GetStreamName");
         }
 
-        string IInternalConfigHost.GetStreamNameForConfigSource(string streamName, string configSource)
+        string IInternalConfigHost.GetStreamNameForConfigSource(
+            string streamName,
+            string configSource
+        )
         {
             return StaticGetStreamNameForConfigSource(streamName, configSource);
         }
@@ -64,25 +74,40 @@ namespace System.Configuration.Internal
             return StaticOpenStreamForRead(streamName);
         }
 
-        Stream IInternalConfigHost.OpenStreamForWrite(string streamName, string templateStreamName,
-            ref object writeContext)
+        Stream IInternalConfigHost.OpenStreamForWrite(
+            string streamName,
+            string templateStreamName,
+            ref object writeContext
+        )
         {
             return StaticOpenStreamForWrite(streamName, templateStreamName, ref writeContext);
         }
 
-        Stream IInternalConfigHost.OpenStreamForWrite(string streamName, string templateStreamName,
-            ref object writeContext, bool assertPermissions)
+        Stream IInternalConfigHost.OpenStreamForWrite(
+            string streamName,
+            string templateStreamName,
+            ref object writeContext,
+            bool assertPermissions
+        )
         {
             return StaticOpenStreamForWrite(streamName, templateStreamName, ref writeContext);
         }
 
-        void IInternalConfigHost.WriteCompleted(string streamName, bool success, object writeContext)
+        void IInternalConfigHost.WriteCompleted(
+            string streamName,
+            bool success,
+            object writeContext
+        )
         {
             StaticWriteCompleted(streamName, success, writeContext);
         }
 
-        void IInternalConfigHost.WriteCompleted(string streamName, bool success, object writeContext,
-            bool assertPermissions)
+        void IInternalConfigHost.WriteCompleted(
+            string streamName,
+            bool success,
+            object writeContext,
+            bool assertPermissions
+        )
         {
             StaticWriteCompleted(streamName, success, writeContext);
         }
@@ -99,29 +124,45 @@ namespace System.Configuration.Internal
 
         bool IInternalConfigHost.SupportsChangeNotifications => false;
 
-        object IInternalConfigHost.StartMonitoringStreamForChanges(string streamName, StreamChangeCallback callback)
+        object IInternalConfigHost.StartMonitoringStreamForChanges(
+            string streamName,
+            StreamChangeCallback callback
+        )
         {
-            throw ExceptionUtil.UnexpectedError("IInternalConfigHost.StartMonitoringStreamForChanges");
+            throw ExceptionUtil.UnexpectedError(
+                "IInternalConfigHost.StartMonitoringStreamForChanges"
+            );
         }
 
-        void IInternalConfigHost.StopMonitoringStreamForChanges(string streamName, StreamChangeCallback callback)
+        void IInternalConfigHost.StopMonitoringStreamForChanges(
+            string streamName,
+            StreamChangeCallback callback
+        )
         {
-            throw ExceptionUtil.UnexpectedError("IInternalConfigHost.StopMonitoringStreamForChanges");
+            throw ExceptionUtil.UnexpectedError(
+                "IInternalConfigHost.StopMonitoringStreamForChanges"
+            );
         }
 
         bool IInternalConfigHost.SupportsRefresh => false;
 
         bool IInternalConfigHost.SupportsPath => false;
 
-        bool IInternalConfigHost.IsDefinitionAllowed(string configPath, ConfigurationAllowDefinition allowDefinition,
-            ConfigurationAllowExeDefinition allowExeDefinition)
+        bool IInternalConfigHost.IsDefinitionAllowed(
+            string configPath,
+            ConfigurationAllowDefinition allowDefinition,
+            ConfigurationAllowExeDefinition allowExeDefinition
+        )
         {
             return true;
         }
 
-        void IInternalConfigHost.VerifyDefinitionAllowed(string configPath, ConfigurationAllowDefinition allowDefinition,
-            ConfigurationAllowExeDefinition allowExeDefinition, IConfigErrorInfo errorInfo)
-        { }
+        void IInternalConfigHost.VerifyDefinitionAllowed(
+            string configPath,
+            ConfigurationAllowDefinition allowDefinition,
+            ConfigurationAllowExeDefinition allowExeDefinition,
+            IConfigErrorInfo errorInfo
+        ) { }
 
         bool IInternalConfigHost.SupportsLocation => false;
 
@@ -130,9 +171,14 @@ namespace System.Configuration.Internal
             throw ExceptionUtil.UnexpectedError("IInternalConfigHost.IsAboveApplication");
         }
 
-        string IInternalConfigHost.GetConfigPathFromLocationSubPath(string configPath, string locationSubPath)
+        string IInternalConfigHost.GetConfigPathFromLocationSubPath(
+            string configPath,
+            string locationSubPath
+        )
         {
-            throw ExceptionUtil.UnexpectedError("IInternalConfigHost.GetConfigPathFromLocationSubPath");
+            throw ExceptionUtil.UnexpectedError(
+                "IInternalConfigHost.GetConfigPathFromLocationSubPath"
+            );
         }
 
         bool IInternalConfigHost.IsLocationApplicable(string configPath)
@@ -152,22 +198,33 @@ namespace System.Configuration.Internal
 
         object IInternalConfigHost.CreateDeprecatedConfigContext(string configPath)
         {
-            throw ExceptionUtil.UnexpectedError("IInternalConfigHost.CreateDeprecatedConfigContext");
+            throw ExceptionUtil.UnexpectedError(
+                "IInternalConfigHost.CreateDeprecatedConfigContext"
+            );
         }
 
-        object IInternalConfigHost.CreateConfigurationContext(string configPath, string locationSubPath)
+        object IInternalConfigHost.CreateConfigurationContext(
+            string configPath,
+            string locationSubPath
+        )
         {
             throw ExceptionUtil.UnexpectedError("IInternalConfigHost.CreateConfigurationContext");
         }
 
-        string IInternalConfigHost.DecryptSection(string encryptedXml, ProtectedConfigurationProvider protectionProvider,
-            ProtectedConfigurationSection protectedConfigSection)
+        string IInternalConfigHost.DecryptSection(
+            string encryptedXml,
+            ProtectedConfigurationProvider protectionProvider,
+            ProtectedConfigurationSection protectedConfigSection
+        )
         {
             return ProtectedConfigurationSection.DecryptSection(encryptedXml, protectionProvider);
         }
 
-        string IInternalConfigHost.EncryptSection(string clearTextXml, ProtectedConfigurationProvider protectionProvider,
-            ProtectedConfigurationSection protectedConfigSection)
+        string IInternalConfigHost.EncryptSection(
+            string clearTextXml,
+            ProtectedConfigurationProvider protectionProvider,
+            ProtectedConfigurationSection protectedConfigSection
+        )
         {
             return ProtectedConfigurationSection.EncryptSection(clearTextXml, protectionProvider);
         }
@@ -184,14 +241,18 @@ namespace System.Configuration.Internal
 
         bool IInternalConfigHost.IsRemote => false;
 
-        internal static string StaticGetStreamNameForConfigSource(string streamName, string configSource)
+        internal static string StaticGetStreamNameForConfigSource(
+            string streamName,
+            string configSource
+        )
         {
             // RemoteWebConfigurationHost also redirects GetStreamNameForConfigSource to this
             // method, and that means streamName is referring to a path that's on the remote
             // machine.
 
             // don't allow relative paths for stream name
-            if (!Path.IsPathRooted(streamName)) throw ExceptionUtil.ParameterInvalid(nameof(streamName));
+            if (!Path.IsPathRooted(streamName))
+                throw ExceptionUtil.ParameterInvalid(nameof(streamName));
 
             // get the path part of the original stream
             streamName = Path.GetFullPath(streamName);
@@ -204,7 +265,9 @@ namespace System.Configuration.Internal
             // ensure the result is in or under the directory of the original source
             string dirResult = UrlPath.GetDirectoryOrRootName(result);
             if (!UrlPath.IsEqualOrSubdirectory(dirStream, dirResult))
-                throw new ArgumentException(SR.Format(SR.Config_source_not_under_config_dir, configSource));
+                throw new ArgumentException(
+                    SR.Format(SR.Config_source_not_under_config_dir, configSource)
+                );
 
             return result;
         }
@@ -231,7 +294,11 @@ namespace System.Configuration.Internal
 
         // This method doesn't really open the streamName for write.  Instead, using WriteFileContext
         // it opens a stream on a temporary file created in the same directory as streamName.
-        internal static Stream StaticOpenStreamForWrite(string streamName, string templateStreamName, ref object writeContext)
+        internal static Stream StaticOpenStreamForWrite(
+            string streamName,
+            string templateStreamName,
+            ref object writeContext
+        )
         {
             if (string.IsNullOrEmpty(streamName))
                 throw new ConfigurationErrorsException(SR.Config_no_stream_to_write);
@@ -256,20 +323,30 @@ namespace System.Configuration.Internal
                     FileAttributes attrs = fi.Attributes;
                     if ((attrs & InvalidAttributesForWrite) != 0)
                     {
-                        throw new IOException(SR.Format(SR.Config_invalid_attributes_for_write, streamName));
+                        throw new IOException(
+                            SR.Format(SR.Config_invalid_attributes_for_write, streamName)
+                        );
                     }
                 }
 
                 try
                 {
-                    stream = new FileStream(writeFileContext.TempNewFilename, FileMode.Create, FileAccess.Write, FileShare.Read);
+                    stream = new FileStream(
+                        writeFileContext.TempNewFilename,
+                        FileMode.Create,
+                        FileAccess.Write,
+                        FileShare.Read
+                    );
                 }
                 catch (Exception e)
                 {
                     // Wrap all exceptions so that we provide a meaningful filename - otherwise the end user
                     // will just see the temporary file name, which is meaningless.
 
-                    throw new ConfigurationErrorsException(SR.Format(SR.Config_write_failed, streamName), e);
+                    throw new ConfigurationErrorsException(
+                        SR.Format(SR.Config_write_failed, streamName),
+                        e
+                    );
                 }
             }
             catch
@@ -280,10 +357,13 @@ namespace System.Configuration.Internal
 
             writeContext = writeFileContext;
             return stream;
-
         }
 
-        internal static void StaticWriteCompleted(string streamName, bool success, object writeContext)
+        internal static void StaticWriteCompleted(
+            string streamName,
+            bool success,
+            object writeContext
+        )
         {
             ((WriteFileContext)writeContext).Complete(streamName, success);
         }
@@ -300,12 +380,21 @@ namespace System.Configuration.Internal
 
         public bool IsTrustedConfigPath(string configPath) => true;
 
-        public bool IsFullTrustSectionWithoutAptcaAllowed(IInternalConfigRecord configRecord) => true;
+        public bool IsFullTrustSectionWithoutAptcaAllowed(IInternalConfigRecord configRecord) =>
+            true;
 
         public IDisposable Impersonate() => new DummyDisposable();
 
-        [System.ObsoleteAttribute("Code Access Security is not supported or honored by the runtime.", DiagnosticId = "SYSLIB0003", UrlFormat = "https://aka.ms/dotnet-warnings/{0}")]
-        public void GetRestrictedPermissions(IInternalConfigRecord configRecord, out PermissionSet permissionSet, out bool isHostReady)
+        [System.ObsoleteAttribute(
+            "Code Access Security is not supported or honored by the runtime.",
+            DiagnosticId = "SYSLIB0003",
+            UrlFormat = "https://aka.ms/dotnet-warnings/{0}"
+        )]
+        public void GetRestrictedPermissions(
+            IInternalConfigRecord configRecord,
+            out PermissionSet permissionSet,
+            out bool isHostReady
+        )
         {
             permissionSet = new PermissionSet(null);
             isHostReady = true;

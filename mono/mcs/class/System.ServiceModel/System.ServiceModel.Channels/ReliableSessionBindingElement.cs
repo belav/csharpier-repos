@@ -12,10 +12,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -30,80 +30,94 @@ using System.ServiceModel.Description;
 
 namespace System.ServiceModel.Channels
 {
-	public sealed class ReliableSessionBindingElement : BindingElement
+    public sealed class ReliableSessionBindingElement : BindingElement
 #if !MOBILE
-		, IPolicyExportExtension
+            , IPolicyExportExtension
 #endif
-	{
-		public ReliableSessionBindingElement ()
-		{
-			// FIXME: apply configuration
-		}
+    {
+        public ReliableSessionBindingElement()
+        {
+            // FIXME: apply configuration
+        }
 
-		public ReliableSessionBindingElement (bool ordered)
-			: this ()
-		{
-			Ordered = ordered;
-		}
+        public ReliableSessionBindingElement(bool ordered)
+            : this()
+        {
+            Ordered = ordered;
+        }
 
-		[MonoTODO]
-		public TimeSpan AcknowledgementInterval { get; set; }
-		[MonoTODO]
-		public bool FlowControlEnabled { get; set; }
-		[MonoTODO]
-		public TimeSpan InactivityTimeout { get; set; }
-		[MonoTODO]
-		public int MaxPendingChannels { get; set; }
-		[MonoTODO]
-		public int MaxRetryCount { get; set; }
-		[MonoTODO]
-		public int MaxTransferWindowSize { get; set; }
-		[MonoTODO]
-		public bool Ordered { get; set; }
-		[MonoTODO]
-		public ReliableMessagingVersion ReliableMessagingVersion { get; set; }
+        [MonoTODO]
+        public TimeSpan AcknowledgementInterval { get; set; }
 
-		[MonoTODO]
-		public override IChannelFactory<TChannel> BuildChannelFactory<TChannel> (BindingContext context)
-		{
-			throw new NotImplementedException ();
-		}
-		
+        [MonoTODO]
+        public bool FlowControlEnabled { get; set; }
+
+        [MonoTODO]
+        public TimeSpan InactivityTimeout { get; set; }
+
+        [MonoTODO]
+        public int MaxPendingChannels { get; set; }
+
+        [MonoTODO]
+        public int MaxRetryCount { get; set; }
+
+        [MonoTODO]
+        public int MaxTransferWindowSize { get; set; }
+
+        [MonoTODO]
+        public bool Ordered { get; set; }
+
+        [MonoTODO]
+        public ReliableMessagingVersion ReliableMessagingVersion { get; set; }
+
+        [MonoTODO]
+        public override IChannelFactory<TChannel> BuildChannelFactory<TChannel>(
+            BindingContext context
+        )
+        {
+            throw new NotImplementedException();
+        }
+
 #if !MOBILE
-		[MonoTODO]
-		public override IChannelListener<TChannel> BuildChannelListener<TChannel> (BindingContext context)
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoTODO]
+        public override IChannelListener<TChannel> BuildChannelListener<TChannel>(
+            BindingContext context
+        )
+        {
+            throw new NotImplementedException();
+        }
 
-		[MonoTODO]
-		public override bool CanBuildChannelListener<TChannel> (BindingContext context)
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoTODO]
+        public override bool CanBuildChannelListener<TChannel>(BindingContext context)
+        {
+            throw new NotImplementedException();
+        }
 #endif
 
-		[MonoTODO]
-		public override bool CanBuildChannelFactory<TChannel> (BindingContext context)
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoTODO]
+        public override bool CanBuildChannelFactory<TChannel>(BindingContext context)
+        {
+            throw new NotImplementedException();
+        }
 
-		public override BindingElement Clone ()
-		{
-			return (ReliableSessionBindingElement) MemberwiseClone ();
-		}
+        public override BindingElement Clone()
+        {
+            return (ReliableSessionBindingElement)MemberwiseClone();
+        }
 
-		public override T GetProperty<T> (BindingContext context)
-		{
-			throw new NotImplementedException ();
-		}
-		
+        public override T GetProperty<T>(BindingContext context)
+        {
+            throw new NotImplementedException();
+        }
+
 #if !MOBILE && !XAMMAC_4_5
-		void IPolicyExportExtension.ExportPolicy (MetadataExporter exporter, PolicyConversionContext context)
-		{
-			throw new NotImplementedException ();
-		}
+        void IPolicyExportExtension.ExportPolicy(
+            MetadataExporter exporter,
+            PolicyConversionContext context
+        )
+        {
+            throw new NotImplementedException();
+        }
 #endif
-	}
+    }
 }

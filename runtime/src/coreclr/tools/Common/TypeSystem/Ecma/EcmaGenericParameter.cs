@@ -22,34 +22,22 @@ namespace Internal.TypeSystem.Ecma
 
         public GenericParameterHandle Handle
         {
-            get
-            {
-                return _handle;
-            }
+            get { return _handle; }
         }
 
         public MetadataReader MetadataReader
         {
-            get
-            {
-                return _module.MetadataReader;
-            }
+            get { return _module.MetadataReader; }
         }
 
         public EcmaModule Module
         {
-            get
-            {
-                return _module;
-            }
+            get { return _module; }
         }
 
         public override TypeSystemContext Context
         {
-            get
-            {
-                return _module.Context;
-            }
+            get { return _module.Context; }
         }
 
         public override string Name
@@ -101,9 +89,14 @@ namespace Internal.TypeSystem.Ecma
         {
             get
             {
-                Debug.Assert((int)GenericVariance.Contravariant == (int)GenericParameterAttributes.Contravariant);
+                Debug.Assert(
+                    (int)GenericVariance.Contravariant
+                        == (int)GenericParameterAttributes.Contravariant
+                );
                 GenericParameter parameter = _module.MetadataReader.GetGenericParameter(_handle);
-                return (GenericVariance)(parameter.Attributes & GenericParameterAttributes.VarianceMask);
+                return (GenericVariance)(
+                    parameter.Attributes & GenericParameterAttributes.VarianceMask
+                );
             }
         }
 
@@ -111,9 +104,14 @@ namespace Internal.TypeSystem.Ecma
         {
             get
             {
-                Debug.Assert((int)GenericConstraints.DefaultConstructorConstraint == (int)GenericParameterAttributes.DefaultConstructorConstraint);
+                Debug.Assert(
+                    (int)GenericConstraints.DefaultConstructorConstraint
+                        == (int)GenericParameterAttributes.DefaultConstructorConstraint
+                );
                 GenericParameter parameter = _module.MetadataReader.GetGenericParameter(_handle);
-                const GenericParameterAttributes mask = GenericParameterAttributes.SpecialConstraintMask | (GenericParameterAttributes)GenericConstraints.AcceptByRefLike;
+                const GenericParameterAttributes mask =
+                    GenericParameterAttributes.SpecialConstraintMask
+                    | (GenericParameterAttributes)GenericConstraints.AcceptByRefLike;
                 return (GenericConstraints)(parameter.Attributes & mask);
             }
         }
@@ -125,7 +123,8 @@ namespace Internal.TypeSystem.Ecma
                 MetadataReader reader = _module.MetadataReader;
 
                 GenericParameter parameter = reader.GetGenericParameter(_handle);
-                GenericParameterConstraintHandleCollection constraintHandles = parameter.GetConstraints();
+                GenericParameterConstraintHandleCollection constraintHandles =
+                    parameter.GetConstraints();
 
                 if (constraintHandles.Count == 0)
                     return EmptyTypes;
@@ -134,9 +133,12 @@ namespace Internal.TypeSystem.Ecma
 
                 for (int i = 0; i < constraintTypes.Length; i++)
                 {
-                    GenericParameterConstraint constraint = reader.GetGenericParameterConstraint(constraintHandles[i]);
+                    GenericParameterConstraint constraint = reader.GetGenericParameterConstraint(
+                        constraintHandles[i]
+                    );
                     constraintTypes[i] = _module.GetType(constraint.Type);
-                };
+                }
+                ;
 
                 return constraintTypes;
             }

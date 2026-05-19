@@ -11,7 +11,9 @@ namespace System
     /// The exception that is thrown when an attempt to load a class fails due to the absence of an entry method.
     /// </summary>
     [Serializable]
-    [TypeForwardedFrom("mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")]
+    [TypeForwardedFrom(
+        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+    )]
     public class EntryPointNotFoundException : TypeLoadException
     {
         public EntryPointNotFoundException()
@@ -32,10 +34,13 @@ namespace System
             HResult = HResults.COR_E_ENTRYPOINTNOTFOUND;
         }
 
-        [Obsolete(Obsoletions.LegacyFormatterImplMessage, DiagnosticId = Obsoletions.LegacyFormatterImplDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+        [Obsolete(
+            Obsoletions.LegacyFormatterImplMessage,
+            DiagnosticId = Obsoletions.LegacyFormatterImplDiagId,
+            UrlFormat = Obsoletions.SharedUrlFormat
+        )]
         [EditorBrowsable(EditorBrowsableState.Never)]
-        protected EntryPointNotFoundException(SerializationInfo info, StreamingContext context) : base(info, context)
-        {
-        }
+        protected EntryPointNotFoundException(SerializationInfo info, StreamingContext context)
+            : base(info, context) { }
     }
 }

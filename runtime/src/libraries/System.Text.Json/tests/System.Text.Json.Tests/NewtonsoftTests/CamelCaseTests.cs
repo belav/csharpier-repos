@@ -44,18 +44,19 @@ namespace System.Text.Json.Tests
     internal class Product
     {
         public string Name { get; set; }
-        public DateTime ExpiryDate { get; set;}
+        public DateTime ExpiryDate { get; set; }
         public decimal Price { get; set; }
         public string[] Sizes { get; set; }
     }
 
     public class CamelCaseTests
     {
-        private static readonly JsonSerializerOptions s_camelCaseAndIndentedOption = new JsonSerializerOptions
-        {
-            PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
-            WriteIndented = true,
-        };
+        private static readonly JsonSerializerOptions s_camelCaseAndIndentedOption =
+            new JsonSerializerOptions
+            {
+                PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
+                WriteIndented = true,
+            };
 
         [Fact]
         public void JsonSerializerCamelCaseSettings()
@@ -67,24 +68,36 @@ namespace System.Text.Json.Tests
 
             string json = JsonSerializer.Serialize(person, s_camelCaseAndIndentedOption);
 
-            Assert.Equal(@"{
+            Assert.Equal(
+                @"{
   ""name"": ""Name!"",
   ""birthDate"": ""2000-11-20T23:55:44Z"",
   ""lastModified"": ""2000-11-20T23:55:44Z""
-}".NormalizeLineEndings(), json);
+}".NormalizeLineEndings(),
+                json
+            );
 
-            Person deserializedPerson = JsonSerializer.Deserialize<Person>(json, s_camelCaseAndIndentedOption);
+            Person deserializedPerson = JsonSerializer.Deserialize<Person>(
+                json,
+                s_camelCaseAndIndentedOption
+            );
 
             Assert.Equal(person.BirthDate, deserializedPerson.BirthDate);
             Assert.Equal(person.LastModified, deserializedPerson.LastModified);
             Assert.Equal(person.Name, deserializedPerson.Name);
 
-            json = JsonSerializer.Serialize(person, new JsonSerializerOptions { WriteIndented = true });
-            Assert.Equal(@"{
+            json = JsonSerializer.Serialize(
+                person,
+                new JsonSerializerOptions { WriteIndented = true }
+            );
+            Assert.Equal(
+                @"{
   ""Name"": ""Name!"",
   ""BirthDate"": ""2000-11-20T23:55:44Z"",
   ""LastModified"": ""2000-11-20T23:55:44Z""
-}".NormalizeLineEndings(), json);
+}".NormalizeLineEndings(),
+                json
+            );
         }
 
         [Fact]
@@ -95,12 +108,13 @@ namespace System.Text.Json.Tests
                 ExpiryDate = new DateTime(2010, 12, 20, 18, 1, 0, DateTimeKind.Utc),
                 Name = "Widget",
                 Price = 9.99m,
-                Sizes = new[] { "Small", "Medium", "Large" }
+                Sizes = new[] { "Small", "Medium", "Large" },
             };
 
             string json = JsonSerializer.Serialize(product, s_camelCaseAndIndentedOption);
 
-            Assert.Equal(@"{
+            Assert.Equal(
+                @"{
   ""name"": ""Widget"",
   ""expiryDate"": ""2010-12-20T18:01:00Z"",
   ""price"": 9.99,
@@ -109,7 +123,9 @@ namespace System.Text.Json.Tests
     ""Medium"",
     ""Large""
   ]
-}".NormalizeLineEndings(), json);
+}".NormalizeLineEndings(),
+                json
+            );
         }
     }
 }

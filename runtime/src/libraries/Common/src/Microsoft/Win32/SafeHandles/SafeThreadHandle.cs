@@ -8,7 +8,8 @@ namespace Microsoft.Win32.SafeHandles
 {
     internal sealed class SafeThreadHandle : SafeHandle
     {
-        public SafeThreadHandle() : base(invalidHandleValue: 0, ownsHandle: true) { }
+        public SafeThreadHandle()
+            : base(invalidHandleValue: 0, ownsHandle: true) { }
 
         public override bool IsInvalid => handle is 0 or -1;
 

@@ -10,8 +10,9 @@ namespace System.Runtime.Serialization
 {
     internal static class ImportGlobals
     {
-        internal const string SerializerTrimmerWarning = "Data Contract Serialization and Deserialization might require types that cannot be statically analyzed. Make sure all of the " +
-            "required types are preserved.";
+        internal const string SerializerTrimmerWarning =
+            "Data Contract Serialization and Deserialization might require types that cannot be statically analyzed. Make sure all of the "
+            + "required types are preserved.";
 
         public const string ActualTypeLocalName = "ActualType";
         public const string ActualTypeNameAttribute = "Name";
@@ -20,18 +21,20 @@ namespace System.Runtime.Serialization
         public const string AnyTypeLocalName = "anyType";
         public const string ArrayPrefix = "ArrayOf";
         public const string ClrNamespaceProperty = "ClrNamespace";
-        public const string CollectionsNamespace = "http://schemas.microsoft.com/2003/10/Serialization/Arrays";
+        public const string CollectionsNamespace =
+            "http://schemas.microsoft.com/2003/10/Serialization/Arrays";
         public const string ContextFieldName = "context";
         public const string CurrentPropertyName = "Current";
-        public const string DataContractXsdBaseNamespace = "http://schemas.datacontract.org/2004/07/";
+        public const string DataContractXsdBaseNamespace =
+            "http://schemas.datacontract.org/2004/07/";
         public const string DefaultClrNamespace = "GeneratedNamespace";
-        public const bool   DefaultEmitDefaultValue = true;
+        public const bool DefaultEmitDefaultValue = true;
         public const string DefaultGeneratedMember = "GeneratedMember";
         public const string DefaultFieldSuffix = "Field";
-        public const bool   DefaultIsReference = false;
-        public const bool   DefaultIsRequired = false;
+        public const bool DefaultIsReference = false;
+        public const bool DefaultIsRequired = false;
         public const string DefaultMemberSuffix = "Member";
-        public const int    DefaultOrder = 0;
+        public const int DefaultOrder = 0;
         public const string DefaultTypeName = "GeneratedType";
         public const string DefaultValueLocalName = "DefaultValue";
         public const string EmitDefaultValueAttribute = "EmitDefaultValue";
@@ -74,7 +77,8 @@ namespace System.Runtime.Serialization
         public const string SerializationEntryFieldName = "entry";
         public const string SerializationInfoFieldName = "info";
         public const string SerializationInfoPropertyName = "SerializationInfo";
-        public const string SerializationNamespace = "http://schemas.microsoft.com/2003/10/Serialization/";
+        public const string SerializationNamespace =
+            "http://schemas.microsoft.com/2003/10/Serialization/";
         public const string SerPrefixForSchema = "ser";
         public const string StringLocalName = "string";
         public const string SurrogateDataLocalName = "Surrogate";
@@ -85,13 +89,22 @@ namespace System.Runtime.Serialization
         public const string ValueProperty = "Value";
 
         private static Uri? s_dataContractXsdBaseNamespaceUri;
-        internal static Uri DataContractXsdBaseNamespaceUri => s_dataContractXsdBaseNamespaceUri ??= new Uri(DataContractXsdBaseNamespace);
+        internal static Uri DataContractXsdBaseNamespaceUri =>
+            s_dataContractXsdBaseNamespaceUri ??= new Uri(DataContractXsdBaseNamespace);
 
         private static XmlQualifiedName? s_idQualifiedName;
-        internal static XmlQualifiedName IdQualifiedName => s_idQualifiedName ??= new XmlQualifiedName(ImportGlobals.IdLocalName, ImportGlobals.SerializationNamespace);
+        internal static XmlQualifiedName IdQualifiedName =>
+            s_idQualifiedName ??= new XmlQualifiedName(
+                ImportGlobals.IdLocalName,
+                ImportGlobals.SerializationNamespace
+            );
 
         private static XmlQualifiedName? s_refQualifiedName;
-        internal static XmlQualifiedName RefQualifiedName => s_refQualifiedName ??= new XmlQualifiedName(ImportGlobals.RefLocalName, ImportGlobals.SerializationNamespace);
+        internal static XmlQualifiedName RefQualifiedName =>
+            s_refQualifiedName ??= new XmlQualifiedName(
+                ImportGlobals.RefLocalName,
+                ImportGlobals.SerializationNamespace
+            );
 
         private static Type? s_typeOfXmlElement;
         internal static Type TypeOfXmlElement => s_typeOfXmlElement ??= typeof(XmlElement);
@@ -100,16 +113,18 @@ namespace System.Runtime.Serialization
         internal static Type TypeOfXmlNodeArray => s_typeOfXmlNodeArray ??= typeof(XmlNode[]);
 
         private static Type? s_typeOfXmlQualifiedName;
-        internal static Type TypeOfXmlQualifiedName => s_typeOfXmlQualifiedName ??= typeof(XmlQualifiedName);
+        internal static Type TypeOfXmlQualifiedName =>
+            s_typeOfXmlQualifiedName ??= typeof(XmlQualifiedName);
 
         private static Type? s_typeOfXmlSchemaProviderAttribute;
-        internal static Type TypeOfXmlSchemaProviderAttribute => s_typeOfXmlSchemaProviderAttribute ??= typeof(XmlSchemaProviderAttribute);
+        internal static Type TypeOfXmlSchemaProviderAttribute =>
+            s_typeOfXmlSchemaProviderAttribute ??= typeof(XmlSchemaProviderAttribute);
 
         private static Type? s_typeOfXmlSchemaType;
         internal static Type TypeOfXmlSchemaType => s_typeOfXmlSchemaType ??= typeof(XmlSchemaType);
 
-
-        public const string SerializationSchema = @"<?xml version='1.0' encoding='utf-8'?>
+        public const string SerializationSchema =
+            @"<?xml version='1.0' encoding='utf-8'?>
 <xs:schema elementFormDefault='qualified' attributeFormDefault='qualified' xmlns:tns='http://schemas.microsoft.com/2003/10/Serialization/' targetNamespace='http://schemas.microsoft.com/2003/10/Serialization/' xmlns:xs='http://www.w3.org/2001/XMLSchema'>
   <xs:element name='anyType' nillable='true' type='xs:anyType' />
   <xs:element name='anyURI' nillable='true' type='xs:anyURI' />

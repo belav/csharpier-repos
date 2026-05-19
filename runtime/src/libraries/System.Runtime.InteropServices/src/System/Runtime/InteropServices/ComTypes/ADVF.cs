@@ -20,6 +20,6 @@ namespace System.Runtime.InteropServices.ComTypes
         ADVF_DATAONSTOP = 64,
         ADVFCACHE_NOHANDLER = 8,
         ADVFCACHE_FORCEBUILTIN = 16,
-        ADVFCACHE_ONSAVE = 32
+        ADVFCACHE_ONSAVE = 32,
     }
 }

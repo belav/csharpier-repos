@@ -21,14 +21,17 @@ namespace System.Web.Http
                     { () => HttpErrorKeys.StackTraceKey, "StackTrace" },
                     { () => HttpErrorKeys.InnerExceptionKey, "InnerException" },
                     { () => HttpErrorKeys.MessageLanguageKey, "MessageLanguage" },
-                    { () => HttpErrorKeys.ErrorCodeKey, "ErrorCode" }
+                    { () => HttpErrorKeys.ErrorCodeKey, "ErrorCode" },
                 };
             }
         }
 
         [Theory]
         [PropertyData("ErrorKeys")]
-        public void HttpErrorKeyProperties_Returns_CorrectKeys(Func<string> productUnderTest, string expectedResult)
+        public void HttpErrorKeyProperties_Returns_CorrectKeys(
+            Func<string> productUnderTest,
+            string expectedResult
+        )
         {
             // Act
             string actualResult = productUnderTest.Invoke();

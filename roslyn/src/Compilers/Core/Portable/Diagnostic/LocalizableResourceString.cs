@@ -27,10 +27,17 @@ namespace Microsoft.CodeAnalysis
         /// <param name="nameOfLocalizableResource">nameof the resource that needs to be localized.</param>
         /// <param name="resourceManager"><see cref="ResourceManager"/> for the calling assembly.</param>
         /// <param name="resourceSource">Type handling assembly's resource management. Typically, this is the static class generated for the resources file from which resources are accessed.</param>
-        public LocalizableResourceString(string nameOfLocalizableResource, ResourceManager resourceManager, Type resourceSource)
-            : this(nameOfLocalizableResource, resourceManager, resourceSource, Array.Empty<string>())
-        {
-        }
+        public LocalizableResourceString(
+            string nameOfLocalizableResource,
+            ResourceManager resourceManager,
+            Type resourceSource
+        )
+            : this(
+                nameOfLocalizableResource,
+                resourceManager,
+                resourceSource,
+                Array.Empty<string>()
+            ) { }
 
         /// <summary>
         /// Creates a localizable resource string that may possibly be formatted differently depending on culture.
@@ -39,7 +46,12 @@ namespace Microsoft.CodeAnalysis
         /// <param name="resourceManager"><see cref="ResourceManager"/> for the calling assembly.</param>
         /// <param name="resourceSource">Type handling assembly's resource management. Typically, this is the static class generated for the resources file from which resources are accessed.</param>
         /// <param name="formatArguments">Optional arguments for formatting the localizable resource string.</param>
-        public LocalizableResourceString(string nameOfLocalizableResource, ResourceManager resourceManager, Type resourceSource, params string[] formatArguments)
+        public LocalizableResourceString(
+            string nameOfLocalizableResource,
+            ResourceManager resourceManager,
+            Type resourceSource,
+            params string[] formatArguments
+        )
         {
             if (nameOfLocalizableResource == null)
             {
@@ -71,27 +83,40 @@ namespace Microsoft.CodeAnalysis
         {
             var culture = formatProvider as CultureInfo ?? CultureInfo.CurrentUICulture;
             var resourceString = _resourceManager.GetString(_nameOfLocalizableResource, culture);
-            return resourceString != null ?
-                (_formatArguments.Length > 0 ? string.Format(resourceString, _formatArguments) : resourceString) :
-                string.Empty;
+            return resourceString != null
+                ? (
+                    _formatArguments.Length > 0
+                        ? string.Format(resourceString, _formatArguments)
+                        : resourceString
+                )
+                : string.Empty;
         }
 
         protected override bool AreEqual(object? other)
         {
             var otherResourceString = other as LocalizableResourceString;
-            return otherResourceString != null &&
-                _nameOfLocalizableResource == otherResourceString._nameOfLocalizableResource &&
-                _resourceManager == otherResourceString._resourceManager &&
-                _resourceSource == otherResourceString._resourceSource &&
-                _formatArguments.SequenceEqual(otherResourceString._formatArguments, (a, b) => a == b);
+            return otherResourceString != null
+                && _nameOfLocalizableResource == otherResourceString._nameOfLocalizableResource
+                && _resourceManager == otherResourceString._resourceManager
+                && _resourceSource == otherResourceString._resourceSource
+                && _formatArguments.SequenceEqual(
+                    otherResourceString._formatArguments,
+                    (a, b) => a == b
+                );
         }
 
         protected override int GetHash()
         {
-            return Hash.Combine(_nameOfLocalizableResource.GetHashCode(),
-                Hash.Combine(_resourceManager.GetHashCode(),
-                Hash.Combine(_resourceSource.GetHashCode(),
-                Hash.CombineValues(_formatArguments))));
+            return Hash.Combine(
+                _nameOfLocalizableResource.GetHashCode(),
+                Hash.Combine(
+                    _resourceManager.GetHashCode(),
+                    Hash.Combine(
+                        _resourceSource.GetHashCode(),
+                        Hash.CombineValues(_formatArguments)
+                    )
+                )
+            );
         }
     }
 }

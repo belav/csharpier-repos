@@ -18,10 +18,26 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.ProjectSystemShim.Inter
         int CompileTempPE(
             [MarshalAs(UnmanagedType.LPWStr)] string pszOutputFileName,
             int sourceCount,
-            [MarshalAs(UnmanagedType.LPArray, ArraySubType = UnmanagedType.LPWStr, SizeParamIndex = 1)] string[] fileNames,
-            [MarshalAs(UnmanagedType.LPArray, ArraySubType = UnmanagedType.LPWStr, SizeParamIndex = 1)] string[] fileContents,
+            [MarshalAs(
+                UnmanagedType.LPArray,
+                ArraySubType = UnmanagedType.LPWStr,
+                SizeParamIndex = 1
+            )]
+                string[] fileNames,
+            [MarshalAs(
+                UnmanagedType.LPArray,
+                ArraySubType = UnmanagedType.LPWStr,
+                SizeParamIndex = 1
+            )]
+                string[] fileContents,
             int optionCount,
-            [MarshalAs(UnmanagedType.LPArray, ArraySubType = UnmanagedType.LPWStr, SizeParamIndex = 4)] string[] optionNames,
-            [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 4)] object[] optionValues);
+            [MarshalAs(
+                UnmanagedType.LPArray,
+                ArraySubType = UnmanagedType.LPWStr,
+                SizeParamIndex = 4
+            )]
+                string[] optionNames,
+            [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 4)] object[] optionValues
+        );
     }
 }

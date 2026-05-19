@@ -17,22 +17,28 @@ namespace Microsoft.VisualStudio.IntegrationTest.Setup
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public TestExtensionErrorHandler()
-        {
-        }
+        public TestExtensionErrorHandler() { }
 
         public void HandleError(object sender, Exception exception)
         {
-            if (exception is ArgumentException argumentException
+            if (
+                exception is ArgumentException argumentException
                 && argumentException.Message.Contains("SnapshotPoint")
-                && argumentException.StackTrace.Contains("Microsoft.VisualStudio.Text.Editor.Implementation.WpfTextView.ValidateBufferPosition"))
+                && argumentException.StackTrace.Contains(
+                    "Microsoft.VisualStudio.Text.Editor.Implementation.WpfTextView.ValidateBufferPosition"
+                )
+            )
             {
                 // Known issue https://github.com/dotnet/roslyn/issues/35123
                 return;
             }
 
-            if (exception is TaskCanceledException taskCanceledException
-                && taskCanceledException.StackTrace.Contains("Microsoft.CodeAnalysis.Editor.Implementation.Suggestions.SuggestedActionsSourceProvider.SuggestedActionsSource.GetSuggestedActions"))
+            if (
+                exception is TaskCanceledException taskCanceledException
+                && taskCanceledException.StackTrace.Contains(
+                    "Microsoft.CodeAnalysis.Editor.Implementation.Suggestions.SuggestedActionsSourceProvider.SuggestedActionsSource.GetSuggestedActions"
+                )
+            )
             {
                 // Workaround for https://devdiv.visualstudio.com/DevDiv/_workitems/edit/1070469
                 return;

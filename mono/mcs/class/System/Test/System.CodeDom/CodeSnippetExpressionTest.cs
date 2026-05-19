@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -27,41 +27,40 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-using NUnit.Framework;
-
 using System;
 using System.CodeDom;
+using NUnit.Framework;
 
 namespace MonoTests.System.CodeDom
 {
-	[TestFixture]
-	public class CodeSnippetExpressionTest
-	{
-		[Test]
-		public void Constructor0 ()
-		{
-			CodeSnippetExpression cse = new CodeSnippetExpression ();
-			Assert.IsNotNull (cse.Value, "#1");
-			Assert.AreEqual (string.Empty, cse.Value, "#2");
+    [TestFixture]
+    public class CodeSnippetExpressionTest
+    {
+        [Test]
+        public void Constructor0()
+        {
+            CodeSnippetExpression cse = new CodeSnippetExpression();
+            Assert.IsNotNull(cse.Value, "#1");
+            Assert.AreEqual(string.Empty, cse.Value, "#2");
 
-			string value = "mono";
-			cse.Value = value;
-			Assert.IsNotNull (cse.Value, "#3");
-			Assert.AreSame (value, cse.Value, "#4");
+            string value = "mono";
+            cse.Value = value;
+            Assert.IsNotNull(cse.Value, "#3");
+            Assert.AreSame(value, cse.Value, "#4");
 
-			cse.Value = null;
-			Assert.IsNotNull (cse.Value, "#5");
-			Assert.AreEqual (string.Empty, cse.Value, "#6");
-		}
+            cse.Value = null;
+            Assert.IsNotNull(cse.Value, "#5");
+            Assert.AreEqual(string.Empty, cse.Value, "#6");
+        }
 
-		[Test]
-		public void Constructor1 ()
-		{
-			string value = "mono";
+        [Test]
+        public void Constructor1()
+        {
+            string value = "mono";
 
-			CodeSnippetExpression cse = new CodeSnippetExpression (value);
-			Assert.IsNotNull (cse.Value, "#1");
-			Assert.AreSame (value, cse.Value, "#2");
-		}
-	}
+            CodeSnippetExpression cse = new CodeSnippetExpression(value);
+            Assert.IsNotNull(cse.Value, "#1");
+            Assert.AreSame(value, cse.Value, "#2");
+        }
+    }
 }

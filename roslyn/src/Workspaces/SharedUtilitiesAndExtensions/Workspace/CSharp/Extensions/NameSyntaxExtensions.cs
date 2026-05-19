@@ -13,8 +13,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
 {
     internal static class NameSyntaxExtensions
     {
-        public static IList<NameSyntax> GetNameParts(this NameSyntax nameSyntax)
-            => new NameSyntaxIterator(nameSyntax).ToList();
+        public static IList<NameSyntax> GetNameParts(this NameSyntax nameSyntax) =>
+            new NameSyntaxIterator(nameSyntax).ToList();
 
         public static NameSyntax GetLastDottedName(this NameSyntax nameSyntax)
         {
@@ -51,17 +51,21 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
 
         public static bool CanBeReplacedWithAnyName(this NameSyntax nameSyntax)
         {
-            if (nameSyntax.Parent?.Kind()
-                    is SyntaxKind.AliasQualifiedName
+            if (
+                nameSyntax.Parent?.Kind()
+                is SyntaxKind.AliasQualifiedName
                     or SyntaxKind.NameColon
                     or SyntaxKind.NameEquals
-                    or SyntaxKind.TypeParameterConstraintClause)
+                    or SyntaxKind.TypeParameterConstraintClause
+            )
             {
                 return false;
             }
 
-            if (nameSyntax.CheckParent<QualifiedNameSyntax>(q => q.Right == nameSyntax) ||
-                nameSyntax.CheckParent<MemberAccessExpressionSyntax>(m => m.Name == nameSyntax))
+            if (
+                nameSyntax.CheckParent<QualifiedNameSyntax>(q => q.Right == nameSyntax)
+                || nameSyntax.CheckParent<MemberAccessExpressionSyntax>(m => m.Name == nameSyntax)
+            )
             {
                 return false;
             }

@@ -31,9 +31,7 @@ namespace System.Text
                 // Retrieve the system default non-unicode code page if possible, or return null,
                 // giving the rest of the EncodingProviders a chance to return a default.
                 int systemDefaultCodePage = SystemDefaultCodePage;
-                return systemDefaultCodePage != 0 ?
-                    GetEncoding(systemDefaultCodePage) :
-                    null;
+                return systemDefaultCodePage != 0 ? GetEncoding(systemDefaultCodePage) : null;
             }
 
             Encoding? result = null;
@@ -105,7 +103,7 @@ namespace System.Text
 
         // ISO 2022 Code Pages
         private const int ISOKorean = 50225;
-        private const int ChineseHZ = 52936;    // HZ has ~}~{~~ sequences
+        private const int ChineseHZ = 52936; // HZ has ~}~{~~ sequences
         private const int ISO2022JP = 50220;
         private const int ISO2022JPESC = 50221;
         private const int ISO2022JPSISO = 50222;
@@ -167,25 +165,25 @@ namespace System.Text
                 case ISOKorean:
                 //    case ISOSimplifiedCN
                 case ChineseHZ:
-                case ISO2022JP:         // JIS JP, full-width Katakana mode (no half-width Katakana)
-                case ISO2022JPESC:      // JIS JP, esc sequence to do Katakana.
-                case ISO2022JPSISO:     // JIS JP with Shift In/ Shift Out Katakana support
+                case ISO2022JP: // JIS JP, full-width Katakana mode (no half-width Katakana)
+                case ISO2022JPESC: // JIS JP, esc sequence to do Katakana.
+                case ISO2022JPSISO: // JIS JP with Shift In/ Shift Out Katakana support
                     result = new ISO2022Encoding(codepage);
                     break;
                 // Duplicate EUC-CN (51936) just calls a base code page 936,
                 // so does ISOSimplifiedCN (50227), which has gotta be broken
                 case DuplicateEUCCN:
                 case ISOSimplifiedCN:
-                    result = new DBCSCodePageEncoding(codepage, EUCCN);    // Just maps to 936
+                    result = new DBCSCodePageEncoding(codepage, EUCCN); // Just maps to 936
                     break;
                 case EUCJP:
                     result = new EUCJPEncoding();
                     break;
                 case EUCKR:
-                    result = new DBCSCodePageEncoding(codepage, CodePageDLLKorean);    // Maps to 20949
+                    result = new DBCSCodePageEncoding(codepage, CodePageDLLKorean); // Maps to 20949
                     break;
                 case ISO_8859_8I:
-                    result = new SBCSCodePageEncoding(codepage, ISO_8859_8_Visual);        // Hebrew maps to a different code page
+                    result = new SBCSCodePageEncoding(codepage, ISO_8859_8_Visual); // Hebrew maps to a different code page
                     break;
             }
             return result;
@@ -194,13 +192,14 @@ namespace System.Text
         /// <summary>Gets a reference to the array's data suitable for pinning.</summary>
         /// <remarks>The resulting pointer is guaranteed to be non-null.</remarks>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static unsafe ref T GetNonNullPinnableReference<T>(T[] array) where T : struct
+        internal static unsafe ref T GetNonNullPinnableReference<T>(T[] array)
+            where T : struct
         {
             return ref
 #if NET5_0_OR_GREATER
-                MemoryMarshal.GetArrayDataReference(array);
+            MemoryMarshal.GetArrayDataReference(array);
 #else
-                array.Length != 0 ? ref array[0] : ref Unsafe.AsRef<T>((void*)1);
+            array.Length != 0 ? ref array[0] : ref Unsafe.AsRef<T>((void*)1);
 #endif
         }
     }

@@ -19,8 +19,7 @@ namespace Microsoft.CodeAnalysis.Utilities
             return new ReadOnlyList<T>(list);
         }
 
-        public static T Last<T>(this IReadOnlyList<T> list)
-            => list[list.Count - 1];
+        public static T Last<T>(this IReadOnlyList<T> list) => list[list.Count - 1];
 
         public static int IndexOf<T>(this IReadOnlyList<T> list, T value, int startIndex = 0)
         {
@@ -39,7 +38,9 @@ namespace Microsoft.CodeAnalysis.Utilities
         {
             public T this[int index] => list[index];
             public int Count => list.Count;
+
             public IEnumerator<T> GetEnumerator() => list.GetEnumerator();
+
             IEnumerator IEnumerable.GetEnumerator() => list.GetEnumerator();
         }
     }

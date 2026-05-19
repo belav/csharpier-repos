@@ -112,14 +112,13 @@ public class HttpsTests : LoggedTest
                 )
             )
             {
-                var ex = await Assert.ThrowsAnyAsync<Exception>(
-                    () =>
-                        sslStream.AuthenticateAsClientAsync(
-                            "127.0.0.1",
-                            clientCertificates: null,
-                            enabledSslProtocols: SslProtocols.None,
-                            checkCertificateRevocation: false
-                        )
+                var ex = await Assert.ThrowsAnyAsync<Exception>(() =>
+                    sslStream.AuthenticateAsClientAsync(
+                        "127.0.0.1",
+                        clientCertificates: null,
+                        enabledSslProtocols: SslProtocols.None,
+                        checkCertificateRevocation: false
+                    )
                 );
 
                 Logger.LogTrace(ex, "AuthenticateAsClientAsync Exception");
@@ -886,14 +885,13 @@ public class HttpsTests : LoggedTest
             )
             {
                 // SslProtocols.Tls is TLS 1.0 which isn't supported by Kestrel by default.
-                await Assert.ThrowsAnyAsync<Exception>(
-                    () =>
-                        sslStream.AuthenticateAsClientAsync(
-                            "127.0.0.1",
-                            clientCertificates: null,
-                            enabledSslProtocols: SslProtocols.Tls,
-                            checkCertificateRevocation: false
-                        )
+                await Assert.ThrowsAnyAsync<Exception>(() =>
+                    sslStream.AuthenticateAsClientAsync(
+                        "127.0.0.1",
+                        clientCertificates: null,
+                        enabledSslProtocols: SslProtocols.Tls,
+                        checkCertificateRevocation: false
+                    )
                 );
             }
         }

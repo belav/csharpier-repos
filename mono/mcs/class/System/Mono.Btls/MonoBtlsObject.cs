@@ -33,131 +33,135 @@ using System.Runtime.CompilerServices;
 
 namespace Mono.Btls
 {
-	abstract class MonoBtlsObject : IDisposable
-	{
-		internal const string BTLS_DYLIB = "libmono-btls-shared";
+    abstract class MonoBtlsObject : IDisposable
+    {
+        internal const string BTLS_DYLIB = "libmono-btls-shared";
 
-		internal MonoBtlsObject (MonoBtlsHandle handle)
-		{
-			this.handle = handle;
-		}
+        internal MonoBtlsObject(MonoBtlsHandle handle)
+        {
+            this.handle = handle;
+        }
 
-		protected internal abstract class MonoBtlsHandle : SafeHandle
-		{
-			internal MonoBtlsHandle ()
-				: base (IntPtr.Zero, true)
-			{
-			}
+        protected internal abstract class MonoBtlsHandle : SafeHandle
+        {
+            internal MonoBtlsHandle()
+                : base(IntPtr.Zero, true) { }
 
-			internal MonoBtlsHandle (IntPtr handle, bool ownsHandle)
-				: base (handle, ownsHandle)
-			{
-			}
+            internal MonoBtlsHandle(IntPtr handle, bool ownsHandle)
+                : base(handle, ownsHandle) { }
 
-			public override bool IsInvalid {
-				get { return handle == IntPtr.Zero; }
-			}
-		}
+            public override bool IsInvalid
+            {
+                get { return handle == IntPtr.Zero; }
+            }
+        }
 
-		internal MonoBtlsHandle Handle {
-			get {
-				CheckThrow ();
-				return handle;
-			}
-		}
+        internal MonoBtlsHandle Handle
+        {
+            get
+            {
+                CheckThrow();
+                return handle;
+            }
+        }
 
-		public bool IsValid {
-			get { return handle != null && !handle.IsInvalid; }
-		}
+        public bool IsValid
+        {
+            get { return handle != null && !handle.IsInvalid; }
+        }
 
-		MonoBtlsHandle handle;
-		Exception lastError;
+        MonoBtlsHandle handle;
+        Exception lastError;
 
-		protected void CheckThrow ()
-		{
-			if (lastError != null)
-				throw lastError;
-			if (handle == null || handle.IsInvalid)
-				throw new ObjectDisposedException ("MonoBtlsSsl");
-		}
+        protected void CheckThrow()
+        {
+            if (lastError != null)
+                throw lastError;
+            if (handle == null || handle.IsInvalid)
+                throw new ObjectDisposedException("MonoBtlsSsl");
+        }
 
-		protected Exception SetException (Exception ex)
-		{
-			if (lastError == null)
-				lastError = ex;
-			return ex;
-		}
+        protected Exception SetException(Exception ex)
+        {
+            if (lastError == null)
+                lastError = ex;
+            return ex;
+        }
 
-		protected void CheckError (bool ok, [CallerMemberName] string callerName = null)
-		{
-			if (!ok) {
-				if (callerName != null)
-					throw new CryptographicException ($"`{GetType ().Name}.{callerName}` failed.");
-				else
-					throw new CryptographicException ();
-			}
-		}
+        protected void CheckError(bool ok, [CallerMemberName] string callerName = null)
+        {
+            if (!ok)
+            {
+                if (callerName != null)
+                    throw new CryptographicException($"`{GetType().Name}.{callerName}` failed.");
+                else
+                    throw new CryptographicException();
+            }
+        }
 
-		protected void CheckError (int ret, [CallerMemberName] string callerName = null)
-		{
-			CheckError (ret == 1, callerName);
-		}
+        protected void CheckError(int ret, [CallerMemberName] string callerName = null)
+        {
+            CheckError(ret == 1, callerName);
+        }
 
-		protected internal void CheckLastError ([CallerMemberName] string callerName = null)
-		{
-			var error = Interlocked.Exchange (ref lastError, null);
-			if (error == null)
-				return;
+        protected internal void CheckLastError([CallerMemberName] string callerName = null)
+        {
+            var error = Interlocked.Exchange(ref lastError, null);
+            if (error == null)
+                return;
 
-			if (error is AuthenticationException || error is NotSupportedException)
-				throw error;
+            if (error is AuthenticationException || error is NotSupportedException)
+                throw error;
 
-			string message;
-			if (callerName != null)
-				message = $"Caught unhandled exception in `{GetType ().Name}.{callerName}`.";
-			else
-				message = "Caught unhandled exception.";
-			throw new CryptographicException (message, error);
-		}
+            string message;
+            if (callerName != null)
+                message = $"Caught unhandled exception in `{GetType().Name}.{callerName}`.";
+            else
+                message = "Caught unhandled exception.";
+            throw new CryptographicException(message, error);
+        }
 
-		[DllImport (BTLS_DYLIB)]
-		extern static void mono_btls_free (IntPtr data);
+        [DllImport(BTLS_DYLIB)]
+        static extern void mono_btls_free(IntPtr data);
 
-		protected void FreeDataPtr (IntPtr data)
-		{
-			mono_btls_free (data);
-		}
+        protected void FreeDataPtr(IntPtr data)
+        {
+            mono_btls_free(data);
+        }
 
-		protected virtual void Close ()
-		{
-		}
+        protected virtual void Close() { }
 
-		protected void Dispose (bool disposing)
-		{
-			if (disposing) {
-				try {
-					if (handle != null) {
-						Close ();
-						handle.Dispose ();
-						handle = null;
-					}
-				} finally {
-					var disposedExc = new ObjectDisposedException (GetType ().Name);
-					Interlocked.CompareExchange (ref lastError, disposedExc, null);
-				}
-			}
-		}
+        protected void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                try
+                {
+                    if (handle != null)
+                    {
+                        Close();
+                        handle.Dispose();
+                        handle = null;
+                    }
+                }
+                finally
+                {
+                    var disposedExc = new ObjectDisposedException(GetType().Name);
+                    Interlocked.CompareExchange(ref lastError, disposedExc, null);
+                }
+            }
+        }
 
-		public void Dispose ()
-		{
-			Dispose (true);
-			GC.SuppressFinalize (this);
-		}
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
 
-		~MonoBtlsObject ()
-		{
-			Dispose (false);
-		}
-	}
+        ~MonoBtlsObject()
+        {
+            Dispose(false);
+        }
+    }
 }
 #endif

@@ -14,7 +14,14 @@ using Microsoft.CodeAnalysis.Simplification;
 
 namespace Microsoft.CodeAnalysis.IntroduceVariable
 {
-    internal partial class AbstractIntroduceVariableService<TService, TExpressionSyntax, TTypeSyntax, TTypeDeclarationSyntax, TQueryExpressionSyntax, TNameSyntax>
+    internal partial class AbstractIntroduceVariableService<
+        TService,
+        TExpressionSyntax,
+        TTypeSyntax,
+        TTypeDeclarationSyntax,
+        TQueryExpressionSyntax,
+        TNameSyntax
+    >
     {
         internal abstract class AbstractIntroduceVariableCodeAction : CodeAction
         {
@@ -36,7 +43,8 @@ namespace Microsoft.CodeAnalysis.IntroduceVariable
                 bool allOccurrences,
                 bool isConstant,
                 bool isLocal,
-                bool isQueryLocal)
+                bool isQueryLocal
+            )
             {
                 _service = service;
                 _semanticDocument = document;
@@ -51,32 +59,66 @@ namespace Microsoft.CodeAnalysis.IntroduceVariable
 
             public override string Title { get; }
 
-            protected override async Task<Document> GetChangedDocumentAsync(CancellationToken cancellationToken)
+            protected override async Task<Document> GetChangedDocumentAsync(
+                CancellationToken cancellationToken
+            )
             {
-                var changedDocument = await GetChangedDocumentCoreAsync(cancellationToken).ConfigureAwait(false);
-                var simplifierOptions = await changedDocument.GetSimplifierOptionsAsync(Options.SimplifierOptions, cancellationToken).ConfigureAwait(false);
-                return await Simplifier.ReduceAsync(changedDocument, simplifierOptions, cancellationToken).ConfigureAwait(false);
+                var changedDocument = await GetChangedDocumentCoreAsync(cancellationToken)
+                    .ConfigureAwait(false);
+                var simplifierOptions = await changedDocument
+                    .GetSimplifierOptionsAsync(Options.SimplifierOptions, cancellationToken)
+                    .ConfigureAwait(false);
+                return await Simplifier
+                    .ReduceAsync(changedDocument, simplifierOptions, cancellationToken)
+                    .ConfigureAwait(false);
             }
 
-            private async Task<Document> GetChangedDocumentCoreAsync(CancellationToken cancellationToken)
+            private async Task<Document> GetChangedDocumentCoreAsync(
+                CancellationToken cancellationToken
+            )
             {
                 if (_isQueryLocal)
                 {
-                    return await _service.IntroduceQueryLocalAsync(_semanticDocument, _expression, _allOccurrences, cancellationToken).ConfigureAwait(false);
+                    return await _service
+                        .IntroduceQueryLocalAsync(
+                            _semanticDocument,
+                            _expression,
+                            _allOccurrences,
+                            cancellationToken
+                        )
+                        .ConfigureAwait(false);
                 }
                 else if (_isLocal)
                 {
-                    return await _service.IntroduceLocalAsync(_semanticDocument, _expression, _allOccurrences, _isConstant, cancellationToken).ConfigureAwait(false);
+                    return await _service
+                        .IntroduceLocalAsync(
+                            _semanticDocument,
+                            _expression,
+                            _allOccurrences,
+                            _isConstant,
+                            cancellationToken
+                        )
+                        .ConfigureAwait(false);
                 }
                 else
                 {
-                    return await _service.IntroduceFieldAsync(_semanticDocument, _expression, _allOccurrences, _isConstant, cancellationToken).ConfigureAwait(false);
+                    return await _service
+                        .IntroduceFieldAsync(
+                            _semanticDocument,
+                            _expression,
+                            _allOccurrences,
+                            _isConstant,
+                            cancellationToken
+                        )
+                        .ConfigureAwait(false);
                 }
             }
 
             private string CreateDisplayText(TExpressionSyntax expression)
             {
-                var singleLineExpression = _semanticDocument.Document.GetLanguageService<ISyntaxFactsService>().ConvertToSingleLine(expression);
+                var singleLineExpression = _semanticDocument
+                    .Document.GetLanguageService<ISyntaxFactsService>()
+                    .ConvertToSingleLine(expression);
                 var nodeString = singleLineExpression.ToString();
 
                 return CreateDisplayText(nodeString);
@@ -84,16 +126,28 @@ namespace Microsoft.CodeAnalysis.IntroduceVariable
 
             // Indexed by: allOccurrences, isConstant, isLocal
             private static readonly string[,,] formatStrings = new string[2, 2, 2]
+            {
                 {
-                  {
-                    { FeaturesResources.Introduce_field_for_0, FeaturesResources.Introduce_local_for_0 },
-                    { FeaturesResources.Introduce_constant_for_0, FeaturesResources.Introduce_local_constant_for_0 }
-                  },
-                  {
-                    { FeaturesResources.Introduce_field_for_all_occurrences_of_0,  FeaturesResources.Introduce_local_for_all_occurrences_of_0 },
-                    { FeaturesResources.Introduce_constant_for_all_occurrences_of_0, FeaturesResources.Introduce_local_constant_for_all_occurrences_of_0 }
-                  }
-                };
+                    {
+                        FeaturesResources.Introduce_field_for_0,
+                        FeaturesResources.Introduce_local_for_0,
+                    },
+                    {
+                        FeaturesResources.Introduce_constant_for_0,
+                        FeaturesResources.Introduce_local_constant_for_0,
+                    },
+                },
+                {
+                    {
+                        FeaturesResources.Introduce_field_for_all_occurrences_of_0,
+                        FeaturesResources.Introduce_local_for_all_occurrences_of_0,
+                    },
+                    {
+                        FeaturesResources.Introduce_constant_for_all_occurrences_of_0,
+                        FeaturesResources.Introduce_local_constant_for_all_occurrences_of_0,
+                    },
+                },
+            };
 
             private string CreateDisplayText(string nodeString)
             {
@@ -105,13 +159,14 @@ namespace Microsoft.CodeAnalysis.IntroduceVariable
                 return string.Format(formatString, nodeString);
             }
 
-            protected ITypeSymbol GetExpressionType(
-                CancellationToken cancellationToken)
+            protected ITypeSymbol GetExpressionType(CancellationToken cancellationToken)
             {
                 var semanticModel = _semanticDocument.SemanticModel;
                 var typeInfo = semanticModel.GetTypeInfo(_expression, cancellationToken);
 
-                return typeInfo.Type ?? typeInfo.ConvertedType ?? semanticModel.Compilation.GetSpecialType(SpecialType.System_Object);
+                return typeInfo.Type
+                    ?? typeInfo.ConvertedType
+                    ?? semanticModel.Compilation.GetSpecialType(SpecialType.System_Object);
             }
         }
     }

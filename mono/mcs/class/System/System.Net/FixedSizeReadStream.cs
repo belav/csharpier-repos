@@ -30,44 +30,46 @@ using System.Threading.Tasks;
 
 namespace System.Net
 {
-	class FixedSizeReadStream : WebReadStream
-	{
-		public long ContentLength {
-			get;
-		}
+    class FixedSizeReadStream : WebReadStream
+    {
+        public long ContentLength { get; }
 
-		long position;
+        long position;
 
-		public FixedSizeReadStream (WebOperation operation, Stream innerStream,
-		                            long contentLength)
-			: base (operation, innerStream)
-		{
-			ContentLength = contentLength;
-		}
+        public FixedSizeReadStream(WebOperation operation, Stream innerStream, long contentLength)
+            : base(operation, innerStream)
+        {
+            ContentLength = contentLength;
+        }
 
-		protected override async Task<int> ProcessReadAsync (
-			byte[] buffer, int offset, int size,
-			CancellationToken cancellationToken)
-		{
-			cancellationToken.ThrowIfCancellationRequested ();
+        protected override async Task<int> ProcessReadAsync(
+            byte[] buffer,
+            int offset,
+            int size,
+            CancellationToken cancellationToken
+        )
+        {
+            cancellationToken.ThrowIfCancellationRequested();
 
-			var remaining = ContentLength - position;
-			WebConnection.Debug ($"{ME} READ: position={position} length={ContentLength} size={size} remaining={remaining}");
+            var remaining = ContentLength - position;
+            WebConnection.Debug(
+                $"{ME} READ: position={position} length={ContentLength} size={size} remaining={remaining}"
+            );
 
-			if (remaining == 0)
-				return 0;
+            if (remaining == 0)
+                return 0;
 
-			var readSize = (int)Math.Min (remaining, size);
-			WebConnection.Debug ($"{ME} READ #1: readSize={readSize}");
-			var ret = await InnerStream.ReadAsync (
-				buffer, offset, readSize, cancellationToken).ConfigureAwait (false);
-			WebConnection.Debug ($"{ME} READ #2: ret={ret}");
-			if (ret <= 0)
-				return ret;
+            var readSize = (int)Math.Min(remaining, size);
+            WebConnection.Debug($"{ME} READ #1: readSize={readSize}");
+            var ret = await InnerStream
+                .ReadAsync(buffer, offset, readSize, cancellationToken)
+                .ConfigureAwait(false);
+            WebConnection.Debug($"{ME} READ #2: ret={ret}");
+            if (ret <= 0)
+                return ret;
 
-			position += ret;
-			return ret;
-		}
-	}
+            position += ret;
+            return ret;
+        }
+    }
 }
-

@@ -6,13 +6,15 @@ namespace System.Web.Http.ContentNegotiation
     public abstract class ContentNegotiationTestBase : HttpServerTestBase
     {
         protected ContentNegotiationTestBase()
-            : base("http://localhost/Conneg")
-        {
-        }
+            : base("http://localhost/Conneg") { }
 
         protected override void ApplyConfiguration(HttpConfiguration configuration)
         {
-            configuration.Routes.MapHttpRoute("Default", "{controller}", new { controller = "Conneg" });
+            configuration.Routes.MapHttpRoute(
+                "Default",
+                "{controller}",
+                new { controller = "Conneg" }
+            );
         }
     }
 }

@@ -29,7 +29,9 @@ namespace System.ServiceModel
     using SR2 = System.ServiceModel.Activation.SR;
     using TD2 = System.ServiceModel.Diagnostics.Application.TD;
 
-    [TypeForwardedFrom("System.ServiceModel, Version=3.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")]
+    [TypeForwardedFrom(
+        "System.ServiceModel, Version=3.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+    )]
     public static class ServiceHostingEnvironment
     {
         static object syncRoot = new object();
@@ -60,25 +62,35 @@ namespace System.ServiceModel
         const string SystemWebComma = "System.Web,";
         const int MaxInsufficientMemoryLogCount = 10;
 
-        [Fx.Tag.SecurityNote(Critical = "Calls into an unsafe UnsafeLogEvent method.",
-            Safe = "Event identities cannot be spoofed as they are constants determined inside the method.")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Calls into an unsafe UnsafeLogEvent method.",
+            Safe = "Event identities cannot be spoofed as they are constants determined inside the method."
+        )]
         [SecuritySafeCritical]
         static void OnUnhandledException(object sender, UnhandledExceptionEventArgs e)
         {
             if (DiagnosticUtility.ShouldTraceError)
             {
                 Exception exception = e.ExceptionObject as Exception;
-                DiagnosticUtility.UnsafeEventLog.UnsafeLogEvent(TraceEventType.Error, (ushort)System.Runtime.Diagnostics.EventLogCategory.WebHost,
-                    (uint)System.Runtime.Diagnostics.EventLogEventId.WebHostUnhandledException, true,
+                DiagnosticUtility.UnsafeEventLog.UnsafeLogEvent(
+                    TraceEventType.Error,
+                    (ushort)System.Runtime.Diagnostics.EventLogCategory.WebHost,
+                    (uint)System.Runtime.Diagnostics.EventLogEventId.WebHostUnhandledException,
+                    true,
                     TraceUtility.CreateSourceString(sender),
-                    exception == null ? string.Empty : exception.ToString());
+                    exception == null ? string.Empty : exception.ToString()
+                );
             }
         }
 
-        [Fx.Tag.SecurityNote(Miscellaneous = "RequiresReview - called by ProcessRequest outside of the restricted SecurityContext.")]
+        [Fx.Tag.SecurityNote(
+            Miscellaneous = "RequiresReview - called by ProcessRequest outside of the restricted SecurityContext."
+        )]
         public static bool AspNetCompatibilityEnabled
         {
-            [Fx.Tag.SecurityNote(Miscellaneous = "RequiresReview - can be called outside of user context.")]
+            [Fx.Tag.SecurityNote(
+                Miscellaneous = "RequiresReview - can be called outside of user context."
+            )]
             get
             {
                 if (!IsHosted)
@@ -90,10 +102,14 @@ namespace System.ServiceModel
             }
         }
 
-        [Fx.Tag.SecurityNote(Miscellaneous = "RequiresReview - called by ProcessRequest outside of the restricted SecurityContext.")]
+        [Fx.Tag.SecurityNote(
+            Miscellaneous = "RequiresReview - called by ProcessRequest outside of the restricted SecurityContext."
+        )]
         public static bool MultipleSiteBindingsEnabled
         {
-            [Fx.Tag.SecurityNote(Miscellaneous = "RequiresReview - can be called outside of user context.")]
+            [Fx.Tag.SecurityNote(
+                Miscellaneous = "RequiresReview - can be called outside of user context."
+            )]
             get
             {
                 if (!IsHosted)
@@ -103,7 +119,9 @@ namespace System.ServiceModel
             }
         }
 
-        [Fx.Tag.SecurityNote(Miscellaneous = "RequiresReview - called by ServiceHostFactory.CreateServiceHost.")]
+        [Fx.Tag.SecurityNote(
+            Miscellaneous = "RequiresReview - called by ServiceHostFactory.CreateServiceHost."
+        )]
         internal static Uri[] PrefixFilters
         {
             [Fx.Tag.SecurityNote(Miscellaneous = "RequiresReview")]
@@ -118,21 +136,27 @@ namespace System.ServiceModel
             }
         }
 
-        [Fx.Tag.SecurityNote(Miscellaneous = "RequiresReview - can be called outside of user context.")]
+        [Fx.Tag.SecurityNote(
+            Miscellaneous = "RequiresReview - can be called outside of user context."
+        )]
         [MethodImpl(MethodImplOptions.NoInlining)]
         static bool IsAspNetCompatibilityEnabled()
         {
             return hostingManager.AspNetCompatibilityEnabled;
         }
 
-        [Fx.Tag.SecurityNote(Miscellaneous = "RequiresReview - can be called outside of user context.")]
+        [Fx.Tag.SecurityNote(
+            Miscellaneous = "RequiresReview - can be called outside of user context."
+        )]
         [MethodImpl(MethodImplOptions.NoInlining)]
         static bool IsMultipleSiteBindingsEnabledEnabled()
         {
             return hostingManager.MultipleSiteBindingsEnabled;
         }
 
-        [Fx.Tag.SecurityNote(Miscellaneous = "RequiresReview - can be called outside of user context.")]
+        [Fx.Tag.SecurityNote(
+            Miscellaneous = "RequiresReview - can be called outside of user context."
+        )]
         [MethodImpl(MethodImplOptions.NoInlining)]
         static Uri[] GetBaseAddressPrefixFilters()
         {
@@ -148,7 +172,10 @@ namespace System.ServiceModel
 
             if (virtualPath.IndexOf(UriSchemeSeparator) > 0)
             {
-                throw FxTrace.Exception.Argument("virtualPath", SR2.Hosting_AddressIsAbsoluteUri(virtualPath));
+                throw FxTrace.Exception.Argument(
+                    "virtualPath",
+                    SR2.Hosting_AddressIsAbsoluteUri(virtualPath)
+                );
             }
 
             EventTraceActivity eventTraceActivity = null;
@@ -162,7 +189,10 @@ namespace System.ServiceModel
             EnsureServiceAvailableFast(virtualPath, eventTraceActivity);
         }
 
-        internal static void EnsureServiceAvailableFast(string relativeVirtualPath, EventTraceActivity eventTraceActivity)
+        internal static void EnsureServiceAvailableFast(
+            string relativeVirtualPath,
+            EventTraceActivity eventTraceActivity
+        )
         {
             try
             {
@@ -176,38 +206,56 @@ namespace System.ServiceModel
             }
         }
 
-        [Fx.Tag.SecurityNote(Critical = "Calls into an unsafe UnsafeLogEvent method.",
-            Safe = "Event identities cannot be spoofed as they are constants determined inside the method.")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Calls into an unsafe UnsafeLogEvent method.",
+            Safe = "Event identities cannot be spoofed as they are constants determined inside the method."
+        )]
         [SecuritySafeCritical]
-        private static void LogServiceActivationException(ServiceActivationException exception, EventTraceActivity eventTraceActivity)
+        private static void LogServiceActivationException(
+            ServiceActivationException exception,
+            EventTraceActivity eventTraceActivity
+        )
         {
             if (exception.InnerException is HttpException)
             {
-                string messageAsString = SafeTryGetHtmlErrorMessage((HttpException)exception.InnerException);
+                string messageAsString = SafeTryGetHtmlErrorMessage(
+                    (HttpException)exception.InnerException
+                );
                 if (string.IsNullOrEmpty(messageAsString))
                 {
                     messageAsString = exception.Message;
                 }
-                DiagnosticUtility.UnsafeEventLog.UnsafeLogEvent(TraceEventType.Error, (ushort)System.Runtime.Diagnostics.EventLogCategory.WebHost,
-                    (uint)System.Runtime.Diagnostics.EventLogEventId.WebHostHttpError, true,
+                DiagnosticUtility.UnsafeEventLog.UnsafeLogEvent(
+                    TraceEventType.Error,
+                    (ushort)System.Runtime.Diagnostics.EventLogCategory.WebHost,
+                    (uint)System.Runtime.Diagnostics.EventLogEventId.WebHostHttpError,
+                    true,
                     TraceUtility.CreateSourceString(hostingManager),
-                    messageAsString, exception.ToString());
+                    messageAsString,
+                    exception.ToString()
+                );
             }
             else if (exception.InnerException is InsufficientMemoryException)
             {
                 //Fix for CSDMain #113776
-                //This logic prevents InsufficientMemoryExceptions from flooding the event log by logging at most a fixed number ('MaxInsufficientMemoryLogCount') of these exceptions 
+                //This logic prevents InsufficientMemoryExceptions from flooding the event log by logging at most a fixed number ('MaxInsufficientMemoryLogCount') of these exceptions
                 //per fixed time interval ('InsufficientMemoryLogIntervalDuration').  If this limit is hit, no exceptions of this type are logged for a full time interval.
                 DateTime now = DateTime.UtcNow;
                 bool shouldLog = false;
                 bool reachedMax = false;
-                if (now - insufficientMemoryLogStartInterval > InsufficientMemoryLogIntervalDuration || insufficientMemoryLogCount < MaxInsufficientMemoryLogCount)
+                if (
+                    now - insufficientMemoryLogStartInterval > InsufficientMemoryLogIntervalDuration
+                    || insufficientMemoryLogCount < MaxInsufficientMemoryLogCount
+                )
                 {
                     //This lock ensures that the log count is only reset once, and that no race conditions exist for the log count and insufficientMemoryLogStartInterval
                     //These 2 static variables are only modified within this lock, and only read in this lock and in its containing if statement.
                     lock (ThisLock)
                     {
-                        if (now - insufficientMemoryLogStartInterval > InsufficientMemoryLogIntervalDuration)
+                        if (
+                            now - insufficientMemoryLogStartInterval
+                            > InsufficientMemoryLogIntervalDuration
+                        )
                         {
                             insufficientMemoryLogCount = 0;
                             insufficientMemoryLogStartInterval = now;
@@ -229,29 +277,59 @@ namespace System.ServiceModel
                 if (shouldLog)
                 {
                     //The lock above ensures that this line is hit no more than MaxInsufficientMemoryLogCount per time interval.
-                    DiagnosticUtility.UnsafeEventLog.UnsafeLogEvent(TraceEventType.Error, (ushort)System.Runtime.Diagnostics.EventLogCategory.WebHost,
-                        (uint)System.Runtime.Diagnostics.EventLogEventId.WebHostFailedToProcessRequest, true,
-                        TraceUtility.CreateSourceString(hostingManager), exception.ToString());
+                    DiagnosticUtility.UnsafeEventLog.UnsafeLogEvent(
+                        TraceEventType.Error,
+                        (ushort)System.Runtime.Diagnostics.EventLogCategory.WebHost,
+                        (uint)
+                            System
+                                .Runtime
+                                .Diagnostics
+                                .EventLogEventId
+                                .WebHostFailedToProcessRequest,
+                        true,
+                        TraceUtility.CreateSourceString(hostingManager),
+                        exception.ToString()
+                    );
 
                     //The lock above ensures that this if statement is entered exactly once if >= MaxInsufficientMemoryLogCount InsufficientMemoryExceptions are thrown in one time interval.
                     if (reachedMax)
                     {
-                        DiagnosticUtility.UnsafeEventLog.UnsafeLogEvent(TraceEventType.Warning, (ushort)System.Runtime.Diagnostics.EventLogCategory.WebHost,
-                            (uint)System.Runtime.Diagnostics.EventLogEventId.WebHostNotLoggingInsufficientMemoryExceptionsOnActivationForNextTimeInterval, true,
-                            SR2.Hosting_NotLoggingInsufficientMemoryExceptionsOnActivationForNextTimeInterval(InsufficientMemoryLogIntervalDuration.ToString()),
-                            TraceUtility.CreateSourceString(hostingManager));
+                        DiagnosticUtility.UnsafeEventLog.UnsafeLogEvent(
+                            TraceEventType.Warning,
+                            (ushort)System.Runtime.Diagnostics.EventLogCategory.WebHost,
+                            (uint)
+                                System
+                                    .Runtime
+                                    .Diagnostics
+                                    .EventLogEventId
+                                    .WebHostNotLoggingInsufficientMemoryExceptionsOnActivationForNextTimeInterval,
+                            true,
+                            SR2.Hosting_NotLoggingInsufficientMemoryExceptionsOnActivationForNextTimeInterval(
+                                InsufficientMemoryLogIntervalDuration.ToString()
+                            ),
+                            TraceUtility.CreateSourceString(hostingManager)
+                        );
                     }
                 }
             }
             else
             {
-                DiagnosticUtility.UnsafeEventLog.UnsafeLogEvent(TraceEventType.Error, (ushort)System.Runtime.Diagnostics.EventLogCategory.WebHost,
-                    (uint)System.Runtime.Diagnostics.EventLogEventId.WebHostFailedToProcessRequest, true,
-                    TraceUtility.CreateSourceString(hostingManager), exception.ToString());
+                DiagnosticUtility.UnsafeEventLog.UnsafeLogEvent(
+                    TraceEventType.Error,
+                    (ushort)System.Runtime.Diagnostics.EventLogCategory.WebHost,
+                    (uint)System.Runtime.Diagnostics.EventLogEventId.WebHostFailedToProcessRequest,
+                    true,
+                    TraceUtility.CreateSourceString(hostingManager),
+                    exception.ToString()
+                );
             }
             if (TD2.ServiceExceptionIsEnabled())
             {
-                TD2.ServiceException(eventTraceActivity, exception.ToString(), typeof(ServiceActivationException).FullName);
+                TD2.ServiceException(
+                    eventTraceActivity,
+                    exception.ToString(),
+                    typeof(ServiceActivationException).FullName
+                );
             }
         }
 
@@ -274,22 +352,32 @@ namespace System.ServiceModel
             return null;
         }
 
-        [Fx.Tag.SecurityNote(Miscellaneous = "RequiresReview - can be called outside of user context.")]
-        internal static void IncrementRequestCount(ref EventTraceActivity eventTraceActivity, string requestUrl)
+        [Fx.Tag.SecurityNote(
+            Miscellaneous = "RequiresReview - can be called outside of user context."
+        )]
+        internal static void IncrementRequestCount(
+            ref EventTraceActivity eventTraceActivity,
+            string requestUrl
+        )
         {
             Interlocked.Increment(ref requestCount);
-            
+
             if (Fx.Trace.IsEtwProviderEnabled)
             {
                 // aspnet provider might provide a guid. We will transfer this over
                 // We use a new id since the thread that comes might be reusing it.
                 Guid relatedId = EventTraceActivity.GetActivityIdFromThread();
-                eventTraceActivity = new EventTraceActivity();                
+                eventTraceActivity = new EventTraceActivity();
                 if (TD.WebHostRequestStartIsEnabled())
-                {                
-                    TD.WebHostRequestStart(eventTraceActivity, AppDomain.CurrentDomain.FriendlyName, requestUrl, relatedId);
+                {
+                    TD.WebHostRequestStart(
+                        eventTraceActivity,
+                        AppDomain.CurrentDomain.FriendlyName,
+                        requestUrl,
+                        relatedId
+                    );
                 }
-            }            
+            }
         }
 
         internal static void DecrementRequestCount(EventTraceActivity eventTraceActivity)
@@ -313,7 +401,10 @@ namespace System.ServiceModel
         {
             get
             {
-                Fx.Assert(IsHosted, "CurrentVirtualPath should not be called from non web-hosted environment.");
+                Fx.Assert(
+                    IsHosted,
+                    "CurrentVirtualPath should not be called from non web-hosted environment."
+                );
                 return HostingManager.CurrentVirtualPath;
             }
         }
@@ -324,8 +415,12 @@ namespace System.ServiceModel
             {
                 if (ServiceHostingEnvironment.serviceActivationElementPath == null)
                 {
-                    ServiceHostingEnvironment.serviceActivationElementPath = string.Format(CultureInfo.CurrentCulture, "{0}/{1}",
-                        ConfigurationStrings.ServiceHostingEnvironmentSectionPath, ConfigurationStrings.ServiceActivations);
+                    ServiceHostingEnvironment.serviceActivationElementPath = string.Format(
+                        CultureInfo.CurrentCulture,
+                        "{0}/{1}",
+                        ConfigurationStrings.ServiceHostingEnvironmentSectionPath,
+                        ConfigurationStrings.ServiceActivations
+                    );
                 }
                 return ServiceHostingEnvironment.serviceActivationElementPath;
             }
@@ -349,7 +444,8 @@ namespace System.ServiceModel
             {
                 if (ServiceHostingEnvironment.applicationVirtualPath == null)
                 {
-                    ServiceHostingEnvironment.applicationVirtualPath = HostingEnvironment.ApplicationVirtualPath;
+                    ServiceHostingEnvironment.applicationVirtualPath =
+                        HostingEnvironment.ApplicationVirtualPath;
                 }
                 return ServiceHostingEnvironment.applicationVirtualPath;
             }
@@ -358,7 +454,10 @@ namespace System.ServiceModel
         {
             get
             {
-                Fx.Assert(IsHosted, "FullVirtualPath should not be called from non web-hosted environment.");
+                Fx.Assert(
+                    IsHosted,
+                    "FullVirtualPath should not be called from non web-hosted environment."
+                );
                 return HostingManager.FullVirtualPath;
             }
         }
@@ -366,7 +465,10 @@ namespace System.ServiceModel
         {
             get
             {
-                Fx.Assert(IsHosted, "XamlFileBaseLocation should not be called from non web-hosted environment.");
+                Fx.Assert(
+                    IsHosted,
+                    "XamlFileBaseLocation should not be called from non web-hosted environment."
+                );
                 return HostingManager.XamlFileBaseLocation;
             }
         }
@@ -374,22 +476,32 @@ namespace System.ServiceModel
         {
             get
             {
-                Fx.Assert(IsHosted, "IsConfigurationBased should not be called from non web-hosted environment.");
+                Fx.Assert(
+                    IsHosted,
+                    "IsConfigurationBased should not be called from non web-hosted environment."
+                );
                 return HostingManager.IsConfigurationBased;
             }
         }
 
-        [Fx.Tag.SecurityNote(Miscellaneous = "RequiresReview - called by ProcessRequest outside of the restricted SecurityContext.")]
+        [Fx.Tag.SecurityNote(
+            Miscellaneous = "RequiresReview - called by ProcessRequest outside of the restricted SecurityContext."
+        )]
         internal static ServiceType GetServiceType(string extension)
         {
-            Fx.Assert(IsHosted, "GetServiceType should not be called from non web-hosted environment.");
+            Fx.Assert(
+                IsHosted,
+                "GetServiceType should not be called from non web-hosted environment."
+            );
             return hostingManager.GetServiceType(extension);
         }
 
-
         internal static bool EnsureWorkflowService(string path)
         {
-            Fx.Assert(IsHosted, "EnsureWorkflowService should not be called from non web-hosted environment.");
+            Fx.Assert(
+                IsHosted,
+                "EnsureWorkflowService should not be called from non web-hosted environment."
+            );
 
             PathInfo pathInfo = PathCache.EnsurePathInfo(path);
             return pathInfo.IsWorkflowService();
@@ -399,42 +511,63 @@ namespace System.ServiceModel
         {
             get
             {
-                Fx.Assert(IsHosted, "IsRecycling should not be called from non web-hosted environment.");
+                Fx.Assert(
+                    IsHosted,
+                    "IsRecycling should not be called from non web-hosted environment."
+                );
                 return hostingManager.IsRecycling;
             }
         }
 
         static object ThisLock
         {
-            get
-            {
-                return syncRoot;
-            }
+            get { return syncRoot; }
         }
 
-        [Fx.Tag.SecurityNote(Miscellaneous = "RequiresReview - called by ProcessRequest outside of the restricted SecurityContext.")]
+        [Fx.Tag.SecurityNote(
+            Miscellaneous = "RequiresReview - called by ProcessRequest outside of the restricted SecurityContext."
+        )]
         internal static bool IsConfigurationBasedService(HttpApplication application)
         {
-            Fx.Assert(IsHosted, "IsConfigurationBased should not be called from non web-hosted environment.");
+            Fx.Assert(
+                IsHosted,
+                "IsConfigurationBased should not be called from non web-hosted environment."
+            );
             string dummyString;
             return IsConfigurationBasedService(application, out dummyString);
         }
 
-        [Fx.Tag.SecurityNote(Miscellaneous = "RequiresReview - called by MsmqHostedTransportManager outside of the restricted SecurityContext.")]
+        [Fx.Tag.SecurityNote(
+            Miscellaneous = "RequiresReview - called by MsmqHostedTransportManager outside of the restricted SecurityContext."
+        )]
         internal static bool IsConfigurationBasedService(string virtualPath)
         {
-            Fx.Assert(IsHosted, "IsConfigurationBased should not be called from non web-hosted environment.");
+            Fx.Assert(
+                IsHosted,
+                "IsConfigurationBased should not be called from non web-hosted environment."
+            );
             return hostingManager.IsConfigurationBasedServiceVirtualPath(virtualPath);
         }
 
-        [Fx.Tag.SecurityNote(Miscellaneous = "RequiresReview - called by ProcessRequest outside of the restricted SecurityContext.")]
-        internal static bool IsConfigurationBasedService(HttpApplication application, out string matchedVirtualPath)
+        [Fx.Tag.SecurityNote(
+            Miscellaneous = "RequiresReview - called by ProcessRequest outside of the restricted SecurityContext."
+        )]
+        internal static bool IsConfigurationBasedService(
+            HttpApplication application,
+            out string matchedVirtualPath
+        )
         {
-            Fx.Assert(IsHosted, "IsConfigurationBased should not be called from non web-hosted environment.");
+            Fx.Assert(
+                IsHosted,
+                "IsConfigurationBased should not be called from non web-hosted environment."
+            );
             bool isCBAService = false;
             matchedVirtualPath = null;
             string virtualPath = application.Request.AppRelativeCurrentExecutionFilePath;
-            if (!string.IsNullOrEmpty(virtualPath) && hostingManager.IsConfigurationBasedServiceVirtualPath(virtualPath))
+            if (
+                !string.IsNullOrEmpty(virtualPath)
+                && hostingManager.IsConfigurationBasedServiceVirtualPath(virtualPath)
+            )
             {
                 matchedVirtualPath = virtualPath;
                 isCBAService = true;
@@ -442,16 +575,23 @@ namespace System.ServiceModel
             return isCBAService;
         }
 
-        [Fx.Tag.SecurityNote(Miscellaneous = "RequiresReview - called by ProcessRequest outside of the restricted SecurityContext.")]
+        [Fx.Tag.SecurityNote(
+            Miscellaneous = "RequiresReview - called by ProcessRequest outside of the restricted SecurityContext."
+        )]
         internal static void SafeEnsureInitialized()
         {
             if (hostingManager == null)
             {
-                AspNetPartialTrustHelpers.PartialTrustInvoke(new ContextCallback(OnEnsureInitialized), null);
+                AspNetPartialTrustHelpers.PartialTrustInvoke(
+                    new ContextCallback(OnEnsureInitialized),
+                    null
+                );
             }
         }
 
-        [Fx.Tag.SecurityNote(Miscellaneous = "RequiresReview - can be called outside of user context.")]
+        [Fx.Tag.SecurityNote(
+            Miscellaneous = "RequiresReview - can be called outside of user context."
+        )]
         internal static void EnsureAllReferencedAssemblyLoaded()
         {
             AspNetPartialTrustHelpers.FailIfInPartialTrustOutsideAspNet();
@@ -472,7 +612,9 @@ namespace System.ServiceModel
                 return;
             }
 
-            FxTrace.Trace.SetAnnotation(() => System.ServiceModel.Diagnostics.TraceUtility.GetAnnotation(OperationContext.Current));
+            FxTrace.Trace.SetAnnotation(() =>
+                System.ServiceModel.Diagnostics.TraceUtility.GetAnnotation(OperationContext.Current)
+            );
 
             lock (ThisLock)
             {
@@ -483,7 +625,14 @@ namespace System.ServiceModel
 
                 if (!HostingEnvironmentWrapper.IsHosted)
                 {
-                    throw FxTrace.Exception.AsError(new InvalidOperationException(SR.GetString(SR.Hosting_ProcessNotExecutingUnderHostedContext, "ServiceHostingEnvironment.EnsureServiceAvailable")));
+                    throw FxTrace.Exception.AsError(
+                        new InvalidOperationException(
+                            SR.GetString(
+                                SR.Hosting_ProcessNotExecutingUnderHostedContext,
+                                "ServiceHostingEnvironment.EnsureServiceAvailable"
+                            )
+                        )
+                    );
                 }
 
                 HostingManager tempHostingManager = new HostingManager();
@@ -501,24 +650,35 @@ namespace System.ServiceModel
             }
         }
 
-        [Fx.Tag.SecurityNote(Critical = "Satisfies a LinkDemand for SecurityPermission(ControlAppDomain) on HookADUnhandledExceptionEvent.",
-            Safe = "No control flow in for handler.")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Satisfies a LinkDemand for SecurityPermission(ControlAppDomain) on HookADUnhandledExceptionEvent.",
+            Safe = "No control flow in for handler."
+        )]
         [SecuritySafeCritical]
         static void HookADUnhandledExceptionEvent()
         {
             AppDomain.CurrentDomain.UnhandledException += OnUnhandledException;
-
         }
 
-        [Fx.Tag.SecurityNote(Critical = "Uses SecurityCritical property UnsafeApplicationID to get application id with an elevation.",
-            Safe = "Processes result into a simple bool which is not protected.")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Uses SecurityCritical property UnsafeApplicationID to get application id with an elevation.",
+            Safe = "Processes result into a simple bool which is not protected."
+        )]
         [SecuritySafeCritical]
         static bool GetIsSimpleApplicationHost()
         {
             // ASPNET won't provide API to check Cassini. But it's safe and performant to check only
             // the ApplicationID prefix (MessageBus Bug 24832).
-            return (string.Compare(ISAPIApplicationIdPrefix, 0,
-                    HostingEnvironmentWrapper.UnsafeApplicationID, 0, ISAPIApplicationIdPrefix.Length, StringComparison.OrdinalIgnoreCase) != 0);
+            return (
+                string.Compare(
+                    ISAPIApplicationIdPrefix,
+                    0,
+                    HostingEnvironmentWrapper.UnsafeApplicationID,
+                    0,
+                    ISAPIApplicationIdPrefix.Length,
+                    StringComparison.OrdinalIgnoreCase
+                ) != 0
+            );
         }
 
         // customer input can be "/appname/<folder>/filename" or "~/<folder>/filename, we will normalize them to application relative one
@@ -532,19 +692,34 @@ namespace System.ServiceModel
             try
             {
                 // Convert the virtual path to relative if not already is.
-                processedVirtualPath = VirtualPathUtility.ToAppRelative(virtualPath, HostingEnvironmentWrapper.ApplicationVirtualPath);
+                processedVirtualPath = VirtualPathUtility.ToAppRelative(
+                    virtualPath,
+                    HostingEnvironmentWrapper.ApplicationVirtualPath
+                );
             }
             catch (HttpException exception)
             {
                 // We want to throw an ArgumentException.
-                throw FxTrace.Exception.AsError(new ArgumentException(exception.Message, "virtualPath", exception));
+                throw FxTrace.Exception.AsError(
+                    new ArgumentException(exception.Message, "virtualPath", exception)
+                );
             }
 
-            if (string.IsNullOrEmpty(processedVirtualPath) ||
-                !processedVirtualPath.StartsWith(RelativeVirtualPathPrefix, StringComparison.Ordinal))
+            if (
+                string.IsNullOrEmpty(processedVirtualPath)
+                || !processedVirtualPath.StartsWith(
+                    RelativeVirtualPathPrefix,
+                    StringComparison.Ordinal
+                )
+            )
             {
-                throw FxTrace.Exception.Argument("virtualPath",
-                    SR2.Hosting_AddressPointsOutsideTheVirtualDirectory(virtualPath, HostingEnvironmentWrapper.ApplicationVirtualPath));
+                throw FxTrace.Exception.Argument(
+                    "virtualPath",
+                    SR2.Hosting_AddressPointsOutsideTheVirtualDirectory(
+                        virtualPath,
+                        HostingEnvironmentWrapper.ApplicationVirtualPath
+                    )
+                );
             }
 
             // Find the position to start.
@@ -555,42 +730,49 @@ namespace System.ServiceModel
                 // Search inside the processedVirtualPath to find the extension.
                 pos = processedVirtualPath.IndexOf(PathSeparator, pos + 1);
 
-                string subVirtualPath = (pos == -1) ? processedVirtualPath : processedVirtualPath.Substring(0, pos);
+                string subVirtualPath =
+                    (pos == -1) ? processedVirtualPath : processedVirtualPath.Substring(0, pos);
                 string extension = VirtualPathUtility.GetExtension(subVirtualPath);
-                if ((!string.IsNullOrEmpty(extension)) &&
-                     ServiceHostingEnvironment.GetServiceType(extension) != ServiceType.Unknown)
+                if (
+                    (!string.IsNullOrEmpty(extension))
+                    && ServiceHostingEnvironment.GetServiceType(extension) != ServiceType.Unknown
+                )
                 {
                     // Remove the pathinfo.
                     return subVirtualPath;
                 }
             }
 
-            throw FxTrace.Exception.AsError(new EndpointNotFoundException(SR2.Hosting_ServiceNotExist(virtualPath)));
+            throw FxTrace.Exception.AsError(
+                new EndpointNotFoundException(SR2.Hosting_ServiceNotExist(virtualPath))
+            );
         }
 
         internal static bool IsHosted
         {
-            [Fx.Tag.SecurityNote(Miscellaneous = "RequiresReview - can be called outside of user context.")]
-            get
-            {
-                return isHosted;
-            }
+            [Fx.Tag.SecurityNote(
+                Miscellaneous = "RequiresReview - can be called outside of user context."
+            )]
+            get { return isHosted; }
         }
 
         internal static bool IsSimpleApplicationHost
         {
             get
             {
-                Fx.Assert(IsHosted, "IsSimpleApplicationHost should not be called from non web-hosted environment.");
+                Fx.Assert(
+                    IsHosted,
+                    "IsSimpleApplicationHost should not be called from non web-hosted environment."
+                );
                 return isSimpleApplicationHost;
             }
         }
-        
+
         internal enum ServiceType
         {
             Unknown = 0,
             WCF,
-            Workflow
+            Workflow,
         }
 
         class HostingManager : IRegisteredObject
@@ -606,13 +788,16 @@ namespace System.ServiceModel
             object activationLock = new object();
             Uri[] baseAddressPrefixFilters;
             Hashtable serviceActivations;
+
             //used to track if HostingEnvironment.RegisterObject has been called.
             bool isRegistered;
 
             // One instance per appdomain, don't need to be disposed.
             ManualResetEvent allRequestDoneInStop = new ManualResetEvent(false);
 
-            [Fx.Tag.SecurityNote(Critical = "Admin-provided value that allows for machine resource allocation.")]
+            [Fx.Tag.SecurityNote(
+                Critical = "Admin-provided value that allows for machine resource allocation."
+            )]
             [SecurityCritical]
             int minFreeMemoryPercentageToActivateService;
 
@@ -635,20 +820,27 @@ namespace System.ServiceModel
 
             internal HostingManager()
             {
-                this.directory = new CollectibleLRUCache<string, ServiceHostBase>(16, StringComparer.OrdinalIgnoreCase);
+                this.directory = new CollectibleLRUCache<string, ServiceHostBase>(
+                    16,
+                    StringComparer.OrdinalIgnoreCase
+                );
                 this.extensions = new ExtensionHelper();
                 LoadConfigParameters();
             }
 
-            [Fx.Tag.SecurityNote(Critical = "Uses SecurityCritical method UnsafeGetSection to get config with an elevation. Sets minFreeMemoryPercentageToActivateService",
-                Safe = "Does not leak config objects.")]
+            [Fx.Tag.SecurityNote(
+                Critical = "Uses SecurityCritical method UnsafeGetSection to get config with an elevation. Sets minFreeMemoryPercentageToActivateService",
+                Safe = "Does not leak config objects."
+            )]
             [SecuritySafeCritical]
             void LoadConfigParameters()
             {
-                ServiceHostingEnvironmentSection section = ServiceHostingEnvironmentSection.UnsafeGetSection();
+                ServiceHostingEnvironmentSection section =
+                    ServiceHostingEnvironmentSection.UnsafeGetSection();
                 this.aspNetCompatibilityEnabled = section.AspNetCompatibilityEnabled;
                 this.multipleSiteBindingsEnabled = section.MultipleSiteBindingsEnabled;
-                this.minFreeMemoryPercentageToActivateService = section.MinFreeMemoryPercentageToActivateService;
+                this.minFreeMemoryPercentageToActivateService =
+                    section.MinFreeMemoryPercentageToActivateService;
                 this.closeIdleServicesAtLowMemory = section.CloseIdleServicesAtLowMemory;
                 List<Uri> prefixFilters = new List<Uri>();
 
@@ -660,13 +852,33 @@ namespace System.ServiceModel
                 this.serviceActivations = new Hashtable(StringComparer.CurrentCultureIgnoreCase);
                 foreach (ServiceActivationElement element in section.ServiceActivations)
                 {
-                    if (string.IsNullOrEmpty(element.Factory) && string.IsNullOrEmpty(element.Service))
+                    if (
+                        string.IsNullOrEmpty(element.Factory)
+                        && string.IsNullOrEmpty(element.Service)
+                    )
                     {
-                        throw FxTrace.Exception.AsError(new ConfigurationErrorsException(SR2.Hosting_NoServiceAndFactorySpecifiedForFilelessService(ConfigurationStrings.Factory, ConfigurationStrings.Service, element.RelativeAddress, ServiceActivationElementPath)));
+                        throw FxTrace.Exception.AsError(
+                            new ConfigurationErrorsException(
+                                SR2.Hosting_NoServiceAndFactorySpecifiedForFilelessService(
+                                    ConfigurationStrings.Factory,
+                                    ConfigurationStrings.Service,
+                                    element.RelativeAddress,
+                                    ServiceActivationElementPath
+                                )
+                            )
+                        );
                     }
 
-                    string normalizedRelativeAddress = NormalizedRelativeAddress(element.RelativeAddress);
-                    string value = string.Format(CultureInfo.CurrentCulture, "{0}|{1}|{2}", normalizedRelativeAddress, element.Factory, element.Service);
+                    string normalizedRelativeAddress = NormalizedRelativeAddress(
+                        element.RelativeAddress
+                    );
+                    string value = string.Format(
+                        CultureInfo.CurrentCulture,
+                        "{0}|{1}|{2}",
+                        normalizedRelativeAddress,
+                        element.Factory,
+                        element.Service
+                    );
 
                     try
                     {
@@ -678,12 +890,21 @@ namespace System.ServiceModel
                     }
                     catch (ArgumentException)
                     {
-                        throw FxTrace.Exception.AsError(new ConfigurationErrorsException(SR2.Hosting_RelativeAddressHasBeenAdded(element.RelativeAddress, ServiceActivationElementPath)));
+                        throw FxTrace.Exception.AsError(
+                            new ConfigurationErrorsException(
+                                SR2.Hosting_RelativeAddressHasBeenAdded(
+                                    element.RelativeAddress,
+                                    ServiceActivationElementPath
+                                )
+                            )
+                        );
                     }
                 }
             }
 
-            [Fx.Tag.SecurityNote(Miscellaneous = "RequiresReview - can be called outside of user context.")]
+            [Fx.Tag.SecurityNote(
+                Miscellaneous = "RequiresReview - can be called outside of user context."
+            )]
             internal ServiceType GetServiceType(string extension)
             {
                 return extensions.GetServiceType(extension);
@@ -691,77 +912,56 @@ namespace System.ServiceModel
 
             internal bool AspNetCompatibilityEnabled
             {
-                [Fx.Tag.SecurityNote(Miscellaneous = "RequiresReview - can be called outside of user context.")]
-                get
-                {
-                    return this.aspNetCompatibilityEnabled;
-                }
+                [Fx.Tag.SecurityNote(
+                    Miscellaneous = "RequiresReview - can be called outside of user context."
+                )]
+                get { return this.aspNetCompatibilityEnabled; }
             }
 
             internal bool MultipleSiteBindingsEnabled
             {
-                [Fx.Tag.SecurityNote(Miscellaneous = "RequiresReview - can be called outside of user context.")]
-                get
-                {
-                    return this.multipleSiteBindingsEnabled;
-                }
+                [Fx.Tag.SecurityNote(
+                    Miscellaneous = "RequiresReview - can be called outside of user context."
+                )]
+                get { return this.multipleSiteBindingsEnabled; }
             }
 
             internal Uri[] BaseAddressPrefixFilters
             {
-                [Fx.Tag.SecurityNote(Miscellaneous = "RequiresReview - can be called outside of user context.")]
-                get
-                {
-                    return this.baseAddressPrefixFilters;
-                }
+                [Fx.Tag.SecurityNote(
+                    Miscellaneous = "RequiresReview - can be called outside of user context."
+                )]
+                get { return this.baseAddressPrefixFilters; }
             }
 
             internal static string CurrentVirtualPath
             {
-                get
-                {
-                    return currentVirtualPath;
-                }
+                get { return currentVirtualPath; }
             }
 
             internal static string FullVirtualPath
             {
-                get
-                {
-                    return fullVirtualPath;
-                }
+                get { return fullVirtualPath; }
             }
 
             internal static string XamlFileBaseLocation
             {
-                get
-                {
-                    return xamlFileBaseLocation;
-                }
+                get { return xamlFileBaseLocation; }
             }
 
             internal static bool IsConfigurationBased
             {
-                get
-                {
-                    return isConfigurationBased;
-                }
+                get { return isConfigurationBased; }
             }
 
             object ActivationLock
             {
-                get
-                {
-                    return this.activationLock;
-                }
+                get { return this.activationLock; }
             }
 
             internal bool IsRecycling
             {
-                get
-                {
-                    return isRecycling;
-                }
+                get { return isRecycling; }
             }
 
             internal string NormalizedRelativeAddress(string relativeAddress)
@@ -776,36 +976,67 @@ namespace System.ServiceModel
                 {
                     if (VirtualPathUtility.IsAbsolute(relativeAddress))
                     {
-                        throw FxTrace.Exception.AsError(new ConfigurationErrorsException(SR2.Hosting_RelativeAddressFormatError(relativeAddress)));
+                        throw FxTrace.Exception.AsError(
+                            new ConfigurationErrorsException(
+                                SR2.Hosting_RelativeAddressFormatError(relativeAddress)
+                            )
+                        );
                     }
 
                     relativeAddress = VirtualPathUtility.Combine(RootVirtualPath, relativeAddress);
                     string extension = VirtualPathUtility.GetExtension(relativeAddress);
                     if (string.IsNullOrEmpty(extension))
                     {
-                        throw FxTrace.Exception.AsError(new ConfigurationErrorsException(SR2.Hosting_NoValidExtensionFoundForRegistedFilelessService(originalRelativeAddress, ServiceActivationElementPath)));
+                        throw FxTrace.Exception.AsError(
+                            new ConfigurationErrorsException(
+                                SR2.Hosting_NoValidExtensionFoundForRegistedFilelessService(
+                                    originalRelativeAddress,
+                                    ServiceActivationElementPath
+                                )
+                            )
+                        );
                     }
                     else if (GetServiceType(extension) == ServiceType.Unknown)
                     {
-                        throw FxTrace.Exception.AsError(new ConfigurationErrorsException(SR2.Hosting_RelativeAddressExtensionNotSupportError(extension, originalRelativeAddress, ServiceActivationElementPath)));
+                        throw FxTrace.Exception.AsError(
+                            new ConfigurationErrorsException(
+                                SR2.Hosting_RelativeAddressExtensionNotSupportError(
+                                    extension,
+                                    originalRelativeAddress,
+                                    ServiceActivationElementPath
+                                )
+                            )
+                        );
                     }
                 }
-                // since we did Empty/Null string checking in configuration element validator, we should not hit ArgumentException, just catch HttpException for invalid characher 
+                // since we did Empty/Null string checking in configuration element validator, we should not hit ArgumentException, just catch HttpException for invalid characher
                 catch (HttpException ex)
                 {
-                    throw FxTrace.Exception.AsError(new ConfigurationErrorsException(SR2.Hosting_RelativeAddressFormatError(originalRelativeAddress), ex));
+                    throw FxTrace.Exception.AsError(
+                        new ConfigurationErrorsException(
+                            SR2.Hosting_RelativeAddressFormatError(originalRelativeAddress),
+                            ex
+                        )
+                    );
                 }
                 return relativeAddress;
             }
 
-            [Fx.Tag.SecurityNote(Miscellaneous = "RequiresReview - can be called outside of user context.")]
+            [Fx.Tag.SecurityNote(
+                Miscellaneous = "RequiresReview - can be called outside of user context."
+            )]
             internal bool IsConfigurationBasedServiceVirtualPath(string normalizedVirtualPath)
             {
                 return this.serviceActivations.ContainsKey(normalizedVirtualPath);
             }
 
-            [Fx.Tag.SecurityNote(Miscellaneous = "RequiresReview - can be called outside of user context.")]
-            internal bool TryGetCompiledCustomStringFromCBA(string normalizedVirtualPath, out string compiledCustomString)
+            [Fx.Tag.SecurityNote(
+                Miscellaneous = "RequiresReview - can be called outside of user context."
+            )]
+            internal bool TryGetCompiledCustomStringFromCBA(
+                string normalizedVirtualPath,
+                out string compiledCustomString
+            )
             {
                 compiledCustomString = null;
                 bool isCBAService = false;
@@ -817,9 +1048,14 @@ namespace System.ServiceModel
                 return isCBAService;
             }
 
-            internal void EnsureServiceAvailable(string normalizedVirtualPath, EventTraceActivity eventTraceActivity)
+            internal void EnsureServiceAvailable(
+                string normalizedVirtualPath,
+                EventTraceActivity eventTraceActivity
+            )
             {
-                TryDebugPrint("HostingManager.EnsureServiceAvailable(" + normalizedVirtualPath + ")");
+                TryDebugPrint(
+                    "HostingManager.EnsureServiceAvailable(" + normalizedVirtualPath + ")"
+                );
 
                 ServiceActivationInfo activationInfo = null;
 
@@ -836,17 +1072,30 @@ namespace System.ServiceModel
                 }
 
                 // 2. Special casing two cases (Routing and Config-based activation)
-                isAspNetRoutedRequest = ServiceRouteHandler.IsActiveAspNetRoute(normalizedVirtualPath);
-                isConfigurationBased = IsConfigurationBasedServiceVirtualPath(normalizedVirtualPath);
+                isAspNetRoutedRequest = ServiceRouteHandler.IsActiveAspNetRoute(
+                    normalizedVirtualPath
+                );
+                isConfigurationBased = IsConfigurationBasedServiceVirtualPath(
+                    normalizedVirtualPath
+                );
 
-                // Check service file existence if not config based activation or aspnet routing. 
-                if (!isAspNetRoutedRequest && !isConfigurationBased
-                     && !HostingEnvironmentWrapper.ServiceFileExists(normalizedVirtualPath))
+                // Check service file existence if not config based activation or aspnet routing.
+                if (
+                    !isAspNetRoutedRequest
+                    && !isConfigurationBased
+                    && !HostingEnvironmentWrapper.ServiceFileExists(normalizedVirtualPath)
+                )
                 {
                     throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
                         new EndpointNotFoundException(
-                                SR2.Hosting_ServiceNotExist(
-                                VirtualPathUtility.ToAbsolute(normalizedVirtualPath, HostingEnvironmentWrapper.ApplicationVirtualPath))));
+                            SR2.Hosting_ServiceNotExist(
+                                VirtualPathUtility.ToAbsolute(
+                                    normalizedVirtualPath,
+                                    HostingEnvironmentWrapper.ApplicationVirtualPath
+                                )
+                            )
+                        )
+                    );
                 }
 
                 // 3. Use global lock to create ServiceActivationInfo if necessary.
@@ -861,7 +1110,8 @@ namespace System.ServiceModel
                         isRegistered = true;
                     }
 
-                    activationInfo = (ServiceActivationInfo)this.directory.UnsafeGet(normalizedVirtualPath);
+                    activationInfo = (ServiceActivationInfo)
+                        this.directory.UnsafeGet(normalizedVirtualPath);
                     if (activationInfo != null)
                     {
                         if (activationInfo.Initialized)
@@ -879,7 +1129,10 @@ namespace System.ServiceModel
 
                     if (activationInfo == null)
                     {
-                        activationInfo = new ServiceActivationInfo(hostingManager, normalizedVirtualPath);
+                        activationInfo = new ServiceActivationInfo(
+                            hostingManager,
+                            normalizedVirtualPath
+                        );
                         directory.UnsafeAdd(activationInfo);
                     }
                 }
@@ -911,8 +1164,19 @@ namespace System.ServiceModel
                         if (DiagnosticUtility.ShouldTraceInformation)
                         {
                             TraceUtility.TraceEvent(
-                                TraceEventType.Information, TraceCode.WebHostServiceActivated, SR2.TraceCodeWebHostServiceActivated,
-                                new StringTraceRecord("VirtualPath", VirtualPathUtility.ToAbsolute(normalizedVirtualPath, HostingEnvironmentWrapper.ApplicationVirtualPath)), this, (Exception)null);
+                                TraceEventType.Information,
+                                TraceCode.WebHostServiceActivated,
+                                SR2.TraceCodeWebHostServiceActivated,
+                                new StringTraceRecord(
+                                    "VirtualPath",
+                                    VirtualPathUtility.ToAbsolute(
+                                        normalizedVirtualPath,
+                                        HostingEnvironmentWrapper.ApplicationVirtualPath
+                                    )
+                                ),
+                                this,
+                                (Exception)null
+                            );
                         }
 
                         if (TD.ServiceHostStartedIsEnabled())
@@ -927,7 +1191,8 @@ namespace System.ServiceModel
                                 }
                                 else
                                 {
-                                    serviceName = host.Description.Namespace + host.Description.Name;
+                                    serviceName =
+                                        host.Description.Namespace + host.Description.Name;
                                 }
                             }
                             if (string.IsNullOrEmpty(serviceName))
@@ -935,8 +1200,17 @@ namespace System.ServiceModel
                                 serviceName = SR2.ServiceTypeUnknown;
                             }
 
-                            string servicePath = normalizedVirtualPath.Replace("~", ServiceHostingEnvironment.ApplicationVirtualPath + "|");
-                            string hostReference = string.Format(CultureInfo.InvariantCulture, "{0}{1}|{2}", ServiceHostingEnvironment.SiteName, servicePath, host.Description.Name);
+                            string servicePath = normalizedVirtualPath.Replace(
+                                "~",
+                                ServiceHostingEnvironment.ApplicationVirtualPath + "|"
+                            );
+                            string hostReference = string.Format(
+                                CultureInfo.InvariantCulture,
+                                "{0}{1}|{2}",
+                                ServiceHostingEnvironment.SiteName,
+                                servicePath,
+                                host.Description.Name
+                            );
                             TD.ServiceHostStarted(eventTraceActivity, serviceName, hostReference);
                         }
 
@@ -944,7 +1218,16 @@ namespace System.ServiceModel
                     }
                     catch (HttpCompileException ex)
                     {
-                        lastException = new ServiceActivationException(SR2.Hosting_ServiceCannotBeActivated(VirtualPathUtility.ToAbsolute(normalizedVirtualPath, HostingEnvironmentWrapper.ApplicationVirtualPath), ex.Message), ex);
+                        lastException = new ServiceActivationException(
+                            SR2.Hosting_ServiceCannotBeActivated(
+                                VirtualPathUtility.ToAbsolute(
+                                    normalizedVirtualPath,
+                                    HostingEnvironmentWrapper.ApplicationVirtualPath
+                                ),
+                                ex.Message
+                            ),
+                            ex
+                        );
                         throw FxTrace.Exception.AsError(lastException);
                     }
                     catch (ServiceActivationException ex)
@@ -961,7 +1244,16 @@ namespace System.ServiceModel
                             throw;
                         }
 
-                        lastException = new ServiceActivationException(SR2.Hosting_ServiceCannotBeActivated(VirtualPathUtility.ToAbsolute(normalizedVirtualPath, HostingEnvironmentWrapper.ApplicationVirtualPath), ex.Message), ex);
+                        lastException = new ServiceActivationException(
+                            SR2.Hosting_ServiceCannotBeActivated(
+                                VirtualPathUtility.ToAbsolute(
+                                    normalizedVirtualPath,
+                                    HostingEnvironmentWrapper.ApplicationVirtualPath
+                                ),
+                                ex.Message
+                            ),
+                            ex
+                        );
                         throw FxTrace.Exception.AsError(lastException);
                     }
                     finally
@@ -998,16 +1290,25 @@ namespace System.ServiceModel
                             int totalCount = directory.Count;
                             if (!directory.UnsafeBeginBatchCollect())
                             {
-                                throw FxTrace.Exception.AsError(new InsufficientMemoryException(
-                                    System.ServiceModel.Activation.SR.Hosting_MemoryGatesCheckFailed(availableMemoryBytes,
-                                    this.minFreeMemoryPercentageToActivateService)));
+                                throw FxTrace.Exception.AsError(
+                                    new InsufficientMemoryException(
+                                        System.ServiceModel.Activation.SR.Hosting_MemoryGatesCheckFailed(
+                                            availableMemoryBytes,
+                                            this.minFreeMemoryPercentageToActivateService
+                                        )
+                                    )
+                                );
                             }
 
                             if (directory.Count < totalCount)
                             {
                                 if (TD.IdleServicesClosedIsEnabled())
                                 {
-                                    TD.IdleServicesClosed(eventTraceActivity, totalCount - directory.Count, totalCount);
+                                    TD.IdleServicesClosed(
+                                        eventTraceActivity,
+                                        totalCount - directory.Count,
+                                        totalCount
+                                    );
                                 }
 
                                 shouldWaitForCollectComplete = true;
@@ -1023,15 +1324,24 @@ namespace System.ServiceModel
                 }
             }
 
-            [Fx.Tag.SecurityNote(Critical = "Accesses minFreeMemoryPercentageToActivateService, calls Check.",
-                Safe = "No input / output, safe operation if called with administrator-provided value.")]
+            [Fx.Tag.SecurityNote(
+                Critical = "Accesses minFreeMemoryPercentageToActivateService, calls Check.",
+                Safe = "No input / output, safe operation if called with administrator-provided value."
+            )]
             [SecuritySafeCritical]
             bool CheckMemoryGates(out ulong availableMemoryBytes)
             {
-                return ServiceMemoryGates.Check(this.minFreeMemoryPercentageToActivateService, !this.closeIdleServicesAtLowMemory, out availableMemoryBytes);
+                return ServiceMemoryGates.Check(
+                    this.minFreeMemoryPercentageToActivateService,
+                    !this.closeIdleServicesAtLowMemory,
+                    out availableMemoryBytes
+                );
             }
 
-            void ActivateService(ServiceActivationInfo serviceActivationInfo, EventTraceActivity eventTraceActivity)
+            void ActivateService(
+                ServiceActivationInfo serviceActivationInfo,
+                EventTraceActivity eventTraceActivity
+            )
             {
                 string normalizedVirtualPath = serviceActivationInfo.GetKey();
                 ServiceHostBase service = CreateService(normalizedVirtualPath, eventTraceActivity);
@@ -1057,15 +1367,17 @@ namespace System.ServiceModel
             }
 
             // Why this triple try blocks instead of using "using" statement:
-            // 1. "using" will do the impersonation prior to entering the try, 
+            // 1. "using" will do the impersonation prior to entering the try,
             //    which leaves an opertunity to Thread.Abort this thread and get it to exit the method still impersonated.
-            // 2. put the assignment of unsafeImpersonate in a finally block 
+            // 2. put the assignment of unsafeImpersonate in a finally block
             //    in order to prevent Threat.Abort after impersonation but before the assignment.
             // 3. the finally of a "using" doesn't run until exception filters higher up the stack have executed.
             //    they will do so in the impersonated context if an exception is thrown inside the try.
-            // In sumary, this should prevent the thread from existing this method well still impersonated. 
-            [Fx.Tag.SecurityNote(Critical = "Uses SecurityCritical method UnsafeImpersonate to establish the impersonation context.",
-                Safe = "Does not leak anything, does not let caller influence impersonation.")]
+            // In sumary, this should prevent the thread from existing this method well still impersonated.
+            [Fx.Tag.SecurityNote(
+                Critical = "Uses SecurityCritical method UnsafeImpersonate to establish the impersonation context.",
+                Safe = "Does not leak anything, does not let caller influence impersonation."
+            )]
             [SecuritySafeCritical]
             string GetCompiledCustomString(string normalizedVirtualPath)
             {
@@ -1077,11 +1389,14 @@ namespace System.ServiceModel
                     try
                     {
                         string result = null;
-                        if (!this.TryGetCompiledCustomStringFromCBA(normalizedVirtualPath, out result))
+                        if (
+                            !this.TryGetCompiledCustomStringFromCBA(
+                                normalizedVirtualPath,
+                                out result
+                            )
+                        )
                         {
-                            try
-                            {
-                            }
+                            try { }
                             finally
                             {
                                 unsafeImpersonate = HostingEnvironmentWrapper.UnsafeImpersonate();
@@ -1114,9 +1429,7 @@ namespace System.ServiceModel
                     IDisposable unsafeImpersonate = null;
                     try
                     {
-                        try
-                        {
-                        }
+                        try { }
                         finally
                         {
                             unsafeImpersonate = HostingEnvironmentWrapper.UnsafeImpersonate();
@@ -1139,8 +1452,8 @@ namespace System.ServiceModel
 
             static Uri[] FilterBaseAddressList(Uri[] baseAddresses, Uri[] prefixFilters)
             {
-                // Precondition assumption: 
-                // filterAddresses only contains one Uri per scheme. 
+                // Precondition assumption:
+                // filterAddresses only contains one Uri per scheme.
                 // Enforced by throwing exception when duplicates found.
                 List<Uri> results = new List<Uri>();
                 Dictionary<string, Uri> schemeMappings = new Dictionary<string, Uri>();
@@ -1153,7 +1466,11 @@ namespace System.ServiceModel
                     }
                     else
                     {
-                        throw FxTrace.Exception.AsError(new InvalidOperationException(SR.GetString(SR.BaseAddressDuplicateScheme, filterUri.Scheme)));
+                        throw FxTrace.Exception.AsError(
+                            new InvalidOperationException(
+                                SR.GetString(SR.BaseAddressDuplicateScheme, filterUri.Scheme)
+                            )
+                        );
                     }
                 }
 
@@ -1164,8 +1481,16 @@ namespace System.ServiceModel
                     {
                         Uri filterUri = schemeMappings[scheme];
 
-                        if ((baseUri.Port == filterUri.Port) &&
-                           (string.Compare(baseUri.Host, filterUri.Host, StringComparison.OrdinalIgnoreCase) == 0))
+                        if (
+                            (baseUri.Port == filterUri.Port)
+                            && (
+                                string.Compare(
+                                    baseUri.Host,
+                                    filterUri.Host,
+                                    StringComparison.OrdinalIgnoreCase
+                                ) == 0
+                            )
+                        )
                         {
                             results.Add(baseUri);
                         }
@@ -1178,7 +1503,10 @@ namespace System.ServiceModel
                 return results.ToArray();
             }
 
-            ServiceHostBase CreateService(string normalizedVirtualPath, EventTraceActivity eventTraceActivity)
+            ServiceHostBase CreateService(
+                string normalizedVirtualPath,
+                EventTraceActivity eventTraceActivity
+            )
             {
                 string virtualPath;
                 string factoryType = "";
@@ -1193,9 +1521,9 @@ namespace System.ServiceModel
                     TD.CompilationStart(eventTraceActivity);
                 }
 
-                // 0. Check AspNet Routing vs CBA 
+                // 0. Check AspNet Routing vs CBA
                 // check whether there is a conflict between CBA and AspNetRouting
-                // if there is a conflict, using AspNet routing policy to decide which service should be activated 
+                // if there is a conflict, using AspNet routing policy to decide which service should be activated
                 // we treat CBA as file. RouteExistingFiles is false means Routing should not override File
                 // Todo: when there is a conflict between file/CBA adn route and routing policy was changed dynamically, we still use the old service CSD105890
                 if (isAspNetRoutedRequest && isConfigurationBased)
@@ -1214,7 +1542,7 @@ namespace System.ServiceModel
                 // 1. Compile the service
                 // The expected format is:
                 //      <virtualPath>|<type>|<constructorstring>
-                // The first two cannot be empty. 
+                // The first two cannot be empty.
                 if (!isAspNetRoutedRequest)
                 {
                     compiledString = GetCompiledCustomString(normalizedVirtualPath);
@@ -1225,19 +1553,38 @@ namespace System.ServiceModel
                         // e.g., incoming request with ~/file.xamlx but physical file has name FiLe.Xamlx
                         // we should convert the virtualPath to ~/FiLe.Xamlx, so that mex can show right case
                         // we cannot make directory path case sensitive as we cannot get this path info with right case
-                        string fileName = HostingEnvironmentWrapper.GetServiceFile(normalizedVirtualPath).Name;
-                        string pathSegment = normalizedVirtualPath.Substring(0, normalizedVirtualPath.LastIndexOf(PathSeparator) + 1);
-                        normalizedVirtualPath = String.Format(CultureInfo.CurrentCulture, "{0}{1}", pathSegment, fileName);
+                        string fileName = HostingEnvironmentWrapper
+                            .GetServiceFile(normalizedVirtualPath)
+                            .Name;
+                        string pathSegment = normalizedVirtualPath.Substring(
+                            0,
+                            normalizedVirtualPath.LastIndexOf(PathSeparator) + 1
+                        );
+                        normalizedVirtualPath = String.Format(
+                            CultureInfo.CurrentCulture,
+                            "{0}{1}",
+                            pathSegment,
+                            fileName
+                        );
                         constructorString = virtualPath = normalizedVirtualPath;
                         factory = CreateWorkflowServiceHostFactory(normalizedVirtualPath);
                     }
                     else
                     {
-                        TryDebugPrint("HostingManager.CreateService() BuildManager.GetCompiledCustomString() returned compiledString: " + compiledString);
-                        compiledStrings = compiledString.Split(ServiceParserDelimiter.ToCharArray());
+                        TryDebugPrint(
+                            "HostingManager.CreateService() BuildManager.GetCompiledCustomString() returned compiledString: "
+                                + compiledString
+                        );
+                        compiledStrings = compiledString.Split(
+                            ServiceParserDelimiter.ToCharArray()
+                        );
                         if (compiledStrings.Length < 3)
                         {
-                            throw FxTrace.Exception.AsError(new InvalidOperationException(SR2.Hosting_CompilationResultInvalid(normalizedVirtualPath)));
+                            throw FxTrace.Exception.AsError(
+                                new InvalidOperationException(
+                                    SR2.Hosting_CompilationResultInvalid(normalizedVirtualPath)
+                                )
+                            );
                         }
                         virtualPath = compiledStrings[0];
                         factoryType = compiledStrings[1];
@@ -1246,8 +1593,10 @@ namespace System.ServiceModel
                 }
                 else
                 {
-                    ServiceDeploymentInfo serviceInfo = ServiceRouteHandler.GetServiceInfo(normalizedVirtualPath);
-                    // use the registered virtualpath to ensure correct case in asp.net route 
+                    ServiceDeploymentInfo serviceInfo = ServiceRouteHandler.GetServiceInfo(
+                        normalizedVirtualPath
+                    );
+                    // use the registered virtualpath to ensure correct case in asp.net route
                     virtualPath = serviceInfo.VirtualPath;
                     constructorString = serviceInfo.ServiceType;
                     factory = serviceInfo.ServiceHostFactory;
@@ -1258,15 +1607,21 @@ namespace System.ServiceModel
                 // absolute path start with / and application name, e.g., /appName/service.svc
                 normalizedVirtualPath = virtualPath;
 
-                // convert relative virtualpath to app absolute one for consistency, since we gave an absolute path in compiledcustomstring previously 
-                // xamlx, CBA, and AspNet routing use relative virtualpath, while configuration/administration needs an absolute one 
+                // convert relative virtualpath to app absolute one for consistency, since we gave an absolute path in compiledcustomstring previously
+                // xamlx, CBA, and AspNet routing use relative virtualpath, while configuration/administration needs an absolute one
                 virtualPath = VirtualPathUtility.ToAbsolute(virtualPath);
 
                 // 2. Add the base addresses
-                Uri[] baseAddresses = HostedTransportConfigurationManager.GetBaseAddresses(virtualPath);
+                Uri[] baseAddresses = HostedTransportConfigurationManager.GetBaseAddresses(
+                    virtualPath
+                );
                 Uri[] prefixFilters = ServiceHostingEnvironment.PrefixFilters;
 
-                if (!this.multipleSiteBindingsEnabled && prefixFilters != null && prefixFilters.Length > 0)
+                if (
+                    !this.multipleSiteBindingsEnabled
+                    && prefixFilters != null
+                    && prefixFilters.Length > 0
+                )
                 {
                     baseAddresses = FilterBaseAddressList(baseAddresses, prefixFilters);
                 }
@@ -1278,7 +1633,10 @@ namespace System.ServiceModel
                 }
 
                 // Get the current virtual path (full path except for the .svc file name).
-                currentVirtualPath = virtualPath.Substring(0, virtualPath.LastIndexOf(PathSeparator));
+                currentVirtualPath = virtualPath.Substring(
+                    0,
+                    virtualPath.LastIndexOf(PathSeparator)
+                );
                 if (currentVirtualPath.Length == 0)
                 {
                     currentVirtualPath = "/";
@@ -1288,7 +1646,9 @@ namespace System.ServiceModel
                 {
                     // add trailing slash to support ../a.xamlx in the case .xamlx file is wrapped with .svc
                     // otherwise when combining ~/sub with ../a.xamlx, VirtualPathUtility will return wrong value ~/a.xamlx
-                    xamlFileBaseLocation = VirtualPathUtility.AppendTrailingSlash(currentVirtualPath);
+                    xamlFileBaseLocation = VirtualPathUtility.AppendTrailingSlash(
+                        currentVirtualPath
+                    );
                 }
 
                 if (isConfigurationBased)
@@ -1310,7 +1670,10 @@ namespace System.ServiceModel
                 {
                     if (string.IsNullOrEmpty(factoryType))
                     {
-                        Fx.Assert(!string.IsNullOrEmpty(compiledString), "The compiled string can't be null or empty");
+                        Fx.Assert(
+                            !string.IsNullOrEmpty(compiledString),
+                            "The compiled string can't be null or empty"
+                        );
                         factory = new ServiceHostFactory();
                     }
                     else
@@ -1333,16 +1696,28 @@ namespace System.ServiceModel
                         }
                         if (compiledType == null)
                         {
-                            throw FxTrace.Exception.AsError(new InvalidOperationException(SR2.Hosting_FactoryTypeNotResolved(factoryType)));
+                            throw FxTrace.Exception.AsError(
+                                new InvalidOperationException(
+                                    SR2.Hosting_FactoryTypeNotResolved(factoryType)
+                                )
+                            );
                         }
                         if (!typeof(ServiceHostFactoryBase).IsAssignableFrom(compiledType))
                         {
-                            throw FxTrace.Exception.AsError(new InvalidOperationException(SR2.Hosting_IServiceHostNotImplemented(factoryType)));
+                            throw FxTrace.Exception.AsError(
+                                new InvalidOperationException(
+                                    SR2.Hosting_IServiceHostNotImplemented(factoryType)
+                                )
+                            );
                         }
                         ConstructorInfo ctor = compiledType.GetConstructor(new Type[] { });
                         if (ctor == null)
                         {
-                            throw FxTrace.Exception.AsError(new InvalidOperationException(SR2.Hosting_NoDefaultCtor(factoryType)));
+                            throw FxTrace.Exception.AsError(
+                                new InvalidOperationException(
+                                    SR2.Hosting_NoDefaultCtor(factoryType)
+                                )
+                            );
                         }
                         factory = (ServiceHostFactoryBase)ctor.Invoke(new object[] { });
                     }
@@ -1354,11 +1729,18 @@ namespace System.ServiceModel
                 }
 
                 // Push assembly context into ServiceHostFactory
-                // it is OK for us to ignore CBA case here since no referenced assembly in compiledString for CBA 
-                // but do not do it for AspNet routing, since there is no compiledString                
-                if (factory is ServiceHostFactory && !isConfigurationBased && !isAspNetRoutedRequest)
+                // it is OK for us to ignore CBA case here since no referenced assembly in compiledString for CBA
+                // but do not do it for AspNet routing, since there is no compiledString
+                if (
+                    factory is ServiceHostFactory
+                    && !isConfigurationBased
+                    && !isAspNetRoutedRequest
+                )
                 {
-                    Fx.Assert(!string.IsNullOrEmpty(compiledString), "The compiled string can't be null or empty");
+                    Fx.Assert(
+                        !string.IsNullOrEmpty(compiledString),
+                        "The compiled string can't be null or empty"
+                    );
                     for (int index = 3; index < compiledStrings.Length; ++index)
                     {
                         ((ServiceHostFactory)factory).AddAssemblyReference(compiledStrings[index]);
@@ -1379,19 +1761,34 @@ namespace System.ServiceModel
 
                 if (service == null)
                 {
-                    throw FxTrace.Exception.AsError(new InvalidOperationException(SR2.Hosting_ServiceHostBaseIsNull(constructorString)));
+                    throw FxTrace.Exception.AsError(
+                        new InvalidOperationException(
+                            SR2.Hosting_ServiceHostBaseIsNull(constructorString)
+                        )
+                    );
                 }
 
                 // 4. Create VirtualPathExtension for ServiceHostBase
-                service.Extensions.Add(new VirtualPathExtension(normalizedVirtualPath, ServiceHostingEnvironment.ApplicationVirtualPath, ServiceHostingEnvironment.SiteName));
+                service.Extensions.Add(
+                    new VirtualPathExtension(
+                        normalizedVirtualPath,
+                        ServiceHostingEnvironment.ApplicationVirtualPath,
+                        ServiceHostingEnvironment.SiteName
+                    )
+                );
 
                 if (service.Description != null)
                 {
                     service.Description.Behaviors.Add(new ApplyHostConfigurationBehavior());
-                    if (this.multipleSiteBindingsEnabled &&
-                        service.Description.Behaviors.Find<UseRequestHeadersForMetadataAddressBehavior>() == null)
+                    if (
+                        this.multipleSiteBindingsEnabled
+                        && service.Description.Behaviors.Find<UseRequestHeadersForMetadataAddressBehavior>()
+                            == null
+                    )
                     {
-                        service.Description.Behaviors.Add(new UseRequestHeadersForMetadataAddressBehavior());
+                        service.Description.Behaviors.Add(
+                            new UseRequestHeadersForMetadataAddressBehavior()
+                        );
                     }
                 }
 
@@ -1403,7 +1800,7 @@ namespace System.ServiceModel
                 return service;
             }
 
-            //NoInlining - we don't want to load Workflow dlls while activating 3.0 services 
+            //NoInlining - we don't want to load Workflow dlls while activating 3.0 services
             [MethodImpl(MethodImplOptions.NoInlining)]
             ServiceHostFactoryBase CreateWorkflowServiceHostFactory(string path)
             {
@@ -1415,9 +1812,14 @@ namespace System.ServiceModel
                 if (IsRecycling)
                 {
                     InvalidOperationException exception = new InvalidOperationException(
-                        SR2.Hosting_EnvironmentShuttingDown(normalizedVirtualPath,
-                        HostingEnvironmentWrapper.ApplicationVirtualPath));
-                    throw FxTrace.Exception.AsError(new ServiceActivationException(exception.Message, exception));
+                        SR2.Hosting_EnvironmentShuttingDown(
+                            normalizedVirtualPath,
+                            HostingEnvironmentWrapper.ApplicationVirtualPath
+                        )
+                    );
+                    throw FxTrace.Exception.AsError(
+                        new ServiceActivationException(exception.Message, exception)
+                    );
                 }
             }
 
@@ -1462,7 +1864,7 @@ namespace System.ServiceModel
                     {
                         this.directory.UnsafeRemove(serviceActivationInfo);
 
-                        // At the time when we just removed all the service, we will unregister 
+                        // At the time when we just removed all the service, we will unregister
                         // from HostingEnvironement.
                         UnregisterObject();
                     }
@@ -1494,7 +1896,7 @@ namespace System.ServiceModel
                 directory.Abort();
                 using (directory.CreateWriterLockScope())
                 {
-                    // We need to set isRecycling inside lock because we want to make sure no 
+                    // We need to set isRecycling inside lock because we want to make sure no
                     // new request will be handed once we start to shut down.
                     isRecycling = true;
 
@@ -1515,7 +1917,7 @@ namespace System.ServiceModel
 
                 using (directory.CreateWriterLockScope())
                 {
-                    // We need to set isRecycling inside lock because we want to make sure no 
+                    // We need to set isRecycling inside lock because we want to make sure no
                     // new request will be handed once we start to shut down.
                     isRecycling = true;
                     directory.UnsafeBeginBatchCollect(true);
@@ -1529,18 +1931,35 @@ namespace System.ServiceModel
                 }
             }
 
-            internal static void LogServiceCloseError(string virtualPath, Exception exception, object source)
+            internal static void LogServiceCloseError(
+                string virtualPath,
+                Exception exception,
+                object source
+            )
             {
                 if (DiagnosticUtility.ShouldTraceError)
                 {
-                    TraceUtility.TraceEvent(TraceEventType.Error, TraceCode.WebHostServiceCloseFailed, SR2.TraceCodeWebHostServiceCloseFailed,
-                        new StringTraceRecord("VirtualPath", VirtualPathUtility.ToAbsolute(virtualPath, HostingEnvironmentWrapper.ApplicationVirtualPath)),
-                        source, exception);
+                    TraceUtility.TraceEvent(
+                        TraceEventType.Error,
+                        TraceCode.WebHostServiceCloseFailed,
+                        SR2.TraceCodeWebHostServiceCloseFailed,
+                        new StringTraceRecord(
+                            "VirtualPath",
+                            VirtualPathUtility.ToAbsolute(
+                                virtualPath,
+                                HostingEnvironmentWrapper.ApplicationVirtualPath
+                            )
+                        ),
+                        source,
+                        exception
+                    );
                 }
             }
 
-            [Fx.Tag.SecurityNote(Critical = "Uses HostingEnvironmentWrapper.UnsafeRegisterObject which is critical.",
-                Safe = "Does not allow the caller to control the variable -- only registers 'this'.")]
+            [Fx.Tag.SecurityNote(
+                Critical = "Uses HostingEnvironmentWrapper.UnsafeRegisterObject which is critical.",
+                Safe = "Does not allow the caller to control the variable -- only registers 'this'."
+            )]
             [SecuritySafeCritical]
             void RegisterObject()
             {
@@ -1548,8 +1967,10 @@ namespace System.ServiceModel
             }
 
             // Note : this method should only be called under lock of the global lock.
-            [Fx.Tag.SecurityNote(Critical = "Uses HostingEnvironmentWrapper.UnsafeRegisterObject which is critical.",
-                Safe = "Does not allow the caller to control the variable -- only registers 'this'.")]
+            [Fx.Tag.SecurityNote(
+                Critical = "Uses HostingEnvironmentWrapper.UnsafeRegisterObject which is critical.",
+                Safe = "Does not allow the caller to control the variable -- only registers 'this'."
+            )]
             [SecuritySafeCritical]
             bool UnregisterObject()
             {
@@ -1570,21 +1991,37 @@ namespace System.ServiceModel
             {
                 readonly IDictionary<string, BuildProviderInfo> buildProviders;
 
-                [Fx.Tag.SecurityNote(Critical = "Loads config through an elevation and stores results.",
-                    Safe = "Stores results in BuildProviderInfo instances which restrict access to the BuildProvider config object.")]
+                [Fx.Tag.SecurityNote(
+                    Critical = "Loads config through an elevation and stores results.",
+                    Safe = "Stores results in BuildProviderInfo instances which restrict access to the BuildProvider config object."
+                )]
                 [SecuritySafeCritical]
                 public ExtensionHelper()
                 {
                     AspNetPartialTrustHelpers.FailIfInPartialTrustOutsideAspNet();
-                    buildProviders = new Dictionary<string, BuildProviderInfo>(8, StringComparer.OrdinalIgnoreCase);
-                    CompilationSection compilationSection = (CompilationSection)HostedAspNetEnvironment.UnsafeGetSectionFromWebConfigurationManager("system.web/compilation", null);
-                    foreach (System.Web.Configuration.BuildProvider buildProvider in compilationSection.BuildProviders)
+                    buildProviders = new Dictionary<string, BuildProviderInfo>(
+                        8,
+                        StringComparer.OrdinalIgnoreCase
+                    );
+                    CompilationSection compilationSection = (CompilationSection)
+                        HostedAspNetEnvironment.UnsafeGetSectionFromWebConfigurationManager(
+                            "system.web/compilation",
+                            null
+                        );
+                    foreach (
+                        System.Web.Configuration.BuildProvider buildProvider in compilationSection.BuildProviders
+                    )
                     {
-                        buildProviders.Add(buildProvider.Extension, new BuildProviderInfo(buildProvider));
+                        buildProviders.Add(
+                            buildProvider.Extension,
+                            new BuildProviderInfo(buildProvider)
+                        );
                     }
                 }
 
-                [Fx.Tag.SecurityNote(Miscellaneous = "RequiresReview - can be called outside of user context.")]
+                [Fx.Tag.SecurityNote(
+                    Miscellaneous = "RequiresReview - can be called outside of user context."
+                )]
                 public ServiceType GetServiceType(string extension)
                 {
                     ServiceType serviceType = ServiceType.Unknown;
@@ -1604,7 +2041,8 @@ namespace System.ServiceModel
                 }
             }
 
-            class ServiceActivationInfo : CollectibleLRUCache<string, ServiceHostBase>.CollectibleNode
+            class ServiceActivationInfo
+                : CollectibleLRUCache<string, ServiceHostBase>.CollectibleNode
             {
                 HostingManager manager;
                 string virtualPath;
@@ -1612,6 +2050,7 @@ namespace System.ServiceModel
                 EventHandler serviceFaultedHandler;
                 bool initialized;
                 Exception lastException;
+
                 public ServiceActivationInfo(HostingManager manager, string virtualPath)
                 {
                     this.manager = manager;
@@ -1620,24 +2059,20 @@ namespace System.ServiceModel
 
                 public bool Initialized
                 {
-                    get
-                    {
-                        return this.initialized;
-                    }
+                    get { return this.initialized; }
                 }
 
                 public Exception LastException
                 {
-                    get
-                    {
-                        return this.lastException;
-                    }
-
+                    get { return this.lastException; }
                 }
 
                 public void SetLastException(Exception lastException)
                 {
-                    Fx.Assert(!this.initialized, "The ServiceActivationInfo should not be in the initialized state");
+                    Fx.Assert(
+                        !this.initialized,
+                        "The ServiceActivationInfo should not be in the initialized state"
+                    );
                     Abort();
 
                     this.lastException = lastException;
@@ -1808,8 +2243,10 @@ namespace System.ServiceModel
             bool isXamlBuildProvider;
             object thisLock = new object();
 
-            [Fx.Tag.SecurityNote(Critical = "Stores the result of an elevation.",
-                Safe = "Stores it in a Critical field.")]
+            [Fx.Tag.SecurityNote(
+                Critical = "Stores the result of an elevation.",
+                Safe = "Stores it in a Critical field."
+            )]
             [SecuritySafeCritical]
             public BuildProviderInfo(System.Web.Configuration.BuildProvider buildProvider)
             {
@@ -1818,13 +2255,17 @@ namespace System.ServiceModel
 
             string BuildProviderType
             {
-                [Fx.Tag.SecurityNote(Critical = "Accesses the SecurityCritical buildProvider field.",
-                    Safe = "Returns the Type property, which is allowed; doesn't leak the BuildProvider instance.")]
+                [Fx.Tag.SecurityNote(
+                    Critical = "Accesses the SecurityCritical buildProvider field.",
+                    Safe = "Returns the Type property, which is allowed; doesn't leak the BuildProvider instance."
+                )]
                 [SecuritySafeCritical]
                 get { return buildProvider.Type; }
             }
 
-            [Fx.Tag.SecurityNote(Miscellaneous = "RequiresReview - can be called outside of user context.")]
+            [Fx.Tag.SecurityNote(
+                Miscellaneous = "RequiresReview - can be called outside of user context."
+            )]
             public bool IsSupported
             {
                 get
@@ -1834,7 +2275,9 @@ namespace System.ServiceModel
                 }
             }
 
-            [Fx.Tag.SecurityNote(Miscellaneous = "RequiresReview - can be called outside of user context.")]
+            [Fx.Tag.SecurityNote(
+                Miscellaneous = "RequiresReview - can be called outside of user context."
+            )]
             public bool IsXamlBuildProvider
             {
                 get
@@ -1842,10 +2285,11 @@ namespace System.ServiceModel
                     EnsureInitialized();
                     return this.isXamlBuildProvider;
                 }
-
             }
 
-            [Fx.Tag.SecurityNote(Miscellaneous = "RequiresReview - can be called outside of user context.")]
+            [Fx.Tag.SecurityNote(
+                Miscellaneous = "RequiresReview - can be called outside of user context."
+            )]
             void EnsureInitialized()
             {
                 if (initialized)
@@ -1876,7 +2320,11 @@ namespace System.ServiceModel
 
                     if (type != null)
                     {
-                        object[] attributes = ServiceReflector.GetCustomAttributes(type, typeof(ServiceActivationBuildProviderAttribute), true);
+                        object[] attributes = ServiceReflector.GetCustomAttributes(
+                            type,
+                            typeof(ServiceActivationBuildProviderAttribute),
+                            true
+                        );
                         if (attributes.Length > 0)
                         {
                             this.isSupported = true;
@@ -1884,7 +2332,9 @@ namespace System.ServiceModel
                         else
                         {
                             //to accomodate for subclasses of XamlBuildProvider
-                            if (typeof(System.Xaml.Hosting.XamlBuildProvider).IsAssignableFrom(type))
+                            if (
+                                typeof(System.Xaml.Hosting.XamlBuildProvider).IsAssignableFrom(type)
+                            )
                             {
                                 this.isXamlBuildProvider = true;
                             }
@@ -1896,8 +2346,10 @@ namespace System.ServiceModel
                 }
             }
 
-            [Fx.Tag.SecurityNote(Critical = "Accesses the SecurityCritical buildProvider field. Can be called outside user context.",
-                Safe = "Just clears it, doesn't leak anything.")]
+            [Fx.Tag.SecurityNote(
+                Critical = "Accesses the SecurityCritical buildProvider field. Can be called outside user context.",
+                Safe = "Just clears it, doesn't leak anything."
+            )]
             [SecuritySafeCritical]
             void ClearBuildProvider()
             {
@@ -1934,7 +2386,9 @@ namespace System.ServiceModel
                     }
                     else
                     {
-                        throw FxTrace.Exception.AsError(new EndpointNotFoundException(SR2.Hosting_ServiceNotExist(path)));
+                        throw FxTrace.Exception.AsError(
+                            new EndpointNotFoundException(SR2.Hosting_ServiceNotExist(path))
+                        );
                     }
                 }
             }
@@ -1967,15 +2421,23 @@ namespace System.ServiceModel
                         if (IsWorkflowService())
                         {
                             this.serviceModelActivationHandler =
-                                CreateServiceModelActivationHandler(serviceModelActivationHandlerType) as IServiceModelActivationHandler;
+                                CreateServiceModelActivationHandler(
+                                    serviceModelActivationHandlerType
+                                ) as IServiceModelActivationHandler;
                         }
                         else
                         {
-                            //The control can come here when the hosted file is a valid XAML (service OR otherwise) but is configured with 
+                            //The control can come here when the hosted file is a valid XAML (service OR otherwise) but is configured with
                             //a handler that does NOT implement IServiceModelActivationHandler and aspnetCompat=true
                             throw FxTrace.Exception.AsError(
-                                new EndpointNotFoundException(SR2.Hosting_InvalidHandlerForWorkflowService(
-                                    this.serviceModelActivationHandlerType.FullName, this.hostedXamlType.FullName, this.path)));
+                                new EndpointNotFoundException(
+                                    SR2.Hosting_InvalidHandlerForWorkflowService(
+                                        this.serviceModelActivationHandlerType.FullName,
+                                        this.hostedXamlType.FullName,
+                                        this.path
+                                    )
+                                )
+                            );
                         }
                     }
                     return this.serviceModelActivationHandler;
@@ -1985,17 +2447,24 @@ namespace System.ServiceModel
             static object CreateServiceModelActivationHandler(Type type)
             {
                 //The handler/factory should have an empty constructor but need not be public
-                return Activator.CreateInstance(type,
-                BindingFlags.CreateInstance | BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance,
-                null, null, null);
+                return Activator.CreateInstance(
+                    type,
+                    BindingFlags.CreateInstance
+                        | BindingFlags.NonPublic
+                        | BindingFlags.Public
+                        | BindingFlags.Instance,
+                    null,
+                    null,
+                    null
+                );
             }
 
             public bool IsWorkflowService()
             {
                 if (this.type == PathType.Unknown)
                 {
-                    //Cache won't be available if it is invoked first time 
-                    //Use a local "lock" specifically for this url 
+                    //Cache won't be available if it is invoked first time
+                    //Use a local "lock" specifically for this url
                     lock (this.writeLock)
                     {
                         if (this.type == PathType.Unknown)
@@ -2019,12 +2488,26 @@ namespace System.ServiceModel
                 return false;
             }
 
-            [SuppressMessage(FxCop.Category.Security, FxCop.Rule.AptcaMethodsShouldOnlyCallAptcaMethods, Justification = "This method doesn't allow callers to access sensitive information, operations, or resources that can be used in a destructive manner.")]
+            [SuppressMessage(
+                FxCop.Category.Security,
+                FxCop.Rule.AptcaMethodsShouldOnlyCallAptcaMethods,
+                Justification = "This method doesn't allow callers to access sensitive information, operations, or resources that can be used in a destructive manner."
+            )]
             bool IsConfiguredWithSMActivationHandler()
             {
-                if (XamlHostingConfiguration.TryGetHttpHandlerType(this.path, this.hostedXamlType, out this.serviceModelActivationHandlerType))
+                if (
+                    XamlHostingConfiguration.TryGetHttpHandlerType(
+                        this.path,
+                        this.hostedXamlType,
+                        out this.serviceModelActivationHandlerType
+                    )
+                )
                 {
-                    if (typeof(IServiceModelActivationHandler).IsAssignableFrom(this.serviceModelActivationHandlerType))
+                    if (
+                        typeof(IServiceModelActivationHandler).IsAssignableFrom(
+                            this.serviceModelActivationHandlerType
+                        )
+                    )
                     {
                         return true;
                     }
@@ -2036,7 +2519,7 @@ namespace System.ServiceModel
             {
                 Unknown,
                 WorkflowService,
-                NotWorkflowService
+                NotWorkflowService,
             }
         }
     }

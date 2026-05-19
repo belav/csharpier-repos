@@ -42,7 +42,13 @@ public class CSharpHelper : ICSharpHelper
         var workspace = new AdhocWorkspace();
         var projectId = ProjectId.CreateNewId();
         var versionStamp = VersionStamp.Create();
-        var projectInfo = ProjectInfo.Create(projectId, versionStamp, "Proj", "Proj", LanguageNames.CSharp);
+        var projectInfo = ProjectInfo.Create(
+            projectId,
+            versionStamp,
+            "Proj",
+            "Proj",
+            LanguageNames.CSharp
+        );
         _project = workspace.AddProject(projectInfo);
         var syntaxGenerator = SyntaxGenerator.GetGenerator(workspace, LanguageNames.CSharp);
         _translator = new LinqToCSharpSyntaxTranslator(syntaxGenerator);
@@ -130,40 +136,45 @@ public class CSharpHelper : ICSharpHelper
         "virtual",
         "void",
         "volatile",
-        "while"
+        "while",
     };
 
-    private static readonly IReadOnlyDictionary<Type, Func<CSharpHelper, object, string>> LiteralFuncs =
-        new Dictionary<Type, Func<CSharpHelper, object, string>>
+    private static readonly IReadOnlyDictionary<
+        Type,
+        Func<CSharpHelper, object, string>
+    > LiteralFuncs = new Dictionary<Type, Func<CSharpHelper, object, string>>
+    {
+        { typeof(bool), (c, v) => c.Literal((bool)v) },
+        { typeof(byte), (c, v) => c.Literal((byte)v) },
+        { typeof(byte[]), (c, v) => c.Literal((byte[])v) },
+        { typeof(char), (c, v) => c.Literal((char)v) },
+        { typeof(DateOnly), (c, v) => c.Literal((DateOnly)v) },
+        { typeof(DateTime), (c, v) => c.Literal((DateTime)v) },
+        { typeof(DateTimeOffset), (c, v) => c.Literal((DateTimeOffset)v) },
+        { typeof(decimal), (c, v) => c.Literal((decimal)v) },
+        { typeof(double), (c, v) => c.Literal((double)v) },
+        { typeof(float), (c, v) => c.Literal((float)v) },
+        { typeof(Guid), (c, v) => c.Literal((Guid)v) },
+        { typeof(int), (c, v) => c.Literal((int)v) },
+        { typeof(long), (c, v) => c.Literal((long)v) },
+        { typeof(NestedClosureCodeFragment), (c, v) => c.Fragment((NestedClosureCodeFragment)v) },
         {
-            { typeof(bool), (c, v) => c.Literal((bool)v) },
-            { typeof(byte), (c, v) => c.Literal((byte)v) },
-            { typeof(byte[]), (c, v) => c.Literal((byte[])v) },
-            { typeof(char), (c, v) => c.Literal((char)v) },
-            { typeof(DateOnly), (c, v) => c.Literal((DateOnly)v) },
-            { typeof(DateTime), (c, v) => c.Literal((DateTime)v) },
-            { typeof(DateTimeOffset), (c, v) => c.Literal((DateTimeOffset)v) },
-            { typeof(decimal), (c, v) => c.Literal((decimal)v) },
-            { typeof(double), (c, v) => c.Literal((double)v) },
-            { typeof(float), (c, v) => c.Literal((float)v) },
-            { typeof(Guid), (c, v) => c.Literal((Guid)v) },
-            { typeof(int), (c, v) => c.Literal((int)v) },
-            { typeof(long), (c, v) => c.Literal((long)v) },
-            { typeof(NestedClosureCodeFragment), (c, v) => c.Fragment((NestedClosureCodeFragment)v) },
-            { typeof(PropertyAccessorCodeFragment), (c, v) => c.Fragment((PropertyAccessorCodeFragment)v) },
-            { typeof(object[]), (c, v) => c.Literal((object[])v) },
-            { typeof(object[,]), (c, v) => c.Literal((object[,])v) },
-            { typeof(sbyte), (c, v) => c.Literal((sbyte)v) },
-            { typeof(short), (c, v) => c.Literal((short)v) },
-            { typeof(string), (c, v) => c.Literal((string)v) },
-            { typeof(TimeOnly), (c, v) => c.Literal((TimeOnly)v) },
-            { typeof(TimeSpan), (c, v) => c.Literal((TimeSpan)v) },
-            { typeof(uint), (c, v) => c.Literal((uint)v) },
-            { typeof(ulong), (c, v) => c.Literal((ulong)v) },
-            { typeof(ushort), (c, v) => c.Literal((ushort)v) },
-            { typeof(BigInteger), (c, v) => c.Literal((BigInteger)v) },
-            { typeof(Type), (c, v) => c.Literal((Type)v) }
-        };
+            typeof(PropertyAccessorCodeFragment),
+            (c, v) => c.Fragment((PropertyAccessorCodeFragment)v)
+        },
+        { typeof(object[]), (c, v) => c.Literal((object[])v) },
+        { typeof(object[,]), (c, v) => c.Literal((object[,])v) },
+        { typeof(sbyte), (c, v) => c.Literal((sbyte)v) },
+        { typeof(short), (c, v) => c.Literal((short)v) },
+        { typeof(string), (c, v) => c.Literal((string)v) },
+        { typeof(TimeOnly), (c, v) => c.Literal((TimeOnly)v) },
+        { typeof(TimeSpan), (c, v) => c.Literal((TimeSpan)v) },
+        { typeof(uint), (c, v) => c.Literal((uint)v) },
+        { typeof(ulong), (c, v) => c.Literal((ulong)v) },
+        { typeof(ushort), (c, v) => c.Literal((ushort)v) },
+        { typeof(BigInteger), (c, v) => c.Literal((BigInteger)v) },
+        { typeof(Type), (c, v) => c.Literal((Type)v) },
+    };
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -180,10 +191,7 @@ public class CSharpHelper : ICSharpHelper
 
         if (properties.Count == 1)
         {
-            builder
-                .Append(lambdaIdentifier)
-                .Append('.')
-                .Append(properties[0]);
+            builder.Append(lambdaIdentifier).Append('.').Append(properties[0]);
         }
         else
         {
@@ -203,7 +211,9 @@ public class CSharpHelper : ICSharpHelper
     /// </summary>
     public virtual string Reference(Type type, bool? fullName = null)
     {
-        fullName ??= type.IsNested ? ShouldUseFullName(type.DeclaringType!) : ShouldUseFullName(type);
+        fullName ??= type.IsNested
+            ? ShouldUseFullName(type.DeclaringType!)
+            : ShouldUseFullName(type);
 
         return type.DisplayName(fullName.Value, compilable: true);
     }
@@ -214,8 +224,7 @@ public class CSharpHelper : ICSharpHelper
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    protected virtual bool ShouldUseFullName(Type type)
-        => ShouldUseFullName(type.Name);
+    protected virtual bool ShouldUseFullName(Type type) => ShouldUseFullName(type.Name);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -223,8 +232,7 @@ public class CSharpHelper : ICSharpHelper
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    protected virtual bool ShouldUseFullName(string shortTypeName)
-        => false;
+    protected virtual bool ShouldUseFullName(string shortTypeName) => false;
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -232,7 +240,11 @@ public class CSharpHelper : ICSharpHelper
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual string Identifier(string name, ICollection<string>? scope = null, bool? capitalize = null)
+    public virtual string Identifier(
+        string name,
+        ICollection<string>? scope = null,
+        bool? capitalize = null
+    )
     {
         var builder = new StringBuilder();
         var partStart = 0;
@@ -255,8 +267,7 @@ public class CSharpHelper : ICSharpHelper
             builder.Append(name[partStart..]);
         }
 
-        if (builder.Length == 0
-            || !IsIdentifierStartCharacter(builder[0]))
+        if (builder.Length == 0 || !IsIdentifierStartCharacter(builder[0]))
         {
             builder.Insert(0, '_');
         }
@@ -296,8 +307,12 @@ public class CSharpHelper : ICSharpHelper
             return;
         }
 
-        builder.Remove(startIndex: 0, length: 1)
-            .Insert(index: 0, value: capitalize ? char.ToUpperInvariant(first) : char.ToLowerInvariant(first));
+        builder
+            .Remove(startIndex: 0, length: 1)
+            .Insert(
+                index: 0,
+                value: capitalize ? char.ToUpperInvariant(first) : char.ToLowerInvariant(first)
+            );
     }
 
     /// <summary>
@@ -309,14 +324,15 @@ public class CSharpHelper : ICSharpHelper
     public virtual string Namespace(params string[] name)
     {
         var @namespace = new StringBuilder();
-        foreach (var piece in name.Where(p => !string.IsNullOrEmpty(p))
-                     .SelectMany(p => p.Split('.', StringSplitOptions.RemoveEmptyEntries)))
+        foreach (
+            var piece in name.Where(p => !string.IsNullOrEmpty(p))
+                .SelectMany(p => p.Split('.', StringSplitOptions.RemoveEmptyEntries))
+        )
         {
             var identifier = Identifier(piece);
             if (!string.IsNullOrEmpty(identifier))
             {
-                @namespace.Append(identifier)
-                    .Append('.');
+                @namespace.Append(identifier).Append('.');
             }
         }
 
@@ -331,7 +347,8 @@ public class CSharpHelper : ICSharpHelper
     /// </summary>
     public virtual string Literal(string? value)
         // do not output @"" syntax as in Migrations this can get indented at a newline and so add spaces to the literal
-        => value is not null
+        =>
+        value is not null
             ? new StringBuilder(value)
                 .Replace("\\", @"\\")
                 .Replace("\0", @"\0")
@@ -349,8 +366,7 @@ public class CSharpHelper : ICSharpHelper
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual string Literal(bool value)
-        => value ? "true" : "false";
+    public virtual string Literal(bool value) => value ? "true" : "false";
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -358,8 +374,7 @@ public class CSharpHelper : ICSharpHelper
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual string Literal(byte value)
-        => "(byte)" + value;
+    public virtual string Literal(byte value) => "(byte)" + value;
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -367,18 +382,18 @@ public class CSharpHelper : ICSharpHelper
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual string Literal(char value)
-        => "\'"
-            + value switch
-            {
-                '\\' => @"\\",
-                '\0' => @"\0",
-                '\n' => @"\n",
-                '\r' => @"\r",
-                '\'' => @"\'",
-                _ => value.ToString()
-            }
-            + "\'";
+    public virtual string Literal(char value) =>
+        "\'"
+        + value switch
+        {
+            '\\' => @"\\",
+            '\0' => @"\0",
+            '\n' => @"\n",
+            '\r' => @"\r",
+            '\'' => @"\'",
+            _ => value.ToString(),
+        }
+        + "\'";
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -386,13 +401,14 @@ public class CSharpHelper : ICSharpHelper
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual string Literal(DateOnly value)
-        => string.Format(
+    public virtual string Literal(DateOnly value) =>
+        string.Format(
             CultureInfo.InvariantCulture,
             "new DateOnly({0}, {1}, {2})",
             value.Year,
             value.Month,
-            value.Day);
+            value.Day
+        );
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -400,24 +416,24 @@ public class CSharpHelper : ICSharpHelper
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual string Literal(DateTime value)
-        => string.Format(
-                CultureInfo.InvariantCulture,
-                "new DateTime({0}, {1}, {2}, {3}, {4}, {5}, {6}, DateTimeKind.{7})",
-                value.Year,
-                value.Month,
-                value.Day,
-                value.Hour,
-                value.Minute,
-                value.Second,
-                value.Millisecond,
-                value.Kind)
-            + (value.Ticks % 10000 == 0
+    public virtual string Literal(DateTime value) =>
+        string.Format(
+            CultureInfo.InvariantCulture,
+            "new DateTime({0}, {1}, {2}, {3}, {4}, {5}, {6}, DateTimeKind.{7})",
+            value.Year,
+            value.Month,
+            value.Day,
+            value.Hour,
+            value.Minute,
+            value.Second,
+            value.Millisecond,
+            value.Kind
+        )
+        + (
+            value.Ticks % 10000 == 0
                 ? ""
-                : string.Format(
-                    CultureInfo.InvariantCulture,
-                    ".AddTicks({0})",
-                    value.Ticks % 10000));
+                : string.Format(CultureInfo.InvariantCulture, ".AddTicks({0})", value.Ticks % 10000)
+        );
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -425,8 +441,8 @@ public class CSharpHelper : ICSharpHelper
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual string Literal(DateTimeOffset value)
-        => "new DateTimeOffset(" + Literal(value.DateTime) + ", " + Literal(value.Offset) + ")";
+    public virtual string Literal(DateTimeOffset value) =>
+        "new DateTimeOffset(" + Literal(value.DateTime) + ", " + Literal(value.Offset) + ")";
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -434,8 +450,8 @@ public class CSharpHelper : ICSharpHelper
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual string Literal(decimal value)
-        => value.ToString(CultureInfo.InvariantCulture) + "m";
+    public virtual string Literal(decimal value) =>
+        value.ToString(CultureInfo.InvariantCulture) + "m";
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -443,8 +459,7 @@ public class CSharpHelper : ICSharpHelper
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual string Literal(double value)
-        => EnsureDecimalPlaces(value);
+    public virtual string Literal(double value) => EnsureDecimalPlaces(value);
 
     private static string EnsureDecimalPlaces(double number)
     {
@@ -465,11 +480,9 @@ public class CSharpHelper : ICSharpHelper
             return $"double.{nameof(double.PositiveInfinity)}";
         }
 
-        return !literal.Contains('E')
-            && !literal.Contains('e')
-            && !literal.Contains('.')
-                ? literal + ".0"
-                : literal;
+        return !literal.Contains('E') && !literal.Contains('e') && !literal.Contains('.')
+            ? literal + ".0"
+            : literal;
     }
 
     /// <summary>
@@ -478,8 +491,8 @@ public class CSharpHelper : ICSharpHelper
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual string Literal(float value)
-        => value.ToString(CultureInfo.InvariantCulture) + "f";
+    public virtual string Literal(float value) =>
+        value.ToString(CultureInfo.InvariantCulture) + "f";
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -487,8 +500,7 @@ public class CSharpHelper : ICSharpHelper
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual string Literal(Guid value)
-        => "new Guid(\"" + value + "\")";
+    public virtual string Literal(Guid value) => "new Guid(\"" + value + "\")";
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -496,8 +508,7 @@ public class CSharpHelper : ICSharpHelper
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual string Literal(int value)
-        => value.ToString(CultureInfo.InvariantCulture);
+    public virtual string Literal(int value) => value.ToString(CultureInfo.InvariantCulture);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -505,8 +516,7 @@ public class CSharpHelper : ICSharpHelper
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual string Literal(long value)
-        => value.ToString(CultureInfo.InvariantCulture) + "L";
+    public virtual string Literal(long value) => value.ToString(CultureInfo.InvariantCulture) + "L";
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -514,8 +524,7 @@ public class CSharpHelper : ICSharpHelper
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual string Literal(sbyte value)
-        => "(sbyte)" + value;
+    public virtual string Literal(sbyte value) => "(sbyte)" + value;
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -523,8 +532,7 @@ public class CSharpHelper : ICSharpHelper
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual string Literal(short value)
-        => "(short)" + value;
+    public virtual string Literal(short value) => "(short)" + value;
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -534,19 +542,31 @@ public class CSharpHelper : ICSharpHelper
     /// </summary>
     public virtual string Literal(TimeOnly value)
     {
-        var result = value.Millisecond == 0
-            ? string.Format(
-                CultureInfo.InvariantCulture, "new TimeOnly({0}, {1}, {2})", value.Hour, value.Minute, value.Second)
-            : string.Format(
-                CultureInfo.InvariantCulture, "new TimeOnly({0}, {1}, {2}, {3})", value.Hour, value.Minute, value.Second,
-                value.Millisecond);
+        var result =
+            value.Millisecond == 0
+                ? string.Format(
+                    CultureInfo.InvariantCulture,
+                    "new TimeOnly({0}, {1}, {2})",
+                    value.Hour,
+                    value.Minute,
+                    value.Second
+                )
+                : string.Format(
+                    CultureInfo.InvariantCulture,
+                    "new TimeOnly({0}, {1}, {2}, {3})",
+                    value.Hour,
+                    value.Minute,
+                    value.Second,
+                    value.Millisecond
+                );
 
         if (value.Ticks % 10000 > 0)
         {
             result += string.Format(
                 CultureInfo.InvariantCulture,
                 ".Add(TimeSpan.FromTicks({0}))",
-                value.Ticks % 10000);
+                value.Ticks % 10000
+            );
         }
 
         return result;
@@ -558,8 +578,8 @@ public class CSharpHelper : ICSharpHelper
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual string Literal(TimeSpan value)
-        => value.Ticks % 10000 == 0
+    public virtual string Literal(TimeSpan value) =>
+        value.Ticks % 10000 == 0
             ? string.Format(
                 CultureInfo.InvariantCulture,
                 "new TimeSpan({0}, {1}, {2}, {3}, {4})",
@@ -567,11 +587,9 @@ public class CSharpHelper : ICSharpHelper
                 value.Hours,
                 value.Minutes,
                 value.Seconds,
-                value.Milliseconds)
-            : string.Format(
-                CultureInfo.InvariantCulture,
-                "new TimeSpan({0})",
-                value.Ticks);
+                value.Milliseconds
+            )
+            : string.Format(CultureInfo.InvariantCulture, "new TimeSpan({0})", value.Ticks);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -579,8 +597,7 @@ public class CSharpHelper : ICSharpHelper
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual string Literal(uint value)
-        => value + "u";
+    public virtual string Literal(uint value) => value + "u";
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -588,8 +605,7 @@ public class CSharpHelper : ICSharpHelper
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual string Literal(ulong value)
-        => value + "ul";
+    public virtual string Literal(ulong value) => value + "ul";
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -597,8 +613,7 @@ public class CSharpHelper : ICSharpHelper
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual string Literal(ushort value)
-        => "(ushort)" + value;
+    public virtual string Literal(ushort value) => "(ushort)" + value;
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -606,8 +621,8 @@ public class CSharpHelper : ICSharpHelper
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual string Literal(BigInteger value)
-        => $"BigInteger.Parse(\"{value.ToString(NumberFormatInfo.InvariantInfo)}\", NumberFormatInfo.InvariantInfo)";
+    public virtual string Literal(BigInteger value) =>
+        $"BigInteger.Parse(\"{value.ToString(NumberFormatInfo.InvariantInfo)}\", NumberFormatInfo.InvariantInfo)";
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -615,8 +630,8 @@ public class CSharpHelper : ICSharpHelper
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual string Literal(Type value, bool? useFullName = null)
-        => $"typeof({Reference(value, useFullName)})";
+    public virtual string Literal(Type value, bool? useFullName = null) =>
+        $"typeof({Reference(value, useFullName)})";
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -625,8 +640,7 @@ public class CSharpHelper : ICSharpHelper
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     public virtual string Literal<T>(T? value)
-        where T : struct
-        => UnknownLiteral(value);
+        where T : struct => UnknownLiteral(value);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -634,8 +648,8 @@ public class CSharpHelper : ICSharpHelper
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual string Literal<T>(T[] values, bool vertical = false)
-        => Array(typeof(T), values, vertical);
+    public virtual string Literal<T>(T[] values, bool vertical = false) =>
+        Array(typeof(T), values, vertical);
 
     private string Array(Type type, IEnumerable values, bool vertical = false)
     {
@@ -647,10 +661,7 @@ public class CSharpHelper : ICSharpHelper
 
         if (valuesList.Count == 0)
         {
-            builder
-                .Append(" ")
-                .Append(Reference(type))
-                .Append("[0]");
+            builder.Append(" ").Append(Reference(type)).Append("[0]");
         }
         else
         {
@@ -706,10 +717,7 @@ public class CSharpHelper : ICSharpHelper
                     }
                 }
 
-                builder.Append(
-                    byteArray
-                        ? Literal((int)(byte)value!)
-                        : UnknownLiteral(value));
+                builder.Append(byteArray ? Literal((int)(byte)value!) : UnknownLiteral(value));
             }
 
             if (vertical)
@@ -766,10 +774,7 @@ public class CSharpHelper : ICSharpHelper
             {
                 typeArguments ??= tuple.GetType().GenericTypeArguments;
 
-                builder
-                    .Append('(')
-                    .Append(Reference(typeArguments[i]))
-                    .Append(')');
+                builder.Append('(').Append(Reference(typeArguments[i])).Append(')');
             }
 
             builder.Append(UnknownLiteral(item));
@@ -786,9 +791,7 @@ public class CSharpHelper : ICSharpHelper
     {
         var builder = new IndentedStringBuilder();
 
-        builder
-            .AppendLine("new object[,]")
-            .AppendLine("{");
+        builder.AppendLine("new object[,]").AppendLine("{");
 
         using (builder.Indent())
         {
@@ -817,9 +820,7 @@ public class CSharpHelper : ICSharpHelper
             }
         }
 
-        builder
-            .AppendLine()
-            .Append("}");
+        builder.AppendLine().Append("}");
 
         return builder.ToString();
     }
@@ -830,22 +831,24 @@ public class CSharpHelper : ICSharpHelper
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual string Literal<T>(List<T> values, bool vertical = false)
-        => List(typeof(T), values, vertical);
+    public virtual string Literal<T>(List<T> values, bool vertical = false) =>
+        List(typeof(T), values, vertical);
 
     private string List(Type type, IEnumerable values, bool vertical = false)
     {
         var builder = new IndentedStringBuilder();
 
-        builder.Append("new List<")
-            .Append(Reference(type))
-            .Append(">");
+        builder.Append("new List<").Append(Reference(type)).Append(">");
 
         return HandleEnumerable(
-            builder, vertical, values, value =>
+            builder,
+            vertical,
+            values,
+            value =>
             {
                 builder.Append(UnknownLiteral(value));
-            });
+            }
+        );
     }
 
     /// <summary>
@@ -854,31 +857,44 @@ public class CSharpHelper : ICSharpHelper
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual string Literal<TKey, TValue>(Dictionary<TKey, TValue> dict, bool vertical = false)
-        where TKey : notnull
-        => Dictionary(typeof(TKey), typeof(TValue), dict, vertical);
+    public virtual string Literal<TKey, TValue>(
+        Dictionary<TKey, TValue> dict,
+        bool vertical = false
+    )
+        where TKey : notnull => Dictionary(typeof(TKey), typeof(TValue), dict, vertical);
 
     private string Dictionary(Type keyType, Type valueType, IDictionary dict, bool vertical = false)
     {
         var builder = new IndentedStringBuilder();
 
-        builder.Append("new Dictionary<")
+        builder
+            .Append("new Dictionary<")
             .Append(Reference(keyType))
             .Append(", ")
             .Append(Reference(valueType))
             .Append(">");
 
         return HandleEnumerable(
-            builder, vertical, dict.Keys, key =>
+            builder,
+            vertical,
+            dict.Keys,
+            key =>
             {
-                builder.Append("[")
+                builder
+                    .Append("[")
                     .Append(UnknownLiteral(key))
                     .Append("] = ")
                     .Append(UnknownLiteral(dict[key]));
-            });
+            }
+        );
     }
 
-    private static string HandleEnumerable(IndentedStringBuilder builder, bool vertical, IEnumerable values, Action<object> handleValue)
+    private static string HandleEnumerable(
+        IndentedStringBuilder builder,
+        bool vertical,
+        IEnumerable values,
+        Action<object> handleValue
+    )
     {
         var first = true;
         foreach (var value in values)
@@ -970,8 +986,8 @@ public class CSharpHelper : ICSharpHelper
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    protected virtual string GetSimpleEnumValue(Type type, string name, bool fullName)
-        => Reference(type, fullName) + "." + name;
+    protected virtual string GetSimpleEnumValue(Type type, string name, bool fullName) =>
+        Reference(type, fullName) + "." + name;
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -992,11 +1008,14 @@ public class CSharpHelper : ICSharpHelper
         }
 
         return allValues.Aggregate(
-            (string?)null,
-            (previous, current) =>
-                previous == null
-                    ? GetSimpleEnumValue(type, Enum.GetName(type, current)!, fullName)
-                    : previous + " | " + GetSimpleEnumValue(type, Enum.GetName(type, current)!, fullName))
+                (string?)null,
+                (previous, current) =>
+                    previous == null
+                        ? GetSimpleEnumValue(type, Enum.GetName(type, current)!, fullName)
+                        : previous
+                            + " | "
+                            + GetSimpleEnumValue(type, Enum.GetName(type, current)!, fullName)
+            )
             ?? $"({Reference(type)}){UnknownLiteral(Convert.ChangeType(flags, Enum.GetUnderlyingType(type)))}";
     }
 
@@ -1056,8 +1075,11 @@ public class CSharpHelper : ICSharpHelper
             return Array(literalType.GetElementType()!, array);
         }
 
-        if (value is ITuple tuple
-            && value.GetType().FullName?.StartsWith("System.ValueTuple`", StringComparison.Ordinal) == true)
+        if (
+            value is ITuple tuple
+            && value.GetType().FullName?.StartsWith("System.ValueTuple`", StringComparison.Ordinal)
+                == true
+        )
         {
             return ValueTuple(tuple);
         }
@@ -1068,9 +1090,13 @@ public class CSharpHelper : ICSharpHelper
             var genericArguments = valueType.GetGenericArguments();
             switch (value)
             {
-                case IList list when genericArguments.Length == 1 && valueType.GetGenericTypeDefinition() == typeof(List<>):
+                case IList list
+                    when genericArguments.Length == 1
+                        && valueType.GetGenericTypeDefinition() == typeof(List<>):
                     return List(genericArguments[0], list);
-                case IDictionary dict when genericArguments.Length == 2 && valueType.GetGenericTypeDefinition() == typeof(Dictionary<,>):
+                case IDictionary dict
+                    when genericArguments.Length == 2
+                        && valueType.GetGenericTypeDefinition() == typeof(Dictionary<,>):
                     return Dictionary(genericArguments[0], genericArguments[1], dict);
             }
         }
@@ -1087,7 +1113,9 @@ public class CSharpHelper : ICSharpHelper
                 throw new NotSupportedException(
                     DesignStrings.LiteralExpressionNotSupported(
                         expression.ToString(),
-                        literalType.ShortDisplayName()));
+                        literalType.ShortDisplayName()
+                    )
+                );
             }
 
             return builder.ToString();
@@ -1109,8 +1137,7 @@ public class CSharpHelper : ICSharpHelper
 
                 HandleList(((NewArrayExpression)expression).Expressions, builder, simple: true);
 
-                builder
-                    .Append(" }");
+                builder.Append(" }");
 
                 return true;
             case ExpressionType.Convert:
@@ -1127,9 +1154,7 @@ public class CSharpHelper : ICSharpHelper
                 return HandleExpression(unaryExpression.Operand, builder);
             }
             case ExpressionType.New:
-                builder
-                    .Append("new ")
-                    .Append(Reference(expression.Type, fullName: true));
+                builder.Append("new ").Append(Reference(expression.Type, fullName: true));
 
                 return HandleArguments(((NewExpression)expression).Arguments, builder);
             case ExpressionType.Call:
@@ -1137,8 +1162,7 @@ public class CSharpHelper : ICSharpHelper
                 var callExpression = (MethodCallExpression)expression;
                 if (callExpression.Method.IsStatic)
                 {
-                    builder
-                        .Append(Reference(callExpression.Method.DeclaringType!, fullName: true));
+                    builder.Append(Reference(callExpression.Method.DeclaringType!, fullName: true));
                 }
                 else
                 {
@@ -1148,9 +1172,7 @@ public class CSharpHelper : ICSharpHelper
                     }
                 }
 
-                builder
-                    .Append('.')
-                    .Append(callExpression.Method.Name);
+                builder.Append('.').Append(callExpression.Method.Name);
 
                 return HandleArguments(callExpression.Arguments, builder);
             }
@@ -1158,12 +1180,9 @@ public class CSharpHelper : ICSharpHelper
             {
                 var value = ((ConstantExpression)expression).Value;
 
-                builder
-                    .Append(
-                        simple
-                        && value?.GetType()?.IsNumeric() == true
-                            ? value
-                            : UnknownLiteral(value));
+                builder.Append(
+                    simple && value?.GetType()?.IsNumeric() == true ? value : UnknownLiteral(value)
+                );
                 return true;
             }
             case ExpressionType.MemberAccess:
@@ -1171,8 +1190,9 @@ public class CSharpHelper : ICSharpHelper
                 var memberExpression = (MemberExpression)expression;
                 if (memberExpression.Expression == null)
                 {
-                    builder
-                        .Append(Reference(memberExpression.Member.DeclaringType!, fullName: true));
+                    builder.Append(
+                        Reference(memberExpression.Member.DeclaringType!, fullName: true)
+                    );
                 }
                 else
                 {
@@ -1182,9 +1202,7 @@ public class CSharpHelper : ICSharpHelper
                     }
                 }
 
-                builder
-                    .Append('.')
-                    .Append(memberExpression.Member.Name);
+                builder.Append('.').Append(memberExpression.Member.Name);
 
                 return true;
             }
@@ -1219,7 +1237,11 @@ public class CSharpHelper : ICSharpHelper
         return true;
     }
 
-    private bool HandleList(IEnumerable<Expression> argumentExpressions, StringBuilder builder, bool simple = false)
+    private bool HandleList(
+        IEnumerable<Expression> argumentExpressions,
+        StringBuilder builder,
+        bool simple = false
+    )
     {
         var separator = string.Empty;
         foreach (var expression in argumentExpressions)
@@ -1243,13 +1265,21 @@ public class CSharpHelper : ICSharpHelper
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual string Fragment(IMethodCallCodeFragment fragment, string? instanceIdentifier, bool typeQualified)
+    public virtual string Fragment(
+        IMethodCallCodeFragment fragment,
+        string? instanceIdentifier,
+        bool typeQualified
+    )
     {
         var builder = new StringBuilder();
 
         if (typeQualified)
         {
-            if (instanceIdentifier is null || fragment.DeclaringType is null || fragment.ChainedCall is not null)
+            if (
+                instanceIdentifier is null
+                || fragment.DeclaringType is null
+                || fragment.ChainedCall is not null
+            )
             {
                 throw new ArgumentException(DesignStrings.CannotGenerateTypeQualifiedMethodCall);
             }
@@ -1323,28 +1353,21 @@ public class CSharpHelper : ICSharpHelper
                 AppendMethodCall(current);
 
                 current = current.ChainedCall;
-            }
-            while (current is not null);
+            } while (current is not null);
         }
 
         return builder.ToString();
 
         void AppendMethodCall(IMethodCallCodeFragment current)
         {
-            builder
-                .Append('.')
-                .Append(current.Method);
+            builder.Append('.').Append(current.Method);
 
             if (current.TypeArguments.Any())
             {
-                builder
-                    .Append("<")
-                    .Append(string.Join(", ", current.TypeArguments))
-                    .Append(">");
+                builder.Append("<").Append(string.Join(", ", current.TypeArguments)).Append(">");
             }
 
-            builder
-                .Append('(');
+            builder.Append('(');
 
             var first = true;
             foreach (var argument in current.Arguments)
@@ -1382,7 +1405,10 @@ public class CSharpHelper : ICSharpHelper
     {
         if (fragment.MethodCalls.Count == 1)
         {
-            return fragment.Parameter + " => " + fragment.Parameter + Fragment(fragment.MethodCalls[0], indent);
+            return fragment.Parameter
+                + " => "
+                + fragment.Parameter
+                + Fragment(fragment.MethodCalls[0], indent);
         }
 
         var builder = new IndentedStringBuilder();
@@ -1397,9 +1423,7 @@ public class CSharpHelper : ICSharpHelper
         {
             foreach (var methodCall in fragment.MethodCalls)
             {
-                builder
-                    .Append(fragment.Parameter)
-                    .Append(Fragment(methodCall, indent + 1));
+                builder.Append(fragment.Parameter).Append(Fragment(methodCall, indent + 1));
                 builder.AppendLine(";");
             }
         }
@@ -1415,8 +1439,8 @@ public class CSharpHelper : ICSharpHelper
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual string Fragment(PropertyAccessorCodeFragment fragment)
-        => Lambda(fragment.Properties, fragment.Parameter);
+    public virtual string Fragment(PropertyAccessorCodeFragment fragment) =>
+        Lambda(fragment.Properties, fragment.Parameter);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -1434,12 +1458,9 @@ public class CSharpHelper : ICSharpHelper
             attributeName = attributeName[..^9];
         }
 
-        builder
-            .Append("[")
-            .Append(attributeName);
+        builder.Append("[").Append(attributeName);
 
-        if (fragment.Arguments.Count != 0
-            || fragment.NamedArguments.Count != 0)
+        if (fragment.Arguments.Count != 0 || fragment.NamedArguments.Count != 0)
         {
             builder.Append("(");
 
@@ -1469,10 +1490,7 @@ public class CSharpHelper : ICSharpHelper
                     first = false;
                 }
 
-                builder
-                    .Append(item.Key)
-                    .Append(" = ")
-                    .Append(UnknownLiteral(item.Value));
+                builder.Append(item.Key).Append(" = ").Append(UnknownLiteral(item.Value));
             }
 
             builder.Append(")");
@@ -1498,10 +1516,7 @@ public class CSharpHelper : ICSharpHelper
         {
             if (!first)
             {
-                builder
-                    .AppendLine()
-                    .Append(' ', indent * 4)
-                    .Append("/// ");
+                builder.AppendLine().Append(' ', indent * 4).Append("/// ");
             }
             else
             {
@@ -1520,8 +1535,8 @@ public class CSharpHelper : ICSharpHelper
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual string Arguments(IEnumerable<object> values)
-        => string.Join(", ", values.Select(UnknownLiteral));
+    public virtual string Arguments(IEnumerable<object> values) =>
+        string.Join(", ", values.Select(UnknownLiteral));
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -1529,8 +1544,7 @@ public class CSharpHelper : ICSharpHelper
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual IEnumerable<string> GetRequiredUsings(Type type)
-        => type.GetNamespaces();
+    public virtual IEnumerable<string> GetRequiredUsings(Type type) => type.GetNamespaces();
 
     private string ToSourceCode(SyntaxNode node)
     {
@@ -1538,7 +1552,9 @@ public class CSharpHelper : ICSharpHelper
         var document = _project.AddDocument("Code.cs", SourceText.From(code));
 
         var syntaxRootFoo = document.GetSyntaxRootAsync().Result!;
-        var annotatedDocument = document.WithSyntaxRoot(syntaxRootFoo.WithAdditionalAnnotations(Simplifier.Annotation));
+        var annotatedDocument = document.WithSyntaxRoot(
+            syntaxRootFoo.WithAdditionalAnnotations(Simplifier.Annotation)
+        );
         document = Simplifier.ReduceAsync(annotatedDocument).Result;
 
         var simplifiedCode = document.GetTextAsync().Result.ToString();
@@ -1552,8 +1568,8 @@ public class CSharpHelper : ICSharpHelper
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual string Statement(Expression node, ISet<string> collectedNamespaces)
-        => ToSourceCode(_translator.TranslateStatement(node, collectedNamespaces));
+    public virtual string Statement(Expression node, ISet<string> collectedNamespaces) =>
+        ToSourceCode(_translator.TranslateStatement(node, collectedNamespaces));
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -1561,8 +1577,8 @@ public class CSharpHelper : ICSharpHelper
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual string Expression(Expression node, ISet<string> collectedNamespaces)
-        => ToSourceCode(_translator.TranslateExpression(node, collectedNamespaces));
+    public virtual string Expression(Expression node, ISet<string> collectedNamespaces) =>
+        ToSourceCode(_translator.TranslateExpression(node, collectedNamespaces));
 
     private static bool IsIdentifierStartCharacter(char ch)
     {
@@ -1583,10 +1599,7 @@ public class CSharpHelper : ICSharpHelper
     {
         if (ch < 'a')
         {
-            return (ch < 'A'
-                    ? ch is >= '0' and <= '9'
-                    : ch <= 'Z')
-                || ch == '_';
+            return (ch < 'A' ? ch is >= '0' and <= '9' : ch <= 'Z') || ch == '_';
         }
 
         if (ch <= 'z')

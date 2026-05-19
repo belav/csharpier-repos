@@ -31,16 +31,27 @@ namespace System.Web.Razor.Generator
         {
             _writer = context.CreateCodeWriter();
 
-            string prefix = context.BuildCodeString(
-                cw => cw.WriteHelperHeaderPrefix(context.Host.GeneratedClassContext.TemplateTypeName, context.Host.StaticHelpers));
+            string prefix = context.BuildCodeString(cw =>
+                cw.WriteHelperHeaderPrefix(
+                    context.Host.GeneratedClassContext.TemplateTypeName,
+                    context.Host.StaticHelpers
+                )
+            );
 
             _writer.WriteLinePragma(
-                context.GenerateLinePragma(Signature.Location, prefix.Length, Signature.Value.Length));
+                context.GenerateLinePragma(
+                    Signature.Location,
+                    prefix.Length,
+                    Signature.Value.Length
+                )
+            );
             _writer.WriteSnippet(prefix);
             _writer.WriteSnippet(Signature);
             if (HeaderComplete)
             {
-                _writer.WriteHelperHeaderSuffix(context.Host.GeneratedClassContext.TemplateTypeName);
+                _writer.WriteHelperHeaderSuffix(
+                    context.Host.GeneratedClassContext.TemplateTypeName
+                );
             }
             _writer.WriteLinePragma(null);
             if (HeaderComplete)
@@ -67,7 +78,8 @@ namespace System.Web.Razor.Generator
             if (Footer != null && !String.IsNullOrEmpty(Footer.Value))
             {
                 _writer.WriteLinePragma(
-                    context.GenerateLinePragma(Footer.Location, 0, Footer.Value.Length));
+                    context.GenerateLinePragma(Footer.Location, 0, Footer.Value.Length)
+                );
                 _writer.WriteSnippet(Footer);
                 _writer.WriteLinePragma();
             }
@@ -80,23 +92,23 @@ namespace System.Web.Razor.Generator
         public override bool Equals(object obj)
         {
             HelperCodeGenerator other = obj as HelperCodeGenerator;
-            return other != null &&
-                   base.Equals(other) &&
-                   HeaderComplete == other.HeaderComplete &&
-                   Equals(Signature, other.Signature);
+            return other != null
+                && base.Equals(other)
+                && HeaderComplete == other.HeaderComplete
+                && Equals(Signature, other.Signature);
         }
 
         public override int GetHashCode()
         {
-            return HashCodeCombiner.Start()
-                .Add(base.GetHashCode())
-                .Add(Signature)
-                .CombinedHash;
+            return HashCodeCombiner.Start().Add(base.GetHashCode()).Add(Signature).CombinedHash;
         }
 
         public override string ToString()
         {
-            return "Helper:" + Signature.ToString("F", CultureInfo.CurrentCulture) + ";" + (HeaderComplete ? "C" : "I");
+            return "Helper:"
+                + Signature.ToString("F", CultureInfo.CurrentCulture)
+                + ";"
+                + (HeaderComplete ? "C" : "I");
         }
 
         private void AddStatementToHelper(string statement, CodeLinePragma pragma)

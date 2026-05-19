@@ -19,7 +19,11 @@ namespace System.DirectoryServices.Protocols.Tests
         [Theory]
         [InlineData("", null, false)]
         [InlineData("AttributeName", null, false)]
-        public void Ctor_AttributeName_MatchingRule_ReverseOrder(string attributeName, string matchingRule, bool reverseOrder)
+        public void Ctor_AttributeName_MatchingRule_ReverseOrder(
+            string attributeName,
+            string matchingRule,
+            bool reverseOrder
+        )
         {
             var sortKey = new SortKey(attributeName, matchingRule, reverseOrder);
             Assert.Equal(attributeName, sortKey.AttributeName);
@@ -30,7 +34,10 @@ namespace System.DirectoryServices.Protocols.Tests
         [Fact]
         public void Ctor_NullAttributeName_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>("value", () => new SortKey(null, "MatchingRule", false));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "value",
+                () => new SortKey(null, "MatchingRule", false)
+            );
         }
 
         [Fact]

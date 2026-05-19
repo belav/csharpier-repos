@@ -23,7 +23,12 @@ namespace System.Reflection.Emit
         internal object? _defaultValue = DBNull.Value;
         internal FieldDefinitionHandle _handle;
 
-        internal FieldBuilderImpl(TypeBuilderImpl typeBuilder, string fieldName, Type type, FieldAttributes attributes)
+        internal FieldBuilderImpl(
+            TypeBuilderImpl typeBuilder,
+            string fieldName,
+            Type type,
+            FieldAttributes attributes
+        )
         {
             _fieldName = fieldName;
             _typeBuilder = typeBuilder;
@@ -44,7 +49,13 @@ namespace System.Reflection.Emit
             if (defaultValue == null)
             {
                 // nullable value types can hold null value.
-                if (destinationType.IsValueType && !(destinationType.IsGenericType && destinationType.GetGenericTypeDefinition() == typeof(Nullable<>)))
+                if (
+                    destinationType.IsValueType
+                    && !(
+                        destinationType.IsGenericType
+                        && destinationType.GetGenericTypeDefinition() == typeof(Nullable<>)
+                    )
+                )
                 {
                     throw new ArgumentException(SR.Argument_ConstantNull);
                 }
@@ -68,14 +79,23 @@ namespace System.Reflection.Emit
                     {
                         underlyingType = enumBldr.GetEnumUnderlyingType();
 
-                        if (sourceType != enumBldr._typeBuilder.UnderlyingSystemType && sourceType != underlyingType)
+                        if (
+                            sourceType != enumBldr._typeBuilder.UnderlyingSystemType
+                            && sourceType != underlyingType
+                        )
                             throw new ArgumentException(SR.Argument_ConstantDoesntMatch);
                     }
                     else if (destinationType is TypeBuilderImpl typeBldr)
                     {
                         underlyingType = typeBldr.UnderlyingSystemType;
 
-                        if (underlyingType == null || (sourceType != typeBldr.UnderlyingSystemType && sourceType != underlyingType))
+                        if (
+                            underlyingType == null
+                            || (
+                                sourceType != typeBldr.UnderlyingSystemType
+                                && sourceType != underlyingType
+                            )
+                        )
                         {
                             throw new ArgumentException(SR.Argument_ConstantDoesntMatch);
                         }
@@ -100,7 +120,10 @@ namespace System.Reflection.Emit
             }
         }
 
-        protected override void SetCustomAttributeCore(ConstructorInfo con, ReadOnlySpan<byte> binaryAttribute)
+        protected override void SetCustomAttributeCore(
+            ConstructorInfo con,
+            ReadOnlySpan<byte> binaryAttribute
+        )
         {
             // Handle pseudo custom attributes
             switch (con.ReflectedType!.FullName)
@@ -119,7 +142,11 @@ namespace System.Reflection.Emit
                     return;
                 case "System.Runtime.InteropServices.MarshalAsAttribute":
                     _attributes |= FieldAttributes.HasFieldMarshal;
-                    _marshallingData = MarshallingData.CreateMarshallingData(con, binaryAttribute, isField: true);
+                    _marshallingData = MarshallingData.CreateMarshallingData(
+                        con,
+                        binaryAttribute,
+                        isField: true
+                    );
                     return;
             }
 
@@ -136,7 +163,8 @@ namespace System.Reflection.Emit
 
         #region MemberInfo Overrides
 
-        public override int MetadataToken => _handle == default ? 0 : MetadataTokens.GetToken(_handle);
+        public override int MetadataToken =>
+            _handle == default ? 0 : MetadataTokens.GetToken(_handle);
 
         public override Module Module => _typeBuilder.Module;
 
@@ -151,22 +179,33 @@ namespace System.Reflection.Emit
         #region FieldInfo Overrides
         public override Type FieldType => _fieldType;
 
-        public override object? GetValue(object? obj) => throw new NotSupportedException(SR.NotSupported_DynamicModule);
+        public override object? GetValue(object? obj) =>
+            throw new NotSupportedException(SR.NotSupported_DynamicModule);
 
-        public override void SetValue(object? obj, object? val, BindingFlags invokeAttr, Binder? binder, CultureInfo? culture)
-            => throw new NotSupportedException(SR.NotSupported_DynamicModule);
-        public override RuntimeFieldHandle FieldHandle => throw new NotSupportedException(SR.NotSupported_DynamicModule);
+        public override void SetValue(
+            object? obj,
+            object? val,
+            BindingFlags invokeAttr,
+            Binder? binder,
+            CultureInfo? culture
+        ) => throw new NotSupportedException(SR.NotSupported_DynamicModule);
+
+        public override RuntimeFieldHandle FieldHandle =>
+            throw new NotSupportedException(SR.NotSupported_DynamicModule);
 
         public override FieldAttributes Attributes => _attributes;
 
         #endregion
 
         #region ICustomAttributeProvider Implementation
-        public override object[] GetCustomAttributes(bool inherit) => throw new NotSupportedException(SR.NotSupported_DynamicModule);
+        public override object[] GetCustomAttributes(bool inherit) =>
+            throw new NotSupportedException(SR.NotSupported_DynamicModule);
 
-        public override object[] GetCustomAttributes(Type attributeType, bool inherit) => throw new NotSupportedException(SR.NotSupported_DynamicModule);
+        public override object[] GetCustomAttributes(Type attributeType, bool inherit) =>
+            throw new NotSupportedException(SR.NotSupported_DynamicModule);
 
-        public override bool IsDefined(Type attributeType, bool inherit) => throw new NotSupportedException(SR.NotSupported_DynamicModule);
+        public override bool IsDefined(Type attributeType, bool inherit) =>
+            throw new NotSupportedException(SR.NotSupported_DynamicModule);
         #endregion
     }
 }

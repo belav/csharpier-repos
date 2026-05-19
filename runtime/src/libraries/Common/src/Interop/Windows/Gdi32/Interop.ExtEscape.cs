@@ -19,13 +19,25 @@ internal static partial class Interop
 #if NET7_0_OR_GREATER
             [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
-            HandleRef hDC, int nEscape, int cbInput, ref int inData, int cbOutput, out int outData);
+            HandleRef hDC,
+            int nEscape,
+            int cbInput,
+            ref int inData,
+            int cbOutput,
+            out int outData
+        );
 
         [LibraryImport(Libraries.Gdi32, SetLastError = true)]
         internal static partial int ExtEscape(
 #if NET7_0_OR_GREATER
             [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
-            HandleRef hDC, int nEscape, int cbInput, byte[] inData, int cbOutput, out int outData);
+            HandleRef hDC,
+            int nEscape,
+            int cbInput,
+            byte[] inData,
+            int cbOutput,
+            out int outData
+        );
     }
 }

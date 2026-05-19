@@ -53,7 +53,7 @@ namespace System.CommandLine.Benchmarks.DragonFruit
         ///         </summary>
         ///         <param>....</param>
         ///         static int Main(int p1, string p2, bool p3) { return 0; }
-        ///     } 
+        ///     }
         /// }
         /// </code>
         /// </remarks>>
@@ -64,21 +64,20 @@ namespace System.CommandLine.Benchmarks.DragonFruit
             string methodNamePrefix = "Method"
         )
         {
-            IEnumerable<string> testMethodsCodeSnapshot =
-                Enumerable
-                    .Range(0, methodsPerClassCount)
-                    .Select(i => $"public int {methodNamePrefix}_{i}() {{ return 0; }} ");
+            IEnumerable<string> testMethodsCodeSnapshot = Enumerable
+                .Range(0, methodsPerClassCount)
+                .Select(i => $"public int {methodNamePrefix}_{i}() {{ return 0; }} ");
 
-            IEnumerable<string> testClassesCodeSnapshot =
-                Enumerable
-                    .Range(0, classesCount)
-                    .Select(i =>
-                        "namespace PerfTestApp { " +
-                        $"public class {classNamePrefix}_{i} {{ {string.Concat(testMethodsCodeSnapshot)} }} " +
-                        "} \n");
+            IEnumerable<string> testClassesCodeSnapshot = Enumerable
+                .Range(0, classesCount)
+                .Select(i =>
+                    "namespace PerfTestApp { "
+                    + $"public class {classNamePrefix}_{i} {{ {string.Concat(testMethodsCodeSnapshot)} }} "
+                    + "} \n"
+                );
 
             string entryPointCodeSnapshot =
-            @"namespace PerfTestApp {
+                @"namespace PerfTestApp {
                 internal class Program {
                  
                     /// <summary>
@@ -97,20 +96,29 @@ namespace System.CommandLine.Benchmarks.DragonFruit
 
         private string CreateTestAssemblyInTempFile(int classesCount, int methodsPerClassCount)
         {
-            string testSourceCode = GenerateTestAssemblySourceCode(classesCount, methodsPerClassCount);
-            return Utils.CreateTestAssemblyInTempFileFromString(testSourceCode,
+            string testSourceCode = GenerateTestAssemblySourceCode(
+                classesCount,
+                methodsPerClassCount
+            );
+            return Utils.CreateTestAssemblyInTempFileFromString(
+                testSourceCode,
                 new[]
                 {
                     typeof(object).GetTypeInfo().Assembly.Location,
                     typeof(Enumerable).GetTypeInfo().Assembly.Location,
-                });
+                }
+            );
         }
 
-        public IEnumerable<(int classesCount, int methodsPerClassCount)> ValuesForTestAssemblySize
-            => new[] {
-                (classesCount: 1,   methodsPerClassCount: 1),
-                (classesCount: 10,  methodsPerClassCount: 10),
-                (classesCount: 100, methodsPerClassCount: 100)
+        public IEnumerable<(
+            int classesCount,
+            int methodsPerClassCount
+        )> ValuesForTestAssemblySize =>
+            new[]
+            {
+                (classesCount: 1, methodsPerClassCount: 1),
+                (classesCount: 10, methodsPerClassCount: 10),
+                (classesCount: 100, methodsPerClassCount: 100),
             };
 
         [ParamsSource(nameof(ValuesForTestAssemblySize))]
@@ -121,27 +129,30 @@ namespace System.CommandLine.Benchmarks.DragonFruit
         {
             _testAssemblyFilePath = CreateTestAssemblyInTempFile(
                 TestAssemblySize.classesCount,
-                TestAssemblySize.methodsPerClassCount);
+                TestAssemblySize.methodsPerClassCount
+            );
 
             _testAssembly = Assembly.Load(File.ReadAllBytes(_testAssemblyFilePath));
             _testAssemblyXmlDocsFilePath = _testAssemblyFilePath.Replace(".dll", ".xml");
         }
 
         [Benchmark(Description = "ExecuteAssemblyAsync entry point search.")]
-        public Task SearchForStartingPointUsingReflection()
-               => System.CommandLine.DragonFruit.CommandLine.ExecuteAssemblyAsync(
-                    _testAssembly,
-                    new string[] { },
-                    null,
-                    _testAssemblyXmlDocsFilePath);
+        public Task SearchForStartingPointUsingReflection() =>
+            System.CommandLine.DragonFruit.CommandLine.ExecuteAssemblyAsync(
+                _testAssembly,
+                new string[] { },
+                null,
+                _testAssemblyXmlDocsFilePath
+            );
 
         [Benchmark(Description = "ExecuteAssemblyAsync explicit entry point.")]
-        public Task SearchForStartingPointWhenGivenEntryPointClass()
-            => System.CommandLine.DragonFruit.CommandLine.ExecuteAssemblyAsync(
+        public Task SearchForStartingPointWhenGivenEntryPointClass() =>
+            System.CommandLine.DragonFruit.CommandLine.ExecuteAssemblyAsync(
                 _testAssembly,
                 new string[] { },
                 "PerfTestApp.Program",
-                _testAssemblyXmlDocsFilePath);
+                _testAssemblyXmlDocsFilePath
+            );
 
         [GlobalCleanup]
         public void Cleanup()

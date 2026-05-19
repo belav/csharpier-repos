@@ -4,12 +4,13 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web.UI {
-
+namespace System.Web.UI
+{
     /// <summary>
     /// Provides access to the CodeBlockType of a CodeBlockBuilder
     /// </summary>
-    public interface ICodeBlockTypeAccessor {
+    public interface ICodeBlockTypeAccessor
+    {
         CodeBlockType BlockType { get; }
     }
 }

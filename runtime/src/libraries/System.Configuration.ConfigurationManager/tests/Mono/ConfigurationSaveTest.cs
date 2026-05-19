@@ -27,17 +27,17 @@
 // THE SOFTWARE.
 
 using System;
+using System.Collections.Generic;
+using System.Configuration;
+using System.Globalization;
 using System.IO;
+using System.Reflection;
+using System.Text;
 using System.Xml;
 using System.Xml.Schema;
 using System.Xml.XPath;
-using System.Text;
-using System.Reflection;
-using System.Globalization;
-using System.Configuration;
-using System.Collections.Generic;
-using SysConfig = System.Configuration.Configuration;
 using Xunit;
+using SysConfig = System.Configuration.Configuration;
 
 namespace MonoTests.System.Configuration
 {
@@ -64,15 +64,12 @@ namespace MonoTests.System.Configuration
                 }
             }
 
-            public abstract UserLevel Level
-            {
-                get;
-            }
+            public abstract UserLevel Level { get; }
 
             public enum UserLevel
             {
                 MachineAndExe,
-                RoamingAndExe
+                RoamingAndExe,
             }
 
             public virtual SysConfig OpenConfig(string parentFile, string configFile)
@@ -174,9 +171,7 @@ namespace MonoTests.System.Configuration
                 writer.WriteEndElement();
             }
 
-            protected override void WriteValues(XmlWriter writer)
-            {
-            }
+            protected override void WriteValues(XmlWriter writer) { }
         }
 
         abstract class ParentProvider : ConfigProvider
@@ -212,7 +207,9 @@ namespace MonoTests.System.Configuration
                 var fileMap = new ExeConfigurationFileMap();
                 fileMap.ExeConfigFilename = filename;
                 var config = ConfigurationManager.OpenMappedExeConfiguration(
-                    fileMap, ConfigurationUserLevel.None);
+                    fileMap,
+                    ConfigurationUserLevel.None
+                );
 
                 func(config, label);
             });
@@ -230,55 +227,55 @@ namespace MonoTests.System.Configuration
             Run<TConfig>(label, func, null);
         }
 
-        private static void Run<TConfig>(
-            string name, TestFunction func, XmlCheckFunction check)
+        private static void Run<TConfig>(string name, TestFunction func, XmlCheckFunction check)
             where TConfig : ConfigProvider, new()
         {
             Run<TConfig>(new TestLabel(name), func, check);
         }
 
-        private static void Run<TConfig>(
-            TestLabel label, TestFunction func, XmlCheckFunction check)
+        private static void Run<TConfig>(TestLabel label, TestFunction func, XmlCheckFunction check)
             where TConfig : ConfigProvider, new()
         {
-            TestUtil.RunWithTempFiles((parent, filename) =>
-            {
-                var provider = new TConfig();
-                provider.Create(parent);
-
-                Assert.False(File.Exists(filename));
-
-                var config = provider.OpenConfig(parent, filename);
-
-                Assert.False(File.Exists(filename));
-
-                try
+            TestUtil.RunWithTempFiles(
+                (parent, filename) =>
                 {
-                    label.EnterScope("config");
-                    func(config, label);
-                }
-                finally
-                {
-                    label.LeaveScope();
-                }
+                    var provider = new TConfig();
+                    provider.Create(parent);
 
-                if (check == null)
-                    return;
+                    Assert.False(File.Exists(filename));
 
-                var xml = new XmlDocument();
-                xml.Load(filename);
+                    var config = provider.OpenConfig(parent, filename);
 
-                var nav = xml.CreateNavigator().SelectSingleNode("/configuration");
-                try
-                {
-                    label.EnterScope("xml");
-                    check(nav, label);
+                    Assert.False(File.Exists(filename));
+
+                    try
+                    {
+                        label.EnterScope("config");
+                        func(config, label);
+                    }
+                    finally
+                    {
+                        label.LeaveScope();
+                    }
+
+                    if (check == null)
+                        return;
+
+                    var xml = new XmlDocument();
+                    xml.Load(filename);
+
+                    var nav = xml.CreateNavigator().SelectSingleNode("/configuration");
+                    try
+                    {
+                        label.EnterScope("xml");
+                        check(nav, label);
+                    }
+                    finally
+                    {
+                        label.LeaveScope();
+                    }
                 }
-                finally
-                {
-                    label.LeaveScope();
-                }
-            });
+            );
         }
 
         #endregion
@@ -335,449 +332,492 @@ namespace MonoTests.System.Configuration
         [Fact]
         public void DefaultValues()
         {
-            Run<DefaultMachineConfig>("DefaultValues", (config, label) =>
-            {
-                var my = config.Sections["my"] as MySection;
+            Run<DefaultMachineConfig>(
+                "DefaultValues",
+                (config, label) =>
+                {
+                    var my = config.Sections["my"] as MySection;
 
-                AssertNotModified(my, label);
+                    AssertNotModified(my, label);
 
-                label.EnterScope("file");
-                Assert.False(File.Exists(config.FilePath), label.Get());
+                    label.EnterScope("file");
+                    Assert.False(File.Exists(config.FilePath), label.Get());
 
-                config.Save(ConfigurationSaveMode.Minimal);
-                Assert.False(File.Exists(config.FilePath), label.Get());
-                label.LeaveScope();
-            });
+                    config.Save(ConfigurationSaveMode.Minimal);
+                    Assert.False(File.Exists(config.FilePath), label.Get());
+                    label.LeaveScope();
+                }
+            );
         }
 
         [Fact]
         public void AddDefaultListElement()
         {
-            Run<DefaultMachineConfig>("AddDefaultListElement", (config, label) =>
-            {
-                var my = config.Sections["my"] as MySection;
+            Run<DefaultMachineConfig>(
+                "AddDefaultListElement",
+                (config, label) =>
+                {
+                    var my = config.Sections["my"] as MySection;
 
-                AssertNotModified(my, label);
+                    AssertNotModified(my, label);
 
-                label.EnterScope("add");
-                var element = my.List.Collection.AddElement();
-                Assert.True(my.IsModified, label.Get());
-                Assert.True(my.List.IsModified, label.Get());
-                Assert.True(my.List.Collection.IsModified, label.Get());
-                Assert.False(element.IsModified, label.Get());
-                label.LeaveScope();
+                    label.EnterScope("add");
+                    var element = my.List.Collection.AddElement();
+                    Assert.True(my.IsModified, label.Get());
+                    Assert.True(my.List.IsModified, label.Get());
+                    Assert.True(my.List.Collection.IsModified, label.Get());
+                    Assert.False(element.IsModified, label.Get());
+                    label.LeaveScope();
 
-                config.Save(ConfigurationSaveMode.Minimal);
-                Assert.False(File.Exists(config.FilePath), label.Get());
-            });
+                    config.Save(ConfigurationSaveMode.Minimal);
+                    Assert.False(File.Exists(config.FilePath), label.Get());
+                }
+            );
         }
 
         [Fact]
         public void AddDefaultListElement2()
         {
-            Run<DefaultMachineConfig>("AddDefaultListElement2", (config, label) =>
-            {
-                var my = config.Sections["my"] as MySection;
+            Run<DefaultMachineConfig>(
+                "AddDefaultListElement2",
+                (config, label) =>
+                {
+                    var my = config.Sections["my"] as MySection;
 
-                AssertNotModified(my, label);
+                    AssertNotModified(my, label);
 
-                label.EnterScope("add");
-                var element = my.List.Collection.AddElement();
-                Assert.True(my.IsModified, label.Get());
-                Assert.True(my.List.IsModified, label.Get());
-                Assert.True(my.List.Collection.IsModified, label.Get());
-                Assert.False(element.IsModified, label.Get());
-                label.LeaveScope();
+                    label.EnterScope("add");
+                    var element = my.List.Collection.AddElement();
+                    Assert.True(my.IsModified, label.Get());
+                    Assert.True(my.List.IsModified, label.Get());
+                    Assert.True(my.List.Collection.IsModified, label.Get());
+                    Assert.False(element.IsModified, label.Get());
+                    label.LeaveScope();
 
-                config.Save(ConfigurationSaveMode.Modified);
-                Assert.True(File.Exists(config.FilePath), label.Get());
-            }, (nav, label) =>
-            {
-                Assert.True(nav.HasChildren, label.Get());
-                var iter = nav.SelectChildren(XPathNodeType.Element);
+                    config.Save(ConfigurationSaveMode.Modified);
+                    Assert.True(File.Exists(config.FilePath), label.Get());
+                },
+                (nav, label) =>
+                {
+                    Assert.True(nav.HasChildren, label.Get());
+                    var iter = nav.SelectChildren(XPathNodeType.Element);
 
-                Assert.Equal(1, iter.Count);
-                Assert.True(iter.MoveNext(), label.Get());
+                    Assert.Equal(1, iter.Count);
+                    Assert.True(iter.MoveNext(), label.Get());
 
-                var my = iter.Current;
-                label.EnterScope("my");
-                Assert.Equal("my", my.Name);
-                Assert.False(my.HasAttributes, label.Get());
-                Assert.False(my.HasChildren, label.Get());
-                label.LeaveScope();
-            });
+                    var my = iter.Current;
+                    label.EnterScope("my");
+                    Assert.Equal("my", my.Name);
+                    Assert.False(my.HasAttributes, label.Get());
+                    Assert.False(my.HasChildren, label.Get());
+                    label.LeaveScope();
+                }
+            );
         }
 
         [Fact]
         public void AddDefaultListElement3()
         {
-            Run<DefaultMachineConfig>("AddDefaultListElement3", (config, label) =>
-            {
-                var my = config.Sections["my"] as MySection;
+            Run<DefaultMachineConfig>(
+                "AddDefaultListElement3",
+                (config, label) =>
+                {
+                    var my = config.Sections["my"] as MySection;
 
-                AssertNotModified(my, label);
+                    AssertNotModified(my, label);
 
-                label.EnterScope("add");
-                var element = my.List.Collection.AddElement();
-                Assert.True(my.IsModified, label.Get());
-                Assert.True(my.List.IsModified, label.Get());
-                Assert.True(my.List.Collection.IsModified, label.Get());
-                Assert.False(element.IsModified, label.Get());
-                label.LeaveScope();
+                    label.EnterScope("add");
+                    var element = my.List.Collection.AddElement();
+                    Assert.True(my.IsModified, label.Get());
+                    Assert.True(my.List.IsModified, label.Get());
+                    Assert.True(my.List.Collection.IsModified, label.Get());
+                    Assert.False(element.IsModified, label.Get());
+                    label.LeaveScope();
 
-                config.Save(ConfigurationSaveMode.Full);
-                Assert.True(File.Exists(config.FilePath), label.Get());
-            }, (nav, label) =>
-            {
-                Assert.True(nav.HasChildren, label.Get());
-                var iter = nav.SelectChildren(XPathNodeType.Element);
+                    config.Save(ConfigurationSaveMode.Full);
+                    Assert.True(File.Exists(config.FilePath), label.Get());
+                },
+                (nav, label) =>
+                {
+                    Assert.True(nav.HasChildren, label.Get());
+                    var iter = nav.SelectChildren(XPathNodeType.Element);
 
-                Assert.Equal(1, iter.Count);
-                Assert.True(iter.MoveNext(), label.Get());
+                    Assert.Equal(1, iter.Count);
+                    Assert.True(iter.MoveNext(), label.Get());
 
-                var my = iter.Current;
-                label.EnterScope("my");
-                Assert.Equal("my", my.Name);
-                Assert.False(my.HasAttributes, label.Get());
+                    var my = iter.Current;
+                    label.EnterScope("my");
+                    Assert.Equal("my", my.Name);
+                    Assert.False(my.HasAttributes, label.Get());
 
-                label.EnterScope("children");
-                Assert.True(my.HasChildren, label.Get());
-                var iter2 = my.SelectChildren(XPathNodeType.Element);
-                Assert.Equal(2, iter2.Count);
+                    label.EnterScope("children");
+                    Assert.True(my.HasChildren, label.Get());
+                    var iter2 = my.SelectChildren(XPathNodeType.Element);
+                    Assert.Equal(2, iter2.Count);
 
-                label.EnterScope("list");
-                var iter3 = my.Select("list/*");
-                Assert.Equal(1, iter3.Count);
-                Assert.True(iter3.MoveNext(), label.Get());
-                var collection = iter3.Current;
-                Assert.Equal("collection", collection.Name);
-                Assert.False(collection.HasChildren, label.Get());
-                Assert.True(collection.HasAttributes, label.Get());
-                var hello = collection.GetAttribute("Hello", string.Empty);
-                Assert.Equal("8", hello);
-                var world = collection.GetAttribute("World", string.Empty);
-                Assert.Equal("0", world);
-                label.LeaveScope();
+                    label.EnterScope("list");
+                    var iter3 = my.Select("list/*");
+                    Assert.Equal(1, iter3.Count);
+                    Assert.True(iter3.MoveNext(), label.Get());
+                    var collection = iter3.Current;
+                    Assert.Equal("collection", collection.Name);
+                    Assert.False(collection.HasChildren, label.Get());
+                    Assert.True(collection.HasAttributes, label.Get());
+                    var hello = collection.GetAttribute("Hello", string.Empty);
+                    Assert.Equal("8", hello);
+                    var world = collection.GetAttribute("World", string.Empty);
+                    Assert.Equal("0", world);
+                    label.LeaveScope();
 
-                label.EnterScope("test");
-                var iter4 = my.Select("test");
-                Assert.Equal(1, iter4.Count);
-                Assert.True(iter4.MoveNext(), label.Get());
-                var test = iter4.Current;
-                Assert.Equal("test", test.Name);
-                Assert.False(test.HasChildren, label.Get());
-                Assert.True(test.HasAttributes, label.Get());
+                    label.EnterScope("test");
+                    var iter4 = my.Select("test");
+                    Assert.Equal(1, iter4.Count);
+                    Assert.True(iter4.MoveNext(), label.Get());
+                    var test = iter4.Current;
+                    Assert.Equal("test", test.Name);
+                    Assert.False(test.HasChildren, label.Get());
+                    Assert.True(test.HasAttributes, label.Get());
 
-                var hello2 = test.GetAttribute("Hello", string.Empty);
-                Assert.Equal("8", hello2);
-                var world2 = test.GetAttribute("World", string.Empty);
-                Assert.Equal("0", world2);
-                label.LeaveScope();
-                label.LeaveScope();
-                label.LeaveScope();
-            });
+                    var hello2 = test.GetAttribute("Hello", string.Empty);
+                    Assert.Equal("8", hello2);
+                    var world2 = test.GetAttribute("World", string.Empty);
+                    Assert.Equal("0", world2);
+                    label.LeaveScope();
+                    label.LeaveScope();
+                    label.LeaveScope();
+                }
+            );
         }
 
         [Fact]
         public void AddListElement()
         {
-            Run<DefaultMachineConfig>("AddListElement", (config, label) =>
-            {
-                var my = config.Sections["my"] as MySection;
+            Run<DefaultMachineConfig>(
+                "AddListElement",
+                (config, label) =>
+                {
+                    var my = config.Sections["my"] as MySection;
 
-                AssertNotModified(my, label);
+                    AssertNotModified(my, label);
 
-                my.Test.Hello = 29;
+                    my.Test.Hello = 29;
 
-                label.EnterScope("file");
-                Assert.False(File.Exists(config.FilePath), label.Get());
+                    label.EnterScope("file");
+                    Assert.False(File.Exists(config.FilePath), label.Get());
 
-                config.Save(ConfigurationSaveMode.Minimal);
-                Assert.True(File.Exists(config.FilePath), label.Get());
-                label.LeaveScope();
-            }, (nav, label) =>
-            {
-                AssertListElement(nav, label);
-            });
+                    config.Save(ConfigurationSaveMode.Minimal);
+                    Assert.True(File.Exists(config.FilePath), label.Get());
+                    label.LeaveScope();
+                },
+                (nav, label) =>
+                {
+                    AssertListElement(nav, label);
+                }
+            );
         }
 
         [Fact]
         public void NotModifiedAfterSave()
         {
-            Run<DefaultMachineConfig>("NotModifiedAfterSave", (config, label) =>
-            {
-                var my = config.Sections["my"] as MySection;
+            Run<DefaultMachineConfig>(
+                "NotModifiedAfterSave",
+                (config, label) =>
+                {
+                    var my = config.Sections["my"] as MySection;
 
-                AssertNotModified(my, label);
+                    AssertNotModified(my, label);
 
-                label.EnterScope("add");
-                var element = my.List.Collection.AddElement();
-                Assert.True(my.IsModified, label.Get());
-                Assert.True(my.List.IsModified, label.Get());
-                Assert.True(my.List.Collection.IsModified, label.Get());
-                Assert.False(element.IsModified, label.Get());
-                label.LeaveScope();
+                    label.EnterScope("add");
+                    var element = my.List.Collection.AddElement();
+                    Assert.True(my.IsModified, label.Get());
+                    Assert.True(my.List.IsModified, label.Get());
+                    Assert.True(my.List.Collection.IsModified, label.Get());
+                    Assert.False(element.IsModified, label.Get());
+                    label.LeaveScope();
 
-                label.EnterScope("1st-save");
-                config.Save(ConfigurationSaveMode.Minimal);
-                Assert.False(File.Exists(config.FilePath), label.Get());
-                config.Save(ConfigurationSaveMode.Modified);
-                Assert.False(File.Exists(config.FilePath), label.Get());
-                label.LeaveScope();
+                    label.EnterScope("1st-save");
+                    config.Save(ConfigurationSaveMode.Minimal);
+                    Assert.False(File.Exists(config.FilePath), label.Get());
+                    config.Save(ConfigurationSaveMode.Modified);
+                    Assert.False(File.Exists(config.FilePath), label.Get());
+                    label.LeaveScope();
 
-                label.EnterScope("modify");
-                element.Hello = 12;
-                Assert.True(my.IsModified, label.Get());
-                Assert.True(my.List.IsModified, label.Get());
-                Assert.True(my.List.Collection.IsModified, label.Get());
-                Assert.True(element.IsModified, label.Get());
-                label.LeaveScope();
+                    label.EnterScope("modify");
+                    element.Hello = 12;
+                    Assert.True(my.IsModified, label.Get());
+                    Assert.True(my.List.IsModified, label.Get());
+                    Assert.True(my.List.Collection.IsModified, label.Get());
+                    Assert.True(element.IsModified, label.Get());
+                    label.LeaveScope();
 
-                label.EnterScope("2nd-save");
-                config.Save(ConfigurationSaveMode.Modified);
-                Assert.True(File.Exists(config.FilePath), label.Get());
+                    label.EnterScope("2nd-save");
+                    config.Save(ConfigurationSaveMode.Modified);
+                    Assert.True(File.Exists(config.FilePath), label.Get());
 
-                Assert.False(my.IsModified, label.Get());
-                Assert.False(my.List.IsModified, label.Get());
-                Assert.False(my.List.Collection.IsModified, label.Get());
-                Assert.False(element.IsModified, label.Get());
-                label.LeaveScope(); // 2nd-save
-            });
+                    Assert.False(my.IsModified, label.Get());
+                    Assert.False(my.List.IsModified, label.Get());
+                    Assert.False(my.List.Collection.IsModified, label.Get());
+                    Assert.False(element.IsModified, label.Get());
+                    label.LeaveScope(); // 2nd-save
+                }
+            );
         }
 
         [Fact]
         public void AddSection()
         {
-            Run("AddSection", (config, label) =>
-            {
-                Assert.Null(config.Sections["my"]);
+            Run(
+                "AddSection",
+                (config, label) =>
+                {
+                    Assert.Null(config.Sections["my"]);
 
-                var my = new MySection();
-                config.Sections.Add("my2", my);
-                config.Save(ConfigurationSaveMode.Full);
+                    var my = new MySection();
+                    config.Sections.Add("my2", my);
+                    config.Save(ConfigurationSaveMode.Full);
 
-                Assert.True(File.Exists(config.FilePath), label.Get());
-            });
+                    Assert.True(File.Exists(config.FilePath), label.Get());
+                }
+            );
         }
 
         [Fact]
         public void AddElement()
         {
-            Run<DefaultMachineConfig>("AddElement", (config, label) =>
-            {
-                var my = config.Sections["my"] as MySection;
+            Run<DefaultMachineConfig>(
+                "AddElement",
+                (config, label) =>
+                {
+                    var my = config.Sections["my"] as MySection;
 
-                AssertNotModified(my, label);
+                    AssertNotModified(my, label);
 
-                var element = my.List.DefaultCollection.AddElement();
-                element.Hello = 12;
+                    var element = my.List.DefaultCollection.AddElement();
+                    element.Hello = 12;
 
-                config.Save(ConfigurationSaveMode.Modified);
+                    config.Save(ConfigurationSaveMode.Modified);
 
-                label.EnterScope("file");
-                Assert.True(File.Exists(config.FilePath), "#c2");
-                label.LeaveScope();
-            }, (nav, label) =>
-            {
-                Assert.True(nav.HasChildren, label.Get());
-                var iter = nav.SelectChildren(XPathNodeType.Element);
+                    label.EnterScope("file");
+                    Assert.True(File.Exists(config.FilePath), "#c2");
+                    label.LeaveScope();
+                },
+                (nav, label) =>
+                {
+                    Assert.True(nav.HasChildren, label.Get());
+                    var iter = nav.SelectChildren(XPathNodeType.Element);
 
-                Assert.Equal(1, iter.Count);
-                Assert.True(iter.MoveNext(), label.Get());
+                    Assert.Equal(1, iter.Count);
+                    Assert.True(iter.MoveNext(), label.Get());
 
-                var my = iter.Current;
-                label.EnterScope("my");
-                Assert.Equal("my", my.Name);
-                Assert.False(my.HasAttributes, label.Get());
-                Assert.True(my.HasChildren, label.Get());
+                    var my = iter.Current;
+                    label.EnterScope("my");
+                    Assert.Equal("my", my.Name);
+                    Assert.False(my.HasAttributes, label.Get());
+                    Assert.True(my.HasChildren, label.Get());
 
-                label.EnterScope("children");
-                var iter2 = my.SelectChildren(XPathNodeType.Element);
-                Assert.Equal(1, iter2.Count);
-                Assert.True(iter2.MoveNext(), label.Get());
+                    label.EnterScope("children");
+                    var iter2 = my.SelectChildren(XPathNodeType.Element);
+                    Assert.Equal(1, iter2.Count);
+                    Assert.True(iter2.MoveNext(), label.Get());
 
-                var list = iter2.Current;
-                label.EnterScope("list");
-                Assert.Equal("list", list.Name);
-                Assert.False(list.HasChildren, label.Get());
-                Assert.True(list.HasAttributes, label.Get());
+                    var list = iter2.Current;
+                    label.EnterScope("list");
+                    Assert.Equal("list", list.Name);
+                    Assert.False(list.HasChildren, label.Get());
+                    Assert.True(list.HasAttributes, label.Get());
 
-                var attr = list.GetAttribute("Hello", string.Empty);
-                Assert.Equal("12", attr);
-                label.LeaveScope();
-                label.LeaveScope();
-                label.LeaveScope();
-            });
+                    var attr = list.GetAttribute("Hello", string.Empty);
+                    Assert.Equal("12", attr);
+                    label.LeaveScope();
+                    label.LeaveScope();
+                    label.LeaveScope();
+                }
+            );
         }
 
         [Fact]
         public void ModifyListElement()
         {
-            Run<RoamingAndExe>("ModifyListElement", (config, label) =>
-            {
-                var my = config.Sections["my"] as MySection;
+            Run<RoamingAndExe>(
+                "ModifyListElement",
+                (config, label) =>
+                {
+                    var my = config.Sections["my"] as MySection;
 
-                AssertNotModified(my, label);
+                    AssertNotModified(my, label);
 
-                my.Test.Hello = 29;
+                    my.Test.Hello = 29;
 
-                label.EnterScope("file");
-                Assert.False(File.Exists(config.FilePath), label.Get());
+                    label.EnterScope("file");
+                    Assert.False(File.Exists(config.FilePath), label.Get());
 
-                config.Save(ConfigurationSaveMode.Minimal);
-                Assert.False(File.Exists(config.FilePath), label.Get());
-                label.LeaveScope();
-            });
+                    config.Save(ConfigurationSaveMode.Minimal);
+                    Assert.False(File.Exists(config.FilePath), label.Get());
+                    label.LeaveScope();
+                }
+            );
         }
 
         [Fact]
         public void ModifyListElement2()
         {
-            Run<RoamingAndExe>("ModifyListElement2", (config, label) =>
-            {
-                var my = config.Sections["my"] as MySection;
+            Run<RoamingAndExe>(
+                "ModifyListElement2",
+                (config, label) =>
+                {
+                    var my = config.Sections["my"] as MySection;
 
-                AssertNotModified(my, label);
+                    AssertNotModified(my, label);
 
-                my.Test.Hello = 29;
+                    my.Test.Hello = 29;
 
-                label.EnterScope("file");
-                Assert.False(File.Exists(config.FilePath), label.Get());
+                    label.EnterScope("file");
+                    Assert.False(File.Exists(config.FilePath), label.Get());
 
-                config.Save(ConfigurationSaveMode.Modified);
-                Assert.True(File.Exists(config.FilePath), label.Get());
-                label.LeaveScope();
-            }, (nav, label) =>
-            {
-                AssertListElement(nav, label);
-            });
+                    config.Save(ConfigurationSaveMode.Modified);
+                    Assert.True(File.Exists(config.FilePath), label.Get());
+                    label.LeaveScope();
+                },
+                (nav, label) =>
+                {
+                    AssertListElement(nav, label);
+                }
+            );
         }
 
         [Fact]
         public void TestElementWithCollection()
         {
-            Run<DefaultMachineConfig2>("TestElementWithCollection", (config, label) =>
-            {
-                label.EnterScope("section");
-                var my2 = config.Sections["my2"] as MySection2;
-                Assert.NotNull(my2);
+            Run<DefaultMachineConfig2>(
+                "TestElementWithCollection",
+                (config, label) =>
+                {
+                    label.EnterScope("section");
+                    var my2 = config.Sections["my2"] as MySection2;
+                    Assert.NotNull(my2);
 
-                Assert.NotNull(my2.Test);
-                Assert.NotNull(my2.Test.DefaultCollection);
-                Assert.Equal(0, my2.Test.DefaultCollection.Count);
-                label.LeaveScope();
+                    Assert.NotNull(my2.Test);
+                    Assert.NotNull(my2.Test.DefaultCollection);
+                    Assert.Equal(0, my2.Test.DefaultCollection.Count);
+                    label.LeaveScope();
 
-                my2.Test.DefaultCollection.AddElement();
+                    my2.Test.DefaultCollection.AddElement();
 
-                my2.Element.Hello = 29;
+                    my2.Element.Hello = 29;
 
-                label.EnterScope("file");
-                Assert.False(File.Exists(config.FilePath), label.Get());
+                    label.EnterScope("file");
+                    Assert.False(File.Exists(config.FilePath), label.Get());
 
-                config.Save(ConfigurationSaveMode.Minimal);
-                Assert.True(File.Exists(config.FilePath), label.Get());
-                label.LeaveScope();
-            }, (nav, label) =>
-            {
-                Assert.True(nav.HasChildren, label.Get());
-                var iter = nav.SelectChildren(XPathNodeType.Element);
+                    config.Save(ConfigurationSaveMode.Minimal);
+                    Assert.True(File.Exists(config.FilePath), label.Get());
+                    label.LeaveScope();
+                },
+                (nav, label) =>
+                {
+                    Assert.True(nav.HasChildren, label.Get());
+                    var iter = nav.SelectChildren(XPathNodeType.Element);
 
-                Assert.Equal(1, iter.Count);
-                Assert.True(iter.MoveNext(), label.Get());
+                    Assert.Equal(1, iter.Count);
+                    Assert.True(iter.MoveNext(), label.Get());
 
-                var my = iter.Current;
-                label.EnterScope("my2");
-                Assert.Equal("my2", my.Name);
-                Assert.False(my.HasAttributes, label.Get());
-                Assert.True(my.HasChildren, label.Get());
+                    var my = iter.Current;
+                    label.EnterScope("my2");
+                    Assert.Equal("my2", my.Name);
+                    Assert.False(my.HasAttributes, label.Get());
+                    Assert.True(my.HasChildren, label.Get());
 
-                label.EnterScope("children");
-                var iter2 = my.SelectChildren(XPathNodeType.Element);
-                Assert.Equal(1, iter2.Count);
-                Assert.True(iter2.MoveNext(), label.Get());
+                    label.EnterScope("children");
+                    var iter2 = my.SelectChildren(XPathNodeType.Element);
+                    Assert.Equal(1, iter2.Count);
+                    Assert.True(iter2.MoveNext(), label.Get());
 
-                var element = iter2.Current;
-                label.EnterScope("element");
-                Assert.Equal("element", element.Name);
-                Assert.False(element.HasChildren, label.Get());
-                Assert.True(element.HasAttributes, label.Get());
+                    var element = iter2.Current;
+                    label.EnterScope("element");
+                    Assert.Equal("element", element.Name);
+                    Assert.False(element.HasChildren, label.Get());
+                    Assert.True(element.HasAttributes, label.Get());
 
-                var attr = element.GetAttribute("Hello", string.Empty);
-                Assert.Equal("29", attr);
-                label.LeaveScope();
-                label.LeaveScope();
-                label.LeaveScope();
-            });
+                    var attr = element.GetAttribute("Hello", string.Empty);
+                    Assert.Equal("29", attr);
+                    label.LeaveScope();
+                    label.LeaveScope();
+                    label.LeaveScope();
+                }
+            );
         }
 
         [Fact]
         public void TestElementWithCollection2()
         {
-            Run<DefaultMachineConfig2>("TestElementWithCollection2", (config, label) =>
-            {
-                label.EnterScope("section");
-                var my2 = config.Sections["my2"] as MySection2;
-                Assert.NotNull(my2);
+            Run<DefaultMachineConfig2>(
+                "TestElementWithCollection2",
+                (config, label) =>
+                {
+                    label.EnterScope("section");
+                    var my2 = config.Sections["my2"] as MySection2;
+                    Assert.NotNull(my2);
 
-                Assert.NotNull(my2.Test);
-                Assert.NotNull(my2.Test.DefaultCollection);
-                Assert.Equal(0, my2.Test.DefaultCollection.Count);
-                label.LeaveScope();
+                    Assert.NotNull(my2.Test);
+                    Assert.NotNull(my2.Test.DefaultCollection);
+                    Assert.Equal(0, my2.Test.DefaultCollection.Count);
+                    label.LeaveScope();
 
-                var element = my2.Test.DefaultCollection.AddElement();
-                var element2 = element.Test.DefaultCollection.AddElement();
-                element2.Hello = 1;
+                    var element = my2.Test.DefaultCollection.AddElement();
+                    var element2 = element.Test.DefaultCollection.AddElement();
+                    element2.Hello = 1;
 
-                label.EnterScope("file");
-                Assert.False(File.Exists(config.FilePath), label.Get());
+                    label.EnterScope("file");
+                    Assert.False(File.Exists(config.FilePath), label.Get());
 
-                config.Save(ConfigurationSaveMode.Minimal);
-                Assert.True(File.Exists(config.FilePath), label.Get());
-                label.LeaveScope();
-            }, (nav, label) =>
-            {
-                Assert.True(nav.HasChildren, label.Get());
-                var iter = nav.SelectChildren(XPathNodeType.Element);
+                    config.Save(ConfigurationSaveMode.Minimal);
+                    Assert.True(File.Exists(config.FilePath), label.Get());
+                    label.LeaveScope();
+                },
+                (nav, label) =>
+                {
+                    Assert.True(nav.HasChildren, label.Get());
+                    var iter = nav.SelectChildren(XPathNodeType.Element);
 
-                Assert.Equal(1, iter.Count);
-                Assert.True(iter.MoveNext(), label.Get());
+                    Assert.Equal(1, iter.Count);
+                    Assert.True(iter.MoveNext(), label.Get());
 
-                var my = iter.Current;
-                label.EnterScope("my2");
-                Assert.Equal("my2", my.Name);
-                Assert.False(my.HasAttributes, label.Get());
-                Assert.True(my.HasChildren, label.Get());
+                    var my = iter.Current;
+                    label.EnterScope("my2");
+                    Assert.Equal("my2", my.Name);
+                    Assert.False(my.HasAttributes, label.Get());
+                    Assert.True(my.HasChildren, label.Get());
 
-                label.EnterScope("children");
-                var iter2 = my.SelectChildren(XPathNodeType.Element);
-                Assert.Equal(1, iter2.Count);
-                Assert.True(iter2.MoveNext(), label.Get());
+                    label.EnterScope("children");
+                    var iter2 = my.SelectChildren(XPathNodeType.Element);
+                    Assert.Equal(1, iter2.Count);
+                    Assert.True(iter2.MoveNext(), label.Get());
 
-                var collection = iter2.Current;
-                label.EnterScope("collection");
-                Assert.Equal("collection", collection.Name);
-                Assert.True(collection.HasChildren, label.Get());
-                Assert.False(collection.HasAttributes, label.Get());
+                    var collection = iter2.Current;
+                    label.EnterScope("collection");
+                    Assert.Equal("collection", collection.Name);
+                    Assert.True(collection.HasChildren, label.Get());
+                    Assert.False(collection.HasAttributes, label.Get());
 
-                label.EnterScope("children");
-                var iter3 = collection.SelectChildren(XPathNodeType.Element);
-                Assert.Equal(1, iter3.Count);
-                Assert.True(iter3.MoveNext(), label.Get());
+                    label.EnterScope("children");
+                    var iter3 = collection.SelectChildren(XPathNodeType.Element);
+                    Assert.Equal(1, iter3.Count);
+                    Assert.True(iter3.MoveNext(), label.Get());
 
-                var element = iter3.Current;
-                label.EnterScope("element");
-                Assert.Equal("test", element.Name);
-                Assert.False(element.HasChildren, label.Get());
-                Assert.True(element.HasAttributes, label.Get());
+                    var element = iter3.Current;
+                    label.EnterScope("element");
+                    Assert.Equal("test", element.Name);
+                    Assert.False(element.HasChildren, label.Get());
+                    Assert.True(element.HasAttributes, label.Get());
 
-                var attr = element.GetAttribute("Hello", string.Empty);
-                Assert.Equal("1", attr);
-                label.LeaveScope();
-                label.LeaveScope();
-                label.LeaveScope();
-                label.LeaveScope();
-                label.LeaveScope();
-            });
+                    var attr = element.GetAttribute("Hello", string.Empty);
+                    Assert.Equal("1", attr);
+                    label.LeaveScope();
+                    label.LeaveScope();
+                    label.LeaveScope();
+                    label.LeaveScope();
+                    label.LeaveScope();
+                }
+            );
         }
 
         #endregion
@@ -814,6 +854,7 @@ namespace MonoTests.System.Configuration
             {
                 return new T();
             }
+
             protected override object GetElementKey(ConfigurationElement element)
             {
                 return ((T)element).GetHashCode();
@@ -822,10 +863,7 @@ namespace MonoTests.System.Configuration
 
             public override ConfigurationElementCollectionType CollectionType
             {
-                get
-                {
-                    return ConfigurationElementCollectionType.BasicMap;
-                }
+                get { return ConfigurationElementCollectionType.BasicMap; }
             }
 
             public T AddElement()
@@ -849,9 +887,11 @@ namespace MonoTests.System.Configuration
         public class MyCollectionElement<T> : ConfigurationElement
             where T : ConfigurationElement, new()
         {
-            [ConfigurationProperty("",
-                                    Options = ConfigurationPropertyOptions.IsDefaultCollection,
-                                    IsDefaultCollection = true)]
+            [ConfigurationProperty(
+                "",
+                Options = ConfigurationPropertyOptions.IsDefaultCollection,
+                IsDefaultCollection = true
+            )]
             public MyCollection<T> DefaultCollection
             {
                 get { return (MyCollection<T>)this[string.Empty]; }
@@ -890,7 +930,6 @@ namespace MonoTests.System.Configuration
                 get { return base.IsModified(); }
             }
         }
-
 
         public class MyElementWithCollection : ConfigurationElement
         {

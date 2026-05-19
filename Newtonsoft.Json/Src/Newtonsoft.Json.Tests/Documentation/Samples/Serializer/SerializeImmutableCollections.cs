@@ -51,12 +51,9 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
         public void Example()
         {
             #region Usage
-            ImmutableList<string> l = ImmutableList.CreateRange(new List<string>
-            {
-                "One",
-                "II",
-                "3"
-            });
+            ImmutableList<string> l = ImmutableList.CreateRange(
+                new List<string> { "One", "II", "3" }
+            );
 
             string json = JsonConvert.SerializeObject(l, Formatting.Indented);
             // [
@@ -66,11 +63,14 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
             // ]
             #endregion
 
-            StringAssert.AreEqual(@"[
+            StringAssert.AreEqual(
+                @"[
   ""One"",
   ""II"",
   ""3""
-]", json);
+]",
+                json
+            );
         }
     }
 }

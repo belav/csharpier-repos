@@ -24,18 +24,12 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
 
         public override System.Reflection.EventAttributes Attributes
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
+            get { throw new NotImplementedException(); }
         }
 
         public override Type DeclaringType
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
+            get { throw new NotImplementedException(); }
         }
 
         public override bool IsEquivalentTo(MemberInfo other)
@@ -45,42 +39,27 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
 
         public override MemberTypes MemberType
         {
-            get
-            {
-                return (MemberTypes)this.Event.MemberType;
-            }
+            get { return (MemberTypes)this.Event.MemberType; }
         }
 
         public override int MetadataToken
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
+            get { throw new NotImplementedException(); }
         }
 
         public override Module Module
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
+            get { throw new NotImplementedException(); }
         }
 
         public override string Name
         {
-            get
-            {
-                return Event.Name;
-            }
+            get { return Event.Name; }
         }
 
         public override Type ReflectedType
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
+            get { throw new NotImplementedException(); }
         }
 
         public override MethodInfo GetAddMethod(bool nonPublic)

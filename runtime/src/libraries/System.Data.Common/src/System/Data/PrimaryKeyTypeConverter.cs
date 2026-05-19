@@ -10,23 +10,28 @@ namespace System.Data
     internal sealed class PrimaryKeyTypeConverter : ReferenceConverter
     {
         // converter classes should have public ctor
-        public PrimaryKeyTypeConverter() : base(typeof(DataColumn[]))
-        {
-        }
+        public PrimaryKeyTypeConverter()
+            : base(typeof(DataColumn[])) { }
 
         public override bool GetPropertiesSupported(ITypeDescriptorContext? context) => false;
 
-        public override bool CanConvertTo(ITypeDescriptorContext? context, [NotNullWhen(true)] Type? destinationType) =>
-            destinationType == typeof(string) ||
-            base.CanConvertTo(context, destinationType);
+        public override bool CanConvertTo(
+            ITypeDescriptorContext? context,
+            [NotNullWhen(true)] Type? destinationType
+        ) => destinationType == typeof(string) || base.CanConvertTo(context, destinationType);
 
-        public override object? ConvertTo(ITypeDescriptorContext? context, CultureInfo? culture, object? value, Type destinationType)
+        public override object? ConvertTo(
+            ITypeDescriptorContext? context,
+            CultureInfo? culture,
+            object? value,
+            Type destinationType
+        )
         {
             ArgumentNullException.ThrowIfNull(destinationType);
 
-            return destinationType == typeof(string) ?
-                Array.Empty<DataColumn>().GetType().Name :
-                base.ConvertTo(context, culture, value, destinationType);
+            return destinationType == typeof(string)
+                ? Array.Empty<DataColumn>().GetType().Name
+                : base.ConvertTo(context, culture, value, destinationType);
         }
     }
 }

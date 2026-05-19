@@ -8,7 +8,9 @@ using System.Threading;
 
 namespace System.IO.Enumeration
 {
-    public abstract unsafe partial class FileSystemEnumerator<TResult> : CriticalFinalizerObject, IEnumerator<TResult>
+    public abstract unsafe partial class FileSystemEnumerator<TResult>
+        : CriticalFinalizerObject,
+            IEnumerator<TResult>
     {
         // The largest supported path on Unix is 4K bytes of UTF-8 (most only support 1K)
         private const int StandardBufferSize = 4096;
@@ -29,6 +31,7 @@ namespace System.IO.Enumeration
 
         // Used for creating full paths
         private char[]? _pathBuffer;
+
         // Used to get the raw entry data
         private byte[]? _entryBuffer;
 
@@ -56,15 +59,18 @@ namespace System.IO.Enumeration
             }
         }
 
-        private bool InternalContinueOnError(Interop.ErrorInfo info, bool ignoreNotFound = false)
-            => (ignoreNotFound && IsDirectoryNotFound(info)) || (_options.IgnoreInaccessible && IsAccessError(info)) || ContinueOnError(info.RawErrno);
+        private bool InternalContinueOnError(Interop.ErrorInfo info, bool ignoreNotFound = false) =>
+            (ignoreNotFound && IsDirectoryNotFound(info))
+            || (_options.IgnoreInaccessible && IsAccessError(info))
+            || ContinueOnError(info.RawErrno);
 
-        private static bool IsDirectoryNotFound(Interop.ErrorInfo info)
-            => info.Error == Interop.Error.ENOTDIR || info.Error == Interop.Error.ENOENT;
+        private static bool IsDirectoryNotFound(Interop.ErrorInfo info) =>
+            info.Error == Interop.Error.ENOTDIR || info.Error == Interop.Error.ENOENT;
 
-        private static bool IsAccessError(Interop.ErrorInfo info)
-            => info.Error == Interop.Error.EACCES || info.Error == Interop.Error.EBADF
-                || info.Error == Interop.Error.EPERM;
+        private static bool IsAccessError(Interop.ErrorInfo info) =>
+            info.Error == Interop.Error.EACCES
+            || info.Error == Interop.Error.EBADF
+            || info.Error == Interop.Error.EPERM;
 
         private IntPtr CreateDirectoryHandle(string path, bool ignoreNotFound = false)
         {
@@ -107,12 +113,21 @@ namespace System.IO.Enumeration
                 {
                     do
                     {
-                        FindNextEntry(entryBufferPtr, _entryBuffer == null ? 0 : _entryBuffer.Length);
+                        FindNextEntry(
+                            entryBufferPtr,
+                            _entryBuffer == null ? 0 : _entryBuffer.Length
+                        );
                         if (_lastEntryFound)
                             return false;
 
                         FileAttributes attributes = FileSystemEntry.Initialize(
-                            ref entry, _entry, _currentPath, _rootDirectory, _originalRootDirectory, new Span<char>(_pathBuffer));
+                            ref entry,
+                            _entry,
+                            _currentPath,
+                            _rootDirectory,
+                            _originalRootDirectory,
+                            new Span<char>(_pathBuffer)
+                        );
                         bool isDirectory = (attributes & FileAttributes.Directory) != 0;
                         bool isSymlink = (attributes & FileAttributes.ReparsePoint) != 0;
 
@@ -120,7 +135,13 @@ namespace System.IO.Enumeration
                         if (isDirectory)
                         {
                             // Subdirectory found
-                            if (_entry.Name[0] == '.' && (_entry.Name[1] == 0 || (_entry.Name[1] == '.' && _entry.Name[2] == 0)))
+                            if (
+                                _entry.Name[0] == '.'
+                                && (
+                                    _entry.Name[1] == 0
+                                    || (_entry.Name[1] == '.' && _entry.Name[2] == 0)
+                                )
+                            )
                             {
                                 // "." or "..", don't process unless the option is set
                                 if (!_options.ReturnSpecialDirectories)
@@ -133,10 +154,12 @@ namespace System.IO.Enumeration
                         {
                             // entry.IsHidden and entry.IsReadOnly will hit the disk if the caches had not been
                             // initialized yet and we could not soft-retrieve the attributes in Initialize
-                            if ((ShouldSkip(FileAttributes.Directory) && isDirectory) ||
-                                (ShouldSkip(FileAttributes.ReparsePoint) && isSymlink) ||
-                                (ShouldSkip(FileAttributes.Hidden) && entry.IsHidden) ||
-                                (ShouldSkip(FileAttributes.ReadOnly) && entry.IsReadOnly))
+                            if (
+                                (ShouldSkip(FileAttributes.Directory) && isDirectory)
+                                || (ShouldSkip(FileAttributes.ReparsePoint) && isSymlink)
+                                || (ShouldSkip(FileAttributes.Hidden) && entry.IsHidden)
+                                || (ShouldSkip(FileAttributes.ReadOnly) && entry.IsReadOnly)
+                            )
                             {
                                 continue;
                             }
@@ -144,11 +167,20 @@ namespace System.IO.Enumeration
 
                         if (isDirectory && !isSpecialDirectory)
                         {
-                            if (_options.RecurseSubdirectories && _remainingRecursionDepth > 0 && ShouldRecurseIntoEntry(ref entry))
+                            if (
+                                _options.RecurseSubdirectories
+                                && _remainingRecursionDepth > 0
+                                && ShouldRecurseIntoEntry(ref entry)
+                            )
                             {
                                 // Recursion is on and the directory was accepted, Queue it
                                 _pending ??= new Queue<(string Path, int RemainingDepth)>();
-                                _pending.Enqueue((Path.Join(_currentPath, entry.FileName), _remainingRecursionDepth - 1));
+                                _pending.Enqueue(
+                                    (
+                                        Path.Join(_currentPath, entry.FileName),
+                                        _remainingRecursionDepth - 1
+                                    )
+                                );
                             }
                         }
 
@@ -161,7 +193,8 @@ namespace System.IO.Enumeration
                 }
             }
 
-            bool ShouldSkip(FileAttributes attributeToSkip) => (_options.AttributesToSkip & attributeToSkip) != 0;
+            bool ShouldSkip(FileAttributes attributeToSkip) =>
+                (_options.AttributesToSkip & attributeToSkip) != 0;
         }
 
         private unsafe void FindNextEntry()
@@ -198,7 +231,11 @@ namespace System.IO.Enumeration
                     }
                     else
                     {
-                        throw Interop.GetExceptionForIoErrno(new Interop.ErrorInfo(result), _currentPath, isDirError: true);
+                        throw Interop.GetExceptionForIoErrno(
+                            new Interop.ErrorInfo(result),
+                            _currentPath,
+                            isDirError: true
+                        );
                     }
             }
         }

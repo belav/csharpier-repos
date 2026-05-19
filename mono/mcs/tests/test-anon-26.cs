@@ -1,23 +1,26 @@
 namespace TestGotoLabels
 {
-	class GotoLabelsTest
-	{
-		public delegate void MyDelegate ();
+    class GotoLabelsTest
+    {
+        public delegate void MyDelegate();
 
-		public static int Main ()
-		{
-			TestMethod2 (delegate () {
-				goto outLabel;
-			outLabel:
-				return;
-			});
+        public static int Main()
+        {
+            TestMethod2(
+                delegate()
+                {
+                    goto outLabel;
+                    outLabel:
+                    return;
+                }
+            );
 
-			return 0;
-		}
+            return 0;
+        }
 
-		public static void TestMethod2 (MyDelegate md)
-		{
-			md.Invoke ();
-		}
-	}
-} 
+        public static void TestMethod2(MyDelegate md)
+        {
+            md.Invoke();
+        }
+    }
+}

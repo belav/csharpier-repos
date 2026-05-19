@@ -15,11 +15,19 @@ namespace System.Formats.Tar.Tests
         {
             await using (MemoryStream archiveStream = new MemoryStream())
             {
-                TarWriter writer1 = new TarWriter(archiveStream, TarEntryFormat.Pax, leaveOpen: true);
+                TarWriter writer1 = new TarWriter(
+                    archiveStream,
+                    TarEntryFormat.Pax,
+                    leaveOpen: true
+                );
                 await writer1.DisposeAsync();
                 archiveStream.WriteByte(0); // Should succeed because stream was not closed
 
-                TarWriter writer2 = new TarWriter(archiveStream, TarEntryFormat.Pax, leaveOpen: false);
+                TarWriter writer2 = new TarWriter(
+                    archiveStream,
+                    TarEntryFormat.Pax,
+                    leaveOpen: false
+                );
                 await writer2.DisposeAsync();
                 Assert.Throws<ObjectDisposedException>(() => archiveStream.WriteByte(0)); // Should fail because stream was closed
             }
@@ -30,7 +38,11 @@ namespace System.Formats.Tar.Tests
         {
             await using (MemoryStream archiveStream = new MemoryStream())
             {
-                TarWriter writer = new TarWriter(archiveStream, TarEntryFormat.Pax, leaveOpen: true);
+                TarWriter writer = new TarWriter(
+                    archiveStream,
+                    TarEntryFormat.Pax,
+                    leaveOpen: true
+                );
                 await writer.DisposeAsync(); // No entries inserted, should write no empty records
                 Assert.Equal(0, archiveStream.Length);
             }
@@ -41,11 +53,27 @@ namespace System.Formats.Tar.Tests
         {
             await using (MemoryStream inner = new MemoryStream())
             {
-                await using (WrappedStream wrapped = new WrappedStream(inner, canRead: true, canWrite: true, canSeek: false))
+                await using (
+                    WrappedStream wrapped = new WrappedStream(
+                        inner,
+                        canRead: true,
+                        canWrite: true,
+                        canSeek: false
+                    )
+                )
                 {
-                    await using (TarWriter writer = new TarWriter(wrapped, TarEntryFormat.Pax, leaveOpen: true))
+                    await using (
+                        TarWriter writer = new TarWriter(
+                            wrapped,
+                            TarEntryFormat.Pax,
+                            leaveOpen: true
+                        )
+                    )
                     {
-                        PaxTarEntry paxEntry = new PaxTarEntry(TarEntryType.RegularFile, "file.txt");
+                        PaxTarEntry paxEntry = new PaxTarEntry(
+                            TarEntryType.RegularFile,
+                            "file.txt"
+                        );
                         await writer.WriteEntryAsync(paxEntry);
                     } // The final records should get written, and the length should not be set because position cannot be read
 
@@ -73,14 +101,20 @@ namespace System.Formats.Tar.Tests
                 // Convert to V7RegularFile if format is V7
                 GetTarEntryTypeForTarEntryFormat(TarEntryType.RegularFile, format),
                 longPath: false,
-                longLink: false);
+                longLink: false
+            );
 
         [Theory] // V7 does not support BlockDevice
         [InlineData(TarEntryFormat.Ustar)]
         [InlineData(TarEntryFormat.Pax)]
         [InlineData(TarEntryFormat.Gnu)]
         public Task Verify_Checksum_BlockDevice_Async(TarEntryFormat format) =>
-            Verify_Checksum_Internal_Async(format, TarEntryType.BlockDevice, longPath: false, longLink: false);
+            Verify_Checksum_Internal_Async(
+                format,
+                TarEntryType.BlockDevice,
+                longPath: false,
+                longLink: false
+            );
 
         [Theory]
         [InlineData(TarEntryFormat.V7)]
@@ -88,7 +122,12 @@ namespace System.Formats.Tar.Tests
         [InlineData(TarEntryFormat.Pax)]
         [InlineData(TarEntryFormat.Gnu)]
         public Task Verify_Checksum_Directory_LongPath_Async(TarEntryFormat format) =>
-            Verify_Checksum_Internal_Async(format, TarEntryType.Directory, longPath: true, longLink: false);
+            Verify_Checksum_Internal_Async(
+                format,
+                TarEntryType.Directory,
+                longPath: true,
+                longLink: false
+            );
 
         [Theory]
         [InlineData(TarEntryFormat.V7)]
@@ -96,7 +135,12 @@ namespace System.Formats.Tar.Tests
         [InlineData(TarEntryFormat.Pax)]
         [InlineData(TarEntryFormat.Gnu)]
         public Task Verify_Checksum_SymbolicLink_LongLink_Async(TarEntryFormat format) =>
-            Verify_Checksum_Internal_Async(format, TarEntryType.SymbolicLink, longPath: false, longLink: true);
+            Verify_Checksum_Internal_Async(
+                format,
+                TarEntryType.SymbolicLink,
+                longPath: false,
+                longLink: true
+            );
 
         [Theory]
         [InlineData(TarEntryFormat.V7)]
@@ -104,15 +148,31 @@ namespace System.Formats.Tar.Tests
         [InlineData(TarEntryFormat.Pax)]
         [InlineData(TarEntryFormat.Gnu)]
         public Task Verify_Checksum_SymbolicLink_LongLink_LongPath_Async(TarEntryFormat format) =>
-            Verify_Checksum_Internal_Async(format, TarEntryType.SymbolicLink, longPath: true, longLink: true);
+            Verify_Checksum_Internal_Async(
+                format,
+                TarEntryType.SymbolicLink,
+                longPath: true,
+                longLink: true
+            );
 
-        private async Task Verify_Checksum_Internal_Async(TarEntryFormat format, TarEntryType entryType, bool longPath, bool longLink)
+        private async Task Verify_Checksum_Internal_Async(
+            TarEntryFormat format,
+            TarEntryType entryType,
+            bool longPath,
+            bool longLink
+        )
         {
             using MemoryStream archive = new MemoryStream();
             int expectedChecksum;
             await using (TarWriter writer = new TarWriter(archive, format, leaveOpen: true))
             {
-                TarEntry entry = CreateTarEntryAndGetExpectedChecksum(format, entryType, longPath, longLink, out expectedChecksum);
+                TarEntry entry = CreateTarEntryAndGetExpectedChecksum(
+                    format,
+                    entryType,
+                    longPath,
+                    longLink,
+                    out expectedChecksum
+                );
                 await writer.WriteEntryAsync(entry);
                 Assert.Equal(expectedChecksum, entry.Checksum);
             }

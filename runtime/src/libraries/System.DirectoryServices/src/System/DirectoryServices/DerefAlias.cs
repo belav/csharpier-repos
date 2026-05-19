@@ -11,6 +11,6 @@ namespace System.DirectoryServices
         Never = 0,
         InSearching = 1,
         FindingBaseObject = 2,
-        Always = 3
+        Always = 3,
     }
 }

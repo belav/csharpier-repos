@@ -6,10 +6,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -29,51 +29,54 @@ using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Xml.Serialization;
 
-namespace MonoTests.System.ComponentModel {
+namespace MonoTests.System.ComponentModel
+{
+    [TestFixture]
+    public class DefaultBindingPropertyAttributeTest
+    {
+        [Test]
+        public void CtorTest()
+        {
+            DefaultBindingPropertyAttribute a;
 
-	[TestFixture]
-	public class DefaultBindingPropertyAttributeTest {
+            a = new DefaultBindingPropertyAttribute("test");
+            Assert.AreEqual("test", a.Name, "1");
 
-		[Test]
-		public void CtorTest ()
-		{
-			DefaultBindingPropertyAttribute a;
+            a = new DefaultBindingPropertyAttribute();
+            Assert.AreEqual(null, a.Name, "2");
+        }
 
-			a = new DefaultBindingPropertyAttribute ("test");
-			Assert.AreEqual ("test", a.Name, "1");
+        [Test]
+        public void EqualsTest()
+        {
+            DefaultBindingPropertyAttribute a;
 
-			a = new DefaultBindingPropertyAttribute ();
-			Assert.AreEqual (null, a.Name, "2");
-		}
+            a = new DefaultBindingPropertyAttribute("test");
+            Assert.IsFalse(a.Equals(null), "1");
+            Assert.IsFalse(a.Equals(new DefaultBindingPropertyAttribute("other")), "2");
+            Assert.IsFalse(a.Equals(new DefaultBindingPropertyAttribute("Test")), "3");
+            Assert.IsTrue(a.Equals(new DefaultBindingPropertyAttribute("test")), "4");
+        }
 
-		[Test]
-		public void EqualsTest ()
-		{
-			DefaultBindingPropertyAttribute a;
+        [Test]
+        public void GetHashCodeTest()
+        {
+            DefaultBindingPropertyAttribute a;
 
-			a = new DefaultBindingPropertyAttribute ("test");
-			Assert.IsFalse (a.Equals (null), "1");
-			Assert.IsFalse (a.Equals (new DefaultBindingPropertyAttribute ("other")), "2");
-			Assert.IsFalse (a.Equals (new DefaultBindingPropertyAttribute ("Test")), "3");
-			Assert.IsTrue (a.Equals (new DefaultBindingPropertyAttribute ("test")), "4");
-		}
+            a = new DefaultBindingPropertyAttribute("test");
+            Assert.IsFalse(0 == a.GetHashCode(), "1");
+        }
 
-		[Test]
-		public void GetHashCodeTest ()
-		{
-			DefaultBindingPropertyAttribute a;
-
-			a = new DefaultBindingPropertyAttribute ("test");
-			Assert.IsFalse (0 == a.GetHashCode (), "1");
-		}
-
-		[Test]
-		public void DefaultTest ()
-		{
-			Assert.AreEqual (DefaultBindingPropertyAttribute.Default, new DefaultBindingPropertyAttribute (), "1");
-		}
-	}
-
+        [Test]
+        public void DefaultTest()
+        {
+            Assert.AreEqual(
+                DefaultBindingPropertyAttribute.Default,
+                new DefaultBindingPropertyAttribute(),
+                "1"
+            );
+        }
+    }
 }
 
 #endif

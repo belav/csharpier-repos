@@ -16,11 +16,22 @@ public class InternalSkipNavigationBuilderTest
         ((SkipNavigation)skipNavigation).SetConfigurationSource(ConfigurationSource.DataAnnotation);
 
         var productEntity = skipNavigation.TargetEntityType.Builder;
-        Assert.Null(productEntity.HasRelationship(skipNavigation.DeclaringEntityType, null, nameof(Order.Products)));
+        Assert.Null(
+            productEntity.HasRelationship(
+                skipNavigation.DeclaringEntityType,
+                null,
+                nameof(Order.Products)
+            )
+        );
 
         Assert.NotNull(
             productEntity.HasRelationship(
-                skipNavigation.DeclaringEntityType, null, nameof(Order.Products), fromDataAnnotation: true));
+                skipNavigation.DeclaringEntityType,
+                null,
+                nameof(Order.Products),
+                fromDataAnnotation: true
+            )
+        );
 
         Assert.False(skipNavigation.IsInModel);
         Assert.Empty(skipNavigation.DeclaringEntityType.GetSkipNavigations());
@@ -39,7 +50,10 @@ public class InternalSkipNavigationBuilderTest
         Assert.NotNull(builder.HasField(Order.ProductsField, ConfigurationSource.DataAnnotation));
 
         Assert.Equal(Order.ProductsField, metadata.FieldInfo);
-        Assert.Equal(ConfigurationSource.DataAnnotation, metadata.GetFieldInfoConfigurationSource());
+        Assert.Equal(
+            ConfigurationSource.DataAnnotation,
+            metadata.GetFieldInfoConfigurationSource()
+        );
 
         Assert.True(builder.CanSetField(Order.ProductsField, ConfigurationSource.Convention));
         Assert.False(builder.CanSetField(Order.OtherProductsField, ConfigurationSource.Convention));
@@ -47,13 +61,23 @@ public class InternalSkipNavigationBuilderTest
         Assert.Null(builder.HasField(Order.OtherProductsField, ConfigurationSource.Convention));
 
         Assert.Equal(Order.ProductsField, metadata.FieldInfo);
-        Assert.Equal(ConfigurationSource.DataAnnotation, metadata.GetFieldInfoConfigurationSource());
+        Assert.Equal(
+            ConfigurationSource.DataAnnotation,
+            metadata.GetFieldInfoConfigurationSource()
+        );
 
-        Assert.True(builder.CanSetField(Order.OtherProductsField, ConfigurationSource.DataAnnotation));
-        Assert.NotNull(builder.HasField(Order.OtherProductsField, ConfigurationSource.DataAnnotation));
+        Assert.True(
+            builder.CanSetField(Order.OtherProductsField, ConfigurationSource.DataAnnotation)
+        );
+        Assert.NotNull(
+            builder.HasField(Order.OtherProductsField, ConfigurationSource.DataAnnotation)
+        );
 
         Assert.Equal(Order.OtherProductsField, metadata.FieldInfo);
-        Assert.Equal(ConfigurationSource.DataAnnotation, metadata.GetFieldInfoConfigurationSource());
+        Assert.Equal(
+            ConfigurationSource.DataAnnotation,
+            metadata.GetFieldInfoConfigurationSource()
+        );
 
         Assert.True(builder.CanSetField((string)null, ConfigurationSource.DataAnnotation));
         Assert.NotNull(builder.HasField((string)null, ConfigurationSource.DataAnnotation));
@@ -75,7 +99,10 @@ public class InternalSkipNavigationBuilderTest
         Assert.NotNull(builder.HasField("_products", ConfigurationSource.DataAnnotation));
 
         Assert.Equal("_products", metadata.FieldInfo?.Name);
-        Assert.Equal(ConfigurationSource.DataAnnotation, metadata.GetFieldInfoConfigurationSource());
+        Assert.Equal(
+            ConfigurationSource.DataAnnotation,
+            metadata.GetFieldInfoConfigurationSource()
+        );
 
         Assert.True(builder.CanSetField("_products", ConfigurationSource.Convention));
         Assert.False(builder.CanSetField("_otherProducts", ConfigurationSource.Convention));
@@ -83,13 +110,19 @@ public class InternalSkipNavigationBuilderTest
         Assert.Null(builder.HasField("_otherProducts", ConfigurationSource.Convention));
 
         Assert.Equal("_products", metadata.FieldInfo?.Name);
-        Assert.Equal(ConfigurationSource.DataAnnotation, metadata.GetFieldInfoConfigurationSource());
+        Assert.Equal(
+            ConfigurationSource.DataAnnotation,
+            metadata.GetFieldInfoConfigurationSource()
+        );
 
         Assert.True(builder.CanSetField("_otherProducts", ConfigurationSource.DataAnnotation));
         Assert.NotNull(builder.HasField("_otherProducts", ConfigurationSource.DataAnnotation));
 
         Assert.Equal("_otherProducts", metadata.FieldInfo?.Name);
-        Assert.Equal(ConfigurationSource.DataAnnotation, metadata.GetFieldInfoConfigurationSource());
+        Assert.Equal(
+            ConfigurationSource.DataAnnotation,
+            metadata.GetFieldInfoConfigurationSource()
+        );
 
         Assert.True(builder.CanSetField((string)null, ConfigurationSource.DataAnnotation));
         Assert.NotNull(builder.HasField((string)null, ConfigurationSource.DataAnnotation));
@@ -107,28 +140,77 @@ public class InternalSkipNavigationBuilderTest
         Assert.Equal(PropertyAccessMode.PreferField, metadata.GetPropertyAccessMode());
         Assert.Null(metadata.GetPropertyAccessModeConfigurationSource());
 
-        Assert.True(builder.CanSetPropertyAccessMode(PropertyAccessMode.PreferProperty, ConfigurationSource.DataAnnotation));
-        Assert.NotNull(builder.UsePropertyAccessMode(PropertyAccessMode.PreferProperty, ConfigurationSource.DataAnnotation));
+        Assert.True(
+            builder.CanSetPropertyAccessMode(
+                PropertyAccessMode.PreferProperty,
+                ConfigurationSource.DataAnnotation
+            )
+        );
+        Assert.NotNull(
+            builder.UsePropertyAccessMode(
+                PropertyAccessMode.PreferProperty,
+                ConfigurationSource.DataAnnotation
+            )
+        );
 
         Assert.Equal(PropertyAccessMode.PreferProperty, metadata.GetPropertyAccessMode());
-        Assert.Equal(ConfigurationSource.DataAnnotation, metadata.GetPropertyAccessModeConfigurationSource());
-
-        Assert.True(builder.CanSetPropertyAccessMode(PropertyAccessMode.PreferProperty, ConfigurationSource.Convention));
-        Assert.False(
-            builder.CanSetPropertyAccessMode(PropertyAccessMode.PreferFieldDuringConstruction, ConfigurationSource.Convention));
-        Assert.NotNull(builder.UsePropertyAccessMode(PropertyAccessMode.PreferProperty, ConfigurationSource.Convention));
-        Assert.Null(builder.UsePropertyAccessMode(PropertyAccessMode.PreferFieldDuringConstruction, ConfigurationSource.Convention));
-
-        Assert.Equal(PropertyAccessMode.PreferProperty, metadata.GetPropertyAccessMode());
-        Assert.Equal(ConfigurationSource.DataAnnotation, metadata.GetPropertyAccessModeConfigurationSource());
+        Assert.Equal(
+            ConfigurationSource.DataAnnotation,
+            metadata.GetPropertyAccessModeConfigurationSource()
+        );
 
         Assert.True(
-            builder.CanSetPropertyAccessMode(PropertyAccessMode.PreferFieldDuringConstruction, ConfigurationSource.DataAnnotation));
+            builder.CanSetPropertyAccessMode(
+                PropertyAccessMode.PreferProperty,
+                ConfigurationSource.Convention
+            )
+        );
+        Assert.False(
+            builder.CanSetPropertyAccessMode(
+                PropertyAccessMode.PreferFieldDuringConstruction,
+                ConfigurationSource.Convention
+            )
+        );
         Assert.NotNull(
-            builder.UsePropertyAccessMode(PropertyAccessMode.PreferFieldDuringConstruction, ConfigurationSource.DataAnnotation));
+            builder.UsePropertyAccessMode(
+                PropertyAccessMode.PreferProperty,
+                ConfigurationSource.Convention
+            )
+        );
+        Assert.Null(
+            builder.UsePropertyAccessMode(
+                PropertyAccessMode.PreferFieldDuringConstruction,
+                ConfigurationSource.Convention
+            )
+        );
 
-        Assert.Equal(PropertyAccessMode.PreferFieldDuringConstruction, metadata.GetPropertyAccessMode());
-        Assert.Equal(ConfigurationSource.DataAnnotation, metadata.GetPropertyAccessModeConfigurationSource());
+        Assert.Equal(PropertyAccessMode.PreferProperty, metadata.GetPropertyAccessMode());
+        Assert.Equal(
+            ConfigurationSource.DataAnnotation,
+            metadata.GetPropertyAccessModeConfigurationSource()
+        );
+
+        Assert.True(
+            builder.CanSetPropertyAccessMode(
+                PropertyAccessMode.PreferFieldDuringConstruction,
+                ConfigurationSource.DataAnnotation
+            )
+        );
+        Assert.NotNull(
+            builder.UsePropertyAccessMode(
+                PropertyAccessMode.PreferFieldDuringConstruction,
+                ConfigurationSource.DataAnnotation
+            )
+        );
+
+        Assert.Equal(
+            PropertyAccessMode.PreferFieldDuringConstruction,
+            metadata.GetPropertyAccessMode()
+        );
+        Assert.Equal(
+            ConfigurationSource.DataAnnotation,
+            metadata.GetPropertyAccessModeConfigurationSource()
+        );
 
         Assert.True(builder.CanSetPropertyAccessMode(null, ConfigurationSource.DataAnnotation));
         Assert.NotNull(builder.UsePropertyAccessMode(null, ConfigurationSource.DataAnnotation));
@@ -147,11 +229,14 @@ public class InternalSkipNavigationBuilderTest
         Assert.NotNull(originalFK);
         Assert.Equal(ConfigurationSource.Convention, metadata.GetForeignKeyConfigurationSource());
 
-        var orderProductEntity = metadata.DeclaringEntityType.Model.Builder.Entity(typeof(OrderProduct));
-        var fk = (ForeignKey)orderProductEntity
-            .HasRelationship(metadata.DeclaringEntityType, nameof(OrderProduct.Order))
-            .IsUnique(false)
-            .Metadata;
+        var orderProductEntity = metadata.DeclaringEntityType.Model.Builder.Entity(
+            typeof(OrderProduct)
+        );
+        var fk = (ForeignKey)
+            orderProductEntity
+                .HasRelationship(metadata.DeclaringEntityType, nameof(OrderProduct.Order))
+                .IsUnique(false)
+                .Metadata;
 
         Assert.NotSame(fk, metadata.ForeignKey);
         Assert.Same(originalFK, metadata.ForeignKey);
@@ -162,7 +247,10 @@ public class InternalSkipNavigationBuilderTest
         Assert.NotNull(builder.HasForeignKey(fk, ConfigurationSource.DataAnnotation));
 
         Assert.Equal(fk, metadata.ForeignKey);
-        Assert.Equal(ConfigurationSource.DataAnnotation, metadata.GetForeignKeyConfigurationSource());
+        Assert.Equal(
+            ConfigurationSource.DataAnnotation,
+            metadata.GetForeignKeyConfigurationSource()
+        );
         Assert.Null(metadata.Inverse.ForeignKey);
 
         Assert.True(builder.CanSetForeignKey(fk, ConfigurationSource.Convention));
@@ -171,7 +259,10 @@ public class InternalSkipNavigationBuilderTest
         Assert.Null(builder.HasForeignKey(null, ConfigurationSource.Convention));
 
         Assert.Equal(fk, metadata.ForeignKey);
-        Assert.Equal(ConfigurationSource.DataAnnotation, metadata.GetForeignKeyConfigurationSource());
+        Assert.Equal(
+            ConfigurationSource.DataAnnotation,
+            metadata.GetForeignKeyConfigurationSource()
+        );
 
         Assert.True(builder.CanSetForeignKey(null, ConfigurationSource.DataAnnotation));
         Assert.NotNull(builder.HasForeignKey(null, ConfigurationSource.DataAnnotation));
@@ -188,10 +279,13 @@ public class InternalSkipNavigationBuilderTest
 
         // the skip navigation is pointing to the automatically-generated
         // join entity type and so is its inverse
-        var inverse = (SkipNavigation)metadata.TargetEntityType.Builder.HasSkipNavigation(
-                Product.OrdersProperty,
-                metadata.DeclaringEntityType)
-            .Metadata;
+        var inverse = (SkipNavigation)
+            metadata
+                .TargetEntityType.Builder.HasSkipNavigation(
+                    Product.OrdersProperty,
+                    metadata.DeclaringEntityType
+                )
+                .Metadata;
 
         Assert.NotNull(metadata.Inverse);
         Assert.Equal(ConfigurationSource.Convention, metadata.GetInverseConfigurationSource());
@@ -235,11 +329,16 @@ public class InternalSkipNavigationBuilderTest
         Assert.False(metadata.IsEagerLoaded);
         Assert.Null(metadata.GetIsEagerLoadedConfigurationSource());
 
-        Assert.True(builder.CanSetAutoInclude(autoInclude: true, ConfigurationSource.DataAnnotation));
+        Assert.True(
+            builder.CanSetAutoInclude(autoInclude: true, ConfigurationSource.DataAnnotation)
+        );
         Assert.NotNull(builder.AutoInclude(autoInclude: true, ConfigurationSource.DataAnnotation));
 
         Assert.True(metadata.IsEagerLoaded);
-        Assert.Equal(ConfigurationSource.DataAnnotation, metadata.GetIsEagerLoadedConfigurationSource());
+        Assert.Equal(
+            ConfigurationSource.DataAnnotation,
+            metadata.GetIsEagerLoadedConfigurationSource()
+        );
 
         Assert.True(builder.CanSetAutoInclude(autoInclude: true, ConfigurationSource.Convention));
         Assert.False(builder.CanSetAutoInclude(autoInclude: false, ConfigurationSource.Convention));
@@ -247,13 +346,21 @@ public class InternalSkipNavigationBuilderTest
         Assert.Null(builder.AutoInclude(autoInclude: false, ConfigurationSource.Convention));
 
         Assert.True(metadata.IsEagerLoaded);
-        Assert.Equal(ConfigurationSource.DataAnnotation, metadata.GetIsEagerLoadedConfigurationSource());
+        Assert.Equal(
+            ConfigurationSource.DataAnnotation,
+            metadata.GetIsEagerLoadedConfigurationSource()
+        );
 
-        Assert.True(builder.CanSetAutoInclude(autoInclude: false, ConfigurationSource.DataAnnotation));
+        Assert.True(
+            builder.CanSetAutoInclude(autoInclude: false, ConfigurationSource.DataAnnotation)
+        );
         Assert.NotNull(builder.AutoInclude(autoInclude: false, ConfigurationSource.DataAnnotation));
 
         Assert.False(metadata.IsEagerLoaded);
-        Assert.Equal(ConfigurationSource.DataAnnotation, metadata.GetIsEagerLoadedConfigurationSource());
+        Assert.Equal(
+            ConfigurationSource.DataAnnotation,
+            metadata.GetIsEagerLoadedConfigurationSource()
+        );
 
         Assert.True(builder.CanSetAutoInclude(null, ConfigurationSource.DataAnnotation));
         Assert.NotNull(builder.AutoInclude(null, ConfigurationSource.DataAnnotation));
@@ -271,25 +378,62 @@ public class InternalSkipNavigationBuilderTest
         Assert.True(metadata.LazyLoadingEnabled);
         Assert.Null(metadata.GetLazyLoadingEnabledConfigurationSource());
 
-        Assert.True(builder.CanSetLazyLoadingEnabled(lazyLoadingEnabled: false, ConfigurationSource.DataAnnotation));
-        Assert.NotNull(builder.EnableLazyLoading(lazyLoadingEnabled: false, ConfigurationSource.DataAnnotation));
+        Assert.True(
+            builder.CanSetLazyLoadingEnabled(
+                lazyLoadingEnabled: false,
+                ConfigurationSource.DataAnnotation
+            )
+        );
+        Assert.NotNull(
+            builder.EnableLazyLoading(lazyLoadingEnabled: false, ConfigurationSource.DataAnnotation)
+        );
 
         Assert.False(metadata.LazyLoadingEnabled);
-        Assert.Equal(ConfigurationSource.DataAnnotation, metadata.GetLazyLoadingEnabledConfigurationSource());
+        Assert.Equal(
+            ConfigurationSource.DataAnnotation,
+            metadata.GetLazyLoadingEnabledConfigurationSource()
+        );
 
-        Assert.True(builder.CanSetLazyLoadingEnabled(lazyLoadingEnabled: false, ConfigurationSource.Convention));
-        Assert.False(builder.CanSetLazyLoadingEnabled(lazyLoadingEnabled: true, ConfigurationSource.Convention));
-        Assert.NotNull(builder.EnableLazyLoading(lazyLoadingEnabled: false, ConfigurationSource.Convention));
-        Assert.Null(builder.EnableLazyLoading(lazyLoadingEnabled: true, ConfigurationSource.Convention));
+        Assert.True(
+            builder.CanSetLazyLoadingEnabled(
+                lazyLoadingEnabled: false,
+                ConfigurationSource.Convention
+            )
+        );
+        Assert.False(
+            builder.CanSetLazyLoadingEnabled(
+                lazyLoadingEnabled: true,
+                ConfigurationSource.Convention
+            )
+        );
+        Assert.NotNull(
+            builder.EnableLazyLoading(lazyLoadingEnabled: false, ConfigurationSource.Convention)
+        );
+        Assert.Null(
+            builder.EnableLazyLoading(lazyLoadingEnabled: true, ConfigurationSource.Convention)
+        );
 
         Assert.False(metadata.LazyLoadingEnabled);
-        Assert.Equal(ConfigurationSource.DataAnnotation, metadata.GetLazyLoadingEnabledConfigurationSource());
+        Assert.Equal(
+            ConfigurationSource.DataAnnotation,
+            metadata.GetLazyLoadingEnabledConfigurationSource()
+        );
 
-        Assert.True(builder.CanSetLazyLoadingEnabled(lazyLoadingEnabled: true, ConfigurationSource.DataAnnotation));
-        Assert.NotNull(builder.EnableLazyLoading(lazyLoadingEnabled: true, ConfigurationSource.DataAnnotation));
+        Assert.True(
+            builder.CanSetLazyLoadingEnabled(
+                lazyLoadingEnabled: true,
+                ConfigurationSource.DataAnnotation
+            )
+        );
+        Assert.NotNull(
+            builder.EnableLazyLoading(lazyLoadingEnabled: true, ConfigurationSource.DataAnnotation)
+        );
 
         Assert.True(metadata.LazyLoadingEnabled);
-        Assert.Equal(ConfigurationSource.DataAnnotation, metadata.GetLazyLoadingEnabledConfigurationSource());
+        Assert.Equal(
+            ConfigurationSource.DataAnnotation,
+            metadata.GetLazyLoadingEnabledConfigurationSource()
+        );
 
         Assert.True(builder.CanSetLazyLoadingEnabled(null, ConfigurationSource.DataAnnotation));
         Assert.NotNull(builder.EnableLazyLoading(null, ConfigurationSource.DataAnnotation));
@@ -303,34 +447,50 @@ public class InternalSkipNavigationBuilderTest
         var modelBuilder = (InternalModelBuilder)
             InMemoryTestHelpers.Instance.CreateConventionBuilder().GetInfrastructure();
 
-        return modelBuilder.Entity(typeof(Order), ConfigurationSource.Convention)
+        return modelBuilder
+            .Entity(typeof(Order), ConfigurationSource.Convention)
             .HasSkipNavigation(
                 MemberIdentity.Create(Order.ProductsProperty),
                 modelBuilder.Entity(typeof(Product), ConfigurationSource.Convention).Metadata,
-                ConfigurationSource.Convention);
+                ConfigurationSource.Convention
+            );
     }
 
     protected class Order
     {
-        public static readonly PropertyInfo ProductsProperty = typeof(Order).GetProperty(nameof(Products));
+        public static readonly PropertyInfo ProductsProperty = typeof(Order).GetProperty(
+            nameof(Products)
+        );
 
-        public static readonly FieldInfo ProductsField = typeof(Order)
-            .GetField(nameof(_products), BindingFlags.Instance | BindingFlags.NonPublic);
+        public static readonly FieldInfo ProductsField = typeof(Order).GetField(
+            nameof(_products),
+            BindingFlags.Instance | BindingFlags.NonPublic
+        );
 
-        public static readonly FieldInfo OtherProductsField = typeof(Order)
-            .GetField(nameof(_otherProducts), BindingFlags.Instance | BindingFlags.NonPublic);
+        public static readonly FieldInfo OtherProductsField = typeof(Order).GetField(
+            nameof(_otherProducts),
+            BindingFlags.Instance | BindingFlags.NonPublic
+        );
 
         public int OrderId { get; set; }
 
         private ICollection<Product> _products;
         private readonly ICollection<Product> _otherProducts = new List<Product>();
-        public ICollection<Product> Products { get => _products; set => _products = value; }
+        public ICollection<Product> Products
+        {
+            get => _products;
+            set => _products = value;
+        }
     }
 
     private class OrderProduct
     {
-        public static readonly PropertyInfo OrderIdProperty = typeof(OrderProduct).GetProperty(nameof(OrderId));
-        public static readonly PropertyInfo ProductIdProperty = typeof(OrderProduct).GetProperty(nameof(ProductId));
+        public static readonly PropertyInfo OrderIdProperty = typeof(OrderProduct).GetProperty(
+            nameof(OrderId)
+        );
+        public static readonly PropertyInfo ProductIdProperty = typeof(OrderProduct).GetProperty(
+            nameof(ProductId)
+        );
 
         public int OrderId { get; set; }
         public int ProductId { get; set; }
@@ -340,7 +500,9 @@ public class InternalSkipNavigationBuilderTest
 
     protected class Product
     {
-        public static readonly PropertyInfo OrdersProperty = typeof(Product).GetProperty(nameof(Orders));
+        public static readonly PropertyInfo OrdersProperty = typeof(Product).GetProperty(
+            nameof(Orders)
+        );
 
         public int Id { get; set; }
 

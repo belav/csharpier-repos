@@ -43,7 +43,8 @@ public class CompiledModelScaffolder : ICompiledModelScaffolder
     public virtual IReadOnlyList<string> ScaffoldModel(
         IModel model,
         string outputDir,
-        CompiledModelCodeGenerationOptions options)
+        CompiledModelCodeGenerationOptions options
+    )
     {
         var codeGenerator = ModelCodeGeneratorSelector.Select(options);
 
@@ -66,7 +67,8 @@ public class CompiledModelScaffolder : ICompiledModelScaffolder
 
     private static void CheckOutputFiles(
         IReadOnlyCollection<ScaffoldedFile> scaffoldedModel,
-        string outputDir)
+        string outputDir
+    )
     {
         var paths = scaffoldedModel.Select(f => f.Path).ToList();
 
@@ -92,7 +94,9 @@ public class CompiledModelScaffolder : ICompiledModelScaffolder
             throw new OperationException(
                 DesignStrings.ReadOnlyFiles(
                     outputDir,
-                    string.Join(CultureInfo.CurrentCulture.TextInfo.ListSeparator, readOnlyFiles)));
+                    string.Join(CultureInfo.CurrentCulture.TextInfo.ListSeparator, readOnlyFiles)
+                )
+            );
         }
     }
 }

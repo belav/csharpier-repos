@@ -14,17 +14,16 @@ namespace System.Data.ProviderBase
 
     internal class WrappedIUnknown : SafeHandle
     {
-        public WrappedIUnknown() : base(IntPtr.Zero, true)
-        {
-        }
+        public WrappedIUnknown()
+            : base(IntPtr.Zero, true) { }
 
-        internal WrappedIUnknown(object? unknown) : this()
+        internal WrappedIUnknown(object? unknown)
+            : this()
         {
             if (null != unknown)
             {
                 RuntimeHelpers.PrepareConstrainedRegions();
-                try
-                { }
+                try { }
                 finally
                 {
                     base.handle = Marshal.GetIUnknownForObject(unknown);
@@ -34,10 +33,7 @@ namespace System.Data.ProviderBase
 
         public override bool IsInvalid
         {
-            get
-            {
-                return (IntPtr.Zero == base.handle);
-            }
+            get { return (IntPtr.Zero == base.handle); }
         }
 
         internal object ComWrapper()

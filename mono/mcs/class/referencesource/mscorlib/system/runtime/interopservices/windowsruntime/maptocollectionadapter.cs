@@ -1,19 +1,19 @@
 ﻿// ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 //
 // <OWNER>GPaperin</OWNER>
 // <OWNER>Microsoft</OWNER>
 
 using System;
-using System.Security;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics.Contracts;
-using System.Runtime.InteropServices;
 using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
+using System.Security;
 
 namespace System.Runtime.InteropServices.WindowsRuntime
 {
@@ -49,19 +49,29 @@ namespace System.Runtime.InteropServices.WindowsRuntime
 
                 if (((uint)Int32.MaxValue) < size)
                 {
-                    throw new InvalidOperationException(Environment.GetResourceString("InvalidOperation_CollectionBackingDictionaryTooLarge"));
+                    throw new InvalidOperationException(
+                        Environment.GetResourceString(
+                            "InvalidOperation_CollectionBackingDictionaryTooLarge"
+                        )
+                    );
                 }
 
                 return (int)size;
             }
             else
             {
-                IVector<KeyValuePair<K, V>> _this_vector = JitHelpers.UnsafeCast<IVector<KeyValuePair<K, V>>>(this);
+                IVector<KeyValuePair<K, V>> _this_vector = JitHelpers.UnsafeCast<
+                    IVector<KeyValuePair<K, V>>
+                >(this);
                 uint size = _this_vector.Size;
 
                 if (((uint)Int32.MaxValue) < size)
                 {
-                    throw new InvalidOperationException(Environment.GetResourceString("InvalidOperation_CollectionBackingListTooLarge"));
+                    throw new InvalidOperationException(
+                        Environment.GetResourceString(
+                            "InvalidOperation_CollectionBackingListTooLarge"
+                        )
+                    );
                 }
 
                 return (int)size;
@@ -88,7 +98,9 @@ namespace System.Runtime.InteropServices.WindowsRuntime
             }
             else
             {
-                IVector<KeyValuePair<K, V>> _this_vector = JitHelpers.UnsafeCast<IVector<KeyValuePair<K, V>>>(this);
+                IVector<KeyValuePair<K, V>> _this_vector = JitHelpers.UnsafeCast<
+                    IVector<KeyValuePair<K, V>>
+                >(this);
                 _this_vector.Append(item);
             }
         }
@@ -106,7 +118,9 @@ namespace System.Runtime.InteropServices.WindowsRuntime
             }
             else
             {
-                IVector<KeyValuePair<K, V>> _this_vector = JitHelpers.UnsafeCast<IVector<KeyValuePair<K, V>>>(this);
+                IVector<KeyValuePair<K, V>> _this_vector = JitHelpers.UnsafeCast<
+                    IVector<KeyValuePair<K, V>>
+                >(this);
                 _this_vector.Clear();
             }
         }
@@ -130,7 +144,9 @@ namespace System.Runtime.InteropServices.WindowsRuntime
             }
             else
             {
-                IVector<KeyValuePair<K, V>> _this_vector = JitHelpers.UnsafeCast<IVector<KeyValuePair<K, V>>>(this);
+                IVector<KeyValuePair<K, V>> _this_vector = JitHelpers.UnsafeCast<
+                    IVector<KeyValuePair<K, V>>
+                >(this);
 
                 uint index;
                 return _this_vector.IndexOf(item, out index);
@@ -148,14 +164,20 @@ namespace System.Runtime.InteropServices.WindowsRuntime
                 throw new ArgumentOutOfRangeException("arrayIndex");
 
             if (array.Length <= arrayIndex && Count<K, V>() > 0)
-                throw new ArgumentException(Environment.GetResourceString("Argument_IndexOutOfArrayBounds"));
+                throw new ArgumentException(
+                    Environment.GetResourceString("Argument_IndexOutOfArrayBounds")
+                );
 
             if (array.Length - arrayIndex < Count<K, V>())
-                throw new ArgumentException(Environment.GetResourceString("Argument_InsufficientSpaceToCopyCollection"));
+                throw new ArgumentException(
+                    Environment.GetResourceString("Argument_InsufficientSpaceToCopyCollection")
+                );
 
             Contract.EndContractBlock();
 
-            IIterable<KeyValuePair<K, V>> _this = JitHelpers.UnsafeCast<IIterable<KeyValuePair<K, V>>>(this);
+            IIterable<KeyValuePair<K, V>> _this = JitHelpers.UnsafeCast<
+                IIterable<KeyValuePair<K, V>>
+            >(this);
             foreach (KeyValuePair<K, V> mapping in _this)
             {
                 array[arrayIndex++] = mapping;
@@ -175,7 +197,9 @@ namespace System.Runtime.InteropServices.WindowsRuntime
             }
             else
             {
-                IVector<KeyValuePair<K, V>> _this_vector = JitHelpers.UnsafeCast<IVector<KeyValuePair<K, V>>>(this);
+                IVector<KeyValuePair<K, V>> _this_vector = JitHelpers.UnsafeCast<
+                    IVector<KeyValuePair<K, V>>
+                >(this);
                 uint index;
                 bool exists = _this_vector.IndexOf(item, out index);
 
@@ -184,7 +208,11 @@ namespace System.Runtime.InteropServices.WindowsRuntime
 
                 if (((uint)Int32.MaxValue) < index)
                 {
-                    throw new InvalidOperationException(Environment.GetResourceString("InvalidOperation_CollectionBackingListTooLarge"));
+                    throw new InvalidOperationException(
+                        Environment.GetResourceString(
+                            "InvalidOperation_CollectionBackingListTooLarge"
+                        )
+                    );
                 }
 
                 VectorToListAdapter.RemoveAtHelper<KeyValuePair<K, V>>(_this_vector, index);

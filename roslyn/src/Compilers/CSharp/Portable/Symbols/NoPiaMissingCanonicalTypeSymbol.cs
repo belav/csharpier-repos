@@ -32,7 +32,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             string? guid,
             string? scope,
             string? identifier,
-            TupleExtraData? tupleData = null)
+            TupleExtraData? tupleData = null
+        )
             : base(tupleData)
         {
             _embeddingAssembly = embeddingAssembly;
@@ -44,23 +45,24 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         protected override NamedTypeSymbol WithTupleDataCore(TupleExtraData newData)
         {
-            return new NoPiaMissingCanonicalTypeSymbol(_embeddingAssembly, _fullTypeName, _guid, _scope, _identifier, newData);
+            return new NoPiaMissingCanonicalTypeSymbol(
+                _embeddingAssembly,
+                _fullTypeName,
+                _guid,
+                _scope,
+                _identifier,
+                newData
+            );
         }
 
         public AssemblySymbol EmbeddingAssembly
         {
-            get
-            {
-                return _embeddingAssembly;
-            }
+            get { return _embeddingAssembly; }
         }
 
         public string FullTypeName
         {
-            get
-            {
-                return _fullTypeName;
-            }
+            get { return _fullTypeName; }
         }
 
         internal override bool MangleName
@@ -78,34 +80,22 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         public string? Guid
         {
-            get
-            {
-                return _guid;
-            }
+            get { return _guid; }
         }
 
         public string? Scope
         {
-            get
-            {
-                return _scope;
-            }
+            get { return _scope; }
         }
 
         public string? Identifier
         {
-            get
-            {
-                return _identifier;
-            }
+            get { return _identifier; }
         }
 
         internal override DiagnosticInfo ErrorInfo
         {
-            get
-            {
-                return new CSDiagnosticInfo(ErrorCode.ERR_NoCanonicalView, _fullTypeName);
-            }
+            get { return new CSDiagnosticInfo(ErrorCode.ERR_NoCanonicalView, _fullTypeName); }
         }
 
         public override int GetHashCode()

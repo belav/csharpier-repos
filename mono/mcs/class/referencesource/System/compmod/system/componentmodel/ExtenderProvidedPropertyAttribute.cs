@@ -1,16 +1,16 @@
 //------------------------------------------------------------------------------
 // <copyright file="ExtenderProvidedPropertyAttribute.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
 /*
  */
-namespace System.ComponentModel {
-
+namespace System.ComponentModel
+{
     using System;
     using System.Diagnostics;
-    using System.Security.Permissions;    
+    using System.Security.Permissions;
 
     /// <internalonly/>
     /// <devdoc>
@@ -20,16 +20,21 @@ namespace System.ComponentModel {
     ///    </para>
     /// </devdoc>
     [AttributeUsage(AttributeTargets.All)]
-    public sealed class ExtenderProvidedPropertyAttribute : Attribute {
-
+    public sealed class ExtenderProvidedPropertyAttribute : Attribute
+    {
         private PropertyDescriptor extenderProperty;
-        private IExtenderProvider  provider;
-        private Type               receiverType;
+        private IExtenderProvider provider;
+        private Type receiverType;
 
         /// <devdoc>
         ///     Creates a new ExtenderProvidedPropertyAttribute.
         /// </devdoc>
-        internal static ExtenderProvidedPropertyAttribute Create(PropertyDescriptor extenderProperty, Type receiverType, IExtenderProvider provider) {
+        internal static ExtenderProvidedPropertyAttribute Create(
+            PropertyDescriptor extenderProperty,
+            Type receiverType,
+            IExtenderProvider provider
+        )
+        {
             ExtenderProvidedPropertyAttribute e = new ExtenderProvidedPropertyAttribute();
             e.extenderProperty = extenderProperty;
             e.receiverType = receiverType;
@@ -40,54 +45,57 @@ namespace System.ComponentModel {
         /// <devdoc>
         ///     Creates an empty ExtenderProvidedPropertyAttribute.
         /// </devdoc>
-        public ExtenderProvidedPropertyAttribute() {
-        }
+        public ExtenderProvidedPropertyAttribute() { }
 
         /// <devdoc>
         ///     PropertyDescriptor of the property that is being provided.
         /// </devdoc>
-        public PropertyDescriptor ExtenderProperty {
-            get {
-                return extenderProperty;
-            }
+        public PropertyDescriptor ExtenderProperty
+        {
+            get { return extenderProperty; }
         }
 
         /// <devdoc>
         ///     Extender provider that is providing the property.
         /// </devdoc>
-        public IExtenderProvider Provider {
-            get {
-                return provider;
-            }
+        public IExtenderProvider Provider
+        {
+            get { return provider; }
         }
 
         /// <devdoc>
         ///     The type of object that can receive these properties.
         /// </devdoc>
-        public Type ReceiverType {
-            get {
-                return receiverType;
-            }
+        public Type ReceiverType
+        {
+            get { return receiverType; }
         }
 
-        public override bool Equals(object obj) {
-            if (obj == this) {
+        public override bool Equals(object obj)
+        {
+            if (obj == this)
+            {
                 return true;
             }
 
             ExtenderProvidedPropertyAttribute other = obj as ExtenderProvidedPropertyAttribute;
 
-            return (other != null) && other.extenderProperty.Equals(extenderProperty) && other.provider.Equals(provider) && other.receiverType.Equals(receiverType);
+            return (other != null)
+                && other.extenderProperty.Equals(extenderProperty)
+                && other.provider.Equals(provider)
+                && other.receiverType.Equals(receiverType);
         }
 
-        public override int GetHashCode() {
+        public override int GetHashCode()
+        {
             return base.GetHashCode();
         }
-    
+
         /// <internalonly/>
         /// <devdoc>
         /// </devdoc>
-        public override bool IsDefaultAttribute() {
+        public override bool IsDefaultAttribute()
+        {
             return receiverType == null;
         }
     }

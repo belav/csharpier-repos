@@ -7,12 +7,12 @@ namespace System.ServiceModel.Dispatcher
     using System.Xml;
     using System.Xml.XPath;
 
-#if NO 
+#if NO
     //
-    // A message is just one more source of Xml data. To filter a message, we create a navigator over it that 
-    // surfaces its contained Xml to the filter engine. 
+    // A message is just one more source of Xml data. To filter a message, we create a navigator over it that
+    // surfaces its contained Xml to the filter engine.
     // In M5.1, we navigate messages by first writing them into a message document. This turns the message into an
-    // Xml DOM. we then get a navigator from the DOM. 
+    // Xml DOM. we then get a navigator from the DOM.
     // In M5.2, we'll navigate messages without requiring this step.
     //
     internal class MessageNavigator : GenericSeekableNavigator
@@ -29,7 +29,7 @@ namespace System.ServiceModel.Dispatcher
             this.loaded = nav.loaded;
             this.navigatesBody = nav.navigatesBody;
         }
-        
+
         internal MessageNavigator(Message message, bool navigateBody)
             : base()
         {
@@ -39,18 +39,12 @@ namespace System.ServiceModel.Dispatcher
 
         internal bool IsLoaded
         {
-            get
-            {
-                return this.loaded;
-            }
+            get { return this.loaded; }
         }
 
         internal bool NavigatesBody
         {
-            get
-            {
-                return this.navigatesBody;
-            }
+            get { return this.navigatesBody; }
         }
 
         internal override void Clear()
@@ -59,18 +53,21 @@ namespace System.ServiceModel.Dispatcher
             this.loaded = false;
             this.navigatesBody = false;
         }
-                
+
         public override XPathNavigator Clone()
         {
             return new MessageNavigator(this);
         }
-        
+
         internal MessageNavigator Ensure(Message message, bool navigateBody)
         {
             // Rebuild the navigator if:
             // If this navigator does not navigate on bodies and now we need to (or vice versa)
             // Or the header collection changed under us
-            if (this.navigatesBody != navigateBody || message.Headers.CollectionVersion != this.headerCollectionVersion)
+            if (
+                this.navigatesBody != navigateBody
+                || message.Headers.CollectionVersion != this.headerCollectionVersion
+            )
             {
                 this.Load(message, navigateBody);
             }
@@ -96,12 +93,12 @@ namespace System.ServiceModel.Dispatcher
 
             message.WriteMessage(writer, navigatesBody);
             writer.Close();
-            
+
             StringReader reader = new StringReader(this.builder.ToString());
             XPathDocument messageDoc = new XPathDocument(reader);
-            reader.Close();            
+            reader.Close();
             this.builder.Length = 0;
-            
+
             this.Init(messageDoc.CreateNavigator());
             this.loaded = true;
             this.navigatesBody = navigatesBody;
@@ -138,9 +135,13 @@ namespace System.ServiceModel.Dispatcher
             set { }
         }
 
-        public int ElapsedCount(int marker) { return 0; }
+        public int ElapsedCount(int marker)
+        {
+            return 0;
+        }
 
         public void Increase() { }
+
         public void IncreaseBy(int count) { }
     }
 
@@ -170,30 +171,18 @@ namespace System.ServiceModel.Dispatcher
 
         public override string BaseURI
         {
-            get
-            {
-                return this.navigator.BaseURI;
-            }
+            get { return this.navigator.BaseURI; }
         }
 
         public int CounterMarker
         {
-            get
-            {
-                return this.counter.nodeCount;
-            }
-            set
-            {
-                this.counter.nodeCount = value;
-            }
+            get { return this.counter.nodeCount; }
+            set { this.counter.nodeCount = value; }
         }
 
         public int MaxCounter
         {
-            set
-            {
-                this.counter.nodeCountMax = value;
-            }
+            set { this.counter.nodeCountMax = value; }
         }
 
         /// <summary>
@@ -201,102 +190,63 @@ namespace System.ServiceModel.Dispatcher
         /// </summary>
         public override long CurrentPosition
         {
-            get
-            {
-                return this.navigator.CurrentPosition;
-            }
-            set
-            {
-                this.navigator.CurrentPosition = value;
-            }
+            get { return this.navigator.CurrentPosition; }
+            set { this.navigator.CurrentPosition = value; }
         }
 
         public override bool HasAttributes
         {
-            get
-            {
-                return this.navigator.HasAttributes;
-            }
+            get { return this.navigator.HasAttributes; }
         }
 
         public override bool HasChildren
         {
-            get
-            {
-                return this.navigator.HasChildren;
-            }
+            get { return this.navigator.HasChildren; }
         }
 
         public override bool IsEmptyElement
         {
-            get
-            {
-                return this.navigator.IsEmptyElement;
-            }
+            get { return this.navigator.IsEmptyElement; }
         }
 
         public override string LocalName
         {
-            get
-            {
-                return this.navigator.LocalName;
-            }
+            get { return this.navigator.LocalName; }
         }
 
         public override string Name
         {
-            get
-            {
-                return this.navigator.Name;
-            }
+            get { return this.navigator.Name; }
         }
 
         public override string NamespaceURI
         {
-            get
-            {
-                return this.navigator.NamespaceURI;
-            }
+            get { return this.navigator.NamespaceURI; }
         }
 
         public override XmlNameTable NameTable
         {
-            get
-            {
-                return this.navigator.NameTable;
-            }
+            get { return this.navigator.NameTable; }
         }
 
         public override XPathNodeType NodeType
         {
-            get
-            {
-                return this.navigator.NodeType;
-            }
+            get { return this.navigator.NodeType; }
         }
 
         public override string Prefix
         {
-            get
-            {
-                return this.navigator.Prefix;
-            }
+            get { return this.navigator.Prefix; }
         }
 
         public override string Value
         {
-            get
-            {
-                return this.navigator.Value;
-            }
+            get { return this.navigator.Value; }
         }
 
         public override string XmlLang
         {
-            get
-            {
-                return this.navigator.XmlLang;
-            }
+            get { return this.navigator.XmlLang; }
         }
 
         public override XPathNavigator Clone()
@@ -310,6 +260,7 @@ namespace System.ServiceModel.Dispatcher
             return new SafeNavigator(this, this.navigator);
         }
 #endif
+
         public override XmlNodeOrder ComparePosition(XPathNavigator navigator)
         {
             if (navigator == null)
@@ -391,9 +342,14 @@ namespace System.ServiceModel.Dispatcher
             }
             else
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new XPathNavigatorException(SR.GetString(SR.FilterNodeQuotaExceeded, this.counter.nodeCountMax)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new XPathNavigatorException(
+                        SR.GetString(SR.FilterNodeQuotaExceeded, this.counter.nodeCountMax)
+                    )
+                );
             }
         }
+
 #if NO
         internal virtual void Init(SeekableXPathNavigator navigator, int nodeCountMax)
         {
@@ -402,6 +358,7 @@ namespace System.ServiceModel.Dispatcher
             this.counter = this;
         }
 #endif
+
         public override bool IsDescendant(XPathNavigator navigator)
         {
             if (navigator == null)
@@ -528,9 +485,9 @@ namespace System.ServiceModel.Dispatcher
     }
 
     /// <summary>
-    /// The filter engine works with seekable navigators. This class takes a generic XPathNavigator implementation 
+    /// The filter engine works with seekable navigators. This class takes a generic XPathNavigator implementation
     /// and transforms it into a seekable navigator. Seekable navigators associate a 'position' to every node in a DOM.
-    /// 
+    ///
     /// This class maintains a (position, navigator) map. Cloning navigators is unavoidable - XPathNavigator offers
     /// no other way to snapshot its current position. However, caching allows memory allocations to be avoided - but
     /// only once the navigator is warmed up.
@@ -542,6 +499,7 @@ namespace System.ServiceModel.Dispatcher
         XPathNavigator navigator;
 
         GenericSeekableNavigator dom;
+
 #if NO
         internal GenericSeekableNavigator()
         {
@@ -549,6 +507,7 @@ namespace System.ServiceModel.Dispatcher
             this.currentPosition = -1;
         }
 #endif
+
         internal GenericSeekableNavigator(XPathNavigator navigator)
         {
             this.navigator = navigator;
@@ -567,107 +526,68 @@ namespace System.ServiceModel.Dispatcher
 
         public override string BaseURI
         {
-            get
-            {
-                return this.navigator.BaseURI;
-            }
+            get { return this.navigator.BaseURI; }
         }
 
         public override bool HasAttributes
         {
-            get
-            {
-                return this.navigator.HasAttributes;
-            }
+            get { return this.navigator.HasAttributes; }
         }
 
         public override bool HasChildren
         {
-            get
-            {
-                return this.navigator.HasChildren;
-            }
+            get { return this.navigator.HasChildren; }
         }
 
-#if NO        
+#if NO
         internal XPathNavigator InternalNavigator
         {
-            get
-            {
-                return this.navigator;
-            }
+            get { return this.navigator; }
         }
 #endif
         public override bool IsEmptyElement
         {
-            get
-            {
-                return this.navigator.IsEmptyElement;
-            }
+            get { return this.navigator.IsEmptyElement; }
         }
 
         public override string LocalName
         {
-            get
-            {
-                return this.navigator.LocalName;
-            }
+            get { return this.navigator.LocalName; }
         }
 
         public override string Name
         {
-            get
-            {
-                return this.navigator.Name;
-            }
+            get { return this.navigator.Name; }
         }
 
         public override string NamespaceURI
         {
-            get
-            {
-                return this.navigator.NamespaceURI;
-            }
+            get { return this.navigator.NamespaceURI; }
         }
 
         public override XmlNameTable NameTable
         {
-            get
-            {
-                return this.navigator.NameTable;
-            }
+            get { return this.navigator.NameTable; }
         }
 
         public override XPathNodeType NodeType
         {
-            get
-            {
-                return this.navigator.NodeType;
-            }
+            get { return this.navigator.NodeType; }
         }
 
         public override string Prefix
         {
-            get
-            {
-                return this.navigator.Prefix;
-            }
+            get { return this.navigator.Prefix; }
         }
 
         public override string Value
         {
-            get
-            {
-                return this.navigator.Value;
-            }
+            get { return this.navigator.Value; }
         }
 
         public override string XmlLang
         {
-            get
-            {
-                return this.navigator.XmlLang;
-            }
+            get { return this.navigator.XmlLang; }
         }
 
         /// <summary>
@@ -710,6 +630,7 @@ namespace System.ServiceModel.Dispatcher
             this.currentPosition = -1;
         }
 #endif
+
         public override XPathNavigator Clone()
         {
             return new GenericSeekableNavigator(this);
@@ -781,6 +702,7 @@ namespace System.ServiceModel.Dispatcher
             this.currentPosition = -1;
         }
 #endif
+
         public override bool IsDescendant(XPathNavigator navigator)
         {
             if (navigator == null)
@@ -919,7 +841,7 @@ namespace System.ServiceModel.Dispatcher
         }
 
         #region IQueryBufferPool Members
-#if NO 
+#if NO
         /// <summary>
         /// Reset the pool by deleting it entirely and starting it over
         /// </summary>

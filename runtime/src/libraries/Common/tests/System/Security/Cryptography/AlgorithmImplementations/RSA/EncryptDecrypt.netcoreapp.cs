@@ -49,10 +49,18 @@ namespace System.Security.Cryptography.Rsa.Tests
     public sealed class EncryptDecrypt_TrySpan : EncryptDecrypt
     {
         protected override byte[] Encrypt(RSA rsa, byte[] data, RSAEncryptionPadding padding) =>
-            TryWithOutputArray(dest => rsa.TryEncrypt(data, dest, padding, out int bytesWritten) ? (true, bytesWritten) : (false, 0));
+            TryWithOutputArray(dest =>
+                rsa.TryEncrypt(data, dest, padding, out int bytesWritten)
+                    ? (true, bytesWritten)
+                    : (false, 0)
+            );
 
         protected override byte[] Decrypt(RSA rsa, byte[] data, RSAEncryptionPadding padding) =>
-            TryWithOutputArray(dest => rsa.TryDecrypt(data, dest, padding, out int bytesWritten) ? (true, bytesWritten) : (false, 0));
+            TryWithOutputArray(dest =>
+                rsa.TryDecrypt(data, dest, padding, out int bytesWritten)
+                    ? (true, bytesWritten)
+                    : (false, 0)
+            );
 
         private static byte[] TryWithOutputArray(Func<byte[], (bool, int)> func)
         {
@@ -74,19 +82,35 @@ namespace System.Security.Cryptography.Rsa.Tests
             using (RSA rsa = RSAFactory.Create())
             {
                 rsa.ImportParameters(TestData.RSA1024Params);
-                byte[] cipherBytes = Encrypt(rsa, TestData.HelloBytes, RSAEncryptionPadding.OaepSHA1);
+                byte[] cipherBytes = Encrypt(
+                    rsa,
+                    TestData.HelloBytes,
+                    RSAEncryptionPadding.OaepSHA1
+                );
                 byte[] actual;
                 int bytesWritten;
 
                 // Too small
                 actual = new byte[TestData.HelloBytes.Length - 1];
-                Assert.False(rsa.TryDecrypt(cipherBytes, actual, RSAEncryptionPadding.OaepSHA1, out bytesWritten));
+                Assert.False(
+                    rsa.TryDecrypt(
+                        cipherBytes,
+                        actual,
+                        RSAEncryptionPadding.OaepSHA1,
+                        out bytesWritten
+                    )
+                );
                 Assert.Equal(0, bytesWritten);
                 Assert.Equal<byte>(new byte[actual.Length], actual);
 
                 // Just right.
                 actual = new byte[TestData.HelloBytes.Length];
-                bool decrypted = rsa.TryDecrypt(cipherBytes, actual, RSAEncryptionPadding.OaepSHA1, out bytesWritten);
+                bool decrypted = rsa.TryDecrypt(
+                    cipherBytes,
+                    actual,
+                    RSAEncryptionPadding.OaepSHA1,
+                    out bytesWritten
+                );
 
                 Assert.True(decrypted);
                 Assert.Equal(TestData.HelloBytes.Length, bytesWritten);
@@ -94,9 +118,19 @@ namespace System.Security.Cryptography.Rsa.Tests
 
                 // Bigger than needed
                 actual = new byte[TestData.HelloBytes.Length + 1000];
-                Assert.True(rsa.TryDecrypt(cipherBytes, actual, RSAEncryptionPadding.OaepSHA1, out bytesWritten));
+                Assert.True(
+                    rsa.TryDecrypt(
+                        cipherBytes,
+                        actual,
+                        RSAEncryptionPadding.OaepSHA1,
+                        out bytesWritten
+                    )
+                );
                 Assert.Equal(TestData.HelloBytes.Length, bytesWritten);
-                Assert.Equal<byte>(TestData.HelloBytes, actual.AsSpan(0, TestData.HelloBytes.Length).ToArray());
+                Assert.Equal<byte>(
+                    TestData.HelloBytes,
+                    actual.AsSpan(0, TestData.HelloBytes.Length).ToArray()
+                );
             }
         }
 
@@ -106,23 +140,48 @@ namespace System.Security.Cryptography.Rsa.Tests
             using (RSA rsa = RSAFactory.Create())
             {
                 rsa.ImportParameters(TestData.RSA1024Params);
-                byte[] cipherBytes = Encrypt(rsa, TestData.HelloBytes, RSAEncryptionPadding.OaepSHA1);
+                byte[] cipherBytes = Encrypt(
+                    rsa,
+                    TestData.HelloBytes,
+                    RSAEncryptionPadding.OaepSHA1
+                );
                 byte[] actual;
                 int bytesWritten;
 
                 // Too small
                 actual = new byte[cipherBytes.Length - 1];
-                Assert.False(rsa.TryEncrypt(TestData.HelloBytes, actual, RSAEncryptionPadding.OaepSHA1, out bytesWritten));
+                Assert.False(
+                    rsa.TryEncrypt(
+                        TestData.HelloBytes,
+                        actual,
+                        RSAEncryptionPadding.OaepSHA1,
+                        out bytesWritten
+                    )
+                );
                 Assert.Equal(0, bytesWritten);
 
                 // Just right
                 actual = new byte[cipherBytes.Length];
-                Assert.True(rsa.TryEncrypt(TestData.HelloBytes, actual, RSAEncryptionPadding.OaepSHA1, out bytesWritten));
+                Assert.True(
+                    rsa.TryEncrypt(
+                        TestData.HelloBytes,
+                        actual,
+                        RSAEncryptionPadding.OaepSHA1,
+                        out bytesWritten
+                    )
+                );
                 Assert.Equal(cipherBytes.Length, bytesWritten);
 
                 // Bigger than needed
                 actual = new byte[cipherBytes.Length + 1];
-                Assert.True(rsa.TryEncrypt(TestData.HelloBytes, actual, RSAEncryptionPadding.OaepSHA1, out bytesWritten));
+                Assert.True(
+                    rsa.TryEncrypt(
+                        TestData.HelloBytes,
+                        actual,
+                        RSAEncryptionPadding.OaepSHA1,
+                        out bytesWritten
+                    )
+                );
                 Assert.Equal(cipherBytes.Length, bytesWritten);
             }
         }
@@ -153,12 +212,24 @@ namespace System.Security.Cryptography.Rsa.Tests
                 byte[] dest = new byte[rsa.KeySize / 8];
 
                 Assert.True(
-                    rsa.TryEncrypt(ReadOnlySpan<byte>.Empty, dest, RSAEncryptionPadding.Pkcs1, out int written));
+                    rsa.TryEncrypt(
+                        ReadOnlySpan<byte>.Empty,
+                        dest,
+                        RSAEncryptionPadding.Pkcs1,
+                        out int written
+                    )
+                );
 
                 Assert.Equal(dest.Length, written);
 
                 Assert.True(
-                    rsa.TryEncrypt(ReadOnlySpan<byte>.Empty, dest, RSAEncryptionPadding.OaepSHA1, out written));
+                    rsa.TryEncrypt(
+                        ReadOnlySpan<byte>.Empty,
+                        dest,
+                        RSAEncryptionPadding.OaepSHA1,
+                        out written
+                    )
+                );
 
                 Assert.Equal(dest.Length, written);
             }
@@ -211,8 +282,10 @@ namespace System.Security.Cryptography.Rsa.Tests
                     //
                     // For RSA-1024 (less freedom) it's 1 in 5.363e19, so like 1.6 trillion years.
 
-                    if (rsa2.TryDecrypt(encrypted, buf, padding, out bytesWritten)
-                        && bytesWritten == input.Length)
+                    if (
+                        rsa2.TryDecrypt(encrypted, buf, padding, out bytesWritten)
+                        && bytesWritten == input.Length
+                    )
                     {
                         // We'll get -here- 1 in 111014 runs (RSA-2048 Pkcs1).
                         Assert.NotEqual(input, buf.AsSpan(0, bytesWritten).ToArray());

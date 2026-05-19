@@ -6,44 +6,52 @@
 // <owner current="true" primary="false">Microsoft</owner>
 //------------------------------------------------------------------------------
 
-namespace System.Data.Common {
-
+namespace System.Data.Common
+{
     using System.ComponentModel;
 
-    public abstract class DbDataRecord : ICustomTypeDescriptor, IDataRecord {
+    public abstract class DbDataRecord : ICustomTypeDescriptor, IDataRecord
+    {
+        protected DbDataRecord()
+            : base() { }
 
-        protected DbDataRecord() : base() {
-        }
+        public abstract int FieldCount { get; }
 
-        public abstract int FieldCount {
-            get;
-        }
+        public abstract object this[int i] { get; }
 
-        public abstract object this[int i] {
-            get;
-        }
-
-        public abstract object this[string name] {
-            get;
-        }
+        public abstract object this[string name] { get; }
 
         public abstract bool GetBoolean(int i);
 
         public abstract byte GetByte(int i);
 
-        public abstract long GetBytes(int i, long dataIndex, byte[] buffer, int bufferIndex, int length);
+        public abstract long GetBytes(
+            int i,
+            long dataIndex,
+            byte[] buffer,
+            int bufferIndex,
+            int length
+        );
 
         public abstract char GetChar(int i);
 
-        public abstract long GetChars(int i, long dataIndex, char[] buffer, int bufferIndex, int length);
+        public abstract long GetChars(
+            int i,
+            long dataIndex,
+            char[] buffer,
+            int bufferIndex,
+            int length
+        );
 
-        public IDataReader GetData(int i) {
+        public IDataReader GetData(int i)
+        {
             return GetDbDataReader(i);
         }
 
-        virtual protected DbDataReader GetDbDataReader(int i) {
+        protected virtual DbDataReader GetDbDataReader(int i)
+        {
             // NOTE: This method is virtual because we're required to implement
-            //       it however most providers won't support it. Only the OLE DB 
+            //       it however most providers won't support it. Only the OLE DB
             //       provider supports it right now, and they can override it.
             throw ADP.NotSupported();
         }
@@ -84,53 +92,63 @@ namespace System.Data.Common {
         // ICustomTypeDescriptor
         //
 
-        AttributeCollection ICustomTypeDescriptor.GetAttributes() {
+        AttributeCollection ICustomTypeDescriptor.GetAttributes()
+        {
             return new AttributeCollection((Attribute[])null);
-
         }
 
-        string ICustomTypeDescriptor.GetClassName() {
+        string ICustomTypeDescriptor.GetClassName()
+        {
             return null;
         }
 
-        string ICustomTypeDescriptor.GetComponentName() {
+        string ICustomTypeDescriptor.GetComponentName()
+        {
             return null;
         }
 
-        TypeConverter ICustomTypeDescriptor.GetConverter() {
+        TypeConverter ICustomTypeDescriptor.GetConverter()
+        {
             return null;
         }
 
-        EventDescriptor ICustomTypeDescriptor.GetDefaultEvent() {
+        EventDescriptor ICustomTypeDescriptor.GetDefaultEvent()
+        {
             return null;
         }
 
-
-        PropertyDescriptor ICustomTypeDescriptor.GetDefaultProperty() {
+        PropertyDescriptor ICustomTypeDescriptor.GetDefaultProperty()
+        {
             return null;
         }
 
-        object ICustomTypeDescriptor.GetEditor(Type editorBaseType) {
+        object ICustomTypeDescriptor.GetEditor(Type editorBaseType)
+        {
             return null;
         }
 
-        EventDescriptorCollection ICustomTypeDescriptor.GetEvents() {
+        EventDescriptorCollection ICustomTypeDescriptor.GetEvents()
+        {
             return new EventDescriptorCollection(null);
         }
 
-        EventDescriptorCollection ICustomTypeDescriptor.GetEvents(Attribute[] attributes) {
+        EventDescriptorCollection ICustomTypeDescriptor.GetEvents(Attribute[] attributes)
+        {
             return new EventDescriptorCollection(null);
         }
 
-        PropertyDescriptorCollection ICustomTypeDescriptor.GetProperties() {
-            return((ICustomTypeDescriptor)this).GetProperties(null);
+        PropertyDescriptorCollection ICustomTypeDescriptor.GetProperties()
+        {
+            return ((ICustomTypeDescriptor)this).GetProperties(null);
         }
 
-        PropertyDescriptorCollection ICustomTypeDescriptor.GetProperties(Attribute[] attributes) {
+        PropertyDescriptorCollection ICustomTypeDescriptor.GetProperties(Attribute[] attributes)
+        {
             return new PropertyDescriptorCollection(null);
         }
 
-        object ICustomTypeDescriptor.GetPropertyOwner(PropertyDescriptor pd) {
+        object ICustomTypeDescriptor.GetPropertyOwner(PropertyDescriptor pd)
+        {
             return this;
         }
     }

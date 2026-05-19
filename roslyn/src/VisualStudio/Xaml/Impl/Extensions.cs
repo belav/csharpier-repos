@@ -12,15 +12,22 @@ namespace Microsoft.CodeAnalysis.Editor.Xaml
 {
     internal static class Extensions
     {
-        public static Guid GetProjectGuid(this VisualStudioWorkspace workspace, ProjectId projectId)
-            => workspace.GetProjectGuid(projectId);
+        public static Guid GetProjectGuid(
+            this VisualStudioWorkspace workspace,
+            ProjectId projectId
+        ) => workspace.GetProjectGuid(projectId);
 
-        public static string GetFilePath(this ITextView textView)
-            => textView.TextBuffer.GetFilePath();
+        public static string GetFilePath(this ITextView textView) =>
+            textView.TextBuffer.GetFilePath();
 
         public static string GetFilePath(this ITextBuffer textBuffer)
         {
-            if (textBuffer.Properties.TryGetProperty<ITextDocument>(typeof(ITextDocument), out var textDoc))
+            if (
+                textBuffer.Properties.TryGetProperty<ITextDocument>(
+                    typeof(ITextDocument),
+                    out var textDoc
+                )
+            )
             {
                 return textDoc.FilePath;
             }
@@ -36,7 +43,9 @@ namespace Microsoft.CodeAnalysis.Editor.Xaml
             }
 
             // There has to be a match
-            return document.Project.Solution.Projects.Single(p => p.SupportsCompilation && p.FilePath == document.Project.FilePath);
+            return document.Project.Solution.Projects.Single(p =>
+                p.SupportsCompilation && p.FilePath == document.Project.FilePath
+            );
         }
     }
 }

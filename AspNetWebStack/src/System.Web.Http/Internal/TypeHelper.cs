@@ -62,13 +62,13 @@ namespace System.Web.Http.Internal
 
         internal static bool IsSimpleType(Type type)
         {
-            return type.IsPrimitive ||
-                   type.Equals(typeof(string)) ||
-                   type.Equals(typeof(DateTime)) ||
-                   type.Equals(typeof(Decimal)) ||
-                   type.Equals(typeof(Guid)) ||
-                   type.Equals(typeof(DateTimeOffset)) ||
-                   type.Equals(typeof(TimeSpan));
+            return type.IsPrimitive
+                || type.Equals(typeof(string))
+                || type.Equals(typeof(DateTime))
+                || type.Equals(typeof(Decimal))
+                || type.Equals(typeof(Guid))
+                || type.Equals(typeof(DateTimeOffset))
+                || type.Equals(typeof(TimeSpan));
         }
 
         internal static bool IsSimpleUnderlyingType(Type type)
@@ -84,8 +84,7 @@ namespace System.Web.Http.Internal
 
         internal static bool CanConvertFromString(Type type)
         {
-            return TypeHelper.IsSimpleUnderlyingType(type) ||
-                TypeHelper.HasStringConverter(type);
+            return TypeHelper.IsSimpleUnderlyingType(type) || TypeHelper.HasStringConverter(type);
         }
 
         internal static bool HasStringConverter(Type type)
@@ -98,7 +97,8 @@ namespace System.Web.Http.Internal
         /// </summary>
         /// <typeparam name="T">type to search for</typeparam>
         /// <returns>subset of objects that can be assigned to T</returns>
-        internal static ReadOnlyCollection<T> OfType<T>(object[] objects) where T : class
+        internal static ReadOnlyCollection<T> OfType<T>(object[] objects)
+            where T : class
         {
             int max = objects.Length;
             List<T> list = new List<T>(max);

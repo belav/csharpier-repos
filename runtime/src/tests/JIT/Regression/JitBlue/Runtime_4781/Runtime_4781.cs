@@ -10,8 +10,9 @@ using Xunit;
 class Foo : IDisposable
 {
     public bool IsConstructed { get; } = true;
+
     public Foo(int ignored) { }
-    
+
     ~Foo()
     {
         if (!IsConstructed)
@@ -20,16 +21,21 @@ class Foo : IDisposable
             Runtime_4781.Fail();
         }
     }
-    
+
     public void Dispose() => GC.SuppressFinalize(this);
 }
 
 public class Runtime_4781
 {
     private static int Throw() => throw new NotSupportedException();
+
     private static bool failed = false;
-    internal static void Fail() { failed = true; }
-    
+
+    internal static void Fail()
+    {
+        failed = true;
+    }
+
     private static IDisposable Test()
     {
         try
@@ -37,12 +43,10 @@ public class Runtime_4781
             int x = Throw();
             return new Foo(x);
         }
-        catch
-        {
-        }
+        catch { }
         return new Foo(2);
     }
-    
+
     [Fact]
     public static int TestEntryPoint()
     {

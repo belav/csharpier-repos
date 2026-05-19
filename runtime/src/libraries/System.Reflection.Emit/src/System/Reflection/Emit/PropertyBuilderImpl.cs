@@ -23,7 +23,14 @@ namespace System.Reflection.Emit
         internal List<CustomAttributeWrapper>? _customAttributes;
         internal object? _defaultValue = DBNull.Value;
 
-        internal PropertyBuilderImpl(string name, PropertyAttributes attributes, CallingConventions callingConvention, Type returnType, Type[]? parameterTypes, TypeBuilderImpl containingType)
+        internal PropertyBuilderImpl(
+            string name,
+            PropertyAttributes attributes,
+            CallingConventions callingConvention,
+            Type returnType,
+            Type[]? parameterTypes,
+            TypeBuilderImpl containingType
+        )
         {
             ArgumentException.ThrowIfNullOrEmpty(name);
 
@@ -54,11 +61,17 @@ namespace System.Reflection.Emit
             _defaultValue = defaultValue;
         }
 
-        protected override void SetCustomAttributeCore(ConstructorInfo con, ReadOnlySpan<byte> binaryAttribute)
+        protected override void SetCustomAttributeCore(
+            ConstructorInfo con,
+            ReadOnlySpan<byte> binaryAttribute
+        )
         {
             _containingType.ThrowIfCreated();
 
-            if (con.ReflectedType!.FullName == "System.Runtime.CompilerServices.SpecialNameAttribute")
+            if (
+                con.ReflectedType!.FullName
+                == "System.Runtime.CompilerServices.SpecialNameAttribute"
+            )
             {
                 _attributes |= PropertyAttributes.SpecialName;
                 return;
@@ -130,18 +143,45 @@ namespace System.Reflection.Emit
             return null;
         }
 
-        public override object? GetConstantValue() => _defaultValue == DBNull.Value ? null : _defaultValue;
+        public override object? GetConstantValue() =>
+            _defaultValue == DBNull.Value ? null : _defaultValue;
 
-        public override object GetValue(object? obj, object?[]? index) => throw new NotSupportedException(SR.NotSupported_DynamicModule);
-        public override object GetValue(object? obj, BindingFlags invokeAttr, Binder? binder, object?[]? index, CultureInfo? culture) =>
+        public override object GetValue(object? obj, object?[]? index) =>
             throw new NotSupportedException(SR.NotSupported_DynamicModule);
-        public override void SetValue(object? obj, object? value, object?[]? index) => throw new NotSupportedException(SR.NotSupported_DynamicModule);
-        public override void SetValue(object? obj, object? value, BindingFlags invokeAttr, Binder? binder, object?[]? index, CultureInfo? culture) =>
+
+        public override object GetValue(
+            object? obj,
+            BindingFlags invokeAttr,
+            Binder? binder,
+            object?[]? index,
+            CultureInfo? culture
+        ) => throw new NotSupportedException(SR.NotSupported_DynamicModule);
+
+        public override void SetValue(object? obj, object? value, object?[]? index) =>
             throw new NotSupportedException(SR.NotSupported_DynamicModule);
-        public override MethodInfo[] GetAccessors(bool nonPublic) => throw new NotSupportedException(SR.NotSupported_DynamicModule);
-        public override object[] GetCustomAttributes(bool inherit) => throw new NotSupportedException(SR.NotSupported_DynamicModule);
-        public override object[] GetCustomAttributes(Type attributeType, bool inherit) => throw new NotSupportedException(SR.NotSupported_DynamicModule);
-        public override ParameterInfo[] GetIndexParameters() => throw new NotSupportedException(SR.NotSupported_DynamicModule);
-        public override bool IsDefined(Type attributeType, bool inherit) => throw new NotSupportedException(SR.NotSupported_DynamicModule);
+
+        public override void SetValue(
+            object? obj,
+            object? value,
+            BindingFlags invokeAttr,
+            Binder? binder,
+            object?[]? index,
+            CultureInfo? culture
+        ) => throw new NotSupportedException(SR.NotSupported_DynamicModule);
+
+        public override MethodInfo[] GetAccessors(bool nonPublic) =>
+            throw new NotSupportedException(SR.NotSupported_DynamicModule);
+
+        public override object[] GetCustomAttributes(bool inherit) =>
+            throw new NotSupportedException(SR.NotSupported_DynamicModule);
+
+        public override object[] GetCustomAttributes(Type attributeType, bool inherit) =>
+            throw new NotSupportedException(SR.NotSupported_DynamicModule);
+
+        public override ParameterInfo[] GetIndexParameters() =>
+            throw new NotSupportedException(SR.NotSupported_DynamicModule);
+
+        public override bool IsDefined(Type attributeType, bool inherit) =>
+            throw new NotSupportedException(SR.NotSupported_DynamicModule);
     }
 }

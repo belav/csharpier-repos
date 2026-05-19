@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -28,26 +28,24 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-
 using System;
 
 namespace System.Web.UI.Design
 {
-	/// <summary>
-	/// Provides the features required to support both complex and simple scenarios when binding to a data source.
-	/// </summary>
-	public interface IDataSourceFieldSchema
-	{
-		Type DataType { get; }
-		bool Identity { get; }
-		bool IsReadOnly { get; }
-		bool IsUnique { get; }
-		int Length { get; }
-		string Name { get; }
-		bool Nullable { get; }
-		int Precision { get; }
-		bool PrimaryKey { get; }
-		int Scale { get; }
-	}
+    /// <summary>
+    /// Provides the features required to support both complex and simple scenarios when binding to a data source.
+    /// </summary>
+    public interface IDataSourceFieldSchema
+    {
+        Type DataType { get; }
+        bool Identity { get; }
+        bool IsReadOnly { get; }
+        bool IsUnique { get; }
+        int Length { get; }
+        string Name { get; }
+        bool Nullable { get; }
+        int Precision { get; }
+        bool PrimaryKey { get; }
+        int Scale { get; }
+    }
 }
-

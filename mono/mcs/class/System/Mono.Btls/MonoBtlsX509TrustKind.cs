@@ -25,18 +25,19 @@
 // THE SOFTWARE.
 #if SECURITY_DEP && MONO_FEATURE_BTLS
 using System;
+
 namespace Mono.Btls
 {
-	[Flags]
-	enum MonoBtlsX509TrustKind
-	{
-		DEFAULT		= 0,
-		TRUST_CLIENT	= 1,
-		TRUST_SERVER	= 2,
-		TRUST_ALL	= 4,
-		REJECT_CLIENT	= 32,
-		REJECT_SERVER	= 64,
-		REJECT_ALL	= 128
-	}
+    [Flags]
+    enum MonoBtlsX509TrustKind
+    {
+        DEFAULT = 0,
+        TRUST_CLIENT = 1,
+        TRUST_SERVER = 2,
+        TRUST_ALL = 4,
+        REJECT_CLIENT = 32,
+        REJECT_SERVER = 64,
+        REJECT_ALL = 128,
+    }
 }
 #endif

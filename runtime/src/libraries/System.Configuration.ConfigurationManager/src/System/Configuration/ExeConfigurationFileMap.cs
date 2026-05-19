@@ -20,8 +20,12 @@ namespace System.Configuration
             LocalUserConfigFilename = string.Empty;
         }
 
-        private ExeConfigurationFileMap(string machineConfigFileName, string exeConfigFilename,
-            string roamingUserConfigFilename, string localUserConfigFilename)
+        private ExeConfigurationFileMap(
+            string machineConfigFileName,
+            string exeConfigFilename,
+            string roamingUserConfigFilename,
+            string localUserConfigFilename
+        )
             : base(machineConfigFileName)
         {
             ExeConfigFilename = exeConfigFilename;
@@ -37,8 +41,12 @@ namespace System.Configuration
 
         public override object Clone()
         {
-            return new ExeConfigurationFileMap(MachineConfigFilename, ExeConfigFilename, RoamingUserConfigFilename,
-                LocalUserConfigFilename);
+            return new ExeConfigurationFileMap(
+                MachineConfigFilename,
+                ExeConfigFilename,
+                RoamingUserConfigFilename,
+                LocalUserConfigFilename
+            );
         }
     }
 }

@@ -13,20 +13,23 @@ using Xunit;
 using Xunit.Abstractions;
 
 namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.Workspaces;
+
 public class LspWorkspaceRegistrationServiceTests : AbstractLanguageServerProtocolTests
 {
-    public LspWorkspaceRegistrationServiceTests(ITestOutputHelper testOutputHelper) : base(testOutputHelper)
-    {
-    }
+    public LspWorkspaceRegistrationServiceTests(ITestOutputHelper testOutputHelper)
+        : base(testOutputHelper) { }
 
     [Theory, CombinatorialData]
     public async Task TestDisposedWorkspaceDeregistered(bool mutatingLspWorkspace)
     {
         var markup = "";
         TestWorkspaceRegistrationService registrationService;
-        await using (var testLspServer = await CreateTestLspServerAsync(markup, mutatingLspWorkspace))
+        await using (
+            var testLspServer = await CreateTestLspServerAsync(markup, mutatingLspWorkspace)
+        )
         {
-            registrationService = (TestWorkspaceRegistrationService)testLspServer.TestWorkspace.ExportProvider.GetExportedValue<LspWorkspaceRegistrationService>();
+            registrationService = (TestWorkspaceRegistrationService)
+                testLspServer.TestWorkspace.ExportProvider.GetExportedValue<LspWorkspaceRegistrationService>();
         }
 
         Assert.Empty(registrationService.GetAllRegistrations());

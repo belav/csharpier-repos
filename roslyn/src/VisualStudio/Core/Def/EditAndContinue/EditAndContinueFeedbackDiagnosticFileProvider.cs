@@ -11,19 +11,20 @@ using System.IO;
 using System.IO.Compression;
 using System.Linq;
 using System.Threading;
+using Microsoft.CodeAnalysis.EditAndContinue;
 using Microsoft.CodeAnalysis.Host.Mef;
 using Microsoft.Internal.VisualStudio.Shell.Embeddable.Feedback;
+using Microsoft.VisualStudio.Shell;
 using Microsoft.VisualStudio.TextManager.Interop;
 using Newtonsoft.Json.Linq;
-using Task = System.Threading.Tasks.Task;
 using Roslyn.Utilities;
-using Microsoft.CodeAnalysis.EditAndContinue;
-using Microsoft.VisualStudio.Shell;
+using Task = System.Threading.Tasks.Task;
 
 namespace Microsoft.VisualStudio.LanguageServices.EditAndContinue;
 
 [Export(typeof(IFeedbackDiagnosticFileProvider))]
-internal sealed class EditAndContinueFeedbackDiagnosticFileProvider : IFeedbackDiagnosticFileProvider
+internal sealed class EditAndContinueFeedbackDiagnosticFileProvider
+    : IFeedbackDiagnosticFileProvider
 {
     /// <summary>
     /// Name of the file displayed in VS Feedback UI.
@@ -52,7 +53,8 @@ internal sealed class EditAndContinueFeedbackDiagnosticFileProvider : IFeedbackD
     [ImportingConstructor]
     [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
     public EditAndContinueFeedbackDiagnosticFileProvider(
-        [Import(AllowDefault = true)] Lazy<EditAndContinueLanguageService>? encService = null)
+        [Import(AllowDefault = true)] Lazy<EditAndContinueLanguageService>? encService = null
+    )
     {
         _encService = encService;
 
@@ -71,7 +73,10 @@ internal sealed class EditAndContinueFeedbackDiagnosticFileProvider : IFeedbackD
             return;
         }
 
-        _vsFeedbackSemaphoreFileWatcher = new FileSystemWatcher(vsFeedbackTempDir, VSFeedbackSemaphoreFileName);
+        _vsFeedbackSemaphoreFileWatcher = new FileSystemWatcher(
+            vsFeedbackTempDir,
+            VSFeedbackSemaphoreFileName
+        );
         _vsFeedbackSemaphoreFileWatcher.Created += (_, _) => OnFeedbackSemaphoreCreatedOrChanged();
         _vsFeedbackSemaphoreFileWatcher.Changed += (_, _) => OnFeedbackSemaphoreCreatedOrChanged();
         _vsFeedbackSemaphoreFileWatcher.Deleted += (_, _) => OnFeedbackSemaphoreDeleted();
@@ -92,16 +97,16 @@ internal sealed class EditAndContinueFeedbackDiagnosticFileProvider : IFeedbackD
     /// we might not be able to write the new zip file to disk and the previous content might be uploaded instead.
     /// See https://dev.azure.com/devdiv/DevDiv/_workitems/edit/1716980
     /// </summary>
-    private string GetLogDirectory()
-        => Path.Combine(Path.Combine(_tempDir, $"EnC_{_vsProcessId}", "Log"));
+    private string GetLogDirectory() =>
+        Path.Combine(Path.Combine(_tempDir, $"EnC_{_vsProcessId}", "Log"));
 
-    private string GetZipFilePath()
-        => Path.Combine(Path.Combine(_tempDir, $"EnC_{_vsProcessId}", ZipFileName));
+    private string GetZipFilePath() =>
+        Path.Combine(Path.Combine(_tempDir, $"EnC_{_vsProcessId}", ZipFileName));
 
-    public IReadOnlyCollection<string> GetFiles()
-        => _vsFeedbackSemaphoreFileWatcher is null
-           ? Array.Empty<string>()
-           : (IReadOnlyCollection<string>)(new[] { GetZipFilePath() });
+    public IReadOnlyCollection<string> GetFiles() =>
+        _vsFeedbackSemaphoreFileWatcher is null
+            ? Array.Empty<string>()
+            : (IReadOnlyCollection<string>)(new[] { GetZipFilePath() });
 
     private void OnFeedbackSemaphoreCreatedOrChanged()
     {
@@ -131,9 +136,7 @@ internal sealed class EditAndContinueFeedbackDiagnosticFileProvider : IFeedbackD
                 {
                     ZipFile.CreateFromDirectory(GetLogDirectory(), GetZipFilePath());
                 }
-                catch
-                {
-                }
+                catch { }
             });
         }
     }
@@ -150,7 +153,8 @@ internal sealed class EditAndContinueFeedbackDiagnosticFileProvider : IFeedbackD
 
             // Check the contents of the semaphore file to see if it's for this instance of VS
             var content = File.ReadAllText(semaphoreFilePath);
-            return JObject.Parse(content)["processIds"] is JContainer pidCollection && pidCollection.Values<int>().Contains(_vsProcessId);
+            return JObject.Parse(content)["processIds"] is JContainer pidCollection
+                && pidCollection.Values<int>().Contains(_vsProcessId);
         }
         catch
         {

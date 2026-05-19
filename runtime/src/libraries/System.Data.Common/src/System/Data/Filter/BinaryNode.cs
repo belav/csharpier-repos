@@ -17,7 +17,8 @@ namespace System.Data
         internal ExpressionNode _left;
         internal ExpressionNode _right;
 
-        internal BinaryNode(DataTable? table, int op, ExpressionNode left, ExpressionNode right) : base(table)
+        internal BinaryNode(DataTable? table, int op, ExpressionNode left, ExpressionNode right)
+            : base(table)
         {
             _op = op;
             _left = left;
@@ -59,6 +60,7 @@ namespace System.Data
         {
             return (_left.IsTableConstant() && _right.IsTableConstant());
         }
+
         internal override bool HasLocalAggregate()
         {
             return (_left.HasLocalAggregate() || _right.HasLocalAggregate());
@@ -109,7 +111,6 @@ namespace System.Data
                 _right = _right.Optimize();
             }
 
-
             if (IsConstant())
             {
                 object val = EvalConstant();
@@ -137,8 +138,11 @@ namespace System.Data
             throw ExprException.TypeMismatchInBinop(op, left, right);
         }
 
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2026:RequiresUnreferencedCode",
-            Justification = "Evaluating constant expression is safe.")]
+        [UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2026:RequiresUnreferencedCode",
+            Justification = "Evaluating constant expression is safe."
+        )]
         private object EvalConstant()
         {
             Debug.Assert(IsConstant());
@@ -146,7 +150,12 @@ namespace System.Data
         }
 
         [RequiresUnreferencedCode(DataSet.RequiresUnreferencedCodeMessage)]
-        private static object Eval(ExpressionNode expr, DataRow? row, DataRowVersion version, int[]? recordNos)
+        private static object Eval(
+            ExpressionNode expr,
+            DataRow? row,
+            DataRowVersion version,
+            int[]? recordNos
+        )
         {
             if (recordNos == null)
             {
@@ -163,7 +172,13 @@ namespace System.Data
             return BinaryCompare(vLeft, vRight, resultType, op, null);
         }
 
-        internal int BinaryCompare(object vLeft, object vRight, StorageType resultType, int op, CompareInfo? comparer)
+        internal int BinaryCompare(
+            object vLeft,
+            object vRight,
+            StorageType resultType,
+            int op,
+            CompareInfo? comparer
+        )
         {
             int result = 0;
             try
@@ -177,32 +192,59 @@ namespace System.Data
                         case StorageType.Int32:
                         case StorageType.Byte:
                         case StorageType.UInt16:
-                            return Convert.ToInt32(vLeft, FormatProvider).CompareTo(Convert.ToInt32(vRight, FormatProvider));
+                            return Convert
+                                .ToInt32(vLeft, FormatProvider)
+                                .CompareTo(Convert.ToInt32(vRight, FormatProvider));
                         case StorageType.Int64:
                         case StorageType.UInt32:
                         case StorageType.UInt64:
                         case StorageType.Decimal:
-                            return decimal.Compare(Convert.ToDecimal(vLeft, FormatProvider), Convert.ToDecimal(vRight, FormatProvider));
+                            return decimal.Compare(
+                                Convert.ToDecimal(vLeft, FormatProvider),
+                                Convert.ToDecimal(vRight, FormatProvider)
+                            );
                         case StorageType.Char:
-                            return Convert.ToInt32(vLeft, FormatProvider).CompareTo(Convert.ToInt32(vRight, FormatProvider));
+                            return Convert
+                                .ToInt32(vLeft, FormatProvider)
+                                .CompareTo(Convert.ToInt32(vRight, FormatProvider));
                         case StorageType.Double:
-                            return Convert.ToDouble(vLeft, FormatProvider).CompareTo(Convert.ToDouble(vRight, FormatProvider));
+                            return Convert
+                                .ToDouble(vLeft, FormatProvider)
+                                .CompareTo(Convert.ToDouble(vRight, FormatProvider));
                         case StorageType.Single:
-                            return Convert.ToSingle(vLeft, FormatProvider).CompareTo(Convert.ToSingle(vRight, FormatProvider));
+                            return Convert
+                                .ToSingle(vLeft, FormatProvider)
+                                .CompareTo(Convert.ToSingle(vRight, FormatProvider));
                         case StorageType.DateTime:
-                            return DateTime.Compare(Convert.ToDateTime(vLeft, FormatProvider), Convert.ToDateTime(vRight, FormatProvider));
+                            return DateTime.Compare(
+                                Convert.ToDateTime(vLeft, FormatProvider),
+                                Convert.ToDateTime(vRight, FormatProvider)
+                            );
                         case StorageType.DateTimeOffset:
                             // DTO can only be compared to DTO, other cases: cast Exception
-                            return DateTimeOffset.Compare((DateTimeOffset)vLeft, (DateTimeOffset)vRight);
+                            return DateTimeOffset.Compare(
+                                (DateTimeOffset)vLeft,
+                                (DateTimeOffset)vRight
+                            );
                         case StorageType.String:
-                            return table!.Compare(Convert.ToString(vLeft, FormatProvider)!, Convert.ToString(vRight, FormatProvider)!, comparer);
+                            return table!.Compare(
+                                Convert.ToString(vLeft, FormatProvider)!,
+                                Convert.ToString(vRight, FormatProvider)!,
+                                comparer
+                            );
                         case StorageType.Guid:
                             return ((Guid)vLeft).CompareTo((Guid)vRight);
                         case StorageType.Boolean:
                             if (op == Operators.EqualTo || op == Operators.NotEqual)
                             {
-                                return Convert.ToInt32(DataExpression.ToBoolean(vLeft), FormatProvider) -
-                                       Convert.ToInt32(DataExpression.ToBoolean(vRight), FormatProvider);
+                                return Convert.ToInt32(
+                                        DataExpression.ToBoolean(vLeft),
+                                        FormatProvider
+                                    )
+                                    - Convert.ToInt32(
+                                        DataExpression.ToBoolean(vRight),
+                                        FormatProvider
+                                    );
                             }
                             break;
                     }
@@ -219,18 +261,28 @@ namespace System.Data
                         case StorageType.SqlByte:
                         case StorageType.SqlInt16:
                         case StorageType.SqlInt32:
-                            return SqlConvert.ConvertToSqlInt32(vLeft).CompareTo(SqlConvert.ConvertToSqlInt32(vRight));
+                            return SqlConvert
+                                .ConvertToSqlInt32(vLeft)
+                                .CompareTo(SqlConvert.ConvertToSqlInt32(vRight));
                         case StorageType.Int64:
                         case StorageType.UInt32:
                         case StorageType.SqlInt64:
-                            return SqlConvert.ConvertToSqlInt64(vLeft).CompareTo(SqlConvert.ConvertToSqlInt64(vRight));
+                            return SqlConvert
+                                .ConvertToSqlInt64(vLeft)
+                                .CompareTo(SqlConvert.ConvertToSqlInt64(vRight));
                         case StorageType.UInt64:
                         case StorageType.SqlDecimal:
-                            return SqlConvert.ConvertToSqlDecimal(vLeft).CompareTo(SqlConvert.ConvertToSqlDecimal(vRight));
+                            return SqlConvert
+                                .ConvertToSqlDecimal(vLeft)
+                                .CompareTo(SqlConvert.ConvertToSqlDecimal(vRight));
                         case StorageType.SqlDouble:
-                            return SqlConvert.ConvertToSqlDouble(vLeft).CompareTo(SqlConvert.ConvertToSqlDouble(vRight));
+                            return SqlConvert
+                                .ConvertToSqlDouble(vLeft)
+                                .CompareTo(SqlConvert.ConvertToSqlDouble(vRight));
                         case StorageType.SqlSingle:
-                            return SqlConvert.ConvertToSqlSingle(vLeft).CompareTo(SqlConvert.ConvertToSqlSingle(vRight));
+                            return SqlConvert
+                                .ConvertToSqlSingle(vLeft)
+                                .CompareTo(SqlConvert.ConvertToSqlSingle(vRight));
                         case StorageType.SqlString:
                             return table!.Compare(vLeft.ToString()!, vRight.ToString()!);
                         case StorageType.SqlGuid:
@@ -239,19 +291,41 @@ namespace System.Data
                             if (op == Operators.EqualTo || op == Operators.NotEqual)
                             {
                                 result = 1;
-                                if (((vLeft.GetType() == typeof(SqlBoolean)) && ((vRight.GetType() == typeof(SqlBoolean)) || (vRight.GetType() == typeof(bool)))) ||
-                                    ((vRight.GetType() == typeof(SqlBoolean)) && ((vLeft.GetType() == typeof(SqlBoolean)) || (vLeft.GetType() == typeof(bool)))))
+                                if (
+                                    (
+                                        (vLeft.GetType() == typeof(SqlBoolean))
+                                        && (
+                                            (vRight.GetType() == typeof(SqlBoolean))
+                                            || (vRight.GetType() == typeof(bool))
+                                        )
+                                    )
+                                    || (
+                                        (vRight.GetType() == typeof(SqlBoolean))
+                                        && (
+                                            (vLeft.GetType() == typeof(SqlBoolean))
+                                            || (vLeft.GetType() == typeof(bool))
+                                        )
+                                    )
+                                )
                                 {
-                                    return SqlConvert.ConvertToSqlBoolean(vLeft).CompareTo(SqlConvert.ConvertToSqlBoolean(vRight));
+                                    return SqlConvert
+                                        .ConvertToSqlBoolean(vLeft)
+                                        .CompareTo(SqlConvert.ConvertToSqlBoolean(vRight));
                                 }
                             }
                             break;
                         case StorageType.SqlBinary:
-                            return SqlConvert.ConvertToSqlBinary(vLeft).CompareTo(SqlConvert.ConvertToSqlBinary(vRight));
+                            return SqlConvert
+                                .ConvertToSqlBinary(vLeft)
+                                .CompareTo(SqlConvert.ConvertToSqlBinary(vRight));
                         case StorageType.SqlDateTime:
-                            return SqlConvert.ConvertToSqlDateTime(vLeft).CompareTo(SqlConvert.ConvertToSqlDateTime(vRight));
+                            return SqlConvert
+                                .ConvertToSqlDateTime(vLeft)
+                                .CompareTo(SqlConvert.ConvertToSqlDateTime(vRight));
                         case StorageType.SqlMoney:
-                            return SqlConvert.ConvertToSqlMoney(vLeft).CompareTo(SqlConvert.ConvertToSqlMoney(vRight));
+                            return SqlConvert
+                                .ConvertToSqlMoney(vLeft)
+                                .CompareTo(SqlConvert.ConvertToSqlMoney(vRight));
                     }
                 }
             }
@@ -280,7 +354,14 @@ namespace System.Data
         }
 
         [RequiresUnreferencedCode(DataSet.RequiresUnreferencedCodeMessage)]
-        private object EvalBinaryOp(int op, ExpressionNode left, ExpressionNode right, DataRow? row, DataRowVersion version, int[]? recordNos)
+        private object EvalBinaryOp(
+            int op,
+            ExpressionNode left,
+            ExpressionNode right,
+            DataRow? row,
+            DataRowVersion version,
+            int[]? recordNos
+        )
         {
             object vLeft;
             object vRight;
@@ -294,7 +375,13 @@ namespace System.Data
             CONSIDER : in the shortcut case do we want to type-check the other operand?
             */
 
-            if (op != Operators.Or && op != Operators.And && op != Operators.In && op != Operators.Is && op != Operators.IsNot)
+            if (
+                op != Operators.Or
+                && op != Operators.And
+                && op != Operators.In
+                && op != Operators.Is
+                && op != Operators.IsNot
+            )
             {
                 vLeft = BinaryNode.Eval(left, row, version, recordNos);
                 vRight = BinaryNode.Eval(right, row, version, recordNos);
@@ -327,7 +414,13 @@ namespace System.Data
                 }
                 else
                 {
-                    resultType = ResultType(leftStorage, rightStorage, (left is ConstNode), (right is ConstNode), op);
+                    resultType = ResultType(
+                        leftStorage,
+                        rightStorage,
+                        (left is ConstNode),
+                        (right is ConstNode),
+                        op
+                    );
                 }
 
                 if (StorageType.Empty == resultType)
@@ -352,157 +445,249 @@ namespace System.Data
                         switch (resultType)
                         {
                             case StorageType.Byte:
-                                {
-                                    value = Convert.ToByte((Convert.ToByte(vLeft, FormatProvider) + Convert.ToByte(vRight, FormatProvider)), FormatProvider);
-                                    break;
-                                }
+                            {
+                                value = Convert.ToByte(
+                                    (
+                                        Convert.ToByte(vLeft, FormatProvider)
+                                        + Convert.ToByte(vRight, FormatProvider)
+                                    ),
+                                    FormatProvider
+                                );
+                                break;
+                            }
                             case StorageType.SByte:
-                                {
-                                    value = Convert.ToSByte((Convert.ToSByte(vLeft, FormatProvider) + Convert.ToSByte(vRight, FormatProvider)), FormatProvider);
-                                    break;
-                                }
+                            {
+                                value = Convert.ToSByte(
+                                    (
+                                        Convert.ToSByte(vLeft, FormatProvider)
+                                        + Convert.ToSByte(vRight, FormatProvider)
+                                    ),
+                                    FormatProvider
+                                );
+                                break;
+                            }
                             case StorageType.Int16:
-                                {
-                                    value = Convert.ToInt16((Convert.ToInt16(vLeft, FormatProvider) + Convert.ToInt16(vRight, FormatProvider)), FormatProvider);
-                                    break;
-                                }
+                            {
+                                value = Convert.ToInt16(
+                                    (
+                                        Convert.ToInt16(vLeft, FormatProvider)
+                                        + Convert.ToInt16(vRight, FormatProvider)
+                                    ),
+                                    FormatProvider
+                                );
+                                break;
+                            }
                             case StorageType.UInt16:
-                                {
-                                    value = Convert.ToUInt16((Convert.ToUInt16(vLeft, FormatProvider) + Convert.ToUInt16(vRight, FormatProvider)), FormatProvider);
-                                    break;
-                                }
+                            {
+                                value = Convert.ToUInt16(
+                                    (
+                                        Convert.ToUInt16(vLeft, FormatProvider)
+                                        + Convert.ToUInt16(vRight, FormatProvider)
+                                    ),
+                                    FormatProvider
+                                );
+                                break;
+                            }
                             case StorageType.Int32:
+                            {
+                                checked
                                 {
-                                    checked { value = Convert.ToInt32(vLeft, FormatProvider) + Convert.ToInt32(vRight, FormatProvider); }
-                                    break;
+                                    value =
+                                        Convert.ToInt32(vLeft, FormatProvider)
+                                        + Convert.ToInt32(vRight, FormatProvider);
                                 }
+                                break;
+                            }
                             case StorageType.UInt32:
+                            {
+                                checked
                                 {
-                                    checked { value = Convert.ToUInt32(vLeft, FormatProvider) + Convert.ToUInt32(vRight, FormatProvider); }
-                                    break;
+                                    value =
+                                        Convert.ToUInt32(vLeft, FormatProvider)
+                                        + Convert.ToUInt32(vRight, FormatProvider);
                                 }
+                                break;
+                            }
                             case StorageType.UInt64:
+                            {
+                                checked
                                 {
-                                    checked { value = Convert.ToUInt64(vLeft, FormatProvider) + Convert.ToUInt64(vRight, FormatProvider); }
-                                    break;
+                                    value =
+                                        Convert.ToUInt64(vLeft, FormatProvider)
+                                        + Convert.ToUInt64(vRight, FormatProvider);
                                 }
+                                break;
+                            }
                             case StorageType.Int64:
+                            {
+                                checked
                                 {
-                                    checked { value = Convert.ToInt64(vLeft, FormatProvider) + Convert.ToInt64(vRight, FormatProvider); }
-                                    break;
+                                    value =
+                                        Convert.ToInt64(vLeft, FormatProvider)
+                                        + Convert.ToInt64(vRight, FormatProvider);
                                 }
+                                break;
+                            }
                             case StorageType.Decimal:
+                            {
+                                checked
                                 {
-                                    checked { value = Convert.ToDecimal(vLeft, FormatProvider) + Convert.ToDecimal(vRight, FormatProvider); }
-                                    break;
+                                    value =
+                                        Convert.ToDecimal(vLeft, FormatProvider)
+                                        + Convert.ToDecimal(vRight, FormatProvider);
                                 }
+                                break;
+                            }
                             case StorageType.Single:
+                            {
+                                checked
                                 {
-                                    checked { value = Convert.ToSingle(vLeft, FormatProvider) + Convert.ToSingle(vRight, FormatProvider); }
-                                    break;
+                                    value =
+                                        Convert.ToSingle(vLeft, FormatProvider)
+                                        + Convert.ToSingle(vRight, FormatProvider);
                                 }
+                                break;
+                            }
                             case StorageType.Double:
+                            {
+                                checked
                                 {
-                                    checked { value = Convert.ToDouble(vLeft, FormatProvider) + Convert.ToDouble(vRight, FormatProvider); }
-                                    break;
+                                    value =
+                                        Convert.ToDouble(vLeft, FormatProvider)
+                                        + Convert.ToDouble(vRight, FormatProvider);
                                 }
+                                break;
+                            }
                             case StorageType.String:
                             case StorageType.Char:
-                                {
-                                    value = Convert.ToString(vLeft, FormatProvider) + Convert.ToString(vRight, FormatProvider);
-                                    break;
-                                }
+                            {
+                                value =
+                                    Convert.ToString(vLeft, FormatProvider)
+                                    + Convert.ToString(vRight, FormatProvider);
+                                break;
+                            }
                             case StorageType.DateTime:
-                                {
-                                    // one of the operands should be a DateTime, and an other a TimeSpan
+                            {
+                                // one of the operands should be a DateTime, and an other a TimeSpan
 
-                                    if (vLeft is TimeSpan && vRight is DateTime)
-                                    {
-                                        value = (DateTime)vRight + (TimeSpan)vLeft;
-                                    }
-                                    else if (vLeft is DateTime && vRight is TimeSpan)
-                                    {
-                                        value = (DateTime)vLeft + (TimeSpan)vRight;
-                                    }
-                                    else
-                                    {
-                                        typeMismatch = true;
-                                    }
-                                    break;
-                                }
-                            case StorageType.TimeSpan:
+                                if (vLeft is TimeSpan && vRight is DateTime)
                                 {
-                                    value = (TimeSpan)vLeft + (TimeSpan)vRight;
-                                    break;
+                                    value = (DateTime)vRight + (TimeSpan)vLeft;
                                 }
-                            case StorageType.SqlInt16:
+                                else if (vLeft is DateTime && vRight is TimeSpan)
                                 {
-                                    value = (SqlConvert.ConvertToSqlInt16(vLeft) + SqlConvert.ConvertToSqlInt16(vRight));
-                                    break;
+                                    value = (DateTime)vLeft + (TimeSpan)vRight;
                                 }
-                            case StorageType.SqlInt32:
-                                {
-                                    value = (SqlConvert.ConvertToSqlInt32(vLeft) + SqlConvert.ConvertToSqlInt32(vRight));
-                                    break;
-                                }
-                            case StorageType.SqlInt64:
-                                {
-                                    value = (SqlConvert.ConvertToSqlInt64(vLeft) + SqlConvert.ConvertToSqlInt64(vRight));
-                                    break;
-                                }
-                            case StorageType.SqlDouble:
-                                {
-                                    value = (SqlConvert.ConvertToSqlDouble(vLeft) + SqlConvert.ConvertToSqlDouble(vRight));
-                                    break;
-                                }
-                            case StorageType.SqlSingle:
-                                {
-                                    value = (SqlConvert.ConvertToSqlSingle(vLeft) + SqlConvert.ConvertToSqlSingle(vRight));
-                                    break;
-                                }
-                            case StorageType.SqlDecimal:
-                                {
-                                    value = (SqlConvert.ConvertToSqlDecimal(vLeft) + SqlConvert.ConvertToSqlDecimal(vRight));
-                                    break;
-                                }
-                            case StorageType.SqlMoney:
-                                {
-                                    value = (SqlConvert.ConvertToSqlMoney(vLeft) + SqlConvert.ConvertToSqlMoney(vRight));
-                                    break;
-                                }
-                            case StorageType.SqlByte:
-                                {
-                                    value = (SqlConvert.ConvertToSqlByte(vLeft) + SqlConvert.ConvertToSqlByte(vRight));
-                                    break;
-                                }
-                            case StorageType.SqlString:
-                                {
-                                    value = (SqlConvert.ConvertToSqlString(vLeft) + SqlConvert.ConvertToSqlString(vRight));
-                                    break;
-                                }
-                            case StorageType.SqlDateTime:
-                                {
-                                    if (vLeft is TimeSpan && vRight is SqlDateTime)
-                                    {
-                                        SqlDateTime rValue = SqlConvert.ConvertToSqlDateTime(vRight);
-                                        value = SqlConvert.ConvertToSqlDateTime((DateTime)rValue.Value + (TimeSpan)vLeft);
-                                    }
-                                    else if (vLeft is SqlDateTime && vRight is TimeSpan)
-                                    {
-                                        SqlDateTime lValue = SqlConvert.ConvertToSqlDateTime(vLeft);
-                                        value = SqlConvert.ConvertToSqlDateTime((DateTime)lValue.Value + (TimeSpan)vRight);
-                                    }
-                                    else
-                                    {
-                                        typeMismatch = true;
-                                    }
-                                    break;
-                                }
-                            default:
+                                else
                                 {
                                     typeMismatch = true;
-                                    break;
                                 }
+                                break;
+                            }
+                            case StorageType.TimeSpan:
+                            {
+                                value = (TimeSpan)vLeft + (TimeSpan)vRight;
+                                break;
+                            }
+                            case StorageType.SqlInt16:
+                            {
+                                value = (
+                                    SqlConvert.ConvertToSqlInt16(vLeft)
+                                    + SqlConvert.ConvertToSqlInt16(vRight)
+                                );
+                                break;
+                            }
+                            case StorageType.SqlInt32:
+                            {
+                                value = (
+                                    SqlConvert.ConvertToSqlInt32(vLeft)
+                                    + SqlConvert.ConvertToSqlInt32(vRight)
+                                );
+                                break;
+                            }
+                            case StorageType.SqlInt64:
+                            {
+                                value = (
+                                    SqlConvert.ConvertToSqlInt64(vLeft)
+                                    + SqlConvert.ConvertToSqlInt64(vRight)
+                                );
+                                break;
+                            }
+                            case StorageType.SqlDouble:
+                            {
+                                value = (
+                                    SqlConvert.ConvertToSqlDouble(vLeft)
+                                    + SqlConvert.ConvertToSqlDouble(vRight)
+                                );
+                                break;
+                            }
+                            case StorageType.SqlSingle:
+                            {
+                                value = (
+                                    SqlConvert.ConvertToSqlSingle(vLeft)
+                                    + SqlConvert.ConvertToSqlSingle(vRight)
+                                );
+                                break;
+                            }
+                            case StorageType.SqlDecimal:
+                            {
+                                value = (
+                                    SqlConvert.ConvertToSqlDecimal(vLeft)
+                                    + SqlConvert.ConvertToSqlDecimal(vRight)
+                                );
+                                break;
+                            }
+                            case StorageType.SqlMoney:
+                            {
+                                value = (
+                                    SqlConvert.ConvertToSqlMoney(vLeft)
+                                    + SqlConvert.ConvertToSqlMoney(vRight)
+                                );
+                                break;
+                            }
+                            case StorageType.SqlByte:
+                            {
+                                value = (
+                                    SqlConvert.ConvertToSqlByte(vLeft)
+                                    + SqlConvert.ConvertToSqlByte(vRight)
+                                );
+                                break;
+                            }
+                            case StorageType.SqlString:
+                            {
+                                value = (
+                                    SqlConvert.ConvertToSqlString(vLeft)
+                                    + SqlConvert.ConvertToSqlString(vRight)
+                                );
+                                break;
+                            }
+                            case StorageType.SqlDateTime:
+                            {
+                                if (vLeft is TimeSpan && vRight is SqlDateTime)
+                                {
+                                    SqlDateTime rValue = SqlConvert.ConvertToSqlDateTime(vRight);
+                                    value = SqlConvert.ConvertToSqlDateTime(
+                                        (DateTime)rValue.Value + (TimeSpan)vLeft
+                                    );
+                                }
+                                else if (vLeft is SqlDateTime && vRight is TimeSpan)
+                                {
+                                    SqlDateTime lValue = SqlConvert.ConvertToSqlDateTime(vLeft);
+                                    value = SqlConvert.ConvertToSqlDateTime(
+                                        (DateTime)lValue.Value + (TimeSpan)vRight
+                                    );
+                                }
+                                else
+                                {
+                                    typeMismatch = true;
+                                }
+                                break;
+                            }
+                            default:
+                            {
+                                typeMismatch = true;
+                                break;
+                            }
                         }
                         break; // Operators.Plus
 
@@ -510,138 +695,225 @@ namespace System.Data
                         switch (resultType)
                         {
                             case StorageType.Byte:
-                                {
-                                    value = Convert.ToByte((Convert.ToByte(vLeft, FormatProvider) - Convert.ToByte(vRight, FormatProvider)), FormatProvider);
-                                    break;
-                                }
+                            {
+                                value = Convert.ToByte(
+                                    (
+                                        Convert.ToByte(vLeft, FormatProvider)
+                                        - Convert.ToByte(vRight, FormatProvider)
+                                    ),
+                                    FormatProvider
+                                );
+                                break;
+                            }
                             case StorageType.SqlByte:
-                                {
-                                    value = (SqlConvert.ConvertToSqlByte(vLeft) - SqlConvert.ConvertToSqlByte(vRight));
-                                    break;
-                                }
+                            {
+                                value = (
+                                    SqlConvert.ConvertToSqlByte(vLeft)
+                                    - SqlConvert.ConvertToSqlByte(vRight)
+                                );
+                                break;
+                            }
                             case StorageType.SByte:
-                                {
-                                    value = Convert.ToSByte((Convert.ToSByte(vLeft, FormatProvider) - Convert.ToSByte(vRight, FormatProvider)), FormatProvider);
-                                    break;
-                                }
+                            {
+                                value = Convert.ToSByte(
+                                    (
+                                        Convert.ToSByte(vLeft, FormatProvider)
+                                        - Convert.ToSByte(vRight, FormatProvider)
+                                    ),
+                                    FormatProvider
+                                );
+                                break;
+                            }
                             case StorageType.Int16:
-                                {
-                                    value = Convert.ToInt16((Convert.ToInt16(vLeft, FormatProvider) - Convert.ToInt16(vRight, FormatProvider)), FormatProvider);
-                                    break;
-                                }
+                            {
+                                value = Convert.ToInt16(
+                                    (
+                                        Convert.ToInt16(vLeft, FormatProvider)
+                                        - Convert.ToInt16(vRight, FormatProvider)
+                                    ),
+                                    FormatProvider
+                                );
+                                break;
+                            }
                             case StorageType.SqlInt16:
-                                {
-                                    value = (SqlConvert.ConvertToSqlInt16(vLeft) - SqlConvert.ConvertToSqlInt16(vRight));
-                                    break;
-                                }
+                            {
+                                value = (
+                                    SqlConvert.ConvertToSqlInt16(vLeft)
+                                    - SqlConvert.ConvertToSqlInt16(vRight)
+                                );
+                                break;
+                            }
                             case StorageType.UInt16:
-                                {
-                                    value = Convert.ToUInt16((Convert.ToUInt16(vLeft, FormatProvider) - Convert.ToUInt16(vRight, FormatProvider)), FormatProvider);
-                                    break;
-                                }
+                            {
+                                value = Convert.ToUInt16(
+                                    (
+                                        Convert.ToUInt16(vLeft, FormatProvider)
+                                        - Convert.ToUInt16(vRight, FormatProvider)
+                                    ),
+                                    FormatProvider
+                                );
+                                break;
+                            }
                             case StorageType.Int32:
+                            {
+                                checked
                                 {
-                                    checked { value = Convert.ToInt32(vLeft, FormatProvider) - Convert.ToInt32(vRight, FormatProvider); }
-                                    break;
+                                    value =
+                                        Convert.ToInt32(vLeft, FormatProvider)
+                                        - Convert.ToInt32(vRight, FormatProvider);
                                 }
+                                break;
+                            }
                             case StorageType.SqlInt32:
-                                {
-                                    value = (SqlConvert.ConvertToSqlInt32(vLeft) - SqlConvert.ConvertToSqlInt32(vRight));
-                                    break;
-                                }
+                            {
+                                value = (
+                                    SqlConvert.ConvertToSqlInt32(vLeft)
+                                    - SqlConvert.ConvertToSqlInt32(vRight)
+                                );
+                                break;
+                            }
                             case StorageType.UInt32:
+                            {
+                                checked
                                 {
-                                    checked { value = Convert.ToUInt32(vLeft, FormatProvider) - Convert.ToUInt32(vRight, FormatProvider); }
-                                    break;
+                                    value =
+                                        Convert.ToUInt32(vLeft, FormatProvider)
+                                        - Convert.ToUInt32(vRight, FormatProvider);
                                 }
+                                break;
+                            }
                             case StorageType.Int64:
+                            {
+                                checked
                                 {
-                                    checked { value = Convert.ToInt64(vLeft, FormatProvider) - Convert.ToInt64(vRight, FormatProvider); }
-                                    break;
+                                    value =
+                                        Convert.ToInt64(vLeft, FormatProvider)
+                                        - Convert.ToInt64(vRight, FormatProvider);
                                 }
+                                break;
+                            }
                             case StorageType.SqlInt64:
-                                {
-                                    value = (SqlConvert.ConvertToSqlInt64(vLeft) - SqlConvert.ConvertToSqlInt64(vRight));
-                                    break;
-                                }
+                            {
+                                value = (
+                                    SqlConvert.ConvertToSqlInt64(vLeft)
+                                    - SqlConvert.ConvertToSqlInt64(vRight)
+                                );
+                                break;
+                            }
                             case StorageType.UInt64:
+                            {
+                                checked
                                 {
-                                    checked { value = Convert.ToUInt64(vLeft, FormatProvider) - Convert.ToUInt64(vRight, FormatProvider); }
-                                    break;
+                                    value =
+                                        Convert.ToUInt64(vLeft, FormatProvider)
+                                        - Convert.ToUInt64(vRight, FormatProvider);
                                 }
+                                break;
+                            }
                             case StorageType.Decimal:
+                            {
+                                checked
                                 {
-                                    checked { value = Convert.ToDecimal(vLeft, FormatProvider) - Convert.ToDecimal(vRight, FormatProvider); }
-                                    break;
+                                    value =
+                                        Convert.ToDecimal(vLeft, FormatProvider)
+                                        - Convert.ToDecimal(vRight, FormatProvider);
                                 }
+                                break;
+                            }
                             case StorageType.SqlDecimal:
-                                {
-                                    value = (SqlConvert.ConvertToSqlDecimal(vLeft) - SqlConvert.ConvertToSqlDecimal(vRight));
-                                    break;
-                                }
+                            {
+                                value = (
+                                    SqlConvert.ConvertToSqlDecimal(vLeft)
+                                    - SqlConvert.ConvertToSqlDecimal(vRight)
+                                );
+                                break;
+                            }
                             case StorageType.Single:
+                            {
+                                checked
                                 {
-                                    checked { value = Convert.ToSingle(vLeft, FormatProvider) - Convert.ToSingle(vRight, FormatProvider); }
-                                    break;
+                                    value =
+                                        Convert.ToSingle(vLeft, FormatProvider)
+                                        - Convert.ToSingle(vRight, FormatProvider);
                                 }
+                                break;
+                            }
                             case StorageType.SqlSingle:
-                                {
-                                    value = (SqlConvert.ConvertToSqlSingle(vLeft) - SqlConvert.ConvertToSqlSingle(vRight));
-                                    break;
-                                }
+                            {
+                                value = (
+                                    SqlConvert.ConvertToSqlSingle(vLeft)
+                                    - SqlConvert.ConvertToSqlSingle(vRight)
+                                );
+                                break;
+                            }
                             case StorageType.Double:
+                            {
+                                checked
                                 {
-                                    checked { value = Convert.ToDouble(vLeft, FormatProvider) - Convert.ToDouble(vRight, FormatProvider); }
-                                    break;
+                                    value =
+                                        Convert.ToDouble(vLeft, FormatProvider)
+                                        - Convert.ToDouble(vRight, FormatProvider);
                                 }
+                                break;
+                            }
                             case StorageType.SqlDouble:
-                                {
-                                    value = (SqlConvert.ConvertToSqlDouble(vLeft) - SqlConvert.ConvertToSqlDouble(vRight));
-                                    break;
-                                }
+                            {
+                                value = (
+                                    SqlConvert.ConvertToSqlDouble(vLeft)
+                                    - SqlConvert.ConvertToSqlDouble(vRight)
+                                );
+                                break;
+                            }
                             case StorageType.SqlMoney:
-                                {
-                                    value = (SqlConvert.ConvertToSqlMoney(vLeft) - SqlConvert.ConvertToSqlMoney(vRight));
-                                    break;
-                                }
+                            {
+                                value = (
+                                    SqlConvert.ConvertToSqlMoney(vLeft)
+                                    - SqlConvert.ConvertToSqlMoney(vRight)
+                                );
+                                break;
+                            }
                             case StorageType.DateTime:
-                                {
-                                    value = (DateTime)vLeft - (TimeSpan)vRight;
-                                    break;
-                                }
+                            {
+                                value = (DateTime)vLeft - (TimeSpan)vRight;
+                                break;
+                            }
                             case StorageType.TimeSpan:
+                            {
+                                if (vLeft is DateTime)
                                 {
-                                    if (vLeft is DateTime)
-                                    {
-                                        value = (DateTime)vLeft - (DateTime)vRight;
-                                    }
-                                    else
-                                        value = (TimeSpan)vLeft - (TimeSpan)vRight;
-                                    break;
+                                    value = (DateTime)vLeft - (DateTime)vRight;
                                 }
+                                else
+                                    value = (TimeSpan)vLeft - (TimeSpan)vRight;
+                                break;
+                            }
                             case StorageType.SqlDateTime:
+                            {
+                                if (vLeft is TimeSpan && vRight is SqlDateTime)
                                 {
-                                    if (vLeft is TimeSpan && vRight is SqlDateTime)
-                                    {
-                                        SqlDateTime rValue = SqlConvert.ConvertToSqlDateTime(vRight);
-                                        value = SqlConvert.ConvertToSqlDateTime((DateTime)rValue.Value - (TimeSpan)vLeft);
-                                    }
-                                    else if (vLeft is SqlDateTime && vRight is TimeSpan)
-                                    {
-                                        SqlDateTime lValue = SqlConvert.ConvertToSqlDateTime(vLeft);
-                                        value = SqlConvert.ConvertToSqlDateTime((DateTime)lValue.Value - (TimeSpan)vRight);
-                                    }
-                                    else
-                                    {
-                                        typeMismatch = true;
-                                    }
-                                    break;
+                                    SqlDateTime rValue = SqlConvert.ConvertToSqlDateTime(vRight);
+                                    value = SqlConvert.ConvertToSqlDateTime(
+                                        (DateTime)rValue.Value - (TimeSpan)vLeft
+                                    );
                                 }
-                            default:
+                                else if (vLeft is SqlDateTime && vRight is TimeSpan)
+                                {
+                                    SqlDateTime lValue = SqlConvert.ConvertToSqlDateTime(vLeft);
+                                    value = SqlConvert.ConvertToSqlDateTime(
+                                        (DateTime)lValue.Value - (TimeSpan)vRight
+                                    );
+                                }
+                                else
                                 {
                                     typeMismatch = true;
-                                    break;
                                 }
+                                break;
+                            }
+                            default:
+                            {
+                                typeMismatch = true;
+                                break;
+                            }
                         }
                         break; // Operators.Minus
 
@@ -649,105 +921,188 @@ namespace System.Data
                         switch (resultType)
                         {
                             case StorageType.Byte:
-                                {
-                                    value = Convert.ToByte((Convert.ToByte(vLeft, FormatProvider) * Convert.ToByte(vRight, FormatProvider)), FormatProvider);
-                                    break;
-                                }
+                            {
+                                value = Convert.ToByte(
+                                    (
+                                        Convert.ToByte(vLeft, FormatProvider)
+                                        * Convert.ToByte(vRight, FormatProvider)
+                                    ),
+                                    FormatProvider
+                                );
+                                break;
+                            }
                             case StorageType.SqlByte:
-                                {
-                                    value = (SqlConvert.ConvertToSqlByte(vLeft) * SqlConvert.ConvertToSqlByte(vRight));
-                                    break;
-                                }
+                            {
+                                value = (
+                                    SqlConvert.ConvertToSqlByte(vLeft)
+                                    * SqlConvert.ConvertToSqlByte(vRight)
+                                );
+                                break;
+                            }
                             case StorageType.SByte:
-                                {
-                                    value = Convert.ToSByte((Convert.ToSByte(vLeft, FormatProvider) * Convert.ToSByte(vRight, FormatProvider)), FormatProvider);
-                                    break;
-                                }
+                            {
+                                value = Convert.ToSByte(
+                                    (
+                                        Convert.ToSByte(vLeft, FormatProvider)
+                                        * Convert.ToSByte(vRight, FormatProvider)
+                                    ),
+                                    FormatProvider
+                                );
+                                break;
+                            }
                             case StorageType.Int16:
-                                {
-                                    value = Convert.ToInt16((Convert.ToInt16(vLeft, FormatProvider) * Convert.ToInt16(vRight, FormatProvider)), FormatProvider);
-                                    break;
-                                }
+                            {
+                                value = Convert.ToInt16(
+                                    (
+                                        Convert.ToInt16(vLeft, FormatProvider)
+                                        * Convert.ToInt16(vRight, FormatProvider)
+                                    ),
+                                    FormatProvider
+                                );
+                                break;
+                            }
                             case StorageType.SqlInt16:
-                                {
-                                    value = (SqlConvert.ConvertToSqlInt16(vLeft) * SqlConvert.ConvertToSqlInt16(vRight));
-                                    break;
-                                }
+                            {
+                                value = (
+                                    SqlConvert.ConvertToSqlInt16(vLeft)
+                                    * SqlConvert.ConvertToSqlInt16(vRight)
+                                );
+                                break;
+                            }
                             case StorageType.UInt16:
-                                {
-                                    value = Convert.ToUInt16((Convert.ToUInt16(vLeft, FormatProvider) * Convert.ToUInt16(vRight, FormatProvider)), FormatProvider);
-                                    break;
-                                }
+                            {
+                                value = Convert.ToUInt16(
+                                    (
+                                        Convert.ToUInt16(vLeft, FormatProvider)
+                                        * Convert.ToUInt16(vRight, FormatProvider)
+                                    ),
+                                    FormatProvider
+                                );
+                                break;
+                            }
                             case StorageType.Int32:
+                            {
+                                checked
                                 {
-                                    checked { value = Convert.ToInt32(vLeft, FormatProvider) * Convert.ToInt32(vRight, FormatProvider); }
-                                    break;
+                                    value =
+                                        Convert.ToInt32(vLeft, FormatProvider)
+                                        * Convert.ToInt32(vRight, FormatProvider);
                                 }
+                                break;
+                            }
                             case StorageType.SqlInt32:
-                                {
-                                    value = (SqlConvert.ConvertToSqlInt32(vLeft) * SqlConvert.ConvertToSqlInt32(vRight));
-                                    break;
-                                }
+                            {
+                                value = (
+                                    SqlConvert.ConvertToSqlInt32(vLeft)
+                                    * SqlConvert.ConvertToSqlInt32(vRight)
+                                );
+                                break;
+                            }
                             case StorageType.UInt32:
+                            {
+                                checked
                                 {
-                                    checked { value = Convert.ToUInt32(vLeft, FormatProvider) * Convert.ToUInt32(vRight, FormatProvider); }
-                                    break;
+                                    value =
+                                        Convert.ToUInt32(vLeft, FormatProvider)
+                                        * Convert.ToUInt32(vRight, FormatProvider);
                                 }
+                                break;
+                            }
                             case StorageType.Int64:
+                            {
+                                checked
                                 {
-                                    checked { value = Convert.ToInt64(vLeft, FormatProvider) * Convert.ToInt64(vRight, FormatProvider); }
-                                    break;
+                                    value =
+                                        Convert.ToInt64(vLeft, FormatProvider)
+                                        * Convert.ToInt64(vRight, FormatProvider);
                                 }
+                                break;
+                            }
                             case StorageType.SqlInt64:
-                                {
-                                    value = (SqlConvert.ConvertToSqlInt64(vLeft) * SqlConvert.ConvertToSqlInt64(vRight));
-                                    break;
-                                }
+                            {
+                                value = (
+                                    SqlConvert.ConvertToSqlInt64(vLeft)
+                                    * SqlConvert.ConvertToSqlInt64(vRight)
+                                );
+                                break;
+                            }
                             case StorageType.UInt64:
+                            {
+                                checked
                                 {
-                                    checked { value = Convert.ToUInt64(vLeft, FormatProvider) * Convert.ToUInt64(vRight, FormatProvider); }
-                                    break;
+                                    value =
+                                        Convert.ToUInt64(vLeft, FormatProvider)
+                                        * Convert.ToUInt64(vRight, FormatProvider);
                                 }
+                                break;
+                            }
                             case StorageType.Decimal:
+                            {
+                                checked
                                 {
-                                    checked { value = Convert.ToDecimal(vLeft, FormatProvider) * Convert.ToDecimal(vRight, FormatProvider); }
-                                    break;
+                                    value =
+                                        Convert.ToDecimal(vLeft, FormatProvider)
+                                        * Convert.ToDecimal(vRight, FormatProvider);
                                 }
+                                break;
+                            }
                             case StorageType.SqlDecimal:
-                                {
-                                    value = (SqlConvert.ConvertToSqlDecimal(vLeft) * SqlConvert.ConvertToSqlDecimal(vRight));
-                                    break;
-                                }
+                            {
+                                value = (
+                                    SqlConvert.ConvertToSqlDecimal(vLeft)
+                                    * SqlConvert.ConvertToSqlDecimal(vRight)
+                                );
+                                break;
+                            }
                             case StorageType.Single:
+                            {
+                                checked
                                 {
-                                    checked { value = Convert.ToSingle(vLeft, FormatProvider) * Convert.ToSingle(vRight, FormatProvider); }
-                                    break;
+                                    value =
+                                        Convert.ToSingle(vLeft, FormatProvider)
+                                        * Convert.ToSingle(vRight, FormatProvider);
                                 }
+                                break;
+                            }
                             case StorageType.SqlSingle:
-                                {
-                                    value = (SqlConvert.ConvertToSqlSingle(vLeft) * SqlConvert.ConvertToSqlSingle(vRight));
-                                    break;
-                                }
+                            {
+                                value = (
+                                    SqlConvert.ConvertToSqlSingle(vLeft)
+                                    * SqlConvert.ConvertToSqlSingle(vRight)
+                                );
+                                break;
+                            }
                             case StorageType.SqlMoney:
-                                {
-                                    value = (SqlConvert.ConvertToSqlMoney(vLeft) * SqlConvert.ConvertToSqlMoney(vRight));
-                                    break;
-                                }
+                            {
+                                value = (
+                                    SqlConvert.ConvertToSqlMoney(vLeft)
+                                    * SqlConvert.ConvertToSqlMoney(vRight)
+                                );
+                                break;
+                            }
                             case StorageType.Double:
+                            {
+                                checked
                                 {
-                                    checked { value = Convert.ToDouble(vLeft, FormatProvider) * Convert.ToDouble(vRight, FormatProvider); }
-                                    break;
+                                    value =
+                                        Convert.ToDouble(vLeft, FormatProvider)
+                                        * Convert.ToDouble(vRight, FormatProvider);
                                 }
+                                break;
+                            }
                             case StorageType.SqlDouble:
-                                {
-                                    value = (SqlConvert.ConvertToSqlDouble(vLeft) * SqlConvert.ConvertToSqlDouble(vRight));
-                                    break;
-                                }
+                            {
+                                value = (
+                                    SqlConvert.ConvertToSqlDouble(vLeft)
+                                    * SqlConvert.ConvertToSqlDouble(vRight)
+                                );
+                                break;
+                            }
                             default:
-                                {
-                                    typeMismatch = true;
-                                    break;
-                                }
+                            {
+                                typeMismatch = true;
+                                break;
+                            }
                         }
                         break; // Operators.Multiply
 
@@ -755,148 +1110,264 @@ namespace System.Data
                         switch (resultType)
                         {
                             case StorageType.Byte:
-                                {
-                                    value = Convert.ToByte((Convert.ToByte(vLeft, FormatProvider) / Convert.ToByte(vRight, FormatProvider)), FormatProvider);
-                                    break;
-                                }
+                            {
+                                value = Convert.ToByte(
+                                    (
+                                        Convert.ToByte(vLeft, FormatProvider)
+                                        / Convert.ToByte(vRight, FormatProvider)
+                                    ),
+                                    FormatProvider
+                                );
+                                break;
+                            }
                             case StorageType.SqlByte:
-                                {
-                                    value = (SqlConvert.ConvertToSqlByte(vLeft) / SqlConvert.ConvertToSqlByte(vRight));
-                                    break;
-                                }
+                            {
+                                value = (
+                                    SqlConvert.ConvertToSqlByte(vLeft)
+                                    / SqlConvert.ConvertToSqlByte(vRight)
+                                );
+                                break;
+                            }
                             case StorageType.SByte:
-                                {
-                                    value = Convert.ToSByte((Convert.ToSByte(vLeft, FormatProvider) / Convert.ToSByte(vRight, FormatProvider)), FormatProvider);
-                                    break;
-                                }
+                            {
+                                value = Convert.ToSByte(
+                                    (
+                                        Convert.ToSByte(vLeft, FormatProvider)
+                                        / Convert.ToSByte(vRight, FormatProvider)
+                                    ),
+                                    FormatProvider
+                                );
+                                break;
+                            }
                             case StorageType.Int16:
-                                {
-                                    value = Convert.ToInt16((Convert.ToInt16(vLeft, FormatProvider) / Convert.ToInt16(vRight, FormatProvider)), FormatProvider);
-                                    break;
-                                }
+                            {
+                                value = Convert.ToInt16(
+                                    (
+                                        Convert.ToInt16(vLeft, FormatProvider)
+                                        / Convert.ToInt16(vRight, FormatProvider)
+                                    ),
+                                    FormatProvider
+                                );
+                                break;
+                            }
                             case StorageType.SqlInt16:
-                                {
-                                    value = (SqlConvert.ConvertToSqlInt16(vLeft) / SqlConvert.ConvertToSqlInt16(vRight));
-                                    break;
-                                }
+                            {
+                                value = (
+                                    SqlConvert.ConvertToSqlInt16(vLeft)
+                                    / SqlConvert.ConvertToSqlInt16(vRight)
+                                );
+                                break;
+                            }
                             case StorageType.UInt16:
-                                {
-                                    value = Convert.ToUInt16((Convert.ToUInt16(vLeft, FormatProvider) / Convert.ToUInt16(vRight, FormatProvider)), FormatProvider);
-                                    break;
-                                }
+                            {
+                                value = Convert.ToUInt16(
+                                    (
+                                        Convert.ToUInt16(vLeft, FormatProvider)
+                                        / Convert.ToUInt16(vRight, FormatProvider)
+                                    ),
+                                    FormatProvider
+                                );
+                                break;
+                            }
                             case StorageType.Int32:
+                            {
+                                checked
                                 {
-                                    checked { value = Convert.ToInt32(vLeft, FormatProvider) / Convert.ToInt32(vRight, FormatProvider); }
-                                    break;
+                                    value =
+                                        Convert.ToInt32(vLeft, FormatProvider)
+                                        / Convert.ToInt32(vRight, FormatProvider);
                                 }
+                                break;
+                            }
                             case StorageType.SqlInt32:
-                                {
-                                    value = (SqlConvert.ConvertToSqlInt32(vLeft) / SqlConvert.ConvertToSqlInt32(vRight));
-                                    break;
-                                }
+                            {
+                                value = (
+                                    SqlConvert.ConvertToSqlInt32(vLeft)
+                                    / SqlConvert.ConvertToSqlInt32(vRight)
+                                );
+                                break;
+                            }
                             case StorageType.UInt32:
+                            {
+                                checked
                                 {
-                                    checked { value = Convert.ToUInt32(vLeft, FormatProvider) / Convert.ToUInt32(vRight, FormatProvider); }
-                                    break;
+                                    value =
+                                        Convert.ToUInt32(vLeft, FormatProvider)
+                                        / Convert.ToUInt32(vRight, FormatProvider);
                                 }
+                                break;
+                            }
                             case StorageType.UInt64:
+                            {
+                                checked
                                 {
-                                    checked { value = Convert.ToUInt64(vLeft, FormatProvider) / Convert.ToUInt64(vRight, FormatProvider); }
-                                    break;
+                                    value =
+                                        Convert.ToUInt64(vLeft, FormatProvider)
+                                        / Convert.ToUInt64(vRight, FormatProvider);
                                 }
+                                break;
+                            }
                             case StorageType.Int64:
+                            {
+                                checked
                                 {
-                                    checked { value = Convert.ToInt64(vLeft, FormatProvider) / Convert.ToInt64(vRight, FormatProvider); }
-                                    break;
+                                    value =
+                                        Convert.ToInt64(vLeft, FormatProvider)
+                                        / Convert.ToInt64(vRight, FormatProvider);
                                 }
+                                break;
+                            }
                             case StorageType.SqlInt64:
-                                {
-                                    value = (SqlConvert.ConvertToSqlInt64(vLeft) / SqlConvert.ConvertToSqlInt64(vRight));
-                                    break;
-                                }
+                            {
+                                value = (
+                                    SqlConvert.ConvertToSqlInt64(vLeft)
+                                    / SqlConvert.ConvertToSqlInt64(vRight)
+                                );
+                                break;
+                            }
                             case StorageType.Decimal:
+                            {
+                                checked
                                 {
-                                    checked { value = Convert.ToDecimal(vLeft, FormatProvider) / Convert.ToDecimal(vRight, FormatProvider); }
-                                    break;
+                                    value =
+                                        Convert.ToDecimal(vLeft, FormatProvider)
+                                        / Convert.ToDecimal(vRight, FormatProvider);
                                 }
+                                break;
+                            }
                             case StorageType.SqlDecimal:
-                                {
-                                    value = (SqlConvert.ConvertToSqlDecimal(vLeft) / SqlConvert.ConvertToSqlDecimal(vRight));
-                                    break;
-                                }
+                            {
+                                value = (
+                                    SqlConvert.ConvertToSqlDecimal(vLeft)
+                                    / SqlConvert.ConvertToSqlDecimal(vRight)
+                                );
+                                break;
+                            }
                             case StorageType.Single:
+                            {
+                                checked
                                 {
-                                    checked { value = Convert.ToSingle(vLeft, FormatProvider) / Convert.ToSingle(vRight, FormatProvider); }
-                                    break;
+                                    value =
+                                        Convert.ToSingle(vLeft, FormatProvider)
+                                        / Convert.ToSingle(vRight, FormatProvider);
                                 }
+                                break;
+                            }
                             case StorageType.SqlSingle:
-                                {
-                                    value = (SqlConvert.ConvertToSqlSingle(vLeft) / SqlConvert.ConvertToSqlSingle(vRight));
-                                    break;
-                                }
+                            {
+                                value = (
+                                    SqlConvert.ConvertToSqlSingle(vLeft)
+                                    / SqlConvert.ConvertToSqlSingle(vRight)
+                                );
+                                break;
+                            }
                             case StorageType.SqlMoney:
-                                {
-                                    value = (SqlConvert.ConvertToSqlMoney(vLeft) / SqlConvert.ConvertToSqlMoney(vRight));
-                                    break;
-                                }
+                            {
+                                value = (
+                                    SqlConvert.ConvertToSqlMoney(vLeft)
+                                    / SqlConvert.ConvertToSqlMoney(vRight)
+                                );
+                                break;
+                            }
                             case StorageType.Double:
+                            {
+                                double b = Convert.ToDouble(vRight, FormatProvider);
+                                checked
                                 {
-                                    double b = Convert.ToDouble(vRight, FormatProvider);
-                                    checked { value = Convert.ToDouble(vLeft, FormatProvider) / b; }
-                                    break;
+                                    value = Convert.ToDouble(vLeft, FormatProvider) / b;
                                 }
+                                break;
+                            }
                             case StorageType.SqlDouble:
-                                {
-                                    value = (SqlConvert.ConvertToSqlDouble(vLeft) / SqlConvert.ConvertToSqlDouble(vRight));
-                                    break;
-                                }
+                            {
+                                value = (
+                                    SqlConvert.ConvertToSqlDouble(vLeft)
+                                    / SqlConvert.ConvertToSqlDouble(vRight)
+                                );
+                                break;
+                            }
                             default:
-                                {
-                                    typeMismatch = true;
-                                    break;
-                                }
+                            {
+                                typeMismatch = true;
+                                break;
+                            }
                         }
                         break; // Operators.Divide
 
                     case Operators.EqualTo:
-                        if ((vLeft == DBNull.Value) || (left.IsSqlColumn && DataStorage.IsObjectSqlNull(vLeft)) ||
-                             (vRight == DBNull.Value) || (right.IsSqlColumn && DataStorage.IsObjectSqlNull(vRight)))
+                        if (
+                            (vLeft == DBNull.Value)
+                            || (left.IsSqlColumn && DataStorage.IsObjectSqlNull(vLeft))
+                            || (vRight == DBNull.Value)
+                            || (right.IsSqlColumn && DataStorage.IsObjectSqlNull(vRight))
+                        )
                             return DBNull.Value;
                         return (0 == BinaryCompare(vLeft, vRight, resultType, Operators.EqualTo));
 
                     case Operators.GreaterThen:
-                        if ((vLeft == DBNull.Value) || (left.IsSqlColumn && DataStorage.IsObjectSqlNull(vLeft)) ||
-                             (vRight == DBNull.Value) || (right.IsSqlColumn && DataStorage.IsObjectSqlNull(vRight)))
+                        if (
+                            (vLeft == DBNull.Value)
+                            || (left.IsSqlColumn && DataStorage.IsObjectSqlNull(vLeft))
+                            || (vRight == DBNull.Value)
+                            || (right.IsSqlColumn && DataStorage.IsObjectSqlNull(vRight))
+                        )
                             return DBNull.Value;
                         return (0 < BinaryCompare(vLeft, vRight, resultType, op));
 
                     case Operators.LessThen:
-                        if ((vLeft == DBNull.Value) || (left.IsSqlColumn && DataStorage.IsObjectSqlNull(vLeft)) ||
-                             (vRight == DBNull.Value) || (right.IsSqlColumn && DataStorage.IsObjectSqlNull(vRight)))
+                        if (
+                            (vLeft == DBNull.Value)
+                            || (left.IsSqlColumn && DataStorage.IsObjectSqlNull(vLeft))
+                            || (vRight == DBNull.Value)
+                            || (right.IsSqlColumn && DataStorage.IsObjectSqlNull(vRight))
+                        )
                             return DBNull.Value;
                         return (0 > BinaryCompare(vLeft, vRight, resultType, op));
 
                     case Operators.GreaterOrEqual:
-                        if ((vLeft == DBNull.Value) || (left.IsSqlColumn && DataStorage.IsObjectSqlNull(vLeft)) ||
-                             (vRight == DBNull.Value) || (right.IsSqlColumn && DataStorage.IsObjectSqlNull(vRight)))
+                        if (
+                            (vLeft == DBNull.Value)
+                            || (left.IsSqlColumn && DataStorage.IsObjectSqlNull(vLeft))
+                            || (vRight == DBNull.Value)
+                            || (right.IsSqlColumn && DataStorage.IsObjectSqlNull(vRight))
+                        )
                             return DBNull.Value;
                         return (0 <= BinaryCompare(vLeft, vRight, resultType, op));
 
                     case Operators.LessOrEqual:
-                        if (((vLeft == DBNull.Value) || (left.IsSqlColumn && DataStorage.IsObjectSqlNull(vLeft))) ||
-                             ((vRight == DBNull.Value) || (right.IsSqlColumn && DataStorage.IsObjectSqlNull(vRight))))
+                        if (
+                            (
+                                (vLeft == DBNull.Value)
+                                || (left.IsSqlColumn && DataStorage.IsObjectSqlNull(vLeft))
+                            )
+                            || (
+                                (vRight == DBNull.Value)
+                                || (right.IsSqlColumn && DataStorage.IsObjectSqlNull(vRight))
+                            )
+                        )
                             return DBNull.Value;
                         return (0 >= BinaryCompare(vLeft, vRight, resultType, op));
 
                     case Operators.NotEqual:
-                        if (((vLeft == DBNull.Value) || (left.IsSqlColumn && DataStorage.IsObjectSqlNull(vLeft))) ||
-                             ((vRight == DBNull.Value) || (right.IsSqlColumn && DataStorage.IsObjectSqlNull(vRight))))
+                        if (
+                            (
+                                (vLeft == DBNull.Value)
+                                || (left.IsSqlColumn && DataStorage.IsObjectSqlNull(vLeft))
+                            )
+                            || (
+                                (vRight == DBNull.Value)
+                                || (right.IsSqlColumn && DataStorage.IsObjectSqlNull(vRight))
+                            )
+                        )
                             return DBNull.Value;
                         return (0 != BinaryCompare(vLeft, vRight, resultType, op));
 
                     case Operators.Is:
                         vLeft = BinaryNode.Eval(left, row, version, recordNos);
-                        if ((vLeft == DBNull.Value) || (left.IsSqlColumn && DataStorage.IsObjectSqlNull(vLeft)))
+                        if (
+                            (vLeft == DBNull.Value)
+                            || (left.IsSqlColumn && DataStorage.IsObjectSqlNull(vLeft))
+                        )
                         {
                             return true;
                         }
@@ -904,7 +1375,10 @@ namespace System.Data
 
                     case Operators.IsNot:
                         vLeft = BinaryNode.Eval(left, row, version, recordNos);
-                        if ((vLeft == DBNull.Value) || (left.IsSqlColumn && DataStorage.IsObjectSqlNull(vLeft)))
+                        if (
+                            (vLeft == DBNull.Value)
+                            || (left.IsSqlColumn && DataStorage.IsObjectSqlNull(vLeft))
+                        )
                         {
                             return false;
                         }
@@ -918,7 +1392,10 @@ namespace System.Data
                         CONSIDER : in the shortcut case do we want to type-check the other operand?
                         */
                         vLeft = BinaryNode.Eval(left, row, version, recordNos);
-                        if ((vLeft == DBNull.Value) || (left.IsSqlColumn && DataStorage.IsObjectSqlNull(vLeft)))
+                        if (
+                            (vLeft == DBNull.Value)
+                            || (left.IsSqlColumn && DataStorage.IsObjectSqlNull(vLeft))
+                        )
                             return DBNull.Value;
 
                         if ((!(vLeft is bool)) && (!(vLeft is SqlBoolean)))
@@ -945,7 +1422,10 @@ namespace System.Data
                             }
                         }
                         vRight = BinaryNode.Eval(right, row, version, recordNos);
-                        if ((vRight == DBNull.Value) || (right.IsSqlColumn && DataStorage.IsObjectSqlNull(vRight)))
+                        if (
+                            (vRight == DBNull.Value)
+                            || (right.IsSqlColumn && DataStorage.IsObjectSqlNull(vRight))
+                        )
                             return DBNull.Value;
 
                         if ((!(vRight is bool)) && (!(vRight is SqlBoolean)))
@@ -1043,11 +1523,16 @@ namespace System.Data
                         {
                             if (resultType == StorageType.UInt64)
                             {
-                                value = Convert.ToUInt64(vLeft, FormatProvider) % Convert.ToUInt64(vRight, FormatProvider);
+                                value =
+                                    Convert.ToUInt64(vLeft, FormatProvider)
+                                    % Convert.ToUInt64(vRight, FormatProvider);
                             }
                             else if (DataStorage.IsSqlType(resultType))
                             {
-                                SqlInt64 res = (SqlConvert.ConvertToSqlInt64(vLeft) % SqlConvert.ConvertToSqlInt64(vRight));
+                                SqlInt64 res = (
+                                    SqlConvert.ConvertToSqlInt64(vLeft)
+                                    % SqlConvert.ConvertToSqlInt64(vRight)
+                                );
 
                                 if (resultType == StorageType.SqlInt32)
                                 {
@@ -1068,8 +1553,14 @@ namespace System.Data
                             }
                             else
                             {
-                                value = Convert.ToInt64(vLeft, FormatProvider) % Convert.ToInt64(vRight, FormatProvider);
-                                value = Convert.ChangeType(value, DataStorage.GetTypeStorage(resultType), FormatProvider);
+                                value =
+                                    Convert.ToInt64(vLeft, FormatProvider)
+                                    % Convert.ToInt64(vRight, FormatProvider);
+                                value = Convert.ChangeType(
+                                    value,
+                                    DataStorage.GetTypeStorage(resultType),
+                                    FormatProvider
+                                );
                             }
                         }
                         else
@@ -1083,7 +1574,6 @@ namespace System.Data
                         special case evaluating of the IN operator: the right have to be IN function node
                         */
 
-
                         if (!(right is FunctionNode))
                         {
                             // this is more like an Assert: should never happens, so we do not care about "nice" Exseptions
@@ -1092,7 +1582,10 @@ namespace System.Data
 
                         vLeft = BinaryNode.Eval(left, row, version, recordNos);
 
-                        if ((vLeft == DBNull.Value) || (left.IsSqlColumn && DataStorage.IsObjectSqlNull(vLeft)))
+                        if (
+                            (vLeft == DBNull.Value)
+                            || (left.IsSqlColumn && DataStorage.IsObjectSqlNull(vLeft))
+                        )
                             return DBNull.Value;
 
                         /* validate IN parameters : must all be constant expressions */
@@ -1105,9 +1598,16 @@ namespace System.Data
                         {
                             vRight = into._arguments![i].Eval();
 
-                            if ((vRight == DBNull.Value) || (right.IsSqlColumn && DataStorage.IsObjectSqlNull(vRight)))
+                            if (
+                                (vRight == DBNull.Value)
+                                || (right.IsSqlColumn && DataStorage.IsObjectSqlNull(vRight))
+                            )
                                 continue;
-                            Debug.Assert((!DataStorage.IsObjectNull(vLeft)) && (!DataStorage.IsObjectNull(vRight)), "Impossible.");
+                            Debug.Assert(
+                                (!DataStorage.IsObjectNull(vLeft))
+                                    && (!DataStorage.IsObjectNull(vRight)),
+                                "Impossible."
+                            );
 
                             resultType = DataStorage.GetStorageType(vLeft.GetType());
 
@@ -1183,43 +1683,76 @@ namespace System.Data
         {
             switch (storageType)
             {
-                case StorageType.Boolean: return DataTypePrecedence.Boolean;
-                case StorageType.Char: return DataTypePrecedence.Char;
-                case StorageType.SByte: return DataTypePrecedence.SByte;
-                case StorageType.Byte: return DataTypePrecedence.Byte;
-                case StorageType.Int16: return DataTypePrecedence.Int16;
-                case StorageType.UInt16: return DataTypePrecedence.UInt16;
-                case StorageType.Int32: return DataTypePrecedence.Int32;
-                case StorageType.UInt32: return DataTypePrecedence.UInt32;
-                case StorageType.Int64: return DataTypePrecedence.Int64;
-                case StorageType.UInt64: return DataTypePrecedence.UInt64;
-                case StorageType.Single: return DataTypePrecedence.Single;
-                case StorageType.Double: return DataTypePrecedence.Double;
-                case StorageType.Decimal: return DataTypePrecedence.Decimal;
-                case StorageType.DateTime: return DataTypePrecedence.DateTime;
-                case StorageType.DateTimeOffset: return DataTypePrecedence.DateTimeOffset;
-                case StorageType.TimeSpan: return DataTypePrecedence.TimeSpan;
-                case StorageType.String: return DataTypePrecedence.String;
-                case StorageType.SqlBinary: return DataTypePrecedence.SqlBinary;
-                case StorageType.SqlBoolean: return DataTypePrecedence.SqlBoolean;
-                case StorageType.SqlByte: return DataTypePrecedence.SqlByte;
-                case StorageType.SqlBytes: return DataTypePrecedence.SqlBytes;
-                case StorageType.SqlChars: return DataTypePrecedence.SqlChars;
-                case StorageType.SqlDateTime: return DataTypePrecedence.SqlDateTime;
-                case StorageType.SqlDecimal: return DataTypePrecedence.SqlDecimal;
-                case StorageType.SqlDouble: return DataTypePrecedence.SqlDouble;
-                case StorageType.SqlGuid: return DataTypePrecedence.SqlGuid;
-                case StorageType.SqlInt16: return DataTypePrecedence.SqlInt16;
-                case StorageType.SqlInt32: return DataTypePrecedence.SqlInt32;
-                case StorageType.SqlInt64: return DataTypePrecedence.SqlInt64;
-                case StorageType.SqlMoney: return DataTypePrecedence.SqlMoney;
-                case StorageType.SqlSingle: return DataTypePrecedence.SqlSingle;
-                case StorageType.SqlString: return DataTypePrecedence.SqlString;
+                case StorageType.Boolean:
+                    return DataTypePrecedence.Boolean;
+                case StorageType.Char:
+                    return DataTypePrecedence.Char;
+                case StorageType.SByte:
+                    return DataTypePrecedence.SByte;
+                case StorageType.Byte:
+                    return DataTypePrecedence.Byte;
+                case StorageType.Int16:
+                    return DataTypePrecedence.Int16;
+                case StorageType.UInt16:
+                    return DataTypePrecedence.UInt16;
+                case StorageType.Int32:
+                    return DataTypePrecedence.Int32;
+                case StorageType.UInt32:
+                    return DataTypePrecedence.UInt32;
+                case StorageType.Int64:
+                    return DataTypePrecedence.Int64;
+                case StorageType.UInt64:
+                    return DataTypePrecedence.UInt64;
+                case StorageType.Single:
+                    return DataTypePrecedence.Single;
+                case StorageType.Double:
+                    return DataTypePrecedence.Double;
+                case StorageType.Decimal:
+                    return DataTypePrecedence.Decimal;
+                case StorageType.DateTime:
+                    return DataTypePrecedence.DateTime;
+                case StorageType.DateTimeOffset:
+                    return DataTypePrecedence.DateTimeOffset;
+                case StorageType.TimeSpan:
+                    return DataTypePrecedence.TimeSpan;
+                case StorageType.String:
+                    return DataTypePrecedence.String;
+                case StorageType.SqlBinary:
+                    return DataTypePrecedence.SqlBinary;
+                case StorageType.SqlBoolean:
+                    return DataTypePrecedence.SqlBoolean;
+                case StorageType.SqlByte:
+                    return DataTypePrecedence.SqlByte;
+                case StorageType.SqlBytes:
+                    return DataTypePrecedence.SqlBytes;
+                case StorageType.SqlChars:
+                    return DataTypePrecedence.SqlChars;
+                case StorageType.SqlDateTime:
+                    return DataTypePrecedence.SqlDateTime;
+                case StorageType.SqlDecimal:
+                    return DataTypePrecedence.SqlDecimal;
+                case StorageType.SqlDouble:
+                    return DataTypePrecedence.SqlDouble;
+                case StorageType.SqlGuid:
+                    return DataTypePrecedence.SqlGuid;
+                case StorageType.SqlInt16:
+                    return DataTypePrecedence.SqlInt16;
+                case StorageType.SqlInt32:
+                    return DataTypePrecedence.SqlInt32;
+                case StorageType.SqlInt64:
+                    return DataTypePrecedence.SqlInt64;
+                case StorageType.SqlMoney:
+                    return DataTypePrecedence.SqlMoney;
+                case StorageType.SqlSingle:
+                    return DataTypePrecedence.SqlSingle;
+                case StorageType.SqlString:
+                    return DataTypePrecedence.SqlString;
                 //            case StorageType.SqlXml: return DataTypePrecedence.SqlXml;
                 case StorageType.Empty:
                 case StorageType.Object:
                 case StorageType.DBNull:
-                default: return DataTypePrecedence.Error;
+                default:
+                    return DataTypePrecedence.Error;
             }
         }
 
@@ -1227,40 +1760,71 @@ namespace System.Data
         {
             switch (code)
             {
-                case DataTypePrecedence.Error: return StorageType.Empty;
-                case DataTypePrecedence.SByte: return StorageType.SByte;
-                case DataTypePrecedence.Byte: return StorageType.Byte;
-                case DataTypePrecedence.Int16: return StorageType.Int16;
-                case DataTypePrecedence.UInt16: return StorageType.UInt16;
-                case DataTypePrecedence.Int32: return StorageType.Int32;
-                case DataTypePrecedence.UInt32: return StorageType.UInt32;
-                case DataTypePrecedence.Int64: return StorageType.Int64;
-                case DataTypePrecedence.UInt64: return StorageType.UInt64;
-                case DataTypePrecedence.Decimal: return StorageType.Decimal;
-                case DataTypePrecedence.Single: return StorageType.Single;
-                case DataTypePrecedence.Double: return StorageType.Double;
+                case DataTypePrecedence.Error:
+                    return StorageType.Empty;
+                case DataTypePrecedence.SByte:
+                    return StorageType.SByte;
+                case DataTypePrecedence.Byte:
+                    return StorageType.Byte;
+                case DataTypePrecedence.Int16:
+                    return StorageType.Int16;
+                case DataTypePrecedence.UInt16:
+                    return StorageType.UInt16;
+                case DataTypePrecedence.Int32:
+                    return StorageType.Int32;
+                case DataTypePrecedence.UInt32:
+                    return StorageType.UInt32;
+                case DataTypePrecedence.Int64:
+                    return StorageType.Int64;
+                case DataTypePrecedence.UInt64:
+                    return StorageType.UInt64;
+                case DataTypePrecedence.Decimal:
+                    return StorageType.Decimal;
+                case DataTypePrecedence.Single:
+                    return StorageType.Single;
+                case DataTypePrecedence.Double:
+                    return StorageType.Double;
 
-                case DataTypePrecedence.Boolean: return StorageType.Boolean;
-                case DataTypePrecedence.String: return StorageType.String;
-                case DataTypePrecedence.Char: return StorageType.Char;
+                case DataTypePrecedence.Boolean:
+                    return StorageType.Boolean;
+                case DataTypePrecedence.String:
+                    return StorageType.String;
+                case DataTypePrecedence.Char:
+                    return StorageType.Char;
 
-                case DataTypePrecedence.DateTimeOffset: return StorageType.DateTimeOffset;
-                case DataTypePrecedence.DateTime: return StorageType.DateTime;
-                case DataTypePrecedence.TimeSpan: return StorageType.TimeSpan;
+                case DataTypePrecedence.DateTimeOffset:
+                    return StorageType.DateTimeOffset;
+                case DataTypePrecedence.DateTime:
+                    return StorageType.DateTime;
+                case DataTypePrecedence.TimeSpan:
+                    return StorageType.TimeSpan;
 
-                case DataTypePrecedence.SqlDateTime: return StorageType.SqlDateTime;
-                case DataTypePrecedence.SqlDouble: return StorageType.SqlDouble;
-                case DataTypePrecedence.SqlSingle: return StorageType.SqlSingle;
-                case DataTypePrecedence.SqlDecimal: return StorageType.SqlDecimal;
-                case DataTypePrecedence.SqlInt64: return StorageType.SqlInt64;
-                case DataTypePrecedence.SqlInt32: return StorageType.SqlInt32;
-                case DataTypePrecedence.SqlInt16: return StorageType.SqlInt16;
-                case DataTypePrecedence.SqlByte: return StorageType.SqlByte;
-                case DataTypePrecedence.SqlBoolean: return StorageType.SqlBoolean;
-                case DataTypePrecedence.SqlString: return StorageType.SqlString;
-                case DataTypePrecedence.SqlGuid: return StorageType.SqlGuid;
-                case DataTypePrecedence.SqlBinary: return StorageType.SqlBinary;
-                case DataTypePrecedence.SqlMoney: return StorageType.SqlMoney;
+                case DataTypePrecedence.SqlDateTime:
+                    return StorageType.SqlDateTime;
+                case DataTypePrecedence.SqlDouble:
+                    return StorageType.SqlDouble;
+                case DataTypePrecedence.SqlSingle:
+                    return StorageType.SqlSingle;
+                case DataTypePrecedence.SqlDecimal:
+                    return StorageType.SqlDecimal;
+                case DataTypePrecedence.SqlInt64:
+                    return StorageType.SqlInt64;
+                case DataTypePrecedence.SqlInt32:
+                    return StorageType.SqlInt32;
+                case DataTypePrecedence.SqlInt16:
+                    return StorageType.SqlInt16;
+                case DataTypePrecedence.SqlByte:
+                    return StorageType.SqlByte;
+                case DataTypePrecedence.SqlBoolean:
+                    return StorageType.SqlBoolean;
+                case DataTypePrecedence.SqlString:
+                    return StorageType.SqlString;
+                case DataTypePrecedence.SqlGuid:
+                    return StorageType.SqlGuid;
+                case DataTypePrecedence.SqlBinary:
+                    return StorageType.SqlBinary;
+                case DataTypePrecedence.SqlMoney:
+                    return StorageType.SqlMoney;
                 default:
                     Debug.Fail("Invalid (unmapped) precedence " + code.ToString());
                     goto case DataTypePrecedence.Error;
@@ -1269,23 +1833,42 @@ namespace System.Data
 
         private static bool IsMixed(StorageType left, StorageType right)
         {
-            return ((IsSigned(left) && IsUnsigned(right)) ||
-                    (IsUnsigned(left) && IsSigned(right)));
+            return ((IsSigned(left) && IsUnsigned(right)) || (IsUnsigned(left) && IsSigned(right)));
         }
 
         private static bool IsMixedSql(StorageType left, StorageType right)
         {
-            return ((IsSignedSql(left) && IsUnsignedSql(right)) ||
-                    (IsUnsignedSql(left) && IsSignedSql(right)));
+            return (
+                (IsSignedSql(left) && IsUnsignedSql(right))
+                || (IsUnsignedSql(left) && IsSignedSql(right))
+            );
         }
 
-        internal static StorageType ResultType(StorageType left, StorageType right, bool lc, bool rc, int op)
+        internal static StorageType ResultType(
+            StorageType left,
+            StorageType right,
+            bool lc,
+            bool rc,
+            int op
+        )
         {
-            if ((left == StorageType.Guid) && (right == StorageType.Guid) && Operators.IsRelational(op))
+            if (
+                (left == StorageType.Guid)
+                && (right == StorageType.Guid)
+                && Operators.IsRelational(op)
+            )
                 return left;
-            if ((left == StorageType.String) && (right == StorageType.Guid) && Operators.IsRelational(op))
+            if (
+                (left == StorageType.String)
+                && (right == StorageType.Guid)
+                && Operators.IsRelational(op)
+            )
                 return left;
-            if ((left == StorageType.Guid) && (right == StorageType.String) && Operators.IsRelational(op))
+            if (
+                (left == StorageType.Guid)
+                && (right == StorageType.String)
+                && Operators.IsRelational(op)
+            )
                 return right;
 
             int leftPrecedence = (int)GetPrecedence(left);
@@ -1312,15 +1895,23 @@ namespace System.Data
                 // Rules to handle DateTimeOffset:
                 // we only allow Relational operations to operate only on DTO vs DTO
                 // all other operations: "exception"
-                if (Operators.IsRelational(op) && left == StorageType.DateTimeOffset && right == StorageType.DateTimeOffset)
+                if (
+                    Operators.IsRelational(op)
+                    && left == StorageType.DateTimeOffset
+                    && right == StorageType.DateTimeOffset
+                )
                     return StorageType.DateTimeOffset;
                 return StorageType.Empty;
             }
 
-            if ((op == Operators.Plus) && ((left == StorageType.String) || (right == StorageType.String)))
+            if (
+                (op == Operators.Plus)
+                && ((left == StorageType.String) || (right == StorageType.String))
+            )
                 return StorageType.String;
 
-            DataTypePrecedence higherPrec = (DataTypePrecedence)Math.Max(leftPrecedence, rightPrecedence);
+            DataTypePrecedence higherPrec = (DataTypePrecedence)
+                Math.Max(leftPrecedence, rightPrecedence);
 
             StorageType result = GetPrecedenceType(higherPrec);
 
@@ -1362,7 +1953,11 @@ namespace System.Data
                         // so promote to the next signed type
                         result = GetPrecedenceType(higherPrec + 1);
                     else
-                        throw ExprException.AmbiguousBinop(op, DataStorage.GetTypeStorage(left), DataStorage.GetTypeStorage(right));
+                        throw ExprException.AmbiguousBinop(
+                            op,
+                            DataStorage.GetTypeStorage(left),
+                            DataStorage.GetTypeStorage(right)
+                        );
                 }
             }
 
@@ -1385,7 +1980,10 @@ namespace System.Data
 
             if (Operators.IsLogical(op))
             {
-                if ((left != StorageType.Boolean && left != StorageType.SqlBoolean) || (right != StorageType.Boolean && right != StorageType.SqlBoolean))
+                if (
+                    (left != StorageType.Boolean && left != StorageType.SqlBoolean)
+                    || (right != StorageType.Boolean && right != StorageType.SqlBoolean)
+                )
                     return StorageType.Empty;
                 if (left == StorageType.Boolean && right == StorageType.Boolean)
                     return StorageType.Boolean;
@@ -1400,18 +1998,34 @@ namespace System.Data
                     return StorageType.String;
             }
             //SqlBinary is operable just with SqlBinary
-            if ((left == StorageType.SqlBinary && right != StorageType.SqlBinary) || (left != StorageType.SqlBinary && right == StorageType.SqlBinary))
+            if (
+                (left == StorageType.SqlBinary && right != StorageType.SqlBinary)
+                || (left != StorageType.SqlBinary && right == StorageType.SqlBinary)
+            )
                 return StorageType.Empty;
             //SqlGuid is operable just with SqlGuid
-            if ((left == StorageType.SqlGuid && right != StorageType.SqlGuid) || (left != StorageType.SqlGuid && right == StorageType.SqlGuid))
+            if (
+                (left == StorageType.SqlGuid && right != StorageType.SqlGuid)
+                || (left != StorageType.SqlGuid && right == StorageType.SqlGuid)
+            )
                 return StorageType.Empty;
 
-            if ((leftPrecedence > (int)DataTypePrecedence.SqlDouble && rightPrecedence < (int)DataTypePrecedence.TimeSpan))
+            if (
+                (
+                    leftPrecedence > (int)DataTypePrecedence.SqlDouble
+                    && rightPrecedence < (int)DataTypePrecedence.TimeSpan
+                )
+            )
             {
                 return StorageType.Empty;
             }
 
-            if ((leftPrecedence < (int)DataTypePrecedence.TimeSpan && rightPrecedence > (int)DataTypePrecedence.SqlDouble))
+            if (
+                (
+                    leftPrecedence < (int)DataTypePrecedence.TimeSpan
+                    && rightPrecedence > (int)DataTypePrecedence.SqlDouble
+                )
+            )
             {
                 return StorageType.Empty;
             }
@@ -1434,7 +2048,8 @@ namespace System.Data
             // time types finished
             // continue with numerical types, numbers
 
-            DataTypePrecedence higherPrec = (DataTypePrecedence)Math.Max(leftPrecedence, rightPrecedence);
+            DataTypePrecedence higherPrec = (DataTypePrecedence)
+                Math.Max(leftPrecedence, rightPrecedence);
 
             StorageType result;
             // if we have at least one Sql type, the intermediate result should be Sql type
@@ -1442,7 +2057,11 @@ namespace System.Data
 
             if (Operators.IsArithmetical(op))
             {
-                if (result != StorageType.String && result != StorageType.Char && result != StorageType.SqlString)
+                if (
+                    result != StorageType.String
+                    && result != StorageType.Char
+                    && result != StorageType.SqlString
+                )
                 {
                     if (!IsNumericSql(left))
                         return StorageType.Empty;
@@ -1475,7 +2094,11 @@ namespace System.Data
                         // so promote to the next signed type
                         result = GetPrecedenceType(higherPrec + 1);
                     else
-                        throw ExprException.AmbiguousBinop(op, DataStorage.GetTypeStorage(left), DataStorage.GetTypeStorage(right));
+                        throw ExprException.AmbiguousBinop(
+                            op,
+                            DataStorage.GetTypeStorage(left),
+                            DataStorage.GetTypeStorage(right)
+                        );
                 }
             }
 
@@ -1486,23 +2109,37 @@ namespace System.Data
         {
             switch (typeCode)
             {
-                case 23: return 24;
-                case 20: return 21;
-                case 18: return 19;
-                case 16: return 17;
-                case 14: return 15;
-                case 12: return 13;
+                case 23:
+                    return 24;
+                case 20:
+                    return 21;
+                case 18:
+                    return 19;
+                case 16:
+                    return 17;
+                case 14:
+                    return 15;
+                case 12:
+                    return 13;
                 case 9:
-                case 10: return 11;
+                case 10:
+                    return 11;
                 case 6:
-                case 7: return 8;
+                case 7:
+                    return 8;
                 case 3:
-                case 4: return 5;
-                case 1: return 2;
-                case -2: return -1;
-                case -5: return -4;
-                case -8: return -7;
-                default: return typeCode;
+                case 4:
+                    return 5;
+                case 1:
+                    return 2;
+                case -2:
+                    return -1;
+                case -5:
+                    return -4;
+                case -8:
+                    return -7;
+                default:
+                    return typeCode;
             }
         }
     }
@@ -1510,11 +2147,11 @@ namespace System.Data
     internal sealed class LikeNode : BinaryNode
     {
         // like kinds
-        internal const int match_left = 1;      // <STR>*
-        internal const int match_right = 2;     // *<STR>
-        internal const int match_middle = 3;    // *<STR>*
-        internal const int match_exact = 4;    // <STR>
-        internal const int match_all = 5;      // *
+        internal const int match_left = 1; // <STR>*
+        internal const int match_right = 2; // *<STR>
+        internal const int match_middle = 3; // *<STR>*
+        internal const int match_exact = 4; // <STR>
+        internal const int match_all = 5; // *
 
         // WhiteSpace Chars Include : 0x9, 0xA, 0xB, 0xC, 0xD, 0x20, 0xA0, 0x2000, 0x2001, 0x2002, 0x2003, 0x2004, 0x2005, 0x2006, 0x2007, 0x2008, 0x2009, 0x200A, 0x200B, 0x3000, and 0xFEFF.
         private static readonly char[] s_trimChars = new char[] { (char)0x20, (char)0x3000 };
@@ -1523,9 +2160,7 @@ namespace System.Data
         private string? _pattern;
 
         internal LikeNode(DataTable? table, int op, ExpressionNode left, ExpressionNode right)
-        : base(table, op, left, right)
-        {
-        }
+            : base(table, op, left, right) { }
 
         [RequiresUnreferencedCode(DataSet.RequiresUnreferencedCodeMessage)]
         internal override object Eval(DataRow? row, DataRowVersion version)
@@ -1533,7 +2168,9 @@ namespace System.Data
             object vLeft = _left.Eval(row, version);
             string substring;
 
-            if ((vLeft == DBNull.Value) || (_left.IsSqlColumn && DataStorage.IsObjectSqlNull(vLeft)))
+            if (
+                (vLeft == DBNull.Value) || (_left.IsSqlColumn && DataStorage.IsObjectSqlNull(vLeft))
+            )
                 return DBNull.Value;
 
             if (_pattern == null)
@@ -1547,8 +2184,13 @@ namespace System.Data
 
                 if (vRight == DBNull.Value || DataStorage.IsObjectSqlNull(vRight))
                     return DBNull.Value;
-                string rightStr = (string)SqlConvert.ChangeType2(vRight, StorageType.String, typeof(string), FormatProvider);
-
+                string rightStr = (string)
+                    SqlConvert.ChangeType2(
+                        vRight,
+                        StorageType.String,
+                        typeof(string),
+                        FormatProvider
+                    );
 
                 // need to convert like pattern to a string
 
@@ -1672,7 +2314,10 @@ namespace System.Data
                     }
                     else
                     {
-                        Debug.Assert(patchars[length - 1] == '*' || patchars[length - 1] == '%', "Invalid LIKE pattern formed.. ");
+                        Debug.Assert(
+                            patchars[length - 1] == '*' || patchars[length - 1] == '%',
+                            "Invalid LIKE pattern formed.. "
+                        );
                         _kind = match_left;
                     }
                 }

@@ -24,7 +24,12 @@ namespace Microsoft.CodeAnalysis.AddPackage;
 /// option to either install the latest version, or install any version installed locally in another project.</param>
 /// <param name="textChanges">Additional text changes to make to the <see cref="Document"/>.  Generally, this would be
 /// the import to add if not present.</param>
-internal readonly struct InstallPackageData(string? packageSource, string packageName, string? packageVersionOpt, ImmutableArray<TextChange> textChanges)
+internal readonly struct InstallPackageData(
+    string? packageSource,
+    string packageName,
+    string? packageVersionOpt,
+    ImmutableArray<TextChange> textChanges
+)
 {
     public readonly string? PackageSource = packageSource;
     public readonly string PackageName = packageName;
@@ -34,8 +39,8 @@ internal readonly struct InstallPackageData(string? packageSource, string packag
 }
 
 /// <summary>
-/// This is the top level 'Install Nuget Package' code action we show in 
-/// the lightbulb.  It will have children to 'Install Latest', 
+/// This is the top level 'Install Nuget Package' code action we show in
+/// the lightbulb.  It will have children to 'Install Latest',
 /// 'Install Version 'X' ..., and 'Install with package manager'.
 /// </summary>
 internal sealed class ParentInstallPackageCodeAction : CodeAction.CodeActionWithNestedActions
@@ -55,20 +60,24 @@ internal sealed class ParentInstallPackageCodeAction : CodeAction.CodeActionWith
     public ParentInstallPackageCodeAction(
         Document document,
         InstallPackageData fixData,
-        IPackageInstallerService installerService)
-        : base(string.Format(FeaturesResources.Install_package_0, fixData.PackageName),
-               CreateNestedActions(document, fixData, installerService),
-               isInlinable: false,
-               priority: CodeActionPriority.Low) // Adding a nuget reference is lower priority than other fixes..
-    {
-    }
+        IPackageInstallerService installerService
+    )
+        : base(
+            string.Format(FeaturesResources.Install_package_0, fixData.PackageName),
+            CreateNestedActions(document, fixData, installerService),
+            isInlinable: false,
+            priority: CodeActionPriority.Low
+        ) // Adding a nuget reference is lower priority than other fixes..
+    { }
 
     public static CodeAction? TryCreateCodeAction(
         Document document,
         InstallPackageData fixData,
-        IPackageInstallerService? installerService)
+        IPackageInstallerService? installerService
+    )
     {
-        installerService ??= document.Project.Solution.Services.GetService<IPackageInstallerService>();
+        installerService ??=
+            document.Project.Solution.Services.GetService<IPackageInstallerService>();
 
         return installerService?.IsInstalled(document.Project.Id, fixData.PackageName) == false
             ? new ParentInstallPackageCodeAction(document, fixData, installerService)
@@ -78,29 +87,43 @@ internal sealed class ParentInstallPackageCodeAction : CodeAction.CodeActionWith
     private static ImmutableArray<CodeAction> CreateNestedActions(
         Document document,
         InstallPackageData fixData,
-        IPackageInstallerService installerService)
+        IPackageInstallerService installerService
+    )
     {
         // Determine what versions of this package are already installed in some project
         // in this solution.  We'll offer to add those specific versions to this project,
         // followed by an option to "Find and install latest version."
-        var installedVersions = installerService.GetInstalledVersions(fixData.PackageName).NullToEmpty();
+        var installedVersions = installerService
+            .GetInstalledVersions(fixData.PackageName)
+            .NullToEmpty();
         using var _ = ArrayBuilder<CodeAction>.GetInstance(out var codeActions);
 
         // First add the actions to install a specific version.
-        codeActions.AddRange(installedVersions.Select(
-            v => CreateCodeAction(
-                document, fixData, installerService, version: v, isLocal: true)));
+        codeActions.AddRange(
+            installedVersions.Select(v =>
+                CreateCodeAction(document, fixData, installerService, version: v, isLocal: true)
+            )
+        );
 
         // Now add the action to install the specific version.
         var preferredVersion = fixData.PackageVersionOpt;
         if (preferredVersion == null || !installedVersions.Contains(preferredVersion))
         {
-            codeActions.Add(CreateCodeAction(
-                document, fixData, installerService, preferredVersion, isLocal: false));
+            codeActions.Add(
+                CreateCodeAction(
+                    document,
+                    fixData,
+                    installerService,
+                    preferredVersion,
+                    isLocal: false
+                )
+            );
         }
 
         // And finally the action to show the package manager dialog.
-        codeActions.Add(new InstallWithPackageManagerCodeAction(installerService, fixData.PackageName));
+        codeActions.Add(
+            new InstallWithPackageManagerCodeAction(installerService, fixData.PackageName)
+        );
         return codeActions.ToImmutable();
     }
 
@@ -109,23 +132,34 @@ internal sealed class ParentInstallPackageCodeAction : CodeAction.CodeActionWith
         InstallPackageData installData,
         IPackageInstallerService installerService,
         string? version,
-        bool isLocal)
+        bool isLocal
+    )
     {
-        var title = version == null
-            ? FeaturesResources.Find_and_install_latest_version
-            : isLocal
-                ? string.Format(FeaturesResources.Use_local_version_0, version)
-                : string.Format(FeaturesResources.Install_version_0, version);
+        var title =
+            version == null ? FeaturesResources.Find_and_install_latest_version
+            : isLocal ? string.Format(FeaturesResources.Use_local_version_0, version)
+            : string.Format(FeaturesResources.Install_version_0, version);
 
         var installOperation = new InstallPackageDirectlyCodeActionOperation(
-            installerService, document, installData.PackageSource, installData.PackageName, version,
-            includePrerelease: false, isLocal: isLocal);
+            installerService,
+            document,
+            installData.PackageSource,
+            installData.PackageName,
+            version,
+            includePrerelease: false,
+            isLocal: isLocal
+        );
 
         // Nuget hits should always come after other results.
         var fixData = new AddImportFixData(
-            AddImportFixKind.PackageSymbol, installData.TextChanges, title, priority: CodeActionPriority.Lowest,
-            packageSource: installData.PackageSource, packageName: installData.PackageName, packageVersionOpt: installData.PackageVersionOpt);
-        return new InstallPackageAndAddImportCodeAction(
-            document, fixData, title, installOperation);
+            AddImportFixKind.PackageSymbol,
+            installData.TextChanges,
+            title,
+            priority: CodeActionPriority.Lowest,
+            packageSource: installData.PackageSource,
+            packageName: installData.PackageName,
+            packageVersionOpt: installData.PackageVersionOpt
+        );
+        return new InstallPackageAndAddImportCodeAction(document, fixData, title, installOperation);
     }
 }

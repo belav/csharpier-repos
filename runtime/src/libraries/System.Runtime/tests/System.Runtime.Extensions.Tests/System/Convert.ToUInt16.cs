@@ -94,7 +94,11 @@ namespace System.Tests
             VerifyFromObject(Convert.ToUInt16, Convert.ToUInt16, testValues, expectedValues);
 
             object[] invalidValues = { new object(), DateTime.Now };
-            VerifyFromObjectThrows<InvalidCastException>(Convert.ToUInt16, Convert.ToUInt16, invalidValues);
+            VerifyFromObjectThrows<InvalidCastException>(
+                Convert.ToUInt16,
+                Convert.ToUInt16,
+                invalidValues
+            );
         }
 
         [Fact]
@@ -127,31 +131,79 @@ namespace System.Tests
             VerifyFromString(Convert.ToUInt16, Convert.ToUInt16, testValues, expectedValues);
 
             string[] overflowValues = { "-1", Decimal.MaxValue.ToString() };
-            VerifyFromStringThrows<OverflowException>(Convert.ToUInt16, Convert.ToUInt16, overflowValues);
+            VerifyFromStringThrows<OverflowException>(
+                Convert.ToUInt16,
+                Convert.ToUInt16,
+                overflowValues
+            );
 
             string[] formatExceptionValues = { "abba" };
-            VerifyFromStringThrows<FormatException>(Convert.ToUInt16, Convert.ToUInt16, formatExceptionValues);
+            VerifyFromStringThrows<FormatException>(
+                Convert.ToUInt16,
+                Convert.ToUInt16,
+                formatExceptionValues
+            );
         }
 
         [Fact]
         public void FromStringWithBase()
         {
-            string[] testValues = { null, null, null, null, "ffff", "65535", "177777", "1111111111111111", "0", "0", "0", "0" };
+            string[] testValues =
+            {
+                null,
+                null,
+                null,
+                null,
+                "ffff",
+                "65535",
+                "177777",
+                "1111111111111111",
+                "0",
+                "0",
+                "0",
+                "0",
+            };
             int[] testBases = { 10, 2, 8, 16, 16, 10, 8, 2, 16, 10, 8, 2 };
-            ushort[] expectedValues = { 0, 0, 0, 0, ushort.MaxValue, ushort.MaxValue, ushort.MaxValue, ushort.MaxValue, ushort.MinValue, ushort.MinValue, ushort.MinValue, ushort.MinValue };
+            ushort[] expectedValues =
+            {
+                0,
+                0,
+                0,
+                0,
+                ushort.MaxValue,
+                ushort.MaxValue,
+                ushort.MaxValue,
+                ushort.MaxValue,
+                ushort.MinValue,
+                ushort.MinValue,
+                ushort.MinValue,
+                ushort.MinValue,
+            };
             VerifyFromStringWithBase(Convert.ToUInt16, testValues, testBases, expectedValues);
 
             string[] overflowValues = { "65536", "-1", "11111111111111111", "1FFFF", "777777" };
             int[] overflowBases = { 10, 10, 2, 16, 8 };
-            VerifyFromStringWithBaseThrows<OverflowException>(Convert.ToUInt16, overflowValues, overflowBases);
+            VerifyFromStringWithBaseThrows<OverflowException>(
+                Convert.ToUInt16,
+                overflowValues,
+                overflowBases
+            );
 
             string[] formatExceptionValues = { "12", "ffffffffffffffffffff" };
             int[] formatExceptionBases = { 2, 8 };
-            VerifyFromStringWithBaseThrows<FormatException>(Convert.ToUInt16, formatExceptionValues, formatExceptionBases);
+            VerifyFromStringWithBaseThrows<FormatException>(
+                Convert.ToUInt16,
+                formatExceptionValues,
+                formatExceptionBases
+            );
 
             string[] argumentExceptionValues = { "10", "11", "abba", "-ab" };
             int[] argumentExceptionBases = { -1, 3, 0, 16 };
-            VerifyFromStringWithBaseThrows<ArgumentException>(Convert.ToUInt16, argumentExceptionValues, argumentExceptionBases);
+            VerifyFromStringWithBaseThrows<ArgumentException>(
+                Convert.ToUInt16,
+                argumentExceptionValues,
+                argumentExceptionBases
+            );
         }
 
         [Fact]

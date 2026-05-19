@@ -28,15 +28,21 @@ namespace Microsoft.CodeAnalysis.Diagnostics.Analyzers.NamingStyles
             return new NamingRule(
                 info.GetSymbolSpecification(SymbolSpecificationID),
                 info.GetNamingStyle(NamingStyleID),
-                EnforcementLevel);
+                EnforcementLevel
+            );
         }
 
         internal XElement CreateXElement()
         {
-            var element = new XElement(nameof(SerializableNamingRule),
+            var element = new XElement(
+                nameof(SerializableNamingRule),
                 new XAttribute(nameof(SymbolSpecificationID), SymbolSpecificationID),
                 new XAttribute(nameof(NamingStyleID), NamingStyleID),
-                new XAttribute(nameof(EnforcementLevel), EnforcementLevel.ToDiagnosticSeverity() ?? DiagnosticSeverity.Hidden));
+                new XAttribute(
+                    nameof(EnforcementLevel),
+                    EnforcementLevel.ToDiagnosticSeverity() ?? DiagnosticSeverity.Hidden
+                )
+            );
 
             return element;
         }
@@ -45,9 +51,19 @@ namespace Microsoft.CodeAnalysis.Diagnostics.Analyzers.NamingStyles
         {
             return new SerializableNamingRule()
             {
-                EnforcementLevel = ((DiagnosticSeverity)Enum.Parse(typeof(DiagnosticSeverity), namingRuleElement.Attribute(nameof(EnforcementLevel)).Value)).ToReportDiagnostic(),
-                NamingStyleID = Guid.Parse(namingRuleElement.Attribute(nameof(NamingStyleID)).Value),
-                SymbolSpecificationID = Guid.Parse(namingRuleElement.Attribute(nameof(SymbolSpecificationID)).Value)
+                EnforcementLevel = (
+                    (DiagnosticSeverity)
+                        Enum.Parse(
+                            typeof(DiagnosticSeverity),
+                            namingRuleElement.Attribute(nameof(EnforcementLevel)).Value
+                        )
+                ).ToReportDiagnostic(),
+                NamingStyleID = Guid.Parse(
+                    namingRuleElement.Attribute(nameof(NamingStyleID)).Value
+                ),
+                SymbolSpecificationID = Guid.Parse(
+                    namingRuleElement.Attribute(nameof(SymbolSpecificationID)).Value
+                ),
             };
         }
 
@@ -55,7 +71,9 @@ namespace Microsoft.CodeAnalysis.Diagnostics.Analyzers.NamingStyles
         {
             writer.WriteGuid(SymbolSpecificationID);
             writer.WriteGuid(NamingStyleID);
-            writer.WriteInt32((int)(EnforcementLevel.ToDiagnosticSeverity() ?? DiagnosticSeverity.Hidden));
+            writer.WriteInt32(
+                (int)(EnforcementLevel.ToDiagnosticSeverity() ?? DiagnosticSeverity.Hidden)
+            );
         }
 
         public static SerializableNamingRule ReadFrom(ObjectReader reader)

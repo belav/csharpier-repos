@@ -6,14 +6,45 @@ using Xunit;
 
 namespace System.SpanTests
 {
-    public class ReplaceTests_Byte : ReplaceTests<byte> { protected override byte Create(int value) => (byte)value; }
-    public class ReplaceTests_Int16 : ReplaceTests<short> { protected override short Create(int value) => (short)value; }
-    public class ReplaceTests_Int32 : ReplaceTests<int> { protected override int Create(int value) => value; }
-    public class ReplaceTests_Int64 : ReplaceTests<long> { protected override long Create(int value) => value; }
-    public class ReplaceTests_Char : ReplaceTests<char> { protected override char Create(int value) => (char)value; }
-    public class ReplaceTests_Double : ReplaceTests<double> { protected override double Create(int value) => (double)value; }
-    public class ReplaceTests_Record : ReplaceTests<SimpleRecord> { protected override SimpleRecord Create(int value) => new SimpleRecord(value); }
-    public class ReplaceTests_CustomEquatable : ReplaceTests<CustomEquatable> { protected override CustomEquatable Create(int value) => new CustomEquatable((byte)value); }
+    public class ReplaceTests_Byte : ReplaceTests<byte>
+    {
+        protected override byte Create(int value) => (byte)value;
+    }
+
+    public class ReplaceTests_Int16 : ReplaceTests<short>
+    {
+        protected override short Create(int value) => (short)value;
+    }
+
+    public class ReplaceTests_Int32 : ReplaceTests<int>
+    {
+        protected override int Create(int value) => value;
+    }
+
+    public class ReplaceTests_Int64 : ReplaceTests<long>
+    {
+        protected override long Create(int value) => value;
+    }
+
+    public class ReplaceTests_Char : ReplaceTests<char>
+    {
+        protected override char Create(int value) => (char)value;
+    }
+
+    public class ReplaceTests_Double : ReplaceTests<double>
+    {
+        protected override double Create(int value) => (double)value;
+    }
+
+    public class ReplaceTests_Record : ReplaceTests<SimpleRecord>
+    {
+        protected override SimpleRecord Create(int value) => new SimpleRecord(value);
+    }
+
+    public class ReplaceTests_CustomEquatable : ReplaceTests<CustomEquatable>
+    {
+        protected override CustomEquatable Create(int value) => new CustomEquatable((byte)value);
+    }
 
     public class ReplaceTests_String : ReplaceTests<string>
     {
@@ -56,7 +87,8 @@ namespace System.SpanTests
         public bool Equals(CustomEquatable other) => other.Value == Value;
     }
 
-    public abstract class ReplaceTests<T> where T : IEquatable<T>
+    public abstract class ReplaceTests<T>
+        where T : IEquatable<T>
     {
         private readonly T _oldValue;
         private readonly T _newValue;
@@ -82,10 +114,26 @@ namespace System.SpanTests
         [Fact]
         public void ArgumentValidation_Copy()
         {
-            AssertExtensions.Throws<ArgumentException>("destination", () => ((ReadOnlySpan<T>)new T[] { _oldValue }).Replace(Span<T>.Empty, _oldValue, _newValue));
+            AssertExtensions.Throws<ArgumentException>(
+                "destination",
+                () =>
+                    ((ReadOnlySpan<T>)new T[] { _oldValue }).Replace(
+                        Span<T>.Empty,
+                        _oldValue,
+                        _newValue
+                    )
+            );
 
             T[] values = new T[] { _oldValue, _oldValue, _oldValue };
-            AssertExtensions.Throws<ArgumentException>(null, () => new ReadOnlySpan<T>(values, 0, 2).Replace(new Span<T>(values, 1, 2), _oldValue, _newValue));
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () =>
+                    new ReadOnlySpan<T>(values, 0, 2).Replace(
+                        new Span<T>(values, 1, 2),
+                        _oldValue,
+                        _newValue
+                    )
+            );
         }
 
         [Theory]

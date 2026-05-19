@@ -9,7 +9,7 @@ namespace System.IdentityModel.Protocols.WSTrust
     using System.IdentityModel.Tokens;
 
     /// <summary>
-    /// The class defines the wst:RequestSecurityTokenResponse element which 
+    /// The class defines the wst:RequestSecurityTokenResponse element which
     /// is used to return a security token.
     /// </summary>
     public class RequestSecurityTokenResponse : WSTrustMessage
@@ -26,15 +26,13 @@ namespace System.IdentityModel.Protocols.WSTrust
         /// This constructor is usually used on the RSTR receiving end.
         /// </summary>
         public RequestSecurityTokenResponse()
-            : base()
-        {
-        }
+            : base() { }
 
         /// <summary>
         /// This constructor is usually used on the RSTR sending side.
         /// </summary>
         /// <remarks>
-        /// This constructor will copy some information, such as Context, KeyType, 
+        /// This constructor will copy some information, such as Context, KeyType,
         /// KeySize and RequestType from the request message. Note here the RequestType
         /// is not a sub element under RSTR, need it just for token request processing.
         /// </remarks>
@@ -46,11 +44,14 @@ namespace System.IdentityModel.Protocols.WSTrust
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("message");
             }
 
-            RequestType = message.RequestType;  // note this is NOT a sub element under RSTR
+            RequestType = message.RequestType; // note this is NOT a sub element under RSTR
             Context = message.Context;
             KeyType = message.KeyType;
 
-            if (message.KeySizeInBits > 0 && StringComparer.Ordinal.Equals(message.KeyType, KeyTypes.Symmetric))
+            if (
+                message.KeySizeInBits > 0
+                && StringComparer.Ordinal.Equals(message.KeyType, KeyTypes.Symmetric)
+            )
             {
                 KeySizeInBits = message.KeySizeInBits;
             }
@@ -67,34 +68,22 @@ namespace System.IdentityModel.Protocols.WSTrust
         /// </remarks>
         public bool IsFinal
         {
-            get
-            {
-                return _isFinal;
-            }
-            set
-            {
-                _isFinal = value;
-            }
+            get { return _isFinal; }
+            set { _isFinal = value; }
         }
 
         /// <summary>
-        /// Gets or sets the security token reference when the requested token is attached 
+        /// Gets or sets the security token reference when the requested token is attached
         /// to the message.
         /// </summary>
         /// <remarks>
-        /// This optional element is specified to indicate how to reference the returned token when 
+        /// This optional element is specified to indicate how to reference the returned token when
         /// that token doesn't support references using URI fragments.
         /// </remarks>
         public SecurityKeyIdentifierClause RequestedAttachedReference
         {
-            get
-            {
-                return _requestedAttachedReference;
-            }
-            set
-            {
-                _requestedAttachedReference = value;
-            }
+            get { return _requestedAttachedReference; }
+            set { _requestedAttachedReference = value; }
         }
 
         /// <summary>
@@ -102,14 +91,8 @@ namespace System.IdentityModel.Protocols.WSTrust
         /// </summary>
         public RequestedSecurityToken RequestedSecurityToken
         {
-            get
-            {
-                return _requestedSecurityToken;
-            }
-            set
-            {
-                _requestedSecurityToken = value;
-            }
+            get { return _requestedSecurityToken; }
+            set { _requestedSecurityToken = value; }
         }
 
         /// <summary>
@@ -117,34 +100,22 @@ namespace System.IdentityModel.Protocols.WSTrust
         /// </summary>
         public RequestedProofToken RequestedProofToken
         {
-            get
-            {
-                return _requestedProofToken;
-            }
-            set
-            {
-                _requestedProofToken = value;
-            }
+            get { return _requestedProofToken; }
+            set { _requestedProofToken = value; }
         }
 
         /// <summary>
-        /// Gets or sets the security token reference when the requested token is not attached 
+        /// Gets or sets the security token reference when the requested token is not attached
         /// to the message.
         /// </summary>
         /// <remarks>
-        /// This optional element is specified to indicate how to reference the returned token when 
+        /// This optional element is specified to indicate how to reference the returned token when
         /// that token is not placed in the message.
         /// </remarks>
         public SecurityKeyIdentifierClause RequestedUnattachedReference
         {
-            get
-            {
-                return _requestedUnattachedReference;
-            }
-            set
-            {
-                _requestedUnattachedReference = value;
-            }
+            get { return _requestedUnattachedReference; }
+            set { _requestedUnattachedReference = value; }
         }
 
         /// <summary>
@@ -152,14 +123,8 @@ namespace System.IdentityModel.Protocols.WSTrust
         /// </summary>
         public bool RequestedTokenCancelled
         {
-            get
-            {
-                return _requestedTokenCancelled;
-            }
-            set
-            {
-                _requestedTokenCancelled = value;
-            }
+            get { return _requestedTokenCancelled; }
+            set { _requestedTokenCancelled = value; }
         }
 
         /// <summary>
@@ -167,14 +132,8 @@ namespace System.IdentityModel.Protocols.WSTrust
         /// </summary>
         public Status Status
         {
-            get
-            {
-                return _status;
-            }
-            set
-            {
-                _status = value;
-            }
+            get { return _status; }
+            set { _status = value; }
         }
     }
 }

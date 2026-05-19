@@ -5,21 +5,23 @@
 namespace System.Web.Services.Configuration
 {
     using System;
-    using System.Configuration;
     using System.Collections.Generic;
+    using System.Configuration;
     using System.Diagnostics;
     using System.Globalization;
     using System.Security.Permissions;
 
     public sealed class WsiProfilesElement : ConfigurationElement
     {
-        // These three constructors are used by the configuration system. 
-        public WsiProfilesElement() : base()
+        // These three constructors are used by the configuration system.
+        public WsiProfilesElement()
+            : base()
         {
             this.properties.Add(this.name);
         }
 
-        public WsiProfilesElement(WsiProfiles name) : this()
+        public WsiProfilesElement(WsiProfiles name)
+            : this()
         {
             this.Name = name;
         }
@@ -28,8 +30,8 @@ namespace System.Web.Services.Configuration
         public WsiProfiles Name
         {
             get { return (WsiProfiles)base[this.name]; }
-            set 
-            { 
+            set
+            {
                 if (!IsValidWsiProfilesValue(value))
                 {
                     throw new ArgumentOutOfRangeException("value");
@@ -48,9 +50,11 @@ namespace System.Web.Services.Configuration
         }
 
         ConfigurationPropertyCollection properties = new ConfigurationPropertyCollection();
-        readonly ConfigurationProperty name = new ConfigurationProperty("name", typeof(WsiProfiles), WsiProfiles.None, ConfigurationPropertyOptions.IsKey);
+        readonly ConfigurationProperty name = new ConfigurationProperty(
+            "name",
+            typeof(WsiProfiles),
+            WsiProfiles.None,
+            ConfigurationPropertyOptions.IsKey
+        );
     }
 }
-
-
-

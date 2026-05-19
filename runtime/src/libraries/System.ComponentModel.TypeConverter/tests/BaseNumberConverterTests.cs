@@ -28,19 +28,14 @@ namespace System.ComponentModel.Tests
 
         public class CustomPositiveSymbolCulture : CultureInfo
         {
-            public CustomPositiveSymbolCulture() : base("en-GB")
-            {
-            }
+            public CustomPositiveSymbolCulture()
+                : base("en-GB") { }
 
             public override object GetFormat(Type formatType)
             {
                 Assert.Equal(typeof(NumberFormatInfo), formatType);
 
-                return new NumberFormatInfo
-                {
-                    PositiveSign = "!",
-                    NegativeSign = "?"
-                };
+                return new NumberFormatInfo { PositiveSign = "!", NegativeSign = "?" };
             }
         }
     }

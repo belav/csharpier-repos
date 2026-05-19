@@ -18,6 +18,6 @@ namespace System.Data.Metadata.Edm
     public enum PropertyKind
     {
         System,
-        Extended
+        Extended,
     }
 }

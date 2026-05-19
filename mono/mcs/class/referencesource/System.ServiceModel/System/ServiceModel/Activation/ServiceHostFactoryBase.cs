@@ -5,6 +5,9 @@ namespace System.ServiceModel.Activation
 {
     public abstract class ServiceHostFactoryBase
     {
-        public abstract ServiceHostBase CreateServiceHost(string constructorString, Uri[] baseAddresses);
+        public abstract ServiceHostBase CreateServiceHost(
+            string constructorString,
+            Uri[] baseAddresses
+        );
     }
 }

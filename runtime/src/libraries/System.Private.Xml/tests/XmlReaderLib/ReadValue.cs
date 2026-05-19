@@ -18,7 +18,12 @@ namespace System.Xml.Tests
         public const string ST_GEN_ENT_NAME = "e1";
         public const string ST_GEN_ENT_VALUE = "e1foo";
 
-        private bool VerifyInvalidReadValue(int iBufferSize, int iIndex, int iCount, Type exceptionType)
+        private bool VerifyInvalidReadValue(
+            int iBufferSize,
+            int iIndex,
+            int iCount,
+            Type exceptionType
+        )
         {
             bool bPassed = false;
             char[] buffer = new char[iBufferSize];
@@ -165,9 +170,17 @@ namespace System.Xml.Tests
             CError.Compare(DataReader.ReadValueChunk(buffer, 0, 5), 0, "Did read 5 chars");
             CError.WriteLineIgnore(DataReader.MoveToElement() + "");
             DataReader.Read();
-            CError.Compare(DataReader.ReadValueChunk(buffer, 0, 5), 5, "Didn't read 5 chars on text node");
+            CError.Compare(
+                DataReader.ReadValueChunk(buffer, 0, 5),
+                5,
+                "Didn't read 5 chars on text node"
+            );
             CError.Compare("value", new string(buffer), "Strings don't match");
-            CError.Compare(DataReader.ReadValueChunk(buffer, 0, 5), 0, "Did read 5 chars on text node");
+            CError.Compare(
+                DataReader.ReadValueChunk(buffer, 0, 5),
+                0,
+                "Did read 5 chars on text node"
+            );
 
             return TEST_PASS;
         }
@@ -293,7 +306,11 @@ namespace System.Xml.Tests
             CError.Compare(DataReader.ReadValueChunk(buffer, 0, 5), 5, "Didn't read first 5");
             CError.Compare("01234", new string(buffer), "First strings don't match");
 
-            CError.Compare(DataReader.ReadValueChunk(buffer, 0, 5), 5, "Didn't read second 5 chars");
+            CError.Compare(
+                DataReader.ReadValueChunk(buffer, 0, 5),
+                5,
+                "Didn't read second 5 chars"
+            );
             CError.Compare("56789", new string(buffer), "Second strings don't match");
 
             return TEST_PASS;
@@ -439,19 +456,25 @@ namespace System.Xml.Tests
         [Variation("ReadValue with count > buffer size")]
         public int TestReadValue7()
         {
-            return BoolToLTMResult(VerifyInvalidReadValue(5, 0, 6, typeof(ArgumentOutOfRangeException)));
+            return BoolToLTMResult(
+                VerifyInvalidReadValue(5, 0, 6, typeof(ArgumentOutOfRangeException))
+            );
         }
 
         [Variation("ReadValue with index > buffer size")]
         public int TestReadValue8()
         {
-            return BoolToLTMResult(VerifyInvalidReadValue(5, 5, 1, typeof(ArgumentOutOfRangeException)));
+            return BoolToLTMResult(
+                VerifyInvalidReadValue(5, 5, 1, typeof(ArgumentOutOfRangeException))
+            );
         }
 
         [Variation("ReadValue with index + count exceeds buffer")]
         public int TestReadValue10()
         {
-            return BoolToLTMResult(VerifyInvalidReadValue(5, 2, 5, typeof(ArgumentOutOfRangeException)));
+            return BoolToLTMResult(
+                VerifyInvalidReadValue(5, 2, 5, typeof(ArgumentOutOfRangeException))
+            );
         }
 
         [Variation("ReadValue with combination Text, CDATA and Whitespace")]
@@ -477,7 +500,11 @@ namespace System.Xml.Tests
                 }
             }
 
-            CError.Compare(DataReader.ReadValueChunk(buffer, 0, buffer.Length), strExpected.Length, "ReadValue");
+            CError.Compare(
+                DataReader.ReadValueChunk(buffer, 0, buffer.Length),
+                strExpected.Length,
+                "ReadValue"
+            );
             CError.Compare(new string(buffer), strExpected, "str");
 
             return TEST_PASS;
@@ -505,7 +532,11 @@ namespace System.Xml.Tests
                 }
             }
 
-            CError.Compare(DataReader.ReadValueChunk(buffer, 0, buffer.Length), strExpected.Length, "ReadValue");
+            CError.Compare(
+                DataReader.ReadValueChunk(buffer, 0, buffer.Length),
+                strExpected.Length,
+                "ReadValue"
+            );
             CError.Compare(new string(buffer), strExpected, "str");
 
             return TEST_PASS;
@@ -565,15 +596,27 @@ namespace System.Xml.Tests
                     return TEST_PASS;
                 }
             }
-            CError.Compare(DataReader.ReadValueChunk(buffer, 0, buffer.Length), strExpected.Length, "ReadValue1");
+            CError.Compare(
+                DataReader.ReadValueChunk(buffer, 0, buffer.Length),
+                strExpected.Length,
+                "ReadValue1"
+            );
             CError.Compare(new string(buffer), strExpected, "str1");
 
-            DataReader.Read();//Now on CDATA.
-            CError.Compare(DataReader.ReadValueChunk(buffer, 0, buffer.Length), strExpected.Length, "ReadValue2");
+            DataReader.Read(); //Now on CDATA.
+            CError.Compare(
+                DataReader.ReadValueChunk(buffer, 0, buffer.Length),
+                strExpected.Length,
+                "ReadValue2"
+            );
             CError.Compare(new string(buffer), strExpected, "str2");
 
-            DataReader.Read();//Now back on Text
-            CError.Compare(DataReader.ReadValueChunk(buffer, 0, buffer.Length), strExpected.Length, "ReadValue3");
+            DataReader.Read(); //Now back on Text
+            CError.Compare(
+                DataReader.ReadValueChunk(buffer, 0, buffer.Length),
+                strExpected.Length,
+                "ReadValue3"
+            );
             CError.Compare(new string(buffer), strExpected, "str3");
 
             return TEST_PASS;
@@ -608,7 +651,11 @@ namespace System.Xml.Tests
             }
             catch (ArgumentException)
             {
-                CError.Compare(DataReader.ReadValueChunk(buffer, 0, buffer.Length), strExpected.Length, "ReadValue Count");
+                CError.Compare(
+                    DataReader.ReadValueChunk(buffer, 0, buffer.Length),
+                    strExpected.Length,
+                    "ReadValue Count"
+                );
                 CError.Compare(new string(buffer), strExpected, "str");
                 return TEST_PASS;
             }
@@ -644,7 +691,10 @@ namespace System.Xml.Tests
 
             DataReader.Read();
 
-            CError.Compare(DataReader.VerifyNode(XmlNodeType.EndElement, "ROOT", string.Empty), "1vn");
+            CError.Compare(
+                DataReader.VerifyNode(XmlNodeType.EndElement, "ROOT", string.Empty),
+                "1vn"
+            );
 
             return TEST_PASS;
         }
@@ -652,7 +702,8 @@ namespace System.Xml.Tests
         [Variation("Test error after successful ReadValue")]
         public int TestReadChar19()
         {
-            if (IsRoundTrippedReader() || IsSubtreeReader()) return TEST_SKIPPED;
+            if (IsRoundTrippedReader() || IsSubtreeReader())
+                return TEST_SKIPPED;
 
             char[] buffer = new char[9];
 
@@ -683,7 +734,8 @@ namespace System.Xml.Tests
 
             try
             {
-                while (DataReader.Read()) ;
+                while (DataReader.Read())
+                    ;
             }
             catch (XmlException)
             {
@@ -696,7 +748,8 @@ namespace System.Xml.Tests
         //[Variation("Call on invalid element content after 64k boundary for Async", Pri = 1, Params = new object[] { true, 1024 * 64 })]
         public int TestReadChar21()
         {
-            if (IsRoundTrippedReader()) return TEST_SKIPPED;
+            if (IsRoundTrippedReader())
+                return TEST_SKIPPED;
             bool forAsync = (bool)CurVariation.Params[0];
             if (forAsync != AsyncUtil.IsAsyncEnabled)
                 return TEST_SKIPPED;
@@ -723,7 +776,8 @@ namespace System.Xml.Tests
             DataReader.Read();
             try
             {
-                while (DataReader.ReadValueChunk(buffer, 0, 1) > 0) ;
+                while (DataReader.ReadValueChunk(buffer, 0, 1) > 0)
+                    ;
             }
             catch (XmlException xe)
             {
@@ -756,18 +810,30 @@ namespace System.Xml.Tests
                     return TEST_PASS;
                 }
             }
-            CError.Compare(DataReader.ReadValueChunk(buffer, 0, buffer.Length), strExpected.Length, "ReadValue1");
+            CError.Compare(
+                DataReader.ReadValueChunk(buffer, 0, buffer.Length),
+                strExpected.Length,
+                "ReadValue1"
+            );
             CError.Compare(new string(buffer), strExpected, "str1");
 
-            DataReader.Read();//Now on CDATA.
-            CError.Compare(DataReader.ReadValueChunk(buffer, 0, buffer.Length), strExpected.Length, "ReadValue2");
+            DataReader.Read(); //Now on CDATA.
+            CError.Compare(
+                DataReader.ReadValueChunk(buffer, 0, buffer.Length),
+                strExpected.Length,
+                "ReadValue2"
+            );
             CError.Compare(new string(buffer), strExpected, "str2");
 
-            DataReader.Read();//Now on test
+            DataReader.Read(); //Now on test
 
             char[] spaces = new char[4];
-            DataReader.Read();//Now on whitespace.
-            CError.Compare(DataReader.ReadValueChunk(spaces, 0, spaces.Length), spaces.Length, "ReadValue3");
+            DataReader.Read(); //Now on whitespace.
+            CError.Compare(
+                DataReader.ReadValueChunk(spaces, 0, spaces.Length),
+                spaces.Length,
+                "ReadValue3"
+            );
             CError.Compare(new string(spaces), "    ", "str3");
 
             return TEST_PASS;
@@ -776,7 +842,8 @@ namespace System.Xml.Tests
         [Variation("ReadValue when end tag doesn't exist")]
         public int TestTextReadValue26()
         {
-            if (IsRoundTrippedReader()) return TEST_SKIPPED;
+            if (IsRoundTrippedReader())
+                return TEST_SKIPPED;
 
             char[] buffer = new char[5];
             ReloadSource(new StringReader("<root>value</notroot>"));
@@ -829,10 +896,11 @@ namespace System.Xml.Tests
                 }
             }
 
-            while (DataReader.ReadValueChunk(buffer, 0, 1) > 0) ;
+            while (DataReader.ReadValueChunk(buffer, 0, 1) > 0)
+                ;
 
-            DataReader.Read();//This takes you to end element
-            DataReader.Read();//This finishes the reading and sets nodetype to none.
+            DataReader.Read(); //This takes you to end element
+            DataReader.Read(); //This finishes the reading and sets nodetype to none.
 
             CError.Compare(DataReader.NodeType, XmlNodeType.None, "Not on End");
 
@@ -843,7 +911,9 @@ namespace System.Xml.Tests
         public int TestCharEntities1()
         {
             char[] buffer = new char[1];
-            ReloadSource(new StringReader("<root>va" + new string('x', 5000) + "l&lt;/root&gt;ue</root>"));
+            ReloadSource(
+                new StringReader("<root>va" + new string('x', 5000) + "l&lt;/root&gt;ue</root>")
+            );
             DataReader.PositionOnElement("root");
             DataReader.Read(); //This takes to text node.
             if (!DataReader.CanReadValueChunk)
@@ -859,10 +929,11 @@ namespace System.Xml.Tests
                 }
             }
 
-            while (DataReader.ReadValueChunk(buffer, 0, 1) > 0) ;
+            while (DataReader.ReadValueChunk(buffer, 0, 1) > 0)
+                ;
 
-            DataReader.Read();//This takes you to end element
-            DataReader.Read();//This finishes the reading and sets nodetype to none.
+            DataReader.Read(); //This takes you to end element
+            DataReader.Read(); //This finishes the reading and sets nodetype to none.
 
             CError.Compare(DataReader.NodeType, XmlNodeType.None, "Not on End");
 
@@ -873,7 +944,11 @@ namespace System.Xml.Tests
         public int TestCharEntities2()
         {
             char[] buffer = new char[1];
-            ReloadSource(new StringReader("<!DOCTYPE root[<!ENTITY x \"somevalue\"><!ELEMENT root ANY>]><root>value&amp;x;</root>"));
+            ReloadSource(
+                new StringReader(
+                    "<!DOCTYPE root[<!ENTITY x \"somevalue\"><!ELEMENT root ANY>]><root>value&amp;x;</root>"
+                )
+            );
             DataReader.PositionOnElement("root");
             DataReader.Read(); //This takes to text node.
             if (!DataReader.CanReadValueChunk)
@@ -889,10 +964,11 @@ namespace System.Xml.Tests
                 }
             }
 
-            while (DataReader.ReadValueChunk(buffer, 0, 1) > 0) ;
+            while (DataReader.ReadValueChunk(buffer, 0, 1) > 0)
+                ;
 
-            DataReader.Read();//This takes you to end element
-            DataReader.Read();//This finishes the reading and sets nodetype to none.
+            DataReader.Read(); //This takes you to end element
+            DataReader.Read(); //This finishes the reading and sets nodetype to none.
 
             CError.Compare(DataReader.NodeType, XmlNodeType.None, "Not on End");
 
@@ -926,8 +1002,7 @@ namespace System.Xml.Tests
                             CError.WriteLineIgnore(DataReader.Value);
                             break;
                         }
-                    }
-                    while (DataReader.ReadValueChunk(buffer, 0, count) > 0);
+                    } while (DataReader.ReadValueChunk(buffer, 0, count) > 0);
 
                     CError.WriteLineIgnore(DataReader.Value);
                 }
@@ -940,9 +1015,7 @@ namespace System.Xml.Tests
                             buffer = new char[1];
                             DataReader.ReadValueChunk(buffer, 0, 1);
                         }
-                        catch (NotSupportedException)
-                        {
-                        }
+                        catch (NotSupportedException) { }
                     }
                     else
                     {
@@ -951,9 +1024,7 @@ namespace System.Xml.Tests
                             buffer = new char[1];
                             DataReader.ReadValueChunk(buffer, 0, 1);
                         }
-                        catch (InvalidOperationException)
-                        {
-                        }
+                        catch (InvalidOperationException) { }
                     }
                 }
             }
@@ -976,7 +1047,9 @@ namespace System.Xml.Tests
             MyDict<string, object> ht = new MyDict<string, object>();
             ht[ReaderFactory.HT_CURDESC] = GetDescription().ToLowerInvariant();
             ht[ReaderFactory.HT_CURVAR] = CurVariation.Desc.ToLowerInvariant();
-            ht[ReaderFactory.HT_STRINGREADER] = new StringReader("<root>val<!--Comment-->ue</root>");
+            ht[ReaderFactory.HT_STRINGREADER] = new StringReader(
+                "<root>val<!--Comment-->ue</root>"
+            );
             ht[ReaderFactory.HT_READERSETTINGS] = settings;
 
             ReloadSource(ht);
@@ -991,7 +1064,8 @@ namespace System.Xml.Tests
             CError.Compare(DataReader.ReadValueChunk(buffer, 0, 2), 2, "Didn't read 2 chars");
             CError.Compare("ue", new string(buffer), "Strings don't match");
 
-            while (DataReader.Read()) ;
+            while (DataReader.Read())
+                ;
             DataReader.Close();
 
             return TEST_PASS;
@@ -1028,7 +1102,8 @@ namespace System.Xml.Tests
             CError.Compare(DataReader.ReadValueChunk(buffer, 0, 2), 2, "Didn't read 2 chars");
             CError.Compare("ue", new string(buffer), "Strings don't match");
 
-            while (DataReader.Read()) ;
+            while (DataReader.Read())
+                ;
             DataReader.Close();
 
             return TEST_PASS;
@@ -1040,7 +1115,10 @@ namespace System.Xml.Tests
             XmlReaderSettings settings = new XmlReaderSettings();
             settings.DtdProcessing = DtdProcessing.Ignore;
 
-            XmlReader reader = XmlReader.Create(FilePathUtil.getStream(this.StandardPath + @"\XML10\ms_xml\vs084.xml"), settings);
+            XmlReader reader = XmlReader.Create(
+                FilePathUtil.getStream(this.StandardPath + @"\XML10\ms_xml\vs084.xml"),
+                settings
+            );
             reader.ReadToFollowing("a");
             reader.MoveToNextAttribute();
             reader.ReadAttributeValue();
@@ -1132,7 +1210,9 @@ namespace System.Xml.Tests
                 sr.MoveToFirstAttribute();
                 char[] chars = new char[100];
                 int i = sr.ReadValueChunk(chars, 0, 100);
-                CError.WriteLine("ReadValueChunk: length = " + i + " value = '" + new string(chars, 0, i) + "'");
+                CError.WriteLine(
+                    "ReadValueChunk: length = " + i + " value = '" + new string(chars, 0, i) + "'"
+                );
             }
             return TEST_PASS;
         }
@@ -1151,7 +1231,10 @@ namespace System.Xml.Tests
             {
                 CError.Compare(DataReader.ReadValueChunk(chars, 0, 1), 1, "size");
             }
-            catch (NotSupportedException e) { CError.WriteLine(e); }
+            catch (NotSupportedException e)
+            {
+                CError.WriteLine(e);
+            }
             DataReader.Close();
             return TEST_PASS;
         }
@@ -1170,12 +1253,17 @@ namespace System.Xml.Tests
                 CError.Compare(DataReader.ReadValueChunk(chars, 0, 1), 1, "size");
                 CError.Compare(DataReader.Value, "23", "value");
             }
-            catch (NotSupportedException e) { CError.WriteLine(e); }
+            catch (NotSupportedException e)
+            {
+                CError.WriteLine(e);
+            }
             DataReader.Close();
             return TEST_PASS;
         }
 
-        [Variation("goto to huge text node, read several chars with ReadValueChank and Move forward with .Read()")]
+        [Variation(
+            "goto to huge text node, read several chars with ReadValueChank and Move forward with .Read()"
+        )]
         public int TestReadValue_3()
         {
             string xml = "<elem0>123 $^ 56789 abcdefg hij klmn opqrst  12345 uvw xy ^ z</elem0>";
@@ -1188,13 +1276,18 @@ namespace System.Xml.Tests
             {
                 CError.Compare(DataReader.ReadValueChunk(chars, 0, 5), 5, "size");
             }
-            catch (NotSupportedException e) { CError.WriteLine(e); }
+            catch (NotSupportedException e)
+            {
+                CError.WriteLine(e);
+            }
             DataReader.Read();
             DataReader.Close();
             return TEST_PASS;
         }
 
-        [Variation("goto to huge text node with invalid chars, read several chars with ReadValueChank and Move forward with .Read()")]
+        [Variation(
+            "goto to huge text node with invalid chars, read several chars with ReadValueChank and Move forward with .Read()"
+        )]
         public int TestReadValue_4()
         {
             string xml = "<elem0>123 $^ 56789 abcdefg hij klmn opqrst  12345 uvw xy ^ z</elem0>";
@@ -1208,8 +1301,14 @@ namespace System.Xml.Tests
                 CError.Compare(DataReader.ReadValueChunk(chars, 0, 5), 5, "size");
                 DataReader.Read();
             }
-            catch (XmlException e) { CError.WriteLine(e); }
-            catch (NotSupportedException e) { CError.WriteLine(e); }
+            catch (XmlException e)
+            {
+                CError.WriteLine(e);
+            }
+            catch (NotSupportedException e)
+            {
+                CError.WriteLine(e);
+            }
             finally
             {
                 DataReader.Close();
@@ -1231,7 +1330,10 @@ namespace System.Xml.Tests
             while (DataReader.Read())
             {
                 DataReader.Read();
-                if (DataReader.NodeType == XmlNodeType.Text || DataReader.NodeType == XmlNodeType.None)
+                if (
+                    DataReader.NodeType == XmlNodeType.Text
+                    || DataReader.NodeType == XmlNodeType.None
+                )
                     continue;
                 currentSize = DataReader.ReadValueChunk(chars, startPos, readSize);
                 CError.Equals(currentSize, 3, "size");
@@ -1262,7 +1364,10 @@ namespace System.Xml.Tests
                 CError.Equals(DataReader.Value, "default", "value");
                 CError.Equals(DataReader.ReadValueChunk(chars, 0, 8), 7, "size");
             }
-            catch (NotSupportedException e) { CError.WriteLine(e); }
+            catch (NotSupportedException e)
+            {
+                CError.WriteLine(e);
+            }
             DataReader.Close();
             return TEST_PASS;
         }
@@ -1270,9 +1375,16 @@ namespace System.Xml.Tests
         [Variation("Call ReadValueChunk on two or more nodes and whitespace")]
         public int TestReadValue_7()
         {
-            string xml = @"<elem0>   123" + "\n" + @" <elem1>" + "\r" + @"123
+            string xml =
+                @"<elem0>   123"
+                + "\n"
+                + @" <elem1>"
+                + "\r"
+                + @"123
 <elem2>
-123  </elem2>" + "\r\n" + @"  123</elem1>          123           </elem0>";
+123  </elem2>"
+                + "\r\n"
+                + @"  123</elem1>          123           </elem0>";
             ReloadSource(new StringReader(xml));
 
             char[] chars = new char[100];
@@ -1284,7 +1396,10 @@ namespace System.Xml.Tests
                 while (DataReader.Read())
                 {
                     DataReader.Read();
-                    if (DataReader.NodeType == XmlNodeType.Text || DataReader.NodeType == XmlNodeType.None)
+                    if (
+                        DataReader.NodeType == XmlNodeType.Text
+                        || DataReader.NodeType == XmlNodeType.None
+                    )
                         continue;
                     currentSize = DataReader.ReadValueChunk(chars, startPos, readSize);
                     CError.Equals(currentSize, 3, "size");
@@ -1292,7 +1407,10 @@ namespace System.Xml.Tests
                     CError.Equals(DataReader.LinePosition, 0, "LinePosition");
                 }
             }
-            catch (NotSupportedException e) { CError.WriteLine(e); }
+            catch (NotSupportedException e)
+            {
+                CError.WriteLine(e);
+            }
             DataReader.Close();
             return TEST_PASS;
         }
@@ -1300,9 +1418,16 @@ namespace System.Xml.Tests
         [Variation("Call ReadValueChunk on two or more nodes and whitespace after call Value")]
         public int TestReadValue_8()
         {
-            string xml = @"<elem0>   123" + "\n" + @" <elem1>" + "\r" + @"123
+            string xml =
+                @"<elem0>   123"
+                + "\n"
+                + @" <elem1>"
+                + "\r"
+                + @"123
 <elem2>
-123  </elem2>" + "\r\n" + @"  123</elem1>          123           </elem0>";
+123  </elem2>"
+                + "\r\n"
+                + @"  123</elem1>          123           </elem0>";
             ReloadSource(new StringReader(xml));
 
             char[] chars = new char[100];
@@ -1315,7 +1440,10 @@ namespace System.Xml.Tests
                 while (DataReader.Read())
                 {
                     DataReader.Read();
-                    if (DataReader.NodeType == XmlNodeType.Text || DataReader.NodeType == XmlNodeType.None)
+                    if (
+                        DataReader.NodeType == XmlNodeType.Text
+                        || DataReader.NodeType == XmlNodeType.None
+                    )
                         continue;
                     CError.Equals(DataReader.Value.Contains("123"), "Value");
                     currentSize = DataReader.ReadValueChunk(chars, startPos, readSize);
@@ -1324,7 +1452,10 @@ namespace System.Xml.Tests
                     CError.Equals(DataReader.LinePosition, 0, "LinePosition");
                 }
             }
-            catch (NotSupportedException e) { CError.WriteLine(e); }
+            catch (NotSupportedException e)
+            {
+                CError.WriteLine(e);
+            }
             DataReader.Close();
             return TEST_PASS;
         }

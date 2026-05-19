@@ -22,12 +22,15 @@ namespace Microsoft.CSharp.RuntimeBinder
         public BindingFlag BindingFlags => 0;
 
         [RequiresUnreferencedCode(Binder.TrimmerWarning)]
-        public Expr DispatchPayload(RuntimeBinder runtimeBinder, ArgumentObject[] arguments, LocalVariableSymbol[] locals)
-            => runtimeBinder.BindAssignment(this, arguments, locals);
+        public Expr DispatchPayload(
+            RuntimeBinder runtimeBinder,
+            ArgumentObject[] arguments,
+            LocalVariableSymbol[] locals
+        ) => runtimeBinder.BindAssignment(this, arguments, locals);
 
         [RequiresUnreferencedCode(Binder.TrimmerWarning)]
-        public void PopulateSymbolTableWithName(Type callingType, ArgumentObject[] arguments)
-            => SymbolTable.PopulateSymbolTableWithName(SpecialNames.Indexer, null, arguments[0].Type);
+        public void PopulateSymbolTableWithName(Type callingType, ArgumentObject[] arguments) =>
+            SymbolTable.PopulateSymbolTableWithName(SpecialNames.Indexer, null, arguments[0].Type);
 
         public bool IsBinderThatCanHaveRefReceiver => true;
 
@@ -57,8 +60,9 @@ namespace Microsoft.CSharp.RuntimeBinder
             bool isCompoundAssignment,
             bool isChecked,
             Type callingContext,
-            IEnumerable<CSharpArgumentInfo> argumentInfo) :
-            base(BinderHelper.CreateCallInfo(ref argumentInfo, 2)) // discard 2 arguments: the target object and the value
+            IEnumerable<CSharpArgumentInfo> argumentInfo
+        )
+            : base(BinderHelper.CreateCallInfo(ref argumentInfo, 2)) // discard 2 arguments: the target object and the value
         {
             IsCompoundAssignment = isCompoundAssignment;
             _argumentInfo = argumentInfo as CSharpArgumentInfo[];
@@ -90,10 +94,12 @@ namespace Microsoft.CSharp.RuntimeBinder
                 return false;
             }
 
-            if (_callingContext != otherBinder._callingContext ||
-                IsChecked != otherBinder.IsChecked ||
-                IsCompoundAssignment != otherBinder.IsCompoundAssignment ||
-                _argumentInfo.Length != otherBinder._argumentInfo.Length)
+            if (
+                _callingContext != otherBinder._callingContext
+                || IsChecked != otherBinder.IsChecked
+                || IsCompoundAssignment != otherBinder.IsCompoundAssignment
+                || _argumentInfo.Length != otherBinder._argumentInfo.Length
+            )
             {
                 return false;
             }
@@ -109,9 +115,17 @@ namespace Microsoft.CSharp.RuntimeBinder
         /// <param name="value">The value to set to the collection.</param>
         /// <param name="errorSuggestion">The binding result to use if binding fails, or null.</param>
         /// <returns>The <see cref="DynamicMetaObject"/> representing the result of the binding.</returns>
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2026:RequiresUnreferencedCode",
-            Justification = "This whole class is unsafe. Constructors are marked as such.")]
-        public override DynamicMetaObject FallbackSetIndex(DynamicMetaObject target, DynamicMetaObject[] indexes, DynamicMetaObject value, DynamicMetaObject errorSuggestion)
+        [UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2026:RequiresUnreferencedCode",
+            Justification = "This whole class is unsafe. Constructors are marked as such."
+        )]
+        public override DynamicMetaObject FallbackSetIndex(
+            DynamicMetaObject target,
+            DynamicMetaObject[] indexes,
+            DynamicMetaObject value,
+            DynamicMetaObject errorSuggestion
+        )
         {
 #if ENABLECOMBINDER
             DynamicMetaObject com;
@@ -126,7 +140,13 @@ namespace Microsoft.CSharp.RuntimeBinder
             BinderHelper.ValidateBindArgument(target, nameof(target));
             BinderHelper.ValidateBindArgument(indexes, nameof(indexes));
             BinderHelper.ValidateBindArgument(value, nameof(value));
-            return BinderHelper.Bind(this, _binder, BinderHelper.Cons(target, indexes, value), _argumentInfo, errorSuggestion);
+            return BinderHelper.Bind(
+                this,
+                _binder,
+                BinderHelper.Cons(target, indexes, value),
+                _argumentInfo,
+                errorSuggestion
+            );
         }
     }
 }

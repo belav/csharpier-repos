@@ -48,6 +48,9 @@ namespace Microsoft.Composition.Demos.ExtendedCollectionImports
         /// <summary>
         /// The name of the metadata item to use as the key of the dictionary.
         /// </summary>
-        public string KeyMetadataName { get { return _metadataKey; } }
+        public string KeyMetadataName
+        {
+            get { return _metadataKey; }
+        }
     }
 }

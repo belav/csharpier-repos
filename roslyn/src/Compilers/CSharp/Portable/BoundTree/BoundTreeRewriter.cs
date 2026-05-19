@@ -3,10 +3,10 @@
 // See the LICENSE file in the project root for more information.
 
 using System.Collections.Immutable;
-using Microsoft.CodeAnalysis.CSharp.Symbols;
-using Microsoft.CodeAnalysis.PooledObjects;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp.Symbols;
+using Microsoft.CodeAnalysis.PooledObjects;
 
 namespace Microsoft.CodeAnalysis.CSharp
 {
@@ -18,7 +18,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             return type;
         }
 
-        public ImmutableArray<T> VisitList<T>(ImmutableArray<T> list) where T : BoundNode
+        public ImmutableArray<T> VisitList<T>(ImmutableArray<T> list)
+            where T : BoundNode
         {
             if (list.IsDefault)
             {
@@ -28,7 +29,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             return DoVisitList(list);
         }
 
-        private ImmutableArray<T> DoVisitList<T>(ImmutableArray<T> list) where T : BoundNode
+        private ImmutableArray<T> DoVisitList<T>(ImmutableArray<T> list)
+            where T : BoundNode
         {
             ArrayBuilder<T>? newList = null;
             for (int i = 0; i < list.Length; i++)
@@ -65,8 +67,7 @@ namespace Microsoft.CodeAnalysis.CSharp
     {
         private int _recursionDepth;
 
-        protected BoundTreeRewriterWithStackGuard()
-        { }
+        protected BoundTreeRewriterWithStackGuard() { }
 
         protected BoundTreeRewriterWithStackGuard(int recursionDepth)
         {
@@ -92,20 +93,23 @@ namespace Microsoft.CodeAnalysis.CSharp
             return VisitExpressionWithStackGuard(ref _recursionDepth, node);
         }
 
-        protected sealed override BoundExpression VisitExpressionWithoutStackGuard(BoundExpression node)
+        protected sealed override BoundExpression VisitExpressionWithoutStackGuard(
+            BoundExpression node
+        )
         {
             return (BoundExpression)base.Visit(node);
         }
     }
 
-    internal abstract class BoundTreeRewriterWithStackGuardWithoutRecursionOnTheLeftOfBinaryOperator : BoundTreeRewriterWithStackGuard
+    internal abstract class BoundTreeRewriterWithStackGuardWithoutRecursionOnTheLeftOfBinaryOperator
+        : BoundTreeRewriterWithStackGuard
     {
-        protected BoundTreeRewriterWithStackGuardWithoutRecursionOnTheLeftOfBinaryOperator()
-        { }
+        protected BoundTreeRewriterWithStackGuardWithoutRecursionOnTheLeftOfBinaryOperator() { }
 
-        protected BoundTreeRewriterWithStackGuardWithoutRecursionOnTheLeftOfBinaryOperator(int recursionDepth)
-            : base(recursionDepth)
-        { }
+        protected BoundTreeRewriterWithStackGuardWithoutRecursionOnTheLeftOfBinaryOperator(
+            int recursionDepth
+        )
+            : base(recursionDepth) { }
 
         public sealed override BoundNode? VisitBinaryOperator(BoundBinaryOperator node)
         {
@@ -143,9 +147,15 @@ namespace Microsoft.CodeAnalysis.CSharp
                 var right = (BoundExpression?)this.Visit(binary.Right);
                 Debug.Assert(right is { });
                 var type = this.VisitType(binary.Type);
-                left = binary.Update(binary.OperatorKind, binary.Data, binary.ResultKind, left, right, type);
-            }
-            while (stack.Count > 0);
+                left = binary.Update(
+                    binary.OperatorKind,
+                    binary.Data,
+                    binary.ResultKind,
+                    left,
+                    right,
+                    type
+                );
+            } while (stack.Count > 0);
 
             Debug.Assert((object)binary == node);
             stack.Free();

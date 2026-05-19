@@ -9,7 +9,8 @@ namespace System.ServiceModel.MsmqIntegration
 
     public sealed class MsmqIntegrationSecurity
     {
-        internal const MsmqIntegrationSecurityMode DefaultMode = MsmqIntegrationSecurityMode.Transport;
+        internal const MsmqIntegrationSecurityMode DefaultMode =
+            MsmqIntegrationSecurityMode.Transport;
 
         MsmqIntegrationSecurityMode mode;
         MsmqTransportSecurity transportSecurity;
@@ -28,7 +29,9 @@ namespace System.ServiceModel.MsmqIntegration
             {
                 if (!MsmqIntegrationSecurityModeHelper.IsDefined(value))
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("value"));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentOutOfRangeException("value")
+                    );
                 }
                 this.mode = value;
             }
@@ -49,5 +52,3 @@ namespace System.ServiceModel.MsmqIntegration
         }
     }
 }
-
-

@@ -25,7 +25,12 @@ namespace System.Web.Mvc.Test
         {
             // Act & assert
             Assert.ThrowsArgumentNullOrEmpty(
-                delegate { new EmptyFileResult(String.Empty); }, "contentType");
+                delegate
+                {
+                    new EmptyFileResult(String.Empty);
+                },
+                "contentType"
+            );
         }
 
         [Fact]
@@ -33,7 +38,12 @@ namespace System.Web.Mvc.Test
         {
             // Act & assert
             Assert.ThrowsArgumentNullOrEmpty(
-                delegate { new EmptyFileResult(null); }, "contentType");
+                delegate
+                {
+                    new EmptyFileResult(null);
+                },
+                "contentType"
+            );
         }
 
         [Fact]
@@ -42,13 +52,24 @@ namespace System.Web.Mvc.Test
             // See comment in FileResult.cs detailing how the FileDownloadName should be encoded.
 
             // Arrange
-            Mock<ControllerContext> mockControllerContext = new Mock<ControllerContext>(MockBehavior.Strict);
-            mockControllerContext.SetupSet(c => c.HttpContext.Response.ContentType = "application/my-type").Verifiable();
-            mockControllerContext.Setup(c => c.HttpContext.Response.AddHeader("Content-Disposition", @"attachment; filename=""some\\file""")).Verifiable();
+            Mock<ControllerContext> mockControllerContext = new Mock<ControllerContext>(
+                MockBehavior.Strict
+            );
+            mockControllerContext
+                .SetupSet(c => c.HttpContext.Response.ContentType = "application/my-type")
+                .Verifiable();
+            mockControllerContext
+                .Setup(c =>
+                    c.HttpContext.Response.AddHeader(
+                        "Content-Disposition",
+                        @"attachment; filename=""some\\file"""
+                    )
+                )
+                .Verifiable();
 
             EmptyFileResult result = new EmptyFileResult("application/my-type")
             {
-                FileDownloadName = @"some\file"
+                FileDownloadName = @"some\file",
             };
 
             // Act
@@ -63,13 +84,24 @@ namespace System.Web.Mvc.Test
         public void ContentDispositionHeaderIsEncodedCorrectlyForUnicodeCharacters()
         {
             // Arrange
-            Mock<ControllerContext> mockControllerContext = new Mock<ControllerContext>(MockBehavior.Strict);
-            mockControllerContext.SetupSet(c => c.HttpContext.Response.ContentType = "application/my-type").Verifiable();
-            mockControllerContext.Setup(c => c.HttpContext.Response.AddHeader("Content-Disposition", @"attachment; filename*=UTF-8''ABCXYZabcxyz012789!%40%23$%25%5E&%2A%28%29-%3D_+.:~%CE%94")).Verifiable();
+            Mock<ControllerContext> mockControllerContext = new Mock<ControllerContext>(
+                MockBehavior.Strict
+            );
+            mockControllerContext
+                .SetupSet(c => c.HttpContext.Response.ContentType = "application/my-type")
+                .Verifiable();
+            mockControllerContext
+                .Setup(c =>
+                    c.HttpContext.Response.AddHeader(
+                        "Content-Disposition",
+                        @"attachment; filename*=UTF-8''ABCXYZabcxyz012789!%40%23$%25%5E&%2A%28%29-%3D_+.:~%CE%94"
+                    )
+                )
+                .Verifiable();
 
             EmptyFileResult result = new EmptyFileResult("application/my-type")
             {
-                FileDownloadName = "ABCXYZabcxyz012789!@#$%^&*()-=_+.:~Δ"
+                FileDownloadName = "ABCXYZabcxyz012789!@#$%^&*()-=_+.:~Δ",
             };
 
             // Act
@@ -85,7 +117,9 @@ namespace System.Web.Mvc.Test
         {
             // Arrange
             Mock<ControllerContext> mockControllerContext = new Mock<ControllerContext>();
-            mockControllerContext.SetupSet(c => c.HttpContext.Response.ContentType = "application/my-type").Verifiable();
+            mockControllerContext
+                .SetupSet(c => c.HttpContext.Response.ContentType = "application/my-type")
+                .Verifiable();
 
             EmptyFileResult result = new EmptyFileResult("application/my-type");
 
@@ -101,13 +135,24 @@ namespace System.Web.Mvc.Test
         public void ExecuteResultSetsContentDispositionIfSpecified()
         {
             // Arrange
-            Mock<ControllerContext> mockControllerContext = new Mock<ControllerContext>(MockBehavior.Strict);
-            mockControllerContext.SetupSet(c => c.HttpContext.Response.ContentType = "application/my-type").Verifiable();
-            mockControllerContext.Setup(c => c.HttpContext.Response.AddHeader("Content-Disposition", "attachment; filename=filename.ext")).Verifiable();
+            Mock<ControllerContext> mockControllerContext = new Mock<ControllerContext>(
+                MockBehavior.Strict
+            );
+            mockControllerContext
+                .SetupSet(c => c.HttpContext.Response.ContentType = "application/my-type")
+                .Verifiable();
+            mockControllerContext
+                .Setup(c =>
+                    c.HttpContext.Response.AddHeader(
+                        "Content-Disposition",
+                        "attachment; filename=filename.ext"
+                    )
+                )
+                .Verifiable();
 
             EmptyFileResult result = new EmptyFileResult("application/my-type")
             {
-                FileDownloadName = "filename.ext"
+                FileDownloadName = "filename.ext",
             };
 
             // Act
@@ -126,7 +171,12 @@ namespace System.Web.Mvc.Test
 
             // Act & assert
             Assert.ThrowsArgumentNull(
-                delegate { result.ExecuteResult(null); }, "context");
+                delegate
+                {
+                    result.ExecuteResult(null);
+                },
+                "context"
+            );
         }
 
         [Fact]
@@ -149,7 +199,12 @@ namespace System.Web.Mvc.Test
                     { " ", "attachment; filename=\" \"" },
                     { "a b", "attachment; filename=\"a b\"" },
                     { "a\tb", "attachment; filename=\"a\tb\"" },
-                    { "a\nb", PlatformInfo.Platform == Platform.Net40 ? "attachment; filename=\"a\\\nb\"" : "attachment; filename=\"=?utf-8?B?YQpi?=\"" },
+                    {
+                        "a\nb",
+                        PlatformInfo.Platform == Platform.Net40
+                            ? "attachment; filename=\"a\\\nb\""
+                            : "attachment; filename=\"=?utf-8?B?YQpi?=\""
+                    },
                     { "a.b", "attachment; filename=a.b" },
                     { "-", "attachment; filename=-" },
                     { "_", "attachment; filename=_" },
@@ -165,13 +220,19 @@ namespace System.Web.Mvc.Test
                     { "résumé.txt", "attachment; filename*=UTF-8''r%C3%A9sum%C3%A9.txt" },
                     { "Δ", "attachment; filename*=UTF-8''%CE%94" },
                     { "Δ\t", "attachment; filename*=UTF-8''%CE%94%09" },
-                    { "ABCXYZabcxyz012789!@#$%^&*()-=_+.:~Δ", @"attachment; filename*=UTF-8''ABCXYZabcxyz012789!%40%23$%25%5E&%2A%28%29-%3D_+.:~%CE%94" },
+                    {
+                        "ABCXYZabcxyz012789!@#$%^&*()-=_+.:~Δ",
+                        @"attachment; filename*=UTF-8''ABCXYZabcxyz012789!%40%23$%25%5E&%2A%28%29-%3D_+.:~%CE%94"
+                    },
                 };
             }
         }
 
         [Theory, PropertyData("ContentDispositionData")]
-        public void GetHeaderValue_Produces_Correct_ContentDisposition(string input, string expectedOutput)
+        public void GetHeaderValue_Produces_Correct_ContentDisposition(
+            string input,
+            string expectedOutput
+        )
         {
             // Arrange & Act
             string actual = FileResult.ContentDispositionUtil.GetHeaderValue(input);
@@ -185,14 +246,10 @@ namespace System.Web.Mvc.Test
             public bool WasWriteFileCalled;
 
             public EmptyFileResult()
-                : this(MediaTypeNames.Application.Octet)
-            {
-            }
+                : this(MediaTypeNames.Application.Octet) { }
 
             public EmptyFileResult(string contentType)
-                : base(contentType)
-            {
-            }
+                : base(contentType) { }
 
             protected override void WriteFile(HttpResponseBase response)
             {

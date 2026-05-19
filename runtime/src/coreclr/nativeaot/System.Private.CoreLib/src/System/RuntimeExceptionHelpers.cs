@@ -5,7 +5,6 @@ using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Runtime;
 using System.Threading;
-
 using Internal.Reflection.Augments;
 
 namespace System
@@ -17,7 +16,7 @@ namespace System
         // Eagerly preallocate instance of out of memory exception to avoid infinite recursion once we run out of memory
         internal static void Initialize()
         {
-            Instance = new OutOfMemoryException(message: null);  // Cannot call the nullary constructor as that triggers non-trivial resource manager logic.
+            Instance = new OutOfMemoryException(message: null); // Cannot call the nullary constructor as that triggers non-trivial resource manager logic.
         }
     }
 
@@ -63,9 +62,7 @@ namespace System
                             {
                                 outOfMemoryException = new OutOfMemoryException();
                             }
-                            catch
-                            {
-                            }
+                            catch { }
                             t_allocatingOutOfMemoryException = false;
                         }
 
@@ -93,7 +90,9 @@ namespace System
                         return new NullReferenceException();
 
                     case ExceptionIDs.AccessViolation:
-                        FailFast("Access Violation: Attempted to read or write protected memory. This is often an indication that other memory is corrupt. The application will be terminated since this platform does not support throwing an AccessViolationException.");
+                        FailFast(
+                            "Access Violation: Attempted to read or write protected memory. This is often an indication that other memory is corrupt. The application will be terminated since this platform does not support throwing an AccessViolationException."
+                        );
                         return null;
 
                     case ExceptionIDs.DataMisaligned:
@@ -106,7 +105,9 @@ namespace System
                         return new AmbiguousImplementationException();
 
                     default:
-                        FailFast("The runtime requires an exception for a case that this class library does not understand.");
+                        FailFast(
+                            "The runtime requires an exception for a case that this class library does not understand."
+                        );
                         return null;
                 }
             }
@@ -116,14 +117,17 @@ namespace System
             }
         }
 
-        private static string GetStringForFailFastReason(RhFailFastReason reason) => reason switch
+        private static string GetStringForFailFastReason(RhFailFastReason reason) =>
+            reason switch
             {
                 RhFailFastReason.InternalError => "Runtime internal error",
-                RhFailFastReason.UnhandledException => "Unhandled exception: a managed exception was not handled before reaching unmanaged code",
-                RhFailFastReason.UnhandledExceptionFromPInvoke => "Unhandled exception: an unmanaged exception was thrown out of a managed-to-native transition",
+                RhFailFastReason.UnhandledException =>
+                    "Unhandled exception: a managed exception was not handled before reaching unmanaged code",
+                RhFailFastReason.UnhandledExceptionFromPInvoke =>
+                    "Unhandled exception: an unmanaged exception was thrown out of a managed-to-native transition",
                 RhFailFastReason.EnvironmentFailFast => "Environment.FailFast was called",
                 RhFailFastReason.AssertionFailure => "Assertion failure",
-                _ => "Unknown reason."
+                _ => "Unknown reason.",
             };
 
         // Used to report exceptions that *logically* go unhandled in the Fx code.  For example, an
@@ -137,7 +141,12 @@ namespace System
         // needs to cause the process to exit. It is the classlib's opportunity to customize the
         // termination behavior in whatever way necessary.
         [RuntimeExport("RuntimeFailFast")]
-        internal static void RuntimeFailFast(RhFailFastReason reason, Exception? exception, IntPtr pExAddress, IntPtr pExContext)
+        internal static void RuntimeFailFast(
+            RhFailFastReason reason,
+            Exception? exception,
+            IntPtr pExAddress,
+            IntPtr pExContext
+        )
         {
             if (!SafeToPerformRichExceptionSupport)
                 return;
@@ -146,7 +155,12 @@ namespace System
             // back into the dispatcher.
             try
             {
-                FailFast(exception: exception, reason: reason, pExAddress: pExAddress, pExContext: pExContext);
+                FailFast(
+                    exception: exception,
+                    reason: reason,
+                    pExAddress: pExAddress,
+                    pExContext: pExContext
+                );
             }
             catch
             {
@@ -178,26 +192,49 @@ namespace System
         private static ulong s_crashingThreadId;
 
         [DoesNotReturn]
-        internal static unsafe void FailFast(string? message = null, Exception? exception = null, string? errorSource = null,
+        internal static unsafe void FailFast(
+            string? message = null,
+            Exception? exception = null,
+            string? errorSource = null,
             RhFailFastReason reason = RhFailFastReason.EnvironmentFailFast,
-            IntPtr pExAddress = 0, IntPtr pExContext = 0)
+            IntPtr pExAddress = 0,
+            IntPtr pExContext = 0
+        )
         {
             IntPtr triageBufferAddress = IntPtr.Zero;
             int triageBufferSize = 0;
             int errorCode = 0;
 
             ulong currentThreadId = Thread.CurrentOSThreadId;
-            ulong previousThreadId = Interlocked.CompareExchange(ref s_crashingThreadId, currentThreadId, 0);
+            ulong previousThreadId = Interlocked.CompareExchange(
+                ref s_crashingThreadId,
+                currentThreadId,
+                0
+            );
             if (previousThreadId == 0)
             {
                 CrashInfo crashInfo = new();
-                crashInfo.Open(reason, s_crashingThreadId, message ?? GetStringForFailFastReason(reason));
+                crashInfo.Open(
+                    reason,
+                    s_crashingThreadId,
+                    message ?? GetStringForFailFastReason(reason)
+                );
 
                 bool minimalFailFast = (exception == PreallocatedOutOfMemoryException.Instance);
                 if (!minimalFailFast)
                 {
-                    Internal.Console.Error.Write(((exception == null) || (reason is RhFailFastReason.EnvironmentFailFast or RhFailFastReason.AssertionFailure)) ?
-                        "Process terminated. " : "Unhandled exception. ");
+                    Internal.Console.Error.Write(
+                        (
+                            (exception == null)
+                            || (
+                                reason
+                                is RhFailFastReason.EnvironmentFailFast
+                                    or RhFailFastReason.AssertionFailure
+                            )
+                        )
+                            ? "Process terminated. "
+                            : "Unhandled exception. "
+                    );
 
                     if (errorSource != null)
                     {
@@ -211,7 +248,11 @@ namespace System
                         Internal.Console.Error.WriteLine();
                     }
 
-                    if (errorSource == null && message == null && (exception == null || reason is RhFailFastReason.EnvironmentFailFast))
+                    if (
+                        errorSource == null
+                        && message == null
+                        && (exception == null || reason is RhFailFastReason.EnvironmentFailFast)
+                    )
                     {
                         Internal.Console.Error.Write(GetStringForFailFastReason(reason));
                         Internal.Console.Error.WriteLine();
@@ -240,15 +281,18 @@ namespace System
                 triageBufferSize = crashInfo.TriageBufferSize;
 
                 // Try to map the failure into a HRESULT that makes sense
-                errorCode = exception != null ? exception.HResult : reason switch
-                {
-                    RhFailFastReason.EnvironmentFailFast => HResults.COR_E_FAILFAST,
-                    RhFailFastReason.InternalError  => HResults.COR_E_EXECUTIONENGINE,
-                    // Error code for unhandled exceptions is expected to come from the exception object above
-                    // RhFailFastReason.UnhandledException or
-                    // RhFailFastReason.UnhandledExceptionFromPInvoke
-                    _ => HResults.E_FAIL
-                };
+                errorCode =
+                    exception != null
+                        ? exception.HResult
+                        : reason switch
+                        {
+                            RhFailFastReason.EnvironmentFailFast => HResults.COR_E_FAILFAST,
+                            RhFailFastReason.InternalError => HResults.COR_E_EXECUTIONENGINE,
+                            // Error code for unhandled exceptions is expected to come from the exception object above
+                            // RhFailFastReason.UnhandledException or
+                            // RhFailFastReason.UnhandledExceptionFromPInvoke
+                            _ => HResults.E_FAIL,
+                        };
             }
             else
             {
@@ -281,7 +325,11 @@ namespace System
             exceptionRecord.ExceptionInformation[3] = (uint)triageBufferSize;
 
 #if TARGET_WINDOWS
-            Interop.Kernel32.RaiseFailFastException(new IntPtr(&exceptionRecord), pExContext, pExAddress == IntPtr.Zero ? FAIL_FAST_GENERATE_EXCEPTION_ADDRESS : 0);
+            Interop.Kernel32.RaiseFailFastException(
+                new IntPtr(&exceptionRecord),
+                pExContext,
+                pExAddress == IntPtr.Zero ? FAIL_FAST_GENERATE_EXCEPTION_ADDRESS : 0
+            );
 #else
             RuntimeImports.RhCreateCrashDumpIfEnabled(new IntPtr(&exceptionRecord), pExContext);
             Interop.Sys.Abort();

@@ -13,10 +13,7 @@ namespace System.Diagnostics
 
         public string ConditionString
         {
-            get
-            {
-                return _conditionString;
-            }
+            get { return _conditionString; }
         }
 
         private string _conditionString;

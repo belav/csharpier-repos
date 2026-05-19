@@ -1,7 +1,7 @@
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 /*============================================================
 **
@@ -12,18 +12,18 @@
 ** defines only the basics. This class is used for wrapping COM objects
 ** accessed from COM+
 **
-** 
+**
 ===========================================================*/
-namespace System {
-    
+namespace System
+{
     using System;
     using System.Collections;
-    using System.Threading;
+    using System.Reflection;
+    using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
     using System.Runtime.InteropServices.WindowsRuntime;
-    using System.Runtime.CompilerServices;
-    using System.Reflection;
     using System.Security.Permissions;
+    using System.Threading;
 
     internal class __ComObject : MarshalByRefObject
     {
@@ -33,12 +33,10 @@ namespace System {
         ** default constructor
         ** can't instantiate this directly
         =============================================================*/
-        protected __ComObject ()
-        {
-        }
+        protected __ComObject() { }
 
         //====================================================================
-        // Overrides ToString() to make sure we call to IStringable if the 
+        // Overrides ToString() to make sure we call to IStringable if the
         // COM object implements it in the case of weakly typed RCWs
         //====================================================================
         public override string ToString()
@@ -55,13 +53,13 @@ namespace System {
                 if (stringableType != null)
                 {
                     return stringableType.ToString();
-                }                   
+                }
             }
-                
+
             return base.ToString();
         }
-        
-        [System.Security.SecurityCritical]  // auto-generated
+
+        [System.Security.SecurityCritical] // auto-generated
         internal IntPtr GetIUnknown(out bool fIsURTAggregated)
         {
             fIsURTAggregated = !GetType().IsDefined(typeof(ComImportAttribute), false);
@@ -77,7 +75,7 @@ namespace System {
             Object data = null;
 
             // Synchronize access to the map.
-            lock(this)
+            lock (this)
             {
                 // If the map hasn't been allocated, then there can be no data for the specified key.
                 if (m_ObjectToDataMap != null)
@@ -89,9 +87,9 @@ namespace System {
 
             return data;
         }
-        
+
         //====================================================================
-        // This method sets the data for the specified key on the current 
+        // This method sets the data for the specified key on the current
         // __ComObject.
         //====================================================================
         internal bool SetData(Object key, Object data)
@@ -99,7 +97,7 @@ namespace System {
             bool bAdded = false;
 
             // Synchronize access to the map.
-            lock(this)
+            lock (this)
             {
                 // If the map hasn't been allocated yet, allocate it.
                 if (m_ObjectToDataMap == null)
@@ -117,16 +115,15 @@ namespace System {
         }
 
         //====================================================================
-        // This method is called from within the EE and releases all the 
+        // This method is called from within the EE and releases all the
         // cached data for the __ComObject.
         //====================================================================
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         internal void ReleaseAllData()
         {
             // Synchronize access to the map.
-            lock(this)
+            lock (this)
             {
-
                 // If the map hasn't been allocated, then there is nothing to do.
                 if (m_ObjectToDataMap != null)
                 {
@@ -134,7 +131,7 @@ namespace System {
                     {
                         // Note: the value could be an object[]
                         // We are fine for now as object[] doesn't implement IDisposable nor derive from __ComObject
-                        
+
                         // If the object implements IDisposable, then call Dispose on it.
                         IDisposable DisposableObj = o as IDisposable;
                         if (DisposableObj != null)
@@ -156,7 +153,7 @@ namespace System {
         // This method is called from within the EE and is used to handle
         // calls on methods of event interfaces.
         //====================================================================
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         internal Object GetEventProvider(RuntimeType t)
         {
             // Check to see if we already have a cached event provider for this type.
@@ -169,26 +166,32 @@ namespace System {
             return EvProvider;
         }
 
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         internal int ReleaseSelf()
         {
             return Marshal.InternalReleaseComObject(this);
         }
 
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         internal void FinalReleaseSelf()
         {
             Marshal.InternalFinalReleaseComObject(this);
         }
 
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
 #if !FEATURE_CORECLR
-        [ReflectionPermissionAttribute(SecurityAction.Assert, MemberAccess=true)]
+        [ReflectionPermissionAttribute(SecurityAction.Assert, MemberAccess = true)]
 #endif
         private Object CreateEventProvider(RuntimeType t)
         {
             // Create the event provider for the specified type.
-            Object EvProvider = Activator.CreateInstance(t, Activator.ConstructorDefault | BindingFlags.NonPublic, null, new Object[]{this}, null);
+            Object EvProvider = Activator.CreateInstance(
+                t,
+                Activator.ConstructorDefault | BindingFlags.NonPublic,
+                null,
+                new Object[] { this },
+                null
+            );
 
             // Attempt to cache the wrapper on the object.
             if (!SetData(t, EvProvider))

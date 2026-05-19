@@ -29,10 +29,7 @@ namespace System.Web.UI.Design.WebControls
                 }
                 return _connectionString;
             }
-            set
-            {
-                _connectionString = value;
-            }
+            set { _connectionString = value; }
         }
 
         public string DefaultContainerName
@@ -45,29 +42,14 @@ namespace System.Web.UI.Design.WebControls
                 }
                 return _defaultContainerName;
             }
-            set
-            {
-                _defaultContainerName = value;
-            }
+            set { _defaultContainerName = value; }
         }
 
-        public bool EnableDelete
-        {
-            get;
-            set;
-        }
+        public bool EnableDelete { get; set; }
 
-        public bool EnableInsert
-        {
-            get;
-            set;
-        }
+        public bool EnableInsert { get; set; }
 
-        public bool EnableUpdate
-        {
-            get;
-            set;
-        }
+        public bool EnableUpdate { get; set; }
 
         public string EntitySetName
         {
@@ -79,10 +61,7 @@ namespace System.Web.UI.Design.WebControls
                 }
                 return _entitySetName;
             }
-            set
-            {
-                _entitySetName = value;
-            }
+            set { _entitySetName = value; }
         }
 
         public string EntityTypeFilter
@@ -95,10 +74,7 @@ namespace System.Web.UI.Design.WebControls
                 }
                 return _entityTypeFilter;
             }
-            set
-            {
-                _entityTypeFilter = value;
-            }
+            set { _entityTypeFilter = value; }
         }
 
         public string Select
@@ -111,16 +87,9 @@ namespace System.Web.UI.Design.WebControls
                 }
                 return _select;
             }
-            set
-            {
-                _select = value;
-            }
+            set { _select = value; }
         }
 
-        public bool EnableFlattening
-        {
-            get;
-            set;
-        }        
+        public bool EnableFlattening { get; set; }
     }
 }

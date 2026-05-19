@@ -15,20 +15,32 @@ namespace Microsoft.CodeAnalysis.CSharp
             Debug.Assert(node.MethodOpt != null);
 
             NamedTypeSymbol booleanType = _compilation.GetSpecialType(SpecialType.System_Boolean);
-            BoundExpression fromEnd = MakeLiteral(node.Syntax, ConstantValue.Create(true), booleanType);
+            BoundExpression fromEnd = MakeLiteral(
+                node.Syntax,
+                ConstantValue.Create(true),
+                booleanType
+            );
 
             BoundExpression operand = VisitExpression(node.Operand);
 
             if (NullableNeverHasValue(operand))
             {
-                operand = new BoundDefaultExpression(operand.Syntax, operand.Type!.GetNullableUnderlyingType());
+                operand = new BoundDefaultExpression(
+                    operand.Syntax,
+                    operand.Type!.GetNullableUnderlyingType()
+                );
             }
 
             operand = NullableAlwaysHasValue(operand) ?? operand;
 
             if (!node.Type.IsNullableType())
             {
-                return new BoundObjectCreationExpression(node.Syntax, node.MethodOpt, operand, fromEnd);
+                return new BoundObjectCreationExpression(
+                    node.Syntax,
+                    node.MethodOpt,
+                    operand,
+                    fromEnd
+                );
             }
 
             ArrayBuilder<BoundExpression> sideeffects = ArrayBuilder<BoundExpression>.GetInstance();
@@ -39,8 +51,16 @@ namespace Microsoft.CodeAnalysis.CSharp
             BoundExpression condition = MakeOptimizedHasValue(operand.Syntax, operand);
 
             // new Index(operand, fromEnd: true)
-            BoundExpression boundOperandGetValueOrDefault = MakeOptimizedGetValueOrDefault(operand.Syntax, operand);
-            BoundExpression indexCreation = new BoundObjectCreationExpression(node.Syntax, node.MethodOpt, boundOperandGetValueOrDefault, fromEnd);
+            BoundExpression boundOperandGetValueOrDefault = MakeOptimizedGetValueOrDefault(
+                operand.Syntax,
+                operand
+            );
+            BoundExpression indexCreation = new BoundObjectCreationExpression(
+                node.Syntax,
+                node.MethodOpt,
+                boundOperandGetValueOrDefault,
+                fromEnd
+            );
 
             // new Nullable(new Index(operand, fromEnd: true))
             BoundExpression consequence = ConvertToNullable(node.Syntax, node.Type, indexCreation);
@@ -56,22 +76,41 @@ namespace Microsoft.CodeAnalysis.CSharp
                 rewrittenAlternative: alternative,
                 constantValueOpt: null,
                 rewrittenType: node.Type,
-                isRef: false);
+                isRef: false
+            );
 
             return new BoundSequence(
                 syntax: node.Syntax,
                 locals: locals.ToImmutableAndFree(),
                 sideEffects: sideeffects.ToImmutableAndFree(),
                 value: conditionalExpression,
-                type: node.Type);
+                type: node.Type
+            );
         }
 
-        private BoundExpression ConvertToNullable(SyntaxNode syntax, TypeSymbol targetNullableType, BoundExpression underlyingValue)
+        private BoundExpression ConvertToNullable(
+            SyntaxNode syntax,
+            TypeSymbol targetNullableType,
+            BoundExpression underlyingValue
+        )
         {
             Debug.Assert(targetNullableType.IsNullableType());
-            Debug.Assert(TypeSymbol.Equals(targetNullableType.GetNullableUnderlyingType(), underlyingValue.Type, TypeCompareKind.AllIgnoreOptions));
+            Debug.Assert(
+                TypeSymbol.Equals(
+                    targetNullableType.GetNullableUnderlyingType(),
+                    underlyingValue.Type,
+                    TypeCompareKind.AllIgnoreOptions
+                )
+            );
 
-            if (!TryGetNullableMethod(syntax, targetNullableType, SpecialMember.System_Nullable_T__ctor, out MethodSymbol nullableCtor))
+            if (
+                !TryGetNullableMethod(
+                    syntax,
+                    targetNullableType,
+                    SpecialMember.System_Nullable_T__ctor,
+                    out MethodSymbol nullableCtor
+                )
+            )
             {
                 return BadExpression(syntax, targetNullableType, underlyingValue);
             }

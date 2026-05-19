@@ -15,6 +15,7 @@ internal static partial class Interop
             CertEncodingType dwCertEncodingType,
             CERT_INFO* pCertInfo,
             out X509KeyUsageFlags pbKeyUsage,
-            int cbKeyUsage);
+            int cbKeyUsage
+        );
     }
 }

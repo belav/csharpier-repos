@@ -65,12 +65,25 @@ namespace System.ServiceModel.Syndication.Tests
         {
             yield return new object[] { null, null, null, null, 0 };
             yield return new object[] { new Uri("http://microsoft.com"), "", "", "", 0 };
-            yield return new object[] { new Uri("/relative", UriKind.Relative), "relationshipType", "title", "mediaType", 10 };
+            yield return new object[]
+            {
+                new Uri("/relative", UriKind.Relative),
+                "relationshipType",
+                "title",
+                "mediaType",
+                10,
+            };
         }
 
         [Theory]
         [MemberData(nameof(Ctor_Uri_String_String_String_Long_TestData))]
-        public void Ctor_Uri_String_String_String_Long(Uri uri, string relationshipType, string title, string mediaType, long length)
+        public void Ctor_Uri_String_String_String_Long(
+            Uri uri,
+            string relationshipType,
+            string title,
+            string mediaType,
+            long length
+        )
         {
             var link = new SyndicationLink(uri, relationshipType, title, mediaType, length);
             Assert.Empty(link.AttributeExtensions);
@@ -86,13 +99,22 @@ namespace System.ServiceModel.Syndication.Tests
         [Fact]
         public void Ctor_NegativeLength_ThrowsArgumentOutOfRangeException()
         {
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("length", () => new SyndicationLink(null, "", "", "", -1));
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "length",
+                () => new SyndicationLink(null, "", "", "", -1)
+            );
         }
 
         [Fact]
         public void Ctor_SyndicationLink_NoExtensions()
         {
-            var link = new SyndicationLink(new Uri("http://microsoft.com"), "relationshipType", "title", "mediaType", 10);
+            var link = new SyndicationLink(
+                new Uri("http://microsoft.com"),
+                "relationshipType",
+                "title",
+                "mediaType",
+                10
+            );
             var clone = new SyndicationLinkSubclass(link);
             Assert.Empty(clone.AttributeExtensions);
             Assert.Null(clone.BaseUri);
@@ -107,9 +129,15 @@ namespace System.ServiceModel.Syndication.Tests
         [Fact]
         public void Ctor_SyndicationLink_Full()
         {
-            var original = new SyndicationLink(new Uri("http://microsoft.com"), "relationshipType", "title", "mediaType", 10)
+            var original = new SyndicationLink(
+                new Uri("http://microsoft.com"),
+                "relationshipType",
+                "title",
+                "mediaType",
+                10
+            )
             {
-                BaseUri = new Uri("http://baseuri.com")
+                BaseUri = new Uri("http://baseuri.com"),
             };
             original.AttributeExtensions.Add(new XmlQualifiedName("name"), "value");
             original.ElementExtensions.Add(new ExtensionObject { Value = 10 });
@@ -150,7 +178,10 @@ namespace System.ServiceModel.Syndication.Tests
         [Fact]
         public void Ctor_NullSource_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>("source", () => new SyndicationLinkSubclass(null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "source",
+                () => new SyndicationLinkSubclass(null)
+            );
         }
 
         [Theory]
@@ -158,10 +189,7 @@ namespace System.ServiceModel.Syndication.Tests
         [InlineData(10)]
         public void Length_SetValid_GetReturnsExpected(long length)
         {
-            var link = new SyndicationLink
-            {
-                Length = length
-            };
+            var link = new SyndicationLink { Length = length };
             Assert.Equal(length, link.Length);
         }
 
@@ -175,9 +203,15 @@ namespace System.ServiceModel.Syndication.Tests
         [Fact]
         public void Clone_Full_ReturnsExpected()
         {
-            var original = new SyndicationLink(new Uri("http://microsoft.com"), "relationshipType", "title", "mediaType", 10)
+            var original = new SyndicationLink(
+                new Uri("http://microsoft.com"),
+                "relationshipType",
+                "title",
+                "mediaType",
+                10
+            )
             {
-                BaseUri = new Uri("http://baseuri.com")
+                BaseUri = new Uri("http://baseuri.com"),
             };
             original.AttributeExtensions.Add(new XmlQualifiedName("name"), "value");
             original.ElementExtensions.Add(new ExtensionObject { Value = 10 });
@@ -247,7 +281,11 @@ namespace System.ServiceModel.Syndication.Tests
 
         [Theory]
         [MemberData(nameof(Ctor_Uri_String_Long_TestData))]
-        public void CreateMediaEnclosureLink_Invoke_ReturnsExpected(Uri uri, string mediaType, long length)
+        public void CreateMediaEnclosureLink_Invoke_ReturnsExpected(
+            Uri uri,
+            string mediaType,
+            long length
+        )
         {
             SyndicationLink link = SyndicationLink.CreateMediaEnclosureLink(uri, mediaType, length);
             Assert.Empty(link.AttributeExtensions);
@@ -263,7 +301,10 @@ namespace System.ServiceModel.Syndication.Tests
         [Fact]
         public void CreateMediaEnclosureLink_NegativeLength_ThrowsArgumentOutOfRangeException()
         {
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("length", () => SyndicationLink.CreateMediaEnclosureLink(null, null, -1));
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "length",
+                () => SyndicationLink.CreateMediaEnclosureLink(null, null, -1)
+            );
         }
 
         [Theory]
@@ -299,9 +340,24 @@ namespace System.ServiceModel.Syndication.Tests
         public static IEnumerable<object[]> GetAbsoluteUri_TestData()
         {
             yield return new object[] { new SyndicationLink(null), null };
-            yield return new object[] { new SyndicationLink(new Uri("http://microsoft.com")), new Uri("http://microsoft.com") };
-            yield return new object[] { new SyndicationLink(new Uri("/relative", UriKind.Relative)), null };
-            yield return new object[] { new SyndicationLink(new Uri("/relative", UriKind.Relative)) { BaseUri = new Uri("http://microsoft.com") }, new Uri("http://microsoft.com/relative") };
+            yield return new object[]
+            {
+                new SyndicationLink(new Uri("http://microsoft.com")),
+                new Uri("http://microsoft.com"),
+            };
+            yield return new object[]
+            {
+                new SyndicationLink(new Uri("/relative", UriKind.Relative)),
+                null,
+            };
+            yield return new object[]
+            {
+                new SyndicationLink(new Uri("/relative", UriKind.Relative))
+                {
+                    BaseUri = new Uri("http://microsoft.com"),
+                },
+                new Uri("http://microsoft.com/relative"),
+            };
         }
 
         [Theory]
@@ -319,7 +375,12 @@ namespace System.ServiceModel.Syndication.Tests
         [InlineData("name", "http://www.w3.org/2000/xmlns/", "value", "version")]
         [InlineData("type", "ns", "value", "version")]
         [InlineData("name", "http://www.w3.org/2001/XMLSchema-instance", "value", "version")]
-        public void TryParseAttribute_Invoke_ReturnsFalse(string name, string ns, string value, string version)
+        public void TryParseAttribute_Invoke_ReturnsFalse(
+            string name,
+            string ns,
+            string value,
+            string version
+        )
         {
             var link = new SyndicationLinkSubclass();
             Assert.False(link.TryParseAttributeEntryPoint(name, ns, value, version));
@@ -347,19 +408,28 @@ namespace System.ServiceModel.Syndication.Tests
         public void WriteAttributeExtensions_Invoke_ReturnsExpected(string version)
         {
             var link = new SyndicationLinkSubclass();
-            CompareHelper.AssertEqualWriteOutput("", writer => link.WriteAttributeExtensionsEntryPoint(writer, version));
+            CompareHelper.AssertEqualWriteOutput(
+                "",
+                writer => link.WriteAttributeExtensionsEntryPoint(writer, version)
+            );
 
             link.AttributeExtensions.Add(new XmlQualifiedName("name1"), "value");
             link.AttributeExtensions.Add(new XmlQualifiedName("name2", "namespace"), "");
             link.AttributeExtensions.Add(new XmlQualifiedName("name3"), null);
-            CompareHelper.AssertEqualWriteOutput(@"name1=""value"" d0p1:name2="""" name3=""""", writer => link.WriteAttributeExtensionsEntryPoint(writer, "version"));
+            CompareHelper.AssertEqualWriteOutput(
+                @"name1=""value"" d0p1:name2="""" name3=""""",
+                writer => link.WriteAttributeExtensionsEntryPoint(writer, "version")
+            );
         }
 
         [Fact]
         public void WriteAttributeExtensions_NullWriter_ThrowsArgumentNullException()
         {
             var link = new SyndicationLinkSubclass();
-            AssertExtensions.Throws<ArgumentNullException>("writer", () => link.WriteAttributeExtensionsEntryPoint(null, "version"));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "writer",
+                () => link.WriteAttributeExtensionsEntryPoint(null, "version")
+            );
         }
 
         [Theory]
@@ -369,39 +439,57 @@ namespace System.ServiceModel.Syndication.Tests
         public void WriteElementExtensions_Invoke_ReturnsExpected(string version)
         {
             var link = new SyndicationLinkSubclass();
-            CompareHelper.AssertEqualWriteOutput("", writer => link.WriteElementExtensionsEntryPoint(writer, version));
+            CompareHelper.AssertEqualWriteOutput(
+                "",
+                writer => link.WriteElementExtensionsEntryPoint(writer, version)
+            );
 
             link.ElementExtensions.Add(new ExtensionObject { Value = 10 });
             link.ElementExtensions.Add(new ExtensionObject { Value = 11 });
             CompareHelper.AssertEqualWriteOutput(
-@"<SyndicationLinkTests.ExtensionObject xmlns:i=""http://www.w3.org/2001/XMLSchema-instance"" xmlns=""http://schemas.datacontract.org/2004/07/System.ServiceModel.Syndication.Tests"">
+                @"<SyndicationLinkTests.ExtensionObject xmlns:i=""http://www.w3.org/2001/XMLSchema-instance"" xmlns=""http://schemas.datacontract.org/2004/07/System.ServiceModel.Syndication.Tests"">
     <Value>10</Value>
 </SyndicationLinkTests.ExtensionObject>
 <SyndicationLinkTests.ExtensionObject xmlns:i=""http://www.w3.org/2001/XMLSchema-instance"" xmlns=""http://schemas.datacontract.org/2004/07/System.ServiceModel.Syndication.Tests"">
     <Value>11</Value>
-</SyndicationLinkTests.ExtensionObject>", writer => link.WriteElementExtensionsEntryPoint(writer, version));
+</SyndicationLinkTests.ExtensionObject>",
+                writer => link.WriteElementExtensionsEntryPoint(writer, version)
+            );
         }
 
         [Fact]
         public void WriteElementExtensions_NullWriter_ThrowsArgumentNullException()
         {
             var link = new SyndicationLinkSubclass();
-            AssertExtensions.Throws<ArgumentNullException>("writer", () => link.WriteElementExtensionsEntryPoint(null, "version"));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "writer",
+                () => link.WriteElementExtensionsEntryPoint(null, "version")
+            );
         }
 
         public class SyndicationLinkSubclass : SyndicationLink
         {
-            public SyndicationLinkSubclass() : base() { }
+            public SyndicationLinkSubclass()
+                : base() { }
 
-            public SyndicationLinkSubclass(SyndicationLink source) : base(source) { }
+            public SyndicationLinkSubclass(SyndicationLink source)
+                : base(source) { }
 
-            public bool TryParseAttributeEntryPoint(string name, string ns, string value, string version) => TryParseAttribute(name, ns, value, version);
+            public bool TryParseAttributeEntryPoint(
+                string name,
+                string ns,
+                string value,
+                string version
+            ) => TryParseAttribute(name, ns, value, version);
 
-            public bool TryParseElementEntryPoint(XmlReader reader, string version) => TryParseElement(reader, version);
+            public bool TryParseElementEntryPoint(XmlReader reader, string version) =>
+                TryParseElement(reader, version);
 
-            public void WriteAttributeExtensionsEntryPoint(XmlWriter writer, string version) => WriteAttributeExtensions(writer, version);
+            public void WriteAttributeExtensionsEntryPoint(XmlWriter writer, string version) =>
+                WriteAttributeExtensions(writer, version);
 
-            public void WriteElementExtensionsEntryPoint(XmlWriter writer, string version) => WriteElementExtensions(writer, version);
+            public void WriteElementExtensionsEntryPoint(XmlWriter writer, string version) =>
+                WriteElementExtensions(writer, version);
         }
 
         [DataContract]

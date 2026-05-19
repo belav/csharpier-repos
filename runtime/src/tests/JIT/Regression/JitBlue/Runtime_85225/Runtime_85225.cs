@@ -17,6 +17,7 @@ public class Test
 
         [MethodImpl(MethodImplOptions.NoInlining)]
         static void Consume(bool x) { }
+
         //---------------------------------
         public static uint s_2;
 
@@ -32,6 +33,7 @@ public class Test
             }
             return 100;
         }
+
         //---------------------------------
         public class C0
         {
@@ -56,6 +58,7 @@ public class Test
                 return 100;
             }
         }
+
         //---------------------------------
         public static uint s_4;
 
@@ -76,6 +79,7 @@ public class Test
             }
             return 100;
         }
+
         //---------------------------------
         public static long s_7;
         public static int[] s_12 = new int[] { 0 };

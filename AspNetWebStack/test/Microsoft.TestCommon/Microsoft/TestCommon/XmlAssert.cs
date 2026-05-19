@@ -13,13 +13,18 @@ namespace Microsoft.TestCommon
     /// </summary>
     public class XmlAssert
     {
-        public void Equal(string expected, string actual, params RegexReplacement[] regexReplacements)
+        public void Equal(
+            string expected,
+            string actual,
+            params RegexReplacement[] regexReplacements
+        )
         {
             if (regexReplacements != null)
             {
                 for (int i = 0; i < regexReplacements.Length; i++)
                 {
-                    actual = regexReplacements[i].Regex.Replace(actual, regexReplacements[i].Replacement);
+                    actual = regexReplacements[i]
+                        .Regex.Replace(actual, regexReplacements[i].Replacement);
                 }
             }
 
@@ -38,42 +43,44 @@ namespace Microsoft.TestCommon
                 return new XElement(
                     Encode(element.Name),
                     Normalize(element.Attributes()),
-                    Normalize(element.Elements()));
+                    Normalize(element.Elements())
+                );
             }
 
             if (element.IsEmpty)
             {
-                return new XElement(
-                    Encode(element.Name),
-                    Normalize(element.Attributes()));
+                return new XElement(Encode(element.Name), Normalize(element.Attributes()));
             }
             else
             {
                 return new XElement(
                     Encode(element.Name),
                     Normalize(element.Attributes()),
-                    element.Value);
+                    element.Value
+                );
             }
         }
 
         private static IEnumerable<XAttribute> Normalize(IEnumerable<XAttribute> attributes)
         {
             return attributes
-                    .Where((attrib) => !attrib.IsNamespaceDeclaration)
-                    .Select((attrib) => new XAttribute(Encode(attrib.Name), attrib.Value))
-                    .OrderBy(a => a.Name.ToString());
+                .Where((attrib) => !attrib.IsNamespaceDeclaration)
+                .Select((attrib) => new XAttribute(Encode(attrib.Name), attrib.Value))
+                .OrderBy(a => a.Name.ToString());
         }
 
         private static IEnumerable<XElement> Normalize(IEnumerable<XElement> elements)
         {
-            return elements
-                    .Select(e => Normalize(e))
-                    .OrderBy(a => a.ToString());
+            return elements.Select(e => Normalize(e)).OrderBy(a => a.ToString());
         }
 
         private static string Encode(XName name)
         {
-            return string.Format("{0}_{1}", HttpUtility.UrlEncode(name.NamespaceName).Replace('%', '_'), name.LocalName);
+            return string.Format(
+                "{0}_{1}",
+                HttpUtility.UrlEncode(name.NamespaceName).Replace('%', '_'),
+                name.LocalName
+            );
         }
     }
 }

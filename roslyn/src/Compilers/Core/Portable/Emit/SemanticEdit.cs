@@ -13,7 +13,7 @@ using Roslyn.Utilities;
 namespace Microsoft.CodeAnalysis.Emit
 {
     /// <summary>
-    /// Describes a symbol edit between two compilations. 
+    /// Describes a symbol edit between two compilations.
     /// For example, an addition of a method, an update of a method, removal of a type, etc.
     /// </summary>
     public readonly struct SemanticEdit : IEquatable<SemanticEdit>
@@ -36,8 +36,8 @@ namespace Microsoft.CodeAnalysis.Emit
         public ISymbol? NewSymbol { get; }
 
         /// <summary>
-        /// A map from syntax node in the later compilation to syntax node in the previous compilation, 
-        /// or null if <see cref="PreserveLocalVariables"/> is false and the map is not needed or 
+        /// A map from syntax node in the later compilation to syntax node in the previous compilation,
+        /// or null if <see cref="PreserveLocalVariables"/> is false and the map is not needed or
         /// the source of the current method is the same as the source of the previous method.
         /// </summary>
         /// <remarks>
@@ -56,19 +56,35 @@ namespace Microsoft.CodeAnalysis.Emit
         // 4.6 BACKCOMPAT OVERLOAD -- DO NOT TOUCH
         [Obsolete("Use other overload")]
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public SemanticEdit(SemanticEditKind kind, ISymbol? oldSymbol, ISymbol? newSymbol, Func<SyntaxNode, SyntaxNode?>? syntaxMap, bool preserveLocalVariables)
-            : this(kind, oldSymbol, newSymbol, syntaxMap, preserveLocalVariables, MethodInstrumentation.Empty)
-        {
-        }
+        public SemanticEdit(
+            SemanticEditKind kind,
+            ISymbol? oldSymbol,
+            ISymbol? newSymbol,
+            Func<SyntaxNode, SyntaxNode?>? syntaxMap,
+            bool preserveLocalVariables
+        )
+            : this(
+                kind,
+                oldSymbol,
+                newSymbol,
+                syntaxMap,
+                preserveLocalVariables,
+                MethodInstrumentation.Empty
+            ) { }
 
         // 4.8 BACKCOMPAT OVERLOAD -- DO NOT TOUCH
 #pragma warning disable IDE0060 // Remove unused parameter
         [Obsolete("Use other overload")]
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public SemanticEdit(SemanticEditKind kind, ISymbol? oldSymbol, ISymbol? newSymbol, Func<SyntaxNode, SyntaxNode?>? syntaxMap, bool preserveLocalVariables, MethodInstrumentation instrumentation)
-            : this(kind, oldSymbol, newSymbol, syntaxMap, MethodInstrumentation.Empty)
-        {
-        }
+        public SemanticEdit(
+            SemanticEditKind kind,
+            ISymbol? oldSymbol,
+            ISymbol? newSymbol,
+            Func<SyntaxNode, SyntaxNode?>? syntaxMap,
+            bool preserveLocalVariables,
+            MethodInstrumentation instrumentation
+        )
+            : this(kind, oldSymbol, newSymbol, syntaxMap, MethodInstrumentation.Empty) { }
 #pragma warning restore
 
         /// <summary>
@@ -95,14 +111,23 @@ namespace Microsoft.CodeAnalysis.Emit
         /// <exception cref="ArgumentOutOfRangeException">
         /// <paramref name="kind"/> is not a valid kind.
         /// </exception>
-        public SemanticEdit(SemanticEditKind kind, ISymbol? oldSymbol, ISymbol? newSymbol, Func<SyntaxNode, SyntaxNode?>? syntaxMap = null, MethodInstrumentation instrumentation = default)
+        public SemanticEdit(
+            SemanticEditKind kind,
+            ISymbol? oldSymbol,
+            ISymbol? newSymbol,
+            Func<SyntaxNode, SyntaxNode?>? syntaxMap = null,
+            MethodInstrumentation instrumentation = default
+        )
         {
             if (kind <= SemanticEditKind.None || kind > SemanticEditKind.Replace)
             {
                 throw new ArgumentOutOfRangeException(nameof(kind));
             }
 
-            if (oldSymbol == null && kind is not (SemanticEditKind.Insert or SemanticEditKind.Replace))
+            if (
+                oldSymbol == null
+                && kind is not (SemanticEditKind.Insert or SemanticEditKind.Replace)
+            )
             {
                 throw new ArgumentNullException(nameof(oldSymbol));
             }
@@ -116,33 +141,54 @@ namespace Microsoft.CodeAnalysis.Emit
             {
                 if (kind != SemanticEditKind.Update)
                 {
-                    throw new ArgumentException("Syntax map can only be specified for updates", nameof(syntaxMap));
+                    throw new ArgumentException(
+                        "Syntax map can only be specified for updates",
+                        nameof(syntaxMap)
+                    );
                 }
 
                 if (oldSymbol is not IMethodSymbol)
                 {
-                    throw new ArgumentException(CodeAnalysisResources.MethodSymbolExpected, nameof(oldSymbol));
+                    throw new ArgumentException(
+                        CodeAnalysisResources.MethodSymbolExpected,
+                        nameof(oldSymbol)
+                    );
                 }
 
                 if (newSymbol is not IMethodSymbol)
                 {
-                    throw new ArgumentException(CodeAnalysisResources.MethodSymbolExpected, nameof(newSymbol));
+                    throw new ArgumentException(
+                        CodeAnalysisResources.MethodSymbolExpected,
+                        nameof(newSymbol)
+                    );
                 }
             }
 
             if (oldSymbol is IMethodSymbol { PartialImplementationPart: not null })
             {
-                throw new ArgumentException("Partial method implementation required", nameof(oldSymbol));
+                throw new ArgumentException(
+                    "Partial method implementation required",
+                    nameof(oldSymbol)
+                );
             }
 
             if (newSymbol is IMethodSymbol { PartialImplementationPart: not null })
             {
-                throw new ArgumentException("Partial method implementation required", nameof(newSymbol));
+                throw new ArgumentException(
+                    "Partial method implementation required",
+                    nameof(newSymbol)
+                );
             }
 
-            if (kind == SemanticEditKind.Delete && oldSymbol is not (IMethodSymbol or IPropertySymbol or IEventSymbol))
+            if (
+                kind == SemanticEditKind.Delete
+                && oldSymbol is not (IMethodSymbol or IPropertySymbol or IEventSymbol)
+            )
             {
-                throw new ArgumentException("Deleted symbol must be a method, property or an event", nameof(oldSymbol));
+                throw new ArgumentException(
+                    "Deleted symbol must be a method, property or an event",
+                    nameof(oldSymbol)
+                );
             }
 
             if (instrumentation.IsDefault)
@@ -159,19 +205,31 @@ namespace Microsoft.CodeAnalysis.Emit
 
                 if (oldSymbol is not IMethodSymbol)
                 {
-                    throw new ArgumentException(CodeAnalysisResources.MethodSymbolExpected, nameof(oldSymbol));
+                    throw new ArgumentException(
+                        CodeAnalysisResources.MethodSymbolExpected,
+                        nameof(oldSymbol)
+                    );
                 }
 
                 if (newSymbol is not IMethodSymbol)
                 {
-                    throw new ArgumentException(CodeAnalysisResources.MethodSymbolExpected, nameof(newSymbol));
+                    throw new ArgumentException(
+                        CodeAnalysisResources.MethodSymbolExpected,
+                        nameof(newSymbol)
+                    );
                 }
 
                 foreach (var instrumentationKind in instrumentation.Kinds)
                 {
                     if (!instrumentationKind.IsValid())
                     {
-                        throw new ArgumentOutOfRangeException(nameof(MethodInstrumentation.Kinds), string.Format(CodeAnalysisResources.InvalidInstrumentationKind, instrumentationKind));
+                        throw new ArgumentOutOfRangeException(
+                            nameof(MethodInstrumentation.Kinds),
+                            string.Format(
+                                CodeAnalysisResources.InvalidInstrumentationKind,
+                                instrumentationKind
+                            )
+                        );
                     }
                 }
             }
@@ -190,7 +248,11 @@ namespace Microsoft.CodeAnalysis.Emit
         public bool PreserveLocalVariables => SyntaxMap != null;
 
         // for testing non-public instrumentation kinds
-        internal SemanticEdit(IMethodSymbol oldSymbol, IMethodSymbol newSymbol, ImmutableArray<InstrumentationKind> instrumentationKinds)
+        internal SemanticEdit(
+            IMethodSymbol oldSymbol,
+            IMethodSymbol newSymbol,
+            ImmutableArray<InstrumentationKind> instrumentationKinds
+        )
         {
             Kind = SemanticEditKind.Update;
             OldSymbol = oldSymbol;
@@ -199,29 +261,37 @@ namespace Microsoft.CodeAnalysis.Emit
         }
 
         // for testing:
-        internal static SemanticEdit Create(SemanticEditKind kind, ISymbolInternal oldSymbol, ISymbolInternal newSymbol, Func<SyntaxNode, SyntaxNode>? syntaxMap = null)
-            => new SemanticEdit(kind, oldSymbol?.GetISymbol(), newSymbol?.GetISymbol(), syntaxMap, instrumentation: default);
+        internal static SemanticEdit Create(
+            SemanticEditKind kind,
+            ISymbolInternal oldSymbol,
+            ISymbolInternal newSymbol,
+            Func<SyntaxNode, SyntaxNode>? syntaxMap = null
+        ) =>
+            new SemanticEdit(
+                kind,
+                oldSymbol?.GetISymbol(),
+                newSymbol?.GetISymbol(),
+                syntaxMap,
+                instrumentation: default
+            );
 
-        public override int GetHashCode()
-            => Hash.Combine(OldSymbol, Hash.Combine(NewSymbol, (int)Kind));
+        public override int GetHashCode() =>
+            Hash.Combine(OldSymbol, Hash.Combine(NewSymbol, (int)Kind));
 
-        public override bool Equals(object? obj)
-            => obj is SemanticEdit other && Equals(other);
+        public override bool Equals(object? obj) => obj is SemanticEdit other && Equals(other);
 
         /// <summary>
         /// <see cref="SemanticEdit"/>s are considered equal if they are of the same <see cref="Kind"/> and
         /// the corresponding <see cref="OldSymbol"/> and <see cref="NewSymbol"/> symbols are the same.
         /// The effects of edits that compare equal on the emitted metadata/IL are not necessarily the same.
         /// </summary>
-        public bool Equals(SemanticEdit other)
-            => Kind == other.Kind
-                && (OldSymbol == null ? other.OldSymbol == null : OldSymbol.Equals(other.OldSymbol))
-                && (NewSymbol == null ? other.NewSymbol == null : NewSymbol.Equals(other.NewSymbol));
+        public bool Equals(SemanticEdit other) =>
+            Kind == other.Kind
+            && (OldSymbol == null ? other.OldSymbol == null : OldSymbol.Equals(other.OldSymbol))
+            && (NewSymbol == null ? other.NewSymbol == null : NewSymbol.Equals(other.NewSymbol));
 
-        public static bool operator ==(SemanticEdit left, SemanticEdit right)
-            => left.Equals(right);
+        public static bool operator ==(SemanticEdit left, SemanticEdit right) => left.Equals(right);
 
-        public static bool operator !=(SemanticEdit left, SemanticEdit right)
-            => !(left == right);
+        public static bool operator !=(SemanticEdit left, SemanticEdit right) => !(left == right);
     }
 }

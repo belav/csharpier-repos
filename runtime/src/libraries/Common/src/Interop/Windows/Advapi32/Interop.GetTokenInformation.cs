@@ -16,6 +16,7 @@ internal static partial class Interop
             uint TokenInformationClass,
             IntPtr TokenInformation,
             uint TokenInformationLength,
-            out uint ReturnLength);
+            out uint ReturnLength
+        );
     }
 }

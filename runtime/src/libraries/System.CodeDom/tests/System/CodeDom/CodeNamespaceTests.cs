@@ -45,11 +45,17 @@ namespace System.CodeDom.Tests
 
             CodeTypeDeclaration type1 = new CodeTypeDeclaration("Name1");
             codeNamespace.Types.Add(type1);
-            Assert.Equal(new CodeTypeDeclaration[] { type1 }, codeNamespace.Types.Cast<CodeTypeDeclaration>());
+            Assert.Equal(
+                new CodeTypeDeclaration[] { type1 },
+                codeNamespace.Types.Cast<CodeTypeDeclaration>()
+            );
 
             CodeTypeDeclaration type2 = new CodeTypeDeclaration("Name2");
             codeNamespace.Types.Add(type2);
-            Assert.Equal(new CodeTypeDeclaration[] { type1, type2 }, codeNamespace.Types.Cast<CodeTypeDeclaration>());
+            Assert.Equal(
+                new CodeTypeDeclaration[] { type1, type2 },
+                codeNamespace.Types.Cast<CodeTypeDeclaration>()
+            );
         }
 
         [Fact]
@@ -80,11 +86,17 @@ namespace System.CodeDom.Tests
 
             CodeNamespaceImport type1 = new CodeNamespaceImport("Namespace1");
             codeNamespace.Imports.Add(type1);
-            Assert.Equal(new CodeNamespaceImport[] { type1 }, codeNamespace.Imports.Cast<CodeNamespaceImport>());
+            Assert.Equal(
+                new CodeNamespaceImport[] { type1 },
+                codeNamespace.Imports.Cast<CodeNamespaceImport>()
+            );
 
             CodeNamespaceImport type2 = new CodeNamespaceImport("Namespace2");
             codeNamespace.Imports.Add(type2);
-            Assert.Equal(new CodeNamespaceImport[] { type1, type2 }, codeNamespace.Imports.Cast<CodeNamespaceImport>());
+            Assert.Equal(
+                new CodeNamespaceImport[] { type1, type2 },
+                codeNamespace.Imports.Cast<CodeNamespaceImport>()
+            );
         }
 
         [Fact]
@@ -101,14 +113,20 @@ namespace System.CodeDom.Tests
 
             CodeNamespaceImport type1 = new CodeNamespaceImport("Namespace1");
             codeNamespace.Imports.Add(type1);
-            Assert.Equal(new CodeNamespaceImport[] { type1 }, codeNamespace.Imports.Cast<CodeNamespaceImport>());
+            Assert.Equal(
+                new CodeNamespaceImport[] { type1 },
+                codeNamespace.Imports.Cast<CodeNamespaceImport>()
+            );
             Assert.True(calledPopulateImports);
 
             // Only calls PopulateImports once
             calledPopulateImports = false;
             CodeNamespaceImport type2 = new CodeNamespaceImport("Namespace2");
             codeNamespace.Imports.Add(type2);
-            Assert.Equal(new CodeNamespaceImport[] { type1, type2 }, codeNamespace.Imports.Cast<CodeNamespaceImport>());
+            Assert.Equal(
+                new CodeNamespaceImport[] { type1, type2 },
+                codeNamespace.Imports.Cast<CodeNamespaceImport>()
+            );
             Assert.False(calledPopulateImports);
         }
 
@@ -119,11 +137,17 @@ namespace System.CodeDom.Tests
 
             CodeCommentStatement comment1 = new CodeCommentStatement("Comment1");
             codeNamespace.Comments.Add(comment1);
-            Assert.Equal(new CodeCommentStatement[] { comment1 }, codeNamespace.Comments.Cast<CodeCommentStatement>());
+            Assert.Equal(
+                new CodeCommentStatement[] { comment1 },
+                codeNamespace.Comments.Cast<CodeCommentStatement>()
+            );
 
             CodeCommentStatement comment2 = new CodeCommentStatement("Comment2");
             codeNamespace.Comments.Add(comment2);
-            Assert.Equal(new CodeCommentStatement[] { comment1, comment2 }, codeNamespace.Comments.Cast<CodeCommentStatement>());
+            Assert.Equal(
+                new CodeCommentStatement[] { comment1, comment2 },
+                codeNamespace.Comments.Cast<CodeCommentStatement>()
+            );
         }
 
         [Fact]
@@ -140,14 +164,20 @@ namespace System.CodeDom.Tests
 
             CodeCommentStatement comment1 = new CodeCommentStatement("Comment1");
             codeNamespace.Comments.Add(comment1);
-            Assert.Equal(new CodeCommentStatement[] { comment1 }, codeNamespace.Comments.Cast<CodeCommentStatement>());
+            Assert.Equal(
+                new CodeCommentStatement[] { comment1 },
+                codeNamespace.Comments.Cast<CodeCommentStatement>()
+            );
             Assert.True(calledPopulateComments);
 
             // Only calls PopulateComments once
             calledPopulateComments = false;
             CodeCommentStatement comment2 = new CodeCommentStatement("Comment2");
             codeNamespace.Comments.Add(comment2);
-            Assert.Equal(new CodeCommentStatement[] { comment1, comment2 }, codeNamespace.Comments.Cast<CodeCommentStatement>());
+            Assert.Equal(
+                new CodeCommentStatement[] { comment1, comment2 },
+                codeNamespace.Comments.Cast<CodeCommentStatement>()
+            );
             Assert.False(calledPopulateComments);
         }
     }

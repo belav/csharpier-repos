@@ -22,9 +22,17 @@ namespace System.Runtime.InteropServices
 
                     Span<char> stackBuffer = stackalloc char[256];
                     const string Version = "Microsoft Windows";
-                    s_osDescription = osDescription = string.IsNullOrEmpty(os.ServicePack) ?
-                        string.Create(null, stackBuffer, $"{Version} {(uint)v.Major}.{(uint)v.Minor}.{(uint)v.Build}") :
-                        string.Create(null, stackBuffer, $"{Version} {(uint)v.Major}.{(uint)v.Minor}.{(uint)v.Build} {os.ServicePack}");
+                    s_osDescription = osDescription = string.IsNullOrEmpty(os.ServicePack)
+                        ? string.Create(
+                            null,
+                            stackBuffer,
+                            $"{Version} {(uint)v.Major}.{(uint)v.Minor}.{(uint)v.Build}"
+                        )
+                        : string.Create(
+                            null,
+                            stackBuffer,
+                            $"{Version} {(uint)v.Major}.{(uint)v.Minor}.{(uint)v.Build} {os.ServicePack}"
+                        );
                 }
 
                 return osDescription;
@@ -42,18 +50,41 @@ namespace System.Runtime.InteropServices
                     // If we are running an x64 process on a non-x64 windows machine, we will report x64 as OS architecture.
                     //
                     // IsWow64Process2 is only available on Windows 10+, so we will perform run-time introspection via indirect load
-                    IntPtr kernel32 = Interop.Kernel32.LoadLibraryEx(Interop.Libraries.Kernel32, 0, Interop.Kernel32.LOAD_LIBRARY_SEARCH_SYSTEM32);
-                    if (NativeLibrary.TryGetExport(kernel32, "IsWow64Process2", out IntPtr isWow64Process2Ptr))
+                    IntPtr kernel32 = Interop.Kernel32.LoadLibraryEx(
+                        Interop.Libraries.Kernel32,
+                        0,
+                        Interop.Kernel32.LOAD_LIBRARY_SEARCH_SYSTEM32
+                    );
+                    if (
+                        NativeLibrary.TryGetExport(
+                            kernel32,
+                            "IsWow64Process2",
+                            out IntPtr isWow64Process2Ptr
+                        )
+                    )
                     {
-                        ushort processMachine, nativeMachine;
-                        var isWow64Process2 = (delegate* unmanaged<IntPtr, ushort*, ushort*, int>)isWow64Process2Ptr;
-                        if (isWow64Process2(Interop.Kernel32.GetCurrentProcess(), &processMachine, &nativeMachine) != 0)
+                        ushort processMachine,
+                            nativeMachine;
+                        var isWow64Process2 = (delegate* unmanaged<
+                            IntPtr,
+                            ushort*,
+                            ushort*,
+                            int>)isWow64Process2Ptr;
+                        if (
+                            isWow64Process2(
+                                Interop.Kernel32.GetCurrentProcess(),
+                                &processMachine,
+                                &nativeMachine
+                            ) != 0
+                        )
                         {
                             osArch = (int)MapMachineConstant(nativeMachine);
                         }
                         else
                         {
-                            Debug.Fail("Call to IsWow64Process2() failed unexpectedly. Falling back to ProcessArchitecture");
+                            Debug.Fail(
+                                "Call to IsWow64Process2() failed unexpectedly. Falling back to ProcessArchitecture"
+                            );
                             osArch = (int)ProcessArchitecture;
                         }
                     }
@@ -86,7 +117,10 @@ namespace System.Runtime.InteropServices
                     return Architecture.X64;
                 case Interop.Kernel32.PROCESSOR_ARCHITECTURE_INTEL:
                 default:
-                    Debug.Assert(processorArchitecture == Interop.Kernel32.PROCESSOR_ARCHITECTURE_INTEL, "Unidentified Architecture");
+                    Debug.Assert(
+                        processorArchitecture == Interop.Kernel32.PROCESSOR_ARCHITECTURE_INTEL,
+                        "Unidentified Architecture"
+                    );
                     return Architecture.X86;
             }
         }

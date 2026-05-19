@@ -11,6 +11,7 @@ namespace System.Diagnostics.Metrics
     {
         private readonly bool _isMonotonic;
         private double _aggregatedValue;
+
         /// <summary>Per-core deltas.</summary>
         /// <remarks>
         /// Stored as an array of deltas rather than a single delta to reduce contention from
@@ -18,7 +19,9 @@ namespace System.Diagnostics.Metrics
         /// The array is limited to a semi-arbitrary limit of 8 in order to avoid excessive memory
         /// consumption when many counters are being used.
         /// </remarks>
-        private readonly PaddedDouble[] _deltas = new PaddedDouble[Math.Min(Environment.ProcessorCount, 8)];
+        private readonly PaddedDouble[] _deltas = new PaddedDouble[
+            Math.Min(Environment.ProcessorCount, 8)
+        ];
 
         public CounterAggregator(bool isMonotonic)
         {
@@ -38,7 +41,7 @@ namespace System.Diagnostics.Metrics
 #else
                 Environment.CurrentManagedThreadId
 #endif
-                % deltas.Length];
+                    % deltas.Length];
 
             // We're not guaranteed uncontented access, so we still need to add the value
             // to the delta with synchronization. Contention could come from other threads
@@ -47,13 +50,16 @@ namespace System.Diagnostics.Metrics
             do
             {
                 currentValue = delta.Value;
-            }
-            while (Interlocked.CompareExchange(ref delta.Value, currentValue + value, currentValue) != currentValue);
+            } while (
+                Interlocked.CompareExchange(ref delta.Value, currentValue + value, currentValue)
+                != currentValue
+            );
         }
 
         public override IAggregationStatistics Collect()
         {
-            double delta, aggregatedValue;
+            double delta,
+                aggregatedValue;
             lock (this)
             {
                 // Sum the deltas, resetting them to zero as we go. These resets needs to synchronize

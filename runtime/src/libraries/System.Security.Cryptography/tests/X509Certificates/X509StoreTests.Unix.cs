@@ -37,16 +37,23 @@ namespace System.Security.Cryptography.X509Certificates.Tests
             var psi = new ProcessStartInfo();
             psi.Environment.Add("SSL_CERT_DIR", sslCertDir);
             psi.Environment.Add("SSL_CERT_FILE", "/nonexisting");
-            RemoteExecutor.Invoke(() =>
-            {
-                using (var store = new X509Store(StoreName.Root, StoreLocation.LocalMachine))
-                {
-                    store.Open(OpenFlags.OpenExistingOnly);
+            RemoteExecutor
+                .Invoke(
+                    () =>
+                    {
+                        using (
+                            var store = new X509Store(StoreName.Root, StoreLocation.LocalMachine)
+                        )
+                        {
+                            store.Open(OpenFlags.OpenExistingOnly);
 
-                    // Check nr of certificates in store.
-                    Assert.Equal(2, store.Certificates.Count);
-                }
-            }, new RemoteInvokeOptions { StartInfo = psi }).Dispose();
+                            // Check nr of certificates in store.
+                            Assert.Equal(2, store.Certificates.Count);
+                        }
+                    },
+                    new RemoteInvokeOptions { StartInfo = psi }
+                )
+                .Dispose();
         }
 
         [ConditionalFact(typeof(RemoteExecutor), nameof(RemoteExecutor.IsSupported))]
@@ -64,32 +71,43 @@ namespace System.Security.Cryptography.X509Certificates.Tests
             File.WriteAllBytes(Path.Combine(sslCertDir2, "3.pem"), TestData.SelfSigned3PemBytes);
 
             // Add a non-existing directory after each valid directory to verify they are ignored.
-            string sslCertDir = string.Join(Path.PathSeparator,
-                new[] {
-                        sslCertDir1,
-                        sslCertDir2,
-                        "",          // empty string
-                        sslCertDir2, // duplicate directory
-                        "/invalid2", // path that does not exist
-            });
+            string sslCertDir = string.Join(
+                Path.PathSeparator,
+                new[]
+                {
+                    sslCertDir1,
+                    sslCertDir2,
+                    "", // empty string
+                    sslCertDir2, // duplicate directory
+                    "/invalid2", // path that does not exist
+                }
+            );
 
             var psi = new ProcessStartInfo();
             psi.Environment.Add("SSL_CERT_DIR", sslCertDir);
             // Set SSL_CERT_FILE to avoid loading the default bundle file.
             psi.Environment.Add("SSL_CERT_FILE", "/nonexisting");
-            RemoteExecutor.Invoke(() =>
-            {
-                Assert.NotNull(Environment.GetEnvironmentVariable("SSL_CERT_DIR"));
-                using (var store = new X509Store(StoreName.Root, StoreLocation.LocalMachine))
-                {
-                    store.Open(OpenFlags.OpenExistingOnly);
+            RemoteExecutor
+                .Invoke(
+                    () =>
+                    {
+                        Assert.NotNull(Environment.GetEnvironmentVariable("SSL_CERT_DIR"));
+                        using (
+                            var store = new X509Store(StoreName.Root, StoreLocation.LocalMachine)
+                        )
+                        {
+                            store.Open(OpenFlags.OpenExistingOnly);
 
-                    // Check nr of certificates in store.
-                    Assert.Equal(3, store.Certificates.Count);
-                }
-            }, new RemoteInvokeOptions { StartInfo = psi }).Dispose();
+                            // Check nr of certificates in store.
+                            Assert.Equal(3, store.Certificates.Count);
+                        }
+                    },
+                    new RemoteInvokeOptions { StartInfo = psi }
+                )
+                .Dispose();
         }
 
-        public static bool NotRunningAsRootAndRemoteExecutorSupported => !Environment.IsPrivilegedProcess && RemoteExecutor.IsSupported;
+        public static bool NotRunningAsRootAndRemoteExecutorSupported =>
+            !Environment.IsPrivilegedProcess && RemoteExecutor.IsSupported;
     }
 }

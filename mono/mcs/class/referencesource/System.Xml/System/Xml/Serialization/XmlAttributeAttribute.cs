@@ -2,11 +2,11 @@
 // <copyright file="XmlAttributeAttribute.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
 // </copyright>
-// <owner current="true" primary="true">Microsoft</owner>                                                                
+// <owner current="true" primary="true">Microsoft</owner>
 //------------------------------------------------------------------------------
 
-namespace System.Xml.Serialization {
-
+namespace System.Xml.Serialization
+{
     using System;
     using System.Xml.Schema;
 
@@ -14,42 +14,50 @@ namespace System.Xml.Serialization {
     /// <devdoc>
     ///    <para>[To be supplied.]</para>
     /// </devdoc>
-    [AttributeUsage(AttributeTargets.Field | AttributeTargets.Property | AttributeTargets.Parameter | AttributeTargets.ReturnValue)]
-    public class XmlAttributeAttribute : System.Attribute {
+    [AttributeUsage(
+        AttributeTargets.Field
+            | AttributeTargets.Property
+            | AttributeTargets.Parameter
+            | AttributeTargets.ReturnValue
+    )]
+    public class XmlAttributeAttribute : System.Attribute
+    {
         string attributeName;
         Type type;
         string ns;
         string dataType;
         XmlSchemaForm form = XmlSchemaForm.None;
-        
+
         /// <include file='doc\XmlAttributeAttribute.uex' path='docs/doc[@for="XmlAttributeAttribute.XmlAttributeAttribute"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public XmlAttributeAttribute() {
-        }
-        
+        public XmlAttributeAttribute() { }
+
         /// <include file='doc\XmlAttributeAttribute.uex' path='docs/doc[@for="XmlAttributeAttribute.XmlAttributeAttribute1"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public XmlAttributeAttribute(string attributeName) {
+        public XmlAttributeAttribute(string attributeName)
+        {
             this.attributeName = attributeName;
         }
-        
+
         /// <include file='doc\XmlAttributeAttribute.uex' path='docs/doc[@for="XmlAttributeAttribute.XmlAttributeAttribute2"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public XmlAttributeAttribute(Type type) {
+        public XmlAttributeAttribute(Type type)
+        {
             this.type = type;
         }
-        
+
         /// <include file='doc\XmlAttributeAttribute.uex' path='docs/doc[@for="XmlAttributeAttribute.XmlAttributeAttribute3"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public XmlAttributeAttribute(string attributeName, Type type) {
+        public XmlAttributeAttribute(string attributeName, Type type)
+        {
             this.attributeName = attributeName;
             this.type = type;
         }
@@ -58,25 +66,28 @@ namespace System.Xml.Serialization {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public Type Type {
+        public Type Type
+        {
             get { return type; }
             set { type = value; }
         }
-       
+
         /// <include file='doc\XmlAttributeAttribute.uex' path='docs/doc[@for="XmlAttributeAttribute.AttributeName"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public string AttributeName {
+        public string AttributeName
+        {
             get { return attributeName == null ? string.Empty : attributeName; }
             set { attributeName = value; }
         }
-        
+
         /// <include file='doc\XmlAttributeAttribute.uex' path='docs/doc[@for="XmlAttributeAttribute.Namespace"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public string Namespace {
+        public string Namespace
+        {
             get { return ns; }
             set { ns = value; }
         }
@@ -85,7 +96,8 @@ namespace System.Xml.Serialization {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public string DataType {
+        public string DataType
+        {
             get { return dataType == null ? string.Empty : dataType; }
             set { dataType = value; }
         }
@@ -94,7 +106,8 @@ namespace System.Xml.Serialization {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public XmlSchemaForm Form {
+        public XmlSchemaForm Form
+        {
             get { return form; }
             set { form = value; }
         }

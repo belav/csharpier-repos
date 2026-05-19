@@ -37,7 +37,10 @@ namespace System.Net.Http.HPack
         public bool BeginTryDecode(byte b, int prefixLength, out int result)
         {
             Debug.Assert(prefixLength >= 1 && prefixLength <= 8);
-            Debug.Assert((b & ~((1 << prefixLength) - 1)) == 0, "bits other than prefix data must be set to 0.");
+            Debug.Assert(
+                (b & ~((1 << prefixLength) - 1)) == 0,
+                "bits other than prefix data must be set to 0."
+            );
 
             if (b < ((1 << prefixLength) - 1))
             {

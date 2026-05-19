@@ -28,13 +28,16 @@ namespace System.Web.Http
         {
             EnableCors(httpConfiguration, null, false);
         }
-        
+
         /// <summary>
         /// Enables the support for CORS.
         /// </summary>
         /// <param name="httpConfiguration">The <see cref="HttpConfiguration"/>.</param>
         /// <param name="rethrowExceptions">Indicates whether upstream exceptions should be rethrown</param>
-        public static void EnableCors(this HttpConfiguration httpConfiguration, bool rethrowExceptions)
+        public static void EnableCors(
+            this HttpConfiguration httpConfiguration,
+            bool rethrowExceptions
+        )
         {
             EnableCors(httpConfiguration, null, rethrowExceptions);
         }
@@ -44,7 +47,10 @@ namespace System.Web.Http
         /// </summary>
         /// <param name="httpConfiguration">The <see cref="HttpConfiguration"/>.</param>
         /// <param name="defaultPolicyProvider">The default <see cref="ICorsPolicyProvider"/>.</param>
-        public static void EnableCors(this HttpConfiguration httpConfiguration, ICorsPolicyProvider defaultPolicyProvider)
+        public static void EnableCors(
+            this HttpConfiguration httpConfiguration,
+            ICorsPolicyProvider defaultPolicyProvider
+        )
         {
             EnableCors(httpConfiguration, defaultPolicyProvider, false);
         }
@@ -56,8 +62,11 @@ namespace System.Web.Http
         /// <param name="defaultPolicyProvider">The default <see cref="ICorsPolicyProvider"/>.</param>
         /// <param name="rethrowExceptions">Indicates whether upstream exceptions should be rethrown</param>
         /// <exception cref="System.ArgumentNullException">httpConfiguration</exception>
-        public static void EnableCors(this HttpConfiguration httpConfiguration, ICorsPolicyProvider defaultPolicyProvider,
-            bool rethrowExceptions)
+        public static void EnableCors(
+            this HttpConfiguration httpConfiguration,
+            ICorsPolicyProvider defaultPolicyProvider,
+            bool rethrowExceptions
+        )
         {
             if (httpConfiguration == null)
             {
@@ -66,7 +75,8 @@ namespace System.Web.Http
 
             if (defaultPolicyProvider != null)
             {
-                AttributeBasedPolicyProviderFactory policyProviderFactory = new AttributeBasedPolicyProviderFactory();
+                AttributeBasedPolicyProviderFactory policyProviderFactory =
+                    new AttributeBasedPolicyProviderFactory();
                 policyProviderFactory.DefaultPolicyProvider = defaultPolicyProvider;
                 httpConfiguration.SetCorsPolicyProviderFactory(policyProviderFactory);
             }
@@ -74,8 +84,15 @@ namespace System.Web.Http
             AddCorsMessageHandler(httpConfiguration, rethrowExceptions);
         }
 
-        [SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope", Justification = "Caller owns the disposable object")]
-        private static void AddCorsMessageHandler(this HttpConfiguration httpConfiguration, bool rethrowExceptions)
+        [SuppressMessage(
+            "Microsoft.Reliability",
+            "CA2000:Dispose objects before losing scope",
+            Justification = "Caller owns the disposable object"
+        )]
+        private static void AddCorsMessageHandler(
+            this HttpConfiguration httpConfiguration,
+            bool rethrowExceptions
+        )
         {
             object corsEnabled;
             if (!httpConfiguration.Properties.TryGetValue(CorsEnabledKey, out corsEnabled))
@@ -86,14 +103,19 @@ namespace System.Web.Http
                     if (!config.Properties.TryGetValue(CorsEnabledKey, out corsEnabled))
                     {
                         // Execute this in the Initializer to ensure that the CorsMessageHandler is added last.
-                        config.MessageHandlers.Add(new CorsMessageHandler(config, rethrowExceptions));
+                        config.MessageHandlers.Add(
+                            new CorsMessageHandler(config, rethrowExceptions)
+                        );
 
                         ITraceWriter traceWriter = config.Services.GetTraceWriter();
 
                         if (traceWriter != null)
                         {
-                            ICorsPolicyProviderFactory factory = config.GetCorsPolicyProviderFactory();
-                            config.SetCorsPolicyProviderFactory(new CorsPolicyProviderFactoryTracer(factory, traceWriter));
+                            ICorsPolicyProviderFactory factory =
+                                config.GetCorsPolicyProviderFactory();
+                            config.SetCorsPolicyProviderFactory(
+                                new CorsPolicyProviderFactoryTracer(factory, traceWriter)
+                            );
                             ICorsEngine corsEngine = config.GetCorsEngine();
                             config.SetCorsEngine(new CorsEngineTracer(corsEngine, traceWriter));
                         }
@@ -115,7 +137,10 @@ namespace System.Web.Http
         /// or
         /// corsEngine
         /// </exception>
-        public static void SetCorsEngine(this HttpConfiguration httpConfiguration, ICorsEngine corsEngine)
+        public static void SetCorsEngine(
+            this HttpConfiguration httpConfiguration,
+            ICorsEngine corsEngine
+        )
         {
             if (httpConfiguration == null)
             {
@@ -142,7 +167,8 @@ namespace System.Web.Http
                 throw new ArgumentNullException("httpConfiguration");
             }
 
-            return (ICorsEngine)httpConfiguration.Properties.GetOrAdd(CorsEngineKey, k => new CorsEngine());
+            return (ICorsEngine)
+                httpConfiguration.Properties.GetOrAdd(CorsEngineKey, k => new CorsEngine());
         }
 
         /// <summary>
@@ -155,7 +181,10 @@ namespace System.Web.Http
         /// or
         /// corsPolicyProviderFactory
         /// </exception>
-        public static void SetCorsPolicyProviderFactory(this HttpConfiguration httpConfiguration, ICorsPolicyProviderFactory corsPolicyProviderFactory)
+        public static void SetCorsPolicyProviderFactory(
+            this HttpConfiguration httpConfiguration,
+            ICorsPolicyProviderFactory corsPolicyProviderFactory
+        )
         {
             if (httpConfiguration == null)
             {
@@ -175,14 +204,20 @@ namespace System.Web.Http
         /// <param name="httpConfiguration">The <see cref="HttpConfiguration"/>.</param>
         /// <returns>The <see cref="ICorsPolicyProviderFactory"/>.</returns>
         /// <exception cref="System.ArgumentNullException">httpConfiguration</exception>
-        public static ICorsPolicyProviderFactory GetCorsPolicyProviderFactory(this HttpConfiguration httpConfiguration)
+        public static ICorsPolicyProviderFactory GetCorsPolicyProviderFactory(
+            this HttpConfiguration httpConfiguration
+        )
         {
             if (httpConfiguration == null)
             {
                 throw new ArgumentNullException("httpConfiguration");
             }
 
-            return (ICorsPolicyProviderFactory)httpConfiguration.Properties.GetOrAdd(CorsPolicyProviderFactoryKey, k => new AttributeBasedPolicyProviderFactory());
+            return (ICorsPolicyProviderFactory)
+                httpConfiguration.Properties.GetOrAdd(
+                    CorsPolicyProviderFactoryKey,
+                    k => new AttributeBasedPolicyProviderFactory()
+                );
         }
     }
 }

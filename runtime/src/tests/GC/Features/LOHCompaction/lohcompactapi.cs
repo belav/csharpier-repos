@@ -3,9 +3,8 @@
 
 using System;
 using System.Collections.Generic;
-using System.Runtime;
 using System.Reflection;
-
+using System.Runtime;
 
 namespace LOHCompactAPI
 {
@@ -17,7 +16,7 @@ namespace LOHCompactAPI
 
         public static int Main()
         {
-            int retVal=0;
+            int retVal = 0;
             for (int i = 0; i < 3; i++)
             {
                 retVal = Runtest(i);
@@ -26,7 +25,7 @@ namespace LOHCompactAPI
                     break;
             }
             if (retVal == 100)
-            Console.WriteLine("Test passed");
+                Console.WriteLine("Test passed");
             return retVal;
         }
 
@@ -38,15 +37,17 @@ namespace LOHCompactAPI
             {
                 shortLivedList.Add(new byte[rnd.Next(85001, 100000)]);
                 LongLivedList.Add(new byte[rnd.Next(85001, 100000)]);
-
             }
             shortLivedList.Clear();
-            GC.Collect();  //when using perfview, LOH should be fragmented after this GC
+            GC.Collect(); //when using perfview, LOH should be fragmented after this GC
 
             //Verify the initial compaction mode should be default
             if (GCSettings.LargeObjectHeapCompactionMode != GCLargeObjectHeapCompactionMode.Default)
             {
-                Console.WriteLine("Initial GCLargeObjectHeapCompactionMode should be default; instead it is " + GCSettings.LargeObjectHeapCompactionMode);
+                Console.WriteLine(
+                    "Initial GCLargeObjectHeapCompactionMode should be default; instead it is "
+                        + GCSettings.LargeObjectHeapCompactionMode
+                );
                 return 1;
             }
             //Set the compaction mode to compact the large object heap
@@ -54,9 +55,15 @@ namespace LOHCompactAPI
             GCSettings.LargeObjectHeapCompactionMode = GCLargeObjectHeapCompactionMode.CompactOnce;
 
             //verify the compaction mode is set correctly
-            if (GCSettings.LargeObjectHeapCompactionMode != GCLargeObjectHeapCompactionMode.CompactOnce)
+            if (
+                GCSettings.LargeObjectHeapCompactionMode
+                != GCLargeObjectHeapCompactionMode.CompactOnce
+            )
             {
-                Console.WriteLine("GCLargeObjectHeapCompactionMode should be CompactOnce; instead it is " + GCSettings.LargeObjectHeapCompactionMode);
+                Console.WriteLine(
+                    "GCLargeObjectHeapCompactionMode should be CompactOnce; instead it is "
+                        + GCSettings.LargeObjectHeapCompactionMode
+                );
                 return 2;
             }
 
@@ -68,7 +75,7 @@ namespace LOHCompactAPI
             List<byte[]> newList = new List<byte[]>();
             List<byte[]> tempList = new List<byte[]>();
             bool Gen2Happened = false;
-            
+
             for (int k = 0; !Gen2Happened && (k < listSize2); k++)
             {
                 newList.Add(new byte[rnd.Next(20, 5000)]);
@@ -84,25 +91,25 @@ namespace LOHCompactAPI
                         //when using perfview,LOH fragmentation should be zero after this GC
                         break;
                     }
-                   
                 }
 
-                if(k>=10)
+                if (k >= 10)
                 {
                     newList[rnd.Next(0, newList.Count)] = new byte[rnd.Next(20, 5000)];
                     newList[rnd.Next(0, newList.Count)] = new byte[rnd.Next(20, 5000)];
                 }
-                if(k%10==0)
+                if (k % 10 == 0)
                     tempList.Clear();
-          
-                    
-             }
+            }
             if (GetBlockingGen2Count() == initial_collectionCount) //a blocking Gen2 collection did not happen; trigger one.
                 GC.Collect();
 
             if (GCSettings.LargeObjectHeapCompactionMode != GCLargeObjectHeapCompactionMode.Default)
             {
-                Console.WriteLine("GCLargeObjectHeapCompactionMode should revert to default after compaction happened; instead it is " + GCSettings.LargeObjectHeapCompactionMode);
+                Console.WriteLine(
+                    "GCLargeObjectHeapCompactionMode should revert to default after compaction happened; instead it is "
+                        + GCSettings.LargeObjectHeapCompactionMode
+                );
                 return 3;
             }
 
@@ -116,9 +123,12 @@ namespace LOHCompactAPI
             //Get the number of concurrent collections (can use this method only through reflection):
             MethodInfo collectionCountmethod = null;
             Type GCType = Type.GetType("System.GC");
-            foreach(MethodInfo m in GCType.GetMethods(BindingFlags.Static | BindingFlags.NonPublic))
+            foreach (
+                MethodInfo m in GCType.GetMethods(BindingFlags.Static | BindingFlags.NonPublic)
+            )
             {
-                if (m.Name.Equals("_CollectionCount") && m.GetParameters().Length == 2) collectionCountmethod = m;
+                if (m.Name.Equals("_CollectionCount") && m.GetParameters().Length == 2)
+                    collectionCountmethod = m;
             }
             if (collectionCountmethod == null)
             {

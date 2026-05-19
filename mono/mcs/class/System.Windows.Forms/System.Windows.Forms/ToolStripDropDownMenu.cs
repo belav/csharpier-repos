@@ -8,10 +8,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -26,170 +26,212 @@
 //	Jonathan Pobst (monkey@jpobst.com)
 //
 
-using System.Drawing;
 using System.ComponentModel;
+using System.Drawing;
 using System.Runtime.InteropServices;
 using System.Windows.Forms.Layout;
 
 namespace System.Windows.Forms
 {
-	[ComVisible (true)]
-	[ClassInterface (ClassInterfaceType.AutoDispatch)]
-	[Designer ("System.Windows.Forms.Design.ToolStripDropDownDesigner, " + Consts.AssemblySystem_Design, "System.ComponentModel.Design.IDesigner")]
-	public class ToolStripDropDownMenu : ToolStripDropDown
-	{
-		private bool show_check_margin;
-		private bool show_image_margin;
+    [ComVisible(true)]
+    [ClassInterface(ClassInterfaceType.AutoDispatch)]
+    [Designer(
+        "System.Windows.Forms.Design.ToolStripDropDownDesigner, " + Consts.AssemblySystem_Design,
+        "System.ComponentModel.Design.IDesigner"
+    )]
+    public class ToolStripDropDownMenu : ToolStripDropDown
+    {
+        private bool show_check_margin;
+        private bool show_image_margin;
 
-		#region Public Constructors
-		public ToolStripDropDownMenu () : base ()
-		{
-			base.LayoutStyle = ToolStripLayoutStyle.Flow;
-			this.show_image_margin = true;
-		}
-		#endregion
+        #region Public Constructors
+        public ToolStripDropDownMenu()
+            : base()
+        {
+            base.LayoutStyle = ToolStripLayoutStyle.Flow;
+            this.show_image_margin = true;
+        }
+        #endregion
 
-		#region Public Properties
-		public override Rectangle DisplayRectangle {
-			get { return base.DisplayRectangle; }
-		}
+        #region Public Properties
+        public override Rectangle DisplayRectangle
+        {
+            get { return base.DisplayRectangle; }
+        }
 
-		public override LayoutEngine LayoutEngine {
-			get { return base.LayoutEngine; }
-		}
-		
-		[DefaultValue (ToolStripLayoutStyle.Flow)]
-		public new ToolStripLayoutStyle LayoutStyle {
-			get { return base.LayoutStyle; }
-			set { base.LayoutStyle = value; }
-		}
-		
-		[DefaultValue (false)]
-		public bool ShowCheckMargin {
-			get { return this.show_check_margin; }
-			set { 
-				if (this.show_check_margin != value) {
-					this.show_check_margin = value;
-					PerformLayout (this, "ShowCheckMargin");
-				}
-			}
-		}
+        public override LayoutEngine LayoutEngine
+        {
+            get { return base.LayoutEngine; }
+        }
 
-		[DefaultValue (true)]
-		public bool ShowImageMargin {
-			get { return this.show_image_margin; }
-			set { 
-				if (this.show_image_margin != value) {
-					this.show_image_margin = value;
-					PerformLayout (this, "ShowImageMargin");
-				}
-			}
-		}
-		#endregion
+        [DefaultValue(ToolStripLayoutStyle.Flow)]
+        public new ToolStripLayoutStyle LayoutStyle
+        {
+            get { return base.LayoutStyle; }
+            set { base.LayoutStyle = value; }
+        }
 
-		#region Protected Properties
-		protected override Padding DefaultPadding {
-			get { return base.DefaultPadding; }
-		}
+        [DefaultValue(false)]
+        public bool ShowCheckMargin
+        {
+            get { return this.show_check_margin; }
+            set
+            {
+                if (this.show_check_margin != value)
+                {
+                    this.show_check_margin = value;
+                    PerformLayout(this, "ShowCheckMargin");
+                }
+            }
+        }
 
-		protected internal override Size MaxItemSize {
-			get { return Size; }
-		}
+        [DefaultValue(true)]
+        public bool ShowImageMargin
+        {
+            get { return this.show_image_margin; }
+            set
+            {
+                if (this.show_image_margin != value)
+                {
+                    this.show_image_margin = value;
+                    PerformLayout(this, "ShowImageMargin");
+                }
+            }
+        }
+        #endregion
 
-		#endregion
+        #region Protected Properties
+        protected override Padding DefaultPadding
+        {
+            get { return base.DefaultPadding; }
+        }
 
-		#region Protected Methods
-		protected internal override ToolStripItem CreateDefaultItem (string text, Image image, EventHandler onClick)
-		{
-			return base.CreateDefaultItem (text, image, onClick);
-		}
+        protected internal override Size MaxItemSize
+        {
+            get { return Size; }
+        }
 
-		protected override void OnFontChanged (EventArgs e)
-		{
-			base.OnFontChanged (e);
-		}
+        #endregion
 
-		protected override void OnLayout (LayoutEventArgs e)
-		{
-			// Find the widest menu item
-			int widest = 0;
+        #region Protected Methods
+        protected internal override ToolStripItem CreateDefaultItem(
+            string text,
+            Image image,
+            EventHandler onClick
+        )
+        {
+            return base.CreateDefaultItem(text, image, onClick);
+        }
 
-			foreach (ToolStripItem tsi in this.Items) {
-				if (!tsi.Available)
-					continue;
+        protected override void OnFontChanged(EventArgs e)
+        {
+            base.OnFontChanged(e);
+        }
 
-				tsi.SetPlacement (ToolStripItemPlacement.Main);
+        protected override void OnLayout(LayoutEventArgs e)
+        {
+            // Find the widest menu item
+            int widest = 0;
 
-				widest = Math.Max (widest, tsi.GetPreferredSize (Size.Empty).Width);
-			}
+            foreach (ToolStripItem tsi in this.Items)
+            {
+                if (!tsi.Available)
+                    continue;
 
-			int x = this.Padding.Left;
-			
-			if (show_check_margin || show_image_margin)
-				widest += 68 - this.Padding.Horizontal;
-			else
-				widest += 47 - this.Padding.Horizontal;
-			
-			int y = this.Padding.Top;
+                tsi.SetPlacement(ToolStripItemPlacement.Main);
 
-			foreach (ToolStripItem tsi in this.Items) {
-				if (!tsi.Available)
-					continue;
+                widest = Math.Max(widest, tsi.GetPreferredSize(Size.Empty).Width);
+            }
 
-				y += tsi.Margin.Top;
+            int x = this.Padding.Left;
 
-				int height = 0;
-	
-				Size preferred_size = tsi.GetPreferredSize (Size.Empty);
+            if (show_check_margin || show_image_margin)
+                widest += 68 - this.Padding.Horizontal;
+            else
+                widest += 47 - this.Padding.Horizontal;
 
-				if (preferred_size.Height > 22)
-					height = preferred_size.Height;
-				else if (tsi is ToolStripSeparator)
-					height = 7;
-				else
-					height = 22;
+            int y = this.Padding.Top;
 
-				tsi.SetBounds (new Rectangle (x, y, widest, height));
-				y += height + tsi.Margin.Bottom;
-			}
+            foreach (ToolStripItem tsi in this.Items)
+            {
+                if (!tsi.Available)
+                    continue;
 
-			this.Size = new Size (widest + this.Padding.Horizontal, y + this.Padding.Bottom);// + 2);
-			this.SetDisplayedItems ();
-			this.OnLayoutCompleted (EventArgs.Empty);
-			this.Invalidate ();
-		}
-		
-		protected override void OnPaintBackground (PaintEventArgs e)
-		{
-			Rectangle affected_bounds = new Rectangle (Point.Empty, this.Size);
+                y += tsi.Margin.Top;
 
-			ToolStripRenderEventArgs tsrea = new ToolStripRenderEventArgs (e.Graphics, this, affected_bounds, SystemColors.Control);
-			tsrea.InternalConnectedArea = CalculateConnectedArea ();
+                int height = 0;
 
-			this.Renderer.DrawToolStripBackground (tsrea);
-			
-			if (this.ShowCheckMargin || this.ShowImageMargin) {
-				tsrea = new ToolStripRenderEventArgs (e.Graphics, this, new Rectangle (tsrea.AffectedBounds.Location, new Size (25, tsrea.AffectedBounds.Height)), SystemColors.Control);
-				this.Renderer.DrawImageMargin (tsrea);
-			}
-		}
+                Size preferred_size = tsi.GetPreferredSize(Size.Empty);
 
-		protected override void SetDisplayedItems ()
-		{
-			base.SetDisplayedItems ();
-		}
-		#endregion
+                if (preferred_size.Height > 22)
+                    height = preferred_size.Height;
+                else if (tsi is ToolStripSeparator)
+                    height = 7;
+                else
+                    height = 22;
 
-		#region Internal Methods
-		internal override Rectangle CalculateConnectedArea ()
-		{
-			if (this.OwnerItem != null && !this.OwnerItem.IsOnDropDown && !(this.OwnerItem is MdiControlStrip.SystemMenuItem)) {
-				Point owner_screen_loc = OwnerItem.GetCurrentParent ().PointToScreen (OwnerItem.Location);
-				return new Rectangle (owner_screen_loc.X - Left, 0, this.OwnerItem.Width - 1, 2);
-			}
+                tsi.SetBounds(new Rectangle(x, y, widest, height));
+                y += height + tsi.Margin.Bottom;
+            }
 
-			return base.CalculateConnectedArea ();
-		}
-		#endregion
-	}
+            this.Size = new Size(widest + this.Padding.Horizontal, y + this.Padding.Bottom); // + 2);
+            this.SetDisplayedItems();
+            this.OnLayoutCompleted(EventArgs.Empty);
+            this.Invalidate();
+        }
+
+        protected override void OnPaintBackground(PaintEventArgs e)
+        {
+            Rectangle affected_bounds = new Rectangle(Point.Empty, this.Size);
+
+            ToolStripRenderEventArgs tsrea = new ToolStripRenderEventArgs(
+                e.Graphics,
+                this,
+                affected_bounds,
+                SystemColors.Control
+            );
+            tsrea.InternalConnectedArea = CalculateConnectedArea();
+
+            this.Renderer.DrawToolStripBackground(tsrea);
+
+            if (this.ShowCheckMargin || this.ShowImageMargin)
+            {
+                tsrea = new ToolStripRenderEventArgs(
+                    e.Graphics,
+                    this,
+                    new Rectangle(
+                        tsrea.AffectedBounds.Location,
+                        new Size(25, tsrea.AffectedBounds.Height)
+                    ),
+                    SystemColors.Control
+                );
+                this.Renderer.DrawImageMargin(tsrea);
+            }
+        }
+
+        protected override void SetDisplayedItems()
+        {
+            base.SetDisplayedItems();
+        }
+        #endregion
+
+        #region Internal Methods
+        internal override Rectangle CalculateConnectedArea()
+        {
+            if (
+                this.OwnerItem != null
+                && !this.OwnerItem.IsOnDropDown
+                && !(this.OwnerItem is MdiControlStrip.SystemMenuItem)
+            )
+            {
+                Point owner_screen_loc = OwnerItem
+                    .GetCurrentParent()
+                    .PointToScreen(OwnerItem.Location);
+                return new Rectangle(owner_screen_loc.X - Left, 0, this.OwnerItem.Width - 1, 2);
+            }
+
+            return base.CalculateConnectedArea();
+        }
+        #endregion
+    }
 }

@@ -1,7 +1,7 @@
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 /*============================================================
  **
@@ -13,13 +13,14 @@
  **
  ===========================================================*/
 
-namespace System.Runtime.Serialization.Formatters {
-    using System;    
-    using System.Runtime.Serialization;
-    using System.Security.Permissions;
-    using System.Reflection;
+namespace System.Runtime.Serialization.Formatters
+{
+    using System;
     using System.Diagnostics;
     using System.Diagnostics.Contracts;
+    using System.Reflection;
+    using System.Runtime.Serialization;
+    using System.Security.Permissions;
 
 #if FEATURE_PAL
     // To turn on tracing, add the following to the per-machine
@@ -37,21 +38,20 @@ namespace System.Runtime.Serialization.Formatters {
     //
     // Turn on Logging in the jitmgr
 
-
     // remoting Wsdl logging
     /// <internalonly/>
-    [System.Security.SecurityCritical]  // auto-generated_required
+    [System.Security.SecurityCritical] // auto-generated_required
     [System.Runtime.InteropServices.ComVisible(true)]
     public sealed class InternalRM
     {
         /// <internalonly/>
         [System.Diagnostics.Conditional("_LOGGING")]
-        public static void InfoSoap(params Object[]messages)
+        public static void InfoSoap(params Object[] messages)
         {
             BCLDebug.Trace("SOAP", messages);
         }
 
-        //[System.Diagnostics.Conditional("_LOGGING")]        
+        //[System.Diagnostics.Conditional("_LOGGING")]
         /// <internalonly/>
         public static bool SoapCheckEnabled()
         {
@@ -60,22 +60,20 @@ namespace System.Runtime.Serialization.Formatters {
     }
 
     /// <internalonly/>
-    [System.Security.SecurityCritical]  // auto-generated_required
+    [System.Security.SecurityCritical] // auto-generated_required
     [System.Runtime.InteropServices.ComVisible(true)]
     public sealed class InternalST
     {
-        private InternalST()
-        {
-        }
+        private InternalST() { }
 
         /// <internalonly/>
         [System.Diagnostics.Conditional("_LOGGING")]
-        public static void InfoSoap(params Object[]messages)
+        public static void InfoSoap(params Object[] messages)
         {
             BCLDebug.Trace("SOAP", messages);
         }
 
-        //[System.Diagnostics.Conditional("_LOGGING")]        
+        //[System.Diagnostics.Conditional("_LOGGING")]
         /// <internalonly/>
         public static bool SoapCheckEnabled()
         {
@@ -83,19 +81,19 @@ namespace System.Runtime.Serialization.Formatters {
         }
 
         /// <internalonly/>
-        [System.Diagnostics.Conditional("SER_LOGGING")]        
-        public static void Soap(params Object[]messages)
+        [System.Diagnostics.Conditional("SER_LOGGING")]
+        public static void Soap(params Object[] messages)
         {
             if (!(messages[0] is String))
-                messages[0] = (messages[0].GetType()).Name+" ";
+                messages[0] = (messages[0].GetType()).Name + " ";
             else
-                messages[0] = messages[0]+" ";                
+                messages[0] = messages[0] + " ";
 
-            BCLDebug.Trace("SOAP",messages);                                
+            BCLDebug.Trace("SOAP", messages);
         }
 
         /// <internalonly/>
-        [System.Diagnostics.Conditional("_DEBUG")]        
+        [System.Diagnostics.Conditional("_DEBUG")]
         public static void SoapAssert(bool condition, String message)
         {
             Contract.Assert(condition, message);
@@ -127,19 +125,19 @@ namespace System.Runtime.Serialization.Formatters {
     internal static class SerTrace
     {
         [Conditional("_LOGGING")]
-        internal static void InfoLog(params Object[]messages)
+        internal static void InfoLog(params Object[] messages)
         {
             BCLDebug.Trace("BINARY", messages);
         }
 
-        [Conditional("SER_LOGGING")]            
-        internal static void Log(params Object[]messages)
+        [Conditional("SER_LOGGING")]
+        internal static void Log(params Object[] messages)
         {
             if (!(messages[0] is String))
-                messages[0] = (messages[0].GetType()).Name+" ";
+                messages[0] = (messages[0].GetType()).Name + " ";
             else
-                messages[0] = messages[0]+" ";                                
-            BCLDebug.Trace("BINARY",messages);
+                messages[0] = messages[0] + " ";
+            BCLDebug.Trace("BINARY", messages);
         }
     }
 }

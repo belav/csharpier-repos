@@ -3,12 +3,11 @@
 
 using System;
 using System.Diagnostics;
-
 using Internal.JitInterface;
+using Internal.ReadyToRunConstants;
 using Internal.Text;
 using Internal.TypeSystem;
 using Internal.TypeSystem.Ecma;
-using Internal.ReadyToRunConstants;
 
 namespace ILCompiler.DependencyAnalysis.ReadyToRun
 {
@@ -32,7 +31,8 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
             TypeDesc typeArgument,
             MethodWithToken methodArgument,
             FieldWithToken fieldArgument,
-            GenericContext methodContext)
+            GenericContext methodContext
+        )
         {
             Debug.Assert(typeArgument != null || methodArgument != null || fieldArgument != null);
             _runtimeLookupKind = runtimeLookupKind;
@@ -96,7 +96,12 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
             ObjectDataSignatureBuilder dataBuilder = new ObjectDataSignatureBuilder();
             dataBuilder.AddSymbol(this);
 
-            SignatureContext innerContext = dataBuilder.EmitFixup(factory, fixupToEmit, targetModule, factory.SignatureContext);
+            SignatureContext innerContext = dataBuilder.EmitFixup(
+                factory,
+                fixupToEmit,
+                targetModule,
+                factory.SignatureContext
+            );
             if (contextTypeToEmit != null)
             {
                 dataBuilder.EmitTypeSignature(contextTypeToEmit, innerContext);
@@ -112,7 +117,8 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                     enforceDefEncoding: false,
                     enforceOwningType: false,
                     context: innerContext,
-                    isInstantiatingStub: true);
+                    isInstantiatingStub: true
+                );
             }
             else if (_typeArgument != null)
             {
@@ -135,7 +141,11 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
             DependencyList dependencies = null;
             if (_fixupKind == ReadyToRunFixupKind.TypeHandle)
             {
-                TypeFixupSignature.AddDependenciesForAsyncStateMachineBox(ref dependencies, factory, _typeArgument);
+                TypeFixupSignature.AddDependenciesForAsyncStateMachineBox(
+                    ref dependencies,
+                    factory,
+                    _typeArgument
+                );
             }
             return dependencies;
         }
@@ -161,7 +171,11 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                 if (!_methodArgument.Token.IsNull)
                 {
                     sb.Append(" [");
-                    sb.Append(_methodArgument.Token.MetadataReader.GetString(_methodArgument.Token.MetadataReader.GetAssemblyDefinition().Name));
+                    sb.Append(
+                        _methodArgument.Token.MetadataReader.GetString(
+                            _methodArgument.Token.MetadataReader.GetAssemblyDefinition().Name
+                        )
+                    );
                     sb.Append(":");
                     sb.Append(((uint)_methodArgument.Token.Token).ToString("X8"));
                     sb.Append("]");
@@ -240,7 +254,10 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
             }
             else
             {
-                return comparer.Compare(_methodContext.ContextType, otherNode._methodContext.ContextType);
+                return comparer.Compare(
+                    _methodContext.ContextType,
+                    otherNode._methodContext.ContextType
+                );
             }
         }
     }

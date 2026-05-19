@@ -5,8 +5,8 @@
 namespace System.Activities.Hosting
 {
     using System;
-    using System.Runtime.Serialization;
     using System.Runtime;
+    using System.Runtime.Serialization;
 
     [DataContract]
     [Fx.Tag.XamlVisible(false)]
@@ -27,34 +27,19 @@ namespace System.Activities.Hosting
 
         public bool IsInitialized
         {
-            get
-            {
-                return this.TemporaryId == null;
-            }
+            get { return this.TemporaryId == null; }
         }
-        
+
         public Guid Id
         {
-            get
-            {
-                return this.id;
-            }
-            private set
-            {
-                this.id = value;
-            }
+            get { return this.id; }
+            private set { this.id = value; }
         }
-        
+
         public string TemporaryId
         {
-            get
-            {
-                return this.temporaryId;
-            }
-            private set
-            {
-                this.temporaryId = value;
-            }
+            get { return this.temporaryId; }
+            private set { this.temporaryId = value; }
         }
 
         [DataMember(EmitDefaultValue = false, Name = "Id")]

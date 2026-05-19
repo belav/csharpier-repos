@@ -12,8 +12,7 @@ namespace System.Diagnostics.Tests
         public void ActivityIdNonHierarchicalOverflow()
         {
             // find out Activity Id length on this platform in this AppDomain
-            Activity testActivity = new Activity("activity")
-                .Start();
+            Activity testActivity = new Activity("activity").Start();
             var expectedIdLength = testActivity.Id.Length;
             testActivity.Stop();
 
@@ -21,9 +20,7 @@ namespace System.Diagnostics.Tests
             // it causes overflow during Id generation, and new root Id is generated for the new Activity
             var parentId = '|' + new string('a', 1022) + '.';
 
-            var activity = new Activity("activity")
-                .SetParentId(parentId)
-                .Start();
+            var activity = new Activity("activity").SetParentId(parentId).Start();
 
             Assert.Equal(parentId, activity.ParentId);
 
@@ -76,7 +73,11 @@ namespace System.Diagnostics.Tests
             child3DebugString = $"{child3.Id}{grandChild.OperationName}-1.";
             child3ReleaseString = $"{child3.Id}1.";
 
-            AssertExtensions.AtLeastOneEquals(child3DebugString, child3ReleaseString, grandChild.Id);
+            AssertExtensions.AtLeastOneEquals(
+                child3DebugString,
+                child3ReleaseString,
+                grandChild.Id
+            );
         }
 
         [Fact]

@@ -13,11 +13,15 @@ namespace System.Web.Http.Controllers
     public class HttpActionContext
     {
         private readonly ModelStateDictionary _modelState = new ModelStateDictionary();
-        private readonly Dictionary<string, object> _operationArguments = new Dictionary<string, object>();
+        private readonly Dictionary<string, object> _operationArguments =
+            new Dictionary<string, object>();
         private HttpActionDescriptor _actionDescriptor;
         private HttpControllerContext _controllerContext;
-       
-        public HttpActionContext(HttpControllerContext controllerContext, HttpActionDescriptor actionDescriptor)
+
+        public HttpActionContext(
+            HttpControllerContext controllerContext,
+            HttpActionDescriptor actionDescriptor
+        )
         {
             if (controllerContext == null)
             {
@@ -37,9 +41,7 @@ namespace System.Web.Http.Controllers
         /// Initializes a new instance of the <see cref="HttpActionContext"/> class.
         /// </summary>
         /// <remarks>The default constructor is intended for use by unit testing only.</remarks>
-        public HttpActionContext()
-        {
-        }
+        public HttpActionContext() { }
 
         public HttpControllerContext ControllerContext
         {

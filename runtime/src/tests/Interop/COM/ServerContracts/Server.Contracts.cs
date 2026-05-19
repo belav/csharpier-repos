@@ -45,8 +45,33 @@ namespace Server.Contract
         void Add_Float_Out(float a, float b, out float c);
         void Add_Double_Out(double a, double b, out double c);
 
-        int Add_ManyInts11(int i1, int i2, int i3, int i4, int i5, int i6, int i7, int i8, int i9, int i10, int i11);
-        int Add_ManyInts12(int i1, int i2, int i3, int i4, int i5, int i6, int i7, int i8, int i9, int i10, int i11, int i12);
+        int Add_ManyInts11(
+            int i1,
+            int i2,
+            int i3,
+            int i4,
+            int i5,
+            int i6,
+            int i7,
+            int i8,
+            int i9,
+            int i10,
+            int i11
+        );
+        int Add_ManyInts12(
+            int i1,
+            int i2,
+            int i3,
+            int i4,
+            int i5,
+            int i6,
+            int i7,
+            int i8,
+            int i9,
+            int i10,
+            int i11,
+            int i12
+        );
     }
 
     [ComVisible(true)]
@@ -54,35 +79,113 @@ namespace Server.Contract
     [InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
     public interface IArrayTesting
     {
-        double Mean_Byte_LP_PreLen(int len, [MarshalAs(UnmanagedType.LPArray, SizeParamIndex=0)] byte[] d);
-        double Mean_Short_LP_PreLen(int len, [MarshalAs(UnmanagedType.LPArray, SizeParamIndex=0)] short[] d);
-        double Mean_UShort_LP_PreLen(int len, [MarshalAs(UnmanagedType.LPArray, SizeParamIndex=0)] ushort[] d);
-        double Mean_Int_LP_PreLen(int len, [MarshalAs(UnmanagedType.LPArray, SizeParamIndex=0)] int[] d);
-        double Mean_UInt_LP_PreLen(int len, [MarshalAs(UnmanagedType.LPArray, SizeParamIndex=0)] uint[] d);
-        double Mean_Long_LP_PreLen(int len, [MarshalAs(UnmanagedType.LPArray, SizeParamIndex=0)] long[] d);
-        double Mean_ULong_LP_PreLen(int len, [MarshalAs(UnmanagedType.LPArray, SizeParamIndex=0)] ulong[] d);
-        double Mean_Float_LP_PreLen(int len, [MarshalAs(UnmanagedType.LPArray, SizeParamIndex=0)] float[] d);
-        double Mean_Double_LP_PreLen(int len, [MarshalAs(UnmanagedType.LPArray, SizeParamIndex=0)] double[] d);
+        double Mean_Byte_LP_PreLen(
+            int len,
+            [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 0)] byte[] d
+        );
+        double Mean_Short_LP_PreLen(
+            int len,
+            [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 0)] short[] d
+        );
+        double Mean_UShort_LP_PreLen(
+            int len,
+            [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 0)] ushort[] d
+        );
+        double Mean_Int_LP_PreLen(
+            int len,
+            [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 0)] int[] d
+        );
+        double Mean_UInt_LP_PreLen(
+            int len,
+            [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 0)] uint[] d
+        );
+        double Mean_Long_LP_PreLen(
+            int len,
+            [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 0)] long[] d
+        );
+        double Mean_ULong_LP_PreLen(
+            int len,
+            [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 0)] ulong[] d
+        );
+        double Mean_Float_LP_PreLen(
+            int len,
+            [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 0)] float[] d
+        );
+        double Mean_Double_LP_PreLen(
+            int len,
+            [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 0)] double[] d
+        );
 
-        double Mean_Byte_LP_PostLen([MarshalAs(UnmanagedType.LPArray, SizeParamIndex=1)] byte[] d, int len);
-        double Mean_Short_LP_PostLen([MarshalAs(UnmanagedType.LPArray, SizeParamIndex=1)] short[] d, int len);
-        double Mean_UShort_LP_PostLen([MarshalAs(UnmanagedType.LPArray, SizeParamIndex=1)] ushort[] d, int len);
-        double Mean_Int_LP_PostLen([MarshalAs(UnmanagedType.LPArray, SizeParamIndex=1)] int[] d, int len);
-        double Mean_UInt_LP_PostLen([MarshalAs(UnmanagedType.LPArray, SizeParamIndex=1)] uint[] d, int len);
-        double Mean_Long_LP_PostLen([MarshalAs(UnmanagedType.LPArray, SizeParamIndex=1)] long[] d, int len);
-        double Mean_ULong_LP_PostLen([MarshalAs(UnmanagedType.LPArray, SizeParamIndex=1)] ulong[] d, int len);
-        double Mean_Float_LP_PostLen([MarshalAs(UnmanagedType.LPArray, SizeParamIndex=1)] float[] d, int len);
-        double Mean_Double_LP_PostLen([MarshalAs(UnmanagedType.LPArray, SizeParamIndex=1)] double[] d, int len);
+        double Mean_Byte_LP_PostLen(
+            [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 1)] byte[] d,
+            int len
+        );
+        double Mean_Short_LP_PostLen(
+            [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 1)] short[] d,
+            int len
+        );
+        double Mean_UShort_LP_PostLen(
+            [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 1)] ushort[] d,
+            int len
+        );
+        double Mean_Int_LP_PostLen(
+            [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 1)] int[] d,
+            int len
+        );
+        double Mean_UInt_LP_PostLen(
+            [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 1)] uint[] d,
+            int len
+        );
+        double Mean_Long_LP_PostLen(
+            [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 1)] long[] d,
+            int len
+        );
+        double Mean_ULong_LP_PostLen(
+            [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 1)] ulong[] d,
+            int len
+        );
+        double Mean_Float_LP_PostLen(
+            [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 1)] float[] d,
+            int len
+        );
+        double Mean_Double_LP_PostLen(
+            [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 1)] double[] d,
+            int len
+        );
 
-        double Mean_Byte_SafeArray_OutLen([MarshalAs(UnmanagedType.SafeArray)] byte[] d, out int len);
-        double Mean_Short_SafeArray_OutLen([MarshalAs(UnmanagedType.SafeArray)] short[] d, out int len);
-        double Mean_UShort_SafeArray_OutLen([MarshalAs(UnmanagedType.SafeArray)] ushort[] d, out int len);
+        double Mean_Byte_SafeArray_OutLen(
+            [MarshalAs(UnmanagedType.SafeArray)] byte[] d,
+            out int len
+        );
+        double Mean_Short_SafeArray_OutLen(
+            [MarshalAs(UnmanagedType.SafeArray)] short[] d,
+            out int len
+        );
+        double Mean_UShort_SafeArray_OutLen(
+            [MarshalAs(UnmanagedType.SafeArray)] ushort[] d,
+            out int len
+        );
         double Mean_Int_SafeArray_OutLen([MarshalAs(UnmanagedType.SafeArray)] int[] d, out int len);
-        double Mean_UInt_SafeArray_OutLen([MarshalAs(UnmanagedType.SafeArray)] uint[] d, out int len);
-        double Mean_Long_SafeArray_OutLen([MarshalAs(UnmanagedType.SafeArray)] long[] d, out int len);
-        double Mean_ULong_SafeArray_OutLen([MarshalAs(UnmanagedType.SafeArray)] ulong[] d, out int len);
-        double Mean_Float_SafeArray_OutLen([MarshalAs(UnmanagedType.SafeArray)] float[] d, out int len);
-        double Mean_Double_SafeArray_OutLen([MarshalAs(UnmanagedType.SafeArray)] double[] d, out int len);
+        double Mean_UInt_SafeArray_OutLen(
+            [MarshalAs(UnmanagedType.SafeArray)] uint[] d,
+            out int len
+        );
+        double Mean_Long_SafeArray_OutLen(
+            [MarshalAs(UnmanagedType.SafeArray)] long[] d,
+            out int len
+        );
+        double Mean_ULong_SafeArray_OutLen(
+            [MarshalAs(UnmanagedType.SafeArray)] ulong[] d,
+            out int len
+        );
+        double Mean_Float_SafeArray_OutLen(
+            [MarshalAs(UnmanagedType.SafeArray)] float[] d,
+            out int len
+        );
+        double Mean_Double_SafeArray_OutLen(
+            [MarshalAs(UnmanagedType.SafeArray)] double[] d,
+            out int len
+        );
     }
 
     [ComVisible(true)]
@@ -93,17 +196,20 @@ namespace Server.Contract
         [return: MarshalAs(UnmanagedType.LPStr)]
         string Add_LPStr(
             [MarshalAs(UnmanagedType.LPStr)] string a,
-            [MarshalAs(UnmanagedType.LPStr)] string b);
+            [MarshalAs(UnmanagedType.LPStr)] string b
+        );
 
         [return: MarshalAs(UnmanagedType.LPWStr)]
         string Add_LPWStr(
             [MarshalAs(UnmanagedType.LPWStr)] string a,
-            [MarshalAs(UnmanagedType.LPWStr)] string b);
+            [MarshalAs(UnmanagedType.LPWStr)] string b
+        );
 
         [return: MarshalAs(UnmanagedType.BStr)]
         string Add_BStr(
             [MarshalAs(UnmanagedType.BStr)] string a,
-            [MarshalAs(UnmanagedType.BStr)] string b);
+            [MarshalAs(UnmanagedType.BStr)] string b
+        );
 
         // LPStr
 
@@ -114,11 +220,17 @@ namespace Server.Contract
         string Reverse_LPStr_Ref([MarshalAs(UnmanagedType.LPStr)] ref string a);
 
         [return: MarshalAs(UnmanagedType.LPStr)]
-        string Reverse_LPStr_InRef([In][MarshalAs(UnmanagedType.LPStr)] ref string a);
+        string Reverse_LPStr_InRef([In] [MarshalAs(UnmanagedType.LPStr)] ref string a);
 
-        void Reverse_LPStr_Out([MarshalAs(UnmanagedType.LPStr)] string a, [MarshalAs(UnmanagedType.LPStr)] out string b);
+        void Reverse_LPStr_Out(
+            [MarshalAs(UnmanagedType.LPStr)] string a,
+            [MarshalAs(UnmanagedType.LPStr)] out string b
+        );
 
-        void Reverse_LPStr_OutAttr([MarshalAs(UnmanagedType.LPStr)] string a, [Out][MarshalAs(UnmanagedType.LPStr)] string b);
+        void Reverse_LPStr_OutAttr(
+            [MarshalAs(UnmanagedType.LPStr)] string a,
+            [Out] [MarshalAs(UnmanagedType.LPStr)] string b
+        );
 
         [return: MarshalAs(UnmanagedType.LPStr)]
         StringBuilder Reverse_SB_LPStr([MarshalAs(UnmanagedType.LPStr)] StringBuilder a);
@@ -127,11 +239,19 @@ namespace Server.Contract
         StringBuilder Reverse_SB_LPStr_Ref([MarshalAs(UnmanagedType.LPStr)] ref StringBuilder a);
 
         [return: MarshalAs(UnmanagedType.LPStr)]
-        StringBuilder Reverse_SB_LPStr_InRef([In][MarshalAs(UnmanagedType.LPStr)] ref StringBuilder a);
+        StringBuilder Reverse_SB_LPStr_InRef(
+            [In] [MarshalAs(UnmanagedType.LPStr)] ref StringBuilder a
+        );
 
-        void Reverse_SB_LPStr_Out([MarshalAs(UnmanagedType.LPStr)] StringBuilder a, [MarshalAs(UnmanagedType.LPStr)] out StringBuilder b);
+        void Reverse_SB_LPStr_Out(
+            [MarshalAs(UnmanagedType.LPStr)] StringBuilder a,
+            [MarshalAs(UnmanagedType.LPStr)] out StringBuilder b
+        );
 
-        void Reverse_SB_LPStr_OutAttr([MarshalAs(UnmanagedType.LPStr)] StringBuilder a, [Out][MarshalAs(UnmanagedType.LPStr)] StringBuilder b);
+        void Reverse_SB_LPStr_OutAttr(
+            [MarshalAs(UnmanagedType.LPStr)] StringBuilder a,
+            [Out] [MarshalAs(UnmanagedType.LPStr)] StringBuilder b
+        );
 
         // LPWStr
 
@@ -142,11 +262,17 @@ namespace Server.Contract
         string Reverse_LPWStr_Ref([MarshalAs(UnmanagedType.LPWStr)] ref string a);
 
         [return: MarshalAs(UnmanagedType.LPWStr)]
-        string Reverse_LPWStr_InRef([In][MarshalAs(UnmanagedType.LPWStr)] ref string a);
+        string Reverse_LPWStr_InRef([In] [MarshalAs(UnmanagedType.LPWStr)] ref string a);
 
-        void Reverse_LPWStr_Out([MarshalAs(UnmanagedType.LPWStr)] string a, [MarshalAs(UnmanagedType.LPWStr)] out string b);
+        void Reverse_LPWStr_Out(
+            [MarshalAs(UnmanagedType.LPWStr)] string a,
+            [MarshalAs(UnmanagedType.LPWStr)] out string b
+        );
 
-        void Reverse_LPWStr_OutAttr([MarshalAs(UnmanagedType.LPWStr)] string a, [Out][MarshalAs(UnmanagedType.LPWStr)] string b);
+        void Reverse_LPWStr_OutAttr(
+            [MarshalAs(UnmanagedType.LPWStr)] string a,
+            [Out] [MarshalAs(UnmanagedType.LPWStr)] string b
+        );
 
         [return: MarshalAs(UnmanagedType.LPWStr)]
         StringBuilder Reverse_SB_LPWStr([MarshalAs(UnmanagedType.LPWStr)] StringBuilder a);
@@ -155,11 +281,19 @@ namespace Server.Contract
         StringBuilder Reverse_SB_LPWStr_Ref([MarshalAs(UnmanagedType.LPWStr)] ref StringBuilder a);
 
         [return: MarshalAs(UnmanagedType.LPWStr)]
-        StringBuilder Reverse_SB_LPWStr_InRef([In][MarshalAs(UnmanagedType.LPWStr)] ref StringBuilder a);
+        StringBuilder Reverse_SB_LPWStr_InRef(
+            [In] [MarshalAs(UnmanagedType.LPWStr)] ref StringBuilder a
+        );
 
-        void Reverse_SB_LPWStr_Out([MarshalAs(UnmanagedType.LPWStr)] StringBuilder a, [MarshalAs(UnmanagedType.LPWStr)] out StringBuilder b);
+        void Reverse_SB_LPWStr_Out(
+            [MarshalAs(UnmanagedType.LPWStr)] StringBuilder a,
+            [MarshalAs(UnmanagedType.LPWStr)] out StringBuilder b
+        );
 
-        void Reverse_SB_LPWStr_OutAttr([MarshalAs(UnmanagedType.LPWStr)] StringBuilder a, [Out][MarshalAs(UnmanagedType.LPWStr)] StringBuilder b);
+        void Reverse_SB_LPWStr_OutAttr(
+            [MarshalAs(UnmanagedType.LPWStr)] StringBuilder a,
+            [Out] [MarshalAs(UnmanagedType.LPWStr)] StringBuilder b
+        );
 
         // BSTR
 
@@ -170,11 +304,17 @@ namespace Server.Contract
         string Reverse_BStr_Ref([MarshalAs(UnmanagedType.BStr)] ref string a);
 
         [return: MarshalAs(UnmanagedType.BStr)]
-        string Reverse_BStr_InRef([In][MarshalAs(UnmanagedType.BStr)] ref string a);
+        string Reverse_BStr_InRef([In] [MarshalAs(UnmanagedType.BStr)] ref string a);
 
-        void Reverse_BStr_Out([MarshalAs(UnmanagedType.BStr)] string a, [MarshalAs(UnmanagedType.BStr)] out string b);
+        void Reverse_BStr_Out(
+            [MarshalAs(UnmanagedType.BStr)] string a,
+            [MarshalAs(UnmanagedType.BStr)] out string b
+        );
 
-        void Reverse_BStr_OutAttr([MarshalAs(UnmanagedType.BStr)] string a, [Out][MarshalAs(UnmanagedType.BStr)] string b);
+        void Reverse_BStr_OutAttr(
+            [MarshalAs(UnmanagedType.BStr)] string a,
+            [Out] [MarshalAs(UnmanagedType.BStr)] string b
+        );
 
         [LCIDConversion(1)]
         [return: MarshalAs(UnmanagedType.LPWStr)]
@@ -202,7 +342,11 @@ namespace Server.Contract
         [PreserveSig]
         HResult Return_As_HResult_Struct(int hresultToReturn);
 
-        void Throw_HResult_HelpLink(int hresultToReturn, [MarshalAs(UnmanagedType.LPWStr)] string helpLink, uint helpContext);
+        void Throw_HResult_HelpLink(
+            int hresultToReturn,
+            [MarshalAs(UnmanagedType.LPWStr)] string helpLink,
+            uint helpContext
+        );
     }
 
     public enum IDispatchTesting_Exception
@@ -232,7 +376,7 @@ namespace Server.Contract
     [InterfaceType(ComInterfaceType.InterfaceIsIDispatch)]
     public interface IDispatchTesting
     {
-        void DoubleNumeric_ReturnByRef (
+        void DoubleNumeric_ReturnByRef(
             byte b1,
             ref byte b2,
             short s1,
@@ -246,7 +390,8 @@ namespace Server.Contract
             long l1,
             ref long l2,
             ulong ul1,
-            ref ulong ul2);
+            ref ulong ul2
+        );
 
         float Add_Float_ReturnAndUpdateByRef(float a, ref float b);
         double Add_Double_ReturnAndUpdateByRef(double a, ref double b);
@@ -260,7 +405,9 @@ namespace Server.Contract
 
         System.Collections.IEnumerator ExplicitGetEnumerator();
 
-        [DispId(/*DISPID_NEWENUM*/-4)]
+        [DispId( /*DISPID_NEWENUM*/
+            -4
+        )]
         System.Collections.IEnumerator GetEnumerator();
     }
 
@@ -319,7 +466,10 @@ namespace Server.Contract
 
         // Check if the two object represent an aggregated pair
         [return: MarshalAs(UnmanagedType.VariantBool)]
-        bool AreAggregated([MarshalAs(UnmanagedType.IUnknown)] object aggregateMaybe1, [MarshalAs(UnmanagedType.IUnknown)] object aggregateMaybe2);
+        bool AreAggregated(
+            [MarshalAs(UnmanagedType.IUnknown)] object aggregateMaybe1,
+            [MarshalAs(UnmanagedType.IUnknown)] object aggregateMaybe2
+        );
     };
 
     [ComVisible(true)]
@@ -363,9 +513,7 @@ namespace Server.Contract
     [ComVisible(true)]
     [InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
     [Guid("3021236a-2a9e-4a29-bf14-533842c55262")]
-    internal interface IInspectableTesting
-    {
-    }
+    internal interface IInspectableTesting { }
 
     [InterfaceType(ComInterfaceType.InterfaceIsIInspectable)]
     [Guid("e9e1ccf9-8e93-4850-ac1c-a71692cb68c5")]

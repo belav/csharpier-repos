@@ -11,13 +11,29 @@ namespace System.Web.Http.ExceptionHandling
     public static class ExceptionCatchBlocks
     {
         private static readonly ExceptionContextCatchBlock _httpBatchHandler =
-            new ExceptionContextCatchBlock(typeof(HttpBatchHandler).Name, isTopLevel: false, callsHandler: true);
+            new ExceptionContextCatchBlock(
+                typeof(HttpBatchHandler).Name,
+                isTopLevel: false,
+                callsHandler: true
+            );
         private static readonly ExceptionContextCatchBlock _httpControllerDispatcher =
-            new ExceptionContextCatchBlock(typeof(HttpControllerDispatcher).Name, isTopLevel: false, callsHandler: true);
+            new ExceptionContextCatchBlock(
+                typeof(HttpControllerDispatcher).Name,
+                isTopLevel: false,
+                callsHandler: true
+            );
         private static readonly ExceptionContextCatchBlock _httpServer =
-            new ExceptionContextCatchBlock(typeof(HttpServer).Name, isTopLevel: true, callsHandler: true);
+            new ExceptionContextCatchBlock(
+                typeof(HttpServer).Name,
+                isTopLevel: true,
+                callsHandler: true
+            );
         private static readonly ExceptionContextCatchBlock _exceptionFilter =
-            new ExceptionContextCatchBlock(typeof(IExceptionFilter).Name, isTopLevel: false, callsHandler: true);
+            new ExceptionContextCatchBlock(
+                typeof(IExceptionFilter).Name,
+                isTopLevel: false,
+                callsHandler: true
+            );
 
         /// <summary>Gets the catch block in <see cref="HttpBatchHandler"/>.SendAsync.</summary>
         public static ExceptionContextCatchBlock HttpBatchHandler

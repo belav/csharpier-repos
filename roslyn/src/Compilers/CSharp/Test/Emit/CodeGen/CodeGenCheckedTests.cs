@@ -19,7 +19,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.CodeGen
         [Fact]
         public void CheckedExpression_Signed()
         {
-            var source = @"
+            var source =
+                @"
 class C 
 {
     public static int Add(int a, int b) 
@@ -45,7 +46,9 @@ class C
 ";
             var verifier = CompileAndVerify(source);
 
-            verifier.VerifyIL("C.Add", @"
+            verifier.VerifyIL(
+                "C.Add",
+                @"
 {
   // Code size        4 (0x4)
   .maxstack  2
@@ -54,8 +57,11 @@ class C
   IL_0002:  add.ovf
   IL_0003:  ret
 }
-");
-            verifier.VerifyIL("C.Sub", @"
+"
+            );
+            verifier.VerifyIL(
+                "C.Sub",
+                @"
 {
   // Code size        4 (0x4)
   .maxstack  2
@@ -64,9 +70,12 @@ class C
   IL_0002:  sub.ovf
   IL_0003:  ret
 }
-");
+"
+            );
 
-            verifier.VerifyIL("C.Mul", @"
+            verifier.VerifyIL(
+                "C.Mul",
+                @"
 {
   // Code size        4 (0x4)
   .maxstack  2
@@ -75,9 +84,12 @@ class C
   IL_0002:  mul.ovf
   IL_0003:  ret
 }
-");
+"
+            );
 
-            verifier.VerifyIL("C.Minus", @"
+            verifier.VerifyIL(
+                "C.Minus",
+                @"
 {
   // Code size        4 (0x4)
   .maxstack  2
@@ -87,13 +99,15 @@ class C
   IL_0003:  ret
 }
 
-");
+"
+            );
         }
 
         [Fact]
         public void CheckedExpression_Unsigned()
         {
-            var source = @"
+            var source =
+                @"
 class C 
 {
     public static long Add(uint a, uint b) 
@@ -119,7 +133,9 @@ class C
 ";
             var verifier = CompileAndVerify(source);
 
-            verifier.VerifyIL("C.Add", @"
+            verifier.VerifyIL(
+                "C.Add",
+                @"
 {
   // Code size        5 (0x5)
   .maxstack  2
@@ -129,8 +145,11 @@ class C
   IL_0003:  conv.u8
   IL_0004:  ret
 }
-");
-            verifier.VerifyIL("C.Sub", @"
+"
+            );
+            verifier.VerifyIL(
+                "C.Sub",
+                @"
 {
   // Code size        5 (0x5)
   .maxstack  2
@@ -140,9 +159,12 @@ class C
   IL_0003:  conv.u8
   IL_0004:  ret
 }
-");
+"
+            );
 
-            verifier.VerifyIL("C.Mul", @"
+            verifier.VerifyIL(
+                "C.Mul",
+                @"
 {
   // Code size        5 (0x5)
   .maxstack  2
@@ -152,9 +174,12 @@ class C
   IL_0003:  conv.u8
   IL_0004:  ret
 }
-");
+"
+            );
 
-            verifier.VerifyIL("C.Minus", @"
+            verifier.VerifyIL(
+                "C.Minus",
+                @"
 {
   // Code size        6 (0x6)
   .maxstack  2
@@ -165,13 +190,15 @@ class C
   IL_0004:  sub.ovf
   IL_0005:  ret
 }
-");
+"
+            );
         }
 
         [Fact]
         public void CheckedExpression_Enums()
         {
-            var source = @"
+            var source =
+                @"
 enum E
 {
     A
@@ -217,7 +244,9 @@ class C
 ";
             var verifier = CompileAndVerify(source);
 
-            verifier.VerifyIL("C.Add1", @"
+            verifier.VerifyIL(
+                "C.Add1",
+                @"
 {
   // Code size        4 (0x4)
   .maxstack  2
@@ -226,8 +255,11 @@ class C
   IL_0002:  add.ovf
   IL_0003:  ret
 }
-");
-            verifier.VerifyIL("C.Add2", @"
+"
+            );
+            verifier.VerifyIL(
+                "C.Add2",
+                @"
 {
   // Code size        4 (0x4)
   .maxstack  2
@@ -236,9 +268,12 @@ class C
   IL_0002:  add.ovf
   IL_0003:  ret
 }
-");
+"
+            );
 
-            verifier.VerifyIL("C.Sub", @"
+            verifier.VerifyIL(
+                "C.Sub",
+                @"
 {
   // Code size        4 (0x4)
   .maxstack  2
@@ -247,9 +282,12 @@ class C
   IL_0002:  sub.ovf
   IL_0003:  ret
 }
-");
+"
+            );
 
-            verifier.VerifyIL("C.PostInc", @"
+            verifier.VerifyIL(
+                "C.PostInc",
+                @"
 {
   // Code size        7 (0x7)
   .maxstack  3
@@ -260,9 +298,12 @@ class C
   IL_0004:  starg.s    V_0
   IL_0006:  ret
 }
-");
+"
+            );
 
-            verifier.VerifyIL("C.PostDec", @"
+            verifier.VerifyIL(
+                "C.PostDec",
+                @"
 {
   // Code size        7 (0x7)
   .maxstack  3
@@ -273,8 +314,11 @@ class C
   IL_0004:  starg.s    V_0
   IL_0006:  ret
 }
-");
-            verifier.VerifyIL("C.PreInc", @"
+"
+            );
+            verifier.VerifyIL(
+                "C.PreInc",
+                @"
 {
   // Code size        7 (0x7)
   .maxstack  2
@@ -285,9 +329,12 @@ class C
   IL_0004:  starg.s    V_0
   IL_0006:  ret
 }
-");
+"
+            );
 
-            verifier.VerifyIL("C.PreDec", @"
+            verifier.VerifyIL(
+                "C.PreDec",
+                @"
 {
   // Code size        7 (0x7)
   .maxstack  2
@@ -298,13 +345,15 @@ class C
   IL_0004:  starg.s    V_0
   IL_0006:  ret
 }
-");
+"
+            );
         }
 
         [Fact]
         public void CheckedExpression_Pointers()
         {
-            var source = @"
+            var source =
+                @"
 enum E
 {
     A
@@ -388,10 +437,16 @@ unsafe struct C
     }
 }
 ";
-            var verifier = CompileAndVerify(source, options: TestOptions.UnsafeReleaseDll, verify: Verification.Fails);
+            var verifier = CompileAndVerify(
+                source,
+                options: TestOptions.UnsafeReleaseDll,
+                verify: Verification.Fails
+            );
 
             // NOTE: unsigned addition
-            verifier.VerifyIL("C.Add_Int1", @"
+            verifier.VerifyIL(
+                "C.Add_Int1",
+                @"
 {
   // Code size       12 (0xc)
   .maxstack  3
@@ -402,9 +457,12 @@ unsafe struct C
   IL_0009:  mul.ovf
   IL_000a:  add.ovf.un
   IL_000b:  ret
-}");
+}"
+            );
             // NOTE: signed addition
-            verifier.VerifyIL("C.Add_Int2", @"
+            verifier.VerifyIL(
+                "C.Add_Int2",
+                @"
 {
   // Code size       12 (0xc)
   .maxstack  2
@@ -415,9 +473,12 @@ unsafe struct C
   IL_0009:  ldarg.0
   IL_000a:  add.ovf
   IL_000b:  ret
-}");
+}"
+            );
             // NOTE: unsigned addition
-            verifier.VerifyIL("C.Add_UInt1", @"{
+            verifier.VerifyIL(
+                "C.Add_UInt1",
+                @"{
   // Code size       14 (0xe)
   .maxstack  3
   IL_0000:  ldarg.0
@@ -429,9 +490,12 @@ unsafe struct C
   IL_000b:  conv.i
   IL_000c:  add.ovf.un
   IL_000d:  ret
-}");
+}"
+            );
             // NOTE: signed addition
-            verifier.VerifyIL("C.Add_UInt2", @"
+            verifier.VerifyIL(
+                "C.Add_UInt2",
+                @"
 {
   // Code size       14 (0xe)
   .maxstack  2
@@ -444,9 +508,12 @@ unsafe struct C
   IL_000b:  ldarg.0
   IL_000c:  add.ovf
   IL_000d:  ret
-}");
+}"
+            );
             // NOTE: unsigned addition
-            verifier.VerifyIL("C.Add_Long1", @"
+            verifier.VerifyIL(
+                "C.Add_Long1",
+                @"
 {
   // Code size       13 (0xd)
   .maxstack  3
@@ -458,9 +525,12 @@ unsafe struct C
   IL_000a:  conv.i
   IL_000b:  add.ovf.un
   IL_000c:  ret
-}");
+}"
+            );
             // NOTE: signed addition
-            verifier.VerifyIL("C.Add_Long2", @"
+            verifier.VerifyIL(
+                "C.Add_Long2",
+                @"
 {
   // Code size       13 (0xd)
   .maxstack  2
@@ -472,9 +542,12 @@ unsafe struct C
   IL_000a:  ldarg.0
   IL_000b:  add.ovf
   IL_000c:  ret
-}");
+}"
+            );
             // NOTE: unsigned addition
-            verifier.VerifyIL("C.Add_ULong1", @"
+            verifier.VerifyIL(
+                "C.Add_ULong1",
+                @"
 {
   // Code size       13 (0xd)
   .maxstack  3
@@ -486,9 +559,12 @@ unsafe struct C
   IL_000a:  conv.u
   IL_000b:  add.ovf.un
   IL_000c:  ret
-}");
+}"
+            );
             // NOTE: unsigned addition (differs from previous Add_*2's)
-            verifier.VerifyIL("C.Add_ULong2", @"
+            verifier.VerifyIL(
+                "C.Add_ULong2",
+                @"
 {
   // Code size       13 (0xd)
   .maxstack  2
@@ -500,8 +576,11 @@ unsafe struct C
   IL_000a:  ldarg.0
   IL_000b:  add.ovf.un
   IL_000c:  ret
-}");
-            verifier.VerifyIL("C.Sub_Int", @"
+}"
+            );
+            verifier.VerifyIL(
+                "C.Sub_Int",
+                @"
 {
   // Code size       12 (0xc)
   .maxstack  3
@@ -512,8 +591,11 @@ unsafe struct C
   IL_0009:  mul.ovf
   IL_000a:  sub.ovf.un
   IL_000b:  ret
-}");
-            verifier.VerifyIL("C.Sub_UInt", @"
+}"
+            );
+            verifier.VerifyIL(
+                "C.Sub_UInt",
+                @"
 {
   // Code size       14 (0xe)
   .maxstack  3
@@ -526,8 +608,11 @@ unsafe struct C
   IL_000b:  conv.i
   IL_000c:  sub.ovf.un
   IL_000d:  ret
-}");
-            verifier.VerifyIL("C.Sub_Long", @"
+}"
+            );
+            verifier.VerifyIL(
+                "C.Sub_Long",
+                @"
 {
   // Code size       13 (0xd)
   .maxstack  3
@@ -539,8 +624,11 @@ unsafe struct C
   IL_000a:  conv.i
   IL_000b:  sub.ovf.un
   IL_000c:  ret
-}");
-            verifier.VerifyIL("C.Sub_ULong", @"
+}"
+            );
+            verifier.VerifyIL(
+                "C.Sub_ULong",
+                @"
 {
   // Code size       13 (0xd)
   .maxstack  3
@@ -552,8 +640,11 @@ unsafe struct C
   IL_000a:  conv.u
   IL_000b:  sub.ovf.un
   IL_000c:  ret
-}");
-            verifier.VerifyIL("C.Sub_Ptr", @"
+}"
+            );
+            verifier.VerifyIL(
+                "C.Sub_Ptr",
+                @"
 {
   // Code size       12 (0xc)
   .maxstack  2
@@ -564,8 +655,11 @@ unsafe struct C
   IL_0009:  div
   IL_000a:  conv.i8
   IL_000b:  ret
-}");
-            verifier.VerifyIL("C.PostInc", @"
+}"
+            );
+            verifier.VerifyIL(
+                "C.PostInc",
+                @"
 {
   // Code size       12 (0xc)
   .maxstack  3
@@ -575,8 +669,11 @@ unsafe struct C
   IL_0008:  add.ovf.un
   IL_0009:  starg.s    V_0
   IL_000b:  ret
-}");
-            verifier.VerifyIL("C.PostDec", @"
+}"
+            );
+            verifier.VerifyIL(
+                "C.PostDec",
+                @"
 {
   // Code size       12 (0xc)
   .maxstack  3
@@ -586,13 +683,15 @@ unsafe struct C
   IL_0008:  sub.ovf.un
   IL_0009:  starg.s    V_0
   IL_000b:  ret
-}");
+}"
+            );
         }
 
         [Fact]
         public void CheckedExpression_Optimizer()
         {
-            var source = @"
+            var source =
+                @"
 class C
 {
     static bool Local()
@@ -610,7 +709,9 @@ class C
 ";
             var verifier = CompileAndVerify(source);
 
-            verifier.VerifyIL("C.Local", @"
+            verifier.VerifyIL(
+                "C.Local",
+                @"
 {
   // Code size       12 (0xc)
   .maxstack  2
@@ -626,8 +727,11 @@ class C
   IL_0009:  ceq
   IL_000b:  ret
 }
-");
-            verifier.VerifyIL("C.LocalInc", @"
+"
+            );
+            verifier.VerifyIL(
+                "C.LocalInc",
+                @"
 {
   // Code size       16 (0x10)
   .maxstack  4
@@ -647,13 +751,15 @@ class C
   IL_000d:  ceq
   IL_000f:  ret
 }
-");
+"
+            );
         }
 
         [Fact]
         public void CheckedExpression_IncDec()
         {
-            var source = @"
+            var source =
+                @"
 class C 
 {
     public static int PostInc(int a) 
@@ -679,7 +785,9 @@ class C
 ";
             var verifier = CompileAndVerify(source);
 
-            verifier.VerifyIL("C.PostInc", @"
+            verifier.VerifyIL(
+                "C.PostInc",
+                @"
 {
   // Code size        7 (0x7)
   .maxstack  3
@@ -690,8 +798,11 @@ class C
   IL_0004:  starg.s    V_0
   IL_0006:  ret
 }
-");
-            verifier.VerifyIL("C.PreInc", @"
+"
+            );
+            verifier.VerifyIL(
+                "C.PreInc",
+                @"
 {
   // Code size        7 (0x7)
   .maxstack  2
@@ -702,9 +813,12 @@ class C
   IL_0004:  starg.s    V_0
   IL_0006:  ret
 }
-");
+"
+            );
 
-            verifier.VerifyIL("C.PostDec", @"
+            verifier.VerifyIL(
+                "C.PostDec",
+                @"
 {
   // Code size        7 (0x7)
   .maxstack  3
@@ -715,9 +829,12 @@ class C
   IL_0004:  starg.s    V_0
   IL_0006:  ret
 }
-");
+"
+            );
 
-            verifier.VerifyIL("C.PreDec", @"
+            verifier.VerifyIL(
+                "C.PreDec",
+                @"
 {
   // Code size        7 (0x7)
   .maxstack  2
@@ -728,13 +845,15 @@ class C
   IL_0004:  starg.s    V_0
   IL_0006:  ret
 }
-");
+"
+            );
         }
 
         [Fact]
         public void CheckedExpression_CompoundAssignment()
         {
-            var source = @"
+            var source =
+                @"
 class C 
 {
     public static int Add(int a, int b) 
@@ -765,7 +884,9 @@ class C
 ";
             var verifier = CompileAndVerify(source);
 
-            verifier.VerifyIL("C.Add", @"
+            verifier.VerifyIL(
+                "C.Add",
+                @"
 {
   // Code size        7 (0x7)
   .maxstack  2
@@ -776,8 +897,11 @@ class C
   IL_0004:  starg.s    V_0
   IL_0006:  ret
 }
-");
-            verifier.VerifyIL("C.Sub", @"
+"
+            );
+            verifier.VerifyIL(
+                "C.Sub",
+                @"
 {
   // Code size        7 (0x7)
   .maxstack  2
@@ -788,9 +912,12 @@ class C
   IL_0004:  starg.s    V_0
   IL_0006:  ret
 }
-");
+"
+            );
 
-            verifier.VerifyIL("C.Mul", @"
+            verifier.VerifyIL(
+                "C.Mul",
+                @"
 {
   // Code size        7 (0x7)
   .maxstack  2
@@ -801,11 +928,14 @@ class C
   IL_0004:  starg.s    V_0
   IL_0006:  ret
 }
-");
+"
+            );
 
             // both checked and unchecked generate the same instruction that checks overflow
 
-            verifier.VerifyIL("C.Div", @"
+            verifier.VerifyIL(
+                "C.Div",
+                @"
 {
   // Code size        7 (0x7)
   .maxstack  2
@@ -816,9 +946,12 @@ class C
   IL_0004:  starg.s    V_0
   IL_0006:  ret
 }
-");
+"
+            );
 
-            verifier.VerifyIL("C.Rem", @"
+            verifier.VerifyIL(
+                "C.Rem",
+                @"
 {
   // Code size        7 (0x7)
   .maxstack  2
@@ -829,13 +962,15 @@ class C
   IL_0004:  starg.s    V_0
   IL_0006:  ret
 }
-");
+"
+            );
         }
 
         [Fact]
         public void Checked_ImplicitConversions_CompoundAssignment()
         {
-            var source = @"
+            var source =
+                @"
 class C 
 {
     public static int Add(short a) 
@@ -846,7 +981,9 @@ class C
 
             var verifier = CompileAndVerify(source);
 
-            verifier.VerifyIL("C.Add", @"
+            verifier.VerifyIL(
+                "C.Add",
+                @"
 {
   // Code size       12 (0xc)
   .maxstack  2
@@ -858,13 +995,15 @@ class C
   IL_0009:  starg.s    V_0
   IL_000b:  ret
 }
-");
+"
+            );
         }
 
         [Fact]
         public void Checked_ImplicitConversions_IncDec()
         {
-            var source = @"
+            var source =
+                @"
 class C 
 {
     class X
@@ -903,7 +1042,9 @@ class C
 }";
             var verifier = CompileAndVerify(source);
 
-            verifier.VerifyIL("C.PostIncUserDefined", @"
+            verifier.VerifyIL(
+                "C.PostIncUserDefined",
+                @"
 {
   // Code size       17 (0x11)
   .maxstack  2
@@ -916,9 +1057,12 @@ class C
   IL_000e:  starg.s    V_0
   IL_0010:  ret
 }
-");
+"
+            );
 
-            verifier.VerifyIL("C.PostInc", @"
+            verifier.VerifyIL(
+                "C.PostInc",
+                @"
 {
   // Code size        8 (0x8)
   .maxstack  3
@@ -930,9 +1074,12 @@ class C
   IL_0005:  starg.s    V_0
   IL_0007:  ret
 }
-");
+"
+            );
 
-            verifier.VerifyIL("C.PreInc", @"
+            verifier.VerifyIL(
+                "C.PreInc",
+                @"
 {
   // Code size        8 (0x8)
   .maxstack  2
@@ -944,9 +1091,12 @@ class C
   IL_0005:  starg.s    V_0
   IL_0007:  ret
 }
-");
+"
+            );
 
-            verifier.VerifyIL("C.PostIncNullable", @"{
+            verifier.VerifyIL(
+                "C.PostIncNullable",
+                @"{
   // Code size       48 (0x30)
   .maxstack  3
   .locals init (short? V_0,
@@ -970,13 +1120,15 @@ class C
   IL_002a:  stsfld     ""short? C.s""
   IL_002f:  ret
 }
-");
+"
+            );
         }
 
         [Fact]
         public void Checked_ImplicitConversions_ArraySize()
         {
-            var source = @"
+            var source =
+                @"
 class C 
 {
     public static int[] ArraySize(long size) 
@@ -990,7 +1142,9 @@ class C
 ";
             var verifier = CompileAndVerify(source);
 
-            verifier.VerifyIL("C.ArraySize", @"
+            verifier.VerifyIL(
+                "C.ArraySize",
+                @"
 {
   // Code size        8 (0x8)
   .maxstack  1
@@ -999,13 +1153,15 @@ class C
   IL_0002:  newarr     ""int""
   IL_0007:  ret
 }
-");
+"
+            );
         }
 
         [Fact]
         public void Checked_ImplicitConversions_ForEach()
         {
-            var source = @"
+            var source =
+                @"
 class C 
 {
     static void ForEachString() 
@@ -1044,7 +1200,9 @@ class C
 ";
             var verifier = CompileAndVerify(source);
 
-            verifier.VerifyIL("C.ForEachString", @"
+            verifier.VerifyIL(
+                "C.ForEachString",
+                @"
 {
   // Code size       33 (0x21)
   .maxstack  2
@@ -1070,9 +1228,12 @@ class C
   IL_001e:  blt.s      IL_000a
   IL_0020:  ret
 }
-");
+"
+            );
 
-            verifier.VerifyIL("C.ForEachVector", @"
+            verifier.VerifyIL(
+                "C.ForEachVector",
+                @"
 {
   // Code size       31 (0x1f)
   .maxstack  4
@@ -1104,9 +1265,12 @@ class C
   IL_001c:  blt.s      IL_000f
   IL_001e:  ret
 }
-");
+"
+            );
 
-            verifier.VerifyIL("C.ForEachMultiDimArray", @"
+            verifier.VerifyIL(
+                "C.ForEachMultiDimArray",
+                @"
 {
   // Code size       85 (0x55)
   .maxstack  5
@@ -1163,13 +1327,15 @@ class C
   IL_0051:  ldloc.1
   IL_0052:  ble.s      IL_002b
   IL_0054:  ret
-}");
+}"
+            );
         }
 
         [Fact]
         public void UncheckedExpression_CompoundAssignment()
         {
-            var source = @"
+            var source =
+                @"
 class C 
 {
     public static int Add(int a, int b) 
@@ -1200,7 +1366,9 @@ class C
 ";
             var verifier = CompileAndVerify(source);
 
-            verifier.VerifyIL("C.Add", @"
+            verifier.VerifyIL(
+                "C.Add",
+                @"
 {
   // Code size        7 (0x7)
   .maxstack  2
@@ -1211,8 +1379,11 @@ class C
   IL_0004:  starg.s    V_0
   IL_0006:  ret
 }
-");
-            verifier.VerifyIL("C.Sub", @"
+"
+            );
+            verifier.VerifyIL(
+                "C.Sub",
+                @"
 {
   // Code size        7 (0x7)
   .maxstack  2
@@ -1223,9 +1394,12 @@ class C
   IL_0004:  starg.s    V_0
   IL_0006:  ret
 }
-");
+"
+            );
 
-            verifier.VerifyIL("C.Mul", @"
+            verifier.VerifyIL(
+                "C.Mul",
+                @"
 {
   // Code size        7 (0x7)
   .maxstack  2
@@ -1236,11 +1410,14 @@ class C
   IL_0004:  starg.s    V_0
   IL_0006:  ret
 }
-");
+"
+            );
 
             // both checked and unchecked generate the same instruction that checks overflow
 
-            verifier.VerifyIL("C.Div", @"
+            verifier.VerifyIL(
+                "C.Div",
+                @"
 {
   // Code size        7 (0x7)
   .maxstack  2
@@ -1251,9 +1428,12 @@ class C
   IL_0004:  starg.s    V_0
   IL_0006:  ret
 }
-");
+"
+            );
 
-            verifier.VerifyIL("C.Rem", @"
+            verifier.VerifyIL(
+                "C.Rem",
+                @"
 {
   // Code size        7 (0x7)
   .maxstack  2
@@ -1264,13 +1444,15 @@ class C
   IL_0004:  starg.s    V_0
   IL_0006:  ret
 }
-");
+"
+            );
         }
 
         [Fact]
         public void CheckedBlock_Conversions()
         {
-            var source = @"
+            var source =
+                @"
 enum E
 {
    A = 1
@@ -1296,7 +1478,9 @@ class C
 ";
             var verifier = CompileAndVerify(source);
 
-            verifier.VerifyIL("C.SByte_UInt", @"
+            verifier.VerifyIL(
+                "C.SByte_UInt",
+                @"
 {
   // Code size        3 (0x3)
   .maxstack  1
@@ -1304,9 +1488,12 @@ class C
   IL_0001:  conv.ovf.u4
   IL_0002:  ret
 }
-");
+"
+            );
 
-            verifier.VerifyIL("C.UInt_Int", @"
+            verifier.VerifyIL(
+                "C.UInt_Int",
+                @"
 {
   // Code size        3 (0x3)
   .maxstack  1
@@ -1314,9 +1501,12 @@ class C
   IL_0001:  conv.ovf.i4.un
   IL_0002:  ret
 }
-");
+"
+            );
 
-            verifier.VerifyIL("C.Enum_Short", @"
+            verifier.VerifyIL(
+                "C.Enum_Short",
+                @"
 {
   // Code size        3 (0x3)
   .maxstack  1
@@ -1324,18 +1514,20 @@ class C
   IL_0001:  conv.ovf.i2
   IL_0002:  ret
 }
-");
+"
+            );
         }
 
-        // Although C# 4.0 specification says that checked context never flows in a lambda, 
-        // the Dev10 compiler implementation always flows the context in, except for 
+        // Although C# 4.0 specification says that checked context never flows in a lambda,
+        // the Dev10 compiler implementation always flows the context in, except for
         // when the lambda is directly a "parameter" of the checked/unchecked expression.
         // For Roslyn we decided to change the spec and always flow the context in.
 
         [Fact]
         public void Lambda_Statement()
         {
-            var verifier = CompileAndVerify(@"
+            var verifier = CompileAndVerify(
+                    @"
 class C
 {
     static void F()
@@ -1349,7 +1541,11 @@ class C
         }
     }
 }
-").VerifyIL("C.<>c.<F>b__0_0(int)", @"
+"
+                )
+                .VerifyIL(
+                    "C.<>c.<F>b__0_0(int)",
+                    @"
 {
   // Code size        4 (0x4)
   .maxstack  2
@@ -1358,13 +1554,15 @@ class C
   IL_0002:  add.ovf
   IL_0003:  ret
 }
-");
+"
+                );
         }
 
         [Fact]
         public void Lambda_QueryStmt()
         {
-            var verifier = CompileAndVerify(@"
+            var verifier = CompileAndVerify(
+                    @"
 using System.Linq;
 
 class C
@@ -1377,7 +1575,11 @@ class C
         }
     }
 }
-").VerifyIL("C.<>c.<F>b__0_0(int)", @"
+"
+                )
+                .VerifyIL(
+                    "C.<>c.<F>b__0_0(int)",
+                    @"
 {
   // Code size        4 (0x4)
   .maxstack  2
@@ -1386,13 +1588,15 @@ class C
   IL_0002:  mul.ovf
   IL_0003:  ret
 }
-");
+"
+                );
         }
 
         [Fact]
         public void Lambda_QueryExpr()
         {
-            var verifier = CompileAndVerify(@"
+            var verifier = CompileAndVerify(
+                    @"
 using System.Linq;
 
 class C
@@ -1402,7 +1606,11 @@ class C
         var a = checked(from x in new[] { 1 } select x * 2);  // mul_ovf
     }
 }
-").VerifyIL("C.<>c.<F>b__0_0(int)", @"
+"
+                )
+                .VerifyIL(
+                    "C.<>c.<F>b__0_0(int)",
+                    @"
 {
   // Code size        4 (0x4)
   .maxstack  2
@@ -1411,13 +1619,15 @@ class C
   IL_0002:  mul.ovf
   IL_0003:  ret
 }
-");
+"
+                );
         }
 
         [Fact]
         public void Lambda_AddOvfAssignment()
         {
-            var verifier = CompileAndVerify(@"
+            var verifier = CompileAndVerify(
+                    @"
 class C
 {
     static void F()
@@ -1429,7 +1639,11 @@ class C
         });
     }
 }
-").VerifyIL("C.<>c.<F>b__0_0(int)", @"
+"
+                )
+                .VerifyIL(
+                    "C.<>c.<F>b__0_0(int)",
+                    @"
 {
   // Code size        4 (0x4)
   .maxstack  2
@@ -1438,13 +1652,15 @@ class C
   IL_0002:  add.ovf
   IL_0003:  ret
 }
-");
+"
+                );
         }
 
         [Fact]
         public void Lambda_Add()
         {
-            var verifier = CompileAndVerify(@"
+            var verifier = CompileAndVerify(
+                    @"
 class C
 {
     static void F()
@@ -1455,7 +1671,11 @@ class C
         });
     }
 }
-").VerifyIL("C.<>c.<F>b__0_0(int)", @"
+"
+                )
+                .VerifyIL(
+                    "C.<>c.<F>b__0_0(int)",
+                    @"
 {
   // Code size        4 (0x4)
   .maxstack  2
@@ -1464,13 +1684,15 @@ class C
   IL_0002:  add.ovf
   IL_0003:  ret
 }
-");
+"
+                );
         }
 
         [Fact]
         public void Lambda_Cast()
         {
-            var verifier = CompileAndVerify(@"
+            var verifier = CompileAndVerify(
+                    @"
 class C
 {    
     static void F()
@@ -1481,7 +1703,11 @@ class C
         });
     }
 }
-").VerifyIL("C.<>c.<F>b__0_0(int)", @"
+"
+                )
+                .VerifyIL(
+                    "C.<>c.<F>b__0_0(int)",
+                    @"
 {
   // Code size        4 (0x4)
   .maxstack  2
@@ -1490,13 +1716,15 @@ class C
   IL_0002:  add.ovf
   IL_0003:  ret
 }
-");
+"
+                );
         }
 
         [Fact]
         public void Lambda_AddOvfCompoundAssignment()
         {
-            var verifier = CompileAndVerify(@"
+            var verifier = CompileAndVerify(
+                    @"
 class C
 {
     static void F()
@@ -1508,7 +1736,11 @@ class C
         });
     }
 }
-").VerifyIL("C.<>c.<F>b__0_0(int)", @"
+"
+                )
+                .VerifyIL(
+                    "C.<>c.<F>b__0_0(int)",
+                    @"
 {
   // Code size        4 (0x4)
   .maxstack  2
@@ -1517,13 +1749,15 @@ class C
   IL_0002:  add.ovf
   IL_0003:  ret
 }
-");
+"
+                );
         }
 
         [Fact]
         public void Lambda_AddOvfArgument()
         {
-            var verifier = CompileAndVerify(@"
+            var verifier = CompileAndVerify(
+                    @"
 class C
 {
     static System.Func<int, int> Id(System.Func<int, int> x) { return x; }
@@ -1536,7 +1770,11 @@ class C
         }));
     }
 }
-").VerifyIL("C.<>c.<F>b__1_0(int)", @"
+"
+                )
+                .VerifyIL(
+                    "C.<>c.<F>b__1_0(int)",
+                    @"
 {
   // Code size        4 (0x4)
   .maxstack  2
@@ -1545,13 +1783,15 @@ class C
   IL_0002:  add.ovf
   IL_0003:  ret
 }
-");
+"
+                );
         }
 
         [Fact]
         public void Lambda_AddOvfArgument2()
         {
-            var verifier = CompileAndVerify(@"
+            var verifier = CompileAndVerify(
+                    @"
 class C
 {
     static System.Func<int, int> Id(System.Func<int, int> x) { return x; }
@@ -1564,7 +1804,11 @@ class C
         })));
     }
 }
-").VerifyIL("C.<>c.<F>b__1_0(int)", @"
+"
+                )
+                .VerifyIL(
+                    "C.<>c.<F>b__1_0(int)",
+                    @"
 {
   // Code size        4 (0x4)
   .maxstack  2
@@ -1573,13 +1817,15 @@ class C
   IL_0002:  add.ovf
   IL_0003:  ret
 }
-");
+"
+                );
         }
 
         [Fact]
         public void Lambda_AddArgument3()
         {
-            var verifier = CompileAndVerify(@"
+            var verifier = CompileAndVerify(
+                    @"
 class C
 {   
     static System.Func<int, int> Id(System.Func<int, int> x) { return x; }
@@ -1592,7 +1838,11 @@ class C
         })));
     }
 }
-").VerifyIL("C.<>c.<F>b__1_0(int)", @"
+"
+                )
+                .VerifyIL(
+                    "C.<>c.<F>b__1_0(int)",
+                    @"
 {
   // Code size        4 (0x4)
   .maxstack  2
@@ -1601,13 +1851,15 @@ class C
   IL_0002:  add.ovf
   IL_0003:  ret
 }
-");
+"
+                );
         }
 
         [Fact]
         public void Lambda_AddOvfArgument4()
         {
-            var verifier = CompileAndVerify(@"
+            var verifier = CompileAndVerify(
+                    @"
 class C
 {
     static System.Func<int, int> Id(System.Func<int, int> x) { return x; }
@@ -1621,7 +1873,11 @@ class C
         }))));
     }
 }
-").VerifyIL("C.<>c.<F>b__1_0(int)", @"
+"
+                )
+                .VerifyIL(
+                    "C.<>c.<F>b__1_0(int)",
+                    @"
 {
   // Code size        4 (0x4)
   .maxstack  2
@@ -1630,13 +1886,15 @@ class C
   IL_0002:  add.ovf
   IL_0003:  ret
 }
-");
+"
+                );
         }
 
         [Fact]
         public void Lambda_AddOvfArgument5()
         {
-            var verifier = CompileAndVerify(@"
+            var verifier = CompileAndVerify(
+                    @"
 class C
 {
     static System.Func<int, int> Id(System.Func<int, int> x) { return x; }
@@ -1649,7 +1907,11 @@ class C
         })));
     }
 }
-").VerifyIL("C.<>c.<F>b__1_0(int)", @"
+"
+                )
+                .VerifyIL(
+                    "C.<>c.<F>b__1_0(int)",
+                    @"
 {
   // Code size        4 (0x4)
   .maxstack  2
@@ -1658,13 +1920,15 @@ class C
   IL_0002:  add
   IL_0003:  ret
 }
-");
+"
+                );
         }
 
         [Fact]
         public void Lambda_AddArgument6()
         {
-            var verifier = CompileAndVerify(@"
+            var verifier = CompileAndVerify(
+                    @"
 class C
 {   
     static System.Func<int, int> Id(System.Func<int, int> x) { return x; }
@@ -1677,7 +1941,11 @@ class C
         })));
     }
 }
-").VerifyIL("C.<>c.<F>b__1_0(int)", @"
+"
+                )
+                .VerifyIL(
+                    "C.<>c.<F>b__1_0(int)",
+                    @"
 {
   // Code size        4 (0x4)
   .maxstack  2
@@ -1686,13 +1954,15 @@ class C
   IL_0002:  add
   IL_0003:  ret
 }
-");
+"
+                );
         }
 
         [Fact]
         public void Lambda_AddArgument7()
         {
-            var verifier = CompileAndVerify(@"
+            var verifier = CompileAndVerify(
+                    @"
 class C
 {
     static System.Func<int, int> Id(System.Func<int, int> x) { return x; }
@@ -1705,7 +1975,11 @@ class C
         }))));
     }
 }
-").VerifyIL("C.<>c.<F>b__1_0(int)", @"
+"
+                )
+                .VerifyIL(
+                    "C.<>c.<F>b__1_0(int)",
+                    @"
 {
   // Code size        4 (0x4)
   .maxstack  2
@@ -1714,13 +1988,15 @@ class C
   IL_0002:  add
   IL_0003:  ret
 }
-");
+"
+                );
         }
 
         [Fact]
         public void Lambda_AddOvfArgument8()
         {
-            var verifier = CompileAndVerify(@"
+            var verifier = CompileAndVerify(
+                    @"
 class C
 {    
     static System.Func<int, int> Id(System.Func<int, int> x) { return x; }
@@ -1733,7 +2009,11 @@ class C
         }))));
     }
 }
-").VerifyIL("C.<>c.<F>b__1_0(int)", @"
+"
+                )
+                .VerifyIL(
+                    "C.<>c.<F>b__1_0(int)",
+                    @"
 {
   // Code size        4 (0x4)
   .maxstack  2
@@ -1742,13 +2022,15 @@ class C
   IL_0002:  add
   IL_0003:  ret
 }
-");
+"
+                );
         }
 
         [Fact]
         public void Lambda_LambdaVsDelegate1()
         {
-            var verifier = CompileAndVerify(@"
+            var verifier = CompileAndVerify(
+                    @"
 class C
 {    
     static void F()
@@ -1756,7 +2038,11 @@ class C
         System.Func<int, int> d1 = checked(delegate(int i) { return i + 1; });  // Dev10: add, Roslyn: add_ovf
     }
 }
-").VerifyIL("C.<>c.<F>b__0_0(int)", @"
+"
+                )
+                .VerifyIL(
+                    "C.<>c.<F>b__0_0(int)",
+                    @"
 {
   // Code size        4 (0x4)
   .maxstack  2
@@ -1766,13 +2052,15 @@ class C
   IL_0003:  ret
 }
 
-");
+"
+                );
         }
 
         [Fact]
         public void Lambda_LambdaVsDelegate2()
         {
-            var verifier = CompileAndVerify(@"
+            var verifier = CompileAndVerify(
+                    @"
 class C
 {
     static void F()
@@ -1780,7 +2068,11 @@ class C
         System.Func<int, int> d1 = checked(i => { return i + 1; }); // Dev10: add, Roslyn: add_ovf
     }
 }
-").VerifyIL("C.<>c.<F>b__0_0(int)", @"
+"
+                )
+                .VerifyIL(
+                    "C.<>c.<F>b__0_0(int)",
+                    @"
 {
   // Code size        4 (0x4)
   .maxstack  2
@@ -1789,13 +2081,15 @@ class C
   IL_0002:  add.ovf
   IL_0003:  ret
 }
-");
+"
+                );
         }
 
         [Fact]
         public void Lambda_LambdaVsDelegate3()
         {
-            var verifier = CompileAndVerify(@"
+            var verifier = CompileAndVerify(
+                    @"
 class C
 {
     static void F()
@@ -1803,7 +2097,11 @@ class C
         System.Func<int, int> d1 = checked(i => i + 1); // Dev10: add, Roslyn: add_ovf
     }
 }
-").VerifyIL("C.<>c.<F>b__0_0(int)", @"
+"
+                )
+                .VerifyIL(
+                    "C.<>c.<F>b__0_0(int)",
+                    @"
 {
   // Code size        4 (0x4)
   .maxstack  2
@@ -1812,13 +2110,15 @@ class C
   IL_0002:  add.ovf
   IL_0003:  ret
 }
-");
+"
+                );
         }
 
         [Fact]
         public void Lambda_NewDelegate1()
         {
-            var verifier = CompileAndVerify(@"
+            var verifier = CompileAndVerify(
+                    @"
 class C
 {
     static System.Func<int, int> Id(System.Func<int, int> x) { return x; }
@@ -1828,7 +2128,11 @@ class C
         Id(new System.Func<int, int>(i => i + 1));
     }
 }
-").VerifyIL("C.<>c.<F>b__1_0(int)", @"
+"
+                )
+                .VerifyIL(
+                    "C.<>c.<F>b__1_0(int)",
+                    @"
 {
   // Code size        4 (0x4)
   .maxstack  2
@@ -1837,13 +2141,15 @@ class C
   IL_0002:  add
   IL_0003:  ret
 }
-");
+"
+                );
         }
 
         [Fact]
         public void Lambda_NewDelegate2()
         {
-            var verifier = CompileAndVerify(@"
+            var verifier = CompileAndVerify(
+                    @"
 class C
 {
     static System.Func<int, int> Id(System.Func<int, int> x) { return x; }
@@ -1853,7 +2159,11 @@ class C
         Id(checked(new System.Func<int, int>(i => i + 1)));
     }
 }
-").VerifyIL("C.<>c.<F>b__1_0(int)", @"
+"
+                )
+                .VerifyIL(
+                    "C.<>c.<F>b__1_0(int)",
+                    @"
 {
   // Code size        4 (0x4)
   .maxstack  2
@@ -1862,13 +2172,15 @@ class C
   IL_0002:  add.ovf
   IL_0003:  ret
 }
-");
+"
+                );
         }
 
         [Fact]
         public void CheckedOption1()
         {
-            var source = @"
+            var source =
+                @"
 class C
 {
     public static uint ULong_UInt(ulong a)
@@ -1877,7 +2189,10 @@ class C
     }
 }
 ";
-            CompileAndVerify(source, options: TestOptions.ReleaseDll.WithOverflowChecks(true)).VerifyIL("C.ULong_UInt", @"
+            CompileAndVerify(source, options: TestOptions.ReleaseDll.WithOverflowChecks(true))
+                .VerifyIL(
+                    "C.ULong_UInt",
+                    @"
 {
   // Code size        3 (0x3)
   .maxstack  1
@@ -1885,8 +2200,12 @@ class C
   IL_0001:  conv.ovf.u4.un
   IL_0002:  ret
 }
-");
-            CompileAndVerify(source, options: TestOptions.ReleaseDll.WithOverflowChecks(false)).VerifyIL("C.ULong_UInt", @"
+"
+                );
+            CompileAndVerify(source, options: TestOptions.ReleaseDll.WithOverflowChecks(false))
+                .VerifyIL(
+                    "C.ULong_UInt",
+                    @"
 {
   // Code size        3 (0x3)
   .maxstack  1
@@ -1894,13 +2213,15 @@ class C
   IL_0001:  conv.u4
   IL_0002:  ret
 }
-");
+"
+                );
         }
 
         [Fact]
         public void CheckedOption2()
         {
-            var source = @"
+            var source =
+                @"
 class C
 {
     public static uint ULong_UInt(ulong a)
@@ -1909,7 +2230,10 @@ class C
     }
 }
 ";
-            CompileAndVerify(source, options: TestOptions.ReleaseDll.WithOverflowChecks(true)).VerifyIL("C.ULong_UInt", @"
+            CompileAndVerify(source, options: TestOptions.ReleaseDll.WithOverflowChecks(true))
+                .VerifyIL(
+                    "C.ULong_UInt",
+                    @"
 {
   // Code size        3 (0x3)
   .maxstack  1
@@ -1917,13 +2241,15 @@ class C
   IL_0001:  conv.u4
   IL_0002:  ret
 }
-");
+"
+                );
         }
 
         [Fact]
         public void CheckedUncheckedNesting()
         {
-            var source = @"
+            var source =
+                @"
 class C
 {
     public static uint ULong_UInt(ulong a)
@@ -1937,7 +2263,10 @@ class C
     }
 }
 ";
-            CompileAndVerify(source, options: TestOptions.ReleaseDll.WithOverflowChecks(true)).VerifyIL("C.ULong_UInt", @"
+            CompileAndVerify(source, options: TestOptions.ReleaseDll.WithOverflowChecks(true))
+                .VerifyIL(
+                    "C.ULong_UInt",
+                    @"
 {
   // Code size        9 (0x9)
   .maxstack  3
@@ -1951,13 +2280,15 @@ class C
   IL_0007:  add
   IL_0008:  ret
 }
-");
+"
+                );
         }
 
         [Fact]
         public void UncheckedOperatorWithConstantsOfTheSignedIntegralTypes()
         {
-            var source = @"
+            var source =
+                @"
 class Test
 {
     const int a = unchecked((int)0xFFFFFFFF);
@@ -1972,7 +2303,8 @@ class Test
         {
             // Overflow checking context with use unchecked operator in checked statement
 
-            var source = @"
+            var source =
+                @"
 class Program
 {
     static void Main()
@@ -1994,7 +2326,8 @@ class Program
                 Diagnostic(ErrorCode.ERR_CheckedOverflow, "int.MaxValue + 1"),
                 // (10,17): error CS0220: The operation overflows at compile time in checked mode
                 //             r = int.MaxValue + 1;
-                Diagnostic(ErrorCode.ERR_CheckedOverflow, "int.MaxValue + 1"));
+                Diagnostic(ErrorCode.ERR_CheckedOverflow, "int.MaxValue + 1")
+            );
         }
 
         [Fact]
@@ -2002,7 +2335,8 @@ class Program
         {
             // Expressions which are in unchecked statement are in explicitly unchecked context.
 
-            var source = @"
+            var source =
+                @"
 using System;
 class Program
 {
@@ -2025,7 +2359,9 @@ class Program
 ";
             var verifier = CompileAndVerify(source);
 
-            verifier.VerifyIL("Program.Main", @"
+            verifier.VerifyIL(
+                "Program.Main",
+                @"
 {
   // Code size       47 (0x2f)
   .maxstack  2
@@ -2043,13 +2379,15 @@ class Program
   IL_0029:  call       ""void System.Console.Write(string)""
   IL_002e:  ret
 }
-");
+"
+            );
         }
 
         [Fact]
         public void CheckOnUnaryOperator()
         {
-            var source = @"
+            var source =
+                @"
 class Program
 {
     static void Main()
@@ -2076,7 +2414,8 @@ class Program
         [Fact]
         public void Test_024_16BitSignedInteger()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 public class MyClass
 {
@@ -2089,9 +2428,7 @@ public class MyClass
 }
 ";
 
-            CompileAndVerify(
-                source,
-                expectedOutput: "32000");
+            CompileAndVerify(source, expectedOutput: "32000");
         }
 
         [Fact]
@@ -2099,7 +2436,8 @@ public class MyClass
         {
             // Overflow checking context with use anonymous function expression in unchecked operator
 
-            var source = @"
+            var source =
+                @"
 class Program
 {
     delegate int D1(int i);
@@ -2138,14 +2476,16 @@ class Program
                 Diagnostic(ErrorCode.ERR_CheckedOverflow, "int.MaxValue + 1"),
                 // (17,52): error CS0220: The operation overflows at compile time in checked mode
                 //         d1 = unchecked(new D1(i => 0 + 0 + checked(int.MaxValue + 1)));
-                Diagnostic(ErrorCode.ERR_CheckedOverflow, "int.MaxValue + 1"));
+                Diagnostic(ErrorCode.ERR_CheckedOverflow, "int.MaxValue + 1")
+            );
         }
 
         [WorkItem(648109, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/648109")]
         [Fact]
         public void CheckedExpressionWithDecimal()
         {
-            var source = @"
+            var source =
+                @"
 class M
 {
     void F()
@@ -2161,18 +2501,24 @@ class M
             comp.VerifyDiagnostics(
                 // (6,25): error CS0463: Evaluation of the decimal constant expression failed
                 //         var r = checked(decimal.MaxValue + 1);
-                Diagnostic(ErrorCode.ERR_DecConstError, "decimal.MaxValue + 1").WithLocation(6, 25),
+                Diagnostic(ErrorCode.ERR_DecConstError, "decimal.MaxValue + 1")
+                    .WithLocation(6, 25),
                 // (10,18): error CS0463: Evaluation of the decimal constant expression failed
                 //         var r1 = decimal.MaxValue + 1;
-                Diagnostic(ErrorCode.ERR_DecConstError, "decimal.MaxValue + 1").WithLocation(10, 18)
-                );
+                Diagnostic(ErrorCode.ERR_DecConstError, "decimal.MaxValue + 1")
+                    .WithLocation(10, 18)
+            );
         }
 
-        [WorkItem(543894, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/543894"), WorkItem(543924, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/543924")]
+        [
+            WorkItem(543894, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/543894"),
+            WorkItem(543924, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/543924")
+        ]
         [Fact]
         public void CheckedOperatorOnEnumOverflow()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 
 class Test
@@ -2194,16 +2540,15 @@ class Test
 }
 ";
 
-            CompileAndVerify(
-                source,
-                expectedOutput: "PASS");
+            CompileAndVerify(source, expectedOutput: "PASS");
         }
 
         [WorkItem(529263, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/529263")]
         [Fact]
         public void CheckedOperatorOnLambdaExpr()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 
 class Program
@@ -2226,15 +2571,14 @@ class Program
 }
 ";
 
-            CompileAndVerify(
-                source,
-                expectedOutput: "PASS");
+            CompileAndVerify(source, expectedOutput: "PASS");
         }
 
         [Fact, WorkItem(543981, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/543981")]
         public void CheckedOperatorOnUnaryExpression()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 
 class Program
@@ -2272,15 +2616,14 @@ class Program
 }
 ";
 
-            CompileAndVerify(
-                source,
-                expectedOutput: "OV-0");
+            CompileAndVerify(source, expectedOutput: "OV-0");
         }
 
         [Fact, WorkItem(543983, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/543983")]
         public void CheckedStatementWithCompoundAssignment()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 
 public class MyClass
@@ -2303,15 +2646,14 @@ public class MyClass
     }
 }
 ";
-            CompileAndVerify(
-                source,
-                expectedOutput: "32000OV");
+            CompileAndVerify(source, expectedOutput: "32000OV");
         }
 
         [Fact, WorkItem(546872, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/546872")]
         public void CheckPostIncrementOnBaseProtectedClassMember()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 class Base1
 {
@@ -2339,7 +2681,9 @@ class Derived2 : Base1
 ";
             var verifier = CompileAndVerify(source);
 
-            verifier.VerifyIL("Derived2.inc", @"
+            verifier.VerifyIL(
+                "Derived2.inc",
+                @"
 {
   // Code size       49 (0x31)
   .maxstack  4
@@ -2370,58 +2714,134 @@ class Derived2 : Base1
   IL_002b:  call       ""void Base1.this[int].set""
   IL_0030:  ret
 }
-");
+"
+            );
         }
 
-        [ConditionalFact(typeof(WindowsDesktopOnly), Reason = "https://github.com/dotnet/roslyn/issues/30160")]
+        [ConditionalFact(
+            typeof(WindowsDesktopOnly),
+            Reason = "https://github.com/dotnet/roslyn/issues/30160"
+        )]
         public void CheckedConversionsInExpressionTrees_Implicit()
         {
             // char
             CheckedConversionInExpressionTree_Implicit("char", "char", ConvertMethod.None);
-            CheckedConversionInExpressionTree_Implicit("char", "ushort", ConvertMethod.ConvertChecked);
+            CheckedConversionInExpressionTree_Implicit(
+                "char",
+                "ushort",
+                ConvertMethod.ConvertChecked
+            );
             CheckedConversionInExpressionTree_Implicit("char", "int", ConvertMethod.ConvertChecked);
-            CheckedConversionInExpressionTree_Implicit("char", "uint", ConvertMethod.ConvertChecked);
-            CheckedConversionInExpressionTree_Implicit("char", "long", ConvertMethod.ConvertChecked);
-            CheckedConversionInExpressionTree_Implicit("char", "ulong", ConvertMethod.ConvertChecked);
+            CheckedConversionInExpressionTree_Implicit(
+                "char",
+                "uint",
+                ConvertMethod.ConvertChecked
+            );
+            CheckedConversionInExpressionTree_Implicit(
+                "char",
+                "long",
+                ConvertMethod.ConvertChecked
+            );
+            CheckedConversionInExpressionTree_Implicit(
+                "char",
+                "ulong",
+                ConvertMethod.ConvertChecked
+            );
             CheckedConversionInExpressionTree_Implicit("char", "decimal", ConvertMethod.Convert);
             CheckedConversionInExpressionTree_Implicit("char", "float", ConvertMethod.Convert);
             CheckedConversionInExpressionTree_Implicit("char", "double", ConvertMethod.Convert);
 
             // sbyte
             CheckedConversionInExpressionTree_Implicit("sbyte", "sbyte", ConvertMethod.None);
-            CheckedConversionInExpressionTree_Implicit("sbyte", "short", ConvertMethod.ConvertChecked);
-            CheckedConversionInExpressionTree_Implicit("sbyte", "int", ConvertMethod.ConvertChecked);
-            CheckedConversionInExpressionTree_Implicit("sbyte", "long", ConvertMethod.ConvertChecked);
+            CheckedConversionInExpressionTree_Implicit(
+                "sbyte",
+                "short",
+                ConvertMethod.ConvertChecked
+            );
+            CheckedConversionInExpressionTree_Implicit(
+                "sbyte",
+                "int",
+                ConvertMethod.ConvertChecked
+            );
+            CheckedConversionInExpressionTree_Implicit(
+                "sbyte",
+                "long",
+                ConvertMethod.ConvertChecked
+            );
             CheckedConversionInExpressionTree_Implicit("sbyte", "decimal", ConvertMethod.Convert);
             CheckedConversionInExpressionTree_Implicit("sbyte", "float", ConvertMethod.Convert);
             CheckedConversionInExpressionTree_Implicit("sbyte", "double", ConvertMethod.Convert);
 
             // byte
             CheckedConversionInExpressionTree_Implicit("byte", "byte", ConvertMethod.None);
-            CheckedConversionInExpressionTree_Implicit("byte", "short", ConvertMethod.ConvertChecked);
-            CheckedConversionInExpressionTree_Implicit("byte", "ushort", ConvertMethod.ConvertChecked);
+            CheckedConversionInExpressionTree_Implicit(
+                "byte",
+                "short",
+                ConvertMethod.ConvertChecked
+            );
+            CheckedConversionInExpressionTree_Implicit(
+                "byte",
+                "ushort",
+                ConvertMethod.ConvertChecked
+            );
             CheckedConversionInExpressionTree_Implicit("byte", "int", ConvertMethod.ConvertChecked);
-            CheckedConversionInExpressionTree_Implicit("byte", "uint", ConvertMethod.ConvertChecked);
-            CheckedConversionInExpressionTree_Implicit("byte", "long", ConvertMethod.ConvertChecked);
-            CheckedConversionInExpressionTree_Implicit("byte", "ulong", ConvertMethod.ConvertChecked);
+            CheckedConversionInExpressionTree_Implicit(
+                "byte",
+                "uint",
+                ConvertMethod.ConvertChecked
+            );
+            CheckedConversionInExpressionTree_Implicit(
+                "byte",
+                "long",
+                ConvertMethod.ConvertChecked
+            );
+            CheckedConversionInExpressionTree_Implicit(
+                "byte",
+                "ulong",
+                ConvertMethod.ConvertChecked
+            );
             CheckedConversionInExpressionTree_Implicit("byte", "decimal", ConvertMethod.Convert);
             CheckedConversionInExpressionTree_Implicit("byte", "float", ConvertMethod.Convert);
             CheckedConversionInExpressionTree_Implicit("byte", "double", ConvertMethod.Convert);
 
             // short
             CheckedConversionInExpressionTree_Implicit("short", "short", ConvertMethod.None);
-            CheckedConversionInExpressionTree_Implicit("short", "int", ConvertMethod.ConvertChecked);
-            CheckedConversionInExpressionTree_Implicit("short", "long", ConvertMethod.ConvertChecked);
+            CheckedConversionInExpressionTree_Implicit(
+                "short",
+                "int",
+                ConvertMethod.ConvertChecked
+            );
+            CheckedConversionInExpressionTree_Implicit(
+                "short",
+                "long",
+                ConvertMethod.ConvertChecked
+            );
             CheckedConversionInExpressionTree_Implicit("short", "decimal", ConvertMethod.Convert);
             CheckedConversionInExpressionTree_Implicit("short", "float", ConvertMethod.Convert);
             CheckedConversionInExpressionTree_Implicit("short", "double", ConvertMethod.Convert);
 
             // ushort
             CheckedConversionInExpressionTree_Implicit("ushort", "ushort", ConvertMethod.None);
-            CheckedConversionInExpressionTree_Implicit("ushort", "int", ConvertMethod.ConvertChecked);
-            CheckedConversionInExpressionTree_Implicit("ushort", "uint", ConvertMethod.ConvertChecked);
-            CheckedConversionInExpressionTree_Implicit("ushort", "long", ConvertMethod.ConvertChecked);
-            CheckedConversionInExpressionTree_Implicit("ushort", "ulong", ConvertMethod.ConvertChecked);
+            CheckedConversionInExpressionTree_Implicit(
+                "ushort",
+                "int",
+                ConvertMethod.ConvertChecked
+            );
+            CheckedConversionInExpressionTree_Implicit(
+                "ushort",
+                "uint",
+                ConvertMethod.ConvertChecked
+            );
+            CheckedConversionInExpressionTree_Implicit(
+                "ushort",
+                "long",
+                ConvertMethod.ConvertChecked
+            );
+            CheckedConversionInExpressionTree_Implicit(
+                "ushort",
+                "ulong",
+                ConvertMethod.ConvertChecked
+            );
             CheckedConversionInExpressionTree_Implicit("ushort", "decimal", ConvertMethod.Convert);
             CheckedConversionInExpressionTree_Implicit("ushort", "float", ConvertMethod.Convert);
             CheckedConversionInExpressionTree_Implicit("ushort", "double", ConvertMethod.Convert);
@@ -2435,8 +2855,16 @@ class Derived2 : Base1
 
             // uint
             CheckedConversionInExpressionTree_Implicit("uint", "uint", ConvertMethod.None);
-            CheckedConversionInExpressionTree_Implicit("uint", "long", ConvertMethod.ConvertChecked);
-            CheckedConversionInExpressionTree_Implicit("uint", "ulong", ConvertMethod.ConvertChecked);
+            CheckedConversionInExpressionTree_Implicit(
+                "uint",
+                "long",
+                ConvertMethod.ConvertChecked
+            );
+            CheckedConversionInExpressionTree_Implicit(
+                "uint",
+                "ulong",
+                ConvertMethod.ConvertChecked
+            );
             CheckedConversionInExpressionTree_Implicit("uint", "decimal", ConvertMethod.Convert);
             CheckedConversionInExpressionTree_Implicit("uint", "float", ConvertMethod.Convert);
             CheckedConversionInExpressionTree_Implicit("uint", "double", ConvertMethod.Convert);
@@ -2469,140 +2897,410 @@ class Derived2 : Base1
 
             // Nullable<>
             CheckedConversionInExpressionTree_Implicit("int", "int?", "arg => F(Convert(arg))");
-            CheckedConversionInExpressionTree_Implicit("int", "long?", "arg => F(ConvertChecked(ConvertChecked(arg)))");
+            CheckedConversionInExpressionTree_Implicit(
+                "int",
+                "long?",
+                "arg => F(ConvertChecked(ConvertChecked(arg)))"
+            );
         }
 
-        [ConditionalFact(typeof(WindowsDesktopOnly), Reason = "https://github.com/dotnet/roslyn/issues/30160")]
+        [ConditionalFact(
+            typeof(WindowsDesktopOnly),
+            Reason = "https://github.com/dotnet/roslyn/issues/30160"
+        )]
         [WorkItem(18459, "https://github.com/dotnet/roslyn/issues/18459")]
         public void CheckedConversionsInExpressionTrees_ImplicitTuple()
         {
-            CheckedConversionInExpressionTree_Implicit("(int, int)", "(int, int)?", ConvertMethod.Convert);
+            CheckedConversionInExpressionTree_Implicit(
+                "(int, int)",
+                "(int, int)?",
+                ConvertMethod.Convert
+            );
         }
 
-        [ConditionalFact(typeof(WindowsDesktopOnly), Reason = "https://github.com/dotnet/roslyn/issues/30160")]
+        [ConditionalFact(
+            typeof(WindowsDesktopOnly),
+            Reason = "https://github.com/dotnet/roslyn/issues/30160"
+        )]
         public void CheckedConversionsInExpressionTrees_Explicit()
         {
             // char
             CheckedConversionInExpressionTree_Explicit("char", "char", ConvertMethod.Convert);
-            CheckedConversionInExpressionTree_Explicit("char", "sbyte", ConvertMethod.ConvertChecked);
-            CheckedConversionInExpressionTree_Explicit("char", "byte", ConvertMethod.ConvertChecked);
-            CheckedConversionInExpressionTree_Explicit("char", "short", ConvertMethod.ConvertChecked);
-            CheckedConversionInExpressionTree_Explicit("char", "ushort", ConvertMethod.ConvertChecked);
+            CheckedConversionInExpressionTree_Explicit(
+                "char",
+                "sbyte",
+                ConvertMethod.ConvertChecked
+            );
+            CheckedConversionInExpressionTree_Explicit(
+                "char",
+                "byte",
+                ConvertMethod.ConvertChecked
+            );
+            CheckedConversionInExpressionTree_Explicit(
+                "char",
+                "short",
+                ConvertMethod.ConvertChecked
+            );
+            CheckedConversionInExpressionTree_Explicit(
+                "char",
+                "ushort",
+                ConvertMethod.ConvertChecked
+            );
             CheckedConversionInExpressionTree_Explicit("char", "int", ConvertMethod.ConvertChecked);
-            CheckedConversionInExpressionTree_Explicit("char", "uint", ConvertMethod.ConvertChecked);
-            CheckedConversionInExpressionTree_Explicit("char", "long", ConvertMethod.ConvertChecked);
-            CheckedConversionInExpressionTree_Explicit("char", "ulong", ConvertMethod.ConvertChecked);
+            CheckedConversionInExpressionTree_Explicit(
+                "char",
+                "uint",
+                ConvertMethod.ConvertChecked
+            );
+            CheckedConversionInExpressionTree_Explicit(
+                "char",
+                "long",
+                ConvertMethod.ConvertChecked
+            );
+            CheckedConversionInExpressionTree_Explicit(
+                "char",
+                "ulong",
+                ConvertMethod.ConvertChecked
+            );
             CheckedConversionInExpressionTree_Explicit("char", "decimal", ConvertMethod.Convert);
             CheckedConversionInExpressionTree_Explicit("char", "float", ConvertMethod.Convert);
             CheckedConversionInExpressionTree_Explicit("char", "double", ConvertMethod.Convert);
 
             // sbyte
-            CheckedConversionInExpressionTree_Explicit("sbyte", "char", ConvertMethod.ConvertChecked);
+            CheckedConversionInExpressionTree_Explicit(
+                "sbyte",
+                "char",
+                ConvertMethod.ConvertChecked
+            );
             CheckedConversionInExpressionTree_Explicit("sbyte", "sbyte", ConvertMethod.Convert);
-            CheckedConversionInExpressionTree_Explicit("sbyte", "byte", ConvertMethod.ConvertChecked);
-            CheckedConversionInExpressionTree_Explicit("sbyte", "short", ConvertMethod.ConvertChecked);
-            CheckedConversionInExpressionTree_Explicit("sbyte", "ushort", ConvertMethod.ConvertChecked);
-            CheckedConversionInExpressionTree_Explicit("sbyte", "int", ConvertMethod.ConvertChecked);
-            CheckedConversionInExpressionTree_Explicit("sbyte", "uint", ConvertMethod.ConvertChecked);
-            CheckedConversionInExpressionTree_Explicit("sbyte", "long", ConvertMethod.ConvertChecked);
-            CheckedConversionInExpressionTree_Explicit("sbyte", "ulong", ConvertMethod.ConvertChecked);
+            CheckedConversionInExpressionTree_Explicit(
+                "sbyte",
+                "byte",
+                ConvertMethod.ConvertChecked
+            );
+            CheckedConversionInExpressionTree_Explicit(
+                "sbyte",
+                "short",
+                ConvertMethod.ConvertChecked
+            );
+            CheckedConversionInExpressionTree_Explicit(
+                "sbyte",
+                "ushort",
+                ConvertMethod.ConvertChecked
+            );
+            CheckedConversionInExpressionTree_Explicit(
+                "sbyte",
+                "int",
+                ConvertMethod.ConvertChecked
+            );
+            CheckedConversionInExpressionTree_Explicit(
+                "sbyte",
+                "uint",
+                ConvertMethod.ConvertChecked
+            );
+            CheckedConversionInExpressionTree_Explicit(
+                "sbyte",
+                "long",
+                ConvertMethod.ConvertChecked
+            );
+            CheckedConversionInExpressionTree_Explicit(
+                "sbyte",
+                "ulong",
+                ConvertMethod.ConvertChecked
+            );
             CheckedConversionInExpressionTree_Explicit("sbyte", "decimal", ConvertMethod.Convert);
             CheckedConversionInExpressionTree_Explicit("sbyte", "float", ConvertMethod.Convert);
             CheckedConversionInExpressionTree_Explicit("sbyte", "double", ConvertMethod.Convert);
 
             // byte
-            CheckedConversionInExpressionTree_Explicit("byte", "char", ConvertMethod.ConvertChecked);
-            CheckedConversionInExpressionTree_Explicit("byte", "sbyte", ConvertMethod.ConvertChecked);
+            CheckedConversionInExpressionTree_Explicit(
+                "byte",
+                "char",
+                ConvertMethod.ConvertChecked
+            );
+            CheckedConversionInExpressionTree_Explicit(
+                "byte",
+                "sbyte",
+                ConvertMethod.ConvertChecked
+            );
             CheckedConversionInExpressionTree_Explicit("byte", "byte", ConvertMethod.Convert);
-            CheckedConversionInExpressionTree_Explicit("byte", "short", ConvertMethod.ConvertChecked);
-            CheckedConversionInExpressionTree_Explicit("byte", "ushort", ConvertMethod.ConvertChecked);
+            CheckedConversionInExpressionTree_Explicit(
+                "byte",
+                "short",
+                ConvertMethod.ConvertChecked
+            );
+            CheckedConversionInExpressionTree_Explicit(
+                "byte",
+                "ushort",
+                ConvertMethod.ConvertChecked
+            );
             CheckedConversionInExpressionTree_Explicit("byte", "int", ConvertMethod.ConvertChecked);
-            CheckedConversionInExpressionTree_Explicit("byte", "uint", ConvertMethod.ConvertChecked);
-            CheckedConversionInExpressionTree_Explicit("byte", "long", ConvertMethod.ConvertChecked);
-            CheckedConversionInExpressionTree_Explicit("byte", "ulong", ConvertMethod.ConvertChecked);
+            CheckedConversionInExpressionTree_Explicit(
+                "byte",
+                "uint",
+                ConvertMethod.ConvertChecked
+            );
+            CheckedConversionInExpressionTree_Explicit(
+                "byte",
+                "long",
+                ConvertMethod.ConvertChecked
+            );
+            CheckedConversionInExpressionTree_Explicit(
+                "byte",
+                "ulong",
+                ConvertMethod.ConvertChecked
+            );
             CheckedConversionInExpressionTree_Explicit("byte", "decimal", ConvertMethod.Convert);
             CheckedConversionInExpressionTree_Explicit("byte", "float", ConvertMethod.Convert);
             CheckedConversionInExpressionTree_Explicit("byte", "double", ConvertMethod.Convert);
 
             // short
-            CheckedConversionInExpressionTree_Explicit("short", "char", ConvertMethod.ConvertChecked);
-            CheckedConversionInExpressionTree_Explicit("short", "sbyte", ConvertMethod.ConvertChecked);
-            CheckedConversionInExpressionTree_Explicit("short", "byte", ConvertMethod.ConvertChecked);
+            CheckedConversionInExpressionTree_Explicit(
+                "short",
+                "char",
+                ConvertMethod.ConvertChecked
+            );
+            CheckedConversionInExpressionTree_Explicit(
+                "short",
+                "sbyte",
+                ConvertMethod.ConvertChecked
+            );
+            CheckedConversionInExpressionTree_Explicit(
+                "short",
+                "byte",
+                ConvertMethod.ConvertChecked
+            );
             CheckedConversionInExpressionTree_Explicit("short", "short", ConvertMethod.Convert);
-            CheckedConversionInExpressionTree_Explicit("short", "ushort", ConvertMethod.ConvertChecked);
-            CheckedConversionInExpressionTree_Explicit("short", "int", ConvertMethod.ConvertChecked);
-            CheckedConversionInExpressionTree_Explicit("short", "uint", ConvertMethod.ConvertChecked);
-            CheckedConversionInExpressionTree_Explicit("short", "long", ConvertMethod.ConvertChecked);
-            CheckedConversionInExpressionTree_Explicit("short", "ulong", ConvertMethod.ConvertChecked);
+            CheckedConversionInExpressionTree_Explicit(
+                "short",
+                "ushort",
+                ConvertMethod.ConvertChecked
+            );
+            CheckedConversionInExpressionTree_Explicit(
+                "short",
+                "int",
+                ConvertMethod.ConvertChecked
+            );
+            CheckedConversionInExpressionTree_Explicit(
+                "short",
+                "uint",
+                ConvertMethod.ConvertChecked
+            );
+            CheckedConversionInExpressionTree_Explicit(
+                "short",
+                "long",
+                ConvertMethod.ConvertChecked
+            );
+            CheckedConversionInExpressionTree_Explicit(
+                "short",
+                "ulong",
+                ConvertMethod.ConvertChecked
+            );
             CheckedConversionInExpressionTree_Explicit("short", "decimal", ConvertMethod.Convert);
             CheckedConversionInExpressionTree_Explicit("short", "float", ConvertMethod.Convert);
             CheckedConversionInExpressionTree_Explicit("short", "double", ConvertMethod.Convert);
 
             // ushort
-            CheckedConversionInExpressionTree_Explicit("ushort", "char", ConvertMethod.ConvertChecked);
-            CheckedConversionInExpressionTree_Explicit("ushort", "sbyte", ConvertMethod.ConvertChecked);
-            CheckedConversionInExpressionTree_Explicit("ushort", "byte", ConvertMethod.ConvertChecked);
-            CheckedConversionInExpressionTree_Explicit("ushort", "short", ConvertMethod.ConvertChecked);
+            CheckedConversionInExpressionTree_Explicit(
+                "ushort",
+                "char",
+                ConvertMethod.ConvertChecked
+            );
+            CheckedConversionInExpressionTree_Explicit(
+                "ushort",
+                "sbyte",
+                ConvertMethod.ConvertChecked
+            );
+            CheckedConversionInExpressionTree_Explicit(
+                "ushort",
+                "byte",
+                ConvertMethod.ConvertChecked
+            );
+            CheckedConversionInExpressionTree_Explicit(
+                "ushort",
+                "short",
+                ConvertMethod.ConvertChecked
+            );
             CheckedConversionInExpressionTree_Explicit("ushort", "ushort", ConvertMethod.Convert);
-            CheckedConversionInExpressionTree_Explicit("ushort", "int", ConvertMethod.ConvertChecked);
-            CheckedConversionInExpressionTree_Explicit("ushort", "uint", ConvertMethod.ConvertChecked);
-            CheckedConversionInExpressionTree_Explicit("ushort", "long", ConvertMethod.ConvertChecked);
-            CheckedConversionInExpressionTree_Explicit("ushort", "ulong", ConvertMethod.ConvertChecked);
+            CheckedConversionInExpressionTree_Explicit(
+                "ushort",
+                "int",
+                ConvertMethod.ConvertChecked
+            );
+            CheckedConversionInExpressionTree_Explicit(
+                "ushort",
+                "uint",
+                ConvertMethod.ConvertChecked
+            );
+            CheckedConversionInExpressionTree_Explicit(
+                "ushort",
+                "long",
+                ConvertMethod.ConvertChecked
+            );
+            CheckedConversionInExpressionTree_Explicit(
+                "ushort",
+                "ulong",
+                ConvertMethod.ConvertChecked
+            );
             CheckedConversionInExpressionTree_Explicit("ushort", "decimal", ConvertMethod.Convert);
             CheckedConversionInExpressionTree_Explicit("ushort", "float", ConvertMethod.Convert);
             CheckedConversionInExpressionTree_Explicit("ushort", "double", ConvertMethod.Convert);
 
             // int
             CheckedConversionInExpressionTree_Explicit("int", "char", ConvertMethod.ConvertChecked);
-            CheckedConversionInExpressionTree_Explicit("int", "sbyte", ConvertMethod.ConvertChecked);
+            CheckedConversionInExpressionTree_Explicit(
+                "int",
+                "sbyte",
+                ConvertMethod.ConvertChecked
+            );
             CheckedConversionInExpressionTree_Explicit("int", "byte", ConvertMethod.ConvertChecked);
-            CheckedConversionInExpressionTree_Explicit("int", "short", ConvertMethod.ConvertChecked);
-            CheckedConversionInExpressionTree_Explicit("int", "ushort", ConvertMethod.ConvertChecked);
+            CheckedConversionInExpressionTree_Explicit(
+                "int",
+                "short",
+                ConvertMethod.ConvertChecked
+            );
+            CheckedConversionInExpressionTree_Explicit(
+                "int",
+                "ushort",
+                ConvertMethod.ConvertChecked
+            );
             CheckedConversionInExpressionTree_Explicit("int", "int", ConvertMethod.Convert);
             CheckedConversionInExpressionTree_Explicit("int", "uint", ConvertMethod.ConvertChecked);
             CheckedConversionInExpressionTree_Explicit("int", "long", ConvertMethod.ConvertChecked);
-            CheckedConversionInExpressionTree_Explicit("int", "ulong", ConvertMethod.ConvertChecked);
+            CheckedConversionInExpressionTree_Explicit(
+                "int",
+                "ulong",
+                ConvertMethod.ConvertChecked
+            );
             CheckedConversionInExpressionTree_Explicit("int", "decimal", ConvertMethod.Convert);
             CheckedConversionInExpressionTree_Explicit("int", "float", ConvertMethod.Convert);
             CheckedConversionInExpressionTree_Explicit("int", "double", ConvertMethod.Convert);
 
             // uint
-            CheckedConversionInExpressionTree_Explicit("uint", "char", ConvertMethod.ConvertChecked);
-            CheckedConversionInExpressionTree_Explicit("uint", "sbyte", ConvertMethod.ConvertChecked);
-            CheckedConversionInExpressionTree_Explicit("uint", "byte", ConvertMethod.ConvertChecked);
-            CheckedConversionInExpressionTree_Explicit("uint", "short", ConvertMethod.ConvertChecked);
-            CheckedConversionInExpressionTree_Explicit("uint", "ushort", ConvertMethod.ConvertChecked);
+            CheckedConversionInExpressionTree_Explicit(
+                "uint",
+                "char",
+                ConvertMethod.ConvertChecked
+            );
+            CheckedConversionInExpressionTree_Explicit(
+                "uint",
+                "sbyte",
+                ConvertMethod.ConvertChecked
+            );
+            CheckedConversionInExpressionTree_Explicit(
+                "uint",
+                "byte",
+                ConvertMethod.ConvertChecked
+            );
+            CheckedConversionInExpressionTree_Explicit(
+                "uint",
+                "short",
+                ConvertMethod.ConvertChecked
+            );
+            CheckedConversionInExpressionTree_Explicit(
+                "uint",
+                "ushort",
+                ConvertMethod.ConvertChecked
+            );
             CheckedConversionInExpressionTree_Explicit("uint", "int", ConvertMethod.ConvertChecked);
             CheckedConversionInExpressionTree_Explicit("uint", "uint", ConvertMethod.Convert);
-            CheckedConversionInExpressionTree_Explicit("uint", "long", ConvertMethod.ConvertChecked);
-            CheckedConversionInExpressionTree_Explicit("uint", "ulong", ConvertMethod.ConvertChecked);
+            CheckedConversionInExpressionTree_Explicit(
+                "uint",
+                "long",
+                ConvertMethod.ConvertChecked
+            );
+            CheckedConversionInExpressionTree_Explicit(
+                "uint",
+                "ulong",
+                ConvertMethod.ConvertChecked
+            );
             CheckedConversionInExpressionTree_Explicit("uint", "decimal", ConvertMethod.Convert);
             CheckedConversionInExpressionTree_Explicit("uint", "float", ConvertMethod.Convert);
             CheckedConversionInExpressionTree_Explicit("uint", "double", ConvertMethod.Convert);
 
             // long
-            CheckedConversionInExpressionTree_Explicit("long", "char", ConvertMethod.ConvertChecked);
-            CheckedConversionInExpressionTree_Explicit("long", "sbyte", ConvertMethod.ConvertChecked);
-            CheckedConversionInExpressionTree_Explicit("long", "byte", ConvertMethod.ConvertChecked);
-            CheckedConversionInExpressionTree_Explicit("long", "short", ConvertMethod.ConvertChecked);
-            CheckedConversionInExpressionTree_Explicit("long", "ushort", ConvertMethod.ConvertChecked);
+            CheckedConversionInExpressionTree_Explicit(
+                "long",
+                "char",
+                ConvertMethod.ConvertChecked
+            );
+            CheckedConversionInExpressionTree_Explicit(
+                "long",
+                "sbyte",
+                ConvertMethod.ConvertChecked
+            );
+            CheckedConversionInExpressionTree_Explicit(
+                "long",
+                "byte",
+                ConvertMethod.ConvertChecked
+            );
+            CheckedConversionInExpressionTree_Explicit(
+                "long",
+                "short",
+                ConvertMethod.ConvertChecked
+            );
+            CheckedConversionInExpressionTree_Explicit(
+                "long",
+                "ushort",
+                ConvertMethod.ConvertChecked
+            );
             CheckedConversionInExpressionTree_Explicit("long", "int", ConvertMethod.ConvertChecked);
-            CheckedConversionInExpressionTree_Explicit("long", "uint", ConvertMethod.ConvertChecked);
+            CheckedConversionInExpressionTree_Explicit(
+                "long",
+                "uint",
+                ConvertMethod.ConvertChecked
+            );
             CheckedConversionInExpressionTree_Explicit("long", "long", ConvertMethod.Convert);
-            CheckedConversionInExpressionTree_Explicit("long", "ulong", ConvertMethod.ConvertChecked);
+            CheckedConversionInExpressionTree_Explicit(
+                "long",
+                "ulong",
+                ConvertMethod.ConvertChecked
+            );
             CheckedConversionInExpressionTree_Explicit("long", "decimal", ConvertMethod.Convert);
             CheckedConversionInExpressionTree_Explicit("long", "float", ConvertMethod.Convert);
             CheckedConversionInExpressionTree_Explicit("long", "double", ConvertMethod.Convert);
 
             // ulong
-            CheckedConversionInExpressionTree_Explicit("ulong", "char", ConvertMethod.ConvertChecked);
-            CheckedConversionInExpressionTree_Explicit("ulong", "sbyte", ConvertMethod.ConvertChecked);
-            CheckedConversionInExpressionTree_Explicit("ulong", "byte", ConvertMethod.ConvertChecked);
-            CheckedConversionInExpressionTree_Explicit("ulong", "short", ConvertMethod.ConvertChecked);
-            CheckedConversionInExpressionTree_Explicit("ulong", "ushort", ConvertMethod.ConvertChecked);
-            CheckedConversionInExpressionTree_Explicit("ulong", "int", ConvertMethod.ConvertChecked);
-            CheckedConversionInExpressionTree_Explicit("ulong", "uint", ConvertMethod.ConvertChecked);
-            CheckedConversionInExpressionTree_Explicit("ulong", "long", ConvertMethod.ConvertChecked);
+            CheckedConversionInExpressionTree_Explicit(
+                "ulong",
+                "char",
+                ConvertMethod.ConvertChecked
+            );
+            CheckedConversionInExpressionTree_Explicit(
+                "ulong",
+                "sbyte",
+                ConvertMethod.ConvertChecked
+            );
+            CheckedConversionInExpressionTree_Explicit(
+                "ulong",
+                "byte",
+                ConvertMethod.ConvertChecked
+            );
+            CheckedConversionInExpressionTree_Explicit(
+                "ulong",
+                "short",
+                ConvertMethod.ConvertChecked
+            );
+            CheckedConversionInExpressionTree_Explicit(
+                "ulong",
+                "ushort",
+                ConvertMethod.ConvertChecked
+            );
+            CheckedConversionInExpressionTree_Explicit(
+                "ulong",
+                "int",
+                ConvertMethod.ConvertChecked
+            );
+            CheckedConversionInExpressionTree_Explicit(
+                "ulong",
+                "uint",
+                ConvertMethod.ConvertChecked
+            );
+            CheckedConversionInExpressionTree_Explicit(
+                "ulong",
+                "long",
+                ConvertMethod.ConvertChecked
+            );
             CheckedConversionInExpressionTree_Explicit("ulong", "ulong", ConvertMethod.Convert);
             CheckedConversionInExpressionTree_Explicit("ulong", "decimal", ConvertMethod.Convert);
             CheckedConversionInExpressionTree_Explicit("ulong", "float", ConvertMethod.Convert);
@@ -2623,38 +3321,130 @@ class Derived2 : Base1
             CheckedConversionInExpressionTree_Explicit("decimal", "double", ConvertMethod.Convert);
 
             // float
-            CheckedConversionInExpressionTree_Explicit("float", "char", ConvertMethod.ConvertChecked);
-            CheckedConversionInExpressionTree_Explicit("float", "sbyte", ConvertMethod.ConvertChecked);
-            CheckedConversionInExpressionTree_Explicit("float", "byte", ConvertMethod.ConvertChecked);
-            CheckedConversionInExpressionTree_Explicit("float", "short", ConvertMethod.ConvertChecked);
-            CheckedConversionInExpressionTree_Explicit("float", "ushort", ConvertMethod.ConvertChecked);
-            CheckedConversionInExpressionTree_Explicit("float", "int", ConvertMethod.ConvertChecked);
-            CheckedConversionInExpressionTree_Explicit("float", "uint", ConvertMethod.ConvertChecked);
-            CheckedConversionInExpressionTree_Explicit("float", "long", ConvertMethod.ConvertChecked);
-            CheckedConversionInExpressionTree_Explicit("float", "ulong", ConvertMethod.ConvertChecked);
+            CheckedConversionInExpressionTree_Explicit(
+                "float",
+                "char",
+                ConvertMethod.ConvertChecked
+            );
+            CheckedConversionInExpressionTree_Explicit(
+                "float",
+                "sbyte",
+                ConvertMethod.ConvertChecked
+            );
+            CheckedConversionInExpressionTree_Explicit(
+                "float",
+                "byte",
+                ConvertMethod.ConvertChecked
+            );
+            CheckedConversionInExpressionTree_Explicit(
+                "float",
+                "short",
+                ConvertMethod.ConvertChecked
+            );
+            CheckedConversionInExpressionTree_Explicit(
+                "float",
+                "ushort",
+                ConvertMethod.ConvertChecked
+            );
+            CheckedConversionInExpressionTree_Explicit(
+                "float",
+                "int",
+                ConvertMethod.ConvertChecked
+            );
+            CheckedConversionInExpressionTree_Explicit(
+                "float",
+                "uint",
+                ConvertMethod.ConvertChecked
+            );
+            CheckedConversionInExpressionTree_Explicit(
+                "float",
+                "long",
+                ConvertMethod.ConvertChecked
+            );
+            CheckedConversionInExpressionTree_Explicit(
+                "float",
+                "ulong",
+                ConvertMethod.ConvertChecked
+            );
             CheckedConversionInExpressionTree_Explicit("float", "decimal", ConvertMethod.Convert);
             CheckedConversionInExpressionTree_Explicit("float", "float", ConvertMethod.Convert);
             CheckedConversionInExpressionTree_Explicit("float", "double", ConvertMethod.Convert);
 
             // double
-            CheckedConversionInExpressionTree_Explicit("double", "char", ConvertMethod.ConvertChecked);
-            CheckedConversionInExpressionTree_Explicit("double", "sbyte", ConvertMethod.ConvertChecked);
-            CheckedConversionInExpressionTree_Explicit("double", "byte", ConvertMethod.ConvertChecked);
-            CheckedConversionInExpressionTree_Explicit("double", "short", ConvertMethod.ConvertChecked);
-            CheckedConversionInExpressionTree_Explicit("double", "ushort", ConvertMethod.ConvertChecked);
-            CheckedConversionInExpressionTree_Explicit("double", "int", ConvertMethod.ConvertChecked);
-            CheckedConversionInExpressionTree_Explicit("double", "uint", ConvertMethod.ConvertChecked);
-            CheckedConversionInExpressionTree_Explicit("double", "long", ConvertMethod.ConvertChecked);
-            CheckedConversionInExpressionTree_Explicit("double", "ulong", ConvertMethod.ConvertChecked);
+            CheckedConversionInExpressionTree_Explicit(
+                "double",
+                "char",
+                ConvertMethod.ConvertChecked
+            );
+            CheckedConversionInExpressionTree_Explicit(
+                "double",
+                "sbyte",
+                ConvertMethod.ConvertChecked
+            );
+            CheckedConversionInExpressionTree_Explicit(
+                "double",
+                "byte",
+                ConvertMethod.ConvertChecked
+            );
+            CheckedConversionInExpressionTree_Explicit(
+                "double",
+                "short",
+                ConvertMethod.ConvertChecked
+            );
+            CheckedConversionInExpressionTree_Explicit(
+                "double",
+                "ushort",
+                ConvertMethod.ConvertChecked
+            );
+            CheckedConversionInExpressionTree_Explicit(
+                "double",
+                "int",
+                ConvertMethod.ConvertChecked
+            );
+            CheckedConversionInExpressionTree_Explicit(
+                "double",
+                "uint",
+                ConvertMethod.ConvertChecked
+            );
+            CheckedConversionInExpressionTree_Explicit(
+                "double",
+                "long",
+                ConvertMethod.ConvertChecked
+            );
+            CheckedConversionInExpressionTree_Explicit(
+                "double",
+                "ulong",
+                ConvertMethod.ConvertChecked
+            );
             CheckedConversionInExpressionTree_Explicit("double", "decimal", ConvertMethod.Convert);
             CheckedConversionInExpressionTree_Explicit("double", "float", ConvertMethod.Convert);
             CheckedConversionInExpressionTree_Explicit("double", "double", ConvertMethod.Convert);
 
             // enum
-            CheckedConversionInExpressionTree_Explicit("E", "int", ConvertMethod.ConvertChecked, "enum E { }");
-            CheckedConversionInExpressionTree_Explicit("int", "E", ConvertMethod.ConvertChecked, "enum E { }");
-            CheckedConversionInExpressionTree_Explicit("E", "int", ConvertMethod.ConvertChecked, "enum E : short { }");
-            CheckedConversionInExpressionTree_Explicit("int", "E", ConvertMethod.ConvertChecked, "enum E : short { }");
+            CheckedConversionInExpressionTree_Explicit(
+                "E",
+                "int",
+                ConvertMethod.ConvertChecked,
+                "enum E { }"
+            );
+            CheckedConversionInExpressionTree_Explicit(
+                "int",
+                "E",
+                ConvertMethod.ConvertChecked,
+                "enum E { }"
+            );
+            CheckedConversionInExpressionTree_Explicit(
+                "E",
+                "int",
+                ConvertMethod.ConvertChecked,
+                "enum E : short { }"
+            );
+            CheckedConversionInExpressionTree_Explicit(
+                "int",
+                "E",
+                ConvertMethod.ConvertChecked,
+                "enum E : short { }"
+            );
 
             // object
             CheckedConversionInExpressionTree_Explicit("int", "object", ConvertMethod.Convert);
@@ -2663,15 +3453,30 @@ class Derived2 : Base1
             CheckedConversionInExpressionTree_Explicit("object", "string", ConvertMethod.Convert);
 
             // Nullable<>
-            CheckedConversionInExpressionTree_Explicit("int", "byte?", "arg => ConvertChecked(arg)");
+            CheckedConversionInExpressionTree_Explicit(
+                "int",
+                "byte?",
+                "arg => ConvertChecked(arg)"
+            );
             CheckedConversionInExpressionTree_Explicit("int", "int?", "arg => ConvertChecked(arg)");
-            CheckedConversionInExpressionTree_Explicit("int", "long?", "arg => ConvertChecked(ConvertChecked(arg))");
+            CheckedConversionInExpressionTree_Explicit(
+                "int",
+                "long?",
+                "arg => ConvertChecked(ConvertChecked(arg))"
+            );
         }
 
-        [ConditionalFact(typeof(WindowsDesktopOnly), Reason = "https://github.com/dotnet/roslyn/issues/30160")]
+        [ConditionalFact(
+            typeof(WindowsDesktopOnly),
+            Reason = "https://github.com/dotnet/roslyn/issues/30160"
+        )]
         public void CheckedConversionsInExpressionTrees_ExplicitTuple()
         {
-            CheckedConversionInExpressionTree_Explicit("(int, int)", "(int, int)?", ConvertMethod.Convert);
+            CheckedConversionInExpressionTree_Explicit(
+                "(int, int)",
+                "(int, int)?",
+                ConvertMethod.Convert
+            );
         }
 
         private enum ConvertMethod
@@ -2681,10 +3486,23 @@ class Derived2 : Base1
             ConvertChecked,
         }
 
-        private void CheckedConversionInExpressionTree_Implicit(string fromType, string toType, ConvertMethod expectedMethod, string additionalTypes = "")
+        private void CheckedConversionInExpressionTree_Implicit(
+            string fromType,
+            string toType,
+            ConvertMethod expectedMethod,
+            string additionalTypes = ""
+        )
         {
-            var source = CheckedConversionInExpressionTree_ImplicitSource(fromType, toType, additionalTypes);
-            var compilation = CreateCompilationWithMscorlib40AndSystemCore(source, options: TestOptions.ReleaseExe, references: new[] { ValueTupleRef, SystemRuntimeFacadeRef });
+            var source = CheckedConversionInExpressionTree_ImplicitSource(
+                fromType,
+                toType,
+                additionalTypes
+            );
+            var compilation = CreateCompilationWithMscorlib40AndSystemCore(
+                source,
+                options: TestOptions.ReleaseExe,
+                references: new[] { ValueTupleRef, SystemRuntimeFacadeRef }
+            );
             string expectedOutput;
             switch (expectedMethod)
             {
@@ -2701,20 +3519,37 @@ class Derived2 : Base1
             var verifier = CompileAndVerify(compilation, expectedOutput: expectedOutput);
             // Since Expression.ConvertChecked can generate a Checked result
             // (rather than ConvertChecked), verify the correct method was called.
-            VerifyConversionInExpressionTreeIL(verifier.TestData.GetMethodData("C.Main").GetMethodIL(), expectedMethod);
+            VerifyConversionInExpressionTreeIL(
+                verifier.TestData.GetMethodData("C.Main").GetMethodIL(),
+                expectedMethod
+            );
         }
 
-        private void CheckedConversionInExpressionTree_Implicit(string fromType, string toType, string expectedOutput)
+        private void CheckedConversionInExpressionTree_Implicit(
+            string fromType,
+            string toType,
+            string expectedOutput
+        )
         {
-            var source = CheckedConversionInExpressionTree_ImplicitSource(fromType, toType, additionalTypes: "");
-            var compilation = CreateCompilationWithMscorlib40AndSystemCore(source, options: TestOptions.ReleaseExe);
+            var source = CheckedConversionInExpressionTree_ImplicitSource(
+                fromType,
+                toType,
+                additionalTypes: ""
+            );
+            var compilation = CreateCompilationWithMscorlib40AndSystemCore(
+                source,
+                options: TestOptions.ReleaseExe
+            );
             CompileAndVerify(compilation, expectedOutput: expectedOutput);
         }
 
-        private static string CheckedConversionInExpressionTree_ImplicitSource(string fromType, string toType, string additionalTypes)
+        private static string CheckedConversionInExpressionTree_ImplicitSource(
+            string fromType,
+            string toType,
+            string additionalTypes
+        )
         {
-            return
-$@"using System;
+            return $@"using System;
 using System.Linq.Expressions;
 {additionalTypes}
 class C
@@ -2728,10 +3563,23 @@ class C
 }}";
         }
 
-        private void CheckedConversionInExpressionTree_Explicit(string fromType, string toType, ConvertMethod expectedMethod, string additionalTypes = "")
+        private void CheckedConversionInExpressionTree_Explicit(
+            string fromType,
+            string toType,
+            ConvertMethod expectedMethod,
+            string additionalTypes = ""
+        )
         {
-            var source = CheckedConversionInExpressionTree_ExplicitSource(fromType, toType, additionalTypes);
-            var compilation = CreateCompilationWithMscorlib40AndSystemCore(source, options: TestOptions.ReleaseExe, references: new[] { ValueTupleRef, SystemRuntimeFacadeRef });
+            var source = CheckedConversionInExpressionTree_ExplicitSource(
+                fromType,
+                toType,
+                additionalTypes
+            );
+            var compilation = CreateCompilationWithMscorlib40AndSystemCore(
+                source,
+                options: TestOptions.ReleaseExe,
+                references: new[] { ValueTupleRef, SystemRuntimeFacadeRef }
+            );
             string expectedOutput;
             switch (expectedMethod)
             {
@@ -2748,20 +3596,37 @@ class C
             var verifier = CompileAndVerify(compilation, expectedOutput: expectedOutput);
             // Since Expression.ConvertChecked can generate a Checked result
             // (rather than ConvertChecked), verify the correct method was called.
-            VerifyConversionInExpressionTreeIL(verifier.TestData.GetMethodData("C.Main").GetMethodIL(), expectedMethod);
+            VerifyConversionInExpressionTreeIL(
+                verifier.TestData.GetMethodData("C.Main").GetMethodIL(),
+                expectedMethod
+            );
         }
 
-        private void CheckedConversionInExpressionTree_Explicit(string fromType, string toType, string expectedOutput)
+        private void CheckedConversionInExpressionTree_Explicit(
+            string fromType,
+            string toType,
+            string expectedOutput
+        )
         {
-            var source = CheckedConversionInExpressionTree_ExplicitSource(fromType, toType, additionalTypes: "");
-            var compilation = CreateCompilationWithMscorlib40AndSystemCore(source, options: TestOptions.ReleaseExe);
+            var source = CheckedConversionInExpressionTree_ExplicitSource(
+                fromType,
+                toType,
+                additionalTypes: ""
+            );
+            var compilation = CreateCompilationWithMscorlib40AndSystemCore(
+                source,
+                options: TestOptions.ReleaseExe
+            );
             CompileAndVerify(compilation, expectedOutput: expectedOutput);
         }
 
-        private static string CheckedConversionInExpressionTree_ExplicitSource(string fromType, string toType, string additionalTypes)
+        private static string CheckedConversionInExpressionTree_ExplicitSource(
+            string fromType,
+            string toType,
+            string additionalTypes
+        )
         {
-            return
-$@"using System;
+            return $@"using System;
 using System.Linq.Expressions;
 {additionalTypes}
 class C
@@ -2774,14 +3639,23 @@ class C
 }}";
         }
 
-        private static void VerifyConversionInExpressionTreeIL(string actualIL, ConvertMethod expectedMethod)
+        private static void VerifyConversionInExpressionTreeIL(
+            string actualIL,
+            ConvertMethod expectedMethod
+        )
         {
             Assert.Equal(
-                actualIL.Contains($"System.Linq.Expressions.Expression.Convert(System.Linq.Expressions.Expression, "),
-                expectedMethod == ConvertMethod.Convert);
+                actualIL.Contains(
+                    $"System.Linq.Expressions.Expression.Convert(System.Linq.Expressions.Expression, "
+                ),
+                expectedMethod == ConvertMethod.Convert
+            );
             Assert.Equal(
-                actualIL.Contains($"System.Linq.Expressions.Expression.ConvertChecked(System.Linq.Expressions.Expression, "),
-                expectedMethod == ConvertMethod.ConvertChecked);
+                actualIL.Contains(
+                    $"System.Linq.Expressions.Expression.ConvertChecked(System.Linq.Expressions.Expression, "
+                ),
+                expectedMethod == ConvertMethod.ConvertChecked
+            );
         }
 
         [Fact, WorkItem(61843, "https://github.com/dotnet/roslyn/issues/61843")]
@@ -2849,7 +3723,9 @@ public static class C
             var comp = CreateCompilation(source);
             var verifier = CompileAndVerify(comp, expectedOutput: "RAN1 RAN2 RAN3");
 
-            verifier.VerifyIL("C.AddInSwitchExpression", @"
+            verifier.VerifyIL(
+                "C.AddInSwitchExpression",
+                @"
 {
   // Code size       13 (0xd)
   .maxstack  2
@@ -2866,9 +3742,12 @@ public static class C
   IL_000b:  ldloc.0
   IL_000c:  ret
 }
-");
+"
+            );
 
-            verifier.VerifyIL("C.AddInSwitchExpression2", @"
+            verifier.VerifyIL(
+                "C.AddInSwitchExpression2",
+                @"
 {
   // Code size       13 (0xd)
   .maxstack  2
@@ -2885,9 +3764,12 @@ public static class C
   IL_000b:  ldloc.0
   IL_000c:  ret
 }
-");
+"
+            );
 
-            verifier.VerifyIL("C.Add", @"
+            verifier.VerifyIL(
+                "C.Add",
+                @"
 {
   // Code size        4 (0x4)
   .maxstack  2
@@ -2896,7 +3778,8 @@ public static class C
   IL_0002:  add.ovf
   IL_0003:  ret
 }
-");
+"
+            );
         }
 
         [Fact, WorkItem(61843, "https://github.com/dotnet/roslyn/issues/61843")]
@@ -2912,18 +3795,41 @@ class C
             var comp = CreateCompilation(source);
             var tree = comp.SyntaxTrees.Single();
             var model = comp.GetSemanticModel(tree);
-            var xNode = tree.GetRoot().DescendantNodes().OfType<CheckedExpressionSyntax>().Single().Expression;
+            var xNode = tree.GetRoot()
+                .DescendantNodes()
+                .OfType<CheckedExpressionSyntax>()
+                .Single()
+                .Expression;
             Assert.Equal("x", xNode.ToString());
 
             var nodeToSpeculate = SyntaxFactory.ParseExpression("x + y");
-            Assert.Equal("System.Int32 System.Int32.op_CheckedAddition(System.Int32 left, System.Int32 right)",
-                model.GetSpeculativeSymbolInfo(xNode.Position, nodeToSpeculate, SpeculativeBindingOption.BindAsExpression).Symbol.ToTestDisplayString());
+            Assert.Equal(
+                "System.Int32 System.Int32.op_CheckedAddition(System.Int32 left, System.Int32 right)",
+                model
+                    .GetSpeculativeSymbolInfo(
+                        xNode.Position,
+                        nodeToSpeculate,
+                        SpeculativeBindingOption.BindAsExpression
+                    )
+                    .Symbol.ToTestDisplayString()
+            );
 
-            var checkedNode = tree.GetRoot().DescendantNodes().OfType<CheckedExpressionSyntax>().Single();
+            var checkedNode = tree.GetRoot()
+                .DescendantNodes()
+                .OfType<CheckedExpressionSyntax>()
+                .Single();
             Assert.Equal("checked(x)", checkedNode.ToString());
 
-            Assert.Equal("System.Int32 System.Int32.op_Addition(System.Int32 left, System.Int32 right)",
-                model.GetSpeculativeSymbolInfo(checkedNode.Position + 2, nodeToSpeculate, SpeculativeBindingOption.BindAsExpression).Symbol.ToTestDisplayString());
+            Assert.Equal(
+                "System.Int32 System.Int32.op_Addition(System.Int32 left, System.Int32 right)",
+                model
+                    .GetSpeculativeSymbolInfo(
+                        checkedNode.Position + 2,
+                        nodeToSpeculate,
+                        SpeculativeBindingOption.BindAsExpression
+                    )
+                    .Symbol.ToTestDisplayString()
+            );
         }
 
         [Fact, WorkItem(61843, "https://github.com/dotnet/roslyn/issues/61843")]
@@ -2944,12 +3850,24 @@ class C
             var comp = CreateCompilation(source);
             var tree = comp.SyntaxTrees.Single();
             var model = comp.GetSemanticModel(tree);
-            var xNode = tree.GetRoot().DescendantNodes().OfType<CheckedExpressionSyntax>().Single().Expression;
+            var xNode = tree.GetRoot()
+                .DescendantNodes()
+                .OfType<CheckedExpressionSyntax>()
+                .Single()
+                .Expression;
             Assert.Equal("x", xNode.ToString());
 
             var nodeToSpeculate = SyntaxFactory.ParseExpression("x + y");
-            Assert.Equal("System.Int32 System.Int32.op_Addition(System.Int32 left, System.Int32 right)",
-                model.GetSpeculativeSymbolInfo(xNode.Position, nodeToSpeculate, SpeculativeBindingOption.BindAsExpression).Symbol.ToTestDisplayString());
+            Assert.Equal(
+                "System.Int32 System.Int32.op_Addition(System.Int32 left, System.Int32 right)",
+                model
+                    .GetSpeculativeSymbolInfo(
+                        xNode.Position,
+                        nodeToSpeculate,
+                        SpeculativeBindingOption.BindAsExpression
+                    )
+                    .Symbol.ToTestDisplayString()
+            );
         }
     }
 }

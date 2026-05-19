@@ -19,30 +19,18 @@ namespace System.ServiceModel
         Collection<AddressHeader> headers;
 
         [DefaultValue(null)]
-        public string BehaviorConfigurationName
-        {
-            get;
-            set;
-        }
+        public string BehaviorConfigurationName { get; set; }
 
         [Fx.Tag.KnownXamlExternal]
         [DefaultValue(null)]
-        public Binding Binding
-        {
-            get;
-            set;
-        }
+        public Binding Binding { get; set; }
 
         [DefaultValue(null)]
         [TypeConverter(typeof(ServiceXNameTypeConverter))]
-        public XName ServiceContractName
-        {
-            get;
-            set;
-        }
+        public XName ServiceContractName { get; set; }
 
         // concrete AddressHeader descendants aren't currently XAMLable, they are not initialized until runtime
-        // If user adds an address header, this object will fail to xamlize. 
+        // If user adds an address header, this object will fail to xamlize.
         [Fx.Tag.KnownXamlExternal]
         public Collection<AddressHeader> Headers
         {
@@ -58,32 +46,16 @@ namespace System.ServiceModel
 
         [DefaultValue(null)]
         [TypeConverter(typeof(EndpointIdentityConverter))]
-        public EndpointIdentity Identity
-        {
-            get;
-            set;
-        }
+        public EndpointIdentity Identity { get; set; }
 
         [DefaultValue(null)]
-        public Uri ListenUri
-        {
-            get;
-            set;
-        }
+        public Uri ListenUri { get; set; }
 
         [DefaultValue(null)]
-        public string Name
-        {
-            get;
-            set;
-        }
+        public string Name { get; set; }
 
         [DefaultValue(null)]
-        public Uri AddressUri
-        {
-            get;
-            set;
-        }
+        public Uri AddressUri { get; set; }
 
         public EndpointAddress GetAddress()
         {
@@ -94,10 +66,18 @@ namespace System.ServiceModel
         {
             if (this.AddressUri == null)
             {
-                string endpointName = ContractValidationHelper.GetErrorMessageEndpointName(this.Name);
-                string contractName = ContractValidationHelper.GetErrorMessageEndpointServiceContractName(this.ServiceContractName);
-                throw FxTrace.Exception.AsError(new InvalidOperationException(
-                    SMASR.MissingUriInEndpoint(endpointName, contractName)));
+                string endpointName = ContractValidationHelper.GetErrorMessageEndpointName(
+                    this.Name
+                );
+                string contractName =
+                    ContractValidationHelper.GetErrorMessageEndpointServiceContractName(
+                        this.ServiceContractName
+                    );
+                throw FxTrace.Exception.AsError(
+                    new InvalidOperationException(
+                        SMASR.MissingUriInEndpoint(endpointName, contractName)
+                    )
+                );
             }
 
             Uri address = null;
@@ -109,22 +89,50 @@ namespace System.ServiceModel
             {
                 if (this.Binding == null)
                 {
-                    string endpointName = ContractValidationHelper.GetErrorMessageEndpointName(this.Name);
-                    string contractName = ContractValidationHelper.GetErrorMessageEndpointServiceContractName(this.ServiceContractName);
-                    throw FxTrace.Exception.AsError(new InvalidOperationException(
-                        SMASR.RelativeUriRequiresBinding(endpointName, contractName, this.AddressUri)));
+                    string endpointName = ContractValidationHelper.GetErrorMessageEndpointName(
+                        this.Name
+                    );
+                    string contractName =
+                        ContractValidationHelper.GetErrorMessageEndpointServiceContractName(
+                            this.ServiceContractName
+                        );
+                    throw FxTrace.Exception.AsError(
+                        new InvalidOperationException(
+                            SMASR.RelativeUriRequiresBinding(
+                                endpointName,
+                                contractName,
+                                this.AddressUri
+                            )
+                        )
+                    );
                 }
                 if (host == null)
                 {
-                    string endpointName = ContractValidationHelper.GetErrorMessageEndpointName(this.Name);
-                    string contractName = ContractValidationHelper.GetErrorMessageEndpointServiceContractName(this.ServiceContractName);
-                    throw FxTrace.Exception.AsError(new InvalidOperationException(
-                        SMASR.RelativeUriRequiresHost(endpointName, contractName, this.AddressUri)));
+                    string endpointName = ContractValidationHelper.GetErrorMessageEndpointName(
+                        this.Name
+                    );
+                    string contractName =
+                        ContractValidationHelper.GetErrorMessageEndpointServiceContractName(
+                            this.ServiceContractName
+                        );
+                    throw FxTrace.Exception.AsError(
+                        new InvalidOperationException(
+                            SMASR.RelativeUriRequiresHost(
+                                endpointName,
+                                contractName,
+                                this.AddressUri
+                            )
+                        )
+                    );
                 }
                 address = host.MakeAbsoluteUri(this.AddressUri, this.Binding);
             }
 
-            return new EndpointAddress(address, this.Identity, new AddressHeaderCollection(this.Headers));
+            return new EndpointAddress(
+                address,
+                this.Identity,
+                new AddressHeaderCollection(this.Headers)
+            );
         }
     }
 }

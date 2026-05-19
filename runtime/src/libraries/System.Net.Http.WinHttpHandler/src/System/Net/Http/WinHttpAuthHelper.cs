@@ -32,16 +32,16 @@ namespace System.Net.Http
             null,
             null,
             null,
-            "Negotiate"
+            "Negotiate",
         ];
 
         private static ReadOnlySpan<uint> AuthSchemePriorityOrder =>
-        [
-            Interop.WinHttp.WINHTTP_AUTH_SCHEME_NEGOTIATE,
-            Interop.WinHttp.WINHTTP_AUTH_SCHEME_NTLM,
-            Interop.WinHttp.WINHTTP_AUTH_SCHEME_DIGEST,
-            Interop.WinHttp.WINHTTP_AUTH_SCHEME_BASIC
-        ];
+            [
+                Interop.WinHttp.WINHTTP_AUTH_SCHEME_NEGOTIATE,
+                Interop.WinHttp.WINHTTP_AUTH_SCHEME_NTLM,
+                Interop.WinHttp.WINHTTP_AUTH_SCHEME_DIGEST,
+                Interop.WinHttp.WINHTTP_AUTH_SCHEME_BASIC,
+            ];
 
         private readonly CredentialCache _credentialCache = new CredentialCache();
         private readonly object _credentialCacheLock = new object();
@@ -49,7 +49,8 @@ namespace System.Net.Http
         public void CheckResponseForAuthentication(
             WinHttpRequestState state,
             ref uint proxyAuthScheme,
-            ref uint serverAuthScheme)
+            ref uint serverAuthScheme
+        )
         {
             uint supportedSchemes;
             uint authTarget;
@@ -62,14 +63,19 @@ namespace System.Net.Http
             state.RetryRequest = false;
 
             // Check the status code and retry the request applying credentials if needed.
-            var statusCode = (HttpStatusCode)WinHttpResponseParser.GetResponseHeaderNumberInfo(
-                state.RequestHandle,
-                Interop.WinHttp.WINHTTP_QUERY_STATUS_CODE);
+            var statusCode = (HttpStatusCode)
+                WinHttpResponseParser.GetResponseHeaderNumberInfo(
+                    state.RequestHandle,
+                    Interop.WinHttp.WINHTTP_QUERY_STATUS_CODE
+                );
 
             switch (statusCode)
             {
                 case HttpStatusCode.Unauthorized:
-                    if (state.ServerCredentials == null || state.LastStatusCode == HttpStatusCode.Unauthorized)
+                    if (
+                        state.ServerCredentials == null
+                        || state.LastStatusCode == HttpStatusCode.Unauthorized
+                    )
                     {
                         // Either we don't have server credentials or we already tried
                         // to set the credentials and it failed before.
@@ -83,11 +89,14 @@ namespace System.Net.Http
                     // parameter which is included in the supportedSchemes flags already.
                     // We pass the schemes to ChooseAuthScheme which will pick the scheme
                     // based on most secure scheme to least secure scheme ordering.
-                    if (!Interop.WinHttp.WinHttpQueryAuthSchemes(
-                        state.RequestHandle,
-                        out supportedSchemes,
-                        out _,
-                        out authTarget))
+                    if (
+                        !Interop.WinHttp.WinHttpQueryAuthSchemes(
+                            state.RequestHandle,
+                            out supportedSchemes,
+                            out _,
+                            out authTarget
+                        )
+                    )
                     {
                         // WinHTTP returns an error for schemes it doesn't handle.
                         // So, we need to ignore the error and just let it stay at 401.
@@ -98,15 +107,22 @@ namespace System.Net.Http
                     // But we can validate with assert.
                     Debug.Assert(authTarget == Interop.WinHttp.WINHTTP_AUTH_TARGET_SERVER);
 
-                    serverAuthScheme = ChooseAuthScheme(supportedSchemes, state.RequestMessage.RequestUri, state.ServerCredentials);
+                    serverAuthScheme = ChooseAuthScheme(
+                        supportedSchemes,
+                        state.RequestMessage.RequestUri,
+                        state.ServerCredentials
+                    );
                     if (serverAuthScheme != 0)
                     {
-                        if (SetWinHttpCredential(
-                            state.RequestHandle,
-                            state.ServerCredentials,
-                            uri,
-                            serverAuthScheme,
-                            authTarget))
+                        if (
+                            SetWinHttpCredential(
+                                state.RequestHandle,
+                                state.ServerCredentials,
+                                uri,
+                                serverAuthScheme,
+                                authTarget
+                            )
+                        )
                         {
                             state.RetryRequest = true;
                         }
@@ -124,9 +140,10 @@ namespace System.Net.Http
                     state.LastStatusCode = statusCode;
 
                     // If we don't have any proxy credentials to try, then we end up with 407.
-                    ICredentials? proxyCreds = state.Proxy == null ?
-                        state.DefaultProxyCredentials :
-                        state.Proxy.Credentials;
+                    ICredentials? proxyCreds =
+                        state.Proxy == null
+                            ? state.DefaultProxyCredentials
+                            : state.Proxy.Credentials;
                     if (proxyCreds == null)
                     {
                         break;
@@ -136,11 +153,14 @@ namespace System.Net.Http
                     // parameter which is included in the supportedSchemes flags already.
                     // We pass the schemes to ChooseAuthScheme which will pick the scheme
                     // based on most secure scheme to least secure scheme ordering.
-                    if (!Interop.WinHttp.WinHttpQueryAuthSchemes(
-                        state.RequestHandle,
-                        out supportedSchemes,
-                        out _,
-                        out authTarget))
+                    if (
+                        !Interop.WinHttp.WinHttpQueryAuthSchemes(
+                            state.RequestHandle,
+                            out supportedSchemes,
+                            out _,
+                            out authTarget
+                        )
+                    )
                     {
                         // WinHTTP returns an error for schemes it doesn't handle.
                         // So, we need to ignore the error and just let it stay at 407.
@@ -157,7 +177,8 @@ namespace System.Net.Http
                         // discovered/calculated with a PAC file. So, we can't determine the actual proxy uri at
                         // this point since it is calculated internally in WinHTTP. For now, pass in null for the uri.
                         state.Proxy?.GetProxy(state.RequestMessage.RequestUri),
-                        proxyCreds);
+                        proxyCreds
+                    );
                     state.RetryRequest = true;
                     break;
 
@@ -165,7 +186,11 @@ namespace System.Net.Http
                     if (state.PreAuthenticate && serverAuthScheme != 0)
                     {
                         Debug.Assert(state.ServerCredentials != null);
-                        SaveServerCredentialsToCache(uri, serverAuthScheme, state.ServerCredentials);
+                        SaveServerCredentialsToCache(
+                            uri,
+                            serverAuthScheme,
+                            state.ServerCredentials
+                        );
                     }
                     break;
             }
@@ -207,7 +232,8 @@ namespace System.Net.Http
                     proxyCredentials,
                     proxyUri,
                     proxyAuthScheme,
-                    Interop.WinHttp.WINHTTP_AUTH_TARGET_PROXY);
+                    Interop.WinHttp.WINHTTP_AUTH_TARGET_PROXY
+                );
             }
 
             // Apply pre-authentication headers for server authentication?
@@ -215,17 +241,21 @@ namespace System.Net.Http
             {
                 uint authScheme;
                 NetworkCredential? serverCredentials;
-                if (GetServerCredentialsFromCache(
+                if (
+                    GetServerCredentialsFromCache(
                         state.RequestMessage.RequestUri,
                         out authScheme,
-                        out serverCredentials))
+                        out serverCredentials
+                    )
+                )
                 {
                     SetWinHttpCredential(
                         state.RequestHandle,
                         serverCredentials,
                         state.RequestMessage.RequestUri,
                         authScheme,
-                        Interop.WinHttp.WINHTTP_AUTH_TARGET_SERVER);
+                        Interop.WinHttp.WINHTTP_AUTH_TARGET_SERVER
+                    );
                     state.LastStatusCode = HttpStatusCode.Unauthorized; // Remember we already set the creds.
                 }
 
@@ -238,7 +268,8 @@ namespace System.Net.Http
         public bool GetServerCredentialsFromCache(
             Uri uri,
             out uint serverAuthScheme,
-            [NotNullWhen(true)] out NetworkCredential? serverCredentials)
+            [NotNullWhen(true)] out NetworkCredential? serverCredentials
+        )
         {
             serverAuthScheme = 0;
             serverCredentials = null;
@@ -249,7 +280,10 @@ namespace System.Net.Http
             {
                 foreach (uint authScheme in AuthSchemePriorityOrder)
                 {
-                    cred = _credentialCache.GetCredential(uri, s_authSchemeStringMapping[authScheme]!);
+                    cred = _credentialCache.GetCredential(
+                        uri,
+                        s_authSchemeStringMapping[authScheme]!
+                    );
                     if (cred != null)
                     {
                         serverAuthScheme = authScheme;
@@ -263,7 +297,11 @@ namespace System.Net.Http
             return false;
         }
 
-        public void SaveServerCredentialsToCache(Uri uri, uint authScheme, ICredentials serverCredentials)
+        public void SaveServerCredentialsToCache(
+            Uri uri,
+            uint authScheme,
+            ICredentials serverCredentials
+        )
         {
             string? authType = s_authSchemeStringMapping[authScheme];
             Debug.Assert(!string.IsNullOrEmpty(authType));
@@ -288,23 +326,33 @@ namespace System.Net.Http
         public void ChangeDefaultCredentialsPolicy(
             SafeWinHttpHandle requestHandle,
             uint authTarget,
-            bool allowDefaultCredentials)
+            bool allowDefaultCredentials
+        )
         {
-            Debug.Assert(authTarget == Interop.WinHttp.WINHTTP_AUTH_TARGET_PROXY ||
-                         authTarget == Interop.WinHttp.WINHTTP_AUTH_TARGET_SERVER);
+            Debug.Assert(
+                authTarget == Interop.WinHttp.WINHTTP_AUTH_TARGET_PROXY
+                    || authTarget == Interop.WinHttp.WINHTTP_AUTH_TARGET_SERVER
+            );
 
-            uint optionData = allowDefaultCredentials ?
-                (authTarget == Interop.WinHttp.WINHTTP_AUTH_TARGET_PROXY ?
-                    Interop.WinHttp.WINHTTP_AUTOLOGON_SECURITY_LEVEL_MEDIUM :
-                    Interop.WinHttp.WINHTTP_AUTOLOGON_SECURITY_LEVEL_LOW) :
-                Interop.WinHttp.WINHTTP_AUTOLOGON_SECURITY_LEVEL_HIGH;
+            uint optionData = allowDefaultCredentials
+                ? (
+                    authTarget == Interop.WinHttp.WINHTTP_AUTH_TARGET_PROXY
+                        ? Interop.WinHttp.WINHTTP_AUTOLOGON_SECURITY_LEVEL_MEDIUM
+                        : Interop.WinHttp.WINHTTP_AUTOLOGON_SECURITY_LEVEL_LOW
+                )
+                : Interop.WinHttp.WINHTTP_AUTOLOGON_SECURITY_LEVEL_HIGH;
 
-            if (!Interop.WinHttp.WinHttpSetOption(
-                requestHandle,
-                Interop.WinHttp.WINHTTP_OPTION_AUTOLOGON_POLICY,
-                ref optionData))
+            if (
+                !Interop.WinHttp.WinHttpSetOption(
+                    requestHandle,
+                    Interop.WinHttp.WINHTTP_OPTION_AUTOLOGON_POLICY,
+                    ref optionData
+                )
+            )
             {
-                WinHttpException.ThrowExceptionUsingLastError(nameof(Interop.WinHttp.WinHttpSetOption));
+                WinHttpException.ThrowExceptionUsingLastError(
+                    nameof(Interop.WinHttp.WinHttpSetOption)
+                );
             }
         }
 
@@ -313,15 +361,18 @@ namespace System.Net.Http
             ICredentials credentials,
             Uri uri,
             uint authScheme,
-            uint authTarget)
+            uint authTarget
+        )
         {
             string? userName;
             string? password;
 
             Debug.Assert(credentials != null);
             Debug.Assert(authScheme != 0);
-            Debug.Assert(authTarget == Interop.WinHttp.WINHTTP_AUTH_TARGET_PROXY ||
-                         authTarget == Interop.WinHttp.WINHTTP_AUTH_TARGET_SERVER);
+            Debug.Assert(
+                authTarget == Interop.WinHttp.WINHTTP_AUTH_TARGET_PROXY
+                    || authTarget == Interop.WinHttp.WINHTTP_AUTH_TARGET_SERVER
+            );
 
             string? authType = s_authSchemeStringMapping[authScheme];
             Debug.Assert(!string.IsNullOrEmpty(authType));
@@ -336,11 +387,17 @@ namespace System.Net.Http
             {
                 // Only Negotiate and NTLM can use default credentials. Otherwise,
                 // behave as-if there were no credentials.
-                if (authScheme == Interop.WinHttp.WINHTTP_AUTH_SCHEME_NEGOTIATE ||
-                    authScheme == Interop.WinHttp.WINHTTP_AUTH_SCHEME_NTLM)
+                if (
+                    authScheme == Interop.WinHttp.WINHTTP_AUTH_SCHEME_NEGOTIATE
+                    || authScheme == Interop.WinHttp.WINHTTP_AUTH_SCHEME_NTLM
+                )
                 {
                     // Allow WinHTTP to transmit the default credentials.
-                    ChangeDefaultCredentialsPolicy(requestHandle, authTarget, allowDefaultCredentials: true);
+                    ChangeDefaultCredentialsPolicy(
+                        requestHandle,
+                        authTarget,
+                        allowDefaultCredentials: true
+                    );
                     userName = null;
                     password = null;
                 }
@@ -367,21 +424,30 @@ namespace System.Net.Http
                 }
             }
 
-            if (!Interop.WinHttp.WinHttpSetCredentials(
-                requestHandle,
-                authTarget,
-                authScheme,
-                userName,
-                password,
-                IntPtr.Zero))
+            if (
+                !Interop.WinHttp.WinHttpSetCredentials(
+                    requestHandle,
+                    authTarget,
+                    authScheme,
+                    userName,
+                    password,
+                    IntPtr.Zero
+                )
+            )
             {
-                WinHttpException.ThrowExceptionUsingLastError(nameof(Interop.WinHttp.WinHttpSetCredentials));
+                WinHttpException.ThrowExceptionUsingLastError(
+                    nameof(Interop.WinHttp.WinHttpSetCredentials)
+                );
             }
 
             return true;
         }
 
-        private static uint ChooseAuthScheme(uint supportedSchemes, Uri? uri, ICredentials? credentials)
+        private static uint ChooseAuthScheme(
+            uint supportedSchemes,
+            Uri? uri,
+            ICredentials? credentials
+        )
         {
             if (credentials == null)
             {
@@ -401,7 +467,11 @@ namespace System.Net.Http
 
             foreach (uint authScheme in AuthSchemePriorityOrder)
             {
-                if ((supportedSchemes & authScheme) != 0 && credentials.GetCredential(uri, s_authSchemeStringMapping[authScheme]!) != null)
+                if (
+                    (supportedSchemes & authScheme) != 0
+                    && credentials.GetCredential(uri, s_authSchemeStringMapping[authScheme]!)
+                        != null
+                )
                 {
                     return authScheme;
                 }

@@ -166,7 +166,6 @@ namespace System.Collections.Generic
             Debug.Assert(count >= 0);
 
             _markers.Add(new Marker(count: count, index: Count));
-
             checked
             {
                 _reservedCount += count;

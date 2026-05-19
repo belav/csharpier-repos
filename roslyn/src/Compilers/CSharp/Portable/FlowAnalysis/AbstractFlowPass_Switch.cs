@@ -48,8 +48,13 @@ namespace Microsoft.CodeAnalysis.CSharp
             {
                 foreach (var label in section.SwitchLabels)
                 {
-                    if (reachableLabels.Contains(label.Label) || label.HasErrors ||
-                        label == node.DefaultLabel && node.Expression.ConstantValueOpt == null && IsTraditionalSwitch(node))
+                    if (
+                        reachableLabels.Contains(label.Label)
+                        || label.HasErrors
+                        || label == node.DefaultLabel
+                            && node.Expression.ConstantValueOpt == null
+                            && IsTraditionalSwitch(node)
+                    )
                     {
                         SetState(initialState.Clone());
                     }
@@ -71,8 +76,14 @@ namespace Microsoft.CodeAnalysis.CSharp
             }
 
             TLocalState afterSwitchState = UnreachableState();
-            if (node.ReachabilityDecisionDag.ReachableLabels.Contains(node.BreakLabel) ||
-                (node.DefaultLabel == null && node.Expression.ConstantValueOpt == null && IsTraditionalSwitch(node)))
+            if (
+                node.ReachabilityDecisionDag.ReachableLabels.Contains(node.BreakLabel)
+                || (
+                    node.DefaultLabel == null
+                    && node.Expression.ConstantValueOpt == null
+                    && IsTraditionalSwitch(node)
+                )
+            )
             {
                 Join(ref afterSwitchState, ref initialState);
             }
@@ -93,7 +104,10 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             // If we are in a recent enough language version, we treat the switch as a fully pattern-based switch
             // for the purposes of flow analysis.
-            if (compilation.LanguageVersion >= MessageID.IDS_FeatureRecursivePatterns.RequiredVersion())
+            if (
+                compilation.LanguageVersion
+                >= MessageID.IDS_FeatureRecursivePatterns.RequiredVersion()
+            )
             {
                 return false;
             }
@@ -142,12 +156,16 @@ namespace Microsoft.CodeAnalysis.CSharp
             return null;
         }
 
-        public override BoundNode VisitConvertedSwitchExpression(BoundConvertedSwitchExpression node)
+        public override BoundNode VisitConvertedSwitchExpression(
+            BoundConvertedSwitchExpression node
+        )
         {
             return this.VisitSwitchExpression(node);
         }
 
-        public override BoundNode VisitUnconvertedSwitchExpression(BoundUnconvertedSwitchExpression node)
+        public override BoundNode VisitUnconvertedSwitchExpression(
+            BoundUnconvertedSwitchExpression node
+        )
         {
             return this.VisitSwitchExpression(node);
         }

@@ -860,8 +860,8 @@ public class UserManagerTest
 
         // Act
         // Assert
-        var ex = await Assert.ThrowsAsync<InvalidOperationException>(
-            () => manager.CreateAsync(user)
+        var ex = await Assert.ThrowsAsync<InvalidOperationException>(() =>
+            manager.CreateAsync(user)
         );
         Assert.Contains(Extensions.Identity.Core.Resources.NullSecurityStamp, ex.Message);
 
@@ -882,8 +882,8 @@ public class UserManagerTest
 
         // Act
         // Assert
-        var ex = await Assert.ThrowsAsync<InvalidOperationException>(
-            () => manager.UpdateAsync(user)
+        var ex = await Assert.ThrowsAsync<InvalidOperationException>(() =>
+            manager.UpdateAsync(user)
         );
         Assert.Contains(Extensions.Identity.Core.Resources.NullSecurityStamp, ex.Message);
 
@@ -966,8 +966,8 @@ public class UserManagerTest
         await Assert.ThrowsAsync<NotSupportedException>(() => manager.SetEmailAsync(null, null));
         await Assert.ThrowsAsync<NotSupportedException>(() => manager.GetEmailAsync(null));
         await Assert.ThrowsAsync<NotSupportedException>(() => manager.IsEmailConfirmedAsync(null));
-        await Assert.ThrowsAsync<NotSupportedException>(
-            () => manager.ConfirmEmailAsync(null, null)
+        await Assert.ThrowsAsync<NotSupportedException>(() =>
+            manager.ConfirmEmailAsync(null, null)
         );
     }
 
@@ -976,14 +976,14 @@ public class UserManagerTest
     {
         var manager = MockHelpers.TestUserManager(new NoopUserStore());
         Assert.False(manager.SupportsUserPhoneNumber);
-        await Assert.ThrowsAsync<NotSupportedException>(
-            async () => await manager.SetPhoneNumberAsync(null, null)
+        await Assert.ThrowsAsync<NotSupportedException>(async () =>
+            await manager.SetPhoneNumberAsync(null, null)
         );
-        await Assert.ThrowsAsync<NotSupportedException>(
-            async () => await manager.SetPhoneNumberAsync(null, null)
+        await Assert.ThrowsAsync<NotSupportedException>(async () =>
+            await manager.SetPhoneNumberAsync(null, null)
         );
-        await Assert.ThrowsAsync<NotSupportedException>(
-            async () => await manager.GetPhoneNumberAsync(null)
+        await Assert.ThrowsAsync<NotSupportedException>(async () =>
+            await manager.GetPhoneNumberAsync(null)
         );
     }
 
@@ -992,11 +992,11 @@ public class UserManagerTest
     {
         var manager = MockHelpers.TestUserManager(new NoopUserStore());
         var user = new PocoUser();
-        await Assert.ThrowsAsync<NotSupportedException>(
-            async () => await manager.GenerateUserTokenAsync(user, "bogus", null)
+        await Assert.ThrowsAsync<NotSupportedException>(async () =>
+            await manager.GenerateUserTokenAsync(user, "bogus", null)
         );
-        await Assert.ThrowsAsync<NotSupportedException>(
-            async () => await manager.VerifyUserTokenAsync(user, "bogus", null, null)
+        await Assert.ThrowsAsync<NotSupportedException>(async () =>
+            await manager.VerifyUserTokenAsync(user, "bogus", null, null)
         );
     }
 
@@ -1006,13 +1006,13 @@ public class UserManagerTest
         var manager = MockHelpers.TestUserManager(new NoopUserStore());
         Assert.False(manager.SupportsUserPassword);
         await Assert.ThrowsAsync<NotSupportedException>(() => manager.CreateAsync(null, null));
-        await Assert.ThrowsAsync<NotSupportedException>(
-            () => manager.ChangePasswordAsync(null, null, null)
+        await Assert.ThrowsAsync<NotSupportedException>(() =>
+            manager.ChangePasswordAsync(null, null, null)
         );
         await Assert.ThrowsAsync<NotSupportedException>(() => manager.AddPasswordAsync(null, null));
         await Assert.ThrowsAsync<NotSupportedException>(() => manager.RemovePasswordAsync(null));
-        await Assert.ThrowsAsync<NotSupportedException>(
-            () => manager.CheckPasswordAsync(null, null)
+        await Assert.ThrowsAsync<NotSupportedException>(() =>
+            manager.CheckPasswordAsync(null, null)
         );
         await Assert.ThrowsAsync<NotSupportedException>(() => manager.HasPasswordAsync(null));
     }
@@ -1026,15 +1026,15 @@ public class UserManagerTest
             .Returns(Task.FromResult(Guid.NewGuid().ToString()));
         var manager = MockHelpers.TestUserManager(store.Object);
         Assert.False(manager.SupportsUserSecurityStamp);
-        await Assert.ThrowsAsync<NotSupportedException>(
-            () => manager.UpdateSecurityStampAsync(null)
+        await Assert.ThrowsAsync<NotSupportedException>(() =>
+            manager.UpdateSecurityStampAsync(null)
         );
         await Assert.ThrowsAsync<NotSupportedException>(() => manager.GetSecurityStampAsync(null));
-        await Assert.ThrowsAsync<NotSupportedException>(
-            () => manager.VerifyChangePhoneNumberTokenAsync(new PocoUser(), "1", "111-111-1111")
+        await Assert.ThrowsAsync<NotSupportedException>(() =>
+            manager.VerifyChangePhoneNumberTokenAsync(new PocoUser(), "1", "111-111-1111")
         );
-        await Assert.ThrowsAsync<NotSupportedException>(
-            () => manager.GenerateChangePhoneNumberTokenAsync(new PocoUser(), "111-111-1111")
+        await Assert.ThrowsAsync<NotSupportedException>(() =>
+            manager.GenerateChangePhoneNumberTokenAsync(new PocoUser(), "111-111-1111")
         );
     }
 
@@ -1043,17 +1043,17 @@ public class UserManagerTest
     {
         var manager = MockHelpers.TestUserManager(new NoopUserStore());
         Assert.False(manager.SupportsUserLogin);
-        await Assert.ThrowsAsync<NotSupportedException>(
-            async () => await manager.AddLoginAsync(null, null)
+        await Assert.ThrowsAsync<NotSupportedException>(async () =>
+            await manager.AddLoginAsync(null, null)
         );
-        await Assert.ThrowsAsync<NotSupportedException>(
-            async () => await manager.RemoveLoginAsync(null, null, null)
+        await Assert.ThrowsAsync<NotSupportedException>(async () =>
+            await manager.RemoveLoginAsync(null, null, null)
         );
-        await Assert.ThrowsAsync<NotSupportedException>(
-            async () => await manager.GetLoginsAsync(null)
+        await Assert.ThrowsAsync<NotSupportedException>(async () =>
+            await manager.GetLoginsAsync(null)
         );
-        await Assert.ThrowsAsync<NotSupportedException>(
-            async () => await manager.FindByLoginAsync(null, null)
+        await Assert.ThrowsAsync<NotSupportedException>(async () =>
+            await manager.FindByLoginAsync(null, null)
         );
     }
 
@@ -1062,17 +1062,17 @@ public class UserManagerTest
     {
         var manager = MockHelpers.TestUserManager(new NoopUserStore());
         Assert.False(manager.SupportsUserClaim);
-        await Assert.ThrowsAsync<NotSupportedException>(
-            async () => await manager.AddClaimAsync(null, null)
+        await Assert.ThrowsAsync<NotSupportedException>(async () =>
+            await manager.AddClaimAsync(null, null)
         );
-        await Assert.ThrowsAsync<NotSupportedException>(
-            async () => await manager.ReplaceClaimAsync(null, null, null)
+        await Assert.ThrowsAsync<NotSupportedException>(async () =>
+            await manager.ReplaceClaimAsync(null, null, null)
         );
-        await Assert.ThrowsAsync<NotSupportedException>(
-            async () => await manager.RemoveClaimAsync(null, null)
+        await Assert.ThrowsAsync<NotSupportedException>(async () =>
+            await manager.RemoveClaimAsync(null, null)
         );
-        await Assert.ThrowsAsync<NotSupportedException>(
-            async () => await manager.GetClaimsAsync(null)
+        await Assert.ThrowsAsync<NotSupportedException>(async () =>
+            await manager.GetClaimsAsync(null)
         );
     }
 
@@ -1125,8 +1125,8 @@ public class UserManagerTest
             )
             .AddUserStore<NoopUserStore>();
         var manager = services.BuildServiceProvider().GetService<UserManager<PocoUser>>();
-        Assert.ThrowsAsync<NotImplementedException>(
-            () => manager.GenerateUserTokenAsync(new PocoUser(), "A", "purpose")
+        Assert.ThrowsAsync<NotImplementedException>(() =>
+            manager.GenerateUserTokenAsync(new PocoUser(), "A", "purpose")
         );
     }
 
@@ -1137,8 +1137,8 @@ public class UserManagerTest
         services
             .AddIdentity<PocoUser, PocoRole>(o => o.Stores.ProtectPersonalData = true)
             .AddUserStore<NoopUserStore>();
-        var e = Assert.Throws<InvalidOperationException>(
-            () => services.BuildServiceProvider().GetService<UserManager<PocoUser>>()
+        var e = Assert.Throws<InvalidOperationException>(() =>
+            services.BuildServiceProvider().GetService<UserManager<PocoUser>>()
         );
         Assert.Contains("Store does not implement IProtectedUserStore", e.Message);
     }
@@ -1150,8 +1150,8 @@ public class UserManagerTest
         services
             .AddIdentity<PocoUser, PocoRole>(o => o.Stores.ProtectPersonalData = true)
             .AddUserStore<ProtectedStore>();
-        var e = Assert.Throws<InvalidOperationException>(
-            () => services.BuildServiceProvider().GetService<UserManager<PocoUser>>()
+        var e = Assert.Throws<InvalidOperationException>(() =>
+            services.BuildServiceProvider().GetService<UserManager<PocoUser>>()
         );
         Assert.Contains("No IPersonalDataProtector service was registered", e.Message);
     }
@@ -1248,13 +1248,8 @@ public class UserManagerTest
             .AddUserStore<NoopUserStore>()
             .AddDefaultTokenProviders();
         var manager = services.BuildServiceProvider().GetService<UserManager<PocoUser>>();
-        Assert.ThrowsAsync<NotImplementedException>(
-            () =>
-                manager.GenerateUserTokenAsync(
-                    new PocoUser(),
-                    TokenOptions.DefaultProvider,
-                    "purpose"
-                )
+        Assert.ThrowsAsync<NotImplementedException>(() =>
+            manager.GenerateUserTokenAsync(new PocoUser(), TokenOptions.DefaultProvider, "purpose")
         );
     }
 
@@ -1263,11 +1258,11 @@ public class UserManagerTest
     {
         var manager = MockHelpers.TestUserManager(new NoopUserStore());
         Assert.False(manager.SupportsUserTwoFactor);
-        await Assert.ThrowsAsync<NotSupportedException>(
-            async () => await manager.GetTwoFactorEnabledAsync(null)
+        await Assert.ThrowsAsync<NotSupportedException>(async () =>
+            await manager.GetTwoFactorEnabledAsync(null)
         );
-        await Assert.ThrowsAsync<NotSupportedException>(
-            async () => await manager.SetTwoFactorEnabledAsync(null, true)
+        await Assert.ThrowsAsync<NotSupportedException>(async () =>
+            await manager.SetTwoFactorEnabledAsync(null, true)
         );
     }
 
@@ -1276,23 +1271,23 @@ public class UserManagerTest
     {
         var manager = MockHelpers.TestUserManager(new NoopUserStore());
         Assert.False(manager.SupportsUserLockout);
-        await Assert.ThrowsAsync<NotSupportedException>(
-            async () => await manager.GetLockoutEnabledAsync(null)
+        await Assert.ThrowsAsync<NotSupportedException>(async () =>
+            await manager.GetLockoutEnabledAsync(null)
         );
-        await Assert.ThrowsAsync<NotSupportedException>(
-            async () => await manager.SetLockoutEnabledAsync(null, true)
+        await Assert.ThrowsAsync<NotSupportedException>(async () =>
+            await manager.SetLockoutEnabledAsync(null, true)
         );
-        await Assert.ThrowsAsync<NotSupportedException>(
-            async () => await manager.AccessFailedAsync(null)
+        await Assert.ThrowsAsync<NotSupportedException>(async () =>
+            await manager.AccessFailedAsync(null)
         );
-        await Assert.ThrowsAsync<NotSupportedException>(
-            async () => await manager.IsLockedOutAsync(null)
+        await Assert.ThrowsAsync<NotSupportedException>(async () =>
+            await manager.IsLockedOutAsync(null)
         );
-        await Assert.ThrowsAsync<NotSupportedException>(
-            async () => await manager.ResetAccessFailedCountAsync(null)
+        await Assert.ThrowsAsync<NotSupportedException>(async () =>
+            await manager.ResetAccessFailedCountAsync(null)
         );
-        await Assert.ThrowsAsync<NotSupportedException>(
-            async () => await manager.GetAccessFailedCountAsync(null)
+        await Assert.ThrowsAsync<NotSupportedException>(async () =>
+            await manager.GetAccessFailedCountAsync(null)
         );
     }
 
@@ -1301,23 +1296,23 @@ public class UserManagerTest
     {
         var manager = MockHelpers.TestUserManager(new NoopUserStore());
         Assert.False(manager.SupportsUserRole);
-        await Assert.ThrowsAsync<NotSupportedException>(
-            async () => await manager.AddToRoleAsync(null, "bogus")
+        await Assert.ThrowsAsync<NotSupportedException>(async () =>
+            await manager.AddToRoleAsync(null, "bogus")
         );
-        await Assert.ThrowsAsync<NotSupportedException>(
-            async () => await manager.AddToRolesAsync(null, null)
+        await Assert.ThrowsAsync<NotSupportedException>(async () =>
+            await manager.AddToRolesAsync(null, null)
         );
-        await Assert.ThrowsAsync<NotSupportedException>(
-            async () => await manager.GetRolesAsync(null)
+        await Assert.ThrowsAsync<NotSupportedException>(async () =>
+            await manager.GetRolesAsync(null)
         );
-        await Assert.ThrowsAsync<NotSupportedException>(
-            async () => await manager.RemoveFromRoleAsync(null, "bogus")
+        await Assert.ThrowsAsync<NotSupportedException>(async () =>
+            await manager.RemoveFromRoleAsync(null, "bogus")
         );
-        await Assert.ThrowsAsync<NotSupportedException>(
-            async () => await manager.RemoveFromRolesAsync(null, null)
+        await Assert.ThrowsAsync<NotSupportedException>(async () =>
+            await manager.RemoveFromRolesAsync(null, null)
         );
-        await Assert.ThrowsAsync<NotSupportedException>(
-            async () => await manager.IsInRoleAsync(null, "bogus")
+        await Assert.ThrowsAsync<NotSupportedException>(async () =>
+            await manager.IsInRoleAsync(null, "bogus")
         );
     }
 
@@ -1705,38 +1700,38 @@ public class UserManagerTest
         await Assert.ThrowsAsync<ObjectDisposedException>(() => manager.AddClaimAsync(null, null));
         await Assert.ThrowsAsync<ObjectDisposedException>(() => manager.AddClaimsAsync(null, null));
         await Assert.ThrowsAsync<ObjectDisposedException>(() => manager.AddLoginAsync(null, null));
-        await Assert.ThrowsAsync<ObjectDisposedException>(
-            () => manager.AddPasswordAsync(null, null)
+        await Assert.ThrowsAsync<ObjectDisposedException>(() =>
+            manager.AddPasswordAsync(null, null)
         );
         await Assert.ThrowsAsync<ObjectDisposedException>(() => manager.AddToRoleAsync(null, null));
-        await Assert.ThrowsAsync<ObjectDisposedException>(
-            () => manager.AddToRolesAsync(null, null)
+        await Assert.ThrowsAsync<ObjectDisposedException>(() =>
+            manager.AddToRolesAsync(null, null)
         );
-        await Assert.ThrowsAsync<ObjectDisposedException>(
-            () => manager.ChangePasswordAsync(null, null, null)
+        await Assert.ThrowsAsync<ObjectDisposedException>(() =>
+            manager.ChangePasswordAsync(null, null, null)
         );
         await Assert.ThrowsAsync<ObjectDisposedException>(() => manager.GetClaimsAsync(null));
         await Assert.ThrowsAsync<ObjectDisposedException>(() => manager.GetLoginsAsync(null));
         await Assert.ThrowsAsync<ObjectDisposedException>(() => manager.GetRolesAsync(null));
         await Assert.ThrowsAsync<ObjectDisposedException>(() => manager.IsInRoleAsync(null, null));
-        await Assert.ThrowsAsync<ObjectDisposedException>(
-            () => manager.RemoveClaimAsync(null, null)
+        await Assert.ThrowsAsync<ObjectDisposedException>(() =>
+            manager.RemoveClaimAsync(null, null)
         );
-        await Assert.ThrowsAsync<ObjectDisposedException>(
-            () => manager.RemoveClaimsAsync(null, null)
+        await Assert.ThrowsAsync<ObjectDisposedException>(() =>
+            manager.RemoveClaimsAsync(null, null)
         );
-        await Assert.ThrowsAsync<ObjectDisposedException>(
-            () => manager.RemoveLoginAsync(null, null, null)
+        await Assert.ThrowsAsync<ObjectDisposedException>(() =>
+            manager.RemoveLoginAsync(null, null, null)
         );
         await Assert.ThrowsAsync<ObjectDisposedException>(() => manager.RemovePasswordAsync(null));
-        await Assert.ThrowsAsync<ObjectDisposedException>(
-            () => manager.RemoveFromRoleAsync(null, null)
+        await Assert.ThrowsAsync<ObjectDisposedException>(() =>
+            manager.RemoveFromRoleAsync(null, null)
         );
-        await Assert.ThrowsAsync<ObjectDisposedException>(
-            () => manager.RemoveFromRolesAsync(null, null)
+        await Assert.ThrowsAsync<ObjectDisposedException>(() =>
+            manager.RemoveFromRolesAsync(null, null)
         );
-        await Assert.ThrowsAsync<ObjectDisposedException>(
-            () => manager.FindByLoginAsync(null, null)
+        await Assert.ThrowsAsync<ObjectDisposedException>(() =>
+            manager.FindByLoginAsync(null, null)
         );
         await Assert.ThrowsAsync<ObjectDisposedException>(() => manager.FindByIdAsync(null));
         await Assert.ThrowsAsync<ObjectDisposedException>(() => manager.FindByNameAsync(null));
@@ -1744,29 +1739,29 @@ public class UserManagerTest
         await Assert.ThrowsAsync<ObjectDisposedException>(() => manager.CreateAsync(null, null));
         await Assert.ThrowsAsync<ObjectDisposedException>(() => manager.UpdateAsync(null));
         await Assert.ThrowsAsync<ObjectDisposedException>(() => manager.DeleteAsync(null));
-        await Assert.ThrowsAsync<ObjectDisposedException>(
-            () => manager.ReplaceClaimAsync(null, null, null)
+        await Assert.ThrowsAsync<ObjectDisposedException>(() =>
+            manager.ReplaceClaimAsync(null, null, null)
         );
-        await Assert.ThrowsAsync<ObjectDisposedException>(
-            () => manager.UpdateSecurityStampAsync(null)
+        await Assert.ThrowsAsync<ObjectDisposedException>(() =>
+            manager.UpdateSecurityStampAsync(null)
         );
-        await Assert.ThrowsAsync<ObjectDisposedException>(
-            () => manager.GetSecurityStampAsync(null)
+        await Assert.ThrowsAsync<ObjectDisposedException>(() =>
+            manager.GetSecurityStampAsync(null)
         );
-        await Assert.ThrowsAsync<ObjectDisposedException>(
-            () => manager.GeneratePasswordResetTokenAsync(null)
+        await Assert.ThrowsAsync<ObjectDisposedException>(() =>
+            manager.GeneratePasswordResetTokenAsync(null)
         );
-        await Assert.ThrowsAsync<ObjectDisposedException>(
-            () => manager.ResetPasswordAsync(null, null, null)
+        await Assert.ThrowsAsync<ObjectDisposedException>(() =>
+            manager.ResetPasswordAsync(null, null, null)
         );
-        await Assert.ThrowsAsync<ObjectDisposedException>(
-            () => manager.GenerateEmailConfirmationTokenAsync(null)
+        await Assert.ThrowsAsync<ObjectDisposedException>(() =>
+            manager.GenerateEmailConfirmationTokenAsync(null)
         );
-        await Assert.ThrowsAsync<ObjectDisposedException>(
-            () => manager.IsEmailConfirmedAsync(null)
+        await Assert.ThrowsAsync<ObjectDisposedException>(() =>
+            manager.IsEmailConfirmedAsync(null)
         );
-        await Assert.ThrowsAsync<ObjectDisposedException>(
-            () => manager.ConfirmEmailAsync(null, null)
+        await Assert.ThrowsAsync<ObjectDisposedException>(() =>
+            manager.ConfirmEmailAsync(null, null)
         );
     }
 

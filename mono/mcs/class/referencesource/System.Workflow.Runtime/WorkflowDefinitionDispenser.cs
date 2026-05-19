@@ -1,29 +1,29 @@
 #region Imports
 
 using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using System.ComponentModel;
 using System.ComponentModel.Design;
 using System.ComponentModel.Design.Serialization;
-using System.Diagnostics;
-using System.Collections;
-using System.Collections.Generic;
-using System.Collections.Specialized;
-using System.Collections.ObjectModel;
 using System.Configuration;
-using System.Reflection;
-using System.Threading;
+using System.Diagnostics;
 using System.Globalization;
 using System.IO;
-using System.Xml;
-using System.Text;
-using System.Workflow.Runtime.Hosting;
-using System.Workflow.Runtime.Configuration;
-using System.Workflow.ComponentModel;
-using System.Workflow.Runtime.Tracking;
-using System.Workflow.ComponentModel.Compiler;
-using System.Workflow.ComponentModel.Serialization;
+using System.Reflection;
 using System.Security.Cryptography;
+using System.Text;
+using System.Threading;
+using System.Workflow.ComponentModel;
+using System.Workflow.ComponentModel.Compiler;
 using System.Workflow.ComponentModel.Design;
+using System.Workflow.ComponentModel.Serialization;
+using System.Workflow.Runtime.Configuration;
+using System.Workflow.Runtime.Hosting;
+using System.Workflow.Runtime.Tracking;
+using System.Xml;
 
 #endregion
 
@@ -37,12 +37,21 @@ namespace System.Workflow.Runtime
         private Dictionary<Type, List<PropertyInfo>> workflowOutParameters;
         private WorkflowRuntime workflowRuntime;
         private bool validateOnCreate = true;
-        internal static DependencyProperty WorkflowDefinitionHashCodeProperty = DependencyProperty.RegisterAttached("WorkflowDefinitionHashCode", typeof(byte[]), typeof(WorkflowDefinitionDispenser));
+        internal static DependencyProperty WorkflowDefinitionHashCodeProperty =
+            DependencyProperty.RegisterAttached(
+                "WorkflowDefinitionHashCode",
+                typeof(byte[]),
+                typeof(WorkflowDefinitionDispenser)
+            );
         internal event EventHandler<WorkflowDefinitionEventArgs> WorkflowDefinitionLoaded;
 
         private ReaderWriterLock parametersLock;
 
-        internal WorkflowDefinitionDispenser(WorkflowRuntime runtime, bool validateOnCreate, int capacity)
+        internal WorkflowDefinitionDispenser(
+            WorkflowRuntime runtime,
+            bool validateOnCreate,
+            int capacity
+        )
         {
             if (capacity <= 0)
             {
@@ -63,7 +72,9 @@ namespace System.Workflow.Runtime
             try
             {
                 if (this.workflowOutParameters.ContainsKey(workflowType))
-                    return new ReadOnlyCollection<PropertyInfo>(this.workflowOutParameters[workflowType]);
+                    return new ReadOnlyCollection<PropertyInfo>(
+                        this.workflowOutParameters[workflowType]
+                    );
             }
             finally
             {
@@ -75,12 +86,18 @@ namespace System.Workflow.Runtime
             return GetOutputParameters(rootActivity);
         }
 
-        internal void GetWorkflowTypes(out ReadOnlyCollection<Type> keys, out ReadOnlyCollection<Activity> values)
+        internal void GetWorkflowTypes(
+            out ReadOnlyCollection<Type> keys,
+            out ReadOnlyCollection<Activity> values
+        )
         {
             this.workflowTypes.GetWorkflowDefinitions<Type>(out keys, out values);
         }
 
-        internal void GetWorkflowDefinitions(out ReadOnlyCollection<byte[]> keys, out ReadOnlyCollection<Activity> values)
+        internal void GetWorkflowDefinitions(
+            out ReadOnlyCollection<byte[]> keys,
+            out ReadOnlyCollection<Activity> values
+        )
         {
             this.xomlFragments.GetWorkflowDefinitions<byte[]>(out keys, out values);
         }
@@ -114,7 +131,14 @@ namespace System.Workflow.Runtime
             if (createNew)
                 return LoadRootActivity(workflowType, false, initForRuntime);
             bool exist;
-            root = workflowTypes.GetOrGenerateDefinition(workflowType, null, null, null, initForRuntime, out exist);
+            root = workflowTypes.GetOrGenerateDefinition(
+                workflowType,
+                null,
+                null,
+                null,
+                initForRuntime,
+                out exist
+            );
             if (exist)
             {
                 return root;
@@ -124,17 +148,26 @@ namespace System.Workflow.Runtime
             // and WorkflowCompletedEventArgs.WorkflowDefinition)
             WorkflowDefinitionLock.SetWorkflowDefinitionLockObject(root, new object());
 
-            EventHandler<WorkflowDefinitionEventArgs> localWorkflowDefinitionLoaded = WorkflowDefinitionLoaded;
+            EventHandler<WorkflowDefinitionEventArgs> localWorkflowDefinitionLoaded =
+                WorkflowDefinitionLoaded;
             if (localWorkflowDefinitionLoaded != null)
-                localWorkflowDefinitionLoaded(this.workflowRuntime, new WorkflowDefinitionEventArgs(workflowType));
+                localWorkflowDefinitionLoaded(
+                    this.workflowRuntime,
+                    new WorkflowDefinitionEventArgs(workflowType)
+                );
 
             return root;
         }
 
         // This function will create a new root activity definition tree by deserializing the xoml and the rules file.
-        // The last parameter createNew should be true when the caller is asking for a new definition for performing 
+        // The last parameter createNew should be true when the caller is asking for a new definition for performing
         // dynamic updates instead of a cached definition.
-        internal Activity GetRootActivity(string xomlText, string rulesText, bool createNew, bool initForRuntime)
+        internal Activity GetRootActivity(
+            string xomlText,
+            string rulesText,
+            bool createNew,
+            bool initForRuntime
+        )
         {
             if (string.IsNullOrEmpty(xomlText))
                 throw new ArgumentNullException("xomlText");
@@ -160,7 +193,14 @@ namespace System.Workflow.Runtime
                 return LoadRootActivity(xomlText, rulesText, xomlHashCode, false, initForRuntime);
 
             bool exist;
-            Activity root = xomlFragments.GetOrGenerateDefinition(null, xomlText, rulesText, xomlHashCode, initForRuntime, out exist);
+            Activity root = xomlFragments.GetOrGenerateDefinition(
+                null,
+                xomlText,
+                rulesText,
+                xomlHashCode,
+                initForRuntime,
+                out exist
+            );
             if (exist)
             {
                 return root;
@@ -170,9 +210,13 @@ namespace System.Workflow.Runtime
             // and WorkflowCompletedEventArgs.WorkflowDefinition)
             WorkflowDefinitionLock.SetWorkflowDefinitionLockObject(root, new object());
 
-            EventHandler<WorkflowDefinitionEventArgs> localWorkflowDefinitionLoaded = WorkflowDefinitionLoaded;
+            EventHandler<WorkflowDefinitionEventArgs> localWorkflowDefinitionLoaded =
+                WorkflowDefinitionLoaded;
             if (localWorkflowDefinitionLoaded != null)
-                localWorkflowDefinitionLoaded(this.workflowRuntime, new WorkflowDefinitionEventArgs(xomlHashCode));
+                localWorkflowDefinitionLoaded(
+                    this.workflowRuntime,
+                    new WorkflowDefinitionEventArgs(xomlHashCode)
+                );
 
             return root;
         }
@@ -184,7 +228,7 @@ namespace System.Workflow.Runtime
 
             ValidationErrorCollection errors = new ValidationErrorCollection();
 
-            // For validation purposes, create a type provider in the type case if the 
+            // For validation purposes, create a type provider in the type case if the
             // host did not push one.
             if (typeProvider == null)
                 typeProvider = WorkflowRuntime.CreateTypeProvider(root);
@@ -192,8 +236,17 @@ namespace System.Workflow.Runtime
             // Validate that we are purely XAML.
             if (!isNewType)
             {
-                if (!string.IsNullOrEmpty(root.GetValue(WorkflowMarkupSerializer.XClassProperty) as string))
-                    errors.Add(new ValidationError(ExecutionStringManager.XomlWorkflowHasClassName, ErrorNumbers.Error_XomlWorkflowHasClassName));
+                if (
+                    !string.IsNullOrEmpty(
+                        root.GetValue(WorkflowMarkupSerializer.XClassProperty) as string
+                    )
+                )
+                    errors.Add(
+                        new ValidationError(
+                            ExecutionStringManager.XomlWorkflowHasClassName,
+                            ErrorNumbers.Error_XomlWorkflowHasClassName
+                        )
+                    );
 
                 Queue compositeActivities = new Queue();
                 compositeActivities.Enqueue(root);
@@ -202,7 +255,12 @@ namespace System.Workflow.Runtime
                     Activity activity = compositeActivities.Dequeue() as Activity;
 
                     if (activity.GetValue(WorkflowMarkupSerializer.XCodeProperty) != null)
-                        errors.Add(new ValidationError(ExecutionStringManager.XomlWorkflowHasCode, ErrorNumbers.Error_XomlWorkflowHasCode));
+                        errors.Add(
+                            new ValidationError(
+                                ExecutionStringManager.XomlWorkflowHasCode,
+                                ErrorNumbers.Error_XomlWorkflowHasCode
+                            )
+                        );
 
                     CompositeActivity compositeActivity = activity as CompositeActivity;
                     if (compositeActivity != null)
@@ -231,7 +289,10 @@ namespace System.Workflow.Runtime
                 }
             }
             if (errors.HasErrors)
-                throw new WorkflowValidationFailedException(ExecutionStringManager.WorkflowValidationFailure, errors);
+                throw new WorkflowValidationFailedException(
+                    ExecutionStringManager.WorkflowValidationFailure,
+                    errors
+                );
         }
 
         public void Dispose()
@@ -240,14 +301,26 @@ namespace System.Workflow.Runtime
             workflowTypes.Dispose();
         }
 
-        private Activity LoadRootActivity(Type workflowType, bool createDefinition, bool initForRuntime)
+        private Activity LoadRootActivity(
+            Type workflowType,
+            bool createDefinition,
+            bool initForRuntime
+        )
         {
             WorkflowLoaderService loader = workflowRuntime.GetService<WorkflowLoaderService>();
             Activity root = loader.CreateInstance(workflowType);
             if (root == null)
-                throw new InvalidOperationException(ExecutionStringManager.CannotCreateRootActivity);
+                throw new InvalidOperationException(
+                    ExecutionStringManager.CannotCreateRootActivity
+                );
             if (root.GetType() != workflowType)
-                throw new InvalidOperationException(String.Format(CultureInfo.CurrentCulture, ExecutionStringManager.WorkflowTypeMismatch, workflowType.FullName));
+                throw new InvalidOperationException(
+                    String.Format(
+                        CultureInfo.CurrentCulture,
+                        ExecutionStringManager.WorkflowTypeMismatch,
+                        workflowType.FullName
+                    )
+                );
 
             if (createDefinition)
                 ValidateDefinition(root, true, workflowRuntime.GetService<ITypeProvider>());
@@ -260,7 +333,13 @@ namespace System.Workflow.Runtime
             return root;
         }
 
-        private Activity LoadRootActivity(string xomlText, string rulesText, byte[] xomlHashCode, bool createDefinition, bool initForRuntime)
+        private Activity LoadRootActivity(
+            string xomlText,
+            string rulesText,
+            byte[] xomlHashCode,
+            bool createDefinition,
+            bool initForRuntime
+        )
         {
             Activity root = null;
             WorkflowLoaderService loader = workflowRuntime.GetService<WorkflowLoaderService>();
@@ -291,7 +370,9 @@ namespace System.Workflow.Runtime
             }
 
             if (root == null)
-                throw new InvalidOperationException(ExecutionStringManager.CannotCreateRootActivity);
+                throw new InvalidOperationException(
+                    ExecutionStringManager.CannotCreateRootActivity
+                );
 
             if (createDefinition)
             {
@@ -330,13 +411,23 @@ namespace System.Workflow.Runtime
                 PropertyInfo[] properties = workflowType.GetProperties();
                 foreach (PropertyInfo property in properties)
                 {
-                    if (!property.CanRead || property.DeclaringType == typeof(DependencyObject) || property.DeclaringType == typeof(Activity) || property.DeclaringType == typeof(CompositeActivity))
+                    if (
+                        !property.CanRead
+                        || property.DeclaringType == typeof(DependencyObject)
+                        || property.DeclaringType == typeof(Activity)
+                        || property.DeclaringType == typeof(CompositeActivity)
+                    )
                         continue;
 
                     bool ignoreProperty = false;
-                    foreach (DependencyProperty dependencyProperty in rootActivity.MetaDependencyProperties)
+                    foreach (
+                        DependencyProperty dependencyProperty in rootActivity.MetaDependencyProperties
+                    )
                     {
-                        if (dependencyProperty.Name == property.Name && dependencyProperty.DefaultMetadata.IsMetaProperty)
+                        if (
+                            dependencyProperty.Name == property.Name
+                            && dependencyProperty.DefaultMetadata.IsMetaProperty
+                        )
                         {
                             ignoreProperty = true;
                             break;
@@ -427,7 +518,14 @@ namespace System.Workflow.Runtime
                 }
             }
 
-            internal Activity GetOrGenerateDefinition(Type type, string xomlText, string rulesText, byte[] md5Codes, bool initForRuntime, out bool exist)
+            internal Activity GetOrGenerateDefinition(
+                Type type,
+                string xomlText,
+                string rulesText,
+                byte[] md5Codes,
+                bool initForRuntime,
+                out bool exist
+            )
             {
                 LinkedListNode<Activity> node;
                 object key;
@@ -483,11 +581,21 @@ namespace System.Workflow.Runtime
                                 Activity activity;
                                 if (type != null)
                                 {
-                                    activity = this.dispenser.LoadRootActivity(type, true, initForRuntime);
+                                    activity = this.dispenser.LoadRootActivity(
+                                        type,
+                                        true,
+                                        initForRuntime
+                                    );
                                 }
                                 else
                                 {
-                                    activity = this.dispenser.LoadRootActivity(xomlText, rulesText, key as byte[], true, initForRuntime);
+                                    activity = this.dispenser.LoadRootActivity(
+                                        xomlText,
+                                        rulesText,
+                                        key as byte[],
+                                        true,
+                                        initForRuntime
+                                    );
                                 }
                                 lock (this.mruList)
                                 {
@@ -515,11 +623,17 @@ namespace System.Workflow.Runtime
                 return node.Value;
             }
 
-            internal void GetWorkflowDefinitions<K>(out ReadOnlyCollection<K> keys, out ReadOnlyCollection<Activity> values)
+            internal void GetWorkflowDefinitions<K>(
+                out ReadOnlyCollection<K> keys,
+                out ReadOnlyCollection<Activity> values
+            )
             {
                 lock (this.hashtable)
                 {
-                    if (((typeof(K) == typeof(Type)) && (this.type == CacheType.Type)) || ((typeof(K) == typeof(byte[])) && (this.type == CacheType.Xoml)))
+                    if (
+                        ((typeof(K) == typeof(Type)) && (this.type == CacheType.Type))
+                        || ((typeof(K) == typeof(byte[])) && (this.type == CacheType.Xoml))
+                    )
                     {
                         List<K> keyList = new List<K>();
                         foreach (K key in this.hashtable.Keys)
@@ -550,9 +664,8 @@ namespace System.Workflow.Runtime
                     {
                         node.Value.Dispose();
                     }
-                    catch (Exception)//ignore any dispose exception.
-                    {
-                    }
+                    catch (Exception) //ignore any dispose exception.
+                    { }
                 }
             }
         }
@@ -560,6 +673,7 @@ namespace System.Workflow.Runtime
         private class DigestComparerWrapper : IEqualityComparer
         {
             IEqualityComparer<byte[]> comparer = (IEqualityComparer<byte[]>)new DigestComparer();
+
             bool IEqualityComparer.Equals(object object1, object object2)
             {
                 return comparer.Equals((byte[])object1, (byte[])object2);
@@ -570,12 +684,17 @@ namespace System.Workflow.Runtime
                 return comparer.GetHashCode((byte[])obj);
             }
         }
-
     }
 
     internal class WorkflowDefinitionLock : IDisposable
     {
-        internal static readonly DependencyProperty WorkflowDefinitionLockObjectProperty = DependencyProperty.RegisterAttached("WorkflowDefinitionLockObject", typeof(object), typeof(WorkflowDefinitionLock), new PropertyMetadata(DependencyPropertyOptions.NonSerialized));
+        internal static readonly DependencyProperty WorkflowDefinitionLockObjectProperty =
+            DependencyProperty.RegisterAttached(
+                "WorkflowDefinitionLockObject",
+                typeof(object),
+                typeof(WorkflowDefinitionLock),
+                new PropertyMetadata(DependencyPropertyOptions.NonSerialized)
+            );
 
         internal static object GetWorkflowDefinitionLockObject(DependencyObject dependencyObject)
         {
@@ -587,7 +706,10 @@ namespace System.Workflow.Runtime
             }
         }
 
-        internal static void SetWorkflowDefinitionLockObject(DependencyObject dependencyObject, object value)
+        internal static void SetWorkflowDefinitionLockObject(
+            DependencyObject dependencyObject,
+            object value
+        )
         {
             lock (dependencyObject)
             {
@@ -604,7 +726,10 @@ namespace System.Workflow.Runtime
         {
             this._syncObj = GetWorkflowDefinitionLockObject(definition);
 
-            Debug.Assert(this._syncObj != null, "Definition's synchronization object was null.  This should always be set.");
+            Debug.Assert(
+                this._syncObj != null,
+                "Definition's synchronization object was null.  This should always be set."
+            );
 
 #pragma warning disable 0618
             //@

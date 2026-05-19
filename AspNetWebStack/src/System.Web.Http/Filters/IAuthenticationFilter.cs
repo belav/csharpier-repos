@@ -13,12 +13,18 @@ namespace System.Web.Http.Filters
         /// <param name="context">The authentication context.</param>
         /// <param name="cancellationToken">The token to monitor for cancellation requests.</param>
         /// <returns>A <see cref="Task"/> that will perform authentication.</returns>
-        Task AuthenticateAsync(HttpAuthenticationContext context, CancellationToken cancellationToken);
+        Task AuthenticateAsync(
+            HttpAuthenticationContext context,
+            CancellationToken cancellationToken
+        );
 
         /// <summary>Adds an authentication challenge to the inner <see cref="IHttpActionResult"/>.</summary>
         /// <param name="context">The authentication challenge context.</param>
         /// <param name="cancellationToken">The token to monitor for cancellation requests.</param>
         /// <returns>A <see cref="Task"/> that will perform the authentication challenge.</returns>
-        Task ChallengeAsync(HttpAuthenticationChallengeContext context, CancellationToken cancellationToken);
+        Task ChallengeAsync(
+            HttpAuthenticationChallengeContext context,
+            CancellationToken cancellationToken
+        );
     }
 }
