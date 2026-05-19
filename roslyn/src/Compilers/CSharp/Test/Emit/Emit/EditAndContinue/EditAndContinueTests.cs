@@ -95,13 +95,13 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue.UnitTests
                         g.VerifyEncMapDefinitions(new[] { Handle(2, TableIndex.MethodDef) });
 
                         var expectedIL = """
-                        {
-                          // Code size        6 (0x6)
-                          .maxstack  8
-                          IL_0000:  newobj     0x0A000005
-                          IL_0005:  throw
-                        }
-                        """;
+                            {
+                              // Code size        6 (0x6)
+                              .maxstack  8
+                              IL_0000:  newobj     0x0A000005
+                              IL_0005:  throw
+                            }
+                            """;
 
                         // Can't verify the IL of individual methods because that requires IMethodSymbolInternal implementations
                         g.VerifyIL(expectedIL);
@@ -4938,13 +4938,13 @@ class C
                         );
 
                         var expectedIL = """
-                        {
-                          // Code size        6 (0x6)
-                          .maxstack  8
-                          IL_0000:  newobj     0x0A000007
-                          IL_0005:  throw
-                        }
-                        """;
+                            {
+                              // Code size        6 (0x6)
+                              .maxstack  8
+                              IL_0000:  newobj     0x0A000007
+                              IL_0005:  throw
+                            }
+                            """;
 
                         // Can't verify the IL of individual methods because that requires IMethodSymbolInternal implementations
                         g.VerifyIL(expectedIL);
@@ -5009,22 +5009,22 @@ class C
                         );
 
                         var expectedIL = """
-                        {
-                          // Code size        7 (0x7)
-                          .maxstack  8
-                          IL_0000:  ldarg.0
-                          IL_0001:  ldfld      0x04000001
-                          IL_0006:  ret
-                        }
-                        {
-                          // Code size        8 (0x8)
-                          .maxstack  8
-                          IL_0000:  ldarg.0
-                          IL_0001:  ldarg.1
-                          IL_0002:  stfld      0x04000001
-                          IL_0007:  ret
-                        }
-                        """;
+                            {
+                              // Code size        7 (0x7)
+                              .maxstack  8
+                              IL_0000:  ldarg.0
+                              IL_0001:  ldfld      0x04000001
+                              IL_0006:  ret
+                            }
+                            {
+                              // Code size        8 (0x8)
+                              .maxstack  8
+                              IL_0000:  ldarg.0
+                              IL_0001:  ldarg.1
+                              IL_0002:  stfld      0x04000001
+                              IL_0007:  ret
+                            }
+                            """;
 
                         // Can't verify the IL of individual methods because that requires IMethodSymbolInternal implementations
                         g.VerifyIL(expectedIL);
@@ -5097,13 +5097,13 @@ class C
                         );
 
                         var expectedIL = """
-                        {
-                          // Code size        6 (0x6)
-                          .maxstack  8
-                          IL_0000:  newobj     0x0A000005
-                          IL_0005:  throw
-                        }
-                        """;
+                            {
+                              // Code size        6 (0x6)
+                              .maxstack  8
+                              IL_0000:  newobj     0x0A000005
+                              IL_0005:  throw
+                            }
+                            """;
 
                         // Can't verify the IL of individual methods because that requires IMethodSymbolInternal implementations
                         g.VerifyIL(expectedIL);
@@ -5184,22 +5184,22 @@ class C
                         );
 
                         var expectedIL = """
-                        {
-                          // Code size        7 (0x7)
-                          .maxstack  8
-                          IL_0000:  ldarg.0
-                          IL_0001:  ldfld      0x04000001
-                          IL_0006:  ret
-                        }
-                        {
-                          // Code size        8 (0x8)
-                          .maxstack  8
-                          IL_0000:  ldarg.0
-                          IL_0001:  ldarg.1
-                          IL_0002:  stfld      0x04000001
-                          IL_0007:  ret
-                        }
-                        """;
+                            {
+                              // Code size        7 (0x7)
+                              .maxstack  8
+                              IL_0000:  ldarg.0
+                              IL_0001:  ldfld      0x04000001
+                              IL_0006:  ret
+                            }
+                            {
+                              // Code size        8 (0x8)
+                              .maxstack  8
+                              IL_0000:  ldarg.0
+                              IL_0001:  ldarg.1
+                              IL_0002:  stfld      0x04000001
+                              IL_0007:  ret
+                            }
+                            """;
 
                         // Can't verify the IL of individual methods because that requires IMethodSymbolInternal implementations
                         g.VerifyIL(expectedIL);
@@ -5272,13 +5272,13 @@ class C
                         );
 
                         var expectedIL = """
-                        {
-                          // Code size        6 (0x6)
-                          .maxstack  8
-                          IL_0000:  newobj     0x0A000005
-                          IL_0005:  throw
-                        }
-                        """;
+                            {
+                              // Code size        6 (0x6)
+                              .maxstack  8
+                              IL_0000:  newobj     0x0A000005
+                              IL_0005:  throw
+                            }
+                            """;
 
                         // Can't verify the IL of individual methods because that requires IMethodSymbolInternal implementations
                         g.VerifyIL(expectedIL);
@@ -5336,23 +5336,23 @@ class C
                         );
 
                         var expectedIL = """
-                        {
-                          // Code size       11 (0xb)
-                          .maxstack  1
-                          IL_0000:  nop
-                          IL_0001:  ldstr      0x7000000D
-                          IL_0006:  stloc.0
-                          IL_0007:  br.s       IL_0009
-                          IL_0009:  ldloc.0
-                          IL_000a:  ret
-                        }
-                        {
-                          // Code size        2 (0x2)
-                          .maxstack  8
-                          IL_0000:  nop
-                          IL_0001:  ret
-                        }
-                        """;
+                            {
+                              // Code size       11 (0xb)
+                              .maxstack  1
+                              IL_0000:  nop
+                              IL_0001:  ldstr      0x7000000D
+                              IL_0006:  stloc.0
+                              IL_0007:  br.s       IL_0009
+                              IL_0009:  ldloc.0
+                              IL_000a:  ret
+                            }
+                            {
+                              // Code size        2 (0x2)
+                              .maxstack  8
+                              IL_0000:  nop
+                              IL_0001:  ret
+                            }
+                            """;
 
                         // Can't verify the IL of individual methods because that requires IMethodSymbolInternal implementations
                         g.VerifyIL(expectedIL);
@@ -5406,13 +5406,13 @@ class C
                         g.VerifyEncMapDefinitions(new[] { Handle(2, TableIndex.MethodDef) });
 
                         var expectedIL = """
-                        {
-                          // Code size        6 (0x6)
-                          .maxstack  8
-                          IL_0000:  newobj     0x0A000005
-                          IL_0005:  throw
-                        }
-                        """;
+                            {
+                              // Code size        6 (0x6)
+                              .maxstack  8
+                              IL_0000:  newobj     0x0A000005
+                              IL_0005:  throw
+                            }
+                            """;
 
                         // Can't verify the IL of individual methods because that requires IMethodSymbolInternal implementations
                         g.VerifyIL(expectedIL);
@@ -5469,23 +5469,23 @@ class C
                         );
 
                         var expectedIL = """
-                        {
-                          // Code size       11 (0xb)
-                          .maxstack  1
-                          IL_0000:  nop
-                          IL_0001:  ldstr      0x7000000D
-                          IL_0006:  stloc.0
-                          IL_0007:  br.s       IL_0009
-                          IL_0009:  ldloc.0
-                          IL_000a:  ret
-                        }
-                        {
-                          // Code size        2 (0x2)
-                          .maxstack  8
-                          IL_0000:  nop
-                          IL_0001:  ret
-                        }
-                        """;
+                            {
+                              // Code size       11 (0xb)
+                              .maxstack  1
+                              IL_0000:  nop
+                              IL_0001:  ldstr      0x7000000D
+                              IL_0006:  stloc.0
+                              IL_0007:  br.s       IL_0009
+                              IL_0009:  ldloc.0
+                              IL_000a:  ret
+                            }
+                            {
+                              // Code size        2 (0x2)
+                              .maxstack  8
+                              IL_0000:  nop
+                              IL_0001:  ret
+                            }
+                            """;
 
                         // Can't verify the IL of individual methods because that requires IMethodSymbolInternal implementations
                         g.VerifyIL(expectedIL);
@@ -5616,28 +5616,28 @@ class C
                         );
 
                         var expectedIL = """
-                        {
-                          // Code size        6 (0x6)
-                          .maxstack  8
-                          IL_0000:  newobj     0x0A000009
-                          IL_0005:  throw
-                        }
-                        {
-                          // Code size        7 (0x7)
-                          .maxstack  8
-                          IL_0000:  ldarg.0
-                          IL_0001:  ldfld      0x04000002
-                          IL_0006:  ret
-                        }
-                        {
-                          // Code size        8 (0x8)
-                          .maxstack  8
-                          IL_0000:  ldarg.0
-                          IL_0001:  ldarg.1
-                          IL_0002:  stfld      0x04000002
-                          IL_0007:  ret
-                        }
-                        """;
+                            {
+                              // Code size        6 (0x6)
+                              .maxstack  8
+                              IL_0000:  newobj     0x0A000009
+                              IL_0005:  throw
+                            }
+                            {
+                              // Code size        7 (0x7)
+                              .maxstack  8
+                              IL_0000:  ldarg.0
+                              IL_0001:  ldfld      0x04000002
+                              IL_0006:  ret
+                            }
+                            {
+                              // Code size        8 (0x8)
+                              .maxstack  8
+                              IL_0000:  ldarg.0
+                              IL_0001:  ldarg.1
+                              IL_0002:  stfld      0x04000002
+                              IL_0007:  ret
+                            }
+                            """;
 
                         // Can't verify the IL of individual methods because that requires IMethodSymbolInternal implementations
                         g.VerifyIL(expectedIL);
@@ -5725,28 +5725,28 @@ class C
                         );
 
                         var expectedIL = """
-                        {
-                          // Code size        7 (0x7)
-                          .maxstack  8
-                          IL_0000:  ldarg.0
-                          IL_0001:  ldfld      0x04000001
-                          IL_0006:  ret
-                        }
-                        {
-                          // Code size        8 (0x8)
-                          .maxstack  8
-                          IL_0000:  ldarg.0
-                          IL_0001:  ldarg.1
-                          IL_0002:  stfld      0x04000001
-                          IL_0007:  ret
-                        }
-                        {
-                          // Code size        6 (0x6)
-                          .maxstack  8
-                          IL_0000:  newobj     0x0A00000C
-                          IL_0005:  throw
-                        }
-                        """;
+                            {
+                              // Code size        7 (0x7)
+                              .maxstack  8
+                              IL_0000:  ldarg.0
+                              IL_0001:  ldfld      0x04000001
+                              IL_0006:  ret
+                            }
+                            {
+                              // Code size        8 (0x8)
+                              .maxstack  8
+                              IL_0000:  ldarg.0
+                              IL_0001:  ldarg.1
+                              IL_0002:  stfld      0x04000001
+                              IL_0007:  ret
+                            }
+                            {
+                              // Code size        6 (0x6)
+                              .maxstack  8
+                              IL_0000:  newobj     0x0A00000C
+                              IL_0005:  throw
+                            }
+                            """;
 
                         // Can't verify the IL of individual methods because that requires IMethodSymbolInternal implementations
                         g.VerifyIL(expectedIL);
@@ -5877,28 +5877,28 @@ class C
                         );
 
                         var expectedIL = """
-                        {
-                          // Code size        6 (0x6)
-                          .maxstack  8
-                          IL_0000:  newobj     0x0A000009
-                          IL_0005:  throw
-                        }
-                        {
-                          // Code size        7 (0x7)
-                          .maxstack  8
-                          IL_0000:  ldarg.0
-                          IL_0001:  ldfld      0x04000002
-                          IL_0006:  ret
-                        }
-                        {
-                          // Code size        8 (0x8)
-                          .maxstack  8
-                          IL_0000:  ldarg.0
-                          IL_0001:  ldarg.1
-                          IL_0002:  stfld      0x04000002
-                          IL_0007:  ret
-                        }
-                        """;
+                            {
+                              // Code size        6 (0x6)
+                              .maxstack  8
+                              IL_0000:  newobj     0x0A000009
+                              IL_0005:  throw
+                            }
+                            {
+                              // Code size        7 (0x7)
+                              .maxstack  8
+                              IL_0000:  ldarg.0
+                              IL_0001:  ldfld      0x04000002
+                              IL_0006:  ret
+                            }
+                            {
+                              // Code size        8 (0x8)
+                              .maxstack  8
+                              IL_0000:  ldarg.0
+                              IL_0001:  ldarg.1
+                              IL_0002:  stfld      0x04000002
+                              IL_0007:  ret
+                            }
+                            """;
 
                         // Can't verify the IL of individual methods because that requires IMethodSymbolInternal implementations
                         g.VerifyIL(expectedIL);
@@ -5986,28 +5986,28 @@ class C
                         );
 
                         var expectedIL = """
-                        {
-                          // Code size        7 (0x7)
-                          .maxstack  8
-                          IL_0000:  ldarg.0
-                          IL_0001:  ldfld      0x04000001
-                          IL_0006:  ret
-                        }
-                        {
-                          // Code size        8 (0x8)
-                          .maxstack  8
-                          IL_0000:  ldarg.0
-                          IL_0001:  ldarg.1
-                          IL_0002:  stfld      0x04000001
-                          IL_0007:  ret
-                        }
-                        {
-                          // Code size        6 (0x6)
-                          .maxstack  8
-                          IL_0000:  newobj     0x0A00000C
-                          IL_0005:  throw
-                        }
-                        """;
+                            {
+                              // Code size        7 (0x7)
+                              .maxstack  8
+                              IL_0000:  ldarg.0
+                              IL_0001:  ldfld      0x04000001
+                              IL_0006:  ret
+                            }
+                            {
+                              // Code size        8 (0x8)
+                              .maxstack  8
+                              IL_0000:  ldarg.0
+                              IL_0001:  ldarg.1
+                              IL_0002:  stfld      0x04000001
+                              IL_0007:  ret
+                            }
+                            {
+                              // Code size        6 (0x6)
+                              .maxstack  8
+                              IL_0000:  newobj     0x0A00000C
+                              IL_0005:  throw
+                            }
+                            """;
 
                         // Can't verify the IL of individual methods because that requires IMethodSymbolInternal implementations
                         g.VerifyIL(expectedIL);
@@ -6081,13 +6081,13 @@ class C
                         );
 
                         var expectedIL = """
-                        {
-                          // Code size        6 (0x6)
-                          .maxstack  8
-                          IL_0000:  newobj     0x0A000006
-                          IL_0005:  throw
-                        }
-                        """;
+                            {
+                              // Code size        6 (0x6)
+                              .maxstack  8
+                              IL_0000:  newobj     0x0A000006
+                              IL_0005:  throw
+                            }
+                            """;
 
                         // Can't verify the IL of individual methods because that requires IMethodSymbolInternal implementations
                         g.VerifyIL(expectedIL);
@@ -6176,23 +6176,23 @@ class C
                         );
 
                         var expectedIL = """
-                        {
-                          // Code size        6 (0x6)
-                          .maxstack  8
-                          IL_0000:  newobj     0x0A000007
-                          IL_0005:  throw
-                        }
-                        {
-                          // Code size        7 (0x7)
-                          .maxstack  1
-                          IL_0000:  nop
-                          IL_0001:  ldc.i4.2
-                          IL_0002:  stloc.0
-                          IL_0003:  br.s       IL_0005
-                          IL_0005:  ldloc.0
-                          IL_0006:  ret
-                        }
-                        """;
+                            {
+                              // Code size        6 (0x6)
+                              .maxstack  8
+                              IL_0000:  newobj     0x0A000007
+                              IL_0005:  throw
+                            }
+                            {
+                              // Code size        7 (0x7)
+                              .maxstack  1
+                              IL_0000:  nop
+                              IL_0001:  ldc.i4.2
+                              IL_0002:  stloc.0
+                              IL_0003:  br.s       IL_0005
+                              IL_0005:  ldloc.0
+                              IL_0006:  ret
+                            }
+                            """;
 
                         // Can't verify the IL of individual methods because that requires IMethodSymbolInternal implementations
                         g.VerifyIL(expectedIL);
@@ -6254,23 +6254,23 @@ class C
                         );
 
                         var expectedIL = """
-                        {
-                          // Code size        7 (0x7)
-                          .maxstack  1
-                          IL_0000:  nop
-                          IL_0001:  ldc.i4.2
-                          IL_0002:  stloc.0
-                          IL_0003:  br.s       IL_0005
-                          IL_0005:  ldloc.0
-                          IL_0006:  ret
-                        }
-                        {
-                          // Code size        6 (0x6)
-                          .maxstack  8
-                          IL_0000:  newobj     0x0A000009
-                          IL_0005:  throw
-                        }
-                        """;
+                            {
+                              // Code size        7 (0x7)
+                              .maxstack  1
+                              IL_0000:  nop
+                              IL_0001:  ldc.i4.2
+                              IL_0002:  stloc.0
+                              IL_0003:  br.s       IL_0005
+                              IL_0005:  ldloc.0
+                              IL_0006:  ret
+                            }
+                            {
+                              // Code size        6 (0x6)
+                              .maxstack  8
+                              IL_0000:  newobj     0x0A000009
+                              IL_0005:  throw
+                            }
+                            """;
 
                         // Can't verify the IL of individual methods because that requires IMethodSymbolInternal implementations
                         g.VerifyIL(expectedIL);
@@ -6333,17 +6333,17 @@ class C
                         );
 
                         var expectedIL = """
-                        {
-                          // Code size        7 (0x7)
-                          .maxstack  1
-                          IL_0000:  nop
-                          IL_0001:  ldc.i4.3
-                          IL_0002:  stloc.0
-                          IL_0003:  br.s       IL_0005
-                          IL_0005:  ldloc.0
-                          IL_0006:  ret
-                        }
-                        """;
+                            {
+                              // Code size        7 (0x7)
+                              .maxstack  1
+                              IL_0000:  nop
+                              IL_0001:  ldc.i4.3
+                              IL_0002:  stloc.0
+                              IL_0003:  br.s       IL_0005
+                              IL_0005:  ldloc.0
+                              IL_0006:  ret
+                            }
+                            """;
 
                         // Can't verify the IL of individual methods because that requires IMethodSymbolInternal implementations
                         g.VerifyIL(expectedIL);
@@ -6649,13 +6649,13 @@ class C
                         );
 
                         var expectedIL = """
-                        {
-                          // Code size        6 (0x6)
-                          .maxstack  8
-                          IL_0000:  newobj     0x0A00000A
-                          IL_0005:  throw
-                        }
-                        """;
+                            {
+                              // Code size        6 (0x6)
+                              .maxstack  8
+                              IL_0000:  newobj     0x0A00000A
+                              IL_0005:  throw
+                            }
+                            """;
 
                         // Can't verify the IL of individual methods because that requires IMethodSymbolInternal implementations
                         g.VerifyIL(expectedIL);
@@ -6785,61 +6785,61 @@ class C
                         );
 
                         var expectedIL = """
-                        {
-                          // Code size        6 (0x6)
-                          .maxstack  8
-                          IL_0000:  newobj     0x0A00000C
-                          IL_0005:  throw
-                        }
-                        {
-                          // Code size       41 (0x29)
-                          .maxstack  3
-                          IL_0000:  ldarg.0
-                          IL_0001:  ldfld      0x04000002
-                          IL_0006:  stloc.0
-                          IL_0007:  ldloc.0
-                          IL_0008:  stloc.1
-                          IL_0009:  ldloc.1
-                          IL_000a:  ldarg.1
-                          IL_000b:  call       0x0A00000D
-                          IL_0010:  castclass  0x0100000D
-                          IL_0015:  stloc.2
-                          IL_0016:  ldarg.0
-                          IL_0017:  ldflda     0x04000002
-                          IL_001c:  ldloc.2
-                          IL_001d:  ldloc.1
-                          IL_001e:  call       0x2B000002
-                          IL_0023:  stloc.0
-                          IL_0024:  ldloc.0
-                          IL_0025:  ldloc.1
-                          IL_0026:  bne.un.s   IL_0007
-                          IL_0028:  ret
-                        }
-                        {
-                          // Code size       41 (0x29)
-                          .maxstack  3
-                          IL_0000:  ldarg.0
-                          IL_0001:  ldfld      0x04000002
-                          IL_0006:  stloc.0
-                          IL_0007:  ldloc.0
-                          IL_0008:  stloc.1
-                          IL_0009:  ldloc.1
-                          IL_000a:  ldarg.1
-                          IL_000b:  call       0x0A00000F
-                          IL_0010:  castclass  0x0100000D
-                          IL_0015:  stloc.2
-                          IL_0016:  ldarg.0
-                          IL_0017:  ldflda     0x04000002
-                          IL_001c:  ldloc.2
-                          IL_001d:  ldloc.1
-                          IL_001e:  call       0x2B000002
-                          IL_0023:  stloc.0
-                          IL_0024:  ldloc.0
-                          IL_0025:  ldloc.1
-                          IL_0026:  bne.un.s   IL_0007
-                          IL_0028:  ret
-                        }
-                        """;
+                            {
+                              // Code size        6 (0x6)
+                              .maxstack  8
+                              IL_0000:  newobj     0x0A00000C
+                              IL_0005:  throw
+                            }
+                            {
+                              // Code size       41 (0x29)
+                              .maxstack  3
+                              IL_0000:  ldarg.0
+                              IL_0001:  ldfld      0x04000002
+                              IL_0006:  stloc.0
+                              IL_0007:  ldloc.0
+                              IL_0008:  stloc.1
+                              IL_0009:  ldloc.1
+                              IL_000a:  ldarg.1
+                              IL_000b:  call       0x0A00000D
+                              IL_0010:  castclass  0x0100000D
+                              IL_0015:  stloc.2
+                              IL_0016:  ldarg.0
+                              IL_0017:  ldflda     0x04000002
+                              IL_001c:  ldloc.2
+                              IL_001d:  ldloc.1
+                              IL_001e:  call       0x2B000002
+                              IL_0023:  stloc.0
+                              IL_0024:  ldloc.0
+                              IL_0025:  ldloc.1
+                              IL_0026:  bne.un.s   IL_0007
+                              IL_0028:  ret
+                            }
+                            {
+                              // Code size       41 (0x29)
+                              .maxstack  3
+                              IL_0000:  ldarg.0
+                              IL_0001:  ldfld      0x04000002
+                              IL_0006:  stloc.0
+                              IL_0007:  ldloc.0
+                              IL_0008:  stloc.1
+                              IL_0009:  ldloc.1
+                              IL_000a:  ldarg.1
+                              IL_000b:  call       0x0A00000F
+                              IL_0010:  castclass  0x0100000D
+                              IL_0015:  stloc.2
+                              IL_0016:  ldarg.0
+                              IL_0017:  ldflda     0x04000002
+                              IL_001c:  ldloc.2
+                              IL_001d:  ldloc.1
+                              IL_001e:  call       0x2B000002
+                              IL_0023:  stloc.0
+                              IL_0024:  ldloc.0
+                              IL_0025:  ldloc.1
+                              IL_0026:  bne.un.s   IL_0007
+                              IL_0028:  ret
+                            }
+                            """;
 
                         // Can't verify the IL of individual methods because that requires IMethodSymbolInternal implementations
                         g.VerifyIL(expectedIL);
@@ -6929,61 +6929,61 @@ class C
                         );
 
                         var expectedIL = """
-                        {
-                          // Code size       41 (0x29)
-                          .maxstack  3
-                          IL_0000:  ldarg.0
-                          IL_0001:  ldfld      0x04000001
-                          IL_0006:  stloc.0
-                          IL_0007:  ldloc.0
-                          IL_0008:  stloc.1
-                          IL_0009:  ldloc.1
-                          IL_000a:  ldarg.1
-                          IL_000b:  call       0x0A000012
-                          IL_0010:  castclass  0x01000015
-                          IL_0015:  stloc.2
-                          IL_0016:  ldarg.0
-                          IL_0017:  ldflda     0x04000001
-                          IL_001c:  ldloc.2
-                          IL_001d:  ldloc.1
-                          IL_001e:  call       0x2B000003
-                          IL_0023:  stloc.0
-                          IL_0024:  ldloc.0
-                          IL_0025:  ldloc.1
-                          IL_0026:  bne.un.s   IL_0007
-                          IL_0028:  ret
-                        }
-                        {
-                          // Code size       41 (0x29)
-                          .maxstack  3
-                          IL_0000:  ldarg.0
-                          IL_0001:  ldfld      0x04000001
-                          IL_0006:  stloc.0
-                          IL_0007:  ldloc.0
-                          IL_0008:  stloc.1
-                          IL_0009:  ldloc.1
-                          IL_000a:  ldarg.1
-                          IL_000b:  call       0x0A000014
-                          IL_0010:  castclass  0x01000015
-                          IL_0015:  stloc.2
-                          IL_0016:  ldarg.0
-                          IL_0017:  ldflda     0x04000001
-                          IL_001c:  ldloc.2
-                          IL_001d:  ldloc.1
-                          IL_001e:  call       0x2B000003
-                          IL_0023:  stloc.0
-                          IL_0024:  ldloc.0
-                          IL_0025:  ldloc.1
-                          IL_0026:  bne.un.s   IL_0007
-                          IL_0028:  ret
-                        }
-                        {
-                          // Code size        6 (0x6)
-                          .maxstack  8
-                          IL_0000:  newobj     0x0A000015
-                          IL_0005:  throw
-                        }
-                        """;
+                            {
+                              // Code size       41 (0x29)
+                              .maxstack  3
+                              IL_0000:  ldarg.0
+                              IL_0001:  ldfld      0x04000001
+                              IL_0006:  stloc.0
+                              IL_0007:  ldloc.0
+                              IL_0008:  stloc.1
+                              IL_0009:  ldloc.1
+                              IL_000a:  ldarg.1
+                              IL_000b:  call       0x0A000012
+                              IL_0010:  castclass  0x01000015
+                              IL_0015:  stloc.2
+                              IL_0016:  ldarg.0
+                              IL_0017:  ldflda     0x04000001
+                              IL_001c:  ldloc.2
+                              IL_001d:  ldloc.1
+                              IL_001e:  call       0x2B000003
+                              IL_0023:  stloc.0
+                              IL_0024:  ldloc.0
+                              IL_0025:  ldloc.1
+                              IL_0026:  bne.un.s   IL_0007
+                              IL_0028:  ret
+                            }
+                            {
+                              // Code size       41 (0x29)
+                              .maxstack  3
+                              IL_0000:  ldarg.0
+                              IL_0001:  ldfld      0x04000001
+                              IL_0006:  stloc.0
+                              IL_0007:  ldloc.0
+                              IL_0008:  stloc.1
+                              IL_0009:  ldloc.1
+                              IL_000a:  ldarg.1
+                              IL_000b:  call       0x0A000014
+                              IL_0010:  castclass  0x01000015
+                              IL_0015:  stloc.2
+                              IL_0016:  ldarg.0
+                              IL_0017:  ldflda     0x04000001
+                              IL_001c:  ldloc.2
+                              IL_001d:  ldloc.1
+                              IL_001e:  call       0x2B000003
+                              IL_0023:  stloc.0
+                              IL_0024:  ldloc.0
+                              IL_0025:  ldloc.1
+                              IL_0026:  bne.un.s   IL_0007
+                              IL_0028:  ret
+                            }
+                            {
+                              // Code size        6 (0x6)
+                              .maxstack  8
+                              IL_0000:  newobj     0x0A000015
+                              IL_0005:  throw
+                            }
+                            """;
 
                         // Can't verify the IL of individual methods because that requires IMethodSymbolInternal implementations
                         g.VerifyIL(expectedIL);
@@ -14756,13 +14756,13 @@ public interface IB
                         g.VerifyEncMapDefinitions(new[] { Handle(1, TableIndex.MethodDef) });
 
                         var expectedIL = """
-                        {
-                          // Code size        6 (0x6)
-                          .maxstack  8
-                          IL_0000:  newobj     0x0A000005
-                          IL_0005:  throw
-                        }
-                        """;
+                            {
+                              // Code size        6 (0x6)
+                              .maxstack  8
+                              IL_0000:  newobj     0x0A000005
+                              IL_0005:  throw
+                            }
+                            """;
 
                         // Can't verify the IL of individual methods because that requires IMethodSymbolInternal implementations
                         g.VerifyIL(expectedIL);
@@ -20138,13 +20138,13 @@ class C
                         g.VerifyEncMapDefinitions(new[] { Handle(1, TableIndex.MethodDef) });
 
                         var expectedIL = """
-                        {
-                          // Code size        6 (0x6)
-                          .maxstack  8
-                          IL_0000:  newobj     0x0A000005
-                          IL_0005:  throw
-                        }
-                        """;
+                            {
+                              // Code size        6 (0x6)
+                              .maxstack  8
+                              IL_0000:  newobj     0x0A000005
+                              IL_0005:  throw
+                            }
+                            """;
 
                         // Can't verify the IL of individual methods because that requires IMethodSymbolInternal implementations
                         g.VerifyIL(expectedIL);
@@ -20202,13 +20202,13 @@ class C
                         g.VerifyEncMapDefinitions(new[] { Handle(3, TableIndex.MethodDef) });
 
                         var expectedIL = """
-                        {
-                          // Code size        2 (0x2)
-                          .maxstack  8
-                          IL_0000:  nop
-                          IL_0001:  ret
-                        }
-                        """;
+                            {
+                              // Code size        2 (0x2)
+                              .maxstack  8
+                              IL_0000:  nop
+                              IL_0001:  ret
+                            }
+                            """;
 
                         // Can't verify the IL of individual methods because that requires IMethodSymbolInternal implementations
                         g.VerifyIL(expectedIL);
@@ -20239,13 +20239,13 @@ class C
                         g.VerifyEncMapDefinitions(new[] { Handle(3, TableIndex.MethodDef) });
 
                         var expectedIL = """
-                        {
-                          // Code size        6 (0x6)
-                          .maxstack  8
-                          IL_0000:  newobj     0x0A000005
-                          IL_0005:  throw
-                        }
-                        """;
+                            {
+                              // Code size        6 (0x6)
+                              .maxstack  8
+                              IL_0000:  newobj     0x0A000005
+                              IL_0005:  throw
+                            }
+                            """;
 
                         // Can't verify the IL of individual methods because that requires IMethodSymbolInternal implementations
                         g.VerifyIL(expectedIL);
@@ -20301,13 +20301,13 @@ class C
                         g.VerifyEncMapDefinitions(new[] { Handle(1, TableIndex.MethodDef) });
 
                         var expectedIL = """
-                        {
-                          // Code size        6 (0x6)
-                          .maxstack  8
-                          IL_0000:  newobj     0x0A000005
-                          IL_0005:  throw
-                        }
-                        """;
+                            {
+                              // Code size        6 (0x6)
+                              .maxstack  8
+                              IL_0000:  newobj     0x0A000005
+                              IL_0005:  throw
+                            }
+                            """;
 
                         // Can't verify the IL of individual methods because that requires IMethodSymbolInternal implementations
                         g.VerifyIL(expectedIL);
@@ -20334,16 +20334,16 @@ class C
                         g.VerifyEncMapDefinitions(new[] { Handle(1, TableIndex.MethodDef) });
 
                         var expectedIL = """
-                        {
-                          // Code size        9 (0x9)
-                          .maxstack  8
-                          IL_0000:  nop
-                          IL_0001:  ldc.i4.1
-                          IL_0002:  call       0x0A000006
-                          IL_0007:  nop
-                          IL_0008:  ret
-                        }
-                        """;
+                            {
+                              // Code size        9 (0x9)
+                              .maxstack  8
+                              IL_0000:  nop
+                              IL_0001:  ldc.i4.1
+                              IL_0002:  call       0x0A000006
+                              IL_0007:  nop
+                              IL_0008:  ret
+                            }
+                            """;
 
                         // Can't verify the IL of individual methods because that requires IMethodSymbolInternal implementations
                         g.VerifyIL(expectedIL);
@@ -20411,13 +20411,13 @@ class C
                         g.VerifyCustomAttributes();
 
                         var expectedIL = """
-                        {
-                          // Code size        6 (0x6)
-                          .maxstack  8
-                          IL_0000:  newobj     0x0A000006
-                          IL_0005:  throw
-                        }
-                        """;
+                            {
+                              // Code size        6 (0x6)
+                              .maxstack  8
+                              IL_0000:  newobj     0x0A000006
+                              IL_0005:  throw
+                            }
+                            """;
 
                         // Can't verify the IL of individual methods because that requires IMethodSymbolInternal implementations
                         g.VerifyIL(expectedIL);
@@ -20497,13 +20497,13 @@ class C
                         );
 
                         var expectedIL = """
-                        {
-                          // Code size        2 (0x2)
-                          .maxstack  8
-                          IL_0000:  nop
-                          IL_0001:  ret
-                        }
-                        """;
+                            {
+                              // Code size        2 (0x2)
+                              .maxstack  8
+                              IL_0000:  nop
+                              IL_0001:  ret
+                            }
+                            """;
 
                         // Can't verify the IL of individual methods because that requires IMethodSymbolInternal implementations
                         g.VerifyIL(expectedIL);
@@ -20571,17 +20571,17 @@ class C
                         );
 
                         var expectedIL = """
-                        {
-                          // Code size        7 (0x7)
-                          .maxstack  1
-                          IL_0000:  nop
-                          IL_0001:  ldnull
-                          IL_0002:  stloc.0
-                          IL_0003:  br.s       IL_0005
-                          IL_0005:  ldloc.0
-                          IL_0006:  ret
-                        }
-                        """;
+                            {
+                              // Code size        7 (0x7)
+                              .maxstack  1
+                              IL_0000:  nop
+                              IL_0001:  ldnull
+                              IL_0002:  stloc.0
+                              IL_0003:  br.s       IL_0005
+                              IL_0005:  ldloc.0
+                              IL_0006:  ret
+                            }
+                            """;
 
                         // Can't verify the IL of individual methods because that requires IMethodSymbolInternal implementations
                         g.VerifyIL(expectedIL);
@@ -20612,13 +20612,13 @@ class C
                         g.VerifyEncMapDefinitions(new[] { Handle(3, TableIndex.MethodDef) });
 
                         var expectedIL = """
-                        {
-                          // Code size        6 (0x6)
-                          .maxstack  8
-                          IL_0000:  newobj     0x0A000005
-                          IL_0005:  throw
-                        }
-                        """;
+                            {
+                              // Code size        6 (0x6)
+                              .maxstack  8
+                              IL_0000:  newobj     0x0A000005
+                              IL_0005:  throw
+                            }
+                            """;
 
                         // Can't verify the IL of individual methods because that requires IMethodSymbolInternal implementations
                         g.VerifyIL(expectedIL);
@@ -20658,20 +20658,20 @@ class C
                         );
 
                         var expectedIL = """
-                        {
-                          // Code size       14 (0xe)
-                          .maxstack  1
-                          IL_0000:  nop
-                          IL_0001:  ldc.i4.1
-                          IL_0002:  call       0x0A000006
-                          IL_0007:  nop
-                          IL_0008:  ldnull
-                          IL_0009:  stloc.0
-                          IL_000a:  br.s       IL_000c
-                          IL_000c:  ldloc.0
-                          IL_000d:  ret
-                        }
-                        """;
+                            {
+                              // Code size       14 (0xe)
+                              .maxstack  1
+                              IL_0000:  nop
+                              IL_0001:  ldc.i4.1
+                              IL_0002:  call       0x0A000006
+                              IL_0007:  nop
+                              IL_0008:  ldnull
+                              IL_0009:  stloc.0
+                              IL_000a:  br.s       IL_000c
+                              IL_000c:  ldloc.0
+                              IL_000d:  ret
+                            }
+                            """;
 
                         // Can't verify the IL of individual methods because that requires IMethodSymbolInternal implementations
                         g.VerifyIL(expectedIL);
@@ -21729,22 +21729,22 @@ class C
                         );
 
                         var expectedIL = """
-                        {
-                          // Code size        6 (0x6)
-                          .maxstack  8
-                          IL_0000:  newobj     0x0A000006
-                          IL_0005:  throw
-                        }
-                        {
-                          // Code size       10 (0xa)
-                          .maxstack  8
-                          IL_0000:  nop
-                          IL_0001:  ldarga.s   V_1
-                          IL_0003:  call       0x0A000007
-                          IL_0008:  pop
-                          IL_0009:  ret
-                        }
-                        """;
+                            {
+                              // Code size        6 (0x6)
+                              .maxstack  8
+                              IL_0000:  newobj     0x0A000006
+                              IL_0005:  throw
+                            }
+                            {
+                              // Code size       10 (0xa)
+                              .maxstack  8
+                              IL_0000:  nop
+                              IL_0001:  ldarga.s   V_1
+                              IL_0003:  call       0x0A000007
+                              IL_0008:  pop
+                              IL_0009:  ret
+                            }
+                            """;
 
                         // Can't verify the IL of individual methods because that requires IMethodSymbolInternal implementations
                         g.VerifyIL(expectedIL);
@@ -21805,22 +21805,22 @@ class C
                         );
 
                         var expectedIL = """
-                        {
-                          // Code size       10 (0xa)
-                          .maxstack  8
-                          IL_0000:  nop
-                          IL_0001:  ldarga.s   V_1
-                          IL_0003:  call       0x0A000008
-                          IL_0008:  pop
-                          IL_0009:  ret
-                        }
-                        {
-                          // Code size        6 (0x6)
-                          .maxstack  8
-                          IL_0000:  newobj     0x0A000009
-                          IL_0005:  throw
-                        }
-                        """;
+                            {
+                              // Code size       10 (0xa)
+                              .maxstack  8
+                              IL_0000:  nop
+                              IL_0001:  ldarga.s   V_1
+                              IL_0003:  call       0x0A000008
+                              IL_0008:  pop
+                              IL_0009:  ret
+                            }
+                            {
+                              // Code size        6 (0x6)
+                              .maxstack  8
+                              IL_0000:  newobj     0x0A000009
+                              IL_0005:  throw
+                            }
+                            """;
 
                         // Can't verify the IL of individual methods because that requires IMethodSymbolInternal implementations
                         g.VerifyIL(expectedIL);
@@ -21905,23 +21905,23 @@ class C
                         );
 
                         var expectedIL = """
-                        {
-                          // Code size        6 (0x6)
-                          .maxstack  8
-                          IL_0000:  newobj     0x0A000006
-                          IL_0005:  throw
-                        }
-                        {
-                          // Code size        7 (0x7)
-                          .maxstack  1
-                          IL_0000:  nop
-                          IL_0001:  ldarg.1
-                          IL_0002:  stloc.0
-                          IL_0003:  br.s       IL_0005
-                          IL_0005:  ldloc.0
-                          IL_0006:  ret
-                        }
-                        """;
+                            {
+                              // Code size        6 (0x6)
+                              .maxstack  8
+                              IL_0000:  newobj     0x0A000006
+                              IL_0005:  throw
+                            }
+                            {
+                              // Code size        7 (0x7)
+                              .maxstack  1
+                              IL_0000:  nop
+                              IL_0001:  ldarg.1
+                              IL_0002:  stloc.0
+                              IL_0003:  br.s       IL_0005
+                              IL_0005:  ldloc.0
+                              IL_0006:  ret
+                            }
+                            """;
 
                         // Can't verify the IL of individual methods because that requires IMethodSymbolInternal implementations
                         g.VerifyIL(expectedIL);
@@ -21984,24 +21984,24 @@ class C
                         );
 
                         var expectedIL = """
-                        {
-                          // Code size       13 (0xd)
-                          .maxstack  1
-                          IL_0000:  nop
-                          IL_0001:  ldarga.s   V_1
-                          IL_0003:  call       0x0A000007
-                          IL_0008:  stloc.0
-                          IL_0009:  br.s       IL_000b
-                          IL_000b:  ldloc.0
-                          IL_000c:  ret
-                        }
-                        {
-                          // Code size        6 (0x6)
-                          .maxstack  8
-                          IL_0000:  newobj     0x0A000008
-                          IL_0005:  throw
-                        }
-                        """;
+                            {
+                              // Code size       13 (0xd)
+                              .maxstack  1
+                              IL_0000:  nop
+                              IL_0001:  ldarga.s   V_1
+                              IL_0003:  call       0x0A000007
+                              IL_0008:  stloc.0
+                              IL_0009:  br.s       IL_000b
+                              IL_000b:  ldloc.0
+                              IL_000c:  ret
+                            }
+                            {
+                              // Code size        6 (0x6)
+                              .maxstack  8
+                              IL_0000:  newobj     0x0A000008
+                              IL_0005:  throw
+                            }
+                            """;
 
                         // Can't verify the IL of individual methods because that requires IMethodSymbolInternal implementations
                         g.VerifyIL(expectedIL);
@@ -22081,22 +22081,22 @@ class C
                         );
 
                         var expectedIL = """
-                        {
-                          // Code size        6 (0x6)
-                          .maxstack  8
-                          IL_0000:  newobj     0x0A000006
-                          IL_0005:  throw
-                        }
-                        {
-                          // Code size       10 (0xa)
-                          .maxstack  8
-                          IL_0000:  nop
-                          IL_0001:  ldarga.s   V_1
-                          IL_0003:  call       0x0A000007
-                          IL_0008:  pop
-                          IL_0009:  ret
-                        }
-                        """;
+                            {
+                              // Code size        6 (0x6)
+                              .maxstack  8
+                              IL_0000:  newobj     0x0A000006
+                              IL_0005:  throw
+                            }
+                            {
+                              // Code size       10 (0xa)
+                              .maxstack  8
+                              IL_0000:  nop
+                              IL_0001:  ldarga.s   V_1
+                              IL_0003:  call       0x0A000007
+                              IL_0008:  pop
+                              IL_0009:  ret
+                            }
+                            """;
 
                         // Can't verify the IL of individual methods because that requires IMethodSymbolInternal implementations
                         g.VerifyIL(expectedIL);
@@ -22151,22 +22151,22 @@ class C
                         );
 
                         var expectedIL = """
-                        {
-                          // Code size       10 (0xa)
-                          .maxstack  8
-                          IL_0000:  nop
-                          IL_0001:  ldarga.s   V_1
-                          IL_0003:  call       0x0A000008
-                          IL_0008:  pop
-                          IL_0009:  ret
-                        }
-                        {
-                          // Code size        6 (0x6)
-                          .maxstack  8
-                          IL_0000:  newobj     0x0A000009
-                          IL_0005:  throw
-                        }
-                        """;
+                            {
+                              // Code size       10 (0xa)
+                              .maxstack  8
+                              IL_0000:  nop
+                              IL_0001:  ldarga.s   V_1
+                              IL_0003:  call       0x0A000008
+                              IL_0008:  pop
+                              IL_0009:  ret
+                            }
+                            {
+                              // Code size        6 (0x6)
+                              .maxstack  8
+                              IL_0000:  newobj     0x0A000009
+                              IL_0005:  throw
+                            }
+                            """;
 
                         // Can't verify the IL of individual methods because that requires IMethodSymbolInternal implementations
                         g.VerifyIL(expectedIL);
