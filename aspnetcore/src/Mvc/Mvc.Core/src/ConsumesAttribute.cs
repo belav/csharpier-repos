@@ -245,8 +245,8 @@ public class ConsumesAttribute
         // we take advantage of the fact that ConsumesAttribute is both an IActionFilter and an
         // IConsumeActionConstraint. Since FilterDescriptor collection is ordered (the last filter is the one
         // closest to the action), we apply this constraint only if there is no IConsumeActionConstraint after this.
-        return actionDescriptor
-                .FilterDescriptors.Last(filter => filter.Filter is IConsumesActionConstraint)
+        return actionDescriptor.FilterDescriptors
+                .Last(filter => filter.Filter is IConsumesActionConstraint)
                 .Filter == this;
     }
 

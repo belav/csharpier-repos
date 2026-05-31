@@ -47,9 +47,9 @@ public class SampleAuthorizationMiddlewareResultHandler : IAuthorizationMiddlewa
 
             // as an example, let's return 404 if specific requirement has failed
             if (
-                policyAuthorizationResult.AuthorizationFailure.FailedRequirements.Any(requirement =>
-                    requirement is SampleRequirement
-                )
+                policyAuthorizationResult.AuthorizationFailure
+                    .FailedRequirements
+                    .Any(requirement => requirement is SampleRequirement)
             )
             {
                 httpContext.Response.StatusCode = (int)HttpStatusCode.NotFound;
@@ -59,9 +59,9 @@ public class SampleAuthorizationMiddlewareResultHandler : IAuthorizationMiddlewa
                 return;
             }
             else if (
-                policyAuthorizationResult.AuthorizationFailure.FailedRequirements.Any(requirement =>
-                    requirement is SampleWithCustomMessageRequirement
-                )
+                policyAuthorizationResult.AuthorizationFailure
+                    .FailedRequirements
+                    .Any(requirement => requirement is SampleWithCustomMessageRequirement)
             )
             {
                 // if other requirements failed, let's just use a custom message
@@ -70,8 +70,9 @@ public class SampleAuthorizationMiddlewareResultHandler : IAuthorizationMiddlewa
                 var message = Startup.CustomForbiddenMessage;
 
                 httpContext.Response.OnStarting(() =>
-                    httpContext
-                        .Response.BodyWriter.WriteAsync(Encoding.UTF8.GetBytes(message))
+                    httpContext.Response
+                        .BodyWriter
+                        .WriteAsync(Encoding.UTF8.GetBytes(message))
                         .AsTask()
                 );
             }

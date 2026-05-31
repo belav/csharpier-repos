@@ -230,8 +230,8 @@ public class Http2TestBase
             _receivedRequestFields.Method = context.Request.Method;
             _receivedRequestFields.Scheme = context.Request.Scheme;
             _receivedRequestFields.Path = context.Request.Path.Value;
-            _receivedRequestFields.RawTarget = context
-                .Features.Get<IHttpRequestFeature>()
+            _receivedRequestFields.RawTarget = context.Features
+                .Get<IHttpRequestFeature>()
                 .RawTarget;
             _receivedRequestFields.Authority = context.Request.Host.Value;
             foreach (var header in context.Request.Headers)
@@ -259,8 +259,8 @@ public class Http2TestBase
             _receivedRequestFields.Method = context.Request.Method;
             _receivedRequestFields.Scheme = context.Request.Scheme;
             _receivedRequestFields.Path = context.Request.Path.Value;
-            _receivedRequestFields.RawTarget = context
-                .Features.Get<IHttpRequestFeature>()
+            _receivedRequestFields.RawTarget = context.Features
+                .Get<IHttpRequestFeature>()
                 .RawTarget;
             foreach (var header in context.Request.Headers)
             {
@@ -416,8 +416,8 @@ public class Http2TestBase
         {
             Assert.False(context.Request.Headers.ContainsKey(InternalHeaderNames.Path));
             context.Response.Headers["path"] = context.Request.Path.ToString();
-            context.Response.Headers["rawtarget"] = context
-                .Features.Get<IHttpRequestFeature>()
+            context.Response.Headers["rawtarget"] = context.Features
+                .Get<IHttpRequestFeature>()
                 .RawTarget;
 
             return Task.CompletedTask;

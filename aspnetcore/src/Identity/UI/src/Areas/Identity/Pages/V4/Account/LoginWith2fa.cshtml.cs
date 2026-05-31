@@ -133,8 +133,8 @@ internal sealed class LoginWith2faModel<TUser> : LoginWith2faModel
             throw new InvalidOperationException("Unable to load two-factor authentication user.");
         }
 
-        var authenticatorCode = Input
-            .TwoFactorCode.Replace(" ", string.Empty)
+        var authenticatorCode = Input.TwoFactorCode
+            .Replace(" ", string.Empty)
             .Replace("-", string.Empty);
 
         var result = await _signInManager.TwoFactorAuthenticatorSignInAsync(

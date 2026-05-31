@@ -57,9 +57,9 @@ public class UnixDomainSocketsTest : TestApplicationErrorLoggerLoggedTest
                 {
                     while (true)
                     {
-                        var result = await connection.Transport.Input.ReadAsync(
-                            notificationFeature.ConnectionClosedRequested
-                        );
+                        var result = await connection.Transport
+                            .Input
+                            .ReadAsync(notificationFeature.ConnectionClosedRequested);
 
                         if (result.IsCompleted)
                         {

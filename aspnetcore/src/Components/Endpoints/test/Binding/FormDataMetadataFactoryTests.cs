@@ -656,8 +656,8 @@ public class FormDataMetadataFactoryTests
         var logMessages = new List<LogMessage>();
         var sink = new TestSink();
         var options = new FormDataMapperOptions(new TestLoggerFactory(sink, enabled: true));
-        var factory = options
-            .Factories.OfType<ComplexTypeConverterFactory>()
+        var factory = options.Factories
+            .OfType<ComplexTypeConverterFactory>()
             .Single()
             .MetadataFactory;
         return (factory, options, sink);

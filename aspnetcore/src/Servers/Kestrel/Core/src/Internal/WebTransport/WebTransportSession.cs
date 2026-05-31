@@ -59,14 +59,16 @@ internal sealed class WebTransportSession : IWebTransportSession
         _pendingStreams = Channel.CreateUnbounded<WebTransportStream>();
 
         // listener to abort if this connection is closed
-        _connectionClosedRegistration = connection._multiplexedContext.ConnectionClosed.Register(
-            static state =>
-            {
-                var session = (WebTransportSession)state!;
-                session.OnClientConnectionClosed();
-            },
-            this
-        );
+        _connectionClosedRegistration = connection._multiplexedContext
+            .ConnectionClosed
+            .Register(
+                static state =>
+                {
+                    var session = (WebTransportSession)state!;
+                    session.OnClientConnectionClosed();
+                },
+                this
+            );
     }
 
     void IWebTransportSession.Abort(int errorCode)

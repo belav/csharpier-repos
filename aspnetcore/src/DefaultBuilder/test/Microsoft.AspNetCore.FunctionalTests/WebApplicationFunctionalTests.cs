@@ -179,8 +179,8 @@ public class WebApplicationFunctionalTests : LoggedTest
             var configChangedTcs = new TaskCompletionSource(
                 TaskCreationOptions.RunContinuationsAsynchronously
             );
-            using var registration = app
-                .Configuration.GetReloadToken()
+            using var registration = app.Configuration
+                .GetReloadToken()
                 .RegisterChangeCallback(
                     tcs => ((TaskCompletionSource)tcs).SetResult(),
                     configChangedTcs

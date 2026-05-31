@@ -127,9 +127,9 @@ public class SimpleTypeModelBinder : IModelBinder
         {
             bindingContext.ModelState.TryAddModelError(
                 bindingContext.ModelName,
-                bindingContext.ModelMetadata.ModelBindingMessageProvider.ValueMustNotBeNullAccessor(
-                    valueProviderResult.ToString()
-                )
+                bindingContext.ModelMetadata
+                    .ModelBindingMessageProvider
+                    .ValueMustNotBeNullAccessor(valueProviderResult.ToString())
             );
         }
         else

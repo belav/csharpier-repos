@@ -389,8 +389,8 @@ public class AuthorizeRouteViewTest
 
         // Assert
         var batch = _renderer.Batches.Single();
-        var componentInstances = batch
-            .ReferenceFrames.Where(f => f.FrameType == RenderTreeFrameType.Component)
+        var componentInstances = batch.ReferenceFrames
+            .Where(f => f.FrameType == RenderTreeFrameType.Component)
             .Select(f => f.Component);
 
         Assert.Collection(
@@ -424,8 +424,8 @@ public class AuthorizeRouteViewTest
 
         // Assert
         var batch = _renderer.Batches.Single();
-        var componentInstances = batch
-            .ReferenceFrames.Where(f => f.FrameType == RenderTreeFrameType.Component)
+        var componentInstances = batch.ReferenceFrames
+            .Where(f => f.FrameType == RenderTreeFrameType.Component)
             .Select(f => f.Component);
 
         Assert.Collection(

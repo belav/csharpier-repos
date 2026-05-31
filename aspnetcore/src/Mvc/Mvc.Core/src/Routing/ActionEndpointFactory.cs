@@ -450,8 +450,8 @@ internal sealed class ActionEndpointFactory
         if (action.FilterDescriptors != null && action.FilterDescriptors.Count > 0)
         {
             foreach (
-                var filter in action
-                    .FilterDescriptors.OrderBy(f => f, FilterDescriptorOrderComparer.Comparer)
+                var filter in action.FilterDescriptors
+                    .OrderBy(f => f, FilterDescriptorOrderComparer.Comparer)
                     .Select(f => f.Filter)
             )
             {
@@ -523,9 +523,10 @@ internal sealed class ActionEndpointFactory
                 // By the time this is called, we have the cache entry
                 var controllerInvocationContext =
                     (ControllerEndpointFilterInvocationContext)invocationContext;
-                return controllerInvocationContext.ActionDescriptor.CacheEntry!.InnerActionMethodExecutor.Execute(
-                    controllerInvocationContext
-                );
+                return controllerInvocationContext.ActionDescriptor
+                    .CacheEntry!
+                    .InnerActionMethodExecutor
+                    .Execute(controllerInvocationContext);
             };
 
             var context = new EndpointFilterFactoryContext

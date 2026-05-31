@@ -211,18 +211,20 @@ public abstract class WebViewManager : IAsyncDisposable
             return false;
         }
 
-        return await capturedCurrentPageContext.Renderer.Dispatcher.InvokeAsync(() =>
-        {
-            if (capturedCurrentPageContext != _currentPageContext)
+        return await capturedCurrentPageContext.Renderer
+            .Dispatcher
+            .InvokeAsync(() =>
             {
-                // If the captured context doesn't match the current context, that means that there was something like
-                // a navigation event that caused the original page to be detached and a new one attached. Thus, we
-                // cancel out of the operation and return failure.
-                return false;
-            }
-            workItem(_currentPageContext.ServiceProvider);
-            return true;
-        });
+                if (capturedCurrentPageContext != _currentPageContext)
+                {
+                    // If the captured context doesn't match the current context, that means that there was something like
+                    // a navigation event that caused the original page to be detached and a new one attached. Thus, we
+                    // cancel out of the operation and return failure.
+                    return false;
+                }
+                workItem(_currentPageContext.ServiceProvider);
+                return true;
+            });
     }
 
     /// <summary>

@@ -76,8 +76,9 @@ public class HttpClientHttp2InteropTests : LoggedTest
                 .Configure(app =>
                     app.Run(async context =>
                     {
-                        await context
-                            .Request.BodyReader.CopyToAsync(context.Response.BodyWriter)
+                        await context.Request
+                            .BodyReader
+                            .CopyToAsync(context.Response.BodyWriter)
                             .DefaultTimeout();
                     })
                 );
@@ -181,8 +182,9 @@ public class HttpClientHttp2InteropTests : LoggedTest
                             allRequestsReceived.SetResult();
                         }
                         await allRequestsReceived.Task;
-                        await context
-                            .Request.BodyReader.CopyToAsync(context.Response.BodyWriter)
+                        await context.Request
+                            .BodyReader
+                            .CopyToAsync(context.Response.BodyWriter)
                             .DefaultTimeout();
                     })
                 );
@@ -317,8 +319,9 @@ public class HttpClientHttp2InteropTests : LoggedTest
 
                             var sequence = readResult.Buffer.Slice(0, "Hello World".Length);
                             Assert.True(sequence.IsSingleSegment);
-                            await context
-                                .Response.BodyWriter.WriteAsync(sequence.First)
+                            await context.Response
+                                .BodyWriter
+                                .WriteAsync(sequence.First)
                                 .DefaultTimeout();
                             reader.AdvanceTo(sequence.End);
                         }
@@ -385,8 +388,9 @@ public class HttpClientHttp2InteropTests : LoggedTest
 
                         var sequence = readResult.Buffer.Slice(0, "Hello World".Length);
                         Assert.True(sequence.IsSingleSegment);
-                        await context
-                            .Response.BodyWriter.WriteAsync(sequence.First)
+                        await context.Response
+                            .BodyWriter
+                            .WriteAsync(sequence.First)
                             .DefaultTimeout();
                         reader.AdvanceTo(sequence.End);
                         await context.Response.CompleteAsync().DefaultTimeout();
@@ -1315,8 +1319,8 @@ public class HttpClientHttp2InteropTests : LoggedTest
         );
         Assert.Equal(
             2,
-            TestSink
-                .Writes.Where(context =>
+            TestSink.Writes
+                .Where(context =>
                     context.Message.Contains(
                         "sending CONTINUATION frame for stream ID 1 with length 15585 and flags NONE"
                     )
@@ -1765,8 +1769,9 @@ public class HttpClientHttp2InteropTests : LoggedTest
                         var read = 0;
                         do
                         {
-                            read = await context
-                                .Request.Body.ReadAsync(buffer, 0, buffer.Length)
+                            read = await context.Request
+                                .Body
+                                .ReadAsync(buffer, 0, buffer.Length)
                                 .DefaultTimeout();
                         } while (read > 0);
 

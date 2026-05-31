@@ -155,11 +155,13 @@ static async Task ApplySpecialCommands(IWebTransportSession session, string mess
             var stream = await session.OpenUnidirectionalStreamAsync();
             if (stream is not null)
             {
-                await stream.Transport.Output.WriteAsync(
-                    new(
-                        "Created a new stream from the client and sent this message then closing the stream."u8.ToArray()
-                    )
-                );
+                await stream.Transport
+                    .Output
+                    .WriteAsync(
+                        new(
+                            "Created a new stream from the client and sent this message then closing the stream."u8.ToArray()
+                        )
+                    );
             }
             break;
         case "Abort":

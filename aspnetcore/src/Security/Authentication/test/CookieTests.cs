@@ -2384,8 +2384,8 @@ public class CookieTests : SharedAuthenticationTests<CookieAuthenticationOptions
 
     private static string FindClaimValue(Transaction transaction, string claimType)
     {
-        var claim = transaction
-            .ResponseElement.Elements("claim")
+        var claim = transaction.ResponseElement
+            .Elements("claim")
             .SingleOrDefault(elt => elt.Attribute("type").Value == claimType);
         if (claim == null)
         {
@@ -2396,8 +2396,8 @@ public class CookieTests : SharedAuthenticationTests<CookieAuthenticationOptions
 
     private static string FindPropertiesValue(Transaction transaction, string key)
     {
-        var property = transaction
-            .ResponseElement.Elements("extra")
+        var property = transaction.ResponseElement
+            .Elements("extra")
             .SingleOrDefault(elt => elt.Attribute("type").Value == key);
         if (property == null)
         {
@@ -2585,21 +2585,27 @@ public class CookieTests : SharedAuthenticationTests<CookieAuthenticationOptions
         if (result?.Ticket?.Principal != null)
         {
             xml.Add(
-                result.Ticket.Principal.Claims.Select(claim => new XElement(
-                    "claim",
-                    new XAttribute("type", claim.Type),
-                    new XAttribute("value", claim.Value)
-                ))
+                result.Ticket
+                    .Principal
+                    .Claims
+                    .Select(claim => new XElement(
+                        "claim",
+                        new XAttribute("type", claim.Type),
+                        new XAttribute("value", claim.Value)
+                    ))
             );
         }
         if (result?.Ticket?.Properties != null)
         {
             xml.Add(
-                result.Ticket.Properties.Items.Select(extra => new XElement(
-                    "extra",
-                    new XAttribute("type", extra.Key),
-                    new XAttribute("value", extra.Value)
-                ))
+                result.Ticket
+                    .Properties
+                    .Items
+                    .Select(extra => new XElement(
+                        "extra",
+                        new XAttribute("type", extra.Key),
+                        new XAttribute("value", extra.Value)
+                    ))
             );
         }
         var xmlBytes = Encoding.UTF8.GetBytes(xml.ToString());
@@ -2624,8 +2630,9 @@ public class CookieTests : SharedAuthenticationTests<CookieAuthenticationOptions
         };
         if (transaction.Response.Headers.Contains("Set-Cookie"))
         {
-            transaction.SetCookie = transaction
-                .Response.Headers.GetValues("Set-Cookie")
+            transaction.SetCookie = transaction.Response
+                .Headers
+                .GetValues("Set-Cookie")
                 .SingleOrDefault();
         }
         if (!string.IsNullOrEmpty(transaction.SetCookie))

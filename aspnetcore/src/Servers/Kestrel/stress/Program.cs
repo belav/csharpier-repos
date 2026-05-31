@@ -664,15 +664,17 @@ public class Program
                                     // Get request but with a bunch of extra headers
                                     for (int i = 0; i < 20; i++)
                                     {
-                                        context.Response.Headers.Add(
-                                            "CustomHeader" + i,
-                                            new StringValues(
-                                                Enumerable
-                                                    .Range(0, i)
-                                                    .Select(id => "value" + id)
-                                                    .ToArray()
-                                            )
-                                        );
+                                        context.Response
+                                            .Headers
+                                            .Add(
+                                                "CustomHeader" + i,
+                                                new StringValues(
+                                                    Enumerable
+                                                        .Range(0, i)
+                                                        .Select(id => "value" + id)
+                                                        .ToArray()
+                                                )
+                                            );
                                     }
                                     await context.Response.WriteAsync(contentSource);
                                     if (context.Response.SupportsTrailers())

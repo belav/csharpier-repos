@@ -52,11 +52,11 @@ internal static class SymbolApiResponseMetadataProvider
     {
         var errorTypeAttribute =
             method.GetAttributes(symbolCache.ProducesErrorResponseTypeAttribute).FirstOrDefault()
-            ?? method
-                .ContainingType.GetAttributes(symbolCache.ProducesErrorResponseTypeAttribute)
+            ?? method.ContainingType
+                .GetAttributes(symbolCache.ProducesErrorResponseTypeAttribute)
                 .FirstOrDefault()
-            ?? method
-                .ContainingAssembly.GetAttributes(symbolCache.ProducesErrorResponseTypeAttribute)
+            ?? method.ContainingAssembly
+                .GetAttributes(symbolCache.ProducesErrorResponseTypeAttribute)
                 .FirstOrDefault();
 
         ITypeSymbol errorType = symbolCache.ProblemDetails;
@@ -210,13 +210,13 @@ internal static class SymbolApiResponseMetadataProvider
         IMethodSymbol method
     )
     {
-        var attributes = method
-            .ContainingType.GetAttributes(symbolCache.ApiConventionTypeAttribute, inherit: true)
+        var attributes = method.ContainingType
+            .GetAttributes(symbolCache.ApiConventionTypeAttribute, inherit: true)
             .ToArray();
         if (attributes.Length == 0)
         {
-            attributes = method
-                .ContainingAssembly.GetAttributes(symbolCache.ApiConventionTypeAttribute)
+            attributes = method.ContainingAssembly
+                .GetAttributes(symbolCache.ApiConventionTypeAttribute)
                 .ToArray();
         }
 

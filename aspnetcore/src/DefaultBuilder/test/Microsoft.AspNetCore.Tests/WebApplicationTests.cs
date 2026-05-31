@@ -1739,8 +1739,8 @@ public class WebApplicationTests
 
         var env0 = app.Services.GetRequiredService<IHostEnvironment>();
 
-        var env1 = app
-            .Services.GetRequiredService<IServiceCollection>()
+        var env1 = app.Services
+            .GetRequiredService<IServiceCollection>()
             .BuildServiceProvider()
             .GetRequiredService<IHostEnvironment>();
 
@@ -1774,8 +1774,8 @@ public class WebApplicationTests
 
         var service0 = app.Services.GetRequiredService<IService>();
 
-        var service1 = app
-            .Services.GetRequiredService<IServiceCollection>()
+        var service1 = app.Services
+            .GetRequiredService<IServiceCollection>()
             .BuildServiceProvider()
             .GetRequiredService<IService>();
 
@@ -1829,8 +1829,8 @@ public class WebApplicationTests
         var app = builder.Build();
 
         var hostLifetime0 = app.Services.GetRequiredService<IHostLifetime>();
-        var childServiceProvider = app
-            .Services.GetRequiredService<IServiceCollection>()
+        var childServiceProvider = app.Services
+            .GetRequiredService<IServiceCollection>()
             .BuildServiceProvider();
         var hostLifetime1 = childServiceProvider.GetRequiredService<IHostLifetime>();
 
@@ -2913,8 +2913,8 @@ public class WebApplicationTests
         var builder = createBuilder();
 
         builder.Services.AddAuthorization();
-        builder
-            .Services.AddAuthentication("testSchemeName")
+        builder.Services
+            .AddAuthentication("testSchemeName")
             .AddScheme<AuthenticationSchemeOptions, UberHandler>(
                 "testSchemeName",
                 "testDisplayName",
@@ -2962,8 +2962,8 @@ public class WebApplicationTests
     {
         var builder = createBuilder();
         builder.Services.AddAuthorization();
-        builder
-            .Services.AddAuthentication("testSchemeName")
+        builder.Services
+            .AddAuthentication("testSchemeName")
             .AddScheme<AuthenticationSchemeOptions, UberHandler>(
                 "testSchemeName",
                 "testDisplayName",
@@ -3154,8 +3154,8 @@ public class WebApplicationTests
     public async Task UsingCreateSlimBuilderWorksIfRegexConstraintAddedViaAddRoutingCoreWithActionDelegate()
     {
         var builder = WebApplication.CreateSlimBuilder();
-        builder
-            .Services.AddRoutingCore()
+        builder.Services
+            .AddRoutingCore()
             .Configure<RouteOptions>(options =>
             {
                 options.SetParameterPolicy<RegexInlineRouteConstraint>("regex");

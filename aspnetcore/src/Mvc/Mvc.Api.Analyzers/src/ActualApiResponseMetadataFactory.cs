@@ -98,8 +98,8 @@ public static class ActualApiResponseMetadataFactory
             && returnedValue is IInvocationOperation invocationOperation
         )
         {
-            defaultStatusCodeAttribute = invocationOperation
-                .TargetMethod.GetAttributes(defaultStatusCodeAttributeSymbol)
+            defaultStatusCodeAttribute = invocationOperation.TargetMethod
+                .GetAttributes(defaultStatusCodeAttributeSymbol)
                 .FirstOrDefault();
         }
 

@@ -464,8 +464,7 @@ public sealed partial class ComplexObjectModelBinder : IModelBinder
         ModelMetadata propertyMetadata
     )
     {
-        var metadataProviderFilter = bindingContext
-            .ModelMetadata
+        var metadataProviderFilter = bindingContext.ModelMetadata
             .PropertyFilterProvider
             ?.PropertyFilter;
         if (metadataProviderFilter?.Invoke(propertyMetadata) == false)
@@ -698,8 +697,7 @@ public sealed partial class ComplexObjectModelBinder : IModelBinder
 
         if (performsConstructorBinding)
         {
-            var parameters = bindingContext
-                .ModelMetadata
+            var parameters = bindingContext.ModelMetadata
                 .BoundConstructor!
                 .BoundConstructorParameters!;
             for (var i = 0; i < parameters.Count; i++)

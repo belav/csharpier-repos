@@ -70,9 +70,7 @@ public static partial class CSharpAnalyzerVerifier<TAnalyzer>
                     typeof(Microsoft.AspNetCore.Authorization.IAuthorizeData).Assembly.Location
                 ),
                 TrimAssemblyExtension(
-                    typeof(Microsoft.AspNetCore.Mvc.ModelBinding.IBinderTypeProviderMetadata)
-                        .Assembly
-                        .Location
+                    typeof(Microsoft.AspNetCore.Mvc.ModelBinding.IBinderTypeProviderMetadata).Assembly.Location
                 ),
                 TrimAssemblyExtension(
                     typeof(Microsoft.AspNetCore.Mvc.BindAttribute).Assembly.Location
@@ -84,9 +82,7 @@ public static partial class CSharpAnalyzerVerifier<TAnalyzer>
                     typeof(Microsoft.Extensions.Hosting.IHostBuilder).Assembly.Location
                 ),
                 TrimAssemblyExtension(
-                    typeof(Microsoft.Extensions.Hosting.HostingHostBuilderExtensions)
-                        .Assembly
-                        .Location
+                    typeof(Microsoft.Extensions.Hosting.HostingHostBuilderExtensions).Assembly.Location
                 ),
                 TrimAssemblyExtension(
                     typeof(Microsoft.AspNetCore.Builder.ConfigureHostBuilder).Assembly.Location
@@ -95,44 +91,28 @@ public static partial class CSharpAnalyzerVerifier<TAnalyzer>
                     typeof(Microsoft.AspNetCore.Builder.ConfigureWebHostBuilder).Assembly.Location
                 ),
                 TrimAssemblyExtension(
-                    typeof(Microsoft.AspNetCore.Builder.EndpointRoutingApplicationBuilderExtensions)
-                        .Assembly
-                        .Location
+                    typeof(Microsoft.AspNetCore.Builder.EndpointRoutingApplicationBuilderExtensions).Assembly.Location
                 ),
                 TrimAssemblyExtension(
-                    typeof(Microsoft.AspNetCore.Builder.RateLimiterEndpointConventionBuilderExtensions)
-                        .Assembly
-                        .Location
+                    typeof(Microsoft.AspNetCore.Builder.RateLimiterEndpointConventionBuilderExtensions).Assembly.Location
                 ),
                 TrimAssemblyExtension(
-                    typeof(Microsoft.AspNetCore.Builder.CorsEndpointConventionBuilderExtensions)
-                        .Assembly
-                        .Location
+                    typeof(Microsoft.AspNetCore.Builder.CorsEndpointConventionBuilderExtensions).Assembly.Location
                 ),
                 TrimAssemblyExtension(
-                    typeof(Microsoft.Extensions.DependencyInjection.OutputCacheConventionBuilderExtensions)
-                        .Assembly
-                        .Location
+                    typeof(Microsoft.Extensions.DependencyInjection.OutputCacheConventionBuilderExtensions).Assembly.Location
                 ),
                 TrimAssemblyExtension(
-                    typeof(Microsoft.AspNetCore.Builder.EndpointRouteBuilderExtensions)
-                        .Assembly
-                        .Location
+                    typeof(Microsoft.AspNetCore.Builder.EndpointRouteBuilderExtensions).Assembly.Location
                 ),
                 TrimAssemblyExtension(
-                    typeof(Microsoft.AspNetCore.Builder.AuthorizationEndpointConventionBuilderExtensions)
-                        .Assembly
-                        .Location
+                    typeof(Microsoft.AspNetCore.Builder.AuthorizationEndpointConventionBuilderExtensions).Assembly.Location
                 ),
                 TrimAssemblyExtension(
-                    typeof(Microsoft.AspNetCore.Mvc.AutoValidateAntiforgeryTokenAttribute)
-                        .Assembly
-                        .Location
+                    typeof(Microsoft.AspNetCore.Mvc.AutoValidateAntiforgeryTokenAttribute).Assembly.Location
                 ),
                 TrimAssemblyExtension(
-                    typeof(Microsoft.AspNetCore.Authorization.AllowAnonymousAttribute)
-                        .Assembly
-                        .Location
+                    typeof(Microsoft.AspNetCore.Authorization.AllowAnonymousAttribute).Assembly.Location
                 ),
                 TrimAssemblyExtension(
                     typeof(Microsoft.AspNetCore.Routing.RouteData).Assembly.Location
@@ -154,9 +134,7 @@ public static partial class CSharpAnalyzerVerifier<TAnalyzer>
                     typeof(Microsoft.AspNetCore.Http.HttpRequestJsonExtensions).Assembly.Location
                 ),
                 TrimAssemblyExtension(
-                    typeof(Microsoft.AspNetCore.Hosting.HostingAbstractionsWebHostBuilderExtensions)
-                        .Assembly
-                        .Location
+                    typeof(Microsoft.AspNetCore.Hosting.HostingAbstractionsWebHostBuilderExtensions).Assembly.Location
                 ),
                 TrimAssemblyExtension(
                     typeof(Microsoft.Extensions.Primitives.StringValues).Assembly.Location
@@ -168,42 +146,28 @@ public static partial class CSharpAnalyzerVerifier<TAnalyzer>
                     typeof(Microsoft.Extensions.Logging.ConsoleLoggerExtensions).Assembly.Location
                 ),
                 TrimAssemblyExtension(
-                    typeof(Microsoft.Extensions.DependencyInjection.IServiceCollection)
-                        .Assembly
-                        .Location
+                    typeof(Microsoft.Extensions.DependencyInjection.IServiceCollection).Assembly.Location
                 ),
                 TrimAssemblyExtension(
-                    typeof(Microsoft.Extensions.DependencyInjection.AntiforgeryServiceCollectionExtensions)
-                        .Assembly
-                        .Location
+                    typeof(Microsoft.Extensions.DependencyInjection.AntiforgeryServiceCollectionExtensions).Assembly.Location
                 ),
                 TrimAssemblyExtension(
                     typeof(Microsoft.Extensions.FileProviders.IFileProvider).Assembly.Location
                 ),
                 TrimAssemblyExtension(
-                    typeof(Microsoft.Extensions.Configuration.ConfigurationManager)
-                        .Assembly
-                        .Location
+                    typeof(Microsoft.Extensions.Configuration.ConfigurationManager).Assembly.Location
                 ),
                 TrimAssemblyExtension(
-                    typeof(Microsoft.Extensions.Configuration.JsonConfigurationExtensions)
-                        .Assembly
-                        .Location
+                    typeof(Microsoft.Extensions.Configuration.JsonConfigurationExtensions).Assembly.Location
                 ),
                 TrimAssemblyExtension(
-                    typeof(Microsoft.Extensions.Configuration.IConfigurationBuilder)
-                        .Assembly
-                        .Location
+                    typeof(Microsoft.Extensions.Configuration.IConfigurationBuilder).Assembly.Location
                 ),
                 TrimAssemblyExtension(
-                    typeof(Microsoft.Extensions.Configuration.EnvironmentVariablesExtensions)
-                        .Assembly
-                        .Location
+                    typeof(Microsoft.Extensions.Configuration.EnvironmentVariablesExtensions).Assembly.Location
                 ),
                 TrimAssemblyExtension(
-                    typeof(Microsoft.Extensions.DependencyInjection.AuthenticationServiceCollectionExtensions)
-                        .Assembly
-                        .Location
+                    typeof(Microsoft.Extensions.DependencyInjection.AuthenticationServiceCollectionExtensions).Assembly.Location
                 ),
                 TrimAssemblyExtension(typeof(Microsoft.JSInterop.IJSRuntime).Assembly.Location)
             )

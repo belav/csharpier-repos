@@ -626,12 +626,14 @@ public partial class HubConnectionHandlerTests : VerifiableLoggedTest
             {
                 var connectionHandlerTask = await client.ConnectAsync(connectionHandler);
 
-                await client.Connection.Application.Output.WriteAsync(
-                    payload.AsMemory(0, payload.Length / 2)
-                );
-                await client.Connection.Application.Output.WriteAsync(
-                    payload.AsMemory(payload.Length / 2)
-                );
+                await client.Connection
+                    .Application
+                    .Output
+                    .WriteAsync(payload.AsMemory(0, payload.Length / 2));
+                await client.Connection
+                    .Application
+                    .Output
+                    .WriteAsync(payload.AsMemory(payload.Length / 2));
 
                 client.Dispose();
 
@@ -2879,9 +2881,11 @@ public partial class HubConnectionHandlerTests : VerifiableLoggedTest
 
             using (var client = new TestClient())
             {
-                client.Connection.User.AddIdentity(
-                    new ClaimsIdentity(new[] { new Claim(ClaimTypes.NameIdentifier, "name") })
-                );
+                client.Connection
+                    .User
+                    .AddIdentity(
+                        new ClaimsIdentity(new[] { new Claim(ClaimTypes.NameIdentifier, "name") })
+                    );
                 var connectionHandlerTask = await client.ConnectAsync(connectionHandler);
 
                 await client.Connected.DefaultTimeout();
@@ -2928,16 +2932,19 @@ public partial class HubConnectionHandlerTests : VerifiableLoggedTest
 
             using (var client = new TestClient())
             {
-                client.Connection.Features.Set<IConnectionLifetimeNotificationFeature>(
-                    new TestConnectionLifetimeNotification()
-                );
+                client.Connection
+                    .Features
+                    .Set<IConnectionLifetimeNotificationFeature>(
+                        new TestConnectionLifetimeNotification()
+                    );
 
                 var connectionHandlerTask = await client.ConnectAsync(connectionHandler);
 
                 await client.Connected.DefaultTimeout();
 
-                client
-                    .Connection.Features.Get<IConnectionLifetimeNotificationFeature>()
+                client.Connection
+                    .Features
+                    .Get<IConnectionLifetimeNotificationFeature>()
                     .RequestClose();
 
                 var close = Assert.IsType<CloseMessage>(await client.ReadAsync().DefaultTimeout());
@@ -3004,9 +3011,11 @@ public partial class HubConnectionHandlerTests : VerifiableLoggedTest
 
             using (var client = new TestClient())
             {
-                client.Connection.User.AddIdentity(
-                    new ClaimsIdentity(new[] { new Claim(ClaimTypes.NameIdentifier, "name") })
-                );
+                client.Connection
+                    .User
+                    .AddIdentity(
+                        new ClaimsIdentity(new[] { new Claim(ClaimTypes.NameIdentifier, "name") })
+                    );
 
                 // Setup a HttpContext to make sure it flows to the AuthHandler correctly
                 var httpConnectionContext = new HttpContextFeatureImpl();
@@ -4493,8 +4502,10 @@ public partial class HubConnectionHandlerTests : VerifiableLoggedTest
                     .ConnectAsync(connectionHandler)
                     .DefaultTimeout();
 
-                await client
-                    .Connection.Application.Output.WriteAsync(Encoding.UTF8.GetBytes(new[] { '{' }))
+                await client.Connection
+                    .Application
+                    .Output
+                    .WriteAsync(Encoding.UTF8.GetBytes(new[] { '{' }))
                     .DefaultTimeout();
 
                 // Close connection

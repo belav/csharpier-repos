@@ -506,11 +506,14 @@ public class ComplexObjectModelBinderTest
         );
         var originalModel = bindingContext.Model;
 
-        var binders = bindingContext.ModelMetadata.Properties.ToDictionary(
-            keySelector: item => item,
-            elementSelector: item =>
-                (IModelBinder)new TestModelBinderProvider(item, ModelBindingResult.Success("Test"))
-        );
+        var binders = bindingContext.ModelMetadata
+            .Properties
+            .ToDictionary(
+                keySelector: item => item,
+                elementSelector: item =>
+                    (IModelBinder)
+                        new TestModelBinderProvider(item, ModelBindingResult.Success("Test"))
+            );
 
         var binder = new ComplexObjectModelBinder(binders, Array.Empty<IModelBinder>(), _logger);
 

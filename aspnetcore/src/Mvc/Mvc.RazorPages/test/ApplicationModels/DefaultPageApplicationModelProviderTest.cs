@@ -154,9 +154,9 @@ public class DefaultPageApplicationModelProviderTest
 
         // Assert
         Assert.NotNull(context.PageApplicationModel);
-        var propertiesOnPage = context.PageApplicationModel.HandlerProperties.Where(p =>
-            p.PropertyInfo.DeclaringType.GetTypeInfo() == typeInfo
-        );
+        var propertiesOnPage = context.PageApplicationModel
+            .HandlerProperties
+            .Where(p => p.PropertyInfo.DeclaringType.GetTypeInfo() == typeInfo);
         Assert.Collection(
             propertiesOnPage.OrderBy(p => p.PropertyName),
             property =>
@@ -276,8 +276,9 @@ public class DefaultPageApplicationModelProviderTest
         // Assert
         Assert.NotNull(context.PageApplicationModel);
         Assert.Collection(
-            context
-                .PageApplicationModel.HandlerProperties.OrderBy(p => p.PropertyName)
+            context.PageApplicationModel
+                .HandlerProperties
+                .OrderBy(p => p.PropertyName)
                 .Where(p => p.BindingInfo != null),
             property =>
             {

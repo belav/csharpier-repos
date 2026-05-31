@@ -55,9 +55,10 @@ public class TwitterPostConfigureOptions : IPostConfigureOptions<TwitterOptions>
             options.Backchannel.Timeout = options.BackchannelTimeout;
             options.Backchannel.MaxResponseContentBufferSize = 1024 * 1024 * 10; // 10 MB
             options.Backchannel.DefaultRequestHeaders.Accept.ParseAdd("*/*");
-            options.Backchannel.DefaultRequestHeaders.UserAgent.ParseAdd(
-                "Microsoft ASP.NET Core Twitter handler"
-            );
+            options.Backchannel
+                .DefaultRequestHeaders
+                .UserAgent
+                .ParseAdd("Microsoft ASP.NET Core Twitter handler");
             options.Backchannel.DefaultRequestHeaders.ExpectContinue = false;
         }
     }

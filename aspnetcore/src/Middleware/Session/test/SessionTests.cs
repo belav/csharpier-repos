@@ -954,8 +954,8 @@ public class SessionTests
             response.EnsureSuccessStatusCode();
         }
 
-        var sessionLogMessage = sink
-            .Writes.Where(message =>
+        var sessionLogMessage = sink.Writes
+            .Where(message =>
                 message.LoggerName.Equals(
                     typeof(DistributedSession).FullName,
                     StringComparison.Ordinal
@@ -966,8 +966,8 @@ public class SessionTests
         Assert.Contains("Session started", sessionLogMessage.State.ToString());
         Assert.Equal(LogLevel.Information, sessionLogMessage.LogLevel);
 
-        var sessionMiddlewareLogMessage = sink
-            .Writes.Where(message =>
+        var sessionMiddlewareLogMessage = sink.Writes
+            .Where(message =>
                 message.LoggerName.Equals(
                     typeof(SessionMiddleware).FullName,
                     StringComparison.Ordinal
@@ -1034,8 +1034,8 @@ public class SessionTests
             response.EnsureSuccessStatusCode();
         }
 
-        var sessionLogMessages = sink
-            .Writes.Where(message =>
+        var sessionLogMessages = sink.Writes
+            .Where(message =>
                 message.LoggerName.Equals(
                     typeof(DistributedSession).FullName,
                     StringComparison.Ordinal
@@ -1052,8 +1052,8 @@ public class SessionTests
         );
         Assert.Equal(LogLevel.Warning, sessionLogMessages[1].LogLevel);
 
-        var sessionMiddlewareLogs = sink
-            .Writes.Where(message =>
+        var sessionMiddlewareLogs = sink.Writes
+            .Where(message =>
                 message.LoggerName.Equals(
                     typeof(SessionMiddleware).FullName,
                     StringComparison.Ordinal
@@ -1127,8 +1127,8 @@ public class SessionTests
         }
 
         // The session is automatically committed on unwind even after the manual commit was canceled.
-        var sessionLogMessages = sink
-            .Writes.Where(message =>
+        var sessionLogMessages = sink.Writes
+            .Where(message =>
                 message.LoggerName.Equals(
                     typeof(DistributedSession).FullName,
                     StringComparison.Ordinal
@@ -1209,8 +1209,8 @@ public class SessionTests
             response.EnsureSuccessStatusCode();
         }
 
-        var sessionLogMessages = sink
-            .Writes.Where(message =>
+        var sessionLogMessages = sink.Writes
+            .Where(message =>
                 message.LoggerName.Equals(
                     typeof(DistributedSession).FullName,
                     StringComparison.Ordinal

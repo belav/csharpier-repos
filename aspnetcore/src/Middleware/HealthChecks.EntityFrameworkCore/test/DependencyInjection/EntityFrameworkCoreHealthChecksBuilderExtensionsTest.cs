@@ -32,7 +32,8 @@ public class EntityFrameworkCoreHealthChecksBuilderExtensionsTest
 
         var registrations = services
             .GetRequiredService<IOptions<HealthCheckServiceOptions>>()
-            .Value.Registrations;
+            .Value
+            .Registrations;
 
         var registration = Assert.Single(registrations);
         Assert.Equal("test", registration.Name);

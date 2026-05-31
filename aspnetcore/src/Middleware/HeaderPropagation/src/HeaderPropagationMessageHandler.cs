@@ -87,10 +87,9 @@ public class HeaderPropagationMessageHandler : DelegatingHandler
                             ) && hasContent
                         )
                         {
-                            request.Content!.Headers.TryAddWithoutValidation(
-                                entry.OutboundHeaderName,
-                                value
-                            );
+                            request.Content!
+                                .Headers
+                                .TryAddWithoutValidation(entry.OutboundHeaderName, value);
                         }
                     }
                     else
@@ -103,10 +102,9 @@ public class HeaderPropagationMessageHandler : DelegatingHandler
                             ) && hasContent
                         )
                         {
-                            request.Content!.Headers.TryAddWithoutValidation(
-                                entry.OutboundHeaderName,
-                                values
-                            );
+                            request.Content!
+                                .Headers
+                                .TryAddWithoutValidation(entry.OutboundHeaderName, values);
                         }
                     }
                 }

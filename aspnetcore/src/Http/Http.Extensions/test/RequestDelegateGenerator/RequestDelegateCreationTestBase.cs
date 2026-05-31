@@ -241,8 +241,8 @@ public abstract class RequestDelegateCreationTestBase : LoggedTest
 
         foreach (var endpoint in endpoints)
         {
-            var generatedCodeAttribute = endpoint
-                .Metadata.OfType<GeneratedCodeAttribute>()
+            var generatedCodeAttribute = endpoint.Metadata
+                .OfType<GeneratedCodeAttribute>()
                 .SingleOrDefault();
 
             if (expectGeneratedCode)
@@ -421,8 +421,8 @@ public static class {{className}}
         {
             compilationOptions = modifyCompilationOptions(compilationOptions);
         }
-        var project = new AdhocWorkspace()
-            .CurrentSolution.AddProject(projectName, projectName, LanguageNames.CSharp)
+        var project = new AdhocWorkspace().CurrentSolution
+            .AddProject(projectName, projectName, LanguageNames.CSharp)
             .WithCompilationOptions(compilationOptions)
             .WithParseOptions(ParseOptions);
 
@@ -469,8 +469,8 @@ public static class {{className}}
             return;
         }
 
-        var baselineFilePathMetadataValue = typeof(RequestDelegateCreationTestBase)
-            .Assembly.GetCustomAttributes<AssemblyMetadataAttribute>()
+        var baselineFilePathMetadataValue = typeof(RequestDelegateCreationTestBase).Assembly
+            .GetCustomAttributes<AssemblyMetadataAttribute>()
             .Single(d => d.Key == "RequestDelegateGeneratorTestBaselines")
             .Value;
         var baselineFilePathRoot = SkipOnHelixAttribute.OnHelix()

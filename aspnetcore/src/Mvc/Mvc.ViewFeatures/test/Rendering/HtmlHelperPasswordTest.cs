@@ -559,16 +559,12 @@ public class HtmlHelperPasswordTest
         helper.ViewData.TemplateInfo.HtmlFieldPrefix = "pre";
 
         helper.ViewData.ModelState.SetModelValue("pre.Property3[key]", "MProp3Val", "MProp3Val");
-        helper.ViewData.ModelState.SetModelValue(
-            "pre.Property4.Property5",
-            "MProp5Val",
-            "MProp5Val"
-        );
-        helper.ViewData.ModelState.SetModelValue(
-            "pre.Property4.Property6[0]",
-            "MProp6Val",
-            "MProp6Val"
-        );
+        helper.ViewData
+            .ModelState
+            .SetModelValue("pre.Property4.Property5", "MProp5Val", "MProp5Val");
+        helper.ViewData
+            .ModelState
+            .SetModelValue("pre.Property4.Property6[0]", "MProp6Val", "MProp6Val");
 
         helper.ViewData["pre.Property3[key]"] = "VDProp3Val";
         helper.ViewData["pre.Property4.Property5"] = "VDProp5Val";

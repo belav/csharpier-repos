@@ -231,8 +231,8 @@ public class ClientHandler : HttpMessageHandler
         var httpContext = await contextBuilder.SendAsync(cancellationToken);
 
         response.StatusCode = (HttpStatusCode)httpContext.Response.StatusCode;
-        response.ReasonPhrase = httpContext
-            .Features.GetRequiredFeature<IHttpResponseFeature>()
+        response.ReasonPhrase = httpContext.Features
+            .GetRequiredFeature<IHttpResponseFeature>()
             .ReasonPhrase;
         response.RequestMessage = request;
         response.Version = request.Version;
@@ -248,10 +248,9 @@ public class ClientHandler : HttpMessageHandler
                 )
             )
             {
-                bool success = response.Content.Headers.TryAddWithoutValidation(
-                    header.Key,
-                    (IEnumerable<string>)header.Value
-                );
+                bool success = response.Content
+                    .Headers
+                    .TryAddWithoutValidation(header.Key, (IEnumerable<string>)header.Value);
                 Contract.Assert(success, "Bad header");
             }
         }

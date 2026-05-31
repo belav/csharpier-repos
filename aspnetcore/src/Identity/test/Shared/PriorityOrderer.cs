@@ -53,9 +53,9 @@ public class PriorityOrderer : ITestCaseOrderer
             var priority = 0;
 
             foreach (
-                IAttributeInfo attr in testCase.TestMethod.Method.GetCustomAttributes(
-                    (typeof(TestPriorityAttribute)).AssemblyQualifiedName
-                )
+                IAttributeInfo attr in testCase.TestMethod
+                    .Method
+                    .GetCustomAttributes((typeof(TestPriorityAttribute)).AssemblyQualifiedName)
             )
             {
                 priority = attr.GetNamedArgument<int>("Priority");

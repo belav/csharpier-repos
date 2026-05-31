@@ -40,8 +40,8 @@ internal static class AngularCliMiddleware
 
         // Start Angular CLI and attach to middleware pipeline
         var appBuilder = spaBuilder.ApplicationBuilder;
-        var applicationStoppingToken = appBuilder
-            .ApplicationServices.GetRequiredService<IHostApplicationLifetime>()
+        var applicationStoppingToken = appBuilder.ApplicationServices
+            .GetRequiredService<IHostApplicationLifetime>()
             .ApplicationStopping;
         var logger = LoggerFinder.GetOrCreateLogger(appBuilder, LogCategoryName);
         var diagnosticSource =

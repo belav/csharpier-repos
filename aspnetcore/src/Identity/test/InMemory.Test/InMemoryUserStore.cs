@@ -66,8 +66,8 @@ public class InMemoryUserStore<TUser>
         CancellationToken cancellationToken = default(CancellationToken)
     )
     {
-        var matchedClaims = user
-            .Claims.Where(uc => uc.ClaimValue == claim.Value && uc.ClaimType == claim.Type)
+        var matchedClaims = user.Claims
+            .Where(uc => uc.ClaimValue == claim.Value && uc.ClaimType == claim.Type)
             .ToList();
         foreach (var matchedClaim in matchedClaims)
         {
@@ -267,12 +267,8 @@ public class InMemoryUserStore<TUser>
         CancellationToken cancellationToken = default(CancellationToken)
     )
     {
-        IList<UserLoginInfo> result = user
-            .Logins.Select(l => new UserLoginInfo(
-                l.LoginProvider,
-                l.ProviderKey,
-                l.ProviderDisplayName
-            ))
+        IList<UserLoginInfo> result = user.Logins
+            .Select(l => new UserLoginInfo(l.LoginProvider, l.ProviderKey, l.ProviderDisplayName))
             .ToList();
         return Task.FromResult(result);
     }
@@ -496,7 +492,8 @@ public class InMemoryUserStore<TUser>
         var query =
             from user in Users
             where
-                user.Claims.Where(x => x.ClaimType == claim.Type && x.ClaimValue == claim.Value)
+                user.Claims
+                    .Where(x => x.ClaimType == claim.Type && x.ClaimValue == claim.Value)
                     .FirstOrDefault() != null
             select user;
 

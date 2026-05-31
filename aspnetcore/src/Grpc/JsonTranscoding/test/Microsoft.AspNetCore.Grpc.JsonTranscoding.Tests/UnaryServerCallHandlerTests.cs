@@ -71,9 +71,10 @@ public class UnaryServerCallHandlerTests : LoggedTest
                     new[]
                     {
                         HelloRequest.Descriptor.FindFieldByNumber(HelloRequest.SubFieldNumber),
-                        HelloRequest.Types.SubMessage.Descriptor.FindFieldByNumber(
-                            HelloRequest.Types.SubMessage.SubfieldFieldNumber
-                        ),
+                        HelloRequest.Types
+                            .SubMessage
+                            .Descriptor
+                            .FindFieldByNumber(HelloRequest.Types.SubMessage.SubfieldFieldNumber),
                     }
                 )
             ),

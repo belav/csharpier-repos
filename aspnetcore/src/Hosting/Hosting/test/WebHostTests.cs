@@ -913,8 +913,8 @@ public partial class WebHostTests
         {
             // Assert
             Assert.NotNull(httpContext);
-            var featuresTraceIdentifier = httpContext
-                .Features.Get<IHttpRequestIdentifierFeature>()
+            var featuresTraceIdentifier = httpContext.Features
+                .Get<IHttpRequestIdentifierFeature>()
                 .TraceIdentifier;
             Assert.False(string.IsNullOrWhiteSpace(httpContext.TraceIdentifier));
             Assert.Same(httpContext.TraceIdentifier, featuresTraceIdentifier);

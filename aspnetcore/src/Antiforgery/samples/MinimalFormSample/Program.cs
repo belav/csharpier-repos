@@ -19,18 +19,18 @@ app.MapGet(
     {
         var token = antiforgery.GetAndStoreTokens(context);
         var html = $"""
-                <html>
-                    <body>
-                        <form action="/todo" method="POST" enctype="multipart/form-data">
-                            <input name="{token.FormFieldName}" type="hidden" value="{token.RequestToken}" />
-                            <input type="text" name="name" />
-                            <input type="date" name="dueDate" />
-                            <input type="checkbox" name="isCompleted" />
-                            <input type="submit" />
-                        </form>
-                    </body>
-                </html>
-            """;
+            <html>
+                <body>
+                    <form action="/todo" method="POST" enctype="multipart/form-data">
+                        <input name="{token.FormFieldName}" type="hidden" value="{token.RequestToken}" />
+                        <input type="text" name="name" />
+                        <input type="date" name="dueDate" />
+                        <input type="checkbox" name="isCompleted" />
+                        <input type="submit" />
+                    </form>
+                </body>
+            </html>
+        """;
         return Results.Content(html, "text/html");
     }
 );
@@ -40,17 +40,17 @@ app.MapGet(
     () =>
     {
         var html = """
-                <html>
-                    <body>
-                        <form action="/todo" method="POST" enctype="multipart/form-data">
-                            <input type="text" name="name" />
-                            <input type="date" name="dueDate" />
-                            <input type="checkbox" name="isCompleted" />
-                            <input type="submit" />
-                        </form>
-                    </body>
-                </html>
-            """;
+            <html>
+                <body>
+                    <form action="/todo" method="POST" enctype="multipart/form-data">
+                        <input type="text" name="name" />
+                        <input type="date" name="dueDate" />
+                        <input type="checkbox" name="isCompleted" />
+                        <input type="submit" />
+                    </form>
+                </body>
+            </html>
+        """;
         return Results.Content(html, "text/html");
     }
 );

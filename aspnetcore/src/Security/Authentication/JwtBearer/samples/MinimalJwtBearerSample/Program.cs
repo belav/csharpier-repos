@@ -5,8 +5,8 @@ using System.Security.Claims;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder
-    .Services.AddAuthentication()
+builder.Services
+    .AddAuthentication()
     .AddJwtBearer()
     .AddJwtBearer("ClaimedDetails")
     .AddJwtBearer("InvalidScheme");

@@ -357,8 +357,8 @@ public class Startup
 
                             await res.WriteAsync("<h2>Payload:</h2>");
                             await res.WriteAsync(
-                                HtmlEncoder
-                                    .Default.Encode(payload.RootElement.ToString())
+                                HtmlEncoder.Default
+                                    .Encode(payload.RootElement.ToString())
                                     .Replace(",", ",<br>") + "<br>"
                             );
                         }

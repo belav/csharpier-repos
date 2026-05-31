@@ -92,8 +92,7 @@ public class DefaultHtmlGenerator : IHtmlGenerator
         _formInputRenderMode = optionsAccessor.Value.HtmlHelperOptions.FormInputRenderMode;
 
         // Underscores are fine characters in id's.
-        IdAttributeDotReplacement = optionsAccessor
-            .Value
+        IdAttributeDotReplacement = optionsAccessor.Value
             .HtmlHelperOptions
             .IdAttributeDotReplacement;
     }
@@ -837,10 +836,9 @@ public class DefaultHtmlGenerator : IHtmlGenerator
             return null;
         }
 
-        var tryGetModelStateResult = viewContext.ViewData.ModelState.TryGetValue(
-            fullName,
-            out var entry
-        );
+        var tryGetModelStateResult = viewContext.ViewData
+            .ModelState
+            .TryGetValue(fullName, out var entry);
         var modelErrors = tryGetModelStateResult ? entry.Errors : null;
 
         ModelError modelError = null;

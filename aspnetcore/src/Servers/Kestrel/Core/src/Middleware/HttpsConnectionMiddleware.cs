@@ -192,8 +192,8 @@ internal sealed class HttpsConnectionMiddleware
         context.Features.Set<ISslStreamFeature>(feature);
         context.Features.Set<SslStream>(sslStream); // Anti-pattern, but retain for back compat
 
-        var metricsContext = context
-            .Features.GetRequiredFeature<IConnectionMetricsContextFeature>()
+        var metricsContext = context.Features
+            .GetRequiredFeature<IConnectionMetricsContextFeature>()
             .MetricsContext;
         var startTimestamp = Stopwatch.GetTimestamp();
         try

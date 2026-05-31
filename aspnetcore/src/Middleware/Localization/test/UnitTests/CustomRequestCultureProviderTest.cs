@@ -69,10 +69,10 @@ public class CustomRequestCultureProviderTest
     )
     {
         var currentCulture = "en";
-        var segments = context.Request.Path.Value.Split(
-            new char[] { '/' },
-            StringSplitOptions.RemoveEmptyEntries
-        );
+        var segments = context.Request
+            .Path
+            .Value
+            .Split(new char[] { '/' }, StringSplitOptions.RemoveEmptyEntries);
         if (segments.Length > 1 && segments[0].Length == 2)
         {
             currentCulture = segments[0];

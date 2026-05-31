@@ -783,8 +783,8 @@ certs            [0] EXPLICIT SEQUENCE OF Certificate OPTIONAL }
 
     private X509AuthorityKeyIdentifierExtension CreateAkidExtension()
     {
-        X509SubjectKeyIdentifierExtension skid = _cert
-            .Extensions.OfType<X509SubjectKeyIdentifierExtension>()
+        X509SubjectKeyIdentifierExtension skid = _cert.Extensions
+            .OfType<X509SubjectKeyIdentifierExtension>()
             .SingleOrDefault();
 
         if (skid is null)
@@ -918,8 +918,8 @@ certs            [0] EXPLICIT SEQUENCE OF Certificate OPTIONAL }
                     intermedPub.Dispose();
                 }
 
-                X509SubjectKeyIdentifierExtension intermedSkid = intermedCert
-                    .Extensions.OfType<X509SubjectKeyIdentifierExtension>()
+                X509SubjectKeyIdentifierExtension intermedSkid = intermedCert.Extensions
+                    .OfType<X509SubjectKeyIdentifierExtension>()
                     .Single();
 
                 certUrl = $"{responder.UriPrefix}cert/{intermedSkid.SubjectKeyIdentifier}.cer";

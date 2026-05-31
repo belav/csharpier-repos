@@ -334,8 +334,10 @@ public class OpenIdConnectChallengeTests
             OpenIdConnectParameterNames.RedirectUri
         );
 
-        var actual = res
-            .Headers.Location.Query.Trim('?')
+        var actual = res.Headers
+            .Location
+            .Query
+            .Trim('?')
             .Split('&')
             .Single(seg =>
                 seg.StartsWith($"{OpenIdConnectParameterNames.ClientId}=", StringComparison.Ordinal)

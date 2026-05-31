@@ -99,8 +99,8 @@ public static class CookieExtensions
                 PostConfigureCookieAuthenticationOptions
             >()
         );
-        builder
-            .Services.AddOptions<CookieAuthenticationOptions>(authenticationScheme)
+        builder.Services
+            .AddOptions<CookieAuthenticationOptions>(authenticationScheme)
             .Validate(
                 o => o.Cookie.Expiration == null,
                 "Cookie.Expiration is ignored, use ExpireTimeSpan instead."

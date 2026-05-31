@@ -53,8 +53,8 @@ internal sealed class ApiResponseTypeProvider
             defaultErrorType = ((ProducesErrorResponseTypeAttribute)result!).Type;
         }
 
-        var producesResponseMetadata = action
-            .EndpointMetadata.OfType<IProducesResponseTypeMetadata>()
+        var producesResponseMetadata = action.EndpointMetadata
+            .OfType<IProducesResponseTypeMetadata>()
             .ToList();
         var apiResponseTypes = GetApiResponseTypes(
             responseMetadataAttributes,
@@ -78,8 +78,8 @@ internal sealed class ApiResponseTypeProvider
         // while searching for a filter that implements IApiResponseMetadataProvider.
         //
         // The workaround for that is to implement the metadata interface on the IFilterFactory.
-        return action
-            .FilterDescriptors.Select(fd => fd.Filter)
+        return action.FilterDescriptors
+            .Select(fd => fd.Filter)
             .OfType<IApiResponseMetadataProvider>()
             .ToList();
     }

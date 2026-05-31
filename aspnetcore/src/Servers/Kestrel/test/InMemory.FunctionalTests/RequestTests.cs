@@ -155,8 +155,9 @@ public class RequestTests : TestApplicationErrorLoggerLoggedTest
                     var data = new byte[6];
                     try
                     {
-                        await context
-                            .Request.Body.FillEntireBufferAsync(data, cts.Token)
+                        await context.Request
+                            .Body
+                            .FillEntireBufferAsync(data, cts.Token)
                             .DefaultTimeout();
 
                         Assert.Equal("Hello ", Encoding.ASCII.GetString(data));
@@ -1063,8 +1064,9 @@ public class RequestTests : TestApplicationErrorLoggerLoggedTest
             var server = new TestServer(
                 async httpContext =>
                 {
-                    var readResult = await httpContext
-                        .Request.BodyReader.ReadAsync()
+                    var readResult = await httpContext.Request
+                        .BodyReader
+                        .ReadAsync()
                         .AsTask()
                         .DefaultTimeout();
                     // This will hang if 0 content length is not assumed by the server
@@ -1153,10 +1155,9 @@ public class RequestTests : TestApplicationErrorLoggerLoggedTest
                     var readResult = await httpContext.Request.BodyReader.ReadAsync();
                     // This will hang if 0 content length is not assumed by the server
                     Assert.Equal(5, readResult.Buffer.Length);
-                    httpContext.Request.BodyReader.AdvanceTo(
-                        readResult.Buffer.Start,
-                        readResult.Buffer.End
-                    );
+                    httpContext.Request
+                        .BodyReader
+                        .AdvanceTo(readResult.Buffer.Start, readResult.Buffer.End);
                     readResult = await httpContext.Request.BodyReader.ReadAsync();
                     Assert.Equal(5, readResult.Buffer.Length);
                 },
@@ -1197,19 +1198,17 @@ public class RequestTests : TestApplicationErrorLoggerLoggedTest
                     var readResult = await httpContext.Request.BodyReader.ReadAsync();
                     // This will hang if 0 content length is not assumed by the server
                     Assert.Equal(5, readResult.Buffer.Length);
-                    httpContext.Request.BodyReader.AdvanceTo(
-                        readResult.Buffer.Start,
-                        readResult.Buffer.End
-                    );
+                    httpContext.Request
+                        .BodyReader
+                        .AdvanceTo(readResult.Buffer.Start, readResult.Buffer.End);
 
                     for (var i = 0; i < 2; i++)
                     {
                         readResult = await httpContext.Request.BodyReader.ReadAsync();
                         Assert.Equal(5, readResult.Buffer.Length);
-                        httpContext.Request.BodyReader.AdvanceTo(
-                            readResult.Buffer.Start,
-                            readResult.Buffer.End
-                        );
+                        httpContext.Request
+                            .BodyReader
+                            .AdvanceTo(readResult.Buffer.Start, readResult.Buffer.End);
                     }
                 },
                 testContext
@@ -1318,17 +1317,15 @@ public class RequestTests : TestApplicationErrorLoggerLoggedTest
                     Assert.Equal(3, readResult.Buffer.Length);
                     tcs.SetResult();
 
-                    httpContext.Request.BodyReader.AdvanceTo(
-                        readResult.Buffer.Start,
-                        readResult.Buffer.End
-                    );
+                    httpContext.Request
+                        .BodyReader
+                        .AdvanceTo(readResult.Buffer.Start, readResult.Buffer.End);
 
                     // Buffer 1 more byte.
                     readResult = await httpContext.Request.BodyReader.ReadAsync();
-                    httpContext.Request.BodyReader.AdvanceTo(
-                        readResult.Buffer.Start,
-                        readResult.Buffer.End
-                    );
+                    httpContext.Request
+                        .BodyReader
+                        .AdvanceTo(readResult.Buffer.Start, readResult.Buffer.End);
                     tcs2.SetResult();
 
                     // Buffer 1 last byte.
@@ -1336,10 +1333,9 @@ public class RequestTests : TestApplicationErrorLoggerLoggedTest
                     Assert.Equal(5, readResult.Buffer.Length);
 
                     // Do one more read to ensure completion is always observed.
-                    httpContext.Request.BodyReader.AdvanceTo(
-                        readResult.Buffer.Start,
-                        readResult.Buffer.End
-                    );
+                    httpContext.Request
+                        .BodyReader
+                        .AdvanceTo(readResult.Buffer.Start, readResult.Buffer.End);
                     readResult = await httpContext.Request.BodyReader.ReadAsync();
                     Assert.True(readResult.IsCompleted);
                 },
@@ -1376,16 +1372,14 @@ public class RequestTests : TestApplicationErrorLoggerLoggedTest
                 {
                     var readResult = await httpContext.Request.BodyReader.ReadAsync();
 
-                    httpContext.Request.BodyReader.AdvanceTo(
-                        readResult.Buffer.Start,
-                        readResult.Buffer.End
-                    );
+                    httpContext.Request
+                        .BodyReader
+                        .AdvanceTo(readResult.Buffer.Start, readResult.Buffer.End);
 
                     readResult = await httpContext.Request.BodyReader.ReadAsync();
-                    httpContext.Request.BodyReader.AdvanceTo(
-                        readResult.Buffer.Slice(1).Start,
-                        readResult.Buffer.End
-                    );
+                    httpContext.Request
+                        .BodyReader
+                        .AdvanceTo(readResult.Buffer.Slice(1).Start, readResult.Buffer.End);
                 },
                 testContext
             )
@@ -1836,8 +1830,8 @@ public class RequestTests : TestApplicationErrorLoggerLoggedTest
                         );
 
                     using (
-                        var stream = await context
-                            .Features.Get<IHttpUpgradeFeature>()
+                        var stream = await context.Features
+                            .Get<IHttpUpgradeFeature>()
                             .UpgradeAsync()
                     )
                     {
@@ -2011,8 +2005,9 @@ public class RequestTests : TestApplicationErrorLoggerLoggedTest
                     Assert.Equal(CoreStrings.SynchronousReadsDisallowed, ioEx2.Message);
 
                     var buffer = new byte[5];
-                    var length = await context
-                        .Request.Body.FillBufferUntilEndAsync(buffer)
+                    var length = await context.Request
+                        .Body
+                        .FillBufferUntilEndAsync(buffer)
                         .DefaultTimeout();
 
                     Assert.Equal(5, length);
@@ -2374,8 +2369,8 @@ public class RequestTests : TestApplicationErrorLoggerLoggedTest
                 context =>
                 {
                     requestCount++;
-                    var persistentStateCollection = context
-                        .Features.Get<IPersistentStateFeature>()
+                    var persistentStateCollection = context.Features
+                        .Get<IPersistentStateFeature>()
                         .State;
                     if (persistentStateCollection.TryGetValue("Counter", out var value))
                     {

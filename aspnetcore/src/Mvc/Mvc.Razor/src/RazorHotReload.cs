@@ -27,8 +27,8 @@ internal sealed class RazorHotReload
     )
     {
         // For Razor view services, use the service locator pattern because they views not be registered by default.
-        _razorCompiledItemFeatureProvider = applicationPartManager
-            .FeatureProviders.OfType<RazorCompiledItemFeatureProvider>()
+        _razorCompiledItemFeatureProvider = applicationPartManager.FeatureProviders
+            .OfType<RazorCompiledItemFeatureProvider>()
             .FirstOrDefault();
 
         if (viewCompilerProvider is DefaultViewCompilerProvider defaultViewCompilerProvider)

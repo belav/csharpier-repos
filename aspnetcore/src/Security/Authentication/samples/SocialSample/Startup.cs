@@ -140,9 +140,9 @@ public class Startup
                                 "Bearer",
                                 context.AccessToken
                             );
-                            request.Headers.Accept.Add(
-                                new MediaTypeWithQualityHeaderValue("application/json")
-                            );
+                            request.Headers
+                                .Accept
+                                .Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
                             var response = await context.Backchannel.SendAsync(
                                 request,
@@ -221,9 +221,9 @@ public class Startup
                                 "Bearer",
                                 context.AccessToken
                             );
-                            request.Headers.Accept.Add(
-                                new MediaTypeWithQualityHeaderValue("application/json")
-                            );
+                            request.Headers
+                                .Accept
+                                .Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
                             var response = await context.Backchannel.SendAsync(
                                 request,
@@ -252,8 +252,9 @@ public class Startup
         await context.Response.WriteAsync("<html><body>");
         await context.Response.WriteAsync(
             "A remote failure has occurred: <br>"
-                + context
-                    .Failure.Message.Split(Environment.NewLine)
+                + context.Failure
+                    .Message
+                    .Split(Environment.NewLine)
                     .Select(s => HtmlEncoder.Default.Encode(s) + "<br>")
                     .Aggregate((s1, s2) => s1 + s2)
         );
@@ -589,32 +590,32 @@ public class Startup
         if (string.Equals(GoogleDefaults.AuthenticationScheme, currentAuthType))
         {
             return Task.FromResult<OAuthOptions>(
-                context
-                    .RequestServices.GetRequiredService<IOptionsMonitor<GoogleOptions>>()
+                context.RequestServices
+                    .GetRequiredService<IOptionsMonitor<GoogleOptions>>()
                     .Get(currentAuthType)
             );
         }
         else if (string.Equals(MicrosoftAccountDefaults.AuthenticationScheme, currentAuthType))
         {
             return Task.FromResult<OAuthOptions>(
-                context
-                    .RequestServices.GetRequiredService<IOptionsMonitor<MicrosoftAccountOptions>>()
+                context.RequestServices
+                    .GetRequiredService<IOptionsMonitor<MicrosoftAccountOptions>>()
                     .Get(currentAuthType)
             );
         }
         else if (string.Equals(FacebookDefaults.AuthenticationScheme, currentAuthType))
         {
             return Task.FromResult<OAuthOptions>(
-                context
-                    .RequestServices.GetRequiredService<IOptionsMonitor<FacebookOptions>>()
+                context.RequestServices
+                    .GetRequiredService<IOptionsMonitor<FacebookOptions>>()
                     .Get(currentAuthType)
             );
         }
         else if (string.Equals("IdentityServer", currentAuthType))
         {
             return Task.FromResult<OAuthOptions>(
-                context
-                    .RequestServices.GetRequiredService<IOptionsMonitor<OAuthOptions>>()
+                context.RequestServices
+                    .GetRequiredService<IOptionsMonitor<OAuthOptions>>()
                     .Get(currentAuthType)
             );
         }

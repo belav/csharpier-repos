@@ -92,9 +92,9 @@ internal sealed class TryParseModelBinder : IModelBinder
                 {
                     bindingContext.ModelState.TryAddModelError(
                         bindingContext.ModelName,
-                        bindingContext.ModelMetadata.ModelBindingMessageProvider.ValueMustNotBeNullAccessor(
-                            valueProviderResult.ToString()
-                        )
+                        bindingContext.ModelMetadata
+                            .ModelBindingMessageProvider
+                            .ValueMustNotBeNullAccessor(valueProviderResult.ToString())
                     );
                 }
                 else

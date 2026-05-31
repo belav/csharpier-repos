@@ -61,8 +61,8 @@ public class AntiforgeryMiddlewareTest
     public async Task Works_WithAntiforgeryMetadata_AndFilterAttribute_ValidToken()
     {
         var builder = WebApplication.CreateBuilder();
-        builder
-            .Services.AddMvcCore()
+        builder.Services
+            .AddMvcCore()
             .UseSpecificControllers(typeof(TestWithBothAttributesController))
             .AddViews();
         builder.Services.AddAntiforgery();
@@ -209,8 +209,8 @@ public class AntiforgeryMiddlewareTest
     public async Task Works_WithAntiforgeryMetadata_ValidToken_DisableRequestSizeLimits()
     {
         var builder = WebApplication.CreateBuilder();
-        builder
-            .Services.AddMvcCore()
+        builder.Services
+            .AddMvcCore()
             .UseSpecificControllers(typeof(TestWithRequestSizeLimitController));
         builder.Services.AddAntiforgery();
         builder.WebHost.UseTestServer();

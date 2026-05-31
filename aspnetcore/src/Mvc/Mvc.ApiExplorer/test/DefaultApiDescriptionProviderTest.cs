@@ -2450,8 +2450,8 @@ public class DefaultApiDescriptionProviderTest
 
     private IEnumerable<string> GetSortedMediaTypes(ApiResponseType apiResponseType)
     {
-        return apiResponseType
-            .ApiResponseFormats.OrderBy(responseType => responseType.MediaType)
+        return apiResponseType.ApiResponseFormats
+            .OrderBy(responseType => responseType.MediaType)
             .Select(responseType => responseType.MediaType);
     }
 

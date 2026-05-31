@@ -55,8 +55,8 @@ internal sealed class Http3Connection : IHttp3StreamLifetimeHandler, IRequestPro
         _multiplexedContext = (MultiplexedConnectionContext)context.ConnectionContext;
         _context = context;
         _streamLifetimeHandler = this;
-        MetricsContext = context
-            .ConnectionFeatures.GetRequiredFeature<IConnectionMetricsContextFeature>()
+        MetricsContext = context.ConnectionFeatures
+            .GetRequiredFeature<IConnectionMetricsContextFeature>()
             .MetricsContext;
 
         _errorCodeFeature =
@@ -280,10 +280,10 @@ internal sealed class Http3Connection : IHttp3StreamLifetimeHandler, IRequestPro
         // 2. When a stream finished and is waiting for underlying transport to drain.
         //    Uses MinResponseDataRate.
         var serviceContext = _context.ServiceContext;
-        var requestHeadersTimeout =
-            serviceContext.ServerOptions.Limits.RequestHeadersTimeout.ToTicks(
-                serviceContext.TimeProvider
-            );
+        var requestHeadersTimeout = serviceContext.ServerOptions
+            .Limits
+            .RequestHeadersTimeout
+            .ToTicks(serviceContext.TimeProvider);
 
         lock (_unidentifiedStreams)
         {
@@ -341,8 +341,7 @@ internal sealed class Http3Connection : IHttp3StreamLifetimeHandler, IRequestPro
                 }
                 else if (stream.IsDraining)
                 {
-                    var minDataRate = _context
-                        .ServiceContext
+                    var minDataRate = _context.ServiceContext
                         .ServerOptions
                         .Limits
                         .MinResponseDataRate;

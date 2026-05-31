@@ -1171,8 +1171,8 @@ public class RouteHandlerEndpointRouteBuilderExtensionsTest : LoggedTest
         addFilter(innerGroup);
         addFilter(innerGroup.Map("/{id}", PrintId));
 
-        var endpoints = builder
-            .DataSources.SelectMany(ds => ds.Endpoints)
+        var endpoints = builder.DataSources
+            .SelectMany(ds => ds.Endpoints)
             .ToDictionary(e => ((RouteEndpoint)e).RoutePattern.RawText!);
 
         Assert.Equal(3, endpoints.Count);
@@ -1351,8 +1351,7 @@ public class RouteHandlerEndpointRouteBuilderExtensionsTest : LoggedTest
         )
         {
             context.HttpContext.Items["loggerErrorIsEnabled"] = _logger.IsEnabled(LogLevel.Error);
-            context.HttpContext.Items["parentName"] = _routeHandlerContext
-                .MethodInfo
+            context.HttpContext.Items["parentName"] = _routeHandlerContext.MethodInfo
                 .DeclaringType
                 ?.Name;
             return await next(context);

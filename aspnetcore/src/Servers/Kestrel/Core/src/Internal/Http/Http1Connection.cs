@@ -855,10 +855,9 @@ internal partial class Http1Connection : HttpProtocol, IRequestProcessor, IHttpO
                 && requestData.Length >= PrefaceLineLength
             )
             {
-                var clientPrefaceRequestLine = Http2.Http2Connection.ClientPreface.Slice(
-                    0,
-                    PrefaceLineLength
-                );
+                var clientPrefaceRequestLine = Http2.Http2Connection
+                    .ClientPreface
+                    .Slice(0, PrefaceLineLength);
                 var currentRequestLine = requestData.Slice(0, PrefaceLineLength).ToSpan();
                 if (currentRequestLine.SequenceEqual(clientPrefaceRequestLine))
                 {

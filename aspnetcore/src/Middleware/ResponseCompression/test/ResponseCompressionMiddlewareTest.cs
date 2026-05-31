@@ -1504,11 +1504,15 @@ public class ResponseCompressionMiddlewareTest
         var request = new HttpRequestMessage(new HttpMethod(httpMethod), "");
         for (var i = 0; i < requestAcceptEncodings?.Length; i++)
         {
-            request.Headers.AcceptEncoding.Add(
-                System.Net.Http.Headers.StringWithQualityHeaderValue.Parse(
-                    requestAcceptEncodings[i]
-                )
-            );
+            request.Headers
+                .AcceptEncoding
+                .Add(
+                    System.Net
+                        .Http
+                        .Headers
+                        .StringWithQualityHeaderValue
+                        .Parse(requestAcceptEncodings[i])
+                );
         }
 
         var response = await client.SendAsync(request);

@@ -171,8 +171,8 @@ internal partial class HubServerProxyGenerator
             foreach (var attributeData in methodSymbol.GetAttributes())
             {
                 if (
-                    !attributeData
-                        .AttributeClass.ToString()
+                    !attributeData.AttributeClass
+                        .ToString()
                         .EndsWith("HubServerProxyAttribute", StringComparison.Ordinal)
                 )
                 {

@@ -566,8 +566,8 @@ public static class ControllerEndpointRouteBuilderExtensions
         IEndpointRouteBuilder endpoints
     )
     {
-        var dataSource = endpoints
-            .DataSources.OfType<ControllerActionEndpointDataSource>()
+        var dataSource = endpoints.DataSources
+            .OfType<ControllerActionEndpointDataSource>()
             .FirstOrDefault();
         if (dataSource == null)
         {

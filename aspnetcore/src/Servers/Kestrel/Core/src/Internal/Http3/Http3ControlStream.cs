@@ -449,8 +449,9 @@ internal abstract class Http3ControlStream : IHttp3Stream, IThreadPoolWorkItem
 
         // StopProcessingNextRequest must be called before RequestClose to ensure it's considered client initiated.
         _context.Connection.StopProcessingNextRequest(serverInitiated: false);
-        _context
-            .ConnectionContext.Features.Get<IConnectionLifetimeNotificationFeature>()
+        _context.ConnectionContext
+            .Features
+            .Get<IConnectionLifetimeNotificationFeature>()
             ?.RequestClose();
 
         // https://quicwg.org/base-drafts/draft-ietf-quic-http.html#name-goaway

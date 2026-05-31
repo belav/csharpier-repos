@@ -230,8 +230,8 @@ internal class CSharpCompiler
     )
     {
         var configurationSymbol = hostingEnvironment.IsDevelopment() ? "DEBUG" : "RELEASE";
-        var defines = dependencyContextOptions
-            .Defines.Concat(new[] { configurationSymbol })
+        var defines = dependencyContextOptions.Defines
+            .Concat(new[] { configurationSymbol })
             .Where(define => define != null);
 
         var parseOptions = new CSharpParseOptions(

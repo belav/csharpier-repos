@@ -522,10 +522,9 @@ static async IAsyncEnumerable<JsonTodo> GetTodosAsync()
             {
                 serviceCollection.ConfigureHttpJsonOptions(o =>
                 {
-                    o.SerializerOptions.TypeInfoResolverChain.Insert(
-                        0,
-                        SharedTestJsonContext.Default
-                    );
+                    o.SerializerOptions
+                        .TypeInfoResolverChain
+                        .Insert(0, SharedTestJsonContext.Default);
                     o.SerializerOptions.TypeInfoResolver = SharedTestJsonContext.Default;
                 });
             }

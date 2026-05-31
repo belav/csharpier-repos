@@ -97,8 +97,8 @@ internal sealed partial class CircuitFactory : ICircuitFactory
         var circuitHandlers =
             components.Count == 0
                 ? []
-                : scope
-                    .ServiceProvider.GetServices<CircuitHandler>()
+                : scope.ServiceProvider
+                    .GetServices<CircuitHandler>()
                     .OrderBy(h => h.Order)
                     .ToArray();
 

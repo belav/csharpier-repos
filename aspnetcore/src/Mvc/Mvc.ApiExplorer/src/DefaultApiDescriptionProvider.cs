@@ -137,8 +137,8 @@ public class DefaultApiDescriptionProvider : IApiDescriptionProvider
         if (apiDescription.ParameterDescriptions.Count > 0)
         {
             // Get the most significant accepts metadata
-            var acceptsMetadata = action
-                .EndpointMetadata.OfType<IAcceptsMetadata>()
+            var acceptsMetadata = action.EndpointMetadata
+                .OfType<IAcceptsMetadata>()
                 .LastOrDefault();
             var requestMetadataAttributes = GetRequestMetadataAttributes(action);
 
@@ -296,8 +296,9 @@ public class DefaultApiDescriptionProvider : IApiDescriptionProvider
                     if (
                         parameter.Source == BindingSource.Path
                         && parameter.ModelMetadata is DefaultModelMetadata defaultModelMetadata
-                        && !defaultModelMetadata
-                            .Attributes.Attributes.OfType<IFromRouteMetadata>()
+                        && !defaultModelMetadata.Attributes
+                            .Attributes
+                            .OfType<IFromRouteMetadata>()
                             .Any()
                     )
                     {
@@ -412,8 +413,8 @@ public class DefaultApiDescriptionProvider : IApiDescriptionProvider
     {
         if (action.ActionConstraints != null && action.ActionConstraints.Count > 0)
         {
-            return action
-                .ActionConstraints.OfType<HttpMethodActionConstraint>()
+            return action.ActionConstraints
+                .OfType<HttpMethodActionConstraint>()
                 .SelectMany(c => c.HttpMethods);
         }
         else
@@ -550,8 +551,8 @@ public class DefaultApiDescriptionProvider : IApiDescriptionProvider
         // while searching for a filter that implements IApiRequestMetadataProvider.
         //
         // The workaround for that is to implement the metadata interface on the IFilterFactory.
-        return action
-            .FilterDescriptors.Select(fd => fd.Filter)
+        return action.FilterDescriptors
+            .Select(fd => fd.Filter)
             .OfType<IApiRequestMetadataProvider>()
             .ToArray();
     }
@@ -568,8 +569,8 @@ public class DefaultApiDescriptionProvider : IApiDescriptionProvider
         // - EndpointGroupName on the controller, if it is set
         // - ApiExplorerSettings.GroupName on the action, if it is set
         // - ApiExplorerSettings.GroupName on the controller, if it is set
-        var endpointGroupName = action
-            .EndpointMetadata.OfType<IEndpointGroupNameMetadata>()
+        var endpointGroupName = action.EndpointMetadata
+            .OfType<IEndpointGroupNameMetadata>()
             .LastOrDefault();
         return endpointGroupName?.EndpointGroupName ?? extensionData.GroupName;
     }

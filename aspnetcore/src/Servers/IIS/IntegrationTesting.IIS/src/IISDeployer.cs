@@ -158,7 +158,8 @@ public class IISDeployer : IISDeployerBase
             if (
                 aspNetCore
                     .Attribute("processPath")
-                    ?.Value.StartsWith("dotnet", StringComparison.Ordinal) == true
+                    ?.Value
+                    .StartsWith("dotnet", StringComparison.Ordinal) == true
             )
             {
                 aspNetCore.SetAttributeValue(

@@ -612,8 +612,8 @@ public class ShutdownTests : IISFunctionalTestBase
 
             var deploymentResult = await DeployAsync(deploymentParameters);
 
-            var response = await deploymentResult
-                .HttpClient.GetAsync("/Abort")
+            var response = await deploymentResult.HttpClient
+                .GetAsync("/Abort")
                 .TimeoutAfter(TimeoutExtensions.DefaultTimeoutValue);
 
             Assert.Equal(HttpStatusCode.BadGateway, response.StatusCode);
@@ -641,8 +641,8 @@ public class ShutdownTests : IISFunctionalTestBase
             var deploymentParameters = Fixture.GetBaseDeploymentParameters(HostingModel.InProcess);
 
             var deploymentResult = await DeployAsync(deploymentParameters);
-            var response = await deploymentResult
-                .HttpClient.GetAsync("/Abort")
+            var response = await deploymentResult.HttpClient
+                .GetAsync("/Abort")
                 .TimeoutAfter(TimeoutExtensions.DefaultTimeoutValue);
 
             Assert.True(false, "Should not reach here");

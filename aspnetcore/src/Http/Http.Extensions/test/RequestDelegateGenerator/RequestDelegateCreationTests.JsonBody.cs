@@ -354,9 +354,9 @@ app.MapPost("/", TestPipeReader);
         Assert.Same(httpContext.Request.BodyReader, pipeReader);
 
         // Assert that we can read the body from both the pipe reader and Stream after executing and verify that they are empty (the pipe reader isn't seekable here)
-        int read = await httpContext.Request.Body.ReadAsync(
-            new byte[requestBodyBytes.Length].AsMemory()
-        );
+        int read = await httpContext.Request
+            .Body
+            .ReadAsync(new byte[requestBodyBytes.Length].AsMemory());
         Assert.Equal(0, read);
 
         var result = await httpContext.Request.BodyReader.ReadAsync();
@@ -400,9 +400,9 @@ app.MapPost("/", TestPipeReader);
         Assert.Same(httpContext.Request.BodyReader, pipeReader);
 
         // Assert that we can read the body from both the pipe reader and Stream after executing and verify that they are empty (the pipe reader isn't seekable here)
-        int read = await httpContext.Request.Body.ReadAsync(
-            new byte[requestBodyBytes.Length].AsMemory()
-        );
+        int read = await httpContext.Request
+            .Body
+            .ReadAsync(new byte[requestBodyBytes.Length].AsMemory());
         Assert.Equal(0, read);
 
         var result = await httpContext.Request.BodyReader.ReadAsync();
