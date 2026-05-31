@@ -42,29 +42,29 @@ public class RoleStoreTest : IClassFixture<InMemoryDatabaseFixture>
     {
         var store = new RoleStore<IdentityRole>(InMemoryContext.Create(_fixture.Connection));
         store.Dispose();
-        await Assert.ThrowsAsync<ObjectDisposedException>(
-            async () => await store.FindByIdAsync(null)
+        await Assert.ThrowsAsync<ObjectDisposedException>(async () =>
+            await store.FindByIdAsync(null)
         );
-        await Assert.ThrowsAsync<ObjectDisposedException>(
-            async () => await store.FindByNameAsync(null)
+        await Assert.ThrowsAsync<ObjectDisposedException>(async () =>
+            await store.FindByNameAsync(null)
         );
-        await Assert.ThrowsAsync<ObjectDisposedException>(
-            async () => await store.GetRoleIdAsync(null)
+        await Assert.ThrowsAsync<ObjectDisposedException>(async () =>
+            await store.GetRoleIdAsync(null)
         );
-        await Assert.ThrowsAsync<ObjectDisposedException>(
-            async () => await store.GetRoleNameAsync(null)
+        await Assert.ThrowsAsync<ObjectDisposedException>(async () =>
+            await store.GetRoleNameAsync(null)
         );
-        await Assert.ThrowsAsync<ObjectDisposedException>(
-            async () => await store.SetRoleNameAsync(null, null)
+        await Assert.ThrowsAsync<ObjectDisposedException>(async () =>
+            await store.SetRoleNameAsync(null, null)
         );
-        await Assert.ThrowsAsync<ObjectDisposedException>(
-            async () => await store.CreateAsync(null)
+        await Assert.ThrowsAsync<ObjectDisposedException>(async () =>
+            await store.CreateAsync(null)
         );
-        await Assert.ThrowsAsync<ObjectDisposedException>(
-            async () => await store.UpdateAsync(null)
+        await Assert.ThrowsAsync<ObjectDisposedException>(async () =>
+            await store.UpdateAsync(null)
         );
-        await Assert.ThrowsAsync<ObjectDisposedException>(
-            async () => await store.DeleteAsync(null)
+        await Assert.ThrowsAsync<ObjectDisposedException>(async () =>
+            await store.DeleteAsync(null)
         );
     }
 

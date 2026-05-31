@@ -1,0 +1,7 @@
+**/*.config
+**/*.csproj
+**/*.props
+**/*.slnx
+**/*.targets
+**/*.xaml
+**/*.xml

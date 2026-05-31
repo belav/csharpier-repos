@@ -33,8 +33,8 @@ public class CommonFilterTest
             .Verifiable();
 
         var context = CreateActionExecutingContext(mock.As<IFilterMetadata>().Object);
-        var next = new ActionExecutionDelegate(
-            () => Task.FromResult(CreateActionExecutedContext(context))
+        var next = new ActionExecutionDelegate(() =>
+            Task.FromResult(CreateActionExecutedContext(context))
         );
 
         // Act
@@ -113,8 +113,8 @@ public class CommonFilterTest
             .Verifiable();
 
         var context = CreateResultExecutingContext(mock.As<IFilterMetadata>().Object);
-        var next = new ResultExecutionDelegate(
-            () => Task.FromResult(CreateResultExecutedContext(context))
+        var next = new ResultExecutionDelegate(() =>
+            Task.FromResult(CreateResultExecutedContext(context))
         );
 
         // Act
@@ -156,8 +156,8 @@ public class CommonFilterTest
             .Verifiable();
 
         var context = CreateResultExecutingContext(mock.As<IFilterMetadata>().Object);
-        var next = new ResultExecutionDelegate(
-            () => Task.FromResult(CreateResultExecutedContext(context))
+        var next = new ResultExecutionDelegate(() =>
+            Task.FromResult(CreateResultExecutedContext(context))
         );
 
         // Act
