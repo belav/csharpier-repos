@@ -68,9 +68,8 @@ internal sealed class TlsConfigurationLoader
         else
         {
             // Ensure endpoint is reloaded if it used the default mode and the ClientCertificateMode changed.
-            endpoint.ClientCertificateMode = configurationReader
-                .EndpointDefaults
-                .ClientCertificateMode;
+            endpoint.ClientCertificateMode =
+                configurationReader.EndpointDefaults.ClientCertificateMode;
         }
 
         // A cert specified directly on the endpoint overrides any defaults.

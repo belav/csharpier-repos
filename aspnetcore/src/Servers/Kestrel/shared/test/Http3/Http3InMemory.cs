@@ -341,9 +341,9 @@ internal class Http3InMemory
         {
             _inner.OnInboundControlStreamSetting(type, value);
 
-            var success = _http3TestBase._serverReceivedSettings.Writer.TryWrite(
-                new KeyValuePair<Http3SettingType, long>(type, value)
-            );
+            var success = _http3TestBase._serverReceivedSettings
+                .Writer
+                .TryWrite(new KeyValuePair<Http3SettingType, long>(type, value));
             Debug.Assert(success);
         }
 

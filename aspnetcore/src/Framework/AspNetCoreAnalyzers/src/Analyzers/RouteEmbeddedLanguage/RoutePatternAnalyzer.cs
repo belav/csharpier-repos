@@ -110,9 +110,9 @@ public class RoutePatternAnalyzer : DiagnosticAnalyzer
                 );
                 if (insertPoint is { } ip)
                 {
-                    parameterInsertIndex = routeUsage.UsageContext.Parameters.IndexOf(
-                        ip.ExistingParameter
-                    );
+                    parameterInsertIndex = routeUsage.UsageContext
+                        .Parameters
+                        .IndexOf(ip.ExistingParameter);
                     if (!ip.Before)
                     {
                         parameterInsertIndex++;

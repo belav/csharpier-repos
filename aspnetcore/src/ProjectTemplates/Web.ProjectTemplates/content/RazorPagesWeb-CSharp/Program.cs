@@ -47,17 +47,15 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 #endif
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
-builder
-    .Services.AddDefaultIdentity<IdentityUser>(options =>
-        options.SignIn.RequireConfirmedAccount = true
-    )
+builder.Services
+    .AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
     .AddEntityFrameworkStores<ApplicationDbContext>();
 #elif (OrganizationalAuth)
 #if (GenerateApiOrGraph)
 var initialScopes = builder.Configuration["DownstreamApi:Scopes"]?.Split(' ');
 #endif
-builder
-    .Services.AddAuthentication(OpenIdConnectDefaults.AuthenticationScheme)
+builder.Services
+    .AddAuthentication(OpenIdConnectDefaults.AuthenticationScheme)
 #if (GenerateApiOrGraph)
     .AddMicrosoftIdentityWebApp(builder.Configuration.GetSection("AzureAd"))
     .EnableTokenAcquisitionToCallDownstreamApi(initialScopes)
@@ -75,8 +73,8 @@ builder
 #if (GenerateApi)
 var initialScopes = builder.Configuration["DownstreamApi:Scopes"]?.Split(' ');
 #endif
-builder
-    .Services.AddAuthentication(OpenIdConnectDefaults.AuthenticationScheme)
+builder.Services
+    .AddAuthentication(OpenIdConnectDefaults.AuthenticationScheme)
 #if (GenerateApi)
     .AddMicrosoftIdentityWebApp(builder.Configuration.GetSection("AzureAdB2C"))
     .EnableTokenAcquisitionToCallDownstreamApi(initialScopes)

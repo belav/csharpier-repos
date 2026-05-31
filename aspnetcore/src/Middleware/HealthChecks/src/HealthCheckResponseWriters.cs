@@ -24,14 +24,17 @@ internal static class HealthCheckResponseWriters
         httpContext.Response.ContentType = "text/plain";
         return result.Status switch
         {
-            HealthStatus.Degraded => httpContext
-                .Response.Body.WriteAsync(DegradedBytes.AsMemory())
+            HealthStatus.Degraded => httpContext.Response
+                .Body
+                .WriteAsync(DegradedBytes.AsMemory())
                 .AsTask(),
-            HealthStatus.Healthy => httpContext
-                .Response.Body.WriteAsync(HealthyBytes.AsMemory())
+            HealthStatus.Healthy => httpContext.Response
+                .Body
+                .WriteAsync(HealthyBytes.AsMemory())
                 .AsTask(),
-            HealthStatus.Unhealthy => httpContext
-                .Response.Body.WriteAsync(UnhealthyBytes.AsMemory())
+            HealthStatus.Unhealthy => httpContext.Response
+                .Body
+                .WriteAsync(UnhealthyBytes.AsMemory())
                 .AsTask(),
             _ => httpContext.Response.WriteAsync(result.Status.ToString()),
         };

@@ -79,8 +79,8 @@ public static class RazorComponentsEndpointRouteBuilderExtensions
         [DynamicallyAccessedMembers(Component)] TRootComponent
     >(IEndpointRouteBuilder endpoints)
     {
-        var dataSource = endpoints
-            .DataSources.OfType<RazorComponentEndpointDataSource<TRootComponent>>()
+        var dataSource = endpoints.DataSources
+            .OfType<RazorComponentEndpointDataSource<TRootComponent>>()
             .FirstOrDefault();
         if (dataSource == null)
         {

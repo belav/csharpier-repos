@@ -524,8 +524,8 @@ public class MinimalFormTests
                             {
                                 context.Request.Body = new SizeLimitedStream(
                                     context.Request.Body,
-                                    context
-                                        .Features.Get<IHttpMaxRequestBodySizeFeature>()
+                                    context.Features
+                                        .Get<IHttpMaxRequestBodySizeFeature>()
                                         ?.MaxRequestBodySize
                                 );
                                 return next(context);

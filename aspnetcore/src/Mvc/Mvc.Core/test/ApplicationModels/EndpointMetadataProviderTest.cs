@@ -478,9 +478,10 @@ public class EndpointMetadataProviderTest
             Task.FromResult<AddsCustomEndpointMetadataResult>(null);
 
         public FSharp.Control.FSharpAsync<AddsCustomEndpointMetadataResult> ActionWithMetadataInFSharpAsyncOfResult() =>
-            FSharp.Core.ExtraTopLevelOperators.DefaultAsyncBuilder.Return<AddsCustomEndpointMetadataResult>(
-                null
-            );
+            FSharp.Core
+                .ExtraTopLevelOperators
+                .DefaultAsyncBuilder
+                .Return<AddsCustomEndpointMetadataResult>(null);
 
         [HttpGet("selector1")]
         [HttpGet("selector2")]
@@ -496,9 +497,10 @@ public class EndpointMetadataProviderTest
             Task.FromResult<AddsCustomEndpointMetadataActionResult>(null);
 
         public FSharp.Control.FSharpAsync<AddsCustomEndpointMetadataActionResult> ActionWithMetadataInFSharpAsyncOfActionResult() =>
-            FSharp.Core.ExtraTopLevelOperators.DefaultAsyncBuilder.Return<AddsCustomEndpointMetadataActionResult>(
-                null
-            );
+            FSharp.Core
+                .ExtraTopLevelOperators
+                .DefaultAsyncBuilder
+                .Return<AddsCustomEndpointMetadataActionResult>(null);
 
         public RemovesAcceptsMetadataResult ActionWithNoAcceptsMetadataInResult() => null;
 
@@ -509,9 +511,10 @@ public class EndpointMetadataProviderTest
             Task.FromResult<RemovesAcceptsMetadataResult>(null);
 
         public FSharp.Control.FSharpAsync<RemovesAcceptsMetadataResult> ActionWithNoAcceptsMetadataInFSharpAsyncOfResult() =>
-            FSharp.Core.ExtraTopLevelOperators.DefaultAsyncBuilder.Return<RemovesAcceptsMetadataResult>(
-                null
-            );
+            FSharp.Core
+                .ExtraTopLevelOperators
+                .DefaultAsyncBuilder
+                .Return<RemovesAcceptsMetadataResult>(null);
 
         public RemovesAcceptsMetadataActionResult ActionWithNoAcceptsMetadataInActionResult() =>
             null;
@@ -523,9 +526,10 @@ public class EndpointMetadataProviderTest
             Task.FromResult<RemovesAcceptsMetadataActionResult>(null);
 
         public FSharp.Control.FSharpAsync<RemovesAcceptsMetadataActionResult> ActionWithNoAcceptsMetadataInFSharpAsyncOfActionResult() =>
-            FSharp.Core.ExtraTopLevelOperators.DefaultAsyncBuilder.Return<RemovesAcceptsMetadataActionResult>(
-                null
-            );
+            FSharp.Core
+                .ExtraTopLevelOperators
+                .DefaultAsyncBuilder
+                .Return<RemovesAcceptsMetadataActionResult>(null);
     }
 
     private class CustomEndpointMetadata

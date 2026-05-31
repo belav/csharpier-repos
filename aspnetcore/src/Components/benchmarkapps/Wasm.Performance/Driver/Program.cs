@@ -220,8 +220,8 @@ public class Program
             {
                 Timestamp = DateTime.UtcNow,
                 Name = "blazorwasm/commit",
-                Value = typeof(Program)
-                    .Assembly.GetCustomAttributes<AssemblyMetadataAttribute>()
+                Value = typeof(Program).Assembly
+                    .GetCustomAttributes<AssemblyMetadataAttribute>()
                     .FirstOrDefault(f => f.Key == "CommitHash")
                     ?.Value,
             }
@@ -296,8 +296,8 @@ public class Program
 #if DEBUG
             "--contentroot",
             Path.GetFullPath(
-                typeof(Program)
-                    .Assembly.GetCustomAttributes<AssemblyMetadataAttribute>()
+                typeof(Program).Assembly
+                    .GetCustomAttributes<AssemblyMetadataAttribute>()
                     .First(f => f.Key == "TestAppLocatiion")
                     .Value
             )
@@ -353,9 +353,11 @@ public class Program
 
     static string GetListeningUrl(IHost testApp)
     {
-        return testApp
-            .Services.GetRequiredService<IServer>()
-            .Features.Get<IServerAddressesFeature>()
-            .Addresses.First();
+        return testApp.Services
+            .GetRequiredService<IServer>()
+            .Features
+            .Get<IServerAddressesFeature>()
+            .Addresses
+            .First();
     }
 }

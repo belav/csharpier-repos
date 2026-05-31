@@ -1056,9 +1056,9 @@ public class WebSocketMiddlewareTests : LoggedTest
                 {
                     request.Headers.Connection.Clear();
                     request.Headers.Connection.Add("Upgrade");
-                    request.Headers.Upgrade.Add(
-                        new System.Net.Http.Headers.ProductHeaderValue("websocket")
-                    );
+                    request.Headers
+                        .Upgrade
+                        .Add(new System.Net.Http.Headers.ProductHeaderValue("websocket"));
                     request.Headers.Add(HeaderNames.SecWebSocketVersion, "13");
                     // SecWebSocketKey required to be 16 bytes
                     request.Headers.Add(
@@ -1178,12 +1178,12 @@ public class WebSocketMiddlewareTests : LoggedTest
                     request.Headers.Connection.Clear();
                     request.Headers.Connection.Add("Upgrade");
                     request.Headers.Connection.Add("keep-alive");
-                    request.Headers.Upgrade.Add(
-                        new System.Net.Http.Headers.ProductHeaderValue("websocket")
-                    );
-                    request.Headers.Upgrade.Add(
-                        new System.Net.Http.Headers.ProductHeaderValue("example")
-                    );
+                    request.Headers
+                        .Upgrade
+                        .Add(new System.Net.Http.Headers.ProductHeaderValue("websocket"));
+                    request.Headers
+                        .Upgrade
+                        .Add(new System.Net.Http.Headers.ProductHeaderValue("example"));
                     request.Headers.Add(HeaderNames.SecWebSocketVersion, "13");
                     // SecWebSocketKey required to be 16 bytes
                     request.Headers.Add(

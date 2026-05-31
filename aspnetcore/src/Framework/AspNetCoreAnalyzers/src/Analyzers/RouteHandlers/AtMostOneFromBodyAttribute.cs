@@ -33,8 +33,8 @@ public partial class RouteHandlerAnalyzer : DiagnosticAnalyzer
 
         foreach (var asParameterDecoratedParameter in asParametersDecoratedParameters)
         {
-            var fromBodyMetadataInterfaceMembers = asParameterDecoratedParameter
-                .Type.GetMembers()
+            var fromBodyMetadataInterfaceMembers = asParameterDecoratedParameter.Type
+                .GetMembers()
                 .Where(m => m.HasAttributeImplementingInterface(fromBodyMetadataInterfaceType));
 
             if (fromBodyMetadataInterfaceMembers.Count() >= 2)

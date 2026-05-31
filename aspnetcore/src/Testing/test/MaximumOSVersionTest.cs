@@ -18,8 +18,9 @@ public class MaximumOSVersionTest
     {
         Assert.True(
             RuntimeInformation.IsOSPlatform(OSPlatform.Windows)
-                && Environment
-                    .OSVersion.Version.ToString()
+                && Environment.OSVersion
+                    .Version
+                    .ToString()
                     .StartsWith("6.1", StringComparison.Ordinal),
             "Test should only be running on Win7 or Win2008R2."
         );
@@ -32,8 +33,9 @@ public class MaximumOSVersionTest
     {
         Assert.True(
             RuntimeInformation.IsOSPlatform(OSPlatform.Windows)
-                && Environment
-                    .OSVersion.Version.ToString()
+                && Environment.OSVersion
+                    .Version
+                    .ToString()
                     .StartsWith("6.1", StringComparison.Ordinal),
             "Test should only be running on Win7 or Win2008R2."
         );
@@ -79,8 +81,9 @@ public class OSMaxVersionClassTest
     {
         Assert.True(
             RuntimeInformation.IsOSPlatform(OSPlatform.Windows)
-                && Environment
-                    .OSVersion.Version.ToString()
+                && Environment.OSVersion
+                    .Version
+                    .ToString()
                     .StartsWith("6.1", StringComparison.Ordinal),
             "Test should only be running on Win7 or Win2008R2."
         );
@@ -97,8 +100,9 @@ public class OSMaxVersionCrossPlatTest
         if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
         {
             Assert.True(
-                Environment
-                    .OSVersion.Version.ToString()
+                Environment.OSVersion
+                    .Version
+                    .ToString()
                     .StartsWith("6.1", StringComparison.Ordinal),
                 "Test should only be running on Win7 or Win2008R2."
             );

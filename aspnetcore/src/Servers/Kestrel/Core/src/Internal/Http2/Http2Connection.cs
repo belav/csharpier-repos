@@ -143,8 +143,8 @@ internal sealed partial class Http2Connection
 
         _context = context;
         _streamLifetimeHandler = this;
-        _metricsContext = context
-            .ConnectionFeatures.GetRequiredFeature<IConnectionMetricsContextFeature>()
+        _metricsContext = context.ConnectionFeatures
+            .GetRequiredFeature<IConnectionMetricsContextFeature>()
             .MetricsContext;
 
         // Capture the ExecutionContext before dispatching HTTP/2 middleware. Will be restored by streams when processing request
@@ -304,8 +304,7 @@ internal sealed partial class Http2Connection
                 await _frameWriter.WriteSettingsAsync(_serverSettings.GetNonProtocolDefaults());
                 // Inform the client that the connection window is larger than the default. It can't be lowered here,
                 // It can only be lowered by not issuing window updates after data is received.
-                var connectionWindow = _context
-                    .ServiceContext
+                var connectionWindow = _context.ServiceContext
                     .ServerOptions
                     .Limits
                     .Http2
@@ -1489,9 +1488,8 @@ internal sealed partial class Http2Connection
             _currentHeadersStream.TotalParsedHeaderSize = _totalParsedHeaderSize;
 
             // This must be initialized before we offload the request or else we may start processing request body frames without it.
-            _currentHeadersStream.InputRemaining = _currentHeadersStream
-                .RequestHeaders
-                .ContentLength;
+            _currentHeadersStream.InputRemaining =
+                _currentHeadersStream.RequestHeaders.ContentLength;
 
             // This must wait until we've received all of the headers so we can verify the content-length.
             // We also must set the proper EndStream state before rejecting the request for any reason.

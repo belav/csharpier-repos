@@ -243,10 +243,9 @@ public class ResponseTrailersTests : LoggedTest
             Assert.Equal(HttpVersion.Version20, response.Version);
             // Avoid HttpContent's automatic content-length calculation.
             Assert.True(
-                response.Content.Headers.TryGetValues(
-                    HeaderNames.ContentLength,
-                    out var contentLength
-                ),
+                response.Content
+                    .Headers
+                    .TryGetValues(HeaderNames.ContentLength, out var contentLength),
                 HeaderNames.ContentLength
             );
             Assert.Equal(
@@ -290,10 +289,9 @@ public class ResponseTrailersTests : LoggedTest
             Assert.Equal(HttpVersion.Version20, response.Version);
             // Avoid HttpContent's automatic content-length calculation.
             Assert.True(
-                response.Content.Headers.TryGetValues(
-                    HeaderNames.ContentLength,
-                    out var contentLength
-                ),
+                response.Content
+                    .Headers
+                    .TryGetValues(HeaderNames.ContentLength, out var contentLength),
                 HeaderNames.ContentLength
             );
             Assert.Equal(body.Length.ToString(CultureInfo.InvariantCulture), contentLength.First());
@@ -335,10 +333,9 @@ public class ResponseTrailersTests : LoggedTest
             Assert.Equal(HttpVersion.Version20, response.Version);
             // Avoid HttpContent's automatic content-length calculation.
             Assert.True(
-                response.Content.Headers.TryGetValues(
-                    HeaderNames.ContentLength,
-                    out var contentLength
-                ),
+                response.Content
+                    .Headers
+                    .TryGetValues(HeaderNames.ContentLength, out var contentLength),
                 HeaderNames.ContentLength
             );
             Assert.Equal(body.Length.ToString(CultureInfo.InvariantCulture), contentLength.First());

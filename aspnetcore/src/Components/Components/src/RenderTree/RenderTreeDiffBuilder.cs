@@ -906,9 +906,9 @@ internal static class RenderTreeDiffBuilder
                     oldFrame.AttributeEventHandlerIdField,
                     newFrame.AttributeEventHandlerIdField
                 );
-                diffContext.BatchBuilder.DisposedEventHandlerIds.Append(
-                    oldFrame.AttributeEventHandlerIdField
-                );
+                diffContext.BatchBuilder
+                    .DisposedEventHandlerIds
+                    .Append(oldFrame.AttributeEventHandlerIdField);
             }
         }
         else if (oldFrame.AttributeEventHandlerIdField > 0)
@@ -1013,9 +1013,9 @@ internal static class RenderTreeDiffBuilder
                 );
                 if (oldFrame.AttributeEventHandlerIdField > 0)
                 {
-                    diffContext.BatchBuilder.DisposedEventHandlerIds.Append(
-                        oldFrame.AttributeEventHandlerIdField
-                    );
+                    diffContext.BatchBuilder
+                        .DisposedEventHandlerIds
+                        .Append(oldFrame.AttributeEventHandlerIdField);
                 }
                 break;
             }

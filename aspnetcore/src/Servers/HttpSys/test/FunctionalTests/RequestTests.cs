@@ -724,9 +724,10 @@ public class RequestTests : LoggedTest
 
         foreach (string path in new[] { "/", "/11", "/2/3", "/2", "/11/2" })
         {
-            server.Listener.Options.UrlPrefixes.Add(
-                UrlPrefix.Create(rootUri.Scheme, rootUri.Host, rootUri.Port, path)
-            );
+            server.Listener
+                .Options
+                .UrlPrefixes
+                .Add(UrlPrefix.Create(rootUri.Scheme, rootUri.Host, rootUri.Port, path));
         }
 
         server.StartAsync(new DummyApplication(app), CancellationToken.None).Wait();

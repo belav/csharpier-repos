@@ -434,8 +434,8 @@ public class Http2StreamTests : Http2TestBase
         {
             context.Response.Headers["path"] = context.Request.Path.Value;
             context.Response.Headers["query"] = context.Request.QueryString.Value;
-            context.Response.Headers["rawtarget"] = context
-                .Features.Get<IHttpRequestFeature>()
+            context.Response.Headers["rawtarget"] = context.Features
+                .Get<IHttpRequestFeature>()
                 .RawTarget;
             return Task.CompletedTask;
         });
@@ -1196,10 +1196,9 @@ public class Http2StreamTests : Http2TestBase
             var readResult = await context.Request.BodyReader.ReadAsync();
             while (!readResult.IsCompleted)
             {
-                context.Request.BodyReader.AdvanceTo(
-                    readResult.Buffer.Start,
-                    readResult.Buffer.End
-                );
+                context.Request
+                    .BodyReader
+                    .AdvanceTo(readResult.Buffer.Start, readResult.Buffer.End);
                 readResult = await context.Request.BodyReader.ReadAsync();
             }
 
@@ -1530,10 +1529,9 @@ public class Http2StreamTests : Http2TestBase
             var readResult = await context.Request.BodyReader.ReadAsync();
             while (!readResult.IsCompleted)
             {
-                context.Request.BodyReader.AdvanceTo(
-                    readResult.Buffer.Start,
-                    readResult.Buffer.End
-                );
+                context.Request
+                    .BodyReader
+                    .AdvanceTo(readResult.Buffer.Start, readResult.Buffer.End);
                 readResult = await context.Request.BodyReader.ReadAsync();
             }
 
@@ -1610,9 +1608,11 @@ public class Http2StreamTests : Http2TestBase
         Assert.Contains(
             LogMessages,
             m =>
-                m.Exception?.Message.Contains(
-                    "Response Content-Length mismatch: too many bytes written (12 of 11)."
-                ) ?? false
+                m.Exception
+                    ?.Message
+                    .Contains(
+                        "Response Content-Length mismatch: too many bytes written (12 of 11)."
+                    ) ?? false
         );
 
         await StopConnectionAsync(expectedLastStreamId: 1, ignoreNonGoAwayFrames: false);
@@ -3434,8 +3434,9 @@ public class Http2StreamTests : Http2TestBase
 
             try
             {
-                var readTask = context
-                    .Request.Body.ReadAsync(new byte[100], 0, 100)
+                var readTask = context.Request
+                    .Body
+                    .ReadAsync(new byte[100], 0, 100)
                     .DefaultTimeout();
                 sem.Release();
                 await readTask;
@@ -3479,11 +3480,13 @@ public class Http2StreamTests : Http2TestBase
 
             try
             {
-                var read = await context
-                    .Request.Body.ReadAsync(new byte[100], 0, 100)
+                var read = await context.Request
+                    .Body
+                    .ReadAsync(new byte[100], 0, 100)
                     .DefaultTimeout();
-                var readTask = context
-                    .Request.Body.ReadAsync(new byte[100], 0, 100)
+                var readTask = context.Request
+                    .Body
+                    .ReadAsync(new byte[100], 0, 100)
                     .DefaultTimeout();
                 sem.Release();
                 await readTask;

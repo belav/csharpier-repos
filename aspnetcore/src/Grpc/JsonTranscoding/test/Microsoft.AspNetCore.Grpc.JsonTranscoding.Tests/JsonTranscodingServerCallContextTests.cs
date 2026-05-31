@@ -41,10 +41,9 @@ public class JsonTranscodingServerCallContextTests
         httpContext.Request.Headers.Append(":method", "GET");
         httpContext.Request.Headers.Append("grpc-encoding", "identity");
         httpContext.Request.Headers.Append("grpc-timeout", "1S");
-        httpContext.Request.Headers.Append(
-            "hello-bin",
-            Convert.ToBase64String(new byte[] { 1, 2, 3 })
-        );
+        httpContext.Request
+            .Headers
+            .Append("hello-bin", Convert.ToBase64String(new byte[] { 1, 2, 3 }));
         var serverCallContext = CreateServerCallContext(httpContext);
 
         // Act

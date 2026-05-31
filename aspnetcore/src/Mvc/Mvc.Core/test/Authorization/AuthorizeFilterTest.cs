@@ -587,8 +587,8 @@ public class AuthorizeFilterTest
         Assert.NotSame(policy2, effectivePolicy);
         Assert.Equal(
             new[] { "Claim1", "Claim2" },
-            effectivePolicy
-                .Requirements.Cast<ClaimsAuthorizationRequirement>()
+            effectivePolicy.Requirements
+                .Cast<ClaimsAuthorizationRequirement>()
                 .Select(c => c.ClaimType)
         );
     }
@@ -627,8 +627,8 @@ public class AuthorizeFilterTest
         Assert.NotSame(policy2, effectivePolicy);
         Assert.Equal(
             new[] { "Claim1", "Claim2" },
-            effectivePolicy
-                .Requirements.Cast<ClaimsAuthorizationRequirement>()
+            effectivePolicy.Requirements
+                .Cast<ClaimsAuthorizationRequirement>()
                 .Select(c => c.ClaimType)
         );
     }

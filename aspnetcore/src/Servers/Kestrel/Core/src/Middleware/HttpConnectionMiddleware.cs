@@ -37,8 +37,8 @@ internal sealed class HttpConnectionMiddleware<TContext>
         var protocols =
             connectionContext.Features.Get<HttpProtocolsFeature>()?.HttpProtocols
             ?? _endpointDefaultProtocols;
-        var metricContext = connectionContext
-            .Features.GetRequiredFeature<IConnectionMetricsContextFeature>()
+        var metricContext = connectionContext.Features
+            .GetRequiredFeature<IConnectionMetricsContextFeature>()
             .MetricsContext;
         var localEndPoint = connectionContext.LocalEndPoint as IPEndPoint;
         var altSvcHeader =

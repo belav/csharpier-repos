@@ -48,9 +48,7 @@ internal sealed class UseAuthorizationAnalyzer
 
                         context.ReportDiagnostic(
                             Diagnostic.Create(
-                                StartupAnalyzer
-                                    .Diagnostics
-                                    .IncorrectlyConfiguredAuthorizationMiddleware,
+                                StartupAnalyzer.Diagnostics.IncorrectlyConfiguredAuthorizationMiddleware,
                                 middlewareItem.Operation.Syntax.GetLocation(),
                                 middlewareItem.UseMethod.Name
                             )
@@ -73,9 +71,7 @@ internal sealed class UseAuthorizationAnalyzer
 
                         context.ReportDiagnostic(
                             Diagnostic.Create(
-                                StartupAnalyzer
-                                    .Diagnostics
-                                    .IncorrectlyConfiguredAuthorizationMiddleware,
+                                StartupAnalyzer.Diagnostics.IncorrectlyConfiguredAuthorizationMiddleware,
                                 useAuthorizationItem.Operation.Syntax.GetLocation(),
                                 middlewareItem.UseMethod.Name
                             )

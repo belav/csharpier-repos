@@ -123,8 +123,8 @@ internal sealed class EndpointMetadataApiDescriptionProvider : IApiDescriptionPr
         var apiDescription = new ApiDescription
         {
             HttpMethod = httpMethod,
-            GroupName = routeEndpoint
-                .Metadata.GetMetadata<IEndpointGroupNameMetadata>()
+            GroupName = routeEndpoint.Metadata
+                .GetMetadata<IEndpointGroupNameMetadata>()
                 ?.EndpointGroupName,
             RelativePath = routeEndpoint.RoutePattern.RawText?.TrimStart('/'),
             ActionDescriptor = new ActionDescriptor

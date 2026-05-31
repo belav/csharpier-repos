@@ -1239,8 +1239,9 @@ public class JwtBearerTests : SharedAuthenticationTests<JwtBearerOptions>
         Assert.Equal(
             firstKey,
             Convert.ToBase64String(
-                jwtBearerOptions
-                    .TokenValidationParameters.IssuerSigningKeys.OfType<SymmetricSecurityKey>()
+                jwtBearerOptions.TokenValidationParameters
+                    .IssuerSigningKeys
+                    .OfType<SymmetricSecurityKey>()
                     .FirstOrDefault()
                     ?.Key
             )
@@ -1248,8 +1249,9 @@ public class JwtBearerTests : SharedAuthenticationTests<JwtBearerOptions>
         Assert.Equal(
             secondKey,
             Convert.ToBase64String(
-                jwtBearerOptions
-                    .TokenValidationParameters.IssuerSigningKeys.OfType<SymmetricSecurityKey>()
+                jwtBearerOptions.TokenValidationParameters
+                    .IssuerSigningKeys
+                    .OfType<SymmetricSecurityKey>()
                     .LastOrDefault()
                     ?.Key
             )

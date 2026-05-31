@@ -227,8 +227,8 @@ public class AutobahnTester : IDisposable
         cancellationToken.ThrowIfCancellationRequested();
 
         // Add to the current spec
-        var wsUrl = result
-            .ApplicationBaseUri.Replace("https://", "wss://")
+        var wsUrl = result.ApplicationBaseUri
+            .Replace("https://", "wss://")
             .Replace("http://", "ws://");
         Spec.WithServer(name, wsUrl);
 

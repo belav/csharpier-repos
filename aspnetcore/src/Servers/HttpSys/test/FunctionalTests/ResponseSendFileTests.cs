@@ -478,12 +478,9 @@ public class ResponseSendFileTests : LoggedTest
                             CancellationToken.None
                         );
                         Assert.True(httpContext.Response.HasStarted);
-                        await httpContext.Response.Body.WriteAsync(
-                            new byte[10],
-                            0,
-                            10,
-                            CancellationToken.None
-                        );
+                        await httpContext.Response
+                            .Body
+                            .WriteAsync(new byte[10], 0, 10, CancellationToken.None);
                     },
                     LoggerFactory
                 )

@@ -478,10 +478,9 @@ internal sealed partial class HttpConnectionDispatcher
         var useStatefulReconnect = false;
         if (
             options.AllowStatefulReconnects == true
-            && context.Request.Query.TryGetValue(
-                "UseStatefulReconnect",
-                out var useStatefulReconnectValue
-            )
+            && context.Request
+                .Query
+                .TryGetValue("UseStatefulReconnect", out var useStatefulReconnectValue)
         )
         {
             var useStatefulReconnectStringValue = useStatefulReconnectValue.ToString();
@@ -624,10 +623,9 @@ internal sealed partial class HttpConnectionDispatcher
             {
                 try
                 {
-                    await context.Request.Body.CopyToAsync(
-                        connection.ApplicationStream,
-                        bufferSize
-                    );
+                    await context.Request
+                        .Body
+                        .CopyToAsync(connection.ApplicationStream, bufferSize);
                 }
                 catch (InvalidOperationException ex)
                 {

@@ -753,8 +753,9 @@ public abstract class RazorPageBase : IRazorPage
         var viewContext = ViewContext;
         if (viewContext != null)
         {
-            var antiforgery =
-                viewContext.HttpContext.RequestServices.GetRequiredService<IAntiforgery>();
+            var antiforgery = viewContext.HttpContext
+                .RequestServices
+                .GetRequiredService<IAntiforgery>();
             antiforgery.SetCookieTokenAndHeader(viewContext.HttpContext);
         }
         return HtmlString.Empty;

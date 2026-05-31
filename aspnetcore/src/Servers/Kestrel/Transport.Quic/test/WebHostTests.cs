@@ -285,8 +285,8 @@ public class WebHostTests : LoggedTest
                     // Assert
                     response1.EnsureSuccessStatusCode();
                     Assert.Equal(HttpVersion.Version20, response1.Version);
-                    var responseText1 = await response1
-                        .Content.ReadAsStringAsync()
+                    var responseText1 = await response1.Content
+                        .ReadAsStringAsync()
                         .DefaultTimeout();
                     Assert.Equal("hello, world", responseText1);
 
@@ -304,8 +304,8 @@ public class WebHostTests : LoggedTest
                     // Assert
                     response2.EnsureSuccessStatusCode();
                     Assert.Equal(HttpVersion.Version30, response2.Version);
-                    var responseText2 = await response2
-                        .Content.ReadAsStringAsync()
+                    var responseText2 = await response2.Content
+                        .ReadAsStringAsync()
                         .DefaultTimeout();
                     Assert.Equal("hello, world", responseText2);
 
@@ -374,8 +374,8 @@ public class WebHostTests : LoggedTest
                     // Assert
                     response1.EnsureSuccessStatusCode();
                     Assert.Equal(HttpVersion.Version20, response1.Version);
-                    var responseText1 = await response1
-                        .Content.ReadAsStringAsync()
+                    var responseText1 = await response1.Content
+                        .ReadAsStringAsync()
                         .DefaultTimeout();
                     Assert.Equal("hello, world", responseText1);
 
@@ -392,8 +392,8 @@ public class WebHostTests : LoggedTest
                     // Assert
                     response2.EnsureSuccessStatusCode();
                     Assert.Equal(HttpVersion.Version20, response2.Version);
-                    var responseText2 = await response2
-                        .Content.ReadAsStringAsync()
+                    var responseText2 = await response2.Content
+                        .ReadAsStringAsync()
                         .DefaultTimeout();
                     Assert.Equal("hello, world", responseText2);
 

@@ -317,7 +317,8 @@ internal sealed partial class RateLimitingMiddleware
                 DefaultRateLimiterPolicy? policy;
                 var enableRateLimitingAttribute = context
                     .GetEndpoint()
-                    ?.Metadata.GetMetadata<EnableRateLimitingAttribute>();
+                    ?.Metadata
+                    .GetMetadata<EnableRateLimitingAttribute>();
                 if (enableRateLimitingAttribute is null)
                 {
                     return RateLimitPartition.GetNoLimiter<DefaultKeyType>(_defaultPolicyKey);

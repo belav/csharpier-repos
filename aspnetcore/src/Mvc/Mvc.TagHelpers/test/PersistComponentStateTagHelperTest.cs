@@ -83,8 +83,10 @@ public class PersistComponentStateTagHelperTest
 
         var context = GetTagHelperContext();
         var output = GetTagHelperOutput();
-        var manager =
-            tagHelper.ViewContext.HttpContext.RequestServices.GetRequiredService<ComponentStatePersistenceManager>();
+        var manager = tagHelper.ViewContext
+            .HttpContext
+            .RequestServices
+            .GetRequiredService<ComponentStatePersistenceManager>();
 
         // Act
         manager.State.RegisterOnPersisting(
@@ -117,8 +119,10 @@ public class PersistComponentStateTagHelperTest
 
         var context = GetTagHelperContext();
         var output = GetTagHelperOutput();
-        var manager =
-            tagHelper.ViewContext.HttpContext.RequestServices.GetRequiredService<ComponentStatePersistenceManager>();
+        var manager = tagHelper.ViewContext
+            .HttpContext
+            .RequestServices
+            .GetRequiredService<ComponentStatePersistenceManager>();
 
         // Act
         manager.State.RegisterOnPersisting(
@@ -150,8 +154,10 @@ public class PersistComponentStateTagHelperTest
 
         var context = GetTagHelperContext();
         var output = GetTagHelperOutput();
-        var manager =
-            tagHelper.ViewContext.HttpContext.RequestServices.GetRequiredService<ComponentStatePersistenceManager>();
+        var manager = tagHelper.ViewContext
+            .HttpContext
+            .RequestServices
+            .GetRequiredService<ComponentStatePersistenceManager>();
 
         // Act
         manager.State.RegisterOnPersisting(
@@ -207,8 +213,10 @@ public class PersistComponentStateTagHelperTest
 
         var context = GetTagHelperContext();
         var output = GetTagHelperOutput();
-        var manager =
-            tagHelper.ViewContext.HttpContext.RequestServices.GetRequiredService<ComponentStatePersistenceManager>();
+        var manager = tagHelper.ViewContext
+            .HttpContext
+            .RequestServices
+            .GetRequiredService<ComponentStatePersistenceManager>();
 
         // Act
         manager.State.RegisterOnPersisting(

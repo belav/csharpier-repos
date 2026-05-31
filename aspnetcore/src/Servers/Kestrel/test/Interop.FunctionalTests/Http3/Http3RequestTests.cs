@@ -1025,11 +1025,13 @@ public class Http3RequestTests : LoggedTest
                     context =>
                     {
                         requestHeaders.Add(
-                            context.Request.Headers.ToDictionary(
-                                k => k.Key,
-                                k => k.Value,
-                                StringComparer.OrdinalIgnoreCase
-                            )
+                            context.Request
+                                .Headers
+                                .ToDictionary(
+                                    k => k.Key,
+                                    k => k.Value,
+                                    StringComparer.OrdinalIgnoreCase
+                                )
                         );
                         return Task.CompletedTask;
                     },

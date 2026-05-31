@@ -1069,9 +1069,10 @@ public abstract class OutputCacheMiddlewareTests
             CancellationToken cancellation
         )
         {
-            context.AllowCacheLookup = !context.HttpContext.Request.Headers.ContainsKey(
-                "X-Refresh"
-            );
+            context.AllowCacheLookup = !context.HttpContext
+                .Request
+                .Headers
+                .ContainsKey("X-Refresh");
             context.AllowCacheStorage = true;
             return ValueTask.CompletedTask;
         }

@@ -950,8 +950,8 @@ public class ApiResponseTypeProviderTest
 
     private static IEnumerable<string> GetSortedMediaTypes(ApiResponseType apiResponseType)
     {
-        return apiResponseType
-            .ApiResponseFormats.OrderBy(format => format.MediaType)
+        return apiResponseType.ApiResponseFormats
+            .OrderBy(format => format.MediaType)
             .Select(format => format.MediaType);
     }
 

@@ -117,10 +117,13 @@ public abstract class IdentityUserContext<TUser, TKey, TUserClaim, TUserLogin, T
 
     private StoreOptions? GetStoreOptions() =>
         this.GetService<IDbContextOptions>()
-            .Extensions.OfType<CoreOptionsExtension>()
+            .Extensions
+            .OfType<CoreOptionsExtension>()
             .FirstOrDefault()
-            ?.ApplicationServiceProvider?.GetService<IOptions<IdentityOptions>>()
-            ?.Value?.Stores;
+            ?.ApplicationServiceProvider
+            ?.GetService<IOptions<IdentityOptions>>()
+            ?.Value
+            ?.Stores;
 
     private sealed class PersonalDataConverter : ValueConverter<string, string>
     {

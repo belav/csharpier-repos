@@ -488,9 +488,11 @@ public class ResponseBodyTests : LoggedTest
                         },
                         httpContext
                     );
-                    httpContext.Response.Body.EndWrite(
-                        httpContext.Response.Body.BeginWrite(new byte[10], 0, 10, null, null)
-                    );
+                    httpContext.Response
+                        .Body
+                        .EndWrite(
+                            httpContext.Response.Body.BeginWrite(new byte[10], 0, 10, null, null)
+                        );
                     return Task.FromResult(0);
                 },
                 LoggerFactory

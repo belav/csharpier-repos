@@ -37,9 +37,9 @@ internal sealed class ResponseCacheFilterApplicationModelProvider : IPageApplica
         foreach (var attribute in responseCacheAttributes)
         {
             var cacheProfile = attribute.GetCacheProfile(_mvcOptions);
-            context.PageApplicationModel.Filters.Add(
-                new PageResponseCacheFilter(cacheProfile, _loggerFactory)
-            );
+            context.PageApplicationModel
+                .Filters
+                .Add(new PageResponseCacheFilter(cacheProfile, _loggerFactory));
         }
     }
 

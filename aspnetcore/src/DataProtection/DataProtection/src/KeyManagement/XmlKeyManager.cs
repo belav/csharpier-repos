@@ -116,9 +116,8 @@ public sealed class XmlKeyManager : IKeyManager, IInternalXmlKeyManager
         KeyRepository = keyRepository;
         KeyEncryptor = keyEncryptor;
 
-        _authenticatedEncryptorConfiguration = keyManagementOptions
-            .Value
-            .AuthenticatedEncryptorConfiguration!;
+        _authenticatedEncryptorConfiguration =
+            keyManagementOptions.Value.AuthenticatedEncryptorConfiguration!;
 
         var escrowSinks = keyManagementOptions.Value.KeyEscrowSinks;
         _keyEscrowSink = escrowSinks.Count > 0 ? new AggregateKeyEscrowSink(escrowSinks) : null;

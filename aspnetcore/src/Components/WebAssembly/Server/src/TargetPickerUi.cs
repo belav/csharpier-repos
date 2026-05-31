@@ -58,8 +58,8 @@ public class TargetPickerUi
         {
             var msg = JsonSerializer.Serialize(args);
             var bytes = Encoding.UTF8.GetBytes(msg);
-            var bytesWithHeader = Encoding
-                .UTF8.GetBytes($"{bytes.Length}:")
+            var bytesWithHeader = Encoding.UTF8
+                .GetBytes($"{bytes.Length}:")
                 .Concat(bytes)
                 .ToArray();
             await toStream.WriteAsync(bytesWithHeader, token).AsTask();
@@ -172,10 +172,10 @@ firefox --start-debugger-server 6000 -new-tab about:debugging"
             string? toCmd = null;
             while (browserDebugClientConnect.Connected)
             {
-                var res = System
-                    .Text.Json.JsonDocument.Parse(
-                        await ReceiveMessageLoop(browserDebugClientConnect, token)
-                    )
+                var res = System.Text
+                    .Json
+                    .JsonDocument
+                    .Parse(await ReceiveMessageLoop(browserDebugClientConnect, token))
                     .RootElement;
                 var hasTabs = res.TryGetProperty("tabs", out var tabs);
                 var hasType = res.TryGetProperty("type", out var type);

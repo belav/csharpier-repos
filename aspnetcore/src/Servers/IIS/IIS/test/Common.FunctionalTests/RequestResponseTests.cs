@@ -619,10 +619,9 @@ public class RequestResponseTests
         Assert.Equal("test123=foo", headerValues.First());
 
         Assert.True(
-            response.Content.Headers.TryGetValues(
-                Net.Http.Headers.HeaderNames.ContentType,
-                out headerValues
-            )
+            response.Content
+                .Headers
+                .TryGetValues(Net.Http.Headers.HeaderNames.ContentType, out headerValues)
         );
         Assert.Equal("text/plain", headerValues.First());
 

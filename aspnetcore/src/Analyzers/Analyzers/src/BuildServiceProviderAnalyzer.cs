@@ -30,9 +30,7 @@ internal sealed class BuildServiceProviderAnalyzer
                 {
                     context.ReportDiagnostic(
                         Diagnostic.Create(
-                            StartupAnalyzer
-                                .Diagnostics
-                                .BuildServiceProviderShouldNotCalledInConfigureServicesMethod,
+                            StartupAnalyzer.Diagnostics.BuildServiceProviderShouldNotCalledInConfigureServicesMethod,
                             serviceItem.Operation.Syntax.GetLocation(),
                             serviceItem.UseMethod.Name,
                             serviceAnalysis.ConfigureServicesMethod.Name

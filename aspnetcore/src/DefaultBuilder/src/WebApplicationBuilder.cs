@@ -108,16 +108,19 @@ public sealed class WebApplicationBuilder : IHostApplicationBuilder
         // This won't be added by CreateEmptyApplicationBuilder.
         configuration.AddEnvironmentVariables(prefix: "DOTNET_");
 
-        _hostApplicationBuilder = Microsoft.Extensions.Hosting.Host.CreateEmptyApplicationBuilder(
-            new HostApplicationBuilderSettings
-            {
-                Args = options.Args,
-                ApplicationName = options.ApplicationName,
-                EnvironmentName = options.EnvironmentName,
-                ContentRootPath = options.ContentRootPath,
-                Configuration = configuration,
-            }
-        );
+        _hostApplicationBuilder = Microsoft.Extensions
+            .Hosting
+            .Host
+            .CreateEmptyApplicationBuilder(
+                new HostApplicationBuilderSettings
+                {
+                    Args = options.Args,
+                    ApplicationName = options.ApplicationName,
+                    EnvironmentName = options.EnvironmentName,
+                    ContentRootPath = options.ContentRootPath,
+                    Configuration = configuration,
+                }
+            );
 
         // Ensure the same behavior of the non-slim WebApplicationBuilder by adding the default "app" Configuration sources
         ApplyDefaultAppConfigurationSlim(
@@ -186,16 +189,19 @@ public sealed class WebApplicationBuilder : IHostApplicationBuilder
         // empty builder should still default the ContentRoot as usual. This is the expected behavior for all WebApplicationBuilders.
         SetDefaultContentRoot(options, configuration);
 
-        _hostApplicationBuilder = Microsoft.Extensions.Hosting.Host.CreateEmptyApplicationBuilder(
-            new HostApplicationBuilderSettings
-            {
-                Args = options.Args,
-                ApplicationName = options.ApplicationName,
-                EnvironmentName = options.EnvironmentName,
-                ContentRootPath = options.ContentRootPath,
-                Configuration = configuration,
-            }
-        );
+        _hostApplicationBuilder = Microsoft.Extensions
+            .Hosting
+            .Host
+            .CreateEmptyApplicationBuilder(
+                new HostApplicationBuilderSettings
+                {
+                    Args = options.Args,
+                    ApplicationName = options.ApplicationName,
+                    EnvironmentName = options.EnvironmentName,
+                    ContentRootPath = options.ContentRootPath,
+                    Configuration = configuration,
+                }
+            );
 
         // Set WebRootPath if necessary
         if (options.WebRootPath is not null)

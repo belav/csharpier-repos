@@ -155,9 +155,10 @@ public class RendererTest
         });
         var parentComponentId = renderer.AssignRootComponentId(parentComponent);
         parentComponent.TriggerRender();
-        var nestedComponentFrame = renderer
-            .Batches.Single()
-            .ReferenceFrames.Single(frame => frame.FrameType == RenderTreeFrameType.Component);
+        var nestedComponentFrame = renderer.Batches
+            .Single()
+            .ReferenceFrames
+            .Single(frame => frame.FrameType == RenderTreeFrameType.Component);
         var nestedComponent = (MessageComponent)nestedComponentFrame.Component;
         var nestedComponentId = nestedComponentFrame.ComponentId;
 
@@ -788,9 +789,10 @@ public class RendererTest
         var componentId = renderer.AssignRootComponentId(component);
         component.TriggerRender();
 
-        var eventHandlerId = renderer
-            .Batches.Single()
-            .ReferenceFrames.First(frame => frame.AttributeValue != null)
+        var eventHandlerId = renderer.Batches
+            .Single()
+            .ReferenceFrames
+            .First(frame => frame.AttributeValue != null)
             .AttributeEventHandlerId;
 
         // Assert: Event not yet fired
@@ -821,9 +823,10 @@ public class RendererTest
         var componentId = renderer.AssignRootComponentId(component);
         component.TriggerRender();
 
-        var eventHandlerId = renderer
-            .Batches.Single()
-            .ReferenceFrames.First(frame => frame.AttributeValue != null)
+        var eventHandlerId = renderer.Batches
+            .Single()
+            .ReferenceFrames
+            .First(frame => frame.AttributeValue != null)
             .AttributeEventHandlerId;
 
         // Assert: Event not yet fired
@@ -849,9 +852,10 @@ public class RendererTest
         var componentId = renderer.AssignRootComponentId(component);
         component.TriggerRender();
 
-        var eventHandlerId = renderer
-            .Batches.Single()
-            .ReferenceFrames.First(frame => frame.AttributeValue != null)
+        var eventHandlerId = renderer.Batches
+            .Single()
+            .ReferenceFrames
+            .First(frame => frame.AttributeValue != null)
             .AttributeEventHandlerId;
 
         // Assert: Can determine event args type
@@ -872,9 +876,10 @@ public class RendererTest
         var componentId = renderer.AssignRootComponentId(component);
         component.TriggerRender();
 
-        var eventHandlerId = renderer
-            .Batches.Single()
-            .ReferenceFrames.First(frame => frame.AttributeValue != null)
+        var eventHandlerId = renderer.Batches
+            .Single()
+            .ReferenceFrames
+            .First(frame => frame.AttributeValue != null)
             .AttributeEventHandlerId;
 
         // Assert: Can determine event args type
@@ -895,9 +900,10 @@ public class RendererTest
         var componentId = renderer.AssignRootComponentId(component);
         component.TriggerRender();
 
-        var eventHandlerId = renderer
-            .Batches.Single()
-            .ReferenceFrames.First(frame => frame.AttributeValue != null)
+        var eventHandlerId = renderer.Batches
+            .Single()
+            .ReferenceFrames
+            .First(frame => frame.AttributeValue != null)
             .AttributeEventHandlerId;
 
         // Assert: Cannot determine event args type
@@ -920,9 +926,10 @@ public class RendererTest
         var componentId = renderer.AssignRootComponentId(component);
         component.TriggerRender();
 
-        var eventHandlerId = renderer
-            .Batches.Single()
-            .ReferenceFrames.First(frame => frame.AttributeValue != null)
+        var eventHandlerId = renderer.Batches
+            .Single()
+            .ReferenceFrames
+            .First(frame => frame.AttributeValue != null)
             .AttributeEventHandlerId;
 
         // Assert: Cannot determine event args type
@@ -942,9 +949,10 @@ public class RendererTest
         var componentId = renderer.AssignRootComponentId(component);
         component.TriggerRender();
 
-        var eventHandlerId = renderer
-            .Batches.Single()
-            .ReferenceFrames.First(frame => frame.AttributeValue != null)
+        var eventHandlerId = renderer.Batches
+            .Single()
+            .ReferenceFrames
+            .First(frame => frame.AttributeValue != null)
             .AttributeEventHandlerId;
 
         // Assert: Event not yet fired
@@ -976,9 +984,10 @@ public class RendererTest
         var componentId = renderer.AssignRootComponentId(component);
         component.TriggerRender();
 
-        var eventHandlerId = renderer
-            .Batches.Single()
-            .ReferenceFrames.First(frame => frame.AttributeValue != null)
+        var eventHandlerId = renderer.Batches
+            .Single()
+            .ReferenceFrames
+            .First(frame => frame.AttributeValue != null)
             .AttributeEventHandlerId;
 
         // Assert: Event not yet fired
@@ -1008,9 +1017,10 @@ public class RendererTest
         var componentId = renderer.AssignRootComponentId(component);
         component.TriggerRender();
 
-        var eventHandlerId = renderer
-            .Batches.Single()
-            .ReferenceFrames.First(frame => frame.AttributeValue != null)
+        var eventHandlerId = renderer.Batches
+            .Single()
+            .ReferenceFrames
+            .First(frame => frame.AttributeValue != null)
             .AttributeEventHandlerId;
 
         // Assert: Event not yet fired
@@ -1039,9 +1049,10 @@ public class RendererTest
         parentComponent.TriggerRender();
 
         // Arrange: Render nested component
-        var nestedComponentFrame = renderer
-            .Batches.Single()
-            .ReferenceFrames.Single(frame => frame.FrameType == RenderTreeFrameType.Component);
+        var nestedComponentFrame = renderer.Batches
+            .Single()
+            .ReferenceFrames
+            .Single(frame => frame.FrameType == RenderTreeFrameType.Component);
         var nestedComponent = (EventComponent)nestedComponentFrame.Component;
         nestedComponent.OnTest = args =>
         {
@@ -1053,7 +1064,8 @@ public class RendererTest
         // Find nested component's event handler ID
         var eventHandlerId = renderer
             .Batches[1]
-            .ReferenceFrames.First(frame => frame.AttributeValue != null)
+            .ReferenceFrames
+            .First(frame => frame.AttributeValue != null)
             .AttributeEventHandlerId;
 
         // Assert: Event not yet fired
@@ -1089,9 +1101,10 @@ public class RendererTest
         var componentId = renderer.AssignRootComponentId(component);
         component.TriggerRender();
 
-        var eventHandlerId = renderer
-            .Batches.Single()
-            .ReferenceFrames.First(frame => frame.AttributeValue != null)
+        var eventHandlerId = renderer.Batches
+            .Single()
+            .ReferenceFrames
+            .First(frame => frame.AttributeValue != null)
             .AttributeEventHandlerId;
 
         // Assert: Event not yet fired
@@ -1132,9 +1145,10 @@ public class RendererTest
         var componentId = renderer.AssignRootComponentId(component);
         component.TriggerRender();
 
-        var eventHandlerId = renderer
-            .Batches.Single()
-            .ReferenceFrames.First(frame => frame.AttributeValue != null)
+        var eventHandlerId = renderer.Batches
+            .Single()
+            .ReferenceFrames
+            .First(frame => frame.AttributeValue != null)
             .AttributeEventHandlerId;
 
         // Assert: Event not yet fired
@@ -1175,9 +1189,10 @@ public class RendererTest
         var componentId = renderer.AssignRootComponentId(component);
         component.TriggerRender();
 
-        var eventHandlerId = renderer
-            .Batches.Single()
-            .ReferenceFrames.First(frame => frame.AttributeValue != null)
+        var eventHandlerId = renderer.Batches
+            .Single()
+            .ReferenceFrames
+            .First(frame => frame.AttributeValue != null)
             .AttributeEventHandlerId;
 
         // Assert: Event not yet fired
@@ -1214,9 +1229,10 @@ public class RendererTest
         parentComponent.TriggerRender();
 
         // Arrange: Render nested component
-        var nestedComponentFrame = renderer
-            .Batches.Single()
-            .ReferenceFrames.Single(frame => frame.FrameType == RenderTreeFrameType.Component);
+        var nestedComponentFrame = renderer.Batches
+            .Single()
+            .ReferenceFrames
+            .Single(frame => frame.FrameType == RenderTreeFrameType.Component);
         var nestedComponent = (EventComponent)nestedComponentFrame.Component;
         nestedComponent.OnTestAsync = async (args) =>
         {
@@ -1231,7 +1247,8 @@ public class RendererTest
         // Find nested component's event handler ID
         var eventHandlerId = renderer
             .Batches[1]
-            .ReferenceFrames.First(frame => frame.AttributeValue != null)
+            .ReferenceFrames
+            .First(frame => frame.AttributeValue != null)
             .AttributeEventHandlerId;
 
         // Assert: Event not yet fired
@@ -1283,7 +1300,8 @@ public class RendererTest
 
         var eventHandlerId = renderer
             .Batches[0]
-            .ReferenceFrames.First(frame => frame.AttributeName == "onclickaction")
+            .ReferenceFrames
+            .First(frame => frame.AttributeName == "onclickaction")
             .AttributeEventHandlerId;
 
         // Act
@@ -1333,7 +1351,8 @@ public class RendererTest
 
         var eventHandlerId = renderer
             .Batches[0]
-            .ReferenceFrames.First(frame => frame.AttributeName == "onclickaction")
+            .ReferenceFrames
+            .First(frame => frame.AttributeName == "onclickaction")
             .AttributeEventHandlerId;
 
         // Act
@@ -1376,7 +1395,8 @@ public class RendererTest
 
         var eventHandlerId = renderer
             .Batches[0]
-            .ReferenceFrames.First(frame => frame.AttributeName == "onclick")
+            .ReferenceFrames
+            .First(frame => frame.AttributeName == "onclick")
             .AttributeEventHandlerId;
 
         // Act
@@ -1426,7 +1446,8 @@ public class RendererTest
 
         var eventHandlerId = renderer
             .Batches[0]
-            .ReferenceFrames.First(frame => frame.AttributeName == "onclick")
+            .ReferenceFrames
+            .First(frame => frame.AttributeName == "onclick")
             .AttributeEventHandlerId;
 
         // Act
@@ -1477,7 +1498,8 @@ public class RendererTest
 
         var eventHandlerId = renderer
             .Batches[0]
-            .ReferenceFrames.First(frame => frame.AttributeName == "onclick")
+            .ReferenceFrames
+            .First(frame => frame.AttributeName == "onclick")
             .AttributeEventHandlerId;
 
         // Act
@@ -1520,7 +1542,8 @@ public class RendererTest
 
         var eventHandlerId = renderer
             .Batches[0]
-            .ReferenceFrames.First(frame => frame.AttributeName == "onclick")
+            .ReferenceFrames
+            .First(frame => frame.AttributeName == "onclick")
             .AttributeEventHandlerId;
 
         // Act
@@ -1570,7 +1593,8 @@ public class RendererTest
 
         var eventHandlerId = renderer
             .Batches[0]
-            .ReferenceFrames.First(frame => frame.AttributeName == "onclick")
+            .ReferenceFrames
+            .First(frame => frame.AttributeName == "onclick")
             .AttributeEventHandlerId;
 
         // Act
@@ -1621,7 +1645,8 @@ public class RendererTest
 
         var eventHandlerId = renderer
             .Batches[0]
-            .ReferenceFrames.First(frame => frame.AttributeName == "onclick")
+            .ReferenceFrames
+            .First(frame => frame.AttributeName == "onclick")
             .AttributeEventHandlerId;
 
         // Act
@@ -1661,7 +1686,8 @@ public class RendererTest
 
         var eventHandlerId = renderer
             .Batches[0]
-            .ReferenceFrames.First(frame => frame.AttributeName == "onclickaction")
+            .ReferenceFrames
+            .First(frame => frame.AttributeName == "onclickaction")
             .AttributeEventHandlerId;
 
         // Act
@@ -1701,7 +1727,8 @@ public class RendererTest
 
         var eventHandlerId = renderer
             .Batches[0]
-            .ReferenceFrames.First(frame => frame.AttributeName == "onclick")
+            .ReferenceFrames
+            .First(frame => frame.AttributeName == "onclick")
             .AttributeEventHandlerId;
 
         // Act
@@ -1744,7 +1771,8 @@ public class RendererTest
 
         var eventHandlerId = renderer
             .Batches[0]
-            .ReferenceFrames.First(frame => frame.AttributeName == "onclick")
+            .ReferenceFrames
+            .First(frame => frame.AttributeName == "onclick")
             .AttributeEventHandlerId;
 
         // Act
@@ -1785,7 +1813,8 @@ public class RendererTest
 
         var eventHandlerId = renderer
             .Batches[0]
-            .ReferenceFrames.First(frame => frame.AttributeName == "onclickaction")
+            .ReferenceFrames
+            .First(frame => frame.AttributeName == "onclickaction")
             .AttributeEventHandlerId;
 
         // Act
@@ -1826,7 +1855,8 @@ public class RendererTest
 
         var eventHandlerId = renderer
             .Batches[0]
-            .ReferenceFrames.First(frame => frame.AttributeName == "onclick")
+            .ReferenceFrames
+            .First(frame => frame.AttributeName == "onclick")
             .AttributeEventHandlerId;
 
         // Act
@@ -1870,7 +1900,8 @@ public class RendererTest
 
         var eventHandlerId = renderer
             .Batches[0]
-            .ReferenceFrames.First(frame => frame.AttributeName == "onclick")
+            .ReferenceFrames
+            .First(frame => frame.AttributeName == "onclick")
             .AttributeEventHandlerId;
 
         // Act
@@ -1911,7 +1942,8 @@ public class RendererTest
 
         var eventHandlerId = renderer
             .Batches[0]
-            .ReferenceFrames.First(frame => frame.AttributeName == "onclickaction")
+            .ReferenceFrames
+            .First(frame => frame.AttributeName == "onclickaction")
             .AttributeEventHandlerId;
 
         // Act
@@ -1952,7 +1984,8 @@ public class RendererTest
 
         var eventHandlerId = renderer
             .Batches[0]
-            .ReferenceFrames.First(frame => frame.AttributeName == "onclick")
+            .ReferenceFrames
+            .First(frame => frame.AttributeName == "onclick")
             .AttributeEventHandlerId;
 
         // Act
@@ -1996,7 +2029,8 @@ public class RendererTest
 
         var eventHandlerId = renderer
             .Batches[0]
-            .ReferenceFrames.First(frame => frame.AttributeName == "onclick")
+            .ReferenceFrames
+            .First(frame => frame.AttributeName == "onclick")
             .AttributeEventHandlerId;
 
         // Act
@@ -2039,7 +2073,8 @@ public class RendererTest
 
         var eventHandlerId = renderer
             .Batches[0]
-            .ReferenceFrames.First(frame => frame.AttributeName == "onclickaction")
+            .ReferenceFrames
+            .First(frame => frame.AttributeName == "onclickaction")
             .AttributeEventHandlerId;
 
         // Act
@@ -2081,7 +2116,8 @@ public class RendererTest
 
         var eventHandlerId = renderer
             .Batches[0]
-            .ReferenceFrames.First(frame => frame.AttributeName == "onclick")
+            .ReferenceFrames
+            .First(frame => frame.AttributeName == "onclick")
             .AttributeEventHandlerId;
 
         // Act
@@ -2126,7 +2162,8 @@ public class RendererTest
 
         var eventHandlerId = renderer
             .Batches[0]
-            .ReferenceFrames.First(frame => frame.AttributeName == "onclick")
+            .ReferenceFrames
+            .First(frame => frame.AttributeName == "onclick")
             .AttributeEventHandlerId;
 
         // Act
@@ -2171,7 +2208,8 @@ public class RendererTest
 
         var eventHandlerId = renderer
             .Batches[0]
-            .ReferenceFrames.First(frame => frame.AttributeName == "onclickaction")
+            .ReferenceFrames
+            .First(frame => frame.AttributeName == "onclickaction")
             .AttributeEventHandlerId;
 
         // Act
@@ -2216,7 +2254,8 @@ public class RendererTest
 
         var eventHandlerId = renderer
             .Batches[0]
-            .ReferenceFrames.First(frame => frame.AttributeName == "onclick")
+            .ReferenceFrames
+            .First(frame => frame.AttributeName == "onclick")
             .AttributeEventHandlerId;
 
         // Act
@@ -2264,7 +2303,8 @@ public class RendererTest
 
         var eventHandlerId = renderer
             .Batches[0]
-            .ReferenceFrames.First(frame => frame.AttributeName == "onclick")
+            .ReferenceFrames
+            .First(frame => frame.AttributeName == "onclick")
             .AttributeEventHandlerId;
 
         // Act
@@ -2311,7 +2351,8 @@ public class RendererTest
 
         var eventHandlerId = renderer
             .Batches[0]
-            .ReferenceFrames.First(frame => frame.AttributeName == "onclickaction")
+            .ReferenceFrames
+            .First(frame => frame.AttributeName == "onclickaction")
             .AttributeEventHandlerId;
 
         // Act
@@ -2355,7 +2396,8 @@ public class RendererTest
 
         var eventHandlerId = renderer
             .Batches[0]
-            .ReferenceFrames.First(frame => frame.AttributeName == "onclick")
+            .ReferenceFrames
+            .First(frame => frame.AttributeName == "onclick")
             .AttributeEventHandlerId;
 
         // Act
@@ -2402,7 +2444,8 @@ public class RendererTest
 
         var eventHandlerId = renderer
             .Batches[0]
-            .ReferenceFrames.First(frame => frame.AttributeName == "onclick")
+            .ReferenceFrames
+            .First(frame => frame.AttributeName == "onclick")
             .AttributeEventHandlerId;
 
         // Act
@@ -2489,9 +2532,10 @@ public class RendererTest
         var rootComponentId = renderer.AssignRootComponentId(component);
         component.TriggerRender();
 
-        var nestedComponentFrame = renderer
-            .Batches.Single()
-            .ReferenceFrames.Single(frame => frame.FrameType == RenderTreeFrameType.Component);
+        var nestedComponentFrame = renderer.Batches
+            .Single()
+            .ReferenceFrames
+            .Single(frame => frame.FrameType == RenderTreeFrameType.Component);
         var nestedComponentInstance = (MessageComponent)nestedComponentFrame.Component;
 
         // Act: Second render
@@ -2544,9 +2588,10 @@ public class RendererTest
         var rootComponentId = renderer.AssignRootComponentId(component);
         component.TriggerRender();
 
-        var originalComponentFrame = renderer
-            .Batches.Single()
-            .ReferenceFrames.Single(frame => frame.FrameType == RenderTreeFrameType.Component);
+        var originalComponentFrame = renderer.Batches
+            .Single()
+            .ReferenceFrames
+            .Single(frame => frame.FrameType == RenderTreeFrameType.Component);
         var childComponentInstance = (FakeComponent)originalComponentFrame.Component;
 
         // Assert 1: properties were assigned
@@ -2584,9 +2629,10 @@ public class RendererTest
         var rootComponentId = renderer.AssignRootComponentId(component);
         component.TriggerRender();
 
-        var childComponentId = renderer
-            .Batches.Single()
-            .ReferenceFrames.Single(frame => frame.FrameType == RenderTreeFrameType.Component)
+        var childComponentId = renderer.Batches
+            .Single()
+            .ReferenceFrames
+            .Single(frame => frame.FrameType == RenderTreeFrameType.Component)
             .ComponentId;
 
         // Act: Second render
@@ -2624,9 +2670,10 @@ public class RendererTest
         var rootComponentId = renderer.AssignRootComponentId(component);
         component.TriggerRender();
 
-        var childComponentId = renderer
-            .Batches.Single()
-            .ReferenceFrames.Single(frame => frame.FrameType == RenderTreeFrameType.Component)
+        var childComponentId = renderer.Batches
+            .Single()
+            .ReferenceFrames
+            .Single(frame => frame.FrameType == RenderTreeFrameType.Component)
             .ComponentId;
 
         // Act: Second render
@@ -2666,9 +2713,10 @@ public class RendererTest
         var rootComponentId = renderer.AssignRootComponentId(component);
         component.TriggerRender();
 
-        var childComponentId = renderer
-            .Batches.Single()
-            .ReferenceFrames.Single(frame => frame.FrameType == RenderTreeFrameType.Component)
+        var childComponentId = renderer.Batches
+            .Single()
+            .ReferenceFrames
+            .Single(frame => frame.FrameType == RenderTreeFrameType.Component)
             .ComponentId;
 
         // Act: Second render
@@ -2707,13 +2755,13 @@ public class RendererTest
         component.TriggerRender();
         var batch = renderer.Batches.Single();
         var rootComponentDiff = batch.DiffsByComponentId[rootComponentId].Single();
-        var childComponentIds = rootComponentDiff
-            .Edits.Select(edit => batch.ReferenceFrames[edit.ReferenceFrameIndex])
+        var childComponentIds = rootComponentDiff.Edits
+            .Select(edit => batch.ReferenceFrames[edit.ReferenceFrameIndex])
             .Where(frame => frame.FrameType == RenderTreeFrameType.Component)
             .Select(frame => frame.ComponentId)
             .ToList();
-        var childComponent3 = batch
-            .ReferenceFrames.Where(f => f.ComponentId == 3)
+        var childComponent3 = batch.ReferenceFrames
+            .Where(f => f.ComponentId == 3)
             .Single()
             .Component;
         Assert.Equal(new[] { 1, 2 }, childComponentIds);
@@ -3206,14 +3254,14 @@ public class RendererTest
         var batch = renderer.Batches.Single();
         var rootComponentDiff = batch.DiffsByComponentId[rootComponentId].Single();
         var rootComponentFrame = batch.ReferenceFrames[0];
-        var childComponentFrame = rootComponentDiff
-            .Edits.Select(e => batch.ReferenceFrames[e.ReferenceFrameIndex])
+        var childComponentFrame = rootComponentDiff.Edits
+            .Select(e => batch.ReferenceFrames[e.ReferenceFrameIndex])
             .Where(f => f.FrameType == RenderTreeFrameType.Component)
             .Single();
         var childComponentId = childComponentFrame.ComponentId;
         var childComponentDiff = batch.DiffsByComponentId[childComponentFrame.ComponentId].Single();
-        var eventHandlerId = batch
-            .ReferenceFrames.Skip(childComponentDiff.Edits[0].ReferenceFrameIndex) // Search from where the child component frames start
+        var eventHandlerId = batch.ReferenceFrames
+            .Skip(childComponentDiff.Edits[0].ReferenceFrameIndex) // Search from where the child component frames start
             .Where(f => f.FrameType == RenderTreeFrameType.Attribute)
             .Single(f => f.AttributeEventHandlerId != 0)
             .AttributeEventHandlerId;
@@ -3249,9 +3297,10 @@ public class RendererTest
         var component = new EventComponent { OnTest = origEventHandler };
         var componentId = renderer.AssignRootComponentId(component);
         component.TriggerRender();
-        var origEventHandlerId = renderer
-            .Batches.Single()
-            .ReferenceFrames.Where(f => f.FrameType == RenderTreeFrameType.Attribute)
+        var origEventHandlerId = renderer.Batches
+            .Single()
+            .ReferenceFrames
+            .Where(f => f.FrameType == RenderTreeFrameType.Attribute)
             .Single(f => f.AttributeEventHandlerId != 0)
             .AttributeEventHandlerId;
 
@@ -3297,9 +3346,10 @@ public class RendererTest
         var component = new EventComponent { OnTest = origEventHandler };
         var componentId = renderer.AssignRootComponentId(component);
         component.TriggerRender();
-        var origEventHandlerId = renderer
-            .Batches.Single()
-            .ReferenceFrames.Where(f => f.FrameType == RenderTreeFrameType.Attribute)
+        var origEventHandlerId = renderer.Batches
+            .Single()
+            .ReferenceFrames
+            .Where(f => f.FrameType == RenderTreeFrameType.Attribute)
             .Single(f => f.AttributeEventHandlerId != 0)
             .AttributeEventHandlerId;
 
@@ -3345,14 +3395,14 @@ public class RendererTest
         var batch = renderer.Batches.Single();
         var rootComponentDiff = batch.DiffsByComponentId[rootComponentId].Single();
         var rootComponentFrame = batch.ReferenceFrames[0];
-        var childComponentFrame = rootComponentDiff
-            .Edits.Select(e => batch.ReferenceFrames[e.ReferenceFrameIndex])
+        var childComponentFrame = rootComponentDiff.Edits
+            .Select(e => batch.ReferenceFrames[e.ReferenceFrameIndex])
             .Where(f => f.FrameType == RenderTreeFrameType.Component)
             .Single();
         var childComponentId = childComponentFrame.ComponentId;
         var childComponentDiff = batch.DiffsByComponentId[childComponentFrame.ComponentId].Single();
-        var eventHandlerId = batch
-            .ReferenceFrames.Skip(childComponentDiff.Edits[0].ReferenceFrameIndex) // Search from where the child component frames start
+        var eventHandlerId = batch.ReferenceFrames
+            .Skip(childComponentDiff.Edits[0].ReferenceFrameIndex) // Search from where the child component frames start
             .Where(f => f.FrameType == RenderTreeFrameType.Attribute)
             .Single(f => f.AttributeEventHandlerId != 0)
             .AttributeEventHandlerId;
@@ -3389,9 +3439,10 @@ public class RendererTest
         var component = new EventComponent { OnTest = origEventHandler };
         var componentId = renderer.AssignRootComponentId(component);
         component.TriggerRender();
-        var origEventHandlerId = renderer
-            .Batches.Single()
-            .ReferenceFrames.Where(f => f.FrameType == RenderTreeFrameType.Attribute)
+        var origEventHandlerId = renderer.Batches
+            .Single()
+            .ReferenceFrames
+            .Where(f => f.FrameType == RenderTreeFrameType.Attribute)
             .Single(f => f.AttributeEventHandlerId != 0)
             .AttributeEventHandlerId;
 
@@ -3657,14 +3708,16 @@ public class RendererTest
 
         var componentId = renderer.AssignRootComponentId(component);
         component.TriggerRender();
-        var childComponentId = renderer
-            .Batches.Single()
-            .ReferenceFrames.Where(f => f.ComponentId != 0)
+        var childComponentId = renderer.Batches
+            .Single()
+            .ReferenceFrames
+            .Where(f => f.ComponentId != 0)
             .Single()
             .ComponentId;
-        var origEventHandlerId = renderer
-            .Batches.Single()
-            .ReferenceFrames.Where(f =>
+        var origEventHandlerId = renderer.Batches
+            .Single()
+            .ReferenceFrames
+            .Where(f =>
                 f.FrameType == RenderTreeFrameType.Attribute && f.AttributeName == "onmycustomevent"
             )
             .Single(f => f.AttributeEventHandlerId != 0)
@@ -3699,9 +3752,10 @@ public class RendererTest
         var component = new BindPlusConditionalAttributeComponent();
         var componentId = renderer.AssignRootComponentId(component);
         component.TriggerRender();
-        var checkboxChangeEventHandlerId = renderer
-            .Batches.Single()
-            .ReferenceFrames.First(frame =>
+        var checkboxChangeEventHandlerId = renderer.Batches
+            .Single()
+            .ReferenceFrames
+            .First(frame =>
                 frame.FrameType == RenderTreeFrameType.Attribute
                 && frame.AttributeEventHandlerId != 0
             )
@@ -3750,9 +3804,10 @@ public class RendererTest
         };
         var componentId = renderer.AssignRootComponentId(component);
         await component.TriggerRenderAsync();
-        var checkboxChangeEventHandlerId = renderer
-            .Batches.Single()
-            .ReferenceFrames.First(frame =>
+        var checkboxChangeEventHandlerId = renderer.Batches
+            .Single()
+            .ReferenceFrames
+            .First(frame =>
                 frame.FrameType == RenderTreeFrameType.Attribute
                 && frame.AttributeEventHandlerId != 0
             )
@@ -3797,9 +3852,10 @@ public class RendererTest
         };
         var componentId = renderer.AssignRootComponentId(component);
         await component.TriggerRenderAsync();
-        var checkboxChangeEventHandlerId = renderer
-            .Batches.Single()
-            .ReferenceFrames.First(frame =>
+        var checkboxChangeEventHandlerId = renderer.Batches
+            .Single()
+            .ReferenceFrames
+            .First(frame =>
                 frame.FrameType == RenderTreeFrameType.Attribute
                 && frame.AttributeEventHandlerId != 0
             )
@@ -3848,9 +3904,10 @@ public class RendererTest
         };
         var componentId = renderer.AssignRootComponentId(component);
         await component.TriggerRenderAsync();
-        var checkboxChangeEventHandlerId = renderer
-            .Batches.Single()
-            .ReferenceFrames.First(frame =>
+        var checkboxChangeEventHandlerId = renderer.Batches
+            .Single()
+            .ReferenceFrames
+            .First(frame =>
                 frame.FrameType == RenderTreeFrameType.Attribute
                 && frame.AttributeEventHandlerId != 0
             )
@@ -3897,9 +3954,10 @@ public class RendererTest
         };
         var componentId = renderer.AssignRootComponentId(component);
         await component.TriggerRenderAsync();
-        var checkboxChangeEventHandlerId = renderer
-            .Batches.Single()
-            .ReferenceFrames.First(frame =>
+        var checkboxChangeEventHandlerId = renderer.Batches
+            .Single()
+            .ReferenceFrames
+            .First(frame =>
                 frame.FrameType == RenderTreeFrameType.Attribute
                 && frame.AttributeEventHandlerId != 0
             )
@@ -4157,9 +4215,10 @@ public class RendererTest
         var componentId = renderer.AssignRootComponentId(component);
         component.TriggerRender();
 
-        var eventHandlerId = renderer
-            .Batches.Single()
-            .ReferenceFrames.First(frame => frame.AttributeValue != null)
+        var eventHandlerId = renderer.Batches
+            .Single()
+            .ReferenceFrames
+            .First(frame => frame.AttributeValue != null)
             .AttributeEventHandlerId;
 
         // Act/Assert 1: Event can be fired for the first time
@@ -5157,9 +5216,10 @@ public class RendererTest
         var componentId = renderer.AssignRootComponentId(component);
         component.TriggerRender();
 
-        var eventHandlerId = renderer
-            .Batches.Single()
-            .ReferenceFrames.First(frame =>
+        var eventHandlerId = renderer.Batches
+            .Single()
+            .ReferenceFrames
+            .First(frame =>
                 frame.FrameType == RenderTreeFrameType.Attribute
                 && frame.AttributeEventHandlerId > 0
             )
@@ -5216,9 +5276,10 @@ public class RendererTest
 
         component.TriggerRender();
 
-        var eventHandlerId = renderer
-            .Batches.Single()
-            .ReferenceFrames.First(frame =>
+        var eventHandlerId = renderer.Batches
+            .Single()
+            .ReferenceFrames
+            .First(frame =>
                 frame.FrameType == RenderTreeFrameType.Attribute
                 && frame.AttributeEventHandlerId > 0
             )
@@ -5485,12 +5546,12 @@ public class RendererTest
         });
         var rootComponentId = renderer.AssignRootComponentId(rootComponent);
         renderer.RenderRootComponent(rootComponentId);
-        var errorBoundaries = renderer
-            .Batches.Single()
+        var errorBoundaries = renderer.Batches
+            .Single()
             .GetComponentFrames<TestErrorBoundary>()
             .Select(f => (TestErrorBoundary)f.Component);
-        var errorThrowingComponentId = renderer
-            .Batches.Single()
+        var errorThrowingComponentId = renderer.Batches
+            .Single()
             .GetComponentFrames<ErrorThrowingComponent>()
             .Single()
             .ComponentId;
@@ -5536,13 +5597,13 @@ public class RendererTest
         });
         var rootComponentId = renderer.AssignRootComponentId(rootComponent);
         renderer.RenderRootComponent(rootComponentId);
-        var errorBoundaries = renderer
-            .Batches.Single()
+        var errorBoundaries = renderer.Batches
+            .Single()
             .GetComponentFrames<TestErrorBoundary>()
             .Select(f => (TestErrorBoundary)f.Component)
             .ToArray();
-        var errorThrowingComponentId = renderer
-            .Batches.Single()
+        var errorThrowingComponentId = renderer.Batches
+            .Single()
             .GetComponentFrames<ErrorThrowingComponent>()
             .Single()
             .ComponentId;
@@ -5591,18 +5652,19 @@ public class RendererTest
             })
         );
         renderer.RenderRootComponent(rootComponentId);
-        var errorBoundaries = renderer
-            .Batches.Single()
+        var errorBoundaries = renderer.Batches
+            .Single()
             .GetComponentFrames<TestErrorBoundary>()
             .Select(f => (TestErrorBoundary)f.Component);
-        var errorThrowingComponentId = renderer
-            .Batches.Single()
+        var errorThrowingComponentId = renderer.Batches
+            .Single()
             .GetComponentFrames<ErrorThrowingComponent>()
             .Single()
             .ComponentId;
-        var eventHandlerId = renderer
-            .Batches.Single()
-            .ReferenceFrames.Single(f =>
+        var eventHandlerId = renderer.Batches
+            .Single()
+            .ReferenceFrames
+            .Single(f =>
                 f.FrameType == RenderTreeFrameType.Attribute && f.AttributeName == "onmakeerror"
             )
             .AttributeEventHandlerId;
@@ -5649,18 +5711,19 @@ public class RendererTest
             })
         );
         renderer.RenderRootComponent(rootComponentId);
-        var errorBoundaries = renderer
-            .Batches.Single()
+        var errorBoundaries = renderer.Batches
+            .Single()
             .GetComponentFrames<TestErrorBoundary>()
             .Select(f => (TestErrorBoundary)f.Component);
-        var errorThrowingComponentId = renderer
-            .Batches.Single()
+        var errorThrowingComponentId = renderer.Batches
+            .Single()
             .GetComponentFrames<ErrorThrowingComponent>()
             .Single()
             .ComponentId;
-        var eventHandlerId = renderer
-            .Batches.Single()
-            .ReferenceFrames.Single(f =>
+        var eventHandlerId = renderer.Batches
+            .Single()
+            .ReferenceFrames
+            .Single(f =>
                 f.FrameType == RenderTreeFrameType.Attribute && f.AttributeName == "onmakeerror"
             )
             .AttributeEventHandlerId;
@@ -5717,18 +5780,19 @@ public class RendererTest
         });
         var rootComponentId = renderer.AssignRootComponentId(rootComponent);
         renderer.RenderRootComponent(rootComponentId);
-        var errorBoundaries = renderer
-            .Batches.Single()
+        var errorBoundaries = renderer.Batches
+            .Single()
             .GetComponentFrames<TestErrorBoundary>()
             .Select(f => (TestErrorBoundary)f.Component);
-        var errorThrowingComponentId = renderer
-            .Batches.Single()
+        var errorThrowingComponentId = renderer.Batches
+            .Single()
             .GetComponentFrames<ErrorThrowingComponent>()
             .Single()
             .ComponentId;
-        var eventHandlerId = renderer
-            .Batches.Single()
-            .ReferenceFrames.Single(f =>
+        var eventHandlerId = renderer.Batches
+            .Single()
+            .ReferenceFrames
+            .Single(f =>
                 f.FrameType == RenderTreeFrameType.Attribute && f.AttributeName == "onmakeerror"
             )
             .AttributeEventHandlerId;

@@ -25,8 +25,7 @@ public class Startup
             .AddViewOptions(options =>
             {
                 options.HtmlHelperOptions.ClientValidationEnabled = false;
-                options.HtmlHelperOptions.Html5DateRenderingMode = Microsoft
-                    .AspNetCore
+                options.HtmlHelperOptions.Html5DateRenderingMode = Microsoft.AspNetCore
                     .Mvc
                     .Rendering
                     .Html5DateRenderingMode

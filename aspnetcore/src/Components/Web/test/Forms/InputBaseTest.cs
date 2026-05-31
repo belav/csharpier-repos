@@ -416,8 +416,8 @@ public class InputBaseTest
         var renderer = new TestRenderer();
         var rootComponentId = renderer.AssignRootComponentId(rootComponent);
         await renderer.RenderRootComponentAsync(rootComponentId);
-        var component = renderer
-            .Batches.Single()
+        var component = renderer.Batches
+            .Single()
             .GetComponentFrames<TestInputComponent<string>>()
             .Single()
             .Component;

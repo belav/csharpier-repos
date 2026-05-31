@@ -68,8 +68,8 @@ public class Program
 #if (!UseServer)
         builder.Services.AddAuthorization();
 #endif
-        builder
-            .Services.AddAuthentication(options =>
+        builder.Services
+            .AddAuthentication(options =>
             {
                 options.DefaultScheme = IdentityConstants.ApplicationScheme;
                 options.DefaultSignInScheme = IdentityConstants.ExternalScheme;
@@ -91,8 +91,8 @@ public class Program
 #endif
         builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
-        builder
-            .Services.AddIdentityCore<ApplicationUser>(options =>
+        builder.Services
+            .AddIdentityCore<ApplicationUser>(options =>
                 options.SignIn.RequireConfirmedAccount = true
             )
             .AddEntityFrameworkStores<ApplicationDbContext>()

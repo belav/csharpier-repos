@@ -372,8 +372,8 @@ public class FunctionalTest : LoggedTest
 
     private static string FindClaimValue(Transaction transaction, string claimType)
     {
-        var claim = transaction
-            .ResponseElement.Elements("claim")
+        var claim = transaction.ResponseElement
+            .Elements("claim")
             .SingleOrDefault(elt => elt.Attribute("type").Value == claimType);
         if (claim == null)
         {
@@ -559,21 +559,25 @@ public class FunctionalTest : LoggedTest
         if (result != null && result.Principal != null)
         {
             xml.Add(
-                result.Principal.Claims.Select(claim => new XElement(
-                    "claim",
-                    new XAttribute("type", claim.Type),
-                    new XAttribute("value", claim.Value)
-                ))
+                result.Principal
+                    .Claims
+                    .Select(claim => new XElement(
+                        "claim",
+                        new XAttribute("type", claim.Type),
+                        new XAttribute("value", claim.Value)
+                    ))
             );
         }
         if (result != null && result.Properties != null)
         {
             xml.Add(
-                result.Properties.Items.Select(extra => new XElement(
-                    "extra",
-                    new XAttribute("type", extra.Key),
-                    new XAttribute("value", extra.Value)
-                ))
+                result.Properties
+                    .Items
+                    .Select(extra => new XElement(
+                        "extra",
+                        new XAttribute("type", extra.Key),
+                        new XAttribute("value", extra.Value)
+                    ))
             );
         }
         using (var memory = new MemoryStream())
@@ -614,8 +618,9 @@ public class FunctionalTest : LoggedTest
         };
         if (transaction.Response.Headers.Contains("Set-Cookie"))
         {
-            transaction.SetCookie = transaction
-                .Response.Headers.GetValues("Set-Cookie")
+            transaction.SetCookie = transaction.Response
+                .Headers
+                .GetValues("Set-Cookie")
                 .FirstOrDefault();
         }
         if (!string.IsNullOrEmpty(transaction.SetCookie))

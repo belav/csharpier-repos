@@ -393,11 +393,9 @@ public class MaxRequestBufferSizeTests : LoggedTest
                             var bytesRead = 0;
                             while (bytesRead < buffer.Length)
                             {
-                                bytesRead += await context.Request.Body.ReadAsync(
-                                    buffer,
-                                    bytesRead,
-                                    buffer.Length - bytesRead
-                                );
+                                bytesRead += await context.Request
+                                    .Body
+                                    .ReadAsync(buffer, bytesRead, buffer.Length - bytesRead);
                             }
 
                             await clientFinishedSendingRequestBody.Task.TimeoutAfter(

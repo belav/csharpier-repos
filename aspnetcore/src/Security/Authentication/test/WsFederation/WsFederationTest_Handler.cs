@@ -364,10 +364,9 @@ public class WsFederationTestHandlers
                                     OnMessageReceived = context =>
                                     {
                                         if (
-                                            !context.ProtocolMessage.Parameters.TryGetValue(
-                                                "suppressWctx",
-                                                out var suppress
-                                            )
+                                            !context.ProtocolMessage
+                                                .Parameters
+                                                .TryGetValue("suppressWctx", out var suppress)
                                         )
                                         {
                                             Assert.True(

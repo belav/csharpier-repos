@@ -38,8 +38,8 @@ public class UseEndpointRoutingStartup
                     var sb = new StringBuilder();
                     sb.AppendLine("Endpoints:");
                     foreach (
-                        var endpoint in dataSource
-                            .Endpoints.OfType<RouteEndpoint>()
+                        var endpoint in dataSource.Endpoints
+                            .OfType<RouteEndpoint>()
                             .OrderBy(e => e.RoutePattern.RawText, StringComparer.OrdinalIgnoreCase)
                     )
                     {

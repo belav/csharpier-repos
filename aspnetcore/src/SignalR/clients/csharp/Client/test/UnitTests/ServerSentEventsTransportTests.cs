@@ -251,9 +251,10 @@ public class ServerSentEventsTransportTests : VerifiableLoggedTest
                     await Task.Yield();
 
                     if (
-                        request.Headers.Accept?.Contains(
-                            new MediaTypeWithQualityHeaderValue("text/event-stream")
-                        ) == true
+                        request.Headers
+                            .Accept
+                            ?.Contains(new MediaTypeWithQualityHeaderValue("text/event-stream"))
+                        == true
                     )
                     {
                         // Receive loop started - allow stopping the transport
@@ -438,9 +439,10 @@ public class ServerSentEventsTransportTests : VerifiableLoggedTest
                     await Task.Yield();
 
                     if (
-                        request.Headers.Accept?.Contains(
-                            new MediaTypeWithQualityHeaderValue("text/event-stream")
-                        ) == true
+                        request.Headers
+                            .Accept
+                            ?.Contains(new MediaTypeWithQualityHeaderValue("text/event-stream"))
+                        == true
                     )
                     {
                         // Receive loop started - allow stopping the transport

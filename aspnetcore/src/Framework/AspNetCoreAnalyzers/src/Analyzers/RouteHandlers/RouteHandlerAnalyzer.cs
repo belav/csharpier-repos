@@ -163,8 +163,9 @@ public partial class RouteHandlerAnalyzer : DiagnosticAnalyzer
                     var foundMethodReferenceBody = false;
                     if (!methodReference.Method.DeclaringSyntaxReferences.IsEmpty)
                     {
-                        var syntaxReference =
-                            methodReference.Method.DeclaringSyntaxReferences.Single();
+                        var syntaxReference = methodReference.Method
+                            .DeclaringSyntaxReferences
+                            .Single();
                         var syntaxNode = syntaxReference.GetSyntax(context.CancellationToken);
                         var methodOperation =
                             syntaxNode.SyntaxTree == invocation.SemanticModel!.SyntaxTree

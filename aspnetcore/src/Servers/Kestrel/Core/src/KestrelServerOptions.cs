@@ -414,8 +414,8 @@ public class KestrelServerOptions
     {
         try
         {
-            var cert = CertificateManager
-                .Instance.ListCertificates(
+            var cert = CertificateManager.Instance
+                .ListCertificates(
                     StoreName.My,
                     StoreLocation.CurrentUser,
                     isValid: true,

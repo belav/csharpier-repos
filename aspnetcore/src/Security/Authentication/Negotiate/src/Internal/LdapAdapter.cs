@@ -48,8 +48,8 @@ internal static partial class LdapAdapter
             return;
         }
 
-        var distinguishedName = settings
-            .Domain.Split('.')
+        var distinguishedName = settings.Domain
+            .Split('.')
             .Select(name => $"dc={name}")
             .Aggregate((a, b) => $"{a},{b}");
         var retrievedClaims = new List<string>();

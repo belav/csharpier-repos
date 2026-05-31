@@ -254,9 +254,8 @@ public static partial class RequestDelegateFactory
         "boundValues"
     );
 
-    private static readonly ParameterExpression HttpContextExpr = ParameterBindingMethodCache
-        .SharedExpressions
-        .HttpContextExpr;
+    private static readonly ParameterExpression HttpContextExpr =
+        ParameterBindingMethodCache.SharedExpressions.HttpContextExpr;
     private static readonly MemberExpression RequestServicesExpr = Expression.Property(
         HttpContextExpr,
         typeof(HttpContext).GetProperty(nameof(HttpContext.RequestServices))!
@@ -317,9 +316,8 @@ public static partial class RequestDelegateFactory
         typeof(ValueTask<object>).GetConstructor(new[] { typeof(EmptyHttpResult) })!,
         Expression.Property(null, typeof(EmptyHttpResult), nameof(EmptyHttpResult.Instance))
     );
-    private static readonly ParameterExpression TempSourceStringExpr = ParameterBindingMethodCache
-        .SharedExpressions
-        .TempSourceStringExpr;
+    private static readonly ParameterExpression TempSourceStringExpr =
+        ParameterBindingMethodCache.SharedExpressions.TempSourceStringExpr;
     private static readonly BinaryExpression TempSourceStringNotNullExpr = Expression.NotEqual(
         TempSourceStringExpr,
         Expression.Constant(null)
@@ -2969,9 +2967,9 @@ public static partial class RequestDelegateFactory
             return;
         }
 
-        factoryContext.EndpointBuilder.Metadata.Add(
-            new AcceptsMetadata(contentTypes, type, factoryContext.AllowEmptyRequestBody)
-        );
+        factoryContext.EndpointBuilder
+            .Metadata
+            .Add(new AcceptsMetadata(contentTypes, type, factoryContext.AllowEmptyRequestBody));
     }
 
     private static void InferFormAcceptsMetadata(RequestDelegateFactoryContext factoryContext)
@@ -3102,8 +3100,9 @@ public static partial class RequestDelegateFactory
         }
 
         var formDataMapperOptions = factoryContext.FormDataMapperOptions;
-        var formMappingOptionsMetadatas =
-            factoryContext.EndpointBuilder.Metadata.OfType<FormMappingOptionsMetadata>();
+        var formMappingOptionsMetadatas = factoryContext.EndpointBuilder
+            .Metadata
+            .OfType<FormMappingOptionsMetadata>();
         foreach (var formMappingOptionsMetadata in formMappingOptionsMetadatas)
         {
             formDataMapperOptions.MaxRecursionDepth =

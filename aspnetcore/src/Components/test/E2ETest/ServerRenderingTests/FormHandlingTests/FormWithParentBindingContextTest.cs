@@ -494,10 +494,12 @@ public class FormWithParentBindingContextTest
         // Assert 'abcde' error
         Browser
             .Exists(By.CssSelector("""ul.validation-errors > li.validation-message"""))
-            .Text.Contains("The value 'abcde' is not valid for 'AreaCode'.");
+            .Text
+            .Contains("The value 'abcde' is not valid for 'AreaCode'.");
         Browser
             .Exists(By.CssSelector("""div > div.validation-message"""))
-            .Text.Contains("The value 'abcde' is not valid for 'AreaCode'.");
+            .Text
+            .Contains("The value 'abcde' is not valid for 'AreaCode'.");
 
         if (!suppressEnhancedNavigation)
         {
@@ -539,10 +541,12 @@ public class FormWithParentBindingContextTest
 
         Browser
             .Exists(By.CssSelector("li.validation-message"))
-            .Text.Contains("The value 'invalid' is not valid for 'value'.");
+            .Text
+            .Contains("The value 'invalid' is not valid for 'value'.");
         Browser
             .Exists(By.CssSelector("div.validation-message"))
-            .Text.Contains("The value 'invalid' is not valid for 'value'.");
+            .Text
+            .Contains("The value 'invalid' is not valid for 'value'.");
 
         if (!suppressEnhancedNavigation)
         {
@@ -723,10 +727,12 @@ public class FormWithParentBindingContextTest
 
         Browser
             .Exists(By.CssSelector("[data-index='0']"))
-            .Text.Contains("The value 'invalid0' is not valid for 'IsPreferred'.");
+            .Text
+            .Contains("The value 'invalid0' is not valid for 'IsPreferred'.");
         Browser
             .Exists(By.CssSelector("[data-index='1']"))
-            .Text.Contains("The value 'invalid1' is not valid for 'IsPreferred'.");
+            .Text
+            .Contains("The value 'invalid1' is not valid for 'IsPreferred'.");
 
         Browser.Equal(
             2,
@@ -1396,7 +1402,8 @@ public class FormWithParentBindingContextTest
             Browser.True(() =>
                 Browser
                     .FindElement(By.TagName("html"))
-                    .Text.Contains("There was an unhandled exception on the current request")
+                    .Text
+                    .Contains("There was an unhandled exception on the current request")
             );
         }
         else

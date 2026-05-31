@@ -59,8 +59,8 @@ builder.Services.AddScoped<AuthenticationStateProvider, ServerAuthenticationStat
 #if (!UseServer)
 builder.Services.AddAuthorization();
 #endif
-builder
-    .Services.AddAuthentication(options =>
+builder.Services
+    .AddAuthentication(options =>
     {
         options.DefaultScheme = IdentityConstants.ApplicationScheme;
         options.DefaultSignInScheme = IdentityConstants.ExternalScheme;
@@ -79,10 +79,8 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 #endif
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
-builder
-    .Services.AddIdentityCore<ApplicationUser>(options =>
-        options.SignIn.RequireConfirmedAccount = true
-    )
+builder.Services
+    .AddIdentityCore<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
     .AddEntityFrameworkStores<ApplicationDbContext>()
     .AddSignInManager()
     .AddDefaultTokenProviders();

@@ -49,9 +49,8 @@ public static class ModelExplorerExtensions
         if (modelExplorer.Metadata.IsEnum && modelExplorer.Model is Enum modelEnum)
         {
             var enumStringValue = modelEnum.ToString("d");
-            var enumGroupedDisplayNamesAndValues = modelExplorer
-                .Metadata
-                .EnumGroupedDisplayNamesAndValues;
+            var enumGroupedDisplayNamesAndValues =
+                modelExplorer.Metadata.EnumGroupedDisplayNamesAndValues;
 
             Debug.Assert(enumGroupedDisplayNamesAndValues != null);
 

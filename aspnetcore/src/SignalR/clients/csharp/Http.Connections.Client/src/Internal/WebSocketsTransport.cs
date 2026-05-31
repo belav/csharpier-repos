@@ -151,9 +151,9 @@ internal sealed partial class WebSocketsTransport : ITransport, IStatefulReconne
 
                 if (context.Options.ClientCertificates is { Count: > 0 })
                 {
-                    webSocket.Options.ClientCertificates.AddRange(
-                        context.Options.ClientCertificates
-                    );
+                    webSocket.Options
+                        .ClientCertificates
+                        .AddRange(context.Options.ClientCertificates);
                 }
 
                 if (context.Options.Credentials != null)
@@ -174,8 +174,7 @@ internal sealed partial class WebSocketsTransport : ITransport, IStatefulReconne
 
                 if (context.Options.UseDefaultCredentials != null)
                 {
-                    webSocket.Options.UseDefaultCredentials = context
-                        .Options
+                    webSocket.Options.UseDefaultCredentials = context.Options
                         .UseDefaultCredentials
                         .Value;
                     if (context.Options.UseDefaultCredentials.Value)

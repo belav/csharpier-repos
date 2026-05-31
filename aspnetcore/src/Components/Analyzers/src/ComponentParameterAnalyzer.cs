@@ -204,8 +204,8 @@ public sealed class ComponentParameterAnalyzer : DiagnosticAnalyzer
     /// TODO: Remove this helper when https://github.com/dotnet/roslyn/issues/46682 is handled.
     /// </summary>
     private static bool IsAutoProperty(IPropertySymbol propertySymbol) =>
-        propertySymbol
-            .ContainingType.GetMembers()
+        propertySymbol.ContainingType
+            .GetMembers()
             .OfType<IFieldSymbol>()
             .Any(f =>
                 f.IsImplicitlyDeclared

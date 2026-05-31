@@ -47,8 +47,8 @@ public class Startup
                 await context.Response.WriteAsync("Environment Variables:\r\n");
                 var vars = Environment.GetEnvironmentVariables();
                 foreach (
-                    var key in vars
-                        .Keys.Cast<string>()
+                    var key in vars.Keys
+                        .Cast<string>()
                         .OrderBy(key => key, StringComparer.OrdinalIgnoreCase)
                 )
                 {

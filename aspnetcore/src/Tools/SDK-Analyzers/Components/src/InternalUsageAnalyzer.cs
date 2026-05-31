@@ -198,8 +198,8 @@ internal sealed class InternalUsageAnalyzer
             context.ReportDiagnostic(
                 Diagnostic.Create(
                     _descriptor,
-                    symbolForDiagnostic
-                        .DeclaringSyntaxReferences.FirstOrDefault()
+                    symbolForDiagnostic.DeclaringSyntaxReferences
+                        .FirstOrDefault()
                         ?.GetSyntax()
                         .GetLocation()
                         ?? Location.None,
@@ -215,8 +215,8 @@ internal sealed class InternalUsageAnalyzer
             context.ReportDiagnostic(
                 Diagnostic.Create(
                     _descriptor,
-                    symbolForDiagnostic
-                        .DeclaringSyntaxReferences.FirstOrDefault()
+                    symbolForDiagnostic.DeclaringSyntaxReferences
+                        .FirstOrDefault()
                         ?.GetSyntax()
                         .GetLocation()
                         ?? Location.None,

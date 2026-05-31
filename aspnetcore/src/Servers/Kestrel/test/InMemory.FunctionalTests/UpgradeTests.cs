@@ -87,8 +87,9 @@ public class UpgradeTests : LoggedTest
                         var stream = await feature.UpgradeAsync();
 
                         var buffer = new byte[128];
-                        var read = await context
-                            .Request.Body.ReadAsync(buffer, 0, 128)
+                        var read = await context.Request
+                            .Body
+                            .ReadAsync(buffer, 0, 128)
                             .DefaultTimeout();
                         Assert.Equal(0, read);
 
@@ -283,9 +284,9 @@ public class UpgradeTests : LoggedTest
                         Assert.False(feature.IsUpgradableRequest);
                         Assert.Equal("chunked", context.Request.Headers.TransferEncoding);
 
-                        var length = await context.Request.Body.FillBufferUntilEndAsync(
-                            new byte[100]
-                        );
+                        var length = await context.Request
+                            .Body
+                            .FillBufferUntilEndAsync(new byte[100]);
                         Assert.Equal(11, length);
                     }
                     else

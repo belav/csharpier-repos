@@ -382,11 +382,13 @@ public static class RazorPagesEndpointRouteBuilderExtensions
         if (marker == null)
         {
             throw new InvalidOperationException(
-                Mvc.Core.Resources.FormatUnableToFindServices(
-                    nameof(IServiceCollection),
-                    "AddRazorPages",
-                    "ConfigureServices(...)"
-                )
+                Mvc.Core
+                    .Resources
+                    .FormatUnableToFindServices(
+                        nameof(IServiceCollection),
+                        "AddRazorPages",
+                        "ConfigureServices(...)"
+                    )
             );
         }
     }
@@ -395,8 +397,8 @@ public static class RazorPagesEndpointRouteBuilderExtensions
         IEndpointRouteBuilder endpoints
     )
     {
-        var dataSource = endpoints
-            .DataSources.OfType<PageActionEndpointDataSource>()
+        var dataSource = endpoints.DataSources
+            .OfType<PageActionEndpointDataSource>()
             .FirstOrDefault();
         if (dataSource == null)
         {

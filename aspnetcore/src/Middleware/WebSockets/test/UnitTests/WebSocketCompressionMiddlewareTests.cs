@@ -48,8 +48,8 @@ public class WebSocketCompressionMiddlewareTests : LoggedTest
                     Assert.Equal(HttpStatusCode.SwitchingProtocols, response.StatusCode);
                     Assert.Equal(
                         "permessage-deflate; server_no_context_takeover",
-                        response
-                            .Headers.GetValues(HeaderNames.SecWebSocketExtensions)
+                        response.Headers
+                            .GetValues(HeaderNames.SecWebSocketExtensions)
                             .Aggregate((l, r) => $"{l}; {r}")
                     );
                 }
@@ -138,8 +138,8 @@ public class WebSocketCompressionMiddlewareTests : LoggedTest
                     Assert.Equal(HttpStatusCode.SwitchingProtocols, response.StatusCode);
                     Assert.Equal(
                         expectedResponse,
-                        response
-                            .Headers.GetValues(HeaderNames.SecWebSocketExtensions)
+                        response.Headers
+                            .GetValues(HeaderNames.SecWebSocketExtensions)
                             .Aggregate((l, r) => $"{l}; {r}")
                     );
                 }

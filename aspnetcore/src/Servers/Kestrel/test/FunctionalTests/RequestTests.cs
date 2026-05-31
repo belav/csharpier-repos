@@ -99,11 +99,9 @@ public class RequestTests : LoggedTest
                             var received = 0;
                             while (
                                 (
-                                    received = await context.Request.Body.ReadAsync(
-                                        receivedBytes,
-                                        0,
-                                        receivedBytes.Length
-                                    )
+                                    received = await context.Request
+                                        .Body
+                                        .ReadAsync(receivedBytes, 0, receivedBytes.Length)
                                 ) > 0
                             )
                             {

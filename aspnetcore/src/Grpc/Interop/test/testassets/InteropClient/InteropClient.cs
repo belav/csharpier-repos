@@ -116,8 +116,8 @@ public class InteropClient : IDisposable
 
     public static void Run(string[] args)
     {
-        var parserResult = Parser
-            .Default.ParseArguments<ClientOptions>(args)
+        var parserResult = Parser.Default
+            .ParseArguments<ClientOptions>(args)
             .WithNotParsed(errors => Environment.Exit(1))
             .WithParsed(options =>
             {

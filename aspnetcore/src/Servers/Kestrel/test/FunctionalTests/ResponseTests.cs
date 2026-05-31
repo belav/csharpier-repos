@@ -73,9 +73,9 @@ public class ResponseTests : TestApplicationErrorLoggerLoggedTest
 
                             for (int i = 0; i < 1024; i++)
                             {
-                                await context.Response.BodyWriter.WriteAsync(
-                                    new Memory<byte>(bytes, 0, bytes.Length)
-                                );
+                                await context.Response
+                                    .BodyWriter
+                                    .WriteAsync(new Memory<byte>(bytes, 0, bytes.Length));
                             }
                         });
                     });
@@ -347,10 +347,12 @@ public class ResponseTests : TestApplicationErrorLoggerLoggedTest
                     {
                         for (var i = 0; i < 1000; i++)
                         {
-                            await context.Response.BodyWriter.WriteAsync(
-                                new Memory<byte>(scratchBuffer, 0, scratchBuffer.Length),
-                                context.RequestAborted
-                            );
+                            await context.Response
+                                .BodyWriter
+                                .WriteAsync(
+                                    new Memory<byte>(scratchBuffer, 0, scratchBuffer.Length),
+                                    context.RequestAborted
+                                );
                             await Task.Delay(10);
                         }
                     }
@@ -426,11 +428,9 @@ public class ResponseTests : TestApplicationErrorLoggerLoggedTest
 
                     for (var i = 0; i < responseBodySegmentCount; i++)
                     {
-                        await context.Response.Body.WriteAsync(
-                            scratchBuffer,
-                            0,
-                            scratchBuffer.Length
-                        );
+                        await context.Response
+                            .Body
+                            .WriteAsync(scratchBuffer, 0, scratchBuffer.Length);
                         await Task.Delay(10);
                     }
 
@@ -611,10 +611,12 @@ public class ResponseTests : TestApplicationErrorLoggerLoggedTest
             {
                 for (; i < chunks; i++)
                 {
-                    await context.Response.BodyWriter.WriteAsync(
-                        new Memory<byte>(chunkData, 0, chunkData.Length),
-                        context.RequestAborted
-                    );
+                    await context.Response
+                        .BodyWriter
+                        .WriteAsync(
+                            new Memory<byte>(chunkData, 0, chunkData.Length),
+                            context.RequestAborted
+                        );
                     await Task.Yield();
                 }
 
@@ -772,10 +774,12 @@ public class ResponseTests : TestApplicationErrorLoggerLoggedTest
                     {
                         for (var i = 0; i < chunks; i++)
                         {
-                            await context.Response.BodyWriter.WriteAsync(
-                                new Memory<byte>(chunkData, 0, chunkData.Length),
-                                context.RequestAborted
-                            );
+                            await context.Response
+                                .BodyWriter
+                                .WriteAsync(
+                                    new Memory<byte>(chunkData, 0, chunkData.Length),
+                                    context.RequestAborted
+                                );
                         }
                     }
                     catch (OperationCanceledException)
@@ -1030,10 +1034,12 @@ public class ResponseTests : TestApplicationErrorLoggerLoggedTest
 
             for (var i = 0; i < chunkCount; i++)
             {
-                await context.Response.BodyWriter.WriteAsync(
-                    new Memory<byte>(chunkData, 0, chunkData.Length),
-                    context.RequestAborted
-                );
+                await context.Response
+                    .BodyWriter
+                    .WriteAsync(
+                        new Memory<byte>(chunkData, 0, chunkData.Length),
+                        context.RequestAborted
+                    );
             }
 
             appFuncCompleted.SetResult();
@@ -1208,10 +1214,12 @@ public class ResponseTests : TestApplicationErrorLoggerLoggedTest
 
             for (var i = 0; i < chunkCount; i++)
             {
-                await context.Response.BodyWriter.WriteAsync(
-                    new Memory<byte>(chunkData, 0, chunkData.Length),
-                    context.RequestAborted
-                );
+                await context.Response
+                    .BodyWriter
+                    .WriteAsync(
+                        new Memory<byte>(chunkData, 0, chunkData.Length),
+                        context.RequestAborted
+                    );
             }
 
             appFuncCompleted.SetResult();

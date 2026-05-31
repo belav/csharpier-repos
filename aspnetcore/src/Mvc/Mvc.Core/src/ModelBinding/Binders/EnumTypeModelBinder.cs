@@ -50,9 +50,9 @@ public class EnumTypeModelBinder : SimpleTypeModelBinder
         {
             bindingContext.ModelState.TryAddModelError(
                 bindingContext.ModelName,
-                bindingContext.ModelMetadata.ModelBindingMessageProvider.ValueIsInvalidAccessor(
-                    valueProviderResult.ToString()
-                )
+                bindingContext.ModelMetadata
+                    .ModelBindingMessageProvider
+                    .ValueIsInvalidAccessor(valueProviderResult.ToString())
             );
         }
     }

@@ -125,10 +125,9 @@ internal sealed class HttpConnection : ITimeoutHandler
                     );
 
                 // Register for connection close
-                using var closedRegistration = _context.ConnectionContext.ConnectionClosed.Register(
-                    state => ((HttpConnection)state!).OnConnectionClosed(),
-                    this
-                );
+                using var closedRegistration = _context.ConnectionContext
+                    .ConnectionClosed
+                    .Register(state => ((HttpConnection)state!).OnConnectionClosed(), this);
 
                 await requestProcessor.ProcessRequestsAsync(httpApplication);
             }

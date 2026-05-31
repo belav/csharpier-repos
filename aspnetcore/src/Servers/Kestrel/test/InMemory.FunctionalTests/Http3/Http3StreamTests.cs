@@ -260,8 +260,8 @@ public class Http3StreamTests : Http3TestBase
             {
                 context.Response.Headers["path"] = context.Request.Path.Value;
                 context.Response.Headers["query"] = context.Request.QueryString.Value;
-                context.Response.Headers["rawtarget"] = context
-                    .Features.Get<IHttpRequestFeature>()
+                context.Response.Headers["rawtarget"] = context.Features
+                    .Get<IHttpRequestFeature>()
                     .RawTarget;
                 return Task.CompletedTask;
             },
@@ -743,11 +743,9 @@ public class Http3StreamTests : Http3TestBase
                 var total = read;
                 while (read > 0)
                 {
-                    read = await context.Request.Body.ReadAsync(
-                        buffer,
-                        total,
-                        buffer.Length - total
-                    );
+                    read = await context.Request
+                        .Body
+                        .ReadAsync(buffer, total, buffer.Length - total);
                     total += read;
                 }
                 Assert.Equal(12, total);
@@ -784,10 +782,9 @@ public class Http3StreamTests : Http3TestBase
                 var readResult = await context.Request.BodyReader.ReadAsync();
                 while (!readResult.IsCompleted)
                 {
-                    context.Request.BodyReader.AdvanceTo(
-                        readResult.Buffer.Start,
-                        readResult.Buffer.End
-                    );
+                    context.Request
+                        .BodyReader
+                        .AdvanceTo(readResult.Buffer.Start, readResult.Buffer.End);
                     readResult = await context.Request.BodyReader.ReadAsync();
                 }
 
@@ -3472,8 +3469,8 @@ public class Http3StreamTests : Http3TestBase
             }
         );
 
-        var maxFieldSetting = await Http3Api
-            .ServerReceivedSettingsReader.ReadAsync()
+        var maxFieldSetting = await Http3Api.ServerReceivedSettingsReader
+            .ReadAsync()
             .DefaultTimeout();
 
         Assert.Equal(Core.Internal.Http3.Http3SettingType.MaxFieldSectionSize, maxFieldSetting.Key);
@@ -3520,9 +3517,9 @@ public class Http3StreamTests : Http3TestBase
                     var readCount = 0;
                     while (readCount < 100)
                     {
-                        readCount += await context.Request.Body.ReadAsync(
-                            buffer.AsMemory(readCount, 100 - readCount)
-                        );
+                        readCount += await context.Request
+                            .Body
+                            .ReadAsync(buffer.AsMemory(readCount, 100 - readCount));
                     }
 
                     await context.Response.Body.WriteAsync(buffer.AsMemory(0, 100));

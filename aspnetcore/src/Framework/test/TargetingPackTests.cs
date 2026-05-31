@@ -474,8 +474,8 @@ public class TargetingPackTests
 
         ZipArchive archive = ZipFile.OpenRead(targetingPackPath);
 
-        var actualPaths = archive
-            .Entries.Where(i =>
+        var actualPaths = archive.Entries
+            .Where(i =>
                 i.FullName.EndsWith(".dll", StringComparison.Ordinal)
                 && !i.FullName.EndsWith(".resources.dll", StringComparison.Ordinal)
             )

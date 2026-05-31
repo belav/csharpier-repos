@@ -490,9 +490,9 @@ public partial class HubConnectionContext
         {
             if (message.Error == null)
             {
-                _connectionContext.Transport.Output.Write(
-                    HandshakeProtocol.GetSuccessfulHandshake(Protocol)
-                );
+                _connectionContext.Transport
+                    .Output
+                    .Write(HandshakeProtocol.GetSuccessfulHandshake(Protocol));
             }
             else
             {

@@ -36,8 +36,9 @@ public class ComponentTagHelperTest
         await tagHelper.ProcessAsync(context, output);
 
         // Assert
-        var prerenderer =
-            viewContext.HttpContext.RequestServices.GetRequiredService<IComponentPrerenderer>();
+        var prerenderer = viewContext.HttpContext
+            .RequestServices
+            .GetRequiredService<IComponentPrerenderer>();
         var content = await prerenderer.Dispatcher.InvokeAsync(() =>
             HtmlContentUtilities.HtmlContentToString(output.Content)
         );

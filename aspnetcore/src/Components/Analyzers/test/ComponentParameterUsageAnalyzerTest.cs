@@ -50,9 +50,8 @@ public class ComponentParameterUsageAnalyzerTest : DiagnosticVerifier
             test,
             new DiagnosticResult
             {
-                Id = DiagnosticDescriptors
-                    .ComponentParametersShouldNotBeSetOutsideOfTheirDeclaredComponent
-                    .Id,
+                Id =
+                    DiagnosticDescriptors.ComponentParametersShouldNotBeSetOutsideOfTheirDeclaredComponent.Id,
                 Message =
                     "Component parameter 'TestProperty' should not be set outside of its component.",
                 Severity = DiagnosticSeverity.Warning,
@@ -84,9 +83,8 @@ public class ComponentParameterUsageAnalyzerTest : DiagnosticVerifier
             test,
             new DiagnosticResult
             {
-                Id = DiagnosticDescriptors
-                    .ComponentParametersShouldNotBeSetOutsideOfTheirDeclaredComponent
-                    .Id,
+                Id =
+                    DiagnosticDescriptors.ComponentParametersShouldNotBeSetOutsideOfTheirDeclaredComponent.Id,
                 Message =
                     "Component parameter 'TestProperty' should not be set outside of its component.",
                 Severity = DiagnosticSeverity.Warning,
@@ -118,9 +116,8 @@ public class ComponentParameterUsageAnalyzerTest : DiagnosticVerifier
             test,
             new DiagnosticResult
             {
-                Id = DiagnosticDescriptors
-                    .ComponentParametersShouldNotBeSetOutsideOfTheirDeclaredComponent
-                    .Id,
+                Id =
+                    DiagnosticDescriptors.ComponentParametersShouldNotBeSetOutsideOfTheirDeclaredComponent.Id,
                 Message =
                     "Component parameter 'TestProperty' should not be set outside of its component.",
                 Severity = DiagnosticSeverity.Warning,
@@ -152,9 +149,8 @@ public class ComponentParameterUsageAnalyzerTest : DiagnosticVerifier
             test,
             new DiagnosticResult
             {
-                Id = DiagnosticDescriptors
-                    .ComponentParametersShouldNotBeSetOutsideOfTheirDeclaredComponent
-                    .Id,
+                Id =
+                    DiagnosticDescriptors.ComponentParametersShouldNotBeSetOutsideOfTheirDeclaredComponent.Id,
                 Message =
                     "Component parameter 'TestInt' should not be set outside of its component.",
                 Severity = DiagnosticSeverity.Warning,
@@ -186,9 +182,8 @@ public class ComponentParameterUsageAnalyzerTest : DiagnosticVerifier
             test,
             new DiagnosticResult
             {
-                Id = DiagnosticDescriptors
-                    .ComponentParametersShouldNotBeSetOutsideOfTheirDeclaredComponent
-                    .Id,
+                Id =
+                    DiagnosticDescriptors.ComponentParametersShouldNotBeSetOutsideOfTheirDeclaredComponent.Id,
                 Message =
                     "Component parameter 'TestInt' should not be set outside of its component.",
                 Severity = DiagnosticSeverity.Warning,

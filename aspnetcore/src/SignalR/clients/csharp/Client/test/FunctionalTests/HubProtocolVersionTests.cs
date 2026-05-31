@@ -155,9 +155,9 @@ public class HubProtocolVersionTests : FunctionalTestBase
                 // Simulate a new call from the client
                 var messageToken = new JObject { ["type"] = int.MaxValue };
 
-                connectionContext.Transport.Output.Write(
-                    Encoding.UTF8.GetBytes(messageToken.ToString())
-                );
+                connectionContext.Transport
+                    .Output
+                    .Write(Encoding.UTF8.GetBytes(messageToken.ToString()));
                 connectionContext.Transport.Output.Write(new[] { (byte)0x1e });
                 await connectionContext.Transport.Output.FlushAsync().DefaultTimeout();
 

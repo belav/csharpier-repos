@@ -25,7 +25,8 @@ internal partial class EndpointHtmlRenderer
 
         var renderModesMetadata = httpContext
             .GetEndpoint()
-            ?.Metadata.GetMetadata<ConfiguredRenderModesMetadata>();
+            ?.Metadata
+            .GetMetadata<ConfiguredRenderModesMetadata>();
 
         IPersistentComponentStateStore? store = null;
 

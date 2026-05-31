@@ -125,15 +125,15 @@ internal sealed class AddResponseTypeAttributeCodeFixAction : CodeAction
             );
         }
 
-        var apiConventionMethodAttribute = context
-            .Method.GetAttributes(context.SymbolCache.ApiConventionMethodAttribute)
+        var apiConventionMethodAttribute = context.Method
+            .GetAttributes(context.SymbolCache.ApiConventionMethodAttribute)
             .FirstOrDefault();
 
         if (apiConventionMethodAttribute != null)
         {
             // Remove [ApiConventionMethodAttribute] declared on the method since it's no longer required
-            var attributeSyntax = await apiConventionMethodAttribute
-                .ApplicationSyntaxReference.GetSyntaxAsync(cancellationToken)
+            var attributeSyntax = await apiConventionMethodAttribute.ApplicationSyntaxReference
+                .GetSyntaxAsync(cancellationToken)
                 .ConfigureAwait(false);
 
             documentEditor.RemoveNode(attributeSyntax);
