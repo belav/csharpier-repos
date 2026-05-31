@@ -74,8 +74,9 @@ public class ApiExplorerDataFilter : IResourceFilter
             {
                 parameterData.RouteInfo = new ApiExplorerParameterRouteInfo()
                 {
-                    ConstraintTypes = parameter
-                        .RouteInfo.Constraints?.Select(c => c.GetType().Name)
+                    ConstraintTypes = parameter.RouteInfo
+                        .Constraints
+                        ?.Select(c => c.GetType().Name)
                         .ToArray(),
                     DefaultValue = parameter.RouteInfo.DefaultValue,
                     IsOptional = parameter.RouteInfo.IsOptional,
@@ -87,13 +88,14 @@ public class ApiExplorerDataFilter : IResourceFilter
 
         foreach (var request in description.SupportedRequestFormats)
         {
-            data.SupportedRequestFormats.Add(
-                new ApiExplorerRequestFormat
-                {
-                    FormatterType = request.Formatter?.GetType().FullName,
-                    MediaType = request.MediaType,
-                }
-            );
+            data.SupportedRequestFormats
+                .Add(
+                    new ApiExplorerRequestFormat
+                    {
+                        FormatterType = request.Formatter?.GetType().FullName,
+                        MediaType = request.MediaType,
+                    }
+                );
         }
 
         foreach (var response in description.SupportedResponseTypes)
@@ -107,13 +109,14 @@ public class ApiExplorerDataFilter : IResourceFilter
 
             foreach (var responseFormat in response.ApiResponseFormats)
             {
-                responseType.ResponseFormats.Add(
-                    new ApiExplorerResponseFormat()
-                    {
-                        FormatterType = responseFormat.Formatter?.GetType().FullName,
-                        MediaType = responseFormat.MediaType,
-                    }
-                );
+                responseType.ResponseFormats
+                    .Add(
+                        new ApiExplorerResponseFormat()
+                        {
+                            FormatterType = responseFormat.Formatter?.GetType().FullName,
+                            MediaType = responseFormat.MediaType,
+                        }
+                    );
             }
 
             data.SupportedResponseTypes.Add(responseType);

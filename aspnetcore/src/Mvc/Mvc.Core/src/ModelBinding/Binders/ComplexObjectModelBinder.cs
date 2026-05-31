@@ -464,8 +464,7 @@ public sealed partial class ComplexObjectModelBinder : IModelBinder
         ModelMetadata propertyMetadata
     )
     {
-        var metadataProviderFilter = bindingContext
-            .ModelMetadata
+        var metadataProviderFilter = bindingContext.ModelMetadata
             .PropertyFilterProvider
             ?.PropertyFilter;
         if (metadataProviderFilter?.Invoke(propertyMetadata) == false)
@@ -539,9 +538,8 @@ public sealed partial class ComplexObjectModelBinder : IModelBinder
         }
         else if (property.IsBindingRequired)
         {
-            var message = property.ModelBindingMessageProvider.MissingBindRequiredValueAccessor(
-                fieldName
-            );
+            var message = property.ModelBindingMessageProvider
+                .MissingBindRequiredValueAccessor(fieldName);
             bindingContext.ModelState.TryAddModelError(modelName, message);
         }
 
@@ -574,9 +572,8 @@ public sealed partial class ComplexObjectModelBinder : IModelBinder
 
         if (!result.IsModelSet && parameter.IsBindingRequired)
         {
-            var message = parameter.ModelBindingMessageProvider.MissingBindRequiredValueAccessor(
-                fieldName
-            );
+            var message = parameter.ModelBindingMessageProvider
+                .MissingBindRequiredValueAccessor(fieldName);
             bindingContext.ModelState.TryAddModelError(modelName, message);
         }
 
@@ -698,8 +695,7 @@ public sealed partial class ComplexObjectModelBinder : IModelBinder
 
         if (performsConstructorBinding)
         {
-            var parameters = bindingContext
-                .ModelMetadata
+            var parameters = bindingContext.ModelMetadata
                 .BoundConstructor!
                 .BoundConstructorParameters!;
             for (var i = 0; i < parameters.Count; i++)

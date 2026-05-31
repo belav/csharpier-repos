@@ -116,8 +116,8 @@ public class InteropClient : IDisposable
 
     public static void Run(string[] args)
     {
-        var parserResult = Parser
-            .Default.ParseArguments<ClientOptions>(args)
+        var parserResult = Parser.Default
+            .ParseArguments<ClientOptions>(args)
             .WithNotParsed(errors => Environment.Exit(1))
             .WithParsed(options =>
             {
@@ -370,46 +370,50 @@ public class InteropClient : IDisposable
 
         using (var call = client.FullDuplexCall())
         {
-            await call.RequestStream.WriteAsync(
-                new StreamingOutputCallRequest
-                {
-                    ResponseParameters = { new ResponseParameters { Size = 31415 } },
-                    Payload = CreateZerosPayload(27182),
-                }
-            );
+            await call.RequestStream
+                .WriteAsync(
+                    new StreamingOutputCallRequest
+                    {
+                        ResponseParameters = { new ResponseParameters { Size = 31415 } },
+                        Payload = CreateZerosPayload(27182),
+                    }
+                );
 
             Assert.IsTrue(await call.ResponseStream.MoveNext());
             Assert.AreEqual(31415, call.ResponseStream.Current.Payload.Body.Length);
 
-            await call.RequestStream.WriteAsync(
-                new StreamingOutputCallRequest
-                {
-                    ResponseParameters = { new ResponseParameters { Size = 9 } },
-                    Payload = CreateZerosPayload(8),
-                }
-            );
+            await call.RequestStream
+                .WriteAsync(
+                    new StreamingOutputCallRequest
+                    {
+                        ResponseParameters = { new ResponseParameters { Size = 9 } },
+                        Payload = CreateZerosPayload(8),
+                    }
+                );
 
             Assert.IsTrue(await call.ResponseStream.MoveNext());
             Assert.AreEqual(9, call.ResponseStream.Current.Payload.Body.Length);
 
-            await call.RequestStream.WriteAsync(
-                new StreamingOutputCallRequest
-                {
-                    ResponseParameters = { new ResponseParameters { Size = 2653 } },
-                    Payload = CreateZerosPayload(1828),
-                }
-            );
+            await call.RequestStream
+                .WriteAsync(
+                    new StreamingOutputCallRequest
+                    {
+                        ResponseParameters = { new ResponseParameters { Size = 2653 } },
+                        Payload = CreateZerosPayload(1828),
+                    }
+                );
 
             Assert.IsTrue(await call.ResponseStream.MoveNext());
             Assert.AreEqual(2653, call.ResponseStream.Current.Payload.Body.Length);
 
-            await call.RequestStream.WriteAsync(
-                new StreamingOutputCallRequest
-                {
-                    ResponseParameters = { new ResponseParameters { Size = 58979 } },
-                    Payload = CreateZerosPayload(45904),
-                }
-            );
+            await call.RequestStream
+                .WriteAsync(
+                    new StreamingOutputCallRequest
+                    {
+                        ResponseParameters = { new ResponseParameters { Size = 58979 } },
+                        Payload = CreateZerosPayload(45904),
+                    }
+                );
 
             Assert.IsTrue(await call.ResponseStream.MoveNext());
             Assert.AreEqual(58979, call.ResponseStream.Current.Payload.Body.Length);
@@ -542,13 +546,14 @@ public class InteropClient : IDisposable
         var cts = new CancellationTokenSource();
         using (var call = client.FullDuplexCall(cancellationToken: cts.Token))
         {
-            await call.RequestStream.WriteAsync(
-                new StreamingOutputCallRequest
-                {
-                    ResponseParameters = { new ResponseParameters { Size = 31415 } },
-                    Payload = CreateZerosPayload(27182),
-                }
-            );
+            await call.RequestStream
+                .WriteAsync(
+                    new StreamingOutputCallRequest
+                    {
+                        ResponseParameters = { new ResponseParameters { Size = 31415 } },
+                        Payload = CreateZerosPayload(27182),
+                    }
+                );
 
             Assert.IsTrue(await call.ResponseStream.MoveNext());
             Assert.AreEqual(31415, call.ResponseStream.Current.Payload.Body.Length);
@@ -578,9 +583,10 @@ public class InteropClient : IDisposable
         {
             try
             {
-                await call.RequestStream.WriteAsync(
-                    new StreamingOutputCallRequest { Payload = CreateZerosPayload(27182) }
-                );
+                await call.RequestStream
+                    .WriteAsync(
+                        new StreamingOutputCallRequest { Payload = CreateZerosPayload(27182) }
+                    );
             }
             catch (InvalidOperationException)
             {
@@ -794,13 +800,14 @@ public class InteropClient : IDisposable
         try
         {
             var probeCall = client.StreamingInputCall(CreateClientCompressionMetadata(false));
-            await probeCall.RequestStream.WriteAsync(
-                new StreamingInputCallRequest
-                {
-                    ExpectCompressed = new BoolValue { Value = true },
-                    Payload = CreateZerosPayload(27182),
-                }
-            );
+            await probeCall.RequestStream
+                .WriteAsync(
+                    new StreamingInputCallRequest
+                    {
+                        ExpectCompressed = new BoolValue { Value = true },
+                        Payload = CreateZerosPayload(27182),
+                    }
+                );
 
             // cannot use Assert.ThrowsAsync because it uses Task.Wait and would deadlock.
             await probeCall;
@@ -812,22 +819,24 @@ public class InteropClient : IDisposable
         }
 
         var call = client.StreamingInputCall(CreateClientCompressionMetadata(true));
-        await call.RequestStream.WriteAsync(
-            new StreamingInputCallRequest
-            {
-                ExpectCompressed = new BoolValue { Value = true },
-                Payload = CreateZerosPayload(27182),
-            }
-        );
+        await call.RequestStream
+            .WriteAsync(
+                new StreamingInputCallRequest
+                {
+                    ExpectCompressed = new BoolValue { Value = true },
+                    Payload = CreateZerosPayload(27182),
+                }
+            );
 
         call.RequestStream.WriteOptions = new WriteOptions(WriteFlags.NoCompress);
-        await call.RequestStream.WriteAsync(
-            new StreamingInputCallRequest
-            {
-                ExpectCompressed = new BoolValue { Value = false },
-                Payload = CreateZerosPayload(45904),
-            }
-        );
+        await call.RequestStream
+            .WriteAsync(
+                new StreamingInputCallRequest
+                {
+                    ExpectCompressed = new BoolValue { Value = false },
+                    Payload = CreateZerosPayload(45904),
+                }
+            );
         await call.RequestStream.CompleteAsync();
 
         var response = await call.ResponseAsync;

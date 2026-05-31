@@ -37,8 +37,8 @@ public sealed class WebApplication
     {
         _host = host;
         ApplicationBuilder = new ApplicationBuilder(host.Services, ServerFeatures);
-        Logger = host
-            .Services.GetRequiredService<ILoggerFactory>()
+        Logger = host.Services
+            .GetRequiredService<ILoggerFactory>()
             .CreateLogger(Environment.ApplicationName ?? nameof(WebApplication));
 
         Properties[GlobalEndpointRouteBuilderKey] = this;
@@ -293,8 +293,8 @@ public sealed class WebApplication
                     // The web app's data sources aren't registered until the routing middleware is. That often happens when the app is run.
                     // We want endpoints to be available in the debug view before the app starts. Test if all the web app's the data sources are registered.
                     if (
-                        compositeEndpointDataSource
-                            .DataSources.Intersect(_webApplication.DataSources)
+                        compositeEndpointDataSource.DataSources
+                            .Intersect(_webApplication.DataSources)
                             .Count() == _webApplication.DataSources.Count
                     )
                     {
@@ -319,10 +319,9 @@ public sealed class WebApplication
             get
             {
                 if (
-                    _webApplication.Properties.TryGetValue(
-                        "__MiddlewareDescriptions",
-                        out var value
-                    ) && value is IList<string> descriptions
+                    _webApplication.Properties
+                        .TryGetValue("__MiddlewareDescriptions", out var value)
+                    && value is IList<string> descriptions
                 )
                 {
                     return descriptions;

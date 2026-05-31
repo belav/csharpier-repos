@@ -208,21 +208,22 @@ public class AsyncActionsController : Controller
 
         public CustomAwaiter(int simulateDelayMilliseconds)
         {
-            Task.Factory.StartNew(() =>
-            {
-                Thread.Sleep(simulateDelayMilliseconds);
-                lock (_continuations)
+            Task.Factory
+                .StartNew(() =>
                 {
-                    IsCompleted = true;
-
-                    foreach (var continuation in _continuations)
+                    Thread.Sleep(simulateDelayMilliseconds);
+                    lock (_continuations)
                     {
-                        continuation();
-                    }
+                        IsCompleted = true;
 
-                    _continuations.Clear();
-                }
-            });
+                        foreach (var continuation in _continuations)
+                        {
+                            continuation();
+                        }
+
+                        _continuations.Clear();
+                    }
+                });
         }
 
         public bool IsCompleted { get; private set; }

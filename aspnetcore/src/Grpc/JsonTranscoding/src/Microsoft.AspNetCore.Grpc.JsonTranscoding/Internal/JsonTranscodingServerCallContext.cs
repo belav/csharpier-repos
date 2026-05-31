@@ -191,10 +191,11 @@ internal sealed class JsonTranscodingServerCallContext
                         continue;
                     }
                     else if (
-                        header.Key.EndsWith(
-                            Metadata.BinaryHeaderSuffix,
-                            StringComparison.OrdinalIgnoreCase
-                        )
+                        header.Key
+                            .EndsWith(
+                                Metadata.BinaryHeaderSuffix,
+                                StringComparison.OrdinalIgnoreCase
+                            )
                     )
                     {
                         _requestHeaders.Add(

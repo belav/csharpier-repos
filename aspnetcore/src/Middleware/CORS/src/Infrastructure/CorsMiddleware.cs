@@ -192,10 +192,8 @@ public class CorsMiddleware
         }
         else
         {
-            context.Response.OnStarting(
-                OnResponseStartingDelegate,
-                Tuple.Create(this, context, corsResult)
-            );
+            context.Response
+                .OnStarting(OnResponseStartingDelegate, Tuple.Create(this, context, corsResult));
             return _next(context);
         }
     }

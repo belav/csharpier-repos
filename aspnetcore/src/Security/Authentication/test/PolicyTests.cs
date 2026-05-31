@@ -534,10 +534,11 @@ public class PolicyTests
                                 var req = context.Request;
                                 var res = context.Response;
                                 if (
-                                    req.Path.StartsWithSegments(
-                                        new PathString("/auth"),
-                                        out var remainder
-                                    )
+                                    req.Path
+                                        .StartsWithSegments(
+                                            new PathString("/auth"),
+                                            out var remainder
+                                        )
                                 )
                                 {
                                     var name =

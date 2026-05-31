@@ -317,32 +317,34 @@ public class RequestTimeoutsMiddlewareTests
                 }
                 : null,
         };
-        options.Policies.Add(
-            "policy1",
-            new RequestTimeoutPolicy
-            {
-                Timeout = TimeSpan.FromSeconds(1),
-                TimeoutStatusCode = 111,
-                WriteTimeoutResponse = context =>
+        options.Policies
+            .Add(
+                "policy1",
+                new RequestTimeoutPolicy
                 {
-                    context.Items["SetFrom"] = "policy1";
-                    return Task.CompletedTask;
-                },
-            }
-        );
-        options.Policies.Add(
-            "policy2",
-            new RequestTimeoutPolicy
-            {
-                Timeout = TimeSpan.FromSeconds(2),
-                TimeoutStatusCode = 222,
-                WriteTimeoutResponse = context =>
+                    Timeout = TimeSpan.FromSeconds(1),
+                    TimeoutStatusCode = 111,
+                    WriteTimeoutResponse = context =>
+                    {
+                        context.Items["SetFrom"] = "policy1";
+                        return Task.CompletedTask;
+                    },
+                }
+            );
+        options.Policies
+            .Add(
+                "policy2",
+                new RequestTimeoutPolicy
                 {
-                    context.Items["SetFrom"] = "policy2";
-                    return Task.CompletedTask;
-                },
-            }
-        );
+                    Timeout = TimeSpan.FromSeconds(2),
+                    TimeoutStatusCode = 222,
+                    WriteTimeoutResponse = context =>
+                    {
+                        context.Items["SetFrom"] = "policy2";
+                        return Task.CompletedTask;
+                    },
+                }
+            );
 
         var optionsMonitor = new MiddlewareOptions(options);
 

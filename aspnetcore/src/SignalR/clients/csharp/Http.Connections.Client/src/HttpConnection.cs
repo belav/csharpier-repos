@@ -463,10 +463,8 @@ public partial class HttpConnection : ConnectionContext, IConnectionInherentKeep
                         );
                     }
                     else if (
-                        !transport.TransferFormats!.Contains(
-                            transferFormatString,
-                            StringComparer.Ordinal
-                        )
+                        !transport.TransferFormats!
+                            .Contains(transferFormatString, StringComparer.Ordinal)
                     )
                     {
                         Log.TransportDoesNotSupportTransferFormat(
@@ -603,8 +601,8 @@ public partial class HttpConnection : ConnectionContext, IConnectionInherentKeep
                 {
                     response.EnsureSuccessStatusCode();
 #pragma warning disable CA2016 // Forward the 'CancellationToken' parameter to methods
-                    var responseBuffer = await response
-                        .Content.ReadAsByteArrayAsync()
+                    var responseBuffer = await response.Content
+                        .ReadAsByteArrayAsync()
                         .ConfigureAwait(false);
 #pragma warning restore CA2016 // Forward the 'CancellationToken' parameter to methods
                     var negotiateResponse = NegotiateProtocol.ParseResponse(responseBuffer);
@@ -720,9 +718,8 @@ public partial class HttpConnection : ConnectionContext, IConnectionInherentKeep
 
                 if (_httpConnectionOptions.UseDefaultCredentials != null)
                 {
-                    httpClientHandler.UseDefaultCredentials = _httpConnectionOptions
-                        .UseDefaultCredentials
-                        .Value;
+                    httpClientHandler.UseDefaultCredentials =
+                        _httpConnectionOptions.UseDefaultCredentials.Value;
                     // Negotiate Auth isn't supported over HTTP/2 and HttpClient does not gracefully fallback to HTTP/1.1 in that case
                     // https://github.com/dotnet/runtime/issues/1582
                     allowHttp2 = !_httpConnectionOptions.UseDefaultCredentials.Value;

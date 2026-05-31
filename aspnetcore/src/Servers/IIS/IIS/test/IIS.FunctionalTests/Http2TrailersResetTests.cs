@@ -243,9 +243,8 @@ public class Http2TrailerResetTests : FunctionalTestsBase
                 {
                     await h2Connection.InitializeConnectionAsync();
 
-                    h2Connection.Logger.LogInformation(
-                        "Initialized http2 connection. Starting stream 1."
-                    );
+                    h2Connection.Logger
+                        .LogInformation("Initialized http2 connection. Starting stream 1.");
 
                     await h2Connection.StartStreamAsync(
                         1,
@@ -288,9 +287,8 @@ public class Http2TrailerResetTests : FunctionalTestsBase
                 {
                     await h2Connection.InitializeConnectionAsync();
 
-                    h2Connection.Logger.LogInformation(
-                        "Initialized http2 connection. Starting stream 1."
-                    );
+                    h2Connection.Logger
+                        .LogInformation("Initialized http2 connection. Starting stream 1.");
 
                     await h2Connection.StartStreamAsync(
                         1,
@@ -331,9 +329,8 @@ public class Http2TrailerResetTests : FunctionalTestsBase
                 {
                     await h2Connection.InitializeConnectionAsync();
 
-                    h2Connection.Logger.LogInformation(
-                        "Initialized http2 connection. Starting stream 1."
-                    );
+                    h2Connection.Logger
+                        .LogInformation("Initialized http2 connection. Starting stream 1.");
 
                     await h2Connection.StartStreamAsync(
                         1,
@@ -378,9 +375,8 @@ public class Http2TrailerResetTests : FunctionalTestsBase
                 {
                     await h2Connection.InitializeConnectionAsync();
 
-                    h2Connection.Logger.LogInformation(
-                        "Initialized http2 connection. Starting stream 1."
-                    );
+                    h2Connection.Logger
+                        .LogInformation("Initialized http2 connection. Starting stream 1.");
 
                     await h2Connection.StartStreamAsync(
                         1,
@@ -421,9 +417,8 @@ public class Http2TrailerResetTests : FunctionalTestsBase
                 {
                     await h2Connection.InitializeConnectionAsync();
 
-                    h2Connection.Logger.LogInformation(
-                        "Initialized http2 connection. Starting stream 1."
-                    );
+                    h2Connection.Logger
+                        .LogInformation("Initialized http2 connection. Starting stream 1.");
 
                     await h2Connection.StartStreamAsync(
                         1,
@@ -472,9 +467,8 @@ public class Http2TrailerResetTests : FunctionalTestsBase
                 {
                     await h2Connection.InitializeConnectionAsync();
 
-                    h2Connection.Logger.LogInformation(
-                        "Initialized http2 connection. Starting stream 1."
-                    );
+                    h2Connection.Logger
+                        .LogInformation("Initialized http2 connection. Starting stream 1.");
 
                     await h2Connection.StartStreamAsync(
                         1,
@@ -534,9 +528,8 @@ public class Http2TrailerResetTests : FunctionalTestsBase
                 {
                     await h2Connection.InitializeConnectionAsync();
 
-                    h2Connection.Logger.LogInformation(
-                        "Initialized http2 connection. Starting stream 1."
-                    );
+                    h2Connection.Logger
+                        .LogInformation("Initialized http2 connection. Starting stream 1.");
 
                     await h2Connection.StartStreamAsync(
                         1,
@@ -573,9 +566,8 @@ public class Http2TrailerResetTests : FunctionalTestsBase
                 {
                     await h2Connection.InitializeConnectionAsync();
 
-                    h2Connection.Logger.LogInformation(
-                        "Initialized http2 connection. Starting stream 1."
-                    );
+                    h2Connection.Logger
+                        .LogInformation("Initialized http2 connection. Starting stream 1.");
 
                     await h2Connection.StartStreamAsync(
                         1,
@@ -612,9 +604,8 @@ public class Http2TrailerResetTests : FunctionalTestsBase
                 {
                     await h2Connection.InitializeConnectionAsync();
 
-                    h2Connection.Logger.LogInformation(
-                        "Initialized http2 connection. Starting stream 1."
-                    );
+                    h2Connection.Logger
+                        .LogInformation("Initialized http2 connection. Starting stream 1.");
 
                     await h2Connection.StartStreamAsync(
                         1,
@@ -654,9 +645,8 @@ public class Http2TrailerResetTests : FunctionalTestsBase
                 {
                     await h2Connection.InitializeConnectionAsync();
 
-                    h2Connection.Logger.LogInformation(
-                        "Initialized http2 connection. Starting stream 1."
-                    );
+                    h2Connection.Logger
+                        .LogInformation("Initialized http2 connection. Starting stream 1.");
 
                     await h2Connection.StartStreamAsync(
                         1,

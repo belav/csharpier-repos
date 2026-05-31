@@ -12,9 +12,8 @@ internal sealed class WebAssemblyNavigationInterception : INavigationInterceptio
 
     public Task EnableNavigationInterceptionAsync()
     {
-        InternalJSImportMethods.Instance.NavigationManager_EnableNavigationInterception(
-            (int)WebRendererId.WebAssembly
-        );
+        InternalJSImportMethods.Instance
+            .NavigationManager_EnableNavigationInterception((int)WebRendererId.WebAssembly);
         return Task.CompletedTask;
     }
 }

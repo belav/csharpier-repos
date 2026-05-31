@@ -60,8 +60,9 @@ public sealed class DatabaseDeveloperPageExceptionFilter : IDeveloperPageExcepti
         try
         {
             // Look for DbContext classes registered in the service provider
-            var registeredContexts = errorContext
-                .HttpContext.RequestServices.GetServices<DbContextOptions>()
+            var registeredContexts = errorContext.HttpContext
+                .RequestServices
+                .GetServices<DbContextOptions>()
                 .Select(o => o.ContextType)
                 .Distinct(); // Workaround for https://github.com/dotnet/efcore/issues/22341
 
@@ -71,10 +72,8 @@ public sealed class DatabaseDeveloperPageExceptionFilter : IDeveloperPageExcepti
 
                 foreach (var registeredContext in registeredContexts)
                 {
-                    var details = await errorContext.HttpContext.GetContextDetailsAsync(
-                        registeredContext,
-                        _logger
-                    );
+                    var details = await errorContext.HttpContext
+                        .GetContextDetailsAsync(registeredContext, _logger);
 
                     if (details != null)
                     {

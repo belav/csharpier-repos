@@ -32,9 +32,8 @@ public class RemoveControllerActionDescriptorProvider : IActionDescriptorProvide
                 {
                     if (
                         controllerToRemove.Actions == null
-                        || controllerToRemove.Actions.Contains(
-                            controllerActionDescriptor.ActionName
-                        )
+                        || controllerToRemove.Actions
+                            .Contains(controllerActionDescriptor.ActionName)
                     )
                     {
                         context.Results.Remove(item);

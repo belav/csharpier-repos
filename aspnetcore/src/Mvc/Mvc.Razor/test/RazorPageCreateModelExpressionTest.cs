@@ -21,9 +21,9 @@ public class RazorPageCreateModelExpressionTest
         // m => m
         // Arrange
         var viewContext = CreateViewContext();
-        var modelExplorer = viewContext.ViewData.ModelExplorer.GetExplorerForProperty(
-            nameof(RazorPageCreateModelExpressionModel.Name)
-        );
+        var modelExplorer = viewContext.ViewData
+            .ModelExplorer
+            .GetExplorerForProperty(nameof(RazorPageCreateModelExpressionModel.Name));
         var viewData = new ViewDataDictionary<string>(viewContext.ViewData)
         {
             ModelExplorer = modelExplorer,
@@ -47,9 +47,9 @@ public class RazorPageCreateModelExpressionTest
         // m => m.Model
         // Arrange
         var viewContext = CreateViewContext();
-        var modelExplorer = viewContext.ViewData.ModelExplorer.GetExplorerForProperty(
-            nameof(RazorPageCreateModelExpressionModel.Name)
-        );
+        var modelExplorer = viewContext.ViewData
+            .ModelExplorer
+            .GetExplorerForProperty(nameof(RazorPageCreateModelExpressionModel.Name));
         var viewData = new ViewDataDictionary<string>(viewContext.ViewData)
         {
             ModelExplorer = modelExplorer,
@@ -149,10 +149,8 @@ public class RazorPageCreateModelExpressionTest
         var page = CreatePage(viewContext);
 
         // Act
-        var result = page.ModelExpressionProvider.CreateModelExpression(
-            page.ViewData,
-            model => somethingElse
-        );
+        var result = page.ModelExpressionProvider
+            .CreateModelExpression(page.ViewData, model => somethingElse);
 
         // Assert
         Assert.NotNull(result);
@@ -170,10 +168,8 @@ public class RazorPageCreateModelExpressionTest
         var page = CreatePage(viewContext);
 
         // Act
-        var result = page.ModelExpressionProvider.CreateModelExpression(
-            page.ViewData,
-            model => model.Id
-        );
+        var result = page.ModelExpressionProvider
+            .CreateModelExpression(page.ViewData, model => model.Id);
 
         // Assert
         Assert.NotNull(result);
@@ -191,10 +187,8 @@ public class RazorPageCreateModelExpressionTest
         var page = CreatePage(viewContext);
 
         // Act
-        var result = page.ModelExpressionProvider.CreateModelExpression(
-            page.ViewData,
-            model => model.SubModel.Id
-        );
+        var result = page.ModelExpressionProvider
+            .CreateModelExpression(page.ViewData, model => model.SubModel.Id);
 
         // Assert
         Assert.NotNull(result);
@@ -212,10 +206,8 @@ public class RazorPageCreateModelExpressionTest
         var page = CreatePage(viewContext);
 
         // Act
-        var result = page.ModelExpressionProvider.CreateModelExpression(
-            page.ViewData,
-            model => model.SubModel.SubSubModel.Id
-        );
+        var result = page.ModelExpressionProvider
+            .CreateModelExpression(page.ViewData, model => model.SubModel.SubSubModel.Id);
 
         // Assert
         Assert.NotNull(result);
@@ -234,10 +226,8 @@ public class RazorPageCreateModelExpressionTest
         var page = CreatePage(viewContext);
 
         // Act
-        var result = page.ModelExpressionProvider.CreateModelExpression(
-            page.ViewData,
-            model => somethingElse
-        );
+        var result = page.ModelExpressionProvider
+            .CreateModelExpression(page.ViewData, model => somethingElse);
 
         // Assert
         Assert.NotNull(result);
@@ -255,10 +245,8 @@ public class RazorPageCreateModelExpressionTest
         var page = CreatePage(viewContext);
 
         // Act
-        var result = page.ModelExpressionProvider.CreateModelExpression(
-            page.ViewData,
-            model => model.Name
-        );
+        var result = page.ModelExpressionProvider
+            .CreateModelExpression(page.ViewData, model => model.Name);
 
         // Assert
         Assert.NotNull(result);
@@ -276,10 +264,8 @@ public class RazorPageCreateModelExpressionTest
         var page = CreatePage(viewContext);
 
         // Act
-        var result = page.ModelExpressionProvider.CreateModelExpression(
-            page.ViewData,
-            model => model.SubModel.SubSubModel.Name
-        );
+        var result = page.ModelExpressionProvider
+            .CreateModelExpression(page.ViewData, model => model.SubModel.SubSubModel.Name);
 
         // Assert
         Assert.NotNull(result);
@@ -297,10 +283,8 @@ public class RazorPageCreateModelExpressionTest
         var page = CreatePage(viewContext);
 
         // Act
-        var result = page.ModelExpressionProvider.CreateModelExpression(
-            page.ViewData,
-            model => model.SubModel.Name
-        );
+        var result = page.ModelExpressionProvider
+            .CreateModelExpression(page.ViewData, model => model.SubModel.Name);
 
         // Assert
         Assert.NotNull(result);

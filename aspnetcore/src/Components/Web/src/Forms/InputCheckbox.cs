@@ -46,11 +46,8 @@ public class InputCheckbox : InputBase<bool>
         builder.AddAttribute(
             7,
             "onchange",
-            EventCallback.Factory.CreateBinder<bool>(
-                this,
-                __value => CurrentValue = __value,
-                CurrentValue
-            )
+            EventCallback.Factory
+                .CreateBinder<bool>(this, __value => CurrentValue = __value, CurrentValue)
         );
         builder.SetUpdatesAttributeName("checked");
         builder.AddElementReferenceCapture(8, __inputReference => Element = __inputReference);

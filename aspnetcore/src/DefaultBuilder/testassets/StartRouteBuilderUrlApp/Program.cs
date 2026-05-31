@@ -26,8 +26,9 @@ public class Program
                         "route",
                         async (req, res, data) =>
                         {
-                            var env =
-                                req.HttpContext.RequestServices.GetRequiredService<IHostEnvironment>();
+                            var env = req.HttpContext
+                                .RequestServices
+                                .GetRequiredService<IHostEnvironment>();
                             await res.WriteAsync(env.ApplicationName);
                             messageSent.Set();
                         }

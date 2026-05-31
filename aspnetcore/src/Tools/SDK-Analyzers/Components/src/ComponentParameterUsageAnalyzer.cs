@@ -91,8 +91,7 @@ public class ComponentParameterUsageAnalyzer : DiagnosticAnalyzer
                             return;
                         }
 
-                        var assignmentContainingType = startBlockContext
-                            .OwningSymbol
+                        var assignmentContainingType = startBlockContext.OwningSymbol
                             ?.ContainingType;
                         if (assignmentContainingType == null)
                         {
@@ -100,10 +99,8 @@ public class ComponentParameterUsageAnalyzer : DiagnosticAnalyzer
                             return;
                         }
 
-                        var conversion = context.Compilation.ClassifyConversion(
-                            propertyContainingType,
-                            assignmentContainingType
-                        );
+                        var conversion = context.Compilation
+                            .ClassifyConversion(propertyContainingType, assignmentContainingType);
                         if (conversion.Exists && conversion.IsIdentity)
                         {
                             // The assignment is taking place inside of the declaring component.

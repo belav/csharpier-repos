@@ -317,10 +317,11 @@ public class HostingApplicationDiagnosticsTests
         diagnosticListener.Subscribe(
             new CallbackDiagnosticListener(pair =>
             {
-                eventsFired |= pair.Key.StartsWith(
-                    "Microsoft.AspNetCore.Hosting.HttpRequestIn",
-                    StringComparison.Ordinal
-                );
+                eventsFired |= pair.Key
+                    .StartsWith(
+                        "Microsoft.AspNetCore.Hosting.HttpRequestIn",
+                        StringComparison.Ordinal
+                    );
             }),
             (s, o, arg3) =>
             {
@@ -360,10 +361,11 @@ public class HostingApplicationDiagnosticsTests
         diagnosticListener.Subscribe(
             new CallbackDiagnosticListener(pair =>
             {
-                eventsFired |= pair.Key.StartsWith(
-                    "Microsoft.AspNetCore.Hosting.HttpRequestIn",
-                    StringComparison.Ordinal
-                );
+                eventsFired |= pair.Key
+                    .StartsWith(
+                        "Microsoft.AspNetCore.Hosting.HttpRequestIn",
+                        StringComparison.Ordinal
+                    );
             }),
             (s, o, arg3) =>
             {

@@ -88,10 +88,11 @@ public class RangeHeaderTests
             .GetAsync("http://localhost/SubFolder/ranges.txt");
 
         var req = new HttpRequestMessage(HttpMethod.Get, "http://localhost/SubFolder/ranges.txt");
-        req.Headers.Add(
-            "If-Modified-Since",
-            original.Content.Headers.LastModified.Value.AddHours(-1).ToString("r")
-        );
+        req.Headers
+            .Add(
+                "If-Modified-Since",
+                original.Content.Headers.LastModified.Value.AddHours(-1).ToString("r")
+            );
         req.Headers.Add("Range", "bytes=0-10");
         HttpResponseMessage resp = await server.CreateClient().SendAsync(req);
         Assert.Equal(HttpStatusCode.PartialContent, resp.StatusCode);
@@ -110,10 +111,8 @@ public class RangeHeaderTests
             .GetAsync("http://localhost/SubFolder/ranges.txt");
 
         var req = new HttpRequestMessage(HttpMethod.Get, "http://localhost/SubFolder/ranges.txt");
-        req.Headers.Add(
-            "If-Modified-Since",
-            original.Content.Headers.LastModified.Value.ToString("r")
-        );
+        req.Headers
+            .Add("If-Modified-Since", original.Content.Headers.LastModified.Value.ToString("r"));
         req.Headers.Add("Range", "bytes=0-10");
         HttpResponseMessage resp = await server.CreateClient().SendAsync(req);
         Assert.Equal(HttpStatusCode.NotModified, resp.StatusCode);
@@ -192,10 +191,16 @@ public class RangeHeaderTests
             .GetAsync("http://localhost/SubFolder/ranges.txt");
 
         var req = new HttpRequestMessage(HttpMethod.Get, "http://localhost/SubFolder/ranges.txt");
-        req.Headers.Add(
-            "If-Range",
-            original.Content.Headers.LastModified.Value.Subtract(TimeSpan.FromDays(1)).ToString("r")
-        );
+        req.Headers
+            .Add(
+                "If-Range",
+                original.Content
+                    .Headers
+                    .LastModified
+                    .Value
+                    .Subtract(TimeSpan.FromDays(1))
+                    .ToString("r")
+            );
         req.Headers.Add("Range", "bytes=0-10");
         HttpResponseMessage resp = await server.CreateClient().SendAsync(req);
         Assert.Equal(HttpStatusCode.OK, resp.StatusCode);
@@ -219,10 +224,16 @@ public class RangeHeaderTests
             .GetAsync("http://localhost/SubFolder/ranges.txt");
 
         var req = new HttpRequestMessage(HttpMethod.Head, "http://localhost/SubFolder/ranges.txt");
-        req.Headers.Add(
-            "If-Range",
-            original.Content.Headers.LastModified.Value.Subtract(TimeSpan.FromDays(1)).ToString("r")
-        );
+        req.Headers
+            .Add(
+                "If-Range",
+                original.Content
+                    .Headers
+                    .LastModified
+                    .Value
+                    .Subtract(TimeSpan.FromDays(1))
+                    .ToString("r")
+            );
         req.Headers.Add("Range", "bytes=0-10");
         HttpResponseMessage resp = await server.CreateClient().SendAsync(req);
         Assert.Equal(HttpStatusCode.OK, resp.StatusCode);

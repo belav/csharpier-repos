@@ -12,24 +12,23 @@ internal sealed partial class HubClientProxyGenerator : IIncrementalGenerator
 {
     public void Initialize(IncrementalGeneratorInitializationContext context)
     {
-        var methodDeclaration = context
-            .SyntaxProvider.CreateSyntaxProvider(
+        var methodDeclaration = context.SyntaxProvider
+            .CreateSyntaxProvider(
                 static (s, _) => Parser.IsSyntaxTargetForAttribute(s),
                 static (ctx, _) => Parser.GetSemanticTargetForAttribute(ctx)
             )
             .Where(static m => m is not null)
             .Collect();
 
-        var memberAccessExpressions = context
-            .SyntaxProvider.CreateSyntaxProvider(
+        var memberAccessExpressions = context.SyntaxProvider
+            .CreateSyntaxProvider(
                 static (s, _) => Parser.IsSyntaxTargetForGeneration(s),
                 static (ctx, _) => Parser.GetSemanticTargetForGeneration(ctx)
             )
             .Where(static m => m is not null);
 
-        var compilationAndMethodDeclaration = context.CompilationProvider.Combine(
-            methodDeclaration
-        );
+        var compilationAndMethodDeclaration = context.CompilationProvider
+            .Combine(methodDeclaration);
 
         var payload = compilationAndMethodDeclaration.Combine(memberAccessExpressions.Collect());
 

@@ -82,10 +82,11 @@ public class TestingInfrastructureInheritanceTests
 
         var lifetimeService = (IHostApplicationLifetime)
             factory.Services.GetService(typeof(IHostApplicationLifetime));
-        lifetimeService.ApplicationStopped.Register(() =>
-        {
-            callbackCalled = true;
-        });
+        lifetimeService.ApplicationStopped
+            .Register(() =>
+            {
+                callbackCalled = true;
+            });
         factory.Dispose();
 
         // Assert

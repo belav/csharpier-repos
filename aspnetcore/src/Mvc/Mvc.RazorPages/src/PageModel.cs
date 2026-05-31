@@ -94,8 +94,8 @@ public abstract class PageModel : IAsyncPageFilter, IPageFilter
         {
             if (_tempData == null)
             {
-                var factory =
-                    HttpContext?.RequestServices?.GetRequiredService<ITempDataDictionaryFactory>();
+                var factory = HttpContext?.RequestServices
+                    ?.GetRequiredService<ITempDataDictionaryFactory>();
                 _tempData = factory?.GetTempData(HttpContext);
             }
 
@@ -139,8 +139,8 @@ public abstract class PageModel : IAsyncPageFilter, IPageFilter
     {
         get
         {
-            _metadataProvider ??=
-                HttpContext?.RequestServices?.GetRequiredService<IModelMetadataProvider>();
+            _metadataProvider ??= HttpContext?.RequestServices
+                ?.GetRequiredService<IModelMetadataProvider>();
             return _metadataProvider!;
         }
         set => _metadataProvider = value ?? throw new ArgumentNullException(nameof(value));
@@ -157,8 +157,8 @@ public abstract class PageModel : IAsyncPageFilter, IPageFilter
         {
             if (_objectValidator == null)
             {
-                _objectValidator =
-                    HttpContext?.RequestServices?.GetRequiredService<IObjectModelValidator>();
+                _objectValidator = HttpContext?.RequestServices
+                    ?.GetRequiredService<IObjectModelValidator>();
             }
 
             return _objectValidator!;
@@ -171,8 +171,8 @@ public abstract class PageModel : IAsyncPageFilter, IPageFilter
         {
             if (_modelBinderFactory == null)
             {
-                _modelBinderFactory =
-                    HttpContext?.RequestServices?.GetRequiredService<IModelBinderFactory>();
+                _modelBinderFactory = HttpContext?.RequestServices
+                    ?.GetRequiredService<IModelBinderFactory>();
             }
 
             return _modelBinderFactory!;

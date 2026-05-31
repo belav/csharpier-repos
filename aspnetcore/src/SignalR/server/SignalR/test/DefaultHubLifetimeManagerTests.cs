@@ -45,13 +45,14 @@ public class DefaultHubLifetimeManagerTests : HubLifetimeManagerTestsBase<Hub>
             Assert.Single(message.Arguments);
             Assert.Equal("World", (string)message.Arguments[0]);
             var tcs = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
-            connection2.ConnectionAborted.Register(
-                t =>
-                {
-                    ((TaskCompletionSource)t).SetResult();
-                },
-                tcs
-            );
+            connection2.ConnectionAborted
+                .Register(
+                    t =>
+                    {
+                        ((TaskCompletionSource)t).SetResult();
+                    },
+                    tcs
+                );
             await tcs.Task.DefaultTimeout();
             Assert.False(connection1.ConnectionAborted.IsCancellationRequested);
         }
@@ -81,13 +82,14 @@ public class DefaultHubLifetimeManagerTests : HubLifetimeManagerTestsBase<Hub>
             cts.Cancel();
             await sendTask.DefaultTimeout();
             var tcs = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
-            connection2.ConnectionAborted.Register(
-                t =>
-                {
-                    ((TaskCompletionSource)t).SetResult();
-                },
-                tcs
-            );
+            connection2.ConnectionAborted
+                .Register(
+                    t =>
+                    {
+                        ((TaskCompletionSource)t).SetResult();
+                    },
+                    tcs
+                );
             await tcs.Task.DefaultTimeout();
             Assert.False(connection1.ConnectionAborted.IsCancellationRequested);
             Assert.Null(client1.TryRead());
@@ -115,13 +117,14 @@ public class DefaultHubLifetimeManagerTests : HubLifetimeManagerTestsBase<Hub>
             cts.Cancel();
             await sendTask.DefaultTimeout();
             var tcs = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
-            connection1.ConnectionAborted.Register(
-                t =>
-                {
-                    ((TaskCompletionSource)t).SetResult();
-                },
-                tcs
-            );
+            connection1.ConnectionAborted
+                .Register(
+                    t =>
+                    {
+                        ((TaskCompletionSource)t).SetResult();
+                    },
+                    tcs
+                );
             await tcs.Task.DefaultTimeout();
         }
     }
@@ -147,13 +150,14 @@ public class DefaultHubLifetimeManagerTests : HubLifetimeManagerTestsBase<Hub>
             cts.Cancel();
             await sendTask.DefaultTimeout();
             var tcs = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
-            connection1.ConnectionAborted.Register(
-                t =>
-                {
-                    ((TaskCompletionSource)t).SetResult();
-                },
-                tcs
-            );
+            connection1.ConnectionAborted
+                .Register(
+                    t =>
+                    {
+                        ((TaskCompletionSource)t).SetResult();
+                    },
+                    tcs
+                );
             await tcs.Task.DefaultTimeout();
         }
     }
@@ -175,13 +179,14 @@ public class DefaultHubLifetimeManagerTests : HubLifetimeManagerTestsBase<Hub>
             cts.Cancel();
             await sendTask.DefaultTimeout();
             var tcs = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
-            connection1.ConnectionAborted.Register(
-                t =>
-                {
-                    ((TaskCompletionSource)t).SetResult();
-                },
-                tcs
-            );
+            connection1.ConnectionAborted
+                .Register(
+                    t =>
+                    {
+                        ((TaskCompletionSource)t).SetResult();
+                    },
+                    tcs
+                );
             await tcs.Task.DefaultTimeout();
         }
     }
@@ -213,13 +218,14 @@ public class DefaultHubLifetimeManagerTests : HubLifetimeManagerTestsBase<Hub>
             cts.Cancel();
             await sendTask.DefaultTimeout();
             var tcs = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
-            connection2.ConnectionAborted.Register(
-                t =>
-                {
-                    ((TaskCompletionSource)t).SetResult();
-                },
-                tcs
-            );
+            connection2.ConnectionAborted
+                .Register(
+                    t =>
+                    {
+                        ((TaskCompletionSource)t).SetResult();
+                    },
+                    tcs
+                );
             await tcs.Task.DefaultTimeout();
             Assert.False(connection1.ConnectionAborted.IsCancellationRequested);
             Assert.Null(client1.TryRead());
@@ -248,13 +254,14 @@ public class DefaultHubLifetimeManagerTests : HubLifetimeManagerTestsBase<Hub>
             cts.Cancel();
             await sendTask.DefaultTimeout();
             var tcs = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
-            connection1.ConnectionAborted.Register(
-                t =>
-                {
-                    ((TaskCompletionSource)t).SetResult();
-                },
-                tcs
-            );
+            connection1.ConnectionAborted
+                .Register(
+                    t =>
+                    {
+                        ((TaskCompletionSource)t).SetResult();
+                    },
+                    tcs
+                );
             await tcs.Task.DefaultTimeout();
         }
     }
@@ -288,13 +295,14 @@ public class DefaultHubLifetimeManagerTests : HubLifetimeManagerTestsBase<Hub>
             Assert.Single(message.Arguments);
             Assert.Equal("World", (string)message.Arguments[0]);
             var tcs = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
-            connection2.ConnectionAborted.Register(
-                t =>
-                {
-                    ((TaskCompletionSource)t).SetResult();
-                },
-                tcs
-            );
+            connection2.ConnectionAborted
+                .Register(
+                    t =>
+                    {
+                        ((TaskCompletionSource)t).SetResult();
+                    },
+                    tcs
+                );
             await tcs.Task.DefaultTimeout();
             Assert.False(connection1.ConnectionAborted.IsCancellationRequested);
         }
@@ -334,13 +342,14 @@ public class DefaultHubLifetimeManagerTests : HubLifetimeManagerTestsBase<Hub>
             Assert.Single(message.Arguments);
             Assert.Equal("World", (string)message.Arguments[0]);
             var tcs = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
-            connection2.ConnectionAborted.Register(
-                t =>
-                {
-                    ((TaskCompletionSource)t).SetResult();
-                },
-                tcs
-            );
+            connection2.ConnectionAborted
+                .Register(
+                    t =>
+                    {
+                        ((TaskCompletionSource)t).SetResult();
+                    },
+                    tcs
+                );
             await tcs.Task.DefaultTimeout();
             Assert.False(connection1.ConnectionAborted.IsCancellationRequested);
         }

@@ -71,12 +71,13 @@ public partial class RenderTreeBuilderAnalyzer : DiagnosticAnalyzer
         WellKnownTypes wellKnownTypes,
         IMethodSymbol targetMethod
     ) =>
-        SymbolEqualityComparer.Default.Equals(
-            wellKnownTypes.Get(
-                WellKnownType.Microsoft_AspNetCore_Components_Rendering_RenderTreeBuilder
-            ),
-            targetMethod.ContainingType
-        )
+        SymbolEqualityComparer.Default
+            .Equals(
+                wellKnownTypes.Get(
+                    WellKnownType.Microsoft_AspNetCore_Components_Rendering_RenderTreeBuilder
+                ),
+                targetMethod.ContainingType
+            )
         && targetMethod.Parameters.Length > SequenceParameterOrdinal
         && targetMethod.Parameters[SequenceParameterOrdinal].Name == "sequence";
 }

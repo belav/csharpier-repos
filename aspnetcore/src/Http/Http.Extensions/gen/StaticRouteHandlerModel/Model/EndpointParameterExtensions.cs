@@ -22,10 +22,8 @@ internal static class EndpointParameterExtensions
         // If the parameter defined in the route handler and the return type of the BindAsync method are the same,
         // then we can use the handler parameter type as the return type of the BindAsync method.
         if (
-            SymbolEqualityComparer.IncludeNullability.Equals(
-                handlerParameterType,
-                bindAsyncReturnType
-            )
+            SymbolEqualityComparer.IncludeNullability
+                .Equals(handlerParameterType, bindAsyncReturnType)
         )
         {
             return handlerParameterType;

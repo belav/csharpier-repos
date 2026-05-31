@@ -269,9 +269,8 @@ public class ShutdownTests : TestApplicationErrorLoggerLoggedTest
         Assert.Contains(
             LogMessages,
             m =>
-                m.Message.Contains(
-                    "Some connections failed to close gracefully during server shutdown."
-                )
+                m.Message
+                    .Contains("Some connections failed to close gracefully during server shutdown.")
         );
         Assert.DoesNotContain(LogMessages, m => m.Message.Contains("Request finished in"));
 

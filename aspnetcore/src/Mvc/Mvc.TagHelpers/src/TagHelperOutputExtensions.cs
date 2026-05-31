@@ -110,10 +110,8 @@ public static class TagHelperOutputExtensions
             }
             else if (string.Equals(attribute.Key, "class", StringComparison.OrdinalIgnoreCase))
             {
-                var found = tagHelperOutput.Attributes.TryGetAttribute(
-                    "class",
-                    out var classAttribute
-                );
+                var found = tagHelperOutput.Attributes
+                    .TryGetAttribute("class", out var classAttribute);
                 Debug.Assert(found);
 
                 var newAttribute = new TagHelperAttribute(
@@ -184,10 +182,8 @@ public static class TagHelperOutputExtensions
         }
 
         if (
-            !tagHelperOutput.Attributes.TryGetAttribute(
-                "class",
-                out TagHelperAttribute classAttribute
-            )
+            !tagHelperOutput.Attributes
+                .TryGetAttribute("class", out TagHelperAttribute classAttribute)
         )
         {
             tagHelperOutput.Attributes.Add("class", classValue);
@@ -257,10 +253,8 @@ public static class TagHelperOutputExtensions
         }
 
         if (
-            !tagHelperOutput.Attributes.TryGetAttribute(
-                "class",
-                out TagHelperAttribute classAttribute
-            )
+            !tagHelperOutput.Attributes
+                .TryGetAttribute("class", out TagHelperAttribute classAttribute)
         )
         {
             return;

@@ -508,18 +508,16 @@ app.MapPost("/hello", (string[] p) => p[0]);
         );
 
         var httpContext = CreateHttpContext();
-        httpContext.Features.Set<IHttpRequestBodyDetectionFeature>(
-            new RequestBodyDetectionFeature(true)
-        );
+        httpContext.Features
+            .Set<IHttpRequestBodyDetectionFeature>(new RequestBodyDetectionFeature(true));
         httpContext.Request.Headers["Content-Type"] = "application/json";
         var requestBodyBytes = JsonSerializer.SerializeToUtf8Bytes(
             new string[] { "ValueFromBody" }
         );
         var stream = new MemoryStream(requestBodyBytes);
         httpContext.Request.Body = stream;
-        httpContext.Request.Headers["Content-Length"] = stream.Length.ToString(
-            CultureInfo.InvariantCulture
-        );
+        httpContext.Request.Headers["Content-Length"] = stream.Length
+            .ToString(CultureInfo.InvariantCulture);
         httpContext.Request.QueryString = new QueryString("?p=ValueFromQueryString");
 
         await endpoint.RequestDelegate(httpContext);
@@ -546,18 +544,16 @@ app.MapMethods("/hello", new [] { "POST" }, (string[] p) => p[0]);
         );
 
         var httpContext = CreateHttpContext();
-        httpContext.Features.Set<IHttpRequestBodyDetectionFeature>(
-            new RequestBodyDetectionFeature(true)
-        );
+        httpContext.Features
+            .Set<IHttpRequestBodyDetectionFeature>(new RequestBodyDetectionFeature(true));
         httpContext.Request.Headers["Content-Type"] = "application/json";
         var requestBodyBytes = JsonSerializer.SerializeToUtf8Bytes(
             new string[] { "ValueFromBody" }
         );
         var stream = new MemoryStream(requestBodyBytes);
         httpContext.Request.Body = stream;
-        httpContext.Request.Headers["Content-Length"] = stream.Length.ToString(
-            CultureInfo.InvariantCulture
-        );
+        httpContext.Request.Headers["Content-Length"] = stream.Length
+            .ToString(CultureInfo.InvariantCulture);
         httpContext.Request.QueryString = new QueryString("?p=ValueFromQueryString");
 
         await endpoint.RequestDelegate(httpContext);
@@ -584,18 +580,16 @@ app.MapMethods("/hello", new [] { "GET" }, (string[] p) => p[0]);
         );
 
         var httpContext = CreateHttpContext();
-        httpContext.Features.Set<IHttpRequestBodyDetectionFeature>(
-            new RequestBodyDetectionFeature(true)
-        );
+        httpContext.Features
+            .Set<IHttpRequestBodyDetectionFeature>(new RequestBodyDetectionFeature(true));
         httpContext.Request.Headers["Content-Type"] = "application/json";
         var requestBodyBytes = JsonSerializer.SerializeToUtf8Bytes(
             new string[] { "ValueFromBody" }
         );
         var stream = new MemoryStream(requestBodyBytes);
         httpContext.Request.Body = stream;
-        httpContext.Request.Headers["Content-Length"] = stream.Length.ToString(
-            CultureInfo.InvariantCulture
-        );
+        httpContext.Request.Headers["Content-Length"] = stream.Length
+            .ToString(CultureInfo.InvariantCulture);
         httpContext.Request.QueryString = new QueryString("?p=ValueFromQueryString");
 
         await endpoint.RequestDelegate(httpContext);
@@ -622,18 +616,16 @@ app.MapMethods("/hello", new [] { "POST", "GET" }, (string[] p) => p[0]);
         );
 
         var httpContext = CreateHttpContext();
-        httpContext.Features.Set<IHttpRequestBodyDetectionFeature>(
-            new RequestBodyDetectionFeature(true)
-        );
+        httpContext.Features
+            .Set<IHttpRequestBodyDetectionFeature>(new RequestBodyDetectionFeature(true));
         httpContext.Request.Headers["Content-Type"] = "application/json";
         var requestBodyBytes = JsonSerializer.SerializeToUtf8Bytes(
             new string[] { "ValueFromBody" }
         );
         var stream = new MemoryStream(requestBodyBytes);
         httpContext.Request.Body = stream;
-        httpContext.Request.Headers["Content-Length"] = stream.Length.ToString(
-            CultureInfo.InvariantCulture
-        );
+        httpContext.Request.Headers["Content-Length"] = stream.Length
+            .ToString(CultureInfo.InvariantCulture);
         httpContext.Request.QueryString = new QueryString("?p=ValueFromQueryString");
 
         await endpoint.RequestDelegate(httpContext);
@@ -660,18 +652,16 @@ app.MapMethods("/hello", new [] { "POST", "PUT" }, (string[] p) => p[0]);
         );
 
         var httpContext = CreateHttpContext();
-        httpContext.Features.Set<IHttpRequestBodyDetectionFeature>(
-            new RequestBodyDetectionFeature(true)
-        );
+        httpContext.Features
+            .Set<IHttpRequestBodyDetectionFeature>(new RequestBodyDetectionFeature(true));
         httpContext.Request.Headers["Content-Type"] = "application/json";
         var requestBodyBytes = JsonSerializer.SerializeToUtf8Bytes(
             new string[] { "ValueFromBody" }
         );
         var stream = new MemoryStream(requestBodyBytes);
         httpContext.Request.Body = stream;
-        httpContext.Request.Headers["Content-Length"] = stream.Length.ToString(
-            CultureInfo.InvariantCulture
-        );
+        httpContext.Request.Headers["Content-Length"] = stream.Length
+            .ToString(CultureInfo.InvariantCulture);
         httpContext.Request.QueryString = new QueryString("?p=ValueFromQueryString");
 
         await endpoint.RequestDelegate(httpContext);

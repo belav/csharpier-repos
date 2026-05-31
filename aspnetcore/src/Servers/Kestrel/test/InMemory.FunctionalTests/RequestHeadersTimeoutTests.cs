@@ -32,9 +32,8 @@ public class RequestHeadersTimeoutTests : LoggedTest
                 await connection.Send("GET / HTTP/1.1", headers);
 
                 // Min amount of time between requests that triggers a request headers timeout.
-                testContext.FakeTimeProvider.Advance(
-                    RequestHeadersTimeout + Heartbeat.Interval + TimeSpan.FromTicks(1)
-                );
+                testContext.FakeTimeProvider
+                    .Advance(RequestHeadersTimeout + Heartbeat.Interval + TimeSpan.FromTicks(1));
                 testContext.ConnectionManager.OnHeartbeat();
 
                 await ReceiveTimeoutResponse(connection, testContext);
@@ -56,9 +55,8 @@ public class RequestHeadersTimeoutTests : LoggedTest
                 await connection.Send("POST / HTTP/1.1", "Host:", "Content-Length: 1", "", "");
 
                 // Min amount of time between requests that triggers a request headers timeout.
-                testContext.FakeTimeProvider.Advance(
-                    RequestHeadersTimeout + Heartbeat.Interval + TimeSpan.FromTicks(1)
-                );
+                testContext.FakeTimeProvider
+                    .Advance(RequestHeadersTimeout + Heartbeat.Interval + TimeSpan.FromTicks(1));
                 testContext.ConnectionManager.OnHeartbeat();
 
                 await connection.Send("a");
@@ -84,9 +82,8 @@ public class RequestHeadersTimeoutTests : LoggedTest
                 await connection.Send(requestLine);
 
                 // Min amount of time between requests that triggers a request headers timeout.
-                testContext.FakeTimeProvider.Advance(
-                    RequestHeadersTimeout + Heartbeat.Interval + TimeSpan.FromTicks(1)
-                );
+                testContext.FakeTimeProvider
+                    .Advance(RequestHeadersTimeout + Heartbeat.Interval + TimeSpan.FromTicks(1));
                 testContext.ConnectionManager.OnHeartbeat();
 
                 await ReceiveTimeoutResponse(connection, testContext);

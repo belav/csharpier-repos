@@ -215,16 +215,16 @@ internal sealed partial class LongPollingTransport : ITransport
                 {
                     Log.ReceivedMessages(_logger);
 #if NETCOREAPP
-                    await response
-                        .Content.CopyToAsync(applicationStream, cancellationToken)
+                    await response.Content
+                        .CopyToAsync(applicationStream, cancellationToken)
                         .ConfigureAwait(false);
 
 #else
                     await response.Content.CopyToAsync(applicationStream).ConfigureAwait(false);
 #endif
 
-                    var flushResult = await _application
-                        .Output.FlushAsync(cancellationToken)
+                    var flushResult = await _application.Output
+                        .FlushAsync(cancellationToken)
                         .ConfigureAwait(false);
 
                     // We canceled in the middle of applying back pressure

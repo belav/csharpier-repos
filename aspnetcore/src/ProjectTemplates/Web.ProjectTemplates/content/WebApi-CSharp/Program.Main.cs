@@ -26,8 +26,8 @@ public class Program
 
         // Add services to the container.
 #if (OrganizationalAuth)
-        builder
-            .Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+        builder.Services
+            .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 #if (GenerateApiOrGraph)
             .AddMicrosoftIdentityWebApi(builder.Configuration.GetSection("AzureAd"))
             .EnableTokenAcquisitionToCallDownstreamApi()
@@ -42,8 +42,8 @@ public class Program
             .AddMicrosoftIdentityWebApi(builder.Configuration.GetSection("AzureAd"));
 #endif
 #elif (IndividualB2CAuth)
-        builder
-            .Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+        builder.Services
+            .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 #if (GenerateApi)
             .AddMicrosoftIdentityWebApi(builder.Configuration.GetSection("AzureAdB2C"))
             .EnableTokenAcquisitionToCallDownstreamApi()
@@ -69,11 +69,12 @@ public class Program
 
         builder.Services.AddAuthentication(NegotiateDefaults.AuthenticationScheme).AddNegotiate();
 
-        builder.Services.AddAuthorization(options =>
-        {
-            // By default, all incoming requests will be authorized according to the default policy.
-            options.FallbackPolicy = options.DefaultPolicy;
-        });
+        builder.Services
+            .AddAuthorization(options =>
+            {
+                // By default, all incoming requests will be authorized according to the default policy.
+                options.FallbackPolicy = options.DefaultPolicy;
+            });
 #endif
 
         var app = builder.Build();
@@ -123,15 +124,15 @@ public class Program
                         .ConfigureAwait(false);
                     if (response.StatusCode == System.Net.HttpStatusCode.OK)
                     {
-                        var apiResult = await response
-                            .Content.ReadAsStringAsync()
+                        var apiResult = await response.Content
+                            .ReadAsStringAsync()
                             .ConfigureAwait(false);
                         // Do something
                     }
                     else
                     {
-                        var error = await response
-                            .Content.ReadAsStringAsync()
+                        var error = await response.Content
+                            .ReadAsStringAsync()
                             .ConfigureAwait(false);
                         throw new HttpRequestException(
                             $"Invalid status code in the HttpResponseMessage: {response.StatusCode}: {error}"

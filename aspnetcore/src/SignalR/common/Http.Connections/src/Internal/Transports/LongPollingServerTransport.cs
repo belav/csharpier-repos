@@ -65,10 +65,9 @@ internal sealed partial class LongPollingServerTransport : IHttpTransport
                 context.Response.ContentType = "application/octet-stream";
 
                 _connection?.StartSendCancellation();
-                await context.Response.Body.WriteAsync(
-                    buffer,
-                    _connection?.SendingToken ?? default
-                );
+                await context.Response
+                    .Body
+                    .WriteAsync(buffer, _connection?.SendingToken ?? default);
             }
             finally
             {

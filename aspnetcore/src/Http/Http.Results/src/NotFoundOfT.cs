@@ -71,12 +71,13 @@ public sealed class NotFound<TValue>
         ArgumentNullException.ThrowIfNull(method);
         ArgumentNullException.ThrowIfNull(builder);
 
-        builder.Metadata.Add(
-            new ProducesResponseTypeMetadata(
-                StatusCodes.Status404NotFound,
-                typeof(TValue),
-                new[] { "application/json" }
-            )
-        );
+        builder.Metadata
+            .Add(
+                new ProducesResponseTypeMetadata(
+                    StatusCodes.Status404NotFound,
+                    typeof(TValue),
+                    new[] { "application/json" }
+                )
+            );
     }
 }

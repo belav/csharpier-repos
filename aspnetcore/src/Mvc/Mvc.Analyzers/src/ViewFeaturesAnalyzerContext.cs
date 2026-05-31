@@ -34,10 +34,8 @@ public class ViewFeaturesAnalyzerContext
         }
 
         if (
-            !SymbolEqualityComparer.Default.Equals(
-                method.ContainingType,
-                HtmlHelperPartialExtensionsType
-            )
+            !SymbolEqualityComparer.Default
+                .Equals(method.ContainingType, HtmlHelperPartialExtensionsType)
         )
         {
             return false;

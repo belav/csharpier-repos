@@ -15,10 +15,12 @@ public abstract class WebHostServerFixture : ServerFixture
     {
         Host = CreateWebHost();
         RunInBackgroundThread(Host.Start);
-        return Host
-            .Services.GetRequiredService<IServer>()
-            .Features.Get<IServerAddressesFeature>()
-            .Addresses.Single();
+        return Host.Services
+            .GetRequiredService<IServer>()
+            .Features
+            .Get<IServerAddressesFeature>()
+            .Addresses
+            .Single();
     }
 
     public IHost Host { get; set; }

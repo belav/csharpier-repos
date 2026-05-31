@@ -84,7 +84,7 @@ app.MapGet("/", ([{typeof(FromBodyAttribute)}] {typeof(Todo)}? todo) => TypedRes
     private static IEnumerable<(object Value, IncrementalStepRunReason Reason)> GetRunStepOutputs(
         GeneratorRunResult? result
     ) =>
-        result
-            ?.TrackedOutputSteps.SelectMany(step => step.Value)
+        result?.TrackedOutputSteps
+            .SelectMany(step => step.Value)
             .SelectMany(value => value.Outputs);
 }

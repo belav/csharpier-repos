@@ -34,9 +34,10 @@ public class KestrelMetricsTests : TestApplicationErrorLoggerLoggedTest
         {
             return async connectionContext =>
             {
-                connectionContext
-                    .Features.Get<IConnectionMetricsTagsFeature>()
-                    .Tags.Add(new KeyValuePair<string, object>("custom", "value!"));
+                connectionContext.Features
+                    .Get<IConnectionMetricsTagsFeature>()
+                    .Tags
+                    .Add(new KeyValuePair<string, object>("custom", "value!"));
 
                 // Wait for the test to verify the connection has started.
                 await sync.WaitToContinue();
@@ -208,9 +209,10 @@ public class KestrelMetricsTests : TestApplicationErrorLoggerLoggedTest
             {
                 currentConnectionContext = connectionContext;
 
-                connectionContext
-                    .Features.Get<IConnectionMetricsTagsFeature>()
-                    .Tags.Add(new KeyValuePair<string, object>("custom", "value!"));
+                connectionContext.Features
+                    .Get<IConnectionMetricsTagsFeature>()
+                    .Tags
+                    .Add(new KeyValuePair<string, object>("custom", "value!"));
 
                 // Wait for the test to verify the connection has started.
                 await sync.WaitToContinue();

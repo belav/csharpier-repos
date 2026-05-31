@@ -60,9 +60,8 @@ public static class RewriteBuilderExtensions
             {
                 if (options is null)
                 {
-                    options = app.ApplicationServices.GetRequiredService<
-                        IOptions<RewriteOptions>
-                    >();
+                    options = app.ApplicationServices
+                        .GetRequiredService<IOptions<RewriteOptions>>();
                 }
 
                 var webHostEnv = app.ApplicationServices.GetRequiredService<IWebHostEnvironment>();

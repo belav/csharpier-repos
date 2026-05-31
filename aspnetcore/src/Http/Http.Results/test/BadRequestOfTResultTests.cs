@@ -112,8 +112,8 @@ public class BadRequestOfTResultTests
         PopulateMetadata<BadRequest<Todo>>(((Delegate)MyApi).GetMethodInfo(), builder);
 
         // Assert
-        var producesResponseTypeMetadata = builder
-            .Metadata.OfType<ProducesResponseTypeMetadata>()
+        var producesResponseTypeMetadata = builder.Metadata
+            .OfType<ProducesResponseTypeMetadata>()
             .Last();
         Assert.Equal(StatusCodes.Status400BadRequest, producesResponseTypeMetadata.StatusCode);
         Assert.Equal(typeof(Todo), producesResponseTypeMetadata.Type);

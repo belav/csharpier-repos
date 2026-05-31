@@ -18,8 +18,9 @@ public class MaximumOSVersionTest
     {
         Assert.True(
             RuntimeInformation.IsOSPlatform(OSPlatform.Windows)
-                && Environment
-                    .OSVersion.Version.ToString()
+                && Environment.OSVersion
+                    .Version
+                    .ToString()
                     .StartsWith("6.1", StringComparison.Ordinal),
             "Test should only be running on Win7 or Win2008R2."
         );
@@ -32,8 +33,9 @@ public class MaximumOSVersionTest
     {
         Assert.True(
             RuntimeInformation.IsOSPlatform(OSPlatform.Windows)
-                && Environment
-                    .OSVersion.Version.ToString()
+                && Environment.OSVersion
+                    .Version
+                    .ToString()
                     .StartsWith("6.1", StringComparison.Ordinal),
             "Test should only be running on Win7 or Win2008R2."
         );
@@ -45,9 +47,8 @@ public class MaximumOSVersionTest
     public void RunTest_Win10_RS4()
     {
         Assert.True(RuntimeInformation.IsOSPlatform(OSPlatform.Windows));
-        var versionKey = Registry.LocalMachine.OpenSubKey(
-            @"SOFTWARE\Microsoft\Windows NT\CurrentVersion"
-        );
+        var versionKey = Registry.LocalMachine
+            .OpenSubKey(@"SOFTWARE\Microsoft\Windows NT\CurrentVersion");
         Assert.NotNull(versionKey);
         var currentVersion = (string)versionKey.GetValue("CurrentBuildNumber");
         Assert.NotNull(currentVersion);
@@ -60,9 +61,8 @@ public class MaximumOSVersionTest
     public void RunTest_Win10_19H2()
     {
         Assert.True(RuntimeInformation.IsOSPlatform(OSPlatform.Windows));
-        var versionKey = Registry.LocalMachine.OpenSubKey(
-            @"SOFTWARE\Microsoft\Windows NT\CurrentVersion"
-        );
+        var versionKey = Registry.LocalMachine
+            .OpenSubKey(@"SOFTWARE\Microsoft\Windows NT\CurrentVersion");
         Assert.NotNull(versionKey);
         var currentVersion = (string)versionKey.GetValue("CurrentBuildNumber");
         Assert.NotNull(currentVersion);
@@ -79,8 +79,9 @@ public class OSMaxVersionClassTest
     {
         Assert.True(
             RuntimeInformation.IsOSPlatform(OSPlatform.Windows)
-                && Environment
-                    .OSVersion.Version.ToString()
+                && Environment.OSVersion
+                    .Version
+                    .ToString()
                     .StartsWith("6.1", StringComparison.Ordinal),
             "Test should only be running on Win7 or Win2008R2."
         );
@@ -97,8 +98,9 @@ public class OSMaxVersionCrossPlatTest
         if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
         {
             Assert.True(
-                Environment
-                    .OSVersion.Version.ToString()
+                Environment.OSVersion
+                    .Version
+                    .ToString()
                     .StartsWith("6.1", StringComparison.Ordinal),
                 "Test should only be running on Win7 or Win2008R2."
             );

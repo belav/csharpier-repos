@@ -71,9 +71,10 @@ public class UnaryServerCallHandlerTests : LoggedTest
                     new[]
                     {
                         HelloRequest.Descriptor.FindFieldByNumber(HelloRequest.SubFieldNumber),
-                        HelloRequest.Types.SubMessage.Descriptor.FindFieldByNumber(
-                            HelloRequest.Types.SubMessage.SubfieldFieldNumber
-                        ),
+                        HelloRequest.Types
+                            .SubMessage
+                            .Descriptor
+                            .FindFieldByNumber(HelloRequest.Types.SubMessage.SubfieldFieldNumber),
                     }
                 )
             ),
@@ -134,9 +135,8 @@ public class UnaryServerCallHandlerTests : LoggedTest
             ),
         };
         var descriptorInfo = TestHelpers.CreateDescriptorInfo(
-            responseBodyDescriptor: HelloReply.Descriptor.FindFieldByNumber(
-                HelloReply.MessageFieldNumber
-            ),
+            responseBodyDescriptor: HelloReply.Descriptor
+                .FindFieldByNumber(HelloReply.MessageFieldNumber),
             routeParameterDescriptors: routeParameterDescriptors
         );
         var unaryServerCallHandler = CreateCallHandler(invoker, descriptorInfo);
@@ -180,9 +180,8 @@ public class UnaryServerCallHandlerTests : LoggedTest
             ),
         };
         var descriptorInfo = TestHelpers.CreateDescriptorInfo(
-            responseBodyDescriptor: HelloReply.Descriptor.FindFieldByNumber(
-                HelloReply.NullableMessageFieldNumber
-            ),
+            responseBodyDescriptor: HelloReply.Descriptor
+                .FindFieldByNumber(HelloReply.NullableMessageFieldNumber),
             routeParameterDescriptors: routeParameterDescriptors
         );
         var unaryServerCallHandler = CreateCallHandler(invoker, descriptorInfo: descriptorInfo);
@@ -218,9 +217,8 @@ public class UnaryServerCallHandlerTests : LoggedTest
         var unaryServerCallHandler = CreateCallHandler(
             invoker,
             descriptorInfo: TestHelpers.CreateDescriptorInfo(
-                responseBodyDescriptor: HelloReply.Descriptor.FindFieldByNumber(
-                    HelloReply.ValuesFieldNumber
-                )
+                responseBodyDescriptor: HelloReply.Descriptor
+                    .FindFieldByNumber(HelloReply.ValuesFieldNumber)
             )
         );
         var httpContext = TestHelpers.CreateHttpContext();
@@ -262,9 +260,8 @@ public class UnaryServerCallHandlerTests : LoggedTest
         );
         var httpContext = TestHelpers.CreateHttpContext();
         httpContext.Request.Body = new MemoryStream(
-            Encoding.UTF8.GetBytes(
-                JsonFormatter.Default.Format(new HelloRequest { Name = "TestName!" })
-            )
+            Encoding.UTF8
+                .GetBytes(JsonFormatter.Default.Format(new HelloRequest { Name = "TestName!" }))
         );
         httpContext.Request.Query = new QueryCollection(
             new Dictionary<string, StringValues>
@@ -306,11 +303,11 @@ public class UnaryServerCallHandlerTests : LoggedTest
         var unaryServerCallHandler = CreateCallHandler(invoker, descriptorInfo);
         var httpContext = TestHelpers.CreateHttpContext();
         httpContext.Request.Body = new MemoryStream(
-            Encoding.UTF8.GetBytes(
-                JsonFormatter.Default.Format(
-                    new HelloRequest.Types.SubMessage { Subfield = "Subfield!" }
+            Encoding.UTF8
+                .GetBytes(
+                    JsonFormatter.Default
+                        .Format(new HelloRequest.Types.SubMessage { Subfield = "Subfield!" })
                 )
-            )
         );
         httpContext.Request.Query = new QueryCollection(
             new Dictionary<string, StringValues>
@@ -406,15 +403,16 @@ public class UnaryServerCallHandlerTests : LoggedTest
         var httpContext = TestHelpers.CreateHttpContext();
 
         var sw = new StringWriter();
-        JsonFormatter.Default.WriteValue(
-            sw,
-            new RepeatedField<HelloRequest.Types.SubMessage>
-            {
-                new HelloRequest.Types.SubMessage { Subfield = "One" },
-                new HelloRequest.Types.SubMessage { Subfield = "Two" },
-                new HelloRequest.Types.SubMessage { Subfield = "Three" },
-            }
-        );
+        JsonFormatter.Default
+            .WriteValue(
+                sw,
+                new RepeatedField<HelloRequest.Types.SubMessage>
+                {
+                    new HelloRequest.Types.SubMessage { Subfield = "One" },
+                    new HelloRequest.Types.SubMessage { Subfield = "Two" },
+                    new HelloRequest.Types.SubMessage { Subfield = "Three" },
+                }
+            );
 
         httpContext.Request.Body = new MemoryStream(Encoding.UTF8.GetBytes(sw.ToString()));
         httpContext.Request.Query = new QueryCollection(
@@ -464,15 +462,16 @@ public class UnaryServerCallHandlerTests : LoggedTest
         var httpContext = TestHelpers.CreateHttpContext();
 
         var sw = new StringWriter();
-        JsonFormatter.Default.WriteValue(
-            sw,
-            new MapField<string, string>
-            {
-                ["key1"] = "One",
-                ["key2"] = "Two",
-                ["key3"] = "Three",
-            }
-        );
+        JsonFormatter.Default
+            .WriteValue(
+                sw,
+                new MapField<string, string>
+                {
+                    ["key1"] = "One",
+                    ["key2"] = "Two",
+                    ["key3"] = "Three",
+                }
+            );
 
         httpContext.Request.Body = new MemoryStream(Encoding.UTF8.GetBytes(sw.ToString()));
         httpContext.Request.Query = new QueryCollection(
@@ -522,15 +521,16 @@ public class UnaryServerCallHandlerTests : LoggedTest
         var httpContext = TestHelpers.CreateHttpContext();
 
         var sw = new StringWriter();
-        JsonFormatter.Default.WriteValue(
-            sw,
-            new MapField<string, HelloRequest.Types.SubMessage>
-            {
-                ["key1"] = new HelloRequest.Types.SubMessage { Subfield = "One" },
-                ["key2"] = new HelloRequest.Types.SubMessage { Subfield = "Two" },
-                ["key3"] = new HelloRequest.Types.SubMessage { Subfield = "Three" },
-            }
-        );
+        JsonFormatter.Default
+            .WriteValue(
+                sw,
+                new MapField<string, HelloRequest.Types.SubMessage>
+                {
+                    ["key1"] = new HelloRequest.Types.SubMessage { Subfield = "One" },
+                    ["key2"] = new HelloRequest.Types.SubMessage { Subfield = "Two" },
+                    ["key3"] = new HelloRequest.Types.SubMessage { Subfield = "Three" },
+                }
+            );
 
         httpContext.Request.Body = new MemoryStream(Encoding.UTF8.GetBytes(sw.ToString()));
         httpContext.Request.Query = new QueryCollection(
@@ -580,15 +580,16 @@ public class UnaryServerCallHandlerTests : LoggedTest
         var httpContext = TestHelpers.CreateHttpContext();
 
         var sw = new StringWriter();
-        JsonFormatter.Default.WriteValue(
-            sw,
-            new MapField<int, int>
-            {
-                [1] = 2,
-                [3] = 4,
-                [5] = 6,
-            }
-        );
+        JsonFormatter.Default
+            .WriteValue(
+                sw,
+                new MapField<int, int>
+                {
+                    [1] = 2,
+                    [3] = 4,
+                    [5] = 6,
+                }
+            );
 
         httpContext.Request.Body = new MemoryStream(Encoding.UTF8.GetBytes(sw.ToString()));
         httpContext.Request.Query = new QueryCollection(
@@ -1211,10 +1212,8 @@ public class UnaryServerCallHandlerTests : LoggedTest
                 Details = { Any.Pack(debugInfo), Any.Pack(requestInfo), Any.Pack(badRequest) },
             };
 
-            c.ResponseTrailers.Add(
-                JsonRequestHelpers.StatusDetailsTrailerName,
-                status.ToByteArray()
-            );
+            c.ResponseTrailers
+                .Add(JsonRequestHelpers.StatusDetailsTrailerName, status.ToByteArray());
             throw new InvalidOperationException("exception");
         };
 
@@ -1312,9 +1311,8 @@ public class UnaryServerCallHandlerTests : LoggedTest
             responseJson.RootElement.GetProperty("code").GetInt32()
         );
 
-        var exceptionWrite = TestSink.Writes.Single(w =>
-            w.EventId.Name == "ErrorExecutingServiceMethod"
-        );
+        var exceptionWrite = TestSink.Writes
+            .Single(w => w.EventId.Name == "ErrorExecutingServiceMethod");
         Assert.Equal(
             "Error when executing service method 'TestMethodName'.",
             exceptionWrite.Message
@@ -1358,9 +1356,8 @@ public class UnaryServerCallHandlerTests : LoggedTest
             responseJson.RootElement.GetProperty("code").GetInt32()
         );
 
-        var exceptionWrite = TestSink.Writes.Single(w =>
-            w.EventId.Name == "ErrorExecutingServiceMethod"
-        );
+        var exceptionWrite = TestSink.Writes
+            .Single(w => w.EventId.Name == "ErrorExecutingServiceMethod");
         Assert.Equal(
             "Error when executing service method 'TestMethodName'.",
             exceptionWrite.Message
@@ -2261,10 +2258,8 @@ public class UnaryServerCallHandlerTests : LoggedTest
         {
             foreach (var interceptor in interceptors)
             {
-                serviceOptions.Interceptors.Add(
-                    interceptor.Type,
-                    interceptor.Args ?? Array.Empty<object>()
-                );
+                serviceOptions.Interceptors
+                    .Add(interceptor.Type, interceptor.Args ?? Array.Empty<object>());
             }
         }
 

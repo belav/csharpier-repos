@@ -139,18 +139,16 @@ public static class ExceptionHandlerExtensions
             return app.Use(next =>
             {
                 var loggerFactory = app.ApplicationServices.GetRequiredService<ILoggerFactory>();
-                var diagnosticListener =
-                    app.ApplicationServices.GetRequiredService<DiagnosticListener>();
-                var exceptionHandlers = app.ApplicationServices.GetRequiredService<
-                    IEnumerable<IExceptionHandler>
-                >();
+                var diagnosticListener = app.ApplicationServices
+                    .GetRequiredService<DiagnosticListener>();
+                var exceptionHandlers = app.ApplicationServices
+                    .GetRequiredService<IEnumerable<IExceptionHandler>>();
                 var meterFactory = app.ApplicationServices.GetRequiredService<IMeterFactory>();
 
                 if (options is null)
                 {
-                    options = app.ApplicationServices.GetRequiredService<
-                        IOptions<ExceptionHandlerOptions>
-                    >();
+                    options = app.ApplicationServices
+                        .GetRequiredService<IOptions<ExceptionHandlerOptions>>();
                 }
 
                 if (

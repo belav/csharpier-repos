@@ -115,14 +115,14 @@ internal class WellKnownTypes
         foreach (var type in types)
         {
             if (
-                type.ContainingAssembly.Identity.Name.StartsWith(
-                    "System.",
-                    StringComparison.Ordinal
-                )
-                || type.ContainingAssembly.Identity.Name.StartsWith(
-                    "Microsoft.",
-                    StringComparison.Ordinal
-                )
+                type.ContainingAssembly
+                    .Identity
+                    .Name
+                    .StartsWith("System.", StringComparison.Ordinal)
+                || type.ContainingAssembly
+                    .Identity
+                    .Name
+                    .StartsWith("Microsoft.", StringComparison.Ordinal)
             )
             {
                 return type;

@@ -441,8 +441,9 @@ public class ScriptTagHelper : UrlResolutionTagHelper
     {
         if (FileVersionProvider == null)
         {
-            FileVersionProvider =
-                ViewContext.HttpContext.RequestServices.GetRequiredService<IFileVersionProvider>();
+            FileVersionProvider = ViewContext.HttpContext
+                .RequestServices
+                .GetRequiredService<IFileVersionProvider>();
         }
     }
 

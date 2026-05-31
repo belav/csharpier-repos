@@ -65,11 +65,12 @@ internal sealed partial class DefaultProblemDetailsWriter : IProblemDetailsWrite
         var problemDetailsType = context.ProblemDetails.GetType();
 
         return new ValueTask(
-            httpContext.Response.WriteAsJsonAsync(
-                context.ProblemDetails,
-                _serializerOptions.GetTypeInfo(problemDetailsType),
-                contentType: "application/problem+json"
-            )
+            httpContext.Response
+                .WriteAsJsonAsync(
+                    context.ProblemDetails,
+                    _serializerOptions.GetTypeInfo(problemDetailsType),
+                    contentType: "application/problem+json"
+                )
         );
     }
 }

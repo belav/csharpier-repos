@@ -128,8 +128,8 @@ public class TestServiceImpl : TestService.TestServiceBase
         bool enableCompression = false
     )
     {
-        var echoInitialList = context
-            .RequestHeaders.Where((entry) => entry.Key == "x-grpc-test-echo-initial")
+        var echoInitialList = context.RequestHeaders
+            .Where((entry) => entry.Key == "x-grpc-test-echo-initial")
             .ToList();
 
         // Append grpc internal compression header if compression is requested by the client
@@ -144,8 +144,8 @@ public class TestServiceImpl : TestService.TestServiceBase
             await context.WriteResponseHeadersAsync(new Metadata { entry });
         }
 
-        var echoTrailingList = context
-            .RequestHeaders.Where((entry) => entry.Key == "x-grpc-test-echo-trailing-bin")
+        var echoTrailingList = context.RequestHeaders
+            .Where((entry) => entry.Key == "x-grpc-test-echo-trailing-bin")
             .ToList();
         if (echoTrailingList.Any())
         {
@@ -170,10 +170,13 @@ public class TestServiceImpl : TestService.TestServiceBase
             // Get grpc-encoding from HttpContext instead
             var encoding = context
                 .GetHttpContext()
-                .Request.Headers.SingleOrDefault(h =>
+                .Request
+                .Headers
+                .SingleOrDefault(h =>
                     string.Equals(h.Key, "grpc-encoding", StringComparison.OrdinalIgnoreCase)
                 )
-                .Value.SingleOrDefault();
+                .Value
+                .SingleOrDefault();
             if (expectCompressed.Value)
             {
                 if (encoding == null || encoding == "identity")
