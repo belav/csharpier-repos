@@ -1133,7 +1133,8 @@ public abstract class UserStoreBase<
                     RecoveryCodeTokenName,
                     cancellationToken
                 )
-                .ConfigureAwait(false) ?? "";
+                .ConfigureAwait(false)
+            ?? "";
         if (mergedCodes.Length > 0)
         {
 #if NET8_0_OR_GREATER
@@ -1208,7 +1209,8 @@ public abstract class UserStoreBase<
                     RecoveryCodeTokenName,
                     cancellationToken
                 )
-                .ConfigureAwait(false) ?? "";
+                .ConfigureAwait(false)
+            ?? "";
         var splitCodes = mergedCodes.Split(';');
         if (splitCodes.Contains(code))
         {

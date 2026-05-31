@@ -53,12 +53,11 @@ public class AutobahnTests : LoggedTest
             cts.CancelAfter(TestTimeout); // These tests generally complete in just over 1 minute.
 
             using (
-                cts.Token.Register(
-                    () =>
-                        logger.LogError(
-                            "Test run is taking longer than maximum duration of {timeoutMinutes:0.00} minutes. Aborting...",
-                            TestTimeout.TotalMinutes
-                        )
+                cts.Token.Register(() =>
+                    logger.LogError(
+                        "Test run is taking longer than maximum duration of {timeoutMinutes:0.00} minutes. Aborting...",
+                        TestTimeout.TotalMinutes
+                    )
                 )
             )
             {

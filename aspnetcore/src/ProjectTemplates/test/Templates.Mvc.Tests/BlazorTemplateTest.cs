@@ -66,9 +66,11 @@ public class BlazorTemplateTest : LoggedTest
     )]
     public Task BlazorWebTemplate_IndividualAuth_LocalDb(bool useProgramMain) =>
         useProgramMain
-            ? BlazorWebTemplate_Core(
-                [ArgConstants.IndividualAuth, ArgConstants.UseLocalDb, ArgConstants.UseProgramMain]
-            )
+            ? BlazorWebTemplate_Core([
+                ArgConstants.IndividualAuth,
+                ArgConstants.UseLocalDb,
+                ArgConstants.UseProgramMain,
+            ])
             : BlazorWebTemplate_Core([ArgConstants.IndividualAuth, ArgConstants.UseLocalDb]);
 
     private async Task BlazorWebTemplate_Core(string[] args)
